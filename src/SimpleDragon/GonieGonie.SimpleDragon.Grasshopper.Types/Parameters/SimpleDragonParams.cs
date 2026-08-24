@@ -62,6 +62,36 @@ public sealed class SimpleDragonZoneParam : SimpleDragonParam<Types.SimpleDragon
     public override Guid ComponentGuid => new("aa522b2d-9eac-47bc-885d-202d6d1741f4");
 }
 
+public sealed class SimpleDragonSourceSystemParam : SimpleDragonParam<Types.SimpleDragonSourceSystemGoo>
+{
+    public SimpleDragonSourceSystemParam()
+        : base("SimpleDragon Source System", "Source", "A SimpleDragon HVAC source system.") { }
+    public override Guid ComponentGuid => new("11dead46-9ee4-48ce-913e-50ff7f10d319");
+}
+
+public sealed class SimpleDragonSupplySystemParam : SimpleDragonParam<Types.SimpleDragonSupplySystemGoo>
+{
+    public SimpleDragonSupplySystemParam()
+        : base("SimpleDragon Supply System", "Supply", "A SimpleDragon zone HVAC supply system.") { }
+    public override Guid ComponentGuid => new("51b809c1-a4ae-4dc7-bca8-81e06d49a806");
+}
+
+public sealed class SimpleDragonEnergyRecoveryVentilatorParam
+    : SimpleDragonParam<Types.SimpleDragonEnergyRecoveryVentilatorGoo>
+{
+    public SimpleDragonEnergyRecoveryVentilatorParam()
+        : base("SimpleDragon Energy Recovery Ventilator", "ERV", "A SimpleDragon energy-recovery ventilator.") { }
+    public override Guid ComponentGuid => new("4a980e9a-a954-47c0-a34b-2026eb86b2ad");
+}
+
+public sealed class SimpleDragonPhotovoltaicPanelParam
+    : SimpleDragonParam<Types.SimpleDragonPhotovoltaicPanelGoo>
+{
+    public SimpleDragonPhotovoltaicPanelParam()
+        : base("SimpleDragon Photovoltaic Panel", "PV", "A SimpleDragon photovoltaic panel.") { }
+    public override Guid ComponentGuid => new("731f38e6-55dd-4d1e-b9cb-ae33faf23154");
+}
+
 public sealed class GreenRetrofitModelParam : SimpleDragonParam<Types.GreenRetrofitModelGoo>
 {
     public GreenRetrofitModelParam() : base("SimpleDragon GRM", "GRM", "A complete GRM 0.7 SimpleDragon model.") { }

@@ -66,6 +66,56 @@ public sealed class SimpleDragonZoneGoo : SimpleDragonGoo<Zone>
     protected override string DisplayText(Zone value) => $"Zone {value.Name} ({value.Surfaces.Count} surfaces, {value.Area:0.###} m\u00B2)";
 }
 
+public sealed class SimpleDragonSourceSystemGoo : SimpleDragonGoo<SourceSystem>
+{
+    public SimpleDragonSourceSystemGoo() { }
+    public SimpleDragonSourceSystemGoo(SourceSystem value) : base(value) { }
+    public override string TypeName => "SimpleDragon Source System";
+    public override string TypeDescription => "A SimpleDragon HVAC source system.";
+    protected override SimpleDragonGoo<SourceSystem> Create(SourceSystem value) => new SimpleDragonSourceSystemGoo(value);
+    protected override SimpleDragonGoo<SourceSystem> CreateEmpty() => new SimpleDragonSourceSystemGoo();
+    protected override string DisplayText(SourceSystem value) => $"Source {value.Name} ({value.Type})";
+}
+
+public sealed class SimpleDragonSupplySystemGoo : SimpleDragonGoo<SupplySystem>
+{
+    public SimpleDragonSupplySystemGoo() { }
+    public SimpleDragonSupplySystemGoo(SupplySystem value) : base(value) { }
+    public override string TypeName => "SimpleDragon Supply System";
+    public override string TypeDescription => "A SimpleDragon zone HVAC supply system.";
+    protected override SimpleDragonGoo<SupplySystem> Create(SupplySystem value) => new SimpleDragonSupplySystemGoo(value);
+    protected override SimpleDragonGoo<SupplySystem> CreateEmpty() => new SimpleDragonSupplySystemGoo();
+    protected override string DisplayText(SupplySystem value) => $"Supply {value.Name} ({value.Type})";
+}
+
+public sealed class SimpleDragonEnergyRecoveryVentilatorGoo : SimpleDragonGoo<VentilationSystem>
+{
+    public SimpleDragonEnergyRecoveryVentilatorGoo() { }
+    public SimpleDragonEnergyRecoveryVentilatorGoo(VentilationSystem value) : base(value) { }
+    public override string TypeName => "SimpleDragon Energy Recovery Ventilator";
+    public override string TypeDescription => "A SimpleDragon energy-recovery ventilator.";
+    protected override SimpleDragonGoo<VentilationSystem> Create(VentilationSystem value) =>
+        new SimpleDragonEnergyRecoveryVentilatorGoo(value);
+    protected override SimpleDragonGoo<VentilationSystem> CreateEmpty() =>
+        new SimpleDragonEnergyRecoveryVentilatorGoo();
+    protected override string DisplayText(VentilationSystem value) =>
+        $"Energy Recovery Ventilator {value.Name} ({value.AirflowRate:0.###} m\u00B3/s)";
+}
+
+public sealed class SimpleDragonPhotovoltaicPanelGoo : SimpleDragonGoo<PhotovoltaicSystem>
+{
+    public SimpleDragonPhotovoltaicPanelGoo() { }
+    public SimpleDragonPhotovoltaicPanelGoo(PhotovoltaicSystem value) : base(value) { }
+    public override string TypeName => "SimpleDragon Photovoltaic Panel";
+    public override string TypeDescription => "A SimpleDragon photovoltaic panel.";
+    protected override SimpleDragonGoo<PhotovoltaicSystem> Create(PhotovoltaicSystem value) =>
+        new SimpleDragonPhotovoltaicPanelGoo(value);
+    protected override SimpleDragonGoo<PhotovoltaicSystem> CreateEmpty() =>
+        new SimpleDragonPhotovoltaicPanelGoo();
+    protected override string DisplayText(PhotovoltaicSystem value) =>
+        $"Photovoltaic Panel {value.Name} ({value.Area:0.###} m\u00B2)";
+}
+
 public sealed class GreenRetrofitModelGoo : SimpleDragonGoo<GreenRetrofitModel>
 {
     public GreenRetrofitModelGoo() { }

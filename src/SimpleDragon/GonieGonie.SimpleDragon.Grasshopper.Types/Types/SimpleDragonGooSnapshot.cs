@@ -25,6 +25,10 @@ internal static class SimpleDragonGooSnapshot
             UsageProfile profile => ("usage-profile", ToJson(UsageProfileSnapshot.From(profile))),
             Surface surface => ("surface", ToJson(SurfaceSnapshot.From(surface))),
             Zone zone => ("zone", ToJson(ZoneSnapshot.From(zone))),
+            SourceSystem source => ("source-system", ToJson(SourceSystemSnapshot.From(source))),
+            SupplySystem supply => ("supply-system", ToJson(SupplySystemSnapshot.From(supply))),
+            VentilationSystem ventilator => ("energy-recovery-ventilator", ToJson(VentilationSystemSnapshot.From(ventilator))),
+            PhotovoltaicSystem panel => ("photovoltaic-panel", ToJson(PhotovoltaicSnapshot.From(panel))),
             GreenRetrofitModel model => ("green-retrofit-model", ToJson(ModelSnapshot.From(model))),
             GreenRetrofitResult result => ("green-retrofit-result", GrrWriter.Serialize(result, writeIndented: false)),
             _ => throw new NotSupportedException(
@@ -54,6 +58,10 @@ internal static class SimpleDragonGooSnapshot
             "usage-profile" => FromJson<UsageProfileSnapshot>(envelope.Payload).ToDomain(),
             "surface" => FromJson<SurfaceSnapshot>(envelope.Payload).ToDomain(),
             "zone" => FromJson<ZoneSnapshot>(envelope.Payload).ToDomain(),
+            "source-system" => FromJson<SourceSystemSnapshot>(envelope.Payload).ToDomain(),
+            "supply-system" => FromJson<SupplySystemSnapshot>(envelope.Payload).ToDomain(),
+            "energy-recovery-ventilator" => FromJson<VentilationSystemSnapshot>(envelope.Payload).ToDomain(),
+            "photovoltaic-panel" => FromJson<PhotovoltaicSnapshot>(envelope.Payload).ToDomain(),
             "green-retrofit-model" => FromJson<ModelSnapshot>(envelope.Payload).ToDomain(),
             "green-retrofit-result" => GrrReader.Read(envelope.Payload).RequireResult(),
             _ => throw new InvalidDataException(
