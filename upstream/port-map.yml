@@ -115,3 +115,134 @@
   tests:
     - WeatherDatabaseTests
   status: equivalent
+
+- upstream:
+    path: src/epsimple/core/model.py
+    symbol: GreenRetrofitModel._dragonize_surface / GreenRetrofitModel.to_dragon
+  dotnet:
+    project: GonieGonie.SimpleDragon.Core
+    file: Conversion/GreenRetrofitConversion.cs
+    symbol: GonieGonie.SimpleDragon.GreenRetrofitConverter
+  tests:
+    - GreenRetrofitConversionTests
+  status: implemented
+
+- upstream:
+    path: src/epsimple/core/model.py
+    symbol: GreenRetrofitResult / GreenRetrofitModel.run result projection
+  dotnet:
+    project: GonieGonie.SimpleDragon.Core
+    file: Results/
+    symbol: GonieGonie.SimpleDragon.GreenRetrofitResult
+  tests:
+    - GrrRoundTripTests
+    - GreenRetrofitResultBuilderTests
+  status: implemented
+
+- upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Surface / Fenestration / Zone / BuildingFloor
+  dotnet:
+    project: GonieGonie.SimpleDragon.Core
+    file: Shape/
+    symbol: GonieGonie.SimpleDragon.Shape
+  tests:
+    - ShapeAndSystemsTests
+    - GrmRoundTripTests
+  status: implemented
+
+- upstream:
+    path: src/epsimple/core/hvac.py
+    symbol: source supply ventilation and photovoltaic systems
+  dotnet:
+    project: GonieGonie.SimpleDragon.Core
+    file: Hvac/
+    symbol: GonieGonie.SimpleDragon.Hvac
+  tests:
+    - ShapeAndSystemsTests
+    - GreenRetrofitConversionTests
+  status: implemented
+
+- upstream:
+    path: src/epsimple/core/model.py
+    symbol: GreenRetrofitModel GRM serialization
+  dotnet:
+    project: GonieGonie.SimpleDragon.Core
+    file: Serialization/
+    symbol: GonieGonie.SimpleDragon.GrmReader / GonieGonie.SimpleDragon.GrmWriter
+  tests:
+    - GrmRoundTripTests
+  status: equivalent
+
+- upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: HVAC sources supplies ventilation and photovoltaic systems
+  dotnet:
+    project: GonieGonie.InvisibleDragon.Core
+    file: Hvac/
+    symbol: GonieGonie.InvisibleDragon.Hvac
+  tests:
+    - SourceSystemTests
+    - EnergyModelFixtureMatrixTests
+  status: implemented
+
+- upstream:
+    path: src/idragon/dragon/model.py
+    symbol: EnergyModel and EnergyPlus IDF assembly
+  dotnet:
+    project: GonieGonie.InvisibleDragon.Core
+    file: Model/
+    symbol: GonieGonie.InvisibleDragon.Model
+  tests:
+    - EnergyModelValidationTests
+    - EnergyModelFixtureMatrixTests
+    - EnergyPlusIddIntegrationTests
+    - EnergyPlusRunnableModelTests
+  status: implemented
+
+- upstream:
+    path: src/idragon/launcher.py
+    symbol: EnergyPlus result collection and interpretation
+  dotnet:
+    project: GonieGonie.InvisibleDragon.Core
+    file: Results/
+    symbol: GonieGonie.InvisibleDragon.Results
+  tests:
+    - EnergyPlusResultParserTests
+  status: implemented
+
+- upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Rhino geometry conversion provenance and face adjacency
+  dotnet:
+    project: GonieGonie.InvisibleDragon.Rhino
+    file: RhinoPolygonConverter.cs
+    symbol: GonieGonie.InvisibleDragon.Rhino.RhinoPolygonConverter
+  tests:
+    - RhinoGeometryFingerprintTests
+    - GonieGonie.InvisibleDragon.Rhino.Smoke
+  status: enhanced
+
+- upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: Grasshopper construction authoring surface
+  dotnet:
+    project: GonieGonie.InvisibleDragon.GH
+    file: Components/ConstructionComponents.cs
+    symbol: GonieGonie.InvisibleDragon.Grasshopper.Components
+  tests:
+    - DragonGooTests
+    - GrasshopperAssemblyTests
+  status: enhanced
+
+- upstream:
+    path: src/idragon/dragon/model.py
+    symbol: Grasshopper model compile run and result workflow
+  dotnet:
+    project: GonieGonie.InvisibleDragon.GH
+    file: Components/
+    symbol: GonieGonie.InvisibleDragon.Grasshopper.Components
+  tests:
+    - DragonGooTests
+    - GrasshopperAssemblyTests
+  status: enhanced
