@@ -1,0 +1,25 @@
+# This map grows as each upstream symbol reaches parity. Paths and package names
+# under `upstream` intentionally preserve the historical source identifiers. A
+# release may not mark a compatibility lock complete while a required symbol
+# remains planned.
+- upstream:
+    path: src/idragon/__init__.py
+    symbol: package metadata
+  dotnet:
+    project: GonieGonie.InvisibleDragon.Core
+    file: PackageInfo.cs
+    symbol: GonieGonie.InvisibleDragon.PackageInfo
+  tests:
+    - PackageInfoTests
+  status: equivalent
+
+- upstream:
+    path: src/epsimple/__init__.py
+    symbol: package metadata
+  dotnet:
+    project: GonieGonie.SimpleDragon.Core
+    file: PackageInfo.cs
+    symbol: GonieGonie.SimpleDragon.PackageInfo
+  tests:
+    - PackageInfoTests
+  status: equivalent

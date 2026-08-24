@@ -1,0 +1,9 @@
+{
+  "schema": "goniegonie.tool-lock.v1",
+  "version": "0.13.0",
+  "windows_x64_url": "https://files.mcneel.com/yak/tools/0.13.0/yak.exe",
+  "windows_x64_size": 12091427,
+  "windows_x64_sha256": "eae398b014faf6a62b35532b0a6b99e00fdf25ce53360335adb4b79b8991bb65",
+  "observed_at": "2026-08-24",
+  "checksum_source": "locally verified official McNeel download; McNeel does not publish a checksum on the referenced page"
+}

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net48;net7.0-windows;net8.0-windows</TargetFrameworks>
+    <AssemblyName>GonieGonie.InvisibleDragon.Core</AssemblyName>
+    <RootNamespace>GonieGonie.InvisibleDragon</RootNamespace>
+    <Description>Rhino-independent C# port of the InvisibleDragon EnergyPlus model layer.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\GonieGonie.BuildingEnergy.Contracts\GonieGonie.BuildingEnergy.Contracts.csproj" />
+    <ProjectReference Include="..\..\Shared\GonieGonie.EnergyPlus.Runtime\GonieGonie.EnergyPlus.Runtime.csproj" />
+  </ItemGroup>
+</Project>

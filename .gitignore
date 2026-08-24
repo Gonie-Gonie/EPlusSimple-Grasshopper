@@ -1,0 +1,75 @@
+# Build, test, and disposable work. Everything under temp can be removed safely.
+/temp/
+
+# Repository-local toolchains and dependency caches created by setup.ps1.
+/.tools/
+/.config/local.*
+
+# Generated deliverables. Keep the policy document, ignore staged binaries.
+/artifacts/*
+!/artifacts/README.md
+
+# .NET / Visual Studio / Rider / VS Code user state.
+**/bin/
+**/obj/
+**/TestResults/
+/.vs/
+/.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.DotSettings.user
+*.ncrunch*
+
+# NuGet and coverage output.
+*.nupkg
+*.snupkg
+*.coverage
+*.coveragexml
+coverage*.xml
+coverage*.json
+
+# Grasshopper/Rhino generated binaries and user state.
+*.gha
+*.rhp
+*.yak
+*.ghuser
+*.rui
+
+# Python reference-runner caches and local environments.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+
+# EnergyPlus run products.
+*.eso
+*.mtr
+*.rdd
+*.mdd
+*.eio
+*.audit
+*.bnd
+*.err
+*.end
+*.sqlite
+*.sql
+eplusout.*
+
+# Packaging output and archives.
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.checksum
+
+# OS/editor noise.
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.tmp
+*.bak

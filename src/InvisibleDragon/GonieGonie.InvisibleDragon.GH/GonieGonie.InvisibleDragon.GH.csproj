@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net48;net7.0-windows;net8.0-windows</TargetFrameworks>
+    <AssemblyName>GonieGonie.InvisibleDragon.GH</AssemblyName>
+    <RootNamespace>GonieGonie.InvisibleDragon.Grasshopper</RootNamespace>
+    <Description>InvisibleDragon components for Rhino 7 and Rhino 8 Grasshopper.</Description>
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <TargetExt>.gha</TargetExt>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GonieGonie.InvisibleDragon.Core\GonieGonie.InvisibleDragon.Core.csproj" />
+    <ProjectReference Include="..\GonieGonie.InvisibleDragon.Rhino\GonieGonie.InvisibleDragon.Rhino.csproj" />
+    <ProjectReference Include="..\GonieGonie.InvisibleDragon.Grasshopper.Types\GonieGonie.InvisibleDragon.Grasshopper.Types.csproj" />
+    <PackageReference Include="Grasshopper" VersionOverride="7.0.20314.3001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' == 'net48'" />
+    <PackageReference Include="Grasshopper" VersionOverride="8.0.23304.9001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' != 'net48'" />
+    <PackageReference Include="RhinoCommon" VersionOverride="7.0.20314.3001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' == 'net48'" />
+    <PackageReference Include="RhinoCommon" VersionOverride="8.0.23304.9001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' != 'net48'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\..\assets\icons\generated\invisible-dragon\invisible-dragon-24.png"
+                      Link="Resources\invisible-dragon-24.png"
+                      LogicalName="GonieGonie.InvisibleDragon.Grasshopper.Resources.InvisibleDragon24.png" />
+  </ItemGroup>
+</Project>

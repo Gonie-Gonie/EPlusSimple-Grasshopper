@@ -1,0 +1,14 @@
+name: simple-dragon
+version: 0.1.0
+authors:
+  - Gonie-Gonie
+description: >-
+  SimpleDragon area-and-azimuth building energy workflows for Grasshopper,
+  backed by the C# InvisibleDragon core.
+url: https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper
+keywords:
+  - energyplus
+  - grasshopper
+  - building-energy
+  - simple-dragon
+  - retrofit

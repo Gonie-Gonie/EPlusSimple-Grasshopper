@@ -1,0 +1,13 @@
+{
+  "runtime_schema": "goniegonie.energyplus-runtime.v1",
+  "energyplus_version": "24.2.0",
+  "energyplus_build": "94a887817b",
+  "energyplus_archive_sha256": "26c7c22b731f54031626750284c8b613fb8f03c3aa56b6bc7ec65b6bf8668df1",
+  "energyplus_archive_size": 179248139,
+  "energyplus_exe_sha256": "95f6047e26b9144fcff7771a85afb1e09da1f2434b748b24c092a0be5ac94728",
+  "energyplus_idd_sha256": "3b56fd8afb02a557f1c2cfb963cbc6f53963738bc6aa169f996d7a5175b324a2",
+  "expandobjects_sha256": "a15bd8e10f6a004e270fa4761527cabc95f776c089b92c11603faba19ed541ae",
+  "weather_pack_version": "weather/v1",
+  "weather_pack_sha256": "fa88b8d69364b6a6b663afdc6dc2eb30c0ddee17cd37e5802ce5a5dec63d92d0",
+  "created_by": "GonieGonie-Dragons"
+}

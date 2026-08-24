@@ -1,0 +1,485 @@
+#requires -Version 5.1
+
+[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
+param(
+    [ValidateSet('Debug', 'Release')]
+    [string] $Configuration = 'Release',
+
+    [switch] $NoRestore,
+    [switch] $SkipTests,
+    [switch] $SkipArtifactStaging,
+    [switch] $RequireEnergyPlus
+)
+
+$ErrorActionPreference = 'Stop'
+Set-StrictMode -Version 2.0
+
+. (Join-Path $PSScriptRoot 'scripts\common.ps1')
+
+$repositoryRoot = Get-RepositoryRoot -ScriptDirectory (Join-Path $PSScriptRoot 'scripts')
+$localSettingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
+$nugetConfig = Join-Path $repositoryRoot 'NuGet.config'
+$toolsRoot = Join-Path $repositoryRoot '.tools'
+$tempRoot = Join-Path $repositoryRoot 'temp'
+$logsRoot = Join-Path $tempRoot 'logs'
+$testResultsRoot = Join-Path $tempRoot (Join-Path 'test-results' $Configuration)
+$buildOutputRoot = Join-Path $tempRoot 'build\bin'
+$artifactsRoot = Join-Path $repositoryRoot 'artifacts'
+$reportsRoot = Join-Path $artifactsRoot 'reports'
+$requiredSdk = [string] ((Get-Content -LiteralPath (Join-Path $repositoryRoot 'global.json') -Raw | ConvertFrom-Json).sdk.version)
+
+function Get-PropertyValue {
+    param(
+        [AllowNull()]
+        [object] $Object,
+
+        [Parameter(Mandatory = $true)]
+        [string] $Name,
+
+        [AllowNull()]
+        [object] $DefaultValue = $null
+    )
+
+    if ($null -eq $Object) {
+        return $DefaultValue
+    }
+
+    $property = $Object.PSObject.Properties[$Name]
+    if ($null -eq $property) {
+        return $DefaultValue
+    }
+
+    return $property.Value
+}
+
+function Reset-GeneratedArtifacts {
+    $safeArtifactsRoot = Assert-RepositoryChildPath `
+        -RepositoryRoot $repositoryRoot `
+        -Path $artifactsRoot `
+        -AllowedTopLevelNames @('artifacts')
+
+    Ensure-Directory -Path $safeArtifactsRoot
+    if (-not (Test-Path -LiteralPath $safeArtifactsRoot -PathType Container)) {
+        return
+    }
+
+    Assert-NoReparsePoints -Path $safeArtifactsRoot
+    $generatedItems = @(Get-ChildItem -LiteralPath $safeArtifactsRoot -Force |
+        Where-Object { -not $_.Name.Equals('README.md', [System.StringComparison]::OrdinalIgnoreCase) })
+
+    foreach ($item in $generatedItems) {
+        $safeItem = Assert-RepositoryChildPath `
+            -RepositoryRoot $repositoryRoot `
+            -Path $item.FullName `
+            -AllowedTopLevelNames @('artifacts')
+        if ($WhatIfPreference) {
+            Write-Host "What if: remove previous generated artifact '$safeItem'."
+        }
+        else {
+            Remove-Item -LiteralPath $safeItem -Recurse -Force
+        }
+    }
+}
+
+function Get-PluginOutputIdentity {
+    param(
+        [Parameter(Mandatory = $true)]
+        [System.IO.FileInfo] $PluginFile
+    )
+
+    $module = $null
+    if ($PluginFile.Name -match '^GonieGonie\.InvisibleDragon\.GH\.(?:gha|dll)$') {
+        $module = 'invisible-dragon'
+    }
+    elseif ($PluginFile.Name -match '^GonieGonie\.SimpleDragon\.GH\.(?:gha|dll)$') {
+        $module = 'simple-dragon'
+    }
+    else {
+        return $null
+    }
+
+    $target = $null
+    $targetFramework = $null
+    $frameworkDirectory = $null
+    if ($PluginFile.FullName -match '(?:^|\\)(net48)(?:\\|$)') {
+        $target = 'rhino7'
+        $targetFramework = $Matches[1]
+        $frameworkDirectory = 'net48'
+    }
+    elseif ($PluginFile.FullName -match '(?:^|\\)(net7\.0-windows[^\\]*)(?:\\|$)') {
+        $target = 'rhino8'
+        $targetFramework = $Matches[1]
+        $frameworkDirectory = 'net7.0'
+    }
+    elseif ($PluginFile.FullName -match '(?:^|\\)(net8\.0-windows[^\\]*)(?:\\|$)') {
+        $target = 'rhino8'
+        $targetFramework = $Matches[1]
+        $frameworkDirectory = 'net8.0'
+    }
+    else {
+        return $null
+    }
+
+    return [pscustomobject] [ordered] @{
+        module = $module
+        target = $target
+        targetFramework = $targetFramework
+        frameworkDirectory = $frameworkDirectory
+        pluginFile = $PluginFile
+    }
+}
+
+function Copy-PluginOutput {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object] $Identity
+    )
+
+    $sourceDirectory = $Identity.pluginFile.Directory.FullName
+    $destination = Join-Path $artifactsRoot (Join-Path $Identity.module (Join-Path $Identity.target $Identity.frameworkDirectory))
+    $safeDestination = Assert-RepositoryChildPath `
+        -RepositoryRoot $repositoryRoot `
+        -Path $destination `
+        -AllowedTopLevelNames @('artifacts')
+
+    if ($WhatIfPreference) {
+        Write-Host "What if: stage '$sourceDirectory' to '$safeDestination'."
+    }
+    else {
+        Ensure-Directory -Path $safeDestination
+        foreach ($item in @(Get-ChildItem -LiteralPath $sourceDirectory -Force)) {
+            # SDK output can include reference-assembly helper directories that
+            # are not runtime plugin payloads.
+            if ($item.PSIsContainer -and ($item.Name -eq 'ref' -or $item.Name -eq 'refint')) {
+                continue
+            }
+            Copy-Item -LiteralPath $item.FullName -Destination $safeDestination -Recurse -Force
+        }
+    }
+
+    return [pscustomobject] [ordered] @{
+        module = $Identity.module
+        target = $Identity.target
+        targetFramework = $Identity.targetFramework
+        frameworkDirectory = $Identity.frameworkDirectory
+        source = $sourceDirectory
+        destination = $safeDestination
+        entryAssembly = $Identity.pluginFile.Name
+    }
+}
+
+function Get-GitBuildIdentity {
+    $git = Get-Command git.exe -ErrorAction SilentlyContinue
+    if ($null -eq $git) {
+        $git = Get-Command git -ErrorAction SilentlyContinue
+    }
+
+    if ($null -eq $git) {
+        return [pscustomobject] [ordered] @{
+            commit = $null
+            dirty = $null
+        }
+    }
+
+    $previousErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $commitOutput = @(& $git.Source -C $repositoryRoot rev-parse HEAD 2>$null)
+        $commitExitCode = $LASTEXITCODE
+        $statusOutput = @(& $git.Source -C $repositoryRoot status --porcelain 2>$null)
+        $statusExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
+
+    $commit = $null
+    if ($commitExitCode -eq 0 -and $commitOutput.Count -gt 0) {
+        $commit = [string] $commitOutput[-1]
+    }
+
+    $dirty = $null
+    if ($statusExitCode -eq 0) {
+        $dirty = $statusOutput.Count -gt 0
+    }
+
+    return [pscustomobject] [ordered] @{
+        commit = $commit
+        dirty = $dirty
+    }
+}
+
+if (-not (Test-Path -LiteralPath $localSettingsPath -PathType Leaf)) {
+    throw "Local setup is missing. Run setup.cmd first; expected '$localSettingsPath'."
+}
+
+$localSettings = Get-Content -LiteralPath $localSettingsPath -Raw | ConvertFrom-Json
+if ([string] (Get-PropertyValue -Object $localSettings -Name 'schema') -ne 'goniegonie.dragons-grasshopper.local-settings.v1') {
+    throw 'Local settings schema is unsupported. Re-run setup.cmd.'
+}
+
+$dotnetSettings = Get-PropertyValue -Object $localSettings -Name 'dotnet'
+$dotnetExecutable = [string] (Get-PropertyValue -Object $dotnetSettings -Name 'executable')
+if ([string]::IsNullOrWhiteSpace($dotnetExecutable) -or
+    -not (Test-Path -LiteralPath $dotnetExecutable -PathType Leaf)) {
+    throw 'The setup-selected dotnet executable no longer exists. Re-run setup.cmd.'
+}
+
+$previousErrorActionPreference = $ErrorActionPreference
+try {
+    $ErrorActionPreference = 'Continue'
+    $actualSdkOutput = @(& $dotnetExecutable --version 2>$null)
+    $sdkExitCode = $LASTEXITCODE
+}
+finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+}
+
+if ($sdkExitCode -ne 0 -or $actualSdkOutput.Count -eq 0 -or [string] $actualSdkOutput[-1] -ne $requiredSdk) {
+    $reportedSdk = if ($actualSdkOutput.Count -gt 0) { [string] $actualSdkOutput[-1] } else { '<none>' }
+    throw "Configured dotnet does not resolve exact SDK $requiredSdk (reported $reportedSdk). Re-run setup.cmd."
+}
+
+$solution = Find-SolutionFile -RepositoryRoot $repositoryRoot
+if ($null -eq $solution) {
+    throw 'No solution file was found. Project scaffolding is not complete, so no build or artifacts were produced.'
+}
+
+$rhinoSettings = Get-PropertyValue -Object $localSettings -Name 'rhino'
+$rhino7 = Get-PropertyValue -Object $rhinoSettings -Name 'rhino7'
+$rhino8 = Get-PropertyValue -Object $rhinoSettings -Name 'rhino8'
+$rhino7Ready = [string] (Get-PropertyValue -Object $rhino7 -Name 'status' -DefaultValue 'missing') -eq 'ready'
+$rhino8Ready = [string] (Get-PropertyValue -Object $rhino8 -Name 'status' -DefaultValue 'missing') -eq 'ready'
+
+$energyPlusSettings = Get-PropertyValue -Object $localSettings -Name 'energyPlus'
+$energyPlusReady = [string] (Get-PropertyValue -Object $energyPlusSettings -Name 'status' -DefaultValue 'missing') -eq 'ready'
+if ($RequireEnergyPlus -and -not $energyPlusReady) {
+    throw 'EnergyPlus was required but no verified runtime is configured. Run setup.cmd -InstallEnergyPlus.'
+}
+
+Set-RepositoryBuildEnvironment -RepositoryRoot $repositoryRoot -DotNetExecutable $dotnetExecutable
+Ensure-Directory -Path $logsRoot
+Ensure-Directory -Path $testResultsRoot
+
+$env:DRAGONS_ENERGYPLUS_AVAILABLE = if ($energyPlusReady) { '1' } else { '0' }
+$env:DRAGONS_ENERGYPLUS_EXE = if ($energyPlusReady) { [string] (Get-PropertyValue -Object $energyPlusSettings -Name 'executable') } else { '' }
+$env:GONIEGONIE_RUN_ENERGYPLUS_INTEGRATION = if ($energyPlusReady) { '1' } else { '0' }
+$env:GONIEGONIE_ENERGYPLUS_ROOT = if ($energyPlusReady) { [string] (Get-PropertyValue -Object $energyPlusSettings -Name 'root') } else { '' }
+$env:DRAGONS_RHINO7_AVAILABLE = if ($rhino7Ready) { '1' } else { '0' }
+$env:DRAGONS_RHINO8_AVAILABLE = if ($rhino8Ready) { '1' } else { '0' }
+$env:DRAGONS_RHINO7_EXE = if ($rhino7Ready) { [string] (Get-PropertyValue -Object $rhino7 -Name 'executable') } else { '' }
+$env:DRAGONS_RHINO8_EXE = if ($rhino8Ready) { [string] (Get-PropertyValue -Object $rhino8 -Name 'executable') } else { '' }
+
+Write-Host "Solution: $solution"
+Write-Host ".NET SDK: $requiredSdk"
+Write-Host "Rhino 7 runtime tests: $(if ($rhino7Ready) { 'enabled' } else { 'unavailable; version-specific tests will be skipped' })"
+Write-Host "Rhino 8 runtime tests: $(if ($rhino8Ready) { 'enabled' } else { 'unavailable; version-specific tests will be skipped' })"
+Write-Host "EnergyPlus integration environment: $(if ($energyPlusReady) { 'enabled' } else { 'unavailable' })"
+
+if (-not $NoRestore) {
+    if ($PSCmdlet.ShouldProcess($solution, 'Restore NuGet dependencies')) {
+        Invoke-LoggedNativeCommand `
+            -FilePath $dotnetExecutable `
+            -ArgumentList @(
+                'restore', $solution,
+                '--configfile', $nugetConfig,
+                '--packages', (Join-Path $toolsRoot 'nuget\packages'),
+                '--nologo'
+            ) `
+            -LogPath (Join-Path $logsRoot 'restore.log') `
+            -FailureMessage 'Dependency restore failed'
+    }
+}
+else {
+    Write-Host 'Restore skipped by -NoRestore.'
+}
+
+if ($PSCmdlet.ShouldProcess($solution, "Build $Configuration")) {
+    Invoke-LoggedNativeCommand `
+        -FilePath $dotnetExecutable `
+        -ArgumentList @(
+            'build', $solution,
+            '--configuration', $Configuration,
+            '--no-restore',
+            '--nologo'
+        ) `
+        -LogPath (Join-Path $logsRoot 'build.log') `
+        -FailureMessage 'Build failed'
+}
+
+$testStatus = 'skipped'
+$executedTestProjects = @()
+$skippedTestProjects = @()
+
+if ($SkipTests) {
+    Write-Host 'Tests skipped by -SkipTests.'
+}
+else {
+    $testsDirectory = Join-Path $repositoryRoot 'tests'
+    $testProjects = @()
+    if (Test-Path -LiteralPath $testsDirectory -PathType Container) {
+        $testProjects = @(Get-ChildItem -LiteralPath $testsDirectory -Filter '*.csproj' -File -Recurse | Sort-Object FullName)
+    }
+
+    if ($testProjects.Count -eq 0) {
+        $testStatus = 'no-test-projects'
+        Write-Warning 'No test projects exist yet. The test stage had nothing to execute.'
+    }
+    else {
+        foreach ($testProject in $testProjects) {
+            $requiresRhino7 = $testProject.BaseName -match '(?i)(Rhino7|Net48)'
+            $requiresRhino8 = $testProject.BaseName -match '(?i)(Rhino8|Net8)'
+            $requiresAnyRhino = $testProject.BaseName -match '(?i)(Rhino|Grasshopper|GH\.Load)'
+
+            $skipReason = $null
+            if ($requiresRhino7 -and -not $rhino7Ready) {
+                $skipReason = 'Rhino 7 is unavailable'
+            }
+            elseif ($requiresRhino8 -and -not $rhino8Ready) {
+                $skipReason = 'Rhino 8 is unavailable'
+            }
+            elseif ($requiresAnyRhino -and -not $rhino7Ready -and -not $rhino8Ready) {
+                $skipReason = 'no Rhino runtime is available'
+            }
+
+            if ($null -ne $skipReason) {
+                Write-Warning "Skipping $($testProject.BaseName): $skipReason."
+                $skippedTestProjects += [pscustomobject] [ordered] @{
+                    project = $testProject.FullName
+                    reason = $skipReason
+                }
+                continue
+            }
+
+            $projectResults = Join-Path $testResultsRoot $testProject.BaseName
+            Ensure-Directory -Path $projectResults
+            $safeLogName = ($testProject.BaseName -replace '[^A-Za-z0-9_.-]', '_') + '.log'
+            if ($PSCmdlet.ShouldProcess($testProject.FullName, "Test $Configuration")) {
+                Invoke-LoggedNativeCommand `
+                    -FilePath $dotnetExecutable `
+                    -ArgumentList @(
+                        'test', $testProject.FullName,
+                        '--configuration', $Configuration,
+                        '--no-restore',
+                        '--no-build',
+                        '--results-directory', $projectResults,
+                        '--logger', ("trx;LogFileName=$($testProject.BaseName).trx"),
+                        '--nologo'
+                    ) `
+                    -LogPath (Join-Path $logsRoot ('test-' + $safeLogName)) `
+                    -FailureMessage "Tests failed for $($testProject.BaseName)"
+            }
+            $executedTestProjects += $testProject.FullName
+        }
+
+        if ($executedTestProjects.Count -gt 0) {
+            $testStatus = 'passed'
+        }
+        elseif ($skippedTestProjects.Count -gt 0) {
+            $testStatus = 'runtime-dependent-tests-skipped'
+        }
+    }
+}
+
+$stagedPlugins = @()
+if ($SkipArtifactStaging) {
+    Write-Host 'Artifact staging skipped by -SkipArtifactStaging.'
+}
+else {
+    Reset-GeneratedArtifacts
+    Ensure-Directory -Path $reportsRoot
+
+    $identities = @()
+    if (Test-Path -LiteralPath $buildOutputRoot -PathType Container) {
+        $pluginFiles = @(Get-ChildItem -LiteralPath $buildOutputRoot -File -Recurse |
+            Where-Object {
+                $_.Name -match '^GonieGonie\.(?:InvisibleDragon|SimpleDragon)\.GH\.(?:gha|dll)$' -and
+                $_.FullName -match ('\\' + [regex]::Escape($Configuration) + '\\') -and
+                $_.FullName -notmatch '\\(?:ref|refint)\\'
+            })
+
+        foreach ($pluginFile in $pluginFiles) {
+            $identity = Get-PluginOutputIdentity -PluginFile $pluginFile
+            if ($null -ne $identity) {
+                $identities += $identity
+            }
+        }
+    }
+
+    foreach ($group in @($identities | Group-Object module, target, frameworkDirectory)) {
+        $preferred = @($group.Group | Where-Object { $_.pluginFile.Extension -eq '.gha' } | Sort-Object { $_.pluginFile.LastWriteTimeUtc } -Descending)
+        if ($preferred.Count -eq 0) {
+            $preferred = @($group.Group | Sort-Object { $_.pluginFile.LastWriteTimeUtc } -Descending)
+        }
+        if ($preferred.Count -gt 0) {
+            $stagedPlugins += Copy-PluginOutput -Identity $preferred[0]
+        }
+    }
+
+    if ($stagedPlugins.Count -eq 0) {
+        Write-Warning 'No InvisibleDragon.GH or SimpleDragon.GH output was found to stage. Build reports will still be written.'
+    }
+}
+
+$artifactChecksums = @()
+if (-not $SkipArtifactStaging -and -not $WhatIfPreference -and (Test-Path -LiteralPath $artifactsRoot -PathType Container)) {
+    foreach ($file in @(Get-ChildItem -LiteralPath $artifactsRoot -File -Recurse |
+        Where-Object { $_.FullName -notmatch '\\reports\\' -and $_.Name -ne 'README.md' } |
+        Sort-Object FullName)) {
+        $relativePath = $file.FullName.Substring($artifactsRoot.Length).TrimStart('\', '/') -replace '\\', '/'
+        $artifactChecksums += [pscustomobject] [ordered] @{
+            path = $relativePath
+            sha256 = Get-Sha256 -Path $file.FullName
+        }
+    }
+}
+
+$gitIdentity = Get-GitBuildIdentity
+$buildManifest = [ordered] @{
+    schema = 'goniegonie.dragons-grasshopper.build-manifest.v1'
+    generatedUtc = [DateTime]::UtcNow.ToString('o')
+    configuration = $Configuration
+    solution = $solution
+    dotnetSdk = $requiredSdk
+    git = $gitIdentity
+    runtimeAvailability = [ordered] @{
+        energyPlus = $energyPlusReady
+        rhino7 = $rhino7Ready
+        rhino8 = $rhino8Ready
+    }
+    tests = [ordered] @{
+        status = $testStatus
+        executedProjects = @($executedTestProjects)
+        skippedProjects = @($skippedTestProjects)
+        resultsDirectory = $testResultsRoot
+    }
+    stagedPlugins = @($stagedPlugins)
+    artifactChecksums = @($artifactChecksums)
+}
+
+if (-not $SkipArtifactStaging) {
+    Write-Utf8JsonIfChanged `
+        -InputObject $buildManifest `
+        -Path (Join-Path $reportsRoot 'build-manifest.json') `
+        -Depth 12
+
+    $testSummary = [ordered] @{
+        schema = 'goniegonie.dragons-grasshopper.test-summary.v1'
+        status = $testStatus
+        executedProjects = @($executedTestProjects)
+        skippedProjects = @($skippedTestProjects)
+        resultsDirectory = $testResultsRoot
+    }
+    Write-Utf8JsonIfChanged `
+        -InputObject $testSummary `
+        -Path (Join-Path $reportsRoot 'test-summary.json') `
+        -Depth 8
+}
+
+Write-Host ''
+Write-Host "Build complete: $Configuration"
+Write-Host "Tests: $testStatus"
+if (-not $SkipArtifactStaging) {
+    Write-Host "Staged plugin targets: $($stagedPlugins.Count)"
+    Write-Host "Artifacts: $artifactsRoot"
+}

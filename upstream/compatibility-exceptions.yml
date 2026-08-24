@@ -1,0 +1,37 @@
+# Paths and symbols in each `upstream` block are exact historical source
+# identifiers. Product-owned names in this port are InvisibleDragon and
+# SimpleDragon.
+- id: deterministic-auto-id
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Surface.__init__
+  difference:
+    upstream: Python memory-address-based automatic identifiers
+    dotnet: deterministic persistent identifiers
+  effect:
+    engineering_result: none
+    raw_idf_text: generated names can differ
+  approval: accepted
+
+- id: immutable-conversion
+  upstream:
+    path: src/epsimple/core/model.py
+    symbol: GreenRetrofitModel._dragonize_surface
+  difference:
+    upstream: temporarily mutates unknown constructions and resets them
+    dotnet: resolves constructions on immutable copies
+  effect:
+    engineering_result: none
+  approval: accepted
+
+- id: rhino-7-support
+  upstream:
+    path: null
+    symbol: null
+  difference:
+    upstream: no Rhino or Grasshopper plugin
+    dotnet: multi-targets Rhino 7 (.NET Framework 4.8) and Rhino 8 (.NET 8)
+  effect:
+    engineering_result: none
+    packaging: separate runtime-specific plugin payloads
+  approval: user-requested

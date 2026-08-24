@@ -1,0 +1,13 @@
+name: invisible-dragon
+version: 0.1.0
+authors:
+  - Gonie-Gonie
+description: >-
+  Vertex-preserving InvisibleDragon components for constructing and running
+  EnergyPlus models in Grasshopper.
+url: https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper
+keywords:
+  - energyplus
+  - grasshopper
+  - building-energy
+  - invisible-dragon

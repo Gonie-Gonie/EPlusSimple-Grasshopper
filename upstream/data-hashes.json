@@ -1,0 +1,17 @@
+{
+  "schema": "goniegonie.upstream-data-hashes.v1",
+  "algorithm": "sha256",
+  "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+  "files": {
+    "src/epsimple/_data/construction/construction_regulation_fenestration.csv": "4e3813baf863dcce1bdb30382d9b33f3a481d5d7b927279c2a76f10aa7cc8562",
+    "src/epsimple/_data/construction/construction_regulation_surface.csv": "292d2acc786bbfae0a83a9365e85b697f5bb97b25f25d4f3de21aae25310d48a",
+    "src/epsimple/_data/construction/material.csv": "2a2b62b1c13e65d99098acac23f1ffcc4aa9ce08d162aa8491898b3f0c7bd395",
+    "src/epsimple/_data/profile/KoreanHoliday.csv": "82975066695d335065b4fe905b000aa4a0ae1aa8893b4deb1ee6668c3344dfce",
+    "src/epsimple/_data/profile/KoreanUsageProfile.csv": "f3c56d80121bc62c47113dafca27e903aa76ff487f18723ce5fe3dfcff8a65bb",
+    "src/epsimple/_data/profile/KoreanUsageProfileExtended.csv": "a24d0ba02559394becb9abc488c544c5bfb1fd424f1c8cd19ef61b6c2cf90ed0",
+    "src/epsimple/_data/weather/기후지역.csv": "565027a25cc89e9d45924c9b4a957251aafc84022fd61f5dcbf3deb0467fb405",
+    "src/epsimple/_data/weather/행정구역별기상데이터.csv": "3422b036820740587173dece19453c6b0e7fba5e7e1aa15f27b830948b6787bc",
+    "examples/grm/ASHRAE 140 modified.grm": "8e2ff63e17af29e7429b696800dbb11a5af45817cd97724481b9152b90fc76b3",
+    "examples/grr/ASHRAE 140 modified.grr": "56fc1a200d319ceaa9e0bb5dc1e14ecc2f19c88c288049dda993a4c1adc1c7b1"
+  }
+}

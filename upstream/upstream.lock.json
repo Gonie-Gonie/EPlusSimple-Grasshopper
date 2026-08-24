@@ -1,0 +1,27 @@
+{
+  "schema": "goniegonie.upstream-lock.v1",
+  "repository": "https://github.com/snu-bslab/EPlusSimple.git",
+  "branch": "main",
+  "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+  "checked_at": "2026-08-24",
+  "source_license_declared_in": "citation.cff",
+  "source_license": "MIT",
+  "modules": {
+    "idragon": {
+      "version": "0.7.0",
+      "paths": [
+        "src/idragon"
+      ]
+    },
+    "epsimple": {
+      "version": "0.7.0",
+      "paths": [
+        "src/epsimple"
+      ]
+    }
+  },
+  "fixtures": {
+    "ashrae_140_modified_grm": "examples/grm/ASHRAE 140 modified.grm",
+    "ashrae_140_modified_grr": "examples/grr/ASHRAE 140 modified.grr"
+  }
+}
