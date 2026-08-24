@@ -2,6 +2,7 @@ using Grasshopper.Kernel;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
 using GonieGonie.InvisibleDragon.Grasshopper.Types;
+using GonieGonie.InvisibleDragon.Hvac;
 using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Model;
 using GonieGonie.InvisibleDragon.Shape;
@@ -109,6 +110,52 @@ public sealed class EnergyModelComponent : DragonComponent
         pManager.AddParameter(new DragonZoneParam(), "Zones", "Z", "Thermal zones.", GH_ParamAccess.list);
         pManager.AddNumberParameter("North Axis", "N°", "North-axis rotation in degrees.", GH_ParamAccess.item, 0);
         pManager.AddTextParameter("Terrain", "T", "Country, Suburbs, City, Ocean, or Urban.", GH_ParamAccess.item, "Suburbs");
+        int sources = pManager.AddParameter(
+            new DragonSourceSystemParam(),
+            "Sources",
+            "Src",
+            "Optional source registry. Referenced sources are persisted through their supply systems.",
+            GH_ParamAccess.list);
+        pManager[sources].Optional = true;
+        int supplies = pManager.AddParameter(
+            new DragonSupplySystemParam(),
+            "Supply Systems",
+            "Sys",
+            "Optional supply systems assigned using Supply Zone Indices. Omit when using HVAC Assignments.",
+            GH_ParamAccess.list);
+        pManager[supplies].Optional = true;
+        int supplyZoneIndices = pManager.AddIntegerParameter(
+            "Supply Zone Indices",
+            "Zi",
+            "Optional zero-based zone index per Supply System; one index broadcasts. Empty auto-maps only unambiguous cases.",
+            GH_ParamAccess.list);
+        pManager[supplyZoneIndices].Optional = true;
+        int assignments = pManager.AddGenericParameter(
+            "HVAC Assignments",
+            "HVAC",
+            "Optional ZoneHvacAssignment values from Supply Group Assignment components.",
+            GH_ParamAccess.list);
+        pManager[assignments].Optional = true;
+        int ventilators = pManager.AddParameter(
+            new DragonEnergyRecoveryVentilatorParam(),
+            "Ventilators",
+            "ERV",
+            "Optional energy recovery ventilators assigned using Ventilator Zone Indices.",
+            GH_ParamAccess.list);
+        pManager[ventilators].Optional = true;
+        int ventilatorZoneIndices = pManager.AddIntegerParameter(
+            "Ventilator Zone Indices",
+            "VZi",
+            "Optional zero-based zone index per Ventilator; one index broadcasts. A single ERV with no indices broadcasts to all zones.",
+            GH_ParamAccess.list);
+        pManager[ventilatorZoneIndices].Optional = true;
+        int photovoltaicPanels = pManager.AddParameter(
+            new DragonPhotovoltaicPanelParam(),
+            "PV Panels",
+            "PV",
+            "Optional photovoltaic panels included in the model.",
+            GH_ParamAccess.list);
+        pManager[photovoltaicPanels].Optional = true;
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -132,6 +179,21 @@ public sealed class EnergyModelComponent : DragonComponent
             return;
         }
 
+        var sourceGoos = new List<DragonSourceSystemGoo>();
+        var supplyGoos = new List<DragonSupplySystemGoo>();
+        var supplyZoneIndices = new List<int>();
+        var assignmentObjects = new List<object>();
+        var ventilatorGoos = new List<DragonEnergyRecoveryVentilatorGoo>();
+        var ventilatorZoneIndices = new List<int>();
+        var photovoltaicGoos = new List<DragonPhotovoltaicPanelGoo>();
+        DA.GetDataList(4, sourceGoos);
+        DA.GetDataList(5, supplyGoos);
+        DA.GetDataList(6, supplyZoneIndices);
+        DA.GetDataList(7, assignmentObjects);
+        DA.GetDataList(8, ventilatorGoos);
+        DA.GetDataList(9, ventilatorZoneIndices);
+        DA.GetDataList(10, photovoltaicGoos);
+
         if (!Enum.TryParse(terrainText.Trim(), true, out Terrain terrain))
         {
             AddRuntimeMessage(GH_RuntimeMessageLevel.Error, $"Unknown terrain '{terrainText}'.");
@@ -147,12 +209,123 @@ public sealed class EnergyModelComponent : DragonComponent
 
             return goo.Value;
         }).ToArray();
-        var model = new EnergyModel(name, zones, northAxisDegrees: northAxis, terrain: terrain);
+        SourceSystem[] explicitSources = sourceGoos.Select((goo, index) => goo?.Value
+            ?? throw new ArgumentException($"Sources contains an empty value at index {index}."))
+            .ToArray();
+        ValidateSourceRegistry(explicitSources);
+        SupplySystem[] directSupplies = supplyGoos
+            .Select((goo, index) => HvacComponentSupport.Supply(goo, "Supply Systems", index))
+            .ToArray();
+        int[] directSupplyIndices = HvacComponentSupport.AssignmentIndices(
+            supplyZoneIndices,
+            directSupplies.Length,
+            zones.Length,
+            "Supply Zone Indices",
+            broadcastSingleItemToAllZones: false);
+        var hvacAssignments = assignmentObjects
+            .Select((value, index) => HvacComponentSupport.RequireObject<ZoneHvacAssignment>(
+                value,
+                $"HVAC Assignments[{index}]"))
+            .ToList();
+        hvacAssignments.AddRange(directSupplies
+            .Select((system, index) => new { System = system, ZoneIndex = directSupplyIndices[index] })
+            .GroupBy(item => item.ZoneIndex)
+            .Select(group => new ZoneHvacAssignment(
+                zones[group.Key].Id,
+                new SupplyGroup(group.Select(item => item.System)))));
+
+        EnergyRecoveryVentilator[] ventilators = ventilatorGoos.Select((goo, index) => goo?.Value
+            ?? throw new ArgumentException($"Ventilators contains an empty value at index {index}."))
+            .ToArray();
+        int[] ventilationIndices = HvacComponentSupport.AssignmentIndices(
+            ventilatorZoneIndices,
+            ventilators.Length,
+            zones.Length,
+            "Ventilator Zone Indices",
+            broadcastSingleItemToAllZones: true);
+        ZoneVentilationAssignment[] ventilationAssignments = ventilationIndices
+            .Select((zoneIndex, index) => new ZoneVentilationAssignment(
+                zones[zoneIndex].Id,
+                ventilators.Length == 1 ? ventilators[0] : ventilators[index]))
+            .ToArray();
+        PhotovoltaicPanel[] photovoltaicPanels = photovoltaicGoos.Select((goo, index) => goo?.Value
+            ?? throw new ArgumentException($"PV Panels contains an empty value at index {index}."))
+            .ToArray();
+
+        var componentDiagnostics = SourceRegistryDiagnostics(explicitSources, hvacAssignments);
+        var model = new EnergyModel(
+            name,
+            zones,
+            hvacAssignments: hvacAssignments,
+            ventilationAssignments: ventilationAssignments,
+            photovoltaicPanels: photovoltaicPanels,
+            northAxisDegrees: northAxis,
+            terrain: terrain);
         ValidationResult validation = model.Validate();
-        Report(validation.Diagnostics);
+        Diagnostic[] diagnostics = componentDiagnostics.Concat(validation.Diagnostics).ToArray();
+        Report(diagnostics);
         DA.SetData(0, new DragonEnergyModelGoo(model));
-        DA.SetData(1, validation.IsValid);
-        DA.SetDataList(2, validation.Diagnostics.Select(item => new DiagnosticGoo(item)));
+        DA.SetData(1, diagnostics.All(item => !item.IsFailure));
+        DA.SetDataList(2, diagnostics.Select(item => new DiagnosticGoo(item)));
+    }
+
+    private static void ValidateSourceRegistry(IReadOnlyList<SourceSystem> sources)
+    {
+        foreach (IGrouping<EntityId, SourceSystem> group in sources.GroupBy(source => source.Id))
+        {
+            SourceSystem first = group.First();
+            if (group.Skip(1).Any(source => !HvacComponentSupport.SourceDefinitionsEqual(first, source)))
+            {
+                throw new ArgumentException(
+                    $"Sources contains conflicting definitions for identifier '{group.Key}'.");
+            }
+        }
+    }
+
+    private static List<Diagnostic> SourceRegistryDiagnostics(
+        IReadOnlyList<SourceSystem> explicitSources,
+        IReadOnlyList<ZoneHvacAssignment> assignments)
+    {
+        SourceSystem[] referencedSources = assignments
+            .SelectMany(assignment => assignment.Supply.Systems)
+            .SelectMany(system => RelatedSources(system.Source))
+            .ToArray();
+        var diagnostics = new List<Diagnostic>();
+        foreach (SourceSystem source in explicitSources.GroupBy(item => item.Id).Select(group => group.First()))
+        {
+            SourceSystem[] matches = referencedSources.Where(item => item.Id.Equals(source.Id)).ToArray();
+            if (matches.Any(match => !HvacComponentSupport.SourceDefinitionsEqual(source, match)))
+            {
+                throw new ArgumentException(
+                    $"Source registry definition '{source.Name}' conflicts with a supply-system source using ID '{source.Id}'.");
+            }
+
+            if (matches.Length == 0)
+            {
+                diagnostics.Add(new Diagnostic(
+                    "INVISIBLEDRAGON.GH.UNREFERENCED_SOURCE",
+                    DiagnosticSeverity.Warning,
+                    $"Source '{source.Name}' is not referenced by an HVAC assignment and is not stored in EnergyModel.",
+                    source.Id,
+                    suggestedAction: "Connect the source to a Supply System and assign that system to a zone."));
+            }
+        }
+
+        return diagnostics;
+    }
+
+    private static IEnumerable<SourceSystem> RelatedSources(SourceSystem? source)
+    {
+        if (source is null)
+        {
+            yield break;
+        }
+
+        yield return source;
+        if (source is AbsorptionChiller absorptionChiller)
+        {
+            yield return absorptionChiller.HeatSource;
+        }
     }
 }
 
