@@ -110,24 +110,10 @@
       "goniegonie.buildingenergy.contracts": {
         "type": "Project"
       },
-      "goniegonie.energyplus.runtime": {
-        "type": "Project",
-        "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
-        }
-      },
-      "goniegonie.invisibledragon.core": {
-        "type": "Project",
-        "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
-        }
-      },
       "goniegonie.simpledragon.core": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )"
+          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
         }
       }
     }

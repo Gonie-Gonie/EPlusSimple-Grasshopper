@@ -23,3 +23,95 @@
   tests:
     - PackageInfoTests
   status: equivalent
+
+- upstream:
+    path: src/idragon/imugi.py
+    symbol: IDD / IddObject / IddField
+  dotnet:
+    project: GonieGonie.InvisibleDragon.Core
+    file: Idd/
+    symbol: GonieGonie.InvisibleDragon.Idd
+  tests:
+    - IddParserTests
+  status: equivalent
+
+- upstream:
+    path: src/idragon/imugi.py
+    symbol: IDF / IdfObject / IdfObjectList
+  dotnet:
+    project: GonieGonie.InvisibleDragon.Core
+    file: Idf/
+    symbol: GonieGonie.InvisibleDragon.Idf
+  tests:
+    - IdfDocumentTests
+    - IdfValidatorTests
+  status: implemented
+
+- upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: construction domain
+  dotnet:
+    project: GonieGonie.InvisibleDragon.Core
+    file: Construction/
+    symbol: GonieGonie.InvisibleDragon.Construction
+  tests:
+    - ConstructionTests
+  status: implemented
+
+- upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: schedule and profile domain
+  dotnet:
+    project: GonieGonie.InvisibleDragon.Core
+    file: Profile/
+    symbol: GonieGonie.InvisibleDragon.Profile
+  tests:
+    - DayScheduleTests
+    - RuleSetScheduleProfileTests
+  status: implemented
+
+- upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: vertex surface opening and zone domain
+  dotnet:
+    project: GonieGonie.InvisibleDragon.Core
+    file: Shape/
+    symbol: GonieGonie.InvisibleDragon.Shape
+  tests:
+    - PlanarPolygonTests
+    - SurfaceOpeningTests
+    - SurfaceAdjacencyZoneTests
+  status: implemented
+
+- upstream:
+    path: src/epsimple/core/construction.py
+    symbol: Material / SurfaceConstruction / FenestrationConstruction databases
+  dotnet:
+    project: GonieGonie.SimpleDragon.Core
+    file: Construction/
+    symbol: GonieGonie.SimpleDragon.Construction
+  tests:
+    - ConstructionDatabaseTests
+  status: equivalent
+
+- upstream:
+    path: src/epsimple/core/profile.py
+    symbol: Profile database
+  dotnet:
+    project: GonieGonie.SimpleDragon.Core
+    file: Profiles/
+    symbol: GonieGonie.SimpleDragon.Profiles
+  tests:
+    - ProfileDatabaseTests
+  status: equivalent
+
+- upstream:
+    path: src/epsimple/core/model.py
+    symbol: address_to_weather
+  dotnet:
+    project: GonieGonie.SimpleDragon.Core
+    file: Weather/WeatherDatabase.cs
+    symbol: GonieGonie.SimpleDragon.Weather.WeatherDatabase
+  tests:
+    - WeatherDatabaseTests
+  status: equivalent

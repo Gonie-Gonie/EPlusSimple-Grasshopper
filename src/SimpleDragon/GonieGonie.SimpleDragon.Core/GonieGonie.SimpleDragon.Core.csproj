@@ -8,6 +8,37 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\GonieGonie.BuildingEnergy.Contracts\GonieGonie.BuildingEnergy.Contracts.csproj" />
-    <ProjectReference Include="..\..\InvisibleDragon\GonieGonie.InvisibleDragon.Core\GonieGonie.InvisibleDragon.Core.csproj" />
+    <PackageReference Include="System.Text.Json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\..\data\simple-dragon\construction\material.csv"
+                      Link="Data\construction\material.csv"
+                      LogicalName="GonieGonie.SimpleDragon.Data.construction.material.csv" />
+    <EmbeddedResource Include="..\..\..\data\simple-dragon\construction\construction_regulation_surface.csv"
+                      Link="Data\construction\construction_regulation_surface.csv"
+                      LogicalName="GonieGonie.SimpleDragon.Data.construction.construction_regulation_surface.csv" />
+    <EmbeddedResource Include="..\..\..\data\simple-dragon\construction\construction_regulation_fenestration.csv"
+                      Link="Data\construction\construction_regulation_fenestration.csv"
+                      LogicalName="GonieGonie.SimpleDragon.Data.construction.construction_regulation_fenestration.csv" />
+    <EmbeddedResource Include="..\..\..\data\simple-dragon\profile\KoreanHoliday.csv"
+                      Link="Data\profile\KoreanHoliday.csv"
+                      LogicalName="GonieGonie.SimpleDragon.Data.profile.KoreanHoliday.csv" />
+    <EmbeddedResource Include="..\..\..\data\simple-dragon\profile\KoreanUsageProfile.csv"
+                      Link="Data\profile\KoreanUsageProfile.csv"
+                      LogicalName="GonieGonie.SimpleDragon.Data.profile.KoreanUsageProfile.csv" />
+    <EmbeddedResource Include="..\..\..\data\simple-dragon\profile\KoreanUsageProfileExtended.csv"
+                      Link="Data\profile\KoreanUsageProfileExtended.csv"
+                      LogicalName="GonieGonie.SimpleDragon.Data.profile.KoreanUsageProfileExtended.csv" />
+    <EmbeddedResource Include="..\..\..\data\simple-dragon\weather\기후지역.csv"
+                      Link="Data\weather\기후지역.csv"
+                      LogicalName="GonieGonie.SimpleDragon.Data.weather.climate-regions.csv" />
+    <EmbeddedResource Include="..\..\..\data\simple-dragon\weather\행정구역별기상데이터.csv"
+                      Link="Data\weather\행정구역별기상데이터.csv"
+                      LogicalName="GonieGonie.SimpleDragon.Data.weather.address-weather.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="GonieGonie.SimpleDragon.Core.Tests" />
   </ItemGroup>
 </Project>

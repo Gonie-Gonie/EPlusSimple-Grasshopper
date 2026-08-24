@@ -78,19 +78,6 @@
           "System.Text.Json": "[8.0.6, )"
         }
       },
-      "goniegonie.energyplus.runtime": {
-        "type": "Project",
-        "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
-        }
-      },
-      "goniegonie.invisibledragon.core": {
-        "type": "Project",
-        "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
-        }
-      },
       "System.Text.Json": {
         "type": "CentralTransitive",
         "requested": "[8.0.6, )",
@@ -110,37 +97,11 @@
     "net7.0-windows7.0": {
       "goniegonie.buildingenergy.contracts": {
         "type": "Project"
-      },
-      "goniegonie.energyplus.runtime": {
-        "type": "Project",
-        "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
-        }
-      },
-      "goniegonie.invisibledragon.core": {
-        "type": "Project",
-        "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
-        }
       }
     },
     "net8.0-windows7.0": {
       "goniegonie.buildingenergy.contracts": {
         "type": "Project"
-      },
-      "goniegonie.energyplus.runtime": {
-        "type": "Project",
-        "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
-        }
-      },
-      "goniegonie.invisibledragon.core": {
-        "type": "Project",
-        "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
-        }
       }
     }
   }

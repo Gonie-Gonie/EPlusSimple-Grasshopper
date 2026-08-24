@@ -120,8 +120,15 @@
         "type": "Project",
         "dependencies": {
           "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
+          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )",
+          "System.Text.Json": "[8.0.6, )"
         }
+      },
+      "System.Text.Json": {
+        "type": "CentralTransitive",
+        "requested": "[8.0.6, )",
+        "resolved": "8.0.6",
+        "contentHash": "BvSpVBsVN9b+Y+wONbvJOHd1HjXQf33+XiC28ZMOwRsYb42mz3Q8YHnpTSwpwJLqYCMqM+0UUVC3V+pi25XfkQ=="
       }
     }
   }
