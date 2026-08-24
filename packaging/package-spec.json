@@ -1,0 +1,71 @@
+{
+  "schema": "goniegonie.dragons-grasshopper.package-spec.v1",
+  "version": "0.1.0",
+  "targets": [
+    {
+      "id": "rhino7",
+      "frameworks": [
+        "net48"
+      ],
+      "yak_layout": "flat",
+      "distribution_tag": "rh7-win",
+      "inspection_sdk_version": "7.0.20314.3001",
+      "inspection_sdk_framework": "net45"
+    },
+    {
+      "id": "rhino8",
+      "frameworks": [
+        "net7.0",
+        "net8.0"
+      ],
+      "yak_layout": "framework-directories",
+      "distribution_tag": "rh8-win",
+      "inspection_sdk_version": "8.0.23304.9001",
+      "inspection_sdk_framework": "net48"
+    }
+  ],
+  "shared_assemblies": [
+    "GonieGonie.BuildingEnergy.Contracts.dll",
+    "GonieGonie.EnergyPlus.Runtime.dll",
+    "GonieGonie.InvisibleDragon.Core.dll",
+    "GonieGonie.InvisibleDragon.Grasshopper.Types.dll",
+    "GonieGonie.InvisibleDragon.Rhino.dll"
+  ],
+  "interop_types": [
+    "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonEnergyModelGoo",
+    "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo",
+    "GonieGonie.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo",
+    "GonieGonie.InvisibleDragon.Grasshopper.Types.DiagnosticGoo"
+  ],
+  "products": [
+    {
+      "id": "invisible-dragon",
+      "display_name": "InvisibleDragon",
+      "entry_assembly": "GonieGonie.InvisibleDragon.GH.gha",
+      "required_assemblies": [
+        "GonieGonie.BuildingEnergy.Contracts.dll",
+        "GonieGonie.EnergyPlus.Runtime.dll",
+        "GonieGonie.InvisibleDragon.Core.dll",
+        "GonieGonie.InvisibleDragon.Grasshopper.Types.dll",
+        "GonieGonie.InvisibleDragon.Rhino.dll",
+        "GonieGonie.InvisibleDragon.GH.gha"
+      ]
+    },
+    {
+      "id": "simple-dragon",
+      "display_name": "SimpleDragon",
+      "entry_assembly": "GonieGonie.SimpleDragon.GH.gha",
+      "required_assemblies": [
+        "GonieGonie.BuildingEnergy.Contracts.dll",
+        "GonieGonie.EnergyPlus.Runtime.dll",
+        "GonieGonie.InvisibleDragon.Core.dll",
+        "GonieGonie.InvisibleDragon.Grasshopper.Types.dll",
+        "GonieGonie.InvisibleDragon.Rhino.dll",
+        "GonieGonie.SimpleDragon.Core.dll",
+        "GonieGonie.SimpleDragon.Grasshopper.Types.dll",
+        "GonieGonie.SimpleDragon.Rhino.dll",
+        "GonieGonie.SimpleDragon.GH.gha"
+      ]
+    }
+  ]
+}

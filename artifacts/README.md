@@ -17,9 +17,16 @@ artifacts/
 |   `-- rhino8/
 |       |-- net7.0/
 |       `-- net8.0/
+|-- packages/
+|   |-- invisible-dragon/{stage,yak,offline}/
+|   |-- simple-dragon/{stage,yak,offline}/
+|   |-- compatibility-report.json
+|   `-- checksums.sha256
 `-- reports/
     |-- build-manifest.json
     `-- test-summary.json
 ```
 
 Delete the generated files at any time and run `build.cmd` to reproduce them.
+Run `package.cmd` to reproduce the lean package stages, Yak distributions, and
+plugin-only offline ZIPs after the normal build artifacts are available.

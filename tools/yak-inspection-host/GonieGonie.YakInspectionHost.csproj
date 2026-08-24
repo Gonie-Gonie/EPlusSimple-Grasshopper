@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>GonieGonie.YakInspectionHost</AssemblyName>
+    <Description>Startup hook that gives the pinned Yak inspector a temp-only dependency resolver.</Description>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);CA1050</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="StartupHook.cs" />
+  </ItemGroup>
+</Project>
