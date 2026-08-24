@@ -1,3 +1,4 @@
+using System.Globalization;
 using GonieGonie.InvisibleDragon.Hvac;
 using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Model;
@@ -84,6 +85,41 @@ public sealed class GreenRetrofitConversionTests
         Assert.All(wall.Openings, opening => Assert.Equal(6d, opening.Polygon.Area, 8));
         Assert.False(wall.Openings[0].Polygon.IntersectsInterior(wall.Openings[1].Polygon));
         Assert.True(wall.Validate().IsValid, Describe(wall.Validate().Diagnostics));
+    }
+
+    [Fact]
+    public void ConvertedIdfKeepsFenestrationVerticesAndPeopleActivityInTheirDeclaredFields()
+    {
+        GreenRetrofitModel source = GrmReader.ReadFile(Fixture("grm")).RequireModel();
+
+        IdfDocument idf = GreenRetrofitConverter.ToIdfDocument(source);
+
+        Assert.All(idf["FenestrationSurface:Detailed"], fenestration =>
+        {
+            Assert.Equal(21, fenestration.Count);
+            Assert.Equal("1", fenestration[7]);
+            Assert.Equal("4", fenestration[8]);
+            Assert.Equal(12, fenestration.Fields.Skip(9).Count());
+        });
+        IdfObject people = Assert.Single(idf["People"]);
+        Assert.Equal(10, people.Count);
+        Assert.Equal("People/Area", people[3]);
+        Assert.Equal("$DEFAULT$PEOPLEACTIVITY", people[9]);
+        IdfObject equipment = Assert.Single(idf["ZoneHVAC:EquipmentList"]);
+        Assert.Equal("1", equipment[4]);
+        Assert.Equal("1", equipment[5]);
+        Assert.Equal("2", equipment[10]);
+        Assert.Equal("2", equipment[11]);
+        IdfObject noMass = Assert.Single(
+            idf["Material:NoMass"],
+            material => material.Name!.StartsWith("MTRL-0x000004_", StringComparison.Ordinal));
+        Assert.Equal(
+            1.003d / 0.04d,
+            double.Parse(noMass[2], NumberStyles.Float, CultureInfo.InvariantCulture),
+            12);
+        Assert.DoesNotContain(
+            idf["Material"],
+            material => material.Name!.StartsWith("MTRL-0x000004_", StringComparison.Ordinal));
     }
 
     [Fact]

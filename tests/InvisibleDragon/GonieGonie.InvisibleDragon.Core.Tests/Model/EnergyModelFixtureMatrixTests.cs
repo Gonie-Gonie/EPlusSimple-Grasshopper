@@ -160,6 +160,39 @@ public sealed class EnergyModelFixtureMatrixTests
         Assert.Contains(document["ZoneHVAC:EquipmentList"], item => item[2] == "ZoneHVAC:EnergyRecoveryVentilator");
     }
 
+    [Theory]
+    [InlineData(999d, "Material:NoMass", "Material")]
+    [InlineData(1000d, "Material", "Material:NoMass")]
+    public void MaterialEmissionUsesArealHeatCapacityBoundary(
+        double arealHeatCapacity,
+        string emittedType,
+        string omittedType)
+    {
+        var material = new Material("Low volumetric capacity", 0.04, 0.01, 100);
+        double thickness = arealHeatCapacity
+            / (material.DensityKilogramsPerCubicMetre * material.SpecificHeatJoulesPerKilogramKelvin);
+        var construction = new OpaqueConstruction(
+            "Low capacity construction",
+            new[] { new Layer("Low capacity layer", material, thickness) });
+        var surface = new Surface(
+            new EntityId("LOW-CAPACITY-FLOOR"),
+            "Low capacity floor",
+            SurfaceType.Floor,
+            construction,
+            SurfaceBoundary.Ground,
+            TestDomainFactory.Square(reverse: true));
+        var zone = new Zone(
+            new EntityId("LOW-CAPACITY-ZONE"),
+            "Low capacity zone",
+            new[] { surface },
+            TestDomainFactory.EmptyProfile("LOW-CAPACITY-PROFILE"));
+
+        IdfDocument document = new EnergyModel("Low capacity model", new[] { zone }).ToIdfDocument();
+
+        Assert.Single(document[emittedType]);
+        Assert.Empty(document[omittedType]);
+    }
+
     internal static EnergyModel CreateRepresentativeModel()
     {
         Zone zone = CreateZone("ZONE-140", "ASHRAE 140 Zone");

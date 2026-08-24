@@ -12,6 +12,10 @@ namespace GonieGonie.InvisibleDragon.Model;
 
 internal static class EnergyModelIdfAssembler
 {
+    // Below 0.278 Wh/(m2 K), retain the layer's R-value without asking EnergyPlus
+    // to solve physically insignificant thermal storage. Thick layers remain massive.
+    private const double MaximumNoMassArealHeatCapacity = 1000d;
+
     private static readonly string[] GeneratedPreamble =
     {
         "Generated deterministically by GonieGonie InvisibleDragon.",
@@ -178,17 +182,31 @@ internal static class EnergyModelIdfAssembler
                     ModelDefinitionComparer.EmittedMaterialEquals,
                     "Material"))
                 {
-                    document.Append(context.CreateRaw(
-                        "Material",
-                        layer.Name,
-                        layer.Material.Roughness,
-                        layer.ThicknessMetres,
-                        layer.Material.ConductivityWattsPerMetreKelvin,
-                        layer.Material.DensityKilogramsPerCubicMetre,
-                        layer.Material.SpecificHeatJoulesPerKilogramKelvin,
-                        layer.Material.ThermalAbsorptance,
-                        layer.Material.SolarAbsorptance,
-                        layer.Material.VisibleAbsorptance));
+                    if (IsEffectivelyNoMass(layer))
+                    {
+                        document.Append(context.CreateRaw(
+                            "Material:NoMass",
+                            layer.Name,
+                            layer.Material.Roughness,
+                            layer.ThermalResistance,
+                            layer.Material.ThermalAbsorptance,
+                            layer.Material.SolarAbsorptance,
+                            layer.Material.VisibleAbsorptance));
+                    }
+                    else
+                    {
+                        document.Append(context.CreateRaw(
+                            "Material",
+                            layer.Name,
+                            layer.Material.Roughness,
+                            layer.ThicknessMetres,
+                            layer.Material.ConductivityWattsPerMetreKelvin,
+                            layer.Material.DensityKilogramsPerCubicMetre,
+                            layer.Material.SpecificHeatJoulesPerKilogramKelvin,
+                            layer.Material.ThermalAbsorptance,
+                            layer.Material.SolarAbsorptance,
+                            layer.Material.VisibleAbsorptance));
+                    }
                 }
             }
 
@@ -244,6 +262,11 @@ internal static class EnergyModelIdfAssembler
         }
 
         return airBoundary.Name;
+    }
+
+    private static bool IsEffectivelyNoMass(Layer layer)
+    {
+        return layer.HeatCapacityJoulesPerSquareMetreKelvin < MaximumNoMassArealHeatCapacity;
     }
 
     private static string AppendGlazing(
@@ -344,31 +367,19 @@ internal static class EnergyModelIdfAssembler
         IOpening opening,
         string constructionName)
     {
-        List<object?> fields = new()
-        {
-            opening.Name,
-            opening.Type,
-            constructionName,
-            host.Name,
-            string.Empty,
-            "autocalculate",
-            string.Empty,
-            string.Empty,
-            1,
-            opening.Polygon.Vertices.Count,
-        };
-        AddVertices(fields, opening.Polygon.Vertices);
-        return context.CreateRaw("FenestrationSurface:Detailed", fields.ToArray());
-    }
-
-    private static void AddVertices(List<object?> fields, IEnumerable<Vertex> vertices)
-    {
-        foreach (Vertex vertex in vertices)
-        {
-            fields.Add(vertex.X);
-            fields.Add(vertex.Y);
-            fields.Add(vertex.Z);
-        }
+        IdfObject result = context.Create(
+            "FenestrationSurface:Detailed",
+            IdfGenerationContext.Field(0, "Name", opening.Name),
+            IdfGenerationContext.Field(1, "Surface Type", opening.Type),
+            IdfGenerationContext.Field(2, "Construction Name", constructionName),
+            IdfGenerationContext.Field(3, "Building Surface Name", host.Name),
+            IdfGenerationContext.Field(4, "Outside Boundary Condition Object", null),
+            IdfGenerationContext.Field(5, "View Factor to Ground", "autocalculate"),
+            IdfGenerationContext.Field(6, "Frame and Divider Name", null),
+            IdfGenerationContext.Field(7, "Multiplier", 1),
+            IdfGenerationContext.Field(8, "Number of Vertices", opening.Polygon.Vertices.Count));
+        AddVertices(result, opening.Polygon.Vertices);
+        return result;
     }
 
     private static void AddVertices(IdfObject target, IEnumerable<Vertex> vertices)
@@ -402,13 +413,18 @@ internal static class EnergyModelIdfAssembler
         if (profile.Occupant is not null && profile.Occupant.Maximum > 0)
         {
             string schedule = AppendNormalizedSchedule(document, context, profile.Occupant, zone.Name, "occupant", schedules);
-            IdfObject people = context.CreateRaw("People", $"people:{zone.Name}", zone.Name, schedule, "People/Area", null, profile.Occupant.Maximum);
-            people.Add(string.Empty);
-            people.Add(string.Empty);
-            people.Add(string.Empty);
-            people.Add(string.Empty);
-            people.Add("$DEFAULT$PEOPLEACTIVITY");
-            document.Append(people);
+            document.Append(context.Create(
+                "People",
+                IdfGenerationContext.Field(0, "Name", $"people:{zone.Name}"),
+                IdfGenerationContext.Field(1, "Zone or ZoneList or Space or SpaceList Name", zone.Name),
+                IdfGenerationContext.Field(2, "Number of People Schedule Name", schedule),
+                IdfGenerationContext.Field(3, "Number of People Calculation Method", "People/Area"),
+                IdfGenerationContext.Field(4, "Number of People", null),
+                IdfGenerationContext.Field(5, "People per Floor Area", profile.Occupant.Maximum),
+                IdfGenerationContext.Field(6, "Floor Area per Person", null),
+                IdfGenerationContext.Field(7, "Fraction Radiant", null),
+                IdfGenerationContext.Field(8, "Sensible Heat Fraction", null),
+                IdfGenerationContext.Field(9, "Activity Level Schedule Name", "$DEFAULT$PEOPLEACTIVITY")));
         }
 
         if (zone.InfiltrationAirChangesPerHour > 0)
@@ -537,10 +553,11 @@ internal static class EnergyModelIdfAssembler
         for (int index = 0; index < equipment.Count; index++)
         {
             ZoneEquipmentDescriptor item = equipment[index];
+            int sequence = index + 1;
             equipmentFields.Add(item.ObjectType);
             equipmentFields.Add(item.Name);
-            equipmentFields.Add(item.CoolingSequence == 0 ? index + 1 : item.CoolingSequence);
-            equipmentFields.Add(item.HeatingSequence == 0 ? index + 1 : item.HeatingSequence);
+            equipmentFields.Add(sequence);
+            equipmentFields.Add(sequence);
             equipmentFields.Add(null);
             equipmentFields.Add(null);
         }
