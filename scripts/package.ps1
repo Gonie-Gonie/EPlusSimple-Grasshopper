@@ -146,7 +146,7 @@ function Copy-FrameworkPayload {
 
     $source = Join-Path $artifactsRoot (Join-Path ([string] $Product.id) (Join-Path $Target $Framework))
     if (-not (Test-Path -LiteralPath $source -PathType Container)) {
-        throw "Build payload is missing: '$source'. Run build.cmd first or omit -SkipBuild."
+        throw "Build payload is missing: '$source'. Run 'dev.cmd build' first or omit -SkipBuild."
     }
 
     Ensure-Directory -Path $Destination
@@ -258,7 +258,7 @@ function New-YakInspectionHost {
     foreach ($packageName in @('grasshopper', 'rhinocommon')) {
         $assetRoot = Join-Path $packagesPath (Join-Path $packageName (Join-Path $sdkVersion (Join-Path 'lib' $sdkFramework)))
         if (-not (Test-Path -LiteralPath $assetRoot -PathType Container)) {
-            throw "Locked $packageName $sdkVersion/$sdkFramework assets are missing. Run setup.cmd/restore first."
+            throw "Locked $packageName $sdkVersion/$sdkFramework assets are missing. Run 'dev.cmd setup' first."
         }
 
         foreach ($sdkAssembly in @(Get-ChildItem -LiteralPath $assetRoot -Filter '*.dll' -File | Sort-Object Name)) {
@@ -374,7 +374,7 @@ if (-not (Test-Path -LiteralPath $specPath -PathType Leaf)) {
     throw "Package specification is missing: '$specPath'."
 }
 if (-not (Test-Path -LiteralPath $settingsPath -PathType Leaf)) {
-    throw "Local setup is missing. Run setup.cmd first; expected '$settingsPath'."
+    throw "Local setup is missing. Run 'dev.cmd setup' first; expected '$settingsPath'."
 }
 
 $spec = Get-Content -LiteralPath $specPath -Raw | ConvertFrom-Json
@@ -396,7 +396,7 @@ if (-not $SkipBuild) {
     if ($NoRestore) {
         $buildParameters.NoRestore = $true
     }
-    & (Join-Path $repositoryRoot 'build.ps1') @buildParameters
+    & (Join-Path $PSScriptRoot 'build.ps1') @buildParameters
 }
 
 Reset-GeneratedDirectory -Path $workingRoot -AllowedTopLevelName 'temp'

@@ -65,19 +65,19 @@ if ($Mode -eq 'Verify' -and $UpdateBaseline) {
 
 foreach ($requiredFile in @($settingsPath, $lockPath, $requirementsPath, $bootstrapPath, $generatorPath)) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
-        throw "Required reference-oracle input is missing: '$requiredFile'. Run setup.cmd if local.settings.json is absent."
+        throw "Required reference-oracle input is missing: '$requiredFile'. Run 'dev.cmd setup' if local.settings.json is absent."
     }
 }
 
 $settings = Get-Content -LiteralPath $settingsPath -Raw | ConvertFrom-Json
 $pythonSettings = $settings.PSObject.Properties['pythonOracle']
 if ($null -eq $pythonSettings -or [string] $pythonSettings.Value.status -ne 'ready') {
-    throw 'The exact Python oracle is not configured. Run setup.cmd without -SkipPythonInstall.'
+    throw "The exact Python oracle is not configured. Run 'dev.cmd setup' without -SkipPythonInstall."
 }
 
 $pythonExecutable = [string] $pythonSettings.Value.executable
 if (-not (Test-Path -LiteralPath $pythonExecutable -PathType Leaf)) {
-    throw "The setup-selected Python executable no longer exists: '$pythonExecutable'. Re-run setup.cmd."
+    throw "The setup-selected Python executable no longer exists: '$pythonExecutable'. Re-run 'dev.cmd setup'."
 }
 
 $pythonIdentity = @(& $pythonExecutable -c "import sys; print('%d.%d.%d' % sys.version_info[:3])" 2>$null)
@@ -385,7 +385,7 @@ function Get-TreeHashes {
 
 function Assert-ReferenceMatchesBaseline {
     if (-not (Test-Path -LiteralPath $baselineRoot -PathType Container)) {
-        throw "Reference baseline is missing: '$baselineRoot'. Generate and review it, then run reference.cmd -UpdateBaseline."
+        throw "Reference baseline is missing: '$baselineRoot'. Generate and review it, then run 'dev.cmd reference -UpdateBaseline'."
     }
 
     $actual = Get-TreeHashes -Root $outputRoot

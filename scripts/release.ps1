@@ -6,9 +6,9 @@ param()
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
-. (Join-Path $PSScriptRoot 'scripts\common.ps1')
+. (Join-Path $PSScriptRoot 'common.ps1')
 
-$repositoryRoot = [System.IO.Path]::GetFullPath($PSScriptRoot).TrimEnd('\', '/')
+$repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
 $releaseStartedUtc = [DateTime]::UtcNow
 $releaseStamp = $releaseStartedUtc.ToString('yyyyMMdd-HHmmss-fff')
 $artifactsRoot = Join-Path $repositoryRoot 'artifacts'
@@ -361,33 +361,33 @@ Initialize-ReleaseWorkspace
 Write-Host "Release candidate source: $commit"
 Write-Host 'Bootstrapping the pinned SDK, Python, Rhino checks, and EnergyPlus runtime...'
 Invoke-RepositoryCommand `
-    -Path (Join-Path $repositoryRoot 'setup.cmd') `
-    -Arguments @('-InstallEnergyPlus', '-RequireEnergyPlus', '-RequireRhino7', '-RequireRhino8') `
+    -Path (Join-Path $repositoryRoot 'dev.cmd') `
+    -Arguments @('setup', '-InstallEnergyPlus', '-RequireEnergyPlus', '-RequireRhino7', '-RequireRhino8') `
     -FailureMessage 'Release environment setup failed'
 
 Write-Host 'Verifying the pinned Python compatibility oracle...'
 Invoke-RepositoryCommand `
-    -Path (Join-Path $repositoryRoot 'reference.cmd') `
-    -Arguments @('-Mode', 'Verify') `
+    -Path (Join-Path $repositoryRoot 'dev.cmd') `
+    -Arguments @('reference', '-Mode', 'Verify') `
     -FailureMessage 'Python compatibility oracle failed'
 
 Write-Host 'Building and testing all Rhino targets with EnergyPlus integration...'
 Invoke-RepositoryCommand `
-    -Path (Join-Path $repositoryRoot 'build.cmd') `
-    -Arguments @('-NoRestore', '-RequireEnergyPlus') `
+    -Path (Join-Path $repositoryRoot 'dev.cmd') `
+    -Arguments @('build', '-NoRestore', '-RequireEnergyPlus') `
     -FailureMessage 'Release build failed'
 
 Write-Host 'Opening and round-trip validating the tracked examples in Rhino 7 and Rhino 8...'
 Invoke-RepositoryCommand `
-    -Path (Join-Path $repositoryRoot 'tools\example-definitions\run.cmd') `
-    -Arguments @('-SkipPluginBuild') `
+    -Path (Join-Path $repositoryRoot 'dev.cmd') `
+    -Arguments @('examples', '-SkipPluginBuild') `
     -FailureMessage 'Verified Grasshopper example gate failed'
 
 Write-Host 'Packaging and loading the exact portable ZIPs in six fresh Rhino hosts...'
 $hostRunsBeforePackage = @(Get-PortableHostGateRunPaths)
 Invoke-RepositoryCommand `
-    -Path (Join-Path $repositoryRoot 'package.cmd') `
-    -Arguments @('-SkipBuild', '-RunPortableHostGate') `
+    -Path (Join-Path $repositoryRoot 'dev.cmd') `
+    -Arguments @('package', '-SkipBuild', '-RunPortableHostGate') `
     -FailureMessage 'Release packaging or portable host verification failed'
 
 Assert-ReleaseSourceClean -Stage 'post-verification'

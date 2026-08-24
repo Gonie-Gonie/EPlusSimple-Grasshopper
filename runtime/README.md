@@ -1,7 +1,7 @@
 # Dragons runtime policy
 
 EnergyPlus and weather payloads are not committed here. During repository
-development, `setup.cmd` either validates a compatible existing EnergyPlus
+development, `dev.cmd setup` either validates a compatible existing EnergyPlus
 24.2.0 installation or prepares the pinned portable runtime under `.tools`.
 Installed plugins use the same validated identity and can securely prepare it
 under `%LOCALAPPDATA%\GonieGonie\BuildingEnergyRuntime`. Runtime identity is

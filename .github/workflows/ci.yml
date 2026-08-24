@@ -25,11 +25,11 @@ jobs:
 
       - name: Bootstrap pinned local environment
         shell: powershell
-        run: .\setup.cmd -SkipPythonInstall
+        run: .\dev.cmd setup -SkipPythonInstall
 
       - name: Build, test, and stage all plugin targets
         shell: powershell
-        run: .\build.cmd -NoRestore
+        run: .\dev.cmd build -NoRestore
 
       - name: Upload staged plugins and reports
         if: always()
@@ -68,11 +68,11 @@ jobs:
 
       - name: Bootstrap local configuration
         shell: powershell
-        run: .\setup.cmd -SkipRestore
+        run: .\dev.cmd setup -SkipRestore
 
       - name: Reproduce and verify compatibility fixtures
         shell: powershell
-        run: .\reference.cmd -Mode Verify
+        run: .\dev.cmd reference -Mode Verify
 
       - name: Upload oracle logs on failure
         if: failure()

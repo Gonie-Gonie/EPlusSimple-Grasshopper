@@ -105,7 +105,7 @@ function Resolve-DotNet {
 
     $command = Get-Command dotnet -ErrorAction SilentlyContinue
     if ($null -eq $command) {
-        throw "dotnet was not found. Run setup.cmd before the Grasshopper host gate."
+        throw "dotnet was not found. Run 'dev.cmd setup' before the Grasshopper host gate."
     }
 
     return $command.Source

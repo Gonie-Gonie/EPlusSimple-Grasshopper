@@ -22,7 +22,7 @@ authorize publication, Yak upload, tag creation, or a GitHub release.
 The supported one-command local candidate gate is:
 
 ```text
-release.cmd
+dev.cmd release
 ```
 
 It verifies the clean branch and live `origin/main`, prepares the pinned local
@@ -33,11 +33,11 @@ published candidate there.
 For diagnosis, its constituent commands are:
 
 ```text
-setup.cmd -InstallEnergyPlus -RequireEnergyPlus -RequireRhino7 -RequireRhino8
-reference.cmd -Mode Verify
-build.cmd -NoRestore -RequireEnergyPlus
-tools\example-definitions\run.cmd -SkipPluginBuild
-package.cmd -SkipBuild -RunPortableHostGate
+dev.cmd setup -InstallEnergyPlus -RequireEnergyPlus -RequireRhino7 -RequireRhino8
+dev.cmd reference -Mode Verify
+dev.cmd build -NoRestore -RequireEnergyPlus
+dev.cmd examples -SkipPluginBuild
+dev.cmd package -SkipBuild -RunPortableHostGate
 ```
 
 - Require zero compiler warnings and errors for `net48`, `net7.0-windows`, and
@@ -69,7 +69,7 @@ package.cmd -SkipBuild -RunPortableHostGate
 
 ## Publication
 
-`release.cmd` creates local evidence only. It never creates a tag, GitHub
+`dev.cmd release` creates local evidence only. It never creates a tag, GitHub
 release, plugin installation, or Yak publication.
 
 Do not push an `invisible-dragon-vX.Y.Z` or `simple-dragon-vX.Y.Z` tag, upload a

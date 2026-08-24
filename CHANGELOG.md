@@ -29,12 +29,16 @@ independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
 
 ### Development and verification
 
+- Consolidate setup, build, reference, package, install, example, smoke,
+  release, cleanup, icon, and upstream workflows behind the single
+  `dev.cmd <command>` development entry point.
 - Pin the historical EPlusSimple and IDragon 0.7.0 source commit for provenance
   and deterministic Python-oracle compatibility testing.
-- Add reproducible `setup.cmd`, `build.cmd`, `reference.cmd`, and `package.cmd`
+- Add reproducible `dev.cmd setup`, `dev.cmd build`, `dev.cmd reference`, and
+  `dev.cmd package`
   entry points with local toolchains and disposable work routed below `.tools`
   and `temp` respectively.
-- Add `release.cmd`, a clean/pushed-`main` local candidate gate that verifies
+- Add `dev.cmd release`, a clean/pushed-`main` local candidate gate that verifies
   the Python oracle, all production targets and tests, real EnergyPlus runs,
   tracked Grasshopper examples, package contents, and all six Rhino 7/Rhino 8
   portable-package load scenarios.
@@ -43,5 +47,5 @@ independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
 
 - Public binaries, release tags, GitHub releases, and Yak publication remain
   withheld pending review of the historical upstream standalone-license
-  omission recorded in `NOTICE.md`. `release.cmd` creates only a local verified
-  candidate and performs none of those publication actions.
+  omission recorded in `NOTICE.md`. `dev.cmd release` creates only a local
+  verified candidate and performs none of those publication actions.

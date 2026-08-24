@@ -11,19 +11,19 @@ only beneath the repository `temp/` directory and can be deleted at any time.
 Validate the lock, port map, and compatibility exceptions:
 
 ```text
-tools\upstream-tracker\run.cmd validate
+dev.cmd upstream validate
 ```
 
 Generate Python 3.12 AST hashes for a pinned or candidate source tree:
 
 ```text
-tools\upstream-tracker\run.cmd hash --source-root <source-root>
+dev.cmd upstream hash --source-root <source-root>
 ```
 
 Compare two trees and write a review package under `temp/upstream-tracker`:
 
 ```text
-tools\upstream-tracker\run.cmd compare ^
+dev.cmd upstream compare ^
   --baseline-source <pinned-source-root> ^
   --current-source <candidate-source-root> ^
   --require-verified-pin

@@ -14,9 +14,9 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
-. (Join-Path $PSScriptRoot 'scripts\common.ps1')
+. (Join-Path $PSScriptRoot 'common.ps1')
 
-$repositoryRoot = Get-RepositoryRoot -ScriptDirectory (Join-Path $PSScriptRoot 'scripts')
+$repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
 $localSettingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
 $nugetConfig = Join-Path $repositoryRoot 'NuGet.config'
 $toolsRoot = Join-Path $repositoryRoot '.tools'
@@ -210,19 +210,19 @@ function Get-GitBuildIdentity {
 }
 
 if (-not (Test-Path -LiteralPath $localSettingsPath -PathType Leaf)) {
-    throw "Local setup is missing. Run setup.cmd first; expected '$localSettingsPath'."
+    throw "Local setup is missing. Run 'dev.cmd setup' first; expected '$localSettingsPath'."
 }
 
 $localSettings = Get-Content -LiteralPath $localSettingsPath -Raw | ConvertFrom-Json
 if ([string] (Get-PropertyValue -Object $localSettings -Name 'schema') -ne 'goniegonie.dragons-grasshopper.local-settings.v1') {
-    throw 'Local settings schema is unsupported. Re-run setup.cmd.'
+    throw "Local settings schema is unsupported. Re-run 'dev.cmd setup'."
 }
 
 $dotnetSettings = Get-PropertyValue -Object $localSettings -Name 'dotnet'
 $dotnetExecutable = [string] (Get-PropertyValue -Object $dotnetSettings -Name 'executable')
 if ([string]::IsNullOrWhiteSpace($dotnetExecutable) -or
     -not (Test-Path -LiteralPath $dotnetExecutable -PathType Leaf)) {
-    throw 'The setup-selected dotnet executable no longer exists. Re-run setup.cmd.'
+    throw "The setup-selected dotnet executable no longer exists. Re-run 'dev.cmd setup'."
 }
 
 $previousErrorActionPreference = $ErrorActionPreference
@@ -237,7 +237,7 @@ finally {
 
 if ($sdkExitCode -ne 0 -or $actualSdkOutput.Count -eq 0 -or [string] $actualSdkOutput[-1] -ne $requiredSdk) {
     $reportedSdk = if ($actualSdkOutput.Count -gt 0) { [string] $actualSdkOutput[-1] } else { '<none>' }
-    throw "Configured dotnet does not resolve exact SDK $requiredSdk (reported $reportedSdk). Re-run setup.cmd."
+    throw "Configured dotnet does not resolve exact SDK $requiredSdk (reported $reportedSdk). Re-run 'dev.cmd setup'."
 }
 
 $solution = Find-SolutionFile -RepositoryRoot $repositoryRoot
@@ -254,7 +254,7 @@ $rhino8Ready = [string] (Get-PropertyValue -Object $rhino8 -Name 'status' -Defau
 $energyPlusSettings = Get-PropertyValue -Object $localSettings -Name 'energyPlus'
 $energyPlusReady = [string] (Get-PropertyValue -Object $energyPlusSettings -Name 'status' -DefaultValue 'missing') -eq 'ready'
 if ($RequireEnergyPlus -and -not $energyPlusReady) {
-    throw 'EnergyPlus was required but no verified runtime is configured. Run setup.cmd -InstallEnergyPlus.'
+    throw "EnergyPlus was required but no verified runtime is configured. Run 'dev.cmd setup -InstallEnergyPlus'."
 }
 
 Set-RepositoryBuildEnvironment -RepositoryRoot $repositoryRoot -DotNetExecutable $dotnetExecutable

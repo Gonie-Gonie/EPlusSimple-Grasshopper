@@ -59,19 +59,19 @@ jobs:
 
       - name: Bootstrap pinned SDK, Python, and EnergyPlus
         shell: powershell
-        run: .\setup.cmd -InstallEnergyPlus -RequireEnergyPlus
+        run: .\dev.cmd setup -InstallEnergyPlus -RequireEnergyPlus
 
       - name: Verify pinned Python compatibility oracle
         shell: powershell
-        run: .\reference.cmd -Mode Verify
+        run: .\dev.cmd reference -Mode Verify
 
       - name: Build and test every Rhino target
         shell: powershell
-        run: .\build.cmd -NoRestore -RequireEnergyPlus
+        run: .\dev.cmd build -NoRestore -RequireEnergyPlus
 
       - name: Build and verify Yak and portable packages
         shell: powershell
-        run: .\package.cmd -SkipBuild -NoRestore
+        run: .\dev.cmd package -SkipBuild -NoRestore
 
       - name: Reject dirty or untracked release inputs
         shell: powershell

@@ -2,7 +2,7 @@
 setlocal
 
 set "REPO_ROOT=%~dp0"
-powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%REPO_ROOT%scripts\package.ps1" %*
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%REPO_ROOT%scripts\dev.ps1" %*
 set "EXIT_CODE=%ERRORLEVEL%"
 
 endlocal & exit /b %EXIT_CODE%

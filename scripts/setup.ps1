@@ -769,7 +769,7 @@ if ($null -eq $energyPlus) {
         idd = $null
         source = $null
         hashes = $null
-        reason = 'No hash-matching runtime was found. Use setup.cmd -InstallEnergyPlus to install the official portable ZIP.'
+        reason = "No hash-matching runtime was found. Use 'dev.cmd setup -InstallEnergyPlus' to install the official portable ZIP."
     }
 
     if ($RequireEnergyPlus -and -not $WhatIfPreference) {

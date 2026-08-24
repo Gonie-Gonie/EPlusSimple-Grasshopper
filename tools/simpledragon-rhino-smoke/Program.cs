@@ -36,7 +36,7 @@ internal static class Program
             || !File.Exists(Path.Combine(systemDirectory, "RhinoCommon.dll")))
         {
             throw new InvalidOperationException(
-                "A verified Rhino 8 System directory is required. Run setup.cmd after installing Rhino 8.");
+                "A verified Rhino 8 System directory is required. Run 'dev.cmd setup' after installing Rhino 8.");
         }
 
         return systemDirectory;

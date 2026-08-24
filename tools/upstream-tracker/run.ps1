@@ -28,7 +28,7 @@ foreach ($candidate in $candidates) {
 }
 
 if ($null -eq $selected) {
-    throw 'Python 3.12 is required. Run setup.cmd or install Python 3.12.'
+    throw "Python 3.12 is required. Run 'dev.cmd setup' or install Python 3.12."
 }
 
 $env:PYTHONDONTWRITEBYTECODE = '1'

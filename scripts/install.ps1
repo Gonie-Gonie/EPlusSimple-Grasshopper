@@ -11,9 +11,9 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
-. (Join-Path $PSScriptRoot 'scripts\common.ps1')
+. (Join-Path $PSScriptRoot 'common.ps1')
 
-$repositoryRoot = [System.IO.Path]::GetFullPath($PSScriptRoot).TrimEnd('\', '/')
+$repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
 $packagesRoot = Join-Path $repositoryRoot 'artifacts\packages'
 $packageIndexPath = Join-Path $packagesRoot 'package-index.json'
 $runStamp = [DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss-fff')
@@ -219,20 +219,20 @@ if (-not $UseExistingPackages) {
 
     Write-Host 'Preparing the reproducible build environment...'
     Invoke-RepositoryCommand `
-        -Path (Join-Path $repositoryRoot 'setup.cmd') `
-        -Arguments $setupArguments `
+        -Path (Join-Path $repositoryRoot 'dev.cmd') `
+        -Arguments (@('setup') + $setupArguments) `
         -FailureMessage 'Setup failed'
 
     Write-Host 'Building current Dragon sources without running tests...'
     Invoke-RepositoryCommand `
-        -Path (Join-Path $repositoryRoot 'build.cmd') `
-        -Arguments @('-NoRestore', '-SkipTests') `
+        -Path (Join-Path $repositoryRoot 'dev.cmd') `
+        -Arguments @('build', '-NoRestore', '-SkipTests') `
         -FailureMessage 'Build failed'
 
     Write-Host 'Creating current local Yak packages...'
     Invoke-RepositoryCommand `
-        -Path (Join-Path $repositoryRoot 'package.cmd') `
-        -Arguments @('-SkipBuild') `
+        -Path (Join-Path $repositoryRoot 'dev.cmd') `
+        -Arguments @('package', '-SkipBuild') `
         -FailureMessage 'Packaging failed'
 }
 else {

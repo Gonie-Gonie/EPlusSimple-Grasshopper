@@ -34,7 +34,7 @@ jobs:
 
       - name: Validate tracking inputs
         shell: powershell
-        run: .\tools\upstream-tracker\run.cmd validate
+        run: .\dev.cmd upstream validate
 
       - name: Materialize pinned and current source trees
         shell: powershell
@@ -51,7 +51,7 @@ jobs:
       - name: Generate deterministic drift report
         shell: powershell
         run: |
-          .\tools\upstream-tracker\run.cmd compare `
+          .\dev.cmd upstream compare `
             --baseline-source temp/upstream-tracker/workflow/baseline `
             --current-source temp/upstream-tracker/workflow/current `
             --output-dir temp/upstream-tracker/report `
