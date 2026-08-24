@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build and test Rhino 7+
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Bootstrap pinned local environment
+        shell: powershell
+        run: .\setup.cmd -SkipPythonInstall
+
+      - name: Build, test, and stage all plugin targets
+        shell: powershell
+        run: .\build.cmd -NoRestore
+
+      - name: Upload staged plugins and reports
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: dragon-plugins-${{ github.sha }}
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload test and build logs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-logs-${{ github.sha }}
+          path: |
+            temp/test-results/
+            temp/logs/
+          if-no-files-found: warn
+          retention-days: 14
+
+  python-reference:
+    name: Verify pinned Python oracle
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Select exact Python oracle
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: 3.12.7
+          check-latest: false
+
+      - name: Bootstrap local configuration
+        shell: powershell
+        run: .\setup.cmd -SkipRestore
+
+      - name: Reproduce and verify compatibility fixtures
+        shell: powershell
+        run: .\reference.cmd -Mode Verify
+
+      - name: Upload oracle logs on failure
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: python-reference-logs-${{ github.sha }}
+          path: temp/reference/logs/
+          if-no-files-found: warn
+          retention-days: 14

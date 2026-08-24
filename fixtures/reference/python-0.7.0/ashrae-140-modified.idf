@@ -1,0 +1,2064 @@
+!- All objects in class: Version
+
+Version,
+  24.2;                          !- Version Identifier
+
+!- All objects in class: SimulationControl
+
+SimulationControl,
+  Yes,                           !- Do Zone Sizing Calculation
+  Yes,                           !- Do System Sizing Calculation
+  Yes,                           !- Do Plant Sizing Calculation
+  No,                            !- Run Simulation for Sizing Periods
+  Yes,                           !- Run Simulation for Weather File Run Periods
+  No;                            !- Do HVAC Sizing Simulation for Sizing Periods
+
+
+!- All objects in class: Building
+
+Building,
+  ASHRAE 140 modified,           !- Name
+  0.0,                           !- North Axis
+  Suburbs,                       !- Terrain
+  ,                              !- Loads Convergence Tolerance Value
+  ,                              !- Temperature Convergence Tolerance Value
+  MinimalShadowing;              !- Solar Distribution
+
+
+!- All objects in class: Timestep
+
+Timestep,
+  6;                             !- Number of Timesteps per Hour
+
+!- All objects in class: SizingPeriod:WeatherFileDays
+
+SizingPeriod:WeatherFileDays,
+  DesignWinter,                  !- Name
+  1,                             !- Begin Month
+  1,                             !- Begin Day of Month
+  1,                             !- End Month
+  31;                            !- End Day of Month
+
+
+SizingPeriod:WeatherFileDays,
+  DesignSummer,                  !- Name
+  8,                             !- Begin Month
+  1,                             !- Begin Day of Month
+  8,                             !- End Month
+  31;                            !- End Day of Month
+
+
+!- All objects in class: RunPeriod
+
+RunPeriod,
+  Year-Round,                    !- Name
+  1,                             !- Begin Month
+  1,                             !- Begin Day of Month
+  2026,                          !- Begin Year
+  12,                            !- End Month
+  31,                            !- End Day of Month
+  2026;                          !- End Year
+
+
+!- All objects in class: ScheduleTypeLimits
+
+ScheduleTypeLimits,
+  ScheduleTypeLimits:Temperature, !- Name
+  -50,                           !- Lower Limit Value
+  200,                           !- Upper Limit Value
+  Continuous,                    !- Numeric Type
+  Temperature;                   !- Unit Type
+
+ScheduleTypeLimits,
+  ScheduleTypeLimits:Onoff,      !- Name
+  0,                             !- Lower Limit Value
+  1,                             !- Upper Limit Value
+  Discrete,                      !- Numeric Type
+  Dimensionless;                 !- Unit Type
+
+ScheduleTypeLimits,
+  ScheduleTypeLimits:Fraction,   !- Name
+  0,                             !- Lower Limit Value
+  1,                             !- Upper Limit Value
+  Continuous,                    !- Numeric Type
+  Dimensionless;                 !- Unit Type
+
+ScheduleTypeLimits,
+  ScheduleTypeLimits:Real,       !- Name
+  ,                              !- Lower Limit Value
+  ,                              !- Upper Limit Value
+  Continuous,                    !- Numeric Type
+  Dimensionless;                 !- Unit Type
+
+!- All objects in class: Schedule:Compact
+
+Schedule:Compact,
+  ALLON,                         !- Name
+  ,                              !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: AllDays,                  !- Field 2
+  Until: 24:00,                  !- Field 3
+  1;                             !- Field 4
+
+
+Schedule:Compact,
+  ALLOFF,                        !- Name
+  ,                              !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: AllDays,                  !- Field 2
+  Until: 24:00,                  !- Field 3
+  0;                             !- Field 4
+
+
+Schedule:Compact,
+  $FROM_DB$:소규모사무실-HeatingSetpoint, !- Name
+  ScheduleTypeLimits:Temperature, !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Weekdays,                 !- Field 2
+  Until: 24:00,                  !- Field 3
+  20.0,                          !- Field 4
+  For: Weekends,                 !- Field 5
+  Until: 24:00,                  !- Field 6
+  20.0,                          !- Field 7
+  For: AllOtherDays,             !- Field 8
+  Until: 24:00,                  !- Field 9
+  20.0;                          !- Field 10
+
+
+Schedule:Compact,
+  $FROM_DB$:소규모사무실-CoolingSetpoint, !- Name
+  ScheduleTypeLimits:Temperature, !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Weekdays,                 !- Field 2
+  Until: 24:00,                  !- Field 3
+  26.0,                          !- Field 4
+  For: Weekends,                 !- Field 5
+  Until: 24:00,                  !- Field 6
+  26.0,                          !- Field 7
+  For: AllOtherDays,             !- Field 8
+  Until: 24:00,                  !- Field 9
+  26.0;                          !- Field 10
+
+
+Schedule:Compact,
+  $FROM_DB$:소규모사무실-HVACOperating:AND:0xAUTO0000:INVERTED, !- Name
+  ScheduleTypeLimits:Onoff,      !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Monday,                   !- Field 2
+  Until: 07:00,                  !- Field 3
+  0,                             !- Field 4
+  Until: 18:00,                  !- Field 5
+  1,                             !- Field 6
+  Until: 24:00,                  !- Field 7
+  0,                             !- Field 8
+  For: Tuesday,                  !- Field 9
+  Until: 07:00,                  !- Field 10
+  0,                             !- Field 11
+  Until: 18:00,                  !- Field 12
+  1,                             !- Field 13
+  Until: 24:00,                  !- Field 14
+  0,                             !- Field 15
+  For: Wednesday,                !- Field 16
+  Until: 07:00,                  !- Field 17
+  0,                             !- Field 18
+  Until: 18:00,                  !- Field 19
+  1,                             !- Field 20
+  Until: 24:00,                  !- Field 21
+  0,                             !- Field 22
+  For: Thursday,                 !- Field 23
+  Until: 07:00,                  !- Field 24
+  0,                             !- Field 25
+  Until: 18:00,                  !- Field 26
+  1,                             !- Field 27
+  Until: 24:00,                  !- Field 28
+  0,                             !- Field 29
+  For: Friday,                   !- Field 30
+  Until: 07:00,                  !- Field 31
+  0,                             !- Field 32
+  Until: 18:00,                  !- Field 33
+  1,                             !- Field 34
+  Until: 24:00,                  !- Field 35
+  0,                             !- Field 36
+  For: Weekends,                 !- Field 37
+  Until: 24:00,                  !- Field 38
+  0,                             !- Field 39
+  For: AllOtherDays,             !- Field 40
+  Until: 24:00,                  !- Field 41
+  0;                             !- Field 42
+
+
+Schedule:Compact,
+  $FROM_DB$:소규모사무실-Occupied:AND:0xAUTO0001:INVERTED:MUL:0.04761904761904762, !- Name
+  ScheduleTypeLimits:Real,       !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Monday,                   !- Field 2
+  Until: 09:00,                  !- Field 3
+  0.0,                           !- Field 4
+  Until: 18:00,                  !- Field 5
+  0.04761904761904762,           !- Field 6
+  Until: 24:00,                  !- Field 7
+  0.0,                           !- Field 8
+  For: Tuesday,                  !- Field 9
+  Until: 09:00,                  !- Field 10
+  0.0,                           !- Field 11
+  Until: 18:00,                  !- Field 12
+  0.04761904761904762,           !- Field 13
+  Until: 24:00,                  !- Field 14
+  0.0,                           !- Field 15
+  For: Wednesday,                !- Field 16
+  Until: 09:00,                  !- Field 17
+  0.0,                           !- Field 18
+  Until: 18:00,                  !- Field 19
+  0.04761904761904762,           !- Field 20
+  Until: 24:00,                  !- Field 21
+  0.0,                           !- Field 22
+  For: Thursday,                 !- Field 23
+  Until: 09:00,                  !- Field 24
+  0.0,                           !- Field 25
+  Until: 18:00,                  !- Field 26
+  0.04761904761904762,           !- Field 27
+  Until: 24:00,                  !- Field 28
+  0.0,                           !- Field 29
+  For: Friday,                   !- Field 30
+  Until: 09:00,                  !- Field 31
+  0.0,                           !- Field 32
+  Until: 18:00,                  !- Field 33
+  0.04761904761904762,           !- Field 34
+  Until: 24:00,                  !- Field 35
+  0.0,                           !- Field 36
+  For: Weekends,                 !- Field 37
+  Until: 24:00,                  !- Field 38
+  0.0,                           !- Field 39
+  For: AllOtherDays,             !- Field 40
+  Until: 24:00,                  !- Field 41
+  0.0;                           !- Field 42
+
+
+Schedule:Compact,
+  $FROM_DB$:소규모사무실-Lighted:MUL:0xAUTO0002:INVERTED, !- Name
+  ScheduleTypeLimits:Fraction,   !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Monday,                   !- Field 2
+  Until: 09:00,                  !- Field 3
+  0.0,                           !- Field 4
+  Until: 10:30,                  !- Field 5
+  1.0,                           !- Field 6
+  Until: 13:30,                  !- Field 7
+  0.0,                           !- Field 8
+  Until: 18:00,                  !- Field 9
+  1.0,                           !- Field 10
+  Until: 24:00,                  !- Field 11
+  0.0,                           !- Field 12
+  For: Tuesday,                  !- Field 13
+  Until: 09:00,                  !- Field 14
+  0.0,                           !- Field 15
+  Until: 10:30,                  !- Field 16
+  1.0,                           !- Field 17
+  Until: 13:30,                  !- Field 18
+  0.0,                           !- Field 19
+  Until: 18:00,                  !- Field 20
+  1.0,                           !- Field 21
+  Until: 24:00,                  !- Field 22
+  0.0,                           !- Field 23
+  For: Wednesday,                !- Field 24
+  Until: 09:00,                  !- Field 25
+  0.0,                           !- Field 26
+  Until: 10:30,                  !- Field 27
+  1.0,                           !- Field 28
+  Until: 13:30,                  !- Field 29
+  0.0,                           !- Field 30
+  Until: 18:00,                  !- Field 31
+  1.0,                           !- Field 32
+  Until: 24:00,                  !- Field 33
+  0.0,                           !- Field 34
+  For: Thursday,                 !- Field 35
+  Until: 09:00,                  !- Field 36
+  0.0,                           !- Field 37
+  Until: 10:30,                  !- Field 38
+  1.0,                           !- Field 39
+  Until: 13:30,                  !- Field 40
+  0.0,                           !- Field 41
+  Until: 18:00,                  !- Field 42
+  1.0,                           !- Field 43
+  Until: 24:00,                  !- Field 44
+  0.0,                           !- Field 45
+  For: Friday,                   !- Field 46
+  Until: 09:00,                  !- Field 47
+  0.0,                           !- Field 48
+  Until: 10:30,                  !- Field 49
+  1.0,                           !- Field 50
+  Until: 13:30,                  !- Field 51
+  0.0,                           !- Field 52
+  Until: 18:00,                  !- Field 53
+  1.0,                           !- Field 54
+  Until: 24:00,                  !- Field 55
+  0.0,                           !- Field 56
+  For: Weekends,                 !- Field 57
+  Until: 24:00,                  !- Field 58
+  0.0,                           !- Field 59
+  For: AllOtherDays,             !- Field 60
+  Until: 24:00,                  !- Field 61
+  0.0;                           !- Field 62
+
+
+Schedule:Compact,
+  $FROM_DB$:소규모사무실-Occupied:AND:0xAUTO0001:INVERTED:MUL:4.666666666666667, !- Name
+  ScheduleTypeLimits:Real,       !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Monday,                   !- Field 2
+  Until: 09:00,                  !- Field 3
+  0.0,                           !- Field 4
+  Until: 18:00,                  !- Field 5
+  4.666666666666667,             !- Field 6
+  Until: 24:00,                  !- Field 7
+  0.0,                           !- Field 8
+  For: Tuesday,                  !- Field 9
+  Until: 09:00,                  !- Field 10
+  0.0,                           !- Field 11
+  Until: 18:00,                  !- Field 12
+  4.666666666666667,             !- Field 13
+  Until: 24:00,                  !- Field 14
+  0.0,                           !- Field 15
+  For: Wednesday,                !- Field 16
+  Until: 09:00,                  !- Field 17
+  0.0,                           !- Field 18
+  Until: 18:00,                  !- Field 19
+  4.666666666666667,             !- Field 20
+  Until: 24:00,                  !- Field 21
+  0.0,                           !- Field 22
+  For: Thursday,                 !- Field 23
+  Until: 09:00,                  !- Field 24
+  0.0,                           !- Field 25
+  Until: 18:00,                  !- Field 26
+  4.666666666666667,             !- Field 27
+  Until: 24:00,                  !- Field 28
+  0.0,                           !- Field 29
+  For: Friday,                   !- Field 30
+  Until: 09:00,                  !- Field 31
+  0.0,                           !- Field 32
+  Until: 18:00,                  !- Field 33
+  4.666666666666667,             !- Field 34
+  Until: 24:00,                  !- Field 35
+  0.0,                           !- Field 36
+  For: Weekends,                 !- Field 37
+  Until: 24:00,                  !- Field 38
+  0.0,                           !- Field 39
+  For: AllOtherDays,             !- Field 40
+  Until: 24:00,                  !- Field 41
+  0.0;                           !- Field 42
+
+
+Schedule:Compact,
+  $FROM_DB$:소규모사무실-Occupied:AND:0xAUTO0001:INVERTED:MUL:0.08333333333333334, !- Name
+  ScheduleTypeLimits:Real,       !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Monday,                   !- Field 2
+  Until: 09:00,                  !- Field 3
+  0.0,                           !- Field 4
+  Until: 18:00,                  !- Field 5
+  0.08333333333333334,           !- Field 6
+  Until: 24:00,                  !- Field 7
+  0.0,                           !- Field 8
+  For: Tuesday,                  !- Field 9
+  Until: 09:00,                  !- Field 10
+  0.0,                           !- Field 11
+  Until: 18:00,                  !- Field 12
+  0.08333333333333334,           !- Field 13
+  Until: 24:00,                  !- Field 14
+  0.0,                           !- Field 15
+  For: Wednesday,                !- Field 16
+  Until: 09:00,                  !- Field 17
+  0.0,                           !- Field 18
+  Until: 18:00,                  !- Field 19
+  0.08333333333333334,           !- Field 20
+  Until: 24:00,                  !- Field 21
+  0.0,                           !- Field 22
+  For: Thursday,                 !- Field 23
+  Until: 09:00,                  !- Field 24
+  0.0,                           !- Field 25
+  Until: 18:00,                  !- Field 26
+  0.08333333333333334,           !- Field 27
+  Until: 24:00,                  !- Field 28
+  0.0,                           !- Field 29
+  For: Friday,                   !- Field 30
+  Until: 09:00,                  !- Field 31
+  0.0,                           !- Field 32
+  Until: 18:00,                  !- Field 33
+  0.08333333333333334,           !- Field 34
+  Until: 24:00,                  !- Field 35
+  0.0,                           !- Field 36
+  For: Weekends,                 !- Field 37
+  Until: 24:00,                  !- Field 38
+  0.0,                           !- Field 39
+  For: AllOtherDays,             !- Field 40
+  Until: 24:00,                  !- Field 41
+  0.0;                           !- Field 42
+
+
+Schedule:Compact,
+  $FROM_DB$:소규모사무실-Occupied:AND:0xAUTO0001:INVERTED:MUL:4.666666666666667_normalized:for:ZONE-0x000000:equipment, !- Name
+  ScheduleTypeLimits:Real,       !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Monday,                   !- Field 2
+  Until: 09:00,                  !- Field 3
+  0.0,                           !- Field 4
+  Until: 18:00,                  !- Field 5
+  1.0,                           !- Field 6
+  Until: 24:00,                  !- Field 7
+  0.0,                           !- Field 8
+  For: Tuesday,                  !- Field 9
+  Until: 09:00,                  !- Field 10
+  0.0,                           !- Field 11
+  Until: 18:00,                  !- Field 12
+  1.0,                           !- Field 13
+  Until: 24:00,                  !- Field 14
+  0.0,                           !- Field 15
+  For: Wednesday,                !- Field 16
+  Until: 09:00,                  !- Field 17
+  0.0,                           !- Field 18
+  Until: 18:00,                  !- Field 19
+  1.0,                           !- Field 20
+  Until: 24:00,                  !- Field 21
+  0.0,                           !- Field 22
+  For: Thursday,                 !- Field 23
+  Until: 09:00,                  !- Field 24
+  0.0,                           !- Field 25
+  Until: 18:00,                  !- Field 26
+  1.0,                           !- Field 27
+  Until: 24:00,                  !- Field 28
+  0.0,                           !- Field 29
+  For: Friday,                   !- Field 30
+  Until: 09:00,                  !- Field 31
+  0.0,                           !- Field 32
+  Until: 18:00,                  !- Field 33
+  1.0,                           !- Field 34
+  Until: 24:00,                  !- Field 35
+  0.0,                           !- Field 36
+  For: Weekends,                 !- Field 37
+  Until: 24:00,                  !- Field 38
+  0.0,                           !- Field 39
+  For: AllOtherDays,             !- Field 40
+  Until: 24:00,                  !- Field 41
+  0.0;                           !- Field 42
+
+
+Schedule:Compact,
+  $FROM_DB$:소규모사무실-Occupied:AND:0xAUTO0001:INVERTED:MUL:0.04761904761904762_normalized:for:ZONE-0x000000:occupant, !- Name
+  ScheduleTypeLimits:Real,       !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Monday,                   !- Field 2
+  Until: 09:00,                  !- Field 3
+  0.0,                           !- Field 4
+  Until: 18:00,                  !- Field 5
+  1.0,                           !- Field 6
+  Until: 24:00,                  !- Field 7
+  0.0,                           !- Field 8
+  For: Tuesday,                  !- Field 9
+  Until: 09:00,                  !- Field 10
+  0.0,                           !- Field 11
+  Until: 18:00,                  !- Field 12
+  1.0,                           !- Field 13
+  Until: 24:00,                  !- Field 14
+  0.0,                           !- Field 15
+  For: Wednesday,                !- Field 16
+  Until: 09:00,                  !- Field 17
+  0.0,                           !- Field 18
+  Until: 18:00,                  !- Field 19
+  1.0,                           !- Field 20
+  Until: 24:00,                  !- Field 21
+  0.0,                           !- Field 22
+  For: Thursday,                 !- Field 23
+  Until: 09:00,                  !- Field 24
+  0.0,                           !- Field 25
+  Until: 18:00,                  !- Field 26
+  1.0,                           !- Field 27
+  Until: 24:00,                  !- Field 28
+  0.0,                           !- Field 29
+  For: Friday,                   !- Field 30
+  Until: 09:00,                  !- Field 31
+  0.0,                           !- Field 32
+  Until: 18:00,                  !- Field 33
+  1.0,                           !- Field 34
+  Until: 24:00,                  !- Field 35
+  0.0,                           !- Field 36
+  For: Weekends,                 !- Field 37
+  Until: 24:00,                  !- Field 38
+  0.0,                           !- Field 39
+  For: AllOtherDays,             !- Field 40
+  Until: 24:00,                  !- Field 41
+  0.0;                           !- Field 42
+
+
+Schedule:Compact,
+  heating_fraction_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Name
+  ScheduleTypeLimits:Real,       !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Weekdays,                 !- Field 2
+  Until: 24:00,                  !- Field 3
+  0.499999999975,                !- Field 4
+  For: Weekends,                 !- Field 5
+  Until: 24:00,                  !- Field 6
+  0.499999999975,                !- Field 7
+  For: AllOtherDays,             !- Field 8
+  Until: 24:00,                  !- Field 9
+  0.499999999975;                !- Field 10
+
+
+Schedule:Compact,
+  heating_fraction_for_RadiantFloor_named_SUPL-0x000001_for_ZONE-0x000000, !- Name
+  ScheduleTypeLimits:Real,       !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Weekdays,                 !- Field 2
+  Until: 24:00,                  !- Field 3
+  0.9999999999,                  !- Field 4
+  For: Weekends,                 !- Field 5
+  Until: 24:00,                  !- Field 6
+  0.9999999999,                  !- Field 7
+  For: AllOtherDays,             !- Field 8
+  Until: 24:00,                  !- Field 9
+  0.9999999999;                  !- Field 10
+
+
+Schedule:Compact,
+  cooling_fraction_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Name
+  ScheduleTypeLimits:Real,       !- Schedule Type Limits Name
+  Through: 12/31,                !- Field 1
+  For: Weekdays,                 !- Field 2
+  Until: 24:00,                  !- Field 3
+  1.0,                           !- Field 4
+  For: Weekends,                 !- Field 5
+  Until: 24:00,                  !- Field 6
+  1.0,                           !- Field 7
+  For: AllOtherDays,             !- Field 8
+  Until: 24:00,                  !- Field 9
+  1.0;                           !- Field 10
+
+
+!- All objects in class: Schedule:Constant
+
+Schedule:Constant,
+  $DEFAULT$PEOPLEACTIVITY,       !- Name
+  real,                          !- Schedule Type Limits Name
+  107.0;                         !- Hourly Value
+
+Schedule:Constant,
+  ScheduleTypeForThermostat_for_ZONE-0x000000, !- Name
+  ,                              !- Schedule Type Limits Name
+  4.0;                           !- Hourly Value
+
+Schedule:Constant,
+  Loop_for_SRCE-0x000001 SetpointTemperature, !- Name
+  ,                              !- Schedule Type Limits Name
+  60.0;                          !- Hourly Value
+
+!- All objects in class: Material
+
+Material,
+  MTRL-0x000000_10.0mm,          !- Name
+  Rough,                         !- Roughness
+  0.01,                          !- Thickness
+  0.16,                          !- Conductivity
+  950.0,                         !- Density
+  840.0,                         !- Specific Heat
+  0.9,                           !- Thermal Absorptance
+  0.7,                           !- Solar Absorptance
+  0.7;                           !- Visible Absorptance
+
+Material,
+  MTRL-0x000004_1003.0000000000001mm, !- Name
+  Rough,                         !- Roughness
+  1.0030000000000001,            !- Thickness
+  0.04,                          !- Conductivity
+  0.01,                          !- Density
+  100.0,                         !- Specific Heat
+  0.9,                           !- Thermal Absorptance
+  0.7,                           !- Solar Absorptance
+  0.7;                           !- Visible Absorptance
+
+Material,
+  MTRL-0x000001_66.0mm,          !- Name
+  Rough,                         !- Roughness
+  0.066,                         !- Thickness
+  0.04,                          !- Conductivity
+  12.0,                          !- Density
+  840.0,                         !- Specific Heat
+  0.9,                           !- Thermal Absorptance
+  0.7,                           !- Solar Absorptance
+  0.7;                           !- Visible Absorptance
+
+Material,
+  MTRL-0x000000_12.0mm,          !- Name
+  Rough,                         !- Roughness
+  0.012,                         !- Thickness
+  0.16,                          !- Conductivity
+  950.0,                         !- Density
+  840.0,                         !- Specific Heat
+  0.9,                           !- Thermal Absorptance
+  0.7,                           !- Solar Absorptance
+  0.7;                           !- Visible Absorptance
+
+Material,
+  MTRL-0x000003_25.0mm,          !- Name
+  Rough,                         !- Roughness
+  0.025,                         !- Thickness
+  0.14,                          !- Conductivity
+  650.0,                         !- Density
+  1200.0,                        !- Specific Heat
+  0.9,                           !- Thermal Absorptance
+  0.7,                           !- Solar Absorptance
+  0.7;                           !- Visible Absorptance
+
+Material,
+  MTRL-0x000002_9.000000000000002mm, !- Name
+  Rough,                         !- Roughness
+  0.009000000000000001,          !- Thickness
+  0.14,                          !- Conductivity
+  530.0,                         !- Density
+  900.0,                         !- Specific Heat
+  0.9,                           !- Thermal Absorptance
+  0.7,                           !- Solar Absorptance
+  0.7;                           !- Visible Absorptance
+
+Material,
+  MTRL-0x000005_19.0mm,          !- Name
+  Rough,                         !- Roughness
+  0.019,                         !- Thickness
+  0.14,                          !- Conductivity
+  530.0,                         !- Density
+  900.0,                         !- Specific Heat
+  0.9,                           !- Thermal Absorptance
+  0.7,                           !- Solar Absorptance
+  0.7;                           !- Visible Absorptance
+
+Material,
+  MTRL-0x000001_111.8mm,         !- Name
+  Rough,                         !- Roughness
+  0.1118,                        !- Thickness
+  0.04,                          !- Conductivity
+  12.0,                          !- Density
+  840.0,                         !- Specific Heat
+  0.9,                           !- Thermal Absorptance
+  0.7,                           !- Solar Absorptance
+  0.7;                           !- Visible Absorptance
+
+!- All objects in class: WindowMaterial:SimpleGlazingSystem
+
+WindowMaterial:SimpleGlazingSystem,
+  $GLAZING_FOR$CTFN-0x000000,    !- Name
+  2.1,                           !- U-Factor
+  0.769;                         !- Solar Heat Gain Coefficient
+
+
+!- All objects in class: Construction
+
+Construction,
+  CTSF-0x000001:for:SURF-0x000000, !- Name
+  MTRL-0x000004_1003.0000000000001mm, !- Outside Layer
+  MTRL-0x000003_25.0mm;          !- Layer 2
+
+
+Construction,
+  CTSF-0x000000:for:SURF-0x000001, !- Name
+  MTRL-0x000002_9.000000000000002mm, !- Outside Layer
+  MTRL-0x000001_66.0mm,          !- Layer 2
+  MTRL-0x000000_12.0mm;          !- Layer 3
+
+
+Construction,
+  CTSF-0x000000:for:SURF-0x000002, !- Name
+  MTRL-0x000002_9.000000000000002mm, !- Outside Layer
+  MTRL-0x000001_66.0mm,          !- Layer 2
+  MTRL-0x000000_12.0mm;          !- Layer 3
+
+
+Construction,
+  CTSF-0x000000:for:SURF-0x000003, !- Name
+  MTRL-0x000002_9.000000000000002mm, !- Outside Layer
+  MTRL-0x000001_66.0mm,          !- Layer 2
+  MTRL-0x000000_12.0mm;          !- Layer 3
+
+
+Construction,
+  CTFN-0x000000,                 !- Name
+  $GLAZING_FOR$CTFN-0x000000;    !- Outside Layer
+
+
+Construction,
+  CTSF-0x000000:for:SURF-0x000004, !- Name
+  MTRL-0x000002_9.000000000000002mm, !- Outside Layer
+  MTRL-0x000001_66.0mm,          !- Layer 2
+  MTRL-0x000000_12.0mm;          !- Layer 3
+
+
+Construction,
+  CTSF-0x000002:for:SURF-0x000005, !- Name
+  MTRL-0x000005_19.0mm,          !- Outside Layer
+  MTRL-0x000001_111.8mm,         !- Layer 2
+  MTRL-0x000000_10.0mm;          !- Layer 3
+
+
+!- All objects in class: ConstructionProperty:InternalHeatSource
+
+ConstructionProperty:InternalHeatSource,
+  SURF-0x000000 Internal Heat Source, !- Name
+  CTSF-0x000001:for:SURF-0x000000, !- Construction Name
+  1,                             !- Thermal Source Present After Layer Number
+  1,                             !- Temperature Calculation Requested After Layer Number
+  1,                             !- Dimensions for the CTF Calculation
+  0.3,                           !- Tube Spacing
+  0.0;                           !- Two-Dimensional Temperature Calculation Position
+
+!- All objects in class: GlobalGeometryRules
+
+GlobalGeometryRules,
+  UpperLeftCorner,               !- Starting Vertex Position
+  Counterclockwise,              !- Vertex Entry Direction
+  World,                         !- Coordinate System
+  Relative,                      !- Daylighting Reference Point Coordinate System
+  Relative;                      !- Rectangular Surface Coordinate System
+
+!- All objects in class: Zone
+
+Zone,
+  ZONE-0x000000,                 !- Name
+  0.0,                           !- Direction of Relative North
+  0.0,                           !- X Origin
+  0.0,                           !- Y Origin
+  0.0,                           !- Z Origin
+  1.0,                           !- Type
+  1.0,                           !- Multiplier
+  autocalculate,                 !- Ceiling Height
+  autocalculate,                 !- Volume
+  47.99999999999999,             !- Floor Area
+  TARP,                          !- Zone Inside Convection Algorithm
+  TARP,                          !- Zone Outside Convection Algorithm
+  Yes;                           !- Part of Total Floor Area
+
+!- All objects in class: BuildingSurface:Detailed
+
+BuildingSurface:Detailed,
+  SURF-0x000000,                 !- Name
+  Floor,                         !- Surface Type
+  CTSF-0x000001:for:SURF-0x000000, !- Construction Name
+  ZONE-0x000000,                 !- Zone Name
+  ,                              !- Space Name
+  Ground,                        !- Outside Boundary Condition
+  ,                              !- Outside Boundary Condition Object
+  NoSun,                         !- Sun Exposure
+  NoWind,                        !- Wind Exposure
+  autocalculate,                 !- View Factor to Ground
+  autocalculate,                 !- Number of Vertices
+  3.4641016151377544,            !- Vertex 1 X-coordinate
+  -3.4641016151377544,           !- Vertex 1 Y-coordinate
+  0.0,                           !- Vertex 1 Z-coordinate
+  -3.4641016151377544,           !- Vertex 2 X-coordinate
+  -3.4641016151377544,           !- Vertex 2 Y-coordinate
+  0.0,                           !- Vertex 2 Z-coordinate
+  -3.4641016151377544,           !- Vertex 3 X-coordinate
+  3.4641016151377544,            !- Vertex 3 Y-coordinate
+  0.0,                           !- Vertex 3 Z-coordinate
+  3.4641016151377544,            !- Vertex 4 X-coordinate
+  3.4641016151377544,            !- Vertex 4 Y-coordinate
+  0.0;                           !- Vertex 4 Z-coordinate
+
+
+BuildingSurface:Detailed,
+  SURF-0x000001,                 !- Name
+  Wall,                          !- Surface Type
+  CTSF-0x000000:for:SURF-0x000001, !- Construction Name
+  ZONE-0x000000,                 !- Zone Name
+  ,                              !- Space Name
+  Outdoors,                      !- Outside Boundary Condition
+  ,                              !- Outside Boundary Condition Object
+  SunExposed,                    !- Sun Exposure
+  WindExposed,                   !- Wind Exposure
+  autocalculate,                 !- View Factor to Ground
+  autocalculate,                 !- Number of Vertices
+  -7.347880794884119e-16,        !- Vertex 1 X-coordinate
+  -4.0,                          !- Vertex 1 Y-coordinate
+  2.7,                           !- Vertex 1 Z-coordinate
+  -7.347880794884119e-16,        !- Vertex 2 X-coordinate
+  -4.0,                          !- Vertex 2 Y-coordinate
+  0.0,                           !- Vertex 2 Z-coordinate
+  7.347880794884119e-16,         !- Vertex 3 X-coordinate
+  4.0,                           !- Vertex 3 Y-coordinate
+  0.0,                           !- Vertex 3 Z-coordinate
+  7.347880794884119e-16,         !- Vertex 4 X-coordinate
+  4.0,                           !- Vertex 4 Y-coordinate
+  2.7;                           !- Vertex 4 Z-coordinate
+
+
+BuildingSurface:Detailed,
+  SURF-0x000002,                 !- Name
+  Wall,                          !- Surface Type
+  CTSF-0x000000:for:SURF-0x000002, !- Construction Name
+  ZONE-0x000000,                 !- Zone Name
+  ,                              !- Space Name
+  Outdoors,                      !- Outside Boundary Condition
+  ,                              !- Outside Boundary Condition Object
+  SunExposed,                    !- Sun Exposure
+  WindExposed,                   !- Wind Exposure
+  autocalculate,                 !- View Factor to Ground
+  autocalculate,                 !- Number of Vertices
+  -2.9999999999999996,           !- Vertex 1 X-coordinate
+  3.673940397442059e-16,         !- Vertex 1 Y-coordinate
+  2.7,                           !- Vertex 1 Z-coordinate
+  -2.9999999999999996,           !- Vertex 2 X-coordinate
+  3.673940397442059e-16,         !- Vertex 2 Y-coordinate
+  0.0,                           !- Vertex 2 Z-coordinate
+  2.9999999999999996,            !- Vertex 3 X-coordinate
+  -3.673940397442059e-16,        !- Vertex 3 Y-coordinate
+  0.0,                           !- Vertex 3 Z-coordinate
+  2.9999999999999996,            !- Vertex 4 X-coordinate
+  -3.673940397442059e-16,        !- Vertex 4 Y-coordinate
+  2.7;                           !- Vertex 4 Z-coordinate
+
+
+BuildingSurface:Detailed,
+  SURF-0x000003,                 !- Name
+  Wall,                          !- Surface Type
+  CTSF-0x000000:for:SURF-0x000003, !- Construction Name
+  ZONE-0x000000,                 !- Zone Name
+  ,                              !- Space Name
+  Outdoors,                      !- Outside Boundary Condition
+  ,                              !- Outside Boundary Condition Object
+  SunExposed,                    !- Sun Exposure
+  WindExposed,                   !- Wind Exposure
+  autocalculate,                 !- View Factor to Ground
+  autocalculate,                 !- Number of Vertices
+  2.4492935982947064e-16,        !- Vertex 1 X-coordinate
+  4.0,                           !- Vertex 1 Y-coordinate
+  2.7,                           !- Vertex 1 Z-coordinate
+  2.4492935982947064e-16,        !- Vertex 2 X-coordinate
+  4.0,                           !- Vertex 2 Y-coordinate
+  0.0,                           !- Vertex 2 Z-coordinate
+  -2.4492935982947064e-16,       !- Vertex 3 X-coordinate
+  -4.0,                          !- Vertex 3 Y-coordinate
+  0.0,                           !- Vertex 3 Z-coordinate
+  -2.4492935982947064e-16,       !- Vertex 4 X-coordinate
+  -4.0,                          !- Vertex 4 Y-coordinate
+  2.7;                           !- Vertex 4 Z-coordinate
+
+
+BuildingSurface:Detailed,
+  SURF-0x000004,                 !- Name
+  Wall,                          !- Surface Type
+  CTSF-0x000000:for:SURF-0x000004, !- Construction Name
+  ZONE-0x000000,                 !- Zone Name
+  ,                              !- Space Name
+  Outdoors,                      !- Outside Boundary Condition
+  ,                              !- Outside Boundary Condition Object
+  SunExposed,                    !- Sun Exposure
+  WindExposed,                   !- Wind Exposure
+  autocalculate,                 !- View Factor to Ground
+  autocalculate,                 !- Number of Vertices
+  2.9999999999999996,            !- Vertex 1 X-coordinate
+  -0.0,                          !- Vertex 1 Y-coordinate
+  2.7,                           !- Vertex 1 Z-coordinate
+  2.9999999999999996,            !- Vertex 2 X-coordinate
+  -0.0,                          !- Vertex 2 Y-coordinate
+  0.0,                           !- Vertex 2 Z-coordinate
+  -2.9999999999999996,           !- Vertex 3 X-coordinate
+  0.0,                           !- Vertex 3 Y-coordinate
+  0.0,                           !- Vertex 3 Z-coordinate
+  -2.9999999999999996,           !- Vertex 4 X-coordinate
+  0.0,                           !- Vertex 4 Y-coordinate
+  2.7;                           !- Vertex 4 Z-coordinate
+
+
+BuildingSurface:Detailed,
+  SURF-0x000005,                 !- Name
+  Roof,                          !- Surface Type
+  CTSF-0x000002:for:SURF-0x000005, !- Construction Name
+  ZONE-0x000000,                 !- Zone Name
+  ,                              !- Space Name
+  Outdoors,                      !- Outside Boundary Condition
+  ,                              !- Outside Boundary Condition Object
+  SunExposed,                    !- Sun Exposure
+  WindExposed,                   !- Wind Exposure
+  autocalculate,                 !- View Factor to Ground
+  autocalculate,                 !- Number of Vertices
+  -3.4641016151377544,           !- Vertex 1 X-coordinate
+  3.4641016151377544,            !- Vertex 1 Y-coordinate
+  2.7,                           !- Vertex 1 Z-coordinate
+  -3.4641016151377544,           !- Vertex 2 X-coordinate
+  -3.4641016151377544,           !- Vertex 2 Y-coordinate
+  2.7,                           !- Vertex 2 Z-coordinate
+  3.4641016151377544,            !- Vertex 3 X-coordinate
+  -3.4641016151377544,           !- Vertex 3 Y-coordinate
+  2.7,                           !- Vertex 3 Z-coordinate
+  3.4641016151377544,            !- Vertex 4 X-coordinate
+  3.4641016151377544,            !- Vertex 4 Y-coordinate
+  2.7;                           !- Vertex 4 Z-coordinate
+
+
+!- All objects in class: Window
+
+Window,
+  FNST-0x000000,                 !- Name
+  CTFN-0x000000,                 !- Construction Name
+  SURF-0x000003,                 !- Building Surface Name
+  ,                              !- Frame and Divider Name
+  1,                             !- Multiplier
+  0.001,                         !- Starting X Coordinate
+  0.001,                         !- Starting Z Coordinate
+  2.223045572434234,             !- Length
+  2.6963010000000005;            !- Height
+
+Window,
+  FNST-0x000001,                 !- Name
+  CTFN-0x000000,                 !- Construction Name
+  SURF-0x000003,                 !- Building Surface Name
+  ,                              !- Frame and Divider Name
+  1,                             !- Multiplier
+  0.001,                         !- Starting X Coordinate
+  0.001,                         !- Starting Z Coordinate
+  2.223045572434234,             !- Length
+  2.6963010000000005;            !- Height
+
+!- All objects in class: People
+
+People,
+  people:ZONE-0x000000,          !- Name
+  ZONE-0x000000,                 !- Zone or ZoneList or Space or SpaceList Name
+  $FROM_DB$:소규모사무실-Occupied:AND:0xAUTO0001:INVERTED:MUL:0.04761904761904762_normalized:for:ZONE-0x000000:occupant, !- Number of People Schedule Name
+  People/Area,                   !- Number of People Calculation Method
+  ,                              !- Number of People
+  0.04761904761904762,           !- People per Floor Area
+  ,                              !- Floor Area per Person
+  0.3,                           !- Fraction Radiant
+  autocalculate,                 !- Sensible Heat Fraction
+  $DEFAULT$PEOPLEACTIVITY,       !- Activity Level Schedule Name
+  3.82E-8,                       !- Carbon Dioxide Generation Rate
+  No,                            !- Enable ASHRAE 55 Comfort Warnings
+  EnclosureAveraged,             !- Mean Radiant Temperature Calculation Type
+  ,                              !- Surface Name/Angle Factor List Name
+  ,                              !- Work Efficiency Schedule Name
+  ClothingInsulationSchedule,    !- Clothing Insulation Calculation Method
+  ,                              !- Clothing Insulation Calculation Method Schedule Name
+  ,                              !- Clothing Insulation Schedule Name
+  ,                              !- Air Velocity Schedule Name
+  ,                              !- Thermal Comfort Model 1 Type
+  ,                              !- Thermal Comfort Model 2 Type
+  ,                              !- Thermal Comfort Model 3 Type
+  ,                              !- Thermal Comfort Model 4 Type
+  ,                              !- Thermal Comfort Model 5 Type
+  ,                              !- Thermal Comfort Model 6 Type
+  ,                              !- Thermal Comfort Model 7 Type
+  ,                              !- Ankle Level Air Velocity Schedule Name
+  15.56,                         !- Cold Stress Temperature Threshold
+  30.0;                          !- Heat Stress Temperature Threshold
+
+!- All objects in class: Lights
+
+Lights,
+  light:ZONE-0x000000,           !- Name
+  ZONE-0x000000,                 !- Zone or ZoneList or Space or SpaceList Name
+  $FROM_DB$:소규모사무실-Lighted:MUL:0xAUTO0002:INVERTED, !- Schedule Name
+  Watts/Area,                    !- Design Level Calculation Method
+  ,                              !- Lighting Level
+  10.0,                          !- Watts per Floor Area
+  ,                              !- Watts per Person
+  0.0,                           !- Return Air Fraction
+  0.0,                           !- Fraction Radiant
+  0.0,                           !- Fraction Visible
+  1.0,                           !- Fraction Replaceable
+  General,                       !- End-Use Subcategory
+  No,                            !- Return Air Fraction Calculated from Plenum Temperature
+  0.0,                           !- Return Air Fraction Function of Plenum Temperature Coefficient 1
+  0.0;                           !- Return Air Fraction Function of Plenum Temperature Coefficient 2
+
+
+!- All objects in class: ElectricEquipment
+
+ElectricEquipment,
+  electric_equipment:ZONE-0x000000, !- Name
+  ZONE-0x000000,                 !- Zone or ZoneList or Space or SpaceList Name
+  $FROM_DB$:소규모사무실-Occupied:AND:0xAUTO0001:INVERTED:MUL:4.666666666666667_normalized:for:ZONE-0x000000:equipment, !- Schedule Name
+  Watts/Area,                    !- Design Level Calculation Method
+  ,                              !- Design Level
+  4.666666666666667,             !- Watts per Floor Area
+  ,                              !- Watts per Person
+  0.0,                           !- Fraction Latent
+  0.0,                           !- Fraction Radiant
+  0.0,                           !- Fraction Lost
+  General;                       !- End-Use Subcategory
+
+!- All objects in class: ZoneInfiltration:DesignFlowRate
+
+ZoneInfiltration:DesignFlowRate,
+  ZONE-0x000000:infiltration,    !- Name
+  ZONE-0x000000,                 !- Zone or ZoneList or Space or SpaceList Name
+  ALLON,                         !- Schedule Name
+  AirChanges/Hour,               !- Design Flow Rate Calculation Method
+  ,                              !- Design Flow Rate
+  ,                              !- Flow Rate per Floor Area
+  ,                              !- Flow Rate per Exterior Surface Area
+  0.10500000000000001,           !- Air Changes per Hour
+  1.0,                           !- Constant Term Coefficient
+  0.0,                           !- Temperature Term Coefficient
+  0.0,                           !- Velocity Term Coefficient
+  0.0;                           !- Velocity Squared Term Coefficient
+
+!- All objects in class: ZoneVentilation:DesignFlowRate
+
+ZoneVentilation:DesignFlowRate,
+  NaturalVentilation:ZONE-0x000000, !- Name
+  ZONE-0x000000,                 !- Zone or ZoneList or Space or SpaceList Name
+  ,                              !- Schedule Name
+  Flow/Person,                   !- Design Flow Rate Calculation Method
+  ,                              !- Design Flow Rate
+  ,                              !- Flow Rate per Floor Area
+  0.0083,                        !- Flow Rate per Person
+  ,                              !- Air Changes per Hour
+  Natural,                       !- Ventilation Type
+  0.0,                           !- Fan Pressure Rise
+  1.0,                           !- Fan Total Efficiency
+  1.0,                           !- Constant Term Coefficient
+  0.0,                           !- Temperature Term Coefficient
+  0.0,                           !- Velocity Term Coefficient
+  0.0,                           !- Velocity Squared Term Coefficient
+  -100,                          !- Minimum Indoor Temperature
+  ,                              !- Minimum Indoor Temperature Schedule Name
+  100.0,                         !- Maximum Indoor Temperature
+  ,                              !- Maximum Indoor Temperature Schedule Name
+  -100,                          !- Delta Temperature
+  ,                              !- Delta Temperature Schedule Name
+  -100,                          !- Minimum Outdoor Temperature
+  ,                              !- Minimum Outdoor Temperature Schedule Name
+  100.0,                         !- Maximum Outdoor Temperature
+  ,                              !- Maximum Outdoor Temperature Schedule Name
+  40.0;                          !- Maximum Wind Speed
+
+!- All objects in class: DesignSpecification:OutdoorAir
+
+DesignSpecification:OutdoorAir,
+  DesignSpecificationOutdoorAir_for_ZONE-0x000000, !- Name
+  Flow/Person,                   !- Outdoor Air Method
+  0.00944,                       !- Outdoor Air Flow per Person
+  0.0,                           !- Outdoor Air Flow per Zone Floor Area
+  0.0,                           !- Outdoor Air Flow per Zone
+  0.0,                           !- Outdoor Air Flow Air Changes per Hour
+  ALLON;                         !- Outdoor Air Schedule Name
+
+
+!- All objects in class: DesignSpecification:ZoneAirDistribution
+
+DesignSpecification:ZoneAirDistribution,
+  DesignSpecificationZoneAirDistribution_for_ZONE-0x000000, !- Name
+  1.0,                           !- Zone Air Distribution Effectiveness in Cooling Mode
+  1.0,                           !- Zone Air Distribution Effectiveness in Heating Mode
+  ,                              !- Zone Air Distribution Effectiveness Schedule Name
+  0.0,                           !- Zone Secondary Recirculation Fraction
+  0.0;                           !- Minimum Zone Ventilation Efficiency
+
+!- All objects in class: Sizing:Zone
+
+Sizing:Zone,
+  ZONE-0x000000,                 !- Zone or ZoneList Name
+  SupplyAirTemperature,          !- Zone Cooling Design Supply Air Temperature Input Method
+  14.0,                          !- Zone Cooling Design Supply Air Temperature
+  10.0,                          !- Zone Cooling Design Supply Air Temperature Difference
+  SupplyAirTemperature,          !- Zone Heating Design Supply Air Temperature Input Method
+  50.0,                          !- Zone Heating Design Supply Air Temperature
+  10.0,                          !- Zone Heating Design Supply Air Temperature Difference
+  0.009,                         !- Zone Cooling Design Supply Air Humidity Ratio
+  0.004,                         !- Zone Heating Design Supply Air Humidity Ratio
+  DesignSpecificationOutdoorAir_for_ZONE-0x000000, !- Design Specification Outdoor Air Object Name
+  1.25,                          !- Zone Heating Sizing Factor
+  1.15,                          !- Zone Cooling Sizing Factor
+  DesignDay,                     !- Cooling Design Air Flow Method
+  0.0,                           !- Cooling Design Air Flow Rate
+  0.000762,                      !- Cooling Minimum Air Flow per Zone Floor Area
+  0.0,                           !- Cooling Minimum Air Flow
+  0.2,                           !- Cooling Minimum Air Flow Fraction
+  DesignDay,                     !- Heating Design Air Flow Method
+  0.0,                           !- Heating Design Air Flow Rate
+  0.002032,                      !- Heating Maximum Air Flow per Zone Floor Area
+  0.1415762,                     !- Heating Maximum Air Flow
+  0.3,                           !- Heating Maximum Air Flow Fraction
+  DesignSpecificationZoneAirDistribution_for_ZONE-0x000000, !- Design Specification Zone Air Distribution Object Name
+  No,                            !- Account for Dedicated Outdoor Air System
+  NeutralSupplyAir,              !- Dedicated Outdoor Air System Control Strategy
+  autosize,                      !- Dedicated Outdoor Air Low Setpoint Temperature for Design
+  autosize,                      !- Dedicated Outdoor Air High Setpoint Temperature for Design
+  Sensible Load Only No Latent Load, !- Zone Load Sizing Method
+  HumidityRatioDifference,       !- Zone Latent Cooling Design Supply Air Humidity Ratio Input Method
+  ,                              !- Zone Dehumidification Design Supply Air Humidity Ratio
+  0.005,                         !- Zone Cooling Design Supply Air Humidity Ratio Difference
+  HumidityRatioDifference,       !- Zone Latent Heating Design Supply Air Humidity Ratio Input Method
+  ,                              !- Zone Humidification Design Supply Air Humidity Ratio
+  0.005,                         !- Zone Humidification Design Supply Air Humidity Ratio Difference
+  ,                              !- Zone Humidistat Dehumidification Set Point Schedule Name
+  ,                              !- Zone Humidistat Humidification Set Point Schedule Name
+  Coincident;                    !- Type of Space Sum to Use
+
+!- All objects in class: Sizing:Plant
+
+Sizing:Plant,
+  Loop_for_SRCE-0x000001,        !- Plant or Condenser Loop Name
+  Heating,                       !- Loop Type
+  80.0,                          !- Design Loop Exit Temperature
+  10.0,                          !- Loop Design Temperature Difference
+  NonCoincident,                 !- Sizing Option
+  1.0;                           !- Zone Timesteps in Averaging Window
+
+
+!- All objects in class: ZoneControl:Thermostat
+
+ZoneControl:Thermostat,
+  Thermostat_for_ZONE-0x000000,  !- Name
+  ZONE-0x000000,                 !- Zone or ZoneList Name
+  ScheduleTypeForThermostat_for_ZONE-0x000000, !- Control Type Schedule Name
+  ThermostatSetpoint:DualSetpoint, !- Control 1 Object Type
+  DualSetPoint_for_ZONE-0x000000, !- Control 1 Name
+  ,                              !- Control 2 Object Type
+  ,                              !- Control 2 Name
+  ,                              !- Control 3 Object Type
+  ,                              !- Control 3 Name
+  ,                              !- Control 4 Object Type
+  ,                              !- Control 4 Name
+  0.0;                           !- Temperature Difference Between Cutout And Setpoint
+
+!- All objects in class: ThermostatSetpoint:DualSetpoint
+
+ThermostatSetpoint:DualSetpoint,
+  DualSetPoint_for_ZONE-0x000000, !- Name
+  $FROM_DB$:소규모사무실-HeatingSetpoint, !- Heating Setpoint Temperature Schedule Name
+  $FROM_DB$:소규모사무실-CoolingSetpoint; !- Cooling Setpoint Temperature Schedule Name
+
+!- All objects in class: ZoneHVAC:TerminalUnit:VariableRefrigerantFlow
+
+ZoneHVAC:TerminalUnit:VariableRefrigerantFlow,
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Zone Terminal Unit Name
+  $FROM_DB$:소규모사무실-HVACOperating:AND:0xAUTO0000:INVERTED, !- Terminal Unit Availability Schedule
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000 Air InletNode, !- Terminal Unit Air Inlet Node Name
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000 Air OutletNode, !- Terminal Unit Air Outlet Node Name
+  autosize,                      !- Cooling Supply Air Flow Rate
+  autosize,                      !- No Cooling Supply Air Flow Rate
+  autosize,                      !- Heating Supply Air Flow Rate
+  autosize,                      !- No Heating Supply Air Flow Rate
+  0.0,                           !- Cooling Outdoor Air Flow Rate
+  0.0,                           !- Heating Outdoor Air Flow Rate
+  0.0,                           !- No Load Outdoor Air Flow Rate
+  ALLON,                         !- Supply Air Fan Operating Mode Schedule Name
+  DrawThrough,                   !- Supply Air Fan Placement
+  Fan:ConstantVolume,            !- Supply Air Fan Object Type
+  Fan_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Supply Air Fan Object Name
+  ,                              !- Outside Air Mixer Object Type
+  ,                              !- Outside Air Mixer Object Name
+  Coil:Cooling:DX:VariableRefrigerantFlow, !- Cooling Coil Object Type
+  CoolingCoil_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Cooling Coil Object Name
+  Coil:Heating:DX:VariableRefrigerantFlow, !- Heating Coil Object Type
+  HeatingCoil_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Heating Coil Object Name
+  30.0,                          !- Zone Terminal Unit On Parasitic Electric Energy Use
+  20.0,                          !- Zone Terminal Unit Off Parasitic Electric Energy Use
+  1.0,                           !- Rated Heating Capacity Sizing Ratio
+  ,                              !- Availability Manager List Name
+  ,                              !- Design Specification ZoneHVAC Sizing Object Name
+  ,                              !- Supplemental Heating Coil Object Type
+  ,                              !- Supplemental Heating Coil Name
+  autosize,                      !- Maximum Supply Air Temperature from Supplemental Heater
+  21.0;                          !- Maximum Outdoor Dry-Bulb Temperature for Supplemental Heater Operation
+
+
+!- All objects in class: ZoneHVAC:LowTemperatureRadiant:VariableFlow
+
+ZoneHVAC:LowTemperatureRadiant:VariableFlow,
+  RadiantFloor_named_SUPL-0x000001_for_ZONE-0x000000, !- Name
+  DesignOf_RadiantFloor_named_SUPL-0x000001_for_ZONE-0x000000, !- Design Object
+  $FROM_DB$:소규모사무실-HVACOperating:AND:0xAUTO0000:INVERTED, !- Availability Schedule Name
+  ZONE-0x000000,                 !- Zone Name
+  RadiantFloorSurfaceGroup_for_ZONE-0x000000, !- Surface Name or Radiant Surface Group Name
+  autosize,                      !- Hydronic Tubing Length
+  autosize,                      !- Heating Design Capacity
+  autosize,                      !- Maximum Hot Water Flow
+  RadiantFloor_named_SUPL-0x000001_for_ZONE-0x000000 Water InletNode, !- Heating Water Inlet Node Name
+  RadiantFloor_named_SUPL-0x000001_for_ZONE-0x000000 Water OutletNode, !- Heating Water Outlet Node Name
+  ,                              !- Cooling Design Capacity
+  ,                              !- Maximum Cold Water Flow
+  ,                              !- Cooling Water Inlet Node Name
+  ,                              !- Cooling Water Outlet Node Name
+  OnePerSurface,                 !- Number of Circuits
+  106.7;                         !- Circuit Length
+
+!- All objects in class: ZoneHVAC:LowTemperatureRadiant:VariableFlow:Design
+
+ZoneHVAC:LowTemperatureRadiant:VariableFlow:Design,
+  DesignOf_RadiantFloor_named_SUPL-0x000001_for_ZONE-0x000000, !- Name
+  ConvectionOnly,                !- Fluid to Radiant Surface Heat Transfer Model
+  0.013,                         !- Hydronic Tubing Inside Diameter
+  0.016,                         !- Hydronic Tubing Outside Diameter
+  0.35,                          !- Hydronic Tubing Conductivity
+  MeanAirTemperature,            !- Temperature Control Type
+  ZeroFlowPower,                 !- Setpoint Control Type
+  HeatingDesignCapacity,         !- Heating Design Capacity Method
+  ,                              !- Heating Design Capacity Per Floor Area
+  1.0,                           !- Fraction of Autosized Heating Design Capacity
+  2,                             !- Heating Control Throttling Range
+  $FROM_DB$:소규모사무실-HeatingSetpoint, !- Heating Control Temperature Schedule Name
+  CoolingDesignCapacity,         !- Cooling Design Capacity Method
+  ,                              !- Cooling Design Capacity Per Floor Area
+  ,                              !- Fraction of Autosized Cooling Design Capacity
+  0.5,                           !- Cooling Control Throttling Range
+  ,                              !- Cooling Control Temperature Schedule Name
+  SimpleOff,                     !- Condensation Control Type
+  1.0;                           !- Condensation Control Dewpoint Offset
+
+
+!- All objects in class: ZoneHVAC:LowTemperatureRadiant:SurfaceGroup
+
+ZoneHVAC:LowTemperatureRadiant:SurfaceGroup,
+  RadiantFloorSurfaceGroup_for_ZONE-0x000000, !- Name
+  SURF-0x000000,                 !- Surface 1 Name
+  1.0;                           !- Flow Fraction for Surface 1
+
+
+!- All objects in class: ZoneHVAC:EquipmentList
+
+ZoneHVAC:EquipmentList,
+  EquipmentList_for_ZONE-0x000000, !- Name
+  SequentialLoad,                !- Load Distribution Scheme
+  ZoneHVAC:TerminalUnit:VariableRefrigerantFlow, !- Zone Equipment 1 Object Type
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Zone Equipment 1 Name
+  1,                             !- Zone Equipment 1 Cooling Sequence
+  1,                             !- Zone Equipment 1 Heating or No-Load Sequence
+  cooling_fraction_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Zone Equipment 1 Sequential Cooling Fraction Schedule Name
+  heating_fraction_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Zone Equipment 1 Sequential Heating Fraction Schedule Name
+  ZoneHVAC:LowTemperatureRadiant:VariableFlow, !- Zone Equipment 2 Object Type
+  RadiantFloor_named_SUPL-0x000001_for_ZONE-0x000000, !- Zone Equipment 2 Name
+  2,                             !- Zone Equipment 2 Cooling Sequence
+  2,                             !- Zone Equipment 2 Heating or No-Load Sequence
+  ALLOFF,                        !- Zone Equipment 2 Sequential Cooling Fraction Schedule Name
+  heating_fraction_for_RadiantFloor_named_SUPL-0x000001_for_ZONE-0x000000; !- Zone Equipment 2 Sequential Heating Fraction Schedule Name
+
+
+!- All objects in class: ZoneHVAC:EquipmentConnections
+
+ZoneHVAC:EquipmentConnections,
+  ZONE-0x000000,                 !- Zone Name
+  EquipmentList_for_ZONE-0x000000, !- Zone Conditioning Equipment List Name
+  ZONE-0x000000 Air InletNode List, !- Zone Air Inlet Node or NodeList Name
+  ZONE-0x000000 Air ExhaustNode List, !- Zone Air Exhaust Node or NodeList Name
+  ZONE-0x000000 Zone Air Node;   !- Zone Air Node Name
+
+
+!- All objects in class: Fan:ConstantVolume
+
+Fan:ConstantVolume,
+  Fan_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Name
+  $FROM_DB$:소규모사무실-HVACOperating:AND:0xAUTO0000:INVERTED, !- Availability Schedule Name
+  0.7,                           !- Fan Total Efficiency
+  100,                           !- Pressure Rise
+  0.4799999999999999,            !- Maximum Flow Rate
+  0.9,                           !- Motor Efficiency
+  1.0,                           !- Motor In Airstream Fraction
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000 HeatingCoil2Fan Air MiddleNode, !- Air Inlet Node Name
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000 Air OutletNode, !- Air Outlet Node Name
+  General;                       !- End-Use Subcategory
+
+!- All objects in class: Coil:Cooling:DX:VariableRefrigerantFlow
+
+Coil:Cooling:DX:VariableRefrigerantFlow,
+  CoolingCoil_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Name
+  $FROM_DB$:소규모사무실-HVACOperating:AND:0xAUTO0000:INVERTED, !- Availability Schedule Name
+  autosize,                      !- Gross Rated Total Cooling Capacity
+  0.7,                           !- Gross Rated Sensible Heat Ratio
+  0.4799999999999999,            !- Rated Air Flow Rate
+  Curve_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000:CoolingCapaTemp, !- Cooling Capacity Ratio Modifier Function of Temperature Curve Name
+  Curve_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000:CoolingCapaFlow, !- Cooling Capacity Modifier Curve Function of Flow Fraction Name
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000 Air InletNode, !- Coil Air Inlet Node
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000 CoolingCoil2HeatingCoil Air MiddleNode; !- Coil Air Outlet Node
+
+
+!- All objects in class: Coil:Heating:DX:VariableRefrigerantFlow
+
+Coil:Heating:DX:VariableRefrigerantFlow,
+  HeatingCoil_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000, !- Name
+  $FROM_DB$:소규모사무실-HVACOperating:AND:0xAUTO0000:INVERTED, !- Availability Schedule
+  autosize,                      !- Gross Rated Heating Capacity
+  0.4799999999999999,            !- Rated Air Flow Rate
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000 CoolingCoil2HeatingCoil Air MiddleNode, !- Coil Air Inlet Node
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000 HeatingCoil2Fan Air MiddleNode, !- Coil Air Outlet Node
+  Curve_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000:HeatingCapaTemp, !- Heating Capacity Ratio Modifier Function of Temperature Curve Name
+  Curve_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000:HeatingCapaFlow; !- Heating Capacity Modifier Function of Flow Fraction Curve Name
+
+!- All objects in class: AirConditioner:VariableRefrigerantFlow
+
+AirConditioner:VariableRefrigerantFlow,
+  HeatPump_named_SRCE-0x000000,  !- Heat Pump Name
+  ALLON,                         !- Availability Schedule Name
+  autosize,                      !- Gross Rated Total Cooling Capacity
+  3.0,                           !- Gross Rated Cooling COP
+  -6.0,                          !- Minimum Condenser Inlet Node Temperature in Cooling Mode
+  43.0,                          !- Maximum Condenser Inlet Node Temperature in Cooling Mode
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingCapaMF_LowTemp, !- Cooling Capacity Ratio Modifier Function of Low Temperature Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingCapaBoundary, !- Cooling Capacity Ratio Boundary Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingCapaMF_HighTemp, !- Cooling Capacity Ratio Modifier Function of High Temperature Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingEIRMF_LowTemp, !- Cooling Energy Input Ratio Modifier Function of Low Temperature Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingEIRBoundary, !- Cooling Energy Input Ratio Boundary Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingEIRMF_HighTemp, !- Cooling Energy Input Ratio Modifier Function of High Temperature Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingEIRMF_LowPLR, !- Cooling Energy Input Ratio Modifier Function of Low Part-Load Ratio Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingEIRMF_HighPLR, !- Cooling Energy Input Ratio Modifier Function of High Part-Load Ratio Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingCombCorrection, !- Cooling Combination Ratio Correction Factor Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingPLRCorrelation, !- Cooling Part-Load Fraction Correlation Curve Name
+  autosize,                      !- Gross Rated Heating Capacity
+  1.0,                           !- Rated Heating Capacity Sizing Ratio
+  3.0,                           !- Gross Rated Heating COP
+  -20.0,                         !- Minimum Condenser Inlet Node Temperature in Heating Mode
+  16.0,                          !- Maximum Condenser Inlet Node Temperature in Heating Mode
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingCapaMF_LowTemp, !- Heating Capacity Ratio Modifier Function of Low Temperature Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingCapaBoundary, !- Heating Capacity Ratio Boundary Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingCapaMF_HighTemp, !- Heating Capacity Ratio Modifier Function of High Temperature Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingEIRMF_LowTemp, !- Heating Energy Input Ratio Modifier Function of Low Temperature Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingEIRBoundary, !- Heating Energy Input Ratio Boundary Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingEIRMF_HighTemp, !- Heating Energy Input Ratio Modifier Function of High Temperature Curve Name
+  WetBulbTemperature,            !- Heating Performance Curve Outdoor Temperature Type
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingEIRMF_LowPLR, !- Heating Energy Input Ratio Modifier Function of Low Part-Load Ratio Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingEIRMF_HighPLR, !- Heating Energy Input Ratio Modifier Function of High Part-Load Ratio Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingCombCorrection, !- Heating Combination Ratio Correction Factor Curve Name
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingPLRCorrelation, !- Heating Part-Load Fraction Correlation Curve Name
+  0.15,                          !- Minimum Heat Pump Part-Load Ratio
+  ,                              !- Zone Name for Master Thermostat Location
+  LoadPriority,                  !- Master Thermostat Priority Control Type
+  ,                              !- Thermostat Priority Schedule Name
+  Terminal_Units_for_HeatPump_named_SRCE-0x000000, !- Zone Terminal Unit List Name
+  No,                            !- Heat Pump Waste Heat Recovery
+  ,                              !- Equivalent Piping Length used for Piping Correction Factor in Cooling Mode
+  ,                              !- Vertical Height used for Piping Correction Factor
+  ,                              !- Piping Correction Factor for Length in Cooling Mode Curve Name
+  0.0,                           !- Piping Correction Factor for Height in Cooling Mode Coefficient
+  ,                              !- Equivalent Piping Length used for Piping Correction Factor in Heating Mode
+  ,                              !- Piping Correction Factor for Length in Heating Mode Curve Name
+  0.0,                           !- Piping Correction Factor for Height in Heating Mode Coefficient
+  33.0,                          !- Crankcase Heater Power per Compressor
+  2.0,                           !- Number of Compressors
+  0.5,                           !- Ratio of Compressor Size to Total Compressor Capacity
+  5.0,                           !- Maximum Outdoor Dry-Bulb Temperature for Crankcase Heater
+  Resistive,                     !- Defrost Strategy
+  Timed,                         !- Defrost Control
+  ,                              !- Defrost Energy Input Ratio Modifier Function of Temperature Curve Name
+  0.058333,                      !- Defrost Time Period Fraction
+  0.0,                           !- Resistive Defrost Heater Capacity
+  5.0,                           !- Maximum Outdoor Dry-bulb Temperature for Defrost Operation
+  AirCooled,                     !- Condenser Type
+  ,                              !- Condenser Inlet Node Name
+  ,                              !- Condenser Outlet Node Name
+  ,                              !- Water Condenser Volume Flow Rate
+  0.9,                           !- Evaporative Condenser Effectiveness
+  ,                              !- Evaporative Condenser Air Flow Rate
+  0.0,                           !- Evaporative Condenser Pump Rated Power Consumption
+  ,                              !- Supply Water Storage Tank Name
+  0.0,                           !- Basin Heater Capacity
+  2.0,                           !- Basin Heater Setpoint Temperature
+  ,                              !- Basin Heater Operating Schedule Name
+  Electricity,                   !- Fuel Type
+  ,                              !- Minimum Condenser Inlet Node Temperature in Heat Recovery Mode
+  ,                              !- Maximum Condenser Inlet Node Temperature in Heat Recovery Mode
+  ,                              !- Heat Recovery Cooling Capacity Modifier Curve Name
+  0.5,                           !- Initial Heat Recovery Cooling Capacity Fraction
+  0.15,                          !- Heat Recovery Cooling Capacity Time Constant
+  ,                              !- Heat Recovery Cooling Energy Modifier Curve Name
+  1.0,                           !- Initial Heat Recovery Cooling Energy Fraction
+  0.0,                           !- Heat Recovery Cooling Energy Time Constant
+  ,                              !- Heat Recovery Heating Capacity Modifier Curve Name
+  1.0,                           !- Initial Heat Recovery Heating Capacity Fraction
+  0.15,                          !- Heat Recovery Heating Capacity Time Constant
+  ,                              !- Heat Recovery Heating Energy Modifier Curve Name
+  1.0,                           !- Initial Heat Recovery Heating Energy Fraction
+  0.0;                           !- Heat Recovery Heating Energy Time Constant
+
+!- All objects in class: ZoneTerminalUnitList
+
+ZoneTerminalUnitList,
+  Terminal_Units_for_HeatPump_named_SRCE-0x000000, !- Zone Terminal Unit List Name
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000; !- Zone Terminal Unit Name 1
+
+
+!- All objects in class: Branch
+
+Branch,
+  Loop_for_SRCE-0x000001 Supply Inlet, !- Name
+  ,                              !- Pressure Drop Curve Name
+  Pump:VariableSpeed,            !- Component 1 Object Type
+  VSDPump_for_Boiler_named_SRCE-0x000001, !- Component 1 Name
+  VSDPump_for_Boiler_named_SRCE-0x000001 Water InletNode, !- Component 1 Inlet Node Name
+  VSDPump_for_Boiler_named_SRCE-0x000001 Water OutletNode; !- Component 1 Outlet Node Name
+
+
+Branch,
+  Loop_for_SRCE-0x000001 Supply Bypass, !- Name
+  ,                              !- Pressure Drop Curve Name
+  Pipe:Adiabatic,                !- Component 1 Object Type
+  Loop_for_SRCE-0x000001 Supply Bypass Pipe, !- Component 1 Name
+  Loop_for_SRCE-0x000001 Supply Bypass Pipe InletNode, !- Component 1 Inlet Node Name
+  Loop_for_SRCE-0x000001 Supply Bypass Pipe OutletNode; !- Component 1 Outlet Node Name
+
+
+Branch,
+  Loop_for_SRCE-0x000001 Supply MainComponent, !- Name
+  ,                              !- Pressure Drop Curve Name
+  Boiler:HotWater,               !- Component 1 Object Type
+  Boiler_named_SRCE-0x000001,    !- Component 1 Name
+  Boiler_named_SRCE-0x000001 Water InletNode, !- Component 1 Inlet Node Name
+  Boiler_named_SRCE-0x000001 Water OutletNode; !- Component 1 Outlet Node Name
+
+
+Branch,
+  Loop_for_SRCE-0x000001 Supply Outlet, !- Name
+  ,                              !- Pressure Drop Curve Name
+  Pipe:Adiabatic,                !- Component 1 Object Type
+  Loop_for_SRCE-0x000001 Supply Outlet Pipe, !- Component 1 Name
+  Loop_for_SRCE-0x000001 Supply Outlet Pipe InletNode, !- Component 1 Inlet Node Name
+  Loop_for_SRCE-0x000001 Supply Outlet Pipe OutletNode; !- Component 1 Outlet Node Name
+
+
+Branch,
+  Loop_for_SRCE-0x000001 Demand Inlet, !- Name
+  ,                              !- Pressure Drop Curve Name
+  Pipe:Adiabatic,                !- Component 1 Object Type
+  Loop_for_SRCE-0x000001 Demand Inlet Pipe, !- Component 1 Name
+  Loop_for_SRCE-0x000001 Demand Inlet Pipe InletNode, !- Component 1 Inlet Node Name
+  Loop_for_SRCE-0x000001 Demand Inlet Pipe OutletNode; !- Component 1 Outlet Node Name
+
+
+Branch,
+  Loop_for_SRCE-0x000001 Demand Bypass, !- Name
+  ,                              !- Pressure Drop Curve Name
+  Pipe:Adiabatic,                !- Component 1 Object Type
+  Loop_for_SRCE-0x000001 Demand Bypass Pipe, !- Component 1 Name
+  Loop_for_SRCE-0x000001 Demand Bypass Pipe InletNode, !- Component 1 Inlet Node Name
+  Loop_for_SRCE-0x000001 Demand Bypass Pipe OutletNode; !- Component 1 Outlet Node Name
+
+
+Branch,
+  Loop_for_SRCE-0x000001 Demand Outlet, !- Name
+  ,                              !- Pressure Drop Curve Name
+  Pipe:Adiabatic,                !- Component 1 Object Type
+  Loop_for_SRCE-0x000001 Demand Outlet Pipe, !- Component 1 Name
+  Loop_for_SRCE-0x000001 Demand Outlet Pipe InletNode, !- Component 1 Inlet Node Name
+  Loop_for_SRCE-0x000001 Demand Outlet Pipe OutletNode; !- Component 1 Outlet Node Name
+
+
+Branch,
+  Loop_for_SRCE-0x000001 Demand Main_RadiantFloor_for_ZONE-0x000000, !- Name
+  ,                              !- Pressure Drop Curve Name
+  ZoneHVAC:LowTemperatureRadiant:VariableFlow, !- Component 1 Object Type
+  RadiantFloor_named_SUPL-0x000001_for_ZONE-0x000000, !- Component 1 Name
+  RadiantFloor_named_SUPL-0x000001_for_ZONE-0x000000 Water InletNode, !- Component 1 Inlet Node Name
+  RadiantFloor_named_SUPL-0x000001_for_ZONE-0x000000 Water OutletNode; !- Component 1 Outlet Node Name
+
+
+!- All objects in class: BranchList
+
+BranchList,
+  Loop_for_SRCE-0x000001 Supply BranchList, !- Name
+  Loop_for_SRCE-0x000001 Supply Inlet, !- Branch 1 Name
+  Loop_for_SRCE-0x000001 Supply Bypass, !- Branch 2 Name
+  Loop_for_SRCE-0x000001 Supply MainComponent, !- Branch 3 Name
+  Loop_for_SRCE-0x000001 Supply Outlet; !- Branch 4 Name
+
+
+BranchList,
+  Loop_for_SRCE-0x000001 Demand BranchList, !- Name
+  Loop_for_SRCE-0x000001 Demand Inlet, !- Branch 1 Name
+  Loop_for_SRCE-0x000001 Demand Bypass, !- Branch 2 Name
+  Loop_for_SRCE-0x000001 Demand Main_RadiantFloor_for_ZONE-0x000000, !- Branch 3 Name
+  Loop_for_SRCE-0x000001 Demand Outlet; !- Branch 4 Name
+
+
+!- All objects in class: Connector:Splitter
+
+Connector:Splitter,
+  Loop_for_SRCE-0x000001 Supply Splitter, !- Name
+  Loop_for_SRCE-0x000001 Supply Inlet, !- Inlet Branch Name
+  Loop_for_SRCE-0x000001 Supply MainComponent, !- Outlet Branch 1 Name
+  Loop_for_SRCE-0x000001 Supply Bypass; !- Outlet Branch 2 Name
+
+
+Connector:Splitter,
+  Loop_for_SRCE-0x000001 Demand Splitter, !- Name
+  Loop_for_SRCE-0x000001 Demand Inlet, !- Inlet Branch Name
+  Loop_for_SRCE-0x000001 Demand Bypass, !- Outlet Branch 1 Name
+  Loop_for_SRCE-0x000001 Demand Main_RadiantFloor_for_ZONE-0x000000; !- Outlet Branch 2 Name
+
+
+!- All objects in class: Connector:Mixer
+
+Connector:Mixer,
+  Loop_for_SRCE-0x000001 Supply Mixer, !- Name
+  Loop_for_SRCE-0x000001 Supply Outlet, !- Outlet Branch Name
+  Loop_for_SRCE-0x000001 Supply MainComponent, !- Inlet Branch 1 Name
+  Loop_for_SRCE-0x000001 Supply Bypass; !- Inlet Branch 2 Name
+
+
+Connector:Mixer,
+  Loop_for_SRCE-0x000001 Demand Mixer, !- Name
+  Loop_for_SRCE-0x000001 Demand Outlet, !- Outlet Branch Name
+  Loop_for_SRCE-0x000001 Demand Bypass, !- Inlet Branch 1 Name
+  Loop_for_SRCE-0x000001 Demand Main_RadiantFloor_for_ZONE-0x000000; !- Inlet Branch 2 Name
+
+
+!- All objects in class: ConnectorList
+
+ConnectorList,
+  Loop_for_SRCE-0x000001 Supply Connectors, !- Name
+  Connector:Splitter,            !- Connector 1 Object Type
+  Loop_for_SRCE-0x000001 Supply Splitter, !- Connector 1 Name
+  Connector:Mixer,               !- Connector 2 Object Type
+  Loop_for_SRCE-0x000001 Supply Mixer; !- Connector 2 Name
+
+ConnectorList,
+  Loop_for_SRCE-0x000001 Demand Connectors, !- Name
+  Connector:Splitter,            !- Connector 1 Object Type
+  Loop_for_SRCE-0x000001 Demand Splitter, !- Connector 1 Name
+  Connector:Mixer,               !- Connector 2 Object Type
+  Loop_for_SRCE-0x000001 Demand Mixer; !- Connector 2 Name
+
+!- All objects in class: NodeList
+
+NodeList,
+  ZONE-0x000000 Air InletNode List, !- Name
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000 Air OutletNode; !- Node 1 Name
+
+
+NodeList,
+  ZONE-0x000000 Air ExhaustNode List, !- Name
+  AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000 Air InletNode; !- Node 1 Name
+
+
+!- All objects in class: Pipe:Adiabatic
+
+Pipe:Adiabatic,
+  Loop_for_SRCE-0x000001 Supply Bypass Pipe, !- Name
+  Loop_for_SRCE-0x000001 Supply Bypass Pipe InletNode, !- Inlet Node Name
+  Loop_for_SRCE-0x000001 Supply Bypass Pipe OutletNode; !- Outlet Node Name
+
+Pipe:Adiabatic,
+  Loop_for_SRCE-0x000001 Supply Outlet Pipe, !- Name
+  Loop_for_SRCE-0x000001 Supply Outlet Pipe InletNode, !- Inlet Node Name
+  Loop_for_SRCE-0x000001 Supply Outlet Pipe OutletNode; !- Outlet Node Name
+
+Pipe:Adiabatic,
+  Loop_for_SRCE-0x000001 Demand Inlet Pipe, !- Name
+  Loop_for_SRCE-0x000001 Demand Inlet Pipe InletNode, !- Inlet Node Name
+  Loop_for_SRCE-0x000001 Demand Inlet Pipe OutletNode; !- Outlet Node Name
+
+Pipe:Adiabatic,
+  Loop_for_SRCE-0x000001 Demand Bypass Pipe, !- Name
+  Loop_for_SRCE-0x000001 Demand Bypass Pipe InletNode, !- Inlet Node Name
+  Loop_for_SRCE-0x000001 Demand Bypass Pipe OutletNode; !- Outlet Node Name
+
+Pipe:Adiabatic,
+  Loop_for_SRCE-0x000001 Demand Outlet Pipe, !- Name
+  Loop_for_SRCE-0x000001 Demand Outlet Pipe InletNode, !- Inlet Node Name
+  Loop_for_SRCE-0x000001 Demand Outlet Pipe OutletNode; !- Outlet Node Name
+
+!- All objects in class: Pump:VariableSpeed
+
+Pump:VariableSpeed,
+  VSDPump_for_Boiler_named_SRCE-0x000001, !- Name
+  VSDPump_for_Boiler_named_SRCE-0x000001 Water InletNode, !- Inlet Node Name
+  VSDPump_for_Boiler_named_SRCE-0x000001 Water OutletNode, !- Outlet Node Name
+  autosize,                      !- Design Maximum Flow Rate
+  179352.0,                      !- Design Pump Head
+  autosize,                      !- Design Power Consumption
+  0.9,                           !- Motor Efficiency
+  0.0,                           !- Fraction of Motor Inefficiencies to Fluid Stream
+  0.0,                           !- Coefficient 1 of the Part Load Performance Curve
+  1.0,                           !- Coefficient 2 of the Part Load Performance Curve
+  0.0,                           !- Coefficient 3 of the Part Load Performance Curve
+  0.0,                           !- Coefficient 4 of the Part Load Performance Curve
+  autosize,                      !- Design Minimum Flow Rate
+  Continuous,                    !- Pump Control Type
+  ,                              !- Pump Flow Rate Schedule Name
+  ,                              !- Pump Curve Name
+  ,                              !- Impeller Diameter
+  ,                              !- VFD Control Type
+  ,                              !- Pump RPM Schedule Name
+  ,                              !- Minimum Pressure Schedule
+  ,                              !- Maximum Pressure Schedule
+  ,                              !- Minimum RPM Schedule
+  ,                              !- Maximum RPM Schedule
+  ,                              !- Zone Name
+  ,                              !- Skin Loss Radiative Fraction
+  PowerPerFlowPerPressure,       !- Design Power Sizing Method
+  348701.1,                      !- Design Electric Power per Unit Flow Rate
+  1.282051282,                   !- Design Shaft Power per Unit Flow Rate per Unit Head
+  0.0,                           !- Design Minimum Flow Rate Fraction
+  General;                       !- End-Use Subcategory
+
+!- All objects in class: Boiler:HotWater
+
+Boiler:HotWater,
+  Boiler_named_SRCE-0x000001,    !- Name
+  Propane,                       !- Fuel Type
+  autosize,                      !- Nominal Capacity
+  0.85,                          !- Nominal Thermal Efficiency
+  LeavingBoiler,                 !- Efficiency Curve Temperature Evaluation Variable
+  ,                              !- Normalized Boiler Efficiency Curve Name
+  autosize,                      !- Design Water Flow Rate
+  0.0,                           !- Minimum Part Load Ratio
+  1.0,                           !- Maximum Part Load Ratio
+  1.0,                           !- Optimum Part Load Ratio
+  Boiler_named_SRCE-0x000001 Water InletNode, !- Boiler Water Inlet Node Name
+  Boiler_named_SRCE-0x000001 Water OutletNode, !- Boiler Water Outlet Node Name
+  99.9,                          !- Water Outlet Upper Temperature Limit
+  NotModulated,                  !- Boiler Flow Mode
+  0.0,                           !- On Cycle Parasitic Electric Load
+  1.0,                           !- Sizing Factor
+  General;                       !- End-Use Subcategory
+
+
+!- All objects in class: PlantLoop
+
+PlantLoop,
+  Loop_for_SRCE-0x000001,        !- Name
+  Water,                         !- Fluid Type
+  ,                              !- User Defined Fluid Type
+  Loop_for_SRCE-0x000001 OperationScheme, !- Plant Equipment Operation Scheme Name
+  Loop_for_SRCE-0x000001 Supply Outlet Pipe OutletNode, !- Loop Temperature Setpoint Node Name
+  99.9,                          !- Maximum Loop Temperature
+  0.1,                           !- Minimum Loop Temperature
+  autosize,                      !- Maximum Loop Flow Rate
+  0.0,                           !- Minimum Loop Flow Rate
+  Autocalculate,                 !- Plant Loop Volume
+  VSDPump_for_Boiler_named_SRCE-0x000001 Water InletNode, !- Plant Side Inlet Node Name
+  Loop_for_SRCE-0x000001 Supply Outlet Pipe OutletNode, !- Plant Side Outlet Node Name
+  Loop_for_SRCE-0x000001 Supply BranchList, !- Plant Side Branch List Name
+  Loop_for_SRCE-0x000001 Supply Connectors, !- Plant Side Connector List Name
+  Loop_for_SRCE-0x000001 Demand Inlet Pipe InletNode, !- Demand Side Inlet Node Name
+  Loop_for_SRCE-0x000001 Demand Outlet Pipe OutletNode, !- Demand Side Outlet Node Name
+  Loop_for_SRCE-0x000001 Demand BranchList, !- Demand Side Branch List Name
+  Loop_for_SRCE-0x000001 Demand Connectors, !- Demand Side Connector List Name
+  SequentialLoad,                !- Load Distribution Scheme
+  Loop_for_SRCE-0x000001 AvailabilityManagerAssignmentList, !- Availability Manager List Name
+  SingleSetpoint,                !- Plant Loop Demand Calculation Scheme
+  None,                          !- Common Pipe Simulation
+  None,                          !- Pressure Simulation Type
+  2.0;                           !- Loop Circulation Time
+
+!- All objects in class: PlantEquipmentList
+
+PlantEquipmentList,
+  Loop_for_SRCE-0x000001 EquipmentList, !- Name
+  Boiler:HotWater,               !- Equipment 1 Object Type
+  Boiler_named_SRCE-0x000001;    !- Equipment 1 Name
+
+
+!- All objects in class: PlantEquipmentOperation:HeatingLoad
+
+PlantEquipmentOperation:HeatingLoad,
+  Loop_for_SRCE-0x000001 Operation, !- Name
+  0.0,                           !- Load Range 1 Lower Limit
+  1e+20,                         !- Load Range 1 Upper Limit
+  Loop_for_SRCE-0x000001 EquipmentList; !- Range 1 Equipment List Name
+
+
+!- All objects in class: PlantEquipmentOperationSchemes
+
+PlantEquipmentOperationSchemes,
+  Loop_for_SRCE-0x000001 OperationScheme, !- Name
+  PlantEquipmentOperation:HeatingLoad, !- Control Scheme 1 Object Type
+  Loop_for_SRCE-0x000001 Operation, !- Control Scheme 1 Name
+  ALLON;                         !- Control Scheme 1 Schedule Name
+
+
+!- All objects in class: AvailabilityManager:Scheduled
+
+AvailabilityManager:Scheduled,
+  Loop_for_SRCE-0x000001 AvailabilityManager, !- Name
+  ALLON;                         !- Schedule Name
+
+!- All objects in class: AvailabilityManagerAssignmentList
+
+AvailabilityManagerAssignmentList,
+  Loop_for_SRCE-0x000001 AvailabilityManagerAssignmentList, !- Name
+  AvailabilityManager:Scheduled, !- Availability Manager 1 Object Type
+  Loop_for_SRCE-0x000001 AvailabilityManager; !- Availability Manager 1 Name
+
+
+!- All objects in class: SetpointManager:Scheduled
+
+SetpointManager:Scheduled,
+  Loop_for_SRCE-0x000001 SetpointManager, !- Name
+  Temperature,                   !- Control Variable
+  Loop_for_SRCE-0x000001 SetpointTemperature, !- Schedule Name
+  Loop_for_SRCE-0x000001 Supply Outlet Pipe OutletNode; !- Setpoint Node or NodeList Name
+
+!- All objects in class: Curve:Linear
+
+Curve:Linear,
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingEIRMF_HighPLR, !- Name
+  1.0,                           !- Coefficient1 Constant
+  0.0,                           !- Coefficient2 x
+  1.0,                           !- Minimum Value of x
+  1.5,                           !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Dimensionless,                 !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Linear,
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingCombCorrection, !- Name
+  0.618055,                      !- Coefficient1 Constant
+  0.381945,                      !- Coefficient2 x
+  1.0,                           !- Minimum Value of x
+  1.5,                           !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Dimensionless,                 !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Linear,
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingPLRCorrelation, !- Name
+  0.85,                          !- Coefficient1 Constant
+  0.15,                          !- Coefficient2 x
+  0.0,                           !- Minimum Value of x
+  1.0,                           !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Dimensionless,                 !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Linear,
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingCombCorrection, !- Name
+  0.96034,                       !- Coefficient1 Constant
+  0.03966,                       !- Coefficient2 x
+  1.0,                           !- Minimum Value of x
+  1.5,                           !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Dimensionless,                 !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Linear,
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingPLRCorrelation, !- Name
+  0.85,                          !- Coefficient1 Constant
+  0.15,                          !- Coefficient2 x
+  0.0,                           !- Minimum Value of x
+  1.0,                           !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Dimensionless,                 !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Linear,
+  Curve_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000:HeatingCapaFlow, !- Name
+  0.8,                           !- Coefficient1 Constant
+  0.2,                           !- Coefficient2 x
+  0.0,                           !- Minimum Value of x
+  1.5,                           !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Dimensionless,                 !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Linear,
+  Curve_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000:CoolingCapaFlow, !- Name
+  0.8,                           !- Coefficient1 Constant
+  0.2,                           !- Coefficient2 x
+  0.0,                           !- Minimum Value of x
+  1.5,                           !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Dimensionless,                 !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+!- All objects in class: Curve:Quadratic
+
+Curve:Quadratic,
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingEIRMF_HighPLR, !- Name
+  2.4294355,                     !- Coefficient1 Constant
+  -2.235887,                     !- Coefficient2 x
+  0.8064516,                     !- Coefficient3 x**2
+  1.0,                           !- Minimum Value of x
+  1.5,                           !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Dimensionless,                 !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+!- All objects in class: Curve:Cubic
+
+Curve:Cubic,
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingCapaBoundary, !- Name
+  25.73473775,                   !- Coefficient1 Constant
+  -0.03150043,                   !- Coefficient2 x
+  -0.01416595,                   !- Coefficient3 x**2
+  0.0,                           !- Coefficient4 x**3
+  11.0,                          !- Minimum Value of x
+  30.0,                          !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Cubic,
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingEIRBoundary, !- Name
+  25.73473775,                   !- Coefficient1 Constant
+  -0.03150043,                   !- Coefficient2 x
+  -0.01416595,                   !- Coefficient3 x**2
+  0.0,                           !- Coefficient4 x**3
+  15.0,                          !- Minimum Value of x
+  24.0,                          !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Cubic,
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingEIRMF_LowPLR, !- Name
+  0.4628123,                     !- Coefficient1 Constant
+  -1.0402406,                    !- Coefficient2 x
+  2.17490997,                    !- Coefficient3 x**2
+  -0.5974817,                    !- Coefficient4 x**3
+  0.0,                           !- Minimum Value of x
+  1.0,                           !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Capacity;                      !- Output Unit Type
+
+Curve:Cubic,
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingCapaBoundary, !- Name
+  -7.6000882,                    !- Coefficient1 Constant
+  3.05090016,                    !- Coefficient2 x
+  -0.1162844,                    !- Coefficient3 x**2
+  0.0,                           !- Coefficient4 x**3
+  15.0,                          !- Minimum Value of x
+  27.0,                          !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Cubic,
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingEIRBoundary, !- Name
+  -7.6000882,                    !- Coefficient1 Constant
+  3.05090016,                    !- Coefficient2 x
+  -0.1162844,                    !- Coefficient3 x**2
+  0.0,                           !- Coefficient4 x**3
+  15.0,                          !- Minimum Value of x
+  27.0,                          !- Maximum Value of x
+  -20.0,                         !- Minimum Curve Output
+  15.0,                          !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Cubic,
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingEIRMF_LowPLR, !- Name
+  0.1400093,                     !- Coefficient1 Constant
+  0.6415002,                     !- Coefficient2 x
+  0.1339047,                     !- Coefficient3 x**2
+  0.0845859,                     !- Coefficient4 x**3
+  0.0,                           !- Minimum Value of x
+  1.0,                           !- Maximum Value of x
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Dimensionless,                 !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Cubic,
+  Curve_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000:HeatingCapaTemp, !- Name
+  -0.390708928,                  !- Coefficient1 Constant
+  0.261815024,                   !- Coefficient2 x
+  -0.0130431603,                 !- Coefficient3 x**2
+  0.000178131746,                !- Coefficient4 x**3
+  0.0,                           !- Minimum Value of x
+  50.0,                          !- Maximum Value of x
+  0.5,                           !- Minimum Curve Output
+  1.5,                           !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Cubic,
+  Curve_for_AirHandlingUnit_named_SUPL-0x000000_for_ZONE-0x000000:CoolingCapaTemp, !- Name
+  0.504547274,                   !- Coefficient1 Constant
+  0.0288891279,                  !- Coefficient2 x
+  -1.08194187e-05,               !- Coefficient3 x**2
+  1.01359395e-05,                !- Coefficient4 x**3
+  0.0,                           !- Minimum Value of x
+  50.0,                          !- Maximum Value of x
+  0.5,                           !- Minimum Curve Output
+  1.5,                           !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Dimensionless;                 !- Output Unit Type
+
+!- All objects in class: Curve:Biquadratic
+
+Curve:Biquadratic,
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingCapaMF_LowTemp, !- Name
+  0.576882692,                   !- Coefficient1 Constant
+  0.017447952,                   !- Coefficient2 x
+  0.000583269,                   !- Coefficient3 x**2
+  -1.76324e-06,                  !- Coefficient4 y
+  -7.474e-09,                    !- Coefficient5 y**2
+  -1.30413e-07,                  !- Coefficient6 x*y
+  15.0,                          !- Minimum Value of x
+  24.0,                          !- Maximum Value of x
+  -5.0,                          !- Minimum Value of y
+  23.0,                          !- Maximum Value of y
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Temperature,                   !- Input Unit Type for Y
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Biquadratic,
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingCapaMF_HighTemp, !- Name
+  0.6867358,                     !- Coefficient1 Constant
+  0.0207631,                     !- Coefficient2 x
+  0.0005447,                     !- Coefficient3 x**2
+  -0.0016218,                    !- Coefficient4 y
+  -4.259e-07,                    !- Coefficient5 y**2
+  -0.0003392,                    !- Coefficient6 x*y
+  15.0,                          !- Minimum Value of x
+  24.0,                          !- Maximum Value of x
+  16.0,                          !- Minimum Value of y
+  43.0,                          !- Maximum Value of y
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Temperature,                   !- Input Unit Type for Y
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Biquadratic,
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingEIRMF_LowTemp, !- Name
+  0.989010541,                   !- Coefficient1 Constant
+  -0.02347967,                   !- Coefficient2 x
+  0.000199711,                   !- Coefficient3 x**2
+  0.005968336,                   !- Coefficient4 y
+  -1.0289e-07,                   !- Coefficient5 y**2
+  -0.00015686,                   !- Coefficient6 x*y
+  15.0,                          !- Minimum Value of x
+  24.0,                          !- Maximum Value of x
+  -5.0,                          !- Minimum Value of y
+  23.0,                          !- Maximum Value of y
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Temperature,                   !- Input Unit Type for Y
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Biquadratic,
+  Curve_for_HeatPump_named_SRCE-0x000000:CoolingEIRMF_HighTemp, !- Name
+  0.1435147,                     !- Coefficient1 Constant
+  0.01860035,                    !- Coefficient2 x
+  -0.0003954,                    !- Coefficient3 x**2
+  0.02485219,                    !- Coefficient4 y
+  0.00016329,                    !- Coefficient5 y**2
+  -0.0006244,                    !- Coefficient6 x*y
+  15.0,                          !- Minimum Value of x
+  24.0,                          !- Maximum Value of x
+  16.0,                          !- Minimum Value of y
+  43.0,                          !- Maximum Value of y
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Temperature,                   !- Input Unit Type for Y
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Biquadratic,
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingCapaMF_LowTemp, !- Name
+  1.014599599,                   !- Coefficient1 Constant
+  -0.002506703,                  !- Coefficient2 x
+  -0.000141599,                  !- Coefficient3 x**2
+  0.026931595,                   !- Coefficient4 y
+  1.83538e-06,                   !- Coefficient5 y**2
+  -0.000358147,                  !- Coefficient6 x*y
+  15.0,                          !- Minimum Value of x
+  27.0,                          !- Maximum Value of x
+  -20.0,                         !- Minimum Value of y
+  15.0,                          !- Maximum Value of y
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Temperature,                   !- Input Unit Type for Y
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Biquadratic,
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingCapaMF_HighTemp, !- Name
+  1.161134821,                   !- Coefficient1 Constant
+  0.027478868,                   !- Coefficient2 x
+  -0.00168795,                   !- Coefficient3 x**2
+  0.001783378,                   !- Coefficient4 y
+  2.03208e-06,                   !- Coefficient5 y**2
+  -6.8969e-05,                   !- Coefficient6 x*y
+  15.0,                          !- Minimum Value of x
+  27.0,                          !- Maximum Value of x
+  -10.0,                         !- Minimum Value of y
+  15.0,                          !- Maximum Value of y
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Temperature,                   !- Input Unit Type for Y
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Biquadratic,
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingEIRMF_LowTemp, !- Name
+  0.87465501,                    !- Coefficient1 Constant
+  -0.01319754,                   !- Coefficient2 x
+  0.00110307,                    !- Coefficient3 x**2
+  -0.0133118,                    !- Coefficient4 y
+  0.00089017,                    !- Coefficient5 y**2
+  -0.00012766,                   !- Coefficient6 x*y
+  15.0,                          !- Minimum Value of x
+  27.0,                          !- Maximum Value of x
+  -20.0,                         !- Minimum Value of y
+  12.0,                          !- Maximum Value of y
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Temperature,                   !- Input Unit Type for Y
+  Dimensionless;                 !- Output Unit Type
+
+Curve:Biquadratic,
+  Curve_for_HeatPump_named_SRCE-0x000000:HeatingEIRMF_HighTemp, !- Name
+  2.504005146,                   !- Coefficient1 Constant
+  -0.05736767,                   !- Coefficient2 x
+  4.07336e-05,                   !- Coefficient3 x**2
+  -0.12959669,                   !- Coefficient4 y
+  0.00135839,                    !- Coefficient5 y**2
+  0.00317047,                    !- Coefficient6 x*y
+  15.0,                          !- Minimum Value of x
+  27.0,                          !- Maximum Value of x
+  -10.0,                         !- Minimum Value of y
+  15.0,                          !- Maximum Value of y
+  ,                              !- Minimum Curve Output
+  ,                              !- Maximum Curve Output
+  Temperature,                   !- Input Unit Type for X
+  Temperature,                   !- Input Unit Type for Y
+  Dimensionless;                 !- Output Unit Type
+
+!- All objects in class: Output:Table:SummaryReports
+
+Output:Table:SummaryReports,
+  EndUseEnergyConsumptionElectricityMonthly, !- Report 1 Name
+  EndUseEnergyConsumptionNaturalGasMonthly, !- Report 2 Name
+  EndUseEnergyConsumptionDieselMonthly, !- Report 3 Name
+  EndUseEnergyConsumptionFuelOilMonthly, !- Report 4 Name
+  EndUseEnergyConsumptionCoalMonthly, !- Report 5 Name
+  EndUseEnergyConsumptionPropaneMonthly, !- Report 6 Name
+  EndUseEnergyConsumptionGasolineMonthly, !- Report 7 Name
+  EndUseEnergyConsumptionOtherFuelsMonthly; !- Report 8 Name
+
+
+!- All objects in class: Output:Table:Monthly
+
+Output:Table:Monthly,
+  ElectricityBalanceMonthly,     !- Name
+  3,                             !- Digits After Decimal
+  ElectricityProduced:Facility,  !- Variable or Meter 1 Name
+  SumOrAverage,                  !- Aggregation Type for Variable or Meter 1
+  ElectricitySurplusSold:Facility, !- Variable or Meter 2 Name
+  SumOrAverage,                  !- Aggregation Type for Variable or Meter 2
+  ElectricityPurchased:Facility, !- Variable or Meter 3 Name
+  SumOrAverage;                  !- Aggregation Type for Variable or Meter 3
+
+
+!- All objects in class: OutputControl:Table:Style
+
+OutputControl:Table:Style,
+  Comma,                         !- Column Separator
+  JtoKWH;                        !- Unit Conversion

@@ -1,0 +1,603 @@
+{
+  "schema": "goniegonie.python-reference.profile-database.v1",
+  "count": 24,
+  "unordered_sha256": "4115ba2e8337ffb8aac73174c26b87119f025d7e7f5d66e87eaacb939a0797bc",
+  "items": [
+    {
+      "name": "주거공간",
+      "occupant_start": 0,
+      "occupant_end": 24,
+      "hvac_start": 0,
+      "hvac_end": 24,
+      "ventilation": 1.1,
+      "domestic_hotwater": 84,
+      "lighting_hours": 5,
+      "occupancy": 53.0,
+      "equipment": 52,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+        "holiday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "소규모사무실",
+      "occupant_start": 9,
+      "occupant_end": 18,
+      "hvac_start": 7,
+      "hvac_end": 18,
+      "ventilation": 4.0,
+      "domestic_hotwater": 30,
+      "lighting_hours": 6,
+      "occupancy": 30.0,
+      "equipment": 42,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "대규모사무실",
+      "occupant_start": 9,
+      "occupant_end": 18,
+      "hvac_start": 7,
+      "hvac_end": 18,
+      "ventilation": 6.0,
+      "domestic_hotwater": 30,
+      "lighting_hours": 9,
+      "occupancy": 55.8,
+      "equipment": 126,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "회의실 및 세미나실",
+      "occupant_start": 7,
+      "occupant_end": 18,
+      "hvac_start": 7,
+      "hvac_end": 18,
+      "ventilation": 15.0,
+      "domestic_hotwater": 30,
+      "lighting_hours": 11,
+      "occupancy": 96.0,
+      "equipment": 8,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "강당",
+      "occupant_start": 7,
+      "occupant_end": 18,
+      "hvac_start": 7,
+      "hvac_end": 18,
+      "ventilation": 2.0,
+      "domestic_hotwater": 30,
+      "lighting_hours": 11,
+      "occupancy": 36.0,
+      "equipment": 24,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "구내식당",
+      "occupant_start": 8,
+      "occupant_end": 15,
+      "hvac_start": 8,
+      "hvac_end": 15,
+      "ventilation": 18.0,
+      "domestic_hotwater": 1250,
+      "lighting_hours": 7,
+      "occupancy": 177.0,
+      "equipment": 10,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "화장실",
+      "occupant_start": 7,
+      "occupant_end": 18,
+      "hvac_start": 7,
+      "hvac_end": 18,
+      "ventilation": 15.0,
+      "domestic_hotwater": 0,
+      "lighting_hours": 11,
+      "occupancy": 0.0,
+      "equipment": 0,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "그 외 체류공간",
+      "occupant_start": 7,
+      "occupant_end": 18,
+      "hvac_start": 7,
+      "hvac_end": 18,
+      "ventilation": 7.0,
+      "domestic_hotwater": 30,
+      "lighting_hours": 11,
+      "occupancy": 96.0,
+      "equipment": 8,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "부속공간",
+      "occupant_start": 7,
+      "occupant_end": 18,
+      "hvac_start": 7,
+      "hvac_end": 18,
+      "ventilation": 0.15,
+      "domestic_hotwater": 0,
+      "lighting_hours": 11,
+      "occupancy": 0.0,
+      "equipment": 0,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "창고/설비/문서실",
+      "occupant_start": 7,
+      "occupant_end": 18,
+      "hvac_start": 7,
+      "hvac_end": 18,
+      "ventilation": 0.15,
+      "domestic_hotwater": 0,
+      "lighting_hours": 11,
+      "occupancy": 0.0,
+      "equipment": 0,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "전산실",
+      "occupant_start": 0,
+      "occupant_end": 24,
+      "hvac_start": 0,
+      "hvac_end": 24,
+      "ventilation": 1.3,
+      "domestic_hotwater": 30,
+      "lighting_hours": 12,
+      "occupancy": 15.0,
+      "equipment": 1800,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+        "holiday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "주방 및 조리실",
+      "occupant_start": 8,
+      "occupant_end": 15,
+      "hvac_start": 8,
+      "hvac_end": 15,
+      "ventilation": 90.0,
+      "domestic_hotwater": 0,
+      "lighting_hours": 7,
+      "occupancy": 56.0,
+      "equipment": 1800,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "병실",
+      "occupant_start": 0,
+      "occupant_end": 24,
+      "hvac_start": 0,
+      "hvac_end": 24,
+      "ventilation": 4.0,
+      "domestic_hotwater": 82,
+      "lighting_hours": 12,
+      "occupancy": 108.0,
+      "equipment": 24,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+        "holiday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "객실",
+      "occupant_start": 21,
+      "occupant_end": 8,
+      "hvac_start": 21,
+      "hvac_end": 8,
+      "ventilation": 3.0,
+      "domestic_hotwater": 82,
+      "lighting_hours": 4,
+      "occupancy": 70.0,
+      "equipment": 44,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+        "holiday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "교실(초중고)",
+      "occupant_start": 8,
+      "occupant_end": 15,
+      "hvac_start": 8,
+      "hvac_end": 15,
+      "ventilation": 10.0,
+      "domestic_hotwater": 30,
+      "lighting_hours": 6,
+      "occupancy": 100.0,
+      "equipment": 20,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": [
+        {
+          "start": "01/01",
+          "end": "02/14"
+        },
+        {
+          "start": "07/22",
+          "end": "08/27"
+        },
+        {
+          "start": "12/22",
+          "end": "12/31"
+        }
+      ]
+    },
+    {
+      "name": "강의실(대학)",
+      "occupant_start": 9,
+      "occupant_end": 18,
+      "hvac_start": 9,
+      "hvac_end": 18,
+      "ventilation": 30.0,
+      "domestic_hotwater": 30,
+      "lighting_hours": 6,
+      "occupancy": 420.0,
+      "equipment": 24,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": [
+        {
+          "start": "01/01",
+          "end": "02/28"
+        },
+        {
+          "start": "07/08",
+          "end": "08/31"
+        },
+        {
+          "start": "12/14",
+          "end": "12/31"
+        }
+      ]
+    },
+    {
+      "name": "매장(상점/백화점)",
+      "occupant_start": 8,
+      "occupant_end": 20,
+      "hvac_start": 8,
+      "hvac_end": 20,
+      "ventilation": 4.0,
+      "domestic_hotwater": 30,
+      "lighting_hours": 12,
+      "occupancy": 84.0,
+      "equipment": 24,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "전시실(전시관/박물관)",
+      "occupant_start": 10,
+      "occupant_end": 18,
+      "hvac_start": 10,
+      "hvac_end": 18,
+      "ventilation": 2.0,
+      "domestic_hotwater": 30,
+      "lighting_hours": 8,
+      "occupancy": 28.0,
+      "equipment": 0,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "열람실(도서관)",
+      "occupant_start": 8,
+      "occupant_end": 20,
+      "hvac_start": 8,
+      "hvac_end": 20,
+      "ventilation": 8.0,
+      "domestic_hotwater": 30,
+      "lighting_hours": 12,
+      "occupancy": 168.0,
+      "equipment": 0,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "체육시설",
+      "occupant_start": 8,
+      "occupant_end": 23,
+      "hvac_start": 8,
+      "hvac_end": 23,
+      "ventilation": 3.0,
+      "domestic_hotwater": 220,
+      "lighting_hours": 15,
+      "occupancy": 60.0,
+      "equipment": 0,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "구내식당(초중고)",
+      "occupant_start": 11,
+      "occupant_end": 15,
+      "hvac_start": 11,
+      "hvac_end": 15,
+      "ventilation": 18.0,
+      "domestic_hotwater": 1250,
+      "lighting_hours": 4,
+      "occupancy": 177.0,
+      "equipment": 10,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": [
+        {
+          "start": "01/01",
+          "end": "02/14"
+        },
+        {
+          "start": "07/22",
+          "end": "08/27"
+        },
+        {
+          "start": "12/22",
+          "end": "12/31"
+        }
+      ]
+    },
+    {
+      "name": "주방 및 조리실(초중고)",
+      "occupant_start": 8,
+      "occupant_end": 15,
+      "hvac_start": 8,
+      "hvac_end": 15,
+      "ventilation": 90.0,
+      "domestic_hotwater": 0,
+      "lighting_hours": 7,
+      "occupancy": 56.0,
+      "equipment": 1800,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": [
+        {
+          "start": "01/01",
+          "end": "02/14"
+        },
+        {
+          "start": "07/22",
+          "end": "08/27"
+        },
+        {
+          "start": "12/22",
+          "end": "12/31"
+        }
+      ]
+    },
+    {
+      "name": "체육시설(초중고)",
+      "occupant_start": 9,
+      "occupant_end": 16,
+      "hvac_start": 9,
+      "hvac_end": 16,
+      "ventilation": 3.0,
+      "domestic_hotwater": 220,
+      "lighting_hours": 7,
+      "occupancy": 60.0,
+      "equipment": 0,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday"
+      ],
+      "vacations": []
+    },
+    {
+      "name": "교실(어린이집)",
+      "occupant_start": 8,
+      "occupant_end": 15,
+      "hvac_start": 8,
+      "hvac_end": 15,
+      "ventilation": 10,
+      "domestic_hotwater": 30,
+      "lighting_hours": 6,
+      "occupancy": 100,
+      "equipment": 20,
+      "heating_setpoint": 20,
+      "cooling_setpoint": 26,
+      "operate_weekdays": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "vacations": []
+    }
+  ]
+}

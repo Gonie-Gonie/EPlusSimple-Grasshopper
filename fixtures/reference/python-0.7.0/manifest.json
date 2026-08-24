@@ -1,0 +1,46 @@
+{
+  "schema": "goniegonie.python-reference.manifest.v1",
+  "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+  "files": [
+    {
+      "path": "ashrae-140-modified.idf",
+      "bytes": 100715,
+      "sha256": "c682e031fe9ebc14297cd6ce805dc4ed2f7191c144410cc86f2fad9ddb919ba4"
+    },
+    {
+      "path": "ashrae-140-modified.idf-summary.json",
+      "bytes": 2459,
+      "sha256": "b37f44bb097f84cebd7bc9afbba0086b86f00b8e74440e93e753d991ec99420e"
+    },
+    {
+      "path": "ashrae-140-modified.model.json",
+      "bytes": 4555,
+      "sha256": "0076a953ce599b47be283375f9aef93b24ddb3cd4192a8bc39573061e6ec8f96"
+    },
+    {
+      "path": "fenestration-construction-database.json",
+      "bytes": 54147,
+      "sha256": "6fd2b18e1e4d464286c6f3a3a197e3c526e863e34ab392f52818435ae6872344"
+    },
+    {
+      "path": "material-database.json",
+      "bytes": 659,
+      "sha256": "45d7c88dd10661486436bed8a94e3de41eaa5713d21003e803a6b0775004f9d8"
+    },
+    {
+      "path": "metadata.json",
+      "bytes": 512,
+      "sha256": "75bb064e4084aeb71d45ba2f3dbe57d626363d949d5d06761ca081be101f8b1d"
+    },
+    {
+      "path": "profile-database.json",
+      "bytes": 13247,
+      "sha256": "f2fa189c3a785493d4e67e1513e695e1d30e32cc8680e8c181fa61645189c81a"
+    },
+    {
+      "path": "surface-construction-database.json",
+      "bytes": 836229,
+      "sha256": "1a6b4b569354dc5481cb6aa194cb57a4e65b22810bcda47aa75687acaf2d80d7"
+    }
+  ]
+}

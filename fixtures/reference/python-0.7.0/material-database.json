@@ -1,0 +1,31 @@
+{
+  "schema": "goniegonie.python-reference.material-database.v1",
+  "count": 4,
+  "unordered_sha256": "0e1465eed7511e16c804bd933d0c29d61b3e399d10d58e378604010e355544c2",
+  "items": [
+    {
+      "name": "concrete",
+      "conductivity": 2.5,
+      "density": 2400,
+      "specific_heat": 880
+    },
+    {
+      "name": "insulation",
+      "conductivity": 0.05,
+      "density": 30,
+      "specific_heat": 1500
+    },
+    {
+      "name": "gypsumboard",
+      "conductivity": 0.18,
+      "density": 800,
+      "specific_heat": 1090
+    },
+    {
+      "name": "glasswool",
+      "conductivity": 0.035,
+      "density": 19,
+      "specific_heat": 960
+    }
+  ]
+}

@@ -12,6 +12,9 @@
 *.yml text eol=lf
 *.yaml text eol=lf
 *.csv text eol=lf
+*.py text eol=lf
+*.txt text eol=lf
+*.idf text eol=lf
 
 # Preserve byte-for-byte upstream oracle payloads so their pinned SHA-256 values survive checkout.
 data/simple-dragon/** binary

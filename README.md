@@ -46,6 +46,12 @@ package locally when needed), validates Rhino 7 and Rhino 8 independently, and
 writes the generated, non-secret `.config\local.settings.json`. It is
 idempotent, so rerun it after installing Rhino to enable that version's tests.
 
+For port-equivalence work, `reference.cmd` runs the pinned historical Python
+implementation in an isolated dependency directory and writes deterministic
+database, GRM, and semantic IDF references under `temp\reference`. Use
+`reference.cmd -Mode Verify` to compare them byte-for-byte with the reviewed
+baseline in `fixtures\reference\python-0.7.0`. Python remains development-only.
+
 EnergyPlus uses a deliberate detect-only default. Setup validates the corrected
 24.2.0 build `94a887817b` at `C:\EnergyPlusV24-2-0` or under `.tools` by the
 executable, IDD, and ExpandObjects SHA-256 values. To download and verify the

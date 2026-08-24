@@ -1,0 +1,154 @@
+{
+  "schema": "goniegonie.python-reference.model-summary.v1",
+  "fixture_sha256": "8e2ff63e17af29e7429b696800dbb11a5af45817cd97724481b9152b90fc76b3",
+  "name": "ASHRAE 140 modified",
+  "address": "서울특별시 관악구",
+  "vintage": "2000-01-01T00:00:00",
+  "is_multifamily_housing": false,
+  "north_axis": 0,
+  "terrain": "Suburbs",
+  "climate": "중부1",
+  "weather": "국립중앙박물관",
+  "area": 48.0,
+  "zones": [
+    {
+      "id": "ZONE-0x000000",
+      "name": "실",
+      "area": 48.0,
+      "height": 2.7,
+      "infiltration": 1.5,
+      "light_density": 10,
+      "profile_id": "$FROM_DB$:소규모사무실",
+      "profile_name": "소규모사무실",
+      "surfaces": [
+        {
+          "id": "SURF-0x000000",
+          "name": "실_바닥",
+          "area": 48.0,
+          "azimuth": null,
+          "surface_type": "floor",
+          "boundary_condition": "ground",
+          "adjacent_zone_id": null,
+          "construction_id": "CTSF-0x000001",
+          "construction_name": "바닥",
+          "construction_type": "SurfaceConstruction",
+          "reflectance": null,
+          "fenestrations": []
+        },
+        {
+          "id": "SURF-0x000001",
+          "name": "실_북벽",
+          "area": 21.6,
+          "azimuth": 0.0,
+          "surface_type": "wall",
+          "boundary_condition": "outdoors",
+          "adjacent_zone_id": null,
+          "construction_id": "CTSF-0x000000",
+          "construction_name": "외벽",
+          "construction_type": "SurfaceConstruction",
+          "reflectance": null,
+          "fenestrations": []
+        },
+        {
+          "id": "SURF-0x000002",
+          "name": "실_서벽",
+          "area": 16.2,
+          "azimuth": 90.0,
+          "surface_type": "wall",
+          "boundary_condition": "outdoors",
+          "adjacent_zone_id": null,
+          "construction_id": "CTSF-0x000000",
+          "construction_name": "외벽",
+          "construction_type": "SurfaceConstruction",
+          "reflectance": null,
+          "fenestrations": []
+        },
+        {
+          "id": "SURF-0x000003",
+          "name": "실_남벽",
+          "area": 21.6,
+          "azimuth": 180.0,
+          "surface_type": "wall",
+          "boundary_condition": "outdoors",
+          "adjacent_zone_id": null,
+          "construction_id": "CTSF-0x000000",
+          "construction_name": "외벽",
+          "construction_type": "SurfaceConstruction",
+          "reflectance": null,
+          "fenestrations": [
+            {
+              "id": "FNST-0x000000",
+              "name": "실_남벽_창_1",
+              "area": 6,
+              "construction_id": "CTFN-0x000000",
+              "construction_name": "Clear Double-Pane Glazing",
+              "blind": null
+            },
+            {
+              "id": "FNST-0x000001",
+              "name": "실_남벽_창_2",
+              "area": 6,
+              "construction_id": "CTFN-0x000000",
+              "construction_name": "Clear Double-Pane Glazing",
+              "blind": null
+            }
+          ]
+        },
+        {
+          "id": "SURF-0x000004",
+          "name": "실_동벽",
+          "area": 16.2,
+          "azimuth": 270.0,
+          "surface_type": "wall",
+          "boundary_condition": "outdoors",
+          "adjacent_zone_id": null,
+          "construction_id": "CTSF-0x000000",
+          "construction_name": "외벽",
+          "construction_type": "SurfaceConstruction",
+          "reflectance": null,
+          "fenestrations": []
+        },
+        {
+          "id": "SURF-0x000005",
+          "name": "실_천장",
+          "area": 48.0,
+          "azimuth": null,
+          "surface_type": "ceiling",
+          "boundary_condition": "outdoors",
+          "adjacent_zone_id": null,
+          "construction_id": "CTSF-0x000002",
+          "construction_name": "천장",
+          "construction_type": "SurfaceConstruction",
+          "reflectance": null,
+          "fenestrations": []
+        }
+      ],
+      "supply_systems": [
+        {
+          "id": "SUPL-0x000000",
+          "name": "실내기-실",
+          "type": "AirHandlingUnit"
+        },
+        {
+          "id": "SUPL-0x000001",
+          "name": "바닥난방",
+          "type": "RadiantFloor"
+        }
+      ],
+      "ventilation_systems": []
+    }
+  ],
+  "source_systems": [
+    {
+      "id": "SRCE-0x000000",
+      "name": "실외기",
+      "type": "HeatPump"
+    },
+    {
+      "id": "SRCE-0x000001",
+      "name": "보보일러",
+      "type": "Boiler"
+    }
+  ],
+  "photovoltaic_systems": []
+}
