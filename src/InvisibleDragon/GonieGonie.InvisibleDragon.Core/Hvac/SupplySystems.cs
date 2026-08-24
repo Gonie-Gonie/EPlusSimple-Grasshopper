@@ -296,11 +296,24 @@ public sealed class ElectricRadiantFloor : SupplySystem
 /// </summary>
 public sealed class ElectricRadiator : SupplySystem
 {
-    public ElectricRadiator(EntityId id, string name, double radiantFraction = 0.3)
+    public ElectricRadiator(
+        EntityId id,
+        string name,
+        double? heatingCapacityWatts = null,
+        double efficiency = 1,
+        double radiantFraction = 0)
         : base(id, name, null)
     {
+        HeatingCapacityWatts = heatingCapacityWatts is null
+            ? null
+            : DomainGuard.Positive(heatingCapacityWatts.Value, nameof(heatingCapacityWatts));
+        Efficiency = DomainGuard.InRange(efficiency, 0.000001, 1, nameof(efficiency));
         RadiantFraction = DomainGuard.InRange(radiantFraction, 0, 1, nameof(radiantFraction));
     }
+
+    public double? HeatingCapacityWatts { get; }
+
+    public double Efficiency { get; }
 
     public double RadiantFraction { get; }
 
@@ -310,15 +323,23 @@ public sealed class ElectricRadiator : SupplySystem
 
     internal override SupplyIdfFragment Generate(IdfGenerationContext context, Zone zone, string availabilityScheduleName)
     {
+        DomainGuard.NotNull(context, nameof(context));
+        DomainGuard.NotNull(zone, nameof(zone));
+        availabilityScheduleName = DomainGuard.RequiredText(
+            availabilityScheduleName,
+            nameof(availabilityScheduleName));
         string name = ObjectNameFor(zone);
         IdfObject radiator = context.Create(
             "ZoneHVAC:Baseboard:RadiantConvective:Electric",
             IdfGenerationContext.Field(0, "Name", name),
             IdfGenerationContext.Field(1, "Availability Schedule Name", availabilityScheduleName),
             IdfGenerationContext.Field(2, "Heating Design Capacity Method", "HeatingDesignCapacity"),
-            IdfGenerationContext.Field(3, "Heating Design Capacity", "autosize"),
-            IdfGenerationContext.Field(7, "Efficiency", 1),
-            IdfGenerationContext.Field(8, "Fraction Radiant", RadiantFraction));
+            IdfGenerationContext.Field(3, "Heating Design Capacity", HeatingCapacityWatts ?? (object)"autosize"),
+            IdfGenerationContext.Field(4, "Heating Design Capacity Per Floor Area", null),
+            IdfGenerationContext.Field(5, "Fraction of Autosized Heating Design Capacity", 1),
+            IdfGenerationContext.Field(6, "Efficiency", Efficiency),
+            IdfGenerationContext.Field(7, "Fraction Radiant", RadiantFraction),
+            IdfGenerationContext.Field(8, "Fraction of Radiant Energy Incident on People", 0));
         return new SupplyIdfFragment(
             new[] { radiator },
             new ZoneEquipmentDescriptor(radiator.ObjectType, name, 0, 1));

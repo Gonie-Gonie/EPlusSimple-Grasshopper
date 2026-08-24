@@ -67,6 +67,15 @@ internal static class ModelDefinitionComparer
                 Nullable.Equals(left.NominalCapacityWatts, right.NominalCapacityWatts)
                 && left.PumpMotorEfficiency.Equals(right.PumpMotorEfficiency)
                 && left.SetpointTemperatureCelsius.Equals(right.SetpointTemperatureCelsius),
+            (FanCoilUnit left, FanCoilUnit right) =>
+                SourceEquals(left.Source, right.Source)
+                && left.FanTotalEfficiency.Equals(right.FanTotalEfficiency)
+                && left.FanPressureRisePascals.Equals(right.FanPressureRisePascals)
+                && left.MotorEfficiency.Equals(right.MotorEfficiency),
+            (Radiator left, Radiator right) =>
+                SourceEquals(left.Source, right.Source)
+                && Nullable.Equals(left.HeatingCapacityWatts, right.HeatingCapacityWatts)
+                && left.RadiantFraction.Equals(right.RadiantFraction),
             (AirHandlingUnit left, AirHandlingUnit right) =>
                 SourceEquals(left.Source, right.Source)
                 && left.FanTotalEfficiency.Equals(right.FanTotalEfficiency)
@@ -78,7 +87,9 @@ internal static class ModelDefinitionComparer
             (ElectricRadiantFloor left, ElectricRadiantFloor right) =>
                 left.ThrottlingRangeCelsius.Equals(right.ThrottlingRangeCelsius),
             (ElectricRadiator left, ElectricRadiator right) =>
-                left.RadiantFraction.Equals(right.RadiantFraction),
+                Nullable.Equals(left.HeatingCapacityWatts, right.HeatingCapacityWatts)
+                && left.Efficiency.Equals(right.Efficiency)
+                && left.RadiantFraction.Equals(right.RadiantFraction),
             (EnergyRecoveryVentilator left, EnergyRecoveryVentilator right) =>
                 left.SensibleEffectiveness.Equals(right.SensibleEffectiveness)
                 && left.LatentEffectiveness.Equals(right.LatentEffectiveness)
