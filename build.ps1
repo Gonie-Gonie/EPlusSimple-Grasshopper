@@ -327,30 +327,10 @@ else {
     }
     else {
         foreach ($testProject in $testProjects) {
-            $requiresRhino7 = $testProject.BaseName -match '(?i)(Rhino7|Net48)'
-            $requiresRhino8 = $testProject.BaseName -match '(?i)(Rhino8|Net8)'
-            $requiresAnyRhino = $testProject.BaseName -match '(?i)(Rhino|Grasshopper|GH\.Load)'
-
-            $skipReason = $null
-            if ($requiresRhino7 -and -not $rhino7Ready) {
-                $skipReason = 'Rhino 7 is unavailable'
-            }
-            elseif ($requiresRhino8 -and -not $rhino8Ready) {
-                $skipReason = 'Rhino 8 is unavailable'
-            }
-            elseif ($requiresAnyRhino -and -not $rhino7Ready -and -not $rhino8Ready) {
-                $skipReason = 'no Rhino runtime is available'
-            }
-
-            if ($null -ne $skipReason) {
-                Write-Warning "Skipping $($testProject.BaseName): $skipReason."
-                $skippedTestProjects += [pscustomobject] [ordered] @{
-                    project = $testProject.FullName
-                    reason = $skipReason
-                }
-                continue
-            }
-
+            # Managed xUnit projects carry the RhinoCommon/Grasshopper NuGet
+            # runtime assets they need and must also run on clean CI workers.
+            # Only the dedicated native-host smoke executables below depend on
+            # an installed Rhino generation.
             $projectResults = Join-Path $testResultsRoot $testProject.BaseName
             Ensure-Directory -Path $projectResults
             $safeLogName = ($testProject.BaseName -replace '[^A-Za-z0-9_.-]', '_') + '.log'
@@ -380,31 +360,97 @@ else {
         }
     }
 
-    # RhinoCommon's native geometry API must be hosted on an STA thread. The
-    # dedicated executable provides that process boundary and initializes the
-    # installed Rhino 8 runtime through Rhino.Inside before exercising Breps.
-    $rhinoSmokeProject = Join-Path $repositoryRoot 'tools\rhino-smoke\GonieGonie.InvisibleDragon.Rhino.Smoke.csproj'
-    if (Test-Path -LiteralPath $rhinoSmokeProject -PathType Leaf) {
-        if ($rhino8Ready) {
-            $rhinoSmokeExecutable = Join-Path $buildOutputRoot (
+    # RhinoCommon's native geometry API must be hosted on an STA thread. These
+    # dedicated executables initialize Rhino 8 through Rhino.Inside and cover
+    # both Dragon geometry adapters with real Breps.
+    $rhinoSmokeChecks = @(
+        [pscustomobject] [ordered] @{
+            project = Join-Path $repositoryRoot 'tools\rhino-smoke\GonieGonie.InvisibleDragon.Rhino.Smoke.csproj'
+            executable = Join-Path $buildOutputRoot (
                 Join-Path 'GonieGonie.InvisibleDragon.Rhino.Smoke' (
                     Join-Path $Configuration 'net8.0-windows\GonieGonie.InvisibleDragon.Rhino.Smoke.exe'))
-            if ($PSCmdlet.ShouldProcess($rhinoSmokeExecutable, 'Run Rhino 8 STA geometry smoke checks')) {
-                if (-not (Test-Path -LiteralPath $rhinoSmokeExecutable -PathType Leaf)) {
-                    throw "The Rhino smoke executable was not built at '$rhinoSmokeExecutable'."
+            label = 'GonieGonie.InvisibleDragon.Rhino.Smoke'
+        },
+        [pscustomobject] [ordered] @{
+            project = Join-Path $repositoryRoot 'tools\simpledragon-rhino-smoke\GonieGonie.SimpleDragon.Rhino.Smoke.csproj'
+            executable = Join-Path $buildOutputRoot (
+                Join-Path 'GonieGonie.SimpleDragon.Rhino.Smoke' (
+                    Join-Path $Configuration 'net8.0-windows\GonieGonie.SimpleDragon.Rhino.Smoke.exe'))
+            label = 'GonieGonie.SimpleDragon.Rhino.Smoke'
+        }
+    )
+    foreach ($rhinoSmoke in $rhinoSmokeChecks) {
+        if (-not (Test-Path -LiteralPath $rhinoSmoke.project -PathType Leaf)) {
+            continue
+        }
+
+        if ($rhino8Ready) {
+            if ($PSCmdlet.ShouldProcess($rhinoSmoke.executable, "Run $($rhinoSmoke.label) Rhino 8 STA geometry smoke checks")) {
+                if (-not (Test-Path -LiteralPath $rhinoSmoke.executable -PathType Leaf)) {
+                    throw "The Rhino smoke executable was not built at '$($rhinoSmoke.executable)'."
                 }
 
                 Invoke-LoggedNativeCommand `
-                    -FilePath $rhinoSmokeExecutable `
-                    -LogPath (Join-Path $logsRoot 'test-GonieGonie.InvisibleDragon.Rhino.Smoke.log') `
-                    -FailureMessage 'Rhino 8 geometry smoke checks failed'
+                    -FilePath $rhinoSmoke.executable `
+                    -LogPath (Join-Path $logsRoot ("test-$($rhinoSmoke.label).log")) `
+                    -FailureMessage "$($rhinoSmoke.label) Rhino 8 geometry smoke checks failed"
             }
-            $executedTestProjects += $rhinoSmokeProject
+            $executedTestProjects += $rhinoSmoke.project
         }
         else {
             $skippedTestProjects += [pscustomobject] [ordered] @{
-                project = $rhinoSmokeProject
+                project = $rhinoSmoke.project
                 reason = 'Rhino 8 is unavailable'
+            }
+        }
+    }
+
+    # Loading a GHA is host behavior, not a managed reflection substitute. Run
+    # the repository gate in every installed Rhino generation and verify that a
+    # Grasshopper document can be saved and reopened with persistent Dragon Goo.
+    $grasshopperSmokeScript = Join-Path $repositoryRoot 'tools\grasshopper-smoke\run.ps1'
+    if (Test-Path -LiteralPath $grasshopperSmokeScript -PathType Leaf) {
+        if ($rhino7Ready -or $rhino8Ready) {
+            $grasshopperTarget = if ($rhino7Ready -and $rhino8Ready) {
+                'All'
+            }
+            elseif ($rhino8Ready) {
+                'Rhino8'
+            }
+            else {
+                'Rhino7'
+            }
+            $windowsPowerShell = Join-Path $PSHOME 'powershell.exe'
+            $grasshopperArguments = @(
+                '-NoLogo',
+                '-NoProfile',
+                '-ExecutionPolicy', 'Bypass',
+                '-File', $grasshopperSmokeScript,
+                '-Target', $grasshopperTarget
+            )
+            if ($Configuration -eq 'Release') {
+                $grasshopperArguments += '-SkipPluginBuild'
+            }
+            if ($rhino8Ready) {
+                $grasshopperArguments += @('-Rhino8Exe', [string] (Get-PropertyValue -Object $rhino8 -Name 'executable'))
+            }
+            if ($rhino7Ready) {
+                $grasshopperArguments += @('-Rhino7Exe', [string] (Get-PropertyValue -Object $rhino7 -Name 'executable'))
+            }
+
+            if ($PSCmdlet.ShouldProcess($grasshopperSmokeScript, "Run Grasshopper real-host gate for $grasshopperTarget")) {
+                Invoke-LoggedNativeCommand `
+                    -FilePath $windowsPowerShell `
+                    -ArgumentList $grasshopperArguments `
+                    -LogPath (Join-Path $logsRoot 'test-GonieGonie.Dragons.Grasshopper.Host.log') `
+                    -FailureMessage 'Grasshopper real-host smoke checks failed'
+            }
+            $executedTestProjects += $grasshopperSmokeScript
+        }
+        else {
+            $skippedTestProjects += [pscustomobject] [ordered] @{
+                project = $grasshopperSmokeScript
+                reason = 'no Rhino runtime is available'
             }
         }
     }

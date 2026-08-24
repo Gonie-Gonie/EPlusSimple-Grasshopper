@@ -5,6 +5,7 @@
     <RootNamespace>GonieGonie.SimpleDragon.Grasshopper</RootNamespace>
     <Description>Grasshopper data types for SimpleDragon models and results.</Description>
     <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>

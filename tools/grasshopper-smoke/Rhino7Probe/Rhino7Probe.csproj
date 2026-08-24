@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>GonieGonie.Dragons.Grasshopper.Rhino7Probe</AssemblyName>
+    <RootNamespace>GonieGonie.Dragons.Grasshopper.Rhino7Probe</RootNamespace>
+    <NoWarn>$(NoWarn);NU1608</NoWarn>
+    <Rhino7SystemDir Condition="'$(Rhino7SystemDir)' == ''">C:\Program Files\Rhino 7\System</Rhino7SystemDir>
+    <Rhino7GrasshopperDir Condition="'$(Rhino7GrasshopperDir)' == ''">C:\Program Files\Rhino 7\Plug-ins\Grasshopper</Rhino7GrasshopperDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\SimpleDragon\GonieGonie.SimpleDragon.Rhino\GonieGonie.SimpleDragon.Rhino.csproj" />
+    <PackageReference Include="Rhino.Inside" VersionOverride="7.0.0" />
+    <PackageReference Include="RhinoCommon" VersionOverride="7.0.20314.3001" ExcludeAssets="all" />
+    <PackageReference Include="Grasshopper" VersionOverride="7.0.20314.3001" ExcludeAssets="all" />
+    <PackageReference Include="RhinoWindows" VersionOverride="7.0.20314.3001" ExcludeAssets="all" />
+    <Reference Include="RhinoCommon">
+      <HintPath>$(Rhino7SystemDir)\RhinoCommon.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Grasshopper">
+      <HintPath>$(Rhino7GrasshopperDir)\Grasshopper.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="GH_IO">
+      <HintPath>$(Rhino7GrasshopperDir)\GH_IO.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+</Project>

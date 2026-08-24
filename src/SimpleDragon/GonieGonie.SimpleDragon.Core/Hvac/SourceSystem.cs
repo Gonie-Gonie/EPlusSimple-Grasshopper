@@ -137,6 +137,8 @@ public sealed class SourceSystem
 
     public double? BoilerEfficiency { get; }
 
+    internal IReadOnlyCollection<string> GrmFields => _grmFields;
+
     internal bool HasGrmField(string name)
     {
         return _grmFields.Contains(name);

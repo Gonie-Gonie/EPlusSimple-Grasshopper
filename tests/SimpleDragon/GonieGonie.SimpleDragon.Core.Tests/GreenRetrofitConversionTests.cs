@@ -1,6 +1,7 @@
 using GonieGonie.InvisibleDragon.Hvac;
 using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Model;
+using DragonConstruction = GonieGonie.InvisibleDragon.Construction.Construction;
 using DragonSurface = GonieGonie.InvisibleDragon.Shape.Surface;
 
 namespace GonieGonie.SimpleDragon.Tests;
@@ -21,6 +22,12 @@ public sealed class GreenRetrofitConversionTests
         Assert.Single(model.Zones);
         Assert.Equal(6, model.Surfaces.Count);
         Assert.Equal(2, model.Surfaces.Sum(surface => surface.Openings.Count));
+        Assert.Equal(6, result.SurfaceConversions.Count);
+        Assert.All(result.SurfaceConversions, item =>
+        {
+            Assert.Equal(item.SourceSurfaceId, item.ConvertedSurfaceId);
+            Assert.False(item.IsSynthesizedCounterpart);
+        });
         Assert.Equal(48d, model.Zones[0].FloorArea, 8);
         Assert.Equal(0.105d, model.Zones[0].InfiltrationAirChangesPerHour, 8);
         Assert.Equal(4d * 48d / 3600d, model.Zones[0].OutdoorAirFlowCubicMetresPerSecond, 8);
@@ -77,6 +84,292 @@ public sealed class GreenRetrofitConversionTests
         Assert.All(wall.Openings, opening => Assert.Equal(6d, opening.Polygon.Area, 8));
         Assert.False(wall.Openings[0].Polygon.IntersectsInterior(wall.Openings[1].Polygon));
         Assert.True(wall.Validate().IsValid, Describe(wall.Validate().Diagnostics));
+    }
+
+    [Fact]
+    public void StandardProfileDisplayNameMayContainWhitespace()
+    {
+        GreenRetrofitModel source = GrmReader.ReadFile(Fixture("grm")).RequireModel();
+        Zone originalZone = Assert.Single(source.Zones);
+        UsageProfile originalProfile = Assert.IsType<UsageProfile>(originalZone.Profile);
+        var operation = Enum.GetValues<UsageDay>()
+            .ToDictionary(day => day, originalProfile.OperatesOn);
+        var spacedProfile = new UsageProfile(
+            "Office profile with spaces",
+            originalProfile.OccupantStart,
+            originalProfile.OccupantEnd,
+            originalProfile.HvacStart,
+            originalProfile.HvacEnd,
+            originalProfile.Ventilation,
+            originalProfile.DomesticHotWater,
+            originalProfile.LightingHours,
+            originalProfile.Occupancy,
+            originalProfile.Equipment,
+            originalProfile.HeatingSetpoint,
+            originalProfile.CoolingSetpoint,
+            operation,
+            originalProfile.Vacations,
+            UsageProfileSource.Standard);
+        var zone = new Zone(
+            originalZone.Name,
+            originalZone.FloorNumber,
+            originalZone.Height,
+            originalZone.Surfaces,
+            spacedProfile.Name,
+            spacedProfile,
+            originalZone.LightDensity,
+            id: originalZone.Id);
+        var model = new GreenRetrofitModel(
+            source.Name,
+            source.NorthAxis,
+            source.Address,
+            source.Vintage,
+            source.IsMultifamilyHousing,
+            new[] { new BuildingFloor(zone.FloorNumber, new[] { zone }) },
+            source.Materials,
+            source.SurfaceConstructions,
+            source.FenestrationConstructions,
+            weather: source.Weather);
+
+        GreenRetrofitConversionResult result = GreenRetrofitConverter.Convert(model);
+
+        Assert.True(result.Success, Describe(result));
+        Assert.Equal(spacedProfile.Id, Assert.Single(result.RequireEnergyModel().Zones).Profile.Id);
+        Assert.Equal("$FROM_DB$:Office profile with spaces",
+            Assert.Single(result.RequireEnergyModel().Zones).Profile.Name);
+    }
+
+    [Fact]
+    public void ReciprocalZoneSurfacesNormalizeToExactlyOneMirroredPair()
+    {
+        GreenRetrofitModel template = GrmReader.ReadFile(Fixture("grm")).RequireModel();
+        SurfaceConstruction construction = template.SurfaceConstructions[0];
+        FenestrationConstruction glazing = template.FenestrationConstructions
+            .First(item => item.IsTransparent);
+        var openingA = new Fenestration(
+            "opening A",
+            FenestrationType.Window,
+            2d,
+            glazing.Id.Value,
+            glazing,
+            BlindType.Shade,
+            new GonieGonie.BuildingEnergy.Contracts.EntityId("OPEN-A"));
+        var openingB = new Fenestration(
+            "opening B",
+            FenestrationType.Window,
+            2d,
+            glazing.Id.Value,
+            glazing,
+            BlindType.Shade,
+            new GonieGonie.BuildingEnergy.Contracts.EntityId("OPEN-B"));
+        Surface surfaceA = ZoneBoundary(
+            "SURFACE-A",
+            "ZONE-B",
+            12d,
+            construction,
+            new[] { openingA });
+        Surface surfaceB = ZoneBoundary(
+            "SURFACE-B",
+            "ZONE-A",
+            12d,
+            construction,
+            new[] { openingB });
+        GreenRetrofitModel source = AdjacencyModel(template, new[] { surfaceA }, new[] { surfaceB });
+
+        GreenRetrofitConversionResult result = GreenRetrofitConverter.Convert(source);
+
+        Assert.True(result.Success, Describe(result));
+        EnergyModel converted = result.RequireEnergyModel();
+        Assert.Equal(2, converted.Surfaces.Count);
+        Assert.DoesNotContain(converted.Surfaces, item =>
+            item.Id.Value.StartsWith("CLONE:", StringComparison.Ordinal));
+        DragonSurface convertedA = Assert.Single(converted.Surfaces, item => item.Id.Equals(surfaceA.Id));
+        DragonSurface convertedB = Assert.Single(converted.Surfaces, item => item.Id.Equals(surfaceB.Id));
+        Assert.Equal(convertedB.Id, convertedA.Boundary.AdjacentSurfaceId);
+        Assert.Equal(convertedA.Id, convertedB.Boundary.AdjacentSurfaceId);
+        Assert.True(convertedA.Polygon.IsGeometricallyEquivalentTo(
+            convertedB.Polygon,
+            allowReversedWinding: true));
+        Assert.True(convertedA.Normal.Dot(convertedB.Normal) < 0d);
+        Assert.Equal(openingA.Id, Assert.Single(convertedA.Openings).Id);
+        Assert.Equal(openingB.Id, Assert.Single(convertedB.Openings).Id);
+        Assert.True(convertedA.Openings[0].Polygon.IsGeometricallyEquivalentTo(
+            convertedB.Openings[0].Polygon,
+            allowReversedWinding: true));
+        DragonConstruction firstConstruction = Assert.IsType<DragonConstruction>(convertedA.Construction);
+        DragonConstruction secondConstruction = Assert.IsType<DragonConstruction>(convertedB.Construction);
+        Assert.Equal(firstConstruction.Layers.Reverse(), secondConstruction.Layers);
+        Assert.Equal(2, result.SurfaceConversions.Count);
+        Assert.All(result.SurfaceConversions, item =>
+        {
+            Assert.Equal(item.SourceZoneId, item.ConvertedZoneId);
+            Assert.Equal(item.SourceSurfaceId, item.ConvertedSurfaceId);
+            Assert.False(item.IsSynthesizedCounterpart);
+        });
+        Assert.True(converted.Validate().IsValid, Describe(converted.Validate().Diagnostics));
+    }
+
+    [Fact]
+    public void OneSidedZoneSurfaceSynthesizesExactlyOneMappedCounterpart()
+    {
+        GreenRetrofitModel template = GrmReader.ReadFile(Fixture("grm")).RequireModel();
+        SurfaceConstruction construction = template.SurfaceConstructions[0];
+        Surface sourceSurface = ZoneBoundary("SURFACE-A", "ZONE-B", 12d, construction);
+        GreenRetrofitModel source = AdjacencyModel(
+            template,
+            new[] { sourceSurface },
+            Array.Empty<Surface>());
+
+        GreenRetrofitConversionResult result = GreenRetrofitConverter.Convert(source);
+
+        Assert.True(result.Success, Describe(result));
+        EnergyModel converted = result.RequireEnergyModel();
+        Assert.Equal(2, converted.Surfaces.Count);
+        DragonSurface original = Assert.Single(converted.Surfaces, item => item.Id.Equals(sourceSurface.Id));
+        DragonSurface counterpart = Assert.Single(converted.Surfaces, item =>
+            item.Id.Value == "CLONE:" + sourceSurface.Id.Value);
+        Assert.Equal(counterpart.Id, original.Boundary.AdjacentSurfaceId);
+        Assert.Equal(original.Id, counterpart.Boundary.AdjacentSurfaceId);
+        Assert.Equal(2, result.SurfaceConversions.Count);
+        GreenRetrofitSurfaceConversion synthesized = Assert.Single(
+            result.SurfaceConversions,
+            item => item.IsSynthesizedCounterpart);
+        Assert.Equal(sourceSurface.Id, synthesized.SourceSurfaceId);
+        Assert.Equal(new GonieGonie.BuildingEnergy.Contracts.EntityId("ZONE-A"), synthesized.SourceZoneId);
+        Assert.Equal(new GonieGonie.BuildingEnergy.Contracts.EntityId("ZONE-B"), synthesized.ConvertedZoneId);
+        Assert.Equal(counterpart.Id, synthesized.ConvertedSurfaceId);
+    }
+
+    [Fact]
+    public void ReciprocalDeclarationsWithDifferentGeometryFailWithMismatchDiagnostic()
+    {
+        GreenRetrofitModel template = GrmReader.ReadFile(Fixture("grm")).RequireModel();
+        SurfaceConstruction construction = template.SurfaceConstructions[0];
+        GreenRetrofitModel source = AdjacencyModel(
+            template,
+            new[] { ZoneBoundary("SURFACE-A", "ZONE-B", 12d, construction) },
+            new[] { ZoneBoundary("SURFACE-B", "ZONE-A", 13d, construction) });
+
+        GreenRetrofitConversionResult result = GreenRetrofitConverter.Convert(source);
+
+        Assert.False(result.Success);
+        Assert.Null(result.EnergyModel);
+        Assert.Contains(result.Diagnostics, item => item.Code == "SD.CONVERSION.ADJACENCY_MISMATCH");
+    }
+
+    [Fact]
+    public void IndistinguishableReciprocalCandidatesFailWithAmbiguityDiagnostic()
+    {
+        GreenRetrofitModel template = GrmReader.ReadFile(Fixture("grm")).RequireModel();
+        SurfaceConstruction construction = template.SurfaceConstructions[0];
+        GreenRetrofitModel source = AdjacencyModel(
+            template,
+            new[]
+            {
+                ZoneBoundary("SURFACE-A1", "ZONE-B", 12d, construction),
+                ZoneBoundary("SURFACE-A2", "ZONE-B", 12d, construction),
+            },
+            new[]
+            {
+                ZoneBoundary("SURFACE-B1", "ZONE-A", 12d, construction),
+                ZoneBoundary("SURFACE-B2", "ZONE-A", 12d, construction),
+            });
+
+        GreenRetrofitConversionResult result = GreenRetrofitConverter.Convert(source);
+
+        Assert.False(result.Success);
+        Assert.Null(result.EnergyModel);
+        Assert.Contains(result.Diagnostics, item => item.Code == "SD.CONVERSION.ADJACENCY_AMBIGUOUS");
+    }
+
+    [Fact]
+    public void DistinctReciprocalPairsMatchByGeometryInsteadOfInputOrder()
+    {
+        GreenRetrofitModel template = GrmReader.ReadFile(Fixture("grm")).RequireModel();
+        SurfaceConstruction construction = template.SurfaceConstructions[0];
+        GreenRetrofitModel source = AdjacencyModel(
+            template,
+            new[]
+            {
+                ZoneBoundary("SURFACE-A12", "ZONE-B", 12d, construction),
+                ZoneBoundary("SURFACE-A18", "ZONE-B", 18d, construction),
+            },
+            new[]
+            {
+                ZoneBoundary("SURFACE-B18", "ZONE-A", 18d, construction),
+                ZoneBoundary("SURFACE-B12", "ZONE-A", 12d, construction),
+            });
+
+        GreenRetrofitConversionResult result = GreenRetrofitConverter.Convert(source);
+
+        Assert.True(result.Success, Describe(result));
+        EnergyModel converted = result.RequireEnergyModel();
+        Assert.Equal(4, converted.Surfaces.Count);
+        Assert.Equal(
+            new GonieGonie.BuildingEnergy.Contracts.EntityId("SURFACE-B12"),
+            Assert.Single(converted.Surfaces, item => item.Id.Value == "SURFACE-A12")
+                .Boundary.AdjacentSurfaceId);
+        Assert.Equal(
+            new GonieGonie.BuildingEnergy.Contracts.EntityId("SURFACE-B18"),
+            Assert.Single(converted.Surfaces, item => item.Id.Value == "SURFACE-A18")
+                .Boundary.AdjacentSurfaceId);
+    }
+
+    private static Surface ZoneBoundary(
+        string id,
+        string adjacentZoneId,
+        double area,
+        SurfaceConstruction construction,
+        IEnumerable<Fenestration>? openings = null)
+    {
+        return new Surface(
+            id,
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Zone,
+            area,
+            null,
+            construction.Id.Value,
+            construction,
+            openings,
+            adjacentZoneId: adjacentZoneId,
+            id: new GonieGonie.BuildingEnergy.Contracts.EntityId(id));
+    }
+
+    private static GreenRetrofitModel AdjacencyModel(
+        GreenRetrofitModel template,
+        IEnumerable<Surface> firstSurfaces,
+        IEnumerable<Surface> secondSurfaces)
+    {
+        Zone templateZone = Assert.Single(template.Zones);
+        var first = new Zone(
+            "zone A",
+            1,
+            templateZone.Height,
+            firstSurfaces,
+            templateZone.ProfileName,
+            templateZone.Profile,
+            templateZone.LightDensity,
+            id: new GonieGonie.BuildingEnergy.Contracts.EntityId("ZONE-A"));
+        var second = new Zone(
+            "zone B",
+            1,
+            templateZone.Height,
+            secondSurfaces,
+            templateZone.ProfileName,
+            templateZone.Profile,
+            templateZone.LightDensity,
+            id: new GonieGonie.BuildingEnergy.Contracts.EntityId("ZONE-B"));
+        return new GreenRetrofitModel(
+            "adjacency regression",
+            template.NorthAxis,
+            template.Address,
+            template.Vintage,
+            template.IsMultifamilyHousing,
+            new[] { new BuildingFloor(1, new[] { first, second }) },
+            template.Materials,
+            template.SurfaceConstructions,
+            template.FenestrationConstructions,
+            weather: template.Weather);
     }
 
     private static string Fixture(string extension)

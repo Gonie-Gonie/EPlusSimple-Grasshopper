@@ -102,6 +102,8 @@ public sealed class SupplySystem
 
     public double? HeatingCapacity { get; }
 
+    internal IReadOnlyCollection<string> GrmFields => _grmFields;
+
     public bool Heatable => Type switch
     {
         SupplySystemType.ElectricRadiator => true,

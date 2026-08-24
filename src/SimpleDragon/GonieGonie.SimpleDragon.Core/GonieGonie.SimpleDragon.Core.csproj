@@ -41,5 +41,6 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="GonieGonie.SimpleDragon.Core.Tests" />
+    <InternalsVisibleTo Include="GonieGonie.SimpleDragon.Grasshopper.Types" />
   </ItemGroup>
 </Project>

@@ -61,6 +61,39 @@ public sealed class GreenRetrofitConversionOptions
 }
 
 /// <summary>
+/// Relates one source GRM surface to a surface emitted in the InvisibleDragon model.
+/// </summary>
+public sealed class GreenRetrofitSurfaceConversion
+{
+    internal GreenRetrofitSurfaceConversion(
+        EntityId sourceZoneId,
+        EntityId sourceSurfaceId,
+        EntityId convertedZoneId,
+        EntityId convertedSurfaceId,
+        bool isSynthesizedCounterpart)
+    {
+        SourceZoneId = sourceZoneId;
+        SourceSurfaceId = sourceSurfaceId;
+        ConvertedZoneId = convertedZoneId;
+        ConvertedSurfaceId = convertedSurfaceId;
+        IsSynthesizedCounterpart = isSynthesizedCounterpart;
+    }
+
+    public EntityId SourceZoneId { get; }
+
+    public EntityId SourceSurfaceId { get; }
+
+    public EntityId ConvertedZoneId { get; }
+
+    public EntityId ConvertedSurfaceId { get; }
+
+    /// <summary>
+    /// Gets whether this output is the missing reciprocal face synthesized from the source surface.
+    /// </summary>
+    public bool IsSynthesizedCounterpart { get; }
+}
+
+/// <summary>
 /// A non-throwing conversion result that retains actionable compatibility diagnostics.
 /// </summary>
 public sealed class GreenRetrofitConversionResult
@@ -68,11 +101,13 @@ public sealed class GreenRetrofitConversionResult
     internal GreenRetrofitConversionResult(
         EnergyModel? energyModel,
         WeatherSelection? weather,
-        IReadOnlyList<Diagnostic> diagnostics)
+        IReadOnlyList<Diagnostic> diagnostics,
+        IReadOnlyList<GreenRetrofitSurfaceConversion> surfaceConversions)
     {
         EnergyModel = energyModel;
         Weather = weather;
         Diagnostics = diagnostics;
+        SurfaceConversions = surfaceConversions;
     }
 
     public EnergyModel? EnergyModel { get; }
@@ -80,6 +115,11 @@ public sealed class GreenRetrofitConversionResult
     public WeatherSelection? Weather { get; }
 
     public IReadOnlyList<Diagnostic> Diagnostics { get; }
+
+    /// <summary>
+    /// Gets deterministic source-to-output surface relationships, including synthesized counterparts.
+    /// </summary>
+    public IReadOnlyList<GreenRetrofitSurfaceConversion> SurfaceConversions { get; }
 
     public bool Success => EnergyModel is not null && Diagnostics.All(item => !item.IsFailure);
 
@@ -140,6 +180,7 @@ public static class GreenRetrofitConverter
         private readonly Dictionary<string, DragonNoMassConstruction> _doorConstructions = new(StringComparer.Ordinal);
         private readonly Dictionary<string, DragonProfile> _profiles = new(StringComparer.Ordinal);
         private readonly Dictionary<string, DragonHvacSource> _sources = new(StringComparer.Ordinal);
+        private readonly List<GreenRetrofitSurfaceConversion> _surfaceConversions = new();
 
         public Converter(GreenRetrofitModel model, GreenRetrofitConversionOptions options)
         {
@@ -157,13 +198,7 @@ public static class GreenRetrofitConverter
                     _ => new List<DragonSurface>(),
                     StringComparer.Ordinal);
 
-                foreach (Zone zone in _model.Zones)
-                {
-                    foreach (Surface surface in zone.Surfaces)
-                    {
-                        AddSurface(zone, surface, weather, surfacesByZone);
-                    }
-                }
+                AddSurfaces(weather, surfacesByZone);
 
                 if (_diagnostics.Any(item => item.IsFailure))
                 {
@@ -209,10 +244,17 @@ public static class GreenRetrofitConverter
 
         private GreenRetrofitConversionResult Result(EnergyModel? model, WeatherSelection? weather)
         {
+            GreenRetrofitSurfaceConversion[] surfaceConversions = model is null
+                ? Array.Empty<GreenRetrofitSurfaceConversion>()
+                : _surfaceConversions
+                    .OrderBy(item => item.ConvertedZoneId.Value, StringComparer.Ordinal)
+                    .ThenBy(item => item.ConvertedSurfaceId.Value, StringComparer.Ordinal)
+                    .ToArray();
             return new GreenRetrofitConversionResult(
                 model,
                 weather,
-                new ReadOnlyCollection<Diagnostic>(_diagnostics.ToArray()));
+                new ReadOnlyCollection<Diagnostic>(_diagnostics.ToArray()),
+                new ReadOnlyCollection<GreenRetrofitSurfaceConversion>(surfaceConversions));
         }
 
         private WeatherSelection? ResolveWeather()
@@ -229,12 +271,67 @@ public static class GreenRetrofitConverter
             return lookup.Value;
         }
 
-        private void AddSurface(
+        private void AddSurfaces(
+            WeatherSelection? weather,
+            Dictionary<string, List<DragonSurface>> surfacesByZone)
+        {
+            var zonesById = _model.Zones.ToDictionary(
+                zone => zone.Id.Value,
+                StringComparer.Ordinal);
+            var adjacencyEntries = new List<SurfaceEntry>();
+            foreach (Zone zone in _model.Zones)
+            {
+                for (int index = 0; index < zone.Surfaces.Count; index++)
+                {
+                    Surface surface = zone.Surfaces[index];
+                    if (surface.BoundaryCondition != SurfaceBoundaryCondition.Zone)
+                    {
+                        AddNonAdjacentSurface(zone, surface, weather, surfacesByZone);
+                        continue;
+                    }
+
+                    string? adjacentZoneId = surface.AdjacentZoneId;
+                    if (string.IsNullOrWhiteSpace(adjacentZoneId)
+                        || !zonesById.TryGetValue(adjacentZoneId!, out Zone? adjacentZone))
+                    {
+                        Error(
+                            "SD.CONVERSION.ADJACENT_ZONE_NOT_FOUND",
+                            "Surface '" + surface.Id.Value + "' references an unavailable adjacent zone.",
+                            "Use the ID of a zone contained in the GRM building.",
+                            surface.Id);
+                        continue;
+                    }
+
+                    if (StringComparer.Ordinal.Equals(zone.Id.Value, adjacentZone.Id.Value))
+                    {
+                        Error(
+                            "SD.CONVERSION.ADJACENCY_SELF_REFERENCE",
+                            "Surface '" + surface.Id.Value + "' references its own zone as adjacent.",
+                            "Reference a distinct zone or use an adiabatic boundary.",
+                            surface.Id);
+                        continue;
+                    }
+
+                    adjacencyEntries.Add(new SurfaceEntry(zone, surface, adjacentZone, index));
+                }
+            }
+
+            foreach (IGrouping<ZonePairKey, SurfaceEntry> group in adjacencyEntries
+                .GroupBy(entry => ZonePairKey.Create(entry.Zone.Id, entry.AdjacentZone.Id))
+                .OrderBy(item => item.Key.FirstZoneId, StringComparer.Ordinal)
+                .ThenBy(item => item.Key.SecondZoneId, StringComparer.Ordinal))
+            {
+                NormalizeAdjacencyGroup(group.Key, group.ToArray(), weather, surfacesByZone);
+            }
+        }
+
+        private void AddNonAdjacentSurface(
             Zone zone,
             Surface surface,
             WeatherSelection? weather,
             Dictionary<string, List<DragonSurface>> surfacesByZone)
         {
+            int diagnosticStart = _diagnostics.Count;
             DragonPlanarPolygon polygon = CreatePolygon(surface, zone.Height);
             DragonSurfaceConstruction? construction = ResolveConstruction(zone, surface, weather);
             if (construction is null)
@@ -243,45 +340,8 @@ public static class GreenRetrofitConverter
             }
 
             IReadOnlyList<DragonOpening> openings = ConvertOpenings(surface, polygon);
-            if (_diagnostics.Any(item => item.IsFailure && Equals(item.ObjectId, surface.Id)))
+            if (_diagnostics.Skip(diagnosticStart).Any(item => item.IsFailure))
             {
-                return;
-            }
-
-            if (surface.BoundaryCondition == SurfaceBoundaryCondition.Zone
-                || surface.BoundaryCondition == SurfaceBoundaryCondition.AdjacentSpace)
-            {
-                string? adjacentZoneId = surface.AdjacentZoneId;
-                if (string.IsNullOrWhiteSpace(adjacentZoneId)
-                    || !surfacesByZone.TryGetValue(adjacentZoneId!, out List<DragonSurface>? adjacentSurfaces))
-                {
-                    Error(
-                        "SD.CONVERSION.ADJACENT_ZONE_NOT_FOUND",
-                        "Surface '" + surface.Id.Value + "' references an unavailable adjacent zone.",
-                        "Use the ID of a zone contained in the GRM building.",
-                        surface.Id);
-                    return;
-                }
-
-                EntityId cloneId = new("CLONE:" + surface.Id.Value);
-                DragonSurface original = new(
-                    surface.Id,
-                    surface.Id.Value,
-                    ConvertSurfaceType(surface.Type),
-                    construction,
-                    DragonSurfaceBoundary.AdjacentTo(cloneId),
-                    polygon,
-                    openings);
-                DragonSurface clone = new(
-                    cloneId,
-                    cloneId.Value,
-                    FlipSurfaceType(surface.Type),
-                    ReverseConstruction(construction),
-                    DragonSurfaceBoundary.AdjacentTo(surface.Id),
-                    polygon.Reverse(),
-                    CloneOpenings(openings));
-                surfacesByZone[zone.Id.Value].Add(original);
-                adjacentSurfaces.Add(clone);
                 return;
             }
 
@@ -293,6 +353,242 @@ public static class GreenRetrofitConverter
                 ConvertBoundary(surface.BoundaryCondition),
                 polygon,
                 openings));
+            AddSurfaceConversion(zone.Id, surface.Id, zone.Id, surface.Id, false);
+        }
+
+        private void NormalizeAdjacencyGroup(
+            ZonePairKey key,
+            IReadOnlyList<SurfaceEntry> entries,
+            WeatherSelection? weather,
+            Dictionary<string, List<DragonSurface>> surfacesByZone)
+        {
+            var first = entries
+                .Where(entry => StringComparer.Ordinal.Equals(entry.Zone.Id.Value, key.FirstZoneId))
+                .OrderBy(entry => entry.Surface.Id.Value, StringComparer.Ordinal)
+                .ThenBy(entry => entry.SurfaceIndex)
+                .ToList();
+            var second = entries
+                .Where(entry => StringComparer.Ordinal.Equals(entry.Zone.Id.Value, key.SecondZoneId))
+                .OrderBy(entry => entry.Surface.Id.Value, StringComparer.Ordinal)
+                .ThenBy(entry => entry.SurfaceIndex)
+                .ToList();
+
+            if (first.Count == 0 || second.Count == 0)
+            {
+                foreach (SurfaceEntry entry in first.Concat(second))
+                {
+                    AddOneSidedAdjacencySurface(entry, weather, surfacesByZone);
+                }
+
+                return;
+            }
+
+            var remainingFirst = new List<SurfaceEntry>(first);
+            var remainingSecond = new List<SurfaceEntry>(second);
+            while (true)
+            {
+                var pairs = remainingFirst
+                    .Select(left => new
+                    {
+                        Left = left,
+                        Candidates = remainingSecond
+                            .Where(right => AreReciprocalGeometriesCompatible(left, right))
+                            .ToArray(),
+                    })
+                    .Where(item => item.Candidates.Length == 1)
+                    .Select(item => new { item.Left, Right = item.Candidates[0] })
+                    .Where(pair => remainingFirst.Count(left =>
+                        AreReciprocalGeometriesCompatible(left, pair.Right)) == 1)
+                    .ToArray();
+                if (pairs.Length == 0)
+                {
+                    break;
+                }
+
+                foreach (var pair in pairs)
+                {
+                    AddReciprocalAdjacencyPair(pair.Left, pair.Right, weather, surfacesByZone);
+                    remainingFirst.Remove(pair.Left);
+                    remainingSecond.Remove(pair.Right);
+                }
+            }
+
+            if (remainingFirst.Count == 0 || remainingSecond.Count == 0)
+            {
+                foreach (SurfaceEntry entry in remainingFirst.Concat(remainingSecond))
+                {
+                    AddOneSidedAdjacencySurface(entry, weather, surfacesByZone);
+                }
+
+                return;
+            }
+
+            bool ambiguous = remainingFirst.Any(left => remainingSecond.Any(right =>
+                AreReciprocalGeometriesCompatible(left, right)));
+            string firstIds = string.Join(", ", remainingFirst.Select(item => item.Surface.Id.Value));
+            string secondIds = string.Join(", ", remainingSecond.Select(item => item.Surface.Id.Value));
+            if (ambiguous)
+            {
+                Error(
+                    "SD.CONVERSION.ADJACENCY_AMBIGUOUS",
+                    "Zone pair '" + key.FirstZoneId + "' / '" + key.SecondZoneId
+                    + "' has multiple indistinguishable reciprocal surface candidates ("
+                    + firstIds + " / " + secondIds + ").",
+                    "Make each reciprocal pair unique by surface type, area, or opening layout.",
+                    remainingFirst[0].Surface.Id);
+            }
+            else
+            {
+                Error(
+                    "SD.CONVERSION.ADJACENCY_MISMATCH",
+                    "Zone pair '" + key.FirstZoneId + "' / '" + key.SecondZoneId
+                    + "' has reciprocal surface declarations whose types, areas, or opening layouts do not match ("
+                    + firstIds + " / " + secondIds + ").",
+                    "Make the two declarations geometrically equivalent, or remove the incorrect reciprocal declaration.",
+                    remainingFirst[0].Surface.Id);
+            }
+        }
+
+        private void AddOneSidedAdjacencySurface(
+            SurfaceEntry entry,
+            WeatherSelection? weather,
+            Dictionary<string, List<DragonSurface>> surfacesByZone)
+        {
+            int diagnosticStart = _diagnostics.Count;
+            Surface surface = entry.Surface;
+            DragonPlanarPolygon polygon = CreatePolygon(surface, entry.Zone.Height);
+            DragonSurfaceConstruction? construction = ResolveConstruction(entry.Zone, surface, weather);
+            if (construction is null)
+            {
+                return;
+            }
+
+            IReadOnlyList<DragonOpening> openings = ConvertOpenings(surface, polygon);
+            if (_diagnostics.Skip(diagnosticStart).Any(item => item.IsFailure))
+            {
+                return;
+            }
+
+            EntityId cloneId = new("CLONE:" + surface.Id.Value);
+            bool conflictsWithSource = _model.Zones
+                .SelectMany(zone => zone.Surfaces)
+                .Any(item => item.Id.Equals(cloneId));
+            if (conflictsWithSource)
+            {
+                Error(
+                    "SD.CONVERSION.ADJACENCY_SYNTHETIC_ID_CONFLICT",
+                    "The synthesized reciprocal ID '" + cloneId.Value + "' conflicts with a source surface ID.",
+                    "Rename the conflicting source surface so the reciprocal ID is unique.",
+                    surface.Id);
+                return;
+            }
+
+            DragonSurface original = new(
+                surface.Id,
+                surface.Id.Value,
+                ConvertSurfaceType(surface.Type),
+                construction,
+                DragonSurfaceBoundary.AdjacentTo(cloneId),
+                polygon,
+                openings);
+            DragonSurface clone = new(
+                cloneId,
+                cloneId.Value,
+                FlipSurfaceType(surface.Type),
+                ReverseConstruction(construction),
+                DragonSurfaceBoundary.AdjacentTo(surface.Id),
+                polygon.Reverse(),
+                CloneOpenings(openings));
+            surfacesByZone[entry.Zone.Id.Value].Add(original);
+            surfacesByZone[entry.AdjacentZone.Id.Value].Add(clone);
+            AddSurfaceConversion(entry.Zone.Id, surface.Id, entry.Zone.Id, surface.Id, false);
+            AddSurfaceConversion(entry.Zone.Id, surface.Id, entry.AdjacentZone.Id, cloneId, true);
+        }
+
+        private void AddReciprocalAdjacencyPair(
+            SurfaceEntry first,
+            SurfaceEntry second,
+            WeatherSelection? weather,
+            Dictionary<string, List<DragonSurface>> surfacesByZone)
+        {
+            SurfaceEntry canonical = Compare(first, second) <= 0 ? first : second;
+            SurfaceEntry counterpart = ReferenceEquals(canonical, first) ? second : first;
+            if (canonical.Surface.Id.Equals(counterpart.Surface.Id))
+            {
+                Error(
+                    "SD.CONVERSION.ADJACENCY_SURFACE_ID_CONFLICT",
+                    "Reciprocal surfaces in distinct zones share ID '" + canonical.Surface.Id.Value + "'.",
+                    "Assign a distinct stable ID to each side of the boundary.",
+                    canonical.Surface.Id);
+                return;
+            }
+
+            int diagnosticStart = _diagnostics.Count;
+            DragonSurfaceConstruction? construction = ResolveConstruction(
+                canonical.Zone,
+                canonical.Surface,
+                weather);
+            DragonSurfaceConstruction? counterpartConstruction = ResolveConstruction(
+                counterpart.Zone,
+                counterpart.Surface,
+                weather);
+            if (construction is null || counterpartConstruction is null)
+            {
+                return;
+            }
+
+            if (!AreConvertedConstructionsCompatible(construction, counterpartConstruction))
+            {
+                Error(
+                    "SD.CONVERSION.ADJACENCY_CONSTRUCTION_MISMATCH",
+                    "Reciprocal surfaces '" + canonical.Surface.Id.Value + "' and '"
+                    + counterpart.Surface.Id.Value + "' have incompatible constructions.",
+                    "Use the same physical layer assembly on both sides of the boundary.",
+                    canonical.Surface.Id);
+                return;
+            }
+
+            DragonPlanarPolygon polygon = CreatePolygon(canonical.Surface, canonical.Zone.Height);
+            IReadOnlyList<DragonOpening> openings = ConvertOpenings(canonical.Surface, polygon);
+            IReadOnlyList<DragonOpening> counterpartOpenings = ConvertMirroredOpenings(
+                canonical.Surface,
+                counterpart.Surface,
+                openings);
+            if (_diagnostics.Skip(diagnosticStart).Any(item => item.IsFailure))
+            {
+                return;
+            }
+
+            DragonSurface convertedCanonical = new(
+                canonical.Surface.Id,
+                canonical.Surface.Id.Value,
+                ConvertSurfaceType(canonical.Surface.Type),
+                construction,
+                DragonSurfaceBoundary.AdjacentTo(counterpart.Surface.Id),
+                polygon,
+                openings);
+            DragonSurface convertedCounterpart = new(
+                counterpart.Surface.Id,
+                counterpart.Surface.Id.Value,
+                FlipSurfaceType(canonical.Surface.Type),
+                ReverseConstruction(construction),
+                DragonSurfaceBoundary.AdjacentTo(canonical.Surface.Id),
+                polygon.Reverse(),
+                counterpartOpenings);
+            surfacesByZone[canonical.Zone.Id.Value].Add(convertedCanonical);
+            surfacesByZone[counterpart.Zone.Id.Value].Add(convertedCounterpart);
+            AddSurfaceConversion(
+                canonical.Zone.Id,
+                canonical.Surface.Id,
+                canonical.Zone.Id,
+                canonical.Surface.Id,
+                false);
+            AddSurfaceConversion(
+                counterpart.Zone.Id,
+                counterpart.Surface.Id,
+                counterpart.Zone.Id,
+                counterpart.Surface.Id,
+                false);
         }
 
         private DragonSurfaceConstruction? ResolveConstruction(
@@ -552,6 +848,96 @@ public static class GreenRetrofitConverter
             return openings.AsReadOnly();
         }
 
+        private IReadOnlyList<DragonOpening> ConvertMirroredOpenings(
+            Surface source,
+            Surface counterpart,
+            IReadOnlyList<DragonOpening> convertedSource)
+        {
+            if (convertedSource.Count != source.Fenestrations.Count)
+            {
+                return Array.Empty<DragonOpening>();
+            }
+
+            var remaining = counterpart.Fenestrations
+                .OrderBy(item => item.Id.Value, StringComparer.Ordinal)
+                .ToList();
+            var converted = new List<DragonOpening>(convertedSource.Count);
+            for (int index = 0; index < source.Fenestrations.Count; index++)
+            {
+                Fenestration sourceOpening = source.Fenestrations[index];
+                Fenestration[] geometryCandidates = remaining
+                    .Where(item => AreOpeningGeometriesCompatible(sourceOpening, item))
+                    .ToArray();
+                Fenestration? counterpartOpening = geometryCandidates
+                    .FirstOrDefault(item => AreOpeningDefinitionsCompatible(sourceOpening, item))
+                    ?? geometryCandidates.FirstOrDefault();
+                if (counterpartOpening is null)
+                {
+                    Error(
+                        "SD.CONVERSION.ADJACENCY_OPENING_MISMATCH",
+                        "Opening '" + sourceOpening.Id.Value + "' has no matching opening on reciprocal surface '"
+                        + counterpart.Id.Value + "'.",
+                        "Mirror the opening type and area on both sides of the boundary.",
+                        sourceOpening.Id);
+                    continue;
+                }
+
+                remaining.Remove(counterpartOpening);
+                if (!AreOpeningDefinitionsCompatible(sourceOpening, counterpartOpening))
+                {
+                    Error(
+                        "SD.CONVERSION.ADJACENCY_OPENING_DEFINITION_MISMATCH",
+                        "Reciprocal openings '" + sourceOpening.Id.Value + "' and '"
+                        + counterpartOpening.Id.Value + "' have incompatible constructions or shading.",
+                        "Use equivalent opening construction and shading definitions on both sides.",
+                        sourceOpening.Id);
+                    continue;
+                }
+
+                if (sourceOpening.Id.Equals(counterpartOpening.Id))
+                {
+                    Error(
+                        "SD.CONVERSION.ADJACENCY_OPENING_ID_CONFLICT",
+                        "Reciprocal openings share ID '" + sourceOpening.Id.Value + "'.",
+                        "Assign a distinct stable ID to each opening side.",
+                        sourceOpening.Id);
+                    continue;
+                }
+
+                if (counterpartOpening.Construction is null)
+                {
+                    Error(
+                        "SD.CONVERSION.FENESTRATION_CONSTRUCTION_NOT_FOUND",
+                        "Opening '" + counterpartOpening.Id.Value + "' references missing construction '"
+                        + counterpartOpening.ConstructionId + "'.",
+                        "Define the referenced fenestration construction before conversion.",
+                        counterpartOpening.Id);
+                    continue;
+                }
+
+                DragonPlanarPolygon polygon = convertedSource[index].Polygon.Reverse();
+                if (counterpartOpening.Type == FenestrationType.Door)
+                {
+                    converted.Add(new DragonDoor(
+                        counterpartOpening.Id,
+                        counterpartOpening.Id.Value,
+                        ConvertDoorConstruction(counterpartOpening.Construction),
+                        polygon));
+                }
+                else
+                {
+                    converted.Add(new DragonWindow(
+                        counterpartOpening.Id,
+                        counterpartOpening.Id.Value,
+                        ConvertGlazing(counterpartOpening.Construction),
+                        polygon,
+                        ConvertShading(counterpartOpening.Blind)));
+                }
+            }
+
+            return converted.AsReadOnly();
+        }
+
         private static GonieGonie.InvisibleDragon.Shape.IShadingDevice? ConvertShading(BlindType? blind)
         {
             return blind switch
@@ -659,7 +1045,7 @@ public static class GreenRetrofitConverter
                 DragonScheduleType.Real);
             DragonSchedule lighting = LightingSchedule(prefix + "-Lighted", profile);
             var converted = new DragonProfile(
-                new EntityId(prefix),
+                profile.Id,
                 prefix,
                 DragonSchedule.Constant(
                     prefix + "-HeatingSetpoint",
@@ -1182,6 +1568,154 @@ public static class GreenRetrofitConverter
             return (value / (double)uint.MaxValue) * 2d * Math.PI;
         }
 
+        private static bool AreReciprocalGeometriesCompatible(
+            SurfaceEntry firstEntry,
+            SurfaceEntry secondEntry)
+        {
+            Surface first = firstEntry.Surface;
+            Surface second = secondEntry.Surface;
+            if (!AreReciprocalTypes(first.Type, second.Type)
+                || !NearlyEqual(first.Area, second.Area)
+                || first.Type == SurfaceType.Wall && !NearlyEqual(firstEntry.Zone.Height, secondEntry.Zone.Height)
+                || first.Fenestrations.Count != second.Fenestrations.Count)
+            {
+                return false;
+            }
+
+            var remaining = second.Fenestrations.ToList();
+            foreach (Fenestration opening in first.Fenestrations)
+            {
+                Fenestration? match = remaining.FirstOrDefault(
+                    candidate => AreOpeningGeometriesCompatible(opening, candidate));
+                if (match is null)
+                {
+                    return false;
+                }
+
+                remaining.Remove(match);
+            }
+
+            return true;
+        }
+
+        private static bool AreReciprocalTypes(SurfaceType first, SurfaceType second)
+        {
+            return first == SurfaceType.Wall && second == SurfaceType.Wall
+                || first == SurfaceType.Floor && second == SurfaceType.Ceiling
+                || first == SurfaceType.Ceiling && second == SurfaceType.Floor;
+        }
+
+        private static bool AreOpeningGeometriesCompatible(Fenestration first, Fenestration second)
+        {
+            bool firstIsDoor = first.Type == FenestrationType.Door;
+            bool secondIsDoor = second.Type == FenestrationType.Door;
+            return firstIsDoor == secondIsDoor && NearlyEqual(first.Area, second.Area);
+        }
+
+        private static bool AreOpeningDefinitionsCompatible(Fenestration first, Fenestration second)
+        {
+            if (!AreOpeningGeometriesCompatible(first, second)
+                || first.Blind != second.Blind
+                || first.Construction is null
+                || second.Construction is null)
+            {
+                return false;
+            }
+
+            return NearlyEqual(first.Construction.UValue, second.Construction.UValue)
+                && NullableNearlyEqual(
+                    first.Construction.SolarHeatGainCoefficient,
+                    second.Construction.SolarHeatGainCoefficient);
+        }
+
+        private static bool AreConvertedConstructionsCompatible(
+            DragonSurfaceConstruction first,
+            DragonSurfaceConstruction second)
+        {
+            if (first is DragonAirBoundary && second is DragonAirBoundary)
+            {
+                return true;
+            }
+
+            if (first is not DragonConstruction firstOpaque
+                || second is not DragonConstruction secondOpaque
+                || firstOpaque.Layers.Count != secondOpaque.Layers.Count)
+            {
+                return first.GetType() == second.GetType()
+                    && StringComparer.Ordinal.Equals(first.Name, second.Name);
+            }
+
+            return LayersMatch(firstOpaque.Layers, secondOpaque.Layers)
+                || LayersMatch(firstOpaque.Layers, secondOpaque.Layers.Reverse().ToArray());
+        }
+
+        private static bool LayersMatch(
+            IReadOnlyList<DragonLayer> first,
+            IReadOnlyList<DragonLayer> second)
+        {
+            for (int index = 0; index < first.Count; index++)
+            {
+                DragonLayer left = first[index];
+                DragonLayer right = second[index];
+                if (!NearlyEqual(left.ThicknessMetres, right.ThicknessMetres)
+                    || !NearlyEqual(
+                        left.Material.ConductivityWattsPerMetreKelvin,
+                        right.Material.ConductivityWattsPerMetreKelvin)
+                    || !NearlyEqual(
+                        left.Material.DensityKilogramsPerCubicMetre,
+                        right.Material.DensityKilogramsPerCubicMetre)
+                    || !NearlyEqual(
+                        left.Material.SpecificHeatJoulesPerKilogramKelvin,
+                        right.Material.SpecificHeatJoulesPerKilogramKelvin)
+                    || !NearlyEqual(left.Material.ThermalAbsorptance, right.Material.ThermalAbsorptance)
+                    || !NearlyEqual(left.Material.SolarAbsorptance, right.Material.SolarAbsorptance)
+                    || !NearlyEqual(left.Material.VisibleAbsorptance, right.Material.VisibleAbsorptance)
+                    || left.Material.Roughness != right.Material.Roughness)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool NearlyEqual(double first, double second)
+        {
+            double scale = Math.Max(Math.Abs(first), Math.Abs(second));
+            return Math.Abs(first - second) <= Math.Max(1e-6d, scale * 1e-9d);
+        }
+
+        private static bool NullableNearlyEqual(double? first, double? second)
+        {
+            return first.HasValue == second.HasValue
+                && (!first.HasValue || NearlyEqual(first.Value, second!.Value));
+        }
+
+        private void AddSurfaceConversion(
+            EntityId sourceZoneId,
+            EntityId sourceSurfaceId,
+            EntityId convertedZoneId,
+            EntityId convertedSurfaceId,
+            bool isSynthesizedCounterpart)
+        {
+            _surfaceConversions.Add(new GreenRetrofitSurfaceConversion(
+                sourceZoneId,
+                sourceSurfaceId,
+                convertedZoneId,
+                convertedSurfaceId,
+                isSynthesizedCounterpart));
+        }
+
+        private static int Compare(SurfaceEntry first, SurfaceEntry second)
+        {
+            int surface = StringComparer.Ordinal.Compare(
+                first.Surface.Id.Value,
+                second.Surface.Id.Value);
+            return surface != 0
+                ? surface
+                : StringComparer.Ordinal.Compare(first.Zone.Id.Value, second.Zone.Id.Value);
+        }
+
         private static DragonSurfaceType ConvertSurfaceType(SurfaceType type)
         {
             return type switch
@@ -1220,6 +1754,66 @@ public static class GreenRetrofitConverter
             return construction is DragonConstruction opaque
                 ? opaque.Reverse("REVERSED:" + opaque.Name)
                 : construction;
+        }
+
+        private sealed class SurfaceEntry
+        {
+            public SurfaceEntry(Zone zone, Surface surface, Zone adjacentZone, int surfaceIndex)
+            {
+                Zone = zone;
+                Surface = surface;
+                AdjacentZone = adjacentZone;
+                SurfaceIndex = surfaceIndex;
+            }
+
+            public Zone Zone { get; }
+
+            public Surface Surface { get; }
+
+            public Zone AdjacentZone { get; }
+
+            public int SurfaceIndex { get; }
+        }
+
+        private sealed class ZonePairKey : IEquatable<ZonePairKey>
+        {
+            private ZonePairKey(string firstZoneId, string secondZoneId)
+            {
+                FirstZoneId = firstZoneId;
+                SecondZoneId = secondZoneId;
+            }
+
+            public string FirstZoneId { get; }
+
+            public string SecondZoneId { get; }
+
+            public static ZonePairKey Create(EntityId first, EntityId second)
+            {
+                return StringComparer.Ordinal.Compare(first.Value, second.Value) <= 0
+                    ? new ZonePairKey(first.Value, second.Value)
+                    : new ZonePairKey(second.Value, first.Value);
+            }
+
+            public bool Equals(ZonePairKey? other)
+            {
+                return other is not null
+                    && StringComparer.Ordinal.Equals(FirstZoneId, other.FirstZoneId)
+                    && StringComparer.Ordinal.Equals(SecondZoneId, other.SecondZoneId);
+            }
+
+            public override bool Equals(object? obj)
+            {
+                return Equals(obj as ZonePairKey);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    return (StringComparer.Ordinal.GetHashCode(FirstZoneId) * 397)
+                        ^ StringComparer.Ordinal.GetHashCode(SecondZoneId);
+                }
+            }
         }
 
         private void Unsupported(
