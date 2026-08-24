@@ -213,6 +213,70 @@ public sealed class EnergyModelValidationTests
     }
 
     [Fact]
+    public void ReportsSharedChillerIdentifierWhenCoolingTowerDefinitionDiffers()
+    {
+        Zone first = Zone("ZONE-1", "First", "SURFACE-1");
+        Zone second = Zone("ZONE-2", "Second", "SURFACE-2");
+        var sourceA = new Chiller(
+            new EntityId("SOURCE-SAME"),
+            "Shared chiller",
+            3.2,
+            CompressorType.Turbo,
+            new OpenSingleSpeedCoolingTower(
+                new EntityId("TOWER-SAME"),
+                "Shared tower",
+                nominalCapacityWatts: 100_000));
+        var sourceB = new Chiller(
+            new EntityId("SOURCE-SAME"),
+            "Shared chiller",
+            3.2,
+            CompressorType.Turbo,
+            new OpenSingleSpeedCoolingTower(
+                new EntityId("TOWER-SAME"),
+                "Shared tower",
+                nominalCapacityWatts: 120_000));
+        var assignments = new[]
+        {
+            new ZoneHvacAssignment(first.Id, new SupplyGroup(new[] { new FanCoilUnit(new EntityId("FCU-A"), "FCU A", sourceA) })),
+            new ZoneHvacAssignment(second.Id, new SupplyGroup(new[] { new FanCoilUnit(new EntityId("FCU-B"), "FCU B", sourceB) })),
+        };
+        var model = new EnergyModel("Cold sources", new[] { first, second }, assignments);
+
+        ValidationResult result = model.Validate();
+
+        Assert.Contains(result.Diagnostics, item => item.Code == "INVISIBLEDRAGON.MODEL.CONFLICTING_HVAC_ID");
+    }
+
+    [Fact]
+    public void ReportsSharedAbsorptionChillerIdentifierWhenGeneratorDefinitionDiffers()
+    {
+        Zone first = Zone("ZONE-1", "First", "SURFACE-1");
+        Zone second = Zone("ZONE-2", "Second", "SURFACE-2");
+        var sourceA = new AbsorptionChiller(
+            new EntityId("SOURCE-SAME"),
+            "Shared absorption chiller",
+            0.72,
+            new Boiler(new EntityId("GENERATOR-SAME"), "Shared generator", Fuel.NaturalGas, 0.85),
+            new ClosedSingleSpeedCoolingTower(new EntityId("TOWER-SAME"), "Shared tower"));
+        var sourceB = new AbsorptionChiller(
+            new EntityId("SOURCE-SAME"),
+            "Shared absorption chiller",
+            0.72,
+            new Boiler(new EntityId("GENERATOR-SAME"), "Shared generator", Fuel.NaturalGas, 0.9),
+            new ClosedSingleSpeedCoolingTower(new EntityId("TOWER-SAME"), "Shared tower"));
+        var assignments = new[]
+        {
+            new ZoneHvacAssignment(first.Id, new SupplyGroup(new[] { new FanCoilUnit(new EntityId("FCU-A"), "FCU A", sourceA) })),
+            new ZoneHvacAssignment(second.Id, new SupplyGroup(new[] { new FanCoilUnit(new EntityId("FCU-B"), "FCU B", sourceB) })),
+        };
+        var model = new EnergyModel("Absorption sources", new[] { first, second }, assignments);
+
+        ValidationResult result = model.Validate();
+
+        Assert.Contains(result.Diagnostics, item => item.Code == "INVISIBLEDRAGON.MODEL.CONFLICTING_HVAC_ID");
+    }
+
+    [Fact]
     public void ReportsSharedPhotovoltaicIdentifierWhenParametersDifferDespiteSameName()
     {
         Zone zone = Zone("ZONE-1", "First", "SURFACE-1");

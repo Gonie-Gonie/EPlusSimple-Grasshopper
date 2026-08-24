@@ -183,6 +183,11 @@
     symbol: GonieGonie.InvisibleDragon.Hvac
   tests:
     - SourceSystemTests
+    - ColdSourceSystemTests
+    - ColdSourceEnergyPlusIntegrationTests
+    - GeothermalHeatPumpTests
+    - HydronicSupplySystemTests
+    - HydronicSupplyEnergyPlusIntegrationTests
     - EnergyModelFixtureMatrixTests
   status: implemented
 

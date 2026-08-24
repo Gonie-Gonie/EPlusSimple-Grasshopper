@@ -67,6 +67,21 @@ internal static class ModelDefinitionComparer
                 Nullable.Equals(left.NominalCapacityWatts, right.NominalCapacityWatts)
                 && left.PumpMotorEfficiency.Equals(right.PumpMotorEfficiency)
                 && left.SetpointTemperatureCelsius.Equals(right.SetpointTemperatureCelsius),
+            (Chiller left, Chiller right) =>
+                left.ReferenceCoefficientOfPerformance.Equals(right.ReferenceCoefficientOfPerformance)
+                && left.Compressor == right.Compressor
+                && Nullable.Equals(left.NominalCapacityWatts, right.NominalCapacityWatts)
+                && left.PumpMotorEfficiency.Equals(right.PumpMotorEfficiency)
+                && left.SetpointTemperatureCelsius.Equals(right.SetpointTemperatureCelsius)
+                && CoolingTowerEquals(left.CoolingTower, right.CoolingTower),
+            (AbsorptionChiller left, AbsorptionChiller right) =>
+                left.ThermalCoefficientOfPerformance.Equals(right.ThermalCoefficientOfPerformance)
+                && Nullable.Equals(left.NominalCapacityWatts, right.NominalCapacityWatts)
+                && left.PumpMotorEfficiency.Equals(right.PumpMotorEfficiency)
+                && left.SetpointTemperatureCelsius.Equals(right.SetpointTemperatureCelsius)
+                && left.HeatSource.Id.Equals(right.HeatSource.Id)
+                && HvacSystemEquals(left.HeatSource, right.HeatSource)
+                && CoolingTowerEquals(left.CoolingTower, right.CoolingTower),
             (FanCoilUnit left, FanCoilUnit right) =>
                 SourceEquals(left.Source, right.Source)
                 && left.FanTotalEfficiency.Equals(right.FanTotalEfficiency)
@@ -145,6 +160,15 @@ internal static class ModelDefinitionComparer
     private static bool SourceEquals(SourceSystem? first, SourceSystem? second)
     {
         return first is null ? second is null : second is not null && first.Id.Equals(second.Id);
+    }
+
+    private static bool CoolingTowerEquals(CoolingTower first, CoolingTower second)
+    {
+        return first.GetType() == second.GetType()
+            && first.Id.Equals(second.Id)
+            && NameEquals(first.Name, second.Name)
+            && Nullable.Equals(first.NominalCapacityWatts, second.NominalCapacityWatts)
+            && first.PumpMotorEfficiency.Equals(second.PumpMotorEfficiency);
     }
 
     private static bool NameEquals(string first, string second)
