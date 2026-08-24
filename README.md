@@ -31,7 +31,20 @@ The SDK packages are sufficient for a headless compile. Rhino 7 and Rhino 8 are
 detected independently; each installed version enables only its own viewport,
 Grasshopper load, geometry, and document tests.
 
-## Quick start
+## Installing a packaged candidate
+
+Installed plugins require Rhino 7 or Rhino 8 on Windows, but not the .NET SDK,
+Python, or Visual Studio. Use the product's matching Yak package when available;
+portable plugin ZIPs are also generated for controlled deployment and
+inspection. EnergyPlus and EPW weather files are separate from every plugin
+package.
+
+Read [Installation](docs/installation.md), [Choosing a Dragon](docs/choosing-a-dragon.md),
+and [EnergyPlus and weather](docs/energyplus-and-weather.md) before using a
+candidate. InvisibleDragon and SimpleDragon may be installed independently or
+together when they come from the same release commit.
+
+## Developer quick start
 
 From a Windows command prompt or PowerShell:
 
@@ -80,6 +93,11 @@ The port is under active development toward the first independently installable
 binary is not considered compatible until the algorithm, semantic IDF,
 EnergyPlus result, Rhino geometry, and dual-package load gates applicable to it
 pass.
+
+The [documentation index](docs/README.md) covers the end-user workflow,
+compatibility boundary, troubleshooting, examples, and maintainer release
+gates. Public binary publication remains subject to the provenance check
+recorded in [NOTICE.md](NOTICE.md).
 
 ## Repository rules
 
