@@ -7,14 +7,22 @@ using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Model;
 using GonieGonie.SimpleDragon.Internal;
 using DragonAirBoundary = GonieGonie.InvisibleDragon.Construction.AirBoundary;
+using DragonAbsorptionChiller = GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller;
 using DragonBlind = GonieGonie.InvisibleDragon.Shape.Blind;
 using DragonBoiler = GonieGonie.InvisibleDragon.Hvac.Boiler;
+using DragonChiller = GonieGonie.InvisibleDragon.Hvac.Chiller;
+using DragonClosedSingleSpeedCoolingTower = GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower;
+using DragonClosedTwoSpeedCoolingTower = GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower;
+using DragonCompressorType = GonieGonie.InvisibleDragon.Hvac.CompressorType;
 using DragonConstruction = GonieGonie.InvisibleDragon.Construction.Construction;
+using DragonCoolingTower = GonieGonie.InvisibleDragon.Hvac.CoolingTower;
 using DragonDistrictHeating = GonieGonie.InvisibleDragon.Hvac.DistrictHeating;
 using DragonDoor = GonieGonie.InvisibleDragon.Shape.Door;
 using DragonElectricRadiantFloor = GonieGonie.InvisibleDragon.Hvac.ElectricRadiantFloor;
 using DragonElectricRadiator = GonieGonie.InvisibleDragon.Hvac.ElectricRadiator;
+using DragonFanCoilUnit = GonieGonie.InvisibleDragon.Hvac.FanCoilUnit;
 using DragonFuel = GonieGonie.InvisibleDragon.Hvac.Fuel;
+using DragonGeothermalHeatPump = GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump;
 using DragonGlazing = GonieGonie.InvisibleDragon.Construction.Glazing;
 using DragonHeatPump = GonieGonie.InvisibleDragon.Hvac.HeatPump;
 using DragonHvacSource = GonieGonie.InvisibleDragon.Hvac.SourceSystem;
@@ -22,11 +30,14 @@ using DragonHvacSupply = GonieGonie.InvisibleDragon.Hvac.SupplySystem;
 using DragonLayer = GonieGonie.InvisibleDragon.Construction.Layer;
 using DragonMaterial = GonieGonie.InvisibleDragon.Construction.Material;
 using DragonNoMassConstruction = GonieGonie.InvisibleDragon.Construction.NoMassConstruction;
+using DragonOpenSingleSpeedCoolingTower = GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower;
+using DragonOpenTwoSpeedCoolingTower = GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower;
 using DragonOpening = GonieGonie.InvisibleDragon.Shape.IOpening;
 using DragonPhotovoltaicPanel = GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel;
 using DragonPlanarPolygon = GonieGonie.InvisibleDragon.Shape.PlanarPolygon;
 using DragonProfile = GonieGonie.InvisibleDragon.Profile.Profile;
 using DragonRadiantFloor = GonieGonie.InvisibleDragon.Hvac.RadiantFloor;
+using DragonRadiator = GonieGonie.InvisibleDragon.Hvac.Radiator;
 using DragonSchedule = GonieGonie.InvisibleDragon.Profile.Schedule;
 using DragonScheduleType = GonieGonie.InvisibleDragon.Profile.ScheduleType;
 using DragonShade = GonieGonie.InvisibleDragon.Shape.Shade;
@@ -1278,11 +1289,19 @@ public static class GreenRetrofitConverter
             {
                 case SupplySystemType.PackagedAirConditioner:
                     double cop = supply.CoolingCop ?? 3d;
+                    Warning(
+                        "SD.CONVERSION.PACKAGED_AC_HEATING_COP_APPROXIMATED",
+                        "Packaged air conditioner '" + supply.Id.Value
+                        + "' uses a neutral heating COP of 1.0 on its cooling-only InvisibleDragon source."
+                        + " The pinned upstream model leaves this value unset, but the C# heat-pump domain requires"
+                        + " a positive value.",
+                        "Treat the value as an inert compatibility placeholder; the converted terminal cannot heat.",
+                        supply.Id);
                     var dedicated = new DragonHeatPump(
                         new EntityId("DedicatedHeatPump_for_" + supply.Id.Value),
                         "DedicatedHeatPump_for_" + supply.Id.Value,
                         DragonFuel.Electricity,
-                        cop,
+                        1d,
                         cop,
                         0.001d,
                         supply.CoolingCapacity);
@@ -1306,15 +1325,24 @@ public static class GreenRetrofitConverter
                 case SupplySystemType.ElectricRadiantFloor:
                     return new DragonElectricRadiantFloor(supply.Id, supply.Id.Value);
                 case SupplySystemType.ElectricRadiator:
-                    return new DragonElectricRadiator(supply.Id, supply.Id.Value);
-                case SupplySystemType.FanCoilUnit:
-                case SupplySystemType.Radiator:
-                    Unsupported(
-                        "SD.CONVERSION.SUPPLY_TYPE_NOT_IMPLEMENTED",
-                        "Assigned supply system '" + supply.Id.Value + "' uses unsupported type " + supply.Type + ".",
+                    return new DragonElectricRadiator(
                         supply.Id,
-                        "Use one of the currently EnergyPlus-ready supply types or add the matching InvisibleDragon adapter.");
-                    return null;
+                        supply.Id.Value,
+                        supply.HeatingCapacity);
+                case SupplySystemType.FanCoilUnit:
+                    DragonHvacSource? fanCoilSource = ConvertSource(supply.SourceSystem);
+                    return fanCoilSource is null
+                        ? null
+                        : new DragonFanCoilUnit(supply.Id, supply.Id.Value, fanCoilSource);
+                case SupplySystemType.Radiator:
+                    DragonHvacSource? radiatorSource = ConvertSource(supply.SourceSystem);
+                    return radiatorSource is null
+                        ? null
+                        : new DragonRadiator(
+                            supply.Id,
+                            supply.Id.Value,
+                            radiatorSource,
+                            supply.HeatingCapacity);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(supply));
             }
@@ -1340,8 +1368,17 @@ public static class GreenRetrofitConverter
             switch (source.Type)
             {
                 case SourceSystemType.HeatPump:
-                case SourceSystemType.GeothermalHeatPump:
                     converted = new DragonHeatPump(
+                        source.Id,
+                        source.Id.Value,
+                        ConvertFuel(source.FuelType),
+                        source.HeatingCop ?? 3d,
+                        source.CoolingCop ?? 3d,
+                        source.HeatingCapacity,
+                        source.CoolingCapacity);
+                    break;
+                case SourceSystemType.GeothermalHeatPump:
+                    converted = new DragonGeothermalHeatPump(
                         source.Id,
                         source.Id.Value,
                         ConvertFuel(source.FuelType),
@@ -1359,25 +1396,92 @@ public static class GreenRetrofitConverter
                         source.HeatingCapacity);
                     break;
                 case SourceSystemType.DistrictHeating:
+                    // Do not route district heat through ConvertFuel: it is an external
+                    // thermal service, represented explicitly rather than as a local boiler fuel.
                     converted = new DragonDistrictHeating(
                         source.Id,
                         source.Id.Value,
                         source.HeatingCapacity);
                     break;
                 case SourceSystemType.Chiller:
-                case SourceSystemType.AbsorptionChiller:
-                    Unsupported(
-                        "SD.CONVERSION.SOURCE_TYPE_NOT_IMPLEMENTED",
-                        "Assigned source system '" + source.Id.Value + "' uses unsupported type " + source.Type + ".",
+                    converted = new DragonChiller(
                         source.Id,
-                        "Use a currently EnergyPlus-ready source type or add the matching InvisibleDragon plant adapter.");
-                    return null;
+                        source.Id.Value,
+                        source.CoolingCop ?? 3d,
+                        ConvertCompressor(source.CompressorType),
+                        ConvertCoolingTower(source),
+                        source.CoolingCapacity);
+                    break;
+                case SourceSystemType.AbsorptionChiller:
+                    string boilerName = "Boiler_for_" + source.Id.Value;
+                    string towerName = "CoolingTower_for_" + source.Id.Value;
+                    var generator = new DragonBoiler(
+                        new EntityId(boilerName),
+                        boilerName,
+                        ConvertFuel(source.FuelType),
+                        source.BoilerEfficiency ?? 0.85d);
+                    var absorptionTower = new DragonOpenSingleSpeedCoolingTower(
+                        new EntityId(towerName),
+                        towerName,
+                        source.CoolingCapacity);
+                    converted = new DragonAbsorptionChiller(
+                        source.Id,
+                        source.Id.Value,
+                        source.CoolingCop ?? 0.9d,
+                        generator,
+                        absorptionTower,
+                        source.CoolingCapacity);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(source));
             }
 
             _sources.Add(source.Id.Value, converted);
             return converted;
+        }
+
+        private static DragonCompressorType ConvertCompressor(CompressorType? compressor)
+        {
+            return compressor switch
+            {
+                CompressorType.Turbo => DragonCompressorType.Turbo,
+                CompressorType.Screw => DragonCompressorType.Screw,
+                CompressorType.Reciprocating => DragonCompressorType.Reciprocating,
+                null => throw new ArgumentException("A chiller compressor type is required.", nameof(compressor)),
+                _ => throw new ArgumentOutOfRangeException(nameof(compressor)),
+            };
+        }
+
+        private static DragonCoolingTower ConvertCoolingTower(SourceSystem source)
+        {
+            string towerName = "CoolingTower_for_" + source.Id.Value;
+            var towerId = new EntityId(towerName);
+            return (source.CoolingTowerType, source.CoolingTowerControl) switch
+            {
+                (CoolingTowerType.Open, CoolingTowerControl.SingleSpeed) =>
+                    new DragonOpenSingleSpeedCoolingTower(
+                        towerId,
+                        towerName,
+                        source.CoolingTowerCapacity),
+                (CoolingTowerType.Open, CoolingTowerControl.TwoSpeed) =>
+                    new DragonOpenTwoSpeedCoolingTower(
+                        towerId,
+                        towerName,
+                        source.CoolingTowerCapacity),
+                (CoolingTowerType.Closed, CoolingTowerControl.SingleSpeed) =>
+                    new DragonClosedSingleSpeedCoolingTower(
+                        towerId,
+                        towerName,
+                        source.CoolingTowerCapacity),
+                (CoolingTowerType.Closed, CoolingTowerControl.TwoSpeed) =>
+                    new DragonClosedTwoSpeedCoolingTower(
+                        towerId,
+                        towerName,
+                        source.CoolingTowerCapacity),
+                _ => throw new ArgumentException(
+                    "A chiller cooling-tower type and control are required.",
+                    nameof(source)),
+            };
         }
 
         private ReadOnlyCollection<DragonZoneVentilationAssignment> ConvertVentilationAssignments()
@@ -1834,6 +1938,20 @@ public static class GreenRetrofitConverter
             _diagnostics.Add(new Diagnostic(
                 code,
                 DiagnosticSeverity.Error,
+                message,
+                id,
+                suggestedAction: action));
+        }
+
+        private void Warning(
+            string code,
+            string message,
+            string action,
+            EntityId? id = null)
+        {
+            _diagnostics.Add(new Diagnostic(
+                code,
+                DiagnosticSeverity.Warning,
                 message,
                 id,
                 suggestedAction: action));
