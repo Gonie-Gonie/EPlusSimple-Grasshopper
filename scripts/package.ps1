@@ -6,7 +6,8 @@ param(
     [string] $Configuration = 'Release',
 
     [switch] $SkipBuild,
-    [switch] $NoRestore
+    [switch] $NoRestore,
+    [switch] $RunPortableHostGate
 )
 
 $ErrorActionPreference = 'Stop'
@@ -590,6 +591,24 @@ Write-Checksums -Root $packagesRoot
     -DotNetExecutable $dotnet
 if ($LASTEXITCODE -ne 0) {
     throw "Final package checksum verification failed with exit code $LASTEXITCODE."
+}
+
+if ($RunPortableHostGate) {
+    $portableHostGate = Join-Path $repositoryRoot 'tools\grasshopper-smoke\run.ps1'
+    if (-not (Test-Path -LiteralPath $portableHostGate -PathType Leaf)) {
+        throw "Portable Grasshopper host gate is missing: '$portableHostGate'."
+    }
+
+    Write-Host 'Running portable package host gate (Rhino 7/8 x InvisibleOnly/SimpleOnly/Both)...'
+    & $portableHostGate `
+        -Source 'PortablePackage' `
+        -Scenario 'All' `
+        -Target 'All' `
+        -SkipPluginBuild `
+        -PackagesRoot $packagesRoot
+    if ($LASTEXITCODE -ne 0) {
+        throw "Portable package host gate failed with exit code $LASTEXITCODE."
+    }
 }
 
 Write-Host "Packaging complete: $packagesRoot"

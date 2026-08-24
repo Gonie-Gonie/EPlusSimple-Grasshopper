@@ -8,7 +8,7 @@ internal static class Program
 
     static Program()
     {
-        Resolver.Initialize(HostInputs.ResolveRhinoSystemDirectory());
+        Resolver.Initialize(Rhino8Environment.ResolveRhinoSystemDirectory());
     }
 
     [STAThread]
@@ -16,7 +16,7 @@ internal static class Program
     {
         try
         {
-            HostInputs inputs = HostInputs.FromEnvironment();
+            SmokeHostInputs inputs = SmokeHostInputs.FromEnvironment();
             Directory.CreateDirectory(inputs.OutputDirectory);
             return RhinoHost.Run(inputs, CoreArguments);
         }

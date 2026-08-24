@@ -14,4 +14,10 @@
     <PackageReference Include="Rhino.Inside" />
     <PackageReference Include="RhinoCommon" VersionOverride="8.0.23304.9001" Private="false" PrivateAssets="all" ExcludeAssets="runtime" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\GrasshopperSmokeGate.cs" Link="Shared\GrasshopperSmokeGate.cs" />
+    <Compile Include="..\Shared\GrasshopperSmokeSummary.cs" Link="Shared\GrasshopperSmokeSummary.cs" />
+    <Compile Include="..\Shared\SmokeHostInputs.cs" Link="Shared\SmokeHostInputs.cs" />
+  </ItemGroup>
 </Project>

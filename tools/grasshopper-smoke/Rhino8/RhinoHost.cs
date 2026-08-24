@@ -7,7 +7,7 @@ internal static class RhinoHost
 {
     private const string GrasshopperPlugInName = "Grasshopper";
 
-    public static int Run(HostInputs inputs, string[] coreArguments)
+    public static int Run(SmokeHostInputs inputs, string[] coreArguments)
     {
         Progress("starting RhinoCore");
         using var core = new Rhino.Runtime.InProcess.RhinoCore(coreArguments);
@@ -18,14 +18,16 @@ internal static class RhinoHost
         object grasshopper = RhinoApp.GetPlugInObject(GrasshopperPlugInName)
             ?? throw new InvalidOperationException("The installed Grasshopper plug-in could not be loaded by Rhino 8.");
 
-        Progress("restricting Grasshopper external libraries to the two Dragon GHAs");
-        GrasshopperSmokeChecks.RestrictExternalLibraries(inputs.PluginPaths);
+        Progress("restricting Grasshopper external libraries to the requested Dragon GHA set");
+        GrasshopperSmokeGate.RestrictExternalLibraries(inputs.PluginPaths);
         Progress("running Grasshopper headless initialization");
         InvokeRunHeadless(grasshopper);
         Progress("Grasshopper headless initialization completed");
 
-        GrasshopperSmokeSummary summary = GrasshopperSmokeChecks.Run(inputs, RhinoApp.Version.ToString());
-        summary.Write(inputs.SummaryPath);
+        GrasshopperSmokeSummary summary = GrasshopperSmokeGate.Run(
+            inputs,
+            "Rhino8",
+            RhinoApp.Version.ToString());
         Console.WriteLine(summary.ToConsoleText());
         return 0;
     }

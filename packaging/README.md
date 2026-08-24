@@ -5,6 +5,22 @@ Release plugins unless `-SkipBuild` is supplied, verifies/downloads the exact
 Yak executable pinned in `yak.lock.json`, creates fresh package stages, builds
 Yak archives, creates portable plugin ZIPs, and runs the package layout and
 shared-assembly compatibility gates. It never publishes or installs a package.
+Rhino is not required for this default packaging flow.
+
+To run the release-level host gate against the portable ZIP artifacts after all
+normal package verification has passed, use:
+
+```powershell
+package.cmd -RunPortableHostGate
+```
+
+This explicit option requires installed Rhino 7 and Rhino 8. It starts six fresh
+host processes: `InvisibleOnly`, `SimpleOnly`, and `Both` once on each Rhino
+major version. The gate uses `Source PortablePackage`, extracts the just-created
+archives from `artifacts/packages`, and does not rebuild or substitute plugin
+assemblies. Each host summary carries the package-index-verified archive path and
+SHA-256 plus the SHA-256 of every loaded GHA. Omitting the switch keeps the
+existing no-Rhino packaging behavior.
 
 Generated output is written below `artifacts/packages`; disposable work and
 logs stay below `temp/packaging`. Each product is independent:
