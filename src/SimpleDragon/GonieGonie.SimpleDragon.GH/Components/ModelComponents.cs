@@ -50,9 +50,37 @@ public sealed class AssembleGreenRetrofitModelComponent : SimpleDragonComponent
             "FC",
             "Additional fenestration constructions.",
             GH_ParamAccess.list);
+        pManager.AddParameter(
+            new SimpleDragonSourceSystemParam(),
+            "Source Systems",
+            "Sources",
+            "Optional explicit HVAC source-system catalog. Sources nested in supplied/assigned supply systems are also included.",
+            GH_ParamAccess.list);
+        pManager.AddParameter(
+            new SimpleDragonSupplySystemParam(),
+            "Supply Systems",
+            "Supplies",
+            "Optional explicit HVAC supply-system catalog. Zone-assigned supply systems are also included.",
+            GH_ParamAccess.list);
+        pManager.AddParameter(
+            new SimpleDragonEnergyRecoveryVentilatorParam(),
+            "ERV Systems",
+            "ERVs",
+            "Optional explicit ventilation/ERV catalog. Zone-assigned ERVs are also included.",
+            GH_ParamAccess.list);
+        pManager.AddParameter(
+            new SimpleDragonPhotovoltaicPanelParam(),
+            "Photovoltaic Panels",
+            "PV",
+            "Optional photovoltaic panels included in the assembled GRM.",
+            GH_ParamAccess.list);
         pManager[6].Optional = true;
         pManager[7].Optional = true;
         pManager[8].Optional = true;
+        pManager[9].Optional = true;
+        pManager[10].Optional = true;
+        pManager[11].Optional = true;
+        pManager[12].Optional = true;
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -74,6 +102,10 @@ public sealed class AssembleGreenRetrofitModelComponent : SimpleDragonComponent
         var materialGoos = new List<SimpleDragonMaterialGoo>();
         var surfaceConstructionGoos = new List<SimpleDragonSurfaceConstructionGoo>();
         var fenestrationConstructionGoos = new List<SimpleDragonFenestrationConstructionGoo>();
+        var sourceGoos = new List<SimpleDragonSourceSystemGoo>();
+        var supplyGoos = new List<SimpleDragonSupplySystemGoo>();
+        var ventilatorGoos = new List<SimpleDragonEnergyRecoveryVentilatorGoo>();
+        var photovoltaicGoos = new List<SimpleDragonPhotovoltaicPanelGoo>();
         if (!DA.GetData(0, ref name)
             || !DA.GetDataList(1, zoneGoos)
             || !DA.GetData(2, ref northAxis)
@@ -87,6 +119,10 @@ public sealed class AssembleGreenRetrofitModelComponent : SimpleDragonComponent
         DA.GetDataList(6, materialGoos);
         DA.GetDataList(7, surfaceConstructionGoos);
         DA.GetDataList(8, fenestrationConstructionGoos);
+        DA.GetDataList(9, sourceGoos);
+        DA.GetDataList(10, supplyGoos);
+        DA.GetDataList(11, ventilatorGoos);
+        DA.GetDataList(12, photovoltaicGoos);
         if (!DateTime.TryParseExact(
                 vintageText.Trim(),
                 "yyyy-MM-dd",
@@ -108,6 +144,22 @@ public sealed class AssembleGreenRetrofitModelComponent : SimpleDragonComponent
             FenestrationConstruction>(
             fenestrationConstructionGoos,
             "Fenestration Construction");
+        SourceSystem[] suppliedSources = Values<SimpleDragonSourceSystemGoo, SourceSystem>(
+            sourceGoos,
+            "Source System");
+        SupplySystem[] suppliedSupplies = Values<SimpleDragonSupplySystemGoo, SupplySystem>(
+            supplyGoos,
+            "Supply System");
+        VentilationSystem[] suppliedVentilators = Values<
+            SimpleDragonEnergyRecoveryVentilatorGoo,
+            VentilationSystem>(
+            ventilatorGoos,
+            "ERV System");
+        PhotovoltaicSystem[] photovoltaicSystems = DistinctById(Values<
+            SimpleDragonPhotovoltaicPanelGoo,
+            PhotovoltaicSystem>(
+            photovoltaicGoos,
+            "Photovoltaic Panel"));
         SurfaceConstruction[] surfaceConstructions = DistinctById(
             suppliedSurfaceConstructions.Concat(
                 zones.SelectMany(zone => zone.Surfaces)
@@ -121,13 +173,16 @@ public sealed class AssembleGreenRetrofitModelComponent : SimpleDragonComponent
                     .SelectMany(surface => surface.Fenestrations)
                     .Select(item => item.Construction)
                     .OfType<FenestrationConstruction>()));
-        SupplySystem[] supplySystems = DistinctById(zones.SelectMany(zone => zone.SupplySystems));
+        SupplySystem[] supplySystems = DistinctById(
+            suppliedSupplies.Concat(zones.SelectMany(zone => zone.SupplySystems)));
         SourceSystem[] sourceSystems = DistinctById(
-            supplySystems.Select(item => item.SourceSystem).OfType<SourceSystem>());
+            suppliedSources.Concat(
+                supplySystems.Select(item => item.SourceSystem).OfType<SourceSystem>()));
         VentilationSystem[] ventilationSystems = DistinctById(
-            zones.SelectMany(zone => zone.VentilationAssignments)
-                .Select(item => item.VentilationSystem)
-                .OfType<VentilationSystem>());
+            suppliedVentilators.Concat(
+                zones.SelectMany(zone => zone.VentilationAssignments)
+                    .Select(item => item.VentilationSystem)
+                    .OfType<VentilationSystem>()));
         BuildingFloor[] floors = zones
             .GroupBy(zone => zone.FloorNumber)
             .OrderBy(group => group.Key)
@@ -147,6 +202,7 @@ public sealed class AssembleGreenRetrofitModelComponent : SimpleDragonComponent
             sourceSystems,
             supplySystems,
             ventilationSystems,
+            photovoltaicSystems,
             weather: weather.Value);
         Report(weather.Diagnostics);
         DA.SetData(0, new GreenRetrofitModelGoo(model));
@@ -184,6 +240,7 @@ public sealed class AssembleGreenRetrofitModelComponent : SimpleDragonComponent
             SourceSystem item => item.Id.Value,
             SupplySystem item => item.Id.Value,
             VentilationSystem item => item.Id.Value,
+            PhotovoltaicSystem item => item.Id.Value,
             _ => throw new NotSupportedException("Cannot read ID from " + value.GetType().FullName + "."),
         };
     }

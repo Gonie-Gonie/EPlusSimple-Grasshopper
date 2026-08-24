@@ -46,7 +46,7 @@ public sealed class GrasshopperAssemblyTests
             .ToArray();
 
         Assert.EndsWith(".gha", assembly.Location, StringComparison.OrdinalIgnoreCase);
-        Assert.True(components.Length >= 18);
+        Assert.True(components.Length >= 35);
         Assert.All(components, component => Assert.Equal("SimpleDragon", component.Category));
         Assert.Equal(components.Length, components.Select(component => component.ComponentGuid).Distinct().Count());
         Assert.Contains(new Guid("b38f2e41-f63b-42a8-b549-65cd60c7a994"),
@@ -58,6 +58,10 @@ public sealed class GrasshopperAssemblyTests
         Assert.Contains(new Guid("76e0c1b6-68d6-4cdc-a418-eea18aa131c1"),
             components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("a73acba4-d98d-4fec-a846-dc982256d6b1"),
+            components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("e6e14d7b-55b4-45a9-97f9-9b99715f5ebc"),
+            components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("5f66b3fd-e69c-4c33-92db-839c07dcbda5"),
             components.Select(component => component.ComponentGuid));
     }
 
