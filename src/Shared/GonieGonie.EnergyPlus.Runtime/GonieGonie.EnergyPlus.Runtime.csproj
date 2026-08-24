@@ -9,4 +9,9 @@
   <ItemGroup>
     <ProjectReference Include="..\GonieGonie.BuildingEnergy.Contracts\GonieGonie.BuildingEnergy.Contracts.csproj" />
   </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
 </Project>

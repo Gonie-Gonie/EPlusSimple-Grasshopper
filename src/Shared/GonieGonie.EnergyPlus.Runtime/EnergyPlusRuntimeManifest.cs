@@ -16,11 +16,13 @@ public sealed record EnergyPlusRuntimeManifest(
     string EnergyPlusExecutableSha256,
     string EnergyPlusIddSha256,
     string ExpandObjectsSha256,
-    string WeatherPackVersion,
-    string WeatherPackSha256,
+    string WeatherPolicy,
     string CreatedBy)
 {
-    public const string SupportedSchema = "goniegonie.energyplus-runtime.v1";
+    public const string SupportedSchema = "goniegonie.energyplus-runtime.v2";
+    public const string UserSuppliedWeatherPolicy = "user-supplied";
+
+    private const string LegacySchema = "goniegonie.energyplus-runtime.v1";
 
     public static EnergyPlusRuntimeManifest Supported { get; } = new(
         SupportedSchema,
@@ -31,8 +33,7 @@ public sealed record EnergyPlusRuntimeManifest(
         "95f6047e26b9144fcff7771a85afb1e09da1f2434b748b24c092a0be5ac94728",
         "3b56fd8afb02a557f1c2cfb963cbc6f53963738bc6aa169f996d7a5175b324a2",
         "a15bd8e10f6a004e270fa4761527cabc95f776c089b92c11603faba19ed541ae",
-        "weather/v1",
-        "fa88b8d69364b6a6b663afdc6dc2eb30c0ddee17cd37e5802ce5a5dec63d92d0",
+        UserSuppliedWeatherPolicy,
         "GonieGonie-Dragons");
 
     /// <summary>
@@ -64,8 +65,20 @@ public sealed record EnergyPlusRuntimeManifest(
             throw new InvalidDataException("The runtime manifest is empty.");
         }
 
+        var declaredSchema = dto.RuntimeSchema ?? string.Empty;
+        var normalizedSchema = declaredSchema;
+        var weatherPolicy = dto.WeatherPolicy ?? string.Empty;
+        if (string.Equals(declaredSchema, LegacySchema, StringComparison.Ordinal))
+        {
+            // Schema v1 coupled a runtime identity to an unverified weather-pack claim.
+            // Preserve runtime compatibility while explicitly migrating weather handling
+            // to the caller-owned policy used by schema v2.
+            normalizedSchema = SupportedSchema;
+            weatherPolicy = UserSuppliedWeatherPolicy;
+        }
+
         var manifest = new EnergyPlusRuntimeManifest(
-            dto.RuntimeSchema ?? string.Empty,
+            normalizedSchema,
             dto.EnergyPlusVersion ?? string.Empty,
             dto.EnergyPlusBuild ?? string.Empty,
             dto.EnergyPlusArchiveSha256 ?? string.Empty,
@@ -73,8 +86,7 @@ public sealed record EnergyPlusRuntimeManifest(
             dto.EnergyPlusExecutableSha256 ?? string.Empty,
             dto.EnergyPlusIddSha256 ?? string.Empty,
             dto.ExpandObjectsSha256 ?? string.Empty,
-            dto.WeatherPackVersion ?? string.Empty,
-            dto.WeatherPackSha256 ?? string.Empty,
+            weatherPolicy,
             dto.CreatedBy ?? string.Empty);
 
         var errors = manifest.Validate();
@@ -101,8 +113,7 @@ public sealed record EnergyPlusRuntimeManifest(
             EnergyPlusExecutableSha256 = EnergyPlusExecutableSha256,
             EnergyPlusIddSha256 = EnergyPlusIddSha256,
             ExpandObjectsSha256 = ExpandObjectsSha256,
-            WeatherPackVersion = WeatherPackVersion,
-            WeatherPackSha256 = WeatherPackSha256,
+            WeatherPolicy = WeatherPolicy,
             CreatedBy = CreatedBy
         };
 
@@ -119,6 +130,11 @@ public sealed record EnergyPlusRuntimeManifest(
     {
         var errors = new List<string>();
         RequireText(RuntimeSchema, "runtime_schema", errors);
+        if (!string.Equals(RuntimeSchema, SupportedSchema, StringComparison.Ordinal))
+        {
+            errors.Add($"runtime_schema must be {SupportedSchema}.");
+        }
+
         RequireText(EnergyPlusVersion, "energyplus_version", errors);
         RequireText(EnergyPlusBuild, "energyplus_build", errors);
         RequireSha256(EnergyPlusArchiveSha256, "energyplus_archive_sha256", errors);
@@ -130,8 +146,12 @@ public sealed record EnergyPlusRuntimeManifest(
         RequireSha256(EnergyPlusExecutableSha256, "energyplus_exe_sha256", errors);
         RequireSha256(EnergyPlusIddSha256, "energyplus_idd_sha256", errors);
         RequireSha256(ExpandObjectsSha256, "expandobjects_sha256", errors);
-        RequireText(WeatherPackVersion, "weather_pack_version", errors);
-        RequireSha256(WeatherPackSha256, "weather_pack_sha256", errors);
+        RequireText(WeatherPolicy, "weather_policy", errors);
+        if (!string.Equals(WeatherPolicy, UserSuppliedWeatherPolicy, StringComparison.Ordinal))
+        {
+            errors.Add($"weather_policy must be {UserSuppliedWeatherPolicy}.");
+        }
+
         RequireText(CreatedBy, "created_by", errors);
         return errors;
     }
@@ -151,8 +171,7 @@ public sealed record EnergyPlusRuntimeManifest(
         CompareHash(EnergyPlusExecutableSha256, expected.EnergyPlusExecutableSha256, "energyplus_exe_sha256", differences);
         CompareHash(EnergyPlusIddSha256, expected.EnergyPlusIddSha256, "energyplus_idd_sha256", differences);
         CompareHash(ExpandObjectsSha256, expected.ExpandObjectsSha256, "expandobjects_sha256", differences);
-        Compare(WeatherPackVersion, expected.WeatherPackVersion, "weather_pack_version", differences);
-        CompareHash(WeatherPackSha256, expected.WeatherPackSha256, "weather_pack_sha256", differences);
+        Compare(WeatherPolicy, expected.WeatherPolicy, "weather_policy", differences);
         Compare(CreatedBy, expected.CreatedBy, "created_by", differences);
         return differences;
     }
@@ -223,10 +242,13 @@ public sealed record EnergyPlusRuntimeManifest(
         [DataMember(Name = "expandobjects_sha256", IsRequired = true)]
         public string? ExpandObjectsSha256 { get; set; }
 
-        [DataMember(Name = "weather_pack_version", IsRequired = true)]
-        public string? WeatherPackVersion { get; set; }
+        [DataMember(Name = "weather_policy", IsRequired = false, EmitDefaultValue = false)]
+        public string? WeatherPolicy { get; set; }
 
-        [DataMember(Name = "weather_pack_sha256", IsRequired = true)]
+        [DataMember(Name = "weather_pack_version", IsRequired = false, EmitDefaultValue = false)]
+        public string? LegacyWeatherPackVersion { get; set; }
+
+        [DataMember(Name = "weather_pack_sha256", IsRequired = false, EmitDefaultValue = false)]
         public string? WeatherPackSha256 { get; set; }
 
         [DataMember(Name = "created_by", IsRequired = true)]

@@ -189,7 +189,7 @@ public sealed class RuntimeResolver
         }
     }
 
-    private static (IReadOnlyList<string> Roots, EnergyPlusFailure? Failure) ResolveCandidateRoots(
+    private (IReadOnlyList<string> Roots, EnergyPlusFailure? Failure) ResolveCandidateRoots(
         EnergyPlusRuntimeResolveOptions options)
     {
         var roots = new List<string>();
@@ -237,6 +237,34 @@ public sealed class RuntimeResolver
             if (failure is not null)
             {
                 return (roots, failure);
+            }
+        }
+
+        if (options.SearchDefaultCacheLocation)
+        {
+            if (options.CachedRuntimeRoot is not null)
+            {
+                var failure = AddCallerRoot(options.CachedRuntimeRoot, "cached");
+                if (failure is not null)
+                {
+                    return (roots, failure);
+                }
+            }
+            else
+            {
+                try
+                {
+                    var cachedRoot = EnergyPlusRuntimePaths.GetDefaultRuntimeRoot(expectedManifest);
+                    if (seen.Add(cachedRoot))
+                    {
+                        roots.Add(cachedRoot);
+                    }
+                }
+                catch (Exception exception) when (
+                    IsPathException(exception) || exception is InvalidOperationException)
+                {
+                    // Profile-based discovery is optional. Explicit and additional roots remain usable.
+                }
             }
         }
 

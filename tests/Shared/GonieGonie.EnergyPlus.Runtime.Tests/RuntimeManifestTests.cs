@@ -9,13 +9,14 @@ public sealed class RuntimeManifestTests
     {
         var manifest = EnergyPlusRuntimeManifest.Supported;
 
-        Assert.Equal("goniegonie.energyplus-runtime.v1", manifest.RuntimeSchema);
+        Assert.Equal("goniegonie.energyplus-runtime.v2", manifest.RuntimeSchema);
         Assert.Equal("24.2.0", manifest.EnergyPlusVersion);
         Assert.Equal("94a887817b", manifest.EnergyPlusBuild);
         Assert.Empty(manifest.Validate());
         Assert.Equal(EnergyPlusRuntimeIdentity.Supported.EnergyPlusExecutableSha256, manifest.EnergyPlusExecutableSha256);
         Assert.Equal(EnergyPlusRuntimeIdentity.Supported.IddSha256, manifest.EnergyPlusIddSha256);
         Assert.Equal(EnergyPlusRuntimeIdentity.Supported.ExpandObjectsSha256, manifest.ExpandObjectsSha256);
+        Assert.Equal(EnergyPlusRuntimeManifest.UserSuppliedWeatherPolicy, manifest.WeatherPolicy);
     }
 
     [Fact]
@@ -52,5 +53,35 @@ public sealed class RuntimeManifestTests
         var errors = manifest.Validate();
 
         Assert.Contains(errors, error => error.StartsWith("energyplus_exe_sha256", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void LegacyManifestLoadsAsRuntimeOnlySchemaWithUserSuppliedWeather()
+    {
+        using var directory = new TestDirectory();
+        var supported = EnergyPlusRuntimeManifest.Supported;
+        var legacyJson = $$"""
+            {
+              "runtime_schema": "goniegonie.energyplus-runtime.v1",
+              "energyplus_version": "{{supported.EnergyPlusVersion}}",
+              "energyplus_build": "{{supported.EnergyPlusBuild}}",
+              "energyplus_archive_sha256": "{{supported.EnergyPlusArchiveSha256}}",
+              "energyplus_archive_size": {{supported.EnergyPlusArchiveSize}},
+              "energyplus_exe_sha256": "{{supported.EnergyPlusExecutableSha256}}",
+              "energyplus_idd_sha256": "{{supported.EnergyPlusIddSha256}}",
+              "expandobjects_sha256": "{{supported.ExpandObjectsSha256}}",
+              "weather_pack_version": "legacy-unverified-weather",
+              "weather_pack_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "created_by": "{{supported.CreatedBy}}"
+            }
+            """;
+        var path = directory.WriteFile("legacy-manifest.json", legacyJson);
+
+        var loaded = EnergyPlusRuntimeManifest.Load(path);
+
+        Assert.Equal(EnergyPlusRuntimeManifest.SupportedSchema, loaded.RuntimeSchema);
+        Assert.Equal(EnergyPlusRuntimeManifest.UserSuppliedWeatherPolicy, loaded.WeatherPolicy);
+        Assert.Equal(supported, loaded);
+        Assert.DoesNotContain("weather_pack", loaded.ToJson(), StringComparison.Ordinal);
     }
 }

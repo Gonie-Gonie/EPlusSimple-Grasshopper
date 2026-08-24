@@ -45,7 +45,15 @@ public sealed record EnergyPlusRuntimeResolveOptions
 
     public IReadOnlyList<string> AdditionalSearchRoots { get; init; } = Array.Empty<string>();
 
+    /// <summary>
+    /// Overrides the stable GonieGonie per-user cache location used by discovery.
+    /// This is primarily useful for portable hosts and isolated tests.
+    /// </summary>
+    public string? CachedRuntimeRoot { get; init; }
+
     public bool SearchEnvironmentVariables { get; init; } = true;
+
+    public bool SearchDefaultCacheLocation { get; init; } = true;
 
     public bool SearchDefaultInstallLocation { get; init; } = true;
 }
