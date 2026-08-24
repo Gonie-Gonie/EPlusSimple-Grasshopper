@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "dependencies": {
+    ".NETFramework,Version=v4.8": {
+      "Grasshopper": {
+        "type": "Direct",
+        "requested": "[7.0.20314.3001, )",
+        "resolved": "7.0.20314.3001",
+        "contentHash": "8/NnsEbu2sC45ndvXWwvzu7rzj02GHd3/GoPCtHcD6r2iLAIR2xefuyoKt7mpsKra3AQDPMAHoVEA7MYZo2Ecw==",
+        "dependencies": {
+          "RhinoCommon": "[7.0.20314.3001]"
+        }
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies": {
+        "type": "Direct",
+        "requested": "[1.0.3, )",
+        "resolved": "1.0.3",
+        "contentHash": "vUc9Npcs14QsyOD01tnv/m8sQUnGTGOw1BCmKcv77LBJY7OxhJ+zJF7UD/sCL3lYNFuqmQEVlkfS4Quif6FyYg==",
+        "dependencies": {
+          "Microsoft.NETFramework.ReferenceAssemblies.net48": "1.0.3"
+        }
+      },
+      "Rhino.Inside": {
+        "type": "Direct",
+        "requested": "[7.0.0, )",
+        "resolved": "7.0.0",
+        "contentHash": "vEbxNKKNazvKx/2EqaXVRjsYMRdbou+EK+NXAGnFc0hgW6TS0jgHlcvbao/hcNL7JTZME1lQ4dmp0djkvxdQaw==",
+        "dependencies": {
+          "Grasshopper": "7.0.20314.3001",
+          "RhinoCommon": "7.0.20314.3001",
+          "RhinoWindows": "7.0.20314.3001"
+        }
+      },
+      "RhinoCommon": {
+        "type": "Direct",
+        "requested": "[7.0.20314.3001, )",
+        "resolved": "7.0.20314.3001",
+        "contentHash": "uB4NfLaKkQYDLrwfw2YdERr1srOqigPO3d9QoQ5YwkcGB8rDdNhfNwQPW0alNJfTn0n77yGR0S+FSBgXNOfDhw=="
+      },
+      "RhinoWindows": {
+        "type": "Direct",
+        "requested": "[7.0.20314.3001, )",
+        "resolved": "7.0.20314.3001",
+        "contentHash": "r1XgILtCURtjZb2tkCrz0xvzP7w9/yExtfJ06cwlyv7iHn7VB/i3m+68OBveGNCbw9JYIJzhuaMJw5Cv00KO2w==",
+        "dependencies": {
+          "RhinoCommon": "[7.0.20314.3001]"
+        }
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies.net48": {
+        "type": "Transitive",
+        "resolved": "1.0.3",
+        "contentHash": "zMk4D+9zyiEWByyQ7oPImPN/Jhpj166Ky0Nlla4eXlNL8hI/BtSJsgR8Inldd4NNpIAH3oh8yym0W2DrhXdSLQ=="
+      }
+    }
+  }
+}

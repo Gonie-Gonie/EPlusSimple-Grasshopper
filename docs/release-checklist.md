@@ -20,6 +20,7 @@ setup.cmd -InstallEnergyPlus -RequireEnergyPlus
 reference.cmd -Mode Verify
 build.cmd -NoRestore -RequireEnergyPlus
 package.cmd -SkipBuild -NoRestore
+tools\example-definitions\run.cmd -SkipPluginBuild
 ```
 
 - Require zero compiler warnings and errors for `net48`, `net7.0-windows`, and
