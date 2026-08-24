@@ -379,6 +379,42 @@ else {
             $testStatus = 'runtime-dependent-tests-skipped'
         }
     }
+
+    # RhinoCommon's native geometry API must be hosted on an STA thread. The
+    # dedicated executable provides that process boundary and initializes the
+    # installed Rhino 8 runtime through Rhino.Inside before exercising Breps.
+    $rhinoSmokeProject = Join-Path $repositoryRoot 'tools\rhino-smoke\GonieGonie.InvisibleDragon.Rhino.Smoke.csproj'
+    if (Test-Path -LiteralPath $rhinoSmokeProject -PathType Leaf) {
+        if ($rhino8Ready) {
+            $rhinoSmokeExecutable = Join-Path $buildOutputRoot (
+                Join-Path 'GonieGonie.InvisibleDragon.Rhino.Smoke' (
+                    Join-Path $Configuration 'net8.0-windows\GonieGonie.InvisibleDragon.Rhino.Smoke.exe'))
+            if ($PSCmdlet.ShouldProcess($rhinoSmokeExecutable, 'Run Rhino 8 STA geometry smoke checks')) {
+                if (-not (Test-Path -LiteralPath $rhinoSmokeExecutable -PathType Leaf)) {
+                    throw "The Rhino smoke executable was not built at '$rhinoSmokeExecutable'."
+                }
+
+                Invoke-LoggedNativeCommand `
+                    -FilePath $rhinoSmokeExecutable `
+                    -LogPath (Join-Path $logsRoot 'test-GonieGonie.InvisibleDragon.Rhino.Smoke.log') `
+                    -FailureMessage 'Rhino 8 geometry smoke checks failed'
+            }
+            $executedTestProjects += $rhinoSmokeProject
+        }
+        else {
+            $skippedTestProjects += [pscustomobject] [ordered] @{
+                project = $rhinoSmokeProject
+                reason = 'Rhino 8 is unavailable'
+            }
+        }
+    }
+
+    if ($executedTestProjects.Count -gt 0) {
+        $testStatus = 'passed'
+    }
+    elseif ($skippedTestProjects.Count -gt 0) {
+        $testStatus = 'runtime-dependent-tests-skipped'
+    }
 }
 
 $stagedPlugins = @()

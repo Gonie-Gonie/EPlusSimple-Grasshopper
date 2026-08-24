@@ -94,7 +94,8 @@
         "type": "Project",
         "dependencies": {
           "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
+          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )",
+          "System.Text.Json": "[8.0.6, )"
         }
       },
       "System.Text.Json": {

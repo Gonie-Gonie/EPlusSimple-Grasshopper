@@ -8,6 +8,15 @@
         "resolved": "6.0.2",
         "contentHash": "bJShQ6uWRTQ100ZeyiMqcFlhP7WJ+bCuabUs885dJiBEzMsJMSFr7BOyeCw4rgvQokteGi5rKQTlkhfQPUXg2A=="
       },
+      "Grasshopper": {
+        "type": "Direct",
+        "requested": "[8.0.23304.9001, )",
+        "resolved": "8.0.23304.9001",
+        "contentHash": "L1Cse6nAxryzcZ7jsu3WzBiG9BYtgYsaNbRV+p55N+THKTFGmXx1PdBbiWtuxK9kB4jyuLVpeV8XBiYlSGA1Vw==",
+        "dependencies": {
+          "RhinoCommon": "[8.0.23304.9001]"
+        }
+      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[17.11.1, )",
@@ -17,6 +26,12 @@
           "Microsoft.CodeCoverage": "17.11.1",
           "Microsoft.TestPlatform.TestHost": "17.11.1"
         }
+      },
+      "RhinoCommon": {
+        "type": "Direct",
+        "requested": "[8.0.23304.9001, )",
+        "resolved": "8.0.23304.9001",
+        "contentHash": "hWuqXjcj/eb1/z8+bml4Bav/8Oug2p6t0mAVf37GhX9sP+M1aYNO9FappqeN8oefcIBkLBmAzr46DYNhTxFAGQ=="
       },
       "xunit": {
         "type": "Direct",
@@ -123,19 +138,13 @@
           "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
         }
       },
-      "goniegonie.simpledragon.core": {
+      "goniegonie.invisibledragon.grasshopper.types": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
           "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
-          "System.Text.Json": "[8.0.6, )"
+          "Grasshopper": "[8.0.23304.9001, )",
+          "RhinoCommon": "[8.0.23304.9001, )"
         }
-      },
-      "System.Text.Json": {
-        "type": "CentralTransitive",
-        "requested": "[8.0.6, )",
-        "resolved": "8.0.6",
-        "contentHash": "BvSpVBsVN9b+Y+wONbvJOHd1HjXQf33+XiC28ZMOwRsYb42mz3Q8YHnpTSwpwJLqYCMqM+0UUVC3V+pi25XfkQ=="
       }
     }
   }

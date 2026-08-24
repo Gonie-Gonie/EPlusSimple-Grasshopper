@@ -11,6 +11,21 @@
           "Microsoft.NETFramework.ReferenceAssemblies.net48": "1.0.3"
         }
       },
+      "System.Text.Json": {
+        "type": "Direct",
+        "requested": "[8.0.6, )",
+        "resolved": "8.0.6",
+        "contentHash": "BvSpVBsVN9b+Y+wONbvJOHd1HjXQf33+XiC28ZMOwRsYb42mz3Q8YHnpTSwpwJLqYCMqM+0UUVC3V+pi25XfkQ==",
+        "dependencies": {
+          "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
+          "System.Buffers": "4.5.1",
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Text.Encodings.Web": "8.0.0",
+          "System.Threading.Tasks.Extensions": "4.5.4",
+          "System.ValueTuple": "4.5.0"
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
         "resolved": "8.0.0",
@@ -78,30 +93,75 @@
           "System.Text.Json": "[8.0.6, )"
         }
       },
-      "System.Text.Json": {
-        "type": "CentralTransitive",
-        "requested": "[8.0.6, )",
-        "resolved": "8.0.6",
-        "contentHash": "BvSpVBsVN9b+Y+wONbvJOHd1HjXQf33+XiC28ZMOwRsYb42mz3Q8YHnpTSwpwJLqYCMqM+0UUVC3V+pi25XfkQ==",
+      "goniegonie.energyplus.runtime": {
+        "type": "Project",
         "dependencies": {
-          "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
-          "System.Buffers": "4.5.1",
-          "System.Memory": "4.5.5",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
-          "System.Text.Encodings.Web": "8.0.0",
-          "System.Threading.Tasks.Extensions": "4.5.4",
-          "System.ValueTuple": "4.5.0"
+          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
+        }
+      },
+      "goniegonie.invisibledragon.core": {
+        "type": "Project",
+        "dependencies": {
+          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
+          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )",
+          "System.Text.Json": "[8.0.6, )"
         }
       }
     },
     "net7.0-windows7.0": {
+      "System.Text.Json": {
+        "type": "Direct",
+        "requested": "[8.0.6, )",
+        "resolved": "8.0.6",
+        "contentHash": "BvSpVBsVN9b+Y+wONbvJOHd1HjXQf33+XiC28ZMOwRsYb42mz3Q8YHnpTSwpwJLqYCMqM+0UUVC3V+pi25XfkQ==",
+        "dependencies": {
+          "System.Text.Encodings.Web": "8.0.0"
+        }
+      },
+      "System.Text.Encodings.Web": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "yev/k9GHAEGx2Rg3/tU6MQh4HGBXJs70y7j1LaM1i/ER9po+6nnQ6RRqTJn1E7Xu0fbIFK80Nh5EoODxrbxwBQ=="
+      },
       "goniegonie.buildingenergy.contracts": {
         "type": "Project"
+      },
+      "goniegonie.energyplus.runtime": {
+        "type": "Project",
+        "dependencies": {
+          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
+        }
+      },
+      "goniegonie.invisibledragon.core": {
+        "type": "Project",
+        "dependencies": {
+          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
+          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
+        }
       }
     },
     "net8.0-windows7.0": {
+      "System.Text.Json": {
+        "type": "Direct",
+        "requested": "[8.0.6, )",
+        "resolved": "8.0.6",
+        "contentHash": "BvSpVBsVN9b+Y+wONbvJOHd1HjXQf33+XiC28ZMOwRsYb42mz3Q8YHnpTSwpwJLqYCMqM+0UUVC3V+pi25XfkQ=="
+      },
       "goniegonie.buildingenergy.contracts": {
         "type": "Project"
+      },
+      "goniegonie.energyplus.runtime": {
+        "type": "Project",
+        "dependencies": {
+          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
+        }
+      },
+      "goniegonie.invisibledragon.core": {
+        "type": "Project",
+        "dependencies": {
+          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
+          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
+        }
       }
     }
   }

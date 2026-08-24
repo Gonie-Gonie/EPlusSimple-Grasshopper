@@ -5,6 +5,7 @@
     <RootNamespace>GonieGonie.InvisibleDragon.Grasshopper</RootNamespace>
     <Description>Shared Grasshopper data types used by both plugin distributions.</Description>
     <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>

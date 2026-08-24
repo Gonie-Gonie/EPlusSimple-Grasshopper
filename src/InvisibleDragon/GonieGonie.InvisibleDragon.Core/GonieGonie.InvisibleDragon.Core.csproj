@@ -6,8 +6,11 @@
     <Description>Rhino-independent C# port of the InvisibleDragon EnergyPlus model layer.</Description>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
     <PackageReference Include="System.Text.Json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Shared\GonieGonie.BuildingEnergy.Contracts\GonieGonie.BuildingEnergy.Contracts.csproj" />
     <ProjectReference Include="..\..\Shared\GonieGonie.EnergyPlus.Runtime\GonieGonie.EnergyPlus.Runtime.csproj" />
   </ItemGroup>

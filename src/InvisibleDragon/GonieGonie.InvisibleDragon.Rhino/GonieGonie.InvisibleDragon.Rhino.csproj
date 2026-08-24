@@ -4,7 +4,8 @@
     <AssemblyName>GonieGonie.InvisibleDragon.Rhino</AssemblyName>
     <RootNamespace>GonieGonie.InvisibleDragon.Rhino</RootNamespace>
     <Description>Rhino geometry adapters for InvisibleDragon.Core.</Description>
-    <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <!-- CA1510/CA1512 suggest guard APIs that do not exist on the Rhino 7 net48 target. -->
+    <NoWarn>$(NoWarn);NU1701;CA1510;CA1512</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

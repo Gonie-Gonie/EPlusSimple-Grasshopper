@@ -34,6 +34,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{4A3E0C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.EnergyPlus.Runtime.Tests", "tests\Shared\GonieGonie.EnergyPlus.Runtime.Tests\GonieGonie.EnergyPlus.Runtime.Tests.csproj", "{CD98FEA4-B16C-4C1B-B012-E9B9C78259CC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InvisibleDragon", "InvisibleDragon", "{6041BFAB-29C1-47C1-90BB-B9788B1807CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.InvisibleDragon.Rhino.Tests", "tests\InvisibleDragon\GonieGonie.InvisibleDragon.Rhino.Tests\GonieGonie.InvisibleDragon.Rhino.Tests.csproj", "{2D01D1A5-D7EA-4326-8618-0AD5CDA7A09B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{99E9D322-CE32-45E7-8852-2416AC9530A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.InvisibleDragon.Rhino.Smoke", "tools\rhino-smoke\GonieGonie.InvisibleDragon.Rhino.Smoke.csproj", "{589883DE-6C2D-4AA0-8FCE-7EF11206428E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.InvisibleDragon.Grasshopper.Types.Tests", "tests\InvisibleDragon\GonieGonie.InvisibleDragon.Grasshopper.Types.Tests\GonieGonie.InvisibleDragon.Grasshopper.Types.Tests.csproj", "{3E988FB3-1A78-4806-8FC9-E7D0CAE8C348}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +106,18 @@ Global
 		{CD98FEA4-B16C-4C1B-B012-E9B9C78259CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD98FEA4-B16C-4C1B-B012-E9B9C78259CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD98FEA4-B16C-4C1B-B012-E9B9C78259CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D01D1A5-D7EA-4326-8618-0AD5CDA7A09B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D01D1A5-D7EA-4326-8618-0AD5CDA7A09B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D01D1A5-D7EA-4326-8618-0AD5CDA7A09B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D01D1A5-D7EA-4326-8618-0AD5CDA7A09B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{589883DE-6C2D-4AA0-8FCE-7EF11206428E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{589883DE-6C2D-4AA0-8FCE-7EF11206428E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{589883DE-6C2D-4AA0-8FCE-7EF11206428E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{589883DE-6C2D-4AA0-8FCE-7EF11206428E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E988FB3-1A78-4806-8FC9-E7D0CAE8C348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E988FB3-1A78-4806-8FC9-E7D0CAE8C348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E988FB3-1A78-4806-8FC9-E7D0CAE8C348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E988FB3-1A78-4806-8FC9-E7D0CAE8C348}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,5 +125,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4A3E0CF3-4C4D-45F3-9C91-31D5C18FA014} = {65F29CFD-8035-4E56-9A1A-8DC76C52960F}
 		{CD98FEA4-B16C-4C1B-B012-E9B9C78259CC} = {4A3E0CF3-4C4D-45F3-9C91-31D5C18FA014}
+		{6041BFAB-29C1-47C1-90BB-B9788B1807CF} = {65F29CFD-8035-4E56-9A1A-8DC76C52960F}
+		{2D01D1A5-D7EA-4326-8618-0AD5CDA7A09B} = {6041BFAB-29C1-47C1-90BB-B9788B1807CF}
+		{3E988FB3-1A78-4806-8FC9-E7D0CAE8C348} = {6041BFAB-29C1-47C1-90BB-B9788B1807CF}
+		{589883DE-6C2D-4AA0-8FCE-7EF11206428E} = {99E9D322-CE32-45E7-8852-2416AC9530A9}
 	EndGlobalSection
 EndGlobal

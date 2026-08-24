@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\GonieGonie.BuildingEnergy.Contracts\GonieGonie.BuildingEnergy.Contracts.csproj" />
+    <ProjectReference Include="..\..\InvisibleDragon\GonieGonie.InvisibleDragon.Core\GonieGonie.InvisibleDragon.Core.csproj" />
     <PackageReference Include="System.Text.Json" />
   </ItemGroup>
 
