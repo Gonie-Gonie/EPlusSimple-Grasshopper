@@ -8,7 +8,7 @@ namespace GonieGonie.InvisibleDragon.Hvac;
 /// <summary>
 /// A variable-refrigerant-flow outdoor heat-pump unit.
 /// </summary>
-public sealed class HeatPump : SourceSystem
+public class HeatPump : SourceSystem
 {
     public HeatPump(
         EntityId id,
