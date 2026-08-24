@@ -68,6 +68,11 @@ public sealed class ExtractSimpleDragonZonesComponent : SimpleDragonComponent
         pManager.AddParameter(new SimpleDragonSurfaceParam(), "Surfaces", "S", "Extracted area-based surfaces.", GH_ParamAccess.list);
         pManager.AddTextParameter("Geometry Map", "Map", "Domain ID to Rhino source/face/loop mapping.", GH_ParamAccess.list);
         pManager.AddParameter(new DiagnosticParam(), "Diagnostics", "D", "Geometry abstraction and validation diagnostics.", GH_ParamAccess.list);
+        pManager.AddGenericParameter(
+            "Geometry Map Data",
+            "Map Data",
+            "Structured Rhino-independent geometry mappings for CSV export and downstream data workflows.",
+            GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
@@ -182,6 +187,7 @@ public sealed class ExtractSimpleDragonZonesComponent : SimpleDragonComponent
         DA.SetDataList(1, extraction.Zones.SelectMany(item => item.Surfaces).Select(item => new SimpleDragonSurfaceGoo(item)));
         DA.SetDataList(2, extraction.GeometryMap.Select(FormatMap));
         DA.SetDataList(3, diagnostics.Select(item => new DiagnosticGoo(item)));
+        DA.SetDataList(4, extraction.GeometryMap.Select(ToCoreGeometryMapEntry));
     }
 
     private static void ValidateParallelValues(int valueCount, int sourceCount, string description)
@@ -223,5 +229,25 @@ public sealed class ExtractSimpleDragonZonesComponent : SimpleDragonComponent
             + " | face " + face
             + " | loop " + loop
             + " | " + entry.Provenance.GeometryFingerprint;
+    }
+
+    private static GreenRetrofitGeometryMapEntry ToCoreGeometryMapEntry(
+        RhinoDomainGeometryMapEntry entry)
+    {
+        GreenRetrofitGeometryKind kind = entry.Kind switch
+        {
+            RhinoMappedGeometryKind.Zone => GreenRetrofitGeometryKind.Zone,
+            RhinoMappedGeometryKind.Surface => GreenRetrofitGeometryKind.Surface,
+            RhinoMappedGeometryKind.Fenestration => GreenRetrofitGeometryKind.Fenestration,
+            _ => throw new ArgumentOutOfRangeException(nameof(entry)),
+        };
+        return new GreenRetrofitGeometryMapEntry(
+            entry.EntityId,
+            kind,
+            entry.SourceIndex,
+            entry.FaceIndex,
+            entry.BrepLoopIndex,
+            entry.FenestrationSourceIndex,
+            entry.Provenance);
     }
 }
