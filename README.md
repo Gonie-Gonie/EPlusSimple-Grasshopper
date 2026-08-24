@@ -4,11 +4,11 @@ This Gonie-Gonie repository ports the upstream EPlusSimple 0.7.0 project and
 its IDragon layer to two independently installable Rhino 7+ / Grasshopper
 plugins written in C#. The public product names in this port are:
 
-- `GonieGonie.InvisibleDragon.GH` preserves planar polygon vertices and builds
-  EnergyPlus models.
-- `GonieGonie.SimpleDragon.GH` preserves the upstream area-and-azimuth
-  abstraction and uses `GreenRetrofitModel.ToInvisibleDragon()` as its
-  simulation conversion path.
+- `GonieGonie.InvisibleDragon.GH` is the renamed IDragon port. It preserves
+  planar polygon vertices and builds EnergyPlus models.
+- `GonieGonie.SimpleDragon.GH` is the renamed EPlusSimple port. It preserves the
+  area-and-azimuth abstraction and uses
+  `GreenRetrofitModel.ToInvisibleDragon()` as its simulation conversion path.
 
 The tracked upstream source is pinned in
 [`upstream/upstream.lock.json`](upstream/upstream.lock.json). Python is used only
@@ -34,10 +34,10 @@ Grasshopper load, geometry, and document tests.
 ## Installing a packaged candidate
 
 Installed plugins require Rhino 7 or Rhino 8 on Windows, but not the .NET SDK,
-Python, or Visual Studio. Use the product's matching Yak package when available;
-portable plugin ZIPs are also generated for controlled deployment and
-inspection. EnergyPlus and EPW weather files are separate from every plugin
-package.
+Python, or Visual Studio. Local candidate builds produce a matching Yak archive
+and portable plugin ZIP for each product. These outputs are currently for
+controlled verification and inspection only; they are not publicly published.
+EnergyPlus and EPW weather files are separate from every plugin package.
 
 Read [Installation](docs/installation.md), [Choosing a Dragon](docs/choosing-a-dragon.md),
 and [EnergyPlus and weather](docs/energyplus-and-weather.md) before using a
@@ -86,18 +86,46 @@ are routed under `temp`; NuGet packages and reusable local toolchains are under
 `.tools`. Run `scripts\clean.ps1` to safely remove only `temp` and generated
 artifact contents while preserving `.tools` and `artifacts\README.md`.
 
+To package an already successful build into deterministic Yak archives and
+portable plugin ZIPs, run:
+
+```text
+package.cmd -SkipBuild
+```
+
+The two tracked starter definitions under [`examples`](examples/README.md) use
+real Dragon components and persisted wires. Rhino 7 generates the canonical
+files; `tools\example-definitions\run.cmd` solves, saves, reopens, and
+round-trip validates them in both Rhino 7 and Rhino 8.
+
+Maintainers can execute the complete first-candidate gate with:
+
+```text
+release.cmd
+```
+
+This command requires a clean `main` commit already pushed to `origin/main`,
+both Rhino 7 and Rhino 8, and the pinned EnergyPlus runtime (which setup can
+prepare). It repeats setup, oracle verification, build/tests, example
+round-trips, packaging, and six exact-portable-ZIP host scenarios, then writes
+the attested local candidate below `artifacts\release`. It does not create a
+tag, GitHub release, plugin installation, or Yak publication. See the
+[release checklist](docs/release-checklist.md) for the evidence reviewed by the
+gate.
+
 ## Current status
 
-The port is under active development toward the first independently installable
-`InvisibleDragon 0.1.0` and `SimpleDragon 0.1.0` distributions. A generated
+The port is preparing the first independently installable local
+`InvisibleDragon 0.1.0` and `SimpleDragon 0.1.0` release candidate. A generated
 binary is not considered compatible until the algorithm, semantic IDF,
-EnergyPlus result, Rhino geometry, and dual-package load gates applicable to it
-pass.
+EnergyPlus result, Rhino geometry, example round-trip, and isolated/co-loaded
+package gates applicable to it pass.
 
 The [documentation index](docs/README.md) covers the end-user workflow,
 compatibility boundary, troubleshooting, examples, and maintainer release
-gates. Public binary publication remains subject to the provenance check
-recorded in [NOTICE.md](NOTICE.md).
+gates. No public binary, release tag, GitHub release, or Yak publication is
+authorized until the historical upstream standalone-license omission recorded
+in [NOTICE.md](NOTICE.md) has been reviewed and resolved.
 
 ## Repository rules
 

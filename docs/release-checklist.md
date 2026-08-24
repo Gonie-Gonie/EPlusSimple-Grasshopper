@@ -1,7 +1,8 @@
 # Release checklist
 
-This checklist is for maintainers. Building a candidate does not authorize
-publication, Yak upload, tag creation, or a public GitHub release.
+This checklist is for maintainers preparing the first local InvisibleDragon and
+SimpleDragon 0.1.0 candidate for Rhino 7+. Building a candidate does not
+authorize publication, Yak upload, tag creation, or a GitHub release.
 
 ## Source and provenance
 
@@ -12,15 +13,31 @@ publication, Yak upload, tag creation, or a public GitHub release.
 - Recheck `LICENSE` and `NOTICE.md`. Resolve the recorded historical upstream
   standalone-license omission before public binary release.
 - Confirm that no weather payload or unlicensed EPW is present.
+- Require both Rhino 7 and Rhino 8 for the complete release gate. A normal
+  developer build may skip tests for a missing Rhino generation, but a release
+  candidate may not.
 
 ## Reproducibility and behavior
 
+The supported one-command local candidate gate is:
+
 ```text
-setup.cmd -InstallEnergyPlus -RequireEnergyPlus
+release.cmd
+```
+
+It verifies the clean branch and live `origin/main`, prepares the pinned local
+environment, runs the full sequence below, and publishes the verified report
+set atomically to `artifacts\release`. A failed rerun leaves no partially
+published candidate there.
+
+For diagnosis, its constituent commands are:
+
+```text
+setup.cmd -InstallEnergyPlus -RequireEnergyPlus -RequireRhino7 -RequireRhino8
 reference.cmd -Mode Verify
 build.cmd -NoRestore -RequireEnergyPlus
-package.cmd -SkipBuild -NoRestore
 tools\example-definitions\run.cmd -SkipPluginBuild
+package.cmd -SkipBuild -RunPortableHostGate
 ```
 
 - Require zero compiler warnings and errors for `net48`, `net7.0-windows`, and
@@ -29,6 +46,9 @@ tools\example-definitions\run.cmd -SkipPluginBuild
   Grasshopper save/reopen gates applicable to the machine.
 - Run package-host scenarios from safely extracted portable archives in Rhino
   7 and Rhino 8: InvisibleDragon-only, SimpleDragon-only, and both.
+- Require both genuine starter definitions to solve, save, reopen, preserve
+  their real wires and typed construction values, and round-trip without
+  structural drift in Rhino 7 and Rhino 8.
 - Confirm the package verifier reports correct Yak tags, framework layout,
   shared DLL hashes, component interoperability, and no Python/Rhino SDK/runtime
   payload leakage.
@@ -36,18 +56,26 @@ tools\example-definitions\run.cmd -SkipPluginBuild
 
 ## Candidate review
 
-- Inspect `package-index.json`, compatibility report, SHA-256 inventory, build
-  manifest, test report, and real-host summaries.
-- Open at least one authored HVAC definition and one existing GRM workflow in
-  each installed Rhino generation.
+- Inspect `artifacts\release\release-gate.json`, its checksum inventory, the
+  package index and compatibility report, build/test reports, and all six
+  copied real-host summaries.
+- Open the tracked InvisibleDragon and SimpleDragon starter definitions in each
+  installed Rhino generation. Separately exercise a direct InvisibleDragon
+  HVAC graph and a SimpleDragon HVAC-to-InvisibleDragon conversion using the
+  recipes in `examples\README.md`.
 - Verify explicit Run/Prepare trigger behavior, cancellation, cache reuse,
   user-supplied EPW handling, CSV schema, and saved Goo persistence.
 - Review release notes for exact supported and intentionally unsupported scope.
 
 ## Publication
 
-Pushing `invisible-dragon-vX.Y.Z` or `simple-dragon-vX.Y.Z` starts the attested
-release-candidate workflow and creates a GitHub **draft** release only. Inspect
-that draft and its provenance before making it public. Yak publication is a
-separate, explicitly authorized operation and is never performed by repository
-build or package scripts.
+`release.cmd` creates local evidence only. It never creates a tag, GitHub
+release, plugin installation, or Yak publication.
+
+Do not push an `invisible-dragon-vX.Y.Z` or `simple-dragon-vX.Y.Z` tag, upload a
+binary, create or publish a GitHub release, or publish to Yak while the
+historical upstream standalone-license omission recorded in `NOTICE.md` remains
+under review. After that review is explicitly resolved, a matching tag may
+start the attested workflow and create a GitHub **draft** release for separate
+inspection. Yak publication remains a distinct, explicitly authorized manual
+operation.
