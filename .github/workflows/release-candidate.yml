@@ -1,0 +1,141 @@
+name: Build release candidate
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - invisible-dragon-v*
+      - simple-dragon-v*
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-candidate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  package:
+    name: Verify and package Dragon 0.1.0
+    runs-on: windows-latest
+    timeout-minutes: 90
+    permissions:
+      attestations: write
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Check out exact release source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Select exact Python oracle
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: 3.12.7
+          check-latest: false
+
+      - name: Validate tag and package version
+        id: release
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $spec = Get-Content -LiteralPath 'packaging/package-spec.json' -Raw | ConvertFrom-Json
+          $product = 'all'
+          $tagVersion = [string] $spec.version
+          if ($env:GITHUB_REF_TYPE -eq 'tag') {
+            if ($env:GITHUB_REF_NAME -notmatch '^(invisible-dragon|simple-dragon)-v(?<version>[0-9]+\.[0-9]+\.[0-9]+)$') {
+              throw "Unsupported release tag '$env:GITHUB_REF_NAME'."
+            }
+
+            $product = $Matches[1]
+            $tagVersion = $Matches['version']
+            if ($tagVersion -ne [string] $spec.version) {
+              throw "Tag version $tagVersion does not match package-spec version $($spec.version)."
+            }
+          }
+
+          "product=$product" | Out-File -LiteralPath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          "version=$tagVersion" | Out-File -LiteralPath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Bootstrap pinned SDK, Python, and EnergyPlus
+        shell: powershell
+        run: .\setup.cmd -InstallEnergyPlus -RequireEnergyPlus
+
+      - name: Verify pinned Python compatibility oracle
+        shell: powershell
+        run: .\reference.cmd -Mode Verify
+
+      - name: Build and test every Rhino target
+        shell: powershell
+        run: .\build.cmd -NoRestore -RequireEnergyPlus
+
+      - name: Build and verify Yak and portable packages
+        shell: powershell
+        run: .\package.cmd -SkipBuild -NoRestore
+
+      - name: Reject dirty or untracked release inputs
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $status = @(git status --porcelain --untracked-files=all)
+          if ($LASTEXITCODE -ne 0) {
+            throw 'git status failed.'
+          }
+
+          $unexpected = @($status | Where-Object {
+            $_ -notmatch '^\?\? artifacts/' -and
+            $_ -notmatch '^\?\? temp/'
+          })
+          if ($unexpected.Count -ne 0) {
+            throw "Release source changed during verification:`n$($unexpected -join [Environment]::NewLine)"
+          }
+
+      - name: Attest packaged binaries
+        uses: actions/attest-build-provenance@43d14bc2b83dec42d39ecae14e916627a18bb661 # v3
+        with:
+          subject-path: |
+            artifacts/packages/**/*.yak
+            artifacts/packages/**/*-portable-plugin-win.zip
+            artifacts/packages/checksums.sha256
+
+      - name: Upload complete release candidate
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: dragons-${{ steps.release.outputs.version }}-${{ github.sha }}
+          path: |
+            artifacts/packages/
+            artifacts/reports/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Create product GitHub draft release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_PRODUCT: ${{ steps.release.outputs.product }}
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $productRoot = Join-Path 'artifacts/packages' $env:RELEASE_PRODUCT
+          $assets = @(
+            Get-ChildItem -LiteralPath (Join-Path $productRoot 'yak') -Filter '*.yak' -File
+            Get-ChildItem -LiteralPath (Join-Path $productRoot 'portable') -Filter '*-portable-plugin-win.zip' -File
+            Get-Item -LiteralPath 'artifacts/packages/package-index.json'
+            Get-Item -LiteralPath 'artifacts/packages/compatibility-report.json'
+            Get-Item -LiteralPath 'artifacts/packages/checksums.sha256'
+          ) | ForEach-Object FullName
+          if ($assets.Count -ne 6) {
+            throw "Expected six release assets for $env:RELEASE_PRODUCT; found $($assets.Count)."
+          }
+
+          gh release create $env:GITHUB_REF_NAME `
+            --repo $env:GITHUB_REPOSITORY `
+            --verify-tag `
+            --draft `
+            --generate-notes `
+            --title "$env:RELEASE_PRODUCT $env:RELEASE_VERSION" `
+            @assets
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Creating the GitHub draft release failed.'
+          }
