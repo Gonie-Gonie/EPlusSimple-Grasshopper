@@ -18,8 +18,8 @@ artifacts/
 |       |-- net7.0/
 |       `-- net8.0/
 |-- packages/
-|   |-- invisible-dragon/{stage,yak,offline}/
-|   |-- simple-dragon/{stage,yak,offline}/
+|   |-- invisible-dragon/{stage,yak,portable}/
+|   |-- simple-dragon/{stage,yak,portable}/
 |   |-- compatibility-report.json
 |   `-- checksums.sha256
 `-- reports/
@@ -29,4 +29,4 @@ artifacts/
 
 Delete the generated files at any time and run `build.cmd` to reproduce them.
 Run `package.cmd` to reproduce the lean package stages, Yak distributions, and
-plugin-only offline ZIPs after the normal build artifacts are available.
+portable plugin ZIPs after the normal build artifacts are available.

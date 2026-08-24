@@ -118,9 +118,9 @@ This is a Gonie-Gonie $PayloadDescription for Grasshopper on Windows.
 
 It contains only managed plugin/runtime-bootstrap assemblies. RhinoCommon,
 Grasshopper, debug symbols, XML documentation, Python, EnergyPlus binaries,
-and weather files are intentionally excluded. Install or prepare the pinned
-EnergyPlus runtime separately; the Gonie-Gonie runtime bootstrap validates and
-reuses that runtime when a simulation is requested.
+and weather files are intentionally excluded. When a simulation is requested,
+the Gonie-Gonie runtime bootstrap validates/reuses a compatible EnergyPlus
+installation or securely prepares the pinned runtime. Supply an EPW separately.
 
 See `package-manifest.json`, `checksums.sha256`, `LICENSE.txt`, and `NOTICE.md`
 in this directory for identity, integrity, licensing, and provenance details.
@@ -450,10 +450,10 @@ foreach ($product in @($spec.products)) {
     $productRoot = Join-Path $packagesRoot ([string] $product.id)
     $stageOutputRoot = Join-Path $productRoot 'stage'
     $yakOutputRoot = Join-Path $productRoot 'yak'
-    $offlineOutputRoot = Join-Path $productRoot 'offline'
+    $portableOutputRoot = Join-Path $productRoot 'portable'
     Ensure-Directory -Path $stageOutputRoot
     Ensure-Directory -Path $yakOutputRoot
-    Ensure-Directory -Path $offlineOutputRoot
+    Ensure-Directory -Path $portableOutputRoot
 
     $yakOutputs = @()
     foreach ($target in @($spec.targets)) {
@@ -511,40 +511,40 @@ foreach ($product in @($spec.products)) {
             -ProbeDirectories $payloadProbeDirectories
     }
 
-    $offlineStage = Join-Path $workingRoot (Join-Path 'offline' ([string] $product.id))
+    $portableStage = Join-Path $workingRoot (Join-Path 'portable' ([string] $product.id))
     Copy-PackageRootFiles `
         -Product $product `
-        -Destination $offlineStage `
-        -PayloadDescription 'offline plugin bundle'
-    $offlineTargets = @()
+        -Destination $portableStage `
+        -PayloadDescription 'portable plugin bundle'
+    $portableTargets = @()
     foreach ($target in @($spec.targets)) {
         foreach ($framework in @($target.frameworks)) {
             $frameworkName = [string] $framework
-            $payloadDestination = Join-Path $offlineStage (Join-Path ([string] $target.id) $frameworkName)
+            $payloadDestination = Join-Path $portableStage (Join-Path ([string] $target.id) $frameworkName)
             Copy-FrameworkPayload `
                 -Product $product `
                 -Target ([string] $target.id) `
                 -Framework $frameworkName `
                 -Destination $payloadDestination
-            $offlineTargets += [pscustomobject] [ordered] @{
+            $portableTargets += [pscustomobject] [ordered] @{
                 rhino = [string] $target.id
                 framework = $frameworkName
-                layout = 'offline-framework-directories'
+                layout = 'portable-framework-directories'
                 distribution = [string] $target.distribution_tag
             }
         }
     }
     Write-PayloadManifest `
         -Product $product `
-        -Root $offlineStage `
-        -Kind 'offline-plugin' `
-        -Targets $offlineTargets
+        -Root $portableStage `
+        -Kind 'portable-plugin' `
+        -Targets $portableTargets
 
-    $offlineName = '{0}-{1}-offline-plugin-win.zip' -f $product.id, $spec.version
-    $offlinePath = Join-Path $offlineOutputRoot $offlineName
+    $portableName = '{0}-{1}-portable-plugin-win.zip' -f $product.id, $spec.version
+    $portablePath = Join-Path $portableOutputRoot $portableName
     [System.IO.Compression.ZipFile]::CreateFromDirectory(
-        $offlineStage,
-        $offlinePath,
+        $portableStage,
+        $portablePath,
         [System.IO.Compression.CompressionLevel]::Optimal,
         $false)
 
@@ -553,9 +553,9 @@ foreach ($product in @($spec.products)) {
         name = [string] $product.display_name
         version = [string] $spec.version
         yak = @($yakOutputs)
-        offline = [pscustomobject] [ordered] @{
-            artifact = Get-RelativeUnixPath -Root $packagesRoot -Path $offlinePath
-            sha256 = Get-Sha256 -Path $offlinePath
+        portable = [pscustomobject] [ordered] @{
+            artifact = Get-RelativeUnixPath -Root $packagesRoot -Path $portablePath
+            sha256 = Get-Sha256 -Path $portablePath
         }
     }
 }
@@ -568,7 +568,7 @@ $index = [pscustomobject] [ordered] @{
     redistribution = [pscustomobject] [ordered] @{
         energyPlusBinariesIncluded = $false
         weatherIncluded = $false
-        offlineArchivesArePluginOnly = $true
+        portableArchivesArePluginOnly = $true
     }
 }
 Write-Utf8JsonIfChanged -InputObject $index -Path (Join-Path $packagesRoot 'package-index.json') -Depth 10

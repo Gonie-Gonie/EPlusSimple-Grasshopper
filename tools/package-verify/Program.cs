@@ -160,7 +160,7 @@ internal sealed class PackageVerifier
         }
 
         VerifyYakArchives(scenario, product, Path.Combine(productRoot, "yak"));
-        VerifyOfflineArchive(scenario, product, Path.Combine(productRoot, "offline"));
+        VerifyPortableArchive(scenario, product, Path.Combine(productRoot, "portable"));
     }
 
     private void VerifyStage(string scenario, ProductSpec product, TargetSpec target, string stageRoot)
@@ -409,19 +409,19 @@ internal sealed class PackageVerifier
         }
     }
 
-    private void VerifyOfflineArchive(string scenario, ProductSpec product, string offlineRoot)
+    private void VerifyPortableArchive(string scenario, ProductSpec product, string portableRoot)
     {
-        string expectedName = product.Id + "-" + _spec.Version + "-offline-plugin-win.zip";
-        string path = Path.Combine(offlineRoot, expectedName);
-        Check(scenario, File.Exists(path), "Offline plugin ZIP is missing: '" + path + "'.");
+        string expectedName = product.Id + "-" + _spec.Version + "-portable-plugin-win.zip";
+        string path = Path.Combine(portableRoot, expectedName);
+        Check(scenario, File.Exists(path), "Portable plugin ZIP is missing: '" + path + "'.");
         if (!File.Exists(path))
         {
             return;
         }
 
-        string[] actual = Directory.EnumerateFiles(offlineRoot, "*.zip").Select(Path.GetFileName).ToArray()!;
+        string[] actual = Directory.EnumerateFiles(portableRoot, "*.zip").Select(Path.GetFileName).ToArray()!;
         Check(scenario, actual.Length == 1 && actual[0] == expectedName,
-            "Offline output must contain exactly the versioned plugin-only ZIP for " + product.DisplayName + ".");
+            "Portable output must contain exactly the versioned plugin-only ZIP for " + product.DisplayName + ".");
         using ZipArchive archive = ZipFile.OpenRead(path);
         string[] entries = archive.Entries.Where(item => !string.IsNullOrEmpty(item.Name))
             .Select(item => NormalizeArchivePath(item.FullName)).ToArray();
@@ -429,7 +429,7 @@ internal sealed class PackageVerifier
         foreach (string name in RequiredRootFiles)
         {
             Check(scenario, entries.Contains(name, StringComparer.Ordinal),
-                "Offline ZIP is missing root file '" + name + "' for " + product.DisplayName + ".");
+                "Portable ZIP is missing root file '" + name + "' for " + product.DisplayName + ".");
         }
         foreach (TargetSpec target in _spec.Targets)
         {
@@ -437,7 +437,7 @@ internal sealed class PackageVerifier
             {
                 string prefix = target.Id + "/" + framework + "/";
                 Check(scenario, entries.Contains(prefix + product.EntryAssembly, StringComparer.Ordinal),
-                    "Offline ZIP is missing " + prefix + product.EntryAssembly + ".");
+                    "Portable ZIP is missing " + prefix + product.EntryAssembly + ".");
                 VerifyArchiveAssemblyDuplicates(scenario, product, archive, prefix);
             }
         }
@@ -459,7 +459,7 @@ internal sealed class PackageVerifier
             string path = NormalizeArchivePath(entry.FullName);
             if (!identities.TryAdd(metadata.Name, path))
             {
-                Failure(scenario, "Offline ZIP contains duplicate assembly identity '" + metadata.Name
+                Failure(scenario, "Portable ZIP contains duplicate assembly identity '" + metadata.Name
                     + "' for " + product.DisplayName + " under " + prefix + ".");
             }
         }
@@ -627,18 +627,18 @@ internal sealed class PackageVerifier
             Match match = Regex.Match(line, "^(?<hash>[0-9a-f]{64})  (?<path>.+)$", RegexOptions.CultureInvariant);
             if (!match.Success)
             {
-                Failure(scenario, "Invalid checksum line inside offline ZIP: '" + line + "'.");
+                Failure(scenario, "Invalid checksum line inside portable ZIP: '" + line + "'.");
                 continue;
             }
             string path = match.Groups["path"].Value;
             listed.Add(path);
             ZipArchiveEntry? entry = FindEntry(archive, path);
-            Check(scenario, entry is not null, "Offline ZIP checksum target is missing: '" + path + "'.");
+            Check(scenario, entry is not null, "Portable ZIP checksum target is missing: '" + path + "'.");
             if (entry is not null)
             {
                 using Stream stream = entry.Open();
                 Check(scenario, Sha256(stream) == match.Groups["hash"].Value,
-                    "Offline ZIP SHA-256 mismatch for '" + path + "'.");
+                    "Portable ZIP SHA-256 mismatch for '" + path + "'.");
             }
         }
 
@@ -647,7 +647,7 @@ internal sealed class PackageVerifier
             .Where(path => path != "checksums.sha256")
             .OrderBy(path => path, StringComparer.Ordinal).ToArray();
         Check(scenario, listed.OrderBy(path => path, StringComparer.Ordinal).SequenceEqual(expected, StringComparer.Ordinal),
-            "Offline ZIP checksum inventory is incomplete or contains extra paths.");
+            "Portable ZIP checksum inventory is incomplete or contains extra paths.");
     }
 
     private static AssemblyMetadata ReadAssembly(string path)

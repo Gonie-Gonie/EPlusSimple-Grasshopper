@@ -16,15 +16,16 @@ InvisibleDragon. The tracked upstream commit does not contain a standalone
 a public binary release.
 
 EnergyPlus is a separate product of the U.S. Department of Energy and its
-contributors. EnergyPlus binaries and data are not stored in this repository.
-The setup and packaging tools obtain or locate the pinned EnergyPlus runtime
-and retain its own license and notices.
+contributors. EnergyPlus binaries and data are not stored in this repository or
+redistributed inside plugin packages. Development setup and the installed-plugin
+bootstrap obtain or locate the pinned EnergyPlus runtime and retain its own
+license and notices.
 
 Rhino, RhinoCommon, Grasshopper, and Yak are products or technologies of Robert
 McNeel & Associates. Their SDK assemblies are restored from McNeel's NuGet
 packages and are not redistributed as part of the plugin payload.
 
-Korean TMY weather files are not stored in this repository. Setup downloads
-them from the separately published upstream EPlusSimple resources release when
-requested. Their redistribution terms must be confirmed before an offline
-bundle is published.
+Korean TMY weather files are not stored in this repository, downloaded by
+setup, or redistributed in packages. Users must supply an EPW file. Weather
+redistribution rights must be established separately before any weather payload
+is added to a future distribution.

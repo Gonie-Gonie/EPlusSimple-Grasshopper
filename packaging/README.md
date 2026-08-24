@@ -3,7 +3,7 @@
 `package.cmd` is the local, one-command packaging entry point. It builds the
 Release plugins unless `-SkipBuild` is supplied, verifies/downloads the exact
 Yak executable pinned in `yak.lock.json`, creates fresh package stages, builds
-Yak archives, creates plugin-only offline ZIPs, and runs the package layout and
+Yak archives, creates portable plugin ZIPs, and runs the package layout and
 shared-assembly compatibility gates. It never publishes or installs a package.
 
 Generated output is written below `artifacts/packages`; disposable work and
@@ -17,8 +17,8 @@ artifacts/packages/<product>/
 |-- yak/
 |   |-- <product>-0.1.0-rh7-win.yak
 |   `-- <product>-0.1.0-rh8-win.yak
-`-- offline/
-    `-- <product>-0.1.0-offline-plugin-win.zip
+`-- portable/
+    `-- <product>-0.1.0-portable-plugin-win.zip
 ```
 
 The stage and ZIP roots include their manifest, icon, Gonie-Gonie notices,
@@ -26,13 +26,15 @@ payload manifest, and SHA-256 list. Plugin payloads contain runtime assemblies
 only: RhinoCommon, Grasshopper, PDB, XML documentation, Python, EnergyPlus
 binaries, and weather files are excluded. The Gonie-Gonie runtime bootstrap
 locates or prepares the separately pinned EnergyPlus runtime after install.
+The user must provide an EPW file, so the portable ZIP is not a fully offline
+simulation bundle.
 
 Yak 0.13.0 is executed from a SHA-256-verified temp copy. A source-built startup
 hook gives Yak's inspection-only process access to the staged dependencies and
 the locked RhinoCommon/Grasshopper NuGet reference assemblies. Those resolver
 files remain below `temp/packaging`; the verifier rejects them from every stage,
-Yak archive, offline ZIP, and artifact tree. Packaging accepts only the real
-`rh7_*`/`rh8_*` tags inferred by Yak from the entry GHA—an `any` tag is a hard
+Yak archive, portable ZIP, and artifact tree. Packaging accepts only the real
+`rh7_*`/`rh8_*` tags inferred by Yak from the entry GHA; an `any` tag is a hard
 failure.
 
 Rhino 7 receives a flat `net48` Yak distribution. Rhino 8 receives an official

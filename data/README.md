@@ -8,4 +8,4 @@ release tests.
 They contain the source project's material, construction-regulation, profile,
 holiday, climate-region, and address-to-weather metadata used by SimpleDragon.
 They are product inputs, not temporary test output. Runtime EPW weather files
-are intentionally excluded and are prepared under `.tools` by setup.
+are intentionally excluded and must be supplied by the user.
