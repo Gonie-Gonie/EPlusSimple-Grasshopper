@@ -25,7 +25,7 @@ public sealed class GrasshopperAssemblyTests
         Type[] componentTypes = ComponentTypes(assembly);
 
         Assert.EndsWith(".gha", assembly.Location, StringComparison.OrdinalIgnoreCase);
-        Assert.Equal(13, componentTypes.Length);
+        Assert.Equal(14, componentTypes.Length);
         Assert.All(componentTypes, type => Assert.NotNull(Activator.CreateInstance(type)));
     }
 

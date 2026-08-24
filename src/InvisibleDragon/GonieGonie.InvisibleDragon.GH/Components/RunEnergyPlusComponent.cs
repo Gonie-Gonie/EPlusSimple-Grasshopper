@@ -20,14 +20,12 @@ namespace GonieGonie.InvisibleDragon.Grasshopper.Components;
 public sealed class RunEnergyPlusComponent : DragonComponent
 {
     private readonly object syncRoot = new();
+    private readonly ExplicitTriggerGate triggerGate = new();
     private CancellationTokenSource? activeCancellation;
     private Task<RunOutcome>? activeTask;
     private RunOutcome? lastOutcome;
     private string? lastRunKey;
     private string stateText = "Idle";
-    private bool observedTriggers;
-    private bool previousRunTrigger;
-    private bool previousCancelTrigger;
     private bool removed;
 
     public RunEnergyPlusComponent()
@@ -44,11 +42,16 @@ public sealed class RunEnergyPlusComponent : DragonComponent
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddParameter(new DragonIdfParam(), "IDF", "IDF", "Compiled EnergyPlus IDF document.", GH_ParamAccess.item);
-        pManager.AddTextParameter("Weather", "EPW", "Optional EPW weather-file path.", GH_ParamAccess.item, string.Empty);
+        pManager.AddTextParameter(
+            "Weather",
+            "EPW",
+            "Optional user-supplied EPW weather-file path. InvisibleDragon never downloads weather files.",
+            GH_ParamAccess.item,
+            string.Empty);
         pManager.AddTextParameter(
             "Runtime Root",
             "E+",
-            "Optional EnergyPlus 24.2 root. Empty uses environment/default discovery.",
+            "Optional EnergyPlus 24.2 root. Empty checks the verified per-user cache, environment hints, and default install.",
             GH_ParamAccess.item,
             string.Empty);
         pManager.AddTextParameter(
@@ -57,11 +60,28 @@ public sealed class RunEnergyPlusComponent : DragonComponent
             "Optional caller-owned temporary root for isolated runs.",
             GH_ParamAccess.item,
             string.Empty);
-        pManager.AddBooleanParameter("Run", "Run", "Toggle False→True to start one run.", GH_ParamAccess.item, false);
-        pManager.AddBooleanParameter("Cancel", "Cancel", "Toggle False→True to cancel the active run.", GH_ParamAccess.item, false);
+        pManager.AddBooleanParameter(
+            "Run",
+            "Run",
+            "Toggle from False to True to start one run. A saved True value does not run when a document opens.",
+            GH_ParamAccess.item,
+            false);
+        pManager.AddBooleanParameter(
+            "Cancel",
+            "Cancel",
+            "Toggle from False to True to cancel the active run.",
+            GH_ParamAccess.item,
+            false);
         pManager.AddBooleanParameter("Force Rerun", "Force", "Ignore the last matching run-key result.", GH_ParamAccess.item, false);
         pManager.AddBooleanParameter("Keep Work Directory", "Keep", "Retain successful EnergyPlus work files.", GH_ParamAccess.item, true);
         pManager.AddNumberParameter("Timeout", "Min", "Positive timeout in minutes.", GH_ParamAccess.item, 30);
+        pManager.AddBooleanParameter(
+            "Prepare Missing Runtime",
+            "Prepare",
+            "When Run rises and no verified runtime is available, securely prepare the pinned per-user runtime before running. "
+            + "This may download EnergyPlus, never weather, and cannot occur during an ordinary recompute.",
+            GH_ParamAccess.item,
+            false);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -79,7 +99,7 @@ public sealed class RunEnergyPlusComponent : DragonComponent
         lock (syncRoot)
         {
             removed = false;
-            observedTriggers = false;
+            triggerGate.Reset();
         }
     }
 
@@ -106,6 +126,7 @@ public sealed class RunEnergyPlusComponent : DragonComponent
         bool cancelTrigger = false;
         bool forceRerun = false;
         bool keepWorkDirectory = true;
+        bool prepareMissingRuntime = false;
         double timeoutMinutes = 30;
         if (!DA.GetData(0, ref idfGoo))
         {
@@ -120,6 +141,7 @@ public sealed class RunEnergyPlusComponent : DragonComponent
         DA.GetData(6, ref forceRerun);
         DA.GetData(7, ref keepWorkDirectory);
         DA.GetData(8, ref timeoutMinutes);
+        DA.GetData(9, ref prepareMissingRuntime);
 
         if (idfGoo?.Value is null)
         {
@@ -134,31 +156,19 @@ public sealed class RunEnergyPlusComponent : DragonComponent
             OptionalFullPath(runtimeRoot),
             ResolveTempRoot(tempRoot),
             TimeSpan.FromMinutes(timeoutMinutes),
-            keepWorkDirectory);
+            keepWorkDirectory,
+            prepareMissingRuntime);
         string runKey = ComputeRunKey(inputs);
 
-        if (!observedTriggers)
+        ExplicitTriggerObservation triggers = triggerGate.Observe(runTrigger, cancelTrigger);
+        if (triggers.Cancel)
         {
-            observedTriggers = true;
-            previousRunTrigger = runTrigger;
-            previousCancelTrigger = cancelTrigger;
+            CancelActiveRun();
         }
-        else
+
+        if (triggers.Start)
         {
-            bool cancelRising = cancelTrigger && !previousCancelTrigger;
-            bool runRising = runTrigger && !previousRunTrigger;
-            previousRunTrigger = runTrigger;
-            previousCancelTrigger = cancelTrigger;
-
-            if (cancelRising)
-            {
-                CancelActiveRun();
-            }
-
-            if (runRising)
-            {
-                StartRun(inputs, runKey, forceRerun);
-            }
+            StartRun(inputs, runKey, forceRerun);
         }
 
         RunOutcome? outcome;
@@ -177,7 +187,7 @@ public sealed class RunEnergyPlusComponent : DragonComponent
         {
             AddRuntimeMessage(
                 GH_RuntimeMessageLevel.Warning,
-                "The displayed result belongs to previous inputs. Toggle Run False→True to evaluate the current IDF.");
+                "The displayed result belongs to previous inputs. Toggle Run False, then True, to evaluate the current IDF.");
         }
 
         if (outcome is not null)
@@ -330,7 +340,28 @@ public sealed class RunEnergyPlusComponent : DragonComponent
             };
             EnergyPlusRuntimeResolution resolution = await resolver.ResolveAsync(resolveOptions, cancellationToken)
                 .ConfigureAwait(false);
-            if (!resolution.IsSuccess)
+            EnergyPlusRuntimeLayout? runtime = resolution.Runtime;
+            if (runtime is null && inputs.PrepareMissingRuntime)
+            {
+                stateChanged("Preparing Runtime");
+                var bootstrapOptions = new EnergyPlusRuntimeBootstrapOptions
+                {
+                    TargetRoot = inputs.RuntimeRoot,
+                };
+                var bootstrapProgress = new InlineProgress<EnergyPlusRuntimeBootstrapProgress>(
+                    update => stateChanged("Preparing: " + update.Stage));
+                EnergyPlusRuntimeBootstrapResult bootstrap = await new EnergyPlusRuntimeBootstrapper()
+                    .EnsureInstalledAsync(bootstrapOptions, bootstrapProgress, cancellationToken)
+                    .ConfigureAwait(false);
+                if (!bootstrap.IsSuccess)
+                {
+                    return RunOutcome.FromResolutionFailure(bootstrap.Failure!);
+                }
+
+                runtime = bootstrap.Runtime;
+            }
+
+            if (runtime is null)
             {
                 return RunOutcome.FromResolutionFailure(resolution.Failure!);
             }
@@ -340,7 +371,7 @@ public sealed class RunEnergyPlusComponent : DragonComponent
             stagedIdf = Path.Combine(inputs.TempRoot, $"grasshopper-input-{Guid.NewGuid():N}.idf");
             File.WriteAllText(stagedIdf, inputs.IdfText, new UTF8Encoding(false));
             var request = new EnergyPlusRunRequest(
-                resolution.Runtime!,
+                runtime,
                 stagedIdf,
                 inputs.WeatherPath,
                 inputs.TempRoot)
@@ -418,7 +449,8 @@ public sealed class RunEnergyPlusComponent : DragonComponent
             weatherIdentity,
             inputs.RuntimeRoot ?? "<auto>",
             inputs.Timeout.TotalSeconds.ToString("R", CultureInfo.InvariantCulture),
-            inputs.KeepWorkDirectory.ToString(CultureInfo.InvariantCulture));
+            inputs.KeepWorkDirectory.ToString(CultureInfo.InvariantCulture),
+            inputs.PrepareMissingRuntime.ToString(CultureInfo.InvariantCulture));
         byte[] bytes = Encoding.UTF8.GetBytes(source);
 #if NET6_0_OR_GREATER
         byte[] hash = SHA256.HashData(bytes);
@@ -440,7 +472,8 @@ public sealed class RunEnergyPlusComponent : DragonComponent
             string? runtimeRoot,
             string tempRoot,
             TimeSpan timeout,
-            bool keepWorkDirectory)
+            bool keepWorkDirectory,
+            bool prepareMissingRuntime)
         {
             if (timeout <= TimeSpan.Zero)
             {
@@ -453,6 +486,7 @@ public sealed class RunEnergyPlusComponent : DragonComponent
             TempRoot = tempRoot;
             Timeout = timeout;
             KeepWorkDirectory = keepWorkDirectory;
+            PrepareMissingRuntime = prepareMissingRuntime;
         }
 
         internal string IdfText { get; }
@@ -461,6 +495,7 @@ public sealed class RunEnergyPlusComponent : DragonComponent
         internal string TempRoot { get; }
         internal TimeSpan Timeout { get; }
         internal bool KeepWorkDirectory { get; }
+        internal bool PrepareMissingRuntime { get; }
     }
 
     private sealed class InlineProgress<T> : IProgress<T>
