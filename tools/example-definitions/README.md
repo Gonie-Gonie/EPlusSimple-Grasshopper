@@ -1,31 +1,40 @@
 # Verified Grasshopper examples
 
-This tool generates the two tracked starter definitions with Rhino 7 and then
-validates their components, wires, solution output, save, and reopen behavior
-inside real Rhino 7 and Rhino 8 Grasshopper hosts. It is intentionally separate
-from the package host smoke gate.
+This tool generates seven tracked Grasshopper definitions and two Rhino building
+models with Rhino 7, then validates them inside real Rhino 7 and Rhino 8 hosts.
+It is intentionally separate from the package host smoke gate.
 
-Run validation from the repository root after `setup.cmd`:
+Run validation from the repository root after `.\dev.cmd setup`:
 
 ```powershell
-tools\example-definitions\run.cmd
+.\dev.cmd examples
 ```
 
 Regenerate the canonical examples with Rhino 7, then validate them in both
 supported host generations:
 
 ```powershell
-tools\example-definitions\run.cmd -Generate
+.\dev.cmd examples -Generate
 ```
 
-Rhino 7 is the canonical writer so the committed files remain readable by the
-oldest supported host. Rhino 8 only writes a round-trip copy below `temp/`.
-Every build log, host log, summary, and round-trip definition is written below
-`temp/example-definitions/run-*`. Generation stages a candidate below that
-directory and only replaces the tracked file after the candidate reopens and
-passes its graph checks.
+Rhino 7 is the canonical writer so the committed `.gh` and `.3dm` files remain
+readable by the oldest supported host. Rhino 8 only writes round-trip copies
+below `temp/`. Every build log, host log, summary, and round-trip artifact is
+written below `temp/example-definitions/run-*`. Generation stages candidates
+there and only replaces tracked files after they reopen and pass their checks.
 
-Use `-Target Rhino7` or `-Target Rhino8` for a single validation host. The
-`-Generate` option always invokes Rhino 7 in addition to the selected validation
-target. Custom Rhino executable locations can be supplied with `-Rhino7Exe` and
-`-Rhino8Exe`.
+Definition checks cover exact object/component identities, source order for
+every wire and its exact total, runtime errors, typed outputs, selected
+Boolean/numeric results, outward envelope winding, solve, save, reopen, and
+round trip. Hosts run from a disposable system-temp directory outside the
+repository, and the result example proves that saved-document-relative file
+paths do not depend on the host process working directory.
+Building-model checks cover metre units, layers, object names and user strings,
+closed solid zone Breps, exact bounds, expected adjacency pairs, and closed
+planar window curves. The two-zone GRM-to-IDF graph also proves that its
+internalized Breps and curves match `30-two-zone-office.3dm`.
+
+Use `-Target Rhino7` or `-Target Rhino8` for a single validation host. Generation
+requires the default `-Target All`: Rhino 7 writes every canonical binary, then
+Rhino 7 and Rhino 8 both validate it before the command succeeds. Custom Rhino
+executable locations can be supplied with `-Rhino7Exe` and `-Rhino8Exe`.

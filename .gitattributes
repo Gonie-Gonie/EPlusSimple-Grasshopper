@@ -22,6 +22,7 @@ fixtures/simple-dragon/** binary
 
 *.gh binary
 *.ghx text eol=lf
+*.3dm binary
 *.png binary
 *.jpg binary
 *.jpeg binary

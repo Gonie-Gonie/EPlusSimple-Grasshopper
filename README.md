@@ -49,22 +49,22 @@ together when they come from the same release commit.
 From a Windows command prompt or PowerShell:
 
 ```text
-dev.cmd setup
-dev.cmd build
+.\dev.cmd setup
+.\dev.cmd build
 ```
 
-Run `dev.cmd help` to list every supported workflow from this single entry point.
+Run `.\dev.cmd help` to list every supported workflow from this single entry point.
 
-`dev.cmd setup` finds the exact SDK from `global.json` or installs it under
+`.\dev.cmd setup` finds the exact SDK from `global.json` or installs it under
 `.tools\dotnet`, selects exact Python 3.12.7 (installing the official embeddable
 package locally when needed), validates Rhino 7 and Rhino 8 independently, and
 writes the generated, non-secret `.config\local.settings.json`. It is
 idempotent, so rerun it after installing Rhino to enable that version's tests.
 
-For port-equivalence work, `dev.cmd reference` runs the pinned historical Python
+For port-equivalence work, `.\dev.cmd reference` runs the pinned historical Python
 implementation in an isolated dependency directory and writes deterministic
 database, GRM, and semantic IDF references under `temp\reference`. Use
-`dev.cmd reference -Mode Verify` to compare them byte-for-byte with the reviewed
+`.\dev.cmd reference -Mode Verify` to compare them byte-for-byte with the reviewed
 baseline in `fixtures\reference\python-0.7.0`. Python remains development-only.
 
 EnergyPlus uses a deliberate detect-only default. Setup validates the corrected
@@ -73,10 +73,10 @@ executable, IDD, and ExpandObjects SHA-256 values. To download and verify the
 official portable ZIP when no compatible runtime exists, run:
 
 ```text
-dev.cmd setup -InstallEnergyPlus
+.\dev.cmd setup -InstallEnergyPlus
 ```
 
-Use `dev.cmd setup -WhatIf -SkipRestore` for a no-write preview. `dev.cmd build`
+Use `.\dev.cmd setup -WhatIf -SkipRestore` for a no-write preview. `.\dev.cmd build`
 performs restore, compile, and tests with the setup-selected SDK, then stages
 all runtime variants under `artifacts\<module>\rhino7\net48`,
 `artifacts\<module>\rhino8\net7.0`, and
@@ -85,25 +85,26 @@ missing Rhino version; headless projects continue to build.
 
 All disposable downloads, build intermediates, test runs, logs, and simulations
 are routed under `temp`; NuGet packages and reusable local toolchains are under
-`.tools`. Run `dev.cmd clean` to safely remove only `temp` and generated
+`.tools`. Run `.\dev.cmd clean` to safely remove only `temp` and generated
 artifact contents while preserving `.tools` and `artifacts\README.md`.
 
 To package an already successful build into deterministic Yak archives and
 portable plugin ZIPs, run:
 
 ```text
-dev.cmd package -SkipBuild
+.\dev.cmd package -SkipBuild
 ```
 
-The two tracked starter definitions under [`examples`](examples/README.md) use
-real Dragon components and persisted wires. Rhino 7 generates the canonical
-files; `dev.cmd examples` solves, saves, reopens, and
-round-trip validates them in both Rhino 7 and Rhino 8.
+The seven tracked definitions and two named-building Rhino models under
+[`examples`](examples/README.md) cover materials, profiles, geometry, HVAC,
+two-zone GRM-to-IDF conversion, result plots, and CSV previews. Rhino 7 writes
+the canonical files; `.\dev.cmd examples` solves and round-trip validates them in
+both Rhino 7 and Rhino 8.
 
 Maintainers can execute the complete first-candidate gate with:
 
 ```text
-dev.cmd release
+.\dev.cmd release
 ```
 
 This command requires a clean `main` commit already pushed to `origin/main`,
@@ -120,10 +121,10 @@ install both products into every detected Rhino 7/8 generation, close Rhino and
 run:
 
 ```text
-dev.cmd install
+.\dev.cmd install
 ```
 
-Use `dev.cmd install -UseExistingPackages` for an immediate reinstall from the
+Use `.\dev.cmd install -UseExistingPackages` for an immediate reinstall from the
 already generated, hash-checked Yak files under `artifacts\packages`.
 
 ## Current status

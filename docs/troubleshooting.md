@@ -7,8 +7,8 @@ generation, and unblock the downloaded archive before reinstalling. Do not copy
 only the GHA: its adjacent `GonieGonie.*` dependencies are required. Check
 Grasshopper's loading/protection settings for the exact rejected path.
 
-For a source checkout, rerun `dev.cmd setup` after installing Rhino, then run
-`dev.cmd build`. Generated host logs are below `temp\grasshopper-smoke`; stable
+For a source checkout, rerun `.\dev.cmd setup` after installing Rhino, then run
+`.\dev.cmd build`. Generated host logs are below `temp\grasshopper-smoke`; stable
 build reports are below `artifacts\reports`.
 
 ## One Dragon loads and the other fails
@@ -50,7 +50,7 @@ remove it only after the case is understood.
 
 ## Cleaning local work
 
-`dev.cmd clean` removes disposable `temp` output and generated artifacts
+`.\dev.cmd clean` removes disposable `temp` output and generated artifacts
 only after validating their repository paths. It preserves `.tools` and the
 tracked artifact documentation. Never delete or edit a user's EPW, project GH
 definition, GRM, GRR, or per-user runtime cache as part of repository cleanup.

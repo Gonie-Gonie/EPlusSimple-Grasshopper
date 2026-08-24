@@ -78,10 +78,29 @@ where spreadsheet interoperability requires it. Monthly DataTree, line-plot,
 and bar-plot components expose the same ordered month/fuel/end-use data without
 requiring a file round trip.
 
+Relative paths on GRM/GRR readers and writers and CSV export are resolved from
+the saved Grasshopper document's folder. Unsaved definitions use Rhino's current
+working directory, while absolute paths are unchanged.
+
 Batch Research accepts an ordered model list and stable case IDs. It limits
 parallel EnergyPlus processes, supports cancellation and partial failure,
 caches matching cases, and writes a combined CSV plus reproducibility manifest.
 All temporary case directories remain below the configured temp root.
+
+## Runnable example matrix
+
+The tracked files under `examples/` cover the workflow in progressively larger
+graphs. The most complete direct path is
+`02-invisibledragon-single-zone-hvac-idf.gh`; the most complete compatibility
+path is `12-simpledragon-two-zone-to-idf.gh`. The latter internalizes geometry
+that is geometrically identical to the named objects in
+`30-two-zone-office.3dm`, allowing either a portable self-contained solve or
+live Rhino document references. `13-simpledragon-results-and-plots.gh` uses the
+real GRR fixture to exercise all non-writing result views and CSV preview.
+
+Run `.\dev.cmd examples` to solve and round-trip every `.gh` and `.3dm` example in
+Rhino 7 and Rhino 8. Run `.\dev.cmd examples -Generate` only when deliberately
+refreshing the Rhino 7-authored canonical binaries.
 
 ## Saving and reopening
 

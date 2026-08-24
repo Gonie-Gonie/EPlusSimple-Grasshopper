@@ -1,6 +1,6 @@
 # Packaging sources
 
-`dev.cmd package` is the local, one-command packaging entry point. It builds the
+`.\dev.cmd package` is the local, one-command packaging entry point. It builds the
 Release plugins unless `-SkipBuild` is supplied, verifies/downloads the exact
 Yak executable pinned in `yak.lock.json`, creates fresh package stages, builds
 Yak archives, creates portable plugin ZIPs, and runs the package layout and
@@ -11,7 +11,7 @@ To run the release-level host gate against the portable ZIP artifacts after all
 normal package verification has passed, use:
 
 ```powershell
-dev.cmd package -RunPortableHostGate
+.\dev.cmd package -RunPortableHostGate
 ```
 
 This explicit option requires installed Rhino 7 and Rhino 8. It starts six fresh

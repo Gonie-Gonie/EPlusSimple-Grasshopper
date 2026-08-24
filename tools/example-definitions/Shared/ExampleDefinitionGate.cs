@@ -57,6 +57,14 @@ internal static class ExampleDefinitionGate
         string host,
         string rhinoVersion)
     {
+        string repositoryRoot = Directory.GetParent(Path.GetFullPath(inputs.ExamplesRoot))?.FullName
+            ?? throw new InvalidOperationException("The repository root could not be resolved from examples.");
+        string workingDirectory = Path.GetFullPath(Environment.CurrentDirectory);
+        Require(
+            !IsSameOrDescendant(workingDirectory, repositoryRoot),
+            "The example host must run outside the repository so document-relative paths are tested independently "
+                + "of the process working directory.");
+
         if (inputs.Action == ExampleHostAction.Generate
             && !string.Equals(host, "Rhino7", StringComparison.Ordinal))
         {
@@ -65,6 +73,7 @@ internal static class ExampleDefinitionGate
         }
 
         RegisterDragonLibraries(inputs.PluginPaths);
+        IReadOnlyList<ExampleBuildingModelResult> models = ExampleBuildingModels.Run(inputs);
         var results = new List<ExampleDefinitionResult>();
         foreach (DefinitionSpec definition in Definitions)
         {
@@ -73,19 +82,35 @@ internal static class ExampleDefinitionGate
                 : Validate(definition, inputs));
         }
 
+        results.AddRange(AdvancedExampleDefinitions.Run(inputs));
+
         var summary = new ExampleHostSummary
         {
             Host = host,
             RhinoVersion = rhinoVersion,
             GrasshopperVersion = typeof(Instances).Assembly.GetName().Version?.ToString() ?? "unknown",
             Action = inputs.Action.ToString(),
-            Definitions = results.ToArray()
+            WorkingDirectory = workingDirectory,
+            Definitions = results.ToArray(),
+            Models = models.ToArray()
         };
         summary.Write(Path.Combine(inputs.OutputDirectory, "summary.json"));
         Console.WriteLine(
-            $"Verified {results.Count} real Grasshopper example definitions in {host} "
+            $"Verified {results.Count} real Grasshopper definitions and {models.Count} Rhino models in {host} "
             + $"({inputs.Action.ToString().ToLowerInvariant()}).");
         return summary;
+    }
+
+    private static bool IsSameOrDescendant(string candidate, string root)
+    {
+        string normalizedCandidate = Path.GetFullPath(candidate)
+            .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        string normalizedRoot = Path.GetFullPath(root)
+            .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        return string.Equals(normalizedCandidate, normalizedRoot, StringComparison.OrdinalIgnoreCase)
+            || normalizedCandidate.StartsWith(
+                normalizedRoot + Path.DirectorySeparatorChar,
+                StringComparison.OrdinalIgnoreCase);
     }
 
     private static ExampleDefinitionResult Generate(
@@ -206,6 +231,13 @@ internal static class ExampleDefinitionGate
             panel,
             construction.Params.Output[1].InstanceGuid,
             $"{definition.Product} U-value-to-panel wire");
+        int actualWireCount = document.Objects.Sum(value => value switch
+        {
+            GH_Component component => component.Params.Input.Sum(input => input.SourceCount),
+            IGH_Param parameter => parameter.SourceCount,
+            _ => 0,
+        });
+        Require(actualWireCount == 3, $"{definition.Product} starter wire count changed.");
 
         GH_Document.EnableSolutions = true;
         document.Enabled = true;
@@ -239,7 +271,7 @@ internal static class ExampleDefinitionGate
             construction.Params.Output[1].VolatileData.DataCount == 1,
             $"{definition.Product} construction produced no U-value.");
         Require(panel.VolatileData.DataCount == 1, $"{definition.Product} panel received no U-value.");
-        return new ValidationFacts(document.ObjectCount, wireCount: 3, definition.OutputGooType);
+        return new ValidationFacts(document.ObjectCount, actualWireCount, definition.OutputGooType);
     }
 
     private static void RegisterDragonLibraries(IReadOnlyList<string> pluginPaths)
@@ -248,16 +280,25 @@ internal static class ExampleDefinitionGate
         foreach (string path in pluginPaths)
         {
             Assembly assembly = Assembly.LoadFrom(path);
-            Guid[] expected = Definitions
+            string? product = Definitions
                 .Where(definition => string.Equals(
                     Path.GetFileName(path),
                     $"GonieGonie.{definition.Product}.GH.gha",
                     StringComparison.OrdinalIgnoreCase))
+                .Select(definition => definition.Product)
+                .Distinct(StringComparer.Ordinal)
+                .SingleOrDefault();
+            Guid[] expected = Definitions
+                .Where(definition => string.Equals(definition.Product, product, StringComparison.Ordinal))
                 .SelectMany(definition => new[]
                 {
                     definition.MaterialComponentGuid,
                     definition.ConstructionComponentGuid
                 })
+                .Concat(product is null
+                    ? Array.Empty<Guid>()
+                    : AdvancedExampleDefinitions.ComponentIds(product))
+                .Distinct()
                 .ToArray();
             if (expected.Length == 0)
             {
@@ -452,7 +493,7 @@ internal static class ExampleDefinitionGate
 internal sealed class ExampleHostSummary
 {
     [DataMember(Name = "schema", Order = 1)]
-    public string Schema { get; set; } = "goniegonie.dragons-grasshopper.examples.v1";
+    public string Schema { get; set; } = "goniegonie.dragons-grasshopper.examples.v2";
 
     [DataMember(Name = "host", Order = 2)]
     public string Host { get; set; } = string.Empty;
@@ -466,8 +507,14 @@ internal sealed class ExampleHostSummary
     [DataMember(Name = "action", Order = 5)]
     public string Action { get; set; } = string.Empty;
 
-    [DataMember(Name = "definitions", Order = 6)]
+    [DataMember(Name = "workingDirectory", Order = 6)]
+    public string WorkingDirectory { get; set; } = string.Empty;
+
+    [DataMember(Name = "definitions", Order = 7)]
     public ExampleDefinitionResult[] Definitions { get; set; } = Array.Empty<ExampleDefinitionResult>();
+
+    [DataMember(Name = "models", Order = 8)]
+    public ExampleBuildingModelResult[] Models { get; set; } = Array.Empty<ExampleBuildingModelResult>();
 
     internal void Write(string path)
     {

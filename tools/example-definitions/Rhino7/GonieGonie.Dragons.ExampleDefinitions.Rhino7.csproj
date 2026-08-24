@@ -32,7 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\Shared\AdvancedExampleDefinitions.cs" Link="Shared\AdvancedExampleDefinitions.cs" />
+    <Compile Include="..\Shared\ExampleBuildingModels.cs" Link="Shared\ExampleBuildingModels.cs" />
     <Compile Include="..\Shared\ExampleDefinitionGate.cs" Link="Shared\ExampleDefinitionGate.cs" />
     <Compile Include="..\Shared\ExampleHostInputs.cs" Link="Shared\ExampleHostInputs.cs" />
+    <Compile Include="..\Shared\IsExternalInit.cs" Link="Shared\IsExternalInit.cs" />
   </ItemGroup>
 </Project>

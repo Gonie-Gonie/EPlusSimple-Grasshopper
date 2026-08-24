@@ -111,8 +111,9 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
             geometryMap,
             caseId,
             modelGoo?.Value);
+        string fullDirectory = ResolveDocumentPath(directory);
         GreenRetrofitCsvExportResult preview = GreenRetrofitCsvExporter.ExportDirectory(
-            directory,
+            fullDirectory,
             resultGoo.Value,
             diagnostics,
             geometryMap,
@@ -126,7 +127,7 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
             try
             {
                 GreenRetrofitCsvExportResult result = GreenRetrofitCsvExporter.ExportDirectory(
-                    directory,
+                    fullDirectory,
                     resultGoo.Value,
                     diagnostics,
                     geometryMap,

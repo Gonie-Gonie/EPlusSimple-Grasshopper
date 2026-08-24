@@ -281,7 +281,8 @@ public sealed class ReadGreenRetrofitModelComponent : SimpleDragonComponent
             return;
         }
 
-        GrmReadResult read = GrmReader.ReadFile(path);
+        string fullPath = ResolveDocumentPath(path);
+        GrmReadResult read = GrmReader.ReadFile(fullPath);
         Report(read.Diagnostics);
         if (read.Model is not null)
         {
@@ -335,7 +336,7 @@ public sealed class WriteGreenRetrofitModelComponent : SimpleDragonComponent
             return;
         }
 
-        string fullPath = Path.GetFullPath(path.Trim());
+        string fullPath = ResolveDocumentPath(path);
         string json = GrmWriter.Serialize(modelGoo.Value);
         if (write)
         {

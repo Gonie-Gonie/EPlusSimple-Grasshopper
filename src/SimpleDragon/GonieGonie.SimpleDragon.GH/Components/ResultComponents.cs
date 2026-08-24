@@ -99,7 +99,8 @@ public sealed class ReadGreenRetrofitResultComponent : SimpleDragonComponent
             return;
         }
 
-        GrrReadResult read = GrrReader.ReadFile(path);
+        string fullPath = ResolveDocumentPath(path);
+        GrrReadResult read = GrrReader.ReadFile(fullPath);
         Report(read.Diagnostics);
         if (read.Result is not null)
         {
@@ -152,7 +153,7 @@ public sealed class WriteGreenRetrofitResultComponent : SimpleDragonComponent
             return;
         }
 
-        string fullPath = Path.GetFullPath(path.Trim());
+        string fullPath = ResolveDocumentPath(path);
         string json = GrrWriter.Serialize(resultGoo.Value);
         if (write)
         {

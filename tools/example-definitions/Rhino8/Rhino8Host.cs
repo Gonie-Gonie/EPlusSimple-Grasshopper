@@ -14,6 +14,15 @@ internal static class Rhino8Host
             throw new InvalidOperationException("Rhino 8 runtime was not loaded.");
         }
 
+        using Rhino.RhinoDoc document = Rhino.RhinoDoc.Create(null)
+            ?? throw new InvalidOperationException("Rhino 8 could not create a model document.");
+        if (Rhino.RhinoDoc.ActiveDoc is null)
+        {
+            throw new InvalidOperationException("Rhino 8 did not activate the example model document.");
+        }
+
+        document.AdjustModelUnitSystem(Rhino.UnitSystem.Meters, scale: false);
+
         object grasshopper = Rhino.RhinoApp.GetPlugInObject("Grasshopper")
             ?? throw new InvalidOperationException("The installed Grasshopper plug-in could not be loaded.");
         ExampleDefinitionGate.RestrictExternalLibraries(inputs.PluginPaths);

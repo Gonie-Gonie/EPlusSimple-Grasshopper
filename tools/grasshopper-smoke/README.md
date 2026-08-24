@@ -5,23 +5,23 @@ This tool loads the built InvisibleDragon and SimpleDragon GHAs inside real, non
 Run both installed hosts from the repository root:
 
 ```powershell
-dev.cmd smoke
+.\dev.cmd smoke
 ```
 
 Run one host, change the executable location, or tighten/extend the hard timeout:
 
 ```powershell
-dev.cmd smoke -Host Rhino8 -TimeoutSeconds 90
-dev.cmd smoke -Host Rhino7 -Rhino7Exe "D:\Rhino 7\System\Rhino.exe"
+.\dev.cmd smoke -Host Rhino8 -TimeoutSeconds 90
+.\dev.cmd smoke -Host Rhino7 -Rhino7Exe "D:\Rhino 7\System\Rhino.exe"
 ```
 
 The historical command above remains the build-output `Both` scenario. Individual
 module scenarios and the full three-scenario matrix are also available:
 
 ```powershell
-dev.cmd smoke -Host Rhino8 -Scenario InvisibleOnly
-dev.cmd smoke -Host Rhino7 -Scenario SimpleOnly
-dev.cmd smoke -Scenario All
+.\dev.cmd smoke -Host Rhino8 -Scenario InvisibleOnly
+.\dev.cmd smoke -Host Rhino7 -Scenario SimpleOnly
+.\dev.cmd smoke -Scenario All
 ```
 
 To gate the files users actually receive, first create packages and then run the
@@ -30,22 +30,22 @@ ZIP for each requested product below the run's `temp` directory and runs six fre
 hosts (three scenarios on each Rhino version):
 
 ```powershell
-dev.cmd package
-dev.cmd smoke -Source PortablePackage -Scenario All -Target All -SkipPluginBuild
+.\dev.cmd package
+.\dev.cmd smoke -Source PortablePackage -Scenario All -Target All -SkipPluginBuild
 ```
 
-`dev.cmd package -RunPortableHostGate` performs those two steps as the opt-in local
+`.\dev.cmd package -RunPortableHostGate` performs those two steps as the opt-in local
 release gate. Normal packaging and CI runs do not require an installed Rhino.
 The archive guards have a Rhino-free negative-test entry point:
 
 ```powershell
-dev.cmd smoke -ArchiveSafetySelfTest
+.\dev.cmd smoke -ArchiveSafetySelfTest
 ```
 
 It proves traversal, trailing-dot/space, reserved `NUL`/`COM9` basenames with
 extensions, case-ambiguous entries, and package-index SHA mismatch are rejected.
 
-The default paths are the standard Rhino 7 and Rhino 8 installations. Run `dev.cmd setup` first so the pinned .NET SDK and restored production assets are available. Production GHAs are built with `--no-restore`, so the gate cannot rewrite their lock files. Pass `-SkipPluginBuild` only when the target-framework GHA outputs are already current.
+The default paths are the standard Rhino 7 and Rhino 8 installations. Run `.\dev.cmd setup` first so the pinned .NET SDK and restored production assets are available. Production GHAs are built with `--no-restore`, so the gate cannot rewrite their lock files. Pass `-SkipPluginBuild` only when the target-framework GHA outputs are already current.
 
 ## What is gated
 

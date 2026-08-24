@@ -25,6 +25,13 @@ $examplesRoot = Join-Path $repoRoot "examples"
 $runStamp = (Get-Date).ToUniversalTime().ToString("yyyyMMdd-HHmmss-fff")
 $runRoot = Join-Path $repoRoot "temp\example-definitions\run-$runStamp"
 [IO.Directory]::CreateDirectory($runRoot) | Out-Null
+$systemTempRoot = [IO.Path]::GetFullPath([IO.Path]::GetTempPath()).TrimEnd('\', '/')
+$hostWorkingDirectory = [IO.Path]::GetFullPath((
+    Join-Path $systemTempRoot "GonieGonie-Dragons-example-host-$runStamp"))
+if (-not $hostWorkingDirectory.StartsWith($systemTempRoot + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) {
+    throw "Host working directory escaped the system temp root: $hostWorkingDirectory"
+}
+[IO.Directory]::CreateDirectory($hostWorkingDirectory) | Out-Null
 
 function Resolve-DotNet {
     $local = Join-Path $repoRoot ".tools\dotnet\dotnet.exe"
@@ -34,7 +41,7 @@ function Resolve-DotNet {
 
     $command = Get-Command dotnet -ErrorAction SilentlyContinue
     if ($null -eq $command) {
-        throw "dotnet was not found. Run setup.cmd before the example-definition gate."
+        throw "dotnet was not found. Run 'dev.cmd setup' before the example-definition gate."
     }
 
     return $command.Source
@@ -79,7 +86,7 @@ function Invoke-BoundedHost(
     $startInfo = [Diagnostics.ProcessStartInfo]::new()
     $startInfo.FileName = $FilePath
     $startInfo.Arguments = ConvertTo-ProcessArguments $Arguments
-    $startInfo.WorkingDirectory = $repoRoot
+    $startInfo.WorkingDirectory = $hostWorkingDirectory
     $startInfo.UseShellExecute = $false
     $startInfo.CreateNoWindow = $true
     $startInfo.RedirectStandardOutput = $true
@@ -180,6 +187,10 @@ function Invoke-ExampleHost(
 }
 
 try {
+    if ($Generate -and $Target -ne "All") {
+        throw "-Generate requires -Target All so every Rhino 7-authored binary is immediately validated in Rhino 8."
+    }
+
     $script:dotnet = Resolve-DotNet
     $invisibleProject = Join-Path $repoRoot "src\InvisibleDragon\GonieGonie.InvisibleDragon.GH\GonieGonie.InvisibleDragon.GH.csproj"
     $simpleProject = Join-Path $repoRoot "src\SimpleDragon\GonieGonie.SimpleDragon.GH\GonieGonie.SimpleDragon.GH.csproj"
@@ -238,4 +249,9 @@ catch {
     [IO.File]::WriteAllText((Join-Path $runRoot "FAIL.txt"), $_.Exception.ToString())
     Write-Error "Grasshopper example-definition gate failed. Logs: $runRoot`n$($_.Exception.Message)"
     exit 1
+}
+finally {
+    if (Test-Path -LiteralPath $hostWorkingDirectory -PathType Container) {
+        Remove-Item -LiteralPath $hostWorkingDirectory -Recurse -Force
+    }
 }
