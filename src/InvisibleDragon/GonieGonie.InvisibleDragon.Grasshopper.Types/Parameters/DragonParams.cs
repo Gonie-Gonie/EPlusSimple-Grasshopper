@@ -68,6 +68,32 @@ public sealed class DragonEnergyModelParam : DragonParam<Types.DragonEnergyModel
     public override Guid ComponentGuid => new("dbfba1b5-624a-4db4-8fec-d80eb9561467");
 }
 
+public sealed class DragonSourceSystemParam : DragonParam<Types.DragonSourceSystemGoo>
+{
+    public DragonSourceSystemParam() : base("InvisibleDragon Source System", "Source", "An InvisibleDragon HVAC source system.") { }
+    public override Guid ComponentGuid => new("d7597f76-1486-45b7-bcc6-7e8f5fb23738");
+}
+
+public sealed class DragonSupplySystemParam : DragonParam<Types.DragonSupplySystemGoo>
+{
+    public DragonSupplySystemParam() : base("InvisibleDragon Supply System", "Supply", "An InvisibleDragon zone HVAC supply system.") { }
+    public override Guid ComponentGuid => new("c6afcc1f-f11e-4a54-a84a-0e845a828d5d");
+}
+
+public sealed class DragonEnergyRecoveryVentilatorParam : DragonParam<Types.DragonEnergyRecoveryVentilatorGoo>
+{
+    public DragonEnergyRecoveryVentilatorParam()
+        : base("InvisibleDragon Energy Recovery Ventilator", "ERV", "An InvisibleDragon energy-recovery ventilator.") { }
+    public override Guid ComponentGuid => new("bc8c67a8-e853-4eec-a576-acdeedbe371b");
+}
+
+public sealed class DragonPhotovoltaicPanelParam : DragonParam<Types.DragonPhotovoltaicPanelGoo>
+{
+    public DragonPhotovoltaicPanelParam()
+        : base("InvisibleDragon Photovoltaic Panel", "PV", "An InvisibleDragon photovoltaic panel.") { }
+    public override Guid ComponentGuid => new("26ef6130-77e3-4c6d-a802-9460bcc386ed");
+}
+
 public sealed class DragonIdfParam : DragonParam<Types.DragonIdfGoo>
 {
     public DragonIdfParam() : base("InvisibleDragon IDF", "IDF", "An assembled EnergyPlus IDF document.") { }

@@ -1,5 +1,6 @@
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Construction;
+using GonieGonie.InvisibleDragon.Hvac;
 using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Model;
 using GonieGonie.InvisibleDragon.Profile;
@@ -104,6 +105,51 @@ public sealed class DragonEnergyModelGoo : DragonGoo<EnergyModel>
     private static string? FailureText(ValidationResult validation) => validation.IsValid
         ? null
         : string.Join(" ", validation.Diagnostics.Where(item => item.IsFailure).Select(item => item.Message));
+}
+
+public sealed class DragonSourceSystemGoo : DragonGoo<SourceSystem>
+{
+    public DragonSourceSystemGoo() { }
+    public DragonSourceSystemGoo(SourceSystem value) : base(value) { }
+    public override string TypeName => "InvisibleDragon Source System";
+    public override string TypeDescription => "An InvisibleDragon HVAC source-system definition.";
+    protected override DragonGoo<SourceSystem> Create(SourceSystem value) => new DragonSourceSystemGoo(value);
+    protected override DragonGoo<SourceSystem> CreateEmpty() => new DragonSourceSystemGoo();
+    protected override string DisplayText(SourceSystem value) => $"Source System {value.Name} ({value.GetType().Name})";
+}
+
+public sealed class DragonSupplySystemGoo : DragonGoo<SupplySystem>
+{
+    public DragonSupplySystemGoo() { }
+    public DragonSupplySystemGoo(SupplySystem value) : base(value) { }
+    public override string TypeName => "InvisibleDragon Supply System";
+    public override string TypeDescription => "An InvisibleDragon zone HVAC supply-system definition.";
+    protected override DragonGoo<SupplySystem> Create(SupplySystem value) => new DragonSupplySystemGoo(value);
+    protected override DragonGoo<SupplySystem> CreateEmpty() => new DragonSupplySystemGoo();
+    protected override string DisplayText(SupplySystem value) => $"Supply System {value.Name} ({value.GetType().Name})";
+}
+
+public sealed class DragonEnergyRecoveryVentilatorGoo : DragonGoo<EnergyRecoveryVentilator>
+{
+    public DragonEnergyRecoveryVentilatorGoo() { }
+    public DragonEnergyRecoveryVentilatorGoo(EnergyRecoveryVentilator value) : base(value) { }
+    public override string TypeName => "InvisibleDragon Energy Recovery Ventilator";
+    public override string TypeDescription => "An InvisibleDragon sensible and latent heat-recovery ventilator.";
+    protected override DragonGoo<EnergyRecoveryVentilator> Create(EnergyRecoveryVentilator value) =>
+        new DragonEnergyRecoveryVentilatorGoo(value);
+    protected override DragonGoo<EnergyRecoveryVentilator> CreateEmpty() => new DragonEnergyRecoveryVentilatorGoo();
+    protected override string DisplayText(EnergyRecoveryVentilator value) => $"Energy Recovery Ventilator {value.Name}";
+}
+
+public sealed class DragonPhotovoltaicPanelGoo : DragonGoo<PhotovoltaicPanel>
+{
+    public DragonPhotovoltaicPanelGoo() { }
+    public DragonPhotovoltaicPanelGoo(PhotovoltaicPanel value) : base(value) { }
+    public override string TypeName => "InvisibleDragon Photovoltaic Panel";
+    public override string TypeDescription => "An InvisibleDragon fixed-geometry photovoltaic panel.";
+    protected override DragonGoo<PhotovoltaicPanel> Create(PhotovoltaicPanel value) => new DragonPhotovoltaicPanelGoo(value);
+    protected override DragonGoo<PhotovoltaicPanel> CreateEmpty() => new DragonPhotovoltaicPanelGoo();
+    protected override string DisplayText(PhotovoltaicPanel value) => $"Photovoltaic Panel {value.Name} ({value.AreaSquareMetres:0.###} m²)";
 }
 
 public sealed class DragonIdfGoo : DragonGoo<IdfDocument>
