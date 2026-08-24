@@ -39,12 +39,33 @@ Contributors can reproduce packages from a clean checkout:
 ```text
 setup.cmd
 build.cmd
-package.cmd -SkipBuild -NoRestore
+package.cmd -SkipBuild
 ```
 
 Outputs are written below `artifacts\packages`. Packaging never installs a
 plugin, publishes to Rhino Package Manager, creates a Git tag, or creates a
 public release.
+
+## One-command local reinstall
+
+Close every Rhino process, then run `install.cmd`. It prepares the reproducible
+environment, builds the current source without tests, creates fresh packages,
+uninstalls only the `invisible-dragon` and `simple-dragon` package IDs from each
+detected Rhino 7/8 installation, and installs the matching local Yak files.
+
+```text
+install.cmd
+```
+
+To skip setup/build/package and reinstall the existing hash-checked Yak files:
+
+```text
+install.cmd -UseExistingPackages
+```
+
+Use `-Target Rhino7` or `-Target Rhino8` to limit the operation. Logs and the
+installation receipt are written below `temp\install`; the script never
+publishes a package and never removes unrelated Rhino packages.
 
 ## First load
 

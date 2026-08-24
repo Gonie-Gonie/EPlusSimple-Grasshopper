@@ -113,6 +113,17 @@ tag, GitHub release, plugin installation, or Yak publication. See the
 [release checklist](docs/release-checklist.md) for the evidence reviewed by the
 gate.
 
+To rebuild the current source, remove any installed Dragon packages, and
+install both products into every detected Rhino 7/8 generation, close Rhino and
+run:
+
+```text
+install.cmd
+```
+
+Use `install.cmd -UseExistingPackages` for an immediate reinstall from the
+already generated, hash-checked Yak files under `artifacts\packages`.
+
 ## Current status
 
 The port is preparing the first independently installable local
