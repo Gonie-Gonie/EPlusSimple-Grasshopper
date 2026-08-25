@@ -12,7 +12,11 @@ namespace GonieGonie.InvisibleDragon.Idd;
 public static class IddParser
 {
     private static readonly Regex FieldLine = new(
-        @"^\s*(?<token>[AN]\d+)\s*(?<delimiter>[,;])(?<directives>.*)$",
+        @"^\s*(?<fields>(?:[AN]\d+\s*[,;]\s*)+)(?<directives>.*)$",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+
+    private static readonly Regex FieldToken = new(
+        @"(?<token>[AN]\d+)\s*(?<delimiter>[,;])",
         RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 
     private static readonly Regex VersionLine = new(
@@ -89,9 +93,18 @@ public static class IddParser
                     throw new FormatException($"IDD field found before an object at line {lineNumber}.");
                 }
 
-                FinishField(currentObject, ref currentField);
-                string token = fieldMatch.Groups["token"].Value.ToUpperInvariant();
-                currentField = new FieldBuilder(token, currentObject.Fields.Count);
+                foreach (Match tokenMatch in FieldToken.Matches(fieldMatch.Groups["fields"].Value))
+                {
+                    FinishField(currentObject, ref currentField);
+                    string token = tokenMatch.Groups["token"].Value.ToUpperInvariant();
+                    currentField = new FieldBuilder(token, currentObject.Fields.Count);
+                }
+
+                if (currentField is null)
+                {
+                    throw new FormatException($"IDD field declaration did not contain a token at line {lineNumber}.");
+                }
+
                 ApplyDirectiveText(fieldMatch.Groups["directives"].Value, currentObject, currentField, lineNumber);
                 continue;
             }
@@ -329,10 +342,19 @@ public static class IddParser
 
         public IddObjectDefinition Build()
         {
+            IEnumerable<IddFieldDefinition> canonicalFields = Fields;
+            int markedStart = Fields.FindIndex(field => field.BeginsExtensible);
+            if (markedStart >= 0 &&
+                ExtensibleGroupSize > 0 &&
+                Fields.Count > markedStart + ExtensibleGroupSize)
+            {
+                canonicalFields = Fields.Take(markedStart + ExtensibleGroupSize).ToArray();
+            }
+
             return new IddObjectDefinition(
                 Name,
                 Group,
-                Fields,
+                canonicalFields,
                 memo,
                 IsUnique,
                 IsRequired,

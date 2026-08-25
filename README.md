@@ -62,8 +62,11 @@ writes the generated, non-secret `.config\local.settings.json`. It is
 idempotent, so rerun it after installing Rhino to enable that version's tests.
 
 For port-equivalence work, `.\dev.cmd reference` runs the pinned historical Python
-implementation in an isolated dependency directory and writes deterministic
-database, GRM, and semantic IDF references under `temp\reference`. Use
+implementation plus the hash-locked EnergyPlus 24.2 IDD and official epJSON
+schema in isolated processes, then writes deterministic database, full-schema,
+GRM, and semantic IDF references under `temp\reference`. If EnergyPlus is not
+already present, first run
+`.\dev.cmd setup -InstallEnergyPlus`. Use
 `.\dev.cmd reference -Mode Verify` to compare them byte-for-byte with the reviewed
 baseline in `fixtures\reference\python-0.7.0`. Python remains development-only.
 

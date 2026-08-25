@@ -86,6 +86,36 @@ public sealed class IddParserTests
     }
 
     [Fact]
+    public void ExpandsCompressedFieldLinesAndKeepsTrailingDirectivesOnTheLastToken()
+    {
+        const string text = """
+            !IDD_Version 24.2.0
+            \group Test Group
+            Compressed:Object,
+              \extensible:5
+              A1, \field Name
+              A2,N1,N2,N3,N4, \note condensed group
+                              \default 31
+              A3,N5,N6,N7,N8; \note final group
+            """;
+
+        IddObjectDefinition item = Assert.Single(IddParser.Parse(text, Hash).Objects);
+
+        Assert.Equal(
+            new[] { "A1", "A2", "N1", "N2", "N3", "N4", "A3", "N5", "N6", "N7", "N8" },
+            item.Fields.Select(field => field.Token));
+        Assert.Equal(6, item.ExtensibleStartIndex);
+        Assert.Equal(5, item.ExtensibleGroupSize);
+        Assert.Empty(item.Fields[1].Notes);
+        Assert.Equal(new[] { "condensed group" }, item.Fields[5].Notes);
+        Assert.Equal("31", item.Fields[5].DefaultValue);
+        Assert.Equal(new[] { "final group" }, item.Fields[10].Notes);
+        Assert.Same(item.Fields[6], item.ResolveField(6));
+        Assert.Same(item.Fields[10], item.ResolveField(10));
+        Assert.Same(item.Fields[6], item.ResolveField(11));
+    }
+
+    [Fact]
     public void ParsedCollectionsAreDefensiveAndReadOnly()
     {
         var sourceFields = new List<IddFieldDefinition>
@@ -153,6 +183,10 @@ public sealed class IddParserTests
         Assert.False(schema["Building"]["Loads Convergence Tolerance Value"].Minimum!.IsInclusive);
         Assert.Equal(1, schema["ShadowCalculation"].ExtensibleGroupSize);
         Assert.Equal(IddDataType.ObjectList, schema["BuildingSurface:Detailed"]["Zone Name"].DataType);
+        Assert.Equal(7, schema["Schedule:Year"].Fields.Count);
+        Assert.Equal(IddDataType.IntegerNumber, schema["Schedule:Year"].ResolveField(133)!.DataType);
+        Assert.Equal(8, schema["Site:SpectrumData"].Fields.Count);
+        Assert.Same(schema["Site:SpectrumData"].Fields[7], schema["Site:SpectrumData"].ResolveField(215));
     }
 }
 

@@ -28,6 +28,7 @@ $requirementsPath = Join-Path $repositoryRoot 'tools\python-reference\requiremen
 $bootstrapPath = Join-Path $repositoryRoot 'tools\python-reference\bootstrap_reference.py'
 $generatorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_reference.py'
 $profileGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_usage_profile_schedule_oracle.py'
+$iddGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_idd_schema_oracle.py'
 $tempRoot = Join-Path $repositoryRoot 'temp'
 $referenceTempRoot = Join-Path $tempRoot 'reference'
 $logsRoot = Join-Path $referenceTempRoot 'logs'
@@ -39,6 +40,10 @@ $pipWheel = Join-Path $repositoryRoot '.tools\python-reference\bootstrap\pip-24.
 $pipWheelUri = 'https://files.pythonhosted.org/packages/ef/7d/500c9ad20238fcfcb4cb9243eede163594d7020ce87bd9610c9e02771876/pip-24.3.1-py3-none-any.whl'
 $pipWheelSha256 = '3790624780082365f47549d032f3770eeb2b1e8bd1f7b2e02dace1afa361b4ed'
 $requiredPythonVersion = '3.12.7'
+$requiredEnergyPlusVersion = '24.2.0'
+$requiredEnergyPlusBuild = '94a887817b'
+$requiredEnergyPlusIddSha256 = '3b56fd8afb02a557f1c2cfb963cbc6f53963738bc6aa169f996d7a5175b324a2'
+$requiredEnergyPlusEpJsonSchemaSha256 = 'aefb16d63495d170468ecab3c935f1aeb68eb07c6551403dd11cbba61cb136fa'
 
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
     $OutputDirectory = Join-Path $referenceTempRoot 'python-output'
@@ -64,7 +69,7 @@ if ($Mode -eq 'Verify' -and $UpdateBaseline) {
     throw '-UpdateBaseline cannot be combined with -Mode Verify.'
 }
 
-foreach ($requiredFile in @($settingsPath, $lockPath, $requirementsPath, $bootstrapPath, $generatorPath, $profileGeneratorPath)) {
+foreach ($requiredFile in @($settingsPath, $lockPath, $requirementsPath, $bootstrapPath, $generatorPath, $profileGeneratorPath, $iddGeneratorPath)) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
         throw "Required reference-oracle input is missing: '$requiredFile'. Run 'dev.cmd setup' if local.settings.json is absent."
     }
@@ -85,6 +90,32 @@ $pythonIdentity = @(& $pythonExecutable -c "import sys; print('%d.%d.%d' % sys.v
 if ($LASTEXITCODE -ne 0 -or $pythonIdentity.Count -eq 0 -or [string] $pythonIdentity[-1] -ne $requiredPythonVersion) {
     $reported = if ($pythonIdentity.Count -gt 0) { [string] $pythonIdentity[-1] } else { '<none>' }
     throw "Python $requiredPythonVersion is required for the reference oracle; configured interpreter reported '$reported'."
+}
+
+$energyPlusSettings = $settings.PSObject.Properties['energyPlus']
+if ($null -eq $energyPlusSettings -or [string] $energyPlusSettings.Value.status -ne 'ready') {
+    throw "The EnergyPlus IDD oracle is not configured. Run 'dev.cmd setup -InstallEnergyPlus'."
+}
+
+$energyPlusIddPath = [string] $energyPlusSettings.Value.idd
+if (-not (Test-Path -LiteralPath $energyPlusIddPath -PathType Leaf)) {
+    throw "The setup-selected EnergyPlus IDD no longer exists: '$energyPlusIddPath'. Re-run 'dev.cmd setup'."
+}
+$energyPlusEpJsonSchemaPath = [string] $energyPlusSettings.Value.epJsonSchema
+if (-not (Test-Path -LiteralPath $energyPlusEpJsonSchemaPath -PathType Leaf)) {
+    throw "The setup-selected official EnergyPlus epJSON schema no longer exists: '$energyPlusEpJsonSchemaPath'. Re-run 'dev.cmd setup'."
+}
+if ([string] $energyPlusSettings.Value.version -ne $requiredEnergyPlusVersion -or
+    [string] $energyPlusSettings.Value.build -ne $requiredEnergyPlusBuild) {
+    throw "EnergyPlus $requiredEnergyPlusVersion build $requiredEnergyPlusBuild is required for the IDD oracle."
+}
+$actualEnergyPlusIddSha256 = Get-Sha256 -Path $energyPlusIddPath
+if ($actualEnergyPlusIddSha256 -ne $requiredEnergyPlusIddSha256) {
+    throw "EnergyPlus IDD hash mismatch. Expected '$requiredEnergyPlusIddSha256', found '$actualEnergyPlusIddSha256'."
+}
+$actualEnergyPlusEpJsonSchemaSha256 = Get-Sha256 -Path $energyPlusEpJsonSchemaPath
+if ($actualEnergyPlusEpJsonSchemaSha256 -ne $requiredEnergyPlusEpJsonSchemaSha256) {
+    throw "Official EnergyPlus epJSON schema hash mismatch. Expected '$requiredEnergyPlusEpJsonSchemaSha256', found '$actualEnergyPlusEpJsonSchemaSha256'."
 }
 
 $upstreamLock = Get-Content -LiteralPath $lockPath -Raw | ConvertFrom-Json
@@ -450,7 +481,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile, IDD, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -473,6 +504,29 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $profileGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-usage-profile-reference.log') `
     -FailureMessage 'Generating the Python usage-profile reference oracle failed'
+
+$iddOraclePath = Join-Path $outputRoot 'idd-24.2.0.schema.json.gz'
+$iddGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $iddGeneratorPath,
+    '--',
+    '--idd', $energyPlusIddPath,
+    '--epjson-schema', $energyPlusEpJsonSchemaPath,
+    '--output', $iddOraclePath,
+    '--upstream-commit', $upstreamCommit,
+    '--expected-sha256', $requiredEnergyPlusIddSha256,
+    '--expected-epjson-sha256', $requiredEnergyPlusEpJsonSchemaSha256,
+    '--expected-version', $requiredEnergyPlusVersion,
+    '--expected-build', $requiredEnergyPlusBuild
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $iddGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-idd-reference.log') `
+    -FailureMessage 'Generating the EnergyPlus IDD reference oracle failed'
 
 $generatorArguments = @(
     '-X', 'utf8',

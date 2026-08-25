@@ -28,6 +28,11 @@
       "sha256": "6fd2b18e1e4d464286c6f3a3a197e3c526e863e34ab392f52818435ae6872344"
     },
     {
+      "path": "idd-24.2.0.schema.json.gz",
+      "bytes": 585482,
+      "sha256": "f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705"
+    },
+    {
       "path": "material-database.json",
       "bytes": 659,
       "sha256": "45d7c88dd10661486436bed8a94e3de41eaa5713d21003e803a6b0775004f9d8"
