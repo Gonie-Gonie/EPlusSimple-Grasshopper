@@ -300,6 +300,71 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         return new DaySchedule(Name, Values, type, Unit);
     }
 
+    internal static string FormatPythonScalar<T>(T value, string operation)
+    {
+        return PythonScalar.Create(value, operation).Text;
+    }
+
+    internal static double ConvertPythonScalarToScheduleValue<T>(
+        T value,
+        ScheduleType type,
+        string operation)
+    {
+        return PythonScalar.Create(value, operation).ToScheduleValue(type, operation);
+    }
+
+    internal static DaySchedule ConstantFromPythonScalar<T>(
+        string name,
+        T value,
+        ScheduleType type)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "constant schedule value");
+        double scheduleValue = scalar.ToScheduleValue(type, "constant schedule value");
+        return new DaySchedule(
+            name,
+            Enumerable.Repeat(scheduleValue, FixedLength),
+            type);
+    }
+
+    internal DaySchedule AddPythonScalar<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "addition");
+        return AddScalar(this, scalar.ToPythonFloat("addition"), scalar.Text);
+    }
+
+    internal DaySchedule SubtractPythonScalar<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "subtraction");
+        return SubtractScalar(this, scalar.ToPythonFloat("subtraction"), scalar.Text);
+    }
+
+    internal DaySchedule ReverseSubtractPythonScalar<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "reverse subtraction");
+        return ReverseSubtractScalar(
+            scalar.ToPythonFloat("reverse subtraction"),
+            scalar.Text,
+            this);
+    }
+
+    internal DaySchedule MultiplyPythonScalar<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "multiplication");
+        return this * scalar.ToPythonFloat("multiplication");
+    }
+
+    internal DaySchedule DividePythonScalar<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "division");
+        return this / scalar.ToPythonFloat("division");
+    }
+
+    internal DaySchedule ReverseDividePythonScalar<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "reverse division");
+        return scalar.ToPythonFloat("reverse division") / this;
+    }
+
     public DaySchedule Clip(double? minimum = null, double? maximum = null, string? name = null)
     {
         if (minimum.HasValue && maximum.HasValue && minimum.Value > maximum.Value)
@@ -1411,7 +1476,10 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
                 }
             }
 
-            return ToPythonFloat(operation);
+            double scheduleValue = ToPythonFloat(operation);
+            return type == ScheduleType.Real
+                ? scheduleValue
+                : type.ValidateValue(scheduleValue, operation);
         }
 
         public static PythonScalar Create<T>(T value, string operation)

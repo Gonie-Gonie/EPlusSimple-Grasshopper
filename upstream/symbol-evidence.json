@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:5381fe5f9801ae725e789790b85242142de08f1033eddff1df96dac419cc7ddf",
+  "content_sha256": "sha256:f32e01c0f24911cea1f46995e6eab11106fb7af3dba733a25c6b0c8483ebc619",
   "entries": [
     {
       "implementation": {
@@ -134,7 +134,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IntervalsPerHour"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -160,7 +160,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Addition"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -186,7 +186,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_BitwiseAnd"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -212,7 +212,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.GreaterThanOrEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -238,7 +238,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.GreaterThan"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -264,7 +264,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_LogicalNot"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -290,7 +290,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.LessThanOrEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -316,7 +316,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.LessThan"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -342,7 +342,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Multiply"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -368,7 +368,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_BitwiseOr"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -394,7 +394,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Addition"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -420,7 +420,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Multiply"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -446,7 +446,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Subtraction"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -472,7 +472,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Division"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -498,7 +498,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Subtraction"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -524,7 +524,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Division"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -550,7 +550,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Average"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -576,7 +576,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -602,7 +602,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementMaximum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -628,7 +628,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementMinimum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -654,7 +654,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementNotEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -680,7 +680,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.FixedLength"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -706,7 +706,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.HasNonzero"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -732,7 +732,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.HasPositive"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -758,7 +758,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IntegralHours"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -784,7 +784,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsBetween"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -810,7 +810,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsConstant"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -836,7 +836,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsNegative"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -862,7 +862,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsNonzero"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -888,7 +888,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsOff"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -914,7 +914,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsOn"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -940,7 +940,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsPositive"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -966,7 +966,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsZero"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -992,7 +992,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Maximum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1018,7 +1018,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Minimum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1044,7 +1044,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.NonzeroHours"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1070,7 +1070,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.NormalizeByMaximum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1096,7 +1096,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.PositiveAverage"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1122,7 +1122,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.PositiveHours"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1148,7 +1148,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Step"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1174,7 +1174,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "source_sha256": "sha256:f23b5f6385d64fbe577efebe0a51bc43487a8622f5bd45b6da6e2362cd852e30",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Where"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1199,8 +1199,736 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Addition"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__add__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7da5f5d9a436908ffa0b9b1b49ad46379d8835f1fdd7b52cab64473fedba4b0d",
+          "id": "profile-ruleset-add-d658d7f9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__add__",
+      "upstream_symbol_hash": "sha256:d658d7f91f8ee7dafbca0504b70bde094910f90830fc85a732e21dcab8ff2405"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_BitwiseAnd"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__and__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:95afd7e72847185e70a737e625ea2693bef08ad8cf6c4861c91ae4b61c7d8e76",
+          "id": "profile-ruleset-and-68f36cc1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__and__",
+      "upstream_symbol_hash": "sha256:68f36cc14f5d257034871f8f96c9ae1e8b225489ee47fd5ce398ade357148315"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.GreaterThanOrEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__ge__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b98521512c67d88f81e0c26d940c2870bc8d9e72111cc437fe59f306643ab8bd",
+          "id": "profile-ruleset-ge-66ecfa68",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__ge__",
+      "upstream_symbol_hash": "sha256:66ecfa68f9710c8f9914577b4617b989292394b534ca98b83e213e7fe735d2b7"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.GreaterThan"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__gt__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:145b0a264bf1d7368b02f10ddb0412e0eceec0b9032b843307a6c75b7427023a",
+          "id": "profile-ruleset-gt-c73275fa",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__gt__",
+      "upstream_symbol_hash": "sha256:c73275fa255d1916ee360c0d6a50ea20828cb75191f9733fa193e1ee4a4f0005"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_LogicalNot"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__invert__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:bdae4ce4e44c29351db71d6a6f207d558b46aadb6c002227ced1f9eb442895f0",
+          "id": "profile-ruleset-invert-4c2c5922",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__invert__",
+      "upstream_symbol_hash": "sha256:4c2c592271f4031026fa49d9f7b90e2e9d7edf0ce708cef18108e1509768780e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.LessThanOrEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__le__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:5671907bfba43ba9a75ceaa5a0a0c5abbe811b809c647fa17a56e7d5df0830c6",
+          "id": "profile-ruleset-le-c28491e9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__le__",
+      "upstream_symbol_hash": "sha256:c28491e978f051599d30f0582d7d3e6b92ed39207719422007d5f99e44aec32b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.LessThan"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__lt__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:46ce751568b48a8baa09a858f2bee5e02470a3823d626da22b16b965f7aebe58",
+          "id": "profile-ruleset-lt-cb4515a2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__lt__",
+      "upstream_symbol_hash": "sha256:cb4515a256ae510fed02b2d73955fd02ec0316d68fc480772662ed3faab38a48"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Multiply"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__mul__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:558588af37c0ab60a073f6df871bd46833e56140973da5d011867f4058a6d503",
+          "id": "profile-ruleset-mul-dfe4535f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__mul__",
+      "upstream_symbol_hash": "sha256:dfe4535f2bfc5d3e8823015e09f766c4bffb1eaa34a5d34641f5d7b86db22094"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_BitwiseOr"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__or__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:92cb3534761bc9c67a455f0592bd01d8fe348d5897f63d80075f6ab879df52a9",
+          "id": "profile-ruleset-or-db95291f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__or__",
+      "upstream_symbol_hash": "sha256:db95291ff1d42fb08f26255bca01aae3ca1bcb0ac48a860f335092d2782a83c5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Addition"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__radd__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:84e293433db22b78d104906236a1204d39d0da2893759b5f61668c8070f24328",
+          "id": "profile-ruleset-radd-7d78c731",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__radd__",
+      "upstream_symbol_hash": "sha256:7d78c731949b203b143a486363e54f8572d57c8f12f0a598d7d0470ac776729e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Multiply"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__rmul__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b3c64be8ebebb71d38b0530073261328a24a7fa4d4294e66a25d382cdd01e28d",
+          "id": "profile-ruleset-rmul-7359aee6",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__rmul__",
+      "upstream_symbol_hash": "sha256:7359aee63c4e4e2dc1fd2c80435b39ac3e7989f60e89e4f9951784b13c003a99"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Subtraction"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__rsub__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:195209a67e554808e2d624619db9b5dd629c9d2b6cc8685bf5247c414bfb7859",
+          "id": "profile-ruleset-rsub-0ee38c58",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__rsub__",
+      "upstream_symbol_hash": "sha256:0ee38c580eba67e6c30a824516a9bf4cf97a4965f28ce732a7271ad8b705d0d6"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Division"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__rtruediv__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:8ea4f17b1f639a7f2b0b2dcc0540808c4e2c60de0611b26a11b5c81ed5af32d3",
+          "id": "profile-ruleset-rtruediv-b665fd3a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__rtruediv__",
+      "upstream_symbol_hash": "sha256:b665fd3ac19d91fed1717628316d613dd189aa9199ad0f9a11bf44deabbbd9a0"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Subtraction"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__sub__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:cfd0d87b6b3332cc9ae56769a3383c91267c0aa7f9c637f5f24489e0c5c9d3d9",
+          "id": "profile-ruleset-sub-d1329238",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__sub__",
+      "upstream_symbol_hash": "sha256:d13292383b4ac45ca61e2e5a3af7f47116cecd9427402a0f82f2facc9a748e8f"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Division"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.__truediv__ is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f375e03109caab34701b01b347ae03efc2b04d42930a4963683a02913a216b62",
+          "id": "profile-ruleset-truediv-5ce5d9fa",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__truediv__",
+      "upstream_symbol_hash": "sha256:5ce5d9fa78fe66d885f07337ea82654b3976d0a954f4dbd9870d2abb08eb272e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.ElementEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.element_eq is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:eb5cee79ba1e6fdae0c53c5bfbe3e1a3bbad461abe394f2922e0394e19f75220",
+          "id": "profile-ruleset-element-eq-2d761982",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.element_eq",
+      "upstream_symbol_hash": "sha256:2d76198253866a17cebeac482806cb4c7172bdd1eac0247412d9e53f96a07f6e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.ElementMaximum"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.element_max is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:725878949b926969a87c0fb1ad8c1fd0ecc408b95cf3f31f5ad889db6db5ad50",
+          "id": "profile-ruleset-element-max-bfffae34",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.element_max",
+      "upstream_symbol_hash": "sha256:bfffae347ffeac971d2328d400ae28e5986cc2f3c60b707e0bb55431989edd39"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.ElementMinimum"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.element_min is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3c777ed50b240b8fc42ec9615162f67625766b150e29b23810abe1fb7c20c206",
+          "id": "profile-ruleset-element-min-33739f88",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.element_min",
+      "upstream_symbol_hash": "sha256:33739f88089372dfdb936c28027f53c69ca8ec4ec1f47ad24ff6d8b7fc427d64"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.ElementNotEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.element_ne is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:bfcca2dd4ab971c3319aa085c7aca661c41df361f4f06d1271988f5d8d1a97e8",
+          "id": "profile-ruleset-element-ne-acaa0bfa",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.element_ne",
+      "upstream_symbol_hash": "sha256:acaa0bfa9274b747da2f9096ecb5598d67e8bb6515846462ae53512c65fe6f60"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsBetween"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.is_between is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f497ac7adca3b4a74bf443087de0c701fcd7dacefabbfb4e70563b55e2fcbd36",
+          "id": "profile-ruleset-is-between-1ada7d9d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.is_between",
+      "upstream_symbol_hash": "sha256:1ada7d9d920d4732ef0bc1602db75a12d2cb97853e6cbbb5d0d7d32d15ec63e7"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsNegative"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.is_negative is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7df10bb303356a29585266a15387c2e74e14aba0db6ab526de531670474e8499",
+          "id": "profile-ruleset-is-negative-344049ce",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.is_negative",
+      "upstream_symbol_hash": "sha256:344049ce22623af29c4956fe51fd008ae546b6bbaedcaec1946037b00ef9d67e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsNonzero"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.is_nonzero is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:de12f37161f31992b76ad2e517b794c35b3629a4b9485c440b0ee949c3811392",
+          "id": "profile-ruleset-is-nonzero-12a2434c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.is_nonzero",
+      "upstream_symbol_hash": "sha256:12a2434cf468d99a4e259487daa1141861bf48c4b4973115adb76e2c3a24333f"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsOff"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.is_off is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3057e21328b64f958a2d1eb370ffa69aa3dd84b8ea741d3d668a1920f5f7e8c0",
+          "id": "profile-ruleset-is-off-8f8e714f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.is_off",
+      "upstream_symbol_hash": "sha256:8f8e714ff0d9a931906eee296428f6565c13fa22152d731f7c0e22e31e0c1f52"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsOn"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.is_on is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b6e5d83bf411065fc879cb87abf0a270c9fd44ac3372ce215abd0ff2cadbfbc4",
+          "id": "profile-ruleset-is-on-5c914c14",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.is_on",
+      "upstream_symbol_hash": "sha256:5c914c14bc867f961622cad9d503ee0103ac1f6e5bbffd860be6739fcc093592"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsPositive"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.is_positive is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:65543726a986a0997f1118478ddc3dd66c70d48fe21fd4037ba49874479e5b72",
+          "id": "profile-ruleset-is-positive-7a7f9ce6",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.is_positive",
+      "upstream_symbol_hash": "sha256:7a7f9ce61c60171028a80e0e81f072ea7f86e59a5053360cec60843db6714247"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsZero"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.is_zero is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2844b27f21fa62f1b6e39d3fd28296bebc6dbf7936ea7f2736ab78b953d44b51",
+          "id": "profile-ruleset-is-zero-8f8e714f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.is_zero",
+      "upstream_symbol_hash": "sha256:8f8e714ff0d9a931906eee296428f6565c13fa22152d731f7c0e22e31e0c1f52"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.NormalizeByMaximum"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.normalize_by_max is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2d57704b7fd35d23085edb164e08fa848febc7d33f0bab43f48dfac147a79d43",
+          "id": "profile-ruleset-normalize-by-max-92c2f287",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.normalize_by_max",
+      "upstream_symbol_hash": "sha256:92c2f28741585003d7e2bab24c4bff10cd1fa42133eb1cf6870409b37ec6ba55"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.Where"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the 334-case pinned CPython and live .NET RuleSet operations oracle, RuleSet.where is verified for exact binary64 values, names, schedule types and units, 10-slot topology and fallback sources, success and failure outcomes, registered adaptations and repair references, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:09213b82a210f4b6667d03c39afb0475e0c19e808540a0ef957d089bcf697af5",
+          "id": "profile-ruleset-where-b245f2e8",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:83ae6c0669de9116c0296bd968b142af568decb49f26e38085fb9077dee9d5c3",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.where",
+      "upstream_symbol_hash": "sha256:b245f2e84cd0e4b15b7f03d663409c07792e05f5143a8aae6a1e567769fa726a"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1226,7 +1954,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType.Fraction"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1252,7 +1980,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType.OnOff"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1278,7 +2006,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType.Real"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1304,7 +2032,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType.Temperature"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1330,7 +2058,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.IdfObjectName"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1356,7 +2084,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.LowerLimit"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1382,7 +2110,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.NumericType"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1408,7 +2136,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.ToIdfObject"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1434,7 +2162,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.UnitType"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1460,7 +2188,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.UpperLimit"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1486,7 +2214,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
-        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.ValidateValue"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1513,9 +2241,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 58,
-    "passed_receipt_count": 58,
-    "receipt_count": 58,
+    "entry_count": 86,
+    "passed_receipt_count": 86,
+    "receipt_count": 86,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

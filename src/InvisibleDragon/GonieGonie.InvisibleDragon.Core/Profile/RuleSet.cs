@@ -1,3 +1,4 @@
+using System.Numerics;
 using GonieGonie.InvisibleDragon.Internal;
 
 namespace GonieGonie.InvisibleDragon.Profile;
@@ -77,7 +78,13 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public static RuleSet Constant(string name, double value, ScheduleType type = ScheduleType.Real)
     {
-        DaySchedule day = DaySchedule.Constant($"{name}:day", value, type);
+        DaySchedule day = DaySchedule.ConstantFromPythonScalar($"{name}:day", value, type);
+        return new RuleSet(name, day, day, type: type);
+    }
+
+    public static RuleSet Constant<T>(string name, T value, ScheduleType type = ScheduleType.Real)
+    {
+        DaySchedule day = DaySchedule.ConstantFromPythonScalar($"{name}:day", value, type);
         return new RuleSet(name, day, day, type: type);
     }
 
@@ -131,7 +138,12 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet Multiply(double value)
     {
-        return Map(day => day * value, $"{Name}:MUL:{value}");
+        return MultiplyPythonScalar(value);
+    }
+
+    public RuleSet Multiply<T>(T value)
+    {
+        return MultiplyPythonScalar(value);
     }
 
     public RuleSet Add(RuleSet other)
@@ -141,12 +153,22 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet Add(double value)
     {
-        return Map(day => day + value, $"{Name}:ADD:{value}");
+        return AddPythonScalar(value);
+    }
+
+    public RuleSet Add<T>(T value)
+    {
+        return AddPythonScalar(value);
     }
 
     public RuleSet ReverseAdd(double value)
     {
-        return Map(day => value + day, $"{value}:ADD:{Name}");
+        return ReverseAddPythonScalar(value);
+    }
+
+    public RuleSet ReverseAdd<T>(T value)
+    {
+        return ReverseAddPythonScalar(value);
     }
 
     public RuleSet Subtract(RuleSet other)
@@ -156,12 +178,22 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet Subtract(double value)
     {
-        return Map(day => day - value, $"{Name}:SUB:{value}");
+        return SubtractPythonScalar(value);
+    }
+
+    public RuleSet Subtract<T>(T value)
+    {
+        return SubtractPythonScalar(value);
     }
 
     public RuleSet ReverseSubtract(double value)
     {
-        return Map(day => value - day, $"{value}:SUB:{Name}");
+        return ReverseSubtractPythonScalar(value);
+    }
+
+    public RuleSet ReverseSubtract<T>(T value)
+    {
+        return ReverseSubtractPythonScalar(value);
     }
 
     public RuleSet Divide(RuleSet other)
@@ -171,12 +203,22 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet Divide(double value)
     {
-        return Map(day => day / value, $"{Name}:DIV:{value}");
+        return DividePythonScalar(value);
+    }
+
+    public RuleSet Divide<T>(T value)
+    {
+        return DividePythonScalar(value);
     }
 
     public RuleSet ReverseDivide(double value)
     {
-        return Map(day => value / day, $"{value}:DIV:{Name}");
+        return ReverseDividePythonScalar(value);
+    }
+
+    public RuleSet ReverseDivide<T>(T value)
+    {
+        return ReverseDividePythonScalar(value);
     }
 
     public RuleSet LogicalAnd(RuleSet other)
@@ -201,7 +243,12 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet ElementEqual(double value)
     {
-        return Map(day => day.ElementEqual(value), $"{Name}:EQ:{value}");
+        return ElementEqualPythonScalar(value);
+    }
+
+    public RuleSet ElementEqual<T>(T value)
+    {
+        return ElementEqualPythonScalar(value);
     }
 
     public RuleSet ElementNotEqual(RuleSet other)
@@ -211,7 +258,12 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet ElementNotEqual(double value)
     {
-        return Map(day => day.ElementNotEqual(value), $"{Name}:NE:{value}");
+        return ElementNotEqualPythonScalar(value);
+    }
+
+    public RuleSet ElementNotEqual<T>(T value)
+    {
+        return ElementNotEqualPythonScalar(value);
     }
 
     public RuleSet LessThan(RuleSet other)
@@ -221,7 +273,12 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet LessThan(double value)
     {
-        return Map(day => day.LessThan(value), $"{Name}:LT:{value}");
+        return LessThanPythonScalar(value);
+    }
+
+    public RuleSet LessThan<T>(T value)
+    {
+        return LessThanPythonScalar(value);
     }
 
     public RuleSet LessThanOrEqual(RuleSet other)
@@ -231,7 +288,12 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet LessThanOrEqual(double value)
     {
-        return Map(day => day.LessThanOrEqual(value), $"{Name}:LE:{value}");
+        return LessThanOrEqualPythonScalar(value);
+    }
+
+    public RuleSet LessThanOrEqual<T>(T value)
+    {
+        return LessThanOrEqualPythonScalar(value);
     }
 
     public RuleSet GreaterThan(RuleSet other)
@@ -241,7 +303,12 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet GreaterThan(double value)
     {
-        return Map(day => day.GreaterThan(value), $"{Name}:GT:{value}");
+        return GreaterThanPythonScalar(value);
+    }
+
+    public RuleSet GreaterThan<T>(T value)
+    {
+        return GreaterThanPythonScalar(value);
     }
 
     public RuleSet GreaterThanOrEqual(RuleSet other)
@@ -251,7 +318,12 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet GreaterThanOrEqual(double value)
     {
-        return Map(day => day.GreaterThanOrEqual(value), $"{Name}:GE:{value}");
+        return GreaterThanOrEqualPythonScalar(value);
+    }
+
+    public RuleSet GreaterThanOrEqual<T>(T value)
+    {
+        return GreaterThanOrEqualPythonScalar(value);
     }
 
     public RuleSet ElementMinimum(RuleSet other)
@@ -261,7 +333,12 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet ElementMinimum(double value)
     {
-        return Map(day => day.ElementMinimum(value), $"{Name}:MIN:{value}");
+        return ElementMinimumPythonScalar(value);
+    }
+
+    public RuleSet ElementMinimum<T>(T value)
+    {
+        return ElementMinimumPythonScalar(value);
     }
 
     public RuleSet ElementMaximum(RuleSet other)
@@ -271,7 +348,12 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet ElementMaximum(double value)
     {
-        return Map(day => day.ElementMaximum(value), $"{Name}:MAX:{value}");
+        return ElementMaximumPythonScalar(value);
+    }
+
+    public RuleSet ElementMaximum<T>(T value)
+    {
+        return ElementMaximumPythonScalar(value);
     }
 
     public RuleSet IsOn()
@@ -315,6 +397,21 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return lower.LogicalAnd(upper);
     }
 
+    public RuleSet IsBetween<TMinimum, TMaximum>(
+        TMinimum minimum,
+        TMaximum maximum,
+        bool includeMinimum = true,
+        bool includeMaximum = true)
+    {
+        RuleSet lower = includeMinimum
+            ? GreaterThanOrEqualPythonScalar(minimum)
+            : GreaterThanPythonScalar(minimum);
+        RuleSet upper = includeMaximum
+            ? LessThanOrEqualPythonScalar(maximum)
+            : LessThanPythonScalar(maximum);
+        return lower.LogicalAnd(upper);
+    }
+
     public static RuleSet Where(
         RuleSet condition,
         object whenTrue,
@@ -330,34 +427,49 @@ public sealed class RuleSet : IEquatable<RuleSet>
             throw new ScheduleOperationException("RuleSet.Where requires an OnOff condition rule set.");
         }
 
-        RuleSet trueRuleSet = CoerceWhereValue(whenTrue, type, nameof(whenTrue));
-        RuleSet falseRuleSet = CoerceWhereValue(whenFalse, type, nameof(whenFalse));
-        string resultName = name ?? "WHERE";
-        DaySchedule weekdays = DaySchedule.Where(
+        WhereOperand trueValue = CoerceWhereValue(whenTrue, type, nameof(whenTrue));
+        WhereOperand falseValue = CoerceWhereValue(whenFalse, type, nameof(whenFalse));
+        ScheduleType resultType = type ?? trueValue.Type;
+        if (trueValue.Type != resultType || falseValue.Type != resultType)
+        {
+            throw new ScheduleOperationException(
+                "RuleSet.Where result branches must have the same requested schedule type.");
+        }
+
+        string resultName;
+        if (name is null || name.Length == 0)
+        {
+            resultName = "WHERE";
+        }
+        else
+        {
+            resultName = DomainGuard.RequiredText(name, nameof(name));
+        }
+        DaySchedule weekdays = SelectWhereDay(
             condition.Weekdays,
-            trueRuleSet.Weekdays,
-            falseRuleSet.Weekdays,
+            trueValue.Weekdays,
+            falseValue.Weekdays,
             $"{resultName}:weekdays",
-            type: type);
-        DaySchedule weekends = DaySchedule.Where(
+            resultType);
+        DaySchedule weekends = SelectWhereDay(
             condition.Weekends,
-            trueRuleSet.Weekends,
-            falseRuleSet.Weekends,
+            trueValue.Weekends,
+            falseValue.Weekends,
             $"{resultName}:weekends",
-            type: type);
+            resultType);
 
         return new RuleSet(
             resultName,
             weekdays,
             weekends,
-            WhereOverride(condition.Monday, trueRuleSet.Monday, falseRuleSet.Monday, condition.Weekdays, trueRuleSet.Weekdays, falseRuleSet.Weekdays, $"{resultName}:monday", type),
-            WhereOverride(condition.Tuesday, trueRuleSet.Tuesday, falseRuleSet.Tuesday, condition.Weekdays, trueRuleSet.Weekdays, falseRuleSet.Weekdays, $"{resultName}:tuesday", type),
-            WhereOverride(condition.Wednesday, trueRuleSet.Wednesday, falseRuleSet.Wednesday, condition.Weekdays, trueRuleSet.Weekdays, falseRuleSet.Weekdays, $"{resultName}:wednesday", type),
-            WhereOverride(condition.Thursday, trueRuleSet.Thursday, falseRuleSet.Thursday, condition.Weekdays, trueRuleSet.Weekdays, falseRuleSet.Weekdays, $"{resultName}:thursday", type),
-            WhereOverride(condition.Friday, trueRuleSet.Friday, falseRuleSet.Friday, condition.Weekdays, trueRuleSet.Weekdays, falseRuleSet.Weekdays, $"{resultName}:friday", type),
-            WhereOverride(condition.Saturday, trueRuleSet.Saturday, falseRuleSet.Saturday, condition.Weekends, trueRuleSet.Weekends, falseRuleSet.Weekends, $"{resultName}:saturday", type),
-            WhereOverride(condition.Sunday, trueRuleSet.Sunday, falseRuleSet.Sunday, condition.Weekends, trueRuleSet.Weekends, falseRuleSet.Weekends, $"{resultName}:sunday", type),
-            WhereOverride(condition.Holiday, trueRuleSet.Holiday, falseRuleSet.Holiday, condition.Weekends, trueRuleSet.Weekends, falseRuleSet.Weekends, $"{resultName}:holiday", type),
+            WhereOverride(condition.Monday, trueValue.Monday, falseValue.Monday, condition.Weekdays, trueValue.Weekdays, falseValue.Weekdays, $"{resultName}:monday", resultType),
+            WhereOverride(condition.Tuesday, trueValue.Tuesday, falseValue.Tuesday, condition.Weekdays, trueValue.Weekdays, falseValue.Weekdays, $"{resultName}:tuesday", resultType),
+            WhereOverride(condition.Wednesday, trueValue.Wednesday, falseValue.Wednesday, condition.Weekdays, trueValue.Weekdays, falseValue.Weekdays, $"{resultName}:wednesday", resultType),
+            WhereOverride(condition.Thursday, trueValue.Thursday, falseValue.Thursday, condition.Weekdays, trueValue.Weekdays, falseValue.Weekdays, $"{resultName}:thursday", resultType),
+            WhereOverride(condition.Friday, trueValue.Friday, falseValue.Friday, condition.Weekdays, trueValue.Weekdays, falseValue.Weekdays, $"{resultName}:friday", resultType),
+            WhereOverride(condition.Saturday, trueValue.Saturday, falseValue.Saturday, condition.Weekends, trueValue.Weekends, falseValue.Weekends, $"{resultName}:saturday", resultType),
+            WhereOverride(condition.Sunday, trueValue.Sunday, falseValue.Sunday, condition.Weekends, trueValue.Weekends, falseValue.Weekends, $"{resultName}:sunday", resultType),
+            WhereOverride(condition.Holiday, trueValue.Holiday, falseValue.Holiday, condition.Weekends, trueValue.Weekends, falseValue.Weekends, $"{resultName}:holiday", resultType),
             weekdays.Type);
     }
 
@@ -388,10 +500,38 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return ruleSet.Multiply(value);
     }
 
+    public static RuleSet operator *(RuleSet ruleSet, int value) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(RuleSet ruleSet, uint value) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(RuleSet ruleSet, long value) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(RuleSet ruleSet, ulong value) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(RuleSet ruleSet, BigInteger value) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(RuleSet ruleSet, bool value) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(RuleSet ruleSet, char value) => ruleSet.Multiply(value);
+
     public static RuleSet operator *(double value, RuleSet ruleSet)
     {
         return ruleSet.Multiply(value);
     }
+
+    public static RuleSet operator *(int value, RuleSet ruleSet) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(uint value, RuleSet ruleSet) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(long value, RuleSet ruleSet) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(ulong value, RuleSet ruleSet) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(BigInteger value, RuleSet ruleSet) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(bool value, RuleSet ruleSet) => ruleSet.Multiply(value);
+
+    public static RuleSet operator *(char value, RuleSet ruleSet) => ruleSet.Multiply(value);
 
     public static RuleSet operator /(RuleSet left, RuleSet right)
     {
@@ -403,10 +543,38 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return ruleSet.Divide(value);
     }
 
+    public static RuleSet operator /(RuleSet ruleSet, int value) => ruleSet.Divide(value);
+
+    public static RuleSet operator /(RuleSet ruleSet, uint value) => ruleSet.Divide(value);
+
+    public static RuleSet operator /(RuleSet ruleSet, long value) => ruleSet.Divide(value);
+
+    public static RuleSet operator /(RuleSet ruleSet, ulong value) => ruleSet.Divide(value);
+
+    public static RuleSet operator /(RuleSet ruleSet, BigInteger value) => ruleSet.Divide(value);
+
+    public static RuleSet operator /(RuleSet ruleSet, bool value) => ruleSet.Divide(value);
+
+    public static RuleSet operator /(RuleSet ruleSet, char value) => ruleSet.Divide(value);
+
     public static RuleSet operator /(double value, RuleSet ruleSet)
     {
         return ruleSet.ReverseDivide(value);
     }
+
+    public static RuleSet operator /(int value, RuleSet ruleSet) => ruleSet.ReverseDivide(value);
+
+    public static RuleSet operator /(uint value, RuleSet ruleSet) => ruleSet.ReverseDivide(value);
+
+    public static RuleSet operator /(long value, RuleSet ruleSet) => ruleSet.ReverseDivide(value);
+
+    public static RuleSet operator /(ulong value, RuleSet ruleSet) => ruleSet.ReverseDivide(value);
+
+    public static RuleSet operator /(BigInteger value, RuleSet ruleSet) => ruleSet.ReverseDivide(value);
+
+    public static RuleSet operator /(bool value, RuleSet ruleSet) => ruleSet.ReverseDivide(value);
+
+    public static RuleSet operator /(char value, RuleSet ruleSet) => ruleSet.ReverseDivide(value);
 
     public static RuleSet operator +(RuleSet left, RuleSet right)
     {
@@ -418,10 +586,38 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return ruleSet.Add(value);
     }
 
+    public static RuleSet operator +(RuleSet ruleSet, int value) => ruleSet.Add(value);
+
+    public static RuleSet operator +(RuleSet ruleSet, uint value) => ruleSet.Add(value);
+
+    public static RuleSet operator +(RuleSet ruleSet, long value) => ruleSet.Add(value);
+
+    public static RuleSet operator +(RuleSet ruleSet, ulong value) => ruleSet.Add(value);
+
+    public static RuleSet operator +(RuleSet ruleSet, BigInteger value) => ruleSet.Add(value);
+
+    public static RuleSet operator +(RuleSet ruleSet, bool value) => ruleSet.Add(value);
+
+    public static RuleSet operator +(RuleSet ruleSet, char value) => ruleSet.Add(value);
+
     public static RuleSet operator +(double value, RuleSet ruleSet)
     {
         return ruleSet.ReverseAdd(value);
     }
+
+    public static RuleSet operator +(int value, RuleSet ruleSet) => ruleSet.ReverseAdd(value);
+
+    public static RuleSet operator +(uint value, RuleSet ruleSet) => ruleSet.ReverseAdd(value);
+
+    public static RuleSet operator +(long value, RuleSet ruleSet) => ruleSet.ReverseAdd(value);
+
+    public static RuleSet operator +(ulong value, RuleSet ruleSet) => ruleSet.ReverseAdd(value);
+
+    public static RuleSet operator +(BigInteger value, RuleSet ruleSet) => ruleSet.ReverseAdd(value);
+
+    public static RuleSet operator +(bool value, RuleSet ruleSet) => ruleSet.ReverseAdd(value);
+
+    public static RuleSet operator +(char value, RuleSet ruleSet) => ruleSet.ReverseAdd(value);
 
     public static RuleSet operator -(RuleSet left, RuleSet right)
     {
@@ -433,10 +629,38 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return ruleSet.Subtract(value);
     }
 
+    public static RuleSet operator -(RuleSet ruleSet, int value) => ruleSet.Subtract(value);
+
+    public static RuleSet operator -(RuleSet ruleSet, uint value) => ruleSet.Subtract(value);
+
+    public static RuleSet operator -(RuleSet ruleSet, long value) => ruleSet.Subtract(value);
+
+    public static RuleSet operator -(RuleSet ruleSet, ulong value) => ruleSet.Subtract(value);
+
+    public static RuleSet operator -(RuleSet ruleSet, BigInteger value) => ruleSet.Subtract(value);
+
+    public static RuleSet operator -(RuleSet ruleSet, bool value) => ruleSet.Subtract(value);
+
+    public static RuleSet operator -(RuleSet ruleSet, char value) => ruleSet.Subtract(value);
+
     public static RuleSet operator -(double value, RuleSet ruleSet)
     {
         return ruleSet.ReverseSubtract(value);
     }
+
+    public static RuleSet operator -(int value, RuleSet ruleSet) => ruleSet.ReverseSubtract(value);
+
+    public static RuleSet operator -(uint value, RuleSet ruleSet) => ruleSet.ReverseSubtract(value);
+
+    public static RuleSet operator -(long value, RuleSet ruleSet) => ruleSet.ReverseSubtract(value);
+
+    public static RuleSet operator -(ulong value, RuleSet ruleSet) => ruleSet.ReverseSubtract(value);
+
+    public static RuleSet operator -(BigInteger value, RuleSet ruleSet) => ruleSet.ReverseSubtract(value);
+
+    public static RuleSet operator -(bool value, RuleSet ruleSet) => ruleSet.ReverseSubtract(value);
+
+    public static RuleSet operator -(char value, RuleSet ruleSet) => ruleSet.ReverseSubtract(value);
 
     public static RuleSet operator &(RuleSet left, RuleSet right)
     {
@@ -512,45 +736,179 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return type;
     }
 
-    private static RuleSet CoerceWhereValue(object value, ScheduleType? type, string parameterName)
+    private RuleSet MultiplyPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "multiplication");
+        return Map(
+            day => day.MultiplyPythonScalar(value),
+            $"{Name}:MUL:{scalarName}");
+    }
+
+    private RuleSet AddPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "addition");
+        return Map(
+            day => day.AddPythonScalar(value),
+            $"{Name}:ADD:{scalarName}");
+    }
+
+    private RuleSet ReverseAddPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "reverse addition");
+        return Map(
+            day => day.AddPythonScalar(value),
+            $"{scalarName}:ADD:{Name}");
+    }
+
+    private RuleSet SubtractPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "subtraction");
+        return Map(
+            day => day.SubtractPythonScalar(value),
+            $"{Name}:SUB:{scalarName}");
+    }
+
+    private RuleSet ReverseSubtractPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "reverse subtraction");
+        return Map(
+            day => day.ReverseSubtractPythonScalar(value),
+            $"{scalarName}:SUB:{Name}");
+    }
+
+    private RuleSet DividePythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "division");
+        return Map(
+            day => day.DividePythonScalar(value),
+            $"{Name}:DIV:{scalarName}");
+    }
+
+    private RuleSet ReverseDividePythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "reverse division");
+        return Map(
+            day => day.ReverseDividePythonScalar(value),
+            $"{scalarName}:DIV:{Name}");
+    }
+
+    private RuleSet ElementEqualPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "equality comparison");
+        return Map(
+            day => day.ElementEqual(value),
+            $"{Name}:EQ:{scalarName}");
+    }
+
+    private RuleSet ElementNotEqualPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "inequality comparison");
+        return Map(
+            day => day.ElementNotEqual(value),
+            $"{Name}:NE:{scalarName}");
+    }
+
+    private RuleSet LessThanPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "less-than comparison");
+        return Map(
+            day => day.LessThan(value),
+            $"{Name}:LT:{scalarName}");
+    }
+
+    private RuleSet LessThanOrEqualPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "less-than-or-equal comparison");
+        return Map(
+            day => day.LessThanOrEqual(value),
+            $"{Name}:LE:{scalarName}");
+    }
+
+    private RuleSet GreaterThanPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "greater-than comparison");
+        return Map(
+            day => day.GreaterThan(value),
+            $"{Name}:GT:{scalarName}");
+    }
+
+    private RuleSet GreaterThanOrEqualPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "greater-than-or-equal comparison");
+        return Map(
+            day => day.GreaterThanOrEqual(value),
+            $"{Name}:GE:{scalarName}");
+    }
+
+    private RuleSet ElementMinimumPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "element-wise minimum");
+        return Map(
+            day => day.ElementMinimum(value),
+            $"{Name}:MIN:{scalarName}");
+    }
+
+    private RuleSet ElementMaximumPythonScalar<T>(T value)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "element-wise maximum");
+        return Map(
+            day => day.ElementMaximum(value),
+            $"{Name}:MAX:{scalarName}");
+    }
+
+    private static WhereOperand CoerceWhereValue(
+        object value,
+        ScheduleType? type,
+        string parameterName)
     {
         if (value is RuleSet ruleSet)
         {
-            return ruleSet;
+            return WhereOperand.FromRuleSet(ruleSet);
         }
 
         if (value is DaySchedule daySchedule)
         {
-            return FromDaySchedule("WHERE", daySchedule);
+            return WhereOperand.FromDaySchedule(daySchedule);
         }
 
-        if (TryGetScalar(value, out double scalar))
+        ScheduleType resultType = type ?? ScheduleType.Real;
+        return value switch
         {
-            return Constant("WHERE", scalar, type ?? ScheduleType.Real);
-        }
-
-        throw new ArgumentException(
-            "A conditional value must be numeric, a DaySchedule, or a RuleSet.",
-            parameterName);
+            bool scalar => WhereOperand.FromScalar(scalar, resultType),
+            sbyte scalar => WhereOperand.FromScalar(scalar, resultType),
+            byte scalar => WhereOperand.FromScalar(scalar, resultType),
+            short scalar => WhereOperand.FromScalar(scalar, resultType),
+            ushort scalar => WhereOperand.FromScalar(scalar, resultType),
+            int scalar => WhereOperand.FromScalar(scalar, resultType),
+            uint scalar => WhereOperand.FromScalar(scalar, resultType),
+            long scalar => WhereOperand.FromScalar(scalar, resultType),
+            ulong scalar => WhereOperand.FromScalar(scalar, resultType),
+            BigInteger scalar => WhereOperand.FromScalar(scalar, resultType),
+            float scalar => WhereOperand.FromScalar(scalar, resultType),
+            double scalar => WhereOperand.FromScalar(scalar, resultType),
+            _ => throw new ArgumentException(
+                "A conditional value must be a Python-compatible bool, integer, float, DaySchedule, or RuleSet.",
+                parameterName),
+        };
     }
 
-    private static bool TryGetScalar(object value, out double scalar)
+    private static DaySchedule SelectWhereDay(
+        DaySchedule condition,
+        object whenTrue,
+        object whenFalse,
+        string name,
+        ScheduleType? type)
     {
-        switch (value)
+        if (whenTrue is DaySchedule trueSchedule)
         {
-            case byte number: scalar = number; return true;
-            case sbyte number: scalar = number; return true;
-            case short number: scalar = number; return true;
-            case ushort number: scalar = number; return true;
-            case int number: scalar = number; return true;
-            case uint number: scalar = number; return true;
-            case long number: scalar = number; return true;
-            case ulong number: scalar = number; return true;
-            case float number: scalar = number; return true;
-            case double number: scalar = number; return true;
-            case decimal number: scalar = (double)number; return true;
-            default: scalar = default; return false;
+            return whenFalse is DaySchedule falseSchedule
+                ? DaySchedule.Where(condition, trueSchedule, falseSchedule, name, type)
+                : DaySchedule.Where(condition, trueSchedule, (double)whenFalse, name, type);
         }
+
+        return whenFalse is DaySchedule falseDaySchedule
+            ? DaySchedule.Where(condition, (double)whenTrue, falseDaySchedule, name, type)
+            : DaySchedule.Where(condition, (double)whenTrue, (double)whenFalse, name, type);
     }
 
     private static DaySchedule? WhereOverride(
@@ -558,8 +916,8 @@ public sealed class RuleSet : IEquatable<RuleSet>
         DaySchedule? trueOverride,
         DaySchedule? falseOverride,
         DaySchedule conditionFallback,
-        DaySchedule trueFallback,
-        DaySchedule falseFallback,
+        object trueFallback,
+        object falseFallback,
         string name,
         ScheduleType? type)
     {
@@ -568,12 +926,93 @@ public sealed class RuleSet : IEquatable<RuleSet>
             return null;
         }
 
-        return DaySchedule.Where(
+        return SelectWhereDay(
             conditionOverride ?? conditionFallback,
             trueOverride ?? trueFallback,
             falseOverride ?? falseFallback,
             name,
-            type: type);
+            type);
+    }
+
+    private sealed class WhereOperand
+    {
+        private WhereOperand(
+            object weekdays,
+            object weekends,
+            ScheduleType type,
+            DaySchedule? monday = null,
+            DaySchedule? tuesday = null,
+            DaySchedule? wednesday = null,
+            DaySchedule? thursday = null,
+            DaySchedule? friday = null,
+            DaySchedule? saturday = null,
+            DaySchedule? sunday = null,
+            DaySchedule? holiday = null)
+        {
+            Weekdays = weekdays;
+            Weekends = weekends;
+            Type = type;
+            Monday = monday;
+            Tuesday = tuesday;
+            Wednesday = wednesday;
+            Thursday = thursday;
+            Friday = friday;
+            Saturday = saturday;
+            Sunday = sunday;
+            Holiday = holiday;
+        }
+
+        public object Weekdays { get; }
+
+        public object Weekends { get; }
+
+        public ScheduleType Type { get; }
+
+        public DaySchedule? Monday { get; }
+
+        public DaySchedule? Tuesday { get; }
+
+        public DaySchedule? Wednesday { get; }
+
+        public DaySchedule? Thursday { get; }
+
+        public DaySchedule? Friday { get; }
+
+        public DaySchedule? Saturday { get; }
+
+        public DaySchedule? Sunday { get; }
+
+        public DaySchedule? Holiday { get; }
+
+        public static WhereOperand FromRuleSet(RuleSet value)
+        {
+            return new WhereOperand(
+                value.Weekdays,
+                value.Weekends,
+                value.Type,
+                value.Monday,
+                value.Tuesday,
+                value.Wednesday,
+                value.Thursday,
+                value.Friday,
+                value.Saturday,
+                value.Sunday,
+                value.Holiday);
+        }
+
+        public static WhereOperand FromDaySchedule(DaySchedule value)
+        {
+            return new WhereOperand(value, value, value.Type);
+        }
+
+        public static WhereOperand FromScalar<T>(T value, ScheduleType type)
+        {
+            double scalar = DaySchedule.ConvertPythonScalarToScheduleValue(
+                value,
+                type,
+                "conditional value");
+            return new WhereOperand(scalar, scalar, type);
+        }
     }
 
     private IEnumerable<DaySchedule> AllSlots()

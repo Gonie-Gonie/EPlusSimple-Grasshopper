@@ -899,23 +899,47 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "exception",
+    "equivalent",
     "needs_reverification",
+    "equivalent",
+    "equivalent",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
     "out_of_scope",
+    "exception",
+    "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -927,31 +951,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:3af6d8b8c80b882a506d2e3fef51af7c9115f91122ccbf2b06730a983e6ba561",
+  "content_sha256": "sha256:3e3a9297fef37a7eb3eef0c5ad231b648469cf56c4e161512a836fb75bae19d0",
   "details": [
     {
       "evidence": [
@@ -3059,6 +3059,82 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-ruleset-add",
+        "upstream/symbol-evidence.json#profile-ruleset-add-d658d7f9"
+      ],
+      "exception_id": "nonfinite-result-ruleset-add",
+      "index": 899,
+      "rationale": "Trusted cross-language evidence verifies every finite-result RuleSet.__add__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability, in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-and-68f36cc1"
+      ],
+      "index": 900,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.__and__ behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-ge-66ecfa68"
+      ],
+      "index": 902,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.__ge__ behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-gt-c73275fa"
+      ],
+      "index": 903,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.__gt__ behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-invert-4c2c5922"
+      ],
+      "index": 905,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.__invert__ behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-le-c28491e9"
+      ],
+      "index": 906,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.__le__ behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-lt-cb4515a2"
+      ],
+      "index": 907,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.__lt__ behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-ruleset-mul",
+        "upstream/symbol-evidence.json#profile-ruleset-mul-dfe4535f"
+      ],
+      "exception_id": "nonfinite-result-ruleset-mul",
+      "index": 908,
+      "rationale": "Trusted cross-language evidence verifies every finite-result RuleSet.__mul__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability, in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-or-db95291f"
+      ],
+      "index": 909,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.__or__ behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-ruleset-radd",
+        "upstream/symbol-evidence.json#profile-ruleset-radd-7d78c731"
+      ],
+      "exception_id": "nonfinite-result-ruleset-radd",
+      "index": 910,
+      "rationale": "Trusted cross-language evidence verifies every finite-result RuleSet.__radd__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability, in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-ruleset-repr-d72176bc"
       ],
       "index": 911,
@@ -3066,10 +3142,154 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-ruleset-rmul",
+        "upstream/symbol-evidence.json#profile-ruleset-rmul-7359aee6"
+      ],
+      "exception_id": "nonfinite-result-ruleset-rmul",
+      "index": 912,
+      "rationale": "Trusted cross-language evidence verifies every finite-result RuleSet.__rmul__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability, in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-ruleset-rsub",
+        "upstream/symbol-evidence.json#profile-ruleset-rsub-0ee38c58"
+      ],
+      "exception_id": "nonfinite-result-ruleset-rsub",
+      "index": 913,
+      "rationale": "Trusted cross-language evidence verifies every finite-result RuleSet.__rsub__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability, in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-ruleset-rtruediv",
+        "upstream/symbol-evidence.json#profile-ruleset-rtruediv-b665fd3a"
+      ],
+      "exception_id": "nonfinite-result-ruleset-rtruediv",
+      "index": 914,
+      "rationale": "Trusted cross-language evidence verifies every finite-result RuleSet.__rtruediv__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability, in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-ruleset-str-2a5a044e"
       ],
       "index": 915,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-ruleset-sub",
+        "upstream/symbol-evidence.json#profile-ruleset-sub-d1329238"
+      ],
+      "exception_id": "nonfinite-result-ruleset-sub",
+      "index": 916,
+      "rationale": "Trusted cross-language evidence verifies every finite-result RuleSet.__sub__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability, in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-ruleset-truediv",
+        "upstream/symbol-evidence.json#profile-ruleset-truediv-5ce5d9fa"
+      ],
+      "exception_id": "nonfinite-result-ruleset-truediv",
+      "index": 917,
+      "rationale": "Trusted cross-language evidence verifies every finite-result RuleSet.__truediv__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability, in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-element-eq-2d761982"
+      ],
+      "index": 920,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.element_eq behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#ruleset-scalar-maximum-upstream-attribute-error",
+        "upstream/symbol-evidence.json#profile-ruleset-element-max-bfffae34"
+      ],
+      "exception_id": "ruleset-scalar-maximum-upstream-attribute-error",
+      "index": 921,
+      "rationale": "Trusted cross-language evidence verifies RuleSet-to-RuleSet element maxima and directly observes the registered repair of the upstream scalar AttributeError for finite in-domain values, together with native rejection of selected non-finite or schedule-domain-invalid results, in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#ruleset-scalar-minimum-upstream-attribute-error",
+        "upstream/symbol-evidence.json#profile-ruleset-element-min-33739f88"
+      ],
+      "exception_id": "ruleset-scalar-minimum-upstream-attribute-error",
+      "index": 922,
+      "rationale": "Trusted cross-language evidence verifies RuleSet-to-RuleSet element minima and directly observes the registered repair of the upstream scalar AttributeError for finite in-domain values, together with native rejection of selected non-finite or schedule-domain-invalid results, in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-element-ne-acaa0bfa"
+      ],
+      "index": 923,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.element_ne behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-is-between-1ada7d9d"
+      ],
+      "index": 929,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.is_between behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-is-negative-344049ce"
+      ],
+      "index": 930,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.is_negative behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-is-nonzero-12a2434c"
+      ],
+      "index": 931,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.is_nonzero behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-is-off-8f8e714f"
+      ],
+      "index": 932,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.is_off behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-is-on-5c914c14"
+      ],
+      "index": 933,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.is_on behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-is-positive-7a7f9ce6"
+      ],
+      "index": 934,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.is_positive behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-is-zero-8f8e714f"
+      ],
+      "index": 935,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.is_zero behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-ruleset-normalize-by-max",
+        "upstream/symbol-evidence.json#profile-ruleset-normalize-by-max-92c2f287"
+      ],
+      "exception_id": "nonfinite-result-ruleset-normalize-by-max",
+      "index": 939,
+      "rationale": "Trusted cross-language evidence verifies immutable independent slot-by-slot normalization, zero-maximum behavior, missing-override preservation, names, types, and source immutability, and directly observes the registered non-finite-result rejection, invalid or blank explicit-name rejection, and surrounding-whitespace trimming policies in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-ruleset-where-day-names",
+        "upstream/symbol-evidence.json#profile-ruleset-where-b245f2e8"
+      ],
+      "exception_id": "deterministic-ruleset-where-day-names",
+      "index": 951,
+      "rationale": "Trusted cross-language evidence verifies supported finite scalar, DaySchedule, and RuleSet branches, inferred and explicit types, weekday and weekend fallbacks, override topology, and source immutability, and directly observes deterministic slot-qualified child names, invalid or blank explicit-name rejection, surrounding-whitespace trimming, invalid native operands, and selected non-finite-result rejection in the 334-case RuleSet operation oracle."
     },
     {
       "evidence": [
@@ -3458,9 +3678,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 40,
-      "exception": 18,
-      "needs_reverification": 932,
+      "equivalent": 56,
+      "exception": 30,
+      "needs_reverification": 904,
       "out_of_scope": 252
     },
     "entry_count": 1242

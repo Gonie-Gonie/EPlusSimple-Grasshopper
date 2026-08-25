@@ -63,6 +63,11 @@
       "sha256": "f2fa189c3a785493d4e67e1513e695e1d30e32cc8680e8c181fa61645189c81a"
     },
     {
+      "path": "rule-set-operations-oracle.json",
+      "bytes": 3006843,
+      "sha256": "5575c9d2946b99afd474220429eef5e5531931a36e26eb55a1e3d4e93548fdc6"
+    },
+    {
       "path": "schedule-type-oracle.json",
       "bytes": 22692,
       "sha256": "68e858a2b243df127663b801f80396671e069645b11659e55ad48eb81973e705"

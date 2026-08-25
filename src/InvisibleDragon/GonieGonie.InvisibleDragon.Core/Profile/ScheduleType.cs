@@ -152,6 +152,8 @@ public static class ScheduleTypeExtensions
                     parameterName,
                     value,
                     "An on/off schedule value must be exactly zero or one.");
+            case ScheduleType.OnOff:
+                return value == 0 ? 0d : 1d;
             case ScheduleType.Fraction when value < 0 || value > 1:
                 throw new ArgumentOutOfRangeException(
                     parameterName,
