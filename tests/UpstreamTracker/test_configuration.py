@@ -39,7 +39,40 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(1241, len(compatibility.needs_reverification))
+        self.assertEqual(1224, len(compatibility.needs_reverification))
+
+        by_key = compatibility.matrix.entries_by_key
+        api_entries = [
+            entry
+            for entry in compatibility.matrix.entries
+            if entry.path == "src/epsimple/api.py"
+        ]
+        self.assertEqual(10, len(api_entries))
+        self.assertTrue(
+            all(entry.classification == "out_of_scope" for entry in api_entries)
+        )
+        self.assertTrue(
+            all(
+                "docs/compatibility.md#declared-product-compatibility-scope"
+                in entry.evidence
+                for entry in api_entries
+            )
+        )
+        self.assertEqual(
+            "needs_reverification",
+            by_key[("src/epsimple/utils.py", "GRJSON_FORMAT")].classification,
+        )
+        people_activity = by_key[
+            (
+                "src/idragon/dragon/model.py",
+                "EnergyModel.create_default_idf",
+            )
+        ]
+        self.assertEqual("exception", people_activity.classification)
+        self.assertEqual(
+            "legacy-people-activity-type-limit",
+            people_activity.exception_id,
+        )
 
     def test_rejects_non_goniegonie_product_ownership(self) -> None:
         with TemporaryWorkspace() as workspace:

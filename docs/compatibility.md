@@ -39,6 +39,13 @@ expanded IDF separately and records path-level GRR numeric errors and warning di
 `artifacts/reports/engineering-compatibility.json`.
 `-AllowDifferences` is a development-only reporting mode and is never evidence of compatibility.
 
+Numeric comparisons use `|a-b| <= absolute + relative * max(|a|, |b|)`.
+The tracked case manifest is authoritative: IDF fields use absolute and relative
+`1e-9`; GRR values use absolute `0.01` and relative `0.001`; values whose
+magnitude is at most `0.005` use the near-zero rule. Warning-count delta is
+exactly zero. The report records the maximum observed error and its JSON path,
+so a tolerance pass cannot hide where the largest difference occurred.
+
 The data parity suite exhaustively checks all 24 pinned usage profiles through their final
 legacy `Schedule:Compact` fields, every surface-regulation branch, every fenestration key, all
 252 weather rows, and climate effective-date boundaries. `dev.cmd examples` separately solves,
@@ -50,6 +57,29 @@ silently removed from the emitted IDF.
 A broad class or object name in the port map does not by itself assert complete
 behavioral parity. Review `upstream/reports`, compatibility exceptions, and the
 release notes for the exact verified matrix.
+
+## Declared product compatibility scope
+
+"Compatible" in this repository means engineering compatibility for the two
+compiled Grasshopper products. It does not mean Python source, import, or call
+syntax compatibility. The release gate may claim compatibility only for rows
+that have symbol-level evidence or a reviewed exception.
+
+| In the 0.1.0 engineering scope | Outside the Grasshopper product scope |
+|---|---|
+| GRM 0.7.0 read/write semantics, defaults, nulls, and references | Python package import and function-call syntax |
+| Pinned construction, profile, climate, and weather data/query results | Excel/GREXCEL input conversion and execution |
+| EPlusSimple-to-IDragon model conversion and deterministic identities | Original Python CLI commands and console formatting |
+| Authoring IDF in the explicit legacy compatibility path | pandas/DataFrame-linked IDF mutation APIs |
+| Expanded IDF meaning, reference topology, and geometry | regex/callable/list Python indexing behavior |
+| EnergyPlus 24.2.0 results, GRR values, and warnings within declared tolerances | Python mutable-container behavior, `shrink`, and `quick_map` syntax |
+| Rhino 7/8 geometry adapters, Grasshopper persistence, and packaged workflows | General editing support for every EnergyPlus object |
+
+The C# APIs and Grasshopper components are native product interfaces. They may
+be more immutable, deterministic, or strongly typed than the historical Python
+objects while preserving the verified model meaning. Any such difference that
+affects authoring text, expanded IDF, warnings, or results must be registered in
+`upstream/compatibility-exceptions.yml`; otherwise it is a release failure.
 
 ## Current limitations
 
