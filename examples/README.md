@@ -14,6 +14,7 @@ window curves that can be referenced directly from Grasshopper.
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
 | `12-simpledragon-two-zone-to-idf.gh` | Two Brep zones and windows through extraction, immutable HVAC/ERV assignment, GRM assembly, and InvisibleDragon IDF conversion |
 | `13-simpledragon-results-and-plots.gh` | Real GRR read, annual summary, monthly DataTree, line plot, bar plot, and non-writing CSV preview |
+| `14-simpledragon-two-zone-run-results-csv.gh` | Two Brep zones through GRM/IDF conversion, a gated EnergyPlus run, result summary, GRR build/summary, CSV export, cache/cancellation controls, and a separate batch branch |
 | `30-two-zone-office.3dm` | Two adjacent named office-zone solids and two named south-window curves |
 | `31-three-zone-stepped-office.3dm` | Two adjacent ground-floor zones plus an adjacent upper zone and three named windows |
 
@@ -26,10 +27,12 @@ file in Grasshopper:
 .\dev.cmd install
 ```
 
-The examples solve without performing EnergyPlus runs or writing result files.
-The IDF examples compile deterministic input text; an unresolved EnergyPlus IDD
-is reported as a warning and can be resolved by running `.\dev.cmd setup
--InstallEnergyPlus`.
+Opening an example manually is safe: all Run, Cancel, Force, Export, Overwrite,
+Batch Run, and Batch Cancel triggers are persisted as `False`. The IDF examples
+still compile deterministic input text; an unresolved EnergyPlus IDD is reported
+as a warning and can be resolved by running `.\dev.cmd setup -InstallEnergyPlus`.
+To execute example 14 interactively, supply an EnergyPlus 24.2 EPW and create a
+fresh False-to-True edge on only the operation you intend to run.
 
 `13-simpledragon-results-and-plots.gh` keeps both paths relative to the saved
 Grasshopper document:
@@ -87,6 +90,14 @@ layer and object names, solid Breps, exact bounds, required zone adjacencies,
 closed planar windows, and equality between the model geometry and the
 internalized two-zone Grasshopper inputs. Candidates, logs, summaries, and
 round-trip copies remain below `temp/example-definitions/`.
+
+When a verified EnergyPlus runtime and EPW are available, the gate temporarily
+enables example 14 in memory and verifies Run, Result, GRR, CSV, cache,
+cancellation, and batch behavior in both hosts. The saved trigger values remain
+`False`. Use `-SkipEnergyPlusWorkflow` to test the explicit disabled state,
+`-EnergyPlusRoot` to select a runtime, or `-WeatherPath` to select an EPW. A
+missing runtime or weather file is reported as `unavailable` and `Not Run`, not
+as a successful simulation.
 
 ## Further workflow recipes
 

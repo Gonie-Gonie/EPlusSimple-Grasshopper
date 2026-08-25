@@ -43,14 +43,20 @@ Numeric comparisons use `|a-b| <= absolute + relative * max(|a|, |b|)`.
 The tracked case manifest is authoritative: IDF fields use absolute and relative
 `1e-9`; GRR values use absolute `0.01` and relative `0.001`; values whose
 magnitude is at most `0.005` use the near-zero rule. Warning-count delta is
-exactly zero. The report records the maximum observed error and its JSON path,
-so a tolerance pass cannot hide where the largest difference occurred.
+exactly zero. Matching non-zero `Severe` or `Fatal` diagnostics fail the gate
+unless the exact normalized title and count are pinned to a reviewed exception;
+equal failure alone is not compatibility evidence. The report records the
+maximum observed error and its JSON path, so a tolerance pass cannot hide where
+the largest difference occurred. Cases with deliberately limited evidence also
+publish limitation and diagnostic-exception counts and IDs.
 
 The data parity suite exhaustively checks all 24 pinned usage profiles through their final
 legacy `Schedule:Compact` fields, every surface-regulation branch, every fenestration key, all
 252 weather rows, and climate effective-date boundaries. `dev.cmd examples` separately solves,
-saves, and reopens seven tracked Grasshopper definitions and validates two Rhino building models
-inside both Rhino 7 and Rhino 8. Known authoring quirks retained for exact upstream parity are
+saves, and reopens eight tracked Grasshopper definitions and validates two Rhino building models
+inside both Rhino 7 and Rhino 8. Its full-workflow definition also executes the gated EnergyPlus,
+Result, GRR, CSV, cache/cancellation, and batch paths when a verified runtime and EPW are available.
+Known authoring quirks retained for exact upstream parity are
 listed in `upstream/compatibility-exceptions.yml`; they remain visible as warnings and are not
 silently removed from the emitted IDF.
 
@@ -90,6 +96,14 @@ affects authoring text, expanded IDF, warnings, or results must be registered in
   graph editor.
 - SimpleDragon intentionally loses arbitrary source vertices during its
   area-and-azimuth abstraction.
+- The pinned Python `AbsorptionChiller.to_idf_object` hot-water generator loop
+  reaches runaway plant temperatures as soon as a non-zero absorption cooling
+  load is dispatched in EnergyPlus 24.2. The paired fixture therefore proves
+  all six stages at zero absorption cooling load plus non-zero electric-radiant
+  heating, but explicitly does not claim active absorption cooling or generator-
+  energy parity. This is tracked as
+  `legacy-absorption-hot-water-generator-runaway` rather than counted as hidden
+  numerical coverage.
 - Public binary publication remains blocked until the historical upstream
   license omission recorded in `NOTICE.md` is resolved or release counsel
   confirms the required attribution basis.

@@ -97,10 +97,17 @@ that is geometrically identical to the named objects in
 `30-two-zone-office.3dm`, allowing either a portable self-contained solve or
 live Rhino document references. `13-simpledragon-results-and-plots.gh` uses the
 real GRR fixture to exercise all non-writing result views and CSV preview.
+`14-simpledragon-two-zone-run-results-csv.gh` carries the same two-zone geometry
+through GRM and IDF into a real, gated EnergyPlus run, Result summary, GRR,
+CSV, cache/cancellation controls, and a separate batch branch. All action
+triggers are persisted as false, so opening the file never starts work by
+itself.
 
 Run `.\dev.cmd examples` to solve and round-trip every `.gh` and `.3dm` example in
-Rhino 7 and Rhino 8. Run `.\dev.cmd examples -Generate` only when deliberately
-refreshing the Rhino 7-authored canonical binaries.
+Rhino 7 and Rhino 8. With a verified EnergyPlus runtime and EPW, this also
+executes the full workflow in memory; use `-SkipEnergyPlusWorkflow` to verify
+the explicit `Not Run` path. Run `.\dev.cmd examples -Generate` only when
+deliberately refreshing the Rhino 7-authored canonical binaries.
 
 ## Saving and reopening
 

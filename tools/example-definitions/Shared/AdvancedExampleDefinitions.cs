@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Reflection;
 using System.Security.Cryptography;
 using Grasshopper;
 using Grasshopper.Kernel;
@@ -13,6 +15,8 @@ internal static class AdvancedExampleDefinitions
     private const string InvisibleProduct = "InvisibleDragon";
     private const string SimpleProduct = "SimpleDragon";
     private const string TwoZoneModel = "30-two-zone-office.3dm";
+    private static readonly int[] SingleBatchParallelLimit = { 1 };
+    private static readonly string[] CsvLineSeparators = { "\r\n", "\n", "\r" };
 
     private static readonly AdvancedDefinition[] Definitions =
     {
@@ -36,6 +40,10 @@ internal static class AdvancedExampleDefinitions
             SimpleProduct,
             "13-simpledragon-results-and-plots.gh",
             BuildSimpleResultsAndPlots),
+        new(
+            SimpleProduct,
+            "14-simpledragon-two-zone-run-results-csv.gh",
+            BuildSimpleRunResultsCsv),
     };
 
     internal static IReadOnlyList<Guid> ComponentIds(string product)
@@ -69,11 +77,19 @@ internal static class AdvancedExampleDefinitions
         Save(graph.Document, candidatePath);
 
         GH_Document candidate = Open(candidatePath);
-        ValidationFacts candidateFacts = ValidateGraph(candidate, graph, inputs.ExamplesRoot);
+        ValidationFacts candidateFacts = ValidateGraph(
+            candidate,
+            graph,
+            inputs,
+            exerciseRuntimeWorkflow: false);
         string canonicalPath = Path.Combine(inputs.ExamplesRoot, definition.FileName);
         File.Copy(candidatePath, canonicalPath, overwrite: true);
         GH_Document canonical = Open(canonicalPath);
-        ValidationFacts canonicalFacts = ValidateGraph(canonical, graph, inputs.ExamplesRoot);
+        ValidationFacts canonicalFacts = ValidateGraph(
+            canonical,
+            graph,
+            inputs,
+            exerciseRuntimeWorkflow: true);
         Require(
             candidateFacts.ObjectCount == canonicalFacts.ObjectCount
                 && candidateFacts.WireCount == canonicalFacts.WireCount,
@@ -96,7 +112,11 @@ internal static class AdvancedExampleDefinitions
 
         ScenarioGraph graph = definition.Build(server);
         GH_Document canonical = Open(canonicalPath);
-        ValidationFacts facts = ValidateGraph(canonical, graph, inputs.ExamplesRoot);
+        ValidationFacts facts = ValidateGraph(
+            canonical,
+            graph,
+            inputs,
+            exerciseRuntimeWorkflow: false);
         string roundTripPath = StagedDefinitionPath(
             inputs.OutputDirectory,
             "roundtrip",
@@ -104,7 +124,11 @@ internal static class AdvancedExampleDefinitions
             inputs.ExamplesRoot);
         Save(canonical, roundTripPath);
         GH_Document roundTrip = Open(roundTripPath);
-        ValidationFacts reopened = ValidateGraph(roundTrip, graph, inputs.ExamplesRoot);
+        ValidationFacts reopened = ValidateGraph(
+            roundTrip,
+            graph,
+            inputs,
+            exerciseRuntimeWorkflow: true);
         Require(
             facts.ObjectCount == reopened.ObjectCount && facts.WireCount == reopened.WireCount,
             definition.FileName + " changed structure during its round trip.");
@@ -315,7 +339,20 @@ internal static class AdvancedExampleDefinitions
 
     private static ScenarioGraph BuildSimpleTwoZone(GH_ComponentServer server)
     {
-        var graph = new ScenarioGraphBuilder(server, "22000000");
+        return BuildSimpleTwoZoneWorkflow(server, "22000000", includeRuntimeWorkflow: false);
+    }
+
+    private static ScenarioGraph BuildSimpleRunResultsCsv(GH_ComponentServer server)
+    {
+        return BuildSimpleTwoZoneWorkflow(server, "24000000", includeRuntimeWorkflow: true);
+    }
+
+    private static ScenarioGraph BuildSimpleTwoZoneWorkflow(
+        GH_ComponentServer server,
+        string instancePrefix,
+        bool includeRuntimeWorkflow)
+    {
+        var graph = new ScenarioGraphBuilder(server, instancePrefix);
         Brep[] zoneGeometry = ExampleBuildingModels.CreateZoneBreps(TwoZoneModel);
         Curve[] openingGeometry = ExampleBuildingModels.CreateOpeningCurves(TwoZoneModel);
         GraphNode modelInfo = graph.Panel(
@@ -405,10 +442,140 @@ internal static class AdvancedExampleDefinitions
         graph.ExpectOutput(success, null, 1);
         graph.ExpectNumber(assemble, 2, 96, 1e-8);
         graph.ExpectBoolean(convert, 4, true);
+
+        RuntimeWorkflowExpectation? runtimeWorkflow = null;
+        if (includeRuntimeWorkflow)
+        {
+            GraphNode runtimeRoot = graph.Panel(100, "EnergyPlus 24.2 root", string.Empty, 2770, 870);
+            GraphNode weatherPath = graph.Panel(101, "EPW path", string.Empty, 2770, 970);
+            GraphNode tempRoot = graph.Panel(
+                102,
+                "Run temp root",
+                @"..\temp\example-preview\energyplus-run",
+                2770,
+                1070);
+            GraphNode runTrigger = graph.Boolean(103, "Run - explicit rising edge", false, 2770, 1170);
+            GraphNode cancelTrigger = graph.Boolean(104, "Cancel active run", false, 2770, 1250);
+            GraphNode forceRerun = graph.Boolean(105, "Force rerun", false, 2770, 1330);
+            GraphNode keepWork = graph.Boolean(106, "Keep work directory", true, 2770, 1410);
+            GraphNode timeout = graph.Slider(107, "Run timeout 2 min", 2m, 1m, 30m, 2770, 1490);
+            GraphNode prepareRuntime = graph.Boolean(108, "Prepare missing runtime", false, 2770, 1570);
+            GraphNode run = graph.Component(110, Catalog.InvisibleRun, 3150, 1050);
+            graph.Connect(convert, 1, run, 0);
+            graph.Connect(weatherPath, null, run, 1);
+            graph.Connect(runtimeRoot, null, run, 2);
+            graph.Connect(tempRoot, null, run, 3);
+            graph.Connect(runTrigger, null, run, 4);
+            graph.Connect(cancelTrigger, null, run, 5);
+            graph.Connect(forceRerun, null, run, 6);
+            graph.Connect(keepWork, null, run, 7);
+            graph.Connect(timeout, null, run, 8);
+            graph.Connect(prepareRuntime, null, run, 9);
+
+            GraphNode energyPlusSummary = graph.Component(111, Catalog.InvisibleResultSummary, 3540, 920);
+            GraphNode buildResult = graph.Component(112, Catalog.SimpleBuildResult, 3540, 1180);
+            GraphNode resultSummary = graph.Component(113, Catalog.SimpleResultSummary, 3900, 1160);
+            GraphNode exportDirectory = graph.Panel(
+                114,
+                "CSV export directory",
+                @"..\temp\example-preview\run-results-csv",
+                3540,
+                1510);
+            GraphNode caseId = graph.Panel(115, "CSV case ID", "two-zone-office", 3540, 1600);
+            GraphNode exportTrigger = graph.Boolean(116, "Export CSV", false, 3540, 1690);
+            GraphNode overwrite = graph.Boolean(117, "Overwrite CSV", false, 3540, 1770);
+            GraphNode exportCsv = graph.Component(118, Catalog.SimpleExportCsv, 3900, 1540);
+            graph.Connect(run, 0, energyPlusSummary, 0);
+            graph.Connect(assemble, 0, buildResult, 0);
+            graph.Connect(run, 0, buildResult, 1);
+            graph.Connect(buildResult, 0, resultSummary, 0);
+            graph.Connect(buildResult, 0, exportCsv, 0);
+            graph.Connect(assemble, 0, exportCsv, 1);
+            graph.Connect(exportDirectory, null, exportCsv, 2);
+            graph.Connect(caseId, null, exportCsv, 3);
+            graph.Connect(run, 4, exportCsv, 4);
+            graph.Connect(extract, 4, exportCsv, 5);
+            graph.Connect(exportTrigger, null, exportCsv, 6);
+            graph.Connect(overwrite, null, exportCsv, 7);
+
+            GraphNode batchOutputRoot = graph.Panel(
+                120,
+                "Batch output root",
+                @"..\temp\example-preview\simpledragon-batch",
+                2770,
+                1870);
+            GraphNode parallelLimit = graph.Integers(121, "Batch parallel limit", SingleBatchParallelLimit, 2770, 1960);
+            GraphNode batchRunTrigger = graph.Boolean(122, "Run batch - explicit rising edge", false, 2770, 2050);
+            GraphNode batchCancelTrigger = graph.Boolean(123, "Cancel active batch", false, 2770, 2130);
+            GraphNode batch = graph.Component(124, Catalog.SimpleBatch, 3150, 1900);
+            graph.Connect(assemble, 0, batch, 0);
+            graph.Connect(caseId, null, batch, 1);
+            graph.Connect(weatherPath, null, batch, 2);
+            graph.Connect(runtimeRoot, null, batch, 3);
+            graph.Connect(batchOutputRoot, null, batch, 4);
+            graph.Connect(parallelLimit, null, batch, 5);
+            graph.Connect(batchRunTrigger, null, batch, 6);
+            graph.Connect(batchCancelTrigger, null, batch, 7);
+
+            GraphNode runState = graph.Panel(130, "EnergyPlus state", string.Empty, 3540, 700);
+            GraphNode runSuccess = graph.Panel(131, "EnergyPlus success", string.Empty, 3900, 700);
+            GraphNode summarySuccess = graph.Panel(132, "Parsed result success", string.Empty, 4280, 920);
+            GraphNode grrSuccess = graph.Panel(133, "GRR build success", string.Empty, 3900, 1370);
+            GraphNode annualResult = graph.Panel(134, "Annual site result", string.Empty, 4280, 1170);
+            GraphNode csvFiles = graph.Panel(135, "CSV package files", string.Empty, 4280, 1540);
+            GraphNode csvWritten = graph.Panel(136, "CSV written", string.Empty, 4280, 1740);
+            GraphNode batchState = graph.Panel(137, "Batch state", string.Empty, 3540, 2050);
+            GraphNode batchCsv = graph.Panel(138, "Batch combined CSV", string.Empty, 3900, 2000);
+            GraphNode batchManifest = graph.Panel(139, "Batch manifest", string.Empty, 3900, 2130);
+            GraphNode batchComplete = graph.Panel(140, "Batch complete", string.Empty, 4280, 2050);
+            graph.Connect(run, 1, runState, null);
+            graph.Connect(run, 2, runSuccess, null);
+            graph.Connect(energyPlusSummary, 2, summarySuccess, null);
+            graph.Connect(buildResult, 2, grrSuccess, null);
+            graph.Connect(resultSummary, 1, annualResult, null);
+            graph.Connect(exportCsv, 2, csvFiles, null);
+            graph.Connect(exportCsv, 4, csvWritten, null);
+            graph.Connect(batch, 0, batchState, null);
+            graph.Connect(batch, 3, batchCsv, null);
+            graph.Connect(batch, 4, batchManifest, null);
+            graph.Connect(batch, 5, batchComplete, null);
+            graph.ExpectOutput(run, 1, 1);
+            graph.ExpectOutput(run, 2, 1);
+            graph.ExpectOutput(runState, null, 1);
+            graph.ExpectOutput(runSuccess, null, 1);
+            graph.ExpectOutput(batch, 0, 1);
+            graph.ExpectOutput(batch, 5, 1);
+            graph.ExpectOutput(batchState, null, 1);
+            graph.ExpectOutput(batchComplete, null, 1);
+            graph.ExpectBoolean(run, 2, false);
+            graph.ExpectBoolean(batch, 5, false);
+
+            runtimeWorkflow = new RuntimeWorkflowExpectation(
+                run.InstanceGuid,
+                runTrigger.InstanceGuid,
+                cancelTrigger.InstanceGuid,
+                forceRerun.InstanceGuid,
+                runtimeRoot.InstanceGuid,
+                weatherPath.InstanceGuid,
+                tempRoot.InstanceGuid,
+                energyPlusSummary.InstanceGuid,
+                buildResult.InstanceGuid,
+                resultSummary.InstanceGuid,
+                exportCsv.InstanceGuid,
+                exportDirectory.InstanceGuid,
+                exportTrigger.InstanceGuid,
+                overwrite.InstanceGuid,
+                batch.InstanceGuid,
+                batchOutputRoot.InstanceGuid,
+                batchRunTrigger.InstanceGuid,
+                batchCancelTrigger.InstanceGuid);
+        }
+
         return graph.Build(
             SimpleProduct,
             "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo",
-            new LinkedModelExpectation(TwoZoneModel, breps.InstanceGuid, openings.InstanceGuid));
+            new LinkedModelExpectation(TwoZoneModel, breps.InstanceGuid, openings.InstanceGuid),
+            runtimeWorkflow: runtimeWorkflow);
     }
 
     private static ScenarioGraph BuildSimpleResultsAndPlots(GH_ComponentServer server)
@@ -472,7 +639,8 @@ internal static class AdvancedExampleDefinitions
     private static ValidationFacts ValidateGraph(
         GH_Document document,
         ScenarioGraph graph,
-        string examplesRoot)
+        ExampleHostInputs inputs,
+        bool exerciseRuntimeWorkflow)
     {
         Require(
             document.ObjectCount == graph.Objects.Count,
@@ -594,12 +762,984 @@ internal static class AdvancedExampleDefinitions
                 .ToArray();
             ExampleBuildingModels.ValidateEmbeddedGeometry(
                 graph.LinkedModel.FileName,
-                examplesRoot,
+                inputs.ExamplesRoot,
                 breps,
                 curves);
         }
 
-        return new ValidationFacts(graph.Objects.Count, actualWireCount, graph.PrimaryOutputGooType);
+        RuntimeValidationFacts runtime = ValidateRuntimeWorkflow(
+            document,
+            graph.RuntimeWorkflow,
+            inputs,
+            exerciseRuntimeWorkflow);
+        return new ValidationFacts(
+            graph.Objects.Count,
+            actualWireCount,
+            graph.PrimaryOutputGooType,
+            runtime);
+    }
+
+    private static RuntimeValidationFacts ValidateRuntimeWorkflow(
+        GH_Document document,
+        RuntimeWorkflowExpectation? expectation,
+        ExampleHostInputs inputs,
+        bool exercise)
+    {
+        if (expectation is null)
+        {
+            return NotExecutedRuntime(
+                "not-applicable",
+                "This definition has no executable EnergyPlus workflow.");
+        }
+
+        RequirePersistentBoolean(document, expectation.RunTriggerGuid, false);
+        RequirePersistentBoolean(document, expectation.CancelTriggerGuid, false);
+        RequirePersistentBoolean(document, expectation.ForceRerunGuid, false);
+        RequirePersistentBoolean(document, expectation.ExportTriggerGuid, false);
+        RequirePersistentBoolean(document, expectation.OverwriteGuid, false);
+        RequirePersistentBoolean(document, expectation.BatchRunTriggerGuid, false);
+        RequirePersistentBoolean(document, expectation.BatchCancelTriggerGuid, false);
+
+        if (!exercise)
+        {
+            return NotExecutedRuntime(
+                "deferred",
+                "The saved workflow and safe False triggers were validated; runtime exercise is deferred to the final reopened document.");
+        }
+
+        if (!inputs.CanRunEnergyPlusWorkflow)
+        {
+            return NotExecutedRuntime(
+                inputs.EnergyPlusGateStatus,
+                inputs.EnergyPlusGateReason);
+        }
+
+        string runtimeRoot = inputs.EnergyPlusRuntimeRoot
+            ?? throw new InvalidOperationException("The ready EnergyPlus gate has no runtime root.");
+        string weatherPath = inputs.EnergyPlusWeatherPath
+            ?? throw new InvalidOperationException("The ready EnergyPlus gate has no weather path.");
+        string workflowRoot = Path.Combine(inputs.OutputDirectory, "runtime-workflow");
+        string tempRoot = Path.Combine(workflowRoot, "energyplus-temp");
+        string csvRoot = Path.Combine(workflowRoot, "csv-package");
+        // Keep the batch roots beneath the host output while staying below the legacy
+        // MAX_PATH limit exercised by Rhino 7 and the batch runner's hashed run paths.
+        string batchRoot = Path.Combine(inputs.OutputDirectory, "b");
+        string batchCancellationRoot = Path.Combine(inputs.OutputDirectory, "c");
+        Require(!Directory.Exists(workflowRoot), "The runtime evidence directory already exists: " + workflowRoot);
+        Directory.CreateDirectory(workflowRoot);
+        DateTime evidenceNotBeforeUtc = DateTime.UtcNow.AddSeconds(-2);
+
+        try
+        {
+            SetPanel(document, expectation.RuntimeRootGuid, runtimeRoot);
+            SetPanel(document, expectation.WeatherPathGuid, weatherPath);
+            SetPanel(document, expectation.TempRootGuid, tempRoot);
+            SetPanel(document, expectation.ExportDirectoryGuid, csvRoot);
+            SetPanel(document, expectation.BatchOutputRootGuid, batchRoot);
+            SetBoolean(document, expectation.RunTriggerGuid, false);
+            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetBoolean(document, expectation.ForceRerunGuid, false);
+            SetBoolean(document, expectation.ExportTriggerGuid, false);
+            SetBoolean(document, expectation.OverwriteGuid, false);
+            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+            SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+            Solve(document);
+
+            SetBoolean(document, expectation.RunTriggerGuid, true);
+            Solve(document);
+            string firstRunState = WaitForTerminalState(
+                document,
+                expectation.RunComponentGuid,
+                "syncRoot",
+                "activeTask",
+                "stateText",
+                inputs.EnergyPlusWorkflowTimeout,
+                "Succeeded",
+                "Failed",
+                "Cancelled");
+            SetBoolean(document, expectation.RunTriggerGuid, false);
+            Solve(document);
+            Require(
+                string.Equals(firstRunState, "Succeeded", StringComparison.Ordinal),
+                "The real EnergyPlus example run ended in " + firstRunState + ". "
+                    + RuntimeMessages(document, expectation.RunComponentGuid));
+            Require(ReadBoolean(document, expectation.RunComponentGuid, 2), "The EnergyPlus run did not report success.");
+            RequireOutputType(
+                document,
+                expectation.RunComponentGuid,
+                0,
+                "GonieGonie.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo");
+            string workDirectory = ReadString(document, expectation.RunComponentGuid, 3);
+            RequireContainedDirectory(workDirectory, tempRoot, "EnergyPlus work directory");
+            Require(
+                ReadBoolean(document, expectation.EnergyPlusSummaryGuid, 2),
+                "EnergyPlus Result Summary did not confirm the successful runtime result.");
+            Require(
+                ReadInteger(document, expectation.EnergyPlusSummaryGuid, 4) == 0
+                    && ReadInteger(document, expectation.EnergyPlusSummaryGuid, 5) == 0,
+                "The successful EnergyPlus result exposed severe or fatal errors.");
+            RequireOutputType(
+                document,
+                expectation.BuildResultGuid,
+                0,
+                "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo");
+            Require(
+                ReadBoolean(document, expectation.BuildResultGuid, 2),
+                "Build SimpleDragon GRR did not convert the real monthly EnergyPlus tables.");
+            double totalArea = ReadNumber(document, expectation.ResultSummaryGuid, 0);
+            double annualResult = ReadNumber(document, expectation.ResultSummaryGuid, 1);
+            double[] monthlyResults = ReadNumbers(document, expectation.ResultSummaryGuid, 2);
+            Require(IsFinite(totalArea) && totalArea > 0, "SimpleDragon GRR Summary emitted an invalid floor area.");
+            Require(IsFinite(annualResult), "SimpleDragon GRR Summary emitted a non-finite annual result.");
+            Require(
+                monthlyResults.Length == 12 && monthlyResults.All(IsFinite),
+                "SimpleDragon GRR Summary did not emit twelve finite monthly results.");
+            double monthlySum = monthlyResults.Sum();
+            double annualTolerance = Math.Max(1e-6, Math.Abs(annualResult) * 1e-9);
+            Require(
+                Math.Abs(monthlySum - annualResult) <= annualTolerance,
+                "SimpleDragon GRR annual result did not equal the twelve monthly values.");
+
+            SetBoolean(document, expectation.OverwriteGuid, true);
+            SetBoolean(document, expectation.ExportTriggerGuid, true);
+            Solve(document);
+            Require(
+                ReadBoolean(document, expectation.ExportCsvGuid, 4),
+                "Export SimpleDragon CSV did not report a completed write.");
+            string[] csvNames = ReadStrings(document, expectation.ExportCsvGuid, 1);
+            string[] csvFiles = ReadStrings(document, expectation.ExportCsvGuid, 2);
+            string[] csvContents = ReadStrings(document, expectation.ExportCsvGuid, 3);
+            Require(csvFiles.Length >= 4, "The CSV package exposed fewer than four output files.");
+            Require(
+                csvNames.Length == csvFiles.Length && csvContents.Length == csvFiles.Length,
+                "The CSV package names, paths, and contents have different lengths.");
+            Require(
+                csvNames.Distinct(StringComparer.Ordinal).Count() == csvNames.Length,
+                "The CSV package contains duplicate file names.");
+            var csvHashes = new string[csvFiles.Length];
+            for (int index = 0; index < csvFiles.Length; index++)
+            {
+                string fullPath = RequireFreshContainedFile(
+                    csvFiles[index],
+                    csvRoot,
+                    evidenceNotBeforeUtc,
+                    "CSV package file");
+                Require(
+                    string.Equals(Path.GetFileName(fullPath), csvNames[index], StringComparison.Ordinal),
+                    "The CSV package file name does not match its reported path: " + csvNames[index] + ".");
+                string writtenContent = File.ReadAllText(fullPath);
+                Require(
+                    string.Equals(writtenContent, csvContents[index], StringComparison.Ordinal),
+                    "The CSV package file differs from the component's deterministic content: " + fullPath + ".");
+                if (string.Equals(Path.GetExtension(fullPath), ".csv", StringComparison.OrdinalIgnoreCase))
+                {
+                    Require(writtenContent.Any(character => character == '\n'), "A CSV package file has no data rows: " + fullPath + ".");
+                }
+
+                csvHashes[index] = csvNames[index] + "=" + ComputeSha256(fullPath);
+            }
+
+            Require(
+                csvContents.Any(content => content.Contains("goniegonie-simpledragon-csv-export.v1")
+                    && content.Contains("two-zone-office")),
+                "The CSV package manifest does not identify its schema and case.");
+            int summaryCsvIndex = Array.FindIndex(
+                csvNames,
+                name => string.Equals(name, "summary.csv", StringComparison.Ordinal));
+            Require(summaryCsvIndex >= 0, "The CSV package contains no summary.csv file.");
+            RequireSummaryCsvMatchesResult(
+                csvContents[summaryCsvIndex],
+                totalArea,
+                annualResult);
+            SetBoolean(document, expectation.ExportTriggerGuid, false);
+            SetBoolean(document, expectation.OverwriteGuid, false);
+            Solve(document);
+
+            SetBoolean(document, expectation.RunTriggerGuid, false);
+            Solve(document);
+            SetBoolean(document, expectation.RunTriggerGuid, true);
+            Solve(document);
+            string cachedRunState = WaitForTerminalState(
+                document,
+                expectation.RunComponentGuid,
+                "syncRoot",
+                "activeTask",
+                "stateText",
+                inputs.EnergyPlusWorkflowTimeout,
+                "Cached",
+                "Succeeded",
+                "Failed",
+                "Cancelled");
+            SetBoolean(document, expectation.RunTriggerGuid, false);
+            Solve(document);
+            Require(
+                string.Equals(cachedRunState, "Cached", StringComparison.Ordinal),
+                "An identical EnergyPlus rerun did not use the component cache; state was " + cachedRunState + ".");
+            Require(ReadBoolean(document, expectation.RunComponentGuid, 2), "The cached EnergyPlus result lost its success state.");
+            RequireOutputType(
+                document,
+                expectation.RunComponentGuid,
+                0,
+                "GonieGonie.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo");
+
+            SetBoolean(document, expectation.ForceRerunGuid, true);
+            Solve(document);
+            SetBoolean(document, expectation.RunTriggerGuid, true);
+            Solve(document);
+            SetBoolean(document, expectation.CancelTriggerGuid, true);
+            Solve(document);
+            string cancellationState = WaitForTerminalState(
+                document,
+                expectation.RunComponentGuid,
+                "syncRoot",
+                "activeTask",
+                "stateText",
+                inputs.EnergyPlusWorkflowTimeout,
+                "Cancelled",
+                "Succeeded",
+                "Failed");
+            Require(
+                string.Equals(cancellationState, "Cancelled", StringComparison.Ordinal),
+                "The explicit EnergyPlus cancellation exercise ended in " + cancellationState + ".");
+            Solve(document);
+            Require(
+                !ReadBoolean(document, expectation.RunComponentGuid, 2),
+                "A cancelled EnergyPlus run incorrectly reported success.");
+            SetBoolean(document, expectation.RunTriggerGuid, false);
+            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetBoolean(document, expectation.ForceRerunGuid, false);
+            Solve(document);
+
+            SetBoolean(document, expectation.BatchRunTriggerGuid, true);
+            Solve(document);
+            string firstBatchState = WaitForTerminalState(
+                document,
+                expectation.BatchComponentGuid,
+                "_syncRoot",
+                "_activeTask",
+                "_state",
+                inputs.EnergyPlusWorkflowTimeout,
+                "Succeeded",
+                "Failed",
+                "Cancelled",
+                "Completed With Failures");
+            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+            Solve(document);
+            Require(
+                string.Equals(firstBatchState, "Succeeded", StringComparison.Ordinal),
+                "The real SimpleDragon batch ended in " + firstBatchState + ". "
+                    + RuntimeMessages(document, expectation.BatchComponentGuid));
+            Require(ReadBoolean(document, expectation.BatchComponentGuid, 5), "The SimpleDragon batch was not complete.");
+            RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Succeeded");
+            string combinedCsv = RequireFreshContainedFile(
+                ReadString(document, expectation.BatchComponentGuid, 3),
+                batchRoot,
+                evidenceNotBeforeUtc,
+                "SimpleDragon batch combined CSV");
+            string manifest = RequireFreshContainedFile(
+                ReadString(document, expectation.BatchComponentGuid, 4),
+                batchRoot,
+                evidenceNotBeforeUtc,
+                "SimpleDragon batch manifest");
+            string combinedCsvContent = File.ReadAllText(combinedCsv);
+            string manifestContent = File.ReadAllText(manifest);
+            Require(
+                combinedCsvContent.StartsWith("index,case_id,status", StringComparison.Ordinal)
+                    && combinedCsvContent.Contains("two-zone-office,Succeeded"),
+                "The SimpleDragon batch combined CSV does not contain the successful ordered case.");
+            RequireBatchCsvMatchesResult(combinedCsvContent, totalArea, annualResult);
+            Require(
+                manifestContent.Contains("goniegonie.simple-dragon.batch-manifest.v1")
+                    && manifestContent.Contains("two-zone-office")
+                    && manifestContent.Contains("\"status\": \"Succeeded\""),
+                "The SimpleDragon batch manifest does not contain its schema and successful case.");
+
+            SetBoolean(document, expectation.BatchRunTriggerGuid, true);
+            Solve(document);
+            string cachedBatchState = WaitForTerminalState(
+                document,
+                expectation.BatchComponentGuid,
+                "_syncRoot",
+                "_activeTask",
+                "_state",
+                inputs.EnergyPlusWorkflowTimeout,
+                "Succeeded",
+                "Failed",
+                "Cancelled",
+                "Completed With Failures");
+            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+            Solve(document);
+            Require(
+                string.Equals(cachedBatchState, "Succeeded", StringComparison.Ordinal),
+                "The cached SimpleDragon batch ended in " + cachedBatchState + ".");
+            Require(
+                ReadBatchCacheHits(document, expectation.BatchComponentGuid) >= 1,
+                "The identical SimpleDragon batch rerun did not report a cache hit.");
+            RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Succeeded");
+
+            SetPanel(document, expectation.BatchOutputRootGuid, batchCancellationRoot);
+            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+            SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+            Solve(document);
+            SetBoolean(document, expectation.BatchRunTriggerGuid, true);
+            Solve(document);
+            string batchStartState = WaitForState(
+                document,
+                expectation.BatchComponentGuid,
+                "_syncRoot",
+                "_state",
+                inputs.EnergyPlusWorkflowTimeout,
+                "Running",
+                "Succeeded",
+                "Failed",
+                "Cancelled",
+                "Completed With Failures");
+            Require(
+                string.Equals(batchStartState, "Running", StringComparison.Ordinal),
+                "The batch cancellation exercise reached " + batchStartState + " before cancellation could be requested.");
+            SetBoolean(document, expectation.BatchCancelTriggerGuid, true);
+            Solve(document);
+            string batchCancellationState = WaitForTerminalState(
+                document,
+                expectation.BatchComponentGuid,
+                "_syncRoot",
+                "_activeTask",
+                "_state",
+                inputs.EnergyPlusWorkflowTimeout,
+                "Cancelled",
+                "Succeeded",
+                "Failed",
+                "Completed With Failures");
+            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+            SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+            Solve(document);
+            Require(
+                string.Equals(batchCancellationState, "Cancelled", StringComparison.Ordinal),
+                "The explicit SimpleDragon batch cancellation ended in " + batchCancellationState + ".");
+            Require(
+                !ReadBoolean(document, expectation.BatchComponentGuid, 5),
+                "A cancelled SimpleDragon batch incorrectly reported complete success.");
+            RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Cancelled");
+            string cancelledBatchCsv = RequireFreshContainedFile(
+                ReadString(document, expectation.BatchComponentGuid, 3),
+                batchCancellationRoot,
+                evidenceNotBeforeUtc,
+                "Cancelled SimpleDragon batch combined CSV");
+            string cancelledBatchManifest = RequireFreshContainedFile(
+                ReadString(document, expectation.BatchComponentGuid, 4),
+                batchCancellationRoot,
+                evidenceNotBeforeUtc,
+                "Cancelled SimpleDragon batch manifest");
+            Require(
+                File.ReadAllText(cancelledBatchCsv).Contains("two-zone-office,Cancelled"),
+                "The cancelled batch CSV does not preserve the cancelled case status.");
+            Require(
+                File.ReadAllText(cancelledBatchManifest).Contains("\"status\": \"Cancelled\""),
+                "The cancelled batch manifest does not preserve the cancelled case status.");
+
+            string finalRunState = ReadRuntimeSnapshot(
+                document,
+                expectation.RunComponentGuid,
+                "syncRoot",
+                "activeTask",
+                "stateText").State;
+            return new RuntimeValidationFacts(
+                "ready",
+                inputs.EnergyPlusGateReason,
+                true,
+                finalRunState,
+                firstRunState,
+                cachedRunState,
+                cancellationState,
+                firstBatchState,
+                cachedBatchState,
+                batchCancellationState,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                Path.GetFullPath(inputs.OutputDirectory),
+                annualResult,
+                csvHashes,
+                ComputeSha256(combinedCsv),
+                ComputeSha256(manifest),
+                ComputeSha256(cancelledBatchCsv),
+                ComputeSha256(cancelledBatchManifest));
+        }
+        finally
+        {
+            BestEffortCancelAndDrain(document, expectation, inputs.EnergyPlusWorkflowTimeout);
+        }
+    }
+
+    private static RuntimeValidationFacts NotExecutedRuntime(string gateStatus, string gateReason)
+    {
+        return new RuntimeValidationFacts(
+            gateStatus,
+            gateReason,
+            false,
+            "Not Run",
+            "Not Run",
+            "Not Run",
+            "Not Run",
+            "Not Run",
+            "Not Run",
+            "Not Run",
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            string.Empty,
+            null,
+            Array.Empty<string>(),
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty);
+    }
+
+    private static string WaitForTerminalState(
+        GH_Document document,
+        Guid componentGuid,
+        string syncRootField,
+        string activeTaskField,
+        string stateField,
+        TimeSpan timeout,
+        params string[] terminalPrefixes)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        RuntimeComponentSnapshot snapshot = ReadRuntimeSnapshot(
+            document,
+            componentGuid,
+            syncRootField,
+            activeTaskField,
+            stateField);
+        while (stopwatch.Elapsed < timeout)
+        {
+            snapshot = ReadRuntimeSnapshot(
+                document,
+                componentGuid,
+                syncRootField,
+                activeTaskField,
+                stateField);
+            bool terminal = terminalPrefixes.Any(prefix => snapshot.State.StartsWith(prefix, StringComparison.Ordinal));
+            if (terminal && !snapshot.HasActiveTask)
+            {
+                return snapshot.State;
+            }
+
+            System.Threading.Thread.Sleep(25);
+        }
+
+        throw new TimeoutException(
+            componentGuid + " did not reach a terminal state within "
+                + timeout.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                + " seconds. Last state: " + snapshot.State + ". " + RuntimeMessages(document, componentGuid));
+    }
+
+    private static string WaitForState(
+        GH_Document document,
+        Guid componentGuid,
+        string syncRootField,
+        string stateField,
+        TimeSpan timeout,
+        params string[] expectedPrefixes)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        string state = string.Empty;
+        while (stopwatch.Elapsed < timeout)
+        {
+            GH_Component component = RequireObject<GH_Component>(document, componentGuid);
+            FieldInfo syncField = RequirePrivateField(component, syncRootField);
+            FieldInfo stateValueField = RequirePrivateField(component, stateField);
+            object syncRoot = syncField.GetValue(component)
+                ?? throw new InvalidOperationException(component.GetType().FullName + "." + syncRootField + " is empty.");
+            lock (syncRoot)
+            {
+                state = stateValueField.GetValue(component) as string
+                    ?? throw new InvalidOperationException(component.GetType().FullName + "." + stateField + " is not text.");
+            }
+
+            if (expectedPrefixes.Any(prefix => state.StartsWith(prefix, StringComparison.Ordinal)))
+            {
+                return state;
+            }
+
+            System.Threading.Thread.Sleep(25);
+        }
+
+        throw new TimeoutException(
+            componentGuid + " did not reach an expected active or terminal state within "
+                + timeout.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                + " seconds. Last state: " + state + ". " + RuntimeMessages(document, componentGuid));
+    }
+
+    private static RuntimeComponentSnapshot ReadRuntimeSnapshot(
+        GH_Document document,
+        Guid componentGuid,
+        string syncRootField,
+        string activeTaskField,
+        string stateField)
+    {
+        GH_Component component = RequireObject<GH_Component>(document, componentGuid);
+        FieldInfo syncField = RequirePrivateField(component, syncRootField);
+        FieldInfo taskField = RequirePrivateField(component, activeTaskField);
+        FieldInfo stateValueField = RequirePrivateField(component, stateField);
+        object syncRoot = syncField.GetValue(component)
+            ?? throw new InvalidOperationException(component.GetType().FullName + "." + syncRootField + " is empty.");
+        lock (syncRoot)
+        {
+            string state = stateValueField.GetValue(component) as string
+                ?? throw new InvalidOperationException(component.GetType().FullName + "." + stateField + " is not text.");
+            return new RuntimeComponentSnapshot(state, taskField.GetValue(component) is Task);
+        }
+    }
+
+    private static FieldInfo RequirePrivateField(GH_Component component, string fieldName)
+    {
+        return component.GetType().GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic)
+            ?? throw new MissingFieldException(component.GetType().FullName, fieldName);
+    }
+
+    private static int ReadBatchCacheHits(GH_Document document, Guid componentGuid)
+    {
+        GH_Component component = RequireObject<GH_Component>(document, componentGuid);
+        FieldInfo syncField = RequirePrivateField(component, "_syncRoot");
+        FieldInfo progressField = RequirePrivateField(component, "_latestProgress");
+        object syncRoot = syncField.GetValue(component)
+            ?? throw new InvalidOperationException(component.GetType().FullName + "._syncRoot is empty.");
+        lock (syncRoot)
+        {
+            object progress = progressField.GetValue(component)
+                ?? throw new InvalidOperationException("The completed batch exposed no progress snapshot.");
+            PropertyInfo property = progress.GetType().GetProperty("CacheHits", BindingFlags.Instance | BindingFlags.Public)
+                ?? throw new MissingMemberException(progress.GetType().FullName, "CacheHits");
+            return Convert.ToInt32(
+                property.GetValue(progress),
+                System.Globalization.CultureInfo.InvariantCulture);
+        }
+    }
+
+    private static void BestEffortCancelAndDrain(
+        GH_Document document,
+        RuntimeWorkflowExpectation expectation,
+        TimeSpan workflowTimeout)
+    {
+        TimeSpan drainTimeout = TimeSpan.FromSeconds(Math.Max(5, Math.Min(30, workflowTimeout.TotalSeconds)));
+        try
+        {
+            SetBoolean(document, expectation.RunTriggerGuid, false);
+            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetBoolean(document, expectation.ForceRerunGuid, false);
+            SetBoolean(document, expectation.ExportTriggerGuid, false);
+            SetBoolean(document, expectation.OverwriteGuid, false);
+            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+            SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+            Solve(document);
+
+            RuntimeComponentSnapshot run = ReadRuntimeSnapshot(
+                document,
+                expectation.RunComponentGuid,
+                "syncRoot",
+                "activeTask",
+                "stateText");
+            RuntimeComponentSnapshot batch = ReadRuntimeSnapshot(
+                document,
+                expectation.BatchComponentGuid,
+                "_syncRoot",
+                "_activeTask",
+                "_state");
+            if (run.HasActiveTask)
+            {
+                SetBoolean(document, expectation.CancelTriggerGuid, true);
+            }
+
+            if (batch.HasActiveTask)
+            {
+                SetBoolean(document, expectation.BatchCancelTriggerGuid, true);
+            }
+
+            if (run.HasActiveTask || batch.HasActiveTask)
+            {
+                Solve(document);
+                var stopwatch = Stopwatch.StartNew();
+                while (stopwatch.Elapsed < drainTimeout)
+                {
+                    run = ReadRuntimeSnapshot(
+                        document,
+                        expectation.RunComponentGuid,
+                        "syncRoot",
+                        "activeTask",
+                        "stateText");
+                    batch = ReadRuntimeSnapshot(
+                        document,
+                        expectation.BatchComponentGuid,
+                        "_syncRoot",
+                        "_activeTask",
+                        "_state");
+                    if (!run.HasActiveTask && !batch.HasActiveTask)
+                    {
+                        break;
+                    }
+
+                    System.Threading.Thread.Sleep(25);
+                }
+
+                if (run.HasActiveTask || batch.HasActiveTask)
+                {
+                    Console.Error.WriteLine(
+                        "Runtime workflow cleanup could not drain every active task within "
+                            + drainTimeout.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                            + " seconds.");
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine("Runtime workflow cleanup failed: " + exception.Message);
+        }
+        finally
+        {
+            try
+            {
+                SetBoolean(document, expectation.RunTriggerGuid, false);
+                SetBoolean(document, expectation.CancelTriggerGuid, false);
+                SetBoolean(document, expectation.ForceRerunGuid, false);
+                SetBoolean(document, expectation.ExportTriggerGuid, false);
+                SetBoolean(document, expectation.OverwriteGuid, false);
+                SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+                SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+                Solve(document);
+            }
+            catch (Exception exception)
+            {
+                Console.Error.WriteLine("Runtime workflow trigger reset failed: " + exception.Message);
+            }
+        }
+    }
+
+    private static void RequireSingleBatchCase(
+        GH_Document document,
+        Guid componentGuid,
+        string expectedStatus)
+    {
+        string[] caseIds = ReadStrings(document, componentGuid, 1);
+        string[] caseStatuses = ReadStrings(document, componentGuid, 2);
+        Require(
+            caseIds.Length == 1 && string.Equals(caseIds[0], "two-zone-office", StringComparison.Ordinal),
+            "The single-case example batch did not preserve its ordered case ID.");
+        Require(
+            caseStatuses.Length == 1 && string.Equals(caseStatuses[0], expectedStatus, StringComparison.Ordinal),
+            "The single-case example batch status was not " + expectedStatus + ".");
+    }
+
+    private static void RequireSummaryCsvMatchesResult(
+        string content,
+        double expectedTotalArea,
+        double expectedAnnualResult)
+    {
+        string[][] rows = ReadSimpleCsvRows(content, "SimpleDragon summary CSV");
+        string[] expectedHeader =
+        {
+            "case_id",
+            "metric",
+            "basis",
+            "total_area_m2",
+            "annual_total",
+            "value_unit",
+        };
+        Require(
+            rows[0].SequenceEqual(expectedHeader, StringComparer.Ordinal),
+            "The SimpleDragon summary CSV header changed unexpectedly.");
+        Require(rows.Length > 1, "The SimpleDragon summary CSV contains no data rows.");
+
+        string[]? sitePerArea = null;
+        foreach (string[] row in rows.Skip(1))
+        {
+            Require(row.Length == expectedHeader.Length, "The SimpleDragon summary CSV contains a malformed row.");
+            Require(
+                string.Equals(row[0], "two-zone-office", StringComparison.Ordinal),
+                "The SimpleDragon summary CSV contains an unexpected case ID.");
+            double totalArea = ParseFiniteCsvNumber(row[3], "summary total_area_m2");
+            ParseFiniteCsvNumber(row[4], "summary annual_total");
+            RequireNearlyEqual(totalArea, expectedTotalArea, "summary total_area_m2");
+            if (string.Equals(row[1], "site_uses", StringComparison.Ordinal)
+                && string.Equals(row[2], "per_area", StringComparison.Ordinal))
+            {
+                Require(sitePerArea is null, "The SimpleDragon summary CSV duplicated site_uses/per_area.");
+                sitePerArea = row;
+            }
+        }
+
+        Require(sitePerArea is not null, "The SimpleDragon summary CSV contains no site_uses/per_area row.");
+        RequireNearlyEqual(
+            ParseFiniteCsvNumber(sitePerArea![4], "summary site_uses/per_area annual_total"),
+            expectedAnnualResult,
+            "summary site_uses/per_area annual_total");
+    }
+
+    private static void RequireBatchCsvMatchesResult(
+        string content,
+        double expectedTotalArea,
+        double expectedAnnualResult)
+    {
+        string[][] rows = ReadSimpleCsvRows(content, "SimpleDragon batch combined CSV");
+        Require(rows.Length == 2, "The single-case batch combined CSV must contain exactly one data row.");
+        string[] header = rows[0];
+        string[] row = rows[1];
+        Require(row.Length == header.Length, "The batch combined CSV contains a malformed row.");
+
+        int caseIndex = Array.IndexOf(header, "case_id");
+        int statusIndex = Array.IndexOf(header, "status");
+        int annualIndex = Array.IndexOf(header, "site_energy_per_m2");
+        int totalAreaIndex = Array.IndexOf(header, "total_area_m2");
+        Require(
+            caseIndex >= 0 && statusIndex >= 0 && annualIndex >= 0 && totalAreaIndex >= 0,
+            "The batch combined CSV is missing required identity, status, or GRR metric columns.");
+        Require(
+            string.Equals(row[caseIndex], "two-zone-office", StringComparison.Ordinal)
+                && string.Equals(row[statusIndex], "Succeeded", StringComparison.Ordinal),
+            "The batch combined CSV does not identify the successful two-zone case.");
+
+        string[] numericColumns =
+        {
+            "carbon_gross",
+            "carbon_per_m2",
+            "cost_gross",
+            "cost_per_m2",
+            "site_energy_gross",
+            "site_energy_per_m2",
+            "source_energy_gross",
+            "source_energy_per_m2",
+            "total_area_m2",
+        };
+        foreach (string column in numericColumns)
+        {
+            int index = Array.IndexOf(header, column);
+            Require(index >= 0, "The batch combined CSV is missing numeric column " + column + ".");
+            ParseFiniteCsvNumber(row[index], "batch " + column);
+        }
+
+        RequireNearlyEqual(
+            ParseFiniteCsvNumber(row[annualIndex], "batch site_energy_per_m2"),
+            expectedAnnualResult,
+            "batch site_energy_per_m2");
+        RequireNearlyEqual(
+            ParseFiniteCsvNumber(row[totalAreaIndex], "batch total_area_m2"),
+            expectedTotalArea,
+            "batch total_area_m2");
+    }
+
+    private static string[][] ReadSimpleCsvRows(string content, string label)
+    {
+        string[][] rows = content
+            .Split(CsvLineSeparators, StringSplitOptions.RemoveEmptyEntries)
+            .Select(line => line.Split(','))
+            .ToArray();
+        Require(rows.Length > 0, label + " is empty.");
+        return rows;
+    }
+
+    private static double ParseFiniteCsvNumber(string text, string label)
+    {
+        bool parsed = double.TryParse(
+            text,
+            System.Globalization.NumberStyles.Float,
+            System.Globalization.CultureInfo.InvariantCulture,
+            out double value);
+        Require(parsed && IsFinite(value), label + " is not a finite invariant number: " + text + ".");
+        return value;
+    }
+
+    private static void RequireNearlyEqual(double actual, double expected, string label)
+    {
+        double tolerance = Math.Max(1e-6, Math.Abs(expected) * 1e-9);
+        Require(
+            Math.Abs(actual - expected) <= tolerance,
+            label + " was "
+                + actual.ToString("R", System.Globalization.CultureInfo.InvariantCulture)
+                + " instead of "
+                + expected.ToString("R", System.Globalization.CultureInfo.InvariantCulture)
+                + ".");
+    }
+
+    private static string RequireFreshContainedFile(
+        string candidate,
+        string root,
+        DateTime notBeforeUtc,
+        string label)
+    {
+        string fullPath = Path.GetFullPath(candidate);
+        Require(IsSameOrDescendant(fullPath, root), label + " escaped its requested root: " + fullPath);
+        Require(File.Exists(fullPath), label + " was not written: " + fullPath);
+        var info = new FileInfo(fullPath);
+        Require(info.Length > 0, label + " is empty: " + fullPath);
+        Require(info.LastWriteTimeUtc >= notBeforeUtc, label + " was not freshly written: " + fullPath);
+        return fullPath;
+    }
+
+    private static void RequireContainedDirectory(string candidate, string root, string label)
+    {
+        string fullPath = Path.GetFullPath(candidate);
+        Require(IsSameOrDescendant(fullPath, root), label + " escaped its requested root: " + fullPath);
+        Require(Directory.Exists(fullPath), label + " does not exist: " + fullPath);
+    }
+
+    private static bool IsSameOrDescendant(string candidate, string root)
+    {
+        string normalizedCandidate = Path.GetFullPath(candidate)
+            .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        string normalizedRoot = Path.GetFullPath(root)
+            .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        return string.Equals(normalizedCandidate, normalizedRoot, StringComparison.OrdinalIgnoreCase)
+            || normalizedCandidate.StartsWith(
+                normalizedRoot + Path.DirectorySeparatorChar,
+                StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static void SetPanel(GH_Document document, Guid instanceGuid, string value)
+    {
+        GH_Panel panel = RequireObject<GH_Panel>(document, instanceGuid);
+        panel.UserText = value;
+        panel.ExpireSolution(false);
+    }
+
+    private static void SetBoolean(GH_Document document, Guid instanceGuid, bool value)
+    {
+        Param_Boolean parameter = RequireObject<Param_Boolean>(document, instanceGuid);
+        parameter.PersistentData.Clear();
+        parameter.PersistentData.Append(new GH_Boolean(value));
+        parameter.ExpireSolution(false);
+    }
+
+    private static void RequirePersistentBoolean(GH_Document document, Guid instanceGuid, bool expected)
+    {
+        Param_Boolean parameter = RequireObject<Param_Boolean>(document, instanceGuid);
+        GH_Boolean value = parameter.PersistentData.AllData(true).OfType<GH_Boolean>().SingleOrDefault()
+            ?? throw new InvalidOperationException(instanceGuid + " has no single persistent Boolean value.");
+        Require(
+            value.Value == expected,
+            instanceGuid + " was saved " + value.Value + " instead of the safe value " + expected + ".");
+    }
+
+    private static void RequireOutputType(
+        GH_Document document,
+        Guid componentGuid,
+        int outputIndex,
+        string expectedType)
+    {
+        object value = ResolveParam(document, componentGuid, outputIndex, output: true)
+            .VolatileData
+            .AllData(true)
+            .FirstOrDefault()
+            ?? throw new InvalidOperationException(componentGuid + " output " + outputIndex + " produced no value.");
+        Require(
+            string.Equals(value.GetType().FullName, expectedType, StringComparison.Ordinal),
+            componentGuid + " output " + outputIndex + " produced " + value.GetType().FullName
+                + " instead of " + expectedType + ".");
+    }
+
+    private static bool ReadBoolean(GH_Document document, Guid componentGuid, int outputIndex)
+    {
+        object value = ResolveParam(document, componentGuid, outputIndex, output: true)
+            .VolatileData
+            .AllData(true)
+            .FirstOrDefault()
+            ?? throw new InvalidOperationException(
+                componentGuid + " output " + outputIndex + " produced no Boolean. "
+                    + RuntimeMessages(document, componentGuid));
+        return value is GH_Boolean boolean
+            ? boolean.Value
+             : throw new InvalidOperationException(componentGuid + " output " + outputIndex + " is not a Boolean.");
+    }
+
+    private static int ReadInteger(GH_Document document, Guid componentGuid, int outputIndex)
+    {
+        object value = ResolveParam(document, componentGuid, outputIndex, output: true)
+            .VolatileData
+            .AllData(true)
+            .FirstOrDefault()
+            ?? throw new InvalidOperationException(componentGuid + " output " + outputIndex + " produced no integer.");
+        return value is GH_Integer integer
+            ? integer.Value
+            : throw new InvalidOperationException(componentGuid + " output " + outputIndex + " is not an integer.");
+    }
+
+    private static double ReadNumber(GH_Document document, Guid componentGuid, int outputIndex)
+    {
+        object value = ResolveParam(document, componentGuid, outputIndex, output: true)
+            .VolatileData
+            .AllData(true)
+            .FirstOrDefault()
+            ?? throw new InvalidOperationException(componentGuid + " output " + outputIndex + " produced no number.");
+        return value is GH_Number number
+            ? number.Value
+            : throw new InvalidOperationException(componentGuid + " output " + outputIndex + " is not a number.");
+    }
+
+    private static double[] ReadNumbers(GH_Document document, Guid componentGuid, int outputIndex)
+    {
+        object[] values = ResolveParam(document, componentGuid, outputIndex, output: true)
+            .VolatileData
+            .AllData(true)
+            .ToArray();
+        Require(
+            values.All(value => value is GH_Number),
+            componentGuid + " output " + outputIndex + " contains a non-numeric value.");
+        return values.Cast<GH_Number>().Select(value => value.Value).ToArray();
+    }
+
+    private static bool IsFinite(double value)
+    {
+        return !double.IsNaN(value) && !double.IsInfinity(value);
+    }
+
+    private static string ReadString(GH_Document document, Guid componentGuid, int outputIndex)
+    {
+        object value = ResolveParam(document, componentGuid, outputIndex, output: true)
+            .VolatileData
+            .AllData(true)
+            .FirstOrDefault()
+            ?? throw new InvalidOperationException(
+                componentGuid + " output " + outputIndex + " produced no text. "
+                    + RuntimeMessages(document, componentGuid));
+        return value is GH_String text
+            ? text.Value
+            : throw new InvalidOperationException(componentGuid + " output " + outputIndex + " is not text.");
+    }
+
+    private static string[] ReadStrings(GH_Document document, Guid componentGuid, int outputIndex)
+    {
+        object[] values = ResolveParam(document, componentGuid, outputIndex, output: true)
+            .VolatileData
+            .AllData(true)
+            .ToArray();
+        Require(
+            values.All(value => value is GH_String),
+            componentGuid + " output " + outputIndex + " contains a non-text value.");
+        return values.Cast<GH_String>().Select(value => value.Value).ToArray();
+    }
+
+    private static string RuntimeMessages(GH_Document document, Guid componentGuid)
+    {
+        GH_ActiveObject component = RequireObject<GH_ActiveObject>(document, componentGuid);
+        string[] messages = Enum.GetValues(typeof(GH_RuntimeMessageLevel))
+            .Cast<GH_RuntimeMessageLevel>()
+            .SelectMany(level => component.RuntimeMessages(level))
+            .Distinct(StringComparer.Ordinal)
+            .ToArray();
+        return messages.Length == 0 ? "No component runtime messages." : string.Join(" | ", messages);
+    }
+
+    private static void Solve(GH_Document document)
+    {
+        GH_Document.EnableSolutions = true;
+        document.Enabled = true;
+        document.NewSolution(true, GH_SolutionMode.Silent);
     }
 
     private static void ValidateOutwardEnvelope(
@@ -689,6 +1829,29 @@ internal static class AdvancedExampleDefinitions
             WireCount = facts.WireCount,
             OutputGooType = facts.OutputGooType,
             Generated = generated,
+            RuntimeGateStatus = facts.Runtime.GateStatus,
+            RuntimeGateReason = facts.Runtime.GateReason,
+            RuntimeExecuted = facts.Runtime.Executed,
+            RuntimeState = facts.Runtime.State,
+            RuntimeResultVerified = facts.Runtime.ResultVerified,
+            RuntimeCsvVerified = facts.Runtime.CsvVerified,
+            RuntimeCacheVerified = facts.Runtime.CacheVerified,
+            RuntimeCancellationVerified = facts.Runtime.CancellationVerified,
+            RuntimeBatchVerified = facts.Runtime.BatchVerified,
+            RuntimeFirstRunState = facts.Runtime.FirstRunState,
+            RuntimeCachedRunState = facts.Runtime.CachedRunState,
+            RuntimeCancellationState = facts.Runtime.CancellationState,
+            RuntimeFirstBatchState = facts.Runtime.FirstBatchState,
+            RuntimeCachedBatchState = facts.Runtime.CachedBatchState,
+            RuntimeBatchCancellationState = facts.Runtime.BatchCancellationState,
+            RuntimeBatchCancellationVerified = facts.Runtime.BatchCancellationVerified,
+            RuntimeEvidenceDirectory = facts.Runtime.EvidenceDirectory,
+            RuntimeAnnualResult = facts.Runtime.AnnualResult,
+            RuntimeCsvSha256 = facts.Runtime.CsvSha256,
+            RuntimeBatchCombinedCsvSha256 = facts.Runtime.BatchCombinedCsvSha256,
+            RuntimeBatchManifestSha256 = facts.Runtime.BatchManifestSha256,
+            RuntimeBatchCancellationCsvSha256 = facts.Runtime.BatchCancellationCsvSha256,
+            RuntimeBatchCancellationManifestSha256 = facts.Runtime.BatchCancellationManifestSha256,
         };
     }
 
@@ -763,7 +1926,38 @@ internal static class AdvancedExampleDefinitions
         string FileName,
         Func<GH_ComponentServer, ScenarioGraph> Build);
 
-    private sealed record ValidationFacts(int ObjectCount, int WireCount, string OutputGooType);
+    private sealed record ValidationFacts(
+        int ObjectCount,
+        int WireCount,
+        string OutputGooType,
+        RuntimeValidationFacts Runtime);
+
+    private sealed record RuntimeComponentSnapshot(string State, bool HasActiveTask);
+
+    private sealed record RuntimeValidationFacts(
+        string GateStatus,
+        string GateReason,
+        bool Executed,
+        string State,
+        string FirstRunState,
+        string CachedRunState,
+        string CancellationState,
+        string FirstBatchState,
+        string CachedBatchState,
+        string BatchCancellationState,
+        bool ResultVerified,
+        bool CsvVerified,
+        bool CacheVerified,
+        bool CancellationVerified,
+        bool BatchVerified,
+        bool BatchCancellationVerified,
+        string EvidenceDirectory,
+        double? AnnualResult,
+        string[] CsvSha256,
+        string BatchCombinedCsvSha256,
+        string BatchManifestSha256,
+        string BatchCancellationCsvSha256,
+        string BatchCancellationManifestSha256);
 
     private static class Catalog
     {
@@ -782,6 +1976,8 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity InvisibleModel = I("fee2629c-94d8-4eed-8be2-14ba108ce825", "EnergyModelComponent");
         internal static readonly ComponentIdentity InvisibleCompile = I("2743be88-ef3a-4f0d-abf8-cf062d93aafe", "CompileIdfComponent");
         internal static readonly ComponentIdentity InvisibleValidate = I("fa664eeb-5503-4366-831d-e3478c8a1832", "ValidateIdfComponent");
+        internal static readonly ComponentIdentity InvisibleRun = I("5f1a9663-6f81-4635-b54d-607b48c9fd47", "RunEnergyPlusComponent");
+        internal static readonly ComponentIdentity InvisibleResultSummary = I("31967aee-84ae-4536-b091-b301d1ab2c3d", "EnergyPlusResultSummaryComponent");
         internal static readonly ComponentIdentity SimpleMaterial = S("fee586e8-692c-407e-a803-d5c43f3c7222", "SimpleDragonMaterialComponent");
         internal static readonly ComponentIdentity SimpleConstruction = S("3e1fa67f-dbb2-4c19-b54b-226c295f5751", "SimpleDragonSurfaceConstructionComponent");
         internal static readonly ComponentIdentity SimpleFenestration = S("b9af07b4-d08e-4335-ab55-a6fd33cb1a93", "SimpleDragonFenestrationConstructionComponent");
@@ -799,23 +1995,26 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity SimpleAssignVentilation = S("5f66b3fd-e69c-4c33-92db-839c07dcbda5", "AssignSimpleDragonVentilationSystemsComponent");
         internal static readonly ComponentIdentity SimpleAssemble = S("f0a131e0-7cfe-45fc-945a-7e52237535ee", "AssembleGreenRetrofitModelComponent");
         internal static readonly ComponentIdentity SimpleConvert = S("b38f2e41-f63b-42a8-b549-65cd60c7a994", "ConvertGreenRetrofitModelComponent");
+        internal static readonly ComponentIdentity SimpleBuildResult = S("2a9f3a4e-56f2-4227-8725-e8befe43cf53", "BuildGreenRetrofitResultComponent");
         internal static readonly ComponentIdentity SimpleReadResult = S("a03fb1d7-7ae2-4e2c-ab31-0e626af50163", "ReadGreenRetrofitResultComponent");
         internal static readonly ComponentIdentity SimpleResultSummary = S("577809aa-2d1c-40ea-aa50-f71d73f19f83", "GreenRetrofitResultSummaryComponent");
         internal static readonly ComponentIdentity SimpleDataTree = S("cb5a98f8-4188-4323-b55d-795b4a7ba20e", "GreenRetrofitDataTreeComponent");
         internal static readonly ComponentIdentity SimpleLinePlot = S("76e0c1b6-68d6-4cdc-a418-eea18aa131c1", "GreenRetrofitMonthlyLinePlotComponent");
         internal static readonly ComponentIdentity SimpleBarPlot = S("a73acba4-d98d-4fec-a846-dc982256d6b1", "GreenRetrofitMonthlyBarPlotComponent");
         internal static readonly ComponentIdentity SimpleExportCsv = S("9fe8a410-ea95-4eb8-81ec-56c45cdd029c", "ExportGreenRetrofitCsvComponent");
+        internal static readonly ComponentIdentity SimpleBatch = S("c0af86b6-5f6e-478c-b069-a7892a31dadd", "RunSimpleDragonBatchComponent");
 
         internal static IReadOnlyList<ComponentIdentity> All { get; } = new[]
         {
             InvisibleMaterial, InvisibleConstruction, InvisibleNoMass, InvisibleProfile, InvisibleSurface,
             InvisibleZone, InvisibleHeatPump, InvisibleAirHandler, InvisibleBoiler, InvisibleRadiantFloor,
-            InvisibleErv, InvisiblePv, InvisibleModel, InvisibleCompile, InvisibleValidate,
+            InvisibleErv, InvisiblePv, InvisibleModel, InvisibleCompile, InvisibleValidate, InvisibleRun,
+            InvisibleResultSummary,
             SimpleMaterial, SimpleConstruction, SimpleFenestration, SimpleProfile, SimpleHeatPump,
             SimpleAirHandler, SimpleBoiler, SimpleRadiator, SimpleChiller, SimpleFanCoil, SimpleErv,
             SimplePv, SimpleExtractZones, SimpleAssignSupplies, SimpleAssignVentilation, SimpleAssemble,
-            SimpleConvert, SimpleReadResult, SimpleResultSummary, SimpleDataTree, SimpleLinePlot,
-            SimpleBarPlot, SimpleExportCsv,
+            SimpleConvert, SimpleBuildResult, SimpleReadResult, SimpleResultSummary, SimpleDataTree,
+            SimpleLinePlot, SimpleBarPlot, SimpleExportCsv, SimpleBatch,
         };
 
         private static ComponentIdentity I(string id, string type)
@@ -937,6 +2136,13 @@ internal sealed class ScenarioGraphBuilder
         return AddSpecial(key, parameter, x, y);
     }
 
+    internal GraphNode Boolean(int key, string nickName, bool value, float x, float y)
+    {
+        var parameter = new Param_Boolean { NickName = nickName };
+        parameter.PersistentData.Append(new GH_Boolean(value));
+        return AddSpecial(key, parameter, x, y);
+    }
+
     internal GraphNode FilePath(int key, string nickName, string value, float x, float y)
     {
         var parameter = new Param_FilePath
@@ -979,7 +2185,8 @@ internal sealed class ScenarioGraphBuilder
         string product,
         string primaryOutputGooType,
         LinkedModelExpectation? linkedModel = null,
-        OutwardEnvelopeExpectation? envelope = null)
+        OutwardEnvelopeExpectation? envelope = null,
+        RuntimeWorkflowExpectation? runtimeWorkflow = null)
     {
         return new ScenarioGraph(
             product,
@@ -991,7 +2198,8 @@ internal sealed class ScenarioGraphBuilder
             _numbers.ToArray(),
             primaryOutputGooType,
             linkedModel,
-            envelope);
+            envelope,
+            runtimeWorkflow);
     }
 
     private GraphNode AddSpecial<T>(int key, T value, float x, float y)
@@ -1055,6 +2263,26 @@ internal sealed record LinkedModelExpectation(string FileName, Guid BrepParamete
 
 internal sealed record OutwardEnvelopeExpectation(Guid[] CurveParameterGuids, Point3d ZoneCentroid);
 
+internal sealed record RuntimeWorkflowExpectation(
+    Guid RunComponentGuid,
+    Guid RunTriggerGuid,
+    Guid CancelTriggerGuid,
+    Guid ForceRerunGuid,
+    Guid RuntimeRootGuid,
+    Guid WeatherPathGuid,
+    Guid TempRootGuid,
+    Guid EnergyPlusSummaryGuid,
+    Guid BuildResultGuid,
+    Guid ResultSummaryGuid,
+    Guid ExportCsvGuid,
+    Guid ExportDirectoryGuid,
+    Guid ExportTriggerGuid,
+    Guid OverwriteGuid,
+    Guid BatchComponentGuid,
+    Guid BatchOutputRootGuid,
+    Guid BatchRunTriggerGuid,
+    Guid BatchCancelTriggerGuid);
+
 internal sealed record ScenarioGraph(
     string Product,
     GH_Document Document,
@@ -1065,4 +2293,5 @@ internal sealed record ScenarioGraph(
     IReadOnlyList<NumberExpectation> Numbers,
     string PrimaryOutputGooType,
     LinkedModelExpectation? LinkedModel,
-    OutwardEnvelopeExpectation? Envelope);
+    OutwardEnvelopeExpectation? Envelope,
+    RuntimeWorkflowExpectation? RuntimeWorkflow);

@@ -1,6 +1,6 @@
 # Verified Grasshopper examples
 
-This tool generates seven tracked Grasshopper definitions and two Rhino building
+This tool generates eight tracked Grasshopper definitions and two Rhino building
 models with Rhino 7, then validates them inside real Rhino 7 and Rhino 8 hosts.
 It is intentionally separate from the package host smoke gate.
 
@@ -29,6 +29,11 @@ Boolean/numeric results, outward envelope winding, solve, save, reopen, and
 round trip. Hosts run from a disposable system-temp directory outside the
 repository, and the result example proves that saved-document-relative file
 paths do not depend on the host process working directory.
+The two-zone run example additionally verifies the typed Run-to-Result-to-GRR-to-
+CSV path and a separate batch path. Every persisted execution, cancellation,
+overwrite, and export trigger must remain false. When EnergyPlus and an EPW are
+ready, the host enables the operations only in memory; disabled or unavailable
+states remain explicitly `Not Run` in the summary.
 Building-model checks cover metre units, layers, object names and user strings,
 closed solid zone Breps, exact bounds, expected adjacency pairs, and closed
 planar window curves. The two-zone GRM-to-IDF graph also proves that its
@@ -38,3 +43,6 @@ Use `-Target Rhino7` or `-Target Rhino8` for a single validation host. Generatio
 requires the default `-Target All`: Rhino 7 writes every canonical binary, then
 Rhino 7 and Rhino 8 both validate it before the command succeeds. Custom Rhino
 executable locations can be supplied with `-Rhino7Exe` and `-Rhino8Exe`.
+Use `-EnergyPlusRoot` and `-WeatherPath` for explicit runtime inputs, or
+`-SkipEnergyPlusWorkflow` to verify the disabled state without executing a
+simulation.

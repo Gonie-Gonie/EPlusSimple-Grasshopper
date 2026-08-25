@@ -37,7 +37,7 @@ For diagnosis, its constituent commands are:
 .\dev.cmd reference -Mode Verify
 .\dev.cmd build -NoRestore -RequireEnergyPlus
 .\dev.cmd compatibility -SkipReferencePreparation -NoRestore
-.\dev.cmd examples -SkipPluginBuild
+.\dev.cmd examples -SkipPluginBuild -RequireEnergyPlusWorkflow
 .\dev.cmd package -SkipBuild -RunPortableHostGate
 ```
 
@@ -48,6 +48,10 @@ For diagnosis, its constituent commands are:
 - Require every declared Python/C# engineering compatibility case to pass with
   zero skipped stages, including authoring/expanded IDF, EnergyPlus, GRR, and
   warning comparisons declared by that case.
+- Require zero unregistered `Severe` and `Fatal` EnergyPlus diagnostics in both
+  engines. An allowed diagnostic must match its normalized title and count
+  exactly, and every diagnostic or `not_verified` limitation must reference an
+  approved compatibility exception.
 - Run package-host scenarios from safely extracted portable archives in Rhino
   7 and Rhino 8: InvisibleDragon-only, SimpleDragon-only, and both.
 - Require both genuine starter definitions to solve, save, reopen, preserve

@@ -98,11 +98,12 @@ portable plugin ZIPs, run:
 .\dev.cmd package -SkipBuild
 ```
 
-The seven tracked definitions and two named-building Rhino models under
+The eight tracked definitions and two named-building Rhino models under
 [`examples`](examples/README.md) cover materials, profiles, geometry, HVAC,
-two-zone GRM-to-IDF conversion, result plots, and CSV previews. Rhino 7 writes
-the canonical files; `.\dev.cmd examples` solves and round-trip validates them in
-both Rhino 7 and Rhino 8.
+two-zone GRM-to-IDF conversion, result plots, CSV previews, and the gated
+Run-to-GRR/CSV/batch workflow. Rhino 7 writes the canonical files;
+`.\dev.cmd examples` solves and round-trip validates them in both Rhino 7 and
+Rhino 8.
 
 Maintainers can execute the complete first-candidate gate with:
 

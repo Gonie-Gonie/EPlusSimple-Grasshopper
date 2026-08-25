@@ -493,7 +493,7 @@ internal static class ExampleDefinitionGate
 internal sealed class ExampleHostSummary
 {
     [DataMember(Name = "schema", Order = 1)]
-    public string Schema { get; set; } = "goniegonie.dragons-grasshopper.examples.v2";
+    public string Schema { get; set; } = "goniegonie.dragons-grasshopper.examples.v3";
 
     [DataMember(Name = "host", Order = 2)]
     public string Host { get; set; } = string.Empty;
@@ -550,4 +550,73 @@ internal sealed class ExampleDefinitionResult
 
     [DataMember(Name = "generated", Order = 8)]
     public bool Generated { get; set; }
+
+    [DataMember(Name = "runtimeGateStatus", Order = 9)]
+    public string RuntimeGateStatus { get; set; } = "not-applicable";
+
+    [DataMember(Name = "runtimeGateReason", Order = 10)]
+    public string RuntimeGateReason { get; set; } = "This definition has no executable EnergyPlus workflow.";
+
+    [DataMember(Name = "runtimeExecuted", Order = 11)]
+    public bool RuntimeExecuted { get; set; }
+
+    [DataMember(Name = "runtimeState", Order = 12)]
+    public string RuntimeState { get; set; } = "Not Run";
+
+    [DataMember(Name = "runtimeResultVerified", Order = 13)]
+    public bool RuntimeResultVerified { get; set; }
+
+    [DataMember(Name = "runtimeCsvVerified", Order = 14)]
+    public bool RuntimeCsvVerified { get; set; }
+
+    [DataMember(Name = "runtimeCacheVerified", Order = 15)]
+    public bool RuntimeCacheVerified { get; set; }
+
+    [DataMember(Name = "runtimeCancellationVerified", Order = 16)]
+    public bool RuntimeCancellationVerified { get; set; }
+
+    [DataMember(Name = "runtimeBatchVerified", Order = 17)]
+    public bool RuntimeBatchVerified { get; set; }
+
+    [DataMember(Name = "runtimeFirstRunState", Order = 18)]
+    public string RuntimeFirstRunState { get; set; } = "Not Run";
+
+    [DataMember(Name = "runtimeCachedRunState", Order = 19)]
+    public string RuntimeCachedRunState { get; set; } = "Not Run";
+
+    [DataMember(Name = "runtimeCancellationState", Order = 20)]
+    public string RuntimeCancellationState { get; set; } = "Not Run";
+
+    [DataMember(Name = "runtimeFirstBatchState", Order = 21)]
+    public string RuntimeFirstBatchState { get; set; } = "Not Run";
+
+    [DataMember(Name = "runtimeCachedBatchState", Order = 22)]
+    public string RuntimeCachedBatchState { get; set; } = "Not Run";
+
+    [DataMember(Name = "runtimeBatchCancellationState", Order = 23)]
+    public string RuntimeBatchCancellationState { get; set; } = "Not Run";
+
+    [DataMember(Name = "runtimeBatchCancellationVerified", Order = 24)]
+    public bool RuntimeBatchCancellationVerified { get; set; }
+
+    [DataMember(Name = "runtimeEvidenceDirectory", Order = 25)]
+    public string RuntimeEvidenceDirectory { get; set; } = string.Empty;
+
+    [DataMember(Name = "runtimeAnnualResult", Order = 26)]
+    public double? RuntimeAnnualResult { get; set; }
+
+    [DataMember(Name = "runtimeCsvSha256", Order = 27)]
+    public string[] RuntimeCsvSha256 { get; set; } = Array.Empty<string>();
+
+    [DataMember(Name = "runtimeBatchCombinedCsvSha256", Order = 28)]
+    public string RuntimeBatchCombinedCsvSha256 { get; set; } = string.Empty;
+
+    [DataMember(Name = "runtimeBatchManifestSha256", Order = 29)]
+    public string RuntimeBatchManifestSha256 { get; set; } = string.Empty;
+
+    [DataMember(Name = "runtimeBatchCancellationCsvSha256", Order = 30)]
+    public string RuntimeBatchCancellationCsvSha256 { get; set; } = string.Empty;
+
+    [DataMember(Name = "runtimeBatchCancellationManifestSha256", Order = 31)]
+    public string RuntimeBatchCancellationManifestSha256 { get; set; } = string.Empty;
 }

@@ -386,7 +386,12 @@ Invoke-RepositoryCommand `
 Write-Host 'Opening and round-trip validating the tracked examples in Rhino 7 and Rhino 8...'
 Invoke-RepositoryCommand `
     -Path (Join-Path $repositoryRoot 'dev.cmd') `
-    -Arguments @('examples', '-SkipPluginBuild') `
+    -Arguments @(
+        'examples',
+        '-SkipPluginBuild',
+        '-RequireEnergyPlusWorkflow',
+        '-TimeoutSeconds', '900',
+        '-WorkflowStageTimeoutSeconds', '240') `
     -FailureMessage 'Verified Grasshopper example gate failed'
 
 Write-Host 'Packaging and loading the exact portable ZIPs in six fresh Rhino hosts...'
@@ -405,6 +410,7 @@ $buildManifestPath = Join-Path $reportsRoot 'build-manifest.json'
 $testSummaryPath = Join-Path $reportsRoot 'test-summary.json'
 $engineeringCompatibilityPath = Join-Path $reportsRoot 'engineering-compatibility.json'
 $engineeringReleasePath = Join-Path $releaseRoot 'engineering-compatibility.json'
+$compatibilityExceptionsPath = Join-Path $repositoryRoot 'upstream\compatibility-exceptions.yml'
 $packageIndexPath = Join-Path $packagesRoot 'package-index.json'
 $compatibilityPath = Join-Path $packagesRoot 'compatibility-report.json'
 $packageChecksumsPath = Join-Path $packagesRoot 'checksums.sha256'
@@ -453,6 +459,87 @@ if (-not [bool] $engineeringCompatibility.passed -or
         @($_.skipped_stages).Count -ne 0
     }).Count -ne 0) {
     throw 'Engineering compatibility report is incomplete, skipped, or failed.'
+}
+$requiredEngineeringStages = @(
+    'grm_cross_read',
+    'authoring_idf',
+    'expanded_idf',
+    'energyplus',
+    'grr',
+    'warnings'
+)
+$limitedEngineeringCases = @()
+$diagnosticEngineeringExceptions = @()
+foreach ($engineeringCase in $engineeringCases) {
+    $caseId = [string] $engineeringCase.id
+    $declaredStages = @($engineeringCase.declared_stages | ForEach-Object { [string] $_ } | Sort-Object)
+    $executedStages = @($engineeringCase.executed_stages | ForEach-Object { [string] $_ } | Sort-Object)
+    if (@(Compare-Object `
+            -ReferenceObject @($requiredEngineeringStages | Sort-Object) `
+            -DifferenceObject $declaredStages).Count -ne 0 -or
+        @(Compare-Object `
+            -ReferenceObject @($requiredEngineeringStages | Sort-Object) `
+            -DifferenceObject $executedStages).Count -ne 0) {
+        throw "Engineering case '$caseId' did not declare and execute the exact six release stages."
+    }
+
+    $stageScope = $engineeringCase.stage_scope
+    if ($null -ne $stageScope) {
+        if (@($stageScope.excluded_stages).Count -ne 0) {
+            throw "Engineering case '$caseId' excludes a release stage."
+        }
+        $notVerified = @($stageScope.not_verified | Where-Object {
+            -not [string]::IsNullOrWhiteSpace([string] $_)
+        })
+        if ($notVerified.Count -ne 0) {
+            if ([string]::IsNullOrWhiteSpace([string] $stageScope.exception_id) -or
+                [string]::IsNullOrWhiteSpace([string] $stageScope.diagnostic) -or
+                @($stageScope.verified).Count -eq 0) {
+                throw "Engineering case '$caseId' has an incomplete not_verified exception policy."
+            }
+            $limitedEngineeringCases += $engineeringCase
+        }
+    }
+
+    foreach ($diagnosticException in @($engineeringCase.diagnostic_exceptions)) {
+        $severity = ([string] $diagnosticException.severity).ToLowerInvariant()
+        if ([string]::IsNullOrWhiteSpace([string] $diagnosticException.exception_id) -or
+            [string]::IsNullOrWhiteSpace([string] $diagnosticException.title) -or
+            $severity -notin @('severe', 'fatal') -or
+            [int] $diagnosticException.count -lt 1) {
+            throw "Engineering case '$caseId' has an invalid diagnostic exception policy."
+        }
+        $diagnosticEngineeringExceptions += $diagnosticException
+    }
+}
+$expectedLimitationIds = @($limitedEngineeringCases |
+    ForEach-Object { [string] $_.stage_scope.exception_id } |
+    Sort-Object -Unique)
+$actualLimitationIds = @($engineeringCompatibility.limitation_exception_ids |
+    ForEach-Object { [string] $_ } |
+    Sort-Object -Unique)
+$expectedDiagnosticIds = @($diagnosticEngineeringExceptions |
+    ForEach-Object { [string] $_.exception_id } |
+    Sort-Object -Unique)
+$actualDiagnosticIds = @($engineeringCompatibility.diagnostic_exception_ids |
+    ForEach-Object { [string] $_ } |
+    Sort-Object -Unique)
+$expectedReferencedIds = @(($expectedLimitationIds + $expectedDiagnosticIds) | Sort-Object -Unique)
+$actualReferencedIds = @($engineeringCompatibility.referenced_exception_ids |
+    ForEach-Object { [string] $_ } |
+    Sort-Object -Unique)
+if ([int] $engineeringCompatibility.limitation_count -ne $limitedEngineeringCases.Count -or
+    [int] $engineeringCompatibility.diagnostic_exception_count -ne $diagnosticEngineeringExceptions.Count -or
+    @(Compare-Object -ReferenceObject $expectedLimitationIds -DifferenceObject $actualLimitationIds).Count -ne 0 -or
+    @(Compare-Object -ReferenceObject $expectedDiagnosticIds -DifferenceObject $actualDiagnosticIds).Count -ne 0 -or
+    @(Compare-Object -ReferenceObject $expectedReferencedIds -DifferenceObject $actualReferencedIds).Count -ne 0) {
+    throw 'Engineering compatibility limitation/diagnostic exception summaries are inconsistent.'
+}
+if (-not (Test-Path -LiteralPath $compatibilityExceptionsPath -PathType Leaf) -or
+    -not ([string] $engineeringCompatibility.exception_registry_sha256).Equals(
+        (Get-Sha256 -Path $compatibilityExceptionsPath),
+        [System.StringComparison]::OrdinalIgnoreCase)) {
+    throw 'Engineering compatibility report does not attest the current exception registry.'
 }
 Copy-Item `
     -LiteralPath $engineeringCompatibilityPath `
@@ -783,6 +870,9 @@ $releaseGate = [pscustomobject] [ordered] @{
             declaredCaseCount = [int] $engineeringCompatibility.declared_case_count
             executedCaseCount = [int] $engineeringCompatibility.executed_case_count
             skippedStageCount = [int] $engineeringCompatibility.skip_count
+            limitationCount = [int] $engineeringCompatibility.limitation_count
+            diagnosticExceptionCount = [int] $engineeringCompatibility.diagnostic_exception_count
+            referencedExceptionIds = @($engineeringCompatibility.referenced_exception_ids)
             report = 'release/' + (Get-RelativeUnixPath `
                 -Root $releaseRoot `
                 -Path $engineeringReleasePath)

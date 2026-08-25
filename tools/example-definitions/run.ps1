@@ -10,10 +10,21 @@ param(
 
     [string]$Rhino7Exe = "C:\Program Files\Rhino 7\System\Rhino.exe",
 
-    [ValidateRange(15, 600)]
-    [int]$TimeoutSeconds = 90,
+    [ValidateRange(30, 3600)]
+    [int]$TimeoutSeconds = 600,
 
-    [switch]$SkipPluginBuild
+    [ValidateRange(15, 600)]
+    [int]$WorkflowStageTimeoutSeconds = 180,
+
+    [switch]$SkipPluginBuild,
+
+    [string]$EnergyPlusRoot,
+
+    [string]$WeatherPath,
+
+    [switch]$SkipEnergyPlusWorkflow,
+
+    [switch]$RequireEnergyPlusWorkflow
 )
 
 Set-StrictMode -Version Latest
@@ -23,7 +34,11 @@ $toolRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = [IO.Path]::GetFullPath((Join-Path $toolRoot "..\.."))
 $examplesRoot = Join-Path $repoRoot "examples"
 $runStamp = (Get-Date).ToUniversalTime().ToString("yyyyMMdd-HHmmss-fff")
-$runRoot = Join-Path $repoRoot "temp\example-definitions\run-$runStamp"
+$runToken = [Guid]::NewGuid().ToString("N").Substring(0, 8)
+# Rhino 7 and EnergyPlus still exercise legacy MAX_PATH code paths. Keep the
+# entire evidence tree in repository temp, but give simulation descendants a
+# deliberately short absolute prefix.
+$runRoot = Join-Path $repoRoot "temp\e\$runToken"
 [IO.Directory]::CreateDirectory($runRoot) | Out-Null
 $systemTempRoot = [IO.Path]::GetFullPath([IO.Path]::GetTempPath()).TrimEnd('\', '/')
 $hostWorkingDirectory = [IO.Path]::GetFullPath((
@@ -56,6 +71,82 @@ function Require-File([string]$Path, [string]$Label) {
     return $full
 }
 
+function Resolve-EnergyPlusWorkflow {
+    if ($SkipEnergyPlusWorkflow) {
+        return @{
+            Status = "disabled"
+            Reason = "EnergyPlus workflow execution was explicitly disabled."
+            RuntimeRoot = ""
+            WeatherPath = ""
+        }
+    }
+
+    $runtimeRoot = $EnergyPlusRoot
+    $configuredWeather = $WeatherPath
+    $settingsPath = Join-Path $repoRoot ".config\local.settings.json"
+    if ([string]::IsNullOrWhiteSpace($runtimeRoot) -and (Test-Path -LiteralPath $settingsPath -PathType Leaf)) {
+        try {
+            $settings = Get-Content -LiteralPath $settingsPath -Raw | ConvertFrom-Json
+            if ($null -ne $settings.energyPlus -and [string]$settings.energyPlus.status -eq "ready") {
+                $runtimeRoot = [string]$settings.energyPlus.root
+            }
+        }
+        catch {
+            return @{
+                Status = "unavailable"
+                Reason = "Local settings could not be read: $($_.Exception.Message)"
+                RuntimeRoot = ""
+                WeatherPath = ""
+            }
+        }
+    }
+
+    if ([string]::IsNullOrWhiteSpace($runtimeRoot)) {
+        return @{
+            Status = "unavailable"
+            Reason = "No EnergyPlus 24.2 runtime root was configured. Run 'dev.cmd setup -InstallEnergyPlus'."
+            RuntimeRoot = ""
+            WeatherPath = ""
+        }
+    }
+
+    $runtimeRoot = [IO.Path]::GetFullPath($runtimeRoot)
+    $runtimeExecutable = Join-Path $runtimeRoot "energyplus.exe"
+    $runtimeIdd = Join-Path $runtimeRoot "Energy+.idd"
+    if (-not (Test-Path -LiteralPath $runtimeExecutable -PathType Leaf) -or
+        -not (Test-Path -LiteralPath $runtimeIdd -PathType Leaf)) {
+        return @{
+            Status = "unavailable"
+            Reason = "EnergyPlus root is incomplete: $runtimeRoot"
+            RuntimeRoot = $runtimeRoot
+            WeatherPath = ""
+        }
+    }
+
+    if ([string]::IsNullOrWhiteSpace($configuredWeather)) {
+        $configuredWeather = Get-ChildItem -LiteralPath (Join-Path $runtimeRoot "WeatherData") `
+            -Filter "*.epw" -File -ErrorAction SilentlyContinue |
+            Sort-Object Name |
+            Select-Object -First 1 -ExpandProperty FullName
+    }
+    if ([string]::IsNullOrWhiteSpace($configuredWeather) -or
+        -not (Test-Path -LiteralPath $configuredWeather -PathType Leaf)) {
+        return @{
+            Status = "unavailable"
+            Reason = "No EPW file is available for the installed EnergyPlus runtime."
+            RuntimeRoot = $runtimeRoot
+            WeatherPath = ""
+        }
+    }
+
+    return @{
+        Status = "ready"
+        Reason = "Verified EnergyPlus executable, IDD, and EPW are available."
+        RuntimeRoot = $runtimeRoot
+        WeatherPath = [IO.Path]::GetFullPath($configuredWeather)
+    }
+}
+
 function Invoke-DotNetLogged([string[]]$Arguments, [string]$LogName) {
     $logPath = Join-Path $runRoot $LogName
     & $script:dotnet @Arguments 2>&1 | Tee-Object -FilePath $logPath
@@ -73,6 +164,177 @@ function ConvertTo-ProcessArguments([string[]]$Arguments) {
             $_
         }
     }) -join ' '
+}
+
+function Get-DescendantProcessIds([int]$RootProcessId) {
+    try {
+        $rows = @(Get-CimInstance Win32_Process -ErrorAction Stop |
+            Select-Object ProcessId, ParentProcessId)
+        $known = [Collections.Generic.HashSet[int]]::new()
+        $frontier = [Collections.Generic.Queue[int]]::new()
+        $frontier.Enqueue($RootProcessId)
+        while ($frontier.Count -gt 0) {
+            $parentId = $frontier.Dequeue()
+            foreach ($row in $rows) {
+                $candidateId = [int]$row.ProcessId
+                if ([int]$row.ParentProcessId -eq $parentId -and $known.Add($candidateId)) {
+                    $frontier.Enqueue($candidateId)
+                }
+            }
+        }
+
+        return @($known)
+    }
+    catch {
+        Write-Verbose "Could not enumerate descendants of process $RootProcessId`: $($_.Exception.Message)"
+        return @()
+    }
+}
+
+function Save-ObservedDescendants([hashtable]$Observed, [int[]]$ProcessIds) {
+    foreach ($descendantId in $ProcessIds) {
+        if ($descendantId -le 0 -or $Observed.ContainsKey($descendantId)) {
+            continue
+        }
+
+        $descendant = Get-Process -Id $descendantId -ErrorAction SilentlyContinue
+        if ($null -eq $descendant) {
+            continue
+        }
+
+        try {
+            # Store a process identity, not only its reusable PID. A short-lived
+            # child can exit while Rhino continues, and its PID must never make
+            # a later unrelated process eligible for cleanup.
+            $Observed[$descendantId] = $descendant.StartTime.ToUniversalTime().Ticks
+        }
+        catch {
+            Write-Verbose "Could not identify descendant process $descendantId`: $($_.Exception.Message)"
+        }
+        finally {
+            $descendant.Dispose()
+        }
+    }
+}
+
+function Stop-ProcessTree(
+    [Diagnostics.Process]$Process,
+    [string]$Reason,
+    [hashtable]$KnownDescendants = @{}) {
+    if ($null -eq $Process) {
+        return
+    }
+
+    $processId = $null
+    $processRunning = $false
+    try {
+        $processId = $Process.Id
+        $processRunning = -not $Process.HasExited
+    }
+    catch {
+        if ($KnownDescendants.Count -eq 0) {
+            return
+        }
+    }
+
+    $descendantSet = [Collections.Generic.HashSet[int]]::new()
+    foreach ($entry in $KnownDescendants.GetEnumerator()) {
+        $descendantId = [int]$entry.Key
+        $descendant = Get-Process -Id $descendantId -ErrorAction SilentlyContinue
+        if ($null -eq $descendant) {
+            continue
+        }
+
+        try {
+            if ($descendant.StartTime.ToUniversalTime().Ticks -eq [long]$entry.Value) {
+                $null = $descendantSet.Add($descendantId)
+            }
+        }
+        catch {
+            Write-Verbose "Could not confirm descendant process $descendantId identity: $($_.Exception.Message)"
+        }
+        finally {
+            $descendant.Dispose()
+        }
+    }
+
+    # A Win32_Process row retains its creating parent ID even after that parent
+    # exits, so take one last snapshot on every path. This catches EnergyPlus
+    # descendants that outlive a Rhino host which has already terminated.
+    if ($null -ne $processId) {
+        foreach ($descendantId in @(Get-DescendantProcessIds $processId)) {
+            $null = $descendantSet.Add([int]$descendantId)
+        }
+    }
+
+    $taskKill = Join-Path $env:SystemRoot "System32\taskkill.exe"
+    if ($processRunning -and (Test-Path -LiteralPath $taskKill -PathType Leaf)) {
+        try {
+            $taskKillOutput = & $taskKill /PID $processId /T /F 2>&1
+            if ($LASTEXITCODE -ne 0) {
+                Write-Verbose ("taskkill could not terminate process tree {0} ({1}): {2}" -f `
+                    $processId, $Reason, ($taskKillOutput -join " | "))
+            }
+        }
+        catch {
+            Write-Verbose "taskkill failed for process tree $processId ($Reason): $($_.Exception.Message)"
+        }
+    }
+
+    if ($null -ne $processId) {
+        foreach ($descendantId in @(Get-DescendantProcessIds $processId)) {
+            $null = $descendantSet.Add([int]$descendantId)
+        }
+    }
+
+    $descendantIds = @($descendantSet | Sort-Object)
+    $descendantDeadline = [DateTime]::UtcNow.AddSeconds(15)
+    do {
+        $remainingDescendants = @()
+        foreach ($descendantId in $descendantIds) {
+            $descendant = Get-Process -Id $descendantId -ErrorAction SilentlyContinue
+            if ($null -eq $descendant) {
+                continue
+            }
+
+            $remainingDescendants += $descendantId
+            try {
+                Stop-Process -Id $descendantId -Force -ErrorAction Stop
+            }
+            catch {
+                Write-Verbose "Could not terminate descendant process $descendantId ($Reason): $($_.Exception.Message)"
+            }
+        }
+
+        if ($remainingDescendants.Count -gt 0) {
+            Start-Sleep -Milliseconds 100
+        }
+    } while ($remainingDescendants.Count -gt 0 -and [DateTime]::UtcNow -lt $descendantDeadline)
+
+    $stillRunning = @($descendantIds | Where-Object {
+        $null -ne (Get-Process -Id $_ -ErrorAction SilentlyContinue)
+    })
+    if ($stillRunning.Count -gt 0) {
+        throw "Descendant processes survived bounded host cleanup: $($stillRunning -join ', ')"
+    }
+
+    if ($null -ne $processId) {
+        try {
+            if (-not $Process.HasExited) {
+                $Process.Kill()
+            }
+        }
+        catch {
+            Write-Verbose "Fallback process termination failed for $processId ($Reason): $($_.Exception.Message)"
+        }
+
+        try {
+            $null = $Process.WaitForExit(10000)
+        }
+        catch {
+            Write-Verbose "Could not confirm process $processId termination ($Reason): $($_.Exception.Message)"
+        }
+    }
 }
 
 function Invoke-BoundedHost(
@@ -97,31 +359,60 @@ function Invoke-BoundedHost(
 
     $process = [Diagnostics.Process]::new()
     $process.StartInfo = $startInfo
-    if (-not $process.Start()) {
-        throw "Host process did not start: $FilePath"
-    }
-
-    $stdoutTask = $process.StandardOutput.ReadToEndAsync()
-    $stderrTask = $process.StandardError.ReadToEndAsync()
-    if (-not $process.WaitForExit($TimeoutSeconds * 1000)) {
-        try {
-            $process.Kill()
-            $process.WaitForExit()
-        }
-        finally {
-            [IO.File]::WriteAllText($stdoutPath, $stdoutTask.Result)
-            [IO.File]::WriteAllText($stderrPath, $stderrTask.Result)
-            $process.Dispose()
+    $stdoutTask = $null
+    $stderrTask = $null
+    $timedOut = $false
+    $observedDescendants = @{}
+    try {
+        if (-not $process.Start()) {
+            throw "Host process did not start: $FilePath"
         }
 
-        throw "Host process exceeded the $TimeoutSeconds-second limit and was terminated. See $OutputDirectory"
+        $stdoutTask = $process.StandardOutput.ReadToEndAsync()
+        $stderrTask = $process.StandardError.ReadToEndAsync()
+        $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
+        $nextDescendantSnapshot = [DateTime]::UtcNow
+        while (-not $process.WaitForExit(250)) {
+            if ([DateTime]::UtcNow -ge $nextDescendantSnapshot) {
+                Save-ObservedDescendants $observedDescendants @(Get-DescendantProcessIds $process.Id)
+                $nextDescendantSnapshot = [DateTime]::UtcNow.AddSeconds(1)
+            }
+
+            if ([DateTime]::UtcNow -ge $deadline) {
+                $timedOut = $true
+                break
+            }
+        }
+
+        if ($timedOut) {
+            Save-ObservedDescendants $observedDescendants @(Get-DescendantProcessIds $process.Id)
+            Stop-ProcessTree $process "host timeout" $observedDescendants
+        }
+
+        if (-not $process.HasExited -and -not $process.WaitForExit(10000)) {
+            throw "Host process tree did not terminate after bounded cleanup. See $OutputDirectory"
+        }
+
+        $process.WaitForExit()
+        $exitCode = $process.ExitCode
+        [IO.File]::WriteAllText($stdoutPath, $stdoutTask.Result)
+        [IO.File]::WriteAllText($stderrPath, $stderrTask.Result)
+    }
+    finally {
+        if ($null -ne $process) {
+            try {
+                Stop-ProcessTree $process "host cleanup" $observedDescendants
+            }
+            finally {
+                $process.Dispose()
+            }
+        }
     }
 
-    $process.WaitForExit()
-    $exitCode = $process.ExitCode
-    [IO.File]::WriteAllText($stdoutPath, $stdoutTask.Result)
-    [IO.File]::WriteAllText($stderrPath, $stderrTask.Result)
-    $process.Dispose()
+    if ($timedOut) {
+        throw "Host process tree exceeded the $TimeoutSeconds-second limit and was terminated. See $OutputDirectory"
+    }
+
     Get-Content -LiteralPath $stdoutPath
     if ($exitCode -ne 0) {
         Get-Content -LiteralPath $stderrPath
@@ -166,14 +457,27 @@ function Invoke-ExampleHost(
     [string[]]$Arguments,
     [string]$InvisibleGha,
     [string]$SimpleGha,
-    [string]$RhinoExecutable) {
-    $output = Join-Path $runRoot ($Action.ToLowerInvariant() + "-" + $HostName.ToLowerInvariant())
+    [string]$RhinoExecutable,
+    [hashtable]$EnergyPlusWorkflow) {
+    $outputKey = switch ("$Action/$HostName") {
+        "Generate/Rhino7" { "g7" }
+        "Validate/Rhino7" { "v7" }
+        "Validate/Rhino8" { "v8" }
+        default { throw "Unknown example host/action pair: $Action/$HostName" }
+    }
+    # Short host directory names keep Rhino 7 batch evidence below legacy MAX_PATH.
+    $output = Join-Path $runRoot $outputKey
     $environment = @{
         DRAGONS_EXAMPLE_ACTION = $Action
         DRAGONS_INVISIBLE_GHA = $InvisibleGha
         DRAGONS_SIMPLE_GHA = $SimpleGha
         DRAGONS_EXAMPLES_ROOT = $examplesRoot
         DRAGONS_EXAMPLES_OUTPUT = $output
+        DRAGONS_ENERGYPLUS_GATE_STATUS = $EnergyPlusWorkflow.Status
+        DRAGONS_ENERGYPLUS_GATE_REASON = $EnergyPlusWorkflow.Reason
+        DRAGONS_ENERGYPLUS_ROOT = $EnergyPlusWorkflow.RuntimeRoot
+        DRAGONS_ENERGYPLUS_WEATHER = $EnergyPlusWorkflow.WeatherPath
+        DRAGONS_ENERGYPLUS_WORKFLOW_TIMEOUT_SECONDS = $WorkflowStageTimeoutSeconds
     }
     if ($HostName -eq "Rhino7") {
         $environment.DRAGONS_RHINO7_EXE = $RhinoExecutable
@@ -183,15 +487,108 @@ function Invoke-ExampleHost(
     }
 
     Invoke-BoundedHost $Runner $Arguments $output $environment
-    Require-File (Join-Path $output "summary.json") "$HostName $Action summary" | Out-Null
+    $summaryPath = Require-File (Join-Path $output "summary.json") "$HostName $Action summary"
+    if ($RequireEnergyPlusWorkflow) {
+        $summary = Get-Content -LiteralPath $summaryPath -Raw | ConvertFrom-Json
+        $workflowRows = @($summary.definitions | Where-Object {
+            $_.fileName -eq "14-simpledragon-two-zone-run-results-csv.gh"
+        })
+        if ($workflowRows.Count -ne 1) {
+            throw "$HostName $Action summary must contain exactly one executable EnergyPlus workflow row."
+        }
+
+        $workflow = $workflowRows[0]
+        $requiredBooleans = @(
+            "runtimeExecuted",
+            "runtimeResultVerified",
+            "runtimeCsvVerified",
+            "runtimeCacheVerified",
+            "runtimeCancellationVerified",
+            "runtimeBatchVerified",
+            "runtimeBatchCancellationVerified"
+        )
+        if ([string]$workflow.runtimeGateStatus -ne "ready") {
+            throw "$HostName $Action did not use the ready EnergyPlus gate: $($workflow.runtimeGateStatus)"
+        }
+
+        foreach ($property in $requiredBooleans) {
+            if ($workflow.$property -ne $true) {
+                throw "$HostName $Action summary did not verify $property."
+            }
+        }
+
+        $requiredStates = @{
+            runtimeFirstRunState = "Succeeded"
+            runtimeCachedRunState = "Cached"
+            runtimeCancellationState = "Cancelled"
+            runtimeFirstBatchState = "Succeeded"
+            runtimeCachedBatchState = "Succeeded"
+            runtimeBatchCancellationState = "Cancelled"
+        }
+        foreach ($property in $requiredStates.Keys) {
+            if ([string]$workflow.$property -ne $requiredStates[$property]) {
+                throw ("{0} {1} summary reported {2}='{3}', expected '{4}'." -f `
+                    $HostName, $Action, $property, $workflow.$property, $requiredStates[$property])
+            }
+        }
+
+        if ([string]$workflow.runtimeState -ne "Cancelled") {
+            throw "$HostName $Action summary did not preserve the final intentional Run cancellation state."
+        }
+
+        if ($null -eq $workflow.runtimeAnnualResult) {
+            throw "$HostName $Action summary contains no annual result."
+        }
+
+        $annualResult = [double]$workflow.runtimeAnnualResult
+        if ([double]::IsNaN($annualResult) -or [double]::IsInfinity($annualResult)) {
+            throw "$HostName $Action summary contains a non-finite annual result."
+        }
+
+        $evidenceDirectory = [IO.Path]::GetFullPath([string]$workflow.runtimeEvidenceDirectory)
+        if (-not [string]::Equals(
+                $evidenceDirectory.TrimEnd('\', '/'),
+                ([IO.Path]::GetFullPath($output)).TrimEnd('\', '/'),
+                [StringComparison]::OrdinalIgnoreCase)) {
+            throw "$HostName $Action runtime evidence escaped its host output directory: $evidenceDirectory"
+        }
+
+        $csvHashes = @($workflow.runtimeCsvSha256)
+        if ($csvHashes.Count -lt 4 -or @($csvHashes | Where-Object {
+                [string]$_ -notmatch '^[^=]+=[0-9a-f]{64}$'
+            }).Count -ne 0) {
+            throw "$HostName $Action summary did not contain complete CSV evidence hashes."
+        }
+
+        foreach ($property in @(
+                "runtimeBatchCombinedCsvSha256",
+                "runtimeBatchManifestSha256",
+                "runtimeBatchCancellationCsvSha256",
+                "runtimeBatchCancellationManifestSha256")) {
+            if ([string]$workflow.$property -notmatch '^[0-9a-f]{64}$') {
+                throw "$HostName $Action summary did not contain a valid $property hash."
+            }
+        }
+    }
 }
 
 try {
+    if ($SkipEnergyPlusWorkflow -and $RequireEnergyPlusWorkflow) {
+        throw "-SkipEnergyPlusWorkflow and -RequireEnergyPlusWorkflow cannot be used together."
+    }
+
     if ($Generate -and $Target -ne "All") {
         throw "-Generate requires -Target All so every Rhino 7-authored binary is immediately validated in Rhino 8."
     }
 
     $script:dotnet = Resolve-DotNet
+    $energyPlusWorkflow = Resolve-EnergyPlusWorkflow
+    Write-Host (
+        "EnergyPlus example workflow gate: $($energyPlusWorkflow.Status) - " +
+        $energyPlusWorkflow.Reason)
+    if ($RequireEnergyPlusWorkflow -and $energyPlusWorkflow.Status -ne "ready") {
+        throw "The required EnergyPlus example workflow is not ready: $($energyPlusWorkflow.Reason)"
+    }
     $invisibleProject = Join-Path $repoRoot "src\InvisibleDragon\GonieGonie.InvisibleDragon.GH\GonieGonie.InvisibleDragon.GH.csproj"
     $simpleProject = Join-Path $repoRoot "src\SimpleDragon\GonieGonie.SimpleDragon.GH\GonieGonie.SimpleDragon.GH.csproj"
 
@@ -215,11 +612,11 @@ try {
             Join-Path $repoRoot "temp\build\bin\GonieGonie.SimpleDragon.GH\Release\net48\GonieGonie.SimpleDragon.GH.gha"
         ) "SimpleDragon Rhino 7 GHA"
         if ($Generate) {
-            Invoke-ExampleHost "Rhino7" "Generate" $rhino7Runner @() $invisible7 $simple7 $rhino7Exe
+            Invoke-ExampleHost "Rhino7" "Generate" $rhino7Runner @() $invisible7 $simple7 $rhino7Exe $energyPlusWorkflow
         }
 
         if ($Target -in @("All", "Rhino7")) {
-            Invoke-ExampleHost "Rhino7" "Validate" $rhino7Runner @() $invisible7 $simple7 $rhino7Exe
+            Invoke-ExampleHost "Rhino7" "Validate" $rhino7Runner @() $invisible7 $simple7 $rhino7Exe $energyPlusWorkflow
         }
     }
 
@@ -237,12 +634,24 @@ try {
         $simple8 = Require-File (
             Join-Path $repoRoot "temp\build\bin\GonieGonie.SimpleDragon.GH\Release\net8.0-windows\GonieGonie.SimpleDragon.GH.gha"
         ) "SimpleDragon Rhino 8 GHA"
-        Invoke-ExampleHost "Rhino8" "Validate" $script:dotnet @($rhino8Runner) $invisible8 $simple8 $rhino8Exe
+        Invoke-ExampleHost "Rhino8" "Validate" $script:dotnet @($rhino8Runner) $invisible8 $simple8 $rhino8Exe $energyPlusWorkflow
     }
 
+    $passDescription = if ($RequireEnergyPlusWorkflow) {
+        "Grasshopper example-definition gate passed with required EnergyPlus execution"
+    }
+    else {
+        "Grasshopper structural example-definition gate passed; EnergyPlus status was $($energyPlusWorkflow.Status)"
+    }
     [IO.File]::WriteAllText(
         (Join-Path $runRoot "PASS.txt"),
-        "Grasshopper example-definition gate passed for $Target at $([DateTimeOffset]::UtcNow.ToString('O'))." + [Environment]::NewLine)
+        "$passDescription for $Target at $([DateTimeOffset]::UtcNow.ToString('O'))." + [Environment]::NewLine)
+    if ($RequireEnergyPlusWorkflow) {
+        [IO.File]::WriteAllText(
+            (Join-Path $runRoot "ENERGYPLUS-WORKFLOW-PASS.txt"),
+            "Every requested Rhino host reported ready, executed, result, CSV, cache, run cancellation, batch, and batch cancellation evidence." +
+                [Environment]::NewLine)
+    }
     Write-Host "Grasshopper example-definition gate passed. Logs: $runRoot"
 }
 catch {
