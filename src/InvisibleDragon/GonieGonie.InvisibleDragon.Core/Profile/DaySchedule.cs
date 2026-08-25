@@ -543,12 +543,10 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public static DaySchedule operator /(DaySchedule schedule, double divisor)
     {
-        if (schedule.Type == ScheduleType.OnOff)
-        {
-            throw new ScheduleOperationException("OnOff schedules cannot be divided.");
-        }
-
-        return schedule.Map(value => Divide(value, divisor), schedule.Type, schedule.Name);
+        ScheduleType resultType = schedule.Type == ScheduleType.OnOff
+            ? ScheduleType.Real
+            : schedule.Type;
+        return schedule.Map(value => Divide(value, divisor), resultType, schedule.Name);
     }
 
     public static DaySchedule operator /(double numerator, DaySchedule denominator)
@@ -579,7 +577,7 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
     public static DaySchedule operator +(DaySchedule schedule, double value)
     {
         RequireScalarArithmetic(schedule.Type, "addition");
-        return schedule.Map(item => item + value, schedule.Type, schedule.Name);
+        return schedule.Map(item => item + value, schedule.Type, $"{schedule.Name}:ADD:{value}");
     }
 
     public static DaySchedule operator +(double value, DaySchedule schedule)
@@ -596,7 +594,7 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
     public static DaySchedule operator -(DaySchedule schedule, double value)
     {
         RequireScalarArithmetic(schedule.Type, "subtraction");
-        return schedule.Map(item => item - value, schedule.Type, schedule.Name);
+        return schedule.Map(item => item - value, schedule.Type, $"{schedule.Name}:SUB:{value}");
     }
 
     public static DaySchedule operator -(double value, DaySchedule schedule)
@@ -628,7 +626,7 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
             throw new ScheduleOperationException("Logical inversion requires an OnOff schedule.");
         }
 
-        return schedule.Map(value => value == 1 ? 0 : 1, ScheduleType.OnOff, $"NOT:{schedule.Name}");
+        return schedule.Map(value => value == 1 ? 0 : 1, ScheduleType.OnOff, $"{schedule.Name}:INVERTED");
     }
 
     public bool Equals(DaySchedule? other)

@@ -41,6 +41,29 @@ public sealed class DayScheduleCompatibilityTests
         Assert.Throws<DivideByZeroException>(() => 1 / realWithZero);
     }
 
+    [Fact]
+    public void ForwardScalarArithmeticAndInversionMatchUpstreamTypesAndNames()
+    {
+        DaySchedule real = Pattern("Real", ScheduleType.Real, null, 2, 4);
+        DaySchedule onOff = Pattern("OnOff", ScheduleType.OnOff, null, 0, 1);
+
+        DaySchedule added = real + 3;
+        DaySchedule subtracted = real - 1;
+        DaySchedule dividedOnOff = onOff / 2;
+        DaySchedule inverted = !onOff;
+
+        AssertPattern(added, 5, 7);
+        Assert.Equal("Real:ADD:3", added.Name);
+        AssertPattern(subtracted, 1, 3);
+        Assert.Equal("Real:SUB:1", subtracted.Name);
+        AssertPattern(dividedOnOff, 0, 0.5);
+        Assert.Equal(ScheduleType.Real, dividedOnOff.Type);
+        Assert.Equal("OnOff", dividedOnOff.Name);
+        AssertPattern(inverted, 1, 0);
+        Assert.Equal("OnOff:INVERTED", inverted.Name);
+        Assert.Throws<DivideByZeroException>(() => onOff / 0);
+    }
+
     [Theory]
     [InlineData("eq", new double[] { 0, 1, 0, 0 })]
     [InlineData("ne", new double[] { 1, 0, 1, 1 })]

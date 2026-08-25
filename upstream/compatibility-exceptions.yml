@@ -73,3 +73,39 @@
     engineering_result: the paired EnergyPlus run completes and its results remain comparable, but the one registered Severe diagnostic must stay visible
     diagnostic_policy: any additional Severe or Fatal diagnostic remains a compatibility failure
   approval: accepted-upstream-fixture-parity
+
+- id: immutable-schedule-apply
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.apply
+  difference:
+    upstream: mutates the schedule by default, permits a mixed ScheduleType assignment, and treats an end date before the start date as an empty no-op range
+    dotnet: returns an immutable updated schedule, requires the assigned RuleSet type to match, and rejects a reversed date range
+  effect:
+    engineering_result: valid same-type date ranges produce the same later-assignment-wins schedule values and Schedule:Compact output
+    api_contract: mutation and invalid-input behavior intentionally follow the native immutable and strongly typed C# product interface
+  approval: accepted-native-api-adaptation
+
+- id: ruleset-scalar-minimum-upstream-attribute-error
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.element_min
+  difference:
+    upstream: declares scalar support but reads other.name before dispatch and raises AttributeError for scalar operands
+    dotnet: implements the declared scalar element-minimum operation while preserving RuleSet-to-RuleSet behavior
+  effect:
+    engineering_result: none for model authoring and serialized schedules
+    api_contract: the unusable upstream scalar branch is repaired
+  approval: accepted-upstream-bug-fix
+
+- id: ruleset-scalar-maximum-upstream-attribute-error
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.element_max
+  difference:
+    upstream: declares scalar support but reads other.name before dispatch and raises AttributeError for scalar operands
+    dotnet: implements the declared scalar element-maximum operation while preserving RuleSet-to-RuleSet behavior
+  effect:
+    engineering_result: none for model authoring and serialized schedules
+    api_contract: the unusable upstream scalar branch is repaired
+  approval: accepted-upstream-bug-fix

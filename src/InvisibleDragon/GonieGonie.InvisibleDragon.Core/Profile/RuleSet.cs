@@ -71,9 +71,9 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public DaySchedule? Holiday { get; }
 
-    public double Minimum => EffectiveDays().Min(day => day.Minimum);
+    public double Minimum => AllSlots().Min(day => day.Minimum);
 
-    public double Maximum => EffectiveDays().Max(day => day.Maximum);
+    public double Maximum => AllSlots().Max(day => day.Maximum);
 
     public static RuleSet Constant(string name, double value, ScheduleType type = ScheduleType.Real)
     {
@@ -129,9 +129,24 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return Combine(other, (left, right) => left * right, "MUL");
     }
 
+    public RuleSet Multiply(double value)
+    {
+        return Map(day => day * value, $"{Name}:MUL:{value}");
+    }
+
     public RuleSet Add(RuleSet other)
     {
         return Combine(other, (left, right) => left + right, "ADD");
+    }
+
+    public RuleSet Add(double value)
+    {
+        return Map(day => day + value, $"{Name}:ADD:{value}");
+    }
+
+    public RuleSet ReverseAdd(double value)
+    {
+        return Map(day => value + day, $"{value}:ADD:{Name}");
     }
 
     public RuleSet Subtract(RuleSet other)
@@ -139,9 +154,29 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return Combine(other, (left, right) => left - right, "SUB");
     }
 
+    public RuleSet Subtract(double value)
+    {
+        return Map(day => day - value, $"{Name}:SUB:{value}");
+    }
+
+    public RuleSet ReverseSubtract(double value)
+    {
+        return Map(day => value - day, $"{value}:SUB:{Name}");
+    }
+
     public RuleSet Divide(RuleSet other)
     {
         return Combine(other, (left, right) => left / right, "DIV");
+    }
+
+    public RuleSet Divide(double value)
+    {
+        return Map(day => day / value, $"{Name}:DIV:{value}");
+    }
+
+    public RuleSet ReverseDivide(double value)
+    {
+        return Map(day => value / day, $"{value}:DIV:{Name}");
     }
 
     public RuleSet LogicalAnd(RuleSet other)
@@ -154,9 +189,181 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return Combine(other, (left, right) => left | right, "OR");
     }
 
+    public RuleSet Invert()
+    {
+        return Map(day => !day, Name);
+    }
+
+    public RuleSet ElementEqual(RuleSet other)
+    {
+        return Combine(other, (left, right) => left.ElementEqual(right), "EQ");
+    }
+
+    public RuleSet ElementEqual(double value)
+    {
+        return Map(day => day.ElementEqual(value), $"{Name}:EQ:{value}");
+    }
+
+    public RuleSet ElementNotEqual(RuleSet other)
+    {
+        return Combine(other, (left, right) => left.ElementNotEqual(right), "NE");
+    }
+
+    public RuleSet ElementNotEqual(double value)
+    {
+        return Map(day => day.ElementNotEqual(value), $"{Name}:NE:{value}");
+    }
+
+    public RuleSet LessThan(RuleSet other)
+    {
+        return Combine(other, (left, right) => left.LessThan(right), "LT");
+    }
+
+    public RuleSet LessThan(double value)
+    {
+        return Map(day => day.LessThan(value), $"{Name}:LT:{value}");
+    }
+
+    public RuleSet LessThanOrEqual(RuleSet other)
+    {
+        return Combine(other, (left, right) => left.LessThanOrEqual(right), "LE");
+    }
+
+    public RuleSet LessThanOrEqual(double value)
+    {
+        return Map(day => day.LessThanOrEqual(value), $"{Name}:LE:{value}");
+    }
+
+    public RuleSet GreaterThan(RuleSet other)
+    {
+        return Combine(other, (left, right) => left.GreaterThan(right), "GT");
+    }
+
+    public RuleSet GreaterThan(double value)
+    {
+        return Map(day => day.GreaterThan(value), $"{Name}:GT:{value}");
+    }
+
+    public RuleSet GreaterThanOrEqual(RuleSet other)
+    {
+        return Combine(other, (left, right) => left.GreaterThanOrEqual(right), "GE");
+    }
+
+    public RuleSet GreaterThanOrEqual(double value)
+    {
+        return Map(day => day.GreaterThanOrEqual(value), $"{Name}:GE:{value}");
+    }
+
+    public RuleSet ElementMinimum(RuleSet other)
+    {
+        return Combine(other, (left, right) => left.ElementMinimum(right), "MIN");
+    }
+
+    public RuleSet ElementMinimum(double value)
+    {
+        return Map(day => day.ElementMinimum(value), $"{Name}:MIN:{value}");
+    }
+
+    public RuleSet ElementMaximum(RuleSet other)
+    {
+        return Combine(other, (left, right) => left.ElementMaximum(right), "MAX");
+    }
+
+    public RuleSet ElementMaximum(double value)
+    {
+        return Map(day => day.ElementMaximum(value), $"{Name}:MAX:{value}");
+    }
+
+    public RuleSet IsOn()
+    {
+        return ElementEqual(1);
+    }
+
+    public RuleSet IsOff()
+    {
+        return ElementEqual(0);
+    }
+
+    public RuleSet IsPositive()
+    {
+        return GreaterThan(0);
+    }
+
+    public RuleSet IsNegative()
+    {
+        return LessThan(0);
+    }
+
+    public RuleSet IsZero()
+    {
+        return ElementEqual(0);
+    }
+
+    public RuleSet IsNonzero()
+    {
+        return ElementNotEqual(0);
+    }
+
+    public RuleSet IsBetween(
+        double minimum,
+        double maximum,
+        bool includeMinimum = true,
+        bool includeMaximum = true)
+    {
+        RuleSet lower = includeMinimum ? GreaterThanOrEqual(minimum) : GreaterThan(minimum);
+        RuleSet upper = includeMaximum ? LessThanOrEqual(maximum) : LessThan(maximum);
+        return lower.LogicalAnd(upper);
+    }
+
+    public static RuleSet Where(
+        RuleSet condition,
+        object whenTrue,
+        object whenFalse,
+        string? name = null,
+        ScheduleType? type = null)
+    {
+        DomainGuard.NotNull(condition, nameof(condition));
+        DomainGuard.NotNull(whenTrue, nameof(whenTrue));
+        DomainGuard.NotNull(whenFalse, nameof(whenFalse));
+        if (condition.Type != ScheduleType.OnOff)
+        {
+            throw new ScheduleOperationException("RuleSet.Where requires an OnOff condition rule set.");
+        }
+
+        RuleSet trueRuleSet = CoerceWhereValue(whenTrue, type, nameof(whenTrue));
+        RuleSet falseRuleSet = CoerceWhereValue(whenFalse, type, nameof(whenFalse));
+        string resultName = name ?? "WHERE";
+        DaySchedule weekdays = DaySchedule.Where(
+            condition.Weekdays,
+            trueRuleSet.Weekdays,
+            falseRuleSet.Weekdays,
+            $"{resultName}:weekdays",
+            type: type);
+        DaySchedule weekends = DaySchedule.Where(
+            condition.Weekends,
+            trueRuleSet.Weekends,
+            falseRuleSet.Weekends,
+            $"{resultName}:weekends",
+            type: type);
+
+        return new RuleSet(
+            resultName,
+            weekdays,
+            weekends,
+            WhereOverride(condition.Monday, trueRuleSet.Monday, falseRuleSet.Monday, condition.Weekdays, trueRuleSet.Weekdays, falseRuleSet.Weekdays, $"{resultName}:monday", type),
+            WhereOverride(condition.Tuesday, trueRuleSet.Tuesday, falseRuleSet.Tuesday, condition.Weekdays, trueRuleSet.Weekdays, falseRuleSet.Weekdays, $"{resultName}:tuesday", type),
+            WhereOverride(condition.Wednesday, trueRuleSet.Wednesday, falseRuleSet.Wednesday, condition.Weekdays, trueRuleSet.Weekdays, falseRuleSet.Weekdays, $"{resultName}:wednesday", type),
+            WhereOverride(condition.Thursday, trueRuleSet.Thursday, falseRuleSet.Thursday, condition.Weekdays, trueRuleSet.Weekdays, falseRuleSet.Weekdays, $"{resultName}:thursday", type),
+            WhereOverride(condition.Friday, trueRuleSet.Friday, falseRuleSet.Friday, condition.Weekdays, trueRuleSet.Weekdays, falseRuleSet.Weekdays, $"{resultName}:friday", type),
+            WhereOverride(condition.Saturday, trueRuleSet.Saturday, falseRuleSet.Saturday, condition.Weekends, trueRuleSet.Weekends, falseRuleSet.Weekends, $"{resultName}:saturday", type),
+            WhereOverride(condition.Sunday, trueRuleSet.Sunday, falseRuleSet.Sunday, condition.Weekends, trueRuleSet.Weekends, falseRuleSet.Weekends, $"{resultName}:sunday", type),
+            WhereOverride(condition.Holiday, trueRuleSet.Holiday, falseRuleSet.Holiday, condition.Weekends, trueRuleSet.Weekends, falseRuleSet.Weekends, $"{resultName}:holiday", type),
+            weekdays.Type);
+    }
+
     public RuleSet Scale(double factor)
     {
-        return Map(day => day * factor, $"{Name}:MUL:{factor}");
+        return Multiply(factor);
     }
 
     public RuleSet NormalizeByMaximum(string? name = null)
@@ -169,6 +376,81 @@ public sealed class RuleSet : IEquatable<RuleSet>
     public RuleSet Clip(double? minimum = null, double? maximum = null, string? name = null)
     {
         return Map(day => day.Clip(minimum, maximum), name ?? $"{Name}:CLIP");
+    }
+
+    public static RuleSet operator *(RuleSet left, RuleSet right)
+    {
+        return left.Multiply(right);
+    }
+
+    public static RuleSet operator *(RuleSet ruleSet, double value)
+    {
+        return ruleSet.Multiply(value);
+    }
+
+    public static RuleSet operator *(double value, RuleSet ruleSet)
+    {
+        return ruleSet.Multiply(value);
+    }
+
+    public static RuleSet operator /(RuleSet left, RuleSet right)
+    {
+        return left.Divide(right);
+    }
+
+    public static RuleSet operator /(RuleSet ruleSet, double value)
+    {
+        return ruleSet.Divide(value);
+    }
+
+    public static RuleSet operator /(double value, RuleSet ruleSet)
+    {
+        return ruleSet.ReverseDivide(value);
+    }
+
+    public static RuleSet operator +(RuleSet left, RuleSet right)
+    {
+        return left.Add(right);
+    }
+
+    public static RuleSet operator +(RuleSet ruleSet, double value)
+    {
+        return ruleSet.Add(value);
+    }
+
+    public static RuleSet operator +(double value, RuleSet ruleSet)
+    {
+        return ruleSet.ReverseAdd(value);
+    }
+
+    public static RuleSet operator -(RuleSet left, RuleSet right)
+    {
+        return left.Subtract(right);
+    }
+
+    public static RuleSet operator -(RuleSet ruleSet, double value)
+    {
+        return ruleSet.Subtract(value);
+    }
+
+    public static RuleSet operator -(double value, RuleSet ruleSet)
+    {
+        return ruleSet.ReverseSubtract(value);
+    }
+
+    public static RuleSet operator &(RuleSet left, RuleSet right)
+    {
+        return left.LogicalAnd(right);
+    }
+
+    public static RuleSet operator |(RuleSet left, RuleSet right)
+    {
+        return left.LogicalOr(right);
+    }
+
+    public static RuleSet operator !(RuleSet ruleSet)
+    {
+        return ruleSet.Invert();
     }
 
     public bool Equals(RuleSet? other)
@@ -230,16 +512,68 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return type;
     }
 
-    private IEnumerable<DaySchedule> EffectiveDays()
+    private static RuleSet CoerceWhereValue(object value, ScheduleType? type, string parameterName)
     {
-        yield return GetDaySchedule(DayOfWeek.Monday);
-        yield return GetDaySchedule(DayOfWeek.Tuesday);
-        yield return GetDaySchedule(DayOfWeek.Wednesday);
-        yield return GetDaySchedule(DayOfWeek.Thursday);
-        yield return GetDaySchedule(DayOfWeek.Friday);
-        yield return GetDaySchedule(DayOfWeek.Saturday);
-        yield return GetDaySchedule(DayOfWeek.Sunday);
-        yield return GetDaySchedule(DayOfWeek.Sunday, true);
+        if (value is RuleSet ruleSet)
+        {
+            return ruleSet;
+        }
+
+        if (value is DaySchedule daySchedule)
+        {
+            return FromDaySchedule("WHERE", daySchedule);
+        }
+
+        if (TryGetScalar(value, out double scalar))
+        {
+            return Constant("WHERE", scalar, type ?? ScheduleType.Real);
+        }
+
+        throw new ArgumentException(
+            "A conditional value must be numeric, a DaySchedule, or a RuleSet.",
+            parameterName);
+    }
+
+    private static bool TryGetScalar(object value, out double scalar)
+    {
+        switch (value)
+        {
+            case byte number: scalar = number; return true;
+            case sbyte number: scalar = number; return true;
+            case short number: scalar = number; return true;
+            case ushort number: scalar = number; return true;
+            case int number: scalar = number; return true;
+            case uint number: scalar = number; return true;
+            case long number: scalar = number; return true;
+            case ulong number: scalar = number; return true;
+            case float number: scalar = number; return true;
+            case double number: scalar = number; return true;
+            case decimal number: scalar = (double)number; return true;
+            default: scalar = default; return false;
+        }
+    }
+
+    private static DaySchedule? WhereOverride(
+        DaySchedule? conditionOverride,
+        DaySchedule? trueOverride,
+        DaySchedule? falseOverride,
+        DaySchedule conditionFallback,
+        DaySchedule trueFallback,
+        DaySchedule falseFallback,
+        string name,
+        ScheduleType? type)
+    {
+        if (conditionOverride is null && trueOverride is null && falseOverride is null)
+        {
+            return null;
+        }
+
+        return DaySchedule.Where(
+            conditionOverride ?? conditionFallback,
+            trueOverride ?? trueFallback,
+            falseOverride ?? falseFallback,
+            name,
+            type: type);
     }
 
     private IEnumerable<DaySchedule> AllSlots()

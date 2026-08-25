@@ -57,7 +57,7 @@ public sealed class RuleSetScheduleProfileTests
         Assert.Equal(365, schedule.Count);
         Assert.Equal(1, schedule[new DateTime(2030, 8, 24)].GetDaySchedule(DayOfWeek.Monday)[0]);
         Assert.Equal(8760, schedule.IntegralHours);
-        Assert.Equal(1, schedule.Average);
+        Assert.Equal(24, schedule.Average);
     }
 
     [Fact]
@@ -79,17 +79,22 @@ public sealed class RuleSetScheduleProfileTests
     }
 
     [Fact]
-    public void CompactAnnualScheduleRejectsOverlappingPeriods()
+    public void CompactAnnualScheduleAppliesOverlappingPeriodsInGivenOrder()
     {
-        RuleSet value = RuleSet.Constant("Value", 1);
+        RuleSet early = RuleSet.Constant("Early", 1);
+        RuleSet late = RuleSet.Constant("Late", 2);
 
-        Assert.Throws<ArgumentException>(() => Schedule.FromCompact(
+        Schedule schedule = Schedule.FromCompact(
             "Overlap",
             new[]
             {
-                new SchedulePeriod(new DateTime(2026, 1, 1), new DateTime(2026, 2, 1), value),
-                new SchedulePeriod(new DateTime(2026, 2, 1), new DateTime(2026, 3, 1), value),
-            }));
+                new SchedulePeriod(new DateTime(2026, 1, 1), new DateTime(2026, 2, 1), early),
+                new SchedulePeriod(new DateTime(2026, 2, 1), new DateTime(2026, 3, 1), late),
+            });
+
+        Assert.Equal(1, schedule[new DateTime(2026, 1, 31)].Weekdays[0]);
+        Assert.Equal(2, schedule[new DateTime(2026, 2, 1)].Weekdays[0]);
+        Assert.Equal(2, schedule[new DateTime(2026, 3, 1)].Weekdays[0]);
     }
 
     [Fact]
