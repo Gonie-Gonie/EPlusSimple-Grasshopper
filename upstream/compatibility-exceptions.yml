@@ -119,3 +119,87 @@
     engineering_result: none for model authoring and serialized schedules
     api_contract: the unusable upstream scalar branch is repaired
   approval: accepted-upstream-bug-fix
+
+- id: construction-equality-native-null-operand
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: Construction.__eq__
+    symbol_hash: sha256:8bf568b5f76ed813063ea04fd2eedf087e8f2525c2be9b9febbdb150a906b019
+  difference:
+    upstream: directly reads the operand name and layers, so duck-typed operands may compare while null or incompatible operands can raise AttributeError
+    dotnet: matches the same supported name and ordered-layer values only for the CLR Construction type and follows native .NET equality by returning false for null or unrelated operands
+  effect:
+    engineering_result: none for valid typed constructions used in model authoring and EnergyPlus export
+    api_contract: invalid-operand equality follows native .NET false semantics instead of preserving the Python AttributeError
+    compatibility_evidence: same-type value parity and the exact null-operand difference remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: construction-hash-native-runtime-value
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: Construction.__hash__
+    symbol_hash: sha256:5994dd14a598a335d7945a1e39b59d93fd6bed9afbaff1308019b57bf22d0889
+  difference:
+    upstream: returns the Python 3.12 hash of name as a Python-sized integer whose value depends on PYTHONHASHSEED and the Python runtime
+    dotnet: returns the native .NET Int32 ordinal string hash of Name and preserves the same name-only dependency without claiming the same numeric value
+  effect:
+    engineering_result: none because hash codes do not participate in EnergyPlus model values or serialized engineering results
+    api_contract: hash codes are runtime-local and must not be persisted or compared numerically across Python and .NET
+    compatibility_evidence: name-only dependency and same-name invariants remain required while exact cross-runtime numeric equality is explicitly excluded
+  approval: accepted-native-api-adaptation
+
+- id: layer-equality-native-null-operand
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: Layer.__eq__
+    symbol_hash: sha256:b3fd4452af62f2d402279427187e70e6165f14be9a0b0543f8702dee39a473e6
+  difference:
+    upstream: directly reads the operand material and thickness while ignoring name, so duck-typed operands may compare while null or incompatible operands can raise AttributeError
+    dotnet: matches the same supported material and thickness values only for the CLR Layer type while ignoring Name and follows native .NET equality by returning false for null or unrelated operands
+  effect:
+    engineering_result: none for valid typed layers used in constructions and EnergyPlus export
+    api_contract: invalid-operand equality follows native .NET false semantics instead of preserving the Python AttributeError
+    compatibility_evidence: same-type value parity and the exact null-operand difference remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: layer-hash-native-runtime-value
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: Layer.__hash__
+    symbol_hash: sha256:5994dd14a598a335d7945a1e39b59d93fd6bed9afbaff1308019b57bf22d0889
+  difference:
+    upstream: returns the Python 3.12 hash of name as a Python-sized integer whose value depends on PYTHONHASHSEED and the Python runtime
+    dotnet: returns the native .NET Int32 ordinal string hash of each Name and preserves the same name-only dependency without claiming collision-dependent distinct numeric values
+  effect:
+    engineering_result: none because hash codes do not participate in EnergyPlus layer values or serialized engineering results
+    api_contract: hash codes are runtime-local and must not be persisted or compared numerically across Python and .NET
+    compatibility_evidence: equal-different-name equality and the name-only hash dependency of each object remain required, while the pinned Python fixture alone records distinct hashes and exact cross-runtime numeric equality is explicitly excluded
+  approval: accepted-native-api-adaptation
+
+- id: material-equality-native-null-operand
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: Material.__eq__
+    symbol_hash: sha256:6ef680a2e300bcb56672f0d036de1b4aea3630cb90a635a3e45002ff8535dbf5
+  difference:
+    upstream: matches same-type Material name conductivity density and specific-heat values while ignoring optical properties and roughness but raises TypeError for null or non-Material operands
+    dotnet: matches the same supported properties and follows native .NET equality by returning false for null or unrelated operands
+  effect:
+    engineering_result: none for valid typed materials used in constructions and EnergyPlus export
+    api_contract: invalid-operand equality follows native .NET false semantics instead of preserving the Python TypeError
+    compatibility_evidence: same-type value parity and the exact null-operand difference remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: schedule-type-validation-native-safety-adaptation
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: ScheduleType.validate
+    symbol_hash: sha256:b09903103bf95c771eb228f80666fb264e176204c332873795c2d96f86056bcb
+  difference:
+    upstream: accepts NaN and positive or negative infinity for Real schedules and returns Python integers for successful OnOff validation
+    dotnet: rejects non-finite values in the typed ScheduleType and DaySchedule authoring path and normalizes successful strongly typed numeric results to CLR double
+  effect:
+    engineering_result: finite typed schedule values retain the pinned behavior, while non-finite values are prevented from entering an IDF through the typed schedule path
+    api_contract: Real non-finite inputs follow the native engineering safety invariant and OnOff results follow the strongly typed CLR double contract
+    compatibility_evidence: all finite, boundary, type, and domain cases plus the three Real safety divergences and four OnOff numeric-kind adaptations remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation

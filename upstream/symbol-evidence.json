@@ -1,12 +1,455 @@
 {
-  "content_sha256": "sha256:a5bae8c98fdec7800c04ead43a07af58e13e0359ded4fd8765feef9e60e0ab3b",
-  "entries": [],
+  "content_sha256": "sha256:3f3097a0b0a20f87ecd314113cbde604f8cf8c578e2ae96580501bdcb5c25368",
+  "entries": [
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
+        "source_sha256": "sha256:dde94beae39d1ba272e735c3e0738a405fada13e6884a10dd8190f030a1f80df",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Construction.Equals"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every same-type Construction fixture case and directly observe the null-operand difference covered by the registered native invalid-operand and strong-typing adaptation.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:25738014aa3ae7bbf4eab6c38c9b52150aabf9e4c58127ee0e1f5d5b184c941a",
+          "id": "idragon-construction-equality-native-null-adaptation",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/ConstructionTests.cs",
+          "test_source_sha256": "sha256:956754259c78fcc5ffed0e3c34fdef05929f69ccbbc6e675e194f763cb484c61",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ConstructionTests.ConstructionEqualityAndHashMatchPinnedInvisibleDragonBehavior",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Construction.__eq__",
+      "upstream_symbol_hash": "sha256:8bf568b5f76ed813063ea04fd2eedf087e8f2525c2be9b9febbdb150a906b019"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
+        "source_sha256": "sha256:dde94beae39d1ba272e735c3e0738a405fada13e6884a10dd8190f030a1f80df",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Construction.GetHashCode"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations preserve Construction name-only hash dependency without comparing runtime-specific integer hash values.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:55d19ea9fafac5896d4189f2d515131c75223a5b143992eedaf3bf0bf2844bb7",
+          "id": "idragon-construction-hash-native-runtime-adaptation",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/ConstructionTests.cs",
+          "test_source_sha256": "sha256:956754259c78fcc5ffed0e3c34fdef05929f69ccbbc6e675e194f763cb484c61",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ConstructionTests.ConstructionEqualityAndHashMatchPinnedInvisibleDragonBehavior",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Construction.__hash__",
+      "upstream_symbol_hash": "sha256:5994dd14a598a335d7945a1e39b59d93fd6bed9afbaff1308019b57bf22d0889"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Layer.cs",
+        "source_sha256": "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Layer.Equals"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every same-type Layer fixture case and directly observe the null-operand difference covered by the registered native invalid-operand and strong-typing adaptation.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:5fd777262ff9d27974846bd4ca1f3f360bf6f9690c73137e498af05675380853",
+          "id": "idragon-layer-equality-native-null-adaptation",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/ConstructionTests.cs",
+          "test_source_sha256": "sha256:956754259c78fcc5ffed0e3c34fdef05929f69ccbbc6e675e194f763cb484c61",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ConstructionTests.LayerEqualityAndHashMatchPinnedInvisibleDragonBehavior",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Layer.__eq__",
+      "upstream_symbol_hash": "sha256:b3fd4452af62f2d402279427187e70e6165f14be9a0b0543f8702dee39a473e6"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Layer.cs",
+        "source_sha256": "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Layer.GetHashCode"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations preserve Layer name-only hash dependency, including equal-different-name behavior, without comparing runtime integers.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3dc3a52496bc138b2837ea63cff38e0e74aa7610ee300174028556770db32e62",
+          "id": "idragon-layer-hash-native-runtime-adaptation",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/ConstructionTests.cs",
+          "test_source_sha256": "sha256:956754259c78fcc5ffed0e3c34fdef05929f69ccbbc6e675e194f763cb484c61",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ConstructionTests.LayerEqualityAndHashMatchPinnedInvisibleDragonBehavior",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Layer.__hash__",
+      "upstream_symbol_hash": "sha256:5994dd14a598a335d7945a1e39b59d93fd6bed9afbaff1308019b57bf22d0889"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+        "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Material.Equals"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every same-type Material fixture case and directly observe the null-operand difference covered by the registered native invalid-operand and strong-typing adaptation.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:bff8d073c89f54c977f4c072430df46f50838369a865d07b9a2c1456508b3147",
+          "id": "idragon-material-equality-native-null-adaptation",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/ConstructionTests.cs",
+          "test_source_sha256": "sha256:956754259c78fcc5ffed0e3c34fdef05929f69ccbbc6e675e194f763cb484c61",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ConstructionTests.MaterialEqualityMatchesPinnedInvisibleDragonProperties",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Material.__eq__",
+      "upstream_symbol_hash": "sha256:6ef680a2e300bcb56672f0d036de1b4aea3630cb90a635a3e45002ff8535dbf5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET expose the same four ordered ScheduleType members.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:bbb8e14183faf7922ac14b8d947b767fed8b0bc8d276577173dc42a4d7131682",
+          "id": "profile-scheduletype-f873f5e8",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType",
+      "upstream_symbol_hash": "sha256:f873f5e850d3f042a188507bae21c0e74e115483b80a46f72872438e8eeaa38a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType.Fraction"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python FRACTION maps exactly to native .NET ScheduleType.Fraction.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3fac2185c52c1492100b75ab34ce6e9efb2420a2241e30514e3f4ace20c3169f",
+          "id": "profile-scheduletype-fraction-00d89a2b",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType.FRACTION",
+      "upstream_symbol_hash": "sha256:00d89a2b31e5155ae7bfb099c21c20736c7feb93222e1c11aa002d683c094528"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType.OnOff"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python ONOFF maps exactly to native .NET ScheduleType.OnOff.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f2ab8abbd6c9212241af5a7d94273c350a4423665ea005f1cbaaf1d50ebb62b9",
+          "id": "profile-scheduletype-onoff-767a33fe",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType.ONOFF",
+      "upstream_symbol_hash": "sha256:767a33fed3b7eec45baa4463546cc530953e0e3fce66d9140b9f84dd0a6e90c3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType.Real"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python REAL maps exactly to native .NET ScheduleType.Real.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:18717f5c1437d016e93084f4b805a0b2ba4d18e6170e751523925b62de65ddb8",
+          "id": "profile-scheduletype-real-daaa37fa",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType.REAL",
+      "upstream_symbol_hash": "sha256:daaa37fac4fc602f11bc3fba7684dbd4a2c4613929219c46a94d3f70997fbb0e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType.Temperature"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python TEMPERATURE maps exactly to native .NET ScheduleType.Temperature.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e54b7f57ab0376d1dc90e8e3709b14d26a09c7922d6fe342dee14432195dd890",
+          "id": "profile-scheduletype-temperature-a85b41c5",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType.TEMPERATURE",
+      "upstream_symbol_hash": "sha256:a85b41c57a152b9e1164b77ca6289d10e5d640d50e2f3b7d82f64e2172b2166a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.IdfObjectName"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "All four pinned Python ScheduleType IDF object names match live .NET output.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:dae24393948164fcc290189e2dd4cec8c1bc7d40ec4ea4329052fba078cfb340",
+          "id": "profile-scheduletype-idf-objname-6922ec3f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType.idf_objname",
+      "upstream_symbol_hash": "sha256:6922ec3fabc53f7c283f0626837f483147071358be52745fd4542adce1cfff70"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.LowerLimit"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "All four pinned Python ScheduleType lower limits match live .NET output.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b98697dc6311defbcebfe7cefb7f75171f2a544e4fe7bfbddd8c1e2a59f8961f",
+          "id": "profile-scheduletype-lower-limit-e4bfd0fa",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType.lower_limit",
+      "upstream_symbol_hash": "sha256:e4bfd0fa9092e8a15c109936aca87b8563ad28e785e0d4d3bf31f9271b8dacf2"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.NumericType"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "All four pinned Python ScheduleType numeric types match live .NET output.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:65156ae6bfb5cf55d5201f287ab069d1a8ab8eb30e05650d86b8b4727859a18e",
+          "id": "profile-scheduletype-numeric-type-723a1640",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType.numeric_type",
+      "upstream_symbol_hash": "sha256:723a16400cd165414a5b9f146557550742fbca24da2d3b341633ff7374c81389"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.ToIdfObject"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "All four ScheduleTypeLimits object types and ordered fields match pinned Python.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2af4c1f2a30fc9a3954019c06d9fdf2ae48c37256bee4ca5687d1ad465ed0966",
+          "id": "profile-scheduletype-to-idf-object-7f67c4b1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType.to_idf_object",
+      "upstream_symbol_hash": "sha256:7f67c4b1b5f76c37aa6fb6355d194b08fad513d38bae331c65f645677fa3e1a5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.UnitType"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "All four pinned Python ScheduleType unit types match live .NET output.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:fa77e8d6186e7242672af3dbde1b48f07c2701dd7cd71a723d2767c7ea9315c2",
+          "id": "profile-scheduletype-unit-type-66ea929d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType.unit_type",
+      "upstream_symbol_hash": "sha256:66ea929d97c87c709bfffcf03a76c7c8ad86b75c844cbff09074e99f8ce339f0"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.UpperLimit"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "All four pinned Python ScheduleType upper limits match live .NET output.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:58c904047faa652346c59f99b1dfaffb371e6541283f33c51ff94032382c8754",
+          "id": "profile-scheduletype-upper-limit-e921c8fa",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType.upper_limit",
+      "upstream_symbol_hash": "sha256:e921c8faee5d3b8fa3190333c18831f18e1ff4afc0e2b5ea332156933159c48b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:00232a3650332997030db95c3e2c7a1bfad77e1245d191e51037b19e34aefffe",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleTypeExtensions.ValidateValue"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET outcomes match across 44 validation cases except the registered three Real non-finite safety rejections and four OnOff CLR numeric-kind adaptations.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c79430e0b549587bd49bfd67d9f504ec9a93fc4fcccdbfcb5fb19133d2678df9",
+          "id": "profile-scheduletype-validate-b0990310",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleTypeOracleParityTests.cs",
+          "test_source_sha256": "sha256:4a7579ca545e90d10cf376d3887bda7166899a4cea4dd56ba8810c4baf958925",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleType.validate",
+      "upstream_symbol_hash": "sha256:b09903103bf95c771eb228f80666fb264e176204c332873795c2d96f86056bcb"
+    }
+  ],
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 0,
-    "passed_receipt_count": 0,
-    "receipt_count": 0,
+    "entry_count": 17,
+    "passed_receipt_count": 17,
+    "receipt_count": 17,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
