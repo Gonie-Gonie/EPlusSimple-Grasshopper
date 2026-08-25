@@ -15,13 +15,13 @@ from .evidence import ScopeDecision, ScopeDecisionRegistry
 
 POLICY_REFERENCE = "docs/compatibility.md#declared-product-compatibility-scope"
 PRODUCT_CONTRACT = "compiled_rhino_grasshopper_product"
-EXPECTED_SAFE_SCOPE_COUNT = 250
+EXPECTED_SAFE_SCOPE_COUNT = 252
 EXPECTED_BASELINE_DECISION_COUNT = 16
 EXPECTED_SELECTION_SHA256 = (
-    "sha256:36fe1d9c6a9473c20e181e09aeaaadcef859971e5847c5a71b490ee0de3c70ce"
+    "sha256:4c8fd29c0734c6fdcf39535d54941bebfbea875ae874f692128e9ed9cf0b135c"
 )
 EXPECTED_SYMBOL_CONTRACT_SHA256 = (
-    "sha256:905f776e28c75fca528ea79c1e6166d1702e2dc9713bc5b1e6bba5b152c635ed"
+    "sha256:982fc697ab8e2d32460e70e08049b2b470663129998bc8818562a9b2f1335b10"
 )
 
 BASELINE_RATIONALE = (
@@ -55,6 +55,24 @@ UNUSED_IDRAGON_TAG_RATIONALE = (
     "The IDragon SpecialTag class has no production use outside its own docstring "
     "examples. The used SimpleDragon tag family is reviewed separately, so this Python "
     "representation entry point is safely outside scope."
+)
+GREXCEL_FACTORY_RATIONALE = (
+    "Historical GREXCEL factory adapter only. The upstream production graph reaches "
+    "it only from the already excluded EXCEL-to-IDF `convert_inputformat` branch, "
+    "while `read_grexcel` is a package alias and `run_grexcel` calls `excel2grjson` "
+    "directly. The body delegates to the already excluded `excel2grjson`, then to "
+    "separately gated `from_grjson`, and deletes the temporary JSON; it adds no GRM, "
+    "IDF, or result semantics. The compiled Grasshopper products expose GRM JSON "
+    "read/write only, and Excel/GREXCEL input conversion and execution are explicitly "
+    "outside the declared product scope."
+)
+ORPHAN_IDRAGON_TAG_TYPE_RATIONALE = (
+    "The IDragon `SpecialTag` class has no production references outside its own "
+    "docstring examples, declares no enum values, and has no C# product counterpart. "
+    "Its only public members are `__format__`, `__repr__`, and `__str__`, all already "
+    "approved out of scope; the used EPlusSimple tag family remains separately gated. "
+    "Keeping the orphan class declaration in `needs_reverification` would therefore "
+    "reintroduce the excluded Python representation/API surface."
 )
 AHU_DEEPCOPY_RATIONALE = (
     "No upstream production call site deep-copies an IDragon AirHandlingUnit. Python "
@@ -259,7 +277,10 @@ def build_safe_scope_plan(
         )
     }
     if counts["out_of_scope"] != EXPECTED_SAFE_SCOPE_COUNT:
-        raise ConfigurationError("scope policy did not produce exactly 250 out-of-scope rows")
+        raise ConfigurationError(
+            "scope policy did not produce exactly "
+            f"{EXPECTED_SAFE_SCOPE_COUNT} out-of-scope rows"
+        )
     return SafeScopePlan(
         planned_decisions,
         planned_matrix,
@@ -290,6 +311,10 @@ def _reviewed_rationales(
 
     add(BASELINE_SCOPE_KEYS, BASELINE_RATIONALE)
     add(_whole_file(keys, "src/epsimple/debug.py"), DEBUG_ADAPTER_RATIONALE)
+    add(
+        {("src/epsimple/core/model.py", "GreenRetrofitModel.from_excel")},
+        GREXCEL_FACTORY_RATIONALE,
+    )
 
     standard_equality: set[tuple[str, str]] = set()
     standard_equality |= _members(
@@ -326,6 +351,10 @@ def _reviewed_rationales(
             ("src/idragon/constants.py", "SpecialTag.__str__"),
         },
         UNUSED_IDRAGON_TAG_RATIONALE,
+    )
+    add(
+        {("src/idragon/constants.py", "SpecialTag")},
+        ORPHAN_IDRAGON_TAG_TYPE_RATIONALE,
     )
     add(
         {("src/idragon/dragon/hvac.py", "AirHandlingUnit.__deepcopy__")},

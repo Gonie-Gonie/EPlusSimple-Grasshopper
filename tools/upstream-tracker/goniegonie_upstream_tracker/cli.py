@@ -212,7 +212,7 @@ def _create_parser() -> argparse.ArgumentParser:
 
     scope_parser = commands.add_parser(
         "apply-safe-scope",
-        help="Generate the exact reviewed 250-symbol product-scope integration.",
+        help="Generate the exact reviewed 252-symbol product-scope integration.",
     )
     scope_parser.add_argument(
         "--output-dir",

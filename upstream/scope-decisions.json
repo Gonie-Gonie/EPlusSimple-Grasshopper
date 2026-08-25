@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:1ed4be39b3cba98d6c3818218b0873bf31bf831301362b2f6d6ca2feea0813c9",
+  "content_sha256": "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6",
   "decisions": [
     {
       "approval": "approved",
@@ -924,6 +924,17 @@
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope.",
       "symbol": "GreenRetrofitModel.__str__",
       "upstream_symbol_hash": "sha256:39c346fc45abacc4f01d1d0e4e33233c9e458c8a81ee0e8b2ed426cfa9d057d3"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-core-model-py-greenretrofitmodel-from-excel-46935cc1",
+      "path": "src/epsimple/core/model.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "Historical GREXCEL factory adapter only. The upstream production graph reaches it only from the already excluded EXCEL-to-IDF `convert_inputformat` branch, while `read_grexcel` is a package alias and `run_grexcel` calls `excel2grjson` directly. The body delegates to the already excluded `excel2grjson`, then to separately gated `from_grjson`, and deletes the temporary JSON; it adds no GRM, IDF, or result semantics. The compiled Grasshopper products expose GRM JSON read/write only, and Excel/GREXCEL input conversion and execution are explicitly outside the declared product scope.",
+      "symbol": "GreenRetrofitModel.from_excel",
+      "upstream_symbol_hash": "sha256:46935cc1aaff18b83281df944eb9f099d53c5894f7427ee98fedb8dccefdc206"
     },
     {
       "approval": "approved",
@@ -2017,6 +2028,17 @@
     {
       "approval": "approved",
       "decision": "out_of_scope",
+      "id": "scope-src-idragon-constants-py-specialtag-3a4b3781",
+      "path": "src/idragon/constants.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The IDragon `SpecialTag` class has no production references outside its own docstring examples, declares no enum values, and has no C# product counterpart. Its only public members are `__format__`, `__repr__`, and `__str__`, all already approved out of scope; the used EPlusSimple tag family remains separately gated. Keeping the orphan class declaration in `needs_reverification` would therefore reintroduce the excluded Python representation/API surface.",
+      "symbol": "SpecialTag",
+      "upstream_symbol_hash": "sha256:3a4b37818bef17a26ede76602478983f0d70840c5a61fce8475f47e491466e41"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
       "id": "scope-src-idragon-constants-py-specialtag-format-4ef932bb",
       "path": "src/idragon/constants.py",
       "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
@@ -2755,9 +2777,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-scope-decisions.v1",
   "summary": {
-    "approved_count": 250,
-    "decision_count": 250,
-    "out_of_scope_count": 250
+    "approved_count": 252,
+    "decision_count": 252,
+    "out_of_scope_count": 252
   },
   "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897"
 }

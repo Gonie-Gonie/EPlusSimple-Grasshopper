@@ -29,10 +29,10 @@ NEEDS_RATIONALE = (
     "No symbol-level equivalence, verified exception, or out-of-scope evidence is registered."
 )
 EXPECTED_FINAL_DECISIONS_SHA256 = (
-    "sha256:1ed4be39b3cba98d6c3818218b0873bf31bf831301362b2f6d6ca2feea0813c9"
+    "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:aecb92e5da26edfad8e86e4d6d5ac7b7f7ec7351c1c1b289679ceef416988082"
+    "sha256:e1f17036ca714959b6612ef854f7ebec058e507ad57aa27fec41247213294587"
 )
 
 
@@ -54,7 +54,7 @@ class SafeScopePolicyTests(unittest.TestCase):
             REPOSITORY_ROOT,
         )
 
-    def test_baseline_integration_adds_exactly_234_reviewed_decisions(self) -> None:
+    def test_baseline_integration_adds_exactly_236_reviewed_decisions(self) -> None:
         baseline_matrix, baseline_decisions = self._baseline()
 
         plan = build_safe_scope_plan(
@@ -64,14 +64,14 @@ class SafeScopePolicyTests(unittest.TestCase):
         )
 
         self.assertEqual(EXPECTED_BASELINE_DECISION_COUNT, plan.previous_decision_count)
-        self.assertEqual(234, plan.new_decision_count)
+        self.assertEqual(236, plan.new_decision_count)
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
                 "equivalent": 0,
                 "exception": 0,
-                "needs_reverification": 992,
-                "out_of_scope": 250,
+                "needs_reverification": 990,
+                "out_of_scope": 252,
             },
             plan.classification_counts,
         )
@@ -108,6 +108,59 @@ class SafeScopePolicyTests(unittest.TestCase):
                 for key in RISKY_AUTHORING_KEYS
             )
         )
+        self.assertEqual(
+            "needs_reverification",
+            entries[("src/idragon/imugi.py", "IdfObjectList.set_wwr")].classification,
+        )
+
+    def test_terminal_scope_additions_are_exactly_bound(self) -> None:
+        plan = build_safe_scope_plan(
+            self.configuration.inventory,
+            self.configuration.matrix,
+            self.configuration.scope_decisions,
+        )
+        decisions = plan.decisions.decisions_by_key
+        entries = plan.matrix.entries_by_key
+        expected = {
+            ("src/epsimple/core/model.py", "GreenRetrofitModel.from_excel"): {
+                "id": "scope-src-epsimple-core-model-py-greenretrofitmodel-from-excel-46935cc1",
+                "hash": "sha256:46935cc1aaff18b83281df944eb9f099d53c5894f7427ee98fedb8dccefdc206",
+                "rationale": (
+                    "Historical GREXCEL factory adapter only. The upstream production graph reaches "
+                    "it only from the already excluded EXCEL-to-IDF `convert_inputformat` branch, "
+                    "while `read_grexcel` is a package alias and `run_grexcel` calls `excel2grjson` "
+                    "directly. The body delegates to the already excluded `excel2grjson`, then to "
+                    "separately gated `from_grjson`, and deletes the temporary JSON; it adds no GRM, "
+                    "IDF, or result semantics. The compiled Grasshopper products expose GRM JSON "
+                    "read/write only, and Excel/GREXCEL input conversion and execution are explicitly "
+                    "outside the declared product scope."
+                ),
+            },
+            ("src/idragon/constants.py", "SpecialTag"): {
+                "id": "scope-src-idragon-constants-py-specialtag-3a4b3781",
+                "hash": "sha256:3a4b37818bef17a26ede76602478983f0d70840c5a61fce8475f47e491466e41",
+                "rationale": (
+                    "The IDragon `SpecialTag` class has no production references outside its own "
+                    "docstring examples, declares no enum values, and has no C# product counterpart. "
+                    "Its only public members are `__format__`, `__repr__`, and `__str__`, all already "
+                    "approved out of scope; the used EPlusSimple tag family remains separately gated. "
+                    "Keeping the orphan class declaration in `needs_reverification` would therefore "
+                    "reintroduce the excluded Python representation/API surface."
+                ),
+            },
+        }
+        for key, values in expected.items():
+            decision = decisions[key]
+            self.assertEqual(values["id"], decision.identifier)
+            self.assertEqual(values["hash"], decision.upstream_symbol_hash)
+            self.assertEqual(values["rationale"], decision.rationale)
+            self.assertEqual("approved", decision.approval)
+            self.assertEqual("out_of_scope", entries[key].classification)
+            self.assertEqual(values["rationale"], entries[key].rationale)
+            self.assertEqual(
+                (f"upstream/scope-decisions.json#{values['id']}",),
+                entries[key].evidence,
+            )
 
     def test_plan_is_idempotent_after_integration(self) -> None:
         baseline_matrix, baseline_decisions = self._baseline()

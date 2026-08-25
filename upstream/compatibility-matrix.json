@@ -358,7 +358,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -576,7 +576,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
+    "out_of_scope",
     "out_of_scope",
     "out_of_scope",
     "out_of_scope",
@@ -1243,7 +1243,7 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:aecb92e5da26edfad8e86e4d6d5ac7b7f7ec7351c1c1b289679ceef416988082",
+  "content_sha256": "sha256:e1f17036ca714959b6612ef854f7ebec058e507ad57aa27fec41247213294587",
   "details": [
     {
       "evidence": [
@@ -1832,6 +1832,13 @@
       ],
       "index": 344,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-model-py-greenretrofitmodel-from-excel-46935cc1"
+      ],
+      "index": 358,
+      "rationale": "Historical GREXCEL factory adapter only. The upstream production graph reaches it only from the already excluded EXCEL-to-IDF `convert_inputformat` branch, while `read_grexcel` is a package alias and `run_grexcel` calls `excel2grjson` directly. The body delegates to the already excluded `excel2grjson`, then to separately gated `from_grjson`, and deletes the temporary JSON; it adds no GRM, IDF, or result semantics. The compiled Grasshopper products expose GRM JSON read/write only, and Excel/GREXCEL input conversion and execution are explicitly outside the declared product scope."
     },
     {
       "evidence": [
@@ -2528,6 +2535,13 @@
     },
     {
       "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-constants-py-specialtag-3a4b3781"
+      ],
+      "index": 576,
+      "rationale": "The IDragon `SpecialTag` class has no production references outside its own docstring examples, declares no enum values, and has no C# product counterpart. Its only public members are `__format__`, `__repr__`, and `__str__`, all already approved out of scope; the used EPlusSimple tag family remains separately gated. Keeping the orphan class declaration in `needs_reverification` would therefore reintroduce the excluded Python representation/API surface."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-constants-py-specialtag-format-4ef932bb"
       ],
       "index": 577,
@@ -3004,8 +3018,8 @@
     "classification_counts": {
       "equivalent": 0,
       "exception": 0,
-      "needs_reverification": 992,
-      "out_of_scope": 250
+      "needs_reverification": 990,
+      "out_of_scope": 252
     },
     "entry_count": 1242
   },

@@ -40,9 +40,9 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(992, len(compatibility.needs_reverification))
+        self.assertEqual(990, len(compatibility.needs_reverification))
         self.assertEqual(
-            250,
+            252,
             sum(
                 entry.classification == "out_of_scope"
                 for entry in compatibility.matrix.entries
@@ -68,6 +68,26 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(
             "needs_reverification",
             by_key[("src/epsimple/utils.py", "GRJSON_FORMAT")].classification,
+        )
+        terminal_scope = {
+            (
+                "src/epsimple/core/model.py",
+                "GreenRetrofitModel.from_excel",
+            ): "scope-src-epsimple-core-model-py-greenretrofitmodel-from-excel-46935cc1",
+            (
+                "src/idragon/constants.py",
+                "SpecialTag",
+            ): "scope-src-idragon-constants-py-specialtag-3a4b3781",
+        }
+        for key, decision_id in terminal_scope.items():
+            self.assertEqual("out_of_scope", by_key[key].classification)
+            self.assertEqual(
+                (f"upstream/scope-decisions.json#{decision_id}",),
+                by_key[key].evidence,
+            )
+        self.assertEqual(
+            "needs_reverification",
+            by_key[("src/idragon/imugi.py", "IdfObjectList.set_wwr")].classification,
         )
         people_activity = by_key[
             (

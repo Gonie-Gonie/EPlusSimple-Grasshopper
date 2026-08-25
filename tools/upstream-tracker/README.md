@@ -84,8 +84,8 @@ Regenerate the reviewed native-product scope integration deterministically:
 
 The command writes candidate `scope-decisions.json` and
 `compatibility-matrix.json` files beneath `temp/upstream-tracker/safe-scope`.
-Its checked-in policy selects exactly 250 hash-bound symbols: the original 16
-approved decisions plus 234 reviewed Python adapter/protocol decisions. The
+Its checked-in policy selects exactly 252 hash-bound symbols: the original 16
+approved decisions plus 236 reviewed Python adapter/protocol decisions. The
 selection-key and exact-symbol-contract digests are fixed, so an upstream API
 change fails closed instead of silently expanding the excluded surface. Eleven
 mixed or production authoring methods, including `IdfObjectList.insert` (`IDF.append`,
