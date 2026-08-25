@@ -113,6 +113,19 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public double NonzeroHours => Values.Count(value => value != 0) / (double)IntervalsPerHour;
 
+    public bool HasPositive => Values.Any(value => value > 0);
+
+    public bool HasNonzero => Values.Any(value => value != 0);
+
+    public double PositiveAverage
+    {
+        get
+        {
+            double[] positiveValues = Values.Where(value => value > 0).ToArray();
+            return positiveValues.Length == 0 ? 0 : positiveValues.Average();
+        }
+    }
+
     public bool IsConstant => Values.All(value => value.Equals(Values[0]));
 
     public static ValidationResult Validate(IEnumerable<double> values, ScheduleType type)
@@ -305,9 +318,19 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         return Compare(value, (left, right) => left == right, "EQ");
     }
 
+    public DaySchedule ElementEqual(DaySchedule other)
+    {
+        return Compare(other, (left, right) => left == right, "EQ");
+    }
+
     public DaySchedule ElementNotEqual(double value)
     {
         return Compare(value, (left, right) => left != right, "NE");
+    }
+
+    public DaySchedule ElementNotEqual(DaySchedule other)
+    {
+        return Compare(other, (left, right) => left != right, "NE");
     }
 
     public DaySchedule LessThan(double value)
@@ -315,9 +338,19 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         return Compare(value, (left, right) => left < right, "LT");
     }
 
+    public DaySchedule LessThan(DaySchedule other)
+    {
+        return Compare(other, (left, right) => left < right, "LT");
+    }
+
     public DaySchedule LessThanOrEqual(double value)
     {
         return Compare(value, (left, right) => left <= right, "LE");
+    }
+
+    public DaySchedule LessThanOrEqual(DaySchedule other)
+    {
+        return Compare(other, (left, right) => left <= right, "LE");
     }
 
     public DaySchedule GreaterThan(double value)
@@ -325,49 +358,160 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         return Compare(value, (left, right) => left > right, "GT");
     }
 
+    public DaySchedule GreaterThan(DaySchedule other)
+    {
+        return Compare(other, (left, right) => left > right, "GT");
+    }
+
     public DaySchedule GreaterThanOrEqual(double value)
     {
         return Compare(value, (left, right) => left >= right, "GE");
     }
 
+    public DaySchedule GreaterThanOrEqual(DaySchedule other)
+    {
+        return Compare(other, (left, right) => left >= right, "GE");
+    }
+
     public DaySchedule ElementMinimum(DaySchedule other)
     {
         RequireSameNonOnOffType(other, "minimum");
-        return Zip(other, Math.Min, Type, "MIN");
+        return new DaySchedule(
+            $"{Name}:MIN:{other.Name}",
+            Enumerable.Range(0, FixedLength).Select(index => Math.Min(Values[index], other.Values[index])),
+            Type);
+    }
+
+    public DaySchedule ElementMinimum(double other)
+    {
+        RequireElementExtremaType("minimum");
+        return new DaySchedule(
+            $"{Name}:MIN:{other}",
+            Values.Select(value => Math.Min(value, other)),
+            Type);
     }
 
     public DaySchedule ElementMaximum(DaySchedule other)
     {
         RequireSameNonOnOffType(other, "maximum");
-        return Zip(other, Math.Max, Type, "MAX");
+        return new DaySchedule(
+            $"{Name}:MAX:{other.Name}",
+            Enumerable.Range(0, FixedLength).Select(index => Math.Max(Values[index], other.Values[index])),
+            Type);
+    }
+
+    public DaySchedule ElementMaximum(double other)
+    {
+        RequireElementExtremaType("maximum");
+        return new DaySchedule(
+            $"{Name}:MAX:{other}",
+            Values.Select(value => Math.Max(value, other)),
+            Type);
+    }
+
+    public DaySchedule IsOn()
+    {
+        return ElementEqual(1);
+    }
+
+    public DaySchedule IsOff()
+    {
+        return ElementEqual(0);
+    }
+
+    public DaySchedule IsPositive()
+    {
+        return GreaterThan(0);
+    }
+
+    public DaySchedule IsNegative()
+    {
+        return LessThan(0);
+    }
+
+    public DaySchedule IsZero()
+    {
+        return ElementEqual(0);
+    }
+
+    public DaySchedule IsNonzero()
+    {
+        return ElementNotEqual(0);
+    }
+
+    public DaySchedule IsBetween(
+        double minimum,
+        double maximum,
+        bool includeMinimum = true,
+        bool includeMaximum = true)
+    {
+        DaySchedule lower = includeMinimum ? GreaterThanOrEqual(minimum) : GreaterThan(minimum);
+        DaySchedule upper = includeMaximum ? LessThanOrEqual(maximum) : LessThan(maximum);
+        return lower & upper;
     }
 
     public static DaySchedule Where(
         DaySchedule condition,
         DaySchedule whenTrue,
         DaySchedule whenFalse,
-        string? name = null)
+        string? name = null,
+        ScheduleType? type = null)
     {
-        DomainGuard.NotNull(condition, nameof(condition));
-        DomainGuard.NotNull(whenTrue, nameof(whenTrue));
-        DomainGuard.NotNull(whenFalse, nameof(whenFalse));
+        ScheduleType resultType = ResolveWhereType(condition, type, whenTrue, whenFalse);
+        return CreateWhere(
+            condition,
+            index => whenTrue[index],
+            index => whenFalse[index],
+            resultType,
+            name);
+    }
 
-        if (condition.Type != ScheduleType.OnOff)
-        {
-            throw new ScheduleOperationException("The condition schedule must have OnOff type.");
-        }
+    public static DaySchedule Where(
+        DaySchedule condition,
+        DaySchedule whenTrue,
+        double whenFalse,
+        string? name = null,
+        ScheduleType? type = null)
+    {
+        ScheduleType resultType = ResolveWhereType(condition, type, whenTrue);
+        return CreateWhere(
+            condition,
+            index => whenTrue[index],
+            _ => whenFalse,
+            resultType,
+            name);
+    }
 
-        if (whenTrue.Type != whenFalse.Type)
-        {
-            throw new ScheduleOperationException("Conditional result schedules must have the same type.");
-        }
+    public static DaySchedule Where(
+        DaySchedule condition,
+        double whenTrue,
+        DaySchedule whenFalse,
+        string? name = null,
+        ScheduleType? type = null)
+    {
+        ScheduleType resultType = ResolveWhereType(condition, type, whenFalse);
+        return CreateWhere(
+            condition,
+            _ => whenTrue,
+            index => whenFalse[index],
+            resultType,
+            name);
+    }
 
-        return new DaySchedule(
-            name ?? "WHERE",
-            Enumerable.Range(0, FixedLength).Select(
-                index => condition[index] == 1 ? whenTrue[index] : whenFalse[index]),
-            whenTrue.Type,
-            whenTrue.Unit == whenFalse.Unit ? whenTrue.Unit : null);
+    public static DaySchedule Where(
+        DaySchedule condition,
+        double whenTrue,
+        double whenFalse,
+        string? name = null,
+        ScheduleType? type = null)
+    {
+        ScheduleType resultType = ResolveWhereType(condition, type);
+        return CreateWhere(
+            condition,
+            _ => whenTrue,
+            _ => whenFalse,
+            resultType,
+            name);
     }
 
     public static DaySchedule operator *(DaySchedule left, DaySchedule right)
@@ -407,6 +551,25 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         return schedule.Map(value => Divide(value, divisor), schedule.Type, schedule.Name);
     }
 
+    public static DaySchedule operator /(double numerator, DaySchedule denominator)
+    {
+        DomainGuard.NotNull(denominator, nameof(denominator));
+        if (denominator.Type != ScheduleType.Real)
+        {
+            throw new ScheduleOperationException("A scalar can only be divided by a Real schedule.");
+        }
+
+        if (denominator.Values.Any(value => value == 0))
+        {
+            throw new DivideByZeroException("A scalar cannot be divided by a schedule containing zero.");
+        }
+
+        return new DaySchedule(
+            denominator.Name,
+            denominator.Values.Select(value => numerator / value),
+            ScheduleType.Real);
+    }
+
     public static DaySchedule operator +(DaySchedule left, DaySchedule right)
     {
         ScheduleType resultType = AdditionType(left.Type, right.Type);
@@ -434,6 +597,16 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
     {
         RequireScalarArithmetic(schedule.Type, "subtraction");
         return schedule.Map(item => item - value, schedule.Type, schedule.Name);
+    }
+
+    public static DaySchedule operator -(double value, DaySchedule schedule)
+    {
+        DomainGuard.NotNull(schedule, nameof(schedule));
+        RequireScalarArithmetic(schedule.Type, "reverse subtraction");
+        return new DaySchedule(
+            $"{schedule.Name}:SUB:{value}",
+            schedule.Values.Select(item => value - item),
+            schedule.Type);
     }
 
     public static DaySchedule operator &(DaySchedule left, DaySchedule right)
@@ -500,11 +673,69 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     private DaySchedule Compare(double value, Func<double, double, bool> comparison, string operation)
     {
-        DomainGuard.Finite(value, nameof(value));
         return new DaySchedule(
             $"{Name}:{operation}:{value}",
             Values.Select(item => comparison(item, value) ? 1d : 0d),
             ScheduleType.OnOff);
+    }
+
+    private DaySchedule Compare(
+        DaySchedule other,
+        Func<double, double, bool> comparison,
+        string operation)
+    {
+        DomainGuard.NotNull(other, nameof(other));
+        return new DaySchedule(
+            $"{Name}:{operation}:{other.Name}",
+            Enumerable.Range(0, FixedLength).Select(
+                index => comparison(Values[index], other.Values[index]) ? 1d : 0d),
+            ScheduleType.OnOff);
+    }
+
+    private static DaySchedule CreateWhere(
+        DaySchedule condition,
+        Func<int, double> whenTrue,
+        Func<int, double> whenFalse,
+        ScheduleType type,
+        string? name)
+    {
+        return new DaySchedule(
+            name ?? "WHERE",
+            Enumerable.Range(0, FixedLength).Select(
+                index => condition[index] == 1 ? whenTrue(index) : whenFalse(index)),
+            type);
+    }
+
+    private static ScheduleType ResolveWhereType(
+        DaySchedule condition,
+        ScheduleType? requestedType,
+        params DaySchedule[] resultSchedules)
+    {
+        DomainGuard.NotNull(condition, nameof(condition));
+        if (condition.Type != ScheduleType.OnOff)
+        {
+            throw new ScheduleOperationException("The condition schedule must have OnOff type.");
+        }
+
+        if (requestedType.HasValue && !Enum.IsDefined(typeof(ScheduleType), requestedType.Value))
+        {
+            throw new ArgumentOutOfRangeException(nameof(requestedType), requestedType, "Unknown schedule type.");
+        }
+
+        foreach (DaySchedule schedule in resultSchedules)
+        {
+            DomainGuard.NotNull(schedule, nameof(resultSchedules));
+        }
+
+        ScheduleType resultType = requestedType
+            ?? resultSchedules.FirstOrDefault()?.Type
+            ?? ScheduleType.Real;
+        if (resultSchedules.Any(schedule => schedule.Type != resultType))
+        {
+            throw new ScheduleOperationException("Conditional result schedules must have the same requested type.");
+        }
+
+        return resultType;
     }
 
     private DaySchedule Map(
@@ -535,6 +766,14 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         if (Type == ScheduleType.OnOff || Type != other.Type)
         {
             throw new ScheduleOperationException($"Element-wise {operation} requires matching non-OnOff schedule types.");
+        }
+    }
+
+    private void RequireElementExtremaType(string operation)
+    {
+        if (Type == ScheduleType.OnOff)
+        {
+            throw new ScheduleOperationException($"Element-wise {operation} is not defined for OnOff schedules.");
         }
     }
 
