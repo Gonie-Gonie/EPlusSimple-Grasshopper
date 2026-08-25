@@ -1,0 +1,820 @@
+{
+  "runtime": {
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.invisibledragon.schedule-type-oracle.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:28911386caf6d923039bdb75e4f158df1102e0a5415fce1567ccbdaaf7eb5f09",
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:ab32e308dcdeb23d0a598da40ac0c17bc956f2b8bc04cfa374c4dbb45c143bdf",
+      "symbol": "ScheduleType",
+      "symbol_hash": "sha256:f873f5e850d3f042a188507bae21c0e74e115483b80a46f72872438e8eeaa38a"
+    },
+    {
+      "body_hash": "sha256:180e95af8f352de30f95a7aab9cf260d8900e8eefcc7f967903524c67df01337",
+      "kind": "constant",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:7100ba733404ecfbc90a098f664a617426ceb1956629bf091f8086bd2d974b56",
+      "symbol": "ScheduleType.FRACTION",
+      "symbol_hash": "sha256:00d89a2b31e5155ae7bfb099c21c20736c7feb93222e1c11aa002d683c094528"
+    },
+    {
+      "body_hash": "sha256:e5d30f5a4717edba4b636189c7104ba402312af0f37a0322ab30d96e9028effc",
+      "kind": "constant",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:bee1a2f35efd141b8c644a68688a22298312ddf1ee5448d0d353ee7771abe51f",
+      "symbol": "ScheduleType.ONOFF",
+      "symbol_hash": "sha256:767a33fed3b7eec45baa4463546cc530953e0e3fce66d9140b9f84dd0a6e90c3"
+    },
+    {
+      "body_hash": "sha256:5e33353699aba9cea783e15f39596e5998779586232942ed3083a82d71da98f1",
+      "kind": "constant",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:58f8d44abc854e2110c94ae98f756579644a7e81a64732d918182b491a87025f",
+      "symbol": "ScheduleType.REAL",
+      "symbol_hash": "sha256:daaa37fac4fc602f11bc3fba7684dbd4a2c4613929219c46a94d3f70997fbb0e"
+    },
+    {
+      "body_hash": "sha256:960c71ce80c8e881570f23b3b97449289eb0f9d272e2981d3e4f98f38462dcff",
+      "kind": "constant",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:cefdc4a047ecd9fab6036b2ae7ca6ed79db8b7029eb0a38a80b5063586d8319e",
+      "symbol": "ScheduleType.TEMPERATURE",
+      "symbol_hash": "sha256:a85b41c57a152b9e1164b77ca6289d10e5d640d50e2f3b7d82f64e2172b2166a"
+    },
+    {
+      "body_hash": "sha256:8eb9d768e09d679fdc9fab4c8c8e90bf5497029ff086b3f43d442f5da57b2d6d",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ScheduleType.idf_objname",
+      "symbol_hash": "sha256:6922ec3fabc53f7c283f0626837f483147071358be52745fd4542adce1cfff70"
+    },
+    {
+      "body_hash": "sha256:15622b6202cb5064782205cc76e08481d184eb9406ccc0bf50472f07dcdef267",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:caedbe3c54ed8ed7e4066f3e8fe080219f5c99288ff4bb1dc988c3fd5d4f6dce",
+      "symbol": "ScheduleType.lower_limit",
+      "symbol_hash": "sha256:e4bfd0fa9092e8a15c109936aca87b8563ad28e785e0d4d3bf31f9271b8dacf2"
+    },
+    {
+      "body_hash": "sha256:febf1738fe3d1b19ab7f7a29857ee6d5543653b1508fa5b0ba17d123dd804503",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ScheduleType.numeric_type",
+      "symbol_hash": "sha256:723a16400cd165414a5b9f146557550742fbca24da2d3b341633ff7374c81389"
+    },
+    {
+      "body_hash": "sha256:ad3d5580cad0c3828ce33b43e3fefb7eef0dbaf84a97b70b9fdd1a1d3d8aa744",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:aad6529bd53e6b00992b78af16eec99debb2fe8c83c692755dbdc772c8094008",
+      "symbol": "ScheduleType.to_idf_object",
+      "symbol_hash": "sha256:7f67c4b1b5f76c37aa6fb6355d194b08fad513d38bae331c65f645677fa3e1a5"
+    },
+    {
+      "body_hash": "sha256:64dc3e3efa5be06293773d32a8ca13de7965a498da7f9514e9b0183b6a0e1046",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ScheduleType.unit_type",
+      "symbol_hash": "sha256:66ea929d97c87c709bfffcf03a76c7c8ad86b75c844cbff09074e99f8ce339f0"
+    },
+    {
+      "body_hash": "sha256:d39d90b6cd804644941f6027df74b28ffdf44e9fcd19c565a4a2e40f6fa984ec",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:caedbe3c54ed8ed7e4066f3e8fe080219f5c99288ff4bb1dc988c3fd5d4f6dce",
+      "symbol": "ScheduleType.upper_limit",
+      "symbol_hash": "sha256:e921c8faee5d3b8fa3190333c18831f18e1ff4afc0e2b5ea332156933159c48b"
+    },
+    {
+      "body_hash": "sha256:0909d43e8e899c313213225bd06c222704dab65d996b0ce9ecae1cc4aa6a7636",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:0d33c9cf66f28ccca1ee840945250450f2280d843661c524209ed698f4897f4c",
+      "symbol": "ScheduleType.validate",
+      "symbol_hash": "sha256:b09903103bf95c771eb228f80666fb264e176204c332873795c2d96f86056bcb"
+    }
+  ],
+  "types": [
+    {
+      "enum_name": "TEMPERATURE",
+      "idf_object": {
+        "fields": [
+          "ScheduleTypeLimits:Temperature",
+          -50,
+          200,
+          "Continuous",
+          "Temperature"
+        ],
+        "object_type": "ScheduleTypeLimits"
+      },
+      "idf_objname": "ScheduleTypeLimits:Temperature",
+      "lower_limit": -50,
+      "numeric_type": "Continuous",
+      "type": "temperature",
+      "unit_type": "Temperature",
+      "upper_limit": 200,
+      "validation_cases": [
+        {
+          "id": "boolean-false",
+          "input": {
+            "kind": "boolean",
+            "value": false
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 0.0
+            }
+          }
+        },
+        {
+          "id": "boolean-true",
+          "input": {
+            "kind": "boolean",
+            "value": true
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 1.0
+            }
+          }
+        },
+        {
+          "id": "interior-fractional",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "float",
+            "value": 20.5
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 20.5
+            }
+          }
+        },
+        {
+          "id": "just-above-lower",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "float",
+            "value": -49.99999999999999
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": -49.99999999999999
+            }
+          }
+        },
+        {
+          "id": "just-above-upper",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "float",
+            "value": 200.00000000000003
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "just-below-lower",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "float",
+            "value": -50.00000000000001
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "just-below-upper",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "float",
+            "value": 199.99999999999997
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 199.99999999999997
+            }
+          }
+        },
+        {
+          "id": "lower-bound",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "int",
+            "value": -50
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": -50.0
+            }
+          }
+        },
+        {
+          "id": "nan",
+          "input": {
+            "kind": "nonfinite",
+            "value": "nan"
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "negative-infinity",
+          "input": {
+            "kind": "nonfinite",
+            "value": "negative-infinity"
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "positive-infinity",
+          "input": {
+            "kind": "nonfinite",
+            "value": "positive-infinity"
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "string-input",
+          "input": {
+            "kind": "string",
+            "value": "20"
+          },
+          "outcome": {
+            "error_category": "type",
+            "python_exception": "TypeError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "upper-bound",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "int",
+            "value": 200
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 200.0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "enum_name": "ONOFF",
+      "idf_object": {
+        "fields": [
+          "ScheduleTypeLimits:Onoff",
+          0,
+          1,
+          "Discrete",
+          "Dimensionless"
+        ],
+        "object_type": "ScheduleTypeLimits"
+      },
+      "idf_objname": "ScheduleTypeLimits:Onoff",
+      "lower_limit": 0,
+      "numeric_type": "Discrete",
+      "type": "onoff",
+      "unit_type": "Dimensionless",
+      "upper_limit": 1,
+      "validation_cases": [
+        {
+          "id": "above-domain",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "int",
+            "value": 2
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "below-domain",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "int",
+            "value": -1
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "boolean-false",
+          "input": {
+            "kind": "boolean",
+            "value": false
+          },
+          "outcome": {
+            "numeric_kind": "int",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 0
+            }
+          }
+        },
+        {
+          "id": "boolean-true",
+          "input": {
+            "kind": "boolean",
+            "value": true
+          },
+          "outcome": {
+            "numeric_kind": "int",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "fractional",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "float",
+            "value": 0.5
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "nan",
+          "input": {
+            "kind": "nonfinite",
+            "value": "nan"
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "negative-infinity",
+          "input": {
+            "kind": "nonfinite",
+            "value": "negative-infinity"
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "one",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "int",
+            "value": 1
+          },
+          "outcome": {
+            "numeric_kind": "int",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "positive-infinity",
+          "input": {
+            "kind": "nonfinite",
+            "value": "positive-infinity"
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "string-input",
+          "input": {
+            "kind": "string",
+            "value": "1"
+          },
+          "outcome": {
+            "error_category": "type",
+            "python_exception": "TypeError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "zero",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "int",
+            "value": 0
+          },
+          "outcome": {
+            "numeric_kind": "int",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "enum_name": "FRACTION",
+      "idf_object": {
+        "fields": [
+          "ScheduleTypeLimits:Fraction",
+          0,
+          1,
+          "Continuous",
+          "Dimensionless"
+        ],
+        "object_type": "ScheduleTypeLimits"
+      },
+      "idf_objname": "ScheduleTypeLimits:Fraction",
+      "lower_limit": 0,
+      "numeric_type": "Continuous",
+      "type": "fraction",
+      "unit_type": "Dimensionless",
+      "upper_limit": 1,
+      "validation_cases": [
+        {
+          "id": "boolean-false",
+          "input": {
+            "kind": "boolean",
+            "value": false
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 0.0
+            }
+          }
+        },
+        {
+          "id": "boolean-true",
+          "input": {
+            "kind": "boolean",
+            "value": true
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 1.0
+            }
+          }
+        },
+        {
+          "id": "interior-fractional",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "float",
+            "value": 0.375
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 0.375
+            }
+          }
+        },
+        {
+          "id": "just-above-upper",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "float",
+            "value": 1.0000000000000002
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "just-below-lower",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "float",
+            "value": -5e-324
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "lower-bound",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "int",
+            "value": 0
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 0.0
+            }
+          }
+        },
+        {
+          "id": "nan",
+          "input": {
+            "kind": "nonfinite",
+            "value": "nan"
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "negative-infinity",
+          "input": {
+            "kind": "nonfinite",
+            "value": "negative-infinity"
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "positive-infinity",
+          "input": {
+            "kind": "nonfinite",
+            "value": "positive-infinity"
+          },
+          "outcome": {
+            "error_category": "domain",
+            "python_exception": "ValueError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "string-input",
+          "input": {
+            "kind": "string",
+            "value": "0.375"
+          },
+          "outcome": {
+            "error_category": "type",
+            "python_exception": "TypeError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "upper-bound",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "int",
+            "value": 1
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 1.0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "enum_name": "REAL",
+      "idf_object": {
+        "fields": [
+          "ScheduleTypeLimits:Real",
+          null,
+          null,
+          "Continuous",
+          "Dimensionless"
+        ],
+        "object_type": "ScheduleTypeLimits"
+      },
+      "idf_objname": "ScheduleTypeLimits:Real",
+      "lower_limit": null,
+      "numeric_type": "Continuous",
+      "type": "real",
+      "unit_type": "Dimensionless",
+      "upper_limit": null,
+      "validation_cases": [
+        {
+          "id": "boolean-false",
+          "input": {
+            "kind": "boolean",
+            "value": false
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 0.0
+            }
+          }
+        },
+        {
+          "id": "boolean-true",
+          "input": {
+            "kind": "boolean",
+            "value": true
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 1.0
+            }
+          }
+        },
+        {
+          "id": "nan",
+          "input": {
+            "kind": "nonfinite",
+            "value": "nan"
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "nonfinite",
+              "value": "nan"
+            }
+          }
+        },
+        {
+          "id": "negative",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "float",
+            "value": -12.5
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": -12.5
+            }
+          }
+        },
+        {
+          "id": "negative-infinity",
+          "input": {
+            "kind": "nonfinite",
+            "value": "negative-infinity"
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "nonfinite",
+              "value": "negative-infinity"
+            }
+          }
+        },
+        {
+          "id": "positive",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "float",
+            "value": 19.75
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 19.75
+            }
+          }
+        },
+        {
+          "id": "positive-infinity",
+          "input": {
+            "kind": "nonfinite",
+            "value": "positive-infinity"
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "nonfinite",
+              "value": "positive-infinity"
+            }
+          }
+        },
+        {
+          "id": "string-input",
+          "input": {
+            "kind": "string",
+            "value": "19.75"
+          },
+          "outcome": {
+            "error_category": "type",
+            "python_exception": "TypeError",
+            "status": "error"
+          }
+        },
+        {
+          "id": "zero",
+          "input": {
+            "kind": "number",
+            "numeric_kind": "int",
+            "value": 0
+          },
+          "outcome": {
+            "numeric_kind": "float",
+            "status": "value",
+            "value": {
+              "kind": "finite",
+              "value": 0.0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "path": "src/idragon/dragon/profile.py",
+    "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+  }
+}

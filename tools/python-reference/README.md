@@ -19,7 +19,11 @@ The generators fix `PYTHONHASHSEED`, remove CPython memory addresses from the
 generated IDF with a stable first-occurrence mapping, and record hashes for
 every output. The construction equality/hash oracle additionally binds its
 Material, Layer, and Construction observations to the exact public-symbol
-inventory, source bytes, and five upstream symbol hashes. `-Mode Verify`
+inventory, source bytes, and five upstream symbol hashes. The ScheduleType
+oracle binds all 12 upstream ScheduleType symbols and records the four exact
+five-field `ScheduleTypeLimits` objects plus 44 boundary, coercion, type-error,
+and tagged non-finite validation cases. Its `real` NaN and infinity results use
+strict JSON tags instead of non-standard numeric tokens. `-Mode Verify`
 compares all generated files byte-for-byte with the reviewed baseline under
 `fixtures/reference/python-0.7.0`. Every reference run also executes the
 fail-closed generator tests under `tests/PythonReference` before producing an

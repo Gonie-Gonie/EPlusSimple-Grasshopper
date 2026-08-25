@@ -8,9 +8,19 @@ internal static class ScheduleIdfExporter
 {
     internal static string TypeLimitName(ScheduleType type, bool legacySimpleDragon = false)
     {
-        string typeName = legacySimpleDragon && type == ScheduleType.OnOff
-            ? "Onoff"
-            : type.ToString();
+        if (legacySimpleDragon)
+        {
+            return type.IdfObjectName();
+        }
+
+        string typeName = type switch
+        {
+            ScheduleType.Temperature => nameof(ScheduleType.Temperature),
+            ScheduleType.OnOff => nameof(ScheduleType.OnOff),
+            ScheduleType.Fraction => nameof(ScheduleType.Fraction),
+            ScheduleType.Real => nameof(ScheduleType.Real),
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown schedule type."),
+        };
         return $"ScheduleTypeLimits:{typeName}";
     }
 
@@ -18,10 +28,23 @@ internal static class ScheduleIdfExporter
         IdfGenerationContext context,
         bool legacySimpleDragon = false)
     {
-        yield return context.CreateRaw("ScheduleTypeLimits", TypeLimitName(ScheduleType.Temperature, legacySimpleDragon), -50, 200, "Continuous", "Temperature");
-        yield return context.CreateRaw("ScheduleTypeLimits", TypeLimitName(ScheduleType.OnOff, legacySimpleDragon), 0, 1, "Discrete", "Dimensionless");
-        yield return context.CreateRaw("ScheduleTypeLimits", TypeLimitName(ScheduleType.Fraction, legacySimpleDragon), 0, 1, "Continuous", "Dimensionless");
-        yield return context.CreateRaw("ScheduleTypeLimits", TypeLimitName(ScheduleType.Real, legacySimpleDragon), null, null, "Continuous", "Dimensionless");
+        ScheduleType[] types =
+        {
+            ScheduleType.Temperature,
+            ScheduleType.OnOff,
+            ScheduleType.Fraction,
+            ScheduleType.Real,
+        };
+        foreach (ScheduleType type in types)
+        {
+            yield return context.CreateRaw(
+                "ScheduleTypeLimits",
+                TypeLimitName(type, legacySimpleDragon),
+                type.LowerLimit(),
+                type.UpperLimit(),
+                type.NumericType(),
+                type.UnitType());
+        }
     }
 
     internal static IdfObject Create(

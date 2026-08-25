@@ -30,7 +30,9 @@ $generatorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_refe
 $profileGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_usage_profile_schedule_oracle.py'
 $iddGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_idd_schema_oracle.py'
 $constructionEqualityGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_construction_equality_hash_oracle.py'
+$scheduleTypeGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_schedule_type_oracle.py'
 $constructionEqualityTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_construction_equality_hash_oracle.py'
+$scheduleTypeTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_schedule_type_oracle.py'
 $publicSymbolInventoryPath = Join-Path $repositoryRoot 'upstream\public-symbol-inventory.json'
 $tempRoot = Join-Path $repositoryRoot 'temp'
 $referenceTempRoot = Join-Path $tempRoot 'reference'
@@ -108,7 +110,9 @@ foreach ($requiredFile in @(
     $profileGeneratorPath,
     $iddGeneratorPath,
     $constructionEqualityGeneratorPath,
+    $scheduleTypeGeneratorPath,
     $constructionEqualityTestPath,
+    $scheduleTypeTestPath,
     $publicSymbolInventoryPath
 )) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
@@ -590,7 +594,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile, IDD, construction equality/hash, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile, IDD, construction equality/hash, ScheduleType, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -670,6 +674,24 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $constructionEqualityGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-construction-equality-reference.log') `
     -FailureMessage 'Generating the Python construction equality/hash oracle failed'
+
+$scheduleTypeOraclePath = Join-Path $outputRoot 'schedule-type-oracle.json'
+$scheduleTypeGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $scheduleTypeGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $scheduleTypeOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $scheduleTypeGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-schedule-type-reference.log') `
+    -FailureMessage 'Generating the Python ScheduleType oracle failed'
 
 $generatorArguments = @(
     '-X', 'utf8',
