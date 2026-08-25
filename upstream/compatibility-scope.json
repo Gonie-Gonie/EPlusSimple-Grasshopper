@@ -1,0 +1,46 @@
+{
+  "schema": "goniegonie.upstream-compatibility-scope.v1",
+  "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+  "module_paths": [
+    "src/epsimple",
+    "src/idragon"
+  ],
+  "inventory_policy": {
+    "language": "python",
+    "python_feature_version": "3.12",
+    "symbol_universe": "ast_declared_public",
+    "include_kinds": [
+      "class",
+      "constant",
+      "function"
+    ],
+    "constant_rule": "uppercase_assignment_target",
+    "include_public_top_level": true,
+    "include_public_class_members": true,
+    "include_dunder_class_members": true,
+    "exclude_private_top_level": true,
+    "exclude_private_class_members": true,
+    "exclude_import_aliases": true,
+    "exclude_nested_function_locals": true
+  },
+  "classifications": {
+    "allowed": [
+      "equivalent",
+      "exception",
+      "out_of_scope",
+      "needs_reverification"
+    ],
+    "complete": [
+      "equivalent",
+      "exception",
+      "out_of_scope"
+    ]
+  },
+  "completion_gate": {
+    "forbid": [
+      "needs_reverification"
+    ],
+    "require_exact_inventory_coverage": true,
+    "require_inventory_matches_pinned_source": true
+  }
+}

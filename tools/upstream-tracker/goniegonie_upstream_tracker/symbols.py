@@ -207,7 +207,7 @@ class _SymbolCollector:
                 self._add_function(prefix, statement)
             elif isinstance(statement, ast.ClassDef):
                 self._add_class(prefix, statement)
-            elif _is_literal_assignment(statement):
+            elif _is_tracked_assignment(statement):
                 for target_name in _assignment_names(statement):
                     qualified = _qualify(prefix, target_name)
                     self._add(
@@ -269,12 +269,14 @@ class _SymbolCollector:
         self._parts.setdefault(name, []).append(part)
 
 
-def _is_literal_assignment(statement: ast.stmt) -> bool:
+def _is_tracked_assignment(statement: ast.stmt) -> bool:
     if not isinstance(statement, (ast.Assign, ast.AnnAssign)):
         return False
     names = _assignment_names(statement)
     if not names:
         return False
+    if any(name.isupper() for name in names):
+        return True
     try:
         ast.literal_eval(statement.value)
     except (ValueError, TypeError):

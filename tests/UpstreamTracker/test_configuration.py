@@ -6,6 +6,7 @@ import unittest
 from support import REPOSITORY_ROOT, TemporaryWorkspace, write_configuration
 
 from goniegonie_upstream_tracker.config import load_configuration
+from goniegonie_upstream_tracker.compatibility import load_compatibility_configuration
 from goniegonie_upstream_tracker.errors import ConfigurationError
 from goniegonie_upstream_tracker.yaml_subset import parse_yaml_subset
 
@@ -26,6 +27,19 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
+        compatibility = load_compatibility_configuration(
+            configuration,
+            REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
+            REPOSITORY_ROOT / "upstream" / "public-symbol-inventory.json",
+            REPOSITORY_ROOT / "upstream" / "compatibility-matrix.json",
+        )
+        self.assertEqual(24, len(compatibility.inventory.files))
+        self.assertEqual(1242, len(compatibility.inventory.symbols))
+        self.assertEqual(
+            len(compatibility.inventory.symbols),
+            len(compatibility.matrix.entries),
+        )
+        self.assertEqual(1241, len(compatibility.needs_reverification))
 
     def test_rejects_non_goniegonie_product_ownership(self) -> None:
         with TemporaryWorkspace() as workspace:

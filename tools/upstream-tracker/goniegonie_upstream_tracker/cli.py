@@ -8,7 +8,19 @@ from pathlib import Path
 import sys
 from typing import Sequence
 
-from .classifier import compare_sources
+from .classifier import compare_sources, inspect_source_identity
+from .compatibility import (
+    CompatibilityConfiguration,
+    build_compatibility_report,
+    build_public_inventory,
+    build_reverification_matrix,
+    load_compatibility_configuration,
+    load_compatibility_scope,
+    load_public_inventory,
+    render_compatibility_matrix,
+    render_public_inventory,
+    write_compatibility_report,
+)
 from .config import TrackerConfiguration, load_configuration
 from .errors import SourceError, TrackerError
 from .reporting import write_reports
@@ -25,11 +37,32 @@ def main(arguments: Sequence[str] | None = None) -> int:
         repository_root = options.repository_root.resolve()
         configuration = _configuration(options, repository_root)
         if options.command == "validate":
-            return _validate(configuration)
+            compatibility = _compatibility_configuration(options, repository_root, configuration)
+            return _validate(configuration, compatibility)
         if options.command == "hash":
             return _hash(configuration, options, repository_root)
         if options.command == "compare":
             return _compare(configuration, options, repository_root)
+        if options.command == "inventory":
+            return _inventory(configuration, options, repository_root)
+        if options.command == "matrix-template":
+            return _matrix_template(configuration, options, repository_root)
+        if options.command == "compatibility-report":
+            compatibility = _compatibility_configuration(options, repository_root, configuration)
+            return _compatibility_report(
+                compatibility,
+                options,
+                repository_root,
+                fail_on_incomplete=False,
+            )
+        if options.command == "compatibility-gate":
+            compatibility = _compatibility_configuration(options, repository_root, configuration)
+            return _compatibility_report(
+                compatibility,
+                options,
+                repository_root,
+                fail_on_incomplete=True,
+            )
         parser.error("a command is required")
     except TrackerError as exception:
         print(f"upstream-tracker: {exception}", file=sys.stderr)
@@ -55,6 +88,21 @@ def _create_parser() -> argparse.ArgumentParser:
         "--compatibility-exceptions",
         type=Path,
         help="Override compatibility-exceptions YAML path.",
+    )
+    parser.add_argument(
+        "--compatibility-scope",
+        type=Path,
+        help="Override compatibility-scope JSON path.",
+    )
+    parser.add_argument(
+        "--public-symbol-inventory",
+        type=Path,
+        help="Override public-symbol-inventory JSON path.",
+    )
+    parser.add_argument(
+        "--compatibility-matrix",
+        type=Path,
+        help="Override compatibility-matrix JSON path.",
     )
     commands = parser.add_subparsers(dest="command", required=True)
 
@@ -99,6 +147,54 @@ def _create_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Return exit code 4 when a changed symbol lacks a port mapping.",
     )
+
+    inventory_parser = commands.add_parser(
+        "inventory",
+        help="Regenerate the exhaustive public-symbol inventory from the exact pinned clone.",
+    )
+    inventory_parser.add_argument("--source-root", type=Path, required=True)
+    inventory_parser.add_argument(
+        "--output",
+        type=Path,
+        help="JSON output path; defaults beneath temp/upstream-tracker.",
+    )
+
+    matrix_parser = commands.add_parser(
+        "matrix-template",
+        help="Create a fail-closed matrix template from the pinned public inventory.",
+    )
+    matrix_parser.add_argument(
+        "--output",
+        type=Path,
+        help="JSON output path; defaults beneath temp/upstream-tracker.",
+    )
+
+    report_parser = commands.add_parser(
+        "compatibility-report",
+        help="Write the machine-readable symbol-classification coverage report.",
+    )
+    report_parser.add_argument("--source-root", type=Path)
+    report_parser.add_argument(
+        "--require-verified-pin",
+        action="store_true",
+        help="Require source-root to be the clean locked Git clone and origin.",
+    )
+    report_parser.add_argument(
+        "--output",
+        type=Path,
+        help="JSON output path; defaults beneath temp/upstream-tracker.",
+    )
+
+    gate_parser = commands.add_parser(
+        "compatibility-gate",
+        help="Fail unless the exact pinned inventory is fully classified and reverified.",
+    )
+    gate_parser.add_argument("--source-root", type=Path, required=True)
+    gate_parser.add_argument(
+        "--output",
+        type=Path,
+        help="JSON output path; defaults beneath temp/upstream-tracker.",
+    )
     return parser
 
 
@@ -112,9 +208,53 @@ def _configuration(options: argparse.Namespace, repository_root: Path) -> Tracke
     return load_configuration(lock, port_map, exceptions)
 
 
-def _validate(configuration: TrackerConfiguration) -> int:
+def _compatibility_configuration(
+    options: argparse.Namespace,
+    repository_root: Path,
+    tracker: TrackerConfiguration,
+) -> CompatibilityConfiguration:
+    scope = _manifest_path(
+        options.compatibility_scope,
+        repository_root / "upstream" / "compatibility-scope.json",
+    )
+    inventory = _manifest_path(
+        options.public_symbol_inventory,
+        repository_root / "upstream" / "public-symbol-inventory.json",
+    )
+    matrix = _manifest_path(
+        options.compatibility_matrix,
+        repository_root / "upstream" / "compatibility-matrix.json",
+    )
+    return load_compatibility_configuration(tracker, scope, inventory, matrix)
+
+
+def _validate(
+    configuration: TrackerConfiguration,
+    compatibility: CompatibilityConfiguration,
+) -> int:
+    classification_counts = {
+        status: sum(
+            entry.classification == status
+            for entry in compatibility.matrix.entries
+        )
+        for status in (
+            "equivalent",
+            "exception",
+            "out_of_scope",
+            "needs_reverification",
+        )
+    }
     data = {
         "compatibility_exception_count": len(configuration.exceptions),
+        "compatibility": {
+            "classification_counts": classification_counts,
+            "complete": not compatibility.needs_reverification,
+            "exact_inventory_coverage": True,
+            "inventory_sha256": compatibility.inventory.content_sha256,
+            "matrix_sha256": compatibility.matrix.content_sha256,
+            "public_symbol_count": len(compatibility.inventory.symbols),
+            "python_file_count": len(compatibility.inventory.files),
+        },
         "mapping_count": len(configuration.mappings),
         "module_count": len(configuration.lock.modules),
         "schema": "goniegonie.upstream-validation.v1",
@@ -122,6 +262,112 @@ def _validate(configuration: TrackerConfiguration) -> int:
         "valid": True,
     }
     print(json.dumps(data, indent=2, sort_keys=True))
+    return 0
+
+
+def _inventory(
+    configuration: TrackerConfiguration,
+    options: argparse.Namespace,
+    repository_root: Path,
+) -> int:
+    scope_path = _manifest_path(
+        options.compatibility_scope,
+        repository_root / "upstream" / "compatibility-scope.json",
+    )
+    scope = load_compatibility_scope(scope_path, configuration)
+    identity = inspect_source_identity(
+        options.source_root,
+        expected_commit=configuration.lock.commit,
+        expected_repository=configuration.lock.repository,
+    )
+    if not identity.pin_verified:
+        raise SourceError(
+            "Public inventory generation requires a clean Git clone at the locked commit and origin"
+        )
+    inventory = build_public_inventory(options.source_root, scope)
+    output = options.output or (
+        repository_root / "temp" / "upstream-tracker" / "public-symbol-inventory.json"
+    )
+    output = _require_temp_output(output, repository_root, file_path=True)
+    _write_text(output, render_public_inventory(inventory), "public symbol inventory")
+    print(output)
+    return 0
+
+
+def _compatibility_report(
+    compatibility: CompatibilityConfiguration,
+    options: argparse.Namespace,
+    repository_root: Path,
+    *,
+    fail_on_incomplete: bool,
+) -> int:
+    source_root: Path | None = options.source_root
+    identity_data = None
+    if source_root is not None:
+        require_verified = fail_on_incomplete or bool(
+            getattr(options, "require_verified_pin", False)
+        )
+        identity = inspect_source_identity(
+            source_root,
+            expected_commit=(compatibility.tracker.lock.commit if require_verified else None),
+            expected_repository=(compatibility.tracker.lock.repository if require_verified else None),
+        )
+        if require_verified and not identity.pin_verified:
+            raise SourceError(
+                "Compatibility verification requires a clean Git clone at the locked commit and origin"
+            )
+        identity_data = identity.to_data()
+    elif bool(getattr(options, "require_verified_pin", False)):
+        raise SourceError("--require-verified-pin requires --source-root")
+
+    report = build_compatibility_report(
+        compatibility,
+        source_root=source_root,
+        source_identity=identity_data,
+    )
+    default_name = "compatibility-gate.json" if fail_on_incomplete else "compatibility-report.json"
+    output = options.output or repository_root / "temp" / "upstream-tracker" / default_name
+    output = _require_temp_output(output, repository_root, file_path=True)
+    write_compatibility_report(report, output)
+    print(
+        json.dumps(
+            {
+                "classification_complete": report.classification_complete,
+                "output": str(output),
+                "passed": report.passed,
+                "public_symbol_count": len(compatibility.inventory.symbols),
+                "source_matches_inventory": report.source_matches_inventory,
+                "unresolved_count": len(compatibility.needs_reverification),
+            },
+            indent=2,
+            sort_keys=True,
+        )
+    )
+    return 5 if fail_on_incomplete and not report.passed else 0
+
+
+def _matrix_template(
+    configuration: TrackerConfiguration,
+    options: argparse.Namespace,
+    repository_root: Path,
+) -> int:
+    scope_path = _manifest_path(
+        options.compatibility_scope,
+        repository_root / "upstream" / "compatibility-scope.json",
+    )
+    inventory_path = _manifest_path(
+        options.public_symbol_inventory,
+        repository_root / "upstream" / "public-symbol-inventory.json",
+    )
+    scope = load_compatibility_scope(scope_path, configuration)
+    inventory = load_public_inventory(inventory_path, scope)
+    matrix = build_reverification_matrix(inventory, configuration.exceptions)
+    output = options.output or (
+        repository_root / "temp" / "upstream-tracker" / "compatibility-matrix-template.json"
+    )
+    output = _require_temp_output(output, repository_root, file_path=True)
+    _write_text(output, render_compatibility_matrix(matrix), "compatibility matrix template")
+    print(output)
     return 0
 
 
@@ -195,6 +441,16 @@ def _require_temp_output(path: Path, repository_root: Path, *, file_path: bool) 
     except ValueError as exception:
         raise SourceError(f"Generated output must remain beneath '{temp_root}'") from exception
     return resolved
+
+
+def _write_text(path: Path, content: str, description: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    try:
+        temporary.write_text(content, encoding="utf-8", newline="\n")
+        temporary.replace(path)
+    except OSError as exception:
+        raise SourceError(f"Cannot write {description} '{path}': {exception}") from exception
 
 
 def _discover_repository_root() -> Path:

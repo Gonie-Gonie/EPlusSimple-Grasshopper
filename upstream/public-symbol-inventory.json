@@ -1,0 +1,6349 @@
+{
+  "content_sha256": "sha256:f103db549899e16a997eaff8c9af19798b046d6c0786afd8424fdbc7284c3e8c",
+  "files": [
+    {
+      "ast_hash": "sha256:f26684ea4b6e1bfe7b9576f06d45971e420d2e9e49da99b6c52ff9d0d424fae3",
+      "content_hash": "sha256:d4de5fd9ada5c22db742bcc317d4202ff2067fe3933d4c1b513704746f9e474c",
+      "path": "src/epsimple/__init__.py"
+    },
+    {
+      "ast_hash": "sha256:f47c3931b817f98a31f2b83d9984b7ad7ba6fd1d7a0813769c233192ce3b890f",
+      "content_hash": "sha256:990928913dd99a1e25e8104a73abe9fad88b5a02ef7192de96a39d148e1553dc",
+      "path": "src/epsimple/__main__.py"
+    },
+    {
+      "ast_hash": "sha256:7910d7d9e0383b319b9374bdcdf5f8c069930c609fa8e9e6bd8c50a59f4858e5",
+      "content_hash": "sha256:6ab3034a7cbbf7c319159def3b2aa58440a2cb8f8d0b7c797ddfa334bf950703",
+      "path": "src/epsimple/api.py"
+    },
+    {
+      "ast_hash": "sha256:6740f081f087834aadfef0c11da6cdbe11f907dc170b48ebaa287e000eb6e27b",
+      "content_hash": "sha256:0e509307b54a6b48a84a12b9d5e22d06dd7960dc62747196bedb46d3d7e830dc",
+      "path": "src/epsimple/constants.py"
+    },
+    {
+      "ast_hash": "sha256:7409c8f18e040e02d52a7e2a70ab56b4539212eb76035f5b218a5bacd84f4762",
+      "content_hash": "sha256:0287d26c6d4b67afddb6a371aa6a79227118d9e4be9478d3c650841e9f36a8f1",
+      "path": "src/epsimple/core/__init__.py"
+    },
+    {
+      "ast_hash": "sha256:fe40c8c89f2c3341ce4972976eabf96edd85ccba55a3a7619ca17e0a7603c0ab",
+      "content_hash": "sha256:e6fed9a545417051f8f59a2a5e37c6e82343694daf9d5c51bacd68ceec459b5c",
+      "path": "src/epsimple/core/construction.py"
+    },
+    {
+      "ast_hash": "sha256:dbbea63f51a001fae4fd73fba96dc099eab8cd5bcec39e3d9bf768e29b463873",
+      "content_hash": "sha256:114cee35999b5a1c41480eb4c4c4122e0e02a1b50d6f8d6fdf7a7181ce965df2",
+      "path": "src/epsimple/core/hvac.py"
+    },
+    {
+      "ast_hash": "sha256:f79918272c07515ee4ae98fa62f4ca5d5d703e5e2faa334f72d6a6966e1e2447",
+      "content_hash": "sha256:b83e7c1f1fb81ddf17b90504042d15c41763ea5e5f2c4be25827502b1454ec63",
+      "path": "src/epsimple/core/model.py"
+    },
+    {
+      "ast_hash": "sha256:bf39751f2e76642e1dbad2c4196f23bcdcdeefaad28e750e5c28c616ea9434ed",
+      "content_hash": "sha256:d12e39e4cefc81a4c1036881e27cd1df7570cb353b204a2adc69d58122c14b4a",
+      "path": "src/epsimple/core/profile.py"
+    },
+    {
+      "ast_hash": "sha256:63cfdec0aec079cfc2d2896091974a5c253656e198cbcb1ea328dbace92c1b7e",
+      "content_hash": "sha256:18226b1c6688f0f0c2ae956fe5f144be44a93c55b2f2344388a44ffbfcdd7f01",
+      "path": "src/epsimple/core/shape.py"
+    },
+    {
+      "ast_hash": "sha256:0cc9cc2ed116f8923f44277a62cc13371e5f687198276c54455c4198be0d84ad",
+      "content_hash": "sha256:2320c9fc6625d5d54aaebe8b31d71f33857f9d06d19e9726062f5b02c72fb4cf",
+      "path": "src/epsimple/debug.py"
+    },
+    {
+      "ast_hash": "sha256:d7757fa8a1fc22604c82479200d8af4338d9283d090bc764b2ed526ee9142135",
+      "content_hash": "sha256:217fecbf13c7c2905434906349694f0e9a95948295955a1817814ab5b2c2b27f",
+      "path": "src/epsimple/utils.py"
+    },
+    {
+      "ast_hash": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+      "content_hash": "sha256:eb4e0e675023392a86f4a4bb282546810d04d96bdae9638ac17fb1321ced97a8",
+      "path": "src/idragon/__init__.py"
+    },
+    {
+      "ast_hash": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+      "content_hash": "sha256:eb2bd5d7d6d7bb54bfafa482fe4cd74603e16cc51f189182916314df7483a8c9",
+      "path": "src/idragon/common.py"
+    },
+    {
+      "ast_hash": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+      "content_hash": "sha256:c1671ce599de07228d9134e4c707a8fef0c7c324e62d8af1114032a44089c289",
+      "path": "src/idragon/constants.py"
+    },
+    {
+      "ast_hash": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+      "content_hash": "sha256:bd97bac55f288fc6053bb3530dd9bd141726090cba7a92daf2e94e1fa997b662",
+      "path": "src/idragon/dragon/__init__.py"
+    },
+    {
+      "ast_hash": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+      "content_hash": "sha256:bd8c264b4ed988cc2fe7efc6c5924f5f2c7b42ef2df338566cba4f270dd00e02",
+      "path": "src/idragon/dragon/construction.py"
+    },
+    {
+      "ast_hash": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+      "content_hash": "sha256:920568aac7cb3de5004d29e39f3c6adddb916c44f67ead46a7bb2c9104920517",
+      "path": "src/idragon/dragon/hvac.py"
+    },
+    {
+      "ast_hash": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+      "content_hash": "sha256:ecb1f239f36bdc68745c40383091af79b1d33b562d89a88ab61712b706f6e33b",
+      "path": "src/idragon/dragon/model.py"
+    },
+    {
+      "ast_hash": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+      "content_hash": "sha256:eb8f22b786b16a212448cd37846f56eaed3fc1b48b2d20aab8e5171e82a4f072",
+      "path": "src/idragon/dragon/profile.py"
+    },
+    {
+      "ast_hash": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+      "content_hash": "sha256:3b4d7bb22d8f54ea1343c7fc9ed617c22bcad11dfb9783531bd1317b54d816ba",
+      "path": "src/idragon/dragon/shape.py"
+    },
+    {
+      "ast_hash": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+      "content_hash": "sha256:fd019b3e42209e3f38f5fa887af5985779f6ce5b220d995c8145fa2e5a74b6ce",
+      "path": "src/idragon/imugi.py"
+    },
+    {
+      "ast_hash": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+      "content_hash": "sha256:403181224085a807610d78475ca9dfcd78d27a16879bf2587e6134af2fbe666f",
+      "path": "src/idragon/launcher.py"
+    },
+    {
+      "ast_hash": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+      "content_hash": "sha256:ee7bf0d2be00e3c536b8db4cc8f8b0559c3676361924b9d46967cf622c932076",
+      "path": "src/idragon/utils.py"
+    }
+  ],
+  "schema": "goniegonie.upstream-public-symbol-inventory.v1",
+  "scope_sha256": "sha256:9b34f9d49e7cba5aa9e2102a86fd62b59732d6ea5d4a5c5024692ed2657b7985",
+  "summary": {
+    "kind_counts": {
+      "class": 151,
+      "constant": 145,
+      "function": 946
+    },
+    "public_symbol_count": 1242,
+    "python_file_count": 24
+  },
+  "symbols": [
+    {
+      "kind": "class",
+      "path": "src/epsimple/api.py",
+      "symbol": "GreenRetrofitDataFormat"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/api.py",
+      "symbol": "GreenRetrofitDataFormat.EXCEL"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/api.py",
+      "symbol": "GreenRetrofitDataFormat.IDF"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/api.py",
+      "symbol": "GreenRetrofitDataFormat.JSON"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/api.py",
+      "symbol": "GreenRetrofitDataFormat.__new__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/api.py",
+      "symbol": "convert_inputformat"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/api.py",
+      "symbol": "debug"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/api.py",
+      "symbol": "get_database"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/api.py",
+      "symbol": "run_grexcel"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/api.py",
+      "symbol": "run_grjson"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.DAY_SCHEDULE"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.FENESTRATION"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.HEAT_EXCHANGER"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.MATERIAL"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.PROFILE"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.PV_PANEL"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.RULESET"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.SCHEDULE"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.SOURCE_SYSTEM"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.SUPPLY_SYSTEM"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.SURFACE"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.SURFACE_CONSTRUCTION"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.ZONE"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.__format__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "symbol": "AUTOID_PREFIX.__str__"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "symbol": "ConvectionHeatTransfer"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "ConvectionHeatTransfer.IN"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "ConvectionHeatTransfer.OUT"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Directory"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Directory.CONSTRUCTION_DIR"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Directory.PROFILE_DIR"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Directory.WEATHER_DATA_DIR"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Directory.WEATHER_META_DIR"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "symbol": "PackageInfo"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "PackageInfo.NAME"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "PackageInfo.REQUIRED_PYTHON"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "PackageInfo.VERSION"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2CO2"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2CO2.DISTRICTHEATING"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2CO2.ELECTRICITY"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2CO2.LPG"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2CO2.NATURALGAS"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2CO2.OIL"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Cost"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Cost.DISTRICTHEATING"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Cost.ELECTRICITY"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Cost.LPG"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Cost.NATURALGAS"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Cost.OIL"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Source"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Source.DISTRICTHEATING"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Source.ELECTRICITY"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Source.LPG"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Source.NATURALGAS"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Site2Source.OIL"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "symbol": "SpecialTag"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "SpecialTag.CLONE"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "SpecialTag.COOLROOF"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "SpecialTag.DB"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "SpecialTag.FLIP"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "SpecialTag.SPECIAL"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "symbol": "SpecialTag.__format__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "symbol": "SpecialTag.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "symbol": "SpecialTag.__str__"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Unit"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Unit.ACH50_TO_ACH"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Unit.FRACTION_TO_PERCENT"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Unit.M3_PER_S_TO_CMH"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Unit.MM_TO_M"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Unit.M_TO_MM"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Unit.PERCENT_TO_FRACTION"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "symbol": "Unit.W_TO_KW"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.g"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.get_DB"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.is_transparent"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.load_DB"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.to_dict"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.to_dragon"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "FenestrationConstruction.u"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.conductivity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.density"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.get_DB"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.load_DB"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.specific_heat"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.to_dict"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "Material.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "OpenConstruction"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "OpenConstruction.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "OpenConstruction.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SpecialConstruction"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SpecialConstruction.__new__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SpecialConstruction.get_unique_materials"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SpecialConstruction.reversed"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.U_internal"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.create_simply"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.depth"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.get_DB"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.get_U"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.get_regulated_construction"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.get_unique_materials"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.heat_capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.load_DB"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.reversed"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.to_dict"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "SurfaceConstruction.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "UnknownConstruction"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "UnknownConstruction.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/construction.py",
+      "symbol": "UnknownConstruction.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller.boiler_efficiency"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller.capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller.cop"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AbsorptionChiller.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AirHandlingUnit"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AirHandlingUnit.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AirHandlingUnit.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AirHandlingUnit.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AirHandlingUnit.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AirHandlingUnit.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AirHandlingUnit.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AirHandlingUnit.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AirHandlingUnit.source"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "AirHandlingUnit.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.efficiency"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.fuel"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.hotwater_supply"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Boiler.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.compressor_type"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.coolingtower_capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.coolingtower_control"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.coolingtower_type"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.cop"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Chiller.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CompressorType"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CompressorType.RECIPROCATING"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CompressorType.SCREW"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CompressorType.TURBO"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CompressorType.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CompressorType.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CoolingTowerControl"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CoolingTowerControl.SINGLESPEED"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CoolingTowerControl.TWOSPEED"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CoolingTowerControl.__str__"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CoolingTowerType"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CoolingTowerType.CLOSED"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CoolingTowerType.OPEN"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "CoolingTowerType.__str__"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "DistrictHeating"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "DistrictHeating.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "DistrictHeating.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "DistrictHeating.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "DistrictHeating.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "DistrictHeating.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "DistrictHeating.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "DistrictHeating.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "DistrictHeating.hotwater_supply"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "DistrictHeating.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiantFloor"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiantFloor.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiantFloor.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiantFloor.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiantFloor.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiantFloor.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiantFloor.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiantFloor.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiantFloor.source"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiantFloor.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiator"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiator.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiator.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiator.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiator.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiator.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiator.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiator.capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiator.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiator.source"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "ElectricRadiator.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "FanCoilUnit"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "FanCoilUnit.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "FanCoilUnit.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "FanCoilUnit.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "FanCoilUnit.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "FanCoilUnit.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "FanCoilUnit.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "FanCoilUnit.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "FanCoilUnit.source"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "FanCoilUnit.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Fuel"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Fuel.DISTRICTHEATING"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Fuel.ELECTRICITY"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Fuel.LPG"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Fuel.NATURALGAS"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Fuel.OIL"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Fuel.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Fuel.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "GeothermalHeatPump"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "GeothermalHeatPump.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "GeothermalHeatPump.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "GeothermalHeatPump.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "GeothermalHeatPump.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.cooling_capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.cooling_cop"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.fuel"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.heating_capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.heating_cop"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "HeatPump.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "NoneSource"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "NoneSource.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "NoneSource.__new__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "NoneSource.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner.capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner.cop"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner.source"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PackagedAirConditioner.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.area"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.azimuth"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.efficiency"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.tilt"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "PhotoVoltaicSystem.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor.coolable"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor.heatable"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor.source"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "RadiantFloor.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Radiator"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Radiator.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Radiator.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Radiator.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Radiator.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Radiator.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Radiator.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Radiator.capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Radiator.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Radiator.source"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "Radiator.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "SourceSystem"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "SourceSystem.TYPE_MAPPER"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "SupplySystem"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "SupplySystem.TYPE_MAPPER"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "SupplySystem.coolable"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "SupplySystem.heatable"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem.airflow_rate"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem.cooling_efficiency"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem.heating_efficiency"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "symbol": "VentilationSystem.to_dragon"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "ADDR_WEATHER_TABLE"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "CLIMATE_TABLE"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "EnergyPlusError"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "EnergyPlusError.__init__"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.address"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.area"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.averaged_exteriorfloor_Uvalue"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.averaged_exteriorroof_Uvalue"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.averaged_exteriorwall_Uvalue"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.averaged_infiltration"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.averaged_lightdensity"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.averaged_window_Uvalue"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.climate"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.exteriorfloors"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.exteriorroofs"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.exteriorwalls"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.exteriorwindows"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.from_excel"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.from_grjson"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.get_unique_fenestration_constructions"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.get_unique_materials"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.get_unique_profiles"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.get_unique_surface_constructions"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.north_axis"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.run"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.source_system"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.terrain"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.to_dragon"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.to_idf"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.vintage"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.weather"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitModel.weather_filepath"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.VALID_DIGITS"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.area"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.calc_domestic_hotwater_site_energy"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.get_dhw_servers"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.get_domestic_hotwater_energy"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.summarize"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.to_co2"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.to_cost"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.to_dict"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.to_site_uses"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.to_source_uses"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "GreenRetrofitResult.write"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "InvalidAddressError"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "symbol": "address_to_weather"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile.DHW_HEAT_PER_LITER"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile.ID"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile.PEOPLE_ACTIVITY_LEVEL"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile.occupied_hours"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile.operating_days"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile.to_dict"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfile.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "KoreanUsageProfileExtended"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "Profile"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "Profile.get_DB"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/profile.py",
+      "symbol": "read_csv_without_units"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "BlindType"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "BlindType.SHADE"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "BlindType.VENETIAN"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "BlindType.__str__"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Door"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Door.construction"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Door.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Door.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Fenestration"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Fenestration.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Fenestration.__deepcopy__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Fenestration.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Fenestration.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Fenestration.construction"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Fenestration.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Fenestration.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "GlassDoor"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.__deepcopy__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.adjacent_zone"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.area"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.azimuth"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.boundary"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.construction"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.flip"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.get_unique_fenestration_constructions"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.num_doors"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.num_windows"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.reflectance"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.to_dragon"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Surface.type"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Window"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Window.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Window.blind"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Window.construction"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Window.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Window.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.ID"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.area"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.cooling_supply_systems"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.from_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.get_unique_fenestration_constructions"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.get_unique_materials"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.get_unique_surface_constructions"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.heating_supply_systems"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.height"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.infiltration"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.supply_systems"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "symbol": "Zone.to_dragon"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "BlindForNonOutdoorWindow"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "BlindForNonOutdoorWindow.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "BlindForNonOutdoorWindow.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "DualRadiantFloor"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "DualRadiantFloor.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "DualRadiantFloor.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "DuplicatedName"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "DuplicatedName.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "DuplicatedName.inspect"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "EXCEL_INSPECTORS"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ExcelException"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ExcelException.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ExcelException.inspect"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ExcelException.to_dict"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ExcelWarning"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ExcelWarning.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ExcelWarning.inspect"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ExcelWarning.to_dict"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ExcessiveOpeningArea"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ExcessiveOpeningArea.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ExcessiveOpeningArea.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InSufficientSurfaceForZoneSubCategory"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InSufficientSurfaceForZoneSubCategory.NO_CEILING"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InSufficientSurfaceForZoneSubCategory.NO_FLOOR"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InSufficientSurfaceForZoneSubCategory.NO_WALL"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InsufficientMaterialDefinition"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InsufficientMaterialDefinition.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InsufficientMaterialDefinition.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InsufficientSurfaceForZone"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InsufficientSurfaceForZone.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InsufficientSurfaceForZone.inspect"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InsufficientSurfaceForZone.inspect_ceiling"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InsufficientSurfaceForZone.inspect_floor"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InsufficientSurfaceForZone.inspect_wall"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidAdjacentZoneName"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidAdjacentZoneName.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidAdjacentZoneName.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidFenestrationConstruction"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidFenestrationConstruction.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidFenestrationConstruction.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidFenestrationConstructionSubCategory"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidFenestrationConstructionSubCategory.INVALID_CONSTRUCTION_NAME"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidFenestrationConstructionSubCategory.OPAQUE_FOR_WINDOW_OR_GLASSDOOR"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidFenestrationConstructionSubCategory.TRANSPARENT_FOR_DOOR"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidSourceSystemName"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidSourceSystemName.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidSourceSystemName.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidSurfaceConstruction"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidSurfaceConstruction.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidSurfaceConstruction.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidSurfaceConstructionSubCategory"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "InvalidSurfaceConstructionSubCategory.INVALID_CONSTRUCTION_NAME"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "JSON_INSPECTORS"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "JsonException"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "JsonException.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "JsonException.inspect"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "JsonException.to_dict"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "JsonWarning"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "JsonWarning.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "JsonWarning.inspect"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "JsonWarning.to_dict"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NoHVACSystemApplied"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NoHVACSystemApplied.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NoHVACSystemApplied.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NoHVACSystemAppliedSubCategory"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NotUsedSourceSystem"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NotUsedSourceSystem.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NotUsedSourceSystem.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NotUsedSupplySystem"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NotUsedSupplySystem.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NotUsedSupplySystem.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NotUsedSurfaceConstruction"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NotUsedSurfaceConstruction.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "NotUsedSurfaceConstruction.inspect"
+    },
+    {
+      "kind": "class",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ReportCode"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ReportCode.CLEAR"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ReportCode.SEVERE"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/debug.py",
+      "symbol": "ReportCode.WARNING"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "debug_excel"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "debug_json"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "merge_report_codes"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "report_result"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/debug.py",
+      "symbol": "report_to_records"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/utils.py",
+      "symbol": "COLUMN_RENAME_DICT"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/utils.py",
+      "symbol": "GRJSON_FORMAT"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/utils.py",
+      "symbol": "ID_PREFIX"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/utils.py",
+      "symbol": "PROPERTY_RENAME_DICT"
+    },
+    {
+      "kind": "constant",
+      "path": "src/epsimple/utils.py",
+      "symbol": "VALID_COLUMNS"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/utils.py",
+      "symbol": "check_modules"
+    },
+    {
+      "kind": "function",
+      "path": "src/epsimple/utils.py",
+      "symbol": "excel2grjson"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/common.py",
+      "symbol": "Setting"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/common.py",
+      "symbol": "Setting.DEFAULT_EP_VERSION"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/common.py",
+      "symbol": "Setting.DEFAULT_YEAR"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/common.py",
+      "symbol": "Version"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "symbol": "Version.__format__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "symbol": "Version.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "symbol": "Version.__iter__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "symbol": "Version.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "symbol": "Version.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "symbol": "Version.ep_dirname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "symbol": "Version.iddname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "symbol": "Version.major"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "symbol": "Version.minor"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "symbol": "Version.patch"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "symbol": "Version.to_version_anyway"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "symbol": "Directory"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "Directory.ENERGYPLUS_DIR"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "Directory.IDD_DIR"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "Directory.PROFILE_DIR"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "symbol": "PackageInfo"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "PackageInfo.NAME"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "PackageInfo.REQUIRED_PYTHON"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "PackageInfo.VERSION"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "symbol": "SpecialTag"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/constants.py",
+      "symbol": "SpecialTag.__format__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/constants.py",
+      "symbol": "SpecialTag.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/constants.py",
+      "symbol": "SpecialTag.__str__"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "symbol": "THERMAL"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "THERMAL.PEOPLE_ACTIVITY_LEVEL"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "symbol": "Unit"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "Unit.L2M3"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "Unit.MM2M"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "Unit.NONE2PRC"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "Unit.PRC2NONE"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "symbol": "Unit.W2KW"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "AirBoundary"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "AirBoundary.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "AirBoundary.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "AirBoundary.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "AirBoundary.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Construction"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Construction.U"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Construction.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Construction.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Construction.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Construction.heat_capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Construction.reversed"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Construction.thickness"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Construction.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Glazing"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Glazing.G"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Glazing.U"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Glazing.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Glazing.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Glazing.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Glazing.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Layer"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Layer.U"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Layer.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Layer.__hash__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Layer.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Layer.heat_capacity"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Layer.material"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Layer.thickness"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Layer.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Material"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Material.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Material.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Material.conductivity"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Material.density"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Material.roughness"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Material.solar_absorptance"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Material.specific_heat"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Material.thermal_absorptance"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "Material.visible_absorptance"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "MaterialRoughness"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "MaterialRoughness.MEDIUMROUGH"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "MaterialRoughness.MEDIUMSMOOTH"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "MaterialRoughness.ROUGH"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "MaterialRoughness.SMOOTH"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "MaterialRoughness.VERYROUGH"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "MaterialRoughness.__str__"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "NoMassConstruction"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "NoMassConstruction.U"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "NoMassConstruction.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "NoMassConstruction.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "NoMassConstruction.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "symbol": "NoMassConstruction.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "AbsorptionChiller"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "AbsorptionChiller.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "AbsorptionChiller.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "AbsorptionChiller.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "AirHandlingUnit"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "AirHandlingUnit.__deepcopy__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "AirHandlingUnit.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "AirHandlingUnit.coolable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "AirHandlingUnit.heatable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "AirHandlingUnit.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "AirHandlingUnit.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Boiler"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Boiler.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Boiler.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Boiler.to_idf_object"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Boiler.to_idf_object_as_generator"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Chiller"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Chiller.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Chiller.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Chiller.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ClosedSingleSpeedCoolingTower"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ClosedSingleSpeedCoolingTower.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ClosedSingleSpeedCoolingTower.to_idf_main_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ClosedTwoSpeedCoolingTower"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ClosedTwoSpeedCoolingTower.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ClosedTwoSpeedCoolingTower.to_idf_main_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CompressorType"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CompressorType.RECIPROCATING"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CompressorType.SCREW"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CompressorType.TURBO"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CompressorType.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CompressorType.to_idf_curve_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.idf_get_demandbranchlistname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.idf_get_demandmixername"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.idf_get_demandsplittername"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.idf_get_loopname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.idf_get_objname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.idf_get_supplybranchlistname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.idf_get_supplymixername"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.idf_get_supplysplittername"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.to_idf_main_object"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "CoolingTower.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DemandBranchAppender"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DemandBranchAppender.append_to_branchlist"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DemandBranchAppender.append_to_mixer"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DemandBranchAppender.append_to_spliter"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DemandBranchAppender.count_current_branches_branchlist"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DemandBranchAppender.count_current_branches_connector"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DemandBranchAppender.run"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DomesticHotWater"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DomesticHotWater.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DomesticHotWater.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DomesticHotWater.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DomesticHotWater.efficiency"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DomesticHotWater.fuel"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "DomesticHotWater.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiantFloor"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiantFloor.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiantFloor.coolable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiantFloor.heatable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiantFloor.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiantFloor.source"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiantFloor.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiator"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiator.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiator.coolable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiator.heatable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiator.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiator.source"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ElectricRadiator.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "EnergyRecoveryVentilator"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "EnergyRecoveryVentilator.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "EnergyRecoveryVentilator.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "EquipmentListAppender"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "EquipmentListAppender.count_current_equipments"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "EquipmentListAppender.run"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "FanCoilUnit"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "FanCoilUnit.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "FanCoilUnit.coolable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "FanCoilUnit.heatable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "FanCoilUnit.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "FanCoilUnit.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel.COAL"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel.DIESEL"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel.ELECTRICITY"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel.FUELOILNO1"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel.FUELOILNO2"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel.GASOLINE"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel.NATURALGAS"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel.OTHERFUEL1"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel.OTHERFUEL2"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel.PROPANE"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Fuel.__str__"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "GeothermalHeatPump"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "GeothermalHeatPump.idf_objtypename"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "HeatPump"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "HeatPump.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "HeatPump.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "HeatPump.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "OpenSingleSpeedCoolingTower"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "OpenSingleSpeedCoolingTower.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "OpenSingleSpeedCoolingTower.to_idf_main_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "OpenTwoSpeedCoolingTower"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "OpenTwoSpeedCoolingTower.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "OpenTwoSpeedCoolingTower.to_idf_main_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PackagedAirConditioner"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PackagedAirConditioner.coolable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PackagedAirConditioner.heatable"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PhotoVoltaicPanel"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PhotoVoltaicPanel.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PhotoVoltaicPanel.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PhotoVoltaicPanel.area"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PhotoVoltaicPanel.azimuth"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PhotoVoltaicPanel.effective_area_ratio"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PhotoVoltaicPanel.efficiency"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PhotoVoltaicPanel.tilt"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "PhotoVoltaicPanel.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "RadiantFloor"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "RadiantFloor.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "RadiantFloor.coolable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "RadiantFloor.heatable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "RadiantFloor.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "RadiantFloor.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Radiator"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Radiator.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Radiator.coolable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Radiator.heatable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Radiator.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "Radiator.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SequentialLoadFractionController"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SequentialLoadFractionController.find_target_equipment_number"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SequentialLoadFractionController.run"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem.idf_demandbranchlistname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem.idf_demandmixername"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem.idf_demandsplittername"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem.idf_loopname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem.idf_objname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem.idf_supplybranchlistname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem.idf_supplymixername"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem.idf_supplysplittername"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem.idf_terminalunitlistname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SourceSystem.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplyGroup"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplyGroup.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplyGroup.coolable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplyGroup.cooling_systems"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplyGroup.heatable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplyGroup.heating_systems"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplyGroup.sources"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplyGroup.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplySystem"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplySystem.idf_get_airinletnodename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplySystem.idf_get_airoutletnodename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplySystem.idf_get_demandbranchname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplySystem.idf_get_objname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplySystem.idf_objtypename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplySystem.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplySystemToIdfPostProcessor"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplySystemToIdfPostProcessor.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplySystemToIdfPostProcessor.run"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "SupplySystemToIdfPostProcessor.source"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ZoneAirNodeAppender"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ZoneAirNodeAppender.count_current_nodes"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ZoneAirNodeAppender.ensure_nodelist_existence"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ZoneAirNodeAppender.run"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ZoneTerminalUnitAppender"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ZoneTerminalUnitAppender.count_current_units"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "symbol": "ZoneTerminalUnitAppender.run"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "EnergyModel"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "EnergyModel.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "EnergyModel.add_supply_system"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "EnergyModel.conditioned_zones"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "EnergyModel.create_default_idf"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "EnergyModel.surfaces"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "EnergyModel.to_idf"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "EnergyModel.unconditioned_zones"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "EnergyModel.used_constructions"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "EnergyModel.used_layers"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "EnergyModel.used_profiles"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "Terrain"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "Terrain.CITY"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "Terrain.COUNTRY"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "Terrain.OCEAN"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "Terrain.SUBURBS"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/model.py",
+      "symbol": "Terrain.URBAN"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.DATA_INTERVAL"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__add__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__and__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__deepcopy__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__delitem__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__ge__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__gt__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__invert__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__le__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__lt__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__mul__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__or__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__radd__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__rmul__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__rsub__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__rtruediv__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__setitem__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__sub__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.__truediv__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.append"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.astype"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.average"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.clear"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.clip"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.compactize"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.element_eq"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.element_max"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.element_min"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.element_ne"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.extend"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.fixed_length"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.from_compact"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.from_constant"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.from_windows"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.has_nonzero"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.has_positive"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.insert"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.integral"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.is_between"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.is_constant"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.is_negative"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.is_nonzero"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.is_off"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.is_on"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.is_positive"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.is_zero"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.max"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.min"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.nonzero_hours"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.normalize_by_max"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.pop"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.positive_average"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.positive_hours"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.step_in_hours"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.summary"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.time_tuple"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.to_idf_compactexpr"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.type"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "DaySchedule.where"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Profile"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Profile.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Profile.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__add__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__and__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__deepcopy__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__ge__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__gt__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__invert__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__le__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__lt__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__mul__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__or__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__radd__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__rmul__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__rsub__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__rtruediv__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__sub__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.__truediv__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.astype"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.clip"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.element_eq"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.element_max"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.element_min"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.element_ne"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.friday"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.from_constant"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.from_days"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.get_dayschedule"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.holiday"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.is_between"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.is_negative"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.is_nonzero"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.is_off"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.is_on"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.is_positive"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.is_zero"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.max"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.min"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.monday"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.normalize_by_max"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.saturday"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.summary"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.sunday"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.thursday"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.to_dict"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.to_idf_compactexpr"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.tuesday"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.type"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.wednesday"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.weekdays"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.weekends"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "RuleSet.where"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.FIXED_LENGTH"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.TIME_TUPLE"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__add__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__and__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__deepcopy__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__delitem__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__ge__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__gt__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__invert__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__le__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__lt__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__mul__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__or__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__radd__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__rmul__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__rsub__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__rtruediv__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__sub__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.__truediv__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.append"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.apply"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.astype"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.average"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.clear"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.clip"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.compactize"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.dayschedules"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.element_eq"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.element_max"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.element_min"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.element_ne"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.extend"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.from_compact"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.from_constant"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.from_windows"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.insert"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.integral"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.is_between"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.is_negative"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.is_nonzero"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.is_off"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.is_on"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.is_positive"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.is_zero"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.max"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.min"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.normalize_by_max"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.pop"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.positive_average"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.summary"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.to_idf_object"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.type"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.unify_compactized_schedules"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.unify_compactized_schedules_many"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "Schedule.where"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleOperationError"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.FRACTION"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.ONOFF"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.REAL"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.TEMPERATURE"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.idf_objname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.lower_limit"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.numeric_type"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.to_idf_object"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.unit_type"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.upper_limit"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "symbol": "ScheduleType.validate"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Blind"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Blind.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Blind.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Door"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Door.__init__"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Shade"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Shade.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Shade.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Shading"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.area"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.blinded_window"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.boundary"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.center"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.get_subsurface"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.height"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.normal"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.to_idf_object"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.type"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Surface.vertex"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "SurfaceBoundaryCondition"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "SurfaceBoundaryCondition.ADIABATIC"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "SurfaceBoundaryCondition.GROUND"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "SurfaceBoundaryCondition.OUTDOOR"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "SurfaceBoundaryCondition.ZONE"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "SurfaceBoundaryCondition.__str__"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "SurfaceType"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "SurfaceType.CEILING"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "SurfaceType.FLOOR"
+    },
+    {
+      "kind": "constant",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "SurfaceType.WALL"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "SurfaceType.__str__"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__add__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__deepcopy__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__iter__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__mul__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__radd__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__rmul__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__sub__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.__truediv__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.are_coplanar"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.cross"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.distance"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.dot"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.norm"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.unit"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.x"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.y"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Vertex.z"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Window"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Window.__init__"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone.floor_area"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone.floor_surface"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone.idf_airexhaustnodelistname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone.idf_airinletnodelistname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone.idf_equipmentlistname"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone.is_conditioned"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone.supply"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone.to_idf_hvac_default_object"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone.to_idf_load_object"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "symbol": "Zone.to_idf_object"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.load"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.read_idd"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.reference_map_cls"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.reference_map_obj"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.referenced_map_obj"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.required_objects"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.to_pickle"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDD.version"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.__len__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.append"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.check_validity"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.default_filename"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.idd"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.quick_map"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.read_idf"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.run"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.shrink"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.version"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IDF.write"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.default"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.external_list"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.from_text"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.is_autocalculatable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.is_autosizable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.is_deprecated"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.is_extensible"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.is_required"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.is_retaincase"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.key"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.maximum"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.memo"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.minimum"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.name"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.object_list"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.reference"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.reference_cls"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.referenceable"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.type"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddField.unit"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.begin_extensible"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.default"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.extensible"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.format"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.from_text"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.idd_index"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.is_obsolete"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.is_required"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.is_unique"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.memo"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.min_fields"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.name"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.reference"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IddObject.required_fields"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.__deepcopy__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.__getitem__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.__setitem__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.check_field_validity"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.check_validity"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.choices"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.ensure_validity"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.grandparent"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.has_parent"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.idd"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.parent"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObject.rename"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectLinkedDataFrame"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectLinkedDataFrame.__enter__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectLinkedDataFrame.__exit__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectLinkedDataFrame.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectLinkedDataFrame.columns"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectLinkedDataFrame.linked"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.__add__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.__deepcopy__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.__eq__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.__getitem__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.__repr__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.__setitem__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.__str__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.append"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.as_dataframe"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.check_validity"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.clear"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.ensure_validity"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.fieldnames"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.get_fields"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.has_name"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.has_parent"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.idd"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.insert"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.is_containor"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.names"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.parent"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.pop"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.set_fields"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.set_wwr"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "IdfObjectList.to_dataframe"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "symbol": "InvalidFieldValue"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "symbol": "InvalidParentManagement"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "symbol": "StaticIndexedDict"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "StaticIndexedDict.__getitem__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "StaticIndexedDict.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "StaticIndexedDict.__setitem__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "StaticIndexedDict.allowed_keys"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "StaticIndexedDict.items"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "StaticIndexedDict.keys"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "symbol": "StaticIndexedDict.values"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "symbol": "VersionIdentificationError"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/launcher.py",
+      "symbol": "EnergyPlusResult"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "symbol": "EnergyPlusResult.__init__"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "symbol": "EnergyPlusResult.parse_audit"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "symbol": "EnergyPlusResult.parse_bnd"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "symbol": "EnergyPlusResult.parse_err"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "symbol": "EnergyPlusResult.parse_eso"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "symbol": "EnergyPlusResult.parse_table"
+    },
+    {
+      "kind": "class",
+      "path": "src/idragon/launcher.py",
+      "symbol": "ExecutableEnergyPlusNotFoundError"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "symbol": "find_executable_dir"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "symbol": "run"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "symbol": "run_single"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/utils.py",
+      "symbol": "validate_enum"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/utils.py",
+      "symbol": "validate_range"
+    },
+    {
+      "kind": "function",
+      "path": "src/idragon/utils.py",
+      "symbol": "validate_type"
+    }
+  ],
+  "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897"
+}
