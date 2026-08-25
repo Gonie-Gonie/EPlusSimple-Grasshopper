@@ -878,6 +878,19 @@ def check_input_identity(
             csharp_metadata["runtime"]["expandobjects_sha256"],
         ),
     }
+    csharp_roundtrip = python_metadata.get("inputs", {}).get("csharp_roundtrip")
+    if csharp_roundtrip is not None:
+        roundtrip_output = next(
+            (
+                item for item in csharp_metadata.get("outputs", [])
+                if str(item.get("path", "")).casefold() == "roundtrip.grm"
+            ),
+            None,
+        )
+        pairs["csharp_roundtrip_grm_sha256"] = (
+            str(csharp_roundtrip["sha256"]),
+            str(roundtrip_output["sha256"]) if roundtrip_output is not None else "<missing>",
+        )
     mismatches: list[dict[str, Any]] = []
     identities: dict[str, Any] = {}
     for key, (left, right) in pairs.items():
@@ -931,6 +944,14 @@ def compare_case(
         float(tolerance["idf_relative"]),
         idd_schema,
     )
+    if "grm_cross_read" in case["stages"]:
+        checks["grm_cross_read"] = compare_idf(
+            python_case / "authoring.idf",
+            python_case / "csharp-roundtrip-authoring.idf",
+            float(tolerance["idf_absolute"]),
+            float(tolerance["idf_relative"]),
+            idd_schema,
+        )
     skipped_stages: list[str] = []
     if "grr" in case["stages"] and not skip_energyplus:
         comparison = JsonComparison(

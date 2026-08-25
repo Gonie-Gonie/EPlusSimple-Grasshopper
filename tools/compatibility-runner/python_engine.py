@@ -32,6 +32,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--runtime-root", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--csharp-output", type=Path, required=True)
     parser.add_argument("--case")
     parser.add_argument("--skip-energyplus", action="store_true")
     return parser.parse_args()
@@ -137,6 +138,7 @@ def run_case(
     repository_root: Path,
     runtime_root: Path,
     output_root: Path,
+    csharp_output_root: Path,
     upstream_commit: str,
     skip_energyplus: bool,
 ) -> None:
@@ -174,12 +176,23 @@ def run_case(
     normalized_idf = canonicalize_addresses(raw_idf)
     write_text(authoring, normalized_idf + ("" if normalized_idf.endswith("\n") else "\n"))
 
+    csharp_roundtrip_path = csharp_output_root / case_id / "roundtrip.grm"
+    if not csharp_roundtrip_path.is_file():
+        raise FileNotFoundError(csharp_roundtrip_path)
+    csharp_roundtrip_model = GreenRetrofitModel.from_grjson(str(csharp_roundtrip_path))
+    csharp_roundtrip_idf = canonicalize_addresses(str(csharp_roundtrip_model.to_idf()))
+    csharp_roundtrip_authoring = case_root / "csharp-roundtrip-authoring.idf"
+    write_text(
+        csharp_roundtrip_authoring,
+        csharp_roundtrip_idf + ("" if csharp_roundtrip_idf.endswith("\n") else "\n"),
+    )
+
     run_idf = case_root / "python-run.idf"
     write_text(run_idf, raw_idf + ("" if raw_idf.endswith("\n") else "\n"))
     expanded = case_root / "expanded.idf"
     expand_idf(run_idf, expanded, runtime_root)
 
-    produced = [authoring, expanded]
+    produced = [authoring, expanded, csharp_roundtrip_authoring]
     if not skip_energyplus:
         raw_output = case_root / "energyplus-output"
         raw_output.mkdir(parents=True, exist_ok=True)
@@ -211,6 +224,10 @@ def run_case(
         "inputs": {
             "grm": {"path": str(case["input_grm"]), "sha256": input_sha256},
             "weather": {"path": str(case["weather"]), "sha256": weather_sha256},
+            "csharp_roundtrip": {
+                "path": str(csharp_roundtrip_path),
+                "sha256": sha256_file(csharp_roundtrip_path),
+            },
         },
         "runtime": {
             "energyplus_exe_sha256": sha256_file(runtime_root / "energyplus.exe"),
@@ -236,6 +253,7 @@ def main() -> None:
     upstream_root = args.upstream_root.resolve()
     runtime_root = args.runtime_root.resolve()
     output_root = args.output.resolve()
+    csharp_output_root = args.csharp_output.resolve()
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     expected_commit = str(manifest["upstream_commit"])
     actual_commit = git_commit(upstream_root)
@@ -256,6 +274,7 @@ def main() -> None:
             repository_root,
             runtime_root,
             output_root,
+            csharp_output_root,
             actual_commit,
             args.skip_energyplus,
         )

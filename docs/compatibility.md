@@ -33,8 +33,10 @@ Compatibility is assessed at several levels:
 The paired engineering gate is `dev.cmd compatibility`. Every case records the GRM and EPW
 SHA-256 in `fixtures/compatibility/cases.json`; both engines reject changed inputs before model
 generation. The gate also fixes the upstream commit and EnergyPlus executable/IDD/ExpandObjects
-hashes, compares authoring and expanded IDF separately, and records path-level GRR numeric errors
-and warning differences in `artifacts/reports/engineering-compatibility.json`.
+hashes. For every case, the C# writer emits a deterministic GRM that the pinned Python 0.7.0
+reader must accept and convert to the same semantic IDF. The gate then compares authoring and
+expanded IDF separately and records path-level GRR numeric errors and warning differences in
+`artifacts/reports/engineering-compatibility.json`.
 `-AllowDifferences` is a development-only reporting mode and is never evidence of compatibility.
 
 A broad class or object name in the port map does not by itself assert complete

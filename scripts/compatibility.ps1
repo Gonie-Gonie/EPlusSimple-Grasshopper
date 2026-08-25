@@ -106,32 +106,6 @@ Ensure-Directory -Path $csharpOutput
 Ensure-Directory -Path $logsRoot
 Ensure-Directory -Path (Split-Path -Parent $artifactReport)
 
-$env:PYTHONHASHSEED = '0'
-$env:PYTHONUTF8 = '1'
-$pythonArguments = @(
-    '-X', 'utf8',
-    $bootstrapPath,
-    '--dependency-root', $dependencyRoot,
-    '--upstream-source', (Join-Path $upstreamRoot 'src'),
-    '--generator', $pythonEnginePath,
-    '--',
-    '--repository-root', $repositoryRoot,
-    '--upstream-root', $upstreamRoot,
-    '--runtime-root', $runtimeRoot,
-    '--manifest', $manifestPath,
-    '--output', $pythonOutput)
-if (-not [string]::IsNullOrWhiteSpace($Case)) {
-    $pythonArguments += @('--case', $Case)
-}
-if ($SkipEnergyPlus) {
-    $pythonArguments += '--skip-energyplus'
-}
-Invoke-LoggedNativeCommand `
-    -FilePath $pythonExecutable `
-    -ArgumentList $pythonArguments `
-    -LogPath (Join-Path $logsRoot 'python-engine.log') `
-    -FailureMessage 'The Python compatibility engine failed'
-
 Set-RepositoryBuildEnvironment `
     -RepositoryRoot $repositoryRoot `
     -DotNetExecutable $dotnetExecutable
@@ -159,6 +133,33 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $dotnetArguments `
     -LogPath (Join-Path $logsRoot 'csharp-engine.log') `
     -FailureMessage 'The C# compatibility engine failed'
+
+$env:PYTHONHASHSEED = '0'
+$env:PYTHONUTF8 = '1'
+$pythonArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', (Join-Path $upstreamRoot 'src'),
+    '--generator', $pythonEnginePath,
+    '--',
+    '--repository-root', $repositoryRoot,
+    '--upstream-root', $upstreamRoot,
+    '--runtime-root', $runtimeRoot,
+    '--manifest', $manifestPath,
+    '--output', $pythonOutput,
+    '--csharp-output', $csharpOutput)
+if (-not [string]::IsNullOrWhiteSpace($Case)) {
+    $pythonArguments += @('--case', $Case)
+}
+if ($SkipEnergyPlus) {
+    $pythonArguments += '--skip-energyplus'
+}
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $pythonArguments `
+    -LogPath (Join-Path $logsRoot 'python-engine.log') `
+    -FailureMessage 'The Python compatibility engine failed'
 
 $reportArguments = @(
     '-X', 'utf8',

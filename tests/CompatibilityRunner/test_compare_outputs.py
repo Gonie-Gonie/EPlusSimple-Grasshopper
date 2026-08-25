@@ -567,6 +567,26 @@ class WarningAndIdentityTests(unittest.TestCase):
             {item["identity"] for item in result["mismatches"]},
         )
 
+    def test_input_identity_verifies_python_read_the_emitted_csharp_grm(self) -> None:
+        python_metadata = metadata()
+        csharp_metadata = copy.deepcopy(python_metadata)
+        python_metadata["inputs"]["csharp_roundtrip"] = {"sha256": "f" * 64}  # type: ignore[index]
+        csharp_metadata["outputs"] = [
+            {"path": "roundtrip.grm", "sha256": "f" * 64}
+        ]
+
+        passing = runner.check_input_identity(python_metadata, csharp_metadata)
+        self.assertTrue(passing["passed"], passing["mismatches"])
+
+        csharp_metadata["outputs"][0]["sha256"] = "0" * 64  # type: ignore[index]
+        failing = runner.check_input_identity(python_metadata, csharp_metadata)
+
+        self.assertFalse(failing["passed"])
+        self.assertEqual(
+            "csharp_roundtrip_grm_sha256",
+            failing["mismatches"][0]["identity"],
+        )
+
     def test_case_manifest_pins_grm_and_weather_hashes(self) -> None:
         case = {
             "id": "pinned-inputs",
@@ -600,6 +620,40 @@ class WarningAndIdentityTests(unittest.TestCase):
 
 
 class CaseStageTests(unittest.TestCase):
+    def test_grm_cross_read_compares_python_original_and_csharp_roundtrip_models(self) -> None:
+        case = {
+            "id": "grm-cross-read",
+            "stages": ["grm_cross_read", "authoring_idf", "expanded_idf"],
+        }
+        with TemporaryWorkspace() as workspace:
+            python_root = workspace.path / "python"
+            csharp_root = workspace.path / "csharp"
+            for root in (python_root, csharp_root):
+                case_root = root / "grm-cross-read"
+                case_root.mkdir(parents=True)
+                workspace.write_json(
+                    str((case_root / "metadata.json").relative_to(workspace.path)).replace("\\", "/"),
+                    metadata(),
+                )
+                for name in ("authoring.idf", "expanded.idf"):
+                    workspace.write_text(
+                        str((case_root / name).relative_to(workspace.path)).replace("\\", "/"),
+                        "Version, 24.2;\n",
+                    )
+            cross_read = workspace.write_text(
+                "python/grm-cross-read/csharp-roundtrip-authoring.idf",
+                "Version, 24.2;\n",
+            )
+
+            passing = runner.compare_case(case, manifest(), python_root, csharp_root)
+            cross_read.write_text("Version, 23.1;\n", encoding="utf-8", newline="\n")
+            failing = runner.compare_case(case, manifest(), python_root, csharp_root)
+
+        self.assertTrue(passing["passed"], passing["checks"])
+        self.assertTrue(passing["checks"]["grm_cross_read"]["passed"])
+        self.assertFalse(failing["passed"])
+        self.assertFalse(failing["checks"]["grm_cross_read"]["passed"])
+
     def test_undeclared_optional_stages_do_not_require_grr_or_warning_files(self) -> None:
         case = {
             "id": "authoring-only",

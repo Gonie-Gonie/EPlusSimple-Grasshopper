@@ -89,6 +89,9 @@ internal static class Program
         var produced = new List<string>();
 
         GreenRetrofitModel model = GrmReader.ReadFile(inputPath).RequireModel();
+        string roundTripGrmPath = Path.Combine(caseRoot, "roundtrip.grm");
+        GrmWriter.WriteFile(roundTripGrmPath, model);
+        produced.Add(roundTripGrmPath);
         GreenRetrofitConversionResult conversion = GreenRetrofitConverter.Convert(model);
         if (!conversion.Success)
         {
