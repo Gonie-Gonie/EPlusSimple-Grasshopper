@@ -35,3 +35,17 @@
     engineering_result: none
     packaging: separate runtime-specific plugin payloads
   approval: user-requested
+
+- id: legacy-people-activity-type-limit
+  upstream:
+    path: src/idragon/dragon/model.py
+    symbol: EnergyModel.create_default_idf
+  difference:
+    upstream: emits the people-activity Schedule:Constant reference as Real although the declared object is named ScheduleTypeLimits:Real
+    dotnet: preserves that authoring text exactly and normalizes the alias only in a disposable validation copy
+  effect:
+    engineering_result: none
+    raw_idf_text: exact upstream text retained
+    energyplus: same not-validated warning as pinned Python 0.7.0
+    grasshopper_validation: warning instead of a blocking error
+  approval: accepted-upstream-parity

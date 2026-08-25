@@ -39,6 +39,14 @@ expanded IDF separately and records path-level GRR numeric errors and warning di
 `artifacts/reports/engineering-compatibility.json`.
 `-AllowDifferences` is a development-only reporting mode and is never evidence of compatibility.
 
+The data parity suite exhaustively checks all 24 pinned usage profiles through their final
+legacy `Schedule:Compact` fields, every surface-regulation branch, every fenestration key, all
+252 weather rows, and climate effective-date boundaries. `dev.cmd examples` separately solves,
+saves, and reopens seven tracked Grasshopper definitions and validates two Rhino building models
+inside both Rhino 7 and Rhino 8. Known authoring quirks retained for exact upstream parity are
+listed in `upstream/compatibility-exceptions.yml`; they remain visible as warnings and are not
+silently removed from the emitted IDF.
+
 A broad class or object name in the port map does not by itself assert complete
 behavioral parity. Review `upstream/reports`, compatibility exceptions, and the
 release notes for the exact verified matrix.

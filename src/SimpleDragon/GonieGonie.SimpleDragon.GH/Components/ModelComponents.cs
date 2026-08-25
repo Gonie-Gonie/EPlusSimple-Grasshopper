@@ -425,7 +425,7 @@ public sealed class ConvertGreenRetrofitModelComponent : SimpleDragonComponent
                 });
             if (schema is not null)
             {
-                diagnostics.AddRange(IdfValidator.Validate(document).Diagnostics);
+                diagnostics.AddRange(GreenRetrofitIdfValidator.Validate(document).Diagnostics);
             }
 
             DA.SetData(0, new DragonEnergyModelGoo(conversion.EnergyModel));

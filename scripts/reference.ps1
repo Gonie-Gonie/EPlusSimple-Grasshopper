@@ -27,6 +27,7 @@ $lockPath = Join-Path $repositoryRoot 'upstream\upstream.lock.json'
 $requirementsPath = Join-Path $repositoryRoot 'tools\python-reference\requirements.lock.txt'
 $bootstrapPath = Join-Path $repositoryRoot 'tools\python-reference\bootstrap_reference.py'
 $generatorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_reference.py'
+$profileGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_usage_profile_schedule_oracle.py'
 $tempRoot = Join-Path $repositoryRoot 'temp'
 $referenceTempRoot = Join-Path $tempRoot 'reference'
 $logsRoot = Join-Path $referenceTempRoot 'logs'
@@ -63,7 +64,7 @@ if ($Mode -eq 'Verify' -and $UpdateBaseline) {
     throw '-UpdateBaseline cannot be combined with -Mode Verify.'
 }
 
-foreach ($requiredFile in @($settingsPath, $lockPath, $requirementsPath, $bootstrapPath, $generatorPath)) {
+foreach ($requiredFile in @($settingsPath, $lockPath, $requirementsPath, $bootstrapPath, $generatorPath, $profileGeneratorPath)) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
         throw "Required reference-oracle input is missing: '$requiredFile'. Run 'dev.cmd setup' if local.settings.json is absent."
     }
@@ -449,13 +450,30 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python reference generator into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile and reference generators into '$outputRoot'."
     exit 0
 }
 
 $env:PYTHONHASHSEED = '0'
 $env:PYTHONUTF8 = '1'
 $upstreamSource = Join-Path $UpstreamPath 'src'
+$profileOraclePath = Join-Path $outputRoot 'usage-profile-schedule-oracle.json'
+$profileGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $profileGeneratorPath,
+    '--',
+    '--output', $profileOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $profileGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-usage-profile-reference.log') `
+    -FailureMessage 'Generating the Python usage-profile reference oracle failed'
+
 $generatorArguments = @(
     '-X', 'utf8',
     $bootstrapPath,

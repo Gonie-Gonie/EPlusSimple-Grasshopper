@@ -46,6 +46,11 @@
       "path": "surface-construction-database.json",
       "bytes": 836229,
       "sha256": "1a6b4b569354dc5481cb6aa194cb57a4e65b22810bcda47aa75687acaf2d80d7"
+    },
+    {
+      "path": "usage-profile-schedule-oracle.json",
+      "bytes": 322781,
+      "sha256": "22274168f78cbab742cbfa4ff5bcc90734a99f43ba0ea5531426d9c2e22ad4f0"
     }
   ]
 }

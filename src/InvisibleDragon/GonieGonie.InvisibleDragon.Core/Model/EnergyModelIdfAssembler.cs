@@ -45,7 +45,10 @@ internal static class EnergyModelIdfAssembler
             }
 
             uniqueSchedules.Add(schedule.Name, schedule);
-            document.Append(ScheduleIdfExporter.Create(context, schedule));
+            document.Append(ScheduleIdfExporter.Create(
+                context,
+                schedule,
+                options.UseLegacySimpleDragonScheduleMetadata));
         }
 
         Dictionary<EntityId, EnergyRecoveryVentilator> legacyVentilators =
@@ -54,7 +57,13 @@ internal static class EnergyModelIdfAssembler
         foreach (Zone zone in model.Zones)
         {
             legacyVentilators.TryGetValue(zone.Id, out EnergyRecoveryVentilator? legacyVentilator);
-            AppendZoneLoads(document, context, zone, uniqueSchedules, legacyVentilator);
+            AppendZoneLoads(
+                document,
+                context,
+                zone,
+                uniqueSchedules,
+                legacyVentilator,
+                options.UseLegacySimpleDragonScheduleMetadata);
         }
 
         AppendHvac(document, context, model, options, legacyVentilators);
@@ -78,7 +87,9 @@ internal static class EnergyModelIdfAssembler
         yield return context.CreateRaw("Timestep", 6);
         yield return context.CreateRaw("RunPeriod", "Year-Round", 1, 1, 2026, 12, 31, 2026);
         yield return context.CreateRaw("GlobalGeometryRules", "UpperLeftCorner", "CounterClockwise", "World");
-        foreach (IdfObject typeLimit in ScheduleIdfExporter.CreateTypeLimits(context))
+        foreach (IdfObject typeLimit in ScheduleIdfExporter.CreateTypeLimits(
+            context,
+            options.UseLegacySimpleDragonScheduleMetadata))
         {
             yield return typeLimit;
         }
@@ -589,7 +600,8 @@ internal static class EnergyModelIdfAssembler
         IdfGenerationContext context,
         Zone zone,
         IDictionary<string, Schedule> schedules,
-        EnergyRecoveryVentilator? legacyVentilator)
+        EnergyRecoveryVentilator? legacyVentilator,
+        bool legacySimpleDragonSchedules)
     {
         ZoneProfile profile = zone.Profile;
         if (profile.Lighting is not null && zone.LightingPowerDensityWattsPerSquareMetre > 0)
@@ -597,15 +609,31 @@ internal static class EnergyModelIdfAssembler
             document.Append(context.CreateRaw("Lights", $"light:{zone.Name}", zone.Name, profile.Lighting.Name, "Watts/Area", null, zone.LightingPowerDensityWattsPerSquareMetre));
         }
 
-        if (profile.Equipment is not null && profile.Equipment.Maximum > 0)
+        if (profile.Equipment is not null
+            && (profile.Equipment.Maximum > 0 || legacySimpleDragonSchedules))
         {
-            string schedule = AppendNormalizedSchedule(document, context, profile.Equipment, zone.Name, "equipment", schedules);
+            string schedule = AppendNormalizedSchedule(
+                document,
+                context,
+                profile.Equipment,
+                zone.Name,
+                "equipment",
+                schedules,
+                legacySimpleDragonSchedules);
             document.Append(context.CreateRaw("ElectricEquipment", $"electric_equipment:{zone.Name}", zone.Name, schedule, "Watts/Area", null, profile.Equipment.Maximum));
         }
 
-        if (profile.Occupant is not null && profile.Occupant.Maximum > 0)
+        if (profile.Occupant is not null
+            && (profile.Occupant.Maximum > 0 || legacySimpleDragonSchedules))
         {
-            string schedule = AppendNormalizedSchedule(document, context, profile.Occupant, zone.Name, "occupant", schedules);
+            string schedule = AppendNormalizedSchedule(
+                document,
+                context,
+                profile.Occupant,
+                zone.Name,
+                "occupant",
+                schedules,
+                legacySimpleDragonSchedules);
             document.Append(context.Create(
                 "People",
                 IdfGenerationContext.Field(0, "Name", $"people:{zone.Name}"),
@@ -666,14 +694,15 @@ internal static class EnergyModelIdfAssembler
         Schedule schedule,
         string zoneName,
         string purpose,
-        IDictionary<string, Schedule> schedules)
+        IDictionary<string, Schedule> schedules,
+        bool legacySimpleDragon)
     {
         string name = $"{schedule.Name}_normalized:for:{zoneName}:{purpose}";
         if (!schedules.ContainsKey(name))
         {
             Schedule normalized = schedule.NormalizeByMaximum(name);
             schedules.Add(name, normalized);
-            document.Append(ScheduleIdfExporter.Create(context, normalized));
+            document.Append(ScheduleIdfExporter.Create(context, normalized, legacySimpleDragon));
         }
 
         return name;

@@ -1,5 +1,7 @@
 using System.Globalization;
+using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Hvac;
+using GonieGonie.InvisibleDragon.Idd;
 using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Model;
 using DragonConstruction = GonieGonie.InvisibleDragon.Construction.Construction;
@@ -275,11 +277,56 @@ public sealed class GreenRetrofitConversionTests
         Assert.Equal("Coincident", zoneSizing[36]);
         IdfObject lighting = Assert.Single(
             idf["Schedule:Compact"],
-            schedule => schedule.Name!.EndsWith("-Lighted:MUL:0xAUTO0000:INVERTED", StringComparison.Ordinal));
+            schedule => schedule.Name!.EndsWith("-Lighted:MUL:0xAUTO0002:INVERTED", StringComparison.Ordinal));
         Assert.Equal("ScheduleTypeLimits:Fraction", lighting[1]);
         Assert.Contains(
             idf["Schedule:Compact"],
             schedule => schedule.Name!.Contains("-HVACOperating:AND:0xAUTO0000:INVERTED", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void LegacyPeopleActivityReferenceIsACompatibilityWarningWithoutMaskingOtherReferences()
+    {
+        const string idd = """
+            !IDD_Version 24.2.0
+            \group Schedules
+            ScheduleTypeLimits,
+              A1; \field Name
+                  \reference ScheduleTypeLimitsNames
+            Schedule:Constant,
+              A1, \field Name
+              A2, \field Schedule Type Limits Name
+                  \type object-list
+                  \object-list ScheduleTypeLimitsNames
+              N1; \field Hourly Value
+                  \type real
+            """;
+        IddSchema schema = IddParser.Parse(idd);
+        var legacy = new IdfDocument(schema, new[]
+        {
+            new IdfObject("ScheduleTypeLimits", new List<string?> { "ScheduleTypeLimits:Real" }),
+            new IdfObject("Schedule:Constant", new List<string?> { "$DEFAULT$PEOPLEACTIVITY", "Real", "107" }),
+        });
+
+        ValidationResult strict = IdfValidator.Validate(legacy);
+        ValidationResult compatible = GreenRetrofitIdfValidator.Validate(legacy);
+
+        Assert.Contains(strict.Diagnostics, item => item.Code == "IDF_FIELD_REFERENCE");
+        Assert.True(compatible.IsValid, Describe(compatible.Diagnostics));
+        Diagnostic warning = Assert.Single(compatible.Diagnostics);
+        Assert.Equal("SD.IDF.LEGACY_PEOPLE_ACTIVITY_TYPE_LIMIT", warning.Code);
+        Assert.Equal(DiagnosticSeverity.Warning, warning.Severity);
+        Assert.Equal("Real", legacy["Schedule:Constant"][0][1]);
+
+        var unrelatedMissingReference = new IdfDocument(schema, new[]
+        {
+            new IdfObject("ScheduleTypeLimits", new List<string?> { "ScheduleTypeLimits:Real" }),
+            new IdfObject("Schedule:Constant", new List<string?> { "Other", "Missing", "1" }),
+        });
+        ValidationResult unrelated = GreenRetrofitIdfValidator.Validate(unrelatedMissingReference);
+
+        Assert.False(unrelated.IsValid);
+        Assert.Contains(unrelated.Diagnostics, item => item.Code == "IDF_FIELD_REFERENCE");
     }
 
     private static void AssertFractionSchedule(

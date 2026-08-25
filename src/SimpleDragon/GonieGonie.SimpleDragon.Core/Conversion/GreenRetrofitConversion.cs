@@ -1070,8 +1070,10 @@ public static class GreenRetrofitConverter
                 || profile.Source == UsageProfileSource.Extended
                 ? "$FROM_DB$:" + profile.Name
                 : profile.Id.Value;
-            const string invertedVacationMask = "0xAUTO0000:INVERTED";
-            string occupiedMaskName = prefix + "-Occupied:AND:" + invertedVacationMask;
+            const string hvacVacationMask = "0xAUTO0000:INVERTED";
+            const string occupiedVacationMask = "0xAUTO0001:INVERTED";
+            const string lightingVacationMask = "0xAUTO0002:INVERTED";
+            string occupiedMaskName = prefix + "-Occupied:AND:" + occupiedVacationMask;
             double occupantFactor = profile.Occupancy
                 / profile.OccupiedHours
                 / UsageProfileConstants.PeopleSensibleActivityWattsPerPerson;
@@ -1087,7 +1089,7 @@ public static class GreenRetrofitConverter
                 occupantFactor,
                 DragonScheduleType.Real);
             DragonSchedule hvac = WeeklyWindowSchedule(
-                prefix + "-HVACOperating:AND:" + invertedVacationMask,
+                prefix + "-HVACOperating:AND:" + hvacVacationMask,
                 profile,
                 profile.HvacStart,
                 profile.HvacEnd,
@@ -1108,7 +1110,7 @@ public static class GreenRetrofitConverter
                 hotWaterFactor,
                 DragonScheduleType.Real);
             DragonSchedule lighting = LightingSchedule(
-                prefix + "-Lighted:MUL:" + invertedVacationMask,
+                prefix + "-Lighted:MUL:" + lightingVacationMask,
                 profile);
             var converted = new DragonProfile(
                 profile.Id,
@@ -1141,7 +1143,7 @@ public static class GreenRetrofitConverter
             DaySchedule active = WindowDay(name + ":active", startHour, endHour, activeValue, type);
             DaySchedule off = DaySchedule.Constant(name + ":off", 0d, type);
             RuleSet weekly = WeeklyRuleSet(name + ":weekly", profile, active, off, type);
-            RuleSet vacation = RuleSet.FromDaySchedule(name + ":vacation", off);
+            RuleSet vacation = VacationRuleSet(name + ":vacation", weekly, off, type);
             return ApplyVacations(new DragonSchedule(name, Enumerable.Repeat(weekly, DragonSchedule.FixedLength), type), profile, vacation);
         }
 
@@ -1156,11 +1158,44 @@ public static class GreenRetrofitConverter
             DaySchedule active = LightingDay(name + ":active", profile);
             DaySchedule off = DaySchedule.Constant(name + ":off", 0d, DragonScheduleType.Fraction);
             RuleSet weekly = WeeklyRuleSet(name + ":weekly", profile, active, off, DragonScheduleType.Fraction);
-            RuleSet vacation = RuleSet.FromDaySchedule(name + ":vacation", off);
+            RuleSet vacation = VacationRuleSet(
+                name + ":vacation",
+                weekly,
+                off,
+                DragonScheduleType.Fraction);
             return ApplyVacations(
                 new DragonSchedule(name, Enumerable.Repeat(weekly, DragonSchedule.FixedLength), DragonScheduleType.Fraction),
                 profile,
                 vacation);
+        }
+
+        private static RuleSet VacationRuleSet(
+            string name,
+            RuleSet weekly,
+            DaySchedule off,
+            DragonScheduleType type)
+        {
+            DaySchedule overrideOff = DaySchedule.Constant(name + ":override", 0d, type);
+            DaySchedule? Preserve(DaySchedule? candidate, DaySchedule fallback)
+            {
+                return candidate is not null && !candidate.Equals(fallback)
+                    ? overrideOff
+                    : null;
+            }
+
+            return new RuleSet(
+                name,
+                off,
+                off,
+                monday: Preserve(weekly.Monday, weekly.Weekdays),
+                tuesday: Preserve(weekly.Tuesday, weekly.Weekdays),
+                wednesday: Preserve(weekly.Wednesday, weekly.Weekdays),
+                thursday: Preserve(weekly.Thursday, weekly.Weekdays),
+                friday: Preserve(weekly.Friday, weekly.Weekdays),
+                saturday: Preserve(weekly.Saturday, weekly.Weekends),
+                sunday: Preserve(weekly.Sunday, weekly.Weekends),
+                holiday: Preserve(weekly.Holiday, weekly.Weekends),
+                type: type);
         }
 
         private static DragonSchedule ApplyVacations(
@@ -1282,24 +1317,67 @@ public static class GreenRetrofitConverter
                     : hour >= profile.OccupantStart || hour < profile.OccupantEnd;
             }
 
-            int required = checked((int)Math.Round(
-                profile.LightingHours * DaySchedule.IntervalsPerHour,
-                MidpointRounding.AwayFromZero));
             int[] occupied = Enumerable.Range(0, DaySchedule.FixedLength)
                 .Where(IsOccupied)
-                .OrderByDescending(index => CircularDistanceToNoon(index))
-                .ThenBy(index => index)
                 .ToArray();
-            if (required > occupied.Length)
+            double remaining = profile.LightingHours * DaySchedule.IntervalsPerHour;
+            if (remaining > occupied.Length)
             {
                 throw new InvalidOperationException(
                     "Profile '" + profile.Name + "' has more lighting intervals than occupied intervals.");
             }
 
             double[] values = new double[DaySchedule.FixedLength];
-            foreach (int index in occupied.Take(required))
+            IEnumerable<IGrouping<double, int>> normalGroups = occupied
+                .Where(index => index >= 6 * DaySchedule.IntervalsPerHour)
+                .GroupBy(CircularDistanceToNoon)
+                .OrderByDescending(group => group.Key);
+            foreach (IGrouping<double, int> group in normalGroups)
             {
-                values[index] = 1d;
+                if (remaining <= 0d)
+                {
+                    break;
+                }
+
+                int[] tied = group.ToArray();
+                if (remaining >= tied.Length)
+                {
+                    foreach (int index in tied)
+                    {
+                        values[index] = 1d;
+                    }
+
+                    remaining -= tied.Length;
+                }
+                else
+                {
+                    double value = remaining / tied.Length;
+                    foreach (int index in tied)
+                    {
+                        values[index] = value;
+                    }
+
+                    remaining = 0d;
+                }
+            }
+
+            foreach (int index in occupied.Where(
+                index => index < 6 * DaySchedule.IntervalsPerHour))
+            {
+                if (remaining <= 0d)
+                {
+                    break;
+                }
+
+                double value = Math.Min(1d, remaining);
+                values[index] = value;
+                remaining -= value;
+            }
+
+            if (remaining > 1.0e-9d)
+            {
+                throw new InvalidOperationException(
+                    "Profile '" + profile.Name + "' could not allocate all lighting intervals.");
             }
 
             return new DaySchedule(name, values, DragonScheduleType.Fraction);
