@@ -89,6 +89,38 @@ public sealed class GreenRetrofitConversionTests
     }
 
     [Fact]
+    public void CoolRoofUsesPinnedPythonNamesForConstructionLayerAndMaterial()
+    {
+        string json = File.ReadAllText(Fixture("grm"));
+        const string missingReflectance = "\"coolroof_reflectance\": null";
+        Assert.Contains(missingReflectance, json, StringComparison.Ordinal);
+        GreenRetrofitModel source = GrmReader.Read(
+            json.Replace(
+                missingReflectance,
+                "\"coolroof_reflectance\": 0.65",
+                StringComparison.Ordinal)).RequireModel();
+
+        GreenRetrofitConversionResult result = GreenRetrofitConverter.Convert(source);
+
+        Assert.True(result.Success, Describe(result));
+        DragonSurface roof = Assert.Single(
+            result.RequireEnergyModel().Surfaces,
+            surface => surface.Id == new GonieGonie.BuildingEnergy.Contracts.EntityId("SURF-0x000005"));
+        DragonConstruction construction = Assert.IsType<DragonConstruction>(roof.Construction);
+        Assert.Equal("$FOR_COOLROOF$:CTSF-0x000002", construction.Name);
+        Assert.Equal("$FOR_COOLROOF$:MTRL-0x000005_19.0mm", construction.Layers[0].Name);
+        Assert.Equal("$FOR_COOLROOF$:MTRL-0x000005", construction.Layers[0].Material.Name);
+
+        IdfDocument idf = result.ToIdfDocument();
+        Assert.Contains(
+            idf["Construction"],
+            item => item.Name == "$FOR_COOLROOF$:CTSF-0x000002:for:SURF-0x000005");
+        Assert.Contains(
+            idf["Material"],
+            item => item.Name == "$FOR_COOLROOF$:MTRL-0x000005_19.0mm");
+    }
+
+    [Fact]
     public void ConvertedIdfUsesPinnedLegacyWindowAndDeclaredPeopleActivityField()
     {
         GreenRetrofitModel source = GrmReader.ReadFile(Fixture("grm")).RequireModel();

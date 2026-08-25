@@ -20,6 +20,8 @@ public enum CompressorType
 /// </summary>
 public sealed class Chiller : SourceSystem
 {
+    private string _availabilityScheduleName = "ALLON";
+
     public Chiller(
         EntityId id,
         string name,
@@ -81,6 +83,22 @@ public sealed class Chiller : SourceSystem
 
     public override string IdfObjectName => $"Chiller_named_{Name}";
 
+    internal static Chiller CreateLegacyDisabled(
+        EntityId id,
+        string name,
+        CoolingTower coolingTower)
+    {
+        var chiller = new Chiller(
+            id,
+            name,
+            1E-10,
+            CompressorType.Turbo,
+            coolingTower,
+            1E-10);
+        chiller._availabilityScheduleName = "ALLOFF";
+        return chiller;
+    }
+
     public override IReadOnlyList<IdfObject> ToIdfObjects(
         IdfGenerationContext context,
         IReadOnlyList<PlantDemandConnection>? demandConnections = null,
@@ -100,8 +118,16 @@ public sealed class Chiller : SourceSystem
             ChilledWaterOutletNodeName,
             PumpMotorEfficiency,
             SetpointTemperatureCelsius,
-            demandConnections ?? Array.Empty<PlantDemandConnection>()));
+            demandConnections ?? Array.Empty<PlantDemandConnection>(),
+            _availabilityScheduleName));
         return objects;
+    }
+
+    internal string IdfObjectTypeFor(IdfGenerationContext context)
+    {
+        return context.Options.UseLegacySimpleDragonHvacTopology
+            ? "Chiller:Electric:EIR"
+            : IdfObjectType;
     }
 
     internal string ChilledWaterInletNodeName => $"{IdfObjectName} ChilledWater InletNode";
@@ -114,7 +140,8 @@ public sealed class Chiller : SourceSystem
 
     private IdfObject CreateMainComponent(IdfGenerationContext context)
     {
-        if (Compressor == CompressorType.Screw)
+        if (Compressor == CompressorType.Screw
+            && !context.Options.UseLegacySimpleDragonHvacTopology)
         {
             // EnergyPlus 24.2 exposes the pinned temperature-by-PLR surface through
             // the reformulated model; the standard Electric:EIR PLR field is univariate.
@@ -144,13 +171,20 @@ public sealed class Chiller : SourceSystem
                 IdfGenerationContext.Field(21, "Chiller Flow Mode Type", "NotModulated"));
         }
 
+        string objectType = IdfObjectTypeFor(context);
+        object referenceChilledWaterTemperature = context.Options.UseLegacySimpleDragonHvacTopology
+            ? 6.67
+            : SetpointTemperatureCelsius;
+        object referenceCondenserTemperature = context.Options.UseLegacySimpleDragonHvacTopology
+            ? 29.4
+            : 29;
         return context.Create(
-            IdfObjectType,
+            objectType,
             IdfGenerationContext.Field(0, "Name", IdfObjectName),
             IdfGenerationContext.Field(1, "Reference Capacity", NominalCapacityWatts ?? (object)"autosize"),
             IdfGenerationContext.Field(2, "Reference COP", ReferenceCoefficientOfPerformance),
-            IdfGenerationContext.Field(3, "Reference Leaving Chilled Water Temperature", SetpointTemperatureCelsius),
-            IdfGenerationContext.Field(4, "Reference Entering Condenser Fluid Temperature", 29),
+            IdfGenerationContext.Field(3, "Reference Leaving Chilled Water Temperature", referenceChilledWaterTemperature),
+            IdfGenerationContext.Field(4, "Reference Entering Condenser Fluid Temperature", referenceCondenserTemperature),
             IdfGenerationContext.Field(5, "Reference Chilled Water Flow Rate", "autosize"),
             IdfGenerationContext.Field(6, "Reference Condenser Fluid Flow Rate", "autosize"),
             IdfGenerationContext.Field(7, "Cooling Capacity Function of Temperature Curve Name", Curve("CoolingCapaTemp")),

@@ -1,0 +1,217 @@
+{
+  "building": {
+    "name": "GonieGonie Screw Chiller FCU Fixture",
+    "north_axis": 0,
+    "address": "서울특별시 관악구",
+    "vintage": [
+      2020,
+      1,
+      1
+    ],
+    "is_multifamily_housing": false,
+    "floors": [
+      {
+        "floor_number": 1,
+        "zones": [
+          {
+            "id": "ZONE-0x200000",
+            "name": "Chiller Test Office",
+            "height": 3.0,
+            "profile": "소규모사무실",
+            "light_density": 9.0,
+            "supply_system_ids": [
+              "SUPL-0x200000"
+            ],
+            "ventilation_systems": [],
+            "surfaces": [
+              {
+                "id": "SURF-0x200000",
+                "name": "Chiller Test Floor",
+                "type": "floor",
+                "boundary_condition": "ground",
+                "area": 48.0,
+                "construction_id": "CTSF-0x200001",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x200001",
+                "name": "Chiller Test North Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 24.0,
+                "azimuth": 0.0,
+                "construction_id": "CTSF-0x200000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x200002",
+                "name": "Chiller Test East Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 18.0,
+                "azimuth": 90.0,
+                "construction_id": "CTSF-0x200000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x200003",
+                "name": "Chiller Test South Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 24.0,
+                "azimuth": 180.0,
+                "construction_id": "CTSF-0x200000",
+                "fenestrations": [
+                  {
+                    "id": "FNST-0x200000",
+                    "name": "Chiller Test South Window",
+                    "type": "window",
+                    "area": 7.2,
+                    "blind": null,
+                    "construction_id": "CTFN-0x200000"
+                  }
+                ]
+              },
+              {
+                "id": "SURF-0x200004",
+                "name": "Chiller Test West Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 18.0,
+                "azimuth": 270.0,
+                "construction_id": "CTSF-0x200000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x200005",
+                "name": "Chiller Test Roof",
+                "type": "ceiling",
+                "boundary_condition": "outdoors",
+                "area": 48.0,
+                "coolroof_reflectance": 0.65,
+                "construction_id": "CTSF-0x200002",
+                "fenestrations": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "supply_systems": {
+      "fan_coil_unit": [
+        {
+          "id": "SUPL-0x200000",
+          "name": "Screw Chiller Fan Coil",
+          "source_system_id": "SRCE-0x200000"
+        }
+      ]
+    },
+    "source_systems": {
+      "chiller": [
+        {
+          "id": "SRCE-0x200000",
+          "name": "Closed Two-Speed Screw Chiller",
+          "compressor_type": "screw",
+          "coolingtower_type": "closed",
+          "coolingtower_control": "two-speed",
+          "capacity_cooling": 30000.0,
+          "cop_cooling": 5.2,
+          "coolingtower_capacity": 39000.0
+        }
+      ]
+    },
+    "ventilation_systems": [],
+    "photovoltaic_systems": []
+  },
+  "materials": [
+    {
+      "id": "MTRL-0x200000",
+      "name": "Fixture Concrete",
+      "conductivity": 1.4,
+      "density": 2300.0,
+      "specific_heat": 880.0
+    },
+    {
+      "id": "MTRL-0x200001",
+      "name": "Fixture Insulation",
+      "conductivity": 0.04,
+      "density": 30.0,
+      "specific_heat": 1400.0
+    },
+    {
+      "id": "MTRL-0x200002",
+      "name": "Fixture Gypsum",
+      "conductivity": 0.16,
+      "density": 800.0,
+      "specific_heat": 1090.0
+    },
+    {
+      "id": "MTRL-0x200003",
+      "name": "Fixture Roof Membrane",
+      "conductivity": 0.17,
+      "density": 1120.0,
+      "specific_heat": 1460.0
+    }
+  ],
+  "surface_constructions": [
+    {
+      "id": "CTSF-0x200000",
+      "name": "Fixture Chiller Exterior Wall",
+      "layers": [
+        {
+          "material_id": "MTRL-0x200000",
+          "thickness": 0.12
+        },
+        {
+          "material_id": "MTRL-0x200001",
+          "thickness": 0.08
+        },
+        {
+          "material_id": "MTRL-0x200002",
+          "thickness": 0.013
+        }
+      ]
+    },
+    {
+      "id": "CTSF-0x200001",
+      "name": "Fixture Chiller Ground Floor",
+      "layers": [
+        {
+          "material_id": "MTRL-0x200000",
+          "thickness": 0.15
+        },
+        {
+          "material_id": "MTRL-0x200001",
+          "thickness": 0.05
+        }
+      ]
+    },
+    {
+      "id": "CTSF-0x200002",
+      "name": "Fixture Chiller Roof",
+      "layers": [
+        {
+          "material_id": "MTRL-0x200003",
+          "thickness": 0.01
+        },
+        {
+          "material_id": "MTRL-0x200001",
+          "thickness": 0.12
+        },
+        {
+          "material_id": "MTRL-0x200002",
+          "thickness": 0.013
+        }
+      ]
+    }
+  ],
+  "fenestration_constructions": [
+    {
+      "id": "CTFN-0x200000",
+      "name": "Fixture Chiller Double Glazing",
+      "is_transparent": true,
+      "u": 1.8,
+      "g": 0.55
+    }
+  ]
+}

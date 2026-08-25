@@ -140,6 +140,48 @@ public sealed class EnergyModelFixtureMatrixTests
     }
 
     [Fact]
+    public void LegacySimpleDragonThermostatAlwaysUsesDualSetpointWithoutChangingNativeDefault()
+    {
+        Zone zone = CreateZone("ZONE-THERMOSTAT", "Thermostat Zone");
+        var heatingOnly = new ElectricRadiator(
+            new EntityId("HVAC-THERMOSTAT-HEAT"),
+            "Heating only");
+        var model = new EnergyModel(
+            "Thermostat modes",
+            new[] { zone },
+            new[]
+            {
+                new ZoneHvacAssignment(
+                    zone.Id,
+                    new SupplyGroup(new SupplySystem[] { heatingOnly })),
+            });
+
+        IdfDocument native = model.ToIdfDocument();
+        IdfObject nativeControl = Assert.Single(
+            native["Schedule:Constant"],
+            item => item.Name == "ScheduleTypeForThermostat_for_Thermostat Zone");
+        Assert.Equal("1", nativeControl[2]);
+        Assert.Single(native["ThermostatSetpoint:SingleHeating"]);
+        Assert.Empty(native["ThermostatSetpoint:DualSetpoint"]);
+
+        var options = new EnergyModelIdfOptions
+        {
+            UseLegacySimpleDragonHvacTopology = true,
+        };
+        IdfDocument legacy = model.ToIdfDocument(options: options);
+        IdfObject legacyControl = Assert.Single(
+            legacy["Schedule:Constant"],
+            item => item.Name == "ScheduleTypeForThermostat_for_Thermostat Zone");
+        Assert.Equal("4", legacyControl[2]);
+        Assert.Single(legacy["ThermostatSetpoint:DualSetpoint"]);
+        Assert.Empty(legacy["ThermostatSetpoint:SingleHeating"]);
+
+        var context = new IdfGenerationContext(options: options);
+        Assert.Same(options, context.Options);
+        Assert.False(new IdfGenerationContext().Options.UseLegacySimpleDragonHvacTopology);
+    }
+
+    [Fact]
     public void EnergyRecoveryVentilatorAndPhotovoltaicFamiliesJoinZoneAssembly()
     {
         Zone zone = CreateZone("ZONE-ERV", "Ventilated");

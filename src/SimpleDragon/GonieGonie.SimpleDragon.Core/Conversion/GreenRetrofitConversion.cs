@@ -153,6 +153,7 @@ public sealed class GreenRetrofitConversionResult
         {
             UseLegacyRectangularFenestration = true,
             UseLegacySimpleDragonScheduleMetadata = true,
+            UseLegacySimpleDragonHvacTopology = true,
         };
         return RequireEnergyModel().ToIdfDocument(schema, options);
     }
@@ -800,7 +801,7 @@ public static class GreenRetrofitConverter
             DragonLayer outside = opaque.Layers[0];
             double absorptance = 1d - surface.CoolRoofReflectance.Value;
             var material = new DragonMaterial(
-                "COOLROOF:" + outside.Material.Name,
+                "$FOR_COOLROOF$:" + outside.Material.Name,
                 outside.Material.ConductivityWattsPerMetreKelvin,
                 outside.Material.DensityKilogramsPerCubicMetre,
                 outside.Material.SpecificHeatJoulesPerKilogramKelvin,
@@ -809,11 +810,11 @@ public static class GreenRetrofitConverter
                 outside.Material.VisibleAbsorptance,
                 outside.Material.Roughness);
             var layer = new DragonLayer(
-                "COOLROOF:" + outside.Name,
+                "$FOR_COOLROOF$:" + outside.Name,
                 material,
                 outside.ThicknessMetres);
             return new DragonConstruction(
-                "COOLROOF:" + opaque.Name,
+                "$FOR_COOLROOF$:" + opaque.Name,
                 new[] { layer }.Concat(opaque.Layers.Skip(1)));
         }
 

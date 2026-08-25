@@ -19,7 +19,7 @@ internal static class EnergyModelIdfAssembler
 
     internal static IdfDocument Assemble(EnergyModel model, IddSchema? schema, EnergyModelIdfOptions options)
     {
-        IdfGenerationContext context = new(schema);
+        IdfGenerationContext context = new(schema, options);
         IdfDocument document = new(schema, preambleComments: GeneratedPreamble);
         Append(document, CreateDefaults(context, options));
         document.Append(context.Create(
@@ -536,7 +536,7 @@ internal static class EnergyModelIdfAssembler
         string name = $"{schedule.Name}_normalized:for:{zoneName}:{purpose}";
         if (!schedules.ContainsKey(name))
         {
-            Schedule normalized = schedule.Scale(1 / schedule.Maximum, name);
+            Schedule normalized = schedule.NormalizeByMaximum(name);
             schedules.Add(name, normalized);
             document.Append(ScheduleIdfExporter.Create(context, normalized));
         }
@@ -625,7 +625,7 @@ internal static class EnergyModelIdfAssembler
 
             if (assignment is not null)
             {
-                AppendThermostat(document, context, zone, assignment.Supply);
+                AppendThermostat(document, context, zone, assignment.Supply, options);
                 AppendSizing(document, context, zone);
             }
             else if (fragments.Count == 0 && options.AddIdealLoadsForUnassignedZones)
@@ -796,11 +796,17 @@ internal static class EnergyModelIdfAssembler
         return name;
     }
 
-    private static void AppendThermostat(IdfDocument document, IdfGenerationContext context, Zone zone, SupplyGroup supply)
+    private static void AppendThermostat(
+        IdfDocument document,
+        IdfGenerationContext context,
+        Zone zone,
+        SupplyGroup supply,
+        EnergyModelIdfOptions options)
     {
         string controlSchedule = $"ScheduleTypeForThermostat_for_{zone.Name}";
         string thermostat = $"Thermostat_for_{zone.Name}";
-        if (supply.HeatingSystems.Count > 0 && supply.CoolingSystems.Count > 0)
+        if (options.UseLegacySimpleDragonHvacTopology
+            || (supply.HeatingSystems.Count > 0 && supply.CoolingSystems.Count > 0))
         {
             document.Append(context.CreateRaw("Schedule:Constant", controlSchedule, null, 4));
             document.Append(context.CreateRaw("ThermostatSetpoint:DualSetpoint", $"DualSetPoint_for_{zone.Name}", zone.Profile.HeatingSetpoint!.Name, zone.Profile.CoolingSetpoint!.Name));

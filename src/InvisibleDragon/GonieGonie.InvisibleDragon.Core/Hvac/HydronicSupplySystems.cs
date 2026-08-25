@@ -131,7 +131,12 @@ public sealed class FanCoilUnit : SupplySystem
                 IdfGenerationContext.Field(0, "Name", heatingCoilName),
                 IdfGenerationContext.Field(1, "Availability Schedule Name", CanHeat ? availabilityScheduleName : "ALLOFF"),
                 IdfGenerationContext.Field(2, "U-Factor Times Area Value", "autosize"),
-                IdfGenerationContext.Field(3, "Maximum Water Flow Rate", CanHeat ? "autosize" : (object)0),
+                IdfGenerationContext.Field(
+                    3,
+                    "Maximum Water Flow Rate",
+                    context.Options.UseLegacySimpleDragonHvacTopology
+                        ? "autosize"
+                        : CanHeat ? "autosize" : (object)0),
                 IdfGenerationContext.Field(4, "Water Inlet Node Name", heatingWaterInlet),
                 IdfGenerationContext.Field(5, "Water Outlet Node Name", heatingWaterOutlet),
                 IdfGenerationContext.Field(6, "Air Inlet Node Name", coolingOutlet),
@@ -152,7 +157,12 @@ public sealed class FanCoilUnit : SupplySystem
                 IdfGenerationContext.Field(4, "Low Speed Supply Air Flow Ratio", 0.33),
                 IdfGenerationContext.Field(5, "Medium Speed Supply Air Flow Ratio", 0.66),
                 IdfGenerationContext.Field(6, "Maximum Outdoor Air Flow Rate", 0),
-                IdfGenerationContext.Field(7, "Outdoor Air Schedule Name", availabilityScheduleName),
+                IdfGenerationContext.Field(
+                    7,
+                    "Outdoor Air Schedule Name",
+                    context.Options.UseLegacySimpleDragonHvacTopology
+                        ? null
+                        : availabilityScheduleName),
                 IdfGenerationContext.Field(8, "Air Inlet Node Name", airInlet),
                 IdfGenerationContext.Field(9, "Air Outlet Node Name", airOutlet),
                 IdfGenerationContext.Field(10, "Outdoor Air Mixer Object Type", "OutdoorAir:Mixer"),
@@ -171,14 +181,17 @@ public sealed class FanCoilUnit : SupplySystem
                 IdfGenerationContext.Field(23, "Heating Convergence Tolerance", 0.001)),
         };
 
+        string demandBranchName = context.Options.UseLegacySimpleDragonHvacTopology
+            ? $"{Source!.LoopName} Demand Main_{nameof(FanCoilUnit)}_for_{zone.Name}"
+            : $"{Source!.LoopName} Demand {name}";
         var heatingConnection = new PlantDemandConnection(
-            $"{Source!.LoopName} Demand {name}",
+            demandBranchName,
             HeatingCoilObjectType,
             heatingCoilName,
             heatingWaterInlet,
             heatingWaterOutlet);
         var coolingConnection = new PlantDemandConnection(
-            $"{Source!.LoopName} Demand {name}",
+            demandBranchName,
             "Coil:Cooling:Water",
             coolingCoilName,
             coolingWaterInlet,
@@ -209,6 +222,17 @@ public sealed class FanCoilUnit : SupplySystem
         PlantDemandConnection heatingConnection,
         PlantDemandConnection coolingConnection)
     {
+        if (context.Options.UseLegacySimpleDragonHvacTopology)
+        {
+            AppendLegacyOppositePlantLoop(
+                objects,
+                context,
+                equipmentName,
+                heatingConnection,
+                coolingConnection);
+            return;
+        }
+
         if (CanHeat)
         {
             var auxiliary = new AuxiliaryDistrictCooling(
@@ -229,6 +253,44 @@ public sealed class FanCoilUnit : SupplySystem
             heatingConnection);
         objects.AddRange(auxiliaryHeating.ToIdfObjects(context, new[] { heatingBranch }));
     }
+
+    private void AppendLegacyOppositePlantLoop(
+        List<IdfObject> objects,
+        IdfGenerationContext context,
+        string equipmentName,
+        PlantDemandConnection heatingConnection,
+        PlantDemandConnection coolingConnection)
+    {
+        if (CanHeat)
+        {
+            // The pinned Python model creates a disabled chiller loop so the four-pipe
+            // terminal remains structurally complete even when only heating is assigned.
+            var tower = new OpenSingleSpeedCoolingTower(
+                new EntityId($"{Id.Value}-NONUSED-TOWER"),
+                $"NonUsedCoolingTower_for_{equipmentName}",
+                1E-10);
+            Chiller auxiliary = Chiller.CreateLegacyDisabled(
+                new EntityId($"{Id.Value}-NONUSED-CHILLER"),
+                $"NonUsedChiller_for_{equipmentName}",
+                tower);
+            PlantDemandConnection branch = PrefixLegacyNonUsed(coolingConnection);
+            objects.AddRange(auxiliary.ToIdfObjects(context, new[] { branch }));
+            return;
+        }
+
+        var boiler = new LegacyDisabledBoiler(
+            new EntityId($"{Id.Value}-NONUSED-BOILER"),
+            $"NonUsedBoiler_for_{equipmentName}");
+        PlantDemandConnection heatingBranch = PrefixLegacyNonUsed(heatingConnection);
+        objects.AddRange(boiler.ToIdfObjects(context, new[] { heatingBranch }));
+    }
+
+    private static PlantDemandConnection PrefixLegacyNonUsed(PlantDemandConnection connection) => new(
+        "NonUsed_" + connection.BranchName,
+        connection.ComponentObjectType,
+        connection.ComponentName,
+        connection.InletNodeName,
+        connection.OutletNodeName);
 
     private static PlantDemandConnection WithSourceLoop(
         SourceSystem source,
@@ -292,6 +354,52 @@ public sealed class FanCoilUnit : SupplySystem
                 0.9,
                 6,
                 demandConnections ?? Array.Empty<PlantDemandConnection>());
+        }
+    }
+
+    private sealed class LegacyDisabledBoiler : SourceSystem
+    {
+        internal LegacyDisabledBoiler(EntityId id, string name)
+            : base(id, name)
+        {
+        }
+
+        public override string IdfObjectType => "Boiler:HotWater";
+
+        public override string IdfObjectName => $"Boiler_named_{Name}";
+
+        public override IReadOnlyList<IdfObject> ToIdfObjects(
+            IdfGenerationContext context,
+            IReadOnlyList<PlantDemandConnection>? demandConnections = null,
+            IReadOnlyList<string>? terminalUnitNames = null)
+        {
+            DomainGuard.NotNull(context, nameof(context));
+            IdfObject component = context.Create(
+                IdfObjectType,
+                IdfGenerationContext.Field(0, "Name", IdfObjectName),
+                IdfGenerationContext.Field(1, "Fuel Type", Fuel.Coal),
+                IdfGenerationContext.Field(2, "Nominal Capacity", 1E-10),
+                IdfGenerationContext.Field(3, "Nominal Thermal Efficiency", 1E-10),
+                IdfGenerationContext.Field(4, "Efficiency Curve Temperature Evaluation Variable", "LeavingBoiler"),
+                IdfGenerationContext.Field(6, "Design Water Flow Rate", "autosize"),
+                IdfGenerationContext.Field(7, "Minimum Part Load Ratio", 0),
+                IdfGenerationContext.Field(8, "Maximum Part Load Ratio", 1),
+                IdfGenerationContext.Field(9, "Optimum Part Load Ratio", 1),
+                IdfGenerationContext.Field(10, "Boiler Water Inlet Node Name", $"{IdfObjectName} Water InletNode"),
+                IdfGenerationContext.Field(11, "Boiler Water Outlet Node Name", $"{IdfObjectName} Water OutletNode"),
+                IdfGenerationContext.Field(12, "Water Outlet Upper Temperature Limit", 99.9),
+                IdfGenerationContext.Field(13, "Boiler Flow Mode", "NotModulated"),
+                IdfGenerationContext.Field(14, "On Cycle Parasitic Electric Load", 0),
+                IdfGenerationContext.Field(15, "Sizing Factor", 1),
+                IdfGenerationContext.Field(16, "End-Use Subcategory", "General"));
+            return PlantLoopAssembler.CreateHeatingLoop(
+                context,
+                this,
+                component,
+                0.9,
+                60,
+                demandConnections ?? Array.Empty<PlantDemandConnection>(),
+                "ALLOFF");
         }
     }
 }

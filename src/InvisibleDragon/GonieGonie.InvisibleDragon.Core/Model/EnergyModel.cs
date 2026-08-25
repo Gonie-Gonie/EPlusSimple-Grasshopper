@@ -36,6 +36,12 @@ public sealed class EnergyModelIdfOptions
     /// by the pinned Python SimpleDragon conversion.
     /// </summary>
     public bool UseLegacySimpleDragonScheduleMetadata { get; set; }
+
+    /// <summary>
+    /// Retains the HVAC topology emitted by the pinned Python SimpleDragon
+    /// conversion when it differs from the native InvisibleDragon topology.
+    /// </summary>
+    public bool UseLegacySimpleDragonHvacTopology { get; set; }
 }
 
 /// <summary>

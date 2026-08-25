@@ -30,12 +30,20 @@ public readonly struct IdfFieldValue
 /// </summary>
 public sealed class IdfGenerationContext
 {
-    public IdfGenerationContext(IddSchema? schema = null)
+    public IdfGenerationContext(
+        IddSchema? schema = null,
+        EnergyModelIdfOptions? options = null)
     {
         Schema = schema;
+        Options = options ?? new EnergyModelIdfOptions();
     }
 
     public IddSchema? Schema { get; }
+
+    /// <summary>
+    /// Gets the IDF generation behavior shared by all nested exporters.
+    /// </summary>
+    public EnergyModelIdfOptions Options { get; }
 
     public IdfObject Create(string objectType, params IdfFieldValue[] fields)
     {

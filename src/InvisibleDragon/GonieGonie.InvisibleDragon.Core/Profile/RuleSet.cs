@@ -159,6 +159,13 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return Map(day => day * factor, $"{Name}:MUL:{factor}");
     }
 
+    public RuleSet NormalizeByMaximum(string? name = null)
+    {
+        return Map(
+            day => day.NormalizeByMaximum(),
+            name ?? $"{Name}_normalized");
+    }
+
     public RuleSet Clip(double? minimum = null, double? maximum = null, string? name = null)
     {
         return Map(day => day.Clip(minimum, maximum), name ?? $"{Name}:CLIP");

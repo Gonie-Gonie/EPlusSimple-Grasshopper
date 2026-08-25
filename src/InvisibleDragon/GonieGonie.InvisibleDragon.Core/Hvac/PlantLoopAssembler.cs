@@ -11,7 +11,8 @@ internal static class PlantLoopAssembler
         IdfObject sourceObject,
         double pumpMotorEfficiency,
         double setpointTemperature,
-        IReadOnlyList<PlantDemandConnection> demandConnections)
+        IReadOnlyList<PlantDemandConnection> demandConnections,
+        string availabilityScheduleName = "ALLON")
     {
         string loop = source.LoopName;
         string pump = $"VSDPump_for_{source.IdfObjectName}";
@@ -91,7 +92,10 @@ internal static class PlantLoopAssembler
         objects.Add(context.CreateRaw("PlantEquipmentOperationSchemes", $"{loop} OperationScheme", "PlantEquipmentOperation:HeatingLoad", $"{loop} Operation", "ALLON"));
         objects.Add(context.CreateRaw("Schedule:Constant", $"{loop} SetpointTemperature", null, setpointTemperature));
         objects.Add(context.CreateRaw("SetpointManager:Scheduled", $"{loop} SetpointManager", "Temperature", $"{loop} SetpointTemperature", $"{loop} Supply Outlet Pipe OutletNode"));
-        objects.Add(context.CreateRaw("AvailabilityManager:Scheduled", $"{loop} AvailabilityManager", "ALLON"));
+        objects.Add(context.CreateRaw(
+            "AvailabilityManager:Scheduled",
+            $"{loop} AvailabilityManager",
+            availabilityScheduleName));
         objects.Add(context.CreateRaw("AvailabilityManagerAssignmentList", $"{loop} AvailabilityManagerAssignmentList", "AvailabilityManager:Scheduled", $"{loop} AvailabilityManager"));
         objects.Add(context.Create(
             "PlantLoop",

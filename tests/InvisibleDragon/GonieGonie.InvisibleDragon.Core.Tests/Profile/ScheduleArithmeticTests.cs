@@ -108,6 +108,26 @@ public sealed class ScheduleArithmeticTests
         Assert.Equal(ScheduleType.Real, quotient.Type);
     }
 
+    [Fact]
+    public void NormalizeByMaximumDividesEachDayDirectlyByItsOwnMaximum()
+    {
+        double active = 0.04761904761904762d;
+        DaySchedule weekday = DaySchedule.FromWindows(
+            "Weekday",
+            0,
+            new[] { new DayScheduleWindow(TimeSpan.FromHours(9), TimeSpan.FromHours(18), active) });
+        DaySchedule weekend = DaySchedule.Constant("Weekend", active / 2);
+        var ruleSet = new RuleSet("Rules", weekday, weekend);
+        var schedule = new Schedule("Annual", Enumerable.Repeat(ruleSet, Schedule.FixedLength));
+
+        Schedule normalized = schedule.NormalizeByMaximum("Normalized");
+
+        Assert.Equal(1d, normalized[January(1)].Weekdays.Maximum);
+        Assert.Equal(1d, normalized[January(1)].Weekends.Maximum);
+        Assert.Equal("Normalized", normalized.Name);
+        Assert.Equal(active, schedule[January(1)].Weekdays.Maximum);
+    }
+
     private static DateTime January(int day)
     {
         return new DateTime(Schedule.DefaultYear, 1, day);

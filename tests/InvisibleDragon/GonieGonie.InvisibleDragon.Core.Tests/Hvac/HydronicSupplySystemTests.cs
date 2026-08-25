@@ -75,16 +75,103 @@ public sealed class HydronicSupplySystemTests
 
         const string equipmentName = "FanCoilUnit_named_Cooling terminal_for_Cooling Fan Coil Zone";
         IdfObject terminal = document["ZoneHVAC:FourPipeFanCoil"][equipmentName];
+        Assert.Equal(terminal[1], terminal[7]);
         Assert.Equal("autosize", terminal[16]);
         Assert.Equal("0", terminal[21]);
         string coolingCoilName = $"CoolingCoil_for_{equipmentName}";
         IdfObject coolingCoil = document["Coil:Cooling:Water"][coolingCoilName];
         Assert.Equal("autosize", coolingCoil[2]);
+        IdfObject heatingCoil = document["Coil:Heating:Water"][$"HeatingCoil_for_{equipmentName}"];
+        Assert.Equal("ALLOFF", heatingCoil[1]);
+        Assert.Equal("0", heatingCoil[3]);
         IdfObject demand = document["Branch"][$"{chiller.LoopName} Demand {equipmentName}"];
         Assert.Equal("Coil:Cooling:Water", demand[2]);
         Assert.Equal(coolingCoilName, demand[3]);
         Assert.Equal(coolingCoil[9], demand[4]);
         Assert.Equal(coolingCoil[10], demand[5]);
+        Assert.Single(document["DistrictHeating:Water"]);
+        Assert.Empty(document["Boiler:HotWater"]);
+        Assert.DoesNotContain(
+            document["Branch"],
+            item => item.Name?.StartsWith("NonUsed_", StringComparison.Ordinal) == true);
+    }
+
+    [Fact]
+    public void LegacyCoolingOnlyFanCoilExportsPinnedDisabledHeatingLoop()
+    {
+        Zone zone = EnergyModelFixtureMatrixTests.CreateZone(
+            "ZONE-FCU-LEGACY-COOL",
+            "Legacy Cooling Fan Coil Zone");
+        var tower = new OpenSingleSpeedCoolingTower(
+            new EntityId("TOWER-FCU-LEGACY-COOL"),
+            "Legacy Cooling FCU Tower");
+        var chiller = new Chiller(
+            new EntityId("CHILLER-FCU-LEGACY-COOL"),
+            "Legacy Cooling FCU Chiller",
+            5,
+            CompressorType.Turbo,
+            tower);
+        var fanCoil = new FanCoilUnit(
+            new EntityId("FCU-LEGACY-COOL"),
+            "Legacy Cooling terminal",
+            chiller);
+
+        IdfDocument document = ModelWith(zone, fanCoil).ToIdfDocument(
+            options: new EnergyModelIdfOptions
+            {
+                UseLegacySimpleDragonHvacTopology = true,
+            });
+
+        const string equipmentName =
+            "FanCoilUnit_named_Legacy Cooling terminal_for_Legacy Cooling Fan Coil Zone";
+        IdfObject terminal = document["ZoneHVAC:FourPipeFanCoil"][equipmentName];
+        Assert.NotEmpty(terminal[1]);
+        Assert.Equal(string.Empty, terminal[7]);
+        Assert.Equal("autosize", terminal[16]);
+        Assert.Equal("0", terminal[21]);
+
+        string coolingCoilName = $"CoolingCoil_for_{equipmentName}";
+        IdfObject coolingCoil = document["Coil:Cooling:Water"][coolingCoilName];
+        string heatingCoilName = $"HeatingCoil_for_{equipmentName}";
+        IdfObject heatingCoil = document["Coil:Heating:Water"][heatingCoilName];
+        Assert.Equal("ALLOFF", heatingCoil[1]);
+        Assert.Equal("autosize", heatingCoil[3]);
+
+        string mainBranchName =
+            $"{chiller.LoopName} Demand Main_{nameof(FanCoilUnit)}_for_{zone.Name}";
+        IdfObject coolingBranch = document["Branch"][mainBranchName];
+        Assert.Equal("Coil:Cooling:Water", coolingBranch[2]);
+        Assert.Equal(coolingCoilName, coolingBranch[3]);
+        Assert.Equal(coolingCoil[9], coolingBranch[4]);
+        Assert.Equal(coolingCoil[10], coolingBranch[5]);
+
+        IdfObject heatingBranch = document["Branch"][$"NonUsed_{mainBranchName}"];
+        Assert.Equal("Coil:Heating:Water", heatingBranch[2]);
+        Assert.Equal(heatingCoilName, heatingBranch[3]);
+        Assert.Equal(heatingCoil[4], heatingBranch[4]);
+        Assert.Equal(heatingCoil[5], heatingBranch[5]);
+
+        string boilerName = $"Boiler_named_NonUsedBoiler_for_{equipmentName}";
+        IdfObject boiler = document["Boiler:HotWater"][boilerName];
+        Assert.Equal("Coal", boiler[1]);
+        Assert.Equal("1E-10", boiler[2]);
+        Assert.Equal("1E-10", boiler[3]);
+        Assert.Equal("LeavingBoiler", boiler[4]);
+        Assert.Equal("autosize", boiler[6]);
+        Assert.Equal("0", boiler[7]);
+        Assert.Equal("1", boiler[8]);
+        Assert.Equal("1", boiler[9]);
+        Assert.Equal("99.9", boiler[12]);
+        Assert.Equal("NotModulated", boiler[13]);
+        Assert.Equal("0", boiler[14]);
+        Assert.Equal("1", boiler[15]);
+        Assert.Equal("General", boiler[16]);
+
+        string dummyLoopName = $"Loop_for_NonUsedBoiler_for_{equipmentName}";
+        IdfObject availability = document["AvailabilityManager:Scheduled"]
+            [$"{dummyLoopName} AvailabilityManager"];
+        Assert.Equal("ALLOFF", availability[1]);
+        Assert.Empty(document["DistrictHeating:Water"]);
     }
 
     [Fact]

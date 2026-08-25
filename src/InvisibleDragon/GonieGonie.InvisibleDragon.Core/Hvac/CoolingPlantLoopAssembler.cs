@@ -16,9 +16,11 @@ internal static class CoolingPlantLoopAssembler
         string sourceOutletNodeName,
         double pumpMotorEfficiency,
         double setpointTemperatureCelsius,
-        IReadOnlyList<PlantDemandConnection> demandConnections)
+        IReadOnlyList<PlantDemandConnection> demandConnections,
+        string availabilityScheduleName = "ALLON")
     {
         string loop = source.LoopName;
+        string sourceObjectType = SourceObjectType(context, source);
         string pump = $"VSDPump_for_{source.IdfObjectName}";
         string pumpInlet = $"{pump} Water InletNode";
         string pumpOutlet = $"{pump} Water OutletNode";
@@ -40,7 +42,7 @@ internal static class CoolingPlantLoopAssembler
             Branch(
                 context,
                 $"{loop} Supply MainComponent",
-                source.IdfObjectType,
+                sourceObjectType,
                 source.IdfObjectName,
                 sourceInletNodeName,
                 sourceOutletNodeName),
@@ -100,7 +102,7 @@ internal static class CoolingPlantLoopAssembler
         objects.Add(context.CreateRaw(
             "PlantEquipmentList",
             $"{loop} EquipmentList",
-            source.IdfObjectType,
+            sourceObjectType,
             source.IdfObjectName));
         objects.Add(context.CreateRaw(
             "PlantEquipmentOperation:CoolingLoad",
@@ -117,7 +119,9 @@ internal static class CoolingPlantLoopAssembler
         objects.Add(context.CreateRaw(
             "Schedule:Constant",
             $"{loop} SetpointTemperature",
-            "ScheduleTypeLimits:Temperature",
+            context.Options.UseLegacySimpleDragonScheduleMetadata
+                ? null
+                : "ScheduleTypeLimits:Temperature",
             setpointTemperatureCelsius));
         objects.Add(context.CreateRaw(
             "SetpointManager:Scheduled",
@@ -128,7 +132,7 @@ internal static class CoolingPlantLoopAssembler
         objects.Add(context.CreateRaw(
             "AvailabilityManager:Scheduled",
             $"{loop} AvailabilityManager",
-            "ALLON"));
+            availabilityScheduleName));
         objects.Add(context.CreateRaw(
             "AvailabilityManagerAssignmentList",
             $"{loop} AvailabilityManagerAssignmentList",
@@ -172,6 +176,7 @@ internal static class CoolingPlantLoopAssembler
         string condenserOutletNodeName)
     {
         string loop = CoolingTower.LoopNameFor(source);
+        string sourceObjectType = SourceObjectType(context, source);
         string towerName = CoolingTower.ObjectNameFor(source);
         string pump = $"VSDPump_for_{towerName}";
         string pumpInlet = $"{pump} Water InletNode";
@@ -232,7 +237,7 @@ internal static class CoolingPlantLoopAssembler
             Branch(
                 context,
                 $"{loop} Demand MainChiller",
-                source.IdfObjectType,
+                sourceObjectType,
                 source.IdfObjectName,
                 condenserInletNodeName,
                 condenserOutletNodeName),
@@ -392,8 +397,26 @@ internal static class CoolingPlantLoopAssembler
             IdfGenerationContext.Field(9, "Coefficient 2 of the Part Load Performance Curve", 1),
             IdfGenerationContext.Field(10, "Coefficient 3 of the Part Load Performance Curve", 0),
             IdfGenerationContext.Field(11, "Coefficient 4 of the Part Load Performance Curve", 0),
-            IdfGenerationContext.Field(12, "Design Minimum Flow Rate", 0),
-            IdfGenerationContext.Field(13, "Pump Control Type", "Intermittent"));
+            IdfGenerationContext.Field(
+                12,
+                "Design Minimum Flow Rate",
+                context.Options.UseLegacySimpleDragonHvacTopology ? "autosize" : (object)0),
+            IdfGenerationContext.Field(
+                13,
+                "Pump Control Type",
+                context.Options.UseLegacySimpleDragonHvacTopology ? "Continuous" : "Intermittent"),
+            IdfGenerationContext.Field(25, "Design Power Sizing Method", "PowerPerFlowPerPressure"),
+            IdfGenerationContext.Field(26, "Design Electric Power per Unit Flow Rate", 348701.1),
+            IdfGenerationContext.Field(27, "Design Shaft Power per Unit Flow Rate per Unit Head", 1.282051282),
+            IdfGenerationContext.Field(28, "Design Minimum Flow Rate Fraction", 0),
+            IdfGenerationContext.Field(29, "End-Use Subcategory", "General"));
+
+    private static string SourceObjectType(IdfGenerationContext context, SourceSystem source)
+    {
+        return source is Chiller chiller
+            ? chiller.IdfObjectTypeFor(context)
+            : source.IdfObjectType;
+    }
 
     private static IdfObject Pipe(IdfGenerationContext context, string name) => context.CreateRaw(
         "Pipe:Adiabatic",

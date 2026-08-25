@@ -221,6 +221,14 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
             RuleSets.Select(ruleSet => ruleSet.Scale(factor)));
     }
 
+    public Schedule NormalizeByMaximum(string? name = null)
+    {
+        return new Schedule(
+            name ?? $"{Name}_normalized",
+            RuleSets.Select(ruleSet => ruleSet.NormalizeByMaximum()),
+            Type);
+    }
+
     public Schedule Clip(double? minimum = null, double? maximum = null, string? name = null)
     {
         return new Schedule(

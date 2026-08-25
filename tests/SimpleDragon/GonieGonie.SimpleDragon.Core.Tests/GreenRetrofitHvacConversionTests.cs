@@ -118,6 +118,28 @@ public sealed class GreenRetrofitHvacConversionTests
     }
 
     [Fact]
+    public void SimpleDragonDefaultIdfUsesLegacyDualSetpointForCoolingOnlyFanCoil()
+    {
+        SourceSystem source = CreateSource(
+            SourceSystemType.Chiller,
+            "SOURCE-LEGACY-THERMOSTAT");
+        GreenRetrofitConversionResult result = Convert(
+            FanCoil("SUPPLY-LEGACY-THERMOSTAT", source),
+            source);
+
+        IdfDocument idf = result.ToIdfDocument();
+
+        IdfObject control = Assert.Single(
+            idf["Schedule:Constant"],
+            item => item.Name!.StartsWith(
+                "ScheduleTypeForThermostat_for_",
+                StringComparison.Ordinal));
+        Assert.Equal("4", control[2]);
+        Assert.Single(idf["ThermostatSetpoint:DualSetpoint"]);
+        Assert.Empty(idf["ThermostatSetpoint:SingleCooling"]);
+    }
+
+    [Fact]
     public void AbsorptionChillerPreservesGeneratorFuelEfficiencyCapacityAndPinnedTower()
     {
         var source = new SourceSystem(

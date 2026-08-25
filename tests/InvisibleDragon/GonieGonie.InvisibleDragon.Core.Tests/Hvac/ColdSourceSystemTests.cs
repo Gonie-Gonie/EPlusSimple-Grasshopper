@@ -136,6 +136,239 @@ public sealed class ColdSourceSystemTests
                 && item.Name!.EndsWith(":CoolingCOPPLR", StringComparison.Ordinal));
     }
 
+    [Fact]
+    public void LegacySimpleDragonScrewChillerUsesElectricEirAcrossPlantReferences()
+    {
+        var tower = new ClosedTwoSpeedCoolingTower(
+            new EntityId("CT-SCREW-LEGACY"),
+            "Legacy screw tower",
+            nominalCapacityWatts: 125_000);
+        var chiller = new Chiller(
+            new EntityId("CHILLER-SCREW-LEGACY"),
+            "Legacy screw",
+            5.2,
+            CompressorType.Screw,
+            tower,
+            nominalCapacityWatts: 100_000,
+            setpointTemperatureCelsius: 7.25);
+
+        IReadOnlyList<IdfObject> native = chiller.ToIdfObjects(new IdfGenerationContext());
+        IReadOnlyList<IdfObject> legacy = chiller.ToIdfObjects(LegacyContext());
+
+        Assert.Equal("Chiller:Electric:ReformulatedEIR", chiller.IdfObjectType);
+        IdfObject nativeCurve = ObjectNamed(
+            native,
+            "Curve:Bicubic",
+            $"Curve_for_{chiller.IdfObjectName}:CoolingCOPPLR");
+        IdfObject nativeComponent = ObjectNamed(
+            native,
+            "Chiller:Electric:ReformulatedEIR",
+            chiller.IdfObjectName);
+        Assert.Equal("7.25", nativeComponent[3]);
+        Assert.Equal("29", nativeComponent[4]);
+        Assert.Equal("LeavingCondenserWaterTemperature", nativeComponent[9]);
+        Assert.Equal(nativeCurve.Name, nativeComponent[10]);
+        Assert.DoesNotContain(native, item => item.ObjectType == "Chiller:Electric:EIR");
+        AssertChillerPlantReferenceType(native, chiller, "Chiller:Electric:ReformulatedEIR");
+
+        IdfObject legacyCurve = ObjectNamed(
+            legacy,
+            "Curve:Bicubic",
+            $"Curve_for_{chiller.IdfObjectName}:CoolingCOPPLR");
+        IdfObject legacyComponent = ObjectNamed(
+            legacy,
+            "Chiller:Electric:EIR",
+            chiller.IdfObjectName);
+        Assert.Equal(nativeCurve.Name, legacyCurve.Name);
+        Assert.Equal("6.67", legacyComponent[3]);
+        Assert.Equal("29.4", legacyComponent[4]);
+        Assert.Equal(legacyCurve.Name, legacyComponent[9]);
+        Assert.Equal("WaterCooled", legacyComponent[18]);
+        Assert.Equal("1", legacyComponent[20]);
+        Assert.Equal("2", legacyComponent[21]);
+        Assert.Equal("NotModulated", legacyComponent[22]);
+        Assert.DoesNotContain(
+            legacy,
+            item => item.ObjectType == "Chiller:Electric:ReformulatedEIR");
+        AssertChillerPlantReferenceType(legacy, chiller, "Chiller:Electric:EIR");
+    }
+
+    [Fact]
+    public void ClosedTwoSpeedCoolingTowerSwitchesOnlyLegacyPerformanceFields()
+    {
+        var tower = new ClosedTwoSpeedCoolingTower(
+            new EntityId("CT-CLOSED-TWO-MODES"),
+            "Closed two modes",
+            nominalCapacityWatts: 125_000);
+        Chiller chiller = CreateChiller(
+            CompressorType.Turbo,
+            tower,
+            "CHILLER-CLOSED-TWO-MODES");
+
+        IdfObject native = ObjectNamed(
+            tower.ToIdfObjects(new IdfGenerationContext(), chiller),
+            "FluidCooler:TwoSpeed",
+            CoolingTower.ObjectNameFor(chiller));
+        IdfObject legacy = ObjectNamed(
+            tower.ToIdfObjects(LegacyContext(), chiller),
+            "FluidCooler:TwoSpeed",
+            CoolingTower.ObjectNameFor(chiller));
+
+        Assert.Equal("NominalCapacity", native[3]);
+        Assert.Equal(string.Empty, native[4]);
+        Assert.Equal(string.Empty, native[5]);
+        Assert.Equal("125000", native[7]);
+        Assert.Equal("autocalculate", native[8]);
+
+        Assert.Equal("UFactorTimesAreaAndDesignWaterFlowRate", legacy[3]);
+        Assert.Equal("autosize", legacy[4]);
+        Assert.Equal("autocalculate", legacy[5]);
+        Assert.Equal(string.Empty, legacy[7]);
+        Assert.Equal(string.Empty, legacy[8]);
+
+        string[] unchangedFields =
+        {
+            "35",
+            "28",
+            "25.56",
+            "autosize",
+            "autosize",
+            "autosize",
+            "autocalculate",
+            "0.5",
+            "autocalculate",
+            "0.16",
+        };
+        for (int offset = 0; offset < unchangedFields.Length; offset++)
+        {
+            int index = 10 + offset;
+            Assert.Equal(unchangedFields[offset], native[index]);
+            Assert.Equal(native[index], legacy[index]);
+        }
+    }
+
+    [Fact]
+    public void OpenCoolingTowersEmitPinnedLegacySizingFields()
+    {
+        var single = new OpenSingleSpeedCoolingTower(
+            new EntityId("CT-OPEN-SINGLE-MODES"),
+            "Open single modes",
+            nominalCapacityWatts: 125_000);
+        Chiller singleChiller = CreateChiller(
+            CompressorType.Turbo,
+            single,
+            "CHILLER-OPEN-SINGLE-MODES");
+        IdfObject nativeSingle = ObjectNamed(
+            single.ToIdfObjects(new IdfGenerationContext(), singleChiller),
+            "CoolingTower:SingleSpeed",
+            CoolingTower.ObjectNameFor(singleChiller));
+        IdfObject legacySingle = ObjectNamed(
+            single.ToIdfObjects(LegacyContext(), singleChiller),
+            "CoolingTower:SingleSpeed",
+            CoolingTower.ObjectNameFor(singleChiller));
+
+        Assert.Equal(string.Empty, nativeSingle[3]);
+        Assert.Equal(string.Empty, nativeSingle[6]);
+        Assert.Equal(string.Empty, nativeSingle[9]);
+        Assert.Equal("NominalCapacity", nativeSingle[11]);
+        Assert.Equal(38, legacySingle.Count);
+        Assert.Equal("autosize", legacySingle[3]);
+        Assert.Equal("autosize", legacySingle[6]);
+        Assert.Equal("autocalculate", legacySingle[9]);
+        Assert.Equal("UFactorTimesAreaAndDesignWaterFlowRate", legacySingle[11]);
+        Assert.Equal("125000", legacySingle[13]);
+        Assert.Equal("FanCycling", legacySingle[31]);
+        Assert.Equal("General", legacySingle[37]);
+
+        var twoSpeed = new OpenTwoSpeedCoolingTower(
+            new EntityId("CT-OPEN-TWO-MODES"),
+            "Open two modes",
+            nominalCapacityWatts: 150_000);
+        Chiller twoSpeedChiller = CreateChiller(
+            CompressorType.Turbo,
+            twoSpeed,
+            "CHILLER-OPEN-TWO-MODES");
+        IdfObject nativeTwoSpeed = ObjectNamed(
+            twoSpeed.ToIdfObjects(new IdfGenerationContext(), twoSpeedChiller),
+            "CoolingTower:TwoSpeed",
+            CoolingTower.ObjectNameFor(twoSpeedChiller));
+        IdfObject legacyTwoSpeed = ObjectNamed(
+            twoSpeed.ToIdfObjects(LegacyContext(), twoSpeedChiller),
+            "CoolingTower:TwoSpeed",
+            CoolingTower.ObjectNameFor(twoSpeedChiller));
+
+        Assert.Equal(string.Empty, nativeTwoSpeed[3]);
+        Assert.Equal(string.Empty, nativeTwoSpeed[6]);
+        Assert.Equal(string.Empty, nativeTwoSpeed[11]);
+        Assert.Equal(string.Empty, nativeTwoSpeed[15]);
+        Assert.Equal("NominalCapacity", nativeTwoSpeed[17]);
+        Assert.Equal(45, legacyTwoSpeed.Count);
+        Assert.Equal("autosize", legacyTwoSpeed[3]);
+        Assert.Equal("autosize", legacyTwoSpeed[6]);
+        Assert.Equal("autocalculate", legacyTwoSpeed[11]);
+        Assert.Equal("autocalculate", legacyTwoSpeed[15]);
+        Assert.Equal("UFactorTimesAreaAndDesignWaterFlowRate", legacyTwoSpeed[17]);
+        Assert.Equal("150000", legacyTwoSpeed[19]);
+        Assert.Equal("General", legacyTwoSpeed[44]);
+    }
+
+    [Fact]
+    public void CoolingLoopPumpsSwitchOnlyLegacyMinimumFlowAndControl()
+    {
+        var tower = new ClosedTwoSpeedCoolingTower(
+            new EntityId("CT-PUMP-MODES"),
+            "Pump modes tower",
+            nominalCapacityWatts: 125_000,
+            pumpMotorEfficiency: 0.83);
+        var chiller = new Chiller(
+            new EntityId("CHILLER-PUMP-MODES"),
+            "Pump modes chiller",
+            3.2,
+            CompressorType.Screw,
+            tower,
+            nominalCapacityWatts: 100_000,
+            pumpMotorEfficiency: 0.87);
+
+        IReadOnlyList<IdfObject> native = chiller.ToIdfObjects(new IdfGenerationContext());
+        IReadOnlyList<IdfObject> legacy = chiller.ToIdfObjects(LegacyContext());
+        Assert.Equal(2, native.Count(item => item.ObjectType == "Pump:VariableSpeed"));
+        Assert.Equal(2, legacy.Count(item => item.ObjectType == "Pump:VariableSpeed"));
+
+        var pumpEfficiencies = new Dictionary<string, string>
+        {
+            [$"VSDPump_for_{chiller.IdfObjectName}"] = "0.87",
+            [$"VSDPump_for_{CoolingTower.ObjectNameFor(chiller)}"] = "0.83",
+        };
+        foreach ((string pumpName, string expectedEfficiency) in pumpEfficiencies)
+        {
+            IdfObject nativePump = ObjectNamed(native, "Pump:VariableSpeed", pumpName);
+            IdfObject legacyPump = ObjectNamed(legacy, "Pump:VariableSpeed", pumpName);
+
+            Assert.Equal(30, nativePump.Count);
+            Assert.Equal(30, legacyPump.Count);
+            for (int index = 0; index <= 11; index++)
+            {
+                Assert.Equal(nativePump[index], legacyPump[index]);
+            }
+
+            for (int index = 14; index <= 29; index++)
+            {
+                Assert.Equal(nativePump[index], legacyPump[index]);
+            }
+
+            Assert.Equal(expectedEfficiency, nativePump[6]);
+            Assert.Equal("0", nativePump[12]);
+            Assert.Equal("Intermittent", nativePump[13]);
+            Assert.Equal("autosize", legacyPump[12]);
+            Assert.Equal("Continuous", legacyPump[13]);
+            Assert.Equal("PowerPerFlowPerPressure", nativePump[25]);
+            Assert.Equal("348701.1", nativePump[26]);
+            Assert.Equal("1.282051282", nativePump[27]);
+            Assert.Equal("0", nativePump[28]);
+            Assert.Equal("General", nativePump[29]);
+        }
+    }
+
     [Theory]
     [MemberData(nameof(ScrewBicubicSweep))]
     public void ScrewChillerBicubicMatchesPinnedTemperaturePartLoadSurface(
@@ -352,6 +585,42 @@ public sealed class ColdSourceSystemTests
         new EntityId(id),
         id,
         nominalCapacityWatts: 125_000);
+
+    private static IdfGenerationContext LegacyContext() => new(
+        options: new EnergyModelIdfOptions
+        {
+            UseLegacySimpleDragonHvacTopology = true,
+        });
+
+    private static IdfObject ObjectNamed(
+        IEnumerable<IdfObject> objects,
+        string objectType,
+        string name) => Assert.Single(
+            objects,
+            item => item.ObjectType == objectType && item.Name == name);
+
+    private static void AssertChillerPlantReferenceType(
+        IEnumerable<IdfObject> objects,
+        Chiller chiller,
+        string expectedObjectType)
+    {
+        IdfObject supplyBranch = ObjectNamed(
+            objects,
+            "Branch",
+            $"{chiller.LoopName} Supply MainComponent");
+        IdfObject condenserDemandBranch = ObjectNamed(
+            objects,
+            "Branch",
+            $"{CoolingTower.LoopNameFor(chiller)} Demand MainChiller");
+        IdfObject equipmentList = ObjectNamed(
+            objects,
+            "PlantEquipmentList",
+            $"{chiller.LoopName} EquipmentList");
+
+        Assert.Equal(expectedObjectType, supplyBranch[2]);
+        Assert.Equal(expectedObjectType, condenserDemandBranch[2]);
+        Assert.Equal(expectedObjectType, equipmentList[1]);
+    }
 
     private static string Serialize(IEnumerable<IdfObject> objects)
     {

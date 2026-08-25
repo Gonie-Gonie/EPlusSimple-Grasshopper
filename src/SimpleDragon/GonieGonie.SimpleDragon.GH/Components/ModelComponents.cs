@@ -420,6 +420,7 @@ public sealed class ConvertGreenRetrofitModelComponent : SimpleDragonComponent
                     ThrowOnValidationErrors = false,
                     UseLegacyRectangularFenestration = true,
                     UseLegacySimpleDragonScheduleMetadata = true,
+                    UseLegacySimpleDragonHvacTopology = true,
                 });
             if (schema is not null)
             {
