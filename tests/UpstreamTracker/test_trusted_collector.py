@@ -150,6 +150,22 @@ class TrustedCollectorTests(unittest.TestCase):
             with self.assertRaisesRegex(TrustedCollectorError, "toolchain changed"):
                 _verify_sdk_toolchain_manifest(manifest)
 
+    def test_isolated_dotnet_environment_precreates_windows_special_folders(self) -> None:
+        with TemporaryWorkspace() as workspace:
+            environment = _isolated_dotnet_environment(workspace.path / "environment")
+            profile = Path(environment["USERPROFILE"])
+            if os.name == "nt":
+                self.assertEqual(
+                    profile / "AppData" / "Roaming",
+                    Path(environment["APPDATA"]),
+                )
+                self.assertEqual(
+                    profile / "AppData" / "Local",
+                    Path(environment["LOCALAPPDATA"]),
+                )
+            self.assertTrue(Path(environment["APPDATA"]).is_dir())
+            self.assertTrue(Path(environment["LOCALAPPDATA"]).is_dir())
+
     def test_recorder_is_noop_outside_collection_and_requires_paired_environment(self) -> None:
         dotnet = REPOSITORY_ROOT / ".tools" / "dotnet" / "dotnet.exe"
         if not dotnet.is_file():
@@ -466,6 +482,13 @@ catch (InvalidOperationException)
                     "utf-8", errors="replace"
                 ),
             )
+            self.assertFalse(source.joinpath("NuGet", "Migrations", "1").exists())
+            self.assertFalse(test_dir.joinpath("NuGet", "Migrations", "1").exists())
+            self.assertTrue(
+                Path(bootstrap_environment["LOCALAPPDATA"])
+                .joinpath("NuGet", "Migrations", "1")
+                .is_file()
+            )
             for generated in (
                 alternate_dir / "obj",
                 library_dir / "obj",
@@ -657,6 +680,9 @@ catch (InvalidOperationException)
             created = [path for path in session.rglob("*")]
             self.assertFalse(any("$(MSBuildProjectName)" in str(path) for path in created))
             self.assertLess(max(len(str(path)) for path in created), 240)
+            self.assertFalse(source.joinpath("NuGet", "Migrations", "1").exists())
+            self.assertFalse(test_dir.joinpath("NuGet", "Migrations", "1").exists())
+            _verify_materialized_source(source, source_tree)
             marker_after = (
                 None
                 if not migration_marker.exists()

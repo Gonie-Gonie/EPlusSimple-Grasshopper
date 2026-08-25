@@ -3827,11 +3827,23 @@ def _isolated_dotnet_environment(
 ) -> dict[str, str]:
     environment_root.mkdir(parents=True, exist_ok=True)
     _require_directory(environment_root, "isolated dotnet environment root")
+    profile_root = environment_root / "home"
+    if os.name == "nt":
+        # NuGet's MigrationRunner uses Environment.GetFolderPath rather than
+        # LOCALAPPDATA on Windows.  With a redirected USERPROFILE, .NET returns
+        # an empty LocalApplicationData path until this conventional directory
+        # exists, which otherwise makes NuGet create `NuGet/Migrations/1`
+        # relative to the build working directory.
+        roaming_appdata = profile_root / "AppData" / "Roaming"
+        local_appdata = profile_root / "AppData" / "Local"
+    else:
+        roaming_appdata = environment_root / "appdata" / "roaming"
+        local_appdata = environment_root / "appdata" / "local"
     directories = {
-        "APPDATA": environment_root / "appdata" / "roaming",
-        "LOCALAPPDATA": environment_root / "appdata" / "local",
-        "HOME": environment_root / "home",
-        "USERPROFILE": environment_root / "home",
+        "APPDATA": roaming_appdata,
+        "LOCALAPPDATA": local_appdata,
+        "HOME": profile_root,
+        "USERPROFILE": profile_root,
         "TEMP": environment_root / "temp",
         "TMP": environment_root / "temp",
         "ProgramData": environment_root / "program-data",
