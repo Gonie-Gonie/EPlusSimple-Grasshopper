@@ -1,10 +1,12 @@
-# Paths and symbols in each `upstream` block are exact historical source
-# identifiers. Product-owned names in this port are InvisibleDragon and
-# SimpleDragon.
+# Paths, symbols, and symbol hashes in each populated `upstream` block are
+# exact historical source identifiers. A changed symbol hash invalidates the
+# exception until it is reviewed again. Product-owned names in this port are
+# InvisibleDragon and SimpleDragon.
 - id: deterministic-auto-id
   upstream:
     path: src/epsimple/core/shape.py
     symbol: Surface.__init__
+    symbol_hash: sha256:bd742aa0e5cee63e774cb93eb9bb81267178cda8632b06462f3edc3a7621fe68
   difference:
     upstream: Python memory-address-based automatic identifiers
     dotnet: deterministic persistent identifiers
@@ -17,6 +19,7 @@
   upstream:
     path: src/epsimple/core/model.py
     symbol: GreenRetrofitModel._dragonize_surface
+    symbol_hash: sha256:8c531a98c322f6cde72eb6ce511159f5ac3f001098519e03dd2b14213fa4546a
   difference:
     upstream: temporarily mutates unknown constructions and resets them
     dotnet: resolves constructions on immutable copies
@@ -28,6 +31,7 @@
   upstream:
     path: null
     symbol: null
+    symbol_hash: null
   difference:
     upstream: no Rhino or Grasshopper plugin
     dotnet: multi-targets Rhino 7 (.NET Framework 4.8) and Rhino 8 (.NET 8)
@@ -40,6 +44,7 @@
   upstream:
     path: src/idragon/dragon/model.py
     symbol: EnergyModel.create_default_idf
+    symbol_hash: sha256:585b53682bd5dbd4d2081e79eddc2789fa60925baafb5eae26de0541346ac9f4
   difference:
     upstream: emits the people-activity Schedule:Constant reference as Real although the declared object is named ScheduleTypeLimits:Real
     dotnet: preserves that authoring text exactly and normalizes the alias only in a disposable validation copy
@@ -54,6 +59,7 @@
   upstream:
     path: src/idragon/dragon/hvac.py
     symbol: AbsorptionChiller.to_idf_object
+    symbol_hash: sha256:17d5fb8afe2207a9772bc47b4f5424d740b3df76301f04c9155c0fbd725af969
   difference:
     upstream: connects the Chiller:Absorption hot-water generator nodes to a Boiler:HotWater demand branch that reaches runaway plant temperatures whenever a non-zero cooling load dispatches the chiller under EnergyPlus 24.2
     dotnet: preserves that legacy authoring topology for exact SimpleDragon parity, verifies all six compatibility stages at zero cooling load, and does not claim active absorption cooling or generator-energy parity
@@ -66,6 +72,7 @@
   upstream:
     path: null
     symbol: null
+    symbol_hash: null
   difference:
     upstream: the pinned ASHRAE 140 modified GRM contains an internal-source construction layer that EnergyPlus 24.2 diagnoses as too thin or highly conductive
     dotnet: preserves the exact fixture material and requires the single normalized Severe diagnostic to match by title and count in both engines
@@ -78,6 +85,7 @@
   upstream:
     path: src/idragon/dragon/profile.py
     symbol: Schedule.apply
+    symbol_hash: sha256:cac23120005e2cac2c4729c70471a7796840160338fff91e1c49e9670f763ba9
   difference:
     upstream: mutates the schedule by default, permits a mixed ScheduleType assignment, and treats an end date before the start date as an empty no-op range
     dotnet: returns an immutable updated schedule, requires the assigned RuleSet type to match, and rejects a reversed date range
@@ -90,6 +98,7 @@
   upstream:
     path: src/idragon/dragon/profile.py
     symbol: RuleSet.element_min
+    symbol_hash: sha256:33739f88089372dfdb936c28027f53c69ca8ec4ec1f47ad24ff6d8b7fc427d64
   difference:
     upstream: declares scalar support but reads other.name before dispatch and raises AttributeError for scalar operands
     dotnet: implements the declared scalar element-minimum operation while preserving RuleSet-to-RuleSet behavior
@@ -102,6 +111,7 @@
   upstream:
     path: src/idragon/dragon/profile.py
     symbol: RuleSet.element_max
+    symbol_hash: sha256:bfffae347ffeac971d2328d400ae28e5986cc2f3c60b707e0bb55431989edd39
   difference:
     upstream: declares scalar support but reads other.name before dispatch and raises AttributeError for scalar operands
     dotnet: implements the declared scalar element-maximum operation while preserving RuleSet-to-RuleSet behavior

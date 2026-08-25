@@ -15,6 +15,7 @@ from .yaml_subset import load_yaml_subset
 
 
 _COMMIT = re.compile(r"^[0-9a-f]{40}$")
+_SHA256 = re.compile(r"^sha256:[0-9a-f]{64}$")
 _IDENTIFIER = re.compile(r"^[A-Za-z][A-Za-z0-9_.-]*$")
 _EXCEPTION_ID = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 _DOTNET_PROJECT = re.compile(
@@ -63,6 +64,7 @@ class CompatibilityException:
     identifier: str
     upstream_path: str | None
     upstream_symbol: str | None
+    upstream_symbol_hash: str | None
     upstream_difference: str
     dotnet_difference: str
     effects: tuple[tuple[str, str], ...]
@@ -74,6 +76,7 @@ class TrackerConfiguration:
     lock: UpstreamLock
     mappings: tuple[PortMapping, ...]
     exceptions: tuple[CompatibilityException, ...]
+    manifest_paths: tuple[Path, ...] = ()
 
     @property
     def tracked_paths(self) -> tuple[str, ...]:
@@ -99,7 +102,12 @@ def load_configuration(
     mappings = _load_port_map(port_map_path)
     exceptions = _load_exceptions(exceptions_path)
     _validate_cross_references(lock, mappings, exceptions)
-    return TrackerConfiguration(lock, mappings, exceptions)
+    return TrackerConfiguration(
+        lock,
+        mappings,
+        exceptions,
+        (lock_path.resolve(), port_map_path.resolve(), exceptions_path.resolve()),
+    )
 
 
 def _load_lock(path: Path) -> UpstreamLock:
@@ -200,7 +208,12 @@ def _load_port_map(path: Path) -> tuple[PortMapping, ...]:
         )
         upstream = _mapping(item["upstream"], f"{context}.upstream")
         dotnet = _mapping(item["dotnet"], f"{context}.dotnet")
-        _keys(upstream, required={"path", "symbol"}, optional=set(), context=f"{context}.upstream")
+        _keys(
+            upstream,
+            required={"path", "symbol"},
+            optional=set(),
+            context=f"{context}.upstream",
+        )
         _keys(
             dotnet,
             required={"project", "file", "symbol"},
@@ -265,7 +278,12 @@ def _load_exceptions(path: Path) -> tuple[CompatibilityException, ...]:
         upstream = _mapping(item["upstream"], f"{context}.upstream")
         difference = _mapping(item["difference"], f"{context}.difference")
         effect = _mapping(item["effect"], f"{context}.effect")
-        _keys(upstream, required={"path", "symbol"}, optional=set(), context=f"{context}.upstream")
+        _keys(
+            upstream,
+            required={"path", "symbol", "symbol_hash"},
+            optional=set(),
+            context=f"{context}.upstream",
+        )
         _keys(
             difference,
             required={"upstream", "dotnet"},
@@ -274,9 +292,19 @@ def _load_exceptions(path: Path) -> tuple[CompatibilityException, ...]:
         )
         upstream_path = _optional_relative_path(upstream["path"], f"{context}.upstream.path")
         upstream_symbol = _optional_text(upstream["symbol"], f"{context}.upstream.symbol")
-        if (upstream_path is None) != (upstream_symbol is None):
+        upstream_symbol_hash = _optional_hash(
+            upstream["symbol_hash"],
+            f"{context}.upstream.symbol_hash",
+        )
+        if len(
+            {
+                upstream_path is None,
+                upstream_symbol is None,
+                upstream_symbol_hash is None,
+            }
+        ) != 1:
             raise ConfigurationError(
-                f"{context}.upstream.path and symbol must either both be null or both be populated"
+                f"{context}.upstream.path, symbol, and symbol_hash must either all be null or all be populated"
             )
         if not effect:
             raise ConfigurationError(f"{context}.effect must not be empty")
@@ -289,6 +317,7 @@ def _load_exceptions(path: Path) -> tuple[CompatibilityException, ...]:
                 identifier,
                 upstream_path,
                 upstream_symbol,
+                upstream_symbol_hash,
                 _text(difference["upstream"], f"{context}.difference.upstream"),
                 _text(difference["dotnet"], f"{context}.difference.dotnet"),
                 effects,
@@ -356,6 +385,15 @@ def _text(value: Any, context: str) -> str:
 
 def _optional_text(value: Any, context: str) -> str | None:
     return None if value is None else _text(value, context)
+
+
+def _optional_hash(value: Any, context: str) -> str | None:
+    if value is None:
+        return None
+    text = _text(value, context)
+    if _SHA256.fullmatch(text) is None:
+        raise ConfigurationError(f"{context} must be a lowercase sha256 hash or null")
+    return text
 
 
 def _mapping(value: Any, context: str) -> Mapping[str, Any]:

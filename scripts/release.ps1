@@ -235,7 +235,7 @@ function Initialize-ReleaseWorkspace {
     Assert-NoReparseAncestorChain -Root $repositoryRoot -Candidate $safeScratchRoot
     Ensure-Directory -Path $safeScratchRoot
     Assert-NoReparseAncestorChain -Root $repositoryRoot -Candidate $safeScratchRoot
-    Assert-NoReparsePoints -Path $safeScratchRoot
+    Assert-NoReparsePoints -Path $safeScratchRoot -AnchorPath $repositoryRoot
 
     if (Test-Path -LiteralPath $releaseRoot) {
         throw "Release staging directory already exists: '$releaseRoot'."
@@ -247,7 +247,7 @@ function Initialize-ReleaseWorkspace {
             -Path $finalReleaseRoot `
             -AllowedTopLevelNames @('artifacts')
         Assert-NoReparseAncestorChain -Root $repositoryRoot -Candidate $safeExisting
-        Assert-NoReparsePoints -Path $safeExisting
+        Assert-NoReparsePoints -Path $safeExisting -AnchorPath $repositoryRoot
         $archivePath = Assert-RepositoryChildPath `
             -RepositoryRoot $repositoryRoot `
             -Path (Join-Path $safeScratchRoot ("previous-" + $releaseStamp)) `
@@ -262,7 +262,7 @@ function Initialize-ReleaseWorkspace {
     }
 
     Ensure-Directory -Path $releaseRoot
-    Assert-NoReparsePoints -Path $releaseRoot
+    Assert-NoReparsePoints -Path $releaseRoot -AnchorPath $repositoryRoot
 }
 
 function Publish-ReleaseWorkspace {
@@ -276,7 +276,7 @@ function Publish-ReleaseWorkspace {
         -AllowedTopLevelNames @('artifacts')
     Assert-NoReparseAncestorChain -Root $repositoryRoot -Candidate $safeStaging
     Assert-NoReparseAncestorChain -Root $repositoryRoot -Candidate $safeFinal
-    Assert-NoReparsePoints -Path $safeStaging
+    Assert-NoReparsePoints -Path $safeStaging -AnchorPath $repositoryRoot
     if (Test-Path -LiteralPath $safeFinal) {
         throw "Refusing to replace an unexpected release directory: '$safeFinal'."
     }

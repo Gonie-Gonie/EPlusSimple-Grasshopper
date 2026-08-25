@@ -63,7 +63,7 @@ function Reset-GeneratedArtifacts {
         return
     }
 
-    Assert-NoReparsePoints -Path $safeArtifactsRoot
+    Assert-NoReparsePoints -Path $safeArtifactsRoot -AnchorPath $repositoryRoot
     $generatedItems = @(Get-ChildItem -LiteralPath $safeArtifactsRoot -Force |
         Where-Object { -not $_.Name.Equals('README.md', [System.StringComparison]::OrdinalIgnoreCase) })
 

@@ -426,7 +426,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "exception",
+    "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -819,7 +819,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "exception",
+    "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,147 +1243,130 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:3978ac9ffdc3b7b6b91d8ba29120d2b9c818ef2b6ba7eb94d6d8cd50d8ee168c",
+  "content_sha256": "sha256:577beba2ba43e7aeae97e4ecd5d7082257c4bc6cf9cafe986b1a9dba436bf3ac",
   "details": [
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-api-py-greenretrofitdataformat-2aed5d41"
       ],
       "index": 0,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-api-py-greenretrofitdataformat-excel-66b6b375"
       ],
       "index": 1,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-api-py-greenretrofitdataformat-idf-be4f894e"
       ],
       "index": 2,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-api-py-greenretrofitdataformat-json-dfcad3ec"
       ],
       "index": 3,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-api-py-greenretrofitdataformat-new-7eb66831"
       ],
       "index": 4,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-api-py-convert-inputformat-40678578"
       ],
       "index": 5,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-api-py-debug-85461a95"
       ],
       "index": 6,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-api-py-get-database-0144ac84"
       ],
       "index": 7,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-api-py-run-grexcel-fbfc29cf"
       ],
       "index": 8,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-api-py-run-grjson-1676324f"
       ],
       "index": 9,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "upstream/compatibility-exceptions.yml#deterministic-auto-id"
-      ],
-      "exception_id": "deterministic-auto-id",
-      "index": 426,
-      "rationale": "The exact upstream symbol is covered by an approved compatibility exception."
-    },
-    {
-      "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-utils-py-column-rename-dict-5b2a0454"
       ],
       "index": 546,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-utils-py-id-prefix-28196274"
       ],
       "index": 548,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-utils-py-property-rename-dict-841642ce"
       ],
       "index": 549,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-utils-py-valid-columns-98d328b6"
       ],
       "index": 550,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-utils-py-check-modules-53e78991"
       ],
       "index": 551,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
     },
     {
       "evidence": [
-        "docs/compatibility.md#declared-product-compatibility-scope"
+        "upstream/scope-decisions.json#scope-src-epsimple-utils-py-excel2grjson-97a11f64"
       ],
       "index": 552,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
-    },
-    {
-      "evidence": [
-        "upstream/compatibility-exceptions.yml#legacy-people-activity-type-limit",
-        "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/GreenRetrofitConversionTests.cs"
-      ],
-      "exception_id": "legacy-people-activity-type-limit",
-      "index": 819,
-      "rationale": "The exact upstream people-activity schedule reference quirk is retained and registered as an approved compatibility exception."
     }
   ],
   "entry_order": "public-symbol-inventory.symbols",
-  "inventory_sha256": "sha256:f103db549899e16a997eaff8c9af19798b046d6c0786afd8424fdbc7284c3e8c",
-  "needs_reverification_rationale": "No symbol-level equivalence, exception, or out-of-scope evidence is registered.",
+  "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+  "needs_reverification_rationale": "No symbol-level equivalence, verified exception, or out-of-scope evidence is registered.",
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
       "equivalent": 0,
-      "exception": 2,
-      "needs_reverification": 1224,
+      "exception": 0,
+      "needs_reverification": 1226,
       "out_of_scope": 16
     },
     "entry_count": 1242

@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
+import os
 import shutil
+import stat
 import sys
 import uuid
 
@@ -26,13 +29,18 @@ class TemporaryWorkspace:
         resolved = self.path.resolve()
         expected = (REPOSITORY_ROOT / "temp" / "tests" / "upstream-tracker").resolve()
         resolved.relative_to(expected)
-        shutil.rmtree(resolved)
+        shutil.rmtree(resolved, onexc=_remove_readonly)
 
     def write(self, relative: str, text: str) -> Path:
         target = self.path.joinpath(*relative.split("/"))
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(text, encoding="utf-8", newline="\n")
         return target
+
+
+def _remove_readonly(function, path, exception) -> None:
+    os.chmod(path, stat.S_IWRITE)
+    function(path)
 
 
 def write_configuration(
@@ -80,6 +88,7 @@ def write_configuration(
   upstream:
     path: null
     symbol: null
+    symbol_hash: null
   difference:
     upstream: source behavior
     dotnet: reviewed GonieGonie behavior
@@ -92,6 +101,7 @@ def write_configuration(
   upstream:
     path: src/source/service.py
     symbol: {exception_symbol}
+    symbol_hash: sha256:{'0' * 64}
   difference:
     upstream: source behavior
     dotnet: reviewed GonieGonie behavior
@@ -101,3 +111,15 @@ def write_configuration(
 """
     exceptions = workspace.write("config/compatibility-exceptions.yml", exception_source)
     return lock, port_map, exceptions
+
+
+def bind_exception_hash(configuration, path: str, symbol: str, symbol_hash: str):
+    return replace(
+        configuration,
+        exceptions=tuple(
+            replace(item, upstream_symbol_hash=symbol_hash)
+            if item.upstream_path == path and item.upstream_symbol == symbol
+            else item
+            for item in configuration.exceptions
+        ),
+    )

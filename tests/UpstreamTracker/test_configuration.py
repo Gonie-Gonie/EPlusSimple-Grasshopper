@@ -32,6 +32,7 @@ class ConfigurationTests(unittest.TestCase):
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
             REPOSITORY_ROOT / "upstream" / "public-symbol-inventory.json",
             REPOSITORY_ROOT / "upstream" / "compatibility-matrix.json",
+            repository_root=REPOSITORY_ROOT,
         )
         self.assertEqual(24, len(compatibility.inventory.files))
         self.assertEqual(1242, len(compatibility.inventory.symbols))
@@ -39,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(1224, len(compatibility.needs_reverification))
+        self.assertEqual(1226, len(compatibility.needs_reverification))
 
         by_key = compatibility.matrix.entries_by_key
         api_entries = [
@@ -53,8 +54,7 @@ class ConfigurationTests(unittest.TestCase):
         )
         self.assertTrue(
             all(
-                "docs/compatibility.md#declared-product-compatibility-scope"
-                in entry.evidence
+                entry.evidence[0].startswith("upstream/scope-decisions.json#")
                 for entry in api_entries
             )
         )
@@ -68,11 +68,8 @@ class ConfigurationTests(unittest.TestCase):
                 "EnergyModel.create_default_idf",
             )
         ]
-        self.assertEqual("exception", people_activity.classification)
-        self.assertEqual(
-            "legacy-people-activity-type-limit",
-            people_activity.exception_id,
-        )
+        self.assertEqual("needs_reverification", people_activity.classification)
+        self.assertIsNone(people_activity.exception_id)
 
     def test_rejects_non_goniegonie_product_ownership(self) -> None:
         with TemporaryWorkspace() as workspace:

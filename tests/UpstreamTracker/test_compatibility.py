@@ -2,14 +2,19 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import subprocess
 import unittest
 
-from support import TemporaryWorkspace, write_configuration
+from support import TemporaryWorkspace, bind_exception_hash, write_configuration
 
 from goniegonie_upstream_tracker.compatibility import (
     CompatibilityConfiguration,
     CompatibilityMatrix,
     MatrixEntry,
+    PublicFile,
+    PublicSymbolInventory,
+    _RepositoryManifestReceipt,
+    _tracker_content_sha256,
     build_compatibility_report,
     build_public_inventory,
     build_reverification_matrix,
@@ -17,13 +22,54 @@ from goniegonie_upstream_tracker.compatibility import (
     load_compatibility_scope,
     load_compatibility_matrix,
     load_public_inventory,
+    rebase_compatibility_inventory,
     render_compatibility_report,
 )
 from goniegonie_upstream_tracker.config import TrackerConfiguration, load_configuration
 from goniegonie_upstream_tracker.errors import ConfigurationError
+from goniegonie_upstream_tracker.evidence import (
+    ScopeDecision,
+    ScopeDecisionRegistry,
+    empty_scope_decisions,
+    empty_symbol_evidence,
+)
 
 
 class CompatibilityTests(unittest.TestCase):
+    def test_public_inventory_v2_preserves_symbol_signature_and_body_hashes(self) -> None:
+        with TemporaryWorkspace() as workspace:
+            _, scope = self._tracker_and_scope(workspace)
+            source = workspace.path / "source"
+            workspace.write(
+                "source/src/source/service.py",
+                "class Service:\n    def run(self, value):\n        return value + 1\n",
+            )
+            first = build_public_inventory(source, scope).symbols_by_key[
+                ("src/source/service.py", "Service.run")
+            ]
+
+            workspace.write(
+                "source/src/source/service.py",
+                "class Service:\n    def run(self, value):\n        return value + 2\n",
+            )
+            body_changed = build_public_inventory(source, scope).symbols_by_key[
+                ("src/source/service.py", "Service.run")
+            ]
+            self.assertEqual(first.signature_hash, body_changed.signature_hash)
+            self.assertNotEqual(first.body_hash, body_changed.body_hash)
+            self.assertNotEqual(first.symbol_hash, body_changed.symbol_hash)
+
+            workspace.write(
+                "source/src/source/service.py",
+                "class Service:\n    def run(self, value, scale=1):\n        return value + 2\n",
+            )
+            signature_changed = build_public_inventory(source, scope).symbols_by_key[
+                ("src/source/service.py", "Service.run")
+            ]
+            self.assertNotEqual(body_changed.signature_hash, signature_changed.signature_hash)
+            self.assertEqual(body_changed.body_hash, signature_changed.body_hash)
+            self.assertNotEqual(body_changed.symbol_hash, signature_changed.symbol_hash)
+
     def test_public_inventory_policy_covers_public_and_dunder_class_api(self) -> None:
         with TemporaryWorkspace() as workspace:
             tracker, scope = self._tracker_and_scope(workspace)
@@ -81,8 +127,17 @@ class _PrivateService:
             )
             self.assertEqual(1, len(inventory.files))
             self.assertEqual(tracker.lock.commit, inventory.upstream_commit)
+            self.assertTrue(
+                all(item.symbol_hash.startswith("sha256:") for item in inventory.symbols)
+            )
+            self.assertTrue(
+                all(item.signature_hash.startswith("sha256:") for item in inventory.symbols)
+            )
+            self.assertTrue(
+                all(item.body_hash.startswith("sha256:") for item in inventory.symbols)
+            )
 
-    def test_matrix_template_is_honest_and_uses_only_exact_registered_exception(self) -> None:
+    def test_matrix_template_keeps_registered_exception_fail_closed_without_receipt(self) -> None:
         with TemporaryWorkspace() as workspace:
             tracker, scope = self._tracker_and_scope(
                 workspace,
@@ -100,14 +155,17 @@ class _PrivateService:
 """,
             )
             inventory = build_public_inventory(source, scope)
+            tracker = bind_exception_hash(
+                tracker,
+                "src/source/service.py",
+                "Service.run",
+                inventory.symbols_by_key[("src/source/service.py", "Service.run")].symbol_hash,
+            )
             matrix = build_reverification_matrix(inventory, tracker.exceptions)
             by_symbol = {item.symbol: item for item in matrix.entries}
 
-            self.assertEqual("exception", by_symbol["Service.run"].classification)
-            self.assertEqual(
-                "reviewed-service-difference",
-                by_symbol["Service.run"].exception_id,
-            )
+            self.assertEqual("needs_reverification", by_symbol["Service.run"].classification)
+            self.assertIsNone(by_symbol["Service.run"].exception_id)
             self.assertEqual(
                 "needs_reverification",
                 by_symbol["Service"].classification,
@@ -177,6 +235,12 @@ class _PrivateService:
                 "class Service:\n    def run(self):\n        return 1\n",
             )
             inventory = build_public_inventory(source, scope)
+            tracker = bind_exception_hash(
+                tracker,
+                "src/source/service.py",
+                "Service.run",
+                inventory.symbols_by_key[("src/source/service.py", "Service.run")].symbol_hash,
+            )
             inventory_path = self._write_json(
                 workspace,
                 "config/public-symbol-inventory.json",
@@ -201,8 +265,21 @@ class _PrivateService:
                 )
 
             wrong_exception = matrix.to_data()
-            detail = wrong_exception["details"][0]
-            exception_index = detail["index"]
+            exception_index = next(
+                index
+                for index, symbol in enumerate(loaded_inventory.symbols)
+                if symbol.symbol == "Service.run"
+            )
+            wrong_exception["classifications"][exception_index] = "exception"
+            detail = {
+                "evidence": [
+                    "upstream/compatibility-exceptions.yml#reviewed-service-difference"
+                ],
+                "exception_id": "reviewed-service-difference",
+                "index": exception_index,
+                "rationale": "Test-only reviewed exception.",
+            }
+            wrong_exception["details"].append(detail)
             wrong_index = next(
                 index
                 for index, symbol in enumerate(loaded_inventory.symbols)
@@ -242,22 +319,37 @@ class _PrivateService:
                 source_identity={"pin_verified": True},
             )
             self.assertTrue(report.source_matches_inventory)
+            self.assertFalse(report.pin_verified)
             self.assertFalse(report.classification_complete)
             self.assertFalse(report.passed)
             data = json.loads(render_compatibility_report(report))
-            self.assertEqual("goniegonie.upstream-compatibility-report.v1", data["schema"])
+            self.assertEqual("goniegonie.upstream-compatibility-report.v2", data["schema"])
             self.assertEqual(len(inventory.symbols), len(data["unresolved"]))
 
+            decisions = tuple(
+                ScopeDecision(
+                    f"test-scope-{index}",
+                    item.path,
+                    item.symbol,
+                    item.symbol_hash,
+                    "out_of_scope",
+                    "compiled_rhino_grasshopper_product",
+                    "Test-only reviewed scope decision.",
+                    "docs/compatibility.md#declared-product-compatibility-scope",
+                    "approved",
+                )
+                for index, item in enumerate(inventory.symbols)
+            )
             reviewed_entries = tuple(
                 MatrixEntry(
                     item.path,
                     item.symbol,
                     "out_of_scope",
                     "Test-only reviewed scope decision.",
-                    (),
+                    (f"upstream/scope-decisions.json#test-scope-{index}",),
                     None,
                 )
-                for item in inventory.symbols
+                for index, item in enumerate(inventory.symbols)
             )
             reviewed = CompatibilityConfiguration(
                 tracker,
@@ -267,6 +359,12 @@ class _PrivateService:
                     inventory.upstream_commit,
                     inventory.content_sha256,
                     reviewed_entries,
+                ),
+                empty_symbol_evidence(inventory),
+                ScopeDecisionRegistry(
+                    inventory.upstream_commit,
+                    inventory.content_sha256,
+                    decisions,
                 ),
             )
             unverified = build_compatibility_report(
@@ -282,7 +380,7 @@ class _PrivateService:
                 source_root=source,
                 source_identity={"pin_verified": True},
             )
-            self.assertTrue(verified.passed)
+            self.assertFalse(verified.passed)
 
             workspace.write(
                 "source/src/source/service.py",
@@ -295,6 +393,147 @@ class _PrivateService:
             )
             self.assertFalse(drifted.source_matches_inventory)
             self.assertFalse(drifted.passed)
+
+    def test_direct_receipt_cannot_substitute_objects_not_loaded_from_manifests(self) -> None:
+        with TemporaryWorkspace() as workspace:
+            initial_tracker, scope = self._tracker_and_scope(workspace)
+            manifest_names = (
+                "upstream.lock.json",
+                "port-map.yml",
+                "compatibility-exceptions.yml",
+            )
+            for source_path, name in zip(initial_tracker.manifest_paths, manifest_names):
+                workspace.write(
+                    f"upstream/{name}",
+                    source_path.read_text(encoding="utf-8"),
+                )
+            source = workspace.path / "source"
+            workspace.write(
+                "source/src/source/service.py",
+                "class Service:\n    def run(self):\n        return 1\n",
+            )
+            inventory = build_public_inventory(source, scope)
+            canonical_matrix = build_reverification_matrix(
+                inventory,
+                initial_tracker.exceptions,
+            )
+            evidence = empty_symbol_evidence(inventory)
+            canonical_decisions = empty_scope_decisions(inventory)
+            self._write_json(
+                workspace,
+                "upstream/compatibility-scope.json",
+                scope.to_data(),
+            )
+            self._write_json(
+                workspace,
+                "upstream/public-symbol-inventory.json",
+                inventory.to_data(),
+            )
+            self._write_json(
+                workspace,
+                "upstream/compatibility-matrix.json",
+                canonical_matrix.to_data(),
+            )
+            self._write_json(
+                workspace,
+                "upstream/symbol-evidence.json",
+                evidence.to_data(),
+            )
+            self._write_json(
+                workspace,
+                "upstream/scope-decisions.json",
+                canonical_decisions.to_data(),
+            )
+            workspace.write(
+                "docs/compatibility.md",
+                "## Declared product compatibility scope\n",
+            )
+            self._commit_repository(workspace.path)
+
+            tracker = load_configuration(
+                workspace.path / "upstream/upstream.lock.json",
+                workspace.path / "upstream/port-map.yml",
+                workspace.path / "upstream/compatibility-exceptions.yml",
+            )
+            canonical = load_compatibility_configuration(
+                tracker,
+                workspace.path / "upstream/compatibility-scope.json",
+                workspace.path / "upstream/public-symbol-inventory.json",
+                workspace.path / "upstream/compatibility-matrix.json",
+                repository_root=workspace.path,
+            )
+            self.assertTrue(canonical.exact_registry_coverage)
+
+            decisions = ScopeDecisionRegistry(
+                inventory.upstream_commit,
+                inventory.content_sha256,
+                tuple(
+                    ScopeDecision(
+                        f"forged-scope-{index}",
+                        item.path,
+                        item.symbol,
+                        item.symbol_hash,
+                        "out_of_scope",
+                        "compiled_rhino_grasshopper_product",
+                        "Forged direct-API decision.",
+                        "docs/compatibility.md#declared-product-compatibility-scope",
+                        "approved",
+                    )
+                    for index, item in enumerate(inventory.symbols)
+                ),
+            )
+            matrix = CompatibilityMatrix(
+                inventory.upstream_commit,
+                inventory.content_sha256,
+                tuple(
+                    MatrixEntry(
+                        item.path,
+                        item.symbol,
+                        "out_of_scope",
+                        "Forged direct-API decision.",
+                        (f"upstream/scope-decisions.json#forged-scope-{index}",),
+                        None,
+                    )
+                    for index, item in enumerate(inventory.symbols)
+                ),
+            )
+            receipt = _RepositoryManifestReceipt(
+                workspace.path.resolve(),
+                (
+                    "upstream/upstream.lock.json",
+                    "upstream/port-map.yml",
+                    "upstream/compatibility-exceptions.yml",
+                    "upstream/compatibility-scope.json",
+                    "upstream/public-symbol-inventory.json",
+                    "upstream/compatibility-matrix.json",
+                    "upstream/symbol-evidence.json",
+                    "upstream/scope-decisions.json",
+                ),
+                _tracker_content_sha256(tracker),
+                scope.content_sha256,
+                inventory.content_sha256,
+                matrix.content_sha256,
+                evidence.content_sha256,
+                decisions.content_sha256,
+            )
+            forged = CompatibilityConfiguration(
+                tracker,
+                scope,
+                inventory,
+                matrix,
+                evidence,
+                decisions,
+                receipt,
+            )
+
+            self.assertFalse(forged.exact_registry_coverage)
+            self.assertFalse(
+                build_compatibility_report(
+                    forged,
+                    source_root=source,
+                    source_identity={"pin_verified": True},
+                ).passed
+            )
 
     def test_full_loader_rejects_inventory_source_hash_tampering(self) -> None:
         with TemporaryWorkspace() as workspace:
@@ -327,6 +566,66 @@ class _PrivateService:
                     inventory_path,
                     matrix_path,
                 )
+
+    def test_inventory_rebase_allows_only_byte_drift_with_same_ast_contract(self) -> None:
+        with TemporaryWorkspace() as workspace:
+            tracker, scope = self._tracker_and_scope(workspace)
+            source = workspace.path / "source"
+            workspace.write(
+                "source/src/source/service.py",
+                "class Service:\n    def run(self):\n        return 1\n",
+            )
+            inventory = build_public_inventory(source, scope)
+            configuration = CompatibilityConfiguration(
+                tracker,
+                scope,
+                inventory,
+                build_reverification_matrix(inventory, tracker.exceptions),
+                empty_symbol_evidence(inventory),
+                empty_scope_decisions(inventory),
+            )
+            replacement = PublicSymbolInventory(
+                inventory.upstream_commit,
+                inventory.scope_sha256,
+                tuple(
+                    PublicFile(
+                        item.path,
+                        "sha256:" + ("f" * 64),
+                        item.ast_hash,
+                    )
+                    for item in inventory.files
+                ),
+                inventory.symbols,
+            )
+
+            rebased = rebase_compatibility_inventory(configuration, replacement)
+
+            self.assertEqual(replacement.content_sha256, rebased.matrix.inventory_sha256)
+            self.assertEqual(
+                replacement.content_sha256,
+                rebased.symbol_evidence.inventory_sha256,
+            )
+            self.assertEqual(
+                replacement.content_sha256,
+                rebased.scope_decisions.inventory_sha256,
+            )
+            self.assertEqual(configuration.matrix.entries, rebased.matrix.entries)
+
+            changed_ast = PublicSymbolInventory(
+                replacement.upstream_commit,
+                replacement.scope_sha256,
+                (
+                    PublicFile(
+                        replacement.files[0].path,
+                        replacement.files[0].content_hash,
+                        "sha256:" + ("e" * 64),
+                    ),
+                    *replacement.files[1:],
+                ),
+                replacement.symbols,
+            )
+            with self.assertRaisesRegex(ConfigurationError, "AST hash"):
+                rebase_compatibility_inventory(configuration, changed_ast)
 
     def test_public_inventory_rejects_file_outside_declared_scope(self) -> None:
         with TemporaryWorkspace() as workspace:
@@ -404,6 +703,35 @@ class _PrivateService:
         return workspace.write(
             relative,
             json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        )
+
+    @staticmethod
+    def _commit_repository(repository: Path) -> None:
+        subprocess.run(["git", "init", "--quiet"], cwd=repository, check=True)
+        subprocess.run(
+            ["git", "config", "core.autocrlf", "false"],
+            cwd=repository,
+            check=True,
+        )
+        subprocess.run(
+            ["git", "-c", "core.autocrlf=false", "add", "--all"],
+            cwd=repository,
+            check=True,
+        )
+        subprocess.run(
+            [
+                "git",
+                "-c",
+                "user.name=GonieGonie Test",
+                "-c",
+                "user.email=test@goniegonie.invalid",
+                "commit",
+                "--quiet",
+                "-m",
+                "canonical manifests",
+            ],
+            cwd=repository,
+            check=True,
         )
 
 

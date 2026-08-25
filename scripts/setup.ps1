@@ -100,7 +100,7 @@ function Remove-SetupOwnedTree {
         -RepositoryRoot $repositoryRoot `
         -Path $Path `
         -AllowedTopLevelNames @('temp', '.tools')
-    Assert-NoReparsePoints -Path $safePath
+    Assert-NoReparsePoints -Path $safePath -AnchorPath $repositoryRoot
 
     if ($WhatIfPreference) {
         Write-Host "What if: remove setup-owned tree '$safePath'."

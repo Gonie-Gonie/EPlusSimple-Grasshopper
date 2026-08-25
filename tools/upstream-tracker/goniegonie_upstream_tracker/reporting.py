@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .atomic_io import write_text_atomically
 from .classifier import ComparisonReport
 from .errors import SourceError
 
@@ -188,9 +189,7 @@ def _display_optional_bool(value: bool | None) -> str:
 
 
 def _write_atomic(path: Path, content: str) -> None:
-    temporary = path.with_suffix(path.suffix + ".tmp")
     try:
-        temporary.write_text(content, encoding="utf-8", newline="\n")
-        temporary.replace(path)
+        write_text_atomically(path, content)
     except OSError as exception:
         raise SourceError(f"Cannot write report '{path}': {exception}") from exception

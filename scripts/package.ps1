@@ -38,7 +38,7 @@ function Reset-GeneratedDirectory {
         -Path $Path `
         -AllowedTopLevelNames @($AllowedTopLevelName)
     if (Test-Path -LiteralPath $safePath) {
-        Assert-NoReparsePoints -Path $safePath
+        Assert-NoReparsePoints -Path $safePath -AnchorPath $repositoryRoot
         Remove-Item -LiteralPath $safePath -Recurse -Force
     }
     Ensure-Directory -Path $safePath

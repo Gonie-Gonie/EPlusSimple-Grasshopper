@@ -8,6 +8,7 @@ from pathlib import Path
 import sys
 from typing import Sequence
 
+from .atomic_io import write_text_atomically
 from .classifier import compare_sources, inspect_source_identity
 from .compatibility import (
     CompatibilityConfiguration,
@@ -17,12 +18,18 @@ from .compatibility import (
     load_compatibility_configuration,
     load_compatibility_scope,
     load_public_inventory,
+    rebase_compatibility_inventory,
     render_compatibility_matrix,
     render_public_inventory,
     write_compatibility_report,
 )
 from .config import TrackerConfiguration, load_configuration
 from .errors import SourceError, TrackerError
+from .evidence import (
+    load_evidence_results,
+    render_scope_decisions,
+    render_symbol_evidence,
+)
 from .reporting import write_reports
 from .symbols import build_snapshot
 
@@ -47,6 +54,9 @@ def main(arguments: Sequence[str] | None = None) -> int:
             return _inventory(configuration, options, repository_root)
         if options.command == "matrix-template":
             return _matrix_template(configuration, options, repository_root)
+        if options.command == "rebase-inventory":
+            compatibility = _compatibility_configuration(options, repository_root, configuration)
+            return _rebase_inventory(compatibility, options, repository_root)
         if options.command == "compatibility-report":
             compatibility = _compatibility_configuration(options, repository_root, configuration)
             return _compatibility_report(
@@ -103,6 +113,16 @@ def _create_parser() -> argparse.ArgumentParser:
         "--compatibility-matrix",
         type=Path,
         help="Override compatibility-matrix JSON path.",
+    )
+    parser.add_argument(
+        "--symbol-evidence",
+        type=Path,
+        help="Override exact symbol-evidence JSON path.",
+    )
+    parser.add_argument(
+        "--scope-decisions",
+        type=Path,
+        help="Override exact product-scope decisions JSON path.",
     )
     commands = parser.add_subparsers(dest="command", required=True)
 
@@ -169,6 +189,22 @@ def _create_parser() -> argparse.ArgumentParser:
         help="JSON output path; defaults beneath temp/upstream-tracker.",
     )
 
+    rebase_parser = commands.add_parser(
+        "rebase-inventory",
+        help="Rebind registries to byte-only inventory drift with an identical AST contract.",
+    )
+    rebase_parser.add_argument(
+        "--replacement-inventory",
+        type=Path,
+        required=True,
+        help="New generated public-symbol inventory JSON.",
+    )
+    rebase_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        help="Output directory; defaults beneath temp/upstream-tracker/rebased.",
+    )
+
     report_parser = commands.add_parser(
         "compatibility-report",
         help="Write the machine-readable symbol-classification coverage report.",
@@ -184,6 +220,13 @@ def _create_parser() -> argparse.ArgumentParser:
         type=Path,
         help="JSON output path; defaults beneath temp/upstream-tracker.",
     )
+    report_parser.add_argument(
+        "--evidence-results",
+        type=Path,
+        action="append",
+        default=[],
+        help="Collected exact assertion-result JSON; repeat for multiple test collectors.",
+    )
 
     gate_parser = commands.add_parser(
         "compatibility-gate",
@@ -194,6 +237,13 @@ def _create_parser() -> argparse.ArgumentParser:
         "--output",
         type=Path,
         help="JSON output path; defaults beneath temp/upstream-tracker.",
+    )
+    gate_parser.add_argument(
+        "--evidence-results",
+        type=Path,
+        action="append",
+        default=[],
+        help="Collected exact assertion-result JSON; repeat for multiple test collectors.",
     )
     return parser
 
@@ -225,7 +275,23 @@ def _compatibility_configuration(
         options.compatibility_matrix,
         repository_root / "upstream" / "compatibility-matrix.json",
     )
-    return load_compatibility_configuration(tracker, scope, inventory, matrix)
+    evidence = _manifest_path(
+        options.symbol_evidence,
+        repository_root / "upstream" / "symbol-evidence.json",
+    )
+    decisions = _manifest_path(
+        options.scope_decisions,
+        repository_root / "upstream" / "scope-decisions.json",
+    )
+    return load_compatibility_configuration(
+        tracker,
+        scope,
+        inventory,
+        matrix,
+        evidence,
+        decisions,
+        repository_root,
+    )
 
 
 def _validate(
@@ -246,12 +312,21 @@ def _validate(
     }
     data = {
         "compatibility_exception_count": len(configuration.exceptions),
+        "compatibility_exception_ids": sorted(
+            item.identifier for item in configuration.exceptions
+        ),
         "compatibility": {
             "classification_counts": classification_counts,
             "complete": not compatibility.needs_reverification,
             "exact_inventory_coverage": True,
+            "repository_manifest_bindings": compatibility.exact_registry_coverage,
             "inventory_sha256": compatibility.inventory.content_sha256,
             "matrix_sha256": compatibility.matrix.content_sha256,
+            "scope_decisions_sha256": compatibility.scope_decisions.content_sha256,
+            "scope_decision_count": len(compatibility.scope_decisions.decisions),
+            "symbol_evidence_sha256": compatibility.symbol_evidence.content_sha256,
+            "symbol_evidence_entry_count": len(compatibility.symbol_evidence.entries),
+            "symbol_evidence_receipt_count": len(compatibility.symbol_evidence.receipts),
             "public_symbol_count": len(compatibility.inventory.symbols),
             "python_file_count": len(compatibility.inventory.files),
         },
@@ -302,7 +377,6 @@ def _compatibility_report(
     fail_on_incomplete: bool,
 ) -> int:
     source_root: Path | None = options.source_root
-    identity_data = None
     if source_root is not None:
         require_verified = fail_on_incomplete or bool(
             getattr(options, "require_verified_pin", False)
@@ -316,14 +390,21 @@ def _compatibility_report(
             raise SourceError(
                 "Compatibility verification requires a clean Git clone at the locked commit and origin"
             )
-        identity_data = identity.to_data()
     elif bool(getattr(options, "require_verified_pin", False)):
         raise SourceError("--require-verified-pin requires --source-root")
 
     report = build_compatibility_report(
         compatibility,
         source_root=source_root,
-        source_identity=identity_data,
+        evidence_results=tuple(
+            load_evidence_results(
+                path,
+                compatibility.inventory,
+                compatibility.symbol_evidence,
+                repository_root=repository_root,
+            )
+            for path in getattr(options, "evidence_results", ())
+        ),
     )
     default_name = "compatibility-gate.json" if fail_on_incomplete else "compatibility-report.json"
     output = options.output or repository_root / "temp" / "upstream-tracker" / default_name
@@ -335,6 +416,7 @@ def _compatibility_report(
                 "classification_complete": report.classification_complete,
                 "output": str(output),
                 "passed": report.passed,
+                "required_symbol_evidence_satisfied": report.evidence_execution.passed,
                 "public_symbol_count": len(compatibility.inventory.symbols),
                 "source_matches_inventory": report.source_matches_inventory,
                 "unresolved_count": len(compatibility.needs_reverification),
@@ -371,6 +453,60 @@ def _matrix_template(
     return 0
 
 
+def _rebase_inventory(
+    configuration: CompatibilityConfiguration,
+    options: argparse.Namespace,
+    repository_root: Path,
+) -> int:
+    replacement = load_public_inventory(
+        options.replacement_inventory.resolve(),
+        configuration.scope,
+    )
+    rebased = rebase_compatibility_inventory(configuration, replacement)
+    output = options.output_dir or repository_root / "temp" / "upstream-tracker" / "rebased"
+    output = _require_temp_output(output, repository_root, file_path=False)
+    paths = {
+        "public_symbol_inventory": output / "public-symbol-inventory.json",
+        "compatibility_matrix": output / "compatibility-matrix.json",
+        "symbol_evidence": output / "symbol-evidence.json",
+        "scope_decisions": output / "scope-decisions.json",
+    }
+    _write_text(
+        paths["public_symbol_inventory"],
+        render_public_inventory(rebased.inventory),
+        "rebased public symbol inventory",
+    )
+    _write_text(
+        paths["compatibility_matrix"],
+        render_compatibility_matrix(rebased.matrix),
+        "rebased compatibility matrix",
+    )
+    _write_text(
+        paths["symbol_evidence"],
+        render_symbol_evidence(rebased.symbol_evidence),
+        "rebased symbol evidence",
+    )
+    _write_text(
+        paths["scope_decisions"],
+        render_scope_decisions(rebased.scope_decisions),
+        "rebased scope decisions",
+    )
+    print(
+        json.dumps(
+            {
+                "inventory_sha256": rebased.inventory.content_sha256,
+                "matrix_sha256": rebased.matrix.content_sha256,
+                "outputs": {key: str(value) for key, value in paths.items()},
+                "schema": "goniegonie.upstream-inventory-rebase.v1",
+                "symbol_contract_unchanged": True,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+    )
+    return 0
+
+
 def _hash(
     configuration: TrackerConfiguration,
     options: argparse.Namespace,
@@ -383,12 +519,9 @@ def _hash(
         configuration.tracked_paths,
         require_tracked_paths=not options.allow_missing_tracked_paths,
     )
-    output.parent.mkdir(parents=True, exist_ok=True)
     content = json.dumps(snapshot.to_data(), ensure_ascii=False, indent=2, sort_keys=True) + "\n"
-    temporary = output.with_suffix(output.suffix + ".tmp")
     try:
-        temporary.write_text(content, encoding="utf-8", newline="\n")
-        temporary.replace(output)
+        write_text_atomically(output, content)
     except OSError as exception:
         raise SourceError(f"Cannot write symbol hashes '{output}': {exception}") from exception
     print(output)
@@ -444,11 +577,8 @@ def _require_temp_output(path: Path, repository_root: Path, *, file_path: bool) 
 
 
 def _write_text(path: Path, content: str, description: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
     try:
-        temporary.write_text(content, encoding="utf-8", newline="\n")
-        temporary.replace(path)
+        write_text_atomically(path, content)
     except OSError as exception:
         raise SourceError(f"Cannot write {description} '{path}': {exception}") from exception
 

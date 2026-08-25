@@ -56,6 +56,33 @@ $outputRoot = Assert-RepositoryChildPath `
     -RepositoryRoot $repositoryRoot `
     -Path $OutputDirectory `
     -AllowedTopLevelNames @('temp')
+
+$mutexHash = $null
+$mutexHasher = [System.Security.Cryptography.SHA256]::Create()
+try {
+    $mutexBytes = [System.Text.Encoding]::UTF8.GetBytes(
+        $repositoryRoot.ToLowerInvariant())
+    $mutexHash = ([System.BitConverter]::ToString(
+        $mutexHasher.ComputeHash($mutexBytes)) -replace '-', '').ToLowerInvariant()
+}
+finally {
+    $mutexHasher.Dispose()
+}
+$referenceMutex = [System.Threading.Mutex]::new(
+    $false,
+    "Local\GonieGonie.Reference.$mutexHash")
+$referenceMutexAcquired = $false
+try {
+    $referenceMutexAcquired = $referenceMutex.WaitOne(0)
+}
+catch [System.Threading.AbandonedMutexException] {
+    $referenceMutexAcquired = $true
+}
+if (-not $referenceMutexAcquired) {
+    $referenceMutex.Dispose()
+    throw 'Another reference-oracle command is already running for this repository.'
+}
+
 $baselineRoot = Assert-RepositoryChildPath `
     -RepositoryRoot $repositoryRoot `
     -Path $BaselineDirectory `
@@ -178,7 +205,7 @@ function Reset-ReferenceOwnedTree {
         return
     }
 
-    Assert-NoReparsePoints -Path $safePath
+    Assert-NoReparsePoints -Path $safePath -AnchorPath $repositoryRoot
     if ($WhatIfPreference) {
         Write-Host "What if: remove reference-owned directory '$safePath'."
         return
@@ -193,6 +220,49 @@ function Get-CanonicalRemoteUrl {
     return $Url.Trim().TrimEnd('/').ToLowerInvariant() -replace '\.git$', ''
 }
 
+function Test-UpstreamCheckoutAuthority {
+    param(
+        [Parameter(Mandatory = $true)][string] $Path,
+        [Parameter(Mandatory = $true)][string] $Commit,
+        [Parameter(Mandatory = $true)][string] $Repository
+    )
+
+    if (-not (Test-Path -LiteralPath (Join-Path $Path '.git') -PathType Container)) {
+        return $false
+    }
+    $trackerRoot = Join-Path $repositoryRoot 'tools\upstream-tracker'
+    $program = @'
+from pathlib import Path
+import sys
+sys.path.insert(0, sys.argv[1])
+from goniegonie_upstream_tracker.classifier import inspect_source_identity
+identity = inspect_source_identity(
+    Path(sys.argv[2]),
+    expected_commit=sys.argv[3],
+    expected_repository=sys.argv[4],
+)
+raise SystemExit(0 if identity.pin_verified else 1)
+'@
+    $previousBytecodePolicy = [Environment]::GetEnvironmentVariable(
+        'PYTHONDONTWRITEBYTECODE',
+        [EnvironmentVariableTarget]::Process)
+    $previousErrorActionPreference = $ErrorActionPreference
+    try {
+        $env:PYTHONDONTWRITEBYTECODE = '1'
+        $ErrorActionPreference = 'Continue'
+        $null = @(& $pythonExecutable -I -X utf8 -c $program `
+            $trackerRoot $Path $Commit $Repository 2>&1)
+        return $LASTEXITCODE -eq 0
+    }
+    finally {
+        [Environment]::SetEnvironmentVariable(
+            'PYTHONDONTWRITEBYTECODE',
+            $previousBytecodePolicy,
+            [EnvironmentVariableTarget]::Process)
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
+}
+
 function Initialize-UpstreamCheckout {
     $gitCommand = Get-Command git.exe -ErrorAction SilentlyContinue
     if ($null -eq $gitCommand) {
@@ -200,6 +270,20 @@ function Initialize-UpstreamCheckout {
     }
     if ($null -eq $gitCommand) {
         throw 'Git is required to materialize the pinned Python reference source.'
+    }
+
+    if (Test-Path -LiteralPath $UpstreamPath) {
+        $authoritative = Test-UpstreamCheckoutAuthority `
+            -Path $UpstreamPath `
+            -Commit $upstreamCommit `
+            -Repository $upstreamRepository
+        if (-not $authoritative) {
+            if (-not $manageUpstream) {
+                throw "The explicitly selected upstream checkout is not byte-exact at the pinned commit: '$UpstreamPath'."
+            }
+            Write-Host "Recreating non-authoritative managed reference checkout: $UpstreamPath"
+            Reset-ReferenceOwnedTree -Path $UpstreamPath -AllowedTopLevelNames @('temp')
+        }
     }
 
     $newCheckout = $false
@@ -215,6 +299,11 @@ function Initialize-UpstreamCheckout {
                 -ArgumentList @('clone', '--filter=blob:none', '--no-checkout', $upstreamRepository, $UpstreamPath) `
                 -LogPath (Join-Path $logsRoot 'upstream-clone.log') `
                 -FailureMessage 'Cloning the Python reference source failed'
+            Invoke-LoggedNativeCommand `
+                -FilePath $gitCommand.Source `
+                -ArgumentList @('-C', $UpstreamPath, 'config', '--local', 'core.autocrlf', 'false') `
+                -LogPath (Join-Path $logsRoot 'upstream-git-config.log') `
+                -FailureMessage 'Configuring the reference checkout for byte-exact verification failed'
             $newCheckout = $true
         }
     }
@@ -290,6 +379,12 @@ function Initialize-UpstreamCheckout {
             -FailureMessage 'Verifying the upstream commit failed')[-1])
         if (-not $verifiedCommit.Equals($upstreamCommit, [System.StringComparison]::OrdinalIgnoreCase)) {
             throw "Pinned upstream checkout verification failed: expected $upstreamCommit, found $verifiedCommit."
+        }
+        if (-not (Test-UpstreamCheckoutAuthority `
+            -Path $UpstreamPath `
+            -Commit $upstreamCommit `
+            -Repository $upstreamRepository)) {
+            throw "Pinned upstream checkout is not byte-exact and free of extra files: '$UpstreamPath'."
         }
     }
 }
@@ -386,7 +481,7 @@ function Reset-OutputDirectory {
         return
     }
 
-    Assert-NoReparsePoints -Path $outputRoot
+    Assert-NoReparsePoints -Path $outputRoot -AnchorPath $repositoryRoot
     foreach ($item in @(Get-ChildItem -LiteralPath $outputRoot -Force)) {
         $safeItem = Assert-RepositoryChildPath `
             -RepositoryRoot $repositoryRoot `
@@ -449,7 +544,7 @@ function Assert-ReferenceMatchesBaseline {
 
 function Update-ReferenceBaseline {
     Ensure-Directory -Path $baselineRoot
-    Assert-NoReparsePoints -Path $baselineRoot
+    Assert-NoReparsePoints -Path $baselineRoot -AnchorPath $repositoryRoot
     foreach ($item in @(Get-ChildItem -LiteralPath $baselineRoot -Force)) {
         $safeItem = Assert-RepositoryChildPath `
             -RepositoryRoot $repositoryRoot `
@@ -487,6 +582,7 @@ if ($WhatIfPreference) {
 
 $env:PYTHONHASHSEED = '0'
 $env:PYTHONUTF8 = '1'
+$env:PYTHONDONTWRITEBYTECODE = '1'
 $upstreamSource = Join-Path $UpstreamPath 'src'
 $profileOraclePath = Join-Path $outputRoot 'usage-profile-schedule-oracle.json'
 $profileGeneratorArguments = @(
@@ -553,3 +649,5 @@ if ($Mode -eq 'Verify') {
 }
 
 Write-Host "Python reference output: $outputRoot"
+$referenceMutex.ReleaseMutex()
+$referenceMutex.Dispose()

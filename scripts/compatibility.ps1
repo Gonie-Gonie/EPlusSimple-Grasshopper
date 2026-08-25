@@ -93,7 +93,7 @@ foreach ($requiredDirectory in @($dependencyRoot, $upstreamRoot, $runtimeRoot)) 
 }
 
 if (Test-Path -LiteralPath $outputRoot -PathType Container) {
-    Assert-NoReparsePoints -Path $outputRoot
+    Assert-NoReparsePoints -Path $outputRoot -AnchorPath $repositoryRoot
     foreach ($item in @(Get-ChildItem -LiteralPath $outputRoot -Force)) {
         $safeItem = Assert-RepositoryChildPath `
             -RepositoryRoot $repositoryRoot `
@@ -138,6 +138,7 @@ Invoke-LoggedNativeCommand `
 
 $env:PYTHONHASHSEED = '0'
 $env:PYTHONUTF8 = '1'
+$env:PYTHONDONTWRITEBYTECODE = '1'
 $pythonArguments = @(
     '-X', 'utf8',
     $bootstrapPath,

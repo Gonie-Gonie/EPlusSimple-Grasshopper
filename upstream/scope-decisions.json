@@ -1,0 +1,189 @@
+{
+  "content_sha256": "sha256:861cd028b0fefcf2a333a0691fffe6e03f567e0282bbdad42ad5595b1d7594ad",
+  "decisions": [
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-api-py-greenretrofitdataformat-2aed5d41",
+      "path": "src/epsimple/api.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "GreenRetrofitDataFormat",
+      "upstream_symbol_hash": "sha256:2aed5d41f4ffdf2b9dda5a3a7e3ce0beea3bbcaa3942f625d6e2c66732a02409"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-api-py-greenretrofitdataformat-excel-66b6b375",
+      "path": "src/epsimple/api.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "GreenRetrofitDataFormat.EXCEL",
+      "upstream_symbol_hash": "sha256:66b6b3753e89b940706f5a92995a8dc45170140f7b30f2275d1f13ba05d1c805"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-api-py-greenretrofitdataformat-idf-be4f894e",
+      "path": "src/epsimple/api.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "GreenRetrofitDataFormat.IDF",
+      "upstream_symbol_hash": "sha256:be4f894ef0b2f53c59c90794f7cdac2b34807927ea6a8d8d3df53819d692d2de"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-api-py-greenretrofitdataformat-json-dfcad3ec",
+      "path": "src/epsimple/api.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "GreenRetrofitDataFormat.JSON",
+      "upstream_symbol_hash": "sha256:dfcad3ec31ed2f2d358fb743e6e6c62ffeeaf17fce5c4c89f60f0e13d0f2e39e"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-api-py-greenretrofitdataformat-new-7eb66831",
+      "path": "src/epsimple/api.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "GreenRetrofitDataFormat.__new__",
+      "upstream_symbol_hash": "sha256:7eb66831b35fc7d259d460b44297603c7d49e6921c71269d6fd23d3590cb466a"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-api-py-convert-inputformat-40678578",
+      "path": "src/epsimple/api.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "convert_inputformat",
+      "upstream_symbol_hash": "sha256:4067857855112b3c7db0e6a3ef067d79026d6ec678d0316436e6bc25978c7810"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-api-py-debug-85461a95",
+      "path": "src/epsimple/api.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "debug",
+      "upstream_symbol_hash": "sha256:85461a9570838dfac90c94dc60a1d88278046c8094f6e7dbaa34458e7e436fc6"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-api-py-get-database-0144ac84",
+      "path": "src/epsimple/api.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "get_database",
+      "upstream_symbol_hash": "sha256:0144ac845036c706490196c4b500f891bb64809aee47031d55e85f6d0eabc1b4"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-api-py-run-grexcel-fbfc29cf",
+      "path": "src/epsimple/api.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "run_grexcel",
+      "upstream_symbol_hash": "sha256:fbfc29cf4e6b1ed3fd22c8a4b802d1686814ccacc74422aa38340723fc2f3f20"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-api-py-run-grjson-1676324f",
+      "path": "src/epsimple/api.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "run_grjson",
+      "upstream_symbol_hash": "sha256:1676324f34686ed2b0bb573e89f9945a263997ce1defa404dedc95e4326b71ac"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-utils-py-column-rename-dict-5b2a0454",
+      "path": "src/epsimple/utils.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "COLUMN_RENAME_DICT",
+      "upstream_symbol_hash": "sha256:5b2a0454591c46141898d57f07023d9a4a20c48e6ec7f596233dd8276dc6cb41"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-utils-py-id-prefix-28196274",
+      "path": "src/epsimple/utils.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "ID_PREFIX",
+      "upstream_symbol_hash": "sha256:281962748f143bffc5730d8f24a15e4b868487fc7009749070f73008ad41b1fa"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-utils-py-property-rename-dict-841642ce",
+      "path": "src/epsimple/utils.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "PROPERTY_RENAME_DICT",
+      "upstream_symbol_hash": "sha256:841642ced416dbd77397cbc1862fe9d33711aae831f9b5856ab8fa81b79e391d"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-utils-py-valid-columns-98d328b6",
+      "path": "src/epsimple/utils.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "VALID_COLUMNS",
+      "upstream_symbol_hash": "sha256:98d328b645952ae27e0f714c449bebfe23537b2818ce1e874b6d4b03fe295dd7"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-utils-py-check-modules-53e78991",
+      "path": "src/epsimple/utils.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "check_modules",
+      "upstream_symbol_hash": "sha256:53e789914c8c1abb79ee99433e2431884422549d3ab4a6487f734fe925e99765"
+    },
+    {
+      "approval": "approved",
+      "decision": "out_of_scope",
+      "id": "scope-src-epsimple-utils-py-excel2grjson-97a11f64",
+      "path": "src/epsimple/utils.py",
+      "policy_reference": "docs/compatibility.md#declared-product-compatibility-scope",
+      "product_contract": "compiled_rhino_grasshopper_product",
+      "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols.",
+      "symbol": "excel2grjson",
+      "upstream_symbol_hash": "sha256:97a11f64d409208b9edd587632fe72c16278800551e438761c23633d62b055bf"
+    }
+  ],
+  "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+  "schema": "goniegonie.upstream-scope-decisions.v1",
+  "summary": {
+    "approved_count": 16,
+    "decision_count": 16,
+    "out_of_scope_count": 16
+  },
+  "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897"
+}

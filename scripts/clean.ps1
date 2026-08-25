@@ -26,7 +26,7 @@ if ($cleanTemp) {
         -AllowedTopLevelNames @('temp')
 
     if (Test-Path -LiteralPath $tempPath) {
-        Assert-NoReparsePoints -Path $tempPath
+        Assert-NoReparsePoints -Path $tempPath -AnchorPath $repositoryRoot
         if ($PSCmdlet.ShouldProcess($tempPath, 'Remove disposable temp tree')) {
             Remove-Item -LiteralPath $tempPath -Recurse -Force
             Write-Host "Removed disposable tree: $tempPath"
@@ -44,7 +44,7 @@ if ($cleanArtifacts) {
         -AllowedTopLevelNames @('artifacts')
 
     if (Test-Path -LiteralPath $artifactsPath -PathType Container) {
-        Assert-NoReparsePoints -Path $artifactsPath
+        Assert-NoReparsePoints -Path $artifactsPath -AnchorPath $repositoryRoot
         $generatedItems = @(Get-ChildItem -LiteralPath $artifactsPath -Force |
             Where-Object { -not $_.Name.Equals('README.md', [System.StringComparison]::OrdinalIgnoreCase) })
 

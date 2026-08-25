@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import StrEnum
+import hashlib
+import os
 from pathlib import Path
+import stat
 import subprocess
 from typing import Any, Iterable
 
@@ -229,7 +232,7 @@ def inspect_source_identity(
     commit = _git(root, "rev-parse", "HEAD").lower()
     repository = _git_optional(root, "remote", "get-url", "origin")
     branch = _git_optional(root, "branch", "--show-current") or None
-    clean = not bool(_git(root, "status", "--porcelain"))
+    clean = _working_tree_matches_head(root)
     if expected_commit is not None and commit != expected_commit.lower():
         raise SourceError(
             f"Pinned source HEAD is '{commit}', expected '{expected_commit.lower()}'"
@@ -284,7 +287,9 @@ def _classify(
                 sorted(
                     item.identifier
                     for item in exceptions
-                    if item.upstream_path == path and item.upstream_symbol == raw.symbol
+                    if item.upstream_path == path
+                    and item.upstream_symbol == raw.symbol
+                    and item.upstream_symbol_hash == raw.baseline_hash
                 )
             )
             result.append(
@@ -457,11 +462,12 @@ def _matching_mappings(
 def _git(root: Path, *arguments: str) -> str:
     try:
         completed = subprocess.run(
-            ["git", "-C", str(root), *arguments],
+            ["git", "--no-replace-objects", "-C", str(root), *arguments],
             check=True,
             capture_output=True,
             text=True,
             encoding="utf-8",
+            env=_git_environment(),
         )
     except (OSError, subprocess.CalledProcessError) as exception:
         detail = getattr(exception, "stderr", None) or str(exception)
@@ -474,6 +480,127 @@ def _git_optional(root: Path, *arguments: str) -> str | None:
         return _git(root, *arguments)
     except SourceError:
         return None
+
+
+def _git_raw(root: Path, *arguments: str) -> bytes:
+    try:
+        completed = subprocess.run(
+            ["git", "--no-replace-objects", "-C", str(root), *arguments],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=_git_environment(),
+        )
+    except (OSError, subprocess.CalledProcessError) as exception:
+        detail_value = getattr(exception, "stderr", None)
+        if isinstance(detail_value, bytes):
+            detail = detail_value.decode("utf-8", errors="replace")
+        else:
+            detail = str(detail_value or exception)
+        raise SourceError(f"Git metadata inspection failed: {detail.strip()}") from exception
+    return completed.stdout
+
+
+def _git_environment() -> dict[str, str]:
+    environment = {
+        key: value
+        for key, value in os.environ.items()
+        if not key.upper().startswith("GIT_")
+    }
+    environment["GIT_NO_REPLACE_OBJECTS"] = "1"
+    return environment
+
+
+def _working_tree_matches_head(root: Path) -> bool:
+    """Compare every working file directly with HEAD and reject every extra file."""
+
+    expected: dict[str, tuple[str, str]] = {}
+    try:
+        tree = _git_raw(root, "ls-tree", "-r", "-z", "HEAD")
+        for item in tree.split(b"\0"):
+            if not item:
+                continue
+            metadata, raw_path = item.split(b"\t", 1)
+            mode, object_type, raw_identifier = metadata.split(b" ", 2)
+            if object_type != b"blob":
+                return False
+            path = raw_path.decode("utf-8", errors="surrogateescape")
+            if (
+                not path
+                or path.startswith("/")
+                or "\\" in path
+                or any(part in {"", ".", ".."} for part in path.split("/"))
+            ):
+                return False
+            expected[path] = (mode.decode("ascii"), raw_identifier.decode("ascii"))
+    except (OSError, UnicodeError, ValueError, SourceError):
+        return False
+
+    actual: set[str] = set()
+    stack = [root]
+    try:
+        while stack:
+            directory = stack.pop()
+            for entry in os.scandir(directory):
+                candidate = Path(entry.path)
+                relative = candidate.relative_to(root).as_posix()
+                if relative == ".git":
+                    continue
+                metadata = entry.stat(follow_symlinks=False)
+                reparse_flag = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
+                is_reparse = bool(
+                    reparse_flag
+                    and getattr(metadata, "st_file_attributes", 0) & reparse_flag
+                )
+                if entry.is_symlink():
+                    actual.add(relative)
+                elif is_reparse:
+                    return False
+                elif entry.is_dir(follow_symlinks=False):
+                    stack.append(candidate)
+                elif entry.is_file(follow_symlinks=False):
+                    actual.add(relative)
+                else:
+                    return False
+    except (OSError, ValueError):
+        return False
+    if actual != set(expected):
+        return False
+
+    for relative, (mode, identifier) in expected.items():
+        candidate = root.joinpath(*relative.split("/"))
+        try:
+            metadata = os.lstat(candidate)
+            if mode == "120000":
+                if not stat.S_ISLNK(metadata.st_mode):
+                    return False
+                content = os.fsencode(os.readlink(candidate))
+            else:
+                reparse_flag = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
+                if (
+                    not stat.S_ISREG(metadata.st_mode)
+                    or stat.S_ISLNK(metadata.st_mode)
+                    or (
+                        reparse_flag
+                        and getattr(metadata, "st_file_attributes", 0) & reparse_flag
+                    )
+                ):
+                    return False
+                content = candidate.read_bytes()
+        except (OSError, UnicodeError):
+            return False
+        if _git_blob_identifier(content, len(identifier)) != identifier:
+            return False
+    return True
+
+
+def _git_blob_identifier(value: bytes, identifier_length: int) -> str:
+    payload = f"blob {len(value)}\0".encode("ascii") + value
+    if identifier_length == 40:
+        return hashlib.sha1(payload).hexdigest()
+    if identifier_length == 64:
+        return hashlib.sha256(payload).hexdigest()
+    raise SourceError(f"Unsupported Git object identifier length: {identifier_length}")
 
 
 def _normalize_repository(value: str) -> str:

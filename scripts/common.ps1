@@ -71,8 +71,50 @@ function Assert-NoReparsePoints {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [string] $Path
+        [string] $Path,
+
+        [string] $AnchorPath
     )
+
+    if (-not [string]::IsNullOrWhiteSpace($AnchorPath)) {
+        $anchor = [System.IO.Path]::GetFullPath($AnchorPath).TrimEnd('\', '/')
+        $candidate = [System.IO.Path]::GetFullPath($Path).TrimEnd('\', '/')
+        $prefix = $anchor + [System.IO.Path]::DirectorySeparatorChar
+        if (-not $candidate.Equals($anchor, [System.StringComparison]::OrdinalIgnoreCase) -and
+            -not $candidate.StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw "Refusing to inspect reparse points outside anchor '$anchor': '$candidate'."
+        }
+        if (-not (Test-Path -LiteralPath $anchor -PathType Container)) {
+            throw "Reparse-point safety anchor does not exist: '$anchor'."
+        }
+
+        $current = $anchor
+        $relative = if ($candidate.Equals(
+            $anchor,
+            [System.StringComparison]::OrdinalIgnoreCase)) {
+            ''
+        }
+        else {
+            $candidate.Substring($prefix.Length)
+        }
+        $segments = @($relative.Split(
+            @('\', '/'),
+            [System.StringSplitOptions]::RemoveEmptyEntries))
+        $anchorItem = Get-Item -LiteralPath $current -Force
+        if (($anchorItem.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) {
+            throw "Refusing to operate through reparse point '$current'."
+        }
+        foreach ($segment in $segments) {
+            $current = Join-Path $current $segment
+            if (-not (Test-Path -LiteralPath $current)) {
+                break
+            }
+            $ancestorItem = Get-Item -LiteralPath $current -Force
+            if (($ancestorItem.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) {
+                throw "Refusing to operate through reparse point '$current'."
+            }
+        }
+    }
 
     if (-not (Test-Path -LiteralPath $Path)) {
         return
