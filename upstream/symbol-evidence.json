@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:372d54330740eea05192cc6055ea8b3fa08abff72c7dc51b2705fc5a0b136de1",
+  "content_sha256": "sha256:5381fe5f9801ae725e789790b85242142de08f1033eddff1df96dac419cc7ddf",
   "entries": [
     {
       "implementation": {
@@ -134,7 +134,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IntervalsPerHour"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -160,7 +160,397 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Addition"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every finite-result DaySchedule.__add__ oracle case and directly verify the registered non-finite-result safety adaptation, names, metadata, failures, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:18998edb8094486373946ec543b35e43c90d28eb704ca1b0b7b545dc57bffce6",
+          "id": "profile-dayschedule-add-f2cc675e",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__add__",
+      "upstream_symbol_hash": "sha256:f2cc675e8c909fae4fa4461fb915249045e55b0e6d7b754575b00ba2cecf7610"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_BitwiseAnd"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.__and__ oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:fbec80e0bc854862c08606812bddf3bfb6eb4593dcc989807a4f0e04f92624e0",
+          "id": "profile-dayschedule-and-28b1aedc",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__and__",
+      "upstream_symbol_hash": "sha256:28b1aedc4bfa287ba2a8cb24dc3146eed48c955ebfcf167f85ea1c58dddcd238"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.GreaterThanOrEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.__ge__ oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b3fb77f22cbf14ae1fea523463de4b09274de0630e7e4ce978e1bde821b93952",
+          "id": "profile-dayschedule-ge-ea94e336",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__ge__",
+      "upstream_symbol_hash": "sha256:ea94e3369cd6b4314bae0a24563fb18cf478872702352f5439ee030b2024ada0"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.GreaterThan"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.__gt__ oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:56991a74256df8a945175578f98ccbff3b2d4b5317cd6a64f736aa8d026a3dc5",
+          "id": "profile-dayschedule-gt-5b9a4135",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__gt__",
+      "upstream_symbol_hash": "sha256:5b9a41353d9b00038482ace45403592e4f63c95442789d384b3f06831bebdee1"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_LogicalNot"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.__invert__ oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:aa546b7b9936eefac808da83988d05d47409de83f40514e207c5d517f9aaee9e",
+          "id": "profile-dayschedule-invert-0920f474",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__invert__",
+      "upstream_symbol_hash": "sha256:0920f4745c4f599b013798696350c268640ce02822d4bcc405fdd5fea20916e4"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.LessThanOrEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.__le__ oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:5af888402db1c09e52899d97987e9318724013781a4bd079b38dc5c22bcb7123",
+          "id": "profile-dayschedule-le-5c35fbea",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__le__",
+      "upstream_symbol_hash": "sha256:5c35fbea76e3e4da3f516363b17530e1972fde58b452ee210c22cb5e8d40f68f"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.LessThan"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.__lt__ oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2ca1cb71e9443836718f59a77a39e55ed8bdd67dffabd5b0b6e434647c5dc5cc",
+          "id": "profile-dayschedule-lt-495dc274",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__lt__",
+      "upstream_symbol_hash": "sha256:495dc27481315dcb97554de321b8e45a12379a1747bbb8d63bc5cbae2af46aee"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Multiply"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every finite-result DaySchedule.__mul__ oracle case and directly verify the registered non-finite-result safety adaptation, names, metadata, failures, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:377fbee4d239feb727c9de2d28d1c17cd3b48f21c26cde557520f2514a878702",
+          "id": "profile-dayschedule-mul-c8bbdbc4",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__mul__",
+      "upstream_symbol_hash": "sha256:c8bbdbc48d7e465d159ab6b829609d582004ead56657b7475b7caeb552454aea"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_BitwiseOr"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.__or__ oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c57ba9fcd25a70c2e2044394edc0ce3730717cd1c1925535a3dbf245cf20d3bd",
+          "id": "profile-dayschedule-or-1bf84ec9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__or__",
+      "upstream_symbol_hash": "sha256:1bf84ec95560db45c4e29a34678c9ff7edad4906bbb3a231bc47aff0481f6fce"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Addition"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every finite-result DaySchedule.__radd__ oracle case and directly verify the registered non-finite-result safety adaptation, names, metadata, failures, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:577dd500bdecd0830786137f10ee849c222ead0497583384750a591702540084",
+          "id": "profile-dayschedule-radd-5a5edede",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__radd__",
+      "upstream_symbol_hash": "sha256:5a5ededeac5428a72339d7725836d9062c10a107cbc821e2659160c73668831f"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Multiply"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every finite-result DaySchedule.__rmul__ oracle case and directly verify the registered non-finite-result safety adaptation, names, metadata, failures, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2a853249a995fc97cbdccb0ae2ed81a655ca1ba623e157f85e88135ac027a75e",
+          "id": "profile-dayschedule-rmul-87f6bef2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__rmul__",
+      "upstream_symbol_hash": "sha256:87f6bef2e0be21121fdc990138093d2d07cc225d5edaff5d2129660a902a4e7f"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Subtraction"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every finite-result DaySchedule.__rsub__ oracle case and directly verify the registered non-finite-result safety adaptation, names, metadata, failures, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e789bfc2bb48a74bb5cc8e098cd574d5094c7cbb2155164d5fc7f6178a98f679",
+          "id": "profile-dayschedule-rsub-a1fa02e1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__rsub__",
+      "upstream_symbol_hash": "sha256:a1fa02e18d86596b88fdebeceedaa48459b6e1068c301c93ba26170f41c37418"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Division"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every finite-result DaySchedule.__rtruediv__ oracle case and directly verify the registered non-finite-result safety adaptation, names, metadata, failures, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:8ee24b496773bf9bee678959146b3015c2993b12e91b37ebbf08fdb62197762a",
+          "id": "profile-dayschedule-rtruediv-9bc405fa",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__rtruediv__",
+      "upstream_symbol_hash": "sha256:9bc405fae0ca82d5a0ab953af9197871e5c71248a267d07d408071d44abbb374"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Subtraction"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every finite-result DaySchedule.__sub__ oracle case and directly verify the registered non-finite-result safety adaptation, names, metadata, failures, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:037999ebc7861f5b8b1199cd11b633992321c6ca8802ed245e056e0540ef77d6",
+          "id": "profile-dayschedule-sub-55fed2bd",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__sub__",
+      "upstream_symbol_hash": "sha256:55fed2bd2b5cbb9b3ed69e4e8c1da4207d382e78ede3fb674750e395f4a1c4e8"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Division"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every finite-result DaySchedule.__truediv__ oracle case and directly verify the registered non-finite-result safety adaptation, names, metadata, failures, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:71196081459721ca760ff928d1b5d0c3f6dc5fe3d352ea3e00eb77876cb9712d",
+          "id": "profile-dayschedule-truediv-d4bf77a6",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.__truediv__",
+      "upstream_symbol_hash": "sha256:d4bf77a6d67c06dfa3076336eac461f80855fdbfb2f72d46115cd8e67c10ca0b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Average"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -186,7 +576,111 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.element_eq oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:63fcd816658eadc0529ac250751fef71292602b23e998d80a3aa39eb36a070a7",
+          "id": "profile-dayschedule-element-eq-ef895644",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.element_eq",
+      "upstream_symbol_hash": "sha256:ef89564449828b40d613fe45cb0f86fe06727df8af9b4f2fa967437a68a1e139"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementMaximum"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every finite-result DaySchedule.element_max oracle case and directly verify the registered non-finite-result safety adaptation, names, metadata, failures, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9ca5d1a08cf1ec5dc552dd5b5d84fe82d2922831033246249331e595ca2cba1e",
+          "id": "profile-dayschedule-element-max-6bf704e3",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.element_max",
+      "upstream_symbol_hash": "sha256:6bf704e3d166ef0957b56ff7cd2b0841a32b80e8c1783e12cd698a183cb20f05"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementMinimum"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every finite-result DaySchedule.element_min oracle case and directly verify the registered non-finite-result safety adaptation, names, metadata, failures, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2c6a6a59277a9596934ff97438bc1ed5aed1688199b8d0a1131511454af05168",
+          "id": "profile-dayschedule-element-min-ac3a8af2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.element_min",
+      "upstream_symbol_hash": "sha256:ac3a8af2147d4a6fb6c85812769b0eea7ddf2c96342d28a0b72c659b0ed1623c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementNotEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.element_ne oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:71a5e8bf57600588d3306644d80596a590d1f911a4f9de672a79476b02adc0c2",
+          "id": "profile-dayschedule-element-ne-93fa9bc6",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.element_ne",
+      "upstream_symbol_hash": "sha256:93fa9bc6ed088f976183ab9cf80f0388eb4dedffa2d72422d1ca7fef37987493"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.FixedLength"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -212,7 +706,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.HasNonzero"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -238,7 +732,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.HasPositive"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -264,7 +758,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IntegralHours"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -290,7 +784,33 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsBetween"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.is_between oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:dc5c8faf43904d9aa675068634e4aabb981559a7bb7cfa66d0d984668bf4b6c9",
+          "id": "profile-dayschedule-is-between-44e0340f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.is_between",
+      "upstream_symbol_hash": "sha256:44e0340fd4f8c80dd25355692d36795370a2957bf582a23243d01a6c38736b29"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsConstant"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -316,7 +836,163 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsNegative"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.is_negative oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:8a740c5a9c0162003b8c52acc57078f6ec3360e3ffd347a4de13b17ea0f1dbd9",
+          "id": "profile-dayschedule-is-negative-556646a1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.is_negative",
+      "upstream_symbol_hash": "sha256:556646a16befc126236753ebe15e3e626de264cc292fa7aeafeccc87f1d6230a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsNonzero"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.is_nonzero oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:ae34022e2ae7bb0d6a83546b8aa3e007b76760cd64b11cd914b04e323276122c",
+          "id": "profile-dayschedule-is-nonzero-c63f38e6",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.is_nonzero",
+      "upstream_symbol_hash": "sha256:c63f38e66d2c02edbc31f84afe616eda8196ac16dd71ee7a198c5ac12c8105a6"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsOff"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.is_off oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:13cde7e7e1a7dfa4da812e02a555b74197e138080bde89e23a2e2da01be5b5cb",
+          "id": "profile-dayschedule-is-off-c26b058f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.is_off",
+      "upstream_symbol_hash": "sha256:c26b058f1987f339e99fb32a831d3e7861f856b5a86ad618f86b4e55335060b5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsOn"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.is_on oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f0ddd4db67b5ab3e50974b6d0af6fe52b86e5813b06c5b04111629de516b9667",
+          "id": "profile-dayschedule-is-on-1125889a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.is_on",
+      "upstream_symbol_hash": "sha256:1125889a0369f6326f366dbc743ca024aa4f59ccbf04f21448237818620958a4"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsPositive"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.is_positive oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e769ab11a2f120233e84c47875ad2e5db628dc226720cae01c94df7770c634d5",
+          "id": "profile-dayschedule-is-positive-95ca3954",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.is_positive",
+      "upstream_symbol_hash": "sha256:95ca3954321930aceddb80707aedfff689163c7fcc4cce416cbe4af558801f8c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsZero"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every DaySchedule.is_zero oracle case, including typed scalar dispatch, success and failure categories, exact binary64 values, names, result metadata, identity, and source immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:42087f7e1fcbcce42994bd9f4f2dfb967dd6277d7c1e2f092088b8ad12330bf3",
+          "id": "profile-dayschedule-is-zero-c26b058f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.is_zero",
+      "upstream_symbol_hash": "sha256:c26b058f1987f339e99fb32a831d3e7861f856b5a86ad618f86b4e55335060b5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Maximum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -342,7 +1018,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Minimum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -368,7 +1044,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.NonzeroHours"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -394,7 +1070,33 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.NormalizeByMaximum"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match copied normalization and directly verify the registered immutable in-place and non-finite-result safety adaptations, exact values, metadata, return identity, and source postconditions.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c8343ceb06197d2f69a2400bfb15469deb490a109f3f96aa2c982e6fb4740658",
+          "id": "profile-dayschedule-normalize-by-max-dd857df9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.normalize_by_max",
+      "upstream_symbol_hash": "sha256:dd857df94e8e53388add91cb81cb88d6e8de762ee49553fdd52f37979f5259c7"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.PositiveAverage"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -420,7 +1122,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.PositiveHours"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -446,7 +1148,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:8ffffe4e218d7e4e188a150bb6cb2bc4dc2e9bd6c8bb1540ffd2d9ab2c3214c6",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Step"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -468,6 +1170,32 @@
       ],
       "symbol": "DaySchedule.step_in_hours",
       "upstream_symbol_hash": "sha256:8f0c0fc9d2013fb3c88672e86d6bba893a91d01467f9d481ee740379e729f0b3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
+        "source_sha256": "sha256:cb1fcdcb90326ce80c944aa593f8e15d2e878f06609aa69dbefeb0e8285b61c1",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Where"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned Python and live .NET observations match every supported finite conditional branch and directly verify the registered deterministic default-name, invalid operand, and selected non-finite-result adaptations, exact values, metadata, failures, and source postconditions.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:63786b6eb440fd68e777ee1f7e7fe594c805f0149d1b468070ace365e03e1ce2",
+          "id": "profile-dayschedule-where-33c2a955",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/DayScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:7a2b46e689e099655dc45a9fc153b5e23d23d30cc0b14c64f09dc38d8159bf38",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.DayScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DaySchedule.where",
+      "upstream_symbol_hash": "sha256:33c2a95572c296a03947b50bb90895168c069b0f054bac875f4039bb8232595c"
     },
     {
       "implementation": {
@@ -785,9 +1513,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 30,
-    "passed_receipt_count": 30,
-    "receipt_count": 30,
+    "entry_count": 58,
+    "passed_receipt_count": 58,
+    "receipt_count": 58,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

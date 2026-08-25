@@ -834,67 +834,67 @@
     "needs_reverification",
     "needs_reverification",
     "equivalent",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "equivalent",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "equivalent",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "equivalent",
-    "equivalent",
-    "out_of_scope",
-    "equivalent",
-    "needs_reverification",
-    "equivalent",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "equivalent",
-    "equivalent",
+    "exception",
     "equivalent",
     "needs_reverification",
     "out_of_scope",
     "equivalent",
     "equivalent",
+    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "out_of_scope",
+    "exception",
+    "exception",
+    "exception",
+    "needs_reverification",
+    "out_of_scope",
+    "exception",
+    "exception",
+    "out_of_scope",
+    "needs_reverification",
+    "equivalent",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "out_of_scope",
+    "equivalent",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "out_of_scope",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "out_of_scope",
+    "equivalent",
+    "equivalent",
     "equivalent",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:50be7d2c78de26fd29b84418e03e5eede4be05e2cb59755bb218178db6252edd",
+  "content_sha256": "sha256:3af6d8b8c80b882a506d2e3fef51af7c9115f91122ccbf2b06730a983e6ba561",
   "details": [
     {
       "evidence": [
@@ -2699,10 +2699,86 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-day-schedule-add",
+        "upstream/symbol-evidence.json#profile-dayschedule-add-f2cc675e"
+      ],
+      "exception_id": "nonfinite-result-day-schedule-add",
+      "index": 834,
+      "rationale": "Trusted cross-language evidence verifies every finite-result case and directly observes the registered non-finite-result safety adaptation in the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-and-28b1aedc"
+      ],
+      "index": 835,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.__and__ behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-delitem-554e0ab1"
       ],
       "index": 837,
       "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-ge-ea94e336"
+      ],
+      "index": 838,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.__ge__ behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-gt-5b9a4135"
+      ],
+      "index": 839,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.__gt__ behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-invert-0920f474"
+      ],
+      "index": 841,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.__invert__ behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-le-5c35fbea"
+      ],
+      "index": 842,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.__le__ behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-lt-495dc274"
+      ],
+      "index": 843,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.__lt__ behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-day-schedule-mul",
+        "upstream/symbol-evidence.json#profile-dayschedule-mul-c8bbdbc4"
+      ],
+      "exception_id": "nonfinite-result-day-schedule-mul",
+      "index": 844,
+      "rationale": "Trusted cross-language evidence verifies every finite-result case and directly observes the registered non-finite-result safety adaptation in the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-or-1bf84ec9"
+      ],
+      "index": 845,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.__or__ behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-day-schedule-radd",
+        "upstream/symbol-evidence.json#profile-dayschedule-radd-5a5edede"
+      ],
+      "exception_id": "nonfinite-result-day-schedule-radd",
+      "index": 846,
+      "rationale": "Trusted cross-language evidence verifies every finite-result case and directly observes the registered non-finite-result safety adaptation in the 321-case DaySchedule operation oracle."
     },
     {
       "evidence": [
@@ -2713,10 +2789,55 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-day-schedule-rmul",
+        "upstream/symbol-evidence.json#profile-dayschedule-rmul-87f6bef2"
+      ],
+      "exception_id": "nonfinite-result-day-schedule-rmul",
+      "index": 848,
+      "rationale": "Trusted cross-language evidence verifies every finite-result case and directly observes the registered non-finite-result safety adaptation in the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-day-schedule-rsub",
+        "upstream/symbol-evidence.json#profile-dayschedule-rsub-a1fa02e1"
+      ],
+      "exception_id": "nonfinite-result-day-schedule-rsub",
+      "index": 849,
+      "rationale": "Trusted cross-language evidence verifies every finite-result case and directly observes the registered non-finite-result safety adaptation in the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-day-schedule-rtruediv",
+        "upstream/symbol-evidence.json#profile-dayschedule-rtruediv-9bc405fa"
+      ],
+      "exception_id": "nonfinite-result-day-schedule-rtruediv",
+      "index": 850,
+      "rationale": "Trusted cross-language evidence verifies every finite-result case and directly observes the registered non-finite-result safety adaptation in the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-str-324659f1"
       ],
       "index": 852,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-day-schedule-sub",
+        "upstream/symbol-evidence.json#profile-dayschedule-sub-55fed2bd"
+      ],
+      "exception_id": "nonfinite-result-day-schedule-sub",
+      "index": 853,
+      "rationale": "Trusted cross-language evidence verifies every finite-result case and directly observes the registered non-finite-result safety adaptation in the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-day-schedule-truediv",
+        "upstream/symbol-evidence.json#profile-dayschedule-truediv-d4bf77a6"
+      ],
+      "exception_id": "nonfinite-result-day-schedule-truediv",
+      "index": 854,
+      "rationale": "Trusted cross-language evidence verifies every finite-result case and directly observes the registered non-finite-result safety adaptation in the 321-case DaySchedule operation oracle."
     },
     {
       "evidence": [
@@ -2738,6 +2859,38 @@
       ],
       "index": 858,
       "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-element-eq-ef895644"
+      ],
+      "index": 861,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.element_eq behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-day-schedule-element-max",
+        "upstream/symbol-evidence.json#profile-dayschedule-element-max-6bf704e3"
+      ],
+      "exception_id": "nonfinite-result-day-schedule-element-max",
+      "index": 862,
+      "rationale": "Trusted cross-language evidence verifies every finite-result case and directly observes the registered non-finite-result safety adaptation in the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-day-schedule-element-min",
+        "upstream/symbol-evidence.json#profile-dayschedule-element-min-ac3a8af2"
+      ],
+      "exception_id": "nonfinite-result-day-schedule-element-min",
+      "index": 863,
+      "rationale": "Trusted cross-language evidence verifies every finite-result case and directly observes the registered non-finite-result safety adaptation in the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-element-ne-93fa9bc6"
+      ],
+      "index": 864,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.element_ne behavior across the 321-case DaySchedule operation oracle."
     },
     {
       "evidence": [
@@ -2783,10 +2936,59 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-is-between-44e0340f"
+      ],
+      "index": 874,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.is_between behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
         "upstream/symbol-evidence.json#profile-dayschedule-is-constant-48c772e4"
       ],
       "index": 875,
       "rationale": "Trusted cross-language evidence verifies exact DaySchedule constant-state behavior across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-is-negative-556646a1"
+      ],
+      "index": 876,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.is_negative behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-is-nonzero-c63f38e6"
+      ],
+      "index": 877,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.is_nonzero behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-is-off-c26b058f"
+      ],
+      "index": 878,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.is_off behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-is-on-1125889a"
+      ],
+      "index": 879,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.is_on behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-is-positive-95ca3954"
+      ],
+      "index": 880,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.is_positive behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-is-zero-c26b058f"
+      ],
+      "index": 881,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.is_zero behavior across the 321-case DaySchedule operation oracle."
     },
     {
       "evidence": [
@@ -2808,6 +3010,15 @@
       ],
       "index": 884,
       "rationale": "Trusted cross-language evidence verifies exact DaySchedule nonzero-hour totals across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-day-schedule-normalize-by-max",
+        "upstream/symbol-evidence.json#profile-dayschedule-normalize-by-max-dd857df9"
+      ],
+      "exception_id": "immutable-day-schedule-normalize-by-max",
+      "index": 885,
+      "rationale": "Trusted cross-language evidence verifies copied normalization exactly and directly observes the registered native immutable in-place and non-finite-result safety adaptations."
     },
     {
       "evidence": [
@@ -2836,6 +3047,15 @@
       ],
       "index": 889,
       "rationale": "Trusted cross-language evidence verifies the exact DaySchedule step duration."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-day-schedule-where-name",
+        "upstream/symbol-evidence.json#profile-dayschedule-where-33c2a955"
+      ],
+      "exception_id": "deterministic-day-schedule-where-name",
+      "index": 894,
+      "rationale": "Trusted cross-language evidence verifies all supported finite conditional branches and directly observes the registered default-name, invalid-operand, and selected non-finite-result adaptations."
     },
     {
       "evidence": [
@@ -3238,9 +3458,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 24,
-      "exception": 6,
-      "needs_reverification": 960,
+      "equivalent": 40,
+      "exception": 18,
+      "needs_reverification": 932,
       "out_of_scope": 252
     },
     "entry_count": 1242

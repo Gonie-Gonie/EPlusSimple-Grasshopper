@@ -203,3 +203,172 @@
     api_contract: Real non-finite inputs follow the native engineering safety invariant and OnOff results follow the strongly typed CLR double contract
     compatibility_evidence: all finite, boundary, type, and domain cases plus the three Real safety divergences and four OnOff numeric-kind adaptations remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-day-schedule-add
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.__add__
+    symbol_hash: sha256:f2cc675e8c909fae4fa4461fb915249045e55b0e6d7b754575b00ba2cecf7610
+  difference:
+    upstream: accepts a Real schedule when addition produces a non-finite binary64 result, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite addition result during DaySchedule validation
+  effect:
+    engineering_result: every finite-result addition remains equivalent while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: CLR Boolean, integral, and floating-point operands form the native strongly typed operator surface; Python arbitrary-precision integer call syntax is not exposed; a non-finite result raises native schedule validation instead of returning a non-finite Real schedule
+    compatibility_evidence: normal CLR primitive behavior, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-day-schedule-radd
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.__radd__
+    symbol_hash: sha256:5a5ededeac5428a72339d7725836d9062c10a107cbc821e2659160c73668831f
+  difference:
+    upstream: accepts a Real schedule when reverse addition produces a non-finite binary64 result, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite reverse-addition result during DaySchedule validation
+  effect:
+    engineering_result: every finite-result reverse addition remains equivalent while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: CLR Boolean, integral, and floating-point operands form the native strongly typed operator surface; Python arbitrary-precision integer call syntax is not exposed; a non-finite result raises native schedule validation instead of returning a non-finite Real schedule
+    compatibility_evidence: normal CLR primitive behavior, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-day-schedule-sub
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.__sub__
+    symbol_hash: sha256:55fed2bd2b5cbb9b3ed69e4e8c1da4207d382e78ede3fb674750e395f4a1c4e8
+  difference:
+    upstream: accepts a Real schedule when subtraction produces a non-finite binary64 result, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite subtraction result during DaySchedule validation
+  effect:
+    engineering_result: every finite-result subtraction remains equivalent while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: CLR Boolean, integral, and floating-point operands form the native strongly typed operator surface; Python arbitrary-precision integer call syntax is not exposed; a non-finite result raises native schedule validation instead of returning a non-finite Real schedule
+    compatibility_evidence: normal CLR primitive behavior, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-day-schedule-rsub
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.__rsub__
+    symbol_hash: sha256:a1fa02e18d86596b88fdebeceedaa48459b6e1068c301c93ba26170f41c37418
+  difference:
+    upstream: accepts a Real schedule when reverse subtraction produces a non-finite binary64 result, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite reverse-subtraction result during DaySchedule validation
+  effect:
+    engineering_result: every finite-result reverse subtraction remains equivalent while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: CLR Boolean, integral, and floating-point operands form the native strongly typed operator surface; Python arbitrary-precision integer call syntax is not exposed; a non-finite result raises native schedule validation instead of returning a non-finite Real schedule
+    compatibility_evidence: normal CLR primitive behavior, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-day-schedule-mul
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.__mul__
+    symbol_hash: sha256:c8bbdbc48d7e465d159ab6b829609d582004ead56657b7475b7caeb552454aea
+  difference:
+    upstream: accepts a Real schedule when multiplication produces a non-finite binary64 result, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite multiplication result during DaySchedule validation
+  effect:
+    engineering_result: every finite-result multiplication remains equivalent while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: CLR Boolean, integral, and floating-point operands form the native strongly typed operator surface; Python arbitrary-precision integer call syntax is not exposed; a non-finite result raises native schedule validation instead of returning a non-finite Real schedule
+    compatibility_evidence: normal CLR primitive behavior, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-day-schedule-rmul
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.__rmul__
+    symbol_hash: sha256:87f6bef2e0be21121fdc990138093d2d07cc225d5edaff5d2129660a902a4e7f
+  difference:
+    upstream: accepts a Real schedule when reverse multiplication produces a non-finite binary64 result, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite reverse-multiplication result during DaySchedule validation
+  effect:
+    engineering_result: every finite-result reverse multiplication remains equivalent while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: CLR Boolean, integral, and floating-point operands form the native strongly typed operator surface; Python arbitrary-precision integer call syntax is not exposed; a non-finite result raises native schedule validation instead of returning a non-finite Real schedule
+    compatibility_evidence: normal CLR primitive behavior, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-day-schedule-truediv
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.__truediv__
+    symbol_hash: sha256:d4bf77a6d67c06dfa3076336eac461f80855fdbfb2f72d46115cd8e67c10ca0b
+  difference:
+    upstream: accepts a Real schedule when division produces a non-finite binary64 result, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite division result during DaySchedule validation
+  effect:
+    engineering_result: every finite-result division remains equivalent while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: CLR Boolean, integral, and floating-point operands form the native strongly typed operator surface; Python arbitrary-precision integer call syntax is not exposed; a non-finite result raises native schedule validation instead of returning a non-finite Real schedule
+    compatibility_evidence: normal CLR primitive behavior, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-day-schedule-rtruediv
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.__rtruediv__
+    symbol_hash: sha256:9bc405fae0ca82d5a0ab953af9197871e5c71248a267d07d408071d44abbb374
+  difference:
+    upstream: accepts a Real schedule when reverse division produces a non-finite binary64 result, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite reverse-division result during DaySchedule validation
+  effect:
+    engineering_result: every finite-result reverse division remains equivalent while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: CLR Boolean, integral, and floating-point operands form the native strongly typed operator surface; Python arbitrary-precision integer call syntax is not exposed; a non-finite result raises native schedule validation instead of returning a non-finite Real schedule
+    compatibility_evidence: normal CLR primitive behavior, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-day-schedule-element-min
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.element_min
+    symbol_hash: sha256:ac3a8af2147d4a6fb6c85812769b0eea7ddf2c96342d28a0b72c659b0ed1623c
+  difference:
+    upstream: accepts a Real schedule when element-wise minimum selects a non-finite floating-point scalar
+    dotnet: preserves the finite-only engineering schedule invariant and rejects the selected non-finite minimum result during DaySchedule validation
+  effect:
+    engineering_result: finite scalar and schedule minima remain equivalent while a selected non-finite result is prevented from entering EnergyPlus authoring output
+    api_contract: a selected non-finite minimum raises a native schedule validation exception instead of returning a non-finite Real schedule
+    compatibility_evidence: normal finite behavior and an explicit selected non-finite scalar divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-day-schedule-element-max
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.element_max
+    symbol_hash: sha256:6bf704e3d166ef0957b56ff7cd2b0841a32b80e8c1783e12cd698a183cb20f05
+  difference:
+    upstream: accepts a Real schedule when element-wise maximum selects a non-finite floating-point scalar
+    dotnet: preserves the finite-only engineering schedule invariant and rejects the selected non-finite maximum result during DaySchedule validation
+  effect:
+    engineering_result: finite scalar and schedule maxima remain equivalent while a selected non-finite result is prevented from entering EnergyPlus authoring output
+    api_contract: a selected non-finite maximum raises a native schedule validation exception instead of returning a non-finite Real schedule
+    compatibility_evidence: normal finite behavior and an explicit selected non-finite scalar divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-day-schedule-normalize-by-max
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.normalize_by_max
+    symbol_hash: sha256:dd857df94e8e53388add91cb81cb88d6e8de762ee49553fdd52f37979f5259c7
+  difference:
+    upstream: supports an inplace mode that mutates the existing data list, returns None, preserves the original type and unit, and bypasses schedule-domain validation; finite Real inputs can normalize to infinity and remain accepted
+    dotnet: follows the native immutable schedule model and always returns a newly validated DaySchedule while leaving the source unchanged; the finite-only engineering invariant rejects a non-finite normalized result
+  effect:
+    engineering_result: finite-result default copy-mode values, result type, result name, and cleared result unit remain equivalent while a non-finite result is prevented from entering EnergyPlus authoring output
+    api_contract: callers replace their schedule reference with the returned immutable value instead of requesting in-place mutation, and normalization overflow raises native schedule validation instead of returning infinity
+    compatibility_evidence: copy-mode parity, source immutability, the exact in-place mutation and None-return difference, and explicit finite-input normalization overflow remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: deterministic-day-schedule-where-name
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.where
+    symbol_hash: sha256:33c2a95572c296a03947b50bb90895168c069b0f054bac875f4039bb8232595c
+  difference:
+    upstream: when name is omitted, assigns the process-specific hexadecimal memory address of the newly created schedule; unsupported Python operands raise Python-native TypeError diagnostics in true-then-false evaluation order; a selected non-finite scalar can enter a Real result schedule
+    dotnet: when name is omitted, assigns the stable native product name WHERE; unsupported CLR operand kinds use native ScheduleOperationException validation and overload ordering; selected non-finite values are rejected by the finite-only engineering schedule invariant
+  effect:
+    engineering_result: for supported finite integer, floating-point, and DaySchedule operands, selected values, result type, and cleared result unit remain equivalent; a selected non-finite result is prevented from entering EnergyPlus authoring output
+    api_contract: invalid CLR operand diagnostics follow the native strongly typed API rather than reproducing Python TypeError text or evaluation order
+    raw_idf_text: an omitted result name is deterministic and can differ from the Python process-address name
+    compatibility_evidence: every supported finite scalar and schedule branch shape, explicit-name behavior, selected non-finite rejection, invalid operand behavior, and the normalized default-name policy difference remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation

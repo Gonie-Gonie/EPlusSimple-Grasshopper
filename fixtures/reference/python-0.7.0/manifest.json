@@ -33,6 +33,11 @@
       "sha256": "45ef72b5561dd159859cf9c295ee5652450f3c37d213bfcb81f1ade79c5967b5"
     },
     {
+      "path": "day-schedule-operations-oracle.json",
+      "bytes": 435956,
+      "sha256": "ffa9805fd16847484195eb001cb7530c718554d13db40f811f7fa1242c020355"
+    },
+    {
       "path": "fenestration-construction-database.json",
       "bytes": 54147,
       "sha256": "6fd2b18e1e4d464286c6f3a3a197e3c526e863e34ab392f52818435ae6872344"

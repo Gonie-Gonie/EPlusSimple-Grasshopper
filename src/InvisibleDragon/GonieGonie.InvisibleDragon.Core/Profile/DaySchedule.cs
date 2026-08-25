@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Numerics;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Internal;
 
@@ -345,7 +347,16 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public DaySchedule ElementEqual(double value)
     {
-        return Compare(value, (left, right) => left == right, "EQ");
+        return Compare(
+            PythonScalar.Create(value, "equality comparison"),
+            PythonComparison.Equal,
+            "EQ");
+    }
+
+    public DaySchedule ElementEqual<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "equality comparison");
+        return Compare(scalar, PythonComparison.Equal, "EQ");
     }
 
     public DaySchedule ElementEqual(DaySchedule other)
@@ -355,7 +366,16 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public DaySchedule ElementNotEqual(double value)
     {
-        return Compare(value, (left, right) => left != right, "NE");
+        return Compare(
+            PythonScalar.Create(value, "inequality comparison"),
+            PythonComparison.NotEqual,
+            "NE");
+    }
+
+    public DaySchedule ElementNotEqual<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "inequality comparison");
+        return Compare(scalar, PythonComparison.NotEqual, "NE");
     }
 
     public DaySchedule ElementNotEqual(DaySchedule other)
@@ -365,7 +385,16 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public DaySchedule LessThan(double value)
     {
-        return Compare(value, (left, right) => left < right, "LT");
+        return Compare(
+            PythonScalar.Create(value, "less-than comparison"),
+            PythonComparison.LessThan,
+            "LT");
+    }
+
+    public DaySchedule LessThan<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "less-than comparison");
+        return Compare(scalar, PythonComparison.LessThan, "LT");
     }
 
     public DaySchedule LessThan(DaySchedule other)
@@ -375,7 +404,16 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public DaySchedule LessThanOrEqual(double value)
     {
-        return Compare(value, (left, right) => left <= right, "LE");
+        return Compare(
+            PythonScalar.Create(value, "less-than-or-equal comparison"),
+            PythonComparison.LessThanOrEqual,
+            "LE");
+    }
+
+    public DaySchedule LessThanOrEqual<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "less-than-or-equal comparison");
+        return Compare(scalar, PythonComparison.LessThanOrEqual, "LE");
     }
 
     public DaySchedule LessThanOrEqual(DaySchedule other)
@@ -385,7 +423,16 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public DaySchedule GreaterThan(double value)
     {
-        return Compare(value, (left, right) => left > right, "GT");
+        return Compare(
+            PythonScalar.Create(value, "greater-than comparison"),
+            PythonComparison.GreaterThan,
+            "GT");
+    }
+
+    public DaySchedule GreaterThan<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "greater-than comparison");
+        return Compare(scalar, PythonComparison.GreaterThan, "GT");
     }
 
     public DaySchedule GreaterThan(DaySchedule other)
@@ -395,7 +442,16 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public DaySchedule GreaterThanOrEqual(double value)
     {
-        return Compare(value, (left, right) => left >= right, "GE");
+        return Compare(
+            PythonScalar.Create(value, "greater-than-or-equal comparison"),
+            PythonComparison.GreaterThanOrEqual,
+            "GE");
+    }
+
+    public DaySchedule GreaterThanOrEqual<T>(T value)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "greater-than-or-equal comparison");
+        return Compare(scalar, PythonComparison.GreaterThanOrEqual, "GE");
     }
 
     public DaySchedule GreaterThanOrEqual(DaySchedule other)
@@ -408,16 +464,27 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         RequireSameNonOnOffType(other, "minimum");
         return new DaySchedule(
             $"{Name}:MIN:{other.Name}",
-            Enumerable.Range(0, FixedLength).Select(index => Math.Min(Values[index], other.Values[index])),
+            Enumerable.Range(0, FixedLength).Select(index => PythonMinimum(Values[index], other.Values[index])),
             Type);
     }
 
     public DaySchedule ElementMinimum(double other)
     {
+        return ElementMinimum(PythonScalar.Create(other, "element-wise minimum"));
+    }
+
+    public DaySchedule ElementMinimum<T>(T other)
+    {
+        PythonScalar scalar = PythonScalar.Create(other, "element-wise minimum");
+        return ElementMinimum(scalar);
+    }
+
+    private DaySchedule ElementMinimum(PythonScalar other)
+    {
         RequireElementExtremaType("minimum");
         return new DaySchedule(
-            $"{Name}:MIN:{other}",
-            Values.Select(value => Math.Min(value, other)),
+            $"{Name}:MIN:{other.Text}",
+            Values.Select(value => PythonMinimum(value, other, Type)),
             Type);
     }
 
@@ -426,16 +493,27 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         RequireSameNonOnOffType(other, "maximum");
         return new DaySchedule(
             $"{Name}:MAX:{other.Name}",
-            Enumerable.Range(0, FixedLength).Select(index => Math.Max(Values[index], other.Values[index])),
+            Enumerable.Range(0, FixedLength).Select(index => PythonMaximum(Values[index], other.Values[index])),
             Type);
     }
 
     public DaySchedule ElementMaximum(double other)
     {
+        return ElementMaximum(PythonScalar.Create(other, "element-wise maximum"));
+    }
+
+    public DaySchedule ElementMaximum<T>(T other)
+    {
+        PythonScalar scalar = PythonScalar.Create(other, "element-wise maximum");
+        return ElementMaximum(scalar);
+    }
+
+    private DaySchedule ElementMaximum(PythonScalar other)
+    {
         RequireElementExtremaType("maximum");
         return new DaySchedule(
-            $"{Name}:MAX:{other}",
-            Values.Select(value => Math.Max(value, other)),
+            $"{Name}:MAX:{other.Text}",
+            Values.Select(value => PythonMaximum(value, other, Type)),
             Type);
     }
 
@@ -475,8 +553,46 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         bool includeMinimum = true,
         bool includeMaximum = true)
     {
-        DaySchedule lower = includeMinimum ? GreaterThanOrEqual(minimum) : GreaterThan(minimum);
-        DaySchedule upper = includeMaximum ? LessThanOrEqual(maximum) : LessThan(maximum);
+        return IsBetween(
+            PythonScalar.Create(minimum, "range minimum"),
+            PythonScalar.Create(maximum, "range maximum"),
+            includeMinimum,
+            includeMaximum);
+    }
+
+    public DaySchedule IsBetween<TMinimum, TMaximum>(
+        TMinimum minimum,
+        TMaximum maximum,
+        bool includeMinimum = true,
+        bool includeMaximum = true)
+    {
+        PythonScalar minimumScalar = PythonScalar.Create(minimum, "range minimum");
+        PythonScalar maximumScalar = PythonScalar.Create(maximum, "range maximum");
+        return IsBetween(
+            minimumScalar,
+            maximumScalar,
+            includeMinimum,
+            includeMaximum);
+    }
+
+    private DaySchedule IsBetween(
+        PythonScalar minimum,
+        PythonScalar maximum,
+        bool includeMinimum,
+        bool includeMaximum)
+    {
+        DaySchedule lower = Compare(
+            minimum,
+            includeMinimum
+                ? PythonComparison.GreaterThanOrEqual
+                : PythonComparison.GreaterThan,
+            includeMinimum ? "GE" : "GT");
+        DaySchedule upper = Compare(
+            maximum,
+            includeMaximum
+                ? PythonComparison.LessThanOrEqual
+                : PythonComparison.LessThan,
+            includeMaximum ? "LE" : "LT");
         return lower & upper;
     }
 
@@ -492,6 +608,23 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
             condition,
             index => whenTrue[index],
             index => whenFalse[index],
+            resultType,
+            name);
+    }
+
+    public static DaySchedule Where<TFalse>(
+        DaySchedule condition,
+        DaySchedule whenTrue,
+        TFalse whenFalse,
+        string? name = null,
+        ScheduleType? type = null)
+    {
+        ScheduleType resultType = ResolveWhereType(condition, type, whenTrue);
+        PythonScalar scalar = PythonScalar.Create(whenFalse, "conditional false value");
+        return CreateWhere(
+            condition,
+            index => whenTrue[index],
+            _ => scalar.ToScheduleValue(resultType, "conditional false value"),
             resultType,
             name);
     }
@@ -528,6 +661,23 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
             name);
     }
 
+    public static DaySchedule Where<TTrue>(
+        DaySchedule condition,
+        TTrue whenTrue,
+        DaySchedule whenFalse,
+        string? name = null,
+        ScheduleType? type = null)
+    {
+        ScheduleType resultType = ResolveWhereType(condition, type, whenFalse);
+        PythonScalar scalar = PythonScalar.Create(whenTrue, "conditional true value");
+        return CreateWhere(
+            condition,
+            _ => scalar.ToScheduleValue(resultType, "conditional true value"),
+            index => whenFalse[index],
+            resultType,
+            name);
+    }
+
     public static DaySchedule Where(
         DaySchedule condition,
         double whenTrue,
@@ -544,6 +694,24 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
             name);
     }
 
+    public static DaySchedule Where<TTrue, TFalse>(
+        DaySchedule condition,
+        TTrue whenTrue,
+        TFalse whenFalse,
+        string? name = null,
+        ScheduleType? type = null)
+    {
+        ScheduleType resultType = ResolveWhereType(condition, type);
+        PythonScalar trueScalar = PythonScalar.Create(whenTrue, "conditional true value");
+        PythonScalar falseScalar = PythonScalar.Create(whenFalse, "conditional false value");
+        return CreateWhere(
+            condition,
+            _ => trueScalar.ToScheduleValue(resultType, "conditional true value"),
+            _ => falseScalar.ToScheduleValue(resultType, "conditional false value"),
+            resultType,
+            name);
+    }
+
     public static DaySchedule operator *(DaySchedule left, DaySchedule right)
     {
         ScheduleType resultType = MultiplicationType(left.Type, right.Type);
@@ -556,9 +724,29 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         return schedule.Map(value => value * factor, resultType, schedule.Name);
     }
 
+    public static DaySchedule operator *(DaySchedule schedule, bool factor)
+    {
+        return schedule * (factor ? 1d : 0d);
+    }
+
+    public static DaySchedule operator *(DaySchedule schedule, char factor)
+    {
+        throw UnsupportedCharacterScalar("multiplication", factor);
+    }
+
     public static DaySchedule operator *(double factor, DaySchedule schedule)
     {
         return schedule * factor;
+    }
+
+    public static DaySchedule operator *(bool factor, DaySchedule schedule)
+    {
+        return schedule * factor;
+    }
+
+    public static DaySchedule operator *(char factor, DaySchedule schedule)
+    {
+        throw UnsupportedCharacterScalar("reverse multiplication", factor);
     }
 
     public static DaySchedule operator /(DaySchedule left, DaySchedule right)
@@ -577,6 +765,16 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
             ? ScheduleType.Real
             : schedule.Type;
         return schedule.Map(value => Divide(value, divisor), resultType, schedule.Name);
+    }
+
+    public static DaySchedule operator /(DaySchedule schedule, bool divisor)
+    {
+        return schedule / (divisor ? 1d : 0d);
+    }
+
+    public static DaySchedule operator /(DaySchedule schedule, char divisor)
+    {
+        throw UnsupportedCharacterScalar("division", divisor);
     }
 
     public static DaySchedule operator /(double numerator, DaySchedule denominator)
@@ -598,6 +796,16 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
             ScheduleType.Real);
     }
 
+    public static DaySchedule operator /(bool numerator, DaySchedule denominator)
+    {
+        return (numerator ? 1d : 0d) / denominator;
+    }
+
+    public static DaySchedule operator /(char numerator, DaySchedule denominator)
+    {
+        throw UnsupportedCharacterScalar("reverse division", numerator);
+    }
+
     public static DaySchedule operator +(DaySchedule left, DaySchedule right)
     {
         ScheduleType resultType = AdditionType(left.Type, right.Type);
@@ -606,13 +814,72 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public static DaySchedule operator +(DaySchedule schedule, double value)
     {
-        RequireScalarArithmetic(schedule.Type, "addition");
-        return schedule.Map(item => item + value, schedule.Type, $"{schedule.Name}:ADD:{value}");
+        return AddScalar(schedule, value, FormatPythonFloat(value));
+    }
+
+    public static DaySchedule operator +(DaySchedule schedule, int value)
+    {
+        return AddScalar(schedule, value, FormatPythonInteger(value));
+    }
+
+    public static DaySchedule operator +(DaySchedule schedule, uint value)
+    {
+        return AddScalar(schedule, value, value.ToString(CultureInfo.InvariantCulture));
+    }
+
+    public static DaySchedule operator +(DaySchedule schedule, long value)
+    {
+        return AddScalar(schedule, value, value.ToString(CultureInfo.InvariantCulture));
+    }
+
+    public static DaySchedule operator +(DaySchedule schedule, ulong value)
+    {
+        return AddScalar(schedule, value, value.ToString(CultureInfo.InvariantCulture));
+    }
+
+    public static DaySchedule operator +(DaySchedule schedule, bool value)
+    {
+        return AddScalar(schedule, value ? 1 : 0, FormatPythonBoolean(value));
+    }
+
+    public static DaySchedule operator +(DaySchedule schedule, char value)
+    {
+        throw UnsupportedCharacterScalar("addition", value);
     }
 
     public static DaySchedule operator +(double value, DaySchedule schedule)
     {
         return schedule + value;
+    }
+
+    public static DaySchedule operator +(int value, DaySchedule schedule)
+    {
+        return schedule + value;
+    }
+
+    public static DaySchedule operator +(uint value, DaySchedule schedule)
+    {
+        return schedule + value;
+    }
+
+    public static DaySchedule operator +(long value, DaySchedule schedule)
+    {
+        return schedule + value;
+    }
+
+    public static DaySchedule operator +(ulong value, DaySchedule schedule)
+    {
+        return schedule + value;
+    }
+
+    public static DaySchedule operator +(bool value, DaySchedule schedule)
+    {
+        return schedule + value;
+    }
+
+    public static DaySchedule operator +(char value, DaySchedule schedule)
+    {
+        throw UnsupportedCharacterScalar("reverse addition", value);
     }
 
     public static DaySchedule operator -(DaySchedule left, DaySchedule right)
@@ -623,18 +890,81 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public static DaySchedule operator -(DaySchedule schedule, double value)
     {
-        RequireScalarArithmetic(schedule.Type, "subtraction");
-        return schedule.Map(item => item - value, schedule.Type, $"{schedule.Name}:SUB:{value}");
+        return SubtractScalar(schedule, value, FormatPythonFloat(value));
+    }
+
+    public static DaySchedule operator -(DaySchedule schedule, int value)
+    {
+        return SubtractScalar(schedule, value, FormatPythonInteger(value));
+    }
+
+    public static DaySchedule operator -(DaySchedule schedule, uint value)
+    {
+        return SubtractScalar(schedule, value, value.ToString(CultureInfo.InvariantCulture));
+    }
+
+    public static DaySchedule operator -(DaySchedule schedule, long value)
+    {
+        return SubtractScalar(schedule, value, value.ToString(CultureInfo.InvariantCulture));
+    }
+
+    public static DaySchedule operator -(DaySchedule schedule, ulong value)
+    {
+        return SubtractScalar(schedule, value, value.ToString(CultureInfo.InvariantCulture));
+    }
+
+    public static DaySchedule operator -(DaySchedule schedule, bool value)
+    {
+        return SubtractScalar(schedule, value ? 1 : 0, FormatPythonBoolean(value));
+    }
+
+    public static DaySchedule operator -(DaySchedule schedule, char value)
+    {
+        throw UnsupportedCharacterScalar("subtraction", value);
     }
 
     public static DaySchedule operator -(double value, DaySchedule schedule)
     {
-        DomainGuard.NotNull(schedule, nameof(schedule));
-        RequireScalarArithmetic(schedule.Type, "reverse subtraction");
-        return new DaySchedule(
-            $"{schedule.Name}:SUB:{value}",
-            schedule.Values.Select(item => value - item),
-            schedule.Type);
+        return ReverseSubtractScalar(value, FormatPythonFloat(value), schedule);
+    }
+
+    public static DaySchedule operator -(int value, DaySchedule schedule)
+    {
+        return ReverseSubtractScalar(value, FormatPythonInteger(value), schedule);
+    }
+
+    public static DaySchedule operator -(uint value, DaySchedule schedule)
+    {
+        return ReverseSubtractScalar(
+            value,
+            value.ToString(CultureInfo.InvariantCulture),
+            schedule);
+    }
+
+    public static DaySchedule operator -(long value, DaySchedule schedule)
+    {
+        return ReverseSubtractScalar(
+            value,
+            value.ToString(CultureInfo.InvariantCulture),
+            schedule);
+    }
+
+    public static DaySchedule operator -(ulong value, DaySchedule schedule)
+    {
+        return ReverseSubtractScalar(
+            value,
+            value.ToString(CultureInfo.InvariantCulture),
+            schedule);
+    }
+
+    public static DaySchedule operator -(bool value, DaySchedule schedule)
+    {
+        return ReverseSubtractScalar(value ? 1 : 0, FormatPythonBoolean(value), schedule);
+    }
+
+    public static DaySchedule operator -(char value, DaySchedule schedule)
+    {
+        throw UnsupportedCharacterScalar("reverse subtraction", value);
     }
 
     public static DaySchedule operator &(DaySchedule left, DaySchedule right)
@@ -699,11 +1029,14 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         return GetEnumerator();
     }
 
-    private DaySchedule Compare(double value, Func<double, double, bool> comparison, string operation)
+    private DaySchedule Compare(
+        PythonScalar scalar,
+        PythonComparison comparison,
+        string operation)
     {
         return new DaySchedule(
-            $"{Name}:{operation}:{value}",
-            Values.Select(item => comparison(item, value) ? 1d : 0d),
+            $"{Name}:{operation}:{scalar.Text}",
+            Values.Select(item => ComparePythonScalar(item, scalar, comparison) ? 1d : 0d),
             ScheduleType.OnOff);
     }
 
@@ -873,5 +1206,614 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         }
 
         return numerator / denominator;
+    }
+
+    private static DaySchedule AddScalar(DaySchedule schedule, double value, string valueText)
+    {
+        DomainGuard.NotNull(schedule, nameof(schedule));
+        RequireScalarArithmetic(schedule.Type, "addition");
+        return schedule.Map(
+            item => item + value,
+            schedule.Type,
+            $"{schedule.Name}:ADD:{valueText}");
+    }
+
+    private static DaySchedule SubtractScalar(DaySchedule schedule, double value, string valueText)
+    {
+        DomainGuard.NotNull(schedule, nameof(schedule));
+        RequireScalarArithmetic(schedule.Type, "subtraction");
+        return schedule.Map(
+            item => item - value,
+            schedule.Type,
+            $"{schedule.Name}:SUB:{valueText}");
+    }
+
+    private static DaySchedule ReverseSubtractScalar(
+        double value,
+        string valueText,
+        DaySchedule schedule)
+    {
+        DomainGuard.NotNull(schedule, nameof(schedule));
+        RequireScalarArithmetic(schedule.Type, "reverse subtraction");
+        return new DaySchedule(
+            $"{schedule.Name}:SUB:{valueText}",
+            schedule.Values.Select(item => value - item),
+            schedule.Type);
+    }
+
+    private static ScheduleOperationException UnsupportedCharacterScalar(
+        string operation,
+        char value)
+    {
+        return new ScheduleOperationException(
+            $"Unsupported DaySchedule {operation}: character '{value}' is not a Python numeric scalar.");
+    }
+
+    private static double PythonMinimum(double left, double right)
+    {
+        return right < left ? right : left;
+    }
+
+    private static double PythonMinimum(
+        double left,
+        PythonScalar right,
+        ScheduleType resultType)
+    {
+        return ComparePythonScalar(left, right, PythonComparison.GreaterThan)
+            ? right.ToScheduleValue(resultType, "element-wise minimum")
+            : left;
+    }
+
+    private static double PythonMaximum(double left, double right)
+    {
+        return right > left ? right : left;
+    }
+
+    private static double PythonMaximum(
+        double left,
+        PythonScalar right,
+        ScheduleType resultType)
+    {
+        return ComparePythonScalar(left, right, PythonComparison.LessThan)
+            ? right.ToScheduleValue(resultType, "element-wise maximum")
+            : left;
+    }
+
+    private static string FormatPythonInteger(int value)
+    {
+        return value.ToString(CultureInfo.InvariantCulture);
+    }
+
+    private static string FormatPythonBoolean(bool value)
+    {
+        return value ? "True" : "False";
+    }
+
+    private static double ConvertPythonIntegerToBinary64(BigInteger integer)
+    {
+        if (integer.IsZero)
+        {
+            return 0;
+        }
+
+        bool negative = integer.Sign < 0;
+        BigInteger magnitude = BigInteger.Abs(integer);
+        int bitLength = GetPositiveBitLength(magnitude);
+        if (bitLength <= 53)
+        {
+            double exact = (double)(ulong)magnitude;
+            return negative ? -exact : exact;
+        }
+
+        int discardedBitCount = bitLength - 53;
+        BigInteger retainedInteger = magnitude >> discardedBitCount;
+        ulong retained = (ulong)retainedInteger;
+        BigInteger remainder = magnitude - (retainedInteger << discardedBitCount);
+        BigInteger midpoint = BigInteger.One << (discardedBitCount - 1);
+        if (remainder > midpoint || (remainder == midpoint && (retained & 1UL) != 0))
+        {
+            retained++;
+        }
+
+        int exponent = bitLength - 1;
+        if (retained == (1UL << 53))
+        {
+            retained >>= 1;
+            exponent++;
+        }
+
+        if (exponent > 1023)
+        {
+            return negative ? double.NegativeInfinity : double.PositiveInfinity;
+        }
+
+        const ulong fractionMask = (1UL << 52) - 1;
+        ulong bits = ((ulong)(exponent + 1023) << 52) | (retained & fractionMask);
+        if (negative)
+        {
+            bits |= 1UL << 63;
+        }
+
+        return BitConverter.Int64BitsToDouble(unchecked((long)bits));
+    }
+
+    private static int GetPositiveBitLength(BigInteger value)
+    {
+        byte[] bytes = value.ToByteArray();
+        int mostSignificantIndex = bytes.Length - 1;
+        while (mostSignificantIndex > 0 && bytes[mostSignificantIndex] == 0)
+        {
+            mostSignificantIndex--;
+        }
+
+        int highByteBitLength = 0;
+        int highByte = bytes[mostSignificantIndex];
+        while (highByte != 0)
+        {
+            highByteBitLength++;
+            highByte >>= 1;
+        }
+
+        return (mostSignificantIndex * 8) + highByteBitLength;
+    }
+
+    private readonly struct PythonScalar
+    {
+        private PythonScalar(
+            double value,
+            string text,
+            BigInteger? integerValue = null)
+        {
+            Value = value;
+            Text = text;
+            IntegerValue = integerValue;
+        }
+
+        public double Value { get; }
+
+        public string Text { get; }
+
+        public BigInteger? IntegerValue { get; }
+
+        public double ToPythonFloat(string operation)
+        {
+            if (IntegerValue.HasValue && double.IsInfinity(Value))
+            {
+                throw new OverflowException(
+                    $"DaySchedule {operation} cannot convert integer {Text} to a finite Python float.");
+            }
+
+            return Value;
+        }
+
+        public double ToScheduleValue(ScheduleType type, string operation)
+        {
+            if (IntegerValue.HasValue)
+            {
+                BigInteger integer = IntegerValue.Value;
+                bool outsideDomain = type switch
+                {
+                    ScheduleType.Temperature => integer < -50 || integer > 200,
+                    ScheduleType.OnOff => integer != BigInteger.Zero && integer != BigInteger.One,
+                    ScheduleType.Fraction => integer < BigInteger.Zero || integer > BigInteger.One,
+                    ScheduleType.Real => false,
+                    _ => throw new ArgumentOutOfRangeException(
+                        nameof(type),
+                        type,
+                        "Unknown schedule type."),
+                };
+                if (outsideDomain)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        operation,
+                        Text,
+                        $"The integer is outside the {type.CanonicalName()} schedule domain.");
+                }
+            }
+
+            return ToPythonFloat(operation);
+        }
+
+        public static PythonScalar Create<T>(T value, string operation)
+        {
+            object? boxed = value;
+            return boxed switch
+            {
+                bool boolean => new PythonScalar(
+                    boolean ? 1 : 0,
+                    FormatPythonBoolean(boolean),
+                    boolean ? BigInteger.One : BigInteger.Zero),
+                sbyte integer => new PythonScalar(
+                    integer,
+                    integer.ToString(CultureInfo.InvariantCulture),
+                    new BigInteger(integer)),
+                byte integer => new PythonScalar(
+                    integer,
+                    integer.ToString(CultureInfo.InvariantCulture),
+                    new BigInteger(integer)),
+                short integer => new PythonScalar(
+                    integer,
+                    integer.ToString(CultureInfo.InvariantCulture),
+                    new BigInteger(integer)),
+                ushort integer => new PythonScalar(
+                    integer,
+                    integer.ToString(CultureInfo.InvariantCulture),
+                    new BigInteger(integer)),
+                int integer => new PythonScalar(
+                    integer,
+                    FormatPythonInteger(integer),
+                    new BigInteger(integer)),
+                uint integer => new PythonScalar(
+                    integer,
+                    integer.ToString(CultureInfo.InvariantCulture),
+                    new BigInteger(integer)),
+                long integer => new PythonScalar(
+                    integer,
+                    integer.ToString(CultureInfo.InvariantCulture),
+                    new BigInteger(integer)),
+                ulong integer => new PythonScalar(
+                    integer,
+                    integer.ToString(CultureInfo.InvariantCulture),
+                    new BigInteger(integer)),
+                BigInteger integer => new PythonScalar(
+                    ConvertPythonIntegerToBinary64(integer),
+                    integer.ToString(CultureInfo.InvariantCulture),
+                    integer),
+                float floating => new PythonScalar(
+                    floating,
+                    FormatPythonFloat(floating)),
+                double floating => new PythonScalar(
+                    floating,
+                    FormatPythonFloat(floating)),
+                _ => throw new ScheduleOperationException(
+                    $"Unsupported DaySchedule {operation}: the scalar operand must be a Python-compatible bool, integer, or float value."),
+            };
+        }
+    }
+
+    private enum PythonComparison
+    {
+        Equal,
+        NotEqual,
+        LessThan,
+        LessThanOrEqual,
+        GreaterThan,
+        GreaterThanOrEqual,
+    }
+
+    private static bool ComparePythonScalar(
+        double left,
+        PythonScalar right,
+        PythonComparison comparison)
+    {
+        if (right.IntegerValue.HasValue)
+        {
+            if (double.IsNaN(left))
+            {
+                return comparison == PythonComparison.NotEqual;
+            }
+
+            int result = ComparePythonFloatToInteger(left, right.IntegerValue.Value);
+            return comparison switch
+            {
+                PythonComparison.Equal => result == 0,
+                PythonComparison.NotEqual => result != 0,
+                PythonComparison.LessThan => result < 0,
+                PythonComparison.LessThanOrEqual => result <= 0,
+                PythonComparison.GreaterThan => result > 0,
+                PythonComparison.GreaterThanOrEqual => result >= 0,
+                _ => throw new InvalidOperationException("Unknown Python comparison."),
+            };
+        }
+
+        return comparison switch
+        {
+            PythonComparison.Equal => left == right.Value,
+            PythonComparison.NotEqual => left != right.Value,
+            PythonComparison.LessThan => left < right.Value,
+            PythonComparison.LessThanOrEqual => left <= right.Value,
+            PythonComparison.GreaterThan => left > right.Value,
+            PythonComparison.GreaterThanOrEqual => left >= right.Value,
+            _ => throw new InvalidOperationException("Unknown Python comparison."),
+        };
+    }
+
+    private static int ComparePythonFloatToInteger(double value, BigInteger integer)
+    {
+        if (double.IsPositiveInfinity(value))
+        {
+            return 1;
+        }
+
+        if (double.IsNegativeInfinity(value))
+        {
+            return -1;
+        }
+
+        long signedBits = BitConverter.DoubleToInt64Bits(value);
+        ulong magnitudeBits = unchecked((ulong)signedBits) & 0x7fff_ffff_ffff_ffffUL;
+        if (magnitudeBits == 0)
+        {
+            return BigInteger.Zero.CompareTo(integer);
+        }
+
+        ulong fraction = magnitudeBits & 0x000f_ffff_ffff_ffffUL;
+        int exponentBits = (int)((magnitudeBits >> 52) & 0x7ffUL);
+        BigInteger significand = exponentBits == 0
+            ? new BigInteger(fraction)
+            : new BigInteger(fraction | (1UL << 52));
+        if (signedBits < 0)
+        {
+            significand = -significand;
+        }
+
+        int binaryExponent = exponentBits == 0
+            ? -1074
+            : exponentBits - 1023 - 52;
+        return binaryExponent >= 0
+            ? (significand << binaryExponent).CompareTo(integer)
+            : significand.CompareTo(integer << -binaryExponent);
+    }
+
+    private static string FormatPythonFloat(double value)
+    {
+        if (double.IsNaN(value))
+        {
+            return "nan";
+        }
+
+        if (double.IsPositiveInfinity(value))
+        {
+            return "inf";
+        }
+
+        if (double.IsNegativeInfinity(value))
+        {
+            return "-inf";
+        }
+
+        if (value == 0)
+        {
+            return BitConverter.DoubleToInt64Bits(value) < 0 ? "-0.0" : "0.0";
+        }
+
+        long signedBits = BitConverter.DoubleToInt64Bits(value);
+        bool negative = signedBits < 0;
+        ulong magnitudeBits = unchecked((ulong)signedBits) & 0x7fff_ffff_ffff_ffffUL;
+        ulong fraction = magnitudeBits & 0x000f_ffff_ffff_ffffUL;
+        int exponentBits = (int)((magnitudeBits >> 52) & 0x7ffUL);
+        BigInteger significand;
+        int binaryExponent;
+        if (exponentBits == 0)
+        {
+            significand = new BigInteger(fraction);
+            binaryExponent = -1074;
+        }
+        else
+        {
+            significand = new BigInteger(fraction | (1UL << 52));
+            binaryExponent = exponentBits - 1023 - 52;
+        }
+
+        BigInteger numerator = significand;
+        BigInteger denominator = BigInteger.One;
+        if (binaryExponent >= 0)
+        {
+            numerator <<= binaryExponent;
+        }
+        else
+        {
+            denominator <<= -binaryExponent;
+        }
+
+        int decimalExponent = (int)Math.Floor(Math.Log10(Math.Abs(value)));
+        while (CompareRationalToPowerOfTen(numerator, denominator, decimalExponent) < 0)
+        {
+            decimalExponent--;
+        }
+
+        while (CompareRationalToPowerOfTen(numerator, denominator, decimalExponent + 1) >= 0)
+        {
+            decimalExponent++;
+        }
+
+        bool midpointInclusive = significand.IsEven;
+        BigInteger lowerBoundaryCoefficient;
+        int lowerBoundaryExponent;
+        if (exponentBits > 1 && fraction == 0)
+        {
+            lowerBoundaryCoefficient = (significand << 2) - BigInteger.One;
+            lowerBoundaryExponent = binaryExponent - 2;
+        }
+        else
+        {
+            lowerBoundaryCoefficient = (significand << 1) - BigInteger.One;
+            lowerBoundaryExponent = binaryExponent - 1;
+        }
+
+        BigInteger upperBoundaryCoefficient = (significand << 1) + BigInteger.One;
+        int upperBoundaryExponent = binaryExponent - 1;
+        for (int precision = 1; precision <= 17; precision++)
+        {
+            int decimalScale = decimalExponent - precision + 1;
+            BigInteger minimumCandidate = MinimumDecimalCandidate(
+                lowerBoundaryCoefficient,
+                lowerBoundaryExponent,
+                decimalScale,
+                midpointInclusive);
+            BigInteger maximumCandidate = MaximumDecimalCandidate(
+                upperBoundaryCoefficient,
+                upperBoundaryExponent,
+                decimalScale,
+                midpointInclusive);
+            if (minimumCandidate > maximumCandidate)
+            {
+                continue;
+            }
+
+            BigInteger candidate = RoundRationalAtDecimalScale(
+                numerator,
+                denominator,
+                decimalScale);
+            if (candidate < minimumCandidate)
+            {
+                candidate = minimumCandidate;
+            }
+            else if (candidate > maximumCandidate)
+            {
+                candidate = maximumCandidate;
+            }
+
+            int normalizedScale = decimalScale;
+            while (BigInteger.Remainder(candidate, 10) == BigInteger.Zero)
+            {
+                candidate /= 10;
+                normalizedScale++;
+            }
+
+            string digits = candidate.ToString(CultureInfo.InvariantCulture);
+            string rendered = RenderPythonFloat(digits, normalizedScale);
+            return negative ? "-" + rendered : rendered;
+        }
+
+        throw new InvalidOperationException(
+            "A Python-compatible floating-point representation could not be produced.");
+    }
+
+    private static int CompareRationalToPowerOfTen(
+        BigInteger numerator,
+        BigInteger denominator,
+        int exponent)
+    {
+        return exponent >= 0
+            ? numerator.CompareTo(denominator * BigInteger.Pow(10, exponent))
+            : (numerator * BigInteger.Pow(10, -exponent)).CompareTo(denominator);
+    }
+
+    private static BigInteger RoundRationalAtDecimalScale(
+        BigInteger numerator,
+        BigInteger denominator,
+        int decimalScale)
+    {
+        BigInteger scaledNumerator = numerator;
+        BigInteger scaledDenominator = denominator;
+        if (decimalScale >= 0)
+        {
+            scaledDenominator *= BigInteger.Pow(10, decimalScale);
+        }
+        else
+        {
+            scaledNumerator *= BigInteger.Pow(10, -decimalScale);
+        }
+
+        BigInteger quotient = BigInteger.DivRem(
+            scaledNumerator,
+            scaledDenominator,
+            out BigInteger remainder);
+        int midpointComparison = (remainder << 1).CompareTo(scaledDenominator);
+        if (midpointComparison > 0
+            || (midpointComparison == 0 && !quotient.IsEven))
+        {
+            quotient++;
+        }
+
+        return quotient;
+    }
+
+    private static BigInteger MinimumDecimalCandidate(
+        BigInteger boundaryCoefficient,
+        int binaryExponent,
+        int decimalScale,
+        bool inclusive)
+    {
+        BigInteger floor = DivideDyadicAtDecimalScale(
+            boundaryCoefficient,
+            binaryExponent,
+            decimalScale,
+            out BigInteger remainder);
+        return remainder != BigInteger.Zero || !inclusive
+            ? floor + BigInteger.One
+            : floor;
+    }
+
+    private static BigInteger MaximumDecimalCandidate(
+        BigInteger boundaryCoefficient,
+        int binaryExponent,
+        int decimalScale,
+        bool inclusive)
+    {
+        BigInteger floor = DivideDyadicAtDecimalScale(
+            boundaryCoefficient,
+            binaryExponent,
+            decimalScale,
+            out BigInteger remainder);
+        return remainder == BigInteger.Zero && !inclusive
+            ? floor - BigInteger.One
+            : floor;
+    }
+
+    private static BigInteger DivideDyadicAtDecimalScale(
+        BigInteger coefficient,
+        int binaryExponent,
+        int decimalScale,
+        out BigInteger remainder)
+    {
+        BigInteger numerator = coefficient;
+        BigInteger denominator = BigInteger.One;
+        if (binaryExponent >= 0)
+        {
+            numerator <<= binaryExponent;
+        }
+        else
+        {
+            denominator <<= -binaryExponent;
+        }
+
+        if (decimalScale >= 0)
+        {
+            denominator *= BigInteger.Pow(10, decimalScale);
+        }
+        else
+        {
+            numerator *= BigInteger.Pow(10, -decimalScale);
+        }
+
+        return BigInteger.DivRem(numerator, denominator, out remainder);
+    }
+
+    private static string RenderPythonFloat(string digits, int decimalScale)
+    {
+        int exponent = decimalScale + digits.Length - 1;
+        if (exponent < -4 || exponent >= 16)
+        {
+            string mantissa = digits.Length == 1
+                ? digits
+                : InsertDecimalPoint(digits, 1);
+            string sign = exponent >= 0 ? "+" : "-";
+            string exponentDigits = Math.Abs(exponent).ToString("D2", CultureInfo.InvariantCulture);
+            return mantissa + "e" + sign + exponentDigits;
+        }
+
+        int decimalPosition = exponent + 1;
+        if (decimalPosition <= 0)
+        {
+            return "0." + new string('0', -decimalPosition) + digits;
+        }
+
+        if (decimalPosition >= digits.Length)
+        {
+            return digits + new string('0', decimalPosition - digits.Length) + ".0";
+        }
+
+        return InsertDecimalPoint(digits, decimalPosition);
+    }
+
+    private static string InsertDecimalPoint(string digits, int position)
+    {
+        char[] result = new char[digits.Length + 1];
+        digits.CopyTo(0, result, 0, position);
+        result[position] = '.';
+        digits.CopyTo(position, result, position + 1, digits.Length - position);
+        return new string(result);
     }
 }
