@@ -263,6 +263,147 @@
     compatibility_evidence: every supported finite branch shape, condition-only and branch-only overrides, weekday and weekend fallback, inferred and explicit types, valid explicit, empty-defaulted, omitted, rejected whitespace-only, and normalized surrounding-whitespace result names, selected non-finite rejection, invalid operands, and deterministic slot-qualified child names remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
 
+- id: nonfinite-result-schedule-add
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.__add__
+    symbol_hash: sha256:b1f53fbc391503bdfb118688bb177fa95bcc24c9dfa53fed27cf00442c23eb72
+  difference:
+    upstream: accepts a Real Schedule when addition produces a non-finite binary64 value in any operated RuleSet, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite addition result during child DaySchedule validation
+  effect:
+    engineering_result: every finite-result addition retains the same annual boundaries, RuleSet topology, values, names, and result type while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: a non-finite child result raises native schedule validation instead of returning an annual Schedule containing a non-finite Real value
+    compatibility_evidence: finite scalar and Schedule behavior, asymmetric compact boundaries, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-schedule-mul
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.__mul__
+    symbol_hash: sha256:341d9b28a235a5361ed9d16141e7ffdeac6f8933c1e420208fefb4714298029a
+  difference:
+    upstream: accepts a Real Schedule when multiplication produces a non-finite binary64 value in any operated RuleSet, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite multiplication result during child DaySchedule validation
+  effect:
+    engineering_result: every finite-result multiplication retains the same annual boundaries, RuleSet topology, values, names, and result type while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: a non-finite child result raises native schedule validation instead of returning an annual Schedule containing a non-finite Real value
+    compatibility_evidence: finite scalar and Schedule behavior, asymmetric compact boundaries, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-schedule-radd
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.__radd__
+    symbol_hash: sha256:ebaafbe81f9daa483e5f13afbd779c49f7308ef8b9551e10dac213d64a37c045
+  difference:
+    upstream: accepts a Real Schedule when reverse addition produces a non-finite binary64 value in any operated RuleSet, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite reverse-addition result during child DaySchedule validation
+  effect:
+    engineering_result: every finite-result reverse addition retains the same annual boundaries, RuleSet topology, values, names, and result type while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: a non-finite child result raises native schedule validation instead of returning an annual Schedule containing a non-finite Real value
+    compatibility_evidence: finite scalar behavior, reverse-operation names, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-schedule-rmul
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.__rmul__
+    symbol_hash: sha256:279533a07d8189cc0a3f7fa57174faab7ea8500caf007ed8fc08ddb067353be2
+  difference:
+    upstream: accepts a Real Schedule when reverse multiplication produces a non-finite binary64 value in any operated RuleSet, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite reverse-multiplication result during child DaySchedule validation
+  effect:
+    engineering_result: every finite-result reverse multiplication retains the same annual boundaries, RuleSet topology, values, names, and result type while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: a non-finite child result raises native schedule validation instead of returning an annual Schedule containing a non-finite Real value
+    compatibility_evidence: finite scalar behavior, upstream multiplication-order naming, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-schedule-rsub
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.__rsub__
+    symbol_hash: sha256:e84f78d3b0d4f00c202d644a04d90915a5302c87e28b1b37394c9504a4400047
+  difference:
+    upstream: accepts a Real Schedule when reverse subtraction produces a non-finite binary64 value in any operated RuleSet, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite reverse-subtraction result during child DaySchedule validation
+  effect:
+    engineering_result: every finite-result reverse subtraction retains the same annual boundaries, RuleSet topology, values, names, and result type while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: a non-finite child result raises native schedule validation instead of returning an annual Schedule containing a non-finite Real value
+    compatibility_evidence: finite scalar behavior, reverse-operation names, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-schedule-rtruediv
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.__rtruediv__
+    symbol_hash: sha256:32d900f7d3189a35816962c0dae8c984f77bf619f9d75e74464a20803b090209
+  difference:
+    upstream: accepts a Real Schedule when reverse division produces a non-finite binary64 value in any operated RuleSet, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite reverse-division result during child DaySchedule validation
+  effect:
+    engineering_result: every finite-result reverse division retains the same annual boundaries, RuleSet topology, values, names, and result type while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: zero divisors retain ordinary failure behavior, while any nonzero operation yielding a non-finite child raises native schedule validation instead of returning a non-finite annual Schedule
+    compatibility_evidence: finite scalar behavior, reverse-operation names, zero-divisor behavior, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-schedule-sub
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.__sub__
+    symbol_hash: sha256:c963a4baf0da27e3807668ca2a93d212c429e167beebb78cdacce21be1c935dc
+  difference:
+    upstream: accepts a Real Schedule when subtraction produces a non-finite binary64 value in any operated RuleSet, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite subtraction result during child DaySchedule validation
+  effect:
+    engineering_result: every finite-result subtraction retains the same annual boundaries, RuleSet topology, values, names, and result type while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: a non-finite child result raises native schedule validation instead of returning an annual Schedule containing a non-finite Real value
+    compatibility_evidence: finite scalar and Schedule behavior, asymmetric compact boundaries, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-schedule-truediv
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.__truediv__
+    symbol_hash: sha256:cb9dd7d8cd8f71bb8ddff07c59959540a9a259b1caf6268128a68e17e375652c
+  difference:
+    upstream: accepts a Real Schedule when division produces a non-finite binary64 value in any operated RuleSet, whether from finite overflow or a non-finite scalar operand
+    dotnet: preserves the finite-only engineering schedule invariant and rejects every non-finite division result during child DaySchedule validation
+  effect:
+    engineering_result: every finite-result division retains the same annual boundaries, RuleSet topology, values, names, and result type while an overflowing result is prevented from entering EnergyPlus authoring output
+    api_contract: zero divisors retain ordinary failure behavior, while any nonzero operation yielding a non-finite child raises native schedule validation instead of returning a non-finite annual Schedule
+    compatibility_evidence: finite scalar and Schedule behavior, asymmetric compact boundaries, zero-divisor behavior, finite-input overflow, and a non-finite scalar-result divergence remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: nonfinite-result-schedule-normalize-by-max
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.normalize_by_max
+    symbol_hash: sha256:b12e2905f36794820228b307d1ee4dacf368b1c00e19a26b7423acae87bab5d3
+  difference:
+    upstream: returns a new compact Schedule that independently normalizes every present RuleSet, accepts a Real child whose finite inputs normalize to infinity, permits empty or whitespace-only explicit result names, and preserves surrounding name whitespace
+    dotnet: returns the same immutable compact annual shape for finite results, rejects a non-finite child during DaySchedule validation, rejects names that cannot form valid EnergyPlus object identifiers, and trims surrounding whitespace from otherwise valid names
+  effect:
+    engineering_result: finite normalized values, annual boundaries, child topology, result types, and valid names remain equivalent while normalization overflow and invalid EnergyPlus names are prevented from entering authoring output
+    api_contract: a non-finite normalized child raises native schedule validation; empty or whitespace-only explicit names raise native name validation and surrounding whitespace is normalized
+    compatibility_evidence: per-child scaling, zero-maximum behavior, compact topology, source immutability, names and types, explicit normalization overflow, invalid-name rejection, and surrounding-whitespace normalization remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: deterministic-schedule-where-child-names
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.where
+    symbol_hash: sha256:d673aaaebf6468cbce8fe25610252702146eda0a155bef637940e26305108315
+  difference:
+    upstream: assigns the requested or default outer Schedule name and lets each nested RuleSet.where use its literal WHERE default, but omits every nested DaySchedule name and therefore produces process-specific hexadecimal DaySchedule names; it permits whitespace-only names and preserves surrounding whitespace, follows Python-native invalid-operand evaluation and diagnostics, and can return a selected non-finite Real value
+    dotnet: preserves the nested WHERE RuleSet name and assigns stable slot-qualified DaySchedule names, rejects whitespace-only names that cannot form valid EnergyPlus identifiers, trims surrounding name whitespace, follows native strongly typed CLR validation, and rejects selected non-finite child values while preserving unselected non-finite branch behavior
+  effect:
+    engineering_result: for supported finite scalar, DaySchedule, RuleSet, and Schedule branches with valid names, selected values, inferred or explicit types, fallback sources, override topology, and asymmetric annual boundaries remain equivalent; selected non-finite results and invalid names are prevented from entering authoring output
+    api_contract: invalid CLR operands and names use native validation instead of Python exception text or ordering, and arbitrarily large integer branches retain eager conversion failure even when unselected
+    raw_idf_text: nested DaySchedule names are deterministic and can differ from upstream process-address names
+    compatibility_evidence: every supported branch shape, scalar kind, annual boundary combination, inferred and explicit type, omitted and empty default names, rejected whitespace-only and trimmed surrounding-whitespace names, eager huge-integer failure, selected and unselected non-finite behavior, source immutability, and deterministic nested names remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
 - id: construction-equality-native-null-operand
   upstream:
     path: src/idragon/dragon/construction.py

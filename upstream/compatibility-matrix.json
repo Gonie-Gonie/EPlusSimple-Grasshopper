@@ -955,38 +955,26 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
     "needs_reverification",
     "out_of_scope",
+    "equivalent",
+    "equivalent",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
     "out_of_scope",
     "needs_reverification",
     "needs_reverification",
@@ -995,14 +983,26 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
     "out_of_scope",
     "needs_reverification",
     "needs_reverification",
@@ -1010,7 +1010,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "equivalent",
     "equivalent",
@@ -1243,7 +1243,7 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:3e3a9297fef37a7eb3eef0c5ad231b648469cf56c4e161512a836fb75bae19d0",
+  "content_sha256": "sha256:7b4cce9297b065038d33e116f7ded5d1e9c8008ffcf191edc58daace411e3e44",
   "details": [
     {
       "evidence": [
@@ -3293,10 +3293,86 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-schedule-add",
+        "upstream/symbol-evidence.json#profile-schedule-add-b1f53fbc"
+      ],
+      "exception_id": "nonfinite-result-schedule-add",
+      "index": 955,
+      "rationale": "Trusted cross-language evidence verifies every finite-result Schedule.__add__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability, in the 329-case Schedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-and-7f01a01b"
+      ],
+      "index": 956,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.__and__ behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-delitem-493d77a9"
       ],
       "index": 958,
       "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-ge-11523775"
+      ],
+      "index": 959,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.__ge__ behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-gt-e70545b0"
+      ],
+      "index": 960,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.__gt__ behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-invert-47427899"
+      ],
+      "index": 962,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.__invert__ behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-le-2c231884"
+      ],
+      "index": 963,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.__le__ behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-lt-78d60d6a"
+      ],
+      "index": 964,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.__lt__ behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-schedule-mul",
+        "upstream/symbol-evidence.json#profile-schedule-mul-341d9b28"
+      ],
+      "exception_id": "nonfinite-result-schedule-mul",
+      "index": 965,
+      "rationale": "Trusted cross-language evidence verifies every finite-result Schedule.__mul__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability, in the 329-case Schedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-or-cad1d342"
+      ],
+      "index": 966,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.__or__ behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-schedule-radd",
+        "upstream/symbol-evidence.json#profile-schedule-radd-ebaafbe8"
+      ],
+      "exception_id": "nonfinite-result-schedule-radd",
+      "index": 967,
+      "rationale": "Trusted cross-language evidence verifies every finite-result Schedule.__radd__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability, in the 329-case Schedule operation oracle."
     },
     {
       "evidence": [
@@ -3307,10 +3383,55 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-schedule-rmul",
+        "upstream/symbol-evidence.json#profile-schedule-rmul-279533a0"
+      ],
+      "exception_id": "nonfinite-result-schedule-rmul",
+      "index": 969,
+      "rationale": "Trusted cross-language evidence verifies every finite-result Schedule.__rmul__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability, in the 329-case Schedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-schedule-rsub",
+        "upstream/symbol-evidence.json#profile-schedule-rsub-e84f78d3"
+      ],
+      "exception_id": "nonfinite-result-schedule-rsub",
+      "index": 970,
+      "rationale": "Trusted cross-language evidence verifies every finite-result Schedule.__rsub__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability, in the 329-case Schedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-schedule-rtruediv",
+        "upstream/symbol-evidence.json#profile-schedule-rtruediv-32d900f7"
+      ],
+      "exception_id": "nonfinite-result-schedule-rtruediv",
+      "index": 971,
+      "rationale": "Trusted cross-language evidence verifies every finite-result Schedule.__rtruediv__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability, in the 329-case Schedule operation oracle."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-str-324659f1"
       ],
       "index": 972,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-schedule-sub",
+        "upstream/symbol-evidence.json#profile-schedule-sub-c963a4ba"
+      ],
+      "exception_id": "nonfinite-result-schedule-sub",
+      "index": 973,
+      "rationale": "Trusted cross-language evidence verifies every finite-result Schedule.__sub__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability, in the 329-case Schedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-schedule-truediv",
+        "upstream/symbol-evidence.json#profile-schedule-truediv-cb9dd7d8"
+      ],
+      "exception_id": "nonfinite-result-schedule-truediv",
+      "index": 974,
+      "rationale": "Trusted cross-language evidence verifies every finite-result Schedule.__truediv__ case and directly observes the registered non-finite child-result safety adaptation, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability, in the 329-case Schedule operation oracle."
     },
     {
       "evidence": [
@@ -3328,6 +3449,34 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-element-eq-e9c68d0b"
+      ],
+      "index": 983,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.element_eq behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-element-max-6287b64a"
+      ],
+      "index": 984,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.element_max behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-element-min-56fdf733"
+      ],
+      "index": 985,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.element_min behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-element-ne-32a6c563"
+      ],
+      "index": 986,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.element_ne behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-extend-4f4001d4"
       ],
       "index": 987,
@@ -3342,10 +3491,77 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-is-between-d359b7f1"
+      ],
+      "index": 993,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.is_between behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-is-negative-49c07d55"
+      ],
+      "index": 994,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.is_negative behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-is-nonzero-c4f3aa30"
+      ],
+      "index": 995,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.is_nonzero behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-is-off-b57679c2"
+      ],
+      "index": 996,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.is_off behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-is-on-5b1abd1e"
+      ],
+      "index": 997,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.is_on behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-is-positive-54b471f2"
+      ],
+      "index": 998,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.is_positive behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-is-zero-b57679c2"
+      ],
+      "index": 999,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.is_zero behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nonfinite-result-schedule-normalize-by-max",
+        "upstream/symbol-evidence.json#profile-schedule-normalize-by-max-b12e2905"
+      ],
+      "exception_id": "nonfinite-result-schedule-normalize-by-max",
+      "index": 1002,
+      "rationale": "Trusted cross-language evidence verifies immutable period-by-period and slot-by-slot normalization, zero-maximum behavior, compact annual boundaries, missing-override preservation, names, types, and source immutability, and directly observes the registered non-finite-result rejection, invalid or blank explicit-name rejection, and surrounding-whitespace trimming policies in the 329-case Schedule operation oracle."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-pop-8358340e"
       ],
       "index": 1003,
       "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-schedule-where-child-names",
+        "upstream/symbol-evidence.json#profile-schedule-where-d673aaae"
+      ],
+      "exception_id": "deterministic-schedule-where-child-names",
+      "index": 1010,
+      "rationale": "Trusted cross-language evidence verifies supported finite scalar, DaySchedule, RuleSet, and Schedule branches, Boolean scalar results, inferred and explicit types, asymmetric annual boundaries, fallback sources, compact topology, and source immutability, and directly observes deterministic nested names, selected and unselected non-finite branch behavior, invalid or blank explicit-name rejection, surrounding-whitespace trimming, eager huge-integer failure, and invalid native operands in the 329-case Schedule operation oracle."
     },
     {
       "evidence": [
@@ -3678,9 +3894,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 56,
-      "exception": 30,
-      "needs_reverification": 904,
+      "equivalent": 74,
+      "exception": 40,
+      "needs_reverification": 876,
       "out_of_scope": 252
     },
     "entry_count": 1242

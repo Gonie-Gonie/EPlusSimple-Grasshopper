@@ -26,7 +26,13 @@ and tagged non-finite validation cases. Its `real` NaN and infinity results use
 strict JSON tags instead of non-standard numeric tokens. The DaySchedule
 metrics oracle binds 13 fixed-grid properties and includes a catastrophic
 cancellation case that locks the CPython 3.12 compensated-float summation
-behavior used by `average`, `integral`, and `positive_average`. `-Mode Verify`
+behavior used by `average`, `integral`, and `positive_average`. The
+DaySchedule, RuleSet, and Schedule operation oracles each bind exactly 28
+upstream symbols and preserve Python scalar kinds, reverse-operation names,
+typed failures, tagged non-finite results, nested fallback topology, and source
+immutability. The annual Schedule corpus additionally records all 365 days and
+the exact inclusive compact-period union across asymmetric operands.
+`-Mode Verify`
 compares all generated files byte-for-byte with the reviewed baseline under
 `fixtures/reference/python-0.7.0`. Every reference run also executes the
 fail-closed generator tests under `tests/PythonReference` before producing an

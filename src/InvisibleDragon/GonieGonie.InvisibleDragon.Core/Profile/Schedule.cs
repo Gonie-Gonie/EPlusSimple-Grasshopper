@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Numerics;
 using GonieGonie.InvisibleDragon.Internal;
 
 namespace GonieGonie.InvisibleDragon.Profile;
@@ -133,6 +134,12 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
         return new Schedule(name, Enumerable.Repeat(ruleSet, FixedLength), type);
     }
 
+    public static Schedule Constant<T>(string name, T value, ScheduleType type = ScheduleType.Real)
+    {
+        RuleSet ruleSet = RuleSet.Constant($"{name}:ruleset", value, type);
+        return new Schedule(name, Enumerable.Repeat(ruleSet, FixedLength), type);
+    }
+
     public static Schedule FromCompact(string name, IEnumerable<SchedulePeriod> periods)
     {
         DomainGuard.NotNull(periods, nameof(periods));
@@ -224,12 +231,22 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public Schedule Add(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.Add(value), name ?? $"{Name}:ADD:{value}");
+        return AddPythonScalar(value, name);
+    }
+
+    public Schedule Add<T>(T value, string? name = null)
+    {
+        return AddPythonScalar(value, name);
     }
 
     public Schedule ReverseAdd(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.ReverseAdd(value), name ?? $"{value}:ADD:{Name}");
+        return ReverseAddPythonScalar(value, name);
+    }
+
+    public Schedule ReverseAdd<T>(T value, string? name = null)
+    {
+        return ReverseAddPythonScalar(value, name);
     }
 
     public Schedule Subtract(Schedule other, string? name = null)
@@ -239,12 +256,22 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public Schedule Subtract(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.Subtract(value), name ?? $"{Name}:SUB:{value}");
+        return SubtractPythonScalar(value, name);
+    }
+
+    public Schedule Subtract<T>(T value, string? name = null)
+    {
+        return SubtractPythonScalar(value, name);
     }
 
     public Schedule ReverseSubtract(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.ReverseSubtract(value), name ?? $"{value}:SUB:{Name}");
+        return ReverseSubtractPythonScalar(value, name);
+    }
+
+    public Schedule ReverseSubtract<T>(T value, string? name = null)
+    {
+        return ReverseSubtractPythonScalar(value, name);
     }
 
     public Schedule Divide(Schedule other, string? name = null)
@@ -254,12 +281,22 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public Schedule Divide(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.Divide(value), name ?? $"{Name}:DIV:{value}");
+        return DividePythonScalar(value, name);
+    }
+
+    public Schedule Divide<T>(T value, string? name = null)
+    {
+        return DividePythonScalar(value, name);
     }
 
     public Schedule ReverseDivide(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.ReverseDivide(value), name ?? $"{value}:DIV:{Name}");
+        return ReverseDividePythonScalar(value, name);
+    }
+
+    public Schedule ReverseDivide<T>(T value, string? name = null)
+    {
+        return ReverseDividePythonScalar(value, name);
     }
 
     public Schedule Multiply(Schedule other, string? name = null)
@@ -269,7 +306,12 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public Schedule Multiply(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.Multiply(value), name ?? $"{Name}:MUL:{value}");
+        return MultiplyPythonScalar(value, name);
+    }
+
+    public Schedule Multiply<T>(T value, string? name = null)
+    {
+        return MultiplyPythonScalar(value, name);
     }
 
     public Schedule LogicalAnd(Schedule other, string? name = null)
@@ -294,7 +336,12 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public Schedule ElementEqual(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.ElementEqual(value), name ?? $"{Name}:EQ:{value}");
+        return ElementEqualPythonScalar(value, name);
+    }
+
+    public Schedule ElementEqual<T>(T value, string? name = null)
+    {
+        return ElementEqualPythonScalar(value, name);
     }
 
     public Schedule ElementNotEqual(Schedule other, string? name = null)
@@ -304,7 +351,12 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public Schedule ElementNotEqual(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.ElementNotEqual(value), name ?? $"{Name}:NE:{value}");
+        return ElementNotEqualPythonScalar(value, name);
+    }
+
+    public Schedule ElementNotEqual<T>(T value, string? name = null)
+    {
+        return ElementNotEqualPythonScalar(value, name);
     }
 
     public Schedule LessThan(Schedule other, string? name = null)
@@ -314,7 +366,12 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public Schedule LessThan(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.LessThan(value), name ?? $"{Name}:LT:{value}");
+        return LessThanPythonScalar(value, name);
+    }
+
+    public Schedule LessThan<T>(T value, string? name = null)
+    {
+        return LessThanPythonScalar(value, name);
     }
 
     public Schedule LessThanOrEqual(Schedule other, string? name = null)
@@ -324,7 +381,12 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public Schedule LessThanOrEqual(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.LessThanOrEqual(value), name ?? $"{Name}:LE:{value}");
+        return LessThanOrEqualPythonScalar(value, name);
+    }
+
+    public Schedule LessThanOrEqual<T>(T value, string? name = null)
+    {
+        return LessThanOrEqualPythonScalar(value, name);
     }
 
     public Schedule GreaterThan(Schedule other, string? name = null)
@@ -334,7 +396,12 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public Schedule GreaterThan(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.GreaterThan(value), name ?? $"{Name}:GT:{value}");
+        return GreaterThanPythonScalar(value, name);
+    }
+
+    public Schedule GreaterThan<T>(T value, string? name = null)
+    {
+        return GreaterThanPythonScalar(value, name);
     }
 
     public Schedule GreaterThanOrEqual(Schedule other, string? name = null)
@@ -344,7 +411,12 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public Schedule GreaterThanOrEqual(double value, string? name = null)
     {
-        return MapCompact(ruleSet => ruleSet.GreaterThanOrEqual(value), name ?? $"{Name}:GE:{value}");
+        return GreaterThanOrEqualPythonScalar(value, name);
+    }
+
+    public Schedule GreaterThanOrEqual<T>(T value, string? name = null)
+    {
+        return GreaterThanOrEqualPythonScalar(value, name);
     }
 
     public Schedule ElementMinimum(Schedule other, string? name = null)
@@ -399,6 +471,22 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
         return lower.LogicalAnd(upper, name);
     }
 
+    public Schedule IsBetween<TMinimum, TMaximum>(
+        TMinimum minimum,
+        TMaximum maximum,
+        bool includeMinimum = true,
+        bool includeMaximum = true,
+        string? name = null)
+    {
+        Schedule lower = includeMinimum
+            ? GreaterThanOrEqualPythonScalar(minimum, null)
+            : GreaterThanPythonScalar(minimum, null);
+        Schedule upper = includeMaximum
+            ? LessThanOrEqualPythonScalar(maximum, null)
+            : LessThanPythonScalar(maximum, null);
+        return lower.LogicalAnd(upper, name);
+    }
+
     public static Schedule Where(
         Schedule condition,
         object whenTrue,
@@ -414,22 +502,43 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
             throw new ScheduleOperationException("Schedule.Where requires an OnOff condition schedule.");
         }
 
-        Schedule trueSchedule = CoerceWhereValue(whenTrue, type, nameof(whenTrue));
-        Schedule falseSchedule = CoerceWhereValue(whenFalse, type, nameof(whenFalse));
-        IReadOnlyList<IReadOnlyList<SchedulePeriod>> unified = UnifyCompactizedSchedulesMany(
+        var compactizedSchedules = new List<IReadOnlyList<SchedulePeriod>>
+        {
             condition.Compactize(),
-            trueSchedule.Compactize(),
-            falseSchedule.Compactize());
+        };
+        int? trueScheduleIndex = null;
+        int? falseScheduleIndex = null;
+        if (whenTrue is Schedule trueSchedule)
+        {
+            trueScheduleIndex = compactizedSchedules.Count;
+            compactizedSchedules.Add(trueSchedule.Compactize());
+        }
+
+        if (whenFalse is Schedule falseSchedule)
+        {
+            falseScheduleIndex = compactizedSchedules.Count;
+            compactizedSchedules.Add(falseSchedule.Compactize());
+        }
+
+        IReadOnlyList<IReadOnlyList<SchedulePeriod>> unified =
+            UnifyCompactizedSchedulesMany(compactizedSchedules.ToArray());
+        string resultName = name is null || name.Length == 0
+            ? "WHERE"
+            : DomainGuard.RequiredText(name, nameof(name));
 
         return FromCompact(
-            name ?? "WHERE",
+            resultName,
             Enumerable.Range(0, unified[0].Count).Select(index => new SchedulePeriod(
                 unified[0][index].Start,
                 unified[0][index].End,
                 RuleSet.Where(
                     unified[0][index].RuleSet,
-                    unified[1][index].RuleSet,
-                    unified[2][index].RuleSet,
+                    trueScheduleIndex.HasValue
+                        ? unified[trueScheduleIndex.Value][index].RuleSet
+                        : whenTrue,
+                    falseScheduleIndex.HasValue
+                        ? unified[falseScheduleIndex.Value][index].RuleSet
+                        : whenFalse,
                     type: type))));
     }
 
@@ -552,10 +661,38 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
         return schedule.Multiply(value);
     }
 
+    public static Schedule operator *(Schedule schedule, int value) => schedule.Multiply(value);
+
+    public static Schedule operator *(Schedule schedule, uint value) => schedule.Multiply(value);
+
+    public static Schedule operator *(Schedule schedule, long value) => schedule.Multiply(value);
+
+    public static Schedule operator *(Schedule schedule, ulong value) => schedule.Multiply(value);
+
+    public static Schedule operator *(Schedule schedule, BigInteger value) => schedule.Multiply(value);
+
+    public static Schedule operator *(Schedule schedule, bool value) => schedule.Multiply(value);
+
+    public static Schedule operator *(Schedule schedule, char value) => schedule.Multiply(value);
+
     public static Schedule operator *(double value, Schedule schedule)
     {
         return schedule.Multiply(value);
     }
+
+    public static Schedule operator *(int value, Schedule schedule) => schedule.Multiply(value);
+
+    public static Schedule operator *(uint value, Schedule schedule) => schedule.Multiply(value);
+
+    public static Schedule operator *(long value, Schedule schedule) => schedule.Multiply(value);
+
+    public static Schedule operator *(ulong value, Schedule schedule) => schedule.Multiply(value);
+
+    public static Schedule operator *(BigInteger value, Schedule schedule) => schedule.Multiply(value);
+
+    public static Schedule operator *(bool value, Schedule schedule) => schedule.Multiply(value);
+
+    public static Schedule operator *(char value, Schedule schedule) => schedule.Multiply(value);
 
     public static Schedule operator /(Schedule left, Schedule right)
     {
@@ -567,10 +704,38 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
         return schedule.Divide(value);
     }
 
+    public static Schedule operator /(Schedule schedule, int value) => schedule.Divide(value);
+
+    public static Schedule operator /(Schedule schedule, uint value) => schedule.Divide(value);
+
+    public static Schedule operator /(Schedule schedule, long value) => schedule.Divide(value);
+
+    public static Schedule operator /(Schedule schedule, ulong value) => schedule.Divide(value);
+
+    public static Schedule operator /(Schedule schedule, BigInteger value) => schedule.Divide(value);
+
+    public static Schedule operator /(Schedule schedule, bool value) => schedule.Divide(value);
+
+    public static Schedule operator /(Schedule schedule, char value) => schedule.Divide(value);
+
     public static Schedule operator /(double value, Schedule schedule)
     {
         return schedule.ReverseDivide(value);
     }
+
+    public static Schedule operator /(int value, Schedule schedule) => schedule.ReverseDivide(value);
+
+    public static Schedule operator /(uint value, Schedule schedule) => schedule.ReverseDivide(value);
+
+    public static Schedule operator /(long value, Schedule schedule) => schedule.ReverseDivide(value);
+
+    public static Schedule operator /(ulong value, Schedule schedule) => schedule.ReverseDivide(value);
+
+    public static Schedule operator /(BigInteger value, Schedule schedule) => schedule.ReverseDivide(value);
+
+    public static Schedule operator /(bool value, Schedule schedule) => schedule.ReverseDivide(value);
+
+    public static Schedule operator /(char value, Schedule schedule) => schedule.ReverseDivide(value);
 
     public static Schedule operator +(Schedule left, Schedule right)
     {
@@ -582,10 +747,38 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
         return schedule.Add(value);
     }
 
+    public static Schedule operator +(Schedule schedule, int value) => schedule.Add(value);
+
+    public static Schedule operator +(Schedule schedule, uint value) => schedule.Add(value);
+
+    public static Schedule operator +(Schedule schedule, long value) => schedule.Add(value);
+
+    public static Schedule operator +(Schedule schedule, ulong value) => schedule.Add(value);
+
+    public static Schedule operator +(Schedule schedule, BigInteger value) => schedule.Add(value);
+
+    public static Schedule operator +(Schedule schedule, bool value) => schedule.Add(value);
+
+    public static Schedule operator +(Schedule schedule, char value) => schedule.Add(value);
+
     public static Schedule operator +(double value, Schedule schedule)
     {
         return schedule.ReverseAdd(value);
     }
+
+    public static Schedule operator +(int value, Schedule schedule) => schedule.ReverseAdd(value);
+
+    public static Schedule operator +(uint value, Schedule schedule) => schedule.ReverseAdd(value);
+
+    public static Schedule operator +(long value, Schedule schedule) => schedule.ReverseAdd(value);
+
+    public static Schedule operator +(ulong value, Schedule schedule) => schedule.ReverseAdd(value);
+
+    public static Schedule operator +(BigInteger value, Schedule schedule) => schedule.ReverseAdd(value);
+
+    public static Schedule operator +(bool value, Schedule schedule) => schedule.ReverseAdd(value);
+
+    public static Schedule operator +(char value, Schedule schedule) => schedule.ReverseAdd(value);
 
     public static Schedule operator -(Schedule left, Schedule right)
     {
@@ -597,10 +790,38 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
         return schedule.Subtract(value);
     }
 
+    public static Schedule operator -(Schedule schedule, int value) => schedule.Subtract(value);
+
+    public static Schedule operator -(Schedule schedule, uint value) => schedule.Subtract(value);
+
+    public static Schedule operator -(Schedule schedule, long value) => schedule.Subtract(value);
+
+    public static Schedule operator -(Schedule schedule, ulong value) => schedule.Subtract(value);
+
+    public static Schedule operator -(Schedule schedule, BigInteger value) => schedule.Subtract(value);
+
+    public static Schedule operator -(Schedule schedule, bool value) => schedule.Subtract(value);
+
+    public static Schedule operator -(Schedule schedule, char value) => schedule.Subtract(value);
+
     public static Schedule operator -(double value, Schedule schedule)
     {
         return schedule.ReverseSubtract(value);
     }
+
+    public static Schedule operator -(int value, Schedule schedule) => schedule.ReverseSubtract(value);
+
+    public static Schedule operator -(uint value, Schedule schedule) => schedule.ReverseSubtract(value);
+
+    public static Schedule operator -(long value, Schedule schedule) => schedule.ReverseSubtract(value);
+
+    public static Schedule operator -(ulong value, Schedule schedule) => schedule.ReverseSubtract(value);
+
+    public static Schedule operator -(BigInteger value, Schedule schedule) => schedule.ReverseSubtract(value);
+
+    public static Schedule operator -(bool value, Schedule schedule) => schedule.ReverseSubtract(value);
+
+    public static Schedule operator -(char value, Schedule schedule) => schedule.ReverseSubtract(value);
 
     public static Schedule operator &(Schedule left, Schedule right)
     {
@@ -677,51 +898,108 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
                 operation(period.RuleSet))));
     }
 
-    private static Schedule CoerceWhereValue(object value, ScheduleType? type, string parameterName)
+    private Schedule MultiplyPythonScalar<T>(T value, string? name)
     {
-        if (value is Schedule schedule)
-        {
-            return schedule;
-        }
-
-        if (value is RuleSet ruleSet)
-        {
-            return new Schedule("WHERE", Enumerable.Repeat(ruleSet, FixedLength), ruleSet.Type);
-        }
-
-        if (value is DaySchedule daySchedule)
-        {
-            RuleSet fromDay = RuleSet.FromDaySchedule("WHERE", daySchedule);
-            return new Schedule("WHERE", Enumerable.Repeat(fromDay, FixedLength), fromDay.Type);
-        }
-
-        if (TryGetScalar(value, out double scalar))
-        {
-            return Constant("WHERE", scalar, type ?? ScheduleType.Real);
-        }
-
-        throw new ArgumentException(
-            "A conditional value must be numeric, a DaySchedule, a RuleSet, or a Schedule.",
-            parameterName);
+        string scalarName = DaySchedule.FormatPythonScalar(value, "multiplication");
+        return MapCompact(
+            ruleSet => ruleSet.Multiply(value),
+            name ?? $"{Name}:MUL:{scalarName}");
     }
 
-    private static bool TryGetScalar(object value, out double scalar)
+    private Schedule AddPythonScalar<T>(T value, string? name)
     {
-        switch (value)
-        {
-            case byte number: scalar = number; return true;
-            case sbyte number: scalar = number; return true;
-            case short number: scalar = number; return true;
-            case ushort number: scalar = number; return true;
-            case int number: scalar = number; return true;
-            case uint number: scalar = number; return true;
-            case long number: scalar = number; return true;
-            case ulong number: scalar = number; return true;
-            case float number: scalar = number; return true;
-            case double number: scalar = number; return true;
-            case decimal number: scalar = (double)number; return true;
-            default: scalar = default; return false;
-        }
+        string scalarName = DaySchedule.FormatPythonScalar(value, "addition");
+        return MapCompact(
+            ruleSet => ruleSet.Add(value),
+            name ?? $"{Name}:ADD:{scalarName}");
+    }
+
+    private Schedule ReverseAddPythonScalar<T>(T value, string? name)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "reverse addition");
+        return MapCompact(
+            ruleSet => ruleSet.ReverseAdd(value),
+            name ?? $"{scalarName}:ADD:{Name}");
+    }
+
+    private Schedule SubtractPythonScalar<T>(T value, string? name)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "subtraction");
+        return MapCompact(
+            ruleSet => ruleSet.Subtract(value),
+            name ?? $"{Name}:SUB:{scalarName}");
+    }
+
+    private Schedule ReverseSubtractPythonScalar<T>(T value, string? name)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "reverse subtraction");
+        return MapCompact(
+            ruleSet => ruleSet.ReverseSubtract(value),
+            name ?? $"{scalarName}:SUB:{Name}");
+    }
+
+    private Schedule DividePythonScalar<T>(T value, string? name)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "division");
+        return MapCompact(
+            ruleSet => ruleSet.Divide(value),
+            name ?? $"{Name}:DIV:{scalarName}");
+    }
+
+    private Schedule ReverseDividePythonScalar<T>(T value, string? name)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "reverse division");
+        return MapCompact(
+            ruleSet => ruleSet.ReverseDivide(value),
+            name ?? $"{scalarName}:DIV:{Name}");
+    }
+
+    private Schedule ElementEqualPythonScalar<T>(T value, string? name)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "equality comparison");
+        return MapCompact(
+            ruleSet => ruleSet.ElementEqual(value),
+            name ?? $"{Name}:EQ:{scalarName}");
+    }
+
+    private Schedule ElementNotEqualPythonScalar<T>(T value, string? name)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "inequality comparison");
+        return MapCompact(
+            ruleSet => ruleSet.ElementNotEqual(value),
+            name ?? $"{Name}:NE:{scalarName}");
+    }
+
+    private Schedule LessThanPythonScalar<T>(T value, string? name)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "less-than comparison");
+        return MapCompact(
+            ruleSet => ruleSet.LessThan(value),
+            name ?? $"{Name}:LT:{scalarName}");
+    }
+
+    private Schedule LessThanOrEqualPythonScalar<T>(T value, string? name)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "less-than-or-equal comparison");
+        return MapCompact(
+            ruleSet => ruleSet.LessThanOrEqual(value),
+            name ?? $"{Name}:LE:{scalarName}");
+    }
+
+    private Schedule GreaterThanPythonScalar<T>(T value, string? name)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "greater-than comparison");
+        return MapCompact(
+            ruleSet => ruleSet.GreaterThan(value),
+            name ?? $"{Name}:GT:{scalarName}");
+    }
+
+    private Schedule GreaterThanOrEqualPythonScalar<T>(T value, string? name)
+    {
+        string scalarName = DaySchedule.FormatPythonScalar(value, "greater-than-or-equal comparison");
+        return MapCompact(
+            ruleSet => ruleSet.GreaterThanOrEqual(value),
+            name ?? $"{Name}:GE:{scalarName}");
     }
 
     private static RuleSet FindRuleSet(IReadOnlyList<SchedulePeriod> schedule, DateTime date)

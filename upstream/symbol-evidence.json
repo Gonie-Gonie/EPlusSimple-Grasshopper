@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:f32e01c0f24911cea1f46995e6eab11106fb7af3dba733a25c6b0c8483ebc619",
+  "content_sha256": "sha256:f0a7a8a7c6cf4369e62e585e06f2c00439f951e7e928583887f942e4224dc0f4",
   "entries": [
     {
       "implementation": {
@@ -1927,6 +1927,734 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.op_Addition"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__add__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a1ad65e2d56c589d4ab238c60b9415e19f7fb0fc1b19f120376efa014ebd2954",
+          "id": "profile-schedule-add-b1f53fbc",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__add__",
+      "upstream_symbol_hash": "sha256:b1f53fbc391503bdfb118688bb177fa95bcc24c9dfa53fed27cf00442c23eb72"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.op_BitwiseAnd"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__and__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4aaa7517f70c1a30e17285bd8666c688dee568a6d7073adc81800f35b0fca496",
+          "id": "profile-schedule-and-7f01a01b",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__and__",
+      "upstream_symbol_hash": "sha256:7f01a01b4cac360d47a636894a07fd56068d60de8e9f38f0f2093136b7d5b604"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.GreaterThanOrEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__ge__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:baa88d74ba2cd513542393c5c8e151b0bc147823392effa9ffb14ac3c363c989",
+          "id": "profile-schedule-ge-11523775",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__ge__",
+      "upstream_symbol_hash": "sha256:11523775a19222ca1a489b107918fcfc6b8f82c3c0a546e353e56db07531549d"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.GreaterThan"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__gt__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:cc7afdbf0c788a527c130a23c4ee00c8802c65a90c9e75a59a5b719c1458ffc8",
+          "id": "profile-schedule-gt-e70545b0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__gt__",
+      "upstream_symbol_hash": "sha256:e70545b0c4551837664dfd3c684e8c835b11039a47898efd2c95df938cbcc6dc"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.op_LogicalNot"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__invert__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d5f6819e9f8a6c86e6184181cf916de60829eee0a232c39c883062f55dd5ceca",
+          "id": "profile-schedule-invert-47427899",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__invert__",
+      "upstream_symbol_hash": "sha256:474278997d954d91123564a0aa856a2ec834728fb3561ed94084cce5b7893b5e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.LessThanOrEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__le__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a471509d9cd988187f8ab6c0f3621ecd529d15790691d0d995ac55575956bbbf",
+          "id": "profile-schedule-le-2c231884",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__le__",
+      "upstream_symbol_hash": "sha256:2c2318841748622514438612475423857eae8f569efe30da720d0f20fca8a21d"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.LessThan"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__lt__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e2ba8423cecff6035444143e244c3d8339c422061a9fa025ad6344f08e8edf4f",
+          "id": "profile-schedule-lt-78d60d6a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__lt__",
+      "upstream_symbol_hash": "sha256:78d60d6a572ac4b18c51274a13bd5f089f183508f1315e82c4a00767febd87b2"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.op_Multiply"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__mul__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c882b597d07eccd92e20436ac68799c35b050989d749c0642e7485f8b5dea3b8",
+          "id": "profile-schedule-mul-341d9b28",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__mul__",
+      "upstream_symbol_hash": "sha256:341d9b28a235a5361ed9d16141e7ffdeac6f8933c1e420208fefb4714298029a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.op_BitwiseOr"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__or__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7ce4f517e6ebe62b31873cc389c7b0a4bc6f6f5db2f5f84c1331d9dbd04eec62",
+          "id": "profile-schedule-or-cad1d342",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__or__",
+      "upstream_symbol_hash": "sha256:cad1d342fc3e187970f1e3c996ddcd1d8ab53e184ca980cd948c2f9641ead350"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.op_Addition"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__radd__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:5476fb0cf17cb6e18f2fe0519a0fe27997beb67c6c0bfabbab38174dba073f1d",
+          "id": "profile-schedule-radd-ebaafbe8",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__radd__",
+      "upstream_symbol_hash": "sha256:ebaafbe81f9daa483e5f13afbd779c49f7308ef8b9551e10dac213d64a37c045"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.op_Multiply"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__rmul__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7cd1a10fc3e5ee3401ee3f4a9cc0af0095560ef228fc80db84f35f1660a1e104",
+          "id": "profile-schedule-rmul-279533a0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__rmul__",
+      "upstream_symbol_hash": "sha256:279533a07d8189cc0a3f7fa57174faab7ea8500caf007ed8fc08ddb067353be2"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.op_Subtraction"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__rsub__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d81cc2fe7f3583144386bf4ba8e012c3c2d24411c624cd8fd808cb08cca29e49",
+          "id": "profile-schedule-rsub-e84f78d3",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__rsub__",
+      "upstream_symbol_hash": "sha256:e84f78d3b0d4f00c202d644a04d90915a5302c87e28b1b37394c9504a4400047"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.op_Division"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__rtruediv__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6a68d2f972fd0b099ecb7cc201dd7dd77cf016d898cb9bcad04644c22b4b3227",
+          "id": "profile-schedule-rtruediv-32d900f7",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__rtruediv__",
+      "upstream_symbol_hash": "sha256:32d900f7d3189a35816962c0dae8c984f77bf619f9d75e74464a20803b090209"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.op_Subtraction"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__sub__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a33026fb5cdaaa88cea6d7d510a7a6268a4432955194bcac00d453c0239c19ca",
+          "id": "profile-schedule-sub-c963a4ba",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__sub__",
+      "upstream_symbol_hash": "sha256:c963a4baf0da27e3807668ca2a93d212c429e167beebb78cdacce21be1c935dc"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.op_Division"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.__truediv__ is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1898be17c95b538d0630541099227a322ead9256cd017c0765be09035c3515a6",
+          "id": "profile-schedule-truediv-cb9dd7d8",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.__truediv__",
+      "upstream_symbol_hash": "sha256:cb9dd7d8cd8f71bb8ddff07c59959540a9a259b1caf6268128a68e17e375652c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.ElementEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.element_eq is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:489688bccc487c3b3b57045f33886d5955d3c870c0e98e9cead017154f8b62db",
+          "id": "profile-schedule-element-eq-e9c68d0b",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.element_eq",
+      "upstream_symbol_hash": "sha256:e9c68d0b1d5292abffaf63d02594825784cb1f07bdff0151f3ba0fefbcd1dae4"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.ElementMaximum"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.element_max is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1dd559a96bffba611fe2e3f2352263f8dd82dc03884f5617f809bb63d21dfcb8",
+          "id": "profile-schedule-element-max-6287b64a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.element_max",
+      "upstream_symbol_hash": "sha256:6287b64a5cf6b3db41eeae0fdeea354e3803debaac7591381e47939c312a087c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.ElementMinimum"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.element_min is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:06d378f9373e4f77f63e25c31f520a7f03717dbd419d025fe277f930915acdd2",
+          "id": "profile-schedule-element-min-56fdf733",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.element_min",
+      "upstream_symbol_hash": "sha256:56fdf733359e9c5e0fd96ec1d1288795816cc4eb3f34541a5b37917ee9297b36"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.ElementNotEqual"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.element_ne is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:46d3d0b312d558aac6ca3ffce08d7c8a986c73c3eaf42ffaaf9ea262ce159fd9",
+          "id": "profile-schedule-element-ne-32a6c563",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.element_ne",
+      "upstream_symbol_hash": "sha256:32a6c5639c7affbca0e62ccf8ec70bb00ced57fbdf6e318cf1196eb7cd3f3e49"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.IsBetween"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.is_between is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2869cfeff190ff371c254f830955c7b6d8475b61698e2e3bcd4efd95f09e9054",
+          "id": "profile-schedule-is-between-d359b7f1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.is_between",
+      "upstream_symbol_hash": "sha256:d359b7f1264f8fedf1c8c448b7efcc6ac8179ec977bb1d3dd6f2e6f2ace4eb5f"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.IsNegative"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.is_negative is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:48b2dfe3c3e203eb3d404c8768ea2f861c4e54ea9fca292569b767d1521a93b6",
+          "id": "profile-schedule-is-negative-49c07d55",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.is_negative",
+      "upstream_symbol_hash": "sha256:49c07d553db98c166cf8cf61ea861b974fe140062ea9f2152a5f830ef6ca94c6"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.IsNonzero"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.is_nonzero is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e3363d80296894ecf5a4a9e98d9b54ecb19d3f9b5343f46a05296269e34e1b8c",
+          "id": "profile-schedule-is-nonzero-c4f3aa30",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.is_nonzero",
+      "upstream_symbol_hash": "sha256:c4f3aa30304e19e7b367eb2bb0e49b29c63d7b2b42e7b956334b56ef61aa4b01"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.IsOff"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.is_off is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:725a2c026b2d4c963175cbc04a530c0dc2de1df7f0adfacae7440137121b91da",
+          "id": "profile-schedule-is-off-b57679c2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.is_off",
+      "upstream_symbol_hash": "sha256:b57679c27fb4fd20277b0bfb3942f0227ac4a7a69f779b66a4e5d495f19755fa"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.IsOn"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.is_on is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d87b1fbd4903a1d36662f5e351fe135de7b7d939d519c11b808b742bf0f22b2b",
+          "id": "profile-schedule-is-on-5b1abd1e",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.is_on",
+      "upstream_symbol_hash": "sha256:5b1abd1e95bc9b66d360bfec68721a2c989e2b98f37c063935239deffe2a1423"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.IsPositive"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.is_positive is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f31ae8644e537892cda36182d9a452ba75ba837747f829e92caa0475791d8331",
+          "id": "profile-schedule-is-positive-54b471f2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.is_positive",
+      "upstream_symbol_hash": "sha256:54b471f257f020203e667a9496c22e38b0e021762b2b63dc793341013372a25c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.IsZero"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.is_zero is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:294b2c1e4b48f7482c66e1348ef24befcca2084d33822f894b7bfe871e6352e0",
+          "id": "profile-schedule-is-zero-b57679c2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.is_zero",
+      "upstream_symbol_hash": "sha256:b57679c27fb4fd20277b0bfb3942f0227ac4a7a69f779b66a4e5d495f19755fa"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.NormalizeByMaximum"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.normalize_by_max is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7f7eab5f1cf03746ca14f6d0e970448d16c1c632df5b83057107d61cc716b4e3",
+          "id": "profile-schedule-normalize-by-max-b12e2905",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.normalize_by_max",
+      "upstream_symbol_hash": "sha256:b12e2905f36794820228b307d1ee4dacf368b1c00e19a26b7423acae87bab5d3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:69ad625032cf1f483a6eb401493774970c9a92893db28125795bb847c2be3093",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.Where"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Across the hardened 329-case pinned CPython and live .NET Schedule operations oracle, Schedule.where is verified for exact binary64 values, names, schedule types and units, 365-day annual boundaries, compact period and nested 10-slot topology, effective fallback sources, success and failure outcomes, registered adaptations, and source identity and immutability.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:730b3a9649b18dc5f23c4427530fc5a0559c20f35d538751589965fdd1bf996b",
+          "id": "profile-schedule-where-d673aaae",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ScheduleOperationsOracleParityTests.cs",
+          "test_source_sha256": "sha256:c04a4df0223485d2d0f67d3c5e0ce82023abef62c6796b6424e229d6e1317ded",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ScheduleOperationsOracleParityTests.MatchesPinnedPythonOperations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule.where",
+      "upstream_symbol_hash": "sha256:d673aaaebf6468cbce8fe25610252702146eda0a155bef637940e26305108315"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
         "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType"
@@ -2241,9 +2969,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 86,
-    "passed_receipt_count": 86,
-    "receipt_count": 86,
+    "entry_count": 114,
+    "passed_receipt_count": 114,
+    "receipt_count": 114,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
