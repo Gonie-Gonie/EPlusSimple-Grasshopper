@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:b8fa006356b6a26e9a49db8073a099062becca3458c8d977fe66802c4bb6fbf2",
+  "content_sha256": "sha256:01d6d642b425b00a1efcd87fca65a1bc4adaa98a0477b2f56a9e4d8dac795379",
   "entries": [
     {
       "implementation": {
@@ -1564,7 +1564,33 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet across its exact three-case RuleSet core slice: the native immutable value surface, exact ten-slot values and aliases, type, name, equality and source isolation. The comparison directly verifies upstream mutable attributes against the native immutable RuleSet value object.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1640d634164ad8fe02dbebd30e20fea03175f3fb4b7ac3427e9fa5d0ee28c27e",
+          "id": "profile-ruleset-core-value-object-3e0aaca7",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet",
+      "upstream_symbol_hash": "sha256:3e0aaca76114e9e5a84d2b6ceb9a650913ad03b5bb6d35c99d3f0a5f97b36994"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Addition"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1590,7 +1616,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_BitwiseAnd"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1616,7 +1642,33 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.DeepCopy"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.__deepcopy__ across its exact three-case RuleSet core slice: ordinary copied values, :COPY names, source isolation, alias topology and the native explicit-copy contract. The comparison directly verifies upstream copy-protocol memo substitution against native explicit DeepCopy behavior.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b9e14cf5b37662b96fc11dec8901b069a702c64de5ef146157dd00d6028c3725",
+          "id": "profile-ruleset-core-deepcopy-058f6012",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__deepcopy__",
+      "upstream_symbol_hash": "sha256:058f6012eabebca75ffb65c55f0fc1fccc51995d38521394faaceb32dfbb9748"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.GreaterThanOrEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1642,7 +1694,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.GreaterThan"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1668,7 +1720,33 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.RuleSet"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.__init__ across its exact three-case RuleSet core slice: default and explicit construction, deterministic names, copied caller containers, preserved supplied children and atomic type validation. The comparison directly verifies upstream mutable aliases and process-address names against native immutable, deterministic construction.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2c868175f9b3bcccc59303520eb44fb60b131a74d04553ab78e31174917f1da9",
+          "id": "profile-ruleset-core-init-f1c4b446",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.__init__",
+      "upstream_symbol_hash": "sha256:f1c4b446cbbc826152dae8f4c4677d323271ad408d12fda0b0b527ae9ecaec51"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_LogicalNot"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1694,7 +1772,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.LessThanOrEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1720,7 +1798,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.LessThan"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1746,7 +1824,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Multiply"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1772,7 +1850,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_BitwiseOr"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1798,7 +1876,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Addition"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1824,7 +1902,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Multiply"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1850,7 +1928,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Subtraction"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1876,7 +1954,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Division"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1902,7 +1980,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Subtraction"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1928,7 +2006,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.op_Division"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1954,7 +2032,59 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.AsType"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.astype across its exact three-case RuleSet core slice: all copied type conversions, recursive child consistency, exact names and source immutability. The comparison directly verifies upstream in-place and stale-type conversion against native recursively consistent immutable conversion.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:dd5578e3f10271f55de589270846b316112e948557868eaee497efa737b31dd5",
+          "id": "profile-ruleset-core-astype-0c0d27de",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.astype",
+      "upstream_symbol_hash": "sha256:0c0d27de9ef57d948f60d77e2ad8ff58f6898f25965135e6584bb0ad65dff226"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.Clip"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.clip across its exact three-case RuleSet core slice: all valid bound combinations, names, values, slot topology, source immutability and atomic invalid-bound handling. The comparison directly verifies upstream in-place, permissive-bound and permissive-name behavior against native immutable validated clipping.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d0c61e094323414f9f282972e08c8596a56710d15a84c0620362de7c7d0b27bd",
+          "id": "profile-ruleset-core-clip-c3bd9235",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.clip",
+      "upstream_symbol_hash": "sha256:c3bd923567b392c6753dd317132395cea97872100ce08853d218144d579f1ede"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.ElementEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -1980,7 +2110,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.ElementMaximum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2006,7 +2136,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.ElementMinimum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2032,7 +2162,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.ElementNotEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2058,7 +2188,137 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.WithDaySchedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.friday across its exact three-case RuleSet core slice: the exact friday getter, preserved child identity, functional replacement, unchanged source and atomic type validation. The comparison directly verifies upstream in-place friday assignment against native read-only access and functional WithDaySchedule replacement.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:343570b6b910cc5def88df6e19a28a008015ecacb901c4311195c7873ebd6f61",
+          "id": "profile-ruleset-core-friday-72220457",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.friday",
+      "upstream_symbol_hash": "sha256:72220457054927f7999dd905ba93aabf314844b6571266eea6aefbc92823880b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.FromConstant"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.from_constant across its exact three-case RuleSet core slice: finite scalar and supplied DaySchedule construction, exact values, type, deterministic names and weekday/weekend alias topology. The comparison directly verifies upstream runtime child names, distinct scalar fallback children and non-finite Real acceptance against native deterministic finite construction and documented sharing.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:19356dd3ee10ae9f3753d04b6b552e08bd9eeb812c22bc8726a68125496f2337",
+          "id": "profile-ruleset-core-from-constant-1093e8f4",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.from_constant",
+      "upstream_symbol_hash": "sha256:1093e8f49640c59a592997f0bf053e4a153733c7fab6d2ac36dc913c742e635c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.FromDays"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.from_days across its exact three-case RuleSet core slice: finite scalar and supplied DaySchedule defaults and overrides, exact type inference, deterministic names and per-slot alias topology. The comparison directly verifies upstream runtime wrapper names and permissive Python coercion against native deterministic strongly typed finite construction.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b570fa89a6f750175ef0fbcf223eeeac9a0e554b72f19801314b99b45359d5cd",
+          "id": "profile-ruleset-core-from-days-d1d5dd6f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.from_days",
+      "upstream_symbol_hash": "sha256:d1d5dd6fce56c158588b0e2ce11671d0063e1e16aee2161b15af5a1c7f5213e9"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.GetDaySchedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.get_dayschedule across its exact three-case RuleSet core slice: exact string and integer lookup, Python-compatible negative indexing, explicit versus fallback results and invalid-key behavior.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:83cbcdbf6753628f5cfb18d8dc22ae5b4173b7470204d6de1b22ceb970818d8c",
+          "id": "profile-ruleset-core-get-dayschedule-51486c90",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.get_dayschedule",
+      "upstream_symbol_hash": "sha256:51486c906fb24fd537abf5d0f07c77d5ec77c150a9f3874e3f1991d59b1de645"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.WithDaySchedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.holiday across its exact three-case RuleSet core slice: the exact holiday getter, preserved child identity, functional replacement, unchanged source and atomic type validation. The comparison directly verifies upstream in-place holiday assignment against native read-only access and functional WithDaySchedule replacement.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e3c5a6fda3c06b02396be03c29fe3b01592f75e51968c0d25c44588e1fa7b558",
+          "id": "profile-ruleset-core-holiday-9bbd78ba",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.holiday",
+      "upstream_symbol_hash": "sha256:9bbd78bae0f36cfa3af556f39f48a53eb852e8a65e338b0a7ea8235a4861087a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsBetween"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2084,7 +2344,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsNegative"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2110,7 +2370,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsNonzero"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2136,7 +2396,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsOff"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2162,7 +2422,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsOn"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2188,7 +2448,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsPositive"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2214,7 +2474,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.IsZero"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2240,7 +2500,85 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.Maximum"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.max across its exact three-case RuleSet core slice: the exact maximum across every present default and override slot.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b3ce2ae80fec26f6c75fb66a72830967f6d6d2d7b7555e57a93ce034e7920aa9",
+          "id": "profile-ruleset-core-max-c62c3676",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.max",
+      "upstream_symbol_hash": "sha256:c62c3676c65897d28e02ae555dd0343582ed8be67411b36fedbef32cca4d3d38"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.Minimum"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.min across its exact three-case RuleSet core slice: the exact minimum across every present default and override slot.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0e36eb4aae97a5499e39996c315fb91052f1a5dcf3dc2c76eebfcf51d723881a",
+          "id": "profile-ruleset-core-min-bf196235",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.min",
+      "upstream_symbol_hash": "sha256:bf1962353ed21c07ad290a4ff9a5ccd94e7db31b8f7a6313ef3104e280a30807"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.WithDaySchedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.monday across its exact three-case RuleSet core slice: the exact monday getter, preserved child identity, functional replacement, unchanged source and atomic type validation. The comparison directly verifies upstream in-place monday assignment against native read-only access and functional WithDaySchedule replacement.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e20938ff62f3d1284eca27b3589e35a93d1c3471fb2d804579830e90e1478a62",
+          "id": "profile-ruleset-core-monday-4cca788f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.monday",
+      "upstream_symbol_hash": "sha256:4cca788f61eeb17cb784485a8b94b01ff7679deadfdf1d4d9fe8160abfe54c95"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.NormalizeByMaximum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2266,7 +2604,293 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
-        "source_sha256": "sha256:d6e1e3ed187861526cb9a46316f1578605311d4d41e3e38685c8345fe78e9e60",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.WithDaySchedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.saturday across its exact three-case RuleSet core slice: the exact saturday getter, preserved child identity, functional replacement, unchanged source and atomic type validation. The comparison directly verifies upstream in-place saturday assignment against native read-only access and functional WithDaySchedule replacement.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:448524f3a362110115ddf1621e1a8f0b4f59cf588fa86f725b31b500a1bc1a2b",
+          "id": "profile-ruleset-core-saturday-693a3041",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.saturday",
+      "upstream_symbol_hash": "sha256:693a3041f2dcd664bea7b574ecea60f7f4b66dce26af8cefbdf49ae356fb71a2"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.Summary"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.summary across its exact three-case RuleSet core slice: the exact ordinal summary text with and without expanded effective-day lines.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:50b1d36a7add1fcb7f0e7a320428551d7385633eb440cf0626d7eb82a00bc91b",
+          "id": "profile-ruleset-core-summary-f669cea0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.summary",
+      "upstream_symbol_hash": "sha256:f669cea057b58f712dc37b4439991f0fc91aa923ecd1d7b0ab80f8e7cd8cc9fc"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.WithDaySchedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.sunday across its exact three-case RuleSet core slice: the exact sunday getter, preserved child identity, functional replacement, unchanged source and atomic type validation. The comparison directly verifies upstream in-place sunday assignment against native read-only access and functional WithDaySchedule replacement.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b47831b788029a674f63463ef45d345a9d7e1be1de767af4f098a30f1fe65756",
+          "id": "profile-ruleset-core-sunday-cfcbc078",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.sunday",
+      "upstream_symbol_hash": "sha256:cfcbc078846cee7f94d9c09b0f32190b495489b8b8f1f21b860a7cbaa16324fc"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.WithDaySchedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.thursday across its exact three-case RuleSet core slice: the exact thursday getter, preserved child identity, functional replacement, unchanged source and atomic type validation. The comparison directly verifies upstream in-place thursday assignment against native read-only access and functional WithDaySchedule replacement.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7e72adda4020a7cb06ad2bce3c396efb7e4b2df9df12383e360d79654b3aef1e",
+          "id": "profile-ruleset-core-thursday-2d3bbbc0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.thursday",
+      "upstream_symbol_hash": "sha256:2d3bbbc02f1cd354f02d0a564e8c8979970ed867e9f5e61fbd76d5465293f602"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.ToDictionary"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.to_dict across its exact three-case RuleSet core slice: the exact ordered ten-key mapping with preserved child references and null overrides.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f00a4455e2be73bfa78aad6a2c758b29a7a926c56d2ae203c723b32b562969d0",
+          "id": "profile-ruleset-core-to-dict-e2a85d52",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.to_dict",
+      "upstream_symbol_hash": "sha256:e2a85d522fcc2dbacec768944cf872ba9b7ffd5dd42e03eb4f7cac035da2efff"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.ToIdfCompactExpression"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.to_idf_compactexpr across its exact three-case RuleSet core slice: the exact culture-invariant EnergyPlus compact expression, fallback expansion, day groups and value formatting.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0a9c35664cbd445b8b7d112fdeb2355f2ac8471a2f1164617aa96db97dffc99c",
+          "id": "profile-ruleset-core-idf-compactexpr-015a80b0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.to_idf_compactexpr",
+      "upstream_symbol_hash": "sha256:015a80b07ad77b088b27d89e7c2f2224553870ad20bffa55a4d43dd1573fb6de"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.WithDaySchedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.tuesday across its exact three-case RuleSet core slice: the exact tuesday getter, preserved child identity, functional replacement, unchanged source and atomic type validation. The comparison directly verifies upstream in-place tuesday assignment against native read-only access and functional WithDaySchedule replacement.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:97adcce849fab192379c80c772e39b6344f4e347c40132b57f5c709eaad26f10",
+          "id": "profile-ruleset-core-tuesday-30f9dc0b",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.tuesday",
+      "upstream_symbol_hash": "sha256:30f9dc0b522275442a6bff0cc22640539789e05274ad72c7a77b487caebe3e68"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.Type"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.type across its exact three-case RuleSet core slice: the exact strongly typed read-only getter across every schedule domain.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:26f4d3fb2a1a4b68674d760e80379e1caa484442ed6264a221e264d6257a6679",
+          "id": "profile-ruleset-core-type-63a5d7d9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.type",
+      "upstream_symbol_hash": "sha256:63a5d7d94275c2184f4c9eae268b1c33ee3351525711e7c232fae68f80c84d6a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.WithDaySchedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.wednesday across its exact three-case RuleSet core slice: the exact wednesday getter, preserved child identity, functional replacement, unchanged source and atomic type validation. The comparison directly verifies upstream in-place wednesday assignment against native read-only access and functional WithDaySchedule replacement.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:fd6094ff17c7450f85a821a7a7e9f6bce1016519088a60e8f4fd9df7e372476b",
+          "id": "profile-ruleset-core-wednesday-a896496e",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.wednesday",
+      "upstream_symbol_hash": "sha256:a896496ee156854d2a7693128f6a66bac9628457468ef2a7b9a00732abe86a22"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.WithDaySchedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.weekdays across its exact three-case RuleSet core slice: the exact weekdays getter, preserved child identity, functional replacement, unchanged source and atomic type validation. The comparison directly verifies upstream in-place weekdays assignment against native read-only access and functional WithDaySchedule replacement.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6bd0b003a6e39e49b87ea0907d64a983c04b4c0e112dc8ad4ec29da1a594bc58",
+          "id": "profile-ruleset-core-weekdays-f89fcc57",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.weekdays",
+      "upstream_symbol_hash": "sha256:f89fcc578196070c1535586d7c2b7142654dcf2d4b0179c21ee92643e0098294"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.WithDaySchedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify RuleSet.weekends across its exact three-case RuleSet core slice: the exact weekends getter, preserved child identity, functional replacement, unchanged source and atomic type validation. The comparison directly verifies upstream in-place weekends assignment against native read-only access and functional WithDaySchedule replacement.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:94631cdd121652456b910149a7bf91e26ce0ab83bc5a840ecbd091fd67163321",
+          "id": "profile-ruleset-core-weekends-c3fdd0ae",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/RuleSetCoreParityTests.cs",
+          "test_source_sha256": "sha256:5a21db9919d0c482e031a98bc4ab5ddcb5335f4defce831f11a7081d30f643c6",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.RuleSetCoreParityTests.MatchesPinnedPythonRuleSetCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "RuleSet.weekends",
+      "upstream_symbol_hash": "sha256:c3fdd0ae9d51b8f43fa821ee2dd774593c90db66b6c19c4a51e0db0ccfd927b5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
+        "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet.Where"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3905,9 +4529,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 150,
-    "passed_receipt_count": 150,
-    "receipt_count": 150,
+    "entry_count": 174,
+    "passed_receipt_count": 174,
+    "receipt_count": 174,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

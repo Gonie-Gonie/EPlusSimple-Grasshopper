@@ -898,59 +898,59 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
+    "exception",
     "exception",
     "equivalent",
-    "needs_reverification",
-    "equivalent",
-    "equivalent",
-    "needs_reverification",
-    "equivalent",
+    "exception",
     "equivalent",
     "equivalent",
     "exception",
     "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "out_of_scope",
+    "exception",
+    "exception",
     "exception",
     "out_of_scope",
     "exception",
     "exception",
     "exception",
-    "out_of_scope",
     "exception",
-    "exception",
-    "needs_reverification",
-    "needs_reverification",
     "equivalent",
     "exception",
     "exception",
     "equivalent",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
     "exception",
     "needs_reverification",
     "equivalent",
@@ -1243,7 +1243,7 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:a6ade741143d58880e70b2e04e5f74a65b42fbd791523bd22a74dc12eefa8fb7",
+  "content_sha256": "sha256:f0f63c3f486078daf885abf194ed4d4a53ed66e3f3e3fd525d8f4e7a876091c6",
   "details": [
     {
       "evidence": [
@@ -3177,6 +3177,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-value-object",
+        "upstream/symbol-evidence.json#profile-ruleset-core-value-object-3e0aaca7"
+      ],
+      "exception_id": "immutable-ruleset-value-object",
+      "index": 898,
+      "rationale": "Trusted cross-language evidence verifies RuleSet across the exact three-case RuleSet core slice: the native immutable value surface, exact ten-slot values and aliases, type, name, equality and source isolation, and directly observes upstream mutable attributes against the native immutable RuleSet value object."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#nonfinite-result-ruleset-add",
         "upstream/symbol-evidence.json#profile-ruleset-add-d658d7f9"
       ],
@@ -3193,6 +3202,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#native-ruleset-deepcopy-memo",
+        "upstream/symbol-evidence.json#profile-ruleset-core-deepcopy-058f6012"
+      ],
+      "exception_id": "native-ruleset-deepcopy-memo",
+      "index": 901,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.__deepcopy__ across the exact three-case RuleSet core slice: ordinary copied values, :COPY names, source isolation, alias topology and the native explicit-copy contract, and directly observes upstream copy-protocol memo substitution against native explicit DeepCopy behavior."
+    },
+    {
+      "evidence": [
         "upstream/symbol-evidence.json#profile-ruleset-ge-66ecfa68"
       ],
       "index": 902,
@@ -3204,6 +3222,15 @@
       ],
       "index": 903,
       "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.__gt__ behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-deterministic-ruleset-construction",
+        "upstream/symbol-evidence.json#profile-ruleset-core-init-f1c4b446"
+      ],
+      "exception_id": "immutable-deterministic-ruleset-construction",
+      "index": 904,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.__init__ across the exact three-case RuleSet core slice: default and explicit construction, deterministic names, copied caller containers, preserved supplied children and atomic type validation, and directly observes upstream mutable aliases and process-address names against native immutable, deterministic construction."
     },
     {
       "evidence": [
@@ -3312,6 +3339,24 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-astype",
+        "upstream/symbol-evidence.json#profile-ruleset-core-astype-0c0d27de"
+      ],
+      "exception_id": "immutable-ruleset-astype",
+      "index": 918,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.astype across the exact three-case RuleSet core slice: all copied type conversions, recursive child consistency, exact names and source immutability, and directly observes upstream in-place and stale-type conversion against native recursively consistent immutable conversion."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-clip",
+        "upstream/symbol-evidence.json#profile-ruleset-core-clip-c3bd9235"
+      ],
+      "exception_id": "immutable-ruleset-clip",
+      "index": 919,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.clip across the exact three-case RuleSet core slice: all valid bound combinations, names, values, slot topology, source immutability and atomic invalid-bound handling, and directly observes upstream in-place, permissive-bound and permissive-name behavior against native immutable validated clipping."
+    },
+    {
+      "evidence": [
         "upstream/symbol-evidence.json#profile-ruleset-element-eq-2d761982"
       ],
       "index": 920,
@@ -3341,6 +3386,49 @@
       ],
       "index": 923,
       "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET RuleSet.element_ne behavior across the 334-case RuleSet operation oracle, including typed scalar dispatch, exact slot values, names, metadata, failures, override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-friday-update",
+        "upstream/symbol-evidence.json#profile-ruleset-core-friday-72220457"
+      ],
+      "exception_id": "immutable-ruleset-friday-update",
+      "index": 924,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.friday across the exact three-case RuleSet core slice: the exact friday getter, preserved child identity, functional replacement, unchanged source and atomic type validation, and directly observes upstream in-place friday assignment against native read-only access and functional WithDaySchedule replacement."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-finite-ruleset-from-constant",
+        "upstream/symbol-evidence.json#profile-ruleset-core-from-constant-1093e8f4"
+      ],
+      "exception_id": "deterministic-finite-ruleset-from-constant",
+      "index": 925,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.from_constant across the exact three-case RuleSet core slice: finite scalar and supplied DaySchedule construction, exact values, type, deterministic names and weekday/weekend alias topology, and directly observes upstream runtime child names, distinct scalar fallback children and non-finite Real acceptance against native deterministic finite construction and documented sharing."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-deterministic-ruleset-from-days",
+        "upstream/symbol-evidence.json#profile-ruleset-core-from-days-d1d5dd6f"
+      ],
+      "exception_id": "validated-deterministic-ruleset-from-days",
+      "index": 926,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.from_days across the exact three-case RuleSet core slice: finite scalar and supplied DaySchedule defaults and overrides, exact type inference, deterministic names and per-slot alias topology, and directly observes upstream runtime wrapper names and permissive Python coercion against native deterministic strongly typed finite construction."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-core-get-dayschedule-51486c90"
+      ],
+      "index": 927,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.get_dayschedule across the exact three-case RuleSet core slice: exact string and integer lookup, Python-compatible negative indexing, explicit versus fallback results and invalid-key behavior."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-holiday-update",
+        "upstream/symbol-evidence.json#profile-ruleset-core-holiday-9bbd78ba"
+      ],
+      "exception_id": "immutable-ruleset-holiday-update",
+      "index": 928,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.holiday across the exact three-case RuleSet core slice: the exact holiday getter, preserved child identity, functional replacement, unchanged source and atomic type validation, and directly observes upstream in-place holiday assignment against native read-only access and functional WithDaySchedule replacement."
     },
     {
       "evidence": [
@@ -3393,12 +3481,126 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-core-max-c62c3676"
+      ],
+      "index": 936,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.max across the exact three-case RuleSet core slice: the exact maximum across every present default and override slot."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-core-min-bf196235"
+      ],
+      "index": 937,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.min across the exact three-case RuleSet core slice: the exact minimum across every present default and override slot."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-monday-update",
+        "upstream/symbol-evidence.json#profile-ruleset-core-monday-4cca788f"
+      ],
+      "exception_id": "immutable-ruleset-monday-update",
+      "index": 938,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.monday across the exact three-case RuleSet core slice: the exact monday getter, preserved child identity, functional replacement, unchanged source and atomic type validation, and directly observes upstream in-place monday assignment against native read-only access and functional WithDaySchedule replacement."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#nonfinite-result-ruleset-normalize-by-max",
         "upstream/symbol-evidence.json#profile-ruleset-normalize-by-max-92c2f287"
       ],
       "exception_id": "nonfinite-result-ruleset-normalize-by-max",
       "index": 939,
       "rationale": "Trusted cross-language evidence verifies immutable independent slot-by-slot normalization, zero-maximum behavior, missing-override preservation, names, types, and source immutability, and directly observes the registered non-finite-result rejection, invalid or blank explicit-name rejection, and surrounding-whitespace trimming policies in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-saturday-update",
+        "upstream/symbol-evidence.json#profile-ruleset-core-saturday-693a3041"
+      ],
+      "exception_id": "immutable-ruleset-saturday-update",
+      "index": 940,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.saturday across the exact three-case RuleSet core slice: the exact saturday getter, preserved child identity, functional replacement, unchanged source and atomic type validation, and directly observes upstream in-place saturday assignment against native read-only access and functional WithDaySchedule replacement."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-core-summary-f669cea0"
+      ],
+      "index": 941,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.summary across the exact three-case RuleSet core slice: the exact ordinal summary text with and without expanded effective-day lines."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-sunday-update",
+        "upstream/symbol-evidence.json#profile-ruleset-core-sunday-cfcbc078"
+      ],
+      "exception_id": "immutable-ruleset-sunday-update",
+      "index": 942,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.sunday across the exact three-case RuleSet core slice: the exact sunday getter, preserved child identity, functional replacement, unchanged source and atomic type validation, and directly observes upstream in-place sunday assignment against native read-only access and functional WithDaySchedule replacement."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-thursday-update",
+        "upstream/symbol-evidence.json#profile-ruleset-core-thursday-2d3bbbc0"
+      ],
+      "exception_id": "immutable-ruleset-thursday-update",
+      "index": 943,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.thursday across the exact three-case RuleSet core slice: the exact thursday getter, preserved child identity, functional replacement, unchanged source and atomic type validation, and directly observes upstream in-place thursday assignment against native read-only access and functional WithDaySchedule replacement."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-core-to-dict-e2a85d52"
+      ],
+      "index": 944,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.to_dict across the exact three-case RuleSet core slice: the exact ordered ten-key mapping with preserved child references and null overrides."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-core-idf-compactexpr-015a80b0"
+      ],
+      "index": 945,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.to_idf_compactexpr across the exact three-case RuleSet core slice: the exact culture-invariant EnergyPlus compact expression, fallback expansion, day groups and value formatting."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-tuesday-update",
+        "upstream/symbol-evidence.json#profile-ruleset-core-tuesday-30f9dc0b"
+      ],
+      "exception_id": "immutable-ruleset-tuesday-update",
+      "index": 946,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.tuesday across the exact three-case RuleSet core slice: the exact tuesday getter, preserved child identity, functional replacement, unchanged source and atomic type validation, and directly observes upstream in-place tuesday assignment against native read-only access and functional WithDaySchedule replacement."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-ruleset-core-type-63a5d7d9"
+      ],
+      "index": 947,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.type across the exact three-case RuleSet core slice: the exact strongly typed read-only getter across every schedule domain."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-wednesday-update",
+        "upstream/symbol-evidence.json#profile-ruleset-core-wednesday-a896496e"
+      ],
+      "exception_id": "immutable-ruleset-wednesday-update",
+      "index": 948,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.wednesday across the exact three-case RuleSet core slice: the exact wednesday getter, preserved child identity, functional replacement, unchanged source and atomic type validation, and directly observes upstream in-place wednesday assignment against native read-only access and functional WithDaySchedule replacement."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-weekdays-update",
+        "upstream/symbol-evidence.json#profile-ruleset-core-weekdays-f89fcc57"
+      ],
+      "exception_id": "immutable-ruleset-weekdays-update",
+      "index": 949,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.weekdays across the exact three-case RuleSet core slice: the exact weekdays getter, preserved child identity, functional replacement, unchanged source and atomic type validation, and directly observes upstream in-place weekdays assignment against native read-only access and functional WithDaySchedule replacement."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-ruleset-weekends-update",
+        "upstream/symbol-evidence.json#profile-ruleset-core-weekends-c3fdd0ae"
+      ],
+      "exception_id": "immutable-ruleset-weekends-update",
+      "index": 950,
+      "rationale": "Trusted cross-language evidence verifies RuleSet.weekends across the exact three-case RuleSet core slice: the exact weekends getter, preserved child identity, functional replacement, unchanged source and atomic type validation, and directly observes upstream in-place weekends assignment against native read-only access and functional WithDaySchedule replacement."
     },
     {
       "evidence": [
@@ -4186,9 +4388,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 90,
-      "exception": 60,
-      "needs_reverification": 840,
+      "equivalent": 97,
+      "exception": 77,
+      "needs_reverification": 816,
       "out_of_scope": 252
     },
     "entry_count": 1242
