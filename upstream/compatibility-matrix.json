@@ -895,29 +895,6 @@
     "equivalent",
     "exception",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "exception",
-    "exception",
-    "equivalent",
-    "exception",
-    "equivalent",
-    "equivalent",
-    "exception",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "exception",
-    "equivalent",
-    "exception",
-    "out_of_scope",
-    "exception",
-    "exception",
-    "exception",
-    "out_of_scope",
-    "exception",
-    "exception",
     "exception",
     "exception",
     "equivalent",
@@ -925,40 +902,6 @@
     "exception",
     "equivalent",
     "exception",
-    "exception",
-    "exception",
-    "equivalent",
-    "exception",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "exception",
-    "exception",
-    "exception",
-    "equivalent",
-    "exception",
-    "exception",
-    "equivalent",
-    "equivalent",
-    "exception",
-    "equivalent",
-    "exception",
-    "exception",
-    "exception",
-    "exception",
-    "needs_reverification",
-    "equivalent",
-    "exception",
-    "exception",
-    "equivalent",
-    "exception",
-    "out_of_scope",
     "equivalent",
     "equivalent",
     "exception",
@@ -975,6 +918,63 @@
     "out_of_scope",
     "exception",
     "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "out_of_scope",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "out_of_scope",
+    "exception",
+    "exception",
+    "exception",
+    "out_of_scope",
+    "exception",
+    "exception",
     "out_of_scope",
     "exception",
     "exception",
@@ -1011,7 +1011,7 @@
     "exception",
     "equivalent",
     "exception",
-    "needs_reverification",
+    "exception",
     "equivalent",
     "equivalent",
     "equivalent",
@@ -1243,7 +1243,7 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:f0f63c3f486078daf885abf194ed4d4a53ed66e3f3e3fd525d8f4e7a876091c6",
+  "content_sha256": "sha256:c9281b9db4e5596ab51619ae25086a6dac69f6d81c7c328eccd9956837e94859",
   "details": [
     {
       "evidence": [
@@ -3177,6 +3177,31 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-profile-value-object",
+        "upstream/symbol-evidence.json#profile-residual-profile-3cf55ef9"
+      ],
+      "exception_id": "immutable-profile-value-object",
+      "index": 895,
+      "rationale": "Trusted cross-language evidence verifies Profile across the exact three-case Profile residual slice: the exact seven optional schedule slots, name, supplied child identities, value semantics and source isolation, and directly observes upstream mutable Profile attributes against the native sealed immutable Profile value surface."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-profile-construction",
+        "upstream/symbol-evidence.json#profile-residual-init-19f87b17"
+      ],
+      "exception_id": "validated-immutable-profile-construction",
+      "index": 896,
+      "rationale": "Trusted cross-language evidence verifies Profile.__init__ across the exact three-case Profile residual slice: explicit and null slot construction, deterministic identifier and name handling, preserved supplied schedules and atomic schedule-domain validation, and directly observes upstream permissive direct assignment against native required identity/name and schedule-domain validation."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-residual-idf-0b06ee5f"
+      ],
+      "index": 897,
+      "rationale": "Trusted cross-language evidence verifies Profile.to_idf_object across the exact three-case Profile residual slice: the exact non-null schedule filtering, fixed slot order, preserved schedule-derived IDF objects and empty-profile result."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#immutable-ruleset-value-object",
         "upstream/symbol-evidence.json#profile-ruleset-core-value-object-3e0aaca7"
       ],
@@ -3610,6 +3635,15 @@
       "exception_id": "deterministic-ruleset-where-day-names",
       "index": 951,
       "rationale": "Trusted cross-language evidence verifies supported finite scalar, DaySchedule, and RuleSet branches, inferred and explicit types, weekday and weekend fallbacks, override topology, and source immutability, and directly observes deterministic slot-qualified child names, invalid or blank explicit-name rejection, surrounding-whitespace trimming, invalid native operands, and selected non-finite-result rejection in the 334-case RuleSet operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-schedule-value-object",
+        "upstream/symbol-evidence.json#profile-residual-schedule-1a40948f"
+      ],
+      "exception_id": "immutable-schedule-value-object",
+      "index": 952,
+      "rationale": "Trusted cross-language evidence verifies Schedule across the exact three-case Profile residual slice: the exact 365 RuleSet values, order, type, name, sequence behavior and source container isolation, and directly observes upstream UserList and public mutable data storage against the native immutable read-only Schedule value surface."
     },
     {
       "evidence": [
@@ -4059,6 +4093,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#native-schedule-operation-exception-family",
+        "upstream/symbol-evidence.json#profile-residual-operation-error-d808ccdd"
+      ],
+      "exception_id": "native-schedule-operation-exception-family",
+      "index": 1011,
+      "rationale": "Trusted cross-language evidence verifies ScheduleOperationError across the exact three-case Profile residual slice: the dedicated schedule-operation failure family, message propagation and native exception-category behavior, and directly observes the upstream TypeError-derived ScheduleOperationError against the native InvalidOperationException-derived ScheduleOperationException family."
+    },
+    {
+      "evidence": [
         "upstream/symbol-evidence.json#profile-scheduletype-f873f5e8"
       ],
       "index": 1012,
@@ -4388,9 +4431,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 97,
-      "exception": 77,
-      "needs_reverification": 816,
+      "equivalent": 98,
+      "exception": 81,
+      "needs_reverification": 811,
       "out_of_scope": 252
     },
     "entry_count": 1242

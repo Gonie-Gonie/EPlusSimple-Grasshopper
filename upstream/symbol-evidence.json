@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:01d6d642b425b00a1efcd87fca65a1bc4adaa98a0477b2f56a9e4d8dac795379",
+  "content_sha256": "sha256:4cd1b6447d6ecc943da476d39d4704ca0b5b6c14173e39ff9bb0dd0f0d7d3cfb",
   "entries": [
     {
       "implementation": {
@@ -1563,6 +1563,84 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Profile.cs",
+        "source_sha256": "sha256:99c3e0557ba737aa74cfb0f15faf0730d9f7215a6b66f7f6b6b2044cf4013c72",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Profile"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Profile across its exact three-case Profile residual slice: the exact seven optional schedule slots, name, supplied child identities, value semantics and source isolation. The comparison directly verifies upstream mutable Profile attributes against the native sealed immutable Profile value surface.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a77c201e34dd3e3e6fbc2425f6e92262a3c6ff45bba3b89fc497bbd28147da2c",
+          "id": "profile-residual-profile-3cf55ef9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ProfileResidualOracleParityTests.cs",
+          "test_source_sha256": "sha256:e999995181ff62926b58c19ab3b87ec338e35292f7606b2218963ca13aa82083",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ProfileResidualOracleParityTests.MatchesPinnedPythonProfileResidual",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Profile",
+      "upstream_symbol_hash": "sha256:3cf55ef99529b6051e2e5bea5c32bbecc5850819101e522fed1008be0599d6ad"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Profile.cs",
+        "source_sha256": "sha256:99c3e0557ba737aa74cfb0f15faf0730d9f7215a6b66f7f6b6b2044cf4013c72",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Profile"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Profile.__init__ across its exact three-case Profile residual slice: explicit and null slot construction, deterministic identifier and name handling, preserved supplied schedules and atomic schedule-domain validation. The comparison directly verifies upstream permissive direct assignment against native required identity/name and schedule-domain validation.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:54c9831ae722015fb90f0fe0f6517b2973f5469e7eae2e59979f3eb5b52de2d1",
+          "id": "profile-residual-init-19f87b17",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ProfileResidualOracleParityTests.cs",
+          "test_source_sha256": "sha256:e999995181ff62926b58c19ab3b87ec338e35292f7606b2218963ca13aa82083",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ProfileResidualOracleParityTests.MatchesPinnedPythonProfileResidual",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Profile.__init__",
+      "upstream_symbol_hash": "sha256:19f87b176fd6f00e83c6b55bda01ac7e9bb5d8a0829e8f869f13c20a0388aa25"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Profile.cs",
+        "source_sha256": "sha256:99c3e0557ba737aa74cfb0f15faf0730d9f7215a6b66f7f6b6b2044cf4013c72",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Profile.ToIdfObjects"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Profile.to_idf_object across its exact three-case Profile residual slice: the exact non-null schedule filtering, fixed slot order, preserved schedule-derived IDF objects and empty-profile result.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:07840766379f33cd70b1d1d8e5fe2229a8f817204a9ddf2f71e46ab29a2fd4c0",
+          "id": "profile-residual-idf-0b06ee5f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ProfileResidualOracleParityTests.cs",
+          "test_source_sha256": "sha256:e999995181ff62926b58c19ab3b87ec338e35292f7606b2218963ca13aa82083",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ProfileResidualOracleParityTests.MatchesPinnedPythonProfileResidual",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Profile.to_idf_object",
+      "upstream_symbol_hash": "sha256:0b06ee5f7b81782b986777c9f524320ff3f272722a9d0ec4942f5f53ac074893"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/RuleSet.cs",
         "source_sha256": "sha256:b4df7b67cc992aa3ea5a9b4308da8cf5855a8ad50669561afd743a9958f25fa7",
         "symbol": "GonieGonie.InvisibleDragon.Profile.RuleSet"
@@ -2917,6 +2995,32 @@
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
         "source_sha256": "sha256:f06d82661c13f8b26f08f904dfd28887d2e7d90f38e4844cb7d8e70dd42cc947",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Schedule across its exact three-case Profile residual slice: the exact 365 RuleSet values, order, type, name, sequence behavior and source container isolation. The comparison directly verifies upstream UserList and public mutable data storage against the native immutable read-only Schedule value surface.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c8704735209451af44288370898ec1ba0f14a36113aef0d65b7f6ce80c84d336",
+          "id": "profile-residual-schedule-1a40948f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ProfileResidualOracleParityTests.cs",
+          "test_source_sha256": "sha256:e999995181ff62926b58c19ab3b87ec338e35292f7606b2218963ca13aa82083",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ProfileResidualOracleParityTests.MatchesPinnedPythonProfileResidual",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Schedule",
+      "upstream_symbol_hash": "sha256:1a40948f1e3ccbc15dbee4033662c4e80a2a6b4ee559271dd0ca2f59f890095c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs",
+        "source_sha256": "sha256:f06d82661c13f8b26f08f904dfd28887d2e7d90f38e4844cb7d8e70dd42cc947",
         "symbol": "GonieGonie.InvisibleDragon.Profile.Schedule.FixedLength"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -4217,6 +4321,32 @@
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
         "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleOperationException"
+      },
+      "path": "src/idragon/dragon/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify ScheduleOperationError across its exact three-case Profile residual slice: the dedicated schedule-operation failure family, message propagation and native exception-category behavior. The comparison directly verifies the upstream TypeError-derived ScheduleOperationError against the native InvalidOperationException-derived ScheduleOperationException family.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a45afa9c757b65d7f41b6d1957c63f0415aaa3cfcec2d8a8584a6d29dc495d8a",
+          "id": "profile-residual-operation-error-d808ccdd",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Profile/ProfileResidualOracleParityTests.cs",
+          "test_source_sha256": "sha256:e999995181ff62926b58c19ab3b87ec338e35292f7606b2218963ca13aa82083",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Profile.ProfileResidualOracleParityTests.MatchesPinnedPythonProfileResidual",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ScheduleOperationError",
+      "upstream_symbol_hash": "sha256:d808ccddebceb72eed1685cd6f236255cc7cc32a21a0b4459237b35af6c7f129"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs",
+        "source_sha256": "sha256:d016d7c29af326b171c4d17d6fd1836bd8d0f3289a886341e17c78752e0a2a3e",
         "symbol": "GonieGonie.InvisibleDragon.Profile.ScheduleType"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -4529,9 +4659,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 174,
-    "passed_receipt_count": 174,
-    "receipt_count": 174,
+    "entry_count": 179,
+    "passed_receipt_count": 179,
+    "receipt_count": 179,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
