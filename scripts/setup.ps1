@@ -453,9 +453,10 @@ function Get-EnergyPlusDetails {
     $resolvedRoot = [System.IO.Path]::GetFullPath($Root).TrimEnd('\', '/')
     $executable = Join-Path $resolvedRoot 'energyplus.exe'
     $idd = Join-Path $resolvedRoot 'Energy+.idd'
+    $epJsonSchema = Join-Path $resolvedRoot 'Energy+.schema.epJSON'
     $expandObjects = Join-Path $resolvedRoot 'ExpandObjects.exe'
 
-    foreach ($requiredFile in @($executable, $idd, $expandObjects)) {
+    foreach ($requiredFile in @($executable, $idd, $epJsonSchema, $expandObjects)) {
         if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
             return $null
         }
@@ -479,10 +480,12 @@ function Get-EnergyPlusDetails {
 
     $executableHash = Get-Sha256 -Path $executable
     $iddHash = Get-Sha256 -Path $idd
+    $epJsonSchemaHash = Get-Sha256 -Path $epJsonSchema
     $expandObjectsHash = Get-Sha256 -Path $expandObjects
 
     if ($executableHash -ne ([string] $runtimeManifest.energyplus_exe_sha256).ToLowerInvariant() -or
         $iddHash -ne ([string] $runtimeManifest.energyplus_idd_sha256).ToLowerInvariant() -or
+        $epJsonSchemaHash -ne ([string] $runtimeManifest.energyplus_epjson_schema_sha256).ToLowerInvariant() -or
         $expandObjectsHash -ne ([string] $runtimeManifest.expandobjects_sha256).ToLowerInvariant()) {
         Write-Warning "Ignoring EnergyPlus candidate '$resolvedRoot': one or more pinned runtime hashes do not match."
         return $null
@@ -500,10 +503,12 @@ function Get-EnergyPlusDetails {
         root = $resolvedRoot
         executable = $executable
         idd = $idd
+        epJsonSchema = $epJsonSchema
         source = $source
         hashes = [ordered] @{
             energyplusExeSha256 = $executableHash
             energyPlusIddSha256 = $iddHash
+            energyPlusEpJsonSchemaSha256 = $epJsonSchemaHash
             expandObjectsSha256 = $expandObjectsHash
         }
     }
@@ -767,6 +772,7 @@ if ($null -eq $energyPlus) {
         root = $null
         executable = $null
         idd = $null
+        epJsonSchema = $null
         source = $null
         hashes = $null
         reason = "No hash-matching runtime was found. Use 'dev.cmd setup -InstallEnergyPlus' to install the official portable ZIP."

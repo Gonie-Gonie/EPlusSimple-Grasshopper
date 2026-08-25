@@ -6,6 +6,7 @@
   "energyplus_archive_size": 179248139,
   "energyplus_exe_sha256": "95f6047e26b9144fcff7771a85afb1e09da1f2434b748b24c092a0be5ac94728",
   "energyplus_idd_sha256": "3b56fd8afb02a557f1c2cfb963cbc6f53963738bc6aa169f996d7a5175b324a2",
+  "energyplus_epjson_schema_sha256": "aefb16d63495d170468ecab3c935f1aeb68eb07c6551403dd11cbba61cb136fa",
   "expandobjects_sha256": "a15bd8e10f6a004e270fa4761527cabc95f776c089b92c11603faba19ed541ae",
   "weather_policy": "user-supplied",
   "created_by": "GonieGonie-Dragons"
