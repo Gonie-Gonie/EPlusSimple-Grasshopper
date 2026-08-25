@@ -25,7 +25,17 @@ $products = @(
         Source = Join-Path $repositoryRoot 'assets\icons\source\invisible-dragon.png'
         Atlas = Join-Path $repositoryRoot 'assets\icons\illustrated\invisible-dragon-functional-atlas.png'
         PackageDirectory = Join-Path $repositoryRoot 'packaging\invisible-dragon'
-        BadgeColor = [System.Drawing.Color]::FromArgb(235, 46, 35, 94)
+        Palette = [pscustomobject]@{
+            Style = 'spectral'
+            Backplate = [System.Drawing.Color]::FromArgb(224, 13, 25, 61)
+            Border = [System.Drawing.Color]::FromArgb(255, 52, 224, 255)
+            Primary = [System.Drawing.Color]::FromArgb(255, 47, 220, 255)
+            Secondary = [System.Drawing.Color]::FromArgb(255, 139, 77, 255)
+            Accent = [System.Drawing.Color]::FromArgb(255, 255, 183, 42)
+            Hot = [System.Drawing.Color]::FromArgb(255, 255, 78, 45)
+            Neutral = [System.Drawing.Color]::FromArgb(255, 244, 251, 255)
+            Ink = [System.Drawing.Color]::FromArgb(255, 7, 15, 35)
+        }
         Components = @(
             (New-ComponentIcon 'InvisibleDragonVersionComponent' 0 'none'),
             (New-ComponentIcon 'OpaqueMaterialComponent' 1 'none'),
@@ -46,7 +56,7 @@ $products = @(
             (New-ComponentIcon 'CoolingTowerComponent' 14 'cooling-tower'),
             (New-ComponentIcon 'ChillerComponent' 14 'snowflake'),
             (New-ComponentIcon 'AbsorptionChillerComponent' 14 'absorption'),
-            (New-ComponentIcon 'BoilerComponent' 13 'none'),
+            (New-ComponentIcon 'BoilerComponent' 13 'flame'),
             (New-ComponentIcon 'DistrictHeatingComponent' 13 'network'),
             (New-ComponentIcon 'PackagedAirConditionerComponent' 12 'packaged'),
             (New-ComponentIcon 'AirHandlingUnitComponent' 12 'ahu'),
@@ -64,7 +74,17 @@ $products = @(
         Source = Join-Path $repositoryRoot 'assets\icons\source\simple-dragon.png'
         Atlas = Join-Path $repositoryRoot 'assets\icons\illustrated\simple-dragon-functional-atlas.png'
         PackageDirectory = Join-Path $repositoryRoot 'packaging\simple-dragon'
-        BadgeColor = [System.Drawing.Color]::FromArgb(235, 8, 79, 75)
+        Palette = [pscustomobject]@{
+            Style = 'origami'
+            Backplate = [System.Drawing.Color]::FromArgb(238, 246, 244, 218)
+            Border = [System.Drawing.Color]::FromArgb(255, 9, 91, 78)
+            Primary = [System.Drawing.Color]::FromArgb(255, 12, 157, 150)
+            Secondary = [System.Drawing.Color]::FromArgb(255, 49, 170, 79)
+            Accent = [System.Drawing.Color]::FromArgb(255, 255, 174, 28)
+            Hot = [System.Drawing.Color]::FromArgb(255, 236, 76, 27)
+            Neutral = [System.Drawing.Color]::FromArgb(255, 255, 252, 231)
+            Ink = [System.Drawing.Color]::FromArgb(255, 17, 65, 62)
+        }
         Components = @(
             (New-ComponentIcon 'SimpleDragonVersionComponent' 0 'none'),
             (New-ComponentIcon 'SimpleDragonMaterialComponent' 1 'none'),
@@ -90,12 +110,12 @@ $products = @(
             (New-ComponentIcon 'AssignSimpleDragonVentilationSystemsComponent' 7 'assign-air'),
             (New-ComponentIcon 'AssignSimpleDragonSupplySystemsComponent' 7 'assign-supply'),
             (New-ComponentIcon 'AssembleGreenRetrofitModelComponent' 8 'assemble'),
-            (New-ComponentIcon 'ReadGreenRetrofitModelComponent' 8 'read'),
-            (New-ComponentIcon 'WriteGreenRetrofitModelComponent' 8 'write'),
+            (New-ComponentIcon 'ReadGreenRetrofitModelComponent' 8 'read-model'),
+            (New-ComponentIcon 'WriteGreenRetrofitModelComponent' 8 'write-model'),
             (New-ComponentIcon 'ConvertGreenRetrofitModelComponent' 9 'convert'),
             (New-ComponentIcon 'BuildGreenRetrofitResultComponent' 10 'build'),
-            (New-ComponentIcon 'ReadGreenRetrofitResultComponent' 10 'read'),
-            (New-ComponentIcon 'WriteGreenRetrofitResultComponent' 10 'write'),
+            (New-ComponentIcon 'ReadGreenRetrofitResultComponent' 10 'read-result'),
+            (New-ComponentIcon 'WriteGreenRetrofitResultComponent' 10 'write-result'),
             (New-ComponentIcon 'GreenRetrofitResultSummaryComponent' 11 'none'),
             (New-ComponentIcon 'GreenRetrofitDataTreeComponent' 12 'none'),
             (New-ComponentIcon 'GreenRetrofitMonthlyLinePlotComponent' 13 'none'),
@@ -226,10 +246,13 @@ function Get-OpaqueBounds {
     return [System.Drawing.Rectangle]::FromLTRB($left, $top, $right + 1, $bottom + 1)
 }
 
-function New-WhitePen {
-    param([float] $Width = 5.0)
+function New-RoundPen {
+    param(
+        [Parameter(Mandatory = $true)] [System.Drawing.Color] $Color,
+        [float] $Width = 5.0
+    )
 
-    $pen = [System.Drawing.Pen]::new([System.Drawing.Color]::White, $Width)
+    $pen = [System.Drawing.Pen]::new($Color, $Width)
     $pen.StartCap = [System.Drawing.Drawing2D.LineCap]::Round
     $pen.EndCap = [System.Drawing.Drawing2D.LineCap]::Round
     $pen.LineJoin = [System.Drawing.Drawing2D.LineJoin]::Round
@@ -240,189 +263,512 @@ function Draw-Arrow {
     param(
         [Parameter(Mandatory = $true)] [System.Drawing.Graphics] $Graphics,
         [Parameter(Mandatory = $true)] [System.Drawing.Pen] $Pen,
-        [float] $X1, [float] $Y1, [float] $X2, [float] $Y2
+        [float] $X1, [float] $Y1, [float] $X2, [float] $Y2,
+        [float] $Wing = 8.0
     )
 
     $Graphics.DrawLine($Pen, $X1, $Y1, $X2, $Y2)
     $angle = [Math]::Atan2($Y2 - $Y1, $X2 - $X1)
-    $wing = 6.5
     foreach ($delta in @(2.55, -2.55)) {
-        $wingX = $X2 + [Math]::Cos($angle + $delta) * $wing
-        $wingY = $Y2 + [Math]::Sin($angle + $delta) * $wing
+        $wingX = $X2 + [Math]::Cos($angle + $delta) * $Wing
+        $wingY = $Y2 + [Math]::Sin($angle + $delta) * $Wing
         $Graphics.DrawLine($Pen, $X2, $Y2, [float]$wingX, [float]$wingY)
     }
 }
 
 function Draw-Snowflake {
-    param([System.Drawing.Graphics] $Graphics, [System.Drawing.Pen] $Pen)
+    param(
+        [Parameter(Mandatory = $true)] [System.Drawing.Graphics] $Graphics,
+        [Parameter(Mandatory = $true)] [System.Drawing.Pen] $Pen,
+        [float] $CenterX = 48,
+        [float] $CenterY = 48,
+        [float] $Radius = 27
+    )
 
-    $Graphics.DrawLine($Pen, 61, 71, 81, 71)
-    $Graphics.DrawLine($Pen, 66, 62, 76, 80)
-    $Graphics.DrawLine($Pen, 76, 62, 66, 80)
+    foreach ($angle in @(0.0, 60.0, 120.0)) {
+        $radians = $angle * [Math]::PI / 180.0
+        $x = [Math]::Cos($radians) * $Radius
+        $y = [Math]::Sin($radians) * $Radius
+        $Graphics.DrawLine(
+            $Pen,
+            [float]($CenterX - $x),
+            [float]($CenterY - $y),
+            [float]($CenterX + $x),
+            [float]($CenterY + $y))
+    }
+
+    $branch = $Radius * 0.27
+    foreach ($angle in @(0.0, 60.0, 120.0, 180.0, 240.0, 300.0)) {
+        $radians = $angle * [Math]::PI / 180.0
+        $tipX = $CenterX + [Math]::Cos($radians) * $Radius
+        $tipY = $CenterY + [Math]::Sin($radians) * $Radius
+        foreach ($branchAngle in @(($angle + 145.0), ($angle - 145.0))) {
+            $branchRadians = $branchAngle * [Math]::PI / 180.0
+            $Graphics.DrawLine(
+                $Pen,
+                [float]$tipX,
+                [float]$tipY,
+                [float]($tipX + [Math]::Cos($branchRadians) * $branch),
+                [float]($tipY + [Math]::Sin($branchRadians) * $branch))
+        }
+    }
 }
 
 function Draw-Lightning {
-    param([System.Drawing.Graphics] $Graphics, [System.Drawing.Pen] $Pen)
+    param(
+        [Parameter(Mandatory = $true)] [System.Drawing.Graphics] $Graphics,
+        [Parameter(Mandatory = $true)] [System.Drawing.Pen] $Pen,
+        [float] $X = 32,
+        [float] $Y = 18,
+        [float] $Width = 34,
+        [float] $Height = 60
+    )
 
     $points = [System.Drawing.PointF[]]@(
-        [System.Drawing.PointF]::new(73, 59),
-        [System.Drawing.PointF]::new(65, 71),
-        [System.Drawing.PointF]::new(72, 71),
-        [System.Drawing.PointF]::new(67, 83),
-        [System.Drawing.PointF]::new(80, 67),
-        [System.Drawing.PointF]::new(73, 67))
+        [System.Drawing.PointF]::new($X + $Width * 0.66, $Y),
+        [System.Drawing.PointF]::new($X + $Width * 0.18, $Y + $Height * 0.50),
+        [System.Drawing.PointF]::new($X + $Width * 0.52, $Y + $Height * 0.50),
+        [System.Drawing.PointF]::new($X + $Width * 0.28, $Y + $Height),
+        [System.Drawing.PointF]::new($X + $Width * 0.84, $Y + $Height * 0.39),
+        [System.Drawing.PointF]::new($X + $Width * 0.55, $Y + $Height * 0.39))
     $Graphics.DrawLines($Pen, $points)
+}
+
+function Draw-Flame {
+    param(
+        [Parameter(Mandatory = $true)] [System.Drawing.Graphics] $Graphics,
+        [Parameter(Mandatory = $true)] [System.Drawing.Brush] $FillBrush,
+        [Parameter(Mandatory = $true)] [System.Drawing.Brush] $InnerBrush,
+        [Parameter(Mandatory = $true)] [System.Drawing.Pen] $OutlinePen,
+        [float] $X,
+        [float] $Y,
+        [float] $Width,
+        [float] $Height
+    )
+
+    $outer = [System.Drawing.PointF[]]@(
+        [System.Drawing.PointF]::new($X + $Width * 0.55, $Y),
+        [System.Drawing.PointF]::new($X + $Width * 0.18, $Y + $Height * 0.49),
+        [System.Drawing.PointF]::new($X + $Width * 0.26, $Y + $Height * 0.82),
+        [System.Drawing.PointF]::new($X + $Width * 0.50, $Y + $Height),
+        [System.Drawing.PointF]::new($X + $Width * 0.79, $Y + $Height * 0.78),
+        [System.Drawing.PointF]::new($X + $Width * 0.86, $Y + $Height * 0.43),
+        [System.Drawing.PointF]::new($X + $Width * 0.68, $Y + $Height * 0.20),
+        [System.Drawing.PointF]::new($X + $Width * 0.60, $Y + $Height * 0.58),
+        [System.Drawing.PointF]::new($X + $Width * 0.42, $Y + $Height * 0.38))
+    $Graphics.FillPolygon($FillBrush, $outer)
+    $Graphics.DrawPolygon($OutlinePen, $outer)
+    $inner = [System.Drawing.PointF[]]@(
+        [System.Drawing.PointF]::new($X + $Width * 0.50, $Y + $Height * 0.47),
+        [System.Drawing.PointF]::new($X + $Width * 0.36, $Y + $Height * 0.75),
+        [System.Drawing.PointF]::new($X + $Width * 0.50, $Y + $Height * 0.90),
+        [System.Drawing.PointF]::new($X + $Width * 0.66, $Y + $Height * 0.72))
+    $Graphics.FillPolygon($InnerBrush, $inner)
+}
+
+function Draw-Fan {
+    param(
+        [Parameter(Mandatory = $true)] [System.Drawing.Graphics] $Graphics,
+        [Parameter(Mandatory = $true)] [System.Drawing.Brush] $BladeBrush,
+        [Parameter(Mandatory = $true)] [System.Drawing.Brush] $HubBrush,
+        [Parameter(Mandatory = $true)] [System.Drawing.Pen] $OutlinePen,
+        [float] $CenterX,
+        [float] $CenterY,
+        [float] $Radius
+    )
+
+    $Graphics.DrawEllipse(
+        $OutlinePen,
+        $CenterX - $Radius,
+        $CenterY - $Radius,
+        $Radius * 2,
+        $Radius * 2)
+    foreach ($angle in @(0.0, 120.0, 240.0)) {
+        $radians = $angle * [Math]::PI / 180.0
+        $next = ($angle + 46.0) * [Math]::PI / 180.0
+        $blade = [System.Drawing.PointF[]]@(
+            [System.Drawing.PointF]::new(
+                $CenterX + [Math]::Cos($radians) * $Radius * 0.18,
+                $CenterY + [Math]::Sin($radians) * $Radius * 0.18),
+            [System.Drawing.PointF]::new(
+                $CenterX + [Math]::Cos($radians) * $Radius * 0.90,
+                $CenterY + [Math]::Sin($radians) * $Radius * 0.90),
+            [System.Drawing.PointF]::new(
+                $CenterX + [Math]::Cos($next) * $Radius * 0.55,
+                $CenterY + [Math]::Sin($next) * $Radius * 0.55))
+        $Graphics.FillPolygon($BladeBrush, $blade)
+    }
+    $Graphics.FillEllipse($HubBrush, $CenterX - 5, $CenterY - 5, 10, 10)
+}
+
+function Draw-FunctionalBackplate {
+    param(
+        [Parameter(Mandatory = $true)] [System.Drawing.Graphics] $Graphics,
+        [Parameter(Mandatory = $true)] [object] $Palette
+    )
+
+    $backplateBrush = [System.Drawing.SolidBrush]::new($Palette.Backplate)
+    $borderPen = New-RoundPen $Palette.Border 5.5
+    $secondaryPen = New-RoundPen $Palette.Secondary 3.5
+    try {
+        if ([string] $Palette.Style -eq 'spectral') {
+            $Graphics.FillEllipse($backplateBrush, 9, 9, 78, 78)
+            $Graphics.DrawArc($borderPen, 9, 9, 78, 78, 195, 245)
+            $Graphics.DrawArc($secondaryPen, 13, 13, 70, 70, 15, 135)
+        }
+        else {
+            $hexagon = [System.Drawing.PointF[]]@(
+                [System.Drawing.PointF]::new(48, 7),
+                [System.Drawing.PointF]::new(83, 27),
+                [System.Drawing.PointF]::new(83, 69),
+                [System.Drawing.PointF]::new(48, 89),
+                [System.Drawing.PointF]::new(13, 69),
+                [System.Drawing.PointF]::new(13, 27))
+            $Graphics.FillPolygon($backplateBrush, $hexagon)
+            $Graphics.DrawPolygon($borderPen, $hexagon)
+            $foldBrush = [System.Drawing.SolidBrush]::new($Palette.Accent)
+            try {
+                $Graphics.FillPolygon($foldBrush, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(13, 27),
+                    [System.Drawing.PointF]::new(31, 18),
+                    [System.Drawing.PointF]::new(22, 40)))
+            }
+            finally { $foldBrush.Dispose() }
+        }
+    }
+    finally {
+        $secondaryPen.Dispose()
+        $borderPen.Dispose()
+        $backplateBrush.Dispose()
+    }
 }
 
 function Draw-Overlay {
     param(
         [Parameter(Mandatory = $true)] [System.Drawing.Graphics] $Graphics,
         [Parameter(Mandatory = $true)] [string] $Kind,
-        [Parameter(Mandatory = $true)] [System.Drawing.Color] $BadgeColor
+        [Parameter(Mandatory = $true)] [object] $Palette
     )
 
     if ($Kind -eq 'none') { return }
 
-    $badgeBrush = [System.Drawing.SolidBrush]::new($BadgeColor)
-    $borderPen = [System.Drawing.Pen]::new([System.Drawing.Color]::FromArgb(235, 9, 18, 29), 3.0)
-    $whitePen = New-WhitePen
-    $thinPen = New-WhitePen 3.2
-    $accentPen = [System.Drawing.Pen]::new([System.Drawing.Color]::FromArgb(255, 255, 180, 45), 4.2)
-    $accentPen.StartCap = [System.Drawing.Drawing2D.LineCap]::Round
-    $accentPen.EndCap = [System.Drawing.Drawing2D.LineCap]::Round
-    try {
-        $Graphics.FillEllipse($badgeBrush, 53, 53, 36, 36)
-        $Graphics.DrawEllipse($borderPen, 53, 53, 36, 36)
+    Draw-FunctionalBackplate $Graphics $Palette
 
+    $primaryBrush = [System.Drawing.SolidBrush]::new($Palette.Primary)
+    $secondaryBrush = [System.Drawing.SolidBrush]::new($Palette.Secondary)
+    $accentBrush = [System.Drawing.SolidBrush]::new($Palette.Accent)
+    $hotBrush = [System.Drawing.SolidBrush]::new($Palette.Hot)
+    $neutralBrush = [System.Drawing.SolidBrush]::new($Palette.Neutral)
+    $inkBrush = [System.Drawing.SolidBrush]::new($Palette.Ink)
+    $primaryPen = New-RoundPen $Palette.Primary 6.0
+    $secondaryPen = New-RoundPen $Palette.Secondary 6.0
+    $accentPen = New-RoundPen $Palette.Accent 6.0
+    $hotPen = New-RoundPen $Palette.Hot 6.0
+    $neutralPen = New-RoundPen $Palette.Neutral 5.0
+    $inkPen = New-RoundPen $Palette.Ink 5.5
+    $thinInkPen = New-RoundPen $Palette.Ink 3.5
+    try {
         switch ($Kind) {
             'membrane' {
-                foreach ($x in @(59, 67, 75)) { $Graphics.DrawLine($whitePen, $x, 72, $x + 4, 72) }
+                $Graphics.FillRectangle($neutralBrush, 20, 24, 56, 48)
+                $Graphics.DrawRectangle($inkPen, 20, 24, 56, 48)
+                foreach ($y in @(34, 46, 58)) {
+                    $Graphics.DrawLine($primaryPen, 25, $y, 71, $y)
+                }
+                $Graphics.DrawLine($accentPen, 28, 67, 68, 28)
             }
             'polyline' {
-                $Graphics.DrawLines($thinPen, [System.Drawing.PointF[]]@(
-                    [System.Drawing.PointF]::new(59, 80), [System.Drawing.PointF]::new(64, 63),
-                    [System.Drawing.PointF]::new(73, 76), [System.Drawing.PointF]::new(82, 60)))
-                foreach ($point in @(@(59,80), @(64,63), @(73,76), @(82,60))) {
-                    $Graphics.FillEllipse([System.Drawing.Brushes]::White, $point[0] - 2, $point[1] - 2, 5, 5)
+                $Graphics.DrawLines($neutralPen, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(17, 72), [System.Drawing.PointF]::new(30, 24),
+                    [System.Drawing.PointF]::new(51, 62), [System.Drawing.PointF]::new(78, 19)))
+                foreach ($point in @(@(17,72), @(30,24), @(51,62), @(78,19))) {
+                    $Graphics.FillEllipse($primaryBrush, $point[0] - 6, $point[1] - 6, 12, 12)
+                    $Graphics.DrawEllipse($inkPen, $point[0] - 6, $point[1] - 6, 12, 12)
                 }
             }
-            { $_ -in @('assemble', 'build') } {
-                $Graphics.DrawLine($whitePen, 61, 71, 81, 71)
-                $Graphics.DrawLine($whitePen, 71, 61, 71, 81)
-                if ($Kind -eq 'assemble') { $Graphics.DrawEllipse($thinPen, 58, 58, 26, 26) }
+            'assemble' {
+                foreach ($box in @(@(17,24), @(17,58), @(59,41))) {
+                    $Graphics.FillRectangle($primaryBrush, $box[0], $box[1], 20, 16)
+                    $Graphics.DrawRectangle($inkPen, $box[0], $box[1], 20, 16)
+                }
+                $Graphics.DrawLine($neutralPen, 37, 32, 58, 48)
+                $Graphics.DrawLine($neutralPen, 37, 66, 58, 50)
+                Draw-Arrow $Graphics $accentPen 64 49 78 49 7
+            }
+            'build' {
+                $Graphics.FillRectangle($neutralBrush, 24, 17, 48, 62)
+                $Graphics.DrawRectangle($inkPen, 24, 17, 48, 62)
+                $Graphics.DrawLine($primaryPen, 34, 32, 62, 32)
+                $Graphics.DrawLine($primaryPen, 34, 43, 56, 43)
+                $Graphics.FillEllipse($secondaryBrush, 44, 50, 30, 30)
+                $Graphics.DrawEllipse($inkPen, 44, 50, 30, 30)
+                $Graphics.DrawLine($neutralPen, 51, 65, 67, 65)
+                $Graphics.DrawLine($neutralPen, 59, 57, 59, 73)
             }
             'compile' {
-                $Graphics.DrawLines($whitePen, [System.Drawing.PointF[]]@(
-                    [System.Drawing.PointF]::new(67, 60), [System.Drawing.PointF]::new(59, 71),
-                    [System.Drawing.PointF]::new(67, 82)))
-                $Graphics.DrawLines($whitePen, [System.Drawing.PointF[]]@(
-                    [System.Drawing.PointF]::new(75, 60), [System.Drawing.PointF]::new(83, 71),
-                    [System.Drawing.PointF]::new(75, 82)))
+                $Graphics.DrawLines($primaryPen, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(38, 22), [System.Drawing.PointF]::new(17, 48),
+                    [System.Drawing.PointF]::new(38, 74)))
+                $Graphics.DrawLines($secondaryPen, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(58, 22), [System.Drawing.PointF]::new(79, 48),
+                    [System.Drawing.PointF]::new(58, 74)))
+                $Graphics.DrawLine($accentPen, 53, 19, 43, 77)
             }
-            'read' { Draw-Arrow $Graphics $whitePen 81 60 61 81 }
-            'write' { Draw-Arrow $Graphics $whitePen 61 81 81 60 }
+            { $_ -in @('read', 'read-model', 'read-result') } {
+                $Graphics.FillRectangle($neutralBrush, 19, 18, 43, 60)
+                $Graphics.DrawRectangle($inkPen, 19, 18, 43, 60)
+                if ($Kind -eq 'read-model') {
+                    $Graphics.FillRectangle($primaryBrush, 27, 29, 13, 13)
+                    $Graphics.FillRectangle($secondaryBrush, 41, 38, 13, 13)
+                    $Graphics.DrawRectangle($thinInkPen, 27, 29, 13, 13)
+                    $Graphics.DrawRectangle($thinInkPen, 41, 38, 13, 13)
+                }
+                elseif ($Kind -eq 'read-result') {
+                    $Graphics.FillRectangle($primaryBrush, 27, 40, 7, 12)
+                    $Graphics.FillRectangle($secondaryBrush, 37, 31, 7, 21)
+                    $Graphics.FillRectangle($accentBrush, 47, 23, 7, 29)
+                    $Graphics.DrawLine($thinInkPen, 25, 54, 56, 54)
+                }
+                else {
+                    $Graphics.DrawLine($primaryPen, 28, 33, 52, 33)
+                    $Graphics.DrawLine($primaryPen, 28, 45, 48, 45)
+                }
+                Draw-Arrow $Graphics $secondaryPen 80 66 48 66 10
+            }
+            { $_ -in @('write', 'write-model', 'write-result') } {
+                $Graphics.FillRectangle($neutralBrush, 34, 18, 43, 60)
+                $Graphics.DrawRectangle($inkPen, 34, 18, 43, 60)
+                if ($Kind -eq 'write-model') {
+                    $Graphics.FillRectangle($primaryBrush, 42, 29, 13, 13)
+                    $Graphics.FillRectangle($secondaryBrush, 56, 38, 13, 13)
+                    $Graphics.DrawRectangle($thinInkPen, 42, 29, 13, 13)
+                    $Graphics.DrawRectangle($thinInkPen, 56, 38, 13, 13)
+                }
+                elseif ($Kind -eq 'write-result') {
+                    $Graphics.FillRectangle($primaryBrush, 42, 40, 7, 12)
+                    $Graphics.FillRectangle($secondaryBrush, 52, 31, 7, 21)
+                    $Graphics.FillRectangle($accentBrush, 62, 23, 7, 29)
+                    $Graphics.DrawLine($thinInkPen, 40, 54, 71, 54)
+                }
+                else {
+                    $Graphics.DrawLine($primaryPen, 44, 33, 67, 33)
+                    $Graphics.DrawLine($primaryPen, 44, 45, 63, 45)
+                }
+                Draw-Arrow $Graphics $hotPen 48 66 16 66 10
+            }
             'extract' {
-                $Graphics.DrawRectangle($thinPen, 59, 62, 15, 17)
-                Draw-Arrow $Graphics $whitePen 70 72 83 60
+                $Graphics.FillRectangle($primaryBrush, 16, 28, 38, 42)
+                $Graphics.DrawRectangle($inkPen, 16, 28, 38, 42)
+                $Graphics.DrawLine($neutralPen, 22, 39, 47, 39)
+                Draw-Arrow $Graphics $accentPen 43 58 80 28 11
             }
             'convert' {
-                Draw-Arrow $Graphics $thinPen 59 66 81 66
-                Draw-Arrow $Graphics $thinPen 82 76 60 76
+                Draw-Arrow $Graphics $primaryPen 17 35 77 35 11
+                Draw-Arrow $Graphics $hotPen 79 61 19 61 11
             }
             'batch' {
-                foreach ($offset in @(0, 5, 10)) { $Graphics.DrawLine($thinPen, 59, 61 + $offset, 72, 61 + $offset) }
-                $Graphics.FillPolygon([System.Drawing.Brushes]::White, [System.Drawing.PointF[]]@(
-                    [System.Drawing.PointF]::new(72, 72), [System.Drawing.PointF]::new(72, 84),
-                    [System.Drawing.PointF]::new(84, 78)))
+                $Graphics.FillRectangle($neutralBrush, 17, 18, 48, 60)
+                $Graphics.DrawRectangle($inkPen, 17, 18, 48, 60)
+                foreach ($y in @(31, 43, 55, 67)) {
+                    $Graphics.DrawLine($primaryPen, 25, $y, 52, $y)
+                }
+                $Graphics.FillPolygon($accentBrush, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(58, 41), [System.Drawing.PointF]::new(58, 75),
+                    [System.Drawing.PointF]::new(84, 58)))
+                $Graphics.DrawPolygon($inkPen, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(58, 41), [System.Drawing.PointF]::new(58, 75),
+                    [System.Drawing.PointF]::new(84, 58)))
             }
             'heat-pump' {
-                Draw-Arrow $Graphics $thinPen 61 67 79 63
-                Draw-Arrow $Graphics $thinPen 81 75 63 79
+                $Graphics.FillEllipse($inkBrush, 20, 18, 56, 60)
+                Draw-Arrow $Graphics $primaryPen 24 35 70 35 10
+                Draw-Arrow $Graphics $hotPen 72 61 26 61 10
+                $Graphics.FillEllipse($neutralBrush, 40, 40, 16, 16)
+                $Graphics.DrawEllipse($accentPen, 40, 40, 16, 16)
             }
             'ground' {
-                foreach ($y in @(65, 72, 79)) { $Graphics.DrawLine($thinPen, 58, $y, 84, $y) }
-                Draw-Arrow $Graphics $thinPen 71 59 71 82
+                $Graphics.FillRectangle($neutralBrush, 25, 15, 46, 21)
+                $Graphics.DrawRectangle($inkPen, 25, 15, 46, 21)
+                foreach ($y in @(51, 63, 75)) { $Graphics.DrawLine($secondaryPen, 15, $y, 81, $y) }
+                $Graphics.DrawLine($primaryPen, 34, 29, 34, 67)
+                $Graphics.DrawArc($primaryPen, 34, 56, 28, 20, 0, 180)
+                $Graphics.DrawLine($primaryPen, 62, 29, 62, 67)
             }
             'cooling-tower' {
-                $Graphics.DrawLines($whitePen, [System.Drawing.PointF[]]@(
-                    [System.Drawing.PointF]::new(64, 59), [System.Drawing.PointF]::new(60, 82),
-                    [System.Drawing.PointF]::new(82, 82), [System.Drawing.PointF]::new(78, 59)))
-                $Graphics.FillEllipse([System.Drawing.Brushes]::DeepSkyBlue, 66, 64, 5, 7)
-                $Graphics.FillEllipse([System.Drawing.Brushes]::DeepSkyBlue, 73, 70, 5, 7)
+                $tower = [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(28, 24), [System.Drawing.PointF]::new(68, 24),
+                    [System.Drawing.PointF]::new(60, 48), [System.Drawing.PointF]::new(70, 78),
+                    [System.Drawing.PointF]::new(26, 78), [System.Drawing.PointF]::new(36, 48))
+                $Graphics.FillPolygon($neutralBrush, $tower)
+                $Graphics.DrawPolygon($inkPen, $tower)
+                $Graphics.DrawArc($primaryPen, 27, 10, 24, 22, 180, 145)
+                $Graphics.DrawArc($primaryPen, 46, 7, 25, 24, 180, 150)
+                foreach ($point in @(@(39,51), @(50,59), @(58,49))) {
+                    $Graphics.FillEllipse($primaryBrush, $point[0] - 4, $point[1] - 5, 8, 11)
+                }
             }
-            'snowflake' { Draw-Snowflake $Graphics $whitePen }
+            'snowflake' {
+                $Graphics.FillEllipse($inkBrush, 16, 16, 64, 64)
+                Draw-Snowflake $Graphics $primaryPen 48 48 27
+                $Graphics.FillEllipse($neutralBrush, 43, 43, 10, 10)
+            }
             'absorption' {
-                Draw-Snowflake $Graphics $thinPen
-                $Graphics.DrawEllipse($accentPen, 73, 73, 8, 10)
+                $Graphics.DrawLine($neutralPen, 48, 19, 48, 77)
+                Draw-Snowflake $Graphics $primaryPen 31 45 17
+                Draw-Flame $Graphics $hotBrush $accentBrush $inkPen 49 27 29 43
             }
             'flame' {
-                $Graphics.DrawLines($accentPen, [System.Drawing.PointF[]]@(
-                    [System.Drawing.PointF]::new(71, 59), [System.Drawing.PointF]::new(63, 73),
-                    [System.Drawing.PointF]::new(70, 83), [System.Drawing.PointF]::new(80, 73),
-                    [System.Drawing.PointF]::new(75, 65), [System.Drawing.PointF]::new(71, 75)))
+                $Graphics.FillRectangle($neutralBrush, 21, 18, 54, 61)
+                $Graphics.DrawRectangle($inkPen, 21, 18, 54, 61)
+                $Graphics.DrawLine($inkPen, 33, 17, 33, 10)
+                $Graphics.DrawLine($inkPen, 63, 17, 63, 10)
+                Draw-Flame $Graphics $hotBrush $accentBrush $inkPen 32 33 33 40
             }
             { $_ -in @('network', 'assign', 'assign-air', 'assign-supply') } {
-                $networkPen = if ($Kind -eq 'assign-air') {
-                    [System.Drawing.Pen]::new([System.Drawing.Color]::DeepSkyBlue, 4.0)
+                $flowPen = if ($Kind -eq 'assign-air') {
+                    $primaryPen
                 } elseif ($Kind -eq 'assign-supply') {
-                    [System.Drawing.Pen]::new([System.Drawing.Color]::Orange, 4.0)
-                } else { New-WhitePen 4.0 }
-                try {
-                    $Graphics.DrawLine($networkPen, 59, 71, 70, 71)
-                    $Graphics.DrawLine($networkPen, 70, 71, 82, 61)
-                    $Graphics.DrawLine($networkPen, 70, 71, 82, 81)
-                    foreach ($point in @(@(59,71), @(82,61), @(82,81))) {
-                        $Graphics.FillEllipse([System.Drawing.Brushes]::White, $point[0] - 2, $point[1] - 2, 5, 5)
+                    $accentPen
+                } elseif ($Kind -eq 'network') {
+                    $hotPen
+                } else {
+                    $secondaryPen
+                }
+                if ($Kind -eq 'network') {
+                    $Graphics.DrawLine($flowPen, 25, 64, 48, 25)
+                    $Graphics.DrawLine($flowPen, 48, 25, 73, 64)
+                    $Graphics.DrawLine($flowPen, 25, 64, 73, 64)
+                    foreach ($point in @(@(25,64), @(48,25), @(73,64))) {
+                        $Graphics.FillEllipse($neutralBrush, $point[0] - 9, $point[1] - 9, 18, 18)
+                        $Graphics.DrawEllipse($inkPen, $point[0] - 9, $point[1] - 9, 18, 18)
                     }
                 }
-                finally { $networkPen.Dispose() }
-            }
-            'packaged' {
-                $Graphics.DrawRectangle($whitePen, 59, 59, 24, 24)
-                $Graphics.DrawLine($thinPen, 64, 71, 78, 71)
-                $Graphics.DrawLine($thinPen, 71, 64, 71, 78)
-            }
-            'ahu' {
-                $Graphics.DrawRectangle($whitePen, 58, 63, 19, 16)
-                Draw-Arrow $Graphics $thinPen 72 71 84 71
-            }
-            'coil' {
-                $Graphics.DrawArc($whitePen, 57, 61, 14, 20, -90, 180)
-                $Graphics.DrawArc($whitePen, 68, 61, 14, 20, 90, 180)
-            }
-            { $_ -in @('radiator', 'electric-radiator') } {
-                foreach ($x in @(60, 66, 72, 78)) { $Graphics.DrawLine($thinPen, $x, 61, $x, 81) }
-                if ($Kind -eq 'electric-radiator') { Draw-Lightning $Graphics $accentPen }
-            }
-            { $_ -in @('radiant-floor', 'electric-floor') } {
-                foreach ($y in @(73, 79, 84)) { $Graphics.DrawLine($thinPen, 58, $y, 84, $y) }
-                if ($Kind -eq 'electric-floor') {
-                    Draw-Lightning $Graphics $accentPen
-                } else {
-                    Draw-Arrow $Graphics $thinPen 64 72 64 60
-                    Draw-Arrow $Graphics $thinPen 77 72 77 60
+                elseif ($Kind -eq 'assign-air') {
+                    Draw-Fan $Graphics $primaryBrush $accentBrush $inkPen 25 48 14
+                    $Graphics.DrawBezier($primaryPen, 39, 35, 51, 23, 64, 23, 79, 31)
+                    $Graphics.DrawBezier($primaryPen, 39, 58, 51, 70, 64, 70, 79, 63)
+                    Draw-Arrow $Graphics $primaryPen 63 27 80 31 7
+                    Draw-Arrow $Graphics $primaryPen 63 67 80 63 7
+                }
+                elseif ($Kind -eq 'assign-supply') {
+                    $Graphics.FillRectangle($accentBrush, 13, 35, 24, 28)
+                    $Graphics.DrawRectangle($inkPen, 13, 35, 24, 28)
+                    $Graphics.DrawLine($accentPen, 37, 49, 53, 49)
+                    $Graphics.DrawLine($accentPen, 53, 49, 69, 29)
+                    $Graphics.DrawLine($accentPen, 53, 49, 69, 69)
+                    foreach ($point in @(@(74,25), @(74,73))) {
+                        $Graphics.FillRectangle($secondaryBrush, $point[0] - 9, $point[1] - 9, 18, 18)
+                        $Graphics.DrawRectangle($inkPen, $point[0] - 9, $point[1] - 9, 18, 18)
+                    }
+                }
+                else {
+                    $Graphics.FillEllipse($neutralBrush, 13, 38, 22, 22)
+                    $Graphics.DrawEllipse($inkPen, 13, 38, 22, 22)
+                    Draw-Arrow $Graphics $flowPen 34 49 62 31 9
+                    Draw-Arrow $Graphics $flowPen 34 49 62 67 9
+                    foreach ($point in @(@(69,27), @(69,71))) {
+                        $Graphics.FillEllipse($secondaryBrush, $point[0] - 10, $point[1] - 10, 20, 20)
+                        $Graphics.DrawEllipse($inkPen, $point[0] - 10, $point[1] - 10, 20, 20)
+                    }
                 }
             }
+            'packaged' {
+                $Graphics.FillRectangle($neutralBrush, 18, 17, 60, 62)
+                $Graphics.DrawRectangle($inkPen, 18, 17, 60, 62)
+                Draw-Fan $Graphics $primaryBrush $accentBrush $inkPen 47 47 22
+                $Graphics.DrawLine($secondaryPen, 68, 27, 68, 67)
+                foreach ($y in @(32, 43, 54, 65)) { $Graphics.DrawLine($thinInkPen, 65, $y, 73, $y) }
+            }
+            'ahu' {
+                $Graphics.FillRectangle($neutralBrush, 9, 27, 78, 43)
+                $Graphics.DrawRectangle($inkPen, 9, 27, 78, 43)
+                $Graphics.DrawLine($inkPen, 32, 28, 32, 69)
+                $Graphics.DrawLine($inkPen, 58, 28, 58, 69)
+                $Graphics.DrawLine($primaryPen, 16, 61, 28, 35)
+                Draw-Fan $Graphics $secondaryBrush $accentBrush $thinInkPen 46 48 10
+                Draw-Arrow $Graphics $hotPen 62 48 82 48 7
+            }
+            'coil' {
+                Draw-Fan $Graphics $secondaryBrush $accentBrush $inkPen 29 48 20
+                foreach ($x in @(49, 60, 71)) {
+                    $Graphics.DrawArc($primaryPen, $x, 25, 14, 46, -90, 180)
+                }
+            }
+            'radiator' {
+                $Graphics.FillRectangle($neutralBrush, 17, 24, 62, 48)
+                $Graphics.DrawRectangle($inkPen, 17, 24, 62, 48)
+                foreach ($x in @(26, 37, 48, 59, 70)) {
+                    $Graphics.DrawLine($hotPen, $x, 31, $x, 65)
+                }
+                $Graphics.DrawLine($inkPen, 26, 72, 26, 81)
+                $Graphics.DrawLine($inkPen, 70, 72, 70, 81)
+            }
+            'electric-radiator' {
+                $Graphics.FillRectangle($primaryBrush, 23, 17, 50, 62)
+                $Graphics.DrawRectangle($inkPen, 23, 17, 50, 62)
+                foreach ($y in @(29, 43, 57, 71)) { $Graphics.DrawLine($neutralPen, 29, $y, 67, $y) }
+                Draw-Lightning $Graphics $accentPen 34 21 31 53
+            }
+            'radiant-floor' {
+                $floor = [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(14, 43), [System.Drawing.PointF]::new(65, 23),
+                    [System.Drawing.PointF]::new(83, 53), [System.Drawing.PointF]::new(31, 76))
+                $Graphics.FillPolygon($neutralBrush, $floor)
+                $Graphics.DrawPolygon($inkPen, $floor)
+                $Graphics.DrawLines($hotPen, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(23, 48), [System.Drawing.PointF]::new(61, 33),
+                    [System.Drawing.PointF]::new(70, 42), [System.Drawing.PointF]::new(31, 58),
+                    [System.Drawing.PointF]::new(39, 68), [System.Drawing.PointF]::new(77, 51)))
+            }
+            'electric-floor' {
+                $Graphics.FillPolygon($primaryBrush, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(13, 39), [System.Drawing.PointF]::new(65, 20),
+                    [System.Drawing.PointF]::new(84, 57), [System.Drawing.PointF]::new(32, 78)))
+                $Graphics.DrawLines($neutralPen, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(20, 46), [System.Drawing.PointF]::new(34, 50),
+                    [System.Drawing.PointF]::new(43, 40), [System.Drawing.PointF]::new(55, 45),
+                    [System.Drawing.PointF]::new(66, 34), [System.Drawing.PointF]::new(77, 43)))
+                Draw-Lightning $Graphics $accentPen 37 20 28 50
+            }
             'erv' {
-                Draw-Arrow $Graphics $thinPen 59 63 82 78
-                Draw-Arrow $Graphics $thinPen 82 63 59 78
+                $Graphics.FillPolygon($neutralBrush, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(48, 29), [System.Drawing.PointF]::new(66, 48),
+                    [System.Drawing.PointF]::new(48, 67), [System.Drawing.PointF]::new(30, 48)))
+                $Graphics.DrawPolygon($inkPen, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(48, 29), [System.Drawing.PointF]::new(66, 48),
+                    [System.Drawing.PointF]::new(48, 67), [System.Drawing.PointF]::new(30, 48)))
+                Draw-Arrow $Graphics $primaryPen 14 25 80 68 12
+                Draw-Arrow $Graphics $hotPen 82 27 16 70 12
             }
             'photovoltaic' {
-                $Graphics.DrawRectangle($thinPen, 58, 66, 22, 16)
-                $Graphics.DrawLine($thinPen, 65, 66, 65, 82)
-                $Graphics.DrawLine($thinPen, 72, 66, 72, 82)
-                $Graphics.DrawLine($thinPen, 58, 74, 80, 74)
-                $Graphics.DrawEllipse($accentPen, 76, 57, 7, 7)
+                $panel = [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(15, 35), [System.Drawing.PointF]::new(64, 24),
+                    [System.Drawing.PointF]::new(77, 67), [System.Drawing.PointF]::new(28, 77))
+                $Graphics.FillPolygon($primaryBrush, $panel)
+                $Graphics.DrawPolygon($inkPen, $panel)
+                $Graphics.DrawLine($neutralPen, 39, 30, 52, 72)
+                $Graphics.DrawLine($neutralPen, 21, 49, 70, 38)
+                $Graphics.DrawLine($neutralPen, 25, 63, 74, 52)
+                $Graphics.FillEllipse($accentBrush, 66, 10, 20, 20)
+                $Graphics.DrawEllipse($inkPen, 66, 10, 20, 20)
             }
             default { throw "Unknown icon overlay '$Kind'." }
         }
     }
     finally {
+        $thinInkPen.Dispose()
+        $inkPen.Dispose()
+        $neutralPen.Dispose()
+        $hotPen.Dispose()
         $accentPen.Dispose()
-        $thinPen.Dispose()
-        $whitePen.Dispose()
-        $borderPen.Dispose()
-        $badgeBrush.Dispose()
+        $secondaryPen.Dispose()
+        $primaryPen.Dispose()
+        $inkBrush.Dispose()
+        $neutralBrush.Dispose()
+        $hotBrush.Dispose()
+        $accentBrush.Dispose()
+        $secondaryBrush.Dispose()
+        $primaryBrush.Dispose()
     }
 }
 
@@ -431,7 +777,7 @@ function Write-ComponentPng {
         [Parameter(Mandatory = $true)] [System.Drawing.Bitmap] $Atlas,
         [Parameter(Mandatory = $true)] [ValidateRange(0, 15)] [int] $Tile,
         [Parameter(Mandatory = $true)] [string] $Overlay,
-        [Parameter(Mandatory = $true)] [System.Drawing.Color] $BadgeColor,
+        [Parameter(Mandatory = $true)] [object] $Palette,
         [Parameter(Mandatory = $true)] [string] $Destination
     )
 
@@ -456,7 +802,7 @@ function Write-ComponentPng {
             Set-HighQualityDrawing $graphics
             Draw-ImageRegion $graphics $Atlas $destinationRectangle $source
             $graphics.CompositingMode = [System.Drawing.Drawing2D.CompositingMode]::SourceOver
-            Draw-Overlay $graphics $Overlay $BadgeColor
+            Draw-Overlay $graphics $Overlay $Palette
         }
         finally { $graphics.Dispose() }
 
@@ -552,13 +898,144 @@ function Write-ContactSheet {
     finally { $sheet.Dispose() }
 }
 
+function New-IconVisualSample {
+    param([Parameter(Mandatory = $true)] [System.Drawing.Bitmap] $Bitmap)
+
+    $pixelCount = $Bitmap.Width * $Bitmap.Height
+    $argb = [int[]]::new($pixelCount)
+    $light = [double[]]::new($pixelCount * 3)
+    $dark = [double[]]::new($pixelCount * 3)
+    $lightBackground = @(242.0, 244.0, 247.0)
+    $darkBackground = @(45.0, 49.0, 57.0)
+    $index = 0
+    for ($y = 0; $y -lt $Bitmap.Height; $y++) {
+        for ($x = 0; $x -lt $Bitmap.Width; $x++) {
+            $color = $Bitmap.GetPixel($x, $y)
+            $argb[$index] = $color.ToArgb()
+            $alpha = $color.A / 255.0
+            $inverseAlpha = 1.0 - $alpha
+            $channels = @([double] $color.R, [double] $color.G, [double] $color.B)
+            $channelOffset = $index * 3
+            for ($channel = 0; $channel -lt 3; $channel++) {
+                $light[$channelOffset + $channel] =
+                    $channels[$channel] * $alpha + $lightBackground[$channel] * $inverseAlpha
+                $dark[$channelOffset + $channel] =
+                    $channels[$channel] * $alpha + $darkBackground[$channel] * $inverseAlpha
+            }
+            $index++
+        }
+    }
+
+    return [pscustomobject]@{
+        Argb = $argb
+        Light = $light
+        Dark = $dark
+    }
+}
+
+function Measure-IconVisualSeparation {
+    param(
+        [Parameter(Mandatory = $true)] [object] $Left,
+        [Parameter(Mandatory = $true)] [object] $Right
+    )
+
+    $identical = 0
+    for ($index = 0; $index -lt $Left.Argb.Length; $index++) {
+        if ($Left.Argb[$index] -eq $Right.Argb[$index]) {
+            $identical++
+        }
+    }
+
+    $lightSquared = 0.0
+    $darkSquared = 0.0
+    for ($index = 0; $index -lt $Left.Light.Length; $index++) {
+        $lightDelta = $Left.Light[$index] - $Right.Light[$index]
+        $darkDelta = $Left.Dark[$index] - $Right.Dark[$index]
+        $lightSquared += $lightDelta * $lightDelta
+        $darkSquared += $darkDelta * $darkDelta
+    }
+
+    $lightDistance = [Math]::Sqrt($lightSquared / $Left.Light.Length) / 255.0
+    $darkDistance = [Math]::Sqrt($darkSquared / $Left.Dark.Length) / 255.0
+    return [pscustomobject]@{
+        IdenticalPixelRatio = $identical / [double] $Left.Argb.Length
+        PerceptualDistance = [Math]::Min($lightDistance, $darkDistance)
+    }
+}
+
+function Assert-IconVisualSeparation {
+    param(
+        [Parameter(Mandatory = $true)] [object[]] $Samples,
+        [Parameter(Mandatory = $true)] [string] $Scope
+    )
+
+    # These thresholds deliberately reject the old lower-right-badge system,
+    # whose confusing families shared 82-91% of their pixels and reached a
+    # normalized light/dark RMS distance as low as 0.045.
+    $maximumIdenticalPixelRatio = 0.72
+    $minimumPerceptualDistance = 0.10
+    $maximumIdentical = [pscustomobject]@{ Value = -1.0; Left = ''; Right = '' }
+    $minimumDistance = [pscustomobject]@{ Value = [double]::PositiveInfinity; Left = ''; Right = '' }
+    for ($leftIndex = 0; $leftIndex -lt $Samples.Count; $leftIndex++) {
+        for ($rightIndex = $leftIndex + 1; $rightIndex -lt $Samples.Count; $rightIndex++) {
+            $left = $Samples[$leftIndex]
+            $right = $Samples[$rightIndex]
+            $separation = Measure-IconVisualSeparation $left.Sample $right.Sample
+            if ($separation.IdenticalPixelRatio -gt $maximumIdentical.Value) {
+                $maximumIdentical = [pscustomobject]@{
+                    Value = [double] $separation.IdenticalPixelRatio
+                    Left = $left.Name
+                    Right = $right.Name
+                }
+            }
+            if ($separation.PerceptualDistance -lt $minimumDistance.Value) {
+                $minimumDistance = [pscustomobject]@{
+                    Value = [double] $separation.PerceptualDistance
+                    Left = $left.Name
+                    Right = $right.Name
+                }
+            }
+        }
+    }
+
+    if ($maximumIdentical.Value -gt $maximumIdenticalPixelRatio) {
+        throw ("Component icons are too pixel-similar in {0}: '{1}' and '{2}' share {3:P1}; maximum is {4:P0}." -f
+            $Scope,
+            $maximumIdentical.Left,
+            $maximumIdentical.Right,
+            $maximumIdentical.Value,
+            $maximumIdenticalPixelRatio)
+    }
+    if ($minimumDistance.Value -lt $minimumPerceptualDistance) {
+        throw ("Component icons are not perceptually separated in {0}: '{1}' and '{2}' have distance {3:F3}; minimum is {4:F2}." -f
+            $Scope,
+            $minimumDistance.Left,
+            $minimumDistance.Right,
+            $minimumDistance.Value,
+            $minimumPerceptualDistance)
+    }
+
+    Write-Host ("Icon separation ({0}): maximum identical pixels {1:P1} ({2} / {3}); minimum perceptual distance {4:F3} ({5} / {6})." -f
+        $Scope,
+        $maximumIdentical.Value,
+        $maximumIdentical.Left,
+        $maximumIdentical.Right,
+        $minimumDistance.Value,
+        $minimumDistance.Left,
+        $minimumDistance.Right)
+}
+
 function Assert-ComponentIcons {
     param(
         [Parameter(Mandatory = $true)] [object[]] $Components,
-        [Parameter(Mandatory = $true)] [string] $ComponentDirectory
+        [Parameter(Mandatory = $true)] [string] $ComponentDirectory,
+        [Parameter(Mandatory = $true)] [string] $ProductSlug,
+        [AllowEmptyCollection()]
+        [Parameter(Mandatory = $true)] [System.Collections.Generic.List[object]] $AllVisualSamples
     )
 
     $hashes = @{}
+    $productVisualSamples = [System.Collections.Generic.List[object]]::new()
     foreach ($component in $Components) {
         $path = Join-Path $ComponentDirectory "$($component.Name).png"
         $bitmap = [System.Drawing.Bitmap]::new($path)
@@ -574,17 +1051,28 @@ function Assert-ComponentIcons {
                     }
                 }
             }
+            $visualSample = [pscustomobject]@{
+                Name = "$ProductSlug/$($component.Name)"
+                Sample = New-IconVisualSample $bitmap
+            }
+            $productVisualSamples.Add($visualSample)
+            $AllVisualSamples.Add($visualSample)
         }
         finally { $bitmap.Dispose() }
 
         $hash = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash
         if ($hashes.ContainsKey($hash)) {
-            throw "Component icons must be visually distinct: '$($hashes[$hash])' and '$($component.Name)'."
+            throw "Component icons must not be byte-identical: '$($hashes[$hash])' and '$($component.Name)'."
         }
         $hashes[$hash] = $component.Name
     }
+
+    Assert-IconVisualSeparation `
+        -Samples $productVisualSamples.ToArray() `
+        -Scope $ProductSlug
 }
 
+$allVisualSamples = [System.Collections.Generic.List[object]]::new()
 foreach ($product in $products) {
     foreach ($requiredFile in @($product.Source, $product.Atlas)) {
         if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
@@ -620,7 +1108,7 @@ foreach ($product in $products) {
         foreach ($component in $product.Components) {
             $destination = Join-Path $componentDirectory "$($component.Name).png"
             [void]$expectedPaths.Add([System.IO.Path]::GetFullPath($destination))
-            Write-ComponentPng $atlas $component.Tile $component.Overlay $product.BadgeColor $destination
+            Write-ComponentPng $atlas $component.Tile $component.Overlay $product.Palette $destination
             Write-Host "Generated $destination"
         }
         foreach ($existing in [System.IO.Directory]::GetFiles($componentDirectory, '*.png')) {
@@ -630,7 +1118,11 @@ foreach ($product in $products) {
             }
         }
 
-        Assert-ComponentIcons $product.Components $componentDirectory
+        Assert-ComponentIcons `
+            -Components $product.Components `
+            -ComponentDirectory $componentDirectory `
+            -ProductSlug $product.Slug `
+            -AllVisualSamples $allVisualSamples
         $contactSheet = Join-Path $generatedDirectory "$($product.Slug)-component-contact-sheet.png"
         Write-ContactSheet $product.Slug $product.Components $componentDirectory $contactSheet
         Write-Host "Generated $contactSheet"
@@ -645,3 +1137,7 @@ foreach ($product in $products) {
         -Force
     Write-Host "Updated $packageIcon"
 }
+
+Assert-IconVisualSeparation `
+    -Samples $allVisualSamples.ToArray() `
+    -Scope 'all products'
