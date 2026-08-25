@@ -1309,13 +1309,18 @@ def _csharp_declares_symbol(text: str, symbol: str) -> bool:
         return False
     return any(
         item.body is not None
-        and _csharp_type_body_declares_member(item.body, item.name, parts[-1])
+        and (
+            _csharp_enum_body_declares_member(item.body, parts[-1])
+            if item.kind == "enum"
+            else _csharp_type_body_declares_member(item.body, item.name, parts[-1])
+        )
         for item in owner_matches
     )
 
 
 @dataclass(frozen=True)
 class _CSharpTypeDeclaration:
+    kind: str
     name: str
     full_name: str
     start: int
@@ -1340,22 +1345,22 @@ def _csharp_type_declarations(masked: str) -> tuple[_CSharpTypeDeclaration, ...]
             namespace_scopes.append((match.group(1), opening, closing))
 
     type_pattern = re.compile(
-        r"\b(?:class|record(?:\s+(?:class|struct))?|struct|enum|interface|delegate)\s+"
+        r"\b(class|record(?:\s+(?:class|struct))?|struct|enum|interface|delegate)\s+"
         r"([A-Za-z_][A-Za-z0-9_]*)\b"
     )
-    raw: list[tuple[str, int, int | None, int | None]] = []
+    raw: list[tuple[str, str, int, int | None, int | None]] = []
     for match in type_pattern.finditer(masked):
         opening = masked.find("{", match.end())
         terminator = masked.find(";", match.end())
         if opening < 0 or (terminator >= 0 and terminator < opening):
-            raw.append((match.group(1), match.start(), None, None))
+            raw.append((match.group(1), match.group(2), match.start(), None, None))
             continue
         closing = _matching_csharp_brace(masked, opening)
         if closing is not None:
-            raw.append((match.group(1), match.start(), opening, closing))
+            raw.append((match.group(1), match.group(2), match.start(), opening, closing))
 
     result: list[_CSharpTypeDeclaration] = []
-    for name, start, opening, closing in raw:
+    for kind, name, start, opening, closing in raw:
         namespace_parts: list[str] = []
         if file_namespace:
             namespace_parts.extend(file_namespace.split("."))
@@ -1372,7 +1377,7 @@ def _csharp_type_declarations(masked: str) -> tuple[_CSharpTypeDeclaration, ...]
         containing_types = sorted(
             (
                 (other_opening, other_name)
-                for other_name, other_start, other_opening, other_closing in raw
+                for _, other_name, other_start, other_opening, other_closing in raw
                 if other_opening is not None
                 and other_closing is not None
                 and other_start != start
@@ -1385,6 +1390,7 @@ def _csharp_type_declarations(masked: str) -> tuple[_CSharpTypeDeclaration, ...]
         )
         result.append(
             _CSharpTypeDeclaration(
+                kind,
                 name,
                 full_name,
                 start,
@@ -1396,6 +1402,47 @@ def _csharp_type_declarations(masked: str) -> tuple[_CSharpTypeDeclaration, ...]
             )
         )
     return tuple(result)
+
+
+def _csharp_enum_body_declares_member(body: str, leaf: str) -> bool:
+    segment_start = 0
+    round_depth = 0
+    square_depth = 0
+    curly_depth = 0
+    segments: list[str] = []
+    for index, character in enumerate(body):
+        if character == "(":
+            round_depth += 1
+        elif character == ")" and round_depth:
+            round_depth -= 1
+        elif character == "[":
+            square_depth += 1
+        elif character == "]" and square_depth:
+            square_depth -= 1
+        elif character == "{":
+            curly_depth += 1
+        elif character == "}" and curly_depth:
+            curly_depth -= 1
+        elif (
+            character == ","
+            and round_depth == 0
+            and square_depth == 0
+            and curly_depth == 0
+        ):
+            segments.append(body[segment_start:index])
+            segment_start = index + 1
+    segments.append(body[segment_start:])
+
+    for segment in segments:
+        without_attributes = re.sub(
+            r"^\s*(?:\[[^\]]*\]\s*)*",
+            "",
+            segment,
+        )
+        match = re.match(r"([A-Za-z_][A-Za-z0-9_]*)\b", without_attributes)
+        if match is not None and match.group(1) == leaf:
+            return True
+    return False
 
 
 def _matching_csharp_brace(value: str, opening: int) -> int | None:

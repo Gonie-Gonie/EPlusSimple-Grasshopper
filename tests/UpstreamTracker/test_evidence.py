@@ -90,6 +90,42 @@ public class Owner
 
         self.assertFalse(_csharp_declares_symbol(source, "N.Owner.Owner"))
 
+    def test_csharp_binding_recognizes_first_middle_and_last_enum_members(self) -> None:
+        source = """namespace GonieGonie.InvisibleDragon.Profile;
+public enum ScheduleType
+{
+    [System.Obsolete] Temperature = -1,
+    OnOff,
+    Fraction = 4,
+    Real,
+}
+public class Other
+{
+    public void Run() { int Temperature = 0; }
+}
+"""
+
+        for member in ("Temperature", "OnOff", "Fraction", "Real"):
+            self.assertTrue(
+                _csharp_declares_symbol(
+                    source,
+                    f"GonieGonie.InvisibleDragon.Profile.ScheduleType.{member}",
+                ),
+                member,
+            )
+        self.assertFalse(
+            _csharp_declares_symbol(
+                source,
+                "GonieGonie.InvisibleDragon.Profile.ScheduleType.Missing",
+            )
+        )
+        self.assertFalse(
+            _csharp_declares_symbol(
+                source,
+                "GonieGonie.InvisibleDragon.Profile.Other.Temperature",
+            )
+        )
+
     def test_head_validation_ignores_inherited_git_directory(self) -> None:
         with TemporaryWorkspace() as real, TemporaryWorkspace() as fake:
             real.write("src/Service.cs", "class Real { }\n")
