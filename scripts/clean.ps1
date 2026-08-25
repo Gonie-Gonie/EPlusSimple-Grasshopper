@@ -26,10 +26,17 @@ if ($cleanTemp) {
         -AllowedTopLevelNames @('temp')
 
     if (Test-Path -LiteralPath $tempPath) {
-        Assert-NoReparsePoints -Path $tempPath -AnchorPath $repositoryRoot
         if ($PSCmdlet.ShouldProcess($tempPath, 'Remove disposable temp tree')) {
-            Remove-Item -LiteralPath $tempPath -Recurse -Force
-            Write-Host "Removed disposable tree: $tempPath"
+            $workflowLock = Enter-TrackedPackageLockWorkflow `
+                -RepositoryRoot $repositoryRoot
+            try {
+                Assert-NoReparsePoints -Path $tempPath -AnchorPath $repositoryRoot
+                Remove-Item -LiteralPath $tempPath -Recurse -Force
+                Write-Host "Removed disposable tree: $tempPath"
+            }
+            finally {
+                $workflowLock.Dispose()
+            }
         }
     }
     else {

@@ -60,6 +60,18 @@ Run `.\dev.cmd help` to list every supported workflow from this single entry poi
 package locally when needed), validates Rhino 7 and Rhino 8 independently, and
 writes the generated, non-secret `.config\local.settings.json`. It is
 idempotent, so rerun it after installing Rhino to enable that version's tests.
+Setup and build serialize their sanctioned NuGet restore workflows with a
+repository-local lease under `.tools` and always run the all-file normalizer
+after the restore attempt. A successful verified batch normalizes every tracked
+`packages.lock.json` to LF. A caught commit failure is rolled back when rollback
+verification succeeds; otherwise ambiguous state is retained with recovery
+evidence instead of overwritten. A process crash leaves its snapshots under
+`.tools\package-lock-normalization`, and the next restore fails closed before
+doing work so they are not silently reused.
+`dev.cmd clean` acquires the same lease before removing the fully disposable
+`temp` tree and preserves `.tools` recovery state. This lease coordinates the
+supplied repository commands; it is not an operating-system sandbox against a
+malicious same-user process swapping filesystem paths mid-operation.
 
 For port-equivalence work, `.\dev.cmd reference` runs the pinned historical Python
 implementation plus the hash-locked EnergyPlus 24.2 IDD and official epJSON

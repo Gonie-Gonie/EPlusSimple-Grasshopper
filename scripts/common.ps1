@@ -237,11 +237,217 @@ function Write-Utf8JsonIfChanged {
     Write-Host "Wrote: $Path"
 }
 
-function Normalize-TrackedPackageLockLineEndings {
+function Test-ExactByteArray {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [byte[]] $Left,
+
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [byte[]] $Right
+    )
+
+    if ($Left.Length -ne $Right.Length) {
+        return $false
+    }
+    for ($index = 0; $index -lt $Left.Length; $index += 1) {
+        if ($Left[$index] -ne $Right[$index]) {
+            return $false
+        }
+    }
+    return $true
+}
+
+function Write-ExclusiveFlushedBytes {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Path,
+
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [byte[]] $Bytes
+    )
+
+    $stream = New-Object System.IO.FileStream(
+        $Path,
+        [System.IO.FileMode]::CreateNew,
+        [System.IO.FileAccess]::Write,
+        [System.IO.FileShare]::None)
+    try {
+        $stream.Write($Bytes, 0, $Bytes.Length)
+        $stream.Flush($true)
+    }
+    finally {
+        $stream.Dispose()
+    }
+}
+
+function Invoke-PackageLockCommitReplace {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $SourcePath,
+
+        [Parameter(Mandatory = $true)]
+        [string] $DestinationPath,
+
+        [Parameter(Mandatory = $true)]
+        [string] $BackupPath
+    )
+
+    [System.IO.File]::Replace(
+        $SourcePath,
+        $DestinationPath,
+        $BackupPath,
+        $true)
+}
+
+function Get-PackageLockWorkflowPath {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
         [string] $RepositoryRoot
+    )
+
+    $root = [System.IO.Path]::GetFullPath($RepositoryRoot).TrimEnd('\', '/')
+    $lockDirectory = Assert-RepositoryChildPath `
+        -RepositoryRoot $root `
+        -Path (Join-Path $root '.tools\package-lock-workflow') `
+        -AllowedTopLevelNames @('.tools')
+    Assert-NoReparsePoints -Path $lockDirectory -AnchorPath $root
+    Ensure-Directory -Path $lockDirectory
+    Assert-NoReparsePoints -Path $lockDirectory -AnchorPath $root
+    return Join-Path $lockDirectory 'workflow.lock'
+}
+
+function Enter-TrackedPackageLockWorkflow {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $RepositoryRoot
+    )
+
+    $lockPath = Get-PackageLockWorkflowPath -RepositoryRoot $RepositoryRoot
+    Assert-NoReparsePoints -Path $lockPath -AnchorPath $RepositoryRoot
+    try {
+        return New-Object System.IO.FileStream(
+            $lockPath,
+            [System.IO.FileMode]::OpenOrCreate,
+            [System.IO.FileAccess]::ReadWrite,
+            [System.IO.FileShare]::None)
+    }
+    catch [System.IO.IOException] {
+        throw "Another setup, build, or lock-file normalization workflow is already running for '$RepositoryRoot'."
+    }
+}
+
+function Assert-TrackedPackageLockWorkflow {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $RepositoryRoot,
+
+        [Parameter(Mandatory = $true)]
+        [System.IO.FileStream] $WorkflowLock
+    )
+
+    $expected = [System.IO.Path]::GetFullPath(
+        (Get-PackageLockWorkflowPath -RepositoryRoot $RepositoryRoot))
+    $actual = [System.IO.Path]::GetFullPath($WorkflowLock.Name)
+    if (-not $actual.Equals($expected, [System.StringComparison]::OrdinalIgnoreCase) -or
+        -not $WorkflowLock.CanRead -or
+        -not $WorkflowLock.CanWrite) {
+        throw 'The supplied package-lock workflow handle is invalid or belongs to another repository.'
+    }
+    $probe = $null
+    try {
+        $probe = New-Object System.IO.FileStream(
+            $expected,
+            [System.IO.FileMode]::Open,
+            [System.IO.FileAccess]::Read,
+            [System.IO.FileShare]::ReadWrite)
+    }
+    catch [System.IO.IOException] {
+        return
+    }
+    finally {
+        if ($null -ne $probe) {
+            $probe.Dispose()
+        }
+    }
+    throw 'The supplied package-lock workflow handle does not hold the exclusive repository lease.'
+}
+
+function Assert-NoIncompletePackageLockNormalizationTransaction {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $RepositoryRoot
+    )
+
+    $root = [System.IO.Path]::GetFullPath($RepositoryRoot).TrimEnd('\', '/')
+    $transactionRoot = Assert-RepositoryChildPath `
+        -RepositoryRoot $root `
+        -Path (Join-Path $root '.tools\package-lock-normalization') `
+        -AllowedTopLevelNames @('.tools')
+    Assert-NoReparsePoints -Path $transactionRoot -AnchorPath $root
+    if (Test-Path -LiteralPath $transactionRoot) {
+        if (-not (Test-Path -LiteralPath $transactionRoot -PathType Container)) {
+            throw "NuGet lock-file transaction root is not a directory: '$transactionRoot'."
+        }
+        $incompleteTransaction = Get-ChildItem `
+            -LiteralPath $transactionRoot `
+            -Force |
+            Select-Object -First 1
+        if ($null -ne $incompleteTransaction) {
+            throw (
+                'An incomplete NuGet lock-file normalization transaction was found. ' +
+                "Inspect and recover it before continuing: '$($incompleteTransaction.FullName)'.")
+        }
+    }
+    return $transactionRoot
+}
+
+function Remove-PackageLockTransactionDirectory {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $RepositoryRoot,
+
+        [Parameter(Mandatory = $true)]
+        [string] $TransactionPath
+    )
+
+    $root = [System.IO.Path]::GetFullPath($RepositoryRoot).TrimEnd('\', '/')
+    $safeTransaction = Assert-RepositoryChildPath `
+        -RepositoryRoot $root `
+        -Path $TransactionPath `
+        -AllowedTopLevelNames @('.tools')
+    Assert-NoReparsePoints -Path $safeTransaction -AnchorPath $root
+    $items = @(Get-ChildItem -LiteralPath $safeTransaction -Force)
+    foreach ($item in $items) {
+        if ($item.PSIsContainer -or
+            ($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) {
+            throw "Refusing to clean an unexpected transaction entry: '$($item.FullName)'."
+        }
+    }
+    foreach ($item in $items) {
+        [System.IO.File]::Delete($item.FullName)
+    }
+    [System.IO.Directory]::Delete($safeTransaction, $false)
+}
+
+function Normalize-TrackedPackageLockLineEndings {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $RepositoryRoot,
+
+        [AllowNull()]
+        [System.IO.FileStream] $WorkflowLock
     )
 
     $ErrorActionPreference = 'Stop'
@@ -251,128 +457,416 @@ function Normalize-TrackedPackageLockLineEndings {
         throw "Repository root does not exist: '$root'."
     }
 
-    $git = Get-Command git.exe -CommandType Application -ErrorAction SilentlyContinue |
-        Select-Object -First 1
-    if ($null -eq $git) {
-        throw 'Git is required to enumerate tracked NuGet lock files.'
+    $ownedWorkflowLock = $null
+    if ($null -eq $WorkflowLock) {
+        if (-not $WhatIfPreference) {
+            $ownedWorkflowLock = Enter-TrackedPackageLockWorkflow -RepositoryRoot $root
+            $WorkflowLock = $ownedWorkflowLock
+        }
+    }
+    else {
+        Assert-TrackedPackageLockWorkflow `
+            -RepositoryRoot $root `
+            -WorkflowLock $WorkflowLock
     }
 
-    $tracked = @(& $git.Source -C $root ls-files -- '*packages.lock.json')
-    if ($LASTEXITCODE -ne 0) {
-        throw "Git could not enumerate tracked NuGet lock files under '$root'."
-    }
-    $tracked = @($tracked | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
-    if ($tracked.Count -eq 0) {
-        throw "No tracked packages.lock.json files were found under '$root'."
-    }
-
-    $rootPrefix = $root + [System.IO.Path]::DirectorySeparatorChar
-    $normalizedCount = 0
-    foreach ($relativePath in $tracked) {
-        if ([System.IO.Path]::IsPathRooted($relativePath) -or
-            $relativePath.IndexOf([char]0) -ge 0) {
-            throw "Git returned an unsafe tracked lock-file path: '$relativePath'."
-        }
-        $segments = @($relativePath.Split(
-            @('/', '\'),
-            [System.StringSplitOptions]::RemoveEmptyEntries))
-        if ($segments.Count -eq 0 -or $segments -contains '..' -or $segments -contains '.') {
-            throw "Git returned an unsafe tracked lock-file path: '$relativePath'."
+    $transactionPath = $null
+    $entries = New-Object System.Collections.ArrayList
+    $failure = $null
+    $rollbackFailures = New-Object System.Collections.ArrayList
+    $recoveryRequired = $false
+    $completed = $false
+    try {
+        $git = Get-Command git.exe -CommandType Application -ErrorAction SilentlyContinue |
+            Select-Object -First 1
+        if ($null -eq $git) {
+            throw 'Git is required to enumerate tracked NuGet lock files.'
         }
 
-        $path = [System.IO.Path]::GetFullPath((Join-Path $root $relativePath))
-        if (-not $path.StartsWith($rootPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
-            throw "Tracked lock file escaped the repository: '$relativePath'."
+        $tracked = @(& $git.Source -C $root ls-files -- '*packages.lock.json')
+        if ($LASTEXITCODE -ne 0) {
+            throw "Git could not enumerate tracked NuGet lock files under '$root'."
         }
-        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
-            throw "Tracked lock file is missing or not a regular file: '$relativePath'."
-        }
-        Assert-NoReparsePoints -Path $path -AnchorPath $root
-
-        $bytes = [System.IO.File]::ReadAllBytes($path)
-        if ($bytes.Length -ge 3 -and
-            $bytes[0] -eq 0xEF -and
-            $bytes[1] -eq 0xBB -and
-            $bytes[2] -eq 0xBF) {
-            throw "Tracked lock file contains a forbidden UTF-8 BOM: '$relativePath'."
+        $tracked = @($tracked |
+            Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+            Sort-Object -Unique)
+        if ($tracked.Count -eq 0) {
+            throw "No tracked packages.lock.json files were found under '$root'."
         }
 
-        $normalized = New-Object 'System.Collections.Generic.List[byte]'
-        $sawCrLf = $false
-        $sawLf = $false
-        for ($index = 0; $index -lt $bytes.Length; $index += 1) {
-            $value = $bytes[$index]
-            if ($value -eq 13) {
-                if ($index + 1 -ge $bytes.Length -or $bytes[$index + 1] -ne 10) {
-                    throw "Tracked lock file contains a lone CR byte: '$relativePath'."
+        $rootPrefix = $root + [System.IO.Path]::DirectorySeparatorChar
+        foreach ($relativePath in $tracked) {
+            if ([System.IO.Path]::IsPathRooted($relativePath) -or
+                $relativePath.IndexOf([char]0) -ge 0) {
+                throw "Git returned an unsafe tracked lock-file path: '$relativePath'."
+            }
+            $segments = @($relativePath.Split(
+                @('/', '\'),
+                [System.StringSplitOptions]::RemoveEmptyEntries))
+            if ($segments.Count -eq 0 -or
+                $segments -contains '..' -or
+                $segments -contains '.') {
+                throw "Git returned an unsafe tracked lock-file path: '$relativePath'."
+            }
+
+            $path = [System.IO.Path]::GetFullPath((Join-Path $root $relativePath))
+            if (-not $path.StartsWith(
+                $rootPrefix,
+                [System.StringComparison]::OrdinalIgnoreCase)) {
+                throw "Tracked lock file escaped the repository: '$relativePath'."
+            }
+            if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+                throw "Tracked lock file is missing or not a regular file: '$relativePath'."
+            }
+            Assert-NoReparsePoints -Path $path -AnchorPath $root
+
+            $bytes = [System.IO.File]::ReadAllBytes($path)
+            if ($bytes.Length -ge 3 -and
+                $bytes[0] -eq 0xEF -and
+                $bytes[1] -eq 0xBB -and
+                $bytes[2] -eq 0xBF) {
+                throw "Tracked lock file contains a forbidden UTF-8 BOM: '$relativePath'."
+            }
+
+            $normalized = New-Object 'System.Collections.Generic.List[byte]'
+            $sawCrLf = $false
+            $sawLf = $false
+            for ($index = 0; $index -lt $bytes.Length; $index += 1) {
+                $value = $bytes[$index]
+                if ($value -eq 13) {
+                    if ($index + 1 -ge $bytes.Length -or $bytes[$index + 1] -ne 10) {
+                        throw "Tracked lock file contains a lone CR byte: '$relativePath'."
+                    }
+                    $normalized.Add([byte] 10)
+                    $sawCrLf = $true
+                    $index += 1
                 }
-                $normalized.Add([byte] 10)
-                $sawCrLf = $true
-                $index += 1
+                elseif ($value -eq 10) {
+                    $normalized.Add([byte] 10)
+                    $sawLf = $true
+                }
+                else {
+                    $normalized.Add($value)
+                }
             }
-            elseif ($value -eq 10) {
-                $normalized.Add([byte] 10)
-                $sawLf = $true
+            if ($sawCrLf -and $sawLf) {
+                throw "Tracked lock file contains mixed LF and CRLF endings: '$relativePath'."
             }
-            else {
-                $normalized.Add($value)
-            }
-        }
-        if ($sawCrLf -and $sawLf) {
-            throw "Tracked lock file contains mixed LF and CRLF endings: '$relativePath'."
-        }
-        if (-not $sawCrLf) {
-            continue
+            $null = $entries.Add([pscustomobject] [ordered] @{
+                RelativePath = [string] $relativePath
+                Path = $path
+                OriginalBytes = [byte[]] $bytes
+                NormalizedBytes = [byte[]] $normalized.ToArray()
+                RollbackBytes = [byte[]] $bytes
+                NeedsChange = [bool] $sawCrLf
+                Attempted = $false
+                ConcurrentChangeDetected = $false
+                TransactionIndex = -1
+                StagePath = $null
+                OriginalPath = $null
+                ReplaceBackupPath = $null
+                RollbackDiscardPath = $null
+            })
         }
 
+        $transactionRoot = Assert-NoIncompletePackageLockNormalizationTransaction `
+            -RepositoryRoot $root
+
+        $changedEntries = @($entries | Where-Object { $_.NeedsChange })
         if ($WhatIfPreference) {
-            Write-Host "What if: normalize tracked NuGet lock file '$relativePath' to LF."
-            continue
+            foreach ($entry in $changedEntries) {
+                Write-Host "What if: normalize tracked NuGet lock file '$($entry.RelativePath)' to LF."
+            }
+            Write-Host "NuGet lock-file LF normalization: 0 changed, $($tracked.Count) checked."
+            $completed = $true
         }
+        elseif ($changedEntries.Count -eq 0) {
+            Write-Host "NuGet lock-file LF normalization: 0 changed, $($tracked.Count) checked."
+            $completed = $true
+        }
+        else {
+            Ensure-Directory -Path $transactionRoot
+            Assert-NoReparsePoints -Path $transactionRoot -AnchorPath $root
+            $transactionPath = Join-Path $transactionRoot ([Guid]::NewGuid().ToString('N'))
+            $null = New-Item -ItemType Directory -Path $transactionPath
+            Assert-NoReparsePoints -Path $transactionPath -AnchorPath $root
 
-        $temporaryPath = $path + '.goniegonie-' + [Guid]::NewGuid().ToString('N') + '.tmp'
-        $backupPath = $path + '.goniegonie-' + [Guid]::NewGuid().ToString('N') + '.bak'
-        try {
-            $stream = New-Object System.IO.FileStream(
-                $temporaryPath,
-                [System.IO.FileMode]::CreateNew,
-                [System.IO.FileAccess]::Write,
-                [System.IO.FileShare]::None)
+            $manifestEntries = New-Object System.Collections.ArrayList
+            for ($entryIndex = 0; $entryIndex -lt $changedEntries.Count; $entryIndex += 1) {
+                $entry = $changedEntries[$entryIndex]
+                $prefix = $entryIndex.ToString('D4')
+                $entry.TransactionIndex = $entryIndex
+                $entry.StagePath = Join-Path $transactionPath ($prefix + '.normalized.tmp')
+                $entry.OriginalPath = Join-Path $transactionPath ($prefix + '.original.bin')
+                $entry.ReplaceBackupPath = Join-Path $transactionPath ($prefix + '.replace.bak')
+                $entry.RollbackDiscardPath = Join-Path $transactionPath (
+                    $prefix + '.rollback-discard.bin')
+                Write-ExclusiveFlushedBytes `
+                    -Path $entry.StagePath `
+                    -Bytes $entry.NormalizedBytes
+                Write-ExclusiveFlushedBytes `
+                    -Path $entry.OriginalPath `
+                    -Bytes $entry.OriginalBytes
+                $stagedBytes = [System.IO.File]::ReadAllBytes($entry.StagePath)
+                $snapshotBytes = [System.IO.File]::ReadAllBytes($entry.OriginalPath)
+                if (-not (Test-ExactByteArray `
+                    -Left $stagedBytes `
+                    -Right $entry.NormalizedBytes) -or
+                    -not (Test-ExactByteArray `
+                    -Left $snapshotBytes `
+                    -Right $entry.OriginalBytes)) {
+                    throw "Transaction staging verification failed: '$($entry.RelativePath)'."
+                }
+                $null = $manifestEntries.Add([pscustomobject] [ordered] @{
+                    index = $entryIndex
+                    path = $entry.RelativePath
+                    original = [System.IO.Path]::GetFileName($entry.OriginalPath)
+                    originalSha256 = Get-Sha256 -Path $entry.OriginalPath
+                    replacement = [System.IO.Path]::GetFileName($entry.StagePath)
+                    replacementSha256 = Get-Sha256 -Path $entry.StagePath
+                    replaceBackup = [System.IO.Path]::GetFileName(
+                        $entry.ReplaceBackupPath)
+                    rollbackDiscard = [System.IO.Path]::GetFileName(
+                        $entry.RollbackDiscardPath)
+                })
+            }
+            $manifest = [pscustomobject] [ordered] @{
+                schema = 'goniegonie.package-lock-normalization-transaction.v1'
+                repository = $root
+                files = @($manifestEntries)
+            }
+            $manifestBytes = [System.Text.Encoding]::UTF8.GetBytes(
+                (($manifest | ConvertTo-Json -Depth 5) + "`n"))
+            Write-ExclusiveFlushedBytes `
+                -Path (Join-Path $transactionPath 'transaction.json') `
+                -Bytes $manifestBytes
+
+            foreach ($entry in $entries) {
+                Assert-NoReparsePoints -Path $entry.Path -AnchorPath $root
+                $current = [System.IO.File]::ReadAllBytes($entry.Path)
+                if (-not (Test-ExactByteArray -Left $current -Right $entry.OriginalBytes)) {
+                    throw "Tracked lock file changed during normalization preflight: '$($entry.RelativePath)'."
+                }
+            }
+
+            foreach ($entry in $changedEntries) {
+                Assert-NoReparsePoints -Path $entry.Path -AnchorPath $root
+                $current = [System.IO.File]::ReadAllBytes($entry.Path)
+                if (-not (Test-ExactByteArray -Left $current -Right $entry.OriginalBytes)) {
+                    throw "Tracked lock file changed before atomic replacement: '$($entry.RelativePath)'."
+                }
+                Assert-NoReparsePoints -Path $entry.StagePath -AnchorPath $root
+                Assert-NoReparsePoints -Path $entry.OriginalPath -AnchorPath $root
+                $stagedBytes = [System.IO.File]::ReadAllBytes($entry.StagePath)
+                $snapshotBytes = [System.IO.File]::ReadAllBytes($entry.OriginalPath)
+                if (-not (Test-ExactByteArray `
+                    -Left $stagedBytes `
+                    -Right $entry.NormalizedBytes) -or
+                    -not (Test-ExactByteArray `
+                    -Left $snapshotBytes `
+                    -Right $entry.OriginalBytes)) {
+                    throw "Transaction files changed before atomic replacement: '$($entry.RelativePath)'."
+                }
+                $entry.Attempted = $true
+                Invoke-PackageLockCommitReplace `
+                    -SourcePath $entry.StagePath `
+                    -DestinationPath $entry.Path `
+                    -BackupPath $entry.ReplaceBackupPath
+                if (-not (Test-Path -LiteralPath $entry.ReplaceBackupPath -PathType Leaf)) {
+                    throw "Atomic replacement did not preserve its backup: '$($entry.RelativePath)'."
+                }
+                $replaceBackup = [System.IO.File]::ReadAllBytes(
+                    $entry.ReplaceBackupPath)
+                $entry.RollbackBytes = [byte[]] $replaceBackup
+                if (-not (Test-ExactByteArray `
+                    -Left $replaceBackup `
+                    -Right $entry.OriginalBytes)) {
+                    $entry.ConcurrentChangeDetected = $true
+                    $recoveryRequired = $true
+                    throw (
+                        'A concurrent change was captured by the atomic replacement backup: ' +
+                        "'$($entry.RelativePath)'.")
+                }
+                Assert-NoReparsePoints -Path $entry.Path -AnchorPath $root
+                $actual = [System.IO.File]::ReadAllBytes($entry.Path)
+                if (-not (Test-ExactByteArray -Left $actual -Right $entry.NormalizedBytes)) {
+                    throw "Atomic lock-file normalization verification failed: '$($entry.RelativePath)'."
+                }
+            }
+
+            foreach ($entry in $entries) {
+                Assert-NoReparsePoints -Path $entry.Path -AnchorPath $root
+                $expected = if ($entry.NeedsChange) {
+                    $entry.NormalizedBytes
+                }
+                else {
+                    $entry.OriginalBytes
+                }
+                $actual = [System.IO.File]::ReadAllBytes($entry.Path)
+                if (-not (Test-ExactByteArray -Left $actual -Right $expected)) {
+                    throw "Batch lock-file normalization verification failed: '$($entry.RelativePath)'."
+                }
+            }
+            Write-Host "NuGet lock-file LF normalization: $($changedEntries.Count) changed, $($tracked.Count) checked."
+            $completed = $true
+        }
+    }
+    catch {
+        $failure = $_
+        $attempted = @($entries | Where-Object { $_.Attempted })
+        for ($rollbackIndex = $attempted.Count - 1; $rollbackIndex -ge 0; $rollbackIndex -= 1) {
+            $entry = $attempted[$rollbackIndex]
             try {
-                $normalizedBytes = $normalized.ToArray()
-                $stream.Write($normalizedBytes, 0, $normalizedBytes.Length)
-                $stream.Flush($true)
-            }
-            finally {
-                $stream.Dispose()
-            }
-            [System.IO.File]::Replace($temporaryPath, $path, $backupPath, $true)
-            $actual = [System.IO.File]::ReadAllBytes($path)
-            $matches = $actual.Length -eq $normalizedBytes.Length
-            if ($matches) {
-                for ($verifyIndex = 0; $verifyIndex -lt $actual.Length; $verifyIndex += 1) {
-                    if ($actual[$verifyIndex] -ne $normalizedBytes[$verifyIndex]) {
-                        $matches = $false
-                        break
+                if (Test-Path -LiteralPath $entry.ReplaceBackupPath -PathType Leaf) {
+                    Assert-NoReparsePoints `
+                        -Path $entry.ReplaceBackupPath `
+                        -AnchorPath $root
+                    $entry.RollbackBytes = [byte[]] [System.IO.File]::ReadAllBytes(
+                        $entry.ReplaceBackupPath)
+                    if (-not (Test-ExactByteArray `
+                        -Left $entry.RollbackBytes `
+                        -Right $entry.OriginalBytes)) {
+                        $entry.ConcurrentChangeDetected = $true
+                        $recoveryRequired = $true
                     }
                 }
+                Assert-NoReparsePoints -Path $entry.Path -AnchorPath $root
+                $current = [System.IO.File]::ReadAllBytes($entry.Path)
+                if (-not (Test-ExactByteArray `
+                    -Left $current `
+                    -Right $entry.RollbackBytes)) {
+                    if (-not (Test-ExactByteArray `
+                        -Left $current `
+                        -Right $entry.NormalizedBytes)) {
+                        throw (
+                            'Refusing to overwrite an ambiguously changed lock file during rollback: ' +
+                            "'$($entry.RelativePath)'.")
+                    }
+                    $rollbackStage = Join-Path $transactionPath (
+                        ([Guid]::NewGuid().ToString('N')) + '.rollback.tmp')
+                    Write-ExclusiveFlushedBytes `
+                        -Path $rollbackStage `
+                        -Bytes $entry.RollbackBytes
+                    $discard = $entry.RollbackDiscardPath
+                    [System.IO.File]::Replace($rollbackStage, $entry.Path, $discard, $true)
+                    $discardBytes = [System.IO.File]::ReadAllBytes($discard)
+                    if (-not (Test-ExactByteArray `
+                        -Left $discardBytes `
+                        -Right $current)) {
+                        $entry.ConcurrentChangeDetected = $true
+                        $recoveryRequired = $true
+                    }
+                }
+                Assert-NoReparsePoints -Path $entry.Path -AnchorPath $root
+                $restored = [System.IO.File]::ReadAllBytes($entry.Path)
+                if (-not (Test-ExactByteArray `
+                    -Left $restored `
+                    -Right $entry.RollbackBytes)) {
+                    throw "Rollback verification failed for '$($entry.RelativePath)'."
+                }
             }
-            if (-not $matches) {
-                throw "Atomic lock-file normalization verification failed: '$relativePath'."
-            }
-            $normalizedCount += 1
-        }
-        finally {
-            if (Test-Path -LiteralPath $temporaryPath) {
-                Remove-Item -LiteralPath $temporaryPath -Force
-            }
-            if (Test-Path -LiteralPath $backupPath) {
-                Remove-Item -LiteralPath $backupPath -Force
+            catch {
+                $null = $rollbackFailures.Add($_)
             }
         }
     }
+    finally {
+        $keepRecovery = $rollbackFailures.Count -gt 0 -or $recoveryRequired
+        if (-not [string]::IsNullOrWhiteSpace($transactionPath) -and
+            (Test-Path -LiteralPath $transactionPath) -and
+            -not $keepRecovery) {
+            try {
+                Remove-PackageLockTransactionDirectory `
+                    -RepositoryRoot $root `
+                    -TransactionPath $transactionPath
+            }
+            catch {
+                $null = $rollbackFailures.Add($_)
+            }
+        }
+        if ($null -ne $ownedWorkflowLock) {
+            $ownedWorkflowLock.Dispose()
+        }
+    }
 
-    Write-Host "NuGet lock-file LF normalization: $normalizedCount changed, $($tracked.Count) checked."
+    if ($rollbackFailures.Count -gt 0) {
+        $reason = if ($null -eq $failure) {
+            'transaction cleanup failed'
+        }
+        else {
+            $failure.Exception.Message
+        }
+        throw "NuGet lock-file normalization could not recover completely: $reason. Recovery files were retained at '$transactionPath'."
+    }
+    if ($recoveryRequired) {
+        $reason = if ($null -eq $failure) {
+            'a concurrent change was detected'
+        }
+        else {
+            $failure.Exception.Message
+        }
+        throw "NuGet lock-file normalization stopped after preserving a concurrent update: $reason. Recovery files were retained at '$transactionPath'."
+    }
+    if ($null -ne $failure) {
+        throw $failure
+    }
+    if (-not $completed) {
+        throw 'NuGet lock-file normalization ended without a verified result.'
+    }
+}
+
+function Invoke-WithTrackedPackageLockNormalization {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $RepositoryRoot,
+
+        [Parameter(Mandatory = $true)]
+        [scriptblock] $Action
+    )
+
+    $workflowLock = $null
+    if (-not $WhatIfPreference) {
+        $workflowLock = Enter-TrackedPackageLockWorkflow -RepositoryRoot $RepositoryRoot
+    }
+    $actionFailure = $null
+    $normalizationFailure = $null
+    try {
+        $null = Assert-NoIncompletePackageLockNormalizationTransaction `
+            -RepositoryRoot $RepositoryRoot
+        try {
+            & $Action
+        }
+        catch {
+            $actionFailure = $_
+        }
+        try {
+            Normalize-TrackedPackageLockLineEndings `
+                -RepositoryRoot $RepositoryRoot `
+                -WorkflowLock $workflowLock
+        }
+        catch {
+            $normalizationFailure = $_
+        }
+    }
+    finally {
+        if ($null -ne $workflowLock) {
+            $workflowLock.Dispose()
+        }
+    }
+
+    if ($null -ne $actionFailure -and $null -ne $normalizationFailure) {
+        throw (
+            $actionFailure.Exception.Message +
+            ' Lock-file normalization also failed: ' +
+            $normalizationFailure.Exception.Message)
+    }
+    if ($null -ne $actionFailure) {
+        throw $actionFailure
+    }
+    if ($null -ne $normalizationFailure) {
+        throw $normalizationFailure
+    }
 }
 
 function Format-NativeCommand {

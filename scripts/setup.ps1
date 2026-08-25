@@ -843,17 +843,20 @@ elseif ($dotnet.status -eq 'planned') {
 }
 else {
     Set-RepositoryBuildEnvironment -RepositoryRoot $repositoryRoot -DotNetExecutable $dotnet.executable
-    Invoke-LoggedNativeCommand `
-        -FilePath $dotnet.executable `
-        -ArgumentList @(
-            'restore', $solution,
-            '--configfile', (Join-Path $repositoryRoot 'NuGet.config'),
-            '--packages', (Join-Path $toolsRoot 'nuget\packages'),
-            '--nologo'
-        ) `
-        -LogPath (Join-Path $logsRoot 'setup-restore.log') `
-        -FailureMessage 'Dependency restore failed during setup'
-    Normalize-TrackedPackageLockLineEndings -RepositoryRoot $repositoryRoot
+    Invoke-WithTrackedPackageLockNormalization `
+        -RepositoryRoot $repositoryRoot `
+        -Action {
+            Invoke-LoggedNativeCommand `
+                -FilePath $dotnet.executable `
+                -ArgumentList @(
+                    'restore', $solution,
+                    '--configfile', (Join-Path $repositoryRoot 'NuGet.config'),
+                    '--packages', (Join-Path $toolsRoot 'nuget\packages'),
+                    '--nologo'
+                ) `
+                -LogPath (Join-Path $logsRoot 'setup-restore.log') `
+                -FailureMessage 'Dependency restore failed during setup'
+        }
 }
 
 Write-Host ''

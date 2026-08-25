@@ -278,17 +278,20 @@ Write-Host "EnergyPlus integration environment: $(if ($energyPlusReady) { 'enabl
 
 if (-not $NoRestore) {
     if ($PSCmdlet.ShouldProcess($solution, 'Restore NuGet dependencies')) {
-        Invoke-LoggedNativeCommand `
-            -FilePath $dotnetExecutable `
-            -ArgumentList @(
-                'restore', $solution,
-                '--configfile', $nugetConfig,
-                '--packages', (Join-Path $toolsRoot 'nuget\packages'),
-                '--nologo'
-            ) `
-            -LogPath (Join-Path $logsRoot 'restore.log') `
-            -FailureMessage 'Dependency restore failed'
-        Normalize-TrackedPackageLockLineEndings -RepositoryRoot $repositoryRoot
+        Invoke-WithTrackedPackageLockNormalization `
+            -RepositoryRoot $repositoryRoot `
+            -Action {
+                Invoke-LoggedNativeCommand `
+                    -FilePath $dotnetExecutable `
+                    -ArgumentList @(
+                        'restore', $solution,
+                        '--configfile', $nugetConfig,
+                        '--packages', (Join-Path $toolsRoot 'nuget\packages'),
+                        '--nologo'
+                    ) `
+                    -LogPath (Join-Path $logsRoot 'restore.log') `
+                    -FailureMessage 'Dependency restore failed'
+            }
     }
 }
 else {
