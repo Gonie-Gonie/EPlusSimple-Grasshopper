@@ -832,44 +832,44 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "equivalent",
     "exception",
-    "equivalent",
-    "needs_reverification",
-    "out_of_scope",
-    "equivalent",
-    "equivalent",
-    "needs_reverification",
-    "equivalent",
-    "equivalent",
     "equivalent",
     "exception",
     "equivalent",
     "exception",
     "out_of_scope",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "out_of_scope",
     "exception",
     "exception",
     "exception",
-    "needs_reverification",
+    "exception",
     "out_of_scope",
     "exception",
     "exception",
     "out_of_scope",
-    "needs_reverification",
+    "exception",
     "equivalent",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
     "equivalent",
     "exception",
     "exception",
     "equivalent",
     "out_of_scope",
     "equivalent",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
     "equivalent",
     "equivalent",
     "out_of_scope",
@@ -890,10 +890,10 @@
     "equivalent",
     "equivalent",
     "equivalent",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
     "exception",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:ad9a26ae6ebaaa5d226d606233b87520eea035371df9fab3b93e9d676db773e6",
+  "content_sha256": "sha256:a6ade741143d58880e70b2e04e5f74a65b42fbd791523bd22a74dc12eefa8fb7",
   "details": [
     {
       "evidence": [
@@ -2692,6 +2692,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-day-schedule-value-object",
+        "upstream/symbol-evidence.json#profile-dayschedule-core-value-object-3d09af63"
+      ],
+      "exception_id": "immutable-day-schedule-value-object",
+      "index": 832,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule across the exact 3-case symbol slice: the exact 144-value native read-only surface, indexing and enumeration, copied source-container isolation, retained type/name/unit metadata, and rejected post-construction collection mutation, and directly observes the upstream mutable UserList/data and indexed assignment surface against the native copied IReadOnlyList value object and functional transformations."
+    },
+    {
+      "evidence": [
         "upstream/symbol-evidence.json#profile-dayschedule-data-interval-b53131cc"
       ],
       "index": 833,
@@ -2715,6 +2724,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#native-day-schedule-deepcopy-memo",
+        "upstream/symbol-evidence.json#profile-dayschedule-core-deepcopy-94716a2a"
+      ],
+      "exception_id": "native-day-schedule-deepcopy-memo",
+      "index": 836,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.__deepcopy__ across the exact 3-case symbol slice: ordinary copied values, type, unit and :COPY name, fresh repeated-copy identity, source immutability, and the native parameterless-only API, and directly observes the upstream prepopulated-memo substitution and ordinary copy protocol against the native explicit parameterless DeepCopy behavior."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-delitem-554e0ab1"
       ],
       "index": 837,
@@ -2733,6 +2751,15 @@
       ],
       "index": 839,
       "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET DaySchedule.__gt__ behavior across the 321-case DaySchedule operation oracle."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-deterministic-day-schedule-construction",
+        "upstream/symbol-evidence.json#profile-dayschedule-core-init-64dc644b"
+      ],
+      "exception_id": "immutable-deterministic-day-schedule-construction",
+      "index": 840,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.__init__ across the exact 3-case symbol slice: default and explicit construction, deterministic and normalized text, exact 144-slot copying, every schedule domain, and atomic invalid-length, type, domain, blank-name and non-finite failures, and directly observes upstream process-address names, mutable storage, permissive text and non-finite Real values against native stable names, copied storage, normalized text and finite typed validation."
     },
     {
       "evidence": [
@@ -2816,6 +2843,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-day-schedule-item-update",
+        "upstream/symbol-evidence.json#profile-dayschedule-core-setitem-f7d024f8"
+      ],
+      "exception_id": "immutable-day-schedule-item-update",
+      "index": 851,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.__setitem__ across the exact 3-case symbol slice: first, interior and last functional updates, exact surrounding values and metadata, source immutability, and atomic type-domain and bounds failures, and directly observes upstream in-place negative-index and slice assignment against native non-negative functional WithValue updates with an unchanged source."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-str-324659f1"
       ],
       "index": 852,
@@ -2848,6 +2884,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-day-schedule-astype",
+        "upstream/symbol-evidence.json#profile-dayschedule-core-astype-b9602775"
+      ],
+      "exception_id": "immutable-day-schedule-astype",
+      "index": 856,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.astype across the exact 3-case symbol slice: every supported copied type conversion, exact values/name/unit, fresh result identity, source immutability, and atomic invalid conversion, and directly observes upstream string-enum and in-place conversion against the native enum-only immutable AsType result and unchanged source."
+    },
+    {
+      "evidence": [
         "upstream/symbol-evidence.json#profile-dayschedule-average-55bc4967"
       ],
       "index": 857,
@@ -2859,6 +2904,22 @@
       ],
       "index": 858,
       "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-day-schedule-clip",
+        "upstream/symbol-evidence.json#profile-dayschedule-core-clip-d8d83254"
+      ],
+      "exception_id": "immutable-day-schedule-clip",
+      "index": 859,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.clip across the exact 3-case symbol slice: no-bound, one-bound and two-bound results, exact values/type/unit and result-name fallbacks, source immutability, and atomic invalid-bound and non-finite failures, and directly observes upstream in-place, reversed-bound, permissive-name and non-finite behavior against native immutable clipping, validated bounds/names and finite authoring invariants."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-core-compactize-b8cb0746"
+      ],
+      "index": 860,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.compactize across the exact 3-case symbol slice: the exact ordered end-inclusive segment boundaries and binary64 values for constant, alternating, signed-zero and multi-run cases without changing the source."
     },
     {
       "evidence": [
@@ -2905,6 +2966,33 @@
       ],
       "index": 866,
       "rationale": "Trusted cross-language evidence verifies the exact fixed DaySchedule length."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-deterministic-day-schedule-from-compact",
+        "upstream/symbol-evidence.json#profile-dayschedule-core-from-compact-7584e03e"
+      ],
+      "exception_id": "validated-deterministic-day-schedule-from-compact",
+      "index": 867,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.from_compact across the exact 3-case symbol slice: exact end-inclusive ten-minute expansion, input isolation, deterministic naming, all valid boundaries, and explicit empty, terminal, ordering, alignment, domain and non-finite validation, and directly observes upstream incidental tuple/list failures, runtime names and permissive malformed or non-finite definitions against native explicit grid/range/domain validation."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-finite-day-schedule-from-constant",
+        "upstream/symbol-evidence.json#profile-dayschedule-core-from-constant-71ce65d4"
+      ],
+      "exception_id": "deterministic-finite-day-schedule-from-constant",
+      "index": 868,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.from_constant across the exact 3-case symbol slice: exact 144-value constants for every supported native scalar and schedule domain, deterministic naming, and atomic unsupported, domain and non-finite failures, and directly observes upstream runtime names and permitted non-finite Real constants against native stable names, supported scalar dispatch and finite typed validation."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-deterministic-day-schedule-from-windows",
+        "upstream/symbol-evidence.json#profile-dayschedule-core-from-windows-5a0b430f"
+      ],
+      "exception_id": "validated-deterministic-day-schedule-from-windows",
+      "index": 869,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.from_windows across the exact 3-case symbol slice: exact outside defaults, start-inclusive/end-exclusive boundaries, first-match overlap precedence, deterministic naming, and atomic range, domain and non-finite validation, and directly observes upstream permissive reversed/out-of-day and non-finite windows plus runtime names against native explicit ranges, finite typed values and stable names."
     },
     {
       "evidence": [
@@ -3047,6 +3135,36 @@
       ],
       "index": 889,
       "rationale": "Trusted cross-language evidence verifies the exact DaySchedule step duration."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-core-summary-0dc726d3"
+      ],
+      "index": 890,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.summary across the exact 3-case symbol slice: the exact ordinal summary strings and run-limit behavior while preserving all source values and metadata."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-core-time-tuple-a7a04f77"
+      ],
+      "index": 891,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.time_tuple across the exact 3-case symbol slice: the exact stable 144-item consecutive ten-minute grid through 24:00 and its native read-only collection behavior."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-core-idf-compactexpr-e33e015c"
+      ],
+      "index": 892,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.to_idf_compactexpr across the exact 3-case symbol slice: the exact culture-invariant EnergyPlus compact-expression lines, Until boundaries, Boolean spelling, binary64 formatting and terminal 24:00 coverage."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-validated-day-schedule-type",
+        "upstream/symbol-evidence.json#profile-dayschedule-core-type-6c3809ae"
+      ],
+      "exception_id": "immutable-validated-day-schedule-type",
+      "index": 893,
+      "rationale": "Trusted cross-language evidence verifies DaySchedule.type across the exact 3-case symbol slice: the exact strongly typed getter across every schedule domain, immutable conversions, and atomic rejection of inconsistent value/type combinations, and directly observes the upstream mutable string-or-enum type setter and stale-domain state against the native read-only enum and validated immutable AsType conversion."
     },
     {
       "evidence": [
@@ -4068,9 +4186,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 86,
-      "exception": 50,
-      "needs_reverification": 854,
+      "equivalent": 90,
+      "exception": 60,
+      "needs_reverification": 840,
       "out_of_scope": 252
     },
     "entry_count": 1242
