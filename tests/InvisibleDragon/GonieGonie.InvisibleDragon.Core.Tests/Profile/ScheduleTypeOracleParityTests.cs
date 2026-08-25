@@ -1,9 +1,11 @@
 using System.Globalization;
+using System.Security.Cryptography;
 using System.Text.Json;
 using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Model;
 using GonieGonie.InvisibleDragon.Profile;
 using GonieGonie.InvisibleDragon.Shape;
+using GonieGonie.UpstreamTracker;
 
 namespace GonieGonie.InvisibleDragon.Tests;
 
@@ -12,7 +14,15 @@ public sealed class ScheduleTypeOracleParityTests
     private const string OracleSchema = "goniegonie.invisibledragon.schedule-type-oracle.v1";
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/dragon/profile.py";
+    private const string InventorySha256 =
+        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
     private const string UpstreamSourceSha256 = "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445";
+    private const string OracleRepositoryPath =
+        "fixtures/reference/python-0.7.0/schedule-type-oracle.json";
+    private const string OracleSha256 =
+        "sha256:68e858a2b243df127663b801f80396671e069645b11659e55ad48eb81973e705";
+    private const string EvidenceTestCase =
+        "GonieGonie.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython";
     private static readonly (string Symbol, string Hash)[] ExpectedSymbols =
     {
         ("ScheduleType", "sha256:f873f5e850d3f042a188507bae21c0e74e115483b80a46f72872438e8eeaa38a"),
@@ -32,14 +42,25 @@ public sealed class ScheduleTypeOracleParityTests
     [Fact]
     public void MatchesPinnedPython()
     {
-        using JsonDocument oracle = JsonDocument.Parse(File.ReadAllBytes(FindOraclePath()));
+        byte[] oracleBytes = File.ReadAllBytes(FindOraclePath());
+        string oracleSha256 =
+            $"sha256:{Convert.ToHexString(SHA256.HashData(oracleBytes)).ToLowerInvariant()}";
+        Assert.Equal(OracleSha256, oracleSha256);
+        using JsonDocument oracle = JsonDocument.Parse(oracleBytes);
         JsonElement root = oracle.RootElement;
         Assert.Equal(OracleSchema, root.GetProperty("schema").GetString());
 
         JsonElement upstream = root.GetProperty("upstream");
         Assert.Equal(UpstreamCommit, upstream.GetProperty("commit").GetString());
         Assert.Equal(UpstreamPath, upstream.GetProperty("path").GetString());
+        Assert.Equal(InventorySha256, upstream.GetProperty("inventory_sha256").GetString());
         Assert.Equal(UpstreamSourceSha256, upstream.GetProperty("source_sha256").GetString());
+        JsonElement runtime = root.GetProperty("runtime");
+        Assert.Equal("cpython", RequiredString(runtime, "implementation"));
+        Assert.Equal("3.12.7", RequiredString(runtime, "python_version"));
+        Assert.Equal(0, runtime.GetProperty("python_hash_seed").GetInt32());
+        Assert.Equal("siphash13", RequiredString(runtime, "python_hash_algorithm"));
+        Assert.Equal(64, runtime.GetProperty("python_hash_width_bits").GetInt32());
         AssertPinnedSymbols(root.GetProperty("symbols"));
 
         JsonElement.ArrayEnumerator typeRows = root.GetProperty("types").EnumerateArray();
@@ -60,7 +81,7 @@ public sealed class ScheduleTypeOracleParityTests
         IdfObject[] legacyObjects = CreateTypeLimitObjects(legacySimpleDragon: true);
         Assert.Equal(rows.Length, legacyObjects.Length);
 
-        int realNonFiniteSafetyDivergences = 0;
+        List<ValidationObservation> validationObservations = new();
         for (int index = 0; index < rows.Length; index++)
         {
             JsonElement row = rows[index];
@@ -85,17 +106,224 @@ public sealed class ScheduleTypeOracleParityTests
 
             foreach (JsonElement validationCase in validationCases)
             {
-                realNonFiniteSafetyDivergences += AssertValidationCase(type, validationCase);
+                validationObservations.Add(AssertValidationCase(type, validationCase));
             }
         }
 
-        Assert.Equal(3, realNonFiniteSafetyDivergences);
+        Assert.Equal(44, validationObservations.Count);
+        Assert.Equal(
+            3,
+            validationObservations.Count(item => item.RegisteredSafetyDivergence));
 
         IdfObject[] nativeObjects = CreateTypeLimitObjects(legacySimpleDragon: false);
         Assert.Equal("ScheduleTypeLimits:OnOff", nativeObjects[(int)ScheduleType.OnOff].Fields[0].Value);
         Assert.NotEqual(
             ScheduleType.OnOff.IdfObjectName(),
             nativeObjects[(int)ScheduleType.OnOff].Fields[0].Value);
+
+        ScheduleType[] orderedTypes = Enum.GetValues<ScheduleType>();
+        var fixture = new
+        {
+            path = OracleRepositoryPath,
+            sha256 = oracleSha256,
+        };
+        Dictionary<ScheduleType, string> oracleEnumNames = rows.ToDictionary(
+            row => ParseType(RequiredString(row, "type")),
+            row => RequiredString(row, "enum_name"));
+
+        TrustedEvidenceRecorder.Record(
+            "profile-scheduletype-f873f5e8",
+            EvidenceTestCase,
+            "not_applicable",
+            new
+            {
+                fixture,
+                observations = new
+                {
+                    count = orderedTypes.Length,
+                    ordered_types = orderedTypes.Select((type, ordinal) => new
+                    {
+                        canonical_name = type.CanonicalName(),
+                        dotnet_name = type.ToString(),
+                        ordinal,
+                    }).ToArray(),
+                },
+                upstream_symbol = "ScheduleType",
+            });
+        RecordScheduleTypeConstant(
+            "profile-scheduletype-fraction-00d89a2b",
+            "ScheduleType.FRACTION",
+            ScheduleType.Fraction,
+            oracleEnumNames[ScheduleType.Fraction],
+            fixture);
+        RecordScheduleTypeConstant(
+            "profile-scheduletype-onoff-767a33fe",
+            "ScheduleType.ONOFF",
+            ScheduleType.OnOff,
+            oracleEnumNames[ScheduleType.OnOff],
+            fixture);
+        RecordScheduleTypeConstant(
+            "profile-scheduletype-real-daaa37fa",
+            "ScheduleType.REAL",
+            ScheduleType.Real,
+            oracleEnumNames[ScheduleType.Real],
+            fixture);
+        RecordScheduleTypeConstant(
+            "profile-scheduletype-temperature-a85b41c5",
+            "ScheduleType.TEMPERATURE",
+            ScheduleType.Temperature,
+            oracleEnumNames[ScheduleType.Temperature],
+            fixture);
+        TrustedEvidenceRecorder.Record(
+            "profile-scheduletype-idf-objname-6922ec3f",
+            EvidenceTestCase,
+            "not_applicable",
+            new
+            {
+                fixture,
+                observations = new
+                {
+                    values = orderedTypes.Select(type => new
+                    {
+                        type = type.CanonicalName(),
+                        value = type.IdfObjectName(),
+                    }).ToArray(),
+                },
+                upstream_symbol = "ScheduleType.idf_objname",
+            });
+        TrustedEvidenceRecorder.Record(
+            "profile-scheduletype-lower-limit-e4bfd0fa",
+            EvidenceTestCase,
+            "not_applicable",
+            new
+            {
+                fixture,
+                observations = new
+                {
+                    values = orderedTypes.Select(type => new
+                    {
+                        type = type.CanonicalName(),
+                        value = type.LowerLimit(),
+                    }).ToArray(),
+                },
+                upstream_symbol = "ScheduleType.lower_limit",
+            });
+        TrustedEvidenceRecorder.Record(
+            "profile-scheduletype-numeric-type-723a1640",
+            EvidenceTestCase,
+            "not_applicable",
+            new
+            {
+                fixture,
+                observations = new
+                {
+                    values = orderedTypes.Select(type => new
+                    {
+                        type = type.CanonicalName(),
+                        value = type.NumericType(),
+                    }).ToArray(),
+                },
+                upstream_symbol = "ScheduleType.numeric_type",
+            });
+        TrustedEvidenceRecorder.Record(
+            "profile-scheduletype-to-idf-object-7f67c4b1",
+            EvidenceTestCase,
+            "not_applicable",
+            new
+            {
+                fixture,
+                observations = new
+                {
+                    objects = orderedTypes.Select(type =>
+                    {
+                        IdfObject value = type.ToIdfObject();
+                        return new
+                        {
+                            fields = value.Fields.Select(field => field.Value).ToArray(),
+                            object_type = value.ObjectType,
+                            type = type.CanonicalName(),
+                        };
+                    }).ToArray(),
+                },
+                upstream_symbol = "ScheduleType.to_idf_object",
+            });
+        TrustedEvidenceRecorder.Record(
+            "profile-scheduletype-unit-type-66ea929d",
+            EvidenceTestCase,
+            "not_applicable",
+            new
+            {
+                fixture,
+                observations = new
+                {
+                    values = orderedTypes.Select(type => new
+                    {
+                        type = type.CanonicalName(),
+                        value = type.UnitType(),
+                    }).ToArray(),
+                },
+                upstream_symbol = "ScheduleType.unit_type",
+            });
+        TrustedEvidenceRecorder.Record(
+            "profile-scheduletype-upper-limit-e921c8fa",
+            EvidenceTestCase,
+            "not_applicable",
+            new
+            {
+                fixture,
+                observations = new
+                {
+                    values = orderedTypes.Select(type => new
+                    {
+                        type = type.CanonicalName(),
+                        value = type.UpperLimit(),
+                    }).ToArray(),
+                },
+                upstream_symbol = "ScheduleType.upper_limit",
+            });
+        TrustedEvidenceRecorder.Record(
+            "profile-scheduletype-validate-b0990310",
+            EvidenceTestCase,
+            "not_applicable",
+            new
+            {
+                fixture,
+                observations = new
+                {
+                    case_count = validationObservations.Count,
+                    cases = validationObservations.Select(item => new
+                    {
+                        case_id = item.CaseId,
+                        dotnet = new
+                        {
+                            error_category = item.DotnetErrorCategory,
+                            finite_value = item.DotnetFiniteValue,
+                            numeric_kind = item.DotnetNumericKind,
+                            status = item.DotnetStatus,
+                            value_kind = item.DotnetValueKind,
+                            value_token = item.DotnetValueToken,
+                        },
+                        input_kind = item.InputKind,
+                        native_numeric_kind_adaptation = item.NativeNumericKindAdaptation,
+                        python = new
+                        {
+                            error_category = item.PythonErrorCategory,
+                            finite_value = item.PythonFiniteValue,
+                            numeric_kind = item.PythonNumericKind,
+                            status = item.PythonStatus,
+                            value_kind = item.PythonValueKind,
+                            value_token = item.PythonValueToken,
+                        },
+                        registered_safety_divergence = item.RegisteredSafetyDivergence,
+                        type = item.Type,
+                    }).ToArray(),
+                    native_numeric_kind_adaptation_count = validationObservations.Count(
+                        item => item.NativeNumericKindAdaptation),
+                    real_nonfinite_safety_divergence_count = validationObservations.Count(
+                        item => item.RegisteredSafetyDivergence),
+                },
+                upstream_symbol = "ScheduleType.validate",
+            });
     }
 
     private static void AssertPinnedSymbols(JsonElement symbolsElement)
@@ -110,14 +338,18 @@ public sealed class ScheduleTypeOracleParityTests
         }
     }
 
-    private static int AssertValidationCase(ScheduleType type, JsonElement validationCase)
+    private static ValidationObservation AssertValidationCase(
+        ScheduleType type,
+        JsonElement validationCase)
     {
         JsonElement inputElement = validationCase.GetProperty("input");
         JsonElement outcome = validationCase.GetProperty("outcome");
         object input = DecodeInput(inputElement);
+        string caseId = RequiredString(validationCase, "id");
+        string inputKind = RequiredString(inputElement, "kind");
         string status = RequiredString(outcome, "status");
         bool isRealNonFinite = type == ScheduleType.Real
-            && RequiredString(inputElement, "kind") == "nonfinite";
+            && inputKind == "nonfinite";
 
         if (isRealNonFinite)
         {
@@ -128,26 +360,54 @@ public sealed class ScheduleTypeOracleParityTests
             Assert.Equal(
                 RequiredString(inputElement, "value"),
                 RequiredString(expectedValue, "value"));
-            Assert.Throws<ArgumentOutOfRangeException>(
+            Exception? error = Record.Exception(
                 () => type.ValidateValue(input, "fixtureValue"));
-            return 1;
+            string dotnetCategory = RequiredDotnetErrorCategory(error);
+            Assert.Equal("domain", dotnetCategory);
+            return new ValidationObservation(
+                type.CanonicalName(),
+                caseId,
+                inputKind,
+                status,
+                "error",
+                null,
+                dotnetCategory,
+                RequiredString(outcome, "numeric_kind"),
+                null,
+                RequiredString(expectedValue, "kind"),
+                null,
+                null,
+                null,
+                RequiredString(expectedValue, "value"),
+                null,
+                false,
+                true);
         }
 
         if (status == "error")
         {
             Exception? error = Record.Exception(() => type.ValidateValue(input, "fixtureValue"));
             string category = RequiredString(outcome, "error_category");
-            if (category == "type")
-            {
-                Assert.IsType<ArgumentException>(error);
-            }
-            else
-            {
-                Assert.Equal("domain", category);
-                Assert.IsType<ArgumentOutOfRangeException>(error);
-            }
-
-            return 0;
+            string dotnetCategory = RequiredDotnetErrorCategory(error);
+            Assert.Equal(category, dotnetCategory);
+            return new ValidationObservation(
+                type.CanonicalName(),
+                caseId,
+                inputKind,
+                status,
+                "error",
+                category,
+                dotnetCategory,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false);
         }
 
         Assert.Equal("value", status);
@@ -158,7 +418,61 @@ public sealed class ScheduleTypeOracleParityTests
 
         string expectedNumericKind = type == ScheduleType.OnOff ? "int" : "float";
         Assert.Equal(expectedNumericKind, RequiredString(outcome, "numeric_kind"));
-        return 0;
+        return new ValidationObservation(
+            type.CanonicalName(),
+            caseId,
+            inputKind,
+            status,
+            "value",
+            null,
+            null,
+            expectedNumericKind,
+            "double",
+            "finite",
+            "finite",
+            expected.GetProperty("value").GetDouble(),
+            actual,
+            null,
+            null,
+            expectedNumericKind == "int",
+            false);
+    }
+
+    private static string RequiredDotnetErrorCategory(Exception? error)
+    {
+        return error switch
+        {
+            ArgumentOutOfRangeException => "domain",
+            ArgumentException => "type",
+            null => throw new Xunit.Sdk.XunitException(
+                "Expected schedule validation to throw an argument exception."),
+            _ => throw new Xunit.Sdk.XunitException(
+                $"Unexpected schedule validation exception '{error.GetType().FullName}'."),
+        };
+    }
+
+    private static void RecordScheduleTypeConstant<TFixture>(
+        string assertionId,
+        string upstreamSymbol,
+        ScheduleType type,
+        string oracleEnumName,
+        TFixture fixture)
+    {
+        TrustedEvidenceRecorder.Record(
+            assertionId,
+            EvidenceTestCase,
+            "not_applicable",
+            new
+            {
+                fixture,
+                observations = new
+                {
+                    canonical_name = type.CanonicalName(),
+                    dotnet_name = type.ToString(),
+                    oracle_enum_name = oracleEnumName,
+                },
+                upstream_symbol = upstreamSymbol,
+            });
     }
 
     private static object DecodeInput(JsonElement input)
@@ -301,4 +615,23 @@ public sealed class ScheduleTypeOracleParityTests
         throw new FileNotFoundException(
             "Could not locate fixtures/reference/python-0.7.0/schedule-type-oracle.json.");
     }
+
+    private sealed record ValidationObservation(
+        string Type,
+        string CaseId,
+        string InputKind,
+        string PythonStatus,
+        string DotnetStatus,
+        string? PythonErrorCategory,
+        string? DotnetErrorCategory,
+        string? PythonNumericKind,
+        string? DotnetNumericKind,
+        string? PythonValueKind,
+        string? DotnetValueKind,
+        double? PythonFiniteValue,
+        double? DotnetFiniteValue,
+        string? PythonValueToken,
+        string? DotnetValueToken,
+        bool NativeNumericKindAdaptation,
+        bool RegisteredSafetyDivergence);
 }
