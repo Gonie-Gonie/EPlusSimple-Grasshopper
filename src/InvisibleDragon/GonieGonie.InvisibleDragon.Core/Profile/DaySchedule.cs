@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Numerics;
+using System.Text;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Internal;
 
@@ -62,20 +63,27 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public static readonly TimeSpan Step = TimeSpan.FromMinutes(60d / IntervalsPerHour);
 
+    private static readonly IReadOnlyList<TimeSpan> IntervalEndTimes =
+        new ReadOnlyCollection<TimeSpan>(
+            Enumerable.Range(1, FixedLength)
+                .Select(index => TimeSpan.FromTicks(Step.Ticks * index))
+                .ToArray());
+
     public DaySchedule(
-        string name,
-        IEnumerable<double> values,
+        string? name = null,
+        IEnumerable<double>? values = null,
         ScheduleType type = ScheduleType.Real,
         string? unit = null)
     {
-        Name = DomainGuard.RequiredText(name, nameof(name));
-        DomainGuard.NotNull(values, nameof(values));
+        Name = name is null
+            ? "anonymous"
+            : DomainGuard.RequiredText(name, nameof(name));
         if (!Enum.IsDefined(typeof(ScheduleType), type))
         {
             throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown schedule type.");
         }
 
-        double[] copy = values.ToArray();
+        double[] copy = (values ?? Enumerable.Repeat(0d, FixedLength)).ToArray();
         if (copy.Length != FixedLength)
         {
             throw new ArgumentException($"A day schedule requires exactly {FixedLength} values.", nameof(values));
@@ -192,7 +200,7 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
     }
 
     public static DaySchedule Constant(
-        string name,
+        string? name,
         double value,
         ScheduleType type = ScheduleType.Real,
         string? unit = null)
@@ -200,8 +208,21 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         return new DaySchedule(name, Enumerable.Repeat(value, FixedLength), type, unit);
     }
 
+    public static DaySchedule FromConstant<T>(
+        string? name,
+        T value,
+        ScheduleType type = ScheduleType.Real)
+    {
+        PythonScalar scalar = PythonScalar.Create(value, "constant schedule value");
+        double scheduleValue = scalar.ToScheduleValue(type, "constant schedule value");
+        return new DaySchedule(
+            name,
+            Enumerable.Repeat(scheduleValue, FixedLength),
+            type);
+    }
+
     public static DaySchedule FromCompact(
-        string name,
+        string? name,
         IEnumerable<DayScheduleSegment> segments,
         ScheduleType type = ScheduleType.Real,
         string? unit = null)
@@ -257,7 +278,7 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
     }
 
     public static DaySchedule FromWindows(
-        string name,
+        string? name,
         double defaultValue,
         IEnumerable<DayScheduleWindow> windows,
         ScheduleType type = ScheduleType.Real,
@@ -300,6 +321,11 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         return new DaySchedule(Name, Values, type, Unit);
     }
 
+    public DaySchedule DeepCopy()
+    {
+        return new DaySchedule($"{Name}:COPY", Values, Type, Unit);
+    }
+
     internal static string FormatPythonScalar<T>(T value, string operation)
     {
         return PythonScalar.Create(value, operation).Text;
@@ -318,12 +344,7 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         T value,
         ScheduleType type)
     {
-        PythonScalar scalar = PythonScalar.Create(value, "constant schedule value");
-        double scheduleValue = scalar.ToScheduleValue(type, "constant schedule value");
-        return new DaySchedule(
-            name,
-            Enumerable.Repeat(scheduleValue, FixedLength),
-            type);
+        return FromConstant(name, value, type);
     }
 
     internal DaySchedule AddPythonScalar<T>(T value)
@@ -367,14 +388,32 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public DaySchedule Clip(double? minimum = null, double? maximum = null, string? name = null)
     {
+        if (minimum.HasValue)
+        {
+            DomainGuard.Finite(minimum.Value, nameof(minimum));
+        }
+
+        if (maximum.HasValue)
+        {
+            DomainGuard.Finite(maximum.Value, nameof(maximum));
+        }
+
         if (minimum.HasValue && maximum.HasValue && minimum.Value > maximum.Value)
         {
             throw new ArgumentException("Minimum cannot exceed maximum.");
         }
 
         return new DaySchedule(
-            name ?? $"{Name}:CLIP",
-            Values.Select(value => Math.Min(maximum ?? double.PositiveInfinity, Math.Max(minimum ?? double.NegativeInfinity, value))),
+            string.IsNullOrEmpty(name) ? $"{Name}:CLIP" : name,
+            Values.Select(value =>
+            {
+                double clipped = minimum.HasValue && !(value > minimum.Value)
+                    ? minimum.Value
+                    : value;
+                return maximum.HasValue && !(clipped < maximum.Value)
+                    ? maximum.Value
+                    : clipped;
+            }),
             Type,
             Unit);
     }
@@ -396,7 +435,7 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         List<DayScheduleSegment> segments = new();
         for (int index = 0; index < Values.Count; index++)
         {
-            TimeSpan until = TimeSpan.FromTicks(Step.Ticks * (index + 1L));
+            TimeSpan until = IntervalEndTimes[index];
             if (index == 0 || Values[index] != Values[index - 1])
             {
                 segments.Add(new DayScheduleSegment(until, Values[index]));
@@ -408,6 +447,69 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         }
 
         return new ReadOnlyCollection<DayScheduleSegment>(segments);
+    }
+
+    /// <summary>
+    /// Gets the 144 consecutive ten-minute interval end times from 00:10 through 24:00.
+    /// </summary>
+    public static IReadOnlyList<TimeSpan> TimeTuple()
+    {
+        return new ReadOnlyCollection<TimeSpan>(IntervalEndTimes.ToArray());
+    }
+
+    public string Summary(int maxSegments = 6)
+    {
+        IReadOnlyList<DayScheduleSegment> compact = Compactize();
+        string unitText = Unit is null ? string.Empty : $", unit={Unit}";
+        var lines = new List<string>
+        {
+            $"DaySchedule {PythonRepr(Name)} "
+                + $"[type={Type.CanonicalName()}{unitText}, steps={FixedLength}, "
+                + $"interval={(int)Step.TotalMinutes} min]",
+            $"  range: min={FormatPythonGeneral(Minimum)}, "
+                + $"max={FormatPythonGeneral(Maximum)}, "
+                + $"constant={(compact.Count == 1 ? "True" : "False")}, "
+                + $"segments={compact.Count}",
+        };
+
+        int previewCount = maxSegments >= 0
+            ? Math.Min(maxSegments, compact.Count)
+            : (int)Math.Max((long)compact.Count + maxSegments, 0L);
+        for (int index = 0; index < previewCount; index++)
+        {
+            DayScheduleSegment segment = compact[index];
+            lines.Add(
+                $"  Until {(int)segment.Until.TotalHours:00}:{segment.Until.Minutes:00} "
+                + $"-> {FormatPythonGeneral(segment.Value)}");
+        }
+
+        if (compact.Count > maxSegments)
+        {
+            long hiddenCount = (long)compact.Count - maxSegments;
+            lines.Add($"  ... ({hiddenCount} more segments)");
+        }
+
+        return string.Join("\n", lines);
+    }
+
+    public override string ToString()
+    {
+        return Summary();
+    }
+
+    public IReadOnlyList<string> ToIdfCompactExpression()
+    {
+        var fields = new List<string>();
+        foreach (DayScheduleSegment segment in Compactize())
+        {
+            fields.Add(
+                $"Until: {(int)segment.Until.TotalHours:00}:{segment.Until.Minutes:00}");
+            fields.Add(Type == ScheduleType.OnOff
+                ? ((int)segment.Value).ToString(CultureInfo.InvariantCulture)
+                : FormatPythonScalar(segment.Value, "IDF serialization"));
+        }
+
+        return new ReadOnlyCollection<string>(fields);
     }
 
     public DaySchedule ElementEqual(double value)
@@ -1623,6 +1725,123 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
             : significand.CompareTo(integer << -binaryExponent);
     }
 
+    private static string FormatPythonGeneral(double value)
+    {
+        const int precision = 4;
+        long signedBits = BitConverter.DoubleToInt64Bits(value);
+        bool isNegative = signedBits < 0;
+        ulong bits = unchecked((ulong)signedBits);
+        ulong magnitudeBits = bits & 0x7fff_ffff_ffff_ffffUL;
+        if (magnitudeBits == 0)
+        {
+            return isNegative ? "-0" : "0";
+        }
+
+        int exponentBits = (int)((magnitudeBits >> 52) & 0x7ffUL);
+        if (exponentBits == 0x7ff)
+        {
+            if ((magnitudeBits & 0x000f_ffff_ffff_ffffUL) != 0)
+            {
+                return "nan";
+            }
+
+            return isNegative ? "-inf" : "inf";
+        }
+
+        ulong fractionBits = magnitudeBits & 0x000f_ffff_ffff_ffffUL;
+        ulong significand = exponentBits == 0
+            ? fractionBits
+            : fractionBits | 0x0010_0000_0000_0000UL;
+        int binaryExponent = exponentBits == 0
+            ? -1074
+            : exponentBits - 1023 - 52;
+        BigInteger numerator = new(significand);
+        BigInteger denominator = BigInteger.One;
+        if (binaryExponent >= 0)
+        {
+            numerator <<= binaryExponent;
+        }
+        else
+        {
+            denominator <<= -binaryExponent;
+        }
+
+        int decimalExponent = (int)Math.Floor(Math.Log10(Math.Abs(value)));
+        while (CompareRationalToPowerOfTen(numerator, denominator, decimalExponent) < 0)
+        {
+            decimalExponent--;
+        }
+
+        while (CompareRationalToPowerOfTen(numerator, denominator, decimalExponent + 1) >= 0)
+        {
+            decimalExponent++;
+        }
+
+        int decimalScale = precision - 1 - decimalExponent;
+        BigInteger scaledNumerator = numerator;
+        BigInteger scaledDenominator = denominator;
+        if (decimalScale >= 0)
+        {
+            scaledNumerator *= BigInteger.Pow(10, decimalScale);
+        }
+        else
+        {
+            scaledDenominator *= BigInteger.Pow(10, -decimalScale);
+        }
+
+        BigInteger rounded = BigInteger.DivRem(
+            scaledNumerator,
+            scaledDenominator,
+            out BigInteger remainder);
+        int midpointComparison = (remainder << 1).CompareTo(scaledDenominator);
+        if (midpointComparison > 0 || (midpointComparison == 0 && !rounded.IsEven))
+        {
+            rounded += BigInteger.One;
+        }
+
+        BigInteger overflowThreshold = BigInteger.Pow(10, precision);
+        if (rounded == overflowThreshold)
+        {
+            rounded /= 10;
+            decimalExponent++;
+        }
+
+        string digits = rounded.ToString(CultureInfo.InvariantCulture);
+        string formatted;
+        if (decimalExponent < -4 || decimalExponent >= precision)
+        {
+            string fractionalDigits = digits.Remove(0, 1).TrimEnd('0');
+            string mantissa = fractionalDigits.Length == 0
+                ? digits[0].ToString()
+                : $"{digits[0]}.{fractionalDigits}";
+            string exponentSign = decimalExponent >= 0 ? "+" : "-";
+            formatted = $"{mantissa}e{exponentSign}{Math.Abs(decimalExponent):D2}";
+        }
+        else
+        {
+            int decimalPosition = decimalExponent + 1;
+            if (decimalPosition <= 0)
+            {
+                formatted = $"0.{new string('0', -decimalPosition)}{digits}";
+            }
+            else if (decimalPosition >= digits.Length)
+            {
+                formatted = digits + new string('0', decimalPosition - digits.Length);
+            }
+            else
+            {
+                formatted = digits.Insert(decimalPosition, ".");
+            }
+
+            if (ContainsCharacter(formatted, '.'))
+            {
+                formatted = formatted.TrimEnd('0').TrimEnd('.');
+            }
+        }
+
+        return isNegative ? $"-{formatted}" : formatted;
+    }
+
     private static string FormatPythonFloat(double value)
     {
         if (double.IsNaN(value))
@@ -1883,5 +2102,115 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         result[position] = '.';
         digits.CopyTo(position, result, position + 1, digits.Length - position);
         return new string(result);
+    }
+
+    private static string PythonRepr(string value)
+    {
+        char quote = ContainsCharacter(value, '\'')
+            && !ContainsCharacter(value, '"')
+                ? '"'
+                : '\'';
+        var result = new StringBuilder(value.Length + 2);
+        result.Append(quote);
+        for (int index = 0; index < value.Length; index++)
+        {
+            char character = value[index];
+            switch (character)
+            {
+                case '\\': result.Append("\\\\"); break;
+                case '\n': result.Append("\\n"); break;
+                case '\r': result.Append("\\r"); break;
+                case '\t': result.Append("\\t"); break;
+                case '\b': result.Append("\\x08"); break;
+                case '\f': result.Append("\\x0c"); break;
+                default:
+                    if (character == quote)
+                    {
+                        result.Append('\\').Append(character);
+                    }
+                    else if (char.IsHighSurrogate(character)
+                        && index + 1 < value.Length
+                        && char.IsLowSurrogate(value[index + 1]))
+                    {
+                        int codePoint = char.ConvertToUtf32(character, value[index + 1]);
+                        UnicodeCategory category = CharUnicodeInfo.GetUnicodeCategory(value, index);
+                        if (IsPythonPrintable(codePoint, category))
+                        {
+                            result.Append(character).Append(value[index + 1]);
+                        }
+                        else
+                        {
+                            AppendPythonUnicodeEscape(result, codePoint);
+                        }
+
+                        index++;
+                    }
+                    else
+                    {
+                        UnicodeCategory category = char.GetUnicodeCategory(character);
+                        if (IsPythonPrintable(character, category))
+                        {
+                            result.Append(character);
+                        }
+                        else
+                        {
+                            AppendPythonUnicodeEscape(result, character);
+                        }
+                    }
+
+                    break;
+            }
+        }
+
+        return result.Append(quote).ToString();
+    }
+
+    private static bool IsPythonPrintable(int codePoint, UnicodeCategory category)
+    {
+        if (codePoint == 0x20)
+        {
+            return true;
+        }
+
+        return category is not UnicodeCategory.Control
+            and not UnicodeCategory.Format
+            and not UnicodeCategory.Surrogate
+            and not UnicodeCategory.PrivateUse
+            and not UnicodeCategory.OtherNotAssigned
+            and not UnicodeCategory.SpaceSeparator
+            and not UnicodeCategory.LineSeparator
+            and not UnicodeCategory.ParagraphSeparator;
+    }
+
+    private static void AppendPythonUnicodeEscape(StringBuilder result, int codePoint)
+    {
+        if (codePoint <= byte.MaxValue)
+        {
+            result.Append("\\x")
+                .Append(codePoint.ToString("x2", CultureInfo.InvariantCulture));
+        }
+        else if (codePoint <= char.MaxValue)
+        {
+            result.Append("\\u")
+                .Append(codePoint.ToString("x4", CultureInfo.InvariantCulture));
+        }
+        else
+        {
+            result.Append("\\U")
+                .Append(codePoint.ToString("x8", CultureInfo.InvariantCulture));
+        }
+    }
+
+    private static bool ContainsCharacter(string value, char target)
+    {
+        foreach (char character in value)
+        {
+            if (character == target)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -28,6 +28,11 @@
       "sha256": "27157ebe6e927e2ba9faabf1a00a6d02480993b1802616c37d2d6bc02c82dffd"
     },
     {
+      "path": "day-schedule-core-oracle.json",
+      "bytes": 166372,
+      "sha256": "202c889b0c38d5571fd6c55aa1eac4cc94344f177df09d5654086860bc714239"
+    },
+    {
       "path": "day-schedule-metrics-oracle.json",
       "bytes": 24749,
       "sha256": "45ef72b5561dd159859cf9c295ee5652450f3c37d213bfcb81f1ade79c5967b5"

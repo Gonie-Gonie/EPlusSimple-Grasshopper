@@ -1,0 +1,5709 @@
+{
+  "cases": [
+    {
+      "executor": "astype",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-astype",
+        "outcome": "returned"
+      },
+      "id": "astype.inplace",
+      "python": {
+        "facts": {
+          "return_is_none": true,
+          "source_after": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "typed"
+            },
+            "schedule_type": "real",
+            "unit": "ratio",
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.8000000000000p-1",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.astype"
+    },
+    {
+      "executor": "astype",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-astype",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "astype.invalid-atomic",
+      "python": {
+        "error_category": "domain",
+        "exception_type": "ValueError",
+        "facts": {
+          "source_after": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "typed"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p+1",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          },
+          "source_before": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "typed"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p+1",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "message": "Fraction schedule value must be within [0, 1], got 2.0.",
+        "outcome": "raised"
+      },
+      "symbol": "DaySchedule.astype"
+    },
+    {
+      "executor": "astype",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-astype",
+        "outcome": "returned"
+      },
+      "id": "astype.outplace-string",
+      "python": {
+        "facts": {
+          "fresh": true,
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "typed"
+            },
+            "schedule_type": "real",
+            "unit": "flag",
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          },
+          "source": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "typed"
+            },
+            "schedule_type": "onoff",
+            "unit": "flag",
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                0,
+                1
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.astype"
+    },
+    {
+      "executor": "class",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-value-object",
+        "outcome": "returned"
+      },
+      "id": "class.mutable-data",
+      "python": {
+        "facts": {
+          "first": {
+            "hex_without_prefix": "1.2000000000000p+3",
+            "kind": "binary64"
+          },
+          "snapshot": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "mutable"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.2000000000000p+3",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule"
+    },
+    {
+      "executor": "class",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-value-object",
+        "outcome": "returned"
+      },
+      "id": "class.sequence",
+      "python": {
+        "facts": {
+          "base_names": [
+            "DaySchedule",
+            "UserList",
+            "MutableSequence",
+            "Sequence",
+            "Reversible",
+            "Collection",
+            "Sized",
+            "Iterable",
+            "Container",
+            "object"
+          ],
+          "count": 144,
+          "first": {
+            "hex_without_prefix": "0.0p+0",
+            "kind": "binary64"
+          },
+          "last": {
+            "hex_without_prefix": "1.1e00000000000p+7",
+            "kind": "binary64"
+          },
+          "sum": {
+            "hex_without_prefix": "1.41c0000000000p+13",
+            "kind": "binary64"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule"
+    },
+    {
+      "executor": "class",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-value-object",
+        "outcome": "returned"
+      },
+      "id": "class.source-isolation",
+      "python": {
+        "facts": {
+          "first": {
+            "hex_without_prefix": "1.0000000000000p-2",
+            "kind": "binary64"
+          },
+          "snapshot": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "isolated"
+            },
+            "schedule_type": "fraction",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          },
+          "source_first": {
+            "hex_without_prefix": "1.0000000000000p+0",
+            "kind": "binary64"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule"
+    },
+    {
+      "executor": "clip",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-clip",
+        "outcome": "returned"
+      },
+      "id": "clip.bounds-empty-name",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "source:CLIP"
+            },
+            "schedule_type": "real",
+            "unit": "kW",
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "-1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          },
+          "source": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "source"
+            },
+            "schedule_type": "real",
+            "unit": "kW",
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "-1.0000000000000p+1",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+1",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.clip"
+    },
+    {
+      "executor": "clip",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-clip",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "clip.reversed",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "source:CLIP"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          },
+          "source": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "source"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "-1.0000000000000p+1",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+1",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.clip"
+    },
+    {
+      "executor": "clip",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-clip",
+        "outcome": "returned"
+      },
+      "id": "clip.signed-zero",
+      "python": {
+        "facts": {
+          "lower": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "lower:CLIP"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "-0.0p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          },
+          "upper": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "upper:CLIP"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.clip"
+    },
+    {
+      "executor": "compactize",
+      "id": "compactize.alternating",
+      "python": {
+        "facts": {
+          "count": 144,
+          "first": [
+            0,
+            10,
+            {
+              "hex_without_prefix": "0.0p+0",
+              "kind": "binary64"
+            }
+          ],
+          "last": [
+            24,
+            0,
+            {
+              "hex_without_prefix": "1.0000000000000p+0",
+              "kind": "binary64"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.compactize"
+    },
+    {
+      "executor": "compactize",
+      "id": "compactize.constant",
+      "python": {
+        "facts": {
+          "compact": [
+            [
+              24,
+              0,
+              {
+                "hex_without_prefix": "1.0000000000000p+1",
+                "kind": "binary64"
+              }
+            ]
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.compactize"
+    },
+    {
+      "executor": "compactize",
+      "id": "compactize.signed-zero",
+      "python": {
+        "facts": {
+          "compact": [
+            [
+              24,
+              0,
+              {
+                "hex_without_prefix": "-0.0p+0",
+                "kind": "binary64"
+              }
+            ]
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.compactize"
+    },
+    {
+      "executor": "deepcopy",
+      "expected_dotnet": {
+        "adaptation": "native-day-schedule-deepcopy-memo",
+        "outcome": "returned"
+      },
+      "id": "deepcopy.memo-hit",
+      "python": {
+        "facts": {
+          "returned_sentinel": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.__deepcopy__"
+    },
+    {
+      "executor": "deepcopy",
+      "expected_dotnet": {
+        "adaptation": "native-day-schedule-deepcopy-memo",
+        "outcome": "returned"
+      },
+      "id": "deepcopy.normal",
+      "python": {
+        "facts": {
+          "fresh": true,
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "source:COPY"
+            },
+            "schedule_type": "fraction",
+            "unit": "ratio",
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.999999999999ap-3",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.999999999999ap-1",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          },
+          "source": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "source"
+            },
+            "schedule_type": "fraction",
+            "unit": "ratio",
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.999999999999ap-3",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.999999999999ap-1",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.__deepcopy__"
+    },
+    {
+      "executor": "deepcopy",
+      "expected_dotnet": {
+        "adaptation": "native-day-schedule-deepcopy-memo",
+        "outcome": "returned"
+      },
+      "id": "deepcopy.repeated",
+      "python": {
+        "facts": {
+          "distinct": true,
+          "left": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "source:COPY"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p+1",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          },
+          "right": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "source:COPY"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p+1",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.__deepcopy__"
+    },
+    {
+      "executor": "from-compact",
+      "expected_dotnet": {
+        "adaptation": "validated-deterministic-day-schedule-from-compact",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "from-compact.invalid-end",
+      "python": {
+        "error_category": "domain",
+        "exception_type": "ValueError",
+        "facts": {},
+        "message": "Compact DaySchedule must end at 24:00, got (23, 50)",
+        "outcome": "raised"
+      },
+      "symbol": "DaySchedule.from_compact"
+    },
+    {
+      "executor": "from-compact",
+      "expected_dotnet": {
+        "adaptation": "validated-deterministic-day-schedule-from-compact",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "from-compact.off-grid",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "offgrid"
+            },
+            "schedule_type": "onoff",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                0
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.from_compact"
+    },
+    {
+      "executor": "from-compact",
+      "expected_dotnet": {
+        "adaptation": "validated-deterministic-day-schedule-from-compact",
+        "outcome": "returned"
+      },
+      "id": "from-compact.valid",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "office"
+            },
+            "schedule_type": "onoff",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.from_compact"
+    },
+    {
+      "executor": "from-constant",
+      "expected_dotnet": {
+        "adaptation": "deterministic-finite-day-schedule-from-constant",
+        "outcome": "returned"
+      },
+      "id": "from-constant.anonymous-real",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "runtime-identity-hex"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.2cccccccccccdp+2",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.from_constant"
+    },
+    {
+      "executor": "from-constant",
+      "expected_dotnet": {
+        "adaptation": "deterministic-finite-day-schedule-from-constant",
+        "outcome": "returned"
+      },
+      "id": "from-constant.bool-onoff",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "on"
+            },
+            "schedule_type": "onoff",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                1
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.from_constant"
+    },
+    {
+      "executor": "from-constant",
+      "expected_dotnet": {
+        "adaptation": "deterministic-finite-day-schedule-from-constant",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "from-constant.nonfinite",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "nan"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "nan",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.from_constant"
+    },
+    {
+      "executor": "from-windows",
+      "expected_dotnet": {
+        "adaptation": "validated-deterministic-day-schedule-from-windows",
+        "outcome": "returned"
+      },
+      "id": "from-windows.first-overlap",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "overlap"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.from_windows"
+    },
+    {
+      "executor": "from-windows",
+      "expected_dotnet": {
+        "adaptation": "validated-deterministic-day-schedule-from-windows",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "from-windows.out-of-day",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "outday"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.from_windows"
+    },
+    {
+      "executor": "from-windows",
+      "expected_dotnet": {
+        "adaptation": "validated-deterministic-day-schedule-from-windows",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "from-windows.reversed",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "reversed"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.from_windows"
+    },
+    {
+      "executor": "init",
+      "expected_dotnet": {
+        "adaptation": "immutable-deterministic-day-schedule-construction",
+        "outcome": "returned"
+      },
+      "id": "init.default",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "runtime-identity-hex"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.__init__"
+    },
+    {
+      "executor": "init",
+      "expected_dotnet": {
+        "adaptation": "immutable-deterministic-day-schedule-construction",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "init.nonfinite-real",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "nonfinite"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "nan",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "inf",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "-inf",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.__init__"
+    },
+    {
+      "executor": "init",
+      "expected_dotnet": {
+        "adaptation": "immutable-deterministic-day-schedule-construction",
+        "outcome": "returned"
+      },
+      "id": "init.text-preservation",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "  padded  "
+            },
+            "schedule_type": "real",
+            "unit": "  W  ",
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.__init__"
+    },
+    {
+      "executor": "setitem",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-item-update",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "setitem.invalid-atomic",
+      "python": {
+        "error_category": "domain",
+        "exception_type": "ValueError",
+        "facts": {
+          "source_after": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "items"
+            },
+            "schedule_type": "fraction",
+            "unit": "ratio",
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "message": "Fraction schedule value must be within [0, 1], got 2.0.",
+        "outcome": "raised"
+      },
+      "symbol": "DaySchedule.__setitem__"
+    },
+    {
+      "executor": "setitem",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-item-update",
+        "error_category": "range",
+        "outcome": "raised"
+      },
+      "id": "setitem.negative",
+      "python": {
+        "facts": {
+          "return_is_none": true,
+          "source_after": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "items"
+            },
+            "schedule_type": "fraction",
+            "unit": "ratio",
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.__setitem__"
+    },
+    {
+      "executor": "setitem",
+      "expected_dotnet": {
+        "adaptation": "immutable-day-schedule-item-update",
+        "outcome": "returned"
+      },
+      "id": "setitem.positive",
+      "python": {
+        "facts": {
+          "return_is_none": true,
+          "source_after": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "items"
+            },
+            "schedule_type": "fraction",
+            "unit": "ratio",
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.8000000000000p-1",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                },
+                {
+                  "hex_without_prefix": "1.0000000000000p-2",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.__setitem__"
+    },
+    {
+      "executor": "summary",
+      "id": "summary.negative-limit",
+      "python": {
+        "facts": {
+          "summary": "DaySchedule 'workday' [type=real, unit=kW, steps=144, interval=10 min]\n  range: min=-1.234e-05, max=1e+04, constant=False, segments=4\n  Until 06:00 -> 0\n  Until 08:00 -> 1.235\n  Until 17:00 -> 1e+04\n  ... (5 more segments)"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.summary"
+    },
+    {
+      "executor": "summary",
+      "id": "summary.repr-name",
+      "python": {
+        "facts": {
+          "summary": "DaySchedule \"a'b\" [type=real, unit=W, steps=144, interval=10 min]\n  range: min=1, max=1, constant=True, segments=1\n  ... (1 more segments)"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.summary"
+    },
+    {
+      "executor": "summary",
+      "id": "summary.rich",
+      "python": {
+        "facts": {
+          "summary": "DaySchedule 'workday' [type=real, unit=kW, steps=144, interval=10 min]\n  range: min=-1.234e-05, max=1e+04, constant=False, segments=4\n  Until 06:00 -> 0\n  Until 08:00 -> 1.235\n  Until 17:00 -> 1e+04\n  Until 24:00 -> -1.234e-05"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.summary"
+    },
+    {
+      "executor": "time-tuple",
+      "id": "time-tuple.fresh",
+      "python": {
+        "facts": {
+          "distinct": true,
+          "left_count": 144,
+          "right_count": 144,
+          "same_values": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.time_tuple"
+    },
+    {
+      "executor": "time-tuple",
+      "id": "time-tuple.grid",
+      "python": {
+        "facts": {
+          "count": 144,
+          "items": [
+            [
+              0,
+              10
+            ],
+            [
+              0,
+              20
+            ],
+            [
+              0,
+              30
+            ],
+            [
+              0,
+              40
+            ],
+            [
+              0,
+              50
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              1,
+              20
+            ],
+            [
+              1,
+              30
+            ],
+            [
+              1,
+              40
+            ],
+            [
+              1,
+              50
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              20
+            ],
+            [
+              2,
+              30
+            ],
+            [
+              2,
+              40
+            ],
+            [
+              2,
+              50
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              3,
+              20
+            ],
+            [
+              3,
+              30
+            ],
+            [
+              3,
+              40
+            ],
+            [
+              3,
+              50
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              4,
+              20
+            ],
+            [
+              4,
+              30
+            ],
+            [
+              4,
+              40
+            ],
+            [
+              4,
+              50
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              5,
+              20
+            ],
+            [
+              5,
+              30
+            ],
+            [
+              5,
+              40
+            ],
+            [
+              5,
+              50
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              6,
+              10
+            ],
+            [
+              6,
+              20
+            ],
+            [
+              6,
+              30
+            ],
+            [
+              6,
+              40
+            ],
+            [
+              6,
+              50
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              10
+            ],
+            [
+              7,
+              20
+            ],
+            [
+              7,
+              30
+            ],
+            [
+              7,
+              40
+            ],
+            [
+              7,
+              50
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              8,
+              10
+            ],
+            [
+              8,
+              20
+            ],
+            [
+              8,
+              30
+            ],
+            [
+              8,
+              40
+            ],
+            [
+              8,
+              50
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              9,
+              10
+            ],
+            [
+              9,
+              20
+            ],
+            [
+              9,
+              30
+            ],
+            [
+              9,
+              40
+            ],
+            [
+              9,
+              50
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              10
+            ],
+            [
+              10,
+              20
+            ],
+            [
+              10,
+              30
+            ],
+            [
+              10,
+              40
+            ],
+            [
+              10,
+              50
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              11,
+              10
+            ],
+            [
+              11,
+              20
+            ],
+            [
+              11,
+              30
+            ],
+            [
+              11,
+              40
+            ],
+            [
+              11,
+              50
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              12,
+              10
+            ],
+            [
+              12,
+              20
+            ],
+            [
+              12,
+              30
+            ],
+            [
+              12,
+              40
+            ],
+            [
+              12,
+              50
+            ],
+            [
+              13,
+              0
+            ],
+            [
+              13,
+              10
+            ],
+            [
+              13,
+              20
+            ],
+            [
+              13,
+              30
+            ],
+            [
+              13,
+              40
+            ],
+            [
+              13,
+              50
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              10
+            ],
+            [
+              14,
+              20
+            ],
+            [
+              14,
+              30
+            ],
+            [
+              14,
+              40
+            ],
+            [
+              14,
+              50
+            ],
+            [
+              15,
+              0
+            ],
+            [
+              15,
+              10
+            ],
+            [
+              15,
+              20
+            ],
+            [
+              15,
+              30
+            ],
+            [
+              15,
+              40
+            ],
+            [
+              15,
+              50
+            ],
+            [
+              16,
+              0
+            ],
+            [
+              16,
+              10
+            ],
+            [
+              16,
+              20
+            ],
+            [
+              16,
+              30
+            ],
+            [
+              16,
+              40
+            ],
+            [
+              16,
+              50
+            ],
+            [
+              17,
+              0
+            ],
+            [
+              17,
+              10
+            ],
+            [
+              17,
+              20
+            ],
+            [
+              17,
+              30
+            ],
+            [
+              17,
+              40
+            ],
+            [
+              17,
+              50
+            ],
+            [
+              18,
+              0
+            ],
+            [
+              18,
+              10
+            ],
+            [
+              18,
+              20
+            ],
+            [
+              18,
+              30
+            ],
+            [
+              18,
+              40
+            ],
+            [
+              18,
+              50
+            ],
+            [
+              19,
+              0
+            ],
+            [
+              19,
+              10
+            ],
+            [
+              19,
+              20
+            ],
+            [
+              19,
+              30
+            ],
+            [
+              19,
+              40
+            ],
+            [
+              19,
+              50
+            ],
+            [
+              20,
+              0
+            ],
+            [
+              20,
+              10
+            ],
+            [
+              20,
+              20
+            ],
+            [
+              20,
+              30
+            ],
+            [
+              20,
+              40
+            ],
+            [
+              20,
+              50
+            ],
+            [
+              21,
+              0
+            ],
+            [
+              21,
+              10
+            ],
+            [
+              21,
+              20
+            ],
+            [
+              21,
+              30
+            ],
+            [
+              21,
+              40
+            ],
+            [
+              21,
+              50
+            ],
+            [
+              22,
+              0
+            ],
+            [
+              22,
+              10
+            ],
+            [
+              22,
+              20
+            ],
+            [
+              22,
+              30
+            ],
+            [
+              22,
+              40
+            ],
+            [
+              22,
+              50
+            ],
+            [
+              23,
+              0
+            ],
+            [
+              23,
+              10
+            ],
+            [
+              23,
+              20
+            ],
+            [
+              23,
+              30
+            ],
+            [
+              23,
+              40
+            ],
+            [
+              23,
+              50
+            ],
+            [
+              24,
+              0
+            ]
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.time_tuple"
+    },
+    {
+      "executor": "time-tuple",
+      "id": "time-tuple.rollover",
+      "python": {
+        "facts": {
+          "hour_end": [
+            1,
+            0
+          ],
+          "last": [
+            24,
+            0
+          ],
+          "midnight_first": [
+            0,
+            10
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.time_tuple"
+    },
+    {
+      "executor": "to-idf",
+      "id": "to-idf.onoff",
+      "python": {
+        "facts": {
+          "fields": [
+            "Until: 24:00",
+            "1"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.to_idf_compactexpr"
+    },
+    {
+      "executor": "to-idf",
+      "id": "to-idf.real",
+      "python": {
+        "facts": {
+          "fields": [
+            "Until: 06:00",
+            "0.0",
+            "Until: 08:00",
+            "1.23456",
+            "Until: 17:00",
+            "10000.0",
+            "Until: 24:00",
+            "-1.2345e-05"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.to_idf_compactexpr"
+    },
+    {
+      "executor": "to-idf",
+      "id": "to-idf.signed-zero",
+      "python": {
+        "facts": {
+          "fields": [
+            "Until: 24:00",
+            "-0.0"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.to_idf_compactexpr"
+    },
+    {
+      "executor": "type",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-day-schedule-type",
+        "outcome": "returned"
+      },
+      "id": "type.getters",
+      "python": {
+        "facts": {
+          "types": [
+            "onoff",
+            "fraction",
+            "real",
+            "temperature"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.type"
+    },
+    {
+      "executor": "type",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-day-schedule-type",
+        "error_category": "type",
+        "outcome": "raised"
+      },
+      "id": "type.invalid-token",
+      "python": {
+        "error_category": "domain",
+        "exception_type": "ValueError",
+        "facts": {
+          "source_after": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "typed"
+            },
+            "schedule_type": "real",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "0.0p+0",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "message": "'invalid' is not a valid ScheduleType",
+        "outcome": "raised"
+      },
+      "symbol": "DaySchedule.type"
+    },
+    {
+      "executor": "type",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-day-schedule-type",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "type.stale-string-setter",
+      "python": {
+        "facts": {
+          "result": {
+            "kind": "schedule",
+            "name": {
+              "policy": "literal",
+              "value": "stale"
+            },
+            "schedule_type": "fraction",
+            "unit": null,
+            "values": {
+              "encoding": "repeat",
+              "length": 144,
+              "pattern": [
+                {
+                  "hex_without_prefix": "1.0000000000000p+1",
+                  "kind": "binary64"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "DaySchedule.type"
+    }
+  ],
+  "cases_sha256": "sha256:928a70bc70c83fc9fd7969253c2c5cc5ab5ffb8fca63726f197c007405d95c45",
+  "consumer_contract": {
+    "adaptations": {
+      "DaySchedule": "immutable-day-schedule-value-object",
+      "DaySchedule.__deepcopy__": "native-day-schedule-deepcopy-memo",
+      "DaySchedule.__init__": "immutable-deterministic-day-schedule-construction",
+      "DaySchedule.__setitem__": "immutable-day-schedule-item-update",
+      "DaySchedule.astype": "immutable-day-schedule-astype",
+      "DaySchedule.clip": "immutable-day-schedule-clip",
+      "DaySchedule.from_compact": "validated-deterministic-day-schedule-from-compact",
+      "DaySchedule.from_constant": "deterministic-finite-day-schedule-from-constant",
+      "DaySchedule.from_windows": "validated-deterministic-day-schedule-from-windows",
+      "DaySchedule.type": "immutable-validated-day-schedule-type"
+    },
+    "case_count": 42,
+    "case_ids": [
+      "astype.inplace",
+      "astype.invalid-atomic",
+      "astype.outplace-string",
+      "class.mutable-data",
+      "class.sequence",
+      "class.source-isolation",
+      "clip.bounds-empty-name",
+      "clip.reversed",
+      "clip.signed-zero",
+      "compactize.alternating",
+      "compactize.constant",
+      "compactize.signed-zero",
+      "deepcopy.memo-hit",
+      "deepcopy.normal",
+      "deepcopy.repeated",
+      "from-compact.invalid-end",
+      "from-compact.off-grid",
+      "from-compact.valid",
+      "from-constant.anonymous-real",
+      "from-constant.bool-onoff",
+      "from-constant.nonfinite",
+      "from-windows.first-overlap",
+      "from-windows.out-of-day",
+      "from-windows.reversed",
+      "init.default",
+      "init.nonfinite-real",
+      "init.text-preservation",
+      "setitem.invalid-atomic",
+      "setitem.negative",
+      "setitem.positive",
+      "summary.negative-limit",
+      "summary.repr-name",
+      "summary.rich",
+      "time-tuple.fresh",
+      "time-tuple.grid",
+      "time-tuple.rollover",
+      "to-idf.onoff",
+      "to-idf.real",
+      "to-idf.signed-zero",
+      "type.getters",
+      "type.invalid-token",
+      "type.stale-string-setter"
+    ],
+    "classifications": {
+      "DaySchedule": "exception",
+      "DaySchedule.__deepcopy__": "exception",
+      "DaySchedule.__init__": "exception",
+      "DaySchedule.__setitem__": "exception",
+      "DaySchedule.astype": "exception",
+      "DaySchedule.clip": "exception",
+      "DaySchedule.compactize": "equivalent",
+      "DaySchedule.from_compact": "exception",
+      "DaySchedule.from_constant": "exception",
+      "DaySchedule.from_windows": "exception",
+      "DaySchedule.summary": "equivalent",
+      "DaySchedule.time_tuple": "equivalent",
+      "DaySchedule.to_idf_compactexpr": "equivalent",
+      "DaySchedule.type": "exception"
+    },
+    "float_encoding": "python-binary64-hex-without-0x-prefix",
+    "runtime_names": "policy-token-no-raw-address",
+    "target_symbols": [
+      "DaySchedule",
+      "DaySchedule.__deepcopy__",
+      "DaySchedule.__init__",
+      "DaySchedule.__setitem__",
+      "DaySchedule.astype",
+      "DaySchedule.clip",
+      "DaySchedule.compactize",
+      "DaySchedule.from_compact",
+      "DaySchedule.from_constant",
+      "DaySchedule.from_windows",
+      "DaySchedule.summary",
+      "DaySchedule.time_tuple",
+      "DaySchedule.to_idf_compactexpr",
+      "DaySchedule.type"
+    ]
+  },
+  "runtime": {
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.invisibledragon.day-schedule-core-oracle.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:31b0c5a91bb166328c75453a1fafba578bac89b29d9f6a39cde7930e29ac0d67",
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:d6cf14abf38a8ebd5ea19cebe3e341da462019d6586a564157ec8d03a785103a",
+      "symbol": "DaySchedule",
+      "symbol_hash": "sha256:3d09af6328fa8beb98a435f86468dbe5db1f906ae8eaef5db6f60b2e75d3ebad"
+    },
+    {
+      "body_hash": "sha256:a921ffa52d0bb16ae64dab3b269d78b01d1e8ae605edcfe953ebf1944e03f2be",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:520ee536d924ac7323d561d9d85957e67316c14aea8bd80a5664a796409a796f",
+      "symbol": "DaySchedule.__deepcopy__",
+      "symbol_hash": "sha256:94716a2a9f9896956ef0fe11d0a43630ef22e3490260cdffd5b5eb34aed20061"
+    },
+    {
+      "body_hash": "sha256:6b3800355e995b6f19cd43c8640e50f4b7ff8a91107f0b10bcf802ff5d9b3465",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:792feef4767b51cf22c073f4f9c482d3a7b44ebf852cd1969f696d35523144f7",
+      "symbol": "DaySchedule.__init__",
+      "symbol_hash": "sha256:64dc644b6b17c50070088875126038fbd0f7fa37c6b102efc1a9fdce7c238b29"
+    },
+    {
+      "body_hash": "sha256:65d793b466ed70ebe848ddb0c684e008c7ee1a985d85834255b21ea8d59126cd",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:c683d89aecb53af53bb23c6719e3ada99d5224b3e92694a66e6416c310dc679e",
+      "symbol": "DaySchedule.__setitem__",
+      "symbol_hash": "sha256:f7d024f8afb2246d678ae93f48ec2dd247cee4a69f050dab9824e41d1043a703"
+    },
+    {
+      "body_hash": "sha256:be2d761d2ccf19329fed5acdd335b1551c36b782d88300f6910b98888e2d3943",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:a14d975027c0b9836d9155272e817515f8f8508481a2756286850554ff87fa08",
+      "symbol": "DaySchedule.astype",
+      "symbol_hash": "sha256:b9602775c81765b2c8833aa2e420e788fc0e15e8ecee1cc26cea6959c1896791"
+    },
+    {
+      "body_hash": "sha256:4e51b37afdf9bfa9733425a72d587a294ef8afea623a0ff639fb8f2c6cd98df6",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:3b5d09dbe8f1e838b60a4b2bb4841d43af33e72368014e36c75638e0220ff3ac",
+      "symbol": "DaySchedule.clip",
+      "symbol_hash": "sha256:d8d8325402e25fc7490c3ab97a5e5406a6aa81fd4529c7e17e181a5fc79eb5e7"
+    },
+    {
+      "body_hash": "sha256:6b89b9584885221eb437f7210bd216dd28c9d9244e510d7f6d236cb00cfbd248",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:ba6052b432aaac041119c4882326d35be34f398de4c71532f310e32a58fabd8a",
+      "symbol": "DaySchedule.compactize",
+      "symbol_hash": "sha256:b8cb0746fc938250dd097a746f74f769d1e34cf83dbcdfdf3f83eef958581542"
+    },
+    {
+      "body_hash": "sha256:9d8896249a21c2babaa6fbe82bc943701a89387a3b3e92d4964f34447b5b753d",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:26770cfe77ae6d18ebe45f2a4125a5456ea818d30ceebddeb89781318b230b1f",
+      "symbol": "DaySchedule.from_compact",
+      "symbol_hash": "sha256:7584e03e29fb0ebfc974fd95edd605fc2fc5ce7d1266b6c936553fd9131d2fe9"
+    },
+    {
+      "body_hash": "sha256:99133543b3c1493261df5ef066ea5884830e2fdbe94f8e575731eec0fde46fea",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:c8e44d72e356a6d7dfa40f8feb731743d4400d69fc5e9bc9e2e64517e5ccb2b8",
+      "symbol": "DaySchedule.from_constant",
+      "symbol_hash": "sha256:71ce65d43f4c5ccf2fe5be57f6f7bd011138f11243e348f9b356bed85dfd1848"
+    },
+    {
+      "body_hash": "sha256:dc83d45aeb2173cfb54288493ecfb2f4d2584529d4899d9fc4c7d2431fd08e39",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:d34d2b5cf299c9f0cf4a5d99215a0b0356a4e95a25b7de38f79c6229ffa05b7e",
+      "symbol": "DaySchedule.from_windows",
+      "symbol_hash": "sha256:5a0b430f3f9b0ba4df876567989aff0675970b3993848114e381b0c69cd6b28f"
+    },
+    {
+      "body_hash": "sha256:7b6247de77b34b713afdd8a50cdb37a1b2187341732805d5e299c92e66d452f0",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:e2ba3e6fd17aef4152bcf0792ba941a91b32572327b6f74511fb0350a2206f5b",
+      "symbol": "DaySchedule.summary",
+      "symbol_hash": "sha256:0dc726d3cf145593aa0305902687e751b9ac6571450ca1d28acff2bf97aa5d85"
+    },
+    {
+      "body_hash": "sha256:b844b6f9d49a5c83ed97ea0f829f7dfd20f4c1ee51605ddb1bde9b0b8c94ce0a",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:112810143170ab80331a6cd5c2b63ea1605c00874963434d2ecf47e86faf93aa",
+      "symbol": "DaySchedule.time_tuple",
+      "symbol_hash": "sha256:a7a04f776f37d8676cd20b07bc190cc28185f207663c2a183671f9bc016d6bbd"
+    },
+    {
+      "body_hash": "sha256:fe44a1d2cdd71efad93b73d0b815d9ca70cc5d59e16e6d228e30f504d2a93c7c",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:636cf3ce72c5b8fab425c494f6300a642ea6dcc1bbec8f0653a7746285088cb8",
+      "symbol": "DaySchedule.to_idf_compactexpr",
+      "symbol_hash": "sha256:e33e015cdd6a0057839061ecfdc1103b6c88abda0e0bc896c5c813c98113dbed"
+    },
+    {
+      "body_hash": "sha256:588af62bcaf3f3c7a14cff2698009eea67025ef8f0c0a098d9015d7a9258fec9",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:906bbe1fecebe27cb285db65c19d7f68b6771efdfa9aebb2662dd0e2e959d5b5",
+      "symbol": "DaySchedule.type",
+      "symbol_hash": "sha256:6c3809ae6a4918dfe994dbec71bfe025272a6ffdd18300b3146888cade19ced3"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "path": "src/idragon/dragon/profile.py",
+    "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+  }
+}

@@ -615,6 +615,151 @@
     compatibility_evidence: all finite, boundary, type, and domain cases plus the three Real safety divergences and four OnOff numeric-kind adaptations remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
 
+- id: immutable-day-schedule-value-object
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule
+    symbol_hash: sha256:3d09af6328fa8beb98a435f86468dbe5db1f906ae8eaef5db6f60b2e75d3ebad
+  difference:
+    upstream: derives from Python UserList, stores its values in the public mutable data list, and exposes Python sequence mutation through that object and indexed assignment
+    dotnet: is a sealed immutable IReadOnlyList value whose copied values cannot be replaced through the public API and whose supported transformations return validated DaySchedule instances
+  effect:
+    engineering_result: valid schedules retain the same ordered 144 ten-minute values, ScheduleType, canonical unit text, and derived engineering metrics while post-construction value mutation is prevented
+    api_contract: callers use the native read-only collection and functional transformation surface instead of relying on Python UserList or its public data member
+    compatibility_evidence: count, order, indexing, enumeration, source-container isolation, and the exact mutability difference remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: native-day-schedule-deepcopy-memo
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.__deepcopy__
+    symbol_hash: sha256:94716a2a9f9896956ef0fe11d0a43630ef22e3490260cdffd5b5eb34aed20061
+  difference:
+    upstream: participates in Python's copy protocol, returns an existing caller-provided memo entry for its identity when present, and otherwise returns a fresh DaySchedule named with the :COPY suffix
+    dotnet: provides an explicit DeepCopy method with no Python memo surface and always returns a fresh immutable DaySchedule named with the same :COPY suffix
+  effect:
+    engineering_result: an ordinary copy retains the same values, type, and unit under the same :COPY naming rule while leaving the source unchanged
+    api_contract: caller-controlled Python memo substitution is intentionally excluded from the native explicit-copy API
+    compatibility_evidence: ordinary copied values and metadata, source and result identity, repeated calls, and the exact prepopulated-memo difference remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-deterministic-day-schedule-construction
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.__init__
+    symbol_hash: sha256:64dc644b6b17c50070088875126038fbd0f7fa37c6b102efc1a9fdce7c238b29
+  difference:
+    upstream: assigns an omitted name from the new object's process-specific hexadecimal memory address, defaults omitted values to 144 zeros, accepts empty or whitespace-only names and preserves surrounding name and unit whitespace, and permits NaN or infinity for Real values
+    dotnet: assigns the stable anonymous name when name is omitted, defaults omitted values to the same 144 zeros, rejects explicit blank names, trims valid names and units, copies values into immutable storage, and enforces the finite typed authoring invariant
+  effect:
+    engineering_result: explicit valid finite inputs and the default zero construction retain the same 144 values, type, normalized nonblank unit text, and independent storage while non-finite values are prevented from entering EnergyPlus authoring output; a blank native unit is normalized to null
+    api_contract: construction uses a nullable native name and value surface, read-only copied storage, and a strongly typed ScheduleType enum rather than preserving Python string-enum and mutable-list conventions
+    raw_idf_text: an omitted or whitespace-padded identifier is deterministic and can differ from the upstream address-based or untrimmed text
+    compatibility_evidence: explicit and omitted inputs, 144-slot validation, source-container isolation, every schedule domain, non-finite Real rejection, deterministic names, and name and unit text policy remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-day-schedule-item-update
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.__setitem__
+    symbol_hash: sha256:f7d024f8afb2246d678ae93f48ec2dd247cee4a69f050dab9824e41d1043a703
+  difference:
+    upstream: validates a scalar against the current type, mutates the same DaySchedule in place, supports Python negative scalar indices, and routes slice assignment through its scalar validator
+    dotnet: exposes WithValue for a native non-negative Int32 index and returns a newly validated DaySchedule while leaving the source unchanged, with no slice-assignment surface
+  effect:
+    engineering_result: a valid in-range scalar update produces the same selected value, surrounding values, type, name, and unit in the returned immutable result
+    api_contract: callers replace their schedule reference with the functional result; negative indexing, Python slice syntax, mutation, and a None return are intentionally excluded
+    compatibility_evidence: first, interior, and last updates, source immutability, type-domain rejection, bounds behavior, negative Python indexing, and slice exclusion remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-day-schedule-astype
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.astype
+    symbol_hash: sha256:b9602775c81765b2c8833aa2e420e788fc0e15e8ecee1cc26cea6959c1896791
+  difference:
+    upstream: defaults to returning a copied conversion but also accepts ScheduleType strings and exposes an inplace mode that atomically replaces the existing type and data then returns None
+    dotnet: accepts the native ScheduleType enum and always returns a newly validated immutable DaySchedule while leaving the source unchanged
+  effect:
+    engineering_result: every valid conversion retains the same converted values, name, and unit, and an invalid conversion leaves the source unchanged in both implementations
+    api_contract: callers replace their schedule reference with the returned immutable conversion instead of requesting Python string-enum or in-place mutation behavior
+    compatibility_evidence: every valid type conversion, preserved name and unit, source immutability, the upstream inplace None return, and atomic invalid-conversion behavior remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-day-schedule-clip
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.clip
+    symbol_hash: sha256:d8d8325402e25fc7490c3ab97a5e5406a6aa81fd4529c7e17e181a5fc79eb5e7
+  difference:
+    upstream: optionally mutates the source and returns None, applies a reversed minimum and maximum sequentially instead of rejecting them, permits a non-finite Real bound to produce non-finite values, uses the default :CLIP name for an omitted or empty name, and accepts whitespace-only names
+    dotnet: always returns a newly validated immutable DaySchedule, rejects reversed or non-finite bounds, uses the same :CLIP fallback for an omitted or empty name, rejects whitespace-only names, and trims other explicit names
+  effect:
+    engineering_result: valid finite bounds produce the same clipped values, type, unit, and fallback name while invalid bounds and non-finite results are prevented from entering EnergyPlus authoring output
+    api_contract: callers replace their schedule reference with the returned immutable result instead of requesting in-place mutation, and invalid bounds follow native argument validation
+    raw_idf_text: whitespace-only or padded explicit result identifiers follow the native validated name policy
+    compatibility_evidence: no-bound, one-bound, two-bound, explicit-name, fallback-name, source-immutability, upstream inplace, reversed-bound, and non-finite-bound cases remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: validated-deterministic-day-schedule-from-compact
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.from_compact
+    symbol_hash: sha256:7584e03e29fb0ebfc974fd95edd605fc2fc5ce7d1266b6c936553fd9131d2fe9
+  difference:
+    upstream: copies the tuple list and explicitly requires only a nonempty definition ending at 24:00 before interpreting it on the ten-minute grid, so some unaligned, repeated, or non-increasing Until tuples are accepted or fail through incidental Python list behavior; it also assigns a None name from a process address and permits non-finite Real values
+    dotnet: requires nonempty strongly typed segments whose end times increase strictly, align to the ten-minute grid, and end at 24:00, assigns the stable anonymous name when name is null, validates identifier text, and rejects non-finite or type-invalid values
+  effect:
+    engineering_result: valid compact definitions retain the same end-inclusive ten-minute values and ScheduleType while ambiguous segment definitions and non-finite values are prevented from entering EnergyPlus authoring output
+    api_contract: malformed compact input follows explicit native argument validation instead of depending on Python tuple and list evaluation failures
+    raw_idf_text: a null or normalized result identifier is deterministic and can differ from upstream process-address or untrimmed text
+    compatibility_evidence: constant and multi-segment definitions, input isolation, every boundary transition, empty and non-24:00 definitions, repeated and decreasing endpoints, off-grid endpoints, type-domain and non-finite rejection, and deterministic naming remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: deterministic-finite-day-schedule-from-constant
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.from_constant
+    symbol_hash: sha256:71ce65d43f4c5ccf2fe5be57f6f7bd011138f11243e348f9b356bed85dfd1848
+  difference:
+    upstream: wraps from_compact, assigns a None name from the new object's process-specific address, follows Python numeric and ScheduleType validation, and permits NaN or infinity for a Real constant
+    dotnet: exposes a native generic scalar dispatcher for supported Boolean, integral, and floating-point values, assigns the stable anonymous name when name is null, validates identifier text and the requested ScheduleType domain, and rejects non-finite constants
+  effect:
+    engineering_result: every supported finite scalar produces the same 144 constant values and type while a non-finite value is prevented from entering EnergyPlus authoring output
+    api_contract: unsupported scalar kinds and invalid domains follow native strongly typed validation rather than Python runtime type diagnostics
+    raw_idf_text: a null or normalized result identifier is deterministic and can differ from upstream process-address or untrimmed text
+    compatibility_evidence: supported Boolean, integral, and floating-point inputs across every schedule domain, invalid operand and domain behavior, non-finite rejection, 144-value constancy, and deterministic naming remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: validated-deterministic-day-schedule-from-windows
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.from_windows
+    symbol_hash: sha256:5a0b430f3f9b0ba4df876567989aff0675970b3993848114e381b0c69cd6b28f
+  difference:
+    upstream: uses the first matching start-inclusive and end-exclusive tuple window but does not validate that its times form an in-day forward range, so reversed windows become no-ops and out-of-day windows can affect the result; it assigns a None name from a process address and permits non-finite Real defaults or window values
+    dotnet: preserves first-match precedence with strongly typed TimeSpan windows whose start and end form a valid in-day forward range, assigns the stable anonymous name when name is null, validates identifier text, and rejects non-finite or type-invalid defaults and window values
+  effect:
+    engineering_result: valid windows retain the same ten-minute values, outside default, first-overlap-wins precedence, and ScheduleType while invalid ranges and non-finite values are prevented from entering EnergyPlus authoring output
+    api_contract: malformed window input follows explicit native argument validation instead of being treated as an incidental no-op or out-of-calendar Python range
+    raw_idf_text: a null or normalized result identifier is deterministic and can differ from upstream process-address or untrimmed text
+    compatibility_evidence: empty, single, disjoint, adjacent, overlapping, and repeated windows, boundary sampling and first-match precedence, reversed and out-of-day ranges, type-domain and non-finite rejection, and deterministic naming remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-validated-day-schedule-type
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: DaySchedule.type
+    symbol_hash: sha256:6c3809ae6a4918dfe994dbec71bfe025272a6ffdd18300b3146888cade19ced3
+  difference:
+    upstream: exposes a public setter that accepts a ScheduleType or its Python string value and can change the type after construction without revalidating existing schedule values
+    dotnet: exposes a read-only ScheduleType enum established only by validated construction or immutable AsType conversion, which revalidates every value before returning a replacement
+  effect:
+    engineering_result: valid consistently typed schedules report the same type while a type and value-domain mismatch cannot be introduced through post-construction assignment
+    api_contract: direct type mutation and Python string-enum assignment are intentionally replaced by the native immutable AsType API
+    compatibility_evidence: every type getter, valid immutable conversion, invalid-conversion atomicity, upstream string assignment, and the exact unrevalidated setter mismatch remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
 - id: nonfinite-result-day-schedule-add
   upstream:
     path: src/idragon/dragon/profile.py

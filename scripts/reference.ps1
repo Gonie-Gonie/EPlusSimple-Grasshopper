@@ -31,6 +31,7 @@ $profileGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\genera
 $iddGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_idd_schema_oracle.py'
 $constructionEqualityGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_construction_equality_hash_oracle.py'
 $scheduleTypeGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_schedule_type_oracle.py'
+$dayScheduleCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_day_schedule_core_oracle.py'
 $dayScheduleMetricsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_day_schedule_metrics_oracle.py'
 $dayScheduleOperationsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_day_schedule_operations_oracle.py'
 $ruleSetOperationsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_rule_set_operations_oracle.py'
@@ -38,6 +39,7 @@ $scheduleCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\g
 $scheduleOperationsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_schedule_operations_oracle.py'
 $constructionEqualityTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_construction_equality_hash_oracle.py'
 $scheduleTypeTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_schedule_type_oracle.py'
+$dayScheduleCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_day_schedule_core_oracle.py'
 $dayScheduleMetricsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_day_schedule_metrics_oracle.py'
 $dayScheduleOperationsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_day_schedule_operations_oracle.py'
 $ruleSetOperationsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_rule_set_operations_oracle.py'
@@ -121,6 +123,7 @@ foreach ($requiredFile in @(
     $iddGeneratorPath,
     $constructionEqualityGeneratorPath,
     $scheduleTypeGeneratorPath,
+    $dayScheduleCoreGeneratorPath,
     $dayScheduleMetricsGeneratorPath,
     $dayScheduleOperationsGeneratorPath,
     $ruleSetOperationsGeneratorPath,
@@ -128,6 +131,7 @@ foreach ($requiredFile in @(
     $scheduleOperationsGeneratorPath,
     $constructionEqualityTestPath,
     $scheduleTypeTestPath,
+    $dayScheduleCoreTestPath,
     $dayScheduleMetricsTestPath,
     $dayScheduleOperationsTestPath,
     $ruleSetOperationsTestPath,
@@ -614,7 +618,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile, IDD, construction equality/hash, ScheduleType, DaySchedule metrics/operations, RuleSet operations, Schedule core/operations, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet operations, Schedule core/operations, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -712,6 +716,24 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $scheduleTypeGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-schedule-type-reference.log') `
     -FailureMessage 'Generating the Python ScheduleType oracle failed'
+
+$dayScheduleCoreOraclePath = Join-Path $outputRoot 'day-schedule-core-oracle.json'
+$dayScheduleCoreGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $dayScheduleCoreGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $dayScheduleCoreOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $dayScheduleCoreGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-day-schedule-core-reference.log') `
+    -FailureMessage 'Generating the Python DaySchedule core oracle failed'
 
 $dayScheduleMetricsOraclePath = Join-Path $outputRoot 'day-schedule-metrics-oracle.json'
 $dayScheduleMetricsGeneratorArguments = @(

@@ -24,6 +24,11 @@ oracle binds all 12 upstream ScheduleType symbols and records the four exact
 five-field `ScheduleTypeLimits` objects plus 44 boundary, coercion, type-error,
 and tagged non-finite validation cases. Its `real` NaN and infinity results use
 strict JSON tags instead of non-standard numeric tokens. The DaySchedule
+core oracle binds the remaining 14 lifecycle, immutable-update, factory,
+compactization, summary, time-grid, IDF-expression, and type symbols through
+42 exactly ordered cases. It preserves recursive binary64 hex facts and
+runtime-name policy tokens while pinning the exact four equivalent versus ten
+reviewed native-adaptation split. The DaySchedule
 metrics oracle binds 13 fixed-grid properties and includes a catastrophic
 cancellation case that locks the CPython 3.12 compensated-float summation
 behavior used by `average`, `integral`, and `positive_average`. The
