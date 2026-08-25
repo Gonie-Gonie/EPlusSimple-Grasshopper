@@ -30,6 +30,12 @@ public sealed class EnergyModelIdfOptions
     /// SimpleDragon conversion instead of explicit fenestration vertices.
     /// </summary>
     public bool UseLegacyRectangularFenestration { get; set; }
+
+    /// <summary>
+    /// Retains the blank and historical schedule type-limit references emitted
+    /// by the pinned Python SimpleDragon conversion.
+    /// </summary>
+    public bool UseLegacySimpleDragonScheduleMetadata { get; set; }
 }
 
 /// <summary>

@@ -23,6 +23,22 @@ public sealed class SourceSystemTests
         Assert.Equal("HeatPump_named_Main", Assert.Single(objects, item => item.ObjectType == heatPump.IdfObjectType).Name);
         IdfObject terminals = Assert.Single(objects, item => item.ObjectType == "ZoneTerminalUnitList");
         Assert.Equal("Terminal A", terminals[1]);
+        IdfObject coolingLowPartLoad = Assert.Single(
+            objects,
+            item => item.ObjectType == "Curve:Cubic"
+                && item.Name == "Curve_for_HeatPump_named_Main:CoolingEIRMF_LowPLR");
+        Assert.Equal("Capacity", coolingLowPartLoad[10]);
+        IdfObject heatingBoundary = Assert.Single(
+            objects,
+            item => item.ObjectType == "Curve:Cubic"
+                && item.Name == "Curve_for_HeatPump_named_Main:HeatingEIRBoundary");
+        Assert.Equal("-20", heatingBoundary[7]);
+        Assert.Equal("15", heatingBoundary[8]);
+        IdfObject heatingLowPartLoad = Assert.Single(
+            objects,
+            item => item.ObjectType == "Curve:Cubic"
+                && item.Name == "Curve_for_HeatPump_named_Main:HeatingEIRMF_LowPLR");
+        Assert.Equal("Dimensionless", heatingLowPartLoad[9]);
     }
 
     [Fact]

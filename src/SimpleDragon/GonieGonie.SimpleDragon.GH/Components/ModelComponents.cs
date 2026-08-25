@@ -419,6 +419,7 @@ public sealed class ConvertGreenRetrofitModelComponent : SimpleDragonComponent
                 {
                     ThrowOnValidationErrors = false,
                     UseLegacyRectangularFenestration = true,
+                    UseLegacySimpleDragonScheduleMetadata = true,
                 });
             if (schema is not null)
             {

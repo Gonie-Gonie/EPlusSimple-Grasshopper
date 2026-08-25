@@ -129,6 +129,32 @@ public sealed class RuleSetScheduleProfileTests
     }
 
     [Fact]
+    public void ProfileAcceptsFractionLightingSchedule()
+    {
+        Schedule fraction = Schedule.Constant("Lighting fraction", 0.5, ScheduleType.Fraction);
+
+        var profile = new ZoneProfile(
+            new EntityId("PRFL-000001"),
+            "Fraction lighting",
+            lighting: fraction);
+
+        Assert.Same(fraction, profile.Lighting);
+    }
+
+    [Fact]
+    public void ProfileRejectsUnrelatedLightingScheduleType()
+    {
+        Schedule real = Schedule.Constant("Lighting real", 1, ScheduleType.Real);
+
+        ArgumentException exception = Assert.Throws<ArgumentException>(() => new ZoneProfile(
+            new EntityId("PRFL-000001"),
+            "Bad lighting",
+            lighting: real));
+
+        Assert.Equal("lighting", exception.ParamName);
+    }
+
+    [Fact]
     public void ProfileReportsOverlappingSetpointRangesAsWarning()
     {
         Schedule heating = Schedule.Constant("Heating", 22, ScheduleType.Temperature);

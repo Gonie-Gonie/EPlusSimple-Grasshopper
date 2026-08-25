@@ -197,7 +197,12 @@ public sealed class RadiantFloor : SupplySystem
         return new SupplyIdfFragment(
             objects,
             new ZoneEquipmentDescriptor("ZoneHVAC:LowTemperatureRadiant:VariableFlow", name, 0, 1),
-            new PlantDemandConnection($"{Source!.LoopName} Demand {name}", "ZoneHVAC:LowTemperatureRadiant:VariableFlow", name, inlet, outlet));
+            new PlantDemandConnection(
+                $"{Source!.LoopName} Demand Main_{nameof(RadiantFloor)}_for_{zone.Name}",
+                "ZoneHVAC:LowTemperatureRadiant:VariableFlow",
+                name,
+                inlet,
+                outlet));
     }
 
     internal static IEnumerable<IdfObject> InternalHeatSourceObjects(IdfGenerationContext context, Zone zone)

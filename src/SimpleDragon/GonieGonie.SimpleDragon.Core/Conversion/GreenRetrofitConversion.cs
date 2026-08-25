@@ -154,6 +154,7 @@ public sealed class GreenRetrofitConversionResult
         options ??= new EnergyModelIdfOptions
         {
             UseLegacyRectangularFenestration = true,
+            UseLegacySimpleDragonScheduleMetadata = true,
         };
         return RequireEnergyModel().ToIdfDocument(schema, options);
     }
@@ -722,15 +723,53 @@ public static class GreenRetrofitConverter
 
             var converted = new DragonConstruction(
                 construction.Id.Value,
-                construction.Layers.Select((layer, index) => ConvertLayer(
+                construction.Layers.Select(layer => ConvertLayer(
                     layer.Material,
                     layer.Thickness,
                     layer.Material.Id.Value + "_"
-                    + (layer.Thickness * UnitConversions.MetresToMillimetres)
-                        .ToString("G17", System.Globalization.CultureInfo.InvariantCulture)
-                    + "mm_" + index.ToString(System.Globalization.CultureInfo.InvariantCulture))));
+                    + FormatPythonFloat(layer.Thickness * UnitConversions.MetresToMillimetres)
+                    + "mm")));
             _constructions.Add(construction.Id.Value, converted);
             return converted;
+        }
+
+        private static string FormatPythonFloat(double value)
+        {
+            // Python 3 uses the shortest decimal that round-trips to the same
+            // binary float and retains a decimal marker for integral floats.
+            for (int precision = 1; precision <= 17; precision++)
+            {
+                string text = value.ToString(
+                    "G" + precision.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                    System.Globalization.CultureInfo.InvariantCulture);
+                if (double.Parse(
+                        text,
+                        System.Globalization.NumberStyles.Float,
+                        System.Globalization.CultureInfo.InvariantCulture) != value)
+                {
+                    continue;
+                }
+
+                text = text.ToLowerInvariant();
+                int exponent = text.IndexOf('e');
+                double magnitude = Math.Abs(value);
+                if (exponent >= 0 && magnitude >= 1.0e-4d && magnitude < 1.0e16d)
+                {
+                    continue;
+                }
+                if (exponent >= 0)
+                {
+                    string mantissa = text.Substring(0, exponent);
+                    string exponentValue = text.Substring(exponent + 1);
+                    char sign = exponentValue[0];
+                    string digits = exponentValue.Substring(1).TrimStart('0');
+                    return mantissa + "e" + sign + (digits.Length == 0 ? "0" : digits);
+                }
+
+                return text.Contains('.') ? text : text + ".0";
+            }
+
+            throw new InvalidOperationException("A finite Python-compatible float representation was not found.");
         }
 
         private DragonLayer ConvertLayer(Material material, double thickness, string layerName)
@@ -1028,37 +1067,46 @@ public static class GreenRetrofitConverter
                 || profile.Source == UsageProfileSource.Extended
                 ? "$FROM_DB$:" + profile.Name
                 : profile.Id.Value;
+            const string invertedVacationMask = "0xAUTO0000:INVERTED";
+            string occupiedMaskName = prefix + "-Occupied:AND:" + invertedVacationMask;
+            double occupantFactor = profile.Occupancy
+                / profile.OccupiedHours
+                / UsageProfileConstants.PeopleSensibleActivityWattsPerPerson;
+            double equipmentFactor = profile.Equipment / profile.OccupiedHours;
+            double hotWaterFactor = profile.DomesticHotWater
+                / profile.OccupiedHours
+                / UsageProfileConstants.DomesticHotWaterHeatWattHoursPerLitre;
             DragonSchedule occupied = WeeklyWindowSchedule(
-                prefix + "-Occupied",
+                occupiedMaskName + ":MUL:" + FormatPythonFloat(occupantFactor),
                 profile,
                 profile.OccupantStart,
                 profile.OccupantEnd,
-                profile.Occupancy / profile.OccupiedHours / UsageProfileConstants.PeopleSensibleActivityWattsPerPerson,
+                occupantFactor,
                 DragonScheduleType.Real);
             DragonSchedule hvac = WeeklyWindowSchedule(
-                prefix + "-HVACOperating",
+                prefix + "-HVACOperating:AND:" + invertedVacationMask,
                 profile,
                 profile.HvacStart,
                 profile.HvacEnd,
                 1d,
                 DragonScheduleType.OnOff);
             DragonSchedule equipment = WeeklyWindowSchedule(
-                prefix + "-Equipment",
+                occupiedMaskName + ":MUL:" + FormatPythonFloat(equipmentFactor),
                 profile,
                 profile.OccupantStart,
                 profile.OccupantEnd,
-                profile.Equipment / profile.OccupiedHours,
+                equipmentFactor,
                 DragonScheduleType.Real);
             DragonSchedule hotWater = WeeklyWindowSchedule(
-                prefix + "-HotWater",
+                occupiedMaskName + ":MUL:" + FormatPythonFloat(hotWaterFactor),
                 profile,
                 profile.OccupantStart,
                 profile.OccupantEnd,
-                profile.DomesticHotWater
-                / profile.OccupiedHours
-                / UsageProfileConstants.DomesticHotWaterHeatWattHoursPerLitre,
+                hotWaterFactor,
                 DragonScheduleType.Real);
-            DragonSchedule lighting = LightingSchedule(prefix + "-Lighted", profile);
+            DragonSchedule lighting = LightingSchedule(
+                prefix + "-Lighted:MUL:" + invertedVacationMask,
+                profile);
             var converted = new DragonProfile(
                 profile.Id,
                 prefix,
@@ -1103,11 +1151,11 @@ public static class GreenRetrofitConverter
             }
 
             DaySchedule active = LightingDay(name + ":active", profile);
-            DaySchedule off = DaySchedule.Constant(name + ":off", 0d, DragonScheduleType.OnOff);
-            RuleSet weekly = WeeklyRuleSet(name + ":weekly", profile, active, off, DragonScheduleType.OnOff);
+            DaySchedule off = DaySchedule.Constant(name + ":off", 0d, DragonScheduleType.Fraction);
+            RuleSet weekly = WeeklyRuleSet(name + ":weekly", profile, active, off, DragonScheduleType.Fraction);
             RuleSet vacation = RuleSet.FromDaySchedule(name + ":vacation", off);
             return ApplyVacations(
-                new DragonSchedule(name, Enumerable.Repeat(weekly, DragonSchedule.FixedLength), DragonScheduleType.OnOff),
+                new DragonSchedule(name, Enumerable.Repeat(weekly, DragonSchedule.FixedLength), DragonScheduleType.Fraction),
                 profile,
                 vacation);
         }
@@ -1251,7 +1299,7 @@ public static class GreenRetrofitConverter
                 values[index] = 1d;
             }
 
-            return new DaySchedule(name, values, DragonScheduleType.OnOff);
+            return new DaySchedule(name, values, DragonScheduleType.Fraction);
         }
 
         private static double CircularDistanceToNoon(int interval)

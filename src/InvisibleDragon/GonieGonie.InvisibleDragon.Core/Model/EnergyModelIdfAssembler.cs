@@ -21,7 +21,7 @@ internal static class EnergyModelIdfAssembler
     {
         IdfGenerationContext context = new(schema);
         IdfDocument document = new(schema, preambleComments: GeneratedPreamble);
-        Append(document, CreateDefaults(context));
+        Append(document, CreateDefaults(context, options));
         document.Append(context.Create(
             "Building",
             IdfGenerationContext.Field(0, "Name", model.Name),
@@ -64,7 +64,9 @@ internal static class EnergyModelIdfAssembler
         return document;
     }
 
-    private static IEnumerable<IdfObject> CreateDefaults(IdfGenerationContext context)
+    private static IEnumerable<IdfObject> CreateDefaults(
+        IdfGenerationContext context,
+        EnergyModelIdfOptions options)
     {
         yield return context.CreateRaw("Version", "24.2");
         yield return context.CreateRaw("SimulationControl", "Yes", "Yes", "Yes", "No", "Yes", "No");
@@ -78,9 +80,15 @@ internal static class EnergyModelIdfAssembler
             yield return typeLimit;
         }
 
-        yield return context.CreateRaw("Schedule:Compact", "ALLON", ScheduleIdfExporter.TypeLimitName(ScheduleType.OnOff), "Through: 12/31", "For: AllDays", "Until: 24:00", 1);
-        yield return context.CreateRaw("Schedule:Compact", "ALLOFF", ScheduleIdfExporter.TypeLimitName(ScheduleType.OnOff), "Through: 12/31", "For: AllDays", "Until: 24:00", 0);
-        yield return context.CreateRaw("Schedule:Constant", "$DEFAULT$PEOPLEACTIVITY", ScheduleIdfExporter.TypeLimitName(ScheduleType.Real), 107);
+        string? onOffType = options.UseLegacySimpleDragonScheduleMetadata
+            ? null
+            : ScheduleIdfExporter.TypeLimitName(ScheduleType.OnOff);
+        string realType = options.UseLegacySimpleDragonScheduleMetadata
+            ? "Real"
+            : ScheduleIdfExporter.TypeLimitName(ScheduleType.Real);
+        yield return context.CreateRaw("Schedule:Compact", "ALLON", onOffType, "Through: 12/31", "For: AllDays", "Until: 24:00", 1);
+        yield return context.CreateRaw("Schedule:Compact", "ALLOFF", onOffType, "Through: 12/31", "For: AllDays", "Until: 24:00", 0);
+        yield return context.CreateRaw("Schedule:Constant", "$DEFAULT$PEOPLEACTIVITY", realType, 107);
     }
 
     private static IEnumerable<Schedule> CollectSchedules(EnergyModel model)
@@ -268,7 +276,7 @@ internal static class EnergyModelIdfAssembler
         Dictionary<string, object> materialDefinitions,
         Dictionary<string, object> constructionDefinitions)
     {
-        string material = $"GlazingMaterialFor_{glazing.Name}";
+        string material = $"$GLAZING_FOR${glazing.Name}";
         if (RegisterDefinition(
             materialDefinitions,
             material,
@@ -348,7 +356,7 @@ internal static class EnergyModelIdfAssembler
             IdfGenerationContext.Field(7, "Sun Exposure", boundary == "Outdoors" ? "SunExposed" : "NoSun"),
             IdfGenerationContext.Field(8, "Wind Exposure", boundary == "Outdoors" ? "WindExposed" : "NoWind"),
             IdfGenerationContext.Field(9, "View Factor to Ground", "autocalculate"),
-            IdfGenerationContext.Field(10, "Number of Vertices", surface.Polygon.Vertices.Count));
+            IdfGenerationContext.Field(10, "Number of Vertices", "autocalculate"));
         AddVertices(result, surface.Polygon.Vertices);
         return result;
     }
@@ -381,7 +389,7 @@ internal static class EnergyModelIdfAssembler
             IdfGenerationContext.Field(5, "View Factor to Ground", "autocalculate"),
             IdfGenerationContext.Field(6, "Frame and Divider Name", null),
             IdfGenerationContext.Field(7, "Multiplier", 1),
-            IdfGenerationContext.Field(8, "Number of Vertices", opening.Polygon.Vertices.Count));
+            IdfGenerationContext.Field(8, "Number of Vertices", "autocalculate"));
         AddVertices(result, opening.Polygon.Vertices);
         return result;
     }
@@ -666,7 +674,7 @@ internal static class EnergyModelIdfAssembler
             inletReference,
             exhaustReference,
             $"{zone.Name} Zone Air Node",
-            $"{zone.Name} Return Air Node"));
+            null));
     }
 
     private static (string? Heating, string? Cooling)[] AppendSequentialLoadFractions(
@@ -831,14 +839,17 @@ internal static class EnergyModelIdfAssembler
             IdfGenerationContext.Field(0, "Zone or ZoneList Name", zone.Name),
             IdfGenerationContext.Field(1, "Zone Cooling Design Supply Air Temperature Input Method", "SupplyAirTemperature"),
             IdfGenerationContext.Field(2, "Zone Cooling Design Supply Air Temperature", 14),
+            IdfGenerationContext.Field(3, "Zone Cooling Design Supply Air Temperature Difference", 10),
             IdfGenerationContext.Field(4, "Zone Heating Design Supply Air Temperature Input Method", "SupplyAirTemperature"),
             IdfGenerationContext.Field(5, "Zone Heating Design Supply Air Temperature", 50),
+            IdfGenerationContext.Field(6, "Zone Heating Design Supply Air Temperature Difference", 10),
             IdfGenerationContext.Field(7, "Zone Cooling Design Supply Air Humidity Ratio", 0.009),
             IdfGenerationContext.Field(8, "Zone Heating Design Supply Air Humidity Ratio", 0.004),
             IdfGenerationContext.Field(9, "Design Specification Outdoor Air Object Name", outdoorAir),
             IdfGenerationContext.Field(10, "Zone Heating Sizing Factor", 1.25),
             IdfGenerationContext.Field(11, "Zone Cooling Sizing Factor", 1.15),
-            IdfGenerationContext.Field(13, "Design Specification Zone Air Distribution Object Name", distribution)));
+            IdfGenerationContext.Field(13, "Design Specification Zone Air Distribution Object Name", distribution),
+            IdfGenerationContext.Field(36, "Type of Space Sum to Use", "Coincident")));
     }
 
     private static void Append(IdfDocument document, IEnumerable<IdfObject> objects)

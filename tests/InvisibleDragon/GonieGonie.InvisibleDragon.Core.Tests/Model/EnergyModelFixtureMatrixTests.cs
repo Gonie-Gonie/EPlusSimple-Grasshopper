@@ -112,10 +112,11 @@ public sealed class EnergyModelFixtureMatrixTests
 
         Assert.Equal(IdfWriter.Write(first), IdfWriter.Write(second));
         IdfObject floor = first["BuildingSurface:Detailed"]["Floor"];
-        Assert.Equal("4", floor[10]);
-        Assert.Equal("0", floor[11]);
-        Assert.Equal("0", floor[12]);
-        Assert.Equal("0", floor[13]);
+        Assert.Equal("autocalculate", floor[10]);
+        Assert.Equal(23, floor.Count);
+        Assert.Equal(
+            new[] { "0", "0", "0", "8", "0", "0", "8", "6", "0", "0", "6", "0" },
+            floor.Fields.Skip(11).Select(field => field.Value));
     }
 
     [Fact]

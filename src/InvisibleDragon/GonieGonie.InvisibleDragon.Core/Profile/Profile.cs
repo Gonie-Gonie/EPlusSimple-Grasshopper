@@ -24,7 +24,7 @@ public sealed record Profile
         RequireType(heatingSetpoint, ScheduleType.Temperature, nameof(heatingSetpoint));
         RequireType(coolingSetpoint, ScheduleType.Temperature, nameof(coolingSetpoint));
         RequireType(hvacAvailability, ScheduleType.OnOff, nameof(hvacAvailability));
-        RequireType(lighting, ScheduleType.OnOff, nameof(lighting));
+        RequireLightingType(lighting, nameof(lighting));
         RequireType(occupant, ScheduleType.Real, nameof(occupant));
         RequireType(equipment, ScheduleType.Real, nameof(equipment));
         RequireType(hotWater, ScheduleType.Real, nameof(hotWater));
@@ -80,6 +80,18 @@ public sealed record Profile
         {
             throw new ArgumentException(
                 $"Schedule '{schedule.Name}' must have {expected} type, not {schedule.Type}.",
+                parameterName);
+        }
+    }
+
+    private static void RequireLightingType(Schedule? schedule, string parameterName)
+    {
+        if (schedule is not null
+            && schedule.Type is not ScheduleType.OnOff
+            && schedule.Type is not ScheduleType.Fraction)
+        {
+            throw new ArgumentException(
+                $"Schedule '{schedule.Name}' must have OnOff or Fraction type, not {schedule.Type}.",
                 parameterName);
         }
     }

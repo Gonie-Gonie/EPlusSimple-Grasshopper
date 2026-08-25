@@ -109,7 +109,10 @@ public sealed class GreenRetrofitConversionTests
         IdfObject activity = Assert.Single(
             idf["Schedule:Constant"],
             schedule => schedule.Name == "$DEFAULT$PEOPLEACTIVITY");
+        Assert.Equal("Real", activity[1]);
         Assert.Equal("107", activity[2]);
+        Assert.Equal(string.Empty, Assert.Single(idf["Schedule:Compact"], item => item.Name == "ALLON")[1]);
+        Assert.Equal(string.Empty, Assert.Single(idf["Schedule:Compact"], item => item.Name == "ALLOFF")[1]);
         IdfObject ventilation = Assert.Single(idf["ZoneVentilation:DesignFlowRate"]);
         Assert.Equal("Flow/Person", ventilation[3]);
         Assert.Equal("0.0083", ventilation[6]);
@@ -130,7 +133,7 @@ public sealed class GreenRetrofitConversionTests
         AssertFractionSchedule(idf, equipment[13], 1d / (1d + 1.0e-10d));
         IdfObject lowCapacity = Assert.Single(
             idf["Material"],
-            material => material.Name!.StartsWith("MTRL-0x000004_", StringComparison.Ordinal));
+            material => material.Name == "MTRL-0x000004_1003.0000000000001mm");
         Assert.Equal(
             1.003d,
             double.Parse(lowCapacity[2], NumberStyles.Float, CultureInfo.InvariantCulture),
@@ -154,6 +157,44 @@ public sealed class GreenRetrofitConversionTests
         IdfObject plantSizing = Assert.Single(idf["Sizing:Plant"]);
         Assert.Equal("80", plantSizing[2]);
         Assert.Equal("10", plantSizing[3]);
+        string[] expectedMaterialNames =
+        {
+            "MTRL-0x000000_10.0mm",
+            "MTRL-0x000000_12.0mm",
+            "MTRL-0x000001_111.8mm",
+            "MTRL-0x000001_66.0mm",
+            "MTRL-0x000002_9.000000000000002mm",
+            "MTRL-0x000003_25.0mm",
+            "MTRL-0x000004_1003.0000000000001mm",
+            "MTRL-0x000005_19.0mm",
+        };
+        Assert.Equal(
+            expectedMaterialNames,
+            idf["Material"].Select(item => item.Name).OrderBy(name => name, StringComparer.Ordinal));
+        Assert.All(
+            idf["BuildingSurface:Detailed"],
+            surface => Assert.Equal("autocalculate", surface[10]));
+        IdfObject glazing = Assert.Single(idf["WindowMaterial:SimpleGlazingSystem"]);
+        Assert.Equal("$GLAZING_FOR$CTFN-0x000000", glazing.Name);
+        IdfObject glazingConstruction = Assert.Single(
+            idf["Construction"],
+            construction => construction.Name == "CTFN-0x000000");
+        Assert.Equal(glazing.Name, glazingConstruction[1]);
+        Assert.Contains(
+            idf["Branch"],
+            branch => branch.Name == "Loop_for_SRCE-0x000001 Demand Main_RadiantFloor_for_ZONE-0x000000");
+        Assert.Equal(string.Empty, Assert.Single(idf["ZoneHVAC:EquipmentConnections"])[5]);
+        IdfObject zoneSizing = Assert.Single(idf["Sizing:Zone"]);
+        Assert.Equal("10", zoneSizing[3]);
+        Assert.Equal("10", zoneSizing[6]);
+        Assert.Equal("Coincident", zoneSizing[36]);
+        IdfObject lighting = Assert.Single(
+            idf["Schedule:Compact"],
+            schedule => schedule.Name!.EndsWith("-Lighted:MUL:0xAUTO0000:INVERTED", StringComparison.Ordinal));
+        Assert.Equal("ScheduleTypeLimits:Fraction", lighting[1]);
+        Assert.Contains(
+            idf["Schedule:Compact"],
+            schedule => schedule.Name!.Contains("-HVACOperating:AND:0xAUTO0000:INVERTED", StringComparison.Ordinal));
     }
 
     private static void AssertFractionSchedule(

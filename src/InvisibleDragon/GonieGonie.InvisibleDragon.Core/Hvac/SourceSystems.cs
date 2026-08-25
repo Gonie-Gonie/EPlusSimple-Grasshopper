@@ -112,7 +112,16 @@ public class HeatPump : SourceSystem
         yield return Biquadratic(context, "CoolingEIRMF_LowTemp", 0.989010541, -0.02347967, 0.000199711, 0.005968336, -1.0289E-07, -0.00015686, 15, 24, -5, 23);
         yield return Cubic(context, "CoolingEIRBoundary", 25.73473775, -0.03150043, -0.01416595, 0, 15, 24);
         yield return Biquadratic(context, "CoolingEIRMF_HighTemp", 0.1435147, 0.01860035, -0.0003954, 0.02485219, 0.00016329, -0.0006244, 15, 24, 16, 43);
-        yield return Cubic(context, "CoolingEIRMF_LowPLR", 0.4628123, -1.0402406, 2.17490997, -0.5974817, 0, 1);
+        yield return Cubic(
+            context,
+            "CoolingEIRMF_LowPLR",
+            0.4628123,
+            -1.0402406,
+            2.17490997,
+            -0.5974817,
+            0,
+            1,
+            outputUnit: "Capacity");
         yield return Linear(context, "CoolingEIRMF_HighPLR", 1, 0, 1, 1.5);
         yield return Linear(context, "CoolingCombCorrection", 0.618055, 0.381945, 1, 1.5);
         yield return Linear(context, "CoolingPLRCorrelation", 0.85, 0.15, 0, 1);
@@ -120,9 +129,28 @@ public class HeatPump : SourceSystem
         yield return Cubic(context, "HeatingCapaBoundary", -7.6000882, 3.05090016, -0.1162844, 0, 15, 27);
         yield return Biquadratic(context, "HeatingCapaMF_HighTemp", 1.161134821, 0.027478868, -0.00168795, 0.001783378, 2.03208E-06, -6.8969E-05, 15, 27, -10, 15);
         yield return Biquadratic(context, "HeatingEIRMF_LowTemp", 0.87465501, -0.01319754, 0.00110307, -0.0133118, 0.00089017, -0.00012766, 15, 27, -20, 12);
-        yield return Cubic(context, "HeatingEIRBoundary", -7.6000882, 3.05090016, -0.1162844, 0, 15, 27);
+        yield return Cubic(
+            context,
+            "HeatingEIRBoundary",
+            -7.6000882,
+            3.05090016,
+            -0.1162844,
+            0,
+            15,
+            27,
+            minimumOutput: -20,
+            maximumOutput: 15);
         yield return Biquadratic(context, "HeatingEIRMF_HighTemp", 2.504005146, -0.05736767, 4.07336E-05, -0.12959669, 0.00135839, 0.00317047, 15, 27, -10, 15);
-        yield return Cubic(context, "HeatingEIRMF_LowPLR", 0.1400093, 0.6415002, 0.1339047, 0.0845859, 0, 1);
+        yield return Cubic(
+            context,
+            "HeatingEIRMF_LowPLR",
+            0.1400093,
+            0.6415002,
+            0.1339047,
+            0.0845859,
+            0,
+            1,
+            inputUnit: "Dimensionless");
         yield return context.CreateRaw("Curve:Quadratic", Curve("HeatingEIRMF_HighPLR"), 2.4294355, -2.235887, 0.8064516, 1, 1.5);
         yield return Linear(context, "HeatingCombCorrection", 0.96034, 0.03966, 1, 1.5);
         yield return Linear(context, "HeatingPLRCorrelation", 0.85, 0.15, 0, 1);
@@ -131,8 +159,32 @@ public class HeatPump : SourceSystem
     private IdfObject Biquadratic(IdfGenerationContext context, string suffix, params object?[] values) =>
         context.CreateRaw("Curve:Biquadratic", new object?[] { Curve(suffix) }.Concat(values).Concat(new object?[] { null, null, "Temperature", "Temperature", "Dimensionless" }).ToArray());
 
-    private IdfObject Cubic(IdfGenerationContext context, string suffix, params object?[] values) =>
-        context.CreateRaw("Curve:Cubic", new object?[] { Curve(suffix) }.Concat(values).Concat(new object?[] { null, null, "Temperature" }).ToArray());
+    private IdfObject Cubic(
+        IdfGenerationContext context,
+        string suffix,
+        double coefficient1,
+        double coefficient2,
+        double coefficient3,
+        double coefficient4,
+        double minimumInput,
+        double maximumInput,
+        double? minimumOutput = null,
+        double? maximumOutput = null,
+        string inputUnit = "Temperature",
+        string outputUnit = "Dimensionless") =>
+        context.CreateRaw(
+            "Curve:Cubic",
+            Curve(suffix),
+            coefficient1,
+            coefficient2,
+            coefficient3,
+            coefficient4,
+            minimumInput,
+            maximumInput,
+            minimumOutput,
+            maximumOutput,
+            inputUnit,
+            outputUnit);
 
     private IdfObject Linear(IdfGenerationContext context, string suffix, params object?[] values) =>
         context.CreateRaw("Curve:Linear", new object?[] { Curve(suffix) }.Concat(values).ToArray());
