@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <AssemblyName>GonieGonie.CompatibilityRunner</AssemblyName>
+    <RootNamespace>GonieGonie.CompatibilityRunner</RootNamespace>
+    <Description>Paired C# engine and reporter for pinned Python compatibility cases.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Shared\GonieGonie.EnergyPlus.Runtime\GonieGonie.EnergyPlus.Runtime.csproj" />
+    <ProjectReference Include="..\..\src\InvisibleDragon\GonieGonie.InvisibleDragon.Core\GonieGonie.InvisibleDragon.Core.csproj" />
+    <ProjectReference Include="..\..\src\SimpleDragon\GonieGonie.SimpleDragon.Core\GonieGonie.SimpleDragon.Core.csproj" />
+  </ItemGroup>
+</Project>

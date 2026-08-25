@@ -1,0 +1,30 @@
+{
+  "schema": "goniegonie.dragons.compatibility-cases.v1",
+  "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+  "energyplus": {
+    "version": "24.2.0",
+    "build": "94a887817b"
+  },
+  "tolerances": {
+    "idf_absolute": 1e-9,
+    "idf_relative": 1e-9,
+    "grr_absolute": 0.01,
+    "grr_relative": 0.001,
+    "near_zero": 0.005,
+    "warning_count_delta": 0
+  },
+  "cases": [
+    {
+      "id": "ashrae-140-modified",
+      "input_grm": "fixtures/simple-dragon/grm/ASHRAE 140 modified.grm",
+      "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
+      "stages": [
+        "authoring_idf",
+        "expanded_idf",
+        "energyplus",
+        "grr",
+        "warnings"
+      ]
+    }
+  ]
+}

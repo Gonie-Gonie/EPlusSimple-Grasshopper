@@ -15,6 +15,7 @@ $commands = [ordered]@{
     release = Join-Path $PSScriptRoot 'release.ps1'
     clean = Join-Path $PSScriptRoot 'clean.ps1'
     icons = Join-Path $PSScriptRoot 'generate-icons.ps1'
+    compatibility = Join-Path $PSScriptRoot 'compatibility.ps1'
     upstream = Join-Path $repositoryRoot 'tools\upstream-tracker\run.ps1'
 }
 
@@ -36,6 +37,7 @@ Commands:
   release     Create a fully verified local release candidate
   clean       Remove disposable temp and generated artifact content
   icons       Regenerate component and package icons
+  compatibility  Run paired Python/C# IDF, EnergyPlus, warning, and GRR parity
   upstream    Validate, hash, or compare the pinned upstream source
   help        Show this command list
 
@@ -44,6 +46,7 @@ Examples:
   dev.cmd build -NoRestore
   dev.cmd examples -Generate
   dev.cmd install -UseExistingPackages
+  dev.cmd compatibility -AllowDifferences
   dev.cmd clean -TempOnly
 '@
 }
