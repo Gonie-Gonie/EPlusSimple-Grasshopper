@@ -64,6 +64,64 @@ public sealed class DayScheduleCompatibilityTests
         Assert.Throws<DivideByZeroException>(() => onOff / 0);
     }
 
+    [Fact]
+    public void AlgebraResultsDropUnitsWithoutMutatingTheirOperands()
+    {
+        DaySchedule left = Pattern("Left", ScheduleType.Real, "kW", 2, 4);
+        DaySchedule right = Pattern("Right", ScheduleType.Real, "kW", 1, 2);
+        DaySchedule onOffLeft = Pattern("OnOff left", ScheduleType.OnOff, "flag", 0, 1);
+        DaySchedule onOffRight = Pattern("OnOff right", ScheduleType.OnOff, "flag", 1, 0);
+
+        DaySchedule[] results =
+        {
+            left * 2,
+            left / 2,
+            left + 1,
+            left - 1,
+            left * right,
+            left / right,
+            left + right,
+            left - right,
+            onOffLeft & onOffRight,
+            onOffLeft | onOffRight,
+            !onOffLeft,
+        };
+
+        Assert.All(results, result => Assert.Null(result.Unit));
+        Assert.Equal("kW", left.Unit);
+        Assert.Equal("kW", right.Unit);
+        Assert.Equal("flag", onOffLeft.Unit);
+        Assert.Equal("flag", onOffRight.Unit);
+        AssertPattern(left, 2, 4);
+        AssertPattern(right, 1, 2);
+        AssertPattern(onOffLeft, 0, 1);
+        AssertPattern(onOffRight, 1, 0);
+    }
+
+    [Fact]
+    public void NormalizeByMaximumUsesScalarDivisionTypeAndKeepsSourceImmutable()
+    {
+        DaySchedule onOff = Pattern("OnOff", ScheduleType.OnOff, "flag", 0, 1);
+        DaySchedule real = Pattern("Real", ScheduleType.Real, "kW", 2, 4);
+
+        DaySchedule normalizedOnOff = onOff.NormalizeByMaximum();
+        DaySchedule normalizedReal = real.NormalizeByMaximum("Normalized real");
+
+        AssertPattern(normalizedOnOff, 0, 1);
+        Assert.Equal("OnOff_normalized", normalizedOnOff.Name);
+        Assert.Equal(ScheduleType.Real, normalizedOnOff.Type);
+        Assert.Null(normalizedOnOff.Unit);
+        AssertPattern(normalizedReal, 0.5, 1);
+        Assert.Equal("Normalized real", normalizedReal.Name);
+        Assert.Equal(ScheduleType.Real, normalizedReal.Type);
+        Assert.Null(normalizedReal.Unit);
+        AssertPattern(onOff, 0, 1);
+        Assert.Equal(ScheduleType.OnOff, onOff.Type);
+        Assert.Equal("flag", onOff.Unit);
+        AssertPattern(real, 2, 4);
+        Assert.Equal("kW", real.Unit);
+    }
+
     [Theory]
     [InlineData("eq", new double[] { 0, 1, 0, 0 })]
     [InlineData("ne", new double[] { 1, 0, 1, 1 })]

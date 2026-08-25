@@ -315,11 +315,13 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
     public DaySchedule NormalizeByMaximum(string? name = null)
     {
         double divisor = Maximum == 0 ? 1 : Maximum;
+        ScheduleType resultType = Type == ScheduleType.OnOff
+            ? ScheduleType.Real
+            : Type;
         return new DaySchedule(
             name ?? $"{Name}_normalized",
             Values.Select(value => value / divisor),
-            Type,
-            Unit);
+            resultType);
     }
 
     public IReadOnlyList<DayScheduleSegment> Compactize()
@@ -769,7 +771,7 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         ScheduleType resultType,
         string resultName)
     {
-        return new DaySchedule(resultName, Values.Select(operation), resultType, Unit);
+        return new DaySchedule(resultName, Values.Select(operation), resultType);
     }
 
     private DaySchedule Zip(
@@ -782,8 +784,7 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         return new DaySchedule(
             $"{Name}:{operationName}:{other.Name}",
             Enumerable.Range(0, FixedLength).Select(index => operation(Values[index], other.Values[index])),
-            resultType,
-            Unit == other.Unit ? Unit : null);
+            resultType);
     }
 
     private void RequireSameNonOnOffType(DaySchedule other, string operation)
