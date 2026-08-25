@@ -1494,6 +1494,134 @@ _CSHARP_MEMBER_MODIFIERS = frozenset(
 )
 
 
+_CSHARP_PARAMETER_MODIFIERS = frozenset(
+    {"in", "out", "params", "readonly", "ref", "scoped", "this"}
+)
+
+
+_CSHARP_RESERVED_KEYWORDS = frozenset(
+    {
+        "abstract",
+        "as",
+        "base",
+        "bool",
+        "break",
+        "byte",
+        "case",
+        "catch",
+        "char",
+        "checked",
+        "class",
+        "const",
+        "continue",
+        "decimal",
+        "default",
+        "delegate",
+        "do",
+        "double",
+        "else",
+        "enum",
+        "event",
+        "explicit",
+        "extern",
+        "false",
+        "finally",
+        "fixed",
+        "float",
+        "for",
+        "foreach",
+        "goto",
+        "if",
+        "implicit",
+        "in",
+        "int",
+        "interface",
+        "internal",
+        "is",
+        "lock",
+        "long",
+        "namespace",
+        "new",
+        "null",
+        "object",
+        "operator",
+        "out",
+        "override",
+        "params",
+        "private",
+        "protected",
+        "public",
+        "readonly",
+        "ref",
+        "return",
+        "sbyte",
+        "sealed",
+        "short",
+        "sizeof",
+        "stackalloc",
+        "static",
+        "string",
+        "struct",
+        "switch",
+        "this",
+        "throw",
+        "true",
+        "try",
+        "typeof",
+        "uint",
+        "ulong",
+        "unchecked",
+        "unsafe",
+        "ushort",
+        "using",
+        "virtual",
+        "void",
+        "volatile",
+        "while",
+    }
+)
+
+
+_CSHARP_PREDEFINED_TYPE_KEYWORDS = frozenset(
+    {
+        "bool",
+        "byte",
+        "char",
+        "decimal",
+        "double",
+        "dynamic",
+        "float",
+        "int",
+        "long",
+        "nint",
+        "nuint",
+        "object",
+        "sbyte",
+        "short",
+        "string",
+        "uint",
+        "ulong",
+        "ushort",
+    }
+)
+
+
+_CSHARP_FORBIDDEN_TYPE_IDENTIFIERS = frozenset(
+    {
+        *_CSHARP_MEMBER_MODIFIERS,
+        *_CSHARP_PARAMETER_MODIFIERS,
+        *(_CSHARP_RESERVED_KEYWORDS - _CSHARP_PREDEFINED_TYPE_KEYWORDS),
+        "var",
+        "where",
+    }
+)
+
+
+_CSHARP_DECLARATION_TOKEN = re.compile(
+    r"::|@?[A-Za-z_][A-Za-z0-9_]*|[<>,.?*\[\]]"
+)
+
+
 _CSHARP_OPERATOR_METADATA_TOKENS = {
     "op_Addition": ("+", 2),
     "op_Subtraction": ("-", 2),
@@ -1516,12 +1644,24 @@ def _csharp_type_body_declares_member(body: str, owner: str, leaf: str) -> bool:
     occurrence = re.compile(rf"\b{re.escape(leaf)}\b")
     for match in occurrence.finditer(top_level):
         suffix = top_level[match.end() :]
+        source_suffix = body[match.end() :]
         next_token = re.match(r"\s*(?:<[^;{}()]*>\s*)?(\(|=>|=|;|,)", suffix)
         if next_token is None:
             continue
         segment_start = top_level.rfind(";", 0, match.start()) + 1
-        prefix = top_level[segment_start : match.start()]
-        prefix = re.sub(r"\[[^\]]*\]", " ", prefix)
+        raw_prefix = top_level[segment_start : match.start()]
+        if (
+            next_token.group(1) == "("
+            and leaf != owner
+            and _csharp_tuple_return_method_prefix_is_declaration(raw_prefix)
+            and _csharp_method_suffix_is_declaration(
+                suffix,
+                source_suffix,
+                next_token.start(1),
+            )
+        ):
+            return True
+        prefix = re.sub(r"\[[^\]]*\]", " ", raw_prefix)
         if any(token in prefix for token in ("=", "=>", "(", ")")):
             continue
         if prefix.rstrip().endswith((".", "::")):
@@ -1539,6 +1679,239 @@ def _csharp_type_body_declares_member(body: str, owner: str, leaf: str) -> bool:
         elif non_modifiers:
             return True
     return False
+
+
+def _csharp_tuple_return_method_prefix_is_declaration(prefix: str) -> bool:
+    """Recognize an explicitly accessible member's tuple return type.
+
+    The general member recognizer deliberately rejects parentheses in the
+    declaration prefix because they commonly indicate an invocation or local
+    expression. Tuple return types are the one declaration form that needs
+    those parentheses. Keep that exception narrow: require only method
+    modifiers before the tuple, an explicit member-only accessibility
+    modifier, and a balanced tuple with at least two non-empty type elements.
+    """
+
+    candidate = prefix.strip()
+    opening = candidate.find("(")
+    if opening < 0:
+        return False
+    modifier_text = candidate[:opening].strip()
+    if not modifier_text or re.search(r"[^A-Za-z0-9_\s]", modifier_text):
+        return False
+    modifiers = modifier_text.split()
+    # Keep the exception at the two declaration shapes required by current
+    # evidence. Other valid tuple-return forms remain false negatives until a
+    # full C# syntax inspector replaces this fail-closed recognizer.
+    if tuple(modifiers) != ("public", "static"):
+        return False
+
+    closing = _matching_csharp_delimiter(candidate, opening, "(", ")")
+    if closing is None or candidate[closing + 1 :].strip():
+        return False
+    elements = _csharp_tuple_return_elements(candidate[opening + 1 : closing])
+    return len(elements) >= 2
+
+
+def _csharp_tuple_return_elements(value: str) -> tuple[str, ...]:
+    elements = _split_csharp_declaration_list(value)
+    if len(elements) < 2 or any(
+        not _csharp_type_declaration_fragment(element, require_name=False)
+        for element in elements
+    ):
+        return ()
+    return elements
+
+
+def _split_csharp_declaration_list(value: str) -> tuple[str, ...]:
+    segments: list[str] = []
+    start = 0
+    angle_depth = 0
+    square_depth = 0
+    round_depth = 0
+    for index, character in enumerate(value):
+        if character == "<":
+            angle_depth += 1
+        elif character == ">":
+            if angle_depth == 0:
+                return ()
+            angle_depth -= 1
+        elif character == "[":
+            square_depth += 1
+        elif character == "]":
+            if square_depth == 0:
+                return ()
+            square_depth -= 1
+        elif character == "(":
+            round_depth += 1
+        elif character == ")":
+            if round_depth == 0:
+                return ()
+            round_depth -= 1
+        elif character in "{};=\"'":
+            return ()
+        elif (
+            character == ","
+            and angle_depth == 0
+            and square_depth == 0
+            and round_depth == 0
+        ):
+            segments.append(value[start:index].strip())
+            start = index + 1
+    if angle_depth or square_depth or round_depth:
+        return ()
+    segments.append(value[start:].strip())
+    if any(not segment for segment in segments):
+        return ()
+    return tuple(segments)
+
+
+def _csharp_type_declaration_fragment(value: str, *, require_name: bool) -> bool:
+    tokens = _csharp_declaration_tokens(value)
+    if not tokens:
+        return False
+    end = _parse_csharp_named_type(tokens, 0)
+    if end is None:
+        return False
+    has_name = end < len(tokens) and _csharp_is_declaration_identifier(tokens[end])
+    if has_name:
+        end += 1
+    return end == len(tokens) and (has_name or not require_name)
+
+
+def _csharp_declaration_tokens(value: str) -> tuple[str, ...]:
+    tokens: list[str] = []
+    end = 0
+    for match in _CSHARP_DECLARATION_TOKEN.finditer(value):
+        if value[end : match.start()].strip():
+            return ()
+        tokens.append(match.group(0))
+        end = match.end()
+    if value[end:].strip():
+        return ()
+    return tuple(tokens)
+
+
+def _parse_csharp_named_type(tokens: tuple[str, ...], start: int) -> int | None:
+    index = start
+    has_global_alias = False
+    if index + 1 < len(tokens) and tokens[index : index + 2] == ("global", "::"):
+        has_global_alias = True
+        index += 2
+    if index < len(tokens) and tokens[index] in _CSHARP_PREDEFINED_TYPE_KEYWORDS:
+        if has_global_alias:
+            return None
+        index += 1
+    else:
+        index = _parse_csharp_type_segment(tokens, index)
+        if index is None:
+            return None
+        while index < len(tokens) and tokens[index] == ".":
+            if (
+                index + 1 >= len(tokens)
+                or tokens[index + 1] in _CSHARP_PREDEFINED_TYPE_KEYWORDS
+            ):
+                return None
+            index = _parse_csharp_type_segment(tokens, index + 1)
+            if index is None:
+                return None
+    nullable_seen = False
+    while index < len(tokens):
+        if tokens[index] == "?":
+            if nullable_seen:
+                return None
+            nullable_seen = True
+            index += 1
+            continue
+        if tokens[index] != "[":
+            break
+        index += 1
+        while index < len(tokens) and tokens[index] == ",":
+            index += 1
+        if index >= len(tokens) or tokens[index] != "]":
+            return None
+        index += 1
+        nullable_seen = False
+    return index
+
+
+def _parse_csharp_type_segment(tokens: tuple[str, ...], start: int) -> int | None:
+    if start >= len(tokens) or not _csharp_is_type_identifier(tokens[start]):
+        return None
+    index = start + 1
+    if index >= len(tokens) or tokens[index] != "<":
+        return index
+    index += 1
+    while True:
+        index = _parse_csharp_named_type(tokens, index)
+        if index is None or index >= len(tokens):
+            return None
+        if tokens[index] == ">":
+            return index + 1
+        if tokens[index] != ",":
+            return None
+        index += 1
+
+
+def _csharp_is_type_identifier(value: str) -> bool:
+    return bool(
+        re.fullmatch(r"@?[A-Za-z_][A-Za-z0-9_]*", value)
+        and (
+            value.startswith("@")
+            or value in _CSHARP_PREDEFINED_TYPE_KEYWORDS
+            or value not in _CSHARP_FORBIDDEN_TYPE_IDENTIFIERS
+        )
+    )
+
+
+def _csharp_is_declaration_identifier(value: str) -> bool:
+    return bool(
+        re.fullmatch(r"@?[A-Za-z_][A-Za-z0-9_]*", value)
+        and (
+            value.startswith("@")
+            or (
+                value not in _CSHARP_RESERVED_KEYWORDS
+                and value != "global"
+            )
+        )
+    )
+
+
+def _csharp_method_suffix_is_declaration(
+    suffix: str,
+    source_suffix: str,
+    opening: int,
+) -> bool:
+    if suffix[:opening].strip():
+        # Generic tuple-return methods remain unsupported rather than letting a
+        # permissive regex mistake malformed type-argument syntax for a method.
+        return False
+    closing = _matching_csharp_delimiter(suffix, opening, "(", ")")
+    source_closing = _matching_csharp_delimiter(source_suffix, opening, "(", ")")
+    if closing is None or source_closing != closing:
+        return False
+    parameters = suffix[opening + 1 : closing]
+    if parameters.strip():
+        declarations = _split_csharp_declaration_list(parameters)
+        if not declarations or any(
+            not _csharp_parameter_is_declaration(item) for item in declarations
+        ):
+            return False
+    remainder = suffix[closing + 1 :].lstrip()
+    source_remainder = source_suffix[closing + 1 :].lstrip()
+    return source_remainder.startswith("{") and remainder.startswith(";")
+
+
+def _csharp_parameter_is_declaration(value: str) -> bool:
+    tokens = _csharp_declaration_tokens(value)
+    if not tokens:
+        return False
+    end = _parse_csharp_named_type(tokens, 0)
+    return (
+        end is not None
+        and end + 1 == len(tokens)
+        and _csharp_is_declaration_identifier(tokens[end])
+    )
 
 
 def _csharp_type_body_declares_operator(

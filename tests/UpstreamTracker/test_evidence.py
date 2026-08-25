@@ -90,6 +90,102 @@ public class Owner
 
         self.assertFalse(_csharp_declares_symbol(source, "N.Owner.Owner"))
 
+    def test_csharp_binding_recognizes_tuple_return_method_declarations(self) -> None:
+        source = """namespace GonieGonie.InvisibleDragon.Profile;
+public sealed class Schedule
+{
+    public static (
+        IReadOnlyList<SchedulePeriod> Left,
+        IReadOnlyList<SchedulePeriod> Right) UnifyCompactizedSchedules(
+            IReadOnlyList<SchedulePeriod> left,
+            IReadOnlyList<SchedulePeriod> right)
+    {
+        return (left, right);
+    }
+
+}
+"""
+
+        self.assertTrue(
+            _csharp_declares_symbol(
+                source,
+                "GonieGonie.InvisibleDragon.Profile.Schedule.UnifyCompactizedSchedules",
+            )
+        )
+
+    def test_csharp_tuple_return_binding_rejects_calls_locals_and_forgeries(
+        self,
+    ) -> None:
+        source = """namespace N;
+public sealed class Owner
+{
+    private static readonly (int Left, int Right) Cached =
+        Helper.UnifyCompactizedSchedules();
+
+    public (int Left, int Right) Wrapper() =>
+        Helper.UnifyCompactizedSchedules();
+
+    public void Outer()
+    {
+        static (int Left, int Right) UnifyCompactizedSchedules() => (1, 2);
+        _ = UnifyCompactizedSchedules();
+    }
+
+    public static (int Left, int Right) Unbalanced(
+        int value;
+}
+public static class Helper
+{
+    public static (int Left, int Right) UnifyCompactizedSchedules()
+    {
+        return (1, 2);
+    }
+}
+"""
+
+        self.assertFalse(
+            _csharp_declares_symbol(source, "N.Owner.UnifyCompactizedSchedules")
+        )
+        self.assertFalse(_csharp_declares_symbol(source, "N.Owner.Unbalanced"))
+        self.assertTrue(
+            _csharp_declares_symbol(source, "N.Helper.UnifyCompactizedSchedules")
+        )
+
+    def test_csharp_tuple_return_binding_rejects_malformed_declarations(
+        self,
+    ) -> None:
+        malformed = (
+            "public static (int A extra, string B) U() { return default; }",
+            "(public static, private readonly) U() { return default; }",
+            "public static (int A, string B) U(int a int b) { return default; }",
+            "public static (int A, string B) U(a + b) { return default; }",
+            "public static (int A, string B) U<<T>() { return default; }",
+            "public static (int A, string B) U<T>() where T { return default; }",
+            "public static (int int, string string) U() { return default; }",
+            "public static (if A, while B) U() { return default; }",
+            "public static (int A, string B) U(int int) { return default; }",
+            "public static (int A, string B) U(int if) { return default; }",
+            "public static (int?? A, string B) U() { return default; }",
+            "public static (int[bogus] A, string B) U() { return default; }",
+            "public [A] static (int A, string B) U() { return default; }",
+            "public static (A.B::C A, string B) U() { return default; }",
+            "public static (int.Foo A, string B) U() { return default; }",
+            "public static (int<string> A, string B) U() { return default; }",
+            "public static (global::int A, string B) U() { return default; }",
+            "public static (int A, string B) U(int.Foo value) { return default; }",
+            "public static (int A, string B) U() =>;",
+            "public static (int A, string B) U() => (1, 2);",
+            "public static (int A, string B) U() => return;",
+            "public static (int A, string B) U() => { };",
+            "public static (int A, string B) U();",
+            "private (int A, string B) U() { return default; }",
+        )
+
+        for declaration in malformed:
+            source = f"namespace N; public sealed class Owner {{ {declaration} }}"
+            with self.subTest(declaration=declaration):
+                self.assertFalse(_csharp_declares_symbol(source, "N.Owner.U"))
+
     def test_csharp_binding_recognizes_first_middle_and_last_enum_members(self) -> None:
         source = """namespace GonieGonie.InvisibleDragon.Profile;
 public enum ScheduleType
