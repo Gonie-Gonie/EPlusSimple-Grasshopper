@@ -73,6 +73,21 @@
         "grr",
         "warnings"
       ]
+    },
+    {
+      "id": "geothermal-heat-pump-ahu",
+      "input_grm": "fixtures/compatibility/models/geothermal-heat-pump-ahu.grm",
+      "input_grm_sha256": "8f65aea3c738dadf53791e300bbfbad19eac6a6c81bbff57d498d545ee10df01",
+      "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
+      "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
+      "stages": [
+        "grm_cross_read",
+        "authoring_idf",
+        "expanded_idf",
+        "energyplus",
+        "grr",
+        "warnings"
+      ]
     }
   ]
 }
