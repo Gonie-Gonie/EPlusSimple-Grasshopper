@@ -15,3 +15,9 @@ other reviewed reference artifacts.
 observations for the remaining 24 RuleSet core symbols, including exact alias,
 lookup, fallback, summary, ordered-dictionary, and IDF-expression behavior.
 Its file hash and byte count are recorded in the same generated manifest.
+
+`python-0.7.0/profile-residual-oracle.json` pins 15 ordered CPython 3.12.7
+observations for the final five public symbols in `profile.py`. It records
+Profile slot and IDF-export order, Schedule container topology, and the
+ScheduleOperationError family while separating exact behavior from reviewed
+immutable native adaptations.

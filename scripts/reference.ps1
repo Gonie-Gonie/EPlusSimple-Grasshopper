@@ -38,6 +38,7 @@ $ruleSetCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\ge
 $ruleSetOperationsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_rule_set_operations_oracle.py'
 $scheduleCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_schedule_core_oracle.py'
 $scheduleOperationsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_schedule_operations_oracle.py'
+$profileResidualGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_profile_residual_oracle.py'
 $constructionEqualityTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_construction_equality_hash_oracle.py'
 $scheduleTypeTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_schedule_type_oracle.py'
 $dayScheduleCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_day_schedule_core_oracle.py'
@@ -47,6 +48,7 @@ $ruleSetCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_rul
 $ruleSetOperationsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_rule_set_operations_oracle.py'
 $scheduleCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_schedule_core_oracle.py'
 $scheduleOperationsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_schedule_operations_oracle.py'
+$profileResidualTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_profile_residual_oracle.py'
 $publicSymbolInventoryPath = Join-Path $repositoryRoot 'upstream\public-symbol-inventory.json'
 $tempRoot = Join-Path $repositoryRoot 'temp'
 $referenceTempRoot = Join-Path $tempRoot 'reference'
@@ -132,6 +134,7 @@ foreach ($requiredFile in @(
     $ruleSetOperationsGeneratorPath,
     $scheduleCoreGeneratorPath,
     $scheduleOperationsGeneratorPath,
+    $profileResidualGeneratorPath,
     $constructionEqualityTestPath,
     $scheduleTypeTestPath,
     $dayScheduleCoreTestPath,
@@ -141,6 +144,7 @@ foreach ($requiredFile in @(
     $ruleSetOperationsTestPath,
     $scheduleCoreTestPath,
     $scheduleOperationsTestPath,
+    $profileResidualTestPath,
     $publicSymbolInventoryPath
 )) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
@@ -622,7 +626,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -846,6 +850,24 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $scheduleOperationsGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-schedule-operations-reference.log') `
     -FailureMessage 'Generating the Python Schedule operations oracle failed'
+
+$profileResidualOraclePath = Join-Path $outputRoot 'profile-residual-oracle.json'
+$profileResidualGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $profileResidualGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $profileResidualOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $profileResidualGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-profile-residual-reference.log') `
+    -FailureMessage 'Generating the Python profile residual oracle failed'
 
 $generatorArguments = @(
     '-X', 'utf8',

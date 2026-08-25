@@ -1170,3 +1170,59 @@
     api_contract: callers replace their RuleSet reference with the functional result and use the exact lowercase weekends key; clearing a required default is rejected explicitly
     compatibility_evidence: getter identity, replacement and null rejection, preserved name, type, other-slot references and null topology, source immutability, exact-key validation, and mixed-type rejection remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
+
+- id: immutable-profile-value-object
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Profile
+    symbol_hash: sha256:3cf55ef99529b6051e2e5bea5c32bbecc5850819101e522fed1008be0599d6ad
+  difference:
+    upstream: is a plain mutable Python object whose name and seven schedule attributes can be reassigned or deleted and whose instance dictionary accepts additional attributes
+    dotnet: is a sealed immutable record with a required EntityId, a validated name, seven read-only nullable Schedule properties, and native value equality and hashing
+  effect:
+    engineering_result: valid profiles retain the same seven schedule values, slot order, null topology, and supplied Schedule identities while post-construction mutation is prevented
+    api_contract: callers construct a complete native Profile and replace that value when changes are required instead of mutating or extending a Python instance dictionary
+    compatibility_evidence: exact slot values and aliases, value versus identity equality, source isolation, and the immutable production contract in src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Profile.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: validated-immutable-profile-construction
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Profile.__init__
+    symbol_hash: sha256:19f87b176fd6f00e83c6b55bda01ac7e9bb5d8a0829e8f869f13c20a0388aa25
+  difference:
+    upstream: directly stores the supplied name and seven optional values without requiring a Profile identity, validating identifier text, checking that values are Schedule instances, or enforcing each slot's schedule domain
+    dotnet: requires a non-null EntityId and normalized nonblank name, preserves valid supplied Schedule references, and atomically enforces Temperature setpoints, OnOff HVAC availability, OnOff or Fraction lighting, and Real occupant, equipment, and hot-water schedules
+  effect:
+    engineering_result: valid typed schedules retain their exact identities and null slots while foreign objects, blank names, missing identities, and schedules in the wrong engineering domain are rejected before a Profile is created
+    api_contract: construction adds the native EntityId requirement and explicit slot-domain validation rather than relying on later Python attribute use to expose invalid inputs
+    compatibility_evidence: defaults, all seven valid slots, reference preservation, name and identity validation, every slot-domain rejection, and atomic construction in src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Profile.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-schedule-value-object
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule
+    symbol_hash: sha256:1a40948f1e3ccbc15dbee4033662c4e80a2a6b4ee559271dd0ca2f59f890095c
+  difference:
+    upstream: derives from Python UserList, retains the caller's ruleset list as its public mutable data storage, and permits indexed, slice, and direct data mutations that can replace values or change the post-construction length
+    dotnet: is a sealed immutable IReadOnlyList that copies the supplied RuleSet sequence into read-only storage, preserves the fixed 365-day length, and exposes validated functional transformations instead of sequence mutation
+  effect:
+    engineering_result: valid annual schedules retain the same 365 ordered RuleSet references, ScheduleType, and name while caller-container changes and post-construction sequence mutation cannot alter the schedule
+    api_contract: callers use the native read-only collection and immutable Schedule operations instead of Python UserList assignment, slicing, or the public data member
+    compatibility_evidence: exact length and order, RuleSet alias topology, copied source-container isolation, default topology, every exposed mutation route, and the immutable production contract in src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Schedule.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: native-schedule-operation-exception-family
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: ScheduleOperationError
+    symbol_hash: sha256:d808ccddebceb72eed1685cd6f236255cc7cc32a21a0b4459237b35af6c7f129
+  difference:
+    upstream: declares an empty custom exception derived from Python TypeError, retaining Python exception-family matching, args, and message behavior
+    dotnet: declares ScheduleOperationException as the native custom exception derived from InvalidOperationException and preserves the supplied operation-failure message
+  effect:
+    engineering_result: unsupported or incompatible schedule operations still fail through a dedicated schedule-operation error with the relevant message
+    api_contract: native callers catch ScheduleOperationException or InvalidOperationException instead of the Python ScheduleOperationError or TypeError family
+    compatibility_evidence: exact upstream inheritance and args behavior, native inheritance and message propagation, catch-family behavior, and the production exception in src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation

@@ -1,4 +1,6 @@
+using System.Collections.ObjectModel;
 using GonieGonie.BuildingEnergy.Contracts;
+using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Internal;
 
 namespace GonieGonie.InvisibleDragon.Profile;
@@ -55,6 +57,30 @@ public sealed record Profile
     public Schedule? Equipment { get; }
 
     public Schedule? HotWater { get; }
+
+    public IReadOnlyList<IdfObject> ToIdfObjects()
+    {
+        Schedule?[] schedules =
+        {
+            HeatingSetpoint,
+            CoolingSetpoint,
+            HvacAvailability,
+            Occupant,
+            Lighting,
+            Equipment,
+            HotWater,
+        };
+        var objects = new List<IdfObject>(schedules.Length);
+        foreach (Schedule? schedule in schedules)
+        {
+            if (schedule is not null)
+            {
+                objects.Add(schedule.ToIdfObject());
+            }
+        }
+
+        return new ReadOnlyCollection<IdfObject>(objects);
+    }
 
     public ValidationResult Validate()
     {

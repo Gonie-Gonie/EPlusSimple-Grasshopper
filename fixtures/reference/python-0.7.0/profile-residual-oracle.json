@@ -1,0 +1,793 @@
+{
+  "cases": [
+    {
+      "executor": "profile-idf",
+      "id": "profile-idf.empty",
+      "python": {
+        "facts": {
+          "count": 0,
+          "null_slots_omitted": true,
+          "objects": [],
+          "repeated_call_count": 0,
+          "results_are_fresh": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Profile.to_idf_object"
+    },
+    {
+      "executor": "profile-idf",
+      "id": "profile-idf.ordered-seven",
+      "python": {
+        "facts": {
+          "count": 7,
+          "objects": [
+            {
+              "fields": [
+                "heating",
+                "ScheduleTypeLimits:Temperature",
+                "Through: 12/31",
+                "For: Weekdays",
+                "Until: 24:00",
+                "20.0",
+                "For: Weekends",
+                "Until: 24:00",
+                "20.0",
+                "For: AllOtherDays",
+                "Until: 24:00",
+                "20.0"
+              ],
+              "kind": "idf-object",
+              "object_type": "Schedule:Compact"
+            },
+            {
+              "fields": [
+                "cooling",
+                "ScheduleTypeLimits:Temperature",
+                "Through: 12/31",
+                "For: Weekdays",
+                "Until: 24:00",
+                "25.0",
+                "For: Weekends",
+                "Until: 24:00",
+                "25.0",
+                "For: AllOtherDays",
+                "Until: 24:00",
+                "25.0"
+              ],
+              "kind": "idf-object",
+              "object_type": "Schedule:Compact"
+            },
+            {
+              "fields": [
+                "hvac",
+                "ScheduleTypeLimits:Onoff",
+                "Through: 12/31",
+                "For: Weekdays",
+                "Until: 24:00",
+                "1",
+                "For: Weekends",
+                "Until: 24:00",
+                "1",
+                "For: AllOtherDays",
+                "Until: 24:00",
+                "1"
+              ],
+              "kind": "idf-object",
+              "object_type": "Schedule:Compact"
+            },
+            {
+              "fields": [
+                "occupant",
+                "ScheduleTypeLimits:Real",
+                "Through: 12/31",
+                "For: Weekdays",
+                "Until: 24:00",
+                "0.1",
+                "For: Weekends",
+                "Until: 24:00",
+                "0.1",
+                "For: AllOtherDays",
+                "Until: 24:00",
+                "0.1"
+              ],
+              "kind": "idf-object",
+              "object_type": "Schedule:Compact"
+            },
+            {
+              "fields": [
+                "lighting",
+                "ScheduleTypeLimits:Fraction",
+                "Through: 12/31",
+                "For: Weekdays",
+                "Until: 24:00",
+                "0.2",
+                "For: Weekends",
+                "Until: 24:00",
+                "0.2",
+                "For: AllOtherDays",
+                "Until: 24:00",
+                "0.2"
+              ],
+              "kind": "idf-object",
+              "object_type": "Schedule:Compact"
+            },
+            {
+              "fields": [
+                "equipment",
+                "ScheduleTypeLimits:Real",
+                "Through: 12/31",
+                "For: Weekdays",
+                "Until: 24:00",
+                "3.0",
+                "For: Weekends",
+                "Until: 24:00",
+                "3.0",
+                "For: AllOtherDays",
+                "Until: 24:00",
+                "3.0"
+              ],
+              "kind": "idf-object",
+              "object_type": "Schedule:Compact"
+            },
+            {
+              "fields": [
+                "hotwater",
+                "ScheduleTypeLimits:Real",
+                "Through: 12/31",
+                "For: Weekdays",
+                "Until: 24:00",
+                "4.0",
+                "For: Weekends",
+                "Until: 24:00",
+                "4.0",
+                "For: AllOtherDays",
+                "Until: 24:00",
+                "4.0"
+              ],
+              "kind": "idf-object",
+              "object_type": "Schedule:Compact"
+            }
+          ],
+          "schedule_names": [
+            "heating",
+            "cooling",
+            "hvac",
+            "occupant",
+            "lighting",
+            "equipment",
+            "hotwater"
+          ],
+          "type_limit_names": [
+            "ScheduleTypeLimits:Temperature",
+            "ScheduleTypeLimits:Temperature",
+            "ScheduleTypeLimits:Onoff",
+            "ScheduleTypeLimits:Real",
+            "ScheduleTypeLimits:Fraction",
+            "ScheduleTypeLimits:Real",
+            "ScheduleTypeLimits:Real"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Profile.to_idf_object"
+    },
+    {
+      "executor": "profile-idf",
+      "id": "profile-idf.repeated-reference",
+      "python": {
+        "facts": {
+          "converted_objects_are_fresh": true,
+          "converted_values_match": true,
+          "count": 2,
+          "duplicate_positions_preserved": true,
+          "objects": [
+            {
+              "fields": [
+                "shared-temperature",
+                "ScheduleTypeLimits:Temperature",
+                "Through: 12/31",
+                "For: Weekdays",
+                "Until: 24:00",
+                "21.0",
+                "For: Weekends",
+                "Until: 24:00",
+                "21.0",
+                "For: AllOtherDays",
+                "Until: 24:00",
+                "21.0"
+              ],
+              "kind": "idf-object",
+              "object_type": "Schedule:Compact"
+            },
+            {
+              "fields": [
+                "shared-temperature",
+                "ScheduleTypeLimits:Temperature",
+                "Through: 12/31",
+                "For: Weekdays",
+                "Until: 24:00",
+                "21.0",
+                "For: Weekends",
+                "Until: 24:00",
+                "21.0",
+                "For: AllOtherDays",
+                "Until: 24:00",
+                "21.0"
+              ],
+              "kind": "idf-object",
+              "object_type": "Schedule:Compact"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Profile.to_idf_object"
+    },
+    {
+      "executor": "profile-init",
+      "expected_dotnet": {
+        "adaptation": "validated-immutable-profile-construction",
+        "outcome": "returned"
+      },
+      "id": "profile-init.defaults",
+      "python": {
+        "facts": {
+          "dictionary_keys": [
+            "name",
+            "heating_setpoint",
+            "cooling_setpoint",
+            "hvac_availability",
+            "occupant",
+            "lighting",
+            "equipment",
+            "hotwater"
+          ],
+          "result": {
+            "kind": "profile",
+            "name": {
+              "policy": "literal",
+              "value": "defaults"
+            },
+            "objects": [],
+            "slots": {
+              "cooling_setpoint": null,
+              "equipment": null,
+              "heating_setpoint": null,
+              "hotwater": null,
+              "hvac_availability": null,
+              "lighting": null,
+              "occupant": null
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Profile.__init__"
+    },
+    {
+      "executor": "profile-init",
+      "expected_dotnet": {
+        "adaptation": "validated-immutable-profile-construction",
+        "error_category": "type",
+        "outcome": "raised"
+      },
+      "id": "profile-init.unvalidated-inputs",
+      "python": {
+        "facts": {
+          "idf_result_is_empty": true,
+          "result": {
+            "kind": "profile",
+            "name": null,
+            "objects": [
+              {
+                "reference": "foreign-01",
+                "value": {
+                  "kind": "foreign",
+                  "type": "object"
+                }
+              }
+            ],
+            "slots": {
+              "cooling_setpoint": "foreign-01",
+              "equipment": "foreign-01",
+              "heating_setpoint": "foreign-01",
+              "hotwater": "foreign-01",
+              "hvac_availability": "foreign-01",
+              "lighting": "foreign-01",
+              "occupant": "foreign-01"
+            }
+          },
+          "slots_retain_one_foreign_identity": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Profile.__init__"
+    },
+    {
+      "executor": "profile-init",
+      "expected_dotnet": {
+        "adaptation": "validated-immutable-profile-construction",
+        "outcome": "returned"
+      },
+      "id": "profile-init.valid-seven-slots",
+      "python": {
+        "facts": {
+          "all_input_references_preserved": true,
+          "result": {
+            "kind": "profile",
+            "name": {
+              "policy": "literal",
+              "value": "  valid profile  "
+            },
+            "objects": [
+              {
+                "reference": "schedule-01",
+                "value": {
+                  "kind": "schedule",
+                  "length": 365,
+                  "name": {
+                    "policy": "literal",
+                    "value": "heating"
+                  },
+                  "schedule_type": "temperature"
+                }
+              },
+              {
+                "reference": "schedule-02",
+                "value": {
+                  "kind": "schedule",
+                  "length": 365,
+                  "name": {
+                    "policy": "literal",
+                    "value": "cooling"
+                  },
+                  "schedule_type": "temperature"
+                }
+              },
+              {
+                "reference": "schedule-03",
+                "value": {
+                  "kind": "schedule",
+                  "length": 365,
+                  "name": {
+                    "policy": "literal",
+                    "value": "hvac"
+                  },
+                  "schedule_type": "onoff"
+                }
+              },
+              {
+                "reference": "schedule-04",
+                "value": {
+                  "kind": "schedule",
+                  "length": 365,
+                  "name": {
+                    "policy": "literal",
+                    "value": "occupant"
+                  },
+                  "schedule_type": "real"
+                }
+              },
+              {
+                "reference": "schedule-05",
+                "value": {
+                  "kind": "schedule",
+                  "length": 365,
+                  "name": {
+                    "policy": "literal",
+                    "value": "lighting"
+                  },
+                  "schedule_type": "fraction"
+                }
+              },
+              {
+                "reference": "schedule-06",
+                "value": {
+                  "kind": "schedule",
+                  "length": 365,
+                  "name": {
+                    "policy": "literal",
+                    "value": "equipment"
+                  },
+                  "schedule_type": "real"
+                }
+              },
+              {
+                "reference": "schedule-07",
+                "value": {
+                  "kind": "schedule",
+                  "length": 365,
+                  "name": {
+                    "policy": "literal",
+                    "value": "hotwater"
+                  },
+                  "schedule_type": "real"
+                }
+              }
+            ],
+            "slots": {
+              "cooling_setpoint": "schedule-02",
+              "equipment": "schedule-06",
+              "heating_setpoint": "schedule-01",
+              "hotwater": "schedule-07",
+              "hvac_availability": "schedule-03",
+              "lighting": "schedule-05",
+              "occupant": "schedule-04"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Profile.__init__"
+    },
+    {
+      "executor": "profile",
+      "expected_dotnet": {
+        "adaptation": "immutable-profile-value-object",
+        "outcome": "returned"
+      },
+      "id": "profile.alias-topology",
+      "python": {
+        "facts": {
+          "heating_is_cooling": true,
+          "occupant_is_equipment_is_hotwater": true,
+          "result": {
+            "kind": "profile",
+            "name": {
+              "policy": "literal",
+              "value": "alias"
+            },
+            "objects": [
+              {
+                "reference": "schedule-01",
+                "value": {
+                  "kind": "schedule",
+                  "length": 365,
+                  "name": {
+                    "policy": "literal",
+                    "value": "temperature-shared"
+                  },
+                  "schedule_type": "temperature"
+                }
+              },
+              {
+                "reference": "schedule-02",
+                "value": {
+                  "kind": "schedule",
+                  "length": 365,
+                  "name": {
+                    "policy": "literal",
+                    "value": "hvac"
+                  },
+                  "schedule_type": "onoff"
+                }
+              },
+              {
+                "reference": "schedule-03",
+                "value": {
+                  "kind": "schedule",
+                  "length": 365,
+                  "name": {
+                    "policy": "literal",
+                    "value": "real-shared"
+                  },
+                  "schedule_type": "real"
+                }
+              },
+              {
+                "reference": "schedule-04",
+                "value": {
+                  "kind": "schedule",
+                  "length": 365,
+                  "name": {
+                    "policy": "literal",
+                    "value": "lighting"
+                  },
+                  "schedule_type": "fraction"
+                }
+              }
+            ],
+            "slots": {
+              "cooling_setpoint": "schedule-01",
+              "equipment": "schedule-03",
+              "heating_setpoint": "schedule-01",
+              "hotwater": "schedule-03",
+              "hvac_availability": "schedule-02",
+              "lighting": "schedule-04",
+              "occupant": "schedule-03"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Profile"
+    },
+    {
+      "executor": "profile",
+      "expected_dotnet": {
+        "adaptation": "immutable-profile-value-object",
+        "outcome": "returned"
+      },
+      "id": "profile.identity-equality",
+      "python": {
+        "facts": {
+          "left_equals_right": false,
+          "left_equals_self": true,
+          "left_is_right": false,
+          "object_equality_is_not_implemented": true,
+          "profiles_are_hashable": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Profile"
+    },
+    {
+      "executor": "profile",
+      "expected_dotnet": {
+        "adaptation": "immutable-profile-value-object",
+        "outcome": "returned"
+      },
+      "id": "profile.mutable-surface",
+      "python": {
+        "facts": {
+          "cooling_attribute_deleted": true,
+          "dictionary_keys": [
+            "name",
+            "heating_setpoint",
+            "hvac_availability",
+            "occupant",
+            "lighting",
+            "equipment",
+            "hotwater",
+            "dynamic_note"
+          ],
+          "dynamic_attribute": "added",
+          "heating_is_foreign_marker": true,
+          "name": "after"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Profile"
+    },
+    {
+      "executor": "schedule-operation-error",
+      "expected_dotnet": {
+        "adaptation": "native-schedule-operation-exception-family",
+        "outcome": "returned"
+      },
+      "id": "schedule-operation-error.args",
+      "python": {
+        "facts": {
+          "empty_args": [],
+          "empty_message": "",
+          "multiple_args": [
+            "left",
+            2
+          ],
+          "multiple_message": "('left', 2)",
+          "single_args": [
+            "operation failed"
+          ],
+          "single_message": "operation failed"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ScheduleOperationError"
+    },
+    {
+      "executor": "schedule-operation-error",
+      "expected_dotnet": {
+        "adaptation": "native-schedule-operation-exception-family",
+        "outcome": "returned"
+      },
+      "id": "schedule-operation-error.catch-family",
+      "python": {
+        "facts": {
+          "caught_as_type_error": true,
+          "is_exception": true,
+          "is_not_value_error": true,
+          "is_type_error": true,
+          "normalized_category": "schedule-operation"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ScheduleOperationError"
+    },
+    {
+      "executor": "schedule-operation-error",
+      "expected_dotnet": {
+        "adaptation": "native-schedule-operation-exception-family",
+        "outcome": "returned"
+      },
+      "id": "schedule-operation-error.inheritance",
+      "python": {
+        "facts": {
+          "is_exception_subclass": true,
+          "is_not_value_error_subclass": true,
+          "is_type_error_subclass": true,
+          "mro_names": [
+            "ScheduleOperationError",
+            "TypeError",
+            "Exception",
+            "BaseException",
+            "object"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ScheduleOperationError"
+    },
+    {
+      "executor": "schedule",
+      "expected_dotnet": {
+        "adaptation": "immutable-schedule-value-object",
+        "outcome": "returned"
+      },
+      "id": "schedule.alias-container",
+      "python": {
+        "facts": {
+          "all_items_shared_before": true,
+          "data_is_source_container": true,
+          "first_tracks_source_replacement": true,
+          "fixed_length_constant": 365,
+          "last_is_shared": true,
+          "length_after_source_append": 366
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Schedule"
+    },
+    {
+      "executor": "schedule",
+      "expected_dotnet": {
+        "adaptation": "immutable-schedule-value-object",
+        "outcome": "returned"
+      },
+      "id": "schedule.default-topology",
+      "python": {
+        "facts": {
+          "all_day_values_zero": true,
+          "all_ruleset_types_real": true,
+          "distinct_day_schedule_count": 730,
+          "distinct_ruleset_count": 365,
+          "fixed_length_constant": 365,
+          "length": 365,
+          "runtime_day_name_count": 730,
+          "runtime_ruleset_name_count": 365,
+          "schedule_name": {
+            "policy": "runtime-identity-hex"
+          },
+          "weekday_weekend_are_distinct": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Schedule"
+    },
+    {
+      "executor": "schedule",
+      "expected_dotnet": {
+        "adaptation": "immutable-schedule-value-object",
+        "outcome": "returned"
+      },
+      "id": "schedule.mutable-userlist",
+      "python": {
+        "facts": {
+          "blocked_append": {
+            "message": "'Schedule' object has no attribute 'fixed_length'",
+            "type": "AttributeError"
+          },
+          "last_was_foreign_value": true,
+          "length_after_raw_pop": 364,
+          "length_after_slice": 364,
+          "negative_assignment_is_replacement": true,
+          "negative_assignment_returns_none": true,
+          "public_data_is_list": true,
+          "raw_pop_removed_replacement": true,
+          "slice_assignment_returns_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Schedule"
+    }
+  ],
+  "cases_sha256": "sha256:9ccf19079e3776b299a4fd4ab6c069daefb076e28855c77ca2639b18a390ba16",
+  "consumer_contract": {
+    "adaptations": {
+      "Profile": "immutable-profile-value-object",
+      "Profile.__init__": "validated-immutable-profile-construction",
+      "Schedule": "immutable-schedule-value-object",
+      "ScheduleOperationError": "native-schedule-operation-exception-family"
+    },
+    "case_count": 15,
+    "case_ids": [
+      "profile-idf.empty",
+      "profile-idf.ordered-seven",
+      "profile-idf.repeated-reference",
+      "profile-init.defaults",
+      "profile-init.unvalidated-inputs",
+      "profile-init.valid-seven-slots",
+      "profile.alias-topology",
+      "profile.identity-equality",
+      "profile.mutable-surface",
+      "schedule-operation-error.args",
+      "schedule-operation-error.catch-family",
+      "schedule-operation-error.inheritance",
+      "schedule.alias-container",
+      "schedule.default-topology",
+      "schedule.mutable-userlist"
+    ],
+    "classifications": {
+      "Profile": "exception",
+      "Profile.__init__": "exception",
+      "Profile.to_idf_object": "equivalent",
+      "Schedule": "exception",
+      "ScheduleOperationError": "exception"
+    },
+    "float_encoding": "python-binary64-hex-without-0x-prefix",
+    "runtime_names": "policy-token-no-raw-address",
+    "target_symbols": [
+      "Profile",
+      "Profile.__init__",
+      "Profile.to_idf_object",
+      "Schedule",
+      "ScheduleOperationError"
+    ]
+  },
+  "runtime": {
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.invisibledragon.profile-residual-oracle.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:bf35db5abe6e8851938c2d634421f972436bb46ab9abab1dca41465ffcd7e9d4",
+      "symbol": "Profile",
+      "symbol_hash": "sha256:3cf55ef99529b6051e2e5bea5c32bbecc5850819101e522fed1008be0599d6ad"
+    },
+    {
+      "body_hash": "sha256:73dd1c37c7a808baa32cbd8e9c811b443e20a07b79a88e38f01ad7387631251f",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:64eb4f95ace84bc62c18887bae8642d24c5a613faea7f0a6403a4d7a4cf9ba52",
+      "symbol": "Profile.__init__",
+      "symbol_hash": "sha256:19f87b176fd6f00e83c6b55bda01ac7e9bb5d8a0829e8f869f13c20a0388aa25"
+    },
+    {
+      "body_hash": "sha256:77716652f9c58182268dd2afe13cec984edbf15c4d64fffac3a85905bc740713",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+      "symbol": "Profile.to_idf_object",
+      "symbol_hash": "sha256:0b06ee5f7b81782b986777c9f524320ff3f272722a9d0ec4942f5f53ac074893"
+    },
+    {
+      "body_hash": "sha256:00679b8c55fe41d3ab7f7d84e2d3a1e3f0b6ed9c003c318e9ff8ed595932fd34",
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:24241d2bdfbc529f097a3f866f790e3a45ad8d0ad336d65ced3c9841d8844453",
+      "symbol": "Schedule",
+      "symbol_hash": "sha256:1a40948f1e3ccbc15dbee4033662c4e80a2a6b4ee559271dd0ca2f59f890095c"
+    },
+    {
+      "body_hash": "sha256:921a63a3a05234e5b1c61efbee031114924c6587cc8d60b93d4932290c0b549a",
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:302b0beaf8566368e9c978cee1c9dcbdf5e3ad95728e33169278853fa1dc0cab",
+      "symbol": "ScheduleOperationError",
+      "symbol_hash": "sha256:d808ccddebceb72eed1685cd6f236255cc7cc32a21a0b4459237b35af6c7f129"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "path": "src/idragon/dragon/profile.py",
+    "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+  }
+}

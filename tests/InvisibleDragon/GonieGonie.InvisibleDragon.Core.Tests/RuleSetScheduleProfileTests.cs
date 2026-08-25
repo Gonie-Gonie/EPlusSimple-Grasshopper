@@ -1,4 +1,5 @@
 using GonieGonie.BuildingEnergy.Contracts;
+using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Profile;
 using ZoneProfile = GonieGonie.InvisibleDragon.Profile.Profile;
 
@@ -175,5 +176,106 @@ public sealed class RuleSetScheduleProfileTests
         Assert.True(validation.IsValid);
         Assert.True(validation.HasWarnings);
         Assert.Equal("INVISIBLEDRAGON.PROFILE.SETPOINT_OVERLAP", validation.Diagnostics.Single().Code);
+    }
+
+    [Fact]
+    public void ProfileToIdfObjectsReturnsEmptyCollectionWhenEverySlotIsNull()
+    {
+        var profile = new ZoneProfile(new EntityId("PRFL-000001"), "Empty");
+
+        IReadOnlyList<IdfObject> objects = profile.ToIdfObjects();
+
+        Assert.Empty(objects);
+    }
+
+    [Fact]
+    public void ProfileToIdfObjectsUsesUpstreamSlotOrder()
+    {
+        Schedule heating = Schedule.Constant("Heating", 20, ScheduleType.Temperature);
+        Schedule cooling = Schedule.Constant("Cooling", 24, ScheduleType.Temperature);
+        Schedule availability = Schedule.Constant("Availability", 1, ScheduleType.OnOff);
+        Schedule occupant = Schedule.Constant("Occupant", 0.1, ScheduleType.Real);
+        Schedule lighting = Schedule.Constant("Lighting", 0.2, ScheduleType.Fraction);
+        Schedule equipment = Schedule.Constant("Equipment", 0.3, ScheduleType.Real);
+        Schedule hotWater = Schedule.Constant("Hot water", 0.4, ScheduleType.Real);
+        var profile = new ZoneProfile(
+            new EntityId("PRFL-000001"),
+            "Complete",
+            heating,
+            cooling,
+            availability,
+            occupant,
+            lighting,
+            equipment,
+            hotWater);
+
+        IReadOnlyList<IdfObject> objects = profile.ToIdfObjects();
+
+        Assert.Equal(
+            new[]
+            {
+                "Heating",
+                "Cooling",
+                "Availability",
+                "Occupant",
+                "Lighting",
+                "Equipment",
+                "Hot water",
+            },
+            objects.Select(value => value.Name));
+        Assert.All(objects, value => Assert.Equal("Schedule:Compact", value.ObjectType));
+    }
+
+    [Fact]
+    public void ProfileToIdfObjectsDoesNotDeduplicateRepeatedScheduleReferences()
+    {
+        Schedule repeated = Schedule.Constant("Repeated", 0.5, ScheduleType.Real);
+        var profile = new ZoneProfile(
+            new EntityId("PRFL-000001"),
+            "Repeated references",
+            occupant: repeated,
+            equipment: repeated,
+            hotWater: repeated);
+
+        IReadOnlyList<IdfObject> first = profile.ToIdfObjects();
+        IReadOnlyList<IdfObject> second = profile.ToIdfObjects();
+
+        Assert.Equal(3, first.Count);
+        Assert.All(first, value => Assert.Equal("Repeated", value.Name));
+        Assert.NotSame(first[0], first[1]);
+        Assert.NotSame(first[1], first[2]);
+        Assert.NotSame(first[0].Fields[0], first[1].Fields[0]);
+        Assert.NotSame(first[0], second[0]);
+
+        first[0].Fields[0].Value = "Changed output";
+
+        Assert.Equal("Repeated", first[1].Name);
+        Assert.Equal("Repeated", second[0].Name);
+    }
+
+    [Fact]
+    public void ProfileToIdfObjectsPreservesSourcesAndReturnsReadOnlyCollection()
+    {
+        Schedule heating = Schedule.Constant("Heating", 20, ScheduleType.Temperature);
+        Schedule lighting = Schedule.Constant("Lighting", 1, ScheduleType.OnOff);
+        var profile = new ZoneProfile(
+            new EntityId("PRFL-000001"),
+            "Sources",
+            heatingSetpoint: heating,
+            lighting: lighting);
+
+        IReadOnlyList<IdfObject> objects = profile.ToIdfObjects();
+
+        Assert.Same(heating, profile.HeatingSetpoint);
+        Assert.Same(lighting, profile.Lighting);
+        Assert.Equal(new[] { "Heating", "Lighting" }, objects.Select(value => value.Name));
+
+        IList<IdfObject> mutableView = Assert.IsAssignableFrom<IList<IdfObject>>(objects);
+        Assert.True(mutableView.IsReadOnly);
+        Assert.Throws<NotSupportedException>(() => mutableView[0] = mutableView[0]);
+        Assert.Throws<NotSupportedException>(() => mutableView.Add(objects[0]));
+        Assert.Throws<NotSupportedException>(() => mutableView.Remove(objects[0]));
+        Assert.Throws<NotSupportedException>(() => mutableView.Clear());
+        Assert.Equal(new[] { "Heating", "Lighting" }, objects.Select(value => value.Name));
     }
 }
