@@ -377,6 +377,12 @@ Invoke-RepositoryCommand `
     -Arguments @('build', '-NoRestore', '-RequireEnergyPlus') `
     -FailureMessage 'Release build failed'
 
+Write-Host 'Running strict cross-language engineering compatibility cases...'
+Invoke-RepositoryCommand `
+    -Path (Join-Path $repositoryRoot 'dev.cmd') `
+    -Arguments @('compatibility', '-SkipReferencePreparation', '-NoRestore') `
+    -FailureMessage 'Engineering compatibility gate failed'
+
 Write-Host 'Opening and round-trip validating the tracked examples in Rhino 7 and Rhino 8...'
 Invoke-RepositoryCommand `
     -Path (Join-Path $repositoryRoot 'dev.cmd') `
@@ -397,6 +403,8 @@ $settings = Require-Json `
     -Schema 'goniegonie.dragons-grasshopper.local-settings.v1'
 $buildManifestPath = Join-Path $reportsRoot 'build-manifest.json'
 $testSummaryPath = Join-Path $reportsRoot 'test-summary.json'
+$engineeringCompatibilityPath = Join-Path $reportsRoot 'engineering-compatibility.json'
+$engineeringReleasePath = Join-Path $releaseRoot 'engineering-compatibility.json'
 $packageIndexPath = Join-Path $packagesRoot 'package-index.json'
 $compatibilityPath = Join-Path $packagesRoot 'compatibility-report.json'
 $packageChecksumsPath = Join-Path $packagesRoot 'checksums.sha256'
@@ -406,6 +414,9 @@ $buildManifest = Require-Json `
 $testSummary = Require-Json `
     -Path $testSummaryPath `
     -Schema 'goniegonie.dragons-grasshopper.test-summary.v1'
+$engineeringCompatibility = Require-Json `
+    -Path $engineeringCompatibilityPath `
+    -Schema 'goniegonie.dragons.engineering-compatibility-report.v1'
 $packageIndex = Require-Json `
     -Path $packageIndexPath `
     -Schema 'goniegonie.dragons-grasshopper.package-index.v1'
@@ -428,6 +439,25 @@ if (-not (Test-Path -LiteralPath $packageChecksumsPath -PathType Leaf)) {
 if ([string] $testSummary.status -ne 'passed') {
     throw "Release tests did not report passed status: '$($testSummary.status)'."
 }
+$engineeringCases = @($engineeringCompatibility.cases)
+if (-not [bool] $engineeringCompatibility.passed -or
+    [int] $engineeringCompatibility.declared_case_count -lt 1 -or
+    [int] $engineeringCompatibility.executed_case_count -ne [int] $engineeringCompatibility.declared_case_count -or
+    [int] $engineeringCompatibility.passed_case_count -ne [int] $engineeringCompatibility.declared_case_count -or
+    [int] $engineeringCompatibility.failed_case_count -ne 0 -or
+    [int] $engineeringCompatibility.skip_count -ne 0 -or
+    $engineeringCases.Count -ne [int] $engineeringCompatibility.declared_case_count -or
+    @($engineeringCases | Where-Object {
+        -not [bool] $_.passed -or
+        [int] $_.skip_count -ne 0 -or
+        @($_.skipped_stages).Count -ne 0
+    }).Count -ne 0) {
+    throw 'Engineering compatibility report is incomplete, skipped, or failed.'
+}
+Copy-Item `
+    -LiteralPath $engineeringCompatibilityPath `
+    -Destination $engineeringReleasePath `
+    -Force
 if ([string] $buildManifest.git.commit -ne $commit -or [bool] $buildManifest.git.dirty) {
     throw 'Build manifest does not identify the clean release commit.'
 }
@@ -704,11 +734,12 @@ $releaseAssets = @(
     Get-Item -LiteralPath $packageIndexPath
     Get-Item -LiteralPath $compatibilityPath
     Get-Item -LiteralPath $packageChecksumsPath
+    Get-Item -LiteralPath $engineeringCompatibilityPath
 )
 if (@($releaseAssets | Where-Object { $_.Extension -eq '.yak' }).Count -ne 4 -or
     @($releaseAssets | Where-Object { $_.Extension -eq '.zip' }).Count -ne 2 -or
-    $releaseAssets.Count -ne 9) {
-    throw "Expected four Yak archives, two portable ZIPs, and three common reports; found $($releaseAssets.Count) release assets."
+    $releaseAssets.Count -ne 10) {
+    throw "Expected four Yak archives, two portable ZIPs, and four common reports; found $($releaseAssets.Count) release assets."
 }
 $assetReports = @($releaseAssets | Sort-Object FullName | ForEach-Object {
     [pscustomobject] [ordered] @{
@@ -747,6 +778,16 @@ $releaseGate = [pscustomobject] [ordered] @{
     verification = [pscustomobject] [ordered] @{
         pythonOracle = 'passed'
         managedAndIntegrationTests = [string] $testSummary.status
+        engineeringCompatibility = [pscustomobject] [ordered] @{
+            status = 'passed'
+            declaredCaseCount = [int] $engineeringCompatibility.declared_case_count
+            executedCaseCount = [int] $engineeringCompatibility.executed_case_count
+            skippedStageCount = [int] $engineeringCompatibility.skip_count
+            report = 'release/' + (Get-RelativeUnixPath `
+                -Root $releaseRoot `
+                -Path $engineeringReleasePath)
+            sha256 = Get-Sha256 -Path $engineeringReleasePath
+        }
         grasshopperExamples = 'passed'
         packageCompatibility = 'passed'
         buildManifest = [pscustomobject] [ordered] @{
@@ -773,6 +814,7 @@ $releaseGatePath = Join-Path $releaseRoot 'release-gate.json'
 Write-Utf8JsonIfChanged -InputObject $releaseGate -Path $releaseGatePath -Depth 16
 $checksumFiles = @(
     Get-Item -LiteralPath $releaseGatePath
+    Get-Item -LiteralPath $engineeringReleasePath
     Get-ChildItem -LiteralPath $hostReportRoot -File -Filter '*.json'
 )
 $checksumLines = @($checksumFiles | Sort-Object FullName | ForEach-Object {

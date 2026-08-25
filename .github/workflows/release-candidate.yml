@@ -69,6 +69,10 @@ jobs:
         shell: powershell
         run: .\dev.cmd build -NoRestore -RequireEnergyPlus
 
+      - name: Verify cross-language engineering compatibility
+        shell: powershell
+        run: .\dev.cmd compatibility -SkipReferencePreparation -NoRestore
+
       - name: Build and verify Yak and portable packages
         shell: powershell
         run: .\dev.cmd package -SkipBuild -NoRestore
@@ -124,9 +128,10 @@ jobs:
             Get-Item -LiteralPath 'artifacts/packages/package-index.json'
             Get-Item -LiteralPath 'artifacts/packages/compatibility-report.json'
             Get-Item -LiteralPath 'artifacts/packages/checksums.sha256'
+            Get-Item -LiteralPath 'artifacts/reports/engineering-compatibility.json'
           ) | ForEach-Object FullName
-          if ($assets.Count -ne 6) {
-            throw "Expected six release assets for $env:RELEASE_PRODUCT; found $($assets.Count)."
+          if ($assets.Count -ne 7) {
+            throw "Expected seven release assets for $env:RELEASE_PRODUCT; found $($assets.Count)."
           }
 
           gh release create $env:GITHUB_REF_NAME `

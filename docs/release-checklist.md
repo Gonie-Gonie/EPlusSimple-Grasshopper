@@ -36,6 +36,7 @@ For diagnosis, its constituent commands are:
 .\dev.cmd setup -InstallEnergyPlus -RequireEnergyPlus -RequireRhino7 -RequireRhino8
 .\dev.cmd reference -Mode Verify
 .\dev.cmd build -NoRestore -RequireEnergyPlus
+.\dev.cmd compatibility -SkipReferencePreparation -NoRestore
 .\dev.cmd examples -SkipPluginBuild
 .\dev.cmd package -SkipBuild -RunPortableHostGate
 ```
@@ -44,6 +45,9 @@ For diagnosis, its constituent commands are:
   `net8.0-windows`.
 - Require all managed tests, real EnergyPlus integration, Rhino geometry, and
   Grasshopper save/reopen gates applicable to the machine.
+- Require every declared Python/C# engineering compatibility case to pass with
+  zero skipped stages, including authoring/expanded IDF, EnergyPlus, GRR, and
+  warning comparisons declared by that case.
 - Run package-host scenarios from safely extracted portable archives in Rhino
   7 and Rhino 8: InvisibleDragon-only, SimpleDragon-only, and both.
 - Require both genuine starter definitions to solve, save, reopen, preserve
@@ -57,8 +61,8 @@ For diagnosis, its constituent commands are:
 ## Candidate review
 
 - Inspect `artifacts\release\release-gate.json`, its checksum inventory, the
-  package index and compatibility report, build/test reports, and all six
-  copied real-host summaries.
+  copied `engineering-compatibility.json`, package index and compatibility
+  report, build/test reports, and all six copied real-host summaries.
 - Open the tracked InvisibleDragon and SimpleDragon starter definitions in each
   installed Rhino generation. Separately exercise a direct InvisibleDragon
   HVAC graph and a SimpleDragon HVAC-to-InvisibleDragon conversion using the
