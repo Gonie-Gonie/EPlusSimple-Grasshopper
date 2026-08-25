@@ -25,6 +25,18 @@
         "grr",
         "warnings"
       ]
+    },
+    {
+      "id": "two-zone-one-sided-adjacency-shared-hp",
+      "input_grm": "fixtures/compatibility/models/two-zone-one-sided-adjacency-shared-hp.grm",
+      "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
+      "stages": [
+        "authoring_idf",
+        "expanded_idf",
+        "energyplus",
+        "grr",
+        "warnings"
+      ]
     }
   ]
 }

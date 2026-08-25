@@ -228,9 +228,9 @@ public static class RhinoConversionPreviewBuilder
             {
                 if (!sourceById.TryGetValue(converted.Id.Value, out sourceSurface)
                     && surfaceConversion is null
-                    && converted.Id.Value.StartsWith("CLONE:", StringComparison.Ordinal))
+                    && converted.Id.Value.StartsWith("$CLONE_OF$:", StringComparison.Ordinal))
                 {
-                    sourceIdText = converted.Id.Value.Remove(0, "CLONE:".Length);
+                    sourceIdText = converted.Id.Value.Remove(0, "$CLONE_OF$:".Length);
                     sourceById.TryGetValue(sourceIdText, out sourceSurface);
                 }
             }

@@ -1,6 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Security.Cryptography;
-using System.Text;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Idd;
 using GonieGonie.InvisibleDragon.Idf;
@@ -186,6 +184,9 @@ public static class GreenRetrofitConverter
 
     private sealed class Converter
     {
+        private const string ClonePrefix = "$CLONE_OF$:";
+        private const string ReversedPrefix = "$REVERSED$:";
+
         private const string DefaultInnerWallName = "SimpleDragon:DefaultInnerWallConstruction";
         private readonly GreenRetrofitModel _model;
         private readonly GreenRetrofitConversionOptions _options;
@@ -485,7 +486,7 @@ public static class GreenRetrofitConverter
                 return;
             }
 
-            EntityId cloneId = new("CLONE:" + surface.Id.Value);
+            EntityId cloneId = new(ClonePrefix + surface.Id.Value);
             bool conflictsWithSource = _model.Zones
                 .SelectMany(zone => zone.Surfaces)
                 .Any(item => item.Id.Equals(cloneId));
@@ -1007,7 +1008,7 @@ public static class GreenRetrofitConverter
         {
             return openings.Select(opening =>
             {
-                EntityId id = new("CLONE:" + opening.Id.Value);
+                EntityId id = new(ClonePrefix + opening.Id.Value);
                 return opening switch
                 {
                     DragonWindow window => (DragonOpening)new DragonWindow(
@@ -1643,7 +1644,7 @@ public static class GreenRetrofitConverter
             double width = surface.Area / zoneHeight;
             double radians = surface.Azimuth.HasValue
                 ? surface.Azimuth.Value * Math.PI / 180d
-                : StableAzimuthRadians(surface.Id.Value);
+                : PythonReferenceAzimuthRadians(surface.Id.Value);
             double x = Math.Cos(radians - (1.5d * Math.PI)) * width / 2d;
             double y = Math.Sin(radians - (1.5d * Math.PI)) * width / 2d;
             return new DragonPlanarPolygon(new[]
@@ -1705,23 +1706,15 @@ public static class GreenRetrofitConverter
             return polygons.AsReadOnly();
         }
 
-        private static double StableAzimuthRadians(string id)
+        private static double PythonReferenceAzimuthRadians(string id)
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(id);
-#if NET6_0_OR_GREATER
-            byte[] hash = SHA256.HashData(bytes);
-#else
-            byte[] hash;
-            using (SHA256 algorithm = SHA256.Create())
-            {
-                hash = algorithm.ComputeHash(bytes);
-            }
-#endif
-            uint value = ((uint)hash[0] << 24)
-                | ((uint)hash[1] << 16)
-                | ((uint)hash[2] << 8)
-                | hash[3];
-            return (value / (double)uint.MaxValue) * 2d * Math.PI;
+            bool isClone = id.StartsWith(ClonePrefix, StringComparison.Ordinal);
+            string hashInput = isClone ? id.Replace(ClonePrefix, string.Empty) : id;
+            long hash = PythonSeedZeroStringHash.Compute(hashInput);
+            double radians = Math.Log10(Math.Abs((double)hash));
+            return isClone
+                ? (radians + Math.PI) % (2d * Math.PI)
+                : radians % (2d * Math.PI);
         }
 
         private static bool AreReciprocalGeometriesCompatible(
@@ -1908,7 +1901,7 @@ public static class GreenRetrofitConverter
         private static DragonSurfaceConstruction ReverseConstruction(DragonSurfaceConstruction construction)
         {
             return construction is DragonConstruction opaque
-                ? opaque.Reverse("REVERSED:" + opaque.Name)
+                ? opaque.Reverse(ReversedPrefix + opaque.Name)
                 : construction;
         }
 

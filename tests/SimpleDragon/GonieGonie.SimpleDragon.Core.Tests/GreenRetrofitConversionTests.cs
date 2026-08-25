@@ -311,7 +311,7 @@ public sealed class GreenRetrofitConversionTests
         EnergyModel converted = result.RequireEnergyModel();
         Assert.Equal(2, converted.Surfaces.Count);
         Assert.DoesNotContain(converted.Surfaces, item =>
-            item.Id.Value.StartsWith("CLONE:", StringComparison.Ordinal));
+            item.Id.Value.StartsWith("$CLONE_OF$:", StringComparison.Ordinal));
         DragonSurface convertedA = Assert.Single(converted.Surfaces, item => item.Id.Equals(surfaceA.Id));
         DragonSurface convertedB = Assert.Single(converted.Surfaces, item => item.Id.Equals(surfaceB.Id));
         Assert.Equal(convertedB.Id, convertedA.Boundary.AdjacentSurfaceId);
@@ -356,7 +356,7 @@ public sealed class GreenRetrofitConversionTests
         Assert.Equal(2, converted.Surfaces.Count);
         DragonSurface original = Assert.Single(converted.Surfaces, item => item.Id.Equals(sourceSurface.Id));
         DragonSurface counterpart = Assert.Single(converted.Surfaces, item =>
-            item.Id.Value == "CLONE:" + sourceSurface.Id.Value);
+            item.Id.Value == "$CLONE_OF$:" + sourceSurface.Id.Value);
         Assert.Equal(counterpart.Id, original.Boundary.AdjacentSurfaceId);
         Assert.Equal(original.Id, counterpart.Boundary.AdjacentSurfaceId);
         Assert.Equal(2, result.SurfaceConversions.Count);
