@@ -31,8 +31,10 @@ $profileGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\genera
 $iddGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_idd_schema_oracle.py'
 $constructionEqualityGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_construction_equality_hash_oracle.py'
 $scheduleTypeGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_schedule_type_oracle.py'
+$dayScheduleMetricsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_day_schedule_metrics_oracle.py'
 $constructionEqualityTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_construction_equality_hash_oracle.py'
 $scheduleTypeTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_schedule_type_oracle.py'
+$dayScheduleMetricsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_day_schedule_metrics_oracle.py'
 $publicSymbolInventoryPath = Join-Path $repositoryRoot 'upstream\public-symbol-inventory.json'
 $tempRoot = Join-Path $repositoryRoot 'temp'
 $referenceTempRoot = Join-Path $tempRoot 'reference'
@@ -111,8 +113,10 @@ foreach ($requiredFile in @(
     $iddGeneratorPath,
     $constructionEqualityGeneratorPath,
     $scheduleTypeGeneratorPath,
+    $dayScheduleMetricsGeneratorPath,
     $constructionEqualityTestPath,
     $scheduleTypeTestPath,
+    $dayScheduleMetricsTestPath,
     $publicSymbolInventoryPath
 )) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
@@ -594,7 +598,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile, IDD, construction equality/hash, ScheduleType, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile, IDD, construction equality/hash, ScheduleType, DaySchedule metrics, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -692,6 +696,24 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $scheduleTypeGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-schedule-type-reference.log') `
     -FailureMessage 'Generating the Python ScheduleType oracle failed'
+
+$dayScheduleMetricsOraclePath = Join-Path $outputRoot 'day-schedule-metrics-oracle.json'
+$dayScheduleMetricsGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $dayScheduleMetricsGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $dayScheduleMetricsOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $dayScheduleMetricsGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-day-schedule-metrics-reference.log') `
+    -FailureMessage 'Generating the Python DaySchedule metrics oracle failed'
 
 $generatorArguments = @(
     '-X', 'utf8',

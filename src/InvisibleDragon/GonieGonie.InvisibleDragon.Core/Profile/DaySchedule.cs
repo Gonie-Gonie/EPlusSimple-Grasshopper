@@ -105,13 +105,13 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
 
     public double Maximum => Values.Max();
 
-    public double IntegralHours => Values.Sum() / IntervalsPerHour;
+    public double IntegralHours => Python312FloatSum(Values) * Step.TotalHours;
 
-    public double Average => Values.Average();
+    public double Average => Python312FloatSum(Values) / FixedLength;
 
-    public double PositiveHours => Values.Count(value => value > 0) / (double)IntervalsPerHour;
+    public double PositiveHours => Values.Count(value => value > 0) * Step.TotalHours;
 
-    public double NonzeroHours => Values.Count(value => value != 0) / (double)IntervalsPerHour;
+    public double NonzeroHours => Values.Count(value => value != 0) * Step.TotalHours;
 
     public bool HasPositive => Values.Any(value => value > 0);
 
@@ -122,11 +122,39 @@ public sealed class DaySchedule : IReadOnlyList<double>, IEquatable<DaySchedule>
         get
         {
             double[] positiveValues = Values.Where(value => value > 0).ToArray();
-            return positiveValues.Length == 0 ? 0 : positiveValues.Average();
+            return positiveValues.Length == 0
+                ? 0
+                : Python312FloatSum(positiveValues) / positiveValues.Length;
         }
     }
 
     public bool IsConstant => Values.All(value => value.Equals(Values[0]));
+
+    // CPython 3.12.7 builtins.sum uses the improved Kahan-Babuska algorithm
+    // by Arnold Neumaier for exact float inputs. DaySchedule.average,
+    // integral, and positive_average all call that builtin upstream.
+    private static double Python312FloatSum(IEnumerable<double> values)
+    {
+        double result = 0;
+        double compensation = 0;
+        foreach (double value in values)
+        {
+            double total = result + value;
+            compensation += Math.Abs(result) >= Math.Abs(value)
+                ? (result - total) + value
+                : (value - total) + result;
+            result = total;
+        }
+
+        if (compensation != 0
+            && !double.IsNaN(compensation)
+            && !double.IsInfinity(compensation))
+        {
+            result += compensation;
+        }
+
+        return result;
+    }
 
     public static ValidationResult Validate(IEnumerable<double> values, ScheduleType type)
     {
