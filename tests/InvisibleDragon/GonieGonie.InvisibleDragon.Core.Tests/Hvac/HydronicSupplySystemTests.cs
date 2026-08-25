@@ -4,6 +4,7 @@ using GonieGonie.InvisibleDragon.Idd;
 using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Model;
 using GonieGonie.InvisibleDragon.Shape;
+using GonieGonie.InvisibleDragon.Tests.Idd;
 using GonieGonie.InvisibleDragon.Tests.Model;
 
 namespace GonieGonie.InvisibleDragon.Tests.Hvac;
@@ -249,6 +250,185 @@ public sealed class HydronicSupplySystemTests
         Assert.Equal(equipmentName, demand[3]);
         Assert.Equal(equipment[3], demand[4]);
         Assert.Equal(equipment[4], demand[5]);
+    }
+
+    [Fact]
+    public void LegacyHydronicRadiatorUsesPinnedZeroRadianceAndDemandBranchTopology()
+    {
+        Zone zone = EnergyModelFixtureMatrixTests.CreateZone(
+            "ZONE-RADIATOR-LEGACY",
+            "Legacy Radiator Zone");
+        var boiler = new Boiler(new EntityId("BOILER-RADIATOR-LEGACY"), "Legacy Radiator Boiler", Fuel.NaturalGas);
+        var radiator = new Radiator(
+            new EntityId("RADIATOR-LEGACY"),
+            "Legacy Radiator",
+            boiler,
+            4200);
+
+        IdfDocument document = ModelWith(zone, radiator).ToIdfDocument(
+            options: new EnergyModelIdfOptions
+            {
+                UseLegacySimpleDragonHvacTopology = true,
+            });
+
+        IdfObject design = Assert.Single(document["ZoneHVAC:Baseboard:RadiantConvective:Water:Design"]);
+        Assert.Equal("0", design[5]);
+        Assert.Equal(string.Empty, design[6]);
+        IdfObject terminal = Assert.Single(document["ZoneHVAC:Baseboard:RadiantConvective:Water"]);
+        Assert.Equal(9, terminal.Count);
+        Assert.Contains(
+            document["Branch"],
+            branch => branch.Name == $"{boiler.LoopName} Demand Main_{nameof(Radiator)}_for_{zone.Name}");
+    }
+
+    [Fact]
+    public void LegacyHydronicRadiatorWithRadianceEmitsPeopleAndSurfaceDistribution()
+    {
+        Zone zone = EnergyModelFixtureMatrixTests.CreateZone(
+            "ZONE-RADIATOR-LEGACY-RADIANT",
+            "Legacy Radiant Radiator Zone");
+        var boiler = new Boiler(
+            new EntityId("BOILER-RADIATOR-LEGACY-RADIANT"),
+            "Legacy Radiant Radiator Boiler",
+            Fuel.NaturalGas);
+        var radiator = new Radiator(
+            new EntityId("RADIATOR-LEGACY-RADIANT"),
+            "Legacy Radiant Radiator",
+            boiler,
+            4200,
+            radiantFraction: 0.35);
+        IdfDocument document = ModelWith(zone, radiator).ToIdfDocument(
+            options: new EnergyModelIdfOptions
+            {
+                UseLegacySimpleDragonHvacTopology = true,
+            });
+
+        IdfObject design = Assert.Single(document["ZoneHVAC:Baseboard:RadiantConvective:Water:Design"]);
+        Assert.Equal("0.35", design[5]);
+        Assert.Equal("0", design[6]);
+        IdfObject terminal = Assert.Single(document["ZoneHVAC:Baseboard:RadiantConvective:Water"]);
+        Assert.Equal(11, terminal.Count);
+        Assert.Equal(zone.Surfaces[0].Name, terminal[9]);
+        Assert.Equal("1", terminal[10]);
+    }
+
+    [IddSchemaOracleTests.EnergyPlusIddIntegrationFact]
+    [Trait("Category", "Integration")]
+    public void LegacyRadiantHydronicRadiatorPassesInstalledEnergyPlus242IddValidation()
+    {
+        Zone zone = EnergyModelFixtureMatrixTests.CreateZone(
+            "ZONE-RADIATOR-LEGACY-RADIANT-IDD",
+            "Legacy Radiant Radiator IDD Zone");
+        var boiler = new Boiler(
+            new EntityId("BOILER-RADIATOR-LEGACY-RADIANT-IDD"),
+            "Legacy Radiant Radiator IDD Boiler",
+            Fuel.NaturalGas);
+        var radiator = new Radiator(
+            new EntityId("RADIATOR-LEGACY-RADIANT-IDD"),
+            "Legacy Radiant Radiator IDD",
+            boiler,
+            4200,
+            radiantFraction: 0.35);
+        string iddPath = FindInstalledIdd()
+            ?? throw new InvalidOperationException(
+                "GONIEGONIE_RUN_ENERGYPLUS_INTEGRATION=1, but EnergyPlus 24.2 Energy+.idd was not found.");
+        IddSchema schema = IddParser.ParseFile(iddPath);
+        IdfDocument document = ModelWith(zone, radiator).ToIdfDocument(
+            schema,
+            new EnergyModelIdfOptions
+            {
+                UseLegacySimpleDragonHvacTopology = true,
+            });
+
+        AssertIddValid(document);
+    }
+
+    [Fact]
+    public void LegacyHydronicRadiatorsSharingSourceAndZoneUseUniqueDemandBranches()
+    {
+        Zone zone = EnergyModelFixtureMatrixTests.CreateZone(
+            "ZONE-RADIATOR-LEGACY-SHARED",
+            "Legacy Shared Radiator Zone");
+        var boiler = new Boiler(
+            new EntityId("BOILER-RADIATOR-LEGACY-SHARED"),
+            "Legacy Shared Radiator Boiler",
+            Fuel.NaturalGas);
+        var first = new Radiator(
+            new EntityId("RADIATOR-LEGACY-SHARED-A"),
+            "First Legacy Radiator",
+            boiler,
+            4200);
+        var second = new Radiator(
+            new EntityId("RADIATOR-LEGACY-SHARED-B"),
+            "Second Legacy Radiator",
+            boiler,
+            4300);
+        var model = new EnergyModel(
+            "Legacy shared radiator branches",
+            new[] { zone },
+            new[]
+            {
+                new ZoneHvacAssignment(
+                    zone.Id,
+                    new SupplyGroup(new SupplySystem[] { first, second })),
+            });
+
+        IdfDocument document = model.ToIdfDocument(
+            options: new EnergyModelIdfOptions
+            {
+                UseLegacySimpleDragonHvacTopology = true,
+            });
+
+        string pinnedBranchName =
+            $"{boiler.LoopName} Demand Main_{nameof(Radiator)}_for_{zone.Name}";
+        const string secondEquipmentName =
+            "Radiator_named_Second Legacy Radiator_for_Legacy Shared Radiator Zone";
+        string disambiguatedBranchName = $"{pinnedBranchName}_for_{secondEquipmentName}";
+        string[] radiatorBranchNames = document["Branch"]
+            .Where(branch => branch.Count > 3
+                && branch[2] == "ZoneHVAC:Baseboard:RadiantConvective:Water")
+            .Select(branch => branch.Name!)
+            .ToArray();
+
+        Assert.Equal(new[] { pinnedBranchName, disambiguatedBranchName }, radiatorBranchNames);
+        Assert.Equal(2, radiatorBranchNames.Distinct(StringComparer.OrdinalIgnoreCase).Count());
+        Assert.Equal(secondEquipmentName, document["Branch"][disambiguatedBranchName][3]);
+        foreach (IdfObject demandTopology in new[]
+        {
+            document["BranchList"][$"{boiler.LoopName} Demand BranchList"],
+            document["Connector:Splitter"][$"{boiler.LoopName} Demand Splitter"],
+            document["Connector:Mixer"][$"{boiler.LoopName} Demand Mixer"],
+        })
+        {
+            string[] references = Enumerable.Range(0, demandTopology.Count)
+                .Select(index => demandTopology[index])
+                .ToArray();
+            Assert.Contains(pinnedBranchName, references);
+            Assert.Contains(disambiguatedBranchName, references);
+        }
+    }
+
+    [Fact]
+    public void LegacyHeatingFanCoilKeepsPinnedAutosizedDisabledCoolingCoil()
+    {
+        Zone zone = EnergyModelFixtureMatrixTests.CreateZone(
+            "ZONE-FCU-LEGACY-HEAT",
+            "Legacy Heating Fan Coil Zone");
+        var boiler = new Boiler(new EntityId("BOILER-FCU-LEGACY"), "Legacy FCU Boiler", Fuel.NaturalGas);
+        var fanCoil = new FanCoilUnit(
+            new EntityId("FCU-LEGACY-HEAT"),
+            "Legacy Heating terminal",
+            boiler);
+
+        IdfDocument document = ModelWith(zone, fanCoil).ToIdfDocument(
+            options: new EnergyModelIdfOptions
+            {
+                UseLegacySimpleDragonHvacTopology = true,
+            });
+
+        IdfObject coolingCoil = Assert.Single(document["Coil:Cooling:Water"]);
+        Assert.Equal("ALLOFF", coolingCoil[1]);
+        Assert.Equal("autosize", coolingCoil[2]);
     }
 
     [Fact]

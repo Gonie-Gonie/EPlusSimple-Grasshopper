@@ -1,0 +1,238 @@
+{
+  "building": {
+    "name": "GonieGonie Boiler Heating Fuel Shared Matrix",
+    "north_axis": 0,
+    "address": "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc \uad00\uc545\uad6c",
+    "vintage": [
+      2020,
+      1,
+      1
+    ],
+    "is_multifamily_housing": false,
+    "floors": [
+      {
+        "floor_number": 1,
+        "zones": [
+          {
+            "id": "ZONE-0x500000",
+            "name": "Boiler Matrix Office",
+            "height": 3.0,
+            "profile": "\uc18c\uaddc\ubaa8\uc0ac\ubb34\uc2e4",
+            "light_density": 8.5,
+            "supply_system_ids": [
+              "SUPL-0x500000",
+              "SUPL-0x500001",
+              "SUPL-0x500002",
+              "SUPL-0x500003",
+              "SUPL-0x500004",
+              "SUPL-0x500005",
+              "SUPL-0x500006",
+              "SUPL-0x500007"
+            ],
+            "ventilation_systems": [],
+            "surfaces": [
+              {
+                "id": "SURF-0x500000",
+                "name": "Boiler Matrix Floor",
+                "type": "floor",
+                "boundary_condition": "ground",
+                "area": 64.0,
+                "construction_id": "CTSF-0x500000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x500001",
+                "name": "Boiler Matrix North Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 24.0,
+                "azimuth": 0.0,
+                "construction_id": "CTSF-0x500000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x500002",
+                "name": "Boiler Matrix East Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 24.0,
+                "azimuth": 90.0,
+                "construction_id": "CTSF-0x500000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x500003",
+                "name": "Boiler Matrix South Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 24.0,
+                "azimuth": 180.0,
+                "construction_id": "CTSF-0x500000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x500004",
+                "name": "Boiler Matrix West Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 24.0,
+                "azimuth": 270.0,
+                "construction_id": "CTSF-0x500000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x500005",
+                "name": "Boiler Matrix Roof",
+                "type": "ceiling",
+                "boundary_condition": "outdoors",
+                "area": 64.0,
+                "construction_id": "CTSF-0x500000",
+                "fenestrations": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "supply_systems": {
+      "radiator": [
+        {
+          "id": "SUPL-0x500000",
+          "name": "Shared Natural Gas Radiator",
+          "source_system_id": "SRCE-0x500000",
+          "capacity_heating": 9000.0
+        },
+        {
+          "id": "SUPL-0x500003",
+          "name": "Autosized LPG Radiator",
+          "source_system_id": "SRCE-0x500002",
+          "capacity_heating": null
+        },
+        {
+          "id": "SUPL-0x500004",
+          "name": "Electricity Boiler Radiator",
+          "source_system_id": "SRCE-0x500003",
+          "capacity_heating": 7000.0
+        },
+        {
+          "id": "SUPL-0x500005",
+          "name": "District Fuel Boiler Radiator",
+          "source_system_id": "SRCE-0x500004"
+        }
+      ],
+      "radiant_floor": [
+        {
+          "id": "SUPL-0x500001",
+          "name": "Shared Natural Gas Radiant Floor",
+          "source_system_id": "SRCE-0x500000"
+        }
+      ],
+      "fan_coil_unit": [
+        {
+          "id": "SUPL-0x500002",
+          "name": "Default Oil Fan Coil",
+          "source_system_id": "SRCE-0x500001"
+        }
+      ],
+      "electric_radiator": [
+        {
+          "id": "SUPL-0x500006",
+          "name": "Explicit Electric Radiator",
+          "capacity_heating": 5500.0
+        },
+        {
+          "id": "SUPL-0x500007",
+          "name": "Autosized Electric Radiator"
+        }
+      ]
+    },
+    "source_systems": {
+      "boiler": [
+        {
+          "id": "SRCE-0x500000",
+          "name": "Explicit Natural Gas DHW Boiler",
+          "fuel_type": "natural_gas",
+          "hotwater_supply": true,
+          "efficiency": 0.92,
+          "capacity_heating": 22000.0
+        },
+        {
+          "id": "SRCE-0x500001",
+          "name": "Default Oil Boiler",
+          "fuel_type": "oil",
+          "hotwater_supply": false
+        },
+        {
+          "id": "SRCE-0x500002",
+          "name": "Nullable LPG DHW Boiler",
+          "fuel_type": "lpg",
+          "hotwater_supply": true,
+          "efficiency": null,
+          "capacity_heating": null
+        },
+        {
+          "id": "SRCE-0x500003",
+          "name": "Electric Boiler",
+          "fuel_type": "electricity",
+          "hotwater_supply": false,
+          "efficiency": 0.99,
+          "capacity_heating": 11000.0
+        },
+        {
+          "id": "SRCE-0x500004",
+          "name": "District Fuel DHW Boiler",
+          "fuel_type": "district_heating",
+          "hotwater_supply": true,
+          "efficiency": 1.0,
+          "capacity_heating": 16000.0
+        }
+      ]
+    },
+    "ventilation_systems": [],
+    "photovoltaic_systems": []
+  },
+  "materials": [
+    {
+      "id": "MTRL-0x500000",
+      "name": "Boiler Matrix Concrete",
+      "conductivity": 1.4,
+      "density": 2300.0,
+      "specific_heat": 880.0
+    },
+    {
+      "id": "MTRL-0x500001",
+      "name": "Boiler Matrix Insulation",
+      "conductivity": 0.04,
+      "density": 30.0,
+      "specific_heat": 1400.0
+    },
+    {
+      "id": "MTRL-0x500002",
+      "name": "Boiler Matrix Gypsum",
+      "conductivity": 0.16,
+      "density": 800.0,
+      "specific_heat": 1090.0
+    }
+  ],
+  "surface_constructions": [
+    {
+      "id": "CTSF-0x500000",
+      "name": "Boiler Matrix Opaque Construction",
+      "layers": [
+        {
+          "material_id": "MTRL-0x500000",
+          "thickness": 0.12
+        },
+        {
+          "material_id": "MTRL-0x500001",
+          "thickness": 0.08
+        },
+        {
+          "material_id": "MTRL-0x500002",
+          "thickness": 0.013
+        }
+      ]
+    }
+  ],
+  "fenestration_constructions": []
+}

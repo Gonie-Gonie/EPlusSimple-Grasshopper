@@ -23,6 +23,7 @@ $pythonEnginePath = Join-Path $repositoryRoot 'tools\compatibility-runner\python
 $reporterPath = Join-Path $repositoryRoot 'tools\compatibility-runner\compare_outputs.py'
 $csharpProject = Join-Path $repositoryRoot 'tools\compatibility-runner\GonieGonie.CompatibilityRunner.csproj'
 $runtimeManifestPath = Join-Path $repositoryRoot 'runtime\manifest.template.json'
+$compatibilityExceptionsPath = Join-Path $repositoryRoot 'upstream\compatibility-exceptions.yml'
 $dependencyRoot = Join-Path $repositoryRoot '.tools\python-reference\3.12.7\site-packages'
 $upstreamRoot = Join-Path $repositoryRoot 'temp\reference\upstream\eplussimple'
 $logsRoot = Join-Path $repositoryRoot 'temp\compatibility\logs'
@@ -45,7 +46,8 @@ foreach ($requiredFile in @(
     $pythonEnginePath,
     $reporterPath,
     $csharpProject,
-    $runtimeManifestPath)) {
+    $runtimeManifestPath,
+    $compatibilityExceptionsPath)) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
         throw "Required compatibility input is missing: '$requiredFile'."
     }
@@ -169,6 +171,7 @@ $reportArguments = @(
     '--csharp-output', $csharpOutput,
     '--idd', $iddPath,
     '--runtime-manifest', $runtimeManifestPath,
+    '--compatibility-exceptions', $compatibilityExceptionsPath,
     '--report', $artifactReport)
 if (-not [string]::IsNullOrWhiteSpace($Case)) {
     $reportArguments += @('--case', $Case)

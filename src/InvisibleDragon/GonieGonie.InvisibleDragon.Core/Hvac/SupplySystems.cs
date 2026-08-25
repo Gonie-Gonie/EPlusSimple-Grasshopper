@@ -276,7 +276,9 @@ public sealed class ElectricRadiantFloor : SupplySystem
         DomainGuard.NotNull(context, nameof(context));
         RadiantFloor.RequireRadiantZone(zone);
         string name = ObjectNameFor(zone);
-        string group = $"ElectricRadiantFloorSurfaceGroup_for_{zone.Name}";
+        string group = context.Options.UseLegacySimpleDragonHvacTopology
+            ? $"RadiantFloorSurfaceGroup_for_{zone.Name}"
+            : $"ElectricRadiantFloorSurfaceGroup_for_{zone.Name}";
         List<IdfObject> objects = RadiantFloor.InternalHeatSourceObjects(context, zone).ToList();
         objects.Add(RadiantFloor.SurfaceGroup(context, zone, group));
         objects.Add(context.Create(
@@ -287,7 +289,13 @@ public sealed class ElectricRadiantFloor : SupplySystem
             IdfGenerationContext.Field(3, "Surface Name or Radiant Surface Group Name", group),
             IdfGenerationContext.Field(4, "Heating Design Capacity Method", "HeatingDesignCapacity"),
             IdfGenerationContext.Field(5, "Heating Design Capacity", "autosize"),
-            IdfGenerationContext.Field(9, "Temperature Control Type", "MeanAirTemperature"),
+            IdfGenerationContext.Field(8, "Temperature Control Type", "MeanAirTemperature"),
+            IdfGenerationContext.Field(
+                9,
+                "Setpoint Control Type",
+                context.Options.UseLegacySimpleDragonHvacTopology
+                    ? "ZeroFlowPower"
+                    : "HalfFlowPower"),
             IdfGenerationContext.Field(10, "Heating Throttling Range", ThrottlingRangeCelsius),
             IdfGenerationContext.Field(11, "Heating Setpoint Temperature Schedule Name", zone.Profile.HeatingSetpoint!.Name)));
         return new SupplyIdfFragment(

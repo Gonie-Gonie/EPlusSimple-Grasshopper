@@ -27,6 +27,14 @@
         "energyplus",
         "grr",
         "warnings"
+      ],
+      "diagnostic_exceptions": [
+        {
+          "exception_id": "legacy-ashrae140-internal-source-material-severe",
+          "severity": "severe",
+          "title": "InitConductionTransferFunctions: Found Material that is too thin and/or too highly conductive, material name = MTRL-0x000004_1003.0000000000001mm",
+          "count": 1
+        }
       ]
     },
     {
@@ -78,6 +86,66 @@
       "id": "geothermal-heat-pump-ahu",
       "input_grm": "fixtures/compatibility/models/geothermal-heat-pump-ahu.grm",
       "input_grm_sha256": "8f65aea3c738dadf53791e300bbfbad19eac6a6c81bbff57d498d545ee10df01",
+      "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
+      "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
+      "stages": [
+        "grm_cross_read",
+        "authoring_idf",
+        "expanded_idf",
+        "energyplus",
+        "grr",
+        "warnings"
+      ]
+    },
+    {
+      "id": "boiler-heating-fuel-shared-matrix",
+      "input_grm": "fixtures/compatibility/models/boiler-heating-fuel-shared-matrix.grm",
+      "input_grm_sha256": "87998dbf8b3d1dc8e6353ffb445c24f27f388fab220c6127c7b99efc41ae4644",
+      "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
+      "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
+      "stages": [
+        "grm_cross_read",
+        "authoring_idf",
+        "expanded_idf",
+        "energyplus",
+        "grr",
+        "warnings"
+      ]
+    },
+    {
+      "id": "absorption-default-explicit-electric-radiant",
+      "input_grm": "fixtures/compatibility/models/absorption-default-explicit-electric-radiant.grm",
+      "input_grm_sha256": "4776e041c8d4b67d6f69928dfb6ef6e78fe75534d42d86c0d3441a88d7a09d4b",
+      "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
+      "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
+      "stages": [
+        "grm_cross_read",
+        "authoring_idf",
+        "expanded_idf",
+        "energyplus",
+        "grr",
+        "warnings"
+      ],
+      "stage_scope": {
+        "classification": "legacy-zero-cooling-runtime-parity",
+        "excluded_stages": [],
+        "exception_id": "legacy-absorption-hot-water-generator-runaway",
+        "verified": [
+          "grm_cross_read",
+          "authoring_and_expanded_idf_parity",
+          "zero_cooling_energyplus_runtime_parity",
+          "electric_radiant_heating_result_parity"
+        ],
+        "not_verified": [
+          "active_absorption_cooling_and_generator_energy_parity"
+        ],
+        "diagnostic": "The ground-coupled, adiabatic-envelope fixture completes all six stages with matching zero cooling and non-zero electric-radiant heating. Any tested non-zero legacy absorption cooling load activates the pinned Python hot-water generator topology and ends in runaway plant temperatures, so active absorption energy parity remains outside this case's evidence."
+      }
+    },
+    {
+      "id": "district-shared-fcu-radiator-radiant-dhw",
+      "input_grm": "fixtures/compatibility/models/district-shared-fcu-radiator-radiant-dhw.grm",
+      "input_grm_sha256": "1cd6fb729ea0e0ea6c6cf70fa7cc2de927d091a8e1bbebc8ed56821c931d6db0",
       "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
       "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
       "stages": [

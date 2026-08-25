@@ -140,6 +140,77 @@ public sealed class EnergyModelFixtureMatrixTests
     }
 
     [Fact]
+    public void LegacyElectricRadiantFloorUsesPinnedGroupAndZeroFlowControl()
+    {
+        Zone zone = CreateZone("ZONE-ELECTRIC-RADIANT-LEGACY", "Legacy Electric Radiant");
+        var electric = new ElectricRadiantFloor(
+            new EntityId("HVAC-ELECTRIC-RADIANT-LEGACY"),
+            "Legacy Electric Radiant");
+        var model = new EnergyModel(
+            "Legacy electric radiant",
+            new[] { zone },
+            new[]
+            {
+                new ZoneHvacAssignment(
+                    zone.Id,
+                    new SupplyGroup(new SupplySystem[] { electric })),
+            });
+        var legacyOptions = new EnergyModelIdfOptions
+        {
+            UseLegacySimpleDragonHvacTopology = true,
+        };
+
+        IdfDocument native = model.ToIdfDocument();
+        IdfDocument legacy = model.ToIdfDocument(options: legacyOptions);
+
+        IdfObject nativeTerminal = Assert.Single(native["ZoneHVAC:LowTemperatureRadiant:Electric"]);
+        IdfObject legacyTerminal = Assert.Single(legacy["ZoneHVAC:LowTemperatureRadiant:Electric"]);
+        Assert.Equal(
+            $"ElectricRadiantFloorSurfaceGroup_for_{zone.Name}",
+            nativeTerminal[3]);
+        Assert.Equal("HalfFlowPower", nativeTerminal[9]);
+        Assert.Equal($"RadiantFloorSurfaceGroup_for_{zone.Name}", legacyTerminal[3]);
+        Assert.Equal("ZeroFlowPower", legacyTerminal[9]);
+        Assert.Single(
+            legacy["ZoneHVAC:LowTemperatureRadiant:SurfaceGroup"],
+            item => item.Name == $"RadiantFloorSurfaceGroup_for_{zone.Name}");
+    }
+
+    [Fact]
+    public void LegacySimpleDragonRetainsPinnedZeroDensityLightsObject()
+    {
+        Zone template = CreateZone("ZONE-ZERO-LIGHTS", "Zero Lights");
+        var profile = new ZoneProfile(
+            template.Profile.Id,
+            template.Profile.Name,
+            template.Profile.HeatingSetpoint,
+            template.Profile.CoolingSetpoint,
+            template.Profile.HvacAvailability,
+            lighting: Schedule.Constant(
+                "Zero Lights Schedule",
+                1,
+                ScheduleType.Fraction));
+        var zone = new Zone(
+            template.Id,
+            template.Name,
+            template.Surfaces,
+            profile,
+            lightingPowerDensityWattsPerSquareMetre: 0);
+        var model = new EnergyModel("Zero lights", new[] { zone });
+
+        IdfDocument native = model.ToIdfDocument();
+        IdfDocument legacy = model.ToIdfDocument(
+            options: new EnergyModelIdfOptions
+            {
+                UseLegacySimpleDragonScheduleMetadata = true,
+            });
+
+        Assert.Empty(native["Lights"]);
+        IdfObject lights = Assert.Single(legacy["Lights"]);
+        Assert.Equal("0", lights[5]);
+    }
+
+    [Fact]
     public void LegacySimpleDragonThermostatAlwaysUsesDualSetpointWithoutChangingNativeDefault()
     {
         Zone zone = CreateZone("ZONE-THERMOSTAT", "Thermostat Zone");

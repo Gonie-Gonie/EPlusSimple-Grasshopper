@@ -482,6 +482,36 @@ public sealed class ColdSourceSystemTests
     }
 
     [Fact]
+    public void LegacyAbsorptionChillerUsesPinnedUnsuffixedGeneratorBranch()
+    {
+        var boiler = new Boiler(
+            new EntityId("ABS-LEGACY-BOILER"),
+            "Legacy absorption generator",
+            Fuel.NaturalGas);
+        var chiller = new AbsorptionChiller(
+            new EntityId("ABS-LEGACY-CHILLER"),
+            "Legacy absorption",
+            0.9,
+            boiler,
+            new OpenSingleSpeedCoolingTower(
+                new EntityId("ABS-LEGACY-TOWER"),
+                "Legacy absorption tower"));
+
+        IReadOnlyList<IdfObject> objects = chiller.ToIdfObjects(LegacyContext());
+
+        IdfObject generator = Assert.Single(
+            objects,
+            item => item.ObjectType == "Branch"
+                && item.Name == $"{boiler.LoopName} Demand MainGenerator");
+        Assert.Equal(chiller.IdfObjectType, generator[2]);
+        Assert.Equal(chiller.IdfObjectName, generator[3]);
+        Assert.DoesNotContain(
+            objects,
+            item => item.ObjectType == "Branch"
+                && item.Name == $"{boiler.LoopName} Demand MainGenerator_for_{chiller.IdfObjectName}");
+    }
+
+    [Fact]
     public void ColdSourcesRejectInvalidOptionsAndIdentifierCollisions()
     {
         var shared = new EntityId("SHARED-COLD-ID");

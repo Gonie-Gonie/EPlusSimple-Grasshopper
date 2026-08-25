@@ -457,6 +457,42 @@ class EngineeringResultComparisonTests(unittest.TestCase):
 
 
 class WarningAndIdentityTests(unittest.TestCase):
+    def test_case_exception_references_must_be_registered(self) -> None:
+        cases = [
+            {
+                "id": "limited",
+                "stage_scope": {
+                    "not_verified": ["active_load"],
+                    "exception_id": "approved-limitation",
+                    "diagnostic": "The active-load branch is not claimed.",
+                },
+                "diagnostic_exceptions": [
+                    {"exception_id": "approved-diagnostic"}
+                ],
+            }
+        ]
+
+        self.assertEqual(
+            ["approved-diagnostic", "approved-limitation"],
+            runner.validate_case_exception_references(
+                cases,
+                {"approved-diagnostic", "approved-limitation"},
+            ),
+        )
+        with self.assertRaisesRegex(ValueError, "unregistered exceptions"):
+            runner.validate_case_exception_references(
+                cases,
+                {"approved-limitation"},
+            )
+
+    def test_not_verified_scope_requires_exception_and_diagnostic(self) -> None:
+        case = {
+            "id": "missing-policy",
+            "stage_scope": {"not_verified": ["active_load"]},
+        }
+        with self.assertRaisesRegex(ValueError, "requires exception_id"):
+            runner.validate_case_exception_references([case], set())
+
     def test_warning_comparison_is_an_order_independent_normalized_multiset(self) -> None:
         expected_value = {
             "summary": {"warning": 2, "severe": 0, "fatal": 0},
@@ -479,6 +515,59 @@ class WarningAndIdentityTests(unittest.TestCase):
             result = runner.compare_warnings(expected, actual, allowed_delta=0)
 
         self.assertTrue(result["passed"], result["mismatches"])
+
+    def test_warning_comparison_rejects_matching_severe_and_fatal_counts(self) -> None:
+        warning_items = [
+            {"severity": "severe", "title": "Matching severe"},
+            {"severity": "fatal", "title": "Matching fatal"},
+        ]
+        value = {
+            "summary": {"warning": 0, "severe": 1, "fatal": 1},
+            "items": warning_items,
+        }
+        with TemporaryWorkspace() as workspace:
+            expected = workspace.write_json("expected.json", value)
+            actual = workspace.write_json("actual.json", value)
+
+            result = runner.compare_warnings(expected, actual, allowed_delta=0)
+
+        self.assertFalse(result["passed"])
+        self.assertEqual(4, result["mismatch_count"])
+        self.assertTrue(all(
+            item["reason"] == "disallowed_nonzero_severity"
+            for item in result["mismatches"]
+        ))
+
+    def test_warning_comparison_allows_only_an_exact_registered_diagnostic(self) -> None:
+        title = "Pinned material severe"
+        value = {
+            "summary": {"warning": 0, "severe": 1, "fatal": 0},
+            "items": [{"severity": "Severe", "title": title}],
+        }
+        policy = [{
+            "exception_id": "pinned-material-severe",
+            "severity": "severe",
+            "title": title,
+            "count": 1,
+        }]
+        with TemporaryWorkspace() as workspace:
+            expected = workspace.write_json("expected.json", value)
+            actual = workspace.write_json("actual.json", value)
+
+            passing = runner.compare_warnings(expected, actual, 0, policy)
+            stale = runner.compare_warnings(
+                expected,
+                actual,
+                0,
+                [{**policy[0], "count": 2}],
+            )
+
+        self.assertTrue(passing["passed"], passing["mismatches"])
+        self.assertFalse(stale["passed"])
+        self.assertIn(
+            "registered_diagnostic_count",
+            {item["reason"] for item in stale["mismatches"]},
+        )
 
     def test_warning_comparison_normalizes_lowercase_auto_address_tokens(self) -> None:
         expected_value = {
@@ -658,6 +747,11 @@ class CaseStageTests(unittest.TestCase):
         case = {
             "id": "authoring-only",
             "stages": ["authoring_idf", "expanded_idf"],
+            "stage_scope": {
+                "classification": "structural-only",
+                "excluded_stages": ["energyplus", "grr", "warnings"],
+                "diagnostic": "Pinned upstream numerical limitation.",
+            },
         }
         with TemporaryWorkspace() as workspace:
             python_root = workspace.path / "python"
@@ -689,6 +783,80 @@ class CaseStageTests(unittest.TestCase):
         )
         self.assertNotIn("grr", result["checks"])
         self.assertNotIn("warnings", result["checks"])
+        self.assertEqual(case["stage_scope"], result["stage_scope"])
+
+    def test_full_stage_zero_cooling_limitation_is_preserved(self) -> None:
+        stages = [
+            "grm_cross_read",
+            "authoring_idf",
+            "expanded_idf",
+            "energyplus",
+            "grr",
+            "warnings",
+        ]
+        stage_scope = {
+            "classification": "legacy-zero-cooling-runtime-parity",
+            "excluded_stages": [],
+            "exception_id": "legacy-absorption-hot-water-generator-runaway",
+            "verified": ["zero_cooling_energyplus_runtime_parity"],
+            "not_verified": ["active_absorption_cooling_and_generator_energy_parity"],
+            "diagnostic": "Active legacy absorption cooling reaches runaway plant temperatures.",
+        }
+        case = {
+            "id": "zero-cooling-absorption",
+            "stages": stages,
+            "stage_scope": stage_scope,
+        }
+        warning_document = {
+            "schema": "goniegonie.dragons.energyplus-warnings.v1",
+            "summary": {"warning": 0, "severe": 0, "fatal": 0},
+            "items": [],
+        }
+        with TemporaryWorkspace() as workspace:
+            python_root = workspace.path / "python"
+            csharp_root = workspace.path / "csharp"
+            for root in (python_root, csharp_root):
+                case_root = root / "zero-cooling-absorption"
+                case_root.mkdir(parents=True)
+                workspace.write_json(
+                    str((case_root / "metadata.json").relative_to(workspace.path)).replace("\\", "/"),
+                    metadata(),
+                )
+                workspace.write_json(
+                    str((case_root / "result.grr").relative_to(workspace.path)).replace("\\", "/"),
+                    {"site_uses": {"cooling": 0.0, "heating": 1.0}},
+                )
+                workspace.write_json(
+                    str((case_root / "warnings.json").relative_to(workspace.path)).replace("\\", "/"),
+                    warning_document,
+                )
+                for name in ("authoring.idf", "expanded.idf"):
+                    workspace.write_text(
+                        str((case_root / name).relative_to(workspace.path)).replace("\\", "/"),
+                        "Version, 24.2;\n",
+                    )
+            workspace.write_text(
+                "python/zero-cooling-absorption/csharp-roundtrip-authoring.idf",
+                "Version, 24.2;\n",
+            )
+
+            result = runner.compare_case(case, manifest(), python_root, csharp_root)
+
+        self.assertTrue(result["passed"], result["checks"])
+        self.assertEqual(stages, result["executed_stages"])
+        self.assertEqual([], result["skipped_stages"])
+        self.assertEqual(stage_scope, result["stage_scope"])
+        self.assertEqual(
+            {
+                "limitation_count": 1,
+                "limitation_exception_ids": [
+                    "legacy-absorption-hot-water-generator-runaway"
+                ],
+                "diagnostic_exception_count": 0,
+                "diagnostic_exception_ids": [],
+            },
+            runner.summarize_limitations([result]),
+        )
 
     def test_explicit_energyplus_skip_is_structured_and_never_passes(self) -> None:
         case = {

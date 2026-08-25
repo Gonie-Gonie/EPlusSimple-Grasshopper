@@ -315,6 +315,25 @@ public sealed class DistrictHeating : SourceSystem
         IReadOnlyList<string>? terminalUnitNames = null)
     {
         DomainGuard.NotNull(context, nameof(context));
+        if (context.Options.UseLegacySimpleDragonHvacTopology)
+        {
+            // Pinned EPlusSimple 0.7 maps district heat to a local Boiler:HotWater
+            // using OtherFuel1, unit efficiency, and autosized capacity. Keep the
+            // native DistrictHeating:Water representation outside compatibility mode.
+            var legacyBoiler = new Boiler(
+                Id,
+                Name,
+                Fuel.OtherFuel1,
+                nominalThermalEfficiency: 1,
+                nominalCapacityWatts: null,
+                pumpMotorEfficiency: PumpMotorEfficiency,
+                setpointTemperatureCelsius: SetpointTemperatureCelsius);
+            return legacyBoiler.ToIdfObjects(
+                context,
+                demandConnections,
+                terminalUnitNames);
+        }
+
         IdfObject component = context.Create(
             IdfObjectType,
             IdfGenerationContext.Field(0, "Name", IdfObjectName),

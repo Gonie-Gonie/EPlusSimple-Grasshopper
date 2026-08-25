@@ -113,7 +113,12 @@ public sealed class FanCoilUnit : SupplySystem
                 "Coil:Cooling:Water",
                 IdfGenerationContext.Field(0, "Name", coolingCoilName),
                 IdfGenerationContext.Field(1, "Availability Schedule Name", CanCool ? availabilityScheduleName : "ALLOFF"),
-                IdfGenerationContext.Field(2, "Design Water Flow Rate", CanCool ? "autosize" : (object)0),
+                IdfGenerationContext.Field(
+                    2,
+                    "Design Water Flow Rate",
+                    context.Options.UseLegacySimpleDragonHvacTopology
+                        ? "autosize"
+                        : CanCool ? "autosize" : (object)0),
                 IdfGenerationContext.Field(3, "Design Air Flow Rate", "autosize"),
                 IdfGenerationContext.Field(4, "Design Inlet Water Temperature", "autosize"),
                 IdfGenerationContext.Field(5, "Design Inlet Air Temperature", "autosize"),
@@ -448,6 +453,8 @@ public sealed class Radiator : SupplySystem
         string designName = $"DesignOf_{name}";
         string inlet = $"{name} Water InletNode";
         string outlet = $"{name} Water OutletNode";
+        bool omitLegacyZeroRadiantDistribution =
+            context.Options.UseLegacySimpleDragonHvacTopology && RadiantFraction == 0d;
         IdfObject design = context.Create(
             "ZoneHVAC:Baseboard:RadiantConvective:Water:Design",
             IdfGenerationContext.Field(0, "Name", designName),
@@ -456,7 +463,10 @@ public sealed class Radiator : SupplySystem
             IdfGenerationContext.Field(3, "Fraction of Autosized Heating Design Capacity", 1),
             IdfGenerationContext.Field(4, "Convergence Tolerance", 0.001),
             IdfGenerationContext.Field(5, "Fraction Radiant", RadiantFraction),
-            IdfGenerationContext.Field(6, "Fraction of Radiant Energy Incident on People", 0));
+            IdfGenerationContext.Field(
+                6,
+                "Fraction of Radiant Energy Incident on People",
+                omitLegacyZeroRadiantDistribution ? null : (object)0));
         IdfObject radiator = context.Create(
             ObjectType,
             IdfGenerationContext.Field(0, "Name", name),
@@ -468,18 +478,25 @@ public sealed class Radiator : SupplySystem
             IdfGenerationContext.Field(6, "Rated Water Mass Flow Rate", 0.063),
             IdfGenerationContext.Field(7, "Heating Design Capacity", HeatingCapacityWatts ?? (object)"autosize"),
             IdfGenerationContext.Field(8, "Maximum Water Flow Rate", "autosize"));
-        double totalSurfaceArea = zone.Surfaces.Sum(surface => surface.GrossArea);
-        foreach (Surface surface in zone.Surfaces)
+        if (!omitLegacyZeroRadiantDistribution)
         {
-            radiator.Add(surface.Name);
-            radiator.Add(IdfGenerationContext.Format(surface.GrossArea / totalSurfaceArea));
+            double totalSurfaceArea = zone.Surfaces.Sum(surface => surface.GrossArea);
+            foreach (Surface surface in zone.Surfaces)
+            {
+                radiator.Add(surface.Name);
+                radiator.Add(IdfGenerationContext.Format(surface.GrossArea / totalSurfaceArea));
+            }
         }
+
+        string demandBranchName = context.Options.UseLegacySimpleDragonHvacTopology
+            ? $"{Source!.LoopName} Demand Main_{nameof(Radiator)}_for_{zone.Name}"
+            : $"{Source!.LoopName} Demand {name}";
 
         return new SupplyIdfFragment(
             new[] { design, radiator },
             new ZoneEquipmentDescriptor(ObjectType, name, 0, 1),
             new PlantDemandConnection(
-                $"{Source!.LoopName} Demand {name}",
+                demandBranchName,
                 ObjectType,
                 name,
                 inlet,

@@ -49,3 +49,27 @@
     energyplus: same not-validated warning as pinned Python 0.7.0
     grasshopper_validation: warning instead of a blocking error
   approval: accepted-upstream-parity
+
+- id: legacy-absorption-hot-water-generator-runaway
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: AbsorptionChiller.to_idf_object
+  difference:
+    upstream: connects the Chiller:Absorption hot-water generator nodes to a Boiler:HotWater demand branch that reaches runaway plant temperatures whenever a non-zero cooling load dispatches the chiller under EnergyPlus 24.2
+    dotnet: preserves that legacy authoring topology for exact SimpleDragon parity, verifies all six compatibility stages at zero cooling load, and does not claim active absorption cooling or generator-energy parity
+  effect:
+    engineering_result: active absorption cooling is not validated and the legacy topology can terminate EnergyPlus 24.2 under non-zero cooling load
+    compatibility_evidence: GRM and IDF parity, zero-cooling runtime parity, and non-zero electric-radiant heating parity remain verified
+  approval: accepted-upstream-parity
+
+- id: legacy-ashrae140-internal-source-material-severe
+  upstream:
+    path: null
+    symbol: null
+  difference:
+    upstream: the pinned ASHRAE 140 modified GRM contains an internal-source construction layer that EnergyPlus 24.2 diagnoses as too thin or highly conductive
+    dotnet: preserves the exact fixture material and requires the single normalized Severe diagnostic to match by title and count in both engines
+  effect:
+    engineering_result: the paired EnergyPlus run completes and its results remain comparable, but the one registered Severe diagnostic must stay visible
+    diagnostic_policy: any additional Severe or Fatal diagnostic remains a compatibility failure
+  approval: accepted-upstream-fixture-parity

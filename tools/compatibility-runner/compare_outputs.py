@@ -7,6 +7,7 @@ import collections
 import json
 import math
 import re
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -82,10 +83,85 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--report", type=Path, required=True)
     parser.add_argument("--idd", type=Path, required=True)
     parser.add_argument("--runtime-manifest", type=Path, required=True)
+    parser.add_argument("--compatibility-exceptions", type=Path, required=True)
     parser.add_argument("--case")
     parser.add_argument("--skip-energyplus", action="store_true")
     parser.add_argument("--allow-differences", action="store_true")
     return parser.parse_args()
+
+
+def load_registered_exception_ids(path: Path) -> set[str]:
+    tracker_root = Path(__file__).resolve().parents[1] / "upstream-tracker"
+    tracker_root_text = str(tracker_root)
+    if tracker_root_text not in sys.path:
+        sys.path.insert(0, tracker_root_text)
+
+    from goniegonie_upstream_tracker.yaml_subset import load_yaml_subset
+
+    source = load_yaml_subset(path)
+    if not isinstance(source, list):
+        raise ValueError("compatibility exception registry must be a YAML sequence")
+
+    identifiers: set[str] = set()
+    for index, item in enumerate(source):
+        if not isinstance(item, dict):
+            raise ValueError(f"compatibility exception[{index}] must be a mapping")
+        identifier = item.get("id")
+        if not isinstance(identifier, str) or not identifier:
+            raise ValueError(f"compatibility exception[{index}] requires an id")
+        if identifier in identifiers:
+            raise ValueError(f"duplicate compatibility exception id: {identifier}")
+        identifiers.add(identifier)
+    return identifiers
+
+
+def validate_case_exception_references(
+    cases: list[dict[str, Any]],
+    registered_ids: set[str],
+) -> list[str]:
+    referenced: set[str] = set()
+    for case in cases:
+        case_id = str(case.get("id", "<unknown>"))
+        stage_scope = case.get("stage_scope")
+        if stage_scope is not None and not isinstance(stage_scope, dict):
+            raise ValueError(f"case '{case_id}' stage_scope must be a mapping")
+        if isinstance(stage_scope, dict) and stage_scope.get("not_verified"):
+            exception_id = stage_scope.get("exception_id")
+            diagnostic = stage_scope.get("diagnostic")
+            if not isinstance(exception_id, str) or not exception_id:
+                raise ValueError(
+                    f"case '{case_id}' with not_verified evidence requires exception_id"
+                )
+            if not isinstance(diagnostic, str) or not diagnostic.strip():
+                raise ValueError(
+                    f"case '{case_id}' with not_verified evidence requires a diagnostic"
+                )
+            referenced.add(exception_id)
+
+        diagnostic_exceptions = case.get("diagnostic_exceptions", [])
+        if not isinstance(diagnostic_exceptions, list):
+            raise ValueError(
+                f"case '{case_id}' diagnostic_exceptions must be a sequence"
+            )
+        for index, item in enumerate(diagnostic_exceptions):
+            if not isinstance(item, dict):
+                raise ValueError(
+                    f"case '{case_id}' diagnostic_exceptions[{index}] must be a mapping"
+                )
+            exception_id = item.get("exception_id")
+            if not isinstance(exception_id, str) or not exception_id:
+                raise ValueError(
+                    f"case '{case_id}' diagnostic_exceptions[{index}] requires exception_id"
+                )
+            referenced.add(exception_id)
+
+    unknown = sorted(referenced - registered_ids)
+    if unknown:
+        raise ValueError(
+            "compatibility cases reference unregistered exceptions: "
+            + ", ".join(unknown)
+        )
+    return sorted(referenced)
 
 
 def load_json(path: Path) -> Any:
@@ -808,9 +884,15 @@ def compare_idf(
     }
 
 
-def compare_warnings(expected_path: Path, actual_path: Path, allowed_delta: int) -> dict[str, Any]:
+def compare_warnings(
+    expected_path: Path,
+    actual_path: Path,
+    allowed_delta: int,
+    diagnostic_exceptions: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     expected = load_json(expected_path)
     actual = load_json(actual_path)
+    diagnostic_exceptions = diagnostic_exceptions or []
     mismatches: list[dict[str, Any]] = []
     for severity in ("warning", "severe", "fatal"):
         left = int(expected["summary"][severity])
@@ -832,6 +914,47 @@ def compare_warnings(expected_path: Path, actual_path: Path, allowed_delta: int)
         (str(item["severity"]).casefold(), normalize_text(str(item["title"])))
         for item in actual["items"]
     )
+    allowed_items: collections.Counter[tuple[str, str]] = collections.Counter()
+    for item in diagnostic_exceptions:
+        severity = str(item.get("severity", "")).casefold()
+        title = normalize_text(str(item.get("title", "")))
+        count = item.get("count")
+        exception_id = str(item.get("exception_id", ""))
+        if severity not in {"severe", "fatal"}:
+            raise ValueError("diagnostic_exceptions severity must be severe or fatal")
+        if not title or not exception_id or not isinstance(count, int) or isinstance(count, bool) or count <= 0:
+            raise ValueError("diagnostic_exceptions require exception_id, title, and a positive integer count")
+        allowed_items[(severity, title)] += count
+
+    for item, allowed_count in sorted(allowed_items.items()):
+        expected_count = expected_items[item]
+        actual_count = actual_items[item]
+        if expected_count != allowed_count or actual_count != allowed_count:
+            mismatches.append(
+                {
+                    "path": "$.items",
+                    "reason": "registered_diagnostic_count",
+                    "expected": [*item, allowed_count],
+                    "actual": {
+                        "python": expected_count,
+                        "csharp": actual_count,
+                    },
+                }
+            )
+
+    for engine, items in (("python", expected_items), ("csharp", actual_items)):
+        severe_or_fatal = collections.Counter(
+            {item: count for item, count in items.items() if item[0] in {"severe", "fatal"}}
+        )
+        for item, count in sorted((severe_or_fatal - allowed_items).items()):
+            mismatches.append(
+                {
+                    "path": "$.items",
+                    "reason": "disallowed_nonzero_severity",
+                    "expected": None,
+                    "actual": [engine, *item, count],
+                }
+            )
     for item, count in sorted((expected_items - actual_items).items()):
         mismatches.append(
             {"path": "$.items", "reason": "missing_warning", "expected": [*item, count], "actual": None}
@@ -844,10 +967,40 @@ def compare_warnings(expected_path: Path, actual_path: Path, allowed_delta: int)
         "passed": not mismatches,
         "expected_summary": expected["summary"],
         "actual_summary": actual["summary"],
+        "diagnostic_exceptions": diagnostic_exceptions,
         "mismatch_count": len(mismatches),
         "reported_mismatch_count": min(len(mismatches), MAX_MISMATCHES),
         "truncated": len(mismatches) > MAX_MISMATCHES,
         "mismatches": mismatches[:MAX_MISMATCHES],
+    }
+
+
+def summarize_limitations(results: list[dict[str, Any]]) -> dict[str, Any]:
+    limited_cases = [
+        item
+        for item in results
+        if isinstance(item.get("stage_scope"), dict)
+        and bool(item["stage_scope"].get("not_verified"))
+    ]
+    exception_ids = sorted(
+        {
+            str(item["stage_scope"].get("exception_id"))
+            for item in limited_cases
+            if item["stage_scope"].get("exception_id")
+        }
+    )
+    diagnostic_exceptions = [
+        exception
+        for item in results
+        for exception in (item.get("diagnostic_exceptions") or [])
+    ]
+    return {
+        "limitation_count": len(limited_cases),
+        "limitation_exception_ids": exception_ids,
+        "diagnostic_exception_count": len(diagnostic_exceptions),
+        "diagnostic_exception_ids": sorted(
+            {str(item["exception_id"]) for item in diagnostic_exceptions}
+        ),
     }
 
 
@@ -971,6 +1124,7 @@ def compare_case(
             python_case / "warnings.json",
             csharp_case / "warnings.json",
             int(tolerance["warning_count_delta"]),
+            case.get("diagnostic_exceptions"),
         )
     elif "warnings" in case["stages"]:
         skipped_stages.append("warnings")
@@ -982,6 +1136,8 @@ def compare_case(
     ]
     return {
         "id": case_id,
+        "stage_scope": case.get("stage_scope"),
+        "diagnostic_exceptions": case.get("diagnostic_exceptions", []),
         "declared_stages": case["stages"],
         "executed_stages": executed_stages,
         "skipped_stages": skipped_stages,
@@ -1010,6 +1166,13 @@ def main() -> None:
     ]
     if not cases:
         raise SystemExit(f"Unknown compatibility case: {args.case}")
+    registered_exception_ids = load_registered_exception_ids(
+        args.compatibility_exceptions
+    )
+    referenced_exception_ids = validate_case_exception_references(
+        cases,
+        registered_exception_ids,
+    )
     results = [
         compare_case(
             item,
@@ -1024,6 +1187,7 @@ def main() -> None:
     ]
     passed_count = sum(item["passed"] for item in results)
     skip_count = sum(item["skip_count"] for item in results)
+    limitation_summary = summarize_limitations(results)
     report = {
         "schema": "goniegonie.dragons.engineering-compatibility-report.v1",
         "upstream_commit": manifest["upstream_commit"],
@@ -1034,6 +1198,9 @@ def main() -> None:
         "passed_case_count": passed_count,
         "failed_case_count": len(results) - passed_count,
         "skip_count": skip_count,
+        **limitation_summary,
+        "referenced_exception_ids": referenced_exception_ids,
+        "exception_registry_sha256": sha256_file(args.compatibility_exceptions),
         "passed": passed_count == len(results) and skip_count == 0,
         "cases": results,
     }

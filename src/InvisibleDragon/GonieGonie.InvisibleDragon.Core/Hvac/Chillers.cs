@@ -462,8 +462,11 @@ public sealed class AbsorptionChiller : SourceSystem
             SetpointTemperatureCelsius,
             demandConnections ?? Array.Empty<PlantDemandConnection>()));
         objects.AddRange(CoolingTower.ToIdfObjects(context, this));
+        string generatorBranchName = context.Options.UseLegacySimpleDragonHvacTopology
+            ? $"{HeatSource.LoopName} Demand MainGenerator"
+            : $"{HeatSource.LoopName} Demand MainGenerator_for_{IdfObjectName}";
         var generatorConnection = new PlantDemandConnection(
-            $"{HeatSource.LoopName} Demand MainGenerator_for_{IdfObjectName}",
+            generatorBranchName,
             IdfObjectType,
             IdfObjectName,
             GeneratorInletNodeName,

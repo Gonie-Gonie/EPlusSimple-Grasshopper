@@ -604,7 +604,8 @@ internal static class EnergyModelIdfAssembler
         bool legacySimpleDragonSchedules)
     {
         ZoneProfile profile = zone.Profile;
-        if (profile.Lighting is not null && zone.LightingPowerDensityWattsPerSquareMetre > 0)
+        if (profile.Lighting is not null
+            && (zone.LightingPowerDensityWattsPerSquareMetre > 0 || legacySimpleDragonSchedules))
         {
             document.Append(context.CreateRaw("Lights", $"light:{zone.Name}", zone.Name, profile.Lighting.Name, "Watts/Area", null, zone.LightingPowerDensityWattsPerSquareMetre));
         }
@@ -748,7 +749,7 @@ internal static class EnergyModelIdfAssembler
 
                     if (fragment.PlantConnection is not null)
                     {
-                        accumulator.DemandConnections.Add(fragment.PlantConnection);
+                        accumulator.AddDemandConnection(fragment.PlantConnection);
                     }
 
                     if (fragment.TerminalUnitName is not null)
@@ -1079,5 +1080,36 @@ internal static class EnergyModelIdfAssembler
         internal List<PlantDemandConnection> DemandConnections { get; } = new();
 
         internal List<string> TerminalUnitNames { get; } = new();
+
+        internal void AddDemandConnection(PlantDemandConnection connection)
+        {
+            if (!DemandConnections.Any(item => string.Equals(
+                item.BranchName,
+                connection.BranchName,
+                StringComparison.OrdinalIgnoreCase)))
+            {
+                DemandConnections.Add(connection);
+                return;
+            }
+
+            string disambiguatedBaseName = $"{connection.BranchName}_for_{connection.ComponentName}";
+            string disambiguatedName = disambiguatedBaseName;
+            int suffix = 2;
+            while (DemandConnections.Any(item => string.Equals(
+                item.BranchName,
+                disambiguatedName,
+                StringComparison.OrdinalIgnoreCase)))
+            {
+                disambiguatedName = $"{disambiguatedBaseName}_{suffix}";
+                suffix++;
+            }
+
+            DemandConnections.Add(new PlantDemandConnection(
+                disambiguatedName,
+                connection.ComponentObjectType,
+                connection.ComponentName,
+                connection.InletNodeName,
+                connection.OutletNodeName));
+        }
     }
 }

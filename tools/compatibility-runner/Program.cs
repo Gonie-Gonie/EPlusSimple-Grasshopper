@@ -117,7 +117,11 @@ internal static class Program
         produced.Add(expandedPath);
 
         var resultDiagnostics = new List<object>();
-        if (!skipEnergyPlus)
+        bool declaresSimulation = item.Stages.Any(stage =>
+            string.Equals(stage, "energyplus", StringComparison.Ordinal)
+            || string.Equals(stage, "grr", StringComparison.Ordinal)
+            || string.Equals(stage, "warnings", StringComparison.Ordinal));
+        if (!skipEnergyPlus && declaresSimulation)
         {
             string runRoot = Path.Combine(caseRoot, "csharp-energyplus-work");
             Directory.CreateDirectory(runRoot);

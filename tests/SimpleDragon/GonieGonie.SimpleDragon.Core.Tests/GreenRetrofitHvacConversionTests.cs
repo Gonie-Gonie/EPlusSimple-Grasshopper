@@ -296,7 +296,7 @@ public sealed class GreenRetrofitHvacConversionTests
     }
 
     [Fact]
-    public void DistrictHeatingUsesExplicitExternalSourceInsteadOfLocalFuel()
+    public void DistrictHeatingPreservesNativeExternalSourceAndPinnedLegacyBoiler()
     {
         var source = new SourceSystem(
             "district service",
@@ -312,9 +312,16 @@ public sealed class GreenRetrofitHvacConversionTests
         DragonDistrictHeating converted = Assert.IsType<DragonDistrictHeating>(OnlySupply(result).Source);
         Assert.Equal(source.Id, converted.Id);
         Assert.Equal(50_000d, converted.NominalCapacityWatts);
-        IdfDocument idf = result.ToIdfDocument();
-        Assert.Single(idf["DistrictHeating:Water"]);
-        Assert.Empty(idf["Boiler:HotWater"]);
+        IdfDocument native = result.RequireEnergyModel().ToIdfDocument();
+        Assert.Single(native["DistrictHeating:Water"]);
+        Assert.Empty(native["Boiler:HotWater"]);
+
+        IdfDocument legacy = result.ToIdfDocument();
+        Assert.Empty(legacy["DistrictHeating:Water"]);
+        IdfObject boiler = Assert.Single(legacy["Boiler:HotWater"]);
+        Assert.Equal("OtherFuel1", boiler[1]);
+        Assert.Equal("autosize", boiler[2]);
+        Assert.Equal("1", boiler[3]);
     }
 
     [Fact]

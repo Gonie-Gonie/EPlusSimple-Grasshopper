@@ -1,0 +1,172 @@
+{
+  "building": {
+    "name": "GonieGonie Absorption Default Explicit Electric Radiant",
+    "north_axis": 15.0,
+    "address": "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc \uad00\uc545\uad6c",
+    "vintage": [
+      2019,
+      1,
+      1
+    ],
+    "is_multifamily_housing": false,
+    "floors": [
+      {
+        "floor_number": 1,
+        "zones": [
+          {
+            "id": "ZONE-0x600000",
+            "name": "Absorption Matrix Office",
+            "height": 3.0,
+            "profile": "\ubd80\uc18d\uacf5\uac04",
+            "light_density": 0.0,
+            "supply_system_ids": [
+              "SUPL-0x600000",
+              "SUPL-0x600001",
+              "SUPL-0x600002"
+            ],
+            "ventilation_systems": [],
+            "surfaces": [
+              {
+                "id": "SURF-0x600000",
+                "name": "Absorption Matrix Floor",
+                "type": "floor",
+                "boundary_condition": "ground",
+                "area": 56.25,
+                "construction_id": "CTSF-0x600000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x600001",
+                "name": "Absorption Matrix North Wall",
+                "type": "wall",
+                "boundary_condition": "adiabatic",
+                "area": 22.5,
+                "construction_id": "CTSF-0x600000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x600002",
+                "name": "Absorption Matrix East Wall",
+                "type": "wall",
+                "boundary_condition": "adiabatic",
+                "area": 22.5,
+                "construction_id": "CTSF-0x600000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x600003",
+                "name": "Absorption Matrix South Wall",
+                "type": "wall",
+                "boundary_condition": "adiabatic",
+                "area": 22.5,
+                "construction_id": "CTSF-0x600000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x600004",
+                "name": "Absorption Matrix West Wall",
+                "type": "wall",
+                "boundary_condition": "adiabatic",
+                "area": 22.5,
+                "construction_id": "CTSF-0x600000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x600005",
+                "name": "Absorption Matrix Roof",
+                "type": "ceiling",
+                "boundary_condition": "adiabatic",
+                "area": 56.25,
+                "construction_id": "CTSF-0x600000",
+                "fenestrations": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "supply_systems": {
+      "fan_coil_unit": [
+        {
+          "id": "SUPL-0x600000",
+          "name": "Explicit Natural Gas Absorption Fan Coil",
+          "source_system_id": "SRCE-0x600000"
+        },
+        {
+          "id": "SUPL-0x600001",
+          "name": "Default Oil Absorption Fan Coil",
+          "source_system_id": "SRCE-0x600001"
+        }
+      ],
+      "electric_radiant_floor": [
+        {
+          "id": "SUPL-0x600002",
+          "name": "Electric Radiant Floor"
+        }
+      ]
+    },
+    "source_systems": {
+      "absorption_chiller": [
+        {
+          "id": "SRCE-0x600000",
+          "name": "Explicit Natural Gas Absorption Chiller",
+          "fuel_type": "natural_gas",
+          "cop_cooling": 0.82,
+          "capacity_cooling": 18000.0,
+          "boiler_efficiency": 0.88
+        },
+        {
+          "id": "SRCE-0x600001",
+          "name": "Default Oil Absorption Chiller",
+          "fuel_type": "oil"
+        }
+      ]
+    },
+    "ventilation_systems": [],
+    "photovoltaic_systems": []
+  },
+  "materials": [
+    {
+      "id": "MTRL-0x600000",
+      "name": "Absorption Matrix Concrete",
+      "conductivity": 1.4,
+      "density": 2300.0,
+      "specific_heat": 880.0
+    },
+    {
+      "id": "MTRL-0x600001",
+      "name": "Absorption Matrix Insulation",
+      "conductivity": 0.04,
+      "density": 30.0,
+      "specific_heat": 1400.0
+    },
+    {
+      "id": "MTRL-0x600002",
+      "name": "Absorption Matrix Gypsum",
+      "conductivity": 0.16,
+      "density": 800.0,
+      "specific_heat": 1090.0
+    }
+  ],
+  "surface_constructions": [
+    {
+      "id": "CTSF-0x600000",
+      "name": "Absorption Matrix Opaque Construction",
+      "layers": [
+        {
+          "material_id": "MTRL-0x600000",
+          "thickness": 0.12
+        },
+        {
+          "material_id": "MTRL-0x600001",
+          "thickness": 0.08
+        },
+        {
+          "material_id": "MTRL-0x600002",
+          "thickness": 0.013
+        }
+      ]
+    }
+  ],
+  "fenestration_constructions": []
+}

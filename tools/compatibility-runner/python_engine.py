@@ -193,7 +193,11 @@ def run_case(
     expand_idf(run_idf, expanded, runtime_root)
 
     produced = [authoring, expanded, csharp_roundtrip_authoring]
-    if not skip_energyplus:
+    declares_simulation = any(
+        stage in {"energyplus", "grr", "warnings"}
+        for stage in case["stages"]
+    )
+    if not skip_energyplus and declares_simulation:
         raw_output = case_root / "energyplus-output"
         raw_output.mkdir(parents=True, exist_ok=True)
         result = run_single(
