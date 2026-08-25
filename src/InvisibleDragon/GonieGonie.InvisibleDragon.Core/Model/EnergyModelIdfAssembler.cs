@@ -48,13 +48,16 @@ internal static class EnergyModelIdfAssembler
             document.Append(ScheduleIdfExporter.Create(context, schedule));
         }
 
+        Dictionary<EntityId, EnergyRecoveryVentilator> legacyVentilators =
+            ResolveLegacyVentilators(model, options);
         AppendConstructionsAndGeometry(document, context, model, options);
         foreach (Zone zone in model.Zones)
         {
-            AppendZoneLoads(document, context, zone, uniqueSchedules);
+            legacyVentilators.TryGetValue(zone.Id, out EnergyRecoveryVentilator? legacyVentilator);
+            AppendZoneLoads(document, context, zone, uniqueSchedules, legacyVentilator);
         }
 
-        AppendHvac(document, context, model, options);
+        AppendHvac(document, context, model, options, legacyVentilators);
         foreach (PhotovoltaicPanel panel in model.PhotovoltaicPanels)
         {
             Append(document, panel.ToIdfObjects(context));
@@ -177,6 +180,15 @@ internal static class EnergyModelIdfAssembler
                         openingConstruction,
                         surfacesById,
                         options));
+                    if (opening is Window shadedWindow && shadedWindow.Shading is not null)
+                    {
+                        AppendWindowShading(
+                            document,
+                            context,
+                            zone,
+                            shadedWindow,
+                            materialDefinitions);
+                    }
                 }
             }
         }
@@ -231,7 +243,7 @@ internal static class EnergyModelIdfAssembler
 
         if (construction is NoMassConstruction noMass)
         {
-            string material = $"MaterialFor_{noMass.Name}";
+            string material = $"$MaterialFor$_{noMass.Name}";
             if (RegisterDefinition(
                 materialDefinitions,
                 material,
@@ -302,6 +314,104 @@ internal static class EnergyModelIdfAssembler
         }
 
         return glazing.Name;
+    }
+
+    private static void AppendWindowShading(
+        IdfDocument document,
+        IdfGenerationContext context,
+        Zone zone,
+        Window window,
+        Dictionary<string, object> materialDefinitions)
+    {
+        IShadingDevice shading = window.Shading!;
+        if (RegisterDefinition(
+            materialDefinitions,
+            shading.Name,
+            shading,
+            ModelDefinitionComparer.EmittedMaterialEquals,
+            "Material"))
+        {
+            document.Append(ShadingMaterial(context, shading));
+        }
+
+        string shadingType = shading is Blind ? "InteriorBlind" : "InteriorShade";
+        document.Append(context.CreateRaw(
+            "WindowShadingControl",
+            $"{window.Name}:ShadingControl",
+            zone.Name,
+            1,
+            shadingType,
+            null,
+            "OffNightAndOnDayIfCoolingAndHighSolarOnWindow",
+            null,
+            20,
+            false,
+            false,
+            shading.Name,
+            "FixedSlatAngle",
+            null,
+            null,
+            null,
+            "Sequential",
+            window.Name));
+    }
+
+    private static IdfObject ShadingMaterial(
+        IdfGenerationContext context,
+        IShadingDevice shading)
+    {
+        return shading switch
+        {
+            Blind blind => context.CreateRaw(
+                "WindowMaterial:Blind",
+                blind.Name,
+                "Horizontal",
+                blind.SlatWidthMetres,
+                blind.SlatSeparationMetres,
+                0.00025,
+                blind.SlatAngleDegrees,
+                221,
+                0,
+                blind.FrontReflectance,
+                blind.BackReflectance,
+                0,
+                blind.FrontReflectance,
+                blind.BackReflectance,
+                0,
+                null,
+                null,
+                0,
+                null,
+                null,
+                0,
+                0.9,
+                0.9,
+                0.05,
+                0.5,
+                0,
+                0.5,
+                0.5,
+                0,
+                180),
+            Shade shade => context.CreateRaw(
+                "WindowMaterial:Shade",
+                shade.Name,
+                shade.Transmittance,
+                shade.Reflectance,
+                shade.Transmittance,
+                shade.Reflectance,
+                shade.Emissivity,
+                shade.Transmittance,
+                0.01,
+                100,
+                0.05,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0),
+            _ => throw new ArgumentOutOfRangeException(nameof(shading)),
+        };
     }
 
     private static bool RegisterDefinition(
@@ -478,7 +588,8 @@ internal static class EnergyModelIdfAssembler
         IdfDocument document,
         IdfGenerationContext context,
         Zone zone,
-        IDictionary<string, Schedule> schedules)
+        IDictionary<string, Schedule> schedules,
+        EnergyRecoveryVentilator? legacyVentilator)
     {
         ZoneProfile profile = zone.Profile;
         if (profile.Lighting is not null && zone.LightingPowerDensityWattsPerSquareMetre > 0)
@@ -516,12 +627,36 @@ internal static class EnergyModelIdfAssembler
 
         if (profile.Occupant is not null)
         {
-            document.Append(context.Create(
-                "ZoneVentilation:DesignFlowRate",
-                IdfGenerationContext.Field(0, "Name", $"NaturalVentilation:{zone.Name}"),
-                IdfGenerationContext.Field(1, "Zone or ZoneList or Space or SpaceList Name", zone.Name),
-                IdfGenerationContext.Field(3, "Design Flow Rate Calculation Method", "Flow/Person"),
-                IdfGenerationContext.Field(6, "Flow Rate per Person", 0.0083d)));
+            if (legacyVentilator is null)
+            {
+                document.Append(context.Create(
+                    "ZoneVentilation:DesignFlowRate",
+                    IdfGenerationContext.Field(0, "Name", $"NaturalVentilation:{zone.Name}"),
+                    IdfGenerationContext.Field(1, "Zone or ZoneList or Space or SpaceList Name", zone.Name),
+                    IdfGenerationContext.Field(3, "Design Flow Rate Calculation Method", "Flow/Person"),
+                    IdfGenerationContext.Field(6, "Flow Rate per Person", 0.0083d)));
+            }
+            else
+            {
+                double overallEffectiveness =
+                    (legacyVentilator.SensibleEffectiveness + legacyVentilator.LatentEffectiveness) / 2d;
+                double unrecoveredFraction = 1d - overallEffectiveness;
+                if (unrecoveredFraction <= 0d)
+                {
+                    throw new InvalidOperationException(
+                        "Legacy SimpleDragon ventilation requires average heat-recovery effectiveness below 1.");
+                }
+
+                document.Append(context.Create(
+                    "ZoneVentilation:DesignFlowRate",
+                    IdfGenerationContext.Field(0, "Name", $"NaturalVentilation:{zone.Name}"),
+                    IdfGenerationContext.Field(1, "Zone or ZoneList or Space or SpaceList Name", zone.Name),
+                    IdfGenerationContext.Field(3, "Design Flow Rate Calculation Method", "Flow/Person"),
+                    IdfGenerationContext.Field(6, "Flow Rate per Person", 0.0083d * unrecoveredFraction),
+                    IdfGenerationContext.Field(8, "Ventilation Type", "Exhaust"),
+                    IdfGenerationContext.Field(9, "Fan Pressure Rise", 50d / unrecoveredFraction),
+                    IdfGenerationContext.Field(10, "Fan Total Efficiency", 0.85d)));
+            }
         }
     }
 
@@ -544,7 +679,12 @@ internal static class EnergyModelIdfAssembler
         return name;
     }
 
-    private static void AppendHvac(IdfDocument document, IdfGenerationContext context, EnergyModel model, EnergyModelIdfOptions options)
+    private static void AppendHvac(
+        IdfDocument document,
+        IdfGenerationContext context,
+        EnergyModel model,
+        EnergyModelIdfOptions options,
+        Dictionary<EntityId, EnergyRecoveryVentilator> legacyVentilators)
     {
         Dictionary<EntityId, Zone> zones = model.Zones.ToDictionary(zone => zone.Id);
         Dictionary<EntityId, List<SupplyIdfFragment>> fragmentsByZone = model.Zones.ToDictionary(zone => zone.Id, _ => new List<SupplyIdfFragment>());
@@ -590,11 +730,17 @@ internal static class EnergyModelIdfAssembler
             }
         }
 
-        foreach (ZoneVentilationAssignment assignment in model.VentilationAssignments)
+        if (!options.UseLegacySimpleDragonVentilation)
         {
-            if (zones.TryGetValue(assignment.ZoneId, out Zone? zone))
+            foreach (ZoneVentilationAssignment assignment in model.VentilationAssignments)
             {
-                fragmentsByZone[zone.Id].Add(assignment.Ventilator.Generate(context, zone, zone.Profile.HvacAvailability?.Name ?? "ALLON"));
+                if (zones.TryGetValue(assignment.ZoneId, out Zone? zone))
+                {
+                    fragmentsByZone[zone.Id].Add(assignment.Ventilator.Generate(
+                        context,
+                        zone,
+                        zone.Profile.HvacAvailability?.Name ?? "ALLON"));
+                }
             }
         }
 
@@ -628,12 +774,38 @@ internal static class EnergyModelIdfAssembler
                 AppendThermostat(document, context, zone, assignment.Supply, options);
                 AppendSizing(document, context, zone);
             }
-            else if (fragments.Count == 0 && options.AddIdealLoadsForUnassignedZones)
+            else if (fragments.Count == 0
+                && options.AddIdealLoadsForUnassignedZones
+                && !legacyVentilators.ContainsKey(zone.Id))
             {
                 document.Append(context.CreateRaw("HVACTemplate:Thermostat", $"IdealThermostat_for_{zone.Name}", null, -30, null, 50));
                 document.Append(context.CreateRaw("HVACTemplate:Zone:IdealLoadsAirSystem", zone.Name, $"IdealThermostat_for_{zone.Name}"));
             }
         }
+    }
+
+    private static Dictionary<EntityId, EnergyRecoveryVentilator> ResolveLegacyVentilators(
+        EnergyModel model,
+        EnergyModelIdfOptions options)
+    {
+        var result = new Dictionary<EntityId, EnergyRecoveryVentilator>();
+        if (!options.UseLegacySimpleDragonVentilation)
+        {
+            return result;
+        }
+
+        foreach (ZoneVentilationAssignment assignment in model.VentilationAssignments)
+        {
+            if (result.ContainsKey(assignment.ZoneId))
+            {
+                throw new InvalidOperationException(
+                    $"Legacy SimpleDragon ventilation requires one aggregated assignment for zone '{assignment.ZoneId}'.");
+            }
+
+            result.Add(assignment.ZoneId, assignment.Ventilator);
+        }
+
+        return result;
     }
 
     private static void AppendZoneEquipment(

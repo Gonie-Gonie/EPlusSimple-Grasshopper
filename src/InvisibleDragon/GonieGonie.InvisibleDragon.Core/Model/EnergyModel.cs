@@ -42,6 +42,13 @@ public sealed class EnergyModelIdfOptions
     /// conversion when it differs from the native InvisibleDragon topology.
     /// </summary>
     public bool UseLegacySimpleDragonHvacTopology { get; set; }
+
+    /// <summary>
+    /// Models SimpleDragon energy-recovery ventilation as the reduced
+    /// ZoneVentilation load emitted by the pinned Python conversion instead
+    /// of native explicit heat-recovery equipment.
+    /// </summary>
+    public bool UseLegacySimpleDragonVentilation { get; set; }
 }
 
 /// <summary>

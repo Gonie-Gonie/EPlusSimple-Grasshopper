@@ -174,6 +174,32 @@ class IddDefaultNormalizationTests(unittest.TestCase):
             result["mismatches"][0]["path"],
         )
 
+    def test_partial_extensible_group_may_omit_trailing_optional_fields(self) -> None:
+        extensible_idd = r"""ElectricLoadCenter:Generators,
+  \extensible:5
+  A1, \field Name
+  A2, \field Generator Name
+      \begin-extensible
+  A3, \field Generator Object Type
+  N1, \field Rated Electric Power Output
+  A4, \field Availability Schedule Name
+  N2; \field Rated Thermal to Electrical Power Ratio
+"""
+        with TemporaryWorkspace() as workspace:
+            idd = workspace.write_text("Energy+.idd", extensible_idd)
+            expected = workspace.write_text(
+                "expected.idf",
+                "ElectricLoadCenter:Generators, List, PV, Generator:Photovoltaic, 1000000;\n",
+            )
+            actual = workspace.write_text(
+                "actual.idf",
+                "ElectricLoadCenter:Generators, List, PV, Generator:Photovoltaic, 1000000,,;\n",
+            )
+            schema = runner.parse_idd(idd)
+            result = runner.compare_idf(expected, actual, 0.0, 0.0, schema)
+
+        self.assertTrue(result["passed"], result["mismatches"])
+
     def test_malformed_idd_raises_instead_of_guessing(self) -> None:
         malformed = r"""Test:Object,
   A1, \field Name
@@ -454,6 +480,33 @@ class WarningAndIdentityTests(unittest.TestCase):
 
         self.assertTrue(result["passed"], result["mismatches"])
 
+    def test_warning_comparison_normalizes_lowercase_auto_address_tokens(self) -> None:
+        expected_value = {
+            "summary": {"warning": 1, "severe": 0, "fatal": 0},
+            "items": [
+                {
+                    "severity": "warning",
+                    "title": "HeatPump_named_DedicatedHeatPump0x176cf002540_for_zone warning",
+                }
+            ],
+        }
+        actual_value = {
+            "summary": {"warning": 1, "severe": 0, "fatal": 0},
+            "items": [
+                {
+                    "severity": "WARNING",
+                    "title": "heatpump_named_dedicatedheatpump0xauto0000_for_zone WARNING",
+                }
+            ],
+        }
+        with TemporaryWorkspace() as workspace:
+            expected = workspace.write_json("expected.json", expected_value)
+            actual = workspace.write_json("actual.json", actual_value)
+
+            result = runner.compare_warnings(expected, actual, allowed_delta=0)
+
+        self.assertTrue(result["passed"], result["mismatches"])
+
     def test_warning_comparison_reports_duplicate_count_difference(self) -> None:
         expected_value = {
             "summary": {"warning": 2, "severe": 0, "fatal": 0},
@@ -513,6 +566,37 @@ class WarningAndIdentityTests(unittest.TestCase):
             },
             {item["identity"] for item in result["mismatches"]},
         )
+
+    def test_case_manifest_pins_grm_and_weather_hashes(self) -> None:
+        case = {
+            "id": "pinned-inputs",
+            "input_grm_sha256": "f" * 64,
+            "weather_sha256": "b" * 64,
+            "stages": ["authoring_idf", "expanded_idf"],
+        }
+        with TemporaryWorkspace() as workspace:
+            python_root = workspace.path / "python"
+            csharp_root = workspace.path / "csharp"
+            for root in (python_root, csharp_root):
+                case_root = root / "pinned-inputs"
+                case_root.mkdir(parents=True)
+                workspace.write_json(
+                    str((case_root / "metadata.json").relative_to(workspace.path)).replace("\\", "/"),
+                    metadata(),
+                )
+                for name in ("authoring.idf", "expanded.idf"):
+                    workspace.write_text(
+                        str((case_root / name).relative_to(workspace.path)).replace("\\", "/"),
+                        "Version, 24.2;\n",
+                    )
+
+            result = runner.compare_case(case, manifest(), python_root, csharp_root)
+
+        identity = result["checks"]["input_identity"]
+        self.assertFalse(identity["passed"])
+        self.assertEqual("f" * 64, identity["identities"]["grm_sha256"]["pinned"])
+        self.assertEqual("b" * 64, identity["identities"]["weather_sha256"]["pinned"])
+        self.assertEqual("grm_sha256", identity["mismatches"][0]["identity"])
 
 
 class CaseStageTests(unittest.TestCase):

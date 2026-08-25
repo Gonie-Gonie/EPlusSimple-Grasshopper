@@ -42,6 +42,49 @@ public sealed class SourceSystemTests
     }
 
     [Fact]
+    public void HeatPumpOmitsHeatingCopOnlyForLegacyCoolingOnlyPackagedTerminals()
+    {
+        var heatPump = new HeatPump(
+            new EntityId("HVAC-HP-PACKAGED"),
+            "Packaged source",
+            Fuel.Electricity,
+            3.2,
+            3.6,
+            heatingCapacityWatts: 0.001,
+            coolingCapacityWatts: 12_000);
+        string packagedTerminal =
+            "PackagedAirConditioner_named_SUPPLY-PACKAGED_for_ZONE-PACKAGED";
+        var legacyOptions = new EnergyModelIdfOptions
+        {
+            UseLegacySimpleDragonHvacTopology = true,
+        };
+
+        IdfObject native = Assert.Single(
+            heatPump.ToIdfObjects(
+                new IdfGenerationContext(),
+                terminalUnitNames: new[] { packagedTerminal }),
+            item => item.ObjectType == heatPump.IdfObjectType);
+        IdfObject legacyPackaged = Assert.Single(
+            heatPump.ToIdfObjects(
+                new IdfGenerationContext(options: legacyOptions),
+                terminalUnitNames: new[] { packagedTerminal }),
+            item => item.ObjectType == heatPump.IdfObjectType);
+        IdfObject legacyMixed = Assert.Single(
+            heatPump.ToIdfObjects(
+                new IdfGenerationContext(options: legacyOptions),
+                terminalUnitNames: new[]
+                {
+                    packagedTerminal,
+                    "AirHandlingUnit_named_SUPPLY-AHU_for_ZONE-AHU",
+                }),
+            item => item.ObjectType == heatPump.IdfObjectType);
+
+        Assert.Equal("3.2", native[20]);
+        Assert.Equal(string.Empty, legacyPackaged[20]);
+        Assert.Equal("3.2", legacyMixed[20]);
+    }
+
+    [Fact]
     public void BoilerExportsClosedPlantLoopAndDemandBranch()
     {
         var boiler = new Boiler(new EntityId("HVAC-BOILER-1"), "Boiler", Fuel.NaturalGas);

@@ -334,8 +334,8 @@ public sealed class ElectricRadiator : SupplySystem
             availabilityScheduleName,
             nameof(availabilityScheduleName));
         string name = ObjectNameFor(zone);
-        IdfObject radiator = context.Create(
-            "ZoneHVAC:Baseboard:RadiantConvective:Electric",
+        var fields = new List<IdfFieldValue>
+        {
             IdfGenerationContext.Field(0, "Name", name),
             IdfGenerationContext.Field(1, "Availability Schedule Name", availabilityScheduleName),
             IdfGenerationContext.Field(2, "Heating Design Capacity Method", "HeatingDesignCapacity"),
@@ -344,7 +344,18 @@ public sealed class ElectricRadiator : SupplySystem
             IdfGenerationContext.Field(5, "Fraction of Autosized Heating Design Capacity", 1),
             IdfGenerationContext.Field(6, "Efficiency", Efficiency),
             IdfGenerationContext.Field(7, "Fraction Radiant", RadiantFraction),
-            IdfGenerationContext.Field(8, "Fraction of Radiant Energy Incident on People", 0));
+        };
+        if (!context.Options.UseLegacySimpleDragonHvacTopology)
+        {
+            fields.Add(IdfGenerationContext.Field(
+                8,
+                "Fraction of Radiant Energy Incident on People",
+                0));
+        }
+
+        IdfObject radiator = context.Create(
+            "ZoneHVAC:Baseboard:RadiantConvective:Electric",
+            fields.ToArray());
         return new SupplyIdfFragment(
             new[] { radiator },
             new ZoneEquipmentDescriptor(radiator.ObjectType, name, 0, 1));

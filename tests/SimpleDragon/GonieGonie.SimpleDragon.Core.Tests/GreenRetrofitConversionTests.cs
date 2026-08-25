@@ -76,6 +76,59 @@ public sealed class GreenRetrofitConversionTests
     }
 
     [Fact]
+    public void LegacyVentilationUsesCountWeightedReductionWithoutExplicitErvEquipment()
+    {
+        GreenRetrofitModel source = GrmReader.ReadFile(
+            CompatibilityFixture("packaged-erv-pv-openings.grm")).RequireModel();
+        Zone sourceZone = Assert.Single(source.Zones);
+        Assert.Equal(2, sourceZone.VentilationAssignments.Count);
+        Assert.Equal(1, sourceZone.VentilationAssignments[0].Count);
+        Assert.Equal(2, sourceZone.VentilationAssignments[1].Count);
+
+        GreenRetrofitConversionResult conversion = GreenRetrofitConverter.Convert(source);
+
+        Assert.True(conversion.Success, Describe(conversion));
+        EnergyModel converted = conversion.RequireEnergyModel();
+        EnergyRecoveryVentilator aggregate = Assert.Single(converted.VentilationAssignments).Ventilator;
+        Assert.Equal(0.2d, aggregate.SupplyAirFlowCubicMetresPerSecond);
+        Assert.Equal(0.7100000000000001d, aggregate.SensibleEffectiveness);
+        Assert.Equal(0.53d, aggregate.LatentEffectiveness);
+
+        IdfDocument legacy = conversion.ToIdfDocument();
+        IdfObject ventilation = Assert.Single(legacy["ZoneVentilation:DesignFlowRate"]);
+        Assert.Equal("NaturalVentilation:ZONE-0x300000", ventilation.Name);
+        Assert.Equal(string.Empty, ventilation[2]);
+        Assert.Equal("Flow/Person", ventilation[3]);
+        Assert.Equal("0.0031539999999999993", ventilation[6]);
+        Assert.Equal("Exhaust", ventilation[8]);
+        Assert.Equal("131.5789473684211", ventilation[9]);
+        Assert.Equal("0.85", ventilation[10]);
+        Assert.Empty(legacy["OutdoorAir:Node"]);
+        Assert.Empty(legacy["HeatExchanger:AirToAir:SensibleAndLatent"]);
+        Assert.Empty(legacy["ZoneHVAC:EnergyRecoveryVentilator:Controller"]);
+        Assert.Empty(legacy["ZoneHVAC:EnergyRecoveryVentilator"]);
+        Assert.DoesNotContain(
+            legacy["Fan:OnOff"],
+            item => item.Name?.StartsWith("ERV_named_", StringComparison.Ordinal) == true);
+        Assert.DoesNotContain(
+            legacy["ZoneHVAC:EquipmentList"].SelectMany(item => item.Fields),
+            field => field.Value.Contains("EnergyRecoveryVentilator", StringComparison.Ordinal));
+        Assert.DoesNotContain(
+            legacy["NodeList"].SelectMany(item => item.Fields),
+            field => field.Value.StartsWith("ERV_named_", StringComparison.Ordinal));
+
+        IdfDocument native = converted.ToIdfDocument();
+        Assert.Single(native["OutdoorAir:Node"]);
+        Assert.Single(native["HeatExchanger:AirToAir:SensibleAndLatent"]);
+        Assert.Single(native["ZoneHVAC:EnergyRecoveryVentilator:Controller"]);
+        Assert.Single(native["ZoneHVAC:EnergyRecoveryVentilator"]);
+        Assert.Equal(
+            2,
+            native["Fan:OnOff"].Count(
+                item => item.Name?.StartsWith("ERV_named_", StringComparison.Ordinal) == true));
+    }
+
+    [Fact]
     public void ConvertedOpeningsRetainAreaAndDoNotOverlap()
     {
         GreenRetrofitModel source = GrmReader.ReadFile(Fixture("grm")).RequireModel();
@@ -553,6 +606,28 @@ public sealed class GreenRetrofitConversionTests
         }
 
         throw new DirectoryNotFoundException("Could not locate the SimpleDragon fixture.");
+    }
+
+    private static string CompatibilityFixture(string fileName)
+    {
+        DirectoryInfo? current = new(AppContext.BaseDirectory);
+        while (current is not null)
+        {
+            string candidate = Path.Combine(
+                current.FullName,
+                "fixtures",
+                "compatibility",
+                "models",
+                fileName);
+            if (File.Exists(candidate))
+            {
+                return candidate;
+            }
+
+            current = current.Parent;
+        }
+
+        throw new DirectoryNotFoundException("Could not locate compatibility fixture '" + fileName + "'.");
     }
 
     private static string ReferenceIdf()

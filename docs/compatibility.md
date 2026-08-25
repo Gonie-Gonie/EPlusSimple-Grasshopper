@@ -30,11 +30,12 @@ Compatibility is assessed at several levels:
 5. Rhino geometry conversion and real Grasshopper host load/save/reopen gates.
 6. Package-only, dual-package, shared-assembly, and no-Python checks.
 
-The paired engineering gate is `dev.cmd compatibility`. It fixes the GRM, EPW bytes, upstream
-commit, and EnergyPlus executable/IDD/ExpandObjects hashes for both engines; compares authoring
-and expanded IDF separately; and records path-level GRR numeric errors and warning differences in
-`artifacts/reports/engineering-compatibility.json`. `-AllowDifferences` is a development-only
-reporting mode and is never evidence of compatibility.
+The paired engineering gate is `dev.cmd compatibility`. Every case records the GRM and EPW
+SHA-256 in `fixtures/compatibility/cases.json`; both engines reject changed inputs before model
+generation. The gate also fixes the upstream commit and EnergyPlus executable/IDD/ExpandObjects
+hashes, compares authoring and expanded IDF separately, and records path-level GRR numeric errors
+and warning differences in `artifacts/reports/engineering-compatibility.json`.
+`-AllowDifferences` is a development-only reporting mode and is never evidence of compatibility.
 
 A broad class or object name in the port map does not by itself assert complete
 behavioral parity. Review `upstream/reports`, compatibility exceptions, and the

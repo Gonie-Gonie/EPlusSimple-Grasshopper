@@ -58,6 +58,12 @@ public class HeatPump : SourceSystem
         IReadOnlyList<string>? terminalUnitNames = null)
     {
         DomainGuard.NotNull(context, nameof(context));
+        bool legacyCoolingOnlyPackagedSource =
+            context.Options.UseLegacySimpleDragonHvacTopology
+            && terminalUnitNames is { Count: > 0 }
+            && terminalUnitNames.All(name => name.StartsWith(
+                "PackagedAirConditioner_named_",
+                StringComparison.Ordinal));
         List<IdfObject> objects = CreatePerformanceCurves(context).ToList();
         object?[] terminalFields = new object?[1 + (terminalUnitNames?.Count ?? 0)];
         terminalFields[0] = TerminalUnitListName;
@@ -87,7 +93,12 @@ public class HeatPump : SourceSystem
             IdfGenerationContext.Field(17, "Cooling Part-Load Fraction Correlation Curve Name", Curve("CoolingPLRCorrelation")),
             IdfGenerationContext.Field(18, "Gross Rated Heating Capacity", HeatingCapacityWatts ?? (object)"autosize"),
             IdfGenerationContext.Field(19, "Rated Heating Capacity Sizing Ratio", 1),
-            IdfGenerationContext.Field(20, "Gross Rated Heating COP", HeatingCoefficientOfPerformance),
+            IdfGenerationContext.Field(
+                20,
+                "Gross Rated Heating COP",
+                legacyCoolingOnlyPackagedSource
+                    ? null
+                    : HeatingCoefficientOfPerformance),
             IdfGenerationContext.Field(24, "Heating Capacity Ratio Modifier Function of Low Temperature Curve Name", Curve("HeatingCapaMF_LowTemp")),
             IdfGenerationContext.Field(25, "Heating Capacity Ratio Boundary Curve Name", Curve("HeatingCapaBoundary")),
             IdfGenerationContext.Field(26, "Heating Capacity Ratio Modifier Function of High Temperature Curve Name", Curve("HeatingCapaMF_HighTemp")),

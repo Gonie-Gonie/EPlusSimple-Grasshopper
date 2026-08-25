@@ -1,0 +1,291 @@
+{
+  "building": {
+    "name": "GonieGonie Packaged ERV PV Openings",
+    "north_axis": 22.5,
+    "address": "서울특별시 관악구",
+    "vintage": [
+      2022,
+      1,
+      1
+    ],
+    "is_multifamily_housing": false,
+    "floors": [
+      {
+        "floor_number": 1,
+        "zones": [
+          {
+            "id": "ZONE-0x300000",
+            "name": "Packaged Office",
+            "height": 3.0,
+            "profile": "소규모사무실",
+            "light_density": 8.0,
+            "supply_system_ids": [
+              "SUPL-0x300000",
+              "SUPL-0x300001"
+            ],
+            "ventilation_systems": [
+              {
+                "id": "ERVT-0x300000",
+                "count": 1
+              },
+              {
+                "id": "ERVT-0x300001",
+                "count": 2
+              }
+            ],
+            "surfaces": [
+              {
+                "id": "SURF-0x300000",
+                "name": "Packaged Office Floor",
+                "type": "floor",
+                "boundary_condition": "ground",
+                "area": 48.0,
+                "construction_id": "CTSF-0x300001",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x300001",
+                "name": "Packaged Office North Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 21.6,
+                "azimuth": 0.0,
+                "construction_id": "CTSF-0x300000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x300002",
+                "name": "Packaged Office East Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 16.2,
+                "azimuth": 90.0,
+                "construction_id": "CTSF-0x300000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x300003",
+                "name": "Packaged Office South Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 21.6,
+                "azimuth": 180.0,
+                "construction_id": "CTSF-0x300000",
+                "fenestrations": [
+                  {
+                    "id": "FNST-0x300000",
+                    "name": "South Window With Shade",
+                    "type": "window",
+                    "area": 4.0,
+                    "blind": "shade",
+                    "construction_id": "CTFN-0x300000"
+                  },
+                  {
+                    "id": "FNST-0x300001",
+                    "name": "South Window With Venetian Blind",
+                    "type": "window",
+                    "area": 3.0,
+                    "blind": "venetian",
+                    "construction_id": "CTFN-0x300000"
+                  },
+                  {
+                    "id": "FNST-0x300002",
+                    "name": "South Glass Door",
+                    "type": "glassdoor",
+                    "area": 2.5,
+                    "blind": null,
+                    "construction_id": "CTFN-0x300000"
+                  },
+                  {
+                    "id": "FNST-0x300003",
+                    "name": "South Opaque Door",
+                    "type": "door",
+                    "area": 2.0,
+                    "construction_id": "CTFN-0x300001"
+                  }
+                ]
+              },
+              {
+                "id": "SURF-0x300004",
+                "name": "Packaged Office West Wall",
+                "type": "wall",
+                "boundary_condition": "outdoors",
+                "area": 16.2,
+                "azimuth": 270.0,
+                "construction_id": "CTSF-0x300000",
+                "fenestrations": []
+              },
+              {
+                "id": "SURF-0x300005",
+                "name": "Packaged Office Roof",
+                "type": "ceiling",
+                "boundary_condition": "outdoors",
+                "area": 48.0,
+                "coolroof_reflectance": 0.7,
+                "construction_id": "CTSF-0x300002",
+                "fenestrations": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "supply_systems": {
+      "packaged_air_conditioner": [
+        {
+          "id": "SUPL-0x300000",
+          "name": "Packaged Office Cooling Unit",
+          "capacity_cooling": 12000.0,
+          "cop_cooling": 3.6
+        }
+      ],
+      "electric_radiator": [
+        {
+          "id": "SUPL-0x300001",
+          "name": "Packaged Office Electric Radiator",
+          "capacity_heating": 10000.0
+        }
+      ]
+    },
+    "source_systems": {},
+    "ventilation_systems": [
+      {
+        "id": "ERVT-0x300000",
+        "name": "Main Sensible ERV",
+        "airflow_rate": 0.12,
+        "efficiency_heating": 0.75,
+        "efficiency_cooling": 0.55
+      },
+      {
+        "id": "ERVT-0x300001",
+        "name": "Supplemental ERV",
+        "airflow_rate": 0.04,
+        "efficiency_heating": 0.65,
+        "efficiency_cooling": 0.5
+      }
+    ],
+    "photovoltaic_systems": [
+      {
+        "id": "PVPN-0x300000",
+        "name": "South Roof PV Array",
+        "area": 18.0,
+        "efficiency": 0.205,
+        "azimuth": 180.0,
+        "tilt": 25.0
+      },
+      {
+        "id": "PVPN-0x300001",
+        "name": "Southwest Canopy PV",
+        "area": 9.0,
+        "efficiency": 0.18,
+        "azimuth": 225.0,
+        "tilt": 10.0
+      }
+    ]
+  },
+  "materials": [
+    {
+      "id": "MTRL-0x300000",
+      "name": "Fixture Brick",
+      "conductivity": 0.77,
+      "density": 1700.0,
+      "specific_heat": 840.0
+    },
+    {
+      "id": "MTRL-0x300001",
+      "name": "Fixture Insulation",
+      "conductivity": 0.04,
+      "density": 30.0,
+      "specific_heat": 1400.0
+    },
+    {
+      "id": "MTRL-0x300002",
+      "name": "Fixture Gypsum",
+      "conductivity": 0.16,
+      "density": 800.0,
+      "specific_heat": 1090.0
+    },
+    {
+      "id": "MTRL-0x300003",
+      "name": "Fixture Concrete",
+      "conductivity": 1.4,
+      "density": 2300.0,
+      "specific_heat": 880.0
+    },
+    {
+      "id": "MTRL-0x300004",
+      "name": "Fixture Roof Membrane",
+      "conductivity": 0.17,
+      "density": 1120.0,
+      "specific_heat": 1460.0
+    }
+  ],
+  "surface_constructions": [
+    {
+      "id": "CTSF-0x300000",
+      "name": "Fixture Exterior Wall",
+      "layers": [
+        {
+          "material_id": "MTRL-0x300000",
+          "thickness": 0.1
+        },
+        {
+          "material_id": "MTRL-0x300001",
+          "thickness": 0.08
+        },
+        {
+          "material_id": "MTRL-0x300002",
+          "thickness": 0.013
+        }
+      ]
+    },
+    {
+      "id": "CTSF-0x300001",
+      "name": "Fixture Ground Floor",
+      "layers": [
+        {
+          "material_id": "MTRL-0x300003",
+          "thickness": 0.15
+        },
+        {
+          "material_id": "MTRL-0x300001",
+          "thickness": 0.05
+        }
+      ]
+    },
+    {
+      "id": "CTSF-0x300002",
+      "name": "Fixture Roof",
+      "layers": [
+        {
+          "material_id": "MTRL-0x300004",
+          "thickness": 0.01
+        },
+        {
+          "material_id": "MTRL-0x300001",
+          "thickness": 0.12
+        },
+        {
+          "material_id": "MTRL-0x300002",
+          "thickness": 0.013
+        }
+      ]
+    }
+  ],
+  "fenestration_constructions": [
+    {
+      "id": "CTFN-0x300000",
+      "name": "Fixture High Performance Glazing",
+      "is_transparent": true,
+      "u": 1.5,
+      "g": 0.42
+    },
+    {
+      "id": "CTFN-0x300001",
+      "name": "Fixture Insulated Opaque Door",
+      "is_transparent": false,
+      "u": 1.2,
+      "g": null
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 using GonieGonie.InvisibleDragon.Construction;
 using GonieGonie.InvisibleDragon.Hvac;
+using GonieGonie.InvisibleDragon.Shape;
 using OpaqueConstruction = GonieGonie.InvisibleDragon.Construction.Construction;
 
 namespace GonieGonie.InvisibleDragon.Model;
@@ -131,6 +132,17 @@ internal static class ModelDefinitionComparer
             (NoMassConstruction left, NoMassConstruction right) =>
                 SurfaceConstructionEquals(left, right),
             (Glazing left, Glazing right) => GlazingEquals(left, right),
+            (Blind left, Blind right) =>
+                NameEquals(left.Name, right.Name)
+                && left.SlatWidthMetres.Equals(right.SlatWidthMetres)
+                && left.SlatSeparationMetres.Equals(right.SlatSeparationMetres)
+                && left.SlatAngleDegrees.Equals(right.SlatAngleDegrees)
+                && left.FrontReflectance.Equals(right.FrontReflectance)
+                && left.BackReflectance.Equals(right.BackReflectance),
+            (Shade left, Shade right) =>
+                NameEquals(left.Name, right.Name)
+                && left.Transmittance.Equals(right.Transmittance)
+                && left.Reflectance.Equals(right.Reflectance),
             _ => false,
         };
     }

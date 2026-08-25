@@ -291,6 +291,35 @@ public sealed class HydronicSupplySystemTests
     }
 
     [Fact]
+    public void ElectricRadiatorOmitsTrailingPeopleFractionOnlyForLegacySimpleDragon()
+    {
+        Zone zone = EnergyModelFixtureMatrixTests.CreateZone(
+            "ZONE-ELECTRIC-RAD-LEGACY",
+            "Electric Radiator Legacy Zone");
+        var radiator = new ElectricRadiator(
+            new EntityId("ELECTRIC-RAD-LEGACY"),
+            "Legacy electric perimeter",
+            4200,
+            radiantFraction: 0);
+        EnergyModel model = ModelWith(zone, radiator);
+        var legacyOptions = new EnergyModelIdfOptions
+        {
+            UseLegacySimpleDragonHvacTopology = true,
+        };
+
+        IdfObject native = Assert.Single(
+            model.ToIdfDocument()["ZoneHVAC:Baseboard:RadiantConvective:Electric"]);
+        IdfObject legacy = Assert.Single(
+            model.ToIdfDocument(options: legacyOptions)[
+                "ZoneHVAC:Baseboard:RadiantConvective:Electric"]);
+
+        Assert.Equal(9, native.Count);
+        Assert.Equal("0", native[8]);
+        Assert.Equal(8, legacy.Count);
+        Assert.Equal("0", legacy[7]);
+    }
+
+    [Fact]
     public void ModelDefinitionEqualityIncludesEveryNewSupplyParameter()
     {
         var boiler = new Boiler(new EntityId("BOILER-EQUALITY"), "Equality boiler", Fuel.NaturalGas);

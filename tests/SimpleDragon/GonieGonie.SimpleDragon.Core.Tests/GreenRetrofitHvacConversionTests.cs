@@ -361,7 +361,7 @@ public sealed class GreenRetrofitHvacConversionTests
             Assert.IsType<DragonPackagedAirConditioner>(OnlySupply(result));
         DragonHeatPump source = Assert.IsType<DragonHeatPump>(converted.Source);
         Assert.Equal(new EntityId("DedicatedHeatPump_for_SUPPLY-PACKAGED"), source.Id);
-        Assert.Equal("DedicatedHeatPump_for_SUPPLY-PACKAGED", source.Name);
+        Assert.Equal("DedicatedHeatPump0xAUTO0000_for_SUPPLY-PACKAGED", source.Name);
         Assert.Equal(DragonFuel.Electricity, source.Fuel);
         Assert.Equal(1d, source.HeatingCoefficientOfPerformance, 12);
         Assert.Equal(4.75d, source.CoolingCoefficientOfPerformance, 12);
@@ -369,6 +369,24 @@ public sealed class GreenRetrofitHvacConversionTests
         Assert.Equal(18_000d, source.CoolingCapacityWatts);
         Assert.False(converted.CanHeat);
         Assert.True(converted.CanCool);
+
+        IdfDocument idf = result.ToIdfDocument();
+        IdfObject outdoor = Assert.Single(idf[source.IdfObjectType]);
+        Assert.Equal(source.IdfObjectName, outdoor.Name);
+        Assert.Equal(string.Empty, outdoor[20]);
+        IdfObject terminals = Assert.Single(idf["ZoneTerminalUnitList"]);
+        Assert.Equal(source.TerminalUnitListName, terminals.Name);
+        IdfObject terminal = Assert.Single(
+            idf["ZoneHVAC:TerminalUnit:VariableRefrigerantFlow"]);
+        Assert.Contains("HVACOperating:AND:0xAUTO0000:INVERTED", terminal[1]);
+        IdfObject thermostatControl = Assert.Single(
+            idf["Schedule:Constant"],
+            item => item.Name!.StartsWith(
+                "ScheduleTypeForThermostat_for_",
+                StringComparison.Ordinal));
+        Assert.Equal("4", thermostatControl[2]);
+        Assert.Single(idf["ThermostatSetpoint:DualSetpoint"]);
+        Assert.Empty(idf["ThermostatSetpoint:SingleCooling"]);
     }
 
     private static SourceSystem CreateSource(SourceSystemType type, string id)

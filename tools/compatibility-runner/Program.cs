@@ -84,6 +84,8 @@ internal static class Program
         Directory.CreateDirectory(caseRoot);
         string inputPath = ResolveUnder(repositoryRoot, item.InputGrm);
         string weatherPath = ResolveUnder(runtime.RootPath, item.Weather);
+        VerifyPinnedSha256(inputPath, item.InputGrmSha256, item.Id + " GRM");
+        VerifyPinnedSha256(weatherPath, item.WeatherSha256, item.Id + " weather");
         var produced = new List<string>();
 
         GreenRetrofitModel model = GrmReader.ReadFile(inputPath).RequireModel();
@@ -300,6 +302,16 @@ internal static class Program
         return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
     }
 
+    private static void VerifyPinnedSha256(string path, string expected, string identity)
+    {
+        string actual = Sha256File(path);
+        if (!string.Equals(actual, expected, StringComparison.OrdinalIgnoreCase))
+        {
+            throw new InvalidDataException(
+                "Pinned " + identity + " hash mismatch: expected " + expected + ", found " + actual + ".");
+        }
+    }
+
     private static void WriteJson(string path, object value)
     {
         File.WriteAllText(
@@ -329,7 +341,9 @@ internal sealed record CompatibilityTolerances(
 internal sealed record CompatibilityCase(
     string Id,
     string InputGrm,
+    string InputGrmSha256,
     string Weather,
+    string WeatherSha256,
     IReadOnlyList<string> Stages);
 
 internal sealed record CommandLine(

@@ -421,6 +421,7 @@ public sealed class ConvertGreenRetrofitModelComponent : SimpleDragonComponent
                     UseLegacyRectangularFenestration = true,
                     UseLegacySimpleDragonScheduleMetadata = true,
                     UseLegacySimpleDragonHvacTopology = true,
+                    UseLegacySimpleDragonVentilation = true,
                 });
             if (schema is not null)
             {

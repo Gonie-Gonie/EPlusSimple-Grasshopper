@@ -13,7 +13,7 @@ from typing import Any
 
 
 MAX_MISMATCHES = 500
-ADDRESS_PATTERN = re.compile(r"0x(?:AUTO\d{4}|[0-9a-fA-F]{7,16})")
+ADDRESS_PATTERN = re.compile(r"0x(?:AUTO\d{4}|[0-9a-f]{7,16})", re.IGNORECASE)
 IDD_OBJECT_PATTERN = re.compile(r"^\s*([^\s!\\][^,;]*?)\s*,\s*$")
 IDD_FIELD_PATTERN = re.compile(
     r"^\s*((?:[AN]\d+\s*,\s*)*[AN]\d+)\s*([,;])"
@@ -66,6 +66,7 @@ ScheduleCompactProfile = tuple[ScheduleThroughProfile, ...]
 class IddObjectDefinition:
     defaults: tuple[str | None, ...]
     extensible_start: int | None
+    extensible_size: int | None
 
 
 IddSchema = dict[str, IddObjectDefinition]
@@ -312,6 +313,7 @@ def parse_idd(path: Path) -> IddSchema:
         schema[key] = IddObjectDefinition(
             defaults=tuple(current_fields),
             extensible_start=current_extensible_start,
+            extensible_size=current_extensible_size,
         )
         current_name = None
         current_fields = []
@@ -643,6 +645,35 @@ def field_difference(
     return len(differences), differences
 
 
+def trailing_blank_limit(
+    definition: IddObjectDefinition | None,
+    expected_count: int,
+    actual_count: int,
+) -> int:
+    if definition is None:
+        return 0
+    if definition.extensible_start is None:
+        return len(definition.defaults)
+
+    start = definition.extensible_start
+    size = definition.extensible_size
+    if size is None:
+        raise IddParseError("An extensible IDD object has no extensible group size")
+
+    shorter_count = min(expected_count, actual_count)
+    populated = max(0, shorter_count - start)
+    remainder = populated % size
+    if remainder == 0:
+        # Do not erase a wholly blank additional extensible group. Only fixed
+        # fields before the first group may normalize omission to a blank.
+        return start
+
+    # EnergyPlus accepts a final, partially populated extensible group when its
+    # remaining optional fields are omitted. Treat explicit blank padding up to
+    # that same group's boundary as equivalent, but no farther.
+    return shorter_count + (size - remainder)
+
+
 def schedule_compact_difference(
     expected: list[str],
     actual: list[str],
@@ -733,11 +764,6 @@ def compare_idf(
             )
             definition = idd_schema.get(object_type) if idd_schema is not None else None
             defaults = definition.defaults if definition is not None else None
-            trailing_blank_limit = (
-                definition.extensible_start
-                if definition is not None and definition.extensible_start is not None
-                else len(definition.defaults) if definition is not None else 0
-            )
             candidates = [
                 difference_function(
                     left,
@@ -745,7 +771,7 @@ def compare_idf(
                     absolute,
                     relative,
                     defaults,
-                    trailing_blank_limit,
+                    trailing_blank_limit(definition, len(left), len(right)),
                 )
                 for right in unmatched
             ]
@@ -881,10 +907,15 @@ def compare_case(
     csharp_case = csharp_root / case_id
     tolerance = manifest["tolerances"]
     checks: dict[str, Any] = {}
+    pinned_identity = dict(pinned_runtime or {})
+    if case.get("input_grm_sha256") is not None:
+        pinned_identity["grm_sha256"] = str(case["input_grm_sha256"])
+    if case.get("weather_sha256") is not None:
+        pinned_identity["weather_sha256"] = str(case["weather_sha256"])
     checks["input_identity"] = check_input_identity(
         load_json(python_case / "metadata.json"),
         load_json(csharp_case / "metadata.json"),
-        pinned_runtime,
+        pinned_identity,
     )
     checks["authoring_idf"] = compare_idf(
         python_case / "authoring.idf",

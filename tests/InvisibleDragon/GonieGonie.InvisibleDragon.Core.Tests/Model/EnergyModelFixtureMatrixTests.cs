@@ -203,6 +203,65 @@ public sealed class EnergyModelFixtureMatrixTests
         Assert.Contains(document["ZoneHVAC:EquipmentList"], item => item[2] == "ZoneHVAC:EnergyRecoveryVentilator");
     }
 
+    [Fact]
+    public void LegacySimpleDragonVentilationReducesZoneLoadAndPreservesNativeDefault()
+    {
+        Zone template = CreateZone("ZONE-LEGACY-ERV", "Legacy Ventilated");
+        var profile = new ZoneProfile(
+            template.Profile.Id,
+            template.Profile.Name,
+            template.Profile.HeatingSetpoint,
+            template.Profile.CoolingSetpoint,
+            template.Profile.HvacAvailability,
+            Schedule.Constant("Legacy Occupancy", 0.1d));
+        var zone = new Zone(
+            template.Id,
+            template.Name,
+            template.Surfaces,
+            profile);
+        var ventilator = new EnergyRecoveryVentilator(
+            new EntityId("HVAC-LEGACY-ERV"),
+            "Legacy ERV",
+            0.75d,
+            0.65d,
+            0.2d);
+        var model = new EnergyModel(
+            "Legacy ventilation",
+            new[] { zone },
+            ventilationAssignments: new[]
+            {
+                new ZoneVentilationAssignment(zone.Id, ventilator),
+            });
+
+        IdfDocument native = model.ToIdfDocument();
+
+        Assert.Single(native["ZoneHVAC:EnergyRecoveryVentilator"]);
+        Assert.Single(native["HeatExchanger:AirToAir:SensibleAndLatent"]);
+        Assert.Equal(2, native["Fan:OnOff"].Count);
+        Assert.Equal("0.0083", Assert.Single(native["ZoneVentilation:DesignFlowRate"])[6]);
+
+        IdfDocument legacy = model.ToIdfDocument(options: new EnergyModelIdfOptions
+        {
+            UseLegacySimpleDragonVentilation = true,
+        });
+
+        IdfObject reduced = Assert.Single(legacy["ZoneVentilation:DesignFlowRate"]);
+        Assert.Equal(string.Empty, reduced[2]);
+        Assert.Equal("Flow/Person", reduced[3]);
+        Assert.Equal("0.0024900000000000005", reduced[6]);
+        Assert.Equal("Exhaust", reduced[8]);
+        Assert.Equal("166.66666666666663", reduced[9]);
+        Assert.Equal("0.85", reduced[10]);
+        Assert.Empty(legacy["OutdoorAir:Node"]);
+        Assert.Empty(legacy["HeatExchanger:AirToAir:SensibleAndLatent"]);
+        Assert.Empty(legacy["Fan:OnOff"]);
+        Assert.Empty(legacy["ZoneHVAC:EnergyRecoveryVentilator:Controller"]);
+        Assert.Empty(legacy["ZoneHVAC:EnergyRecoveryVentilator"]);
+        Assert.Empty(legacy["ZoneHVAC:EquipmentList"]);
+        Assert.Empty(legacy["HVACTemplate:Zone:IdealLoadsAirSystem"]);
+        Assert.False(new EnergyModelIdfOptions().UseLegacySimpleDragonVentilation);
+    }
+
     [Theory]
     [InlineData(1d)]
     [InlineData(999d)]

@@ -154,6 +154,7 @@ public sealed class GreenRetrofitConversionResult
             UseLegacyRectangularFenestration = true,
             UseLegacySimpleDragonScheduleMetadata = true,
             UseLegacySimpleDragonHvacTopology = true,
+            UseLegacySimpleDragonVentilation = true,
         };
         return RequireEnergyModel().ToIdfDocument(schema, options);
     }
@@ -1353,7 +1354,7 @@ public static class GreenRetrofitConverter
                         supply.Id);
                     var dedicated = new DragonHeatPump(
                         new EntityId("DedicatedHeatPump_for_" + supply.Id.Value),
-                        "DedicatedHeatPump_for_" + supply.Id.Value,
+                        "DedicatedHeatPump0xAUTO0000_for_" + supply.Id.Value,
                         DragonFuel.Electricity,
                         1d,
                         cop,

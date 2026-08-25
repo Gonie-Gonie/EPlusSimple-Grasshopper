@@ -152,6 +152,20 @@ def run_case(
         raise FileNotFoundError(input_path)
     if not weather_path.is_file():
         raise FileNotFoundError(weather_path)
+    input_sha256 = sha256_file(input_path)
+    weather_sha256 = sha256_file(weather_path)
+    expected_input_sha256 = str(case["input_grm_sha256"])
+    expected_weather_sha256 = str(case["weather_sha256"])
+    if input_sha256.casefold() != expected_input_sha256.casefold():
+        raise RuntimeError(
+            f"Pinned {case_id} GRM hash mismatch: expected "
+            f"{expected_input_sha256}, found {input_sha256}."
+        )
+    if weather_sha256.casefold() != expected_weather_sha256.casefold():
+        raise RuntimeError(
+            f"Pinned {case_id} weather hash mismatch: expected "
+            f"{expected_weather_sha256}, found {weather_sha256}."
+        )
 
     model = GreenRetrofitModel.from_grjson(str(input_path))
     idf = model.to_idf()
@@ -195,8 +209,8 @@ def run_case(
         "case_id": case_id,
         "upstream_commit": upstream_commit,
         "inputs": {
-            "grm": {"path": str(case["input_grm"]), "sha256": sha256_file(input_path)},
-            "weather": {"path": str(case["weather"]), "sha256": sha256_file(weather_path)},
+            "grm": {"path": str(case["input_grm"]), "sha256": input_sha256},
+            "weather": {"path": str(case["weather"]), "sha256": weather_sha256},
         },
         "runtime": {
             "energyplus_exe_sha256": sha256_file(runtime_root / "energyplus.exe"),
