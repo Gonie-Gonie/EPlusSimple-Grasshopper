@@ -953,22 +953,22 @@
     "needs_reverification",
     "exception",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
     "exception",
-    "equivalent",
-    "needs_reverification",
-    "out_of_scope",
-    "equivalent",
-    "equivalent",
-    "needs_reverification",
-    "equivalent",
-    "equivalent",
-    "equivalent",
     "exception",
     "equivalent",
     "exception",
     "out_of_scope",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "out_of_scope",
     "exception",
     "exception",
     "exception",
@@ -976,40 +976,40 @@
     "exception",
     "exception",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "equivalent",
-    "equivalent",
-    "equivalent",
+    "exception",
+    "exception",
     "equivalent",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
     "out_of_scope",
-    "needs_reverification",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
     "exception",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "out_of_scope",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
     "exception",
     "needs_reverification",
     "equivalent",
@@ -1243,7 +1243,7 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:7b4cce9297b065038d33e116f7ded5d1e9c8008ffcf191edc58daace411e3e44",
+  "content_sha256": "sha256:ad9a26ae6ebaaa5d226d606233b87520eea035371df9fab3b93e9d676db773e6",
   "details": [
     {
       "evidence": [
@@ -3293,6 +3293,22 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-fixed-length-60d994b2"
+      ],
+      "index": 953,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.FIXED_LENGTH: the exact native 365-day constant against the pinned Python observation."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-schedule-time-tuple",
+        "upstream/symbol-evidence.json#profile-schedule-core-time-tuple-e175d235"
+      ],
+      "exception_id": "immutable-schedule-time-tuple",
+      "index": 954,
+      "rationale": "Trusted cross-language evidence verifies supported Schedule.TIME_TUPLE: the stable read-only 365-item native collection, its complete consecutive 2026-01-01 through 2026-12-31 date sequence, repeat-read identity, and rejection of set/add/remove/remove-at/clear mutations. The comparison directly verifies the upstream shared-list mutation and changed class-wide first date against the native stable 365-date read-only grid, repeat-read identity, exact consecutive 2026 dates, and rejected collection mutations."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#nonfinite-result-schedule-add",
         "upstream/symbol-evidence.json#profile-schedule-add-b1f53fbc"
       ],
@@ -3306,6 +3322,15 @@
       ],
       "index": 956,
       "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.__and__ behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#native-schedule-deepcopy-memo",
+        "upstream/symbol-evidence.json#profile-schedule-core-deepcopy-be9a6493"
+      ],
+      "exception_id": "native-schedule-deepcopy-memo",
+      "index": 957,
+      "rationale": "Trusted cross-language evidence verifies supported Schedule.__deepcopy__: the Python memo and copy observations plus the native parameterless-only API, copied value/type/name and clone identity topology, complete source-graph preservation, and clone isolation from every source RuleSet and DaySchedule. The comparison directly verifies the upstream memo-hit sentinel and ordinary :COPY compact-period clone behavior against the native parameterless-only DeepCopy API, absence of memo/__deepcopy__, exact cloned values, names, types and topology, clone isolation, and an unchanged source graph."
     },
     {
       "evidence": [
@@ -3327,6 +3352,15 @@
       ],
       "index": 960,
       "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.__gt__ behavior across the 329-case Schedule operation oracle, including typed scalar dispatch, exact 365-day values, names, metadata, failures, compact annual boundaries, RuleSet override topology, effective fallback sources, and source immutability."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-deterministic-schedule-construction",
+        "upstream/symbol-evidence.json#profile-schedule-core-init-72d34a65"
+      ],
+      "exception_id": "immutable-deterministic-schedule-construction",
+      "index": 961,
+      "rationale": "Trusted cross-language evidence verifies supported Schedule.__init__: default and supplied-rule construction, name normalization, length/type failures, copied input container, retained caller RuleSet references, and deterministic 365-RuleSet/730-DaySchedule default graph names. The comparison directly verifies upstream supplied-list aliasing, runtime-derived names, and blank-name behavior against native container copying, preserved caller RuleSet identities, deterministic anonymous/indexed names, 365 distinct default RuleSets, 730 distinct default DaySchedules, trimming, and blank-name rejection."
     },
     {
       "evidence": [
@@ -3442,10 +3476,58 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-schedule-apply",
+        "upstream/symbol-evidence.json#profile-schedule-core-apply-cac23120"
+      ],
+      "exception_id": "immutable-schedule-apply",
+      "index": 976,
+      "rationale": "Trusted cross-language evidence verifies supported Schedule.apply: date parsing and inclusive range patterns, returned RuleSet identity runs, immutable source references, structural sharing for unchanged dates, and atomic date/type failures. The comparison directly verifies upstream default mutation/None return, non-inplace deepcopy topology, mixed-type acceptance, and permissive reversed/out-of-calendar ranges against the native distinct immutable result, original result name, unchanged-child structural sharing, exact override identity, fixed-calendar normalization, and atomic type/date validation."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-schedule-astype",
+        "upstream/symbol-evidence.json#profile-schedule-core-astype-3c3e1ad9"
+      ],
+      "exception_id": "immutable-schedule-astype",
+      "index": 977,
+      "rationale": "Trusted cross-language evidence verifies supported Schedule.astype: converted values, names, types, period clone topology, immutable source references, and atomic invalid-value failure; the unsafe Python in-place path is intentionally omitted. The comparison directly verifies the upstream stale-type and partial-mutation inplace defects against the native copied-only conversion, exact values and :COPY names, period-clone topology, recursively consistent types, atomic failure, and unchanged source graph."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-average-e5a1cd49"
+      ],
+      "index": 978,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.average: the exact binary64 average for cancellation, minimum-subnormal, and negative-zero cases."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-clear-c50f5430"
       ],
       "index": 979,
       "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-schedule-clip",
+        "upstream/symbol-evidence.json#profile-schedule-core-clip-a5c9474c"
+      ],
+      "exception_id": "immutable-schedule-clip",
+      "index": 980,
+      "rationale": "Trusted cross-language evidence verifies supported Schedule.clip: supported bound combinations, output names and complete cloned graph topology, immutable source references, inverted-bound atomic failure, public heterogeneous-graph rejection, and atomic valid-bound failure on the exact test-only heterogeneous fixture topology. The comparison directly verifies upstream inplace identity explosion, ignored result name, partial mutation, and sequential reversed-bound behavior against native identity-compact clones, requested/:CLIP fallback names, supported bound results, source immutability, reversed-bound rejection, and atomic failure."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-compactize-47d2d3d2"
+      ],
+      "index": 981,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.compactize: exact identity-based period boundaries, retained caller RuleSet references, and unchanged source references for default, equal-distinct, full-run, and noncontiguous-reuse cases."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-dayschedules-61806264"
+      ],
+      "index": 982,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.dayschedules: the exact 2026 effective-day reference sequence, weekday overrides, fresh read-only native collections, retained caller DaySchedule references, and rejected collection mutations."
     },
     {
       "evidence": [
@@ -3484,10 +3566,44 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-deterministic-schedule-from-compact",
+        "upstream/symbol-evidence.json#profile-schedule-core-from-compact-ce943fca"
+      ],
+      "exception_id": "validated-deterministic-schedule-from-compact",
+      "index": 988,
+      "rationale": "Trusted cross-language evidence verifies supported Schedule.from_compact: period expansion, exact gap RuleSet identity topology and deterministic names, retained caller references, repeatability, and empty/mixed-type/invalid-boundary failures. The comparison directly verifies upstream runtime-derived gap names and permissive range behavior against native deterministic distinct gap identities, preserved caller identities, inclusive later-wins expansion, fixed-year normalization, repeatability, and explicit mixed-type/reversed/leap-day validation."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-schedule-from-constant-child-names",
+        "upstream/symbol-evidence.json#profile-schedule-core-from-constant-921474e6"
+      ],
+      "exception_id": "deterministic-schedule-from-constant-child-names",
+      "index": 989,
+      "rationale": "Trusted cross-language evidence verifies supported Schedule.from_constant: scalar, DaySchedule, RuleSet, null-name, and trimmed-name construction with exact reference and naming topology, plus NaN and unsupported-operand failures. The comparison directly verifies upstream runtime-derived/whitespace-preserving names and the pinned NaN acceptance case against native anonymous/trimmed deterministic names, scalar/bool/DaySchedule/RuleSet annual identity topology, typed-input reference preservation, and NaN/unsupported-operand rejection."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-deterministic-schedule-from-windows",
+        "upstream/symbol-evidence.json#profile-schedule-core-from-windows-95346844"
+      ],
+      "exception_id": "validated-deterministic-schedule-from-windows",
+      "index": 990,
+      "rationale": "Trusted cross-language evidence verifies supported Schedule.from_windows: scalar, DaySchedule, and RuleSet default/window families, exact override/default references and deterministic names, repeatability, foreign-year normalization, and invalid-date/type/value failures. The comparison directly verifies upstream runtime wrapper names, the pinned positive-infinity acceptance case, permissive invalid ranges, and unsupported-operand error defect against native deterministic scalar/DaySchedule/RuleSet wrappers, exact source references, later-window-wins behavior, fixed-year normalization, and positive-infinity/type/range/operand validation."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-insert-9d26ff4a"
       ],
       "index": 991,
       "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-integral-ef9cd611"
+      ],
+      "index": 992,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.integral: the exact binary64 integral for cancellation, minimum-subnormal, and overflow cases."
     },
     {
       "evidence": [
@@ -3540,6 +3656,20 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-max-5b932882"
+      ],
+      "index": 1000,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.max: the exact maximum and signed-zero bits for used-day and unused-holiday cases."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-min-78822362"
+      ],
+      "index": 1001,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.min: the exact minimum and signed-zero bits for used-day and unused-holiday cases."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#nonfinite-result-schedule-normalize-by-max",
         "upstream/symbol-evidence.json#profile-schedule-normalize-by-max-b12e2905"
       ],
@@ -3553,6 +3683,50 @@
       ],
       "index": 1003,
       "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-positive-average-8c464f8c"
+      ],
+      "index": 1004,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.positive_average: the exact binary64 positive average for cancellation, minimum-subnormal, and no-positive cases."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-summary-6ccaf08d"
+      ],
+      "index": 1005,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.summary: the exact ordinal summary strings and period-limit behavior while preserving the complete source reference graph."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-to-idf-object-afa76bbb"
+      ],
+      "index": 1006,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.to_idf_object: the exact object type and declared native contiguous value mapping: non-null primary prefix followed by extension values, while fixture-only primary field labels and the primary/extension boundary are pinned separately."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-type-2819b394"
+      ],
+      "index": 1007,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.type: the exact native Real and Fraction ScheduleType values and IDF object names across the pinned cases."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-schedule-unify-coverage",
+        "upstream/symbol-evidence.json#profile-schedule-core-unify-pair-6f7741b7"
+      ],
+      "exception_id": "validated-schedule-unify-coverage",
+      "index": 1008,
+      "rationale": "Trusted cross-language evidence verifies supported Schedule.unify_compactized_schedules: exact pairwise boundaries and preserved input RuleSet references for full-year, interior/missing coverage, overlaps, and empty inputs. The comparison directly verifies upstream pairwise null RuleSet insertion for one-sided/interior gaps against native atomic gap rejection, while preserving exact valid boundaries, first-overlap behavior, empty results, caller identities, and the separately pinned many-input missing-coverage behavior."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-schedule-core-unify-many-51d9dbc9"
+      ],
+      "index": 1009,
+      "rationale": "Trusted cross-language evidence verifies pinned CPython 3.12.7 and live .NET Schedule.unify_compactized_schedules_many: exact many-input boundaries, preserved input and cross-output RuleSet identity, and zero/one/multiple-input, missing-coverage, and overlap behavior."
     },
     {
       "evidence": [
@@ -3894,9 +4068,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 74,
-      "exception": 40,
-      "needs_reverification": 876,
+      "equivalent": 86,
+      "exception": 50,
+      "needs_reverification": 854,
       "out_of_scope": 252
     },
     "entry_count": 1242

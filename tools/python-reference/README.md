@@ -31,8 +31,13 @@ DaySchedule, RuleSet, and Schedule operation oracles each bind exactly 28
 upstream symbols and preserve Python scalar kinds, reverse-operation names,
 typed failures, tagged non-finite results, nested fallback topology, and source
 immutability. The annual Schedule corpus additionally records all 365 days and
-the exact inclusive compact-period union across asymmetric operands.
-`-Mode Verify`
+the exact inclusive compact-period union across asymmetric operands. A separate
+Schedule core oracle binds the remaining 22 annual lifecycle, factory, metric,
+summary, IDF, and compact-unification symbols through 104 cases. It records
+case-local alias graphs, input postconditions, CPython 3.12 binary64 results,
+runtime-name normalization, partial-mutation defects, read-only day-list and
+contiguous IDF-field native mappings, and the exact 12 equivalent versus 10
+reviewed native-adaptation split. `-Mode Verify`
 compares all generated files byte-for-byte with the reviewed baseline under
 `fixtures/reference/python-0.7.0`. Every reference run also executes the
 fail-closed generator tests under `tests/PythonReference` before producing an

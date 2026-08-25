@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Numerics;
+using System.Text;
+using System.Text.RegularExpressions;
+using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Internal;
 
 namespace GonieGonie.InvisibleDragon.Profile;
@@ -17,6 +21,11 @@ public sealed record SchedulePeriod
         }
 
         RuleSet = ruleSet ?? throw new ArgumentNullException(nameof(ruleSet));
+    }
+
+    public SchedulePeriod(string start, string end, RuleSet ruleSet)
+        : this(Schedule.ParseDate(start, nameof(start)), Schedule.ParseDate(end, nameof(end)), ruleSet)
+    {
     }
 
     public DateTime Start { get; }
@@ -40,11 +49,46 @@ public sealed record ScheduleWindow
         RuleSet = ruleSet ?? throw new ArgumentNullException(nameof(ruleSet));
     }
 
+    public ScheduleWindow(string start, string end, RuleSet ruleSet)
+        : this(Schedule.ParseDate(start, nameof(start)), Schedule.ParseDate(end, nameof(end)), ruleSet)
+    {
+    }
+
     public DateTime Start { get; }
 
     public DateTime End { get; }
 
     public RuleSet RuleSet { get; }
+}
+
+/// <summary>
+/// One date window whose value can be a Python-compatible scalar,
+/// <see cref="DaySchedule"/>, or <see cref="RuleSet"/>.
+/// </summary>
+public sealed record ScheduleValueWindow
+{
+    public ScheduleValueWindow(DateTime start, DateTime end, object value)
+    {
+        Start = Schedule.NormalizeDate(start);
+        End = Schedule.NormalizeDate(end);
+        if (End < Start)
+        {
+            throw new ArgumentException("A schedule window cannot end before it starts.");
+        }
+
+        Value = value ?? throw new ArgumentNullException(nameof(value));
+    }
+
+    public ScheduleValueWindow(string start, string end, object value)
+        : this(Schedule.ParseDate(start, nameof(start)), Schedule.ParseDate(end, nameof(end)), value)
+    {
+    }
+
+    public DateTime Start { get; }
+
+    public DateTime End { get; }
+
+    public object Value { get; }
 }
 
 /// <summary>
@@ -58,10 +102,30 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     private static readonly DateTime FirstDay = new(DefaultYear, 1, 1);
 
-    public Schedule(string name, IEnumerable<RuleSet> ruleSets, ScheduleType? type = null)
+    private static readonly IReadOnlyList<DateTime> AnnualTimeTuple =
+        new ReadOnlyCollection<DateTime>(
+            Enumerable.Range(0, FixedLength)
+                .Select(index => FirstDay.AddDays(index))
+                .ToArray());
+
+    public Schedule(
+        string? name,
+        IEnumerable<RuleSet>? ruleSets = null,
+        ScheduleType? type = null)
     {
-        Name = DomainGuard.RequiredText(name, nameof(name));
-        DomainGuard.NotNull(ruleSets, nameof(ruleSets));
+        Name = NormalizeScheduleName(name);
+
+        if (ruleSets is null)
+        {
+            ScheduleType defaultType = type ?? ScheduleType.Real;
+            RuleSets = new ReadOnlyCollection<RuleSet>(
+                Enumerable.Range(0, FixedLength)
+                    .Select(index => CreateZeroRuleSet(Name, index, defaultType))
+                    .ToArray());
+            Type = defaultType;
+            return;
+        }
+
         RuleSet[] copy = ruleSets.ToArray();
         if (copy.Length != FixedLength)
         {
@@ -88,6 +152,11 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public IReadOnlyList<RuleSet> RuleSets { get; }
 
+    /// <summary>
+    /// Gets the pinned non-leap-year dates corresponding to the 365 schedule slots.
+    /// </summary>
+    public static IReadOnlyList<DateTime> TimeTuple => AnnualTimeTuple;
+
     public int Count => FixedLength;
 
     public RuleSet this[int index] => RuleSets[index];
@@ -98,8 +167,19 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
 
     public double Maximum => RuleSets.Max(ruleSet => ruleSet.Maximum);
 
-    public double IntegralHours => Enumerable.Range(0, FixedLength)
-        .Sum(index => RuleSets[index].GetDaySchedule(FirstDay.AddDays(index).DayOfWeek).IntegralHours);
+    public IReadOnlyList<DaySchedule> DaySchedules =>
+        new ReadOnlyCollection<DaySchedule>(
+            Enumerable.Range(0, FixedLength)
+                .Select(index => RuleSets[index].GetDaySchedule(AnnualTimeTuple[index].DayOfWeek))
+                .ToArray());
+
+    public double IntegralHours => Python312FloatSum(
+        Enumerable.Range(0, FixedLength)
+            .Select(index => RuleSets[index]
+                .GetDaySchedule(AnnualTimeTuple[index].DayOfWeek)
+                .IntegralHours));
+
+    public double Integral => IntegralHours;
 
     // Preserve the pinned Python 0.7.0 contract: this is the mean daily
     // integral, despite the historical property name suggesting a value mean.
@@ -109,54 +189,100 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
     {
         get
         {
-            double total = 0;
-            int count = 0;
-            for (int index = 0; index < FixedLength; index++)
-            {
-                DaySchedule daySchedule = RuleSets[index].GetDaySchedule(FirstDay.AddDays(index).DayOfWeek);
-                foreach (double value in daySchedule)
-                {
-                    if (value > 0)
-                    {
-                        total += value;
-                        count++;
-                    }
-                }
-            }
-
-            return count == 0 ? 0 : total / count;
+            double[] positiveValues = DaySchedules
+                .SelectMany(daySchedule => daySchedule)
+                .Where(value => value > 0)
+                .ToArray();
+            return positiveValues.Length == 0
+                ? 0
+                : Python312FloatSum(positiveValues) / positiveValues.Length;
         }
     }
 
-    public static Schedule Constant(string name, double value, ScheduleType type = ScheduleType.Real)
+    public static Schedule Constant(string? name, double value, ScheduleType type = ScheduleType.Real)
     {
-        RuleSet ruleSet = RuleSet.Constant($"{name}:ruleset", value, type);
-        return new Schedule(name, Enumerable.Repeat(ruleSet, FixedLength), type);
+        return FromConstant(name, value, type);
     }
 
-    public static Schedule Constant<T>(string name, T value, ScheduleType type = ScheduleType.Real)
+    public static Schedule Constant<T>(string? name, T value, ScheduleType type = ScheduleType.Real)
     {
-        RuleSet ruleSet = RuleSet.Constant($"{name}:ruleset", value, type);
-        return new Schedule(name, Enumerable.Repeat(ruleSet, FixedLength), type);
+        return FromConstant(name, value, type);
     }
 
-    public static Schedule FromCompact(string name, IEnumerable<SchedulePeriod> periods)
+    public static Schedule Constant(
+        string? name,
+        DaySchedule value,
+        ScheduleType type = ScheduleType.Real)
+    {
+        return FromConstant(name, value, type);
+    }
+
+    public static Schedule Constant(
+        string? name,
+        RuleSet value,
+        ScheduleType type = ScheduleType.Real)
+    {
+        return FromConstant(name, value, type);
+    }
+
+    public static Schedule FromConstant<T>(
+        string? name,
+        T value,
+        ScheduleType type = ScheduleType.Real)
+    {
+        if (value is null)
+        {
+            throw new ArgumentNullException(nameof(value));
+        }
+
+        return FromConstantObject(name, value, type, nameof(value));
+    }
+
+    public static Schedule FromConstant(
+        string? name,
+        DaySchedule value,
+        ScheduleType type = ScheduleType.Real)
+    {
+        DomainGuard.NotNull(value, nameof(value));
+        string factoryName = NormalizeScheduleName(name);
+        RuleSet ruleSet = RuleSet.FromDaySchedule($"{factoryName}:ruleset", value);
+        return new Schedule(factoryName, Enumerable.Repeat(ruleSet, FixedLength), value.Type);
+    }
+
+    public static Schedule FromConstant(
+        string? name,
+        RuleSet value,
+        ScheduleType type = ScheduleType.Real)
+    {
+        DomainGuard.NotNull(value, nameof(value));
+        return new Schedule(
+            NormalizeScheduleName(name),
+            Enumerable.Repeat(value, FixedLength),
+            value.Type);
+    }
+
+    public static Schedule FromCompact(string? name, IEnumerable<SchedulePeriod> periods)
     {
         DomainGuard.NotNull(periods, nameof(periods));
+        string scheduleName = NormalizeScheduleName(name);
         SchedulePeriod[] copy = periods.ToArray();
         if (copy.Length == 0)
         {
             throw new ArgumentException("At least one annual schedule period is required.", nameof(periods));
         }
 
-        ScheduleType type = copy[0].RuleSet.Type;
-        if (copy.Any(period => period is null || period.RuleSet.Type != type))
+        if (copy.Any(period => period is null))
         {
-            throw new ArgumentException("Annual schedule periods cannot be null or mix schedule types.", nameof(periods));
+            throw new ArgumentException("Annual schedule periods cannot contain null.", nameof(periods));
         }
 
-        RuleSet zero = RuleSet.Constant($"{name}:default", 0, type);
-        RuleSet[] values = Enumerable.Repeat(zero, FixedLength).ToArray();
+        ScheduleType type = copy[0].RuleSet.Type;
+        if (copy.Any(period => period.RuleSet.Type != type))
+        {
+            throw new ArgumentException("Annual schedule periods cannot mix schedule types.", nameof(periods));
+        }
+
+        RuleSet?[] values = new RuleSet?[FixedLength];
         foreach (SchedulePeriod period in copy)
         {
             int start = (period.Start - FirstDay).Days;
@@ -167,11 +293,16 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
             }
         }
 
-        return new Schedule(name, values, type);
+        for (int index = 0; index < values.Length; index++)
+        {
+            values[index] ??= CreateZeroRuleSet(scheduleName, index, type);
+        }
+
+        return new Schedule(scheduleName, values.Select(value => value!).ToArray(), type);
     }
 
     public static Schedule FromWindows(
-        string name,
+        string? name,
         RuleSet defaultRuleSet,
         IEnumerable<ScheduleWindow> windows)
     {
@@ -192,7 +323,36 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
             values[index] = match?.RuleSet ?? defaultRuleSet;
         }
 
-        return new Schedule(name, values, defaultRuleSet.Type);
+        return new Schedule(NormalizeScheduleName(name), values, defaultRuleSet.Type);
+    }
+
+    public static Schedule FromWindows(
+        string? name,
+        object defaultValue,
+        IEnumerable<ScheduleValueWindow> windows,
+        ScheduleType? type = null)
+    {
+        DomainGuard.NotNull(defaultValue, nameof(defaultValue));
+        DomainGuard.NotNull(windows, nameof(windows));
+        ScheduleValueWindow[] copy = windows.ToArray();
+        if (copy.Any(window => window is null))
+        {
+            throw new ArgumentException("Schedule windows cannot contain null.", nameof(windows));
+        }
+
+        Schedule schedule = FromConstantObject(name, defaultValue, type, "defaultValue");
+        for (int index = 0; index < copy.Length; index++)
+        {
+            ScheduleValueWindow window = copy[index];
+            RuleSet ruleSet = CoerceRuleSet(
+                window.Value,
+                schedule.Type,
+                $"{schedule.Name}:window:{index + 1:D3}",
+                nameof(windows));
+            schedule = schedule.Apply(ruleSet, window.Start, window.End);
+        }
+
+        return schedule;
     }
 
     public Schedule Apply(RuleSet ruleSet, DateTime start, DateTime end, string? name = null)
@@ -219,9 +379,28 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
         return new Schedule(name ?? Name, copy, Type);
     }
 
+    public Schedule Apply(RuleSet ruleSet, string start, string end, string? name = null)
+    {
+        return Apply(
+            ruleSet,
+            ParseDate(start, nameof(start)),
+            ParseDate(end, nameof(end)),
+            name);
+    }
+
     public Schedule AsType(ScheduleType type)
     {
-        return MapCompact(ruleSet => ruleSet.AsType(type), Name);
+        return MapCompact(ruleSet => DeepCopyRuleSet(ruleSet).AsType(type), Name);
+    }
+
+    public Schedule DeepCopy()
+    {
+        return FromCompact(
+            $"{Name}:COPY",
+            Compactize().Select(period => new SchedulePeriod(
+                period.Start,
+                period.End,
+                DeepCopyRuleSet(period.RuleSet))));
     }
 
     public Schedule Add(Schedule other, string? name = null)
@@ -558,7 +737,7 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
     {
         return MapCompact(
             ruleSet => ruleSet.Clip(minimum, maximum),
-            name ?? $"{Name}:CLIP");
+            string.IsNullOrEmpty(name) ? $"{Name}:CLIP" : name!);
     }
 
     public IReadOnlyList<SchedulePeriod> Compactize()
@@ -649,6 +828,65 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
             results
                 .Select(result => (IReadOnlyList<SchedulePeriod>)new ReadOnlyCollection<SchedulePeriod>(result))
                 .ToArray());
+    }
+
+    public IdfObject ToIdfObject()
+    {
+        var fields = new List<string?>
+        {
+            Name,
+            Type.IdfObjectName(),
+        };
+
+        foreach (SchedulePeriod period in Compactize())
+        {
+            fields.Add($"Through: {period.End.Month}/{period.End.Day}");
+            AddRuleSetIdfFields(fields, period.RuleSet);
+        }
+
+        return new IdfObject("Schedule:Compact", fields);
+    }
+
+    public string Summary(int maxPeriods = 8)
+    {
+        IReadOnlyList<SchedulePeriod> compact = Compactize();
+        int uniqueRuleSets = RuleSets
+            .Select(ruleSet => ruleSet.Name)
+            .Distinct(StringComparer.Ordinal)
+            .Count();
+        var lines = new List<string>
+        {
+            $"Schedule {PythonRepr(Name)} [type={Type.CanonicalName()}, days={FixedLength}]",
+            $"  range: min={FormatPythonGeneral(Minimum)}, max={FormatPythonGeneral(Maximum)}, "
+                + $"periods={compact.Count}, unique_rulesets={uniqueRuleSets}",
+        };
+
+        int previewCount = maxPeriods >= 0
+            ? Math.Min(maxPeriods, compact.Count)
+            : Math.Max(compact.Count + maxPeriods, 0);
+        for (int index = 0; index < previewCount; index++)
+        {
+            SchedulePeriod period = compact[index];
+            lines.Add(
+                $"  {period.Start.Month:00}/{period.Start.Day:00} ~ "
+                + $"{period.End.Month:00}/{period.End.Day:00}: "
+                + $"{PythonRepr(period.RuleSet.Name)} "
+                + $"(min={FormatPythonGeneral(period.RuleSet.Minimum)}, "
+                + $"max={FormatPythonGeneral(period.RuleSet.Maximum)})");
+        }
+
+        if (compact.Count > maxPeriods)
+        {
+            long hiddenCount = (long)compact.Count - maxPeriods;
+            lines.Add($"  ... ({hiddenCount} more periods)");
+        }
+
+        return string.Join("\n", lines);
+    }
+
+    public override string ToString()
+    {
+        return Summary();
     }
 
     public static Schedule operator *(Schedule left, Schedule right)
@@ -1002,6 +1240,480 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
             name ?? $"{Name}:GE:{scalarName}");
     }
 
+    private static Schedule FromConstantObject(
+        string? name,
+        object value,
+        ScheduleType? type,
+        string parameterName)
+    {
+        string scheduleName = NormalizeScheduleName(name);
+        if (value is RuleSet ruleSet)
+        {
+            return FromConstant(scheduleName, ruleSet, type ?? ruleSet.Type);
+        }
+
+        if (value is DaySchedule daySchedule)
+        {
+            return FromConstant(scheduleName, daySchedule, type ?? daySchedule.Type);
+        }
+
+        ScheduleType resultType = type ?? ScheduleType.Real;
+        string ruleSetName = $"{scheduleName}:ruleset";
+        RuleSet scalarRuleSet = CreateScalarRuleSetFromObject(
+            ruleSetName,
+            value,
+            resultType,
+            parameterName);
+        return new Schedule(
+            scheduleName,
+            Enumerable.Repeat(scalarRuleSet, FixedLength),
+            resultType);
+    }
+
+    private static string NormalizeScheduleName(string? name)
+    {
+        return name is null
+            ? "anonymous"
+            : DomainGuard.RequiredText(name, nameof(name));
+    }
+
+    private static RuleSet CoerceRuleSet(
+        object value,
+        ScheduleType type,
+        string name,
+        string parameterName)
+    {
+        if (value is RuleSet ruleSet)
+        {
+            if (ruleSet.Type != type)
+            {
+                throw new ArgumentException(
+                    $"RuleSet type mismatch: expected {type.CanonicalName()}, got {ruleSet.Type.CanonicalName()}.",
+                    parameterName);
+            }
+
+            return ruleSet;
+        }
+
+        if (value is DaySchedule daySchedule)
+        {
+            if (daySchedule.Type != type)
+            {
+                throw new ArgumentException(
+                    $"DaySchedule type mismatch: expected {type.CanonicalName()}, got {daySchedule.Type.CanonicalName()}.",
+                    parameterName);
+            }
+
+            return RuleSet.FromDaySchedule(name, daySchedule);
+        }
+
+        return CreateScalarRuleSetFromObject(name, value, type, parameterName);
+    }
+
+    private static RuleSet CreateScalarRuleSetFromObject(
+        string name,
+        object value,
+        ScheduleType type,
+        string parameterName)
+    {
+        return value switch
+        {
+            bool scalar => CreateScalarRuleSet(name, scalar, type),
+            sbyte scalar => CreateScalarRuleSet(name, scalar, type),
+            byte scalar => CreateScalarRuleSet(name, scalar, type),
+            short scalar => CreateScalarRuleSet(name, scalar, type),
+            ushort scalar => CreateScalarRuleSet(name, scalar, type),
+            int scalar => CreateScalarRuleSet(name, scalar, type),
+            uint scalar => CreateScalarRuleSet(name, scalar, type),
+            long scalar => CreateScalarRuleSet(name, scalar, type),
+            ulong scalar => CreateScalarRuleSet(name, scalar, type),
+            BigInteger scalar => CreateScalarRuleSet(name, scalar, type),
+            float scalar => CreateScalarRuleSet(name, scalar, type),
+            double scalar => CreateScalarRuleSet(name, scalar, type),
+            _ => throw new ArgumentException(
+                "A schedule value must be a Python-compatible bool, integer, float, DaySchedule, or RuleSet.",
+                parameterName),
+        };
+    }
+
+    private static RuleSet CreateScalarRuleSet<T>(
+        string name,
+        T value,
+        ScheduleType type)
+    {
+        DaySchedule weekdays = DaySchedule.ConstantFromPythonScalar(
+            $"{name}:day",
+            value,
+            type);
+        DaySchedule weekends = DaySchedule.ConstantFromPythonScalar(
+            $"{name}:day",
+            value,
+            type);
+        return new RuleSet(name, weekdays, weekends, type: type);
+    }
+
+    private static RuleSet CreateZeroRuleSet(
+        string scheduleName,
+        int index,
+        ScheduleType type)
+    {
+        return CreateScalarRuleSet(
+            $"{scheduleName}:default:{index + 1:D3}",
+            0,
+            type);
+    }
+
+    private static RuleSet DeepCopyRuleSet(RuleSet source)
+    {
+        return new RuleSet(
+            $"{source.Name}:COPY",
+            DeepCopyDaySchedule(source.Weekdays),
+            DeepCopyDaySchedule(source.Weekends),
+            source.Monday is null ? null : DeepCopyDaySchedule(source.Monday),
+            source.Tuesday is null ? null : DeepCopyDaySchedule(source.Tuesday),
+            source.Wednesday is null ? null : DeepCopyDaySchedule(source.Wednesday),
+            source.Thursday is null ? null : DeepCopyDaySchedule(source.Thursday),
+            source.Friday is null ? null : DeepCopyDaySchedule(source.Friday),
+            source.Saturday is null ? null : DeepCopyDaySchedule(source.Saturday),
+            source.Sunday is null ? null : DeepCopyDaySchedule(source.Sunday),
+            source.Holiday is null ? null : DeepCopyDaySchedule(source.Holiday),
+            source.Type);
+    }
+
+    private static DaySchedule DeepCopyDaySchedule(DaySchedule source)
+    {
+        return new DaySchedule(
+            $"{source.Name}:COPY",
+            source.Values,
+            source.Type,
+            source.Unit);
+    }
+
+    private static double Python312FloatSum(IEnumerable<double> values)
+    {
+        double result = 0;
+        double compensation = 0;
+        foreach (double value in values)
+        {
+            double total = result + value;
+            compensation += Math.Abs(result) >= Math.Abs(value)
+                ? (result - total) + value
+                : (value - total) + result;
+            result = total;
+        }
+
+        if (compensation != 0
+            && !double.IsNaN(compensation)
+            && !double.IsInfinity(compensation))
+        {
+            result += compensation;
+        }
+
+        return result;
+    }
+
+    private static void AddRuleSetIdfFields(List<string?> fields, RuleSet ruleSet)
+    {
+        (string Name, DaySchedule? Override)[] weekdays =
+        {
+            ("Monday", ruleSet.Monday),
+            ("Tuesday", ruleSet.Tuesday),
+            ("Wednesday", ruleSet.Wednesday),
+            ("Thursday", ruleSet.Thursday),
+            ("Friday", ruleSet.Friday),
+        };
+        if (weekdays.Any(item => item.Override is not null))
+        {
+            foreach ((string selection, DaySchedule? dayOverride) in weekdays)
+            {
+                AddDayIdfFields(fields, selection, dayOverride ?? ruleSet.Weekdays);
+            }
+        }
+        else
+        {
+            AddDayIdfFields(fields, "Weekdays", ruleSet.Weekdays);
+        }
+
+        (string Name, DaySchedule? Override)[] weekends =
+        {
+            ("Saturday", ruleSet.Saturday),
+            ("Sunday", ruleSet.Sunday),
+        };
+        if (weekends.Any(item => item.Override is not null))
+        {
+            foreach ((string selection, DaySchedule? dayOverride) in weekends)
+            {
+                AddDayIdfFields(fields, selection, dayOverride ?? ruleSet.Weekends);
+            }
+        }
+        else
+        {
+            AddDayIdfFields(fields, "Weekends", ruleSet.Weekends);
+        }
+
+        if (ruleSet.Holiday is not null)
+        {
+            AddDayIdfFields(fields, "Holiday", ruleSet.Holiday);
+        }
+
+        AddDayIdfFields(fields, "AllOtherDays", ruleSet.Weekends);
+    }
+
+    private static void AddDayIdfFields(
+        List<string?> fields,
+        string selection,
+        DaySchedule daySchedule)
+    {
+        fields.Add($"For: {selection}");
+        foreach (DayScheduleSegment segment in daySchedule.Compactize())
+        {
+            string until = segment.Until == TimeSpan.FromHours(24)
+                ? "24:00"
+                : $"{(int)segment.Until.TotalHours:00}:{segment.Until.Minutes:00}";
+            fields.Add($"Until: {until}");
+            fields.Add(daySchedule.Type == ScheduleType.OnOff
+                ? ((int)segment.Value).ToString(CultureInfo.InvariantCulture)
+                : DaySchedule.FormatPythonScalar(segment.Value, "IDF serialization"));
+        }
+    }
+
+    private static string FormatPythonGeneral(double value)
+    {
+        const int precision = 4;
+        long signedBits = BitConverter.DoubleToInt64Bits(value);
+        bool isNegative = signedBits < 0;
+        ulong bits = unchecked((ulong)signedBits);
+        ulong magnitudeBits = bits & 0x7fff_ffff_ffff_ffffUL;
+        if (magnitudeBits == 0)
+        {
+            return isNegative ? "-0" : "0";
+        }
+
+        int exponentBits = (int)((magnitudeBits >> 52) & 0x7ffUL);
+        if (exponentBits == 0x7ff)
+        {
+            if ((magnitudeBits & 0x000f_ffff_ffff_ffffUL) != 0)
+            {
+                return "nan";
+            }
+
+            return isNegative ? "-inf" : "inf";
+        }
+
+        ulong fractionBits = magnitudeBits & 0x000f_ffff_ffff_ffffUL;
+        ulong significand = exponentBits == 0
+            ? fractionBits
+            : fractionBits | 0x0010_0000_0000_0000UL;
+        int binaryExponent = exponentBits == 0
+            ? -1074
+            : exponentBits - 1023 - 52;
+        BigInteger numerator = new(significand);
+        BigInteger denominator = BigInteger.One;
+        if (binaryExponent >= 0)
+        {
+            numerator <<= binaryExponent;
+        }
+        else
+        {
+            denominator <<= -binaryExponent;
+        }
+
+        int decimalExponent = (int)Math.Floor(Math.Log10(Math.Abs(value)));
+        while (CompareRationalToPowerOfTen(numerator, denominator, decimalExponent) < 0)
+        {
+            decimalExponent--;
+        }
+
+        while (CompareRationalToPowerOfTen(numerator, denominator, decimalExponent + 1) >= 0)
+        {
+            decimalExponent++;
+        }
+
+        int decimalScale = precision - 1 - decimalExponent;
+        BigInteger scaledNumerator = numerator;
+        BigInteger scaledDenominator = denominator;
+        if (decimalScale >= 0)
+        {
+            scaledNumerator *= BigInteger.Pow(10, decimalScale);
+        }
+        else
+        {
+            scaledDenominator *= BigInteger.Pow(10, -decimalScale);
+        }
+
+        BigInteger rounded = BigInteger.DivRem(
+            scaledNumerator,
+            scaledDenominator,
+            out BigInteger remainder);
+        int midpointComparison = (remainder << 1).CompareTo(scaledDenominator);
+        if (midpointComparison > 0 || (midpointComparison == 0 && !rounded.IsEven))
+        {
+            rounded += BigInteger.One;
+        }
+
+        BigInteger overflowThreshold = BigInteger.Pow(10, precision);
+        if (rounded == overflowThreshold)
+        {
+            rounded /= 10;
+            decimalExponent++;
+        }
+
+        string digits = rounded.ToString(CultureInfo.InvariantCulture);
+        string formatted;
+        if (decimalExponent < -4 || decimalExponent >= precision)
+        {
+            string fractionalDigits = digits.Remove(0, 1).TrimEnd('0');
+            string mantissa = fractionalDigits.Length == 0
+                ? digits[0].ToString()
+                : $"{digits[0]}.{fractionalDigits}";
+            string exponentSign = decimalExponent >= 0 ? "+" : "-";
+            formatted = $"{mantissa}e{exponentSign}{Math.Abs(decimalExponent):D2}";
+        }
+        else
+        {
+            int decimalPosition = decimalExponent + 1;
+            if (decimalPosition <= 0)
+            {
+                formatted = $"0.{new string('0', -decimalPosition)}{digits}";
+            }
+            else if (decimalPosition >= digits.Length)
+            {
+                formatted = digits + new string('0', decimalPosition - digits.Length);
+            }
+            else
+            {
+                formatted = digits.Insert(decimalPosition, ".");
+            }
+
+            if (ContainsCharacter(formatted, '.'))
+            {
+                formatted = formatted.TrimEnd('0').TrimEnd('.');
+            }
+        }
+
+        return isNegative ? $"-{formatted}" : formatted;
+    }
+
+    private static int CompareRationalToPowerOfTen(
+        BigInteger numerator,
+        BigInteger denominator,
+        int exponent)
+    {
+        return exponent >= 0
+            ? numerator.CompareTo(denominator * BigInteger.Pow(10, exponent))
+            : (numerator * BigInteger.Pow(10, -exponent)).CompareTo(denominator);
+    }
+
+    private static string PythonRepr(string value)
+    {
+        char quote = ContainsCharacter(value, '\'')
+            && !ContainsCharacter(value, '"')
+                ? '"'
+                : '\'';
+        var result = new StringBuilder(value.Length + 2);
+        result.Append(quote);
+        for (int index = 0; index < value.Length; index++)
+        {
+            char character = value[index];
+            switch (character)
+            {
+                case '\\': result.Append("\\\\"); break;
+                case '\n': result.Append("\\n"); break;
+                case '\r': result.Append("\\r"); break;
+                case '\t': result.Append("\\t"); break;
+                case '\b': result.Append("\\x08"); break;
+                case '\f': result.Append("\\x0c"); break;
+                default:
+                    if (character == quote)
+                    {
+                        result.Append('\\').Append(character);
+                    }
+                    else if (char.IsHighSurrogate(character)
+                        && index + 1 < value.Length
+                        && char.IsLowSurrogate(value[index + 1]))
+                    {
+                        int codePoint = char.ConvertToUtf32(character, value[index + 1]);
+                        UnicodeCategory category = CharUnicodeInfo.GetUnicodeCategory(value, index);
+                        if (IsPythonPrintable(codePoint, category))
+                        {
+                            result.Append(character).Append(value[index + 1]);
+                        }
+                        else
+                        {
+                            AppendPythonUnicodeEscape(result, codePoint);
+                        }
+
+                        index++;
+                    }
+                    else
+                    {
+                        UnicodeCategory category = char.GetUnicodeCategory(character);
+                        if (IsPythonPrintable(character, category))
+                        {
+                            result.Append(character);
+                        }
+                        else
+                        {
+                            AppendPythonUnicodeEscape(result, character);
+                        }
+                    }
+
+                    break;
+            }
+        }
+
+        return result.Append(quote).ToString();
+    }
+
+    private static bool IsPythonPrintable(int codePoint, UnicodeCategory category)
+    {
+        if (codePoint == 0x20)
+        {
+            return true;
+        }
+
+        return category is not UnicodeCategory.Control
+            and not UnicodeCategory.Format
+            and not UnicodeCategory.Surrogate
+            and not UnicodeCategory.PrivateUse
+            and not UnicodeCategory.OtherNotAssigned
+            and not UnicodeCategory.SpaceSeparator
+            and not UnicodeCategory.LineSeparator
+            and not UnicodeCategory.ParagraphSeparator;
+    }
+
+    private static void AppendPythonUnicodeEscape(StringBuilder result, int codePoint)
+    {
+        if (codePoint <= byte.MaxValue)
+        {
+            result.Append("\\x")
+                .Append(codePoint.ToString("x2", CultureInfo.InvariantCulture));
+        }
+        else if (codePoint <= char.MaxValue)
+        {
+            result.Append("\\u")
+                .Append(codePoint.ToString("x4", CultureInfo.InvariantCulture));
+        }
+        else
+        {
+            result.Append("\\U")
+                .Append(codePoint.ToString("x8", CultureInfo.InvariantCulture));
+        }
+    }
+
+    private static bool ContainsCharacter(string value, char target)
+    {
+        foreach (char character in value)
+        {
+            if (character == target)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private static RuleSet FindRuleSet(IReadOnlyList<SchedulePeriod> schedule, DateTime date)
     {
         foreach (SchedulePeriod period in schedule)
@@ -1020,6 +1732,59 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
+    }
+
+    internal static DateTime ParseDate(string value, string parameterName)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException("A schedule date is required.", parameterName);
+        }
+
+        if (Regex.IsMatch(value, @"^\d{8}$", RegexOptions.CultureInvariant))
+        {
+            return new DateTime(
+                ParseDigits(value, 0, 4),
+                ParseDigits(value, 4, 2),
+                ParseDigits(value, 6, 2));
+        }
+
+        if (Regex.IsMatch(value, @"^\d{4}$", RegexOptions.CultureInvariant))
+        {
+            return new DateTime(
+                DefaultYear,
+                ParseDigits(value, 0, 2),
+                ParseDigits(value, 2, 2));
+        }
+
+        int[] parts = Regex.Matches(value, @"\d+", RegexOptions.CultureInvariant)
+            .Cast<Match>()
+            .Select(match => int.Parse(match.Value, CultureInfo.InvariantCulture))
+            .ToArray();
+        if (parts.Length == 2)
+        {
+            return new DateTime(DefaultYear, parts[0], parts[1]);
+        }
+
+        if (parts.Length == 3)
+        {
+            return new DateTime(parts[0], parts[1], parts[2]);
+        }
+
+        throw new ArgumentException(
+            $"The schedule date {PythonRepr(value)} is not supported.",
+            parameterName);
+    }
+
+    private static int ParseDigits(string value, int start, int length)
+    {
+        int result = 0;
+        for (int index = start; index < start + length; index++)
+        {
+            result = checked((result * 10) + (value[index] - '0'));
+        }
+
+        return result;
     }
 
     internal static DateTime NormalizeDate(DateTime date)

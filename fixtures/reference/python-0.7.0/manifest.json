@@ -68,6 +68,11 @@
       "sha256": "5575c9d2946b99afd474220429eef5e5531931a36e26eb55a1e3d4e93548fdc6"
     },
     {
+      "path": "schedule-core-oracle.json",
+      "bytes": 15661618,
+      "sha256": "9810d81206c066ef05f6d95f2dc1e7c66a84e8dbb939efbe76a63d8e4b9717bb"
+    },
+    {
       "path": "schedule-operations-oracle.json",
       "bytes": 10190654,
       "sha256": "0036b17a367317e3898a16b57d39727035f9df30c7fb8a5c6a9cfaa49263c9a0"

@@ -87,11 +87,138 @@
     symbol: Schedule.apply
     symbol_hash: sha256:cac23120005e2cac2c4729c70471a7796840160338fff91e1c49e9670f763ba9
   difference:
-    upstream: mutates the schedule by default, permits a mixed ScheduleType assignment, and treats an end date before the start date as an empty no-op range
-    dotnet: returns an immutable updated schedule, requires the assigned RuleSet type to match, and rejects a reversed date range
+    upstream: mutates the schedule by default and returns None; its non-inplace branch deep-copies the Schedule and unchanged RuleSets with :COPY names before inserting the caller RuleSet reference, permits a mixed ScheduleType assignment, and treats reversed or out-of-calendar ranges as empty no-op ranges
+    dotnet: always returns an immutable structurally shared schedule whose default result name is the original Schedule name and whose unchanged periods preserve the original RuleSet references, requires the assigned RuleSet type to match, preserves that RuleSet reference in the returned range, rejects a reversed range, and maps native DateTime values onto the fixed 2026 annual calendar
   effect:
-    engineering_result: valid same-type date ranges produce the same later-assignment-wins schedule values and Schedule:Compact output
-    api_contract: mutation and invalid-input behavior intentionally follow the native immutable and strongly typed C# product interface
+    engineering_result: valid same-type date ranges produce the same later-assignment-wins values, type, period boundaries, and assigned RuleSet identity; functional-result names and unchanged child identities intentionally follow structural sharing instead of Python deepcopy
+    api_contract: mutation, return value, copy topology, naming, and invalid-input behavior intentionally follow the native immutable, fixed-calendar, and strongly typed C# product interface
+    compatibility_evidence: valid DateTime and supported Python-string date ranges, upstream inplace and non-inplace topology, C# source immutability and structural sharing, assigned RuleSet identity, type validation, fixed-calendar normalization, and reversed-range behavior remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-schedule-time-tuple
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.TIME_TUPLE
+    symbol_hash: sha256:e175d235cac1a4c1ad2f2f06b27f6df1ee8dfcafa93bcba1482d4c9fc3a823a3
+  difference:
+    upstream: exposes one shared mutable list containing the 365 consecutive 2026 date objects, so callers can corrupt the class-wide calendar
+    dotnet: exposes the same ordered 365-day calendar as an IReadOnlyList whose contents cannot be replaced through the public API
+  effect:
+    engineering_result: every supported calendar lookup observes the same non-leap 2026 date sequence while accidental process-wide calendar mutation is prevented
+    api_contract: mutation of a class constant is intentionally excluded by the native read-only C# collection contract
+    compatibility_evidence: exact count, endpoints, consecutiveness, uniqueness, weekday mapping, repeat-read identity, and read-only behavior remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: native-schedule-deepcopy-memo
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.__deepcopy__
+    symbol_hash: sha256:be9a64938799225409f7b10083e2fcae187eb2bae01151a68f21305ffd240a7d
+  difference:
+    upstream: participates in Python's copy protocol, returns an existing caller-provided memo entry when present, otherwise appends :COPY names and independently deep-copies each identity-compactized RuleSet period without registering itself inside __deepcopy__
+    dotnet: provides an explicit DeepCopy method with the same copied values, names, compact-period sharing, and noncontiguous-alias splitting but has no Python copy-protocol or memo surface
+  effect:
+    engineering_result: copied schedules retain the same values, type, period boundaries, copied child names, and isolation from their source
+    api_contract: Python protocol dispatch and caller-controlled memo short-circuiting are replaced by the idiomatic explicit CLR copy operation
+    compatibility_evidence: the exact upstream memo-hit short-circuit, the native absence of a memo surface, source isolation, copied names, within-period sharing, noncontiguous alias splitting, override topology, and value/type preservation remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-deterministic-schedule-construction
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.__init__
+    symbol_hash: sha256:72d34a65bd7c9b82f9962da98b6ec5e1496459918de625fb8e2126c9832ddf06
+  difference:
+    upstream: aliases a supplied mutable 365-item list directly and derives omitted Schedule and default child names from runtime object addresses while preserving empty or whitespace names
+    dotnet: copies the supplied sequence into a read-only collection, preserves its RuleSet references, uses stable anonymous and indexed default-child names, trims surrounding whitespace, and requires a non-empty product name when a name is supplied
+  effect:
+    engineering_result: valid explicit constructions and default zero constructions retain the same 365 values, type, per-slot RuleSet identity topology, and 730 distinct default DaySchedule instances while post-construction list mutation and nondeterministic IDF names are prevented
+    api_contract: caller-container aliasing, runtime-address names, and blank product identifiers are intentionally replaced by immutable deterministic C# model construction
+    compatibility_evidence: explicit and omitted inputs, type inference and rejection, 365-slot validation, preserved RuleSet references, distinct default RuleSets and DaySchedules, deterministic names, and source-container isolation remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-schedule-astype
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.astype
+    symbol_hash: sha256:3c3e1ad91d7a933d4d60c38cab8d9b0ef5ed28f1b036eb23f3c9961115df2c07
+  difference:
+    upstream: defaults to a copied conversion but also exposes an inplace mode that repeatedly mutates nested DaySchedules while leaving the Schedule and RuleSet type fields stale and can leave a partially converted graph after failure
+    dotnet: exposes only the safe immutable copied conversion and returns a consistently typed Schedule, RuleSets, and DaySchedules
+  effect:
+    engineering_result: supported copy-mode conversions retain the same values, :COPY child names, identity-compact period boundaries, and converted ScheduleType without admitting a stale or partially converted model
+    api_contract: the unsafe and internally inconsistent upstream inplace branch is intentionally omitted from the immutable product API
+    compatibility_evidence: copy-mode values, names, source isolation, period alias topology, and recursive type consistency plus the exact upstream inplace defect remain required in a trusted cross-language receipt
+  approval: accepted-upstream-bug-fix
+
+- id: immutable-schedule-clip
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.clip
+    symbol_hash: sha256:a5c9474c7c676e8512720ed02a0f4f112e0e7380c5e2d3cc19e22d3aee38dec2
+  difference:
+    upstream: defaults to identity-compact copied clipping, resolves a lower bound above the upper bound to the upper value by sequential clipping, and also exposes an inplace mode that replaces all 365 daily slots with independent RuleSets, ignores the requested name, and can leave a partially clipped graph after failure
+    dotnet: exposes only identity-compact immutable clipping, returns the requested or :CLIP fallback name, rejects a reversed bound pair explicitly, and never mutates the source schedule
+  effect:
+    engineering_result: supported copy-mode bounds, values, type, result name, source isolation, and compact-period topology remain equivalent while identity explosion and partial mutation are prevented
+    api_contract: the mutation-only topology and failure semantics of upstream inplace mode are intentionally omitted from the immutable product API
+    compatibility_evidence: lower-only, upper-only, combined, reversed-bound, unbounded-copy, explicit-name, empty-name, source-isolation, and compact-period identity cases plus the exact upstream inplace behavior remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: validated-deterministic-schedule-from-compact
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.from_compact
+    symbol_hash: sha256:ce943fca5d32b9a2c538b68eca8edd3e9fd16f63f9fc7dc7847ff7695719622b
+  difference:
+    upstream: leaves every uncovered date backed by a distinct runtime-named zero RuleSet, applies valid tuples inclusively with later tuples winning, and silently treats reversed or out-of-year tuples as empty ranges
+    dotnet: preserves the distinct uncovered RuleSets and valid later-wins identity topology with stable indexed names, rejects reversed and leap-day periods, and maps non-2026 DateTime values by month and day onto the fixed annual calendar
+  effect:
+    engineering_result: valid annual periods, overlaps, gaps, daily values, type, and identity-based compactization remain equivalent while generated IDF names are reproducible and malformed native periods cannot silently disappear
+    api_contract: runtime-address child names and permissive Python range quirks are replaced by deterministic fixed-calendar C# value objects
+    compatibility_evidence: empty input, full and partial coverage, 365 distinct gap identities, adjacent same-reference merging, equal-but-distinct separation, later overlap wins, deterministic names, reversed/leap-day handling, and native year normalization remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: deterministic-schedule-from-constant-child-names
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.from_constant
+    symbol_hash: sha256:921474e6c535cf86b9c5452f828a1ee00c0a9aafbafc8b64ea9d3a924f3242fd
+  difference:
+    upstream: derives omitted Schedule and generated scalar or DaySchedule wrapper names from runtime object addresses, preserves surrounding whitespace in explicit names, and accepts NaN or infinity in Real scalar schedules
+    dotnet: uses stable anonymous and derived child names from one trimmed non-empty Schedule name, preserves the upstream finite value, type inference, source-object references, and annual sharing topology, and rejects non-finite scalar values before they can enter IDF authoring
+  effect:
+    engineering_result: every supported finite scalar, bool, DaySchedule, and RuleSet constant produces the same 365 values, type, one shared RuleSet, and required weekday/weekend DaySchedule identity relationships with reproducible IDF identifiers; non-finite Real values are prevented from entering an EnergyPlus model
+    api_contract: nondeterministic generated names, whitespace preservation, blank product identifiers, and non-finite scalar acceptance are replaced by deterministic native naming and finite schedule validation
+    compatibility_evidence: finite scalar and bool conversion, non-finite rejection, two distinct scalar fallback days, shared source DaySchedule fallback identity, exact source RuleSet identity, ignored explicit type for typed inputs, annual sharing, trimmed deterministic names, and invalid operand handling remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: validated-deterministic-schedule-from-windows
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.from_windows
+    symbol_hash: sha256:95346844e1f1e0554287cd904a0b24ef17522ccb1099007fbb3b72cfd2703a2d
+  difference:
+    upstream: uses runtime-address names for generated wrappers, accepts non-finite Real scalars plus permissive tuple ranges and operand dispatch, and contains a shadowed-variable error path for unsupported window values
+    dotnet: uses deterministic per-window names, strongly typed native window value objects, finite schedule validation, explicit operand and type validation, reversed/leap-day rejection, and fixed-calendar month/day normalization
+  effect:
+    engineering_result: valid finite scalar, DaySchedule, and RuleSet defaults and windows retain the same inclusive later-window-wins values, type inference, source references, per-window wrapper identities, and empty-window behavior with reproducible IDF identifiers while non-finite Real values are prevented from entering an EnergyPlus model
+    api_contract: non-finite values, permissive invalid ranges, runtime names, and the unusable upstream error path are replaced by explicit deterministic C# validation
+    compatibility_evidence: every default and window operand family, non-finite rejection, later overlap wins, empty and repeated windows, source-reference topology, independently wrapped repeated DaySchedule and scalar windows, type inference, deterministic names, reversed/leap-day handling, year normalization, and unsupported operands remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: validated-schedule-unify-coverage
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: Schedule.unify_compactized_schedules
+    symbol_hash: sha256:6f7741b799e71d8d5f0f180a0d9ade68fe4d3a86bf0fde346f34a57b287c8231
+  difference:
+    upstream: preserves RuleSet references for covered ranges but silently inserts None into pairwise output periods when either input has a coverage gap despite the annotated non-null RuleSet contract
+    dotnet: preserves the same references and boundary partition for valid covered inputs but rejects any coverage gap before constructing an invalid SchedulePeriod
+  effect:
+    engineering_result: valid pairwise boundary unions remain exact while a null RuleSet cannot enter downstream compact schedule or IDF authoring operations
+    api_contract: the unsafe upstream missing-coverage sentinel is replaced by native non-null validation; the separate many-schedule operation retains its upstream missing-coverage failure behavior
+    compatibility_evidence: disjoint boundaries, overlaps, first-period selection, preserved references, both-empty input, one-sided and interior coverage gaps, and distinction from many-schedule unification remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
 
 - id: ruleset-scalar-minimum-upstream-attribute-error
