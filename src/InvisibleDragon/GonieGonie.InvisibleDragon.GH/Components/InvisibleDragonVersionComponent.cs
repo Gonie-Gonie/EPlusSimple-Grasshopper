@@ -16,7 +16,7 @@ public sealed class InvisibleDragonVersionComponent : GH_Component
 
     public override Guid ComponentGuid => new("bcdd73c6-e40f-4ae4-9b9b-5dc78a238b18");
 
-    protected override System.Drawing.Bitmap? Icon => PluginIcons.Icon24;
+    protected override System.Drawing.Bitmap? Icon => PluginIcons.ForComponent(GetType());
 
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {

@@ -16,7 +16,7 @@ public sealed class SimpleDragonVersionComponent : GH_Component
 
     public override Guid ComponentGuid => new("ea29f1c8-72aa-446a-8da4-c786ab470237");
 
-    protected override System.Drawing.Bitmap? Icon => PluginIcons.Icon24;
+    protected override System.Drawing.Bitmap? Icon => PluginIcons.ForComponent(GetType());
 
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {

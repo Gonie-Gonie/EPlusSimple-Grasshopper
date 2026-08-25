@@ -28,7 +28,7 @@ public abstract class DragonComponent : GH_Component
     {
     }
 
-    protected override Bitmap? Icon => PluginIcons.Icon24;
+    protected override Bitmap? Icon => PluginIcons.ForComponent(GetType());
 
     protected sealed override void SolveInstance(IGH_DataAccess DA)
     {

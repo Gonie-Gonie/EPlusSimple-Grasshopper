@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Security.Cryptography;
 using Grasshopper.Kernel;
 
 namespace GonieGonie.InvisibleDragon.Grasshopper.Tests;
@@ -49,6 +50,55 @@ public sealed class GrasshopperAssemblyTests
         Assert.EndsWith(".gha", assembly.Location, StringComparison.OrdinalIgnoreCase);
         Assert.Equal(31, componentTypes.Length);
         Assert.All(componentTypes, type => Assert.NotNull(Activator.CreateInstance(type)));
+    }
+
+    [Fact]
+    public void EveryComponentHasItsOwnEmbeddedTwentyFourPixelIcon()
+    {
+        const string prefix =
+            "GonieGonie.InvisibleDragon.Grasshopper.Resources.Components.";
+        Assembly assembly = LoadPlugin();
+        Type[] componentTypes = ComponentTypes(assembly);
+        string[] resources = assembly.GetManifestResourceNames()
+            .Where(name => name.StartsWith(prefix, StringComparison.Ordinal))
+            .OrderBy(name => name, StringComparer.Ordinal)
+            .ToArray();
+
+        Assert.Equal(componentTypes.Length, resources.Length);
+        var hashes = new HashSet<string>(StringComparer.Ordinal);
+        foreach (Type type in componentTypes)
+        {
+            string resourceName = prefix + type.Name + ".png";
+            Assert.Contains(resourceName, resources);
+            using Stream stream = Assert.IsAssignableFrom<Stream>(
+                assembly.GetManifestResourceStream(resourceName));
+            using var bitmap = new Bitmap(stream);
+            Assert.Equal(24, bitmap.Width);
+            Assert.Equal(24, bitmap.Height);
+            AssertTransparentBorder(bitmap);
+
+            stream.Position = 0;
+            using SHA256 sha = SHA256.Create();
+            Assert.True(hashes.Add(Convert.ToHexString(sha.ComputeHash(stream))), resourceName);
+
+            GH_Component component = Assert.IsAssignableFrom<GH_Component>(Activator.CreateInstance(type));
+            Bitmap? icon = component.Icon_24x24;
+            Assert.NotNull(icon);
+            Assert.Equal(24, icon.Width);
+            Assert.Equal(24, icon.Height);
+        }
+    }
+
+    private static void AssertTransparentBorder(Bitmap bitmap)
+    {
+        for (int pixel = 0; pixel < 24; pixel++)
+        {
+            foreach (int edge in new[] { 0, 1, 22, 23 })
+            {
+                Assert.Equal(0, bitmap.GetPixel(edge, pixel).A);
+                Assert.Equal(0, bitmap.GetPixel(pixel, edge).A);
+            }
+        }
     }
 
     private static Type[] ComponentTypes(Assembly assembly)

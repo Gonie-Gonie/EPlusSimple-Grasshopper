@@ -25,5 +25,9 @@
     <EmbeddedResource Include="..\..\..\assets\icons\generated\simple-dragon\simple-dragon-24.png"
                       Link="Resources\simple-dragon-24.png"
                       LogicalName="GonieGonie.SimpleDragon.Grasshopper.Resources.SimpleDragon24.png" />
+    <EmbeddedResource Include="..\..\..\assets\icons\generated\simple-dragon\components\*.png">
+      <Link>Resources\Components\%(Filename)%(Extension)</Link>
+      <LogicalName>GonieGonie.SimpleDragon.Grasshopper.Resources.Components.%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
