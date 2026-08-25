@@ -38,8 +38,35 @@ public sealed class SourceSystemTests
 
         IReadOnlyList<IdfObject> objects = boiler.ToIdfObjects(new IdfGenerationContext(), new[] { demand });
 
-        Assert.Single(objects, item => item.ObjectType == "Boiler:HotWater");
-        Assert.Single(objects, item => item.ObjectType == "PlantLoop");
+        IdfObject boilerObject = Assert.Single(objects, item => item.ObjectType == "Boiler:HotWater");
+        Assert.Equal("LeavingBoiler", boilerObject[4]);
+        Assert.Equal("autosize", boilerObject[6]);
+        Assert.Equal("1", boilerObject[8]);
+        Assert.Equal("99.9", boilerObject[12]);
+        Assert.Equal("NotModulated", boilerObject[13]);
+        Assert.Equal("General", boilerObject[16]);
+        IdfObject plantLoop = Assert.Single(objects, item => item.ObjectType == "PlantLoop");
+        Assert.Equal("99.9", plantLoop[5]);
+        Assert.Equal("SequentialLoad", plantLoop[18]);
+        Assert.Equal($"{boiler.LoopName} AvailabilityManagerAssignmentList", plantLoop[19]);
+        Assert.Equal("2", plantLoop[23]);
+        IdfObject sizing = Assert.Single(objects, item => item.ObjectType == "Sizing:Plant");
+        Assert.Equal("80", sizing[2]);
+        Assert.Equal("10", sizing[3]);
+        Assert.Equal("NonCoincident", sizing[4]);
+        Assert.Equal("1", sizing[5]);
+        IdfObject pump = Assert.Single(objects, item => item.ObjectType == "Pump:VariableSpeed");
+        Assert.Equal("179352", pump[4]);
+        Assert.Equal("Continuous", pump[13]);
+        Assert.Equal("PowerPerFlowPerPressure", pump[25]);
+        Assert.Equal("348701.1", pump[26]);
+        Assert.Equal("1.282051282", pump[27]);
+        Assert.Equal("General", pump[29]);
+        IdfObject setpoint = Assert.Single(
+            objects,
+            item => item.ObjectType == "Schedule:Constant"
+                && item.Name == $"{boiler.LoopName} SetpointTemperature");
+        Assert.Equal(string.Empty, setpoint[1]);
         Assert.Equal(5, objects.Count(item => item.ObjectType == "Pipe:Adiabatic"));
         Assert.Equal(8, objects.Count(item => item.ObjectType == "Branch"));
         Assert.Equal(2, objects.Count(item => item.ObjectType == "BranchList"));

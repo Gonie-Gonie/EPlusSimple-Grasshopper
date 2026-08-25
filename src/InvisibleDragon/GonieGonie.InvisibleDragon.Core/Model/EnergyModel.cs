@@ -24,6 +24,12 @@ public sealed class EnergyModelIdfOptions
     public bool ThrowOnValidationErrors { get; set; } = true;
 
     public bool AddIdealLoadsForUnassignedZones { get; set; } = true;
+
+    /// <summary>
+    /// Emits the rectangular Window/Door object family used by the pinned Python
+    /// SimpleDragon conversion instead of explicit fenestration vertices.
+    /// </summary>
+    public bool UseLegacyRectangularFenestration { get; set; }
 }
 
 /// <summary>

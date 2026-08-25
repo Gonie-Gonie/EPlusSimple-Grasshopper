@@ -27,8 +27,21 @@ internal static class PlantLoopAssembler
             IdfGenerationContext.Field(1, "Inlet Node Name", pumpInlet),
             IdfGenerationContext.Field(2, "Outlet Node Name", pumpOutlet),
             IdfGenerationContext.Field(3, "Design Maximum Flow Rate", "autosize"),
+            IdfGenerationContext.Field(4, "Design Pump Head", 179352),
             IdfGenerationContext.Field(5, "Design Power Consumption", "autosize"),
-            IdfGenerationContext.Field(6, "Motor Efficiency", pumpMotorEfficiency)));
+            IdfGenerationContext.Field(6, "Motor Efficiency", pumpMotorEfficiency),
+            IdfGenerationContext.Field(7, "Fraction of Motor Inefficiencies to Fluid Stream", 0),
+            IdfGenerationContext.Field(8, "Coefficient 1 of the Part Load Performance Curve", 0),
+            IdfGenerationContext.Field(9, "Coefficient 2 of the Part Load Performance Curve", 1),
+            IdfGenerationContext.Field(10, "Coefficient 3 of the Part Load Performance Curve", 0),
+            IdfGenerationContext.Field(11, "Coefficient 4 of the Part Load Performance Curve", 0),
+            IdfGenerationContext.Field(12, "Design Minimum Flow Rate", "autosize"),
+            IdfGenerationContext.Field(13, "Pump Control Type", "Continuous"),
+            IdfGenerationContext.Field(25, "Design Power Sizing Method", "PowerPerFlowPerPressure"),
+            IdfGenerationContext.Field(26, "Design Electric Power per Unit Flow Rate", 348701.1),
+            IdfGenerationContext.Field(27, "Design Shaft Power per Unit Flow Rate per Unit Head", 1.282051282),
+            IdfGenerationContext.Field(28, "Design Minimum Flow Rate Fraction", 0),
+            IdfGenerationContext.Field(29, "End-Use Subcategory", "General")));
 
         string[] pipeRoles = { "Supply Bypass", "Supply Outlet", "Demand Inlet", "Demand Bypass", "Demand Outlet" };
         foreach (string role in pipeRoles)
@@ -76,7 +89,7 @@ internal static class PlantLoopAssembler
         objects.Add(context.CreateRaw("PlantEquipmentList", $"{loop} EquipmentList", source.IdfObjectType, source.IdfObjectName));
         objects.Add(context.CreateRaw("PlantEquipmentOperation:HeatingLoad", $"{loop} Operation", 0, 1E20, $"{loop} EquipmentList"));
         objects.Add(context.CreateRaw("PlantEquipmentOperationSchemes", $"{loop} OperationScheme", "PlantEquipmentOperation:HeatingLoad", $"{loop} Operation", "ALLON"));
-        objects.Add(context.CreateRaw("Schedule:Constant", $"{loop} SetpointTemperature", "ScheduleTypeLimits:Temperature", setpointTemperature));
+        objects.Add(context.CreateRaw("Schedule:Constant", $"{loop} SetpointTemperature", null, setpointTemperature));
         objects.Add(context.CreateRaw("SetpointManager:Scheduled", $"{loop} SetpointManager", "Temperature", $"{loop} SetpointTemperature", $"{loop} Supply Outlet Pipe OutletNode"));
         objects.Add(context.CreateRaw("AvailabilityManager:Scheduled", $"{loop} AvailabilityManager", "ALLON"));
         objects.Add(context.CreateRaw("AvailabilityManagerAssignmentList", $"{loop} AvailabilityManagerAssignmentList", "AvailabilityManager:Scheduled", $"{loop} AvailabilityManager"));
@@ -86,7 +99,7 @@ internal static class PlantLoopAssembler
             IdfGenerationContext.Field(1, "Fluid Type", "Water"),
             IdfGenerationContext.Field(3, "Plant Equipment Operation Scheme Name", $"{loop} OperationScheme"),
             IdfGenerationContext.Field(4, "Loop Temperature Setpoint Node Name", $"{loop} Supply Outlet Pipe OutletNode"),
-            IdfGenerationContext.Field(5, "Maximum Loop Temperature", 80),
+            IdfGenerationContext.Field(5, "Maximum Loop Temperature", 99.9),
             IdfGenerationContext.Field(6, "Minimum Loop Temperature", 0.1),
             IdfGenerationContext.Field(7, "Maximum Loop Flow Rate", "autosize"),
             IdfGenerationContext.Field(10, "Plant Side Inlet Node Name", pumpInlet),
@@ -97,8 +110,20 @@ internal static class PlantLoopAssembler
             IdfGenerationContext.Field(15, "Demand Side Outlet Node Name", $"{loop} Demand Outlet Pipe OutletNode"),
             IdfGenerationContext.Field(16, "Demand Side Branch List Name", $"{loop} Demand BranchList"),
             IdfGenerationContext.Field(17, "Demand Side Connector List Name", $"{loop} Demand Connectors"),
-            IdfGenerationContext.Field(18, "Availability Manager List Name", $"{loop} AvailabilityManagerAssignmentList")));
-        objects.Add(context.CreateRaw("Sizing:Plant", loop, "Heating", setpointTemperature, 11));
+            IdfGenerationContext.Field(18, "Load Distribution Scheme", "SequentialLoad"),
+            IdfGenerationContext.Field(19, "Availability Manager List Name", $"{loop} AvailabilityManagerAssignmentList"),
+            IdfGenerationContext.Field(20, "Plant Loop Demand Calculation Scheme", "SingleSetpoint"),
+            IdfGenerationContext.Field(21, "Common Pipe Simulation", "None"),
+            IdfGenerationContext.Field(22, "Pressure Simulation Type", "None"),
+            IdfGenerationContext.Field(23, "Loop Circulation Time", 2)));
+        objects.Add(context.Create(
+            "Sizing:Plant",
+            IdfGenerationContext.Field(0, "Plant or Condenser Loop Name", loop),
+            IdfGenerationContext.Field(1, "Loop Type", "Heating"),
+            IdfGenerationContext.Field(2, "Design Loop Exit Temperature", 80),
+            IdfGenerationContext.Field(3, "Loop Design Temperature Difference", 10),
+            IdfGenerationContext.Field(4, "Sizing Option", "NonCoincident"),
+            IdfGenerationContext.Field(5, "Zone Timesteps in Averaging Window", 1)));
         return objects;
     }
 

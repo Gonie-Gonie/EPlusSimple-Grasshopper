@@ -415,7 +415,11 @@ public sealed class ConvertGreenRetrofitModelComponent : SimpleDragonComponent
         {
             IdfDocument document = conversion.EnergyModel.ToIdfDocument(
                 schema,
-                new EnergyModelIdfOptions { ThrowOnValidationErrors = false });
+                new EnergyModelIdfOptions
+                {
+                    ThrowOnValidationErrors = false,
+                    UseLegacyRectangularFenestration = true,
+                });
             if (schema is not null)
             {
                 diagnostics.AddRange(IdfValidator.Validate(document).Diagnostics);

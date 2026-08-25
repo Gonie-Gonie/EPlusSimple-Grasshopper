@@ -161,12 +161,11 @@ public sealed class EnergyModelFixtureMatrixTests
     }
 
     [Theory]
-    [InlineData(999d, "Material:NoMass", "Material")]
-    [InlineData(1000d, "Material", "Material:NoMass")]
-    public void MaterialEmissionUsesArealHeatCapacityBoundary(
-        double arealHeatCapacity,
-        string emittedType,
-        string omittedType)
+    [InlineData(1d)]
+    [InlineData(999d)]
+    [InlineData(1000d)]
+    public void OpaqueConstructionLayerAlwaysEmitsUpstreamMaterial(
+        double arealHeatCapacity)
     {
         var material = new Material("Low volumetric capacity", 0.04, 0.01, 100);
         double thickness = arealHeatCapacity
@@ -189,8 +188,12 @@ public sealed class EnergyModelFixtureMatrixTests
 
         IdfDocument document = new EnergyModel("Low capacity model", new[] { zone }).ToIdfDocument();
 
-        Assert.Single(document[emittedType]);
-        Assert.Empty(document[omittedType]);
+        IdfObject emitted = Assert.Single(document["Material"]);
+        Assert.Equal("Low capacity layer", emitted.Name);
+        Assert.Equal(
+            thickness.ToString("R", System.Globalization.CultureInfo.InvariantCulture),
+            emitted[2]);
+        Assert.Empty(document["Material:NoMass"]);
     }
 
     internal static EnergyModel CreateRepresentativeModel()

@@ -47,7 +47,8 @@ public sealed class GreenRetrofitConversionTests
         Assert.Single(idf["Building"]);
         Assert.Single(idf["Zone"]);
         Assert.Equal(6, idf["BuildingSurface:Detailed"].Count);
-        Assert.Equal(2, idf["FenestrationSurface:Detailed"].Count);
+        Assert.Equal(2, idf["Window"].Count);
+        Assert.Empty(idf["FenestrationSurface:Detailed"]);
         Assert.Single(idf["AirConditioner:VariableRefrigerantFlow"]);
         Assert.Single(idf["Boiler:HotWater"]);
         Assert.Single(idf["ZoneHVAC:LowTemperatureRadiant:VariableFlow"]);
@@ -63,7 +64,7 @@ public sealed class GreenRetrofitConversionTests
             idf["BuildingSurface:Detailed"].Select(item => (item.Name, item[1])));
         Assert.Equal(
             oracle["Window"].Select(item => item.Name),
-            idf["FenestrationSurface:Detailed"].Select(item => item.Name));
+            idf["Window"].Select(item => item.Name));
         Assert.Equal(oracle["Boiler:HotWater"][0][0], idf["Boiler:HotWater"][0][0]);
         Assert.Equal(oracle["Boiler:HotWater"][0][1], idf["Boiler:HotWater"][0][1]);
 
@@ -88,38 +89,89 @@ public sealed class GreenRetrofitConversionTests
     }
 
     [Fact]
-    public void ConvertedIdfKeepsFenestrationVerticesAndPeopleActivityInTheirDeclaredFields()
+    public void ConvertedIdfUsesPinnedLegacyWindowAndDeclaredPeopleActivityField()
     {
         GreenRetrofitModel source = GrmReader.ReadFile(Fixture("grm")).RequireModel();
 
         IdfDocument idf = GreenRetrofitConverter.ToIdfDocument(source);
 
-        Assert.All(idf["FenestrationSurface:Detailed"], fenestration =>
+        Assert.All(idf["Window"], fenestration =>
         {
-            Assert.Equal(21, fenestration.Count);
-            Assert.Equal("1", fenestration[7]);
-            Assert.Equal("4", fenestration[8]);
-            Assert.Equal(12, fenestration.Fields.Skip(9).Count());
+            Assert.Equal(9, fenestration.Count);
+            Assert.Equal("1", fenestration[4]);
+            Assert.Equal("0.001", fenestration[5]);
+            Assert.Equal("0.001", fenestration[6]);
         });
         IdfObject people = Assert.Single(idf["People"]);
         Assert.Equal(10, people.Count);
         Assert.Equal("People/Area", people[3]);
         Assert.Equal("$DEFAULT$PEOPLEACTIVITY", people[9]);
+        IdfObject activity = Assert.Single(
+            idf["Schedule:Constant"],
+            schedule => schedule.Name == "$DEFAULT$PEOPLEACTIVITY");
+        Assert.Equal("107", activity[2]);
+        IdfObject ventilation = Assert.Single(idf["ZoneVentilation:DesignFlowRate"]);
+        Assert.Equal("Flow/Person", ventilation[3]);
+        Assert.Equal("0.0083", ventilation[6]);
+        IdfObject outdoorAir = Assert.Single(idf["DesignSpecification:OutdoorAir"]);
+        Assert.Equal("Flow/Person", outdoorAir[1]);
+        Assert.Equal("0.00944", outdoorAir[2]);
         IdfObject equipment = Assert.Single(idf["ZoneHVAC:EquipmentList"]);
         Assert.Equal("1", equipment[4]);
         Assert.Equal("1", equipment[5]);
         Assert.Equal("2", equipment[10]);
         Assert.Equal("2", equipment[11]);
-        IdfObject noMass = Assert.Single(
-            idf["Material:NoMass"],
-            material => material.Name!.StartsWith("MTRL-0x000004_", StringComparison.Ordinal));
-        Assert.Equal(
-            1.003d / 0.04d,
-            double.Parse(noMass[2], NumberStyles.Float, CultureInfo.InvariantCulture),
-            12);
-        Assert.DoesNotContain(
+        Assert.Equal($"cooling_fraction_for_{equipment[3]}", equipment[6]);
+        Assert.Equal($"heating_fraction_for_{equipment[3]}", equipment[7]);
+        Assert.Equal("ALLOFF", equipment[12]);
+        Assert.Equal($"heating_fraction_for_{equipment[9]}", equipment[13]);
+        AssertFractionSchedule(idf, equipment[6], 1d);
+        AssertFractionSchedule(idf, equipment[7], 1d / (2d + 1.0e-10d));
+        AssertFractionSchedule(idf, equipment[13], 1d / (1d + 1.0e-10d));
+        IdfObject lowCapacity = Assert.Single(
             idf["Material"],
             material => material.Name!.StartsWith("MTRL-0x000004_", StringComparison.Ordinal));
+        Assert.Equal(
+            1.003d,
+            double.Parse(lowCapacity[2], NumberStyles.Float, CultureInfo.InvariantCulture),
+            12);
+        Assert.Equal("0.04", lowCapacity[3]);
+        Assert.Empty(idf["Material:NoMass"]);
+        IdfObject zone = Assert.Single(idf["Zone"]);
+        Assert.Equal(
+            48d,
+            double.Parse(zone[9], NumberStyles.Float, CultureInfo.InvariantCulture),
+            12);
+        Assert.Equal("TARP", zone[10]);
+        Assert.Equal("TARP", zone[11]);
+        IdfObject boiler = Assert.Single(idf["Boiler:HotWater"]);
+        Assert.Equal("1", boiler[8]);
+        Assert.Equal("99.9", boiler[12]);
+        Assert.Equal("NotModulated", boiler[13]);
+        IdfObject plantLoop = Assert.Single(idf["PlantLoop"]);
+        Assert.Equal("99.9", plantLoop[5]);
+        Assert.Equal("SequentialLoad", plantLoop[18]);
+        IdfObject plantSizing = Assert.Single(idf["Sizing:Plant"]);
+        Assert.Equal("80", plantSizing[2]);
+        Assert.Equal("10", plantSizing[3]);
+    }
+
+    private static void AssertFractionSchedule(
+        IdfDocument document,
+        string name,
+        double expected)
+    {
+        IdfObject schedule = Assert.Single(
+            document["Schedule:Compact"],
+            item => item.Name == name);
+        double[] values = schedule.Fields
+            .Select((value, index) => new { value, index })
+            .Where(item => item.index > 0
+                && schedule[item.index - 1].StartsWith("Until:", StringComparison.Ordinal))
+            .Select(item => double.Parse(item.value.Value, NumberStyles.Float, CultureInfo.InvariantCulture))
+            .ToArray();
+        Assert.NotEmpty(values);
+        Assert.All(values, value => Assert.Equal(expected, value, 12));
     }
 
     [Fact]

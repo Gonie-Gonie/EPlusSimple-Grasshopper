@@ -151,6 +151,10 @@ public sealed class GreenRetrofitConversionResult
         IddSchema? schema = null,
         EnergyModelIdfOptions? options = null)
     {
+        options ??= new EnergyModelIdfOptions
+        {
+            UseLegacyRectangularFenestration = true,
+        };
         return RequireEnergyModel().ToIdfDocument(schema, options);
     }
 }

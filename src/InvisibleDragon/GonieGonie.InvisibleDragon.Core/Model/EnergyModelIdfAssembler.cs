@@ -12,10 +12,6 @@ namespace GonieGonie.InvisibleDragon.Model;
 
 internal static class EnergyModelIdfAssembler
 {
-    // Below 0.278 Wh/(m2 K), retain the layer's R-value without asking EnergyPlus
-    // to solve physically insignificant thermal storage. Thick layers remain massive.
-    private const double MaximumNoMassArealHeatCapacity = 1000d;
-
     private static readonly string[] GeneratedPreamble =
     {
         "Generated deterministically by GonieGonie InvisibleDragon.",
@@ -52,7 +48,7 @@ internal static class EnergyModelIdfAssembler
             document.Append(ScheduleIdfExporter.Create(context, schedule));
         }
 
-        AppendConstructionsAndGeometry(document, context, model);
+        AppendConstructionsAndGeometry(document, context, model, options);
         foreach (Zone zone in model.Zones)
         {
             AppendZoneLoads(document, context, zone, uniqueSchedules);
@@ -84,7 +80,7 @@ internal static class EnergyModelIdfAssembler
 
         yield return context.CreateRaw("Schedule:Compact", "ALLON", ScheduleIdfExporter.TypeLimitName(ScheduleType.OnOff), "Through: 12/31", "For: AllDays", "Until: 24:00", 1);
         yield return context.CreateRaw("Schedule:Compact", "ALLOFF", ScheduleIdfExporter.TypeLimitName(ScheduleType.OnOff), "Through: 12/31", "For: AllDays", "Until: 24:00", 0);
-        yield return context.CreateRaw("Schedule:Constant", "$DEFAULT$PEOPLEACTIVITY", ScheduleIdfExporter.TypeLimitName(ScheduleType.Real), 120);
+        yield return context.CreateRaw("Schedule:Constant", "$DEFAULT$PEOPLEACTIVITY", ScheduleIdfExporter.TypeLimitName(ScheduleType.Real), 107);
     }
 
     private static IEnumerable<Schedule> CollectSchedules(EnergyModel model)
@@ -115,14 +111,23 @@ internal static class EnergyModelIdfAssembler
         }
     }
 
-    private static void AppendConstructionsAndGeometry(IdfDocument document, IdfGenerationContext context, EnergyModel model)
+    private static void AppendConstructionsAndGeometry(
+        IdfDocument document,
+        IdfGenerationContext context,
+        EnergyModel model,
+        EnergyModelIdfOptions options)
     {
         Dictionary<string, object> materialDefinitions = new(StringComparer.OrdinalIgnoreCase);
         Dictionary<string, object> constructionDefinitions = new(StringComparer.OrdinalIgnoreCase);
         Dictionary<EntityId, Surface> surfacesById = model.Surfaces.ToDictionary(surface => surface.Id);
         foreach (Zone zone in model.Zones)
         {
-            document.Append(context.CreateRaw("Zone", zone.Name));
+            document.Append(context.Create(
+                "Zone",
+                IdfGenerationContext.Field(0, "Name", zone.Name),
+                IdfGenerationContext.Field(9, "Floor Area", zone.FloorArea),
+                IdfGenerationContext.Field(10, "Zone Inside Convection Algorithm", "TARP"),
+                IdfGenerationContext.Field(11, "Zone Outside Convection Algorithm", "TARP")));
             foreach (Surface surface in zone.Surfaces)
             {
                 string constructionName = AppendSurfaceConstruction(
@@ -157,7 +162,13 @@ internal static class EnergyModelIdfAssembler
                             constructionDefinitions);
                     }
 
-                    document.Append(FenestrationSurface(context, surface, opening, openingConstruction));
+                    document.Append(FenestrationSurface(
+                        context,
+                        surface,
+                        opening,
+                        openingConstruction,
+                        surfacesById,
+                        options));
                 }
             }
         }
@@ -182,31 +193,17 @@ internal static class EnergyModelIdfAssembler
                     ModelDefinitionComparer.EmittedMaterialEquals,
                     "Material"))
                 {
-                    if (IsEffectivelyNoMass(layer))
-                    {
-                        document.Append(context.CreateRaw(
-                            "Material:NoMass",
-                            layer.Name,
-                            layer.Material.Roughness,
-                            layer.ThermalResistance,
-                            layer.Material.ThermalAbsorptance,
-                            layer.Material.SolarAbsorptance,
-                            layer.Material.VisibleAbsorptance));
-                    }
-                    else
-                    {
-                        document.Append(context.CreateRaw(
-                            "Material",
-                            layer.Name,
-                            layer.Material.Roughness,
-                            layer.ThicknessMetres,
-                            layer.Material.ConductivityWattsPerMetreKelvin,
-                            layer.Material.DensityKilogramsPerCubicMetre,
-                            layer.Material.SpecificHeatJoulesPerKilogramKelvin,
-                            layer.Material.ThermalAbsorptance,
-                            layer.Material.SolarAbsorptance,
-                            layer.Material.VisibleAbsorptance));
-                    }
+                    document.Append(context.CreateRaw(
+                        "Material",
+                        layer.Name,
+                        layer.Material.Roughness,
+                        layer.ThicknessMetres,
+                        layer.Material.ConductivityWattsPerMetreKelvin,
+                        layer.Material.DensityKilogramsPerCubicMetre,
+                        layer.Material.SpecificHeatJoulesPerKilogramKelvin,
+                        layer.Material.ThermalAbsorptance,
+                        layer.Material.SolarAbsorptance,
+                        layer.Material.VisibleAbsorptance));
                 }
             }
 
@@ -262,11 +259,6 @@ internal static class EnergyModelIdfAssembler
         }
 
         return airBoundary.Name;
-    }
-
-    private static bool IsEffectivelyNoMass(Layer layer)
-    {
-        return layer.HeatCapacityJoulesPerSquareMetreKelvin < MaximumNoMassArealHeatCapacity;
     }
 
     private static string AppendGlazing(
@@ -365,8 +357,20 @@ internal static class EnergyModelIdfAssembler
         IdfGenerationContext context,
         Surface host,
         IOpening opening,
-        string constructionName)
+        string constructionName,
+        IReadOnlyDictionary<EntityId, Surface> surfacesById,
+        EnergyModelIdfOptions options)
     {
+        if (options.UseLegacyRectangularFenestration)
+        {
+            return LegacyRectangularFenestration(
+                context,
+                host,
+                opening,
+                constructionName,
+                surfacesById);
+        }
+
         IdfObject result = context.Create(
             "FenestrationSurface:Detailed",
             IdfGenerationContext.Field(0, "Name", opening.Name),
@@ -380,6 +384,76 @@ internal static class EnergyModelIdfAssembler
             IdfGenerationContext.Field(8, "Number of Vertices", opening.Polygon.Vertices.Count));
         AddVertices(result, opening.Polygon.Vertices);
         return result;
+    }
+
+    private static IdfObject LegacyRectangularFenestration(
+        IdfGenerationContext context,
+        Surface host,
+        IOpening opening,
+        string constructionName,
+        IReadOnlyDictionary<EntityId, Surface> surfacesById)
+    {
+        const double safetyFactor = 0.999d;
+        const double safetyMargin = 0.001d;
+        double height = (host.Height - safetyMargin) * safetyFactor;
+        if (height <= 0d)
+        {
+            throw new InvalidOperationException(
+                $"Surface '{host.Name}' has no positive height for legacy rectangular fenestration.");
+        }
+
+        double width = (opening.Polygon.Area / height) * safetyFactor;
+        bool interzone = host.Boundary.Condition == SurfaceBoundaryCondition.Zone;
+        string objectType = opening.Type switch
+        {
+            OpeningType.Window when interzone => "Window:Interzone",
+            OpeningType.Window => "Window",
+            OpeningType.Door when interzone => "Door:Interzone",
+            OpeningType.Door => "Door",
+            _ => throw new ArgumentOutOfRangeException(nameof(opening)),
+        };
+
+        if (!interzone)
+        {
+            return opening.Type == OpeningType.Window
+                ? context.CreateRaw(
+                    objectType,
+                    opening.Name,
+                    constructionName,
+                    host.Name,
+                    null,
+                    1,
+                    safetyMargin,
+                    safetyMargin,
+                    width,
+                    height)
+                : context.CreateRaw(
+                    objectType,
+                    opening.Name,
+                    constructionName,
+                    host.Name,
+                    1,
+                    safetyMargin,
+                    safetyMargin,
+                    width,
+                    height);
+        }
+
+        Surface adjacent = surfacesById[host.Boundary.AdjacentSurfaceId!];
+        IOpening counterpart = adjacent.Openings.Single(candidate =>
+            candidate.Type == opening.Type
+            && opening.Polygon.IsGeometricallyEquivalentTo(candidate.Polygon, true));
+        return context.CreateRaw(
+            objectType,
+            opening.Name,
+            constructionName,
+            host.Name,
+            counterpart.Name,
+            1,
+            safetyMargin,
+            safetyMargin,
+            width,
+            height);
     }
 
     private static void AddVertices(IdfObject target, IEnumerable<Vertex> vertices)
@@ -432,9 +506,14 @@ internal static class EnergyModelIdfAssembler
             document.Append(context.CreateRaw("ZoneInfiltration:DesignFlowRate", $"{zone.Name}:infiltration", zone.Name, "ALLON", "AirChanges/Hour", null, null, null, zone.InfiltrationAirChangesPerHour));
         }
 
-        if (zone.OutdoorAirFlowCubicMetresPerSecond > 0)
+        if (profile.Occupant is not null)
         {
-            document.Append(context.CreateRaw("ZoneVentilation:DesignFlowRate", $"NaturalVentilation:{zone.Name}", zone.Name, "ALLON", "Flow/Zone", zone.OutdoorAirFlowCubicMetresPerSecond));
+            document.Append(context.Create(
+                "ZoneVentilation:DesignFlowRate",
+                IdfGenerationContext.Field(0, "Name", $"NaturalVentilation:{zone.Name}"),
+                IdfGenerationContext.Field(1, "Zone or ZoneList or Space or SpaceList Name", zone.Name),
+                IdfGenerationContext.Field(3, "Design Flow Rate Calculation Method", "Flow/Person"),
+                IdfGenerationContext.Field(6, "Flow Rate per Person", 0.0083d)));
         }
     }
 
@@ -519,6 +598,8 @@ internal static class EnergyModelIdfAssembler
         foreach (Zone zone in model.Zones)
         {
             List<SupplyIdfFragment> fragments = fragmentsByZone[zone.Id];
+            ZoneHvacAssignment? assignment = model.HvacAssignments.FirstOrDefault(
+                item => item.ZoneId.Equals(zone.Id));
             foreach (SupplyIdfFragment fragment in fragments)
             {
                 Append(document, fragment.Objects);
@@ -526,10 +607,14 @@ internal static class EnergyModelIdfAssembler
 
             if (fragments.Count > 0)
             {
-                AppendZoneEquipment(document, context, zone, fragments.Select(fragment => fragment.Equipment).ToArray());
+                AppendZoneEquipment(
+                    document,
+                    context,
+                    zone,
+                    fragments.Select(fragment => fragment.Equipment).ToArray(),
+                    assignment?.Supply);
             }
 
-            ZoneHvacAssignment? assignment = model.HvacAssignments.FirstOrDefault(item => item.ZoneId.Equals(zone.Id));
             if (assignment is not null)
             {
                 AppendThermostat(document, context, zone, assignment.Supply);
@@ -547,8 +632,15 @@ internal static class EnergyModelIdfAssembler
         IdfDocument document,
         IdfGenerationContext context,
         Zone zone,
-        IReadOnlyList<ZoneEquipmentDescriptor> equipment)
+        IReadOnlyList<ZoneEquipmentDescriptor> equipment,
+        SupplyGroup? supply)
     {
+        (string? Heating, string? Cooling)[] fractions = AppendSequentialLoadFractions(
+            document,
+            context,
+            zone,
+            supply,
+            equipment);
         List<object?> equipmentFields = new() { $"EquipmentList_for_{zone.Name}", "SequentialLoad" };
         for (int index = 0; index < equipment.Count; index++)
         {
@@ -558,8 +650,8 @@ internal static class EnergyModelIdfAssembler
             equipmentFields.Add(item.Name);
             equipmentFields.Add(sequence);
             equipmentFields.Add(sequence);
-            equipmentFields.Add(null);
-            equipmentFields.Add(null);
+            equipmentFields.Add(fractions[index].Cooling);
+            equipmentFields.Add(fractions[index].Heating);
         }
 
         document.Append(context.CreateRaw("ZoneHVAC:EquipmentList", equipmentFields.ToArray()));
@@ -575,6 +667,114 @@ internal static class EnergyModelIdfAssembler
             exhaustReference,
             $"{zone.Name} Zone Air Node",
             $"{zone.Name} Return Air Node"));
+    }
+
+    private static (string? Heating, string? Cooling)[] AppendSequentialLoadFractions(
+        IdfDocument document,
+        IdfGenerationContext context,
+        Zone zone,
+        SupplyGroup? supply,
+        IReadOnlyList<ZoneEquipmentDescriptor> equipment)
+    {
+        var result = new (string? Heating, string? Cooling)[equipment.Count];
+        if (supply is null)
+        {
+            return result;
+        }
+
+        string?[] heating = AppendModeFractions(
+            document,
+            context,
+            zone,
+            supply,
+            equipment,
+            "heating",
+            system => system.CanHeat);
+        string?[] cooling = AppendModeFractions(
+            document,
+            context,
+            zone,
+            supply,
+            equipment,
+            "cooling",
+            system => system.CanCool);
+        for (int index = 0; index < result.Length; index++)
+        {
+            result[index] = (heating[index], cooling[index]);
+        }
+
+        return result;
+    }
+
+    private static string?[] AppendModeFractions(
+        IdfDocument document,
+        IdfGenerationContext context,
+        Zone zone,
+        SupplyGroup supply,
+        IReadOnlyList<ZoneEquipmentDescriptor> equipment,
+        string mode,
+        Func<SupplySystem, bool> supportsMode)
+    {
+        var references = new string?[equipment.Count];
+        int pairedCount = Math.Min(supply.Systems.Count, equipment.Count);
+        for (int index = 0; index < pairedCount; index++)
+        {
+            references[index] = "ALLOFF";
+        }
+
+        int[] active = Enumerable.Range(0, pairedCount)
+            .Where(index => supportsMode(supply.Systems[index]))
+            .ToArray();
+        if (active.Length == 0)
+        {
+            return references;
+        }
+
+        if (active.Length == 1)
+        {
+            int index = active[0];
+            string name = $"{mode}_fraction_for_{equipment[index].Name}";
+            Schedule fraction = Schedule.Constant(name, 1d, ScheduleType.Real);
+            document.Append(ScheduleIdfExporter.Create(context, fraction));
+            references[index] = name;
+            return references;
+        }
+
+        Schedule[] availability = new Schedule[pairedCount];
+        foreach (int index in active)
+        {
+            availability[index] = supply.Availabilities[index]?.AsType(ScheduleType.Real)
+                ?? Schedule.Constant(
+                    $"{mode}_availability_for_{equipment[index].Name}",
+                    1d,
+                    ScheduleType.Real);
+        }
+
+        Schedule remaining = Schedule.Constant(
+            $"{mode}_remaining_for_{zone.Name}",
+            0d,
+            ScheduleType.Real);
+        foreach (int index in active)
+        {
+            remaining = remaining.Add(availability[index]);
+        }
+
+        Schedule epsilon = Schedule.Constant(
+            $"{mode}_fraction_epsilon_for_{zone.Name}",
+            1.0e-10d,
+            ScheduleType.Real);
+        foreach (int index in active)
+        {
+            string name = $"{mode}_fraction_for_{equipment[index].Name}";
+            Schedule fraction = availability[index].Divide(
+                remaining.Add(epsilon),
+                name);
+            document.Append(ScheduleIdfExporter.Create(context, fraction));
+            references[index] = name;
+            remaining = remaining.Subtract(availability[index]);
+        }
+
+        return references;
     }
 
     private static string AppendNodeList(IdfDocument document, IdfGenerationContext context, string name, string[] nodes)
@@ -616,7 +816,15 @@ internal static class EnergyModelIdfAssembler
     {
         string outdoorAir = $"DesignSpecificationOutdoorAir_for_{zone.Name}";
         string distribution = $"DesignSpecificationZoneAirDistribution_for_{zone.Name}";
-        document.Append(context.CreateRaw("DesignSpecification:OutdoorAir", outdoorAir, "Flow/Zone", zone.OutdoorAirFlowCubicMetresPerSecond, null, null, null, "ALLON"));
+        document.Append(context.CreateRaw(
+            "DesignSpecification:OutdoorAir",
+            outdoorAir,
+            "Flow/Person",
+            0.00944d,
+            0,
+            0,
+            0,
+            "ALLON"));
         document.Append(context.CreateRaw("DesignSpecification:ZoneAirDistribution", distribution));
         document.Append(context.Create(
             "Sizing:Zone",

@@ -272,7 +272,7 @@ public sealed class GreenRetrofitResult
         var metrics = new Dictionary<GreenRetrofitMetric, EnergyUseBreakdown>
         {
             [GreenRetrofitMetric.SiteUses] = siteUses,
-            [GreenRetrofitMetric.SourceUses] = siteUses.Scale(EnergyConversionFactors.SiteToSource),
+            [GreenRetrofitMetric.SourceUses] = siteUses.Scale(PinnedPython07SiteToSource),
             [GreenRetrofitMetric.Carbon] = siteUses.Scale(EnergyConversionFactors.SiteToCarbon),
             [GreenRetrofitMetric.Cost] = siteUses.Scale(EnergyConversionFactors.SiteToCost),
         };
@@ -283,6 +283,23 @@ public sealed class GreenRetrofitResult
             metric => metric,
             metric => Summarize(metrics[metric], totalArea, gross: true));
         return new GreenRetrofitResult(totalArea, metrics, perArea, gross);
+    }
+
+    private static double PinnedPython07SiteToSource(EnergyCarrier carrier)
+    {
+        // Python Enum iteration collapses the three equal 1.1 members into one alias.
+        // Its zip against the five GRR carrier rows therefore applies 0.728 to LPG
+        // and leaves the final two rows unscaled. Preserve that observable 0.7 output
+        // while GrrWriter continues to publish the declared factor constants verbatim.
+        return carrier switch
+        {
+            EnergyCarrier.Electricity => 2.75d,
+            EnergyCarrier.NaturalGas => 1.1d,
+            EnergyCarrier.LiquefiedPetroleumGas => 0.728d,
+            EnergyCarrier.Oil => 1d,
+            EnergyCarrier.DistrictHeating => 1d,
+            _ => throw new ArgumentOutOfRangeException(nameof(carrier), carrier, "Unknown energy carrier."),
+        };
     }
 
     internal static double Round(double value, int digits = ValidDigits)

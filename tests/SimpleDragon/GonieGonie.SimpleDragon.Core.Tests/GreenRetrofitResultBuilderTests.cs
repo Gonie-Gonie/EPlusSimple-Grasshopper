@@ -80,6 +80,9 @@ public sealed class GreenRetrofitResultBuilderTests
             0.71d,
             result.SiteUses[EnergyEndUse.HotWater, EnergyCarrier.LiquefiedPetroleumGas][1]);
         Assert.Equal(2.75d, result.SourceUses[EnergyEndUse.Heating, EnergyCarrier.Electricity][0]);
+        Assert.Equal(
+            0.57d,
+            result.SourceUses[EnergyEndUse.HotWater, EnergyCarrier.LiquefiedPetroleumGas][0]);
         Assert.Equal(1.83d, result.PerAreaSummaries[GreenRetrofitMetric.SiteUses].MonthlyTotal[0]);
         Assert.Equal(87.84d, result.GrossSummaries[GreenRetrofitMetric.SiteUses].MonthlyTotal[0]);
     }
@@ -138,6 +141,30 @@ public sealed class GreenRetrofitResultBuilderTests
         Assert.False(failed.Success);
         Assert.Null(failed.Result);
         Assert.Equal("SD.GRR.ENERGYPLUS_FAILED", Assert.Single(failed.Diagnostics).Code);
+    }
+
+    [Fact]
+    public void ExplicitCompatibilityOptionRetainsCompleteTablesWithSevereDiagnostics()
+    {
+        GreenRetrofitModel model = LoadModel();
+        EnergyPlusTabularTable electricity = MonthlyRows(
+            "EndUseEnergyConsumptionElectricityMonthly",
+            ElectricityHeadings,
+            _ => new double[ElectricityHeadings.Length]);
+
+        GreenRetrofitResultBuildResult build = GreenRetrofitResultBuilder.Build(
+            model,
+            Simulation(new[] { electricity }, severeCount: 1),
+            new GreenRetrofitResultBuildOptions
+            {
+                AllowSevereDiagnostics = true,
+            });
+
+        Assert.True(build.Success, Describe(build));
+        Assert.NotNull(build.Result);
+        Assert.Equal(
+            "SD.GRR.ENERGYPLUS_SEVERE_ALLOWED",
+            Assert.Single(build.Diagnostics).Code);
     }
 
     private static EnergyPlusTabularTable MonthlyRows(

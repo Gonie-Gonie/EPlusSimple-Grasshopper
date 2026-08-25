@@ -37,6 +37,15 @@ public sealed class GreenRetrofitResultBuildResult
     }
 }
 
+public sealed class GreenRetrofitResultBuildOptions
+{
+    /// <summary>
+    /// Allows conversion of complete tabular output when EnergyPlus emitted one or more
+    /// severe diagnostics. Fatal diagnostics always remain blocking.
+    /// </summary>
+    public bool AllowSevereDiagnostics { get; set; }
+}
+
 /// <summary>
 /// Transforms InvisibleDragon monthly EnergyPlus tables into the upstream GRR 0.7 result model.
 /// </summary>
@@ -73,10 +82,12 @@ public static class GreenRetrofitResultBuilder
 
     public static GreenRetrofitResultBuildResult Build(
         GreenRetrofitModel model,
-        EnergyPlusSimulationResult simulation)
+        EnergyPlusSimulationResult simulation,
+        GreenRetrofitResultBuildOptions? options = null)
     {
         DomainSupport.NotNull(model, nameof(model));
         DomainSupport.NotNull(simulation, nameof(simulation));
+        options ??= new GreenRetrofitResultBuildOptions();
         var diagnostics = new List<Diagnostic>();
         if (model.Area <= 0d)
         {
@@ -96,14 +107,23 @@ public static class GreenRetrofitResultBuilder
             return BuildResult(null, diagnostics);
         }
 
-        if (simulation.ErrorLog.Summary.SevereCount > 0
-            || simulation.ErrorLog.Summary.FatalCount > 0)
+        if (simulation.ErrorLog.Summary.FatalCount > 0
+            || (simulation.ErrorLog.Summary.SevereCount > 0
+                && !options.AllowSevereDiagnostics))
         {
             diagnostics.Add(Error(
                 "SD.GRR.ENERGYPLUS_FAILED",
                 "EnergyPlus reported severe or fatal errors; GRR values would be incomplete.",
                 "Resolve the EnergyPlus diagnostics and rerun the model."));
             return BuildResult(null, diagnostics);
+        }
+
+        if (simulation.ErrorLog.Summary.SevereCount > 0)
+        {
+            diagnostics.Add(Warning(
+                "SD.GRR.ENERGYPLUS_SEVERE_ALLOWED",
+                "EnergyPlus reported severe diagnostics, but complete tabular output was retained by explicit request.",
+                "Review the EnergyPlus error log before relying on the converted GRR result."));
         }
 
         var values = CreateMutableMatrix();
