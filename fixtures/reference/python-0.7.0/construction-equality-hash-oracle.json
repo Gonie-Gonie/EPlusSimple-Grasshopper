@@ -1,0 +1,146 @@
+{
+  "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+  "runtime": {
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.invisibledragon.construction-equality-hash-oracle.v1",
+  "source": {
+    "content_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622",
+    "path": "src/idragon/dragon/construction.py"
+  },
+  "symbols": [
+    {
+      "null_operand": {
+        "exception_message": "'NoneType' object has no attribute 'name'",
+        "exception_type": "AttributeError",
+        "outcome": "raised"
+      },
+      "same_type_cases": [
+        {
+          "case": "same-name-same-ordered-layer-values",
+          "equal": true
+        },
+        {
+          "case": "different-name",
+          "equal": false
+        },
+        {
+          "case": "reversed-layer-order",
+          "equal": false
+        },
+        {
+          "case": "fewer-layers",
+          "equal": false
+        }
+      ],
+      "symbol": "Construction.__eq__",
+      "symbol_hash": "sha256:8bf568b5f76ed813063ea04fd2eedf087e8f2525c2be9b9febbdb150a906b019"
+    },
+    {
+      "hash_dependency": {
+        "base": {
+          "name": "Wall",
+          "name_hash": -3800131166649284067,
+          "object_hash": -3800131166649284067
+        },
+        "checks": {
+          "object_hash_equals_name_hash": true,
+          "same_name_reversed_layers_same_hash": true
+        },
+        "same_name_reversed_layers": {
+          "name": "Wall",
+          "name_hash": -3800131166649284067,
+          "object_hash": -3800131166649284067
+        }
+      },
+      "symbol": "Construction.__hash__",
+      "symbol_hash": "sha256:5994dd14a598a335d7945a1e39b59d93fd6bed9afbaff1308019b57bf22d0889"
+    },
+    {
+      "null_operand": {
+        "exception_message": "'NoneType' object has no attribute 'material'",
+        "exception_type": "AttributeError",
+        "outcome": "raised"
+      },
+      "same_type_cases": [
+        {
+          "case": "renamed-layer-same-material-and-thickness",
+          "equal": true
+        },
+        {
+          "case": "different-thickness",
+          "equal": false
+        },
+        {
+          "case": "different-material",
+          "equal": false
+        }
+      ],
+      "symbol": "Layer.__eq__",
+      "symbol_hash": "sha256:b3fd4452af62f2d402279427187e70e6165f14be9a0b0543f8702dee39a473e6"
+    },
+    {
+      "hash_dependency": {
+        "base": {
+          "name": "Exterior concrete",
+          "name_hash": -7690400829097940843,
+          "object_hash": -7690400829097940843
+        },
+        "checks": {
+          "different_name_observed": true,
+          "equal_different_name": true,
+          "equal_different_name_hashes_differ": true,
+          "object_hash_equals_name_hash": true,
+          "same_name_changed_thickness_same_hash": true
+        },
+        "different_name": {
+          "name": "Other layer",
+          "name_hash": 9069355770650853479,
+          "object_hash": 9069355770650853479
+        },
+        "same_name_changed_thickness": {
+          "name": "Exterior concrete",
+          "name_hash": -7690400829097940843,
+          "object_hash": -7690400829097940843
+        }
+      },
+      "symbol": "Layer.__hash__",
+      "symbol_hash": "sha256:5994dd14a598a335d7945a1e39b59d93fd6bed9afbaff1308019b57bf22d0889"
+    },
+    {
+      "null_operand": {
+        "exception_message": "Cannot compare Material with <class 'NoneType'>",
+        "exception_type": "TypeError",
+        "outcome": "raised"
+      },
+      "same_type_cases": [
+        {
+          "case": "same-core-ignore-optical-and-roughness",
+          "equal": true
+        },
+        {
+          "case": "different-name",
+          "equal": false
+        },
+        {
+          "case": "different-conductivity",
+          "equal": false
+        },
+        {
+          "case": "different-density",
+          "equal": false
+        },
+        {
+          "case": "different-specific-heat",
+          "equal": false
+        }
+      ],
+      "symbol": "Material.__eq__",
+      "symbol_hash": "sha256:6ef680a2e300bcb56672f0d036de1b4aea3630cb90a635a3e45002ff8535dbf5"
+    }
+  ],
+  "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897"
+}

@@ -15,10 +15,15 @@ work to `temp/reference/python-output`.
 .\dev.cmd reference -RefreshDependencies
 ```
 
-The generator fixes `PYTHONHASHSEED`, removes CPython memory addresses from the
-generated IDF with a stable first-occurrence mapping, and records hashes for
-every output. `-Mode Verify` compares those files byte-for-byte with the
-reviewed baseline under `fixtures/reference/python-0.7.0`.
+The generators fix `PYTHONHASHSEED`, remove CPython memory addresses from the
+generated IDF with a stable first-occurrence mapping, and record hashes for
+every output. The construction equality/hash oracle additionally binds its
+Material, Layer, and Construction observations to the exact public-symbol
+inventory, source bytes, and five upstream symbol hashes. `-Mode Verify`
+compares all generated files byte-for-byte with the reviewed baseline under
+`fixtures/reference/python-0.7.0`. Every reference run also executes the
+fail-closed generator tests under `tests/PythonReference` before producing an
+oracle.
 
 Updating the tracked baseline is an explicit review action:
 

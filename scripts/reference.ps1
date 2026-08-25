@@ -29,6 +29,9 @@ $bootstrapPath = Join-Path $repositoryRoot 'tools\python-reference\bootstrap_ref
 $generatorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_reference.py'
 $profileGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_usage_profile_schedule_oracle.py'
 $iddGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_idd_schema_oracle.py'
+$constructionEqualityGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_construction_equality_hash_oracle.py'
+$constructionEqualityTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_construction_equality_hash_oracle.py'
+$publicSymbolInventoryPath = Join-Path $repositoryRoot 'upstream\public-symbol-inventory.json'
 $tempRoot = Join-Path $repositoryRoot 'temp'
 $referenceTempRoot = Join-Path $tempRoot 'reference'
 $logsRoot = Join-Path $referenceTempRoot 'logs'
@@ -96,7 +99,18 @@ if ($Mode -eq 'Verify' -and $UpdateBaseline) {
     throw '-UpdateBaseline cannot be combined with -Mode Verify.'
 }
 
-foreach ($requiredFile in @($settingsPath, $lockPath, $requirementsPath, $bootstrapPath, $generatorPath, $profileGeneratorPath, $iddGeneratorPath)) {
+foreach ($requiredFile in @(
+    $settingsPath,
+    $lockPath,
+    $requirementsPath,
+    $bootstrapPath,
+    $generatorPath,
+    $profileGeneratorPath,
+    $iddGeneratorPath,
+    $constructionEqualityGeneratorPath,
+    $constructionEqualityTestPath,
+    $publicSymbolInventoryPath
+)) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
         throw "Required reference-oracle input is missing: '$requiredFile'. Run 'dev.cmd setup' if local.settings.json is absent."
     }
@@ -576,7 +590,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile, IDD, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile, IDD, construction equality/hash, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -584,6 +598,21 @@ $env:PYTHONHASHSEED = '0'
 $env:PYTHONUTF8 = '1'
 $env:PYTHONDONTWRITEBYTECODE = '1'
 $upstreamSource = Join-Path $UpstreamPath 'src'
+$constructionEqualityTestArguments = @(
+    '-B',
+    '-X', 'utf8',
+    '-m', 'unittest',
+    'discover',
+    '-s', (Split-Path -Parent $constructionEqualityTestPath),
+    '-p', 'test_*.py',
+    '-v'
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $constructionEqualityTestArguments `
+    -LogPath (Join-Path $logsRoot 'python-reference-generator-tests.log') `
+    -FailureMessage 'Python reference generator tests failed'
+
 $profileOraclePath = Join-Path $outputRoot 'usage-profile-schedule-oracle.json'
 $profileGeneratorArguments = @(
     '-X', 'utf8',
@@ -623,6 +652,24 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $iddGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-idd-reference.log') `
     -FailureMessage 'Generating the EnergyPlus IDD reference oracle failed'
+
+$constructionEqualityOraclePath = Join-Path $outputRoot 'construction-equality-hash-oracle.json'
+$constructionEqualityGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $constructionEqualityGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $constructionEqualityOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $constructionEqualityGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-construction-equality-reference.log') `
+    -FailureMessage 'Generating the Python construction equality/hash oracle failed'
 
 $generatorArguments = @(
     '-X', 'utf8',
