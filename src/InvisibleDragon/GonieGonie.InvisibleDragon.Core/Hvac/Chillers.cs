@@ -75,7 +75,9 @@ public sealed class Chiller : SourceSystem
 
     public double SetpointTemperatureCelsius { get; }
 
-    public override string IdfObjectType => "Chiller:Electric:EIR";
+    public override string IdfObjectType => Compressor == CompressorType.Screw
+        ? "Chiller:Electric:ReformulatedEIR"
+        : "Chiller:Electric:EIR";
 
     public override string IdfObjectName => $"Chiller_named_{Name}";
 
@@ -89,7 +91,60 @@ public sealed class Chiller : SourceSystem
         objects.AddRange(CreatePerformanceCurves(context));
         objects.AddRange(CoolingTower.ToIdfObjects(context, this));
 
-        IdfObject component = context.Create(
+        IdfObject component = CreateMainComponent(context);
+        objects.AddRange(CoolingPlantLoopAssembler.CreateCoolingLoop(
+            context,
+            this,
+            component,
+            ChilledWaterInletNodeName,
+            ChilledWaterOutletNodeName,
+            PumpMotorEfficiency,
+            SetpointTemperatureCelsius,
+            demandConnections ?? Array.Empty<PlantDemandConnection>()));
+        return objects;
+    }
+
+    internal string ChilledWaterInletNodeName => $"{IdfObjectName} ChilledWater InletNode";
+
+    internal string ChilledWaterOutletNodeName => $"{IdfObjectName} ChilledWater OutletNode";
+
+    internal string CondenserInletNodeName => $"{IdfObjectName} Condenser InletNode";
+
+    internal string CondenserOutletNodeName => $"{IdfObjectName} Condenser OutletNode";
+
+    private IdfObject CreateMainComponent(IdfGenerationContext context)
+    {
+        if (Compressor == CompressorType.Screw)
+        {
+            // EnergyPlus 24.2 exposes the pinned temperature-by-PLR surface through
+            // the reformulated model; the standard Electric:EIR PLR field is univariate.
+            return context.Create(
+                IdfObjectType,
+                IdfGenerationContext.Field(0, "Name", IdfObjectName),
+                IdfGenerationContext.Field(1, "Reference Capacity", NominalCapacityWatts ?? (object)"autosize"),
+                IdfGenerationContext.Field(2, "Reference COP", ReferenceCoefficientOfPerformance),
+                IdfGenerationContext.Field(3, "Reference Leaving Chilled Water Temperature", SetpointTemperatureCelsius),
+                IdfGenerationContext.Field(4, "Reference Leaving Condenser Water Temperature", 29),
+                IdfGenerationContext.Field(5, "Reference Chilled Water Flow Rate", "autosize"),
+                IdfGenerationContext.Field(6, "Reference Condenser Water Flow Rate", "autosize"),
+                IdfGenerationContext.Field(7, "Cooling Capacity Function of Temperature Curve Name", Curve("CoolingCapaTemp")),
+                IdfGenerationContext.Field(8, "Electric Input to Cooling Output Ratio Function of Temperature Curve Name", Curve("CoolingCOPTemp")),
+                IdfGenerationContext.Field(9, "Electric Input to Cooling Output Ratio Function of Part Load Ratio Curve Type", "LeavingCondenserWaterTemperature"),
+                IdfGenerationContext.Field(10, "Electric Input to Cooling Output Ratio Function of Part Load Ratio Curve Name", Curve("CoolingCOPPLR")),
+                IdfGenerationContext.Field(11, "Minimum Part Load Ratio", 0.1),
+                IdfGenerationContext.Field(12, "Maximum Part Load Ratio", 1),
+                IdfGenerationContext.Field(13, "Optimum Part Load Ratio", 1),
+                IdfGenerationContext.Field(14, "Minimum Unloading Ratio", 0.2),
+                IdfGenerationContext.Field(15, "Chilled Water Inlet Node Name", ChilledWaterInletNodeName),
+                IdfGenerationContext.Field(16, "Chilled Water Outlet Node Name", ChilledWaterOutletNodeName),
+                IdfGenerationContext.Field(17, "Condenser Inlet Node Name", CondenserInletNodeName),
+                IdfGenerationContext.Field(18, "Condenser Outlet Node Name", CondenserOutletNodeName),
+                IdfGenerationContext.Field(19, "Fraction of Compressor Electric Consumption Rejected by Condenser", 1),
+                IdfGenerationContext.Field(20, "Leaving Chilled Water Lower Temperature Limit", 2),
+                IdfGenerationContext.Field(21, "Chiller Flow Mode Type", "NotModulated"));
+        }
+
+        return context.Create(
             IdfObjectType,
             IdfGenerationContext.Field(0, "Name", IdfObjectName),
             IdfGenerationContext.Field(1, "Reference Capacity", NominalCapacityWatts ?? (object)"autosize"),
@@ -113,25 +168,7 @@ public sealed class Chiller : SourceSystem
             IdfGenerationContext.Field(20, "Fraction of Compressor Electric Consumption Rejected by Condenser", 1),
             IdfGenerationContext.Field(21, "Leaving Chilled Water Lower Temperature Limit", 2),
             IdfGenerationContext.Field(22, "Chiller Flow Mode", "NotModulated"));
-        objects.AddRange(CoolingPlantLoopAssembler.CreateCoolingLoop(
-            context,
-            this,
-            component,
-            ChilledWaterInletNodeName,
-            ChilledWaterOutletNodeName,
-            PumpMotorEfficiency,
-            SetpointTemperatureCelsius,
-            demandConnections ?? Array.Empty<PlantDemandConnection>()));
-        return objects;
     }
-
-    internal string ChilledWaterInletNodeName => $"{IdfObjectName} ChilledWater InletNode";
-
-    internal string ChilledWaterOutletNodeName => $"{IdfObjectName} ChilledWater OutletNode";
-
-    internal string CondenserInletNodeName => $"{IdfObjectName} Condenser InletNode";
-
-    internal string CondenserOutletNodeName => $"{IdfObjectName} Condenser OutletNode";
 
     private IEnumerable<IdfObject> CreatePerformanceCurves(IdfGenerationContext context)
     {
@@ -201,17 +238,21 @@ public sealed class Chiller : SourceSystem
                     20,
                     0,
                     50);
-                // The pinned source stores this family as a bicubic of condenser
-                // temperature and PLR, but Chiller:Electric:EIR accepts only a
-                // univariate PLR curve in EnergyPlus 24.2. Collapse the exact
-                // matrix at the 29 C reference condenser temperature used above.
-                yield return Cubic(
+                yield return Bicubic(
                     context,
                     "CoolingCOPPLR",
-                    0.78097407420000009,
-                    -1.1434505447,
+                    0.044612112,
+                    0.023594163,
+                    0.0000619872,
+                    -0.353684198,
                     1.797965254,
+                    -0.0272333223,
+                    0,
                     -0.467387755,
+                    0,
+                    0,
+                    14.56,
+                    34.97,
                     0.18,
                     1.03);
                 break;
@@ -265,11 +306,11 @@ public sealed class Chiller : SourceSystem
             "Curve:Biquadratic",
             new object?[] { Curve(suffix) }.Concat(values).ToArray());
 
-    private IdfObject Cubic(
+    private IdfObject Bicubic(
         IdfGenerationContext context,
         string suffix,
         params object?[] values) => context.CreateRaw(
-            "Curve:Cubic",
+            "Curve:Bicubic",
             new object?[] { Curve(suffix) }.Concat(values).ToArray());
 
     private IdfObject Quadratic(

@@ -32,6 +32,24 @@ public sealed class ColdSourceEnergyPlusIntegrationTests
     }
 
     [EnergyPlusRunnableModelTests.EnergyPlusGeneratedModelFact]
+    public async Task StandaloneScrewChillerBicubicPlantRunsInEnergyPlus242()
+    {
+        var tower = new OpenSingleSpeedCoolingTower(
+            new EntityId("RUN-SCREW-TOWER"),
+            "Runnable screw cooling tower",
+            nominalCapacityWatts: 100_000);
+        var chiller = new Chiller(
+            new EntityId("RUN-SCREW-CHILLER"),
+            "Runnable screw chiller",
+            3.2,
+            CompressorType.Screw,
+            tower,
+            nominalCapacityWatts: 80_000);
+
+        await RunSourceAsync(chiller, "screw-chiller-bicubic");
+    }
+
+    [EnergyPlusRunnableModelTests.EnergyPlusGeneratedModelFact]
     public async Task AbsorptionChillerGeneratorPlantRunsInEnergyPlus242()
     {
         var boiler = new Boiler(

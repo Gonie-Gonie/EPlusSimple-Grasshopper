@@ -8,11 +8,27 @@ namespace GonieGonie.InvisibleDragon.Tests.Hvac;
 
 public sealed class ColdSourceSystemTests
 {
-    public static TheoryData<CompressorType, string, double> CompressorCases => new()
+    public static TheoryData<CompressorType, string, string, double> CompressorCases => new()
     {
-        { CompressorType.Turbo, "Curve:Quadratic", 0.257183345 },
-        { CompressorType.Screw, "Curve:Cubic", 0.907133913 },
-        { CompressorType.Reciprocating, "Curve:Quadratic", 0.9441897 },
+        { CompressorType.Turbo, "Chiller:Electric:EIR", "Curve:Quadratic", 0.257183345 },
+        { CompressorType.Screw, "Chiller:Electric:ReformulatedEIR", "Curve:Bicubic", 0.907133913 },
+        { CompressorType.Reciprocating, "Chiller:Electric:EIR", "Curve:Quadratic", 0.9441897 },
+    };
+
+    public static TheoryData<double, double, double> ScrewBicubicSweep => new()
+    {
+        { 14.56, 0.18, 0.32177603708051999 },
+        { 14.56, 0.50, 0.41725117374292003 },
+        { 14.56, 1.03, 1.0253107217639950 },
+        { 20.00, 0.18, 0.43511540492244005 },
+        { 20.00, 0.50, 0.48318277412499999 },
+        { 20.00, 1.03, 1.0127232072907151 },
+        { 29.00, 0.18, 0.63068124499643996 },
+        { 29.00, 0.50, 0.60031664597500012 },
+        { 29.00, 1.03, 0.99995413176971526 },
+        { 34.97, 0.18, 0.76594643743133994 },
+        { 34.97, 0.50, 0.68355529948797999 },
+        { 34.97, 1.03, 0.99702383019326490 },
     };
 
     public static TheoryData<CoolingTower, string> CoolingTowerCases => new()
@@ -39,6 +55,7 @@ public sealed class ColdSourceSystemTests
     [MemberData(nameof(CompressorCases))]
     public void ChillerExportsPinnedCompressorCurveFamily(
         CompressorType compressor,
+        string chillerObjectType,
         string partLoadCurveType,
         double firstCapacityCoefficient)
     {
@@ -46,6 +63,8 @@ public sealed class ColdSourceSystemTests
 
         IReadOnlyList<IdfObject> objects = chiller.ToIdfObjects(new IdfGenerationContext());
 
+        Assert.Equal(chillerObjectType, chiller.IdfObjectType);
+        Assert.Single(objects, item => item.ObjectType == chillerObjectType);
         Assert.Equal(2, objects.Count(item => item.ObjectType == "Curve:Biquadratic"));
         IdfObject partLoad = Assert.Single(
             objects,
@@ -55,6 +74,87 @@ public sealed class ColdSourceSystemTests
             objects,
             item => item.ObjectType == "Curve:Biquadratic" && item.Name!.EndsWith(":CoolingCapaTemp", StringComparison.Ordinal));
         Assert.Equal(firstCapacityCoefficient.ToString("R", System.Globalization.CultureInfo.InvariantCulture), capacity[1]);
+    }
+
+    [Fact]
+    public void ScrewChillerExportsPinnedBicubicFieldsAndReformulatedEirConnection()
+    {
+        Chiller chiller = CreateChiller(CompressorType.Screw, OpenTower("CT-SCREW-BICUBIC"));
+
+        IReadOnlyList<IdfObject> objects = chiller.ToIdfObjects(new IdfGenerationContext());
+
+        IdfObject curve = Assert.Single(
+            objects,
+            item => item.ObjectType == "Curve:Bicubic"
+                && item.Name!.EndsWith(":CoolingCOPPLR", StringComparison.Ordinal));
+        double[] expectedFields =
+        {
+            0.044612112,
+            0.023594163,
+            0.0000619872,
+            -0.353684198,
+            1.797965254,
+            -0.0272333223,
+            0,
+            -0.467387755,
+            0,
+            0,
+            14.56,
+            34.97,
+            0.18,
+            1.03,
+        };
+        double[] actualFields = Enumerable.Range(1, expectedFields.Length)
+            .Select(index => double.Parse(
+                curve[index],
+                System.Globalization.CultureInfo.InvariantCulture))
+            .ToArray();
+        Assert.Equal(expectedFields, actualFields);
+
+        IdfObject component = Assert.Single(
+            objects,
+            item => item.ObjectType == "Chiller:Electric:ReformulatedEIR");
+        Assert.Equal("LeavingCondenserWaterTemperature", component[9]);
+        Assert.Equal(curve.Name, component[10]);
+        Assert.Contains(
+            objects,
+            item => item.ObjectType == "Branch"
+                && item.Name == $"{chiller.LoopName} Supply MainComponent"
+                && item[2] == chiller.IdfObjectType);
+        Assert.Contains(
+            objects,
+            item => item.ObjectType == "Branch"
+                && item.Name == $"{CoolingTower.LoopNameFor(chiller)} Demand MainChiller"
+                && item[2] == chiller.IdfObjectType);
+        Assert.Contains(
+            objects,
+            item => item.ObjectType == "PlantEquipmentList"
+                && item[1] == chiller.IdfObjectType);
+        Assert.DoesNotContain(
+            objects,
+            item => item.ObjectType == "Curve:Cubic"
+                && item.Name!.EndsWith(":CoolingCOPPLR", StringComparison.Ordinal));
+    }
+
+    [Theory]
+    [MemberData(nameof(ScrewBicubicSweep))]
+    public void ScrewChillerBicubicMatchesPinnedTemperaturePartLoadSurface(
+        double leavingCondenserWaterTemperatureCelsius,
+        double partLoadRatio,
+        double expectedModifier)
+    {
+        Chiller chiller = CreateChiller(CompressorType.Screw, OpenTower("CT-SCREW-SWEEP"));
+        IdfObject curve = Assert.Single(
+            chiller.ToIdfObjects(new IdfGenerationContext()),
+            item => item.ObjectType == "Curve:Bicubic"
+                && item.Name!.EndsWith(":CoolingCOPPLR", StringComparison.Ordinal));
+
+        double actualModifier = EvaluateBicubic(
+            curve,
+            leavingCondenserWaterTemperatureCelsius,
+            partLoadRatio);
+
+        Assert.InRange(Math.Abs(actualModifier - expectedModifier), 0, 1E-12);
     }
 
     [Theory]
@@ -100,7 +200,7 @@ public sealed class ColdSourceSystemTests
             new IdfGenerationContext(),
             new[] { demand });
 
-        Assert.Single(first, item => item.ObjectType == "Chiller:Electric:EIR");
+        Assert.Single(first, item => item.ObjectType == chiller.IdfObjectType);
         Assert.Single(first, item => item.ObjectType == "PlantLoop");
         Assert.Single(first, item => item.ObjectType == "CondenserLoop");
         Assert.Contains(first, item => item.ObjectType == "Branch" && item.Name == demand.BranchName);
@@ -257,6 +357,25 @@ public sealed class ColdSourceSystemTests
     {
         var document = new IdfDocument(objects: objects);
         return IdfWriter.Write(document);
+    }
+
+    private static double EvaluateBicubic(IdfObject curve, double x, double y)
+    {
+        double[] coefficient = Enumerable.Range(1, 10)
+            .Select(index => double.Parse(
+                curve[index],
+                System.Globalization.CultureInfo.InvariantCulture))
+            .ToArray();
+        return coefficient[0]
+            + (coefficient[1] * x)
+            + (coefficient[2] * x * x)
+            + (coefficient[3] * y)
+            + (coefficient[4] * y * y)
+            + (coefficient[5] * x * y)
+            + (coefficient[6] * x * x * x)
+            + (coefficient[7] * y * y * y)
+            + (coefficient[8] * x * x * y)
+            + (coefficient[9] * x * y * y);
     }
 
     private static void Append(IdfDocument document, IEnumerable<IdfObject> objects)

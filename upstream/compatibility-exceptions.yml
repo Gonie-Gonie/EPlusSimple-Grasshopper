@@ -35,15 +35,3 @@
     engineering_result: none
     packaging: separate runtime-specific plugin payloads
   approval: user-requested
-
-- id: screw-chiller-plr-curve-energyplus-24-2
-  upstream:
-    path: src/idragon/dragon/hvac.py
-    symbol: CompressorType.to_idf_curve_object[SCREW]
-  difference:
-    upstream: emits a two-input Curve:Bicubic for the electric chiller part-load modifier
-    dotnet: analytically evaluates the second input at the pinned 29 C reference condenser temperature and emits the equivalent one-input Curve:Cubic
-  effect:
-    engineering_result: preserves the pinned coefficient surface at its reference condition
-    runtime: EnergyPlus 24.2 accepts the curve as a univariate chiller part-load function
-  approval: required-for-pinned-runtime
