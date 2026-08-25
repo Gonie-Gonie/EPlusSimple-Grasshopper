@@ -199,6 +199,21 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
         return new Schedule(Name, RuleSets.Select(ruleSet => ruleSet.AsType(type)), type);
     }
 
+    public Schedule Add(Schedule other, string? name = null)
+    {
+        return Combine(other, (left, right) => left.Add(right), "ADD", name);
+    }
+
+    public Schedule Subtract(Schedule other, string? name = null)
+    {
+        return Combine(other, (left, right) => left.Subtract(right), "SUB", name);
+    }
+
+    public Schedule Divide(Schedule other, string? name = null)
+    {
+        return Combine(other, (left, right) => left.Divide(right), "DIV", name);
+    }
+
     public Schedule Scale(double factor, string? name = null)
     {
         return new Schedule(
@@ -264,6 +279,18 @@ public sealed class Schedule : IReadOnlyList<RuleSet>, IEquatable<Schedule>
     public IEnumerator<RuleSet> GetEnumerator()
     {
         return RuleSets.GetEnumerator();
+    }
+
+    private Schedule Combine(
+        Schedule other,
+        Func<RuleSet, RuleSet, RuleSet> operation,
+        string operationName,
+        string? name)
+    {
+        DomainGuard.NotNull(other, nameof(other));
+        return new Schedule(
+            name ?? $"{Name}:{operationName}:{other.Name}",
+            Enumerable.Range(0, FixedLength).Select(index => operation(RuleSets[index], other.RuleSets[index])));
     }
 
     IEnumerator IEnumerable.GetEnumerator()

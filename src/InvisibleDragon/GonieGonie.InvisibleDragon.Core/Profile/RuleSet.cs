@@ -139,6 +139,11 @@ public sealed class RuleSet : IEquatable<RuleSet>
         return Combine(other, (left, right) => left - right, "SUB");
     }
 
+    public RuleSet Divide(RuleSet other)
+    {
+        return Combine(other, (left, right) => left / right, "DIV");
+    }
+
     public RuleSet LogicalAnd(RuleSet other)
     {
         return Combine(other, (left, right) => left & right, "AND");
