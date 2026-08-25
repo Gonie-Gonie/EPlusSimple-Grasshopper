@@ -10,6 +10,9 @@
 *.sln text eol=lf
 *.md text eol=lf
 *.json text eol=lf
+# NuGet serializes lock files with Windows-native CRLF; preserve those exact
+# bytes so a restore cannot leave an apparently-clean but non-HEAD worktree.
+**/packages.lock.json -text -eol whitespace=cr-at-eol
 *.yml text eol=lf
 *.yaml text eol=lf
 *.csv text eol=lf
