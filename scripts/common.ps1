@@ -237,6 +237,144 @@ function Write-Utf8JsonIfChanged {
     Write-Host "Wrote: $Path"
 }
 
+function Normalize-TrackedPackageLockLineEndings {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $RepositoryRoot
+    )
+
+    $ErrorActionPreference = 'Stop'
+
+    $root = [System.IO.Path]::GetFullPath($RepositoryRoot).TrimEnd('\', '/')
+    if (-not (Test-Path -LiteralPath $root -PathType Container)) {
+        throw "Repository root does not exist: '$root'."
+    }
+
+    $git = Get-Command git.exe -CommandType Application -ErrorAction SilentlyContinue |
+        Select-Object -First 1
+    if ($null -eq $git) {
+        throw 'Git is required to enumerate tracked NuGet lock files.'
+    }
+
+    $tracked = @(& $git.Source -C $root ls-files -- '*packages.lock.json')
+    if ($LASTEXITCODE -ne 0) {
+        throw "Git could not enumerate tracked NuGet lock files under '$root'."
+    }
+    $tracked = @($tracked | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    if ($tracked.Count -eq 0) {
+        throw "No tracked packages.lock.json files were found under '$root'."
+    }
+
+    $rootPrefix = $root + [System.IO.Path]::DirectorySeparatorChar
+    $normalizedCount = 0
+    foreach ($relativePath in $tracked) {
+        if ([System.IO.Path]::IsPathRooted($relativePath) -or
+            $relativePath.IndexOf([char]0) -ge 0) {
+            throw "Git returned an unsafe tracked lock-file path: '$relativePath'."
+        }
+        $segments = @($relativePath.Split(
+            @('/', '\'),
+            [System.StringSplitOptions]::RemoveEmptyEntries))
+        if ($segments.Count -eq 0 -or $segments -contains '..' -or $segments -contains '.') {
+            throw "Git returned an unsafe tracked lock-file path: '$relativePath'."
+        }
+
+        $path = [System.IO.Path]::GetFullPath((Join-Path $root $relativePath))
+        if (-not $path.StartsWith($rootPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw "Tracked lock file escaped the repository: '$relativePath'."
+        }
+        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+            throw "Tracked lock file is missing or not a regular file: '$relativePath'."
+        }
+        Assert-NoReparsePoints -Path $path -AnchorPath $root
+
+        $bytes = [System.IO.File]::ReadAllBytes($path)
+        if ($bytes.Length -ge 3 -and
+            $bytes[0] -eq 0xEF -and
+            $bytes[1] -eq 0xBB -and
+            $bytes[2] -eq 0xBF) {
+            throw "Tracked lock file contains a forbidden UTF-8 BOM: '$relativePath'."
+        }
+
+        $normalized = New-Object 'System.Collections.Generic.List[byte]'
+        $sawCrLf = $false
+        $sawLf = $false
+        for ($index = 0; $index -lt $bytes.Length; $index += 1) {
+            $value = $bytes[$index]
+            if ($value -eq 13) {
+                if ($index + 1 -ge $bytes.Length -or $bytes[$index + 1] -ne 10) {
+                    throw "Tracked lock file contains a lone CR byte: '$relativePath'."
+                }
+                $normalized.Add([byte] 10)
+                $sawCrLf = $true
+                $index += 1
+            }
+            elseif ($value -eq 10) {
+                $normalized.Add([byte] 10)
+                $sawLf = $true
+            }
+            else {
+                $normalized.Add($value)
+            }
+        }
+        if ($sawCrLf -and $sawLf) {
+            throw "Tracked lock file contains mixed LF and CRLF endings: '$relativePath'."
+        }
+        if (-not $sawCrLf) {
+            continue
+        }
+
+        if ($WhatIfPreference) {
+            Write-Host "What if: normalize tracked NuGet lock file '$relativePath' to LF."
+            continue
+        }
+
+        $temporaryPath = $path + '.goniegonie-' + [Guid]::NewGuid().ToString('N') + '.tmp'
+        $backupPath = $path + '.goniegonie-' + [Guid]::NewGuid().ToString('N') + '.bak'
+        try {
+            $stream = New-Object System.IO.FileStream(
+                $temporaryPath,
+                [System.IO.FileMode]::CreateNew,
+                [System.IO.FileAccess]::Write,
+                [System.IO.FileShare]::None)
+            try {
+                $normalizedBytes = $normalized.ToArray()
+                $stream.Write($normalizedBytes, 0, $normalizedBytes.Length)
+                $stream.Flush($true)
+            }
+            finally {
+                $stream.Dispose()
+            }
+            [System.IO.File]::Replace($temporaryPath, $path, $backupPath, $true)
+            $actual = [System.IO.File]::ReadAllBytes($path)
+            $matches = $actual.Length -eq $normalizedBytes.Length
+            if ($matches) {
+                for ($verifyIndex = 0; $verifyIndex -lt $actual.Length; $verifyIndex += 1) {
+                    if ($actual[$verifyIndex] -ne $normalizedBytes[$verifyIndex]) {
+                        $matches = $false
+                        break
+                    }
+                }
+            }
+            if (-not $matches) {
+                throw "Atomic lock-file normalization verification failed: '$relativePath'."
+            }
+            $normalizedCount += 1
+        }
+        finally {
+            if (Test-Path -LiteralPath $temporaryPath) {
+                Remove-Item -LiteralPath $temporaryPath -Force
+            }
+            if (Test-Path -LiteralPath $backupPath) {
+                Remove-Item -LiteralPath $backupPath -Force
+            }
+        }
+    }
+
+    Write-Host "NuGet lock-file LF normalization: $normalizedCount changed, $($tracked.Count) checked."
+}
+
 function Format-NativeCommand {
     [CmdletBinding()]
     param(

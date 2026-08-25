@@ -853,6 +853,7 @@ else {
         ) `
         -LogPath (Join-Path $logsRoot 'setup-restore.log') `
         -FailureMessage 'Dependency restore failed during setup'
+    Normalize-TrackedPackageLockLineEndings -RepositoryRoot $repositoryRoot
 }
 
 Write-Host ''

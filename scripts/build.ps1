@@ -288,6 +288,7 @@ if (-not $NoRestore) {
             ) `
             -LogPath (Join-Path $logsRoot 'restore.log') `
             -FailureMessage 'Dependency restore failed'
+        Normalize-TrackedPackageLockLineEndings -RepositoryRoot $repositoryRoot
     }
 }
 else {
