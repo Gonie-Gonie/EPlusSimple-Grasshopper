@@ -31,6 +31,7 @@ from .evidence import (
     render_symbol_evidence,
 )
 from .reporting import write_reports
+from .scope_policy import build_safe_scope_plan
 from .symbols import build_snapshot
 
 
@@ -57,6 +58,9 @@ def main(arguments: Sequence[str] | None = None) -> int:
         if options.command == "rebase-inventory":
             compatibility = _compatibility_configuration(options, repository_root, configuration)
             return _rebase_inventory(compatibility, options, repository_root)
+        if options.command == "apply-safe-scope":
+            compatibility = _compatibility_configuration(options, repository_root, configuration)
+            return _apply_safe_scope(compatibility, options, repository_root)
         if options.command == "compatibility-report":
             compatibility = _compatibility_configuration(options, repository_root, configuration)
             return _compatibility_report(
@@ -203,6 +207,21 @@ def _create_parser() -> argparse.ArgumentParser:
         "--output-dir",
         type=Path,
         help="Output directory; defaults beneath temp/upstream-tracker/rebased.",
+    )
+
+    scope_parser = commands.add_parser(
+        "apply-safe-scope",
+        help="Generate the exact reviewed 250-symbol product-scope integration.",
+    )
+    scope_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        help="Output directory; defaults beneath temp/upstream-tracker/safe-scope.",
+    )
+    scope_parser.add_argument(
+        "--write-canonical",
+        action="store_true",
+        help="Replace the two canonical scope manifests after exact validation.",
     )
 
     report_parser = commands.add_parser(
@@ -499,6 +518,80 @@ def _rebase_inventory(
                 "outputs": {key: str(value) for key, value in paths.items()},
                 "schema": "goniegonie.upstream-inventory-rebase.v1",
                 "symbol_contract_unchanged": True,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+    )
+    return 0
+
+
+def _apply_safe_scope(
+    configuration: CompatibilityConfiguration,
+    options: argparse.Namespace,
+    repository_root: Path,
+) -> int:
+    if configuration.scope_decisions is None:
+        raise SourceError("Exact scope decisions are required for safe-scope integration")
+    plan = build_safe_scope_plan(
+        configuration.inventory,
+        configuration.matrix,
+        configuration.scope_decisions,
+    )
+    output = options.output_dir or (
+        repository_root / "temp" / "upstream-tracker" / "safe-scope"
+    )
+    output = _require_temp_output(output, repository_root, file_path=False)
+    rendered_decisions = render_scope_decisions(plan.decisions)
+    rendered_matrix = render_compatibility_matrix(plan.matrix)
+    outputs = {
+        "scope_decisions": output / "scope-decisions.json",
+        "compatibility_matrix": output / "compatibility-matrix.json",
+    }
+    _write_text(outputs["scope_decisions"], rendered_decisions, "safe scope decisions")
+    _write_text(outputs["compatibility_matrix"], rendered_matrix, "safe scope matrix")
+
+    canonical_written = False
+    if options.write_canonical:
+        manifest_overrides = any(
+            getattr(options, name) is not None
+            for name in (
+                "lock",
+                "port_map",
+                "compatibility_exceptions",
+                "compatibility_scope",
+                "public_symbol_inventory",
+                "compatibility_matrix",
+                "symbol_evidence",
+                "scope_decisions",
+            )
+        )
+        if manifest_overrides:
+            raise SourceError("Canonical safe-scope writes do not accept manifest overrides")
+        if not configuration.exact_registry_coverage:
+            raise SourceError(
+                "Canonical safe-scope writes require clean, exact HEAD compatibility manifests"
+            )
+        canonical_decisions = repository_root / "upstream" / "scope-decisions.json"
+        canonical_matrix = repository_root / "upstream" / "compatibility-matrix.json"
+        _write_text(canonical_decisions, rendered_decisions, "canonical scope decisions")
+        _write_text(canonical_matrix, rendered_matrix, "canonical compatibility matrix")
+        canonical_written = True
+
+    print(
+        json.dumps(
+            {
+                "canonical_written": canonical_written,
+                "classification_counts": plan.classification_counts,
+                "decision_count": len(plan.decisions.decisions),
+                "matrix_sha256": plan.matrix.content_sha256,
+                "new_decision_count": plan.new_decision_count,
+                "outputs": {key: str(value) for key, value in outputs.items()},
+                "previous_decision_count": plan.previous_decision_count,
+                "schema": "goniegonie.reviewed-safe-scope-integration.v1",
+                "scope_decisions_sha256": plan.decisions.content_sha256,
+                "selection_sha256": plan.selection_sha256,
+                "symbol_contract_sha256": plan.symbol_contract_sha256,
             },
             indent=2,
             sort_keys=True,

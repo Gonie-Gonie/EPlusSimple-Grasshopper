@@ -26,6 +26,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -64,6 +65,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -75,7 +77,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -86,7 +92,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -105,7 +115,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -123,7 +137,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -131,13 +149,21 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -146,7 +172,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -171,26 +201,42 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -203,11 +249,17 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -221,7 +273,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -229,7 +285,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -238,7 +298,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -246,7 +310,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -259,7 +327,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -271,6 +343,8 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -319,7 +393,10 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -339,6 +416,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -347,7 +425,10 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -369,6 +450,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -381,7 +463,96 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -389,6 +560,8 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -404,6 +577,9 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -414,6 +590,8 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -428,6 +606,8 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -458,13 +638,124 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -548,18 +839,370 @@
     "needs_reverification",
     "out_of_scope",
     "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
     "out_of_scope",
     "out_of_scope",
     "out_of_scope",
     "out_of_scope",
     "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -570,653 +1213,10 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:577beba2ba43e7aeae97e4ecd5d7082257c4bc6cf9cafe986b1a9dba436bf3ac",
+  "content_sha256": "sha256:aecb92e5da26edfad8e86e4d6d5ac7b7f7ec7351c1c1b289679ceef416988082",
   "details": [
     {
       "evidence": [
@@ -1317,6 +1317,1161 @@
     },
     {
       "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-constants-py-autoid-prefix-repr-f40e4929"
+      ],
+      "index": 26,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-constants-py-specialtag-repr-f40e4929"
+      ],
+      "index": 65,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-fenestrationconstruction-eq-e668db31"
+      ],
+      "index": 77,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-fenestrationconstruction-hash-60007ac6"
+      ],
+      "index": 78,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-fenestrationconstruction-repr-103f1788"
+      ],
+      "index": 80,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-fenestrationconstruction-str-a44a4626"
+      ],
+      "index": 81,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-material-eq-e8bba35e"
+      ],
+      "index": 92,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-material-hash-60007ac6"
+      ],
+      "index": 93,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-material-repr-1525e789"
+      ],
+      "index": 95,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-material-str-4df0e286"
+      ],
+      "index": 96,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-surfaceconstruction-eq-7b7e80e4"
+      ],
+      "index": 115,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-surfaceconstruction-hash-60007ac6"
+      ],
+      "index": 116,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-surfaceconstruction-repr-490fa337"
+      ],
+      "index": 118,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-construction-py-surfaceconstruction-str-b9270d7a"
+      ],
+      "index": 119,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-absorptionchiller-eq-c012f21a"
+      ],
+      "index": 137,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-absorptionchiller-hash-60007ac6"
+      ],
+      "index": 138,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-absorptionchiller-repr-2d9744bb"
+      ],
+      "index": 140,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-absorptionchiller-str-efffc8dc"
+      ],
+      "index": 141,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-airhandlingunit-eq-b6e5634b"
+      ],
+      "index": 149,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-airhandlingunit-hash-60007ac6"
+      ],
+      "index": 150,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-airhandlingunit-repr-7ed3e34a"
+      ],
+      "index": 152,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-airhandlingunit-str-ac717111"
+      ],
+      "index": 153,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-boiler-eq-2b503f3d"
+      ],
+      "index": 159,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-boiler-hash-60007ac6"
+      ],
+      "index": 160,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-boiler-repr-a6483d4a"
+      ],
+      "index": 162,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-boiler-str-b8479ae5"
+      ],
+      "index": 163,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-chiller-eq-8de6da04"
+      ],
+      "index": 172,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-chiller-hash-60007ac6"
+      ],
+      "index": 173,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-chiller-repr-b825b20b"
+      ],
+      "index": 175,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-chiller-str-790c58cc"
+      ],
+      "index": 176,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-districtheating-eq-706095a5"
+      ],
+      "index": 201,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-districtheating-hash-60007ac6"
+      ],
+      "index": 202,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-districtheating-repr-76dcce40"
+      ],
+      "index": 204,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-districtheating-str-5755e4a5"
+      ],
+      "index": 205,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-electricradiantfloor-eq-2079415d"
+      ],
+      "index": 211,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-electricradiantfloor-hash-60007ac6"
+      ],
+      "index": 212,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-electricradiantfloor-repr-35e27bc1"
+      ],
+      "index": 214,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-electricradiantfloor-str-b0bb1b40"
+      ],
+      "index": 215,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-electricradiator-eq-a27ed22f"
+      ],
+      "index": 221,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-electricradiator-hash-60007ac6"
+      ],
+      "index": 222,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-electricradiator-repr-6644ef11"
+      ],
+      "index": 224,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-electricradiator-str-b131e492"
+      ],
+      "index": 225,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-fancoilunit-eq-e61af711"
+      ],
+      "index": 232,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-fancoilunit-hash-60007ac6"
+      ],
+      "index": 233,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-fancoilunit-repr-18573f62"
+      ],
+      "index": 235,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-fancoilunit-str-bb2a64c8"
+      ],
+      "index": 236,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-geothermalheatpump-repr-416f3c25"
+      ],
+      "index": 249,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-geothermalheatpump-str-28deb246"
+      ],
+      "index": 250,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-heatpump-eq-8ba373e2"
+      ],
+      "index": 255,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-heatpump-hash-60007ac6"
+      ],
+      "index": 256,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-heatpump-repr-e883a8f3"
+      ],
+      "index": 258,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-heatpump-str-309802d1"
+      ],
+      "index": 259,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-packagedairconditioner-eq-51178e17"
+      ],
+      "index": 273,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-packagedairconditioner-hash-60007ac6"
+      ],
+      "index": 274,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-packagedairconditioner-repr-b5728b3d"
+      ],
+      "index": 276,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-packagedairconditioner-str-23f742cc"
+      ],
+      "index": 277,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-photovoltaicsystem-eq-857cab33"
+      ],
+      "index": 285,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-photovoltaicsystem-hash-60007ac6"
+      ],
+      "index": 286,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-photovoltaicsystem-repr-c0e1d5ce"
+      ],
+      "index": 288,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-photovoltaicsystem-str-3f778814"
+      ],
+      "index": 289,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-radiantfloor-eq-860d9927"
+      ],
+      "index": 298,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-radiantfloor-hash-60007ac6"
+      ],
+      "index": 299,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-radiantfloor-repr-8ee82f62"
+      ],
+      "index": 301,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-radiantfloor-str-df8acdde"
+      ],
+      "index": 302,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-radiator-eq-4c6c9781"
+      ],
+      "index": 310,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-radiator-hash-60007ac6"
+      ],
+      "index": 311,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-radiator-repr-b0f692e7"
+      ],
+      "index": 313,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-radiator-str-9295b82b"
+      ],
+      "index": 314,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-ventilationsystem-eq-9c28de4f"
+      ],
+      "index": 327,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-ventilationsystem-hash-60007ac6"
+      ],
+      "index": 328,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-ventilationsystem-repr-fd46070c"
+      ],
+      "index": 330,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-ventilationsystem-str-5abb2e8f"
+      ],
+      "index": 331,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-model-py-greenretrofitmodel-repr-544b402c"
+      ],
+      "index": 343,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-model-py-greenretrofitmodel-str-39c346fc"
+      ],
+      "index": 344,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-profile-py-koreanusageprofile-hash-60007ac6"
+      ],
+      "index": 393,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-profile-py-koreanusageprofile-repr-31503d34"
+      ],
+      "index": 395,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-profile-py-koreanusageprofile-str-38ed6628"
+      ],
+      "index": 396,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-shape-py-fenestration-hash-60007ac6"
+      ],
+      "index": 416,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-shape-py-surface-hash-60007ac6"
+      ],
+      "index": 425,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-shape-py-surface-repr-ac4399ab"
+      ],
+      "index": 427,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-shape-py-surface-str-f4142b96"
+      ],
+      "index": 428,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-core-shape-py-zone-hash-60007ac6"
+      ],
+      "index": 450,
+      "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-blindfornonoutdoorwindow-186aef7a"
+      ],
+      "index": 463,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-blindfornonoutdoorwindow-init-2e1868a2"
+      ],
+      "index": 464,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-blindfornonoutdoorwindow-inspect-26f65ca9"
+      ],
+      "index": 465,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-dualradiantfloor-5c9b5cae"
+      ],
+      "index": 466,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-dualradiantfloor-init-e3aa58b0"
+      ],
+      "index": 467,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-dualradiantfloor-inspect-6933bcb9"
+      ],
+      "index": 468,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-duplicatedname-225e775a"
+      ],
+      "index": 469,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-duplicatedname-init-1e5f8a08"
+      ],
+      "index": 470,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-duplicatedname-inspect-f850d257"
+      ],
+      "index": 471,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excel-inspectors-676b8467"
+      ],
+      "index": 472,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excelexception-0d28a3db"
+      ],
+      "index": 473,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excelexception-init-8b95dda8"
+      ],
+      "index": 474,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excelexception-inspect-fc353362"
+      ],
+      "index": 475,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excelexception-to-dict-5aa0f2d4"
+      ],
+      "index": 476,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excelwarning-a1140961"
+      ],
+      "index": 477,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excelwarning-init-8b95dda8"
+      ],
+      "index": 478,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excelwarning-inspect-286ac8a4"
+      ],
+      "index": 479,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excelwarning-to-dict-c7432478"
+      ],
+      "index": 480,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excessiveopeningarea-c9ce09be"
+      ],
+      "index": 481,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excessiveopeningarea-init-662b4db6"
+      ],
+      "index": 482,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-excessiveopeningarea-inspect-1cce3a9f"
+      ],
+      "index": 483,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientsurfaceforzonesubcategory-e98c5902"
+      ],
+      "index": 484,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientsurfaceforzonesubcategory-no-ceiling-07860dea"
+      ],
+      "index": 485,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientsurfaceforzonesubcategory-no-floor-1c477bac"
+      ],
+      "index": 486,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientsurfaceforzonesubcategory-no-wall-082535bb"
+      ],
+      "index": 487,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientmaterialdefinition-289d0d24"
+      ],
+      "index": 488,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientmaterialdefinition-init-a6558c45"
+      ],
+      "index": 489,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientmaterialdefinition-inspect-35a6d474"
+      ],
+      "index": 490,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientsurfaceforzone-015c2897"
+      ],
+      "index": 491,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientsurfaceforzone-init-b23cb031"
+      ],
+      "index": 492,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientsurfaceforzone-inspect-e87440b0"
+      ],
+      "index": 493,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientsurfaceforzone-inspect-ceiling-f3c06687"
+      ],
+      "index": 494,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientsurfaceforzone-inspect-floor-fbd86e0d"
+      ],
+      "index": 495,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-insufficientsurfaceforzone-inspect-wall-cad46f10"
+      ],
+      "index": 496,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidadjacentzonename-640847ea"
+      ],
+      "index": 497,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidadjacentzonename-init-0151a89d"
+      ],
+      "index": 498,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidadjacentzonename-inspect-8b94e710"
+      ],
+      "index": 499,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidfenestrationconstruction-488a9467"
+      ],
+      "index": 500,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidfenestrationconstruction-init-60545db6"
+      ],
+      "index": 501,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidfenestrationconstruction-inspect-7ec0aa8a"
+      ],
+      "index": 502,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidfenestrationconstructionsubcategory-b6699ced"
+      ],
+      "index": 503,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidfenestrationconstructionsubcategory-invalid-construction-name-5d6635b1"
+      ],
+      "index": 504,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidfenestrationconstructionsubcategory-opaque-for-window-or-glassdoor-4456ee1e"
+      ],
+      "index": 505,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidfenestrationconstructionsubcategory-transparent-for-door-1b7a1297"
+      ],
+      "index": 506,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidsourcesystemname-76ff1fd1"
+      ],
+      "index": 507,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidsourcesystemname-init-95565ef3"
+      ],
+      "index": 508,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidsourcesystemname-inspect-9120586f"
+      ],
+      "index": 509,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidsurfaceconstruction-082b6356"
+      ],
+      "index": 510,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidsurfaceconstruction-init-9326b013"
+      ],
+      "index": 511,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidsurfaceconstruction-inspect-28f65a2d"
+      ],
+      "index": 512,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidsurfaceconstructionsubcategory-21e0ec7d"
+      ],
+      "index": 513,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-invalidsurfaceconstructionsubcategory-invalid-construction-name-bf154a59"
+      ],
+      "index": 514,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-json-inspectors-27d907a6"
+      ],
+      "index": 515,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-jsonexception-6742f8c8"
+      ],
+      "index": 516,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-jsonexception-init-d7fd51c9"
+      ],
+      "index": 517,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-jsonexception-inspect-6d1ebb7d"
+      ],
+      "index": 518,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-jsonexception-to-dict-5aa0f2d4"
+      ],
+      "index": 519,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-jsonwarning-ee3139e6"
+      ],
+      "index": 520,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-jsonwarning-init-d7fd51c9"
+      ],
+      "index": 521,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-jsonwarning-inspect-5f7070b5"
+      ],
+      "index": 522,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-jsonwarning-to-dict-c7432478"
+      ],
+      "index": 523,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-nohvacsystemapplied-8004d5ff"
+      ],
+      "index": 524,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-nohvacsystemapplied-init-126bf50d"
+      ],
+      "index": 525,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-nohvacsystemapplied-inspect-144efa22"
+      ],
+      "index": 526,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-nohvacsystemappliedsubcategory-1ff5be0b"
+      ],
+      "index": 527,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-notusedsourcesystem-6b8f73a9"
+      ],
+      "index": 528,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-notusedsourcesystem-init-b02f87ae"
+      ],
+      "index": 529,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-notusedsourcesystem-inspect-2ea268bc"
+      ],
+      "index": 530,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-notusedsupplysystem-446040d2"
+      ],
+      "index": 531,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-notusedsupplysystem-init-33c50813"
+      ],
+      "index": 532,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-notusedsupplysystem-inspect-67cd6a82"
+      ],
+      "index": 533,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-notusedsurfaceconstruction-2f725c7f"
+      ],
+      "index": 534,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-notusedsurfaceconstruction-init-06748381"
+      ],
+      "index": 535,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-notusedsurfaceconstruction-inspect-2d4f92df"
+      ],
+      "index": 536,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-reportcode-2f1abc03"
+      ],
+      "index": 537,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-reportcode-clear-0a59647d"
+      ],
+      "index": 538,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-reportcode-severe-2e3b0dcb"
+      ],
+      "index": 539,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-reportcode-warning-3f3f2c3f"
+      ],
+      "index": 540,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-debug-excel-b5bfd339"
+      ],
+      "index": 541,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-debug-json-70fb7e6a"
+      ],
+      "index": 542,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-merge-report-codes-83386b7d"
+      ],
+      "index": 543,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-report-result-5800626b"
+      ],
+      "index": 544,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-epsimple-debug-py-report-to-records-70a60113"
+      ],
+      "index": 545,
+      "rationale": "This exact declaration is in the legacy pandas-based Excel/JSON debugger and report-format surface. The adapter/report API is excluded, but the underlying model validity constraints must still be demonstrated by domain and workflow tests."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-utils-py-column-rename-dict-5b2a0454"
       ],
       "index": 546,
@@ -1356,6 +2511,489 @@
       ],
       "index": 552,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-common-py-version-repr-91a0c4f0"
+      ],
+      "index": 560,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-common-py-version-str-0e6c9717"
+      ],
+      "index": 561,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-constants-py-specialtag-format-4ef932bb"
+      ],
+      "index": 577,
+      "rationale": "The IDragon SpecialTag class has no production use outside its own docstring examples. The used SimpleDragon tag family is reviewed separately, so this Python representation entry point is safely outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-constants-py-specialtag-repr-f40e4929"
+      ],
+      "index": 578,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-constants-py-specialtag-str-13ed292a"
+      ],
+      "index": 579,
+      "rationale": "The IDragon SpecialTag class has no production use outside its own docstring examples. The used SimpleDragon tag family is reviewed separately, so this Python representation entry point is safely outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-construction-py-airboundary-repr-daa801e7"
+      ],
+      "index": 590,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-construction-py-airboundary-str-85ae4dd0"
+      ],
+      "index": 591,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-construction-py-glazing-repr-70c8d1bb"
+      ],
+      "index": 606,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-construction-py-glazing-str-e60b9bc1"
+      ],
+      "index": 607,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-construction-py-nomassconstruction-repr-70c42194"
+      ],
+      "index": 638,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-construction-py-nomassconstruction-str-460a5e36"
+      ],
+      "index": 639,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-airhandlingunit-deepcopy-49a11aeb"
+      ],
+      "index": 646,
+      "rationale": "No upstream production call site deep-copies an IDragon AirHandlingUnit. Python copy syntax can be excluded; shared source identity/reference topology remains covered by the native model, persistence, and authored-IDF gates."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-compressortype-str-f40e4929"
+      ],
+      "index": 671,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-domestichotwater-repr-a09db461"
+      ],
+      "index": 695,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-domestichotwater-str-b234d2ca"
+      ],
+      "index": 696,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-fuel-str-f40e4929"
+      ],
+      "index": 737,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-photovoltaicpanel-str-ba95fcfe"
+      ],
+      "index": 755,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-delitem-554e0ab1"
+      ],
+      "index": 837,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-repr-959b723f"
+      ],
+      "index": 847,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-str-324659f1"
+      ],
+      "index": 852,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-append-1840e6c2"
+      ],
+      "index": 855,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-clear-f01a6272"
+      ],
+      "index": 858,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-extend-45e0f21f"
+      ],
+      "index": 865,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-insert-5f30e73e"
+      ],
+      "index": 872,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-pop-bf140edd"
+      ],
+      "index": 886,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-ruleset-repr-d72176bc"
+      ],
+      "index": 911,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-ruleset-str-2a5a044e"
+      ],
+      "index": 915,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-delitem-493d77a9"
+      ],
+      "index": 958,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-repr-b7b8b983"
+      ],
+      "index": 968,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-str-324659f1"
+      ],
+      "index": 972,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-append-08bdbb6b"
+      ],
+      "index": 975,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-clear-c50f5430"
+      ],
+      "index": 979,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-extend-4f4001d4"
+      ],
+      "index": 987,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-insert-9d26ff4a"
+      ],
+      "index": 991,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-schedule-pop-8358340e"
+      ],
+      "index": 1003,
+      "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-scheduletype-str-f40e4929"
+      ],
+      "index": 1017,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-shape-py-surface-repr-c40ec5b3"
+      ],
+      "index": 1036,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-shape-py-surface-str-9cae86e1"
+      ],
+      "index": 1037,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-shape-py-vertex-eq-d11d670e"
+      ],
+      "index": 1062,
+      "rationale": "The approximate Python equality has no upstream geometry call site; coplanarity, centroid, and IDF coordinate generation use vector operations instead. The C# native API separates exact Equals from tolerance-aware AlmostEquals, and actual geometry/topology remains covered by Rhino/IDF evidence."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-shape-py-vertex-repr-ea12c1b8"
+      ],
+      "index": 1067,
+      "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-dragon-shape-py-vertex-str-97794195"
+      ],
+      "index": 1069,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idd-eq-be42dfb2"
+      ],
+      "index": 1096,
+      "rationale": "No production authoring path compares complete IDD instances. Object insertion compares IddObject definitions instead; complete official schema/hash validation is the engineering replacement evidence."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idd-repr-372cdb12"
+      ],
+      "index": 1098,
+      "rationale": "This exact declaration is a Python representation/copy protocol entry point. Only the Python protocol surface is excluded; when it produces IDF text, the same authoring meaning remains covered by the semantic IDF gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idd-str-e03d34d8"
+      ],
+      "index": 1099,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idf-len-4fd43916"
+      ],
+      "index": 1110,
+      "rationale": "The full-IDF length protocol is used only for representation/object-count convenience, not model generation or write. Authored object sets are compared independently."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idf-repr-4e75ca35"
+      ],
+      "index": 1111,
+      "rationale": "This exact declaration is a Python representation/copy protocol entry point. Only the Python protocol surface is excluded; when it produces IDF text, the same authoring meaning remains covered by the semantic IDF gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idf-quick-map-0b3ea58f"
+      ],
+      "index": 1117,
+      "rationale": "This exact declaration is one of the shrink/quick_map Python convenience APIs named explicitly outside scope. It does not exclude ordinary IDF authoring or the engineering results of a model."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idf-shrink-835a12e8"
+      ],
+      "index": 1120,
+      "rationale": "This exact declaration is one of the shrink/quick_map Python convenience APIs named explicitly outside scope. It does not exclude ordinary IDF authoring or the engineering results of a model."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-iddfield-repr-53e7dea3"
+      ],
+      "index": 1126,
+      "rationale": "This exact declaration is a Python representation/copy protocol entry point. Only the Python protocol surface is excluded; when it produces IDF text, the same authoring meaning remains covered by the semantic IDF gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-iddfield-str-2071030f"
+      ],
+      "index": 1127,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-iddobject-repr-04f9e22d"
+      ],
+      "index": 1151,
+      "rationale": "This exact declaration is a Python representation/copy protocol entry point. Only the Python protocol surface is excluded; when it produces IDF text, the same authoring meaning remains covered by the semantic IDF gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-iddobject-str-3f50631e"
+      ],
+      "index": 1152,
+      "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobject-deepcopy-d3136f86"
+      ],
+      "index": 1168,
+      "rationale": "This exact declaration is a Python representation/copy protocol entry point. Only the Python protocol surface is excluded; when it produces IDF text, the same authoring meaning remains covered by the semantic IDF gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobject-eq-1cbdc9a3"
+      ],
+      "index": 1169,
+      "rationale": "This equality is reached only by excluded mutable-list editing/pop behavior or explicit Python comparisons, not by the legacy model-to-IDF append path. Semantic IDF equivalence remains independently gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobject-repr-61d42a6b"
+      ],
+      "index": 1172,
+      "rationale": "This exact declaration is a Python representation/copy protocol entry point. Only the Python protocol surface is excluded; when it produces IDF text, the same authoring meaning remains covered by the semantic IDF gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlinkeddataframe-eb25bba5"
+      ],
+      "index": 1184,
+      "rationale": "This exact declaration implements the pandas-linked IDF editing adapter that is explicitly outside scope. Authoring-IDF meaning and reference topology remain subject to the semantic differential gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlinkeddataframe-enter-9c7fa506"
+      ],
+      "index": 1185,
+      "rationale": "This exact declaration implements the pandas-linked IDF editing adapter that is explicitly outside scope. Authoring-IDF meaning and reference topology remain subject to the semantic differential gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlinkeddataframe-exit-147879d2"
+      ],
+      "index": 1186,
+      "rationale": "This exact declaration implements the pandas-linked IDF editing adapter that is explicitly outside scope. Authoring-IDF meaning and reference topology remain subject to the semantic differential gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlinkeddataframe-init-939ad76d"
+      ],
+      "index": 1187,
+      "rationale": "This exact declaration implements the pandas-linked IDF editing adapter that is explicitly outside scope. Authoring-IDF meaning and reference topology remain subject to the semantic differential gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlinkeddataframe-columns-ea45e0e4"
+      ],
+      "index": 1188,
+      "rationale": "This exact declaration implements the pandas-linked IDF editing adapter that is explicitly outside scope. Authoring-IDF meaning and reference topology remain subject to the semantic differential gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlinkeddataframe-linked-4c721f36"
+      ],
+      "index": 1189,
+      "rationale": "This exact declaration implements the pandas-linked IDF editing adapter that is explicitly outside scope. Authoring-IDF meaning and reference topology remain subject to the semantic differential gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlist-add-b431b259"
+      ],
+      "index": 1191,
+      "rationale": "This exact declaration is a Python mutable-container/editing entry point. The entry point is excluded, but no resulting IDF object, reference, warning, or simulation difference is waived by this scope decision."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlist-deepcopy-f788b16f"
+      ],
+      "index": 1192,
+      "rationale": "This exact declaration is a Python representation/copy protocol entry point. Only the Python protocol surface is excluded; when it produces IDF text, the same authoring meaning remains covered by the semantic IDF gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlist-eq-9829bf6c"
+      ],
+      "index": 1193,
+      "rationale": "This equality is reached only by excluded mutable-list editing/pop behavior or explicit Python comparisons, not by the legacy model-to-IDF append path. Semantic IDF equivalence remains independently gated."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlist-repr-7ea313e2"
+      ],
+      "index": 1196,
+      "rationale": "This exact declaration is a Python representation/copy protocol entry point. Only the Python protocol surface is excluded; when it produces IDF text, the same authoring meaning remains covered by the semantic IDF gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlist-as-dataframe-66309c6b"
+      ],
+      "index": 1200,
+      "rationale": "This exact declaration implements the pandas-linked IDF editing adapter that is explicitly outside scope. Authoring-IDF meaning and reference topology remain subject to the semantic differential gate."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlist-clear-e019c42e"
+      ],
+      "index": 1202,
+      "rationale": "This exact declaration is a Python mutable-container/editing entry point. The entry point is excluded, but no resulting IDF object, reference, warning, or simulation difference is waived by this scope decision."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlist-pop-1d2c571c"
+      ],
+      "index": 1213,
+      "rationale": "This exact declaration exposes Python key/list or regex/callable selection syntax. That protocol is excluded, while the selected IDF objects, field values, and downstream authored model remain in scope through native C# interfaces."
+    },
+    {
+      "evidence": [
+        "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idfobjectlist-to-dataframe-ea3a8f17"
+      ],
+      "index": 1216,
+      "rationale": "This exact declaration implements the pandas-linked IDF editing adapter that is explicitly outside scope. Authoring-IDF meaning and reference topology remain subject to the semantic differential gate."
     }
   ],
   "entry_order": "public-symbol-inventory.symbols",
@@ -1366,8 +3004,8 @@
     "classification_counts": {
       "equivalent": 0,
       "exception": 0,
-      "needs_reverification": 1226,
-      "out_of_scope": 16
+      "needs_reverification": 992,
+      "out_of_scope": 250
     },
     "entry_count": 1242
   },

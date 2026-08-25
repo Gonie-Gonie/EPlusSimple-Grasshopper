@@ -40,7 +40,14 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(1226, len(compatibility.needs_reverification))
+        self.assertEqual(992, len(compatibility.needs_reverification))
+        self.assertEqual(
+            250,
+            sum(
+                entry.classification == "out_of_scope"
+                for entry in compatibility.matrix.entries
+            ),
+        )
 
         by_key = compatibility.matrix.entries_by_key
         api_entries = [

@@ -76,6 +76,34 @@ by path, symbol, and upstream symbol hash. The matrix must reference the exact
 decision id. Missing, extra, duplicate, stale, or broad scope decisions fail
 configuration validation.
 
+Regenerate the reviewed native-product scope integration deterministically:
+
+```text
+.\dev.cmd upstream apply-safe-scope
+```
+
+The command writes candidate `scope-decisions.json` and
+`compatibility-matrix.json` files beneath `temp/upstream-tracker/safe-scope`.
+Its checked-in policy selects exactly 250 hash-bound symbols: the original 16
+approved decisions plus 234 reviewed Python adapter/protocol decisions. The
+selection-key and exact-symbol-contract digests are fixed, so an upstream API
+change fails closed instead of silently expanding the excluded surface. Eleven
+mixed or production authoring methods, including `IdfObjectList.insert` (`IDF.append`,
+the ordinary IDF field and container accessors/mutators/formatters, and
+`StaticIndexedDict` accessors)
+remain `needs_reverification` explicitly.
+
+After reviewing the generated candidates, apply the same byte-deterministic
+result to the canonical registries with:
+
+```text
+.\dev.cmd upstream apply-safe-scope --write-canonical
+```
+
+Canonical writes require the existing compatibility manifests to be clean,
+exact `HEAD` files. Re-running the generator after integration reports zero new
+decisions and produces files byte-identical to the canonical pair.
+
 Create a review template for a newly generated inventory without inferring
 equivalence:
 
