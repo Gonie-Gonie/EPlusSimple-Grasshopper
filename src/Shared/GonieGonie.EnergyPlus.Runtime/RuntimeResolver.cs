@@ -1,7 +1,7 @@
 namespace GonieGonie.EnergyPlus.Runtime;
 
 /// <summary>
-/// Finds EnergyPlus 24.2 and verifies both its manifest and executable payload hashes.
+/// Finds EnergyPlus 24.2 and verifies its manifest and all required payload hashes.
 /// </summary>
 public sealed class RuntimeResolver
 {
@@ -316,11 +316,16 @@ public sealed class RuntimeResolver
         var energyPlusPath = RuntimeFileSystem.CombineUnder(root, "energyplus.exe");
         var expandObjectsPath = RuntimeFileSystem.CombineUnder(root, "ExpandObjects.exe");
         var iddPath = RuntimeFileSystem.CombineUnder(root, "Energy+.idd");
+        var epJsonSchemaPath = RuntimeFileSystem.CombineUnder(root, "Energy+.schema.epJSON");
         var requiredFiles = new[]
         {
             (Path: energyPlusPath, ExpectedHash: expectedManifest.EnergyPlusExecutableSha256, Name: "energyplus.exe"),
             (Path: expandObjectsPath, ExpectedHash: expectedManifest.ExpandObjectsSha256, Name: "ExpandObjects.exe"),
-            (Path: iddPath, ExpectedHash: expectedManifest.EnergyPlusIddSha256, Name: "Energy+.idd")
+            (Path: iddPath, ExpectedHash: expectedManifest.EnergyPlusIddSha256, Name: "Energy+.idd"),
+            (
+                Path: epJsonSchemaPath,
+                ExpectedHash: expectedManifest.EnergyPlusEpJsonSchemaSha256,
+                Name: "Energy+.schema.epJSON")
         };
 
         foreach (var file in requiredFiles)
@@ -372,6 +377,7 @@ public sealed class RuntimeResolver
             energyPlusPath,
             expandObjectsPath,
             iddPath,
+            epJsonSchemaPath,
             expectedManifest,
             DateTimeOffset.UtcNow);
         return new EnergyPlusRuntimeResolution(runtime, null, new[] { root });

@@ -1,5 +1,5 @@
 {
-  "runtime_schema": "goniegonie.energyplus-runtime.v2",
+  "runtime_schema": "goniegonie.energyplus-runtime.v3",
   "energyplus_version": "24.2.0",
   "energyplus_build": "94a887817b",
   "energyplus_archive_sha256": "26c7c22b731f54031626750284c8b613fb8f03c3aa56b6bc7ec65b6bf8668df1",

@@ -66,11 +66,16 @@ internal static class TestRuntimeFactory
         var energyPlus = WriteRuntimeFile(runtimeRoot, "energyplus.exe", "fake-energyplus");
         var expandObjects = WriteRuntimeFile(runtimeRoot, "ExpandObjects.exe", "fake-expandobjects");
         var idd = WriteRuntimeFile(runtimeRoot, "Energy+.idd", "fake-idd");
+        var epJsonSchema = WriteRuntimeFile(
+            runtimeRoot,
+            "Energy+.schema.epJSON",
+            "{\"fake-schema\":true}");
         var manifest = EnergyPlusRuntimeManifest.Supported with
         {
             EnergyPlusExecutableSha256 = Hash(energyPlus),
             ExpandObjectsSha256 = Hash(expandObjects),
-            EnergyPlusIddSha256 = Hash(idd)
+            EnergyPlusIddSha256 = Hash(idd),
+            EnergyPlusEpJsonSchemaSha256 = Hash(epJsonSchema)
         };
         var resolution = await new RuntimeResolver(manifest).ResolveAsync(
             new EnergyPlusRuntimeResolveOptions
@@ -113,6 +118,8 @@ internal static class TestRuntimeArchiveFactory
     private static readonly byte[] EnergyPlusBytes = Encoding.UTF8.GetBytes("fake-energyplus-bootstrap");
     private static readonly byte[] ExpandObjectsBytes = Encoding.UTF8.GetBytes("fake-expandobjects-bootstrap");
     private static readonly byte[] IddBytes = Encoding.UTF8.GetBytes("fake-idd-bootstrap");
+    private static readonly byte[] EpJsonSchemaBytes =
+        Encoding.UTF8.GetBytes("{\"fake-bootstrap-schema\":true}");
 
     internal static TestRuntimeArchive Create(
         TestDirectory directory,
@@ -131,6 +138,7 @@ internal static class TestRuntimeArchiveFactory
             WriteEntry(archive, archiveRoot + "energyplus.exe", EnergyPlusBytes);
             WriteEntry(archive, archiveRoot + "ExpandObjects.exe", ExpandObjectsBytes);
             WriteEntry(archive, archiveRoot + "Energy+.idd", IddBytes);
+            WriteEntry(archive, archiveRoot + "Energy+.schema.epJSON", EpJsonSchemaBytes);
             WriteEntry(archive, archiveRoot + "ExampleFiles/example.idf", Encoding.UTF8.GetBytes("Version,24.2;"));
         }
 
@@ -140,7 +148,8 @@ internal static class TestRuntimeArchiveFactory
             EnergyPlusArchiveSize = new FileInfo(archivePath).Length,
             EnergyPlusExecutableSha256 = TestRuntimeFactory.Hash(EnergyPlusBytes),
             ExpandObjectsSha256 = TestRuntimeFactory.Hash(ExpandObjectsBytes),
-            EnergyPlusIddSha256 = TestRuntimeFactory.Hash(IddBytes)
+            EnergyPlusIddSha256 = TestRuntimeFactory.Hash(IddBytes),
+            EnergyPlusEpJsonSchemaSha256 = TestRuntimeFactory.Hash(EpJsonSchemaBytes)
         };
         var distribution = new EnergyPlusRuntimeDistribution(
             new Uri("https://example.invalid/fake-energyplus.zip", UriKind.Absolute),

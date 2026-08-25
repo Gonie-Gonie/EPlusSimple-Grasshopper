@@ -10,6 +10,7 @@ public sealed class EnergyPlusRuntimeLayout
         string energyPlusExecutablePath,
         string expandObjectsExecutablePath,
         string iddPath,
+        string schemaPath,
         EnergyPlusRuntimeManifest manifest,
         DateTimeOffset verifiedAtUtc)
     {
@@ -17,6 +18,7 @@ public sealed class EnergyPlusRuntimeLayout
         EnergyPlusExecutablePath = energyPlusExecutablePath;
         ExpandObjectsExecutablePath = expandObjectsExecutablePath;
         IddPath = iddPath;
+        SchemaPath = schemaPath;
         Manifest = manifest;
         VerifiedAtUtc = verifiedAtUtc;
     }
@@ -28,6 +30,8 @@ public sealed class EnergyPlusRuntimeLayout
     public string ExpandObjectsExecutablePath { get; }
 
     public string IddPath { get; }
+
+    public string SchemaPath { get; }
 
     public EnergyPlusRuntimeManifest Manifest { get; }
 

@@ -292,7 +292,7 @@ public sealed class EnergyPlusRuntimeBootstrapper
             Report(
                 progress,
                 EnergyPlusRuntimeBootstrapStage.VerifyingExtractedRuntime,
-                "Verifying the extracted EnergyPlus executables and IDD.");
+                "Verifying the extracted EnergyPlus executables, IDD, and epJSON schema.");
             var candidate = await FindVerifiedRuntimeAsync(
                 extractionRoot,
                 cancellationToken).ConfigureAwait(false);

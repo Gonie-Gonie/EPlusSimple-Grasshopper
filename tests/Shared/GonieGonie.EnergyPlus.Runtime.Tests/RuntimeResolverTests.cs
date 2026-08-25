@@ -10,6 +10,9 @@ public sealed class RuntimeResolverTests
 
         Assert.Equal(manifest, runtime.Manifest);
         Assert.Equal(System.IO.Path.Combine(runtime.RootPath, "energyplus.exe"), runtime.EnergyPlusExecutablePath);
+        Assert.Equal(
+            System.IO.Path.Combine(runtime.RootPath, "Energy+.schema.epJSON"),
+            runtime.SchemaPath);
         Assert.True(runtime.VerifiedAtUtc <= DateTimeOffset.UtcNow);
     }
 
@@ -30,6 +33,37 @@ public sealed class RuntimeResolverTests
         Assert.False(resolution.IsSuccess);
         Assert.Equal(EnergyPlusFailureCategory.RuntimeIntegrity, resolution.Failure?.Category);
         Assert.Equal("RUNTIME_HASH_MISMATCH", resolution.Failure?.Code);
+    }
+
+    [Theory]
+    [InlineData(false, "RUNTIME_FILE_MISSING")]
+    [InlineData(true, "RUNTIME_HASH_MISMATCH")]
+    public async Task RejectsMissingOrTamperedEpJsonSchemaAsIntegrityFailure(
+        bool tamperInsteadOfDelete,
+        string expectedFailureCode)
+    {
+        using var directory = new TestDirectory();
+        var (runtime, manifest) = await TestRuntimeFactory.CreateAsync(directory);
+        if (tamperInsteadOfDelete)
+        {
+            await File.AppendAllTextAsync(runtime.SchemaPath, "tampered");
+        }
+        else
+        {
+            File.Delete(runtime.SchemaPath);
+        }
+
+        var resolution = await new RuntimeResolver(manifest).ResolveAsync(new EnergyPlusRuntimeResolveOptions
+        {
+            RuntimeRoot = runtime.RootPath,
+            SearchDefaultInstallLocation = false,
+            SearchEnvironmentVariables = false
+        });
+
+        Assert.False(resolution.IsSuccess);
+        Assert.Equal(EnergyPlusFailureCategory.RuntimeIntegrity, resolution.Failure?.Category);
+        Assert.Equal(expectedFailureCode, resolution.Failure?.Code);
+        Assert.Contains("Energy+.schema.epJSON", resolution.Failure?.Message, StringComparison.Ordinal);
     }
 
     [Fact]

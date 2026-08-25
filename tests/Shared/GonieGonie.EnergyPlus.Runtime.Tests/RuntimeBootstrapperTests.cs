@@ -61,6 +61,10 @@ public sealed class RuntimeBootstrapperTests
         Assert.Equal(EnergyPlusRuntimeBootstrapDisposition.Installed, result.Disposition);
         Assert.Equal(1, downloader.CallCount);
         Assert.Equal(target, result.Runtime?.RootPath);
+        Assert.Equal(
+            System.IO.Path.Combine(target, "Energy+.schema.epJSON"),
+            result.Runtime?.SchemaPath);
+        Assert.True(File.Exists(result.Runtime?.SchemaPath));
         Assert.True(File.Exists(System.IO.Path.Combine(target, "ExampleFiles", "example.idf")));
         Assert.Contains(
             progress.Updates,
@@ -126,6 +130,33 @@ public sealed class RuntimeBootstrapperTests
         Assert.False(result.IsSuccess);
         Assert.Equal(EnergyPlusFailureCategory.RuntimeIntegrity, result.Failure?.Category);
         Assert.Equal("RUNTIME_ARCHIVE_HASH_MISMATCH", result.Failure?.Code);
+        Assert.False(Directory.Exists(target));
+        AssertNoOperationResidue(target);
+    }
+
+    [Fact]
+    public async Task RejectsArchiveWhoseEpJsonSchemaDoesNotMatchManifest()
+    {
+        using var directory = new TestDirectory();
+        var fixture = TestRuntimeArchiveFactory.Create(directory);
+        var invalidDistribution = new EnergyPlusRuntimeDistribution(
+            fixture.Distribution.ArchiveUri,
+            fixture.Manifest with
+            {
+                EnergyPlusEpJsonSchemaSha256 = new string('0', 64)
+            });
+        var target = System.IO.Path.Combine(directory.Path, "cache", "schema-mismatch-target");
+        var bootstrapper = new EnergyPlusRuntimeBootstrapper(
+            invalidDistribution,
+            DelegateRuntimeArchiveDownloader.Copying(fixture.ArchivePath));
+
+        var result = await bootstrapper.EnsureInstalledAsync(
+            new EnergyPlusRuntimeBootstrapOptions { TargetRoot = target });
+
+        Assert.False(result.IsSuccess);
+        Assert.Equal(EnergyPlusFailureCategory.RuntimeIntegrity, result.Failure?.Category);
+        Assert.Equal("RUNTIME_ARCHIVE_PAYLOAD_MISMATCH", result.Failure?.Code);
+        Assert.Contains("Energy+.schema.epJSON", result.Failure?.Detail, StringComparison.Ordinal);
         Assert.False(Directory.Exists(target));
         AssertNoOperationResidue(target);
     }
