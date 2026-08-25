@@ -833,42 +833,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -882,6 +847,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -889,7 +855,41 @@
     "out_of_scope",
     "needs_reverification",
     "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
+    "equivalent",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "equivalent",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "out_of_scope",
+    "equivalent",
+    "needs_reverification",
+    "equivalent",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "needs_reverification",
+    "out_of_scope",
+    "equivalent",
+    "equivalent",
+    "equivalent",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:9b12f25e2a42949d8d6ec5fc7504c72c31e11a3b094ebd04d5b52e9d1f7e3c82",
+  "content_sha256": "sha256:50be7d2c78de26fd29b84418e03e5eede4be05e2cb59755bb218178db6252edd",
   "details": [
     {
       "evidence": [
@@ -2692,6 +2692,13 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-data-interval-b53131cc"
+      ],
+      "index": 833,
+      "rationale": "Trusted cross-language evidence verifies the exact DaySchedule sampling interval."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-delitem-554e0ab1"
       ],
       "index": 837,
@@ -2720,6 +2727,13 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-average-55bc4967"
+      ],
+      "index": 857,
+      "rationale": "Trusted cross-language evidence verifies exact DaySchedule averages across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-clear-f01a6272"
       ],
       "index": 858,
@@ -2734,6 +2748,27 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-fixed-length-a353188f"
+      ],
+      "index": 866,
+      "rationale": "Trusted cross-language evidence verifies the exact fixed DaySchedule length."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-has-nonzero-8e7daa8f"
+      ],
+      "index": 870,
+      "rationale": "Trusted cross-language evidence verifies exact DaySchedule nonzero-presence behavior across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-has-positive-84c867d2"
+      ],
+      "index": 871,
+      "rationale": "Trusted cross-language evidence verifies exact DaySchedule positive-presence behavior across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-insert-5f30e73e"
       ],
       "index": 872,
@@ -2741,10 +2776,66 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-integral-cd574988"
+      ],
+      "index": 873,
+      "rationale": "Trusted cross-language evidence verifies exact DaySchedule hour integrals across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-is-constant-48c772e4"
+      ],
+      "index": 875,
+      "rationale": "Trusted cross-language evidence verifies exact DaySchedule constant-state behavior across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-max-44f90344"
+      ],
+      "index": 882,
+      "rationale": "Trusted cross-language evidence verifies exact DaySchedule maxima across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-min-ed9f11bd"
+      ],
+      "index": 883,
+      "rationale": "Trusted cross-language evidence verifies exact DaySchedule minima across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-nonzero-hours-f4c71d3a"
+      ],
+      "index": 884,
+      "rationale": "Trusted cross-language evidence verifies exact DaySchedule nonzero-hour totals across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-profile-py-dayschedule-pop-bf140edd"
       ],
       "index": 886,
       "rationale": "This method only rejects a Python list-style size mutation with AttributeError. No production caller invokes it, and mutable-container behavior is explicitly outside scope; fixed-length schedule values remain covered through constructors and writers."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-positive-average-630219d6"
+      ],
+      "index": 887,
+      "rationale": "Trusted cross-language evidence verifies exact DaySchedule positive-value averages across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-positive-hours-8408d1e0"
+      ],
+      "index": 888,
+      "rationale": "Trusted cross-language evidence verifies exact DaySchedule positive-hour totals across the finite typed oracle domain."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#profile-dayschedule-step-in-hours-8f0c0fc9"
+      ],
+      "index": 889,
+      "rationale": "Trusted cross-language evidence verifies the exact DaySchedule step duration."
     },
     {
       "evidence": [
@@ -3147,9 +3238,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 11,
+      "equivalent": 24,
       "exception": 6,
-      "needs_reverification": 973,
+      "needs_reverification": 960,
       "out_of_scope": 252
     },
     "entry_count": 1242
