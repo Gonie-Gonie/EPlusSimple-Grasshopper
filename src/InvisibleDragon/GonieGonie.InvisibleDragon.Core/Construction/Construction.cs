@@ -52,15 +52,6 @@ public sealed class Construction : ISurfaceConstruction, IEquatable<Construction
 
     public override int GetHashCode()
     {
-        unchecked
-        {
-            int hash = StringComparer.Ordinal.GetHashCode(Name);
-            foreach (Layer layer in Layers)
-            {
-                hash = (hash * 397) ^ layer.GetHashCode();
-            }
-
-            return hash;
-        }
+        return StringComparer.Ordinal.GetHashCode(Name);
     }
 }

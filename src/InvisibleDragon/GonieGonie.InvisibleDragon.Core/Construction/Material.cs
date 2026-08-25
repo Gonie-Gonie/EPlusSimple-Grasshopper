@@ -59,4 +59,29 @@ public sealed record Material
     public double VisibleAbsorptance { get; }
 
     public MaterialRoughness Roughness { get; }
+
+    /// <summary>
+    /// Compares the identity and fundamental thermal properties used by
+    /// InvisibleDragon 0.7.0. Optical properties and roughness do not
+    /// participate in material equality.
+    /// </summary>
+    public bool Equals(Material? other)
+    {
+        return other is not null
+            && StringComparer.Ordinal.Equals(Name, other.Name)
+            && ConductivityWattsPerMetreKelvin.Equals(other.ConductivityWattsPerMetreKelvin)
+            && DensityKilogramsPerCubicMetre.Equals(other.DensityKilogramsPerCubicMetre)
+            && SpecificHeatJoulesPerKilogramKelvin.Equals(other.SpecificHeatJoulesPerKilogramKelvin);
+    }
+
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            int hash = StringComparer.Ordinal.GetHashCode(Name);
+            hash = (hash * 397) ^ ConductivityWattsPerMetreKelvin.GetHashCode();
+            hash = (hash * 397) ^ DensityKilogramsPerCubicMetre.GetHashCode();
+            return (hash * 397) ^ SpecificHeatJoulesPerKilogramKelvin.GetHashCode();
+        }
+    }
 }

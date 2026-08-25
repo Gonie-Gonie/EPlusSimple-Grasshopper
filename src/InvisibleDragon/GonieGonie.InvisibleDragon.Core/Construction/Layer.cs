@@ -37,4 +37,27 @@ public sealed record Layer
         Material.SpecificHeatJoulesPerKilogramKelvin
         * Material.DensityKilogramsPerCubicMetre
         * ThicknessMetres;
+
+    /// <summary>
+    /// Compares the material and thickness used by InvisibleDragon 0.7.0.
+    /// The descriptive layer name does not participate in equality.
+    /// </summary>
+    public bool Equals(Layer? other)
+    {
+        return other is not null
+            && Material.Equals(other.Material)
+            && ThicknessMetres.Equals(other.ThicknessMetres);
+    }
+
+    /// <summary>
+    /// Returns the name-only hash used by InvisibleDragon 0.7.0.
+    /// </summary>
+    /// <remarks>
+    /// The upstream behavior intentionally differs from the fields used by
+    /// equality and is retained for public-behavior compatibility.
+    /// </remarks>
+    public override int GetHashCode()
+    {
+        return StringComparer.Ordinal.GetHashCode(Name);
+    }
 }

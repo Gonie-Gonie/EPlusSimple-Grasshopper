@@ -37,6 +37,43 @@ public sealed class ConstructionTests
     }
 
     [Fact]
+    public void MaterialEqualityMatchesPinnedInvisibleDragonProperties()
+    {
+        var first = new Material(
+            "Brick",
+            0.72,
+            1920,
+            840,
+            thermalAbsorptance: 0.1,
+            solarAbsorptance: 0.2,
+            visibleAbsorptance: 0.3,
+            roughness: MaterialRoughness.VeryRough);
+        var samePinnedProperties = new Material(
+            "Brick",
+            0.72,
+            1920,
+            840,
+            thermalAbsorptance: 0.9,
+            solarAbsorptance: 0.8,
+            visibleAbsorptance: 0.7,
+            roughness: MaterialRoughness.Smooth);
+        var renamed = new Material("Other", 0.72, 1920, 840);
+        var changedConductivity = new Material("Brick", 0.73, 1920, 840);
+        var changedDensity = new Material("Brick", 0.72, 1919, 840);
+        var changedSpecificHeat = new Material("Brick", 0.72, 1920, 841);
+
+        Assert.Equal(first, samePinnedProperties);
+        Assert.True(first == samePinnedProperties);
+        Assert.Equal(first.GetHashCode(), samePinnedProperties.GetHashCode());
+        Assert.NotEqual(first, renamed);
+        Assert.NotEqual(first, changedConductivity);
+        Assert.NotEqual(first, changedDensity);
+        Assert.NotEqual(first, changedSpecificHeat);
+        Assert.False(first.Equals(null));
+        Assert.False(first.Equals(new object()));
+    }
+
+    [Fact]
     public void LayerCalculatesConductanceResistanceAndArealHeatCapacity()
     {
         var layer = new Layer("Concrete 200 mm", TestDomainFactory.Concrete(), 0.2);
@@ -44,6 +81,36 @@ public sealed class ConstructionTests
         Assert.Equal(7, layer.UValue, 12);
         Assert.Equal(1d / 7, layer.ThermalResistance, 12);
         Assert.Equal(387200, layer.HeatCapacityJoulesPerSquareMetreKelvin, 8);
+    }
+
+    [Fact]
+    public void LayerEqualityAndHashMatchPinnedInvisibleDragonBehavior()
+    {
+        var first = new Layer(
+            "Exterior concrete",
+            new Material("Concrete", 1.4, 2300, 880, thermalAbsorptance: 0.1),
+            0.2);
+        var renamedWithIgnoredMaterialProperties = new Layer(
+            "Interior concrete",
+            new Material("Concrete", 1.4, 2300, 880, thermalAbsorptance: 0.9),
+            0.2);
+        var changedThickness = new Layer("Exterior concrete", first.Material, 0.21);
+        var changedMaterial = new Layer(
+            "Exterior concrete",
+            new Material("Concrete", 1.5, 2300, 880),
+            0.2);
+
+        Assert.Equal(first, renamedWithIgnoredMaterialProperties);
+        Assert.True(first == renamedWithIgnoredMaterialProperties);
+        Assert.NotEqual(first, changedThickness);
+        Assert.NotEqual(first, changedMaterial);
+        Assert.Equal(StringComparer.Ordinal.GetHashCode(first.Name), first.GetHashCode());
+        Assert.Equal(first.GetHashCode(), changedThickness.GetHashCode());
+        Assert.Equal(
+            StringComparer.Ordinal.GetHashCode(renamedWithIgnoredMaterialProperties.Name),
+            renamedWithIgnoredMaterialProperties.GetHashCode());
+        Assert.False(first.Equals(null));
+        Assert.False(first.Equals(new object()));
     }
 
     [Fact]
@@ -82,6 +149,40 @@ public sealed class ConstructionTests
         Assert.Equal(new[] { second, first }, reversed.Layers);
         Assert.Equal(construction.UValue, reversed.UValue, 12);
         Assert.Equal(construction.HeatCapacityJoulesPerSquareMetreKelvin, reversed.HeatCapacityJoulesPerSquareMetreKelvin, 8);
+    }
+
+    [Fact]
+    public void ConstructionEqualityAndHashMatchPinnedInvisibleDragonBehavior()
+    {
+        var concrete = new Material("Concrete", 1.4, 2300, 880);
+        var insulation = new Material("Insulation", 0.04, 30, 1400);
+        var first = new OpaqueConstruction(
+            "Wall",
+            new[]
+            {
+                new Layer("Concrete outside", concrete, 0.2),
+                new Layer("Insulation inside", insulation, 0.1),
+            });
+        var samePinnedProperties = new OpaqueConstruction(
+            "Wall",
+            new[]
+            {
+                new Layer("Renamed concrete", concrete, 0.2),
+                new Layer("Renamed insulation", insulation, 0.1),
+            });
+        var renamed = new OpaqueConstruction("Other", samePinnedProperties.Layers);
+        var reversed = new OpaqueConstruction("Wall", samePinnedProperties.Layers.Reverse());
+        var fewerLayers = new OpaqueConstruction("Wall", samePinnedProperties.Layers.Take(1));
+
+        Assert.Equal(first, samePinnedProperties);
+        Assert.NotEqual(first, renamed);
+        Assert.NotEqual(first, reversed);
+        Assert.NotEqual(first, fewerLayers);
+        Assert.Equal(StringComparer.Ordinal.GetHashCode(first.Name), first.GetHashCode());
+        Assert.Equal(first.GetHashCode(), reversed.GetHashCode());
+        Assert.Equal(StringComparer.Ordinal.GetHashCode(renamed.Name), renamed.GetHashCode());
+        Assert.False(first.Equals(null));
+        Assert.False(first.Equals(new object()));
     }
 
     [Fact]
