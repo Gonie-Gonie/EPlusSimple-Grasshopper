@@ -126,6 +126,131 @@ public class Other
             )
         )
 
+    def test_csharp_binding_maps_only_closed_operator_metadata_names(self) -> None:
+        source = r'''namespace GonieGonie.InvisibleDragon.Profile;
+public sealed class DaySchedule
+{
+    public static DaySchedule operator +(DaySchedule left, DaySchedule right) => left;
+    public static DaySchedule operator -(DaySchedule left, DaySchedule right) => left;
+    public static DaySchedule operator *(DaySchedule left, double right) => left;
+    public static DaySchedule operator /(DaySchedule left, double right) => left;
+    public static DaySchedule operator &(DaySchedule left, DaySchedule right) => left;
+    public static DaySchedule operator |(DaySchedule left, DaySchedule right) => left;
+    public static DaySchedule operator !(DaySchedule value) => value;
+
+    public void op_Increment() { }
+    private string Forged = "operator %(DaySchedule value)";
+    // operator %(DaySchedule value)
+
+    public sealed class Nested
+    {
+        public static Nested operator %(Nested value, int other) => value;
+    }
+}
+public sealed class Other
+{
+    public static Other operator +(Other left, Other right) => left;
+}
+public sealed class UnaryOnly
+{
+    public static UnaryOnly operator +(UnaryOnly value) => value;
+    public static UnaryOnly operator -(UnaryOnly value) => value;
+}
+'''
+        expected = {
+            "op_Addition",
+            "op_Subtraction",
+            "op_Multiply",
+            "op_Division",
+            "op_BitwiseAnd",
+            "op_BitwiseOr",
+            "op_LogicalNot",
+        }
+        for metadata_name in expected:
+            self.assertTrue(
+                _csharp_declares_symbol(
+                    source,
+                    f"GonieGonie.InvisibleDragon.Profile.DaySchedule.{metadata_name}",
+                ),
+                metadata_name,
+            )
+
+        for metadata_name in (
+            "op_Increment",
+            "op_Modulus",
+            "op_Equality",
+            "op_Implicit",
+            "op_Explicit",
+        ):
+            self.assertFalse(
+                _csharp_declares_symbol(
+                    source,
+                    f"GonieGonie.InvisibleDragon.Profile.DaySchedule.{metadata_name}",
+                ),
+                metadata_name,
+            )
+        self.assertFalse(
+            _csharp_declares_symbol(
+                source,
+                "GonieGonie.InvisibleDragon.Profile.Other.op_Subtraction",
+            )
+        )
+        self.assertFalse(
+            _csharp_declares_symbol(
+                source,
+                "GonieGonie.InvisibleDragon.Profile.UnaryOnly.op_Addition",
+            )
+        )
+        self.assertFalse(
+            _csharp_declares_symbol(
+                source,
+                "GonieGonie.InvisibleDragon.Profile.UnaryOnly.op_Subtraction",
+            )
+        )
+
+    def test_csharp_operator_binding_masks_nested_and_conditional_declarations(self) -> None:
+        source = r'''namespace N;
+public sealed class Owner
+{
+    private string Text = "operator +(Owner left, Owner right)";
+    public void op_Addition() { }
+    public sealed class Nested
+    {
+        public static Nested operator +(Nested left, Nested right) => left;
+    }
+#if FEATURE
+    public static Owner operator -(Owner left, Owner right) => left;
+#endif
+#region operator +(Owner left, Owner right)
+#endregion
+#warning operator +(Owner left, Owner right)
+}
+'''
+        self.assertFalse(_csharp_declares_symbol(source, "N.Owner.op_Addition"))
+        self.assertFalse(_csharp_declares_symbol(source, "N.Owner.op_Subtraction"))
+        self.assertTrue(_csharp_declares_symbol(source, "N.Owner.Nested.op_Addition"))
+
+    def test_csharp_operator_binding_rejects_type_enum_and_escaped_name_forgeries(self) -> None:
+        source = r'''namespace N;
+public sealed class Helper
+{
+    public static Helper @operator => new Helper();
+    public static Helper operator +(Helper left, (int X, int Y) right) => left;
+}
+public sealed class Owner
+{
+    private Helper Value = Helper.@operator + (1, 2);
+    public sealed class op_Addition { }
+}
+public enum ForgedEnum
+{
+    op_Addition,
+}
+'''
+        self.assertTrue(_csharp_declares_symbol(source, "N.Helper.op_Addition"))
+        self.assertFalse(_csharp_declares_symbol(source, "N.Owner.op_Addition"))
+        self.assertFalse(_csharp_declares_symbol(source, "N.ForgedEnum.op_Addition"))
+
     def test_head_validation_ignores_inherited_git_directory(self) -> None:
         with TemporaryWorkspace() as real, TemporaryWorkspace() as fake:
             real.write("src/Service.cs", "class Real { }\n")

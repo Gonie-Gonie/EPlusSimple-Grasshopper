@@ -1290,12 +1290,17 @@ def _csharp_declares_symbol(text: str, symbol: str) -> bool:
     parts = re.split(r"\.|::", symbol)
     declarations = _csharp_type_declarations(masked)
     requested = ".".join(parts)
+    operator_metadata_request = parts[-1].startswith("op_")
     type_matches = tuple(
         item
         for item in declarations
         if item.full_name == requested
     )
-    if type_matches and len({item.full_name for item in type_matches}) == 1:
+    if (
+        not operator_metadata_request
+        and type_matches
+        and len({item.full_name for item in type_matches}) == 1
+    ):
         return True
     if len(parts) < 2:
         return False
@@ -1310,7 +1315,8 @@ def _csharp_declares_symbol(text: str, symbol: str) -> bool:
     return any(
         item.body is not None
         and (
-            _csharp_enum_body_declares_member(item.body, parts[-1])
+            not operator_metadata_request
+            and _csharp_enum_body_declares_member(item.body, parts[-1])
             if item.kind == "enum"
             else _csharp_type_body_declares_member(item.body, item.name, parts[-1])
         )
@@ -1488,8 +1494,25 @@ _CSHARP_MEMBER_MODIFIERS = frozenset(
 )
 
 
+_CSHARP_OPERATOR_METADATA_TOKENS = {
+    "op_Addition": ("+", 2),
+    "op_Subtraction": ("-", 2),
+    "op_Multiply": ("*", 2),
+    "op_Division": ("/", 2),
+    "op_BitwiseAnd": ("&", 2),
+    "op_BitwiseOr": ("|", 2),
+    "op_LogicalNot": ("!", 1),
+}
+
+
 def _csharp_type_body_declares_member(body: str, owner: str, leaf: str) -> bool:
     top_level = _mask_nested_csharp_blocks(body)
+    operator_descriptor = _CSHARP_OPERATOR_METADATA_TOKENS.get(leaf)
+    if operator_descriptor is not None:
+        return _csharp_type_body_declares_operator(top_level, *operator_descriptor)
+    if leaf.startswith("op_"):
+        return False
+
     occurrence = re.compile(rf"\b{re.escape(leaf)}\b")
     for match in occurrence.finditer(top_level):
         suffix = top_level[match.end() :]
@@ -1516,6 +1539,78 @@ def _csharp_type_body_declares_member(body: str, owner: str, leaf: str) -> bool:
         elif non_modifiers:
             return True
     return False
+
+
+def _csharp_type_body_declares_operator(
+    top_level: str,
+    token: str,
+    arity: int,
+) -> bool:
+    pattern = re.compile(
+        rf"(?<![@.A-Za-z0-9_])operator\s*{re.escape(token)}\s*(\()"
+    )
+    for match in pattern.finditer(top_level):
+        opening = match.start(1)
+        closing = _matching_csharp_delimiter(top_level, opening, "(", ")")
+        if closing is None:
+            continue
+        if _csharp_parameter_count(top_level[opening + 1 : closing]) == arity:
+            return True
+    return False
+
+
+def _csharp_parameter_count(value: str) -> int:
+    if not value.strip():
+        return 0
+    comma_count = 0
+    round_depth = 0
+    square_depth = 0
+    curly_depth = 0
+    angle_depth = 0
+    for character in value:
+        if character == "(":
+            round_depth += 1
+        elif character == ")" and round_depth:
+            round_depth -= 1
+        elif character == "[":
+            square_depth += 1
+        elif character == "]" and square_depth:
+            square_depth -= 1
+        elif character == "{":
+            curly_depth += 1
+        elif character == "}" and curly_depth:
+            curly_depth -= 1
+        elif character == "<":
+            angle_depth += 1
+        elif character == ">" and angle_depth:
+            angle_depth -= 1
+        elif (
+            character == ","
+            and round_depth == 0
+            and square_depth == 0
+            and curly_depth == 0
+            and angle_depth == 0
+        ):
+            comma_count += 1
+    return comma_count + 1
+
+
+def _matching_csharp_delimiter(
+    value: str,
+    opening: int,
+    opening_character: str,
+    closing_character: str,
+) -> int | None:
+    depth = 0
+    for index in range(opening, len(value)):
+        character = value[index]
+        if character == opening_character:
+            depth += 1
+        elif character == closing_character:
+            depth -= 1
+            if depth == 0:
+                return index
+    return None
 
 
 def _mask_nested_csharp_blocks(value: str) -> str:
@@ -1641,7 +1736,7 @@ def _mask_csharp_conditional_regions(value: str) -> str:
     result: list[str] = []
     depth = 0
     for line in value.splitlines(keepends=True):
-        directive = re.match(r"^\s*#\s*(if|elif|else|endif)\b", line)
+        directive = re.match(r"^\s*#\s*([A-Za-z_][A-Za-z0-9_]*)\b", line)
         if directive is not None:
             keyword = directive.group(1)
             if keyword == "if":
