@@ -155,9 +155,11 @@ Externally supplied JSON is deliberately non-authoritative: it can diagnose
 exact binding problems, but it cannot make the release compatibility gate pass.
 `--collect-evidence` is mutually exclusive with `--evidence-results`. It creates
 `temp/u/<uuid>`, launches the exact tracked collector as
-an isolated standard-library Python child, performs a fresh `dotnet test` build
-(never `--no-build`), independently reparses the TRX and case records in the
-parent, and seals the result only in memory:
+an isolated standard-library Python child, performs an isolated locked restore
+of each requested test project without globally overriding its declared target
+framework set, then runs a fresh `dotnet test --no-restore` build for the
+requested target (never `--no-build`). The parent independently reparses the
+TRX and case records and seals the result only in memory:
 
 ```text
 .\dev.cmd upstream compatibility-report ^
@@ -169,12 +171,13 @@ parent, and seals the result only in memory:
 The session requires a byte-exact clean repository and binds the repository
 HEAD, canonical inventory and evidence registries, required assertion ids,
 tracked source/project/Directory/NuGet inputs, the MSBuild-evaluated
-`ProjectReference`, `Compile`, `PackageReference`, and `AssemblyName` graph,
-the complete tracked `packages.lock.json` closure, pinned `global.json`, exact
+requested-target `ProjectReference`, `Compile`, `PackageReference`, and
+`AssemblyName` graph, every tracked `packages.lock.json`, pinned `global.json`, exact
 SDK root and complete SDK-root file/hash manifest, dotnet executable SHA-256,
 target framework, absolute Git executable path/SHA-256,
-command/exit/stdout/stderr, TRX, fresh test DLL, and all relevant implementation
-DLLs. Output, object, results, record, and NuGet
+the separate restore/test commands and exits, both stdout/stderr pairs, TRX,
+fresh test DLL, and all relevant implementation DLLs. Output, object, results,
+record, and NuGet
 directories are unique to the session. A foreign TRX `codeBase`, ambiguous
 class/method or theory case, skipped/structural-only assertion, wrong exercised
 load, stale file, symlink/junction/hardlink, or repository mutation fails closed.

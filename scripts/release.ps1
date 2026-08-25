@@ -1496,6 +1496,8 @@ function Copy-TrustedEvidenceSession {
         'parent_evaluation_build_props',
         'child_evaluation_build_props',
         'parent_validation_build_props',
+        'restore_stdout',
+        'restore_stderr',
         'stdout',
         'stderr',
         'test_dll',
@@ -1963,6 +1965,7 @@ function Copy-TrustedEvidenceSession {
                 'implementation_assemblies',
                 'path',
                 'planning_build_props',
+                'restore_arguments',
                 'slug') `
             -Label 'collector request project'
         $projectPath = Get-TrustedEvidenceCanonicalRelativePath `
@@ -1973,6 +1976,7 @@ function Copy-TrustedEvidenceSession {
             $project.slug -isnot [string] -or
             $project.slug -cnotmatch '^[a-z0-9]+(?:-[a-z0-9]+)*$' -or
             $project.arguments -isnot [System.Array] -or
+            $project.restore_arguments -isnot [System.Array] -or
             $project.assertions -isnot [System.Array] -or
             $project.implementation_assemblies -isnot [System.Array]) {
             throw 'Trusted evidence request project is duplicate or malformed.'
@@ -1980,6 +1984,11 @@ function Copy-TrustedEvidenceSession {
         foreach ($argument in $project.arguments) {
             if ($argument -isnot [string]) {
                 throw 'Trusted evidence request project arguments must be exact text.'
+            }
+        }
+        foreach ($argument in $project.restore_arguments) {
+            if ($argument -isnot [string]) {
+                throw 'Trusted evidence request project restore arguments must be exact text.'
             }
         }
         foreach ($assertion in @($project.assertions)) {
@@ -2205,6 +2214,10 @@ function Copy-TrustedEvidenceSession {
                 'path',
                 'parent_validation_build_props',
                 'records',
+                'restore_arguments',
+                'restore_exit_code',
+                'restore_stderr',
+                'restore_stdout',
                 'stderr',
                 'stdout',
                 'test_dll',
@@ -2216,6 +2229,7 @@ function Copy-TrustedEvidenceSession {
         if (-not $seenChildProjects.Add($projectPath) -or
             -not $requestProjectsByPath.ContainsKey($projectPath) -or
             $project.arguments -isnot [System.Array] -or
+            $project.restore_arguments -isnot [System.Array] -or
             $project.assertions -isnot [System.Array] -or
             $project.implementation_dlls -isnot [System.Array] -or
             $project.records -isnot [System.Array]) {
@@ -2225,12 +2239,18 @@ function Copy-TrustedEvidenceSession {
         $projectExitCode = Get-JsonInteger `
             -Value $project.exit_code `
             -Label 'collector child project.exit_code'
+        $projectRestoreExitCode = Get-JsonInteger `
+            -Value $project.restore_exit_code `
+            -Label 'collector child project.restore_exit_code'
         if ($projectExitCode -ne 0 -or
+            $projectRestoreExitCode -ne 0 -or
             (ConvertTo-TrustedEvidenceCanonicalJson -Value $project.arguments) -cne
                 (ConvertTo-TrustedEvidenceCanonicalJson -Value $requestProject.arguments) -or
+            (ConvertTo-TrustedEvidenceCanonicalJson -Value $project.restore_arguments) -cne
+                (ConvertTo-TrustedEvidenceCanonicalJson -Value $requestProject.restore_arguments) -or
             (ConvertTo-TrustedEvidenceCanonicalJson -Value $project.evaluated_graph) -cne
                 (ConvertTo-TrustedEvidenceCanonicalJson -Value $requestProject.evaluated_graph)) {
-            throw 'Trusted evidence child project command/graph/exit binding is invalid.'
+            throw 'Trusted evidence child project restore/test command/graph/exit binding is invalid.'
         }
         if (@($project.implementation_dlls).Count -ne
             @($requestProject.implementation_assemblies).Count -or
@@ -2272,7 +2292,13 @@ function Copy-TrustedEvidenceSession {
             -Descriptor $project.parent_validation_build_props `
             -ProjectPath $projectPath `
             -Label 'parent validation build props'
-        foreach ($name in @('stderr', 'stdout', 'test_dll', 'trx')) {
+        foreach ($name in @(
+            'restore_stderr',
+            'restore_stdout',
+            'stderr',
+            'stdout',
+            'test_dll',
+            'trx')) {
             Add-TrustedEvidenceExpectedArtifact `
                 -ExpectedByPath $expectedByPath `
                 -Kind $name `

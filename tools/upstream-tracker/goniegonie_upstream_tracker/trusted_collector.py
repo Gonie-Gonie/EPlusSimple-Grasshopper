@@ -428,6 +428,7 @@ def _collect_unsealed_evidence(
                 session / "p" / project["slug"] / "o",
                 session / "p" / project["slug"] / "t",
             ),
+            "restore_arguments": _dotnet_restore_command(request, project),
         }
         for project in request["projects"]
     ]
@@ -651,7 +652,14 @@ def _build_session_artifact_index(
             project["evaluation_build_props"],
             project_path,
         )
-        for key in ("stderr", "stdout", "test_dll", "trx"):
+        for key in (
+            "restore_stderr",
+            "restore_stdout",
+            "stderr",
+            "stdout",
+            "test_dll",
+            "trx",
+        ):
             add(key, project[key], project_path)
         for key in ("implementation_dlls", "records"):
             singular = "implementation_dll" if key == "implementation_dlls" else "record"
@@ -857,7 +865,7 @@ def _run_child_request(
     if [item["assertion_id"] for item in assertions] != normalized["required_assertion_ids"]:
         raise TrustedCollectorError("trusted child did not collect the exact required assertions")
     artifact_count = 2 + sum(
-        8 + len(project["implementation_dlls"]) + len(project["records"])
+        10 + len(project["implementation_dlls"]) + len(project["records"])
         for project in project_results
     )
     _verify_requested_inputs(source_root, normalized["inputs"])
@@ -916,7 +924,6 @@ def _run_test_project(
         path.mkdir(parents=True, exist_ok=True)
         _require_safe_ancestors(session, path)
 
-    command = _dotnet_test_command(request, project, bin_root, obj_root, results_root)
     environment = _isolated_dotnet_environment(
         environment_root, Path(request["dotnet"]["path"])
     )
@@ -932,6 +939,50 @@ def _run_test_project(
             "NUGET_PACKAGES": str(packages_root),
         }
     )
+    restore_command = _dotnet_restore_command(request, project)
+    try:
+        restore_completed = run_command(
+            restore_command,
+            cwd=root,
+            env=environment,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=1800,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exception:
+        raise TrustedCollectorError(
+            f"locked restore failed to run for {project['path']}: {exception}"
+        ) from exception
+    restore_stdout = bytes(restore_completed.stdout or b"")
+    restore_stderr = bytes(restore_completed.stderr or b"")
+    if (
+        len(restore_stdout) > _MAX_CHILD_OUTPUT_BYTES
+        or len(restore_stderr) > _MAX_CHILD_OUTPUT_BYTES
+    ):
+        raise TrustedCollectorError("locked restore output exceeded the safety limit")
+    restore_stdout_path = project_session / "restore.stdout.bin"
+    restore_stderr_path = project_session / "restore.stderr.bin"
+    if restore_completed.returncode != 0:
+        _write_captured_session_artifact(
+            session,
+            restore_stdout_path,
+            restore_stdout,
+            "locked restore stdout",
+        )
+        _write_captured_session_artifact(
+            session,
+            restore_stderr_path,
+            restore_stderr,
+            "locked restore stderr",
+        )
+        detail = restore_stderr.decode("utf-8", errors="replace").strip()
+        raise TrustedCollectorError(
+            "locked restore failed for "
+            f"{project['path']}: {detail or restore_completed.returncode}"
+        )
+
+    command = _dotnet_test_command(request, project, bin_root, obj_root, results_root)
     try:
         completed = run_command(
             command,
@@ -944,14 +995,46 @@ def _run_test_project(
         )
     except (OSError, subprocess.TimeoutExpired) as exception:
         raise TrustedCollectorError(f"dotnet test failed to run for {project['path']}: {exception}") from exception
+    try:
+        restore_stdout_artifact = _write_captured_session_artifact(
+            session,
+            restore_stdout_path,
+            restore_stdout,
+            "locked restore stdout",
+        )
+        restore_stderr_artifact = _write_captured_session_artifact(
+            session,
+            restore_stderr_path,
+            restore_stderr,
+            "locked restore stderr",
+        )
+    except (OSError, TrustedCollectorError) as exception:
+        raise TrustedCollectorError(
+            f"restore provenance path was preempted for {project['path']}"
+        ) from exception
     stdout = bytes(completed.stdout or b"")
     stderr = bytes(completed.stderr or b"")
     if len(stdout) > _MAX_CHILD_OUTPUT_BYTES or len(stderr) > _MAX_CHILD_OUTPUT_BYTES:
         raise TrustedCollectorError("dotnet test output exceeded the safety limit")
     stdout_path = project_session / "stdout.bin"
     stderr_path = project_session / "stderr.bin"
-    _write_exclusive(stdout_path, stdout)
-    _write_exclusive(stderr_path, stderr)
+    try:
+        stdout_artifact = _write_captured_session_artifact(
+            session,
+            stdout_path,
+            stdout,
+            "dotnet test stdout",
+        )
+        stderr_artifact = _write_captured_session_artifact(
+            session,
+            stderr_path,
+            stderr,
+            "dotnet test stderr",
+        )
+    except (OSError, TrustedCollectorError) as exception:
+        raise TrustedCollectorError(
+            f"test provenance path was preempted for {project['path']}"
+        ) from exception
 
     trx_files = tuple(results_root.glob("*.trx"))
     if len(trx_files) != 1:
@@ -973,8 +1056,12 @@ def _run_test_project(
         "implementation_dlls": parsed["implementation_dlls"],
         "path": project["path"],
         "records": parsed["records"],
-        "stderr": _session_artifact(session, stderr_path),
-        "stdout": _session_artifact(session, stdout_path),
+        "restore_arguments": restore_command,
+        "restore_exit_code": int(restore_completed.returncode),
+        "restore_stderr": restore_stderr_artifact,
+        "restore_stdout": restore_stdout_artifact,
+        "stderr": stderr_artifact,
+        "stdout": stdout_artifact,
         "test_dll": parsed["test_dll"],
         "trx": _session_artifact(session, trx_files[0], max_bytes=_MAX_TRX_BYTES),
     }
@@ -1062,6 +1149,46 @@ def _write_project_build_props(
     return _session_artifact(session, path)
 
 
+def _dotnet_restore_command(
+    request: Mapping[str, Any],
+    project: Mapping[str, Any],
+) -> list[str]:
+    source_root = Path(request["source"]["root"])
+    source_paths = {item["path"] for item in request["source"]["files"]}
+    session = Path(request["session_directory"])
+    slug = _text(project["slug"], "test project slug")
+    packages_root = session / "n" / "t" / slug
+    user_extensions_root = session / "p" / slug / "u"
+    build_props = _artifact_path(
+        session,
+        project["build_props"],
+        "project build props",
+    )
+    properties = _msbuild_isolation_properties(
+        source_root,
+        source_paths,
+        project["path"],
+        build_props,
+        None,
+        Path(request["dotnet"]["sdk_root"]),
+        packages_root,
+        user_extensions_root,
+    )
+    return [
+        request["dotnet"]["path"],
+        "restore",
+        "/noAutoResponse",
+        str(source_root.joinpath(*project["path"].split("/"))),
+        "--locked-mode",
+        "--configfile",
+        str(source_root / "NuGet.config"),
+        "--packages",
+        str(packages_root),
+        "--disable-build-servers",
+        *properties,
+    ]
+
+
 def _dotnet_test_command(
     request: Mapping[str, Any],
     project: Mapping[str, Any],
@@ -1107,6 +1234,7 @@ def _dotnet_test_command(
         "Release",
         "--framework",
         request["target_framework"],
+        "--no-restore",
         "--logger",
         f"trx;LogFileName={project['slug']}.trx",
         "--results-directory",
@@ -1493,6 +1621,10 @@ def _validate_child_result_artifacts(
                 "implementation_dlls",
                 "path",
                 "records",
+                "restore_arguments",
+                "restore_exit_code",
+                "restore_stderr",
+                "restore_stdout",
                 "stderr",
                 "stdout",
                 "test_dll",
@@ -1551,16 +1683,40 @@ def _validate_child_result_artifacts(
         )
         if actual["arguments"] != expected_command:
             raise TrustedCollectorError("trusted child dotnet command was not exact")
+        expected_restore_command = _dotnet_restore_command(
+            normalized_request,
+            expected_project,
+        )
+        if actual["restore_arguments"] != expected_restore_command:
+            raise TrustedCollectorError(
+                "trusted child locked restore command was not exact"
+            )
+        restore_exit_code = actual["restore_exit_code"]
+        if (
+            not isinstance(restore_exit_code, int)
+            or isinstance(restore_exit_code, bool)
+            or restore_exit_code != 0
+        ):
+            raise TrustedCollectorError(
+                "trusted child locked restore exit code is invalid"
+            )
         exit_code = actual["exit_code"]
         if not isinstance(exit_code, int) or isinstance(exit_code, bool):
             raise TrustedCollectorError("trusted child exit code is invalid")
-        for key in ("stdout", "stderr", "trx", "test_dll"):
+        for key in (
+            "restore_stdout",
+            "restore_stderr",
+            "stdout",
+            "stderr",
+            "trx",
+            "test_dll",
+        ):
             _validate_session_artifact(session, actual[key], key)
         for key in ("implementation_dlls", "records"):
             for artifact in _sequence(actual[key], f"child result {key}"):
                 _validate_session_artifact(session, artifact, key)
         recomputed_artifact_count += (
-            8 + len(actual["implementation_dlls"]) + len(actual["records"])
+            10 + len(actual["implementation_dlls"]) + len(actual["records"])
         )
         recomputed = _parse_project_artifacts(
             normalized_request,
@@ -1821,6 +1977,13 @@ def _validate_request(request: Mapping[str, Any]) -> Mapping[str, Any]:
             raise TrustedCollectorError(
                 "request project dotnet arguments are not independently reproducible"
             )
+        if project["restore_arguments"] != _dotnet_restore_command(
+            normalized,
+            project,
+        ):
+            raise TrustedCollectorError(
+                "request project restore arguments are not independently reproducible"
+            )
     return normalized
 
 
@@ -1880,6 +2043,7 @@ def _normalize_projects(value: Any) -> list[Mapping[str, Any]]:
                 "implementation_assemblies",
                 "path",
                 "planning_build_props",
+                "restore_arguments",
                 "slug",
             },
             "request project",
@@ -1973,6 +2137,13 @@ def _normalize_projects(value: Any) -> list[Mapping[str, Any]]:
                         "request planning build props hash",
                     ),
                 },
+                "restore_arguments": [
+                    _text(argument, "request project restore argument")
+                    for argument in _sequence(
+                        item["restore_arguments"],
+                        "request project restore arguments",
+                    )
+                ],
                 "slug": _pattern_text(item["slug"], r"[a-z0-9]+(?:-[a-z0-9]+)*", "project slug"),
             }
         )
@@ -2161,7 +2332,7 @@ def _msbuild_isolation_properties(
     source_paths: set[str],
     root_project: str,
     build_props: Path,
-    target_framework: str,
+    target_framework: str | None,
     sdk_root: Path,
     packages_root: Path,
     user_extensions_root: Path,
@@ -2178,29 +2349,34 @@ def _msbuild_isolation_properties(
     )
     properties = [
         "-p:Configuration=Release",
-        f"-p:TargetFramework={target_framework}",
-        "-p:ContinuousIntegrationBuild=true",
-        "-p:Deterministic=true",
-        "-p:RestoreLockedMode=true",
-        "-p:RestorePackagesWithLockFile=true",
-        "-p:RestoreNoCache=true",
-        "-p:RestoreDisableParallel=true",
-        "-p:NuGetAudit=false",
-        f"-p:RestoreConfigFile={source_root / 'NuGet.config'}",
-        f"-p:RestorePackagesPath={packages_root}",
-        f"-p:MSBuildSDKsPath={sdk_root / 'Sdks'}",
-        f"-p:MSBuildUserExtensionsPath={user_extensions_root}",
-        (
-            "-p:CustomBeforeMicrosoftCommonTargets="
-            f"{source_root / '.goniegonie-no-custom-before.targets'}"
-        ),
-        (
-            "-p:CustomAfterMicrosoftCommonTargets="
-            f"{source_root / '.goniegonie-no-custom-after.targets'}"
-        ),
-        "-p:ImportDirectoryBuildProps=true",
-        f"-p:DirectoryBuildPropsPath={build_props}",
     ]
+    if target_framework is not None:
+        properties.append(f"-p:TargetFramework={target_framework}")
+    properties.extend(
+        (
+            "-p:ContinuousIntegrationBuild=true",
+            "-p:Deterministic=true",
+            "-p:RestoreLockedMode=true",
+            "-p:RestorePackagesWithLockFile=true",
+            "-p:RestoreNoCache=true",
+            "-p:RestoreDisableParallel=true",
+            "-p:NuGetAudit=false",
+            f"-p:RestoreConfigFile={source_root / 'NuGet.config'}",
+            f"-p:RestorePackagesPath={packages_root}",
+            f"-p:MSBuildSDKsPath={sdk_root / 'Sdks'}",
+            f"-p:MSBuildUserExtensionsPath={user_extensions_root}",
+            (
+                "-p:CustomBeforeMicrosoftCommonTargets="
+                f"{source_root / '.goniegonie-no-custom-before.targets'}"
+            ),
+            (
+                "-p:CustomAfterMicrosoftCommonTargets="
+                f"{source_root / '.goniegonie-no-custom-after.targets'}"
+            ),
+            "-p:ImportDirectoryBuildProps=true",
+            f"-p:DirectoryBuildPropsPath={build_props}",
+        )
+    )
     if directory_build_targets_relative is None:
         properties.append("-p:ImportDirectoryBuildTargets=false")
     else:
@@ -2379,6 +2555,16 @@ def _evaluate_project_graph(
         packages_root,
         user_extensions_root,
     )
+    restore_common = _msbuild_isolation_properties(
+        source_root,
+        source_paths,
+        root_project,
+        build_props_path,
+        None,
+        sdk_root,
+        packages_root,
+        user_extensions_root,
+    )
     root_path = source_root.joinpath(*PurePosixPath(root_project).parts)
     _source_manifest_path(
         str(root_path), source_root, source_paths_by_case, "evaluated root project"
@@ -2394,7 +2580,7 @@ def _evaluate_project_graph(
         "--packages",
         str(packages_root),
         "--disable-build-servers",
-        *common,
+        *restore_common,
     ]
     _run_msbuild_process(
         restore,
@@ -2776,14 +2962,17 @@ def _build_collection_plan(
     input_paths.update(
         path
         for path in head_paths
-        if PurePosixPath(path).name
-        in {
-            "Directory.Build.props",
-            "Directory.Build.targets",
-            "Directory.Packages.props",
-            "Directory.Packages.targets",
-            "NuGet.config",
-        }
+        if (
+            PurePosixPath(path).name == "packages.lock.json"
+            or PurePosixPath(path).name
+            in {
+                "Directory.Build.props",
+                "Directory.Build.targets",
+                "Directory.Packages.props",
+                "Directory.Packages.targets",
+                "NuGet.config",
+            }
+        )
     )
     return tuple(projects), input_paths
 
@@ -3783,6 +3972,36 @@ def _session_artifact(
         "path": relative,
         "sha256": _sha256_file(resolved),
     }
+
+
+def _captured_session_artifact(
+    session: Path,
+    path: Path,
+    captured: bytes,
+    context: str,
+) -> Mapping[str, Any]:
+    try:
+        relative = path.absolute().relative_to(session.resolve(strict=True)).as_posix()
+    except (OSError, ValueError) as exception:
+        raise TrustedCollectorError(f"{context} escaped the session") from exception
+    descriptor: Mapping[str, Any] = {
+        "bytes": len(captured),
+        "path": _relative_path(relative, f"{context} artifact path"),
+        "sha256": _sha256_bytes(captured),
+    }
+    _validate_session_artifact(session, descriptor, context)
+    return descriptor
+
+
+def _write_captured_session_artifact(
+    session: Path,
+    path: Path,
+    captured: bytes,
+    context: str,
+) -> Mapping[str, Any]:
+    _require_safe_ancestors(session, path.parent)
+    _write_exclusive(path, captured)
+    return _captured_session_artifact(session, path, captured, context)
 
 
 def _validate_session_artifact(session: Path, value: Any, context: str) -> None:

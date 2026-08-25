@@ -53,9 +53,9 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             result = json.loads(fixture["result"].read_text(encoding="utf-8"))
             self.assertEqual(1, result["projectCount"])
             self.assertEqual(1, result["assertionCount"])
-            self.assertEqual(12, result["artifactCount"])
-            self.assertEqual(14, result["copiedArtifactCount"])
-            self.assertEqual(12, len(result["artifacts"]))
+            self.assertEqual(14, result["artifactCount"])
+            self.assertEqual(16, result["copiedArtifactCount"])
+            self.assertEqual(14, len(result["artifacts"]))
             self.assertEqual(
                 {
                     "request",
@@ -64,6 +64,8 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                     "parent_evaluation_build_props",
                     "child_evaluation_build_props",
                     "parent_validation_build_props",
+                    "restore_stdout",
+                    "restore_stderr",
                     "stdout",
                     "stderr",
                     "test_dll",
@@ -89,7 +91,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                 (destination / "artifact-index.json").read_bytes(),
             )
             self.assertEqual(
-                14,
+                16,
                 len([path for path in destination.rglob("*") if path.is_file()]),
             )
 
@@ -144,6 +146,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             "child-input-mismatch",
             "child-package-lock-mismatch",
             "child-arguments-mismatch",
+            "child-restore-arguments-mismatch",
             "child-graph-mismatch",
         )
         for case in cases:
@@ -165,7 +168,8 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             "receipt-request-hash-forgery": "request hashes do not match actual q.json bytes",
             "receipt-child-hash-forgery": "child-result hashes do not match actual z.json bytes",
             "failed-assertion": "not exact passing canonical evidence",
-            "nonzero-exit": "command/graph/exit binding is invalid",
+            "nonzero-exit": "restore/test command/graph/exit binding is invalid",
+            "nonzero-restore-exit": "restore/test command/graph/exit binding is invalid",
             "forged-output": "not exact passing canonical evidence",
             "forged-evidence-results-hash": "forged EvidenceResults content hash",
             "forged-g2": "canonical request/child artifact closure",
@@ -297,12 +301,19 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             "--framework",
             "net8.0-windows",
         ]
+        expected_restore_arguments = [
+            "C:/pinned/dotnet/dotnet.exe",
+            "restore",
+            "--locked-mode",
+        ]
 
         artifact_bytes = {
             f"c/{PROJECT_SLUG}/d.props": b"<Project>generated</Project>\n",
             f"g0/{PROJECT_SLUG}/d.props": b"<Project>parent-eval</Project>\n",
             f"g1/{PROJECT_SLUG}/d.props": b"<Project>child-eval</Project>\n",
             f"g2/{PROJECT_SLUG}/d.props": b"<Project>parent-validation</Project>\n",
+            f"p/{PROJECT_SLUG}/restore.stdout.bin": b"locked restore stdout\r\n",
+            f"p/{PROJECT_SLUG}/restore.stderr.bin": b"",
             f"p/{PROJECT_SLUG}/stdout.bin": b"fresh stdout\r\n",
             f"p/{PROJECT_SLUG}/stderr.bin": b"",
             f"p/{PROJECT_SLUG}/b/Product.Tests.dll": b"fresh test dll",
@@ -370,6 +381,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                     "planning_build_props": descriptors[
                         f"g0/{PROJECT_SLUG}/d.props"
                     ],
+                    "restore_arguments": expected_restore_arguments,
                     "slug": PROJECT_SLUG,
                 }
             ],
@@ -401,7 +413,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             "test_symbol": "Product.Tests.ParityTests.Matches",
         }
         child = {
-            "artifact_count": 12,
+            "artifact_count": 14,
             "assertion_count": 1,
             "assertions": [executed_assertion],
             "git_executable_sha256": HASH_B,
@@ -426,6 +438,14 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                         f"g2/{PROJECT_SLUG}/d.props"
                     ],
                     "records": [descriptors[f"p/{PROJECT_SLUG}/r/case.json"]],
+                    "restore_arguments": expected_restore_arguments,
+                    "restore_exit_code": 0,
+                    "restore_stderr": descriptors[
+                        f"p/{PROJECT_SLUG}/restore.stderr.bin"
+                    ],
+                    "restore_stdout": descriptors[
+                        f"p/{PROJECT_SLUG}/restore.stdout.bin"
+                    ],
                     "stderr": descriptors[f"p/{PROJECT_SLUG}/stderr.bin"],
                     "stdout": descriptors[f"p/{PROJECT_SLUG}/stdout.bin"],
                     "test_dll": descriptors[
@@ -470,6 +490,14 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                 "parent_validation_build_props",
                 descriptors[f"g2/{PROJECT_SLUG}/d.props"],
             ),
+            indexed(
+                "restore_stdout",
+                descriptors[f"p/{PROJECT_SLUG}/restore.stdout.bin"],
+            ),
+            indexed(
+                "restore_stderr",
+                descriptors[f"p/{PROJECT_SLUG}/restore.stderr.bin"],
+            ),
             indexed("stdout", descriptors[f"p/{PROJECT_SLUG}/stdout.bin"]),
             indexed("stderr", descriptors[f"p/{PROJECT_SLUG}/stderr.bin"]),
             indexed(
@@ -484,7 +512,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
         ]
         entries.sort(key=lambda item: (item["path"], item["kind"]))
         index = {
-            "artifact_count": 12,
+            "artifact_count": 14,
             "artifacts": entries,
             "assertion_count": 1,
             "child_result_sha256": child_descriptor["sha256"],
@@ -502,7 +530,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
         self._write_json(session / "i.json", index)
         index_descriptor = self._descriptor(session, "i.json")
         receipt = {
-            "artifact_count": 12,
+            "artifact_count": 14,
             "artifact_index_path": "i.json",
             "artifact_index_sha256": index_descriptor["sha256"],
             "assertion_count": 1,
@@ -540,7 +568,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
         self._write_json(session / "a.json", receipt)
         receipt_descriptor = self._descriptor(session, "a.json")
         trace = {
-            "artifact_count": 12,
+            "artifact_count": 14,
             "artifact_index_path": f"temp/u/{SESSION_ID}/i.json",
             "artifact_index_sha256": index_descriptor["sha256"],
             "assertion_count": 1,
@@ -599,14 +627,14 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             control = json.loads(control_path.read_text(encoding="utf-8"))
             control["evidence_execution"]["result_artifacts"][0][
                 "artifact_count"
-            ] = 13
+            ] = 15
             self._write_json(control_path, control)
             return
         if case == "trace-count-string":
             control = json.loads(control_path.read_text(encoding="utf-8"))
             control["evidence_execution"]["result_artifacts"][0][
                 "artifact_count"
-            ] = "12"
+            ] = "14"
             self._write_json(control_path, control)
             return
         if case == "report-assertion-id-mismatch":
@@ -641,13 +669,13 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                 if case == "path-case-collision":
                     duplicate["path"] = record["path"].upper()
                 index["artifacts"].append(duplicate)
-                index["artifact_count"] = 13
+                index["artifact_count"] = 15
                 index["artifacts"].sort(key=lambda item: (item["path"], item["kind"]))
             elif case == "missing-artifact":
                 index["artifacts"] = [
                     item for item in index["artifacts"] if item["kind"] != "stdout"
                 ]
-                index["artifact_count"] = 11
+                index["artifact_count"] = 13
             elif case == "extra-artifact":
                 extra_path = f"p/{PROJECT_SLUG}/r/extra.json"
                 extra_file = session / Path(extra_path)
@@ -660,7 +688,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                         "project_path": PROJECT_PATH,
                     }
                 )
-                index["artifact_count"] = 13
+                index["artifact_count"] = 15
                 index["artifacts"].sort(key=lambda item: (item["path"], item["kind"]))
             elif case == "index-missing-property":
                 index.pop("source_tree_sha256")
@@ -680,14 +708,16 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
 
         def mutate_child(child: dict) -> None:
             if case in {"path-case-collision", "duplicate-path", "extra-artifact"}:
-                child["artifact_count"] = 13
+                child["artifact_count"] = 15
             elif case == "missing-artifact":
-                child["artifact_count"] = 11
+                child["artifact_count"] = 13
             elif case == "failed-assertion":
                 child["assertions"][0]["outcome"] = "failed"
                 child["projects"][0]["assertions"][0]["outcome"] = "failed"
             elif case == "nonzero-exit":
                 child["projects"][0]["exit_code"] = 1
+            elif case == "nonzero-restore-exit":
+                child["projects"][0]["restore_exit_code"] = 1
             elif case == "forged-output":
                 child["assertions"][0]["output_sha256"] = HASH_B
                 child["projects"][0]["assertions"][0]["output_sha256"] = HASH_B
@@ -699,6 +729,8 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                 ]
             elif case == "child-arguments-mismatch":
                 child["projects"][0]["arguments"].append("--forged")
+            elif case == "child-restore-arguments-mismatch":
+                child["projects"][0]["restore_arguments"].append("--forged")
             elif case == "child-graph-mismatch":
                 child["projects"][0]["evaluated_graph"] = {"forged": True}
 

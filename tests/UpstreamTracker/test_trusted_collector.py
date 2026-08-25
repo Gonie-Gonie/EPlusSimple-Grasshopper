@@ -26,6 +26,8 @@ from goniegonie_upstream_tracker.trusted_collector import (
     TrustedCollectorError,
     TrustedEvidenceResults,
     _build_session_artifact_index,
+    _captured_session_artifact,
+    _dotnet_restore_command,
     _exact_repository_snapshot,
     _dotnet_test_command,
     _evaluate_project_graph,
@@ -35,11 +37,13 @@ from goniegonie_upstream_tracker.trusted_collector import (
     _materialize_source_tree,
     _normalize_evaluated_graph,
     _parse_project_artifacts,
+    _run_test_project,
     _sha256_bytes,
     _sha256_data,
     _sdk_toolchain_manifest,
     _validate_child_result_artifacts,
     _validate_request,
+    _validate_session_artifact,
     _verify_canonical_evidence_binding,
     _verify_materialized_source,
     _verify_sdk_toolchain_manifest,
@@ -87,7 +91,7 @@ class TrustedCollectorTests(unittest.TestCase):
             "target_framework": "net8.0-windows",
         }
         child = {
-            "artifact_count": 12,
+            "artifact_count": 14,
             "assertion_count": 1,
             "assertions": [{"assertion_id": "service-parity"}],
             "project_count": 1,
@@ -100,6 +104,12 @@ class TrustedCollectorTests(unittest.TestCase):
                     ),
                     "path": project_path,
                     "records": [artifact("p/slug/r/case.json", HASH_B)],
+                    "restore_stderr": artifact(
+                        "p/slug/restore.stderr.bin", HASH_A
+                    ),
+                    "restore_stdout": artifact(
+                        "p/slug/restore.stdout.bin", HASH_B
+                    ),
                     "stderr": artifact("p/slug/stderr.bin", HASH_A),
                     "stdout": artifact("p/slug/stdout.bin", HASH_B),
                     "test_dll": artifact("p/slug/b/Product.Tests.dll", HASH_C),
@@ -356,16 +366,24 @@ catch (InvalidOperationException)
             session = workspace.path / "q"
             source = session / "s"
             library_dir = source / "s" / "ThisIsAnIntentionallyLongLibraryProjectNameForPathRegression"
+            alternate_dir = source / "s" / "AlternateTargetOnlyProject"
             test_dir = source / "t" / "ThisIsAnIntentionallyLongTestProjectNameForPathRegression"
             library_dir.mkdir(parents=True)
+            alternate_dir.mkdir(parents=True)
             test_dir.mkdir(parents=True)
             library_project = library_dir / "LongLibrary.csproj"
+            alternate_project = alternate_dir / "AlternateTargetOnly.csproj"
             test_project = test_dir / "LongTest.csproj"
             library_project.write_text(
                 '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup>'
-                '<TargetFramework>net8.0-windows</TargetFramework>'
+                '<TargetFrameworks>net8.0;net8.0-windows</TargetFrameworks>'
                 '<AssemblyName>LongLibrary</AssemblyName>'
-                '</PropertyGroup></Project>\n',
+                '<EnableDefaultCompileItems>false</EnableDefaultCompileItems>'
+                '</PropertyGroup><ItemGroup><Compile Include="Library.cs" />'
+                '</ItemGroup><ItemGroup '
+                'Condition="\'$(TargetFrameworks)\' == \'net8.0;net8.0-windows\'">'
+                '<Compile Include="MultiTargetMarker.cs" />'
+                '</ItemGroup></Project>\n',
                 encoding="utf-8",
                 newline="\n",
             )
@@ -374,13 +392,34 @@ catch (InvalidOperationException)
                 encoding="utf-8",
                 newline="\n",
             )
+            (library_dir / "MultiTargetMarker.cs").write_text(
+                "namespace LongNames; public sealed class MultiTargetMarker { }\n",
+                encoding="utf-8",
+                newline="\n",
+            )
+            alternate_project.write_text(
+                '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup>'
+                '<TargetFramework>net8.0</TargetFramework>'
+                '<AssemblyName>AlternateTargetOnly</AssemblyName>'
+                '</PropertyGroup></Project>\n',
+                encoding="utf-8",
+                newline="\n",
+            )
+            (alternate_dir / "Alternate.cs").write_text(
+                "namespace LongNames; public sealed class Alternate { }\n",
+                encoding="utf-8",
+                newline="\n",
+            )
             relative_reference = os.path.relpath(library_project, test_dir)
+            alternate_reference = os.path.relpath(alternate_project, test_dir)
             test_project.write_text(
                 '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup>'
-                '<TargetFramework>net8.0-windows</TargetFramework>'
+                '<TargetFrameworks>net8.0;net8.0-windows</TargetFrameworks>'
                 '<AssemblyName>LongTest</AssemblyName>'
                 '</PropertyGroup><ItemGroup Condition="\'$(TargetFramework)\' == \'net8.0-windows\'">'
                 f'<ProjectReference Include="{escape(relative_reference)}" />'
+                '</ItemGroup><ItemGroup Condition="\'$(TargetFramework)\' == \'net8.0\'">'
+                f'<ProjectReference Include="{escape(alternate_reference)}" />'
                 '</ItemGroup></Project>\n',
                 encoding="utf-8",
                 newline="\n",
@@ -413,7 +452,6 @@ catch (InvalidOperationException)
                     "--packages",
                     str(bootstrap_packages),
                     "--disable-build-servers",
-                    "-p:TargetFramework=net8.0-windows",
                     "-p:NuGetAudit=false",
                 ],
                 cwd=source,
@@ -428,7 +466,11 @@ catch (InvalidOperationException)
                     "utf-8", errors="replace"
                 ),
             )
-            for generated in (library_dir / "obj", test_dir / "obj"):
+            for generated in (
+                alternate_dir / "obj",
+                library_dir / "obj",
+                test_dir / "obj",
+            ):
                 if generated.exists():
                     shutil.rmtree(generated)
             files = []
@@ -475,9 +517,20 @@ catch (InvalidOperationException)
                 {"LongLibrary", "LongTest"},
                 {item["assembly_name"] for item in graph["projects"]},
             )
+            self.assertNotIn(
+                "AlternateTargetOnly",
+                {item["assembly_name"] for item in graph["projects"]},
+            )
             self.assertTrue(
                 any(
                     item["path"].endswith("ConditionalCompile.cs")
+                    for project_metadata in graph["projects"]
+                    for item in project_metadata["compile"]
+                )
+            )
+            self.assertTrue(
+                any(
+                    item["path"].endswith("MultiTargetMarker.cs")
                     for project_metadata in graph["projects"]
                     for item in project_metadata["compile"]
                 )
@@ -517,6 +570,40 @@ catch (InvalidOperationException)
                 project_session / "o",
                 project_session / "t",
             )
+            restore_command = _dotnet_restore_command(build_request, build_project)
+            restore_completed = subprocess.run(
+                restore_command,
+                cwd=source,
+                env=build_environment,
+                capture_output=True,
+                check=False,
+            )
+            self.assertEqual(
+                0,
+                restore_completed.returncode,
+                msg=(restore_completed.stdout + restore_completed.stderr).decode(
+                    "utf-8", errors="replace"
+                ),
+            )
+            restored_projects: set[str] = set()
+            restored_frameworks: dict[str, set[tuple[str, ...]]] = {}
+            dgspec_paths = tuple((project_session / "o").rglob("*.nuget.dgspec.json"))
+            self.assertTrue(dgspec_paths)
+            for dgspec_path in dgspec_paths:
+                dgspec = json.loads(dgspec_path.read_text(encoding="utf-8"))
+                for raw_path, specification in dgspec["projects"].items():
+                    project_name = Path(raw_path).name
+                    restored_projects.add(project_name)
+                    restored_frameworks.setdefault(project_name, set()).add(
+                        tuple(specification["restore"]["originalTargetFrameworks"])
+                    )
+            self.assertIn(alternate_project.name, restored_projects)
+            self.assertIn(library_project.name, restored_projects)
+            self.assertIn(test_project.name, restored_projects)
+            self.assertIn(
+                ("net8.0", "net8.0-windows"),
+                restored_frameworks[test_project.name],
+            )
             property_start = test_command.index("--disable-build-servers")
             build_command = [
                 str(dotnet),
@@ -527,6 +614,7 @@ catch (InvalidOperationException)
                 "Release",
                 "--framework",
                 "net8.0-windows",
+                "--no-restore",
                 "--disable-build-servers",
                 *test_command[property_start + 1 :],
             ]
@@ -546,15 +634,26 @@ catch (InvalidOperationException)
             )
             self.assertNotIn("--no-build", build_command)
             self.assertNotIn("--no-build", test_command)
+            self.assertIn("--no-restore", build_command)
+            self.assertIn("--no-restore", test_command)
+            self.assertFalse(
+                any(
+                    argument.startswith("-p:TargetFramework")
+                    for argument in restore_command
+                )
+            )
             self.assertIn("/noAutoResponse", test_command)
             assembly_paths = list((project_session / "b").rglob("*.dll"))
             self.assertTrue(any(path.name == "LongLibrary.dll" for path in assembly_paths))
             self.assertTrue(any(path.name == "LongTest.dll" for path in assembly_paths))
+            self.assertFalse(
+                any(path.name == "AlternateTargetOnly.dll" for path in assembly_paths)
+            )
             project_keys = {
                 path.relative_to(project_session / "o").parts[0]
                 for path in (project_session / "o").rglob("project.assets.json")
             }
-            self.assertEqual(2, len(project_keys))
+            self.assertEqual(3, len(project_keys))
             created = [path for path in session.rglob("*")]
             self.assertFalse(any("$(MSBuildProjectName)" in str(path) for path in created))
             self.assertLess(max(len(str(path)) for path in created), 240)
@@ -895,6 +994,7 @@ if (-not $rejected) {{ exit 14 }}
                 workspace.path / "obj",
                 workspace.path / "results",
             )
+            restore_command = _dotnet_restore_command(request, project)
             self.assertIn(
                 "-p:CustomBeforeMicrosoftCommonTargets="
                 f"{source_root / '.goniegonie-no-custom-before.targets'}",
@@ -919,6 +1019,159 @@ if (-not $rejected) {{ exit 14 }}
                 command,
             )
             self.assertFalse(any("forged" in item for item in command))
+            self.assertFalse(any("forged" in item for item in restore_command))
+            self.assertIn("--locked-mode", restore_command)
+            self.assertIn("--no-restore", command)
+            self.assertFalse(
+                any(
+                    item.startswith("-p:TargetFramework")
+                    for item in restore_command
+                )
+            )
+
+    def test_test_process_cannot_preempt_restore_provenance_artifacts(self) -> None:
+        with TemporaryWorkspace() as workspace:
+            session = workspace.path / "session"
+            source = session / "s"
+            source.mkdir(parents=True)
+            slug = "product-tests"
+            build_props_path = session / "c" / slug / "d.props"
+            build_props_path.parent.mkdir(parents=True)
+            build_props_path.write_bytes(b"<Project />\n")
+            project = {
+                "build_props": {
+                    "bytes": build_props_path.stat().st_size,
+                    "path": f"c/{slug}/d.props",
+                    "sha256": _sha256_bytes(build_props_path.read_bytes()),
+                },
+                "path": "tests/Product.Tests/Product.Tests.csproj",
+                "slug": slug,
+            }
+            dotnet = Path(sys.executable).resolve(strict=True)
+            request = {
+                "dotnet": {
+                    "path": dotnet.as_posix(),
+                    "sdk_root": dotnet.parent.as_posix(),
+                },
+                "nonce": NONCE,
+                "session_directory": session.as_posix(),
+                "source": {"files": [], "root": source.as_posix()},
+                "target_framework": "net8.0-windows",
+            }
+            calls = 0
+            planted = session / "p" / slug / "restore.stdout.bin"
+
+            def fake_run(command: list[str], **_: object) -> subprocess.CompletedProcess[bytes]:
+                nonlocal calls
+                calls += 1
+                if calls == 1:
+                    self.assertEqual("restore", command[1])
+                    self.assertFalse(planted.exists())
+                    return subprocess.CompletedProcess(
+                        command,
+                        0,
+                        stdout=b"trusted restore stdout",
+                        stderr=b"",
+                    )
+                self.assertEqual("test", command[1])
+                self.assertFalse(planted.exists())
+                planted.write_bytes(b"forged by test process")
+                return subprocess.CompletedProcess(
+                    command,
+                    0,
+                    stdout=b"test stdout",
+                    stderr=b"",
+                )
+
+            with self.assertRaisesRegex(
+                TrustedCollectorError,
+                "restore provenance path was preempted",
+            ):
+                _run_test_project(request, project, run_command=fake_run)
+            self.assertEqual(2, calls)
+            self.assertEqual(b"forged by test process", planted.read_bytes())
+
+    def test_test_process_cannot_preempt_test_output_provenance_artifacts(self) -> None:
+        with TemporaryWorkspace() as workspace:
+            session = workspace.path / "session"
+            source = session / "s"
+            source.mkdir(parents=True)
+            slug = "product-tests"
+            build_props_path = session / "c" / slug / "d.props"
+            build_props_path.parent.mkdir(parents=True)
+            build_props_path.write_bytes(b"<Project />\n")
+            project = {
+                "build_props": {
+                    "bytes": build_props_path.stat().st_size,
+                    "path": f"c/{slug}/d.props",
+                    "sha256": _sha256_bytes(build_props_path.read_bytes()),
+                },
+                "path": "tests/Product.Tests/Product.Tests.csproj",
+                "slug": slug,
+            }
+            dotnet = Path(sys.executable).resolve(strict=True)
+            request = {
+                "dotnet": {
+                    "path": dotnet.as_posix(),
+                    "sdk_root": dotnet.parent.as_posix(),
+                },
+                "nonce": NONCE,
+                "session_directory": session.as_posix(),
+                "source": {"files": [], "root": source.as_posix()},
+                "target_framework": "net8.0-windows",
+            }
+            calls = 0
+            planted = session / "p" / slug / "stdout.bin"
+
+            def fake_run(command: list[str], **_: object) -> subprocess.CompletedProcess[bytes]:
+                nonlocal calls
+                calls += 1
+                if calls == 1:
+                    self.assertEqual("restore", command[1])
+                    return subprocess.CompletedProcess(
+                        command,
+                        0,
+                        stdout=b"trusted restore stdout",
+                        stderr=b"",
+                    )
+                self.assertEqual("test", command[1])
+                planted.write_bytes(b"forged test stdout")
+                return subprocess.CompletedProcess(
+                    command,
+                    0,
+                    stdout=b"trusted test stdout",
+                    stderr=b"",
+                )
+
+            with self.assertRaisesRegex(
+                TrustedCollectorError,
+                "test provenance path was preempted",
+            ):
+                _run_test_project(request, project, run_command=fake_run)
+            self.assertEqual(2, calls)
+            self.assertEqual(b"forged test stdout", planted.read_bytes())
+
+    def test_captured_output_descriptor_never_adopts_later_disk_bytes(self) -> None:
+        with TemporaryWorkspace() as workspace:
+            session = workspace.path / "session"
+            path = session / "p" / "project" / "stdout.bin"
+            path.parent.mkdir(parents=True)
+            captured = b"captured subprocess bytes"
+            path.write_bytes(captured)
+
+            descriptor = _captured_session_artifact(
+                session,
+                path,
+                captured,
+                "captured stdout",
+            )
+            self.assertEqual(len(captured), descriptor["bytes"])
+            self.assertEqual(_sha256_bytes(captured), descriptor["sha256"])
+
+            path.write_bytes(b"x" * len(captured))
+            self.assertEqual(_sha256_bytes(captured), descriptor["sha256"])
+            with self.assertRaisesRegex(TrustedCollectorError, "hash is invalid"):
+                _validate_session_artifact(session, descriptor, "captured stdout")
 
     def test_failed_dotnet_exit_cannot_produce_a_passing_assertion(self) -> None:
         with TemporaryWorkspace() as workspace:
