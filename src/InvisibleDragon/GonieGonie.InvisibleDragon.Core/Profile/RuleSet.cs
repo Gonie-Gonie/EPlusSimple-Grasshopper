@@ -1,4 +1,7 @@
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Numerics;
+using System.Text;
 using GonieGonie.InvisibleDragon.Internal;
 
 namespace GonieGonie.InvisibleDragon.Profile;
@@ -8,8 +11,20 @@ namespace GonieGonie.InvisibleDragon.Profile;
 /// </summary>
 public sealed class RuleSet : IEquatable<RuleSet>
 {
+    private static readonly string[] DayKeys =
+    {
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+        "holiday",
+    };
+
     public RuleSet(
-        string name,
+        string? name,
         DaySchedule? weekdays = null,
         DaySchedule? weekends = null,
         DaySchedule? monday = null,
@@ -22,7 +37,7 @@ public sealed class RuleSet : IEquatable<RuleSet>
         DaySchedule? holiday = null,
         ScheduleType? type = null)
     {
-        Name = DomainGuard.RequiredText(name, nameof(name));
+        Name = NormalizeName(name);
         Type = InferAndValidateType(
             type,
             weekdays,
@@ -76,6 +91,28 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public double Maximum => AllSlots().Max(day => day.Maximum);
 
+    /// <summary>
+    /// Creates a value-equivalent independent copy of every populated day slot.
+    /// Repeated references in the source are intentionally split, matching the
+    /// pinned Python <c>__deepcopy__</c> implementation's per-slot calls.
+    /// </summary>
+    public RuleSet DeepCopy()
+    {
+        return new RuleSet(
+            $"{Name}:COPY",
+            Weekdays.DeepCopy(),
+            Weekends.DeepCopy(),
+            Monday?.DeepCopy(),
+            Tuesday?.DeepCopy(),
+            Wednesday?.DeepCopy(),
+            Thursday?.DeepCopy(),
+            Friday?.DeepCopy(),
+            Saturday?.DeepCopy(),
+            Sunday?.DeepCopy(),
+            Holiday?.DeepCopy(),
+            Type);
+    }
+
     public static RuleSet Constant(string name, double value, ScheduleType type = ScheduleType.Real)
     {
         DaySchedule day = DaySchedule.ConstantFromPythonScalar($"{name}:day", value, type);
@@ -92,6 +129,96 @@ public sealed class RuleSet : IEquatable<RuleSet>
     {
         DomainGuard.NotNull(day, nameof(day));
         return new RuleSet(name, day, day, type: day.Type);
+    }
+
+    /// <summary>
+    /// Creates a rule set from a Python-compatible scalar. Scalar values create
+    /// distinct weekday and weekend schedules, as in the pinned implementation.
+    /// </summary>
+    public static RuleSet FromConstant<T>(
+        string? name,
+        T value,
+        ScheduleType? type = null)
+    {
+        if (value is null)
+        {
+            throw new ArgumentNullException(nameof(value));
+        }
+
+        if (value is DaySchedule daySchedule)
+        {
+            return FromConstant(name, daySchedule, type);
+        }
+
+        string ruleSetName = NormalizeName(name);
+        ScheduleType resultType = ValidateScheduleType(type ?? ScheduleType.Real, nameof(type));
+        DaySchedule weekdays = DaySchedule.ConstantFromPythonScalar(
+            $"{ruleSetName}:weekdays",
+            value,
+            resultType);
+        DaySchedule weekends = DaySchedule.ConstantFromPythonScalar(
+            $"{ruleSetName}:weekends",
+            value,
+            resultType);
+        return new RuleSet(ruleSetName, weekdays, weekends, type: resultType);
+    }
+
+    /// <summary>
+    /// Creates a rule set whose defaults reference the supplied day schedule.
+    /// The optional type is ignored to preserve the upstream typed-day factory
+    /// contract; the day schedule is authoritative.
+    /// </summary>
+    public static RuleSet FromConstant(
+        string? name,
+        DaySchedule value,
+        ScheduleType? type = null)
+    {
+        DomainGuard.NotNull(value, nameof(value));
+        return new RuleSet(name, value, value, type: value.Type);
+    }
+
+    /// <summary>
+    /// Creates a rule set from a shared default and optional per-day overrides.
+    /// Inputs may be day schedules or Python-compatible scalar values.
+    /// </summary>
+    public static RuleSet FromDays(
+        string? name,
+        object defaultValue,
+        object? monday = null,
+        object? tuesday = null,
+        object? wednesday = null,
+        object? thursday = null,
+        object? friday = null,
+        object? saturday = null,
+        object? sunday = null,
+        object? holiday = null,
+        ScheduleType? type = null)
+    {
+        DomainGuard.NotNull(defaultValue, nameof(defaultValue));
+
+        string ruleSetName = NormalizeName(name);
+        ScheduleType inferredType = defaultValue is DaySchedule defaultSchedule
+            ? defaultSchedule.Type
+            : ValidateScheduleType(type ?? ScheduleType.Real, nameof(type));
+        DaySchedule defaultDay = CoerceDaySchedule(
+            defaultValue,
+            inferredType,
+            $"{ruleSetName}:default",
+            nameof(defaultValue));
+
+        return new RuleSet(
+            ruleSetName,
+            defaultDay,
+            defaultDay,
+            CoerceOptionalDaySchedule(monday, inferredType, $"{ruleSetName}:monday", nameof(monday)),
+            CoerceOptionalDaySchedule(tuesday, inferredType, $"{ruleSetName}:tuesday", nameof(tuesday)),
+            CoerceOptionalDaySchedule(wednesday, inferredType, $"{ruleSetName}:wednesday", nameof(wednesday)),
+            CoerceOptionalDaySchedule(thursday, inferredType, $"{ruleSetName}:thursday", nameof(thursday)),
+            CoerceOptionalDaySchedule(friday, inferredType, $"{ruleSetName}:friday", nameof(friday)),
+            CoerceOptionalDaySchedule(saturday, inferredType, $"{ruleSetName}:saturday", nameof(saturday)),
+            CoerceOptionalDaySchedule(sunday, inferredType, $"{ruleSetName}:sunday", nameof(sunday)),
+            CoerceOptionalDaySchedule(holiday, inferredType, $"{ruleSetName}:holiday", nameof(holiday)),
+            inferredType);
     }
 
     public DaySchedule GetDaySchedule(DayOfWeek dayOfWeek, bool isHoliday = false)
@@ -111,6 +238,87 @@ public sealed class RuleSet : IEquatable<RuleSet>
             DayOfWeek.Saturday => Saturday ?? Weekends,
             DayOfWeek.Sunday => Sunday ?? Weekends,
             _ => throw new ArgumentOutOfRangeException(nameof(dayOfWeek), dayOfWeek, "Unknown day of week."),
+        };
+    }
+
+    /// <summary>
+    /// Resolves one of the eight optional day keys, optionally returning the raw
+    /// nullable override instead of its weekday/weekend fallback.
+    /// </summary>
+    public DaySchedule? GetDaySchedule(string key, bool fallback = true)
+    {
+        DomainGuard.NotNull(key, nameof(key));
+
+        if (key == "weekdays")
+        {
+            return Weekdays;
+        }
+
+        if (key == "weekends")
+        {
+            return Weekends;
+        }
+
+        DaySchedule? explicitDay = GetExplicitDay(key);
+        if (explicitDay is not null || !fallback)
+        {
+            return explicitDay;
+        }
+
+        return IsWeekdayKey(key) ? Weekdays : Weekends;
+    }
+
+    /// <summary>
+    /// Resolves the pinned Monday-through-Holiday index order. Python-compatible
+    /// negative indices -8 through -1 are supported.
+    /// </summary>
+    public DaySchedule? GetDaySchedule(int index, bool fallback = true)
+    {
+        int normalized = index < 0 ? index + DayKeys.Length : index;
+        if (normalized < 0 || normalized >= DayKeys.Length)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(index),
+                index,
+                $"A rule-set day index must be between {-DayKeys.Length} and {DayKeys.Length - 1}.");
+        }
+
+        return GetDaySchedule(DayKeys[normalized], fallback);
+    }
+
+    /// <summary>
+    /// Returns a new rule set with one slot replaced. Defaults cannot be cleared;
+    /// optional day overrides may be set to <see langword="null"/>.
+    /// </summary>
+    public RuleSet WithDaySchedule(string key, DaySchedule? value)
+    {
+        DomainGuard.NotNull(key, nameof(key));
+
+        if ((key == "weekdays" || key == "weekends") && value is null)
+        {
+            throw new ArgumentNullException(nameof(value), $"The {key} default cannot be null.");
+        }
+
+        if (value is not null && value.Type != Type)
+        {
+            throw new ArgumentException(
+                $"DaySchedule type mismatch: expected {Type.CanonicalName()}, got {value.Type.CanonicalName()}.",
+                nameof(value));
+        }
+
+        return key switch
+        {
+            "weekdays" => Reconstruct(weekdays: value),
+            "weekends" => Reconstruct(weekends: value),
+            "monday" => Reconstruct(monday: value, replaceMonday: true),
+            "tuesday" => Reconstruct(tuesday: value, replaceTuesday: true),
+            "wednesday" => Reconstruct(wednesday: value, replaceWednesday: true),
+            "thursday" => Reconstruct(thursday: value, replaceThursday: true),
+            "friday" => Reconstruct(friday: value, replaceFriday: true),
+            "saturday" => Reconstruct(saturday: value, replaceSaturday: true),
+            "sunday" => Reconstruct(sunday: value, replaceSunday: true),
+            "holiday" => Reconstruct(holiday: value, replaceHoliday: true),
+            _ => throw UnknownDayKey(key, nameof(key)),
         };
     }
 
@@ -487,7 +695,106 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
     public RuleSet Clip(double? minimum = null, double? maximum = null, string? name = null)
     {
-        return Map(day => day.Clip(minimum, maximum), name ?? $"{Name}:CLIP");
+        return Map(
+            day => day.Clip(minimum, maximum),
+            string.IsNullOrEmpty(name) ? $"{Name}:CLIP" : name!);
+    }
+
+    /// <summary>
+    /// Returns all ten slots in the pinned upstream insertion order.
+    /// </summary>
+    public IReadOnlyDictionary<string, DaySchedule?> ToDictionary()
+    {
+        var slots = new Dictionary<string, DaySchedule?>(StringComparer.Ordinal)
+        {
+            ["weekdays"] = Weekdays,
+            ["weekends"] = Weekends,
+            ["monday"] = Monday,
+            ["tuesday"] = Tuesday,
+            ["wednesday"] = Wednesday,
+            ["thursday"] = Thursday,
+            ["friday"] = Friday,
+            ["saturday"] = Saturday,
+            ["sunday"] = Sunday,
+            ["holiday"] = Holiday,
+        };
+        return new ReadOnlyDictionary<string, DaySchedule?>(slots);
+    }
+
+    public string Summary(bool includeDays = true)
+    {
+        string[] overrideKeys = DayKeys
+            .Where(key => GetExplicitDay(key) is not null)
+            .ToArray();
+        var lines = new List<string>
+        {
+            $"RuleSet {PythonRepr(Name)} [type={Type.CanonicalName()}]",
+            $"  range: min={FormatPythonGeneral(Minimum)}, max={FormatPythonGeneral(Maximum)}",
+            $"  defaults: weekdays={PythonRepr(Weekdays.Name)}, weekends={PythonRepr(Weekends.Name)}",
+            $"  overrides: {(overrideKeys.Length == 0 ? "none" : string.Join(", ", overrideKeys))}",
+        };
+
+        if (includeDays)
+        {
+            foreach (string key in DayKeys)
+            {
+                DaySchedule? explicitDay = GetExplicitDay(key);
+                DaySchedule effective = GetDaySchedule(key, fallback: true)!;
+                string source = explicitDay is null ? "fallback" : "override";
+                lines.Add(
+                    $"  {key,-9}: {PythonRepr(effective.Name)} "
+                        + $"({source}, min={FormatPythonGeneral(effective.Minimum)}, "
+                        + $"max={FormatPythonGeneral(effective.Maximum)})");
+            }
+        }
+
+        return string.Join("\n", lines);
+    }
+
+    public override string ToString()
+    {
+        return Summary();
+    }
+
+    public IReadOnlyList<string> ToIdfCompactExpression()
+    {
+        var fields = new List<string>();
+        bool hasWeekdayOverride = Monday is not null
+            || Tuesday is not null
+            || Wednesday is not null
+            || Thursday is not null
+            || Friday is not null;
+        if (hasWeekdayOverride)
+        {
+            AppendDayIdfFields(fields, "Monday", Monday ?? Weekdays);
+            AppendDayIdfFields(fields, "Tuesday", Tuesday ?? Weekdays);
+            AppendDayIdfFields(fields, "Wednesday", Wednesday ?? Weekdays);
+            AppendDayIdfFields(fields, "Thursday", Thursday ?? Weekdays);
+            AppendDayIdfFields(fields, "Friday", Friday ?? Weekdays);
+        }
+        else
+        {
+            AppendDayIdfFields(fields, "Weekdays", Weekdays);
+        }
+
+        bool hasWeekendOverride = Saturday is not null || Sunday is not null;
+        if (hasWeekendOverride)
+        {
+            AppendDayIdfFields(fields, "Saturday", Saturday ?? Weekends);
+            AppendDayIdfFields(fields, "Sunday", Sunday ?? Weekends);
+        }
+        else
+        {
+            AppendDayIdfFields(fields, "Weekends", Weekends);
+        }
+
+        if (Holiday is not null)
+        {
+            AppendDayIdfFields(fields, "Holiday", Holiday);
+        }
+
+        AppendDayIdfFields(fields, "AllOtherDays", Weekends);
+        return new ReadOnlyCollection<string>(fields);
     }
 
     public static RuleSet operator *(RuleSet left, RuleSet right)
@@ -712,6 +1019,376 @@ public sealed class RuleSet : IEquatable<RuleSet>
 
             return hash;
         }
+    }
+
+    private static string NormalizeName(string? name)
+    {
+        return name is null
+            ? "anonymous"
+            : DomainGuard.RequiredText(name, nameof(name));
+    }
+
+    private static ScheduleType ValidateScheduleType(ScheduleType type, string parameterName)
+    {
+        if (!Enum.IsDefined(typeof(ScheduleType), type))
+        {
+            throw new ArgumentOutOfRangeException(parameterName, type, "Unknown schedule type.");
+        }
+
+        return type;
+    }
+
+    private static DaySchedule CoerceDaySchedule(
+        object value,
+        ScheduleType type,
+        string name,
+        string parameterName)
+    {
+        if (value is DaySchedule daySchedule)
+        {
+            if (daySchedule.Type != type)
+            {
+                throw new ArgumentException(
+                    $"DaySchedule type mismatch: expected {type.CanonicalName()}, got {daySchedule.Type.CanonicalName()}.",
+                    parameterName);
+            }
+
+            return daySchedule;
+        }
+
+        try
+        {
+            return DaySchedule.ConstantFromPythonScalar(name, value, type);
+        }
+        catch (ScheduleOperationException exception)
+        {
+            throw new ArgumentException(
+                "A rule-set day value must be a Python-compatible bool, integer, float, or DaySchedule.",
+                parameterName,
+                exception);
+        }
+    }
+
+    private static DaySchedule? CoerceOptionalDaySchedule(
+        object? value,
+        ScheduleType type,
+        string name,
+        string parameterName)
+    {
+        return value is null
+            ? null
+            : CoerceDaySchedule(value, type, name, parameterName);
+    }
+
+    private DaySchedule? GetExplicitDay(string key)
+    {
+        return key switch
+        {
+            "monday" => Monday,
+            "tuesday" => Tuesday,
+            "wednesday" => Wednesday,
+            "thursday" => Thursday,
+            "friday" => Friday,
+            "saturday" => Saturday,
+            "sunday" => Sunday,
+            "holiday" => Holiday,
+            _ => throw UnknownDayKey(key, nameof(key)),
+        };
+    }
+
+    private static bool IsWeekdayKey(string key)
+    {
+        return key == "monday"
+            || key == "tuesday"
+            || key == "wednesday"
+            || key == "thursday"
+            || key == "friday";
+    }
+
+    private static ArgumentException UnknownDayKey(string key, string parameterName)
+    {
+        return new ArgumentException($"Unknown RuleSet day key: {PythonRepr(key)}.", parameterName);
+    }
+
+    private RuleSet Reconstruct(
+        DaySchedule? weekdays = null,
+        DaySchedule? weekends = null,
+        DaySchedule? monday = null,
+        DaySchedule? tuesday = null,
+        DaySchedule? wednesday = null,
+        DaySchedule? thursday = null,
+        DaySchedule? friday = null,
+        DaySchedule? saturday = null,
+        DaySchedule? sunday = null,
+        DaySchedule? holiday = null,
+        bool replaceMonday = false,
+        bool replaceTuesday = false,
+        bool replaceWednesday = false,
+        bool replaceThursday = false,
+        bool replaceFriday = false,
+        bool replaceSaturday = false,
+        bool replaceSunday = false,
+        bool replaceHoliday = false)
+    {
+        return new RuleSet(
+            Name,
+            weekdays ?? Weekdays,
+            weekends ?? Weekends,
+            replaceMonday ? monday : Monday,
+            replaceTuesday ? tuesday : Tuesday,
+            replaceWednesday ? wednesday : Wednesday,
+            replaceThursday ? thursday : Thursday,
+            replaceFriday ? friday : Friday,
+            replaceSaturday ? saturday : Saturday,
+            replaceSunday ? sunday : Sunday,
+            replaceHoliday ? holiday : Holiday,
+            Type);
+    }
+
+    private static void AppendDayIdfFields(
+        List<string> fields,
+        string selection,
+        DaySchedule daySchedule)
+    {
+        fields.Add($"For: {selection}");
+        fields.AddRange(daySchedule.ToIdfCompactExpression());
+    }
+
+    private static string FormatPythonGeneral(double value)
+    {
+        const int precision = 4;
+        long signedBits = BitConverter.DoubleToInt64Bits(value);
+        bool isNegative = signedBits < 0;
+        ulong bits = unchecked((ulong)signedBits);
+        ulong magnitudeBits = bits & 0x7fff_ffff_ffff_ffffUL;
+        if (magnitudeBits == 0)
+        {
+            return isNegative ? "-0" : "0";
+        }
+
+        int exponentBits = (int)((magnitudeBits >> 52) & 0x7ffUL);
+        if (exponentBits == 0x7ff)
+        {
+            if ((magnitudeBits & 0x000f_ffff_ffff_ffffUL) != 0)
+            {
+                return "nan";
+            }
+
+            return isNegative ? "-inf" : "inf";
+        }
+
+        ulong fractionBits = magnitudeBits & 0x000f_ffff_ffff_ffffUL;
+        ulong significand = exponentBits == 0
+            ? fractionBits
+            : fractionBits | 0x0010_0000_0000_0000UL;
+        int binaryExponent = exponentBits == 0
+            ? -1074
+            : exponentBits - 1023 - 52;
+        BigInteger numerator = new(significand);
+        BigInteger denominator = BigInteger.One;
+        if (binaryExponent >= 0)
+        {
+            numerator <<= binaryExponent;
+        }
+        else
+        {
+            denominator <<= -binaryExponent;
+        }
+
+        int decimalExponent = (int)Math.Floor(Math.Log10(Math.Abs(value)));
+        while (CompareRationalToPowerOfTen(numerator, denominator, decimalExponent) < 0)
+        {
+            decimalExponent--;
+        }
+
+        while (CompareRationalToPowerOfTen(numerator, denominator, decimalExponent + 1) >= 0)
+        {
+            decimalExponent++;
+        }
+
+        int decimalScale = precision - 1 - decimalExponent;
+        BigInteger scaledNumerator = numerator;
+        BigInteger scaledDenominator = denominator;
+        if (decimalScale >= 0)
+        {
+            scaledNumerator *= BigInteger.Pow(10, decimalScale);
+        }
+        else
+        {
+            scaledDenominator *= BigInteger.Pow(10, -decimalScale);
+        }
+
+        BigInteger rounded = BigInteger.DivRem(
+            scaledNumerator,
+            scaledDenominator,
+            out BigInteger remainder);
+        int midpointComparison = (remainder << 1).CompareTo(scaledDenominator);
+        if (midpointComparison > 0 || (midpointComparison == 0 && !rounded.IsEven))
+        {
+            rounded += BigInteger.One;
+        }
+
+        BigInteger overflowThreshold = BigInteger.Pow(10, precision);
+        if (rounded == overflowThreshold)
+        {
+            rounded /= 10;
+            decimalExponent++;
+        }
+
+        string digits = rounded.ToString(CultureInfo.InvariantCulture);
+        string formatted;
+        if (decimalExponent < -4 || decimalExponent >= precision)
+        {
+            string fractionalDigits = digits.Remove(0, 1).TrimEnd('0');
+            string mantissa = fractionalDigits.Length == 0
+                ? digits[0].ToString()
+                : $"{digits[0]}.{fractionalDigits}";
+            string exponentSign = decimalExponent >= 0 ? "+" : "-";
+            formatted = $"{mantissa}e{exponentSign}{Math.Abs(decimalExponent):D2}";
+        }
+        else
+        {
+            int decimalPosition = decimalExponent + 1;
+            if (decimalPosition <= 0)
+            {
+                formatted = $"0.{new string('0', -decimalPosition)}{digits}";
+            }
+            else if (decimalPosition >= digits.Length)
+            {
+                formatted = digits + new string('0', decimalPosition - digits.Length);
+            }
+            else
+            {
+                formatted = digits.Insert(decimalPosition, ".");
+            }
+
+            if (ContainsCharacter(formatted, '.'))
+            {
+                formatted = formatted.TrimEnd('0').TrimEnd('.');
+            }
+        }
+
+        return isNegative ? $"-{formatted}" : formatted;
+    }
+
+    private static int CompareRationalToPowerOfTen(
+        BigInteger numerator,
+        BigInteger denominator,
+        int exponent)
+    {
+        return exponent >= 0
+            ? numerator.CompareTo(denominator * BigInteger.Pow(10, exponent))
+            : (numerator * BigInteger.Pow(10, -exponent)).CompareTo(denominator);
+    }
+
+    private static string PythonRepr(string value)
+    {
+        char quote = ContainsCharacter(value, '\'')
+            && !ContainsCharacter(value, '"')
+                ? '"'
+                : '\'';
+        var result = new StringBuilder(value.Length + 2);
+        result.Append(quote);
+        for (int index = 0; index < value.Length; index++)
+        {
+            char character = value[index];
+            switch (character)
+            {
+                case '\\': result.Append("\\\\"); break;
+                case '\n': result.Append("\\n"); break;
+                case '\r': result.Append("\\r"); break;
+                case '\t': result.Append("\\t"); break;
+                case '\b': result.Append("\\x08"); break;
+                case '\f': result.Append("\\x0c"); break;
+                default:
+                    if (character == quote)
+                    {
+                        result.Append('\\').Append(character);
+                    }
+                    else if (char.IsHighSurrogate(character)
+                        && index + 1 < value.Length
+                        && char.IsLowSurrogate(value[index + 1]))
+                    {
+                        int codePoint = char.ConvertToUtf32(character, value[index + 1]);
+                        UnicodeCategory category = CharUnicodeInfo.GetUnicodeCategory(value, index);
+                        if (IsPythonPrintable(codePoint, category))
+                        {
+                            result.Append(character).Append(value[index + 1]);
+                        }
+                        else
+                        {
+                            AppendPythonUnicodeEscape(result, codePoint);
+                        }
+
+                        index++;
+                    }
+                    else
+                    {
+                        UnicodeCategory category = char.GetUnicodeCategory(character);
+                        if (IsPythonPrintable(character, category))
+                        {
+                            result.Append(character);
+                        }
+                        else
+                        {
+                            AppendPythonUnicodeEscape(result, character);
+                        }
+                    }
+
+                    break;
+            }
+        }
+
+        return result.Append(quote).ToString();
+    }
+
+    private static bool IsPythonPrintable(int codePoint, UnicodeCategory category)
+    {
+        if (codePoint == 0x20)
+        {
+            return true;
+        }
+
+        return category is not UnicodeCategory.Control
+            and not UnicodeCategory.Format
+            and not UnicodeCategory.Surrogate
+            and not UnicodeCategory.PrivateUse
+            and not UnicodeCategory.OtherNotAssigned
+            and not UnicodeCategory.SpaceSeparator
+            and not UnicodeCategory.LineSeparator
+            and not UnicodeCategory.ParagraphSeparator;
+    }
+
+    private static void AppendPythonUnicodeEscape(StringBuilder result, int codePoint)
+    {
+        if (codePoint <= byte.MaxValue)
+        {
+            result.Append("\\x")
+                .Append(codePoint.ToString("x2", CultureInfo.InvariantCulture));
+        }
+        else if (codePoint <= char.MaxValue)
+        {
+            result.Append("\\u")
+                .Append(codePoint.ToString("x4", CultureInfo.InvariantCulture));
+        }
+        else
+        {
+            result.Append("\\U")
+                .Append(codePoint.ToString("x8", CultureInfo.InvariantCulture));
+        }
+    }
+
+    private static bool ContainsCharacter(string value, char target)
+    {
+        foreach (char character in value)
+        {
+            if (character == target)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static ScheduleType InferAndValidateType(ScheduleType? requested, params DaySchedule?[] days)

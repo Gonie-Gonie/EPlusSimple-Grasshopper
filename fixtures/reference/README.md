@@ -10,3 +10,8 @@ after reviewing intentional compatibility changes.
 observations for the remaining 14 DaySchedule symbols. Its file hash and byte
 count are recorded in the generated `python-0.7.0/manifest.json` alongside the
 other reviewed reference artifacts.
+
+`python-0.7.0/rule-set-core-oracle.json` pins 72 ordered CPython 3.12.7
+observations for the remaining 24 RuleSet core symbols, including exact alias,
+lookup, fallback, summary, ordered-dictionary, and IDF-expression behavior.
+Its file hash and byte count are recorded in the same generated manifest.

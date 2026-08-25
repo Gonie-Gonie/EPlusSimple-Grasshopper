@@ -35,8 +35,15 @@ behavior used by `average`, `integral`, and `positive_average`. The
 DaySchedule, RuleSet, and Schedule operation oracles each bind exactly 28
 upstream symbols and preserve Python scalar kinds, reverse-operation names,
 typed failures, tagged non-finite results, nested fallback topology, and source
-immutability. The annual Schedule corpus additionally records all 365 days and
-the exact inclusive compact-period union across asymmetric operands. A separate
+immutability. A separate RuleSet core oracle binds the remaining 24 lifecycle,
+immutable-slot, factory, lookup, summary, dictionary, IDF-expression, extrema,
+and type symbols through 72 exactly ordered cases. It preserves default and
+override alias topology, string and positive/negative integer day lookup,
+fallback suppression, exact dictionary order, binary64 values, runtime-name
+policy tokens, and the exact seven equivalent versus seventeen reviewed
+native-adaptation split. The annual Schedule corpus additionally records all
+365 days and the exact inclusive compact-period union across asymmetric
+operands. A separate
 Schedule core oracle binds the remaining 22 annual lifecycle, factory, metric,
 summary, IDF, and compact-unification symbols through 104 cases. It records
 case-local alias graphs, input postconditions, CPython 3.12 binary64 results,

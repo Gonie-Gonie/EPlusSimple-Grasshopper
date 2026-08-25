@@ -928,3 +928,245 @@
     raw_idf_text: an omitted result name is deterministic and can differ from the Python process-address name
     compatibility_evidence: every supported finite scalar and schedule branch shape, explicit-name behavior, selected non-finite rejection, invalid operand behavior, and the normalized default-name policy difference remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-value-object
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet
+    symbol_hash: sha256:3e0aaca76114e9e5a84d2b6ceb9a650913ad03b5bb6d35c99d3f0a5f97b36994
+  difference:
+    upstream: is a mutable Python object whose ten day slots can be replaced after construction through public property setters
+    dotnet: is a sealed immutable value object whose ten day slots are read-only and whose supported replacements return a new RuleSet with structural equality and hashing
+  effect:
+    engineering_result: valid names, types, day values, null topology, and supplied DaySchedule identities remain available while post-construction mutation of the RuleSet is prevented
+    api_contract: callers use read-only slot properties and functional replacement instead of Python property assignment; independently constructed structurally equal native rule sets compare as values
+    compatibility_evidence: the exact pinned class surface, read-only final RuleSet.cs properties, structural equality, source immutability, and focused construction and replacement tests remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: native-ruleset-deepcopy-memo
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.__deepcopy__
+    symbol_hash: sha256:058f6012eabebca75ffb65c55f0fc1fccc51995d38521394faaceb32dfbb9748
+  difference:
+    upstream: participates in Python's copy protocol, returns an existing caller-provided memo entry for its identity when present, and otherwise appends :COPY while independently deep-copying every populated day slot
+    dotnet: provides an explicit DeepCopy method with no Python memo surface and always returns a fresh immutable RuleSet named with the same :COPY suffix while independently copying every populated slot
+  effect:
+    engineering_result: an ordinary copy retains the same type, values, null topology, and per-slot alias splitting under the same :COPY naming rule while leaving the source unchanged
+    api_contract: caller-controlled Python memo substitution is intentionally excluded from the native explicit-copy API
+    compatibility_evidence: ordinary copied values and metadata, source and result identity, repeated calls, split repeated DaySchedule aliases, preserved null slots, and the exact prepopulated-memo difference remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-deterministic-ruleset-construction
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.__init__
+    symbol_hash: sha256:f1c4b446cbbc826152dae8f4c4677d323271ad408d12fda0b0b527ae9ecaec51
+  difference:
+    upstream: assigns an omitted name from the new object's process-specific hexadecimal memory address, preserves blank and surrounding name whitespace, creates runtime-named zero defaults, and exposes the constructed slots through mutable property setters
+    dotnet: assigns the stable anonymous name when name is omitted, rejects an explicit blank name, trims a valid name, creates distinct deterministically named zero defaults, validates one consistent ScheduleType atomically, and exposes read-only slots
+  effect:
+    engineering_result: explicit valid inputs retain their type, values, supplied DaySchedule references, distinct weekday and weekend defaults, and null override topology while mixed child types and later mutation are prevented
+    api_contract: construction uses nullable native name and ScheduleType inputs with deterministic normalization and atomic validation rather than process-address naming and mutable Python properties
+    raw_idf_text: omitted, blank, padded, and default-child identifiers follow the native deterministic EnergyPlus naming policy
+    compatibility_evidence: omitted and explicit inputs, default values and identities, inferred and explicit types, supplied-reference preservation, mixed-type rejection, deterministic names, and read-only slots in final RuleSet.cs and its focused tests remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-astype
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.astype
+    symbol_hash: sha256:0c0d27de9ef57d948f60d77e2ad8ff58f6898f25965135e6584bb0ad65dff226
+  difference:
+    upstream: defaults to a copied conversion but also accepts Python ScheduleType strings and exposes an inplace mode that mutates child DaySchedules while leaving the RuleSet type field stale and can leave a partially converted graph after failure
+    dotnet: accepts the native ScheduleType enum and always returns a newly validated immutable RuleSet whose populated child schedules and RuleSet type agree, leaving the entire source graph unchanged if conversion fails
+  effect:
+    engineering_result: valid copied conversions retain converted values, names, units, null topology, and per-slot conversion behavior while a partially converted or type-inconsistent RuleSet cannot be produced
+    api_contract: callers replace their RuleSet reference with the returned immutable conversion instead of requesting Python string-enum or in-place mutation behavior
+    compatibility_evidence: every valid type conversion, split repeated child aliases, preserved nulls and names, source immutability, atomic invalid conversion, and the exact upstream inplace stale-type and partial-mutation behavior remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-clip
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.clip
+    symbol_hash: sha256:c3bd923567b392c6753dd317132395cea97872100ce08853d218144d579f1ede
+  difference:
+    upstream: supports copied and inplace clipping, resolves a lower bound above the upper bound through sequential clipping, permits non-finite Real bounds, and accepts whitespace-only names while using :CLIP for an omitted or empty name
+    dotnet: always returns a newly validated immutable RuleSet, rejects reversed or non-finite bounds, rejects whitespace-only names, and uses the same :CLIP fallback for an omitted or empty name
+  effect:
+    engineering_result: valid finite bounds retain the same clipped values, type, null topology, signed-zero behavior, and fallback name while invalid or non-finite results are prevented from entering EnergyPlus authoring output
+    api_contract: callers replace their RuleSet reference with the functional result instead of requesting in-place mutation, and invalid bounds follow native argument validation
+    raw_idf_text: whitespace-only or padded explicit result identifiers follow the native validated name policy
+    compatibility_evidence: no-bound, one-bound, two-bound, explicit-name and fallback-name behavior, source immutability, upstream inplace behavior, reversed and non-finite bounds, signed zero, and null slots remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-friday-update
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.friday
+    symbol_hash: sha256:72220457054927f7999dd905ba93aabf314844b6571266eea6aefbc92823880b
+  difference:
+    upstream: exposes friday as a mutable property whose setter replaces or clears that optional slot on the same RuleSet without enforcing agreement with the RuleSet type
+    dotnet: exposes the same nullable Friday reference through a read-only property and uses WithDaySchedule("friday", value) to return an immutable replacement, allowing null but rejecting a mismatched ScheduleType
+  effect:
+    engineering_result: a valid same-type replacement or clear produces the same Friday selection and preserves every other slot while leaving the source RuleSet unchanged
+    api_contract: callers replace their RuleSet reference with the functional result and use the exact lowercase friday key instead of Python property assignment
+    compatibility_evidence: getter identity, set and clear results, preserved name, type, other-slot references and null topology, source immutability, exact-key validation, and mixed-type rejection remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: deterministic-finite-ruleset-from-constant
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.from_constant
+    symbol_hash: sha256:1093e8f49640c59a592997f0bf053e4a153733c7fab6d2ac36dc913c742e635c
+  difference:
+    upstream: uses process-specific names when a rule-set name is omitted, follows Python runtime scalar and ScheduleType validation, and permits NaN or infinity for a Real scalar constant
+    dotnet: normalizes a nullable name deterministically, dispatches supported CLR Boolean, integral, floating-point, and DaySchedule inputs through the strongly typed API, and rejects non-finite scalar constants
+  effect:
+    engineering_result: supported finite scalars retain the requested type and values in two distinct default DaySchedules, and a supplied DaySchedule remains the one shared default reference with its type authoritative; non-finite values are prevented from entering EnergyPlus authoring output
+    api_contract: unsupported scalar kinds and invalid domains follow native validation, and an explicit type is ignored for a supplied typed DaySchedule as in the pinned factory
+    raw_idf_text: omitted and normalized outer and scalar-child identifiers are deterministic rather than process-address based
+    compatibility_evidence: finite scalar kinds and domains, distinct scalar default identities, shared supplied-DaySchedule identity, typed-day authority, invalid operand and non-finite rejection, and deterministic names in final RuleSet.cs and its focused tests remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: validated-deterministic-ruleset-from-days
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.from_days
+    symbol_hash: sha256:d1d5dd6fce56c158588b0e2ce11671d0063e1e16aee2161b15af5a1c7f5213e9
+  difference:
+    upstream: assigns process-specific names to omitted-name and scalar-created schedules, follows Python runtime coercion, and permits non-finite Real scalar defaults or overrides
+    dotnet: normalizes a nullable name deterministically, wraps supported CLR scalar defaults and overrides in deterministically named schedules, validates every populated slot against one authoritative ScheduleType, and rejects non-finite scalar values
+  effect:
+    engineering_result: the default DaySchedule remains shared by weekday and weekend slots, each scalar override remains independently wrapped, supplied DaySchedule references and null overrides remain preserved, and valid values retain their type while mixed or non-finite children are prevented
+    api_contract: a supplied default DaySchedule remains type-authoritative and an explicit type is ignored for it, while scalar coercion and invalid inputs follow the native strongly typed API
+    raw_idf_text: omitted and scalar-generated outer and child identifiers are deterministic rather than process-address based
+    compatibility_evidence: shared default identity, independent scalar-override wrappers, supplied-reference preservation, null topology, typed-day authority, mixed-type and non-finite rejection, and deterministic names in final RuleSet.cs and its focused tests remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-holiday-update
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.holiday
+    symbol_hash: sha256:9bbd78bae0f36cfa3af556f39f48a53eb852e8a65e338b0a7ea8235a4861087a
+  difference:
+    upstream: exposes holiday as a mutable property whose setter replaces or clears that optional slot on the same RuleSet without enforcing agreement with the RuleSet type
+    dotnet: exposes the same nullable Holiday reference through a read-only property and uses WithDaySchedule("holiday", value) to return an immutable replacement, allowing null but rejecting a mismatched ScheduleType
+  effect:
+    engineering_result: a valid same-type replacement or clear produces the same Holiday selection and preserves every other slot while leaving the source RuleSet unchanged
+    api_contract: callers replace their RuleSet reference with the functional result and use the exact lowercase holiday key instead of Python property assignment
+    compatibility_evidence: getter identity, set and clear results, preserved name, type, other-slot references and null topology, source immutability, exact-key validation, and mixed-type rejection remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-monday-update
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.monday
+    symbol_hash: sha256:4cca788f61eeb17cb784485a8b94b01ff7679deadfdf1d4d9fe8160abfe54c95
+  difference:
+    upstream: exposes monday as a mutable property whose setter replaces or clears that optional slot on the same RuleSet without enforcing agreement with the RuleSet type
+    dotnet: exposes the same nullable Monday reference through a read-only property and uses WithDaySchedule("monday", value) to return an immutable replacement, allowing null but rejecting a mismatched ScheduleType
+  effect:
+    engineering_result: a valid same-type replacement or clear produces the same Monday selection and preserves every other slot while leaving the source RuleSet unchanged
+    api_contract: callers replace their RuleSet reference with the functional result and use the exact lowercase monday key instead of Python property assignment
+    compatibility_evidence: getter identity, set and clear results, preserved name, type, other-slot references and null topology, source immutability, exact-key validation, and mixed-type rejection remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-saturday-update
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.saturday
+    symbol_hash: sha256:693a3041f2dcd664bea7b574ecea60f7f4b66dce26af8cefbdf49ae356fb71a2
+  difference:
+    upstream: exposes saturday as a mutable property whose setter replaces or clears that optional slot on the same RuleSet without enforcing agreement with the RuleSet type
+    dotnet: exposes the same nullable Saturday reference through a read-only property and uses WithDaySchedule("saturday", value) to return an immutable replacement, allowing null but rejecting a mismatched ScheduleType
+  effect:
+    engineering_result: a valid same-type replacement or clear produces the same Saturday selection and preserves every other slot while leaving the source RuleSet unchanged
+    api_contract: callers replace their RuleSet reference with the functional result and use the exact lowercase saturday key instead of Python property assignment
+    compatibility_evidence: getter identity, set and clear results, preserved name, type, other-slot references and null topology, source immutability, exact-key validation, and mixed-type rejection remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-sunday-update
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.sunday
+    symbol_hash: sha256:cfcbc078846cee7f94d9c09b0f32190b495489b8b8f1f21b860a7cbaa16324fc
+  difference:
+    upstream: exposes sunday as a mutable property whose setter replaces or clears that optional slot on the same RuleSet without enforcing agreement with the RuleSet type
+    dotnet: exposes the same nullable Sunday reference through a read-only property and uses WithDaySchedule("sunday", value) to return an immutable replacement, allowing null but rejecting a mismatched ScheduleType
+  effect:
+    engineering_result: a valid same-type replacement or clear produces the same Sunday selection and preserves every other slot while leaving the source RuleSet unchanged
+    api_contract: callers replace their RuleSet reference with the functional result and use the exact lowercase sunday key instead of Python property assignment
+    compatibility_evidence: getter identity, set and clear results, preserved name, type, other-slot references and null topology, source immutability, exact-key validation, and mixed-type rejection remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-thursday-update
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.thursday
+    symbol_hash: sha256:2d3bbbc02f1cd354f02d0a564e8c8979970ed867e9f5e61fbd76d5465293f602
+  difference:
+    upstream: exposes thursday as a mutable property whose setter replaces or clears that optional slot on the same RuleSet without enforcing agreement with the RuleSet type
+    dotnet: exposes the same nullable Thursday reference through a read-only property and uses WithDaySchedule("thursday", value) to return an immutable replacement, allowing null but rejecting a mismatched ScheduleType
+  effect:
+    engineering_result: a valid same-type replacement or clear produces the same Thursday selection and preserves every other slot while leaving the source RuleSet unchanged
+    api_contract: callers replace their RuleSet reference with the functional result and use the exact lowercase thursday key instead of Python property assignment
+    compatibility_evidence: getter identity, set and clear results, preserved name, type, other-slot references and null topology, source immutability, exact-key validation, and mixed-type rejection remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-tuesday-update
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.tuesday
+    symbol_hash: sha256:30f9dc0b522275442a6bff0cc22640539789e05274ad72c7a77b487caebe3e68
+  difference:
+    upstream: exposes tuesday as a mutable property whose setter replaces or clears that optional slot on the same RuleSet without enforcing agreement with the RuleSet type
+    dotnet: exposes the same nullable Tuesday reference through a read-only property and uses WithDaySchedule("tuesday", value) to return an immutable replacement, allowing null but rejecting a mismatched ScheduleType
+  effect:
+    engineering_result: a valid same-type replacement or clear produces the same Tuesday selection and preserves every other slot while leaving the source RuleSet unchanged
+    api_contract: callers replace their RuleSet reference with the functional result and use the exact lowercase tuesday key instead of Python property assignment
+    compatibility_evidence: getter identity, set and clear results, preserved name, type, other-slot references and null topology, source immutability, exact-key validation, and mixed-type rejection remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-wednesday-update
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.wednesday
+    symbol_hash: sha256:a896496ee156854d2a7693128f6a66bac9628457468ef2a7b9a00732abe86a22
+  difference:
+    upstream: exposes wednesday as a mutable property whose setter replaces or clears that optional slot on the same RuleSet without enforcing agreement with the RuleSet type
+    dotnet: exposes the same nullable Wednesday reference through a read-only property and uses WithDaySchedule("wednesday", value) to return an immutable replacement, allowing null but rejecting a mismatched ScheduleType
+  effect:
+    engineering_result: a valid same-type replacement or clear produces the same Wednesday selection and preserves every other slot while leaving the source RuleSet unchanged
+    api_contract: callers replace their RuleSet reference with the functional result and use the exact lowercase wednesday key instead of Python property assignment
+    compatibility_evidence: getter identity, set and clear results, preserved name, type, other-slot references and null topology, source immutability, exact-key validation, and mixed-type rejection remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-weekdays-update
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.weekdays
+    symbol_hash: sha256:f89fcc578196070c1535586d7c2b7142654dcf2d4b0179c21ee92643e0098294
+  difference:
+    upstream: exposes weekdays as a mutable property whose setter replaces that required default on the same RuleSet without enforcing agreement with the RuleSet type
+    dotnet: exposes the same Weekdays reference through a read-only property and uses WithDaySchedule("weekdays", value) to return an immutable replacement, rejecting null and a mismatched ScheduleType
+  effect:
+    engineering_result: a valid same-type replacement produces the same weekday fallback selection and preserves every other slot while leaving the source RuleSet unchanged
+    api_contract: callers replace their RuleSet reference with the functional result and use the exact lowercase weekdays key; clearing a required default is rejected explicitly
+    compatibility_evidence: getter identity, replacement and null rejection, preserved name, type, other-slot references and null topology, source immutability, exact-key validation, and mixed-type rejection remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-ruleset-weekends-update
+  upstream:
+    path: src/idragon/dragon/profile.py
+    symbol: RuleSet.weekends
+    symbol_hash: sha256:c3fdd0ae9d51b8f43fa821ee2dd774593c90db66b6c19c4a51e0db0ccfd927b5
+  difference:
+    upstream: exposes weekends as a mutable property whose setter replaces that required default on the same RuleSet without enforcing agreement with the RuleSet type
+    dotnet: exposes the same Weekends reference through a read-only property and uses WithDaySchedule("weekends", value) to return an immutable replacement, rejecting null and a mismatched ScheduleType
+  effect:
+    engineering_result: a valid same-type replacement produces the same weekend fallback selection and preserves every other slot while leaving the source RuleSet unchanged
+    api_contract: callers replace their RuleSet reference with the functional result and use the exact lowercase weekends key; clearing a required default is rejected explicitly
+    compatibility_evidence: getter identity, replacement and null rejection, preserved name, type, other-slot references and null topology, source immutability, exact-key validation, and mixed-type rejection remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation

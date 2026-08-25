@@ -34,6 +34,7 @@ $scheduleTypeGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\g
 $dayScheduleCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_day_schedule_core_oracle.py'
 $dayScheduleMetricsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_day_schedule_metrics_oracle.py'
 $dayScheduleOperationsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_day_schedule_operations_oracle.py'
+$ruleSetCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_rule_set_core_oracle.py'
 $ruleSetOperationsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_rule_set_operations_oracle.py'
 $scheduleCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_schedule_core_oracle.py'
 $scheduleOperationsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_schedule_operations_oracle.py'
@@ -42,6 +43,7 @@ $scheduleTypeTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_sc
 $dayScheduleCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_day_schedule_core_oracle.py'
 $dayScheduleMetricsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_day_schedule_metrics_oracle.py'
 $dayScheduleOperationsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_day_schedule_operations_oracle.py'
+$ruleSetCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_rule_set_core_oracle.py'
 $ruleSetOperationsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_rule_set_operations_oracle.py'
 $scheduleCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_schedule_core_oracle.py'
 $scheduleOperationsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_schedule_operations_oracle.py'
@@ -126,6 +128,7 @@ foreach ($requiredFile in @(
     $dayScheduleCoreGeneratorPath,
     $dayScheduleMetricsGeneratorPath,
     $dayScheduleOperationsGeneratorPath,
+    $ruleSetCoreGeneratorPath,
     $ruleSetOperationsGeneratorPath,
     $scheduleCoreGeneratorPath,
     $scheduleOperationsGeneratorPath,
@@ -134,6 +137,7 @@ foreach ($requiredFile in @(
     $dayScheduleCoreTestPath,
     $dayScheduleMetricsTestPath,
     $dayScheduleOperationsTestPath,
+    $ruleSetCoreTestPath,
     $ruleSetOperationsTestPath,
     $scheduleCoreTestPath,
     $scheduleOperationsTestPath,
@@ -618,7 +622,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet operations, Schedule core/operations, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -770,6 +774,24 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $dayScheduleOperationsGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-day-schedule-operations-reference.log') `
     -FailureMessage 'Generating the Python DaySchedule operations oracle failed'
+
+$ruleSetCoreOraclePath = Join-Path $outputRoot 'rule-set-core-oracle.json'
+$ruleSetCoreGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $ruleSetCoreGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $ruleSetCoreOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $ruleSetCoreGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-rule-set-core-reference.log') `
+    -FailureMessage 'Generating the Python RuleSet core oracle failed'
 
 $ruleSetOperationsOraclePath = Join-Path $outputRoot 'rule-set-operations-oracle.json'
 $ruleSetOperationsGeneratorArguments = @(

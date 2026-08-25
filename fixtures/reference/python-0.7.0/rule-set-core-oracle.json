@@ -1,0 +1,5629 @@
+{
+  "cases": [
+    {
+      "executor": "astype",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-astype",
+        "outcome": "returned"
+      },
+      "id": "astype.inplace-stale-type",
+      "python": {
+        "facts": {
+          "return_is_none": true,
+          "source_after": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "typed"
+            },
+            "ruleset_type": "fraction",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.astype"
+    },
+    {
+      "executor": "astype",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-astype",
+        "outcome": "returned"
+      },
+      "id": "astype.outplace-string",
+      "python": {
+        "facts": {
+          "fresh": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "shared"
+                  },
+                  "schedule_type": "real",
+                  "unit": "ratio",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "shared"
+                  },
+                  "schedule_type": "real",
+                  "unit": "ratio",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "shared"
+                  },
+                  "schedule_type": "real",
+                  "unit": "ratio",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "typed"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": "day-03",
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "source": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "shared"
+                  },
+                  "schedule_type": "fraction",
+                  "unit": "ratio",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "typed"
+            },
+            "ruleset_type": "fraction",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": "day-01",
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-01"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.astype"
+    },
+    {
+      "executor": "astype",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-astype",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "astype.partial-failure",
+      "python": {
+        "error_category": "domain",
+        "exception_type": "ValueError",
+        "facts": {
+          "source_after": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "fraction",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "partial"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "source_before": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "partial"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "message": "Fraction schedule value must be within [0, 1], got 2.0.",
+        "outcome": "raised"
+      },
+      "symbol": "RuleSet.astype"
+    },
+    {
+      "executor": "class",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-value-object",
+        "outcome": "returned"
+      },
+      "id": "class.alias-topology",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "shared"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "alias"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": "day-01",
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-01"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet"
+    },
+    {
+      "executor": "class",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-value-object",
+        "outcome": "returned"
+      },
+      "id": "class.mutable-slot",
+      "python": {
+        "facts": {
+          "getter_is_replacement": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "monday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+2",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "rules"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": "day-03",
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet"
+    },
+    {
+      "executor": "class",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-value-object",
+        "outcome": "returned"
+      },
+      "id": "class.slot-inventory",
+      "python": {
+        "facts": {
+          "day_keys": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday",
+            "holiday"
+          ],
+          "mro_names": [
+            "RuleSet",
+            "object"
+          ],
+          "weekday_keys": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday"
+          ],
+          "weekend_keys": [
+            "saturday",
+            "sunday"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet"
+    },
+    {
+      "executor": "clip",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-clip",
+        "outcome": "returned"
+      },
+      "id": "clip.bounds-empty-name",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday:CLIP"
+                  },
+                  "schedule_type": "real",
+                  "unit": "kW",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "-1.0000000000000p+0",
+                        "kind": "binary64"
+                      },
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend:CLIP"
+                  },
+                  "schedule_type": "real",
+                  "unit": "kW",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      },
+                      {
+                        "hex_without_prefix": "-1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "source:CLIP"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "source": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": "kW",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "-1.0000000000000p+1",
+                        "kind": "binary64"
+                      },
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": "kW",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p+1",
+                        "kind": "binary64"
+                      },
+                      {
+                        "hex_without_prefix": "-1.8000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "source"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.clip"
+    },
+    {
+      "executor": "clip",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-clip",
+        "outcome": "returned"
+      },
+      "id": "clip.inplace",
+      "python": {
+        "facts": {
+          "return_is_none": true,
+          "source_after": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "-1.0000000000000p+0",
+                        "kind": "binary64"
+                      },
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      },
+                      {
+                        "hex_without_prefix": "-1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "source"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.clip"
+    },
+    {
+      "executor": "clip",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-clip",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "clip.reversed",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday:CLIP"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend:CLIP"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "rules:CLIP"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "source": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "rules"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.clip"
+    },
+    {
+      "executor": "deepcopy",
+      "expected_dotnet": {
+        "adaptation": "native-ruleset-deepcopy-memo",
+        "outcome": "returned"
+      },
+      "id": "deepcopy.alias-topology",
+      "python": {
+        "facts": {
+          "fresh": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "shared:COPY"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "shared:COPY"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "shared:COPY"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "source:COPY"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": "day-03",
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "source": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "shared"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "source"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": "day-01",
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-01"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.__deepcopy__"
+    },
+    {
+      "executor": "deepcopy",
+      "expected_dotnet": {
+        "adaptation": "native-ruleset-deepcopy-memo",
+        "outcome": "returned"
+      },
+      "id": "deepcopy.memo-hit",
+      "python": {
+        "facts": {
+          "returned_sentinel": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.__deepcopy__"
+    },
+    {
+      "executor": "deepcopy",
+      "expected_dotnet": {
+        "adaptation": "native-ruleset-deepcopy-memo",
+        "outcome": "returned"
+      },
+      "id": "deepcopy.repeated",
+      "python": {
+        "facts": {
+          "distinct": true,
+          "left": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday:COPY"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend:COPY"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "rules:COPY"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "right": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday:COPY"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend:COPY"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "rules:COPY"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.__deepcopy__"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-friday-update",
+        "outcome": "returned"
+      },
+      "id": "friday.clear",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.friday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-friday-update",
+        "outcome": "returned"
+      },
+      "id": "friday.explicit",
+      "python": {
+        "facts": {
+          "getter_is_input": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "friday-explicit"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": "day-03",
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.friday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-friday-update",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "friday.mixed-type",
+      "python": {
+        "facts": {
+          "getter_is_mixed": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "friday-temperature"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+4",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": "day-03",
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.friday"
+    },
+    {
+      "executor": "from-constant",
+      "expected_dotnet": {
+        "adaptation": "deterministic-finite-ruleset-from-constant",
+        "outcome": "returned"
+      },
+      "id": "from-constant.day-alias",
+      "python": {
+        "facts": {
+          "input_is_weekdays": true,
+          "input_is_weekends": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "shared"
+                  },
+                  "schedule_type": "fraction",
+                  "unit": "ratio",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "day-alias"
+            },
+            "ruleset_type": "fraction",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-01"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.from_constant"
+    },
+    {
+      "executor": "from-constant",
+      "expected_dotnet": {
+        "adaptation": "deterministic-finite-ruleset-from-constant",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "from-constant.nonfinite",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "nan",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "nan",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "nonfinite"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.from_constant"
+    },
+    {
+      "executor": "from-constant",
+      "expected_dotnet": {
+        "adaptation": "deterministic-finite-ruleset-from-constant",
+        "outcome": "returned"
+      },
+      "id": "from-constant.scalar-distinct",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "runtime-identity-hex"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.from_constant"
+    },
+    {
+      "executor": "from-days",
+      "expected_dotnet": {
+        "adaptation": "validated-deterministic-ruleset-from-days",
+        "outcome": "returned"
+      },
+      "id": "from-days.day-ignores-type",
+      "python": {
+        "facts": {
+          "default_is_weekdays": true,
+          "default_is_weekends": true,
+          "friday_is_input": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "default"
+                  },
+                  "schedule_type": "fraction",
+                  "unit": "ratio",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-2",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "friday"
+                  },
+                  "schedule_type": "fraction",
+                  "unit": "ratio",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "typed-day"
+            },
+            "ruleset_type": "fraction",
+            "slots": {
+              "friday": "day-02",
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-01"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.from_days"
+    },
+    {
+      "executor": "from-days",
+      "expected_dotnet": {
+        "adaptation": "validated-deterministic-ruleset-from-days",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "from-days.mixed-types",
+      "python": {
+        "error_category": "domain",
+        "exception_type": "ValueError",
+        "facts": {},
+        "message": "DaySchedule type mismatch: expected fraction, got temperature.",
+        "outcome": "raised"
+      },
+      "symbol": "RuleSet.from_days"
+    },
+    {
+      "executor": "from-days",
+      "expected_dotnet": {
+        "adaptation": "validated-deterministic-ruleset-from-days",
+        "outcome": "returned"
+      },
+      "id": "from-days.scalar-overrides",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "fraction",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-2",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "fraction",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "fraction",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-04",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "fraction",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "days"
+            },
+            "ruleset_type": "fraction",
+            "slots": {
+              "friday": null,
+              "holiday": "day-04",
+              "monday": "day-02",
+              "saturday": "day-03",
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-01"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.from_days"
+    },
+    {
+      "executor": "get-dayschedule",
+      "id": "get-dayschedule.integer-indices",
+      "python": {
+        "facts": {
+          "index_0_is_monday": true,
+          "index_7_is_holiday": true,
+          "negative_1_is_holiday": true,
+          "negative_8_is_monday": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.get_dayschedule"
+    },
+    {
+      "executor": "get-dayschedule",
+      "id": "get-dayschedule.invalid-index",
+      "python": {
+        "error_category": "range",
+        "exception_type": "IndexError",
+        "facts": {
+          "source": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "rules"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "message": "list index out of range",
+        "outcome": "raised"
+      },
+      "symbol": "RuleSet.get_dayschedule"
+    },
+    {
+      "executor": "get-dayschedule",
+      "id": "get-dayschedule.string-fallback",
+      "python": {
+        "facts": {
+          "holiday_fallback_is_weekends": true,
+          "monday_fallback_is_weekdays": true,
+          "monday_raw_is_none": true,
+          "tuesday_explicit_is_input": true,
+          "weekdays_string_is_default": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.get_dayschedule"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-holiday-update",
+        "outcome": "returned"
+      },
+      "id": "holiday.clear",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.holiday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-holiday-update",
+        "outcome": "returned"
+      },
+      "id": "holiday.explicit",
+      "python": {
+        "facts": {
+          "getter_is_input": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "holiday-explicit"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": "day-03",
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.holiday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-holiday-update",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "holiday.mixed-type",
+      "python": {
+        "facts": {
+          "getter_is_mixed": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "holiday-temperature"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+4",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": "day-03",
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.holiday"
+    },
+    {
+      "executor": "init",
+      "expected_dotnet": {
+        "adaptation": "immutable-deterministic-ruleset-construction",
+        "outcome": "returned"
+      },
+      "id": "init.default-anonymous",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "0.0p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "0.0p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "runtime-identity-hex"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.__init__"
+    },
+    {
+      "executor": "init",
+      "expected_dotnet": {
+        "adaptation": "immutable-deterministic-ruleset-construction",
+        "outcome": "returned"
+      },
+      "id": "init.explicit-padded",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "  weekday  "
+                  },
+                  "schedule_type": "fraction",
+                  "unit": "  ratio  ",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p-2",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "  weekend  "
+                  },
+                  "schedule_type": "fraction",
+                  "unit": "  ratio  ",
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p-1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "  rules  "
+            },
+            "ruleset_type": "fraction",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.__init__"
+    },
+    {
+      "executor": "init",
+      "expected_dotnet": {
+        "adaptation": "immutable-deterministic-ruleset-construction",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "init.mixed-types",
+      "python": {
+        "error_category": "domain",
+        "exception_type": "ValueError",
+        "facts": {},
+        "message": "RuleSet 'mixed' contains mixed DaySchedule types. Expected fraction, got [<ScheduleType.TEMPERATURE: 'temperature'>].",
+        "outcome": "raised"
+      },
+      "symbol": "RuleSet.__init__"
+    },
+    {
+      "executor": "max",
+      "id": "max.defaults",
+      "python": {
+        "facts": {
+          "value": {
+            "hex_without_prefix": "1.0000000000000p+1",
+            "kind": "binary64"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.max"
+    },
+    {
+      "executor": "max",
+      "id": "max.override",
+      "python": {
+        "facts": {
+          "value": {
+            "hex_without_prefix": "1.2000000000000p+3",
+            "kind": "binary64"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.max"
+    },
+    {
+      "executor": "max",
+      "id": "max.signed-zero",
+      "python": {
+        "facts": {
+          "value": {
+            "hex_without_prefix": "-0.0p+0",
+            "kind": "binary64"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.max"
+    },
+    {
+      "executor": "min",
+      "id": "min.defaults",
+      "python": {
+        "facts": {
+          "value": {
+            "hex_without_prefix": "1.0000000000000p+0",
+            "kind": "binary64"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.min"
+    },
+    {
+      "executor": "min",
+      "id": "min.override",
+      "python": {
+        "facts": {
+          "value": {
+            "hex_without_prefix": "-1.4000000000000p+2",
+            "kind": "binary64"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.min"
+    },
+    {
+      "executor": "min",
+      "id": "min.signed-zero",
+      "python": {
+        "facts": {
+          "value": {
+            "hex_without_prefix": "0.0p+0",
+            "kind": "binary64"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.min"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-monday-update",
+        "outcome": "returned"
+      },
+      "id": "monday.clear",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.monday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-monday-update",
+        "outcome": "returned"
+      },
+      "id": "monday.explicit",
+      "python": {
+        "facts": {
+          "getter_is_input": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "monday-explicit"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": "day-03",
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.monday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-monday-update",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "monday.mixed-type",
+      "python": {
+        "facts": {
+          "getter_is_mixed": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "monday-temperature"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+4",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": "day-03",
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.monday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-saturday-update",
+        "outcome": "returned"
+      },
+      "id": "saturday.clear",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.saturday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-saturday-update",
+        "outcome": "returned"
+      },
+      "id": "saturday.explicit",
+      "python": {
+        "facts": {
+          "getter_is_input": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "saturday-explicit"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": "day-03",
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.saturday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-saturday-update",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "saturday.mixed-type",
+      "python": {
+        "facts": {
+          "getter_is_mixed": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "saturday-temperature"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+4",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": "day-03",
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.saturday"
+    },
+    {
+      "executor": "summary",
+      "id": "summary.default-normalized",
+      "python": {
+        "facts": {
+          "summary": "RuleSet '<runtime-identity>' [type=real]\n  range: min=0, max=0\n  defaults: weekdays='<runtime-identity>', weekends='<runtime-identity>'\n  overrides: none\n  monday   : '<runtime-identity>' (fallback, min=0, max=0)\n  tuesday  : '<runtime-identity>' (fallback, min=0, max=0)\n  wednesday: '<runtime-identity>' (fallback, min=0, max=0)\n  thursday : '<runtime-identity>' (fallback, min=0, max=0)\n  friday   : '<runtime-identity>' (fallback, min=0, max=0)\n  saturday : '<runtime-identity>' (fallback, min=0, max=0)\n  sunday   : '<runtime-identity>' (fallback, min=0, max=0)\n  holiday  : '<runtime-identity>' (fallback, min=0, max=0)"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.summary"
+    },
+    {
+      "executor": "summary",
+      "id": "summary.exclude-days",
+      "python": {
+        "facts": {
+          "summary": "RuleSet 'rules' [type=real]\n  range: min=1, max=2\n  defaults: weekdays='weekday', weekends='weekend'\n  overrides: none"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.summary"
+    },
+    {
+      "executor": "summary",
+      "id": "summary.override-rich",
+      "python": {
+        "facts": {
+          "summary": "RuleSet \"a'b\" [type=real]\n  range: min=-2, max=1e+04\n  defaults: weekdays='weekday', weekends='weekend'\n  overrides: monday, holiday\n  monday   : 'monday' (override, min=1e+04, max=1e+04)\n  tuesday  : 'weekday' (fallback, min=1.235, max=1.235)\n  wednesday: 'weekday' (fallback, min=1.235, max=1.235)\n  thursday : 'weekday' (fallback, min=1.235, max=1.235)\n  friday   : 'weekday' (fallback, min=1.235, max=1.235)\n  saturday : 'weekend' (fallback, min=-1.234e-05, max=-1.234e-05)\n  sunday   : 'weekend' (fallback, min=-1.234e-05, max=-1.234e-05)\n  holiday  : 'holiday' (override, min=-2, max=-2)"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.summary"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-sunday-update",
+        "outcome": "returned"
+      },
+      "id": "sunday.clear",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.sunday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-sunday-update",
+        "outcome": "returned"
+      },
+      "id": "sunday.explicit",
+      "python": {
+        "facts": {
+          "getter_is_input": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "sunday-explicit"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": "day-03",
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.sunday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-sunday-update",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "sunday.mixed-type",
+      "python": {
+        "facts": {
+          "getter_is_mixed": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "sunday-temperature"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+4",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": "day-03",
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.sunday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-thursday-update",
+        "outcome": "returned"
+      },
+      "id": "thursday.clear",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.thursday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-thursday-update",
+        "outcome": "returned"
+      },
+      "id": "thursday.explicit",
+      "python": {
+        "facts": {
+          "getter_is_input": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "thursday-explicit"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": "day-03",
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.thursday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-thursday-update",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "thursday.mixed-type",
+      "python": {
+        "facts": {
+          "getter_is_mixed": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "thursday-temperature"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+4",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": "day-03",
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.thursday"
+    },
+    {
+      "executor": "to-dict",
+      "id": "to-dict.aliases",
+      "python": {
+        "facts": {
+          "mapping": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "shared"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "keys": [
+              "weekdays",
+              "weekends",
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+              "saturday",
+              "sunday",
+              "holiday"
+            ],
+            "slots": {
+              "friday": null,
+              "holiday": "day-01",
+              "monday": "day-01",
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-01"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.to_dict"
+    },
+    {
+      "executor": "to-dict",
+      "id": "to-dict.nulls",
+      "python": {
+        "facts": {
+          "mapping": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "keys": [
+              "weekdays",
+              "weekends",
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+              "saturday",
+              "sunday",
+              "holiday"
+            ],
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.to_dict"
+    },
+    {
+      "executor": "to-dict",
+      "id": "to-dict.order",
+      "python": {
+        "facts": {
+          "keys": [
+            "weekdays",
+            "weekends",
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday",
+            "holiday"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.to_dict"
+    },
+    {
+      "executor": "to-idf",
+      "id": "to-idf.defaults",
+      "python": {
+        "facts": {
+          "fields": [
+            "For: Weekdays",
+            "Until: 24:00",
+            "1.0",
+            "For: Weekends",
+            "Until: 24:00",
+            "2.0",
+            "For: AllOtherDays",
+            "Until: 24:00",
+            "2.0"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.to_idf_compactexpr"
+    },
+    {
+      "executor": "to-idf",
+      "id": "to-idf.weekday-expansion",
+      "python": {
+        "facts": {
+          "fields": [
+            "For: Monday",
+            "Until: 24:00",
+            "1.0",
+            "For: Tuesday",
+            "Until: 24:00",
+            "1.0",
+            "For: Wednesday",
+            "Until: 24:00",
+            "3.0",
+            "For: Thursday",
+            "Until: 24:00",
+            "1.0",
+            "For: Friday",
+            "Until: 24:00",
+            "1.0",
+            "For: Weekends",
+            "Until: 24:00",
+            "2.0",
+            "For: AllOtherDays",
+            "Until: 24:00",
+            "2.0"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.to_idf_compactexpr"
+    },
+    {
+      "executor": "to-idf",
+      "id": "to-idf.weekend-holiday",
+      "python": {
+        "facts": {
+          "fields": [
+            "For: Weekdays",
+            "Until: 24:00",
+            "1.0",
+            "For: Saturday",
+            "Until: 24:00",
+            "2.0",
+            "For: Sunday",
+            "Until: 24:00",
+            "-0.0",
+            "For: Holiday",
+            "Until: 24:00",
+            "3.0",
+            "For: AllOtherDays",
+            "Until: 24:00",
+            "-0.0"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.to_idf_compactexpr"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-tuesday-update",
+        "outcome": "returned"
+      },
+      "id": "tuesday.clear",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.tuesday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-tuesday-update",
+        "outcome": "returned"
+      },
+      "id": "tuesday.explicit",
+      "python": {
+        "facts": {
+          "getter_is_input": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "tuesday-explicit"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": "day-03",
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.tuesday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-tuesday-update",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "tuesday.mixed-type",
+      "python": {
+        "facts": {
+          "getter_is_mixed": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "tuesday-temperature"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+4",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": "day-03",
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.tuesday"
+    },
+    {
+      "executor": "type",
+      "id": "type.default-real",
+      "python": {
+        "facts": {
+          "type": "real"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.type"
+    },
+    {
+      "executor": "type",
+      "id": "type.explicit-token",
+      "python": {
+        "facts": {
+          "type": "temperature"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.type"
+    },
+    {
+      "executor": "type",
+      "id": "type.inferred-day",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "runtime-identity-hex"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "0.0p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+4",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "inferred"
+            },
+            "ruleset_type": "temperature",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "type": "temperature"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.type"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-wednesday-update",
+        "outcome": "returned"
+      },
+      "id": "wednesday.clear",
+      "python": {
+        "facts": {
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.wednesday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-wednesday-update",
+        "outcome": "returned"
+      },
+      "id": "wednesday.explicit",
+      "python": {
+        "facts": {
+          "getter_is_input": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "wednesday-explicit"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": "day-03",
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.wednesday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-wednesday-update",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "wednesday.mixed-type",
+      "python": {
+        "facts": {
+          "getter_is_mixed": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-03",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "wednesday-temperature"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+4",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": "day-03",
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.wednesday"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-weekdays-update",
+        "outcome": "returned"
+      },
+      "id": "weekdays.explicit",
+      "python": {
+        "facts": {
+          "getter_is_input": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekdays-explicit"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.weekdays"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-weekdays-update",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "weekdays.mixed-type",
+      "python": {
+        "facts": {
+          "getter_is_mixed": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekdays-temperature"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+4",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.weekdays"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-weekdays-update",
+        "outcome": "returned"
+      },
+      "id": "weekdays.replace",
+      "python": {
+        "facts": {
+          "getter_is_replacement": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekdays-replacement"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+2",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekend"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.weekdays"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-weekends-update",
+        "outcome": "returned"
+      },
+      "id": "weekends.explicit",
+      "python": {
+        "facts": {
+          "getter_is_input": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekends-explicit"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.8000000000000p+1",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.weekends"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-weekends-update",
+        "error_category": "domain",
+        "outcome": "raised"
+      },
+      "id": "weekends.mixed-type",
+      "python": {
+        "facts": {
+          "getter_is_mixed": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekends-temperature"
+                  },
+                  "schedule_type": "temperature",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.4000000000000p+4",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.weekends"
+    },
+    {
+      "executor": "slot",
+      "expected_dotnet": {
+        "adaptation": "immutable-ruleset-weekends-update",
+        "outcome": "returned"
+      },
+      "id": "weekends.replace",
+      "python": {
+        "facts": {
+          "getter_is_replacement": true,
+          "result": {
+            "days": [
+              {
+                "reference": "day-01",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekday"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+0",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "reference": "day-02",
+                "schedule": {
+                  "kind": "schedule",
+                  "name": {
+                    "policy": "literal",
+                    "value": "weekends-replacement"
+                  },
+                  "schedule_type": "real",
+                  "unit": null,
+                  "values": {
+                    "encoding": "repeat",
+                    "length": 144,
+                    "pattern": [
+                      {
+                        "hex_without_prefix": "1.0000000000000p+2",
+                        "kind": "binary64"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "kind": "ruleset",
+            "name": {
+              "policy": "literal",
+              "value": "slots"
+            },
+            "ruleset_type": "real",
+            "slots": {
+              "friday": null,
+              "holiday": null,
+              "monday": null,
+              "saturday": null,
+              "sunday": null,
+              "thursday": null,
+              "tuesday": null,
+              "wednesday": null,
+              "weekdays": "day-01",
+              "weekends": "day-02"
+            }
+          },
+          "return_is_none": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "RuleSet.weekends"
+    }
+  ],
+  "cases_sha256": "sha256:9509c5d9ed393dfdbedcd786b62ddca041fbacb1d13aa91391d441ec3c67bb63",
+  "consumer_contract": {
+    "adaptations": {
+      "RuleSet": "immutable-ruleset-value-object",
+      "RuleSet.__deepcopy__": "native-ruleset-deepcopy-memo",
+      "RuleSet.__init__": "immutable-deterministic-ruleset-construction",
+      "RuleSet.astype": "immutable-ruleset-astype",
+      "RuleSet.clip": "immutable-ruleset-clip",
+      "RuleSet.friday": "immutable-ruleset-friday-update",
+      "RuleSet.from_constant": "deterministic-finite-ruleset-from-constant",
+      "RuleSet.from_days": "validated-deterministic-ruleset-from-days",
+      "RuleSet.holiday": "immutable-ruleset-holiday-update",
+      "RuleSet.monday": "immutable-ruleset-monday-update",
+      "RuleSet.saturday": "immutable-ruleset-saturday-update",
+      "RuleSet.sunday": "immutable-ruleset-sunday-update",
+      "RuleSet.thursday": "immutable-ruleset-thursday-update",
+      "RuleSet.tuesday": "immutable-ruleset-tuesday-update",
+      "RuleSet.wednesday": "immutable-ruleset-wednesday-update",
+      "RuleSet.weekdays": "immutable-ruleset-weekdays-update",
+      "RuleSet.weekends": "immutable-ruleset-weekends-update"
+    },
+    "case_count": 72,
+    "case_ids": [
+      "astype.inplace-stale-type",
+      "astype.outplace-string",
+      "astype.partial-failure",
+      "class.alias-topology",
+      "class.mutable-slot",
+      "class.slot-inventory",
+      "clip.bounds-empty-name",
+      "clip.inplace",
+      "clip.reversed",
+      "deepcopy.alias-topology",
+      "deepcopy.memo-hit",
+      "deepcopy.repeated",
+      "friday.clear",
+      "friday.explicit",
+      "friday.mixed-type",
+      "from-constant.day-alias",
+      "from-constant.nonfinite",
+      "from-constant.scalar-distinct",
+      "from-days.day-ignores-type",
+      "from-days.mixed-types",
+      "from-days.scalar-overrides",
+      "get-dayschedule.integer-indices",
+      "get-dayschedule.invalid-index",
+      "get-dayschedule.string-fallback",
+      "holiday.clear",
+      "holiday.explicit",
+      "holiday.mixed-type",
+      "init.default-anonymous",
+      "init.explicit-padded",
+      "init.mixed-types",
+      "max.defaults",
+      "max.override",
+      "max.signed-zero",
+      "min.defaults",
+      "min.override",
+      "min.signed-zero",
+      "monday.clear",
+      "monday.explicit",
+      "monday.mixed-type",
+      "saturday.clear",
+      "saturday.explicit",
+      "saturday.mixed-type",
+      "summary.default-normalized",
+      "summary.exclude-days",
+      "summary.override-rich",
+      "sunday.clear",
+      "sunday.explicit",
+      "sunday.mixed-type",
+      "thursday.clear",
+      "thursday.explicit",
+      "thursday.mixed-type",
+      "to-dict.aliases",
+      "to-dict.nulls",
+      "to-dict.order",
+      "to-idf.defaults",
+      "to-idf.weekday-expansion",
+      "to-idf.weekend-holiday",
+      "tuesday.clear",
+      "tuesday.explicit",
+      "tuesday.mixed-type",
+      "type.default-real",
+      "type.explicit-token",
+      "type.inferred-day",
+      "wednesday.clear",
+      "wednesday.explicit",
+      "wednesday.mixed-type",
+      "weekdays.explicit",
+      "weekdays.mixed-type",
+      "weekdays.replace",
+      "weekends.explicit",
+      "weekends.mixed-type",
+      "weekends.replace"
+    ],
+    "classifications": {
+      "RuleSet": "exception",
+      "RuleSet.__deepcopy__": "exception",
+      "RuleSet.__init__": "exception",
+      "RuleSet.astype": "exception",
+      "RuleSet.clip": "exception",
+      "RuleSet.friday": "exception",
+      "RuleSet.from_constant": "exception",
+      "RuleSet.from_days": "exception",
+      "RuleSet.get_dayschedule": "equivalent",
+      "RuleSet.holiday": "exception",
+      "RuleSet.max": "equivalent",
+      "RuleSet.min": "equivalent",
+      "RuleSet.monday": "exception",
+      "RuleSet.saturday": "exception",
+      "RuleSet.summary": "equivalent",
+      "RuleSet.sunday": "exception",
+      "RuleSet.thursday": "exception",
+      "RuleSet.to_dict": "equivalent",
+      "RuleSet.to_idf_compactexpr": "equivalent",
+      "RuleSet.tuesday": "exception",
+      "RuleSet.type": "equivalent",
+      "RuleSet.wednesday": "exception",
+      "RuleSet.weekdays": "exception",
+      "RuleSet.weekends": "exception"
+    },
+    "float_encoding": "python-binary64-hex-without-0x-prefix",
+    "runtime_names": "policy-token-no-raw-address",
+    "target_symbols": [
+      "RuleSet",
+      "RuleSet.__deepcopy__",
+      "RuleSet.__init__",
+      "RuleSet.astype",
+      "RuleSet.clip",
+      "RuleSet.friday",
+      "RuleSet.from_constant",
+      "RuleSet.from_days",
+      "RuleSet.get_dayschedule",
+      "RuleSet.holiday",
+      "RuleSet.max",
+      "RuleSet.min",
+      "RuleSet.monday",
+      "RuleSet.saturday",
+      "RuleSet.summary",
+      "RuleSet.sunday",
+      "RuleSet.thursday",
+      "RuleSet.to_dict",
+      "RuleSet.to_idf_compactexpr",
+      "RuleSet.tuesday",
+      "RuleSet.type",
+      "RuleSet.wednesday",
+      "RuleSet.weekdays",
+      "RuleSet.weekends"
+    ]
+  },
+  "runtime": {
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.invisibledragon.rule-set-core-oracle.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:a11810c9b7a2d650b7c76769e34925cdc1c160f0d92a783d616c06a008bbe832",
+      "kind": "class",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:ef0a54678cdf78602bc289989268ec4be5889a84c3c5540e29a46e191d125158",
+      "symbol": "RuleSet",
+      "symbol_hash": "sha256:3e0aaca76114e9e5a84d2b6ceb9a650913ad03b5bb6d35c99d3f0a5f97b36994"
+    },
+    {
+      "body_hash": "sha256:ad49ff4fff462758e5d5d8a1cf7eff1eedc4ff042da1d3315aa46a4e48a5d144",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:520ee536d924ac7323d561d9d85957e67316c14aea8bd80a5664a796409a796f",
+      "symbol": "RuleSet.__deepcopy__",
+      "symbol_hash": "sha256:058f6012eabebca75ffb65c55f0fc1fccc51995d38521394faaceb32dfbb9748"
+    },
+    {
+      "body_hash": "sha256:ad14a63315409c3ec6728c9e82f0b40de2300b6cd2f6c3959efa400a9cd7d945",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:608b060baba1615ff775a1a258ea80f31531ab2ead04af7cffe6f9807fa70da4",
+      "symbol": "RuleSet.__init__",
+      "symbol_hash": "sha256:f1c4b446cbbc826152dae8f4c4677d323271ad408d12fda0b0b527ae9ecaec51"
+    },
+    {
+      "body_hash": "sha256:9cf91845f70b2249a6c498393e623d3af79ee8b1d086aa3b2b6c62d90d1c178c",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:cf39c8fabdbe0ecbd6ba6adc59426feaf3c128631fbeee6c69d60e5e73aa7855",
+      "symbol": "RuleSet.astype",
+      "symbol_hash": "sha256:0c0d27de9ef57d948f60d77e2ad8ff58f6898f25965135e6584bb0ad65dff226"
+    },
+    {
+      "body_hash": "sha256:9fe56b3a1c9f21d7a0721710ba240a16554f15890d6ddd6643fdfcc5e5943da9",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:855c6f59d635ebd7895537821026cb2c9c8c4c6c4bfc9d5e1640d6559f48a981",
+      "symbol": "RuleSet.clip",
+      "symbol_hash": "sha256:c3bd923567b392c6753dd317132395cea97872100ce08853d218144d579f1ede"
+    },
+    {
+      "body_hash": "sha256:d9fd4ee092614b6a06ba2cdfe3769cb105c911629c127301df27b05daf7aef28",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:d8f80b44e53531d060f0315e07cf5630b29410ac1af17bb8124150b1b93fa1fa",
+      "symbol": "RuleSet.friday",
+      "symbol_hash": "sha256:72220457054927f7999dd905ba93aabf314844b6571266eea6aefbc92823880b"
+    },
+    {
+      "body_hash": "sha256:0b19637e1c09fe802513e548d388a8fd7dc47804fd0eb187da6c1e4b64507212",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:78f492e0a2dd8ba19b55d416aa9c12edb3b68423e6cf2c5502a5928ac3d0abc6",
+      "symbol": "RuleSet.from_constant",
+      "symbol_hash": "sha256:1093e8f49640c59a592997f0bf053e4a153733c7fab6d2ac36dc913c742e635c"
+    },
+    {
+      "body_hash": "sha256:507371e6221a26c23208480654600694beebfb4af3a634586fca5733b2790b52",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:733b678bcfef161c72c4fb040e97e0788ae11f76e7dec1ddde67eaa2606d10bf",
+      "symbol": "RuleSet.from_days",
+      "symbol_hash": "sha256:d1d5dd6fce56c158588b0e2ce11671d0063e1e16aee2161b15af5a1c7f5213e9"
+    },
+    {
+      "body_hash": "sha256:28f0f003c41d9065e1f6831570bc9bc1e3da85838689c18379f6d5ddba8d97fb",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:1a8742611ecfc2141d656bc92ba8e467f9d868558ad5291c525ee8c2e09e420a",
+      "symbol": "RuleSet.get_dayschedule",
+      "symbol_hash": "sha256:51486c906fb24fd537abf5d0f07c77d5ec77c150a9f3874e3f1991d59b1de645"
+    },
+    {
+      "body_hash": "sha256:be07a7c048c4dab4a5a53d5c20bc17f0eaa6a369b442ea404cf0b006c0852bbe",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:3af0ebe3e9623dfc7fed3f710017eb215d6a1cc57fe9b714489e97aac7bfaa87",
+      "symbol": "RuleSet.holiday",
+      "symbol_hash": "sha256:9bbd78bae0f36cfa3af556f39f48a53eb852e8a65e338b0a7ea8235a4861087a"
+    },
+    {
+      "body_hash": "sha256:47c7d237620a0132c7199b5eb33f1a1305f80ba00118929b0422f9d4f5b099ae",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:f1b77727408acaea93a770200d99c9972e070fabcf19c0e2f6dbc4c1c1f3feea",
+      "symbol": "RuleSet.max",
+      "symbol_hash": "sha256:c62c3676c65897d28e02ae555dd0343582ed8be67411b36fedbef32cca4d3d38"
+    },
+    {
+      "body_hash": "sha256:1c7b752a31153019c85a5c71e06f54ac38e202d62817d270c4bd253dddc4731e",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:f1b77727408acaea93a770200d99c9972e070fabcf19c0e2f6dbc4c1c1f3feea",
+      "symbol": "RuleSet.min",
+      "symbol_hash": "sha256:bf1962353ed21c07ad290a4ff9a5ccd94e7db31b8f7a6313ef3104e280a30807"
+    },
+    {
+      "body_hash": "sha256:c2da11bad3eb7d6a6fc0f1cff443179ac04d8770ea24af283a12a754382cd3de",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:f10341133c365d37adad333fcef83b309cc925d031a315bc6ac2bbf8377d8dbd",
+      "symbol": "RuleSet.monday",
+      "symbol_hash": "sha256:4cca788f61eeb17cb784485a8b94b01ff7679deadfdf1d4d9fe8160abfe54c95"
+    },
+    {
+      "body_hash": "sha256:cfccab53a6c430e822787ac78cc0ff2a5be1e1ee6a15b6e3b1c29d0a959404f8",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:2380dd190eec51d7aa37263facd1a9e12989f01d756e19b1a4f63f5e383b4968",
+      "symbol": "RuleSet.saturday",
+      "symbol_hash": "sha256:693a3041f2dcd664bea7b574ecea60f7f4b66dce26af8cefbdf49ae356fb71a2"
+    },
+    {
+      "body_hash": "sha256:910befff9ae9f300a776f7281dfcdd7d5887ca33710cf7fc464c03ce3cb397c8",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:1b593b0eff21728ab25d12af1562984d3da660986aafcaf89a44de6ef14d62ce",
+      "symbol": "RuleSet.summary",
+      "symbol_hash": "sha256:f669cea057b58f712dc37b4439991f0fc91aa923ecd1d7b0ab80f8e7cd8cc9fc"
+    },
+    {
+      "body_hash": "sha256:95442f9f0651fb3ddc87a1c329eda501393062819231d68fae2a637d6148955a",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:b2b8b108f6b302456dd1d0ec62fc74adec221dccd2adc42ace3f4b48d92860ed",
+      "symbol": "RuleSet.sunday",
+      "symbol_hash": "sha256:cfcbc078846cee7f94d9c09b0f32190b495489b8b8f1f21b860a7cbaa16324fc"
+    },
+    {
+      "body_hash": "sha256:5889f9223e779a76a35591e31aa979288d0b8dfa45ddeb8c2124aa8d7a2f33bc",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:5be74f7ac04eb4575303a9f8649d0ffd3a06b9d9e22a2c9e30b2efefbf00ae59",
+      "symbol": "RuleSet.thursday",
+      "symbol_hash": "sha256:2d3bbbc02f1cd354f02d0a564e8c8979970ed867e9f5e61fbd76d5465293f602"
+    },
+    {
+      "body_hash": "sha256:57763202f4ee3c29d58de3342489991202a44c8fe08d5d4ec7594cbd5059337c",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:a99804c1ea11fb4281230b344829794ccaecb9e02c8e74a18a290bf00441116e",
+      "symbol": "RuleSet.to_dict",
+      "symbol_hash": "sha256:e2a85d522fcc2dbacec768944cf872ba9b7ffd5dd42e03eb4f7cac035da2efff"
+    },
+    {
+      "body_hash": "sha256:186931bf4cdf99bd478390cf576b2ddcd58b71ef219832d80d1985fa514dec54",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:636cf3ce72c5b8fab425c494f6300a642ea6dcc1bbec8f0653a7746285088cb8",
+      "symbol": "RuleSet.to_idf_compactexpr",
+      "symbol_hash": "sha256:015a80b07ad77b088b27d89e7c2f2224553870ad20bffa55a4d43dd1573fb6de"
+    },
+    {
+      "body_hash": "sha256:1e5ef088530721dbaa7db5d5cafefec5c86643beb860e6c5d65a1aaf9011302a",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:c590b6062061da5e42864e2fd88b4293bf880eee53b1b837ba823a588b628bf2",
+      "symbol": "RuleSet.tuesday",
+      "symbol_hash": "sha256:30f9dc0b522275442a6bff0cc22640539789e05274ad72c7a77b487caebe3e68"
+    },
+    {
+      "body_hash": "sha256:c127d9c3b77bd9baf591dbecb6bac00e4249af93aa7b3ef5a503333c07abc581",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:5dede16ed32055ee5ef3307fdd9e5d66bb15147e3dfbfe282745b9285cfa267a",
+      "symbol": "RuleSet.type",
+      "symbol_hash": "sha256:63a5d7d94275c2184f4c9eae268b1c33ee3351525711e7c232fae68f80c84d6a"
+    },
+    {
+      "body_hash": "sha256:2c763ac25ce46c7b660a88d96d5a6564f65ab6cfc232db3a3e42e55408df53e8",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:38547e842b968d7e914894ef043cb565fea149051755d1dc91b1d7337e404741",
+      "symbol": "RuleSet.wednesday",
+      "symbol_hash": "sha256:a896496ee156854d2a7693128f6a66bac9628457468ef2a7b9a00732abe86a22"
+    },
+    {
+      "body_hash": "sha256:105a78e7e0595fef7130a929dc130834e8a832a77923a4583f9d1c2c9ec5dbf8",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:c49d1194cd324beae53bca8145ab606d1a26c9f21d86fbb04f4b93217831a1cb",
+      "symbol": "RuleSet.weekdays",
+      "symbol_hash": "sha256:f89fcc578196070c1535586d7c2b7142654dcf2d4b0179c21ee92643e0098294"
+    },
+    {
+      "body_hash": "sha256:df662aecc01710f785b1221e793e9c3987eeaa3e2a5d17ad043e592a9ad1ca6b",
+      "kind": "function",
+      "path": "src/idragon/dragon/profile.py",
+      "signature_hash": "sha256:e362ecffa7bd1eda05a79c1cd15c72e8b974c083acbe741197f66b08ce2ee420",
+      "symbol": "RuleSet.weekends",
+      "symbol_hash": "sha256:c3fdd0ae9d51b8f43fa821ee2dd774593c90db66b6c19c4a51e0db0ccfd927b5"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "path": "src/idragon/dragon/profile.py",
+    "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+  }
+}

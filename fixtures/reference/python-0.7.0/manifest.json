@@ -68,6 +68,11 @@
       "sha256": "f2fa189c3a785493d4e67e1513e695e1d30e32cc8680e8c181fa61645189c81a"
     },
     {
+      "path": "rule-set-core-oracle.json",
+      "bytes": 170470,
+      "sha256": "ad70604e6f5a0f24cfd8503692a5f73b635189d4d5d1c3e627196f99d1d20825"
+    },
+    {
       "path": "rule-set-operations-oracle.json",
       "bytes": 3006843,
       "sha256": "5575c9d2946b99afd474220429eef5e5531931a36e26eb55a1e3d4e93548fdc6"
