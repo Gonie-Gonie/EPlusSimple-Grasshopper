@@ -18,6 +18,11 @@
       "sha256": "0076a953ce599b47be283375f9aef93b24ddb3cd4192a8bc39573061e6ec8f96"
     },
     {
+      "path": "database-query-oracle.json",
+      "bytes": 3228689,
+      "sha256": "27157ebe6e927e2ba9faabf1a00a6d02480993b1802616c37d2d6bc02c82dffd"
+    },
+    {
       "path": "fenestration-construction-database.json",
       "bytes": 54147,
       "sha256": "6fd2b18e1e4d464286c6f3a3a197e3c526e863e34ab392f52818435ae6872344"

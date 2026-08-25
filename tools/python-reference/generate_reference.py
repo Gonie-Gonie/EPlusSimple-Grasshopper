@@ -10,7 +10,7 @@ import os
 import re
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -70,6 +70,183 @@ def sha256_file(path: Path) -> str:
 
 def canonical_key(value: Any) -> str:
     return json.dumps(value, ensure_ascii=False, allow_nan=False, sort_keys=True)
+
+
+def canonical_items_sha256(items: list[dict[str, Any]]) -> str:
+    return sha256_bytes(
+        "\n".join(canonical_key(item) for item in items).encode("utf-8")
+    )
+
+
+def summarize_surface_construction(value: Any) -> dict[str, Any]:
+    return {
+        "name": value.name,
+        "u_value": value.get_U(),
+        "layers": [
+            {
+                "material": material.name,
+                "thickness": thickness,
+            }
+            for material, thickness in value.layers
+        ],
+    }
+
+
+def generate_database_query_oracle(
+    upstream_commit: str,
+    surface_construction_type: Any,
+    fenestration_construction_type: Any,
+    surface_types: Any,
+    boundary_conditions: Any,
+    address_weather_table: Any,
+    climate_table: Any,
+    address_to_weather: Any,
+) -> dict[str, Any]:
+    regulation_dates = sorted(surface_construction_type.REGULATION_DATES)
+    climates = sorted({key[4] for key in surface_construction_type._DB})
+    housing_values = (False, True)
+    radiant_values = (False, True)
+    surface_type_values = list(surface_types)
+    boundary_condition_values = list(boundary_conditions)
+
+    surface_queries: list[dict[str, Any]] = []
+    for vintage in regulation_dates:
+        for climate in climates:
+            for is_multifamily_housing in housing_values:
+                for surface_type in surface_type_values:
+                    for boundary_condition in boundary_condition_values:
+                        for is_radiant_floor in radiant_values:
+                            result = surface_construction_type.get_regulated_construction(
+                                vintage,
+                                surface_type,
+                                boundary_condition,
+                                climate,
+                                is_radiant_floor=is_radiant_floor,
+                                is_multifamily_housing=is_multifamily_housing,
+                            )
+                            surface_queries.append(
+                                {
+                                    "vintage": vintage.strftime("%Y-%m-%d"),
+                                    "climate": climate,
+                                    "is_multifamily_housing": is_multifamily_housing,
+                                    "surface_type": surface_type.value,
+                                    "boundary_condition": boundary_condition.value,
+                                    "is_radiant_floor": is_radiant_floor,
+                                    "result": summarize_surface_construction(result),
+                                }
+                            )
+
+    fenestration_queries: list[dict[str, Any]] = []
+    for key in fenestration_construction_type._DB.keys():
+        result = fenestration_construction_type.get_DB(key)
+        fenestration_queries.append(
+            {
+                "key": {
+                    "window_count": key[0],
+                    "low_e_glass": key[1],
+                    "argon": key[2],
+                    "thermal_break": key[3],
+                    "frame": key[4],
+                    "cavity": key[5],
+                },
+                "result": {
+                    "name": result.name,
+                    "u_value": result.u,
+                    "solar_heat_gain_coefficient": result.g,
+                    "is_transparent": result.is_transparent,
+                },
+            }
+        )
+
+    weather_metadata: list[dict[str, Any]] = []
+    for administrative_area, row in address_weather_table.iterrows():
+        weather_metadata.append(
+            {
+                "administrative_area": administrative_area,
+                "legal_district_code": str(row["법정동코드"]),
+                "terrain": row["terrain"],
+                "administrative_latitude": float(row["행정구역위도"]),
+                "administrative_longitude": float(row["행정구역경도"]),
+                "weather_location": row["기상지역명"],
+                "weather_location_type": row["기상지역유형"],
+                "weather_latitude": float(row["기상지역위도"]),
+                "weather_longitude": float(row["기상지역경도"]),
+                "epw_file_name": row["EPW파일명"],
+            }
+        )
+
+    climate_effective_dates = sorted(
+        datetime.strptime(str(value), "%Y%m%d") for value in climate_table.columns
+    )
+    earliest_climate_date = climate_effective_dates[0]
+    boundary_vintages = sorted(
+        {
+            effective_date + timedelta(days=offset)
+            for effective_date in climate_effective_dates
+            for offset in (-1, 0, 1)
+            if effective_date + timedelta(days=offset) >= earliest_climate_date
+        }
+    )
+    weather_queries: list[dict[str, Any]] = []
+    for metadata in weather_metadata:
+        administrative_area = metadata["administrative_area"]
+        for vintage in boundary_vintages:
+            terrain, climate, weather_location, weather_filepath = address_to_weather(
+                administrative_area,
+                vintage,
+            )
+            effective_date = max(
+                candidate for candidate in climate_effective_dates if candidate <= vintage
+            )
+            weather_queries.append(
+                {
+                    "administrative_area": administrative_area,
+                    "vintage": vintage.strftime("%Y-%m-%d"),
+                    "climate_effective_date": effective_date.strftime("%Y-%m-%d"),
+                    "terrain": terrain,
+                    "climate_region": climate,
+                    "weather_location": weather_location,
+                    "epw_file_name": weather_filepath.name,
+                }
+            )
+
+    return {
+        "schema": f"{SCHEMA_PREFIX}.database-query-oracle.v1",
+        "upstream_commit": upstream_commit,
+        "surface": {
+            "regulation_dates": [value.strftime("%Y-%m-%d") for value in regulation_dates],
+            "climates": climates,
+            "housing_values": list(housing_values),
+            "surface_types": [value.value for value in surface_type_values],
+            "boundary_conditions": [value.value for value in boundary_condition_values],
+            "radiant_values": list(radiant_values),
+            "query_count": len(surface_queries),
+            "unique_result_count": len(
+                {query["result"]["name"] for query in surface_queries}
+            ),
+            "queries_sha256": canonical_items_sha256(surface_queries),
+            "queries": surface_queries,
+        },
+        "fenestration": {
+            "query_count": len(fenestration_queries),
+            "queries_sha256": canonical_items_sha256(fenestration_queries),
+            "queries": fenestration_queries,
+        },
+        "weather": {
+            "metadata_count": len(weather_metadata),
+            "metadata_sha256": canonical_items_sha256(weather_metadata),
+            "metadata": weather_metadata,
+            "climate_effective_dates": [
+                value.strftime("%Y-%m-%d") for value in climate_effective_dates
+            ],
+            "boundary_vintages": [
+                value.strftime("%Y-%m-%d") for value in boundary_vintages
+            ],
+            "query_count": len(weather_queries),
+            "queries_sha256": canonical_items_sha256(weather_queries),
+            "queries": weather_queries,
+        },
+    }
 
 
 def canonicalize_runtime_addresses(text: str) -> tuple[str, int]:
@@ -206,7 +383,14 @@ def generate() -> None:
         GreenRetrofitModel,
         Material,
         Profile,
+        SurfaceBoundaryCondition,
         SurfaceConstruction,
+        SurfaceType,
+    )
+    from epsimple.core.model import (
+        ADDR_WEATHER_TABLE,
+        CLIMATE_TABLE,
+        address_to_weather,
     )
 
     expected_epsimple = str(lock["modules"]["epsimple"]["version"])
@@ -266,6 +450,20 @@ def generate() -> None:
                 "items": items,
             },
         )
+
+    write_json(
+        output / "database-query-oracle.json",
+        generate_database_query_oracle(
+            actual_commit,
+            SurfaceConstruction,
+            FenestrationConstruction,
+            SurfaceType,
+            SurfaceBoundaryCondition,
+            ADDR_WEATHER_TABLE,
+            CLIMATE_TABLE,
+            address_to_weather,
+        ),
+    )
 
     fixture_path = repository_root / "fixtures" / "simple-dragon" / "grm" / "ASHRAE 140 modified.grm"
     fixture_hash = sha256_file(fixture_path)
