@@ -183,6 +183,7 @@ public class Owner
                 "EvidenceCollector.Emit",
                 source_hash(COLLECTOR_SOURCE),
                 (self._executed(),),
+                "net8.0-windows",
             )
 
             report = build_compatibility_report(
@@ -259,6 +260,7 @@ public class Owner
                 "EvidenceCollector.Emit",
                 source_hash(COLLECTOR_SOURCE),
                 (self._executed(output_hash=OTHER_HASH),),
+                "net8.0-windows",
             )
             mismatch = build_compatibility_report(
                 configuration,
@@ -285,6 +287,7 @@ public class Owner
                         exercised_load="zero",
                     ),
                 ),
+                "net8.0-windows",
             )
             rejected = build_compatibility_report(
                 configuration,
@@ -306,6 +309,7 @@ public class Owner
                 "EvidenceCollector.Emit",
                 source_hash(COLLECTOR_SOURCE),
                 (self._executed(),),
+                "net8.0-windows",
             )
             verified = build_compatibility_report(
                 configuration,
@@ -588,6 +592,7 @@ public class Owner
                 "EvidenceCollector.Emit",
                 source_hash(COLLECTOR_SOURCE),
                 (self._executed(),),
+                "net8.0-windows",
             ).to_data()
             loaded = load_evidence_results(
                 self._write_json(workspace, "config/results.json", valid),

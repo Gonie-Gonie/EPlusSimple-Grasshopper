@@ -814,6 +814,8 @@ def build_compatibility_report(
             configuration.required_assertion_ids,
             (),
             (),
+            (),
+            (),
             configuration.required_assertion_ids,
             (),
             (),

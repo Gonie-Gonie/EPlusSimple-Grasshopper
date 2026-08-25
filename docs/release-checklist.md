@@ -35,6 +35,7 @@ For diagnosis, its constituent commands are:
 ```text
 .\dev.cmd setup -InstallEnergyPlus -RequireEnergyPlus -RequireRhino7 -RequireRhino8
 .\dev.cmd reference -Mode Verify
+.\dev.cmd upstream compatibility-gate --source-root temp/reference/upstream/eplussimple --collect-evidence
 .\dev.cmd build -NoRestore -RequireEnergyPlus
 .\dev.cmd compatibility -SkipReferencePreparation -NoRestore
 .\dev.cmd examples -SkipPluginBuild -RequireEnergyPlusWorkflow
@@ -43,6 +44,28 @@ For diagnosis, its constituent commands are:
 
 - Require zero compiler warnings and errors for `net48`, `net7.0-windows`, and
   `net8.0-windows`.
+- Require all 1,242 pinned upstream public symbols to have exact registry
+  coverage, no `needs_reverification` rows, and fresh authoritative assertion
+  evidence for every `equivalent` or `exception` row. External evidence JSON
+  cannot satisfy this release gate.
+- Require the upstream report to contain no duplicate or case-ambiguous JSON
+  object keys, real JSON booleans (never truthy strings), equal nonzero
+  required/collected assertion counts, empty evidence failure arrays, and
+  classification counts that total exactly 1,242. The release copies the
+  already-validated report bytes atomically and attests that exact byte hash.
+  It also reconciles each authoritative session's positive project, assertion,
+  and indexed-artifact counts and validates the request, child result, receipt,
+  and index against the repository HEAD, upstream manifests,
+  `net8.0-windows`, and the pinned SDK toolchain. Every indexed build prop,
+  stdout/stderr stream, TRX, test/implementation DLL, and evidence record is
+  read once with path/reparse/hardlink checks and copied byte-exactly beneath
+  `artifacts\release\trusted-evidence\<session>\artifacts`; the receipt and
+  index are copied beside it and all files enter the final checksum inventory.
+  Receipt/index q/z hashes must match the actual held bytes. The tracked and
+  isolated symbol-evidence manifests, report/request/child assertion ids, exact
+  receipt output/load/test fields, zero project exits, request commands/graphs,
+  parent-bound `g2` descriptor, and recomputed EvidenceResults hash must all
+  agree before packaging.
 - Require all managed tests, real EnergyPlus integration, Rhino geometry, and
   Grasshopper save/reopen gates applicable to the machine.
 - Require every declared Python/C# engineering compatibility case to pass with
@@ -65,8 +88,11 @@ For diagnosis, its constituent commands are:
 ## Candidate review
 
 - Inspect `artifacts\release\release-gate.json`, its checksum inventory, the
-  copied `engineering-compatibility.json`, package index and compatibility
-  report, build/test reports, and all six copied real-host summaries.
+  copied `upstream-compatibility-gate.json` and
+  complete `trusted-evidence\<session-id>` bundle (receipt, index, and indexed
+  `artifacts` tree),
+  `engineering-compatibility.json`, package index and compatibility report,
+  build/test reports, and all six copied real-host summaries.
 - Open the tracked InvisibleDragon and SimpleDragon starter definitions in each
   installed Rhino generation. Separately exercise a direct InvisibleDragon
   HVAC graph and a SimpleDragon HVAC-to-InvisibleDragon conversion using the

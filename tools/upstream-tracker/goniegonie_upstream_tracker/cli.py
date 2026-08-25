@@ -24,7 +24,7 @@ from .compatibility import (
     write_compatibility_report,
 )
 from .config import TrackerConfiguration, load_configuration
-from .errors import SourceError, TrackerError
+from .errors import ConfigurationError, SourceError, TrackerError
 from .evidence import (
     load_evidence_results,
     render_scope_decisions,
@@ -33,6 +33,7 @@ from .evidence import (
 from .reporting import write_reports
 from .scope_policy import build_safe_scope_plan
 from .symbols import build_snapshot
+from .trusted_collector import collect_trusted_evidence
 
 
 def main(arguments: Sequence[str] | None = None) -> int:
@@ -244,7 +245,15 @@ def _create_parser() -> argparse.ArgumentParser:
         type=Path,
         action="append",
         default=[],
-        help="Collected exact assertion-result JSON; repeat for multiple test collectors.",
+        help=(
+            "External assertion-result JSON for diagnostics only; it is never authoritative. "
+            "Repeat for multiple artifacts."
+        ),
+    )
+    report_parser.add_argument(
+        "--collect-evidence",
+        action="store_true",
+        help="Run a fresh isolated dotnet test session and use its in-memory trusted evidence.",
     )
 
     gate_parser = commands.add_parser(
@@ -262,7 +271,15 @@ def _create_parser() -> argparse.ArgumentParser:
         type=Path,
         action="append",
         default=[],
-        help="Collected exact assertion-result JSON; repeat for multiple test collectors.",
+        help=(
+            "External assertion-result JSON for diagnostics only; it is never authoritative. "
+            "Repeat for multiple artifacts."
+        ),
+    )
+    gate_parser.add_argument(
+        "--collect-evidence",
+        action="store_true",
+        help="Run a fresh isolated dotnet test session and use its in-memory trusted evidence.",
     )
     return parser
 
@@ -412,18 +429,35 @@ def _compatibility_report(
     elif bool(getattr(options, "require_verified_pin", False)):
         raise SourceError("--require-verified-pin requires --source-root")
 
+    evidence_paths = tuple(getattr(options, "evidence_results", ()))
+    collect_evidence = bool(getattr(options, "collect_evidence", False))
+    if collect_evidence and evidence_paths:
+        raise ConfigurationError(
+            "--collect-evidence cannot be combined with non-authoritative --evidence-results"
+        )
+    evidence_results = tuple(
+        load_evidence_results(
+            path,
+            compatibility.inventory,
+            compatibility.symbol_evidence,
+            repository_root=repository_root,
+        )
+        for path in evidence_paths
+    )
+    if collect_evidence:
+        evidence_results = (
+            collect_trusted_evidence(
+                repository_root,
+                compatibility.inventory,
+                compatibility.symbol_evidence,
+                compatibility.required_assertion_ids,
+            ),
+        )
+
     report = build_compatibility_report(
         compatibility,
         source_root=source_root,
-        evidence_results=tuple(
-            load_evidence_results(
-                path,
-                compatibility.inventory,
-                compatibility.symbol_evidence,
-                repository_root=repository_root,
-            )
-            for path in getattr(options, "evidence_results", ())
-        ),
+        evidence_results=evidence_results,
     )
     default_name = "compatibility-gate.json" if fail_on_incomplete else "compatibility-report.json"
     output = options.output or repository_root / "temp" / "upstream-tracker" / default_name
@@ -433,6 +467,7 @@ def _compatibility_report(
         json.dumps(
             {
                 "classification_complete": report.classification_complete,
+                "evidence_authoritative": report.evidence_execution.authoritative,
                 "output": str(output),
                 "passed": report.passed,
                 "required_symbol_evidence_satisfied": report.evidence_execution.passed,

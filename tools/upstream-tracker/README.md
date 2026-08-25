@@ -128,7 +128,7 @@ Write the machine-readable compatibility report using the exact pinned clone:
 ```
 
 For every matrix entry classified `equivalent` or `exception`, the report also
-requires an executed assertion-result artifact. Test collectors emit
+requires an executed assertion result. External test collectors may emit
 `goniegonie.upstream-evidence-results.v1` JSON containing the exact
 `assertion_id`, pass/skip/structural flags, exercised-load category, and a
 deterministic `output_sha256`. Each result is also bound to the exact test path,
@@ -153,16 +153,119 @@ when any `equivalent` or `exception` row requires assertions.
 
 Externally supplied JSON is deliberately non-authoritative: it can diagnose
 exact binding problems, but it cannot make the release compatibility gate pass.
-Only result artifacts produced by a test subprocess launched by the gate itself
-may set `evidence_execution.authoritative=true`. Until such a checked-in
-collector is configured, every `equivalent` or `exception` row remains
-fail-closed even when a well-formed external result JSON is supplied.
+`--collect-evidence` is mutually exclusive with `--evidence-results`. It creates
+`temp/u/<uuid>`, launches the exact tracked collector as
+an isolated standard-library Python child, performs a fresh `dotnet test` build
+(never `--no-build`), independently reparses the TRX and case records in the
+parent, and seals the result only in memory:
+
+```text
+.\dev.cmd upstream compatibility-report ^
+  --source-root temp/reference/upstream/eplussimple ^
+  --require-verified-pin ^
+  --collect-evidence
+```
+
+The session requires a byte-exact clean repository and binds the repository
+HEAD, canonical inventory and evidence registries, required assertion ids,
+tracked source/project/Directory/NuGet inputs, the MSBuild-evaluated
+`ProjectReference`, `Compile`, `PackageReference`, and `AssemblyName` graph,
+the complete tracked `packages.lock.json` closure, pinned `global.json`, exact
+SDK root and complete SDK-root file/hash manifest, dotnet executable SHA-256,
+target framework, absolute Git executable path/SHA-256,
+command/exit/stdout/stderr, TRX, fresh test DLL, and all relevant implementation
+DLLs. Output, object, results, record, and NuGet
+directories are unique to the session. A foreign TRX `codeBase`, ambiguous
+class/method or theory case, skipped/structural-only assertion, wrong exercised
+load, stale file, symlink/junction/hardlink, or repository mutation fails closed.
+
+The worker derives the exact required assertion-id closure directly from the
+tracked public-symbol inventory, compatibility matrix classifications, and
+symbol-evidence receipts. The caller-provided id list must be byte-for-byte the
+same sorted closure; it cannot select a convenient subset.
+
+No build runs from the developer working tree. Before launching dotnet, the
+parent copies every regular file in the verified `HEAD` tree byte-for-byte into
+`temp/u/<uuid>/s`, with no `.git` directory or extra files, and binds the
+ordered per-file hashes plus their aggregate tree hash into the signed request.
+Both parent and child verify that isolated tree before and after the fresh build.
+Consequently, a source file hidden by `.gitignore`, `.git/info/exclude`, or a
+default SDK compile glob cannot enter the trusted build.
+
+The dotnet process receives only a small allowlist of operating-system process
+variables plus collector-owned CLI-home, roaming/local application-data, user
+profile, temporary, record, package, and verified-dotnet search paths;
+arbitrary environment variables are never promoted to MSBuild properties.
+Nearest tracked `Directory.Build.props`, `Directory.Build.targets`, and
+`Directory.Packages.props` paths are fixed explicitly within the isolated tree,
+the exact tracked root `NuGet.config` is the restore config, and custom before/
+after common targets are fixed to verified-nonexistent isolated paths. User
+environment values therefore cannot redirect imports, SDKs, package roots, or
+restore sources.
+
+Each evaluated graph is produced only after an isolated locked restore. The
+child independently restores and evaluates it again before `dotnet test`, and
+the parent performs a third restore/evaluation while validating the signed
+child result. Conditional/import-added project references and SDK default
+compile items therefore cannot be replaced by static XML guesses. All tracked
+`.csproj`, `.props`, and `.targets` files reject DTD/entity declarations before
+MSBuild runs. Automatic MSBuild response files are disabled with
+`/noAutoResponse` on restore, evaluation, and test commands.
+
+The parent sends the request and a one-session secret to the tracked child over
+stdin. Request/result HMACs prevent stale files, crossed sessions, and
+post-execution disk substitution from being accepted; they are not a sandbox
+against arbitrary Python code already executing inside the parent process. The
+actual authority is the parent's direct child launch plus exact artifact
+revalidation and a one-use, object-identity-bound in-memory capability. The
+capability and seal are never serialized.
+
+The session persists canonical `q.json` (request), `z.json` (validated child
+result), `i.json` (artifact index), and `a.json` (authority receipt). The
+compatibility report exposes the session id, receipt/index paths, and hashes
+only for a still-live authoritative result. It also seals the independently
+recomputed project, assertion, and indexed-artifact counts; `artifact_count`
+means exactly the number of entries in `i.json.artifacts` and excludes `i.json`
+and `a.json` themselves. Release validation rereads every source artifact once
+through a locked handle, rejects unsafe paths, reparse points, and hardlinks,
+and reconciles the request, child result, index, receipt, compatibility report,
+repository HEAD, manifest, toolchain, and framework bindings. The exact held
+bytes for `q.json`, `z.json`, every generated/evaluation props file, stdout,
+stderr, TRX, test and implementation DLLs, and every evidence record are copied
+under `artifacts/release/trusted-evidence/<session>/artifacts`; the receipt and
+index are copied beside that directory. The release checksum inventory covers
+the complete self-contained bundle. Receipt/index request and child hashes must
+equal the actual held `q.json` and `z.json` bytes, not merely each other. The
+release also strict-reads the tracked and isolated `upstream/symbol-evidence.json`,
+recomputes its canonical content hash, and requires an exact assertion-id and
+field bijection across its receipts, the request plan, aggregate child results,
+and per-project child results. Every assertion must be passed, non-skipped,
+non-structural, and match the receipt's output/load/test binding; every project
+must exit zero and reproduce the request command and evaluated graph. The
+authority receipt's EvidenceResults hash is independently recomputed. Parent
+validation adds its `g2` build-props descriptor to each validated `z.json`
+project, so the artifact index can never serve as its own descriptor oracle.
+
+Each xUnit case must emit one `goniegonie.trusted-evidence-record.v1` JSON file
+to the directory in `GONIEGONIE_EVIDENCE_RECORDS_DIRECTORY`, using the nonce in
+`GONIEGONIE_EVIDENCE_SESSION_NONCE`. Required fields are `assertion_id`, exact
+TRX `test_case`, `exercised_load`, `structural_only: false`, and a finite JSON
+`output`. Theory cases are ordered by exact TRX name and the collector computes
+`sha256(canonical-json({"cases":[{"output":...,"test_case":...}, ...]}))`.
+Tests can link the tracked
+`tools/upstream-tracker/csharp/TrustedEvidenceRecorder.cs` helper with one exact
+literal `<Compile Include="..." Link="TrustedEvidenceRecorder.cs" />`; the
+collector includes such linked sources in its input closure. The helper never
+allows a structural-only declaration. With neither collector environment
+variable present it is a no-op for ordinary local test runs; exactly one
+variable is an error, and with both present it emits the strict record above.
 
 Run the fail-closed completion gate:
 
 ```text
 .\dev.cmd upstream compatibility-gate ^
-  --source-root temp/reference/upstream/eplussimple
+  --source-root temp/reference/upstream/eplussimple ^
+  --collect-evidence
 ```
 
 For a valid verified clone, the gate returns exit code `5` until its generated

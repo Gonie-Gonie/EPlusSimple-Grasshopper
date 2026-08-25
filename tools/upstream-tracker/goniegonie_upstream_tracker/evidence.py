@@ -193,6 +193,7 @@ class EvidenceResults:
     collector_symbol: str
     collector_source_sha256: str
     assertions: tuple[ExecutedAssertion, ...]
+    target_framework: str
 
     @property
     def assertions_by_id(self) -> dict[str, ExecutedAssertion]:
@@ -212,6 +213,7 @@ class EvidenceResults:
             },
             "inventory_sha256": self.inventory_sha256,
             "symbol_evidence_sha256": self.symbol_evidence_sha256,
+            "target_framework": self.target_framework,
             "upstream_commit": self.upstream_commit,
         }
 
@@ -227,6 +229,7 @@ class EvidenceResults:
             "inventory_sha256": self.inventory_sha256,
             "schema": EVIDENCE_RESULTS_SCHEMA,
             "symbol_evidence_sha256": self.symbol_evidence_sha256,
+            "target_framework": self.target_framework,
             "summary": {
                 "assertion_count": len(self.assertions),
                 "failed_count": sum(item.outcome == "failed" for item in self.assertions),
@@ -244,6 +247,8 @@ class EvidenceExecution:
     required_assertion_ids: tuple[str, ...]
     collected_assertion_ids: tuple[str, ...]
     result_artifact_sha256s: tuple[str, ...]
+    result_artifacts: tuple[Mapping[str, Any], ...]
+    target_frameworks: tuple[str, ...]
     missing_assertion_ids: tuple[str, ...]
     failed_assertion_ids: tuple[str, ...]
     skipped_assertion_ids: tuple[str, ...]
@@ -286,9 +291,11 @@ class EvidenceExecution:
             "required_assertion_count": len(self.required_assertion_ids),
             "required_assertion_ids": list(self.required_assertion_ids),
             "result_artifact_sha256s": list(self.result_artifact_sha256s),
+            "result_artifacts": [dict(item) for item in self.result_artifacts],
             "skipped_assertion_ids": list(self.skipped_assertion_ids),
             "structural_only_assertion_ids": list(self.structural_only_assertion_ids),
             "test_binding_mismatch_ids": list(self.test_binding_mismatch_ids),
+            "target_frameworks": list(self.target_frameworks),
         }
 
 
@@ -489,6 +496,7 @@ def load_evidence_results(
             "collector",
             "assertions",
             "summary",
+            "target_framework",
         },
         optional=set(),
         context="evidence results",
@@ -540,6 +548,7 @@ def load_evidence_results(
         collector_symbol,
         collector_source_sha256,
         assertions,
+        _framework(root["target_framework"], "evidence results.target_framework"),
     )
     if repository_root is not None:
         repository_state = _git_head_repository_state(
@@ -592,6 +601,10 @@ def evaluate_evidence_execution(
             f"required evidence assertion '{unknown_required}' is not declared in symbol evidence"
         )
     collected: dict[str, ExecutedAssertion] = {}
+    authoritative_by_assertion: dict[str, bool] = {}
+    result_artifact_hashes: list[str] = []
+    result_artifacts: list[Mapping[str, Any]] = []
+    target_frameworks: set[str] = set()
     for result_set in result_sets:
         if result_set.upstream_commit != registry.upstream_commit:
             raise ConfigurationError(
@@ -605,6 +618,26 @@ def evaluate_evidence_execution(
             raise ConfigurationError(
                 "evidence results symbol-evidence registry hash is stale"
             )
+        # A JSON-loaded EvidenceResults instance is declaration-only.  The
+        # trusted collector returns an in-memory subclass carrying a
+        # process-local HMAC seal after independently validating its fresh
+        # build/TRX/session receipt.  Import lazily to keep evidence parsing
+        # independent from the collector implementation.
+        from .trusted_collector import (
+            authority_artifact_trace,
+            authority_receipt_sha256,
+            is_authoritative_evidence_results,
+        )
+
+        trusted = is_authoritative_evidence_results(result_set)
+        authority_hash = authority_receipt_sha256(result_set)
+        trace = authority_artifact_trace(result_set)
+        if trace is not None:
+            result_artifacts.append(trace)
+        target_frameworks.add(result_set.target_framework)
+        result_artifact_hashes.append(
+            authority_hash if authority_hash is not None else result_set.content_sha256
+        )
         for assertion in result_set.assertions:
             if assertion.assertion_id in collected:
                 raise ConfigurationError(
@@ -615,6 +648,7 @@ def evaluate_evidence_execution(
                     f"evidence results contain undeclared assertion '{assertion.assertion_id}'"
                 )
             collected[assertion.assertion_id] = assertion
+            authoritative_by_assertion[assertion.assertion_id] = trusted
 
     missing: list[str] = []
     failed: list[str] = []
@@ -647,11 +681,17 @@ def evaluate_evidence_execution(
             expected.claims_active_load and actual.exercised_load != "nonzero"
         ):
             load_mismatch.append(identifier)
+    authoritative = bool(required) and all(
+        authoritative_by_assertion.get(identifier, False)
+        for identifier in required
+    )
     return EvidenceExecution(
-        False,
+        authoritative,
         required,
         tuple(sorted(collected)),
-        tuple(sorted(result_set.content_sha256 for result_set in result_sets)),
+        tuple(sorted(result_artifact_hashes)),
+        tuple(sorted(result_artifacts, key=lambda item: item["session_id"])),
+        tuple(sorted(target_frameworks)),
         tuple(missing),
         tuple(failed),
         tuple(skipped),
@@ -1653,6 +1693,15 @@ def _boolean(value: Any, context: str) -> bool:
     if not isinstance(value, bool):
         raise ConfigurationError(f"{context} must be a boolean")
     return value
+
+
+def _framework(value: Any, context: str) -> str:
+    text = _text(value, context)
+    if re.fullmatch(r"net[0-9]+\.[0-9]+-windows", text) is None:
+        raise ConfigurationError(
+            f"{context} must be an exact Windows target framework"
+        )
+    return text
 
 
 def _text(value: Any, context: str) -> str:
