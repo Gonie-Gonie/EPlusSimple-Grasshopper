@@ -42,7 +42,7 @@ public sealed class SupplyGroupToIdfObjectOracleParityTests
     private const string ImplementationRepositoryPath =
         "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs";
     private const string ImplementationSymbol =
-        "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendHvac";
+        "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.Assemble";
     private const string ImplementationSha256 =
         "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3";
     private const string EvidenceTestCase =
@@ -605,22 +605,20 @@ public sealed class SupplyGroupToIdfObjectOracleParityTests
         Type assembler = typeof(EnergyModel).Assembly.GetType(
             "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler",
             throwOnError: true)!;
-        MethodInfo appendHvac = Assert.Single(
+        MethodInfo assemble = Assert.Single(
             assembler.GetMethods(BindingFlags.Static | BindingFlags.NonPublic),
-            method => method.Name == "AppendHvac");
-        Assert.True(appendHvac.IsPrivate);
-        Assert.True(appendHvac.IsStatic);
-        Assert.Equal(typeof(void), appendHvac.ReturnType);
+            method => method.Name == "Assemble");
+        Assert.True(assemble.IsAssembly);
+        Assert.True(assemble.IsStatic);
+        Assert.Equal(typeof(IdfDocument), assemble.ReturnType);
         Assert.Equal(
             new[]
             {
-                typeof(IdfDocument),
-                typeof(IdfGenerationContext),
                 typeof(EnergyModel),
+                typeof(IddSchema),
                 typeof(EnergyModelIdfOptions),
-                typeof(Dictionary<EntityId, EnergyRecoveryVentilator>),
             },
-            appendHvac.GetParameters().Select(item => item.ParameterType));
+            assemble.GetParameters().Select(item => item.ParameterType));
     }
 
     private static string[] ExecuteNativeCase(CaseBinding expected, JsonElement pythonFacts)
