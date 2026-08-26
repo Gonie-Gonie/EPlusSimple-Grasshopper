@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:ad63332f80cd33eba8a08a4279aee1a4d95db6ad8d45a07703ea7ff26f043074",
+  "content_sha256": "sha256:fbd996372aa33c3c14bbb14e3c16effbf66ff1be51384d00e7aa3d4cc64657fe",
   "entries": [
     {
       "implementation": {
@@ -6659,6 +6659,58 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Shading.cs",
+        "source_sha256": "sha256:99b426d76894461ca1f29e41dfba08204ee43a72f6133f3588eedd7e79b3affd",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Blind"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Blind across exact A01: the representative six-value Blind state and two fresh equal-valued native instances are pinned. Adaptation family permissive-python-blind-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c075c45deb7cda1407a72808c0d277d6efd5316085b144095d2bf517386973f7",
+          "id": "dragon-shape-opening-adjacency-core-1025-75f7c91c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Blind",
+      "upstream_symbol_hash": "sha256:75f7c91c526ca8c2a86f7a984fa2007d17e94a8a3e38a6a80ffa6a7af37cd36b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Shading.cs",
+        "source_sha256": "sha256:99b426d76894461ca1f29e41dfba08204ee43a72f6133f3588eedd7e79b3affd",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Blind.Blind"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Blind.__init__ across exact A01 and A02: representative construction and the five exact native negative-width, zero-separation, angle-999, front-minus-0.2 and back-1.5 ArgumentOutOfRangeException boundaries are pinned. The later Python dynamic-mutation bundle is context only and no native mutation counterpart is claimed. Adaptation family permissive-python-blind-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:5388e0665f85bc41bb818f26c8f6fa89cf76898e26e6df4d36abe0c373570bee",
+          "id": "dragon-shape-opening-adjacency-core-1026-574e9b5a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Blind.__init__",
+      "upstream_symbol_hash": "sha256:574e9b5ab31178c6d64eaeb70e19e3a434448c712cf2d8459bfdc36704047eee"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
         "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.ShadingMaterial"
@@ -6682,6 +6734,110 @@
       ],
       "symbol": "Blind.to_idf_object",
       "upstream_symbol_hash": "sha256:16e274127d87265296d229708222d131dbf0885a06196f088f42ade37e18b231"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Openings.cs",
+        "source_sha256": "sha256:4da15fd6ee228d471bc1a249abf23f7dbff5687ff0f1dabb9dc820b512aee494",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Door"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Door across exact A08: representative Door name, construction reference, derived area and fresh native instances are pinned. Adaptation family permissive-python-door-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:fa39e26798264f38d0e9a43f1940c2863f70f05203b2b1e8c74faa3c5eb8afd9",
+          "id": "dragon-shape-opening-adjacency-core-1028-717d717a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Door",
+      "upstream_symbol_hash": "sha256:717d717ab0c24c7d2900081f9853e5b1670c8f37731d3076410b3401718e59b9"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Openings.cs",
+        "source_sha256": "sha256:4da15fd6ee228d471bc1a249abf23f7dbff5687ff0f1dabb9dc820b512aee494",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Door.Door"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Door.__init__ across exact A08 and A09: representative typed polygon construction and observed invalid geometry and required-reference rejections are pinned without normalizing mutable scalar-area Python objects. Adaptation family permissive-python-door-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a7a103e8899887ec153199f974e4050ca493cda73d31b7c64e562ebba60ab30e",
+          "id": "dragon-shape-opening-adjacency-core-1029-efd71c81",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Door.__init__",
+      "upstream_symbol_hash": "sha256:efd71c8161c4540503d2a0539dd30c3bf05109fa353292091035dec6b848bbde"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Shading.cs",
+        "source_sha256": "sha256:99b426d76894461ca1f29e41dfba08204ee43a72f6133f3588eedd7e79b3affd",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Shade"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Shade across exact A03: representative Shade optical values, derived emissivity and two fresh equal-valued native instances are pinned. Adaptation family permissive-python-shade-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:45b6423f0139944ee5c8cb4726894b9dc4585b05cdd343bddb24b830fe43c35f",
+          "id": "dragon-shape-opening-adjacency-core-1030-9404da04",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Shade",
+      "upstream_symbol_hash": "sha256:9404da043505f2d5bcd314f7a1ce2a994eaec9ba237a8d039f9c107bb97987a0"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Shading.cs",
+        "source_sha256": "sha256:99b426d76894461ca1f29e41dfba08204ee43a72f6133f3588eedd7e79b3affd",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Shade.Shade"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Shade.__init__ across exact A03 and A04: representative optical construction and the native excessive-sum rejection are pinned without accepting permissive Python invalid state or mutation. Adaptation family permissive-python-shade-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6d4294f2c7584ecee38272e92a20d323ba5d26bbe1b6cf488d5749dfdfc8c496",
+          "id": "dragon-shape-opening-adjacency-core-1031-f76ed298",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Shade.__init__",
+      "upstream_symbol_hash": "sha256:f76ed298cc435ea32d2c8b3631590e12fbb4b844e60af60e13aa517867b225b7"
     },
     {
       "implementation": {
@@ -6711,6 +6867,136 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Shading.cs",
+        "source_sha256": "sha256:99b426d76894461ca1f29e41dfba08204ee43a72f6133f3588eedd7e79b3affd",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.IShadingDevice"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Shading across exact A05: the exact non-instantiable native interface boundary and direct-activation MissingMethodException are pinned with no concrete shading closure. Adaptation family directly-instantiable-empty-python-shading classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:8b9e5ab60f25bf306e117d4df92ea08a784482435e73166da9ecdb52ab860bbc",
+          "id": "dragon-shape-opening-adjacency-core-1033-4dba9833",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Shading",
+      "upstream_symbol_hash": "sha256:4dba9833a4c24512afe7f0cc7566f8e89fa27a5c4b4d2be523a568dfa83d221c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs",
+        "source_sha256": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Surface.Surface"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface.__init__ across exact A10 and A11: distinct read-only default collections, defensive-copy behavior, exact mixed opening name order and count and source-list isolation are pinned; per-opening reference identity is not claimed. Adaptation family aliased-python-surface-opening-inputs classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4b3ebe4b809eb5da6aa98988847d7dff288a1fd3370583166b27b0210feb31ee",
+          "id": "dragon-shape-opening-adjacency-core-1035-ef349ef4",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface.__init__",
+      "upstream_symbol_hash": "sha256:ef349ef4b0a7bfcd1f47a297b0107d24018f5c4350b1765051948f2cfde5daa3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs",
+        "source_sha256": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Surface.Windows"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface.blinded_window across exact A12: the explicit nonnull-Shading filter over fresh Surface.Windows projections preserves exact projection and source name order, fresh collection and local-mutation isolation, and the separately captured authored Surface.Openings references and order; projected-item reference identity is not claimed. Adaptation family fresh-python-blinded-window-projection classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:69f056b8beb1e306a0c7ad7c83365a09e184365bb579bddfec8a349663b17d03",
+          "id": "dragon-shape-opening-adjacency-core-1039-f520fbfe",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface.blinded_window",
+      "upstream_symbol_hash": "sha256:f520fbfe3104ddbfa8f056b4c28908706faac3b0b333f46b19ff4a7366d73234"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceAdjacency.cs",
+        "source_sha256": "sha256:83d67c465446be31133fcd17d2e3cbbab9b6b320a28a3f2608ad55c99450fb59",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.SurfaceAdjacency.Match"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface.boundary across exact A13, A14, A15 and A16: SurfaceAdjacency.Match validation and fresh reciprocal-pair behavior, unlinked-zone, self and opening-count-mismatch rejection, unavailable stale in-place reassignment and captured source state are pinned. Ten exact counterpart-name links are separately observed through the legacy assembler context; Surface.to_idf_object remains context-only and untargeted. Adaptation family mutable-reciprocal-python-surface-adjacency classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:84d8d135700b571157f91ee6f2c3b9ae859d233d0dc5beadfd4eb16704174189",
+          "id": "dragon-shape-opening-adjacency-core-1040-7753d967",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface.boundary",
+      "upstream_symbol_hash": "sha256:7753d96736d6410917d1eb131f747db5f1e5538aa51e5f00bcf68ee34c084316"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs",
+        "source_sha256": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Surface.CreateCenteredSubsurface"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface.get_subsurface across exact finite numeric A17 and A18 inputs: correct square-root area scaling, exact four-unit polygon, result freshness, host preservation and finite-domain and oversized rejections are pinned. Native nonfinite-double rejection is recorded only as native context, while Python nonfinite and nonnumeric execution remains unresolved. Adaptation family legacy-linear-scale-subsurface-projection classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0705e84c47890ec56447c65eff16bb31d5340d79e19921ae7b985ecb037855b3",
+          "id": "dragon-shape-opening-adjacency-core-1042-7e43708d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface.get_subsurface",
+      "upstream_symbol_hash": "sha256:7e43708dfc08dc4b915a0fbb6ea3ebb1ee7b943031a60d12336e4fe3ed33e91f"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
         "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendConstructionsAndGeometry"
@@ -6734,6 +7020,214 @@
       ],
       "symbol": "Surface.to_idf_object",
       "upstream_symbol_hash": "sha256:a03c4d5229587498a9a3451a51c842e1f6df83e08ff5c42488a64959e384fece"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs",
+        "source_sha256": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.SurfaceBoundaryCondition"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition across exact A13: the four-member native definition order, PascalCase ToString values, EnergyPlus token mapping and invalid and unlinked-zone boundaries are pinned without raw-string equivalence. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:08ce2c6a908b36f58f12d985c5e38cb513acbae7176e30362366de85347ed0b0",
+          "id": "dragon-shape-opening-adjacency-core-1048-73a8b86f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SurfaceBoundaryCondition",
+      "upstream_symbol_hash": "sha256:73a8b86f663a2874b87c5c6f8ba801e5515095918422a1854e1acf157bb72fa7"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs",
+        "source_sha256": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.SurfaceBoundaryCondition.Adiabatic"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition.ADIABATIC across exact A13: the typed Adiabatic member, definition position, native ToString value and exact EnergyPlus Adiabatic token are pinned. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:71a4f989a069bbfa082ed1c95b6d592cb559164bbc3e59bbd3e4516acbd121b8",
+          "id": "dragon-shape-opening-adjacency-core-1049-1d0e3d46",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SurfaceBoundaryCondition.ADIABATIC",
+      "upstream_symbol_hash": "sha256:1d0e3d46c8e9ae9dec15e60e913ee94e01a3261bbae746ebfe9f71913eb08051"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs",
+        "source_sha256": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.SurfaceBoundaryCondition.Ground"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition.GROUND across exact A13: the typed Ground member, definition position, native ToString value and exact EnergyPlus Ground token are pinned. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:93821fe3c3d6a6237b2810173fd5930d7650eead430add543f323b70ec45cc48",
+          "id": "dragon-shape-opening-adjacency-core-1050-0992cbf6",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SurfaceBoundaryCondition.GROUND",
+      "upstream_symbol_hash": "sha256:0992cbf625fbf401fbc1229e59696a8fa65bc36efc11177322a8b181c329e410"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs",
+        "source_sha256": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.SurfaceBoundaryCondition.Outdoors"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition.OUTDOOR across exact A13: the typed plural Outdoors member, definition position, native ToString value and exact EnergyPlus Outdoors token are pinned. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:fa3365775b6703acd140afe11e50b9f546326dcb8b74d608086d15e6f3393b20",
+          "id": "dragon-shape-opening-adjacency-core-1051-8560160a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SurfaceBoundaryCondition.OUTDOOR",
+      "upstream_symbol_hash": "sha256:8560160a8415533fb8b2572a963112b6fef686482ffaacd99c461ea99fa30306"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs",
+        "source_sha256": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.SurfaceBoundaryCondition.Zone"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition.ZONE across exact A13: the typed Zone member, definition position, native ToString value, exact EnergyPlus Surface token and required adjacency identifier are pinned. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:ce75591156a712c29b635ee22f70387d62faee6d006cf41308a4649819ed6abc",
+          "id": "dragon-shape-opening-adjacency-core-1052-3ec06789",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SurfaceBoundaryCondition.ZONE",
+      "upstream_symbol_hash": "sha256:3ec06789fa4f783e94be2d46f5c31e90fdad2fac6641ea8097a304beba8e613e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.BuildingSurface"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition.__str__ across exact A13: the four PascalCase native display values and separate explicit Outdoors, Ground, Adiabatic and Surface engineering-token mapping are pinned without display-string equivalence. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:334050b16537ed04fbda77c181a7442d51c502b0d35014eedc670fd651e85786",
+          "id": "dragon-shape-opening-adjacency-core-1053-f40e4929",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SurfaceBoundaryCondition.__str__",
+      "upstream_symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Openings.cs",
+        "source_sha256": "sha256:4da15fd6ee228d471bc1a249abf23f7dbff5687ff0f1dabb9dc820b512aee494",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Window"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Window across exact A06: unshaded, Blind and Shade Window variants preserve exact order, selected areas and glazing and shading references through typed polygon-backed native state. Adaptation family permissive-python-window-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:19224d3273d70c3effeced094b414ca5df1fdb1316e39f9ba9f79236dd760c51",
+          "id": "dragon-shape-opening-adjacency-core-1081-af640a9a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Window",
+      "upstream_symbol_hash": "sha256:af640a9abfcfaae14201dbe8195aba06780027412da5ac3ffaf480d7bfe45b3b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Openings.cs",
+        "source_sha256": "sha256:4da15fd6ee228d471bc1a249abf23f7dbff5687ff0f1dabb9dc820b512aee494",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Window.Window"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Window.__init__ across exact A06 and A07: representative typed shading variants and observed invalid geometry and required-reference rejections are pinned without normalizing mutable scalar-area or foreign-reference Python objects. Adaptation family permissive-python-window-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:dc72750acd6bdc3c06076d2f61c0cd7e8b1ef02b5e7499c142a0142d1bc426d9",
+          "id": "dragon-shape-opening-adjacency-core-1082-3ce851bd",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/OpeningAdjacencyCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.OpeningAdjacencyCoreOracleParityTests.MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Window.__init__",
+      "upstream_symbol_hash": "sha256:3ce851bd512903617cce711c5883a4968e1e0ab7e275c2bb10d0b046532e7380"
     },
     {
       "implementation": {
@@ -7207,9 +7701,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 277,
-    "passed_receipt_count": 277,
-    "receipt_count": 277,
+    "entry_count": 296,
+    "passed_receipt_count": 296,
+    "receipt_count": 296,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

@@ -1025,26 +1025,34 @@
     "equivalent",
     "equivalent",
     "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "needs_reverification",
+    "exception",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "exception",
+    "exception",
+    "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "exception",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "exception",
     "needs_reverification",
     "needs_reverification",
@@ -1054,14 +1062,6 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "out_of_scope",
     "needs_reverification",
     "needs_reverification",
@@ -1081,8 +1081,8 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:1f0b46838a30518dd4a2ccd19f3cbf69606bf6a06f17d14a0c514e05d9773bf0",
+  "content_sha256": "sha256:6f134b37a2bf93e6cf8b61d9fa14062ff5cf015ff3cee46681b2566041304c83",
   "details": [
     {
       "evidence": [
@@ -4818,6 +4818,24 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-python-blind-state-75f7c91c",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1025-75f7c91c"
+      ],
+      "exception_id": "permissive-python-blind-state-75f7c91c",
+      "index": 1025,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Blind across exact A01: the representative six-value Blind state and two fresh equal-valued native instances are pinned. Adaptation family permissive-python-blind-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-python-blind-state-574e9b5a",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1026-574e9b5a"
+      ],
+      "exception_id": "permissive-python-blind-state-574e9b5a",
+      "index": 1026,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Blind.__init__ across exact A01 and A02: representative construction and the five exact native negative-width, zero-separation, angle-999, front-minus-0.2 and back-1.5 ArgumentOutOfRangeException boundaries are pinned. The later Python dynamic-mutation bundle is context only and no native mutation counterpart is claimed. Adaptation family permissive-python-blind-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#model-context-blind-shading-material-emission",
         "upstream/symbol-evidence.json#dragon-shape-blind-to-idf-object-16e27412"
       ],
@@ -4827,12 +4845,66 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-python-door-state-717d717a",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1028-717d717a"
+      ],
+      "exception_id": "permissive-python-door-state-717d717a",
+      "index": 1028,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Door across exact A08: representative Door name, construction reference, derived area and fresh native instances are pinned. Adaptation family permissive-python-door-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-python-door-state-efd71c81",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1029-efd71c81"
+      ],
+      "exception_id": "permissive-python-door-state-efd71c81",
+      "index": 1029,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Door.__init__ across exact A08 and A09: representative typed polygon construction and observed invalid geometry and required-reference rejections are pinned without normalizing mutable scalar-area Python objects. Adaptation family permissive-python-door-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-python-shade-state-9404da04",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1030-9404da04"
+      ],
+      "exception_id": "permissive-python-shade-state-9404da04",
+      "index": 1030,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Shade across exact A03: representative Shade optical values, derived emissivity and two fresh equal-valued native instances are pinned. Adaptation family permissive-python-shade-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-python-shade-state-f76ed298",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1031-f76ed298"
+      ],
+      "exception_id": "permissive-python-shade-state-f76ed298",
+      "index": 1031,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Shade.__init__ across exact A03 and A04: representative optical construction and the native excessive-sum rejection are pinned without accepting permissive Python invalid state or mutation. Adaptation family permissive-python-shade-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#model-context-shade-shading-material-emission",
         "upstream/symbol-evidence.json#dragon-shape-shade-to-idf-object-75e6c8e6"
       ],
       "exception_id": "model-context-shade-shading-material-emission",
       "index": 1032,
       "rationale": "Trusted cross-language evidence verifies Shade.to_idf_object across the exact three-case shading-material slice: all 15 ordered effective IDF fields, supplied and repeated optical values, computed emissivity, fixed constants, repeat-call freshness, unchanged source state, the exact private mapper and the public EnergyModel route for supported valid values. The observed excessive-sum emission and injected nonnumeric TypeError boundary are replaced by native constructor validation and typed exclusion without claiming every invalid permutation, standalone converter or mutable-list parity, constructors or classes, IdfObject behavior, Surface or WindowShadingControl conversion, or EnergyModel.to_idf; the shared None-to-blank rule is explicit although Shade has no None fields."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#directly-instantiable-empty-python-shading-4dba9833",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1033-4dba9833"
+      ],
+      "exception_id": "directly-instantiable-empty-python-shading-4dba9833",
+      "index": 1033,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Shading across exact A05: the exact non-instantiable native interface boundary and direct-activation MissingMethodException are pinned with no concrete shading closure. Adaptation family directly-instantiable-empty-python-shading classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#aliased-python-surface-opening-inputs-ef349ef4",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1035-ef349ef4"
+      ],
+      "exception_id": "aliased-python-surface-opening-inputs-ef349ef4",
+      "index": 1035,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.__init__ across exact A10 and A11: distinct read-only default collections, defensive-copy behavior, exact mixed opening name order and count and source-list isolation are pinned; per-opening reference identity is not claimed. Adaptation family aliased-python-surface-opening-inputs classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
     },
     {
       "evidence": [
@@ -4850,12 +4922,93 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#fresh-python-blinded-window-projection-f520fbfe",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1039-f520fbfe"
+      ],
+      "exception_id": "fresh-python-blinded-window-projection-f520fbfe",
+      "index": 1039,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.blinded_window across exact A12: the explicit nonnull-Shading filter over fresh Surface.Windows projections preserves exact projection and source name order, fresh collection and local-mutation isolation, and the separately captured authored Surface.Openings references and order; projected-item reference identity is not claimed. Adaptation family fresh-python-blinded-window-projection classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#mutable-reciprocal-python-surface-adjacency-7753d967",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1040-7753d967"
+      ],
+      "exception_id": "mutable-reciprocal-python-surface-adjacency-7753d967",
+      "index": 1040,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.boundary across exact A13, A14, A15 and A16: SurfaceAdjacency.Match validation and fresh reciprocal-pair behavior, unlinked-zone, self and opening-count-mismatch rejection, unavailable stale in-place reassignment and captured source state are pinned. Ten exact counterpart-name links are separately observed through the legacy assembler context; Surface.to_idf_object remains context-only and untargeted. Adaptation family mutable-reciprocal-python-surface-adjacency classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#legacy-linear-scale-subsurface-projection-7e43708d",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1042-7e43708d"
+      ],
+      "exception_id": "legacy-linear-scale-subsurface-projection-7e43708d",
+      "index": 1042,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.get_subsurface across exact finite numeric A17 and A18 inputs: correct square-root area scaling, exact four-unit polygon, result freshness, host preservation and finite-domain and oversized rejections are pinned. Native nonfinite-double rejection is recorded only as native context, while Python nonfinite and nonnumeric execution remains unresolved. Adaptation family legacy-linear-scale-subsurface-projection classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#legacy-rectangular-surface-idf-emission",
         "upstream/symbol-evidence.json#dragon-shape-surface-to-idf-object-a03c4d52"
       ],
       "exception_id": "legacy-rectangular-surface-idf-emission",
       "index": 1045,
       "rationale": "Trusted cross-language evidence verifies Surface.to_idf_object across the exact five-case legacy-rectangular model-context slice: all 23 Python target objects and all 2437 official EnergyPlus 24.2 IDD fields are classified as native values, 2103 compact trailing omissions across eight spans, 91 explicit lexical or bounded-roundoff differences, and one corrected custom AirBoundary reference. Reciprocal two-window and two-door links, ground and roof classification, geometry, shading, target relocation and order, two-call document/object/field freshness and byte determinism, and the bounded captured source state are pinned. Standalone mutable-list shape, child classes and converters, invalid/error behavior, the native default detailed-fenestration route, IdfObject policy, broader global ordering/deduplication/conflict behavior, uncaptured source state, and EnergyModel parent-assembly closure remain unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#lowercase-python-surface-boundary-enum-73a8b86f",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1048-73a8b86f"
+      ],
+      "exception_id": "lowercase-python-surface-boundary-enum-73a8b86f",
+      "index": 1048,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition across exact A13: the four-member native definition order, PascalCase ToString values, EnergyPlus token mapping and invalid and unlinked-zone boundaries are pinned without raw-string equivalence. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#lowercase-python-surface-boundary-enum-1d0e3d46",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1049-1d0e3d46"
+      ],
+      "exception_id": "lowercase-python-surface-boundary-enum-1d0e3d46",
+      "index": 1049,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition.ADIABATIC across exact A13: the typed Adiabatic member, definition position, native ToString value and exact EnergyPlus Adiabatic token are pinned. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#lowercase-python-surface-boundary-enum-0992cbf6",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1050-0992cbf6"
+      ],
+      "exception_id": "lowercase-python-surface-boundary-enum-0992cbf6",
+      "index": 1050,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition.GROUND across exact A13: the typed Ground member, definition position, native ToString value and exact EnergyPlus Ground token are pinned. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#lowercase-python-surface-boundary-enum-8560160a",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1051-8560160a"
+      ],
+      "exception_id": "lowercase-python-surface-boundary-enum-8560160a",
+      "index": 1051,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition.OUTDOOR across exact A13: the typed plural Outdoors member, definition position, native ToString value and exact EnergyPlus Outdoors token are pinned. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#lowercase-python-surface-boundary-enum-3ec06789",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1052-3ec06789"
+      ],
+      "exception_id": "lowercase-python-surface-boundary-enum-3ec06789",
+      "index": 1052,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition.ZONE across exact A13: the typed Zone member, definition position, native ToString value, exact EnergyPlus Surface token and required adjacency identifier are pinned. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#lowercase-python-surface-boundary-enum-f40e4929",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1053-f40e4929"
+      ],
+      "exception_id": "lowercase-python-surface-boundary-enum-f40e4929",
+      "index": 1053,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceBoundaryCondition.__str__ across exact A13: the four PascalCase native display values and separate explicit Outdoors, Ground, Adiabatic and Surface engineering-token mapping are pinned without display-string equivalence. Adaptation family lowercase-python-surface-boundary-enum classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
     },
     {
       "evidence": [
@@ -4877,6 +5030,24 @@
       ],
       "index": 1069,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-python-window-state-af640a9a",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1081-af640a9a"
+      ],
+      "exception_id": "permissive-python-window-state-af640a9a",
+      "index": 1081,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Window across exact A06: unshaded, Blind and Shade Window variants preserve exact order, selected areas and glazing and shading references through typed polygon-backed native state. Adaptation family permissive-python-window-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-python-window-state-3ce851bd",
+        "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1082-3ce851bd"
+      ],
+      "exception_id": "permissive-python-window-state-3ce851bd",
+      "index": 1082,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Window.__init__ across exact A06 and A07: representative typed shading variants and observed invalid geometry and required-reference rejections are pinned without normalizing mutable scalar-area or foreign-reference Python objects. Adaptation family permissive-python-window-state classifies the observed Python/native difference explicitly; no broader class, converter, invalid-domain, source-graph or parent-emission closure is claimed."
     },
     {
       "evidence": [
@@ -5244,8 +5415,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 133,
-      "exception": 144,
-      "needs_reverification": 713,
+      "exception": 163,
+      "needs_reverification": 694,
       "out_of_scope": 252
     },
     "entry_count": 1242

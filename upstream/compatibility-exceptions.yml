@@ -2108,3 +2108,269 @@
     api_contract: callers place typed validated geometry in an EnergyModel and use the legacy rectangular fenestration option; compact parent-model assembly replaces the standalone mutable Python list, and neither a standalone native Surface converter nor mutable-list-shape parity is claimed
     compatibility_evidence: all five exact cases, public and private native bindings, official-IDD field positions and extensibles, two-call document/object/field freshness and byte determinism, and unchanged captured reference identities plus selected names, surface types, boundary/adjacency, surface vertices and opening areas remain required; child classes and converters, invalid/error behavior, the default detailed fenestration route, IdfObject policy, broader global ordering/deduplication/conflict behavior, broader source state, and EnergyModel parent-assembly closure remain unresolved
   approval: accepted-native-api-adaptation
+
+- id: permissive-python-blind-state-75f7c91c
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Blind
+    symbol_hash: sha256:75f7c91c526ca8c2a86f7a984fa2007d17e94a8a3e38a6a80ffa6a7af37cd36b
+  difference:
+    upstream: exposes a dynamically mutable Blind state object whose unchecked invalid and post-construction mutation behavior is evidenced separately at its constructor target
+    dotnet: exposes a sealed typed Blind record with validated constructor inputs and immutable selected state
+  effect:
+    engineering_result: A01 preserves the representative name, slat width, separation, angle and front and back reflectances with fresh equal-valued native instances
+    api_contract: callers use the typed validated Blind record; Python dynamic mutation and unchecked invalid state are not accepted as native successes
+    compatibility_evidence: only A01 class construction, the six selected values, two-call fresh instance behavior and equal values are required; constructor rejection coverage, properties, equality, hashing, invalid-state closure and Blind.to_idf_object remain separately targeted or unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-python-blind-state-574e9b5a
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Blind.__init__
+    symbol_hash: sha256:574e9b5ab31178c6d64eaeb70e19e3a434448c712cf2d8459bfdc36704047eee
+  difference:
+    upstream: A02 construction accepts the exact negative width, zero separation, angle 999, front reflectance -0.2 and back reflectance 1.5 values; later dynamic attribute mutation is observed only as Python context
+    dotnet: the typed Blind constructor rejects each of those five exact A02 inputs with ArgumentOutOfRangeException and exposes get-only selected state
+  effect:
+    engineering_result: A01 preserves every representative constructor value while A02 pins five exact native ArgumentOutOfRangeException boundaries instead of treating those permissive Python construction results as equivalent
+    api_contract: callers provide values within the typed Blind constructor domains and receive get-only state; no native counterpart claim is made for the later Python dynamic-mutation bundle
+    compatibility_evidence: exactly A01 and A02, representative values, fresh equal-valued instances and the five exact negative-width, zero-separation, angle-999, front-minus-0.2 and back-1.5 native rejections remain required; blank, nonnumeric and nonfinite inputs, the Python post-mutation bundle, every other invalid combination, properties, equality, hashing and IDF emission remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-python-door-state-717d717a
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Door
+    symbol_hash: sha256:717d717ab0c24c7d2900081f9853e5b1670c8f37731d3076410b3401718e59b9
+  difference:
+    upstream: exposes a mutable area-based Door object with permissive references and state
+    dotnet: exposes a typed immutable Door record whose area is derived from a validated polygon and whose construction and identity are required
+  effect:
+    engineering_result: A08 preserves the representative name, construction reference and area with fresh equal-valued native instances
+    api_contract: callers provide typed identity, construction and planar polygon inputs instead of a mutable scalar-area object
+    compatibility_evidence: only A08 class construction, selected name, construction and area, reference preservation and two-call freshness are required; constructor invalid cases, properties, equality, hashing and Door.to_idf_object remain separately targeted or unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-python-door-state-efd71c81
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Door.__init__
+    symbol_hash: sha256:efd71c8161c4540503d2a0539dd30c3bf05109fa353292091035dec6b848bbde
+  difference:
+    upstream: accepts negative, nonfinite and mutable scalar area state plus foreign construction references
+    dotnet: the typed Door constructor requires identity, text, construction and a validated finite planar polygon and derives area from geometry
+  effect:
+    engineering_result: A08 preserves the representative Door state while A09 pins native rejection of invalid geometry and required references rather than normalizing permissive Python invalid objects
+    api_contract: callers construct a Door from validated polygon geometry; direct mutable scalar-area and foreign-reference behavior is unavailable
+    compatibility_evidence: exactly A08 and A09, representative state, selected reference identity and observed native invalid-input exception boundaries remain required; arbitrary duck types, all invalid geometry, properties, equality, hashing and IDF emission remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-python-shade-state-9404da04
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Shade
+    symbol_hash: sha256:9404da043505f2d5bcd314f7a1ce2a994eaec9ba237a8d039f9c107bb97987a0
+  difference:
+    upstream: exposes a dynamically mutable Shade state object without enforcing its optical domain
+    dotnet: exposes a sealed typed Shade record with validated transmittance and reflectance and derived emissivity
+  effect:
+    engineering_result: A03 preserves representative name, transmittance, reflectance and derived emissivity with fresh equal-valued native instances
+    api_contract: callers use a typed immutable Shade whose optical values lie in the supported unit domain
+    compatibility_evidence: only A03 class construction, selected optical values, derived emissivity and two-call freshness are required; constructor invalid cases, properties, equality, hashing and Shade.to_idf_object remain separately targeted or unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-python-shade-state-f76ed298
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Shade.__init__
+    symbol_hash: sha256:f76ed298cc435ea32d2c8b3631590e12fbb4b844e60af60e13aa517867b225b7
+  difference:
+    upstream: accepts out-of-range and excessive optical sums and permits later mutation
+    dotnet: the typed Shade constructor validates required text, unit-range values and a transmittance-plus-reflectance sum no greater than one and exposes immutable state
+  effect:
+    engineering_result: A03 preserves representative optical state while A04 pins the native ArgumentException boundary for excessive optical sums rather than claiming invalid Python equivalence
+    api_contract: callers provide valid Shade optics and cannot mutate the record after construction
+    compatibility_evidence: exactly A03 and A04, representative state, derived emissivity, fresh equal-valued instances and the observed excessive-sum rejection remain required; arbitrary invalid inputs, properties, equality, hashing and IDF emission remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: directly-instantiable-empty-python-shading-4dba9833
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Shading
+    symbol_hash: sha256:4dba9833a4c24512afe7f0cc7566f8e89fa27a5c4b4d2be523a568dfa83d221c
+  difference:
+    upstream: declares an empty nominal ABC that can be instantiated directly and carries no abstract methods
+    dotnet: represents the shading boundary as the non-instantiable typed IShadingDevice interface implemented by Blind and Shade
+  effect:
+    engineering_result: none is claimed for standalone shading behavior; A05 pins the intentional interface boundary and MissingMethodException from direct activation
+    api_contract: callers supply a concrete Blind or Shade instead of constructing an empty base Shading object
+    compatibility_evidence: only A05, the exact interface declaration and direct-instantiation rejection are required; interface member closure, concrete shading behavior, constructors, IDF converters and parent emission remain separately targeted or unresolved
+  approval: accepted-native-api-adaptation
+
+- id: aliased-python-surface-opening-inputs-ef349ef4
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface.__init__
+    symbol_hash: sha256:ef349ef4b0a7bfcd1f47a297b0107d24018f5c4350b1765051948f2cfde5daa3
+  difference:
+    upstream: retains separate mutable window and door input lists, including shared mutable defaults, so later list mutations are visible through constructed surfaces
+    dotnet: the Surface constructor defensively copies one ordered mixed opening sequence into a distinct read-only collection
+  effect:
+    engineering_result: A10 pins distinct empty native collections and rejected mutation, while A11 preserves the authored mixed opening name order and count and isolates the surface from later source-list additions
+    api_contract: callers provide one typed opening sequence and receive stable read-only surface membership instead of aliased window and door lists
+    compatibility_evidence: exactly A10 and A11, collection identity, counts, mixed name order, defensive-copy and source-list isolation behavior and NotSupportedException mutation boundaries remain required; per-opening reference identity, the Surface class, other properties, validation, mutation helpers and all parent emission remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: fresh-python-blinded-window-projection-f520fbfe
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface.blinded_window
+    symbol_hash: sha256:f520fbfe3104ddbfa8f056b4c28908706faac3b0b333f46b19ff4a7366d73234
+  difference:
+    upstream: returns a new mutable projection list of windows carrying truthy shading state on every property access
+    dotnet: Surface.Windows returns a fresh read-only window projection and callers explicitly filter Window.Shading for the equivalent bounded selection
+  effect:
+    engineering_result: A12 preserves the exact Blind 1, Shade, Blind 2 projection order, fresh projection isolation and the complete source-window order
+    api_contract: callers compose the typed Windows projection with a nonnull Shading filter instead of using a dedicated blinded_window property
+    compatibility_evidence: only A12, its five source windows, exact three-item projection order, fresh collection and local-mutation isolation behavior, complete source order and the separately captured authored Surface.Openings references and order are required; projected-item reference identity, arbitrary truthiness, source mutation, all collection operations, Window and shading class closure and emission remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: mutable-reciprocal-python-surface-adjacency-7753d967
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface.boundary
+    symbol_hash: sha256:7753d96736d6410917d1eb131f747db5f1e5538aa51e5f00bcf68ee34c084316
+  difference:
+    upstream: a boundary setter mutates reciprocal links in place, permits unlinked zone, stale reassignment and self links, and parent emission positionally truncates unequal opening lists
+    dotnet: immutable SurfaceBoundary values and SurfaceAdjacency.Match validate and return fresh reciprocal surfaces, rejecting unlinked zone, self adjacency and unequal opening counts while making stale in-place reassignment unavailable; the legacy assembler separately links valid interzone counterpart names by geometry
+  effect:
+    engineering_result: A13 through A16 pin enum-to-IDF boundary tokens, valid reciprocal identifiers, preserved original boundaries, rejection of unlinked zone, self adjacency and mismatched counts, prevention of stale in-place mutation through fresh pairs, plus ten exact assembler-produced reciprocal links in legacy parent context
+    api_contract: callers validate and obtain a fresh SurfaceAdjacencyPair instead of assigning a mutable boundary property; the A16 legacy document is context only
+    compatibility_evidence: exactly A13, A14, A15 and A16, selected boundary and opening reference state, Match validation and fresh-pair behavior, diagnostics and exceptions, separately observed assembler counterpart links and two-call legacy context determinism and document/object freshness remain required; Surface.to_idf_object is not targeted, positional truncation is not normalized, broader model emission, fields, child converters and uncaptured source state remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: legacy-linear-scale-subsurface-projection-7e43708d
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface.get_subsurface
+    symbol_hash: sha256:7e43708dfc08dc4b915a0fbb6ea3ebb1ee7b943031a60d12336e4fe3ed33e91f
+  difference:
+    upstream: in the observed finite numeric A17 and A18 inputs, scales vertices by target-area divided by host-area, producing squared-area distortion, accepts equal, zero and negative targets, and rejects the oversized target with ValueError
+    dotnet: Surface.CreateCenteredSubsurface uses the square root of the area ratio and rejects nonpositive, equal, oversized and nonfinite double targets with ArgumentOutOfRangeException
+  effect:
+    engineering_result: A17 pins the corrected four-square-unit geometry, area and fresh result collections and A18 pins repeatable oversized rejection without treating the upstream linear-scale defect as equivalent
+    api_contract: callers request a finite positive target area strictly smaller than the host and receive a validated PlanarPolygon rather than a mutable vertex list
+    compatibility_evidence: exactly A17 and A18, selected vertices and area, two-call result collection freshness and value determinism, six native double-domain rejections, repeated oversized exception state and captured host polygon reference and coordinates remain required; Python nonfinite and nonnumeric execution and arithmetic error timing remain explicitly unresolved
+  approval: accepted-native-api-adaptation
+
+- id: lowercase-python-surface-boundary-enum-73a8b86f
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: SurfaceBoundaryCondition
+    symbol_hash: sha256:73a8b86f663a2874b87c5c6f8ba801e5515095918422a1854e1acf157bb72fa7
+  difference:
+    upstream: defines a string-valued enum with OUTDOOR, GROUND, ADIABATIC and ZONE names and lowercase values and permits an unlinked zone state outside the enum itself
+    dotnet: defines the typed Outdoors, Ground, Adiabatic and Zone enum and represents link validity separately through SurfaceBoundary
+  effect:
+    engineering_result: A13 preserves the four-way definition order and maps each condition to the verified EnergyPlus Outdoors, Ground, Adiabatic or Surface token
+    api_contract: native enum member names use .NET casing and zone adjacency requires a SurfaceBoundary identifier
+    compatibility_evidence: only A13 enum order, names, ToString observations, IDF boundary mapping and invalid/unlinked boundary exceptions are required; raw-string equality, arbitrary conversion, all enum runtime semantics, surface emission and adjacency closure remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: lowercase-python-surface-boundary-enum-1d0e3d46
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: SurfaceBoundaryCondition.ADIABATIC
+    symbol_hash: sha256:1d0e3d46c8e9ae9dec15e60e913ee94e01a3261bbae746ebfe9f71913eb08051
+  difference:
+    upstream: exposes the string-enum member ADIABATIC with lowercase value adiabatic
+    dotnet: exposes SurfaceBoundaryCondition.Adiabatic and maps it explicitly to the EnergyPlus Adiabatic token
+  effect:
+    engineering_result: A13 preserves the adiabatic boundary engineering meaning despite identifier and string casing differences
+    api_contract: callers use the typed PascalCase enum member and explicit model mapping rather than raw lowercase string equality
+    compatibility_evidence: only A13 member identity within the four-member order, native ToString value and exact IDF token are required; other enum behavior, surfaces and parent emission remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: lowercase-python-surface-boundary-enum-0992cbf6
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: SurfaceBoundaryCondition.GROUND
+    symbol_hash: sha256:0992cbf625fbf401fbc1229e59696a8fa65bc36efc11177322a8b181c329e410
+  difference:
+    upstream: exposes the string-enum member GROUND with lowercase value ground
+    dotnet: exposes SurfaceBoundaryCondition.Ground and maps it explicitly to the EnergyPlus Ground token
+  effect:
+    engineering_result: A13 preserves the ground boundary engineering meaning despite identifier and string casing differences
+    api_contract: callers use the typed PascalCase enum member and explicit model mapping rather than raw lowercase string equality
+    compatibility_evidence: only A13 member identity within the four-member order, native ToString value and exact IDF token are required; other enum behavior, surfaces and parent emission remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: lowercase-python-surface-boundary-enum-8560160a
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: SurfaceBoundaryCondition.OUTDOOR
+    symbol_hash: sha256:8560160a8415533fb8b2572a963112b6fef686482ffaacd99c461ea99fa30306
+  difference:
+    upstream: exposes the singular string-enum member OUTDOOR with lowercase value outdoors
+    dotnet: exposes SurfaceBoundaryCondition.Outdoors and maps it explicitly to the EnergyPlus Outdoors token
+  effect:
+    engineering_result: A13 preserves the outdoors boundary engineering meaning despite singular and casing differences
+    api_contract: callers use the typed plural PascalCase enum member and explicit model mapping rather than raw lowercase string equality
+    compatibility_evidence: only A13 member identity within the four-member order, native ToString value and exact IDF token are required; other enum behavior, surfaces and parent emission remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: lowercase-python-surface-boundary-enum-3ec06789
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: SurfaceBoundaryCondition.ZONE
+    symbol_hash: sha256:3ec06789fa4f783e94be2d46f5c31e90fdad2fac6641ea8097a304beba8e613e
+  difference:
+    upstream: exposes the string-enum member ZONE and permits a zone condition before any adjacent surface link exists
+    dotnet: exposes SurfaceBoundaryCondition.Zone but SurfaceBoundary requires an adjacent surface identifier and maps it to the EnergyPlus Surface token
+  effect:
+    engineering_result: A13 preserves interzone boundary meaning and the emitted Surface token while rejecting an unlinked zone boundary
+    api_contract: callers pair the typed Zone member with a valid adjacent surface identifier through SurfaceBoundary
+    compatibility_evidence: only A13 member identity within the four-member order, native ToString value, exact IDF token and unlinked-zone rejection are required; reciprocal adjacency is targeted separately and broader surface emission remains unresolved
+  approval: accepted-native-api-adaptation
+
+- id: lowercase-python-surface-boundary-enum-f40e4929
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: SurfaceBoundaryCondition.__str__
+    symbol_hash: sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e
+  difference:
+    upstream: string conversion returns lowercase EnergyPlus-adjacent values directly from a str enum
+    dotnet: default enum ToString returns PascalCase member names while EnergyModelIdfAssembler.BuildingSurface performs the explicit EnergyPlus token mapping
+  effect:
+    engineering_result: A13 preserves exact Outdoors, Ground, Adiabatic and Surface IDF boundary tokens without claiming raw display-string equivalence
+    api_contract: display strings and engineering serialization are distinct native operations
+    compatibility_evidence: only A13 four-member ToString observations and explicit BuildingSurface mapping are required; general formatting, parsing, raw-string equality, other fields and parent emission closure remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-python-window-state-af640a9a
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Window
+    symbol_hash: sha256:af640a9abfcfaae14201dbe8195aba06780027412da5ac3ffaf480d7bfe45b3b
+  difference:
+    upstream: exposes a mutable area-based Window object accepting arbitrary glazing and shading references
+    dotnet: exposes a typed immutable Window record whose area is derived from validated polygon geometry and whose glazing and optional shading are typed
+  effect:
+    engineering_result: A06 preserves unshaded, Blind and Shade variants, exact order, selected areas and glazing and shading references
+    api_contract: callers provide typed identity, glazing, planar polygon and optional IShadingDevice rather than a mutable scalar-area object
+    compatibility_evidence: only A06 class construction and the three representative shading variants are required; constructor invalid cases, properties, equality, hashing and Window.to_idf_object remain separately targeted or unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-python-window-state-3ce851bd
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Window.__init__
+    symbol_hash: sha256:3ce851bd512903617cce711c5883a4968e1e0ab7e275c2bb10d0b046532e7380
+  difference:
+    upstream: accepts negative and nonfinite scalar areas, foreign glazing and shading references and later attribute mutation
+    dotnet: the typed Window constructor requires identity, text, Glazing and validated finite planar polygon inputs and derives area from geometry
+  effect:
+    engineering_result: A06 preserves representative unshaded, Blind and Shade state while A07 pins native rejection of invalid geometry and required references rather than normalizing permissive Python invalid objects
+    api_contract: callers construct an immutable Window from typed validated geometry; arbitrary duck-typed references and scalar-area mutation are unavailable
+    compatibility_evidence: exactly A06 and A07, representative shading order and references plus observed native invalid-input exception boundaries remain required; arbitrary dynamic inputs, all invalid geometry, properties, equality, hashing and IDF emission remain unresolved
+  approval: accepted-native-api-adaptation
