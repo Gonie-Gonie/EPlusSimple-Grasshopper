@@ -53,6 +53,11 @@
       "sha256": "ffa9805fd16847484195eb001cb7530c718554d13db40f811f7fa1242c020355"
     },
     {
+      "path": "dragon-hvac-photovoltaic-to-idf-object-oracle.json",
+      "bytes": 147261,
+      "sha256": "07c383c316989ccb22ac3eadcf9d8388764f76effbbf03c13b7a54f8af20f22b"
+    },
+    {
       "path": "dragon-hvac-supply-group-core-oracle.json",
       "bytes": 31163,
       "sha256": "320ac62b8b9eccc9d4053a6b5ceb6fa3e825c329d1ac3d10f4c8c5cd89f0c092"

@@ -52,6 +52,20 @@ three-member iteration, representative engineering products, and the 107 W
 default people-activity field. Six members are exact equivalents and the two
 Python enum containers are reviewed native API adaptations.
 
+`python-0.7.0/dragon-hvac-photovoltaic-to-idf-object-oracle.json` pins three
+ordered CPython 3.12.7 observations for `PhotoVoltaicPanel.to_idf_object` on
+the common valid constructor domain. It records the exact six-object family
+order, complete allowed-field order and values, fresh list/object topology,
+square-panel side length derived from `sqrt(area)`, default and custom
+effective-area ratios, and cross-object names at tilt/azimuth boundaries and
+unit efficiency/ratio values. The
+reviewed `compact-native-photovoltaic-idf-emission` mapping targets
+`PhotovoltaicPanel.ToIdfObjects`, preserving populated and default semantics
+while omitting trailing blank/default native fields. The class and constructor,
+property-validation order and errors, invalid or nonfinite domain state,
+isolated `IdfObject` policy, and parent `EnergyModel.to_idf` remain explicit
+unresolved boundaries.
+
 `python-0.7.0/dragon-hvac-supply-group-core-oracle.json` pins 18 ordered
 CPython 3.12.7 observations, three each for the six bounded public
 `SupplyGroup` constructor and container-projection symbols. It records exact
