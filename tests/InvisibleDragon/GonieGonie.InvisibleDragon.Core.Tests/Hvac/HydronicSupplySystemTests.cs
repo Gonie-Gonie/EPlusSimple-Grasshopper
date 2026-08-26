@@ -155,8 +155,8 @@ public sealed class HydronicSupplySystemTests
         string boilerName = $"Boiler_named_NonUsedBoiler_for_{equipmentName}";
         IdfObject boiler = document["Boiler:HotWater"][boilerName];
         Assert.Equal("Coal", boiler[1]);
-        Assert.Equal("1E-10", boiler[2]);
-        Assert.Equal("1E-10", boiler[3]);
+        Assert.Equal("1e-10", boiler[2]);
+        Assert.Equal("1e-10", boiler[3]);
         Assert.Equal("LeavingBoiler", boiler[4]);
         Assert.Equal("autosize", boiler[6]);
         Assert.Equal("0", boiler[7]);
@@ -220,7 +220,7 @@ public sealed class HydronicSupplySystemTests
 
     [Theory]
     [InlineData(null, "autosize")]
-    [InlineData(6500d, "6500")]
+    [InlineData(6500d, "6500.0")]
     public void HydronicRadiatorExportsAutosizedOrExplicitCapacity(
         double? heatingCapacityWatts,
         string expectedCapacity)
@@ -272,7 +272,7 @@ public sealed class HydronicSupplySystemTests
             });
 
         IdfObject design = Assert.Single(document["ZoneHVAC:Baseboard:RadiantConvective:Water:Design"]);
-        Assert.Equal("0", design[5]);
+        Assert.Equal("0.0", design[5]);
         Assert.Equal(string.Empty, design[6]);
         IdfObject terminal = Assert.Single(document["ZoneHVAC:Baseboard:RadiantConvective:Water"]);
         Assert.Equal(9, terminal.Count);
@@ -309,7 +309,7 @@ public sealed class HydronicSupplySystemTests
         IdfObject terminal = Assert.Single(document["ZoneHVAC:Baseboard:RadiantConvective:Water"]);
         Assert.Equal(11, terminal.Count);
         Assert.Equal(zone.Surfaces[0].Name, terminal[9]);
-        Assert.Equal("1", terminal[10]);
+        Assert.Equal("1.0", terminal[10]);
     }
 
     [IddSchemaOracleTests.EnergyPlusIddIntegrationFact]
@@ -447,7 +447,7 @@ public sealed class HydronicSupplySystemTests
 
     [Theory]
     [InlineData(null, "autosize")]
-    [InlineData(4200d, "4200")]
+    [InlineData(4200d, "4200.0")]
     public void ElectricRadiatorRetainsCapacityAndEnergyInputParameters(
         double? heatingCapacityWatts,
         string expectedCapacity)
@@ -496,7 +496,7 @@ public sealed class HydronicSupplySystemTests
         Assert.Equal(9, native.Count);
         Assert.Equal("0", native[8]);
         Assert.Equal(8, legacy.Count);
-        Assert.Equal("0", legacy[7]);
+        Assert.Equal("0.0", legacy[7]);
     }
 
     [Fact]

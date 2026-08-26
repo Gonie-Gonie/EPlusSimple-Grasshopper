@@ -179,7 +179,7 @@ public sealed class EnergyModelConditioningTests
         IdfObject emittedAvailability = Assert.Single(
             document["Schedule:Compact"],
             item => item.Name == profileAvailability.Name);
-        Assert.Contains(emittedAvailability.Fields, field => field.Value == "0");
+        Assert.Contains(emittedAvailability.Fields, field => field.Value == "0.0");
     }
 
     private static ZoneHvacAssignment Assignment(

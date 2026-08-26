@@ -70,8 +70,8 @@ public sealed class ZoneCoreOracleParityTests
             "sha256:99c3e0557ba737aa74cfb0f15faf0730d9f7215a6b66f7f6b6b2044cf4013c72"),
         new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_582,
             "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"),
-        new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs", 18_026,
-            "sha256:b7889501a3f42dd455902edd711cea80e2f729b06cdb8d0357ec3f90136af64e"),
+        new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs", 18_027,
+            "sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e"),
         new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SupplySystems.cs", 18_267,
             "sha256:4de030455a8a1b8db0ca4eca7745c6501930c984f9d1e156e17cb0b752d845cf"),
         new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs", 13_182,
@@ -290,14 +290,14 @@ public sealed class ZoneCoreOracleParityTests
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:0a8e3c4a13829403a767b44e261874a5474efcd68a45690d82d9ef7390c6a9b3",
-        "sha256:981c4ce3873cc1f2a318798c5c17acf4930c1dc22d62030ea867d266b2066323",
-        "sha256:03ac624fcb7cab7c9747dae4110451bb050787739d64c531c1020551cb599c88",
-        "sha256:27e26141d68464f70c03765f293ee32f249eeaef215d22295bcf64397148f214",
-        "sha256:09948bfe118818e91b075083c372b79e6ba897ad914e3b294023ca4549851d57",
-        "sha256:535e3cdeaf89f909847737d3c3ee01d4e1472dca2d3d753ade3e4d9e01e8490b",
-        "sha256:b42ff0074cb2373baf4b5e50eabb52a10e9a1f035b1d26504b46c6e8c8d0496a",
-        "sha256:c4a3dfe679378e960361262fc322ce34960c2d32f2f8bf21f41f9f6ce987ccae",
+        "sha256:f21dfce2129fa58635ab4896c2afa35000f3195f7a9719f7cee51585ffc6267d",
+        "sha256:bf2ebcea57e49f729552672b68dc91fc902853f4a08c4683675f2e14ee56d89d",
+        "sha256:bcc83acaa516b9f2a9b50c3aab4bb77a9b9385bd9e80903b4b8a44f711bf27ce",
+        "sha256:e9c5f87781baeef940dbcf06978893b6ae84d1ed661ba4df8351b9fc807661f0",
+        "sha256:cdce413a7abd467883aa51e8af549838f2e9ffba875fa6cd501ca0b7e4aa9270",
+        "sha256:678949cffd20083ab71304632aae0b7e945cc9dea7862d574967b585fcc5de57",
+        "sha256:ee3e42bf7b7b071d2225df831cce93f7316e7e4f576535c229aa94e9552f4468",
+        "sha256:4c673a4f89ae77fea63d764db40ab8edccd65b079babe97e72a0306e2e79c2f7",
     };
 
     [Fact]

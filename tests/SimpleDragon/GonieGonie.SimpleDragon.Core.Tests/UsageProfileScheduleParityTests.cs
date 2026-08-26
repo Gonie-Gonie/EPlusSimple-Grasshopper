@@ -1,5 +1,5 @@
-using System.Globalization;
 using System.Text.Json;
+using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Model;
 using DragonSchedule = GonieGonie.InvisibleDragon.Profile.Schedule;
@@ -88,11 +88,11 @@ public sealed class UsageProfileScheduleParityTests
 
         IdfObject people = Assert.Single(idf["People"]);
         Assert.Equal(
-            expected.OccupancyDensity.ToString("R", CultureInfo.InvariantCulture),
+            InvariantText.FormatPythonFloat(expected.OccupancyDensity),
             people[5]);
         IdfObject equipment = Assert.Single(idf["ElectricEquipment"]);
         Assert.Equal(
-            expected.EquipmentPowerDensity.ToString("R", CultureInfo.InvariantCulture),
+            InvariantText.FormatPythonFloat(expected.EquipmentPowerDensity),
             equipment[5]);
     }
 

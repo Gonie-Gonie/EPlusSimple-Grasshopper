@@ -596,13 +596,13 @@ public sealed class ConstantsEngineeringOracleParityTests
                 document["Schedule:Constant"],
                 item => item.Name == "$DEFAULT$PEOPLEACTIVITY");
             IdfObject ventilation = Assert.Single(document["ZoneVentilation:DesignFlowRate"]);
-            Assert.Equal("107", activity[2]);
+            Assert.Equal("107.0", activity[2]);
             Assert.Equal("Flow/Person", ventilation[3]);
             Assert.Equal("0.0083", ventilation[6]);
             return new[]
             {
                 "native-idf-object=Schedule:Constant",
-                "native-idf-activity=107",
+                "native-idf-activity=107.0",
                 "native-ventilation-flow-per-person=0.0083",
             };
         }

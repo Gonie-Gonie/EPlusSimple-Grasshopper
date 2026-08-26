@@ -79,7 +79,7 @@ public class HeatPump : SourceSystem
             IdfGenerationContext.Field(1, "Availability Schedule Name", "ALLON"),
             IdfGenerationContext.Field(2, "Gross Rated Total Cooling Capacity", CoolingCapacityWatts ?? (object)"autosize"),
             IdfGenerationContext.Field(3, "Gross Rated Cooling COP", CoolingCoefficientOfPerformance),
-            IdfGenerationContext.Field(4, "Minimum Outdoor Temperature in Cooling Mode", -6),
+            IdfGenerationContext.Field(4, "Minimum Outdoor Temperature in Cooling Mode", -6d),
             IdfGenerationContext.Field(5, "Maximum Outdoor Temperature in Cooling Mode", 43),
             IdfGenerationContext.Field(8, "Cooling Capacity Ratio Modifier Function of Low Temperature Curve Name", Curve("CoolingCapaMF_LowTemp")),
             IdfGenerationContext.Field(9, "Cooling Capacity Ratio Boundary Curve Name", Curve("CoolingCapaBoundary")),

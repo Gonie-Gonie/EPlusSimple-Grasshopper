@@ -98,7 +98,7 @@ public sealed class SurfaceToIdfObjectOracleParityTests
         WriteIndented = true,
     };
     private const string ReceiptSha256 =
-        "sha256:ce5d885ad999e85e029d8be3576f70c2762ed0d034eec18463669d7cc2761670";
+        "sha256:7976d445b4680e73f8beef0304bb16e0bb87d375ea9567b9ebf1fcad7fde7ed4";
 
     private static readonly string[] SelectedObjectTypes =
     {
@@ -122,10 +122,10 @@ public sealed class SurfaceToIdfObjectOracleParityTests
             new NativePin(
                 21,
                 new[] { 23 },
-                new[] { 348, 1, 12, 1 },
-                "sha256:51ecffe252f3a013e68ca568ae0adbb597ddef11d9bda154e4b3e27fa7498d27",
-                "sha256:995d202d5ccb0b74c26ca80e556984a06016b85988ea74625fd548dade8a00b3",
-                "sha256:d6efd00e2d8c01a07b587d47b4635b27b0a3173db7291af69ee8bd2349128163",
+                new[] { 348, 1, 0, 1 },
+                "sha256:7c66b450ad379eac6c50ce3e437c5447380a32919a1801bb584d64f7732726c4",
+                "sha256:d03bf0a31c1b3af4bb428d2693ab1e4b21f62d78b3c2ff17d211bc65392b4fe7",
+                "sha256:02e0cbed24a78bdd03a9d9b7176cc30454d796b47df303adc6f216f84c98bf50",
                 new[] { "BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling" },
                 new[]
                 {
@@ -136,18 +136,6 @@ public sealed class SurfaceToIdfObjectOracleParityTests
                 new[]
                 {
                     "omit|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|23-370|native-compact-trailing-None",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|11|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|12|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|13|3.0|3|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|14|5.0|5|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|15|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|16|3.0|3|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|17|5.0|5|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|18|4.0|4|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|19|3.0|3|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|20|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|21|4.0|4|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|22|3.0|3|numeric-lexical-format-only",
                     "value|BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling|2|DefaultAirBoundary|Custom Transfer Air Boundary|native-correct-custom-AirBoundary-reference-versus-upstream-dangling-DefaultAirBoundary",
                 })),
         new(
@@ -158,10 +146,10 @@ public sealed class SurfaceToIdfObjectOracleParityTests
             new NativePin(
                 22,
                 new[] { 26 },
-                new[] { 345, 1, 15, 0 },
-                "sha256:ac57619ecf7cba7bb81a5d7f3886a583b0d975ad7f4b6ff4f8919f38f0ee1882",
-                "sha256:5c6db733ff4bfda5a57d100a2e02e1562f444d7dc8fb472d650e4be779978f68",
-                "sha256:e7c996b04766f709b3dd52b585ab06f81f9508c6284094675fc68f623c79d6bb",
+                new[] { 345, 1, 0, 0 },
+                "sha256:b5e7c793d9cc6abde8ac815214c7d863cc48fd08841270e35d435b15db432268",
+                "sha256:370ca48222b24498a16e104537fec48f2e76d911712838196ec38cdf46bd2a50",
+                "sha256:b8e328f27fa760d53a1e0ed6d9f88770a9eae4806907381484cbc0fc7bcc1941",
                 new[] { "BuildingSurface:Detailed|Ground Pentagon Floor" },
                 new[]
                 {
@@ -173,21 +161,6 @@ public sealed class SurfaceToIdfObjectOracleParityTests
                 new[]
                 {
                     "omit|BuildingSurface:Detailed|Ground Pentagon Floor|26-370|native-compact-trailing-None",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|11|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|12|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|13|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|14|4.0|4|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|15|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|16|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|17|5.0|5|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|18|2.0|2|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|19|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|20|2.0|2|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|21|4.0|4|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|22|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|23|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|24|2.0|2|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Ground Pentagon Floor|25|0.0|0|numeric-lexical-format-only",
                 })),
         new(
             "dragon-shape-surface-to-idf-object.interzone-wall.reciprocal-two-windows-two-doors",
@@ -203,10 +176,10 @@ public sealed class SurfaceToIdfObjectOracleParityTests
             new NativePin(
                 38,
                 new[] { 9, 9, 9, 9, 23, 9, 9, 9, 9, 23 },
-                new[] { 696, 2, 26, 0 },
-                "sha256:4a8b9e13f6645a339c6d402d81bd24e86c3408ecd7af7c838b591a0cb03d2627",
-                "sha256:6c323f26f8b014ccce5ac8cfe745d7827200787502f399fa9b2140c7a274a16e",
-                "sha256:d12edd1ae40ac2b42f925478ba35e4c18d4aba8d4a0dbdb592d70ee8d6b30cdd",
+                new[] { 696, 2, 2, 0 },
+                "sha256:085914ae1ea97757c203349822cd174f1901e4c3cfed40b3fbeb57ccbcd50260",
+                "sha256:5e7bee1746747f54e93fb3568e61fd3c8704eb0c26d96f4499661ddcb9b5c8c9",
+                "sha256:a0e3f877266a7683e597b21198b23ecf3116fd41fee6e6eff2abb8663b184ee0",
                 new[]
                 {
                     "BuildingSurface:Detailed|Interzone Wall A",
@@ -248,31 +221,7 @@ public sealed class SurfaceToIdfObjectOracleParityTests
                     "omit|BuildingSurface:Detailed|Interzone Wall A|23-370|native-compact-trailing-None",
                     "omit|BuildingSurface:Detailed|Interzone Wall B|23-370|native-compact-trailing-None",
                     "lexical|Window:Interzone|Interzone A Window 2|7|0.4668222740913638|0.4668222740913636|native-opening-polygon-area-roundoff-within-1e-12",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|11|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|12|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|13|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|14|4.0|4|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|15|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|16|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|17|4.0|4|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|18|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|19|3.0|3|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|20|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|21|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall A|22|3.0|3|numeric-lexical-format-only",
                     "lexical|Window:Interzone|Interzone B Window 2|7|0.4668222740913638|0.4668222740913636|native-opening-polygon-area-roundoff-within-1e-12",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|11|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|12|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|13|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|14|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|15|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|16|3.0|3|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|17|4.0|4|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|18|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|19|3.0|3|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|20|4.0|4|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|21|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Interzone Wall B|22|0.0|0|numeric-lexical-format-only",
                 })),
         new(
             "dragon-shape-surface-to-idf-object.outdoors-ceiling.roof",
@@ -282,10 +231,10 @@ public sealed class SurfaceToIdfObjectOracleParityTests
             new NativePin(
                 22,
                 new[] { 23 },
-                new[] { 348, 1, 8, 0 },
-                "sha256:3ab54356706b60105acb1bc719df9798436f8c91f58206e2f98419bd503ece98",
-                "sha256:6713762f53b091824473a46cdb53fda4645ab8c5536041beb968d28fbfdddc02",
-                "sha256:34c5d3072b0234fce5aafa11d7880e8fc51cfc31cb4dd6ac5c886ca4a6d3fff7",
+                new[] { 348, 1, 0, 0 },
+                "sha256:174d81bccc7c17189a76f5ac59ba6c8d44b76e8d5b9bfbfbd4702b883db1ccf2",
+                "sha256:7d80d7ba2108479897e8e0e59fd22201970a1dde6066f8b252e933d64b5c27ef",
+                "sha256:4470e204310b807b1977f95476a00b22f5fd7d473ee3186399a25351c30d51a8",
                 new[] { "BuildingSurface:Detailed|Outdoor Ceiling Becomes Roof" },
                 new[]
                 {
@@ -297,14 +246,6 @@ public sealed class SurfaceToIdfObjectOracleParityTests
                 new[]
                 {
                     "omit|BuildingSurface:Detailed|Outdoor Ceiling Becomes Roof|23-370|native-compact-trailing-None",
-                    "lexical|BuildingSurface:Detailed|Outdoor Ceiling Becomes Roof|11|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Ceiling Becomes Roof|12|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Ceiling Becomes Roof|14|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Ceiling Becomes Roof|15|4.0|4|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Ceiling Becomes Roof|17|6.0|6|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Ceiling Becomes Roof|18|4.0|4|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Ceiling Becomes Roof|20|6.0|6|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Ceiling Becomes Roof|21|0.0|0|numeric-lexical-format-only",
                 })),
         new(
             "dragon-shape-surface-to-idf-object.outdoors-wall.multiple-openings-blind-shade",
@@ -320,10 +261,10 @@ public sealed class SurfaceToIdfObjectOracleParityTests
             new NativePin(
                 35,
                 new[] { 9, 9, 9, 8, 8, 29, 17, 15, 17, 23 },
-                new[] { 366, 3, 30, 0 },
-                "sha256:3651285846eae049116cd8453cba05d48ee495554dd2ab9b9162924ce939886a",
-                "sha256:4916d0705dfdf4b89478b626e45a6c1ab7453abc10029cc7cfb5b6eb6c046105",
-                "sha256:9555f7ad67ae6f52c2c6c10b8bf248d4e5e4841aa64111fd4c3c9c287b6c6f1d",
+                new[] { 366, 3, 19, 0 },
+                "sha256:accbdf7010c6dccee1176f57b5fd409ce7be74bc60e251389cbf302b97bd57bf",
+                "sha256:30bf0dafe7daa808849c6392f66ce7293b2111e9b9898d20ff7284c90498203c",
+                "sha256:6b4cf576ee3970184f0675c3c657bb2f3b157eb03d5778ad38f2674508acbcfe",
                 new[]
                 {
                     "BuildingSurface:Detailed|Outdoor Multi-Opening Wall",
@@ -366,7 +307,6 @@ public sealed class SurfaceToIdfObjectOracleParityTests
                     "lexical|Window|Outdoor Shade Window|7|0.45727350671620465|0.4572735067162047|native-opening-polygon-area-roundoff-within-1e-12",
                     "lexical|Door|Outdoor Door 1|6|0.5430122892254929|0.5430122892254928|native-opening-polygon-area-roundoff-within-1e-12",
                     "lexical|Door|Outdoor Door 2|6|0.6287510717347814|0.6287510717347817|native-opening-polygon-area-roundoff-within-1e-12",
-                    "lexical|WindowMaterial:Blind|Strong Interior Blind|5|45.0|45|numeric-lexical-format-only",
                     "lexical|WindowMaterial:Blind|Strong Interior Blind|6|221.0|221|numeric-lexical-format-only",
                     "lexical|WindowMaterial:Blind|Strong Interior Blind|7|0.0|0|numeric-lexical-format-only",
                     "lexical|WindowMaterial:Blind|Strong Interior Blind|10|0.0|0|numeric-lexical-format-only",
@@ -382,16 +322,6 @@ public sealed class SurfaceToIdfObjectOracleParityTests
                     "lexical|WindowMaterial:Shade|Simple Interior Shade|14|0.0|0|numeric-lexical-format-only",
                     "lexical|WindowShadingControl|Outdoor Shade Window:ShadingControl|2|1.0|1|numeric-lexical-format-only",
                     "lexical|WindowShadingControl|Outdoor Shade Window:ShadingControl|7|20.0|20|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Multi-Opening Wall|11|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Multi-Opening Wall|12|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Multi-Opening Wall|13|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Multi-Opening Wall|14|8.0|8|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Multi-Opening Wall|15|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Multi-Opening Wall|16|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Multi-Opening Wall|17|8.0|8|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Multi-Opening Wall|18|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Multi-Opening Wall|20|0.0|0|numeric-lexical-format-only",
-                    "lexical|BuildingSurface:Detailed|Outdoor Multi-Opening Wall|21|0.0|0|numeric-lexical-format-only",
                 })),
     };
 
@@ -1276,8 +1206,8 @@ public sealed class SurfaceToIdfObjectOracleParityTests
         Assert.Equal(
             new[]
             {
-                "0", "0", "0", "4", "0", "0", "5", "2", "0",
-                "2", "4", "0", "0", "2", "0",
+                "0.0", "0.0", "0.0", "4.0", "0.0", "0.0", "5.0", "2.0", "0.0",
+                "2.0", "4.0", "0.0", "0.0", "2.0", "0.0",
             },
             observations[1].TargetFieldValues[0].Skip(11));
         Assert.Equal("Roof", observations[3].TargetFieldValues[0][1]);

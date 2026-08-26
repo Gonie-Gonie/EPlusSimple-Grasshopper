@@ -321,7 +321,7 @@ public sealed class GreenRetrofitHvacConversionTests
         IdfObject boiler = Assert.Single(legacy["Boiler:HotWater"]);
         Assert.Equal("OtherFuel1", boiler[1]);
         Assert.Equal("autosize", boiler[2]);
-        Assert.Equal("1", boiler[3]);
+        Assert.Equal("1.0", boiler[3]);
     }
 
     [Fact]

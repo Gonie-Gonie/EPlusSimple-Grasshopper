@@ -53,6 +53,14 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
         "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31";
     private const string EvidenceTestCase =
         "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext";
+    private static bool DiscoverPins => string.Equals(
+        Environment.GetEnvironmentVariable("GONIEGONIE_DISCOVER_SOURCE_SYSTEM_PINS"),
+        "1",
+        StringComparison.Ordinal);
+    private static readonly JsonSerializerOptions DiscoveryJsonOptions = new()
+    {
+        WriteIndented = true,
+    };
 
     private const string IddOracleRepositoryPath =
         "fixtures/reference/python-0.7.0/idd-24.2.0.schema.json.gz";
@@ -200,25 +208,25 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
 
     private static readonly NativeCaseExpectation[] ExpectedNativeCases =
     {
-        new(ExpectedCases[0].CaseId, 580, 2_916, 18, 2, 0, 13, "sha256:3615b0ffaf989707e760486e10866202408ac7d2c0953502942f70319222e256"),
-        new(ExpectedCases[1].CaseId, 598, 2_915, 16, 2, 0, 13, "sha256:5d67e36a3636fa96258545e9844e44983d2ed9254c2527264e2635f3c0c9196c"),
-        new(ExpectedCases[2].CaseId, 199, 988, 2, 0, 0, 20, "sha256:c82b004772e8d45760fe1c2f84f0ae54bc8c860aed8bf13ad7b9e82f99726e5a"),
-        new(ExpectedCases[3].CaseId, 190, 951, 2, 0, 0, 4, "sha256:aae0381f572edf7d0a55ea9a4b20a74d76080acb6ffb7f3428df16bca3cbcca8"),
-        new(ExpectedCases[4].CaseId, 190, 951, 2, 0, 0, 4, "sha256:bb12f3e8715c61cfdc6fa6032a8e6963a81eb000a0776ddefc727ae46fc2f068"),
-        new(ExpectedCases[5].CaseId, 399, 1_944, 28, 2, 0, 9, "sha256:37d93f07ea7747910fa6459c4c81d4a7d51120b5741f85e57273bdf06e0503ed"),
-        new(ExpectedCases[6].CaseId, 432, 1_943, 28, 2, 0, 9, "sha256:149b3f4a84dfac60f82442059513cd4c02f7f86d9f2c1151233d3ebd325ebc8c"),
-        new(ExpectedCases[7].CaseId, 28, 6, 8, 0, 0, 0, "sha256:0780e936cf7252c0251a50c80dfebdcb7e219d2113fd35cbaf8b0b42182b914a"),
-        new(ExpectedCases[8].CaseId, 37, 6, 9, 0, 0, 0, "sha256:6eb5a4375e112fc58f16eecd0728c87bf1b853e652fb1dd5d382e0221c49e5fb"),
+        new(ExpectedCases[0].CaseId, 580, 2_916, 18, 2, 0, 13, "sha256:019f64e4ecba016ed4c49f61fabc1b1ac3420211e7d2731e02e47d772709951d"),
+        new(ExpectedCases[1].CaseId, 598, 2_915, 16, 2, 0, 13, "sha256:f8ce4f613700f24e41ab11710072b9588cbf3ef5c25f782bf1eb1760fb4a4790"),
+        new(ExpectedCases[2].CaseId, 199, 988, 2, 0, 0, 20, "sha256:c8753ca8ef5822aa9d4afc15935a7eed0700b1bb5eb52f7378c1dd9ae244595b"),
+        new(ExpectedCases[3].CaseId, 190, 951, 2, 0, 0, 4, "sha256:cf4dbaa45414426a0e4541d8ea1a95607acb34c6b1633528c4c22354ff975bd6"),
+        new(ExpectedCases[4].CaseId, 190, 951, 2, 0, 0, 4, "sha256:8592d05da2e2e1eabab03a58d4950b46916e3eb4d07c21d612b41c87e62c6809"),
+        new(ExpectedCases[5].CaseId, 399, 1_944, 28, 2, 0, 9, "sha256:aabdcfeea723476cb8f5a6e92eaa66d17eb349134513ae833b580b0e31f9065b"),
+        new(ExpectedCases[6].CaseId, 432, 1_943, 28, 2, 0, 9, "sha256:09ba977e040ee0214fdfc3611e364910dddc57b1cab65df4bcbe5f4d610429fd"),
+        new(ExpectedCases[7].CaseId, 28, 6, 8, 0, 0, 0, "sha256:7829c0ef98e789b96193a6f50044b76f419c2f5acc000c855462ff8d3411fd1c"),
+        new(ExpectedCases[8].CaseId, 37, 6, 9, 0, 0, 0, "sha256:f3521bed2db0db8efc445ae34dd58d21e654fd4b42649f3186445b860dabfe74"),
         new(ExpectedCases[9].CaseId, 28, 6, 8, 0, 0, 0, "sha256:d2e138b3e6acaac1358fbd6c1faf5db816bf23c61f9e707e494984aacf224d95"),
-        new(ExpectedCases[10].CaseId, 189, 978, 7, 1, 0, 5, "sha256:5eb1e49beeaabe254ed56d4a85e08668dc43c1a8ce0b4b20738725504ac5f512"),
-        new(ExpectedCases[11].CaseId, 207, 977, 5, 1, 0, 5, "sha256:11288d7cb572a8f8b6ea2ed165e398ba9ec8b0c84c2881b38048280f18984859"),
+        new(ExpectedCases[10].CaseId, 189, 978, 7, 1, 0, 5, "sha256:26c89c7b4e41c9b6e91b408e43d832d8e5500f7d9f5560938b33a3f0ce351b75"),
+        new(ExpectedCases[11].CaseId, 207, 977, 5, 1, 0, 5, "sha256:40633364659f01c972cb46cca5aa332d1ebc51f7357d4732decbe3702ff74151"),
         new(ExpectedCases[12].CaseId, 0, 0, 0, 0, 0, 0, "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"),
-        new(ExpectedCases[13].CaseId, 12, 1, 0, 0, 0, 0, "sha256:0533ff8891b54f419d30125f390b2b8dc830a0f4b22ac8d33eb17660602ca006"),
+        new(ExpectedCases[13].CaseId, 12, 1, 0, 0, 0, 0, "sha256:3e8c203f2888c7939e43cfc8da9670f3fbc17ca1329c211cfdbc3684a5dbf826"),
         new(ExpectedCases[14].CaseId, 20, 1, 2, 0, 0, 0, "sha256:d78baabca8e649fd099c874fa8981d334bfb54d65265558d21c9cedaba899196"),
-        new(ExpectedCases[15].CaseId, 38, 0, 0, 0, 0, 0, "sha256:fadcd66507a457d3e43bef23a939b114934bb524554818aee911f3048afc1d77"),
-        new(ExpectedCases[16].CaseId, 45, 0, 0, 0, 0, 0, "sha256:3756895486406b00e54c0f400e7388ad3582066cdc487a7e048084b8445355ef"),
-        new(ExpectedCases[17].CaseId, 293, 78, 41, 0, 1, 0, "sha256:aa46e655c58baa6e8e6fc3c1a3782bf361476040e235c6fa4197052981b95227"),
-        new(ExpectedCases[18].CaseId, 293, 78, 41, 0, 1, 0, "sha256:37604eca6528d2d902da35af70bc83ab6ffae833703986424c393329ef921683"),
+        new(ExpectedCases[15].CaseId, 38, 0, 0, 0, 0, 0, "sha256:65662ff9b2bb9674d2cbd6638b8f73a825de42e08f281352e38d4d44f77734bf"),
+        new(ExpectedCases[16].CaseId, 45, 0, 0, 0, 0, 0, "sha256:abded3157940955995441f70a92f189b35b731a1243c7c20d89e00cc4841d1ea"),
+        new(ExpectedCases[17].CaseId, 293, 78, 41, 0, 0, 0, "sha256:e30fe394a2e50f673c559cad3f54412ab587eeb3936a5cf8b27d95fa646ab42b"),
+        new(ExpectedCases[18].CaseId, 293, 78, 41, 0, 0, 0, "sha256:c1b08fc306568c9ae9db75e9447806f807db87e2e4596f898fdc075e50986639"),
         new(ExpectedCases[19].CaseId, 0, 0, 0, 0, 0, 0, "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"),
     };
 
@@ -241,12 +249,12 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
     private static readonly NativeArtifact[] NativeArtifacts =
     {
         new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_582, "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"),
-        new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs", 18_026, "sha256:b7889501a3f42dd455902edd711cea80e2f729b06cdb8d0357ec3f90136af64e"),
+        new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs", 18_027, "sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e"),
         new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs", 23_777, "sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be"),
         new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs", 19_554, "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07"),
         new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/PlantLoopAssembler.cs", 10_538, "sha256:6a612a61c056583471cec4782ca4b64e6a94be6a177fec1ef0ee869ff3da25ee"),
         new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingPlantLoopAssembler.cs", 19_561, "sha256:0d571a9ad78caf2aa55913c19a86df041f12c8506b4999e7a03209d626aee594"),
-        new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/IdfGenerationContext.cs", 3_619, "sha256:96a09a36a4f5c4cb6b756ee54514a56dd67290105315f0ab961cf4c24688f313"),
+        new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/IdfGenerationContext.cs", 3_801, "sha256:f7b6867f411575c6ce5e068df9568f76791ad7a715d41a5b4937528105f78574"),
         new("src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_764, "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905"),
     };
 
@@ -292,6 +300,24 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
         Assert.Equal(ExpectedCaseCount, observations.Length);
         Assert.Equal(ExpectedPythonObjectCount, observations.Sum(item => item.PythonObjectCount));
         Assert.Equal(ExpectedPythonFieldCount, observations.Sum(item => item.PythonFieldCount));
+
+        if (DiscoverPins)
+        {
+            throw new Xunit.Sdk.XunitException(
+                "SOURCE_SYSTEM_NATIVE_PINS\n" + JsonSerializer.Serialize(
+                    observations.Select(item => new
+                    {
+                        item.CaseId,
+                        item.NativeCompactFieldCount,
+                        item.BlankOrNoneOmissionCount,
+                        DefaultOmissionCount = item.DefaultOmissions.Length,
+                        TokenCaseNormalizationCount = item.TokenCaseNormalizations.Length,
+                        NumericLexemeNormalizationCount = item.NumericLexemeNormalizations.Length,
+                        ObjectRelocationCount = item.ObjectRelocations.Length,
+                        item.NativeOutputSha256,
+                    }),
+                    DiscoveryJsonOptions));
+        }
 
         AssertLegacyTopology(observations);
         foreach (SymbolBinding symbol in ExpectedSymbols)
@@ -1130,14 +1156,17 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
                 + firstAnalysis.BlankOrNoneOmissionCount
                 + firstAnalysis.DefaultOmissions.Length);
         NativeCaseExpectation expectation = ExpectedNativeCases.Single(item => item.CaseId == binding.CaseId);
-        Assert.Equal(expectation.NativeCompactFieldCount, first.Sum(item => item.Count));
-        Assert.Equal(expectation.BlankOrNoneOmissionCount, firstAnalysis.BlankOrNoneOmissionCount);
-        Assert.Equal(expectation.DefaultOmissionCount, firstAnalysis.DefaultOmissions.Length);
+        if (!DiscoverPins)
+        {
+            Assert.Equal(expectation.NativeCompactFieldCount, first.Sum(item => item.Count));
+            Assert.Equal(expectation.BlankOrNoneOmissionCount, firstAnalysis.BlankOrNoneOmissionCount);
+            Assert.Equal(expectation.DefaultOmissionCount, firstAnalysis.DefaultOmissions.Length);
+            Assert.Equal(expectation.TokenCaseNormalizationCount, firstAnalysis.TokenCaseNormalizations.Length);
+            Assert.Equal(expectation.NumericLexemeNormalizationCount, firstAnalysis.NumericLexemeNormalizations.Length);
+            Assert.Equal(expectation.ObjectRelocationCount, firstAnalysis.ObjectRelocations.Length);
+            Assert.Equal(expectation.NativeOutputSha256, nativeOutputSha256);
+        }
         Assert.Empty(firstAnalysis.ContextEnrichments);
-        Assert.Equal(expectation.TokenCaseNormalizationCount, firstAnalysis.TokenCaseNormalizations.Length);
-        Assert.Equal(expectation.NumericLexemeNormalizationCount, firstAnalysis.NumericLexemeNormalizations.Length);
-        Assert.Equal(expectation.ObjectRelocationCount, firstAnalysis.ObjectRelocations.Length);
-        Assert.Equal(expectation.NativeOutputSha256, nativeOutputSha256);
         AssertHonestNormalizations(firstAnalysis);
 
         string[] topologyFacts = AssertCaseTopology(binding, first, records);
@@ -1341,6 +1370,10 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
                     }
                     else if (RequiredString(encoded, "kind") == "str"
                         && officialField.Kind == "numeric"
+                        && !string.Equals(
+                            RequiredString(encoded, "value"),
+                            nativeValue,
+                            StringComparison.Ordinal)
                         && NumericEqual(RequiredString(encoded, "value"), nativeValue))
                     {
                         numericNormalizations.Add(new NumericLexemeNormalizationFact(
@@ -1598,7 +1631,7 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
                     && item.Name == (binding.CaseId.Contains("alternate", StringComparison.Ordinal)
                         ? "Loop_for_Alternate Absorber"
                         : "Loop_for_Representative Absorber"));
-            Assert.Equal("6", sizing[2]);
+            Assert.Equal("6.0", sizing[2]);
             IdfObject generator = Assert.Single(
                 native,
                 item => item.ObjectType == "Branch"
@@ -1609,7 +1642,7 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
             return new[]
             {
                 "legacy-absorption-order=chiller-prefix;generator-boiler-loop;generator-branch;condenser-loop;main-loop-closure",
-                "legacy-main-sizing-design-exit-temperature=6",
+                "legacy-main-sizing-design-exit-temperature=6.0",
                 "generator-branch-link=Chiller:Absorption;position=immediately-before-condenser-tower",
             };
         }
@@ -1662,11 +1695,11 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
             Assert.True(nativeTypes.Take(3).All(item => item.StartsWith("Curve:", StringComparison.Ordinal)));
             Assert.Equal("PlantLoop", native[^2].ObjectType);
             Assert.Equal("Sizing:Plant", native[^1].ObjectType);
-            Assert.Equal("6", native[^1][2]);
+            Assert.Equal("6.0", native[^1][2]);
             return new[]
             {
                 "chiller-order=three-curves;condenser-loop;chilled-water-loop",
-                "legacy-main-sizing-design-exit-temperature=6",
+                "legacy-main-sizing-design-exit-temperature=6.0",
             };
         }
 
@@ -1720,7 +1753,7 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
         Assert.Equal(2, observations.Count(item => item.Symbol == "Chiller.to_idf_object"));
         Assert.All(
             observations.Where(item => item.Symbol is "AbsorptionChiller.to_idf_object" or "Chiller.to_idf_object"),
-            item => Assert.Contains("legacy-main-sizing-design-exit-temperature=6", item.NativeFacts));
+            item => Assert.Contains("legacy-main-sizing-design-exit-temperature=6.0", item.NativeFacts));
         Assert.All(
             observations.Where(item => !IsAbstractSymbol(item.Symbol)),
             item =>

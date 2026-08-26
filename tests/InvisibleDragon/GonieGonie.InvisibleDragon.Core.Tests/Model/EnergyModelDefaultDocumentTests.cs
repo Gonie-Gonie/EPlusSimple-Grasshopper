@@ -89,13 +89,13 @@ public sealed class EnergyModelDefaultDocumentTests
         Assert.Equal(4, limits.Count);
         AssertFields(
             limits[0],
-            "ScheduleTypeLimits:Temperature", "-50", "200", "Continuous", "Temperature");
+            "ScheduleTypeLimits:Temperature", "-50.0", "200.0", "Continuous", "Temperature");
         AssertFields(
             limits[1],
-            "ScheduleTypeLimits:Onoff", "0", "1", "Discrete", "Dimensionless");
+            "ScheduleTypeLimits:Onoff", "0.0", "1.0", "Discrete", "Dimensionless");
         AssertFields(
             limits[2],
-            "ScheduleTypeLimits:Fraction", "0", "1", "Continuous", "Dimensionless");
+            "ScheduleTypeLimits:Fraction", "0.0", "1.0", "Continuous", "Dimensionless");
         AssertFields(
             limits[3],
             "ScheduleTypeLimits:Real", string.Empty, string.Empty, "Continuous", "Dimensionless");

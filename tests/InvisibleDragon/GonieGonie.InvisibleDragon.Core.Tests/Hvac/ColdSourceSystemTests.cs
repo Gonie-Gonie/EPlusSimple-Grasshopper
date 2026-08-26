@@ -205,7 +205,7 @@ public sealed class ColdSourceSystemTests
         Assert.Equal("7.25", nativeSetpoint[2]);
         Assert.Equal(nativeSetpoint[2], legacySetpoint[2]);
         Assert.Equal("7.25", nativeSizing[2]);
-        Assert.Equal("6", legacySizing[2]);
+        Assert.Equal("6.0", legacySizing[2]);
     }
 
     [Fact]
@@ -232,7 +232,7 @@ public sealed class ColdSourceSystemTests
         Assert.Equal("NominalCapacity", native[3]);
         Assert.Equal(string.Empty, native[4]);
         Assert.Equal(string.Empty, native[5]);
-        Assert.Equal("125000", native[7]);
+        Assert.Equal("125000.0", native[7]);
         Assert.Equal("autocalculate", native[8]);
 
         Assert.Equal("UFactorTimesAreaAndDesignWaterFlowRate", legacy[3]);
@@ -291,7 +291,7 @@ public sealed class ColdSourceSystemTests
         Assert.Equal("autosize", legacySingle[6]);
         Assert.Equal("autocalculate", legacySingle[9]);
         Assert.Equal("UFactorTimesAreaAndDesignWaterFlowRate", legacySingle[11]);
-        Assert.Equal("125000", legacySingle[13]);
+        Assert.Equal("125000.0", legacySingle[13]);
         Assert.Equal("FanCycling", legacySingle[31]);
         Assert.Equal("General", legacySingle[37]);
 
@@ -323,7 +323,7 @@ public sealed class ColdSourceSystemTests
         Assert.Equal("autocalculate", legacyTwoSpeed[11]);
         Assert.Equal("autocalculate", legacyTwoSpeed[15]);
         Assert.Equal("UFactorTimesAreaAndDesignWaterFlowRate", legacyTwoSpeed[17]);
-        Assert.Equal("150000", legacyTwoSpeed[19]);
+        Assert.Equal("150000.0", legacyTwoSpeed[19]);
         Assert.Equal("General", legacyTwoSpeed[44]);
     }
 
@@ -571,7 +571,7 @@ public sealed class ColdSourceSystemTests
             $"{chiller.LoopName} SetpointTemperature");
         IdfObject nativeSizing = ObjectNamed(native, "Sizing:Plant", chiller.LoopName);
         Assert.Equal("8.5", legacySetpoint[2]);
-        Assert.Equal("6", legacySizing[2]);
+        Assert.Equal("6.0", legacySizing[2]);
         Assert.Equal("8.5", nativeSetpoint[2]);
         Assert.Equal("8.5", nativeSizing[2]);
 

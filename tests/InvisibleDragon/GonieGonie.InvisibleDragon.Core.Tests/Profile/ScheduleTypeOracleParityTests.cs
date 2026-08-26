@@ -509,7 +509,19 @@ public sealed class ScheduleTypeOracleParityTests
         Assert.Equal(fields.Length, actual.Fields.Count);
         for (int index = 0; index < fields.Length; index++)
         {
-            Assert.Equal(NormalizeIdfField(fields[index]), actual.Fields[index].Value);
+            if (fields[index].ValueKind == JsonValueKind.Number)
+            {
+                Assert.True(double.TryParse(
+                    actual.Fields[index].Value,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out double nativeNumber));
+                Assert.Equal(fields[index].GetDouble(), nativeNumber);
+            }
+            else
+            {
+                Assert.Equal(NormalizeIdfField(fields[index]), actual.Fields[index].Value);
+            }
         }
     }
 
@@ -519,7 +531,6 @@ public sealed class ScheduleTypeOracleParityTests
         {
             JsonValueKind.Null => string.Empty,
             JsonValueKind.String => value.GetString()!,
-            JsonValueKind.Number => value.GetDouble().ToString("R", CultureInfo.InvariantCulture),
             _ => throw new InvalidDataException(
                 $"Unsupported IDF field JSON kind '{value.ValueKind}'."),
         };

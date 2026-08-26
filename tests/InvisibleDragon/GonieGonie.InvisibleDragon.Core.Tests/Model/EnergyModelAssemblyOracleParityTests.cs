@@ -1447,7 +1447,7 @@ public sealed class EnergyModelAssemblyOracleParityTests
         AssertFields(
             ventilation,
             "NaturalVentilation:ERV-Zone", "ERV-Zone", string.Empty, "Flow/Person", string.Empty,
-            string.Empty, "0.00332", string.Empty, "Exhaust", "125", "0.85");
+            string.Empty, "0.00332", string.Empty, "Exhaust", "125.0", "0.85");
         Assert.Empty(document["OutdoorAir:Node"]);
         Assert.Empty(document["HeatExchanger:AirToAir:SensibleAndLatent"]);
         Assert.Empty(document["Fan:OnOff"]);

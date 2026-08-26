@@ -32,8 +32,8 @@ public sealed class SourceSystemTests
             objects,
             item => item.ObjectType == "Curve:Cubic"
                 && item.Name == "Curve_for_HeatPump_named_Main:HeatingEIRBoundary");
-        Assert.Equal("-20", heatingBoundary[7]);
-        Assert.Equal("15", heatingBoundary[8]);
+        Assert.Equal("-20.0", heatingBoundary[7]);
+        Assert.Equal("15.0", heatingBoundary[8]);
         IdfObject heatingLowPartLoad = Assert.Single(
             objects,
             item => item.ObjectType == "Curve:Cubic"

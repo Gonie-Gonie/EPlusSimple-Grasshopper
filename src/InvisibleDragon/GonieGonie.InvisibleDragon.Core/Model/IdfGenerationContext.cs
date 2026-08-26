@@ -1,4 +1,5 @@
 using System.Globalization;
+using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Idd;
 using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Internal;
@@ -100,6 +101,8 @@ public sealed class IdfGenerationContext
             string text => text,
             bool flag => flag ? "Yes" : "No",
             Enum enumeration => enumeration.ToString(),
+            double number => InvariantText.FormatPythonFloat(number),
+            float number => InvariantText.FormatPythonFloat(number),
             IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture) ?? string.Empty,
             _ => value.ToString() ?? string.Empty,
         };

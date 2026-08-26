@@ -115,7 +115,7 @@ public sealed class EnergyModelFixtureMatrixTests
         Assert.Equal("autocalculate", floor[10]);
         Assert.Equal(23, floor.Count);
         Assert.Equal(
-            new[] { "0", "0", "0", "8", "0", "0", "8", "6", "0", "0", "6", "0" },
+            new[] { "0.0", "0.0", "0.0", "8.0", "0.0", "0.0", "8.0", "6.0", "0.0", "0.0", "6.0", "0.0" },
             floor.Fields.Skip(11).Select(field => field.Value));
     }
 
@@ -207,7 +207,7 @@ public sealed class EnergyModelFixtureMatrixTests
 
         Assert.Empty(native["Lights"]);
         IdfObject lights = Assert.Single(legacy["Lights"]);
-        Assert.Equal("0", lights[5]);
+        Assert.Equal("0.0", lights[5]);
     }
 
     [Fact]
@@ -312,7 +312,7 @@ public sealed class EnergyModelFixtureMatrixTests
         IdfObject activity = Assert.Single(
             native["Schedule:Constant"],
             item => item.Name == "$DEFAULT$PEOPLEACTIVITY");
-        Assert.Equal("107", activity[2]);
+        Assert.Equal("107.0", activity[2]);
         Assert.Equal("0.0083", Assert.Single(native["ZoneVentilation:DesignFlowRate"])[6]);
 
         IdfDocument legacy = model.ToIdfDocument(options: new EnergyModelIdfOptions
@@ -368,7 +368,7 @@ public sealed class EnergyModelFixtureMatrixTests
         IdfObject emitted = Assert.Single(document["Material"]);
         Assert.Equal("Low capacity layer", emitted.Name);
         Assert.Equal(
-            thickness.ToString("R", System.Globalization.CultureInfo.InvariantCulture),
+            InvariantText.FormatPythonFloat(thickness),
             emitted[2]);
         Assert.Empty(document["Material:NoMass"]);
     }

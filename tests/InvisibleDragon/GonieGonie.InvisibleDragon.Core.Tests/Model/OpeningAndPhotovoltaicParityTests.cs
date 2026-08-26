@@ -87,7 +87,7 @@ public sealed class OpeningAndPhotovoltaicParityTests
         Assert.Equal("0.05", blindMaterial[2]);
         Assert.Equal("0.05", blindMaterial[3]);
         Assert.Equal("0.00025", blindMaterial[4]);
-        Assert.Equal("90", blindMaterial[5]);
+        Assert.Equal("90.0", blindMaterial[5]);
         Assert.Equal("221", blindMaterial[6]);
         Assert.Equal("0.5", blindMaterial[8]);
         Assert.Equal("0.5", blindMaterial[9]);
@@ -298,7 +298,7 @@ public sealed class OpeningAndPhotovoltaicParityTests
 
     [Theory]
     [InlineData("PVPN-0x300000", 18d, 0.205d, 180d, 25d, "4.242640687119285")]
-    [InlineData("PVPN-0x300001", 9d, 0.18d, 225d, 10d, "3")]
+    [InlineData("PVPN-0x300001", 9d, 0.18d, 225d, 10d, "3.0")]
     public void PhotovoltaicExportsPinnedExteriorShadeAndLoadCenterFields(
         string name,
         double area,
@@ -319,8 +319,8 @@ public sealed class OpeningAndPhotovoltaicParityTests
 
         IdfObject shade = Object(objects, "Shading:Site");
         Assert.Equal($"Shading4PVpanel:{name}", shade[0]);
-        Assert.Equal(azimuth.ToString("R", System.Globalization.CultureInfo.InvariantCulture), shade[1]);
-        Assert.Equal(tilt.ToString("R", System.Globalization.CultureInfo.InvariantCulture), shade[2]);
+        Assert.Equal(InvariantText.FormatPythonFloat(azimuth), shade[1]);
+        Assert.Equal(InvariantText.FormatPythonFloat(tilt), shade[2]);
         Assert.Equal(expectedSide, shade[6]);
         Assert.Equal(expectedSide, shade[7]);
 
@@ -329,7 +329,7 @@ public sealed class OpeningAndPhotovoltaicParityTests
         Assert.Equal("0.7", performance[1]);
         Assert.Equal("Fixed", performance[2]);
         Assert.Equal(
-            efficiency.ToString("R", System.Globalization.CultureInfo.InvariantCulture),
+            InvariantText.FormatPythonFloat(efficiency),
             performance[3]);
 
         IdfObject generator = Object(objects, "Generator:Photovoltaic");

@@ -62,7 +62,7 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(345, len(symbol_evidence.entries))
         self.assertEqual(345, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:4120142a275231b7e43c29ee96d064f90fe443a51349a881e55c2463831415fa",
+            "sha256:24863628cdb22e0c29f2e9ce8b909efb04065207813e9b17bcd377e7726a29ca",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -323,133 +323,133 @@ class ConfigurationTests(unittest.TestCase):
                 1025,
                 "permissive-python-blind-state-75f7c91c",
                 "dragon-shape-opening-adjacency-core-1025-75f7c91c",
-                "sha256:c075c45deb7cda1407a72808c0d277d6efd5316085b144095d2bf517386973f7",
+                "sha256:64dcaf9393ca788505441f2b62efe2153d4afd78e3072f53d302282e9a8a31bd",
                 "permissive-python-blind-state",
             ),
             "Blind.__init__": (
                 1026,
                 "permissive-python-blind-state-574e9b5a",
                 "dragon-shape-opening-adjacency-core-1026-574e9b5a",
-                "sha256:5388e0665f85bc41bb818f26c8f6fa89cf76898e26e6df4d36abe0c373570bee",
+                "sha256:d24f4d29a44afa671c4d2d487eaf6a2e837fa2edb140385e9d296d89a0b294b9",
                 "permissive-python-blind-state",
             ),
             "Door": (
                 1028,
                 "permissive-python-door-state-717d717a",
                 "dragon-shape-opening-adjacency-core-1028-717d717a",
-                "sha256:fa39e26798264f38d0e9a43f1940c2863f70f05203b2b1e8c74faa3c5eb8afd9",
+                "sha256:73603b3c0d9b6e08472014c76fc2dcd4e4fca15b7b8cdf6ec2919f1bc34b4c2d",
                 "permissive-python-door-state",
             ),
             "Door.__init__": (
                 1029,
                 "permissive-python-door-state-efd71c81",
                 "dragon-shape-opening-adjacency-core-1029-efd71c81",
-                "sha256:a7a103e8899887ec153199f974e4050ca493cda73d31b7c64e562ebba60ab30e",
+                "sha256:b5dbb581ff8eb8ecc7cfa2cfffe9e39cf63f00866df25a3e0a17c84240e33fce",
                 "permissive-python-door-state",
             ),
             "Shade": (
                 1030,
                 "permissive-python-shade-state-9404da04",
                 "dragon-shape-opening-adjacency-core-1030-9404da04",
-                "sha256:45b6423f0139944ee5c8cb4726894b9dc4585b05cdd343bddb24b830fe43c35f",
+                "sha256:3e57b061272e3ee577e31c07e45e09bb19a09457ab3f48558c5347a700fa9ac3",
                 "permissive-python-shade-state",
             ),
             "Shade.__init__": (
                 1031,
                 "permissive-python-shade-state-f76ed298",
                 "dragon-shape-opening-adjacency-core-1031-f76ed298",
-                "sha256:6d4294f2c7584ecee38272e92a20d323ba5d26bbe1b6cf488d5749dfdfc8c496",
+                "sha256:f228d23cf189b9c5f778e2760952e21b782bc686c994281f400b6399b386269e",
                 "permissive-python-shade-state",
             ),
             "Shading": (
                 1033,
                 "directly-instantiable-empty-python-shading-4dba9833",
                 "dragon-shape-opening-adjacency-core-1033-4dba9833",
-                "sha256:8b9e5ab60f25bf306e117d4df92ea08a784482435e73166da9ecdb52ab860bbc",
+                "sha256:4bd856667c24d93adfa228e0724cf9f07f14e90140544db02e4b0b31b240a2af",
                 "directly-instantiable-empty-python-shading",
             ),
             "Surface.__init__": (
                 1035,
                 "aliased-python-surface-opening-inputs-ef349ef4",
                 "dragon-shape-opening-adjacency-core-1035-ef349ef4",
-                "sha256:4b3ebe4b809eb5da6aa98988847d7dff288a1fd3370583166b27b0210feb31ee",
+                "sha256:0b11e25629db08b0498b96a5544d7a011819e1a01555a89ef369819c2920697b",
                 "aliased-python-surface-opening-inputs",
             ),
             "Surface.blinded_window": (
                 1039,
                 "fresh-python-blinded-window-projection-f520fbfe",
                 "dragon-shape-opening-adjacency-core-1039-f520fbfe",
-                "sha256:69f056b8beb1e306a0c7ad7c83365a09e184365bb579bddfec8a349663b17d03",
+                "sha256:bb2cff5eb33003d79f28bf47bd7dbe705fd2225741797c56f33954d6304b69a0",
                 "fresh-python-blinded-window-projection",
             ),
             "Surface.boundary": (
                 1040,
                 "mutable-reciprocal-python-surface-adjacency-7753d967",
                 "dragon-shape-opening-adjacency-core-1040-7753d967",
-                "sha256:84d8d135700b571157f91ee6f2c3b9ae859d233d0dc5beadfd4eb16704174189",
+                "sha256:86ecb839d0652cbcaea8c7310566de4d4f1795b1a20ca0adf95dae0f2cc41253",
                 "mutable-reciprocal-python-surface-adjacency",
             ),
             "Surface.get_subsurface": (
                 1042,
                 "legacy-linear-scale-subsurface-projection-7e43708d",
                 "dragon-shape-opening-adjacency-core-1042-7e43708d",
-                "sha256:0705e84c47890ec56447c65eff16bb31d5340d79e19921ae7b985ecb037855b3",
+                "sha256:dfc4a7c265d365fd34017f89278b9e47d95d68da99dc7d4c994e4fa4c4dfbaec",
                 "legacy-linear-scale-subsurface-projection",
             ),
             "SurfaceBoundaryCondition": (
                 1048,
                 "lowercase-python-surface-boundary-enum-73a8b86f",
                 "dragon-shape-opening-adjacency-core-1048-73a8b86f",
-                "sha256:08ce2c6a908b36f58f12d985c5e38cb513acbae7176e30362366de85347ed0b0",
+                "sha256:c45c68a457705c686699c6dbdfdc235ee5ad0cb4638a8456bec5237e6f4ee8f8",
                 "lowercase-python-surface-boundary-enum",
             ),
             "SurfaceBoundaryCondition.ADIABATIC": (
                 1049,
                 "lowercase-python-surface-boundary-enum-1d0e3d46",
                 "dragon-shape-opening-adjacency-core-1049-1d0e3d46",
-                "sha256:71a4f989a069bbfa082ed1c95b6d592cb559164bbc3e59bbd3e4516acbd121b8",
+                "sha256:08e570845c119718b6fa052862fa05f0792391a0e76797671c8c314c0d397c56",
                 "lowercase-python-surface-boundary-enum",
             ),
             "SurfaceBoundaryCondition.GROUND": (
                 1050,
                 "lowercase-python-surface-boundary-enum-0992cbf6",
                 "dragon-shape-opening-adjacency-core-1050-0992cbf6",
-                "sha256:93821fe3c3d6a6237b2810173fd5930d7650eead430add543f323b70ec45cc48",
+                "sha256:b1b7efac6274046b0596a8c2f4c3a6359f8bf2f2cb0e1f32c722af7f4499260b",
                 "lowercase-python-surface-boundary-enum",
             ),
             "SurfaceBoundaryCondition.OUTDOOR": (
                 1051,
                 "lowercase-python-surface-boundary-enum-8560160a",
                 "dragon-shape-opening-adjacency-core-1051-8560160a",
-                "sha256:fa3365775b6703acd140afe11e50b9f546326dcb8b74d608086d15e6f3393b20",
+                "sha256:d107db8406311b734dda94e2a0b4f9024f3cb294eefff3d951f62589dc26a73c",
                 "lowercase-python-surface-boundary-enum",
             ),
             "SurfaceBoundaryCondition.ZONE": (
                 1052,
                 "lowercase-python-surface-boundary-enum-3ec06789",
                 "dragon-shape-opening-adjacency-core-1052-3ec06789",
-                "sha256:ce75591156a712c29b635ee22f70387d62faee6d006cf41308a4649819ed6abc",
+                "sha256:e584aa44381399a4daaadb5d004eff0a3291c94e6bfa438d7d5b1880db0b7d16",
                 "lowercase-python-surface-boundary-enum",
             ),
             "SurfaceBoundaryCondition.__str__": (
                 1053,
                 "lowercase-python-surface-boundary-enum-f40e4929",
                 "dragon-shape-opening-adjacency-core-1053-f40e4929",
-                "sha256:334050b16537ed04fbda77c181a7442d51c502b0d35014eedc670fd651e85786",
+                "sha256:69b03cccaa9c2bfd9e0b35d8658ba772e0875f5b8716183f3827129dd9607943",
                 "lowercase-python-surface-boundary-enum",
             ),
             "Window": (
                 1081,
                 "permissive-python-window-state-af640a9a",
                 "dragon-shape-opening-adjacency-core-1081-af640a9a",
-                "sha256:19224d3273d70c3effeced094b414ca5df1fdb1316e39f9ba9f79236dd760c51",
+                "sha256:6f704712439b980642cf4a9a44ea28a243300af2f466140457ad71286897bd7d",
                 "permissive-python-window-state",
             ),
             "Window.__init__": (
                 1082,
                 "permissive-python-window-state-3ce851bd",
                 "dragon-shape-opening-adjacency-core-1082-3ce851bd",
-                "sha256:dc72750acd6bdc3c06076d2f61c0cd7e8b1ef02b5e7499c142a0142d1bc426d9",
+                "sha256:d7fc537b98a3772775b7cb997bc857c63faf6c006d30be3d40318e3aa68ad03b",
                 "permissive-python-window-state",
             ),
         }
@@ -492,7 +492,7 @@ class ConfigurationTests(unittest.TestCase):
             "MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes"
         )
         test_hash = (
-            "sha256:7ad3b9251f5c73e5a710d4ce7ef836d63e79000c2c3e6a00952ca61ccfaa5aa2"
+            "sha256:4e381e78334e6d976a1a4e1d19feab502769210c9b61c980c373587f505690b0"
         )
         opening_families = set()
         for symbol, (
@@ -544,7 +544,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "permissive-python-surface-polygon-model-cb620c55",
                 "dragon-shape-geometry-core-1034-cb620c55",
-                "sha256:2867a6b5a26a756fa6aeaf65068a2e9fa7321b0e6923e77ae9524036b686472d",
+                "sha256:001cc076b64e25c31e353ffda4e59922fca2246b0631474d6513ff9daa11da3a",
                 "permissive-python-surface-polygon-model",
             ),
             "Surface.area": (
@@ -552,7 +552,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "first-triple-oriented-python-surface-area-f254ab66",
                 "dragon-shape-geometry-core-1038-f254ab66",
-                "sha256:6cc3a7db18daa625d5dab183570f02c32e5319f911ac9f3517bff23d8d6aa191",
+                "sha256:684f552a5733fce9458c077f4763d475ad571a29e543ad171e634013c1effdc1",
                 "first-triple-oriented-python-surface-area",
             ),
             "Surface.center": (
@@ -560,7 +560,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "vertex-mean-python-surface-center-f0c05c2b",
                 "dragon-shape-geometry-core-1041-f0c05c2b",
-                "sha256:8074898397022e774997a6a725b80781111550897ab44740e89dc3238b2ff455",
+                "sha256:c76c774f5ac7f38eb3a1610592a63dc9d4e2e3a3a8ee1676f56954cfbfda45a0",
                 "vertex-mean-python-surface-center",
             ),
             "Surface.height": (
@@ -568,7 +568,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "z-span-python-surface-height-d479fe2f",
                 "dragon-shape-geometry-core-1043-d479fe2f",
-                "sha256:a528074f8ab957267bac2b8ce3557194ff474c111b17321c8b97ea797b5df5a9",
+                "sha256:936825eba1643e89a2178e394dd938fafa96b38454f05a0dc79a10dc8398ca9f",
                 "z-span-python-surface-height",
             ),
             "Surface.normal": (
@@ -576,7 +576,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "first-triple-python-surface-normal-3f089c8c",
                 "dragon-shape-geometry-core-1044-3f089c8c",
-                "sha256:81ec416bc7639194804e4380e03f99006dbf6a16d09525ccadec25da28321eb8",
+                "sha256:f53cb86260ed57b04b628af86246332566d6e4ae2165cefcd7adfb73a8c1c4c3",
                 "first-triple-python-surface-normal",
             ),
             "Surface.type": (
@@ -584,7 +584,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "mutable-string-coerced-python-surface-type-ae4bdcc7",
                 "dragon-shape-geometry-core-1046-ae4bdcc7",
-                "sha256:d312aa561bdbb6cab2484f8a078a702bb56d38be42f3bcaa2800f5532b518888",
+                "sha256:0e8ede1b3c0bbb43c3ea695ffc5c874a1e197e8b407d1aa3c7702f8915bcdc34",
                 "mutable-string-coerced-python-surface-type",
             ),
             "Surface.vertex": (
@@ -592,7 +592,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "aliased-mutable-python-surface-vertices-7ed5c6b3",
                 "dragon-shape-geometry-core-1047-7ed5c6b3",
-                "sha256:0810dc08418bc78deac6f89786a849f5c20390ecc994c9395bcad0c715ce3cd7",
+                "sha256:5d9c644d686983198550afed9855ca8a21276e9235143b66ffd68ef6a8ba2744",
                 "aliased-mutable-python-surface-vertices",
             ),
             "SurfaceType": (
@@ -600,7 +600,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "lowercase-python-surface-type-enum-61a37f9d",
                 "dragon-shape-geometry-core-1054-61a37f9d",
-                "sha256:e28446741c641805190b1565b43de667c6062361b1409215d5f7ad5d4314c31f",
+                "sha256:95bbe8b412e9ec5edac4389e0602fc618162553eb84a7f794f229e26f6b65143",
                 "lowercase-python-surface-type-enum",
             ),
             "SurfaceType.CEILING": (
@@ -608,7 +608,7 @@ class ConfigurationTests(unittest.TestCase):
                 "equivalent",
                 None,
                 "dragon-shape-geometry-core-1055-9ece8323",
-                "sha256:05316ed46e42810cf7e5b0de1ba338d5f502c25a6a4c97e208fd5cdb9c435919",
+                "sha256:bc403ff8d739932e5be1b809dffb9fb808395d2fc048f127435d0d7854c90ee6",
                 "direct-surface-type-member-mapping",
             ),
             "SurfaceType.FLOOR": (
@@ -616,7 +616,7 @@ class ConfigurationTests(unittest.TestCase):
                 "equivalent",
                 None,
                 "dragon-shape-geometry-core-1056-c8c4f240",
-                "sha256:4bab1a992d34a81b0e0b280baba6fe6d305cf430d82c817ccfef4b853ab574cb",
+                "sha256:44c5e3114d165607332730dc4256d93a8b44de8c629c90b30d7f7593aa6c4325",
                 "direct-surface-type-member-mapping",
             ),
             "SurfaceType.WALL": (
@@ -624,7 +624,7 @@ class ConfigurationTests(unittest.TestCase):
                 "equivalent",
                 None,
                 "dragon-shape-geometry-core-1057-ca6d5593",
-                "sha256:e4f63e8852e3c5be771dc461fd372e655c9683e9b3ed30ce928643eb0409029c",
+                "sha256:b27671d54451df410e7465303096af339da1080779350bc8ea89fb314441bfa4",
                 "direct-surface-type-member-mapping",
             ),
             "SurfaceType.__str__": (
@@ -632,7 +632,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "lowercase-python-surface-type-enum-f40e4929",
                 "dragon-shape-geometry-core-1058-f40e4929",
-                "sha256:14ae314f685943e78011024dcc0b279c48b972f9c72053029849eef98547e65b",
+                "sha256:afb7c2734e360938563c7b6ae371eb32ef29649182fc5591b98987f330162929",
                 "lowercase-python-surface-type-enum",
             ),
             "Vertex": (
@@ -640,7 +640,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "permissive-mutable-python-vertex-state-78650289",
                 "dragon-shape-geometry-core-1059-78650289",
-                "sha256:0f2962d8fab43164ac0ad84f04fe7bbbbe53ceaa9893f7b4093b4209aacfd34f",
+                "sha256:a8cdbcc351ae243dff644bb913ec3ed634e681565b678995a38641591e80803a",
                 "permissive-mutable-python-vertex-state",
             ),
             "Vertex.__add__": (
@@ -648,7 +648,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "untyped-python-vertex-algebra-a5c7ecea",
                 "dragon-shape-geometry-core-1060-a5c7ecea",
-                "sha256:9b3e942fa977cb5374c53c5539b263d8e66bffb8a7ca3d2dba42cea26460bc22",
+                "sha256:26eb7fea9168cfe5acdd0eaec64450410c69878fe1a2298c0c8372f939a0a607",
                 "untyped-python-vertex-algebra",
             ),
             "Vertex.__deepcopy__": (
@@ -656,7 +656,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "python-vertex-copy-iteration-zero-addition-2c79da1a",
                 "dragon-shape-geometry-core-1061-2c79da1a",
-                "sha256:7cc15089ff3974303b8ff66c82264f1e4575280cebe7dc53b695df31229e19aa",
+                "sha256:2f2cb2440ab0ffe71ae49bb013f9fb2f371f231704b8f971a00c734e428528f6",
                 "python-vertex-copy-iteration-zero-addition",
             ),
             "Vertex.__init__": (
@@ -664,7 +664,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "permissive-mutable-python-vertex-state-be3c69c5",
                 "dragon-shape-geometry-core-1063-be3c69c5",
-                "sha256:a31d5463a22afc15fbfa422477e455ddbfe768412d716d1f76c4d4f0a4afd733",
+                "sha256:9c19b6b133dffec3652af707482128b9776c16b0f71ba6dfa8f1dc21f0803c75",
                 "permissive-mutable-python-vertex-state",
             ),
             "Vertex.__iter__": (
@@ -672,7 +672,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "python-vertex-copy-iteration-zero-addition-e95d7ce5",
                 "dragon-shape-geometry-core-1064-e95d7ce5",
-                "sha256:5c429ab04b30eb052ab4fdd421665fb13e870a75b834a1f0a85307bd464002dc",
+                "sha256:924ef9477e390a62d81c5842dce9d0edb34dd72a194e1e0994804e39e6b19c4f",
                 "python-vertex-copy-iteration-zero-addition",
             ),
             "Vertex.__mul__": (
@@ -680,7 +680,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "untyped-python-vertex-algebra-323878e1",
                 "dragon-shape-geometry-core-1065-323878e1",
-                "sha256:608a929646e45db53d8800b571e607ff4f191b15109a359ad311f91684840e38",
+                "sha256:d7d0cb22d793d35c187518b149887f515e3d182a9511b6a9b929071e0249e8a9",
                 "untyped-python-vertex-algebra",
             ),
             "Vertex.__radd__": (
@@ -688,7 +688,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "python-vertex-copy-iteration-zero-addition-a473d0f3",
                 "dragon-shape-geometry-core-1066-a473d0f3",
-                "sha256:388fb6ca4786fe66e539f699caf4937ef824dc6118441a12a19e01dbb7ab049a",
+                "sha256:7ab4d1a06246f8c981604ea66c56794a28df7e901393637d9c30daf9c416a3ac",
                 "python-vertex-copy-iteration-zero-addition",
             ),
             "Vertex.__rmul__": (
@@ -696,7 +696,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "untyped-python-vertex-algebra-1dbe33d3",
                 "dragon-shape-geometry-core-1068-1dbe33d3",
-                "sha256:4e09af087fb303452aaf3761ce473e61cf23286f9600a8efde211d9460a05f16",
+                "sha256:341eac15a4f31865fdf1366fd5279f5c5cdf3cf52459789a91837abbe60c34f8",
                 "untyped-python-vertex-algebra",
             ),
             "Vertex.__sub__": (
@@ -704,7 +704,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "untyped-python-vertex-algebra-4ee38e65",
                 "dragon-shape-geometry-core-1070-4ee38e65",
-                "sha256:bf1d02133fd2651444492a88f3b27ed4bd9b7cc1d4ffb0351232a7ca652ccc87",
+                "sha256:ac54feab78509bac23da06bb27a7cbd76267dc4b548bcd6e740453eb17e38708",
                 "untyped-python-vertex-algebra",
             ),
             "Vertex.__truediv__": (
@@ -712,7 +712,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "untyped-python-vertex-algebra-94f397b8",
                 "dragon-shape-geometry-core-1071-94f397b8",
-                "sha256:9fcfa8d48d9d35d62788f9b2ad7f218fa224e37cdf6ecfc32fbbe02ddc9fdf53",
+                "sha256:76d545bff2e10e5d891744aaa88451d3ddbfe4dce12c6504c28ee99fbaf734d7",
                 "untyped-python-vertex-algebra",
             ),
             "Vertex.are_coplanar": (
@@ -720,7 +720,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "legacy-first-triple-angular-coplanarity-905ebbf2",
                 "dragon-shape-geometry-core-1072-905ebbf2",
-                "sha256:ae0fab18d3b9c344c9ca4b66c991a16a958cf93a6323b69faf7736d3160d1f87",
+                "sha256:f40ec2da2cf4de165fd9c5aeca368d5107eb595b8ea609d69a05ac264587a1d7",
                 "legacy-first-triple-angular-coplanarity",
             ),
             "Vertex.cross": (
@@ -728,7 +728,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "untyped-python-vertex-metrics-6bc5db49",
                 "dragon-shape-geometry-core-1073-6bc5db49",
-                "sha256:47acbfb4038b9fcc6998c29b6c2221e72bf7613ea55689cfb3b5cabf1a926c08",
+                "sha256:4422f19acb2d8d08fa0df5d803a0d2c107c499b8030ad2a49c7887b39795354e",
                 "untyped-python-vertex-metrics",
             ),
             "Vertex.distance": (
@@ -736,7 +736,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "untyped-python-vertex-metrics-88c4cb9f",
                 "dragon-shape-geometry-core-1074-88c4cb9f",
-                "sha256:ba64225df24c6f348dbe1c61a31f6d7abfee9b5198e9aeb7effbacd487f45f47",
+                "sha256:47dd5385e06816a19e6a3c2ad2a1bef9b47abf0e5da7e263f8a2d67e4d521d6b",
                 "untyped-python-vertex-metrics",
             ),
             "Vertex.dot": (
@@ -744,7 +744,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "untyped-python-vertex-metrics-1aaf5930",
                 "dragon-shape-geometry-core-1075-1aaf5930",
-                "sha256:f84f3567eecb80518afa19d48a74cd56841ff2d559f7374c3c29fa2a80da1d8e",
+                "sha256:ca2205f398613ceef6bef35c2e1f9df5676cff9bcf968be9902e0189f4e9c9cf",
                 "untyped-python-vertex-metrics",
             ),
             "Vertex.norm": (
@@ -752,7 +752,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "untyped-python-vertex-metrics-e41eae31",
                 "dragon-shape-geometry-core-1076-e41eae31",
-                "sha256:0d5f53eedec478840c4d78919bde15e99901b3011389dd7eecd5c6c10efdd324",
+                "sha256:d792c5d6e0e0d9c943d2fb6a2054fcf7bba2feaf351a80d9cd4b1a4bf32d038a",
                 "untyped-python-vertex-metrics",
             ),
             "Vertex.unit": (
@@ -760,7 +760,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "zero-preserving-python-vertex-unit-4267bc06",
                 "dragon-shape-geometry-core-1077-4267bc06",
-                "sha256:510b8d8341d45c68b2503628e1d23a91794e4a48266264c38831046f9fb518d6",
+                "sha256:94485adc8570643a7ece3586d3cb1b77f9b1976067b1261a5ff3ff8e9a4d9063",
                 "zero-preserving-python-vertex-unit",
             ),
             "Vertex.x": (
@@ -768,7 +768,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "permissive-mutable-python-vertex-state-d859bad0",
                 "dragon-shape-geometry-core-1078-d859bad0",
-                "sha256:1b9c809756cb95c699a83bce8a074a73178f778e48bfeb9b094b6afa2f6a85b5",
+                "sha256:d954a38434d10eb4902650f925247ebaabeb0df0cdeaede281010c5b436ed970",
                 "permissive-mutable-python-vertex-state",
             ),
             "Vertex.y": (
@@ -776,7 +776,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "permissive-mutable-python-vertex-state-ff0bcc12",
                 "dragon-shape-geometry-core-1079-ff0bcc12",
-                "sha256:b203ff08791766ecee97c0d65b2e6242bef726c134d29f1e9f590422c1ad7846",
+                "sha256:0842a605a3acf284cacb4615cb15f00d8298ac13daf60b386080e2c04d6ac759",
                 "permissive-mutable-python-vertex-state",
             ),
             "Vertex.z": (
@@ -784,7 +784,7 @@ class ConfigurationTests(unittest.TestCase):
                 "exception",
                 "permissive-mutable-python-vertex-state-64899aff",
                 "dragon-shape-geometry-core-1080-64899aff",
-                "sha256:39d8c23b19ef20d1ca83a4785214fb9470c910d6af5f9d34fd23a6f5a97ecfac",
+                "sha256:8aa2468d2a77e4239ec962033c058a41f72c9cdbf16cbc5dbfdbf441aa00017d",
                 "permissive-mutable-python-vertex-state",
             ),
         }
@@ -949,56 +949,56 @@ class ConfigurationTests(unittest.TestCase):
                 1083,
                 "permissive-mutable-python-zone-container",
                 "dragon-shape-zone-core-1083-4830290e",
-                "sha256:0a8e3c4a13829403a767b44e261874a5474efcd68a45690d82d9ef7390c6a9b3",
+                "sha256:559e1ff5e78db8af2a73c3fb32f39d50494680ce9fe950ad434497bbb08a4c3e",
                 "permissive-mutable-python-zone-container",
             ),
             "Zone.__init__": (
                 1084,
                 "unchecked-aliased-python-zone-construction",
                 "dragon-shape-zone-core-1084-fad03092",
-                "sha256:981c4ce3873cc1f2a318798c5c17acf4930c1dc22d62030ea867d266b2066323",
+                "sha256:eaaf8e16d643b7da83ea69ffed2cfa5705a1a981fd2645049886423e7a6986e2",
                 "unchecked-aliased-python-zone-construction",
             ),
             "Zone.floor_area": (
                 1085,
                 "python-floor-identity-filter-and-dynamic-sum",
                 "dragon-shape-zone-core-1085-21fe276d",
-                "sha256:03ac624fcb7cab7c9747dae4110451bb050787739d64c531c1020551cb599c88",
+                "sha256:f62ada88673b4d66bdf3622c9f3b8574e4e28bece58db1e7f0df4d239e1a61a9",
                 "python-floor-identity-filter-and-dynamic-sum",
             ),
             "Zone.floor_surface": (
                 1086,
                 "python-floor-identity-filter-and-fresh-list",
                 "dragon-shape-zone-core-1086-53382328",
-                "sha256:27e26141d68464f70c03765f293ee32f249eeaef215d22295bcf64397148f214",
+                "sha256:dd2bdca0b834218b224bcbe5f5a0e736abba096d14e8e3a1aaca319d03c8c554",
                 "python-floor-identity-filter-and-fresh-list",
             ),
             "Zone.idf_airexhaustnodelistname": (
                 1087,
                 "mutable-unvalidated-python-zone-name-formatting-48c6fddb",
                 "dragon-shape-zone-core-1087-48c6fddb",
-                "sha256:09948bfe118818e91b075083c372b79e6ba897ad914e3b294023ca4549851d57",
+                "sha256:7e3a36b02e12c4ba1e17f94e04c9827be991487685b1f5bacc6d6fcb51057990",
                 "mutable-unvalidated-python-zone-name-formatting",
             ),
             "Zone.idf_airinletnodelistname": (
                 1088,
                 "mutable-unvalidated-python-zone-name-formatting-97745304",
                 "dragon-shape-zone-core-1088-97745304",
-                "sha256:535e3cdeaf89f909847737d3c3ee01d4e1472dca2d3d753ade3e4d9e01e8490b",
+                "sha256:625c6d4ee5c179618a75f4263dc8d3189c83bad52cbacd1f45aa5a57eff314e8",
                 "mutable-unvalidated-python-zone-name-formatting",
             ),
             "Zone.idf_equipmentlistname": (
                 1089,
                 "mutable-unvalidated-python-zone-name-formatting-ad9ccd78",
                 "dragon-shape-zone-core-1089-ad9ccd78",
-                "sha256:b42ff0074cb2373baf4b5e50eabb52a10e9a1f035b1d26504b46c6e8c8d0496a",
+                "sha256:186e8228fb0083efdfd01beb135eca5ed29f2fedcf377a7a84a7a6a4c8eecbf8",
                 "mutable-unvalidated-python-zone-name-formatting",
             ),
             "Zone.supply": (
                 1091,
                 "embedded-python-zone-supply-coercion-and-mutation",
                 "dragon-shape-zone-core-1091-1b5900c0",
-                "sha256:c4a3dfe679378e960361262fc322ce34960c2d32f2f8bf21f41f9f6ce987ccae",
+                "sha256:99e5f1c10bc7d526475e01e58793fd99fb0ffbed95e0e310c6ad2e8b5c6fc0d0",
                 "embedded-python-zone-supply-coercion-and-mutation",
             ),
         }
@@ -1047,7 +1047,7 @@ class ConfigurationTests(unittest.TestCase):
             "MatchesPinnedZoneCoreThroughTypedNativeRoutes"
         )
         zone_test_hash = (
-            "sha256:46b3d12a353c2e083ec81260692ede77b6658452d6f0815328597884ee8a0582"
+            "sha256:5d32682cfb81f5e2c4a1f0a34dd183e99aac1cd5972626a102566d7b1616899a"
         )
         zone_assertions = {}
         zone_families = set()

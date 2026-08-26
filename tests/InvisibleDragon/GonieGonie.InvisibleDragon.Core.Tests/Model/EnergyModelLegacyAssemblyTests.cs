@@ -33,14 +33,14 @@ public sealed class EnergyModelLegacyAssemblyTests
             "UpperLeftCorner", "CounterClockwise", "World");
         AssertFields(
             Assert.Single(safe["Schedule:Constant"]),
-            "$DEFAULT$PEOPLEACTIVITY", "ScheduleTypeLimits:Real", "107");
+            "$DEFAULT$PEOPLEACTIVITY", "ScheduleTypeLimits:Real", "107.0");
 
         AssertFields(
             Assert.Single(metadataOnly["GlobalGeometryRules"]),
             "UpperLeftCorner", "CounterClockwise", "World");
         AssertFields(
             Assert.Single(metadataOnly["Schedule:Constant"]),
-            "$DEFAULT$PEOPLEACTIVITY", "Real", "107");
+            "$DEFAULT$PEOPLEACTIVITY", "Real", "107.0");
         Assert.Equal(string.Empty, metadataOnly["Schedule:Compact"]["ALLON"][1]);
         Assert.Equal(string.Empty, metadataOnly["Schedule:Compact"]["ALLOFF"][1]);
 
@@ -203,7 +203,7 @@ public sealed class EnergyModelLegacyAssemblyTests
         Assert.Equal("Flow/Person", reduced[3]);
         Assert.Equal("0.00332", reduced[6]);
         Assert.Equal("Exhaust", reduced[8]);
-        Assert.Equal("125", reduced[9]);
+        Assert.Equal("125.0", reduced[9]);
         Assert.Equal("0.85", reduced[10]);
         Assert.Empty(legacy["OutdoorAir:Node"]);
         Assert.Empty(legacy["HeatExchanger:AirToAir:SensibleAndLatent"]);

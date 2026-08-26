@@ -170,7 +170,7 @@ public sealed class OpeningAdjacencyCoreOracleParityTests
         new(7, "sha256:26864b21db4e256819ecd68bd4493f8b0cbdd48f430d91726c0d817035f946f4"),
         new(6, "sha256:1cfa7e7e6196db5db775ef158391ab18d5c0f1b4b51c290b1ff1653de39eb92b"),
         new(6, "sha256:b73d1f643c95b2cdead760d228d4d8bc08d201ec7e640cbc8deb412e1464035b"),
-        new(10, "sha256:c789f7344415c87c3137b73b0a4f0db2610eff5fc1e33954cffbeb5d57b38803"),
+        new(10, "sha256:da13abd9c459600023c6ab72ea91b5f090b8d2dd8d5fabb51eb707f7f8cb8814"),
         new(13, "sha256:afae1436752290c7cef315a98d03854dc6ff16ef7999999b6e8fc976f7411cf4"),
         new(8, "sha256:730a4d632408ca29d1bfa5204554ead7d4ab41bb51133400832a07571f9565ef"),
     };
@@ -188,7 +188,7 @@ public sealed class OpeningAdjacencyCoreOracleParityTests
         "sha256:8b9e5ab60f25bf306e117d4df92ea08a784482435e73166da9ecdb52ab860bbc",
         "sha256:4b3ebe4b809eb5da6aa98988847d7dff288a1fd3370583166b27b0210feb31ee",
         "sha256:69f056b8beb1e306a0c7ad7c83365a09e184365bb579bddfec8a349663b17d03",
-        "sha256:84d8d135700b571157f91ee6f2c3b9ae859d233d0dc5beadfd4eb16704174189",
+        "sha256:887aaad7449dce5e1753add6d5cf5de3e944d222be88d154b00f4421afb4ef5c",
         "sha256:0705e84c47890ec56447c65eff16bb31d5340d79e19921ae7b985ecb037855b3",
         "sha256:08ce2c6a908b36f58f12d985c5e38cb513acbae7176e30362366de85347ed0b0",
         "sha256:71a4f989a069bbfa082ed1c95b6d592cb559164bbc3e59bbd3e4516acbd121b8",
