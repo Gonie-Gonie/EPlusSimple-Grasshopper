@@ -52,6 +52,17 @@ three-member iteration, representative engineering products, and the 107 W
 default people-activity field. Six members are exact equivalents and the two
 Python enum containers are reviewed native API adaptations.
 
+`python-0.7.0/dragon-model-add-supply-system-oracle.json` pins three ordered
+CPython 3.12.7 observations for `EnergyModel.add_supply_system`: generation
+failure before mutation, processor failure after appended objects persist, and
+successful append/processor/`None` return order. It binds the reviewed
+`model-context-supply-system-assembly` exception to public target
+`EnergyModel.ToIdfDocument` and assertion
+`dragon-model-add-supply-system-174532d0`. All twelve local modules loaded by
+the cases carry exact source and Python 3.12 AST receipts. The corpus is bounded
+and does not close `EnergyModel.to_idf`, `SupplyGroup`, concrete systems, or
+postprocessors.
+
 `python-0.7.0/dragon-model-assembly-oracle.json` pins five ordered CPython
 3.12.7 observations for bounded `EnergyModel.to_idf` behavior. It records
 exact-name profile replacement and its dangling schedule reference,

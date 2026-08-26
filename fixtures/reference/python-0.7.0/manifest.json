@@ -53,6 +53,11 @@
       "sha256": "ffa9805fd16847484195eb001cb7530c718554d13db40f811f7fa1242c020355"
     },
     {
+      "path": "dragon-model-add-supply-system-oracle.json",
+      "bytes": 15122,
+      "sha256": "4896c54312c44bffc573d0dc4d0fddfff14d17b0c65a3f789b8f6a487e1f181c"
+    },
+    {
       "path": "dragon-model-assembly-oracle.json",
       "bytes": 77002,
       "sha256": "a008740b6830908cd65d3f2636532c67dde7d7a6cadd062d34e3583775f16308"

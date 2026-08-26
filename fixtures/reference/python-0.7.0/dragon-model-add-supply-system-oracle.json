@@ -1,0 +1,398 @@
+{
+  "cases": [
+    {
+      "executor": "energy-model-add-supply-system",
+      "expected_dotnet": {
+        "adaptation": "model-context-supply-system-assembly",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-add-supply-system.add-supply-system.append-then-processor-failure",
+      "python": {
+        "facts": {
+          "append_call_count": 1,
+          "error": {
+            "args": [
+              "processor-failure: intentional failure after append"
+            ],
+            "message": "processor-failure: intentional failure after append",
+            "message_prefix": "processor-failure:",
+            "message_starts_with_prefix": true,
+            "type": "RuntimeError"
+          },
+          "events": [
+            {
+              "event": "supply.to_idf_object",
+              "zone_name": "Processor-Failure-Zone"
+            },
+            {
+              "event": "idf.append",
+              "objects": [
+                {
+                  "name": "Failure-Appended-First",
+                  "object_type": "Zone"
+                },
+                {
+                  "name": "Failure-Appended-Second",
+                  "object_type": "Zone"
+                }
+              ]
+            },
+            {
+              "event": "processor.run",
+              "processor": "observer-before-failure",
+              "zone_names": [
+                "Existing-Zone",
+                "Failure-Appended-First",
+                "Failure-Appended-Second"
+              ]
+            },
+            {
+              "event": "processor.run",
+              "processor": "failing-processor",
+              "zone_names": [
+                "Existing-Zone",
+                "Failure-Appended-First",
+                "Failure-Appended-Second"
+              ]
+            }
+          ],
+          "mutation_state": "appended-before-processor-error",
+          "processor_labels_run": [
+            "observer-before-failure",
+            "failing-processor"
+          ],
+          "return": {
+            "kind": "not-returned"
+          },
+          "supply_generation_count": 1,
+          "unreached_processor_ran": false,
+          "zone_names_after": [
+            "Existing-Zone",
+            "Failure-Appended-First",
+            "Failure-Appended-Second"
+          ]
+        },
+        "outcome": "raised"
+      },
+      "symbol": "EnergyModel.add_supply_system"
+    },
+    {
+      "executor": "energy-model-add-supply-system",
+      "expected_dotnet": {
+        "adaptation": "model-context-supply-system-assembly",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-add-supply-system.add-supply-system.generation-failure-before-mutation",
+      "python": {
+        "facts": {
+          "append_call_count": 0,
+          "error": {
+            "args": [
+              "generation-failure: intentional failure before append"
+            ],
+            "message": "generation-failure: intentional failure before append",
+            "message_prefix": "generation-failure:",
+            "message_starts_with_prefix": true,
+            "type": "RuntimeError"
+          },
+          "events": [
+            {
+              "event": "supply.to_idf_object",
+              "zone_name": "Generation-Failure-Zone"
+            }
+          ],
+          "mutation_state": "unchanged-before-generation-error",
+          "processor_labels_run": [],
+          "return": {
+            "kind": "not-returned"
+          },
+          "supply_generation_count": 1,
+          "unreached_processor_ran": false,
+          "zone_names_after": [
+            "Existing-Zone"
+          ]
+        },
+        "outcome": "raised"
+      },
+      "symbol": "EnergyModel.add_supply_system"
+    },
+    {
+      "executor": "energy-model-add-supply-system",
+      "expected_dotnet": {
+        "adaptation": "model-context-supply-system-assembly",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-add-supply-system.add-supply-system.success-return-and-order",
+      "python": {
+        "facts": {
+          "append_call_count": 1,
+          "error": {
+            "kind": "none"
+          },
+          "events": [
+            {
+              "event": "supply.to_idf_object",
+              "zone_name": "Success-Zone"
+            },
+            {
+              "event": "idf.append",
+              "objects": [
+                {
+                  "name": "Success-Appended-First",
+                  "object_type": "Zone"
+                },
+                {
+                  "name": "Success-Appended-Second",
+                  "object_type": "Zone"
+                }
+              ]
+            },
+            {
+              "event": "processor.run",
+              "processor": "first-processor",
+              "zone_names": [
+                "Existing-Zone",
+                "Success-Appended-First",
+                "Success-Appended-Second"
+              ]
+            },
+            {
+              "event": "processor.run",
+              "processor": "second-processor",
+              "zone_names": [
+                "Existing-Zone",
+                "Success-Appended-First",
+                "Success-Appended-Second"
+              ]
+            }
+          ],
+          "mutation_state": "appended-before-ordered-processors",
+          "processor_labels_run": [
+            "first-processor",
+            "second-processor"
+          ],
+          "return": {
+            "kind": "none"
+          },
+          "supply_generation_count": 1,
+          "unreached_processor_ran": false,
+          "zone_names_after": [
+            "Existing-Zone",
+            "Success-Appended-First",
+            "Success-Appended-Second"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.add_supply_system"
+    }
+  ],
+  "cases_sha256": "sha256:ac58c4020edba588dceb8793b42552d261eb6686975bee1b553e9d8697d9cc2d",
+  "consumer_contract": {
+    "adaptations": {
+      "EnergyModel.add_supply_system": "model-context-supply-system-assembly"
+    },
+    "assertion_ids": {
+      "EnergyModel.add_supply_system": "dragon-model-add-supply-system-174532d0"
+    },
+    "case_count": 3,
+    "case_ids": [
+      "dragon-model-add-supply-system.add-supply-system.append-then-processor-failure",
+      "dragon-model-add-supply-system.add-supply-system.generation-failure-before-mutation",
+      "dragon-model-add-supply-system.add-supply-system.success-return-and-order"
+    ],
+    "classifications": {
+      "EnergyModel.add_supply_system": "exception"
+    },
+    "closure": {
+      "full_symbol_closure": false,
+      "scope": "bounded-reviewed-adaptation-evidence",
+      "unresolved_behavior": [
+        "EnergyModel.to_idf",
+        "SupplyGroup",
+        "concrete-supply-systems",
+        "supply-system-postprocessors"
+      ]
+    },
+    "identity_encoding": "logical-labels-only-no-id-or-address",
+    "native_targets": {
+      "EnergyModel.add_supply_system": "EnergyModel.ToIdfDocument"
+    },
+    "source_import_policy": "external-temporary-copy-with-complete-loaded-local-module-audit",
+    "state_encoding": "ordered-logical-events-and-object-names",
+    "target_symbols": [
+      "EnergyModel.add_supply_system"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-model-add-supply-system.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:6bf509a4d5050f54bd748c516ed98b6ae249edf3aaa84a75c4c7bd11b7fbef4b",
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:576bb4584970582d94ae80ad061612e84dad263321a9e6288b39a92af7cd959f",
+      "symbol": "EnergyModel.add_supply_system",
+      "symbol_hash": "sha256:174532d0aa6b76826dd78f3d7020ba49eeba26494019da3fb361396e31c15a94"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "loaded_local_modules": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "module": "idragon",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "module": "idragon.common",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "module": "idragon.constants",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "module": "idragon.dragon",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "module": "idragon.dragon.construction",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "module": "idragon.dragon.hvac",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "module": "idragon.dragon.model",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "module": "idragon.dragon.profile",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "module": "idragon.dragon.shape",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "module": "idragon.imugi",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "module": "idragon.launcher",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "module": "idragon.utils",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ],
+    "sources": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ]
+  }
+}

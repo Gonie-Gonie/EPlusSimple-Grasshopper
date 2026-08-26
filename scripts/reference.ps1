@@ -32,6 +32,7 @@ $usageProfileCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-referen
 $utilsCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_utils_core_oracle.py'
 $commonCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_common_core_oracle.py'
 $constantsEngineeringGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_constants_engineering_oracle.py'
+$dragonModelAddSupplySystemGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_add_supply_system_oracle.py'
 $dragonModelAssemblyGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_assembly_oracle.py'
 $dragonModelConditioningGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_conditioning_oracle.py'
 $dragonModelConstructionDefaultsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_construction_defaults_oracle.py'
@@ -64,6 +65,7 @@ $usageProfileCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\tes
 $utilsCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_utils_core_oracle.py'
 $commonCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_common_core_oracle.py'
 $constantsEngineeringTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_constants_engineering_oracle.py'
+$dragonModelAddSupplySystemTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_add_supply_system_oracle.py'
 $dragonModelAssemblyTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_assembly_oracle.py'
 $dragonModelConditioningTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_conditioning_oracle.py'
 $dragonModelConstructionDefaultsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_construction_defaults_oracle.py'
@@ -148,6 +150,7 @@ foreach ($requiredFile in @(
     $utilsCoreGeneratorPath,
     $commonCoreGeneratorPath,
     $constantsEngineeringGeneratorPath,
+    $dragonModelAddSupplySystemGeneratorPath,
     $dragonModelAssemblyGeneratorPath,
     $dragonModelConditioningGeneratorPath,
     $dragonModelConstructionDefaultsGeneratorPath,
@@ -178,6 +181,7 @@ foreach ($requiredFile in @(
     $utilsCoreTestPath,
     $commonCoreTestPath,
     $constantsEngineeringTestPath,
+    $dragonModelAddSupplySystemTestPath,
     $dragonModelAssemblyTestPath,
     $dragonModelConditioningTestPath,
     $dragonModelConstructionDefaultsTestPath,
@@ -664,7 +668,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, dragon model assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -775,6 +779,25 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $constantsEngineeringGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-constants-engineering-reference.log') `
     -FailureMessage 'Generating the Python constants engineering oracle failed'
+
+$dragonModelAddSupplySystemOraclePath = Join-Path $outputRoot 'dragon-model-add-supply-system-oracle.json'
+$dragonModelAddSupplySystemGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $dragonModelAddSupplySystemGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $dragonModelAddSupplySystemOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $dragonModelAddSupplySystemGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-dragon-model-add-supply-system-reference.log') `
+    -FailureMessage 'Generating the Python dragon model add-supply-system oracle failed'
 
 $dragonModelAssemblyOraclePath = Join-Path $outputRoot 'dragon-model-assembly-oracle.json'
 $dragonModelAssemblyGeneratorArguments = @(
