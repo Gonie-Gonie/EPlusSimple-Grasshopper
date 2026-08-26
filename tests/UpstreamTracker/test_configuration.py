@@ -40,16 +40,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(746, len(compatibility.needs_reverification))
+        self.assertEqual(740, len(compatibility.needs_reverification))
         self.assertEqual(
-            129,
+            133,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            115,
+            117,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -176,6 +176,77 @@ class ConfigurationTests(unittest.TestCase):
                 "upstream/symbol-evidence.json#dragon-model-add-supply-system-174532d0",
             ),
             add_supply_system.evidence,
+        )
+        expected_supply_group_core = {
+            "SupplyGroup.__init__": (
+                "exception",
+                "immutable-validated-supply-group-construction",
+                (
+                    "upstream/compatibility-exceptions.yml#"
+                    "immutable-validated-supply-group-construction",
+                    "upstream/symbol-evidence.json#"
+                    "dragon-hvac-supply-group-core-init-02b3c43a",
+                ),
+            ),
+            "SupplyGroup.coolable": (
+                "equivalent",
+                None,
+                (
+                    "upstream/symbol-evidence.json#"
+                    "dragon-hvac-supply-group-core-coolable-0f6f3f1a",
+                ),
+            ),
+            "SupplyGroup.cooling_systems": (
+                "equivalent",
+                None,
+                (
+                    "upstream/symbol-evidence.json#"
+                    "dragon-hvac-supply-group-core-cooling-systems-e2ee9492",
+                ),
+            ),
+            "SupplyGroup.heatable": (
+                "equivalent",
+                None,
+                (
+                    "upstream/symbol-evidence.json#"
+                    "dragon-hvac-supply-group-core-heatable-ab11abdd",
+                ),
+            ),
+            "SupplyGroup.heating_systems": (
+                "equivalent",
+                None,
+                (
+                    "upstream/symbol-evidence.json#"
+                    "dragon-hvac-supply-group-core-heating-systems-1fdfba66",
+                ),
+            ),
+            "SupplyGroup.sources": (
+                "exception",
+                "stable-entity-id-supply-source-deduplication",
+                (
+                    "upstream/compatibility-exceptions.yml#"
+                    "stable-entity-id-supply-source-deduplication",
+                    "upstream/symbol-evidence.json#"
+                    "dragon-hvac-supply-group-core-sources-482d0fa2",
+                ),
+            ),
+        }
+        for symbol, (classification, exception_id, evidence) in (
+            expected_supply_group_core.items()
+        ):
+            entry = by_key[("src/idragon/dragon/hvac.py", symbol)]
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            self.assertEqual(evidence, entry.evidence, symbol)
+        self.assertEqual(
+            "needs_reverification",
+            by_key[("src/idragon/dragon/hvac.py", "SupplyGroup")].classification,
+        )
+        self.assertEqual(
+            "needs_reverification",
+            by_key[
+                ("src/idragon/dragon/hvac.py", "SupplyGroup.to_idf_object")
+            ].classification,
         )
 
     def test_rejects_non_goniegonie_product_ownership(self) -> None:

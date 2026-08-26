@@ -1702,3 +1702,31 @@
     api_contract: callers assign a SupplyGroup to a model zone and call EnergyModel.ToIdfDocument; no parity is claimed for standalone static invocation, duck-typed inputs, mutation of a caller-owned IDF, processor identity or execution timing, partial-mutation failure effects, or assembly of zones that the model does not classify as conditioned
     compatibility_evidence: exact upstream delegation, append-before-processor ordering, argument identity, None return and partial-failure behavior plus the native public assignment route, conditioning gate, fresh-document isolation and deterministic integration remain required; SupplyGroup conversion, concrete supply-system conversion, postprocessor implementations and full EnergyModel.to_idf behavior remain separately reviewed symbols
   approval: accepted-native-api-adaptation
+
+- id: immutable-validated-supply-group-construction
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: SupplyGroup.__init__
+    symbol_hash: sha256:02b3c43aa048fd31a3ffc31fea96f5086a599d3245847e217dc0c99a9cf5fddd
+  difference:
+    upstream: accepts a nonempty Python list of SupplySystem instances and an optional keyword-only availability list, snapshots both as tuples, rejects mismatched counts and systems without either capability, but accepts repeated system identities and arbitrary availability objects
+    dotnet: accepts typed enumerable inputs, rejects null or empty membership, duplicate stable EntityId values, mismatched availability counts and non-OnOff schedules, then exposes immutable read-only snapshots while preserving valid input order and object identity
+  effect:
+    engineering_result: valid ordered systems and aligned OnOff availability schedules retain the same capability membership and caller object identities while ambiguous duplicate logical equipment and invalid availability domains are rejected before model assembly
+    api_contract: callers construct SupplyGroup from typed native systems and optional OnOff schedules; no parity is claimed for Python keyword-only invocation, arbitrary availability values, duplicate system membership, Python exception families or exact error text
+    compatibility_evidence: exact upstream signature, selected validation messages and precedence under simultaneously invalid inputs, tuple snapshot behavior, duplicate and arbitrary-availability acceptance, plus native defensive copying, stable-identity and schedule-domain guards remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: stable-entity-id-supply-source-deduplication
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: SupplyGroup.sources
+    symbol_hash: sha256:482d0fa2c4cc9f732bc33911ae01ea857e3042ff4cf60e680583f2abefdab423
+  difference:
+    upstream: returns a fresh tuple in system encounter order, skips None, and collapses only repeated references to the same source object, so distinct source objects representing the same logical source remain separate
+    dotnet: returns a fresh read-only collection in system encounter order, skips null, and collapses sources by stable EntityId while retaining the first encountered native source object
+  effect:
+    engineering_result: shared logical sources are exposed once in this projection with deterministic first-object retention, avoiding duplicate logical entries for consumers of SupplyGroup.Sources; downstream plant assembly remains separately reviewed
+    api_contract: callers observe logical source identity through EntityId rather than Python process object identity; no parity is claimed for retaining multiple distinct references with the same logical identifier or for the Python tuple representation
+    compatibility_evidence: no-source filtering, repeated-reference collapse, distinct-source encounter order, fresh result collections, equal-but-distinct upstream identity retention and first-wins native EntityId collapse remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation

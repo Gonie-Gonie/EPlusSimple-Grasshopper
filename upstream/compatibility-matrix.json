@@ -790,12 +790,12 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:82fc11ef3a285d3e544edfc6a1bb9fce269004a81114c9dfabbf82d4e251dda5",
+  "content_sha256": "sha256:7109c221a7ed894bfb6dcf413f33d162fe2380d4876050cd6536327e373747d3",
   "details": [
     {
       "evidence": [
@@ -2962,6 +2962,52 @@
       ],
       "index": 755,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-validated-supply-group-construction",
+        "upstream/symbol-evidence.json#dragon-hvac-supply-group-core-init-02b3c43a"
+      ],
+      "exception_id": "immutable-validated-supply-group-construction",
+      "index": 790,
+      "rationale": "Trusted cross-language evidence verifies the exact upstream constructor surface and validation precedence, tuple snapshots, permissive duplicate and availability behavior, and the approved typed immutable native adaptation."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-supply-group-core-coolable-0f6f3f1a"
+      ],
+      "index": 791,
+      "rationale": "Trusted cross-language evidence verifies cooling capability results and exact ordered capability reads for the three bounded cooling-only, heating-only, and mixed inputs."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-supply-group-core-cooling-systems-e2ee9492"
+      ],
+      "index": 792,
+      "rationale": "Trusted cross-language evidence verifies ordered cooling membership, empty projection behavior, preserved input identity, and fresh result collections."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-supply-group-core-heatable-ab11abdd"
+      ],
+      "index": 793,
+      "rationale": "Trusted cross-language evidence verifies heating capability results and exact ordered capability reads for the three bounded cooling-only, heating-only, and mixed inputs."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-supply-group-core-heating-systems-1fdfba66"
+      ],
+      "index": 794,
+      "rationale": "Trusted cross-language evidence verifies ordered heating membership, empty projection behavior, preserved input identity, and fresh result collections."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#stable-entity-id-supply-source-deduplication",
+        "upstream/symbol-evidence.json#dragon-hvac-supply-group-core-sources-482d0fa2"
+      ],
+      "exception_id": "stable-entity-id-supply-source-deduplication",
+      "index": 795,
+      "rationale": "Trusted cross-language evidence verifies source order, None filtering, identity deduplication and fresh projections, plus the approved native stable-EntityId first-object-retention adaptation; downstream plant assembly remains unresolved."
     },
     {
       "evidence": [
@@ -4954,9 +5000,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 129,
-      "exception": 115,
-      "needs_reverification": 746,
+      "equivalent": 133,
+      "exception": 117,
+      "needs_reverification": 740,
       "out_of_scope": 252
     },
     "entry_count": 1242

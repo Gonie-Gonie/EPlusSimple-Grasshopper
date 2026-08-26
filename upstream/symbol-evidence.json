@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:7870638605f23a0d13f18e9d8be84696a156c1a26b1fa1d8174c4fd1e3f89901",
+  "content_sha256": "sha256:e8d4430c33b210cb0c773cb728f8739d45f3770e58bd1388a40b36ff6aca1668",
   "entries": [
     {
       "implementation": {
@@ -1040,6 +1040,162 @@
       ],
       "symbol": "Material.__eq__",
       "upstream_symbol_hash": "sha256:6ef680a2e300bcb56672f0d036de1b4aea3630cb90a635a3e45002ff8535dbf5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "source_sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify the exact SupplyGroup constructor surface, tuple snapshots, validation precedence, duplicate and arbitrary-availability acceptance, and the approved typed immutable native construction adaptation.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:09ed6105d8021a7b9724d2c54af972e7c4814b84097c4ebf040d316d8cc1c9f4",
+          "id": "dragon-hvac-supply-group-core-init-02b3c43a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SupplyGroupCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:52c10f25b87534b8c898002f343c04b7cafcbbe1095bbc182051e81ed55681bd",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SupplyGroupCoreOracleParityTests.MatchesPinnedPythonSupplyGroupCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SupplyGroup.__init__",
+      "upstream_symbol_hash": "sha256:02b3c43aa048fd31a3ffc31fea96f5086a599d3245847e217dc0c99a9cf5fddd"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "source_sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup.CanCool"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SupplyGroup.coolable for cooling-only, heating-only, and mixed ordered inputs, including exact ordered capability reads for those three bounded inputs, against SupplyGroup.CanCool.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:939db8cfa724e599b89fa60f6a47b1d7df7ca4ac5c4a11b93f5a6286e008f531",
+          "id": "dragon-hvac-supply-group-core-coolable-0f6f3f1a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SupplyGroupCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:52c10f25b87534b8c898002f343c04b7cafcbbe1095bbc182051e81ed55681bd",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SupplyGroupCoreOracleParityTests.MatchesPinnedPythonSupplyGroupCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SupplyGroup.coolable",
+      "upstream_symbol_hash": "sha256:0f6f3f1afaac0b5144d7a4f3af1857e2d5d6ca2e02baf98d0427cd1a317abd36"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "source_sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup.CoolingSystems"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify ordered cooling-system projection membership, empty results, input identity, and fresh result containers against SupplyGroup.CoolingSystems.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9d03457f00fce90d5269a008ec3549d2d709e5006738fda5e5cfed03df43bdc5",
+          "id": "dragon-hvac-supply-group-core-cooling-systems-e2ee9492",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SupplyGroupCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:52c10f25b87534b8c898002f343c04b7cafcbbe1095bbc182051e81ed55681bd",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SupplyGroupCoreOracleParityTests.MatchesPinnedPythonSupplyGroupCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SupplyGroup.cooling_systems",
+      "upstream_symbol_hash": "sha256:e2ee9492964b6c3eeaa5d54700d66a010198413a3c006edd46427c126150221c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "source_sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup.CanHeat"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SupplyGroup.heatable for cooling-only, heating-only, and mixed ordered inputs, including exact ordered capability reads for those three bounded inputs, against SupplyGroup.CanHeat.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e9ee613153115c25f5ab269fe232a7bd26ca320cb71149b6969aa2dd99ae82af",
+          "id": "dragon-hvac-supply-group-core-heatable-ab11abdd",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SupplyGroupCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:52c10f25b87534b8c898002f343c04b7cafcbbe1095bbc182051e81ed55681bd",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SupplyGroupCoreOracleParityTests.MatchesPinnedPythonSupplyGroupCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SupplyGroup.heatable",
+      "upstream_symbol_hash": "sha256:ab11abdd7afeb3b7fde0805ce2697af2df49ad6e874691b164bb5674ae9ac655"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "source_sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup.HeatingSystems"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify ordered heating-system projection membership, empty results, input identity, and fresh result containers against SupplyGroup.HeatingSystems.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:24283bf79c2821f8707b9e76eaaf596945f3662dfb6a388ea7fa9356057a6594",
+          "id": "dragon-hvac-supply-group-core-heating-systems-1fdfba66",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SupplyGroupCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:52c10f25b87534b8c898002f343c04b7cafcbbe1095bbc182051e81ed55681bd",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SupplyGroupCoreOracleParityTests.MatchesPinnedPythonSupplyGroupCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SupplyGroup.heating_systems",
+      "upstream_symbol_hash": "sha256:1fdfba66763618fe1880c3d0354b764e551c8a7747eb4a1dedac24d375f87dc2"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "source_sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup.Sources"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify source encounter order, None filtering, reference-identity deduplication, fresh projections, and the approved native stable-EntityId first-object-retention adaptation.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3945c4f7c79900f7a739033cc2830d61390c47c0065e7b3e0ace6056fb78a6d5",
+          "id": "dragon-hvac-supply-group-core-sources-482d0fa2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SupplyGroupCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:52c10f25b87534b8c898002f343c04b7cafcbbe1095bbc182051e81ed55681bd",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SupplyGroupCoreOracleParityTests.MatchesPinnedPythonSupplyGroupCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SupplyGroup.sources",
+      "upstream_symbol_hash": "sha256:482d0fa2c4cc9f732bc33911ae01ea857e3042ff4cf60e680583f2abefdab423"
     },
     {
       "implementation": {
@@ -6349,9 +6505,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 244,
-    "passed_receipt_count": 244,
-    "receipt_count": 244,
+    "entry_count": 250,
+    "passed_receipt_count": 250,
+    "receipt_count": 250,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
