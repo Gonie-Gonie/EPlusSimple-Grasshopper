@@ -821,7 +821,7 @@
     "equivalent",
     "equivalent",
     "equivalent",
-    "needs_reverification",
+    "exception",
     "equivalent",
     "exception",
     "exception",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:4be03cd6581dfd1f89ea55bcc7f68dfeef1cb8e50d7ebdd5b02a2f7a4db7f2a7",
+  "content_sha256": "sha256:b0a4b79e037716efc6ba023fe1cf6e7521b64b6c7499cc73c14736bef71aa0bf",
   "details": [
     {
       "evidence": [
@@ -3056,6 +3056,15 @@
       ],
       "index": 820,
       "rationale": "Trusted cross-language evidence verifies EnergyModel.surfaces across its exact three-case model projection slice: empty freshness, zone-major flatten order, repeated identity, and isolated result mutation."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-fresh-energy-model-idf-assembly",
+        "upstream/symbol-evidence.json#dragon-model-energy-model-to-idf-de10251f"
+      ],
+      "exception_id": "validated-fresh-energy-model-idf-assembly",
+      "index": 821,
+      "rationale": "Trusted cross-language evidence verifies EnergyModel.to_idf across the bounded five-case parent-orchestration slice: a successful adversarial native model yields fresh distinct byte-for-byte deterministic documents and children without model mutation, preserves model zone, supply and photovoltaic input order, orders sources by stable EntityId despite opposite encounter order, deduplicates a shared source, preserves ordered terminals, contiguous photovoltaic batches and major-family checkpoints, and uses only default ThrowOnValidationErrors=true pre-validation. Raw global Python order, caller-owned mutable or partial IDF identity, all four upstream assembly-stage failure prefixes, validation bypass, failures after Assemble starts and transactionality, invalid duck types and exception wording, and standalone AirBoundary, Construction, Glazing, Layer, NoMassConstruction, Zone, source, photovoltaic, IDF and IdfObject child converters or classes remain explicitly excluded or unresolved."
     },
     {
       "evidence": [
@@ -5028,8 +5037,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 133,
-      "exception": 120,
-      "needs_reverification": 737,
+      "exception": 121,
+      "needs_reverification": 736,
       "out_of_scope": 252
     },
     "entry_count": 1242

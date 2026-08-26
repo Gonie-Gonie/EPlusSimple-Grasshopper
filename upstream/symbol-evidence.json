@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:dbc6cf02cf4f5a9b574e2e08107cfdd407363b4dc5c3f3e43baa65d35d671c67",
+  "content_sha256": "sha256:ad47bf699e86e22360da580436c6bc5b89ffb3b3cbd9f9fb0a63a9926e7a012e",
   "entries": [
     {
       "implementation": {
@@ -1352,6 +1352,32 @@
       ],
       "symbol": "EnergyModel.surfaces",
       "upstream_symbol_hash": "sha256:9bd40b3fbdc974f1f3a7550b2df6ec8f4c41ce9cb55ecbc07b3f2fce264834c0"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.Assemble"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyModel.to_idf across the bounded five-case parent-orchestration slice. The successful adversarial native model returns fresh distinct byte-for-byte deterministic documents and child objects without mutating model membership or identities, preserves model zone, supply and photovoltaic input ordering, orders distinct sources by stable EntityId despite opposite encounter order, deduplicates a shared source, retains ordered terminal references, contiguous photovoltaic batches and major-family checkpoints, and uses default ThrowOnValidationErrors=true pre-validation. The four upstream assembly-stage partial-prefix traces are explicitly waived and are not mapped to native stages; no parity is claimed for raw global Python order, mutable or partial IDF identity, validation bypass, failures after Assemble starts or their transactionality, invalid duck types or exception wording, or standalone unresolved child converters and classes.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e70ced0ec859a1e5fbbe1461273f3e4218c2228d470e6100d59bbea8eb7e3757",
+          "id": "dragon-model-energy-model-to-idf-de10251f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelAssemblyOracleParityTests.cs",
+          "test_source_sha256": "sha256:f2bb09e22b60f2ff247548c6ee13c87535cfba50dc477a8f4f2a0ab2723c05dc",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelAssemblyOracleParityTests.ValidatedFreshEnergyModelIdfAssemblyMatchesBoundedParentOrchestration",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyModel.to_idf",
+      "upstream_symbol_hash": "sha256:de10251f38f220956e870d8faea1c7a879da9158b369cffc244f7afc6519eb35"
     },
     {
       "implementation": {
@@ -6583,9 +6609,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 253,
-    "passed_receipt_count": 253,
-    "receipt_count": 253,
+    "entry_count": 254,
+    "passed_receipt_count": 254,
+    "receipt_count": 254,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(737, len(compatibility.needs_reverification))
+        self.assertEqual(736, len(compatibility.needs_reverification))
         self.assertEqual(
             133,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            120,
+            121,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -284,11 +284,26 @@ class ConfigurationTests(unittest.TestCase):
             self.assertEqual("exception", entry.classification, symbol)
             self.assertEqual(exception_id, entry.exception_id, symbol)
             self.assertEqual(evidence, entry.evidence, symbol)
+        energy_model_to_idf_key = (
+            "src/idragon/dragon/model.py",
+            "EnergyModel.to_idf",
+        )
+        energy_model_to_idf = by_key[energy_model_to_idf_key]
+        self.assertEqual(energy_model_to_idf_key, compatibility.inventory.symbols[821].key)
+        self.assertEqual(energy_model_to_idf, compatibility.matrix.entries[821])
+        self.assertEqual("exception", energy_model_to_idf.classification)
         self.assertEqual(
-            "needs_reverification",
-            by_key[
-                ("src/idragon/dragon/model.py", "EnergyModel.to_idf")
-            ].classification,
+            "validated-fresh-energy-model-idf-assembly",
+            energy_model_to_idf.exception_id,
+        )
+        self.assertEqual(
+            (
+                "upstream/compatibility-exceptions.yml#"
+                "validated-fresh-energy-model-idf-assembly",
+                "upstream/symbol-evidence.json#"
+                "dragon-model-energy-model-to-idf-de10251f",
+            ),
+            energy_model_to_idf.evidence,
         )
 
     def test_rejects_non_goniegonie_product_ownership(self) -> None:
