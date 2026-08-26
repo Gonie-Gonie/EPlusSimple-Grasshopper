@@ -69,6 +69,16 @@ compares all generated files byte-for-byte with the reviewed baseline under
 fail-closed generator tests under `tests/PythonReference` before producing an
 oracle.
 
+The common core oracle directly imports the pinned `idragon/common.py` bytes
+without initializing the surrounding package and binds its 13 unresolved
+symbols through 39 ordered cases. It preserves the 24.2.0 and 2026 defaults,
+two- and three-component construction, arbitrary nonnumeric delimiters,
+Unicode decimal digits, the empty-format separator quirk, ordered iteration,
+legacy IDD and EnergyPlus directory names, and the upstream invalid-input
+failure surface. Its consumer contract declares ten exact equivalents and the
+three reviewed native descriptor, validated-construction, and strongly typed
+coercion adaptations.
+
 Updating the tracked baseline is an explicit review action:
 
 ```text

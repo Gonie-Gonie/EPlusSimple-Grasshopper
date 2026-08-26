@@ -35,3 +35,11 @@ observations for `GRJSON_FORMAT`, `validate_type`, `validate_range`, and
 It preserves legacy template order and mutability facts plus decorator
 acceptance and rejection surfaces, and records the four reviewed immutable,
 finite, or strongly typed native adaptations explicitly.
+
+`python-0.7.0/common-core-oracle.json` pins 39 ordered CPython 3.12.7
+observations for the 13 unresolved public symbols in `idragon/common.py` while
+leaving the already excluded debug representations out of the corpus. It
+records the EnergyPlus 24.2.0 and 2026 defaults, ASCII and Unicode-decimal
+version parsing, formatting, component order, filenames, identity behavior,
+and coercion failures with the exact ten-equivalent versus three-reviewed-
+adaptation split.

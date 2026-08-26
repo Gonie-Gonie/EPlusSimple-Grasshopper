@@ -18,6 +18,11 @@
       "sha256": "0076a953ce599b47be283375f9aef93b24ddb3cd4192a8bc39573061e6ec8f96"
     },
     {
+      "path": "common-core-oracle.json",
+      "bytes": 34831,
+      "sha256": "2aba044516f955c5ef1ae28770982a68bf79d3dab6899f66a9091e0ccc4e9f9a"
+    },
+    {
       "path": "construction-equality-hash-oracle.json",
       "bytes": 4326,
       "sha256": "6a1de9268675565ab6a14467717ac38799c45d9fdbba4230b4be403a9b79dbe7"

@@ -30,6 +30,7 @@ $generatorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_refe
 $profileGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_usage_profile_schedule_oracle.py'
 $usageProfileCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_usage_profile_core_oracle.py'
 $utilsCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_utils_core_oracle.py'
+$commonCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_common_core_oracle.py'
 $iddGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_idd_schema_oracle.py'
 $constructionEqualityGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_construction_equality_hash_oracle.py'
 $scheduleTypeGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_schedule_type_oracle.py'
@@ -53,6 +54,7 @@ $scheduleOperationsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\t
 $profileResidualTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_profile_residual_oracle.py'
 $usageProfileCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_usage_profile_core_oracle.py'
 $utilsCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_utils_core_oracle.py'
+$commonCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_common_core_oracle.py'
 $publicSymbolInventoryPath = Join-Path $repositoryRoot 'upstream\public-symbol-inventory.json'
 $tempRoot = Join-Path $repositoryRoot 'temp'
 $referenceTempRoot = Join-Path $tempRoot 'reference'
@@ -130,6 +132,7 @@ foreach ($requiredFile in @(
     $profileGeneratorPath,
     $usageProfileCoreGeneratorPath,
     $utilsCoreGeneratorPath,
+    $commonCoreGeneratorPath,
     $iddGeneratorPath,
     $constructionEqualityGeneratorPath,
     $scheduleTypeGeneratorPath,
@@ -153,6 +156,7 @@ foreach ($requiredFile in @(
     $profileResidualTestPath,
     $usageProfileCoreTestPath,
     $utilsCoreTestPath,
+    $commonCoreTestPath,
     $publicSymbolInventoryPath
 )) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
@@ -634,7 +638,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -709,6 +713,24 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $utilsCoreGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-utils-core-reference.log') `
     -FailureMessage 'Generating the Python utils core reference oracle failed'
+
+$commonCoreOraclePath = Join-Path $outputRoot 'common-core-oracle.json'
+$commonCoreGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $commonCoreGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $commonCoreOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $commonCoreGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-common-core-reference.log') `
+    -FailureMessage 'Generating the Python common core reference oracle failed'
 
 $iddOraclePath = Join-Path $outputRoot 'idd-24.2.0.schema.json.gz'
 $iddGeneratorArguments = @(

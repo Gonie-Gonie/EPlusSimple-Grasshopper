@@ -1,3 +1,4 @@
+using System.Globalization;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Construction;
 using GonieGonie.InvisibleDragon.Hvac;
@@ -80,12 +81,23 @@ internal static class EnergyModelIdfAssembler
         IdfGenerationContext context,
         EnergyModelIdfOptions options)
     {
-        yield return context.CreateRaw("Version", "24.2");
+        EnergyPlusVersion version = EnergyPlusDefaults.DefaultVersion;
+        yield return context.CreateRaw(
+            "Version",
+            string.Format(CultureInfo.InvariantCulture, "{0}.{1}", version.Major, version.Minor));
         yield return context.CreateRaw("SimulationControl", "Yes", "Yes", "Yes", "No", "Yes", "No");
         yield return context.CreateRaw("SizingPeriod:WeatherFileDays", "DesignWinter", 1, 1, 1, 31);
         yield return context.CreateRaw("SizingPeriod:WeatherFileDays", "DesignSummer", 8, 1, 8, 31);
         yield return context.CreateRaw("Timestep", 6);
-        yield return context.CreateRaw("RunPeriod", "Year-Round", 1, 1, 2026, 12, 31, 2026);
+        yield return context.CreateRaw(
+            "RunPeriod",
+            "Year-Round",
+            1,
+            1,
+            EnergyPlusDefaults.DefaultYear,
+            12,
+            31,
+            EnergyPlusDefaults.DefaultYear);
         yield return context.CreateRaw("GlobalGeometryRules", "UpperLeftCorner", "CounterClockwise", "World");
         foreach (IdfObject typeLimit in ScheduleIdfExporter.CreateTypeLimits(
             context,

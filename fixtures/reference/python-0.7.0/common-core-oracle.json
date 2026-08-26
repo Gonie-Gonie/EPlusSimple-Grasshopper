@@ -1,0 +1,1236 @@
+{
+  "cases": [
+    {
+      "executor": "setting-default-ep-version",
+      "id": "setting-default-ep-version.components",
+      "python": {
+        "facts": {
+          "component_count": 3,
+          "components": [
+            24,
+            2,
+            0
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Setting.DEFAULT_EP_VERSION"
+    },
+    {
+      "executor": "setting-default-ep-version",
+      "id": "setting-default-ep-version.formatted-identities",
+      "python": {
+        "facts": {
+          "dotted": "24.2.0",
+          "ep_dirname": "EnergyPlusV24-2-0",
+          "hyphenated": "24-2-0",
+          "iddname": "V24-2-0-Energy+.idd"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Setting.DEFAULT_EP_VERSION"
+    },
+    {
+      "executor": "setting-default-ep-version",
+      "id": "setting-default-ep-version.semantic-shape",
+      "python": {
+        "facts": {
+          "all_nonnegative": true,
+          "component_count": 3,
+          "patch_is_zero": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Setting.DEFAULT_EP_VERSION"
+    },
+    {
+      "executor": "setting-default-year",
+      "id": "setting-default-year.calendar",
+      "python": {
+        "facts": {
+          "day_count": 365,
+          "is_leap": false,
+          "year": 2026
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Setting.DEFAULT_YEAR"
+    },
+    {
+      "executor": "setting-default-year",
+      "id": "setting-default-year.run-period",
+      "python": {
+        "facts": {
+          "end": [
+            2026,
+            12,
+            31
+          ],
+          "start": [
+            2026,
+            1,
+            1
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Setting.DEFAULT_YEAR"
+    },
+    {
+      "executor": "setting-default-year",
+      "id": "setting-default-year.scalar",
+      "python": {
+        "facts": {
+          "next_year": 2027,
+          "previous_year": 2025,
+          "text": "2026",
+          "value": 2026
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Setting.DEFAULT_YEAR"
+    },
+    {
+      "executor": "setting",
+      "id": "setting.baseline-values",
+      "python": {
+        "facts": {
+          "default_ep_version": [
+            24,
+            2,
+            0
+          ],
+          "default_year": 2026
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Setting"
+    },
+    {
+      "executor": "setting",
+      "id": "setting.default-version-roundtrip",
+      "python": {
+        "facts": {
+          "version": {
+            "component_types": [
+              "int",
+              "int",
+              "int"
+            ],
+            "components": [
+              24,
+              2,
+              0
+            ],
+            "ep_dirname": "EnergyPlusV24-2-0",
+            "format_dash": "24-2-0",
+            "format_dot": "24.2.0",
+            "iddname": "V24-2-0-Energy+.idd",
+            "major": 24,
+            "minor": 2,
+            "patch": 0
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Setting"
+    },
+    {
+      "executor": "setting",
+      "id": "setting.engineering-shape",
+      "python": {
+        "facts": {
+          "component_count": 3,
+          "patch_default_is_zero": true,
+          "year_day_count": 365,
+          "year_is_non_leap": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Setting"
+    },
+    {
+      "executor": "version-class",
+      "expected_dotnet": {
+        "adaptation": "native-energyplus-version-descriptor",
+        "outcome": "returned"
+      },
+      "id": "version-class.descriptor",
+      "python": {
+        "facts": {
+          "defines_equality": false,
+          "has_instance_dictionary": true,
+          "public_descriptors": [
+            "ep_dirname",
+            "iddname",
+            "major",
+            "minor",
+            "patch",
+            "to_version_anyway"
+          ],
+          "type_name": "Version"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version"
+    },
+    {
+      "executor": "version-class",
+      "expected_dotnet": {
+        "adaptation": "native-energyplus-version-descriptor",
+        "outcome": "returned"
+      },
+      "id": "version-class.identity-equality",
+      "python": {
+        "facts": {
+          "components_equal": true,
+          "self_equal": true,
+          "separate_instances_equal": false
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version"
+    },
+    {
+      "executor": "version-class",
+      "expected_dotnet": {
+        "adaptation": "native-energyplus-version-descriptor",
+        "outcome": "returned"
+      },
+      "id": "version-class.readonly-properties",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "type",
+              "exception_type": "AttributeError",
+              "message": "property 'major' of 'Version' object has no setter",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "AttributeError",
+              "message": "property 'minor' of 'Version' object has no setter",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "AttributeError",
+              "message": "property 'patch' of 'Version' object has no setter",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version"
+    },
+    {
+      "executor": "version-coerce",
+      "expected_dotnet": {
+        "adaptation": "strongly-typed-energyplus-version-coercion",
+        "outcome": "returned"
+      },
+      "id": "version-coerce.existing-identity",
+      "python": {
+        "facts": {
+          "same_identity": true,
+          "version": {
+            "component_types": [
+              "int",
+              "int",
+              "int"
+            ],
+            "components": [
+              24,
+              2,
+              0
+            ],
+            "ep_dirname": "EnergyPlusV24-2-0",
+            "format_dash": "24-2-0",
+            "format_dot": "24.2.0",
+            "iddname": "V24-2-0-Energy+.idd",
+            "major": 24,
+            "minor": 2,
+            "patch": 0
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.to_version_anyway"
+    },
+    {
+      "executor": "version-coerce",
+      "expected_dotnet": {
+        "adaptation": "strongly-typed-energyplus-version-coercion",
+        "outcome": "returned"
+      },
+      "id": "version-coerce.failure-surface",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "sequence item 0: expected str instance, type found",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "sequence item 0: expected str instance, type found",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "sequence item 0: expected str instance, type found",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "sequence item 0: expected str instance, type found",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.to_version_anyway"
+    },
+    {
+      "executor": "version-coerce",
+      "expected_dotnet": {
+        "adaptation": "strongly-typed-energyplus-version-coercion",
+        "outcome": "returned"
+      },
+      "id": "version-coerce.strings-and-sequences",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  24,
+                  2,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusV24-2-0",
+                "format_dash": "24-2-0",
+                "format_dot": "24.2.0",
+                "iddname": "V24-2-0-Energy+.idd",
+                "major": 24,
+                "minor": 2,
+                "patch": 0
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  24,
+                  2,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusV24-2-0",
+                "format_dash": "24-2-0",
+                "format_dot": "24.2.0",
+                "iddname": "V24-2-0-Energy+.idd",
+                "major": 24,
+                "minor": 2,
+                "patch": 0
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  24,
+                  2,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusV24-2-0",
+                "format_dash": "24-2-0",
+                "format_dot": "24.2.0",
+                "iddname": "V24-2-0-Energy+.idd",
+                "major": 24,
+                "minor": 2,
+                "patch": 0
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.to_version_anyway"
+    },
+    {
+      "executor": "version-ep-dirname",
+      "id": "version-ep-dirname.default",
+      "python": {
+        "facts": {
+          "components": [
+            24,
+            2,
+            0
+          ],
+          "value": "EnergyPlusV24-2-0"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.ep_dirname"
+    },
+    {
+      "executor": "version-ep-dirname",
+      "id": "version-ep-dirname.legacy",
+      "python": {
+        "facts": {
+          "components": [
+            9,
+            6,
+            0
+          ],
+          "value": "EnergyPlusV9-6-0"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.ep_dirname"
+    },
+    {
+      "executor": "version-ep-dirname",
+      "id": "version-ep-dirname.zero-and-large",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "outcome": "returned",
+              "result": "EnergyPlusV0-0-0"
+            },
+            {
+              "outcome": "returned",
+              "result": "EnergyPlusV123-45-6"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.ep_dirname"
+    },
+    {
+      "executor": "version-format",
+      "id": "version-format.default-direct",
+      "python": {
+        "facts": {
+          "direct_default": "24-2-0",
+          "explicit_dash": "24-2-0"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.__format__"
+    },
+    {
+      "executor": "version-format",
+      "id": "version-format.delimiters",
+      "python": {
+        "facts": {
+          "dash": "24-2-0",
+          "dot": "24.2.0",
+          "double_colon": "24::2::0",
+          "slash": "24/2/0"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.__format__"
+    },
+    {
+      "executor": "version-format",
+      "id": "version-format.empty-spec",
+      "python": {
+        "facts": {
+          "builtin_format": "2420",
+          "direct_empty": "2420",
+          "fstring_empty": "2420"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.__format__"
+    },
+    {
+      "executor": "version-iddname",
+      "id": "version-iddname.default",
+      "python": {
+        "facts": {
+          "components": [
+            24,
+            2,
+            0
+          ],
+          "value": "V24-2-0-Energy+.idd"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.iddname"
+    },
+    {
+      "executor": "version-iddname",
+      "id": "version-iddname.legacy",
+      "python": {
+        "facts": {
+          "components": [
+            9,
+            6,
+            0
+          ],
+          "value": "V9-6-0-Energy+.idd"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.iddname"
+    },
+    {
+      "executor": "version-iddname",
+      "id": "version-iddname.zero-and-large",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "outcome": "returned",
+              "result": "V0-0-0-Energy+.idd"
+            },
+            {
+              "outcome": "returned",
+              "result": "V123-45-6-Energy+.idd"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.iddname"
+    },
+    {
+      "executor": "version-init",
+      "expected_dotnet": {
+        "adaptation": "validated-energyplus-version-construction",
+        "outcome": "returned"
+      },
+      "id": "version-init.failure-surface",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "message": "Expected three integers, but got 0 in ",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "message": "Expected three integers, but got 1 in 9",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "message": "Expected three integers, but got 4 in 1.2.3.4",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "sequence item 0: expected str instance, type found",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "sequence item 0: expected str instance, type found",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "message": "Expected one string or two/three integers, but got .",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.__init__"
+    },
+    {
+      "executor": "version-init",
+      "expected_dotnet": {
+        "adaptation": "validated-energyplus-version-construction",
+        "outcome": "returned"
+      },
+      "id": "version-init.integer-overloads",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  9,
+                  6,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusV9-6-0",
+                "format_dash": "9-6-0",
+                "format_dot": "9.6.0",
+                "iddname": "V9-6-0-Energy+.idd",
+                "major": 9,
+                "minor": 6,
+                "patch": 0
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  9,
+                  6,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusV9-6-0",
+                "format_dash": "9-6-0",
+                "format_dot": "9.6.0",
+                "iddname": "V9-6-0-Energy+.idd",
+                "major": 9,
+                "minor": 6,
+                "patch": 0
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  -1,
+                  2,
+                  3
+                ],
+                "ep_dirname": "EnergyPlusV-1-2-3",
+                "format_dash": "-1-2-3",
+                "format_dot": "-1.2.3",
+                "iddname": "V-1-2-3-Energy+.idd",
+                "major": -1,
+                "minor": 2,
+                "patch": 3
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "bool",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  true,
+                  2,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusVTrue-2-0",
+                "format_dash": "True-2-0",
+                "format_dot": "True.2.0",
+                "iddname": "VTrue-2-0-Energy+.idd",
+                "major": true,
+                "minor": 2,
+                "patch": 0
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.__init__"
+    },
+    {
+      "executor": "version-init",
+      "expected_dotnet": {
+        "adaptation": "validated-energyplus-version-construction",
+        "outcome": "returned"
+      },
+      "id": "version-init.string-tokenization",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  9,
+                  6,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusV9-6-0",
+                "format_dash": "9-6-0",
+                "format_dot": "9.6.0",
+                "iddname": "V9-6-0-Energy+.idd",
+                "major": 9,
+                "minor": 6,
+                "patch": 0
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  9,
+                  6,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusV9-6-0",
+                "format_dash": "9-6-0",
+                "format_dot": "9.6.0",
+                "iddname": "V9-6-0-Energy+.idd",
+                "major": 9,
+                "minor": 6,
+                "patch": 0
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  24,
+                  2,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusV24-2-0",
+                "format_dash": "24-2-0",
+                "format_dot": "24.2.0",
+                "iddname": "V24-2-0-Energy+.idd",
+                "major": 24,
+                "minor": 2,
+                "patch": 0
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  1,
+                  2,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusV1-2-0",
+                "format_dash": "1-2-0",
+                "format_dot": "1.2.0",
+                "iddname": "V1-2-0-Energy+.idd",
+                "major": 1,
+                "minor": 2,
+                "patch": 0
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  24,
+                  2,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusV24-2-0",
+                "format_dash": "24-2-0",
+                "format_dot": "24.2.0",
+                "iddname": "V24-2-0-Energy+.idd",
+                "major": 24,
+                "minor": 2,
+                "patch": 0
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "component_types": [
+                  "int",
+                  "int",
+                  "int"
+                ],
+                "components": [
+                  12,
+                  2,
+                  0
+                ],
+                "ep_dirname": "EnergyPlusV12-2-0",
+                "format_dash": "12-2-0",
+                "format_dot": "12.2.0",
+                "iddname": "V12-2-0-Energy+.idd",
+                "major": 12,
+                "minor": 2,
+                "patch": 0
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.__init__"
+    },
+    {
+      "executor": "version-iter",
+      "id": "version-iter.conversions",
+      "python": {
+        "facts": {
+          "list": [
+            24,
+            2,
+            0
+          ],
+          "tuple": [
+            24,
+            2,
+            0
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.__iter__"
+    },
+    {
+      "executor": "version-iter",
+      "id": "version-iter.fresh-generators",
+      "python": {
+        "facts": {
+          "first_is_second": false,
+          "first_type": "generator",
+          "first_values": [
+            24,
+            2,
+            0
+          ],
+          "second_values": [
+            24,
+            2,
+            0
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.__iter__"
+    },
+    {
+      "executor": "version-iter",
+      "id": "version-iter.ordered-exhaustion",
+      "python": {
+        "facts": {
+          "exhausted": true,
+          "values": [
+            24,
+            2,
+            0
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.__iter__"
+    },
+    {
+      "executor": "version-major",
+      "id": "version-major.default-baseline",
+      "python": {
+        "facts": {
+          "components": [
+            24,
+            2,
+            0
+          ],
+          "value": 24
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.major"
+    },
+    {
+      "executor": "version-major",
+      "id": "version-major.explicit-three",
+      "python": {
+        "facts": {
+          "components": [
+            9,
+            6,
+            7
+          ],
+          "value": 9
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.major"
+    },
+    {
+      "executor": "version-major",
+      "id": "version-major.two-component-default",
+      "python": {
+        "facts": {
+          "components": [
+            9,
+            6,
+            0
+          ],
+          "value": 9
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.major"
+    },
+    {
+      "executor": "version-minor",
+      "id": "version-minor.default-baseline",
+      "python": {
+        "facts": {
+          "components": [
+            24,
+            2,
+            0
+          ],
+          "value": 2
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.minor"
+    },
+    {
+      "executor": "version-minor",
+      "id": "version-minor.explicit-three",
+      "python": {
+        "facts": {
+          "components": [
+            9,
+            6,
+            7
+          ],
+          "value": 6
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.minor"
+    },
+    {
+      "executor": "version-minor",
+      "id": "version-minor.two-component-default",
+      "python": {
+        "facts": {
+          "components": [
+            9,
+            6,
+            0
+          ],
+          "value": 6
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.minor"
+    },
+    {
+      "executor": "version-patch",
+      "id": "version-patch.default-baseline",
+      "python": {
+        "facts": {
+          "components": [
+            24,
+            2,
+            0
+          ],
+          "value": 0
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.patch"
+    },
+    {
+      "executor": "version-patch",
+      "id": "version-patch.explicit-three",
+      "python": {
+        "facts": {
+          "components": [
+            9,
+            6,
+            7
+          ],
+          "value": 7
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.patch"
+    },
+    {
+      "executor": "version-patch",
+      "id": "version-patch.two-component-default",
+      "python": {
+        "facts": {
+          "components": [
+            9,
+            6,
+            0
+          ],
+          "value": 0
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Version.patch"
+    }
+  ],
+  "cases_sha256": "sha256:143964427b8165d29a99192ad21414eacc1f9cdc21520f3f3681447ad28e4ea4",
+  "consumer_contract": {
+    "adaptations": {
+      "Version": "native-energyplus-version-descriptor",
+      "Version.__init__": "validated-energyplus-version-construction",
+      "Version.to_version_anyway": "strongly-typed-energyplus-version-coercion"
+    },
+    "case_count": 39,
+    "case_ids": [
+      "setting-default-ep-version.components",
+      "setting-default-ep-version.formatted-identities",
+      "setting-default-ep-version.semantic-shape",
+      "setting-default-year.calendar",
+      "setting-default-year.run-period",
+      "setting-default-year.scalar",
+      "setting.baseline-values",
+      "setting.default-version-roundtrip",
+      "setting.engineering-shape",
+      "version-class.descriptor",
+      "version-class.identity-equality",
+      "version-class.readonly-properties",
+      "version-coerce.existing-identity",
+      "version-coerce.failure-surface",
+      "version-coerce.strings-and-sequences",
+      "version-ep-dirname.default",
+      "version-ep-dirname.legacy",
+      "version-ep-dirname.zero-and-large",
+      "version-format.default-direct",
+      "version-format.delimiters",
+      "version-format.empty-spec",
+      "version-iddname.default",
+      "version-iddname.legacy",
+      "version-iddname.zero-and-large",
+      "version-init.failure-surface",
+      "version-init.integer-overloads",
+      "version-init.string-tokenization",
+      "version-iter.conversions",
+      "version-iter.fresh-generators",
+      "version-iter.ordered-exhaustion",
+      "version-major.default-baseline",
+      "version-major.explicit-three",
+      "version-major.two-component-default",
+      "version-minor.default-baseline",
+      "version-minor.explicit-three",
+      "version-minor.two-component-default",
+      "version-patch.default-baseline",
+      "version-patch.explicit-three",
+      "version-patch.two-component-default"
+    ],
+    "classifications": {
+      "Setting": "equivalent",
+      "Setting.DEFAULT_EP_VERSION": "equivalent",
+      "Setting.DEFAULT_YEAR": "equivalent",
+      "Version": "exception",
+      "Version.__format__": "equivalent",
+      "Version.__init__": "exception",
+      "Version.__iter__": "equivalent",
+      "Version.ep_dirname": "equivalent",
+      "Version.iddname": "equivalent",
+      "Version.major": "equivalent",
+      "Version.minor": "equivalent",
+      "Version.patch": "equivalent",
+      "Version.to_version_anyway": "exception"
+    },
+    "float_encoding": "python-binary64-hex-without-0x-prefix",
+    "runtime_names": "policy-token-no-raw-address",
+    "target_symbols": [
+      "Setting",
+      "Setting.DEFAULT_EP_VERSION",
+      "Setting.DEFAULT_YEAR",
+      "Version",
+      "Version.__format__",
+      "Version.__init__",
+      "Version.__iter__",
+      "Version.ep_dirname",
+      "Version.iddname",
+      "Version.major",
+      "Version.minor",
+      "Version.patch",
+      "Version.to_version_anyway"
+    ]
+  },
+  "runtime": {
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.invisibledragon.common-core-oracle.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:ee5384599d7bf86f25c4c9be3c78b9ca50772d5770a0cdd4e4ba6df05ca13228",
+      "symbol": "Setting",
+      "symbol_hash": "sha256:6e21a2020f51e224497609cab212d06906e185320247c6604a763f2498b8a965"
+    },
+    {
+      "body_hash": "sha256:7ae62845ed4693ec74ed0a0816732e1e6b73208c56e2a77a7618fc521026fde2",
+      "kind": "constant",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:23bdff34828c36f054d2cbb1d25fba1a6c760b3caafa55eaf7e79275d9bdc112",
+      "symbol": "Setting.DEFAULT_EP_VERSION",
+      "symbol_hash": "sha256:f61d5ffdf018890e5d6e521ee25af49c93de60ce1d8a10c00e41b8d484d64ba6"
+    },
+    {
+      "body_hash": "sha256:0d1272fa2e01e32086f61a1b3ba1e1f0fa830eac73d098d45c29c22d4c5e6b36",
+      "kind": "constant",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:1b8a61e6ffe40d8e48d9355f31cc15c065d4667bab652fc07b81b08e40d7e92c",
+      "symbol": "Setting.DEFAULT_YEAR",
+      "symbol_hash": "sha256:06415c37d66501858c44650d009662b50212cac62baf713ca9e75276e737eb14"
+    },
+    {
+      "body_hash": "sha256:fb7b04e087cf5ee44ca605240380ca8847066ea9c7c879315419dc0b52446c3c",
+      "kind": "class",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:127a8b300808358bf3f1a153c025fb3d53ef73e7fd1ba8cc098576acb458a6ed",
+      "symbol": "Version",
+      "symbol_hash": "sha256:1c497416f9054aec72cc23eb32f3740e6001e70183471e0453128ec74d7770c8"
+    },
+    {
+      "body_hash": "sha256:c839272a4d8790a62fefc1020c9eb590c9f978c6fe48f967062d5b936c3771b9",
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:898cc4fc44ddc0f34fa112615fb7b40d48b275e241775ced67b86d2912549d7e",
+      "symbol": "Version.__format__",
+      "symbol_hash": "sha256:da210c4fe8b52304df65a5ebcd0ac74511eed62730dd724b3c6f8ce3fbabc528"
+    },
+    {
+      "body_hash": "sha256:fca44c5193da96a1ce893264f7969f6edb34bc2f579bc0447f87386e417adbce",
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:03d7516c1730f6f95147d7ebd855ace566e32c4f896eab3ff830b5ba6e716413",
+      "symbol": "Version.__init__",
+      "symbol_hash": "sha256:a3def1029c1ebaf97d2c94d1efdc88f0c302c44e0c93d2045c38be0b12a0e983"
+    },
+    {
+      "body_hash": "sha256:08cbcae78468818d6528e4acca4edbebc02f602d9f5c88ce4a48a0708b48dc9c",
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:d9c32b0d50573f40cb5a4661cd4e1a7d0fed48c9126e12d1232aa81d4986ab85",
+      "symbol": "Version.__iter__",
+      "symbol_hash": "sha256:6d3a4baddd16fa313692dee29016da7b507b724a99f3e96f90b3def0b20c84e0"
+    },
+    {
+      "body_hash": "sha256:29ae518a6fbdb45dc66b0b7da90a3440e5b467f8a9d548e50c16841dbc0d2d1b",
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Version.ep_dirname",
+      "symbol_hash": "sha256:4b01fd15706bc10675d11074bffb225f0ff0cf52d42c9367e9f815e420c43f38"
+    },
+    {
+      "body_hash": "sha256:ca48532a9eba41657918bcc72e8f326620e023a4b16df154772eee584ef1c280",
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Version.iddname",
+      "symbol_hash": "sha256:35a0ff29689c5bec73734a0541aed807b56f3f7d452f9803d3dc48cdfa2987cf"
+    },
+    {
+      "body_hash": "sha256:25aebf43a7db451d8989bb906db40d99b7f30f80903bd26fad7fcd9ca367012c",
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:eb9fa11a201dd61305f0314fe0261cbc371edeb6909c805081c19c6b05e73876",
+      "symbol": "Version.major",
+      "symbol_hash": "sha256:eb78e2b16110644dbb1186f0957d03be39f3b277422c81019a9da6b15d4e8723"
+    },
+    {
+      "body_hash": "sha256:dcc7fe6ca11597a4e305f98448113b96de26e37cc25544a5092372ed8932ef3c",
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:eb9fa11a201dd61305f0314fe0261cbc371edeb6909c805081c19c6b05e73876",
+      "symbol": "Version.minor",
+      "symbol_hash": "sha256:2574c06325619eff67f689a237849ff548f990cc4f121556aa1b8a563d9828c0"
+    },
+    {
+      "body_hash": "sha256:52d92682a931ea9189cec4de0714158104ba614d5ae6fed24a1e0a47779fb9be",
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:eb9fa11a201dd61305f0314fe0261cbc371edeb6909c805081c19c6b05e73876",
+      "symbol": "Version.patch",
+      "symbol_hash": "sha256:e799dbd50398b1bce90539df69a7c61165ec72ea1933bba3cf17bbdea580b8de"
+    },
+    {
+      "body_hash": "sha256:126857416d367ce852290756b157a9a33e5a191247d1ec56e9752711b7bbaec5",
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:692fddbade2d31fda71ec2d931a2797265fd87743d9f23211f29d3d7851c9dc1",
+      "symbol": "Version.to_version_anyway",
+      "symbol_hash": "sha256:d59930546366ae649f0b4c1b7f0c3e38b46194099dc987873b519e47883fcc61"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "path": "src/idragon/common.py",
+    "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+  }
+}

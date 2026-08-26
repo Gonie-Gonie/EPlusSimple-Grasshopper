@@ -1394,3 +1394,45 @@
     api_contract: callers pass a defined typed enum or use an explicit parser and catch native argument exceptions rather than passing equal strings or arbitrary decorator literals and depending on Python join-error behavior
     compatibility_evidence: Enum-member and raw-string acceptance, literal and None handling, the optional invalid-value TypeError, native parse and nullable behavior, undefined-value rejection in constructors and writers, and DomainSupport.DefinedEnumOrNull plus GrmVocabulary remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
+
+- id: native-energyplus-version-descriptor
+  upstream:
+    path: src/idragon/common.py
+    symbol: Version
+    symbol_hash: sha256:1c497416f9054aec72cc23eb32f3740e6001e70183471e0453128ec74d7770c8
+  difference:
+    upstream: exposes an open Python identity object whose private components can contain arbitrary-precision integers, negative values, and bool values admitted through Python's int subtype relationship
+    dotnet: exposes a sealed identity-based EnergyPlusVersion descriptor with immutable nonnegative Int32 components and an IReadOnlyList enumeration surface suitable for Rhino 7 and later hosts
+  effect:
+    engineering_result: every supported EnergyPlus major, minor, and patch value retains exact component order, formatting, legacy IDD naming, and installation-directory naming while invalid or unrepresentable native versions fail before runtime discovery or IDF authoring
+    api_contract: callers use a sealed CLR reference type with immutable typed properties instead of mutating Python name-mangled attributes or relying on arbitrary-precision and bool-as-int component values
+    compatibility_evidence: exact default and alternate component triples, public immutability and identity semantics, ordered enumeration, formatting and filename projections, nonnegative Int32 boundaries, and src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: validated-energyplus-version-construction
+  upstream:
+    path: src/idragon/common.py
+    symbol: Version.__init__
+    symbol_hash: sha256:a3def1029c1ebaf97d2c94d1efdc88f0c302c44e0c93d2045c38be0b12a0e983
+  difference:
+    upstream: dynamically accepts one string or two or three Python int values, treats nonnumeric runs including signs as string delimiters, accepts bool and negative integer components, and can raise an accidental TypeError while constructing its invalid-argument ValueError message
+    dotnet: provides explicit string, two-integer, and three-integer constructors, preserves the accepted two-or-three numeric-token string grammar, and rejects null, malformed, negative, or Int32-overflow components with stable native argument exceptions
+  effect:
+    engineering_result: supported version strings and integer triples produce the same components and patch default while nonsensical negative, boolean, overflow, or malformed inputs cannot enter runtime paths, IDD selection, or IDF version declarations
+    api_contract: C# overload resolution and native argument exceptions replace Python runtime tuple inspection, bool-as-int behavior, arbitrary-precision components, and the malformed error-message branch
+    compatibility_evidence: exact prefix, suffix, delimiter, two-token and three-token parsing; integer patch defaults; invalid token counts; negative, boolean and overflow observations; native exception categories; and the EnergyPlusVersion constructors remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: strongly-typed-energyplus-version-coercion
+  upstream:
+    path: src/idragon/common.py
+    symbol: Version.to_version_anyway
+    symbol_hash: sha256:d59930546366ae649f0b4c1b7f0c3e38b46194099dc987873b519e47883fcc61
+  difference:
+    upstream: dynamically returns an existing Version by identity, expands tuple or list values into the catch-all constructor, otherwise forwards any object into string-style construction, and inherits the constructor's accidental invalid-argument TypeError paths
+    dotnet: provides closed From overloads for EnergyPlusVersion, string, and IReadOnlyList integer inputs, preserves existing-instance identity, and validates null, component count, range, and element type at explicit CLR boundaries
+  effect:
+    engineering_result: supported existing, textual, two-component, and three-component inputs resolve deterministically to the same version while unrelated runtime objects and invalid component collections cannot be silently forwarded into EnergyPlus selection
+    api_contract: callers select a typed From overload and receive native argument failures instead of depending on Python union inspection, iterable expansion, or catch-all dynamic dispatch
+    compatibility_evidence: same-instance identity, string, tuple and list conversions, two-component patch default, invalid counts and unrelated inputs, native typed overload behavior, and EnergyPlusVersion.From remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
