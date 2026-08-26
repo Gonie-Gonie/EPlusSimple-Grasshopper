@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:690be4f3b51d440e2d5250c30e5de63a6061ebd8e01d4c84af4c436b635ee35e",
+  "content_sha256": "sha256:0c0bd502e5dc3dff31d7df6da0925d5365ef28217a2acc8a7404d39e53e0b63b",
   "entries": [
     {
       "implementation": {
@@ -1044,7 +1044,59 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ConditionedZones"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyModel.conditioned_zones across its exact three-case conditioning slice: the ordered source-zone identities selected when both HVAC supply and availability context are present.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4bb5eb00ee271bf83f33b243f30de331507ac50fa5f732c2a1a57f7b0859da80",
+          "id": "dragon-model-conditioning-conditioned-zones-90ceddf7",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelConditioningOracleParityTests.cs",
+          "test_source_sha256": "sha256:b76dff7e69332d3999540ce26543a8ab6898868809d49dae18c61f09adff1428",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelConditioningOracleParityTests.MatchesPinnedPythonConditioning",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyModel.conditioned_zones",
+      "upstream_symbol_hash": "sha256:90ceddf7de437a59950e7081185fefbf1f56354a49662431452f11ac24bc6f24"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UnconditionedZones"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyModel.unconditioned_zones across its exact three-case conditioning slice: the ordered complementary source-zone identities selected when either HVAC supply or availability context is absent.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9619a05c6f38ffdaa3b12369f8114422e648aae53b04e8e5579f612f37162ecc",
+          "id": "dragon-model-conditioning-unconditioned-zones-24b8c9a9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelConditioningOracleParityTests.cs",
+          "test_source_sha256": "sha256:b76dff7e69332d3999540ce26543a8ab6898868809d49dae18c61f09adff1428",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelConditioningOracleParityTests.MatchesPinnedPythonConditioning",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyModel.unconditioned_zones",
+      "upstream_symbol_hash": "sha256:24b8c9a917df6c286d13dfb75c3ca04403b74cf0a70e6056cc933c9ed2822e08"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1070,7 +1122,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.City"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1096,7 +1148,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Country"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1122,7 +1174,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Ocean"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1148,7 +1200,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Suburbs"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1174,7 +1226,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Urban"
       },
       "path": "src/idragon/dragon/model.py",
@@ -5723,6 +5775,32 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ConditionedZones"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.is_conditioned across its exact three-case conditioning slice: the exact four-way supply and HVAC-availability truth table against the model-context native partition. The comparison directly verifies the mutable Python Zone-local supply predicate against immutable native Zone values classified from typed EnergyModel assignments, without claiming a context-free native Zone property.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9dd47841f5e301fb768c58b3b05fd1c722c45855dec6e8d63672a713cd43599e",
+          "id": "dragon-model-conditioning-zone-is-conditioned-6fe80cb1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelConditioningOracleParityTests.cs",
+          "test_source_sha256": "sha256:b76dff7e69332d3999540ce26543a8ab6898868809d49dae18c61f09adff1428",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelConditioningOracleParityTests.MatchesPinnedPythonConditioning",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone.is_conditioned",
+      "upstream_symbol_hash": "sha256:6fe80cb193a6716b68c1033c5c52bd29f422ffb9efbdac8475a7f4b4ddc46370"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Results/EnergyPlusResultModels.cs",
         "source_sha256": "sha256:d7f8ae53dd548f8c24cdcc5f1e0478bc3edfecfac9ec9ab7f0d846ba93501fa8",
         "symbol": "GonieGonie.InvisibleDragon.Results.EnergyPlusSimulationResult"
@@ -6089,9 +6167,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 234,
-    "passed_receipt_count": 234,
-    "receipt_count": 234,
+    "entry_count": 237,
+    "passed_receipt_count": 237,
+    "receipt_count": 237,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

@@ -818,11 +818,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "equivalent",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1090,7 +1090,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:f4297e8813c61d06143f70c667eb6e7705babd27dcb4878e39224f723710db1b",
+  "content_sha256": "sha256:07cadb09328da21726e6252a3bc18b7f1729a93fc51f8220253b878c6902af81",
   "details": [
     {
       "evidence": [
@@ -2965,6 +2965,20 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#dragon-model-conditioning-conditioned-zones-90ceddf7"
+      ],
+      "index": 818,
+      "rationale": "Trusted cross-language evidence verifies EnergyModel.conditioned_zones across its exact three-case conditioning slice: the ordered source-zone identities selected when both HVAC supply and availability context are present."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-model-conditioning-unconditioned-zones-24b8c9a9"
+      ],
+      "index": 822,
+      "rationale": "Trusted cross-language evidence verifies EnergyModel.unconditioned_zones across its exact three-case conditioning slice: the ordered complementary source-zone identities selected when either HVAC supply or availability context is absent."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#native-typed-terrain-enum-valid-idf-token",
         "upstream/symbol-evidence.json#dragon-model-terrain-c6163ac5"
       ],
@@ -4547,6 +4561,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-zone-conditioning-predicate",
+        "upstream/symbol-evidence.json#dragon-model-conditioning-zone-is-conditioned-6fe80cb1"
+      ],
+      "exception_id": "model-context-zone-conditioning-predicate",
+      "index": 1090,
+      "rationale": "Trusted cross-language evidence verifies Zone.is_conditioned across its exact three-case conditioning slice: the exact four-way supply and HVAC-availability truth table against the model-context native partition, and directly observes the mutable Python Zone-local supply predicate against immutable native Zone values classified from typed EnergyModel assignments, without claiming a context-free native Zone property."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idd-eq-be42dfb2"
       ],
       "index": 1096,
@@ -4874,9 +4897,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 124,
-      "exception": 110,
-      "needs_reverification": 756,
+      "equivalent": 126,
+      "exception": 111,
+      "needs_reverification": 753,
       "out_of_scope": 252
     },
     "entry_count": 1242
