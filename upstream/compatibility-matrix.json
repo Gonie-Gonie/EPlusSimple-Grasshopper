@@ -1083,15 +1083,15 @@
     "exception",
     "exception",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "exception",
     "exception",
     "exception",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:0253e6f292e8d4fc142198983bc1d28380839e801cf6e9bd8e385f8069760871",
+  "content_sha256": "sha256:b202762913ec5ae4921e45b5581c1391432cc14f7c0787010c75671fc713976a",
   "details": [
     {
       "evidence": [
@@ -5324,12 +5324,84 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-mutable-python-zone-container",
+        "upstream/symbol-evidence.json#dragon-shape-zone-core-1083-4830290e"
+      ],
+      "exception_id": "permissive-mutable-python-zone-container",
+      "index": 1083,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone across exact Z01: representative name, empty surface count, retained profile reference and finite load scalars, plus the native typed aggregate and constructor validation boundaries. Adaptation family permissive-mutable-python-zone-container classifies the bounded native API difference. The permissive mutable unvalidated Python carrier is not preserved; constructor aliasing, floor projection, IDF naming, supply, adjacent emission methods and the declared unresolved boundaries remain separate."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#unchecked-aliased-python-zone-construction",
+        "upstream/symbol-evidence.json#dragon-shape-zone-core-1084-fad03092"
+      ],
+      "exception_id": "unchecked-aliased-python-zone-construction",
+      "index": 1084,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.__init__ across exact Z01, Z06 and Z09: representative construction and validation failures, defensive surface-collection copying with immutable Surface-reference retention, isolation from append, reverse and clear mutations, absence of a native supply constructor parameter, and unchanged captured Zone and radiator fields after rejected external assignment construction. Adaptation family unchecked-aliased-python-zone-construction classifies the bounded native API difference. The unchecked aliased Python list and partially initialized invalid-supply state are not preserved; no deep-copy claim is made, and floor, naming, supply and unresolved input domains remain separate."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#python-floor-identity-filter-and-dynamic-sum",
+        "upstream/symbol-evidence.json#dragon-shape-zone-core-1085-21fe276d"
+      ],
+      "exception_id": "python-floor-identity-filter-and-dynamic-sum",
+      "index": 1085,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.floor_area across exact Z02 through Z06 and Z10: empty and no-floor zero, representative 12.5, bounded multi-floor 6.5, retained value 4 after source-list mutation, repeated valid value 2, and selected construction and read timing. Adaptation family python-floor-identity-filter-and-dynamic-sum classifies the bounded native API difference. Only upstream True, 3 and 2.5 successes, representative 12.5, one first-string failure and finite native double sums are claimed; nonfinite, huge or mixed overflow and coercion, missing or raising area, foreign addition protocols and concurrent mutation are explicitly unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#python-floor-identity-filter-and-fresh-list",
+        "upstream/symbol-evidence.json#dragon-shape-zone-core-1086-53382328"
+      ],
+      "exception_id": "python-floor-identity-filter-and-fresh-list",
+      "index": 1086,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.floor_surface across exact Z02 through Z06 and Z10: empty, mixed, no-floor and multiple-floor order and counts, two-call freshness, read-only projection rejection, Surface-reference retention, source-list mutation isolation and selected invalid construction timing. Adaptation family python-floor-identity-filter-and-fresh-list classifies the bounded native API difference. This is a defensive collection-copy and immutable-reference-retention claim, not a deep-copy claim; arbitrary iterators, concurrent mutation, foreign surfaces and uncaptured input domains remain unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#mutable-unvalidated-python-zone-name-formatting-48c6fddb",
+        "upstream/symbol-evidence.json#dragon-shape-zone-core-1087-48c6fddb"
+      ],
+      "exception_id": "mutable-unvalidated-python-zone-name-formatting-48c6fddb",
+      "index": 1087,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.idf_airexhaustnodelistname across exact Z07 through the assembler-authored value North Ω / Zone 01 Air ExhaustNode List, immutable Zone.Name, empty and null constructor rejections, and unchanged captured native name state. Adaptation family mutable-unvalidated-python-zone-name-formatting classifies the bounded native API and location difference. Python mutable, empty, None and custom string-conversion behavior is not preserved; inlet and equipment names are context-only here, and custom conversion side effects or errors remain unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#mutable-unvalidated-python-zone-name-formatting-97745304",
+        "upstream/symbol-evidence.json#dragon-shape-zone-core-1088-97745304"
+      ],
+      "exception_id": "mutable-unvalidated-python-zone-name-formatting-97745304",
+      "index": 1088,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.idf_airinletnodelistname across exact Z07 through the assembler-authored value North Ω / Zone 01 Air InletNode List, immutable Zone.Name, empty and null constructor rejections, and unchanged captured native name state. Adaptation family mutable-unvalidated-python-zone-name-formatting classifies the bounded native API and location difference. Python mutable, empty, None and custom string-conversion behavior is not preserved; exhaust and equipment names are context-only here, and custom conversion side effects or errors remain unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#mutable-unvalidated-python-zone-name-formatting-ad9ccd78",
+        "upstream/symbol-evidence.json#dragon-shape-zone-core-1089-ad9ccd78"
+      ],
+      "exception_id": "mutable-unvalidated-python-zone-name-formatting-ad9ccd78",
+      "index": 1089,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.idf_equipmentlistname across exact Z07 through the assembler-authored value EquipmentList_for_North Ω / Zone 01, immutable Zone.Name, empty and null constructor rejections, and unchanged captured native name state. Adaptation family mutable-unvalidated-python-zone-name-formatting classifies the bounded native API and location difference. Python mutable, empty, None and custom string-conversion behavior is not preserved; inlet and exhaust names are context-only here, and custom conversion side effects or errors remain unresolved."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#model-context-zone-conditioning-predicate",
         "upstream/symbol-evidence.json#dragon-model-conditioning-zone-is-conditioned-6fe80cb1"
       ],
       "exception_id": "model-context-zone-conditioning-predicate",
       "index": 1090,
       "rationale": "Trusted cross-language evidence verifies Zone.is_conditioned across its exact three-case conditioning slice: the exact four-way supply and HVAC-availability truth table against the model-context native partition, and directly observes the mutable Python Zone-local supply predicate against immutable native Zone values classified from typed EnergyModel assignments, without claiming a context-free native Zone property."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#embedded-python-zone-supply-coercion-and-mutation",
+        "upstream/symbol-evidence.json#dragon-shape-zone-core-1091-1b5900c0"
+      ],
+      "exception_id": "embedded-python-zone-supply-coercion-and-mutation",
+      "index": 1091,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.supply across exact Z08 and Z09: unassigned-model absence, explicit one-system and existing-group topology, system and group order and reference retention, absence of a native Zone supply member, read-only external assignment, null guards, and unchanged captured Zone and radiator fields after rejected assignment construction. Adaptation family embedded-python-zone-supply-coercion-and-mutation classifies the bounded native ownership and coercion difference. Python Zone-owned mutation, implicit direct-system coercion, setter TypeError state and partially initialized invalid-supply construction are not preserved; context HVAC symbols, virtual subclasses, descriptor tampering and concurrent mutation remain unresolved."
     },
     {
       "evidence": [
@@ -5688,8 +5760,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 136,
-      "exception": 191,
-      "needs_reverification": 663,
+      "exception": 199,
+      "needs_reverification": 655,
       "out_of_scope": 252
     },
     "entry_count": 1242

@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(663, len(compatibility.needs_reverification))
+        self.assertEqual(655, len(compatibility.needs_reverification))
         self.assertEqual(
             136,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            191,
+            199,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -58,10 +58,10 @@ class ConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(compatibility.symbol_evidence)
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
-        self.assertEqual(327, len(symbol_evidence.entries))
-        self.assertEqual(327, len(symbol_evidence.receipts))
+        self.assertEqual(335, len(symbol_evidence.entries))
+        self.assertEqual(335, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:ec1c72c5eb5a996b89ac52b3ce1d7c77723914da61a6f1fce5155bf828fdcfc5",
+            "sha256:7662e4f911088d29ce425ba58a33a57e8a32cdb46b574ccc267833dd3acd1281",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -798,6 +798,216 @@ class ConfigurationTests(unittest.TestCase):
                 "out_of_scope",
                 by_key[("src/idragon/dragon/shape.py", preserved_out_of_scope)].classification,
                 preserved_out_of_scope,
+            )
+        expected_zone_core = {
+            "Zone": (
+                1083,
+                "permissive-mutable-python-zone-container",
+                "dragon-shape-zone-core-1083-4830290e",
+                "sha256:0a8e3c4a13829403a767b44e261874a5474efcd68a45690d82d9ef7390c6a9b3",
+                "permissive-mutable-python-zone-container",
+            ),
+            "Zone.__init__": (
+                1084,
+                "unchecked-aliased-python-zone-construction",
+                "dragon-shape-zone-core-1084-fad03092",
+                "sha256:981c4ce3873cc1f2a318798c5c17acf4930c1dc22d62030ea867d266b2066323",
+                "unchecked-aliased-python-zone-construction",
+            ),
+            "Zone.floor_area": (
+                1085,
+                "python-floor-identity-filter-and-dynamic-sum",
+                "dragon-shape-zone-core-1085-21fe276d",
+                "sha256:03ac624fcb7cab7c9747dae4110451bb050787739d64c531c1020551cb599c88",
+                "python-floor-identity-filter-and-dynamic-sum",
+            ),
+            "Zone.floor_surface": (
+                1086,
+                "python-floor-identity-filter-and-fresh-list",
+                "dragon-shape-zone-core-1086-53382328",
+                "sha256:27e26141d68464f70c03765f293ee32f249eeaef215d22295bcf64397148f214",
+                "python-floor-identity-filter-and-fresh-list",
+            ),
+            "Zone.idf_airexhaustnodelistname": (
+                1087,
+                "mutable-unvalidated-python-zone-name-formatting-48c6fddb",
+                "dragon-shape-zone-core-1087-48c6fddb",
+                "sha256:09948bfe118818e91b075083c372b79e6ba897ad914e3b294023ca4549851d57",
+                "mutable-unvalidated-python-zone-name-formatting",
+            ),
+            "Zone.idf_airinletnodelistname": (
+                1088,
+                "mutable-unvalidated-python-zone-name-formatting-97745304",
+                "dragon-shape-zone-core-1088-97745304",
+                "sha256:535e3cdeaf89f909847737d3c3ee01d4e1472dca2d3d753ade3e4d9e01e8490b",
+                "mutable-unvalidated-python-zone-name-formatting",
+            ),
+            "Zone.idf_equipmentlistname": (
+                1089,
+                "mutable-unvalidated-python-zone-name-formatting-ad9ccd78",
+                "dragon-shape-zone-core-1089-ad9ccd78",
+                "sha256:b42ff0074cb2373baf4b5e50eabb52a10e9a1f035b1d26504b46c6e8c8d0496a",
+                "mutable-unvalidated-python-zone-name-formatting",
+            ),
+            "Zone.supply": (
+                1091,
+                "embedded-python-zone-supply-coercion-and-mutation",
+                "dragon-shape-zone-core-1091-1b5900c0",
+                "sha256:c4a3dfe679378e960361262fc322ce34960c2d32f2f8bf21f41f9f6ce987ccae",
+                "embedded-python-zone-supply-coercion-and-mutation",
+            ),
+        }
+        zone_native_sources = {
+            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Zone.cs": "sha256:37bd33ef649a03988255edd9f95bbb0f1ffb7c63cbf8fd1ddb784ebb071b8920",
+            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
+            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        }
+        expected_zone_native_symbols = {
+            "Zone": ("Shape/Zone.cs", "GonieGonie.InvisibleDragon.Shape.Zone"),
+            "Zone.__init__": (
+                "Shape/Zone.cs",
+                "GonieGonie.InvisibleDragon.Shape.Zone.Zone",
+            ),
+            "Zone.floor_area": (
+                "Shape/Zone.cs",
+                "GonieGonie.InvisibleDragon.Shape.Zone.FloorArea",
+            ),
+            "Zone.floor_surface": (
+                "Shape/Zone.cs",
+                "GonieGonie.InvisibleDragon.Shape.Zone.FloorSurfaces",
+            ),
+            "Zone.idf_airexhaustnodelistname": (
+                "Model/EnergyModelIdfAssembler.cs",
+                "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment",
+            ),
+            "Zone.idf_airinletnodelistname": (
+                "Model/EnergyModelIdfAssembler.cs",
+                "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment",
+            ),
+            "Zone.idf_equipmentlistname": (
+                "Model/EnergyModelIdfAssembler.cs",
+                "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment",
+            ),
+            "Zone.supply": (
+                "Hvac/HvacAbstractions.cs",
+                "GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment",
+            ),
+        }
+        zone_test_path = (
+            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/"
+            "ZoneCoreOracleParityTests.cs"
+        )
+        zone_test_symbol = (
+            "GonieGonie.InvisibleDragon.Tests.Model.ZoneCoreOracleParityTests."
+            "MatchesPinnedZoneCoreThroughTypedNativeRoutes"
+        )
+        zone_test_hash = (
+            "sha256:46b3d12a353c2e083ec81260692ede77b6658452d6f0815328597884ee8a0582"
+        )
+        zone_assertions = {}
+        zone_families = set()
+        for symbol, (
+            index,
+            exception_id,
+            assertion_id,
+            receipt_hash,
+            adaptation_family,
+        ) in expected_zone_core.items():
+            key = ("src/idragon/dragon/shape.py", symbol)
+            entry = by_key[key]
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual(entry, compatibility.matrix.entries[index], symbol)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            self.assertTrue(
+                exception_id == adaptation_family
+                or exception_id.startswith(adaptation_family + "-"),
+                symbol,
+            )
+            self.assertEqual(
+                (
+                    f"upstream/compatibility-exceptions.yml#{exception_id}",
+                    f"upstream/symbol-evidence.json#{assertion_id}",
+                ),
+                entry.evidence,
+                symbol,
+            )
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertEqual(receipt_hash, receipt.expected_output_sha256, symbol)
+            self.assertEqual(zone_test_path, receipt.test_path, symbol)
+            self.assertEqual(zone_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(zone_test_hash, receipt.test_source_sha256, symbol)
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+            self.assertIn(f"Adaptation family {adaptation_family}", receipt.assertion)
+            suffix, native_symbol = expected_zone_native_symbols[symbol]
+            self.assertTrue(evidence_entry.implementation_path.endswith(suffix), symbol)
+            self.assertEqual(native_symbol, evidence_entry.implementation_symbol, symbol)
+            self.assertEqual(
+                zone_native_sources[evidence_entry.implementation_path],
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            zone_assertions[symbol] = receipt.assertion
+            zone_families.add(adaptation_family)
+        self.assertEqual(8, len(expected_zone_core))
+        self.assertEqual(6, len(zone_families))
+        self.assertIn("not a deep-copy claim", zone_assertions["Zone.floor_surface"])
+        self.assertIn(
+            "nonfinite, huge or mixed overflow and coercion, missing or raising area",
+            zone_assertions["Zone.floor_area"],
+        )
+        self.assertIn(
+            "no deep-copy claim is made",
+            zone_assertions["Zone.__init__"],
+        )
+        for naming_symbol in (
+            "Zone.idf_airexhaustnodelistname",
+            "Zone.idf_airinletnodelistname",
+            "Zone.idf_equipmentlistname",
+        ):
+            self.assertIn("custom string-conversion", zone_assertions[naming_symbol])
+        self.assertIn(
+            "context HVAC symbols, virtual subclasses, descriptor tampering",
+            zone_assertions["Zone.supply"],
+        )
+        self.assertFalse(set(expected_zone_core) & set(expected_geometry_core))
+        self.assertFalse(set(expected_zone_core) & set(expected_opening_adjacency))
+        self.assertFalse(set(expected_zone_core) & set(expected_zone_idf))
+        for preserved_symbol, expected_classification in {
+            "Window": "exception",
+            "Window.__init__": "exception",
+            "Zone.is_conditioned": "exception",
+            "Zone.to_idf_hvac_default_object": "exception",
+            "Zone.to_idf_load_object": "exception",
+            "Zone.to_idf_object": "exception",
+            "SurfaceType.FLOOR": "equivalent",
+        }.items():
+            self.assertEqual(
+                expected_classification,
+                by_key[("src/idragon/dragon/shape.py", preserved_symbol)].classification,
+                preserved_symbol,
+            )
+        for context_symbol, expected_classification in {
+            "ElectricRadiator": "needs_reverification",
+            "ElectricRadiator.__init__": "needs_reverification",
+            "ElectricRadiator.heatable": "needs_reverification",
+            "SupplyGroup": "needs_reverification",
+            "SupplyGroup.__init__": "exception",
+            "SupplySystem": "needs_reverification",
+        }.items():
+            self.assertEqual(
+                expected_classification,
+                by_key[("src/idragon/dragon/hvac.py", context_symbol)].classification,
+                context_symbol,
             )
         expected_source_system_idf = {
             "AbsorptionChiller.to_idf_object": (

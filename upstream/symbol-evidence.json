@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:ec1c72c5eb5a996b89ac52b3ce1d7c77723914da61a6f1fce5155bf828fdcfc5",
+  "content_sha256": "sha256:7662e4f911088d29ce425ba58a33a57e8a32cdb46b574ccc267833dd3acd1281",
   "entries": [
     {
       "implementation": {
@@ -8037,6 +8037,188 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Zone.cs",
+        "source_sha256": "sha256:37bd33ef649a03988255edd9f95bbb0f1ffb7c63cbf8fd1ddb784ebb071b8920",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Zone"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone across exact Z01: representative name, empty surface count, retained profile reference and finite load scalars, plus the native typed aggregate and constructor validation boundaries. Adaptation family permissive-mutable-python-zone-container classifies the bounded native API difference. The permissive mutable unvalidated Python carrier is not preserved; constructor aliasing, floor projection, IDF naming, supply, adjacent emission methods and the declared unresolved boundaries remain separate.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0a8e3c4a13829403a767b44e261874a5474efcd68a45690d82d9ef7390c6a9b3",
+          "id": "dragon-shape-zone-core-1083-4830290e",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:46b3d12a353c2e083ec81260692ede77b6658452d6f0815328597884ee8a0582",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneCoreOracleParityTests.MatchesPinnedZoneCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone",
+      "upstream_symbol_hash": "sha256:4830290e50ed3c4b50717f26a9b0503763c09b5b87f041b2f03d5ab3ba035d30"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Zone.cs",
+        "source_sha256": "sha256:37bd33ef649a03988255edd9f95bbb0f1ffb7c63cbf8fd1ddb784ebb071b8920",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Zone.Zone"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.__init__ across exact Z01, Z06 and Z09: representative construction and validation failures, defensive surface-collection copying with immutable Surface-reference retention, isolation from append, reverse and clear mutations, absence of a native supply constructor parameter, and unchanged captured Zone and radiator fields after rejected external assignment construction. Adaptation family unchecked-aliased-python-zone-construction classifies the bounded native API difference. The unchecked aliased Python list and partially initialized invalid-supply state are not preserved; no deep-copy claim is made, and floor, naming, supply and unresolved input domains remain separate.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:981c4ce3873cc1f2a318798c5c17acf4930c1dc22d62030ea867d266b2066323",
+          "id": "dragon-shape-zone-core-1084-fad03092",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:46b3d12a353c2e083ec81260692ede77b6658452d6f0815328597884ee8a0582",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneCoreOracleParityTests.MatchesPinnedZoneCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone.__init__",
+      "upstream_symbol_hash": "sha256:fad03092d1390e4a9f0c7f4184a757c7abc55fb85b737f2d0c9be217b7682987"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Zone.cs",
+        "source_sha256": "sha256:37bd33ef649a03988255edd9f95bbb0f1ffb7c63cbf8fd1ddb784ebb071b8920",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Zone.FloorArea"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.floor_area across exact Z02 through Z06 and Z10: empty and no-floor zero, representative 12.5, bounded multi-floor 6.5, retained value 4 after source-list mutation, repeated valid value 2, and selected construction and read timing. Adaptation family python-floor-identity-filter-and-dynamic-sum classifies the bounded native API difference. Only upstream True, 3 and 2.5 successes, representative 12.5, one first-string failure and finite native double sums are claimed; nonfinite, huge or mixed overflow and coercion, missing or raising area, foreign addition protocols and concurrent mutation are explicitly unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:03ac624fcb7cab7c9747dae4110451bb050787739d64c531c1020551cb599c88",
+          "id": "dragon-shape-zone-core-1085-21fe276d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:46b3d12a353c2e083ec81260692ede77b6658452d6f0815328597884ee8a0582",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneCoreOracleParityTests.MatchesPinnedZoneCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone.floor_area",
+      "upstream_symbol_hash": "sha256:21fe276dd163e81d4c0de2f978cb6dca63e807a7fe798d9fdaa5f8316ec8fac2"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Zone.cs",
+        "source_sha256": "sha256:37bd33ef649a03988255edd9f95bbb0f1ffb7c63cbf8fd1ddb784ebb071b8920",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Zone.FloorSurfaces"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.floor_surface across exact Z02 through Z06 and Z10: empty, mixed, no-floor and multiple-floor order and counts, two-call freshness, read-only projection rejection, Surface-reference retention, source-list mutation isolation and selected invalid construction timing. Adaptation family python-floor-identity-filter-and-fresh-list classifies the bounded native API difference. This is a defensive collection-copy and immutable-reference-retention claim, not a deep-copy claim; arbitrary iterators, concurrent mutation, foreign surfaces and uncaptured input domains remain unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:27e26141d68464f70c03765f293ee32f249eeaef215d22295bcf64397148f214",
+          "id": "dragon-shape-zone-core-1086-53382328",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:46b3d12a353c2e083ec81260692ede77b6658452d6f0815328597884ee8a0582",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneCoreOracleParityTests.MatchesPinnedZoneCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone.floor_surface",
+      "upstream_symbol_hash": "sha256:53382328123e6a81052a598a89a8e41482a1aac0a3d470e7bd66c63d6d8c22b7"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.idf_airexhaustnodelistname across exact Z07 through the assembler-authored value North Ω / Zone 01 Air ExhaustNode List, immutable Zone.Name, empty and null constructor rejections, and unchanged captured native name state. Adaptation family mutable-unvalidated-python-zone-name-formatting classifies the bounded native API and location difference. Python mutable, empty, None and custom string-conversion behavior is not preserved; inlet and equipment names are context-only here, and custom conversion side effects or errors remain unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:09948bfe118818e91b075083c372b79e6ba897ad914e3b294023ca4549851d57",
+          "id": "dragon-shape-zone-core-1087-48c6fddb",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:46b3d12a353c2e083ec81260692ede77b6658452d6f0815328597884ee8a0582",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneCoreOracleParityTests.MatchesPinnedZoneCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone.idf_airexhaustnodelistname",
+      "upstream_symbol_hash": "sha256:48c6fddbf04adf507eabbaa023c0a3a711bb01812e6068becd27f2abdff9c1b7"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.idf_airinletnodelistname across exact Z07 through the assembler-authored value North Ω / Zone 01 Air InletNode List, immutable Zone.Name, empty and null constructor rejections, and unchanged captured native name state. Adaptation family mutable-unvalidated-python-zone-name-formatting classifies the bounded native API and location difference. Python mutable, empty, None and custom string-conversion behavior is not preserved; exhaust and equipment names are context-only here, and custom conversion side effects or errors remain unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:535e3cdeaf89f909847737d3c3ee01d4e1472dca2d3d753ade3e4d9e01e8490b",
+          "id": "dragon-shape-zone-core-1088-97745304",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:46b3d12a353c2e083ec81260692ede77b6658452d6f0815328597884ee8a0582",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneCoreOracleParityTests.MatchesPinnedZoneCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone.idf_airinletnodelistname",
+      "upstream_symbol_hash": "sha256:97745304336763af22c9a31a48c4a590d7faa2a936ec220fa0ee144fae1b701e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.idf_equipmentlistname across exact Z07 through the assembler-authored value EquipmentList_for_North Ω / Zone 01, immutable Zone.Name, empty and null constructor rejections, and unchanged captured native name state. Adaptation family mutable-unvalidated-python-zone-name-formatting classifies the bounded native API and location difference. Python mutable, empty, None and custom string-conversion behavior is not preserved; inlet and exhaust names are context-only here, and custom conversion side effects or errors remain unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b42ff0074cb2373baf4b5e50eabb52a10e9a1f035b1d26504b46c6e8c8d0496a",
+          "id": "dragon-shape-zone-core-1089-ad9ccd78",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:46b3d12a353c2e083ec81260692ede77b6658452d6f0815328597884ee8a0582",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneCoreOracleParityTests.MatchesPinnedZoneCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone.idf_equipmentlistname",
+      "upstream_symbol_hash": "sha256:ad9ccd78f5ddb00df6add098e600b6526268400988d2d2aaf2d0d3bd324b6a13"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
         "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ConditionedZones"
@@ -8060,6 +8242,32 @@
       ],
       "symbol": "Zone.is_conditioned",
       "upstream_symbol_hash": "sha256:6fe80cb193a6716b68c1033c5c52bd29f422ffb9efbdac8475a7f4b4ddc46370"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "source_sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.supply across exact Z08 and Z09: unassigned-model absence, explicit one-system and existing-group topology, system and group order and reference retention, absence of a native Zone supply member, read-only external assignment, null guards, and unchanged captured Zone and radiator fields after rejected assignment construction. Adaptation family embedded-python-zone-supply-coercion-and-mutation classifies the bounded native ownership and coercion difference. Python Zone-owned mutation, implicit direct-system coercion, setter TypeError state and partially initialized invalid-supply construction are not preserved; context HVAC symbols, virtual subclasses, descriptor tampering and concurrent mutation remain unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c4a3dfe679378e960361262fc322ce34960c2d32f2f8bf21f41f9f6ce987ccae",
+          "id": "dragon-shape-zone-core-1091-1b5900c0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:46b3d12a353c2e083ec81260692ede77b6658452d6f0815328597884ee8a0582",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneCoreOracleParityTests.MatchesPinnedZoneCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone.supply",
+      "upstream_symbol_hash": "sha256:1b5900c0e47502e001f7a6055ea868392c85617ee800596666325fa118979b10"
     },
     {
       "implementation": {
@@ -8507,9 +8715,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 327,
-    "passed_receipt_count": 327,
-    "receipt_count": 327,
+    "entry_count": 335,
+    "passed_receipt_count": 335,
+    "receipt_count": 335,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

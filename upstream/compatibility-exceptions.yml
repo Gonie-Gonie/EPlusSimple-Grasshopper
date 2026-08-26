@@ -2766,3 +2766,115 @@
     api_contract: callers read finite get-only Z; mutable, bool, nonfinite and huge-integer z state is unavailable
     compatibility_evidence: only the target-specific facts explicitly named above for V01, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.z; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
   approval: accepted-native-api-adaptation
+
+- id: permissive-mutable-python-zone-container
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Zone
+    symbol_hash: sha256:4830290e50ed3c4b50717f26a9b0503763c09b5b87f041b2f03d5ab3ba035d30
+  difference:
+    upstream: Z01 observes a permissive mutable Python Zone carrier that accepts unchecked names, collections, references and scalar values
+    dotnet: Shape.Zone is a sealed typed aggregate with validated required values, finite scalar guards and a read-only surface collection
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Zone across exact Z01: representative name, empty surface count, retained profile reference and finite load scalars, plus the native typed aggregate and constructor validation boundaries. Adaptation family permissive-mutable-python-zone-container classifies the bounded native API difference. The permissive mutable unvalidated Python carrier is not preserved; constructor aliasing, floor projection, IDF naming, supply, adjacent emission methods and the declared unresolved boundaries remain separate.
+    api_contract: callers construct a typed native Zone with a validated name, non-null typed surfaces and profile, and finite load scalars
+    compatibility_evidence: only the Zone-specific Z01 Python facts, 13 native facts, exact upstream descriptor, canonical receipt hash and Shape.Zone implementation binding are claimed; co-recorded Zone.__init__ and Zone.supply facts are context-only, and adjacent or context symbols are not retargeted
+  approval: accepted-native-api-adaptation
+
+- id: unchecked-aliased-python-zone-construction
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Zone.__init__
+    symbol_hash: sha256:fad03092d1390e4a9f0c7f4184a757c7abc55fb85b737f2d0c9be217b7682987
+  difference:
+    upstream: Z01, Z06 and Z09 observe unchecked aliased surface-list construction and a partially initialized object after invalid supply coercion
+    dotnet: Shape.Zone validates construction and defensively copies the surface collection while retaining the same immutable Surface references; HVAC association is external
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Zone.__init__ across exact Z01, Z06 and Z09: representative construction and validation failures, defensive surface-collection copying with immutable Surface-reference retention, isolation from append, reverse and clear mutations, absence of a native supply constructor parameter, and unchanged captured Zone and radiator fields after rejected external assignment construction. Adaptation family unchecked-aliased-python-zone-construction classifies the bounded native API difference. The unchecked aliased Python list and partially initialized invalid-supply state are not preserved; no deep-copy claim is made, and floor, naming, supply and unresolved input domains remain separate.
+    api_contract: callers receive a fully validated native Zone whose surface collection is isolated from later source-list edits while retaining the authored immutable Surface instances
+    compatibility_evidence: only the target-specific Z01, Z06 and Z09 facts, exact upstream descriptor, canonical receipt hash and typed Zone constructor binding are claimed; Python supply setter behavior, arbitrary iterators, concurrent mutation and all adjacent or context symbols remain unresolved or separately classified
+  approval: accepted-native-api-adaptation
+
+- id: python-floor-identity-filter-and-dynamic-sum
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Zone.floor_area
+    symbol_hash: sha256:21fe276dd163e81d4c0de2f978cb6dca63e807a7fe798d9fdaa5f8316ec8fac2
+  difference:
+    upstream: Z02 through Z06 and Z10 filter by the FLOOR enum member at read time and dynamically sum the bounded observed True, int and float area values, including one first-string failure
+    dotnet: Zone.FloorArea sums finite immutable double GrossArea values from the typed FloorSurfaces projection
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Zone.floor_area across exact Z02 through Z06 and Z10: empty and no-floor zero, representative 12.5, bounded multi-floor 6.5, retained value 4 after source-list mutation, repeated valid value 2, and selected construction and read timing. Adaptation family python-floor-identity-filter-and-dynamic-sum classifies the bounded native API difference. Only upstream True, 3 and 2.5 successes, representative 12.5, one first-string failure and finite native double sums are claimed; nonfinite, huge or mixed overflow and coercion, missing or raising area, foreign addition protocols and concurrent mutation are explicitly unresolved.
+    api_contract: callers obtain a finite double sum over typed immutable floor surfaces; arbitrary Python addition protocols and mutable area state are unavailable
+    compatibility_evidence: only the floor-area-specific facts from Z02 through Z06 and Z10, the exact upstream descriptor, canonical receipt hash and Zone.FloorArea binding are claimed; FloorSurfaces facts are context unless separately bound, and no adjacent or emission symbol is retargeted
+  approval: accepted-native-api-adaptation
+
+- id: python-floor-identity-filter-and-fresh-list
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Zone.floor_surface
+    symbol_hash: sha256:53382328123e6a81052a598a89a8e41482a1aac0a3d470e7bd66c63d6d8c22b7
+  difference:
+    upstream: Z02 through Z06 and Z10 create fresh mutable lists by identity-filtering the current aliased Python surface list
+    dotnet: Zone.FloorSurfaces creates fresh read-only projections from a defensively copied collection while retaining the same immutable Surface references
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Zone.floor_surface across exact Z02 through Z06 and Z10: empty, mixed, no-floor and multiple-floor order and counts, two-call freshness, read-only projection rejection, Surface-reference retention, source-list mutation isolation and selected invalid construction timing. Adaptation family python-floor-identity-filter-and-fresh-list classifies the bounded native API difference. This is a defensive collection-copy and immutable-reference-retention claim, not a deep-copy claim; arbitrary iterators, concurrent mutation, foreign surfaces and uncaptured input domains remain unresolved.
+    api_contract: callers receive a fresh read-only floor projection in stored surface order, backed by the Zone's isolated collection and retaining authored immutable Surface identities
+    compatibility_evidence: only the floor-projection-specific facts from Z02 through Z06 and Z10, the exact upstream descriptor, canonical receipt hash and Zone.FloorSurfaces binding are claimed; FloorArea facts are context unless separately bound, and no adjacent or emission symbol is retargeted
+  approval: accepted-native-api-adaptation
+
+- id: mutable-unvalidated-python-zone-name-formatting-48c6fddb
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Zone.idf_airexhaustnodelistname
+    symbol_hash: sha256:48c6fddbf04adf507eabbaa023c0a3a711bb01812e6068becd27f2abdff9c1b7
+  difference:
+    upstream: Z07 formats the exhaust-node-list name from mutable unvalidated Python name state on every property read
+    dotnet: EnergyModelIdfAssembler.AppendZoneEquipment authors the exhaust-node-list name from immutable validated Zone.Name and passes it to AppendNodeList
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Zone.idf_airexhaustnodelistname across exact Z07 through the assembler-authored value North Ω / Zone 01 Air ExhaustNode List, immutable Zone.Name, empty and null constructor rejections, and unchanged captured native name state. Adaptation family mutable-unvalidated-python-zone-name-formatting classifies the bounded native API and location difference. Python mutable, empty, None and custom string-conversion behavior is not preserved; inlet and equipment names are context-only here, and custom conversion side effects or errors remain unresolved.
+    api_contract: callers obtain the exhaust NodeList reference during typed model assembly from a validated immutable Zone name
+    compatibility_evidence: only the exhaust-specific Z07 facts, exact upstream descriptor, canonical receipt hash and AppendZoneEquipment implementation binding are claimed; the other two co-recorded names, parent emission and adjacent symbols are not retargeted
+  approval: accepted-native-api-adaptation
+
+- id: mutable-unvalidated-python-zone-name-formatting-97745304
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Zone.idf_airinletnodelistname
+    symbol_hash: sha256:97745304336763af22c9a31a48c4a590d7faa2a936ec220fa0ee144fae1b701e
+  difference:
+    upstream: Z07 formats the inlet-node-list name from mutable unvalidated Python name state on every property read
+    dotnet: EnergyModelIdfAssembler.AppendZoneEquipment authors the inlet-node-list name from immutable validated Zone.Name and passes it to AppendNodeList
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Zone.idf_airinletnodelistname across exact Z07 through the assembler-authored value North Ω / Zone 01 Air InletNode List, immutable Zone.Name, empty and null constructor rejections, and unchanged captured native name state. Adaptation family mutable-unvalidated-python-zone-name-formatting classifies the bounded native API and location difference. Python mutable, empty, None and custom string-conversion behavior is not preserved; exhaust and equipment names are context-only here, and custom conversion side effects or errors remain unresolved.
+    api_contract: callers obtain the inlet NodeList reference during typed model assembly from a validated immutable Zone name
+    compatibility_evidence: only the inlet-specific Z07 facts, exact upstream descriptor, canonical receipt hash and AppendZoneEquipment implementation binding are claimed; the other two co-recorded names, parent emission and adjacent symbols are not retargeted
+  approval: accepted-native-api-adaptation
+
+- id: mutable-unvalidated-python-zone-name-formatting-ad9ccd78
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Zone.idf_equipmentlistname
+    symbol_hash: sha256:ad9ccd78f5ddb00df6add098e600b6526268400988d2d2aaf2d0d3bd324b6a13
+  difference:
+    upstream: Z07 formats the equipment-list name from mutable unvalidated Python name state on every property read
+    dotnet: EnergyModelIdfAssembler.AppendZoneEquipment authors the equipment-list name from immutable validated Zone.Name
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Zone.idf_equipmentlistname across exact Z07 through the assembler-authored value EquipmentList_for_North Ω / Zone 01, immutable Zone.Name, empty and null constructor rejections, and unchanged captured native name state. Adaptation family mutable-unvalidated-python-zone-name-formatting classifies the bounded native API and location difference. Python mutable, empty, None and custom string-conversion behavior is not preserved; inlet and exhaust names are context-only here, and custom conversion side effects or errors remain unresolved.
+    api_contract: callers obtain the equipment-list reference during typed model assembly from a validated immutable Zone name
+    compatibility_evidence: only the equipment-list-specific Z07 facts, exact upstream descriptor, canonical receipt hash and AppendZoneEquipment implementation binding are claimed; the other two co-recorded names, parent emission and adjacent symbols are not retargeted
+  approval: accepted-native-api-adaptation
+
+- id: embedded-python-zone-supply-coercion-and-mutation
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Zone.supply
+    symbol_hash: sha256:1b5900c0e47502e001f7a6055ea868392c85617ee800596666325fa118979b10
+  difference:
+    upstream: Z08 and Z09 expose mutable Zone-owned None, direct SupplySystem and SupplyGroup assignment with implicit wrapping, setter errors and partial invalid-constructor state
+    dotnet: HVAC association is an external immutable ZoneHvacAssignment requiring an explicit SupplyGroup; Shape.Zone has no supply property or HVAC constructor parameter
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Zone.supply across exact Z08 and Z09: unassigned-model absence, explicit one-system and existing-group topology, system and group order and reference retention, absence of a native Zone supply member, read-only external assignment, null guards, and unchanged captured Zone and radiator fields after rejected assignment construction. Adaptation family embedded-python-zone-supply-coercion-and-mutation classifies the bounded native ownership and coercion difference. Python Zone-owned mutation, implicit direct-system coercion, setter TypeError state and partially initialized invalid-supply construction are not preserved; context HVAC symbols, virtual subclasses, descriptor tampering and concurrent mutation remain unresolved.
+    api_contract: callers associate a Zone identifier with an explicit SupplyGroup through immutable ZoneHvacAssignment; unassigned Zones have no assignment entry
+    compatibility_evidence: only the supply-specific Z08 and Z09 facts, exact upstream descriptor, canonical receipt hash and ZoneHvacAssignment implementation binding are claimed; ElectricRadiator, SupplyGroup, SupplySystem, Zone construction and all resolved adjacent Zone methods remain context-only or separately classified
+  approval: accepted-native-api-adaptation
