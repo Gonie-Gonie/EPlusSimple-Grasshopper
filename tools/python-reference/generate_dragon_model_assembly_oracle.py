@@ -1,10 +1,13 @@
 """Generate bounded pinned observations for legacy ``EnergyModel.to_idf``.
 
-The five cases deliberately do not close the complete symbol.  They preserve
-the exact profile-name, unconditioned fallback, legacy ERV, and missing-HVAC-
-availability branches needed by the current native assembly review.  Runtime
-identity is represented only by logical labels, and raw IDF values use tagged
-JSON encodings with trailing ``None`` fields trimmed.
+Five concrete-model cases preserve the exact profile-name, unconditioned
+fallback, legacy ERV, and missing-HVAC-availability branches needed by the
+current native assembly review.  Five additional probe cases bind only the
+parent method's orchestration order and selected failure prefixes; child
+converter semantics remain separate inventory symbols.  The ten cases still
+deliberately do not close the complete symbol.  Runtime identity is represented
+only by logical labels, and raw IDF values use tagged JSON encodings with
+trailing ``None`` fields trimmed.
 """
 
 from __future__ import annotations
@@ -118,36 +121,90 @@ EXPECTED_SYMBOL_RECEIPTS = {
     }
 }
 TARGET_SYMBOLS = tuple(EXPECTED_SYMBOL_RECEIPTS)
+ASSIGNED_WITHOUT_AVAILABILITY_CASE_ID = (
+    "dragon-model-assembly.to-idf.assigned-without-availability-fallback"
+)
+CASE_DISTINCT_PROFILE_CASE_ID = (
+    "dragon-model-assembly.to-idf.case-distinct-profile-schedules"
+)
+DUPLICATE_PROFILE_CASE_ID = (
+    "dragon-model-assembly.to-idf.duplicate-profile-last-wins-dangling"
+)
+LEGACY_ERV_CASE_ID = "dragon-model-assembly.to-idf.legacy-erv-unconditioned"
+ORCHESTRATION_ADD_SUPPLY_FAILURE_CASE_ID = (
+    "dragon-model-assembly.to-idf.orchestration-failure.add-supply-prefix"
+)
+ORCHESTRATION_LAYER_FAILURE_CASE_ID = (
+    "dragon-model-assembly.to-idf.orchestration-failure.layer-batch-prefix"
+)
+ORCHESTRATION_PV_FAILURE_CASE_ID = (
+    "dragon-model-assembly.to-idf.orchestration-failure.pv-prefix"
+)
+ORCHESTRATION_SOURCE_FAILURE_CASE_ID = (
+    "dragon-model-assembly.to-idf.orchestration-failure.source-prefix"
+)
+ORCHESTRATION_SUCCESS_CASE_ID = (
+    "dragon-model-assembly.to-idf.orchestration-success.parent-order"
+)
+TWO_UNCONDITIONED_CASE_ID = (
+    "dragon-model-assembly.to-idf.two-unconditioned-shared-fallback"
+)
+
 EXPECTED_CASE_BINDINGS = (
     (
-        "dragon-model-assembly.to-idf.assigned-without-availability-fallback",
+        ASSIGNED_WITHOUT_AVAILABILITY_CASE_ID,
         "energy-model-to-idf",
         "EnergyModel.to_idf",
     ),
     (
-        "dragon-model-assembly.to-idf.case-distinct-profile-schedules",
+        CASE_DISTINCT_PROFILE_CASE_ID,
         "energy-model-to-idf",
         "EnergyModel.to_idf",
     ),
     (
-        "dragon-model-assembly.to-idf.duplicate-profile-last-wins-dangling",
+        DUPLICATE_PROFILE_CASE_ID,
         "energy-model-to-idf",
         "EnergyModel.to_idf",
     ),
     (
-        "dragon-model-assembly.to-idf.legacy-erv-unconditioned",
+        LEGACY_ERV_CASE_ID,
         "energy-model-to-idf",
         "EnergyModel.to_idf",
     ),
     (
-        "dragon-model-assembly.to-idf.two-unconditioned-shared-fallback",
+        ORCHESTRATION_ADD_SUPPLY_FAILURE_CASE_ID,
+        "energy-model-to-idf",
+        "EnergyModel.to_idf",
+    ),
+    (
+        ORCHESTRATION_LAYER_FAILURE_CASE_ID,
+        "energy-model-to-idf",
+        "EnergyModel.to_idf",
+    ),
+    (
+        ORCHESTRATION_PV_FAILURE_CASE_ID,
+        "energy-model-to-idf",
+        "EnergyModel.to_idf",
+    ),
+    (
+        ORCHESTRATION_SOURCE_FAILURE_CASE_ID,
+        "energy-model-to-idf",
+        "EnergyModel.to_idf",
+    ),
+    (
+        ORCHESTRATION_SUCCESS_CASE_ID,
+        "energy-model-to-idf",
+        "EnergyModel.to_idf",
+    ),
+    (
+        TWO_UNCONDITIONED_CASE_ID,
         "energy-model-to-idf",
         "EnergyModel.to_idf",
     ),
 )
 EXPECTED_CASE_IDS = tuple(item[0] for item in EXPECTED_CASE_BINDINGS)
-EXPECTED_CASE_COUNT = 5
-EXPECTED_CASE_COUNTS = {"EnergyModel.to_idf": 5}
+EXPECTED_CASE_COUNT = 10
+EXPECTED_CASE_COUNTS = {"EnergyModel.to_idf": 10}
 EXPECTED_DEPENDENCIES = {
     "colorama": "0.4.6",
     "et_xmlfile": "2.0.0",
@@ -530,8 +587,246 @@ def _ventilation() -> dict[str, Any]:
     )
 
 
+ORCHESTRATION_FAILURES = {
+    ORCHESTRATION_ADD_SUPPLY_FAILURE_CASE_ID: "supply-zone-2",
+    ORCHESTRATION_LAYER_FAILURE_CASE_ID: "layer-2",
+    ORCHESTRATION_PV_FAILURE_CASE_ID: "pv-2",
+    ORCHESTRATION_SOURCE_FAILURE_CASE_ID: "source-2",
+}
+
+
+def _trace_event(event: str, **values: Any) -> dict[str, Any]:
+    return {"event": event, **values}
+
+
+def _trace_conversion(
+    kind: str,
+    label: str,
+    *,
+    arguments: tuple[str, ...] = (),
+    result: str = "returned",
+) -> dict[str, Any]:
+    return _trace_event(
+        "converter.call",
+        arguments=list(arguments),
+        kind=kind,
+        label=label,
+        result=result,
+    )
+
+
+def _trace_append(*labels: str) -> dict[str, Any]:
+    return _trace_event("idf.append", labels=list(labels))
+
+
+def _trace_error(label: str) -> dict[str, Any]:
+    message = f"orchestration-failure:{label}"
+    return {
+        "args": [message],
+        "message": message,
+        "outcome": "raised",
+        "type": "RuntimeError",
+    }
+
+
+def _expected_orchestration_events(fail_at: str | None) -> list[dict[str, Any]]:
+    events: list[dict[str, Any]] = [
+        _trace_event("default.create"),
+        _trace_event("idf.family.get", family="building"),
+        _trace_event(
+            "idf.family.append",
+            family="building",
+            fields={
+                "Name": "trace-model",
+                "North Axis": 17,
+                "Solar Distribution": "MinimalShadowing",
+                "Terrain": "TraceTerrain",
+            },
+        ),
+        _trace_event("projection.read", call=1, projection="used_layers"),
+        _trace_conversion("layer", "layer-1"),
+    ]
+    if fail_at == "layer-2":
+        events.append(_trace_conversion("layer", "layer-2", result="raised"))
+        return events
+    events.extend(
+        (
+            _trace_conversion("layer", "layer-2"),
+            _trace_append("object:layer-1", "object:layer-2"),
+            _trace_event("projection.read", call=1, projection="surfaces"),
+            _trace_conversion(
+                "construction",
+                "construction-opaque",
+                arguments=("surface-opaque",),
+            ),
+            _trace_append("object:construction-opaque"),
+            _trace_conversion("glazing", "glazing-1"),
+            _trace_append("object:glazing-1:material", "object:glazing-1:construction"),
+            _trace_conversion("door-construction", "door-construction-1"),
+            _trace_append(
+                "object:door-construction-1:material",
+                "object:door-construction-1:construction",
+            ),
+            _trace_event("idf.family.get", family="Construction:AirBoundary"),
+            _trace_event(
+                "idf.family.names",
+                family="Construction:AirBoundary",
+                names=[],
+            ),
+            _trace_conversion("air-boundary", "air-boundary-first"),
+            _trace_append("object:air-boundary-first"),
+            _trace_event("idf.family.get", family="Construction:AirBoundary"),
+            _trace_event(
+                "idf.family.names",
+                family="Construction:AirBoundary",
+                names=["Shared-Air-Boundary"],
+            ),
+            _trace_event("projection.read", call=1, projection="used_profiles"),
+            _trace_conversion("profile", "profile-1"),
+            _trace_append("object:profile-1"),
+            _trace_conversion("profile", "profile-2"),
+            _trace_append("object:profile-2"),
+            _trace_conversion("zone", "zone-1"),
+            _trace_append("object:zone-1"),
+            _trace_conversion("zone", "zone-2"),
+            _trace_append("object:zone-2"),
+            _trace_conversion("zone", "zone-unconditioned"),
+            _trace_append("object:zone-unconditioned"),
+            _trace_event(
+                "projection.read", call=1, projection="conditioned_zones"
+            ),
+            _trace_event(
+                "supply.sources.read",
+                sources=["source-shared", "source-2"],
+                zone="zone-1",
+            ),
+            _trace_conversion("source", "source-shared"),
+            _trace_append("object:source-shared"),
+        )
+    )
+    if fail_at == "source-2":
+        events.append(_trace_conversion("source", "source-2", result="raised"))
+        return events
+    events.extend(
+        (
+            _trace_conversion("source", "source-2"),
+            _trace_append("object:source-2"),
+            _trace_event(
+                "supply.sources.read",
+                sources=["source-shared"],
+                zone="zone-2",
+            ),
+            _trace_event(
+                "projection.read", call=2, projection="conditioned_zones"
+            ),
+            _trace_event(
+                "supply.delegate",
+                idf_identity_aligned=True,
+                result="returned",
+                supply_identity_aligned=True,
+                zone="zone-1",
+            ),
+        )
+    )
+    if fail_at == "supply-zone-2":
+        events.append(
+            _trace_event(
+                "supply.delegate",
+                idf_identity_aligned=True,
+                result="raised",
+                supply_identity_aligned=True,
+                zone="zone-2",
+            )
+        )
+        return events
+    events.extend(
+        (
+            _trace_event(
+                "supply.delegate",
+                idf_identity_aligned=True,
+                result="returned",
+                supply_identity_aligned=True,
+                zone="zone-2",
+            ),
+            _trace_event(
+                "projection.read", call=1, projection="unconditioned_zones"
+            ),
+            _trace_event(
+                "idf-object.create",
+                fields={
+                    "Constant Cooling Setpoint": 50,
+                    "Constant Heating Setpoint": -30,
+                    "Name": "UNCONDITIONED_THERMOSTAT",
+                },
+                label="fallback-thermostat",
+                object_type="HVACTemplate:Thermostat",
+            ),
+            _trace_append("fallback-thermostat"),
+            _trace_event(
+                "projection.read", call=2, projection="unconditioned_zones"
+            ),
+            _trace_event(
+                "idf-object.create",
+                fields={
+                    "System Availability Schedule Name": "ALLON",
+                    "Template Thermostat Name": "UNCONDITIONED_THERMOSTAT",
+                    "Zone Name": "zone-unconditioned",
+                },
+                label="fallback-ideal:zone-unconditioned",
+                object_type="HVACTemplate:Zone:IdealLoadsAirSystem",
+            ),
+            _trace_append("fallback-ideal:zone-unconditioned"),
+            _trace_conversion("photovoltaic", "pv-1"),
+            _trace_append("object:pv-1"),
+        )
+    )
+    if fail_at == "pv-2":
+        events.append(_trace_conversion("photovoltaic", "pv-2", result="raised"))
+        return events
+    events.extend(
+        (
+            _trace_conversion("photovoltaic", "pv-2"),
+            _trace_append("object:pv-2"),
+        )
+    )
+    return events
+
+
+def _projection_read_counts(events: list[dict[str, Any]]) -> dict[str, int]:
+    names = (
+        "conditioned_zones",
+        "surfaces",
+        "unconditioned_zones",
+        "used_layers",
+        "used_profiles",
+    )
+    return {
+        name: sum(
+            event["event"] == "projection.read" and event["projection"] == name
+            for event in events
+        )
+        for name in names
+    }
+
+
+def _expected_orchestration_facts(fail_at: str | None) -> dict[str, Any]:
+    events = _expected_orchestration_events(fail_at)
+    facts: dict[str, Any] = {
+        "append_batches": [
+            event["labels"] for event in events if event["event"] == "idf.append"
+        ],
+        "events": events,
+        "model_membership_unchanged": True,
+        "projection_read_counts": _projection_read_counts(events),
+        "returned_default_idf_identity": fail_at is None,
+    }
+    if fail_at is not None:
+        facts["error"] = _trace_error(fail_at)
+    return facts
+
+
 def expected_facts(identifier: str) -> dict[str, Any]:
-    if identifier == EXPECTED_CASE_IDS[0]:
+    if identifier == ASSIGNED_WITHOUT_AVAILABILITY_CASE_ID:
         return {
             "absent_object_counts": {
                 "DesignSpecification:OutdoorAir": 0,
@@ -569,7 +864,7 @@ def expected_facts(identifier: str) -> dict[str, Any]:
             "zone_is_conditioned": False,
             "zone_names": ["Assigned-Zone"],
         }
-    if identifier == EXPECTED_CASE_IDS[1]:
+    if identifier == CASE_DISTINCT_PROFILE_CASE_ID:
         return {
             "casefold_schedule_groups": {
                 "alloff": ["ALLOFF"],
@@ -612,7 +907,7 @@ def expected_facts(identifier: str) -> dict[str, Any]:
             ],
             "zone_names": ["Case-Zone-1", "Case-Zone-2"],
         }
-    if identifier == EXPECTED_CASE_IDS[2]:
+    if identifier == DUPLICATE_PROFILE_CASE_ID:
         return {
             "ensure_validity": False,
             "fallback_ideal_loads": [
@@ -645,7 +940,7 @@ def expected_facts(identifier: str) -> dict[str, Any]:
             ],
             "zone_names": ["Exact-Zone-1", "Exact-Zone-2"],
         }
-    if identifier == EXPECTED_CASE_IDS[3]:
+    if identifier == LEGACY_ERV_CASE_ID:
         return {
             "conditioned_zone_names": [],
             "ensure_validity": False,
@@ -689,7 +984,11 @@ def expected_facts(identifier: str) -> dict[str, Any]:
             "zone_is_conditioned": False,
             "zone_names": ["ERV-Zone"],
         }
-    if identifier == EXPECTED_CASE_IDS[4]:
+    if identifier in ORCHESTRATION_FAILURES:
+        return _expected_orchestration_facts(ORCHESTRATION_FAILURES[identifier])
+    if identifier == ORCHESTRATION_SUCCESS_CASE_ID:
+        return _expected_orchestration_facts(None)
+    if identifier == TWO_UNCONDITIONED_CASE_ID:
         return {
             "allon_object_count": 1,
             "conditioned_zone_names": [],
@@ -719,6 +1018,10 @@ def expected_facts(identifier: str) -> dict[str, Any]:
             "zone_names": ["Unconditioned-First", "Unconditioned-Second"],
         }
     raise RuntimeError(f"Unknown dragon-model assembly case: {identifier}")
+
+
+def expected_outcome(identifier: str) -> str:
+    return "raised" if identifier in ORCHESTRATION_FAILURES else "returned"
 
 
 def _dependencies() -> dict[str, str]:
@@ -1026,13 +1329,423 @@ def _common_facts(idf: Any) -> dict[str, Any]:
     }
 
 
-def _execute_case(identifier: str, modules: SimpleNamespace) -> dict[str, Any]:
+class _TraceToken:
+    def __init__(
+        self,
+        label: str,
+        *,
+        family: str | None = None,
+        name: str | None = None,
+    ) -> None:
+        self.label = label
+        self.family = family
+        self.name = name
+
+
+class _TraceFamily:
+    def __init__(
+        self,
+        owner: "_TraceIdf",
+        family: str,
+    ) -> None:
+        self.owner = owner
+        self.family = family
+        self._names: list[str] = []
+
+    def append(self, fields: dict[str, Any]) -> None:
+        if not isinstance(fields, dict):
+            raise RuntimeError("Trace family append expected a field mapping.")
+        self.owner.events.append(
+            _trace_event(
+                "idf.family.append",
+                family=self.family,
+                fields=dict(fields),
+            )
+        )
+
+    @property
+    def names(self) -> list[str]:
+        names = list(self._names)
+        self.owner.events.append(
+            _trace_event("idf.family.names", family=self.family, names=names)
+        )
+        return names
+
+
+class _TraceIdf:
+    def __init__(self, events: list[dict[str, Any]]) -> None:
+        self.events = events
+        self.append_batches: list[list[str]] = []
+        self._families: dict[str, _TraceFamily] = {}
+
+    def __getitem__(self, family: str) -> _TraceFamily:
+        self.events.append(_trace_event("idf.family.get", family=family))
+        if family not in self._families:
+            self._families[family] = _TraceFamily(self, family)
+        return self._families[family]
+
+    def append(self, *objects: _TraceToken) -> None:
+        if any(not isinstance(item, _TraceToken) for item in objects):
+            raise RuntimeError("Trace IDF append received a non-token object.")
+        labels = [item.label for item in objects]
+        self.events.append(_trace_append(*labels))
+        self.append_batches.append(labels)
+        for item in objects:
+            if item.family is not None and item.name is not None:
+                family = self._families.setdefault(
+                    item.family, _TraceFamily(self, item.family)
+                )
+                family._names.append(item.name)
+
+
+class _TraceConverter:
+    def __init__(
+        self,
+        kind: str,
+        label: str,
+        events: list[dict[str, Any]],
+        token_labels: tuple[str, ...],
+        fail_at: str | None,
+        *,
+        return_list: bool = True,
+    ) -> None:
+        self.kind = kind
+        self.label = label
+        self.events = events
+        self.token_labels = token_labels
+        self.fail_at = fail_at
+        self.return_list = return_list
+
+    def to_idf_object(self, *arguments: Any) -> Any:
+        argument_labels = tuple(
+            str(getattr(value, "label", getattr(value, "name", type(value).__name__)))
+            for value in arguments
+        )
+        result = "raised" if self.fail_at == self.label else "returned"
+        self.events.append(
+            _trace_conversion(
+                self.kind,
+                self.label,
+                arguments=argument_labels,
+                result=result,
+            )
+        )
+        if result == "raised":
+            raise RuntimeError(f"orchestration-failure:{self.label}")
+        tokens = [_TraceToken(label) for label in self.token_labels]
+        if self.return_list:
+            return tokens
+        if len(tokens) != 1:
+            raise RuntimeError("A scalar trace converter must return one token.")
+        return tokens[0]
+
+
+class _TraceSupply:
+    def __init__(
+        self,
+        zone_label: str,
+        sources: tuple[_TraceConverter, ...],
+        events: list[dict[str, Any]],
+    ) -> None:
+        self.zone_label = zone_label
+        self._sources = sources
+        self.events = events
+
+    @property
+    def sources(self) -> tuple[_TraceConverter, ...]:
+        self.events.append(
+            _trace_event(
+                "supply.sources.read",
+                sources=[source.label for source in self._sources],
+                zone=self.zone_label,
+            )
+        )
+        return tuple(self._sources)
+
+
+def _same_identity_sequence(first: list[Any], second: list[Any]) -> bool:
+    return len(first) == len(second) and all(
+        left is right for left, right in zip(first, second, strict=True)
+    )
+
+
+def _execute_orchestration_case(
+    modules: SimpleNamespace,
+    fail_at: str | None,
+) -> tuple[dict[str, Any], str]:
+    events: list[dict[str, Any]] = []
+    trace_idf = _TraceIdf(events)
+
+    layer_1 = _TraceConverter(
+        "layer",
+        "layer-1",
+        events,
+        ("object:layer-1",),
+        fail_at,
+        return_list=False,
+    )
+    layer_2 = _TraceConverter(
+        "layer",
+        "layer-2",
+        events,
+        ("object:layer-2",),
+        fail_at,
+        return_list=False,
+    )
+
+    class ProbeConstruction(modules.model.Construction):
+        def __init__(self) -> None:
+            self.probe = _TraceConverter(
+                "construction",
+                "construction-opaque",
+                events,
+                ("object:construction-opaque",),
+                fail_at,
+            )
+
+        def to_idf_object(self, surface: Any) -> list[_TraceToken]:
+            return self.probe.to_idf_object(surface)
+
+    class ProbeAirBoundary(modules.model.AirBoundary):
+        def __init__(self, label: str) -> None:
+            self.name = "Shared-Air-Boundary"
+            self.probe = _TraceConverter(
+                "air-boundary",
+                label,
+                events,
+                (f"object:{label}",),
+                fail_at,
+            )
+
+        def to_idf_object(self) -> list[_TraceToken]:
+            tokens = self.probe.to_idf_object()
+            for token in tokens:
+                token.family = "Construction:AirBoundary"
+                token.name = self.name
+            return tokens
+
+    glazing = _TraceConverter(
+        "glazing",
+        "glazing-1",
+        events,
+        ("object:glazing-1:material", "object:glazing-1:construction"),
+        fail_at,
+    )
+    door_construction = _TraceConverter(
+        "door-construction",
+        "door-construction-1",
+        events,
+        (
+            "object:door-construction-1:material",
+            "object:door-construction-1:construction",
+        ),
+        fail_at,
+    )
+    opaque_surface = SimpleNamespace(
+        construction=ProbeConstruction(),
+        door=[SimpleNamespace(construction=door_construction)],
+        label="surface-opaque",
+        name="surface-opaque",
+        window=[SimpleNamespace(glazing=glazing)],
+    )
+    first_air_surface = SimpleNamespace(
+        construction=ProbeAirBoundary("air-boundary-first"),
+        door=[],
+        label="surface-air-first",
+        name="surface-air-first",
+        window=[],
+    )
+    duplicate_air_surface = SimpleNamespace(
+        construction=ProbeAirBoundary("air-boundary-duplicate"),
+        door=[],
+        label="surface-air-duplicate",
+        name="surface-air-duplicate",
+        window=[],
+    )
+    profiles = [
+        _TraceConverter("profile", "profile-1", events, ("object:profile-1",), fail_at),
+        _TraceConverter("profile", "profile-2", events, ("object:profile-2",), fail_at),
+    ]
+    shared_source = _TraceConverter(
+        "source",
+        "source-shared",
+        events,
+        ("object:source-shared",),
+        fail_at,
+    )
+    second_source = _TraceConverter(
+        "source", "source-2", events, ("object:source-2",), fail_at
+    )
+    zone_1 = _TraceConverter(
+        "zone", "zone-1", events, ("object:zone-1",), fail_at
+    )
+    zone_1.name = zone_1.label
+    zone_1.supply = _TraceSupply(
+        zone_1.label, (shared_source, second_source), events
+    )
+    zone_2 = _TraceConverter(
+        "zone", "zone-2", events, ("object:zone-2",), fail_at
+    )
+    zone_2.name = zone_2.label
+    zone_2.supply = _TraceSupply(zone_2.label, (shared_source,), events)
+    unconditioned_zone = _TraceConverter(
+        "zone",
+        "zone-unconditioned",
+        events,
+        ("object:zone-unconditioned",),
+        fail_at,
+    )
+    unconditioned_zone.name = unconditioned_zone.label
+    unconditioned_zone.supply = None
+    photovoltaic = [
+        _TraceConverter(
+            "photovoltaic", "pv-1", events, ("object:pv-1",), fail_at
+        ),
+        _TraceConverter(
+            "photovoltaic", "pv-2", events, ("object:pv-2",), fail_at
+        ),
+    ]
+
+    projection_calls = Counter()
+
+    class ProbeEnergyModel(modules.model.EnergyModel):
+        def __init__(self) -> None:
+            self.name = "trace-model"
+            self.north_axis = 17
+            self.terrain = "TraceTerrain"
+            self.zone = [zone_1, zone_2, unconditioned_zone]
+            self.pv = photovoltaic
+
+        def _projection(self, name: str, values: list[Any]) -> list[Any]:
+            projection_calls[name] += 1
+            events.append(
+                _trace_event(
+                    "projection.read",
+                    call=projection_calls[name],
+                    projection=name,
+                )
+            )
+            return list(values)
+
+        @property
+        def used_layers(self) -> list[Any]:
+            return self._projection("used_layers", [layer_1, layer_2])
+
+        @property
+        def surfaces(self) -> list[Any]:
+            return self._projection(
+                "surfaces",
+                [opaque_surface, first_air_surface, duplicate_air_surface],
+            )
+
+        @property
+        def used_profiles(self) -> list[Any]:
+            return self._projection("used_profiles", profiles)
+
+        @property
+        def conditioned_zones(self) -> list[Any]:
+            return self._projection("conditioned_zones", [zone_1, zone_2])
+
+        @property
+        def unconditioned_zones(self) -> list[Any]:
+            return self._projection("unconditioned_zones", [unconditioned_zone])
+
+    probe_model = ProbeEnergyModel()
+    original_zones = list(probe_model.zone)
+    original_pv = list(probe_model.pv)
+    energy_model = modules.model.EnergyModel
+    original_create_default = energy_model.__dict__["create_default_idf"]
+    original_add_supply = energy_model.__dict__["add_supply_system"]
+    original_idf_object = modules.model.IdfObject
+
+    def create_default_idf() -> _TraceIdf:
+        events.append(_trace_event("default.create"))
+        return trace_idf
+
+    def add_supply_system(idf: Any, zone: Any, supply: Any) -> None:
+        result = "raised" if fail_at == f"supply-{zone.label}" else "returned"
+        events.append(
+            _trace_event(
+                "supply.delegate",
+                idf_identity_aligned=idf is trace_idf,
+                result=result,
+                supply_identity_aligned=supply is zone.supply,
+                zone=zone.label,
+            )
+        )
+        if result == "raised":
+            raise RuntimeError(f"orchestration-failure:supply-{zone.label}")
+
+    def idf_object(object_type: str, fields: dict[str, Any]) -> _TraceToken:
+        if object_type == "HVACTemplate:Thermostat":
+            label = "fallback-thermostat"
+        elif object_type == "HVACTemplate:Zone:IdealLoadsAirSystem":
+            label = f"fallback-ideal:{fields['Zone Name']}"
+        else:
+            raise RuntimeError(f"Unexpected trace IdfObject type: {object_type}")
+        events.append(
+            _trace_event(
+                "idf-object.create",
+                fields=dict(fields),
+                label=label,
+                object_type=object_type,
+            )
+        )
+        return _TraceToken(label, family=object_type, name=label)
+
+    result: Any = None
+    error_fact: dict[str, Any] | None = None
+    outcome = "returned"
+    try:
+        setattr(energy_model, "create_default_idf", staticmethod(create_default_idf))
+        setattr(energy_model, "add_supply_system", staticmethod(add_supply_system))
+        modules.model.IdfObject = idf_object
+        result = energy_model.to_idf(probe_model)
+    except Exception as error:
+        outcome = "raised"
+        error_fact = {
+            "args": [str(value) for value in error.args],
+            "message": str(error),
+            "outcome": "raised",
+            "type": type(error).__name__,
+        }
+    finally:
+        setattr(energy_model, "create_default_idf", original_create_default)
+        setattr(energy_model, "add_supply_system", original_add_supply)
+        modules.model.IdfObject = original_idf_object
+
+    facts: dict[str, Any] = {
+        "append_batches": trace_idf.append_batches,
+        "events": events,
+        "model_membership_unchanged": _same_identity_sequence(
+            probe_model.zone, original_zones
+        )
+        and _same_identity_sequence(probe_model.pv, original_pv),
+        "projection_read_counts": _projection_read_counts(events),
+        "returned_default_idf_identity": result is trace_idf,
+    }
+    if error_fact is not None:
+        facts["error"] = error_fact
+    return facts, outcome
+
+
+def _execute_case(
+    identifier: str,
+    modules: SimpleNamespace,
+) -> tuple[dict[str, Any], str]:
+    if identifier in ORCHESTRATION_FAILURES:
+        return _execute_orchestration_case(
+            modules, ORCHESTRATION_FAILURES[identifier]
+        )
+    if identifier == ORCHESTRATION_SUCCESS_CASE_ID:
+        return _execute_orchestration_case(modules, None)
+
     schedule = modules.profile.Schedule
     schedule_type = modules.profile.ScheduleType
     profile = modules.profile.Profile
     energy_model = modules.model.EnergyModel
 
-    if identifier == EXPECTED_CASE_IDS[0]:
+    if identifier == ASSIGNED_WITHOUT_AVAILABILITY_CASE_ID:
         heating = schedule.from_constant(
             "Heat-Assigned", 20, type=schedule_type.TEMPERATURE
         )
@@ -1080,9 +1793,9 @@ def _execute_case(identifier: str, modules: SimpleNamespace) -> dict[str, Any]:
                 "zone_is_conditioned": zone.is_conditioned,
             }
         )
-        return facts
+        return facts, "returned"
 
-    if identifier == EXPECTED_CASE_IDS[1]:
+    if identifier == CASE_DISTINCT_PROFILE_CASE_ID:
         upper = schedule.from_constant(
             "CaseLight", 1, type=schedule_type.ONOFF
         )
@@ -1117,9 +1830,9 @@ def _execute_case(identifier: str, modules: SimpleNamespace) -> dict[str, Any]:
                 ],
             }
         )
-        return facts
+        return facts, "returned"
 
-    if identifier == EXPECTED_CASE_IDS[2]:
+    if identifier == DUPLICATE_PROFILE_CASE_ID:
         first_schedule = schedule.from_constant(
             "Light-A", 1, type=schedule_type.ONOFF
         )
@@ -1156,9 +1869,9 @@ def _execute_case(identifier: str, modules: SimpleNamespace) -> dict[str, Any]:
                 ],
             }
         )
-        return facts
+        return facts, "returned"
 
-    if identifier == EXPECTED_CASE_IDS[3]:
+    if identifier == LEGACY_ERV_CASE_ID:
         occupancy = schedule.from_constant(
             "Occ-ERV", 1.0, type=schedule_type.REAL
         )
@@ -1197,9 +1910,9 @@ def _execute_case(identifier: str, modules: SimpleNamespace) -> dict[str, Any]:
                 "zone_is_conditioned": zone.is_conditioned,
             }
         )
-        return facts
+        return facts, "returned"
 
-    if identifier == EXPECTED_CASE_IDS[4]:
+    if identifier == TWO_UNCONDITIONED_CASE_ID:
         first = _zone(modules, "Unconditioned-First", profile("First-Profile"))
         second = _zone(
             modules, "Unconditioned-Second", profile("Second-Profile")
@@ -1220,7 +1933,7 @@ def _execute_case(identifier: str, modules: SimpleNamespace) -> dict[str, Any]:
                 ],
             }
         )
-        return facts
+        return facts, "returned"
     raise RuntimeError(f"Unknown dragon-model assembly case: {identifier}")
 
 
@@ -1322,7 +2035,7 @@ def build_oracle(
     with _pinned_modules(imported_root) as modules:
         cases: list[dict[str, Any]] = []
         for definition in case_definitions():
-            facts = _execute_case(definition["id"], modules)
+            facts, outcome = _execute_case(definition["id"], modules)
             if facts != expected_facts(definition["id"]):
                 raise SystemExit(
                     "Pinned Python dragon-model assembly semantics drifted: "
@@ -1331,7 +2044,7 @@ def build_oracle(
                     + strict_json_dumps(facts, indent=2)
                 )
             case = dict(definition)
-            case["python"] = {"facts": facts, "outcome": "returned"}
+            case["python"] = {"facts": facts, "outcome": outcome}
             cases.append(case)
     loaded_local_modules = modules.loaded_local_modules
 
@@ -1449,7 +2162,7 @@ def validate_oracle(value: dict[str, Any]) -> None:
                 f"Bounded assembly case cannot claim expected_dotnet: {case['id']}"
             )
         _require_keys(case["python"], {"facts", "outcome"}, "python")
-        if case["python"]["outcome"] != "returned":
+        if case["python"]["outcome"] != expected_outcome(case["id"]):
             raise RuntimeError(f"Python case outcome drifted: {case['id']}")
         if case["python"]["facts"] != expected_facts(case["id"]):
             raise RuntimeError(f"Dragon-model assembly semantics drifted: {case['id']}")

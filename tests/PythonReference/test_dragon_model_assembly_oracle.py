@@ -45,12 +45,12 @@ if spec is None or spec.loader is None:
 generator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(generator)
 
-EXPECTED_FIXTURE_BYTES = 77_002
+EXPECTED_FIXTURE_BYTES = 119_000
 EXPECTED_FIXTURE_SHA256 = (
-    "sha256:a008740b6830908cd65d3f2636532c67dde7d7a6cadd062d34e3583775f16308"
+    "sha256:f01960724a367eadb8fbee9a5bef3b8d4304449eb9d3c71fa626f4db03024ef4"
 )
 EXPECTED_CASES_SHA256 = (
-    "sha256:9e3d8c576e2ed17fdbe9555fbafda9dc92aca3991c835b0d83a134a8415c6833"
+    "sha256:c93a9a25726848777d527518a99419f21175fb9e473c0371654fef9fb5f01eaa"
 )
 
 
@@ -136,7 +136,7 @@ class DragonModelAssemblyOracleTests(unittest.TestCase):
         self.assertEqual(generator.EXPECTED_CASE_IDS, identifiers)
         self.assertEqual(tuple(sorted(identifiers)), identifiers)
         self.assertEqual(len(identifiers), len(set(identifiers)))
-        self.assertEqual(5, generator.EXPECTED_CASE_COUNT)
+        self.assertEqual(10, generator.EXPECTED_CASE_COUNT)
         self.assertEqual(
             generator.EXPECTED_CASE_COUNTS,
             dict(Counter(item["symbol"] for item in definitions)),
@@ -310,6 +310,167 @@ class DragonModelAssemblyOracleTests(unittest.TestCase):
             },
             assigned["absent_object_counts"],
         )
+
+    def test_parent_orchestration_success_binds_order_identity_and_dedup(self) -> None:
+        value = self.fixture()
+        case = self.case(value, generator.ORCHESTRATION_SUCCESS_CASE_ID)
+        self.assertEqual("returned", case["python"]["outcome"])
+        facts = case["python"]["facts"]
+        self.assertTrue(facts["returned_default_idf_identity"])
+        self.assertTrue(facts["model_membership_unchanged"])
+        self.assertEqual(
+            {
+                "conditioned_zones": 2,
+                "surfaces": 1,
+                "unconditioned_zones": 2,
+                "used_layers": 1,
+                "used_profiles": 1,
+            },
+            facts["projection_read_counts"],
+        )
+        self.assertEqual(51, len(facts["events"]))
+        self.assertEqual(
+            ["object:layer-1", "object:layer-2"],
+            facts["append_batches"][0],
+        )
+        self.assertEqual(
+            ["fallback-thermostat"], facts["append_batches"][-4]
+        )
+        self.assertEqual(
+            ["fallback-ideal:zone-unconditioned"],
+            facts["append_batches"][-3],
+        )
+        self.assertEqual(["object:pv-1"], facts["append_batches"][-2])
+        self.assertEqual(["object:pv-2"], facts["append_batches"][-1])
+
+        events = facts["events"]
+        self.assertEqual("default.create", events[0]["event"])
+        self.assertEqual("building", events[1]["family"])
+        self.assertEqual(
+            {
+                "Name": "trace-model",
+                "North Axis": 17,
+                "Solar Distribution": "MinimalShadowing",
+                "Terrain": "TraceTerrain",
+            },
+            events[2]["fields"],
+        )
+        shared_source_calls = [
+            event
+            for event in events
+            if event["event"] == "converter.call"
+            and event["label"] == "source-shared"
+        ]
+        self.assertEqual(1, len(shared_source_calls))
+        source_reads = [
+            event for event in events if event["event"] == "supply.sources.read"
+        ]
+        self.assertEqual(
+            [
+                ["source-shared", "source-2"],
+                ["source-shared"],
+            ],
+            [event["sources"] for event in source_reads],
+        )
+        self.assertFalse(
+            any(
+                event["event"] == "converter.call"
+                and event["label"] == "air-boundary-duplicate"
+                for event in events
+            )
+        )
+        delegates = [
+            event for event in events if event["event"] == "supply.delegate"
+        ]
+        self.assertEqual(["zone-1", "zone-2"], [item["zone"] for item in delegates])
+        self.assertTrue(
+            all(
+                item["idf_identity_aligned"]
+                and item["supply_identity_aligned"]
+                and item["result"] == "returned"
+                for item in delegates
+            )
+        )
+
+    def test_parent_orchestration_failure_prefixes_are_exact_and_bounded(self) -> None:
+        value = self.fixture()
+
+        layer = self.case(value, generator.ORCHESTRATION_LAYER_FAILURE_CASE_ID)
+        self.assertEqual("raised", layer["python"]["outcome"])
+        layer_facts = layer["python"]["facts"]
+        self.assertEqual(generator._trace_error("layer-2"), layer_facts["error"])
+        self.assertEqual([], layer_facts["append_batches"])
+        self.assertEqual(
+            generator._trace_conversion("layer", "layer-2", result="raised"),
+            layer_facts["events"][-1],
+        )
+        self.assertFalse(layer_facts["returned_default_idf_identity"])
+
+        source = self.case(value, generator.ORCHESTRATION_SOURCE_FAILURE_CASE_ID)
+        self.assertEqual("raised", source["python"]["outcome"])
+        source_facts = source["python"]["facts"]
+        self.assertEqual(generator._trace_error("source-2"), source_facts["error"])
+        self.assertEqual(
+            generator._trace_conversion("source", "source-2", result="raised"),
+            source_facts["events"][-1],
+        )
+        self.assertIn(["object:source-shared"], source_facts["append_batches"])
+        self.assertNotIn(["object:source-2"], source_facts["append_batches"])
+        self.assertFalse(
+            any(
+                event["event"] in {"supply.delegate", "idf-object.create"}
+                or (
+                    event["event"] == "converter.call"
+                    and event["kind"] == "photovoltaic"
+                )
+                for event in source_facts["events"]
+            )
+        )
+
+        supply = self.case(
+            value, generator.ORCHESTRATION_ADD_SUPPLY_FAILURE_CASE_ID
+        )
+        self.assertEqual("raised", supply["python"]["outcome"])
+        supply_facts = supply["python"]["facts"]
+        self.assertEqual(
+            generator._trace_error("supply-zone-2"), supply_facts["error"]
+        )
+        delegates = [
+            event
+            for event in supply_facts["events"]
+            if event["event"] == "supply.delegate"
+        ]
+        self.assertEqual(
+            [("zone-1", "returned"), ("zone-2", "raised")],
+            [(event["zone"], event["result"]) for event in delegates],
+        )
+        self.assertFalse(
+            any(
+                event["event"] == "idf-object.create"
+                or (
+                    event["event"] == "converter.call"
+                    and event["kind"] == "photovoltaic"
+                )
+                for event in supply_facts["events"]
+            )
+        )
+
+        photovoltaic = self.case(
+            value, generator.ORCHESTRATION_PV_FAILURE_CASE_ID
+        )
+        self.assertEqual("raised", photovoltaic["python"]["outcome"])
+        photovoltaic_facts = photovoltaic["python"]["facts"]
+        self.assertEqual(
+            generator._trace_error("pv-2"), photovoltaic_facts["error"]
+        )
+        self.assertEqual(
+            generator._trace_conversion("photovoltaic", "pv-2", result="raised"),
+            photovoltaic_facts["events"][-1],
+        )
+        self.assertEqual(["object:pv-1"], photovoltaic_facts["append_batches"][-1])
+        self.assertNotIn(["object:pv-2"], photovoltaic_facts["append_batches"])
+        self.assertTrue(photovoltaic_facts["model_membership_unchanged"])
+        self.assertFalse(photovoltaic_facts["returned_default_idf_identity"])
 
     @unittest.skipUnless(
         all(

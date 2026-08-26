@@ -2162,6 +2162,1496 @@
     },
     {
       "executor": "energy-model-to-idf",
+      "id": "dragon-model-assembly.to-idf.orchestration-failure.add-supply-prefix",
+      "python": {
+        "facts": {
+          "append_batches": [
+            [
+              "object:layer-1",
+              "object:layer-2"
+            ],
+            [
+              "object:construction-opaque"
+            ],
+            [
+              "object:glazing-1:material",
+              "object:glazing-1:construction"
+            ],
+            [
+              "object:door-construction-1:material",
+              "object:door-construction-1:construction"
+            ],
+            [
+              "object:air-boundary-first"
+            ],
+            [
+              "object:profile-1"
+            ],
+            [
+              "object:profile-2"
+            ],
+            [
+              "object:zone-1"
+            ],
+            [
+              "object:zone-2"
+            ],
+            [
+              "object:zone-unconditioned"
+            ],
+            [
+              "object:source-shared"
+            ],
+            [
+              "object:source-2"
+            ]
+          ],
+          "error": {
+            "args": [
+              "orchestration-failure:supply-zone-2"
+            ],
+            "message": "orchestration-failure:supply-zone-2",
+            "outcome": "raised",
+            "type": "RuntimeError"
+          },
+          "events": [
+            {
+              "event": "default.create"
+            },
+            {
+              "event": "idf.family.get",
+              "family": "building"
+            },
+            {
+              "event": "idf.family.append",
+              "family": "building",
+              "fields": {
+                "Name": "trace-model",
+                "North Axis": 17,
+                "Solar Distribution": "MinimalShadowing",
+                "Terrain": "TraceTerrain"
+              }
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "used_layers"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "layer",
+              "label": "layer-1",
+              "result": "returned"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "layer",
+              "label": "layer-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:layer-1",
+                "object:layer-2"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "surfaces"
+            },
+            {
+              "arguments": [
+                "surface-opaque"
+              ],
+              "event": "converter.call",
+              "kind": "construction",
+              "label": "construction-opaque",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:construction-opaque"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "glazing",
+              "label": "glazing-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:glazing-1:material",
+                "object:glazing-1:construction"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "door-construction",
+              "label": "door-construction-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:door-construction-1:material",
+                "object:door-construction-1:construction"
+              ]
+            },
+            {
+              "event": "idf.family.get",
+              "family": "Construction:AirBoundary"
+            },
+            {
+              "event": "idf.family.names",
+              "family": "Construction:AirBoundary",
+              "names": []
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "air-boundary",
+              "label": "air-boundary-first",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:air-boundary-first"
+              ]
+            },
+            {
+              "event": "idf.family.get",
+              "family": "Construction:AirBoundary"
+            },
+            {
+              "event": "idf.family.names",
+              "family": "Construction:AirBoundary",
+              "names": [
+                "Shared-Air-Boundary"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "used_profiles"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "profile",
+              "label": "profile-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:profile-1"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "profile",
+              "label": "profile-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:profile-2"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-1"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-2"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-unconditioned",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-unconditioned"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "conditioned_zones"
+            },
+            {
+              "event": "supply.sources.read",
+              "sources": [
+                "source-shared",
+                "source-2"
+              ],
+              "zone": "zone-1"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "source",
+              "label": "source-shared",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:source-shared"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "source",
+              "label": "source-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:source-2"
+              ]
+            },
+            {
+              "event": "supply.sources.read",
+              "sources": [
+                "source-shared"
+              ],
+              "zone": "zone-2"
+            },
+            {
+              "call": 2,
+              "event": "projection.read",
+              "projection": "conditioned_zones"
+            },
+            {
+              "event": "supply.delegate",
+              "idf_identity_aligned": true,
+              "result": "returned",
+              "supply_identity_aligned": true,
+              "zone": "zone-1"
+            },
+            {
+              "event": "supply.delegate",
+              "idf_identity_aligned": true,
+              "result": "raised",
+              "supply_identity_aligned": true,
+              "zone": "zone-2"
+            }
+          ],
+          "model_membership_unchanged": true,
+          "projection_read_counts": {
+            "conditioned_zones": 2,
+            "surfaces": 1,
+            "unconditioned_zones": 0,
+            "used_layers": 1,
+            "used_profiles": 1
+          },
+          "returned_default_idf_identity": false
+        },
+        "outcome": "raised"
+      },
+      "symbol": "EnergyModel.to_idf"
+    },
+    {
+      "executor": "energy-model-to-idf",
+      "id": "dragon-model-assembly.to-idf.orchestration-failure.layer-batch-prefix",
+      "python": {
+        "facts": {
+          "append_batches": [],
+          "error": {
+            "args": [
+              "orchestration-failure:layer-2"
+            ],
+            "message": "orchestration-failure:layer-2",
+            "outcome": "raised",
+            "type": "RuntimeError"
+          },
+          "events": [
+            {
+              "event": "default.create"
+            },
+            {
+              "event": "idf.family.get",
+              "family": "building"
+            },
+            {
+              "event": "idf.family.append",
+              "family": "building",
+              "fields": {
+                "Name": "trace-model",
+                "North Axis": 17,
+                "Solar Distribution": "MinimalShadowing",
+                "Terrain": "TraceTerrain"
+              }
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "used_layers"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "layer",
+              "label": "layer-1",
+              "result": "returned"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "layer",
+              "label": "layer-2",
+              "result": "raised"
+            }
+          ],
+          "model_membership_unchanged": true,
+          "projection_read_counts": {
+            "conditioned_zones": 0,
+            "surfaces": 0,
+            "unconditioned_zones": 0,
+            "used_layers": 1,
+            "used_profiles": 0
+          },
+          "returned_default_idf_identity": false
+        },
+        "outcome": "raised"
+      },
+      "symbol": "EnergyModel.to_idf"
+    },
+    {
+      "executor": "energy-model-to-idf",
+      "id": "dragon-model-assembly.to-idf.orchestration-failure.pv-prefix",
+      "python": {
+        "facts": {
+          "append_batches": [
+            [
+              "object:layer-1",
+              "object:layer-2"
+            ],
+            [
+              "object:construction-opaque"
+            ],
+            [
+              "object:glazing-1:material",
+              "object:glazing-1:construction"
+            ],
+            [
+              "object:door-construction-1:material",
+              "object:door-construction-1:construction"
+            ],
+            [
+              "object:air-boundary-first"
+            ],
+            [
+              "object:profile-1"
+            ],
+            [
+              "object:profile-2"
+            ],
+            [
+              "object:zone-1"
+            ],
+            [
+              "object:zone-2"
+            ],
+            [
+              "object:zone-unconditioned"
+            ],
+            [
+              "object:source-shared"
+            ],
+            [
+              "object:source-2"
+            ],
+            [
+              "fallback-thermostat"
+            ],
+            [
+              "fallback-ideal:zone-unconditioned"
+            ],
+            [
+              "object:pv-1"
+            ]
+          ],
+          "error": {
+            "args": [
+              "orchestration-failure:pv-2"
+            ],
+            "message": "orchestration-failure:pv-2",
+            "outcome": "raised",
+            "type": "RuntimeError"
+          },
+          "events": [
+            {
+              "event": "default.create"
+            },
+            {
+              "event": "idf.family.get",
+              "family": "building"
+            },
+            {
+              "event": "idf.family.append",
+              "family": "building",
+              "fields": {
+                "Name": "trace-model",
+                "North Axis": 17,
+                "Solar Distribution": "MinimalShadowing",
+                "Terrain": "TraceTerrain"
+              }
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "used_layers"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "layer",
+              "label": "layer-1",
+              "result": "returned"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "layer",
+              "label": "layer-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:layer-1",
+                "object:layer-2"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "surfaces"
+            },
+            {
+              "arguments": [
+                "surface-opaque"
+              ],
+              "event": "converter.call",
+              "kind": "construction",
+              "label": "construction-opaque",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:construction-opaque"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "glazing",
+              "label": "glazing-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:glazing-1:material",
+                "object:glazing-1:construction"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "door-construction",
+              "label": "door-construction-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:door-construction-1:material",
+                "object:door-construction-1:construction"
+              ]
+            },
+            {
+              "event": "idf.family.get",
+              "family": "Construction:AirBoundary"
+            },
+            {
+              "event": "idf.family.names",
+              "family": "Construction:AirBoundary",
+              "names": []
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "air-boundary",
+              "label": "air-boundary-first",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:air-boundary-first"
+              ]
+            },
+            {
+              "event": "idf.family.get",
+              "family": "Construction:AirBoundary"
+            },
+            {
+              "event": "idf.family.names",
+              "family": "Construction:AirBoundary",
+              "names": [
+                "Shared-Air-Boundary"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "used_profiles"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "profile",
+              "label": "profile-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:profile-1"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "profile",
+              "label": "profile-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:profile-2"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-1"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-2"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-unconditioned",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-unconditioned"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "conditioned_zones"
+            },
+            {
+              "event": "supply.sources.read",
+              "sources": [
+                "source-shared",
+                "source-2"
+              ],
+              "zone": "zone-1"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "source",
+              "label": "source-shared",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:source-shared"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "source",
+              "label": "source-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:source-2"
+              ]
+            },
+            {
+              "event": "supply.sources.read",
+              "sources": [
+                "source-shared"
+              ],
+              "zone": "zone-2"
+            },
+            {
+              "call": 2,
+              "event": "projection.read",
+              "projection": "conditioned_zones"
+            },
+            {
+              "event": "supply.delegate",
+              "idf_identity_aligned": true,
+              "result": "returned",
+              "supply_identity_aligned": true,
+              "zone": "zone-1"
+            },
+            {
+              "event": "supply.delegate",
+              "idf_identity_aligned": true,
+              "result": "returned",
+              "supply_identity_aligned": true,
+              "zone": "zone-2"
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "unconditioned_zones"
+            },
+            {
+              "event": "idf-object.create",
+              "fields": {
+                "Constant Cooling Setpoint": 50,
+                "Constant Heating Setpoint": -30,
+                "Name": "UNCONDITIONED_THERMOSTAT"
+              },
+              "label": "fallback-thermostat",
+              "object_type": "HVACTemplate:Thermostat"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "fallback-thermostat"
+              ]
+            },
+            {
+              "call": 2,
+              "event": "projection.read",
+              "projection": "unconditioned_zones"
+            },
+            {
+              "event": "idf-object.create",
+              "fields": {
+                "System Availability Schedule Name": "ALLON",
+                "Template Thermostat Name": "UNCONDITIONED_THERMOSTAT",
+                "Zone Name": "zone-unconditioned"
+              },
+              "label": "fallback-ideal:zone-unconditioned",
+              "object_type": "HVACTemplate:Zone:IdealLoadsAirSystem"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "fallback-ideal:zone-unconditioned"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "photovoltaic",
+              "label": "pv-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:pv-1"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "photovoltaic",
+              "label": "pv-2",
+              "result": "raised"
+            }
+          ],
+          "model_membership_unchanged": true,
+          "projection_read_counts": {
+            "conditioned_zones": 2,
+            "surfaces": 1,
+            "unconditioned_zones": 2,
+            "used_layers": 1,
+            "used_profiles": 1
+          },
+          "returned_default_idf_identity": false
+        },
+        "outcome": "raised"
+      },
+      "symbol": "EnergyModel.to_idf"
+    },
+    {
+      "executor": "energy-model-to-idf",
+      "id": "dragon-model-assembly.to-idf.orchestration-failure.source-prefix",
+      "python": {
+        "facts": {
+          "append_batches": [
+            [
+              "object:layer-1",
+              "object:layer-2"
+            ],
+            [
+              "object:construction-opaque"
+            ],
+            [
+              "object:glazing-1:material",
+              "object:glazing-1:construction"
+            ],
+            [
+              "object:door-construction-1:material",
+              "object:door-construction-1:construction"
+            ],
+            [
+              "object:air-boundary-first"
+            ],
+            [
+              "object:profile-1"
+            ],
+            [
+              "object:profile-2"
+            ],
+            [
+              "object:zone-1"
+            ],
+            [
+              "object:zone-2"
+            ],
+            [
+              "object:zone-unconditioned"
+            ],
+            [
+              "object:source-shared"
+            ]
+          ],
+          "error": {
+            "args": [
+              "orchestration-failure:source-2"
+            ],
+            "message": "orchestration-failure:source-2",
+            "outcome": "raised",
+            "type": "RuntimeError"
+          },
+          "events": [
+            {
+              "event": "default.create"
+            },
+            {
+              "event": "idf.family.get",
+              "family": "building"
+            },
+            {
+              "event": "idf.family.append",
+              "family": "building",
+              "fields": {
+                "Name": "trace-model",
+                "North Axis": 17,
+                "Solar Distribution": "MinimalShadowing",
+                "Terrain": "TraceTerrain"
+              }
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "used_layers"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "layer",
+              "label": "layer-1",
+              "result": "returned"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "layer",
+              "label": "layer-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:layer-1",
+                "object:layer-2"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "surfaces"
+            },
+            {
+              "arguments": [
+                "surface-opaque"
+              ],
+              "event": "converter.call",
+              "kind": "construction",
+              "label": "construction-opaque",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:construction-opaque"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "glazing",
+              "label": "glazing-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:glazing-1:material",
+                "object:glazing-1:construction"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "door-construction",
+              "label": "door-construction-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:door-construction-1:material",
+                "object:door-construction-1:construction"
+              ]
+            },
+            {
+              "event": "idf.family.get",
+              "family": "Construction:AirBoundary"
+            },
+            {
+              "event": "idf.family.names",
+              "family": "Construction:AirBoundary",
+              "names": []
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "air-boundary",
+              "label": "air-boundary-first",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:air-boundary-first"
+              ]
+            },
+            {
+              "event": "idf.family.get",
+              "family": "Construction:AirBoundary"
+            },
+            {
+              "event": "idf.family.names",
+              "family": "Construction:AirBoundary",
+              "names": [
+                "Shared-Air-Boundary"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "used_profiles"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "profile",
+              "label": "profile-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:profile-1"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "profile",
+              "label": "profile-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:profile-2"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-1"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-2"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-unconditioned",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-unconditioned"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "conditioned_zones"
+            },
+            {
+              "event": "supply.sources.read",
+              "sources": [
+                "source-shared",
+                "source-2"
+              ],
+              "zone": "zone-1"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "source",
+              "label": "source-shared",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:source-shared"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "source",
+              "label": "source-2",
+              "result": "raised"
+            }
+          ],
+          "model_membership_unchanged": true,
+          "projection_read_counts": {
+            "conditioned_zones": 1,
+            "surfaces": 1,
+            "unconditioned_zones": 0,
+            "used_layers": 1,
+            "used_profiles": 1
+          },
+          "returned_default_idf_identity": false
+        },
+        "outcome": "raised"
+      },
+      "symbol": "EnergyModel.to_idf"
+    },
+    {
+      "executor": "energy-model-to-idf",
+      "id": "dragon-model-assembly.to-idf.orchestration-success.parent-order",
+      "python": {
+        "facts": {
+          "append_batches": [
+            [
+              "object:layer-1",
+              "object:layer-2"
+            ],
+            [
+              "object:construction-opaque"
+            ],
+            [
+              "object:glazing-1:material",
+              "object:glazing-1:construction"
+            ],
+            [
+              "object:door-construction-1:material",
+              "object:door-construction-1:construction"
+            ],
+            [
+              "object:air-boundary-first"
+            ],
+            [
+              "object:profile-1"
+            ],
+            [
+              "object:profile-2"
+            ],
+            [
+              "object:zone-1"
+            ],
+            [
+              "object:zone-2"
+            ],
+            [
+              "object:zone-unconditioned"
+            ],
+            [
+              "object:source-shared"
+            ],
+            [
+              "object:source-2"
+            ],
+            [
+              "fallback-thermostat"
+            ],
+            [
+              "fallback-ideal:zone-unconditioned"
+            ],
+            [
+              "object:pv-1"
+            ],
+            [
+              "object:pv-2"
+            ]
+          ],
+          "events": [
+            {
+              "event": "default.create"
+            },
+            {
+              "event": "idf.family.get",
+              "family": "building"
+            },
+            {
+              "event": "idf.family.append",
+              "family": "building",
+              "fields": {
+                "Name": "trace-model",
+                "North Axis": 17,
+                "Solar Distribution": "MinimalShadowing",
+                "Terrain": "TraceTerrain"
+              }
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "used_layers"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "layer",
+              "label": "layer-1",
+              "result": "returned"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "layer",
+              "label": "layer-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:layer-1",
+                "object:layer-2"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "surfaces"
+            },
+            {
+              "arguments": [
+                "surface-opaque"
+              ],
+              "event": "converter.call",
+              "kind": "construction",
+              "label": "construction-opaque",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:construction-opaque"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "glazing",
+              "label": "glazing-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:glazing-1:material",
+                "object:glazing-1:construction"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "door-construction",
+              "label": "door-construction-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:door-construction-1:material",
+                "object:door-construction-1:construction"
+              ]
+            },
+            {
+              "event": "idf.family.get",
+              "family": "Construction:AirBoundary"
+            },
+            {
+              "event": "idf.family.names",
+              "family": "Construction:AirBoundary",
+              "names": []
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "air-boundary",
+              "label": "air-boundary-first",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:air-boundary-first"
+              ]
+            },
+            {
+              "event": "idf.family.get",
+              "family": "Construction:AirBoundary"
+            },
+            {
+              "event": "idf.family.names",
+              "family": "Construction:AirBoundary",
+              "names": [
+                "Shared-Air-Boundary"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "used_profiles"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "profile",
+              "label": "profile-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:profile-1"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "profile",
+              "label": "profile-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:profile-2"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-1"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-2"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "zone",
+              "label": "zone-unconditioned",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:zone-unconditioned"
+              ]
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "conditioned_zones"
+            },
+            {
+              "event": "supply.sources.read",
+              "sources": [
+                "source-shared",
+                "source-2"
+              ],
+              "zone": "zone-1"
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "source",
+              "label": "source-shared",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:source-shared"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "source",
+              "label": "source-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:source-2"
+              ]
+            },
+            {
+              "event": "supply.sources.read",
+              "sources": [
+                "source-shared"
+              ],
+              "zone": "zone-2"
+            },
+            {
+              "call": 2,
+              "event": "projection.read",
+              "projection": "conditioned_zones"
+            },
+            {
+              "event": "supply.delegate",
+              "idf_identity_aligned": true,
+              "result": "returned",
+              "supply_identity_aligned": true,
+              "zone": "zone-1"
+            },
+            {
+              "event": "supply.delegate",
+              "idf_identity_aligned": true,
+              "result": "returned",
+              "supply_identity_aligned": true,
+              "zone": "zone-2"
+            },
+            {
+              "call": 1,
+              "event": "projection.read",
+              "projection": "unconditioned_zones"
+            },
+            {
+              "event": "idf-object.create",
+              "fields": {
+                "Constant Cooling Setpoint": 50,
+                "Constant Heating Setpoint": -30,
+                "Name": "UNCONDITIONED_THERMOSTAT"
+              },
+              "label": "fallback-thermostat",
+              "object_type": "HVACTemplate:Thermostat"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "fallback-thermostat"
+              ]
+            },
+            {
+              "call": 2,
+              "event": "projection.read",
+              "projection": "unconditioned_zones"
+            },
+            {
+              "event": "idf-object.create",
+              "fields": {
+                "System Availability Schedule Name": "ALLON",
+                "Template Thermostat Name": "UNCONDITIONED_THERMOSTAT",
+                "Zone Name": "zone-unconditioned"
+              },
+              "label": "fallback-ideal:zone-unconditioned",
+              "object_type": "HVACTemplate:Zone:IdealLoadsAirSystem"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "fallback-ideal:zone-unconditioned"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "photovoltaic",
+              "label": "pv-1",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:pv-1"
+              ]
+            },
+            {
+              "arguments": [],
+              "event": "converter.call",
+              "kind": "photovoltaic",
+              "label": "pv-2",
+              "result": "returned"
+            },
+            {
+              "event": "idf.append",
+              "labels": [
+                "object:pv-2"
+              ]
+            }
+          ],
+          "model_membership_unchanged": true,
+          "projection_read_counts": {
+            "conditioned_zones": 2,
+            "surfaces": 1,
+            "unconditioned_zones": 2,
+            "used_layers": 1,
+            "used_profiles": 1
+          },
+          "returned_default_idf_identity": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.to_idf"
+    },
+    {
+      "executor": "energy-model-to-idf",
       "id": "dragon-model-assembly.to-idf.two-unconditioned-shared-fallback",
       "python": {
         "facts": {
@@ -2570,16 +4060,21 @@
       "symbol": "EnergyModel.to_idf"
     }
   ],
-  "cases_sha256": "sha256:9e3d8c576e2ed17fdbe9555fbafda9dc92aca3991c835b0d83a134a8415c6833",
+  "cases_sha256": "sha256:c93a9a25726848777d527518a99419f21175fb9e473c0371654fef9fb5f01eaa",
   "consumer_contract": {
     "adaptations": {},
     "assertion_ids": {},
-    "case_count": 5,
+    "case_count": 10,
     "case_ids": [
       "dragon-model-assembly.to-idf.assigned-without-availability-fallback",
       "dragon-model-assembly.to-idf.case-distinct-profile-schedules",
       "dragon-model-assembly.to-idf.duplicate-profile-last-wins-dangling",
       "dragon-model-assembly.to-idf.legacy-erv-unconditioned",
+      "dragon-model-assembly.to-idf.orchestration-failure.add-supply-prefix",
+      "dragon-model-assembly.to-idf.orchestration-failure.layer-batch-prefix",
+      "dragon-model-assembly.to-idf.orchestration-failure.pv-prefix",
+      "dragon-model-assembly.to-idf.orchestration-failure.source-prefix",
+      "dragon-model-assembly.to-idf.orchestration-success.parent-order",
       "dragon-model-assembly.to-idf.two-unconditioned-shared-fallback"
     ],
     "classifications": {
