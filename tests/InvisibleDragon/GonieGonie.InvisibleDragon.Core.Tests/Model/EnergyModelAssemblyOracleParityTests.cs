@@ -1,15 +1,18 @@
 using System.Globalization;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using GonieGonie.BuildingEnergy.Contracts;
+using GonieGonie.InvisibleDragon.Construction;
 using GonieGonie.InvisibleDragon.Hvac;
 using GonieGonie.InvisibleDragon.Idd;
 using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Model;
 using GonieGonie.InvisibleDragon.Profile;
 using GonieGonie.InvisibleDragon.Shape;
+using GonieGonie.UpstreamTracker;
 using ZoneProfile = GonieGonie.InvisibleDragon.Profile.Profile;
 
 #pragma warning disable CA1861 // Closed oracle arrays are intentionally auditable in place.
@@ -21,31 +24,135 @@ public sealed class EnergyModelAssemblyOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/dragon-model-assembly-oracle.json";
     private const string OracleSha256 =
-        "sha256:a008740b6830908cd65d3f2636532c67dde7d7a6cadd062d34e3583775f16308";
+        "sha256:f01960724a367eadb8fbee9a5bef3b8d4304449eb9d3c71fa626f4db03024ef4";
     private const string CasesSha256 =
-        "sha256:9e3d8c576e2ed17fdbe9555fbafda9dc92aca3991c835b0d83a134a8415c6833";
-    private const int OracleByteLength = 77_002;
-    private const int ExpectedCaseCount = 5;
+        "sha256:c93a9a25726848777d527518a99419f21175fb9e473c0371654fef9fb5f01eaa";
+    private const int OracleByteLength = 119_000;
+    private const int ExpectedCaseCount = 10;
+    private const int ExpectedSemanticCaseCount = 5;
+    private const int ExpectedOrchestrationCaseCount = 5;
     private const string OracleSchema =
         "goniegonie.python-reference.dragon-model-assembly.v1";
     private const string UpstreamCommit =
         "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string InventorySha256 =
         "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+    private const int UpstreamInventoryIndex = 821;
+    private const string UpstreamPath = "src/idragon/dragon/model.py";
     private const string TargetSymbol = "EnergyModel.to_idf";
+    private const string UpstreamSourceSha256 =
+        "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090";
+    private const string UpstreamAstSha256 =
+        "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59";
+    private const string UpstreamSignatureHash =
+        "sha256:9389bd00d5a2180ea9f3cd1aa5695ba492e1665947515c34c31eff01f072bade";
+    private const string UpstreamBodyHash =
+        "sha256:9d1b5a610b485aa782c0c1f39ed57b65d5534e1ba3271f1a325c52a109228189";
+    private const string UpstreamSymbolHash =
+        "sha256:de10251f38f220956e870d8faea1c7a879da9158b369cffc244f7afc6519eb35";
+    private const string GeneratorRepositoryPath =
+        "tools/python-reference/generate_dragon_model_assembly_oracle.py";
+    private const string GeneratorSha256 =
+        "sha256:2e1294c95abd407345a0c567a1b800068788d3e3be4059c0801a0bc567ea3bd0";
+    private const string PythonValidatorRepositoryPath =
+        "tests/PythonReference/test_dragon_model_assembly_oracle.py";
+    private const string PythonValidatorSha256 =
+        "sha256:674663b235325c23a014b960203b8e0722438f4e4ed4a197b3e677a9f2f0aa16";
+    private const string PublicRouteRepositoryPath =
+        "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs";
+    private const string PublicRouteSha256 =
+        "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3";
+    private const string PublicRouteSymbol =
+        "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument";
+    private const string ImplementationRepositoryPath =
+        "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs";
+    private const string ImplementationSha256 =
+        "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3";
+    private const string ImplementationSymbol =
+        "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.Assemble";
+    private const string AdaptationId = "validated-fresh-energy-model-idf-assembly";
+    private const string AssertionId = "dragon-model-energy-model-to-idf-de10251f";
+    private const string EvidenceTestCase =
+        "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelAssemblyOracleParityTests.ValidatedFreshEnergyModelIdfAssemblyMatchesBoundedParentOrchestration";
     private const string EnergyPlusVersion = "24.2.0";
     private const string EnergyPlusBuild = "94a887817b";
     private const string EnergyPlusIddSha256 =
         "3b56fd8afb02a557f1c2cfb963cbc6f53963738bc6aa169f996d7a5175b324a2";
     private const long EnergyPlusIddBytes = 4_556_412;
 
-    private static readonly CaseBinding[] ExpectedCases =
+    private static readonly CaseBinding[] ExpectedSemanticCases =
     {
         new("dragon-model-assembly.to-idf.assigned-without-availability-fallback", "energy-model-to-idf", TargetSymbol),
         new("dragon-model-assembly.to-idf.case-distinct-profile-schedules", "energy-model-to-idf", TargetSymbol),
         new("dragon-model-assembly.to-idf.duplicate-profile-last-wins-dangling", "energy-model-to-idf", TargetSymbol),
         new("dragon-model-assembly.to-idf.legacy-erv-unconditioned", "energy-model-to-idf", TargetSymbol),
         new("dragon-model-assembly.to-idf.two-unconditioned-shared-fallback", "energy-model-to-idf", TargetSymbol),
+    };
+
+    private static readonly CaseBinding[] ExpectedOrchestrationCases =
+    {
+        new("dragon-model-assembly.to-idf.orchestration-failure.add-supply-prefix", "energy-model-to-idf", TargetSymbol),
+        new("dragon-model-assembly.to-idf.orchestration-failure.layer-batch-prefix", "energy-model-to-idf", TargetSymbol),
+        new("dragon-model-assembly.to-idf.orchestration-failure.pv-prefix", "energy-model-to-idf", TargetSymbol),
+        new("dragon-model-assembly.to-idf.orchestration-failure.source-prefix", "energy-model-to-idf", TargetSymbol),
+        new("dragon-model-assembly.to-idf.orchestration-success.parent-order", "energy-model-to-idf", TargetSymbol),
+    };
+
+    private static readonly CaseBinding[] ExpectedCases = ExpectedSemanticCases
+        .Concat(ExpectedOrchestrationCases)
+        .OrderBy(item => item.CaseId, StringComparer.Ordinal)
+        .ToArray();
+
+    private static readonly string[][] ExpectedOrchestrationAppendBatches =
+    {
+        new[] { "object:layer-1", "object:layer-2" },
+        new[] { "object:construction-opaque" },
+        new[] { "object:glazing-1:material", "object:glazing-1:construction" },
+        new[] { "object:door-construction-1:material", "object:door-construction-1:construction" },
+        new[] { "object:air-boundary-first" },
+        new[] { "object:profile-1" },
+        new[] { "object:profile-2" },
+        new[] { "object:zone-1" },
+        new[] { "object:zone-2" },
+        new[] { "object:zone-unconditioned" },
+        new[] { "object:source-shared" },
+        new[] { "object:source-2" },
+        new[] { "fallback-thermostat" },
+        new[] { "fallback-ideal:zone-unconditioned" },
+        new[] { "object:pv-1" },
+        new[] { "object:pv-2" },
+    };
+
+    private static readonly string[] ExplicitlyUnresolvedChildSymbols =
+    {
+        "AirBoundary.to_idf_object",
+        "Construction.to_idf_object",
+        "Glazing.to_idf_object",
+        "Layer.to_idf_object",
+        "NoMassConstruction.to_idf_object",
+        "Zone.to_idf_object",
+        "SourceSystem.to_idf_object",
+        "AbsorptionChiller.to_idf_object",
+        "Boiler.to_idf_object",
+        "Chiller.to_idf_object",
+        "CoolingTower.to_idf_object",
+        "HeatPump.to_idf_object",
+        "PhotoVoltaicPanel.to_idf_object",
+        "IDF",
+        "IDF.append",
+        "IdfObject",
+        "IdfObjectList.names",
+    };
+
+    private static readonly string[] ExplicitlyExcludedBehavior =
+    {
+        "raw-global-Python-IDF-object-order",
+        "mutable-Python-IDF-and-partial-document-observation",
+        "invalid-Python-duck-types-and-exception-wording",
+        "all-four-upstream-assembly-stage-failure-prefix-semantics",
+        "ThrowOnValidationErrors-false-validation-bypass-route",
+        "native-post-Assemble-start-failure-and-transactionality",
+        "standalone-child-converter-closure",
     };
 
     private static readonly SourceBinding[] ExpectedSources =
@@ -85,12 +192,114 @@ public sealed class EnergyModelAssemblyOracleParityTests
     {
         using JsonDocument oracle = ReadPinnedOracle();
         JsonElement[] cases = ValidateCorpus(oracle.RootElement);
+        JsonElement[] semanticCases = SelectCases(cases, ExpectedSemanticCases);
 
         AssertSafeDefaultsRemainEnabled();
-        for (int index = 0; index < cases.Length; index++)
+        for (int index = 0; index < semanticCases.Length; index++)
         {
-            ExecuteNativeCase(ExpectedCases[index], cases[index].GetProperty("python").GetProperty("facts"));
+            ExecuteNativeCase(
+                ExpectedSemanticCases[index],
+                semanticCases[index].GetProperty("python").GetProperty("facts"));
         }
+    }
+
+    [Fact]
+    public void ValidatedFreshEnergyModelIdfAssemblyMatchesBoundedParentOrchestration()
+    {
+        using JsonDocument oracle = ReadPinnedOracle();
+        JsonElement[] cases = ValidateCorpus(oracle.RootElement);
+        JsonElement[] orchestrationCases = SelectCases(cases, ExpectedOrchestrationCases);
+        ValidateNativeAndArtifactBindings();
+
+        NativeObservation[] observations = orchestrationCases
+            .Select((item, index) =>
+            {
+                CaseBinding binding = ExpectedOrchestrationCases[index];
+                JsonElement python = item.GetProperty("python");
+                string pythonOutcome = RequiredString(python, "outcome");
+                string[] nativeFacts = binding.IsOrchestrationSuccess
+                    ? ObserveNativeParentAssembly(python.GetProperty("facts"))
+                    : ObserveNativeValidationBoundary(binding, python.GetProperty("facts"));
+                string nativeOutcome = binding.IsOrchestrationSuccess ? "returned" : "raised";
+                Assert.Equal(binding.IsOrchestrationSuccess ? "returned" : "raised", pythonOutcome);
+                Assert.True(nativeFacts.Length >= 9);
+                Assert.Equal(
+                    nativeFacts.Length,
+                    nativeFacts.Distinct(StringComparer.Ordinal).Count());
+                Assert.All(nativeFacts, fact => Assert.False(string.IsNullOrWhiteSpace(fact)));
+                return new NativeObservation(binding.CaseId, nativeOutcome, nativeFacts);
+            })
+            .ToArray();
+        Assert.Equal(ExpectedOrchestrationCaseCount, observations.Length);
+
+        string fixtureSha256 = Sha256(File.ReadAllBytes(FindRepositoryFile(OracleRepositoryPath)));
+        var receipt = new
+        {
+            artifacts = new
+            {
+                fixture = new
+                {
+                    byte_length = OracleByteLength,
+                    case_count = ExpectedCaseCount,
+                    cases_sha256 = CasesSha256,
+                    path = OracleRepositoryPath,
+                    sha256 = fixtureSha256,
+                },
+                generator = new
+                {
+                    path = GeneratorRepositoryPath,
+                    sha256 = GeneratorSha256,
+                },
+                python_validator = new
+                {
+                    path = PythonValidatorRepositoryPath,
+                    sha256 = PythonValidatorSha256,
+                },
+            },
+            native_binding = new
+            {
+                adaptation_id = AdaptationId,
+                classification = "exception",
+                implementation_path = ImplementationRepositoryPath,
+                implementation_sha256 = ImplementationSha256,
+                implementation_symbol = ImplementationSymbol,
+                public_route_path = PublicRouteRepositoryPath,
+                public_route_sha256 = PublicRouteSha256,
+                public_route_symbol = PublicRouteSymbol,
+            },
+            observations = observations.Select(item => new
+            {
+                adaptation_id = AdaptationId,
+                case_id = item.CaseId,
+                native_facts = item.NativeFacts,
+                native_outcome = item.NativeOutcome,
+            }).ToArray(),
+            scope = new
+            {
+                dependency_evidence_only = new[]
+                {
+                    "EnergyModel.add_supply_system",
+                    "SupplyGroup.to_idf_object",
+                },
+                excluded_behavior = ExplicitlyExcludedBehavior,
+                full_child_symbol_closure = false,
+                unresolved_child_symbols = ExplicitlyUnresolvedChildSymbols,
+            },
+            upstream = new
+            {
+                ast_sha256 = UpstreamAstSha256,
+                body_hash = UpstreamBodyHash,
+                inventory_index = UpstreamInventoryIndex,
+                path = UpstreamPath,
+                signature_hash = UpstreamSignatureHash,
+                source_sha256 = UpstreamSourceSha256,
+                symbol = TargetSymbol,
+                symbol_hash = UpstreamSymbolHash,
+            },
+        };
+        JsonElement receiptJson = JsonSerializer.SerializeToElement(receipt);
+        ValidateReceipt(receiptJson, observations);
+        TrustedEvidenceRecorder.Record(AssertionId, EvidenceTestCase, "not_applicable", receipt);
     }
 
     [GonieGonie.InvisibleDragon.Tests.Idd.IddSchemaOracleTests.EnergyPlusIddIntegrationFact]
@@ -99,13 +308,14 @@ public sealed class EnergyModelAssemblyOracleParityTests
     {
         using JsonDocument oracle = ReadPinnedOracle();
         JsonElement[] cases = ValidateCorpus(oracle.RootElement);
+        JsonElement[] semanticCases = SelectCases(cases, ExpectedSemanticCases);
         IddSchema schema = LoadPinnedEnergyPlusSchema();
 
-        for (int index = 0; index < cases.Length; index++)
+        for (int index = 0; index < semanticCases.Length; index++)
         {
             ExecuteSchemaBoundCase(
-                ExpectedCases[index],
-                cases[index].GetProperty("python").GetProperty("facts"),
+                ExpectedSemanticCases[index],
+                semanticCases[index].GetProperty("python").GetProperty("facts"),
                 schema);
         }
     }
@@ -141,6 +351,8 @@ public sealed class EnergyModelAssemblyOracleParityTests
 
         JsonElement[] cases = root.GetProperty("cases").EnumerateArray().ToArray();
         Assert.Equal(ExpectedCaseCount, cases.Length);
+        Assert.Equal(ExpectedSemanticCaseCount, ExpectedSemanticCases.Length);
+        Assert.Equal(ExpectedOrchestrationCaseCount, ExpectedOrchestrationCases.Length);
         string[] caseIds = cases.Select(item => RequiredString(item, "id")).ToArray();
         Assert.Equal(ExpectedCases.Select(item => item.CaseId), caseIds);
         Assert.Equal(caseIds.OrderBy(item => item, StringComparer.Ordinal), caseIds);
@@ -153,6 +365,19 @@ public sealed class EnergyModelAssemblyOracleParityTests
         Assert.Equal(CasesSha256, RequiredString(root, "cases_sha256"));
         Assert.Equal(CasesSha256, CanonicalSha256(root.GetProperty("cases")));
         return cases;
+    }
+
+    private static JsonElement[] SelectCases(
+        IReadOnlyList<JsonElement> cases,
+        IReadOnlyList<CaseBinding> bindings)
+    {
+        JsonElement[] selected = bindings
+            .Select(binding => Assert.Single(
+                cases,
+                item => RequiredString(item, "id") == binding.CaseId))
+            .ToArray();
+        Assert.Equal(bindings.Select(item => item.CaseId), selected.Select(item => RequiredString(item, "id")));
+        return selected;
     }
 
     private static void ValidateUpstream(JsonElement upstream)
@@ -235,16 +460,10 @@ public sealed class EnergyModelAssemblyOracleParityTests
         AssertKeys(symbol, "body_hash", "kind", "path", "signature_hash", "symbol", "symbol_hash");
         Assert.Equal(TargetSymbol, RequiredString(symbol, "symbol"));
         Assert.Equal("function", RequiredString(symbol, "kind"));
-        Assert.Equal("src/idragon/dragon/model.py", RequiredString(symbol, "path"));
-        Assert.Equal(
-            "sha256:9389bd00d5a2180ea9f3cd1aa5695ba492e1665947515c34c31eff01f072bade",
-            RequiredString(symbol, "signature_hash"));
-        Assert.Equal(
-            "sha256:9d1b5a610b485aa782c0c1f39ed57b65d5534e1ba3271f1a325c52a109228189",
-            RequiredString(symbol, "body_hash"));
-        Assert.Equal(
-            "sha256:de10251f38f220956e870d8faea1c7a879da9158b369cffc244f7afc6519eb35",
-            RequiredString(symbol, "symbol_hash"));
+        Assert.Equal(UpstreamPath, RequiredString(symbol, "path"));
+        Assert.Equal(UpstreamSignatureHash, RequiredString(symbol, "signature_hash"));
+        Assert.Equal(UpstreamBodyHash, RequiredString(symbol, "body_hash"));
+        Assert.Equal(UpstreamSymbolHash, RequiredString(symbol, "symbol_hash"));
     }
 
     private static void ValidateConsumerContract(JsonElement contract)
@@ -295,38 +514,151 @@ public sealed class EnergyModelAssemblyOracleParityTests
         Assert.False(item.TryGetProperty("expected_dotnet", out _));
         JsonElement python = item.GetProperty("python");
         AssertKeys(python, "facts", "outcome");
-        Assert.Equal("returned", RequiredString(python, "outcome"));
+        Assert.Equal(
+            expected.IsOrchestrationFailure ? "raised" : "returned",
+            RequiredString(python, "outcome"));
         ValidatePythonFacts(expected.CaseId, python.GetProperty("facts"));
     }
 
     private static void ValidatePythonFacts(string caseId, JsonElement facts)
     {
-        if (caseId == ExpectedCases[0].CaseId)
+        if (caseId.StartsWith("dragon-model-assembly.to-idf.orchestration-", StringComparison.Ordinal))
+        {
+            ValidateOrchestrationFacts(caseId, facts);
+            return;
+        }
+
+        if (caseId == ExpectedSemanticCases[0].CaseId)
         {
             ValidateAssignedWithoutAvailabilityFacts(facts);
             return;
         }
 
-        if (caseId == ExpectedCases[1].CaseId)
+        if (caseId == ExpectedSemanticCases[1].CaseId)
         {
             ValidateCaseDistinctFacts(facts);
             return;
         }
 
-        if (caseId == ExpectedCases[2].CaseId)
+        if (caseId == ExpectedSemanticCases[2].CaseId)
         {
             ValidateDuplicateProfileFacts(facts);
             return;
         }
 
-        if (caseId == ExpectedCases[3].CaseId)
+        if (caseId == ExpectedSemanticCases[3].CaseId)
         {
             ValidateLegacyErvFacts(facts);
             return;
         }
 
-        Assert.Equal(ExpectedCases[4].CaseId, caseId);
+        Assert.Equal(ExpectedSemanticCases[4].CaseId, caseId);
         ValidateTwoUnconditionedFacts(facts);
+    }
+
+    private static void ValidateOrchestrationFacts(string caseId, JsonElement facts)
+    {
+        bool success = caseId == ExpectedOrchestrationCases[4].CaseId;
+        AssertKeys(
+            facts,
+            success
+                ? new[]
+                {
+                    "append_batches",
+                    "events",
+                    "model_membership_unchanged",
+                    "projection_read_counts",
+                    "returned_default_idf_identity",
+                }
+                : new[]
+                {
+                    "append_batches",
+                    "error",
+                    "events",
+                    "model_membership_unchanged",
+                    "projection_read_counts",
+                    "returned_default_idf_identity",
+                });
+        Assert.True(facts.GetProperty("model_membership_unchanged").GetBoolean());
+        Assert.Equal(success, facts.GetProperty("returned_default_idf_identity").GetBoolean());
+
+        int expectedBatchCount;
+        (int Conditioned, int Surfaces, int Unconditioned, int Layers, int Profiles) expectedReads;
+        string? expectedError = null;
+        if (caseId == ExpectedOrchestrationCases[0].CaseId)
+        {
+            expectedBatchCount = 12;
+            expectedReads = (2, 1, 0, 1, 1);
+            expectedError = "orchestration-failure:supply-zone-2";
+        }
+        else if (caseId == ExpectedOrchestrationCases[1].CaseId)
+        {
+            expectedBatchCount = 0;
+            expectedReads = (0, 0, 0, 1, 0);
+            expectedError = "orchestration-failure:layer-2";
+        }
+        else if (caseId == ExpectedOrchestrationCases[2].CaseId)
+        {
+            expectedBatchCount = 15;
+            expectedReads = (2, 1, 2, 1, 1);
+            expectedError = "orchestration-failure:pv-2";
+        }
+        else if (caseId == ExpectedOrchestrationCases[3].CaseId)
+        {
+            expectedBatchCount = 11;
+            expectedReads = (1, 1, 0, 1, 1);
+            expectedError = "orchestration-failure:source-2";
+        }
+        else
+        {
+            Assert.Equal(ExpectedOrchestrationCases[4].CaseId, caseId);
+            expectedBatchCount = ExpectedOrchestrationAppendBatches.Length;
+            expectedReads = (2, 1, 2, 1, 1);
+        }
+
+        JsonElement[] batches = facts.GetProperty("append_batches").EnumerateArray().ToArray();
+        Assert.Equal(expectedBatchCount, batches.Length);
+        for (int index = 0; index < batches.Length; index++)
+        {
+            AssertStringArray(batches[index], ExpectedOrchestrationAppendBatches[index]);
+        }
+
+        JsonElement reads = facts.GetProperty("projection_read_counts");
+        AssertKeys(reads, "conditioned_zones", "surfaces", "unconditioned_zones", "used_layers", "used_profiles");
+        Assert.Equal(expectedReads.Conditioned, reads.GetProperty("conditioned_zones").GetInt32());
+        Assert.Equal(expectedReads.Surfaces, reads.GetProperty("surfaces").GetInt32());
+        Assert.Equal(expectedReads.Unconditioned, reads.GetProperty("unconditioned_zones").GetInt32());
+        Assert.Equal(expectedReads.Layers, reads.GetProperty("used_layers").GetInt32());
+        Assert.Equal(expectedReads.Profiles, reads.GetProperty("used_profiles").GetInt32());
+
+        JsonElement[] events = facts.GetProperty("events").EnumerateArray().ToArray();
+        Assert.True(events.Length >= 5);
+        Assert.Equal("default.create", RequiredString(events[0], "event"));
+        Assert.Equal("idf.family.get", RequiredString(events[1], "event"));
+        Assert.Equal("building", RequiredString(events[1], "family"));
+        Assert.Equal("idf.family.append", RequiredString(events[2], "event"));
+        Assert.Equal("building", RequiredString(events[2], "family"));
+        Assert.Equal("projection.read", RequiredString(events[3], "event"));
+        Assert.Equal("used_layers", RequiredString(events[3], "projection"));
+        Assert.Equal("converter.call", RequiredString(events[4], "event"));
+        Assert.Equal("layer", RequiredString(events[4], "kind"));
+        Assert.Equal("layer-1", RequiredString(events[4], "label"));
+
+        if (expectedError is null)
+        {
+            Assert.False(facts.TryGetProperty("error", out _));
+            Assert.Equal("idf.append", RequiredString(events[^1], "event"));
+            AssertStringArray(events[^1].GetProperty("labels"), "object:pv-2");
+            return;
+        }
+
+        JsonElement error = facts.GetProperty("error");
+        AssertKeys(error, "args", "message", "outcome", "type");
+        AssertStringArray(error.GetProperty("args"), expectedError);
+        Assert.Equal(expectedError, RequiredString(error, "message"));
+        Assert.Equal("raised", RequiredString(error, "outcome"));
+        Assert.Equal("RuntimeError", RequiredString(error, "type"));
+        Assert.Equal("raised", RequiredString(events[^1], "result"));
     }
 
     private static void ValidateAssignedWithoutAvailabilityFacts(JsonElement facts)
@@ -471,33 +803,563 @@ public sealed class EnergyModelAssemblyOracleParityTests
         AssertFallbacks(facts, "Unconditioned-First", "Unconditioned-Second");
     }
 
+    private static void ValidateNativeAndArtifactBindings()
+    {
+        Assert.Equal(
+            GeneratorSha256,
+            Sha256(File.ReadAllBytes(FindRepositoryFile(GeneratorRepositoryPath))));
+        Assert.Equal(
+            PythonValidatorSha256,
+            Sha256(File.ReadAllBytes(FindRepositoryFile(PythonValidatorRepositoryPath))));
+        Assert.Equal(
+            PublicRouteSha256,
+            Sha256(File.ReadAllBytes(FindRepositoryFile(PublicRouteRepositoryPath))));
+        Assert.Equal(
+            ImplementationSha256,
+            Sha256(File.ReadAllBytes(FindRepositoryFile(ImplementationRepositoryPath))));
+
+        SourceBinding modelSource = Assert.Single(
+            ExpectedSources,
+            source => source.Path == UpstreamPath);
+        Assert.Equal(UpstreamSourceSha256, modelSource.SourceSha256);
+        Assert.Equal(UpstreamAstSha256, modelSource.AstSha256);
+
+        MethodInfo[] publicTargets = typeof(EnergyModel)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public)
+            .Where(method => method.Name == nameof(EnergyModel.ToIdfDocument))
+            .ToArray();
+        MethodInfo publicTarget = Assert.Single(publicTargets);
+        Assert.Equal(typeof(IdfDocument), publicTarget.ReturnType);
+        Assert.Equal(
+            new[] { typeof(IddSchema), typeof(EnergyModelIdfOptions) },
+            publicTarget.GetParameters().Select(item => item.ParameterType));
+        Assert.All(publicTarget.GetParameters(), parameter => Assert.True(parameter.HasDefaultValue));
+        Assert.DoesNotContain(
+            publicTarget.GetParameters(),
+            parameter => parameter.ParameterType == typeof(IdfDocument));
+
+        Type assembler = typeof(EnergyModel).Assembly.GetType(
+            "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler",
+            throwOnError: true)!;
+        MethodInfo assemble = Assert.Single(
+            assembler.GetMethods(BindingFlags.Static | BindingFlags.NonPublic),
+            method => method.Name == "Assemble");
+        Assert.True(assemble.IsAssembly);
+        Assert.True(assemble.IsStatic);
+        Assert.Equal(typeof(IdfDocument), assemble.ReturnType);
+        Assert.Equal(
+            new[]
+            {
+                typeof(EnergyModel),
+                typeof(IddSchema),
+                typeof(EnergyModelIdfOptions),
+            },
+            assemble.GetParameters().Select(item => item.ParameterType));
+    }
+
+    private static string[] ObserveNativeParentAssembly(JsonElement pythonFacts)
+    {
+        Assert.True(pythonFacts.GetProperty("model_membership_unchanged").GetBoolean());
+        Assert.True(pythonFacts.GetProperty("returned_default_idf_identity").GetBoolean());
+        Assert.Equal(
+            ExpectedOrchestrationAppendBatches.Length,
+            pythonFacts.GetProperty("append_batches").GetArrayLength());
+
+        EnergyModel model = CreateNativeParentAssemblyModel();
+        ModelAssemblySnapshot snapshot = ModelAssemblySnapshot.Capture(model);
+        ValidationResult validation = model.Validate();
+        Assert.True(validation.IsValid);
+        Assert.DoesNotContain(validation.Diagnostics, item => item.IsFailure);
+
+        IdfDocument first = model.ToIdfDocument();
+        snapshot.AssertUnchanged(model);
+        IdfDocument second = model.ToIdfDocument();
+        snapshot.AssertUnchanged(model);
+        Assert.NotSame(first, second);
+        Assert.Equal(IdfWriter.Write(first), IdfWriter.Write(second));
+        Assert.Equal(first.Count, second.Count);
+        Assert.All(
+            first.Zip(second, (left, right) => (left, right)),
+            pair => Assert.NotSame(pair.left, pair.right));
+
+        Assert.Equal(
+            new[]
+            {
+                "Native-Orchestration-Conditioned-Second",
+                "Native-Orchestration-Conditioned-First",
+                "Native-Orchestration-Unconditioned",
+            },
+            first["Zone"].Select(item => item.Name));
+        Assert.Equal(
+            new[]
+            {
+                "HeatPump_named_Native Orchestration Shared Source",
+                "HeatPump_named_Native Orchestration Distinct Source",
+            },
+            first["AirConditioner:VariableRefrigerantFlow"].Select(item => item.Name));
+        Assert.Equal(
+            new[]
+            {
+                "AirHandlingUnit_named_Native Orchestration Zeta Distinct Second_for_Native-Orchestration-Conditioned-Second",
+                "AirHandlingUnit_named_Native Orchestration Shared Second_for_Native-Orchestration-Conditioned-Second",
+                "AirHandlingUnit_named_Native Orchestration Yankee Shared First_for_Native-Orchestration-Conditioned-First",
+                "AirHandlingUnit_named_Native Orchestration Beta Shared First_for_Native-Orchestration-Conditioned-First",
+            },
+            first["ZoneHVAC:TerminalUnit:VariableRefrigerantFlow"].Select(item => item.Name));
+        IdfObject[] terminalLists = first["ZoneTerminalUnitList"].ToArray();
+        Assert.Equal(2, terminalLists.Length);
+        AssertFields(
+            terminalLists[0],
+            "Terminal_Units_for_HeatPump_named_Native Orchestration Shared Source",
+            "AirHandlingUnit_named_Native Orchestration Shared Second_for_Native-Orchestration-Conditioned-Second",
+            "AirHandlingUnit_named_Native Orchestration Yankee Shared First_for_Native-Orchestration-Conditioned-First",
+            "AirHandlingUnit_named_Native Orchestration Beta Shared First_for_Native-Orchestration-Conditioned-First");
+        AssertFields(
+            terminalLists[1],
+            "Terminal_Units_for_HeatPump_named_Native Orchestration Distinct Source",
+            "AirHandlingUnit_named_Native Orchestration Zeta Distinct Second_for_Native-Orchestration-Conditioned-Second");
+        Assert.Single(first["HVACTemplate:Thermostat"]);
+        Assert.Single(first["HVACTemplate:Zone:IdealLoadsAirSystem"]);
+        Assert.Equal(
+            new[]
+            {
+                "PVpanel:Native Orchestration PV Second",
+                "PVpanel:Native Orchestration PV First",
+            },
+            first["Generator:Photovoltaic"].Select(item => item.Name));
+        Assert.Equal(
+            new[]
+            {
+                "Distribution4PVpanel:Native Orchestration PV Second",
+                "Distribution4PVpanel:Native Orchestration PV First",
+            },
+            first["ElectricLoadCenter:Distribution"].Select(item => item.Name));
+
+        Assert.Equal(
+            new[]
+            {
+                "Shading4PVpanel:Native Orchestration PV Second",
+                "Shading4PVpanel:Native Orchestration PV First",
+            },
+            first["Shading:Site"].Select(item => item.Name));
+        Assert.Equal(
+            new[]
+            {
+                "Spec4PVpanel:Native Orchestration PV Second",
+                "Spec4PVpanel:Native Orchestration PV First",
+            },
+            first["PhotovoltaicPerformance:Simple"].Select(item => item.Name));
+        Assert.Equal(
+            new[]
+            {
+                "Generator4PVpanel:Native Orchestration PV Second",
+                "Generator4PVpanel:Native Orchestration PV First",
+            },
+            first["ElectricLoadCenter:Generators"].Select(item => item.Name));
+        Assert.Equal(
+            new[]
+            {
+                "Inverter4PVpanel:Native Orchestration PV Second",
+                "Inverter4PVpanel:Native Orchestration PV First",
+            },
+            first["ElectricLoadCenter:Inverter:Simple"].Select(item => item.Name));
+
+        int[] photovoltaicPositions =
+        {
+            IndexOfFirst(first, "Shading:Site", "Shading4PVpanel:Native Orchestration PV Second"),
+            IndexOfFirst(first, "PhotovoltaicPerformance:Simple", "Spec4PVpanel:Native Orchestration PV Second"),
+            IndexOfFirst(first, "Generator:Photovoltaic", "PVpanel:Native Orchestration PV Second"),
+            IndexOfFirst(first, "ElectricLoadCenter:Generators", "Generator4PVpanel:Native Orchestration PV Second"),
+            IndexOfFirst(first, "ElectricLoadCenter:Inverter:Simple", "Inverter4PVpanel:Native Orchestration PV Second"),
+            IndexOfFirst(first, "ElectricLoadCenter:Distribution", "Distribution4PVpanel:Native Orchestration PV Second"),
+            IndexOfFirst(first, "Shading:Site", "Shading4PVpanel:Native Orchestration PV First"),
+            IndexOfFirst(first, "PhotovoltaicPerformance:Simple", "Spec4PVpanel:Native Orchestration PV First"),
+            IndexOfFirst(first, "Generator:Photovoltaic", "PVpanel:Native Orchestration PV First"),
+            IndexOfFirst(first, "ElectricLoadCenter:Generators", "Generator4PVpanel:Native Orchestration PV First"),
+            IndexOfFirst(first, "ElectricLoadCenter:Inverter:Simple", "Inverter4PVpanel:Native Orchestration PV First"),
+            IndexOfFirst(first, "ElectricLoadCenter:Distribution", "Distribution4PVpanel:Native Orchestration PV First"),
+        };
+        Assert.Equal(photovoltaicPositions.OrderBy(value => value), photovoltaicPositions);
+        Assert.Equal(photovoltaicPositions.Length, photovoltaicPositions.Distinct().Count());
+        Assert.Equal(
+            Enumerable.Range(photovoltaicPositions[0], photovoltaicPositions.Length),
+            photovoltaicPositions);
+        Assert.Equal(first.Count - photovoltaicPositions.Length, photovoltaicPositions[0]);
+        Assert.Equal(first.Count - 1, photovoltaicPositions[^1]);
+
+        string[] orderedCheckpoints =
+        {
+            "Version",
+            "Building",
+            "Schedule:Compact[Native Orchestration Availability]",
+            "Zone",
+            "Material",
+            "Construction",
+            "BuildingSurface:Detailed",
+            "AirConditioner:VariableRefrigerantFlow",
+            "ZoneHVAC:TerminalUnit:VariableRefrigerantFlow",
+            "HVACTemplate:Thermostat",
+            "HVACTemplate:Zone:IdealLoadsAirSystem",
+            "Shading:Site[Shading4PVpanel:Native Orchestration PV Second]",
+            "PhotovoltaicPerformance:Simple[Spec4PVpanel:Native Orchestration PV Second]",
+            "Generator:Photovoltaic[PVpanel:Native Orchestration PV Second]",
+            "ElectricLoadCenter:Generators[Generator4PVpanel:Native Orchestration PV Second]",
+            "ElectricLoadCenter:Inverter:Simple[Inverter4PVpanel:Native Orchestration PV Second]",
+            "ElectricLoadCenter:Distribution[Distribution4PVpanel:Native Orchestration PV Second]",
+        };
+        int[] positions =
+        {
+            IndexOfFirst(first, "Version"),
+            IndexOfFirst(first, "Building"),
+            IndexOfFirst(first, "Schedule:Compact", "Native Orchestration Availability"),
+            IndexOfFirst(first, "Zone"),
+            IndexOfFirst(first, "Material"),
+            IndexOfFirst(first, "Construction"),
+            IndexOfFirst(first, "BuildingSurface:Detailed"),
+            IndexOfFirst(first, "AirConditioner:VariableRefrigerantFlow"),
+            IndexOfFirst(first, "ZoneHVAC:TerminalUnit:VariableRefrigerantFlow"),
+            IndexOfFirst(first, "HVACTemplate:Thermostat"),
+            IndexOfFirst(first, "HVACTemplate:Zone:IdealLoadsAirSystem"),
+            IndexOfFirst(first, "Shading:Site", "Shading4PVpanel:Native Orchestration PV Second"),
+            IndexOfFirst(first, "PhotovoltaicPerformance:Simple", "Spec4PVpanel:Native Orchestration PV Second"),
+            IndexOfFirst(first, "Generator:Photovoltaic", "PVpanel:Native Orchestration PV Second"),
+            IndexOfFirst(first, "ElectricLoadCenter:Generators", "Generator4PVpanel:Native Orchestration PV Second"),
+            IndexOfFirst(first, "ElectricLoadCenter:Inverter:Simple", "Inverter4PVpanel:Native Orchestration PV Second"),
+            IndexOfFirst(first, "ElectricLoadCenter:Distribution", "Distribution4PVpanel:Native Orchestration PV Second"),
+        };
+        Assert.Equal(positions.OrderBy(value => value), positions);
+        Assert.Equal(positions.Length, positions.Distinct().Count());
+
+        Assert.All(ExplicitlyUnresolvedChildSymbols, symbol => Assert.False(string.IsNullOrWhiteSpace(symbol)));
+        Assert.All(ExplicitlyExcludedBehavior, behavior => Assert.False(string.IsNullOrWhiteSpace(behavior)));
+        return new[]
+        {
+            "python_parent_order=complete-and-default-idf-identity-returned",
+            "native_public_route=EnergyModel.ToIdfDocument",
+            "native_implementation=EnergyModelIdfAssembler.Assemble",
+            "native_validation=successful-before-assembly",
+            "native_return=fresh-distinct-IdfDocument",
+            "native_repeat=byte-for-byte-deterministic",
+            "native_children=fresh-distinct-IdfObject-instances",
+            "native_model_membership_and_reference_identity=unchanged",
+            "native_parent_sources=2-distinct-source-objects-from-4-terminal-references",
+            "native_shared_source_dedup=1-outdoor-object-with-3-ordered-terminal-references",
+            "native_source_order=entity-id-A-before-B-despite-B-first-encounter",
+            "native_zone_supply_order=model-Second-before-First-and-reverse-id-system-membership",
+            "native_photovoltaic_order=model-input-B-before-A-despite-entity-id-order",
+            "native_photovoltaic_batches=2-complete-contiguous-6-object-batches",
+            $"native_major_family_order={string.Join("->", orderedCheckpoints)}",
+            "native_python-default-IDF-identity=adapted-to-fresh-document",
+            "native_raw-global-Python-object-order=excluded",
+            "native_scope=parent-assembly-only-child-converters-unresolved",
+        };
+    }
+
+    private static string[] ObserveNativeValidationBoundary(
+        CaseBinding binding,
+        JsonElement pythonFacts)
+    {
+        Assert.True(binding.IsOrchestrationFailure);
+        Assert.True(pythonFacts.GetProperty("model_membership_unchanged").GetBoolean());
+        Assert.False(pythonFacts.GetProperty("returned_default_idf_identity").GetBoolean());
+        Assert.Equal("raised", RequiredString(pythonFacts.GetProperty("error"), "outcome"));
+
+        EnergyModel model = CreateInvalidNativeBoundaryModel();
+        ModelAssemblySnapshot snapshot = ModelAssemblySnapshot.Capture(model);
+        ValidationResult validation = model.Validate();
+        Assert.False(validation.IsValid);
+        Assert.True(new EnergyModelIdfOptions().ThrowOnValidationErrors);
+        Assert.Contains(
+            validation.Diagnostics,
+            diagnostic => diagnostic.Code == "INVISIBLEDRAGON.MODEL.UNKNOWN_HVAC_ZONE");
+
+        Exception first = Assert.Throws<InvalidOperationException>(() => model.ToIdfDocument());
+        snapshot.AssertUnchanged(model);
+        Exception second = Assert.Throws<InvalidOperationException>(() => model.ToIdfDocument());
+        snapshot.AssertUnchanged(model);
+        Assert.Equal(first.GetType(), second.GetType());
+
+        return new[]
+        {
+            $"python_orchestration_case={binding.CaseId}",
+            "python_failure=RuntimeError-with-partial-mutable-IDF-prefix",
+            "native_public_route=EnergyModel.ToIdfDocument",
+            "native_evidence_scope=default-ThrowOnValidationErrors-true-only",
+            "native_failure_stage=pre-validation-before-Assemble-start",
+            $"native_exception_type={nameof(InvalidOperationException)}",
+            "native_exception_wording=excluded",
+            "native_repeated_attempts=2-same-exception-type",
+            "native_model_membership_and_reference_identity=unchanged",
+            "native_invalid-duck-type-injection=unrepresentable-by-typed-immutable-API",
+            "upstream_four_assembly-stage_failure-prefix_semantics=explicitly-waived",
+            "native_ThrowOnValidationErrors-false_route=explicitly-excluded",
+            "native_post-Assemble-start_failure_and_transactionality=no-claim",
+            "native_scope=default-parent-pre-validation-boundary-only-child-converters-unresolved",
+        };
+    }
+
+    private static EnergyModel CreateNativeParentAssemblyModel()
+    {
+        Schedule heating = Schedule.Constant("Native Orchestration Heating", 20, ScheduleType.Temperature);
+        Schedule cooling = Schedule.Constant("Native Orchestration Cooling", 26, ScheduleType.Temperature);
+        Schedule availability = Schedule.Constant("Native Orchestration Availability", 1, ScheduleType.OnOff);
+        Zone conditionedFirst = CreateZone(
+            "Native-Orchestration-Conditioned-First",
+            new ZoneProfile(
+                new EntityId("PROFILE-NATIVE-ORCHESTRATION-CONDITIONED-FIRST"),
+                "Native Orchestration Conditioned First Profile",
+                heating,
+                cooling,
+                availability),
+            0);
+        Zone conditionedSecond = CreateZone(
+            "Native-Orchestration-Conditioned-Second",
+            new ZoneProfile(
+                new EntityId("PROFILE-NATIVE-ORCHESTRATION-CONDITIONED-SECOND"),
+                "Native Orchestration Conditioned Second Profile",
+                heating,
+                cooling,
+                availability),
+            2);
+        Zone unconditioned = CreateZone(
+            "Native-Orchestration-Unconditioned",
+            new ZoneProfile(
+                new EntityId("PROFILE-NATIVE-ORCHESTRATION-UNCONDITIONED"),
+                "Native Orchestration Unconditioned Profile"),
+            4);
+        var sharedSource = new HeatPump(
+            new EntityId("SOURCE-NATIVE-ORCHESTRATION-A-SHARED"),
+            "Native Orchestration Shared Source",
+            Fuel.Electricity,
+            3.2,
+            3.0);
+        var distinctSource = new HeatPump(
+            new EntityId("SOURCE-NATIVE-ORCHESTRATION-B-DISTINCT"),
+            "Native Orchestration Distinct Source",
+            Fuel.Electricity,
+            3.4,
+            3.1);
+        var distinctSecondSystem = new AirHandlingUnit(
+            new EntityId("SUPPLY-NATIVE-ORCHESTRATION-Z-DISTINCT-SECOND"),
+            "Native Orchestration Zeta Distinct Second",
+            distinctSource);
+        var sharedSecondSystem = new AirHandlingUnit(
+            new EntityId("SUPPLY-NATIVE-ORCHESTRATION-A-SHARED-SECOND"),
+            "Native Orchestration Shared Second",
+            sharedSource);
+        var sharedFirstHighSystem = new AirHandlingUnit(
+            new EntityId("SUPPLY-NATIVE-ORCHESTRATION-Y-SHARED-FIRST"),
+            "Native Orchestration Yankee Shared First",
+            sharedSource);
+        var sharedFirstLowSystem = new AirHandlingUnit(
+            new EntityId("SUPPLY-NATIVE-ORCHESTRATION-B-SHARED-FIRST"),
+            "Native Orchestration Beta Shared First",
+            sharedSource);
+        var firstPanel = new PhotovoltaicPanel(
+            new EntityId("PV-NATIVE-ORCHESTRATION-A-FIRST"),
+            "Native Orchestration PV First",
+            12,
+            30,
+            180,
+            0.2);
+        var secondPanel = new PhotovoltaicPanel(
+            new EntityId("PV-NATIVE-ORCHESTRATION-B-SECOND"),
+            "Native Orchestration PV Second",
+            8,
+            20,
+            90,
+            0.18);
+        return new EnergyModel(
+            "Native Orchestration Model",
+            new[] { conditionedSecond, conditionedFirst, unconditioned },
+            new[]
+            {
+                new ZoneHvacAssignment(
+                    conditionedSecond.Id,
+                    new SupplyGroup(new SupplySystem[] { distinctSecondSystem, sharedSecondSystem })),
+                new ZoneHvacAssignment(
+                    conditionedFirst.Id,
+                    new SupplyGroup(new SupplySystem[] { sharedFirstHighSystem, sharedFirstLowSystem })),
+            },
+            photovoltaicPanels: new[] { secondPanel, firstPanel },
+            northAxisDegrees: 17,
+            terrain: Terrain.City);
+    }
+
+    private static EnergyModel CreateInvalidNativeBoundaryModel()
+    {
+        Zone zone = CreateZone(
+            "Native-Invalid-Boundary",
+            new ZoneProfile(
+                new EntityId("PROFILE-NATIVE-INVALID-BOUNDARY"),
+                "Native Invalid Boundary Profile"),
+            0);
+        var radiator = new ElectricRadiator(
+            new EntityId("SUPPLY-NATIVE-INVALID-BOUNDARY"),
+            "Native Invalid Boundary Radiator",
+            1_000);
+        return new EnergyModel(
+            "Native Invalid Boundary Model",
+            new[] { zone },
+            new[]
+            {
+                new ZoneHvacAssignment(
+                    new EntityId("ZONE-NOT-IN-MODEL"),
+                    new SupplyGroup(new SupplySystem[] { radiator })),
+            });
+    }
+
+    private static int IndexOfFirst(
+        IdfDocument document,
+        string objectType,
+        string? objectName = null)
+    {
+        for (int index = 0; index < document.Count; index++)
+        {
+            if (string.Equals(document[index].ObjectType, objectType, StringComparison.OrdinalIgnoreCase)
+                && (objectName is null
+                    || string.Equals(document[index].Name, objectName, StringComparison.Ordinal)))
+            {
+                return index;
+            }
+        }
+
+        throw new Xunit.Sdk.XunitException(
+            $"Expected native IDF object '{objectType}:{objectName ?? "<any>"}' was not emitted.");
+    }
+
+    private static void ValidateReceipt(
+        JsonElement receipt,
+        IReadOnlyList<NativeObservation> observations)
+    {
+        AssertUniqueObjectKeysRecursive(receipt);
+        AssertNoRawAddresses(receipt.GetRawText());
+        AssertNoHostPaths(receipt);
+        AssertNoNonFiniteJsonNumbers(receipt);
+        AssertKeys(receipt, "artifacts", "native_binding", "observations", "scope", "upstream");
+
+        JsonElement artifacts = receipt.GetProperty("artifacts");
+        AssertKeys(artifacts, "fixture", "generator", "python_validator");
+        JsonElement fixture = artifacts.GetProperty("fixture");
+        AssertKeys(fixture, "byte_length", "case_count", "cases_sha256", "path", "sha256");
+        Assert.Equal(OracleByteLength, fixture.GetProperty("byte_length").GetInt32());
+        Assert.Equal(ExpectedCaseCount, fixture.GetProperty("case_count").GetInt32());
+        Assert.Equal(CasesSha256, RequiredString(fixture, "cases_sha256"));
+        Assert.Equal(OracleRepositoryPath, RequiredString(fixture, "path"));
+        Assert.Equal(OracleSha256, RequiredString(fixture, "sha256"));
+        AssertArtifact(
+            artifacts.GetProperty("generator"),
+            GeneratorRepositoryPath,
+            GeneratorSha256);
+        AssertArtifact(
+            artifacts.GetProperty("python_validator"),
+            PythonValidatorRepositoryPath,
+            PythonValidatorSha256);
+
+        JsonElement binding = receipt.GetProperty("native_binding");
+        AssertKeys(
+            binding,
+            "adaptation_id",
+            "classification",
+            "implementation_path",
+            "implementation_sha256",
+            "implementation_symbol",
+            "public_route_path",
+            "public_route_sha256",
+            "public_route_symbol");
+        Assert.Equal(AdaptationId, RequiredString(binding, "adaptation_id"));
+        Assert.Equal("exception", RequiredString(binding, "classification"));
+        Assert.Equal(ImplementationRepositoryPath, RequiredString(binding, "implementation_path"));
+        Assert.Equal(ImplementationSha256, RequiredString(binding, "implementation_sha256"));
+        Assert.Equal(ImplementationSymbol, RequiredString(binding, "implementation_symbol"));
+        Assert.Equal(PublicRouteRepositoryPath, RequiredString(binding, "public_route_path"));
+        Assert.Equal(PublicRouteSha256, RequiredString(binding, "public_route_sha256"));
+        Assert.Equal(PublicRouteSymbol, RequiredString(binding, "public_route_symbol"));
+
+        JsonElement[] recorded = receipt.GetProperty("observations").EnumerateArray().ToArray();
+        Assert.Equal(observations.Count, recorded.Length);
+        for (int index = 0; index < recorded.Length; index++)
+        {
+            AssertKeys(recorded[index], "adaptation_id", "case_id", "native_facts", "native_outcome");
+            Assert.Equal(AdaptationId, RequiredString(recorded[index], "adaptation_id"));
+            Assert.Equal(observations[index].CaseId, RequiredString(recorded[index], "case_id"));
+            Assert.Equal(observations[index].NativeOutcome, RequiredString(recorded[index], "native_outcome"));
+            AssertStringArray(recorded[index].GetProperty("native_facts"), observations[index].NativeFacts);
+        }
+
+        JsonElement scope = receipt.GetProperty("scope");
+        AssertKeys(
+            scope,
+            "dependency_evidence_only",
+            "excluded_behavior",
+            "full_child_symbol_closure",
+            "unresolved_child_symbols");
+        AssertStringArray(
+            scope.GetProperty("dependency_evidence_only"),
+            "EnergyModel.add_supply_system",
+            "SupplyGroup.to_idf_object");
+        AssertStringArray(scope.GetProperty("excluded_behavior"), ExplicitlyExcludedBehavior);
+        Assert.False(scope.GetProperty("full_child_symbol_closure").GetBoolean());
+        AssertStringArray(scope.GetProperty("unresolved_child_symbols"), ExplicitlyUnresolvedChildSymbols);
+        Assert.Equal(
+            ExplicitlyUnresolvedChildSymbols.Length,
+            ExplicitlyUnresolvedChildSymbols.Distinct(StringComparer.Ordinal).Count());
+
+        JsonElement upstream = receipt.GetProperty("upstream");
+        AssertKeys(
+            upstream,
+            "ast_sha256",
+            "body_hash",
+            "inventory_index",
+            "path",
+            "signature_hash",
+            "source_sha256",
+            "symbol",
+            "symbol_hash");
+        Assert.Equal(UpstreamAstSha256, RequiredString(upstream, "ast_sha256"));
+        Assert.Equal(UpstreamBodyHash, RequiredString(upstream, "body_hash"));
+        Assert.Equal(UpstreamInventoryIndex, upstream.GetProperty("inventory_index").GetInt32());
+        Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
+        Assert.Equal(UpstreamSignatureHash, RequiredString(upstream, "signature_hash"));
+        Assert.Equal(UpstreamSourceSha256, RequiredString(upstream, "source_sha256"));
+        Assert.Equal(TargetSymbol, RequiredString(upstream, "symbol"));
+        Assert.Equal(UpstreamSymbolHash, RequiredString(upstream, "symbol_hash"));
+    }
+
+    private static void AssertArtifact(JsonElement artifact, string path, string sha256)
+    {
+        AssertKeys(artifact, "path", "sha256");
+        Assert.Equal(path, RequiredString(artifact, "path"));
+        Assert.Equal(sha256, RequiredString(artifact, "sha256"));
+    }
+
     private static void ExecuteNativeCase(CaseBinding binding, JsonElement pythonFacts)
     {
-        if (binding.CaseId == ExpectedCases[0].CaseId)
+        if (binding.CaseId == ExpectedSemanticCases[0].CaseId)
         {
             ExecuteAssignedWithoutAvailability(pythonFacts);
             return;
         }
 
-        if (binding.CaseId == ExpectedCases[1].CaseId)
+        if (binding.CaseId == ExpectedSemanticCases[1].CaseId)
         {
             ExecuteCaseDistinctProfiles(pythonFacts);
             return;
         }
 
-        if (binding.CaseId == ExpectedCases[2].CaseId)
+        if (binding.CaseId == ExpectedSemanticCases[2].CaseId)
         {
             ExecuteDuplicateProfiles(pythonFacts);
             return;
         }
 
-        if (binding.CaseId == ExpectedCases[3].CaseId)
+        if (binding.CaseId == ExpectedSemanticCases[3].CaseId)
         {
             ExecuteLegacyErv(pythonFacts);
             return;
         }
 
-        Assert.Equal(ExpectedCases[4].CaseId, binding.CaseId);
+        Assert.Equal(ExpectedSemanticCases[4].CaseId, binding.CaseId);
         ExecuteTwoUnconditioned(pythonFacts);
     }
 
@@ -659,27 +1521,27 @@ public sealed class EnergyModelAssemblyOracleParityTests
 
     private static EnergyModel CreateNativeModel(string caseId)
     {
-        if (caseId == ExpectedCases[0].CaseId)
+        if (caseId == ExpectedSemanticCases[0].CaseId)
         {
             return CreateAssignedWithoutAvailabilityModel();
         }
 
-        if (caseId == ExpectedCases[1].CaseId)
+        if (caseId == ExpectedSemanticCases[1].CaseId)
         {
             return CreateCaseDistinctProfilesModel();
         }
 
-        if (caseId == ExpectedCases[2].CaseId)
+        if (caseId == ExpectedSemanticCases[2].CaseId)
         {
             return CreateDuplicateProfilesModel();
         }
 
-        if (caseId == ExpectedCases[3].CaseId)
+        if (caseId == ExpectedSemanticCases[3].CaseId)
         {
             return CreateLegacyErvModel();
         }
 
-        Assert.Equal(ExpectedCases[4].CaseId, caseId);
+        Assert.Equal(ExpectedSemanticCases[4].CaseId, caseId);
         return CreateTwoUnconditionedModel();
     }
 
@@ -1443,7 +2305,81 @@ public sealed class EnergyModelAssemblyOracleParityTests
     private static string Sha256(byte[] bytes) =>
         "sha256:" + Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
 
-    private sealed record CaseBinding(string CaseId, string Executor, string Symbol);
+    private static void AssertSameSequence<T>(
+        IReadOnlyList<T> expected,
+        IReadOnlyList<T> actual)
+        where T : class
+    {
+        Assert.Equal(expected.Count, actual.Count);
+        for (int index = 0; index < expected.Count; index++)
+        {
+            Assert.Same(expected[index], actual[index]);
+        }
+    }
+
+    private sealed record CaseBinding(string CaseId, string Executor, string Symbol)
+    {
+        public bool IsOrchestrationFailure => CaseId.Contains(
+            ".orchestration-failure.",
+            StringComparison.Ordinal);
+
+        public bool IsOrchestrationSuccess => CaseId.Contains(
+            ".orchestration-success.",
+            StringComparison.Ordinal);
+    }
+
+    private sealed record NativeObservation(
+        string CaseId,
+        string NativeOutcome,
+        string[] NativeFacts);
+
+    private sealed record ModelAssemblySnapshot(
+        string Name,
+        double NorthAxisDegrees,
+        Terrain Terrain,
+        Zone[] Zones,
+        ZoneHvacAssignment[] HvacAssignments,
+        ZoneVentilationAssignment[] VentilationAssignments,
+        PhotovoltaicPanel[] PhotovoltaicPanels,
+        Surface[] Surfaces,
+        Layer[] UsedLayers,
+        ZoneProfile[] UsedProfiles,
+        Zone[] ConditionedZones,
+        Zone[] UnconditionedZones,
+        OutputTableSettings OutputTables)
+    {
+        public static ModelAssemblySnapshot Capture(EnergyModel model) => new(
+            model.Name,
+            model.NorthAxisDegrees,
+            model.Terrain,
+            model.Zones.ToArray(),
+            model.HvacAssignments.ToArray(),
+            model.VentilationAssignments.ToArray(),
+            model.PhotovoltaicPanels.ToArray(),
+            model.Surfaces.ToArray(),
+            model.UsedLayers.ToArray(),
+            model.UsedProfiles.ToArray(),
+            model.ConditionedZones.ToArray(),
+            model.UnconditionedZones.ToArray(),
+            model.OutputTables);
+
+        public void AssertUnchanged(EnergyModel model)
+        {
+            Assert.Equal(Name, model.Name);
+            Assert.Equal(NorthAxisDegrees, model.NorthAxisDegrees);
+            Assert.Equal(Terrain, model.Terrain);
+            Assert.Same(OutputTables, model.OutputTables);
+            AssertSameSequence(Zones, model.Zones);
+            AssertSameSequence(HvacAssignments, model.HvacAssignments);
+            AssertSameSequence(VentilationAssignments, model.VentilationAssignments);
+            AssertSameSequence(PhotovoltaicPanels, model.PhotovoltaicPanels);
+            AssertSameSequence(Surfaces, model.Surfaces);
+            AssertSameSequence(UsedLayers, model.UsedLayers);
+            AssertSameSequence(UsedProfiles, model.UsedProfiles);
+            AssertSameSequence(ConditionedZones, model.ConditionedZones);
+            AssertSameSequence(UnconditionedZones, model.UnconditionedZones);
+        }
+    }
 
     private sealed record SourceBinding(string Path, string SourceSha256, string AstSha256);
 
