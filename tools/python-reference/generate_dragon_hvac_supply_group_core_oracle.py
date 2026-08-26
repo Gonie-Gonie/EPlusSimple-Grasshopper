@@ -80,7 +80,7 @@ EXPECTED_CASE_BINDINGS = (
     ("dragon-hvac-supply-group-core.init.duplicates-and-explicit-availabilities", "supply-group-init", "SupplyGroup.__init__"),
     ("dragon-hvac-supply-group-core.init.validation-order", "supply-group-init", "SupplyGroup.__init__"),
     ("dragon-hvac-supply-group-core.sources.distinct-equal-sources", "supply-group-sources", "SupplyGroup.sources"),
-    ("dragon-hvac-supply-group-core.sources.dynamic-source-recomputation", "supply-group-sources", "SupplyGroup.sources"),
+    ("dragon-hvac-supply-group-core.sources.distinct-identifiers-first-seen", "supply-group-sources", "SupplyGroup.sources"),
     ("dragon-hvac-supply-group-core.sources.identity-dedup-and-none", "supply-group-sources", "SupplyGroup.sources"),
 )
 EXPECTED_CASE_IDS = tuple(item[0] for item in EXPECTED_CASE_BINDINGS)
@@ -240,6 +240,20 @@ def _attempt(function: Any) -> dict[str, Any]:
     return {"outcome": "returned"}
 
 
+def _input_conditions(
+    system_count: int,
+    all_systems_are_supply_system: bool,
+    availability_count_matches: bool | None,
+    all_systems_capable: bool | None,
+) -> dict[str, Any]:
+    return {
+        "all_systems_are_supply_system": all_systems_are_supply_system,
+        "all_systems_capable": all_systems_capable,
+        "availability_count_matches": availability_count_matches,
+        "system_count": system_count,
+    }
+
+
 def _new_system(Probe: type[Any], label: str, heatable: bool, coolable: bool, events: list[dict[str, Any]], source: Any = None) -> Any:
     return Probe(label, heatable, coolable, source, events)
 
@@ -326,12 +340,28 @@ def _execute_case(identifier: str, modules: Any) -> dict[str, Any]:
         group = SupplyGroup(systems, availabilities=availabilities); systems.clear(); availabilities.reverse()
         return {"duplicate_same_object_accepted": group.systems[0] is group.systems[1] is both, "explicit_availabilities_snapshot_isolated": list(group.availabilities) != availabilities, "non_schedule_availabilities_accepted": group.availabilities[0] is available_a and group.availabilities[2] is available_b, "stored_availabilities": _availability_labels(group.availabilities), "stored_availabilities_type": type(group.availabilities).__name__, "stored_systems": _system_labels(group.systems), "stored_systems_type": type(group.systems).__name__}
     if identifier == EXPECTED_CASE_IDS[14]:
-        capable = _new_system(Probe, "capable", True, False, events); incapable = _new_system(Probe, "incapable", False, False, events)
+        incapable = _new_system(Probe, "incapable", False, False, events)
         attempts = [
-            {"label": "empty", **_attempt(lambda: SupplyGroup([]))},
-            {"label": "type-before-count", **_attempt(lambda: SupplyGroup([object()], availabilities=[]))},
-            {"label": "count-before-capability", **_attempt(lambda: SupplyGroup([capable], availabilities=[]))},
-            {"label": "incapable", **_attempt(lambda: SupplyGroup([incapable], availabilities=[None]))},
+            {
+                "label": "empty",
+                **_input_conditions(0, True, None, None),
+                **_attempt(lambda: SupplyGroup([])),
+            },
+            {
+                "label": "type-before-count",
+                **_input_conditions(1, False, False, None),
+                **_attempt(lambda: SupplyGroup([object()], availabilities=[])),
+            },
+            {
+                "label": "count-before-capability",
+                **_input_conditions(1, True, False, False),
+                **_attempt(lambda: SupplyGroup([incapable], availabilities=[])),
+            },
+            {
+                "label": "incapable",
+                **_input_conditions(1, True, True, False),
+                **_attempt(lambda: SupplyGroup([incapable], availabilities=[None])),
+            },
         ]
         return {"attempts": attempts, "validation_order": [item["label"] for item in attempts]}
 
@@ -341,10 +371,24 @@ def _execute_case(identifier: str, modules: Any) -> dict[str, Any]:
         group = SupplyGroup([first, second]); events.clear(); result = group.sources
         return {"distinct_source_identity": source_a is not source_b, "equal_by_value": source_a == source_b, "result_sources": _source_labels(result), "result_type": type(result).__name__, "source_reads": events}
     if identifier == EXPECTED_CASE_IDS[16]:
-        source_a = _LogicalSource("source-a"); source_b = _LogicalSource("source-b")
-        first = _new_system(Probe, "first", True, False, events, source_a); second = _new_system(Probe, "second", True, False, events, None)
-        group = SupplyGroup([first, second]); events.clear(); first_result = group.sources; first._source = source_b; second._source = source_a; second_result = group.sources
-        return {"first_result": _source_labels(first_result), "fresh_result_tuple": first_result is not second_result, "second_result": _source_labels(second_result), "source_reads": events}
+        source_z = _LogicalSource("source-z", "entity-z"); source_a = _LogicalSource("source-a", "entity-a")
+        first = _new_system(Probe, "first", True, False, events, source_z); second = _new_system(Probe, "second", True, False, events, source_a)
+        group = SupplyGroup([first, second]); events.clear(); first_result = group.sources; second_result = group.sources
+        return {
+            "distinct_entity_keys": source_z.entity_key != source_a.entity_key,
+            "distinct_source_identity": source_z is not source_a,
+            "first_result_sources": _source_labels(first_result),
+            "first_seen_order_preserved": first_result[0] is source_z and first_result[1] is source_a,
+            "fresh_result_tuple": first_result is not second_result,
+            "input_sources": [
+                {"entity_key": source_z.entity_key, "label": source_z.label, "system": first.label},
+                {"entity_key": source_a.entity_key, "label": source_a.label, "system": second.label},
+            ],
+            "result_type": type(first_result).__name__,
+            "reverse_logical_label_order": source_z.label > source_a.label,
+            "second_result_sources": _source_labels(second_result),
+            "source_reads": events,
+        }
     if identifier == EXPECTED_CASE_IDS[17]:
         source_a = _LogicalSource("source-a"); source_b = _LogicalSource("source-b")
         systems = [_new_system(Probe, "first", True, False, events, source_a), _new_system(Probe, "second", True, False, events, source_a), _new_system(Probe, "third", True, False, events, None), _new_system(Probe, "fourth", True, False, events, source_b), _new_system(Probe, "fifth", True, False, events, source_a)]
@@ -397,16 +441,35 @@ def expected_facts(identifier: str) -> dict[str, Any]:
         return {"duplicate_same_object_accepted": True, "explicit_availabilities_snapshot_isolated": True, "non_schedule_availabilities_accepted": True, "stored_availabilities": ["availability-a", None, "availability-b"], "stored_availabilities_type": "tuple", "stored_systems": ["both", "both", "heat-only"], "stored_systems_type": "tuple"}
     if identifier == EXPECTED_CASE_IDS[14]:
         attempts = [
-            _raised("empty", "ValueError", "SupplyGroup requires at least one system."),
-            _raised("type-before-count", "TypeError", "All systems must be SupplySystem instances."),
-            _raised("count-before-capability", "ValueError", "The number of availabilities must match the number of systems."),
-            _raised("incapable", "ValueError", "Every supply system must support heating or cooling."),
+            {**_raised("empty", "ValueError", "SupplyGroup requires at least one system."), **_input_conditions(0, True, None, None)},
+            {**_raised("type-before-count", "TypeError", "All systems must be SupplySystem instances."), **_input_conditions(1, False, False, None)},
+            {**_raised("count-before-capability", "ValueError", "The number of availabilities must match the number of systems."), **_input_conditions(1, True, False, False)},
+            {**_raised("incapable", "ValueError", "Every supply system must support heating or cooling."), **_input_conditions(1, True, True, False)},
         ]
         return {"attempts": attempts, "validation_order": [item["label"] for item in attempts]}
     if identifier == EXPECTED_CASE_IDS[15]:
         return {"distinct_source_identity": True, "equal_by_value": True, "result_sources": ["source-a", "source-b"], "result_type": "tuple", "source_reads": [_source_read("first", "source-a"), _source_read("second", "source-b")]}
     if identifier == EXPECTED_CASE_IDS[16]:
-        return {"first_result": ["source-a"], "fresh_result_tuple": True, "second_result": ["source-b", "source-a"], "source_reads": [_source_read("first", "source-a"), _source_read("second", None), _source_read("first", "source-b"), _source_read("second", "source-a")]}
+        return {
+            "distinct_entity_keys": True,
+            "distinct_source_identity": True,
+            "first_result_sources": ["source-z", "source-a"],
+            "first_seen_order_preserved": True,
+            "fresh_result_tuple": True,
+            "input_sources": [
+                {"entity_key": "entity-z", "label": "source-z", "system": "first"},
+                {"entity_key": "entity-a", "label": "source-a", "system": "second"},
+            ],
+            "result_type": "tuple",
+            "reverse_logical_label_order": True,
+            "second_result_sources": ["source-z", "source-a"],
+            "source_reads": [
+                _source_read("first", "source-z"),
+                _source_read("second", "source-a"),
+                _source_read("first", "source-z"),
+                _source_read("second", "source-a"),
+            ],
+        }
     if identifier == EXPECTED_CASE_IDS[17]:
         reads = [_source_read("first", "source-a"), _source_read("second", "source-a"), _source_read("third", None), _source_read("fourth", "source-b"), _source_read("fifth", "source-a")]
         return {"first_seen_identity_deduplication": True, "fresh_result_tuple": True, "none_skipped": True, "result_sources": ["source-a", "source-b"], "result_type": "tuple", "source_reads": reads + reads}

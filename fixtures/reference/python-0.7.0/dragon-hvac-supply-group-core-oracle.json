@@ -419,39 +419,55 @@
         "facts": {
           "attempts": [
             {
+              "all_systems_are_supply_system": true,
+              "all_systems_capable": null,
               "args": [
                 "SupplyGroup requires at least one system."
               ],
+              "availability_count_matches": null,
               "label": "empty",
               "message": "SupplyGroup requires at least one system.",
               "outcome": "raised",
+              "system_count": 0,
               "type": "ValueError"
             },
             {
+              "all_systems_are_supply_system": false,
+              "all_systems_capable": null,
               "args": [
                 "All systems must be SupplySystem instances."
               ],
+              "availability_count_matches": false,
               "label": "type-before-count",
               "message": "All systems must be SupplySystem instances.",
               "outcome": "raised",
+              "system_count": 1,
               "type": "TypeError"
             },
             {
+              "all_systems_are_supply_system": true,
+              "all_systems_capable": false,
               "args": [
                 "The number of availabilities must match the number of systems."
               ],
+              "availability_count_matches": false,
               "label": "count-before-capability",
               "message": "The number of availabilities must match the number of systems.",
               "outcome": "raised",
+              "system_count": 1,
               "type": "ValueError"
             },
             {
+              "all_systems_are_supply_system": true,
+              "all_systems_capable": false,
               "args": [
                 "Every supply system must support heating or cooling."
               ],
+              "availability_count_matches": true,
               "label": "incapable",
               "message": "Every supply system must support heating or cooling.",
               "outcome": "raised",
+              "system_count": 1,
               "type": "ValueError"
             }
           ],
@@ -503,28 +519,46 @@
         "adaptation": "stable-entity-id-supply-source-deduplication",
         "outcome": "returned"
       },
-      "id": "dragon-hvac-supply-group-core.sources.dynamic-source-recomputation",
+      "id": "dragon-hvac-supply-group-core.sources.distinct-identifiers-first-seen",
       "python": {
         "facts": {
-          "first_result": [
+          "distinct_entity_keys": true,
+          "distinct_source_identity": true,
+          "first_result_sources": [
+            "source-z",
             "source-a"
           ],
+          "first_seen_order_preserved": true,
           "fresh_result_tuple": true,
-          "second_result": [
-            "source-b",
+          "input_sources": [
+            {
+              "entity_key": "entity-z",
+              "label": "source-z",
+              "system": "first"
+            },
+            {
+              "entity_key": "entity-a",
+              "label": "source-a",
+              "system": "second"
+            }
+          ],
+          "result_type": "tuple",
+          "reverse_logical_label_order": true,
+          "second_result_sources": [
+            "source-z",
             "source-a"
           ],
           "source_reads": [
             {
-              "source": "source-a",
+              "source": "source-z",
               "system": "first"
             },
             {
-              "source": null,
+              "source": "source-a",
               "system": "second"
             },
             {
-              "source": "source-b",
+              "source": "source-z",
               "system": "first"
             },
             {
@@ -602,7 +636,7 @@
       "symbol": "SupplyGroup.sources"
     }
   ],
-  "cases_sha256": "sha256:1204af9174f2853ef303868d072974c1d753bd2657e12f99fc753af83a7dd602",
+  "cases_sha256": "sha256:b429a0dbefc2ac0411f53bfc705fcbfb984fffcf6859a1a3be7e355bc47a9b8a",
   "consumer_contract": {
     "adaptations": {
       "SupplyGroup.__init__": "immutable-validated-supply-group-construction",
@@ -634,7 +668,7 @@
       "dragon-hvac-supply-group-core.init.duplicates-and-explicit-availabilities",
       "dragon-hvac-supply-group-core.init.validation-order",
       "dragon-hvac-supply-group-core.sources.distinct-equal-sources",
-      "dragon-hvac-supply-group-core.sources.dynamic-source-recomputation",
+      "dragon-hvac-supply-group-core.sources.distinct-identifiers-first-seen",
       "dragon-hvac-supply-group-core.sources.identity-dedup-and-none"
     ],
     "classifications": {

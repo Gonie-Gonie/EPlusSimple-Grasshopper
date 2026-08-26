@@ -56,8 +56,8 @@ Python enum containers are reviewed native API adaptations.
 CPython 3.12.7 observations, three each for the six bounded public
 `SupplyGroup` constructor and container-projection symbols. It records exact
 validation order and messages, tuple snapshots, valid-domain heat/cool
-capability selection, fresh ordered projection tuples, and first-seen source
-selection.
+capability selection, fresh ordered projection tuples, and static first-seen
+source ordering across distinct entity identifiers.
 Construction uses the reviewed `immutable-validated-supply-group-construction`
 adaptation, and source identity de-duplication uses
 `stable-entity-id-supply-source-deduplication`; the four capability properties

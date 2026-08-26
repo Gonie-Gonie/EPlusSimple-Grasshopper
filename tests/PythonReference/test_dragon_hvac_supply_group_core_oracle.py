@@ -29,9 +29,9 @@ if spec is None or spec.loader is None:
 generator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(generator)
 
-EXPECTED_FIXTURE_BYTES = 29_865
-EXPECTED_FIXTURE_SHA256 = "sha256:ac99f78ee10ab3c3c4e39a99059854b49f31ffbf823509764af970564ffba363"
-EXPECTED_CASES_SHA256 = "sha256:1204af9174f2853ef303868d072974c1d753bd2657e12f99fc753af83a7dd602"
+EXPECTED_FIXTURE_BYTES = 31_163
+EXPECTED_FIXTURE_SHA256 = "sha256:320ac62b8b9eccc9d4053a6b5ceb6fa3e825c329d1ac3d10f4c8c5cd89f0c092"
+EXPECTED_CASES_SHA256 = "sha256:b429a0dbefc2ac0411f53bfc705fcbfb984fffcf6859a1a3be7e355bc47a9b8a"
 
 
 class DragonHvacSupplyGroupCoreOracleTests(unittest.TestCase):
@@ -172,6 +172,46 @@ class DragonHvacSupplyGroupCoreOracleTests(unittest.TestCase):
             ],
             [item["message"] for item in validation["attempts"]],
         )
+        self.assertEqual(
+            [
+                {
+                    "all_systems_are_supply_system": True,
+                    "all_systems_capable": None,
+                    "availability_count_matches": None,
+                    "system_count": 0,
+                },
+                {
+                    "all_systems_are_supply_system": False,
+                    "all_systems_capable": None,
+                    "availability_count_matches": False,
+                    "system_count": 1,
+                },
+                {
+                    "all_systems_are_supply_system": True,
+                    "all_systems_capable": False,
+                    "availability_count_matches": False,
+                    "system_count": 1,
+                },
+                {
+                    "all_systems_are_supply_system": True,
+                    "all_systems_capable": False,
+                    "availability_count_matches": True,
+                    "system_count": 1,
+                },
+            ],
+            [
+                {
+                    key: attempt[key]
+                    for key in (
+                        "all_systems_are_supply_system",
+                        "all_systems_capable",
+                        "availability_count_matches",
+                        "system_count",
+                    )
+                }
+                for attempt in validation["attempts"]
+            ],
+        )
 
         cooling = self.case(value, "dragon-hvac-supply-group-core.cooling-systems.distinct-members-and-order")["python"]["facts"]
         self.assertEqual(["both-first", "cool-only", "both-second"], cooling["result_systems"])
@@ -184,6 +224,14 @@ class DragonHvacSupplyGroupCoreOracleTests(unittest.TestCase):
         self.assertTrue(equal_sources["equal_by_value"])
         self.assertTrue(equal_sources["distinct_source_identity"])
         self.assertEqual(["source-a", "source-b"], equal_sources["result_sources"])
+        first_seen = self.case(value, "dragon-hvac-supply-group-core.sources.distinct-identifiers-first-seen")["python"]["facts"]
+        self.assertTrue(first_seen["distinct_entity_keys"])
+        self.assertTrue(first_seen["distinct_source_identity"])
+        self.assertTrue(first_seen["reverse_logical_label_order"])
+        self.assertTrue(first_seen["first_seen_order_preserved"])
+        self.assertTrue(first_seen["fresh_result_tuple"])
+        self.assertEqual(["source-z", "source-a"], first_seen["first_result_sources"])
+        self.assertEqual(first_seen["first_result_sources"], first_seen["second_result_sources"])
 
     @unittest.skipUnless(
         all((PINNED_SOURCE_ROOT / Path(source["path"]).relative_to("src")).is_file() for source in generator.SOURCE_SPECS)

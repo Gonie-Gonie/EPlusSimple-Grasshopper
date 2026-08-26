@@ -92,8 +92,9 @@ The dragon-HVAC SupplyGroup core oracle binds 18 cases, three each for
 `SupplyGroup.__init__`, `coolable`, `cooling_systems`, `heatable`,
 `heating_systems`, and `sources`. Logical probes capture exact constructor
 validation, tuple snapshots, capability reads, valid-domain projection
-order and identity, tuple freshness, and source identity de-duplication without
-serializing runtime addresses. Constructor validation and stable native
+order and identity, tuple freshness, static first-seen ordering across distinct
+entity identifiers, and source identity de-duplication without serializing
+runtime addresses. Constructor validation and stable native
 entity-ID source de-duplication are explicit reviewed adaptations; the four
 capability projections map to `CanCool`, `CoolingSystems`, `CanHeat`, and
 `HeatingSystems`. The generator audits the complete twelve-module local import
