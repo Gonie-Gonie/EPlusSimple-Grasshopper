@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:5ba85ba553617851cf9b4eec237ae69ace6a2d6f39b586bbb296efecc056583f",
+  "content_sha256": "sha256:dbc6cf02cf4f5a9b574e2e08107cfdd407363b4dc5c3f3e43baa65d35d671c67",
   "entries": [
     {
       "implementation": {
@@ -6139,6 +6139,58 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.ShadingMaterial"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Blind.to_idf_object across its exact three-case shading-material slice: all 29 ordered fields, supplied values, fixed constants, Python None-to-native blank IDF serialization, repeated-call freshness, unchanged source state, and the valid-domain private mapper plus public EnergyModel route. The observed permissive-invalid Python state is rejected by the native constructor without claiming every invalid permutation, standalone converter parity, constructor or class closure, IdfObject behavior, Surface or WindowShadingControl conversion, or EnergyModel.to_idf.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b3549515bf997bdd8e214e5fd53cdb460df566613eb4abf0f9b33b696ec97df3",
+          "id": "dragon-shape-blind-to-idf-object-16e27412",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ShadingMaterialIdfOracleParityTests.cs",
+          "test_source_sha256": "sha256:3d674b98075e6e9a06c93a372602209f7a0c0bfea8d09f18ced293121347ef51",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ShadingMaterialIdfOracleParityTests.MatchesPinnedPythonShadingMaterialEmissionInNativeModelContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Blind.to_idf_object",
+      "upstream_symbol_hash": "sha256:16e274127d87265296d229708222d131dbf0885a06196f088f42ade37e18b231"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.ShadingMaterial"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Shade.to_idf_object across its exact three-case shading-material slice: all 15 ordered fields, supplied and repeated optical values, computed emissivity, fixed constants, repeated-call freshness, unchanged source state, and the valid-domain private mapper plus public EnergyModel route. The observed excessive-sum Python emission and injected nonnumeric TypeError boundary are replaced by native constructor validation and typed exclusion without claiming every invalid permutation, standalone converter parity, constructor or class closure, IdfObject behavior, Surface or WindowShadingControl conversion, or EnergyModel.to_idf; the shared Python None-to-native blank IDF serialization rule is explicit although these 15 fields contain no None slots.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4359b894572833c1ee8ea32842d892365cf30d8d042159d095706dba6df57c5a",
+          "id": "dragon-shape-shade-to-idf-object-75e6c8e6",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ShadingMaterialIdfOracleParityTests.cs",
+          "test_source_sha256": "sha256:3d674b98075e6e9a06c93a372602209f7a0c0bfea8d09f18ced293121347ef51",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ShadingMaterialIdfOracleParityTests.MatchesPinnedPythonShadingMaterialEmissionInNativeModelContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Shade.to_idf_object",
+      "upstream_symbol_hash": "sha256:75e6c8e673fc64d8f7966286fd2094b4d958b170903af6413f91b92ce095d66c"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
         "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ConditionedZones"
@@ -6531,9 +6583,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 251,
-    "passed_receipt_count": 251,
-    "receipt_count": 251,
+    "entry_count": 253,
+    "passed_receipt_count": 253,
+    "receipt_count": 253,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

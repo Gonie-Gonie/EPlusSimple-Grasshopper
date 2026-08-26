@@ -1027,12 +1027,12 @@
     "exception",
     "needs_reverification",
     "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:e9be2f22030b7dc6d5c72c1342a14e56de6281dccc7b828b248bb1792aae45a3",
+  "content_sha256": "sha256:4be03cd6581dfd1f89ea55bcc7f68dfeef1cb8e50d7ebdd5b02a2f7a4db7f2a7",
   "details": [
     {
       "evidence": [
@@ -4638,6 +4638,24 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-blind-shading-material-emission",
+        "upstream/symbol-evidence.json#dragon-shape-blind-to-idf-object-16e27412"
+      ],
+      "exception_id": "model-context-blind-shading-material-emission",
+      "index": 1027,
+      "rationale": "Trusted cross-language evidence verifies Blind.to_idf_object across the exact three-case shading-material slice: all 29 ordered effective IDF fields, supplied values, fixed constants, Python None-to-native blank serialization, repeat-call freshness, unchanged source state, the exact private mapper and the public EnergyModel route for supported valid values. The observed permissive-invalid Python state is rejected at native construction without claiming every invalid permutation, standalone converter or mutable-list parity, constructors or classes, IdfObject behavior, Surface or WindowShadingControl conversion, or EnergyModel.to_idf."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-shade-shading-material-emission",
+        "upstream/symbol-evidence.json#dragon-shape-shade-to-idf-object-75e6c8e6"
+      ],
+      "exception_id": "model-context-shade-shading-material-emission",
+      "index": 1032,
+      "rationale": "Trusted cross-language evidence verifies Shade.to_idf_object across the exact three-case shading-material slice: all 15 ordered effective IDF fields, supplied and repeated optical values, computed emissivity, fixed constants, repeat-call freshness, unchanged source state, the exact private mapper and the public EnergyModel route for supported valid values. The observed excessive-sum emission and injected nonnumeric TypeError boundary are replaced by native constructor validation and typed exclusion without claiming every invalid permutation, standalone converter or mutable-list parity, constructors or classes, IdfObject behavior, Surface or WindowShadingControl conversion, or EnergyModel.to_idf; the shared None-to-blank rule is explicit although Shade has no None fields."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-shape-py-surface-repr-c40ec5b3"
       ],
       "index": 1036,
@@ -5010,8 +5028,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 133,
-      "exception": 118,
-      "needs_reverification": 739,
+      "exception": 120,
+      "needs_reverification": 737,
       "out_of_scope": 252
     },
     "entry_count": 1242

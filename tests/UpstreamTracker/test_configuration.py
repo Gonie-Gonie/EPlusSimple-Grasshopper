@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(739, len(compatibility.needs_reverification))
+        self.assertEqual(737, len(compatibility.needs_reverification))
         self.assertEqual(
             133,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            118,
+            120,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -259,6 +259,31 @@ class ConfigurationTests(unittest.TestCase):
             ),
             supply_group_to_idf.evidence,
         )
+        expected_shading_material = {
+            "Blind.to_idf_object": (
+                "model-context-blind-shading-material-emission",
+                (
+                    "upstream/compatibility-exceptions.yml#"
+                    "model-context-blind-shading-material-emission",
+                    "upstream/symbol-evidence.json#"
+                    "dragon-shape-blind-to-idf-object-16e27412",
+                ),
+            ),
+            "Shade.to_idf_object": (
+                "model-context-shade-shading-material-emission",
+                (
+                    "upstream/compatibility-exceptions.yml#"
+                    "model-context-shade-shading-material-emission",
+                    "upstream/symbol-evidence.json#"
+                    "dragon-shape-shade-to-idf-object-75e6c8e6",
+                ),
+            ),
+        }
+        for symbol, (exception_id, evidence) in expected_shading_material.items():
+            entry = by_key[("src/idragon/dragon/shape.py", symbol)]
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            self.assertEqual(evidence, entry.evidence, symbol)
         self.assertEqual(
             "needs_reverification",
             by_key[
