@@ -19,6 +19,7 @@ public enum UsageProfileSource
 {
     Standard,
     Extended,
+    Custom,
 }
 
 /// <summary>
@@ -211,6 +212,48 @@ public sealed class UsageProfile
         }
 
         return _operation[day];
+    }
+
+    /// <summary>
+    /// Returns the upstream-compatible profile representation in its pinned key order.
+    /// </summary>
+    public OrderedMap<object> ToDictionary()
+    {
+        IReadOnlyList<string> operatingDays = Array.AsReadOnly(
+            OperatingDays
+                .Select(day => day.ToString().ToLowerInvariant())
+                .ToArray());
+        IReadOnlyList<OrderedMap<object>> vacations = Array.AsReadOnly(
+            Vacations
+                .Select(period => new OrderedMap<object>(new[]
+                {
+                    Entry("start", period.Start.ToString()),
+                    Entry("end", period.End.ToString()),
+                }))
+                .ToArray());
+
+        return new OrderedMap<object>(new[]
+        {
+            Entry("name", Name),
+            Entry("occupant_start", OccupantStart),
+            Entry("occupant_end", OccupantEnd),
+            Entry("hvac_start", HvacStart),
+            Entry("hvac_end", HvacEnd),
+            Entry("ventilation", Ventilation),
+            Entry("domestic_hotwater", DomesticHotWater),
+            Entry("lighting_hours", LightingHours),
+            Entry("occupancy", Occupancy),
+            Entry("equipment", Equipment),
+            Entry("heating_setpoint", HeatingSetpoint),
+            Entry("cooling_setpoint", CoolingSetpoint),
+            Entry("operate_weekdays", operatingDays),
+            Entry("vacations", vacations),
+        });
+    }
+
+    private static KeyValuePair<string, object> Entry(string key, object value)
+    {
+        return new KeyValuePair<string, object>(key, value);
     }
 
     private static void ValidateHour(int hour, string parameterName)

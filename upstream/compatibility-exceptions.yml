@@ -1226,3 +1226,115 @@
     api_contract: native callers catch ScheduleOperationException or InvalidOperationException instead of the Python ScheduleOperationError or TypeError family
     compatibility_evidence: exact upstream inheritance and args behavior, native inheritance and message propagation, catch-family behavior, and the production exception in src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/ScheduleType.cs remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
+
+- id: immutable-validated-usage-profile-value-object
+  upstream:
+    path: src/epsimple/core/profile.py
+    symbol: KoreanUsageProfile
+    symbol_hash: sha256:52a3656b8d8c7abbbbc0403206bede355eb776a007aee2f301c0819bf9a3044f
+  difference:
+    upstream: is a mutable Python object whose public profile attributes and runtime-address-derived default identity can be reassigned after construction without enforcing hours, finite loads, complete day flags, vacation dates, or source provenance
+    dotnet: is a sealed native UsageProfile value whose copied operation and vacation collections, validated scalar properties, deterministic EntityId, and UsageProfileSource are read-only after atomic construction
+  effect:
+    engineering_result: valid profiles preserve the same name, operating windows, engineering loads and setpoints, eight day flags, vacations, derived occupied hours, and conversion inputs while invalid or post-construction mutation cannot corrupt the packaged profile database
+    api_contract: callers create a complete validated UsageProfile and replace the value when changes are required instead of mutating a Python instance or attaching additional attributes
+    compatibility_evidence: exact valid values and derived facts, source-container isolation, non-finite and range rejection, day and vacation topology, immutability, and the production contract in src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: deterministic-native-usage-profile-identity
+  upstream:
+    path: src/epsimple/core/profile.py
+    symbol: KoreanUsageProfile.ID
+    symbol_hash: sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2
+  difference:
+    upstream: exposes a string identity that preserves an explicit caller value but otherwise embeds the process-specific Python object address
+    dotnet: exposes a strongly typed EntityId, preserving an explicit native identity and otherwise deriving a stable profile identity from deterministic domain inputs, with separate deterministic packaged-database identity provenance
+  effect:
+    engineering_result: profile references remain stable and unique for the same supported native inputs without allowing process addresses to leak into serialized models or generated EnergyPlus names
+    api_contract: callers use EntityId.Value when textual identity is required and cannot request the legacy runtime-address fallback
+    compatibility_evidence: explicit identity preservation, deterministic repeat construction, packaged-database identity, absence of raw addresses, and the Id contract in src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: validated-immutable-usage-profile-construction
+  upstream:
+    path: src/epsimple/core/profile.py
+    symbol: KoreanUsageProfile.__init__
+    symbol_hash: sha256:f242c8e5794ae9b49de1e768956963696c8351c947440f6fa3ef1f70230d50f0
+  difference:
+    upstream: directly stores supplied mutable values, accepts incomplete or malformed engineering state, and generates an omitted identity from the live Python address
+    dotnet: atomically requires a nonblank name, hours in the supported zero-through-24 range, finite nonnegative loads, all eight operation flags, valid non-null vacation periods, a defined source discriminator, and an explicit or deterministic EntityId, then copies collection inputs into read-only storage
+  effect:
+    engineering_result: every valid constructor input retains its exact engineering value and day or vacation topology while malformed profiles are rejected before they can enter conversion or EnergyPlus authoring
+    api_contract: construction is validated and immutable and reports native argument or range failures instead of deferring failure to later Python attribute use
+    compatibility_evidence: full valid construction, overnight and full-day hours, explicit and generated identities, all numeric and collection boundaries, source isolation, atomic rejection, and src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: typed-usage-profile-serialization
+  upstream:
+    path: src/epsimple/core/profile.py
+    symbol: KoreanUsageProfile.to_dict
+    symbol_hash: sha256:40c556a7cf3a93741c48f26c3eb30ba4d70f7dade0abfc3ef50ecfbf3cfded5e
+  difference:
+    upstream: creates an untyped mutable dictionary with snake-case scalar keys, lowercase operating-day strings, and MM/DD vacation strings
+    dotnet: ToDictionary returns the exact 14-key projection as an immutable OrderedMap<object>, with IReadOnlyList<string> lowercase day names and IReadOnlyList<OrderedMap<object>> MM/DD vacation endpoints derived from the immutable UsageProfile instead of mutable containers
+  effect:
+    engineering_result: normalized profile serialization preserves the same 14 keys, scalar values, ordered operating days, vacation endpoints, and absence or presence topology while neither the projection nor its nested sequences can mutate the source profile
+    api_contract: consumers use the native immutable ordered projection and its typed nested values rather than mutating the Python dictionary, day strings, or vacation dictionaries
+    compatibility_evidence: exact key count and order, scalar values, normalized day and vacation facts, projection and nested immutability, source isolation, and UsageProfile.ToDictionary in src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: usage-profile-source-discriminator
+  upstream:
+    path: src/epsimple/core/profile.py
+    symbol: KoreanUsageProfileExtended
+    symbol_hash: sha256:5a6703884a6c29f977d9e025af134b26199f10dab6f1edb680ee161c0ece47e1
+  difference:
+    upstream: represents extended database rows with a subclass whose only declared distinction is a different CSV datapath
+    dotnet: represents standard and extended rows with the UsageProfileSource discriminator on the same sealed UsageProfile type while loading both pinned embedded resources in deterministic database order
+  effect:
+    engineering_result: extended rows retain their exact profile values, position, lookup behavior, and provenance without introducing a behavior-free inheritance type
+    api_contract: callers inspect UsageProfile.Source instead of testing Python subclass identity or accessing a class-level datapath
+    compatibility_evidence: standard versus extended provenance, overlap replacement and ordering, exact row values, and UsageProfileSource in src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: immutable-usage-profile-database
+  upstream:
+    path: src/epsimple/core/profile.py
+    symbol: Profile
+    symbol_hash: sha256:3cf55ef99529b6051e2e5bea5c32bbecc5850819101e522fed1008be0599d6ad
+  difference:
+    upstream: is a base class that owns one process-global mutable dictionary populated at module import time by standard and extended CSV rows
+    dotnet: exposes a lazily initialized immutable SimpleDragonDatabase aggregate containing an ordered UsageProfileDatabase built from the two pinned embedded resources, with read-only items and lookup state
+  effect:
+    engineering_result: the same packaged profile rows and extended-row replacement order are available deterministically while callers cannot mutate process-global database membership
+    api_contract: consumers use SimpleDragonDatabase.Default.UsageProfiles or an explicitly supplied database rather than a mutable Profile._DB class attribute
+    compatibility_evidence: exact row count and order, standard and extended provenance, duplicate replacement behavior, immutability, lazy repeat access, and src/SimpleDragon/GonieGonie.SimpleDragon.Core/Data/SimpleDragonDatabase.cs plus Profiles/ProfileDatabases.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: diagnostic-usage-profile-lookup
+  upstream:
+    path: src/epsimple/core/profile.py
+    symbol: Profile.get_DB
+    symbol_hash: sha256:a8448202da1e84bb21aa6672fee1c03fb401390f51cf1ea4b2d6810af74aeecc
+  difference:
+    upstream: overloads string keys so __path__ returns CSV paths, __all__ returns all objects or dictionaries, a profile key returns one mutable object or dictionary, and an unknown key raises KeyError
+    dotnet: separates ordered enumeration through UsageProfileDatabase.Items from exact-name lookup through Find, which returns a typed LookupResult with a stable diagnostic for blank or unknown names and does not expose host filesystem paths
+  effect:
+    engineering_result: supported exact-name and all-profile queries preserve the same ordered packaged profile values while lookup failure remains explicit and actionable without relying on exceptions or deployment-specific paths
+    api_contract: callers select Items for enumeration and inspect or require the LookupResult from Find instead of passing Python magic keys or requesting an as_dict branch
+    compatibility_evidence: successful exact lookup, ordered all-row enumeration, blank and missing diagnostics, source provenance, path non-disclosure, and src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/ProfileDatabases.cs plus Data/SimpleDragonDatabase.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: strict-invariant-profile-csv-reader
+  upstream:
+    path: src/epsimple/core/profile.py
+    symbol: read_csv_without_units
+    symbol_hash: sha256:77befcdc77b99adb5b3b7311f90774dd82ff72ba4eea1c6b7058419c1aff412a
+  difference:
+    upstream: accepts an arbitrary filepath and encoding through pandas, then removes any bracketed suffix from every column label with a permissive regular expression
+    dotnet: reads pinned UTF-8 embedded profile resources through the invariant CsvDocument parser with unit-header stripping enabled, deterministic culture-independent scalar parsing, strict quoting and column validation, and source-aware CsvDataException failures
+  effect:
+    engineering_result: supported packaged CSV rows and unit-stripped headers retain the same values while malformed, duplicate, truncated, or culture-dependent input cannot enter the profile database silently
+    api_contract: arbitrary filesystem, encoding, and pandas DataFrame behavior are outside the native parser; the product consumes validated embedded rows and typed CsvDocument or UsageProfile results
+    compatibility_evidence: exact stripped headers and row values, BOM and quoted-field handling, invariant numeric parsing, malformed-input categories, and src/SimpleDragon/GonieGonie.SimpleDragon.Core/Internal/InvariantCsv.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation

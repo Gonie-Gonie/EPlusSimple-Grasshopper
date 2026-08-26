@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\..\tools\upstream-tracker\csharp\TrustedEvidenceRecorder.cs" Link="TrustedEvidenceRecorder.cs" />
     <Using Include="Xunit" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="xunit" />

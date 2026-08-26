@@ -53,7 +53,12 @@ reviewed native-adaptation split. A final profile residual oracle binds the
 five remaining public `profile.py` symbols through 15 ordered cases. It pins
 Profile slot and IDF-export order, Schedule container topology, and the native
 schedule-operation exception family as one equivalent behavior and four
-reviewed adaptations. `-Mode Verify`
+reviewed adaptations. The usage-profile core oracle binds the 13 in-scope
+public symbols in `epsimple/core/profile.py` through 39 ordered cases. It pins
+the exact 14-key dictionary contract, standard and extended database lookup,
+invariant CSV parsing, deterministic IDs, and the complete seven-schedule
+conversion for all 24 embedded profiles, including vacation and holiday day
+topology. `-Mode Verify`
 compares all generated files byte-for-byte with the reviewed baseline under
 `fixtures/reference/python-0.7.0`. Every reference run also executes the
 fail-closed generator tests under `tests/PythonReference` before producing an

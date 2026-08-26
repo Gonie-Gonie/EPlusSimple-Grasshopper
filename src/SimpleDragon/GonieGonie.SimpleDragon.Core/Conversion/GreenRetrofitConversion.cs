@@ -4,8 +4,10 @@ using GonieGonie.InvisibleDragon.Idd;
 using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Model;
 using GonieGonie.SimpleDragon.Internal;
-using DragonAirBoundary = GonieGonie.InvisibleDragon.Construction.AirBoundary;
+using DaySchedule = GonieGonie.InvisibleDragon.Profile.DaySchedule;
+using DayScheduleWindow = GonieGonie.InvisibleDragon.Profile.DayScheduleWindow;
 using DragonAbsorptionChiller = GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller;
+using DragonAirBoundary = GonieGonie.InvisibleDragon.Construction.AirBoundary;
 using DragonBlind = GonieGonie.InvisibleDragon.Shape.Blind;
 using DragonBoiler = GonieGonie.InvisibleDragon.Hvac.Boiler;
 using DragonChiller = GonieGonie.InvisibleDragon.Hvac.Chiller;
@@ -28,9 +30,9 @@ using DragonHvacSupply = GonieGonie.InvisibleDragon.Hvac.SupplySystem;
 using DragonLayer = GonieGonie.InvisibleDragon.Construction.Layer;
 using DragonMaterial = GonieGonie.InvisibleDragon.Construction.Material;
 using DragonNoMassConstruction = GonieGonie.InvisibleDragon.Construction.NoMassConstruction;
+using DragonOpening = GonieGonie.InvisibleDragon.Shape.IOpening;
 using DragonOpenSingleSpeedCoolingTower = GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower;
 using DragonOpenTwoSpeedCoolingTower = GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower;
-using DragonOpening = GonieGonie.InvisibleDragon.Shape.IOpening;
 using DragonPhotovoltaicPanel = GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel;
 using DragonPlanarPolygon = GonieGonie.InvisibleDragon.Shape.PlanarPolygon;
 using DragonProfile = GonieGonie.InvisibleDragon.Profile.Profile;
@@ -39,11 +41,11 @@ using DragonRadiator = GonieGonie.InvisibleDragon.Hvac.Radiator;
 using DragonSchedule = GonieGonie.InvisibleDragon.Profile.Schedule;
 using DragonScheduleType = GonieGonie.InvisibleDragon.Profile.ScheduleType;
 using DragonShade = GonieGonie.InvisibleDragon.Shape.Shade;
+using DragonSupplyGroup = GonieGonie.InvisibleDragon.Hvac.SupplyGroup;
 using DragonSurface = GonieGonie.InvisibleDragon.Shape.Surface;
 using DragonSurfaceBoundary = GonieGonie.InvisibleDragon.Shape.SurfaceBoundary;
 using DragonSurfaceConstruction = GonieGonie.InvisibleDragon.Construction.ISurfaceConstruction;
 using DragonSurfaceType = GonieGonie.InvisibleDragon.Shape.SurfaceType;
-using DragonSupplyGroup = GonieGonie.InvisibleDragon.Hvac.SupplyGroup;
 using DragonTerrain = GonieGonie.InvisibleDragon.Model.Terrain;
 using DragonVertex = GonieGonie.InvisibleDragon.Shape.Vertex;
 using DragonWindow = GonieGonie.InvisibleDragon.Shape.Window;
@@ -52,8 +54,6 @@ using DragonZoneHvacAssignment = GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignm
 using DragonZoneVentilationAssignment = GonieGonie.InvisibleDragon.Hvac.ZoneVentilationAssignment;
 using EnergyRecoveryVentilator = GonieGonie.InvisibleDragon.Hvac.EnergyRecoveryVentilator;
 using RuleSet = GonieGonie.InvisibleDragon.Profile.RuleSet;
-using DaySchedule = GonieGonie.InvisibleDragon.Profile.DaySchedule;
-using DayScheduleWindow = GonieGonie.InvisibleDragon.Profile.DayScheduleWindow;
 
 namespace GonieGonie.SimpleDragon;
 
@@ -173,6 +173,16 @@ public static class GreenRetrofitConverter
         options ??= new GreenRetrofitConversionOptions();
         DomainSupport.NotNull(options.Database, nameof(options.Database));
         return new Converter(model, options).Convert();
+    }
+
+    /// <summary>
+    /// Converts one usage profile without requiring model geometry.
+    /// Each call returns a fresh immutable InvisibleDragon profile graph.
+    /// </summary>
+    public static DragonProfile ConvertProfile(UsageProfile profile)
+    {
+        DomainSupport.NotNull(profile, nameof(profile));
+        return Converter.CreateProfile(profile);
     }
 
     public static IdfDocument ToIdfDocument(
@@ -1053,23 +1063,36 @@ public static class GreenRetrofitConverter
                 zone.Id,
                 zone.Id.Value,
                 surfaces,
-                ConvertProfile(profile),
+                ConvertProfileCached(profile),
                 zone.Infiltration * UnitConversions.AirChangesAt50PaToNaturalAirChanges,
                 zone.LightDensity ?? 0d,
                 outdoorAir);
         }
 
-        private DragonProfile ConvertProfile(UsageProfile profile)
+        private DragonProfile ConvertProfileCached(UsageProfile profile)
         {
             if (_profiles.TryGetValue(profile.Id.Value, out DragonProfile? existing))
             {
                 return existing;
             }
 
-            string prefix = profile.Source == UsageProfileSource.Standard
-                || profile.Source == UsageProfileSource.Extended
-                ? "$FROM_DB$:" + profile.Name
-                : profile.Id.Value;
+            DragonProfile converted = CreateProfile(profile);
+            _profiles.Add(profile.Id.Value, converted);
+            return converted;
+        }
+
+        internal static DragonProfile CreateProfile(UsageProfile profile)
+        {
+            string prefix = profile.Source switch
+            {
+                UsageProfileSource.Standard => "$FROM_DB$:" + profile.Name,
+                UsageProfileSource.Extended => "$FROM_DB$:" + profile.Name,
+                UsageProfileSource.Custom => profile.Id.Value,
+                _ => throw new ArgumentOutOfRangeException(
+                    nameof(profile),
+                    profile.Source,
+                    "Unknown usage-profile source."),
+            };
             const string hvacVacationMask = "0xAUTO0000:INVERTED";
             const string occupiedVacationMask = "0xAUTO0001:INVERTED";
             const string lightingVacationMask = "0xAUTO0002:INVERTED";
@@ -1128,7 +1151,6 @@ public static class GreenRetrofitConverter
                 lighting,
                 equipment,
                 hotWater);
-            _profiles.Add(profile.Id.Value, converted);
             return converted;
         }
 
@@ -1208,23 +1230,14 @@ public static class GreenRetrofitConverter
             {
                 DateTime start = ToScheduleDate(period.Start);
                 DateTime end = ToScheduleDate(period.End);
-                if (end >= start)
+                if (end < start)
                 {
-                    result = result.Apply(vacation, start, end, schedule.Name);
+                    // Preserve Python 0.7.0 Schedule.from_windows: a reversed
+                    // annual window assigns no slots rather than wrapping.
+                    continue;
                 }
-                else
-                {
-                    result = result.Apply(
-                        vacation,
-                        start,
-                        new DateTime(DragonSchedule.DefaultYear, 12, 31),
-                        schedule.Name);
-                    result = result.Apply(
-                        vacation,
-                        new DateTime(DragonSchedule.DefaultYear, 1, 1),
-                        end,
-                        schedule.Name);
-                }
+
+                result = result.Apply(vacation, start, end, schedule.Name);
             }
 
             return result;
@@ -1232,8 +1245,7 @@ public static class GreenRetrofitConverter
 
         private static DateTime ToScheduleDate(MonthDay value)
         {
-            int day = value.Month == 2 && value.Day == 29 ? 28 : value.Day;
-            return new DateTime(DragonSchedule.DefaultYear, value.Month, day);
+            return new DateTime(DragonSchedule.DefaultYear, value.Month, value.Day);
         }
 
         private static RuleSet WeeklyRuleSet(
@@ -1243,19 +1255,19 @@ public static class GreenRetrofitConverter
             DaySchedule off,
             DragonScheduleType type)
         {
-            DaySchedule For(UsageDay day) => profile.OperatesOn(day) ? active : off;
+            DaySchedule? OverrideFor(UsageDay day) => profile.OperatesOn(day) ? active : null;
             return new RuleSet(
                 name,
                 off,
                 off,
-                monday: For(UsageDay.Monday),
-                tuesday: For(UsageDay.Tuesday),
-                wednesday: For(UsageDay.Wednesday),
-                thursday: For(UsageDay.Thursday),
-                friday: For(UsageDay.Friday),
-                saturday: For(UsageDay.Saturday),
-                sunday: For(UsageDay.Sunday),
-                holiday: For(UsageDay.Holiday),
+                monday: OverrideFor(UsageDay.Monday),
+                tuesday: OverrideFor(UsageDay.Tuesday),
+                wednesday: OverrideFor(UsageDay.Wednesday),
+                thursday: OverrideFor(UsageDay.Thursday),
+                friday: OverrideFor(UsageDay.Friday),
+                saturday: OverrideFor(UsageDay.Saturday),
+                sunday: OverrideFor(UsageDay.Sunday),
+                holiday: OverrideFor(UsageDay.Holiday),
                 type: type);
         }
 

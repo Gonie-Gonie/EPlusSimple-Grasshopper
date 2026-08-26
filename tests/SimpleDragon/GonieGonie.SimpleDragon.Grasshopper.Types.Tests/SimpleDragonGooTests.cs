@@ -1,8 +1,8 @@
+using System.Text.Json;
 using GH_IO.Serialization;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
-using System.Text.Json;
 
 namespace GonieGonie.SimpleDragon.Grasshopper.Tests;
 
@@ -67,6 +67,29 @@ public sealed class SimpleDragonGooTests
         Assert.Equal(
             result.GrossSummaries[GreenRetrofitMetric.Cost].AnnualTotal,
             resultCopy.Value.GrossSummaries[GreenRetrofitMetric.Cost].AnnualTotal);
+    }
+
+    [Theory]
+    [InlineData(UsageProfileSource.Standard, 0)]
+    [InlineData(UsageProfileSource.Extended, 1)]
+    [InlineData(UsageProfileSource.Custom, 2)]
+    public void UsageProfileSourceOrdinalsRoundTripGrasshopperArchives(
+        UsageProfileSource source,
+        int expectedOrdinal)
+    {
+        UsageProfile profile = CreateProfile(source);
+
+        SimpleDragonUsageProfileGoo reopened = ArchiveRoundTrip(
+            new SimpleDragonUsageProfileGoo(profile),
+            new SimpleDragonUsageProfileGoo());
+
+        Assert.Equal(expectedOrdinal, (int)source);
+        Assert.Equal(source, reopened.Value.Source);
+        Assert.Equal(profile.Id, reopened.Value.Id);
+        Assert.Equal(profile.OperatingDays, reopened.Value.OperatingDays);
+        Assert.Equal(
+            profile.Vacations.Select(period => (period.Start.ToString(), period.End.ToString())),
+            reopened.Value.Vacations.Select(period => (period.Start.ToString(), period.End.ToString())));
     }
 
     [Fact]
@@ -206,21 +229,11 @@ public sealed class SimpleDragonGooTests
         return GreenRetrofitResult.FromSiteUses(area, siteUses);
     }
 
-    private static TestDomain CreateDomain()
+    private static UsageProfile CreateProfile(UsageProfileSource source)
     {
-        var material = new Material("Insulation", 0.04, 30, 1400, new EntityId("MATERIAL-TEST"));
-        var surfaceConstruction = new SurfaceConstruction(
-            "Envelope",
-            new[] { new SurfaceConstructionLayer(material, 0.2) },
-            new EntityId("CONSTRUCTION-TEST"));
-        var fenestrationConstruction = new FenestrationConstruction(
-            "Window",
-            1.4,
-            0.45,
-            new EntityId("FENESTRATION-CONSTRUCTION-TEST"));
         var operation = ((UsageDay[])Enum.GetValues(typeof(UsageDay)))
             .ToDictionary(day => day, _ => true);
-        var profile = new UsageProfile(
+        return new UsageProfile(
             "Custom Profile",
             8,
             18,
@@ -235,8 +248,23 @@ public sealed class SimpleDragonGooTests
             26,
             operation,
             new[] { new VacationPeriod(new MonthDay(8, 1), new MonthDay(8, 7)) },
-            UsageProfileSource.Extended,
+            source,
             new EntityId("PROFILE-TEST"));
+    }
+
+    private static TestDomain CreateDomain()
+    {
+        var material = new Material("Insulation", 0.04, 30, 1400, new EntityId("MATERIAL-TEST"));
+        var surfaceConstruction = new SurfaceConstruction(
+            "Envelope",
+            new[] { new SurfaceConstructionLayer(material, 0.2) },
+            new EntityId("CONSTRUCTION-TEST"));
+        var fenestrationConstruction = new FenestrationConstruction(
+            "Window",
+            1.4,
+            0.45,
+            new EntityId("FENESTRATION-CONSTRUCTION-TEST"));
+        UsageProfile profile = CreateProfile(UsageProfileSource.Extended);
         var window = new Fenestration(
             "Window",
             FenestrationType.Window,

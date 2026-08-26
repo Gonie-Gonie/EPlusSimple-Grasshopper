@@ -21,3 +21,10 @@ observations for the final five public symbols in `profile.py`. It records
 Profile slot and IDF-export order, Schedule container topology, and the
 ScheduleOperationError family while separating exact behavior from reviewed
 immutable native adaptations.
+
+`python-0.7.0/usage-profile-core-oracle.json` pins 39 ordered CPython 3.12.7
+observations for the 13 public symbols in `epsimple/core/profile.py` that are
+inside the native port scope. It covers all 24 embedded usage profiles, their
+ordered dictionaries and seven generated schedules, deterministic identity,
+database lookup, and invariant CSV parsing while recording reviewed native
+adaptations explicitly.

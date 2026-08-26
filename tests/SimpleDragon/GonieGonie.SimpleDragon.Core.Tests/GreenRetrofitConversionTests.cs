@@ -395,9 +395,10 @@ public sealed class GreenRetrofitConversionTests
         GreenRetrofitConversionResult result = GreenRetrofitConverter.Convert(model);
 
         Assert.True(result.Success, Describe(result));
-        Assert.Equal(spacedProfile.Id, Assert.Single(result.RequireEnergyModel().Zones).Profile.Id);
-        Assert.Equal("$FROM_DB$:Office profile with spaces",
-            Assert.Single(result.RequireEnergyModel().Zones).Profile.Name);
+        GonieGonie.InvisibleDragon.Profile.Profile converted =
+            Assert.Single(result.RequireEnergyModel().Zones).Profile;
+        Assert.Equal(spacedProfile.Id, converted.Id);
+        Assert.Equal("$FROM_DB$:Office profile with spaces", converted.Name);
     }
 
     [Fact]
