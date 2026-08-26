@@ -109,6 +109,20 @@ public sealed class EnergyModel
 
     public IReadOnlyList<Surface> Surfaces => new ReadOnlyCollection<Surface>(Zones.SelectMany(zone => zone.Surfaces).ToArray());
 
+    /// <summary>
+    /// Zones that have both an HVAC assignment and a profile-level HVAC availability schedule.
+    /// Input zone order and zone object identity are preserved.
+    /// </summary>
+    public IReadOnlyList<Zone> ConditionedZones => new ReadOnlyCollection<Zone>(
+        Zones.Where(IsConditionedZone).ToArray());
+
+    /// <summary>
+    /// Zones that do not have both an HVAC assignment and a profile-level HVAC availability schedule.
+    /// Input zone order and zone object identity are preserved.
+    /// </summary>
+    public IReadOnlyList<Zone> UnconditionedZones => new ReadOnlyCollection<Zone>(
+        Zones.Where(zone => !IsConditionedZone(zone)).ToArray());
+
     public ValidationResult Validate()
     {
         List<Diagnostic> diagnostics = Zones.SelectMany(zone => zone.Validate().Diagnostics).ToList();
@@ -138,6 +152,11 @@ public sealed class EnergyModel
                     $"HVAC assignment references unknown zone '{assignment.ZoneId}'.",
                     assignment.ZoneId,
                     "Use a zone identifier contained in this model."));
+                continue;
+            }
+
+            if (!IsConditionedZone(zone))
+            {
                 continue;
             }
 
@@ -189,6 +208,21 @@ public sealed class EnergyModel
         }
 
         return EnergyModelIdfAssembler.Assemble(this, schema, options);
+    }
+
+    internal bool IsConditionedZone(Zone zone)
+    {
+#if NET7_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(zone);
+#else
+        if (zone is null)
+        {
+            throw new ArgumentNullException(nameof(zone));
+        }
+#endif
+
+        return zone.Profile.HvacAvailability is not null
+            && HvacAssignments.Any(assignment => assignment.ZoneId.Equals(zone.Id));
     }
 
     private void AddHvacIdentityDiagnostics(List<Diagnostic> diagnostics)

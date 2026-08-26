@@ -1632,3 +1632,17 @@
     api_contract: callers use the typed Terrain enum and EnergyModel validation; no parity is claimed for Python str inheritance, Enum value construction, iteration, identity, member naming, JSON behavior, or Enum text syntax
     compatibility_evidence: exact upstream construction, rejection, declaration and iteration order, names, values, identity, JSON and display text plus native enum topology, undefined-value rejection, EnergyModel retention, and emitted IDF token remain required in trusted cross-language receipts
   approval: accepted-native-api-adaptation
+
+- id: model-context-zone-conditioning-predicate
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Zone.is_conditioned
+    symbol_hash: sha256:6fe80cb193a6716b68c1033c5c52bd29f422ffb9efbdac8475a7f4b4ddc46370
+  difference:
+    upstream: exposes a Zone-local Python property that returns true only when the mutable zone carries both a non-None supply group and a profile with non-None HVAC availability
+    dotnet: deliberately keeps HVAC equipment assignments outside immutable Zone values and derives conditioning in EnergyModel context from a zone profile and the model's typed assignment keyed by the stable zone identifier, exposing ordered ConditionedZones and UnconditionedZones partitions
+  effect:
+    engineering_result: model zones with both an HVAC assignment and HVAC availability retain the same conditioned classification and input-order partition while detached zones no longer imply equipment state they do not own
+    api_contract: callers query EnergyModel.ConditionedZones or EnergyModel.UnconditionedZones instead of reading Zone.is_conditioned; no parity is claimed for a mutable zone-local supply reference or a context-free native Zone predicate
+    compatibility_evidence: supply-only, availability-only, both-present and neither-present truth behavior plus ordered partition membership, source-zone identity, read-only native results, model-context assignment lookup, and shared IDF-assembler use remain required in trusted cross-language receipts
+  approval: accepted-native-api-adaptation

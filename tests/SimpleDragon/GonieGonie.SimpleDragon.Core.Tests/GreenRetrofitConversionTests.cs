@@ -36,6 +36,11 @@ public sealed class GreenRetrofitConversionTests
         Assert.Equal(4d * 48d / 3600d, model.Zones[0].OutdoorAirFlowCubicMetresPerSecond, 8);
 
         Assert.Single(model.HvacAssignments);
+        Assert.Same(model.Zones[0], Assert.Single(model.ConditionedZones));
+        Assert.Empty(model.UnconditionedZones);
+        Assert.Equal(
+            model.Zones.Count,
+            model.ConditionedZones.Count + model.UnconditionedZones.Count);
         SupplyGroup group = model.HvacAssignments[0].Supply;
         Assert.Equal(2, group.Systems.Count);
         Assert.Contains(group.Systems, item => item is AirHandlingUnit);

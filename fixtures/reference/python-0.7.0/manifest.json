@@ -53,6 +53,11 @@
       "sha256": "ffa9805fd16847484195eb001cb7530c718554d13db40f811f7fa1242c020355"
     },
     {
+      "path": "dragon-model-conditioning-oracle.json",
+      "bytes": 19851,
+      "sha256": "7cbdcad0691b3e56010981217f11e515c6cb7f417b6a22643925876b33e6de81"
+    },
+    {
       "path": "dragon-model-terrain-oracle.json",
       "bytes": 17936,
       "sha256": "f371e7b98aebb4f5bb338185c32e804975801349a123c58aba4d78263658183e"

@@ -1,0 +1,610 @@
+{
+  "cases": [
+    {
+      "executor": "energy-model-conditioned-zones",
+      "id": "dragon-model-conditioning.conditioned-zones.empty-selection",
+      "python": {
+        "facts": {
+          "fresh_list_each_access": true,
+          "input_labels": [
+            "profile-only",
+            "custom-only",
+            "neither"
+          ],
+          "input_states": [
+            {
+              "custom_supply_availability_present": false,
+              "label": "profile-only",
+              "profile_availability": {
+                "kind": "token",
+                "value": "ALLON"
+              },
+              "supply_present": false,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": true,
+              "label": "custom-only",
+              "profile_availability": {
+                "kind": "none"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "neither",
+              "profile_availability": {
+                "kind": "none"
+              },
+              "supply_present": false,
+              "zone_is_conditioned": false
+            }
+          ],
+          "result_type": "list",
+          "selected_indices": [],
+          "selected_labels": [],
+          "selected_objects_are_input_objects": true,
+          "source_list_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.conditioned_zones"
+    },
+    {
+      "executor": "energy-model-conditioned-zones",
+      "id": "dragon-model-conditioning.conditioned-zones.falsey-availability-order",
+      "python": {
+        "facts": {
+          "fresh_list_each_access": true,
+          "input_labels": [
+            "supply-zero",
+            "supply-false",
+            "supply-empty"
+          ],
+          "input_states": [
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-zero",
+              "profile_availability": {
+                "decimal": "0",
+                "kind": "int"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-false",
+              "profile_availability": {
+                "kind": "bool",
+                "value": false
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-empty",
+              "profile_availability": {
+                "kind": "string",
+                "value": ""
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            }
+          ],
+          "result_type": "list",
+          "selected_indices": [
+            0,
+            1,
+            2
+          ],
+          "selected_labels": [
+            "supply-zero",
+            "supply-false",
+            "supply-empty"
+          ],
+          "selected_objects_are_input_objects": true,
+          "source_list_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.conditioned_zones"
+    },
+    {
+      "executor": "energy-model-conditioned-zones",
+      "id": "dragon-model-conditioning.conditioned-zones.mixed-order-identity",
+      "python": {
+        "facts": {
+          "fresh_list_each_access": true,
+          "input_labels": [
+            "no-supply-profile",
+            "supply-on",
+            "custom-only",
+            "supply-zero"
+          ],
+          "input_states": [
+            {
+              "custom_supply_availability_present": false,
+              "label": "no-supply-profile",
+              "profile_availability": {
+                "kind": "token",
+                "value": "ALLON"
+              },
+              "supply_present": false,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-on",
+              "profile_availability": {
+                "kind": "token",
+                "value": "ALLON"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            },
+            {
+              "custom_supply_availability_present": true,
+              "label": "custom-only",
+              "profile_availability": {
+                "kind": "none"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-zero",
+              "profile_availability": {
+                "decimal": "0",
+                "kind": "int"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            }
+          ],
+          "result_type": "list",
+          "selected_indices": [
+            1,
+            3
+          ],
+          "selected_labels": [
+            "supply-on",
+            "supply-zero"
+          ],
+          "selected_objects_are_input_objects": true,
+          "source_list_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.conditioned_zones"
+    },
+    {
+      "executor": "energy-model-unconditioned-zones",
+      "id": "dragon-model-conditioning.unconditioned-zones.empty-selection",
+      "python": {
+        "facts": {
+          "fresh_list_each_access": true,
+          "input_labels": [
+            "supply-zero",
+            "supply-false",
+            "supply-empty"
+          ],
+          "input_states": [
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-zero",
+              "profile_availability": {
+                "decimal": "0",
+                "kind": "int"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-false",
+              "profile_availability": {
+                "kind": "bool",
+                "value": false
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-empty",
+              "profile_availability": {
+                "kind": "string",
+                "value": ""
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            }
+          ],
+          "result_type": "list",
+          "selected_indices": [],
+          "selected_labels": [],
+          "selected_objects_are_input_objects": true,
+          "source_list_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.unconditioned_zones"
+    },
+    {
+      "executor": "energy-model-unconditioned-zones",
+      "id": "dragon-model-conditioning.unconditioned-zones.mixed-complement",
+      "python": {
+        "facts": {
+          "fresh_list_each_access": true,
+          "input_labels": [
+            "no-supply-profile",
+            "supply-on",
+            "custom-only",
+            "supply-zero"
+          ],
+          "input_states": [
+            {
+              "custom_supply_availability_present": false,
+              "label": "no-supply-profile",
+              "profile_availability": {
+                "kind": "token",
+                "value": "ALLON"
+              },
+              "supply_present": false,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-on",
+              "profile_availability": {
+                "kind": "token",
+                "value": "ALLON"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            },
+            {
+              "custom_supply_availability_present": true,
+              "label": "custom-only",
+              "profile_availability": {
+                "kind": "none"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-zero",
+              "profile_availability": {
+                "decimal": "0",
+                "kind": "int"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            }
+          ],
+          "result_type": "list",
+          "selected_indices": [
+            0,
+            2
+          ],
+          "selected_labels": [
+            "no-supply-profile",
+            "custom-only"
+          ],
+          "selected_objects_are_input_objects": true,
+          "source_list_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.unconditioned_zones"
+    },
+    {
+      "executor": "energy-model-unconditioned-zones",
+      "id": "dragon-model-conditioning.unconditioned-zones.profile-and-custom-only",
+      "python": {
+        "facts": {
+          "fresh_list_each_access": true,
+          "input_labels": [
+            "profile-only",
+            "custom-only",
+            "neither",
+            "supply-on"
+          ],
+          "input_states": [
+            {
+              "custom_supply_availability_present": false,
+              "label": "profile-only",
+              "profile_availability": {
+                "kind": "token",
+                "value": "ALLON"
+              },
+              "supply_present": false,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": true,
+              "label": "custom-only",
+              "profile_availability": {
+                "kind": "none"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "neither",
+              "profile_availability": {
+                "kind": "none"
+              },
+              "supply_present": false,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-on",
+              "profile_availability": {
+                "kind": "token",
+                "value": "ALLON"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            }
+          ],
+          "result_type": "list",
+          "selected_indices": [
+            0,
+            1,
+            2
+          ],
+          "selected_labels": [
+            "profile-only",
+            "custom-only",
+            "neither"
+          ],
+          "selected_objects_are_input_objects": true,
+          "source_list_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.unconditioned_zones"
+    },
+    {
+      "executor": "zone-is-conditioned",
+      "expected_dotnet": {
+        "adaptation": "model-context-zone-conditioning-predicate",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-conditioning.zone-is-conditioned.falsey-availability",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-zero",
+              "profile_availability": {
+                "decimal": "0",
+                "kind": "int"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-false",
+              "profile_availability": {
+                "kind": "bool",
+                "value": false
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-empty",
+              "profile_availability": {
+                "kind": "string",
+                "value": ""
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Zone.is_conditioned"
+    },
+    {
+      "executor": "zone-is-conditioned",
+      "expected_dotnet": {
+        "adaptation": "model-context-zone-conditioning-predicate",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-conditioning.zone-is-conditioned.no-supply",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "custom_supply_availability_present": false,
+              "label": "no-supply-none",
+              "profile_availability": {
+                "kind": "none"
+              },
+              "supply_present": false,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "no-supply-on",
+              "profile_availability": {
+                "kind": "token",
+                "value": "ALLON"
+              },
+              "supply_present": false,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "no-supply-zero",
+              "profile_availability": {
+                "decimal": "0",
+                "kind": "int"
+              },
+              "supply_present": false,
+              "zone_is_conditioned": false
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Zone.is_conditioned"
+    },
+    {
+      "executor": "zone-is-conditioned",
+      "expected_dotnet": {
+        "adaptation": "model-context-zone-conditioning-predicate",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-conditioning.zone-is-conditioned.profile-availability-required",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-none",
+              "profile_availability": {
+                "kind": "none"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": true,
+              "label": "supply-custom",
+              "profile_availability": {
+                "kind": "none"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": false
+            },
+            {
+              "custom_supply_availability_present": false,
+              "label": "supply-on",
+              "profile_availability": {
+                "kind": "token",
+                "value": "ALLON"
+              },
+              "supply_present": true,
+              "zone_is_conditioned": true
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Zone.is_conditioned"
+    }
+  ],
+  "cases_sha256": "sha256:96d15556dcde29a91582c66bc7c056c374619d8a50c7c17785ef0eeb241bdfca",
+  "consumer_contract": {
+    "adaptations": {
+      "Zone.is_conditioned": "model-context-zone-conditioning-predicate"
+    },
+    "assertion_ids": {
+      "EnergyModel.conditioned_zones": "dragon-model-conditioning-conditioned-zones-90ceddf7",
+      "EnergyModel.unconditioned_zones": "dragon-model-conditioning-unconditioned-zones-24b8c9a9",
+      "Zone.is_conditioned": "dragon-model-conditioning-zone-is-conditioned-6fe80cb1"
+    },
+    "case_count": 9,
+    "case_ids": [
+      "dragon-model-conditioning.conditioned-zones.empty-selection",
+      "dragon-model-conditioning.conditioned-zones.falsey-availability-order",
+      "dragon-model-conditioning.conditioned-zones.mixed-order-identity",
+      "dragon-model-conditioning.unconditioned-zones.empty-selection",
+      "dragon-model-conditioning.unconditioned-zones.mixed-complement",
+      "dragon-model-conditioning.unconditioned-zones.profile-and-custom-only",
+      "dragon-model-conditioning.zone-is-conditioned.falsey-availability",
+      "dragon-model-conditioning.zone-is-conditioned.no-supply",
+      "dragon-model-conditioning.zone-is-conditioned.profile-availability-required"
+    ],
+    "classifications": {
+      "EnergyModel.conditioned_zones": "equivalent",
+      "EnergyModel.unconditioned_zones": "equivalent",
+      "Zone.is_conditioned": "exception"
+    },
+    "identity_encoding": "logical-label-index-and-boolean-only-no-id-or-address",
+    "runtime_names": "pinned-python-only-no-native-type-name-claims",
+    "state_encoding": "logical-presence-tags-no-raw-objects",
+    "target_symbols": [
+      "EnergyModel.conditioned_zones",
+      "EnergyModel.unconditioned_zones",
+      "Zone.is_conditioned"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-model-conditioning.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:ae71f1c62c76cfdf6890e18c83f3dd2709b9fb72627f690db7dc52b7db719348",
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:e8822bd4d00ab05c8d049de4b8fedb8917e0b9cd2daa2c2a3f7503b1985b276e",
+      "symbol": "EnergyModel.conditioned_zones",
+      "symbol_hash": "sha256:90ceddf7de437a59950e7081185fefbf1f56354a49662431452f11ac24bc6f24"
+    },
+    {
+      "body_hash": "sha256:e65c4689f16398a99be21f56cf6c046ee411718b151d637a75abc7e8076249c8",
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:e8822bd4d00ab05c8d049de4b8fedb8917e0b9cd2daa2c2a3f7503b1985b276e",
+      "symbol": "EnergyModel.unconditioned_zones",
+      "symbol_hash": "sha256:24b8c9a917df6c286d13dfb75c3ca04403b74cf0a70e6056cc933c9ed2822e08"
+    },
+    {
+      "body_hash": "sha256:48a103a5bbb0b2a65f357d705eb38137269140e236bf98c2d56d7dd77474d9f3",
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:2ee623b35ab3aacb49e23aff07dd62f5cbcb8efcfa87d52572a74a57b32ebcfb",
+      "symbol": "Zone.is_conditioned",
+      "symbol_hash": "sha256:6fe80cb193a6716b68c1033c5c52bd29f422ffb9efbdac8475a7f4b4ddc46370"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "sources": [
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      }
+    ]
+  }
+}

@@ -143,7 +143,11 @@ internal static class EnergyModelIdfAssembler
             }
         }
 
-        foreach (Schedule schedule in model.HvacAssignments.SelectMany(assignment => assignment.Supply.CustomAvailabilitySchedules))
+        HashSet<EntityId> conditionedZoneIds = new(
+            model.ConditionedZones.Select(zone => zone.Id));
+        foreach (Schedule schedule in model.HvacAssignments
+            .Where(assignment => conditionedZoneIds.Contains(assignment.ZoneId))
+            .SelectMany(assignment => assignment.Supply.CustomAvailabilitySchedules))
         {
             yield return schedule;
         }
@@ -748,12 +752,16 @@ internal static class EnergyModelIdfAssembler
                 continue;
             }
 
+            if (!model.IsConditionedZone(zone))
+            {
+                continue;
+            }
+
             for (int index = 0; index < assignment.Supply.Systems.Count; index++)
             {
                 SupplySystem system = assignment.Supply.Systems[index];
                 string availability = assignment.Supply.Availabilities[index]?.Name
-                    ?? zone.Profile.HvacAvailability?.Name
-                    ?? "ALLON";
+                    ?? zone.Profile.HvacAvailability!.Name;
                 SupplyIdfFragment fragment = system.Generate(context, zone, availability);
                 fragmentsByZone[zone.Id].Add(fragment);
                 if (system.Source is not null)
@@ -804,8 +812,10 @@ internal static class EnergyModelIdfAssembler
         foreach (Zone zone in model.Zones)
         {
             List<SupplyIdfFragment> fragments = fragmentsByZone[zone.Id];
-            ZoneHvacAssignment? assignment = model.HvacAssignments.FirstOrDefault(
-                item => item.ZoneId.Equals(zone.Id));
+            bool isConditioned = model.IsConditionedZone(zone);
+            ZoneHvacAssignment? assignment = isConditioned
+                ? model.HvacAssignments.FirstOrDefault(item => item.ZoneId.Equals(zone.Id))
+                : null;
             foreach (SupplyIdfFragment fragment in fragments)
             {
                 Append(document, fragment.Objects);
@@ -821,12 +831,13 @@ internal static class EnergyModelIdfAssembler
                     assignment?.Supply);
             }
 
-            if (assignment is not null)
+            if (isConditioned && assignment is not null)
             {
                 AppendThermostat(document, context, zone, assignment.Supply, options);
                 AppendSizing(document, context, zone);
             }
-            else if (fragments.Count == 0
+            else if (!isConditioned
+                && fragments.Count == 0
                 && options.AddIdealLoadsForUnassignedZones
                 && !legacyVentilators.ContainsKey(zone.Id))
             {

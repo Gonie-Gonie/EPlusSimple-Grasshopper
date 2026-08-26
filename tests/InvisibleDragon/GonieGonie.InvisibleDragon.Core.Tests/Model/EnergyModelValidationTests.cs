@@ -296,7 +296,16 @@ public sealed class EnergyModelValidationTests
     {
         Schedule heating = Schedule.Constant($"{name} heat", 20, ScheduleType.Temperature);
         Schedule cooling = Schedule.Constant($"{name} cool", 26, ScheduleType.Temperature);
-        var profile = new ZoneProfile(new EntityId($"{id}-PROFILE"), $"{name} profile", heating, cooling);
+        Schedule availability = Schedule.Constant(
+            $"{name} availability",
+            1,
+            ScheduleType.OnOff);
+        var profile = new ZoneProfile(
+            new EntityId($"{id}-PROFILE"),
+            $"{name} profile",
+            heating,
+            cooling,
+            availability);
         Surface floor = TestDomainFactory.Surface(
             surfaceId,
             $"{name} floor",

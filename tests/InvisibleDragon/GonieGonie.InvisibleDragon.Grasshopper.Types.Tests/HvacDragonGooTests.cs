@@ -1,5 +1,4 @@
 using GH_IO.Serialization;
-using Grasshopper.Kernel;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Construction;
 using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
@@ -8,6 +7,7 @@ using GonieGonie.InvisibleDragon.Hvac;
 using GonieGonie.InvisibleDragon.Model;
 using GonieGonie.InvisibleDragon.Profile;
 using GonieGonie.InvisibleDragon.Shape;
+using Grasshopper.Kernel;
 using DragonSurface = GonieGonie.InvisibleDragon.Shape.Surface;
 using ZoneProfile = GonieGonie.InvisibleDragon.Profile.Profile;
 
@@ -441,7 +441,8 @@ public sealed class HvacDragonGooTests
             new EntityId($"profile-{id}"),
             $"Profile {name}",
             Schedule.Constant($"Heating {name}", 20.5, ScheduleType.Temperature),
-            Schedule.Constant($"Cooling {name}", 25.5, ScheduleType.Temperature));
+            Schedule.Constant($"Cooling {name}", 25.5, ScheduleType.Temperature),
+            Schedule.Constant($"HVAC Availability {name}", 1, ScheduleType.OnOff));
         var polygon = new PlanarPolygon(new[]
         {
             new Vertex(xOffset, 0, 0),

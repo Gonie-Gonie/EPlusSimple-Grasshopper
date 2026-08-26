@@ -52,6 +52,15 @@ three-member iteration, representative engineering products, and the 107 W
 default people-activity field. Six members are exact equivalents and the two
 Python enum containers are reviewed native API adaptations.
 
+`python-0.7.0/dragon-model-conditioning-oracle.json` pins nine ordered
+CPython 3.12.7 observations for `EnergyModel.conditioned_zones`,
+`EnergyModel.unconditioned_zones`, and `Zone.is_conditioned` across
+`idragon/dragon/model.py` and `idragon/dragon/shape.py`. It preserves zone
+order, fresh-list and input-object identity semantics, falsey-but-present
+profile availability, and the exact supply-plus-profile predicate without
+serializing raw Python identities. The two model list properties are exact
+equivalents; the zone-local predicate is a reviewed model-context adaptation.
+
 `python-0.7.0/dragon-model-terrain-oracle.json` pins 18 ordered CPython
 3.12.7 observations for the `Terrain` class and five members in
 `idragon/dragon/model.py`. It preserves exact member order, title-case semantic
