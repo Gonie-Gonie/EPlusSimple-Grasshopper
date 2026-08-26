@@ -52,6 +52,24 @@ three-member iteration, representative engineering products, and the 107 W
 default people-activity field. Six members are exact equivalents and the two
 Python enum containers are reviewed native API adaptations.
 
+`python-0.7.0/dragon-construction-to-idf-object-oracle.json` pins two common-
+valid-state observations each for `AirBoundary.to_idf_object`,
+`Construction.to_idf_object`, `Glazing.to_idf_object`, `Layer.to_idf_object`,
+and `NoMassConstruction.to_idf_object`. It records complete ordered fields and
+fresh returned IDF objects plus fresh lists where the upstream API returns
+lists. The Construction cases also
+pin the surface argument and its `<construction>:for:<surface>` name linkage.
+The distinct reviewed `model-context-air-boundary-idf-emission`,
+`model-context-construction-idf-emission`,
+`model-context-glazing-idf-emission`, `model-context-layer-idf-emission`, and
+`model-context-no-mass-construction-idf-emission` exceptions restrict the
+evidence to the corresponding private `EnergyModelIdfAssembler` paths reached
+through `EnergyModel.ToIdfDocument`. Class constructors and properties,
+equality/hash behavior, invalid-domain and error semantics, isolated
+`IdfObject` policy, parent Surface/Zone/model assembly, and native
+deduplication, conflict, compaction, and global ordering remain explicit
+unresolved boundaries.
+
 `python-0.7.0/dragon-hvac-photovoltaic-to-idf-object-oracle.json` pins three
 ordered CPython 3.12.7 observations for `PhotoVoltaicPanel.to_idf_object` on
 the common valid constructor domain. It records the exact six-object family
