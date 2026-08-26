@@ -73,17 +73,19 @@ public sealed class SourceSystem
         }
 
         Type = type;
-        FuelType = fuelType;
+        FuelType = DomainSupport.DefinedEnumOrNull(fuelType, nameof(fuelType));
+        CompressorType = DomainSupport.DefinedEnumOrNull(compressorType, nameof(compressorType));
+        CoolingTowerType = DomainSupport.DefinedEnumOrNull(coolingTowerType, nameof(coolingTowerType));
+        CoolingTowerControl = DomainSupport.DefinedEnumOrNull(
+            coolingTowerControl,
+            nameof(coolingTowerControl));
         HeatingCop = PositiveOrNull(heatingCop, nameof(heatingCop));
         CoolingCop = PositiveOrNull(coolingCop, nameof(coolingCop));
         HeatingCapacity = PositiveOrNull(heatingCapacity, nameof(heatingCapacity));
         CoolingCapacity = PositiveOrNull(coolingCapacity, nameof(coolingCapacity));
         Efficiency = FractionOrNull(efficiency, nameof(efficiency));
         HotWaterSupply = hotWaterSupply;
-        CompressorType = compressorType;
-        CoolingTowerType = coolingTowerType;
         CoolingTowerCapacity = PositiveOrNull(coolingTowerCapacity, nameof(coolingTowerCapacity));
-        CoolingTowerControl = coolingTowerControl;
         BoilerEfficiency = FractionOrNull(boilerEfficiency, nameof(boilerEfficiency));
         ValidateRequiredValues();
         Id = id ?? DeterministicDomainId.Create(

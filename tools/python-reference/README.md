@@ -58,7 +58,12 @@ public symbols in `epsimple/core/profile.py` through 39 ordered cases. It pins
 the exact 14-key dictionary contract, standard and extended database lookup,
 invariant CSV parsing, deterministic IDs, and the complete seven-schedule
 conversion for all 24 embedded profiles, including vacation and holiday day
-topology. `-Mode Verify`
+topology. The utils core oracle binds the exact two historical `utils.py`
+sources and their four public-symbol receipts through 12 ordered cases. It
+records the legacy GRJSON template's exact order, defaults, deep-copy
+isolation, and shared-global mutation behavior together with the Python
+type, range, and enum decorator surfaces, while declaring the four reviewed
+immutable or strongly typed native adaptations explicitly. `-Mode Verify`
 compares all generated files byte-for-byte with the reviewed baseline under
 `fixtures/reference/python-0.7.0`. Every reference run also executes the
 fail-closed generator tests under `tests/PythonReference` before producing an

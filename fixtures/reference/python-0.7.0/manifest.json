@@ -111,6 +111,11 @@
       "path": "usage-profile-schedule-oracle.json",
       "bytes": 311381,
       "sha256": "ed5e5326a7a20d0191c8a2bbac5b6fcb277c19df8cdb183d8b9de3d56b1d2f29"
+    },
+    {
+      "path": "utils-core-oracle.json",
+      "bytes": 16070,
+      "sha256": "b661c4b906552383f4c27d68e69564b6b81a61f7555e7cc849b6c25318ac746c"
     }
   ]
 }

@@ -1,0 +1,540 @@
+{
+  "cases": [
+    {
+      "executor": "grjson-format",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-grm-template",
+        "outcome": "returned"
+      },
+      "id": "grjson-format.copy-isolation",
+      "python": {
+        "facts": {
+          "building_is_distinct": true,
+          "copy_mutation_isolated": true,
+          "floors_is_distinct": true,
+          "root_is_distinct": true,
+          "vintage_is_distinct": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "GRJSON_FORMAT"
+    },
+    {
+      "executor": "grjson-format",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-grm-template",
+        "outcome": "returned"
+      },
+      "id": "grjson-format.exact-defaults",
+      "python": {
+        "facts": {
+          "building_key_order": [
+            "name",
+            "north_axis",
+            "address",
+            "vintage",
+            "num_aboveground_floors",
+            "num_underground_floors",
+            "floors",
+            "supply_systems",
+            "source_systems",
+            "ventilation_systems",
+            "photovoltaic_systems"
+          ],
+          "root_key_order": [
+            "building",
+            "materials",
+            "surface_constructions",
+            "fenestration_constructions"
+          ],
+          "snapshot": {
+            "building": {
+              "address": "",
+              "floors": [],
+              "name": "",
+              "north_axis": 0,
+              "num_aboveground_floors": 0,
+              "num_underground_floors": 0,
+              "photovoltaic_systems": [],
+              "source_systems": [],
+              "supply_systems": [],
+              "ventilation_systems": [],
+              "vintage": [
+                1900,
+                1,
+                1
+              ]
+            },
+            "fenestration_constructions": [],
+            "materials": [],
+            "surface_constructions": []
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "GRJSON_FORMAT"
+    },
+    {
+      "executor": "grjson-format",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-grm-template",
+        "outcome": "returned"
+      },
+      "id": "grjson-format.shared-global-mutation",
+      "python": {
+        "facts": {
+          "alias_is_same": true,
+          "mutation_visible": true,
+          "nested_alias_is_same": true,
+          "restored_exactly": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "GRJSON_FORMAT"
+    },
+    {
+      "executor": "validate-enum",
+      "expected_dotnet": {
+        "adaptation": "strongly-typed-native-enum-validation",
+        "outcome": "returned"
+      },
+      "id": "validate-enum.accepted-members-and-raw-values",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "StringMode",
+                "value": "alpha"
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "str",
+                "value": "alpha"
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "StringMode",
+                "value": "beta"
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "str",
+                "value": "beta"
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "validate_enum"
+    },
+    {
+      "executor": "validate-enum",
+      "expected_dotnet": {
+        "adaptation": "strongly-typed-native-enum-validation",
+        "outcome": "returned"
+      },
+      "id": "validate-enum.none-and-wraps",
+      "python": {
+        "facts": {
+          "metadata": {
+            "doc": "Optional enum probe.",
+            "has_wrapped": true,
+            "name": "optional"
+          },
+          "observations": [
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "NoneType",
+                "value": null
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "StringMode",
+                "value": "alpha"
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "validate_enum"
+    },
+    {
+      "executor": "validate-enum",
+      "expected_dotnet": {
+        "adaptation": "strongly-typed-native-enum-validation",
+        "outcome": "returned"
+      },
+      "id": "validate-enum.rejection-surface",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "message": "Invalid value 'unknown' for mode. Allowed values: alpha,beta",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "sequence item 2: expected str instance, NoneType found",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "sequence item 0: expected str instance, NumberMode found",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "validate_enum"
+    },
+    {
+      "executor": "validate-range",
+      "expected_dotnet": {
+        "adaptation": "finite-native-range-validation",
+        "outcome": "returned"
+      },
+      "id": "validate-range.inclusive-boundaries",
+      "python": {
+        "facts": {
+          "metadata": {
+            "doc": "Inclusive range probe.",
+            "has_wrapped": true,
+            "name": "fraction"
+          },
+          "observations": [
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "int",
+                "value": 0
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "int",
+                "value": 1
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "float",
+                "value": {
+                  "hex_without_prefix": "1.0000000000000p-1",
+                  "kind": "binary64"
+                }
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "validate_range"
+    },
+    {
+      "executor": "validate-range",
+      "expected_dotnet": {
+        "adaptation": "finite-native-range-validation",
+        "outcome": "returned"
+      },
+      "id": "validate-range.none-and-nonfinite",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "NoneType",
+                "value": null
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "float",
+                "value": {
+                  "hex_without_prefix": "nan",
+                  "kind": "binary64"
+                }
+              }
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "message": "Value 'inf' for fraction is below the maxmimum 1.",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "message": "Value '-inf' for fraction is below the minimum 0.",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "validate_range"
+    },
+    {
+      "executor": "validate-range",
+      "expected_dotnet": {
+        "adaptation": "finite-native-range-validation",
+        "outcome": "returned"
+      },
+      "id": "validate-range.rejection-surface",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "message": "Value '-1' for fraction is below the minimum 0.",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "message": "Value '2' for fraction is below the maxmimum 1.",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "'<' not supported between instances of 'str' and 'int'",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "validate_range"
+    },
+    {
+      "executor": "validate-type",
+      "expected_dotnet": {
+        "adaptation": "strongly-typed-native-type-validation",
+        "outcome": "returned"
+      },
+      "id": "validate-type.allow-none-and-wraps",
+      "python": {
+        "facts": {
+          "metadata": {
+            "doc": "Optional type probe.",
+            "has_wrapped": true,
+            "name": "optional"
+          },
+          "observations": [
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "NoneType",
+                "value": null
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "int",
+                "value": 4
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "validate_type"
+    },
+    {
+      "executor": "validate-type",
+      "expected_dotnet": {
+        "adaptation": "strongly-typed-native-type-validation",
+        "outcome": "returned"
+      },
+      "id": "validate-type.rejection-surface",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "Invalid type for union: expected (<class 'int'>, <class 'str'>), got <class 'float'>",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "Invalid type for union: expected (<class 'int'>, <class 'str'>), got <class 'NoneType'>",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "type",
+              "exception_type": "TypeError",
+              "message": "Invalid type for union: expected (<class 'int'>, <class 'str'>), got <class 'list'>",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "validate_type"
+    },
+    {
+      "executor": "validate-type",
+      "expected_dotnet": {
+        "adaptation": "strongly-typed-native-type-validation",
+        "outcome": "returned"
+      },
+      "id": "validate-type.union-subclass-and-bool",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "int",
+                "value": 7
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "str",
+                "value": "seven"
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "bool",
+                "value": true
+              }
+            },
+            {
+              "outcome": "returned",
+              "result": {
+                "python_type": "IntChild",
+                "value": 8
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "validate_type"
+    }
+  ],
+  "cases_sha256": "sha256:0941c448edc0ca61009841c41aa479ac13fd24e5d2c66ec5b1684157d57473b9",
+  "consumer_contract": {
+    "adaptations": {
+      "GRJSON_FORMAT": "immutable-validated-grm-template",
+      "validate_enum": "strongly-typed-native-enum-validation",
+      "validate_range": "finite-native-range-validation",
+      "validate_type": "strongly-typed-native-type-validation"
+    },
+    "case_count": 12,
+    "case_ids": [
+      "grjson-format.copy-isolation",
+      "grjson-format.exact-defaults",
+      "grjson-format.shared-global-mutation",
+      "validate-enum.accepted-members-and-raw-values",
+      "validate-enum.none-and-wraps",
+      "validate-enum.rejection-surface",
+      "validate-range.inclusive-boundaries",
+      "validate-range.none-and-nonfinite",
+      "validate-range.rejection-surface",
+      "validate-type.allow-none-and-wraps",
+      "validate-type.rejection-surface",
+      "validate-type.union-subclass-and-bool"
+    ],
+    "classifications": {
+      "GRJSON_FORMAT": "exception",
+      "validate_enum": "exception",
+      "validate_range": "exception",
+      "validate_type": "exception"
+    },
+    "float_encoding": "python-binary64-hex-without-0x-prefix",
+    "runtime_names": "policy-token-no-raw-address",
+    "target_symbols": [
+      "GRJSON_FORMAT",
+      "validate_enum",
+      "validate_range",
+      "validate_type"
+    ]
+  },
+  "runtime": {
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.simpledragon.utils-core-oracle.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:bfd54ded3c829caf3ffe7c5b15a3692067451f5f758d2bc89df825fb39c4409e",
+      "kind": "constant",
+      "path": "src/epsimple/utils.py",
+      "signature_hash": "sha256:d85c1609b8dd75fa0730679f37f9ee903e8f5cb3f7aadb6d2f81b72cc03bfe8e",
+      "symbol": "GRJSON_FORMAT",
+      "symbol_hash": "sha256:6c3ef8ba838797c6783d1ed35b52dcd6b4eb364baa529820c6df9ed8dfb2e75e"
+    },
+    {
+      "body_hash": "sha256:38228c97c0219e1c852349edbbfec7cdc92cf88421439e0bf3f0e99c0c8f3558",
+      "kind": "function",
+      "path": "src/idragon/utils.py",
+      "signature_hash": "sha256:a1cad1caa130af3a903461789f644227240d4623fe1f248ed8865270b8b9e1cc",
+      "symbol": "validate_enum",
+      "symbol_hash": "sha256:8b3b34b63f7091d045c421b0309c3549f935ee47aa704faf4931be786991402c"
+    },
+    {
+      "body_hash": "sha256:c92ba78111abd3b3bbd34d23a8f932ef366f93d1d673c455497e4d663189bf7e",
+      "kind": "function",
+      "path": "src/idragon/utils.py",
+      "signature_hash": "sha256:5326abdf0b673e41a11c76f5f481e600209f97011936c814d4e4a518b38c8f17",
+      "symbol": "validate_range",
+      "symbol_hash": "sha256:a5710a725c7060dead58c254874c24d8c82b0e25d08cc88abff1e68275fcb0b1"
+    },
+    {
+      "body_hash": "sha256:4e168989f6958d9a6aa63f5af53727b21bcbe2a154d9e44132f9944cfd99a7bf",
+      "kind": "function",
+      "path": "src/idragon/utils.py",
+      "signature_hash": "sha256:aad965d407adc54c3b5324be5dd2c3d2d6ea1786fe01f5c0b32b698b353019fb",
+      "symbol": "validate_type",
+      "symbol_hash": "sha256:d2d6da05e97ccf6815cd924a3c8e4502fcb9055aa771281f95f609cd11c6eb26"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "sources": [
+      {
+        "path": "src/epsimple/utils.py",
+        "source_sha256": "sha256:4b19874951feb696f0a5f1b42d85a11c405e5f83958828997af9a977a6aa9cf8"
+      },
+      {
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ]
+  }
+}

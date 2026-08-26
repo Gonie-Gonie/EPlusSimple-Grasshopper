@@ -37,6 +37,7 @@ public sealed class Fenestration
         }
 
         Type = type;
+        BlindType? validatedBlind = DomainSupport.DefinedEnumOrNull(blind, nameof(blind));
         Area = DomainSupport.FinitePositive(area, nameof(area));
         ConstructionId = DomainSupport.RequiredText(constructionId, nameof(constructionId));
         Construction = construction;
@@ -54,12 +55,12 @@ public sealed class Fenestration
             throw new ArgumentException("A window or glass door requires a transparent construction.", nameof(construction));
         }
 
-        if (blind.HasValue && type == FenestrationType.Door)
+        if (validatedBlind.HasValue && type == FenestrationType.Door)
         {
             throw new ArgumentException("An opaque door cannot have a window blind.", nameof(blind));
         }
 
-        Blind = blind;
+        Blind = validatedBlind;
         Id = id ?? DeterministicDomainId.Create(
             "FNST",
             Name,

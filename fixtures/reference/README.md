@@ -28,3 +28,10 @@ inside the native port scope. It covers all 24 embedded usage profiles, their
 ordered dictionaries and seven generated schedules, deterministic identity,
 database lookup, and invariant CSV parsing while recording reviewed native
 adaptations explicitly.
+
+`python-0.7.0/utils-core-oracle.json` pins 12 ordered CPython 3.12.7
+observations for `GRJSON_FORMAT`, `validate_type`, `validate_range`, and
+`validate_enum` across the exact `epsimple` and `idragon` `utils.py` sources.
+It preserves legacy template order and mutability facts plus decorator
+acceptance and rejection surfaces, and records the four reviewed immutable,
+finite, or strongly typed native adaptations explicitly.

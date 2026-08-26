@@ -35,6 +35,20 @@ internal static class DomainSupport
         return trimmed;
     }
 
+    public static TEnum? DefinedEnumOrNull<TEnum>(TEnum? value, string parameterName)
+        where TEnum : struct, Enum
+    {
+        if (value.HasValue && !Enum.IsDefined(typeof(TEnum), value.Value))
+        {
+            throw new ArgumentOutOfRangeException(
+                parameterName,
+                value.Value,
+                "A defined " + typeof(TEnum).Name + " value is required.");
+        }
+
+        return value;
+    }
+
     public static double FinitePositive(double value, string parameterName)
     {
         if (double.IsNaN(value) || double.IsInfinity(value) || value <= 0d)

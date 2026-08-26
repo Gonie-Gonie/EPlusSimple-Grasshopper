@@ -1338,3 +1338,59 @@
     api_contract: arbitrary filesystem, encoding, and pandas DataFrame behavior are outside the native parser; the product consumes validated embedded rows and typed CsvDocument or UsageProfile results
     compatibility_evidence: exact stripped headers and row values, BOM and quoted-field handling, invariant numeric parsing, malformed-input categories, and src/SimpleDragon/GonieGonie.SimpleDragon.Core/Internal/InvariantCsv.cs remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
+
+- id: immutable-validated-grm-template
+  upstream:
+    path: src/epsimple/utils.py
+    symbol: GRJSON_FORMAT
+    symbol_hash: sha256:6c3ef8ba838797c6783d1ed35b52dcd6b4eb364baa529820c6df9ed8dfb2e75e
+  difference:
+    upstream: exposes one process-global mutable dictionary as an Excel-import seed, relies on callers to deepcopy it before mutation, includes legacy floor-count fields and flat system arrays, and omits the later required is_multifamily_housing field
+    dotnet: CreateLegacyInputTemplate returns the exact ordered legacy seed as a fresh deeply read-only OrderedMap graph while GreenRetrofitModel and GrmWriter separately require validated typed state and emit the canonical native GRM shape
+  effect:
+    engineering_result: the legacy importer seed retains its exact four root keys, eleven building keys, scalar defaults, vintage tuple values, empty collection topology, and compact JSON bytes without permitting shared global mutation to leak between operations
+    api_contract: callers explicitly request a new legacy input template and construct a valid typed GreenRetrofitModel before canonical serialization instead of mutating a module-level dictionary or treating the incomplete seed as a runnable model
+    compatibility_evidence: exact key order and values, 304-byte compact JSON hash, repeated-call isolation, nested mutation rejection, legacy-versus-canonical topology, and GrmFormat.CreateLegacyInputTemplate in src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmFormat.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: strongly-typed-native-type-validation
+  upstream:
+    path: src/idragon/utils.py
+    symbol: validate_type
+    symbol_hash: sha256:d2d6da05e97ccf6815cd924a3c8e4502fcb9055aa771281f95f609cd11c6eb26
+  difference:
+    upstream: is a runtime setter decorator based on isinstance, optionally accepts None, treats bool as an int, reports Python type tuples in TypeError messages, and preserves callable metadata through functools.wraps
+    dotnet: expresses required and nullable values in CLR signatures, rejects incompatible values before or during typed construction, and supplements compile-time contracts with DomainSupport null guards instead of exposing a decorator or Python callable metadata
+  effect:
+    engineering_result: supported typed values and explicit nullable fields retain their values while incompatible runtime objects cannot enter a native domain model and Python's bool-as-number subtype behavior is intentionally not reproduced
+    api_contract: C# callers satisfy declared parameter types and nullable annotations and receive native argument failures at validation boundaries rather than applying a reusable setter decorator or inspecting __wrapped__ metadata
+    compatibility_evidence: upstream numeric-subtype and allow-none behavior, exact rejection and wraps facts, native required and nullable contracts, object-reference preservation, wrong-type exclusion, and DomainSupport.NotNull remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: finite-native-range-validation
+  upstream:
+    path: src/idragon/utils.py
+    symbol: validate_range
+    symbol_hash: sha256:a5710a725c7060dead58c254874c24d8c82b0e25d08cc88abff1e68275fcb0b1
+  difference:
+    upstream: is an inclusive comparison decorator that always bypasses None, permits NaN because both comparisons are false, permits unbounded positive infinity, and preserves a misspelled maximum-error message
+    dotnet: validates ranges at typed constructor boundaries with finite positive, finite nonnegative, fraction, hour, angle, and other domain-specific guards, allowing nullable values only where declared and rejecting every NaN or infinity
+  effect:
+    engineering_result: supported finite values preserve inclusive domain boundaries and optional absence while non-finite values are rejected before they can contaminate geometry, HVAC, profile, serialization, or EnergyPlus calculations
+    api_contract: callers use each domain constructor's explicit range contract and native ArgumentOutOfRangeException diagnostics instead of applying a generic Python decorator or relying on its None and non-finite comparison loopholes
+    compatibility_evidence: exact upstream inclusive boundaries, below and above failures, None and non-finite observations, native finite boundary acceptance, non-finite rejection, and the finite guards in SimpleDragon Internal/DomainSupport.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: strongly-typed-native-enum-validation
+  upstream:
+    path: src/idragon/utils.py
+    symbol: validate_enum
+    symbol_hash: sha256:8b3b34b63f7091d045c421b0309c3549f935ee47aa704faf4931be786991402c
+  difference:
+    upstream: expands Enum classes into a mutable allowed-value list, accepts equal raw strings for string-valued Enum members plus arbitrary literals and None, and can raise an accidental TypeError while joining an invalid optional-key error message
+    dotnet: uses closed CLR enums, explicit GRM vocabulary parsers, nullable enum parameters where absence is valid, Enum.IsDefined-backed construction guards, and exhaustive writers that reject undefined numeric enum values
+  effect:
+    engineering_result: every supported enum member, GRM token, and nullable absence maps deterministically while undefined numeric values and unknown tokens fail explicitly instead of being silently coerced to another HVAC or blind behavior
+    api_contract: callers pass a defined typed enum or use an explicit parser and catch native argument exceptions rather than passing equal strings or arbitrary decorator literals and depending on Python join-error behavior
+    compatibility_evidence: Enum-member and raw-string acceptance, literal and None handling, the optional invalid-value TypeError, native parse and nullable behavior, undefined-value rejection in constructors and writers, and DomainSupport.DefinedEnumOrNull plus GrmVocabulary remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation

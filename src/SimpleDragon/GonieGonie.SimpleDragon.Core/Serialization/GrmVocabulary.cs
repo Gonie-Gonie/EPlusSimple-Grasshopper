@@ -178,7 +178,12 @@ internal static class GrmVocabulary
 
     public static string ToGrm(BlindType value)
     {
-        return value == BlindType.Shade ? "shade" : "venetian";
+        return value switch
+        {
+            BlindType.Shade => "shade",
+            BlindType.Venetian => "venetian",
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown blind type."),
+        };
     }
 
     public static BlindType ParseBlind(string value)
@@ -215,7 +220,12 @@ internal static class GrmVocabulary
 
     public static string ToGrm(CoolingTowerType value)
     {
-        return value == CoolingTowerType.Open ? "open" : "closed";
+        return value switch
+        {
+            CoolingTowerType.Closed => "closed",
+            CoolingTowerType.Open => "open",
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown cooling-tower type."),
+        };
     }
 
     public static CoolingTowerType ParseCoolingTower(string value)
@@ -230,7 +240,12 @@ internal static class GrmVocabulary
 
     public static string ToGrm(CoolingTowerControl value)
     {
-        return value == CoolingTowerControl.SingleSpeed ? "single-speed" : "two-speed";
+        return value switch
+        {
+            CoolingTowerControl.SingleSpeed => "single-speed",
+            CoolingTowerControl.TwoSpeed => "two-speed",
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown cooling-tower control."),
+        };
     }
 
     public static CoolingTowerControl ParseCoolingTowerControl(string value)
