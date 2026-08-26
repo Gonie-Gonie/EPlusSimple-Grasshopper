@@ -2374,3 +2374,395 @@
     api_contract: callers construct an immutable Window from typed validated geometry; arbitrary duck-typed references and scalar-area mutation are unavailable
     compatibility_evidence: exactly A06 and A07, representative shading order and references plus observed native invalid-input exception boundaries remain required; arbitrary dynamic inputs, all invalid geometry, properties, equality, hashing and IDF emission remain unresolved
   approval: accepted-native-api-adaptation
+
+- id: permissive-python-surface-polygon-model-cb620c55
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface
+    symbol_hash: sha256:cb620c55ad36aaa035597b8c9975721d7fd397a000213beae556880050f75dba
+  difference:
+    upstream: the Surface class constructs mutable state from permissive vertices and the exact S11 probes produce usable collinear, duplicate-closing and self-intersecting Surface instances
+    dotnet: Surface construction requires an immutable validated PlanarPolygon and rejects the three exact S11 invalid families before a Surface exists
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Surface through the typed Surface and validated PlanarPolygon constructors for S08, S11. S08 constructs the representative validated surface, while S11 returns diagnostics and repeatable ArgumentException for the collinear triangle, duplicate-closing square and self-intersecting bow-tie before any native Surface construction. Adaptation family permissive-python-surface-polygon-model classifies the bounded native API or algorithm difference. Python mutable class state and accepted invalid-polygon instances are not native successes; Surface.__init__, openings, boundary, IDF emission and invalid families beyond the three named probes remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers construct typed Surface state from a validated PlanarPolygon; permissive invalid Surface instances are unavailable
+    compatibility_evidence: only the target-specific facts explicitly named above for S08, S11, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Surface; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: first-triple-oriented-python-surface-area-f254ab66
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface.area
+    symbol_hash: sha256:f254ab666c61170d9ea16598a4182e7f49526eb4e0eaff0af293499695cbd9fa
+  difference:
+    upstream: Surface.area uses its current first local turn, reports the exact negative S10 area and remains readable on each accepted S11 invalid polygon
+    dotnet: Surface.GrossArea uses validated full-loop PlanarPolygon.Area, is positive for S10 and has no native result for rejected S11 polygons
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Surface.area through Surface.GrossArea for S08, S09, S10, S11, S12. S08 GrossArea repeats exactly, S09 forward and reversed winding areas are equal, S10 native full-loop GrossArea is positive where Python reports a negative first-turn area, S11 has no area-bearing native Surface because each exact invalid polygon is rejected, and S12 preserves the original area while separately observing the replacement surface. Adaptation family first-triple-oriented-python-surface-area classifies the bounded native API or algorithm difference. Python signed first-turn area is not preserved; mutable alias behavior, nonfinite coordinates, other invalid polygons and every non-area Surface property remain outside this target claim. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers read positive full-loop GrossArea from validated geometry rather than a signed first-turn result
+    compatibility_evidence: only the target-specific facts explicitly named above for S08, S09, S10, S11, S12, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Surface.area; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: vertex-mean-python-surface-center-f0c05c2b
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface.center
+    symbol_hash: sha256:f0c05c2bc1bd07b18d9140cafa7f970129215c9aa311f80a0073445b92526273
+  difference:
+    upstream: Surface.center is the arithmetic mean of current aliased vertices and changes with Python vertex mutation
+    dotnet: Surface.Center uses validated PlanarPolygon.Centroid and remains isolated from caller-array replacement
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Surface.center through Surface.Center for S08, S09, S12. S08 Center repeats exactly, S09 forward and reversed centers are equal, and S12 keeps the original center unchanged after source-array replacement while separately observing the replacement surface center. Adaptation family vertex-mean-python-surface-center classifies the bounded native API or algorithm difference. Only the named valid-polygon Center observations are claimed; Python vertex-mean behavior after alias mutation or on invalid polygons and every non-center property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers read the validated polygon centroid rather than a mutable arithmetic vertex mean
+    compatibility_evidence: only the target-specific facts explicitly named above for S08, S09, S12, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Surface.center; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: z-span-python-surface-height-d479fe2f
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface.height
+    symbol_hash: sha256:d479fe2f2ded1a09be3f2686e3ee6306b96beccb8cc20f04def11be7c0712f55
+  difference:
+    upstream: Surface.height is current maximum z minus minimum z without a validated finite-polygon boundary
+    dotnet: Surface.Height reads validated finite immutable polygon z span
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Surface.height through Surface.Height for S08, S09, S12. S08 Height repeats exactly, S09 forward and reversed heights are equal, and S12 keeps the original height unchanged after source-array replacement while separately observing the replacement surface height. Adaptation family z-span-python-surface-height classifies the bounded native API or algorithm difference. Only the named valid finite-polygon Height observations are claimed; mutable or invalid Python geometry and every non-height property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers read height from validated finite immutable polygon geometry
+    compatibility_evidence: only the target-specific facts explicitly named above for S08, S09, S12, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Surface.height; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: first-triple-python-surface-normal-3f089c8c
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface.normal
+    symbol_hash: sha256:3f089c8c429d26cd3ee65ff085dea58b961a0ec0c4b9b757172f65bf42a8b7e7
+  difference:
+    upstream: Surface.normal uses only the first three current vertices, opposes the S10 full-loop direction and remains readable on accepted S11 invalid polygons
+    dotnet: Surface.Normal uses the validated full-loop normal, follows S10 full-loop direction and has no result for rejected S11 polygons
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Surface.normal through Surface.Normal for S08, S09, S10, S11, S12. S08 Normal repeats exactly, S09 reversed winding produces the opposite normal, S10 native Normal follows the normalized full-loop cross sum where Python uses an opposed first-turn normal, S11 rejects each exact invalid polygon before a native normal exists, and S12 preserves the original normal while separately observing the replacement. Adaptation family first-triple-python-surface-normal classifies the bounded native API or algorithm difference. Only the named full-loop normal observations and exact invalid rejections are claimed; other degeneracy, mutable alias behavior and every non-normal property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers read a validated full-loop winding normal rather than a mutable first-three normal
+    compatibility_evidence: only the target-specific facts explicitly named above for S08, S09, S10, S11, S12, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Surface.normal; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: mutable-string-coerced-python-surface-type-ae4bdcc7
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface.type
+    symbol_hash: sha256:ae4bdcc76210c35b23978d30c1d57491785d9fa9a2a66e80cc123e7c633a2db5
+  difference:
+    upstream: Surface.type is mutable and its setter converts lowercase raw strings through SurfaceType
+    dotnet: Surface.Type is get-only; typed reconstruction changes the member and undefined enum value 99 is rejected
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Surface.type through the get-only Surface.Type property and typed reconstruction for S08, S12. S08 observes Wall; S12 preserves original Wall state, reconstructs a distinct Floor surface and rejects enum value 99. No native property setter or Python lowercase-string mutation counterpart is claimed. Adaptation family mutable-string-coerced-python-surface-type classifies the bounded native API or algorithm difference. Only the named enum state, typed reconstruction and undefined-value rejection are claimed; Python string coercion, in-place setters and every non-type property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers use a defined SurfaceType during construction or reconstruction and cannot mutate Type in place
+    compatibility_evidence: only the target-specific facts explicitly named above for S08, S12, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Surface.type; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: aliased-mutable-python-surface-vertices-7ed5c6b3
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface.vertex
+    symbol_hash: sha256:7ed5c6b3be62b893275d7dedccacd8cc2a85e7d0862801001a67650330ac2be8
+  difference:
+    upstream: Surface.vertex tupleizes a container but retains mutable caller Vertex references, permits reassignment and exposes alias changes and exact invalid polygons
+    dotnet: PlanarPolygon.Vertices is read-only value-copied state, WithPolygon creates a distinct surface and exact S11 invalid inputs are rejected
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Surface.vertex through Surface.Polygon and read-only PlanarPolygon.Vertices for S08, S11, S12. S08 preserves exact ordered vertex scalars after source-array element replacement, S11 rejects the three exact invalid polygons, and S12 preserves the original vertices while producing a distinct validated replacement. The native collection is read-only and value-copied. Adaptation family aliased-mutable-python-surface-vertices classifies the bounded native API or algorithm difference. Python vertex-object alias propagation, tuple reassignment and post-construction mutation are not preserved; per-object identity, other collection operations and every non-vertex property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers provide Vertex values to PlanarPolygon and receive a stable read-only sequence without alias mutation
+    compatibility_evidence: only the target-specific facts explicitly named above for S08, S11, S12, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Surface.vertex; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: lowercase-python-surface-type-enum-61a37f9d
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: SurfaceType
+    symbol_hash: sha256:61a37f9dc7fea0761d67c6e8efbd3ef6ef7e6e75788e8bcec26784d2a9bbf1a3
+  difference:
+    upstream: SurfaceType is a lowercase Python str enum with raw-string equality and lowercase construction; title-case and integer construction raise ValueError
+    dotnet: SurfaceType is a PascalCase .NET enum with the exact T13 member topology and bounded T14 parse and cast differences
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify SurfaceType through the SurfaceType enum for T13, T14. T13 pins definition order Wall, Ceiling, Floor, underlying values 0, 1, 2 and repeat enumeration; T14 pins only the class-level case-sensitive parse and defined integer-cast observations. Adaptation family lowercase-python-surface-type-enum classifies the bounded native API or algorithm difference. Python str-subclass identity, raw-string equality, lowercase construction and exact Python error text or timing are not equated; engineering serialization is separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers use typed enum members; raw-string behavior, display and engineering serialization are separate concerns
+    compatibility_evidence: only the target-specific facts explicitly named above for T13, T14, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for SurfaceType; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: lowercase-python-surface-type-enum-f40e4929
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: SurfaceType.__str__
+    symbol_hash: sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e
+  difference:
+    upstream: T13 SurfaceType.__str__ returns lowercase wall, ceiling and floor strings; T14 conversion and error observations are context-only for this target
+    dotnet: T13 System.Enum.ToString returns Wall, Ceiling and Floor; no T14 parse or cast behavior is attributed to this display target
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify SurfaceType.__str__ through System.Enum.ToString on SurfaceType for T13 active, with T14 context-only. T13 pins native ToString results Wall, Ceiling and Floor against Python lowercase strings. T14 parsing and integer-cast observations co-recorded in the receipt are context-only and are not evidence for __str__. Adaptation family lowercase-python-surface-type-enum classifies the bounded native API or algorithm difference. Only T13 display strings are active evidence; parsing, casting, raw-string equality, construction, engineering serialization and error topology remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers receive PascalCase enum display names; lowercase Python display, parsing and engineering serialization are not conflated
+    compatibility_evidence: only the target-specific facts explicitly named above for T13 display-string facts; T14 observations context-only, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for SurfaceType.__str__; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-mutable-python-vertex-state-78650289
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex
+    symbol_hash: sha256:786502893a6774ddb9c263e2ce3de1037c9f88f8dde30c32f04ad6e1418f0b64
+  difference:
+    upstream: V01 Vertex exposes mutable coordinates and accepts bool, nonfinite float and arbitrary-precision huge integers
+    dotnet: Vertex is a readonly finite-double value type and V01 rejects the exact NaN-X, positive-infinity-Y and negative-infinity-Z inputs
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex through the readonly Vertex value type for V01. V01 pins finite Vertex(1,2,3), repeat value equality, readonly value-type state, absent X, Y and Z setters, and the exact NaN-X, positive-infinity-Y and negative-infinity-Z constructor rejections. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable coordinates, bool runtime values, nonfinite values and arbitrary-precision huge integers are not normalized or claimed as native successes; operator and metric behavior is separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers provide finite doubles and receive an immutable value rather than mutable Python numeric-domain state
+    compatibility_evidence: only the target-specific facts explicitly named above for V01, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: untyped-python-vertex-algebra-a5c7ecea
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.__add__
+    symbol_hash: sha256:a5c7ecea4df4c83044d8b673c72a7352e3121627c2aafe1f6e99a3ffba35977e
+  difference:
+    upstream: V03 adds another point dynamically and returns Vertex; V04 accepts zero or False and raises AttributeError for the observed nonzero integer
+    dotnet: Vertex.op_Addition accepts only Vertex plus Vector3 and pins the V03 result and V04 explicit Origin identity without an asserted native add exception
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.__add__ through Vertex.op_Addition(Vertex, Vector3) for V03, V04. V03 pins only the repeated point-plus-vector result from left plus right.ToVector; V04 pins only Vertex.Origin plus value.ToVector as the explicit zero identity and the declared Vertex addition signature. The V04 multiplication and division exceptions are context-only. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only the two named addition results and exact declared addition route are claimed; Python nonzero-int error text or timing and every multiplication or division fact remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers add a typed Vector3 to Vertex; Python dynamic scalar identity and foreign operand dispatch are unavailable
+    compatibility_evidence: only the target-specific facts explicitly named above for V03, V04, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.__add__; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: python-vertex-copy-iteration-zero-addition-2c79da1a
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.__deepcopy__
+    symbol_hash: sha256:2c79da1a720680314133fb5aebf7c420f8586bd91d402a578b6797f0833b7f85
+  difference:
+    upstream: V02 __deepcopy__ returns fresh independent Vertex objects whose copied values remain after source mutation
+    dotnet: Vertex assignment is value-copy semantics with no direct __deepcopy__ method and no object-freshness identity claim
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.__deepcopy__ through Vertex value-copy assignment for V02. V02 pins only equal Vertex value-copy assignment and unchanged original value, without native object-freshness identity. The V02 coordinate-projection and reverse-addition observations are context-only. Adaptation family python-vertex-copy-iteration-zero-addition classifies the bounded native API or algorithm difference. Python fresh-copy reference identity, memo behavior and mutation-after-copy semantics have no direct native method analogue and are not claimed. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers use value copies; Python deepcopy identity and memo protocols have no direct native analogue
+    compatibility_evidence: only the target-specific facts explicitly named above for V02, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.__deepcopy__; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-mutable-python-vertex-state-be3c69c5
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.__init__
+    symbol_hash: sha256:be3c69c5422b57d538899edd108fb477fcb0766fdea42e53f6e6ca25ae838ac3
+  difference:
+    upstream: V01 construction accepts bool, nonfinite float and arbitrary-precision huge integers and rejects the exact list-valued x input
+    dotnet: Vertex(double,double,double) accepts finite values and rejects exactly the three named nonfinite coordinate inputs
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.__init__ through Vertex.Vertex(double, double, double) for V01. V01 pins finite construction and the exact NaN-X, positive-infinity-Y and negative-infinity-Z constructor rejections. Python post-construction coordinate mutation is context-only for this constructor target. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python bool-preserving, nonfinite and arbitrary-precision huge-integer construction success is not normalized; property mutation and every operator remain separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers provide three finite doubles; Python bool, nonfinite and arbitrary-precision construction success is unavailable
+    compatibility_evidence: only the target-specific facts explicitly named above for V01, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.__init__; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: python-vertex-copy-iteration-zero-addition-e95d7ce5
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.__iter__
+    symbol_hash: sha256:e95d7ce5aa55d56bc0012c191bc98fc7cd74941f724816583108f53e9bda37e7
+  difference:
+    upstream: V02 __iter__ returns a one-shot generator yielding x, y and z and then an empty exhausted sequence
+    dotnet: native code directly reads X, Y and Z, binds the registry to Vertex.X, and does not implement IEnumerable or use ToVector as an iterator analogue
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.__iter__ through direct Vertex.X, Vertex.Y and Vertex.Z reads, with Vertex.X as the exact registry-bound production member for V02. V02 pins only the explicit 1, 2, 3 coordinate projection obtained by direct X, Y and Z reads and the absence of native IEnumerable. No Vertex.ToVector implementation binding, copy behavior or reverse-addition behavior is claimed. Adaptation family python-vertex-copy-iteration-zero-addition classifies the bounded native API or algorithm difference. Python generator identity, one-shot exhaustion and mutation interaction have no native iterator analogue and remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers explicitly read X, Y and Z; no generator or iterator contract is exposed
+    compatibility_evidence: only the target-specific facts explicitly named above for V02, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.__iter__; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: untyped-python-vertex-algebra-323878e1
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.__mul__
+    symbol_hash: sha256:323878e160b4a3f298740187d6136d8d8e9c112ae6f7097dccc7fd9d4be57747
+  difference:
+    upstream: V03 right multiplication returns Vertex; V04 accepts bool scaling and raises the observed TypeError for a string multiplier
+    dotnet: Vector3 times double after ToVector pins V03 right multiplication, V04 zero scale and only the NaN-scale rejection
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.__mul__ through Vector3.op_Multiply(Vector3, double) after Vertex.ToVector for V03, V04. V03 pins only the repeated right scalar multiplication result through value.ToVector times 2; V04 pins only zero scale and the NaN-scale ArgumentOutOfRangeException for that same operator direction. Division, addition and left multiplication observations are context-only. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only right multiplication, zero scale and NaN-scale rejection are claimed; Python string error text or timing and left multiplication, addition and division are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers convert the point to Vector3 and use typed right scalar multiplication
+    compatibility_evidence: only the target-specific facts explicitly named above for V03, V04, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.__mul__; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: python-vertex-copy-iteration-zero-addition-a473d0f3
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.__radd__
+    symbol_hash: sha256:a473d0f327d8b3055e2e614d0e6da54681e058469f4d3266ac69d0849849dd35
+  difference:
+    upstream: V02 and V04 reverse addition treats zero and False as identity and raises AttributeError for the observed nonzero integer
+    dotnet: Vertex.Origin plus ToVector is an explicit identity adaptation; no dynamic zero, False or nonzero-int protocol is exposed
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.__radd__ through Vertex.op_Addition as Vertex.Origin plus Vertex.ToVector for V02, V04. V02 and V04 pin only the explicit Vertex.Origin plus value.ToVector identity adaptation corresponding to Python zero or False reverse addition and the unavailable nonzero-int dynamic route. Copy, iteration, multiplication and division observations are context-only. Adaptation family python-vertex-copy-iteration-zero-addition classifies the bounded native API or algorithm difference. No native dynamic False, zero or nonzero-int protocol, object-freshness identity, copy or iterator semantics are claimed. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers request identity explicitly through Origin plus ToVector rather than dynamic reverse addition
+    compatibility_evidence: only the target-specific facts explicitly named above for V02, V04, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.__radd__; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: untyped-python-vertex-algebra-1dbe33d3
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.__rmul__
+    symbol_hash: sha256:1dbe33d37c8ebeda67422c7b71c99b4314290005faaab35c11a6d62446da88ef
+  difference:
+    upstream: V03 left multiplication by two returns the exact Vertex result; no V04 probe targets __rmul__
+    dotnet: double times Vector3 after ToVector pins only the finite V03 left multiplication result and no V04 or exception boundary
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.__rmul__ through Vector3.op_Multiply(double, Vector3) after Vertex.ToVector for V03. V03 pins only the repeated left scalar multiplication result through 2 times value.ToVector. V04 zero, nonfinite and exception observations are absent and are not claimed. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only finite left multiplication is claimed; V04, zero, nonfinite, bool, string, foreign-operand and exception behavior remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers convert the point to Vector3 and use typed left scalar multiplication
+    compatibility_evidence: only the target-specific facts explicitly named above for V03, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.__rmul__; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: untyped-python-vertex-algebra-4ee38e65
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.__sub__
+    symbol_hash: sha256:4ee38e65b625fbec9e82d2cf2497d08bc3569dd9f19bb9d68500823113b2a9fc
+  difference:
+    upstream: V03 subtraction returns the exact Vertex-shaped difference; no V04 probe targets __sub__
+    dotnet: Vertex minus Vertex returns Vector3 and pins only the finite V03 result without a V04 or exception boundary
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.__sub__ through Vertex.op_Subtraction(Vertex, Vertex) for V03. V03 pins only the repeated Vertex-minus-Vertex Vector3 result. No V04 behavior or native exception boundary is claimed. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only finite typed subtraction is claimed; V04, nonfinite, bool, string, foreign-operand and exception behavior remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers subtract two points and receive Vector3
+    compatibility_evidence: only the target-specific facts explicitly named above for V03, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.__sub__; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: untyped-python-vertex-algebra-94f397b8
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.__truediv__
+    symbol_hash: sha256:94f397b889c7022f9e61270308cb32f2994fa6336aa0034bf6af9f73fa05ee53
+  difference:
+    upstream: V03 division by two returns Vertex; V04 raises ZeroDivisionError for zero and False and TypeError for the string divisor
+    dotnet: Vector3 divided by double after ToVector pins V03 finite division and only the V04 zero and positive-infinity divisor rejections
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.__truediv__ through Vector3.op_Division(Vector3, double) after Vertex.ToVector for V03, V04. V03 pins only the repeated value.ToVector divided by 2 result; V04 pins only DivideByZeroException for divisor zero and ArgumentOutOfRangeException for positive-infinity divisor. The V04 NaN multiplication exception is context-only. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only finite division and the two named divisor rejections are claimed; Python error text or timing, NaN numerator behavior and multiplication facts remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers convert the point to Vector3 and use typed scalar division with explicit invalid-divisor errors
+    compatibility_evidence: only the target-specific facts explicitly named above for V03, V04, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.__truediv__; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: legacy-first-triple-angular-coplanarity-905ebbf2
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.are_coplanar
+    symbol_hash: sha256:905ebbf25f731adcf96fd59e0ee78f8afda0e325ed624baa9e0124cc3a5da493
+  difference:
+    upstream: V06 uses a first-three angular-normal test with a 1e-15 threshold and short arguments; V07 returns true for the observed collinear-first-three zero-normal defect
+    dotnet: Vertex.AreCoplanar uses distance tolerance and robust plane search, including the exact V06 probes and V07 continuation past collinear first points
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.are_coplanar through Vertex.AreCoplanar for V06, V07. V06 pins explicit-distance-tolerance below, exact and above results true, true, false, default-tolerance results, empty and three-point shortcuts and null-enumerable rejection; V07 pins false for the two selected orderings through robust plane search where Python exposes the collinear-first-three defect. Adaptation family legacy-first-triple-angular-coplanarity classifies the bounded native API or algorithm difference. Python angular threshold, ordering-dependent zero-normal defect and dynamic non-Vertex element error timing are not preserved; tolerances and degeneracies beyond the named probes remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers use distance tolerance and robust plane selection rather than an ordering-sensitive angular first-triple test
+    compatibility_evidence: only the target-specific facts explicitly named above for V06, V07, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.are_coplanar; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: untyped-python-vertex-metrics-6bc5db49
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.cross
+    symbol_hash: sha256:6bc5db49d054daacb8f76e26342f1a6f45ccbdffdc1119addebe8e18ccbad02a
+  difference:
+    upstream: V05 Vertex.cross returns only the exact Python cross vector for the selected finite operands
+    dotnet: Vector3.Cross after ToVector pins only the exact finite V05 cross result
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.cross through Vector3.Cross after Vertex.ToVector for V05. V05 pins only the exact finite cross result (48,-36,0) and unchanged selected source values; all other V05 metrics are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite Cross result is claimed; nonfinite, huge-integer, bool, foreign inputs and every other metric remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers convert points to Vector3 and invoke typed Cross for finite values
+    compatibility_evidence: only the target-specific facts explicitly named above for V05, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.cross; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: untyped-python-vertex-metrics-88c4cb9f
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.distance
+    symbol_hash: sha256:88c4cb9fbd03fc69d540cf3b644516743673077ab0ec7540c84a767eaca902cc
+  difference:
+    upstream: V05 Vertex.distance returns only the exact Python distance for the selected finite operands
+    dotnet: Vertex.DistanceTo pins only the exact finite V05 distance result
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.distance through Vertex.DistanceTo for V05. V05 pins only the exact finite distance result 13 and unchanged selected source values; all other V05 metrics are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite DistanceTo result is claimed; nonfinite, huge-integer, bool, foreign inputs and every other metric remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers invoke typed DistanceTo for finite points
+    compatibility_evidence: only the target-specific facts explicitly named above for V05, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.distance; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: untyped-python-vertex-metrics-1aaf5930
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.dot
+    symbol_hash: sha256:1aaf5930f9dbfec62d7999fc240ee947eaa0397482c417da92d23ea51d79cc87
+  difference:
+    upstream: V05 Vertex.dot returns only the exact Python dot value for the selected finite operands
+    dotnet: Vector3.Dot after ToVector pins only the exact finite V05 dot result
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.dot through Vector3.Dot after Vertex.ToVector for V05. V05 pins only the exact finite dot result 0 and unchanged selected source values; all other V05 metrics are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite Dot result is claimed; nonfinite, huge-integer, bool, foreign inputs and every other metric remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers convert points to Vector3 and invoke typed Dot for finite values
+    compatibility_evidence: only the target-specific facts explicitly named above for V05, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.dot; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: untyped-python-vertex-metrics-e41eae31
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.norm
+    symbol_hash: sha256:e41eae31e96f574bb148c14e0e8f19d03302136144b6e43baf73a18bfa678b49
+  difference:
+    upstream: V05 Vertex.norm returns only the exact selected finite and zero lengths
+    dotnet: Vector3.Length after ToVector pins only the exact V05 finite and zero lengths
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.norm through Vector3.Length after Vertex.ToVector for V05. V05 pins only finite Length 5, zero Length 0 and unchanged selected source values; Cross, DistanceTo, Dot and Normalize observations are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite and zero Length values are claimed; nonfinite, huge-integer, bool, foreign inputs and normalization behavior remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers convert a point to Vector3 and read finite Length
+    compatibility_evidence: only the target-specific facts explicitly named above for V05, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.norm; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: zero-preserving-python-vertex-unit-4267bc06
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.unit
+    symbol_hash: sha256:4267bc06a7a7d67fece4bdcb4963be1e87dd65436d8cecacce017bd19cf8c756
+  difference:
+    upstream: V05 Vertex.unit returns the selected nonzero unit Vertex and fresh zero Vertex objects for the zero vector
+    dotnet: Vector3.Normalize pins the exact nonzero unit result and repeatable InvalidOperationException for zero
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.unit through Vector3.Normalize after Vertex.ToVector for V05. V05 pins only the repeated nonzero normalized vector (0.6,0.8,0), repeatable InvalidOperationException for zero normalization and unchanged selected source values. Cross, DistanceTo, Dot and Length values beyond the zero precondition are context-only. Adaptation family zero-preserving-python-vertex-unit classifies the bounded native API or algorithm difference. Python fresh zero-Vertex success is explicitly not preserved; nonfinite, huge-integer, bool and foreign inputs and other metrics remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers handle zero-vector Normalize as an explicit error rather than receiving a fresh zero point
+    compatibility_evidence: only the target-specific facts explicitly named above for V05, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.unit; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-mutable-python-vertex-state-d859bad0
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.x
+    symbol_hash: sha256:d859bad0320353e43a2fc277a54559f90cbcf19e91d3d5b49e0ec77a98da5125
+  difference:
+    upstream: V01 x accepts and preserves bool, nonfinite and huge-integer values and is mutable; only the x-specific Python state is relevant here
+    dotnet: Vertex.X is get-only and finite; V01 pins X=1 and only the NaN-X constructor rejection for this target
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.x through the get-only Vertex.X property for V01. V01 pins only X=1, the absent X setter and the exact NaN-X constructor rejection. Y and Z values and their rejection probes are context-only. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable, bool-preserving, nonfinite and arbitrary-precision huge-integer X state is not normalized; Y, Z, operators and metrics are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers read finite get-only X; mutable, bool, nonfinite and huge-integer x state is unavailable
+    compatibility_evidence: only the target-specific facts explicitly named above for V01, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.x; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-mutable-python-vertex-state-ff0bcc12
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.y
+    symbol_hash: sha256:ff0bcc126b70820f4cd15e2d743102715885b2f19b3df6662eaba221a54f6e4c
+  difference:
+    upstream: V01 y accepts and preserves bool, nonfinite and huge-integer values and is mutable; only the y-specific Python state is relevant here
+    dotnet: Vertex.Y is get-only and finite; V01 pins Y=2 and only the positive-infinity-Y constructor rejection for this target
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.y through the get-only Vertex.Y property for V01. V01 pins only Y=2, the absent Y setter and the exact positive-infinity-Y constructor rejection. X and Z values and their rejection probes are context-only. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable, bool-preserving, nonfinite and arbitrary-precision huge-integer Y state is not normalized; X, Z, operators and metrics are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers read finite get-only Y; mutable, bool, nonfinite and huge-integer y state is unavailable
+    compatibility_evidence: only the target-specific facts explicitly named above for V01, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.y; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: permissive-mutable-python-vertex-state-64899aff
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Vertex.z
+    symbol_hash: sha256:64899affcdb0d27b23069a9323ba7e71ae572ecddadb121c28051a8d279fcfc5
+  difference:
+    upstream: V01 z accepts and preserves bool, nonfinite and huge-integer values and is mutable; only the z-specific Python state is relevant here
+    dotnet: Vertex.Z is get-only and finite; V01 pins Z=3 and only the negative-infinity-Z constructor rejection for this target
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify Vertex.z through the get-only Vertex.Z property for V01. V01 pins only Z=3, the absent Z setter and the exact negative-infinity-Z constructor rejection. X and Y values and their rejection probes are context-only. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable, bool-preserving, nonfinite and arbitrary-precision huge-integer Z state is not normalized; X, Y, operators and metrics are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.
+    api_contract: callers read finite get-only Z; mutable, bool, nonfinite and huge-integer z state is unavailable
+    compatibility_evidence: only the target-specific facts explicitly named above for V01, the exact upstream descriptor, final receipt hash and declared implementation binding remain required; every co-recorded case fact not explicitly named is context-only for Vertex.z; opening and adjacency targets, out-of-scope repr, str and equality symbols, uncaptured state and broader geometry behavior remain unresolved
+  approval: accepted-native-api-adaptation

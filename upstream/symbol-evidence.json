@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:fbd996372aa33c3c14bbb14e3c16effbf66ff1be51384d00e7aa3d4cc64657fe",
+  "content_sha256": "sha256:ec1c72c5eb5a996b89ac52b3ce1d7c77723914da61a6f1fce5155bf828fdcfc5",
   "entries": [
     {
       "implementation": {
@@ -212,7 +212,7 @@
     {
       "implementation": {
         "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
-        "source_sha256": "sha256:dae31d954a8eaf74b80d552d31e139845cfb6011b457e32df683d08d170d9d93",
+        "source_sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd",
         "symbol": "GonieGonie.SimpleDragon.GreenRetrofitConverter.ConvertProfile"
       },
       "path": "src/epsimple/core/profile.py",
@@ -6895,6 +6895,32 @@
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs",
         "source_sha256": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Surface"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface through the typed Surface and validated PlanarPolygon constructors for S08, S11. S08 constructs the representative validated surface, while S11 returns diagnostics and repeatable ArgumentException for the collinear triangle, duplicate-closing square and self-intersecting bow-tie before any native Surface construction. Adaptation family permissive-python-surface-polygon-model classifies the bounded native API or algorithm difference. Python mutable class state and accepted invalid-polygon instances are not native successes; Surface.__init__, openings, boundary, IDF emission and invalid families beyond the three named probes remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2867a6b5a26a756fa6aeaf65068a2e9fa7321b0e6923e77ae9524036b686472d",
+          "id": "dragon-shape-geometry-core-1034-cb620c55",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface",
+      "upstream_symbol_hash": "sha256:cb620c55ad36aaa035597b8c9975721d7fd397a000213beae556880050f75dba"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs",
+        "source_sha256": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
         "symbol": "GonieGonie.InvisibleDragon.Shape.Surface.Surface"
       },
       "path": "src/idragon/dragon/shape.py",
@@ -6916,6 +6942,32 @@
       ],
       "symbol": "Surface.__init__",
       "upstream_symbol_hash": "sha256:ef349ef4b0a7bfcd1f47a297b0107d24018f5c4350b1765051948f2cfde5daa3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs",
+        "source_sha256": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Surface.GrossArea"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface.area through Surface.GrossArea for S08, S09, S10, S11, S12. S08 GrossArea repeats exactly, S09 forward and reversed winding areas are equal, S10 native full-loop GrossArea is positive where Python reports a negative first-turn area, S11 has no area-bearing native Surface because each exact invalid polygon is rejected, and S12 preserves the original area while separately observing the replacement surface. Adaptation family first-triple-oriented-python-surface-area classifies the bounded native API or algorithm difference. Python signed first-turn area is not preserved; mutable alias behavior, nonfinite coordinates, other invalid polygons and every non-area Surface property remain outside this target claim. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6cc3a7db18daa625d5dab183570f02c32e5319f911ac9f3517bff23d8d6aa191",
+          "id": "dragon-shape-geometry-core-1038-f254ab66",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface.area",
+      "upstream_symbol_hash": "sha256:f254ab666c61170d9ea16598a4182e7f49526eb4e0eaff0af293499695cbd9fa"
     },
     {
       "implementation": {
@@ -6973,6 +7025,32 @@
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs",
         "source_sha256": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Surface.Center"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface.center through Surface.Center for S08, S09, S12. S08 Center repeats exactly, S09 forward and reversed centers are equal, and S12 keeps the original center unchanged after source-array replacement while separately observing the replacement surface center. Adaptation family vertex-mean-python-surface-center classifies the bounded native API or algorithm difference. Only the named valid-polygon Center observations are claimed; Python vertex-mean behavior after alias mutation or on invalid polygons and every non-center property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:8074898397022e774997a6a725b80781111550897ab44740e89dc3238b2ff455",
+          "id": "dragon-shape-geometry-core-1041-f0c05c2b",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface.center",
+      "upstream_symbol_hash": "sha256:f0c05c2bc1bd07b18d9140cafa7f970129215c9aa311f80a0073445b92526273"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs",
+        "source_sha256": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
         "symbol": "GonieGonie.InvisibleDragon.Shape.Surface.CreateCenteredSubsurface"
       },
       "path": "src/idragon/dragon/shape.py",
@@ -6994,6 +7072,58 @@
       ],
       "symbol": "Surface.get_subsurface",
       "upstream_symbol_hash": "sha256:7e43708dfc08dc4b915a0fbb6ea3ebb1ee7b943031a60d12336e4fe3ed33e91f"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs",
+        "source_sha256": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Surface.Height"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface.height through Surface.Height for S08, S09, S12. S08 Height repeats exactly, S09 forward and reversed heights are equal, and S12 keeps the original height unchanged after source-array replacement while separately observing the replacement surface height. Adaptation family z-span-python-surface-height classifies the bounded native API or algorithm difference. Only the named valid finite-polygon Height observations are claimed; mutable or invalid Python geometry and every non-height property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a528074f8ab957267bac2b8ce3557194ff474c111b17321c8b97ea797b5df5a9",
+          "id": "dragon-shape-geometry-core-1043-d479fe2f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface.height",
+      "upstream_symbol_hash": "sha256:d479fe2f2ded1a09be3f2686e3ee6306b96beccb8cc20f04def11be7c0712f55"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs",
+        "source_sha256": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Surface.Normal"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface.normal through Surface.Normal for S08, S09, S10, S11, S12. S08 Normal repeats exactly, S09 reversed winding produces the opposite normal, S10 native Normal follows the normalized full-loop cross sum where Python uses an opposed first-turn normal, S11 rejects each exact invalid polygon before a native normal exists, and S12 preserves the original normal while separately observing the replacement. Adaptation family first-triple-python-surface-normal classifies the bounded native API or algorithm difference. Only the named full-loop normal observations and exact invalid rejections are claimed; other degeneracy, mutable alias behavior and every non-normal property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:81ec416bc7639194804e4380e03f99006dbf6a16d09525ccadec25da28321eb8",
+          "id": "dragon-shape-geometry-core-1044-3f089c8c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface.normal",
+      "upstream_symbol_hash": "sha256:3f089c8c429d26cd3ee65ff085dea58b961a0ec0c4b9b757172f65bf42a8b7e7"
     },
     {
       "implementation": {
@@ -7020,6 +7150,58 @@
       ],
       "symbol": "Surface.to_idf_object",
       "upstream_symbol_hash": "sha256:a03c4d5229587498a9a3451a51c842e1f6df83e08ff5c42488a64959e384fece"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs",
+        "source_sha256": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Surface.Type"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface.type through the get-only Surface.Type property and typed reconstruction for S08, S12. S08 observes Wall; S12 preserves original Wall state, reconstructs a distinct Floor surface and rejects enum value 99. No native property setter or Python lowercase-string mutation counterpart is claimed. Adaptation family mutable-string-coerced-python-surface-type classifies the bounded native API or algorithm difference. Only the named enum state, typed reconstruction and undefined-value rejection are claimed; Python string coercion, in-place setters and every non-type property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d312aa561bdbb6cab2484f8a078a702bb56d38be42f3bcaa2800f5532b518888",
+          "id": "dragon-shape-geometry-core-1046-ae4bdcc7",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface.type",
+      "upstream_symbol_hash": "sha256:ae4bdcc76210c35b23978d30c1d57491785d9fa9a2a66e80cc123e7c633a2db5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/PlanarPolygon.cs",
+        "source_sha256": "sha256:73a1dd052fb12ed0802a6236d21484e2b680cbe3f0f4005ade6a61995111c653",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.PlanarPolygon.Vertices"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface.vertex through Surface.Polygon and read-only PlanarPolygon.Vertices for S08, S11, S12. S08 preserves exact ordered vertex scalars after source-array element replacement, S11 rejects the three exact invalid polygons, and S12 preserves the original vertices while producing a distinct validated replacement. The native collection is read-only and value-copied. Adaptation family aliased-mutable-python-surface-vertices classifies the bounded native API or algorithm difference. Python vertex-object alias propagation, tuple reassignment and post-construction mutation are not preserved; per-object identity, other collection operations and every non-vertex property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0810dc08418bc78deac6f89786a849f5c20390ecc994c9395bcad0c715ce3cd7",
+          "id": "dragon-shape-geometry-core-1047-7ed5c6b3",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface.vertex",
+      "upstream_symbol_hash": "sha256:7ed5c6b3be62b893275d7dedccacd8cc2a85e7d0862801001a67650330ac2be8"
     },
     {
       "implementation": {
@@ -7176,6 +7358,630 @@
       ],
       "symbol": "SurfaceBoundaryCondition.__str__",
       "upstream_symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs",
+        "source_sha256": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.SurfaceType"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceType through the SurfaceType enum for T13, T14. T13 pins definition order Wall, Ceiling, Floor, underlying values 0, 1, 2 and repeat enumeration; T14 pins only the class-level case-sensitive parse and defined integer-cast observations. Adaptation family lowercase-python-surface-type-enum classifies the bounded native API or algorithm difference. Python str-subclass identity, raw-string equality, lowercase construction and exact Python error text or timing are not equated; engineering serialization is separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e28446741c641805190b1565b43de667c6062361b1409215d5f7ad5d4314c31f",
+          "id": "dragon-shape-geometry-core-1054-61a37f9d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SurfaceType",
+      "upstream_symbol_hash": "sha256:61a37f9dc7fea0761d67c6e8efbd3ef6ef7e6e75788e8bcec26784d2a9bbf1a3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs",
+        "source_sha256": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.SurfaceType.Ceiling"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceType.CEILING through SurfaceType.Ceiling for T13. T13 pins only the direct Python CEILING engineering member to native Ceiling mapping. Adaptation family direct-surface-type-member-mapping records the direct equivalent member mapping. No enum order, ToString, parsing, raw-string equality or other member behavior is claimed by this equivalent constant receipt. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:05316ed46e42810cf7e5b0de1ba338d5f502c25a6a4c97e208fd5cdb9c435919",
+          "id": "dragon-shape-geometry-core-1055-9ece8323",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SurfaceType.CEILING",
+      "upstream_symbol_hash": "sha256:9ece83237cbba05bedb4f1f349b4505dba0a06a6d8e661bbb2e51485c0a28c4c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs",
+        "source_sha256": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.SurfaceType.Floor"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceType.FLOOR through SurfaceType.Floor for T13. T13 pins only the direct Python FLOOR engineering member to native Floor mapping. Adaptation family direct-surface-type-member-mapping records the direct equivalent member mapping. No enum order, ToString, parsing, raw-string equality or other member behavior is claimed by this equivalent constant receipt. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4bab1a992d34a81b0e0b280baba6fe6d305cf430d82c817ccfef4b853ab574cb",
+          "id": "dragon-shape-geometry-core-1056-c8c4f240",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SurfaceType.FLOOR",
+      "upstream_symbol_hash": "sha256:c8c4f240e476a6db7cc85ca0bfcaea675233b72f28019edd4308f11cb689e01b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs",
+        "source_sha256": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.SurfaceType.Wall"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceType.WALL through SurfaceType.Wall for T13. T13 pins only the direct Python WALL engineering member to native Wall mapping. Adaptation family direct-surface-type-member-mapping records the direct equivalent member mapping. No enum order, ToString, parsing, raw-string equality or other member behavior is claimed by this equivalent constant receipt. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e4f63e8852e3c5be771dc461fd372e655c9683e9b3ed30ce928643eb0409029c",
+          "id": "dragon-shape-geometry-core-1057-ca6d5593",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SurfaceType.WALL",
+      "upstream_symbol_hash": "sha256:ca6d5593884470ef294f9e38f3e03f945136bb49d08ef1e6fa9d08d5cac35cf4"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs",
+        "source_sha256": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.SurfaceType"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceType.__str__ through System.Enum.ToString on SurfaceType for T13 active, with T14 context-only. T13 pins native ToString results Wall, Ceiling and Floor against Python lowercase strings. T14 parsing and integer-cast observations co-recorded in the receipt are context-only and are not evidence for __str__. Adaptation family lowercase-python-surface-type-enum classifies the bounded native API or algorithm difference. Only T13 display strings are active evidence; parsing, casting, raw-string equality, construction, engineering serialization and error topology remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:14ae314f685943e78011024dcc0b279c48b972f9c72053029849eef98547e65b",
+          "id": "dragon-shape-geometry-core-1058-f40e4929",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SurfaceType.__str__",
+      "upstream_symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex through the readonly Vertex value type for V01. V01 pins finite Vertex(1,2,3), repeat value equality, readonly value-type state, absent X, Y and Z setters, and the exact NaN-X, positive-infinity-Y and negative-infinity-Z constructor rejections. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable coordinates, bool runtime values, nonfinite values and arbitrary-precision huge integers are not normalized or claimed as native successes; operator and metric behavior is separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0f2962d8fab43164ac0ad84f04fe7bbbbe53ceaa9893f7b4093b4209aacfd34f",
+          "id": "dragon-shape-geometry-core-1059-78650289",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex",
+      "upstream_symbol_hash": "sha256:786502893a6774ddb9c263e2ce3de1037c9f88f8dde30c32f04ad6e1418f0b64"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex.op_Addition"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__add__ through Vertex.op_Addition(Vertex, Vector3) for V03, V04. V03 pins only the repeated point-plus-vector result from left plus right.ToVector; V04 pins only Vertex.Origin plus value.ToVector as the explicit zero identity and the declared Vertex addition signature. The V04 multiplication and division exceptions are context-only. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only the two named addition results and exact declared addition route are claimed; Python nonzero-int error text or timing and every multiplication or division fact remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9b3e942fa977cb5374c53c5539b263d8e66bffb8a7ca3d2dba42cea26460bc22",
+          "id": "dragon-shape-geometry-core-1060-a5c7ecea",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.__add__",
+      "upstream_symbol_hash": "sha256:a5c7ecea4df4c83044d8b673c72a7352e3121627c2aafe1f6e99a3ffba35977e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__deepcopy__ through Vertex value-copy assignment for V02. V02 pins only equal Vertex value-copy assignment and unchanged original value, without native object-freshness identity. The V02 coordinate-projection and reverse-addition observations are context-only. Adaptation family python-vertex-copy-iteration-zero-addition classifies the bounded native API or algorithm difference. Python fresh-copy reference identity, memo behavior and mutation-after-copy semantics have no direct native method analogue and are not claimed. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7cc15089ff3974303b8ff66c82264f1e4575280cebe7dc53b695df31229e19aa",
+          "id": "dragon-shape-geometry-core-1061-2c79da1a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.__deepcopy__",
+      "upstream_symbol_hash": "sha256:2c79da1a720680314133fb5aebf7c420f8586bd91d402a578b6797f0833b7f85"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex.Vertex"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__init__ through Vertex.Vertex(double, double, double) for V01. V01 pins finite construction and the exact NaN-X, positive-infinity-Y and negative-infinity-Z constructor rejections. Python post-construction coordinate mutation is context-only for this constructor target. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python bool-preserving, nonfinite and arbitrary-precision huge-integer construction success is not normalized; property mutation and every operator remain separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a31d5463a22afc15fbfa422477e455ddbfe768412d716d1f76c4d4f0a4afd733",
+          "id": "dragon-shape-geometry-core-1063-be3c69c5",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.__init__",
+      "upstream_symbol_hash": "sha256:be3c69c5422b57d538899edd108fb477fcb0766fdea42e53f6e6ca25ae838ac3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex.X"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__iter__ through direct Vertex.X, Vertex.Y and Vertex.Z reads, with Vertex.X as the exact registry-bound production member for V02. V02 pins only the explicit 1, 2, 3 coordinate projection obtained by direct X, Y and Z reads and the absence of native IEnumerable. No Vertex.ToVector implementation binding, copy behavior or reverse-addition behavior is claimed. Adaptation family python-vertex-copy-iteration-zero-addition classifies the bounded native API or algorithm difference. Python generator identity, one-shot exhaustion and mutation interaction have no native iterator analogue and remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:5c429ab04b30eb052ab4fdd421665fb13e870a75b834a1f0a85307bd464002dc",
+          "id": "dragon-shape-geometry-core-1064-e95d7ce5",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.__iter__",
+      "upstream_symbol_hash": "sha256:e95d7ce5aa55d56bc0012c191bc98fc7cd74941f724816583108f53e9bda37e7"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vector3.cs",
+        "source_sha256": "sha256:02536827db9d1c6ff48a46678871e4d736d9536228f0de370a9fb2c5294b9ede",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vector3.op_Multiply"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__mul__ through Vector3.op_Multiply(Vector3, double) after Vertex.ToVector for V03, V04. V03 pins only the repeated right scalar multiplication result through value.ToVector times 2; V04 pins only zero scale and the NaN-scale ArgumentOutOfRangeException for that same operator direction. Division, addition and left multiplication observations are context-only. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only right multiplication, zero scale and NaN-scale rejection are claimed; Python string error text or timing and left multiplication, addition and division are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:608a929646e45db53d8800b571e607ff4f191b15109a359ad311f91684840e38",
+          "id": "dragon-shape-geometry-core-1065-323878e1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.__mul__",
+      "upstream_symbol_hash": "sha256:323878e160b4a3f298740187d6136d8d8e9c112ae6f7097dccc7fd9d4be57747"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex.op_Addition"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__radd__ through Vertex.op_Addition as Vertex.Origin plus Vertex.ToVector for V02, V04. V02 and V04 pin only the explicit Vertex.Origin plus value.ToVector identity adaptation corresponding to Python zero or False reverse addition and the unavailable nonzero-int dynamic route. Copy, iteration, multiplication and division observations are context-only. Adaptation family python-vertex-copy-iteration-zero-addition classifies the bounded native API or algorithm difference. No native dynamic False, zero or nonzero-int protocol, object-freshness identity, copy or iterator semantics are claimed. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:388fb6ca4786fe66e539f699caf4937ef824dc6118441a12a19e01dbb7ab049a",
+          "id": "dragon-shape-geometry-core-1066-a473d0f3",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.__radd__",
+      "upstream_symbol_hash": "sha256:a473d0f327d8b3055e2e614d0e6da54681e058469f4d3266ac69d0849849dd35"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vector3.cs",
+        "source_sha256": "sha256:02536827db9d1c6ff48a46678871e4d736d9536228f0de370a9fb2c5294b9ede",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vector3.op_Multiply"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__rmul__ through Vector3.op_Multiply(double, Vector3) after Vertex.ToVector for V03. V03 pins only the repeated left scalar multiplication result through 2 times value.ToVector. V04 zero, nonfinite and exception observations are absent and are not claimed. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only finite left multiplication is claimed; V04, zero, nonfinite, bool, string, foreign-operand and exception behavior remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4e09af087fb303452aaf3761ce473e61cf23286f9600a8efde211d9460a05f16",
+          "id": "dragon-shape-geometry-core-1068-1dbe33d3",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.__rmul__",
+      "upstream_symbol_hash": "sha256:1dbe33d37c8ebeda67422c7b71c99b4314290005faaab35c11a6d62446da88ef"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex.op_Subtraction"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__sub__ through Vertex.op_Subtraction(Vertex, Vertex) for V03. V03 pins only the repeated Vertex-minus-Vertex Vector3 result. No V04 behavior or native exception boundary is claimed. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only finite typed subtraction is claimed; V04, nonfinite, bool, string, foreign-operand and exception behavior remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:bf1d02133fd2651444492a88f3b27ed4bd9b7cc1d4ffb0351232a7ca652ccc87",
+          "id": "dragon-shape-geometry-core-1070-4ee38e65",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.__sub__",
+      "upstream_symbol_hash": "sha256:4ee38e65b625fbec9e82d2cf2497d08bc3569dd9f19bb9d68500823113b2a9fc"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vector3.cs",
+        "source_sha256": "sha256:02536827db9d1c6ff48a46678871e4d736d9536228f0de370a9fb2c5294b9ede",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vector3.op_Division"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__truediv__ through Vector3.op_Division(Vector3, double) after Vertex.ToVector for V03, V04. V03 pins only the repeated value.ToVector divided by 2 result; V04 pins only DivideByZeroException for divisor zero and ArgumentOutOfRangeException for positive-infinity divisor. The V04 NaN multiplication exception is context-only. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only finite division and the two named divisor rejections are claimed; Python error text or timing, NaN numerator behavior and multiplication facts remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9fcfa8d48d9d35d62788f9b2ad7f218fa224e37cdf6ecfc32fbbe02ddc9fdf53",
+          "id": "dragon-shape-geometry-core-1071-94f397b8",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.__truediv__",
+      "upstream_symbol_hash": "sha256:94f397b889c7022f9e61270308cb32f2994fa6336aa0034bf6af9f73fa05ee53"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex.AreCoplanar"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.are_coplanar through Vertex.AreCoplanar for V06, V07. V06 pins explicit-distance-tolerance below, exact and above results true, true, false, default-tolerance results, empty and three-point shortcuts and null-enumerable rejection; V07 pins false for the two selected orderings through robust plane search where Python exposes the collinear-first-three defect. Adaptation family legacy-first-triple-angular-coplanarity classifies the bounded native API or algorithm difference. Python angular threshold, ordering-dependent zero-normal defect and dynamic non-Vertex element error timing are not preserved; tolerances and degeneracies beyond the named probes remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:ae0fab18d3b9c344c9ca4b66c991a16a958cf93a6323b69faf7736d3160d1f87",
+          "id": "dragon-shape-geometry-core-1072-905ebbf2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.are_coplanar",
+      "upstream_symbol_hash": "sha256:905ebbf25f731adcf96fd59e0ee78f8afda0e325ed624baa9e0124cc3a5da493"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vector3.cs",
+        "source_sha256": "sha256:02536827db9d1c6ff48a46678871e4d736d9536228f0de370a9fb2c5294b9ede",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vector3.Cross"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.cross through Vector3.Cross after Vertex.ToVector for V05. V05 pins only the exact finite cross result (48,-36,0) and unchanged selected source values; all other V05 metrics are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite Cross result is claimed; nonfinite, huge-integer, bool, foreign inputs and every other metric remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:47acbfb4038b9fcc6998c29b6c2221e72bf7613ea55689cfb3b5cabf1a926c08",
+          "id": "dragon-shape-geometry-core-1073-6bc5db49",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.cross",
+      "upstream_symbol_hash": "sha256:6bc5db49d054daacb8f76e26342f1a6f45ccbdffdc1119addebe8e18ccbad02a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex.DistanceTo"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.distance through Vertex.DistanceTo for V05. V05 pins only the exact finite distance result 13 and unchanged selected source values; all other V05 metrics are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite DistanceTo result is claimed; nonfinite, huge-integer, bool, foreign inputs and every other metric remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:ba64225df24c6f348dbe1c61a31f6d7abfee9b5198e9aeb7effbacd487f45f47",
+          "id": "dragon-shape-geometry-core-1074-88c4cb9f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.distance",
+      "upstream_symbol_hash": "sha256:88c4cb9fbd03fc69d540cf3b644516743673077ab0ec7540c84a767eaca902cc"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vector3.cs",
+        "source_sha256": "sha256:02536827db9d1c6ff48a46678871e4d736d9536228f0de370a9fb2c5294b9ede",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vector3.Dot"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.dot through Vector3.Dot after Vertex.ToVector for V05. V05 pins only the exact finite dot result 0 and unchanged selected source values; all other V05 metrics are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite Dot result is claimed; nonfinite, huge-integer, bool, foreign inputs and every other metric remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f84f3567eecb80518afa19d48a74cd56841ff2d559f7374c3c29fa2a80da1d8e",
+          "id": "dragon-shape-geometry-core-1075-1aaf5930",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.dot",
+      "upstream_symbol_hash": "sha256:1aaf5930f9dbfec62d7999fc240ee947eaa0397482c417da92d23ea51d79cc87"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vector3.cs",
+        "source_sha256": "sha256:02536827db9d1c6ff48a46678871e4d736d9536228f0de370a9fb2c5294b9ede",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vector3.Length"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.norm through Vector3.Length after Vertex.ToVector for V05. V05 pins only finite Length 5, zero Length 0 and unchanged selected source values; Cross, DistanceTo, Dot and Normalize observations are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite and zero Length values are claimed; nonfinite, huge-integer, bool, foreign inputs and normalization behavior remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0d5f53eedec478840c4d78919bde15e99901b3011389dd7eecd5c6c10efdd324",
+          "id": "dragon-shape-geometry-core-1076-e41eae31",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.norm",
+      "upstream_symbol_hash": "sha256:e41eae31e96f574bb148c14e0e8f19d03302136144b6e43baf73a18bfa678b49"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vector3.cs",
+        "source_sha256": "sha256:02536827db9d1c6ff48a46678871e4d736d9536228f0de370a9fb2c5294b9ede",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vector3.Normalize"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.unit through Vector3.Normalize after Vertex.ToVector for V05. V05 pins only the repeated nonzero normalized vector (0.6,0.8,0), repeatable InvalidOperationException for zero normalization and unchanged selected source values. Cross, DistanceTo, Dot and Length values beyond the zero precondition are context-only. Adaptation family zero-preserving-python-vertex-unit classifies the bounded native API or algorithm difference. Python fresh zero-Vertex success is explicitly not preserved; nonfinite, huge-integer, bool and foreign inputs and other metrics remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:510b8d8341d45c68b2503628e1d23a91794e4a48266264c38831046f9fb518d6",
+          "id": "dragon-shape-geometry-core-1077-4267bc06",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.unit",
+      "upstream_symbol_hash": "sha256:4267bc06a7a7d67fece4bdcb4963be1e87dd65436d8cecacce017bd19cf8c756"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex.X"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.x through the get-only Vertex.X property for V01. V01 pins only X=1, the absent X setter and the exact NaN-X constructor rejection. Y and Z values and their rejection probes are context-only. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable, bool-preserving, nonfinite and arbitrary-precision huge-integer X state is not normalized; Y, Z, operators and metrics are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1b9c809756cb95c699a83bce8a074a73178f778e48bfeb9b094b6afa2f6a85b5",
+          "id": "dragon-shape-geometry-core-1078-d859bad0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.x",
+      "upstream_symbol_hash": "sha256:d859bad0320353e43a2fc277a54559f90cbcf19e91d3d5b49e0ec77a98da5125"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex.Y"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.y through the get-only Vertex.Y property for V01. V01 pins only Y=2, the absent Y setter and the exact positive-infinity-Y constructor rejection. X and Z values and their rejection probes are context-only. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable, bool-preserving, nonfinite and arbitrary-precision huge-integer Y state is not normalized; X, Z, operators and metrics are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b203ff08791766ecee97c0d65b2e6242bef726c134d29f1e9f590422c1ad7846",
+          "id": "dragon-shape-geometry-core-1079-ff0bcc12",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.y",
+      "upstream_symbol_hash": "sha256:ff0bcc126b70820f4cd15e2d743102715885b2f19b3df6662eaba221a54f6e4c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs",
+        "source_sha256": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        "symbol": "GonieGonie.InvisibleDragon.Shape.Vertex.Z"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.z through the get-only Vertex.Z property for V01. V01 pins only Z=3, the absent Z setter and the exact negative-infinity-Z constructor rejection. X and Y values and their rejection probes are context-only. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable, bool-preserving, nonfinite and arbitrary-precision huge-integer Z state is not normalized; X, Y, operators and metrics are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:39d8c23b19ef20d1ca83a4785214fb9470c910d6af5f9d34fd23a6f5a97ecfac",
+          "id": "dragon-shape-geometry-core-1080-64899aff",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/GeometryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests.MatchesPinnedGeometryCoreThroughBoundedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Vertex.z",
+      "upstream_symbol_hash": "sha256:64899affcdb0d27b23069a9323ba7e71ae572ecddadb121c28051a8d279fcfc5"
     },
     {
       "implementation": {
@@ -7570,7 +8376,7 @@
     {
       "implementation": {
         "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Batch/BatchRunner.cs",
-        "source_sha256": "sha256:49db902d7b25774f5892c687d7eb7b9416d142eb43027858397b20018ed9f0de",
+        "source_sha256": "sha256:0c10ef83545c12cf458e891efaa60e9b7101f23beac16f3ffec580d545ddb7eb",
         "symbol": "GonieGonie.SimpleDragon.Batch.BatchRunner.RunAsync"
       },
       "path": "src/idragon/launcher.py",
@@ -7622,7 +8428,7 @@
     {
       "implementation": {
         "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Internal/DomainSupport.cs",
-        "source_sha256": "sha256:b7533867e6dde3fde138799861be245467fbe58b8842005d840a9781f0d8c940",
+        "source_sha256": "sha256:8e08f4b14fe302d5920970a505940db34a5e863a57670ddba241ef2288e703ab",
         "symbol": "GonieGonie.SimpleDragon.Internal.DomainSupport.DefinedEnumOrNull"
       },
       "path": "src/idragon/utils.py",
@@ -7648,7 +8454,7 @@
     {
       "implementation": {
         "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Internal/DomainSupport.cs",
-        "source_sha256": "sha256:b7533867e6dde3fde138799861be245467fbe58b8842005d840a9781f0d8c940",
+        "source_sha256": "sha256:8e08f4b14fe302d5920970a505940db34a5e863a57670ddba241ef2288e703ab",
         "symbol": "GonieGonie.SimpleDragon.Internal.DomainSupport.FinitePositive"
       },
       "path": "src/idragon/utils.py",
@@ -7674,7 +8480,7 @@
     {
       "implementation": {
         "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Internal/DomainSupport.cs",
-        "source_sha256": "sha256:b7533867e6dde3fde138799861be245467fbe58b8842005d840a9781f0d8c940",
+        "source_sha256": "sha256:8e08f4b14fe302d5920970a505940db34a5e863a57670ddba241ef2288e703ab",
         "symbol": "GonieGonie.SimpleDragon.Internal.DomainSupport.NotNull"
       },
       "path": "src/idragon/utils.py",
@@ -7701,9 +8507,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 296,
-    "passed_receipt_count": 296,
-    "receipt_count": 296,
+    "entry_count": 327,
+    "passed_receipt_count": 327,
+    "receipt_count": 327,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

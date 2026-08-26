@@ -40,16 +40,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(694, len(compatibility.needs_reverification))
+        self.assertEqual(663, len(compatibility.needs_reverification))
         self.assertEqual(
-            133,
+            136,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            163,
+            191,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -58,10 +58,10 @@ class ConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(compatibility.symbol_evidence)
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
-        self.assertEqual(296, len(symbol_evidence.entries))
-        self.assertEqual(296, len(symbol_evidence.receipts))
+        self.assertEqual(327, len(symbol_evidence.entries))
+        self.assertEqual(327, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:fbd996372aa33c3c14bbb14e3c16effbf66ff1be51384d00e7aa3d4cc64657fe",
+            "sha256:ec1c72c5eb5a996b89ac52b3ce1d7c77723914da61a6f1fce5155bf828fdcfc5",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -393,6 +393,412 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(19, len(expected_opening_adjacency))
         self.assertEqual(10, len(opening_families))
         self.assertNotIn("Surface.to_idf_object", expected_opening_adjacency)
+        expected_geometry_core = {
+            "Surface": (
+                1034,
+                "exception",
+                "permissive-python-surface-polygon-model-cb620c55",
+                "dragon-shape-geometry-core-1034-cb620c55",
+                "sha256:2867a6b5a26a756fa6aeaf65068a2e9fa7321b0e6923e77ae9524036b686472d",
+                "permissive-python-surface-polygon-model",
+            ),
+            "Surface.area": (
+                1038,
+                "exception",
+                "first-triple-oriented-python-surface-area-f254ab66",
+                "dragon-shape-geometry-core-1038-f254ab66",
+                "sha256:6cc3a7db18daa625d5dab183570f02c32e5319f911ac9f3517bff23d8d6aa191",
+                "first-triple-oriented-python-surface-area",
+            ),
+            "Surface.center": (
+                1041,
+                "exception",
+                "vertex-mean-python-surface-center-f0c05c2b",
+                "dragon-shape-geometry-core-1041-f0c05c2b",
+                "sha256:8074898397022e774997a6a725b80781111550897ab44740e89dc3238b2ff455",
+                "vertex-mean-python-surface-center",
+            ),
+            "Surface.height": (
+                1043,
+                "exception",
+                "z-span-python-surface-height-d479fe2f",
+                "dragon-shape-geometry-core-1043-d479fe2f",
+                "sha256:a528074f8ab957267bac2b8ce3557194ff474c111b17321c8b97ea797b5df5a9",
+                "z-span-python-surface-height",
+            ),
+            "Surface.normal": (
+                1044,
+                "exception",
+                "first-triple-python-surface-normal-3f089c8c",
+                "dragon-shape-geometry-core-1044-3f089c8c",
+                "sha256:81ec416bc7639194804e4380e03f99006dbf6a16d09525ccadec25da28321eb8",
+                "first-triple-python-surface-normal",
+            ),
+            "Surface.type": (
+                1046,
+                "exception",
+                "mutable-string-coerced-python-surface-type-ae4bdcc7",
+                "dragon-shape-geometry-core-1046-ae4bdcc7",
+                "sha256:d312aa561bdbb6cab2484f8a078a702bb56d38be42f3bcaa2800f5532b518888",
+                "mutable-string-coerced-python-surface-type",
+            ),
+            "Surface.vertex": (
+                1047,
+                "exception",
+                "aliased-mutable-python-surface-vertices-7ed5c6b3",
+                "dragon-shape-geometry-core-1047-7ed5c6b3",
+                "sha256:0810dc08418bc78deac6f89786a849f5c20390ecc994c9395bcad0c715ce3cd7",
+                "aliased-mutable-python-surface-vertices",
+            ),
+            "SurfaceType": (
+                1054,
+                "exception",
+                "lowercase-python-surface-type-enum-61a37f9d",
+                "dragon-shape-geometry-core-1054-61a37f9d",
+                "sha256:e28446741c641805190b1565b43de667c6062361b1409215d5f7ad5d4314c31f",
+                "lowercase-python-surface-type-enum",
+            ),
+            "SurfaceType.CEILING": (
+                1055,
+                "equivalent",
+                None,
+                "dragon-shape-geometry-core-1055-9ece8323",
+                "sha256:05316ed46e42810cf7e5b0de1ba338d5f502c25a6a4c97e208fd5cdb9c435919",
+                "direct-surface-type-member-mapping",
+            ),
+            "SurfaceType.FLOOR": (
+                1056,
+                "equivalent",
+                None,
+                "dragon-shape-geometry-core-1056-c8c4f240",
+                "sha256:4bab1a992d34a81b0e0b280baba6fe6d305cf430d82c817ccfef4b853ab574cb",
+                "direct-surface-type-member-mapping",
+            ),
+            "SurfaceType.WALL": (
+                1057,
+                "equivalent",
+                None,
+                "dragon-shape-geometry-core-1057-ca6d5593",
+                "sha256:e4f63e8852e3c5be771dc461fd372e655c9683e9b3ed30ce928643eb0409029c",
+                "direct-surface-type-member-mapping",
+            ),
+            "SurfaceType.__str__": (
+                1058,
+                "exception",
+                "lowercase-python-surface-type-enum-f40e4929",
+                "dragon-shape-geometry-core-1058-f40e4929",
+                "sha256:14ae314f685943e78011024dcc0b279c48b972f9c72053029849eef98547e65b",
+                "lowercase-python-surface-type-enum",
+            ),
+            "Vertex": (
+                1059,
+                "exception",
+                "permissive-mutable-python-vertex-state-78650289",
+                "dragon-shape-geometry-core-1059-78650289",
+                "sha256:0f2962d8fab43164ac0ad84f04fe7bbbbe53ceaa9893f7b4093b4209aacfd34f",
+                "permissive-mutable-python-vertex-state",
+            ),
+            "Vertex.__add__": (
+                1060,
+                "exception",
+                "untyped-python-vertex-algebra-a5c7ecea",
+                "dragon-shape-geometry-core-1060-a5c7ecea",
+                "sha256:9b3e942fa977cb5374c53c5539b263d8e66bffb8a7ca3d2dba42cea26460bc22",
+                "untyped-python-vertex-algebra",
+            ),
+            "Vertex.__deepcopy__": (
+                1061,
+                "exception",
+                "python-vertex-copy-iteration-zero-addition-2c79da1a",
+                "dragon-shape-geometry-core-1061-2c79da1a",
+                "sha256:7cc15089ff3974303b8ff66c82264f1e4575280cebe7dc53b695df31229e19aa",
+                "python-vertex-copy-iteration-zero-addition",
+            ),
+            "Vertex.__init__": (
+                1063,
+                "exception",
+                "permissive-mutable-python-vertex-state-be3c69c5",
+                "dragon-shape-geometry-core-1063-be3c69c5",
+                "sha256:a31d5463a22afc15fbfa422477e455ddbfe768412d716d1f76c4d4f0a4afd733",
+                "permissive-mutable-python-vertex-state",
+            ),
+            "Vertex.__iter__": (
+                1064,
+                "exception",
+                "python-vertex-copy-iteration-zero-addition-e95d7ce5",
+                "dragon-shape-geometry-core-1064-e95d7ce5",
+                "sha256:5c429ab04b30eb052ab4fdd421665fb13e870a75b834a1f0a85307bd464002dc",
+                "python-vertex-copy-iteration-zero-addition",
+            ),
+            "Vertex.__mul__": (
+                1065,
+                "exception",
+                "untyped-python-vertex-algebra-323878e1",
+                "dragon-shape-geometry-core-1065-323878e1",
+                "sha256:608a929646e45db53d8800b571e607ff4f191b15109a359ad311f91684840e38",
+                "untyped-python-vertex-algebra",
+            ),
+            "Vertex.__radd__": (
+                1066,
+                "exception",
+                "python-vertex-copy-iteration-zero-addition-a473d0f3",
+                "dragon-shape-geometry-core-1066-a473d0f3",
+                "sha256:388fb6ca4786fe66e539f699caf4937ef824dc6118441a12a19e01dbb7ab049a",
+                "python-vertex-copy-iteration-zero-addition",
+            ),
+            "Vertex.__rmul__": (
+                1068,
+                "exception",
+                "untyped-python-vertex-algebra-1dbe33d3",
+                "dragon-shape-geometry-core-1068-1dbe33d3",
+                "sha256:4e09af087fb303452aaf3761ce473e61cf23286f9600a8efde211d9460a05f16",
+                "untyped-python-vertex-algebra",
+            ),
+            "Vertex.__sub__": (
+                1070,
+                "exception",
+                "untyped-python-vertex-algebra-4ee38e65",
+                "dragon-shape-geometry-core-1070-4ee38e65",
+                "sha256:bf1d02133fd2651444492a88f3b27ed4bd9b7cc1d4ffb0351232a7ca652ccc87",
+                "untyped-python-vertex-algebra",
+            ),
+            "Vertex.__truediv__": (
+                1071,
+                "exception",
+                "untyped-python-vertex-algebra-94f397b8",
+                "dragon-shape-geometry-core-1071-94f397b8",
+                "sha256:9fcfa8d48d9d35d62788f9b2ad7f218fa224e37cdf6ecfc32fbbe02ddc9fdf53",
+                "untyped-python-vertex-algebra",
+            ),
+            "Vertex.are_coplanar": (
+                1072,
+                "exception",
+                "legacy-first-triple-angular-coplanarity-905ebbf2",
+                "dragon-shape-geometry-core-1072-905ebbf2",
+                "sha256:ae0fab18d3b9c344c9ca4b66c991a16a958cf93a6323b69faf7736d3160d1f87",
+                "legacy-first-triple-angular-coplanarity",
+            ),
+            "Vertex.cross": (
+                1073,
+                "exception",
+                "untyped-python-vertex-metrics-6bc5db49",
+                "dragon-shape-geometry-core-1073-6bc5db49",
+                "sha256:47acbfb4038b9fcc6998c29b6c2221e72bf7613ea55689cfb3b5cabf1a926c08",
+                "untyped-python-vertex-metrics",
+            ),
+            "Vertex.distance": (
+                1074,
+                "exception",
+                "untyped-python-vertex-metrics-88c4cb9f",
+                "dragon-shape-geometry-core-1074-88c4cb9f",
+                "sha256:ba64225df24c6f348dbe1c61a31f6d7abfee9b5198e9aeb7effbacd487f45f47",
+                "untyped-python-vertex-metrics",
+            ),
+            "Vertex.dot": (
+                1075,
+                "exception",
+                "untyped-python-vertex-metrics-1aaf5930",
+                "dragon-shape-geometry-core-1075-1aaf5930",
+                "sha256:f84f3567eecb80518afa19d48a74cd56841ff2d559f7374c3c29fa2a80da1d8e",
+                "untyped-python-vertex-metrics",
+            ),
+            "Vertex.norm": (
+                1076,
+                "exception",
+                "untyped-python-vertex-metrics-e41eae31",
+                "dragon-shape-geometry-core-1076-e41eae31",
+                "sha256:0d5f53eedec478840c4d78919bde15e99901b3011389dd7eecd5c6c10efdd324",
+                "untyped-python-vertex-metrics",
+            ),
+            "Vertex.unit": (
+                1077,
+                "exception",
+                "zero-preserving-python-vertex-unit-4267bc06",
+                "dragon-shape-geometry-core-1077-4267bc06",
+                "sha256:510b8d8341d45c68b2503628e1d23a91794e4a48266264c38831046f9fb518d6",
+                "zero-preserving-python-vertex-unit",
+            ),
+            "Vertex.x": (
+                1078,
+                "exception",
+                "permissive-mutable-python-vertex-state-d859bad0",
+                "dragon-shape-geometry-core-1078-d859bad0",
+                "sha256:1b9c809756cb95c699a83bce8a074a73178f778e48bfeb9b094b6afa2f6a85b5",
+                "permissive-mutable-python-vertex-state",
+            ),
+            "Vertex.y": (
+                1079,
+                "exception",
+                "permissive-mutable-python-vertex-state-ff0bcc12",
+                "dragon-shape-geometry-core-1079-ff0bcc12",
+                "sha256:b203ff08791766ecee97c0d65b2e6242bef726c134d29f1e9f590422c1ad7846",
+                "permissive-mutable-python-vertex-state",
+            ),
+            "Vertex.z": (
+                1080,
+                "exception",
+                "permissive-mutable-python-vertex-state-64899aff",
+                "dragon-shape-geometry-core-1080-64899aff",
+                "sha256:39d8c23b19ef20d1ca83a4785214fb9470c910d6af5f9d34fd23a6f5a97ecfac",
+                "permissive-mutable-python-vertex-state",
+            ),
+        }
+        geometry_native_source_hashes = {
+            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/PlanarPolygon.cs": "sha256:73a1dd052fb12ed0802a6236d21484e2b680cbe3f0f4005ade6a61995111c653",
+            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vector3.cs": "sha256:02536827db9d1c6ff48a46678871e4d736d9536228f0de370a9fb2c5294b9ede",
+            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+        }
+        expected_geometry_native_symbols = {
+            "Surface": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface"),
+            "Surface.area": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.GrossArea"),
+            "Surface.center": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.Center"),
+            "Surface.height": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.Height"),
+            "Surface.normal": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.Normal"),
+            "Surface.type": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.Type"),
+            "Surface.vertex": ("Shape/PlanarPolygon.cs", "GonieGonie.InvisibleDragon.Shape.PlanarPolygon.Vertices"),
+            "SurfaceType": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceType"),
+            "SurfaceType.CEILING": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceType.Ceiling"),
+            "SurfaceType.FLOOR": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceType.Floor"),
+            "SurfaceType.WALL": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceType.Wall"),
+            "SurfaceType.__str__": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceType"),
+            "Vertex": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex"),
+            "Vertex.__add__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.op_Addition"),
+            "Vertex.__deepcopy__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex"),
+            "Vertex.__init__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.Vertex"),
+            "Vertex.__iter__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.X"),
+            "Vertex.__mul__": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.op_Multiply"),
+            "Vertex.__radd__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.op_Addition"),
+            "Vertex.__rmul__": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.op_Multiply"),
+            "Vertex.__sub__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.op_Subtraction"),
+            "Vertex.__truediv__": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.op_Division"),
+            "Vertex.are_coplanar": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.AreCoplanar"),
+            "Vertex.cross": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.Cross"),
+            "Vertex.distance": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.DistanceTo"),
+            "Vertex.dot": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.Dot"),
+            "Vertex.norm": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.Length"),
+            "Vertex.unit": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.Normalize"),
+            "Vertex.x": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.X"),
+            "Vertex.y": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.Y"),
+            "Vertex.z": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.Z"),
+        }
+        geometry_test_path = (
+            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/"
+            "GeometryCoreOracleParityTests.cs"
+        )
+        geometry_test_symbol = (
+            "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests."
+            "MatchesPinnedGeometryCoreThroughBoundedNativeRoutes"
+        )
+        geometry_test_hash = (
+            "sha256:6b9541530d1cd8f029ebd4596c87b019f6b2fecccd7426b12d62400fdb553edf"
+        )
+        geometry_families = set()
+        geometry_assertions = {}
+        equivalent_geometry_symbols = set()
+        exception_geometry_symbols = set()
+        for symbol, (
+            index,
+            classification,
+            exception_id,
+            assertion_id,
+            receipt_hash,
+            adaptation_family,
+        ) in expected_geometry_core.items():
+            key = ("src/idragon/dragon/shape.py", symbol)
+            entry = by_key[key]
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual(entry, compatibility.matrix.entries[index], symbol)
+            self.assertEqual(classification, entry.classification, symbol)
+            expected_refs = [f"upstream/symbol-evidence.json#{assertion_id}"]
+            if classification == "exception":
+                assert exception_id is not None
+                self.assertEqual(exception_id, entry.exception_id, symbol)
+                self.assertTrue(exception_id.startswith(adaptation_family + "-"), symbol)
+                expected_refs.insert(
+                    0, f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+                exception_geometry_symbols.add(symbol)
+            else:
+                self.assertEqual("equivalent", classification, symbol)
+                self.assertIsNone(entry.exception_id, symbol)
+                equivalent_geometry_symbols.add(symbol)
+            self.assertEqual(tuple(expected_refs), entry.evidence, symbol)
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertEqual(receipt_hash, receipt.expected_output_sha256, symbol)
+            self.assertEqual(geometry_test_path, receipt.test_path, symbol)
+            self.assertEqual(geometry_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(geometry_test_hash, receipt.test_source_sha256, symbol)
+            self.assertIn(f"Adaptation family {adaptation_family}", receipt.assertion)
+            self.assertIn(
+                "Other facts co-recorded in the same case observations are context-only",
+                receipt.assertion,
+                symbol,
+            )
+            suffix, native_symbol = expected_geometry_native_symbols[symbol]
+            self.assertTrue(evidence_entry.implementation_path.endswith(suffix), symbol)
+            self.assertEqual(native_symbol, evidence_entry.implementation_symbol, symbol)
+            self.assertEqual(
+                geometry_native_source_hashes[evidence_entry.implementation_path],
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            geometry_families.add(adaptation_family)
+            geometry_assertions[symbol] = receipt.assertion
+        self.assertEqual(31, len(expected_geometry_core))
+        self.assertEqual(15, len(geometry_families))
+        self.assertEqual(
+            {"SurfaceType.CEILING", "SurfaceType.FLOOR", "SurfaceType.WALL"},
+            equivalent_geometry_symbols,
+        )
+        self.assertEqual(28, len(exception_geometry_symbols))
+        self.assertIn(
+            "V04 zero, nonfinite and exception observations are absent and are not claimed",
+            geometry_assertions["Vertex.__rmul__"],
+        )
+        self.assertIn(
+            "No V04 behavior or native exception boundary is claimed",
+            geometry_assertions["Vertex.__sub__"],
+        )
+        self.assertIn(
+            "The V04 multiplication and division exceptions are context-only",
+            geometry_assertions["Vertex.__add__"],
+        )
+        self.assertIn(
+            "coordinate-projection and reverse-addition observations are context-only",
+            geometry_assertions["Vertex.__deepcopy__"],
+        )
+        self.assertIn(
+            "No Vertex.ToVector implementation binding, copy behavior or reverse-addition behavior is claimed",
+            geometry_assertions["Vertex.__iter__"],
+        )
+        self.assertIn(
+            "Copy, iteration, multiplication and division observations are context-only",
+            geometry_assertions["Vertex.__radd__"],
+        )
+        self.assertIn(
+            "T14 parsing and integer-cast observations co-recorded in the receipt are context-only",
+            geometry_assertions["SurfaceType.__str__"],
+        )
+        self.assertFalse(set(expected_geometry_core) & set(expected_opening_adjacency))
+        self.assertFalse(set(expected_geometry_core) & set(expected_zone_idf))
+        for preserved_out_of_scope in (
+            "Surface.__repr__",
+            "Surface.__str__",
+            "Vertex.__eq__",
+            "Vertex.__repr__",
+            "Vertex.__str__",
+        ):
+            self.assertEqual(
+                "out_of_scope",
+                by_key[("src/idragon/dragon/shape.py", preserved_out_of_scope)].classification,
+                preserved_out_of_scope,
+            )
         expected_source_system_idf = {
             "AbsorptionChiller.to_idf_object": (
                 644,

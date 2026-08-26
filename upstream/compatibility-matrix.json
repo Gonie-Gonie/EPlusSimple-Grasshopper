@@ -1034,53 +1034,53 @@
     "exception",
     "exception",
     "exception",
-    "needs_reverification",
+    "exception",
     "exception",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
-    "exception",
-    "exception",
-    "needs_reverification",
-    "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "exception",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
     "exception",
     "exception",
     "exception",
     "exception",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "out_of_scope",
-    "needs_reverification",
+    "exception",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "exception",
     "exception",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:6f134b37a2bf93e6cf8b61d9fa14062ff5cf015ff3cee46681b2566041304c83",
+  "content_sha256": "sha256:0253e6f292e8d4fc142198983bc1d28380839e801cf6e9bd8e385f8069760871",
   "details": [
     {
       "evidence": [
@@ -4899,6 +4899,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-python-surface-polygon-model-cb620c55",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1034-cb620c55"
+      ],
+      "exception_id": "permissive-python-surface-polygon-model-cb620c55",
+      "index": 1034,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface through the typed Surface and validated PlanarPolygon constructors for S08, S11. S08 constructs the representative validated surface, while S11 returns diagnostics and repeatable ArgumentException for the collinear triangle, duplicate-closing square and self-intersecting bow-tie before any native Surface construction. Adaptation family permissive-python-surface-polygon-model classifies the bounded native API or algorithm difference. Python mutable class state and accepted invalid-polygon instances are not native successes; Surface.__init__, openings, boundary, IDF emission and invalid families beyond the three named probes remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#aliased-python-surface-opening-inputs-ef349ef4",
         "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1035-ef349ef4"
       ],
@@ -4922,6 +4931,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#first-triple-oriented-python-surface-area-f254ab66",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1038-f254ab66"
+      ],
+      "exception_id": "first-triple-oriented-python-surface-area-f254ab66",
+      "index": 1038,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.area through Surface.GrossArea for S08, S09, S10, S11, S12. S08 GrossArea repeats exactly, S09 forward and reversed winding areas are equal, S10 native full-loop GrossArea is positive where Python reports a negative first-turn area, S11 has no area-bearing native Surface because each exact invalid polygon is rejected, and S12 preserves the original area while separately observing the replacement surface. Adaptation family first-triple-oriented-python-surface-area classifies the bounded native API or algorithm difference. Python signed first-turn area is not preserved; mutable alias behavior, nonfinite coordinates, other invalid polygons and every non-area Surface property remain outside this target claim. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#fresh-python-blinded-window-projection-f520fbfe",
         "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1039-f520fbfe"
       ],
@@ -4940,6 +4958,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#vertex-mean-python-surface-center-f0c05c2b",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1041-f0c05c2b"
+      ],
+      "exception_id": "vertex-mean-python-surface-center-f0c05c2b",
+      "index": 1041,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.center through Surface.Center for S08, S09, S12. S08 Center repeats exactly, S09 forward and reversed centers are equal, and S12 keeps the original center unchanged after source-array replacement while separately observing the replacement surface center. Adaptation family vertex-mean-python-surface-center classifies the bounded native API or algorithm difference. Only the named valid-polygon Center observations are claimed; Python vertex-mean behavior after alias mutation or on invalid polygons and every non-center property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#legacy-linear-scale-subsurface-projection-7e43708d",
         "upstream/symbol-evidence.json#dragon-shape-opening-adjacency-core-1042-7e43708d"
       ],
@@ -4949,12 +4976,48 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#z-span-python-surface-height-d479fe2f",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1043-d479fe2f"
+      ],
+      "exception_id": "z-span-python-surface-height-d479fe2f",
+      "index": 1043,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.height through Surface.Height for S08, S09, S12. S08 Height repeats exactly, S09 forward and reversed heights are equal, and S12 keeps the original height unchanged after source-array replacement while separately observing the replacement surface height. Adaptation family z-span-python-surface-height classifies the bounded native API or algorithm difference. Only the named valid finite-polygon Height observations are claimed; mutable or invalid Python geometry and every non-height property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#first-triple-python-surface-normal-3f089c8c",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1044-3f089c8c"
+      ],
+      "exception_id": "first-triple-python-surface-normal-3f089c8c",
+      "index": 1044,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.normal through Surface.Normal for S08, S09, S10, S11, S12. S08 Normal repeats exactly, S09 reversed winding produces the opposite normal, S10 native Normal follows the normalized full-loop cross sum where Python uses an opposed first-turn normal, S11 rejects each exact invalid polygon before a native normal exists, and S12 preserves the original normal while separately observing the replacement. Adaptation family first-triple-python-surface-normal classifies the bounded native API or algorithm difference. Only the named full-loop normal observations and exact invalid rejections are claimed; other degeneracy, mutable alias behavior and every non-normal property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#legacy-rectangular-surface-idf-emission",
         "upstream/symbol-evidence.json#dragon-shape-surface-to-idf-object-a03c4d52"
       ],
       "exception_id": "legacy-rectangular-surface-idf-emission",
       "index": 1045,
       "rationale": "Trusted cross-language evidence verifies Surface.to_idf_object across the exact five-case legacy-rectangular model-context slice: all 23 Python target objects and all 2437 official EnergyPlus 24.2 IDD fields are classified as native values, 2103 compact trailing omissions across eight spans, 91 explicit lexical or bounded-roundoff differences, and one corrected custom AirBoundary reference. Reciprocal two-window and two-door links, ground and roof classification, geometry, shading, target relocation and order, two-call document/object/field freshness and byte determinism, and the bounded captured source state are pinned. Standalone mutable-list shape, child classes and converters, invalid/error behavior, the native default detailed-fenestration route, IdfObject policy, broader global ordering/deduplication/conflict behavior, uncaptured source state, and EnergyModel parent-assembly closure remain unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#mutable-string-coerced-python-surface-type-ae4bdcc7",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1046-ae4bdcc7"
+      ],
+      "exception_id": "mutable-string-coerced-python-surface-type-ae4bdcc7",
+      "index": 1046,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.type through the get-only Surface.Type property and typed reconstruction for S08, S12. S08 observes Wall; S12 preserves original Wall state, reconstructs a distinct Floor surface and rejects enum value 99. No native property setter or Python lowercase-string mutation counterpart is claimed. Adaptation family mutable-string-coerced-python-surface-type classifies the bounded native API or algorithm difference. Only the named enum state, typed reconstruction and undefined-value rejection are claimed; Python string coercion, in-place setters and every non-type property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#aliased-mutable-python-surface-vertices-7ed5c6b3",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1047-7ed5c6b3"
+      ],
+      "exception_id": "aliased-mutable-python-surface-vertices-7ed5c6b3",
+      "index": 1047,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.vertex through Surface.Polygon and read-only PlanarPolygon.Vertices for S08, S11, S12. S08 preserves exact ordered vertex scalars after source-array element replacement, S11 rejects the three exact invalid polygons, and S12 preserves the original vertices while producing a distinct validated replacement. The native collection is read-only and value-copied. Adaptation family aliased-mutable-python-surface-vertices classifies the bounded native API or algorithm difference. Python vertex-object alias propagation, tuple reassignment and post-construction mutation are not preserved; per-object identity, other collection operations and every non-vertex property remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
     },
     {
       "evidence": [
@@ -5012,10 +5075,112 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#lowercase-python-surface-type-enum-61a37f9d",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1054-61a37f9d"
+      ],
+      "exception_id": "lowercase-python-surface-type-enum-61a37f9d",
+      "index": 1054,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceType through the SurfaceType enum for T13, T14. T13 pins definition order Wall, Ceiling, Floor, underlying values 0, 1, 2 and repeat enumeration; T14 pins only the class-level case-sensitive parse and defined integer-cast observations. Adaptation family lowercase-python-surface-type-enum classifies the bounded native API or algorithm difference. Python str-subclass identity, raw-string equality, lowercase construction and exact Python error text or timing are not equated; engineering serialization is separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1055-9ece8323"
+      ],
+      "index": 1055,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceType.CEILING through SurfaceType.Ceiling for T13. T13 pins only the direct Python CEILING engineering member to native Ceiling mapping. Adaptation family direct-surface-type-member-mapping records the direct equivalent member mapping. No enum order, ToString, parsing, raw-string equality or other member behavior is claimed by this equivalent constant receipt. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1056-c8c4f240"
+      ],
+      "index": 1056,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceType.FLOOR through SurfaceType.Floor for T13. T13 pins only the direct Python FLOOR engineering member to native Floor mapping. Adaptation family direct-surface-type-member-mapping records the direct equivalent member mapping. No enum order, ToString, parsing, raw-string equality or other member behavior is claimed by this equivalent constant receipt. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1057-ca6d5593"
+      ],
+      "index": 1057,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceType.WALL through SurfaceType.Wall for T13. T13 pins only the direct Python WALL engineering member to native Wall mapping. Adaptation family direct-surface-type-member-mapping records the direct equivalent member mapping. No enum order, ToString, parsing, raw-string equality or other member behavior is claimed by this equivalent constant receipt. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#lowercase-python-surface-type-enum-f40e4929",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1058-f40e4929"
+      ],
+      "exception_id": "lowercase-python-surface-type-enum-f40e4929",
+      "index": 1058,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SurfaceType.__str__ through System.Enum.ToString on SurfaceType for T13 active, with T14 context-only. T13 pins native ToString results Wall, Ceiling and Floor against Python lowercase strings. T14 parsing and integer-cast observations co-recorded in the receipt are context-only and are not evidence for __str__. Adaptation family lowercase-python-surface-type-enum classifies the bounded native API or algorithm difference. Only T13 display strings are active evidence; parsing, casting, raw-string equality, construction, engineering serialization and error topology remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-mutable-python-vertex-state-78650289",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1059-78650289"
+      ],
+      "exception_id": "permissive-mutable-python-vertex-state-78650289",
+      "index": 1059,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex through the readonly Vertex value type for V01. V01 pins finite Vertex(1,2,3), repeat value equality, readonly value-type state, absent X, Y and Z setters, and the exact NaN-X, positive-infinity-Y and negative-infinity-Z constructor rejections. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable coordinates, bool runtime values, nonfinite values and arbitrary-precision huge integers are not normalized or claimed as native successes; operator and metric behavior is separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#untyped-python-vertex-algebra-a5c7ecea",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1060-a5c7ecea"
+      ],
+      "exception_id": "untyped-python-vertex-algebra-a5c7ecea",
+      "index": 1060,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__add__ through Vertex.op_Addition(Vertex, Vector3) for V03, V04. V03 pins only the repeated point-plus-vector result from left plus right.ToVector; V04 pins only Vertex.Origin plus value.ToVector as the explicit zero identity and the declared Vertex addition signature. The V04 multiplication and division exceptions are context-only. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only the two named addition results and exact declared addition route are claimed; Python nonzero-int error text or timing and every multiplication or division fact remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#python-vertex-copy-iteration-zero-addition-2c79da1a",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1061-2c79da1a"
+      ],
+      "exception_id": "python-vertex-copy-iteration-zero-addition-2c79da1a",
+      "index": 1061,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__deepcopy__ through Vertex value-copy assignment for V02. V02 pins only equal Vertex value-copy assignment and unchanged original value, without native object-freshness identity. The V02 coordinate-projection and reverse-addition observations are context-only. Adaptation family python-vertex-copy-iteration-zero-addition classifies the bounded native API or algorithm difference. Python fresh-copy reference identity, memo behavior and mutation-after-copy semantics have no direct native method analogue and are not claimed. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-shape-py-vertex-eq-d11d670e"
       ],
       "index": 1062,
       "rationale": "The approximate Python equality has no upstream geometry call site; coplanarity, centroid, and IDF coordinate generation use vector operations instead. The C# native API separates exact Equals from tolerance-aware AlmostEquals, and actual geometry/topology remains covered by Rhino/IDF evidence."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-mutable-python-vertex-state-be3c69c5",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1063-be3c69c5"
+      ],
+      "exception_id": "permissive-mutable-python-vertex-state-be3c69c5",
+      "index": 1063,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__init__ through Vertex.Vertex(double, double, double) for V01. V01 pins finite construction and the exact NaN-X, positive-infinity-Y and negative-infinity-Z constructor rejections. Python post-construction coordinate mutation is context-only for this constructor target. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python bool-preserving, nonfinite and arbitrary-precision huge-integer construction success is not normalized; property mutation and every operator remain separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#python-vertex-copy-iteration-zero-addition-e95d7ce5",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1064-e95d7ce5"
+      ],
+      "exception_id": "python-vertex-copy-iteration-zero-addition-e95d7ce5",
+      "index": 1064,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__iter__ through direct Vertex.X, Vertex.Y and Vertex.Z reads, with Vertex.X as the exact registry-bound production member for V02. V02 pins only the explicit 1, 2, 3 coordinate projection obtained by direct X, Y and Z reads and the absence of native IEnumerable. No Vertex.ToVector implementation binding, copy behavior or reverse-addition behavior is claimed. Adaptation family python-vertex-copy-iteration-zero-addition classifies the bounded native API or algorithm difference. Python generator identity, one-shot exhaustion and mutation interaction have no native iterator analogue and remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#untyped-python-vertex-algebra-323878e1",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1065-323878e1"
+      ],
+      "exception_id": "untyped-python-vertex-algebra-323878e1",
+      "index": 1065,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__mul__ through Vector3.op_Multiply(Vector3, double) after Vertex.ToVector for V03, V04. V03 pins only the repeated right scalar multiplication result through value.ToVector times 2; V04 pins only zero scale and the NaN-scale ArgumentOutOfRangeException for that same operator direction. Division, addition and left multiplication observations are context-only. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only right multiplication, zero scale and NaN-scale rejection are claimed; Python string error text or timing and left multiplication, addition and division are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#python-vertex-copy-iteration-zero-addition-a473d0f3",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1066-a473d0f3"
+      ],
+      "exception_id": "python-vertex-copy-iteration-zero-addition-a473d0f3",
+      "index": 1066,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__radd__ through Vertex.op_Addition as Vertex.Origin plus Vertex.ToVector for V02, V04. V02 and V04 pin only the explicit Vertex.Origin plus value.ToVector identity adaptation corresponding to Python zero or False reverse addition and the unavailable nonzero-int dynamic route. Copy, iteration, multiplication and division observations are context-only. Adaptation family python-vertex-copy-iteration-zero-addition classifies the bounded native API or algorithm difference. No native dynamic False, zero or nonzero-int protocol, object-freshness identity, copy or iterator semantics are claimed. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
     },
     {
       "evidence": [
@@ -5026,10 +5191,118 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#untyped-python-vertex-algebra-1dbe33d3",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1068-1dbe33d3"
+      ],
+      "exception_id": "untyped-python-vertex-algebra-1dbe33d3",
+      "index": 1068,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__rmul__ through Vector3.op_Multiply(double, Vector3) after Vertex.ToVector for V03. V03 pins only the repeated left scalar multiplication result through 2 times value.ToVector. V04 zero, nonfinite and exception observations are absent and are not claimed. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only finite left multiplication is claimed; V04, zero, nonfinite, bool, string, foreign-operand and exception behavior remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-shape-py-vertex-str-97794195"
       ],
       "index": 1069,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#untyped-python-vertex-algebra-4ee38e65",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1070-4ee38e65"
+      ],
+      "exception_id": "untyped-python-vertex-algebra-4ee38e65",
+      "index": 1070,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__sub__ through Vertex.op_Subtraction(Vertex, Vertex) for V03. V03 pins only the repeated Vertex-minus-Vertex Vector3 result. No V04 behavior or native exception boundary is claimed. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only finite typed subtraction is claimed; V04, nonfinite, bool, string, foreign-operand and exception behavior remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#untyped-python-vertex-algebra-94f397b8",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1071-94f397b8"
+      ],
+      "exception_id": "untyped-python-vertex-algebra-94f397b8",
+      "index": 1071,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.__truediv__ through Vector3.op_Division(Vector3, double) after Vertex.ToVector for V03, V04. V03 pins only the repeated value.ToVector divided by 2 result; V04 pins only DivideByZeroException for divisor zero and ArgumentOutOfRangeException for positive-infinity divisor. The V04 NaN multiplication exception is context-only. Adaptation family untyped-python-vertex-algebra classifies the bounded native API or algorithm difference. Only finite division and the two named divisor rejections are claimed; Python error text or timing, NaN numerator behavior and multiplication facts remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#legacy-first-triple-angular-coplanarity-905ebbf2",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1072-905ebbf2"
+      ],
+      "exception_id": "legacy-first-triple-angular-coplanarity-905ebbf2",
+      "index": 1072,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.are_coplanar through Vertex.AreCoplanar for V06, V07. V06 pins explicit-distance-tolerance below, exact and above results true, true, false, default-tolerance results, empty and three-point shortcuts and null-enumerable rejection; V07 pins false for the two selected orderings through robust plane search where Python exposes the collinear-first-three defect. Adaptation family legacy-first-triple-angular-coplanarity classifies the bounded native API or algorithm difference. Python angular threshold, ordering-dependent zero-normal defect and dynamic non-Vertex element error timing are not preserved; tolerances and degeneracies beyond the named probes remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#untyped-python-vertex-metrics-6bc5db49",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1073-6bc5db49"
+      ],
+      "exception_id": "untyped-python-vertex-metrics-6bc5db49",
+      "index": 1073,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.cross through Vector3.Cross after Vertex.ToVector for V05. V05 pins only the exact finite cross result (48,-36,0) and unchanged selected source values; all other V05 metrics are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite Cross result is claimed; nonfinite, huge-integer, bool, foreign inputs and every other metric remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#untyped-python-vertex-metrics-88c4cb9f",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1074-88c4cb9f"
+      ],
+      "exception_id": "untyped-python-vertex-metrics-88c4cb9f",
+      "index": 1074,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.distance through Vertex.DistanceTo for V05. V05 pins only the exact finite distance result 13 and unchanged selected source values; all other V05 metrics are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite DistanceTo result is claimed; nonfinite, huge-integer, bool, foreign inputs and every other metric remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#untyped-python-vertex-metrics-1aaf5930",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1075-1aaf5930"
+      ],
+      "exception_id": "untyped-python-vertex-metrics-1aaf5930",
+      "index": 1075,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.dot through Vector3.Dot after Vertex.ToVector for V05. V05 pins only the exact finite dot result 0 and unchanged selected source values; all other V05 metrics are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite Dot result is claimed; nonfinite, huge-integer, bool, foreign inputs and every other metric remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#untyped-python-vertex-metrics-e41eae31",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1076-e41eae31"
+      ],
+      "exception_id": "untyped-python-vertex-metrics-e41eae31",
+      "index": 1076,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.norm through Vector3.Length after Vertex.ToVector for V05. V05 pins only finite Length 5, zero Length 0 and unchanged selected source values; Cross, DistanceTo, Dot and Normalize observations are context-only. Adaptation family untyped-python-vertex-metrics classifies the bounded native API or algorithm difference. Only the named finite and zero Length values are claimed; nonfinite, huge-integer, bool, foreign inputs and normalization behavior remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#zero-preserving-python-vertex-unit-4267bc06",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1077-4267bc06"
+      ],
+      "exception_id": "zero-preserving-python-vertex-unit-4267bc06",
+      "index": 1077,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.unit through Vector3.Normalize after Vertex.ToVector for V05. V05 pins only the repeated nonzero normalized vector (0.6,0.8,0), repeatable InvalidOperationException for zero normalization and unchanged selected source values. Cross, DistanceTo, Dot and Length values beyond the zero precondition are context-only. Adaptation family zero-preserving-python-vertex-unit classifies the bounded native API or algorithm difference. Python fresh zero-Vertex success is explicitly not preserved; nonfinite, huge-integer, bool and foreign inputs and other metrics remain unresolved. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-mutable-python-vertex-state-d859bad0",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1078-d859bad0"
+      ],
+      "exception_id": "permissive-mutable-python-vertex-state-d859bad0",
+      "index": 1078,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.x through the get-only Vertex.X property for V01. V01 pins only X=1, the absent X setter and the exact NaN-X constructor rejection. Y and Z values and their rejection probes are context-only. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable, bool-preserving, nonfinite and arbitrary-precision huge-integer X state is not normalized; Y, Z, operators and metrics are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-mutable-python-vertex-state-ff0bcc12",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1079-ff0bcc12"
+      ],
+      "exception_id": "permissive-mutable-python-vertex-state-ff0bcc12",
+      "index": 1079,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.y through the get-only Vertex.Y property for V01. V01 pins only Y=2, the absent Y setter and the exact positive-infinity-Y constructor rejection. X and Z values and their rejection probes are context-only. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable, bool-preserving, nonfinite and arbitrary-precision huge-integer Y state is not normalized; X, Z, operators and metrics are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-mutable-python-vertex-state-64899aff",
+        "upstream/symbol-evidence.json#dragon-shape-geometry-core-1080-64899aff"
+      ],
+      "exception_id": "permissive-mutable-python-vertex-state-64899aff",
+      "index": 1080,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Vertex.z through the get-only Vertex.Z property for V01. V01 pins only Z=3, the absent Z setter and the exact negative-infinity-Z constructor rejection. X and Y values and their rejection probes are context-only. Adaptation family permissive-mutable-python-vertex-state classifies the bounded native API or algorithm difference. Python mutable, bool-preserving, nonfinite and arbitrary-precision huge-integer Z state is not normalized; X, Y, operators and metrics are separate. Other facts co-recorded in the same case observations are context-only unless named above; opening and adjacency targets and out-of-scope repr, str and equality symbols are not retargeted."
     },
     {
       "evidence": [
@@ -5414,9 +5687,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 133,
-      "exception": 163,
-      "needs_reverification": 694,
+      "equivalent": 136,
+      "exception": 191,
+      "needs_reverification": 663,
       "out_of_scope": 252
     },
     "entry_count": 1242
