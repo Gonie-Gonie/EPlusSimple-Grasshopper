@@ -1,0 +1,2771 @@
+{
+  "cases": [
+    {
+      "executor": "convection-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-convection-constant-container",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.convection-heat-transfer.class.construction",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "input": {
+                "binary64": "1.22e8ba2e8ba2fp+3",
+                "kind": "float"
+              },
+              "label": "first-declared-value",
+              "outcome": "returned",
+              "result": {
+                "name": "IN",
+                "value": {
+                  "binary64": "1.22e8ba2e8ba2fp+3",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "input": {
+                "binary64": "1.7417d05f417d1p+4",
+                "kind": "float"
+              },
+              "label": "last-declared-value",
+              "outcome": "returned",
+              "result": {
+                "name": "OUT",
+                "value": {
+                  "binary64": "1.7417d05f417d1p+4",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "input": {
+                "decimal": "-1",
+                "kind": "int"
+              },
+              "label": "unknown-value",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ConvectionHeatTransfer"
+    },
+    {
+      "executor": "convection-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-convection-constant-container",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.convection-heat-transfer.class.member-topology",
+      "python": {
+        "facts": {
+          "alias_groups": [],
+          "canonical_names": {
+            "IN": "IN",
+            "OUT": "OUT"
+          },
+          "declared_member_names": [
+            "IN",
+            "OUT"
+          ],
+          "declared_values": [
+            {
+              "binary64": "1.22e8ba2e8ba2fp+3",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.7417d05f417d1p+4",
+              "kind": "float"
+            }
+          ],
+          "iterated_member_names": [
+            "IN",
+            "OUT"
+          ],
+          "iterated_values": [
+            {
+              "binary64": "1.22e8ba2e8ba2fp+3",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.7417d05f417d1p+4",
+              "kind": "float"
+            }
+          ],
+          "member_count": 2,
+          "unique_member_count": 2
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ConvectionHeatTransfer"
+    },
+    {
+      "executor": "convection-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-convection-constant-container",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.convection-heat-transfer.class.type-topology",
+      "python": {
+        "facts": {
+          "base_names": [
+            "float",
+            "Enum"
+          ],
+          "class_name": "ConvectionHeatTransfer",
+          "is_enum_subclass": true,
+          "is_float_subclass": true,
+          "module": "epsimple.constants",
+          "signature": "(*values)"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ConvectionHeatTransfer"
+    },
+    {
+      "executor": "convection-constant",
+      "id": "epsimple-constants-numeric.convection-heat-transfer.in.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.c28f5c28f5c29p-4",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.0000000000000p+0",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ConvectionHeatTransfer.IN"
+    },
+    {
+      "executor": "convection-constant",
+      "id": "epsimple-constants-numeric.convection-heat-transfer.in.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "IN",
+          "declared_name": "IN",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.22e8ba2e8ba2fp+3",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ConvectionHeatTransfer.IN"
+    },
+    {
+      "executor": "convection-constant",
+      "id": "epsimple-constants-numeric.convection-heat-transfer.in.value",
+      "python": {
+        "facts": {
+          "canonical_name": "IN",
+          "declared_name": "IN",
+          "value": {
+            "binary64": "1.22e8ba2e8ba2fp+3",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ConvectionHeatTransfer.IN"
+    },
+    {
+      "executor": "convection-constant",
+      "id": "epsimple-constants-numeric.convection-heat-transfer.out.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.604189374bc6ap-5",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.0000000000000p+0",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ConvectionHeatTransfer.OUT"
+    },
+    {
+      "executor": "convection-constant",
+      "id": "epsimple-constants-numeric.convection-heat-transfer.out.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "OUT",
+          "declared_name": "OUT",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.7417d05f417d1p+4",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ConvectionHeatTransfer.OUT"
+    },
+    {
+      "executor": "convection-constant",
+      "id": "epsimple-constants-numeric.convection-heat-transfer.out.value",
+      "python": {
+        "facts": {
+          "canonical_name": "OUT",
+          "declared_name": "OUT",
+          "value": {
+            "binary64": "1.7417d05f417d1p+4",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ConvectionHeatTransfer.OUT"
+    },
+    {
+      "executor": "site-factor-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-site-to-carbon-dispatch",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.site2co2.class.construction",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "input": {
+                "binary64": "1.d0ff972474539p-2",
+                "kind": "float"
+              },
+              "label": "first-declared-value",
+              "outcome": "returned",
+              "result": {
+                "name": "ELECTRICITY",
+                "value": {
+                  "binary64": "1.d0ff972474539p-2",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "input": {
+                "binary64": "1.161e4f765fd8bp-3",
+                "kind": "float"
+              },
+              "label": "last-declared-value",
+              "outcome": "returned",
+              "result": {
+                "name": "DISTRICTHEATING",
+                "value": {
+                  "binary64": "1.161e4f765fd8bp-3",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "input": {
+                "decimal": "-1",
+                "kind": "int"
+              },
+              "label": "unknown-value",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2"
+    },
+    {
+      "executor": "site-factor-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-site-to-carbon-dispatch",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.site2co2.class.member-topology",
+      "python": {
+        "facts": {
+          "alias_groups": [],
+          "canonical_names": {
+            "DISTRICTHEATING": "DISTRICTHEATING",
+            "ELECTRICITY": "ELECTRICITY",
+            "LPG": "LPG",
+            "NATURALGAS": "NATURALGAS",
+            "OIL": "OIL"
+          },
+          "declared_member_names": [
+            "ELECTRICITY",
+            "NATURALGAS",
+            "LPG",
+            "OIL",
+            "DISTRICTHEATING"
+          ],
+          "declared_values": [
+            {
+              "binary64": "1.d0ff972474539p-2",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.9e83e425aee63p-3",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.dc5d63886594bp-3",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.0a8c154c985f0p-2",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.161e4f765fd8bp-3",
+              "kind": "float"
+            }
+          ],
+          "iterated_member_names": [
+            "ELECTRICITY",
+            "NATURALGAS",
+            "LPG",
+            "OIL",
+            "DISTRICTHEATING"
+          ],
+          "iterated_values": [
+            {
+              "binary64": "1.d0ff972474539p-2",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.9e83e425aee63p-3",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.dc5d63886594bp-3",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.0a8c154c985f0p-2",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.161e4f765fd8bp-3",
+              "kind": "float"
+            }
+          ],
+          "member_count": 5,
+          "unique_member_count": 5
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2"
+    },
+    {
+      "executor": "site-factor-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-site-to-carbon-dispatch",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.site2co2.class.type-topology",
+      "python": {
+        "facts": {
+          "base_names": [
+            "float",
+            "Enum"
+          ],
+          "class_name": "Site2CO2",
+          "is_enum_subclass": true,
+          "is_float_subclass": true,
+          "module": "epsimple.constants",
+          "signature": "(*values)"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.districtheating.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.b28f5c28f5c29p+3",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.DISTRICTHEATING"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.districtheating.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "DISTRICTHEATING",
+          "declared_name": "DISTRICTHEATING",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.161e4f765fd8bp-3",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.DISTRICTHEATING"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.districtheating.value",
+      "python": {
+        "facts": {
+          "canonical_name": "DISTRICTHEATING",
+          "declared_name": "DISTRICTHEATING",
+          "value": {
+            "binary64": "1.161e4f765fd8bp-3",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.DISTRICTHEATING"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.electricity.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.6b47ae147ae15p+5",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.ELECTRICITY"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.electricity.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "ELECTRICITY",
+          "declared_name": "ELECTRICITY",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.d0ff972474539p-2",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.ELECTRICITY"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.electricity.value",
+      "python": {
+        "facts": {
+          "canonical_name": "ELECTRICITY",
+          "declared_name": "ELECTRICITY",
+          "value": {
+            "binary64": "1.d0ff972474539p-2",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.ELECTRICITY"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.lpg.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.7428f5c28f5c3p+4",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.LPG"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.lpg.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "LPG",
+          "declared_name": "LPG",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.dc5d63886594bp-3",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.LPG"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.lpg.value",
+      "python": {
+        "facts": {
+          "canonical_name": "LPG",
+          "declared_name": "LPG",
+          "value": {
+            "binary64": "1.dc5d63886594bp-3",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.LPG"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.naturalgas.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.43d70a3d70a3dp+4",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.NATURALGAS"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.naturalgas.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "NATURALGAS",
+          "declared_name": "NATURALGAS",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.9e83e425aee63p-3",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.NATURALGAS"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.naturalgas.value",
+      "python": {
+        "facts": {
+          "canonical_name": "NATURALGAS",
+          "declared_name": "NATURALGAS",
+          "value": {
+            "binary64": "1.9e83e425aee63p-3",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.NATURALGAS"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.oil.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.a07ae147ae147p+4",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.OIL"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.oil.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "OIL",
+          "declared_name": "OIL",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.0a8c154c985f0p-2",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.OIL"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2co2.oil.value",
+      "python": {
+        "facts": {
+          "canonical_name": "OIL",
+          "declared_name": "OIL",
+          "value": {
+            "binary64": "1.0a8c154c985f0p-2",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2CO2.OIL"
+    },
+    {
+      "executor": "site-factor-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-site-to-cost-dispatch",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.site2cost.class.construction",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "input": {
+                "binary64": "1.45d70a3d70a3dp+7",
+                "kind": "float"
+              },
+              "label": "first-declared-value",
+              "outcome": "returned",
+              "result": {
+                "name": "ELECTRICITY",
+                "value": {
+                  "binary64": "1.45d70a3d70a3dp+7",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "input": {
+                "binary64": "1.7beb851eb851fp+6",
+                "kind": "float"
+              },
+              "label": "last-declared-value",
+              "outcome": "returned",
+              "result": {
+                "name": "DISTRICTHEATING",
+                "value": {
+                  "binary64": "1.7beb851eb851fp+6",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "input": {
+                "decimal": "-1",
+                "kind": "int"
+              },
+              "label": "unknown-value",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost"
+    },
+    {
+      "executor": "site-factor-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-site-to-cost-dispatch",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.site2cost.class.member-topology",
+      "python": {
+        "facts": {
+          "alias_groups": [],
+          "canonical_names": {
+            "DISTRICTHEATING": "DISTRICTHEATING",
+            "ELECTRICITY": "ELECTRICITY",
+            "LPG": "LPG",
+            "NATURALGAS": "NATURALGAS",
+            "OIL": "OIL"
+          },
+          "declared_member_names": [
+            "ELECTRICITY",
+            "NATURALGAS",
+            "LPG",
+            "OIL",
+            "DISTRICTHEATING"
+          ],
+          "declared_values": [
+            {
+              "binary64": "1.45d70a3d70a3dp+7",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.387ae147ae148p+6",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.71c7ae147ae14p+7",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.1bd70a3d70a3dp+7",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.7beb851eb851fp+6",
+              "kind": "float"
+            }
+          ],
+          "iterated_member_names": [
+            "ELECTRICITY",
+            "NATURALGAS",
+            "LPG",
+            "OIL",
+            "DISTRICTHEATING"
+          ],
+          "iterated_values": [
+            {
+              "binary64": "1.45d70a3d70a3dp+7",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.387ae147ae148p+6",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.71c7ae147ae14p+7",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.1bd70a3d70a3dp+7",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.7beb851eb851fp+6",
+              "kind": "float"
+            }
+          ],
+          "member_count": 5,
+          "unique_member_count": 5
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost"
+    },
+    {
+      "executor": "site-factor-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-site-to-cost-dispatch",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.site2cost.class.type-topology",
+      "python": {
+        "facts": {
+          "base_names": [
+            "float",
+            "Enum"
+          ],
+          "class_name": "Site2Cost",
+          "is_enum_subclass": true,
+          "is_float_subclass": true,
+          "module": "epsimple.constants",
+          "signature": "(*values)"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.districtheating.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.28d0000000000p+13",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.DISTRICTHEATING"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.districtheating.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "DISTRICTHEATING",
+          "declared_name": "DISTRICTHEATING",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.7beb851eb851fp+6",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.DISTRICTHEATING"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.districtheating.value",
+      "python": {
+        "facts": {
+          "canonical_name": "DISTRICTHEATING",
+          "declared_name": "DISTRICTHEATING",
+          "value": {
+            "binary64": "1.7beb851eb851fp+6",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.DISTRICTHEATING"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.electricity.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.fd1ffffffffffp+13",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.ELECTRICITY"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.electricity.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "ELECTRICITY",
+          "declared_name": "ELECTRICITY",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.45d70a3d70a3dp+7",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.ELECTRICITY"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.electricity.value",
+      "python": {
+        "facts": {
+          "canonical_name": "ELECTRICITY",
+          "declared_name": "ELECTRICITY",
+          "value": {
+            "binary64": "1.45d70a3d70a3dp+7",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.ELECTRICITY"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.lpg.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.20e4000000000p+14",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.LPG"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.lpg.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "LPG",
+          "declared_name": "LPG",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.71c7ae147ae14p+7",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.LPG"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.lpg.value",
+      "python": {
+        "facts": {
+          "canonical_name": "LPG",
+          "declared_name": "LPG",
+          "value": {
+            "binary64": "1.71c7ae147ae14p+7",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.LPG"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.naturalgas.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.e840000000000p+12",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.NATURALGAS"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.naturalgas.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "NATURALGAS",
+          "declared_name": "NATURALGAS",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.387ae147ae148p+6",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.NATURALGAS"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.naturalgas.value",
+      "python": {
+        "facts": {
+          "canonical_name": "NATURALGAS",
+          "declared_name": "NATURALGAS",
+          "value": {
+            "binary64": "1.387ae147ae148p+6",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.NATURALGAS"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.oil.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.bb7ffffffffffp+13",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.OIL"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.oil.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "OIL",
+          "declared_name": "OIL",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.1bd70a3d70a3dp+7",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.OIL"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2cost.oil.value",
+      "python": {
+        "facts": {
+          "canonical_name": "OIL",
+          "declared_name": "OIL",
+          "value": {
+            "binary64": "1.1bd70a3d70a3dp+7",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Cost.OIL"
+    },
+    {
+      "executor": "site-factor-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-site-to-source-dispatch",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.site2source.class.construction",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "input": {
+                "binary64": "1.6000000000000p+1",
+                "kind": "float"
+              },
+              "label": "first-declared-value",
+              "outcome": "returned",
+              "result": {
+                "name": "ELECTRICITY",
+                "value": {
+                  "binary64": "1.6000000000000p+1",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "input": {
+                "binary64": "1.74bc6a7ef9db2p-1",
+                "kind": "float"
+              },
+              "label": "last-declared-value",
+              "outcome": "returned",
+              "result": {
+                "name": "DISTRICTHEATING",
+                "value": {
+                  "binary64": "1.74bc6a7ef9db2p-1",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "input": {
+                "decimal": "-1",
+                "kind": "int"
+              },
+              "label": "unknown-value",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source"
+    },
+    {
+      "executor": "site-factor-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-site-to-source-dispatch",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.site2source.class.member-topology",
+      "python": {
+        "facts": {
+          "alias_groups": [
+            [
+              "NATURALGAS",
+              "LPG",
+              "OIL"
+            ]
+          ],
+          "canonical_names": {
+            "DISTRICTHEATING": "DISTRICTHEATING",
+            "ELECTRICITY": "ELECTRICITY",
+            "LPG": "NATURALGAS",
+            "NATURALGAS": "NATURALGAS",
+            "OIL": "NATURALGAS"
+          },
+          "declared_member_names": [
+            "ELECTRICITY",
+            "NATURALGAS",
+            "LPG",
+            "OIL",
+            "DISTRICTHEATING"
+          ],
+          "declared_values": [
+            {
+              "binary64": "1.6000000000000p+1",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.199999999999ap+0",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.199999999999ap+0",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.199999999999ap+0",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.74bc6a7ef9db2p-1",
+              "kind": "float"
+            }
+          ],
+          "iterated_member_names": [
+            "ELECTRICITY",
+            "NATURALGAS",
+            "DISTRICTHEATING"
+          ],
+          "iterated_values": [
+            {
+              "binary64": "1.6000000000000p+1",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.199999999999ap+0",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.74bc6a7ef9db2p-1",
+              "kind": "float"
+            }
+          ],
+          "member_count": 5,
+          "result_scaling": {
+            "carrier_order": [
+              "ELECTRICITY",
+              "NATURALGAS",
+              "LPG",
+              "OIL",
+              "DISTRICTHEATING"
+            ],
+            "direct_method_execution": {
+              "input_rows": [
+                {
+                  "carrier": "ELECTRICITY",
+                  "values": [
+                    {
+                      "binary64": "1.0000000000000p+0",
+                      "kind": "float"
+                    },
+                    {
+                      "binary64": "1.0000000000000p+1",
+                      "kind": "float"
+                    }
+                  ]
+                },
+                {
+                  "carrier": "NATURALGAS",
+                  "values": [
+                    {
+                      "binary64": "1.0000000000000p+0",
+                      "kind": "float"
+                    },
+                    {
+                      "binary64": "1.0000000000000p+1",
+                      "kind": "float"
+                    }
+                  ]
+                },
+                {
+                  "carrier": "LPG",
+                  "values": [
+                    {
+                      "binary64": "1.0000000000000p+0",
+                      "kind": "float"
+                    },
+                    {
+                      "binary64": "1.0000000000000p+1",
+                      "kind": "float"
+                    }
+                  ]
+                },
+                {
+                  "carrier": "OIL",
+                  "values": [
+                    {
+                      "binary64": "1.0000000000000p+0",
+                      "kind": "float"
+                    },
+                    {
+                      "binary64": "1.0000000000000p+1",
+                      "kind": "float"
+                    }
+                  ]
+                },
+                {
+                  "carrier": "DISTRICTHEATING",
+                  "values": [
+                    {
+                      "binary64": "1.0000000000000p+0",
+                      "kind": "float"
+                    },
+                    {
+                      "binary64": "1.0000000000000p+1",
+                      "kind": "float"
+                    }
+                  ]
+                }
+              ],
+              "method": "GreenRetrofitResult.to_source_uses",
+              "mode": "pinned-upstream-ast-exact-method",
+              "output_rows": [
+                {
+                  "carrier": "ELECTRICITY",
+                  "values": [
+                    {
+                      "binary64": "1.6000000000000p+1",
+                      "kind": "float"
+                    },
+                    {
+                      "binary64": "1.6000000000000p+2",
+                      "kind": "float"
+                    }
+                  ]
+                },
+                {
+                  "carrier": "NATURALGAS",
+                  "values": [
+                    {
+                      "binary64": "1.199999999999ap+0",
+                      "kind": "float"
+                    },
+                    {
+                      "binary64": "1.199999999999ap+1",
+                      "kind": "float"
+                    }
+                  ]
+                },
+                {
+                  "carrier": "LPG",
+                  "values": [
+                    {
+                      "binary64": "1.75c28f5c28f5cp-1",
+                      "kind": "float"
+                    },
+                    {
+                      "binary64": "1.75c28f5c28f5cp+0",
+                      "kind": "float"
+                    }
+                  ]
+                },
+                {
+                  "carrier": "OIL",
+                  "values": [
+                    {
+                      "binary64": "1.0000000000000p+0",
+                      "kind": "float"
+                    },
+                    {
+                      "binary64": "1.0000000000000p+1",
+                      "kind": "float"
+                    }
+                  ]
+                },
+                {
+                  "carrier": "DISTRICTHEATING",
+                  "values": [
+                    {
+                      "binary64": "1.0000000000000p+0",
+                      "kind": "float"
+                    },
+                    {
+                      "binary64": "1.0000000000000p+1",
+                      "kind": "float"
+                    }
+                  ]
+                }
+              ],
+              "valid_digits": 2
+            },
+            "factor_sources": [
+              "ELECTRICITY",
+              "NATURALGAS",
+              "DISTRICTHEATING",
+              "UNMATCHED",
+              "UNMATCHED"
+            ],
+            "factors": [
+              {
+                "binary64": "1.6000000000000p+1",
+                "kind": "float"
+              },
+              {
+                "binary64": "1.199999999999ap+0",
+                "kind": "float"
+              },
+              {
+                "binary64": "1.74bc6a7ef9db2p-1",
+                "kind": "float"
+              },
+              {
+                "binary64": "1.0000000000000p+0",
+                "kind": "float"
+              },
+              {
+                "binary64": "1.0000000000000p+0",
+                "kind": "float"
+              }
+            ]
+          },
+          "unique_member_count": 3
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source"
+    },
+    {
+      "executor": "site-factor-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-site-to-source-dispatch",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.site2source.class.type-topology",
+      "python": {
+        "facts": {
+          "base_names": [
+            "float",
+            "Enum"
+          ],
+          "class_name": "Site2Source",
+          "is_enum_subclass": true,
+          "is_float_subclass": true,
+          "module": "epsimple.constants",
+          "signature": "(*values)"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.districtheating.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.2333333333333p+6",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.DISTRICTHEATING"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.districtheating.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "DISTRICTHEATING",
+          "declared_name": "DISTRICTHEATING",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.74bc6a7ef9db2p-1",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.DISTRICTHEATING"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.districtheating.value",
+      "python": {
+        "facts": {
+          "canonical_name": "DISTRICTHEATING",
+          "declared_name": "DISTRICTHEATING",
+          "value": {
+            "binary64": "1.74bc6a7ef9db2p-1",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.DISTRICTHEATING"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.electricity.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.1300000000000p+8",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.ELECTRICITY"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.electricity.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "ELECTRICITY",
+          "declared_name": "ELECTRICITY",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.6000000000000p+1",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.ELECTRICITY"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.electricity.value",
+      "python": {
+        "facts": {
+          "canonical_name": "ELECTRICITY",
+          "declared_name": "ELECTRICITY",
+          "value": {
+            "binary64": "1.6000000000000p+1",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.ELECTRICITY"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.lpg.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.b800000000001p+6",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.LPG"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.lpg.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "NATURALGAS",
+          "declared_name": "LPG",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.199999999999ap+0",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.LPG"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.lpg.value",
+      "python": {
+        "facts": {
+          "canonical_name": "NATURALGAS",
+          "declared_name": "LPG",
+          "value": {
+            "binary64": "1.199999999999ap+0",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.LPG"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.naturalgas.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.b800000000001p+6",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.NATURALGAS"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.naturalgas.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "NATURALGAS",
+          "declared_name": "NATURALGAS",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.199999999999ap+0",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.NATURALGAS"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.naturalgas.value",
+      "python": {
+        "facts": {
+          "canonical_name": "NATURALGAS",
+          "declared_name": "NATURALGAS",
+          "value": {
+            "binary64": "1.199999999999ap+0",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.NATURALGAS"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.oil.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.b800000000001p+6",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.OIL"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.oil.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "NATURALGAS",
+          "declared_name": "OIL",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.199999999999ap+0",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.OIL"
+    },
+    {
+      "executor": "site-factor-constant",
+      "id": "epsimple-constants-numeric.site2source.oil.value",
+      "python": {
+        "facts": {
+          "canonical_name": "NATURALGAS",
+          "declared_name": "OIL",
+          "value": {
+            "binary64": "1.199999999999ap+0",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Site2Source.OIL"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.ach50-to-ach.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.0000000000000p+1",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.1eb851eb851ecp-3",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.ACH50_TO_ACH"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.ach50-to-ach.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "ACH50_TO_ACH",
+          "declared_name": "ACH50_TO_ACH",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.1eb851eb851ecp-4",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.ACH50_TO_ACH"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.ach50-to-ach.value",
+      "python": {
+        "facts": {
+          "canonical_name": "ACH50_TO_ACH",
+          "declared_name": "ACH50_TO_ACH",
+          "value": {
+            "binary64": "1.1eb851eb851ecp-4",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.ACH50_TO_ACH"
+    },
+    {
+      "executor": "unit-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-unit-conversion-constants",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.unit.class.construction",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "input": {
+                "binary64": "1.0624dd2f1a9fcp-10",
+                "kind": "float"
+              },
+              "label": "first-declared-value",
+              "outcome": "returned",
+              "result": {
+                "name": "MM_TO_M",
+                "value": {
+                  "binary64": "1.0624dd2f1a9fcp-10",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "input": {
+                "binary64": "1.c200000000000p+11",
+                "kind": "float"
+              },
+              "label": "last-declared-value",
+              "outcome": "returned",
+              "result": {
+                "name": "M3_PER_S_TO_CMH",
+                "value": {
+                  "binary64": "1.c200000000000p+11",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "input": {
+                "decimal": "-1",
+                "kind": "int"
+              },
+              "label": "unknown-value",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit"
+    },
+    {
+      "executor": "unit-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-unit-conversion-constants",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.unit.class.member-topology",
+      "python": {
+        "facts": {
+          "alias_groups": [
+            [
+              "MM_TO_M",
+              "W_TO_KW"
+            ]
+          ],
+          "canonical_names": {
+            "ACH50_TO_ACH": "ACH50_TO_ACH",
+            "FRACTION_TO_PERCENT": "FRACTION_TO_PERCENT",
+            "M3_PER_S_TO_CMH": "M3_PER_S_TO_CMH",
+            "MM_TO_M": "MM_TO_M",
+            "M_TO_MM": "M_TO_MM",
+            "PERCENT_TO_FRACTION": "PERCENT_TO_FRACTION",
+            "W_TO_KW": "MM_TO_M"
+          },
+          "declared_member_names": [
+            "MM_TO_M",
+            "M_TO_MM",
+            "FRACTION_TO_PERCENT",
+            "PERCENT_TO_FRACTION",
+            "W_TO_KW",
+            "ACH50_TO_ACH",
+            "M3_PER_S_TO_CMH"
+          ],
+          "declared_values": [
+            {
+              "binary64": "1.0624dd2f1a9fcp-10",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.f400000000000p+9",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.9000000000000p+6",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.47ae147ae147bp-7",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.0624dd2f1a9fcp-10",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.1eb851eb851ecp-4",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.c200000000000p+11",
+              "kind": "float"
+            }
+          ],
+          "iterated_member_names": [
+            "MM_TO_M",
+            "M_TO_MM",
+            "FRACTION_TO_PERCENT",
+            "PERCENT_TO_FRACTION",
+            "ACH50_TO_ACH",
+            "M3_PER_S_TO_CMH"
+          ],
+          "iterated_values": [
+            {
+              "binary64": "1.0624dd2f1a9fcp-10",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.f400000000000p+9",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.9000000000000p+6",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.47ae147ae147bp-7",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.1eb851eb851ecp-4",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.c200000000000p+11",
+              "kind": "float"
+            }
+          ],
+          "member_count": 7,
+          "unique_member_count": 6
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit"
+    },
+    {
+      "executor": "unit-class",
+      "expected_dotnet": {
+        "adaptation": "native-simpledragon-unit-conversion-constants",
+        "outcome": "returned"
+      },
+      "id": "epsimple-constants-numeric.unit.class.type-topology",
+      "python": {
+        "facts": {
+          "base_names": [
+            "float",
+            "Enum"
+          ],
+          "class_name": "Unit",
+          "is_enum_subclass": true,
+          "is_float_subclass": true,
+          "module": "epsimple.constants",
+          "signature": "(*values)"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.fraction-to-percent.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.8000000000000p-2",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.2c00000000000p+5",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.FRACTION_TO_PERCENT"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.fraction-to-percent.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "FRACTION_TO_PERCENT",
+          "declared_name": "FRACTION_TO_PERCENT",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.FRACTION_TO_PERCENT"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.fraction-to-percent.value",
+      "python": {
+        "facts": {
+          "canonical_name": "FRACTION_TO_PERCENT",
+          "declared_name": "FRACTION_TO_PERCENT",
+          "value": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.FRACTION_TO_PERCENT"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.m-to-mm.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.47ae147ae147bp-10",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.4000000000000p+0",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.M_TO_MM"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.m-to-mm.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "M_TO_MM",
+          "declared_name": "M_TO_MM",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.f400000000000p+9",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.M_TO_MM"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.m-to-mm.value",
+      "python": {
+        "facts": {
+          "canonical_name": "M_TO_MM",
+          "declared_name": "M_TO_MM",
+          "value": {
+            "binary64": "1.f400000000000p+9",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.M_TO_MM"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.m3-per-s-to-cmh.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.0000000000000p-1",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.c200000000000p+10",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.M3_PER_S_TO_CMH"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.m3-per-s-to-cmh.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "M3_PER_S_TO_CMH",
+          "declared_name": "M3_PER_S_TO_CMH",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.c200000000000p+11",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.M3_PER_S_TO_CMH"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.m3-per-s-to-cmh.value",
+      "python": {
+        "facts": {
+          "canonical_name": "M3_PER_S_TO_CMH",
+          "declared_name": "M3_PER_S_TO_CMH",
+          "value": {
+            "binary64": "1.c200000000000p+11",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.M3_PER_S_TO_CMH"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.mm-to-m.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.3880000000000p+10",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.4000000000000p+0",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.MM_TO_M"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.mm-to-m.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "MM_TO_M",
+          "declared_name": "MM_TO_M",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.0624dd2f1a9fcp-10",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.MM_TO_M"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.mm-to-m.value",
+      "python": {
+        "facts": {
+          "canonical_name": "MM_TO_M",
+          "declared_name": "MM_TO_M",
+          "value": {
+            "binary64": "1.0624dd2f1a9fcp-10",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.MM_TO_M"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.percent-to-fraction.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.2c00000000000p+5",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.8000000000000p-2",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.PERCENT_TO_FRACTION"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.percent-to-fraction.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "PERCENT_TO_FRACTION",
+          "declared_name": "PERCENT_TO_FRACTION",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.47ae147ae147bp-7",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.PERCENT_TO_FRACTION"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.percent-to-fraction.value",
+      "python": {
+        "facts": {
+          "canonical_name": "PERCENT_TO_FRACTION",
+          "declared_name": "PERCENT_TO_FRACTION",
+          "value": {
+            "binary64": "1.47ae147ae147bp-7",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.PERCENT_TO_FRACTION"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.w-to-kw.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.0680000000000p+12",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.0cccccccccccdp+2",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.W_TO_KW"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.w-to-kw.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "MM_TO_M",
+          "declared_name": "W_TO_KW",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.0624dd2f1a9fcp-10",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.W_TO_KW"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "epsimple-constants-numeric.unit.w-to-kw.value",
+      "python": {
+        "facts": {
+          "canonical_name": "MM_TO_M",
+          "declared_name": "W_TO_KW",
+          "value": {
+            "binary64": "1.0624dd2f1a9fcp-10",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.W_TO_KW"
+    }
+  ],
+  "cases_sha256": "sha256:e80c7d274444f640a4c3a2ddf3b8a7c03e06adfe6e0b3b844c8ed74dce501e3a",
+  "consumer_contract": {
+    "adaptations": {
+      "ConvectionHeatTransfer": "native-simpledragon-convection-constant-container",
+      "Site2CO2": "native-simpledragon-site-to-carbon-dispatch",
+      "Site2Cost": "native-simpledragon-site-to-cost-dispatch",
+      "Site2Source": "native-simpledragon-site-to-source-dispatch",
+      "Unit": "native-simpledragon-unit-conversion-constants"
+    },
+    "assertion_ids": {
+      "ConvectionHeatTransfer": "epsimple-constants-numeric-convection-heat-transfer-2d68c0fd",
+      "ConvectionHeatTransfer.IN": "epsimple-constants-numeric-convection-heat-transfer-in-f4d1b691",
+      "ConvectionHeatTransfer.OUT": "epsimple-constants-numeric-convection-heat-transfer-out-c36faf62",
+      "Site2CO2": "epsimple-constants-numeric-site2co2-9ff40d94",
+      "Site2CO2.DISTRICTHEATING": "epsimple-constants-numeric-site2co2-districtheating-1d7b874c",
+      "Site2CO2.ELECTRICITY": "epsimple-constants-numeric-site2co2-electricity-427886a2",
+      "Site2CO2.LPG": "epsimple-constants-numeric-site2co2-lpg-68cf7791",
+      "Site2CO2.NATURALGAS": "epsimple-constants-numeric-site2co2-naturalgas-860c2f93",
+      "Site2CO2.OIL": "epsimple-constants-numeric-site2co2-oil-4a1979a2",
+      "Site2Cost": "epsimple-constants-numeric-site2cost-0f875078",
+      "Site2Cost.DISTRICTHEATING": "epsimple-constants-numeric-site2cost-districtheating-956e2b0d",
+      "Site2Cost.ELECTRICITY": "epsimple-constants-numeric-site2cost-electricity-b9b2bc99",
+      "Site2Cost.LPG": "epsimple-constants-numeric-site2cost-lpg-08fe014b",
+      "Site2Cost.NATURALGAS": "epsimple-constants-numeric-site2cost-naturalgas-6c00bbfc",
+      "Site2Cost.OIL": "epsimple-constants-numeric-site2cost-oil-f58bfe50",
+      "Site2Source": "epsimple-constants-numeric-site2source-763a14c7",
+      "Site2Source.DISTRICTHEATING": "epsimple-constants-numeric-site2source-districtheating-5f0ca3b7",
+      "Site2Source.ELECTRICITY": "epsimple-constants-numeric-site2source-electricity-9f6e831e",
+      "Site2Source.LPG": "epsimple-constants-numeric-site2source-lpg-f891444c",
+      "Site2Source.NATURALGAS": "epsimple-constants-numeric-site2source-naturalgas-8661aaea",
+      "Site2Source.OIL": "epsimple-constants-numeric-site2source-oil-18468fb1",
+      "Unit": "epsimple-constants-numeric-unit-82eeceb9",
+      "Unit.ACH50_TO_ACH": "epsimple-constants-numeric-unit-ach50-to-ach-fd2a09b0",
+      "Unit.FRACTION_TO_PERCENT": "epsimple-constants-numeric-unit-fraction-to-percent-55d3f412",
+      "Unit.M3_PER_S_TO_CMH": "epsimple-constants-numeric-unit-m3-per-s-to-cmh-c67e87d9",
+      "Unit.MM_TO_M": "epsimple-constants-numeric-unit-mm-to-m-78d61c82",
+      "Unit.M_TO_MM": "epsimple-constants-numeric-unit-m-to-mm-b49a8507",
+      "Unit.PERCENT_TO_FRACTION": "epsimple-constants-numeric-unit-percent-to-fraction-2f91a99f",
+      "Unit.W_TO_KW": "epsimple-constants-numeric-unit-w-to-kw-9891f5c1"
+    },
+    "case_count": 87,
+    "case_ids": [
+      "epsimple-constants-numeric.convection-heat-transfer.class.construction",
+      "epsimple-constants-numeric.convection-heat-transfer.class.member-topology",
+      "epsimple-constants-numeric.convection-heat-transfer.class.type-topology",
+      "epsimple-constants-numeric.convection-heat-transfer.in.engineering-probe",
+      "epsimple-constants-numeric.convection-heat-transfer.in.numeric-semantics",
+      "epsimple-constants-numeric.convection-heat-transfer.in.value",
+      "epsimple-constants-numeric.convection-heat-transfer.out.engineering-probe",
+      "epsimple-constants-numeric.convection-heat-transfer.out.numeric-semantics",
+      "epsimple-constants-numeric.convection-heat-transfer.out.value",
+      "epsimple-constants-numeric.site2co2.class.construction",
+      "epsimple-constants-numeric.site2co2.class.member-topology",
+      "epsimple-constants-numeric.site2co2.class.type-topology",
+      "epsimple-constants-numeric.site2co2.districtheating.engineering-probe",
+      "epsimple-constants-numeric.site2co2.districtheating.numeric-semantics",
+      "epsimple-constants-numeric.site2co2.districtheating.value",
+      "epsimple-constants-numeric.site2co2.electricity.engineering-probe",
+      "epsimple-constants-numeric.site2co2.electricity.numeric-semantics",
+      "epsimple-constants-numeric.site2co2.electricity.value",
+      "epsimple-constants-numeric.site2co2.lpg.engineering-probe",
+      "epsimple-constants-numeric.site2co2.lpg.numeric-semantics",
+      "epsimple-constants-numeric.site2co2.lpg.value",
+      "epsimple-constants-numeric.site2co2.naturalgas.engineering-probe",
+      "epsimple-constants-numeric.site2co2.naturalgas.numeric-semantics",
+      "epsimple-constants-numeric.site2co2.naturalgas.value",
+      "epsimple-constants-numeric.site2co2.oil.engineering-probe",
+      "epsimple-constants-numeric.site2co2.oil.numeric-semantics",
+      "epsimple-constants-numeric.site2co2.oil.value",
+      "epsimple-constants-numeric.site2cost.class.construction",
+      "epsimple-constants-numeric.site2cost.class.member-topology",
+      "epsimple-constants-numeric.site2cost.class.type-topology",
+      "epsimple-constants-numeric.site2cost.districtheating.engineering-probe",
+      "epsimple-constants-numeric.site2cost.districtheating.numeric-semantics",
+      "epsimple-constants-numeric.site2cost.districtheating.value",
+      "epsimple-constants-numeric.site2cost.electricity.engineering-probe",
+      "epsimple-constants-numeric.site2cost.electricity.numeric-semantics",
+      "epsimple-constants-numeric.site2cost.electricity.value",
+      "epsimple-constants-numeric.site2cost.lpg.engineering-probe",
+      "epsimple-constants-numeric.site2cost.lpg.numeric-semantics",
+      "epsimple-constants-numeric.site2cost.lpg.value",
+      "epsimple-constants-numeric.site2cost.naturalgas.engineering-probe",
+      "epsimple-constants-numeric.site2cost.naturalgas.numeric-semantics",
+      "epsimple-constants-numeric.site2cost.naturalgas.value",
+      "epsimple-constants-numeric.site2cost.oil.engineering-probe",
+      "epsimple-constants-numeric.site2cost.oil.numeric-semantics",
+      "epsimple-constants-numeric.site2cost.oil.value",
+      "epsimple-constants-numeric.site2source.class.construction",
+      "epsimple-constants-numeric.site2source.class.member-topology",
+      "epsimple-constants-numeric.site2source.class.type-topology",
+      "epsimple-constants-numeric.site2source.districtheating.engineering-probe",
+      "epsimple-constants-numeric.site2source.districtheating.numeric-semantics",
+      "epsimple-constants-numeric.site2source.districtheating.value",
+      "epsimple-constants-numeric.site2source.electricity.engineering-probe",
+      "epsimple-constants-numeric.site2source.electricity.numeric-semantics",
+      "epsimple-constants-numeric.site2source.electricity.value",
+      "epsimple-constants-numeric.site2source.lpg.engineering-probe",
+      "epsimple-constants-numeric.site2source.lpg.numeric-semantics",
+      "epsimple-constants-numeric.site2source.lpg.value",
+      "epsimple-constants-numeric.site2source.naturalgas.engineering-probe",
+      "epsimple-constants-numeric.site2source.naturalgas.numeric-semantics",
+      "epsimple-constants-numeric.site2source.naturalgas.value",
+      "epsimple-constants-numeric.site2source.oil.engineering-probe",
+      "epsimple-constants-numeric.site2source.oil.numeric-semantics",
+      "epsimple-constants-numeric.site2source.oil.value",
+      "epsimple-constants-numeric.unit.ach50-to-ach.engineering-probe",
+      "epsimple-constants-numeric.unit.ach50-to-ach.numeric-semantics",
+      "epsimple-constants-numeric.unit.ach50-to-ach.value",
+      "epsimple-constants-numeric.unit.class.construction",
+      "epsimple-constants-numeric.unit.class.member-topology",
+      "epsimple-constants-numeric.unit.class.type-topology",
+      "epsimple-constants-numeric.unit.fraction-to-percent.engineering-probe",
+      "epsimple-constants-numeric.unit.fraction-to-percent.numeric-semantics",
+      "epsimple-constants-numeric.unit.fraction-to-percent.value",
+      "epsimple-constants-numeric.unit.m-to-mm.engineering-probe",
+      "epsimple-constants-numeric.unit.m-to-mm.numeric-semantics",
+      "epsimple-constants-numeric.unit.m-to-mm.value",
+      "epsimple-constants-numeric.unit.m3-per-s-to-cmh.engineering-probe",
+      "epsimple-constants-numeric.unit.m3-per-s-to-cmh.numeric-semantics",
+      "epsimple-constants-numeric.unit.m3-per-s-to-cmh.value",
+      "epsimple-constants-numeric.unit.mm-to-m.engineering-probe",
+      "epsimple-constants-numeric.unit.mm-to-m.numeric-semantics",
+      "epsimple-constants-numeric.unit.mm-to-m.value",
+      "epsimple-constants-numeric.unit.percent-to-fraction.engineering-probe",
+      "epsimple-constants-numeric.unit.percent-to-fraction.numeric-semantics",
+      "epsimple-constants-numeric.unit.percent-to-fraction.value",
+      "epsimple-constants-numeric.unit.w-to-kw.engineering-probe",
+      "epsimple-constants-numeric.unit.w-to-kw.numeric-semantics",
+      "epsimple-constants-numeric.unit.w-to-kw.value"
+    ],
+    "classifications": {
+      "ConvectionHeatTransfer": "exception",
+      "ConvectionHeatTransfer.IN": "equivalent",
+      "ConvectionHeatTransfer.OUT": "equivalent",
+      "Site2CO2": "exception",
+      "Site2CO2.DISTRICTHEATING": "equivalent",
+      "Site2CO2.ELECTRICITY": "equivalent",
+      "Site2CO2.LPG": "equivalent",
+      "Site2CO2.NATURALGAS": "equivalent",
+      "Site2CO2.OIL": "equivalent",
+      "Site2Cost": "exception",
+      "Site2Cost.DISTRICTHEATING": "equivalent",
+      "Site2Cost.ELECTRICITY": "equivalent",
+      "Site2Cost.LPG": "equivalent",
+      "Site2Cost.NATURALGAS": "equivalent",
+      "Site2Cost.OIL": "equivalent",
+      "Site2Source": "exception",
+      "Site2Source.DISTRICTHEATING": "equivalent",
+      "Site2Source.ELECTRICITY": "equivalent",
+      "Site2Source.LPG": "equivalent",
+      "Site2Source.NATURALGAS": "equivalent",
+      "Site2Source.OIL": "equivalent",
+      "Unit": "exception",
+      "Unit.ACH50_TO_ACH": "equivalent",
+      "Unit.FRACTION_TO_PERCENT": "equivalent",
+      "Unit.M3_PER_S_TO_CMH": "equivalent",
+      "Unit.MM_TO_M": "equivalent",
+      "Unit.M_TO_MM": "equivalent",
+      "Unit.PERCENT_TO_FRACTION": "equivalent",
+      "Unit.W_TO_KW": "equivalent"
+    },
+    "float_encoding": "python-binary64-hex-without-0x-prefix",
+    "runtime_names": "pinned-python-only-no-native-type-name-claims",
+    "target_symbols": [
+      "ConvectionHeatTransfer",
+      "ConvectionHeatTransfer.IN",
+      "ConvectionHeatTransfer.OUT",
+      "Site2CO2",
+      "Site2CO2.DISTRICTHEATING",
+      "Site2CO2.ELECTRICITY",
+      "Site2CO2.LPG",
+      "Site2CO2.NATURALGAS",
+      "Site2CO2.OIL",
+      "Site2Cost",
+      "Site2Cost.DISTRICTHEATING",
+      "Site2Cost.ELECTRICITY",
+      "Site2Cost.LPG",
+      "Site2Cost.NATURALGAS",
+      "Site2Cost.OIL",
+      "Site2Source",
+      "Site2Source.DISTRICTHEATING",
+      "Site2Source.ELECTRICITY",
+      "Site2Source.LPG",
+      "Site2Source.NATURALGAS",
+      "Site2Source.OIL",
+      "Unit",
+      "Unit.ACH50_TO_ACH",
+      "Unit.FRACTION_TO_PERCENT",
+      "Unit.M3_PER_S_TO_CMH",
+      "Unit.MM_TO_M",
+      "Unit.M_TO_MM",
+      "Unit.PERCENT_TO_FRACTION",
+      "Unit.W_TO_KW"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.epsimple-constants-numeric.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:f346b39d59e5bdb4e369113e55c6e167dd2fa73da3021d8f90e896b7a936284c",
+      "symbol": "ConvectionHeatTransfer",
+      "symbol_hash": "sha256:2d68c0fd189f85734d82a18e0312c03fda9f734cdcf7b3d72bf2d3e356c29577"
+    },
+    {
+      "body_hash": "sha256:b6d082785c99259867d0dc0d77d76ac63c22d1a444b8f575a2378b70ee151b01",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:1b01e1353c2601d136ef91cfac7fe225d304239324671935290bad727f78c005",
+      "symbol": "ConvectionHeatTransfer.IN",
+      "symbol_hash": "sha256:f4d1b69119dd3619805511a2f0b25fddbe63554a38c3001f672cd1efdcea1edf"
+    },
+    {
+      "body_hash": "sha256:08a45f66df3ebb992ae824045dc367e08a223ac790ab9179e048ca4a0a5dc32a",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:f0e5bfe691366195a447f74f0d6201598e095b6881803351f3030d781cb1892e",
+      "symbol": "ConvectionHeatTransfer.OUT",
+      "symbol_hash": "sha256:c36faf62dd987cd8561bd92a0c78e218baa23444f8d487070612ff8b5b3aa5b9"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:58f61ff1835c93a6b0956d0a15d937281796e98f01297ba91c6db6e874fc63d6",
+      "symbol": "Site2CO2",
+      "symbol_hash": "sha256:9ff40d942ec30fa90a8b95e5d24205d33eea26afc4e143ee8457bf440b0a6270"
+    },
+    {
+      "body_hash": "sha256:7032add1aef46b96675e97d3f35dc6381c8925d1a19ea5ca84df707fa762046a",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:7192cff6cf324d01d37009b3eb33734d4266d04f498ecb7c04589663ff47cf36",
+      "symbol": "Site2CO2.DISTRICTHEATING",
+      "symbol_hash": "sha256:1d7b874c5a80a7b28fe56c8dbc5b20c395c260feb0c339657a1ee76922bf447d"
+    },
+    {
+      "body_hash": "sha256:dc2d4918d3dc700bcca1e3c3a4791792a163ca47cc8c43c8f2bf2260ceeec73c",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:72aea6596570580ccc52c17466c4628382e08da6627bd43a5b5ed57b9d682c2f",
+      "symbol": "Site2CO2.ELECTRICITY",
+      "symbol_hash": "sha256:427886a21467ffa2e70b09b222f44e9185d1bdc8cf3ff6cc3d858f370b439b5a"
+    },
+    {
+      "body_hash": "sha256:fdf8e9a54a0c32c67b3cb8278615f6e369eccd60728a4e99b7b6720b8a326103",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:679d716960bc375fd53e3e3de5ed9351c5386c9860c457b7f0b4d59d757955b9",
+      "symbol": "Site2CO2.LPG",
+      "symbol_hash": "sha256:68cf7791fd2569d21d8dfdc36fffb54c82dcb4493c258708b2da1bda096b62f1"
+    },
+    {
+      "body_hash": "sha256:195526433a8bd4b1bc2e83f85212e7d705c50ed510e557f10aa44f7fe83c4d41",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:3219fb8a9ad5ecac99020288d75b2f1fc7ac14f8efc0d03092ce23f6855588f7",
+      "symbol": "Site2CO2.NATURALGAS",
+      "symbol_hash": "sha256:860c2f939cbd8d3c6c89855296706c774d24d3a93a70fb1595e7f04cec6a9e90"
+    },
+    {
+      "body_hash": "sha256:ae67781472c12cb4bdb378326502ea5d61ab41c783607453740f066589b29598",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:8cd43de8532cfc3648f5c42bbef75ffb179a0bbc291bdc65f2e20c3cd562a90d",
+      "symbol": "Site2CO2.OIL",
+      "symbol_hash": "sha256:4a1979a27d16ba6b4e0765d2d5f97142a35f5485967e05be6e52916100e07727"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:e30974309debfb1ded65597741074db22e42046c3474a3c97a4ec2fc0cec9751",
+      "symbol": "Site2Cost",
+      "symbol_hash": "sha256:0f8750781047825eb5c4eea60e058821a61701bf39a930e8a78f9a31e2c9566e"
+    },
+    {
+      "body_hash": "sha256:fc5445f71f3d40f721d85bd50509c6b83f3863cb0704887e5231a7859fa8d2dd",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:baaeaa529b5cf356ff6f5975d9ac9cddbbfe68b10fda1d105203b306bdb06506",
+      "symbol": "Site2Cost.DISTRICTHEATING",
+      "symbol_hash": "sha256:956e2b0d76110c8aa33eb3b33fec599d6e1ea9f8c98b7cb58d535c5f16884ebb"
+    },
+    {
+      "body_hash": "sha256:cef178527e410145519cf69089e01fd78e5600280c283dc1f62279a4fd56498f",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:7cd5cc01b3ea53e2080f04dca3fbbecf99ab795221a61df8a1ceff52a24970de",
+      "symbol": "Site2Cost.ELECTRICITY",
+      "symbol_hash": "sha256:b9b2bc9925459d830c1de8a4e971d5f4597021ec62d980f162e8a7718ac9abff"
+    },
+    {
+      "body_hash": "sha256:fd6cd001ed389da65ae93f87211c80326ca289e0188269679ac4a5bcdc35dd47",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:a2eb07f314178de19dc8709a8c051256a8f86203773b1d619e7aab3513147d4d",
+      "symbol": "Site2Cost.LPG",
+      "symbol_hash": "sha256:08fe014b98f9d0492866d4b64446982476f8b07432d981ccd8ff76a96cec5ecf"
+    },
+    {
+      "body_hash": "sha256:cc5db32e4b7f9e9d343246a3f654663763ca62f35d23177fbd39de588bb60f0f",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:45e72751468baaa1d08dc16bde1cb11f8c82797bdfd36abe7c3ae624639d8f16",
+      "symbol": "Site2Cost.NATURALGAS",
+      "symbol_hash": "sha256:6c00bbfc4ae58ce5287c7748b5f9dd75141457e56c37b6e9d4a9284a57064055"
+    },
+    {
+      "body_hash": "sha256:5570b297853cd48c7931910ccd9e0a5fa97b3ebaef17cea325e4b01e9ed1e57a",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:a00b0901c5edae87145e5d7643f853976f99686f8e1dcc73850de5760d15e7b1",
+      "symbol": "Site2Cost.OIL",
+      "symbol_hash": "sha256:f58bfe501cf9658b50f5541c6fa314ddcb98369d59b760f626fd1318aaf607d1"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:a0ad366186188fe14567a9661fb67fa7a1b950aa5afad401b8ff10d22f492fb2",
+      "symbol": "Site2Source",
+      "symbol_hash": "sha256:763a14c74718b1386a9ddc7a5c0f06ebb769ac08391365d917d1042965292e9d"
+    },
+    {
+      "body_hash": "sha256:6f54899d2973a52f87696315784a866783785a20b9b7222a1cd5d16216ebe662",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:97f37a60c1b9346e6c48a0affd0acf48bc673a3adcfc06de6f52e93c73d1c193",
+      "symbol": "Site2Source.DISTRICTHEATING",
+      "symbol_hash": "sha256:5f0ca3b7ed38e426a21befb255af26cd257c025be81734a4e7be8469a777f9f7"
+    },
+    {
+      "body_hash": "sha256:11748497aa24493f29c98a749db7261b999b4dd5e8da827cb2dae8e0b7fa8f96",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:6da7ff4826f9f1c1012fbcd7fcf801cfaa65be65aad36842c0c51626445f2d98",
+      "symbol": "Site2Source.ELECTRICITY",
+      "symbol_hash": "sha256:9f6e831e10bc5bee518399cec50e39fc7258fa7186028636d6e7dce89cbd637c"
+    },
+    {
+      "body_hash": "sha256:9d87ff0a62d45b977abbeee07313669faa41a26a1e371fb4de8bd4920ae5ea8c",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:e071db60c656b33f740fe3923237e373cb98029cef124a74c2524c909fae40a0",
+      "symbol": "Site2Source.LPG",
+      "symbol_hash": "sha256:f891444c39ad8d08e27afa90b0bd7817d5704ee1b70b187e35c86bf1bf08582e"
+    },
+    {
+      "body_hash": "sha256:9d87ff0a62d45b977abbeee07313669faa41a26a1e371fb4de8bd4920ae5ea8c",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:3575ab52059704e7b3d721927fd400cd5a6435516af21389305b1024b5ce7b95",
+      "symbol": "Site2Source.NATURALGAS",
+      "symbol_hash": "sha256:8661aaeabf25d8c5c520b75d20acb9994e59b3153f07d21eafa57971ab6c7394"
+    },
+    {
+      "body_hash": "sha256:9d87ff0a62d45b977abbeee07313669faa41a26a1e371fb4de8bd4920ae5ea8c",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:58a3d244b423f6a30f472b721392e57805eac073597c427be88545ff8581398b",
+      "symbol": "Site2Source.OIL",
+      "symbol_hash": "sha256:18468fb1b142964ae9104c7ad816347e9109c40ef4205c7872dc577758efc254"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:4207679fe2ede1a951b1882e62a22d8d915b1442dc5d1e1f62925d16cb6422e0",
+      "symbol": "Unit",
+      "symbol_hash": "sha256:82eeceb9e427512d5ed45c6139c5fb92859289547ded26e7e410b3be3f591b70"
+    },
+    {
+      "body_hash": "sha256:4ee0d3906e46532ef590b16c4f85886bb129c92b697aa36a261bdc1fd09335b5",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:3afd608864e96c6cbd84dafd3cdfc94ce317a2e2784cea31c8afe3990752c554",
+      "symbol": "Unit.ACH50_TO_ACH",
+      "symbol_hash": "sha256:fd2a09b09735722d7642be7d9f6f477970306a19540ac5b01d0357ea47c57401"
+    },
+    {
+      "body_hash": "sha256:d3c3cec052dae85942a722526911012da69bf59aca87bc1229bfbc27211abdd1",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:1cb497d3cae6e62d4e2c50b1754cf150b4fdce93c973f30509b28cf4fa1e82c4",
+      "symbol": "Unit.FRACTION_TO_PERCENT",
+      "symbol_hash": "sha256:55d3f412e4fc8dc309ceb1e5d298946b289c8adb66736a8de5de2533b5050880"
+    },
+    {
+      "body_hash": "sha256:aa8817177208c34e6d84856ee1bbc0360af016491b5a153690f899cb967626f2",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:574acc67cf8a454280621da85ef059251e2c222aabe5bc1fc7679a3e09d7c3eb",
+      "symbol": "Unit.M3_PER_S_TO_CMH",
+      "symbol_hash": "sha256:c67e87d901a7d2de66c51d559d4b4d6552f188503c1f9dc331d5bf698540ea73"
+    },
+    {
+      "body_hash": "sha256:2c90d8b6a6e407cf5919aa4be628204f8dbdeba19539303f86d2ba56ab41a6bf",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:03686fd1f94671e5a411db8c0f4d7a6bc8f62f9033a4f65fecfab0cf2f2a06f8",
+      "symbol": "Unit.MM_TO_M",
+      "symbol_hash": "sha256:78d61c825c4faade4c8268ca8c23a95c00ad44ce68574bc3afaf7791387ba1b5"
+    },
+    {
+      "body_hash": "sha256:d1c5df1014d99d4fa0a7e141221a6ba21ecf57cc8755703a7d6229af7a2a376d",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:ee5969c67823797b883ba77c3c09f0c078a08dde8240b68a2ca79c7a57c70e78",
+      "symbol": "Unit.M_TO_MM",
+      "symbol_hash": "sha256:b49a8507bdd65b293983e5930a4b5710befca44ce1583d8ae3ada9d7ddd4c85b"
+    },
+    {
+      "body_hash": "sha256:d2dff8ba2e3305a55a5cfcb7f170272f46ce3773420fc2094c6eb318b178a722",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:13ad23718f631a0cc2b84c7b09e1287564aa549a52c30ec98f10a86b15f6a3fb",
+      "symbol": "Unit.PERCENT_TO_FRACTION",
+      "symbol_hash": "sha256:2f91a99f89863099df480e571f6e4f05249479b3adb70f77f1f141838035e240"
+    },
+    {
+      "body_hash": "sha256:2c90d8b6a6e407cf5919aa4be628204f8dbdeba19539303f86d2ba56ab41a6bf",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:3212f8fad3be6cfe8fc6dc7a7391b487924402ac39cacdafd8d9af8686a00085",
+      "symbol": "Unit.W_TO_KW",
+      "symbol_hash": "sha256:9891f5c1310487862261f06e345c18941cad2fac3c22b2210a7a5ee92e22f215"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "observation_dependency": {
+      "file": {
+        "ast_hash": "sha256:f79918272c07515ee4ae98fa62f4ca5d5d703e5e2faa334f72d6a6966e1e2447",
+        "content_hash": "sha256:71dc9bb8d97e829c27d9b5d19ef88709af9613f9e53f60807d54ceb2922e4532",
+        "path": "src/epsimple/core/model.py"
+      },
+      "symbols": [
+        {
+          "body_hash": "sha256:ddcc9e26678f237b5f7892c086072a5962980b4d4b13bcee47bd9c0d98a52cc6",
+          "kind": "constant",
+          "path": "src/epsimple/core/model.py",
+          "signature_hash": "sha256:aa336779f69a8902021215ad36bc8925e1d599b84b1c2149a383d3313065b1a2",
+          "symbol": "GreenRetrofitResult.VALID_DIGITS",
+          "symbol_hash": "sha256:ff1cddacd1d221d604e80997d48ef03662bbeb531c45337abde8fcc3f9fc30df"
+        },
+        {
+          "body_hash": "sha256:d9c7d1b27a50ae9b04a5278c1d1881309fc297af097af411791f2f1d77e73d5d",
+          "kind": "function",
+          "path": "src/epsimple/core/model.py",
+          "signature_hash": "sha256:3a410f05d904cd573f15bd094908c64f55a72f6a804b455f752cf4d0a298d3ef",
+          "symbol": "GreenRetrofitResult.to_source_uses",
+          "symbol_hash": "sha256:842eb853a7216a84eab7ccc5a04d7454fc7f2572ea9c8e0bc32f73d6ffc84291"
+        }
+      ]
+    },
+    "path": "src/epsimple/constants.py",
+    "source_sha256": "sha256:d5dd5241ec90b14ba3708a525cd74279a8cdc238164a5b8544c4c82b05a29897"
+  }
+}

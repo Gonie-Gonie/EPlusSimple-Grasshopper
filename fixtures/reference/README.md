@@ -52,6 +52,17 @@ three-member iteration, representative engineering products, and the 107 W
 default people-activity field. Six members are exact equivalents and the two
 Python enum containers are reviewed native API adaptations.
 
+`python-0.7.0/epsimple-constants-numeric-oracle.json` pins 87 ordered CPython
+3.12.7 observations for 29 numeric symbols in `epsimple/constants.py`. It
+preserves exact binary64 values and products, float-enum construction and
+member order, the `Unit.MM_TO_M`/`W_TO_KW` alias, and both sides of the
+`Site2Source` contract: all five declared factors and the three-member enum
+iteration whose zip leaves the final two result rows unscaled. The latter is a
+direct execution of the exact pinned `GreenRetrofitResult.to_source_uses` AST,
+with its model-file, AST, method, and `VALID_DIGITS` receipts included. The 24
+numeric members are exact equivalents and the five enum containers are
+reviewed native container or dispatch adaptations.
+
 `python-0.7.0/dragon-construction-to-idf-object-oracle.json` pins two common-
 valid-state observations each for `AirBoundary.to_idf_object`,
 `Construction.to_idf_object`, `Glazing.to_idf_object`, `Layer.to_idf_object`,

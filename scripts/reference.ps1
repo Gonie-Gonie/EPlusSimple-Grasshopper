@@ -32,6 +32,7 @@ $usageProfileCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-referen
 $utilsCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_utils_core_oracle.py'
 $commonCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_common_core_oracle.py'
 $constantsEngineeringGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_constants_engineering_oracle.py'
+$epsimpleConstantsNumericGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_constants_numeric_oracle.py'
 $dragonConstructionToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_construction_to_idf_object_oracle.py'
 $dragonHvacPhotovoltaicToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_photovoltaic_to_idf_object_oracle.py'
 $dragonHvacSupplyGroupCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_supply_group_core_oracle.py'
@@ -70,6 +71,7 @@ $usageProfileCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\tes
 $utilsCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_utils_core_oracle.py'
 $commonCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_common_core_oracle.py'
 $constantsEngineeringTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_constants_engineering_oracle.py'
+$epsimpleConstantsNumericTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_constants_numeric_oracle.py'
 $dragonConstructionToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_construction_to_idf_object_oracle.py'
 $dragonHvacPhotovoltaicToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_photovoltaic_to_idf_object_oracle.py'
 $dragonHvacSupplyGroupCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_supply_group_core_oracle.py'
@@ -160,6 +162,7 @@ foreach ($requiredFile in @(
     $utilsCoreGeneratorPath,
     $commonCoreGeneratorPath,
     $constantsEngineeringGeneratorPath,
+    $epsimpleConstantsNumericGeneratorPath,
     $dragonConstructionToIdfObjectGeneratorPath,
     $dragonHvacPhotovoltaicToIdfObjectGeneratorPath,
     $dragonHvacSupplyGroupCoreGeneratorPath,
@@ -196,6 +199,7 @@ foreach ($requiredFile in @(
     $utilsCoreTestPath,
     $commonCoreTestPath,
     $constantsEngineeringTestPath,
+    $epsimpleConstantsNumericTestPath,
     $dragonConstructionToIdfObjectTestPath,
     $dragonHvacPhotovoltaicToIdfObjectTestPath,
     $dragonHvacSupplyGroupCoreTestPath,
@@ -688,7 +692,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, dragon construction-family and HVAC photovoltaic-to-IDF-object and SupplyGroup core/to-IDF-object, dragon shape shading-material-to-IDF-object, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, epsimple numeric constants, dragon construction-family and HVAC photovoltaic-to-IDF-object and SupplyGroup core/to-IDF-object, dragon shape shading-material-to-IDF-object, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -799,6 +803,25 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $constantsEngineeringGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-constants-engineering-reference.log') `
     -FailureMessage 'Generating the Python constants engineering oracle failed'
+
+$epsimpleConstantsNumericOraclePath = Join-Path $outputRoot 'epsimple-constants-numeric-oracle.json'
+$epsimpleConstantsNumericGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $epsimpleConstantsNumericGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $epsimpleConstantsNumericOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $epsimpleConstantsNumericGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-epsimple-constants-numeric-reference.log') `
+    -FailureMessage 'Generating the Python epsimple numeric-constants oracle failed'
 
 $dragonConstructionToIdfObjectOraclePath = Join-Path $outputRoot 'dragon-construction-to-idf-object-oracle.json'
 $dragonConstructionToIdfObjectGeneratorArguments = @(

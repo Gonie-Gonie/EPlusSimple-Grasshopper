@@ -88,6 +88,20 @@ containers are reviewed native adaptations; all six engineering members are
 exact equivalents. Package directories and Python package metadata are not
 part of this engineering corpus.
 
+The epsimple numeric-constants oracle binds the 29 `ConvectionHeatTransfer`,
+`Site2CO2`, `Site2Cost`, `Site2Source`, and `Unit` symbols in the exact pinned
+`epsimple/constants.py` source through 87 ordered cases. It records each
+binary64 declaration and engineering probe, float-enum construction and member
+topology, the `Unit.MM_TO_M`/`W_TO_KW` alias, and the three-name 1.1
+`Site2Source` alias. The latter also pins the historical result-scaling split:
+GRR constants expose all five declarations while enum iteration supplies only
+three zipped factors and leaves the final two carrier rows unscaled. That split
+is observed by compiling and directly executing the exact pinned
+`GreenRetrofitResult.to_source_uses` AST from `core/model.py`; the model file,
+AST, method, and `VALID_DIGITS` inventory receipts are fail-closed provenance.
+Five enum containers are reviewed native dispatch/container adaptations; all
+24 numeric members are exact equivalents.
+
 The dragon construction-family-to-IDF-object oracle binds two common-valid-
 state cases each for `AirBoundary.to_idf_object`, `Construction.to_idf_object`,
 `Glazing.to_idf_object`, `Layer.to_idf_object`, and

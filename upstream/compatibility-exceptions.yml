@@ -1591,6 +1591,81 @@
     compatibility_evidence: upstream version detection, explicit-runtime path, launch and copy ordering, ignored status, result-before-delete behavior, output deletion and failure transactionality plus native validation, state transitions, structured failures, artifact capture and marked-directory cleanup remain required under an injected fake process executor without claiming that EnergyPlus executed
   approval: accepted-native-api-adaptation
 
+- id: native-simpledragon-convection-constant-container
+  upstream:
+    path: src/epsimple/constants.py
+    symbol: ConvectionHeatTransfer
+    symbol_hash: sha256:2d68c0fd189f85734d82a18e0312c03fda9f734cdcf7b3d72bf2d3e356c29577
+  difference:
+    upstream: defines IN and OUT as the two unique members of a float-valued Python Enum whose members support float arithmetic, construction from their numeric values, declaration-order iteration, identity, hashing, and name and value access, and supplies those members as defaults to mutable Python construction objects
+    dotnet: exposes the exact two factors as immutable public const double fields Interior and Exterior on the static ConvectionHeatTransfer container and supplies typed doubles to native SurfaceConstruction without a Python Enum construction or iteration surface
+  effect:
+    engineering_result: interior and exterior surface-resistance and U-value calculations retain the exact pinned binary64 factors 1 divided by 0.110 and 1 divided by 0.043
+    raw_grr: convection factors are not GRR factor-group entries, and no standalone GRR or IDF token changes; construction values derived from the defaults retain the same engineering numbers
+    api_contract: callers reference named static constants rather than constructing, iterating, comparing, hashing, or inspecting Python float Enum members
+    compatibility_evidence: exact upstream float inheritance, value construction, declaration-order iteration, identity and representative arithmetic plus native const-double topology, names, binary64 values and immutability remain required in trusted cross-language receipts
+  approval: accepted-native-api-adaptation
+
+- id: native-simpledragon-site-to-carbon-dispatch
+  upstream:
+    path: src/epsimple/constants.py
+    symbol: Site2CO2
+    symbol_hash: sha256:9ff40d942ec30fa90a8b95e5d24205d33eea26afc4e143ee8457bf440b0a6270
+  difference:
+    upstream: defines five unique float-valued Python Enum members with value construction, declaration-order iteration, identity, hashing, and name and value access, then deep-copies and mutates pandas carrier rows while applying the iterated factors
+    dotnet: dispatches the same five factors through the static EnergyConversionFactors.SiteToCarbon method over the typed EnergyCarrier enum and scales an immutable EnergyUseBreakdown without exposing the factor set as float Enum members
+  effect:
+    engineering_result: electricity, natural gas, LPG, oil, and district-heating carbon values retain the exact factors and pinned two-digit result rounding for every supported carrier
+    raw_grr: GrrWriter writes and GrrReader validates all five site2co2 constants exactly, while the derived co2 matrix and summaries retain the upstream engineering values in a deterministic typed GRR tree
+    api_contract: callers dispatch by EnergyCarrier and receive a double or an explicit unknown-carrier error instead of constructing or iterating Site2CO2 members or mutating pandas rows
+    compatibility_evidence: all five upstream Enum names, binary64 values, value construction, declaration-order iteration, identity and representative arithmetic plus exact typed native carrier dispatch remain required in trusted cross-language receipts
+  approval: accepted-native-api-adaptation
+
+- id: native-simpledragon-site-to-cost-dispatch
+  upstream:
+    path: src/epsimple/constants.py
+    symbol: Site2Cost
+    symbol_hash: sha256:0f8750781047825eb5c4eea60e058821a61701bf39a930e8a78f9a31e2c9566e
+  difference:
+    upstream: defines five unique float-valued Python Enum members with value construction, declaration-order iteration, identity, hashing, and name and value access, then deep-copies and mutates pandas carrier rows while applying the iterated factors
+    dotnet: dispatches the same five factors through the static EnergyConversionFactors.SiteToCost method over the typed EnergyCarrier enum and scales an immutable EnergyUseBreakdown without exposing the factor set as float Enum members
+  effect:
+    engineering_result: electricity, natural gas, LPG, oil, and district-heating cost values retain the exact factors and pinned two-digit result rounding for every supported carrier
+    raw_grr: GrrWriter writes and GrrReader validates all five site2cost constants exactly, while the derived cost matrix and summaries retain the upstream engineering values in a deterministic typed GRR tree
+    api_contract: callers dispatch by EnergyCarrier and receive a double or an explicit unknown-carrier error instead of constructing or iterating Site2Cost members or mutating pandas rows
+    compatibility_evidence: all five upstream Enum names, binary64 values, value construction, declaration-order iteration, identity and representative arithmetic plus exact typed native carrier dispatch remain required in trusted cross-language receipts
+  approval: accepted-native-api-adaptation
+
+- id: native-simpledragon-site-to-source-dispatch
+  upstream:
+    path: src/epsimple/constants.py
+    symbol: Site2Source
+    symbol_hash: sha256:763a14c74718b1386a9ddc7a5c0f06ebb769ac08391365d917d1042965292e9d
+  difference:
+    upstream: declares five float Enum names but NATURALGAS, LPG, and OIL share 1.1 so LPG and OIL are aliases and normal Enum iteration yields only ELECTRICITY, NATURALGAS, and DISTRICTHEATING; to_source_uses zips those three iterated factors onto the first three rows of a mutable five-carrier pandas DataFrame, while to_dict retrieves all five declared names and therefore writes their declared constants
+    dotnet: EnergyConversionFactors.SiteToSource dispatches the five declared factors by typed EnergyCarrier and preserves 1.1 independently for natural gas, LPG, and oil through GrrWriter and GrrReader, while GreenRetrofitResult.FromSiteUses deliberately uses PinnedPython07SiteToSource to reproduce the upstream three-member Enum-iteration zip result
+  effect:
+    engineering_result: declared factor lookup remains electricity 2.75, natural gas 1.1, LPG 1.1, oil 1.1, and district heating 0.728, while derived source uses deliberately preserve the upstream observable mapping of electricity 2.75, natural gas 1.1, LPG 0.728, oil 1, and district heating 1 with pinned two-digit rounding
+    raw_grr: the site2source constants group round-trips all five declared factors exactly, including all three 1.1 carriers, while source_uses and its summaries retain the distinct upstream Enum-iteration zip bug reproduced by FromSiteUses
+    api_contract: direct native factor lookup is exhaustive EnergyCarrier dispatch and does not collapse equal values into aliases; the legacy iteration defect is isolated to result derivation instead of leaking into constants, serialization, or callers
+    compatibility_evidence: declared names and alias identity, three-member Python iteration, value construction, exact execution of the pinned mutable DataFrame zip method, five-factor native dispatch, and the isolated PinnedPython07SiteToSource result derivation remain required in trusted cross-language receipts
+  approval: accepted-upstream-parity
+
+- id: native-simpledragon-unit-conversion-constants
+  upstream:
+    path: src/epsimple/constants.py
+    symbol: Unit
+    symbol_hash: sha256:82eeceb9e427512d5ed45c6139c5fb92859289547ded26e7e410b3be3f591b70
+  difference:
+    upstream: defines seven public names on a float-valued Python Enum with value construction, identity, hashing, name and value access, and arithmetic; MM_TO_M and W_TO_KW both equal 0.001 so W_TO_KW is an alias omitted from normal six-member iteration
+    dotnet: exposes seven immutable public named const double fields on the static UnitConversions container, preserving distinct engineering names for the equal millimetre and watt factors without Python Enum construction, alias identity, or canonical-member iteration
+  effect:
+    engineering_result: length, ratio, power, infiltration, and volume-flow conversions retain the exact seven pinned binary64 factors in every supported consuming calculation
+    raw_grr: unit factors are not GRR factor-group entries; converted GRM, IDF, and result values retain the same engineering numbers without serializing Python Enum identity or alias metadata
+    api_contract: callers reference UnitConversions named constants directly, and no parity is claimed for Python Enum value construction, member wrappers, hashing, alias identity, member names, or iteration order
+    compatibility_evidence: all seven names and binary64 values, float inheritance, 0.001 value construction, alias identity, six-member canonical iteration, representative arithmetic, and native const-double names, types and immutability remain required in trusted cross-language receipts
+  approval: accepted-native-api-adaptation
+
 - id: native-named-unit-conversion-constants
   upstream:
     path: src/idragon/constants.py
