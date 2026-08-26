@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(730, len(compatibility.needs_reverification))
+        self.assertEqual(727, len(compatibility.needs_reverification))
         self.assertEqual(
             133,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            127,
+            130,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -95,6 +95,38 @@ class ConfigurationTests(unittest.TestCase):
             expected_construction_family.items()
         ):
             key = ("src/idragon/dragon/construction.py", symbol)
+            entry = by_key[key]
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual(entry, compatibility.matrix.entries[index], symbol)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            self.assertEqual(
+                (
+                    f"upstream/compatibility-exceptions.yml#{exception_id}",
+                    f"upstream/symbol-evidence.json#{assertion_id}",
+                ),
+                entry.evidence,
+                symbol,
+            )
+        expected_zone_idf = {
+            "Zone.to_idf_hvac_default_object": (
+                1092,
+                "model-context-zone-hvac-default-idf-emission",
+                "dragon-shape-zone-to-idf-hvac-default-object-ff678ec2",
+            ),
+            "Zone.to_idf_load_object": (
+                1093,
+                "model-context-zone-load-idf-emission",
+                "dragon-shape-zone-to-idf-load-object-d19165f0",
+            ),
+            "Zone.to_idf_object": (
+                1094,
+                "model-context-zone-idf-emission",
+                "dragon-shape-zone-to-idf-object-479f4d74",
+            ),
+        }
+        for symbol, (index, exception_id, assertion_id) in expected_zone_idf.items():
+            key = ("src/idragon/dragon/shape.py", symbol)
             entry = by_key[key]
             self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
             self.assertEqual(entry, compatibility.matrix.entries[index], symbol)

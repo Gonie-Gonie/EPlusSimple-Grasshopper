@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:294de00b52cff531583a80b1ee1d0b684aa42486cbc9132dedb2afd2a1a41080",
+  "content_sha256": "sha256:fa9580a009695bceb794b0d94546fd73a31fa8ca0bf0a3da46b81f72f910606e",
   "entries": [
     {
       "implementation": {
@@ -6399,6 +6399,84 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendHvac"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.to_idf_hvac_default_object across its exact three cases inside the nine-case Zone fixture through public EnergyModel.ToIdfDocument and private AppendHvac, AppendThermostat and AppendSizing mappers. The conditioned case preserves all eight semantic target objects with native compact counts [7,1,37,8,6,3,3,5], exhaustively classifies 120 Python blank-or-None fields and 24 official EnergyPlus 24.2 IDD defaults, explicitly records six real ZoneHVAC:EquipmentList enrichment fields and one Sizing:Zone field relocation, and classifies parent orchestration order; both unconditioned cases remain empty. Two-call document/object/field freshness and determinism, exact linkage and source-graph reference/value immutability are verified without claiming Zone, Profile, Schedule, Surface or IdfObject closure, invalid behavior, global ordering, deduplication, conflicts or EnergyModel parent assembly.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:37341308493f9ba368288e1e32c6e738cd847450c7eac6769aa25202f683e8c7",
+          "id": "dragon-shape-zone-to-idf-hvac-default-object-ff678ec2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneIdfOracleParityTests.cs",
+          "test_source_sha256": "sha256:aa9b5df9441135dd3eafe84ec39d671cab437c43d8d7326a68731266ca408448",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneIdfOracleParityTests.MatchesPinnedPythonZoneEmissionThroughFreshEnergyModels",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone.to_idf_hvac_default_object",
+      "upstream_symbol_hash": "sha256:ff678ec281fe0726c46fd2145ebfb7fe22b56c5772bf1423d83c4877c0287cd9"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneLoads"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.to_idf_load_object across its exact three cases inside the nine-case Zone fixture through public EnergyModel.ToIdfDocument and the private AppendZoneLoads mapper. The empty, ERV-occupant and full-natural cases preserve zero-, three- and seven-object outcomes and shared relative order with native compact counts [12,10,11] and [6,12,6,12,10,8,7], while every Python field is exhaustively classified as native, one of 480 blank-or-None omissions, or one of 55 official EnergyPlus 24.2 IDD defaults. Exact names, normalized schedules, zone references, values, two-call document/object/field freshness and determinism, and source-graph reference/value immutability are verified without claiming Zone, Profile, Schedule, Surface or IdfObject closure, invalid behavior, global ordering, deduplication, conflicts or EnergyModel parent assembly.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:82b60a8cdf7189950c6ffce79b2f16d9b6d2a482e20258767c06068fcc54dac0",
+          "id": "dragon-shape-zone-to-idf-load-object-d19165f0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneIdfOracleParityTests.cs",
+          "test_source_sha256": "sha256:aa9b5df9441135dd3eafe84ec39d671cab437c43d8d7326a68731266ca408448",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneIdfOracleParityTests.MatchesPinnedPythonZoneEmissionThroughFreshEnergyModels",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone.to_idf_load_object",
+      "upstream_symbol_hash": "sha256:d19165f0aa97a1768174def3da3a46c9c11f29567c558ae844d4cac546452f99"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.Assemble"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.to_idf_object across its exact three parent cases inside the nine-case Zone fixture through public EnergyModel.ToIdfDocument and private geometry, load and HVAC assembly stages. Every case preserves one compact 12-field Zone target and classifies all nine Python default-valued tail fields through the official EnergyPlus 24.2 IDD with zero blank omissions, for 27 defaults total. The comparison explicitly keeps fixture-only Python child trace doubles outside child-converter closure while verifying real native geometry and exact surface order, parent-stage order classification, two-call document/object/field freshness and determinism, and full source-graph reference/value immutability without claiming Zone class contracts, Surface, Window, Door, shading, Profile, Schedule or IdfObject closure, invalid behavior, global ordering, deduplication, conflicts or EnergyModel parent assembly.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:89bc66a2ff0af5800430dd14898f023e2ff993236bc6dfd0d3752399c0694fb1",
+          "id": "dragon-shape-zone-to-idf-object-479f4d74",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneIdfOracleParityTests.cs",
+          "test_source_sha256": "sha256:aa9b5df9441135dd3eafe84ec39d671cab437c43d8d7326a68731266ca408448",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneIdfOracleParityTests.MatchesPinnedPythonZoneEmissionThroughFreshEnergyModels",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Zone.to_idf_object",
+      "upstream_symbol_hash": "sha256:479f4d74a625e35e97559f208b41c4bde2f00a519b8e6b840718d78fdfd2e096"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Results/EnergyPlusResultModels.cs",
         "source_sha256": "sha256:d7f8ae53dd548f8c24cdcc5f1e0478bc3edfecfac9ec9ab7f0d846ba93501fa8",
         "symbol": "GonieGonie.InvisibleDragon.Results.EnergyPlusSimulationResult"
@@ -6765,9 +6843,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 260,
-    "passed_receipt_count": 260,
-    "receipt_count": 260,
+    "entry_count": 263,
+    "passed_receipt_count": 263,
+    "receipt_count": 263,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

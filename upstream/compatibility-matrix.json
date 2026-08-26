@@ -1092,9 +1092,9 @@
     "needs_reverification",
     "exception",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
     "needs_reverification",
     "out_of_scope",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:e58c95d8007d0e5c941f7519cdf34548d0267cffbbf2305c0fcbb759006769e5",
+  "content_sha256": "sha256:15604f12d5cc51fec00505ee8938895f9ff3f833b790ddda3a27b1c03180a958",
   "details": [
     {
       "evidence": [
@@ -4763,6 +4763,33 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-zone-hvac-default-idf-emission",
+        "upstream/symbol-evidence.json#dragon-shape-zone-to-idf-hvac-default-object-ff678ec2"
+      ],
+      "exception_id": "model-context-zone-hvac-default-idf-emission",
+      "index": 1092,
+      "rationale": "Trusted cross-language evidence verifies Zone.to_idf_hvac_default_object across its exact three cases in the nine-case Zone fixture through public EnergyModel.ToIdfDocument and private HVAC, thermostat and sizing mappers: two empty outcomes, all eight conditioned semantic targets, exhaustive native versus 120 blank-or-None versus 24 official-IDD-default field classification, six explicit EquipmentList enrichments, one explicit Sizing relocation, parent-stage order, freshness, determinism, linkage and source immutability. Zone, Profile, Schedule, Surface and IdfObject closure, invalid behavior, global policy and EnergyModel parent assembly remain separately unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-zone-load-idf-emission",
+        "upstream/symbol-evidence.json#dragon-shape-zone-to-idf-load-object-d19165f0"
+      ],
+      "exception_id": "model-context-zone-load-idf-emission",
+      "index": 1093,
+      "rationale": "Trusted cross-language evidence verifies Zone.to_idf_load_object across its exact three cases in the nine-case Zone fixture through public EnergyModel.ToIdfDocument and private AppendZoneLoads: empty, three-object and seven-object outcomes, exact shared relative order, exhaustive native versus 480 blank-or-None versus 55 official-IDD-default field classification, names, schedules, references, values, freshness, determinism and source immutability. Zone, Profile, Schedule, Surface and IdfObject closure, invalid behavior, global policy and EnergyModel parent assembly remain separately unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-zone-idf-emission",
+        "upstream/symbol-evidence.json#dragon-shape-zone-to-idf-object-479f4d74"
+      ],
+      "exception_id": "model-context-zone-idf-emission",
+      "index": 1094,
+      "rationale": "Trusted cross-language evidence verifies Zone.to_idf_object across its exact three parent cases in the nine-case Zone fixture through public EnergyModel.ToIdfDocument and private geometry, load and HVAC assembly stages: one 12-field Zone target per case, exhaustive native or 27 official-IDD-default field classification with zero blank omissions, explicit Python trace-double versus real native geometry boundary, surface and parent-stage order, freshness, determinism and full source immutability. Zone class contracts and all child converters, invalid behavior, IdfObject policy, global order, deduplication, conflicts and EnergyModel parent assembly remain separately unresolved."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-imugi-py-idd-eq-be42dfb2"
       ],
       "index": 1096,
@@ -5091,8 +5118,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 133,
-      "exception": 127,
-      "needs_reverification": 730,
+      "exception": 130,
+      "needs_reverification": 727,
       "out_of_scope": 252
     },
     "entry_count": 1242
