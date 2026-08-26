@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:d972083d1873a4607d578bd1ad3235e8d2b66af8ad2825367867327286977f6d",
+  "content_sha256": "sha256:5f5c377936ac1478b66faa79deab2dfee2ff25bc00ebd53735a2a0ccfce596fe",
   "entries": [
     {
       "implementation": {
@@ -2344,7 +2344,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2370,7 +2370,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IntervalsPerHour"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2396,7 +2396,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Addition"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2422,7 +2422,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_BitwiseAnd"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2448,7 +2448,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.DeepCopy"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2474,7 +2474,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.GreaterThanOrEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2500,7 +2500,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.GreaterThan"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2526,7 +2526,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.DaySchedule"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2552,7 +2552,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_LogicalNot"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2578,7 +2578,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.LessThanOrEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2604,7 +2604,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.LessThan"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2630,7 +2630,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Multiply"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2656,7 +2656,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_BitwiseOr"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2682,7 +2682,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Addition"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2708,7 +2708,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Multiply"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2734,7 +2734,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Subtraction"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2760,7 +2760,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Division"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2786,7 +2786,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.WithValue"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2812,7 +2812,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Subtraction"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2838,7 +2838,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.op_Division"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2864,7 +2864,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.AsType"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2890,7 +2890,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Average"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2916,7 +2916,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Clip"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2942,7 +2942,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Compactize"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2968,7 +2968,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -2994,7 +2994,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementMaximum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3020,7 +3020,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementMinimum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3046,7 +3046,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ElementNotEqual"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3072,7 +3072,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.FixedLength"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3098,7 +3098,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.FromCompact"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3124,7 +3124,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.FromConstant"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3150,7 +3150,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.FromWindows"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3176,7 +3176,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.HasNonzero"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3202,7 +3202,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.HasPositive"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3228,7 +3228,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IntegralHours"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3254,7 +3254,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsBetween"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3280,7 +3280,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsConstant"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3306,7 +3306,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsNegative"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3332,7 +3332,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsNonzero"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3358,7 +3358,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsOff"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3384,7 +3384,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsOn"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3410,7 +3410,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsPositive"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3436,7 +3436,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.IsZero"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3462,7 +3462,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Maximum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3488,7 +3488,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Minimum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3514,7 +3514,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.NonzeroHours"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3540,7 +3540,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.NormalizeByMaximum"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3566,7 +3566,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.PositiveAverage"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3592,7 +3592,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.PositiveHours"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3618,7 +3618,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Step"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3644,7 +3644,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Summary"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3670,7 +3670,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.TimeTuple"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3696,7 +3696,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.ToIdfCompactExpression"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3722,7 +3722,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Type"
       },
       "path": "src/idragon/dragon/profile.py",
@@ -3748,7 +3748,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/DaySchedule.cs",
-        "source_sha256": "sha256:3d57f182b64973d7bdab85983ca987990f6d02f4d2beb8eae1222ca091af9ffb",
+        "source_sha256": "sha256:f334e65b2065a3ddf642dde5b9ff891317b5954b31b21d66e6f4b5553dedf286",
         "symbol": "GonieGonie.InvisibleDragon.Profile.DaySchedule.Where"
       },
       "path": "src/idragon/dragon/profile.py",

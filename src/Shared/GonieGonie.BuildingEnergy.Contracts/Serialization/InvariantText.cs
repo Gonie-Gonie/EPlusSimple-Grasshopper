@@ -17,6 +17,22 @@ public static class InvariantText
     }
 
     /// <summary>
+    /// Formats a finite floating-point value as the shortest canonical JSON number without depending on the host CLR's dtoa implementation.
+    /// </summary>
+    public static string FormatCanonicalDouble(double value)
+    {
+        return CanonicalDouble.FormatCanonical(value);
+    }
+
+    /// <summary>
+    /// Formats a floating-point value with CPython 3.12 binary64 representation semantics.
+    /// </summary>
+    public static string FormatPythonFloat(double value)
+    {
+        return CanonicalDouble.FormatPythonFloat(value);
+    }
+
+    /// <summary>
     /// Parses an invariant floating-point value without accepting locale-specific separators.
     /// </summary>
     public static double ParseDouble(string value)

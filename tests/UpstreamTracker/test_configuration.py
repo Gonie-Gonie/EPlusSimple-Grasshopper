@@ -62,7 +62,7 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(343, len(symbol_evidence.entries))
         self.assertEqual(343, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:d972083d1873a4607d578bd1ad3235e8d2b66af8ad2825367867327286977f6d",
+            "sha256:5f5c377936ac1478b66faa79deab2dfee2ff25bc00ebd53735a2a0ccfce596fe",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
