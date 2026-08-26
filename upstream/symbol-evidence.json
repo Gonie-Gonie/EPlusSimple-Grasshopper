@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:2df4acb968d361a1c40ada3678a287142750e4f9fcd3dee72741a9c680bc89e2",
+  "content_sha256": "sha256:690be4f3b51d440e2d5250c30e5de63a6061ebd8e01d4c84af4c436b635ee35e",
   "entries": [
     {
       "implementation": {
@@ -1040,6 +1040,162 @@
       ],
       "symbol": "Material.__eq__",
       "upstream_symbol_hash": "sha256:6ef680a2e300bcb56672f0d036de1b4aea3630cb90a635a3e45002ff8535dbf5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "symbol": "GonieGonie.InvisibleDragon.Model.Terrain"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Terrain across its exact three-case Terrain slice: the five-member terrain domain, construction and rejection boundaries, declaration order, text projections, typed native topology, and exact IDF tokens. The comparison directly verifies the Python str-Enum construction, identity, name/value and display surface against a validated typed native enum whose serializer emits exact EnergyPlus tokens, without claiming Python Enum API or text-syntax parity.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b76f3a66c862f52befe70f3c9167ff0370df12e5d87dbb19518f8b80a1712e35",
+          "id": "dragon-model-terrain-c6163ac5",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/TerrainOracleParityTests.cs",
+          "test_source_sha256": "sha256:5db209a254b839232d21734594ee9f2b3fdfb75169bfc47744e3ad79429b1916",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.TerrainOracleParityTests.MatchesPinnedPythonTerrain",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Terrain",
+      "upstream_symbol_hash": "sha256:c6163ac59051a6638838c9f9b2953585bf6825942dfa79b46af3be27279e5799"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.City"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Terrain.CITY across its exact three-case Terrain slice: the exact City engineering token and model-to-IDF round trip.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e26e1f1ae0d102ca96af0bfa813723e2f567588de1c357b2b3a51ca701c24271",
+          "id": "dragon-model-terrain-city-86bbbecc",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/TerrainOracleParityTests.cs",
+          "test_source_sha256": "sha256:5db209a254b839232d21734594ee9f2b3fdfb75169bfc47744e3ad79429b1916",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.TerrainOracleParityTests.MatchesPinnedPythonTerrain",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Terrain.CITY",
+      "upstream_symbol_hash": "sha256:86bbbeccfdcac8147f1ea09090065c8567a1a910715d4679b1059b02a27839bc"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Country"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Terrain.COUNTRY across its exact three-case Terrain slice: the exact Country engineering token and model-to-IDF round trip.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:48b171f614b2d29dd919ffc8b76b37fbb2aeb6b9435ca7feedf35e369e396caa",
+          "id": "dragon-model-terrain-country-b5cce6c9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/TerrainOracleParityTests.cs",
+          "test_source_sha256": "sha256:5db209a254b839232d21734594ee9f2b3fdfb75169bfc47744e3ad79429b1916",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.TerrainOracleParityTests.MatchesPinnedPythonTerrain",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Terrain.COUNTRY",
+      "upstream_symbol_hash": "sha256:b5cce6c9c3dbcbe551d86663ed5d7b4615451b5b9841f0fd6c8ddc6c6a5b5eae"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Ocean"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Terrain.OCEAN across its exact three-case Terrain slice: the exact Ocean engineering token and model-to-IDF round trip.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:28187ef4eebf5e29404fa5191376ca08e6c0e76c07cd13c66aba65b7452e380b",
+          "id": "dragon-model-terrain-ocean-4fb458af",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/TerrainOracleParityTests.cs",
+          "test_source_sha256": "sha256:5db209a254b839232d21734594ee9f2b3fdfb75169bfc47744e3ad79429b1916",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.TerrainOracleParityTests.MatchesPinnedPythonTerrain",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Terrain.OCEAN",
+      "upstream_symbol_hash": "sha256:4fb458afdad96d03018c848e08a853065cf2ff1f71d110175a13e18481c6b20a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Suburbs"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Terrain.SUBURBS across its exact three-case Terrain slice: the exact Suburbs engineering token and model-to-IDF round trip.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9f70c0b561f4d0d24924669f2de001911de6530f76eecbc0c1dbc91b67aa27b5",
+          "id": "dragon-model-terrain-suburbs-3de90284",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/TerrainOracleParityTests.cs",
+          "test_source_sha256": "sha256:5db209a254b839232d21734594ee9f2b3fdfb75169bfc47744e3ad79429b1916",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.TerrainOracleParityTests.MatchesPinnedPythonTerrain",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Terrain.SUBURBS",
+      "upstream_symbol_hash": "sha256:3de90284fe1a6b5e8b582cd04c07cd01da2a3fc6d097bce30b2c3d23144167e6"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:29a19de019f61676cd03f6448830cf323a99d6cd0a298e14dc77b1ec785565b4",
+        "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Urban"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Terrain.URBAN across its exact three-case Terrain slice: the exact Urban engineering token and model-to-IDF round trip.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:34eca1e52f70617ae40f1fcbefafb8b3c93df40209a1a9663ae5fdd1a990ff13",
+          "id": "dragon-model-terrain-urban-a4c4bc7",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/TerrainOracleParityTests.cs",
+          "test_source_sha256": "sha256:5db209a254b839232d21734594ee9f2b3fdfb75169bfc47744e3ad79429b1916",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.TerrainOracleParityTests.MatchesPinnedPythonTerrain",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Terrain.URBAN",
+      "upstream_symbol_hash": "sha256:a4c4bc7a7a67f1165956614348dde48e687d79001443487b879f5abf1cbf5a62"
     },
     {
       "implementation": {
@@ -5933,9 +6089,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 228,
-    "passed_receipt_count": 228,
-    "receipt_count": 228,
+    "entry_count": 234,
+    "passed_receipt_count": 234,
+    "receipt_count": 234,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

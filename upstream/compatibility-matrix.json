@@ -826,12 +826,12 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
     "exception",
     "equivalent",
     "exception",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:03cb2ad9bb2bfeb3d3ecbb39483bd7d3366ba77ecaf8544e85abe3581d275ab2",
+  "content_sha256": "sha256:f4297e8813c61d06143f70c667eb6e7705babd27dcb4878e39224f723710db1b",
   "details": [
     {
       "evidence": [
@@ -2962,6 +2962,50 @@
       ],
       "index": 755,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#native-typed-terrain-enum-valid-idf-token",
+        "upstream/symbol-evidence.json#dragon-model-terrain-c6163ac5"
+      ],
+      "exception_id": "native-typed-terrain-enum-valid-idf-token",
+      "index": 826,
+      "rationale": "Trusted cross-language evidence verifies Terrain across its exact three-case Terrain slice: the five-member terrain domain, construction and rejection boundaries, declaration order, text projections, typed native topology, and exact IDF tokens, and directly observes the Python str-Enum construction, identity, name/value and display surface against a validated typed native enum whose serializer emits exact EnergyPlus tokens, without claiming Python Enum API or text-syntax parity."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-model-terrain-city-86bbbecc"
+      ],
+      "index": 827,
+      "rationale": "Trusted cross-language evidence verifies Terrain.CITY across its exact three-case Terrain slice: the exact City engineering token and model-to-IDF round trip."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-model-terrain-country-b5cce6c9"
+      ],
+      "index": 828,
+      "rationale": "Trusted cross-language evidence verifies Terrain.COUNTRY across its exact three-case Terrain slice: the exact Country engineering token and model-to-IDF round trip."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-model-terrain-ocean-4fb458af"
+      ],
+      "index": 829,
+      "rationale": "Trusted cross-language evidence verifies Terrain.OCEAN across its exact three-case Terrain slice: the exact Ocean engineering token and model-to-IDF round trip."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-model-terrain-suburbs-3de90284"
+      ],
+      "index": 830,
+      "rationale": "Trusted cross-language evidence verifies Terrain.SUBURBS across its exact three-case Terrain slice: the exact Suburbs engineering token and model-to-IDF round trip."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-model-terrain-urban-a4c4bc7"
+      ],
+      "index": 831,
+      "rationale": "Trusted cross-language evidence verifies Terrain.URBAN across its exact three-case Terrain slice: the exact Urban engineering token and model-to-IDF round trip."
     },
     {
       "evidence": [
@@ -4830,9 +4874,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 119,
-      "exception": 109,
-      "needs_reverification": 762,
+      "equivalent": 124,
+      "exception": 110,
+      "needs_reverification": 756,
       "out_of_scope": 252
     },
     "entry_count": 1242
