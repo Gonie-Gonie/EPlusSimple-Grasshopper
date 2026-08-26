@@ -1,0 +1,2397 @@
+{
+  "case_sha256": {
+    "dragon-shape-zone-core.z01-representative-and-permissive-construction": "sha256:8525a95f683d23f3c8b9fc1098f54e21545978becf0b1495934994c064e156b6",
+    "dragon-shape-zone-core.z02-empty-floor-projection": "sha256:1e5bbaa6a5544d3ed2095186464a0a4558e3ac8823cb1aafb5f4f4797091408d",
+    "dragon-shape-zone-core.z03-mixed-multiple-surface-floor-projection": "sha256:8753662d5118d6d0624e17fd8595c2658ab7dc34b13e52ff2ec63bf911eeebb6",
+    "dragon-shape-zone-core.z04-no-floor-multiple-surface-projection": "sha256:c0d59d4de8601928540f97f67ab54e0379a734810adbfd7407028f11ff88a35f",
+    "dragon-shape-zone-core.z05-multiple-floor-dynamic-sum": "sha256:3e5e7c0fb8dec50819621336aac8eceb679899171a4a6cf7a51ce07c4fcfb937",
+    "dragon-shape-zone-core.z06-surface-alias-mutation-and-reassignment": "sha256:8ded2c24ba9f9347474fdf01e01ee4db03de239a1597a93426c4948d2f9028d5",
+    "dragon-shape-zone-core.z07-name-formatting-and-name-mutation": "sha256:d946b3b64c6294fb7001400fcde629a62d78235cc616db527c2437ddf52c85d4",
+    "dragon-shape-zone-core.z08-supply-none-system-group-coercion": "sha256:9cf61887a4998f7ed1f278e59cd52b8fe6ad1786e3b94bd4b050f37ed6e792f0",
+    "dragon-shape-zone-core.z09-invalid-supply-error-and-partial-init": "sha256:0cbaeae8b5db19a0505a74099dd634ba7227ecdbf167df35cf074eb3dfbae85b",
+    "dragon-shape-zone-core.z10-floor-projection-error-timing": "sha256:73b4f618cd44aa712ea3d1ea472ee2510d07a3614ae3f87bd98cc2598a024df6"
+  },
+  "cases": [
+    {
+      "context_symbols": [
+        "Zone.supply"
+      ],
+      "executor": "shape-zone-core",
+      "expected_dotnet": {
+        "adaptations": [
+          "permissive-mutable-python-zone-container",
+          "unchecked-aliased-python-zone-construction"
+        ],
+        "classifications": {
+          "Zone": "exception",
+          "Zone.__init__": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-shape-zone-core.z01-representative-and-permissive-construction",
+      "python": {
+        "facts": {
+          "observations": {
+            "permissive_attributes": {
+              "infiltration": {
+                "kind": "float-nonfinite",
+                "value": "nan"
+              },
+              "light_density": {
+                "kind": "int",
+                "value": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              },
+              "name": {
+                "kind": "bool",
+                "value": true
+              },
+              "profile_label": "odd-profile",
+              "supply": {
+                "kind": "none"
+              },
+              "surface_label": "non-sequence-surface-token",
+              "ventilation_label": "odd-ventilation"
+            },
+            "representative_attributes": {
+              "infiltration": {
+                "hex": "0x1.0000000000000p-2",
+                "kind": "float",
+                "repr": "0.25"
+              },
+              "light_density": {
+                "kind": "int",
+                "value": "8"
+              },
+              "name": {
+                "kind": "str",
+                "value": "Representative"
+              },
+              "profile": "profile",
+              "supply_type": "None",
+              "surface_container_type": "tuple",
+              "surfaces": [],
+              "ventilation": {
+                "hex": "0x1.0000000000000p-1",
+                "kind": "float",
+                "repr": "0.5"
+              }
+            }
+          },
+          "scenario": "Z01",
+          "source_state": {
+            "snapshots": [
+              {
+                "odd_surface_label": "non-sequence-surface-token",
+                "phase": "before"
+              },
+              {
+                "odd_surface_label": "non-sequence-surface-token",
+                "phase": "after"
+              }
+            ]
+          },
+          "timeline": [
+            {
+              "outcome": "returned",
+              "phase": "construct-representative-zone",
+              "return_type": "Zone",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "construct-permissive-zone",
+              "return_type": "Zone",
+              "returned_none": false
+            }
+          ]
+        },
+        "facts_sha256": "sha256:48ca4f2a95644574349289883d7b2053fd89630e987c0c7f413be8ce72a35714",
+        "outcome": "observed"
+      },
+      "subfamily": "container",
+      "target_symbols": [
+        "Zone",
+        "Zone.__init__"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Zone",
+        "Zone.__init__",
+        "Zone.supply"
+      ],
+      "executor": "shape-zone-core",
+      "expected_dotnet": {
+        "adaptations": [
+          "python-floor-identity-filter-and-dynamic-sum",
+          "python-floor-identity-filter-and-fresh-list"
+        ],
+        "classifications": {
+          "Zone.floor_area": "exception",
+          "Zone.floor_surface": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-shape-zone-core.z02-empty-floor-projection",
+      "python": {
+        "facts": {
+          "observations": {
+            "first_floor_labels": [],
+            "first_floor_list_type": "list",
+            "first_list_is_second_list": false,
+            "floor_area": {
+              "kind": "int",
+              "value": "0"
+            },
+            "second_floor_labels": [],
+            "zone_surface_is_authored_list": true
+          },
+          "scenario": "Z02",
+          "source_state": {
+            "snapshots": [
+              {
+                "authored_labels": [],
+                "phase": "before",
+                "zone_surface_labels": []
+              },
+              {
+                "authored_labels": [],
+                "phase": "after",
+                "zone_surface_labels": []
+              }
+            ]
+          },
+          "timeline": [
+            {
+              "outcome": "returned",
+              "phase": "first-floor-surface",
+              "return_type": "list"
+            },
+            {
+              "outcome": "returned",
+              "phase": "floor-area",
+              "return_type": "int"
+            },
+            {
+              "outcome": "returned",
+              "phase": "second-floor-surface",
+              "return_type": "list"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:53fae4c45819d22aa9cbed67bf233a053d90b7cb9671456bd6d8f07eb4c02151",
+        "outcome": "observed"
+      },
+      "subfamily": "floor",
+      "target_symbols": [
+        "Zone.floor_surface",
+        "Zone.floor_area"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Zone",
+        "Zone.__init__",
+        "Zone.supply",
+        "SurfaceType.FLOOR"
+      ],
+      "executor": "shape-zone-core",
+      "expected_dotnet": {
+        "adaptations": [
+          "python-floor-identity-filter-and-dynamic-sum",
+          "python-floor-identity-filter-and-fresh-list"
+        ],
+        "classifications": {
+          "Zone.floor_area": "exception",
+          "Zone.floor_surface": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-shape-zone-core.z03-mixed-multiple-surface-floor-projection",
+      "python": {
+        "facts": {
+          "observations": {
+            "first_floor_labels": [
+              "floor-1"
+            ],
+            "first_list_is_second_list": false,
+            "floor_area_event": {
+              "outcome": "returned",
+              "phase": "floor-area",
+              "return_type": "float",
+              "returned_none": false
+            },
+            "floor_area_value": {
+              "hex": "0x1.9000000000000p+3",
+              "kind": "float",
+              "repr": "12.5"
+            },
+            "second_floor_labels": [
+              "floor-1"
+            ],
+            "trace_after_first": [
+              "wall-1.type",
+              "floor-1.type",
+              "string-floor.type",
+              "ceiling-1.type"
+            ],
+            "trace_after_floor_area": [
+              "wall-1.type",
+              "floor-1.type",
+              "string-floor.type",
+              "ceiling-1.type",
+              "wall-1.type",
+              "floor-1.type",
+              "string-floor.type",
+              "ceiling-1.type",
+              "floor-1.area"
+            ],
+            "trace_after_second": [
+              "wall-1.type",
+              "floor-1.type",
+              "string-floor.type",
+              "ceiling-1.type",
+              "wall-1.type",
+              "floor-1.type",
+              "string-floor.type",
+              "ceiling-1.type",
+              "floor-1.area",
+              "wall-1.type",
+              "floor-1.type",
+              "string-floor.type",
+              "ceiling-1.type"
+            ]
+          },
+          "scenario": "Z03",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "surfaces": [
+                  {
+                    "area": {
+                      "kind": "int",
+                      "value": "100"
+                    },
+                    "label": "wall-1",
+                    "type": {
+                      "kind": "str",
+                      "value": "wall"
+                    }
+                  },
+                  {
+                    "area": {
+                      "hex": "0x1.9000000000000p+3",
+                      "kind": "float",
+                      "repr": "12.5"
+                    },
+                    "label": "floor-1",
+                    "type": {
+                      "kind": "surface-type",
+                      "value": "floor"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "int",
+                      "value": "999"
+                    },
+                    "label": "string-floor",
+                    "type": {
+                      "kind": "str",
+                      "value": "floor"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "int",
+                      "value": "100"
+                    },
+                    "label": "ceiling-1",
+                    "type": {
+                      "kind": "str",
+                      "value": "ceiling"
+                    }
+                  }
+                ]
+              },
+              {
+                "phase": "after",
+                "surfaces": [
+                  {
+                    "area": {
+                      "kind": "int",
+                      "value": "100"
+                    },
+                    "label": "wall-1",
+                    "type": {
+                      "kind": "str",
+                      "value": "wall"
+                    }
+                  },
+                  {
+                    "area": {
+                      "hex": "0x1.9000000000000p+3",
+                      "kind": "float",
+                      "repr": "12.5"
+                    },
+                    "label": "floor-1",
+                    "type": {
+                      "kind": "surface-type",
+                      "value": "floor"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "int",
+                      "value": "999"
+                    },
+                    "label": "string-floor",
+                    "type": {
+                      "kind": "str",
+                      "value": "floor"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "int",
+                      "value": "100"
+                    },
+                    "label": "ceiling-1",
+                    "type": {
+                      "kind": "str",
+                      "value": "ceiling"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "timeline": [
+            {
+              "outcome": "returned",
+              "phase": "floor-surface-first",
+              "return_type": "list"
+            },
+            {
+              "outcome": "returned",
+              "phase": "floor-area",
+              "return_type": "float",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "floor-surface-second",
+              "return_type": "list"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:7db7329767cd20752668cf27a0eb29b54b960387c8e08d628a2165c0f4d00fed",
+        "outcome": "observed"
+      },
+      "subfamily": "floor",
+      "target_symbols": [
+        "Zone.floor_surface",
+        "Zone.floor_area"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Zone",
+        "Zone.__init__",
+        "Zone.supply",
+        "SurfaceType.FLOOR"
+      ],
+      "executor": "shape-zone-core",
+      "expected_dotnet": {
+        "adaptations": [
+          "python-floor-identity-filter-and-dynamic-sum",
+          "python-floor-identity-filter-and-fresh-list"
+        ],
+        "classifications": {
+          "Zone.floor_area": "exception",
+          "Zone.floor_surface": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-shape-zone-core.z04-no-floor-multiple-surface-projection",
+      "python": {
+        "facts": {
+          "observations": {
+            "first_floor_labels": [],
+            "first_list_is_second_list": false,
+            "floor_area_event": {
+              "outcome": "returned",
+              "phase": "floor-area",
+              "return_type": "int",
+              "returned_none": false
+            },
+            "floor_area_value": {
+              "kind": "int",
+              "value": "0"
+            },
+            "second_floor_labels": [],
+            "trace_after_first": [
+              "wall-a.type",
+              "ceiling-a.type",
+              "string-floor.type"
+            ],
+            "trace_after_floor_area": [
+              "wall-a.type",
+              "ceiling-a.type",
+              "string-floor.type",
+              "wall-a.type",
+              "ceiling-a.type",
+              "string-floor.type"
+            ],
+            "trace_after_second": [
+              "wall-a.type",
+              "ceiling-a.type",
+              "string-floor.type",
+              "wall-a.type",
+              "ceiling-a.type",
+              "string-floor.type",
+              "wall-a.type",
+              "ceiling-a.type",
+              "string-floor.type"
+            ]
+          },
+          "scenario": "Z04",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "surfaces": [
+                  {
+                    "area": {
+                      "kind": "str",
+                      "value": "unread-a"
+                    },
+                    "label": "wall-a",
+                    "type": {
+                      "kind": "str",
+                      "value": "wall"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "str",
+                      "value": "unread-b"
+                    },
+                    "label": "ceiling-a",
+                    "type": {
+                      "kind": "str",
+                      "value": "ceiling"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "str",
+                      "value": "unread-c"
+                    },
+                    "label": "string-floor",
+                    "type": {
+                      "kind": "str",
+                      "value": "floor"
+                    }
+                  }
+                ]
+              },
+              {
+                "phase": "after",
+                "surfaces": [
+                  {
+                    "area": {
+                      "kind": "str",
+                      "value": "unread-a"
+                    },
+                    "label": "wall-a",
+                    "type": {
+                      "kind": "str",
+                      "value": "wall"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "str",
+                      "value": "unread-b"
+                    },
+                    "label": "ceiling-a",
+                    "type": {
+                      "kind": "str",
+                      "value": "ceiling"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "str",
+                      "value": "unread-c"
+                    },
+                    "label": "string-floor",
+                    "type": {
+                      "kind": "str",
+                      "value": "floor"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "timeline": [
+            {
+              "outcome": "returned",
+              "phase": "floor-surface-first",
+              "return_type": "list"
+            },
+            {
+              "outcome": "returned",
+              "phase": "floor-area",
+              "return_type": "int",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "floor-surface-second",
+              "return_type": "list"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:7c9482907498643f83792188b370eaab0a1b9c09ffa65e9d204abd04a634a7be",
+        "outcome": "observed"
+      },
+      "subfamily": "floor",
+      "target_symbols": [
+        "Zone.floor_surface",
+        "Zone.floor_area"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Zone",
+        "Zone.__init__",
+        "Zone.supply",
+        "SurfaceType.FLOOR"
+      ],
+      "executor": "shape-zone-core",
+      "expected_dotnet": {
+        "adaptations": [
+          "python-floor-identity-filter-and-dynamic-sum",
+          "python-floor-identity-filter-and-fresh-list"
+        ],
+        "classifications": {
+          "Zone.floor_area": "exception",
+          "Zone.floor_surface": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-shape-zone-core.z05-multiple-floor-dynamic-sum",
+      "python": {
+        "facts": {
+          "observations": {
+            "first_floor_labels": [
+              "floor-bool",
+              "floor-int",
+              "floor-float"
+            ],
+            "first_list_is_second_list": false,
+            "floor_area_event": {
+              "outcome": "returned",
+              "phase": "floor-area",
+              "return_type": "float",
+              "returned_none": false
+            },
+            "floor_area_value": {
+              "hex": "0x1.a000000000000p+2",
+              "kind": "float",
+              "repr": "6.5"
+            },
+            "second_floor_labels": [
+              "floor-bool",
+              "floor-int",
+              "floor-float"
+            ],
+            "trace_after_first": [
+              "floor-bool.type",
+              "wall-huge.type",
+              "floor-int.type",
+              "floor-float.type"
+            ],
+            "trace_after_floor_area": [
+              "floor-bool.type",
+              "wall-huge.type",
+              "floor-int.type",
+              "floor-float.type",
+              "floor-bool.type",
+              "wall-huge.type",
+              "floor-int.type",
+              "floor-float.type",
+              "floor-bool.area",
+              "floor-int.area",
+              "floor-float.area"
+            ],
+            "trace_after_second": [
+              "floor-bool.type",
+              "wall-huge.type",
+              "floor-int.type",
+              "floor-float.type",
+              "floor-bool.type",
+              "wall-huge.type",
+              "floor-int.type",
+              "floor-float.type",
+              "floor-bool.area",
+              "floor-int.area",
+              "floor-float.area",
+              "floor-bool.type",
+              "wall-huge.type",
+              "floor-int.type",
+              "floor-float.type"
+            ]
+          },
+          "scenario": "Z05",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "surfaces": [
+                  {
+                    "area": {
+                      "kind": "bool",
+                      "value": true
+                    },
+                    "label": "floor-bool",
+                    "type": {
+                      "kind": "surface-type",
+                      "value": "floor"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "int",
+                      "value": "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                    },
+                    "label": "wall-huge",
+                    "type": {
+                      "kind": "str",
+                      "value": "wall"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "int",
+                      "value": "3"
+                    },
+                    "label": "floor-int",
+                    "type": {
+                      "kind": "surface-type",
+                      "value": "floor"
+                    }
+                  },
+                  {
+                    "area": {
+                      "hex": "0x1.4000000000000p+1",
+                      "kind": "float",
+                      "repr": "2.5"
+                    },
+                    "label": "floor-float",
+                    "type": {
+                      "kind": "surface-type",
+                      "value": "floor"
+                    }
+                  }
+                ]
+              },
+              {
+                "phase": "after",
+                "surfaces": [
+                  {
+                    "area": {
+                      "kind": "bool",
+                      "value": true
+                    },
+                    "label": "floor-bool",
+                    "type": {
+                      "kind": "surface-type",
+                      "value": "floor"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "int",
+                      "value": "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                    },
+                    "label": "wall-huge",
+                    "type": {
+                      "kind": "str",
+                      "value": "wall"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "int",
+                      "value": "3"
+                    },
+                    "label": "floor-int",
+                    "type": {
+                      "kind": "surface-type",
+                      "value": "floor"
+                    }
+                  },
+                  {
+                    "area": {
+                      "hex": "0x1.4000000000000p+1",
+                      "kind": "float",
+                      "repr": "2.5"
+                    },
+                    "label": "floor-float",
+                    "type": {
+                      "kind": "surface-type",
+                      "value": "floor"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "timeline": [
+            {
+              "outcome": "returned",
+              "phase": "floor-surface-first",
+              "return_type": "list"
+            },
+            {
+              "outcome": "returned",
+              "phase": "floor-area",
+              "return_type": "float",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "floor-surface-second",
+              "return_type": "list"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:b8ceb11920c5e347c03bf1b3ae7abc3387503b2267802ad168b30877c31c393b",
+        "outcome": "observed"
+      },
+      "subfamily": "floor",
+      "target_symbols": [
+        "Zone.floor_surface",
+        "Zone.floor_area"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Zone",
+        "Zone.supply",
+        "SurfaceType.FLOOR"
+      ],
+      "executor": "shape-zone-core",
+      "expected_dotnet": {
+        "adaptations": [
+          "python-floor-identity-filter-and-dynamic-sum",
+          "python-floor-identity-filter-and-fresh-list",
+          "unchecked-aliased-python-zone-construction"
+        ],
+        "classifications": {
+          "Zone.__init__": "exception",
+          "Zone.floor_area": "exception",
+          "Zone.floor_surface": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-shape-zone-core.z06-surface-alias-mutation-and-reassignment",
+      "python": {
+        "facts": {
+          "observations": {
+            "replacement_container_type": "tuple",
+            "trace": [
+              "floor-1.type",
+              "wall.type",
+              "floor-1.area",
+              "floor-1.type",
+              "wall.type",
+              "floor-1.type",
+              "wall.type",
+              "floor-2.type",
+              "floor-1.area",
+              "floor-2.area",
+              "floor-1.type",
+              "wall.type",
+              "floor-2.type",
+              "floor-2.type",
+              "wall.type",
+              "floor-1.type",
+              "floor-2.area",
+              "floor-1.area",
+              "floor-2.type",
+              "wall.type",
+              "floor-1.type",
+              "floor-2.type",
+              "wall.type",
+              "floor-1.type",
+              "floor-2.area",
+              "wall.area",
+              "floor-1.area",
+              "floor-2.type",
+              "wall.type",
+              "floor-1.type",
+              "wall.type",
+              "wall.area",
+              "wall.type",
+              "wall.type",
+              "wall.area",
+              "wall.type"
+            ],
+            "zone_surface_is_authored_initially": true,
+            "zone_surface_is_replacement_after_assignment": true
+          },
+          "scenario": "Z06",
+          "source_state": {
+            "snapshots": [
+              {
+                "authored_labels": [
+                  "floor-1",
+                  "wall"
+                ],
+                "floor_area": {
+                  "kind": "int",
+                  "value": "10"
+                },
+                "floor_labels": [
+                  "floor-1"
+                ],
+                "phase": "initial",
+                "zone_surface_container": "list",
+                "zone_surface_labels": [
+                  "floor-1",
+                  "wall"
+                ]
+              },
+              {
+                "authored_labels": [
+                  "floor-1",
+                  "wall",
+                  "floor-2"
+                ],
+                "floor_area": {
+                  "hex": "0x1.b000000000000p+3",
+                  "kind": "float",
+                  "repr": "13.5"
+                },
+                "floor_labels": [
+                  "floor-1",
+                  "floor-2"
+                ],
+                "phase": "after-authored-append",
+                "zone_surface_container": "list",
+                "zone_surface_labels": [
+                  "floor-1",
+                  "wall",
+                  "floor-2"
+                ]
+              },
+              {
+                "authored_labels": [
+                  "floor-2",
+                  "wall",
+                  "floor-1"
+                ],
+                "floor_area": {
+                  "hex": "0x1.b000000000000p+3",
+                  "kind": "float",
+                  "repr": "13.5"
+                },
+                "floor_labels": [
+                  "floor-2",
+                  "floor-1"
+                ],
+                "phase": "after-authored-reverse",
+                "zone_surface_container": "list",
+                "zone_surface_labels": [
+                  "floor-2",
+                  "wall",
+                  "floor-1"
+                ]
+              },
+              {
+                "authored_labels": [
+                  "floor-2",
+                  "wall",
+                  "floor-1"
+                ],
+                "floor_area": {
+                  "hex": "0x1.3000000000000p+3",
+                  "kind": "float",
+                  "repr": "9.5"
+                },
+                "floor_labels": [
+                  "floor-2",
+                  "wall",
+                  "floor-1"
+                ],
+                "phase": "after-surface-property-mutation",
+                "zone_surface_container": "list",
+                "zone_surface_labels": [
+                  "floor-2",
+                  "wall",
+                  "floor-1"
+                ]
+              },
+              {
+                "authored_labels": [
+                  "floor-2",
+                  "wall",
+                  "floor-1"
+                ],
+                "floor_area": {
+                  "kind": "int",
+                  "value": "-4"
+                },
+                "floor_labels": [
+                  "wall"
+                ],
+                "phase": "after-zone-surface-reassignment",
+                "zone_surface_container": "tuple",
+                "zone_surface_labels": [
+                  "wall"
+                ]
+              },
+              {
+                "authored_labels": [
+                  "floor-2",
+                  "wall",
+                  "floor-1",
+                  "floor-1"
+                ],
+                "floor_area": {
+                  "kind": "int",
+                  "value": "-4"
+                },
+                "floor_labels": [
+                  "wall"
+                ],
+                "phase": "after-old-authored-list-mutation",
+                "zone_surface_container": "tuple",
+                "zone_surface_labels": [
+                  "wall"
+                ]
+              }
+            ]
+          },
+          "timeline": [
+            {
+              "outcome": "returned",
+              "phase": "initial",
+              "return_type": "snapshot"
+            },
+            {
+              "outcome": "returned",
+              "phase": "after-authored-append",
+              "return_type": "snapshot"
+            },
+            {
+              "outcome": "returned",
+              "phase": "after-authored-reverse",
+              "return_type": "snapshot"
+            },
+            {
+              "outcome": "returned",
+              "phase": "after-surface-property-mutation",
+              "return_type": "snapshot"
+            },
+            {
+              "outcome": "returned",
+              "phase": "after-zone-surface-reassignment",
+              "return_type": "snapshot"
+            },
+            {
+              "outcome": "returned",
+              "phase": "after-old-authored-list-mutation",
+              "return_type": "snapshot"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:b68647cc92f046009483d76756e1e8a14fb4db3caf8e28b6c0507694db07a039",
+        "outcome": "observed"
+      },
+      "subfamily": "floor",
+      "target_symbols": [
+        "Zone.__init__",
+        "Zone.floor_surface",
+        "Zone.floor_area"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Zone",
+        "Zone.__init__",
+        "Zone.supply"
+      ],
+      "executor": "shape-zone-core",
+      "expected_dotnet": {
+        "adaptations": [
+          "mutable-unvalidated-python-zone-name-formatting"
+        ],
+        "classifications": {
+          "Zone.idf_airexhaustnodelistname": "exception",
+          "Zone.idf_airinletnodelistname": "exception",
+          "Zone.idf_equipmentlistname": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-shape-zone-core.z07-name-formatting-and-name-mutation",
+      "python": {
+        "facts": {
+          "observations": {
+            "name_output_snapshots": [
+              {
+                "air_exhaust_node_list_name": "North Ω / Zone 01 Air ExhaustNode List",
+                "air_inlet_node_list_name": "North Ω / Zone 01 Air InletNode List",
+                "equipment_list_name": "EquipmentList_for_North Ω / Zone 01",
+                "name": {
+                  "kind": "str",
+                  "value": "North Ω / Zone 01"
+                },
+                "phase": "unicode-name"
+              },
+              {
+                "air_exhaust_node_list_name": " Air ExhaustNode List",
+                "air_inlet_node_list_name": " Air InletNode List",
+                "equipment_list_name": "EquipmentList_for_",
+                "name": {
+                  "kind": "str",
+                  "value": ""
+                },
+                "phase": "empty-name"
+              },
+              {
+                "air_exhaust_node_list_name": "None Air ExhaustNode List",
+                "air_inlet_node_list_name": "None Air InletNode List",
+                "equipment_list_name": "EquipmentList_for_None",
+                "name": {
+                  "kind": "none"
+                },
+                "phase": "none-name"
+              }
+            ]
+          },
+          "scenario": "Z07",
+          "source_state": {
+            "snapshots": [
+              {
+                "air_exhaust_node_list_name": "North Ω / Zone 01 Air ExhaustNode List",
+                "air_inlet_node_list_name": "North Ω / Zone 01 Air InletNode List",
+                "equipment_list_name": "EquipmentList_for_North Ω / Zone 01",
+                "name": {
+                  "kind": "str",
+                  "value": "North Ω / Zone 01"
+                },
+                "phase": "unicode-name"
+              },
+              {
+                "air_exhaust_node_list_name": " Air ExhaustNode List",
+                "air_inlet_node_list_name": " Air InletNode List",
+                "equipment_list_name": "EquipmentList_for_",
+                "name": {
+                  "kind": "str",
+                  "value": ""
+                },
+                "phase": "empty-name"
+              },
+              {
+                "air_exhaust_node_list_name": "None Air ExhaustNode List",
+                "air_inlet_node_list_name": "None Air InletNode List",
+                "equipment_list_name": "EquipmentList_for_None",
+                "name": {
+                  "kind": "none"
+                },
+                "phase": "none-name"
+              }
+            ]
+          },
+          "timeline": [
+            {
+              "outcome": "returned",
+              "phase": "unicode-name",
+              "return_type": "dict"
+            },
+            {
+              "outcome": "returned",
+              "phase": "empty-name",
+              "return_type": "dict"
+            },
+            {
+              "outcome": "returned",
+              "phase": "none-name",
+              "return_type": "dict"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:bd383c4ed786db75b4c064874af0f079865e5a53a3114880343fa51bf0f37268",
+        "outcome": "observed"
+      },
+      "subfamily": "naming",
+      "target_symbols": [
+        "Zone.idf_airexhaustnodelistname",
+        "Zone.idf_airinletnodelistname",
+        "Zone.idf_equipmentlistname"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Zone",
+        "Zone.__init__",
+        "ElectricRadiator",
+        "ElectricRadiator.__init__",
+        "ElectricRadiator.heatable",
+        "SupplyGroup",
+        "SupplyGroup.__init__",
+        "SupplySystem"
+      ],
+      "executor": "shape-zone-core",
+      "expected_dotnet": {
+        "adaptations": [
+          "embedded-python-zone-supply-coercion-and-mutation"
+        ],
+        "classifications": {
+          "Zone.supply": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-shape-zone-core.z08-supply-none-system-group-coercion",
+      "python": {
+        "facts": {
+          "observations": {
+            "existing_group_is_retained": true,
+            "wrapped_group_availability_count": 1,
+            "wrapped_group_system_is_direct_input": true
+          },
+          "scenario": "Z08",
+          "source_state": {
+            "snapshots": [
+              {
+                "availabilities": [],
+                "phase": "constructed-none",
+                "supply_type": "None",
+                "system_labels": []
+              },
+              {
+                "availabilities": [
+                  {
+                    "kind": "none"
+                  }
+                ],
+                "phase": "assigned-direct-system",
+                "supply_type": "SupplyGroup",
+                "system_labels": [
+                  "first"
+                ]
+              },
+              {
+                "availabilities": [
+                  {
+                    "kind": "none"
+                  },
+                  {
+                    "kind": "none"
+                  }
+                ],
+                "phase": "assigned-existing-group",
+                "supply_type": "SupplyGroup",
+                "system_labels": [
+                  "first",
+                  "second"
+                ]
+              },
+              {
+                "availabilities": [],
+                "phase": "assigned-none",
+                "supply_type": "None",
+                "system_labels": []
+              },
+              {
+                "availabilities": [
+                  {
+                    "kind": "none"
+                  }
+                ],
+                "phase": "constructed-direct-system",
+                "supply_type": "SupplyGroup",
+                "system_labels": [
+                  "second"
+                ]
+              }
+            ]
+          },
+          "timeline": [
+            {
+              "outcome": "returned",
+              "phase": "construct-first-system",
+              "return_type": "ElectricRadiator",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "construct-second-system",
+              "return_type": "ElectricRadiator",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "construct-existing-group",
+              "return_type": "SupplyGroup",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "construct-zone-none",
+              "return_type": "Zone",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-direct-system",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-existing-group",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-none",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "construct-zone-direct-system",
+              "return_type": "Zone",
+              "returned_none": false
+            }
+          ]
+        },
+        "facts_sha256": "sha256:da56883067aefbccf8d509ed11472acb7ea85c1e04c4d38eaf2cd93aaf01c811",
+        "outcome": "observed"
+      },
+      "subfamily": "supply",
+      "target_symbols": [
+        "Zone.supply"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Zone",
+        "ElectricRadiator",
+        "ElectricRadiator.__init__",
+        "ElectricRadiator.heatable",
+        "SupplyGroup",
+        "SupplyGroup.__init__",
+        "SupplySystem"
+      ],
+      "executor": "shape-zone-core",
+      "expected_dotnet": {
+        "adaptations": [
+          "embedded-python-zone-supply-coercion-and-mutation",
+          "unchecked-aliased-python-zone-construction"
+        ],
+        "classifications": {
+          "Zone.__init__": "exception",
+          "Zone.supply": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-shape-zone-core.z09-invalid-supply-error-and-partial-init",
+      "python": {
+        "facts": {
+          "observations": {
+            "constructor_error_event": {
+              "error": {
+                "message": "supply must be a SupplySystem, SupplyGroup, or None.",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "construct-invalid-supply"
+            },
+            "partial_constructor_state": {
+              "attribute_names": [
+                "infiltration",
+                "light_density",
+                "name",
+                "profile",
+                "surface"
+              ],
+              "light_density": {
+                "kind": "int",
+                "value": "7"
+              },
+              "name": {
+                "kind": "str",
+                "value": "partial"
+              },
+              "private_supply_lookup": {
+                "kind": "str",
+                "value": "missing"
+              },
+              "surface_values": [
+                {
+                  "kind": "str",
+                  "value": "surface-token"
+                }
+              ],
+              "ventilation_attribute_present": false
+            },
+            "setter_error_events": [
+              {
+                "error": {
+                  "message": "supply must be a SupplySystem, SupplyGroup, or None.",
+                  "type": "TypeError"
+                },
+                "outcome": "raised",
+                "phase": "set-integer"
+              },
+              {
+                "error": {
+                  "message": "supply must be a SupplySystem, SupplyGroup, or None.",
+                  "type": "TypeError"
+                },
+                "outcome": "raised",
+                "phase": "set-boolean"
+              },
+              {
+                "error": {
+                  "message": "supply must be a SupplySystem, SupplyGroup, or None.",
+                  "type": "TypeError"
+                },
+                "outcome": "raised",
+                "phase": "set-token"
+              }
+            ]
+          },
+          "scenario": "Z09",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before-invalid-setters",
+                "supply_is_original_group": true,
+                "supply_type": "SupplyGroup"
+              },
+              {
+                "phase": "after-integer",
+                "supply_is_original_group": true,
+                "supply_type": "SupplyGroup"
+              },
+              {
+                "phase": "after-boolean",
+                "supply_is_original_group": true,
+                "supply_type": "SupplyGroup"
+              },
+              {
+                "phase": "after-token",
+                "supply_is_original_group": true,
+                "supply_type": "SupplyGroup"
+              },
+              {
+                "attribute_names": [
+                  "infiltration",
+                  "light_density",
+                  "name",
+                  "profile",
+                  "surface"
+                ],
+                "light_density": {
+                  "kind": "int",
+                  "value": "7"
+                },
+                "name": {
+                  "kind": "str",
+                  "value": "partial"
+                },
+                "phase": "after-failed-constructor",
+                "private_supply_lookup": {
+                  "kind": "str",
+                  "value": "missing"
+                },
+                "surface_values": [
+                  {
+                    "kind": "str",
+                    "value": "surface-token"
+                  }
+                ],
+                "ventilation_attribute_present": false
+              }
+            ]
+          },
+          "timeline": [
+            {
+              "error": {
+                "message": "supply must be a SupplySystem, SupplyGroup, or None.",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "set-integer"
+            },
+            {
+              "error": {
+                "message": "supply must be a SupplySystem, SupplyGroup, or None.",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "set-boolean"
+            },
+            {
+              "error": {
+                "message": "supply must be a SupplySystem, SupplyGroup, or None.",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "set-token"
+            },
+            {
+              "error": {
+                "message": "supply must be a SupplySystem, SupplyGroup, or None.",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "construct-invalid-supply"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:53ed4cf50a90e1f9da5bb102def1dc020c7fa7fa50e574efd6fb12b2a151af9c",
+        "outcome": "observed"
+      },
+      "subfamily": "supply",
+      "target_symbols": [
+        "Zone.__init__",
+        "Zone.supply"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Zone",
+        "Zone.__init__",
+        "Zone.supply",
+        "SurfaceType.FLOOR"
+      ],
+      "executor": "shape-zone-core",
+      "expected_dotnet": {
+        "adaptations": [
+          "python-floor-identity-filter-and-dynamic-sum",
+          "python-floor-identity-filter-and-fresh-list"
+        ],
+        "classifications": {
+          "Zone.floor_area": "exception",
+          "Zone.floor_surface": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-shape-zone-core.z10-floor-projection-error-timing",
+      "python": {
+        "facts": {
+          "observations": {
+            "error_events": [
+              {
+                "error": {
+                  "message": "'_MissingTypeProbe' object has no attribute 'type'",
+                  "type": "AttributeError"
+                },
+                "outcome": "raised",
+                "phase": "missing-type-floor-surface"
+              },
+              {
+                "error": {
+                  "message": "'_MissingTypeProbe' object has no attribute 'type'",
+                  "type": "AttributeError"
+                },
+                "outcome": "raised",
+                "phase": "missing-type-floor-area"
+              },
+              {
+                "error": {
+                  "message": "unsupported operand type(s) for +: 'int' and 'str'",
+                  "type": "TypeError"
+                },
+                "outcome": "raised",
+                "phase": "string-area-floor-area"
+              }
+            ],
+            "string_area_trace": [
+              "string-area.type",
+              "later-floor.type",
+              "string-area.area"
+            ]
+          },
+          "scenario": "Z10",
+          "source_state": {
+            "snapshots": [
+              {
+                "missing_probe_label": "missing-type",
+                "phase": "missing-type-before",
+                "zone_name": {
+                  "kind": "str",
+                  "value": "missing-type-zone"
+                },
+                "zone_surface_labels": [
+                  "missing-type"
+                ]
+              },
+              {
+                "missing_probe_label": "missing-type",
+                "phase": "missing-type-after-floor-surface-error",
+                "zone_name": {
+                  "kind": "str",
+                  "value": "missing-type-zone"
+                },
+                "zone_surface_labels": [
+                  "missing-type"
+                ]
+              },
+              {
+                "missing_probe_label": "missing-type",
+                "phase": "missing-type-after-floor-area-error",
+                "zone_name": {
+                  "kind": "str",
+                  "value": "missing-type-zone"
+                },
+                "zone_surface_labels": [
+                  "missing-type"
+                ]
+              },
+              {
+                "phase": "string-area-after",
+                "surfaces": [
+                  {
+                    "area": {
+                      "kind": "str",
+                      "value": "bad"
+                    },
+                    "label": "string-area",
+                    "type": {
+                      "kind": "surface-type",
+                      "value": "floor"
+                    }
+                  },
+                  {
+                    "area": {
+                      "kind": "int",
+                      "value": "4"
+                    },
+                    "label": "later-floor",
+                    "type": {
+                      "kind": "surface-type",
+                      "value": "floor"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "timeline": [
+            {
+              "error": {
+                "message": "'_MissingTypeProbe' object has no attribute 'type'",
+                "type": "AttributeError"
+              },
+              "outcome": "raised",
+              "phase": "missing-type-floor-surface"
+            },
+            {
+              "error": {
+                "message": "'_MissingTypeProbe' object has no attribute 'type'",
+                "type": "AttributeError"
+              },
+              "outcome": "raised",
+              "phase": "missing-type-floor-area"
+            },
+            {
+              "error": {
+                "message": "unsupported operand type(s) for +: 'int' and 'str'",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "string-area-floor-area"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:ee6b6700ce0844bca9878ee1f95a36d68e656355e9882cee89cd7718e366816a",
+        "outcome": "observed"
+      },
+      "subfamily": "floor",
+      "target_symbols": [
+        "Zone.floor_surface",
+        "Zone.floor_area"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:b42a68ae6532fa179348796c81982a98579c9789b66a453fd5c1eae22d8b964f",
+  "consumer_contract": {
+    "adaptations": {
+      "Zone": "permissive-mutable-python-zone-container",
+      "Zone.__init__": "unchecked-aliased-python-zone-construction",
+      "Zone.floor_area": "python-floor-identity-filter-and-dynamic-sum",
+      "Zone.floor_surface": "python-floor-identity-filter-and-fresh-list",
+      "Zone.idf_airexhaustnodelistname": "mutable-unvalidated-python-zone-name-formatting",
+      "Zone.idf_airinletnodelistname": "mutable-unvalidated-python-zone-name-formatting",
+      "Zone.idf_equipmentlistname": "mutable-unvalidated-python-zone-name-formatting",
+      "Zone.supply": "embedded-python-zone-supply-coercion-and-mutation"
+    },
+    "assertion_ids": {
+      "Zone": "dragon-shape-zone-core-1083-4830290e",
+      "Zone.__init__": "dragon-shape-zone-core-1084-fad03092",
+      "Zone.floor_area": "dragon-shape-zone-core-1085-21fe276d",
+      "Zone.floor_surface": "dragon-shape-zone-core-1086-53382328",
+      "Zone.idf_airexhaustnodelistname": "dragon-shape-zone-core-1087-48c6fddb",
+      "Zone.idf_airinletnodelistname": "dragon-shape-zone-core-1088-97745304",
+      "Zone.idf_equipmentlistname": "dragon-shape-zone-core-1089-ad9ccd78",
+      "Zone.supply": "dragon-shape-zone-core-1091-1b5900c0"
+    },
+    "case_count": 10,
+    "case_ids": [
+      "dragon-shape-zone-core.z01-representative-and-permissive-construction",
+      "dragon-shape-zone-core.z02-empty-floor-projection",
+      "dragon-shape-zone-core.z03-mixed-multiple-surface-floor-projection",
+      "dragon-shape-zone-core.z04-no-floor-multiple-surface-projection",
+      "dragon-shape-zone-core.z05-multiple-floor-dynamic-sum",
+      "dragon-shape-zone-core.z06-surface-alias-mutation-and-reassignment",
+      "dragon-shape-zone-core.z07-name-formatting-and-name-mutation",
+      "dragon-shape-zone-core.z08-supply-none-system-group-coercion",
+      "dragon-shape-zone-core.z09-invalid-supply-error-and-partial-init",
+      "dragon-shape-zone-core.z10-floor-projection-error-timing"
+    ],
+    "classification_basis": "All eight contracts require explicit exceptions. Python Zone accepts and retains unchecked mutable inputs, filters floors by enum-member identity at each read, dynamically sums the bounded observed area values, formats mutable names without validation, and owns mutable SupplySystem-to-SupplyGroup coercion. The native model validates inputs and defensively copies its surface collection while retaining immutable Surface references, locates IDF naming in the assembler, and associates HVAC externally.",
+    "classification_counts": {
+      "equivalent": 0,
+      "exception": 8
+    },
+    "classifications": {
+      "Zone": "exception",
+      "Zone.__init__": "exception",
+      "Zone.floor_area": "exception",
+      "Zone.floor_surface": "exception",
+      "Zone.idf_airexhaustnodelistname": "exception",
+      "Zone.idf_airinletnodelistname": "exception",
+      "Zone.idf_equipmentlistname": "exception",
+      "Zone.supply": "exception"
+    },
+    "closure": {
+      "case_coverage_by_symbol": {
+        "Zone": [
+          "dragon-shape-zone-core.z01-representative-and-permissive-construction"
+        ],
+        "Zone.__init__": [
+          "dragon-shape-zone-core.z01-representative-and-permissive-construction",
+          "dragon-shape-zone-core.z06-surface-alias-mutation-and-reassignment",
+          "dragon-shape-zone-core.z09-invalid-supply-error-and-partial-init"
+        ],
+        "Zone.floor_area": [
+          "dragon-shape-zone-core.z02-empty-floor-projection",
+          "dragon-shape-zone-core.z03-mixed-multiple-surface-floor-projection",
+          "dragon-shape-zone-core.z04-no-floor-multiple-surface-projection",
+          "dragon-shape-zone-core.z05-multiple-floor-dynamic-sum",
+          "dragon-shape-zone-core.z06-surface-alias-mutation-and-reassignment",
+          "dragon-shape-zone-core.z10-floor-projection-error-timing"
+        ],
+        "Zone.floor_surface": [
+          "dragon-shape-zone-core.z02-empty-floor-projection",
+          "dragon-shape-zone-core.z03-mixed-multiple-surface-floor-projection",
+          "dragon-shape-zone-core.z04-no-floor-multiple-surface-projection",
+          "dragon-shape-zone-core.z05-multiple-floor-dynamic-sum",
+          "dragon-shape-zone-core.z06-surface-alias-mutation-and-reassignment",
+          "dragon-shape-zone-core.z10-floor-projection-error-timing"
+        ],
+        "Zone.idf_airexhaustnodelistname": [
+          "dragon-shape-zone-core.z07-name-formatting-and-name-mutation"
+        ],
+        "Zone.idf_airinletnodelistname": [
+          "dragon-shape-zone-core.z07-name-formatting-and-name-mutation"
+        ],
+        "Zone.idf_equipmentlistname": [
+          "dragon-shape-zone-core.z07-name-formatting-and-name-mutation"
+        ],
+        "Zone.supply": [
+          "dragon-shape-zone-core.z08-supply-none-system-group-coercion",
+          "dragon-shape-zone-core.z09-invalid-supply-error-and-partial-init"
+        ]
+      },
+      "context_receipts": [
+        {
+          "body_hash": "sha256:8b8d4de15bc3ac3f97742e4883e96cfbd188a7b4195ba0bf2dd76d29fec1ec92",
+          "inventory_index": 707,
+          "kind": "class",
+          "path": "src/idragon/dragon/hvac.py",
+          "signature_hash": "sha256:1c9170eb76b09c7feea649df317e2a08e6baf0c314de14d3f28859af519d9b05",
+          "symbol": "ElectricRadiator",
+          "symbol_hash": "sha256:6e4ce6d4489fd995f5cf5ebfd4ca8a96db68c7b5d0bb271fbf37a9ea01dbdf33"
+        },
+        {
+          "body_hash": "sha256:f34ba716b0ec8995d0c671dd8ee8464d437871508ce667580c2f25f606b059f9",
+          "inventory_index": 708,
+          "kind": "function",
+          "path": "src/idragon/dragon/hvac.py",
+          "signature_hash": "sha256:d23ce9ebf7e7a2bba349ed7000094734a2eecfb480fb83c721e56a5e6ef0936b",
+          "symbol": "ElectricRadiator.__init__",
+          "symbol_hash": "sha256:07f43ff08d4fb608d661c8399fbf11db4f1d8c7c504e81a6e8b8e9e223772ba5"
+        },
+        {
+          "body_hash": "sha256:a200989331792d789cc947c1b615c0eb8c31e552b2dbe4f805b7ad72e3f082d4",
+          "inventory_index": 710,
+          "kind": "function",
+          "path": "src/idragon/dragon/hvac.py",
+          "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+          "symbol": "ElectricRadiator.heatable",
+          "symbol_hash": "sha256:0b60e64a309323590a641eb4ac517d15891d836f48176947c1f7a8df43d244db"
+        },
+        {
+          "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+          "inventory_index": 789,
+          "kind": "class",
+          "path": "src/idragon/dragon/hvac.py",
+          "signature_hash": "sha256:705b5c841450a5e51e48e95e3027de5a03632aa70888f7176d77d0cd48087459",
+          "symbol": "SupplyGroup",
+          "symbol_hash": "sha256:f22147d1bab44415fda473980799cb75dc4ce6c57693b5d9ec0a5faaf131fe69"
+        },
+        {
+          "body_hash": "sha256:643ca4afc57e9a0b22eee5df0a2cd7b90d9d579cf16bb20fd6d6a9e40b5bc57c",
+          "inventory_index": 790,
+          "kind": "function",
+          "path": "src/idragon/dragon/hvac.py",
+          "signature_hash": "sha256:f01960cc5a0c00e094cf2eb094922d734343c92c8ec849977ea8b86337805907",
+          "symbol": "SupplyGroup.__init__",
+          "symbol_hash": "sha256:02b3c43aa048fd31a3ffc31fea96f5086a599d3245847e217dc0c99a9cf5fddd"
+        },
+        {
+          "body_hash": "sha256:ae6bdfe5569d83c09285f8097f3d7783d8e4911c3c43d0cac4dd9eb2ea1ff51e",
+          "inventory_index": 797,
+          "kind": "class",
+          "path": "src/idragon/dragon/hvac.py",
+          "signature_hash": "sha256:e69d386ef2ddabed5236bc05985ae71c826e6a0e7cb4b9b9a35ecc71a6bfb9ef",
+          "symbol": "SupplySystem",
+          "symbol_hash": "sha256:13ed08986e2e8b8e9b6a3f9b9a1f387ad8075a99a5f79e6df18b2fd0280cfdc1"
+        },
+        {
+          "body_hash": "sha256:37194ca6121ae832d5c991164c74dd662b39ba10da745ebc418aef2d1a834e5a",
+          "inventory_index": 1056,
+          "kind": "constant",
+          "path": "src/idragon/dragon/shape.py",
+          "signature_hash": "sha256:909756f308b102264b0588f914f69542d69da96738233ca4fbb92a838d087bea",
+          "symbol": "SurfaceType.FLOOR",
+          "symbol_hash": "sha256:c8c4f240e476a6db7cc85ca0bfcaea675233b72f28019edd4308f11cb689e01b"
+        }
+      ],
+      "full_symbol_closure": false,
+      "observed_floor_sum_domain": {
+        "edge_failure_inputs": [
+          "str:'bad'-as-first-floor-area"
+        ],
+        "edge_success_inputs": [
+          "bool:True",
+          "int:3",
+          "float:2.5"
+        ],
+        "representative_finite_input": "float:12.5"
+      },
+      "resolved_receipts_not_retargeted": [
+        {
+          "body_hash": "sha256:48a103a5bbb0b2a65f357d705eb38137269140e236bf98c2d56d7dd77474d9f3",
+          "inventory_index": 1090,
+          "kind": "function",
+          "path": "src/idragon/dragon/shape.py",
+          "signature_hash": "sha256:2ee623b35ab3aacb49e23aff07dd62f5cbcb8efcfa87d52572a74a57b32ebcfb",
+          "symbol": "Zone.is_conditioned",
+          "symbol_hash": "sha256:6fe80cb193a6716b68c1033c5c52bd29f422ffb9efbdac8475a7f4b4ddc46370"
+        },
+        {
+          "body_hash": "sha256:9a121aaad9df4bfa6222f747985a1b07749f518b3501154743ef5c32d307940b",
+          "inventory_index": 1092,
+          "kind": "function",
+          "path": "src/idragon/dragon/shape.py",
+          "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+          "symbol": "Zone.to_idf_hvac_default_object",
+          "symbol_hash": "sha256:ff678ec281fe0726c46fd2145ebfb7fe22b56c5772bf1423d83c4877c0287cd9"
+        },
+        {
+          "body_hash": "sha256:17d9c0579f4763783672c981efb7fa0d7c979af8ebfe008b70499f81273e5a78",
+          "inventory_index": 1093,
+          "kind": "function",
+          "path": "src/idragon/dragon/shape.py",
+          "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+          "symbol": "Zone.to_idf_load_object",
+          "symbol_hash": "sha256:d19165f0aa97a1768174def3da3a46c9c11f29567c558ae844d4cac546452f99"
+        },
+        {
+          "body_hash": "sha256:1964153231690634955bd8ae5c39468cd1ecab4f5c2acbff9ded2cb37978369a",
+          "inventory_index": 1094,
+          "kind": "function",
+          "path": "src/idragon/dragon/shape.py",
+          "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+          "symbol": "Zone.to_idf_object",
+          "symbol_hash": "sha256:479f4d74a625e35e97559f208b41c4bde2f00a519b8e6b840718d78fdfd2e096"
+        }
+      ],
+      "scope": "exact-ten-case-eight-target-zone-core-matrix",
+      "target_coverage_complete": true,
+      "target_symbols": [
+        "Zone",
+        "Zone.__init__",
+        "Zone.floor_area",
+        "Zone.floor_surface",
+        "Zone.idf_airexhaustnodelistname",
+        "Zone.idf_airinletnodelistname",
+        "Zone.idf_equipmentlistname",
+        "Zone.supply"
+      ],
+      "unresolved_boundaries": [
+        "arbitrary-surface-iterators-that-raise-or-mutate-during-iteration",
+        "foreign-area-addition-protocols-beyond-the-bounded-observed-inputs",
+        "nonfinite-floor-area-values-not-observed",
+        "huge-or-mixed-numeric-floor-area-overflow-and-coercion-not-observed",
+        "missing-or-raising-area-attributes-not-observed",
+        "zone-name-objects-with-custom-string-conversion-side-effects-or-errors",
+        "virtual-or-dynamically-registered-SupplySystem-subclasses-and-descriptor-tampering",
+        "concurrent-mutation-during-floor-projection-or-supply-assignment"
+      ]
+    },
+    "context_runtime_signatures": {
+      "ElectricRadiator": "(name: 'str', capacity: 'int | float', *, efficiency: 'int | float' = 1.0, radiant_fraction: 'int | float' = 0) -> 'None'",
+      "ElectricRadiator.__init__": "(self, name: 'str', capacity: 'int | float', *, efficiency: 'int | float' = 1.0, radiant_fraction: 'int | float' = 0) -> 'None'",
+      "ElectricRadiator.heatable": "property:fget=(self) -> 'bool'",
+      "SupplyGroup": "(systems: 'list[SupplySystem]', *, availabilities: 'list[Schedule | None] | None' = None) -> 'None'",
+      "SupplyGroup.__init__": "(self, systems: 'list[SupplySystem]', *, availabilities: 'list[Schedule | None] | None' = None) -> 'None'",
+      "SupplySystem": "()",
+      "SurfaceType.FLOOR": "enum-member:'floor'"
+    },
+    "identity_encoding": "stable-direct-is-relations-only-no-id-or-address",
+    "native_targets": {
+      "Zone": "GonieGonie.InvisibleDragon.Shape.Zone typed aggregate",
+      "Zone.__init__": "Shape.Zone constructor with validated identifiers, profile, and defensive surface-collection copy retaining immutable Surface references",
+      "Zone.floor_area": "Zone.FloorArea over immutable native Surface.GrossArea values",
+      "Zone.floor_surface": "Zone.FloorSurfaces filtered from the native read-only surface collection",
+      "Zone.idf_airexhaustnodelistname": "EnergyModelIdfAssembler zone exhaust-node naming",
+      "Zone.idf_airinletnodelistname": "EnergyModelIdfAssembler zone inlet-node naming",
+      "Zone.idf_equipmentlistname": "EnergyModelIdfAssembler zone equipment-list naming",
+      "Zone.supply": "ZoneHvacAssignment external HVAC association model"
+    },
+    "raw_fact_encoding": "typed-scalars-snapshots-access-traces-and-phase-bound-errors",
+    "runtime_signatures": {
+      "Zone": "(name, surface, profile, infiltration, light_density, supply_systems: 'None | SupplySystem | SupplyGroup', ventilation)",
+      "Zone.__init__": "(self, name, surface, profile, infiltration, light_density, supply_systems: 'None | SupplySystem | SupplyGroup', ventilation)",
+      "Zone.floor_area": "property:fget=(self) -> 'int | float'",
+      "Zone.floor_surface": "property:fget=(self) -> 'list[Surface]'",
+      "Zone.idf_airexhaustnodelistname": "property:fget=(self) -> 'str'",
+      "Zone.idf_airinletnodelistname": "property:fget=(self) -> 'str'",
+      "Zone.idf_equipmentlistname": "property:fget=(self) -> 'str'",
+      "Zone.supply": "property:fget=(self) -> 'SupplyGroup | None';fset=(self, value: 'SupplyGroup | SupplySystem | None') -> 'None'"
+    },
+    "source_import_policy": "external-temporary-copy-with-complete-loaded-local-module-audit",
+    "target_receipts": [
+      {
+        "body_hash": "sha256:82f464feaab2b692325befc8de0fdf44f28698a041430c75dce9acb727a1a318",
+        "inventory_index": 1083,
+        "kind": "class",
+        "path": "src/idragon/dragon/shape.py",
+        "signature_hash": "sha256:16fdf50a01e06bd39fd30bae2eee24f8902679a1db662214f3ba00345680a29e",
+        "symbol": "Zone",
+        "symbol_hash": "sha256:4830290e50ed3c4b50717f26a9b0503763c09b5b87f041b2f03d5ab3ba035d30"
+      },
+      {
+        "body_hash": "sha256:990d28f257710186eca517844cd89463291fbe5be37185a4e29df367f56be502",
+        "inventory_index": 1084,
+        "kind": "function",
+        "path": "src/idragon/dragon/shape.py",
+        "signature_hash": "sha256:60d0cabb1fd39adf4a0b915e1aa6dd59bd9861678ae2325ed69e38ee416a2b5e",
+        "symbol": "Zone.__init__",
+        "symbol_hash": "sha256:fad03092d1390e4a9f0c7f4184a757c7abc55fb85b737f2d0c9be217b7682987"
+      },
+      {
+        "body_hash": "sha256:c6cbd898d7acd8c43cc2661cbaef1e9e8a8988ce15aeeaef4a41f6b82c2a4213",
+        "inventory_index": 1085,
+        "kind": "function",
+        "path": "src/idragon/dragon/shape.py",
+        "signature_hash": "sha256:f1b77727408acaea93a770200d99c9972e070fabcf19c0e2f6dbc4c1c1f3feea",
+        "symbol": "Zone.floor_area",
+        "symbol_hash": "sha256:21fe276dd163e81d4c0de2f978cb6dca63e807a7fe798d9fdaa5f8316ec8fac2"
+      },
+      {
+        "body_hash": "sha256:6a515e3593890cc2dda844d3daceb975cec58874cdddaa46419fbdde77a86c48",
+        "inventory_index": 1086,
+        "kind": "function",
+        "path": "src/idragon/dragon/shape.py",
+        "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+        "symbol": "Zone.floor_surface",
+        "symbol_hash": "sha256:53382328123e6a81052a598a89a8e41482a1aac0a3d470e7bd66c63d6d8c22b7"
+      },
+      {
+        "body_hash": "sha256:655be145758f5c64d4cf876a2e60ef3729bfa412a6e50755f03dfec1eaa855d8",
+        "inventory_index": 1087,
+        "kind": "function",
+        "path": "src/idragon/dragon/shape.py",
+        "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+        "symbol": "Zone.idf_airexhaustnodelistname",
+        "symbol_hash": "sha256:48c6fddbf04adf507eabbaa023c0a3a711bb01812e6068becd27f2abdff9c1b7"
+      },
+      {
+        "body_hash": "sha256:4c5c03d5d4247e862823a0d61639ea54d7a6457dc644e32a568b3a9b52c173d4",
+        "inventory_index": 1088,
+        "kind": "function",
+        "path": "src/idragon/dragon/shape.py",
+        "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+        "symbol": "Zone.idf_airinletnodelistname",
+        "symbol_hash": "sha256:97745304336763af22c9a31a48c4a590d7faa2a936ec220fa0ee144fae1b701e"
+      },
+      {
+        "body_hash": "sha256:a20734c2039bd542918bcc16011a6b1c3eb3cb79412d6d1e2fedea909d428c82",
+        "inventory_index": 1089,
+        "kind": "function",
+        "path": "src/idragon/dragon/shape.py",
+        "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+        "symbol": "Zone.idf_equipmentlistname",
+        "symbol_hash": "sha256:ad9ccd78f5ddb00df6add098e600b6526268400988d2d2aaf2d0d3bd324b6a13"
+      },
+      {
+        "body_hash": "sha256:33112772ec1f8e870b64bcfaf5d178b471689b1dadb017030f23d683503eac1d",
+        "inventory_index": 1091,
+        "kind": "function",
+        "path": "src/idragon/dragon/shape.py",
+        "signature_hash": "sha256:30c559093214655a8e9c1f7a0f57523a48b1fcdba7601332201bca6669ee0a7e",
+        "symbol": "Zone.supply",
+        "symbol_hash": "sha256:1b5900c0e47502e001f7a6055ea868392c85617ee800596666325fa118979b10"
+      }
+    ],
+    "target_symbols": [
+      "Zone",
+      "Zone.__init__",
+      "Zone.floor_area",
+      "Zone.floor_surface",
+      "Zone.idf_airexhaustnodelistname",
+      "Zone.idf_airinletnodelistname",
+      "Zone.idf_equipmentlistname",
+      "Zone.supply"
+    ]
+  },
+  "context_receipts": [
+    {
+      "body_hash": "sha256:8b8d4de15bc3ac3f97742e4883e96cfbd188a7b4195ba0bf2dd76d29fec1ec92",
+      "inventory_index": 707,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:1c9170eb76b09c7feea649df317e2a08e6baf0c314de14d3f28859af519d9b05",
+      "symbol": "ElectricRadiator",
+      "symbol_hash": "sha256:6e4ce6d4489fd995f5cf5ebfd4ca8a96db68c7b5d0bb271fbf37a9ea01dbdf33"
+    },
+    {
+      "body_hash": "sha256:f34ba716b0ec8995d0c671dd8ee8464d437871508ce667580c2f25f606b059f9",
+      "inventory_index": 708,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:d23ce9ebf7e7a2bba349ed7000094734a2eecfb480fb83c721e56a5e6ef0936b",
+      "symbol": "ElectricRadiator.__init__",
+      "symbol_hash": "sha256:07f43ff08d4fb608d661c8399fbf11db4f1d8c7c504e81a6e8b8e9e223772ba5"
+    },
+    {
+      "body_hash": "sha256:a200989331792d789cc947c1b615c0eb8c31e552b2dbe4f805b7ad72e3f082d4",
+      "inventory_index": 710,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "ElectricRadiator.heatable",
+      "symbol_hash": "sha256:0b60e64a309323590a641eb4ac517d15891d836f48176947c1f7a8df43d244db"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 789,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:705b5c841450a5e51e48e95e3027de5a03632aa70888f7176d77d0cd48087459",
+      "symbol": "SupplyGroup",
+      "symbol_hash": "sha256:f22147d1bab44415fda473980799cb75dc4ce6c57693b5d9ec0a5faaf131fe69"
+    },
+    {
+      "body_hash": "sha256:643ca4afc57e9a0b22eee5df0a2cd7b90d9d579cf16bb20fd6d6a9e40b5bc57c",
+      "inventory_index": 790,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:f01960cc5a0c00e094cf2eb094922d734343c92c8ec849977ea8b86337805907",
+      "symbol": "SupplyGroup.__init__",
+      "symbol_hash": "sha256:02b3c43aa048fd31a3ffc31fea96f5086a599d3245847e217dc0c99a9cf5fddd"
+    },
+    {
+      "body_hash": "sha256:ae6bdfe5569d83c09285f8097f3d7783d8e4911c3c43d0cac4dd9eb2ea1ff51e",
+      "inventory_index": 797,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:e69d386ef2ddabed5236bc05985ae71c826e6a0e7cb4b9b9a35ecc71a6bfb9ef",
+      "symbol": "SupplySystem",
+      "symbol_hash": "sha256:13ed08986e2e8b8e9b6a3f9b9a1f387ad8075a99a5f79e6df18b2fd0280cfdc1"
+    },
+    {
+      "body_hash": "sha256:37194ca6121ae832d5c991164c74dd662b39ba10da745ebc418aef2d1a834e5a",
+      "inventory_index": 1056,
+      "kind": "constant",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:909756f308b102264b0588f914f69542d69da96738233ca4fbb92a838d087bea",
+      "symbol": "SurfaceType.FLOOR",
+      "symbol_hash": "sha256:c8c4f240e476a6db7cc85ca0bfcaea675233b72f28019edd4308f11cb689e01b"
+    }
+  ],
+  "fact_sha256": {
+    "dragon-shape-zone-core.z01-representative-and-permissive-construction": "sha256:48ca4f2a95644574349289883d7b2053fd89630e987c0c7f413be8ce72a35714",
+    "dragon-shape-zone-core.z02-empty-floor-projection": "sha256:53fae4c45819d22aa9cbed67bf233a053d90b7cb9671456bd6d8f07eb4c02151",
+    "dragon-shape-zone-core.z03-mixed-multiple-surface-floor-projection": "sha256:7db7329767cd20752668cf27a0eb29b54b960387c8e08d628a2165c0f4d00fed",
+    "dragon-shape-zone-core.z04-no-floor-multiple-surface-projection": "sha256:7c9482907498643f83792188b370eaab0a1b9c09ffa65e9d204abd04a634a7be",
+    "dragon-shape-zone-core.z05-multiple-floor-dynamic-sum": "sha256:b8ceb11920c5e347c03bf1b3ae7abc3387503b2267802ad168b30877c31c393b",
+    "dragon-shape-zone-core.z06-surface-alias-mutation-and-reassignment": "sha256:b68647cc92f046009483d76756e1e8a14fb4db3caf8e28b6c0507694db07a039",
+    "dragon-shape-zone-core.z07-name-formatting-and-name-mutation": "sha256:bd383c4ed786db75b4c064874af0f079865e5a53a3114880343fa51bf0f37268",
+    "dragon-shape-zone-core.z08-supply-none-system-group-coercion": "sha256:da56883067aefbccf8d509ed11472acb7ea85c1e04c4d38eaf2cd93aaf01c811",
+    "dragon-shape-zone-core.z09-invalid-supply-error-and-partial-init": "sha256:53ed4cf50a90e1f9da5bb102def1dc020c7fa7fa50e574efd6fb12b2a151af9c",
+    "dragon-shape-zone-core.z10-floor-projection-error-timing": "sha256:ee6b6700ce0844bca9878ee1f95a36d68e656355e9882cee89cd7718e366816a"
+  },
+  "resolved_receipts": [
+    {
+      "body_hash": "sha256:48a103a5bbb0b2a65f357d705eb38137269140e236bf98c2d56d7dd77474d9f3",
+      "inventory_index": 1090,
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:2ee623b35ab3aacb49e23aff07dd62f5cbcb8efcfa87d52572a74a57b32ebcfb",
+      "symbol": "Zone.is_conditioned",
+      "symbol_hash": "sha256:6fe80cb193a6716b68c1033c5c52bd29f422ffb9efbdac8475a7f4b4ddc46370"
+    },
+    {
+      "body_hash": "sha256:9a121aaad9df4bfa6222f747985a1b07749f518b3501154743ef5c32d307940b",
+      "inventory_index": 1092,
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+      "symbol": "Zone.to_idf_hvac_default_object",
+      "symbol_hash": "sha256:ff678ec281fe0726c46fd2145ebfb7fe22b56c5772bf1423d83c4877c0287cd9"
+    },
+    {
+      "body_hash": "sha256:17d9c0579f4763783672c981efb7fa0d7c979af8ebfe008b70499f81273e5a78",
+      "inventory_index": 1093,
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+      "symbol": "Zone.to_idf_load_object",
+      "symbol_hash": "sha256:d19165f0aa97a1768174def3da3a46c9c11f29567c558ae844d4cac546452f99"
+    },
+    {
+      "body_hash": "sha256:1964153231690634955bd8ae5c39468cd1ecab4f5c2acbff9ded2cb37978369a",
+      "inventory_index": 1094,
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+      "symbol": "Zone.to_idf_object",
+      "symbol_hash": "sha256:479f4d74a625e35e97559f208b41c4bde2f00a519b8e6b840718d78fdfd2e096"
+    }
+  ],
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-shape-zone-core.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:82f464feaab2b692325befc8de0fdf44f28698a041430c75dce9acb727a1a318",
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:16fdf50a01e06bd39fd30bae2eee24f8902679a1db662214f3ba00345680a29e",
+      "symbol": "Zone",
+      "symbol_hash": "sha256:4830290e50ed3c4b50717f26a9b0503763c09b5b87f041b2f03d5ab3ba035d30"
+    },
+    {
+      "body_hash": "sha256:990d28f257710186eca517844cd89463291fbe5be37185a4e29df367f56be502",
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:60d0cabb1fd39adf4a0b915e1aa6dd59bd9861678ae2325ed69e38ee416a2b5e",
+      "symbol": "Zone.__init__",
+      "symbol_hash": "sha256:fad03092d1390e4a9f0c7f4184a757c7abc55fb85b737f2d0c9be217b7682987"
+    },
+    {
+      "body_hash": "sha256:c6cbd898d7acd8c43cc2661cbaef1e9e8a8988ce15aeeaef4a41f6b82c2a4213",
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:f1b77727408acaea93a770200d99c9972e070fabcf19c0e2f6dbc4c1c1f3feea",
+      "symbol": "Zone.floor_area",
+      "symbol_hash": "sha256:21fe276dd163e81d4c0de2f978cb6dca63e807a7fe798d9fdaa5f8316ec8fac2"
+    },
+    {
+      "body_hash": "sha256:6a515e3593890cc2dda844d3daceb975cec58874cdddaa46419fbdde77a86c48",
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+      "symbol": "Zone.floor_surface",
+      "symbol_hash": "sha256:53382328123e6a81052a598a89a8e41482a1aac0a3d470e7bd66c63d6d8c22b7"
+    },
+    {
+      "body_hash": "sha256:655be145758f5c64d4cf876a2e60ef3729bfa412a6e50755f03dfec1eaa855d8",
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Zone.idf_airexhaustnodelistname",
+      "symbol_hash": "sha256:48c6fddbf04adf507eabbaa023c0a3a711bb01812e6068becd27f2abdff9c1b7"
+    },
+    {
+      "body_hash": "sha256:4c5c03d5d4247e862823a0d61639ea54d7a6457dc644e32a568b3a9b52c173d4",
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Zone.idf_airinletnodelistname",
+      "symbol_hash": "sha256:97745304336763af22c9a31a48c4a590d7faa2a936ec220fa0ee144fae1b701e"
+    },
+    {
+      "body_hash": "sha256:a20734c2039bd542918bcc16011a6b1c3eb3cb79412d6d1e2fedea909d428c82",
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Zone.idf_equipmentlistname",
+      "symbol_hash": "sha256:ad9ccd78f5ddb00df6add098e600b6526268400988d2d2aaf2d0d3bd324b6a13"
+    },
+    {
+      "body_hash": "sha256:33112772ec1f8e870b64bcfaf5d178b471689b1dadb017030f23d683503eac1d",
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:30c559093214655a8e9c1f7a0f57523a48b1fcdba7601332201bca6669ee0a7e",
+      "symbol": "Zone.supply",
+      "symbol_hash": "sha256:1b5900c0e47502e001f7a6055ea868392c85617ee800596666325fa118979b10"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:82f464feaab2b692325befc8de0fdf44f28698a041430c75dce9acb727a1a318",
+      "inventory_index": 1083,
+      "kind": "class",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:16fdf50a01e06bd39fd30bae2eee24f8902679a1db662214f3ba00345680a29e",
+      "symbol": "Zone",
+      "symbol_hash": "sha256:4830290e50ed3c4b50717f26a9b0503763c09b5b87f041b2f03d5ab3ba035d30"
+    },
+    {
+      "body_hash": "sha256:990d28f257710186eca517844cd89463291fbe5be37185a4e29df367f56be502",
+      "inventory_index": 1084,
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:60d0cabb1fd39adf4a0b915e1aa6dd59bd9861678ae2325ed69e38ee416a2b5e",
+      "symbol": "Zone.__init__",
+      "symbol_hash": "sha256:fad03092d1390e4a9f0c7f4184a757c7abc55fb85b737f2d0c9be217b7682987"
+    },
+    {
+      "body_hash": "sha256:c6cbd898d7acd8c43cc2661cbaef1e9e8a8988ce15aeeaef4a41f6b82c2a4213",
+      "inventory_index": 1085,
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:f1b77727408acaea93a770200d99c9972e070fabcf19c0e2f6dbc4c1c1f3feea",
+      "symbol": "Zone.floor_area",
+      "symbol_hash": "sha256:21fe276dd163e81d4c0de2f978cb6dca63e807a7fe798d9fdaa5f8316ec8fac2"
+    },
+    {
+      "body_hash": "sha256:6a515e3593890cc2dda844d3daceb975cec58874cdddaa46419fbdde77a86c48",
+      "inventory_index": 1086,
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+      "symbol": "Zone.floor_surface",
+      "symbol_hash": "sha256:53382328123e6a81052a598a89a8e41482a1aac0a3d470e7bd66c63d6d8c22b7"
+    },
+    {
+      "body_hash": "sha256:655be145758f5c64d4cf876a2e60ef3729bfa412a6e50755f03dfec1eaa855d8",
+      "inventory_index": 1087,
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Zone.idf_airexhaustnodelistname",
+      "symbol_hash": "sha256:48c6fddbf04adf507eabbaa023c0a3a711bb01812e6068becd27f2abdff9c1b7"
+    },
+    {
+      "body_hash": "sha256:4c5c03d5d4247e862823a0d61639ea54d7a6457dc644e32a568b3a9b52c173d4",
+      "inventory_index": 1088,
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Zone.idf_airinletnodelistname",
+      "symbol_hash": "sha256:97745304336763af22c9a31a48c4a590d7faa2a936ec220fa0ee144fae1b701e"
+    },
+    {
+      "body_hash": "sha256:a20734c2039bd542918bcc16011a6b1c3eb3cb79412d6d1e2fedea909d428c82",
+      "inventory_index": 1089,
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Zone.idf_equipmentlistname",
+      "symbol_hash": "sha256:ad9ccd78f5ddb00df6add098e600b6526268400988d2d2aaf2d0d3bd324b6a13"
+    },
+    {
+      "body_hash": "sha256:33112772ec1f8e870b64bcfaf5d178b471689b1dadb017030f23d683503eac1d",
+      "inventory_index": 1091,
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:30c559093214655a8e9c1f7a0f57523a48b1fcdba7601332201bca6669ee0a7e",
+      "symbol": "Zone.supply",
+      "symbol_hash": "sha256:1b5900c0e47502e001f7a6055ea868392c85617ee800596666325fa118979b10"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "loaded_local_modules": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "module": "idragon",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "module": "idragon.common",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "module": "idragon.constants",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "module": "idragon.dragon",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "module": "idragon.dragon.construction",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "module": "idragon.dragon.hvac",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "module": "idragon.dragon.model",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "module": "idragon.dragon.profile",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "module": "idragon.dragon.shape",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "module": "idragon.imugi",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "module": "idragon.launcher",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "module": "idragon.utils",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ],
+    "shape_source": {
+      "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+      "bytes": 27438,
+      "path": "src/idragon/dragon/shape.py",
+      "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+    },
+    "sources": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ]
+  }
+}
