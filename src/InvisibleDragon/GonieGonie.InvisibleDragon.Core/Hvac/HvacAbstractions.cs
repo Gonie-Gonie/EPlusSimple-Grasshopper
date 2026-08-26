@@ -225,6 +225,10 @@ public sealed class SupplyGroup
     public IReadOnlyList<SupplySystem> CoolingSystems =>
         new ReadOnlyCollection<SupplySystem>(Systems.Where(system => system.CanCool).ToArray());
 
+    public bool CanHeat => HeatingSystems.Count > 0;
+
+    public bool CanCool => CoolingSystems.Count > 0;
+
     public IReadOnlyList<SourceSystem> Sources => new ReadOnlyCollection<SourceSystem>(
         Systems
             .Select(system => system.Source)
