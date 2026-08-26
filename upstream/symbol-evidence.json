@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:ea2fd02760205f6b6ce6af47a767f0b2d892fd11a4f306a6b8407a9ecb3302f2",
+  "content_sha256": "sha256:7397a8e0b6b4cce7fa2ce753c2e1f64fd1840ffffdd15f43ff4ab6b12ffd56b2",
   "entries": [
     {
       "implementation": {
@@ -5541,6 +5541,110 @@
     },
     {
       "implementation": {
+        "path": "src/Shared/GonieGonie.EnergyPlus.Runtime/EnergyPlusFailure.cs",
+        "source_sha256": "sha256:1301a60181bc7f3369fb972c43b61b00613a9ca3e7342f5c64c543c064b7ca9f",
+        "symbol": "GonieGonie.EnergyPlus.Runtime.EnergyPlusFailure"
+      },
+      "path": "src/idragon/launcher.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify ExecutableEnergyPlusNotFoundError across its exact three-case launcher runtime slice: exception inheritance, construction, argument preservation and the exact runtime-not-found raise boundary. The comparison directly verifies the empty throwable Python subtype against immutable categorized native failure data returned without starting a child process.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2e18b702e03b1ddb471e9bdb2ab3d4d50ee37ac25903b71e2d2c818e371ed2ac",
+          "id": "launcher-runtime-executable-not-found-76d795db",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/Shared/GonieGonie.EnergyPlus.Runtime.Tests/LauncherRuntimeOracleParityTests.cs",
+          "test_source_sha256": "sha256:c77d9d8dea55500582965fe9da466dd2c7c0c38231eca2ac222b7ea06029ffe5",
+          "test_symbol": "GonieGonie.EnergyPlus.Runtime.Tests.LauncherRuntimeOracleParityTests.MatchesPinnedPythonLauncherRuntime",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ExecutableEnergyPlusNotFoundError",
+      "upstream_symbol_hash": "sha256:76d795db5a0292d2af780a00ee53760a1ab5bd07d50cdf144cf6863c3b08b3d3"
+    },
+    {
+      "implementation": {
+        "path": "src/Shared/GonieGonie.EnergyPlus.Runtime/RuntimeResolver.cs",
+        "source_sha256": "sha256:5c4170c2f4648a5fab93ff092c2c307589bd909d436437ccc66280bf4ac487f6",
+        "symbol": "GonieGonie.EnergyPlus.Runtime.RuntimeResolver.ResolveAsync"
+      },
+      "path": "src/idragon/launcher.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify find_executable_dir across its exact three-case launcher runtime slice: version coercion, package precedence, system fallback, missing-runtime behavior and native hash-verified candidate resolution. The comparison directly verifies directory-name-only version discovery against the one supported pinned manifest, deterministic candidate policy and full payload hash verification.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:611e102e5c815b0dbb4cc60c6b425679b0a3031d783337443bee048c6e71e488",
+          "id": "launcher-runtime-find-executable-dir-6de563f4",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/Shared/GonieGonie.EnergyPlus.Runtime.Tests/LauncherRuntimeOracleParityTests.cs",
+          "test_source_sha256": "sha256:c77d9d8dea55500582965fe9da466dd2c7c0c38231eca2ac222b7ea06029ffe5",
+          "test_symbol": "GonieGonie.EnergyPlus.Runtime.Tests.LauncherRuntimeOracleParityTests.MatchesPinnedPythonLauncherRuntime",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "find_executable_dir",
+      "upstream_symbol_hash": "sha256:6de563f4cfe228449e3c29866c9e432c7cf0f9ffc49dad4e7558d9b0addebf1b"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Batch/BatchRunner.cs",
+        "source_sha256": "sha256:49db902d7b25774f5892c687d7eb7b9416d142eb43027858397b20018ed9f0de",
+        "symbol": "GonieGonie.SimpleDragon.Batch.BatchRunner.RunAsync"
+      },
+      "path": "src/idragon/launcher.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify run across its exact three-case launcher runtime slice: scalar delegation, both broadcast directions, list mutation, cardinality failures, option forwarding and explicit native ordered batch execution. The comparison directly verifies polymorphic raw-path broadcasting and sequential tqdm delegation against explicit typed SimpleDragon cases, bounded concurrency and ordered results, without claiming arbitrary raw-IDF list parity.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a28a204e5fd4437a7790688353720e167844aaeec9278487d012adb436a1c936",
+          "id": "launcher-runtime-run-84c6ff24",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/Shared/GonieGonie.EnergyPlus.Runtime.Tests/LauncherRuntimeOracleParityTests.cs",
+          "test_source_sha256": "sha256:c77d9d8dea55500582965fe9da466dd2c7c0c38231eca2ac222b7ea06029ffe5",
+          "test_symbol": "GonieGonie.EnergyPlus.Runtime.Tests.LauncherRuntimeOracleParityTests.MatchesPinnedPythonLauncherRuntime",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "run",
+      "upstream_symbol_hash": "sha256:84c6ff241eb023074ab18999d177182fcc33e90c128d479f50303041945b4281"
+    },
+    {
+      "implementation": {
+        "path": "src/Shared/GonieGonie.EnergyPlus.Runtime/EnergyPlusRunner.cs",
+        "source_sha256": "sha256:828cbaa9c1864463d83f306a2d4cca6d9b1df0b2af4d58fc4ae2fadda22c5a29",
+        "symbol": "GonieGonie.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync"
+      },
+      "path": "src/idragon/launcher.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify run_single across its exact three-case launcher runtime slice: version inference, explicit runtime use, launch-copy-delete ordering, ignored status, failure transactionality and native isolated cleanup states. The comparison directly verifies status-ignoring caller-output copy and deletion behavior against validated typed requests, injected process orchestration, structured terminal states, captured artifacts and marked-directory cleanup without an active-load claim.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:50941626e4af2c3aa0c316dff2a42c8bfc571742be75a1d59c84a4494fd43967",
+          "id": "launcher-runtime-run-single-eda7f757",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/Shared/GonieGonie.EnergyPlus.Runtime.Tests/LauncherRuntimeOracleParityTests.cs",
+          "test_source_sha256": "sha256:c77d9d8dea55500582965fe9da466dd2c7c0c38231eca2ac222b7ea06029ffe5",
+          "test_symbol": "GonieGonie.EnergyPlus.Runtime.Tests.LauncherRuntimeOracleParityTests.MatchesPinnedPythonLauncherRuntime",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "run_single",
+      "upstream_symbol_hash": "sha256:eda7f7577da0c1ac73498136fcfa6955ffb6605bad1dc0b9a1ac80609b094884"
+    },
+    {
+      "implementation": {
         "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Internal/DomainSupport.cs",
         "source_sha256": "sha256:b7533867e6dde3fde138799861be245467fbe58b8842005d840a9781f0d8c940",
         "symbol": "GonieGonie.SimpleDragon.Internal.DomainSupport.DefinedEnumOrNull"
@@ -5621,9 +5725,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 216,
-    "passed_receipt_count": 216,
-    "receipt_count": 216,
+    "entry_count": 220,
+    "passed_receipt_count": 220,
+    "receipt_count": 220,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

@@ -1235,15 +1235,15 @@
     "exception",
     "exception",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "exception",
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:383011de50358f0f65cda69e0e13c0f6386153a6c29180359bbf41099c3202bc",
+  "content_sha256": "sha256:985d2f40721aac23141225644c878acaf13bb3cbf7b9d89d10a8e9f1e51d7b44",
   "details": [
     {
       "evidence": [
@@ -4702,6 +4702,42 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#structured-energyplus-runtime-not-found-failure",
+        "upstream/symbol-evidence.json#launcher-runtime-executable-not-found-76d795db"
+      ],
+      "exception_id": "structured-energyplus-runtime-not-found-failure",
+      "index": 1235,
+      "rationale": "Trusted cross-language evidence verifies ExecutableEnergyPlusNotFoundError across the exact three-case launcher runtime slice: exception inheritance, construction, argument preservation and the exact runtime-not-found raise boundary, and directly observes the empty throwable Python subtype against immutable categorized native failure data returned without starting a child process."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#hash-verified-energyplus-runtime-resolution",
+        "upstream/symbol-evidence.json#launcher-runtime-find-executable-dir-6de563f4"
+      ],
+      "exception_id": "hash-verified-energyplus-runtime-resolution",
+      "index": 1236,
+      "rationale": "Trusted cross-language evidence verifies find_executable_dir across the exact three-case launcher runtime slice: version coercion, package precedence, system fallback, missing-runtime behavior and native hash-verified candidate resolution, and directly observes directory-name-only version discovery against the one supported pinned manifest, deterministic candidate policy and full payload hash verification."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#bounded-deterministic-energyplus-batch-execution",
+        "upstream/symbol-evidence.json#launcher-runtime-run-84c6ff24"
+      ],
+      "exception_id": "bounded-deterministic-energyplus-batch-execution",
+      "index": 1237,
+      "rationale": "Trusted cross-language evidence verifies run across the exact three-case launcher runtime slice: scalar delegation, both broadcast directions, list mutation, cardinality failures, option forwarding and explicit native ordered batch execution, and directly observes polymorphic raw-path broadcasting and sequential tqdm delegation against explicit typed SimpleDragon cases, bounded concurrency and ordered results, without claiming arbitrary raw-IDF list parity."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#isolated-cancellable-energyplus-single-run",
+        "upstream/symbol-evidence.json#launcher-runtime-run-single-eda7f757"
+      ],
+      "exception_id": "isolated-cancellable-energyplus-single-run",
+      "index": 1238,
+      "rationale": "Trusted cross-language evidence verifies run_single across the exact three-case launcher runtime slice: version inference, explicit runtime use, launch-copy-delete ordering, ignored status, failure transactionality and native isolated cleanup states, and directly observes status-ignoring caller-output copy and deletion behavior against validated typed requests, injected process orchestration, structured terminal states, captured artifacts and marked-directory cleanup without an active-load claim."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#strongly-typed-native-enum-validation",
         "upstream/symbol-evidence.json#utils-core-validate-enum-8b3b34b6"
       ],
@@ -4735,8 +4771,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 113,
-      "exception": 103,
-      "needs_reverification": 774,
+      "exception": 107,
+      "needs_reverification": 770,
       "out_of_scope": 252
     },
     "entry_count": 1242
