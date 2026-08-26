@@ -162,7 +162,9 @@ internal static class CoolingPlantLoopAssembler
             "Sizing:Plant",
             loop,
             "Cooling",
-            setpointTemperatureCelsius,
+            context.Options.UseLegacySimpleDragonHvacTopology
+                ? 6
+                : setpointTemperatureCelsius,
             4));
         return objects;
     }

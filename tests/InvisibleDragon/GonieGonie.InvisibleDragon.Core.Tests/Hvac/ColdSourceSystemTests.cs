@@ -191,6 +191,21 @@ public sealed class ColdSourceSystemTests
             legacy,
             item => item.ObjectType == "Chiller:Electric:ReformulatedEIR");
         AssertChillerPlantReferenceType(legacy, chiller, "Chiller:Electric:EIR");
+
+        IdfObject nativeSetpoint = ObjectNamed(
+            native,
+            "Schedule:Constant",
+            $"{chiller.LoopName} SetpointTemperature");
+        IdfObject legacySetpoint = ObjectNamed(
+            legacy,
+            "Schedule:Constant",
+            $"{chiller.LoopName} SetpointTemperature");
+        IdfObject nativeSizing = ObjectNamed(native, "Sizing:Plant", chiller.LoopName);
+        IdfObject legacySizing = ObjectNamed(legacy, "Sizing:Plant", chiller.LoopName);
+        Assert.Equal("7.25", nativeSetpoint[2]);
+        Assert.Equal(nativeSetpoint[2], legacySetpoint[2]);
+        Assert.Equal("7.25", nativeSizing[2]);
+        Assert.Equal("6", legacySizing[2]);
     }
 
     [Fact]
@@ -512,6 +527,113 @@ public sealed class ColdSourceSystemTests
     }
 
     [Fact]
+    public void LegacyAbsorptionChillerMatchesPinnedSubloopOrderAndFixedSizingSetpoint()
+    {
+        var boiler = new Boiler(
+            new EntityId("ABS-LEGACY-ORDER-BOILER"),
+            "Legacy ordered generator",
+            Fuel.NaturalGas,
+            setpointTemperatureCelsius: 72);
+        var tower = new OpenSingleSpeedCoolingTower(
+            new EntityId("ABS-LEGACY-ORDER-TOWER"),
+            "Legacy ordered tower");
+        var chiller = new AbsorptionChiller(
+            new EntityId("ABS-LEGACY-ORDER-CHILLER"),
+            "Legacy ordered absorption",
+            0.9,
+            boiler,
+            tower,
+            setpointTemperatureCelsius: 8.5);
+
+        IReadOnlyList<IdfObject> native = chiller.ToIdfObjects(new IdfGenerationContext());
+        IReadOnlyList<IdfObject> first = chiller.ToIdfObjects(LegacyContext());
+        IReadOnlyList<IdfObject> second = chiller.ToIdfObjects(LegacyContext());
+
+        Assert.Equal(Serialize(first), Serialize(second));
+        Assert.Equal(first.Count, second.Count);
+        for (int index = 0; index < first.Count; index++)
+        {
+            Assert.NotSame(first[index], second[index]);
+        }
+
+        Assert.Equal("Legacy ordered absorption", chiller.Name);
+        Assert.Equal(8.5, chiller.SetpointTemperatureCelsius);
+        Assert.Equal(72, chiller.HeatSource.SetpointTemperatureCelsius);
+
+        IdfObject legacySetpoint = ObjectNamed(
+            first,
+            "Schedule:Constant",
+            $"{chiller.LoopName} SetpointTemperature");
+        IdfObject legacySizing = ObjectNamed(first, "Sizing:Plant", chiller.LoopName);
+        IdfObject nativeSetpoint = ObjectNamed(
+            native,
+            "Schedule:Constant",
+            $"{chiller.LoopName} SetpointTemperature");
+        IdfObject nativeSizing = ObjectNamed(native, "Sizing:Plant", chiller.LoopName);
+        Assert.Equal("8.5", legacySetpoint[2]);
+        Assert.Equal("6", legacySizing[2]);
+        Assert.Equal("8.5", nativeSetpoint[2]);
+        Assert.Equal("8.5", nativeSizing[2]);
+
+        string generatorBranchName = $"{boiler.LoopName} Demand MainGenerator";
+        string towerObjectName = CoolingTower.ObjectNameFor(chiller);
+        string towerLoopName = CoolingTower.LoopNameFor(chiller);
+        int absorptionComponentIndex = IndexOf(first, "Chiller:Absorption", chiller.IdfObjectName);
+        int boilerComponentIndex = IndexOf(first, "Boiler:HotWater", boiler.IdfObjectName);
+        int boilerPlantIndex = IndexOf(first, "PlantLoop", boiler.LoopName);
+        int boilerSizingIndex = IndexOf(first, "Sizing:Plant", boiler.LoopName);
+        int generatorBranchIndex = IndexOf(first, "Branch", generatorBranchName);
+        int towerComponentIndex = IndexOf(first, tower.IdfObjectType, towerObjectName);
+        int towerLoopIndex = IndexOf(first, "CondenserLoop", towerLoopName);
+        int towerSizingIndex = IndexOf(first, "Sizing:Plant", towerLoopName);
+        int absorptionPlantIndex = IndexOf(first, "PlantLoop", chiller.LoopName);
+        int absorptionSizingIndex = IndexOf(first, "Sizing:Plant", chiller.LoopName);
+
+        Assert.Equal(0, absorptionComponentIndex);
+        Assert.True(absorptionComponentIndex < boilerComponentIndex);
+        Assert.True(boilerComponentIndex < boilerPlantIndex);
+        Assert.Equal(boilerPlantIndex + 1, boilerSizingIndex);
+        Assert.Equal(boilerSizingIndex + 1, generatorBranchIndex);
+        Assert.Equal(generatorBranchIndex + 1, towerComponentIndex);
+        Assert.True(towerComponentIndex < towerLoopIndex);
+        Assert.Equal(towerLoopIndex + 1, towerSizingIndex);
+        Assert.Equal(towerSizingIndex + 1, absorptionPlantIndex);
+        Assert.Equal(absorptionPlantIndex + 1, absorptionSizingIndex);
+        Assert.Equal(first.Count - 1, absorptionSizingIndex);
+
+        IdfObject generatorBranch = first[generatorBranchIndex];
+        Assert.Equal(chiller.IdfObjectType, generatorBranch[2]);
+        Assert.Equal(chiller.IdfObjectName, generatorBranch[3]);
+        Assert.Equal($"{chiller.IdfObjectName} Generator InletNode", generatorBranch[4]);
+        Assert.Equal($"{chiller.IdfObjectName} Generator OutletNode", generatorBranch[5]);
+        foreach (string objectType in new[] { "BranchList", "Connector:Splitter", "Connector:Mixer" })
+        {
+            IdfObject topology = ObjectNamed(
+                first,
+                objectType,
+                objectType == "BranchList"
+                    ? $"{boiler.LoopName} Demand BranchList"
+                    : $"{boiler.LoopName} Demand {objectType[(objectType.IndexOf(':') + 1)..]}");
+            Assert.Contains(
+                generatorBranchName,
+                Enumerable.Range(0, topology.Count).Select(index => topology[index]));
+        }
+
+        int nativeAbsorptionPlantIndex = IndexOf(native, "PlantLoop", chiller.LoopName);
+        int nativeTowerComponentIndex = IndexOf(native, tower.IdfObjectType, towerObjectName);
+        int nativeBoilerComponentIndex = IndexOf(native, "Boiler:HotWater", boiler.IdfObjectName);
+        int nativeGeneratorBranchIndex = IndexOf(
+            native,
+            "Branch",
+            $"{boiler.LoopName} Demand MainGenerator_for_{chiller.IdfObjectName}");
+        int nativeBoilerPlantIndex = IndexOf(native, "PlantLoop", boiler.LoopName);
+        Assert.True(nativeAbsorptionPlantIndex < nativeTowerComponentIndex);
+        Assert.True(nativeTowerComponentIndex < nativeBoilerComponentIndex);
+        Assert.True(nativeBoilerComponentIndex < nativeGeneratorBranchIndex);
+        Assert.True(nativeGeneratorBranchIndex < nativeBoilerPlantIndex);
+    }
+
+    [Fact]
     public void ColdSourcesRejectInvalidOptionsAndIdentifierCollisions()
     {
         var shared = new EntityId("SHARED-COLD-ID");
@@ -628,6 +750,14 @@ public sealed class ColdSourceSystemTests
         string name) => Assert.Single(
             objects,
             item => item.ObjectType == objectType && item.Name == name);
+
+    private static int IndexOf(
+        IReadOnlyList<IdfObject> objects,
+        string objectType,
+        string name) => objects
+            .Select((item, index) => (Item: item, Index: index))
+            .Single(pair => pair.Item.ObjectType == objectType && pair.Item.Name == name)
+            .Index;
 
     private static void AssertChillerPlantReferenceType(
         IEnumerable<IdfObject> objects,

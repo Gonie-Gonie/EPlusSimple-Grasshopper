@@ -451,8 +451,7 @@ public sealed class AbsorptionChiller : SourceSystem
             IdfGenerationContext.Field(23, "Generator Heat Source Type", "HotWater"),
             IdfGenerationContext.Field(24, "Design Generator Fluid Flow Rate", "autosize"));
 
-        var objects = new List<IdfObject>();
-        objects.AddRange(CoolingPlantLoopAssembler.CreateCoolingLoop(
+        IReadOnlyList<IdfObject> coolingLoop = CoolingPlantLoopAssembler.CreateCoolingLoop(
             context,
             this,
             component,
@@ -460,8 +459,7 @@ public sealed class AbsorptionChiller : SourceSystem
             ChilledWaterOutletNodeName,
             PumpMotorEfficiency,
             SetpointTemperatureCelsius,
-            demandConnections ?? Array.Empty<PlantDemandConnection>()));
-        objects.AddRange(CoolingTower.ToIdfObjects(context, this));
+            demandConnections ?? Array.Empty<PlantDemandConnection>());
         string generatorBranchName = context.Options.UseLegacySimpleDragonHvacTopology
             ? $"{HeatSource.LoopName} Demand MainGenerator"
             : $"{HeatSource.LoopName} Demand MainGenerator_for_{IdfObjectName}";
@@ -471,8 +469,68 @@ public sealed class AbsorptionChiller : SourceSystem
             IdfObjectName,
             GeneratorInletNodeName,
             GeneratorOutletNodeName);
-        objects.AddRange(HeatSource.ToIdfObjects(context, new[] { generatorConnection }));
+
+        var objects = new List<IdfObject>();
+        if (!context.Options.UseLegacySimpleDragonHvacTopology)
+        {
+            objects.AddRange(coolingLoop);
+            objects.AddRange(CoolingTower.ToIdfObjects(context, this));
+            objects.AddRange(HeatSource.ToIdfObjects(context, new[] { generatorConnection }));
+            return objects;
+        }
+
+        // Pinned EPlusSimple 0.7 constructs the absorption prefix first, then the
+        // complete generator-boiler loop (with its generator branch appended),
+        // then the condenser loop, and only then closes the absorption loop.
+        // Reordering these fresh objects preserves the native link topology and
+        // leaves the safe/native assembly path above byte-for-byte unchanged.
+        (IReadOnlyList<IdfObject> prefix, IReadOnlyList<IdfObject> closure) =
+            SplitLegacyCoolingLoop(coolingLoop);
+        objects.AddRange(prefix);
+        AppendLegacyGeneratorLoop(
+            objects,
+            HeatSource.ToIdfObjects(context, new[] { generatorConnection }),
+            generatorBranchName);
+        objects.AddRange(CoolingTower.ToIdfObjects(context, this));
+        objects.AddRange(closure);
         return objects;
+    }
+
+    private (IReadOnlyList<IdfObject> Prefix, IReadOnlyList<IdfObject> Closure)
+        SplitLegacyCoolingLoop(IReadOnlyList<IdfObject> coolingLoop)
+    {
+        int closureIndex = coolingLoop.Count - 2;
+        if (closureIndex < 0
+            || coolingLoop[closureIndex].ObjectType != "PlantLoop"
+            || coolingLoop[closureIndex].Name != LoopName
+            || coolingLoop[closureIndex + 1].ObjectType != "Sizing:Plant"
+            || coolingLoop[closureIndex + 1].Name != LoopName)
+        {
+            throw new InvalidOperationException(
+                $"Cooling loop '{LoopName}' does not end with its PlantLoop and Sizing:Plant closure.");
+        }
+
+        return (
+            coolingLoop.Take(closureIndex).ToArray(),
+            coolingLoop.Skip(closureIndex).ToArray());
+    }
+
+    private static void AppendLegacyGeneratorLoop(
+        List<IdfObject> destination,
+        IReadOnlyList<IdfObject> generatorLoop,
+        string generatorBranchName)
+    {
+        IdfObject generatorBranch = generatorLoop.Single(
+            item => item.ObjectType == "Branch" && item.Name == generatorBranchName);
+        foreach (IdfObject item in generatorLoop)
+        {
+            if (!ReferenceEquals(item, generatorBranch))
+            {
+                destination.Add(item);
+            }
+        }
+
+        destination.Add(generatorBranch);
     }
 
     internal string ChilledWaterInletNodeName => $"{IdfObjectName} ChilledWater InletNode";
