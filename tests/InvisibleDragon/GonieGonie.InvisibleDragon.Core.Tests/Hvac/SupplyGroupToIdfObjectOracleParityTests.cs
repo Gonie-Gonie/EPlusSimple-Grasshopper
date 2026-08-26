@@ -738,35 +738,28 @@ public sealed class SupplyGroupToIdfObjectOracleParityTests
         Assert.Equal(0, facts.GetProperty("third_system_call_count").GetInt32());
 
         Schedule profileAvailability = Schedule.Constant("native-profile-availability", 1, ScheduleType.OnOff);
-        Zone zone = ConditionedZone(
+        Zone zone = ConditionedZoneWithoutFloor(
             "NATIVE-SYSTEM-FAILURE-ZONE",
             "Native System Failure Zone",
             profileAvailability);
-        var conflictingId = new EntityId("NATIVE-CONFLICTING-SOURCE");
-        var firstSource = new Boiler(
-            conflictingId,
-            "native-first-source",
+        var radiantSource = new Boiler(
+            new EntityId("NATIVE-FAILING-RADIANT-SOURCE"),
+            "native-failing-radiant-source",
             Fuel.NaturalGas);
-        var secondSource = new HeatPump(
-            conflictingId,
-            "native-second-source",
-            Fuel.Electricity,
-            3,
-            3);
         var thirdSource = new HeatPump(
             new EntityId("NATIVE-UNREACHED-SOURCE"),
             "native-unreached-source",
             Fuel.Electricity,
             3,
             3);
-        var first = new RadiantFloor(
+        var first = new ElectricRadiator(
             new EntityId("NATIVE-SYSTEM-FIRST"),
             RequiredString(systemEvents[0], "system"),
-            firstSource);
-        var second = new AirHandlingUnit(
+            1_000);
+        var second = new RadiantFloor(
             new EntityId("NATIVE-SYSTEM-SECOND"),
             RequiredString(systemEvents[1], "system"),
-            secondSource);
+            radiantSource);
         var third = new PackagedAirConditioner(
             new EntityId("NATIVE-SYSTEM-THIRD"),
             "third",
@@ -783,25 +776,23 @@ public sealed class SupplyGroupToIdfObjectOracleParityTests
         var group = new SupplyGroup(
             new SupplySystem[] { first, second, third },
             new Schedule?[] { firstAvailability, secondAvailability, thirdAvailability });
-        Assert.Equal(
-            systemEvents.Select(item => item.GetProperty("for_heating").GetBoolean()),
-            group.Systems.Take(2).Select(system => system.CanHeat));
-        Assert.Equal(
-            systemEvents.Select(item => item.GetProperty("for_cooling").GetBoolean()),
-            group.Systems.Take(2).Select(system => system.CanCool));
+        Assert.Equal(systemEvents[0].GetProperty("for_heating").GetBoolean(), first.CanHeat);
+        Assert.Equal(systemEvents[0].GetProperty("for_cooling").GetBoolean(), first.CanCool);
+        Assert.Equal(systemEvents[1].GetProperty("for_heating").GetBoolean(), second.CanHeat);
+        Assert.NotEqual(systemEvents[1].GetProperty("for_cooling").GetBoolean(), second.CanCool);
         AssertReferenceSequence(new SupplySystem[] { first, second, third }, group.Systems);
 
         var model = new EnergyModel(
-            "Native ordered source conflict",
+            "Native ordered SupplySystem.Generate failure",
             new[] { zone },
             new[] { new ZoneHvacAssignment(zone.Id, group) });
         Assert.Contains(
             model.Validate().Diagnostics,
-            item => item.Code == "INVISIBLEDRAGON.MODEL.CONFLICTING_HVAC_ID");
+            item => item.Code == "INVISIBLEDRAGON.ZONE.NO_FLOOR");
         ModelSnapshot snapshot = Capture(model);
-        var options = new EnergyModelIdfOptions { ThrowOnValidationErrors = false };
         const string expectedMessage =
-            "HVAC identifier 'NATIVE-CONFLICTING-SOURCE' has conflicting source definitions.";
+            "Zone 'Native System Failure Zone' has no floor for radiant equipment.";
+        var options = new EnergyModelIdfOptions { ThrowOnValidationErrors = false };
 
         InvalidOperationException firstError = Assert.Throws<InvalidOperationException>(
             () => model.ToIdfDocument(options: options));
@@ -818,10 +809,11 @@ public sealed class SupplyGroupToIdfObjectOracleParityTests
             $"python_failure={pythonError}",
             $"python_local_prefix={string.Join("+", prefixObjects)}|{string.Join("+", prefixProcessors)}",
             "native_public_target=EnergyModel.ToIdfDocument",
-            "native_failure_stage=ordered-source-definition-conflict-at-second-system",
+            "native_failure_stage=ordered-SupplySystem.Generate-failure-at-second-system",
+            "native_capability-adaptation=second-both-probe-to-heating-only-radiant-floor",
             $"native_exception={nameof(InvalidOperationException)}:{expectedMessage}",
             "native_return=not-returned",
-            "native_input_order=heat-only->both->cool-only-unreached",
+            "native_input_order=ElectricRadiator-success->RadiantFloor-failure->PackagedAirConditioner-unreached",
             "native_repeated_attempts=2-identical",
             "native_model_and-group_reference_identity=unchanged",
             "native_standalone-prefix-and-controller=not-exposed",
@@ -885,7 +877,7 @@ public sealed class SupplyGroupToIdfObjectOracleParityTests
         Assert.Equal(JsonValueKind.Null, firstCallSystems[1].GetProperty("availability").ValueKind);
         string coolAvailabilityName = RequiredString(firstCallSystems[2], "availability");
         Schedule heatAvailability = Schedule.Constant(heatAvailabilityName, 1, ScheduleType.OnOff);
-        Schedule coolAvailability = Schedule.Constant(coolAvailabilityName, 1, ScheduleType.OnOff);
+        Schedule coolAvailability = Schedule.Constant(coolAvailabilityName, 0, ScheduleType.OnOff);
         Zone zone = ConditionedZone(
             "NATIVE-SUCCESS-ZONE",
             "zone-main",
@@ -985,12 +977,11 @@ public sealed class SupplyGroupToIdfObjectOracleParityTests
             .Where(item => fractionNames.Contains(item.Name, StringComparer.Ordinal))
             .ToArray();
         Assert.Equal(fractionNames, fractions.Select(item => item.Name));
-        double firstSequentialFraction = 1d / (2d + 1.0e-10d);
-        double lastSequentialFraction = 1d / (1d + 1.0e-10d);
-        AssertScheduleValues(fractions[0], firstSequentialFraction);
-        AssertScheduleValues(fractions[1], lastSequentialFraction);
-        AssertScheduleValues(fractions[2], firstSequentialFraction);
-        AssertScheduleValues(fractions[3], lastSequentialFraction);
+        Assert.All(fractions, item => Assert.Equal("ScheduleTypeLimits:Real", item[1]));
+        AssertScheduleValues(fractions[0], 1d / (2d + 1.0e-10d));
+        AssertScheduleValues(fractions[1], 1d / (1d + 1.0e-10d));
+        AssertScheduleValues(fractions[2], 1d / (1d + 1.0e-10d));
+        AssertScheduleValues(fractions[3], 0d);
         IdfObject equipment = Assert.Single(firstDocument["ZoneHVAC:EquipmentList"]);
         Assert.Equal(
             new[]
@@ -1070,6 +1061,26 @@ public sealed class SupplyGroupToIdfObjectOracleParityTests
             Schedule.Constant($"{name} Cooling", 26, ScheduleType.Temperature),
             hvacAvailability);
         return new Zone(new EntityId(id), name, new[] { floor }, profile);
+    }
+
+    private static Zone ConditionedZoneWithoutFloor(
+        string id,
+        string name,
+        Schedule hvacAvailability)
+    {
+        Surface roof = TestDomainFactory.Surface(
+            $"{id}-ROOF",
+            $"{name} Roof",
+            TestDomainFactory.Square(size: 2, z: 3),
+            SurfaceType.Ceiling,
+            SurfaceBoundary.Outdoors);
+        var profile = new ZoneProfile(
+            new EntityId($"{id}-PROFILE"),
+            $"{name} Profile",
+            Schedule.Constant($"{name} Heating", 20, ScheduleType.Temperature),
+            Schedule.Constant($"{name} Cooling", 26, ScheduleType.Temperature),
+            hvacAvailability);
+        return new Zone(new EntityId(id), name, new[] { roof }, profile);
     }
 
     private static ModelSnapshot Capture(EnergyModel model)
