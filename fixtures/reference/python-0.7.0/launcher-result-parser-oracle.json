@@ -1,0 +1,1468 @@
+{
+  "cases": [
+    {
+      "executor": "class",
+      "expected_dotnet": {
+        "adaptation": "immutable-structured-energyplus-result",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.class-descriptors",
+      "python": {
+        "facts": {
+          "base_names": [
+            "object"
+          ],
+          "direct_dictionary_keys": [
+            "__module__",
+            "__init__",
+            "parse_audit",
+            "parse_err",
+            "parse_bnd",
+            "parse_table",
+            "parse_eso",
+            "__dict__",
+            "__weakref__",
+            "__doc__"
+          ],
+          "method_signatures": {
+            "parse_audit": "(text: 'str') -> 'dict[str, int]'",
+            "parse_bnd": "(text: 'str') -> 'dict[str, pd.DataFrame]'",
+            "parse_err": "(text: 'str') -> 'tuple[float, pd.DataFrame]'",
+            "parse_eso": "(text: 'str')",
+            "parse_table": "(text: 'str', extension: 'str') -> 'None'"
+          },
+          "module": "idragon.launcher",
+          "name": "EnergyPlusResult",
+          "signature": "(*args) -> 'None'"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult"
+    },
+    {
+      "executor": "class",
+      "expected_dotnet": {
+        "adaptation": "immutable-structured-energyplus-result",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.class-dynamic-identity",
+      "python": {
+        "facts": {
+          "arbitrary_attribute": {
+            "decimal": "7",
+            "kind": "int"
+          },
+          "hashable": true,
+          "identity": {
+            "self_equal": true,
+            "separate_instances_equal": false
+          },
+          "subclass": {
+            "instance_of_base": true,
+            "mro": [
+              "Derived",
+              "EnergyPlusResult",
+              "object"
+            ]
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult"
+    },
+    {
+      "executor": "class",
+      "expected_dotnet": {
+        "adaptation": "immutable-structured-energyplus-result",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.class-static-bindings",
+      "python": {
+        "facts": {
+          "descriptor_types": {
+            "parse_audit": "staticmethod",
+            "parse_bnd": "staticmethod",
+            "parse_err": "staticmethod",
+            "parse_eso": "staticmethod",
+            "parse_table": "staticmethod"
+          },
+          "same_function_identity": {
+            "parse_audit": true,
+            "parse_bnd": true,
+            "parse_err": true,
+            "parse_eso": true,
+            "parse_table": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult"
+    },
+    {
+      "executor": "init",
+      "expected_dotnet": {
+        "adaptation": "validated-energyplus-result-file-loading",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.init-defaults",
+      "python": {
+        "facts": {
+          "attribute_order": [
+            "audit",
+            "err",
+            "bnd",
+            "tbl",
+            "eso"
+          ],
+          "has_time": false,
+          "values": {
+            "audit": {
+              "kind": "none"
+            },
+            "bnd": {
+              "kind": "none"
+            },
+            "err": {
+              "kind": "none"
+            },
+            "eso": {
+              "kind": "none"
+            },
+            "tbl": {
+              "kind": "none"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.__init__"
+    },
+    {
+      "executor": "init",
+      "expected_dotnet": {
+        "adaptation": "validated-energyplus-result-file-loading",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.init-dispatch-overwrite",
+      "python": {
+        "facts": {
+          "final": {
+            "attribute_order": [
+              "audit",
+              "err",
+              "bnd",
+              "tbl",
+              "eso",
+              "time"
+            ],
+            "audit": [
+              {
+                "key": "Final",
+                "value": {
+                  "decimal": "9",
+                  "kind": "int"
+                }
+              }
+            ],
+            "boundary": [
+              {
+                "frame": {
+                  "columns": [
+                    "A",
+                    "B"
+                  ],
+                  "dtypes": [
+                    "object",
+                    "object"
+                  ],
+                  "index": [
+                    {
+                      "decimal": "0",
+                      "kind": "int"
+                    }
+                  ],
+                  "index_name": {
+                    "kind": "none"
+                  },
+                  "rows": [
+                    [
+                      {
+                        "kind": "string",
+                        "value": "x"
+                      },
+                      {
+                        "kind": "none"
+                      }
+                    ]
+                  ]
+                },
+                "key": "Rec"
+              }
+            ],
+            "error": {
+              "columns": [
+                "type",
+                "title"
+              ],
+              "dtypes": [
+                "object",
+                "object"
+              ],
+              "index": [
+                {
+                  "decimal": "0",
+                  "kind": "int"
+                },
+                {
+                  "decimal": "1",
+                  "kind": "int"
+                }
+              ],
+              "index_name": {
+                "kind": "none"
+              },
+              "rows": [
+                [
+                  {
+                    "kind": "string",
+                    "value": "Warning"
+                  },
+                  {
+                    "kind": "string",
+                    "value": "first"
+                  }
+                ],
+                [
+                  {
+                    "kind": "string",
+                    "value": "Severe"
+                  },
+                  {
+                    "kind": "string",
+                    "value": "second"
+                  }
+                ]
+              ]
+            },
+            "eso": {
+              "kind": "none"
+            },
+            "table": [
+              {
+                "frame": {
+                  "columns": [
+                    "V"
+                  ],
+                  "dtypes": [
+                    "int64"
+                  ],
+                  "index": [
+                    {
+                      "kind": "string",
+                      "value": "A"
+                    }
+                  ],
+                  "index_name": {
+                    "kind": "string",
+                    "value": "index"
+                  },
+                  "rows": [
+                    [
+                      {
+                        "decimal": "4",
+                        "kind": "int"
+                      }
+                    ]
+                  ]
+                },
+                "key": "R"
+              }
+            ],
+            "time": {
+              "binary64": "1.d168000000000p+11",
+              "kind": "float"
+            }
+          },
+          "ignored_suffixes": {
+            "all_none": true,
+            "attribute_order": [
+              "audit",
+              "err",
+              "bnd",
+              "tbl",
+              "eso"
+            ],
+            "has_time": false
+          },
+          "invalid_utf8_audit": [
+            {
+              "key": "Alpha",
+              "value": {
+                "decimal": "1",
+                "kind": "int"
+              }
+            },
+            {
+              "key": "Dup",
+              "value": {
+                "decimal": "3",
+                "kind": "int"
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.__init__"
+    },
+    {
+      "executor": "init",
+      "expected_dotnet": {
+        "adaptation": "validated-energyplus-result-file-loading",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.init-failure-transactionality",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "missing-file",
+              "exception_type": "FileNotFoundError",
+              "label": "missing-file",
+              "message": "'<TEMP>/missing.err' is not existing energyplus output file.",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "missing-member",
+              "exception_type": "AttributeError",
+              "label": "path-object",
+              "message": "'pathlib.Path' object has no attribute 'endswith'",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "missing-member",
+              "exception_type": "AttributeError",
+              "label": "malformed-error",
+              "message": "'NoneType' object has no attribute 'group'",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "unbound-local",
+              "exception_type": "UnboundLocalError",
+              "label": "html-table",
+              "message": "cannot access local variable 'tbl' where it is not associated with a value",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "unbound-local",
+              "exception_type": "UnboundLocalError",
+              "label": "xml-table",
+              "message": "cannot access local variable 'tbl' where it is not associated with a value",
+              "outcome": "raised"
+            }
+          ],
+          "partial_state": {
+            "attribute_order": [
+              "audit",
+              "err",
+              "bnd",
+              "tbl",
+              "eso"
+            ],
+            "audit": [
+              {
+                "key": "Alpha",
+                "value": {
+                  "decimal": "1",
+                  "kind": "int"
+                }
+              },
+              {
+                "key": "Dup",
+                "value": {
+                  "decimal": "3",
+                  "kind": "int"
+                }
+              }
+            ],
+            "failure": {
+              "error_category": "missing-file",
+              "exception_type": "FileNotFoundError",
+              "label": "later-missing-file",
+              "message": "'<TEMP>/missing.err' is not existing energyplus output file.",
+              "outcome": "raised"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.__init__"
+    },
+    {
+      "executor": "parse-audit",
+      "expected_dotnet": {
+        "adaptation": "ordered-typed-energyplus-audit-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-audit-duplicates-unicode",
+      "python": {
+        "facts": {
+          "entries": [
+            {
+              "key": "A",
+              "value": {
+                "decimal": "3",
+                "kind": "int"
+              }
+            },
+            {
+              "key": "B",
+              "value": {
+                "decimal": "2",
+                "kind": "int"
+              }
+            },
+            {
+              "key": "한글_١",
+              "value": {
+                "decimal": "42",
+                "kind": "int"
+              }
+            },
+            {
+              "key": "Huge",
+              "value": {
+                "decimal": "99999999999999999999999999999999999999",
+                "kind": "int"
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_audit"
+    },
+    {
+      "executor": "parse-audit",
+      "expected_dotnet": {
+        "adaptation": "ordered-typed-energyplus-audit-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-audit-failure-surface",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "label": "empty",
+              "outcome": "returned",
+              "result": []
+            },
+            {
+              "label": "noise",
+              "outcome": "returned",
+              "result": []
+            },
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "none",
+              "message": "expected string or bytes-like object, got 'NoneType'",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "bytes",
+              "message": "cannot use a string pattern on a bytes-like object",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "integer",
+              "message": "expected string or bytes-like object, got 'int'",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_audit"
+    },
+    {
+      "executor": "parse-audit",
+      "expected_dotnet": {
+        "adaptation": "ordered-typed-energyplus-audit-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-audit-recognition-boundaries",
+      "python": {
+        "facts": {
+          "entries": [
+            {
+              "key": "Alpha",
+              "value": {
+                "decimal": "12",
+                "kind": "int"
+              }
+            },
+            {
+              "key": "Decimal",
+              "value": {
+                "decimal": "7",
+                "kind": "int"
+              }
+            },
+            {
+              "key": "Tab",
+              "value": {
+                "decimal": "8",
+                "kind": "int"
+              }
+            },
+            {
+              "key": "Trailing",
+              "value": {
+                "decimal": "9",
+                "kind": "int"
+              }
+            },
+            {
+              "key": "y",
+              "value": {
+                "decimal": "10",
+                "kind": "int"
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_audit"
+    },
+    {
+      "executor": "parse-bnd",
+      "expected_dotnet": {
+        "adaptation": "csv-aware-energyplus-boundary-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-bnd-duplicates-padding",
+      "python": {
+        "facts": {
+          "tables": [
+            {
+              "frame": {
+                "columns": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "dtypes": [
+                  "object",
+                  "object",
+                  "object"
+                ],
+                "index": [
+                  {
+                    "decimal": "0",
+                    "kind": "int"
+                  }
+                ],
+                "index_name": {
+                  "kind": "none"
+                },
+                "rows": [
+                  [
+                    {
+                      "kind": "string",
+                      "value": "one"
+                    },
+                    {
+                      "kind": "none"
+                    },
+                    {
+                      "kind": "none"
+                    }
+                  ]
+                ]
+              },
+              "key": "Rec"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_bnd"
+    },
+    {
+      "executor": "parse-bnd",
+      "expected_dotnet": {
+        "adaptation": "csv-aware-energyplus-boundary-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-bnd-failure-grammar",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "invalid-value",
+              "exception_type": "ValueError",
+              "label": "overlong-row",
+              "message": "cannot set a row with mismatched columns",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "invalid-value",
+              "exception_type": "ValueError",
+              "label": "partial-invalid-column",
+              "message": "cannot set a row with mismatched columns",
+              "outcome": "raised"
+            },
+            {
+              "label": "invalid-header",
+              "outcome": "returned",
+              "result": []
+            },
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "none",
+              "message": "expected string or bytes-like object, got 'NoneType'",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "bytes",
+              "message": "cannot use a string pattern on a bytes-like object",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_bnd"
+    },
+    {
+      "executor": "parse-bnd",
+      "expected_dotnet": {
+        "adaptation": "csv-aware-energyplus-boundary-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-bnd-records",
+      "python": {
+        "facts": {
+          "first_line": [
+            {
+              "frame": {
+                "columns": [
+                  "A"
+                ],
+                "dtypes": [
+                  "object"
+                ],
+                "index": [
+                  {
+                    "decimal": "0",
+                    "kind": "int"
+                  }
+                ],
+                "index_name": {
+                  "kind": "none"
+                },
+                "rows": [
+                  [
+                    {
+                      "kind": "string",
+                      "value": "second"
+                    }
+                  ]
+                ]
+              },
+              "key": "Rec"
+            }
+          ],
+          "tables": [
+            {
+              "frame": {
+                "columns": [
+                  "Zone Name",
+                  "Zone #",
+                  "Path [m2/s]"
+                ],
+                "dtypes": [
+                  "object",
+                  "object",
+                  "object"
+                ],
+                "index": [
+                  {
+                    "decimal": "0",
+                    "kind": "int"
+                  },
+                  {
+                    "decimal": "1",
+                    "kind": "int"
+                  }
+                ],
+                "index_name": {
+                  "kind": "none"
+                },
+                "rows": [
+                  [
+                    {
+                      "kind": "string",
+                      "value": "Zone A"
+                    },
+                    {
+                      "kind": "string",
+                      "value": "1"
+                    },
+                    {
+                      "kind": "none"
+                    }
+                  ],
+                  [
+                    {
+                      "kind": "string",
+                      "value": "Zone B"
+                    },
+                    {
+                      "kind": "string",
+                      "value": "2"
+                    },
+                    {
+                      "kind": "string",
+                      "value": "/tmp"
+                    }
+                  ]
+                ]
+              },
+              "key": "Zone Information"
+            },
+            {
+              "frame": {
+                "columns": [
+                  "Name",
+                  "Type"
+                ],
+                "dtypes": [
+                  "object",
+                  "object"
+                ],
+                "index": [],
+                "index_name": {
+                  "kind": "none"
+                },
+                "rows": []
+              },
+              "key": "Surface Data"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_bnd"
+    },
+    {
+      "executor": "parse-err",
+      "expected_dotnet": {
+        "adaptation": "structured-energyplus-error-log-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-err-diagnostics",
+      "python": {
+        "facts": {
+          "elapsed_seconds": {
+            "binary64": "1.d168000000000p+11",
+            "kind": "float"
+          },
+          "warnings": {
+            "columns": [
+              "type",
+              "title"
+            ],
+            "dtypes": [
+              "object",
+              "object"
+            ],
+            "index": [
+              {
+                "decimal": "0",
+                "kind": "int"
+              },
+              {
+                "decimal": "1",
+                "kind": "int"
+              }
+            ],
+            "index_name": {
+              "kind": "none"
+            },
+            "rows": [
+              [
+                {
+                  "kind": "string",
+                  "value": "Warning"
+                },
+                {
+                  "kind": "string",
+                  "value": "first title  "
+                }
+              ],
+              [
+                {
+                  "kind": "string",
+                  "value": "Severe"
+                },
+                {
+                  "kind": "string",
+                  "value": "second title"
+                }
+              ]
+            ]
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_err"
+    },
+    {
+      "executor": "parse-err",
+      "expected_dotnet": {
+        "adaptation": "structured-energyplus-error-log-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-err-failure-surface",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "missing-member",
+              "exception_type": "AttributeError",
+              "label": "missing",
+              "message": "'NoneType' object has no attribute 'group'",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "missing-member",
+              "exception_type": "AttributeError",
+              "label": "spaced-equals",
+              "message": "'NoneType' object has no attribute 'group'",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "invalid-value",
+              "exception_type": "ValueError",
+              "label": "invalid-seconds",
+              "message": "could not convert string to float: '1..2'",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "none",
+              "message": "expected string or bytes-like object, got 'NoneType'",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "bytes",
+              "message": "cannot use a string pattern on a bytes-like object",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_err"
+    },
+    {
+      "executor": "parse-err",
+      "expected_dotnet": {
+        "adaptation": "structured-energyplus-error-log-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-err-time-empty",
+      "python": {
+        "facts": {
+          "elapsed_seconds": {
+            "binary64": "1.0000000000000p-1",
+            "kind": "float"
+          },
+          "warnings": {
+            "columns": [],
+            "dtypes": [],
+            "index": [],
+            "index_name": {
+              "kind": "none"
+            },
+            "rows": []
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_err"
+    },
+    {
+      "executor": "parse-eso",
+      "expected_dotnet": {
+        "adaptation": "explicitly-unsupported-energyplus-eso",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-eso-arity",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "zero",
+              "message": "EnergyPlusResult.parse_eso() missing 1 required positional argument: 'text'",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "two",
+              "message": "EnergyPlusResult.parse_eso() takes 1 positional argument but 2 were given",
+              "outcome": "raised"
+            },
+            {
+              "label": "keyword",
+              "outcome": "returned",
+              "result": {
+                "kind": "none"
+              }
+            },
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "wrong-keyword",
+              "message": "EnergyPlusResult.parse_eso() got an unexpected keyword argument 'value'",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_eso"
+    },
+    {
+      "executor": "parse-eso",
+      "expected_dotnet": {
+        "adaptation": "explicitly-unsupported-energyplus-eso",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-eso-opaque",
+      "python": {
+        "facts": {
+          "observation": {
+            "label": "opaque",
+            "outcome": "returned",
+            "result": {
+              "kind": "none"
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_eso"
+    },
+    {
+      "executor": "parse-eso",
+      "expected_dotnet": {
+        "adaptation": "explicitly-unsupported-energyplus-eso",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-eso-values",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "label": "empty",
+              "outcome": "returned",
+              "result": {
+                "kind": "none"
+              }
+            },
+            {
+              "label": "text",
+              "outcome": "returned",
+              "result": {
+                "kind": "none"
+              }
+            },
+            {
+              "label": "none",
+              "outcome": "returned",
+              "result": {
+                "kind": "none"
+              }
+            },
+            {
+              "label": "bytes",
+              "outcome": "returned",
+              "result": {
+                "kind": "none"
+              }
+            },
+            {
+              "label": "integer",
+              "outcome": "returned",
+              "result": {
+                "kind": "none"
+              }
+            },
+            {
+              "label": "list",
+              "outcome": "returned",
+              "result": {
+                "kind": "none"
+              }
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_eso"
+    },
+    {
+      "executor": "parse-table",
+      "expected_dotnet": {
+        "adaptation": "typed-energyplus-tabular-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-table-csv-multi-report",
+      "python": {
+        "facts": {
+          "tables": [
+            {
+              "frame": {
+                "columns": [
+                  "Electricity [kWh]",
+                  "Label"
+                ],
+                "dtypes": [
+                  "float64",
+                  "object"
+                ],
+                "index": [
+                  {
+                    "kind": "string",
+                    "value": "Jan"
+                  },
+                  {
+                    "kind": "string",
+                    "value": "Feb"
+                  }
+                ],
+                "index_name": {
+                  "kind": "string",
+                  "value": "index"
+                },
+                "rows": [
+                  [
+                    {
+                      "binary64": "1.8000000000000p+0",
+                      "kind": "float"
+                    },
+                    {
+                      "kind": "string",
+                      "value": "a,b"
+                    }
+                  ],
+                  [
+                    {
+                      "kind": "nan"
+                    },
+                    {
+                      "kind": "string",
+                      "value": "plain"
+                    }
+                  ]
+                ]
+              },
+              "key": "MonthlyOne"
+            },
+            {
+              "frame": {
+                "columns": [
+                  "Value"
+                ],
+                "dtypes": [
+                  "int64"
+                ],
+                "index": [
+                  {
+                    "kind": "string",
+                    "value": "A"
+                  },
+                  {
+                    "kind": "string",
+                    "value": "B"
+                  }
+                ],
+                "index_name": {
+                  "kind": "string",
+                  "value": "index"
+                },
+                "rows": [
+                  [
+                    {
+                      "decimal": "2",
+                      "kind": "int"
+                    }
+                  ],
+                  [
+                    {
+                      "decimal": "3",
+                      "kind": "int"
+                    }
+                  ]
+                ]
+              },
+              "key": "Second_2"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_table"
+    },
+    {
+      "executor": "parse-table",
+      "expected_dotnet": {
+        "adaptation": "typed-energyplus-tabular-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-table-failure-surface",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "unbound-local",
+              "exception_type": "UnboundLocalError",
+              "label": "extension-html",
+              "message": "cannot access local variable 'tbl' where it is not associated with a value",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "unbound-local",
+              "exception_type": "UnboundLocalError",
+              "label": "extension-xml",
+              "message": "cannot access local variable 'tbl' where it is not associated with a value",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "unbound-local",
+              "exception_type": "UnboundLocalError",
+              "label": "extension-csv",
+              "message": "cannot access local variable 'tbl' where it is not associated with a value",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "unbound-local",
+              "exception_type": "UnboundLocalError",
+              "label": "extension-none",
+              "message": "cannot access local variable 'tbl' where it is not associated with a value",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "unbound-local",
+              "exception_type": "UnboundLocalError",
+              "label": "extension-1",
+              "message": "cannot access local variable 'tbl' where it is not associated with a value",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "none-text",
+              "message": "expected string or bytes-like object, got 'NoneType'",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "invalid-type",
+              "exception_type": "TypeError",
+              "label": "bytes-text",
+              "message": "cannot use a string pattern on a bytes-like object",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "invalid-csv",
+              "exception_type": "ParserError",
+              "label": "malformed-csv",
+              "message": "Error tokenizing data. C error: EOF inside string starting at row 1",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_table"
+    },
+    {
+      "executor": "parse-table",
+      "expected_dotnet": {
+        "adaptation": "typed-energyplus-tabular-parsing",
+        "outcome": "returned"
+      },
+      "id": "energyplus-result.parse-table-grammar-duplicates",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "label": "leading",
+              "outcome": "returned",
+              "result": []
+            },
+            {
+              "label": "spaced-name",
+              "outcome": "returned",
+              "result": []
+            },
+            {
+              "label": "wrong-scope",
+              "outcome": "returned",
+              "result": []
+            },
+            {
+              "label": "crlf",
+              "outcome": "returned",
+              "result": []
+            },
+            {
+              "label": "unterminated",
+              "outcome": "returned",
+              "result": []
+            },
+            {
+              "label": "duplicates-separated",
+              "outcome": "returned",
+              "result": [
+                {
+                  "frame": {
+                    "columns": [
+                      "Value"
+                    ],
+                    "dtypes": [
+                      "int64"
+                    ],
+                    "index": [
+                      {
+                        "kind": "string",
+                        "value": "B"
+                      }
+                    ],
+                    "index_name": {
+                      "kind": "string",
+                      "value": "index"
+                    },
+                    "rows": [
+                      [
+                        {
+                          "decimal": "2",
+                          "kind": "int"
+                        }
+                      ]
+                    ]
+                  },
+                  "key": "Dup"
+                }
+              ]
+            },
+            {
+              "label": "duplicates-adjacent",
+              "outcome": "returned",
+              "result": [
+                {
+                  "frame": {
+                    "columns": [
+                      "Value"
+                    ],
+                    "dtypes": [
+                      "int64"
+                    ],
+                    "index": [
+                      {
+                        "kind": "string",
+                        "value": "A"
+                      }
+                    ],
+                    "index_name": {
+                      "kind": "string",
+                      "value": "index"
+                    },
+                    "rows": [
+                      [
+                        {
+                          "decimal": "1",
+                          "kind": "int"
+                        }
+                      ]
+                    ]
+                  },
+                  "key": "Dup"
+                }
+              ]
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyPlusResult.parse_table"
+    }
+  ],
+  "cases_sha256": "sha256:a0464a29bfd0bd1712deacbac50d3f87f6ea15e4ba9f4d19a70e88e896be38dd",
+  "consumer_contract": {
+    "adaptations": {
+      "EnergyPlusResult": "immutable-structured-energyplus-result",
+      "EnergyPlusResult.__init__": "validated-energyplus-result-file-loading",
+      "EnergyPlusResult.parse_audit": "ordered-typed-energyplus-audit-parsing",
+      "EnergyPlusResult.parse_bnd": "csv-aware-energyplus-boundary-parsing",
+      "EnergyPlusResult.parse_err": "structured-energyplus-error-log-parsing",
+      "EnergyPlusResult.parse_eso": "explicitly-unsupported-energyplus-eso",
+      "EnergyPlusResult.parse_table": "typed-energyplus-tabular-parsing"
+    },
+    "assertion_ids": {
+      "EnergyPlusResult": "launcher-result-energyplus-result-eab88d95",
+      "EnergyPlusResult.__init__": "launcher-result-init-30d49efa",
+      "EnergyPlusResult.parse_audit": "launcher-result-parse-audit-7315fbc3",
+      "EnergyPlusResult.parse_bnd": "launcher-result-parse-bnd-631c7884",
+      "EnergyPlusResult.parse_err": "launcher-result-parse-err-f5789307",
+      "EnergyPlusResult.parse_eso": "launcher-result-parse-eso-3e849bcd",
+      "EnergyPlusResult.parse_table": "launcher-result-parse-table-eaf18f21"
+    },
+    "case_count": 21,
+    "case_ids": [
+      "energyplus-result.class-descriptors",
+      "energyplus-result.class-dynamic-identity",
+      "energyplus-result.class-static-bindings",
+      "energyplus-result.init-defaults",
+      "energyplus-result.init-dispatch-overwrite",
+      "energyplus-result.init-failure-transactionality",
+      "energyplus-result.parse-audit-duplicates-unicode",
+      "energyplus-result.parse-audit-failure-surface",
+      "energyplus-result.parse-audit-recognition-boundaries",
+      "energyplus-result.parse-bnd-duplicates-padding",
+      "energyplus-result.parse-bnd-failure-grammar",
+      "energyplus-result.parse-bnd-records",
+      "energyplus-result.parse-err-diagnostics",
+      "energyplus-result.parse-err-failure-surface",
+      "energyplus-result.parse-err-time-empty",
+      "energyplus-result.parse-eso-arity",
+      "energyplus-result.parse-eso-opaque",
+      "energyplus-result.parse-eso-values",
+      "energyplus-result.parse-table-csv-multi-report",
+      "energyplus-result.parse-table-failure-surface",
+      "energyplus-result.parse-table-grammar-duplicates"
+    ],
+    "classifications": {
+      "EnergyPlusResult": "exception",
+      "EnergyPlusResult.__init__": "exception",
+      "EnergyPlusResult.parse_audit": "exception",
+      "EnergyPlusResult.parse_bnd": "exception",
+      "EnergyPlusResult.parse_err": "exception",
+      "EnergyPlusResult.parse_eso": "exception",
+      "EnergyPlusResult.parse_table": "exception"
+    },
+    "dataframe_encoding": "ordered-columns-index-dtypes-and-tagged-cells",
+    "float_encoding": "python-binary64-hex-without-0x-prefix",
+    "runtime_names": "pinned-python-only-no-native-type-name-claims",
+    "target_symbols": [
+      "EnergyPlusResult",
+      "EnergyPlusResult.__init__",
+      "EnergyPlusResult.parse_audit",
+      "EnergyPlusResult.parse_bnd",
+      "EnergyPlusResult.parse_err",
+      "EnergyPlusResult.parse_eso",
+      "EnergyPlusResult.parse_table"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.launcher-result-parser.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/launcher.py",
+      "signature_hash": "sha256:e88e44c74b7fe4452c4b4ab02a77089cc4d00bf85c9ae6e0d66da6f9434f3058",
+      "symbol": "EnergyPlusResult",
+      "symbol_hash": "sha256:eab88d95447b32529789bf2881a5d4d3e13651c4e10d9bd732a6a647f1a1f597"
+    },
+    {
+      "body_hash": "sha256:07b3bd52cbf73e0aefff8c1ad129513d27a70b4f2eb20367823906d0eb554ded",
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "signature_hash": "sha256:7e5b8274a07d7fb62744d1264fbb0b20e61cd8c98043fadd006e927ad1f5b306",
+      "symbol": "EnergyPlusResult.__init__",
+      "symbol_hash": "sha256:30d49efa5495acff6cb5c9c03c9aacb3bd633048bb4fec63ce2d31b36f85a31a"
+    },
+    {
+      "body_hash": "sha256:1623e7f8578b27f3cfb1fb619812d5bd86ff454bd5013ccceae56368e95b13c0",
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "signature_hash": "sha256:1e71b92b3165cc8d006395d5ea0af9a81aff2a071bab1786e6fa831eb183d23f",
+      "symbol": "EnergyPlusResult.parse_audit",
+      "symbol_hash": "sha256:7315fbc33d50d14f5dfcab78401ef66838a9e2c3760bea72e6b3b3d3aea59fce"
+    },
+    {
+      "body_hash": "sha256:fbb91620c064f38be0b8be747a217029a890610b5e534156afc8f33e01d8b61d",
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "signature_hash": "sha256:46ce611e7c31e66b237299dd1fcfd62fa99a3ace82a364e0bb5f00608b7dbcb1",
+      "symbol": "EnergyPlusResult.parse_bnd",
+      "symbol_hash": "sha256:631c7884e2ca51b8410312a506edf7fbf79928a5c49d13c132e3dc897a325ac9"
+    },
+    {
+      "body_hash": "sha256:8e8874e9cc6f51ad980d80a7ea7d2f31edfb2fce7cd7b6146322386a68e9d4b3",
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "signature_hash": "sha256:eb51fd10a2d723663f382cb82e19b2ce1c5fad4663d610da9299279287665fa5",
+      "symbol": "EnergyPlusResult.parse_err",
+      "symbol_hash": "sha256:f578930710efdaf9f65ec2ec992fc1fcadb22270c26b788a2513125e029e0561"
+    },
+    {
+      "body_hash": "sha256:69ee3e6f0fb7d958909b14349d6313a2b89d827e22269768d74cb04ec38a4b37",
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "signature_hash": "sha256:537014c1413f0afaa5e35f17842785640f506e5da03814c6547486d26c06955c",
+      "symbol": "EnergyPlusResult.parse_eso",
+      "symbol_hash": "sha256:3e849bcd62a1caba6f2d56d3f5353d485f601aa2c9375ffecfa17ab4968d645c"
+    },
+    {
+      "body_hash": "sha256:6cd0846d65f6edd670890f719cd0c2f793c2fc03a7b07d3f18a7620b38ae4559",
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "signature_hash": "sha256:8d4aab53f7cf5437b4388d7289738711f41221a5fabf818c61bfda9a5a64a8b9",
+      "symbol": "EnergyPlusResult.parse_table",
+      "symbol_hash": "sha256:eaf18f211cbe4342c5c5be02cf6ccf1ea10f6604cbf199051bacac03bcabea3a"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "path": "src/idragon/launcher.py",
+    "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+  }
+}

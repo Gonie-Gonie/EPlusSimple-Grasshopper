@@ -58,6 +58,11 @@
       "sha256": "f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705"
     },
     {
+      "path": "launcher-result-parser-oracle.json",
+      "bytes": 43608,
+      "sha256": "a5e4024e46ed30d2cfed54b8f158a167de796bde898cc5cc451701ded4d3df6e"
+    },
+    {
       "path": "material-database.json",
       "bytes": 659,
       "sha256": "45d7c88dd10661486436bed8a94e3de41eaa5713d21003e803a6b0775004f9d8"

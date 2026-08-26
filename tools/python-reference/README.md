@@ -79,6 +79,16 @@ failure surface. Its consumer contract declares ten exact equivalents and the
 three reviewed native descriptor, validated-construction, and strongly typed
 coercion adaptations.
 
+The launcher result-parser oracle directly loads the pinned
+`idragon/launcher.py` together with only its pinned sibling modules, without
+executing `idragon.__init__`. Its 21 ordered cases bind the seven
+`EnergyPlusResult` class, constructor, audit, boundary, error, ESO, and tabular
+parser symbols. DataFrames are normalized as ordered columns, index, dtypes,
+and tagged cells; NaN and finite binary64 values never enter JSON as
+non-standard numeric tokens. The consumer contract records all seven reviewed
+typed native adaptations, including `explicitly-unsupported-energyplus-eso`;
+it does not claim that the native port parses ESO output.
+
 Updating the tracked baseline is an explicit review action:
 
 ```text

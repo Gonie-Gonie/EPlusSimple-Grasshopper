@@ -233,6 +233,8 @@ public sealed class EnergyPlusBoundaryRecord
 
 public sealed class EnergyPlusBoundaryData
 {
+    private readonly ReadOnlyDictionary<string, IReadOnlyList<string>> _schemas;
+
     [JsonConstructor]
     public EnergyPlusBoundaryData(
         IReadOnlyList<string>? comments,
@@ -241,6 +243,7 @@ public sealed class EnergyPlusBoundaryData
         Comments = new ReadOnlyCollection<string>((comments ?? Array.Empty<string>()).ToArray());
         Records = new ReadOnlyCollection<EnergyPlusBoundaryRecord>(
             (records ?? Array.Empty<EnergyPlusBoundaryRecord>()).ToArray());
+        _schemas = ParseSchemas(Comments);
     }
 
     [JsonPropertyOrder(0)]
@@ -249,12 +252,102 @@ public sealed class EnergyPlusBoundaryData
     [JsonPropertyOrder(1)]
     public IReadOnlyList<EnergyPlusBoundaryRecord> Records { get; }
 
+    /// <summary>
+    /// Column names declared by EnergyPlus boundary header comments. The map is
+    /// derived from <see cref="Comments"/> so the v1 serialized result shape remains unchanged.
+    /// </summary>
+    [JsonIgnore]
+    public IReadOnlyDictionary<string, IReadOnlyList<string>> Schemas => _schemas;
+
     public IEnumerable<EnergyPlusBoundaryRecord> OfType(string recordType)
     {
         return Records.Where(record => string.Equals(
             record.RecordType,
             recordType,
             StringComparison.OrdinalIgnoreCase));
+    }
+
+    public bool TryGetColumns(
+        string recordType,
+        out IReadOnlyList<string>? columns)
+    {
+        string normalized = recordType?.Trim() ?? string.Empty;
+        if (normalized.Length == 0)
+        {
+            columns = null;
+            return false;
+        }
+
+        return _schemas.TryGetValue(normalized, out columns);
+    }
+
+    public bool TryGetField(
+        EnergyPlusBoundaryRecord record,
+        string columnName,
+        out string? value)
+    {
+        Guard.NotNull(record, nameof(record));
+        string normalizedColumn = columnName?.Trim() ?? string.Empty;
+        IReadOnlyList<string>? columns;
+        if (normalizedColumn.Length == 0 ||
+            !TryGetColumns(record.RecordType, out columns) ||
+            columns is null)
+        {
+            value = null;
+            return false;
+        }
+
+        for (int index = 0; index < columns.Count; index++)
+        {
+            if (!string.Equals(
+                    columns[index],
+                    normalizedColumn,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            value = index < record.Fields.Count ? record.Fields[index] : null;
+            return true;
+        }
+
+        value = null;
+        return false;
+    }
+
+    private static ReadOnlyDictionary<string, IReadOnlyList<string>> ParseSchemas(
+        IEnumerable<string> comments)
+    {
+        var schemas = new Dictionary<string, IReadOnlyList<string>>(
+            StringComparer.OrdinalIgnoreCase);
+        foreach (string comment in comments)
+        {
+            string[] tokens = comment
+                .Split(',')
+                .Select(value => value.Trim())
+                .ToArray();
+            if (tokens.Length < 2 || tokens.Any(token =>
+                    token.Length < 3 || token[0] != '<' || token[token.Length - 1] != '>'))
+            {
+                continue;
+            }
+
+            string recordType = Unwrap(tokens[0]);
+            string[] columns = tokens.Skip(1).Select(Unwrap).ToArray();
+            if (recordType.Length == 0 || columns.Any(column => column.Length == 0))
+            {
+                continue;
+            }
+
+            schemas[recordType] = new ReadOnlyCollection<string>(columns);
+        }
+
+        return new ReadOnlyDictionary<string, IReadOnlyList<string>>(schemas);
+    }
+
+    private static string Unwrap(string value)
+    {
+        return value.Substring(1, value.Length - 2).Trim();
     }
 }
 
@@ -337,10 +430,19 @@ public sealed class EnergyPlusTabularTable
 
     public IEnumerable<EnergyPlusTabularRow> FindRows(string rowLabel)
     {
-        return Rows.Where(row => row.Cells.Any(cell => string.Equals(
-            cell.Text,
-            rowLabel,
-            StringComparison.OrdinalIgnoreCase)));
+        int labelColumn = InferRowLabelColumn();
+        if (labelColumn < 0)
+        {
+            return Enumerable.Empty<EnergyPlusTabularRow>();
+        }
+
+        string normalized = rowLabel?.Trim() ?? string.Empty;
+        return Rows.Where(row =>
+            labelColumn < row.Cells.Count &&
+            string.Equals(
+                row.Cells[labelColumn].Text,
+                normalized,
+                StringComparison.OrdinalIgnoreCase));
     }
 
     public bool TryGetCell(
@@ -375,6 +477,19 @@ public sealed class EnergyPlusTabularTable
 
         cell = null;
         return false;
+    }
+
+    private int InferRowLabelColumn()
+    {
+        for (int index = 0; index < Header.Cells.Count; index++)
+        {
+            if (!string.IsNullOrWhiteSpace(Header.Cells[index].Text))
+            {
+                return index == 0 ? 0 : index - 1;
+            }
+        }
+
+        return -1;
     }
 }
 

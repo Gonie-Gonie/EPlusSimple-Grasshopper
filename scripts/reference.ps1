@@ -31,6 +31,7 @@ $profileGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\genera
 $usageProfileCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_usage_profile_core_oracle.py'
 $utilsCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_utils_core_oracle.py'
 $commonCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_common_core_oracle.py'
+$launcherResultParserGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_launcher_result_parser_oracle.py'
 $iddGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_idd_schema_oracle.py'
 $constructionEqualityGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_construction_equality_hash_oracle.py'
 $scheduleTypeGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_schedule_type_oracle.py'
@@ -638,7 +639,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, launcher result-parser, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -731,6 +732,24 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $commonCoreGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-common-core-reference.log') `
     -FailureMessage 'Generating the Python common core reference oracle failed'
+
+$launcherResultParserOraclePath = Join-Path $outputRoot 'launcher-result-parser-oracle.json'
+$launcherResultParserGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $launcherResultParserGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $launcherResultParserOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $launcherResultParserGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-launcher-result-parser-reference.log') `
+    -FailureMessage 'Generating the Python launcher result-parser oracle failed'
 
 $iddOraclePath = Join-Path $outputRoot 'idd-24.2.0.schema.json.gz'
 $iddGeneratorArguments = @(

@@ -43,3 +43,10 @@ records the EnergyPlus 24.2.0 and 2026 defaults, ASCII and Unicode-decimal
 version parsing, formatting, component order, filenames, identity behavior,
 and coercion failures with the exact ten-equivalent versus three-reviewed-
 adaptation split.
+
+`python-0.7.0/launcher-result-parser-oracle.json` pins 21 ordered CPython
+3.12.7 observations for the seven result-parser symbols in
+`idragon/launcher.py`. It records constructor dispatch and partial failures,
+audit duplicates, boundary padding, error-log filtering, the legacy tabular
+CSV grammar, pandas NaN and binary64 values, and the explicit absence of ESO
+parsing. All seven symbols are bound to reviewed native API adaptations.

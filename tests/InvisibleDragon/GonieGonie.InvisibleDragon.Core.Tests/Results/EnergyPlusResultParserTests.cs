@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.EnergyPlus.Runtime;
 using GonieGonie.InvisibleDragon.Results;
@@ -65,7 +66,7 @@ public sealed class EnergyPlusResultParserTests
         const string text = """
             ! <Node>,<Node Number>,<Node Name>,<Node Type>
              Node,1,"Supply, Main",Air
-             Node,2,Return,Air
+             Node,2,Return
              #Nodes,2
             """;
 
@@ -73,8 +74,52 @@ public sealed class EnergyPlusResultParserTests
 
         Assert.Single(boundary.Comments);
         Assert.Equal(3, boundary.Records.Count);
-        Assert.Equal("Supply, Main", boundary.OfType("node").First().Fields[1]);
+        EnergyPlusBoundaryRecord[] nodes = boundary.OfType("node").ToArray();
+        Assert.Equal(2, nodes.Length);
+        Assert.True(boundary.TryGetColumns("node", out IReadOnlyList<string>? columns));
+        Assert.Equal(new[] { "Node Number", "Node Name", "Node Type" }, columns);
+        Assert.True(boundary.TryGetField(nodes[0], "Node Name", out string? nodeName));
+        Assert.Equal("Supply, Main", nodeName);
+        Assert.True(boundary.TryGetField(nodes[1], "Node Type", out string? missingType));
+        Assert.Null(missingType);
         Assert.Equal("2", boundary.OfType("#Nodes").Single().Fields[0]);
+        Assert.False(boundary.TryGetColumns("#Nodes", out _));
+        Assert.False(boundary.TryGetField(nodes[0], "Unknown Column", out _));
+    }
+
+    [Fact]
+    public void BoundarySchemasUseLastDuplicateHeaderAndRemainDerivedAcrossJson()
+    {
+        const string text = """
+            ! <Node>,<Legacy Number>
+            ! <Node>,<Node Number>,<Node Name>
+             Node,7,Supply
+            """;
+        EnergyPlusBoundaryData boundary = EnergyPlusResultParser.ParseBoundary(text);
+
+        Assert.Single(boundary.Schemas);
+        Assert.True(boundary.TryGetColumns("NODE", out IReadOnlyList<string>? columns));
+        Assert.Equal(new[] { "Node Number", "Node Name" }, columns);
+        IDictionary<string, IReadOnlyList<string>> mutableSchemas =
+            Assert.IsAssignableFrom<IDictionary<string, IReadOnlyList<string>>>(boundary.Schemas);
+        Assert.True(mutableSchemas.IsReadOnly);
+        Assert.Throws<NotSupportedException>(
+            () => mutableSchemas.Add("Other", Array.Empty<string>()));
+        IList<string> mutableColumns = Assert.IsAssignableFrom<IList<string>>(columns);
+        Assert.True(mutableColumns.IsReadOnly);
+        Assert.Throws<NotSupportedException>(() => mutableColumns.Add("Other"));
+        EnergyPlusBoundaryRecord record = Assert.Single(boundary.Records);
+        Assert.False(boundary.TryGetField(record, "Legacy Number", out _));
+        Assert.True(boundary.TryGetField(record, "Node Name", out string? name));
+        Assert.Equal("Supply", name);
+
+        string json = JsonSerializer.Serialize(boundary, BuildingEnergyJson.CreateOptions());
+        Assert.DoesNotContain("schemas", json, StringComparison.OrdinalIgnoreCase);
+        EnergyPlusBoundaryData restored = JsonSerializer.Deserialize<EnergyPlusBoundaryData>(
+            json,
+            BuildingEnergyJson.CreateOptions())!;
+        Assert.True(restored.TryGetColumns("Node", out IReadOnlyList<string>? restoredColumns));
+        Assert.Equal(columns, restoredColumns);
     }
 
     [Fact]
@@ -106,6 +151,27 @@ public sealed class EnergyPlusResultParserTests
         Assert.Null(table.Rows[1][2].NumericValue);
         Assert.True(table.TryGetCell("Heating", "February", out EnergyPlusTabularCell? february));
         Assert.Equal(2.5, february!.NumericValue);
+    }
+
+    [Fact]
+    public void TabularRowLookupMatchesOnlyTheInferredLabelColumn()
+    {
+        const string csv = """
+            REPORT:,Collision
+            FOR:,Meter
+            Collision Table
+            ,,January,February
+            ,Heating,1.25,Target Row
+            ,Target Row,9.00,10.00
+            """;
+
+        EnergyPlusTabularTable table = Assert.Single(
+            EnergyPlusResultParser.ParseTabular("collisiontbl.csv", csv));
+
+        EnergyPlusTabularRow row = Assert.Single(table.FindRows("target row"));
+        Assert.Equal("Target Row", row[1].Text);
+        Assert.True(table.TryGetCell("Target Row", "January", out EnergyPlusTabularCell? january));
+        Assert.Equal(9d, january!.NumericValue);
     }
 
     [Fact]

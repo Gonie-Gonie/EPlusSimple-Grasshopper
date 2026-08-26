@@ -1436,3 +1436,101 @@
     api_contract: callers select a typed From overload and receive native argument failures instead of depending on Python union inspection, iterable expansion, or catch-all dynamic dispatch
     compatibility_evidence: same-instance identity, string, tuple and list conversions, two-component patch default, invalid counts and unrelated inputs, native typed overload behavior, and EnergyPlusVersion.From remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
+
+- id: immutable-structured-energyplus-result
+  upstream:
+    path: src/idragon/launcher.py
+    symbol: EnergyPlusResult
+    symbol_hash: sha256:eab88d95447b32529789bf2881a5d4d3e13651c4e10d9bd732a6a647f1a1f597
+  difference:
+    upstream: exposes an open mutable carrier whose audit, err, bnd, tbl, and eso attributes default to None, whose time attribute appears only after an error file is parsed, and whose attributes can be replaced or extended arbitrarily
+    dotnet: exposes a sealed schema-stamped EnergyPlusSimulationResult aggregate with required typed metadata, error, audit, and boundary models plus copied read-only table and source collections and derived diagnostics
+  effect:
+    engineering_result: supported EnergyPlus diagnostics, audit entries, boundary records, tabular values, run metadata, and source provenance remain available deterministically while partially initialized or post-parse mutated result state cannot enter downstream Grasshopper workflows
+    api_contract: callers consume immutable typed result properties and collections instead of probing or replacing a mutable Python instance dictionary, optional time attribute, pandas objects, or an inert eso slot
+    compatibility_evidence: default and populated result topology, schema and metadata, source isolation, identity and mutation behavior, read-only typed collections, absence topology, and src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Results/EnergyPlusResultModels.cs remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: validated-energyplus-result-file-loading
+  upstream:
+    path: src/idragon/launcher.py
+    symbol: EnergyPlusResult.__init__
+    symbol_hash: sha256:30d49efa5495acff6cb5c9c03c9aacb3bd633048bb4fec63ce2d31b36f85a31a
+  difference:
+    upstream: accepts an arbitrary ordered path list, reads every file as UTF-8 while ignoring decoding errors, dispatches by case-sensitive suffix, silently ignores unknown files, overwrites a result slot when a later matching file appears, and raises a path-bearing FileNotFoundError for the first missing input
+    dotnet: explicitly parses a validated result directory or runtime result, discovers canonical result names and every matching tabular CSV deterministically, retains typed source metadata and hashes, and assembles one immutable result with native directory and argument failures
+  effect:
+    engineering_result: supported error, audit, boundary, and tabular artifacts retain their parsed engineering content while ambiguous ordering, silent unknown-file handling, and mutable last-write result replacement are removed
+    api_contract: callers provide a result directory or EnergyPlusRunResult and inspect the returned typed aggregate rather than constructing a mutable carrier from variadic paths and suffix side effects
+    compatibility_evidence: empty and populated loading, deterministic file discovery and ordering, duplicate and unknown files, missing directories and artifacts, text decoding, source metadata, immutable assembly, and EnergyPlusResultParser.ParseDirectory remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: ordered-typed-energyplus-audit-parsing
+  upstream:
+    path: src/idragon/launcher.py
+    symbol: EnergyPlusResult.parse_audit
+    symbol_hash: sha256:7315fbc33d50d14f5dfcab78401ef66838a9e2c3760bea72e6b3b3d3aea59fce
+  difference:
+    upstream: extracts only word keys followed by equals, whitespace, and unsigned decimal digits into a mutable dictionary, overwrites duplicate keys, and silently ignores messages and every other value form
+    dotnet: returns an immutable ordered EnergyPlusAuditLog that preserves duplicate entries and non-entry messages, retains each trimmed string value, and adds a finite invariant numeric projection when one is available
+  effect:
+    engineering_result: the upstream integer key/value projection remains recoverable in order while duplicate audit evidence, scientific and textual values, and diagnostic messages are no longer silently discarded
+    api_contract: callers query typed ordered entries and messages instead of relying on mutable dictionary overwrite behavior or the restricted regular-expression grammar
+    compatibility_evidence: basic integer extraction, whitespace and Unicode word keys, duplicate ordering, ignored upstream values, message retention, invariant finite numeric parsing, immutable results, and EnergyPlusResultParser.ParseAudit remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: csv-aware-energyplus-boundary-parsing
+  upstream:
+    path: src/idragon/launcher.py
+    symbol: EnergyPlusResult.parse_bnd
+    symbol_hash: sha256:631c7884e2ca51b8410312a506edf7fbf79928a5c49d13c132e3dc897a325ac9
+  difference:
+    upstream: builds a mutable dictionary of pandas DataFrames only for angle-bracket header declarations, tokenizes rows with a comma regular expression, pads short rows with None, ignores undeclared record keys, and cannot preserve quoted comma fields
+    dotnet: parses invariant quoted CSV into immutable ordered boundary comments and typed records with exact fields and source lines, retains declared columns in an immutable schema map, and exposes TryGetColumns and null-padding TryGetField lookup without pandas indices, dtypes, or mutation
+  effect:
+    engineering_result: supported boundary schemas, record types, ordered text fields, and missing trailing values remain available while quoted names and commas are preserved and malformed CSV fails explicitly instead of entering a distorted table
+    api_contract: callers query EnergyPlusBoundaryData records by type, inspect immutable declared columns, and use TryGetField for null-padded lookup instead of indexing or mutating a dictionary of DataFrames
+    compatibility_evidence: declared headers and rows, immutable schema and TryGetColumns lookup, short-row null padding through TryGetField, ignored-key behavior, comments, quoted commas, malformed input, ordered fields and source lines, and EnergyPlusResultParser.ParseBoundary remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: structured-energyplus-error-log-parsing
+  upstream:
+    path: src/idragon/launcher.py
+    symbol: EnergyPlusResult.parse_err
+    symbol_hash: sha256:f578930710efdaf9f65ec2ec992fc1fcadb22270c26b788a2513125e029e0561
+  difference:
+    upstream: requires one exact elapsed-time match and returns elapsed seconds plus a mutable two-column pandas DataFrame containing only one-line Warning and Severe titles, raising an incidental AttributeError when elapsed text is absent
+    dotnet: returns an immutable EnergyPlusErrorLog with nullable elapsed seconds, version, build and timestamp metadata, ordered Warning, Severe, and Fatal diagnostics, continuation lines, source lines, completion state, and summary counts
+  effect:
+    engineering_result: matching warning and severe titles and elapsed seconds retain their values while fatal diagnostics, continuation details, execution identity, and explicit missing-time state remain available for simulation validity decisions
+    api_contract: callers consume a typed log and summary with native null and argument behavior instead of unpacking a float and mutable pandas DataFrame or depending on an incidental missing-match exception
+    compatibility_evidence: exact elapsed arithmetic, warning and severe extraction, duplicate and continuation topology, fatal and summary behavior, version metadata, missing elapsed input, immutable diagnostics, and EnergyPlusResultParser.ParseErrorLog remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: explicitly-unsupported-energyplus-eso
+  upstream:
+    path: src/idragon/launcher.py
+    symbol: EnergyPlusResult.parse_eso
+    symbol_hash: sha256:3e849bcd62a1caba6f2d56d3f5353d485f601aa2c9375ffecfa17ab4968d645c
+  difference:
+    upstream: exposes a callable parse_eso stub that accepts arbitrary text, performs no parsing or validation, and always returns None
+    dotnet: deliberately exposes no public ESO parser on EnergyPlusResultParser and makes no claim to interpret ESO dictionary or time-series content
+  effect:
+    engineering_result: none because the pinned upstream method produces no engineering result and the native product does not substitute invented ESO semantics
+    api_contract: callers cannot invoke a native no-op parse method and must not infer ESO support from the structured result parser surface
+    compatibility_evidence: empty, representative, and malformed ESO text returning None upstream, reflective absence of a public native ParseEso method, and the exact EnergyPlusResultParser type remain required in a trusted cross-language receipt without claiming ESO parsing
+  approval: accepted-native-api-adaptation
+
+- id: typed-energyplus-tabular-parsing
+  upstream:
+    path: src/idragon/launcher.py
+    symbol: EnergyPlusResult.parse_table
+    symbol_hash: sha256:eaf18f211cbe4342c5c5be02cf6ccf1ea10f6604cbf199051bacac03bcabea3a
+  difference:
+    upstream: recognizes only lowercase csv through a fixed Custom Monthly Report and Meter regular-expression grammar, returns a mutable report-name dictionary of pandas DataFrames with inferred indices and dtypes, overwrites duplicate report names, and raises an incidental UnboundLocalError for unsupported extensions
+    dotnet: parses general tabular CSV with quoted-field handling into an ordered immutable list of typed report, scope, title, header, row, and cell models with finite invariant numeric projections and explicit native validation
+  effect:
+    engineering_result: the supported monthly report labels, ordering, missingness, text, and finite numeric values remain queryable while broader EnergyPlus tables and quoted fields are retained without pandas inference or duplicate-key loss
+    api_contract: callers consume immutable EnergyPlusTabularTable and cell projections keyed by file identity rather than mutating pandas DataFrames, relying on inferred dtypes and index behavior, or passing a format extension switch
+    compatibility_evidence: the exact narrow upstream CSV grammar, multiple and duplicate reports, unsupported extensions, blank and quoted cells, missingness, finite numeric projection, ordered immutable native tables, and EnergyPlusResultParser.ParseTabular remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
