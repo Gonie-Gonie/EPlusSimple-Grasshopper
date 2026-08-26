@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:057f11cafc671fd1ec9fadb5c8fcb9896d395a52c62140f0db78a03b16d2fa55",
+  "content_sha256": "sha256:be9b3941f23035b82a1188aa60b99bd8ccdceadaa64b6676daefe389667710e0",
   "entries": [
     {
       "implementation": {
@@ -338,6 +338,32 @@
       ],
       "symbol": "read_csv_without_units",
       "upstream_symbol_hash": "sha256:77befcdc77b99adb5b3b7311f90774dd82ff72ba4eea1c6b7058419c1aff412a"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmFormat.cs",
+        "source_sha256": "sha256:e8a2240e37c080635977d43ae9e95ddb4c67f8581c2b4eb07d4c30299f99729c",
+        "symbol": "GonieGonie.SimpleDragon.GrmFormat.CreateLegacyInputTemplate"
+      },
+      "path": "src/epsimple/utils.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify GRJSON_FORMAT across its exact three-case utils core slice: the exact ordered legacy defaults and collection topology, its 304-byte compact serialization, fresh-call isolation and deep read-only behavior. The comparison directly verifies the process-global mutable Python seed against a fresh deeply immutable native legacy template.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7530931360f76e9e203ba2de12c7674d6da6d0c43c0b31c863686468bddbe171",
+          "id": "utils-core-grjson-format-6c3ef8ba",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UtilsCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:aae7d01a398d8112d15dbd7cae1ac88e6344bd02821ed5b783938982b7829056",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UtilsCoreOracleParityTests.MatchesPinnedPythonUtilsCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "GRJSON_FORMAT",
+      "upstream_symbol_hash": "sha256:6c3ef8ba838797c6783d1ed35b52dcd6b4eb364baa529820c6df9ed8dfb2e75e"
     },
     {
       "implementation": {
@@ -4992,14 +5018,92 @@
       ],
       "symbol": "ScheduleType.validate",
       "upstream_symbol_hash": "sha256:b09903103bf95c771eb228f80666fb264e176204c332873795c2d96f86056bcb"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Internal/DomainSupport.cs",
+        "source_sha256": "sha256:b7533867e6dde3fde138799861be245467fbe58b8842005d840a9781f0d8c940",
+        "symbol": "GonieGonie.SimpleDragon.Internal.DomainSupport.DefinedEnumOrNull"
+      },
+      "path": "src/idragon/utils.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify validate_enum across its exact three-case utils core slice: upstream member, raw-value, literal and None behavior plus native nullable typed enum, vocabulary parsing and undefined-value rejection. The comparison directly verifies Python runtime Enum and raw-value decoration against closed CLR enums, explicit vocabulary parsing and fail-closed undefined-value guards.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:523595c7a82cdac895947eb706761d2c9c66872a2499b6d8ff3b3d6abf08ddda",
+          "id": "utils-core-validate-enum-8b3b34b6",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UtilsCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:aae7d01a398d8112d15dbd7cae1ac88e6344bd02821ed5b783938982b7829056",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UtilsCoreOracleParityTests.MatchesPinnedPythonUtilsCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "validate_enum",
+      "upstream_symbol_hash": "sha256:8b3b34b63f7091d045c421b0309c3549f935ee47aa704faf4931be786991402c"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Internal/DomainSupport.cs",
+        "source_sha256": "sha256:b7533867e6dde3fde138799861be245467fbe58b8842005d840a9781f0d8c940",
+        "symbol": "GonieGonie.SimpleDragon.Internal.DomainSupport.FinitePositive"
+      },
+      "path": "src/idragon/utils.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify validate_range across its exact three-case utils core slice: inclusive upstream boundaries, None and non-finite behavior plus native finite positive boundary acceptance and rejection. The comparison directly verifies the generic permissive Python comparison decorator against finite typed native constructor boundaries.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:66feb17d7614e0b3196efb26be7d7bba482172a134d79a22c1fa7c5f685d5c40",
+          "id": "utils-core-validate-range-a5710a72",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UtilsCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:aae7d01a398d8112d15dbd7cae1ac88e6344bd02821ed5b783938982b7829056",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UtilsCoreOracleParityTests.MatchesPinnedPythonUtilsCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "validate_range",
+      "upstream_symbol_hash": "sha256:a5710a725c7060dead58c254874c24d8c82b0e25d08cc88abff1e68275fcb0b1"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Internal/DomainSupport.cs",
+        "source_sha256": "sha256:b7533867e6dde3fde138799861be245467fbe58b8842005d840a9781f0d8c940",
+        "symbol": "GonieGonie.SimpleDragon.Internal.DomainSupport.NotNull"
+      },
+      "path": "src/idragon/utils.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify validate_type across its exact three-case utils core slice: upstream union, subclass, bool, allow-none and wraps behavior plus native CLR type separation, nullable contracts and required-reference guards. The comparison directly verifies Python isinstance and decorator metadata behavior against compile-time CLR types, nullable annotations and native null guards.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:bf77783a47448806007032e24e7752003102b9ab4ecca842201635f9c3fadadd",
+          "id": "utils-core-validate-type-d2d6da05",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UtilsCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:aae7d01a398d8112d15dbd7cae1ac88e6344bd02821ed5b783938982b7829056",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UtilsCoreOracleParityTests.MatchesPinnedPythonUtilsCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "validate_type",
+      "upstream_symbol_hash": "sha256:d2d6da05e97ccf6815cd924a3c8e4502fcb9055aa771281f95f609cd11c6eb26"
     }
   ],
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 192,
-    "passed_receipt_count": 192,
-    "receipt_count": 192,
+    "entry_count": 196,
+    "passed_receipt_count": 196,
+    "receipt_count": 196,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

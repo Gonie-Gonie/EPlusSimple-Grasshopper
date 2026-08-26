@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(798, len(compatibility.needs_reverification))
+        self.assertEqual(794, len(compatibility.needs_reverification))
         self.assertEqual(
             103,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            89,
+            93,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -80,8 +80,12 @@ class ConfigurationTests(unittest.TestCase):
             )
         )
         self.assertEqual(
-            "needs_reverification",
+            "exception",
             by_key[("src/epsimple/utils.py", "GRJSON_FORMAT")].classification,
+        )
+        self.assertEqual(
+            "immutable-validated-grm-template",
+            by_key[("src/epsimple/utils.py", "GRJSON_FORMAT")].exception_id,
         )
         terminal_scope = {
             (

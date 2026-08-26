@@ -547,7 +547,7 @@
     "out_of_scope",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
+    "exception",
     "out_of_scope",
     "out_of_scope",
     "out_of_scope",
@@ -1217,7 +1217,6 @@
     "needs_reverification",
     "needs_reverification",
     "out_of_scope",
-    "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1240,10 +1239,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification"
+    "exception",
+    "exception",
+    "exception"
   ],
-  "content_sha256": "sha256:ae3fa6785dfd561aa418c040909a5662982f8d2e3e9f9cad96715d3f1b72da53",
+  "content_sha256": "sha256:2bc9e2cecf5052862602b347154844c15d73e0484bdf4ff10f7a047a12e3209d",
   "details": [
     {
       "evidence": [
@@ -2590,6 +2590,15 @@
       ],
       "index": 546,
       "rationale": "The historical Python import/call or Excel adapter contract is outside the compiled Grasshopper product scope; its underlying engineering domains are reviewed under their own symbols."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-validated-grm-template",
+        "upstream/symbol-evidence.json#utils-core-grjson-format-6c3ef8ba"
+      ],
+      "exception_id": "immutable-validated-grm-template",
+      "index": 547,
+      "rationale": "Trusted cross-language evidence verifies GRJSON_FORMAT across the exact three-case utils core slice: the exact ordered legacy defaults and collection topology, its 304-byte compact serialization, fresh-call isolation and deep read-only behavior, and directly observes the process-global mutable Python seed against a fresh deeply immutable native legacy template."
     },
     {
       "evidence": [
@@ -4530,6 +4539,33 @@
       ],
       "index": 1216,
       "rationale": "This exact declaration implements the pandas-linked IDF editing adapter that is explicitly outside scope. Authoring-IDF meaning and reference topology remain subject to the semantic differential gate."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#strongly-typed-native-enum-validation",
+        "upstream/symbol-evidence.json#utils-core-validate-enum-8b3b34b6"
+      ],
+      "exception_id": "strongly-typed-native-enum-validation",
+      "index": 1239,
+      "rationale": "Trusted cross-language evidence verifies validate_enum across the exact three-case utils core slice: upstream member, raw-value, literal and None behavior plus native nullable typed enum, vocabulary parsing and undefined-value rejection, and directly observes Python runtime Enum and raw-value decoration against closed CLR enums, explicit vocabulary parsing and fail-closed undefined-value guards."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#finite-native-range-validation",
+        "upstream/symbol-evidence.json#utils-core-validate-range-a5710a72"
+      ],
+      "exception_id": "finite-native-range-validation",
+      "index": 1240,
+      "rationale": "Trusted cross-language evidence verifies validate_range across the exact three-case utils core slice: inclusive upstream boundaries, None and non-finite behavior plus native finite positive boundary acceptance and rejection, and directly observes the generic permissive Python comparison decorator against finite typed native constructor boundaries."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#strongly-typed-native-type-validation",
+        "upstream/symbol-evidence.json#utils-core-validate-type-d2d6da05"
+      ],
+      "exception_id": "strongly-typed-native-type-validation",
+      "index": 1241,
+      "rationale": "Trusted cross-language evidence verifies validate_type across the exact three-case utils core slice: upstream union, subclass, bool, allow-none and wraps behavior plus native CLR type separation, nullable contracts and required-reference guards, and directly observes Python isinstance and decorator metadata behavior against compile-time CLR types, nullable annotations and native null guards."
     }
   ],
   "entry_order": "public-symbol-inventory.symbols",
@@ -4539,8 +4575,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 103,
-      "exception": 89,
-      "needs_reverification": 798,
+      "exception": 93,
+      "needs_reverification": 794,
       "out_of_scope": 252
     },
     "entry_count": 1242
