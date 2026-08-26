@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:ad47bf699e86e22360da580436c6bc5b89ffb3b3cbd9f9fb0a63a9926e7a012e",
+  "content_sha256": "sha256:fcc207773e60363a18f22995543f8a417843a1af719a229830ea0399af3b66fd",
   "entries": [
     {
       "implementation": {
@@ -1040,6 +1040,32 @@
       ],
       "symbol": "Material.__eq__",
       "upstream_symbol_hash": "sha256:6ef680a2e300bcb56672f0d036de1b4aea3630cb90a635a3e45002ff8535dbf5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs",
+        "source_sha256": "sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.ToIdfObjects"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify PhotoVoltaicPanel.to_idf_object across its exact three-case valid-domain slice. The upstream complete field counts [8,5,7,151,5,21] and native compact counts [8,4,4,4,5,8] preserve all 33 present fields semantically and exactly; the 164 omissions are exhaustively split into 158 None or blank fields and six independently verified official EnergyPlus 24.2 IDD defaults, including the 145-None extensible generator-tail subset. Six-object order, linkage, angle and efficiency boundaries, default and custom effective-area ratios, square-root geometry, freshness, determinism and immutable source state are verified without claiming the class, constructor, properties, invalid or non-finite state, validation ordering or diagnostics, isolated IdfObject behavior, or parent EnergyModel orchestration.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b63907907fbfc7fc743992e23c1bd44bf38e45dc535cbdf0c4b3f2ccd2ef08eb",
+          "id": "dragon-hvac-photovoltaic-to-idf-object-4723273d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/PhotovoltaicPanelToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:1ae59827f4f3dbdf355a9202dc63681750ac778ead61c5326d0a3ef495c49f05",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.PhotovoltaicPanelToIdfObjectOracleParityTests.MatchesPinnedPythonPhotovoltaicEmissionWithOfficialIddDefaults",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "PhotoVoltaicPanel.to_idf_object",
+      "upstream_symbol_hash": "sha256:4723273d4b77d9286d4a47c4d753f71049e87d146ff912b0aa6a8ab8ed911287"
     },
     {
       "implementation": {
@@ -6609,9 +6635,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 254,
-    "passed_receipt_count": 254,
-    "receipt_count": 254,
+    "entry_count": 255,
+    "passed_receipt_count": 255,
+    "receipt_count": 255,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

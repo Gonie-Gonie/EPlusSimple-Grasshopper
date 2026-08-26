@@ -761,7 +761,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:b0a4b79e037716efc6ba023fe1cf6e7521b64b6c7499cc73c14736bef71aa0bf",
+  "content_sha256": "sha256:25cb62380522759f99805b129606468385bcd6c4b501f56399877b48f0516cde",
   "details": [
     {
       "evidence": [
@@ -2962,6 +2962,15 @@
       ],
       "index": 755,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#compact-native-photovoltaic-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-photovoltaic-to-idf-object-4723273d"
+      ],
+      "exception_id": "compact-native-photovoltaic-idf-emission",
+      "index": 761,
+      "rationale": "Trusted cross-language evidence verifies all 33 native-present fields, exact six-object order and linkage, boundary and custom inputs, default and custom effective-area ratios, square-root geometry, freshness, determinism and source immutability across the bounded valid domain. The 164 compact omissions are exhaustively partitioned into 158 Python None or blank fields and six independently verified official EnergyPlus 24.2 IDD defaults, including the 145-None extensible generator tail; the class, constructor, properties, invalid and non-finite state, validation behavior, isolated IdfObject policy and parent EnergyModel orchestration remain separately unresolved."
     },
     {
       "evidence": [
@@ -5037,8 +5046,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 133,
-      "exception": 121,
-      "needs_reverification": 736,
+      "exception": 122,
+      "needs_reverification": 735,
       "out_of_scope": 252
     },
     "entry_count": 1242

@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(736, len(compatibility.needs_reverification))
+        self.assertEqual(735, len(compatibility.needs_reverification))
         self.assertEqual(
             133,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            121,
+            122,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -176,6 +176,30 @@ class ConfigurationTests(unittest.TestCase):
                 "upstream/symbol-evidence.json#dragon-model-add-supply-system-174532d0",
             ),
             add_supply_system.evidence,
+        )
+        photovoltaic_to_idf_key = (
+            "src/idragon/dragon/hvac.py",
+            "PhotoVoltaicPanel.to_idf_object",
+        )
+        photovoltaic_to_idf = by_key[photovoltaic_to_idf_key]
+        self.assertEqual(
+            photovoltaic_to_idf_key,
+            compatibility.inventory.symbols[761].key,
+        )
+        self.assertEqual(photovoltaic_to_idf, compatibility.matrix.entries[761])
+        self.assertEqual("exception", photovoltaic_to_idf.classification)
+        self.assertEqual(
+            "compact-native-photovoltaic-idf-emission",
+            photovoltaic_to_idf.exception_id,
+        )
+        self.assertEqual(
+            (
+                "upstream/compatibility-exceptions.yml#"
+                "compact-native-photovoltaic-idf-emission",
+                "upstream/symbol-evidence.json#"
+                "dragon-hvac-photovoltaic-to-idf-object-4723273d",
+            ),
+            photovoltaic_to_idf.evidence,
         )
         expected_supply_group_core = {
             "SupplyGroup.__init__": (
