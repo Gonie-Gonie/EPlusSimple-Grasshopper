@@ -221,17 +221,17 @@ public static class BatchDeterminism
         string weatherIdentity = CanonicalizeOptions(new Dictionary<string, string>(StringComparer.Ordinal)
         {
             ["administrative_area"] = metadata.AdministrativeArea,
-            ["administrative_latitude"] = metadata.AdministrativeLatitude.ToString("R", CultureInfo.InvariantCulture),
-            ["administrative_longitude"] = metadata.AdministrativeLongitude.ToString("R", CultureInfo.InvariantCulture),
+            ["administrative_latitude"] = CanonicalDouble.Format(metadata.AdministrativeLatitude),
+            ["administrative_longitude"] = CanonicalDouble.Format(metadata.AdministrativeLongitude),
             ["climate_effective_date"] = weather.ClimateEffectiveDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
             ["climate_region"] = weather.ClimateRegion,
             ["epw_file_name"] = metadata.EpwFileName,
             ["legal_district_code"] = metadata.LegalDistrictCode,
             ["terrain"] = metadata.Terrain,
-            ["weather_latitude"] = metadata.WeatherLatitude.ToString("R", CultureInfo.InvariantCulture),
+            ["weather_latitude"] = CanonicalDouble.Format(metadata.WeatherLatitude),
             ["weather_location"] = metadata.WeatherLocation,
             ["weather_location_type"] = metadata.WeatherLocationType,
-            ["weather_longitude"] = metadata.WeatherLongitude.ToString("R", CultureInfo.InvariantCulture),
+            ["weather_longitude"] = CanonicalDouble.Format(metadata.WeatherLongitude),
             ["weather_metadata_id"] = metadata.Id.Value,
         });
         return grm + "\n{\"effective_weather_override\":" + weatherIdentity + "}";

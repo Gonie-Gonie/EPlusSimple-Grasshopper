@@ -53,7 +53,7 @@ public sealed class EnergyPlusBatchCaseExecutor : IBatchCaseExecutor
             {
                 ["cleanup_policy"] = EnergyPlusCleanupPolicy.DeleteOnSuccess.ToString(),
                 ["maximum_captured_artifact_bytes"] = maximumCapturedArtifactBytes.ToString(CultureInfo.InvariantCulture),
-                ["timeout_seconds"] = _timeout.TotalSeconds.ToString("R", CultureInfo.InvariantCulture),
+                ["timeout_seconds"] = CanonicalDouble.Format(_timeout.TotalSeconds),
             });
         CanonicalOutputOptions = BatchDeterminism.CanonicalizeOptions(
             new Dictionary<string, string>(StringComparer.Ordinal)

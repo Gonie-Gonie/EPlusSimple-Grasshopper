@@ -52,7 +52,7 @@ public static class GrmWriter
     {
         writer.WriteStartObject();
         writer.WriteString("name", model.Name);
-        writer.WriteNumber("north_axis", model.NorthAxis);
+        CanonicalDouble.Write(writer, "north_axis", model.NorthAxis);
         writer.WriteString("address", model.Address);
         writer.WritePropertyName("vintage");
         writer.WriteStartArray();
@@ -80,9 +80,9 @@ public static class GrmWriter
             writer.WriteStartObject();
             writer.WriteString("id", system.Id.Value);
             writer.WriteString("name", system.Name);
-            writer.WriteNumber("airflow_rate", system.AirflowRate);
-            writer.WriteNumber("efficiency_heating", system.HeatingEfficiency);
-            writer.WriteNumber("efficiency_cooling", system.CoolingEfficiency);
+            CanonicalDouble.Write(writer, "airflow_rate", system.AirflowRate);
+            CanonicalDouble.Write(writer, "efficiency_heating", system.HeatingEfficiency);
+            CanonicalDouble.Write(writer, "efficiency_cooling", system.CoolingEfficiency);
             writer.WriteEndObject();
         }
 
@@ -94,10 +94,10 @@ public static class GrmWriter
             writer.WriteStartObject();
             writer.WriteString("id", system.Id.Value);
             writer.WriteString("name", system.Name);
-            writer.WriteNumber("area", system.Area);
-            writer.WriteNumber("efficiency", system.Efficiency);
-            writer.WriteNumber("azimuth", system.Azimuth);
-            writer.WriteNumber("tilt", system.Tilt);
+            CanonicalDouble.Write(writer, "area", system.Area);
+            CanonicalDouble.Write(writer, "efficiency", system.Efficiency);
+            CanonicalDouble.Write(writer, "azimuth", system.Azimuth);
+            CanonicalDouble.Write(writer, "tilt", system.Tilt);
             writer.WriteEndObject();
         }
 
@@ -125,7 +125,7 @@ public static class GrmWriter
         writer.WriteStartObject();
         writer.WriteString("id", zone.Id.Value);
         writer.WriteString("name", zone.Name);
-        writer.WriteNumber("height", zone.Height);
+        CanonicalDouble.Write(writer, "height", zone.Height);
         writer.WriteString("profile", zone.ProfileName);
         WriteNullableNumber(writer, "light_density", zone.LightDensity);
         writer.WritePropertyName("supply_system_ids");
@@ -165,11 +165,11 @@ public static class GrmWriter
         writer.WriteString("name", surface.Name);
         writer.WriteString("type", GrmVocabulary.ToGrm(surface.Type));
         writer.WriteString("boundary_condition", GrmVocabulary.ToGrm(surface.BoundaryCondition));
-        writer.WriteNumber("area", surface.Area);
+        CanonicalDouble.Write(writer, "area", surface.Area);
         if (surface.Type == SurfaceType.Wall
             && surface.BoundaryCondition == SurfaceBoundaryCondition.Outdoors)
         {
-            writer.WriteNumber("azimuth", surface.Azimuth!.Value);
+            CanonicalDouble.Write(writer, "azimuth", surface.Azimuth!.Value);
         }
 
         if (surface.BoundaryCondition == SurfaceBoundaryCondition.Zone
@@ -201,7 +201,7 @@ public static class GrmWriter
             writer.WriteString("id", opening.Id.Value);
             writer.WriteString("name", opening.Name);
             writer.WriteString("type", GrmVocabulary.ToGrm(opening.Type));
-            writer.WriteNumber("area", opening.Area);
+            CanonicalDouble.Write(writer, "area", opening.Area);
             if (opening.Type != FenestrationType.Door)
             {
                 if (opening.Blind.HasValue)
@@ -367,9 +367,9 @@ public static class GrmWriter
             writer.WriteStartObject();
             writer.WriteString("id", material.Id.Value);
             writer.WriteString("name", material.Name);
-            writer.WriteNumber("conductivity", material.Conductivity);
-            writer.WriteNumber("density", material.Density);
-            writer.WriteNumber("specific_heat", material.SpecificHeat);
+            CanonicalDouble.Write(writer, "conductivity", material.Conductivity);
+            CanonicalDouble.Write(writer, "density", material.Density);
+            CanonicalDouble.Write(writer, "specific_heat", material.SpecificHeat);
             writer.WriteEndObject();
         }
 
@@ -392,7 +392,7 @@ public static class GrmWriter
             {
                 writer.WriteStartObject();
                 writer.WriteString("material_id", layer.Material.Id.Value);
-                writer.WriteNumber("thickness", layer.Thickness);
+                CanonicalDouble.Write(writer, "thickness", layer.Thickness);
                 writer.WriteEndObject();
             }
 
@@ -414,7 +414,7 @@ public static class GrmWriter
             writer.WriteString("id", construction.Id.Value);
             writer.WriteString("name", construction.Name);
             writer.WriteBoolean("is_transparent", construction.IsTransparent);
-            writer.WriteNumber("u", construction.UValue);
+            CanonicalDouble.Write(writer, "u", construction.UValue);
             WriteNullableNumber(writer, "g", construction.SolarHeatGainCoefficient);
             writer.WriteEndObject();
         }
@@ -438,7 +438,7 @@ public static class GrmWriter
     {
         if (value.HasValue)
         {
-            writer.WriteNumber(name, value.Value);
+            CanonicalDouble.Write(writer, name, value.Value);
         }
         else
         {

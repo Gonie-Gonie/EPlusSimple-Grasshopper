@@ -750,41 +750,7 @@ public static class GreenRetrofitConverter
 
         private static string FormatPythonFloat(double value)
         {
-            // Python 3 uses the shortest decimal that round-trips to the same
-            // binary float and retains a decimal marker for integral floats.
-            for (int precision = 1; precision <= 17; precision++)
-            {
-                string text = value.ToString(
-                    "G" + precision.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                    System.Globalization.CultureInfo.InvariantCulture);
-                if (double.Parse(
-                        text,
-                        System.Globalization.NumberStyles.Float,
-                        System.Globalization.CultureInfo.InvariantCulture) != value)
-                {
-                    continue;
-                }
-
-                text = text.ToLowerInvariant();
-                int exponent = text.IndexOf('e');
-                double magnitude = Math.Abs(value);
-                if (exponent >= 0 && magnitude >= 1.0e-4d && magnitude < 1.0e16d)
-                {
-                    continue;
-                }
-                if (exponent >= 0)
-                {
-                    string mantissa = text.Substring(0, exponent);
-                    string exponentValue = text.Substring(exponent + 1);
-                    char sign = exponentValue[0];
-                    string digits = exponentValue.Substring(1).TrimStart('0');
-                    return mantissa + "e" + sign + (digits.Length == 0 ? "0" : digits);
-                }
-
-                return text.Contains('.') ? text : text + ".0";
-            }
-
-            throw new InvalidOperationException("A finite Python-compatible float representation was not found.");
+            return CanonicalDouble.FormatPythonFloat(value);
         }
 
         private DragonLayer ConvertLayer(Material material, double thickness, string layerName)

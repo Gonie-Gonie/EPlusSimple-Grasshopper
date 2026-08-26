@@ -360,7 +360,7 @@ public static class GreenRetrofitCsvExporter
             writer.WriteString("csv_encoding", "utf-8-bom");
             writer.WriteString("manifest_encoding", "utf-8");
             writer.WriteString("line_endings", "lf");
-            writer.WriteString("numeric_format", "invariant-roundtrip");
+            writer.WriteString("numeric_format", "canonical-ieee754-shortest");
             writer.WriteString("enum_format", "stable-snake-case");
             writer.WriteBoolean("explicit_trigger_required", true);
             writer.WriteBoolean("explicit_overwrite_required", true);
@@ -375,8 +375,8 @@ public static class GreenRetrofitCsvExporter
                 writer.WriteStartObject();
                 writer.WriteString("id", model.Id.Value);
                 writer.WriteString("name", model.Name);
-                writer.WriteNumber("area_m2", model.Area);
-                writer.WriteNumber("north_axis_degrees", model.NorthAxis);
+                CanonicalDouble.Write(writer, "area_m2", model.Area);
+                CanonicalDouble.Write(writer, "north_axis_degrees", model.NorthAxis);
                 writer.WriteString(
                     "sha256",
                     Sha256(Encoding.UTF8.GetBytes(GrmWriter.Serialize(model, indented: false))));
@@ -385,7 +385,7 @@ public static class GreenRetrofitCsvExporter
 
             writer.WritePropertyName("result");
             writer.WriteStartObject();
-            writer.WriteNumber("total_area_m2", result.TotalArea);
+            CanonicalDouble.Write(writer, "total_area_m2", result.TotalArea);
             writer.WriteString(
                 "sha256",
                 Sha256(Encoding.UTF8.GetBytes(GrrWriter.Serialize(result, writeIndented: false))));
@@ -557,7 +557,7 @@ public static class GreenRetrofitCsvExporter
 
     private static string BasisName(bool gross) => gross ? "gross" : "per_area";
 
-    private static string Number(double value) => value.ToString("R", CultureInfo.InvariantCulture);
+    private static string Number(double value) => CanonicalDouble.Format(value);
 
     private static string Integer(int value) => value.ToString(CultureInfo.InvariantCulture);
 

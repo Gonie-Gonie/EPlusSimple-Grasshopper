@@ -116,6 +116,16 @@ internal static class DeterministicDomainId
             return dateTime.ToString("yyyyMMdd", CultureInfo.InvariantCulture);
         }
 
+        if (value is double doubleValue)
+        {
+            return CanonicalDouble.Format(doubleValue);
+        }
+
+        if (value is float singleValue)
+        {
+            return CanonicalDouble.Format(singleValue);
+        }
+
         if (value is IFormattable formattable)
         {
             return formattable.ToString(null, CultureInfo.InvariantCulture) ?? string.Empty;

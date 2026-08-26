@@ -91,6 +91,9 @@ public sealed class GreenRetrofitCsvExporterTests
         Assert.Equal(GreenRetrofitCsvExporter.ManifestSchemaVersion, root.GetProperty("schema_version").GetString());
         Assert.Equal("서울,case", root.GetProperty("case_id").GetString());
         Assert.Equal(model.Id.Value, root.GetProperty("model").GetProperty("id").GetString());
+        Assert.Equal(
+            "canonical-ieee754-shortest",
+            root.GetProperty("export_options").GetProperty("numeric_format").GetString());
         Assert.Equal(64, root.GetProperty("model").GetProperty("sha256").GetString()!.Length);
         Assert.Equal(64, root.GetProperty("result").GetProperty("sha256").GetString()!.Length);
         Assert.Equal(7, root.GetProperty("files").GetArrayLength());

@@ -620,7 +620,7 @@ internal static class BatchCache
             writer.WriteStartObject("metrics");
             foreach (KeyValuePair<string, double> metric in metrics.OrderBy(item => item.Key, StringComparer.Ordinal))
             {
-                writer.WriteNumber(metric.Key, metric.Value);
+                CanonicalDouble.Write(writer, metric.Key, metric.Value);
             }
 
             writer.WriteEndObject();
@@ -677,7 +677,7 @@ internal static class BatchOutputWriter
             foreach (string metricName in metricNames)
             {
                 values.Add(item.Metrics.TryGetValue(metricName, out double value)
-                    ? value.ToString("R", CultureInfo.InvariantCulture)
+                    ? CanonicalDouble.Format(value)
                     : string.Empty);
             }
 
@@ -745,7 +745,7 @@ internal static class BatchOutputWriter
                 writer.WriteStartObject("metrics");
                 foreach (KeyValuePair<string, double> metric in item.Metrics)
                 {
-                    writer.WriteNumber(metric.Key, metric.Value);
+                    CanonicalDouble.Write(writer, metric.Key, metric.Value);
                 }
 
                 writer.WriteEndObject();

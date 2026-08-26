@@ -41,7 +41,7 @@ public static class GrrWriter
         writer.WriteStartObject();
         writer.WritePropertyName("building");
         writer.WriteStartObject();
-        writer.WriteNumber("total_area", result.TotalArea);
+        CanonicalDouble.Write(writer, "total_area", result.TotalArea);
         writer.WriteEndObject();
         WriteConstants(writer);
         foreach (GreenRetrofitMetric metric in GrrVocabulary.Metrics)
@@ -74,7 +74,7 @@ public static class GrrWriter
         writer.WriteStartObject();
         foreach (EnergyCarrier carrier in GrrVocabulary.Carriers)
         {
-            writer.WriteNumber(GrrVocabulary.CarrierConstantName(carrier), factor(carrier));
+            CanonicalDouble.Write(writer, GrrVocabulary.CarrierConstantName(carrier), factor(carrier));
         }
 
         writer.WriteEndObject();
@@ -113,21 +113,23 @@ public static class GrrWriter
             writer.WriteStartObject();
             foreach (EnergyCarrier carrier in GrrVocabulary.Carriers)
             {
-                writer.WriteNumber(
+                CanonicalDouble.Write(
+                    writer,
                     GrrVocabulary.CarrierDataName(carrier),
                     summary.CarrierTotals[carrier]);
             }
 
             foreach (EnergyEndUse endUse in GrrVocabulary.EndUses)
             {
-                writer.WriteNumber(
+                CanonicalDouble.Write(
+                    writer,
                     GrrVocabulary.EndUseName(endUse),
                     summary.EndUseTotals[endUse]);
             }
 
             writer.WritePropertyName("total_monthly");
             WriteMonthly(writer, summary.MonthlyTotal);
-            writer.WriteNumber("total_annual", summary.AnnualTotal);
+            CanonicalDouble.Write(writer, "total_annual", summary.AnnualTotal);
             writer.WriteEndObject();
         }
 
@@ -139,7 +141,7 @@ public static class GrrWriter
         writer.WriteStartArray();
         foreach (double value in monthly)
         {
-            writer.WriteNumberValue(value);
+            CanonicalDouble.WriteValue(writer, value);
         }
 
         writer.WriteEndArray();
