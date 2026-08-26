@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:7662e4f911088d29ce425ba58a33a57e8a32cdb46b574ccc267833dd3acd1281",
+  "content_sha256": "sha256:d972083d1873a4607d578bd1ad3235e8d2b66af8ad2825367867327286977f6d",
   "entries": [
     {
       "implementation": {
@@ -702,6 +702,214 @@
       ],
       "symbol": "Version.to_version_anyway",
       "upstream_symbol_hash": "sha256:d59930546366ae649f0b4c1b7f0c3e38b46194099dc987873b519e47883fcc61"
+    },
+    {
+      "implementation": {
+        "path": "src/Shared/GonieGonie.EnergyPlus.Runtime/RuntimeResolver.cs",
+        "source_sha256": "sha256:5c4170c2f4648a5fab93ff092c2c307589bd909d436437ccc66280bf4ac487f6",
+        "symbol": "GonieGonie.EnergyPlus.Runtime.RuntimeResolver"
+      },
+      "path": "src/idragon/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Directory across exact C01, C03, and C04, with C02 relocation context. Adaptation family resolved-native-runtime-and-resource-layout classifies the bounded native API difference. Python class mutation, instance shadowing, frozen or zip loaders, alternate filesystem semantics, and concurrent mutation are not preserved. The canonical direct receipt is sha256:b010e27fab04726eca7bad08cc9862c6f9614f44bd86658c6fa519f909de7c58; no live EnergyPlus installation or execution is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1260f23bad5142f44afb51fbbaf1a335b256712d9d1fe3670f3c84f238ecc1ae",
+          "id": "constants-metadata-568-5b876ad7",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/ConstantsMetadataOracleParityTests.cs",
+          "test_source_sha256": "sha256:fe0809967c5fcc94c70e1805a215e670d709dbf72d3ba1888d78b5bd55e404ef",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests.MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Directory",
+      "upstream_symbol_hash": "sha256:5b876ad7fd9b11f66cc01ecb6c43d4e143b6f0258ba070c02551d968dd68aaf6"
+    },
+    {
+      "implementation": {
+        "path": "src/Shared/GonieGonie.EnergyPlus.Runtime/EnergyPlusRuntimeLayout.cs",
+        "source_sha256": "sha256:3b2beace10108918cfc69b06be42da966fc138e3f2fcff1c9bf39d2d5cdce84c",
+        "symbol": "GonieGonie.EnergyPlus.Runtime.EnergyPlusRuntimeLayout.RootPath"
+      },
+      "path": "src/idragon/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Directory.ENERGYPLUS_DIR across exact C01 through C03, with C04 construction context and two test-owned synthetic runtime roots. Adaptation family explicit-validated-native-energyplus-runtime-root classifies the bounded native API difference. Import-time Python path identity and mutability, external filesystem races, and live EnergyPlus availability or execution remain unresolved. The canonical direct receipt is sha256:e245c641ed9b9a37d6e2f7f17c52f6f44ae274516b4edfe740c4866e81436960.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9197d216c12052e6553557ef964bd06d48f09c212f4598773f1d7f299e763eba",
+          "id": "constants-metadata-569-7e01ceac",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/ConstantsMetadataOracleParityTests.cs",
+          "test_source_sha256": "sha256:fe0809967c5fcc94c70e1805a215e670d709dbf72d3ba1888d78b5bd55e404ef",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests.MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Directory.ENERGYPLUS_DIR",
+      "upstream_symbol_hash": "sha256:7e01ceac3f311fa9fbf2fde2b25cc1c7cd16c3b3f16a3dae9f55531d25ecef5d"
+    },
+    {
+      "implementation": {
+        "path": "src/Shared/GonieGonie.EnergyPlus.Runtime/EnergyPlusRuntimeLayout.cs",
+        "source_sha256": "sha256:3b2beace10108918cfc69b06be42da966fc138e3f2fcff1c9bf39d2d5cdce84c",
+        "symbol": "GonieGonie.EnergyPlus.Runtime.EnergyPlusRuntimeLayout.IddPath"
+      },
+      "path": "src/idragon/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Directory.IDD_DIR across exact C01 through C03, with C04 construction context and two test-owned synthetic runtime roots. Adaptation family validated-native-idd-path-resolution classifies the bounded native API difference. Import-time Python path identity and mutability, external filesystem races, and live EnergyPlus availability or execution remain unresolved. The canonical direct receipt is sha256:bcdb44f08ca85537eca206313be08bf31384dec386fd842bce38e96b3553d1f9.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:ef814651c1d0e843ae53c9dd6fc834ccd2271ea975d2e132d809d644eb53cc88",
+          "id": "constants-metadata-570-1f0c2815",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/ConstantsMetadataOracleParityTests.cs",
+          "test_source_sha256": "sha256:fe0809967c5fcc94c70e1805a215e670d709dbf72d3ba1888d78b5bd55e404ef",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests.MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Directory.IDD_DIR",
+      "upstream_symbol_hash": "sha256:1f0c2815e4e0732316c71edc653a9a35e5081466805dfbf900c10971f1d171d5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Profile.cs",
+        "source_sha256": "sha256:99c3e0557ba737aa74cfb0f15faf0730d9f7215a6b66f7f6b6b2044cf4013c72",
+        "symbol": "GonieGonie.InvisibleDragon.Profile.Profile"
+      },
+      "path": "src/idragon/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Directory.PROFILE_DIR across exact C01 through C03, with C04 construction context and a real typed native Profile instance. Adaptation family typed-native-profile-data-without-package-profile-directory classifies the bounded native API difference. Bundled Python profile-directory layout and loading, filesystem races, and arbitrary class or instance mutation are not preserved. The canonical direct receipt is sha256:5536cae6af137a72c7c927cc4221cd1eea35e0f541b74922275683420ec267eb.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0c358b1bdfba0186aaf1fbae8d5c9768b2e34c3528cf02df1b720e145eabb25d",
+          "id": "constants-metadata-571-f65d5eae",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/ConstantsMetadataOracleParityTests.cs",
+          "test_source_sha256": "sha256:fe0809967c5fcc94c70e1805a215e670d709dbf72d3ba1888d78b5bd55e404ef",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests.MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Directory.PROFILE_DIR",
+      "upstream_symbol_hash": "sha256:f65d5eaefa2bc1cbb6f0c9b5904624194a1551f48e7966c7973d35526bad4fa6"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
+        "source_sha256": "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
+        "symbol": "GonieGonie.InvisibleDragon.PackageInfo"
+      },
+      "path": "src/idragon/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo across exact C05 through C07, with C08 through C10 as member-operation context. Adaptation family static-native-package-information classifies the bounded native API difference. Python construction, instance shadowing, class-attribute replacement, custom descriptors, and concurrent mutation are not preserved. The canonical direct receipt is sha256:a3741a5a5870ff30f6e840e266c436abda507ff96c93e974cbc68df211e28168.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9add953f90477a1c6294d5c2eba362c862fa6f0aef2bd1b25c4f598ac5d3910f",
+          "id": "constants-metadata-572-aaf5b98d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/ConstantsMetadataOracleParityTests.cs",
+          "test_source_sha256": "sha256:fe0809967c5fcc94c70e1805a215e670d709dbf72d3ba1888d78b5bd55e404ef",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests.MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "PackageInfo",
+      "upstream_symbol_hash": "sha256:aaf5b98d4a7dc29f83b698f1fb2881b7bb258885bd2aaf17a53b6da902d1eda1"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
+        "source_sha256": "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
+        "symbol": "GonieGonie.InvisibleDragon.PackageInfo.Name"
+      },
+      "path": "src/idragon/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.NAME across exact C05, C06, and C08, with C07 construction context. Adaptation family native-invisibledragon-package-name classifies the intentional product-name difference. Exact Python hyphenated equality and string-operation results, class mutation, deletion, and instance shadowing are not preserved. The canonical direct receipt is sha256:1539ac6658af20566740884fc3f1d4802e99a0a96b9760a06d69f0f37420804b.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:ce337d684f985b7fe8402969f81e473a06ad4a872a1fb0acf66469ddf6f58d73",
+          "id": "constants-metadata-573-3942a963",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/ConstantsMetadataOracleParityTests.cs",
+          "test_source_sha256": "sha256:fe0809967c5fcc94c70e1805a215e670d709dbf72d3ba1888d78b5bd55e404ef",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests.MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "PackageInfo.NAME",
+      "upstream_symbol_hash": "sha256:3942a963fcf59af7b1a181bea940b7a883dec4f7059b042451842334e47768cd"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
+        "source_sha256": "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
+        "symbol": "GonieGonie.InvisibleDragon.PackageInfo"
+      },
+      "path": "src/idragon/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.REQUIRED_PYTHON across exact C05, C06, and C10, with C07 construction context. Adaptation family compiled-native-target-framework-contract classifies the absence of a Python runtime dependency in the compiled product. Python runtime gating, tuple comparison and error parity, replaced tuple members, and unpinned native frameworks are not claimed. The canonical direct receipt is sha256:c666b0f9e6499a34acc0a98f3f01584e73add9a9d64dd3e66842e79012714aad.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d16c7e2050430c23a42db97ee0e60db6e4b9d34667a037539879581bdbeaf7aa",
+          "id": "constants-metadata-574-cf74d0eb",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/ConstantsMetadataOracleParityTests.cs",
+          "test_source_sha256": "sha256:fe0809967c5fcc94c70e1805a215e670d709dbf72d3ba1888d78b5bd55e404ef",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests.MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "PackageInfo.REQUIRED_PYTHON",
+      "upstream_symbol_hash": "sha256:cf74d0eb707a3668aa515bdd31d767109337841bcf28f03b96c6e9264d9407a4"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
+        "source_sha256": "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
+        "symbol": "GonieGonie.InvisibleDragon.PackageInfo.Version"
+      },
+      "path": "src/idragon/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.VERSION across exact C05, C06, and C09, with C07 construction context. Adaptation family native-semantic-version-string classifies the intentional native release-line and representation difference. Python 0.7.0 tuple equality, ordering, concatenation, item errors, class mutation, deletion, and instance shadowing are not preserved. The canonical direct receipt is sha256:9ab52755f1c9d6600068d446d4df9420aa0c37df3a365668dc241334f5ca63d7.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:450d23845ac4b76a1a1b9b129d52ef1fc8f824d22eb94a17f43126bb22caab00",
+          "id": "constants-metadata-575-a8260e5f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/ConstantsMetadataOracleParityTests.cs",
+          "test_source_sha256": "sha256:fe0809967c5fcc94c70e1805a215e670d709dbf72d3ba1888d78b5bd55e404ef",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests.MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "PackageInfo.VERSION",
+      "upstream_symbol_hash": "sha256:a8260e5f38f8422e1ac38ce24fd0136b4bb3a4de24f268e9a262aa6034031ea4"
     },
     {
       "implementation": {
@@ -8715,9 +8923,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 335,
-    "passed_receipt_count": 335,
-    "receipt_count": 335,
+    "entry_count": 343,
+    "passed_receipt_count": 343,
+    "receipt_count": 343,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

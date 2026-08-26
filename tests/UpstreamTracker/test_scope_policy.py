@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:b202762913ec5ae4921e45b5581c1391432cc14f7c0787010c75671fc713976a"
+    "sha256:55bb7e5e2eeb5990239a72416d96dd5ddd46fcb1ae61627ba1caa4bee56a19f9"
 )
 
 
@@ -69,8 +69,8 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(
             {
                 "equivalent": 136,
-                "exception": 199,
-                "needs_reverification": 655,
+                "exception": 207,
+                "needs_reverification": 647,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -112,6 +112,64 @@ class SafeScopePolicyTests(unittest.TestCase):
             "needs_reverification",
             entries[("src/idragon/imugi.py", "IdfObjectList.set_wwr")].classification,
         )
+
+    def test_constants_metadata_promotion_preserves_adjacent_scope(self) -> None:
+        entries = self.configuration.matrix.entries
+        expected = {
+            568: ("Directory", "resolved-native-runtime-and-resource-layout"),
+            569: (
+                "Directory.ENERGYPLUS_DIR",
+                "explicit-validated-native-energyplus-runtime-root",
+            ),
+            570: ("Directory.IDD_DIR", "validated-native-idd-path-resolution"),
+            571: (
+                "Directory.PROFILE_DIR",
+                "typed-native-profile-data-without-package-profile-directory",
+            ),
+            572: ("PackageInfo", "static-native-package-information"),
+            573: ("PackageInfo.NAME", "native-invisibledragon-package-name"),
+            574: (
+                "PackageInfo.REQUIRED_PYTHON",
+                "compiled-native-target-framework-contract",
+            ),
+            575: ("PackageInfo.VERSION", "native-semantic-version-string"),
+        }
+        for index, (symbol, exception_id) in expected.items():
+            entry = entries[index]
+            self.assertEqual(("src/idragon/constants.py", symbol), entry.key)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+
+        for index, symbol in enumerate(
+            (
+                "SpecialTag",
+                "SpecialTag.__format__",
+                "SpecialTag.__repr__",
+                "SpecialTag.__str__",
+            ),
+            start=576,
+        ):
+            entry = entries[index]
+            self.assertEqual(("src/idragon/constants.py", symbol), entry.key)
+            self.assertEqual("out_of_scope", entry.classification, symbol)
+
+        for index, symbol in enumerate(
+            (
+                "Directory",
+                "Directory.CONSTRUCTION_DIR",
+                "Directory.PROFILE_DIR",
+                "Directory.WEATHER_DATA_DIR",
+                "Directory.WEATHER_META_DIR",
+                "PackageInfo",
+                "PackageInfo.NAME",
+                "PackageInfo.REQUIRED_PYTHON",
+                "PackageInfo.VERSION",
+            ),
+            start=31,
+        ):
+            entry = entries[index]
+            self.assertEqual(("src/epsimple/constants.py", symbol), entry.key)
+            self.assertEqual("needs_reverification", entry.classification, symbol)
 
     def test_terminal_scope_additions_are_exactly_bound(self) -> None:
         plan = build_safe_scope_plan(

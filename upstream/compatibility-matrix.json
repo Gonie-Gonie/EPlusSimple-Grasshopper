@@ -568,14 +568,14 @@
     "equivalent",
     "equivalent",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "out_of_scope",
     "out_of_scope",
     "out_of_scope",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:b202762913ec5ae4921e45b5581c1391432cc14f7c0787010c75671fc713976a",
+  "content_sha256": "sha256:55bb7e5e2eeb5990239a72416d96dd5ddd46fcb1ae61627ba1caa4bee56a19f9",
   "details": [
     {
       "evidence": [
@@ -2745,6 +2745,78 @@
       "exception_id": "strongly-typed-energyplus-version-coercion",
       "index": 567,
       "rationale": "Trusted cross-language evidence verifies Version.to_version_anyway across the exact three-case common-core slice: existing identity, strings, integer sequences and rejection behavior, and directly observes Python catch-all dynamic forwarding against closed typed From overloads and explicit collection validation."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#resolved-native-runtime-and-resource-layout",
+        "upstream/symbol-evidence.json#constants-metadata-568-5b876ad7"
+      ],
+      "exception_id": "resolved-native-runtime-and-resource-layout",
+      "index": 568,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Directory across exact C01, C03, and C04, with C02 relocation context. Adaptation family resolved-native-runtime-and-resource-layout classifies the bounded native API difference. Python class mutation, instance shadowing, frozen or zip loaders, alternate filesystem semantics, and concurrent mutation are not preserved. The canonical direct receipt is sha256:b010e27fab04726eca7bad08cc9862c6f9614f44bd86658c6fa519f909de7c58; no live EnergyPlus installation or execution is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#explicit-validated-native-energyplus-runtime-root",
+        "upstream/symbol-evidence.json#constants-metadata-569-7e01ceac"
+      ],
+      "exception_id": "explicit-validated-native-energyplus-runtime-root",
+      "index": 569,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Directory.ENERGYPLUS_DIR across exact C01 through C03, with C04 construction context and two test-owned synthetic runtime roots. Adaptation family explicit-validated-native-energyplus-runtime-root classifies the bounded native API difference. Import-time Python path identity and mutability, external filesystem races, and live EnergyPlus availability or execution remain unresolved. The canonical direct receipt is sha256:e245c641ed9b9a37d6e2f7f17c52f6f44ae274516b4edfe740c4866e81436960."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-native-idd-path-resolution",
+        "upstream/symbol-evidence.json#constants-metadata-570-1f0c2815"
+      ],
+      "exception_id": "validated-native-idd-path-resolution",
+      "index": 570,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Directory.IDD_DIR across exact C01 through C03, with C04 construction context and two test-owned synthetic runtime roots. Adaptation family validated-native-idd-path-resolution classifies the bounded native API difference. Import-time Python path identity and mutability, external filesystem races, and live EnergyPlus availability or execution remain unresolved. The canonical direct receipt is sha256:bcdb44f08ca85537eca206313be08bf31384dec386fd842bce38e96b3553d1f9."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#typed-native-profile-data-without-package-profile-directory",
+        "upstream/symbol-evidence.json#constants-metadata-571-f65d5eae"
+      ],
+      "exception_id": "typed-native-profile-data-without-package-profile-directory",
+      "index": 571,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Directory.PROFILE_DIR across exact C01 through C03, with C04 construction context and a real typed native Profile instance. Adaptation family typed-native-profile-data-without-package-profile-directory classifies the bounded native API difference. Bundled Python profile-directory layout and loading, filesystem races, and arbitrary class or instance mutation are not preserved. The canonical direct receipt is sha256:5536cae6af137a72c7c927cc4221cd1eea35e0f541b74922275683420ec267eb."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#static-native-package-information",
+        "upstream/symbol-evidence.json#constants-metadata-572-aaf5b98d"
+      ],
+      "exception_id": "static-native-package-information",
+      "index": 572,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo across exact C05 through C07, with C08 through C10 as member-operation context. Adaptation family static-native-package-information classifies the bounded native API difference. Python construction, instance shadowing, class-attribute replacement, custom descriptors, and concurrent mutation are not preserved. The canonical direct receipt is sha256:a3741a5a5870ff30f6e840e266c436abda507ff96c93e974cbc68df211e28168."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#native-invisibledragon-package-name",
+        "upstream/symbol-evidence.json#constants-metadata-573-3942a963"
+      ],
+      "exception_id": "native-invisibledragon-package-name",
+      "index": 573,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.NAME across exact C05, C06, and C08, with C07 construction context. Adaptation family native-invisibledragon-package-name classifies the intentional product-name difference. Exact Python hyphenated equality and string-operation results, class mutation, deletion, and instance shadowing are not preserved. The canonical direct receipt is sha256:1539ac6658af20566740884fc3f1d4802e99a0a96b9760a06d69f0f37420804b."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#compiled-native-target-framework-contract",
+        "upstream/symbol-evidence.json#constants-metadata-574-cf74d0eb"
+      ],
+      "exception_id": "compiled-native-target-framework-contract",
+      "index": 574,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.REQUIRED_PYTHON across exact C05, C06, and C10, with C07 construction context. Adaptation family compiled-native-target-framework-contract classifies the absence of a Python runtime dependency in the compiled product. Python runtime gating, tuple comparison and error parity, replaced tuple members, and unpinned native frameworks are not claimed. The canonical direct receipt is sha256:c666b0f9e6499a34acc0a98f3f01584e73add9a9d64dd3e66842e79012714aad."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#native-semantic-version-string",
+        "upstream/symbol-evidence.json#constants-metadata-575-a8260e5f"
+      ],
+      "exception_id": "native-semantic-version-string",
+      "index": 575,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.VERSION across exact C05, C06, and C09, with C07 construction context. Adaptation family native-semantic-version-string classifies the intentional native release-line and representation difference. Python 0.7.0 tuple equality, ordering, concatenation, item errors, class mutation, deletion, and instance shadowing are not preserved. The canonical direct receipt is sha256:9ab52755f1c9d6600068d446d4df9420aa0c37df3a365668dc241334f5ca63d7."
     },
     {
       "evidence": [
@@ -5760,8 +5832,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 136,
-      "exception": 199,
-      "needs_reverification": 655,
+      "exception": 207,
+      "needs_reverification": 647,
       "out_of_scope": 252
     },
     "entry_count": 1242

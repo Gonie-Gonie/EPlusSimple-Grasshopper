@@ -27,6 +27,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
+        self.assertEqual(213, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -40,7 +41,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(655, len(compatibility.needs_reverification))
+        self.assertEqual(647, len(compatibility.needs_reverification))
         self.assertEqual(
             136,
             sum(
@@ -49,7 +50,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            199,
+            207,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -58,10 +59,10 @@ class ConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(compatibility.symbol_evidence)
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
-        self.assertEqual(335, len(symbol_evidence.entries))
-        self.assertEqual(335, len(symbol_evidence.receipts))
+        self.assertEqual(343, len(symbol_evidence.entries))
+        self.assertEqual(343, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:7662e4f911088d29ce425ba58a33a57e8a32cdb46b574ccc267833dd3acd1281",
+            "sha256:d972083d1873a4607d578bd1ad3235e8d2b66af8ad2825367867327286977f6d",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -1116,6 +1117,193 @@ class ConfigurationTests(unittest.TestCase):
             "immutable-validated-grm-template",
             by_key[("src/epsimple/utils.py", "GRJSON_FORMAT")].exception_id,
         )
+        expected_constants_metadata = {
+            "Directory": (
+                568,
+                "resolved-native-runtime-and-resource-layout",
+                "constants-metadata-568-5b876ad7",
+                "sha256:b010e27fab04726eca7bad08cc9862c6f9614f44bd86658c6fa519f909de7c58",
+                "sha256:1260f23bad5142f44afb51fbbaf1a335b256712d9d1fe3670f3c84f238ecc1ae",
+                "src/Shared/GonieGonie.EnergyPlus.Runtime/RuntimeResolver.cs",
+                "GonieGonie.EnergyPlus.Runtime.RuntimeResolver",
+                "sha256:5c4170c2f4648a5fab93ff092c2c307589bd909d436437ccc66280bf4ac487f6",
+            ),
+            "Directory.ENERGYPLUS_DIR": (
+                569,
+                "explicit-validated-native-energyplus-runtime-root",
+                "constants-metadata-569-7e01ceac",
+                "sha256:e245c641ed9b9a37d6e2f7f17c52f6f44ae274516b4edfe740c4866e81436960",
+                "sha256:9197d216c12052e6553557ef964bd06d48f09c212f4598773f1d7f299e763eba",
+                "src/Shared/GonieGonie.EnergyPlus.Runtime/EnergyPlusRuntimeLayout.cs",
+                "GonieGonie.EnergyPlus.Runtime.EnergyPlusRuntimeLayout.RootPath",
+                "sha256:3b2beace10108918cfc69b06be42da966fc138e3f2fcff1c9bf39d2d5cdce84c",
+            ),
+            "Directory.IDD_DIR": (
+                570,
+                "validated-native-idd-path-resolution",
+                "constants-metadata-570-1f0c2815",
+                "sha256:bcdb44f08ca85537eca206313be08bf31384dec386fd842bce38e96b3553d1f9",
+                "sha256:ef814651c1d0e843ae53c9dd6fc834ccd2271ea975d2e132d809d644eb53cc88",
+                "src/Shared/GonieGonie.EnergyPlus.Runtime/EnergyPlusRuntimeLayout.cs",
+                "GonieGonie.EnergyPlus.Runtime.EnergyPlusRuntimeLayout.IddPath",
+                "sha256:3b2beace10108918cfc69b06be42da966fc138e3f2fcff1c9bf39d2d5cdce84c",
+            ),
+            "Directory.PROFILE_DIR": (
+                571,
+                "typed-native-profile-data-without-package-profile-directory",
+                "constants-metadata-571-f65d5eae",
+                "sha256:5536cae6af137a72c7c927cc4221cd1eea35e0f541b74922275683420ec267eb",
+                "sha256:0c358b1bdfba0186aaf1fbae8d5c9768b2e34c3528cf02df1b720e145eabb25d",
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Profile.cs",
+                "GonieGonie.InvisibleDragon.Profile.Profile",
+                "sha256:99c3e0557ba737aa74cfb0f15faf0730d9f7215a6b66f7f6b6b2044cf4013c72",
+            ),
+            "PackageInfo": (
+                572,
+                "static-native-package-information",
+                "constants-metadata-572-aaf5b98d",
+                "sha256:a3741a5a5870ff30f6e840e266c436abda507ff96c93e974cbc68df211e28168",
+                "sha256:9add953f90477a1c6294d5c2eba362c862fa6f0aef2bd1b25c4f598ac5d3910f",
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
+                "GonieGonie.InvisibleDragon.PackageInfo",
+                "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
+            ),
+            "PackageInfo.NAME": (
+                573,
+                "native-invisibledragon-package-name",
+                "constants-metadata-573-3942a963",
+                "sha256:1539ac6658af20566740884fc3f1d4802e99a0a96b9760a06d69f0f37420804b",
+                "sha256:ce337d684f985b7fe8402969f81e473a06ad4a872a1fb0acf66469ddf6f58d73",
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
+                "GonieGonie.InvisibleDragon.PackageInfo.Name",
+                "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
+            ),
+            "PackageInfo.REQUIRED_PYTHON": (
+                574,
+                "compiled-native-target-framework-contract",
+                "constants-metadata-574-cf74d0eb",
+                "sha256:c666b0f9e6499a34acc0a98f3f01584e73add9a9d64dd3e66842e79012714aad",
+                "sha256:d16c7e2050430c23a42db97ee0e60db6e4b9d34667a037539879581bdbeaf7aa",
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
+                "GonieGonie.InvisibleDragon.PackageInfo",
+                "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
+            ),
+            "PackageInfo.VERSION": (
+                575,
+                "native-semantic-version-string",
+                "constants-metadata-575-a8260e5f",
+                "sha256:9ab52755f1c9d6600068d446d4df9420aa0c37df3a365668dc241334f5ca63d7",
+                "sha256:450d23845ac4b76a1a1b9b129d52ef1fc8f824d22eb94a17f43126bb22caab00",
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
+                "GonieGonie.InvisibleDragon.PackageInfo.Version",
+                "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
+            ),
+        }
+        constants_test_path = (
+            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/"
+            "ConstantsMetadataOracleParityTests.cs"
+        )
+        constants_test_symbol = (
+            "GonieGonie.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests."
+            "MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations"
+        )
+        constants_test_hash = (
+            "sha256:fe0809967c5fcc94c70e1805a215e670d709dbf72d3ba1888d78b5bd55e404ef"
+        )
+        exceptions_by_id = {
+            item.identifier: item for item in configuration.exceptions
+        }
+        for symbol, (
+            index,
+            exception_id,
+            assertion_id,
+            direct_hash,
+            collector_hash,
+            implementation_path,
+            implementation_symbol,
+            implementation_hash,
+        ) in expected_constants_metadata.items():
+            key = ("src/idragon/constants.py", symbol)
+            entry = by_key[key]
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual(entry, compatibility.matrix.entries[index], symbol)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            self.assertEqual(
+                (
+                    f"upstream/compatibility-exceptions.yml#{exception_id}",
+                    f"upstream/symbol-evidence.json#{assertion_id}",
+                ),
+                entry.evidence,
+                symbol,
+            )
+            exception = exceptions_by_id[exception_id]
+            self.assertEqual(key, (exception.upstream_path, exception.upstream_symbol))
+            self.assertEqual(
+                compatibility.inventory.symbols[index].symbol_hash,
+                exception.upstream_symbol_hash,
+                symbol,
+            )
+            self.assertIn(("engineering_result", entry.rationale), exception.effects)
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(implementation_path, evidence_entry.implementation_path, symbol)
+            self.assertEqual(implementation_symbol, evidence_entry.implementation_symbol, symbol)
+            self.assertEqual(
+                implementation_hash,
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertIn(direct_hash, receipt.assertion, symbol)
+            self.assertEqual(collector_hash, receipt.expected_output_sha256, symbol)
+            self.assertEqual(constants_test_path, receipt.test_path, symbol)
+            self.assertEqual(constants_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(constants_test_hash, receipt.test_source_sha256, symbol)
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+        self.assertEqual(8, len(expected_constants_metadata))
+        for index, symbol in enumerate(
+            (
+                "SpecialTag",
+                "SpecialTag.__format__",
+                "SpecialTag.__repr__",
+                "SpecialTag.__str__",
+            ),
+            start=576,
+        ):
+            key = ("src/idragon/constants.py", symbol)
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual("out_of_scope", by_key[key].classification, symbol)
+            self.assertTrue(
+                by_key[key].evidence[0].startswith("upstream/scope-decisions.json#"),
+                symbol,
+            )
+            self.assertNotIn(key, symbol_evidence.entries_by_key, symbol)
+        for index, symbol in enumerate(
+            (
+                "Directory",
+                "Directory.CONSTRUCTION_DIR",
+                "Directory.PROFILE_DIR",
+                "Directory.WEATHER_DATA_DIR",
+                "Directory.WEATHER_META_DIR",
+                "PackageInfo",
+                "PackageInfo.NAME",
+                "PackageInfo.REQUIRED_PYTHON",
+                "PackageInfo.VERSION",
+            ),
+            start=31,
+        ):
+            key = ("src/epsimple/constants.py", symbol)
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual("needs_reverification", by_key[key].classification, symbol)
+            self.assertNotIn(key, symbol_evidence.entries_by_key, symbol)
         expected_common_core = {
             "Setting": ("equivalent", None),
             "Setting.DEFAULT_EP_VERSION": ("equivalent", None),
