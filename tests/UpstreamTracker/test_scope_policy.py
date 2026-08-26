@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:6bc822acba7d17a83bba9e0c42102716a89a90d009187af08f5f519e5812629e"
+    "sha256:b7c4d4d9ce37e66376078359b3c3dcb3b9805bb94e9c1ad6c1fa24a4b0264ec1"
 )
 
 
@@ -68,9 +68,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 136,
-                "exception": 209,
-                "needs_reverification": 645,
+                "equivalent": 160,
+                "exception": 214,
+                "needs_reverification": 616,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -170,6 +170,133 @@ class SafeScopePolicyTests(unittest.TestCase):
             entry = entries[index]
             self.assertEqual(("src/epsimple/constants.py", symbol), entry.key)
             self.assertEqual("needs_reverification", entry.classification, symbol)
+
+    def test_epsimple_numeric_constants_promotion_preserves_adjacent_scope(self) -> None:
+        entries = self.configuration.matrix.entries
+        class_targets = {
+            28: (
+                "ConvectionHeatTransfer",
+                "native-simpledragon-convection-constant-container",
+            ),
+            40: ("Site2CO2", "native-simpledragon-site-to-carbon-dispatch"),
+            46: ("Site2Cost", "native-simpledragon-site-to-cost-dispatch"),
+            52: ("Site2Source", "native-simpledragon-site-to-source-dispatch"),
+            67: ("Unit", "native-simpledragon-unit-conversion-constants"),
+        }
+        equivalent_targets = {
+            29: "ConvectionHeatTransfer.IN",
+            30: "ConvectionHeatTransfer.OUT",
+            41: "Site2CO2.DISTRICTHEATING",
+            42: "Site2CO2.ELECTRICITY",
+            43: "Site2CO2.LPG",
+            44: "Site2CO2.NATURALGAS",
+            45: "Site2CO2.OIL",
+            47: "Site2Cost.DISTRICTHEATING",
+            48: "Site2Cost.ELECTRICITY",
+            49: "Site2Cost.LPG",
+            50: "Site2Cost.NATURALGAS",
+            51: "Site2Cost.OIL",
+            53: "Site2Source.DISTRICTHEATING",
+            54: "Site2Source.ELECTRICITY",
+            55: "Site2Source.LPG",
+            56: "Site2Source.NATURALGAS",
+            57: "Site2Source.OIL",
+            68: "Unit.ACH50_TO_ACH",
+            69: "Unit.FRACTION_TO_PERCENT",
+            70: "Unit.M3_PER_S_TO_CMH",
+            71: "Unit.MM_TO_M",
+            72: "Unit.M_TO_MM",
+            73: "Unit.PERCENT_TO_FRACTION",
+            74: "Unit.W_TO_KW",
+        }
+        target_indices = (*range(28, 31), *range(40, 58), *range(67, 75))
+        self.assertEqual(
+            target_indices,
+            tuple(sorted((*class_targets, *equivalent_targets))),
+        )
+        self.assertEqual(5, len(class_targets))
+        self.assertEqual(24, len(equivalent_targets))
+
+        for index, (symbol, exception_id) in class_targets.items():
+            entry = entries[index]
+            self.assertEqual(("src/epsimple/constants.py", symbol), entry.key)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+
+        for index, symbol in equivalent_targets.items():
+            entry = entries[index]
+            self.assertEqual(("src/epsimple/constants.py", symbol), entry.key)
+            self.assertEqual("equivalent", entry.classification, symbol)
+            self.assertIsNone(entry.exception_id, symbol)
+
+        self.assertEqual(
+            5,
+            sum(entries[index].classification == "exception" for index in target_indices),
+        )
+        self.assertEqual(
+            24,
+            sum(entries[index].classification == "equivalent" for index in target_indices),
+        )
+
+        adjacent_families = (
+            (
+                10,
+                (
+                    ("AUTOID_PREFIX", "needs_reverification"),
+                    ("AUTOID_PREFIX.DAY_SCHEDULE", "needs_reverification"),
+                    ("AUTOID_PREFIX.FENESTRATION", "needs_reverification"),
+                    ("AUTOID_PREFIX.FENESTRATION_CONSTRUCTION", "needs_reverification"),
+                    ("AUTOID_PREFIX.HEAT_EXCHANGER", "needs_reverification"),
+                    ("AUTOID_PREFIX.MATERIAL", "needs_reverification"),
+                    ("AUTOID_PREFIX.PROFILE", "needs_reverification"),
+                    ("AUTOID_PREFIX.PV_PANEL", "needs_reverification"),
+                    ("AUTOID_PREFIX.RULESET", "needs_reverification"),
+                    ("AUTOID_PREFIX.SCHEDULE", "needs_reverification"),
+                    ("AUTOID_PREFIX.SOURCE_SYSTEM", "needs_reverification"),
+                    ("AUTOID_PREFIX.SUPPLY_SYSTEM", "needs_reverification"),
+                    ("AUTOID_PREFIX.SURFACE", "needs_reverification"),
+                    ("AUTOID_PREFIX.SURFACE_CONSTRUCTION", "needs_reverification"),
+                    ("AUTOID_PREFIX.ZONE", "needs_reverification"),
+                    ("AUTOID_PREFIX.__format__", "needs_reverification"),
+                    ("AUTOID_PREFIX.__repr__", "out_of_scope"),
+                    ("AUTOID_PREFIX.__str__", "needs_reverification"),
+                ),
+            ),
+            (
+                31,
+                (
+                    ("Directory", "needs_reverification"),
+                    ("Directory.CONSTRUCTION_DIR", "needs_reverification"),
+                    ("Directory.PROFILE_DIR", "needs_reverification"),
+                    ("Directory.WEATHER_DATA_DIR", "needs_reverification"),
+                    ("Directory.WEATHER_META_DIR", "needs_reverification"),
+                    ("PackageInfo", "needs_reverification"),
+                    ("PackageInfo.NAME", "needs_reverification"),
+                    ("PackageInfo.REQUIRED_PYTHON", "needs_reverification"),
+                    ("PackageInfo.VERSION", "needs_reverification"),
+                ),
+            ),
+            (
+                58,
+                (
+                    ("SpecialTag", "needs_reverification"),
+                    ("SpecialTag.CLONE", "needs_reverification"),
+                    ("SpecialTag.COOLROOF", "needs_reverification"),
+                    ("SpecialTag.DB", "needs_reverification"),
+                    ("SpecialTag.FLIP", "needs_reverification"),
+                    ("SpecialTag.SPECIAL", "needs_reverification"),
+                    ("SpecialTag.__format__", "needs_reverification"),
+                    ("SpecialTag.__repr__", "out_of_scope"),
+                    ("SpecialTag.__str__", "needs_reverification"),
+                ),
+            ),
+        )
+        for start, expected in adjacent_families:
+            for offset, (symbol, classification) in enumerate(expected):
+                entry = entries[start + offset]
+                self.assertEqual(("src/epsimple/constants.py", symbol), entry.key)
+                self.assertEqual(classification, entry.classification, symbol)
+                self.assertIsNone(entry.exception_id, symbol)
 
     def test_air_boundary_core_promotion_preserves_adjacent_construction_scope(self) -> None:
         entries = self.configuration.matrix.entries

@@ -27,7 +27,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(215, len(configuration.exceptions))
+        self.assertEqual(220, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -41,16 +41,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(645, len(compatibility.needs_reverification))
+        self.assertEqual(616, len(compatibility.needs_reverification))
         self.assertEqual(
-            136,
+            160,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            209,
+            214,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -59,10 +59,10 @@ class ConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(compatibility.symbol_evidence)
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
-        self.assertEqual(345, len(symbol_evidence.entries))
-        self.assertEqual(345, len(symbol_evidence.receipts))
+        self.assertEqual(374, len(symbol_evidence.entries))
+        self.assertEqual(374, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:24863628cdb22e0c29f2e9ce8b909efb04065207813e9b17bcd377e7726a29ca",
+            "sha256:7abaac72229370cca3b9b8576c4c89164ff57bab0189405760671aa4f825ed68",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -74,6 +74,109 @@ class ConfigurationTests(unittest.TestCase):
         )
 
         by_key = compatibility.matrix.entries_by_key
+        numeric_indices = (
+            *range(28, 31),
+            *range(40, 58),
+            *range(67, 75),
+        )
+        numeric_exception_ids = {
+            28: "native-simpledragon-convection-constant-container",
+            40: "native-simpledragon-site-to-carbon-dispatch",
+            46: "native-simpledragon-site-to-cost-dispatch",
+            52: "native-simpledragon-site-to-source-dispatch",
+            67: "native-simpledragon-unit-conversion-constants",
+        }
+        numeric_test_path = (
+            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "ConstantsNumericOracleParityTests.cs"
+        )
+        numeric_test_symbol = (
+            "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests."
+            "MatchesPinnedPythonConstantsNumeric"
+        )
+        numeric_test_hash = (
+            "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a"
+        )
+        numeric_implementation_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/"
+            "SimpleDragonConstants.cs"
+        )
+        numeric_implementation_hash = (
+            "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7"
+        )
+        numeric_exceptions = {
+            item.identifier: item for item in configuration.exceptions
+        }
+        for index in numeric_indices:
+            inventory_symbol = compatibility.inventory.symbols[index]
+            key = inventory_symbol.key
+            self.assertEqual("src/epsimple/constants.py", key[0], key)
+            entry = compatibility.matrix.entries[index]
+            self.assertEqual(entry, by_key[key], key)
+            exception_id = numeric_exception_ids.get(index)
+            self.assertEqual(
+                "exception" if exception_id is not None else "equivalent",
+                entry.classification,
+                key,
+            )
+            self.assertEqual(exception_id, entry.exception_id, key)
+
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(
+                numeric_implementation_path,
+                evidence_entry.implementation_path,
+                key,
+            )
+            self.assertEqual(
+                numeric_implementation_hash,
+                evidence_entry.implementation_source_sha256,
+                key,
+            )
+            self.assertTrue(
+                evidence_entry.implementation_symbol.startswith(
+                    "GonieGonie.SimpleDragon."
+                ),
+                key,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), key)
+            receipt = evidence_entry.receipts[0]
+            self.assertTrue(
+                receipt.identifier.startswith("epsimple-constants-numeric-"),
+                key,
+            )
+            self.assertEqual(entry.rationale, receipt.assertion, key)
+            self.assertEqual(1, receipt.assertion.count("sha256:"), key)
+            self.assertEqual(numeric_test_path, receipt.test_path, key)
+            self.assertEqual(numeric_test_symbol, receipt.test_symbol, key)
+            self.assertEqual(numeric_test_hash, receipt.test_source_sha256, key)
+            self.assertEqual("cross_language", receipt.verification_kind, key)
+            self.assertEqual("passed", receipt.outcome, key)
+            self.assertFalse(receipt.skipped, key)
+            self.assertFalse(receipt.structural_only, key)
+            self.assertFalse(receipt.claims_active_load, key)
+            self.assertEqual("not_applicable", receipt.exercised_load, key)
+
+            expected_evidence = [
+                f"upstream/symbol-evidence.json#{receipt.identifier}"
+            ]
+            if exception_id is not None:
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+                exception = numeric_exceptions[exception_id]
+                self.assertEqual(
+                    key,
+                    (exception.upstream_path, exception.upstream_symbol),
+                    key,
+                )
+                self.assertEqual(
+                    inventory_symbol.symbol_hash,
+                    exception.upstream_symbol_hash,
+                    key,
+                )
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, key)
+        self.assertEqual(29, len(numeric_indices))
+
         expected_construction_family = {
             "AirBoundary.to_idf_object": (
                 592,

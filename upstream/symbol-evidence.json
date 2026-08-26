@@ -1,6 +1,760 @@
 {
-  "content_sha256": "sha256:24863628cdb22e0c29f2e9ce8b909efb04065207813e9b17bcd377e7726a29ca",
+  "content_sha256": "sha256:7abaac72229370cca3b9b8576c4c89164ff57bab0189405760671aa4f825ed68",
   "entries": [
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.ConvectionHeatTransfer"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify ConvectionHeatTransfer across its exact three-case EPlusSimple numeric constants slice: the reviewed native strongly typed container/dispatch adaptation, including Python float-Enum construction and alias topology while preserving every declared engineering value. The canonical direct receipt is sha256:b4433eb3cb19d7ba19f449eca8e3f46c9d32d2094a8c98df62802a990fb7d546.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4e522486e6d7179a57d55b3d03067c3ada5921dba0077c43c28a6996622c62af",
+          "id": "epsimple-constants-numeric-convection-heat-transfer-2d68c0fd",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ConvectionHeatTransfer",
+      "upstream_symbol_hash": "sha256:2d68c0fd189f85734d82a18e0312c03fda9f734cdcf7b3d72bf2d3e356c29577"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.ConvectionHeatTransfer.Interior"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify ConvectionHeatTransfer.IN across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.ConvectionHeatTransfer.Interior. The canonical direct receipt is sha256:30ef903ef59ee122f877ab7a2ee1586e1de31375f019637a102cac395fbc20ed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:472bfae041fa329b8b9b72fd2186b22cc4174fe7b50fa5bd0f92391f29b6e3ab",
+          "id": "epsimple-constants-numeric-convection-heat-transfer-in-f4d1b691",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ConvectionHeatTransfer.IN",
+      "upstream_symbol_hash": "sha256:f4d1b69119dd3619805511a2f0b25fddbe63554a38c3001f672cd1efdcea1edf"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.ConvectionHeatTransfer.Exterior"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify ConvectionHeatTransfer.OUT across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.ConvectionHeatTransfer.Exterior. The canonical direct receipt is sha256:7cd9fb6cf1e1f1f138ffee1fe6c311f8fb5e674ac86d666e9dca4904c233a563.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:212c1238b60a1f68058c63e37c6413d7d2f853c11bff1a8d97c40af767fdd797",
+          "id": "epsimple-constants-numeric-convection-heat-transfer-out-c36faf62",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ConvectionHeatTransfer.OUT",
+      "upstream_symbol_hash": "sha256:c36faf62dd987cd8561bd92a0c78e218baa23444f8d487070612ff8b5b3aa5b9"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCarbon"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2CO2 across its exact three-case EPlusSimple numeric constants slice: the reviewed native strongly typed container/dispatch adaptation, including Python float-Enum construction and alias topology while preserving every declared engineering value. The canonical direct receipt is sha256:178df73bb30fd7e70b341e8454a5998005f44438a598cb0333659434d3ceae6f.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7ad3522a2e415a3645224f4277c82c358ed4ff78c15a2fbb156fa666b184f2b2",
+          "id": "epsimple-constants-numeric-site2co2-9ff40d94",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2CO2",
+      "upstream_symbol_hash": "sha256:9ff40d942ec30fa90a8b95e5d24205d33eea26afc4e143ee8457bf440b0a6270"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCarbon"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2CO2.DISTRICTHEATING across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCarbon. The canonical direct receipt is sha256:b72a4dd6b08847248b872b9236e562d448d2cf1c1e642d747bd38dbff279f277.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:386ba2f79bb14c79a47935e90f42d7ebe698512baf8c3ca3eb7595e6dd9fa8ec",
+          "id": "epsimple-constants-numeric-site2co2-districtheating-1d7b874c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2CO2.DISTRICTHEATING",
+      "upstream_symbol_hash": "sha256:1d7b874c5a80a7b28fe56c8dbc5b20c395c260feb0c339657a1ee76922bf447d"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCarbon"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2CO2.ELECTRICITY across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCarbon. The canonical direct receipt is sha256:e78ebec11d2b9058b912d04e6a5fe910beba0ca5043b6d9d3d7fc05ff5ab4e3f.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2e1a93bd8e4b543ab5375bd83e08e487c9861510733cc436d639290092536b59",
+          "id": "epsimple-constants-numeric-site2co2-electricity-427886a2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2CO2.ELECTRICITY",
+      "upstream_symbol_hash": "sha256:427886a21467ffa2e70b09b222f44e9185d1bdc8cf3ff6cc3d858f370b439b5a"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCarbon"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2CO2.LPG across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCarbon. The canonical direct receipt is sha256:dfc04463966bdfede9c537d658e9333a5fe241bc9dd582bcd219c09d6ba389e8.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:5494e6ffb285ddf560ff65e041b9254b991ffd3360be7de3f377d0ca2ba9fd5e",
+          "id": "epsimple-constants-numeric-site2co2-lpg-68cf7791",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2CO2.LPG",
+      "upstream_symbol_hash": "sha256:68cf7791fd2569d21d8dfdc36fffb54c82dcb4493c258708b2da1bda096b62f1"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCarbon"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2CO2.NATURALGAS across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCarbon. The canonical direct receipt is sha256:e8c0e6086269d8d6f6351a1c0e564ce5f191012f8e982a2a7f15eef4fa27c7ef.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6fdd4f3ddfa7716156fbe43cf9509c0b4e0fde57b57bc1f5a98fbf9ff6ad132b",
+          "id": "epsimple-constants-numeric-site2co2-naturalgas-860c2f93",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2CO2.NATURALGAS",
+      "upstream_symbol_hash": "sha256:860c2f939cbd8d3c6c89855296706c774d24d3a93a70fb1595e7f04cec6a9e90"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCarbon"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2CO2.OIL across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCarbon. The canonical direct receipt is sha256:071feb9bcf36e9724f0561f7ebffcf3e0f89a58f72784b2ed190750d83bb5717.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9f6734038f6c2fc9598c2109dcf57c85b98f4fd4412571153454834b5d57c073",
+          "id": "epsimple-constants-numeric-site2co2-oil-4a1979a2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2CO2.OIL",
+      "upstream_symbol_hash": "sha256:4a1979a27d16ba6b4e0765d2d5f97142a35f5485967e05be6e52916100e07727"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCost"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Cost across its exact three-case EPlusSimple numeric constants slice: the reviewed native strongly typed container/dispatch adaptation, including Python float-Enum construction and alias topology while preserving every declared engineering value. The canonical direct receipt is sha256:8373d7d216b5367d9e1fc4bdb1f923084b10b8fe8ed1ffb0af9da63d08a7bc59.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3b7f466d016b4de70df31b45c480841889af4387d93d0d95780cd8fbc26d9ec4",
+          "id": "epsimple-constants-numeric-site2cost-0f875078",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Cost",
+      "upstream_symbol_hash": "sha256:0f8750781047825eb5c4eea60e058821a61701bf39a930e8a78f9a31e2c9566e"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCost"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Cost.DISTRICTHEATING across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCost. The canonical direct receipt is sha256:b5f36b5fcce3b17368b343169b04b3175e209d80a9c3278d25a58de3be70fdc5.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a9981cecfa042296cab5574e3c3e20a298dc586c04cb09312d579feb4f82cfe1",
+          "id": "epsimple-constants-numeric-site2cost-districtheating-956e2b0d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Cost.DISTRICTHEATING",
+      "upstream_symbol_hash": "sha256:956e2b0d76110c8aa33eb3b33fec599d6e1ea9f8c98b7cb58d535c5f16884ebb"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCost"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Cost.ELECTRICITY across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCost. The canonical direct receipt is sha256:a63a3d18763b4acfe4b0986d99dde172dc484125a756f1fd12e5d7c12adb2717.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:ec427a0117c57e9a957bc49a30e7bcc95c15bfb9a4282611809d6181ec85c581",
+          "id": "epsimple-constants-numeric-site2cost-electricity-b9b2bc99",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Cost.ELECTRICITY",
+      "upstream_symbol_hash": "sha256:b9b2bc9925459d830c1de8a4e971d5f4597021ec62d980f162e8a7718ac9abff"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCost"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Cost.LPG across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCost. The canonical direct receipt is sha256:2e0db4e56e430301036ce1395e711ff85f402916acec8b673531e9daac418d6a.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a72fcdeadbc7703ad32cc5db597ab5a318c06c27a9fb4f2ddce4d0781fc3801d",
+          "id": "epsimple-constants-numeric-site2cost-lpg-08fe014b",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Cost.LPG",
+      "upstream_symbol_hash": "sha256:08fe014b98f9d0492866d4b64446982476f8b07432d981ccd8ff76a96cec5ecf"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCost"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Cost.NATURALGAS across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCost. The canonical direct receipt is sha256:52be29456a3c17b610d804699b2a56a2cb8838eaf89efc3d299e7a9355accdaf.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:76f1ef390adfcc13a87006eae0c0605e5893f12154a410a30beed2f2e8f166d7",
+          "id": "epsimple-constants-numeric-site2cost-naturalgas-6c00bbfc",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Cost.NATURALGAS",
+      "upstream_symbol_hash": "sha256:6c00bbfc4ae58ce5287c7748b5f9dd75141457e56c37b6e9d4a9284a57064055"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCost"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Cost.OIL across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToCost. The canonical direct receipt is sha256:a43844065ca5aa9f09dc93b4cdbda2f6084954d2c47a6988c522d72c75a250aa.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:8a0048edfd72e8e3ccd9c0ee8d454908bdbf6913f5724830d27255e03551b725",
+          "id": "epsimple-constants-numeric-site2cost-oil-f58bfe50",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Cost.OIL",
+      "upstream_symbol_hash": "sha256:f58bfe501cf9658b50f5541c6fa314ddcb98369d59b760f626fd1318aaf607d1"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToSource"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Source across its exact three-case EPlusSimple numeric constants slice: the reviewed native strongly typed container/dispatch adaptation, including Python float-Enum construction and alias topology while preserving every declared engineering value. The canonical direct receipt is sha256:52e089133e4245c828c24c8c2a48c505f996d7de3f7c7508d4453a53e99b7ba3.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:74e8eb686b7ec20bef5c57873016f89b026ecea0f74e45bb3f5c6b1c50068ffb",
+          "id": "epsimple-constants-numeric-site2source-763a14c7",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Source",
+      "upstream_symbol_hash": "sha256:763a14c74718b1386a9ddc7a5c0f06ebb769ac08391365d917d1042965292e9d"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToSource"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Source.DISTRICTHEATING across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToSource. The canonical direct receipt is sha256:ee2e8fcac13c55baf40a41516e965fd08e1251e2e276edd6d90a5f7992203271.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e1dbc102cd3325c27c8da17b62a2f03a2ce5edc1bbaf9d4fe386152b52802caa",
+          "id": "epsimple-constants-numeric-site2source-districtheating-5f0ca3b7",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Source.DISTRICTHEATING",
+      "upstream_symbol_hash": "sha256:5f0ca3b7ed38e426a21befb255af26cd257c025be81734a4e7be8469a777f9f7"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToSource"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Source.ELECTRICITY across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToSource. The canonical direct receipt is sha256:f0f355684aacfbff21b474b1f83984e46e171e0ccc0ed3f0942a0f88c6b3d717.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:8d281abd27d2c7029983ac2be634c84b4529e62efc99cd8c64160b843e9bbe3d",
+          "id": "epsimple-constants-numeric-site2source-electricity-9f6e831e",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Source.ELECTRICITY",
+      "upstream_symbol_hash": "sha256:9f6e831e10bc5bee518399cec50e39fc7258fa7186028636d6e7dce89cbd637c"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToSource"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Source.LPG across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToSource. The canonical direct receipt is sha256:79f95004286cec8341138b98d0277da0611eaaa6054de6fec265b12e2c15db8f.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:55fbd6fb8154e2160e204b3fa809ba1cc176162e44a4eeb0cbe2bb04cd785d76",
+          "id": "epsimple-constants-numeric-site2source-lpg-f891444c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Source.LPG",
+      "upstream_symbol_hash": "sha256:f891444c39ad8d08e27afa90b0bd7817d5704ee1b70b187e35c86bf1bf08582e"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToSource"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Source.NATURALGAS across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToSource. The canonical direct receipt is sha256:f0da15f8aa0a8e9207907a4a7c388937256a79dce023916c41627e3e73be5c7a.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:94f9f8f21fdaba8bd1bfb17520b7dafede3fb39b5ab31f1eb18a2680b293c856",
+          "id": "epsimple-constants-numeric-site2source-naturalgas-8661aaea",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Source.NATURALGAS",
+      "upstream_symbol_hash": "sha256:8661aaeabf25d8c5c520b75d20acb9994e59b3153f07d21eafa57971ab6c7394"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToSource"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Site2Source.OIL across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.EnergyConversionFactors.SiteToSource. The canonical direct receipt is sha256:bfdea68b7ae87075b4a73e7ab9f1bc6db6e30f05366237d312e0ea0e9ccbfec4.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a52a71d0c10ce29904c0bd8b374a8f586dd7781227ff2f453b283e946269ffbd",
+          "id": "epsimple-constants-numeric-site2source-oil-18468fb1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Site2Source.OIL",
+      "upstream_symbol_hash": "sha256:18468fb1b142964ae9104c7ad816347e9109c40ef4205c7872dc577758efc254"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.UnitConversions"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Unit across its exact three-case EPlusSimple numeric constants slice: the reviewed native strongly typed container/dispatch adaptation, including Python float-Enum construction and alias topology while preserving every declared engineering value. The canonical direct receipt is sha256:e3a40a81411aa0fb6a1d4ae6ff6b118f697c9c2f5db0e4a112ca416184dd270b.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:8298d4cb6d6b9dc479016942ddf50662794d68ab32aa22837ef47969abc8d553",
+          "id": "epsimple-constants-numeric-unit-82eeceb9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Unit",
+      "upstream_symbol_hash": "sha256:82eeceb9e427512d5ed45c6139c5fb92859289547ded26e7e410b3be3f591b70"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.UnitConversions.AirChangesAt50PaToNaturalAirChanges"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Unit.ACH50_TO_ACH across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.UnitConversions.AirChangesAt50PaToNaturalAirChanges. The canonical direct receipt is sha256:847111fc6d398132d7307d6748bd7985d4ba38b5c725543dd3193d89ff80e390.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:182336e9273cad2a5a48dbe7ae387f4a7d1321d482854052356aa538e206a609",
+          "id": "epsimple-constants-numeric-unit-ach50-to-ach-fd2a09b0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Unit.ACH50_TO_ACH",
+      "upstream_symbol_hash": "sha256:fd2a09b09735722d7642be7d9f6f477970306a19540ac5b01d0357ea47c57401"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.UnitConversions.FractionToPercent"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Unit.FRACTION_TO_PERCENT across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.UnitConversions.FractionToPercent. The canonical direct receipt is sha256:f52fee7f672380004e5d4a4360998016fa6969b3aa12bd6282530db73ed12101.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f3ee2cf4771b52f1e4bb8aecb9baa14ed2861be84e2ceeb66a3e34da9aeea923",
+          "id": "epsimple-constants-numeric-unit-fraction-to-percent-55d3f412",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Unit.FRACTION_TO_PERCENT",
+      "upstream_symbol_hash": "sha256:55d3f412e4fc8dc309ceb1e5d298946b289c8adb66736a8de5de2533b5050880"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.UnitConversions.CubicMetresPerSecondToPerHour"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Unit.M3_PER_S_TO_CMH across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.UnitConversions.CubicMetresPerSecondToPerHour. The canonical direct receipt is sha256:237487fec0f4e7a60ebeba4e0e6a0b4da9cd1ccadd9174e7cbd9ae1989ab6ed9.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:49cee4f50b0c29ed30bb29bf6f80e8d8e286758e3a59344bd588dc61f07361e8",
+          "id": "epsimple-constants-numeric-unit-m3-per-s-to-cmh-c67e87d9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Unit.M3_PER_S_TO_CMH",
+      "upstream_symbol_hash": "sha256:c67e87d901a7d2de66c51d559d4b4d6552f188503c1f9dc331d5bf698540ea73"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.UnitConversions.MillimetresToMetres"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Unit.MM_TO_M across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.UnitConversions.MillimetresToMetres. The canonical direct receipt is sha256:7c5e63586f61d4ad85e6634edbdb14f6644547326bc6309f7f45da2d915df004.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e875ce0d852d930f8b9ad262dae81dc614c35b71d3494e53784a70d8b8ad2d08",
+          "id": "epsimple-constants-numeric-unit-mm-to-m-78d61c82",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Unit.MM_TO_M",
+      "upstream_symbol_hash": "sha256:78d61c825c4faade4c8268ca8c23a95c00ad44ce68574bc3afaf7791387ba1b5"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.UnitConversions.MetresToMillimetres"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Unit.M_TO_MM across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.UnitConversions.MetresToMillimetres. The canonical direct receipt is sha256:d2877f9b5106c3059898fbdb5678a9292132a1859e87650df060b466136cf012.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e4384d581b7d4339f0c704c8a149eff87361e5a317da419b3f58818518f34a3d",
+          "id": "epsimple-constants-numeric-unit-m-to-mm-b49a8507",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Unit.M_TO_MM",
+      "upstream_symbol_hash": "sha256:b49a8507bdd65b293983e5930a4b5710befca44ce1583d8ae3ada9d7ddd4c85b"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.UnitConversions.PercentToFraction"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Unit.PERCENT_TO_FRACTION across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.UnitConversions.PercentToFraction. The canonical direct receipt is sha256:21d23ac941fc2b67a7585f030be12f5c900eefc1a51b06f9ba2785c278c4224e.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d1b041a77676f72415ad2a75d7e134d106eb0569d243452e0868e84d83bc3087",
+          "id": "epsimple-constants-numeric-unit-percent-to-fraction-2f91a99f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Unit.PERCENT_TO_FRACTION",
+      "upstream_symbol_hash": "sha256:2f91a99f89863099df480e571f6e4f05249479b3adb70f77f1f141838035e240"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.UnitConversions.WattsToKilowatts"
+      },
+      "path": "src/epsimple/constants.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Unit.W_TO_KW across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.UnitConversions.WattsToKilowatts. The canonical direct receipt is sha256:f45ec25a2477cfb362fe03c93f38c8447fb75a6ebbbfcf2e07731b035472800a.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3a6142a778b8b317f3f979a38eef0184241612449b10758d9fbde6266efe53ee",
+          "id": "epsimple-constants-numeric-unit-w-to-kw-9891f5c1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/ConstantsNumericOracleParityTests.cs",
+          "test_source_sha256": "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests.MatchesPinnedPythonConstantsNumeric",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Unit.W_TO_KW",
+      "upstream_symbol_hash": "sha256:9891f5c1310487862261f06e345c18941cad2fac3c22b2210a7a5ee92e22f215"
+    },
     {
       "implementation": {
         "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs",
@@ -8975,9 +9729,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 345,
-    "passed_receipt_count": 345,
-    "receipt_count": 345,
+    "entry_count": 374,
+    "passed_receipt_count": 374,
+    "receipt_count": 374,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
