@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:56036c17fcb6dff5f8a528a75981864dce928b0cc92ee43f0570c12349855f33",
+  "content_sha256": "sha256:7870638605f23a0d13f18e9d8be84696a156c1a26b1fa1d8174c4fd1e3f89901",
   "entries": [
     {
       "implementation": {
@@ -1066,6 +1066,32 @@
       ],
       "symbol": "EnergyModel.__init__",
       "upstream_symbol_hash": "sha256:1d1dbee8fef8b70b2919c4e46a0ea60efbd748b360d31ff353ea121c72ad97d2"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendHvac"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify the bounded EnergyModel.add_supply_system adaptation: upstream generation failure occurs before mutation, append precedes ordered postprocessors, processor failure retains the appended objects, and success returns None, while native EnergyModel.ToIdfDocument performs deterministic model-context HVAC assembly through EnergyModelIdfAssembler.AppendHvac. No closure is claimed for EnergyModel.to_idf, SupplyGroup, concrete supply systems, or supply-system postprocessors.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:46a5a19db5de15a3d1ef104d1488cae3fdc08b1b483314d3209c79470c627ce8",
+          "id": "dragon-model-add-supply-system-174532d0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelAddSupplySystemOracleParityTests.cs",
+          "test_source_sha256": "sha256:ee5a5ad920e23f69c6f76939ccd487406806a8462e29bc3fbbc72a5384a69f10",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelAddSupplySystemOracleParityTests.MatchesPinnedPythonAddSupplySystemAndNativeModelContextAssembly",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyModel.add_supply_system",
+      "upstream_symbol_hash": "sha256:174532d0aa6b76826dd78f3d7020ba49eeba26494019da3fb361396e31c15a94"
     },
     {
       "implementation": {
@@ -6323,9 +6349,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 243,
-    "passed_receipt_count": 243,
-    "receipt_count": 243,
+    "entry_count": 244,
+    "passed_receipt_count": 244,
+    "receipt_count": 244,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

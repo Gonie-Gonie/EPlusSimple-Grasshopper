@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(747, len(compatibility.needs_reverification))
+        self.assertEqual(746, len(compatibility.needs_reverification))
         self.assertEqual(
             129,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            114,
+            115,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -158,6 +158,24 @@ class ConfigurationTests(unittest.TestCase):
                 "upstream/symbol-evidence.json#dragon-model-construction-defaults-create-default-idf-585b5368",
             ),
             people_activity.evidence,
+        )
+        add_supply_system = by_key[
+            (
+                "src/idragon/dragon/model.py",
+                "EnergyModel.add_supply_system",
+            )
+        ]
+        self.assertEqual("exception", add_supply_system.classification)
+        self.assertEqual(
+            "model-context-supply-system-assembly",
+            add_supply_system.exception_id,
+        )
+        self.assertEqual(
+            (
+                "upstream/compatibility-exceptions.yml#model-context-supply-system-assembly",
+                "upstream/symbol-evidence.json#dragon-model-add-supply-system-174532d0",
+            ),
+            add_supply_system.evidence,
         )
 
     def test_rejects_non_goniegonie_product_ownership(self) -> None:

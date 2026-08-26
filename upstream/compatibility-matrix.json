@@ -817,7 +817,7 @@
     "needs_reverification",
     "needs_reverification",
     "exception",
-    "needs_reverification",
+    "exception",
     "equivalent",
     "equivalent",
     "equivalent",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:1302f06dc76a6006501a0504c7aa3b1daeb8079125e120d6254b2ace03762fef",
+  "content_sha256": "sha256:82fc11ef3a285d3e544edfc6a1bb9fce269004a81114c9dfabbf82d4e251dda5",
   "details": [
     {
       "evidence": [
@@ -2971,6 +2971,15 @@
       "exception_id": "immutable-validated-energy-model-construction",
       "index": 816,
       "rationale": "Trusted cross-language evidence verifies the exact constructor call surface, Python aliasing and shared-default behavior, and the approved native immutable validated construction adaptation."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-supply-system-assembly",
+        "upstream/symbol-evidence.json#dragon-model-add-supply-system-174532d0"
+      ],
+      "exception_id": "model-context-supply-system-assembly",
+      "index": 817,
+      "rationale": "Trusted cross-language evidence verifies the reviewed model-context supply-system assembly adaptation while leaving EnergyModel.to_idf, SupplyGroup, concrete supply systems, and supply-system postprocessors unresolved."
     },
     {
       "evidence": [
@@ -4946,8 +4955,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 129,
-      "exception": 114,
-      "needs_reverification": 747,
+      "exception": 115,
+      "needs_reverification": 746,
       "out_of_scope": 252
     },
     "entry_count": 1242

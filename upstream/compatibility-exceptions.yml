@@ -1688,3 +1688,17 @@
     api_contract: callers construct EnergyModel with typed enumerable inputs and cannot mutate model membership through a retained caller list or a shared default; no parity is claimed for permissive invalid values or cross-instance mutable-default leakage
     compatibility_evidence: exact signature and Python aliasing behavior, shared omitted-list mutation, explicit-list identity, permissive invalid inputs, native normalization and range guards, defensive copying, ordered child identity, and read-only membership remain required in trusted cross-language receipts
   approval: accepted-native-api-adaptation
+
+- id: model-context-supply-system-assembly
+  upstream:
+    path: src/idragon/dragon/model.py
+    symbol: EnergyModel.add_supply_system
+    symbol_hash: sha256:174532d0aa6b76826dd78f3d7020ba49eeba26494019da3fb361396e31c15a94
+  difference:
+    upstream: exposes a static mutator that asks the supplied SupplyGroup for its IDF objects and postprocessors, appends all returned objects to the caller-owned IDF, then runs every postprocessor in returned order against that same document; it returns None, assumes prerequisite zone and source objects already exist, and preserves prior mutations when a later step fails
+    dotnet: exposes supply assembly through EnergyModel.ToIdfDocument with typed ZoneHvacAssignment and SupplyGroup inputs; the internal assembler creates a fresh document, gates assignments by model-context conditioning, generates supply fragments, accumulates source, plant-demand and terminal-unit connections, and builds equipment, node and sequential-load structures directly without exposing a mutable postprocessor protocol
+  effect:
+    engineering_result: supported valid conditioned-zone assignments are integrated into deterministic model output with their supply objects and connection topology while mutable callback ordering is replaced by declarative model assembly
+    api_contract: callers assign a SupplyGroup to a model zone and call EnergyModel.ToIdfDocument; no parity is claimed for standalone static invocation, duck-typed inputs, mutation of a caller-owned IDF, processor identity or execution timing, partial-mutation failure effects, or assembly of zones that the model does not classify as conditioned
+    compatibility_evidence: exact upstream delegation, append-before-processor ordering, argument identity, None return and partial-failure behavior plus the native public assignment route, conditioning gate, fresh-document isolation and deterministic integration remain required; SupplyGroup conversion, concrete supply-system conversion, postprocessor implementations and full EnergyModel.to_idf behavior remain separately reviewed symbols
+  approval: accepted-native-api-adaptation
