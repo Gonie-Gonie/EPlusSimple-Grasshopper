@@ -34,6 +34,7 @@ $commonCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\gen
 $constantsEngineeringGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_constants_engineering_oracle.py'
 $dragonHvacSupplyGroupCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_supply_group_core_oracle.py'
 $dragonHvacSupplyGroupToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_supply_group_to_idf_object_oracle.py'
+$dragonShapeShadingMaterialToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_shape_shading_material_to_idf_object_oracle.py'
 $dragonModelAddSupplySystemGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_add_supply_system_oracle.py'
 $dragonModelAssemblyGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_assembly_oracle.py'
 $dragonModelConditioningGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_conditioning_oracle.py'
@@ -69,6 +70,7 @@ $commonCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_comm
 $constantsEngineeringTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_constants_engineering_oracle.py'
 $dragonHvacSupplyGroupCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_supply_group_core_oracle.py'
 $dragonHvacSupplyGroupToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_supply_group_to_idf_object_oracle.py'
+$dragonShapeShadingMaterialToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_shape_shading_material_to_idf_object_oracle.py'
 $dragonModelAddSupplySystemTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_add_supply_system_oracle.py'
 $dragonModelAssemblyTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_assembly_oracle.py'
 $dragonModelConditioningTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_conditioning_oracle.py'
@@ -156,6 +158,7 @@ foreach ($requiredFile in @(
     $constantsEngineeringGeneratorPath,
     $dragonHvacSupplyGroupCoreGeneratorPath,
     $dragonHvacSupplyGroupToIdfObjectGeneratorPath,
+    $dragonShapeShadingMaterialToIdfObjectGeneratorPath,
     $dragonModelAddSupplySystemGeneratorPath,
     $dragonModelAssemblyGeneratorPath,
     $dragonModelConditioningGeneratorPath,
@@ -189,6 +192,7 @@ foreach ($requiredFile in @(
     $constantsEngineeringTestPath,
     $dragonHvacSupplyGroupCoreTestPath,
     $dragonHvacSupplyGroupToIdfObjectTestPath,
+    $dragonShapeShadingMaterialToIdfObjectTestPath,
     $dragonModelAddSupplySystemTestPath,
     $dragonModelAssemblyTestPath,
     $dragonModelConditioningTestPath,
@@ -676,7 +680,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, dragon HVAC SupplyGroup core/to-IDF-object, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, dragon HVAC SupplyGroup core/to-IDF-object, dragon shape shading-material-to-IDF-object, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -825,6 +829,25 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $dragonHvacSupplyGroupToIdfObjectGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-dragon-hvac-supply-group-to-idf-object-reference.log') `
     -FailureMessage 'Generating the Python dragon HVAC SupplyGroup.to_idf_object oracle failed'
+
+$dragonShapeShadingMaterialToIdfObjectOraclePath = Join-Path $outputRoot 'dragon-shape-shading-material-to-idf-object-oracle.json'
+$dragonShapeShadingMaterialToIdfObjectGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $dragonShapeShadingMaterialToIdfObjectGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $dragonShapeShadingMaterialToIdfObjectOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $dragonShapeShadingMaterialToIdfObjectGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-dragon-shape-shading-material-to-idf-object-reference.log') `
+    -FailureMessage 'Generating the Python dragon shape shading-material to-IDF-object oracle failed'
 
 $dragonModelAddSupplySystemOraclePath = Join-Path $outputRoot 'dragon-model-add-supply-system-oracle.json'
 $dragonModelAddSupplySystemGeneratorArguments = @(

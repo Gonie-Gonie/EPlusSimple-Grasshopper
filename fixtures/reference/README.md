@@ -92,18 +92,22 @@ the cases carry exact source and Python 3.12 AST receipts. The corpus is bounded
 and does not close `EnergyModel.to_idf`, `SupplyGroup`, concrete systems, or
 postprocessors.
 
-`python-0.7.0/dragon-model-assembly-oracle.json` pins five ordered CPython
-3.12.7 observations for bounded `EnergyModel.to_idf` behavior. It records
-exact-name profile replacement and its dangling schedule reference,
+`python-0.7.0/dragon-model-assembly-oracle.json` pins ten ordered CPython
+3.12.7 observations for bounded `EnergyModel.to_idf` behavior. Five model cases
+record exact-name profile replacement and its dangling schedule reference,
 case-sensitive profile and schedule emission, the shared unconditioned
 thermostat/ALLON fallback, legacy ERV ventilation fields, and the silent
 fallback when assigned HVAC lacks availability. One case additionally pins the
 exact five-field geometry rules, default 107 W people-activity schedule,
-blank-typed ALLON/ALLOFF schedules, and four schedule type-limit objects. The
-generator audits all twelve local `idragon` modules actually loaded across the
-five cases against exact source and Python 3.12 AST receipts. This is behavioral
-evidence only: the symbol remains `needs_reverification`, with no adaptation,
-trusted assertion, or full-symbol closure claim.
+blank-typed ALLON/ALLOFF schedules, and four schedule type-limit objects. Five
+additional orchestration cases pin the parent call order, batch-before-append
+layer behavior, first-seen source identity de-duplication, repeated conditioned
+and unconditioned projections, shared fallback creation, photovoltaic order,
+same-document return identity, and exact failure prefixes. The generator audits
+all twelve loaded local `idragon` modules against exact source and Python 3.12
+AST receipts. This is behavioral evidence only: the symbol remains
+`needs_reverification`, with no adaptation, trusted assertion, child-converter
+closure, or full-symbol closure claim.
 
 `python-0.7.0/dragon-model-conditioning-oracle.json` pins nine ordered
 CPython 3.12.7 observations for `EnergyModel.conditioned_zones`,
@@ -139,6 +143,17 @@ tokens, value/name construction, and JSON behavior while separately recording
 the historical qualified `Terrain.NAME` IDF rendering. The five member values
 are exact equivalents; the class is a reviewed typed-native-enum adaptation
 that emits valid EnergyPlus terrain tokens.
+
+`python-0.7.0/dragon-shape-shading-material-to-idf-object-oracle.json` pins
+six ordered CPython 3.12.7 observations for `Blind.to_idf_object` and
+`Shade.to_idf_object`. It records the complete 29- and 15-field EnergyPlus
+material order, fresh list/object behavior, Shade emissivity arithmetic,
+constructor alias context, permissive invalid numeric emission, and the exact
+nonnumeric failure boundary. The reviewed
+`model-context-shading-material-idf-assembly` mapping is restricted to valid
+material emission through `EnergyModel.ToIdfDocument`; constructors, invalid
+native emission parity, standalone converters, shading controls, surfaces, and
+parent `EnergyModel.to_idf` remain explicit unresolved boundaries.
 
 `python-0.7.0/launcher-result-parser-oracle.json` pins 21 ordered CPython
 3.12.7 observations for the seven result-parser symbols in

@@ -69,8 +69,8 @@
     },
     {
       "path": "dragon-model-assembly-oracle.json",
-      "bytes": 77002,
-      "sha256": "a008740b6830908cd65d3f2636532c67dde7d7a6cadd062d34e3583775f16308"
+      "bytes": 119000,
+      "sha256": "f01960724a367eadb8fbee9a5bef3b8d4304449eb9d3c71fa626f4db03024ef4"
     },
     {
       "path": "dragon-model-conditioning-oracle.json",
@@ -91,6 +91,11 @@
       "path": "dragon-model-terrain-oracle.json",
       "bytes": 17936,
       "sha256": "f371e7b98aebb4f5bb338185c32e804975801349a123c58aba4d78263658183e"
+    },
+    {
+      "path": "dragon-shape-shading-material-to-idf-object-oracle.json",
+      "bytes": 56704,
+      "sha256": "e805e1d8e953879012975cd8854e8737da29ed038f66d6176010337ace6f27fe"
     },
     {
       "path": "fenestration-construction-database.json",
