@@ -580,14 +580,14 @@
     "out_of_scope",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
     "needs_reverification",
     "needs_reverification",
     "out_of_scope",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:985d2f40721aac23141225644c878acaf13bb3cbf7b9d89d10a8e9f1e51d7b44",
+  "content_sha256": "sha256:03cb2ad9bb2bfeb3d3ecbb39483bd7d3366ba77ecaf8544e85abe3581d275ab2",
   "details": [
     {
       "evidence": [
@@ -2773,6 +2773,66 @@
       ],
       "index": 579,
       "rationale": "The IDragon SpecialTag class has no production use outside its own docstring examples. The used SimpleDragon tag family is reviewed separately, so this Python representation entry point is safely outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#native-thermal-default-constant-container",
+        "upstream/symbol-evidence.json#constants-engineering-thermal-c55d90e3"
+      ],
+      "exception_id": "native-thermal-default-constant-container",
+      "index": 580,
+      "rationale": "Trusted cross-language evidence verifies THERMAL across its exact three-case constants engineering slice: the 107-value float-Enum construction and one-member topology against an immutable native thermal-default constant container, and directly observes Python float-Enum construction, identity, iteration and wrapper behavior against a static public const-double container without claiming Enum API parity."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#constants-engineering-thermal-people-activity-5a39d884"
+      ],
+      "index": 581,
+      "rationale": "Trusted cross-language evidence verifies THERMAL.PEOPLE_ACTIVITY_LEVEL across its exact three-case constants engineering slice: the exact binary64 value 107 and its native model-assembly default use."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#native-named-unit-conversion-constants",
+        "upstream/symbol-evidence.json#constants-engineering-unit-82eeceb9"
+      ],
+      "exception_id": "native-named-unit-conversion-constants",
+      "index": 582,
+      "rationale": "Trusted cross-language evidence verifies Unit across its exact three-case constants engineering slice: float-Enum construction, declaration and iteration topology, the three-name 0.001 alias group, and the immutable native named-constant surface, and directly observes Python alias identity and Enum surface behavior against separate named public const-double fields without claiming Enum identity or API-syntax parity."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#constants-engineering-unit-l2m3-91d7c582"
+      ],
+      "index": 583,
+      "rationale": "Trusted cross-language evidence verifies Unit.L2M3 across its exact three-case constants engineering slice: the exact 0.001 litre-to-cubic-metre engineering factor."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#constants-engineering-unit-mm2m-4f90e5de"
+      ],
+      "index": 584,
+      "rationale": "Trusted cross-language evidence verifies Unit.MM2M across its exact three-case constants engineering slice: the exact 0.001 millimetre-to-metre engineering factor."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#constants-engineering-unit-none2prc-743aa08a"
+      ],
+      "index": 585,
+      "rationale": "Trusted cross-language evidence verifies Unit.NONE2PRC across its exact three-case constants engineering slice: the exact 100 fraction-to-percent engineering factor."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#constants-engineering-unit-prc2none-48e9d761"
+      ],
+      "index": 586,
+      "rationale": "Trusted cross-language evidence verifies Unit.PRC2NONE across its exact three-case constants engineering slice: the exact 0.01 percent-to-fraction engineering factor."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#constants-engineering-unit-w2kw-f00a1484"
+      ],
+      "index": 587,
+      "rationale": "Trusted cross-language evidence verifies Unit.W2KW across its exact three-case constants engineering slice: the exact 0.001 watt-to-kilowatt engineering factor."
     },
     {
       "evidence": [
@@ -4770,9 +4830,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 113,
-      "exception": 107,
-      "needs_reverification": 770,
+      "equivalent": 119,
+      "exception": 109,
+      "needs_reverification": 762,
       "out_of_scope": 252
     },
     "entry_count": 1242
