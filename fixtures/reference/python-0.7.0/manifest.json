@@ -53,6 +53,11 @@
       "sha256": "ffa9805fd16847484195eb001cb7530c718554d13db40f811f7fa1242c020355"
     },
     {
+      "path": "dragon-model-terrain-oracle.json",
+      "bytes": 17936,
+      "sha256": "f371e7b98aebb4f5bb338185c32e804975801349a123c58aba4d78263658183e"
+    },
+    {
       "path": "fenestration-construction-database.json",
       "bytes": 54147,
       "sha256": "6fd2b18e1e4d464286c6f3a3a197e3c526e863e34ab392f52818435ae6872344"

@@ -1618,3 +1618,17 @@
     api_contract: callers reference ThermalDefaults.PeopleActivityLevelWattsPerPerson directly; no parity is claimed for Python Enum construction, iteration, identity, member naming, value wrappers, hashing, or Enum API syntax
     compatibility_evidence: exact upstream float inheritance, construction, iteration, identity and numeric behavior plus the native public const-double field name, type, immutability, value and downstream use remain required in trusted cross-language receipts
   approval: accepted-native-api-adaptation
+
+- id: native-typed-terrain-enum-valid-idf-token
+  upstream:
+    path: src/idragon/dragon/model.py
+    symbol: Terrain
+    symbol_hash: sha256:c6163ac59051a6638838c9f9b2953585bf6825942dfa79b46af3be27279e5799
+  difference:
+    upstream: defines a Python str Enum whose five uppercase members support value construction, iteration, identity, name and value access, JSON string projection, and Python Enum text rendering such as Terrain.CITY rather than the EnergyPlus field token
+    dotnet: exposes a strongly typed Terrain enum with PascalCase members, rejects undefined enum values at EnergyModel construction, and serializes the selected member as the exact EnergyPlus Building terrain token such as City
+  effect:
+    engineering_result: Country, Suburbs, City, Ocean, and Urban retain the exact pinned engineering choice tokens while native IDF assembly emits a valid EnergyPlus Building field instead of Python Enum display text
+    api_contract: callers use the typed Terrain enum and EnergyModel validation; no parity is claimed for Python str inheritance, Enum value construction, iteration, identity, member naming, JSON behavior, or Enum text syntax
+    compatibility_evidence: exact upstream construction, rejection, declaration and iteration order, names, values, identity, JSON and display text plus native enum topology, undefined-value rejection, EnergyModel retention, and emitted IDF token remain required in trusted cross-language receipts
+  approval: accepted-native-api-adaptation

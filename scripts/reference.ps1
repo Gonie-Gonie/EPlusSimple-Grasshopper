@@ -32,6 +32,7 @@ $usageProfileCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-referen
 $utilsCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_utils_core_oracle.py'
 $commonCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_common_core_oracle.py'
 $constantsEngineeringGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_constants_engineering_oracle.py'
+$dragonModelTerrainGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_terrain_oracle.py'
 $launcherResultParserGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_launcher_result_parser_oracle.py'
 $launcherRuntimeGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_launcher_runtime_oracle.py'
 $iddGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_idd_schema_oracle.py'
@@ -59,6 +60,7 @@ $usageProfileCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\tes
 $utilsCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_utils_core_oracle.py'
 $commonCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_common_core_oracle.py'
 $constantsEngineeringTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_constants_engineering_oracle.py'
+$dragonModelTerrainTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_terrain_oracle.py'
 $publicSymbolInventoryPath = Join-Path $repositoryRoot 'upstream\public-symbol-inventory.json'
 $tempRoot = Join-Path $repositoryRoot 'temp'
 $referenceTempRoot = Join-Path $tempRoot 'reference'
@@ -138,6 +140,7 @@ foreach ($requiredFile in @(
     $utilsCoreGeneratorPath,
     $commonCoreGeneratorPath,
     $constantsEngineeringGeneratorPath,
+    $dragonModelTerrainGeneratorPath,
     $iddGeneratorPath,
     $constructionEqualityGeneratorPath,
     $scheduleTypeGeneratorPath,
@@ -163,6 +166,7 @@ foreach ($requiredFile in @(
     $utilsCoreTestPath,
     $commonCoreTestPath,
     $constantsEngineeringTestPath,
+    $dragonModelTerrainTestPath,
     $publicSymbolInventoryPath
 )) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
@@ -644,7 +648,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, dragon model Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -755,6 +759,24 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $constantsEngineeringGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-constants-engineering-reference.log') `
     -FailureMessage 'Generating the Python constants engineering oracle failed'
+
+$dragonModelTerrainOraclePath = Join-Path $outputRoot 'dragon-model-terrain-oracle.json'
+$dragonModelTerrainGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $dragonModelTerrainGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $dragonModelTerrainOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $dragonModelTerrainGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-dragon-model-terrain-reference.log') `
+    -FailureMessage 'Generating the Python dragon model Terrain oracle failed'
 
 $launcherResultParserOraclePath = Join-Path $outputRoot 'launcher-result-parser-oracle.json'
 $launcherResultParserGeneratorArguments = @(

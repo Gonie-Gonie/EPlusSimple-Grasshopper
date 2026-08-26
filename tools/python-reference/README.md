@@ -88,6 +88,15 @@ containers are reviewed native adaptations; all six engineering members are
 exact equivalents. Package directories and Python package metadata are not
 part of this engineering corpus.
 
+The dragon-model Terrain oracle binds the `Terrain` string-enum class and its
+five public members in the exact pinned `idragon/dragon/model.py` source through
+18 ordered cases. It records declaration and iteration order, exact title-case
+EnergyPlus choice tokens, value/name construction, JSON projection, and the
+pinned CPython qualified `Terrain.NAME` string that the historical IDF writer
+emits. The class is one reviewed typed-native-enum adaptation that corrects the
+rendered token for EnergyPlus; the five semantic member values are exact
+equivalents.
+
 The launcher result-parser oracle directly loads the pinned
 `idragon/launcher.py` together with only its pinned sibling modules, without
 executing `idragon.__init__`. Its 21 ordered cases bind the seven

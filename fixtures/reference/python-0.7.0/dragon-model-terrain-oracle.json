@@ -1,0 +1,580 @@
+{
+  "cases": [
+    {
+      "executor": "terrain-class",
+      "expected_dotnet": {
+        "adaptation": "native-typed-terrain-enum-valid-idf-token",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-terrain.enum.construction",
+      "python": {
+        "facts": {
+          "invalid_observations": [
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "input": {
+                "kind": "string",
+                "value": "country"
+              },
+              "outcome": "raised"
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "input": {
+                "kind": "string",
+                "value": "Rural"
+              },
+              "outcome": "raised"
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "input": {
+                "kind": "string",
+                "value": ""
+              },
+              "outcome": "raised"
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "input": {
+                "decimal": "0",
+                "kind": "int"
+              },
+              "outcome": "raised"
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "input": {
+                "kind": "none"
+              },
+              "outcome": "raised"
+            }
+          ],
+          "member_passthrough_identity": {
+            "CITY": true,
+            "COUNTRY": true,
+            "OCEAN": true,
+            "SUBURBS": true,
+            "URBAN": true
+          },
+          "valid_observations": [
+            {
+              "input": {
+                "kind": "string",
+                "value": "Country"
+              },
+              "outcome": "returned",
+              "result": {
+                "name": "COUNTRY",
+                "value": "Country"
+              },
+              "same_member": true
+            },
+            {
+              "input": {
+                "kind": "string",
+                "value": "Suburbs"
+              },
+              "outcome": "returned",
+              "result": {
+                "name": "SUBURBS",
+                "value": "Suburbs"
+              },
+              "same_member": true
+            },
+            {
+              "input": {
+                "kind": "string",
+                "value": "City"
+              },
+              "outcome": "returned",
+              "result": {
+                "name": "CITY",
+                "value": "City"
+              },
+              "same_member": true
+            },
+            {
+              "input": {
+                "kind": "string",
+                "value": "Ocean"
+              },
+              "outcome": "returned",
+              "result": {
+                "name": "OCEAN",
+                "value": "Ocean"
+              },
+              "same_member": true
+            },
+            {
+              "input": {
+                "kind": "string",
+                "value": "Urban"
+              },
+              "outcome": "returned",
+              "result": {
+                "name": "URBAN",
+                "value": "Urban"
+              },
+              "same_member": true
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain"
+    },
+    {
+      "executor": "terrain-class",
+      "expected_dotnet": {
+        "adaptation": "native-typed-terrain-enum-valid-idf-token",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-terrain.enum.member-topology",
+      "python": {
+        "facts": {
+          "declared_member_names": [
+            "COUNTRY",
+            "SUBURBS",
+            "CITY",
+            "OCEAN",
+            "URBAN"
+          ],
+          "declared_member_values": [
+            "Country",
+            "Suburbs",
+            "City",
+            "Ocean",
+            "Urban"
+          ],
+          "has_aliases": false,
+          "iterated_member_names": [
+            "COUNTRY",
+            "SUBURBS",
+            "CITY",
+            "OCEAN",
+            "URBAN"
+          ],
+          "iterated_member_values": [
+            "Country",
+            "Suburbs",
+            "City",
+            "Ocean",
+            "Urban"
+          ],
+          "member_count": 5,
+          "unique_member_count": 5
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain"
+    },
+    {
+      "executor": "terrain-class",
+      "expected_dotnet": {
+        "adaptation": "native-typed-terrain-enum-valid-idf-token",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-terrain.enum.text-projection",
+      "python": {
+        "facts": {
+          "base_names": [
+            "str",
+            "Enum"
+          ],
+          "class_name": "Terrain",
+          "is_enum_subclass": true,
+          "is_str_subclass": true,
+          "json_tokens": {
+            "CITY": "City",
+            "COUNTRY": "Country",
+            "OCEAN": "Ocean",
+            "SUBURBS": "Suburbs",
+            "URBAN": "Urban"
+          },
+          "module": "idragon.dragon.model",
+          "rendered_building_tokens": {
+            "CITY": "Terrain.CITY",
+            "COUNTRY": "Terrain.COUNTRY",
+            "OCEAN": "Terrain.OCEAN",
+            "SUBURBS": "Terrain.SUBURBS",
+            "URBAN": "Terrain.URBAN"
+          },
+          "signature": "(*values)",
+          "str_tokens": {
+            "CITY": "Terrain.CITY",
+            "COUNTRY": "Terrain.COUNTRY",
+            "OCEAN": "Terrain.OCEAN",
+            "SUBURBS": "Terrain.SUBURBS",
+            "URBAN": "Terrain.URBAN"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.city.engineering-token",
+      "python": {
+        "facts": {
+          "building_field_equals_value": true,
+          "building_field_is_member": true,
+          "building_field_value": "City",
+          "energyplus_choice_token": "City",
+          "model_retains_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.CITY"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.city.roundtrip",
+      "python": {
+        "facts": {
+          "construct_from_member_is_member": true,
+          "construct_from_value_is_member": true,
+          "hash_equals_value_hash": true,
+          "json_value": "City",
+          "lookup_by_name_is_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.CITY"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.city.value",
+      "python": {
+        "facts": {
+          "canonical_name": "CITY",
+          "declared_name": "CITY",
+          "equals_value": true,
+          "is_str_instance": true,
+          "value": "City",
+          "value_type": "str"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.CITY"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.country.engineering-token",
+      "python": {
+        "facts": {
+          "building_field_equals_value": true,
+          "building_field_is_member": true,
+          "building_field_value": "Country",
+          "energyplus_choice_token": "Country",
+          "model_retains_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.COUNTRY"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.country.roundtrip",
+      "python": {
+        "facts": {
+          "construct_from_member_is_member": true,
+          "construct_from_value_is_member": true,
+          "hash_equals_value_hash": true,
+          "json_value": "Country",
+          "lookup_by_name_is_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.COUNTRY"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.country.value",
+      "python": {
+        "facts": {
+          "canonical_name": "COUNTRY",
+          "declared_name": "COUNTRY",
+          "equals_value": true,
+          "is_str_instance": true,
+          "value": "Country",
+          "value_type": "str"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.COUNTRY"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.ocean.engineering-token",
+      "python": {
+        "facts": {
+          "building_field_equals_value": true,
+          "building_field_is_member": true,
+          "building_field_value": "Ocean",
+          "energyplus_choice_token": "Ocean",
+          "model_retains_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.OCEAN"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.ocean.roundtrip",
+      "python": {
+        "facts": {
+          "construct_from_member_is_member": true,
+          "construct_from_value_is_member": true,
+          "hash_equals_value_hash": true,
+          "json_value": "Ocean",
+          "lookup_by_name_is_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.OCEAN"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.ocean.value",
+      "python": {
+        "facts": {
+          "canonical_name": "OCEAN",
+          "declared_name": "OCEAN",
+          "equals_value": true,
+          "is_str_instance": true,
+          "value": "Ocean",
+          "value_type": "str"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.OCEAN"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.suburbs.engineering-token",
+      "python": {
+        "facts": {
+          "building_field_equals_value": true,
+          "building_field_is_member": true,
+          "building_field_value": "Suburbs",
+          "energyplus_choice_token": "Suburbs",
+          "model_retains_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.SUBURBS"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.suburbs.roundtrip",
+      "python": {
+        "facts": {
+          "construct_from_member_is_member": true,
+          "construct_from_value_is_member": true,
+          "hash_equals_value_hash": true,
+          "json_value": "Suburbs",
+          "lookup_by_name_is_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.SUBURBS"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.suburbs.value",
+      "python": {
+        "facts": {
+          "canonical_name": "SUBURBS",
+          "declared_name": "SUBURBS",
+          "equals_value": true,
+          "is_str_instance": true,
+          "value": "Suburbs",
+          "value_type": "str"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.SUBURBS"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.urban.engineering-token",
+      "python": {
+        "facts": {
+          "building_field_equals_value": true,
+          "building_field_is_member": true,
+          "building_field_value": "Urban",
+          "energyplus_choice_token": "Urban",
+          "model_retains_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.URBAN"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.urban.roundtrip",
+      "python": {
+        "facts": {
+          "construct_from_member_is_member": true,
+          "construct_from_value_is_member": true,
+          "hash_equals_value_hash": true,
+          "json_value": "Urban",
+          "lookup_by_name_is_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.URBAN"
+    },
+    {
+      "executor": "terrain-member",
+      "id": "dragon-model-terrain.member.urban.value",
+      "python": {
+        "facts": {
+          "canonical_name": "URBAN",
+          "declared_name": "URBAN",
+          "equals_value": true,
+          "is_str_instance": true,
+          "value": "Urban",
+          "value_type": "str"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Terrain.URBAN"
+    }
+  ],
+  "cases_sha256": "sha256:aea20222894cc0c5a500dfccb15f9955e56666f4de763fef62c297fe975d0a47",
+  "consumer_contract": {
+    "adaptations": {
+      "Terrain": "native-typed-terrain-enum-valid-idf-token"
+    },
+    "assertion_ids": {
+      "Terrain": "dragon-model-terrain-c6163ac5",
+      "Terrain.CITY": "dragon-model-terrain-city-86bbbecc",
+      "Terrain.COUNTRY": "dragon-model-terrain-country-b5cce6c9",
+      "Terrain.OCEAN": "dragon-model-terrain-ocean-4fb458af",
+      "Terrain.SUBURBS": "dragon-model-terrain-suburbs-3de90284",
+      "Terrain.URBAN": "dragon-model-terrain-urban-a4c4bc7"
+    },
+    "case_count": 18,
+    "case_ids": [
+      "dragon-model-terrain.enum.construction",
+      "dragon-model-terrain.enum.member-topology",
+      "dragon-model-terrain.enum.text-projection",
+      "dragon-model-terrain.member.city.engineering-token",
+      "dragon-model-terrain.member.city.roundtrip",
+      "dragon-model-terrain.member.city.value",
+      "dragon-model-terrain.member.country.engineering-token",
+      "dragon-model-terrain.member.country.roundtrip",
+      "dragon-model-terrain.member.country.value",
+      "dragon-model-terrain.member.ocean.engineering-token",
+      "dragon-model-terrain.member.ocean.roundtrip",
+      "dragon-model-terrain.member.ocean.value",
+      "dragon-model-terrain.member.suburbs.engineering-token",
+      "dragon-model-terrain.member.suburbs.roundtrip",
+      "dragon-model-terrain.member.suburbs.value",
+      "dragon-model-terrain.member.urban.engineering-token",
+      "dragon-model-terrain.member.urban.roundtrip",
+      "dragon-model-terrain.member.urban.value"
+    ],
+    "classifications": {
+      "Terrain": "exception",
+      "Terrain.CITY": "equivalent",
+      "Terrain.COUNTRY": "equivalent",
+      "Terrain.OCEAN": "equivalent",
+      "Terrain.SUBURBS": "equivalent",
+      "Terrain.URBAN": "equivalent"
+    },
+    "runtime_names": "pinned-python-only-no-native-type-name-claims",
+    "target_symbols": [
+      "Terrain",
+      "Terrain.CITY",
+      "Terrain.COUNTRY",
+      "Terrain.OCEAN",
+      "Terrain.SUBURBS",
+      "Terrain.URBAN"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-model-terrain.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:1d1e2b681f443f98c601d67c7ad6574c3ab400169fba214018821be810b35a05",
+      "symbol": "Terrain",
+      "symbol_hash": "sha256:c6163ac59051a6638838c9f9b2953585bf6825942dfa79b46af3be27279e5799"
+    },
+    {
+      "body_hash": "sha256:1dd88966c75717b665c6649618e6003073b9f4c6c767171d6adc097e23263394",
+      "kind": "constant",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:8111cd1050752ea024674b02b1502d1fdab240d04147d65f4c8ad71f148f0791",
+      "symbol": "Terrain.CITY",
+      "symbol_hash": "sha256:86bbbeccfdcac8147f1ea09090065c8567a1a910715d4679b1059b02a27839bc"
+    },
+    {
+      "body_hash": "sha256:20ae46499cfabff7e35ca4cda49b33ccfd5258adad3ceed6ae7feb05eaae3772",
+      "kind": "constant",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:cd58cf34472c886ee073d9c92cccd9a21ef585675a3aebbfac665ec8701fd93c",
+      "symbol": "Terrain.COUNTRY",
+      "symbol_hash": "sha256:b5cce6c9c3dbcbe551d86663ed5d7b4615451b5b9841f0fd6c8ddc6c6a5b5eae"
+    },
+    {
+      "body_hash": "sha256:49dab2386f677c04c24d008110220ae1ef2e02d84ce9a54de25a4c05e6e683d8",
+      "kind": "constant",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:43f22f5af8b01a0e2ac6f0d4c47016cc200961a8b80b0228c0f7768076df9086",
+      "symbol": "Terrain.OCEAN",
+      "symbol_hash": "sha256:4fb458afdad96d03018c848e08a853065cf2ff1f71d110175a13e18481c6b20a"
+    },
+    {
+      "body_hash": "sha256:6bece3a025b22ae5b104d63e066146295e565cfae57cf5fcc92e827ec2644291",
+      "kind": "constant",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:201c53eabe683bbe1abea3efd17c21f4b74c585b63fd2d76ca2bb44878f99587",
+      "symbol": "Terrain.SUBURBS",
+      "symbol_hash": "sha256:3de90284fe1a6b5e8b582cd04c07cd01da2a3fc6d097bce30b2c3d23144167e6"
+    },
+    {
+      "body_hash": "sha256:84445019fc9c0fbb69f98f9b193728c3227aeabb9f1b19ca165d80f1e0250b30",
+      "kind": "constant",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:69ca03abbb5e119dbba6122c1e9a4c0eb82beaeeae2abca2fd9c8ea80949c011",
+      "symbol": "Terrain.URBAN",
+      "symbol_hash": "sha256:a4c4bc7a7a67f1165956614348dde48e687d79001443487b879f5abf1cbf5a62"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "path": "src/idragon/dragon/model.py",
+    "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+  }
+}

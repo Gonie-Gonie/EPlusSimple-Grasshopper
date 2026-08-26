@@ -52,6 +52,14 @@ three-member iteration, representative engineering products, and the 107 W
 default people-activity field. Six members are exact equivalents and the two
 Python enum containers are reviewed native API adaptations.
 
+`python-0.7.0/dragon-model-terrain-oracle.json` pins 18 ordered CPython
+3.12.7 observations for the `Terrain` class and five members in
+`idragon/dragon/model.py`. It preserves exact member order, title-case semantic
+tokens, value/name construction, and JSON behavior while separately recording
+the historical qualified `Terrain.NAME` IDF rendering. The five member values
+are exact equivalents; the class is a reviewed typed-native-enum adaptation
+that emits valid EnergyPlus terrain tokens.
+
 `python-0.7.0/launcher-result-parser-oracle.json` pins 21 ordered CPython
 3.12.7 observations for the seven result-parser symbols in
 `idragon/launcher.py`. It records constructor dispatch and partial failures,
