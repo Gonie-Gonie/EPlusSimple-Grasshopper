@@ -588,8 +588,8 @@
     "equivalent",
     "equivalent",
     "equivalent",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
     "out_of_scope",
     "out_of_scope",
     "exception",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:55bb7e5e2eeb5990239a72416d96dd5ddd46fcb1ae61627ba1caa4bee56a19f9",
+  "content_sha256": "sha256:6bc822acba7d17a83bba9e0c42102716a89a90d009187af08f5f519e5812629e",
   "details": [
     {
       "evidence": [
@@ -2905,6 +2905,24 @@
       ],
       "index": 587,
       "rationale": "Trusted cross-language evidence verifies Unit.W2KW across its exact three-case constants engineering slice: the exact 0.001 watt-to-kilowatt engineering factor."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#permissive-mutable-python-air-boundary-state-fd8f9bb9",
+        "upstream/symbol-evidence.json#dragon-construction-air-boundary-core-588-fd8f9bb9"
+      ],
+      "exception_id": "permissive-mutable-python-air-boundary-state-fd8f9bb9",
+      "index": 588,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AirBoundary across exact AB01 through AB04: Python unchecked mutable identity-retained name and ACH state, public attribute reassignment, default, explicit and zero values, and bounded invalid or unusual states are compared with a sealed typed native record whose trimmed Name and finite non-negative AirChangesPerHour are get-only. Adaptation family permissive-mutable-python-air-boundary-state-fd8f9bb9 classifies this bounded container and state-contract difference. The canonical direct receipt is sha256:e94adada7522d56edce498e3d9caf6fe390d5926cf42038c689b15b1df8a1be3; record equality, hashing, string representation, copy or deconstruction, descriptors and proxies, serialization, concurrency, IDF emission, parent construction integration and the fixture's explicit unresolved input domains are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#unchecked-python-air-boundary-construction-a69bf707",
+        "upstream/symbol-evidence.json#dragon-construction-air-boundary-core-589-a69bf707"
+      ],
+      "exception_id": "unchecked-python-air-boundary-construction-a69bf707",
+      "index": 589,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AirBoundary.__init__ across exact AB01 through AB04: Python's (self, name, ACH=0.5) call accepts unchecked default, explicit and zero values plus the bounded null, blank, padded, boolean, string, collection, negative and nonfinite states, retains mutable aliases and exposes the captured call-shape error timing; the native public (string name, double airChangesPerHour=0.5) constructor trims and validates its arguments, rejects null or blank names and negative or nonfinite ACH, and cannot admit Python-only dynamic values through its typed signature. Adaptation family unchecked-python-air-boundary-construction-a69bf707 classifies this bounded constructor and validation-timing difference. The canonical direct receipt is sha256:53e6bdb13392529e182b4b16a24fc72d37116abf93472e49e6648d5e0cb8458a; Python error wording or ordering beyond AB04, manual dunder calls, descriptors or proxies, decimal, fraction, complex or huge-integer ACH, broader Unicode whitespace, serialization, concurrency, representation, IDF emission and parent integration are not claimed."
     },
     {
       "evidence": [
@@ -5832,8 +5850,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 136,
-      "exception": 207,
-      "needs_reverification": 647,
+      "exception": 209,
+      "needs_reverification": 645,
       "out_of_scope": 252
     },
     "entry_count": 1242

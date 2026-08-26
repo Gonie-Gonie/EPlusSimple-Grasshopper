@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:5f5c377936ac1478b66faa79deab2dfee2ff25bc00ebd53735a2a0ccfce596fe",
+  "content_sha256": "sha256:4120142a275231b7e43c29ee96d064f90fe443a51349a881e55c2463831415fa",
   "entries": [
     {
       "implementation": {
@@ -1118,6 +1118,58 @@
       ],
       "symbol": "Unit.W2KW",
       "upstream_symbol_hash": "sha256:f00a14847f11df61238d82b56c9a31ecc8453877c7bda1eb12fbe13573f0f3eb"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+        "source_sha256": "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.AirBoundary"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify AirBoundary across exact AB01 through AB04: Python unchecked mutable identity-retained name and ACH state, public attribute reassignment, default, explicit and zero values, and bounded invalid or unusual states are compared with a sealed typed native record whose trimmed Name and finite non-negative AirChangesPerHour are get-only. Adaptation family permissive-mutable-python-air-boundary-state-fd8f9bb9 classifies this bounded container and state-contract difference. The canonical direct receipt is sha256:e94adada7522d56edce498e3d9caf6fe390d5926cf42038c689b15b1df8a1be3; record equality, hashing, string representation, copy or deconstruction, descriptors and proxies, serialization, concurrency, IDF emission, parent construction integration and the fixture's explicit unresolved input domains are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:83167c1eb59ce60b50cd6fbb2e7eebbe87e1452243d6b5ff50287691c3e3f4b7",
+          "id": "dragon-construction-air-boundary-core-588-fd8f9bb9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/AirBoundaryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:64adf39ee35dc626606071fcf8efd9a46a6e73f21536b2b355834a0611389766",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.AirBoundaryCoreOracleParityTests.MatchesPinnedAirBoundaryCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "AirBoundary",
+      "upstream_symbol_hash": "sha256:fd8f9bb9fcc8a5676f77b8abaffdb0d4fc33ac1d8cdc9e1a6803a6b94e85eb0a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+        "source_sha256": "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.AirBoundary.AirBoundary"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify AirBoundary.__init__ across exact AB01 through AB04: Python's (self, name, ACH=0.5) call accepts unchecked default, explicit and zero values plus the bounded null, blank, padded, boolean, string, collection, negative and nonfinite states, retains mutable aliases and exposes the captured call-shape error timing; the native public (string name, double airChangesPerHour=0.5) constructor trims and validates its arguments, rejects null or blank names and negative or nonfinite ACH, and cannot admit Python-only dynamic values through its typed signature. Adaptation family unchecked-python-air-boundary-construction-a69bf707 classifies this bounded constructor and validation-timing difference. The canonical direct receipt is sha256:53e6bdb13392529e182b4b16a24fc72d37116abf93472e49e6648d5e0cb8458a; Python error wording or ordering beyond AB04, manual dunder calls, descriptors or proxies, decimal, fraction, complex or huge-integer ACH, broader Unicode whitespace, serialization, concurrency, representation, IDF emission and parent integration are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a6bc52d12c81f6a4463421cb5c77decd1ba956e797afab0e7c7e19425bf6264f",
+          "id": "dragon-construction-air-boundary-core-589-a69bf707",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/AirBoundaryCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:64adf39ee35dc626606071fcf8efd9a46a6e73f21536b2b355834a0611389766",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.AirBoundaryCoreOracleParityTests.MatchesPinnedAirBoundaryCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "AirBoundary.__init__",
+      "upstream_symbol_hash": "sha256:a69bf7074e3d95dfd347a13b8e35462ad11f92c5d45db4d58ca4dc3f1d7a026f"
     },
     {
       "implementation": {
@@ -8923,9 +8975,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 343,
-    "passed_receipt_count": 343,
-    "receipt_count": 343,
+    "entry_count": 345,
+    "passed_receipt_count": 345,
+    "receipt_count": 345,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

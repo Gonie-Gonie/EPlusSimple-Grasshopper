@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:55bb7e5e2eeb5990239a72416d96dd5ddd46fcb1ae61627ba1caa4bee56a19f9"
+    "sha256:6bc822acba7d17a83bba9e0c42102716a89a90d009187af08f5f519e5812629e"
 )
 
 
@@ -69,8 +69,8 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(
             {
                 "equivalent": 136,
-                "exception": 207,
-                "needs_reverification": 647,
+                "exception": 209,
+                "needs_reverification": 645,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -170,6 +170,106 @@ class SafeScopePolicyTests(unittest.TestCase):
             entry = entries[index]
             self.assertEqual(("src/epsimple/constants.py", symbol), entry.key)
             self.assertEqual("needs_reverification", entry.classification, symbol)
+
+    def test_air_boundary_core_promotion_preserves_adjacent_construction_scope(self) -> None:
+        entries = self.configuration.matrix.entries
+        expected_targets = {
+            588: (
+                "AirBoundary",
+                "permissive-mutable-python-air-boundary-state-fd8f9bb9",
+            ),
+            589: (
+                "AirBoundary.__init__",
+                "unchecked-python-air-boundary-construction-a69bf707",
+            ),
+        }
+        for index, (symbol, exception_id) in expected_targets.items():
+            entry = entries[index]
+            self.assertEqual(("src/idragon/dragon/construction.py", symbol), entry.key)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+
+        expected_adjacent_classifications = (
+            "out_of_scope",
+            "out_of_scope",
+            "exception",
+            "needs_reverification",
+            "needs_reverification",
+            "exception",
+            "exception",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "exception",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "out_of_scope",
+            "out_of_scope",
+            "exception",
+            "needs_reverification",
+            "needs_reverification",
+            "exception",
+            "exception",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "exception",
+            "needs_reverification",
+            "exception",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "needs_reverification",
+            "out_of_scope",
+            "out_of_scope",
+            "exception",
+        )
+        self.assertEqual(
+            expected_adjacent_classifications,
+            tuple(entry.classification for entry in entries[590:641]),
+        )
+        self.assertEqual(
+            ("src/idragon/dragon/construction.py", "AirBoundary.__repr__"),
+            entries[590].key,
+        )
+        self.assertEqual(
+            ("src/idragon/dragon/construction.py", "AirBoundary.__str__"),
+            entries[591].key,
+        )
+        self.assertEqual(
+            ("src/idragon/dragon/construction.py", "AirBoundary.to_idf_object"),
+            entries[592].key,
+        )
+        self.assertEqual(
+            "model-context-air-boundary-idf-emission",
+            entries[592].exception_id,
+        )
+        self.assertEqual(
+            ("src/idragon/dragon/construction.py", "NoMassConstruction.to_idf_object"),
+            entries[640].key,
+        )
+        self.assertEqual(
+            "model-context-no-mass-construction-idf-emission",
+            entries[640].exception_id,
+        )
 
     def test_terminal_scope_additions_are_exactly_bound(self) -> None:
         plan = build_safe_scope_plan(

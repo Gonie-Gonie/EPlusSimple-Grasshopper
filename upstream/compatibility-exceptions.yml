@@ -2990,3 +2990,31 @@
     api_contract: callers receive the immutable native semantic-version string 0.1.0
     compatibility_evidence: only VERSION-specific C05, C06, and C09 facts are claimed; C07 is context and other PackageInfo members are separately classified
   approval: accepted-native-api-adaptation
+
+- id: permissive-mutable-python-air-boundary-state-fd8f9bb9
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: AirBoundary
+    symbol_hash: sha256:fd8f9bb9fcc8a5676f77b8abaffdb0d4fc33ac1d8cdc9e1a6803a6b94e85eb0a
+  difference:
+    upstream: AB01 through AB04 expose an unchecked mutable Python container that identity-retains arbitrary name and ACH values in writable public attributes
+    dotnet: GonieGonie.InvisibleDragon.Construction.AirBoundary is a sealed typed record whose constructor trims and validates Name, requires finite non-negative AirChangesPerHour, and exposes get-only properties
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify AirBoundary across exact AB01 through AB04: Python unchecked mutable identity-retained name and ACH state, public attribute reassignment, default, explicit and zero values, and bounded invalid or unusual states are compared with a sealed typed native record whose trimmed Name and finite non-negative AirChangesPerHour are get-only. Adaptation family permissive-mutable-python-air-boundary-state-fd8f9bb9 classifies this bounded container and state-contract difference. The canonical direct receipt is sha256:e94adada7522d56edce498e3d9caf6fe390d5926cf42038c689b15b1df8a1be3; record equality, hashing, string representation, copy or deconstruction, descriptors and proxies, serialization, concurrency, IDF emission, parent construction integration and the fixture's explicit unresolved input domains are not claimed.
+    api_contract: callers construct an immutable typed AirBoundary and read its validated Name and AirChangesPerHour instead of mutating Python attributes or retaining arbitrary aliased state
+    compatibility_evidence: only the exact AB01 through AB04 class and state observations, primary SimpleConstructions.cs implementation binding and canonical two-target native receipt are claimed; the constructor has its own receipt, indices 590 through 640 are not retargeted, and no representation, IDF or full-construction-family closure is asserted
+  approval: accepted-native-api-adaptation
+
+- id: unchecked-python-air-boundary-construction-a69bf707
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: AirBoundary.__init__
+    symbol_hash: sha256:a69bf7074e3d95dfd347a13b8e35462ad11f92c5d45db4d58ca4dc3f1d7a026f
+  difference:
+    upstream: AB01 through AB04 execute the dynamic (self, name, ACH=0.5) call without validation, retaining Python-only values and exposing Python call-shape error timing
+    dotnet: the public AirBoundary(string name, double airChangesPerHour=0.5) constructor trims and validates name and accepts only typed finite non-negative double ACH values
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations verify AirBoundary.__init__ across exact AB01 through AB04: Python's (self, name, ACH=0.5) call accepts unchecked default, explicit and zero values plus the bounded null, blank, padded, boolean, string, collection, negative and nonfinite states, retains mutable aliases and exposes the captured call-shape error timing; the native public (string name, double airChangesPerHour=0.5) constructor trims and validates its arguments, rejects null or blank names and negative or nonfinite ACH, and cannot admit Python-only dynamic values through its typed signature. Adaptation family unchecked-python-air-boundary-construction-a69bf707 classifies this bounded constructor and validation-timing difference. The canonical direct receipt is sha256:53e6bdb13392529e182b4b16a24fc72d37116abf93472e49e6648d5e0cb8458a; Python error wording or ordering beyond AB04, manual dunder calls, descriptors or proxies, decimal, fraction, complex or huge-integer ACH, broader Unicode whitespace, serialization, concurrency, representation, IDF emission and parent integration are not claimed.
+    api_contract: callers use the typed public constructor with one required name and one optional double ACH argument and receive validation before any AirBoundary value exists
+    compatibility_evidence: only the exact AB01 through AB04 constructor, argument, default, rejection and captured state facts, primary SimpleConstructions.cs implementation binding and canonical two-target native receipt are claimed; the class has its own receipt, indices 590 through 640 are not retargeted, and no Python-only dynamic signature or full-construction-family closure is asserted
+  approval: accepted-native-api-adaptation

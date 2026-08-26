@@ -27,7 +27,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(213, len(configuration.exceptions))
+        self.assertEqual(215, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -41,7 +41,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(647, len(compatibility.needs_reverification))
+        self.assertEqual(645, len(compatibility.needs_reverification))
         self.assertEqual(
             136,
             sum(
@@ -50,7 +50,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            207,
+            209,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -59,10 +59,10 @@ class ConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(compatibility.symbol_evidence)
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
-        self.assertEqual(343, len(symbol_evidence.entries))
-        self.assertEqual(343, len(symbol_evidence.receipts))
+        self.assertEqual(345, len(symbol_evidence.entries))
+        self.assertEqual(345, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:5f5c377936ac1478b66faa79deab2dfee2ff25bc00ebd53735a2a0ccfce596fe",
+            "sha256:4120142a275231b7e43c29ee96d064f90fe443a51349a881e55c2463831415fa",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -118,6 +118,150 @@ class ConfigurationTests(unittest.TestCase):
                 entry.evidence,
                 symbol,
             )
+        expected_air_boundary_core = {
+            "AirBoundary": (
+                588,
+                "permissive-mutable-python-air-boundary-state-fd8f9bb9",
+                "dragon-construction-air-boundary-core-588-fd8f9bb9",
+                "sha256:e94adada7522d56edce498e3d9caf6fe390d5926cf42038c689b15b1df8a1be3",
+                "sha256:83167c1eb59ce60b50cd6fbb2e7eebbe87e1452243d6b5ff50287691c3e3f4b7",
+                "GonieGonie.InvisibleDragon.Construction.AirBoundary",
+            ),
+            "AirBoundary.__init__": (
+                589,
+                "unchecked-python-air-boundary-construction-a69bf707",
+                "dragon-construction-air-boundary-core-589-a69bf707",
+                "sha256:53e6bdb13392529e182b4b16a24fc72d37116abf93472e49e6648d5e0cb8458a",
+                "sha256:a6bc52d12c81f6a4463421cb5c77decd1ba956e797afab0e7c7e19425bf6264f",
+                "GonieGonie.InvisibleDragon.Construction.AirBoundary.AirBoundary",
+            ),
+        }
+        air_boundary_test_path = (
+            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/"
+            "AirBoundaryCoreOracleParityTests.cs"
+        )
+        air_boundary_test_symbol = (
+            "GonieGonie.InvisibleDragon.Tests.Construction."
+            "AirBoundaryCoreOracleParityTests."
+            "MatchesPinnedAirBoundaryCoreThroughTypedNativeRoutes"
+        )
+        air_boundary_test_hash = (
+            "sha256:64adf39ee35dc626606071fcf8efd9a46a6e73f21536b2b355834a0611389766"
+        )
+        air_boundary_implementation_path = (
+            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/"
+            "SimpleConstructions.cs"
+        )
+        air_boundary_implementation_hash = (
+            "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292"
+        )
+        air_boundary_exceptions = {
+            item.identifier: item for item in configuration.exceptions
+        }
+        air_boundary_assertions = {}
+        for symbol, (
+            index,
+            exception_id,
+            assertion_id,
+            direct_receipt_hash,
+            collector_output_hash,
+            implementation_symbol,
+        ) in expected_air_boundary_core.items():
+            key = ("src/idragon/dragon/construction.py", symbol)
+            entry = by_key[key]
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual(entry, compatibility.matrix.entries[index], symbol)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            self.assertEqual(
+                (
+                    f"upstream/compatibility-exceptions.yml#{exception_id}",
+                    f"upstream/symbol-evidence.json#{assertion_id}",
+                ),
+                entry.evidence,
+                symbol,
+            )
+            exception = air_boundary_exceptions[exception_id]
+            self.assertEqual(key, (exception.upstream_path, exception.upstream_symbol))
+            self.assertEqual(
+                compatibility.inventory.symbols[index].symbol_hash,
+                exception.upstream_symbol_hash,
+                symbol,
+            )
+            self.assertIn(("engineering_result", entry.rationale), exception.effects)
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(
+                air_boundary_implementation_path,
+                evidence_entry.implementation_path,
+                symbol,
+            )
+            self.assertEqual(
+                air_boundary_implementation_hash,
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            self.assertEqual(
+                implementation_symbol,
+                evidence_entry.implementation_symbol,
+                symbol,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash,
+                receipt.expected_output_sha256,
+                symbol,
+            )
+            self.assertEqual(air_boundary_test_path, receipt.test_path, symbol)
+            self.assertEqual(air_boundary_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(air_boundary_test_hash, receipt.test_source_sha256, symbol)
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+            air_boundary_assertions[symbol] = receipt.assertion
+        self.assertEqual(2, len(expected_air_boundary_core))
+        self.assertFalse(set(expected_air_boundary_core) & set(expected_construction_family))
+        expected_adjacent_receipts = {
+            592: "dragon-construction-air-boundary-to-idf-object-639a205f",
+            595: "idragon-construction-equality-native-null-adaptation",
+            596: "idragon-construction-hash-native-runtime-adaptation",
+            601: "dragon-construction-construction-to-idf-object-71a76f27",
+            608: "dragon-construction-glazing-to-idf-object-3350beaf",
+            611: "idragon-layer-equality-native-null-adaptation",
+            612: "idragon-layer-hash-native-runtime-adaptation",
+            617: "dragon-construction-layer-to-idf-object-66e6d458",
+            619: "idragon-material-equality-native-null-adaptation",
+            640: "dragon-construction-no-mass-construction-to-idf-object-2bc3fe98",
+        }
+        for index in range(590, 641):
+            adjacent_key = compatibility.inventory.symbols[index].key
+            if index in expected_adjacent_receipts:
+                adjacent_evidence = symbol_evidence.entries_by_key[adjacent_key]
+                self.assertEqual(
+                    (expected_adjacent_receipts[index],),
+                    tuple(item.identifier for item in adjacent_evidence.receipts),
+                    adjacent_key,
+                )
+            else:
+                self.assertNotIn(adjacent_key, symbol_evidence.entries_by_key, adjacent_key)
+        self.assertIn(
+            "record equality, hashing, string representation, copy or deconstruction",
+            air_boundary_assertions["AirBoundary"],
+        )
+        self.assertIn(
+            "decimal, fraction, complex or huge-integer ACH",
+            air_boundary_assertions["AirBoundary.__init__"],
+        )
+        self.assertIn(
+            "IDF emission and parent integration are not claimed",
+            air_boundary_assertions["AirBoundary.__init__"],
+        )
         expected_zone_idf = {
             "Zone.to_idf_hvac_default_object": (
                 1092,
