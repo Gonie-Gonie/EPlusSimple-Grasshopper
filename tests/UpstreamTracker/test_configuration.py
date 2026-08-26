@@ -40,16 +40,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(794, len(compatibility.needs_reverification))
+        self.assertEqual(781, len(compatibility.needs_reverification))
         self.assertEqual(
-            103,
+            113,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            93,
+            96,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -87,6 +87,31 @@ class ConfigurationTests(unittest.TestCase):
             "immutable-validated-grm-template",
             by_key[("src/epsimple/utils.py", "GRJSON_FORMAT")].exception_id,
         )
+        expected_common_core = {
+            "Setting": ("equivalent", None),
+            "Setting.DEFAULT_EP_VERSION": ("equivalent", None),
+            "Setting.DEFAULT_YEAR": ("equivalent", None),
+            "Version": ("exception", "native-energyplus-version-descriptor"),
+            "Version.__format__": ("equivalent", None),
+            "Version.__init__": (
+                "exception",
+                "validated-energyplus-version-construction",
+            ),
+            "Version.__iter__": ("equivalent", None),
+            "Version.ep_dirname": ("equivalent", None),
+            "Version.iddname": ("equivalent", None),
+            "Version.major": ("equivalent", None),
+            "Version.minor": ("equivalent", None),
+            "Version.patch": ("equivalent", None),
+            "Version.to_version_anyway": (
+                "exception",
+                "strongly-typed-energyplus-version-coercion",
+            ),
+        }
+        for symbol, (classification, exception_id) in expected_common_core.items():
+            entry = by_key[("src/idragon/common.py", symbol)]
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
         terminal_scope = {
             (
                 "src/epsimple/core/model.py",

@@ -553,21 +553,21 @@
     "out_of_scope",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "equivalent",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:2bc9e2cecf5052862602b347154844c15d73e0484bdf4ff10f7a047a12e3209d",
+  "content_sha256": "sha256:77a74b94ba95caf55a8d1ce90c57b974218055be96545fd9fc71838b09c0eea1",
   "details": [
     {
       "evidence": [
@@ -2637,6 +2637,59 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#common-core-setting-6e21a202"
+      ],
+      "index": 553,
+      "rationale": "Trusted cross-language evidence verifies Setting across the exact three-case common-core slice: the exact default version/year values, roundtrip and native engineering shape."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#common-core-setting-default-ep-version-f61d5ffd"
+      ],
+      "index": 554,
+      "rationale": "Trusted cross-language evidence verifies Setting.DEFAULT_EP_VERSION across the exact three-case common-core slice: the exact 24.2.0 components and formatted installation identities."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#common-core-setting-default-year-06415c37"
+      ],
+      "index": 555,
+      "rationale": "Trusted cross-language evidence verifies Setting.DEFAULT_YEAR across the exact three-case common-core slice: the exact 2026 scalar, calendar and run-period default."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#native-energyplus-version-descriptor",
+        "upstream/symbol-evidence.json#common-core-version-1c497416"
+      ],
+      "exception_id": "native-energyplus-version-descriptor",
+      "index": 556,
+      "rationale": "Trusted cross-language evidence verifies Version across the exact three-case common-core slice: component order, immutable public shape and identity-based equality semantics, and directly observes the open arbitrary-precision Python identity object against the sealed immutable nonnegative Int32 native descriptor."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#common-core-version-format-da210c4f"
+      ],
+      "index": 557,
+      "rationale": "Trusted cross-language evidence verifies Version.__format__ across the exact three-case common-core slice: default, empty and caller-provided separators across exact components."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-energyplus-version-construction",
+        "upstream/symbol-evidence.json#common-core-version-init-a3def102"
+      ],
+      "exception_id": "validated-energyplus-version-construction",
+      "index": 558,
+      "rationale": "Trusted cross-language evidence verifies Version.__init__ across the exact three-case common-core slice: integer overloads, string tokenization and the pinned failure surface, and directly observes Python dynamic arguments, bool-as-int and malformed error paths against explicit validated CLR constructors."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#common-core-version-iter-6d3a4bad"
+      ],
+      "index": 559,
+      "rationale": "Trusted cross-language evidence verifies Version.__iter__ across the exact three-case common-core slice: ordered iteration, fresh enumerators, exhaustion and collection conversions."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-common-py-version-repr-91a0c4f0"
       ],
       "index": 560,
@@ -2648,6 +2701,50 @@
       ],
       "index": 561,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#common-core-version-ep-dirname-4b01fd15"
+      ],
+      "index": 562,
+      "rationale": "Trusted cross-language evidence verifies Version.ep_dirname across the exact three-case common-core slice: exact default, legacy, zero and large installation-directory names."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#common-core-version-iddname-35a0ff29"
+      ],
+      "index": 563,
+      "rationale": "Trusted cross-language evidence verifies Version.iddname across the exact three-case common-core slice: exact default, legacy, zero and large IDD filenames."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#common-core-version-major-eb78e2b1"
+      ],
+      "index": 564,
+      "rationale": "Trusted cross-language evidence verifies Version.major across the exact three-case common-core slice: default, explicit-three and two-component major values."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#common-core-version-minor-2574c063"
+      ],
+      "index": 565,
+      "rationale": "Trusted cross-language evidence verifies Version.minor across the exact three-case common-core slice: default, explicit-three and two-component minor values."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#common-core-version-patch-e799dbd5"
+      ],
+      "index": 566,
+      "rationale": "Trusted cross-language evidence verifies Version.patch across the exact three-case common-core slice: default, explicit-three and two-component patch values."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#strongly-typed-energyplus-version-coercion",
+        "upstream/symbol-evidence.json#common-core-version-to-version-anyway-d5993054"
+      ],
+      "exception_id": "strongly-typed-energyplus-version-coercion",
+      "index": 567,
+      "rationale": "Trusted cross-language evidence verifies Version.to_version_anyway across the exact three-case common-core slice: existing identity, strings, integer sequences and rejection behavior, and directly observes Python catch-all dynamic forwarding against closed typed From overloads and explicit collection validation."
     },
     {
       "evidence": [
@@ -4574,9 +4671,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 103,
-      "exception": 93,
-      "needs_reverification": 794,
+      "equivalent": 113,
+      "exception": 96,
+      "needs_reverification": 781,
       "out_of_scope": 252
     },
     "entry_count": 1242

@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:be9b3941f23035b82a1188aa60b99bd8ccdceadaa64b6676daefe389667710e0",
+  "content_sha256": "sha256:f859ce7c69a388e316d17c571a1c531f579fbaca4b81595d4198349acd8abd05",
   "entries": [
     {
       "implementation": {
@@ -364,6 +364,344 @@
       ],
       "symbol": "GRJSON_FORMAT",
       "upstream_symbol_hash": "sha256:6c3ef8ba838797c6783d1ed35b52dcd6b4eb364baa529820c6df9ed8dfb2e75e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusDefaults"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Setting across its exact three-case common-core slice: the exact default version/year values, roundtrip and native engineering shape.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0d05f1bcfecdc0113093f01f6eb3019ef82851f4ffd3efadae865d28e4d46324",
+          "id": "common-core-setting-6e21a202",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Setting",
+      "upstream_symbol_hash": "sha256:6e21a2020f51e224497609cab212d06906e185320247c6604a763f2498b8a965"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusDefaults.DefaultVersion"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Setting.DEFAULT_EP_VERSION across its exact three-case common-core slice: the exact 24.2.0 components and formatted installation identities.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b4d7cfd7b97864b1ff83bffef0cf9be60e328fdd7a588d120815c035c719bf52",
+          "id": "common-core-setting-default-ep-version-f61d5ffd",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Setting.DEFAULT_EP_VERSION",
+      "upstream_symbol_hash": "sha256:f61d5ffdf018890e5d6e521ee25af49c93de60ce1d8a10c00e41b8d484d64ba6"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusDefaults.DefaultYear"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Setting.DEFAULT_YEAR across its exact three-case common-core slice: the exact 2026 scalar, calendar and run-period default.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:35202d147c160fa9c81b4d7b8044ff147964bf2566fe48de43c02e8b84724621",
+          "id": "common-core-setting-default-year-06415c37",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Setting.DEFAULT_YEAR",
+      "upstream_symbol_hash": "sha256:06415c37d66501858c44650d009662b50212cac62baf713ca9e75276e737eb14"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusVersion"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Version across its exact three-case common-core slice: component order, immutable public shape and identity-based equality semantics. The comparison directly verifies the open arbitrary-precision Python identity object against the sealed immutable nonnegative Int32 native descriptor.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:8a77e446a1ba38a1a07b873abe60bb46e03c5d42281cc299984c8969316ffbc2",
+          "id": "common-core-version-1c497416",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Version",
+      "upstream_symbol_hash": "sha256:1c497416f9054aec72cc23eb32f3740e6001e70183471e0453128ec74d7770c8"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusVersion.Format"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Version.__format__ across its exact three-case common-core slice: default, empty and caller-provided separators across exact components.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:31ea3d976c78b4684ca19a313f541cb5cf4278ef0a9b4a3bf495c2da5a15bc41",
+          "id": "common-core-version-format-da210c4f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Version.__format__",
+      "upstream_symbol_hash": "sha256:da210c4fe8b52304df65a5ebcd0ac74511eed62730dd724b3c6f8ce3fbabc528"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusVersion.EnergyPlusVersion"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Version.__init__ across its exact three-case common-core slice: integer overloads, string tokenization and the pinned failure surface. The comparison directly verifies Python dynamic arguments, bool-as-int and malformed error paths against explicit validated CLR constructors.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:124a57530761a9bee0dbffe48acdd20d1ed563cb151624d5f585d6817cfec849",
+          "id": "common-core-version-init-a3def102",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Version.__init__",
+      "upstream_symbol_hash": "sha256:a3def1029c1ebaf97d2c94d1efdc88f0c302c44e0c93d2045c38be0b12a0e983"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusVersion.GetEnumerator"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Version.__iter__ across its exact three-case common-core slice: ordered iteration, fresh enumerators, exhaustion and collection conversions.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:effad4e57c5325a13bf9b43d6e952ffe09c5ccfabc2f7542dfc30f4676c0894e",
+          "id": "common-core-version-iter-6d3a4bad",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Version.__iter__",
+      "upstream_symbol_hash": "sha256:6d3a4baddd16fa313692dee29016da7b507b724a99f3e96f90b3def0b20c84e0"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusVersion.EnergyPlusDirectoryName"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Version.ep_dirname across its exact three-case common-core slice: exact default, legacy, zero and large installation-directory names.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:dc3c975313a9f31813dee803ee360c15294c69bc89c6e3ae45432a618bb93851",
+          "id": "common-core-version-ep-dirname-4b01fd15",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Version.ep_dirname",
+      "upstream_symbol_hash": "sha256:4b01fd15706bc10675d11074bffb225f0ff0cf52d42c9367e9f815e420c43f38"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusVersion.LegacyIddFileName"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Version.iddname across its exact three-case common-core slice: exact default, legacy, zero and large IDD filenames.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:88067f27a6b0931b733f539013e7e5d2be5dc28df6110970284240f88b7d99c9",
+          "id": "common-core-version-iddname-35a0ff29",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Version.iddname",
+      "upstream_symbol_hash": "sha256:35a0ff29689c5bec73734a0541aed807b56f3f7d452f9803d3dc48cdfa2987cf"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusVersion.Major"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Version.major across its exact three-case common-core slice: default, explicit-three and two-component major values.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:eb0c26f261f32232f51a6aed38628128eaf7a3375bcfea4ab340faba0edf5bf4",
+          "id": "common-core-version-major-eb78e2b1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Version.major",
+      "upstream_symbol_hash": "sha256:eb78e2b16110644dbb1186f0957d03be39f3b277422c81019a9da6b15d4e8723"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusVersion.Minor"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Version.minor across its exact three-case common-core slice: default, explicit-three and two-component minor values.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:18555848fbb749dbf02ebf5a98707091b06f54f13682279ac369f9406b3447f7",
+          "id": "common-core-version-minor-2574c063",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Version.minor",
+      "upstream_symbol_hash": "sha256:2574c06325619eff67f689a237849ff548f990cc4f121556aa1b8a563d9828c0"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusVersion.Patch"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Version.patch across its exact three-case common-core slice: default, explicit-three and two-component patch values.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a9d57f82eebf999c637ba98bb0fc2d7925d92d5a2cce3818257d0242edffcdde",
+          "id": "common-core-version-patch-e799dbd5",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Version.patch",
+      "upstream_symbol_hash": "sha256:e799dbd50398b1bce90539df69a7c61165ec72ea1933bba3cf17bbdea580b8de"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "source_sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "symbol": "GonieGonie.InvisibleDragon.EnergyPlusVersion.From"
+      },
+      "path": "src/idragon/common.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Version.to_version_anyway across its exact three-case common-core slice: existing identity, strings, integer sequences and rejection behavior. The comparison directly verifies Python catch-all dynamic forwarding against closed typed From overloads and explicit collection validation.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:eadcd90269908d8f0c0c6444e8484461dd16c2512196c55b5676f44a7b154514",
+          "id": "common-core-version-to-version-anyway-d5993054",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/CommonCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:73acdfd19f517c8fe98adfa2f138cc77fc711501a7173fd2b7f1ea4fc9d26d7d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Common.CommonCoreOracleParityTests.MatchesPinnedPythonCommonCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Version.to_version_anyway",
+      "upstream_symbol_hash": "sha256:d59930546366ae649f0b4c1b7f0c3e38b46194099dc987873b519e47883fcc61"
     },
     {
       "implementation": {
@@ -5101,9 +5439,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 196,
-    "passed_receipt_count": 196,
-    "receipt_count": 196,
+    "entry_count": 209,
+    "passed_receipt_count": 209,
+    "receipt_count": 209,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
