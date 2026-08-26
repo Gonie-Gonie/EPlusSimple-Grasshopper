@@ -58,6 +58,11 @@
       "sha256": "7cbdcad0691b3e56010981217f11e515c6cb7f417b6a22643925876b33e6de81"
     },
     {
+      "path": "dragon-model-projections-oracle.json",
+      "bytes": 22156,
+      "sha256": "cee03dd2df0ef704dd77145e94223cc1a74a852ef3d822307749fe368b489117"
+    },
+    {
       "path": "dragon-model-terrain-oracle.json",
       "bytes": 17936,
       "sha256": "f371e7b98aebb4f5bb338185c32e804975801349a123c58aba4d78263658183e"

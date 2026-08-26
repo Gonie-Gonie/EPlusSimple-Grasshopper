@@ -7,6 +7,7 @@ using GonieGonie.InvisibleDragon.Idf;
 using GonieGonie.InvisibleDragon.Internal;
 using GonieGonie.InvisibleDragon.Shape;
 using OpaqueConstruction = GonieGonie.InvisibleDragon.Construction.Construction;
+using ZoneProfile = GonieGonie.InvisibleDragon.Profile.Profile;
 
 namespace GonieGonie.InvisibleDragon.Model;
 
@@ -108,6 +109,82 @@ public sealed class EnergyModel
     public OutputTableSettings OutputTables { get; }
 
     public IReadOnlyList<Surface> Surfaces => new ReadOnlyCollection<Surface>(Zones.SelectMany(zone => zone.Surfaces).ToArray());
+
+    /// <summary>
+    /// Opaque constructions assigned directly to host surfaces.
+    /// Equivalent definitions retain their first object and surface encounter order.
+    /// </summary>
+    public IReadOnlyList<OpaqueConstruction> UsedConstructions
+    {
+        get
+        {
+            var result = new List<OpaqueConstruction>();
+            foreach (Surface surface in Surfaces)
+            {
+                if (surface.Construction is OpaqueConstruction construction
+                    && !result.Any(existing => existing.Equals(construction)))
+                {
+                    result.Add(construction);
+                }
+            }
+
+            return new ReadOnlyCollection<OpaqueConstruction>(result);
+        }
+    }
+
+    /// <summary>
+    /// Layers referenced by <see cref="UsedConstructions"/> in deterministic first-use order.
+    /// </summary>
+    /// <remarks>
+    /// InvisibleDragon 0.7.0 hashes layers by name but compares their material and thickness.
+    /// Requiring both the same ordinal name and the pinned layer equality reproduces that set
+    /// membership without exposing Python hash-table ordering or runtime hash collisions.
+    /// </remarks>
+    public IReadOnlyList<Layer> UsedLayers
+    {
+        get
+        {
+            var result = new List<Layer>();
+            foreach (OpaqueConstruction construction in UsedConstructions)
+            {
+                foreach (Layer layer in construction.Layers)
+                {
+                    if (!result.Any(existing => UsedLayerEquals(existing, layer)))
+                    {
+                        result.Add(layer);
+                    }
+                }
+            }
+
+            return new ReadOnlyCollection<Layer>(result);
+        }
+    }
+
+    /// <summary>
+    /// Zone profiles keyed by their case-sensitive names.
+    /// The first occurrence fixes the result position and the last occurrence supplies the object.
+    /// </summary>
+    public IReadOnlyList<ZoneProfile> UsedProfiles
+    {
+        get
+        {
+            var orderedNames = new List<string>();
+            var profilesByName = new Dictionary<string, ZoneProfile>(StringComparer.Ordinal);
+            foreach (Zone zone in Zones)
+            {
+                string name = zone.Profile.Name;
+                if (!profilesByName.ContainsKey(name))
+                {
+                    orderedNames.Add(name);
+                }
+
+                profilesByName[name] = zone.Profile;
+            }
+
+            return new ReadOnlyCollection<ZoneProfile>(
+                orderedNames.Select(name => profilesByName[name]).ToArray());
+        }
+    }
 
     /// <summary>
     /// Zones that have both an HVAC assignment and a profile-level HVAC availability schedule.
@@ -223,6 +300,12 @@ public sealed class EnergyModel
 
         return zone.Profile.HvacAvailability is not null
             && HvacAssignments.Any(assignment => assignment.ZoneId.Equals(zone.Id));
+    }
+
+    private static bool UsedLayerEquals(Layer first, Layer second)
+    {
+        return StringComparer.Ordinal.Equals(first.Name, second.Name)
+            && first.Equals(second);
     }
 
     private void AddHvacIdentityDiagnostics(List<Diagnostic> diagnostics)

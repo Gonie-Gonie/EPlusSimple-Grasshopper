@@ -1,0 +1,749 @@
+{
+  "cases": [
+    {
+      "executor": "energy-model-surfaces",
+      "id": "dragon-model-projections.surfaces.empty-fresh",
+      "python": {
+        "facts": {
+          "fresh_list_each_access": true,
+          "input_zone_surface_indices": [],
+          "output_surface_indices": [],
+          "registry_labels": [],
+          "result_type": "list",
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.surfaces"
+    },
+    {
+      "executor": "energy-model-surfaces",
+      "id": "dragon-model-projections.surfaces.flatten-order-identity",
+      "python": {
+        "facts": {
+          "fresh_list_each_access": true,
+          "input_zone_surface_indices": [
+            [
+              0,
+              1
+            ],
+            [],
+            [
+              1,
+              2,
+              0
+            ]
+          ],
+          "output_surface_indices": [
+            0,
+            1,
+            1,
+            2,
+            0
+          ],
+          "registry_labels": [
+            "A",
+            "B",
+            "C"
+          ],
+          "result_type": "list",
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.surfaces"
+    },
+    {
+      "executor": "energy-model-surfaces",
+      "id": "dragon-model-projections.surfaces.result-mutation-isolated",
+      "python": {
+        "facts": {
+          "first_result_indices_after_mutation": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "first_result_indices_before_mutation": [
+            0,
+            1,
+            2
+          ],
+          "fresh_list_each_access": true,
+          "input_zone_surface_indices": [
+            [
+              0,
+              1
+            ],
+            [
+              2
+            ]
+          ],
+          "registry_labels": [
+            "A",
+            "B",
+            "C",
+            "RESULT-ONLY"
+          ],
+          "result_type": "list",
+          "returned_list_mutation_supported": true,
+          "second_result_indices_after_mutation": [
+            0,
+            1,
+            2
+          ],
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.surfaces"
+    },
+    {
+      "executor": "energy-model-used-constructions",
+      "expected_dotnet": {
+        "adaptation": "deterministic-used-construction-projection",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-projections.used-constructions.collision-dedup",
+      "python": {
+        "facts": {
+          "construction_registry": [
+            {
+              "hash_decimal": "-3612718561660722853",
+              "label": "first-equal",
+              "name": "Shared"
+            },
+            {
+              "hash_decimal": "-3612718561660722853",
+              "label": "later-equal",
+              "name": "Shared"
+            },
+            {
+              "hash_decimal": "-3612718561660722853",
+              "label": "same-name-unequal",
+              "name": "Shared"
+            },
+            {
+              "hash_decimal": "-8767484776472450951",
+              "label": "other",
+              "name": "Other"
+            }
+          ],
+          "equality": {
+            "first_equals_later": true,
+            "first_equals_same_name_unequal": false
+          },
+          "fresh_list_each_access": true,
+          "input_registry_indices": [
+            0,
+            1,
+            2,
+            3,
+            0
+          ],
+          "output_labels": [
+            "other",
+            "same-name-unequal",
+            "first-equal"
+          ],
+          "output_registry_indices": [
+            3,
+            2,
+            0
+          ],
+          "result_type": "list",
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.used_constructions"
+    },
+    {
+      "executor": "energy-model-used-constructions",
+      "expected_dotnet": {
+        "adaptation": "deterministic-used-construction-projection",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-projections.used-constructions.empty-filtered",
+      "python": {
+        "facts": {
+          "construction_registry": [],
+          "fresh_list_each_access": true,
+          "input_filtered_labels": [
+            "air-a",
+            "no-mass",
+            "air-b",
+            "air-a"
+          ],
+          "input_kinds": [
+            "air-boundary",
+            "no-mass",
+            "air-boundary",
+            "air-boundary"
+          ],
+          "output_labels": [],
+          "output_registry_indices": [],
+          "result_type": "list",
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.used_constructions"
+    },
+    {
+      "executor": "energy-model-used-constructions",
+      "expected_dotnet": {
+        "adaptation": "deterministic-used-construction-projection",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-projections.used-constructions.hash-order-resize",
+      "python": {
+        "facts": {
+          "construction_registry": [
+            {
+              "hash_decimal": "-6911130904927632849",
+              "label": "c0",
+              "name": "Zulu"
+            },
+            {
+              "hash_decimal": "-5489660660273336509",
+              "label": "c1",
+              "name": "Alpha"
+            },
+            {
+              "hash_decimal": "8186683321401986332",
+              "label": "c2",
+              "name": "Dragon"
+            },
+            {
+              "hash_decimal": "-2926469781815734489",
+              "label": "c3",
+              "name": "Brick"
+            },
+            {
+              "hash_decimal": "7551058807157025315",
+              "label": "c4",
+              "name": "Omega"
+            },
+            {
+              "hash_decimal": "3011526259676503552",
+              "label": "c5",
+              "name": "한글"
+            },
+            {
+              "hash_decimal": "8889289909682346436",
+              "label": "c6",
+              "name": "🐉"
+            },
+            {
+              "hash_decimal": "5629188463992988249",
+              "label": "c7",
+              "name": "Glass"
+            },
+            {
+              "hash_decimal": "2500655868670704794",
+              "label": "c8",
+              "name": "Roof"
+            }
+          ],
+          "fresh_list_each_access": true,
+          "input_registry_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "output_labels": [
+            "c5",
+            "c4",
+            "c1",
+            "c6",
+            "c3",
+            "c0",
+            "c7",
+            "c8",
+            "c2"
+          ],
+          "output_registry_indices": [
+            5,
+            4,
+            1,
+            6,
+            3,
+            0,
+            7,
+            8,
+            2
+          ],
+          "result_type": "list",
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.used_constructions"
+    },
+    {
+      "executor": "energy-model-used-layers",
+      "expected_dotnet": {
+        "adaptation": "deterministic-used-layer-projection",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-projections.used-layers.empty-fresh",
+      "python": {
+        "facts": {
+          "construction_input_kinds": [
+            "air-boundary",
+            "no-mass",
+            "air-boundary"
+          ],
+          "construction_input_labels": [
+            "air-a",
+            "no-mass",
+            "air-b"
+          ],
+          "fresh_list_each_access": true,
+          "layer_registry": [],
+          "output_labels": [],
+          "output_layer_indices": [],
+          "result_type": "list",
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.used_layers"
+    },
+    {
+      "executor": "energy-model-used-layers",
+      "expected_dotnet": {
+        "adaptation": "deterministic-used-layer-projection",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-projections.used-layers.hash-equality-mismatch",
+      "python": {
+        "facts": {
+          "equality": {
+            "base_equals_equal_different_name": true,
+            "base_equals_exact_duplicate": true,
+            "base_equals_same_name_different_thickness": false
+          },
+          "fresh_list_each_access": true,
+          "layer_registry": [
+            {
+              "hash_decimal": "-276500280528783050",
+              "label": "base",
+              "name": "Core-A"
+            },
+            {
+              "hash_decimal": "-8620372976408521596",
+              "label": "equal-different-name",
+              "name": "Core-B"
+            },
+            {
+              "hash_decimal": "-276500280528783050",
+              "label": "same-name-different-thickness",
+              "name": "Core-A"
+            },
+            {
+              "hash_decimal": "-276500280528783050",
+              "label": "exact-duplicate",
+              "name": "Core-A"
+            }
+          ],
+          "output_labels": [
+            "same-name-different-thickness",
+            "equal-different-name",
+            "base"
+          ],
+          "output_layer_indices": [
+            2,
+            1,
+            0
+          ],
+          "python_flattened_layer_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "python_used_construction_indices": [
+            0
+          ],
+          "result_type": "list",
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.used_layers"
+    },
+    {
+      "executor": "energy-model-used-layers",
+      "expected_dotnet": {
+        "adaptation": "deterministic-used-layer-projection",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-projections.used-layers.hash-order-resize",
+      "python": {
+        "facts": {
+          "construction_input_indices": [
+            0,
+            1,
+            2
+          ],
+          "construction_registry": [
+            {
+              "hash_decimal": "-6911130904927632849",
+              "label": "construction-zulu",
+              "name": "Zulu"
+            },
+            {
+              "hash_decimal": "-5489660660273336509",
+              "label": "construction-alpha",
+              "name": "Alpha"
+            },
+            {
+              "hash_decimal": "8186683321401986332",
+              "label": "construction-dragon",
+              "name": "Dragon"
+            }
+          ],
+          "fresh_list_each_access": true,
+          "layer_registry": [
+            {
+              "hash_decimal": "-6911130904927632849",
+              "label": "l0",
+              "name": "Zulu"
+            },
+            {
+              "hash_decimal": "-5489660660273336509",
+              "label": "l1",
+              "name": "Alpha"
+            },
+            {
+              "hash_decimal": "8186683321401986332",
+              "label": "l2",
+              "name": "Dragon"
+            },
+            {
+              "hash_decimal": "-2926469781815734489",
+              "label": "l3",
+              "name": "Brick"
+            },
+            {
+              "hash_decimal": "7551058807157025315",
+              "label": "l4",
+              "name": "Omega"
+            },
+            {
+              "hash_decimal": "3011526259676503552",
+              "label": "l5",
+              "name": "한글"
+            },
+            {
+              "hash_decimal": "8889289909682346436",
+              "label": "l6",
+              "name": "🐉"
+            },
+            {
+              "hash_decimal": "5629188463992988249",
+              "label": "l7",
+              "name": "Glass"
+            },
+            {
+              "hash_decimal": "2500655868670704794",
+              "label": "l8",
+              "name": "Roof"
+            }
+          ],
+          "output_labels": [
+            "l5",
+            "l4",
+            "l6",
+            "l1",
+            "l3",
+            "l0",
+            "l7",
+            "l8",
+            "l2"
+          ],
+          "output_layer_indices": [
+            5,
+            4,
+            6,
+            1,
+            3,
+            0,
+            7,
+            8,
+            2
+          ],
+          "python_flattened_layer_indices": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            0,
+            1,
+            2
+          ],
+          "python_used_construction_indices": [
+            1,
+            2,
+            0
+          ],
+          "result_type": "list",
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.used_layers"
+    },
+    {
+      "executor": "energy-model-used-profiles",
+      "id": "dragon-model-projections.used-profiles.case-sensitive-unicode-replacement",
+      "python": {
+        "facts": {
+          "first_seen_name_order": [
+            "Alpha",
+            "alpha",
+            "한글",
+            "🐉"
+          ],
+          "fresh_list_each_access": true,
+          "input_names": [
+            "Alpha",
+            "alpha",
+            "한글",
+            "🐉",
+            "Alpha"
+          ],
+          "output_labels": [
+            "alpha-last",
+            "lower-alpha",
+            "korean",
+            "dragon"
+          ],
+          "output_profile_indices": [
+            4,
+            1,
+            2,
+            3
+          ],
+          "profile_registry_labels": [
+            "alpha-first",
+            "lower-alpha",
+            "korean",
+            "dragon",
+            "alpha-last"
+          ],
+          "result_type": "list",
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.used_profiles"
+    },
+    {
+      "executor": "energy-model-used-profiles",
+      "id": "dragon-model-projections.used-profiles.duplicate-name-last-wins",
+      "python": {
+        "facts": {
+          "first_seen_name_order": [
+            "Team",
+            "Aux",
+            "Core"
+          ],
+          "fresh_list_each_access": true,
+          "input_names": [
+            "Team",
+            "Aux",
+            "Team",
+            "Core",
+            "Aux"
+          ],
+          "output_labels": [
+            "team-last",
+            "aux-last",
+            "core-only"
+          ],
+          "output_profile_indices": [
+            2,
+            4,
+            3
+          ],
+          "profile_registry_labels": [
+            "team-first",
+            "aux-first",
+            "team-last",
+            "core-only",
+            "aux-last"
+          ],
+          "result_type": "list",
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.used_profiles"
+    },
+    {
+      "executor": "energy-model-used-profiles",
+      "id": "dragon-model-projections.used-profiles.empty-fresh",
+      "python": {
+        "facts": {
+          "first_seen_name_order": [],
+          "fresh_list_each_access": true,
+          "input_names": [],
+          "output_labels": [],
+          "output_profile_indices": [],
+          "profile_registry_labels": [],
+          "result_type": "list",
+          "selected_objects_are_registry_objects": true,
+          "source_lists_unchanged": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.used_profiles"
+    }
+  ],
+  "cases_sha256": "sha256:b8ec10dcd0e44e8c46584cd241489b58fb4562d99bb790aff5202a6350b0a784",
+  "consumer_contract": {
+    "adaptations": {
+      "EnergyModel.used_constructions": "deterministic-used-construction-projection",
+      "EnergyModel.used_layers": "deterministic-used-layer-projection"
+    },
+    "assertion_ids": {
+      "EnergyModel.surfaces": "dragon-model-projections-surfaces-9bd40b3f",
+      "EnergyModel.used_constructions": "dragon-model-projections-used-constructions-b34dd26f",
+      "EnergyModel.used_layers": "dragon-model-projections-used-layers-e15c8d38",
+      "EnergyModel.used_profiles": "dragon-model-projections-used-profiles-b8a8a5f6"
+    },
+    "case_count": 12,
+    "case_ids": [
+      "dragon-model-projections.surfaces.empty-fresh",
+      "dragon-model-projections.surfaces.flatten-order-identity",
+      "dragon-model-projections.surfaces.result-mutation-isolated",
+      "dragon-model-projections.used-constructions.collision-dedup",
+      "dragon-model-projections.used-constructions.empty-filtered",
+      "dragon-model-projections.used-constructions.hash-order-resize",
+      "dragon-model-projections.used-layers.empty-fresh",
+      "dragon-model-projections.used-layers.hash-equality-mismatch",
+      "dragon-model-projections.used-layers.hash-order-resize",
+      "dragon-model-projections.used-profiles.case-sensitive-unicode-replacement",
+      "dragon-model-projections.used-profiles.duplicate-name-last-wins",
+      "dragon-model-projections.used-profiles.empty-fresh"
+    ],
+    "classifications": {
+      "EnergyModel.surfaces": "equivalent",
+      "EnergyModel.used_constructions": "exception",
+      "EnergyModel.used_layers": "exception",
+      "EnergyModel.used_profiles": "equivalent"
+    },
+    "hash_encoding": "signed-int64-decimal-string",
+    "identity_encoding": "logical-label-and-registry-index-only-no-id-or-address",
+    "native_order": "stable-first-use-order-for-declared-set-order-adaptations",
+    "runtime_names": "pinned-python-only-no-native-type-name-claims",
+    "target_symbols": [
+      "EnergyModel.surfaces",
+      "EnergyModel.used_constructions",
+      "EnergyModel.used_layers",
+      "EnergyModel.used_profiles"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-model-projections.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:9ac965df879ac38614b80c38800b8b7e28f3a584d20be71afac9301eea223c06",
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+      "symbol": "EnergyModel.surfaces",
+      "symbol_hash": "sha256:9bd40b3fbdc974f1f3a7550b2df6ec8f4c41ce9cb55ecbc07b3f2fce264834c0"
+    },
+    {
+      "body_hash": "sha256:56cc7c61d049242fa77c1c2457d6d9f5678ca41a41af86ddd2ff93be20ed78b3",
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:47d2fe431ebc01347b7bef0a612859f9d45131c67b7ee67971757a0694919023",
+      "symbol": "EnergyModel.used_constructions",
+      "symbol_hash": "sha256:b34dd26fdb9af00f053278e77ac3cc85394a646405e8e5e0b5c077342fd1bebd"
+    },
+    {
+      "body_hash": "sha256:bde4ae4c3efe1129e1c3ee19dc273a7e251f770f7173fbc1a3d2b67ec80d0733",
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:d5bc4e72ec91b9ecdbdd46cd7a50e3da18408ff227d9549c7ae42bf488381844",
+      "symbol": "EnergyModel.used_layers",
+      "symbol_hash": "sha256:e15c8d38a7b918895bf399bc319bbb2caf2810d416cb4c8792fedb5cec3358f0"
+    },
+    {
+      "body_hash": "sha256:5e04e97f3e1161b94743a1377272a037c646df7e0aa07b6a3ce51c3d4b61ae9a",
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:2417ee894af42b33af27bb335ee1a91c7205d1a2093879c28e6e4178554e4a60",
+      "symbol": "EnergyModel.used_profiles",
+      "symbol_hash": "sha256:b8a8a5f692a0cbeeec4215cbab71e89291a3f96e68d7702853631dc454a695ab"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "sources": [
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      }
+    ]
+  }
+}

@@ -33,6 +33,7 @@ $utilsCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\gene
 $commonCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_common_core_oracle.py'
 $constantsEngineeringGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_constants_engineering_oracle.py'
 $dragonModelConditioningGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_conditioning_oracle.py'
+$dragonModelProjectionsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_projections_oracle.py'
 $dragonModelTerrainGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_terrain_oracle.py'
 $launcherResultParserGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_launcher_result_parser_oracle.py'
 $launcherRuntimeGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_launcher_runtime_oracle.py'
@@ -62,6 +63,7 @@ $utilsCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_utils
 $commonCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_common_core_oracle.py'
 $constantsEngineeringTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_constants_engineering_oracle.py'
 $dragonModelConditioningTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_conditioning_oracle.py'
+$dragonModelProjectionsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_projections_oracle.py'
 $dragonModelTerrainTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_terrain_oracle.py'
 $publicSymbolInventoryPath = Join-Path $repositoryRoot 'upstream\public-symbol-inventory.json'
 $tempRoot = Join-Path $repositoryRoot 'temp'
@@ -143,6 +145,7 @@ foreach ($requiredFile in @(
     $commonCoreGeneratorPath,
     $constantsEngineeringGeneratorPath,
     $dragonModelConditioningGeneratorPath,
+    $dragonModelProjectionsGeneratorPath,
     $dragonModelTerrainGeneratorPath,
     $iddGeneratorPath,
     $constructionEqualityGeneratorPath,
@@ -170,6 +173,7 @@ foreach ($requiredFile in @(
     $commonCoreTestPath,
     $constantsEngineeringTestPath,
     $dragonModelConditioningTestPath,
+    $dragonModelProjectionsTestPath,
     $dragonModelTerrainTestPath,
     $publicSymbolInventoryPath
 )) {
@@ -652,7 +656,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, dragon model conditioning/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, dragon model conditioning/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -781,6 +785,24 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $dragonModelConditioningGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-dragon-model-conditioning-reference.log') `
     -FailureMessage 'Generating the Python dragon model conditioning oracle failed'
+
+$dragonModelProjectionsOraclePath = Join-Path $outputRoot 'dragon-model-projections-oracle.json'
+$dragonModelProjectionsGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $dragonModelProjectionsGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $dragonModelProjectionsOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $dragonModelProjectionsGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-dragon-model-projections-reference.log') `
+    -FailureMessage 'Generating the Python dragon model projections oracle failed'
 
 $dragonModelTerrainOraclePath = Join-Path $outputRoot 'dragon-model-terrain-oracle.json'
 $dragonModelTerrainGeneratorArguments = @(

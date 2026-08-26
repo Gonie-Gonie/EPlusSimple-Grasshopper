@@ -1646,3 +1646,31 @@
     api_contract: callers query EnergyModel.ConditionedZones or EnergyModel.UnconditionedZones instead of reading Zone.is_conditioned; no parity is claimed for a mutable zone-local supply reference or a context-free native Zone predicate
     compatibility_evidence: supply-only, availability-only, both-present and neither-present truth behavior plus ordered partition membership, source-zone identity, read-only native results, model-context assignment lookup, and shared IDF-assembler use remain required in trusted cross-language receipts
   approval: accepted-native-api-adaptation
+
+- id: deterministic-used-construction-projection
+  upstream:
+    path: src/idragon/dragon/model.py
+    symbol: EnergyModel.used_constructions
+    symbol_hash: sha256:b34dd26fdb9af00f053278e77ac3cc85394a646405e8e5e0b5c077342fd1bebd
+  difference:
+    upstream: builds a Python set from every host surface construction before filtering for Construction instances, so equal hash-compatible values retain the first object but the returned mutable list follows CPython hash-table order and varies with string hashing, table size, and insertion history
+    dotnet: returns a fresh read-only list of opaque Construction values from host surfaces only, excluding AirBoundary, NoMass, and opening constructions from this projection while preserving the first equal object and deterministic first host-surface encounter order
+  effect:
+    engineering_result: the same opaque host-surface construction definitions remain available exactly once with the same first surviving object identity, while nondeterministic Python set-table ordering and other valid construction categories outside this getter are not included
+    api_contract: callers use EnergyModel.UsedConstructions as IReadOnlyList<Construction>; no parity is claimed for mutable list results, CPython hash-table order, or construction categories outside this opaque host-surface projection
+    compatibility_evidence: empty and filtered models, equal duplicates, same-name unequal values, repeated identity, resize-sensitive hash order, category exclusions, first-object identity, deterministic encounter order, freshness, and read-only behavior remain required in trusted cross-language receipts
+  approval: accepted-native-api-adaptation
+
+- id: deterministic-used-layer-projection
+  upstream:
+    path: src/idragon/dragon/model.py
+    symbol: EnergyModel.used_layers
+    symbol_hash: sha256:e15c8d38a7b918895bf399bc319bbb2caf2810d416cb4c8792fedb5cec3358f0
+  difference:
+    upstream: flattens layers from the hash-ordered used-construction set into a second Python set and returns Layer objects despite its list[Material] annotation, with membership and order affected by name hashing, Layer equality, collisions, and CPython set-table layout
+    dotnet: returns IReadOnlyList<Layer> in deterministic construction-major and layer-major first-encounter order, collapsing only candidates with the same ordinal layer name and upstream-equivalent Layer values while retaining the first object and declining to emulate accidental cross-name hash collisions
+  effect:
+    engineering_result: all supported distinct layer definitions and the first identity for true same-name equal duplicates are preserved while order is deterministic and unrelated names cannot collapse merely because Python hashes collide
+    api_contract: callers use EnergyModel.UsedLayers as IReadOnlyList<Layer>; no parity is claimed for the inaccurate upstream Material annotation, mutable list results, CPython set-table order, or accidental hash-collision behavior
+    compatibility_evidence: empty and fresh results, runtime Layer values, exact duplicates, equal different-name retention, same-name unequal retention, same-name equality across secondary properties, resize-sensitive hash order, deterministic encounter order, identity, and read-only behavior remain required in trusted cross-language receipts
+  approval: accepted-native-api-adaptation

@@ -61,6 +61,16 @@ profile availability, and the exact supply-plus-profile predicate without
 serializing raw Python identities. The two model list properties are exact
 equivalents; the zone-local predicate is a reviewed model-context adaptation.
 
+`python-0.7.0/dragon-model-projections-oracle.json` pins 12 ordered CPython
+3.12.7 observations for `EnergyModel.surfaces`, `used_constructions`,
+`used_layers`, and `used_profiles`. It preserves nested surface flattening and
+source identity, seed-zero SipHash13 construction/layer set order and their
+equality/hash edge cases, explicit AirBoundary and NoMass exclusion, and
+duplicate-profile last-value replacement without moving the first name slot.
+Surface and profile projections are exact
+equivalents; the two runtime-specific set orders are reviewed deterministic
+first-use native-order adaptations.
+
 `python-0.7.0/dragon-model-terrain-oracle.json` pins 18 ordered CPython
 3.12.7 observations for the `Terrain` class and five members in
 `idragon/dragon/model.py`. It preserves exact member order, title-case semantic
