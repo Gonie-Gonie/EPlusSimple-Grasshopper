@@ -38,7 +38,7 @@ public sealed class EnergyModelConstructionDefaultsOracleParityTests
     private const string AssemblerRepositoryPath =
         "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs";
     private const string AssemblerSourceSha256 =
-        "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3";
+        "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905";
 
     private static readonly string[] DefaultObjectTypes =
     {

@@ -622,13 +622,23 @@ internal static class EnergyModelIdfAssembler
                 surfacesById);
         }
 
+        string boundaryObject = string.Empty;
+        if (host.Boundary.Condition == SurfaceBoundaryCondition.Zone)
+        {
+            Surface adjacent = surfacesById[host.Boundary.AdjacentSurfaceId!];
+            IOpening counterpart = adjacent.Openings.Single(candidate =>
+                candidate.Type == opening.Type
+                && opening.Polygon.IsGeometricallyEquivalentTo(candidate.Polygon, true));
+            boundaryObject = counterpart.Name;
+        }
+
         IdfObject result = context.Create(
             "FenestrationSurface:Detailed",
             IdfGenerationContext.Field(0, "Name", opening.Name),
             IdfGenerationContext.Field(1, "Surface Type", opening.Type),
             IdfGenerationContext.Field(2, "Construction Name", constructionName),
             IdfGenerationContext.Field(3, "Building Surface Name", host.Name),
-            IdfGenerationContext.Field(4, "Outside Boundary Condition Object", null),
+            IdfGenerationContext.Field(4, "Outside Boundary Condition Object", boundaryObject),
             IdfGenerationContext.Field(5, "View Factor to Ground", "autocalculate"),
             IdfGenerationContext.Field(6, "Frame and Divider Name", null),
             IdfGenerationContext.Field(7, "Multiplier", 1),

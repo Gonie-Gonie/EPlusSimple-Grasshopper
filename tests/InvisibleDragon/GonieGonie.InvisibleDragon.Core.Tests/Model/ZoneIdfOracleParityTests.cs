@@ -59,9 +59,9 @@ public sealed class ZoneIdfOracleParityTests
         "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3";
     private const string ImplementationRepositoryPath =
         "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs";
-    private const int ImplementationByteLength = 50_281;
+    private const int ImplementationByteLength = 50_764;
     private const string ImplementationSha256 =
-        "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3";
+        "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905";
     private const string ZoneRepositoryPath =
         "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Zone.cs";
     private const int ZoneByteLength = 6_698;
