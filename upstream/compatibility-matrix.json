@@ -644,8 +644,58 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "exception",
+    "needs_reverification",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "exception",
+    "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "exception",
+    "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
     "out_of_scope",
     "needs_reverification",
     "needs_reverification",
@@ -671,56 +721,6 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -743,13 +743,13 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -788,7 +788,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "exception",
     "equivalent",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:15604f12d5cc51fec00505ee8938895f9ff3f833b790ddda3a27b1c03180a958",
+  "content_sha256": "sha256:b9257512eaea4395904d6bc38821f261626cd68402eb6a66e925c8114f841df4",
   "details": [
     {
       "evidence": [
@@ -2968,6 +2968,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#legacy-context-absorption-chiller-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-absorption-chiller-to-idf-object-17d5fb8a"
+      ],
+      "exception_id": "legacy-context-absorption-chiller-idf-emission",
+      "index": 644,
+      "rationale": "Trusted cross-language evidence verifies AbsorptionChiller.to_idf_object across its exact 2-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-airhandlingunit-deepcopy-49a11aeb"
       ],
       "index": 646,
@@ -2975,10 +2984,82 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#compact-native-boiler-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-boiler-to-idf-object-b63a454b"
+      ],
+      "exception_id": "compact-native-boiler-idf-emission",
+      "index": 655,
+      "rationale": "Trusted cross-language evidence verifies Boiler.to_idf_object across its exact 2-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#fresh-native-boiler-generator-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-boiler-to-idf-object-as-generator-d239b10e"
+      ],
+      "exception_id": "fresh-native-boiler-generator-idf-emission",
+      "index": 656,
+      "rationale": "Trusted cross-language evidence verifies Boiler.to_idf_object_as_generator across its exact 1-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#legacy-context-chiller-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-chiller-to-idf-object-fc75129f"
+      ],
+      "exception_id": "legacy-context-chiller-idf-emission",
+      "index": 660,
+      "rationale": "Trusted cross-language evidence verifies Chiller.to_idf_object across its exact 2-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#cooling-tower-context-closed-single-speed-main-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-closed-single-speed-cooling-tower-to-idf-main-object-0e14065a"
+      ],
+      "exception_id": "cooling-tower-context-closed-single-speed-main-idf-emission",
+      "index": 663,
+      "rationale": "Trusted cross-language evidence verifies ClosedSingleSpeedCoolingTower.to_idf_main_object across its exact 1-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#cooling-tower-context-closed-two-speed-main-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-closed-two-speed-cooling-tower-to-idf-main-object-30402683"
+      ],
+      "exception_id": "cooling-tower-context-closed-two-speed-main-idf-emission",
+      "index": 666,
+      "rationale": "Trusted cross-language evidence verifies ClosedTwoSpeedCoolingTower.to_idf_main_object across its exact 1-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-compressortype-str-f40e4929"
       ],
       "index": 671,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#chiller-context-compressor-curve-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-compressor-type-to-idf-curve-object-8ca6c2d0"
+      ],
+      "exception_id": "chiller-context-compressor-curve-idf-emission",
+      "index": 672,
+      "rationale": "Trusted cross-language evidence verifies CompressorType.to_idf_curve_object across its exact 3-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#contextual-native-cooling-tower-main-idf-contract",
+        "upstream/symbol-evidence.json#dragon-hvac-cooling-tower-to-idf-main-object-4615e08c"
+      ],
+      "exception_id": "contextual-native-cooling-tower-main-idf-contract",
+      "index": 684,
+      "rationale": "Trusted cross-language reflection evidence verifies only CoolingTower.to_idf_main_object across its exact one-case abstract-contract slice: the upstream abstract trace and native abstract member/NotSupportedException boundary. Runtime IDF emission, two-call freshness, operational determinism, source-state mutation behavior, concrete implementations, invalid behavior and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#legacy-context-cooling-tower-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-cooling-tower-to-idf-object-74287ab5"
+      ],
+      "exception_id": "legacy-context-cooling-tower-idf-emission",
+      "index": 685,
+      "rationale": "Trusted cross-language evidence verifies CoolingTower.to_idf_object across its exact 2-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
     },
     {
       "evidence": [
@@ -3003,6 +3084,33 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#compact-native-heat-pump-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-heat-pump-to-idf-object-b8cb28ab"
+      ],
+      "exception_id": "compact-native-heat-pump-idf-emission",
+      "index": 743,
+      "rationale": "Trusted cross-language evidence verifies HeatPump.to_idf_object across its exact 2-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#cooling-tower-context-open-single-speed-main-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-open-single-speed-cooling-tower-to-idf-main-object-102bccd9"
+      ],
+      "exception_id": "cooling-tower-context-open-single-speed-main-idf-emission",
+      "index": 746,
+      "rationale": "Trusted cross-language evidence verifies OpenSingleSpeedCoolingTower.to_idf_main_object across its exact 1-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#cooling-tower-context-open-two-speed-main-idf-emission",
+        "upstream/symbol-evidence.json#dragon-hvac-open-two-speed-cooling-tower-to-idf-main-object-7fd75338"
+      ],
+      "exception_id": "cooling-tower-context-open-two-speed-main-idf-emission",
+      "index": 749,
+      "rationale": "Trusted cross-language evidence verifies OpenTwoSpeedCoolingTower.to_idf_main_object across its exact 1-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-photovoltaicpanel-str-ba95fcfe"
       ],
       "index": 755,
@@ -3016,6 +3124,15 @@
       "exception_id": "compact-native-photovoltaic-idf-emission",
       "index": 761,
       "rationale": "Trusted cross-language evidence verifies all 33 native-present fields, exact six-object order and linkage, boundary and custom inputs, default and custom effective-area ratios, square-root geometry, freshness, determinism and source immutability across the bounded valid domain. The 164 compact omissions are exhaustively partitioned into 158 Python None or blank fields and six independently verified official EnergyPlus 24.2 IDD defaults, including the 145-None extensible generator tail; the class, constructor, properties, invalid and non-finite state, validation behavior, isolated IdfObject policy and parent EnergyModel orchestration remain separately unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#contextual-native-source-system-idf-contract",
+        "upstream/symbol-evidence.json#dragon-hvac-source-system-to-idf-object-63aa5eab"
+      ],
+      "exception_id": "contextual-native-source-system-idf-contract",
+      "index": 788,
+      "rationale": "Trusted cross-language reflection evidence verifies only SourceSystem.to_idf_object across its exact one-case abstract-contract slice: the upstream abstract trace and native abstract member/NotSupportedException boundary. Runtime IDF emission, two-call freshness, operational determinism, source-state mutation behavior, concrete implementations, invalid behavior and EnergyModel parent orchestration are explicitly not claimed."
     },
     {
       "evidence": [
@@ -5118,8 +5235,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 133,
-      "exception": 130,
-      "needs_reverification": 727,
+      "exception": 143,
+      "needs_reverification": 714,
       "out_of_scope": 252
     },
     "entry_count": 1242

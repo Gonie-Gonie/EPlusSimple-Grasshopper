@@ -1912,3 +1912,185 @@
     api_contract: callers place validated geometry, profiles and systems in an EnergyModel and call EnergyModel.ToIdfDocument instead of invoking a standalone Zone converter or receiving a mutable flattened list; real geometry replaces fixture-only child trace doubles and model stages determine global placement, while Surface.to_idf_object, HVAC-default and load child converters remain dependency-only at this parent boundary and are not closed transitively
     compatibility_evidence: within the exact nine-case Zone fixture, all three parent cases, one compact Zone object per case, every Python Zone field's native or official-IDD-default classification, zero unexplained omissions, private geometry/load/HVAC stage bindings through public EnergyModel.ToIdfDocument, explicit Python trace-double versus native real-geometry and parent-order classification, exact surface order, two-call document/object/field freshness and determinism, source-graph reference and value immutability, and explicit non-closure of Zone class contracts, Surface, Window, Door, shading, Profile, Schedule, IdfObject, invalid behavior, global order, deduplication, conflicts and EnergyModel parent assembly remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
+
+- id: legacy-context-absorption-chiller-idf-emission
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: AbsorptionChiller.to_idf_object
+    symbol_hash: sha256:17d5fb8afe2207a9772bc47b4f5424d740b3df76301f04c9155c0fbd725af969
+  difference:
+    upstream: emits a complete mutable standalone absorption-chiller IDF list using implicit surrounding names, complete None/default tails, and legacy object ordering
+    dotnet: AbsorptionChiller.ToIdfObjects emits a fresh mutable List of typed compact IDF objects through an explicit legacy IdfGenerationContext, preserving supported engineering fields and links while omitting blank/default tails and adding required native context objects
+  effect:
+    engineering_result: the exact two common-valid-state cases preserve the verified absorption plant topology, names, links, setpoints, effective fields, and ordered target families after every upstream field is classified as a native value, compact omission, official default, or explicit context difference
+    api_contract: callers use the typed native source and explicit generation context rather than a mutable duck-typed standalone Python converter; raw list shape, field counts, and context-object placement differ
+    compatibility_evidence: both pinned cases, exact native and reflection routes, complete field classification, deterministic repeated values, fresh distinct result and object instances, and unchanged source state remain required; the result collection is mutable, and constructors, properties, invalid behavior, active absorption runtime, isolated IdfObject policy, and EnergyModel parent orchestration remain outside this receipt
+  approval: accepted-native-api-adaptation
+
+- id: compact-native-boiler-idf-emission
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: Boiler.to_idf_object
+    symbol_hash: sha256:b63a454be07eaaee80563cbac25cd78a3fb632e462e2ea37aed7906c2967a7ae
+  difference:
+    upstream: returns a fresh mutable complete boiler IDF list retaining all allowed None and default-valued fields
+    dotnet: Boiler.ToIdfObjects returns a fresh mutable List with compact typed boiler and plant objects, preserving supported values and links while relying on explicit context and verified EnergyPlus defaults for omitted tails
+  effect:
+    engineering_result: the autosized natural-gas and explicit propane cases preserve fuel, efficiency, capacity, temperature, flow, plant linkage, names, and all classified effective fields
+    api_contract: compact native field counts and explicit generation context replace the padded standalone Python list; the native result remains mutable and is not represented as an immutable collection
+    compatibility_evidence: both exact cases, full field classification, native route, deterministic repeated values, fresh distinct lists and objects, and source-state immutability remain required; constructors, properties, enum closure, invalid behavior, isolated IdfObject policy, and parent assembly remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: fresh-native-boiler-generator-idf-emission
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: Boiler.to_idf_object_as_generator
+    symbol_hash: sha256:d239b10e14f899ec4f7d9d914e7322fd684d3cfe5096609119f32eef9dc79aa0
+  difference:
+    upstream: mutates and returns a fresh complete boiler-as-generator IDF list with a caller-supplied demand connection and padded None/default fields
+    dotnet: Boiler.ToIdfObjects emits the generator demand-connection topology as a fresh mutable List of fresh typed compact objects through IdfGenerationContext without mutating the source boiler
+  effect:
+    engineering_result: the exact topology case preserves generator-side demand links, object-family order, names, effective fields, deterministic values, and source state
+    api_contract: a typed native context and fresh mutable result replace the Python standalone converter; freshness and source immutability are verified, but collection immutability is not claimed
+    compatibility_evidence: the one exact generator case, complete field and link comparison, deterministic repeated emission, distinct result and object identities, and unchanged source state remain required; broader boiler behavior, invalid inputs, isolated IdfObject policy, and parent orchestration remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: legacy-context-chiller-idf-emission
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: Chiller.to_idf_object
+    symbol_hash: sha256:fc75129f85debd982652240620407bcb408a73fcf5fef197871599da771e34d3
+  difference:
+    upstream: emits a complete mutable standalone chiller list with implicit source, condenser and cooling-tower context and complete None/default field tails
+    dotnet: Chiller.ToIdfObjects emits a fresh mutable List of typed compact chiller, curve, loop and connection objects through an explicit legacy IdfGenerationContext, with verified context enrichments and compact omissions
+  effect:
+    engineering_result: the representative and alternate-setpoint cases preserve the supported chiller topology, compressor curves, names, setpoints, links, ordered target families, and classified effective fields
+    api_contract: explicit typed generation context and compact native objects replace a padded standalone Python result; exact raw global object order and mutable Python object shape are not preserved
+    compatibility_evidence: both exact cases, full upstream-field classification, native/reflection bindings, deterministic repeated values, fresh distinct lists and objects, and unchanged source state remain required; safe native screw behavior, invalid cases, isolated IdfObject policy, and parent model assembly remain excluded
+  approval: accepted-native-api-adaptation
+
+- id: cooling-tower-context-closed-single-speed-main-idf-emission
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: ClosedSingleSpeedCoolingTower.to_idf_main_object
+    symbol_hash: sha256:0e14065ae1ca788b3219a54f5d1ae41d7783e0dd6497667cf583e7387e0396d8
+  difference:
+    upstream: returns one complete closed single-speed cooling-tower main object using standalone mutable state and padded fields
+    dotnet: ClosedSingleSpeedCoolingTower.CreateMainObject is reached through ToIdfObjects with explicit generation context and produces a fresh typed compact main object inside a fresh mutable result list
+  effect:
+    engineering_result: the exact one-case slice preserves tower type, names, node links, capacities, flow values, effective defaults, and ordered field semantics
+    api_contract: callers invoke the concrete typed source route rather than the private main-object mapper directly; compact fields and context replace standalone complete-object shape
+    compatibility_evidence: the pinned case, complete field classification, private mapper linkage, deterministic repeated values, fresh result/object identities, and unchanged source state remain required; constructors, invalid behavior, isolated IdfObject policy, and parent assembly remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: cooling-tower-context-closed-two-speed-main-idf-emission
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: ClosedTwoSpeedCoolingTower.to_idf_main_object
+    symbol_hash: sha256:30402683c6a9db760ad1727995d72c8357b93cf5704625779e5ce43b907739ae
+  difference:
+    upstream: returns one complete closed two-speed cooling-tower main object using standalone mutable state and padded fields
+    dotnet: ClosedTwoSpeedCoolingTower.CreateMainObject is reached through ToIdfObjects with explicit generation context and produces a fresh typed compact two-speed main object inside a fresh mutable result list
+  effect:
+    engineering_result: the exact one-case slice preserves tower type, names, node links, high/low-speed capacities and flows, effective defaults, and ordered field semantics
+    api_contract: the concrete typed source route and compact context-bound object replace direct standalone complete-object emission
+    compatibility_evidence: the pinned case, exhaustive field classification, private mapper linkage, deterministic repeated values, fresh result/object identities, and unchanged source state remain required; constructors, invalid behavior, isolated IdfObject policy, and parent assembly remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: chiller-context-compressor-curve-idf-emission
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: CompressorType.to_idf_curve_object
+    symbol_hash: sha256:8ca6c2d070a534718d90fe79dff5d8a1e015593a0551a5a53ec3bf1c3e932d81
+  difference:
+    upstream: maps each compressor token directly to a fresh mutable complete performance-curve list
+    dotnet: Chiller.CreatePerformanceCurves emits the compressor-specific fresh typed compact curve slice within Chiller.ToIdfObjects and explicit chiller context
+  effect:
+    engineering_result: reciprocating, screw, and turbo cases preserve the verified curve families, names, coefficients, limits, object order, and effective fields; the native screw mapping is compared as observed without claiming broader safe-simulation behavior
+    api_contract: compressor curves are produced through a typed chiller rather than a standalone enum converter, and compact typed objects replace padded mutable Python objects
+    compatibility_evidence: all three compressor cases, exact curve slice and field classification, mapper linkage, deterministic repeated values, fresh result/object identities, and source-state immutability remain required; enum closure, invalid values, active runtime behavior, and parent assembly remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: contextual-native-cooling-tower-main-idf-contract
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: CoolingTower.to_idf_main_object
+    symbol_hash: sha256:4615e08c6ec284f9bac80d2a5f25beca2b9706f4c706e0b47cf27ab35c2c5915
+  difference:
+    upstream: declares an abstract main-object converter whose bounded trace-double observation yields no operational IDF objects
+    dotnet: CoolingTower.CreateMainObject is an abstract native contract reached only by concrete subclasses; the exact abstract boundary is verified by reflection and expected NotSupportedException behavior without executing a two-call emitter
+  effect:
+    engineering_result: none is claimed for runtime IDF emission at the abstract contract itself; concrete cooling-tower emissions are evidenced separately
+    api_contract: a typed abstract member and explicit unsupported boundary replace the upstream abstract method shape
+    compatibility_evidence: only the one exact abstract-contract case, member identity, reflection binding, and unsupported boundary remain required; runtime emission, freshness, determinism, source-state mutation behavior, concrete implementations, invalid behavior, and parent orchestration are explicitly not claimed here
+  approval: accepted-native-api-adaptation
+
+- id: legacy-context-cooling-tower-idf-emission
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: CoolingTower.to_idf_object
+    symbol_hash: sha256:74287ab5af4712528e239034183e43122280dcf9760ebece16161e93c629c762
+  difference:
+    upstream: emits complete mutable cooling-tower object lists with standalone implicit plant context and padded None/default fields
+    dotnet: CoolingTower.ToIdfObjects emits fresh mutable Lists of typed compact tower and plant-context objects through explicit IdfGenerationContext
+  effect:
+    engineering_result: the closed-two-speed and open-single-speed full-object cases preserve concrete tower selection, names, links, plant topology, ordered target families, and every classified effective field
+    api_contract: explicit typed context and compact native objects replace the standalone padded Python lists; raw field counts and context-object placement differ
+    compatibility_evidence: both exact cases, concrete dispatch, complete field classification, deterministic repeated values, fresh distinct lists and objects, and unchanged source state remain required; abstract main contract and other concrete variants are separately evidenced, while invalid behavior and parent assembly remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: compact-native-heat-pump-idf-emission
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: HeatPump.to_idf_object
+    symbol_hash: sha256:b8cb28ab0ec6d2775a69548b0b5d7983afa38e0f980ec1e1835d40ccd1edacb1
+  difference:
+    upstream: returns a fresh mutable complete heat-pump IDF list retaining all allowed None and default-valued fields
+    dotnet: HeatPump.ToIdfObjects returns a fresh mutable List of typed compact heat-pump objects through explicit context, preserving supported values and links while omitting verified blank/default tails
+  effect:
+    engineering_result: the representative autosized and explicit-capacity cases preserve heating/cooling capacities, coefficients, flows, names, links, order, and all classified effective fields
+    api_contract: compact typed context-bound emission replaces the padded standalone Python converter; the result is fresh but remains mutable
+    compatibility_evidence: both exact cases, complete field classification, deterministic repeated values, fresh distinct lists and objects, and unchanged source state remain required; constructors, properties, invalid values, geothermal behavior, isolated IdfObject policy, and EnergyModel parent assembly remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: cooling-tower-context-open-single-speed-main-idf-emission
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: OpenSingleSpeedCoolingTower.to_idf_main_object
+    symbol_hash: sha256:102bccd9091484e0f915dc24010d22c22a91c69b95a17e10f44ab7d6b189e61f
+  difference:
+    upstream: returns one complete open single-speed cooling-tower main object using standalone mutable state and padded fields
+    dotnet: OpenSingleSpeedCoolingTower.CreateMainObject is reached through ToIdfObjects with explicit context and produces a fresh typed compact main object inside a fresh mutable result list
+  effect:
+    engineering_result: the exact one-case slice preserves open-tower type, names, node links, capacity and flow values, effective defaults, and ordered fields
+    api_contract: the concrete typed source route and compact context-bound object replace direct standalone complete-object emission
+    compatibility_evidence: the pinned case, exhaustive field classification, mapper linkage, deterministic repeated values, fresh result/object identities, and unchanged source state remain required; constructors, invalid behavior, isolated IdfObject policy, and parent assembly remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: cooling-tower-context-open-two-speed-main-idf-emission
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: OpenTwoSpeedCoolingTower.to_idf_main_object
+    symbol_hash: sha256:7fd75338aa5a98323eb0d3cfeac729d921c00f95e91f7e03cfddf4b2b885e736
+  difference:
+    upstream: returns one complete open two-speed cooling-tower main object using standalone mutable state and padded fields
+    dotnet: OpenTwoSpeedCoolingTower.CreateMainObject is reached through ToIdfObjects with explicit context and produces a fresh typed compact two-speed main object inside a fresh mutable result list
+  effect:
+    engineering_result: the exact one-case slice preserves open-tower type, names, node links, high/low-speed capacities and flows, effective defaults, and ordered fields
+    api_contract: the concrete typed source route and compact context-bound object replace direct standalone complete-object emission
+    compatibility_evidence: the pinned case, exhaustive field classification, mapper linkage, deterministic repeated values, fresh result/object identities, and unchanged source state remain required; constructors, invalid behavior, isolated IdfObject policy, and parent assembly remain unresolved
+  approval: accepted-native-api-adaptation
+
+- id: contextual-native-source-system-idf-contract
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: SourceSystem.to_idf_object
+    symbol_hash: sha256:63aa5eab420418dc4467359ae79d5b1b0b59f1a0501e6e5953039b3a3adfb57b
+  difference:
+    upstream: declares an abstract source-system converter whose bounded trace-double observation yields no operational IDF objects
+    dotnet: SourceSystem.ToIdfObjects is a typed abstract native contract; the exact abstract boundary is verified by reflection and expected NotSupportedException behavior without executing a two-call emitter
+  effect:
+    engineering_result: none is claimed for runtime IDF emission at the abstract contract itself; concrete source-system emissions are evidenced separately
+    api_contract: a typed abstract member and explicit unsupported boundary replace the upstream abstract method shape
+    compatibility_evidence: only the one exact abstract-contract case, member identity, reflection binding, and unsupported boundary remain required; runtime emission, freshness, determinism, source-state mutation behavior, concrete systems, invalid behavior, and parent orchestration are explicitly not claimed here
+  approval: accepted-native-api-adaptation

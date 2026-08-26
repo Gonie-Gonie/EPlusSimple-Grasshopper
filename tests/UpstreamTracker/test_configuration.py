@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(727, len(compatibility.needs_reverification))
+        self.assertEqual(714, len(compatibility.needs_reverification))
         self.assertEqual(
             133,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            130,
+            143,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -127,6 +127,90 @@ class ConfigurationTests(unittest.TestCase):
         }
         for symbol, (index, exception_id, assertion_id) in expected_zone_idf.items():
             key = ("src/idragon/dragon/shape.py", symbol)
+            entry = by_key[key]
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual(entry, compatibility.matrix.entries[index], symbol)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            self.assertEqual(
+                (
+                    f"upstream/compatibility-exceptions.yml#{exception_id}",
+                    f"upstream/symbol-evidence.json#{assertion_id}",
+                ),
+                entry.evidence,
+                symbol,
+            )
+        expected_source_system_idf = {
+            "AbsorptionChiller.to_idf_object": (
+                644,
+                "legacy-context-absorption-chiller-idf-emission",
+                "dragon-hvac-absorption-chiller-to-idf-object-17d5fb8a",
+            ),
+            "Boiler.to_idf_object": (
+                655,
+                "compact-native-boiler-idf-emission",
+                "dragon-hvac-boiler-to-idf-object-b63a454b",
+            ),
+            "Boiler.to_idf_object_as_generator": (
+                656,
+                "fresh-native-boiler-generator-idf-emission",
+                "dragon-hvac-boiler-to-idf-object-as-generator-d239b10e",
+            ),
+            "Chiller.to_idf_object": (
+                660,
+                "legacy-context-chiller-idf-emission",
+                "dragon-hvac-chiller-to-idf-object-fc75129f",
+            ),
+            "ClosedSingleSpeedCoolingTower.to_idf_main_object": (
+                663,
+                "cooling-tower-context-closed-single-speed-main-idf-emission",
+                "dragon-hvac-closed-single-speed-cooling-tower-to-idf-main-object-0e14065a",
+            ),
+            "ClosedTwoSpeedCoolingTower.to_idf_main_object": (
+                666,
+                "cooling-tower-context-closed-two-speed-main-idf-emission",
+                "dragon-hvac-closed-two-speed-cooling-tower-to-idf-main-object-30402683",
+            ),
+            "CompressorType.to_idf_curve_object": (
+                672,
+                "chiller-context-compressor-curve-idf-emission",
+                "dragon-hvac-compressor-type-to-idf-curve-object-8ca6c2d0",
+            ),
+            "CoolingTower.to_idf_main_object": (
+                684,
+                "contextual-native-cooling-tower-main-idf-contract",
+                "dragon-hvac-cooling-tower-to-idf-main-object-4615e08c",
+            ),
+            "CoolingTower.to_idf_object": (
+                685,
+                "legacy-context-cooling-tower-idf-emission",
+                "dragon-hvac-cooling-tower-to-idf-object-74287ab5",
+            ),
+            "HeatPump.to_idf_object": (
+                743,
+                "compact-native-heat-pump-idf-emission",
+                "dragon-hvac-heat-pump-to-idf-object-b8cb28ab",
+            ),
+            "OpenSingleSpeedCoolingTower.to_idf_main_object": (
+                746,
+                "cooling-tower-context-open-single-speed-main-idf-emission",
+                "dragon-hvac-open-single-speed-cooling-tower-to-idf-main-object-102bccd9",
+            ),
+            "OpenTwoSpeedCoolingTower.to_idf_main_object": (
+                749,
+                "cooling-tower-context-open-two-speed-main-idf-emission",
+                "dragon-hvac-open-two-speed-cooling-tower-to-idf-main-object-7fd75338",
+            ),
+            "SourceSystem.to_idf_object": (
+                788,
+                "contextual-native-source-system-idf-contract",
+                "dragon-hvac-source-system-to-idf-object-63aa5eab",
+            ),
+        }
+        for symbol, (index, exception_id, assertion_id) in (
+            expected_source_system_idf.items()
+        ):
+            key = ("src/idragon/dragon/hvac.py", symbol)
             entry = by_key[key]
             self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
             self.assertEqual(entry, compatibility.matrix.entries[index], symbol)

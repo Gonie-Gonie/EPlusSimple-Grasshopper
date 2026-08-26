@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:bde9c4e42aac38e024c1111c4192f4ff747595e1e0de09e4455ad6951f05d1ca",
+  "content_sha256": "sha256:440a09efbbd72a4880c468cea2ad122a463820adbc5612140da6b542c11a44b1",
   "entries": [
     {
       "implementation": {
@@ -1173,6 +1173,318 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs",
+        "source_sha256": "sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller.ToIdfObjects"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify AbsorptionChiller.to_idf_object across its exact 2-case bounded common-valid-state slice through GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller.ToIdfObjects: ordered object families, complete upstream fields versus native values or explicitly classified compact/default/context differences, deterministic repeated values, fresh distinct result and object instances, and unchanged source state. The native result collection is mutable and is not claimed immutable; constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families, and EnergyModel parent orchestration remain separately unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:8c3cc3245322d6886e83d7f19b196e8c22d205589b7250dfe54b268a840553d7",
+          "id": "dragon-hvac-absorption-chiller-to-idf-object-17d5fb8a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "AbsorptionChiller.to_idf_object",
+      "upstream_symbol_hash": "sha256:17d5fb8afe2207a9772bc47b4f5424d740b3df76301f04c9155c0fbd725af969"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs",
+        "source_sha256": "sha256:b7889501a3f42dd455902edd711cea80e2f729b06cdb8d0357ec3f90136af64e",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.Boiler.ToIdfObjects"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Boiler.to_idf_object across its exact 2-case bounded common-valid-state slice through GonieGonie.InvisibleDragon.Hvac.Boiler.ToIdfObjects: ordered object families, complete upstream fields versus native values or explicitly classified compact/default/context differences, deterministic repeated values, fresh distinct result and object instances, and unchanged source state. The native result collection is mutable and is not claimed immutable; constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families, and EnergyModel parent orchestration remain separately unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:560dd11cf2062103a83c4a9c6d726171cbef710a0261d638ec1d957d2ae2c0e6",
+          "id": "dragon-hvac-boiler-to-idf-object-b63a454b",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Boiler.to_idf_object",
+      "upstream_symbol_hash": "sha256:b63a454be07eaaee80563cbac25cd78a3fb632e462e2ea37aed7906c2967a7ae"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs",
+        "source_sha256": "sha256:b7889501a3f42dd455902edd711cea80e2f729b06cdb8d0357ec3f90136af64e",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.Boiler.ToIdfObjects"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Boiler.to_idf_object_as_generator across its exact 1-case bounded common-valid-state slice through GonieGonie.InvisibleDragon.Hvac.Boiler.ToIdfObjects: ordered object families, complete upstream fields versus native values or explicitly classified compact/default/context differences, deterministic repeated values, fresh distinct result and object instances, and unchanged source state. The native result collection is mutable and is not claimed immutable; constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families, and EnergyModel parent orchestration remain separately unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e7b537de5f1bbc7fc2182081f20de7fb23fa8d2f4224e44355702cbfccc4de69",
+          "id": "dragon-hvac-boiler-to-idf-object-as-generator-d239b10e",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Boiler.to_idf_object_as_generator",
+      "upstream_symbol_hash": "sha256:d239b10e14f899ec4f7d9d914e7322fd684d3cfe5096609119f32eef9dc79aa0"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs",
+        "source_sha256": "sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.Chiller.ToIdfObjects"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Chiller.to_idf_object across its exact 2-case bounded common-valid-state slice through GonieGonie.InvisibleDragon.Hvac.Chiller.ToIdfObjects: ordered object families, complete upstream fields versus native values or explicitly classified compact/default/context differences, deterministic repeated values, fresh distinct result and object instances, and unchanged source state. The native result collection is mutable and is not claimed immutable; constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families, and EnergyModel parent orchestration remain separately unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c926f341cbcf35f65d8aa348d7b8681de9e69c72530cd5eea7dc27e8772485cc",
+          "id": "dragon-hvac-chiller-to-idf-object-fc75129f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Chiller.to_idf_object",
+      "upstream_symbol_hash": "sha256:fc75129f85debd982652240620407bcb408a73fcf5fef197871599da771e34d3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
+        "source_sha256": "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower.CreateMainObject"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify ClosedSingleSpeedCoolingTower.to_idf_main_object across its exact 1-case bounded common-valid-state slice through GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower.CreateMainObject: ordered object families, complete upstream fields versus native values or explicitly classified compact/default/context differences, deterministic repeated values, fresh distinct result and object instances, and unchanged source state. The native result collection is mutable and is not claimed immutable; constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families, and EnergyModel parent orchestration remain separately unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:fedb92764047c69fab93ad2904dd2cbac625d837911e7fb042f46030b731e73d",
+          "id": "dragon-hvac-closed-single-speed-cooling-tower-to-idf-main-object-0e14065a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ClosedSingleSpeedCoolingTower.to_idf_main_object",
+      "upstream_symbol_hash": "sha256:0e14065ae1ca788b3219a54f5d1ae41d7783e0dd6497667cf583e7387e0396d8"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
+        "source_sha256": "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower.CreateMainObject"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify ClosedTwoSpeedCoolingTower.to_idf_main_object across its exact 1-case bounded common-valid-state slice through GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower.CreateMainObject: ordered object families, complete upstream fields versus native values or explicitly classified compact/default/context differences, deterministic repeated values, fresh distinct result and object instances, and unchanged source state. The native result collection is mutable and is not claimed immutable; constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families, and EnergyModel parent orchestration remain separately unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7b8f6448e7f2647f23d3c6c5dd0e29d6b1d357186ca740378dbe1cce5c1abeb4",
+          "id": "dragon-hvac-closed-two-speed-cooling-tower-to-idf-main-object-30402683",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ClosedTwoSpeedCoolingTower.to_idf_main_object",
+      "upstream_symbol_hash": "sha256:30402683c6a9db760ad1727995d72c8357b93cf5704625779e5ce43b907739ae"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs",
+        "source_sha256": "sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.Chiller.CreatePerformanceCurves"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify CompressorType.to_idf_curve_object across its exact 3-case bounded common-valid-state slice through GonieGonie.InvisibleDragon.Hvac.Chiller.CreatePerformanceCurves: ordered object families, complete upstream fields versus native values or explicitly classified compact/default/context differences, deterministic repeated values, fresh distinct result and object instances, and unchanged source state. The native result collection is mutable and is not claimed immutable; constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families, and EnergyModel parent orchestration remain separately unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6c4f46942dff0ece43be46ffacd5517eb8867cd0ae61266df9cf4f1c3ec23c34",
+          "id": "dragon-hvac-compressor-type-to-idf-curve-object-8ca6c2d0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "CompressorType.to_idf_curve_object",
+      "upstream_symbol_hash": "sha256:8ca6c2d070a534718d90fe79dff5d8a1e015593a0551a5a53ec3bf1c3e932d81"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
+        "source_sha256": "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.CreateMainObject"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET reflection observations verify only the exact one-case abstract contract for CoolingTower.to_idf_main_object: the upstream abstract method trace and the native abstract member/NotSupportedException boundary are bound without claiming runtime IDF emission, two-call freshness, operational determinism, or source-state mutation behavior. Concrete source emitters, constructors, properties, invalid-domain semantics, isolated IdfObject policy, and EnergyModel parent orchestration remain outside this receipt.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:21b63a106b90327310959987608123e17b34593bfa17f156ee46aea095ff86b7",
+          "id": "dragon-hvac-cooling-tower-to-idf-main-object-4615e08c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "CoolingTower.to_idf_main_object",
+      "upstream_symbol_hash": "sha256:4615e08c6ec284f9bac80d2a5f25beca2b9706f4c706e0b47cf27ab35c2c5915"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
+        "source_sha256": "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify CoolingTower.to_idf_object across its exact 2-case bounded common-valid-state slice through GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects: ordered object families, complete upstream fields versus native values or explicitly classified compact/default/context differences, deterministic repeated values, fresh distinct result and object instances, and unchanged source state. The native result collection is mutable and is not claimed immutable; constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families, and EnergyModel parent orchestration remain separately unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:02994a145d207070905d95c265e8d03c85213d01cf7e57ad84ef00f84d45c648",
+          "id": "dragon-hvac-cooling-tower-to-idf-object-74287ab5",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "CoolingTower.to_idf_object",
+      "upstream_symbol_hash": "sha256:74287ab5af4712528e239034183e43122280dcf9760ebece16161e93c629c762"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs",
+        "source_sha256": "sha256:b7889501a3f42dd455902edd711cea80e2f729b06cdb8d0357ec3f90136af64e",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.HeatPump.ToIdfObjects"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify HeatPump.to_idf_object across its exact 2-case bounded common-valid-state slice through GonieGonie.InvisibleDragon.Hvac.HeatPump.ToIdfObjects: ordered object families, complete upstream fields versus native values or explicitly classified compact/default/context differences, deterministic repeated values, fresh distinct result and object instances, and unchanged source state. The native result collection is mutable and is not claimed immutable; constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families, and EnergyModel parent orchestration remain separately unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9adb2dc6fda5ef8e510c855a648b763bec84eaeeaf9c84c0c2f9f9ff67b2989d",
+          "id": "dragon-hvac-heat-pump-to-idf-object-b8cb28ab",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "HeatPump.to_idf_object",
+      "upstream_symbol_hash": "sha256:b8cb28ab0ec6d2775a69548b0b5d7983afa38e0f980ec1e1835d40ccd1edacb1"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
+        "source_sha256": "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower.CreateMainObject"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify OpenSingleSpeedCoolingTower.to_idf_main_object across its exact 1-case bounded common-valid-state slice through GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower.CreateMainObject: ordered object families, complete upstream fields versus native values or explicitly classified compact/default/context differences, deterministic repeated values, fresh distinct result and object instances, and unchanged source state. The native result collection is mutable and is not claimed immutable; constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families, and EnergyModel parent orchestration remain separately unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7afc74cf628250fbde90d79869b89649a9376b0c2f9322cc4fc628c5fd548372",
+          "id": "dragon-hvac-open-single-speed-cooling-tower-to-idf-main-object-102bccd9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "OpenSingleSpeedCoolingTower.to_idf_main_object",
+      "upstream_symbol_hash": "sha256:102bccd9091484e0f915dc24010d22c22a91c69b95a17e10f44ab7d6b189e61f"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
+        "source_sha256": "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower.CreateMainObject"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify OpenTwoSpeedCoolingTower.to_idf_main_object across its exact 1-case bounded common-valid-state slice through GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower.CreateMainObject: ordered object families, complete upstream fields versus native values or explicitly classified compact/default/context differences, deterministic repeated values, fresh distinct result and object instances, and unchanged source state. The native result collection is mutable and is not claimed immutable; constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families, and EnergyModel parent orchestration remain separately unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:782875d475ecbe0c04231435e8c00f3594033156c612d2ff934fcccad879f63a",
+          "id": "dragon-hvac-open-two-speed-cooling-tower-to-idf-main-object-7fd75338",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "OpenTwoSpeedCoolingTower.to_idf_main_object",
+      "upstream_symbol_hash": "sha256:7fd75338aa5a98323eb0d3cfeac729d921c00f95e91f7e03cfddf4b2b885e736"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs",
         "source_sha256": "sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82",
         "symbol": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.ToIdfObjects"
@@ -1196,6 +1508,32 @@
       ],
       "symbol": "PhotoVoltaicPanel.to_idf_object",
       "upstream_symbol_hash": "sha256:4723273d4b77d9286d4a47c4d753f71049e87d146ff912b0aa6a8ab8ed911287"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "source_sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "symbol": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET reflection observations verify only the exact one-case abstract contract for SourceSystem.to_idf_object: the upstream abstract method trace and the native abstract member/NotSupportedException boundary are bound without claiming runtime IDF emission, two-call freshness, operational determinism, or source-state mutation behavior. Concrete source emitters, constructors, properties, invalid-domain semantics, isolated IdfObject policy, and EnergyModel parent orchestration remain outside this receipt.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d05b4b8e04e8af4d5720a2c2b6c2fc383d77a70494c8ab18289909b4beff6fbf",
+          "id": "dragon-hvac-source-system-to-idf-object-63aa5eab",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:b89b72bf19dabd465c071461601c5497d6a7e9ede43e17554a54dd3cdfb7956b",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SourceSystemToIdfObjectOracleParityTests.MatchesPinnedPythonSourceSystemFamilyThroughNativeLegacyContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SourceSystem.to_idf_object",
+      "upstream_symbol_hash": "sha256:63aa5eab420418dc4467359ae79d5b1b0b59f1a0501e6e5953039b3a3adfb57b"
     },
     {
       "implementation": {
@@ -6843,9 +7181,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 263,
-    "passed_receipt_count": 263,
-    "receipt_count": 263,
+    "entry_count": 276,
+    "passed_receipt_count": 276,
+    "receipt_count": 276,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
