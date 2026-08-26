@@ -1228,13 +1228,13 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:77a74b94ba95caf55a8d1ce90c57b974218055be96545fd9fc71838b09c0eea1",
+  "content_sha256": "sha256:383011de50358f0f65cda69e0e13c0f6386153a6c29180359bbf41099c3202bc",
   "details": [
     {
       "evidence": [
@@ -4639,6 +4639,69 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-structured-energyplus-result",
+        "upstream/symbol-evidence.json#launcher-result-energyplus-result-eab88d95"
+      ],
+      "exception_id": "immutable-structured-energyplus-result",
+      "index": 1228,
+      "rationale": "Trusted cross-language evidence verifies EnergyPlusResult across the exact three-case launcher result-parser slice: default and populated topology, typed immutable result state, metadata, source isolation and mutation boundaries, and directly observes the open mutable partially initialized Python carrier against the sealed schema-stamped native aggregate and copied read-only collections."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-energyplus-result-file-loading",
+        "upstream/symbol-evidence.json#launcher-result-init-30d49efa"
+      ],
+      "exception_id": "validated-energyplus-result-file-loading",
+      "index": 1229,
+      "rationale": "Trusted cross-language evidence verifies EnergyPlusResult.__init__ across the exact three-case launcher result-parser slice: empty and populated result loading, deterministic artifact discovery, failure behavior and source provenance, and directly observes variadic suffix-driven Python file mutation against deterministic native directory or runtime parsing with typed source metadata."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#ordered-typed-energyplus-audit-parsing",
+        "upstream/symbol-evidence.json#launcher-result-parse-audit-7315fbc3"
+      ],
+      "exception_id": "ordered-typed-energyplus-audit-parsing",
+      "index": 1230,
+      "rationale": "Trusted cross-language evidence verifies EnergyPlusResult.parse_audit across the exact three-case launcher result-parser slice: integer entries, duplicate and ignored-value behavior, messages, ordered values and invariant numeric projections, and directly observes the duplicate-collapsing integer-only Python dictionary against ordered typed entries that retain duplicates, messages and finite numeric values."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#csv-aware-energyplus-boundary-parsing",
+        "upstream/symbol-evidence.json#launcher-result-parse-bnd-631c7884"
+      ],
+      "exception_id": "csv-aware-energyplus-boundary-parsing",
+      "index": 1231,
+      "rationale": "Trusted cross-language evidence verifies EnergyPlusResult.parse_bnd across the exact three-case launcher result-parser slice: declared schemas, ordered records, short-row padding, quoted CSV behavior and immutable field lookup, and directly observes header-keyed mutable pandas tables and comma-regex padding against immutable native schemas, CSV-aware records and null-padded field lookup."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#structured-energyplus-error-log-parsing",
+        "upstream/symbol-evidence.json#launcher-result-parse-err-f5789307"
+      ],
+      "exception_id": "structured-energyplus-error-log-parsing",
+      "index": 1232,
+      "rationale": "Trusted cross-language evidence verifies EnergyPlusResult.parse_err across the exact three-case launcher result-parser slice: elapsed arithmetic, diagnostics, continuations, summary counts, version metadata and missing-time behavior, and directly observes the elapsed-plus-Warning/Severe pandas tuple against the structured native metadata, diagnostics, continuations and nullable summary."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#explicitly-unsupported-energyplus-eso",
+        "upstream/symbol-evidence.json#launcher-result-parse-eso-3e849bcd"
+      ],
+      "exception_id": "explicitly-unsupported-energyplus-eso",
+      "index": 1233,
+      "rationale": "Trusted cross-language evidence verifies EnergyPlusResult.parse_eso across the exact three-case launcher result-parser slice: the exact upstream no-op contract and deliberate absence of native ESO parsing without claiming ESO support, and directly observes the callable Python stub that always returns None against deliberate absence of a native ParseEso API."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#typed-energyplus-tabular-parsing",
+        "upstream/symbol-evidence.json#launcher-result-parse-table-eaf18f21"
+      ],
+      "exception_id": "typed-energyplus-tabular-parsing",
+      "index": 1234,
+      "rationale": "Trusted cross-language evidence verifies EnergyPlusResult.parse_table across the exact three-case launcher result-parser slice: the narrow upstream monthly CSV grammar, ordered text and finite numeric values, missingness, duplicate reports and unsupported formats, and directly observes the brittle lowercase-csv pandas dictionary surface against ordered immutable native tables with general quoted CSV and invariant cell projections."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#strongly-typed-native-enum-validation",
         "upstream/symbol-evidence.json#utils-core-validate-enum-8b3b34b6"
       ],
@@ -4672,8 +4735,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 113,
-      "exception": 96,
-      "needs_reverification": 781,
+      "exception": 103,
+      "needs_reverification": 774,
       "out_of_scope": 252
     },
     "entry_count": 1242

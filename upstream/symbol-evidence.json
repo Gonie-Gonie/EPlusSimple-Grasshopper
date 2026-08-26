@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:f859ce7c69a388e316d17c571a1c531f579fbaca4b81595d4198349acd8abd05",
+  "content_sha256": "sha256:ea2fd02760205f6b6ce6af47a767f0b2d892fd11a4f306a6b8407a9ecb3302f2",
   "entries": [
     {
       "implementation": {
@@ -5359,6 +5359,188 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Results/EnergyPlusResultModels.cs",
+        "source_sha256": "sha256:d7f8ae53dd548f8c24cdcc5f1e0478bc3edfecfac9ec9ab7f0d846ba93501fa8",
+        "symbol": "GonieGonie.InvisibleDragon.Results.EnergyPlusSimulationResult"
+      },
+      "path": "src/idragon/launcher.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyPlusResult across its exact three-case launcher result-parser slice: default and populated topology, typed immutable result state, metadata, source isolation and mutation boundaries. The comparison directly verifies the open mutable partially initialized Python carrier against the sealed schema-stamped native aggregate and copied read-only collections.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4716b683516b7954b95769f3fb1a59e6e7ae05fe537be78abafd7a1923590817",
+          "id": "launcher-result-energyplus-result-eab88d95",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Results/EnergyPlusResultParserOracleParityTests.cs",
+          "test_source_sha256": "sha256:d3de0cc325633e656bde331e694a6ce3b9ad84a361bc10fbb000df8579ba993d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Results.EnergyPlusResultParserOracleParityTests.MatchesPinnedPythonLauncherResultParser",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyPlusResult",
+      "upstream_symbol_hash": "sha256:eab88d95447b32529789bf2881a5d4d3e13651c4e10d9bd732a6a647f1a1f597"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Results/EnergyPlusResultParser.cs",
+        "source_sha256": "sha256:5d310cb2448fddd94d5560b1e27bffa925e6f7d44996116f3950f04417f4e787",
+        "symbol": "GonieGonie.InvisibleDragon.Results.EnergyPlusResultParser.ParseDirectory"
+      },
+      "path": "src/idragon/launcher.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyPlusResult.__init__ across its exact three-case launcher result-parser slice: empty and populated result loading, deterministic artifact discovery, failure behavior and source provenance. The comparison directly verifies variadic suffix-driven Python file mutation against deterministic native directory or runtime parsing with typed source metadata.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:400a9c7391e263cb5268a1300e495ef2fb74cecb27379d3e8d55aebcd08a0b5a",
+          "id": "launcher-result-init-30d49efa",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Results/EnergyPlusResultParserOracleParityTests.cs",
+          "test_source_sha256": "sha256:d3de0cc325633e656bde331e694a6ce3b9ad84a361bc10fbb000df8579ba993d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Results.EnergyPlusResultParserOracleParityTests.MatchesPinnedPythonLauncherResultParser",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyPlusResult.__init__",
+      "upstream_symbol_hash": "sha256:30d49efa5495acff6cb5c9c03c9aacb3bd633048bb4fec63ce2d31b36f85a31a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Results/EnergyPlusResultParser.cs",
+        "source_sha256": "sha256:5d310cb2448fddd94d5560b1e27bffa925e6f7d44996116f3950f04417f4e787",
+        "symbol": "GonieGonie.InvisibleDragon.Results.EnergyPlusResultParser.ParseAudit"
+      },
+      "path": "src/idragon/launcher.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyPlusResult.parse_audit across its exact three-case launcher result-parser slice: integer entries, duplicate and ignored-value behavior, messages, ordered values and invariant numeric projections. The comparison directly verifies the duplicate-collapsing integer-only Python dictionary against ordered typed entries that retain duplicates, messages and finite numeric values.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:aad35ff632ad1eab9fce231ae1d12c6afb4e62ce19ab46018e65b9f0eae05d71",
+          "id": "launcher-result-parse-audit-7315fbc3",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Results/EnergyPlusResultParserOracleParityTests.cs",
+          "test_source_sha256": "sha256:d3de0cc325633e656bde331e694a6ce3b9ad84a361bc10fbb000df8579ba993d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Results.EnergyPlusResultParserOracleParityTests.MatchesPinnedPythonLauncherResultParser",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyPlusResult.parse_audit",
+      "upstream_symbol_hash": "sha256:7315fbc33d50d14f5dfcab78401ef66838a9e2c3760bea72e6b3b3d3aea59fce"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Results/EnergyPlusResultParser.cs",
+        "source_sha256": "sha256:5d310cb2448fddd94d5560b1e27bffa925e6f7d44996116f3950f04417f4e787",
+        "symbol": "GonieGonie.InvisibleDragon.Results.EnergyPlusResultParser.ParseBoundary"
+      },
+      "path": "src/idragon/launcher.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyPlusResult.parse_bnd across its exact three-case launcher result-parser slice: declared schemas, ordered records, short-row padding, quoted CSV behavior and immutable field lookup. The comparison directly verifies header-keyed mutable pandas tables and comma-regex padding against immutable native schemas, CSV-aware records and null-padded field lookup.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:5b5782a790658ab31ec6ccb182e5606e7803bd94c77221b625e6ee34cfb29de8",
+          "id": "launcher-result-parse-bnd-631c7884",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Results/EnergyPlusResultParserOracleParityTests.cs",
+          "test_source_sha256": "sha256:d3de0cc325633e656bde331e694a6ce3b9ad84a361bc10fbb000df8579ba993d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Results.EnergyPlusResultParserOracleParityTests.MatchesPinnedPythonLauncherResultParser",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyPlusResult.parse_bnd",
+      "upstream_symbol_hash": "sha256:631c7884e2ca51b8410312a506edf7fbf79928a5c49d13c132e3dc897a325ac9"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Results/EnergyPlusResultParser.cs",
+        "source_sha256": "sha256:5d310cb2448fddd94d5560b1e27bffa925e6f7d44996116f3950f04417f4e787",
+        "symbol": "GonieGonie.InvisibleDragon.Results.EnergyPlusResultParser.ParseErrorLog"
+      },
+      "path": "src/idragon/launcher.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyPlusResult.parse_err across its exact three-case launcher result-parser slice: elapsed arithmetic, diagnostics, continuations, summary counts, version metadata and missing-time behavior. The comparison directly verifies the elapsed-plus-Warning/Severe pandas tuple against the structured native metadata, diagnostics, continuations and nullable summary.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6f0326d28ea668f804c964971bfb21be24274bc49a624a0965e3788984f497e5",
+          "id": "launcher-result-parse-err-f5789307",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Results/EnergyPlusResultParserOracleParityTests.cs",
+          "test_source_sha256": "sha256:d3de0cc325633e656bde331e694a6ce3b9ad84a361bc10fbb000df8579ba993d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Results.EnergyPlusResultParserOracleParityTests.MatchesPinnedPythonLauncherResultParser",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyPlusResult.parse_err",
+      "upstream_symbol_hash": "sha256:f578930710efdaf9f65ec2ec992fc1fcadb22270c26b788a2513125e029e0561"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Results/EnergyPlusResultParser.cs",
+        "source_sha256": "sha256:5d310cb2448fddd94d5560b1e27bffa925e6f7d44996116f3950f04417f4e787",
+        "symbol": "GonieGonie.InvisibleDragon.Results.EnergyPlusResultParser"
+      },
+      "path": "src/idragon/launcher.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyPlusResult.parse_eso across its exact three-case launcher result-parser slice: the exact upstream no-op contract and deliberate absence of native ESO parsing without claiming ESO support. The comparison directly verifies the callable Python stub that always returns None against deliberate absence of a native ParseEso API.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4a69499750a16590140e8911e0db169a45aa36723b6a94d677ee13d37c113c41",
+          "id": "launcher-result-parse-eso-3e849bcd",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Results/EnergyPlusResultParserOracleParityTests.cs",
+          "test_source_sha256": "sha256:d3de0cc325633e656bde331e694a6ce3b9ad84a361bc10fbb000df8579ba993d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Results.EnergyPlusResultParserOracleParityTests.MatchesPinnedPythonLauncherResultParser",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyPlusResult.parse_eso",
+      "upstream_symbol_hash": "sha256:3e849bcd62a1caba6f2d56d3f5353d485f601aa2c9375ffecfa17ab4968d645c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Results/EnergyPlusResultParser.cs",
+        "source_sha256": "sha256:5d310cb2448fddd94d5560b1e27bffa925e6f7d44996116f3950f04417f4e787",
+        "symbol": "GonieGonie.InvisibleDragon.Results.EnergyPlusResultParser.ParseTabular"
+      },
+      "path": "src/idragon/launcher.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyPlusResult.parse_table across its exact three-case launcher result-parser slice: the narrow upstream monthly CSV grammar, ordered text and finite numeric values, missingness, duplicate reports and unsupported formats. The comparison directly verifies the brittle lowercase-csv pandas dictionary surface against ordered immutable native tables with general quoted CSV and invariant cell projections.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:7faad09ae6adba1495fdbfa2b0ad66f55e40a072093685beb1015ac75f2e46d8",
+          "id": "launcher-result-parse-table-eaf18f21",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Results/EnergyPlusResultParserOracleParityTests.cs",
+          "test_source_sha256": "sha256:d3de0cc325633e656bde331e694a6ce3b9ad84a361bc10fbb000df8579ba993d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Results.EnergyPlusResultParserOracleParityTests.MatchesPinnedPythonLauncherResultParser",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyPlusResult.parse_table",
+      "upstream_symbol_hash": "sha256:eaf18f211cbe4342c5c5be02cf6ccf1ea10f6604cbf199051bacac03bcabea3a"
+    },
+    {
+      "implementation": {
         "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Internal/DomainSupport.cs",
         "source_sha256": "sha256:b7533867e6dde3fde138799861be245467fbe58b8842005d840a9781f0d8c940",
         "symbol": "GonieGonie.SimpleDragon.Internal.DomainSupport.DefinedEnumOrNull"
@@ -5439,9 +5621,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 209,
-    "passed_receipt_count": 209,
-    "receipt_count": 209,
+    "entry_count": 216,
+    "passed_receipt_count": 216,
+    "receipt_count": 216,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

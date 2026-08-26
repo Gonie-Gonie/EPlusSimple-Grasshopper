@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(781, len(compatibility.needs_reverification))
+        self.assertEqual(774, len(compatibility.needs_reverification))
         self.assertEqual(
             113,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            96,
+            103,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -111,6 +111,19 @@ class ConfigurationTests(unittest.TestCase):
         for symbol, (classification, exception_id) in expected_common_core.items():
             entry = by_key[("src/idragon/common.py", symbol)]
             self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+        expected_launcher_results = {
+            "EnergyPlusResult": "immutable-structured-energyplus-result",
+            "EnergyPlusResult.__init__": "validated-energyplus-result-file-loading",
+            "EnergyPlusResult.parse_audit": "ordered-typed-energyplus-audit-parsing",
+            "EnergyPlusResult.parse_bnd": "csv-aware-energyplus-boundary-parsing",
+            "EnergyPlusResult.parse_err": "structured-energyplus-error-log-parsing",
+            "EnergyPlusResult.parse_eso": "explicitly-unsupported-energyplus-eso",
+            "EnergyPlusResult.parse_table": "typed-energyplus-tabular-parsing",
+        }
+        for symbol, exception_id in expected_launcher_results.items():
+            entry = by_key[("src/idragon/launcher.py", symbol)]
+            self.assertEqual("exception", entry.classification, symbol)
             self.assertEqual(exception_id, entry.exception_id, symbol)
         terminal_scope = {
             (
