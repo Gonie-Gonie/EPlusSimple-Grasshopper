@@ -53,6 +53,11 @@
       "sha256": "ffa9805fd16847484195eb001cb7530c718554d13db40f811f7fa1242c020355"
     },
     {
+      "path": "dragon-hvac-supply-group-core-oracle.json",
+      "bytes": 29865,
+      "sha256": "ac99f78ee10ab3c3c4e39a99059854b49f31ffbf823509764af970564ffba363"
+    },
+    {
       "path": "dragon-model-add-supply-system-oracle.json",
       "bytes": 15122,
       "sha256": "4896c54312c44bffc573d0dc4d0fddfff14d17b0c65a3f789b8f6a487e1f181c"

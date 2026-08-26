@@ -52,6 +52,20 @@ three-member iteration, representative engineering products, and the 107 W
 default people-activity field. Six members are exact equivalents and the two
 Python enum containers are reviewed native API adaptations.
 
+`python-0.7.0/dragon-hvac-supply-group-core-oracle.json` pins 18 ordered
+CPython 3.12.7 observations, three each for the six bounded public
+`SupplyGroup` constructor and container-projection symbols. It records exact
+validation order and messages, tuple snapshots, valid-domain heat/cool
+capability selection, fresh ordered projection tuples, and first-seen source
+selection.
+Construction uses the reviewed `immutable-validated-supply-group-construction`
+adaptation, and source identity de-duplication uses
+`stable-entity-id-supply-source-deduplication`; the four capability properties
+are exact equivalents on the native valid domain. All twelve loaded local
+modules carry exact source and Python 3.12 AST receipts. The `SupplyGroup` class
+receipt, `SupplyGroup.to_idf_object`, concrete systems, postprocessors, and full
+model IDF assembly remain outside this bounded corpus.
+
 `python-0.7.0/dragon-model-add-supply-system-oracle.json` pins three ordered
 CPython 3.12.7 observations for `EnergyModel.add_supply_system`: generation
 failure before mutation, processor failure after appended objects persist, and

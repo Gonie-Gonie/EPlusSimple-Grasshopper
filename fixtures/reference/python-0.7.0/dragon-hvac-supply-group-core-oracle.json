@@ -1,0 +1,890 @@
+{
+  "cases": [
+    {
+      "executor": "supply-group-coolable",
+      "id": "dragon-hvac-supply-group-core.coolable.cooling-only-true",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "coolable",
+              "system": "cool-only",
+              "value": true
+            }
+          ],
+          "result": true,
+          "result_type": "bool"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.coolable"
+    },
+    {
+      "executor": "supply-group-coolable",
+      "id": "dragon-hvac-supply-group-core.coolable.heating-only-false",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "coolable",
+              "system": "heat-only",
+              "value": false
+            }
+          ],
+          "result": false,
+          "result_type": "bool"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.coolable"
+    },
+    {
+      "executor": "supply-group-coolable",
+      "id": "dragon-hvac-supply-group-core.coolable.mixed-capability-true",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "coolable",
+              "system": "heat-only",
+              "value": false
+            },
+            {
+              "capability": "coolable",
+              "system": "cool-only",
+              "value": true
+            }
+          ],
+          "result": true,
+          "result_type": "bool",
+          "systems": [
+            "heat-only",
+            "cool-only"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.coolable"
+    },
+    {
+      "executor": "supply-group-cooling-systems",
+      "id": "dragon-hvac-supply-group-core.cooling-systems.distinct-members-and-order",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "coolable",
+              "system": "heat-only",
+              "value": false
+            },
+            {
+              "capability": "coolable",
+              "system": "both-first",
+              "value": true
+            },
+            {
+              "capability": "coolable",
+              "system": "cool-only",
+              "value": true
+            },
+            {
+              "capability": "coolable",
+              "system": "both-second",
+              "value": true
+            }
+          ],
+          "input_systems": [
+            "heat-only",
+            "both-first",
+            "cool-only",
+            "both-second"
+          ],
+          "preserved_input_identity": true,
+          "result_systems": [
+            "both-first",
+            "cool-only",
+            "both-second"
+          ],
+          "result_type": "tuple"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.cooling_systems"
+    },
+    {
+      "executor": "supply-group-cooling-systems",
+      "id": "dragon-hvac-supply-group-core.cooling-systems.fresh-tuple",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "coolable",
+              "system": "both",
+              "value": true
+            },
+            {
+              "capability": "coolable",
+              "system": "both",
+              "value": true
+            }
+          ],
+          "first_result": [
+            "both"
+          ],
+          "result_type": "tuple",
+          "same_result_object": false,
+          "same_system_identity": true,
+          "second_result": [
+            "both"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.cooling_systems"
+    },
+    {
+      "executor": "supply-group-cooling-systems",
+      "id": "dragon-hvac-supply-group-core.cooling-systems.heating-only-empty",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "coolable",
+              "system": "heat-first",
+              "value": false
+            },
+            {
+              "capability": "coolable",
+              "system": "heat-second",
+              "value": false
+            }
+          ],
+          "result_systems": [],
+          "result_type": "tuple",
+          "systems": [
+            "heat-first",
+            "heat-second"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.cooling_systems"
+    },
+    {
+      "executor": "supply-group-heatable",
+      "id": "dragon-hvac-supply-group-core.heatable.cooling-only-false",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "heatable",
+              "system": "cool-only",
+              "value": false
+            }
+          ],
+          "result": false,
+          "result_type": "bool"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.heatable"
+    },
+    {
+      "executor": "supply-group-heatable",
+      "id": "dragon-hvac-supply-group-core.heatable.heating-only-true",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "heatable",
+              "system": "heat-only",
+              "value": true
+            }
+          ],
+          "result": true,
+          "result_type": "bool"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.heatable"
+    },
+    {
+      "executor": "supply-group-heatable",
+      "id": "dragon-hvac-supply-group-core.heatable.mixed-capability-true",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "heatable",
+              "system": "cool-only",
+              "value": false
+            },
+            {
+              "capability": "heatable",
+              "system": "heat-only",
+              "value": true
+            }
+          ],
+          "result": true,
+          "result_type": "bool",
+          "systems": [
+            "cool-only",
+            "heat-only"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.heatable"
+    },
+    {
+      "executor": "supply-group-heating-systems",
+      "id": "dragon-hvac-supply-group-core.heating-systems.cooling-only-empty",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "heatable",
+              "system": "cool-first",
+              "value": false
+            },
+            {
+              "capability": "heatable",
+              "system": "cool-second",
+              "value": false
+            }
+          ],
+          "result_systems": [],
+          "result_type": "tuple",
+          "systems": [
+            "cool-first",
+            "cool-second"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.heating_systems"
+    },
+    {
+      "executor": "supply-group-heating-systems",
+      "id": "dragon-hvac-supply-group-core.heating-systems.distinct-members-and-order",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "heatable",
+              "system": "cool-only",
+              "value": false
+            },
+            {
+              "capability": "heatable",
+              "system": "both-first",
+              "value": true
+            },
+            {
+              "capability": "heatable",
+              "system": "heat-only",
+              "value": true
+            },
+            {
+              "capability": "heatable",
+              "system": "both-second",
+              "value": true
+            }
+          ],
+          "input_systems": [
+            "cool-only",
+            "both-first",
+            "heat-only",
+            "both-second"
+          ],
+          "preserved_input_identity": true,
+          "result_systems": [
+            "both-first",
+            "heat-only",
+            "both-second"
+          ],
+          "result_type": "tuple"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.heating_systems"
+    },
+    {
+      "executor": "supply-group-heating-systems",
+      "id": "dragon-hvac-supply-group-core.heating-systems.fresh-tuple",
+      "python": {
+        "facts": {
+          "capability_reads": [
+            {
+              "capability": "heatable",
+              "system": "both",
+              "value": true
+            },
+            {
+              "capability": "heatable",
+              "system": "both",
+              "value": true
+            }
+          ],
+          "first_result": [
+            "both"
+          ],
+          "result_type": "tuple",
+          "same_result_object": false,
+          "same_system_identity": true,
+          "second_result": [
+            "both"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.heating_systems"
+    },
+    {
+      "executor": "supply-group-init",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-supply-group-construction",
+        "outcome": "returned"
+      },
+      "id": "dragon-hvac-supply-group-core.init.defaults-and-snapshot",
+      "python": {
+        "facts": {
+          "availability_default_is_none": true,
+          "availability_parameter_kind": "KEYWORD_ONLY",
+          "input_systems_after_mutation": [
+            "cool-only",
+            "both",
+            "heat-only"
+          ],
+          "parameter_order": [
+            "systems",
+            "availabilities"
+          ],
+          "snapshot_isolated": true,
+          "stored_availabilities": [
+            null,
+            null,
+            null
+          ],
+          "stored_availabilities_type": "tuple",
+          "stored_objects_are_inputs": true,
+          "stored_systems": [
+            "heat-only",
+            "both",
+            "cool-only"
+          ],
+          "stored_systems_type": "tuple"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.__init__"
+    },
+    {
+      "executor": "supply-group-init",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-supply-group-construction",
+        "outcome": "returned"
+      },
+      "id": "dragon-hvac-supply-group-core.init.duplicates-and-explicit-availabilities",
+      "python": {
+        "facts": {
+          "duplicate_same_object_accepted": true,
+          "explicit_availabilities_snapshot_isolated": true,
+          "non_schedule_availabilities_accepted": true,
+          "stored_availabilities": [
+            "availability-a",
+            null,
+            "availability-b"
+          ],
+          "stored_availabilities_type": "tuple",
+          "stored_systems": [
+            "both",
+            "both",
+            "heat-only"
+          ],
+          "stored_systems_type": "tuple"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.__init__"
+    },
+    {
+      "executor": "supply-group-init",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-supply-group-construction",
+        "outcome": "returned"
+      },
+      "id": "dragon-hvac-supply-group-core.init.validation-order",
+      "python": {
+        "facts": {
+          "attempts": [
+            {
+              "args": [
+                "SupplyGroup requires at least one system."
+              ],
+              "label": "empty",
+              "message": "SupplyGroup requires at least one system.",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            {
+              "args": [
+                "All systems must be SupplySystem instances."
+              ],
+              "label": "type-before-count",
+              "message": "All systems must be SupplySystem instances.",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            {
+              "args": [
+                "The number of availabilities must match the number of systems."
+              ],
+              "label": "count-before-capability",
+              "message": "The number of availabilities must match the number of systems.",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            {
+              "args": [
+                "Every supply system must support heating or cooling."
+              ],
+              "label": "incapable",
+              "message": "Every supply system must support heating or cooling.",
+              "outcome": "raised",
+              "type": "ValueError"
+            }
+          ],
+          "validation_order": [
+            "empty",
+            "type-before-count",
+            "count-before-capability",
+            "incapable"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.__init__"
+    },
+    {
+      "executor": "supply-group-sources",
+      "expected_dotnet": {
+        "adaptation": "stable-entity-id-supply-source-deduplication",
+        "outcome": "returned"
+      },
+      "id": "dragon-hvac-supply-group-core.sources.distinct-equal-sources",
+      "python": {
+        "facts": {
+          "distinct_source_identity": true,
+          "equal_by_value": true,
+          "result_sources": [
+            "source-a",
+            "source-b"
+          ],
+          "result_type": "tuple",
+          "source_reads": [
+            {
+              "source": "source-a",
+              "system": "first"
+            },
+            {
+              "source": "source-b",
+              "system": "second"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.sources"
+    },
+    {
+      "executor": "supply-group-sources",
+      "expected_dotnet": {
+        "adaptation": "stable-entity-id-supply-source-deduplication",
+        "outcome": "returned"
+      },
+      "id": "dragon-hvac-supply-group-core.sources.dynamic-source-recomputation",
+      "python": {
+        "facts": {
+          "first_result": [
+            "source-a"
+          ],
+          "fresh_result_tuple": true,
+          "second_result": [
+            "source-b",
+            "source-a"
+          ],
+          "source_reads": [
+            {
+              "source": "source-a",
+              "system": "first"
+            },
+            {
+              "source": null,
+              "system": "second"
+            },
+            {
+              "source": "source-b",
+              "system": "first"
+            },
+            {
+              "source": "source-a",
+              "system": "second"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.sources"
+    },
+    {
+      "executor": "supply-group-sources",
+      "expected_dotnet": {
+        "adaptation": "stable-entity-id-supply-source-deduplication",
+        "outcome": "returned"
+      },
+      "id": "dragon-hvac-supply-group-core.sources.identity-dedup-and-none",
+      "python": {
+        "facts": {
+          "first_seen_identity_deduplication": true,
+          "fresh_result_tuple": true,
+          "none_skipped": true,
+          "result_sources": [
+            "source-a",
+            "source-b"
+          ],
+          "result_type": "tuple",
+          "source_reads": [
+            {
+              "source": "source-a",
+              "system": "first"
+            },
+            {
+              "source": "source-a",
+              "system": "second"
+            },
+            {
+              "source": null,
+              "system": "third"
+            },
+            {
+              "source": "source-b",
+              "system": "fourth"
+            },
+            {
+              "source": "source-a",
+              "system": "fifth"
+            },
+            {
+              "source": "source-a",
+              "system": "first"
+            },
+            {
+              "source": "source-a",
+              "system": "second"
+            },
+            {
+              "source": null,
+              "system": "third"
+            },
+            {
+              "source": "source-b",
+              "system": "fourth"
+            },
+            {
+              "source": "source-a",
+              "system": "fifth"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "SupplyGroup.sources"
+    }
+  ],
+  "cases_sha256": "sha256:1204af9174f2853ef303868d072974c1d753bd2657e12f99fc753af83a7dd602",
+  "consumer_contract": {
+    "adaptations": {
+      "SupplyGroup.__init__": "immutable-validated-supply-group-construction",
+      "SupplyGroup.sources": "stable-entity-id-supply-source-deduplication"
+    },
+    "assertion_ids": {
+      "SupplyGroup.__init__": "dragon-hvac-supply-group-core-init-02b3c43a",
+      "SupplyGroup.coolable": "dragon-hvac-supply-group-core-coolable-0f6f3f1a",
+      "SupplyGroup.cooling_systems": "dragon-hvac-supply-group-core-cooling-systems-e2ee9492",
+      "SupplyGroup.heatable": "dragon-hvac-supply-group-core-heatable-ab11abdd",
+      "SupplyGroup.heating_systems": "dragon-hvac-supply-group-core-heating-systems-1fdfba66",
+      "SupplyGroup.sources": "dragon-hvac-supply-group-core-sources-482d0fa2"
+    },
+    "case_count": 18,
+    "case_ids": [
+      "dragon-hvac-supply-group-core.coolable.cooling-only-true",
+      "dragon-hvac-supply-group-core.coolable.heating-only-false",
+      "dragon-hvac-supply-group-core.coolable.mixed-capability-true",
+      "dragon-hvac-supply-group-core.cooling-systems.distinct-members-and-order",
+      "dragon-hvac-supply-group-core.cooling-systems.fresh-tuple",
+      "dragon-hvac-supply-group-core.cooling-systems.heating-only-empty",
+      "dragon-hvac-supply-group-core.heatable.cooling-only-false",
+      "dragon-hvac-supply-group-core.heatable.heating-only-true",
+      "dragon-hvac-supply-group-core.heatable.mixed-capability-true",
+      "dragon-hvac-supply-group-core.heating-systems.cooling-only-empty",
+      "dragon-hvac-supply-group-core.heating-systems.distinct-members-and-order",
+      "dragon-hvac-supply-group-core.heating-systems.fresh-tuple",
+      "dragon-hvac-supply-group-core.init.defaults-and-snapshot",
+      "dragon-hvac-supply-group-core.init.duplicates-and-explicit-availabilities",
+      "dragon-hvac-supply-group-core.init.validation-order",
+      "dragon-hvac-supply-group-core.sources.distinct-equal-sources",
+      "dragon-hvac-supply-group-core.sources.dynamic-source-recomputation",
+      "dragon-hvac-supply-group-core.sources.identity-dedup-and-none"
+    ],
+    "classifications": {
+      "SupplyGroup.__init__": "exception",
+      "SupplyGroup.coolable": "equivalent",
+      "SupplyGroup.cooling_systems": "equivalent",
+      "SupplyGroup.heatable": "equivalent",
+      "SupplyGroup.heating_systems": "equivalent",
+      "SupplyGroup.sources": "exception"
+    },
+    "closure": {
+      "full_symbol_closure": false,
+      "scope": "bounded-supply-group-container-evidence",
+      "unresolved_behavior": [
+        "SupplyGroup",
+        "SupplyGroup.to_idf_object",
+        "SupplySystem",
+        "concrete-supply-systems",
+        "supply-system-postprocessors",
+        "EnergyModel.to_idf"
+      ]
+    },
+    "identity_encoding": "logical-labels-only-no-id-or-address",
+    "native_targets": {
+      "SupplyGroup.__init__": "SupplyGroup",
+      "SupplyGroup.coolable": "SupplyGroup.CanCool",
+      "SupplyGroup.cooling_systems": "SupplyGroup.CoolingSystems",
+      "SupplyGroup.heatable": "SupplyGroup.CanHeat",
+      "SupplyGroup.heating_systems": "SupplyGroup.HeatingSystems",
+      "SupplyGroup.sources": "SupplyGroup.Sources"
+    },
+    "source_import_policy": "external-temporary-copy-with-complete-loaded-local-module-audit",
+    "target_symbols": [
+      "SupplyGroup.__init__",
+      "SupplyGroup.coolable",
+      "SupplyGroup.cooling_systems",
+      "SupplyGroup.heatable",
+      "SupplyGroup.heating_systems",
+      "SupplyGroup.sources"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-hvac-supply-group-core.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:643ca4afc57e9a0b22eee5df0a2cd7b90d9d579cf16bb20fd6d6a9e40b5bc57c",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:f01960cc5a0c00e094cf2eb094922d734343c92c8ec849977ea8b86337805907",
+      "symbol": "SupplyGroup.__init__",
+      "symbol_hash": "sha256:02b3c43aa048fd31a3ffc31fea96f5086a599d3245847e217dc0c99a9cf5fddd"
+    },
+    {
+      "body_hash": "sha256:73f3cb2b0806dccc2593dcdb1412835c8258e8bca42388c75c1ba2e3038afa56",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "SupplyGroup.coolable",
+      "symbol_hash": "sha256:0f6f3f1afaac0b5144d7a4f3af1857e2d5d6ca2e02baf98d0427cd1a317abd36"
+    },
+    {
+      "body_hash": "sha256:ba298377ff3ee58bec8d56a856e9fab8941fec0cfd35321d6e48c7c9b3df9c89",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:97cc1e2d625ebc73e65314802efcf1b1278d42ee34f0bba31a167bb7a7525344",
+      "symbol": "SupplyGroup.cooling_systems",
+      "symbol_hash": "sha256:e2ee9492964b6c3eeaa5d54700d66a010198413a3c006edd46427c126150221c"
+    },
+    {
+      "body_hash": "sha256:ac6066fdc4f9bed2e2f6b2f7c5910634c34c5b26f84a6bb5c4e2049deb3d8096",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "SupplyGroup.heatable",
+      "symbol_hash": "sha256:ab11abdd7afeb3b7fde0805ce2697af2df49ad6e874691b164bb5674ae9ac655"
+    },
+    {
+      "body_hash": "sha256:f1ea945dbd140a8fed2b6adf855e9751375c5ca15aae41b6d9a591c25d3291f1",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:97cc1e2d625ebc73e65314802efcf1b1278d42ee34f0bba31a167bb7a7525344",
+      "symbol": "SupplyGroup.heating_systems",
+      "symbol_hash": "sha256:1fdfba66763618fe1880c3d0354b764e551c8a7747eb4a1dedac24d375f87dc2"
+    },
+    {
+      "body_hash": "sha256:8380d67f068d32acc9710838b7314fd04f3acf74b53e5f9484cdde3b07e3d09d",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:74055a2ba47ab60bd034a8ca75be001a2cd1b1c1e78e201eed646b37d5b2065d",
+      "symbol": "SupplyGroup.sources",
+      "symbol_hash": "sha256:482d0fa2c4cc9f732bc33911ae01ea857e3042ff4cf60e680583f2abefdab423"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "loaded_local_modules": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "module": "idragon",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "module": "idragon.common",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "module": "idragon.constants",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "module": "idragon.dragon",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "module": "idragon.dragon.construction",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "module": "idragon.dragon.hvac",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "module": "idragon.dragon.model",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "module": "idragon.dragon.profile",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "module": "idragon.dragon.shape",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "module": "idragon.imugi",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "module": "idragon.launcher",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "module": "idragon.utils",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ],
+    "sources": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ]
+  }
+}
