@@ -1,0 +1,4422 @@
+{
+  "cases": [
+    {
+      "executor": "photovoltaic-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "compact-native-photovoltaic-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-hvac-photovoltaic-to-idf-object.boundaries.maximum-tilt-default-ratio",
+      "python": {
+        "facts": {
+          "constructor_context": {
+            "declared_effective_area_ratio_default": {
+              "hex": "0x1.6666666666666p-1",
+              "kind": "float",
+              "repr": "0.7"
+            },
+            "explicit_input_identity_preserved": true,
+            "keyword_only_parameters": [
+              "effective_area_ratio"
+            ],
+            "parameter_order": [
+              "name",
+              "area",
+              "tilt",
+              "azimuth",
+              "efficiency",
+              "effective_area_ratio"
+            ],
+            "returned": true,
+            "state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Default Ratio PV"
+                }
+              },
+              {
+                "name": "area",
+                "value": {
+                  "hex": "0x1.9000000000000p+2",
+                  "kind": "float",
+                  "repr": "6.25"
+                }
+              },
+              {
+                "name": "tilt",
+                "value": {
+                  "hex": "0x1.6800000000000p+6",
+                  "kind": "float",
+                  "repr": "90.0"
+                }
+              },
+              {
+                "name": "azimuth",
+                "value": {
+                  "hex": "0x1.c200000000000p+7",
+                  "kind": "float",
+                  "repr": "225.0"
+                }
+              },
+              {
+                "name": "efficiency",
+                "value": {
+                  "hex": "0x1.999999999999ap-3",
+                  "kind": "float",
+                  "repr": "0.2"
+                }
+              },
+              {
+                "name": "effective_area_ratio",
+                "value": {
+                  "hex": "0x1.6666666666666p-1",
+                  "kind": "float",
+                  "repr": "0.7"
+                }
+              }
+            ],
+            "state_unchanged_after_two_emissions": true,
+            "used_default_effective_area_ratio": true
+          },
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 8,
+                "object_type": "Shading:Site",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Shading4PVpanel:Default Ratio PV"
+                    }
+                  },
+                  {
+                    "name": "Azimuth Angle",
+                    "value": {
+                      "hex": "0x1.c200000000000p+7",
+                      "kind": "float",
+                      "repr": "225.0"
+                    }
+                  },
+                  {
+                    "name": "Tilt Angle",
+                    "value": {
+                      "hex": "0x1.6800000000000p+6",
+                      "kind": "float",
+                      "repr": "90.0"
+                    }
+                  },
+                  {
+                    "name": "Starting X Coordinate",
+                    "value": {
+                      "kind": "int",
+                      "value": "0"
+                    }
+                  },
+                  {
+                    "name": "Starting Y Coordinate",
+                    "value": {
+                      "kind": "int",
+                      "value": "0"
+                    }
+                  },
+                  {
+                    "name": "Starting Z Coordinate",
+                    "value": {
+                      "kind": "int",
+                      "value": "10"
+                    }
+                  },
+                  {
+                    "name": "Length",
+                    "value": {
+                      "hex": "0x1.4000000000000p+1",
+                      "kind": "float",
+                      "repr": "2.5"
+                    }
+                  },
+                  {
+                    "name": "Height",
+                    "value": {
+                      "hex": "0x1.4000000000000p+1",
+                      "kind": "float",
+                      "repr": "2.5"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 5,
+                "object_type": "PhotovoltaicPerformance:Simple",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Spec4PVpanel:Default Ratio PV"
+                    }
+                  },
+                  {
+                    "name": "Fraction of Surface Area with Active Solar Cells",
+                    "value": {
+                      "hex": "0x1.6666666666666p-1",
+                      "kind": "float",
+                      "repr": "0.7"
+                    }
+                  },
+                  {
+                    "name": "Conversion Efficiency Input Mode",
+                    "value": {
+                      "kind": "str",
+                      "value": "Fixed"
+                    }
+                  },
+                  {
+                    "name": "Value for Cell Efficiency if Fixed",
+                    "value": {
+                      "hex": "0x1.999999999999ap-3",
+                      "kind": "float",
+                      "repr": "0.2"
+                    }
+                  },
+                  {
+                    "name": "Efficiency Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 7,
+                "object_type": "Generator:Photovoltaic",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "PVpanel:Default Ratio PV"
+                    }
+                  },
+                  {
+                    "name": "Surface Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Shading4PVpanel:Default Ratio PV"
+                    }
+                  },
+                  {
+                    "name": "Photovoltaic Performance Object Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "PhotovoltaicPerformance:Simple"
+                    }
+                  },
+                  {
+                    "name": "Module Performance Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Spec4PVpanel:Default Ratio PV"
+                    }
+                  },
+                  {
+                    "name": "Heat Transfer Integration Mode",
+                    "value": {
+                      "kind": "str",
+                      "value": "Decoupled"
+                    }
+                  },
+                  {
+                    "name": "Number of Series Strings in Parallel",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  },
+                  {
+                    "name": "Number of Modules in Series",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 151,
+                "object_type": "ElectricLoadCenter:Generators",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Generator4PVpanel:Default Ratio PV"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "PVpanel:Default Ratio PV"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Object Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "Generator:Photovoltaic"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Rated Electric Power Output",
+                    "value": {
+                      "hex": "0x1.e848000000000p+19",
+                      "kind": "float",
+                      "repr": "1000000.0"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 5,
+                "object_type": "ElectricLoadCenter:Inverter:Simple",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Inverter4PVpanel:Default Ratio PV"
+                    }
+                  },
+                  {
+                    "name": "Availability Schedule Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "ALLON"
+                    }
+                  },
+                  {
+                    "name": "Zone Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Radiative Fraction",
+                    "value": {
+                      "kind": "int",
+                      "value": "0"
+                    }
+                  },
+                  {
+                    "name": "Inverter Efficiency",
+                    "value": {
+                      "kind": "int",
+                      "value": "1"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 21,
+                "object_type": "ElectricLoadCenter:Distribution",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Distribution4PVpanel:Default Ratio PV"
+                    }
+                  },
+                  {
+                    "name": "Generator List Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Generator4PVpanel:Default Ratio PV"
+                    }
+                  },
+                  {
+                    "name": "Generator Operation Scheme Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "Baseload"
+                    }
+                  },
+                  {
+                    "name": "Generator Demand Limit Scheme Purchased Electric Demand Limit",
+                    "value": {
+                      "hex": "0x1.e848000000000p+19",
+                      "kind": "float",
+                      "repr": "1000000.0"
+                    }
+                  },
+                  {
+                    "name": "Generator Track Schedule Name Scheme Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator Track Meter Scheme Meter Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Electrical Buss Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "DirectCurrentWithInverter"
+                    }
+                  },
+                  {
+                    "name": "Inverter Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Inverter4PVpanel:Default Ratio PV"
+                    }
+                  },
+                  {
+                    "name": "Electrical Storage Object Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Transformer Object Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Operation Scheme",
+                    "value": {
+                      "kind": "str",
+                      "value": "TrackFacilityElectricDemandStoreExcessOnSite"
+                    }
+                  },
+                  {
+                    "name": "Storage Control Track Meter Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Converter Object Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Maximum Storage State of Charge Fraction",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  },
+                  {
+                    "name": "Minimum Storage State of Charge Fraction",
+                    "value": {
+                      "hex": "0x0.0p+0",
+                      "kind": "float",
+                      "repr": "0.0"
+                    }
+                  },
+                  {
+                    "name": "Design Storage Control Charge Power",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Charge Power Fraction Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Design Storage Control Discharge Power",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Discharge Power Fraction Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Control Utility Demand Target",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Control Utility Demand Target Fraction Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "fresh_result_list": true,
+            "object_count": 6,
+            "object_types": [
+              "Shading:Site",
+              "PhotovoltaicPerformance:Simple",
+              "Generator:Photovoltaic",
+              "ElectricLoadCenter:Generators",
+              "ElectricLoadCenter:Inverter:Simple",
+              "ElectricLoadCenter:Distribution"
+            ],
+            "result_type": "list",
+            "same_idd_definition_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "second_fields_equal_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "PhotoVoltaicPanel.to_idf_object"
+    },
+    {
+      "executor": "photovoltaic-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "compact-native-photovoltaic-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-hvac-photovoltaic-to-idf-object.boundaries.minimum-angles-unit-efficiencies",
+      "python": {
+        "facts": {
+          "constructor_context": {
+            "declared_effective_area_ratio_default": {
+              "hex": "0x1.6666666666666p-1",
+              "kind": "float",
+              "repr": "0.7"
+            },
+            "explicit_input_identity_preserved": true,
+            "keyword_only_parameters": [
+              "effective_area_ratio"
+            ],
+            "parameter_order": [
+              "name",
+              "area",
+              "tilt",
+              "azimuth",
+              "efficiency",
+              "effective_area_ratio"
+            ],
+            "returned": true,
+            "state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Unit Boundary PV"
+                }
+              },
+              {
+                "name": "area",
+                "value": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                }
+              },
+              {
+                "name": "tilt",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "azimuth",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "efficiency",
+                "value": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                }
+              },
+              {
+                "name": "effective_area_ratio",
+                "value": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                }
+              }
+            ],
+            "state_unchanged_after_two_emissions": true,
+            "used_default_effective_area_ratio": false
+          },
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 8,
+                "object_type": "Shading:Site",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Shading4PVpanel:Unit Boundary PV"
+                    }
+                  },
+                  {
+                    "name": "Azimuth Angle",
+                    "value": {
+                      "hex": "0x0.0p+0",
+                      "kind": "float",
+                      "repr": "0.0"
+                    }
+                  },
+                  {
+                    "name": "Tilt Angle",
+                    "value": {
+                      "hex": "0x0.0p+0",
+                      "kind": "float",
+                      "repr": "0.0"
+                    }
+                  },
+                  {
+                    "name": "Starting X Coordinate",
+                    "value": {
+                      "kind": "int",
+                      "value": "0"
+                    }
+                  },
+                  {
+                    "name": "Starting Y Coordinate",
+                    "value": {
+                      "kind": "int",
+                      "value": "0"
+                    }
+                  },
+                  {
+                    "name": "Starting Z Coordinate",
+                    "value": {
+                      "kind": "int",
+                      "value": "10"
+                    }
+                  },
+                  {
+                    "name": "Length",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  },
+                  {
+                    "name": "Height",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 5,
+                "object_type": "PhotovoltaicPerformance:Simple",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Spec4PVpanel:Unit Boundary PV"
+                    }
+                  },
+                  {
+                    "name": "Fraction of Surface Area with Active Solar Cells",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  },
+                  {
+                    "name": "Conversion Efficiency Input Mode",
+                    "value": {
+                      "kind": "str",
+                      "value": "Fixed"
+                    }
+                  },
+                  {
+                    "name": "Value for Cell Efficiency if Fixed",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  },
+                  {
+                    "name": "Efficiency Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 7,
+                "object_type": "Generator:Photovoltaic",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "PVpanel:Unit Boundary PV"
+                    }
+                  },
+                  {
+                    "name": "Surface Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Shading4PVpanel:Unit Boundary PV"
+                    }
+                  },
+                  {
+                    "name": "Photovoltaic Performance Object Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "PhotovoltaicPerformance:Simple"
+                    }
+                  },
+                  {
+                    "name": "Module Performance Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Spec4PVpanel:Unit Boundary PV"
+                    }
+                  },
+                  {
+                    "name": "Heat Transfer Integration Mode",
+                    "value": {
+                      "kind": "str",
+                      "value": "Decoupled"
+                    }
+                  },
+                  {
+                    "name": "Number of Series Strings in Parallel",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  },
+                  {
+                    "name": "Number of Modules in Series",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 151,
+                "object_type": "ElectricLoadCenter:Generators",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Generator4PVpanel:Unit Boundary PV"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "PVpanel:Unit Boundary PV"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Object Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "Generator:Photovoltaic"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Rated Electric Power Output",
+                    "value": {
+                      "hex": "0x1.e848000000000p+19",
+                      "kind": "float",
+                      "repr": "1000000.0"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 5,
+                "object_type": "ElectricLoadCenter:Inverter:Simple",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Inverter4PVpanel:Unit Boundary PV"
+                    }
+                  },
+                  {
+                    "name": "Availability Schedule Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "ALLON"
+                    }
+                  },
+                  {
+                    "name": "Zone Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Radiative Fraction",
+                    "value": {
+                      "kind": "int",
+                      "value": "0"
+                    }
+                  },
+                  {
+                    "name": "Inverter Efficiency",
+                    "value": {
+                      "kind": "int",
+                      "value": "1"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 21,
+                "object_type": "ElectricLoadCenter:Distribution",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Distribution4PVpanel:Unit Boundary PV"
+                    }
+                  },
+                  {
+                    "name": "Generator List Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Generator4PVpanel:Unit Boundary PV"
+                    }
+                  },
+                  {
+                    "name": "Generator Operation Scheme Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "Baseload"
+                    }
+                  },
+                  {
+                    "name": "Generator Demand Limit Scheme Purchased Electric Demand Limit",
+                    "value": {
+                      "hex": "0x1.e848000000000p+19",
+                      "kind": "float",
+                      "repr": "1000000.0"
+                    }
+                  },
+                  {
+                    "name": "Generator Track Schedule Name Scheme Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator Track Meter Scheme Meter Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Electrical Buss Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "DirectCurrentWithInverter"
+                    }
+                  },
+                  {
+                    "name": "Inverter Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Inverter4PVpanel:Unit Boundary PV"
+                    }
+                  },
+                  {
+                    "name": "Electrical Storage Object Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Transformer Object Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Operation Scheme",
+                    "value": {
+                      "kind": "str",
+                      "value": "TrackFacilityElectricDemandStoreExcessOnSite"
+                    }
+                  },
+                  {
+                    "name": "Storage Control Track Meter Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Converter Object Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Maximum Storage State of Charge Fraction",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  },
+                  {
+                    "name": "Minimum Storage State of Charge Fraction",
+                    "value": {
+                      "hex": "0x0.0p+0",
+                      "kind": "float",
+                      "repr": "0.0"
+                    }
+                  },
+                  {
+                    "name": "Design Storage Control Charge Power",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Charge Power Fraction Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Design Storage Control Discharge Power",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Discharge Power Fraction Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Control Utility Demand Target",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Control Utility Demand Target Fraction Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "fresh_result_list": true,
+            "object_count": 6,
+            "object_types": [
+              "Shading:Site",
+              "PhotovoltaicPerformance:Simple",
+              "Generator:Photovoltaic",
+              "ElectricLoadCenter:Generators",
+              "ElectricLoadCenter:Inverter:Simple",
+              "ElectricLoadCenter:Distribution"
+            ],
+            "result_type": "list",
+            "same_idd_definition_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "second_fields_equal_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "PhotoVoltaicPanel.to_idf_object"
+    },
+    {
+      "executor": "photovoltaic-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "compact-native-photovoltaic-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-hvac-photovoltaic-to-idf-object.custom-ratio-nonsquare-area-sqrt",
+      "python": {
+        "facts": {
+          "constructor_context": {
+            "declared_effective_area_ratio_default": {
+              "hex": "0x1.6666666666666p-1",
+              "kind": "float",
+              "repr": "0.7"
+            },
+            "explicit_input_identity_preserved": true,
+            "keyword_only_parameters": [
+              "effective_area_ratio"
+            ],
+            "parameter_order": [
+              "name",
+              "area",
+              "tilt",
+              "azimuth",
+              "efficiency",
+              "effective_area_ratio"
+            ],
+            "returned": true,
+            "state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Nonsquare Area PV"
+                }
+              },
+              {
+                "name": "area",
+                "value": {
+                  "hex": "0x1.0000000000000p+1",
+                  "kind": "float",
+                  "repr": "2.0"
+                }
+              },
+              {
+                "name": "tilt",
+                "value": {
+                  "hex": "0x1.2c00000000000p+5",
+                  "kind": "float",
+                  "repr": "37.5"
+                }
+              },
+              {
+                "name": "azimuth",
+                "value": {
+                  "hex": "0x1.ed00000000000p+6",
+                  "kind": "float",
+                  "repr": "123.25"
+                }
+              },
+              {
+                "name": "efficiency",
+                "value": {
+                  "hex": "0x1.8000000000000p-3",
+                  "kind": "float",
+                  "repr": "0.1875"
+                }
+              },
+              {
+                "name": "effective_area_ratio",
+                "value": {
+                  "hex": "0x1.4000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.625"
+                }
+              }
+            ],
+            "state_unchanged_after_two_emissions": true,
+            "used_default_effective_area_ratio": false
+          },
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 8,
+                "object_type": "Shading:Site",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Shading4PVpanel:Nonsquare Area PV"
+                    }
+                  },
+                  {
+                    "name": "Azimuth Angle",
+                    "value": {
+                      "hex": "0x1.ed00000000000p+6",
+                      "kind": "float",
+                      "repr": "123.25"
+                    }
+                  },
+                  {
+                    "name": "Tilt Angle",
+                    "value": {
+                      "hex": "0x1.2c00000000000p+5",
+                      "kind": "float",
+                      "repr": "37.5"
+                    }
+                  },
+                  {
+                    "name": "Starting X Coordinate",
+                    "value": {
+                      "kind": "int",
+                      "value": "0"
+                    }
+                  },
+                  {
+                    "name": "Starting Y Coordinate",
+                    "value": {
+                      "kind": "int",
+                      "value": "0"
+                    }
+                  },
+                  {
+                    "name": "Starting Z Coordinate",
+                    "value": {
+                      "kind": "int",
+                      "value": "10"
+                    }
+                  },
+                  {
+                    "name": "Length",
+                    "value": {
+                      "hex": "0x1.6a09e667f3bcdp+0",
+                      "kind": "float",
+                      "repr": "1.4142135623730951"
+                    }
+                  },
+                  {
+                    "name": "Height",
+                    "value": {
+                      "hex": "0x1.6a09e667f3bcdp+0",
+                      "kind": "float",
+                      "repr": "1.4142135623730951"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 5,
+                "object_type": "PhotovoltaicPerformance:Simple",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Spec4PVpanel:Nonsquare Area PV"
+                    }
+                  },
+                  {
+                    "name": "Fraction of Surface Area with Active Solar Cells",
+                    "value": {
+                      "hex": "0x1.4000000000000p-1",
+                      "kind": "float",
+                      "repr": "0.625"
+                    }
+                  },
+                  {
+                    "name": "Conversion Efficiency Input Mode",
+                    "value": {
+                      "kind": "str",
+                      "value": "Fixed"
+                    }
+                  },
+                  {
+                    "name": "Value for Cell Efficiency if Fixed",
+                    "value": {
+                      "hex": "0x1.8000000000000p-3",
+                      "kind": "float",
+                      "repr": "0.1875"
+                    }
+                  },
+                  {
+                    "name": "Efficiency Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 7,
+                "object_type": "Generator:Photovoltaic",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "PVpanel:Nonsquare Area PV"
+                    }
+                  },
+                  {
+                    "name": "Surface Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Shading4PVpanel:Nonsquare Area PV"
+                    }
+                  },
+                  {
+                    "name": "Photovoltaic Performance Object Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "PhotovoltaicPerformance:Simple"
+                    }
+                  },
+                  {
+                    "name": "Module Performance Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Spec4PVpanel:Nonsquare Area PV"
+                    }
+                  },
+                  {
+                    "name": "Heat Transfer Integration Mode",
+                    "value": {
+                      "kind": "str",
+                      "value": "Decoupled"
+                    }
+                  },
+                  {
+                    "name": "Number of Series Strings in Parallel",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  },
+                  {
+                    "name": "Number of Modules in Series",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 151,
+                "object_type": "ElectricLoadCenter:Generators",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Generator4PVpanel:Nonsquare Area PV"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "PVpanel:Nonsquare Area PV"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Object Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "Generator:Photovoltaic"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Rated Electric Power Output",
+                    "value": {
+                      "hex": "0x1.e848000000000p+19",
+                      "kind": "float",
+                      "repr": "1000000.0"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 1 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 2 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 3 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 4 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 5 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 6 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 7 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 8 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 9 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 10 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 11 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 12 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 13 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 14 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 15 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 16 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 17 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 18 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 19 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 20 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 21 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 22 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 23 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 24 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 25 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 26 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 27 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 28 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 29 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Object Type",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Rated Electric Power Output",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Availability Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator 30 Rated Thermal to Electrical Power Ratio",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 5,
+                "object_type": "ElectricLoadCenter:Inverter:Simple",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Inverter4PVpanel:Nonsquare Area PV"
+                    }
+                  },
+                  {
+                    "name": "Availability Schedule Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "ALLON"
+                    }
+                  },
+                  {
+                    "name": "Zone Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Radiative Fraction",
+                    "value": {
+                      "kind": "int",
+                      "value": "0"
+                    }
+                  },
+                  {
+                    "name": "Inverter Efficiency",
+                    "value": {
+                      "kind": "int",
+                      "value": "1"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 21,
+                "object_type": "ElectricLoadCenter:Distribution",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Distribution4PVpanel:Nonsquare Area PV"
+                    }
+                  },
+                  {
+                    "name": "Generator List Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Generator4PVpanel:Nonsquare Area PV"
+                    }
+                  },
+                  {
+                    "name": "Generator Operation Scheme Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "Baseload"
+                    }
+                  },
+                  {
+                    "name": "Generator Demand Limit Scheme Purchased Electric Demand Limit",
+                    "value": {
+                      "hex": "0x1.e848000000000p+19",
+                      "kind": "float",
+                      "repr": "1000000.0"
+                    }
+                  },
+                  {
+                    "name": "Generator Track Schedule Name Scheme Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Generator Track Meter Scheme Meter Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Electrical Buss Type",
+                    "value": {
+                      "kind": "str",
+                      "value": "DirectCurrentWithInverter"
+                    }
+                  },
+                  {
+                    "name": "Inverter Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Inverter4PVpanel:Nonsquare Area PV"
+                    }
+                  },
+                  {
+                    "name": "Electrical Storage Object Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Transformer Object Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Operation Scheme",
+                    "value": {
+                      "kind": "str",
+                      "value": "TrackFacilityElectricDemandStoreExcessOnSite"
+                    }
+                  },
+                  {
+                    "name": "Storage Control Track Meter Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Converter Object Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Maximum Storage State of Charge Fraction",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  },
+                  {
+                    "name": "Minimum Storage State of Charge Fraction",
+                    "value": {
+                      "hex": "0x0.0p+0",
+                      "kind": "float",
+                      "repr": "0.0"
+                    }
+                  },
+                  {
+                    "name": "Design Storage Control Charge Power",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Charge Power Fraction Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Design Storage Control Discharge Power",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Discharge Power Fraction Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Control Utility Demand Target",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Storage Control Utility Demand Target Fraction Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "fresh_result_list": true,
+            "object_count": 6,
+            "object_types": [
+              "Shading:Site",
+              "PhotovoltaicPerformance:Simple",
+              "Generator:Photovoltaic",
+              "ElectricLoadCenter:Generators",
+              "ElectricLoadCenter:Inverter:Simple",
+              "ElectricLoadCenter:Distribution"
+            ],
+            "result_type": "list",
+            "same_idd_definition_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "second_fields_equal_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "PhotoVoltaicPanel.to_idf_object"
+    }
+  ],
+  "cases_sha256": "sha256:767c3314ec20d07aa12fdce48b9969a98b54b835855b4be7ecfdd896816be0dd",
+  "consumer_contract": {
+    "adaptations": {
+      "PhotoVoltaicPanel.to_idf_object": "compact-native-photovoltaic-idf-emission"
+    },
+    "assertion_ids": {
+      "PhotoVoltaicPanel.to_idf_object": "dragon-hvac-photovoltaic-to-idf-object-4723273d"
+    },
+    "case_count": 3,
+    "case_ids": [
+      "dragon-hvac-photovoltaic-to-idf-object.boundaries.maximum-tilt-default-ratio",
+      "dragon-hvac-photovoltaic-to-idf-object.boundaries.minimum-angles-unit-efficiencies",
+      "dragon-hvac-photovoltaic-to-idf-object.custom-ratio-nonsquare-area-sqrt"
+    ],
+    "classifications": {
+      "PhotoVoltaicPanel.to_idf_object": "exception"
+    },
+    "closure": {
+      "context_only_not_targeted": [
+        "PhotoVoltaicPanel",
+        "PhotoVoltaicPanel.__init__",
+        "PhotoVoltaicPanel.area",
+        "PhotoVoltaicPanel.azimuth",
+        "PhotoVoltaicPanel.effective_area_ratio",
+        "PhotoVoltaicPanel.efficiency",
+        "PhotoVoltaicPanel.tilt",
+        "IdfObject",
+        "IdfObject.__init__"
+      ],
+      "full_symbol_closure": false,
+      "representation_contract": {
+        "native_compact_field_counts": [
+          8,
+          4,
+          4,
+          4,
+          5,
+          8
+        ],
+        "native_policy": "omit-trailing-blank-and-default-fields",
+        "python_complete_allowed_key_field_counts": [
+          8,
+          5,
+          7,
+          151,
+          5,
+          21
+        ]
+      },
+      "scope": "bounded-common-valid-domain-compact-native-photovoltaic-idf-emission-adaptation",
+      "unresolved_behavior": [
+        "photovoltaic-constructor-validation-order-and-errors",
+        "photovoltaic-property-setter-validation-order-and-errors",
+        "invalid-or-nonfinite-domain-state",
+        "semantic-populated-and-default-field-parity-requires-csharp-evidence",
+        "isolated-IdfObject-validation-policy",
+        "EnergyModel.to_idf"
+      ]
+    },
+    "identity_encoding": "booleans-only-no-id-or-address",
+    "native_targets": {
+      "PhotoVoltaicPanel.to_idf_object": "PhotovoltaicPanel.ToIdfObjects"
+    },
+    "source_import_policy": "external-temporary-copy-with-complete-loaded-local-module-audit",
+    "target_symbols": [
+      "PhotoVoltaicPanel.to_idf_object"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-hvac-photovoltaic-to-idf-object.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:a227ed7b60c5a482a11b9a11f36e243b56cae95e2889effe9abe7e6e70d0346b",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+      "symbol": "PhotoVoltaicPanel.to_idf_object",
+      "symbol_hash": "sha256:4723273d4b77d9286d4a47c4d753f71049e87d146ff912b0aa6a8ab8ed911287"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "loaded_local_modules": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "module": "idragon",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "module": "idragon.common",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "module": "idragon.constants",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "module": "idragon.dragon",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "module": "idragon.dragon.construction",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "module": "idragon.dragon.hvac",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "module": "idragon.dragon.model",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "module": "idragon.dragon.profile",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "module": "idragon.dragon.shape",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "module": "idragon.imugi",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "module": "idragon.launcher",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "module": "idragon.utils",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ],
+    "sources": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ]
+  }
+}
