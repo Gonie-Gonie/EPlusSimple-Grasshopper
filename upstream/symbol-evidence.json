@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:0c0bd502e5dc3dff31d7df6da0925d5365ef28217a2acc8a7404d39e53e0b63b",
+  "content_sha256": "sha256:2c3b3aa180b744f205349d60d9cc9ce5dccb96a8e1e5c881435c500e4ce36dee",
   "entries": [
     {
       "implementation": {
@@ -1044,7 +1044,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ConditionedZones"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1070,7 +1070,33 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.Surfaces"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyModel.surfaces across its exact three-case model projection slice: empty freshness, zone-major flatten order, repeated identity, and isolated result mutation.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9674cc2ec622a8f4f2a1ae22d11a3f11bfc4043a60c37296665ed915a415ed7e",
+          "id": "dragon-model-projections-surfaces-9bd40b3f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelProjectionOracleParityTests.cs",
+          "test_source_sha256": "sha256:0f444e3e1794e95f5f2dbc68b64f7506fd840c0bcbbecdfc0ec0038cb18eca42",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelProjectionOracleParityTests.MatchesPinnedPythonProjections",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyModel.surfaces",
+      "upstream_symbol_hash": "sha256:9bd40b3fbdc974f1f3a7550b2df6ec8f4c41ce9cb55ecbc07b3f2fce264834c0"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UnconditionedZones"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1096,7 +1122,85 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UsedConstructions"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyModel.used_constructions across its exact three-case model projection slice: opaque host filtering, equality membership, first surviving identity, and hash-table versus deterministic first-use order. The comparison directly verifies the same supported opaque-construction membership and first surviving identity with stable host-surface encounter order instead of CPython set-table order.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d38c8a8404189490d6567255d32d9238960bdf2172238801fb9131c42e93ab8c",
+          "id": "dragon-model-projections-used-constructions-b34dd26f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelProjectionOracleParityTests.cs",
+          "test_source_sha256": "sha256:0f444e3e1794e95f5f2dbc68b64f7506fd840c0bcbbecdfc0ec0038cb18eca42",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelProjectionOracleParityTests.MatchesPinnedPythonProjections",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyModel.used_constructions",
+      "upstream_symbol_hash": "sha256:b34dd26fdb9af00f053278e77ac3cc85394a646405e8e5e0b5c077342fd1bebd"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UsedLayers"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyModel.used_layers across its exact three-case model projection slice: runtime Layer membership, name-hash/equality boundaries, first identity, and hash-table versus deterministic construction/layer order. The comparison directly verifies the pinned name-hash/equality membership boundary with stable first-use order and no accidental cross-name hash-collision emulation.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:19e333cf906eec3114078bb53cad4f5ed9b38e72baece4cb8a48e75b36e81928",
+          "id": "dragon-model-projections-used-layers-e15c8d38",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelProjectionOracleParityTests.cs",
+          "test_source_sha256": "sha256:0f444e3e1794e95f5f2dbc68b64f7506fd840c0bcbbecdfc0ec0038cb18eca42",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelProjectionOracleParityTests.MatchesPinnedPythonProjections",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyModel.used_layers",
+      "upstream_symbol_hash": "sha256:e15c8d38a7b918895bf399bc319bbb2caf2810d416cb4c8792fedb5cec3358f0"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UsedProfiles"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyModel.used_profiles across its exact three-case model projection slice: ordinal name keys, first key position, last object replacement, Unicode and case sensitivity.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:863a51a67b7f2fa96e94d1b3305c4d9a1e72e9f4a7f9a8cb30dff59391253bc7",
+          "id": "dragon-model-projections-used-profiles-b8a8a5f6",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelProjectionOracleParityTests.cs",
+          "test_source_sha256": "sha256:0f444e3e1794e95f5f2dbc68b64f7506fd840c0bcbbecdfc0ec0038cb18eca42",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelProjectionOracleParityTests.MatchesPinnedPythonProjections",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyModel.used_profiles",
+      "upstream_symbol_hash": "sha256:b8a8a5f692a0cbeeec4215cbab71e89291a3f96e68d7702853631dc454a695ab"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1122,7 +1226,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.City"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1148,7 +1252,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Country"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1174,7 +1278,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Ocean"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1200,7 +1304,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Suburbs"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1226,7 +1330,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Urban"
       },
       "path": "src/idragon/dragon/model.py",
@@ -5776,7 +5880,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:413b4ee466bb403f7f56eb30edfa922730a2bfd36b10bf253dac36166156a666",
+        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ConditionedZones"
       },
       "path": "src/idragon/dragon/shape.py",
@@ -6167,9 +6271,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 237,
-    "passed_receipt_count": 237,
-    "receipt_count": 237,
+    "entry_count": 241,
+    "passed_receipt_count": 241,
+    "receipt_count": 241,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

@@ -820,12 +820,12 @@
     "needs_reverification",
     "equivalent",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "equivalent",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
     "exception",
     "equivalent",
     "equivalent",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:07cadb09328da21726e6252a3bc18b7f1729a93fc51f8220253b878c6902af81",
+  "content_sha256": "sha256:d1d02ef38ab1408612aba83b6dfe3100ae3cbf0a135772cc9cdc4dfc5222d4e6",
   "details": [
     {
       "evidence": [
@@ -2972,10 +2972,42 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#dragon-model-projections-surfaces-9bd40b3f"
+      ],
+      "index": 820,
+      "rationale": "Trusted cross-language evidence verifies EnergyModel.surfaces across its exact three-case model projection slice: empty freshness, zone-major flatten order, repeated identity, and isolated result mutation."
+    },
+    {
+      "evidence": [
         "upstream/symbol-evidence.json#dragon-model-conditioning-unconditioned-zones-24b8c9a9"
       ],
       "index": 822,
       "rationale": "Trusted cross-language evidence verifies EnergyModel.unconditioned_zones across its exact three-case conditioning slice: the ordered complementary source-zone identities selected when either HVAC supply or availability context is absent."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-used-construction-projection",
+        "upstream/symbol-evidence.json#dragon-model-projections-used-constructions-b34dd26f"
+      ],
+      "exception_id": "deterministic-used-construction-projection",
+      "index": 823,
+      "rationale": "Trusted cross-language evidence verifies EnergyModel.used_constructions across its exact three-case model projection slice: opaque host filtering, equality membership, first surviving identity, and hash-table versus deterministic first-use order, and directly observes the same supported opaque-construction membership and first surviving identity with stable host-surface encounter order instead of CPython set-table order."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-used-layer-projection",
+        "upstream/symbol-evidence.json#dragon-model-projections-used-layers-e15c8d38"
+      ],
+      "exception_id": "deterministic-used-layer-projection",
+      "index": 824,
+      "rationale": "Trusted cross-language evidence verifies EnergyModel.used_layers across its exact three-case model projection slice: runtime Layer membership, name-hash/equality boundaries, first identity, and hash-table versus deterministic construction/layer order, and directly observes the pinned name-hash/equality membership boundary with stable first-use order and no accidental cross-name hash-collision emulation."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-model-projections-used-profiles-b8a8a5f6"
+      ],
+      "index": 825,
+      "rationale": "Trusted cross-language evidence verifies EnergyModel.used_profiles across its exact three-case model projection slice: ordinal name keys, first key position, last object replacement, Unicode and case sensitivity."
     },
     {
       "evidence": [
@@ -4897,9 +4929,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 126,
-      "exception": 111,
-      "needs_reverification": 753,
+      "equivalent": 128,
+      "exception": 113,
+      "needs_reverification": 749,
       "out_of_scope": 252
     },
     "entry_count": 1242
