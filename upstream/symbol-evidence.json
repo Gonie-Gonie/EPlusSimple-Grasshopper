@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:5851c42e592322b34e24520c4fb97eab34df1fa4797c932232502417edb223dc",
+  "content_sha256": "sha256:5ba85ba553617851cf9b4eec237ae69ace6a2d6f39b586bbb296efecc056583f",
   "entries": [
     {
       "implementation": {
@@ -1201,7 +1201,7 @@
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
         "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
-        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendHvac"
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.Assemble"
       },
       "path": "src/idragon/dragon/hvac.py",
       "receipts": [
@@ -1209,13 +1209,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify the bounded SupplyGroup.to_idf_object model-context adaptation across success, availability-conversion failure, and ordered child-system failure: exact upstream capability reads, aligned identities, immediate flattening, controller-last construction, fresh lists, and failure prefixes are bound to native deterministic schedule, source, fragment, sequential-fraction, ALLOFF, and equipment-list assembly plus fresh-document failure isolation. No closure is claimed for a standalone native converter, processor identity or execution, concrete supply/source converters, controller run behavior, postprocessors, or EnergyModel.to_idf.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:55a4128f410919e0a7466cd89f869ae7de9e1d5079508e36f23d7dd20795f1dc",
+          "expected_output_sha256": "sha256:737a687bea4fc0de3eb9f3dfb854fd22d97119eab983187b59ee823d82d4c614",
           "id": "dragon-hvac-supply-group-to-idf-object-3f9c508c",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SupplyGroupToIdfObjectOracleParityTests.cs",
-          "test_source_sha256": "sha256:af9b8b38bda94c24be77437ca3a61c52484131d77fefe2120ec7e22c9d64cc97",
+          "test_source_sha256": "sha256:0542092331df9154c336b5fd46ebd76185ce7be1027cd0f86e3c180ce3040c19",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SupplyGroupToIdfObjectOracleParityTests.MatchesPinnedPythonSupplyGroupToIdfObjectThroughNativeModelContext",
           "verification_kind": "cross_language"
         }
