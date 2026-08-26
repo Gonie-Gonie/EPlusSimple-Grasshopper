@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:fa9580a009695bceb794b0d94546fd73a31fa8ca0bf0a3da46b81f72f910606e",
+  "content_sha256": "sha256:bde9c4e42aac38e024c1111c4192f4ff747595e1e0de09e4455ad6951f05d1ca",
   "entries": [
     {
       "implementation": {
@@ -914,7 +914,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendSurfaceConstruction"
       },
       "path": "src/idragon/dragon/construction.py",
@@ -923,13 +923,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify AirBoundary.to_idf_object across its exact two-case bounded common valid slice through EnergyModel.ToIdfDocument and the private construction mapper. The upstream complete count [4] and native compact count [3] preserve the name, SimpleMixing token and exact ACH value while exhaustively classifying the one trailing Python None schedule as a compact omission with no official-default omission. Host-surface linkage, two-call freshness and determinism, source-graph immutability and official EnergyPlus 24.2 IDD topology are verified without claiming standalone mutable-list shape, class or constructor closure, invalid behavior, IdfObject policy, parent converters, global order, deduplication or conflicts.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:9df727e95563dfd5acefcab4e6b398371c22d600a2db8266af9e82dc30a8210f",
+          "expected_output_sha256": "sha256:0ce1256dee8e1cf7d7c70edd9df089386be1f17e06a836dc09f1846f0440f8b4",
           "id": "dragon-construction-air-boundary-to-idf-object-639a205f",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ConstructionFamilyIdfOracleParityTests.cs",
-          "test_source_sha256": "sha256:10fc1f60fd44900f7752e37a022a7a94dfabd60780eeb1aad8316f1f5948932d",
+          "test_source_sha256": "sha256:30b9cd8d972bb448ae1d8c787264465a49bc4efeb4b85843ac086b5af17d6c9b",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ConstructionFamilyIdfOracleParityTests.MatchesPinnedPythonConstructionFamilyEmissionThroughFreshEnergyModels",
           "verification_kind": "cross_language"
         }
@@ -992,7 +992,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendSurfaceConstruction"
       },
       "path": "src/idragon/dragon/construction.py",
@@ -1001,13 +1001,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Construction.to_idf_object across its exact one-layer and three-layer bounded common valid cases through EnergyModel.ToIdfDocument and the private construction mapper. The upstream complete count [11] maps to native compact counts [2] and [4], preserving the surface-scoped construction name and exact ordered layer references while exhaustively classifying nine and seven trailing Python None fields as compact omissions with no official-default omission. Host-surface linkage, two-call freshness and determinism, source-graph immutability and official EnergyPlus 24.2 IDD topology are verified without claiming standalone surface-parameter or mutable-list shape, class closure, Layer child conversion, invalid behavior, parent converters, global order, deduplication or conflicts.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:0e80e49abec13dc288c84669a836f923002b83cab2102b90eeeb4df819a2063c",
+          "expected_output_sha256": "sha256:47ee45ab0dbb690609d3f355b54d84ebf247058b19cf07a8c62337e4fd1f0bfe",
           "id": "dragon-construction-construction-to-idf-object-71a76f27",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ConstructionFamilyIdfOracleParityTests.cs",
-          "test_source_sha256": "sha256:10fc1f60fd44900f7752e37a022a7a94dfabd60780eeb1aad8316f1f5948932d",
+          "test_source_sha256": "sha256:30b9cd8d972bb448ae1d8c787264465a49bc4efeb4b85843ac086b5af17d6c9b",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ConstructionFamilyIdfOracleParityTests.MatchesPinnedPythonConstructionFamilyEmissionThroughFreshEnergyModels",
           "verification_kind": "cross_language"
         }
@@ -1018,7 +1018,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendGlazing"
       },
       "path": "src/idragon/dragon/construction.py",
@@ -1027,13 +1027,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Glazing.to_idf_object across its exact two-case bounded common valid slice through EnergyModel.ToIdfDocument and the private glazing mapper. The upstream complete counts [4,11] and native compact counts [3,2] preserve all five present material and construction fields, exact U-factor and solar-gain values, and material-to-construction-to-fenestration linkage while exhaustively classifying all ten Python None fields as compact omissions with no official-default omission. Host-surface linkage, two-call freshness and determinism, source-graph immutability and official EnergyPlus 24.2 IDD topology are verified without claiming standalone mutable-list shape, class closure, invalid behavior, parent Window, Surface or Zone converters, global order, deduplication or conflicts.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:35ca9ce197c146fbb03bc1e9788ec14dfb315813c23d19ce937af5d517fa67eb",
+          "expected_output_sha256": "sha256:e31039d69886b923548e254687727ba4def437304bbede5180fafd382723a913",
           "id": "dragon-construction-glazing-to-idf-object-3350beaf",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ConstructionFamilyIdfOracleParityTests.cs",
-          "test_source_sha256": "sha256:10fc1f60fd44900f7752e37a022a7a94dfabd60780eeb1aad8316f1f5948932d",
+          "test_source_sha256": "sha256:30b9cd8d972bb448ae1d8c787264465a49bc4efeb4b85843ac086b5af17d6c9b",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ConstructionFamilyIdfOracleParityTests.MatchesPinnedPythonConstructionFamilyEmissionThroughFreshEnergyModels",
           "verification_kind": "cross_language"
         }
@@ -1096,7 +1096,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendSurfaceConstruction"
       },
       "path": "src/idragon/dragon/construction.py",
@@ -1105,13 +1105,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Layer.to_idf_object across its exact two-case bounded common valid slice through EnergyModel.ToIdfDocument and the private construction mapper. Upstream and native both preserve all nine Material fields with zero omissions: name, roughness, exact thickness, conductivity, density and specific-heat values, plus fixed thermal, solar and visible absorptances. Material-to-scoped-construction-to-surface linkage, two-call freshness and determinism, source-graph immutability and official EnergyPlus 24.2 IDD topology are verified without claiming standalone raw-object shape, Layer or Material class closure, invalid behavior, parent Construction or Surface converters, global order, deduplication or conflicts.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:a21692b8c28c79fed2945a15c64537b82a57aece1a0cbc6fa2e039b7e3a389f4",
+          "expected_output_sha256": "sha256:573e359c9ece151739355e9c59418d98de15dd5e90a9a94733a55accb6dd425e",
           "id": "dragon-construction-layer-to-idf-object-66e6d458",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ConstructionFamilyIdfOracleParityTests.cs",
-          "test_source_sha256": "sha256:10fc1f60fd44900f7752e37a022a7a94dfabd60780eeb1aad8316f1f5948932d",
+          "test_source_sha256": "sha256:30b9cd8d972bb448ae1d8c787264465a49bc4efeb4b85843ac086b5af17d6c9b",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ConstructionFamilyIdfOracleParityTests.MatchesPinnedPythonConstructionFamilyEmissionThroughFreshEnergyModels",
           "verification_kind": "cross_language"
         }
@@ -1148,7 +1148,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendSurfaceConstruction"
       },
       "path": "src/idragon/dragon/construction.py",
@@ -1157,13 +1157,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify NoMassConstruction.to_idf_object across its exact two-case bounded common valid slice through EnergyModel.ToIdfDocument and the private construction mapper. The upstream complete counts [6,11] and native compact counts [6,2] preserve all eight present material and construction fields, the Rough token, exact reciprocal-U resistance, fixed absorptances and material-to-construction-to-surface linkage while exhaustively classifying all nine Python None fields as compact omissions with no official-default omission. Two-call freshness and determinism, source-graph immutability and official EnergyPlus 24.2 IDD topology are verified without claiming standalone mutable-list shape, class or property closure, invalid or zero-U behavior, parent converters, global order, deduplication or conflicts.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:1a6edabc9ac66ab0ddfaec232946f941185bea42588597e48902127e1effc70c",
+          "expected_output_sha256": "sha256:eb4e09bd03638894d0d18b9e60924d6594b8cd3170f0be4c02373a569d9f277c",
           "id": "dragon-construction-no-mass-construction-to-idf-object-2bc3fe98",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ConstructionFamilyIdfOracleParityTests.cs",
-          "test_source_sha256": "sha256:10fc1f60fd44900f7752e37a022a7a94dfabd60780eeb1aad8316f1f5948932d",
+          "test_source_sha256": "sha256:30b9cd8d972bb448ae1d8c787264465a49bc4efeb4b85843ac086b5af17d6c9b",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ConstructionFamilyIdfOracleParityTests.MatchesPinnedPythonConstructionFamilyEmissionThroughFreshEnergyModels",
           "verification_kind": "cross_language"
         }
@@ -1356,7 +1356,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.Assemble"
       },
       "path": "src/idragon/dragon/hvac.py",
@@ -1365,13 +1365,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify the bounded SupplyGroup.to_idf_object model-context adaptation across success, availability-conversion failure, and ordered child-system failure: exact upstream capability reads, aligned identities, immediate flattening, controller-last construction, fresh lists, and failure prefixes are bound to native deterministic schedule, source, fragment, sequential-fraction, ALLOFF, and equipment-list assembly plus fresh-document failure isolation. No closure is claimed for a standalone native converter, processor identity or execution, concrete supply/source converters, controller run behavior, postprocessors, or EnergyModel.to_idf.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:737a687bea4fc0de3eb9f3dfb854fd22d97119eab983187b59ee823d82d4c614",
+          "expected_output_sha256": "sha256:278dfbbdcdd23cba7850d2697356c27449c96d79dddd60c09e72d1fcec8c93c1",
           "id": "dragon-hvac-supply-group-to-idf-object-3f9c508c",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SupplyGroupToIdfObjectOracleParityTests.cs",
-          "test_source_sha256": "sha256:0542092331df9154c336b5fd46ebd76185ce7be1027cd0f86e3c180ce3040c19",
+          "test_source_sha256": "sha256:81348fc57fee6ae6cb9773b5d22dbed68ed031310c34cef4b6db9fc191607207",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SupplyGroupToIdfObjectOracleParityTests.MatchesPinnedPythonSupplyGroupToIdfObjectThroughNativeModelContext",
           "verification_kind": "cross_language"
         }
@@ -1397,7 +1397,7 @@
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelConstructionDefaultsOracleParityTests.cs",
-          "test_source_sha256": "sha256:9610b50989e79ccda64ccbad222e34ec1d226065c2e594a2e7db0049a9f38bb8",
+          "test_source_sha256": "sha256:a647f8c841922dec56b94d9bd41ed92213d474ab8cb4552f56236402f774aad8",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelConstructionDefaultsOracleParityTests.MatchesPinnedPythonConstructionDefaults",
           "verification_kind": "cross_language"
         }
@@ -1408,7 +1408,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendHvac"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1417,13 +1417,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify the bounded EnergyModel.add_supply_system adaptation: upstream generation failure occurs before mutation, append precedes ordered postprocessors, processor failure retains the appended objects, and success returns None, while native EnergyModel.ToIdfDocument performs deterministic model-context HVAC assembly through EnergyModelIdfAssembler.AppendHvac. No closure is claimed for EnergyModel.to_idf, SupplyGroup, concrete supply systems, or supply-system postprocessors.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:46a5a19db5de15a3d1ef104d1488cae3fdc08b1b483314d3209c79470c627ce8",
+          "expected_output_sha256": "sha256:80ffdd879b867ffbf5f62c597e4649bd95321cc7e9b28572fa2a1d101107c4c1",
           "id": "dragon-model-add-supply-system-174532d0",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelAddSupplySystemOracleParityTests.cs",
-          "test_source_sha256": "sha256:ee5a5ad920e23f69c6f76939ccd487406806a8462e29bc3fbbc72a5384a69f10",
+          "test_source_sha256": "sha256:9f1156dcd9684c14ca84f29eca9266b4c1fac67973aa9f642a67215acf3de801",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelAddSupplySystemOracleParityTests.MatchesPinnedPythonAddSupplySystemAndNativeModelContextAssembly",
           "verification_kind": "cross_language"
         }
@@ -1475,7 +1475,7 @@
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelConstructionDefaultsOracleParityTests.cs",
-          "test_source_sha256": "sha256:9610b50989e79ccda64ccbad222e34ec1d226065c2e594a2e7db0049a9f38bb8",
+          "test_source_sha256": "sha256:a647f8c841922dec56b94d9bd41ed92213d474ab8cb4552f56236402f774aad8",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelConstructionDefaultsOracleParityTests.MatchesPinnedPythonConstructionDefaults",
           "verification_kind": "cross_language"
         }
@@ -1512,7 +1512,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.Assemble"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1521,13 +1521,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyModel.to_idf across the bounded five-case parent-orchestration slice. The successful adversarial native model returns fresh distinct byte-for-byte deterministic documents and child objects without mutating model membership or identities, preserves model zone, supply and photovoltaic input ordering, orders distinct sources by stable EntityId despite opposite encounter order, deduplicates a shared source, retains ordered terminal references, contiguous photovoltaic batches and major-family checkpoints, and uses default ThrowOnValidationErrors=true pre-validation. The four upstream assembly-stage partial-prefix traces are explicitly waived and are not mapped to native stages; no parity is claimed for raw global Python order, mutable or partial IDF identity, validation bypass, failures after Assemble starts or their transactionality, invalid duck types or exception wording, or standalone unresolved child converters and classes.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:e70ced0ec859a1e5fbbe1461273f3e4218c2228d470e6100d59bbea8eb7e3757",
+          "expected_output_sha256": "sha256:56cdd87e977cca164b4b0a665de89b38d0a7c912236fd9dceb49a791903d7631",
           "id": "dragon-model-energy-model-to-idf-de10251f",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelAssemblyOracleParityTests.cs",
-          "test_source_sha256": "sha256:f2bb09e22b60f2ff247548c6ee13c87535cfba50dc477a8f4f2a0ab2723c05dc",
+          "test_source_sha256": "sha256:34628e366a151514ba7838b4df1b89374c3599974a02881215d509f7f3e08b0a",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelAssemblyOracleParityTests.ValidatedFreshEnergyModelIdfAssemblyMatchesBoundedParentOrchestration",
           "verification_kind": "cross_language"
         }
@@ -6322,7 +6322,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.ShadingMaterial"
       },
       "path": "src/idragon/dragon/shape.py",
@@ -6331,13 +6331,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Blind.to_idf_object across its exact three-case shading-material slice: all 29 ordered fields, supplied values, fixed constants, Python None-to-native blank IDF serialization, repeated-call freshness, unchanged source state, and the valid-domain private mapper plus public EnergyModel route. The observed permissive-invalid Python state is rejected by the native constructor without claiming every invalid permutation, standalone converter parity, constructor or class closure, IdfObject behavior, Surface or WindowShadingControl conversion, or EnergyModel.to_idf.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:b3549515bf997bdd8e214e5fd53cdb460df566613eb4abf0f9b33b696ec97df3",
+          "expected_output_sha256": "sha256:c6ec3afba36e54c10b4663063810b64a1fbb3c1b051ca31eaf206b88f9a2a227",
           "id": "dragon-shape-blind-to-idf-object-16e27412",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ShadingMaterialIdfOracleParityTests.cs",
-          "test_source_sha256": "sha256:3d674b98075e6e9a06c93a372602209f7a0c0bfea8d09f18ced293121347ef51",
+          "test_source_sha256": "sha256:eba3f95a6103db5d793dca4fb132fe9cf38908183b4e2148fb0fb7ec7bf472ef",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ShadingMaterialIdfOracleParityTests.MatchesPinnedPythonShadingMaterialEmissionInNativeModelContext",
           "verification_kind": "cross_language"
         }
@@ -6348,7 +6348,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.ShadingMaterial"
       },
       "path": "src/idragon/dragon/shape.py",
@@ -6357,13 +6357,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Shade.to_idf_object across its exact three-case shading-material slice: all 15 ordered fields, supplied and repeated optical values, computed emissivity, fixed constants, repeated-call freshness, unchanged source state, and the valid-domain private mapper plus public EnergyModel route. The observed excessive-sum Python emission and injected nonnumeric TypeError boundary are replaced by native constructor validation and typed exclusion without claiming every invalid permutation, standalone converter parity, constructor or class closure, IdfObject behavior, Surface or WindowShadingControl conversion, or EnergyModel.to_idf; the shared Python None-to-native blank IDF serialization rule is explicit although these 15 fields contain no None slots.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:4359b894572833c1ee8ea32842d892365cf30d8d042159d095706dba6df57c5a",
+          "expected_output_sha256": "sha256:db43b4e07673b26361676225ce154a8a564f0fd05e87c4761143ce45ed562489",
           "id": "dragon-shape-shade-to-idf-object-75e6c8e6",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ShadingMaterialIdfOracleParityTests.cs",
-          "test_source_sha256": "sha256:3d674b98075e6e9a06c93a372602209f7a0c0bfea8d09f18ced293121347ef51",
+          "test_source_sha256": "sha256:eba3f95a6103db5d793dca4fb132fe9cf38908183b4e2148fb0fb7ec7bf472ef",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ShadingMaterialIdfOracleParityTests.MatchesPinnedPythonShadingMaterialEmissionInNativeModelContext",
           "verification_kind": "cross_language"
         }
@@ -6400,7 +6400,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendHvac"
       },
       "path": "src/idragon/dragon/shape.py",
@@ -6409,13 +6409,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.to_idf_hvac_default_object across its exact three cases inside the nine-case Zone fixture through public EnergyModel.ToIdfDocument and private AppendHvac, AppendThermostat and AppendSizing mappers. The conditioned case preserves all eight semantic target objects with native compact counts [7,1,37,8,6,3,3,5], exhaustively classifies 120 Python blank-or-None fields and 24 official EnergyPlus 24.2 IDD defaults, explicitly records six real ZoneHVAC:EquipmentList enrichment fields and one Sizing:Zone field relocation, and classifies parent orchestration order; both unconditioned cases remain empty. Two-call document/object/field freshness and determinism, exact linkage and source-graph reference/value immutability are verified without claiming Zone, Profile, Schedule, Surface or IdfObject closure, invalid behavior, global ordering, deduplication, conflicts or EnergyModel parent assembly.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:37341308493f9ba368288e1e32c6e738cd847450c7eac6769aa25202f683e8c7",
+          "expected_output_sha256": "sha256:ea3b92e78092b8261ee2322c9d4cd16e4dc0c7e0edc3a41c4b215b9f1749d13a",
           "id": "dragon-shape-zone-to-idf-hvac-default-object-ff678ec2",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneIdfOracleParityTests.cs",
-          "test_source_sha256": "sha256:aa9b5df9441135dd3eafe84ec39d671cab437c43d8d7326a68731266ca408448",
+          "test_source_sha256": "sha256:2242314284197badd7514f331293c3f0a4ed7b4b483a6467919dbe70c6e906f4",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneIdfOracleParityTests.MatchesPinnedPythonZoneEmissionThroughFreshEnergyModels",
           "verification_kind": "cross_language"
         }
@@ -6426,7 +6426,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneLoads"
       },
       "path": "src/idragon/dragon/shape.py",
@@ -6435,13 +6435,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.to_idf_load_object across its exact three cases inside the nine-case Zone fixture through public EnergyModel.ToIdfDocument and the private AppendZoneLoads mapper. The empty, ERV-occupant and full-natural cases preserve zero-, three- and seven-object outcomes and shared relative order with native compact counts [12,10,11] and [6,12,6,12,10,8,7], while every Python field is exhaustively classified as native, one of 480 blank-or-None omissions, or one of 55 official EnergyPlus 24.2 IDD defaults. Exact names, normalized schedules, zone references, values, two-call document/object/field freshness and determinism, and source-graph reference/value immutability are verified without claiming Zone, Profile, Schedule, Surface or IdfObject closure, invalid behavior, global ordering, deduplication, conflicts or EnergyModel parent assembly.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:82b60a8cdf7189950c6ffce79b2f16d9b6d2a482e20258767c06068fcc54dac0",
+          "expected_output_sha256": "sha256:b22b0b60acdfae5b338335c2b56053a112700dfd3bda22f4513922ba9846607d",
           "id": "dragon-shape-zone-to-idf-load-object-d19165f0",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneIdfOracleParityTests.cs",
-          "test_source_sha256": "sha256:aa9b5df9441135dd3eafe84ec39d671cab437c43d8d7326a68731266ca408448",
+          "test_source_sha256": "sha256:2242314284197badd7514f331293c3f0a4ed7b4b483a6467919dbe70c6e906f4",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneIdfOracleParityTests.MatchesPinnedPythonZoneEmissionThroughFreshEnergyModels",
           "verification_kind": "cross_language"
         }
@@ -6452,7 +6452,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.Assemble"
       },
       "path": "src/idragon/dragon/shape.py",
@@ -6461,13 +6461,13 @@
           "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Zone.to_idf_object across its exact three parent cases inside the nine-case Zone fixture through public EnergyModel.ToIdfDocument and private geometry, load and HVAC assembly stages. Every case preserves one compact 12-field Zone target and classifies all nine Python default-valued tail fields through the official EnergyPlus 24.2 IDD with zero blank omissions, for 27 defaults total. The comparison explicitly keeps fixture-only Python child trace doubles outside child-converter closure while verifying real native geometry and exact surface order, parent-stage order classification, two-call document/object/field freshness and determinism, and full source-graph reference/value immutability without claiming Zone class contracts, Surface, Window, Door, shading, Profile, Schedule or IdfObject closure, invalid behavior, global ordering, deduplication, conflicts or EnergyModel parent assembly.",
           "claims_active_load": false,
           "exercised_load": "not_applicable",
-          "expected_output_sha256": "sha256:89bc66a2ff0af5800430dd14898f023e2ff993236bc6dfd0d3752399c0694fb1",
+          "expected_output_sha256": "sha256:11e4a4bb88bab984b4f6121a9bc4f10c426fc2331ce01d66129a47d532246808",
           "id": "dragon-shape-zone-to-idf-object-479f4d74",
           "outcome": "passed",
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ZoneIdfOracleParityTests.cs",
-          "test_source_sha256": "sha256:aa9b5df9441135dd3eafe84ec39d671cab437c43d8d7326a68731266ca408448",
+          "test_source_sha256": "sha256:2242314284197badd7514f331293c3f0a4ed7b4b483a6467919dbe70c6e906f4",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ZoneIdfOracleParityTests.MatchesPinnedPythonZoneEmissionThroughFreshEnergyModels",
           "verification_kind": "cross_language"
         }
