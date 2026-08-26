@@ -136,6 +136,146 @@ public sealed class GreenRetrofitConversionTests
     }
 
     [Fact]
+    public void LegacyConversionRetainsIdealFallbackForVentilatedUnconditionedZone()
+    {
+        GreenRetrofitModel source = GrmReader.ReadFile(
+            CompatibilityFixture("packaged-erv-pv-openings.grm")).RequireModel();
+        Zone sourceZone = Assert.Single(source.Zones);
+        var unconditionedZone = new Zone(
+            sourceZone.Name,
+            sourceZone.FloorNumber,
+            sourceZone.Height,
+            sourceZone.Surfaces,
+            sourceZone.ProfileName,
+            sourceZone.Profile,
+            sourceZone.LightDensity,
+            supplySystems: Array.Empty<SupplySystemAssignment>(),
+            ventilationSystems: sourceZone.VentilationAssignments,
+            id: sourceZone.Id);
+        var unconditionedSource = new GreenRetrofitModel(
+            source.Name,
+            source.NorthAxis,
+            source.Address,
+            source.Vintage,
+            source.IsMultifamilyHousing,
+            new[] { new BuildingFloor(unconditionedZone.FloorNumber, new[] { unconditionedZone }) },
+            source.Materials,
+            source.SurfaceConstructions,
+            source.FenestrationConstructions,
+            source.SourceSystems,
+            source.SupplySystems,
+            source.VentilationSystems,
+            source.PhotovoltaicSystems,
+            source.Weather);
+
+        GreenRetrofitConversionResult conversion = GreenRetrofitConverter.Convert(unconditionedSource);
+
+        Assert.True(conversion.Success, Describe(conversion));
+        EnergyModel converted = conversion.RequireEnergyModel();
+        Assert.Empty(converted.HvacAssignments);
+        Assert.Single(converted.UnconditionedZones);
+        Assert.Single(converted.VentilationAssignments);
+
+        IdfDocument idf = conversion.ToIdfDocument();
+        IdfObject thermostat = Assert.Single(idf["HVACTemplate:Thermostat"]);
+        Assert.Equal("UNCONDITIONED_THERMOSTAT", thermostat.Name);
+        Assert.Equal(string.Empty, thermostat[1]);
+        Assert.Equal("-30", thermostat[2]);
+        Assert.Equal(string.Empty, thermostat[3]);
+        Assert.Equal("50", thermostat[4]);
+        IdfObject ideal = Assert.Single(idf["HVACTemplate:Zone:IdealLoadsAirSystem"]);
+        Assert.Equal(converted.UnconditionedZones[0].Name, ideal.Name);
+        Assert.Equal(thermostat.Name, ideal[1]);
+        Assert.Equal("ALLON", ideal[2]);
+        Assert.Single(idf["ZoneVentilation:DesignFlowRate"]);
+    }
+
+    [Fact]
+    public void LegacyConversionUsesLastSameNamedSourceProfileScheduleDefinition()
+    {
+        GreenRetrofitModel template = GrmReader.ReadFile(Fixture("grm")).RequireModel();
+        Zone templateZone = Assert.Single(template.Zones);
+        UsageProfile templateProfile = Assert.IsType<UsageProfile>(templateZone.Profile);
+        UsageProfile firstProfile = WithLightingHours(
+            templateProfile,
+            1d,
+            new GonieGonie.BuildingEnergy.Contracts.EntityId("PROFILE-DUPLICATE-FIRST"));
+        UsageProfile secondProfile = WithLightingHours(
+            templateProfile,
+            2d,
+            new GonieGonie.BuildingEnergy.Contracts.EntityId("PROFILE-DUPLICATE-SECOND"));
+        SurfaceConstruction floorConstruction = Assert.IsType<SurfaceConstruction>(
+            templateZone.Surfaces.First(surface => surface.Type == SurfaceType.Floor).Construction);
+        var firstFloor = new Surface(
+            "Duplicate profile floor A",
+            SurfaceType.Floor,
+            SurfaceBoundaryCondition.Ground,
+            16d,
+            null,
+            floorConstruction.Id.Value,
+            floorConstruction,
+            id: new GonieGonie.BuildingEnergy.Contracts.EntityId("SURFACE-DUPLICATE-A"));
+        var secondFloor = new Surface(
+            "Duplicate profile floor B",
+            SurfaceType.Floor,
+            SurfaceBoundaryCondition.Ground,
+            16d,
+            null,
+            floorConstruction.Id.Value,
+            floorConstruction,
+            id: new GonieGonie.BuildingEnergy.Contracts.EntityId("SURFACE-DUPLICATE-B"));
+        var firstZone = new Zone(
+            "Duplicate profile zone A",
+            1,
+            templateZone.Height,
+            new[] { firstFloor },
+            firstProfile.Name,
+            firstProfile,
+            5d,
+            id: new GonieGonie.BuildingEnergy.Contracts.EntityId("ZONE-DUPLICATE-A"));
+        var secondZone = new Zone(
+            "Duplicate profile zone B",
+            1,
+            templateZone.Height,
+            new[] { secondFloor },
+            secondProfile.Name,
+            secondProfile,
+            5d,
+            id: new GonieGonie.BuildingEnergy.Contracts.EntityId("ZONE-DUPLICATE-B"));
+        var source = new GreenRetrofitModel(
+            "Duplicate profile schedule selection",
+            template.NorthAxis,
+            template.Address,
+            template.Vintage,
+            template.IsMultifamilyHousing,
+            new[] { new BuildingFloor(1, new[] { firstZone, secondZone }) },
+            template.Materials,
+            template.SurfaceConstructions,
+            template.FenestrationConstructions,
+            weather: template.Weather);
+
+        GreenRetrofitConversionResult conversion = GreenRetrofitConverter.Convert(source);
+
+        Assert.True(conversion.Success, Describe(conversion));
+        EnergyModel converted = conversion.RequireEnergyModel();
+        Assert.Same(converted.Zones[1].Profile, Assert.Single(converted.UsedProfiles));
+        Assert.Throws<InvalidOperationException>(() => converted.ToIdfDocument());
+
+        IdfDocument legacy = conversion.ToIdfDocument();
+        IdfObject actualLighting = Assert.Single(
+            legacy["Schedule:Compact"],
+            item => item.Name == converted.Zones[1].Profile.Lighting!.Name);
+        IdfObject firstLighting = converted.Zones[0].Profile.Lighting!.ToIdfObject();
+        IdfObject lastLighting = converted.Zones[1].Profile.Lighting!.ToIdfObject();
+        Assert.NotEqual(
+            firstLighting.Fields.Skip(2).Select(field => field.Value),
+            lastLighting.Fields.Skip(2).Select(field => field.Value));
+        Assert.Equal(
+            lastLighting.Fields.Skip(2).Select(field => field.Value),
+            actualLighting.Fields.Skip(2).Select(field => field.Value));
+    }
+
+    [Fact]
     public void ConvertedOpeningsRetainAreaAndDoNotOverlap()
     {
         GreenRetrofitModel source = GrmReader.ReadFile(Fixture("grm")).RequireModel();
@@ -201,8 +341,15 @@ public sealed class GreenRetrofitConversionTests
         IdfObject activity = Assert.Single(
             idf["Schedule:Constant"],
             schedule => schedule.Name == "$DEFAULT$PEOPLEACTIVITY");
-        Assert.Equal("Real", activity[1]);
-        Assert.Equal("107", activity[2]);
+        Assert.Equal("real", activity[1]);
+        Assert.Equal("107.0", activity[2]);
+        IdfObject geometryRules = Assert.Single(idf["GlobalGeometryRules"]);
+        Assert.Equal(5, geometryRules.Fields.Count);
+        Assert.Equal("UpperLeftCorner", geometryRules[0]);
+        Assert.Equal("Counterclockwise", geometryRules[1]);
+        Assert.Equal("World", geometryRules[2]);
+        Assert.Equal("Relative", geometryRules[3]);
+        Assert.Equal("Relative", geometryRules[4]);
         Assert.Equal(string.Empty, Assert.Single(idf["Schedule:Compact"], item => item.Name == "ALLON")[1]);
         Assert.Equal(string.Empty, Assert.Single(idf["Schedule:Compact"], item => item.Name == "ALLOFF")[1]);
         IdfObject ventilation = Assert.Single(idf["ZoneVentilation:DesignFlowRate"]);
@@ -637,6 +784,34 @@ public sealed class GreenRetrofitConversionTests
             template.SurfaceConstructions,
             template.FenestrationConstructions,
             weather: template.Weather);
+    }
+
+    private static UsageProfile WithLightingHours(
+        UsageProfile template,
+        double lightingHours,
+        GonieGonie.BuildingEnergy.Contracts.EntityId id)
+    {
+        Dictionary<UsageDay, bool> operation = Enum
+            .GetValues(typeof(UsageDay))
+            .Cast<UsageDay>()
+            .ToDictionary(day => day, template.OperatesOn);
+        return new UsageProfile(
+            template.Name,
+            template.OccupantStart,
+            template.OccupantEnd,
+            template.HvacStart,
+            template.HvacEnd,
+            template.Ventilation,
+            template.DomesticHotWater,
+            lightingHours,
+            template.Occupancy,
+            template.Equipment,
+            template.HeatingSetpoint,
+            template.CoolingSetpoint,
+            operation,
+            template.Vacations,
+            template.Source,
+            id);
     }
 
     private static string Fixture(string extension)

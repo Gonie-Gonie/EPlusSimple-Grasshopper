@@ -13,6 +13,7 @@ namespace GonieGonie.InvisibleDragon.Model;
 
 internal static class EnergyModelIdfAssembler
 {
+    private const string LegacyUnconditionedThermostatName = "UNCONDITIONED_THERMOSTAT";
     private const int PinnedDefaultObjectCount = 17;
 
     private static readonly string[] GeneratedPreamble =
@@ -80,7 +81,10 @@ internal static class EnergyModelIdfAssembler
     {
         IdfGenerationContext context = new(schema, options);
         IdfDocument document = new(schema, preambleComments: GeneratedPreamble);
-        Append(document, CreateDefaults(context, options));
+        Append(document, CreateDefaults(
+            context,
+            options,
+            exactPinnedFields: options.UseLegacySimpleDragonDefaultObjectFields));
         document.Append(context.Create(
             "Building",
             IdfGenerationContext.Field(0, "Name", model.Name),
@@ -89,8 +93,12 @@ internal static class EnergyModelIdfAssembler
             IdfGenerationContext.Field(5, "Solar Distribution", "MinimalShadowing")));
         Append(document, model.OutputTables.ToIdfObjects(context));
 
-        List<Schedule> schedules = CollectSchedules(model).ToList();
-        Dictionary<string, Schedule> uniqueSchedules = new(StringComparer.OrdinalIgnoreCase);
+        List<Schedule> schedules = CollectSchedules(model, options).ToList();
+        IEqualityComparer<string> scheduleNameComparer =
+            options.UseLegacySimpleDragonUsedProfileScheduleSelection
+                ? StringComparer.Ordinal
+                : StringComparer.OrdinalIgnoreCase;
+        Dictionary<string, Schedule> uniqueSchedules = new(scheduleNameComparer);
         foreach (Schedule schedule in schedules)
         {
             if (uniqueSchedules.TryGetValue(schedule.Name, out Schedule? previous))
@@ -210,9 +218,14 @@ internal static class EnergyModelIdfAssembler
             peopleActivity);
     }
 
-    private static IEnumerable<Schedule> CollectSchedules(EnergyModel model)
+    private static IEnumerable<Schedule> CollectSchedules(
+        EnergyModel model,
+        EnergyModelIdfOptions options)
     {
-        foreach (ZoneProfile profile in model.Zones.Select(zone => zone.Profile))
+        IEnumerable<ZoneProfile> profiles = options.UseLegacySimpleDragonUsedProfileScheduleSelection
+            ? model.UsedProfiles
+            : model.Zones.Select(zone => zone.Profile);
+        foreach (ZoneProfile profile in profiles)
         {
             foreach (Schedule? schedule in new[]
             {
@@ -898,6 +911,7 @@ internal static class EnergyModelIdfAssembler
             Append(document, source.Source.ToIdfObjects(context, source.DemandConnections, source.TerminalUnitNames));
         }
 
+        bool sharedLegacyThermostatAppended = false;
         foreach (Zone zone in model.Zones)
         {
             List<SupplyIdfFragment> fragments = fragmentsByZone[zone.Id];
@@ -928,10 +942,34 @@ internal static class EnergyModelIdfAssembler
             else if (!isConditioned
                 && fragments.Count == 0
                 && options.AddIdealLoadsForUnassignedZones
-                && !legacyVentilators.ContainsKey(zone.Id))
+                && (!legacyVentilators.ContainsKey(zone.Id)
+                    || options.UseLegacySimpleDragonHvacTopology))
             {
-                document.Append(context.CreateRaw("HVACTemplate:Thermostat", $"IdealThermostat_for_{zone.Name}", null, -30, null, 50));
-                document.Append(context.CreateRaw("HVACTemplate:Zone:IdealLoadsAirSystem", zone.Name, $"IdealThermostat_for_{zone.Name}"));
+                if (options.UseLegacySimpleDragonHvacTopology)
+                {
+                    if (!sharedLegacyThermostatAppended)
+                    {
+                        document.Append(context.CreateRaw(
+                            "HVACTemplate:Thermostat",
+                            LegacyUnconditionedThermostatName,
+                            null,
+                            -30,
+                            null,
+                            50));
+                        sharedLegacyThermostatAppended = true;
+                    }
+
+                    document.Append(context.CreateRaw(
+                        "HVACTemplate:Zone:IdealLoadsAirSystem",
+                        zone.Name,
+                        LegacyUnconditionedThermostatName,
+                        "ALLON"));
+                }
+                else
+                {
+                    document.Append(context.CreateRaw("HVACTemplate:Thermostat", $"IdealThermostat_for_{zone.Name}", null, -30, null, 50));
+                    document.Append(context.CreateRaw("HVACTemplate:Zone:IdealLoadsAirSystem", zone.Name, $"IdealThermostat_for_{zone.Name}"));
+                }
             }
         }
     }

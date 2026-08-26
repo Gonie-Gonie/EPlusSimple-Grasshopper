@@ -153,6 +153,8 @@ public sealed class GreenRetrofitConversionResult
         {
             UseLegacyRectangularFenestration = true,
             UseLegacySimpleDragonScheduleMetadata = true,
+            UseLegacySimpleDragonDefaultObjectFields = true,
+            UseLegacySimpleDragonUsedProfileScheduleSelection = true,
             UseLegacySimpleDragonHvacTopology = true,
             UseLegacySimpleDragonVentilation = true,
         };

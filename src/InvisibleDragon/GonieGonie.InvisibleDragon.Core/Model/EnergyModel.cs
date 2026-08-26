@@ -39,6 +39,21 @@ public sealed class EnergyModelIdfOptions
     public bool UseLegacySimpleDragonScheduleMetadata { get; set; }
 
     /// <summary>
+    /// Emits the exact raw default-object fields created by the pinned Python
+    /// SimpleDragon implementation. This is independent from the broader native
+    /// schedule-metadata compatibility switch.
+    /// </summary>
+    public bool UseLegacySimpleDragonDefaultObjectFields { get; set; }
+
+    /// <summary>
+    /// Selects profile schedules through the pinned Python used-profiles projection,
+    /// where the first profile-name position is retained and the last profile with
+    /// that case-sensitive name supplies the schedules. This can intentionally leave
+    /// an earlier duplicate-name zone referencing a schedule that is not emitted.
+    /// </summary>
+    public bool UseLegacySimpleDragonUsedProfileScheduleSelection { get; set; }
+
+    /// <summary>
     /// Retains the HVAC topology emitted by the pinned Python SimpleDragon
     /// conversion when it differs from the native InvisibleDragon topology.
     /// </summary>
