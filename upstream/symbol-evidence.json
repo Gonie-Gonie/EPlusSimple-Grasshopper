@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:3ceeb8cc7559410d86e40fc382f31d00d217d709f86ae2f72b0a88bdcbe248b2",
+  "content_sha256": "sha256:56036c17fcb6dff5f8a528a75981864dce928b0cc92ee43f0570c12349855f33",
   "entries": [
     {
       "implementation": {
@@ -212,7 +212,7 @@
     {
       "implementation": {
         "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
-        "source_sha256": "sha256:d96cb8785881ef39efcbd49b75350f79c9c132d0ecea38e1618df4bfa500444e",
+        "source_sha256": "sha256:dae31d954a8eaf74b80d552d31e139845cfb6011b457e32df683d08d170d9d93",
         "symbol": "GonieGonie.SimpleDragon.GreenRetrofitConverter.ConvertProfile"
       },
       "path": "src/epsimple/core/profile.py",
@@ -1044,7 +1044,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.EnergyModel"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1059,7 +1059,7 @@
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelConstructionDefaultsOracleParityTests.cs",
-          "test_source_sha256": "sha256:a5519282f2bb6a3f735912457971ccd416e867c8f7699d7a8af6fc0bf589dff8",
+          "test_source_sha256": "sha256:9610b50989e79ccda64ccbad222e34ec1d226065c2e594a2e7db0049a9f38bb8",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelConstructionDefaultsOracleParityTests.MatchesPinnedPythonConstructionDefaults",
           "verification_kind": "cross_language"
         }
@@ -1070,7 +1070,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ConditionedZones"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1096,7 +1096,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.CreateDefaultIdfDocument"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1111,7 +1111,7 @@
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelConstructionDefaultsOracleParityTests.cs",
-          "test_source_sha256": "sha256:a5519282f2bb6a3f735912457971ccd416e867c8f7699d7a8af6fc0bf589dff8",
+          "test_source_sha256": "sha256:9610b50989e79ccda64ccbad222e34ec1d226065c2e594a2e7db0049a9f38bb8",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelConstructionDefaultsOracleParityTests.MatchesPinnedPythonConstructionDefaults",
           "verification_kind": "cross_language"
         }
@@ -1122,7 +1122,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.Surfaces"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1148,7 +1148,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UnconditionedZones"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1174,7 +1174,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UsedConstructions"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1200,7 +1200,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UsedLayers"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1226,7 +1226,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UsedProfiles"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1252,7 +1252,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1278,7 +1278,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.City"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1304,7 +1304,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Country"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1330,7 +1330,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Ocean"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1356,7 +1356,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Suburbs"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1382,7 +1382,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Urban"
       },
       "path": "src/idragon/dragon/model.py",
@@ -5932,7 +5932,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ConditionedZones"
       },
       "path": "src/idragon/dragon/shape.py",

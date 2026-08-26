@@ -47,11 +47,11 @@
     symbol_hash: sha256:585b53682bd5dbd4d2081e79eddc2789fa60925baafb5eae26de0541346ac9f4
   difference:
     upstream: emits the people-activity Schedule:Constant type-limit reference as lowercase real although the declared object is named ScheduleTypeLimits:Real, and returns the document without validity checking
-    dotnet: preserves lowercase real exactly in the standalone pinned-default factory; legacy SimpleDragon model assembly emits the ASCII-case variant Real while safe native assembly uses the fully qualified ScheduleTypeLimits:Real name, and disposable validation may normalize either legacy alias without mutating the authored document
+    dotnet: preserves lowercase real and the raw 107.0 token exactly in both the standalone pinned-default factory and the explicit legacy SimpleDragon default-object mode; safe native assembly uses the fully qualified ScheduleTypeLimits:Real name, and disposable validation may normalize the legacy alias without mutating the authored document
   effect:
     engineering_result: none
-    raw_idf_text: the standalone factory is exact; legacy SimpleDragon assembly differs only by ASCII case and safe native assembly deliberately uses the valid fully qualified reference
-    energyplus: the two legacy aliases have the same unresolved-reference warning as pinned Python 0.7.0 while the safe native reference validates normally
+    raw_idf_text: the standalone factory and explicit legacy SimpleDragon assembly are exact; safe native assembly deliberately uses the valid fully qualified reference
+    energyplus: the lowercase legacy alias has the same unresolved-reference warning as pinned Python 0.7.0 while the safe native reference validates normally
     grasshopper_validation: warning instead of a blocking error
   approval: accepted-upstream-parity
 
