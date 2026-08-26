@@ -58,6 +58,11 @@
       "sha256": "7cbdcad0691b3e56010981217f11e515c6cb7f417b6a22643925876b33e6de81"
     },
     {
+      "path": "dragon-model-construction-defaults-oracle.json",
+      "bytes": 21802,
+      "sha256": "50a6c1d8cf1c9362b7cacf4462d468211ce3b993059e362bfe83eb3274cc1f13"
+    },
+    {
       "path": "dragon-model-projections-oracle.json",
       "bytes": 22156,
       "sha256": "cee03dd2df0ef704dd77145e94223cc1a74a852ef3d822307749fe368b489117"

@@ -13,10 +13,68 @@ namespace GonieGonie.InvisibleDragon.Model;
 
 internal static class EnergyModelIdfAssembler
 {
+    private const int PinnedDefaultObjectCount = 17;
+
     private static readonly string[] GeneratedPreamble =
     {
         "Generated deterministically by GonieGonie InvisibleDragon.",
     };
+
+    private static readonly string[] PinnedDefaultFamilyOrder =
+    {
+        "Version",
+        "SimulationControl",
+        "Timestep",
+        "SizingPeriod:WeatherFileDays",
+        "RunPeriod",
+        "ScheduleTypeLimits",
+        "Schedule:Compact",
+        "Schedule:Constant",
+        "GlobalGeometryRules",
+        "Output:Table:SummaryReports",
+        "Output:Table:Monthly",
+        "OutputControl:Table:Style",
+    };
+
+    internal static IdfDocument CreateDefaultDocument()
+    {
+        var options = new EnergyModelIdfOptions();
+        IdfGenerationContext context = new(options: options);
+        IdfObject[] objects = CreateDefaults(
+                context,
+                options,
+                exactPinnedFields: true)
+            .Concat(OutputTableSettings.Default.ToIdfObjects(context))
+            .ToArray();
+        if (objects.Length != PinnedDefaultObjectCount
+            || objects.Any(item => string.Equals(
+                item.ObjectType,
+                "Building",
+                StringComparison.OrdinalIgnoreCase)))
+        {
+            throw new InvalidOperationException(
+                $"The pinned default IDF graph must contain exactly {PinnedDefaultObjectCount} non-Building objects.");
+        }
+
+        IdfDocument document = new();
+        foreach (string objectType in PinnedDefaultFamilyOrder)
+        {
+            Append(
+                document,
+                objects.Where(item => string.Equals(
+                    item.ObjectType,
+                    objectType,
+                    StringComparison.OrdinalIgnoreCase)));
+        }
+
+        if (document.Count != objects.Length)
+        {
+            throw new InvalidOperationException(
+                "The pinned default IDF family order does not cover every default object.");
+        }
+
+        return document;
+    }
 
     internal static IdfDocument Assemble(EnergyModel model, IddSchema? schema, EnergyModelIdfOptions options)
     {
@@ -79,7 +137,8 @@ internal static class EnergyModelIdfAssembler
 
     private static IEnumerable<IdfObject> CreateDefaults(
         IdfGenerationContext context,
-        EnergyModelIdfOptions options)
+        EnergyModelIdfOptions options,
+        bool exactPinnedFields = false)
     {
         EnergyPlusVersion version = EnergyPlusDefaults.DefaultVersion;
         yield return context.CreateRaw(
@@ -98,27 +157,57 @@ internal static class EnergyModelIdfAssembler
             12,
             31,
             EnergyPlusDefaults.DefaultYear);
-        yield return context.CreateRaw("GlobalGeometryRules", "UpperLeftCorner", "CounterClockwise", "World");
+        if (exactPinnedFields)
+        {
+            yield return context.CreateRaw(
+                "GlobalGeometryRules",
+                "UpperLeftCorner",
+                "Counterclockwise",
+                "World",
+                "Relative",
+                "Relative");
+        }
+        else
+        {
+            yield return context.CreateRaw("GlobalGeometryRules", "UpperLeftCorner", "CounterClockwise", "World");
+        }
+
+        bool legacyScheduleMetadata = exactPinnedFields
+            || options.UseLegacySimpleDragonScheduleMetadata;
         foreach (IdfObject typeLimit in ScheduleIdfExporter.CreateTypeLimits(
             context,
-            options.UseLegacySimpleDragonScheduleMetadata))
+            legacyScheduleMetadata))
         {
             yield return typeLimit;
         }
 
-        string? onOffType = options.UseLegacySimpleDragonScheduleMetadata
+        string? onOffType = legacyScheduleMetadata
             ? null
             : ScheduleIdfExporter.TypeLimitName(ScheduleType.OnOff);
-        string realType = options.UseLegacySimpleDragonScheduleMetadata
-            ? "Real"
-            : ScheduleIdfExporter.TypeLimitName(ScheduleType.Real);
+        string realType;
+        if (exactPinnedFields)
+        {
+            realType = "real";
+        }
+        else if (options.UseLegacySimpleDragonScheduleMetadata)
+        {
+            realType = "Real";
+        }
+        else
+        {
+            realType = ScheduleIdfExporter.TypeLimitName(ScheduleType.Real);
+        }
+
+        object peopleActivity = exactPinnedFields
+            ? "107.0"
+            : ThermalDefaults.PeopleActivityLevelWattsPerPerson;
         yield return context.CreateRaw("Schedule:Compact", "ALLON", onOffType, "Through: 12/31", "For: AllDays", "Until: 24:00", 1);
         yield return context.CreateRaw("Schedule:Compact", "ALLOFF", onOffType, "Through: 12/31", "For: AllDays", "Until: 24:00", 0);
         yield return context.CreateRaw(
             "Schedule:Constant",
             "$DEFAULT$PEOPLEACTIVITY",
             realType,
-            ThermalDefaults.PeopleActivityLevelWattsPerPerson);
+            peopleActivity);
     }
 
     private static IEnumerable<Schedule> CollectSchedules(EnergyModel model)

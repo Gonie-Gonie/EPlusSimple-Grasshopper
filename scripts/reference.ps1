@@ -33,6 +33,7 @@ $utilsCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\gene
 $commonCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_common_core_oracle.py'
 $constantsEngineeringGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_constants_engineering_oracle.py'
 $dragonModelConditioningGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_conditioning_oracle.py'
+$dragonModelConstructionDefaultsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_construction_defaults_oracle.py'
 $dragonModelProjectionsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_projections_oracle.py'
 $dragonModelTerrainGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_terrain_oracle.py'
 $launcherResultParserGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_launcher_result_parser_oracle.py'
@@ -63,6 +64,7 @@ $utilsCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_utils
 $commonCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_common_core_oracle.py'
 $constantsEngineeringTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_constants_engineering_oracle.py'
 $dragonModelConditioningTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_conditioning_oracle.py'
+$dragonModelConstructionDefaultsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_construction_defaults_oracle.py'
 $dragonModelProjectionsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_projections_oracle.py'
 $dragonModelTerrainTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_terrain_oracle.py'
 $publicSymbolInventoryPath = Join-Path $repositoryRoot 'upstream\public-symbol-inventory.json'
@@ -145,6 +147,7 @@ foreach ($requiredFile in @(
     $commonCoreGeneratorPath,
     $constantsEngineeringGeneratorPath,
     $dragonModelConditioningGeneratorPath,
+    $dragonModelConstructionDefaultsGeneratorPath,
     $dragonModelProjectionsGeneratorPath,
     $dragonModelTerrainGeneratorPath,
     $iddGeneratorPath,
@@ -173,6 +176,7 @@ foreach ($requiredFile in @(
     $commonCoreTestPath,
     $constantsEngineeringTestPath,
     $dragonModelConditioningTestPath,
+    $dragonModelConstructionDefaultsTestPath,
     $dragonModelProjectionsTestPath,
     $dragonModelTerrainTestPath,
     $publicSymbolInventoryPath
@@ -656,7 +660,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, dragon model conditioning/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants engineering, dragon model conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -785,6 +789,24 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $dragonModelConditioningGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-dragon-model-conditioning-reference.log') `
     -FailureMessage 'Generating the Python dragon model conditioning oracle failed'
+
+$dragonModelConstructionDefaultsOraclePath = Join-Path $outputRoot 'dragon-model-construction-defaults-oracle.json'
+$dragonModelConstructionDefaultsGeneratorArguments = @(
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $dragonModelConstructionDefaultsGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $dragonModelConstructionDefaultsOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $dragonModelConstructionDefaultsGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-dragon-model-construction-defaults-reference.log') `
+    -FailureMessage 'Generating the Python dragon model construction-defaults oracle failed'
 
 $dragonModelProjectionsOraclePath = Join-Path $outputRoot 'dragon-model-projections-oracle.json'
 $dragonModelProjectionsGeneratorArguments = @(

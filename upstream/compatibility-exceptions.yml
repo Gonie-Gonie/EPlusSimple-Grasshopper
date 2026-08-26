@@ -46,12 +46,12 @@
     symbol: EnergyModel.create_default_idf
     symbol_hash: sha256:585b53682bd5dbd4d2081e79eddc2789fa60925baafb5eae26de0541346ac9f4
   difference:
-    upstream: emits the people-activity Schedule:Constant reference as Real although the declared object is named ScheduleTypeLimits:Real
-    dotnet: preserves that authoring text exactly and normalizes the alias only in a disposable validation copy
+    upstream: emits the people-activity Schedule:Constant type-limit reference as lowercase real although the declared object is named ScheduleTypeLimits:Real, and returns the document without validity checking
+    dotnet: preserves lowercase real exactly in the standalone pinned-default factory; legacy SimpleDragon model assembly emits the ASCII-case variant Real while safe native assembly uses the fully qualified ScheduleTypeLimits:Real name, and disposable validation may normalize either legacy alias without mutating the authored document
   effect:
     engineering_result: none
-    raw_idf_text: exact upstream text retained
-    energyplus: same not-validated warning as pinned Python 0.7.0
+    raw_idf_text: the standalone factory is exact; legacy SimpleDragon assembly differs only by ASCII case and safe native assembly deliberately uses the valid fully qualified reference
+    energyplus: the two legacy aliases have the same unresolved-reference warning as pinned Python 0.7.0 while the safe native reference validates normally
     grasshopper_validation: warning instead of a blocking error
   approval: accepted-upstream-parity
 
@@ -1673,4 +1673,18 @@
     engineering_result: all supported distinct layer definitions and the first identity for true same-name equal duplicates are preserved while order is deterministic and unrelated names cannot collapse merely because Python hashes collide
     api_contract: callers use EnergyModel.UsedLayers as IReadOnlyList<Layer>; no parity is claimed for the inaccurate upstream Material annotation, mutable list results, CPython set-table order, or accidental hash-collision behavior
     compatibility_evidence: empty and fresh results, runtime Layer values, exact duplicates, equal different-name retention, same-name unequal retention, same-name equality across secondary properties, resize-sensitive hash order, deterministic encounter order, identity, and read-only behavior remain required in trusted cross-language receipts
+  approval: accepted-native-api-adaptation
+
+- id: immutable-validated-energy-model-construction
+  upstream:
+    path: src/idragon/dragon/model.py
+    symbol: EnergyModel.__init__
+    symbol_hash: sha256:1d1dbee8fef8b70b2919c4e46a0ea60efbd748b360d31ff353ea121c72ad97d2
+  difference:
+    upstream: assigns every argument verbatim, aliases explicit zone and photovoltaic lists, shares the omitted mutable default lists across instances, and accepts blank names, nonfinite or unbounded north axes, arbitrary terrain values, and untyped collection values until a later operation fails
+    dotnet: requires a nonblank normalized name, a finite north axis within the supported range, a defined Terrain value, and typed required zones, copies every input collection, exposes read-only snapshots, and models HVAC and ventilation assignments separately from zones
+  effect:
+    engineering_result: valid model names, axes, terrain, zone order, photovoltaic order, and child object identities are preserved while invalid or accidentally shared aggregate state is rejected before IDF assembly
+    api_contract: callers construct EnergyModel with typed enumerable inputs and cannot mutate model membership through a retained caller list or a shared default; no parity is claimed for permissive invalid values or cross-instance mutable-default leakage
+    compatibility_evidence: exact signature and Python aliasing behavior, shared omitted-list mutation, explicit-list identity, permissive invalid inputs, native normalization and range guards, defensive copying, ordered child identity, and read-only membership remain required in trusted cross-language receipts
   approval: accepted-native-api-adaptation

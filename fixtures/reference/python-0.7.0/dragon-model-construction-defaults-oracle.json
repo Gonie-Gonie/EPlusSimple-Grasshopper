@@ -1,0 +1,732 @@
+{
+  "cases": [
+    {
+      "executor": "energy-model-create-default-idf",
+      "id": "dragon-model-construction-defaults.create-default-idf.argument-rejection",
+      "python": {
+        "facts": {
+          "positional_argument_error_type": "TypeError",
+          "signature_text": "() -> 'IDF'",
+          "staticmethod_descriptor": true,
+          "unexpected_keyword_error_type": "TypeError"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.create_default_idf"
+    },
+    {
+      "executor": "energy-model-create-default-idf",
+      "id": "dragon-model-construction-defaults.create-default-idf.exact-family-order-count",
+      "python": {
+        "facts": {
+          "building_object_count": 0,
+          "ensure_validity": false,
+          "flat_object_types": [
+            "Version",
+            "SimulationControl",
+            "Timestep",
+            "SizingPeriod:WeatherFileDays",
+            "SizingPeriod:WeatherFileDays",
+            "RunPeriod",
+            "ScheduleTypeLimits",
+            "ScheduleTypeLimits",
+            "ScheduleTypeLimits",
+            "ScheduleTypeLimits",
+            "Schedule:Compact",
+            "Schedule:Compact",
+            "Schedule:Constant",
+            "GlobalGeometryRules",
+            "Output:Table:SummaryReports",
+            "Output:Table:Monthly",
+            "OutputControl:Table:Style"
+          ],
+          "nonempty_families": [
+            {
+              "count": 1,
+              "object_type": "Version"
+            },
+            {
+              "count": 1,
+              "object_type": "SimulationControl"
+            },
+            {
+              "count": 1,
+              "object_type": "Timestep"
+            },
+            {
+              "count": 2,
+              "object_type": "SizingPeriod:WeatherFileDays"
+            },
+            {
+              "count": 1,
+              "object_type": "RunPeriod"
+            },
+            {
+              "count": 4,
+              "object_type": "ScheduleTypeLimits"
+            },
+            {
+              "count": 2,
+              "object_type": "Schedule:Compact"
+            },
+            {
+              "count": 1,
+              "object_type": "Schedule:Constant"
+            },
+            {
+              "count": 1,
+              "object_type": "GlobalGeometryRules"
+            },
+            {
+              "count": 1,
+              "object_type": "Output:Table:SummaryReports"
+            },
+            {
+              "count": 1,
+              "object_type": "Output:Table:Monthly"
+            },
+            {
+              "count": 1,
+              "object_type": "OutputControl:Table:Style"
+            }
+          ],
+          "object_count": 17,
+          "version_components": [
+            24,
+            2,
+            0
+          ],
+          "version_field": {
+            "kind": "float",
+            "repr": "24.2"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.create_default_idf"
+    },
+    {
+      "executor": "energy-model-create-default-idf",
+      "id": "dragon-model-construction-defaults.create-default-idf.fresh-mutation-isolation",
+      "python": {
+        "facts": {
+          "all_corresponding_objects_are_distinct": true,
+          "first_allon_name_after_mutation": "MUTATED-🐉",
+          "first_building_count_after_mutation": 1,
+          "first_count_after_mutation": 18,
+          "fresh_idf_instances": true,
+          "second_allon_name_after_first_mutation": "ALLON",
+          "second_building_count_after_first_mutation": 0,
+          "second_count_after_first_mutation": 17,
+          "shared_immutable_idd_schema": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.create_default_idf"
+    },
+    {
+      "executor": "energy-model-create-default-idf",
+      "id": "dragon-model-construction-defaults.create-default-idf.global-schedule-raw-fields",
+      "python": {
+        "facts": {
+          "compact_schedules": [
+            {
+              "stored_field_count": 153,
+              "values": [
+                {
+                  "kind": "str",
+                  "value": "ALLON"
+                },
+                {
+                  "kind": "none"
+                },
+                {
+                  "kind": "str",
+                  "value": "Through: 12/31"
+                },
+                {
+                  "kind": "str",
+                  "value": "For: AllDays"
+                },
+                {
+                  "kind": "str",
+                  "value": "Until: 24:00"
+                },
+                {
+                  "kind": "int",
+                  "repr": "1"
+                }
+              ]
+            },
+            {
+              "stored_field_count": 153,
+              "values": [
+                {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                },
+                {
+                  "kind": "none"
+                },
+                {
+                  "kind": "str",
+                  "value": "Through: 12/31"
+                },
+                {
+                  "kind": "str",
+                  "value": "For: AllDays"
+                },
+                {
+                  "kind": "str",
+                  "value": "Until: 24:00"
+                },
+                {
+                  "kind": "int",
+                  "repr": "0"
+                }
+              ]
+            }
+          ],
+          "global_geometry_rules": [
+            {
+              "kind": "str",
+              "value": "UpperLeftCorner"
+            },
+            {
+              "kind": "str",
+              "value": "Counterclockwise"
+            },
+            {
+              "kind": "str",
+              "value": "World"
+            },
+            {
+              "kind": "str",
+              "value": "Relative"
+            },
+            {
+              "kind": "str",
+              "value": "Relative"
+            }
+          ],
+          "people_activity": {
+            "stored_field_count": 3,
+            "values": [
+              {
+                "kind": "str",
+                "value": "$DEFAULT$PEOPLEACTIVITY"
+              },
+              {
+                "enum_type": "ScheduleType",
+                "kind": "enum",
+                "text": "real",
+                "value": "real"
+              },
+              {
+                "kind": "float",
+                "repr": "107.0"
+              }
+            ]
+          },
+          "run_period": [
+            {
+              "kind": "str",
+              "value": "Year-Round"
+            },
+            {
+              "kind": "int",
+              "repr": "1"
+            },
+            {
+              "kind": "int",
+              "repr": "1"
+            },
+            {
+              "kind": "int",
+              "repr": "2026"
+            },
+            {
+              "kind": "int",
+              "repr": "12"
+            },
+            {
+              "kind": "int",
+              "repr": "31"
+            },
+            {
+              "kind": "int",
+              "repr": "2026"
+            }
+          ],
+          "schedule_type_limits": [
+            [
+              {
+                "kind": "str",
+                "value": "ScheduleTypeLimits:Temperature"
+              },
+              {
+                "kind": "int",
+                "repr": "-50"
+              },
+              {
+                "kind": "int",
+                "repr": "200"
+              },
+              {
+                "kind": "str",
+                "value": "Continuous"
+              },
+              {
+                "kind": "str",
+                "value": "Temperature"
+              }
+            ],
+            [
+              {
+                "kind": "str",
+                "value": "ScheduleTypeLimits:Onoff"
+              },
+              {
+                "kind": "int",
+                "repr": "0"
+              },
+              {
+                "kind": "int",
+                "repr": "1"
+              },
+              {
+                "kind": "str",
+                "value": "Discrete"
+              },
+              {
+                "kind": "str",
+                "value": "Dimensionless"
+              }
+            ],
+            [
+              {
+                "kind": "str",
+                "value": "ScheduleTypeLimits:Fraction"
+              },
+              {
+                "kind": "int",
+                "repr": "0"
+              },
+              {
+                "kind": "int",
+                "repr": "1"
+              },
+              {
+                "kind": "str",
+                "value": "Continuous"
+              },
+              {
+                "kind": "str",
+                "value": "Dimensionless"
+              }
+            ],
+            [
+              {
+                "kind": "str",
+                "value": "ScheduleTypeLimits:Real"
+              },
+              {
+                "kind": "none"
+              },
+              {
+                "kind": "none"
+              },
+              {
+                "kind": "str",
+                "value": "Continuous"
+              },
+              {
+                "kind": "str",
+                "value": "Dimensionless"
+              }
+            ]
+          ],
+          "simulation_control": [
+            {
+              "kind": "str",
+              "value": "Yes"
+            },
+            {
+              "kind": "str",
+              "value": "Yes"
+            },
+            {
+              "kind": "str",
+              "value": "Yes"
+            },
+            {
+              "kind": "str",
+              "value": "No"
+            },
+            {
+              "kind": "str",
+              "value": "Yes"
+            },
+            {
+              "kind": "str",
+              "value": "No"
+            }
+          ],
+          "sizing_periods": [
+            [
+              {
+                "kind": "str",
+                "value": "DesignWinter"
+              },
+              {
+                "kind": "int",
+                "repr": "1"
+              },
+              {
+                "kind": "int",
+                "repr": "1"
+              },
+              {
+                "kind": "int",
+                "repr": "1"
+              },
+              {
+                "kind": "int",
+                "repr": "31"
+              }
+            ],
+            [
+              {
+                "kind": "str",
+                "value": "DesignSummer"
+              },
+              {
+                "kind": "int",
+                "repr": "8"
+              },
+              {
+                "kind": "int",
+                "repr": "1"
+              },
+              {
+                "kind": "int",
+                "repr": "8"
+              },
+              {
+                "kind": "int",
+                "repr": "31"
+              }
+            ]
+          ],
+          "timestep": [
+            {
+              "kind": "int",
+              "repr": "6"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.create_default_idf"
+    },
+    {
+      "executor": "energy-model-create-default-idf",
+      "id": "dragon-model-construction-defaults.create-default-idf.output-objects",
+      "python": {
+        "facts": {
+          "monthly": {
+            "stored_field_count": 52,
+            "values": [
+              {
+                "kind": "str",
+                "value": "ElectricityBalanceMonthly"
+              },
+              {
+                "kind": "int",
+                "repr": "3"
+              },
+              {
+                "kind": "str",
+                "value": "ElectricityProduced:Facility"
+              },
+              {
+                "kind": "str",
+                "value": "SumOrAverage"
+              },
+              {
+                "kind": "str",
+                "value": "ElectricitySurplusSold:Facility"
+              },
+              {
+                "kind": "str",
+                "value": "SumOrAverage"
+              },
+              {
+                "kind": "str",
+                "value": "ElectricityPurchased:Facility"
+              },
+              {
+                "kind": "str",
+                "value": "SumOrAverage"
+              }
+            ]
+          },
+          "style": {
+            "stored_field_count": 2,
+            "values": [
+              {
+                "kind": "str",
+                "value": "Comma"
+              },
+              {
+                "kind": "str",
+                "value": "JtoKWH"
+              }
+            ]
+          },
+          "summary": {
+            "stored_field_count": 25,
+            "values": [
+              {
+                "kind": "str",
+                "value": "EndUseEnergyConsumptionElectricityMonthly"
+              },
+              {
+                "kind": "str",
+                "value": "EndUseEnergyConsumptionNaturalGasMonthly"
+              },
+              {
+                "kind": "str",
+                "value": "EndUseEnergyConsumptionDieselMonthly"
+              },
+              {
+                "kind": "str",
+                "value": "EndUseEnergyConsumptionFuelOilMonthly"
+              },
+              {
+                "kind": "str",
+                "value": "EndUseEnergyConsumptionCoalMonthly"
+              },
+              {
+                "kind": "str",
+                "value": "EndUseEnergyConsumptionPropaneMonthly"
+              },
+              {
+                "kind": "str",
+                "value": "EndUseEnergyConsumptionGasolineMonthly"
+              },
+              {
+                "kind": "str",
+                "value": "EndUseEnergyConsumptionOtherFuelsMonthly"
+              }
+            ]
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.create_default_idf"
+    },
+    {
+      "executor": "energy-model-init",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-energy-model-construction",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-construction-defaults.init.call-shape-errors",
+      "python": {
+        "facts": {
+          "missing_name_error_type": "TypeError",
+          "positional_pv_error_type": "TypeError",
+          "unexpected_keyword_error_type": "TypeError"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.__init__"
+    },
+    {
+      "executor": "energy-model-init",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-energy-model-construction",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-construction-defaults.init.explicit-aliasing",
+      "python": {
+        "facts": {
+          "explicit_pv_is_input_list": true,
+          "explicit_zone_is_input_list": true,
+          "input_mutation_visible_in_model": true,
+          "model_mutation_visible_in_input": true,
+          "pv_labels_after_bidirectional_mutation": [
+            "pv:initial-🐉",
+            "pv:input-appended",
+            "pv:model-appended"
+          ],
+          "zone_labels_after_bidirectional_mutation": [
+            "zone:initial-용",
+            "zone:input-appended",
+            "zone:model-appended"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.__init__"
+    },
+    {
+      "executor": "energy-model-init",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-energy-model-construction",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-construction-defaults.init.permissive-invalid-values",
+      "python": {
+        "facts": {
+          "constructed_without_error": true,
+          "name_is_none": true,
+          "north_axis_identity_preserved": true,
+          "north_axis_type": "list",
+          "pv_is_none": true,
+          "terrain_identity_preserved": true,
+          "terrain_type": "dict",
+          "zone_identity_preserved": true,
+          "zone_type": "str"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.__init__"
+    },
+    {
+      "executor": "energy-model-init",
+      "expected_dotnet": {
+        "adaptation": "immutable-validated-energy-model-construction",
+        "outcome": "returned"
+      },
+      "id": "dragon-model-construction-defaults.init.shared-defaults-signature",
+      "python": {
+        "facts": {
+          "first_pv_is_second_pv": true,
+          "first_zone_is_second_zone": true,
+          "keyword_only_parameters": [
+            "pv"
+          ],
+          "positional_parameters": [
+            "self",
+            "name",
+            "north_axis",
+            "terrain",
+            "zone"
+          ],
+          "pv_default_is_distinct_from_zone_default": true,
+          "pv_mutation_visible_cross_instance": true,
+          "shared_pv_default_restored": true,
+          "shared_zone_default_restored": true,
+          "signature_text": "(self, name: 'str', north_axis: 'int | float' = 0, terrain: 'str' = <Terrain.SUBURBS: 'Suburbs'>, zone: 'list[Zone]' = [], *, pv: 'list[PhotoVoltaicPanel]' = [])",
+          "zone_mutation_visible_cross_instance": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "EnergyModel.__init__"
+    }
+  ],
+  "cases_sha256": "sha256:7a2c84fc965b884bd93d4e4f12bfab5df03e491b50dd8ed8ecda9eb4d6b21c84",
+  "consumer_contract": {
+    "adaptations": {
+      "EnergyModel.__init__": "immutable-validated-energy-model-construction"
+    },
+    "assertion_ids": {
+      "EnergyModel.__init__": "dragon-model-construction-defaults-init-1d1dbee8",
+      "EnergyModel.create_default_idf": "dragon-model-construction-defaults-create-default-idf-585b5368"
+    },
+    "case_count": 9,
+    "case_ids": [
+      "dragon-model-construction-defaults.create-default-idf.argument-rejection",
+      "dragon-model-construction-defaults.create-default-idf.exact-family-order-count",
+      "dragon-model-construction-defaults.create-default-idf.fresh-mutation-isolation",
+      "dragon-model-construction-defaults.create-default-idf.global-schedule-raw-fields",
+      "dragon-model-construction-defaults.create-default-idf.output-objects",
+      "dragon-model-construction-defaults.init.call-shape-errors",
+      "dragon-model-construction-defaults.init.explicit-aliasing",
+      "dragon-model-construction-defaults.init.permissive-invalid-values",
+      "dragon-model-construction-defaults.init.shared-defaults-signature"
+    ],
+    "classifications": {
+      "EnergyModel.__init__": "exception",
+      "EnergyModel.create_default_idf": "equivalent"
+    },
+    "identity_encoding": "logical-label-and-boolean-only-no-id-or-address",
+    "raw_field_encoding": "typed-kind-plus-value-or-repr-with-trailing-none-trimmed",
+    "runtime_names": "pinned-python-builtins-and-enums-only-no-native-type-name-claims",
+    "target_symbols": [
+      "EnergyModel.__init__",
+      "EnergyModel.create_default_idf"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-model-construction-defaults.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:e4e5ef56fd12719fe976231c03d867e932eff64870f9c0fd7a5107b7e11538f1",
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:9706dcab3a90048744a47f3596613b34247cb6cd1eb2903582e2fb2cb6342a2d",
+      "symbol": "EnergyModel.__init__",
+      "symbol_hash": "sha256:1d1dbee8fef8b70b2919c4e46a0ea60efbd748b360d31ff353ea121c72ad97d2"
+    },
+    {
+      "body_hash": "sha256:e505591e57b64f4f7ff0b6fb18e775ad88048d4eaddb9d8a4f9e5a0afd2c8ab7",
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:6750822d2a0b36e44dced756c45817742cfc0940e8646be6212eedfe3698d8cf",
+      "symbol": "EnergyModel.create_default_idf",
+      "symbol_hash": "sha256:585b53682bd5dbd4d2081e79eddc2789fa60925baafb5eae26de0541346ac9f4"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "sources": [
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      }
+    ]
+  }
+}

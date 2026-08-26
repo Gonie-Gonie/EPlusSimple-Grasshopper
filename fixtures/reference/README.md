@@ -61,6 +61,14 @@ profile availability, and the exact supply-plus-profile predicate without
 serializing raw Python identities. The two model list properties are exact
 equivalents; the zone-local predicate is a reviewed model-context adaptation.
 
+`python-0.7.0/dragon-model-construction-defaults-oracle.json` pins nine
+ordered CPython 3.12.7 observations for `EnergyModel.__init__` and
+`EnergyModel.create_default_idf`. It preserves the constructor's exact call
+shape, shared omitted-list defaults, explicit list aliasing, and permissive raw
+assignments, plus the fresh default IDF's exact 17-object family order and raw
+fields. Default-IDF creation is an exact equivalent; native construction uses
+the reviewed `immutable-validated-energy-model-construction` adaptation.
+
 `python-0.7.0/dragon-model-projections-oracle.json` pins 12 ordered CPython
 3.12.7 observations for `EnergyModel.surfaces`, `used_constructions`,
 `used_layers`, and `used_profiles`. It preserves nested surface flattening and

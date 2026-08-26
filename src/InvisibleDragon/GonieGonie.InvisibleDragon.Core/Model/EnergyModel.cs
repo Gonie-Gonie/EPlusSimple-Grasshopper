@@ -57,6 +57,22 @@ public sealed class EnergyModelIdfOptions
 /// </summary>
 public sealed class EnergyModel
 {
+    /// <summary>
+    /// EnergyPlus versions supported by the pinned InvisibleDragon model contract.
+    /// A fresh read-only collection is returned for every access.
+    /// </summary>
+    public static IReadOnlyList<EnergyPlusVersion> SupportedVersions =>
+        new ReadOnlyCollection<EnergyPlusVersion>(new[] { EnergyPlusDefaults.DefaultVersion });
+
+    /// <summary>
+    /// Creates the exact standalone default IDF graph used by pinned InvisibleDragon 0.7.0.
+    /// The returned document is fresh and does not contain a Building object.
+    /// </summary>
+    public static IdfDocument CreateDefaultIdfDocument()
+    {
+        return EnergyModelIdfAssembler.CreateDefaultDocument();
+    }
+
     public EnergyModel(
         string name,
         IEnumerable<Zone> zones,
