@@ -389,22 +389,22 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
+    "exception",
+    "equivalent",
     "out_of_scope",
-    "needs_reverification",
+    "exception",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "needs_reverification",
     "needs_reverification"
   ],
-  "content_sha256": "sha256:c9281b9db4e5596ab51619ae25086a6dac69f6d81c7c328eccd9956837e94859",
+  "content_sha256": "sha256:ae3fa6785dfd561aa418c040909a5662982f8d2e3e9f9cad96715d3f1b72da53",
   "details": [
     {
       "evidence": [
@@ -1842,10 +1842,51 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-validated-usage-profile-value-object",
+        "upstream/symbol-evidence.json#usage-profile-core-value-object-52a3656b"
+      ],
+      "exception_id": "immutable-validated-usage-profile-value-object",
+      "index": 389,
+      "rationale": "Trusted cross-language evidence verifies KoreanUsageProfile across the exact three-case UsageProfile core slice: the exact immutable engineering values, operation and vacation topology, validation boundaries and source isolation, and directly observes the upstream mutable unvalidated object against the native immutable validated UsageProfile."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#usage-profile-core-dhw-heat-per-liter-f43f031d"
+      ],
+      "index": 390,
+      "rationale": "Trusted cross-language evidence verifies KoreanUsageProfile.DHW_HEAT_PER_LITER across the exact three-case UsageProfile core slice: the exact 40 Wh/L domestic-hot-water conversion constant."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-native-usage-profile-identity",
+        "upstream/symbol-evidence.json#usage-profile-core-id-246156d9"
+      ],
+      "exception_id": "deterministic-native-usage-profile-identity",
+      "index": 391,
+      "rationale": "Trusted cross-language evidence verifies KoreanUsageProfile.ID across the exact three-case UsageProfile core slice: explicit identity preservation, deterministic native fallback identities and the absence of raw process addresses, and directly observes the upstream address-derived string fallback against deterministic native EntityId."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#usage-profile-core-people-activity-level-e2da67c4"
+      ],
+      "index": 392,
+      "rationale": "Trusted cross-language evidence verifies KoreanUsageProfile.PEOPLE_ACTIVITY_LEVEL across the exact three-case UsageProfile core slice: the exact 70 W/person sensible-activity conversion constant."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-core-profile-py-koreanusageprofile-hash-60007ac6"
       ],
       "index": 393,
       "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-usage-profile-construction",
+        "upstream/symbol-evidence.json#usage-profile-core-init-f242c8e5"
+      ],
+      "exception_id": "validated-immutable-usage-profile-construction",
+      "index": 394,
+      "rationale": "Trusted cross-language evidence verifies KoreanUsageProfile.__init__ across the exact three-case UsageProfile core slice: valid construction, copied collections, every native validation boundary and atomic rejection, and directly observes upstream direct assignment against atomic native engineering validation and copied read-only collections."
     },
     {
       "evidence": [
@@ -1860,6 +1901,72 @@
       ],
       "index": 396,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#usage-profile-core-occupied-hours-511dd2e0"
+      ],
+      "index": 397,
+      "rationale": "Trusted cross-language evidence verifies KoreanUsageProfile.occupied_hours across the exact three-case UsageProfile core slice: same-day, overnight and full-day occupied-hour calculations."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#usage-profile-core-operating-days-1ab019f1"
+      ],
+      "index": 398,
+      "rationale": "Trusted cross-language evidence verifies KoreanUsageProfile.operating_days across the exact three-case UsageProfile core slice: the exact ordered subset of eight weekday and holiday flags."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#typed-usage-profile-serialization",
+        "upstream/symbol-evidence.json#usage-profile-core-to-dict-40c556a7"
+      ],
+      "exception_id": "typed-usage-profile-serialization",
+      "index": 399,
+      "rationale": "Trusted cross-language evidence verifies KoreanUsageProfile.to_dict across the exact three-case UsageProfile core slice: the exact 14-key ordered projection, typed nested values and immutable result, and directly observes the mutable untyped Python dictionary against the exact immutable typed native OrderedMap projection."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#usage-profile-core-to-dragon-f3b70764"
+      ],
+      "index": 400,
+      "rationale": "Trusted cross-language evidence verifies KoreanUsageProfile.to_dragon across the exact three-case UsageProfile core slice: the exact converted profile schedules, normalized loads, IDF fields and child topology."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#usage-profile-source-discriminator",
+        "upstream/symbol-evidence.json#usage-profile-core-extended-5a670388"
+      ],
+      "exception_id": "usage-profile-source-discriminator",
+      "index": 401,
+      "rationale": "Trusted cross-language evidence verifies KoreanUsageProfileExtended across the exact three-case UsageProfile core slice: standard versus extended provenance, ordering and exact row values, and directly observes the behavior-free Python subclass against the native UsageProfileSource discriminator."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-usage-profile-database",
+        "upstream/symbol-evidence.json#usage-profile-core-database-3cf55ef9"
+      ],
+      "exception_id": "immutable-usage-profile-database",
+      "index": 402,
+      "rationale": "Trusted cross-language evidence verifies Profile across the exact three-case UsageProfile core slice: the immutable ordered packaged profile database and lazy repeat access, and directly observes the process-global mutable Python dictionary against the lazy immutable native UsageProfileDatabase."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#diagnostic-usage-profile-lookup",
+        "upstream/symbol-evidence.json#usage-profile-core-get-db-a8448202"
+      ],
+      "exception_id": "diagnostic-usage-profile-lookup",
+      "index": 403,
+      "rationale": "Trusted cross-language evidence verifies Profile.get_DB across the exact three-case UsageProfile core slice: exact-name lookup, ordered enumeration and stable missing-name diagnostics, and directly observes Python magic-key and KeyError behavior against native Items and diagnostic LookupResult APIs."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#strict-invariant-profile-csv-reader",
+        "upstream/symbol-evidence.json#usage-profile-core-csv-77befcdc"
+      ],
+      "exception_id": "strict-invariant-profile-csv-reader",
+      "index": 404,
+      "rationale": "Trusted cross-language evidence verifies read_csv_without_units across the exact three-case UsageProfile core slice: unit-stripped headers, invariant typed rows and strict malformed-input behavior, and directly observes arbitrary pandas file and encoding behavior against the strict embedded invariant CsvDocument parser."
     },
     {
       "evidence": [
@@ -4431,9 +4538,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 98,
-      "exception": 81,
-      "needs_reverification": 811,
+      "equivalent": 103,
+      "exception": 89,
+      "needs_reverification": 798,
       "out_of_scope": 252
     },
     "entry_count": 1242

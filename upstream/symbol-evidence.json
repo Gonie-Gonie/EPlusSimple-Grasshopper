@@ -1,6 +1,344 @@
 {
-  "content_sha256": "sha256:4cd1b6447d6ecc943da476d39d4704ca0b5b6c14173e39ff9bb0dd0f0d7d3cfb",
+  "content_sha256": "sha256:057f11cafc671fd1ec9fadb5c8fcb9896d395a52c62140f0db78a03b16d2fa55",
   "entries": [
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs",
+        "source_sha256": "sha256:94ef1a3d94da3d5e108e47da9f0158a4c51e340f4646d5bc52d885da63852eb9",
+        "symbol": "GonieGonie.SimpleDragon.UsageProfile"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify KoreanUsageProfile across its exact three-case UsageProfile core slice: the exact immutable engineering values, operation and vacation topology, validation boundaries and source isolation. The comparison directly verifies the upstream mutable unvalidated object against the native immutable validated UsageProfile.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:bf7224232eade16b119e64522ec0672000edbdf7be54f7dbe3d084307bccadc4",
+          "id": "usage-profile-core-value-object-52a3656b",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "KoreanUsageProfile",
+      "upstream_symbol_hash": "sha256:52a3656b8d8c7abbbbc0403206bede355eb776a007aee2f301c0819bf9a3044f"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.UsageProfileConstants.DomesticHotWaterHeatWattHoursPerLitre"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify KoreanUsageProfile.DHW_HEAT_PER_LITER across its exact three-case UsageProfile core slice: the exact 40 Wh/L domestic-hot-water conversion constant.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9b3d30fa385af7c0b59538efa7403ae6ef81816687e4a92ea421eb6920e160ca",
+          "id": "usage-profile-core-dhw-heat-per-liter-f43f031d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "KoreanUsageProfile.DHW_HEAT_PER_LITER",
+      "upstream_symbol_hash": "sha256:f43f031dc4dd8dd0426bbe82871259fbfad10d3011a78f865d753c02b5203f98"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs",
+        "source_sha256": "sha256:94ef1a3d94da3d5e108e47da9f0158a4c51e340f4646d5bc52d885da63852eb9",
+        "symbol": "GonieGonie.SimpleDragon.UsageProfile.Id"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify KoreanUsageProfile.ID across its exact three-case UsageProfile core slice: explicit identity preservation, deterministic native fallback identities and the absence of raw process addresses. The comparison directly verifies the upstream address-derived string fallback against deterministic native EntityId.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:55377bb53d74b5f73040407b59ebea64710e8303b580dc2a812690518a9d5c94",
+          "id": "usage-profile-core-id-246156d9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "KoreanUsageProfile.ID",
+      "upstream_symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/SimpleDragonConstants.cs",
+        "source_sha256": "sha256:dd6cbe124a3b07b6cee8eb3698077db95912062281a3fac5d9d53ec74da4e2a7",
+        "symbol": "GonieGonie.SimpleDragon.UsageProfileConstants.PeopleSensibleActivityWattsPerPerson"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify KoreanUsageProfile.PEOPLE_ACTIVITY_LEVEL across its exact three-case UsageProfile core slice: the exact 70 W/person sensible-activity conversion constant.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9b3e80d91d0340ac97e82e93790b477ae84cb7b997a7e08b67786e865a5be419",
+          "id": "usage-profile-core-people-activity-level-e2da67c4",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "KoreanUsageProfile.PEOPLE_ACTIVITY_LEVEL",
+      "upstream_symbol_hash": "sha256:e2da67c4aaf7e9220236aa66fead7ae05e32914c255302ea32fcee37c1679b72"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs",
+        "source_sha256": "sha256:94ef1a3d94da3d5e108e47da9f0158a4c51e340f4646d5bc52d885da63852eb9",
+        "symbol": "GonieGonie.SimpleDragon.UsageProfile"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify KoreanUsageProfile.__init__ across its exact three-case UsageProfile core slice: valid construction, copied collections, every native validation boundary and atomic rejection. The comparison directly verifies upstream direct assignment against atomic native engineering validation and copied read-only collections.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:19705d5b51c87d2e516b34ac5f75677f91d4e9942958c19a074da937e4f0974f",
+          "id": "usage-profile-core-init-f242c8e5",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "KoreanUsageProfile.__init__",
+      "upstream_symbol_hash": "sha256:f242c8e5794ae9b49de1e768956963696c8351c947440f6fa3ef1f70230d50f0"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs",
+        "source_sha256": "sha256:94ef1a3d94da3d5e108e47da9f0158a4c51e340f4646d5bc52d885da63852eb9",
+        "symbol": "GonieGonie.SimpleDragon.UsageProfile.OccupiedHours"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify KoreanUsageProfile.occupied_hours across its exact three-case UsageProfile core slice: same-day, overnight and full-day occupied-hour calculations.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:728e0d356a711bd4ac803cd6c549194cdebf26269aa33718aff9ffd4076eaf94",
+          "id": "usage-profile-core-occupied-hours-511dd2e0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "KoreanUsageProfile.occupied_hours",
+      "upstream_symbol_hash": "sha256:511dd2e08d266e099afda2d88e98ff3f7976a7fb6738bb8ff2304f19033cfc90"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs",
+        "source_sha256": "sha256:94ef1a3d94da3d5e108e47da9f0158a4c51e340f4646d5bc52d885da63852eb9",
+        "symbol": "GonieGonie.SimpleDragon.UsageProfile.OperatingDays"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify KoreanUsageProfile.operating_days across its exact three-case UsageProfile core slice: the exact ordered subset of eight weekday and holiday flags.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1ec6efe45f76da4dc27c33f3e747e58f3b6f6a830f6d83d22b86983aa3c78f95",
+          "id": "usage-profile-core-operating-days-1ab019f1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "KoreanUsageProfile.operating_days",
+      "upstream_symbol_hash": "sha256:1ab019f1c745c00702036a96b87c9d604cd18608b033510e3de6621e8f6a930d"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs",
+        "source_sha256": "sha256:94ef1a3d94da3d5e108e47da9f0158a4c51e340f4646d5bc52d885da63852eb9",
+        "symbol": "GonieGonie.SimpleDragon.UsageProfile.ToDictionary"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify KoreanUsageProfile.to_dict across its exact three-case UsageProfile core slice: the exact 14-key ordered projection, typed nested values and immutable result. The comparison directly verifies the mutable untyped Python dictionary against the exact immutable typed native OrderedMap projection.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:ce773ce37ec47e1f3a018574c51fa2b43607ecd877704029ee8eef62003f0952",
+          "id": "usage-profile-core-to-dict-40c556a7",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "KoreanUsageProfile.to_dict",
+      "upstream_symbol_hash": "sha256:40c556a7cf3a93741c48f26c3eb30ba4d70f7dade0abfc3ef50ecfbf3cfded5e"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
+        "source_sha256": "sha256:d96cb8785881ef39efcbd49b75350f79c9c132d0ecea38e1618df4bfa500444e",
+        "symbol": "GonieGonie.SimpleDragon.GreenRetrofitConverter.ConvertProfile"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify KoreanUsageProfile.to_dragon across its exact three-case UsageProfile core slice: the exact converted profile schedules, normalized loads, IDF fields and child topology.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:056d75eb7805f027b93fdc17a15ef8c9e8126ff3a5e197dac5dd4091adb207a2",
+          "id": "usage-profile-core-to-dragon-f3b70764",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "KoreanUsageProfile.to_dragon",
+      "upstream_symbol_hash": "sha256:f3b70764f326865596e72fcfc799555b190ef18db77a54dcbfa6df012f236d3e"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/UsageProfile.cs",
+        "source_sha256": "sha256:94ef1a3d94da3d5e108e47da9f0158a4c51e340f4646d5bc52d885da63852eb9",
+        "symbol": "GonieGonie.SimpleDragon.UsageProfileSource.Extended"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify KoreanUsageProfileExtended across its exact three-case UsageProfile core slice: standard versus extended provenance, ordering and exact row values. The comparison directly verifies the behavior-free Python subclass against the native UsageProfileSource discriminator.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d8e5f9f2729e5fc0b14334ca66c7a714883e6260234ef033bf8590d102499f6c",
+          "id": "usage-profile-core-extended-5a670388",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "KoreanUsageProfileExtended",
+      "upstream_symbol_hash": "sha256:5a6703884a6c29f977d9e025af134b26199f10dab6f1edb680ee161c0ece47e1"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/ProfileDatabases.cs",
+        "source_sha256": "sha256:73564c26c8ba3ec98e0758fa8528a6a0771d72c268af7a4beb23e5cc7dc6625c",
+        "symbol": "GonieGonie.SimpleDragon.UsageProfileDatabase"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Profile across its exact three-case UsageProfile core slice: the immutable ordered packaged profile database and lazy repeat access. The comparison directly verifies the process-global mutable Python dictionary against the lazy immutable native UsageProfileDatabase.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0f54f45fb74aa6df9d9e352e1b25185910cefda943dde3a888fb233563a2a237",
+          "id": "usage-profile-core-database-3cf55ef9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Profile",
+      "upstream_symbol_hash": "sha256:3cf55ef99529b6051e2e5bea5c32bbecc5850819101e522fed1008be0599d6ad"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Profiles/ProfileDatabases.cs",
+        "source_sha256": "sha256:73564c26c8ba3ec98e0758fa8528a6a0771d72c268af7a4beb23e5cc7dc6625c",
+        "symbol": "GonieGonie.SimpleDragon.UsageProfileDatabase.Find"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Profile.get_DB across its exact three-case UsageProfile core slice: exact-name lookup, ordered enumeration and stable missing-name diagnostics. The comparison directly verifies Python magic-key and KeyError behavior against native Items and diagnostic LookupResult APIs.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:705864506fa25adb83236b1a63abcd9a7650fff0db49ecf37145ab4892242095",
+          "id": "usage-profile-core-get-db-a8448202",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Profile.get_DB",
+      "upstream_symbol_hash": "sha256:a8448202da1e84bb21aa6672fee1c03fb401390f51cf1ea4b2d6810af74aeecc"
+    },
+    {
+      "implementation": {
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Internal/InvariantCsv.cs",
+        "source_sha256": "sha256:aa2865f894030376a13cc857597d387bc0645b01be8fb6770bd2f4991c03d42a",
+        "symbol": "GonieGonie.SimpleDragon.Internal.CsvDocument.Parse"
+      },
+      "path": "src/epsimple/core/profile.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify read_csv_without_units across its exact three-case UsageProfile core slice: unit-stripped headers, invariant typed rows and strict malformed-input behavior. The comparison directly verifies arbitrary pandas file and encoding behavior against the strict embedded invariant CsvDocument parser.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:296bafa57531334a77863dba0a6d9ec1897b7873135e9573f1d2ef515b197e9d",
+          "id": "usage-profile-core-csv-77befcdc",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/UsageProfileCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:442de0e56ccafe32e04ab6c778712e1d22dd49791049f2e1cc934d01e6553425",
+          "test_symbol": "GonieGonie.SimpleDragon.Tests.UsageProfileCoreOracleParityTests.MatchesPinnedPythonUsageProfileCore",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "read_csv_without_units",
+      "upstream_symbol_hash": "sha256:77befcdc77b99adb5b3b7311f90774dd82ff72ba4eea1c6b7058419c1aff412a"
+    },
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
@@ -4659,9 +4997,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 179,
-    "passed_receipt_count": 179,
-    "receipt_count": 179,
+    "entry_count": 192,
+    "passed_receipt_count": 192,
+    "receipt_count": 192,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

@@ -40,16 +40,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(811, len(compatibility.needs_reverification))
+        self.assertEqual(798, len(compatibility.needs_reverification))
         self.assertEqual(
-            98,
+            103,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            81,
+            89,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
