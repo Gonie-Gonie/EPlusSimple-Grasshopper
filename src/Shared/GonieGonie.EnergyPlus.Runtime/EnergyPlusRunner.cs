@@ -183,7 +183,7 @@ public sealed class EnergyPlusRunner
 
             executionToken.ThrowIfCancellationRequested();
             var arguments = BuildEnergyPlusArguments(
-                request.Runtime.IddPath,
+                localIddPath,
                 validated.WeatherFilePath is null ? null : localWeatherPath,
                 outputDirectory,
                 expandedInputPath);

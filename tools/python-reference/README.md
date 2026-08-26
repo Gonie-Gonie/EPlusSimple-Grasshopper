@@ -89,6 +89,15 @@ non-standard numeric tokens. The consumer contract records all seven reviewed
 typed native adaptations, including `explicitly-unsupported-energyplus-eso`;
 it does not claim that the native port parses ESO output.
 
+The launcher runtime oracle directly loads the same pinned launcher source
+under closed fakes. Its 12 ordered cases bind the runtime-not-found exception,
+runtime discovery, scalar/broadcast dispatch, and single-run lifecycle through
+exactly three cases per symbol. No process or active EnergyPlus load is
+executed. Temporary work is confined to one unique controlled descendant, and
+only logical path tokens enter the fixture. The consumer contract records four
+reviewed structured runtime, verified discovery, bounded batch, and isolated
+cancellable single-run adaptations.
+
 Updating the tracked baseline is an explicit review action:
 
 ```text

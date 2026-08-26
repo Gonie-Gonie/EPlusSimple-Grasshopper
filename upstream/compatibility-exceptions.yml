@@ -1534,3 +1534,59 @@
     api_contract: callers consume immutable EnergyPlusTabularTable and cell projections keyed by file identity rather than mutating pandas DataFrames, relying on inferred dtypes and index behavior, or passing a format extension switch
     compatibility_evidence: the exact narrow upstream CSV grammar, multiple and duplicate reports, unsupported extensions, blank and quoted cells, missingness, finite numeric projection, ordered immutable native tables, and EnergyPlusResultParser.ParseTabular remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
+
+- id: structured-energyplus-runtime-not-found-failure
+  upstream:
+    path: src/idragon/launcher.py
+    symbol: ExecutableEnergyPlusNotFoundError
+    symbol_hash: sha256:76d795db5a0292d2af780a00ee53760a1ab5bd07d50cdf144cf6863c3b08b3d3
+  difference:
+    upstream: defines an empty Exception subclass with the ordinary mutable Python exception argument surface, used when neither of two directory-name scans locates the requested EnergyPlus version
+    dotnet: represents expected discovery failures as an immutable EnergyPlusFailure with a stable category, code, message, and optional detail inside EnergyPlusRuntimeResolution instead of throwing a dedicated runtime-not-found exception
+  effect:
+    engineering_result: none because runtime discovery failure occurs before a simulation process or engineering result exists
+    api_contract: callers inspect the structured RuntimeNotFound failure and RUNTIME_NOT_FOUND code rather than catching ExecutableEnergyPlusNotFoundError or depending on its message and argument tuple
+    compatibility_evidence: exact upstream inheritance, construction, argument and raise behavior plus native nonthrowing resolution, stable failure category and code, and absence of child-process execution remain required in a trusted cross-language receipt
+  approval: accepted-native-api-adaptation
+
+- id: hash-verified-energyplus-runtime-resolution
+  upstream:
+    path: src/idragon/launcher.py
+    symbol: find_executable_dir
+    symbol_hash: sha256:6de563f4cfe228449e3c29866c9e432c7cf0f9ffc49dad4e7558d9b0addebf1b
+  difference:
+    upstream: coerces a Version or string into a directory name, checks the package runtime directory before the Windows system drive by directory-name membership alone, and raises a custom exception without verifying executables, IDD files, schemas, or payload hashes
+    dotnet: asynchronously resolves the one supported pinned EnergyPlus manifest through explicit, additional, cache, environment, and default-install candidates, preserves explicit-root authority, verifies every required payload SHA-256, supports cancellation, and returns a structured resolution
+  effect:
+    engineering_result: a runtime is accepted only when the pinned EnergyPlus 24.2.0 executable, ExpandObjects executable, IDD, and epJSON schema are all present and hash verified, so a matching directory name with missing or altered payloads cannot run a model
+    api_contract: callers provide EnergyPlusRuntimeResolveOptions and await ResolveAsync instead of requesting arbitrary version-directory discovery, and no multi-version compatibility is claimed
+    compatibility_evidence: upstream version coercion, package precedence, system fallback and missing-runtime behavior plus isolated native candidate precedence, explicit-root handling, hash verification, tamper rejection, cancellation and structured failures remain required without serializing host paths or environment values
+  approval: accepted-native-api-adaptation
+
+- id: bounded-deterministic-energyplus-batch-execution
+  upstream:
+    path: src/idragon/launcher.py
+    symbol: run
+    symbol_hash: sha256:84c6ff241eb023074ab18999d177182fcc33e90c128d479f50303041945b4281
+  difference:
+    upstream: accepts scalar or mutable IDF and weather path lists, mutates and broadcasts one-element lists, runs cases sequentially through run_single, returns either one result or a list, raises a blank ValueError for incompatible cardinalities, and accidentally drops output_dir for multiple cases
+    dotnet: executes an explicit ordered collection of typed SimpleDragon BatchCaseDefinition values through BatchRunner with bounded concurrency, deterministic case identities and result ordering, cancellation, partial-failure isolation, optional cache use, and reproducibility outputs
+  effect:
+    engineering_result: supported typed SimpleDragon alternatives retain deterministic per-case results and diagnostics while caller list mutation, implicit broadcasting, ambiguous return shape, and the multi-case output-directory omission are removed; arbitrary raw-IDF list parity is not claimed
+    api_contract: callers construct explicit batch cases and receive one BatchRunResult instead of passing polymorphic path containers and relying on implicit broadcasting or tqdm sequencing
+    compatibility_evidence: exact upstream scalar delegation, both broadcast directions, input mutation, mismatch and empty-input behavior, option forwarding and output_dir omission plus native explicit case ordering, bounded concurrency, cancellation, partial failure and deterministic output behavior remain required under fake executors without claiming an EnergyPlus engineering load
+  approval: accepted-native-api-adaptation
+
+- id: isolated-cancellable-energyplus-single-run
+  upstream:
+    path: src/idragon/launcher.py
+    symbol: run_single
+    symbol_hash: sha256:eda7f7577da0c1ac73498136fcfa6955ffb6605bad1dc0b9a1ac80609b094884
+  difference:
+    upstream: infers a version from IDF text when ep_dir is omitted, launches into a global temporary directory, ignores the returned launch status, copies outputs by basename into a caller directory with overwrite behavior, removes the run directory only along the completed copy path, constructs a result, and optionally deletes the copied files
+    dotnet: accepts a hash-verified EnergyPlusRuntimeLayout and typed EnergyPlusRunRequest, validates caller paths, runs ExpandObjects and EnergyPlus asynchronously in a uniquely marked directory beneath a caller-owned temporary root, reports progress, timeout, cancellation and process failure explicitly, captures typed artifacts, and applies KeepAlways, DeleteOnSuccess, or DeleteAlways only to the marked run directory
+  effect:
+    engineering_result: supported output artifacts, hashes, text and diagnostics remain available after a successful run while failed status, timeout and cancellation cannot be silently treated as success and cleanup cannot overwrite or delete arbitrary caller output files
+    api_contract: callers resolve the runtime and submit one immutable request with explicit timeout, capture limit and cleanup policy instead of passing ep_dir, verbose, output_dir and delete switches or depending on copied-output lifetime
+    compatibility_evidence: upstream version detection, explicit-runtime path, launch and copy ordering, ignored status, result-before-delete behavior, output deletion and failure transactionality plus native validation, state transitions, structured failures, artifact capture and marked-directory cleanup remain required under an injected fake process executor without claiming that EnergyPlus executed
+  approval: accepted-native-api-adaptation

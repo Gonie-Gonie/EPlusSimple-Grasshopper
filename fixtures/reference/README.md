@@ -50,3 +50,12 @@ adaptation split.
 audit duplicates, boundary padding, error-log filtering, the legacy tabular
 CSV grammar, pandas NaN and binary64 values, and the explicit absence of ESO
 parsing. All seven symbols are bound to reviewed native API adaptations.
+
+`python-0.7.0/launcher-runtime-oracle.json` pins 12 ordered CPython 3.12.7
+observations for the remaining four public runtime symbols in
+`idragon/launcher.py`. It records the inherited not-found exception surface,
+package-versus-system discovery precedence, list broadcasting and cardinality
+quirks, version inference, output retention/deletion, and failure cleanup
+ordering. All execution uses closed fakes inside a unique controlled temporary
+descendant; the fixture contains logical tokens only and makes no active-load
+claim. All four symbols are reviewed native API adaptations.

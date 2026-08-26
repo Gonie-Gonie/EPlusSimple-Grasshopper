@@ -1,0 +1,643 @@
+{
+  "cases": [
+    {
+      "executor": "executable-error",
+      "expected_dotnet": {
+        "adaptation": "structured-energyplus-runtime-not-found-failure",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.executable-error-class",
+      "python": {
+        "facts": {
+          "base_names": [
+            "Exception"
+          ],
+          "direct_dictionary_keys": [
+            "__doc__",
+            "__module__",
+            "__weakref__"
+          ],
+          "inspect_signature": {
+            "error_category": "value",
+            "exception_type": "ValueError",
+            "label": "class-signature",
+            "message": "no signature found for builtin type <class 'idragon.launcher.ExecutableEnergyPlusNotFoundError'>",
+            "outcome": "raised"
+          },
+          "module": "idragon.launcher",
+          "name": "ExecutableEnergyPlusNotFoundError"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ExecutableEnergyPlusNotFoundError"
+    },
+    {
+      "executor": "executable-error",
+      "expected_dotnet": {
+        "adaptation": "structured-energyplus-runtime-not-found-failure",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.executable-error-instance",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "args": [],
+              "dictionary": {},
+              "label": "empty",
+              "repr": "ExecutableEnergyPlusNotFoundError()",
+              "str": ""
+            },
+            {
+              "args": [
+                "runtime missing"
+              ],
+              "dictionary": {},
+              "label": "single",
+              "repr": "ExecutableEnergyPlusNotFoundError('runtime missing')",
+              "str": "runtime missing"
+            },
+            {
+              "args": [
+                "runtime missing",
+                24
+              ],
+              "dictionary": {},
+              "label": "multiple",
+              "repr": "ExecutableEnergyPlusNotFoundError('runtime missing', 24)",
+              "str": "('runtime missing', 24)"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ExecutableEnergyPlusNotFoundError"
+    },
+    {
+      "executor": "executable-error",
+      "expected_dotnet": {
+        "adaptation": "structured-energyplus-runtime-not-found-failure",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.executable-error-raise",
+      "python": {
+        "facts": {
+          "caught_as_exact_type": true,
+          "caught_as_exception": true,
+          "child_caught_as_parent": true,
+          "dynamic_marker": 7,
+          "separate_instances_equal": false,
+          "subclassable": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "ExecutableEnergyPlusNotFoundError"
+    },
+    {
+      "executor": "find-executable",
+      "expected_dotnet": {
+        "adaptation": "hash-verified-energyplus-runtime-resolution",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.find-executable-failure",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "other",
+              "exception_type": "ExecutableEnergyPlusNotFoundError",
+              "label": "not-found",
+              "listdir_calls": [
+                "package-root",
+                "system-root"
+              ],
+              "message": "EnergyPlus 버전 맞는걸로 안깔려있는듯",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "file-not-found",
+              "exception_type": "FileNotFoundError",
+              "label": "package-listing-error",
+              "listdir_calls": [
+                "package-root"
+              ],
+              "message": "package runtime unavailable",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "value",
+              "exception_type": "ValueError",
+              "label": "invalid-version",
+              "listdir_calls": [],
+              "message": "Expected three integers, but got 0 in invalid",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "find_executable_dir"
+    },
+    {
+      "executor": "find-executable",
+      "expected_dotnet": {
+        "adaptation": "hash-verified-energyplus-runtime-resolution",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.find-executable-package-precedence",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "label": "string",
+              "listdir_calls": [
+                "package-root"
+              ],
+              "outcome": "returned",
+              "result": "package-root/EnergyPlusV24-2-0"
+            },
+            {
+              "label": "list",
+              "listdir_calls": [
+                "package-root"
+              ],
+              "outcome": "returned",
+              "result": "package-root/EnergyPlusV24-2-0"
+            },
+            {
+              "label": "version-instance",
+              "listdir_calls": [
+                "package-root"
+              ],
+              "outcome": "returned",
+              "result": "package-root/EnergyPlusV24-2-0"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "find_executable_dir"
+    },
+    {
+      "executor": "find-executable",
+      "expected_dotnet": {
+        "adaptation": "hash-verified-energyplus-runtime-resolution",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.find-executable-system-fallback",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "label": "tuple",
+              "listdir_calls": [
+                "package-root",
+                "system-root"
+              ],
+              "outcome": "returned",
+              "result": "system-root/EnergyPlusV9-6-0"
+            },
+            {
+              "label": "string",
+              "listdir_calls": [
+                "package-root",
+                "system-root"
+              ],
+              "outcome": "returned",
+              "result": "system-root/EnergyPlusV8-9-0"
+            }
+          ],
+          "verification": "name-membership-only"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "find_executable_dir"
+    },
+    {
+      "executor": "run",
+      "expected_dotnet": {
+        "adaptation": "bounded-deterministic-energyplus-batch-execution",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.run-broadcast",
+      "python": {
+        "facts": {
+          "caller_lists_after": {
+            "idfs": [
+              "model.idf",
+              "model.idf"
+            ],
+            "one_weather": [
+              "only.epw",
+              "only.epw"
+            ]
+          },
+          "calls": [
+            {
+              "idf": "model.idf",
+              "kwargs": {
+                "delete": false,
+                "ep_dir": "runtime-token",
+                "verbose": false
+              },
+              "weather": "first.epw"
+            },
+            {
+              "idf": "model.idf",
+              "kwargs": {
+                "delete": false,
+                "ep_dir": "runtime-token",
+                "verbose": false
+              },
+              "weather": "second.epw"
+            },
+            {
+              "idf": "a.idf",
+              "kwargs": {
+                "delete": true,
+                "ep_dir": null,
+                "verbose": false
+              },
+              "weather": "only.epw"
+            },
+            {
+              "idf": "b.idf",
+              "kwargs": {
+                "delete": true,
+                "ep_dir": null,
+                "verbose": false
+              },
+              "weather": "only.epw"
+            }
+          ],
+          "progress": [
+            {
+              "desc": "Running idfs",
+              "ncols": 100
+            },
+            {
+              "desc": "Running idfs",
+              "ncols": 100
+            }
+          ],
+          "returns": [
+            [
+              "result:model.idf:first.epw",
+              "result:model.idf:second.epw"
+            ],
+            [
+              "result:a.idf:only.epw",
+              "result:b.idf:only.epw"
+            ]
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "run"
+    },
+    {
+      "executor": "run",
+      "expected_dotnet": {
+        "adaptation": "bounded-deterministic-energyplus-batch-execution",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.run-cardinality",
+      "python": {
+        "facts": {
+          "calls": [
+            {
+              "idf": "ok.idf",
+              "kwargs": {
+                "delete": true,
+                "ep_dir": null,
+                "verbose": false
+              },
+              "weather": "1.epw"
+            },
+            {
+              "idf": "fail.idf",
+              "kwargs": {
+                "delete": true,
+                "ep_dir": null,
+                "verbose": false
+              },
+              "weather": "2.epw"
+            }
+          ],
+          "observations": [
+            {
+              "error_category": "value",
+              "exception_type": "ValueError",
+              "label": "mismatch",
+              "message": "",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "index",
+              "exception_type": "IndexError",
+              "label": "one-idf-no-weather",
+              "message": "list index out of range",
+              "outcome": "raised"
+            },
+            {
+              "label": "no-idf-one-weather",
+              "outcome": "returned",
+              "result": []
+            },
+            {
+              "error_category": "runtime",
+              "exception_type": "RuntimeError",
+              "label": "short-circuit",
+              "message": "closed fake stopped",
+              "outcome": "raised"
+            }
+          ],
+          "progress": [
+            {
+              "desc": "Running idfs",
+              "ncols": 100
+            },
+            {
+              "desc": "Running idfs",
+              "ncols": 100
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "run"
+    },
+    {
+      "executor": "run",
+      "expected_dotnet": {
+        "adaptation": "bounded-deterministic-energyplus-batch-execution",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.run-scalar",
+      "python": {
+        "facts": {
+          "calls": [
+            {
+              "idf": "model.idf",
+              "kwargs": {
+                "delete": false,
+                "ep_dir": "runtime-token",
+                "output_dir": "output-token",
+                "verbose": false
+              },
+              "weather": "weather.epw"
+            },
+            {
+              "idf": "listed.idf",
+              "kwargs": {
+                "delete": true,
+                "ep_dir": null,
+                "output_dir": null,
+                "verbose": true
+              },
+              "weather": "listed.epw"
+            }
+          ],
+          "progress": [],
+          "returns": [
+            "result:model.idf:weather.epw",
+            "result:listed.idf:listed.epw"
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "run"
+    },
+    {
+      "executor": "run-single",
+      "expected_dotnet": {
+        "adaptation": "isolated-cancellable-energyplus-single-run",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.run-single-explicit-retain",
+      "python": {
+        "facts": {
+          "audit": {
+            "A": 1
+          },
+          "copied_files": [
+            "case.audit",
+            "case.err"
+          ],
+          "elapsed_binary64": "1.8000000000000p+0",
+          "launch_calls": [
+            {
+              "ep_dir": "explicit-runtime",
+              "idf": "inputs/explicit.idf",
+              "run_dir": "work-0",
+              "verbose": true,
+              "weather": "weather-token.epw"
+            }
+          ],
+          "launch_status_ignored": 73,
+          "process_attempt_count": 0,
+          "resolver_calls": [],
+          "run_dir_exists_after": false,
+          "warnings": [
+            {
+              "title": "retained warning",
+              "type": "Warning"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "run_single"
+    },
+    {
+      "executor": "run-single",
+      "expected_dotnet": {
+        "adaptation": "isolated-cancellable-energyplus-single-run",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.run-single-inferred-delete",
+      "python": {
+        "facts": {
+          "audit": {
+            "B": 2
+          },
+          "copied_audit_exists_after": false,
+          "launch_calls": [
+            {
+              "ep_dir": "resolved-runtime",
+              "run_dir": "work-0",
+              "verbose": false,
+              "weather": "weather-token.epw"
+            }
+          ],
+          "launch_status_ignored": -9,
+          "process_attempt_count": 0,
+          "resolver_calls": [
+            "23.2.0"
+          ],
+          "run_dir_exists_after": false
+        },
+        "outcome": "returned"
+      },
+      "symbol": "run_single"
+    },
+    {
+      "executor": "run-single",
+      "expected_dotnet": {
+        "adaptation": "isolated-cancellable-energyplus-single-run",
+        "outcome": "returned"
+      },
+      "id": "launcher-runtime.run-single-transactionality",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "error_category": "runtime",
+              "exception_type": "RuntimeError",
+              "label": "missing-version",
+              "message": "Cannot find EnergyPlus version as the format in the idf text",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "runtime",
+              "exception_type": "RuntimeError",
+              "label": "launch-failure",
+              "message": "closed launch failure",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "file-not-found",
+              "exception_type": "FileNotFoundError",
+              "label": "copy-failure",
+              "message": "[Errno 2] No such file or directory: '<controlled-temp>//work-1//missing.audit'",
+              "outcome": "raised"
+            },
+            {
+              "error_category": "other",
+              "exception_type": "AttributeError",
+              "label": "parse-failure",
+              "message": "'NoneType' object has no attribute 'group'",
+              "outcome": "raised"
+            }
+          ],
+          "process_attempt_count": 0,
+          "side_effects": {
+            "copy_failure_run_dir_exists": true,
+            "launch_failure_run_dir_exists": true,
+            "missing_version_created_run_dir": false,
+            "parse_failure_copied_output_exists": true,
+            "parse_failure_run_dir_exists": false
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "run_single"
+    }
+  ],
+  "cases_sha256": "sha256:bf5d658273fcf42e536acc102e1b117497b3f017031c0db0c2d605c87297d4bc",
+  "consumer_contract": {
+    "adaptations": {
+      "ExecutableEnergyPlusNotFoundError": "structured-energyplus-runtime-not-found-failure",
+      "find_executable_dir": "hash-verified-energyplus-runtime-resolution",
+      "run": "bounded-deterministic-energyplus-batch-execution",
+      "run_single": "isolated-cancellable-energyplus-single-run"
+    },
+    "assertion_ids": {
+      "ExecutableEnergyPlusNotFoundError": "launcher-runtime-executable-not-found-76d795db",
+      "find_executable_dir": "launcher-runtime-find-executable-dir-6de563f4",
+      "run": "launcher-runtime-run-84c6ff24",
+      "run_single": "launcher-runtime-run-single-eda7f757"
+    },
+    "case_count": 12,
+    "case_ids": [
+      "launcher-runtime.executable-error-class",
+      "launcher-runtime.executable-error-instance",
+      "launcher-runtime.executable-error-raise",
+      "launcher-runtime.find-executable-failure",
+      "launcher-runtime.find-executable-package-precedence",
+      "launcher-runtime.find-executable-system-fallback",
+      "launcher-runtime.run-broadcast",
+      "launcher-runtime.run-cardinality",
+      "launcher-runtime.run-scalar",
+      "launcher-runtime.run-single-explicit-retain",
+      "launcher-runtime.run-single-inferred-delete",
+      "launcher-runtime.run-single-transactionality"
+    ],
+    "classifications": {
+      "ExecutableEnergyPlusNotFoundError": "exception",
+      "find_executable_dir": "exception",
+      "run": "exception",
+      "run_single": "exception"
+    },
+    "execution_policy": "closed-fakes-no-process-or-active-load",
+    "float_encoding": "python-binary64-hex-without-0x-prefix",
+    "path_encoding": "logical-tokens-only",
+    "runtime_names": "pinned-python-only-no-native-type-name-claims",
+    "target_symbols": [
+      "ExecutableEnergyPlusNotFoundError",
+      "find_executable_dir",
+      "run",
+      "run_single"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.launcher-runtime.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:921a63a3a05234e5b1c61efbee031114924c6587cc8d60b93d4932290c0b549a",
+      "kind": "class",
+      "path": "src/idragon/launcher.py",
+      "signature_hash": "sha256:af4269c77686b13c3db93174c1cba5a3679b876d7dd4996633b5daeab8fff8f3",
+      "symbol": "ExecutableEnergyPlusNotFoundError",
+      "symbol_hash": "sha256:76d795db5a0292d2af780a00ee53760a1ab5bd07d50cdf144cf6863c3b08b3d3"
+    },
+    {
+      "body_hash": "sha256:99ab4b26f1043306ed119f8df86069765fa4cde5dd32792ce335ea1800820c2d",
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "signature_hash": "sha256:ebb7af2fdb78b6207f5681aa3c0ccab67f8ba7bd843663597beed49ccf11b61f",
+      "symbol": "find_executable_dir",
+      "symbol_hash": "sha256:6de563f4cfe228449e3c29866c9e432c7cf0f9ffc49dad4e7558d9b0addebf1b"
+    },
+    {
+      "body_hash": "sha256:0fb4f14dabde914d8f39235d9df925f011fc66d7fc88131230fc5b213bff106a",
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "signature_hash": "sha256:4e1ba99373cc367b28141f5395751a8eac81db60ee71bb4afe691981d4bd2bf8",
+      "symbol": "run",
+      "symbol_hash": "sha256:84c6ff241eb023074ab18999d177182fcc33e90c128d479f50303041945b4281"
+    },
+    {
+      "body_hash": "sha256:e5fb9f5b5a84a697283db6c5bb88dce0f1b696c7864a2934279ff93a1b3ba659",
+      "kind": "function",
+      "path": "src/idragon/launcher.py",
+      "signature_hash": "sha256:77a80eeb659cc9b40e69a8db74a9337246ca40bb3ea900e9b466accc92bb9c0a",
+      "symbol": "run_single",
+      "symbol_hash": "sha256:eda7f7577da0c1ac73498136fcfa6955ffb6605bad1dc0b9a1ac80609b094884"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "path": "src/idragon/launcher.py",
+    "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+  }
+}

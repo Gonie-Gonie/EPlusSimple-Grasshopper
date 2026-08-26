@@ -15,6 +15,7 @@ public sealed class EnergyPlusRunnerTests
         var executor = CreateSuccessfulExecutor();
         var progress = new List<EnergyPlusRunTransition>();
         var runner = new EnergyPlusRunner(executor);
+        var externalIddBytes = File.ReadAllBytes(runtime.IddPath);
 
         var result = await runner.RunAsync(
             new EnergyPlusRunRequest(runtime, input, weather, tempRoot),
@@ -47,11 +48,30 @@ public sealed class EnergyPlusRunnerTests
             progress.Select(item => item.State));
 
         var energyRequest = executor.Requests.Single(item => item.Stage == EnergyPlusProcessStage.EnergyPlus);
-        var weatherArgumentIndex = energyRequest.Arguments.ToList().IndexOf("-w");
-        Assert.True(weatherArgumentIndex >= 0);
+        var workDirectory = result.WorkDirectory!;
+        var localIddPath = System.IO.Path.Combine(workDirectory, "Energy+.idd");
+        Assert.True(File.Exists(System.IO.Path.Combine(workDirectory, ".goniegonie-energyplus-run")));
+        Assert.True(RuntimeFileSystem.IsDescendantOf(workDirectory, localIddPath));
+        Assert.NotEqual(runtime.IddPath, localIddPath);
+        Assert.Equal(externalIddBytes, File.ReadAllBytes(localIddPath));
+        Assert.Equal(externalIddBytes, File.ReadAllBytes(runtime.IddPath));
+        Assert.Equal(workDirectory, energyRequest.WorkingDirectory);
         Assert.Equal(
-            System.IO.Path.Combine(result.WorkDirectory!, "in.epw"),
-            energyRequest.Arguments[weatherArgumentIndex + 1]);
+            new[]
+            {
+                "-i",
+                localIddPath,
+                "-d",
+                System.IO.Path.Combine(workDirectory, "output"),
+                "-p",
+                "eplus",
+                "-s",
+                "L",
+                "-w",
+                System.IO.Path.Combine(workDirectory, "in.epw"),
+                System.IO.Path.Combine(workDirectory, "expanded.idf")
+            },
+            energyRequest.Arguments);
     }
 
     [Fact]

@@ -8,11 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\..\tools\upstream-tracker\csharp\TrustedEvidenceRecorder.cs" Link="TrustedEvidenceRecorder.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
     <PackageReference Include="coverlet.collector" PrivateAssets="all" />
     <ProjectReference Include="..\..\..\src\Shared\GonieGonie.EnergyPlus.Runtime\GonieGonie.EnergyPlus.Runtime.csproj" />
+    <ProjectReference Include="..\..\..\src\SimpleDragon\GonieGonie.SimpleDragon.Core\GonieGonie.SimpleDragon.Core.csproj" />
   </ItemGroup>
 </Project>
