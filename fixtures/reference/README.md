@@ -52,6 +52,19 @@ three-member iteration, representative engineering products, and the 107 W
 default people-activity field. Six members are exact equivalents and the two
 Python enum containers are reviewed native API adaptations.
 
+`python-0.7.0/dragon-model-assembly-oracle.json` pins five ordered CPython
+3.12.7 observations for bounded `EnergyModel.to_idf` behavior. It records
+exact-name profile replacement and its dangling schedule reference,
+case-sensitive profile and schedule emission, the shared unconditioned
+thermostat/ALLON fallback, legacy ERV ventilation fields, and the silent
+fallback when assigned HVAC lacks availability. One case additionally pins the
+exact five-field geometry rules, default 107 W people-activity schedule,
+blank-typed ALLON/ALLOFF schedules, and four schedule type-limit objects. The
+generator audits all twelve local `idragon` modules actually loaded across the
+five cases against exact source and Python 3.12 AST receipts. This is behavioral
+evidence only: the symbol remains `needs_reverification`, with no adaptation,
+trusted assertion, or full-symbol closure claim.
+
 `python-0.7.0/dragon-model-conditioning-oracle.json` pins nine ordered
 CPython 3.12.7 observations for `EnergyModel.conditioned_zones`,
 `EnergyModel.unconditioned_zones`, and `Zone.is_conditioned` across
