@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:2c3b3aa180b744f205349d60d9cc9ce5dccb96a8e1e5c881435c500e4ce36dee",
+  "content_sha256": "sha256:3ceeb8cc7559410d86e40fc382f31d00d217d709f86ae2f72b0a88bdcbe248b2",
   "entries": [
     {
       "implementation": {
@@ -1044,7 +1044,33 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.EnergyModel"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify the exact EnergyModel.__init__ call surface, explicit-list aliasing, shared mutable defaults, permissive invalid values, and the native immutable validated construction adaptation.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e9c7a4822f58174440c7aaecd52964343ee94a33c5cafeb7f463c7b10dcc4656",
+          "id": "dragon-model-construction-defaults-init-1d1dbee8",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelConstructionDefaultsOracleParityTests.cs",
+          "test_source_sha256": "sha256:a5519282f2bb6a3f735912457971ccd416e867c8f7699d7a8af6fc0bf589dff8",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelConstructionDefaultsOracleParityTests.MatchesPinnedPythonConstructionDefaults",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyModel.__init__",
+      "upstream_symbol_hash": "sha256:1d1dbee8fef8b70b2919c4e46a0ea60efbd748b360d31ff353ea121c72ad97d2"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ConditionedZones"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1070,7 +1096,33 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.CreateDefaultIdfDocument"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify EnergyModel.create_default_idf as the exact fresh seventeen-object default document in effective token and family order, including the raw schedule, geometry, and output objects.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d3443c2e9f75efb3001a2a7c5707939ba5af079ad5aac4d35ebb627adcec51aa",
+          "id": "dragon-model-construction-defaults-create-default-idf-585b5368",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelConstructionDefaultsOracleParityTests.cs",
+          "test_source_sha256": "sha256:a5519282f2bb6a3f735912457971ccd416e867c8f7699d7a8af6fc0bf589dff8",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelConstructionDefaultsOracleParityTests.MatchesPinnedPythonConstructionDefaults",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyModel.create_default_idf",
+      "upstream_symbol_hash": "sha256:585b53682bd5dbd4d2081e79eddc2789fa60925baafb5eae26de0541346ac9f4"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.Surfaces"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1096,7 +1148,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UnconditionedZones"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1122,7 +1174,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UsedConstructions"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1148,7 +1200,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UsedLayers"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1174,7 +1226,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.UsedProfiles"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1200,7 +1252,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1226,7 +1278,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.City"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1252,7 +1304,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Country"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1278,7 +1330,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Ocean"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1304,7 +1356,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Suburbs"
       },
       "path": "src/idragon/dragon/model.py",
@@ -1330,7 +1382,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.Terrain.Urban"
       },
       "path": "src/idragon/dragon/model.py",
@@ -5880,7 +5932,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "source_sha256": "sha256:74c35fc6db4579f4db9854612b8633b6085b22317360e12e4424cb352b2d0a05",
+        "source_sha256": "sha256:81c40a13c49ac320993fd1cc8f73e01fd5ed433b5708207a2658e8204e6d063f",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ConditionedZones"
       },
       "path": "src/idragon/dragon/shape.py",
@@ -6271,9 +6323,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 241,
-    "passed_receipt_count": 241,
-    "receipt_count": 241,
+    "entry_count": 243,
+    "passed_receipt_count": 243,
+    "receipt_count": 243,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

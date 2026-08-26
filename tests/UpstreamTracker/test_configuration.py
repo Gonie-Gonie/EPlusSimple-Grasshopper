@@ -40,16 +40,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(749, len(compatibility.needs_reverification))
+        self.assertEqual(747, len(compatibility.needs_reverification))
         self.assertEqual(
-            128,
+            129,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            113,
+            114,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -151,8 +151,14 @@ class ConfigurationTests(unittest.TestCase):
                 "EnergyModel.create_default_idf",
             )
         ]
-        self.assertEqual("needs_reverification", people_activity.classification)
+        self.assertEqual("equivalent", people_activity.classification)
         self.assertIsNone(people_activity.exception_id)
+        self.assertEqual(
+            (
+                "upstream/symbol-evidence.json#dragon-model-construction-defaults-create-default-idf-585b5368",
+            ),
+            people_activity.evidence,
+        )
 
     def test_rejects_non_goniegonie_product_ownership(self) -> None:
         with TemporaryWorkspace() as workspace:

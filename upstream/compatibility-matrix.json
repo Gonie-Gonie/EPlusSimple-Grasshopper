@@ -816,10 +816,10 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "equivalent",
-    "needs_reverification",
+    "equivalent",
     "equivalent",
     "needs_reverification",
     "equivalent",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:d1d02ef38ab1408612aba83b6dfe3100ae3cbf0a135772cc9cdc4dfc5222d4e6",
+  "content_sha256": "sha256:1302f06dc76a6006501a0504c7aa3b1daeb8079125e120d6254b2ace03762fef",
   "details": [
     {
       "evidence": [
@@ -2965,10 +2965,26 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-validated-energy-model-construction",
+        "upstream/symbol-evidence.json#dragon-model-construction-defaults-init-1d1dbee8"
+      ],
+      "exception_id": "immutable-validated-energy-model-construction",
+      "index": 816,
+      "rationale": "Trusted cross-language evidence verifies the exact constructor call surface, Python aliasing and shared-default behavior, and the approved native immutable validated construction adaptation."
+    },
+    {
+      "evidence": [
         "upstream/symbol-evidence.json#dragon-model-conditioning-conditioned-zones-90ceddf7"
       ],
       "index": 818,
       "rationale": "Trusted cross-language evidence verifies EnergyModel.conditioned_zones across its exact three-case conditioning slice: the ordered source-zone identities selected when both HVAC supply and availability context are present."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-model-construction-defaults-create-default-idf-585b5368"
+      ],
+      "index": 819,
+      "rationale": "Trusted cross-language evidence verifies the exact fresh seventeen-object default document, effective raw tokens, family order, mutation isolation, and no-argument static call surface."
     },
     {
       "evidence": [
@@ -4929,9 +4945,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 128,
-      "exception": 113,
-      "needs_reverification": 749,
+      "equivalent": 129,
+      "exception": 114,
+      "needs_reverification": 747,
       "out_of_scope": 252
     },
     "entry_count": 1242
