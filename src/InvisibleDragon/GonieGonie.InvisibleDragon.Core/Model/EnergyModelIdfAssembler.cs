@@ -114,7 +114,11 @@ internal static class EnergyModelIdfAssembler
             : ScheduleIdfExporter.TypeLimitName(ScheduleType.Real);
         yield return context.CreateRaw("Schedule:Compact", "ALLON", onOffType, "Through: 12/31", "For: AllDays", "Until: 24:00", 1);
         yield return context.CreateRaw("Schedule:Compact", "ALLOFF", onOffType, "Through: 12/31", "For: AllDays", "Until: 24:00", 0);
-        yield return context.CreateRaw("Schedule:Constant", "$DEFAULT$PEOPLEACTIVITY", realType, 107);
+        yield return context.CreateRaw(
+            "Schedule:Constant",
+            "$DEFAULT$PEOPLEACTIVITY",
+            realType,
+            ThermalDefaults.PeopleActivityLevelWattsPerPerson);
     }
 
     private static IEnumerable<Schedule> CollectSchedules(EnergyModel model)
@@ -675,7 +679,10 @@ internal static class EnergyModelIdfAssembler
                     IdfGenerationContext.Field(0, "Name", $"NaturalVentilation:{zone.Name}"),
                     IdfGenerationContext.Field(1, "Zone or ZoneList or Space or SpaceList Name", zone.Name),
                     IdfGenerationContext.Field(3, "Design Flow Rate Calculation Method", "Flow/Person"),
-                    IdfGenerationContext.Field(6, "Flow Rate per Person", 0.0083d)));
+                    IdfGenerationContext.Field(
+                        6,
+                        "Flow Rate per Person",
+                        8.3d * UnitConversions.LitresToCubicMetres)));
             }
             else
             {
@@ -693,7 +700,10 @@ internal static class EnergyModelIdfAssembler
                     IdfGenerationContext.Field(0, "Name", $"NaturalVentilation:{zone.Name}"),
                     IdfGenerationContext.Field(1, "Zone or ZoneList or Space or SpaceList Name", zone.Name),
                     IdfGenerationContext.Field(3, "Design Flow Rate Calculation Method", "Flow/Person"),
-                    IdfGenerationContext.Field(6, "Flow Rate per Person", 0.0083d * unrecoveredFraction),
+                    IdfGenerationContext.Field(
+                        6,
+                        "Flow Rate per Person",
+                        8.3d * UnitConversions.LitresToCubicMetres * unrecoveredFraction),
                     IdfGenerationContext.Field(8, "Ventilation Type", "Exhaust"),
                     IdfGenerationContext.Field(9, "Fan Pressure Rise", 50d / unrecoveredFraction),
                     IdfGenerationContext.Field(10, "Fan Total Efficiency", 0.85d)));

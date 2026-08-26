@@ -79,6 +79,15 @@ failure surface. Its consumer contract declares ten exact equivalents and the
 three reviewed native descriptor, validated-construction, and strongly typed
 coercion adaptations.
 
+The constants engineering oracle binds the eight `THERMAL` and `Unit` symbols
+in the exact pinned `idragon/constants.py` source through 24 ordered cases. It
+records canonical binary64 conversion values and engineering probes, the
+five-name versus three-iterated-member `Unit` alias topology, and the 107 W
+people-activity value emitted by the default IDF. The two mutable Python enum
+containers are reviewed native adaptations; all six engineering members are
+exact equivalents. Package directories and Python package metadata are not
+part of this engineering corpus.
+
 The launcher result-parser oracle directly loads the pinned
 `idragon/launcher.py` together with only its pinned sibling modules, without
 executing `idragon.__init__`. Its 21 ordered cases bind the seven

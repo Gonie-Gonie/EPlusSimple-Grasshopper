@@ -44,6 +44,14 @@ version parsing, formatting, component order, filenames, identity behavior,
 and coercion failures with the exact ten-equivalent versus three-reviewed-
 adaptation split.
 
+`python-0.7.0/constants-engineering-oracle.json` pins 24 ordered CPython
+3.12.7 observations for the eight engineering symbols in
+`idragon/constants.py`. It preserves exact binary64 conversion coefficients,
+five declared `Unit` names with the `MM2M`/`W2KW`/`L2M3` identity alias and
+three-member iteration, representative engineering products, and the 107 W
+default people-activity field. Six members are exact equivalents and the two
+Python enum containers are reviewed native API adaptations.
+
 `python-0.7.0/launcher-result-parser-oracle.json` pins 21 ordered CPython
 3.12.7 observations for the seven result-parser symbols in
 `idragon/launcher.py`. It records constructor dispatch and partial failures,

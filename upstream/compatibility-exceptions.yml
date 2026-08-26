@@ -1590,3 +1590,31 @@
     api_contract: callers resolve the runtime and submit one immutable request with explicit timeout, capture limit and cleanup policy instead of passing ep_dir, verbose, output_dir and delete switches or depending on copied-output lifetime
     compatibility_evidence: upstream version detection, explicit-runtime path, launch and copy ordering, ignored status, result-before-delete behavior, output deletion and failure transactionality plus native validation, state transitions, structured failures, artifact capture and marked-directory cleanup remain required under an injected fake process executor without claiming that EnergyPlus executed
   approval: accepted-native-api-adaptation
+
+- id: native-named-unit-conversion-constants
+  upstream:
+    path: src/idragon/constants.py
+    symbol: Unit
+    symbol_hash: sha256:82eeceb9e427512d5ed45c6139c5fb92859289547ded26e7e410b3be3f591b70
+  difference:
+    upstream: defines a float-valued Python Enum whose five public names support value construction, iteration, identity, hashing, name and value access, with MM2M, W2KW, and L2M3 sharing 0.001 so the latter two are aliases of the first
+    dotnet: exposes five immutable public named const double fields on the static UnitConversions container, preserving separate engineering names even when their numeric values are equal instead of representing enum members or aliases
+  effect:
+    engineering_result: litre-to-cubic-metre, millimetre-to-metre, fraction-to-percent, percent-to-fraction, and watt-to-kilowatt calculations retain the exact upstream binary64 conversion factors
+    api_contract: callers reference UnitConversions named constants directly; no parity is claimed for Python Enum construction, iteration order, alias identity, member names, value wrappers, hashing, or Enum API syntax
+    compatibility_evidence: exact upstream float inheritance, construction, canonical-member iteration, alias identity and numeric behavior plus the native public const-double names, field types, immutability, values and arithmetic remain required in trusted cross-language receipts
+  approval: accepted-native-api-adaptation
+
+- id: native-thermal-default-constant-container
+  upstream:
+    path: src/idragon/constants.py
+    symbol: THERMAL
+    symbol_hash: sha256:c55d90e3a5f7120226dc556d856b18c8070aac02531b2632e56ee15f8d8dcdcd
+  difference:
+    upstream: defines a float-valued Python Enum containing PEOPLE_ACTIVITY_LEVEL at 107 with ordinary Enum construction, one-member iteration, identity, hashing, name and value behavior
+    dotnet: exposes the exact numeric default as the immutable public const double ThermalDefaults.PeopleActivityLevelWattsPerPerson on a static native constant container rather than as an enum member
+  effect:
+    engineering_result: the people activity default retains the exact upstream binary64 value 107 for downstream model assembly and calculations
+    api_contract: callers reference ThermalDefaults.PeopleActivityLevelWattsPerPerson directly; no parity is claimed for Python Enum construction, iteration, identity, member naming, value wrappers, hashing, or Enum API syntax
+    compatibility_evidence: exact upstream float inheritance, construction, iteration, identity and numeric behavior plus the native public const-double field name, type, immutability, value and downstream use remain required in trusted cross-language receipts
+  approval: accepted-native-api-adaptation

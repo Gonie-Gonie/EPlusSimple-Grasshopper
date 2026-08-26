@@ -1,5 +1,5 @@
-using GonieGonie.BuildingEnergy.Contracts;
 using System.Text.Json;
+using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Construction;
 using GonieGonie.InvisibleDragon.Hvac;
 using GonieGonie.InvisibleDragon.Idf;
@@ -309,6 +309,10 @@ public sealed class EnergyModelFixtureMatrixTests
         Assert.Single(native["ZoneHVAC:EnergyRecoveryVentilator"]);
         Assert.Single(native["HeatExchanger:AirToAir:SensibleAndLatent"]);
         Assert.Equal(2, native["Fan:OnOff"].Count);
+        IdfObject activity = Assert.Single(
+            native["Schedule:Constant"],
+            item => item.Name == "$DEFAULT$PEOPLEACTIVITY");
+        Assert.Equal("107", activity[2]);
         Assert.Equal("0.0083", Assert.Single(native["ZoneVentilation:DesignFlowRate"])[6]);
 
         IdfDocument legacy = model.ToIdfDocument(options: new EnergyModelIdfOptions

@@ -1,0 +1,680 @@
+{
+  "cases": [
+    {
+      "executor": "thermal-class",
+      "expected_dotnet": {
+        "adaptation": "native-thermal-default-constant-container",
+        "outcome": "returned"
+      },
+      "id": "constants-engineering.thermal.class.construction",
+      "python": {
+        "facts": {
+          "observations": [
+            {
+              "input": {
+                "decimal": "107",
+                "kind": "int"
+              },
+              "label": "integer-member",
+              "outcome": "returned",
+              "result": {
+                "name": "PEOPLE_ACTIVITY_LEVEL",
+                "value": {
+                  "binary64": "1.ac00000000000p+6",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "input": {
+                "binary64": "1.ac00000000000p+6",
+                "kind": "float"
+              },
+              "label": "float-member",
+              "outcome": "returned",
+              "result": {
+                "name": "PEOPLE_ACTIVITY_LEVEL",
+                "value": {
+                  "binary64": "1.ac00000000000p+6",
+                  "kind": "float"
+                }
+              }
+            },
+            {
+              "error_category": "domain",
+              "exception_type": "ValueError",
+              "input": {
+                "decimal": "106",
+                "kind": "int"
+              },
+              "label": "unknown-value",
+              "outcome": "raised"
+            }
+          ]
+        },
+        "outcome": "returned"
+      },
+      "symbol": "THERMAL"
+    },
+    {
+      "executor": "thermal-class",
+      "expected_dotnet": {
+        "adaptation": "native-thermal-default-constant-container",
+        "outcome": "returned"
+      },
+      "id": "constants-engineering.thermal.class.member-topology",
+      "python": {
+        "facts": {
+          "declared_member_names": [
+            "PEOPLE_ACTIVITY_LEVEL"
+          ],
+          "iterated_member_names": [
+            "PEOPLE_ACTIVITY_LEVEL"
+          ],
+          "member_count": 1,
+          "unique_member_count": 1
+        },
+        "outcome": "returned"
+      },
+      "symbol": "THERMAL"
+    },
+    {
+      "executor": "thermal-class",
+      "expected_dotnet": {
+        "adaptation": "native-thermal-default-constant-container",
+        "outcome": "returned"
+      },
+      "id": "constants-engineering.thermal.class.type-topology",
+      "python": {
+        "facts": {
+          "base_names": [
+            "float",
+            "Enum"
+          ],
+          "class_name": "THERMAL",
+          "is_enum_subclass": true,
+          "is_float_subclass": true,
+          "module": "idragon.constants",
+          "signature": "(*values)"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "THERMAL"
+    },
+    {
+      "executor": "thermal-constant",
+      "id": "constants-engineering.thermal.people-activity-level.idf-default",
+      "python": {
+        "facts": {
+          "activity_value": {
+            "binary64": "1.ac00000000000p+6",
+            "kind": "float"
+          },
+          "field_count": 3,
+          "name": "$DEFAULT$PEOPLEACTIVITY",
+          "object_type": "Schedule:Constant",
+          "schedule_type": {
+            "name": "REAL",
+            "value": "real"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "THERMAL.PEOPLE_ACTIVITY_LEVEL"
+    },
+    {
+      "executor": "thermal-constant",
+      "id": "constants-engineering.thermal.people-activity-level.numeric-semantics",
+      "python": {
+        "facts": {
+          "equals_107": true,
+          "float_projection": {
+            "binary64": "1.ac00000000000p+6",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "value_type": "float"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "THERMAL.PEOPLE_ACTIVITY_LEVEL"
+    },
+    {
+      "executor": "thermal-constant",
+      "id": "constants-engineering.thermal.people-activity-level.value",
+      "python": {
+        "facts": {
+          "canonical_name": "PEOPLE_ACTIVITY_LEVEL",
+          "declared_name": "PEOPLE_ACTIVITY_LEVEL",
+          "value": {
+            "binary64": "1.ac00000000000p+6",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "THERMAL.PEOPLE_ACTIVITY_LEVEL"
+    },
+    {
+      "executor": "unit-class",
+      "expected_dotnet": {
+        "adaptation": "native-named-unit-conversion-constants",
+        "outcome": "returned"
+      },
+      "id": "constants-engineering.unit.class.alias-topology",
+      "python": {
+        "facts": {
+          "alias_group": [
+            "MM2M",
+            "W2KW",
+            "L2M3"
+          ],
+          "canonical_names": {
+            "L2M3": "MM2M",
+            "MM2M": "MM2M",
+            "NONE2PRC": "NONE2PRC",
+            "PRC2NONE": "PRC2NONE",
+            "W2KW": "MM2M"
+          },
+          "l2m3_is_mm2m": true,
+          "mm2m_is_w2kw": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit"
+    },
+    {
+      "executor": "unit-class",
+      "expected_dotnet": {
+        "adaptation": "native-named-unit-conversion-constants",
+        "outcome": "returned"
+      },
+      "id": "constants-engineering.unit.class.member-order",
+      "python": {
+        "facts": {
+          "declared_member_names": [
+            "MM2M",
+            "NONE2PRC",
+            "PRC2NONE",
+            "W2KW",
+            "L2M3"
+          ],
+          "iterated_member_names": [
+            "MM2M",
+            "NONE2PRC",
+            "PRC2NONE"
+          ],
+          "iterated_values": [
+            {
+              "binary64": "1.0624dd2f1a9fcp-10",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.9000000000000p+6",
+              "kind": "float"
+            },
+            {
+              "binary64": "1.47ae147ae147bp-7",
+              "kind": "float"
+            }
+          ],
+          "member_count": 5,
+          "unique_member_count": 3
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit"
+    },
+    {
+      "executor": "unit-class",
+      "expected_dotnet": {
+        "adaptation": "native-named-unit-conversion-constants",
+        "outcome": "returned"
+      },
+      "id": "constants-engineering.unit.class.type-topology",
+      "python": {
+        "facts": {
+          "base_names": [
+            "float",
+            "Enum"
+          ],
+          "class_name": "Unit",
+          "is_enum_subclass": true,
+          "is_float_subclass": true,
+          "module": "idragon.constants",
+          "signature": "(*values)"
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.l2m3.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.099999999999ap+3",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.0ff972474538fp-7",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.L2M3"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.l2m3.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "MM2M",
+          "declared_name": "L2M3",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.0624dd2f1a9fcp-10",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.L2M3"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.l2m3.value",
+      "python": {
+        "facts": {
+          "canonical_name": "MM2M",
+          "declared_name": "L2M3",
+          "value": {
+            "binary64": "1.0624dd2f1a9fcp-10",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.L2M3"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.mm2m.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.3880000000000p+10",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.4000000000000p+0",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.MM2M"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.mm2m.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "MM2M",
+          "declared_name": "MM2M",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.0624dd2f1a9fcp-10",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.MM2M"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.mm2m.value",
+      "python": {
+        "facts": {
+          "canonical_name": "MM2M",
+          "declared_name": "MM2M",
+          "value": {
+            "binary64": "1.0624dd2f1a9fcp-10",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.MM2M"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.none2prc.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.8000000000000p-2",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.2c00000000000p+5",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.NONE2PRC"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.none2prc.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "NONE2PRC",
+          "declared_name": "NONE2PRC",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.NONE2PRC"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.none2prc.value",
+      "python": {
+        "facts": {
+          "canonical_name": "NONE2PRC",
+          "declared_name": "NONE2PRC",
+          "value": {
+            "binary64": "1.9000000000000p+6",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.NONE2PRC"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.prc2none.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.2c00000000000p+5",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.8000000000000p-2",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.PRC2NONE"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.prc2none.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "PRC2NONE",
+          "declared_name": "PRC2NONE",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.47ae147ae147bp-7",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.PRC2NONE"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.prc2none.value",
+      "python": {
+        "facts": {
+          "canonical_name": "PRC2NONE",
+          "declared_name": "PRC2NONE",
+          "value": {
+            "binary64": "1.47ae147ae147bp-7",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.PRC2NONE"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.w2kw.engineering-probe",
+      "python": {
+        "facts": {
+          "input": {
+            "binary64": "1.0680000000000p+12",
+            "kind": "float"
+          },
+          "operation": "multiply",
+          "result": {
+            "binary64": "1.0cccccccccccdp+2",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.W2KW"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.w2kw.numeric-semantics",
+      "python": {
+        "facts": {
+          "canonical_name": "MM2M",
+          "declared_name": "W2KW",
+          "equals_value": true,
+          "float_projection": {
+            "binary64": "1.0624dd2f1a9fcp-10",
+            "kind": "float"
+          },
+          "is_float_instance": true,
+          "is_same_as_canonical_member": true
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.W2KW"
+    },
+    {
+      "executor": "unit-constant",
+      "id": "constants-engineering.unit.w2kw.value",
+      "python": {
+        "facts": {
+          "canonical_name": "MM2M",
+          "declared_name": "W2KW",
+          "value": {
+            "binary64": "1.0624dd2f1a9fcp-10",
+            "kind": "float"
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Unit.W2KW"
+    }
+  ],
+  "cases_sha256": "sha256:18cc2d2295cad8a96a1a54ebd726c9d258586cd5f44a46c401fcb2f87997050e",
+  "consumer_contract": {
+    "adaptations": {
+      "THERMAL": "native-thermal-default-constant-container",
+      "Unit": "native-named-unit-conversion-constants"
+    },
+    "assertion_ids": {
+      "THERMAL": "constants-engineering-thermal-c55d90e3",
+      "THERMAL.PEOPLE_ACTIVITY_LEVEL": "constants-engineering-thermal-people-activity-5a39d884",
+      "Unit": "constants-engineering-unit-82eeceb9",
+      "Unit.L2M3": "constants-engineering-unit-l2m3-91d7c582",
+      "Unit.MM2M": "constants-engineering-unit-mm2m-4f90e5de",
+      "Unit.NONE2PRC": "constants-engineering-unit-none2prc-743aa08a",
+      "Unit.PRC2NONE": "constants-engineering-unit-prc2none-48e9d761",
+      "Unit.W2KW": "constants-engineering-unit-w2kw-f00a1484"
+    },
+    "case_count": 24,
+    "case_ids": [
+      "constants-engineering.thermal.class.construction",
+      "constants-engineering.thermal.class.member-topology",
+      "constants-engineering.thermal.class.type-topology",
+      "constants-engineering.thermal.people-activity-level.idf-default",
+      "constants-engineering.thermal.people-activity-level.numeric-semantics",
+      "constants-engineering.thermal.people-activity-level.value",
+      "constants-engineering.unit.class.alias-topology",
+      "constants-engineering.unit.class.member-order",
+      "constants-engineering.unit.class.type-topology",
+      "constants-engineering.unit.l2m3.engineering-probe",
+      "constants-engineering.unit.l2m3.numeric-semantics",
+      "constants-engineering.unit.l2m3.value",
+      "constants-engineering.unit.mm2m.engineering-probe",
+      "constants-engineering.unit.mm2m.numeric-semantics",
+      "constants-engineering.unit.mm2m.value",
+      "constants-engineering.unit.none2prc.engineering-probe",
+      "constants-engineering.unit.none2prc.numeric-semantics",
+      "constants-engineering.unit.none2prc.value",
+      "constants-engineering.unit.prc2none.engineering-probe",
+      "constants-engineering.unit.prc2none.numeric-semantics",
+      "constants-engineering.unit.prc2none.value",
+      "constants-engineering.unit.w2kw.engineering-probe",
+      "constants-engineering.unit.w2kw.numeric-semantics",
+      "constants-engineering.unit.w2kw.value"
+    ],
+    "classifications": {
+      "THERMAL": "exception",
+      "THERMAL.PEOPLE_ACTIVITY_LEVEL": "equivalent",
+      "Unit": "exception",
+      "Unit.L2M3": "equivalent",
+      "Unit.MM2M": "equivalent",
+      "Unit.NONE2PRC": "equivalent",
+      "Unit.PRC2NONE": "equivalent",
+      "Unit.W2KW": "equivalent"
+    },
+    "float_encoding": "python-binary64-hex-without-0x-prefix",
+    "runtime_names": "pinned-python-only-no-native-type-name-claims",
+    "target_symbols": [
+      "THERMAL",
+      "THERMAL.PEOPLE_ACTIVITY_LEVEL",
+      "Unit",
+      "Unit.L2M3",
+      "Unit.MM2M",
+      "Unit.NONE2PRC",
+      "Unit.PRC2NONE",
+      "Unit.W2KW"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.constants-engineering.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:1a8e65ce71d37c495d404d7e8379dc1e3007bea81f99cca0d6c39c13f281d902",
+      "symbol": "THERMAL",
+      "symbol_hash": "sha256:c55d90e3a5f7120226dc556d856b18c8070aac02531b2632e56ee15f8d8dcdcd"
+    },
+    {
+      "body_hash": "sha256:b33ef9739f6bd8533418c2d2c199e209601c5aa7111e178afb610494d4ea2696",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:6987d99c6d345cbd8d6ff4397ca43194b04fe907b89d9422c7972c5a0a501d74",
+      "symbol": "THERMAL.PEOPLE_ACTIVITY_LEVEL",
+      "symbol_hash": "sha256:5a39d884ca1bdfa92fe0568bc4b11f8164ed3b50ed783378becec0c18147d946"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:4207679fe2ede1a951b1882e62a22d8d915b1442dc5d1e1f62925d16cb6422e0",
+      "symbol": "Unit",
+      "symbol_hash": "sha256:82eeceb9e427512d5ed45c6139c5fb92859289547ded26e7e410b3be3f591b70"
+    },
+    {
+      "body_hash": "sha256:2c90d8b6a6e407cf5919aa4be628204f8dbdeba19539303f86d2ba56ab41a6bf",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:d4f677f2c249499bd341314182b551f8f784d9d00f8df315ddb9f1d3fec321e6",
+      "symbol": "Unit.L2M3",
+      "symbol_hash": "sha256:91d7c58294dae00c815dbf158fb57990500db567405a7b2c31350eef60ea7102"
+    },
+    {
+      "body_hash": "sha256:2c90d8b6a6e407cf5919aa4be628204f8dbdeba19539303f86d2ba56ab41a6bf",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:6c5322fba5eeccac01411c863db5421b2ed98765a307fea5b69e2f6878f511ff",
+      "symbol": "Unit.MM2M",
+      "symbol_hash": "sha256:4f90e5dec4746b485bf2d2b35f73b00ca8b742d8ca1babed858dc04fddc01e69"
+    },
+    {
+      "body_hash": "sha256:d3c3cec052dae85942a722526911012da69bf59aca87bc1229bfbc27211abdd1",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:c28ce3b1d369b3c8be93fbedc29a75951029b8485d3b7885f43e46eb817efdb1",
+      "symbol": "Unit.NONE2PRC",
+      "symbol_hash": "sha256:743aa08ade92de4311700e7e29b0bcfd084735a36520906bec9e74acd373c31a"
+    },
+    {
+      "body_hash": "sha256:d2dff8ba2e3305a55a5cfcb7f170272f46ce3773420fc2094c6eb318b178a722",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:de430edab58a6cacc63b7c0d76b68d49302e7dc3217bd6b45da3db4369a05219",
+      "symbol": "Unit.PRC2NONE",
+      "symbol_hash": "sha256:48e9d7619e573e8c55d44bbd640558260c077144a4b24fe384a91b7c433e6306"
+    },
+    {
+      "body_hash": "sha256:2c90d8b6a6e407cf5919aa4be628204f8dbdeba19539303f86d2ba56ab41a6bf",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:f9130ac841cd7644647450db8a07fc69eaa4ace7594cd4f0ebb0ed6af610dbf8",
+      "symbol": "Unit.W2KW",
+      "symbol_hash": "sha256:f00a14847f11df61238d82b56c9a31ecc8453877c7bda1eb12fbe13573f0f3eb"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "path": "src/idragon/constants.py",
+    "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+  }
+}
