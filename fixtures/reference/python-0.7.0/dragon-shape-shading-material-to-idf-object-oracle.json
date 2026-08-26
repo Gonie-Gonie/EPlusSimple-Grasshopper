@@ -1,0 +1,1749 @@
+{
+  "cases": [
+    {
+      "executor": "shading-material-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-shading-material-idf-assembly",
+        "outcome": "returned"
+      },
+      "id": "dragon-shape-shading-material-to-idf-object.blind.alternate-values",
+      "python": {
+        "facts": {
+          "constructor_context": {
+            "input_identity_preserved": true,
+            "parameter_order": [
+              "name",
+              "slat_width",
+              "slat_separation",
+              "slat_angle",
+              "front_reflectance",
+              "back_reflectance"
+            ],
+            "returned": true,
+            "state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "alternate blind"
+                }
+              },
+              {
+                "name": "slat_width",
+                "value": {
+                  "hex": "0x1.0000000000000p-5",
+                  "kind": "float",
+                  "repr": "0.03125"
+                }
+              },
+              {
+                "name": "slat_separation",
+                "value": {
+                  "hex": "0x1.0000000000000p-4",
+                  "kind": "float",
+                  "repr": "0.0625"
+                }
+              },
+              {
+                "name": "slat_angle",
+                "value": {
+                  "hex": "0x1.0e00000000000p+7",
+                  "kind": "float",
+                  "repr": "135.0"
+                }
+              },
+              {
+                "name": "front_reflectance",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              },
+              {
+                "name": "back_reflectance",
+                "value": {
+                  "hex": "0x1.8000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.75"
+                }
+              }
+            ],
+            "state_unchanged_after_two_emissions": true
+          },
+          "emission": {
+            "first_object_type": "WindowMaterial:Blind",
+            "fresh_idf_object": true,
+            "fresh_result_list": true,
+            "object_count": 1,
+            "ordered_fields": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "alternate blind"
+                }
+              },
+              {
+                "name": "Slat Orientation",
+                "value": {
+                  "kind": "str",
+                  "value": "Horizontal"
+                }
+              },
+              {
+                "name": "Slat Width",
+                "value": {
+                  "hex": "0x1.0000000000000p-5",
+                  "kind": "float",
+                  "repr": "0.03125"
+                }
+              },
+              {
+                "name": "Slat Separation",
+                "value": {
+                  "hex": "0x1.0000000000000p-4",
+                  "kind": "float",
+                  "repr": "0.0625"
+                }
+              },
+              {
+                "name": "Slat Thickness",
+                "value": {
+                  "hex": "0x1.0624dd2f1a9fcp-12",
+                  "kind": "float",
+                  "repr": "0.00025"
+                }
+              },
+              {
+                "name": "Slat Angle",
+                "value": {
+                  "hex": "0x1.0e00000000000p+7",
+                  "kind": "float",
+                  "repr": "135.0"
+                }
+              },
+              {
+                "name": "Slat Conductivity",
+                "value": {
+                  "hex": "0x1.ba00000000000p+7",
+                  "kind": "float",
+                  "repr": "221.0"
+                }
+              },
+              {
+                "name": "Slat Beam Solar Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Beam Solar Reflectance",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              },
+              {
+                "name": "Back Side Slat Beam Solar Reflectance",
+                "value": {
+                  "hex": "0x1.8000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.75"
+                }
+              },
+              {
+                "name": "Slat Diffuse Solar Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Diffuse Solar Reflectance",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              },
+              {
+                "name": "Back Side Slat Diffuse Solar Reflectance",
+                "value": {
+                  "hex": "0x1.8000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.75"
+                }
+              },
+              {
+                "name": "Slat Beam Visible Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Beam Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Back Side Slat Beam Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Slat Diffuse Visible Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Diffuse Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Back Side Slat Diffuse Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Slat Infrared Hemispherical Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Infrared Hemispherical Emissivity",
+                "value": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                }
+              },
+              {
+                "name": "Back Side Slat Infrared Hemispherical Emissivity",
+                "value": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                }
+              },
+              {
+                "name": "Blind to Glass Distance",
+                "value": {
+                  "hex": "0x1.999999999999ap-5",
+                  "kind": "float",
+                  "repr": "0.05"
+                }
+              },
+              {
+                "name": "Blind Top Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Blind Bottom Opening Multiplier",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Blind Left Side Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Blind Right Side Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Minimum Slat Angle",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Maximum Slat Angle",
+                "value": {
+                  "hex": "0x1.6800000000000p+7",
+                  "kind": "float",
+                  "repr": "180.0"
+                }
+              }
+            ],
+            "result_type": "list",
+            "same_idd_definition": true,
+            "second_fields_equal": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Blind.to_idf_object"
+    },
+    {
+      "executor": "shading-material-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-shading-material-idf-assembly",
+        "outcome": "constructor-rejected"
+      },
+      "id": "dragon-shape-shading-material-to-idf-object.blind.permissive-invalid-state",
+      "python": {
+        "facts": {
+          "constructor_context": {
+            "input_identity_preserved": true,
+            "parameter_order": [
+              "name",
+              "slat_width",
+              "slat_separation",
+              "slat_angle",
+              "front_reflectance",
+              "back_reflectance"
+            ],
+            "returned": true,
+            "state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "permissive blind"
+                }
+              },
+              {
+                "name": "slat_width",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "slat_separation",
+                "value": {
+                  "hex": "-0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "-0.5"
+                }
+              },
+              {
+                "name": "slat_angle",
+                "value": {
+                  "hex": "-0x1.6800000000000p+5",
+                  "kind": "float",
+                  "repr": "-45.0"
+                }
+              },
+              {
+                "name": "front_reflectance",
+                "value": {
+                  "hex": "0x1.4000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.25"
+                }
+              },
+              {
+                "name": "back_reflectance",
+                "value": {
+                  "hex": "-0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "-0.25"
+                }
+              }
+            ],
+            "state_unchanged_after_two_emissions": true
+          },
+          "emission": {
+            "first_object_type": "WindowMaterial:Blind",
+            "fresh_idf_object": true,
+            "fresh_result_list": true,
+            "object_count": 1,
+            "ordered_fields": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "permissive blind"
+                }
+              },
+              {
+                "name": "Slat Orientation",
+                "value": {
+                  "kind": "str",
+                  "value": "Horizontal"
+                }
+              },
+              {
+                "name": "Slat Width",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Slat Separation",
+                "value": {
+                  "hex": "-0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "-0.5"
+                }
+              },
+              {
+                "name": "Slat Thickness",
+                "value": {
+                  "hex": "0x1.0624dd2f1a9fcp-12",
+                  "kind": "float",
+                  "repr": "0.00025"
+                }
+              },
+              {
+                "name": "Slat Angle",
+                "value": {
+                  "hex": "-0x1.6800000000000p+5",
+                  "kind": "float",
+                  "repr": "-45.0"
+                }
+              },
+              {
+                "name": "Slat Conductivity",
+                "value": {
+                  "hex": "0x1.ba00000000000p+7",
+                  "kind": "float",
+                  "repr": "221.0"
+                }
+              },
+              {
+                "name": "Slat Beam Solar Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Beam Solar Reflectance",
+                "value": {
+                  "hex": "0x1.4000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.25"
+                }
+              },
+              {
+                "name": "Back Side Slat Beam Solar Reflectance",
+                "value": {
+                  "hex": "-0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "-0.25"
+                }
+              },
+              {
+                "name": "Slat Diffuse Solar Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Diffuse Solar Reflectance",
+                "value": {
+                  "hex": "0x1.4000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.25"
+                }
+              },
+              {
+                "name": "Back Side Slat Diffuse Solar Reflectance",
+                "value": {
+                  "hex": "-0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "-0.25"
+                }
+              },
+              {
+                "name": "Slat Beam Visible Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Beam Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Back Side Slat Beam Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Slat Diffuse Visible Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Diffuse Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Back Side Slat Diffuse Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Slat Infrared Hemispherical Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Infrared Hemispherical Emissivity",
+                "value": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                }
+              },
+              {
+                "name": "Back Side Slat Infrared Hemispherical Emissivity",
+                "value": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                }
+              },
+              {
+                "name": "Blind to Glass Distance",
+                "value": {
+                  "hex": "0x1.999999999999ap-5",
+                  "kind": "float",
+                  "repr": "0.05"
+                }
+              },
+              {
+                "name": "Blind Top Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Blind Bottom Opening Multiplier",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Blind Left Side Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Blind Right Side Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Minimum Slat Angle",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Maximum Slat Angle",
+                "value": {
+                  "hex": "0x1.6800000000000p+7",
+                  "kind": "float",
+                  "repr": "180.0"
+                }
+              }
+            ],
+            "result_type": "list",
+            "same_idd_definition": true,
+            "second_fields_equal": true
+          },
+          "input_conditions": {
+            "angle_in_native_range": true,
+            "dimensions_positive": false,
+            "reflectances_in_unit_interval": false
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Blind.to_idf_object"
+    },
+    {
+      "executor": "shading-material-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-shading-material-idf-assembly",
+        "outcome": "returned"
+      },
+      "id": "dragon-shape-shading-material-to-idf-object.blind.representative-fields-and-freshness",
+      "python": {
+        "facts": {
+          "constructor_context": {
+            "input_identity_preserved": true,
+            "parameter_order": [
+              "name",
+              "slat_width",
+              "slat_separation",
+              "slat_angle",
+              "front_reflectance",
+              "back_reflectance"
+            ],
+            "returned": true,
+            "state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "representative blind"
+                }
+              },
+              {
+                "name": "slat_width",
+                "value": {
+                  "hex": "0x1.999999999999ap-5",
+                  "kind": "float",
+                  "repr": "0.05"
+                }
+              },
+              {
+                "name": "slat_separation",
+                "value": {
+                  "hex": "0x1.47ae147ae147bp-5",
+                  "kind": "float",
+                  "repr": "0.04"
+                }
+              },
+              {
+                "name": "slat_angle",
+                "value": {
+                  "hex": "0x1.6800000000000p+5",
+                  "kind": "float",
+                  "repr": "45.0"
+                }
+              },
+              {
+                "name": "front_reflectance",
+                "value": {
+                  "hex": "0x1.3333333333333p-1",
+                  "kind": "float",
+                  "repr": "0.6"
+                }
+              },
+              {
+                "name": "back_reflectance",
+                "value": {
+                  "hex": "0x1.999999999999ap-2",
+                  "kind": "float",
+                  "repr": "0.4"
+                }
+              }
+            ],
+            "state_unchanged_after_two_emissions": true
+          },
+          "emission": {
+            "first_object_type": "WindowMaterial:Blind",
+            "fresh_idf_object": true,
+            "fresh_result_list": true,
+            "object_count": 1,
+            "ordered_fields": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "representative blind"
+                }
+              },
+              {
+                "name": "Slat Orientation",
+                "value": {
+                  "kind": "str",
+                  "value": "Horizontal"
+                }
+              },
+              {
+                "name": "Slat Width",
+                "value": {
+                  "hex": "0x1.999999999999ap-5",
+                  "kind": "float",
+                  "repr": "0.05"
+                }
+              },
+              {
+                "name": "Slat Separation",
+                "value": {
+                  "hex": "0x1.47ae147ae147bp-5",
+                  "kind": "float",
+                  "repr": "0.04"
+                }
+              },
+              {
+                "name": "Slat Thickness",
+                "value": {
+                  "hex": "0x1.0624dd2f1a9fcp-12",
+                  "kind": "float",
+                  "repr": "0.00025"
+                }
+              },
+              {
+                "name": "Slat Angle",
+                "value": {
+                  "hex": "0x1.6800000000000p+5",
+                  "kind": "float",
+                  "repr": "45.0"
+                }
+              },
+              {
+                "name": "Slat Conductivity",
+                "value": {
+                  "hex": "0x1.ba00000000000p+7",
+                  "kind": "float",
+                  "repr": "221.0"
+                }
+              },
+              {
+                "name": "Slat Beam Solar Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Beam Solar Reflectance",
+                "value": {
+                  "hex": "0x1.3333333333333p-1",
+                  "kind": "float",
+                  "repr": "0.6"
+                }
+              },
+              {
+                "name": "Back Side Slat Beam Solar Reflectance",
+                "value": {
+                  "hex": "0x1.999999999999ap-2",
+                  "kind": "float",
+                  "repr": "0.4"
+                }
+              },
+              {
+                "name": "Slat Diffuse Solar Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Diffuse Solar Reflectance",
+                "value": {
+                  "hex": "0x1.3333333333333p-1",
+                  "kind": "float",
+                  "repr": "0.6"
+                }
+              },
+              {
+                "name": "Back Side Slat Diffuse Solar Reflectance",
+                "value": {
+                  "hex": "0x1.999999999999ap-2",
+                  "kind": "float",
+                  "repr": "0.4"
+                }
+              },
+              {
+                "name": "Slat Beam Visible Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Beam Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Back Side Slat Beam Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Slat Diffuse Visible Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Diffuse Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Back Side Slat Diffuse Visible Reflectance",
+                "value": {
+                  "kind": "none"
+                }
+              },
+              {
+                "name": "Slat Infrared Hemispherical Transmittance",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Front Side Slat Infrared Hemispherical Emissivity",
+                "value": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                }
+              },
+              {
+                "name": "Back Side Slat Infrared Hemispherical Emissivity",
+                "value": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                }
+              },
+              {
+                "name": "Blind to Glass Distance",
+                "value": {
+                  "hex": "0x1.999999999999ap-5",
+                  "kind": "float",
+                  "repr": "0.05"
+                }
+              },
+              {
+                "name": "Blind Top Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Blind Bottom Opening Multiplier",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Blind Left Side Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Blind Right Side Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Minimum Slat Angle",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "name": "Maximum Slat Angle",
+                "value": {
+                  "hex": "0x1.6800000000000p+7",
+                  "kind": "float",
+                  "repr": "180.0"
+                }
+              }
+            ],
+            "result_type": "list",
+            "same_idd_definition": true,
+            "second_fields_equal": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Blind.to_idf_object"
+    },
+    {
+      "executor": "shading-material-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-shading-material-idf-assembly",
+        "outcome": "returned"
+      },
+      "id": "dragon-shape-shading-material-to-idf-object.shade.alternate-values",
+      "python": {
+        "facts": {
+          "constructor_context": {
+            "input_identity_preserved": true,
+            "parameter_order": [
+              "name",
+              "transmittance",
+              "reflectance"
+            ],
+            "returned": true,
+            "state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "alternate shade"
+                }
+              },
+              {
+                "name": "transmittance",
+                "value": {
+                  "hex": "0x1.0000000000000p-3",
+                  "kind": "float",
+                  "repr": "0.125"
+                }
+              },
+              {
+                "name": "reflectance",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              }
+            ],
+            "state_unchanged_after_two_emissions": true
+          },
+          "emission": {
+            "first_object_type": "WindowMaterial:Shade",
+            "fresh_idf_object": true,
+            "fresh_result_list": true,
+            "object_count": 1,
+            "ordered_fields": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "alternate shade"
+                }
+              },
+              {
+                "name": "Solar Transmittance",
+                "value": {
+                  "hex": "0x1.0000000000000p-3",
+                  "kind": "float",
+                  "repr": "0.125"
+                }
+              },
+              {
+                "name": "Solar Reflectance",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              },
+              {
+                "name": "Visible Transmittance",
+                "value": {
+                  "hex": "0x1.0000000000000p-3",
+                  "kind": "float",
+                  "repr": "0.125"
+                }
+              },
+              {
+                "name": "Visible Reflectance",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              },
+              {
+                "name": "Infrared Hemispherical Emissivity",
+                "value": {
+                  "hex": "0x1.4000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.625"
+                }
+              },
+              {
+                "name": "Infrared Transmittance",
+                "value": {
+                  "hex": "0x1.0000000000000p-3",
+                  "kind": "float",
+                  "repr": "0.125"
+                }
+              },
+              {
+                "name": "Thickness",
+                "value": {
+                  "hex": "0x1.47ae147ae147bp-7",
+                  "kind": "float",
+                  "repr": "0.01"
+                }
+              },
+              {
+                "name": "Conductivity",
+                "value": {
+                  "hex": "0x1.9000000000000p+6",
+                  "kind": "float",
+                  "repr": "100.0"
+                }
+              },
+              {
+                "name": "Shade to Glass Distance",
+                "value": {
+                  "hex": "0x1.999999999999ap-5",
+                  "kind": "float",
+                  "repr": "0.05"
+                }
+              },
+              {
+                "name": "Top Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Bottom Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Left-Side Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Right-Side Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Airflow Permeability",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              }
+            ],
+            "result_type": "list",
+            "same_idd_definition": true,
+            "second_fields_equal": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Shade.to_idf_object"
+    },
+    {
+      "executor": "shading-material-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-shading-material-idf-assembly",
+        "outcome": "constructor-rejected"
+      },
+      "id": "dragon-shape-shading-material-to-idf-object.shade.permissive-invalid-and-type-failure",
+      "python": {
+        "facts": {
+          "nonnumeric_state": [
+            {
+              "name": "name",
+              "value": {
+                "kind": "str",
+                "value": "nonnumeric shade"
+              }
+            },
+            {
+              "name": "transmittance",
+              "value": {
+                "kind": "str",
+                "value": "opaque"
+              }
+            },
+            {
+              "name": "reflectance",
+              "value": {
+                "hex": "0x1.999999999999ap-4",
+                "kind": "float",
+                "repr": "0.1"
+              }
+            }
+          ],
+          "nonnumeric_to_idf": {
+            "args": [
+              "unsupported operand type(s) for -: 'int' and 'str'"
+            ],
+            "message": "unsupported operand type(s) for -: 'int' and 'str'",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "numeric_input_conditions": {
+            "components_in_unit_interval": true,
+            "sum_not_greater_than_one": false
+          },
+          "numeric_permissive_emission": {
+            "constructor_context": {
+              "input_identity_preserved": true,
+              "parameter_order": [
+                "name",
+                "transmittance",
+                "reflectance"
+              ],
+              "returned": true,
+              "state": [
+                {
+                  "name": "name",
+                  "value": {
+                    "kind": "str",
+                    "value": "permissive shade"
+                  }
+                },
+                {
+                  "name": "transmittance",
+                  "value": {
+                    "hex": "0x1.999999999999ap-1",
+                    "kind": "float",
+                    "repr": "0.8"
+                  }
+                },
+                {
+                  "name": "reflectance",
+                  "value": {
+                    "hex": "0x1.999999999999ap-2",
+                    "kind": "float",
+                    "repr": "0.4"
+                  }
+                }
+              ],
+              "state_unchanged_after_two_emissions": true
+            },
+            "emission": {
+              "first_object_type": "WindowMaterial:Shade",
+              "fresh_idf_object": true,
+              "fresh_result_list": true,
+              "object_count": 1,
+              "ordered_fields": [
+                {
+                  "name": "Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "permissive shade"
+                  }
+                },
+                {
+                  "name": "Solar Transmittance",
+                  "value": {
+                    "hex": "0x1.999999999999ap-1",
+                    "kind": "float",
+                    "repr": "0.8"
+                  }
+                },
+                {
+                  "name": "Solar Reflectance",
+                  "value": {
+                    "hex": "0x1.999999999999ap-2",
+                    "kind": "float",
+                    "repr": "0.4"
+                  }
+                },
+                {
+                  "name": "Visible Transmittance",
+                  "value": {
+                    "hex": "0x1.999999999999ap-1",
+                    "kind": "float",
+                    "repr": "0.8"
+                  }
+                },
+                {
+                  "name": "Visible Reflectance",
+                  "value": {
+                    "hex": "0x1.999999999999ap-2",
+                    "kind": "float",
+                    "repr": "0.4"
+                  }
+                },
+                {
+                  "name": "Infrared Hemispherical Emissivity",
+                  "value": {
+                    "hex": "-0x1.999999999999cp-3",
+                    "kind": "float",
+                    "repr": "-0.20000000000000007"
+                  }
+                },
+                {
+                  "name": "Infrared Transmittance",
+                  "value": {
+                    "hex": "0x1.999999999999ap-1",
+                    "kind": "float",
+                    "repr": "0.8"
+                  }
+                },
+                {
+                  "name": "Thickness",
+                  "value": {
+                    "hex": "0x1.47ae147ae147bp-7",
+                    "kind": "float",
+                    "repr": "0.01"
+                  }
+                },
+                {
+                  "name": "Conductivity",
+                  "value": {
+                    "hex": "0x1.9000000000000p+6",
+                    "kind": "float",
+                    "repr": "100.0"
+                  }
+                },
+                {
+                  "name": "Shade to Glass Distance",
+                  "value": {
+                    "hex": "0x1.999999999999ap-5",
+                    "kind": "float",
+                    "repr": "0.05"
+                  }
+                },
+                {
+                  "name": "Top Opening Multiplier",
+                  "value": {
+                    "hex": "0x1.0000000000000p-1",
+                    "kind": "float",
+                    "repr": "0.5"
+                  }
+                },
+                {
+                  "name": "Bottom Opening Multiplier",
+                  "value": {
+                    "hex": "0x1.0000000000000p-1",
+                    "kind": "float",
+                    "repr": "0.5"
+                  }
+                },
+                {
+                  "name": "Left-Side Opening Multiplier",
+                  "value": {
+                    "hex": "0x1.0000000000000p-1",
+                    "kind": "float",
+                    "repr": "0.5"
+                  }
+                },
+                {
+                  "name": "Right-Side Opening Multiplier",
+                  "value": {
+                    "hex": "0x1.0000000000000p-1",
+                    "kind": "float",
+                    "repr": "0.5"
+                  }
+                },
+                {
+                  "name": "Airflow Permeability",
+                  "value": {
+                    "hex": "0x0.0p+0",
+                    "kind": "float",
+                    "repr": "0.0"
+                  }
+                }
+              ],
+              "result_type": "list",
+              "same_idd_definition": true,
+              "second_fields_equal": true
+            }
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Shade.to_idf_object"
+    },
+    {
+      "executor": "shading-material-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-shading-material-idf-assembly",
+        "outcome": "returned"
+      },
+      "id": "dragon-shape-shading-material-to-idf-object.shade.representative-fields-and-freshness",
+      "python": {
+        "facts": {
+          "constructor_context": {
+            "input_identity_preserved": true,
+            "parameter_order": [
+              "name",
+              "transmittance",
+              "reflectance"
+            ],
+            "returned": true,
+            "state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "representative shade"
+                }
+              },
+              {
+                "name": "transmittance",
+                "value": {
+                  "hex": "0x1.999999999999ap-3",
+                  "kind": "float",
+                  "repr": "0.2"
+                }
+              },
+              {
+                "name": "reflectance",
+                "value": {
+                  "hex": "0x1.3333333333333p-2",
+                  "kind": "float",
+                  "repr": "0.3"
+                }
+              }
+            ],
+            "state_unchanged_after_two_emissions": true
+          },
+          "emission": {
+            "first_object_type": "WindowMaterial:Shade",
+            "fresh_idf_object": true,
+            "fresh_result_list": true,
+            "object_count": 1,
+            "ordered_fields": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "representative shade"
+                }
+              },
+              {
+                "name": "Solar Transmittance",
+                "value": {
+                  "hex": "0x1.999999999999ap-3",
+                  "kind": "float",
+                  "repr": "0.2"
+                }
+              },
+              {
+                "name": "Solar Reflectance",
+                "value": {
+                  "hex": "0x1.3333333333333p-2",
+                  "kind": "float",
+                  "repr": "0.3"
+                }
+              },
+              {
+                "name": "Visible Transmittance",
+                "value": {
+                  "hex": "0x1.999999999999ap-3",
+                  "kind": "float",
+                  "repr": "0.2"
+                }
+              },
+              {
+                "name": "Visible Reflectance",
+                "value": {
+                  "hex": "0x1.3333333333333p-2",
+                  "kind": "float",
+                  "repr": "0.3"
+                }
+              },
+              {
+                "name": "Infrared Hemispherical Emissivity",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Infrared Transmittance",
+                "value": {
+                  "hex": "0x1.999999999999ap-3",
+                  "kind": "float",
+                  "repr": "0.2"
+                }
+              },
+              {
+                "name": "Thickness",
+                "value": {
+                  "hex": "0x1.47ae147ae147bp-7",
+                  "kind": "float",
+                  "repr": "0.01"
+                }
+              },
+              {
+                "name": "Conductivity",
+                "value": {
+                  "hex": "0x1.9000000000000p+6",
+                  "kind": "float",
+                  "repr": "100.0"
+                }
+              },
+              {
+                "name": "Shade to Glass Distance",
+                "value": {
+                  "hex": "0x1.999999999999ap-5",
+                  "kind": "float",
+                  "repr": "0.05"
+                }
+              },
+              {
+                "name": "Top Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Bottom Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Left-Side Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Right-Side Opening Multiplier",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "Airflow Permeability",
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              }
+            ],
+            "result_type": "list",
+            "same_idd_definition": true,
+            "second_fields_equal": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Shade.to_idf_object"
+    }
+  ],
+  "cases_sha256": "sha256:e577eebfb5c6ad65670bc3ae9624d77eec2d2f3e21d0d518c25f78cde2459f92",
+  "consumer_contract": {
+    "adaptations": {
+      "Blind.to_idf_object": "model-context-shading-material-idf-assembly",
+      "Shade.to_idf_object": "model-context-shading-material-idf-assembly"
+    },
+    "assertion_ids": {
+      "Blind.to_idf_object": "dragon-shape-blind-to-idf-object-16e27412",
+      "Shade.to_idf_object": "dragon-shape-shade-to-idf-object-75e6c8e6"
+    },
+    "case_count": 6,
+    "case_ids": [
+      "dragon-shape-shading-material-to-idf-object.blind.alternate-values",
+      "dragon-shape-shading-material-to-idf-object.blind.permissive-invalid-state",
+      "dragon-shape-shading-material-to-idf-object.blind.representative-fields-and-freshness",
+      "dragon-shape-shading-material-to-idf-object.shade.alternate-values",
+      "dragon-shape-shading-material-to-idf-object.shade.permissive-invalid-and-type-failure",
+      "dragon-shape-shading-material-to-idf-object.shade.representative-fields-and-freshness"
+    ],
+    "classifications": {
+      "Blind.to_idf_object": "exception",
+      "Shade.to_idf_object": "exception"
+    },
+    "closure": {
+      "context_only_not_targeted": [
+        "Blind",
+        "Blind.__init__",
+        "Shade",
+        "Shade.__init__",
+        "Shading",
+        "IdfObject",
+        "IdfObject.__init__",
+        "isolated-IdfObject-validation-policy"
+      ],
+      "full_symbol_closure": false,
+      "scope": "bounded-valid-state-shading-material-emission-with-validation-context",
+      "unresolved_behavior": [
+        "standalone-shading-material-converter-API-shape",
+        "invalid-or-nonnumeric-state-native-emission",
+        "Surface",
+        "Surface.blinded_window",
+        "Surface.to_idf_object",
+        "Window",
+        "Window.__init__",
+        "WindowShadingControl-emission",
+        "EnergyModel.to_idf"
+      ]
+    },
+    "identity_encoding": "booleans-only-no-id-or-address",
+    "native_targets": {
+      "Blind.to_idf_object": "EnergyModel.ToIdfDocument",
+      "Shade.to_idf_object": "EnergyModel.ToIdfDocument"
+    },
+    "source_import_policy": "external-temporary-copy-with-complete-loaded-local-module-audit",
+    "target_symbols": [
+      "Blind.to_idf_object",
+      "Shade.to_idf_object"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-shape-shading-material-to-idf-object.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:dbdfe63eb69145e34565287fea0891f7bafaeb23b5a147b7f8d6799a8f6b652b",
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:aad6529bd53e6b00992b78af16eec99debb2fe8c83c692755dbdc772c8094008",
+      "symbol": "Blind.to_idf_object",
+      "symbol_hash": "sha256:16e274127d87265296d229708222d131dbf0885a06196f088f42ade37e18b231"
+    },
+    {
+      "body_hash": "sha256:db351161de65aa88fe02fa9488fdab4ca99c8f8643ff18479fcd91e63de71ef9",
+      "kind": "function",
+      "path": "src/idragon/dragon/shape.py",
+      "signature_hash": "sha256:aad6529bd53e6b00992b78af16eec99debb2fe8c83c692755dbdc772c8094008",
+      "symbol": "Shade.to_idf_object",
+      "symbol_hash": "sha256:75e6c8e673fc64d8f7966286fd2094b4d958b170903af6413f91b92ce095d66c"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "loaded_local_modules": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "module": "idragon",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "module": "idragon.common",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "module": "idragon.constants",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "module": "idragon.dragon",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "module": "idragon.dragon.construction",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "module": "idragon.dragon.hvac",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "module": "idragon.dragon.model",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "module": "idragon.dragon.profile",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "module": "idragon.dragon.shape",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "module": "idragon.imugi",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "module": "idragon.launcher",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "module": "idragon.utils",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ],
+    "sources": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ]
+  }
+}
