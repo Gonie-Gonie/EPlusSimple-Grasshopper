@@ -64,7 +64,22 @@ adaptation, and source identity de-duplication uses
 are exact equivalents on the native valid domain. All twelve loaded local
 modules carry exact source and Python 3.12 AST receipts. The `SupplyGroup` class
 receipt, `SupplyGroup.to_idf_object`, concrete systems, postprocessors, and full
-model IDF assembly remain outside this bounded corpus.
+model IDF assembly remain outside this core corpus.
+
+`python-0.7.0/dragon-hvac-supply-group-to-idf-object-oracle.json` pins three
+ordered CPython 3.12.7 observations for the bounded orchestration performed by
+`SupplyGroup.to_idf_object`: system/availability zip order, heatability before
+coolability reads, aligned availability identity, flattened object and
+processor order, immediate custom-availability conversion, and a fresh
+`SequentialLoadFractionController` in the final processor position. Separate
+system- and availability-failure cases preserve exact prefix side effects and
+failure order. The reviewed `model-context-supply-group-idf-assembly` exception
+maps this evidence only to `EnergyModel.ToIdfDocument` under assertion
+`dragon-hvac-supply-group-to-idf-object-3f9c508c`. It does not claim a
+standalone native SupplyGroup converter, `SupplySystem.to_idf_object`,
+`SourceSystem.to_idf_object`, the controller class or its `run` behavior,
+concrete converters, arbitrary probe acceptance, or full `EnergyModel.to_idf`
+compatibility.
 
 `python-0.7.0/dragon-model-add-supply-system-oracle.json` pins three ordered
 CPython 3.12.7 observations for `EnergyModel.add_supply_system`: generation

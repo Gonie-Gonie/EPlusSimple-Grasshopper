@@ -58,6 +58,11 @@
       "sha256": "320ac62b8b9eccc9d4053a6b5ceb6fa3e825c329d1ac3d10f4c8c5cd89f0c092"
     },
     {
+      "path": "dragon-hvac-supply-group-to-idf-object-oracle.json",
+      "bytes": 22608,
+      "sha256": "f1c3454cdf34eed1a47180b13bacab2dadf04a06883a34c214738ed6ef50a608"
+    },
+    {
       "path": "dragon-model-add-supply-system-oracle.json",
       "bytes": 15122,
       "sha256": "4896c54312c44bffc573d0dc4d0fddfff14d17b0c65a3f789b8f6a487e1f181c"
