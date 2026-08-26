@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:25cb62380522759f99805b129606468385bcd6c4b501f56399877b48f0516cde"
+    "sha256:e58c95d8007d0e5c941f7519cdf34548d0267cffbbf2305c0fcbb759006769e5"
 )
 
 
@@ -69,8 +69,8 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(
             {
                 "equivalent": 133,
-                "exception": 122,
-                "needs_reverification": 735,
+                "exception": 127,
+                "needs_reverification": 730,
                 "out_of_scope": 252,
             },
             plan.classification_counts,

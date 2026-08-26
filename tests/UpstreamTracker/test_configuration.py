@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(735, len(compatibility.needs_reverification))
+        self.assertEqual(730, len(compatibility.needs_reverification))
         self.assertEqual(
             133,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            122,
+            127,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -64,6 +64,50 @@ class ConfigurationTests(unittest.TestCase):
         )
 
         by_key = compatibility.matrix.entries_by_key
+        expected_construction_family = {
+            "AirBoundary.to_idf_object": (
+                592,
+                "model-context-air-boundary-idf-emission",
+                "dragon-construction-air-boundary-to-idf-object-639a205f",
+            ),
+            "Construction.to_idf_object": (
+                601,
+                "model-context-construction-idf-emission",
+                "dragon-construction-construction-to-idf-object-71a76f27",
+            ),
+            "Glazing.to_idf_object": (
+                608,
+                "model-context-glazing-idf-emission",
+                "dragon-construction-glazing-to-idf-object-3350beaf",
+            ),
+            "Layer.to_idf_object": (
+                617,
+                "model-context-layer-idf-emission",
+                "dragon-construction-layer-to-idf-object-66e6d458",
+            ),
+            "NoMassConstruction.to_idf_object": (
+                640,
+                "model-context-no-mass-construction-idf-emission",
+                "dragon-construction-no-mass-construction-to-idf-object-2bc3fe98",
+            ),
+        }
+        for symbol, (index, exception_id, assertion_id) in (
+            expected_construction_family.items()
+        ):
+            key = ("src/idragon/dragon/construction.py", symbol)
+            entry = by_key[key]
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual(entry, compatibility.matrix.entries[index], symbol)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            self.assertEqual(
+                (
+                    f"upstream/compatibility-exceptions.yml#{exception_id}",
+                    f"upstream/symbol-evidence.json#{assertion_id}",
+                ),
+                entry.evidence,
+                symbol,
+            )
         api_entries = [
             entry
             for entry in compatibility.matrix.entries

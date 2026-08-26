@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:fcc207773e60363a18f22995543f8a417843a1af719a229830ea0399af3b66fd",
+  "content_sha256": "sha256:294de00b52cff531583a80b1ee1d0b684aa42486cbc9132dedb2afd2a1a41080",
   "entries": [
     {
       "implementation": {
@@ -913,6 +913,32 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendSurfaceConstruction"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify AirBoundary.to_idf_object across its exact two-case bounded common valid slice through EnergyModel.ToIdfDocument and the private construction mapper. The upstream complete count [4] and native compact count [3] preserve the name, SimpleMixing token and exact ACH value while exhaustively classifying the one trailing Python None schedule as a compact omission with no official-default omission. Host-surface linkage, two-call freshness and determinism, source-graph immutability and official EnergyPlus 24.2 IDD topology are verified without claiming standalone mutable-list shape, class or constructor closure, invalid behavior, IdfObject policy, parent converters, global order, deduplication or conflicts.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9df727e95563dfd5acefcab4e6b398371c22d600a2db8266af9e82dc30a8210f",
+          "id": "dragon-construction-air-boundary-to-idf-object-639a205f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ConstructionFamilyIdfOracleParityTests.cs",
+          "test_source_sha256": "sha256:10fc1f60fd44900f7752e37a022a7a94dfabd60780eeb1aad8316f1f5948932d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ConstructionFamilyIdfOracleParityTests.MatchesPinnedPythonConstructionFamilyEmissionThroughFreshEnergyModels",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "AirBoundary.to_idf_object",
+      "upstream_symbol_hash": "sha256:639a205f5c73ed6febc52735b33521b20dbeb644fcc4fd6ac2e148439c4e9545"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
         "source_sha256": "sha256:dde94beae39d1ba272e735c3e0738a405fada13e6884a10dd8190f030a1f80df",
         "symbol": "GonieGonie.InvisibleDragon.Construction.Construction.Equals"
@@ -962,6 +988,58 @@
       ],
       "symbol": "Construction.__hash__",
       "upstream_symbol_hash": "sha256:5994dd14a598a335d7945a1e39b59d93fd6bed9afbaff1308019b57bf22d0889"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendSurfaceConstruction"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Construction.to_idf_object across its exact one-layer and three-layer bounded common valid cases through EnergyModel.ToIdfDocument and the private construction mapper. The upstream complete count [11] maps to native compact counts [2] and [4], preserving the surface-scoped construction name and exact ordered layer references while exhaustively classifying nine and seven trailing Python None fields as compact omissions with no official-default omission. Host-surface linkage, two-call freshness and determinism, source-graph immutability and official EnergyPlus 24.2 IDD topology are verified without claiming standalone surface-parameter or mutable-list shape, class closure, Layer child conversion, invalid behavior, parent converters, global order, deduplication or conflicts.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0e80e49abec13dc288c84669a836f923002b83cab2102b90eeeb4df819a2063c",
+          "id": "dragon-construction-construction-to-idf-object-71a76f27",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ConstructionFamilyIdfOracleParityTests.cs",
+          "test_source_sha256": "sha256:10fc1f60fd44900f7752e37a022a7a94dfabd60780eeb1aad8316f1f5948932d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ConstructionFamilyIdfOracleParityTests.MatchesPinnedPythonConstructionFamilyEmissionThroughFreshEnergyModels",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Construction.to_idf_object",
+      "upstream_symbol_hash": "sha256:71a76f27ebadf7476c2746f1634258a52b3f16bd19e01624d9ce3809afc37309"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendGlazing"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Glazing.to_idf_object across its exact two-case bounded common valid slice through EnergyModel.ToIdfDocument and the private glazing mapper. The upstream complete counts [4,11] and native compact counts [3,2] preserve all five present material and construction fields, exact U-factor and solar-gain values, and material-to-construction-to-fenestration linkage while exhaustively classifying all ten Python None fields as compact omissions with no official-default omission. Host-surface linkage, two-call freshness and determinism, source-graph immutability and official EnergyPlus 24.2 IDD topology are verified without claiming standalone mutable-list shape, class closure, invalid behavior, parent Window, Surface or Zone converters, global order, deduplication or conflicts.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:35ca9ce197c146fbb03bc1e9788ec14dfb315813c23d19ce937af5d517fa67eb",
+          "id": "dragon-construction-glazing-to-idf-object-3350beaf",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ConstructionFamilyIdfOracleParityTests.cs",
+          "test_source_sha256": "sha256:10fc1f60fd44900f7752e37a022a7a94dfabd60780eeb1aad8316f1f5948932d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ConstructionFamilyIdfOracleParityTests.MatchesPinnedPythonConstructionFamilyEmissionThroughFreshEnergyModels",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Glazing.to_idf_object",
+      "upstream_symbol_hash": "sha256:3350beafdd06d7e477a86dedc271f9e4e71452dafd3137dcd8e512f94f58d093"
     },
     {
       "implementation": {
@@ -1017,6 +1095,32 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendSurfaceConstruction"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Layer.to_idf_object across its exact two-case bounded common valid slice through EnergyModel.ToIdfDocument and the private construction mapper. Upstream and native both preserve all nine Material fields with zero omissions: name, roughness, exact thickness, conductivity, density and specific-heat values, plus fixed thermal, solar and visible absorptances. Material-to-scoped-construction-to-surface linkage, two-call freshness and determinism, source-graph immutability and official EnergyPlus 24.2 IDD topology are verified without claiming standalone raw-object shape, Layer or Material class closure, invalid behavior, parent Construction or Surface converters, global order, deduplication or conflicts.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a21692b8c28c79fed2945a15c64537b82a57aece1a0cbc6fa2e039b7e3a389f4",
+          "id": "dragon-construction-layer-to-idf-object-66e6d458",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ConstructionFamilyIdfOracleParityTests.cs",
+          "test_source_sha256": "sha256:10fc1f60fd44900f7752e37a022a7a94dfabd60780eeb1aad8316f1f5948932d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ConstructionFamilyIdfOracleParityTests.MatchesPinnedPythonConstructionFamilyEmissionThroughFreshEnergyModels",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Layer.to_idf_object",
+      "upstream_symbol_hash": "sha256:66e6d4589806a69db0d4023bcd6160f1e9a7079ed4aac3f3cb5f0839307fc884"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
         "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
         "symbol": "GonieGonie.InvisibleDragon.Construction.Material.Equals"
@@ -1040,6 +1144,32 @@
       ],
       "symbol": "Material.__eq__",
       "upstream_symbol_hash": "sha256:6ef680a2e300bcb56672f0d036de1b4aea3630cb90a635a3e45002ff8535dbf5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendSurfaceConstruction"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify NoMassConstruction.to_idf_object across its exact two-case bounded common valid slice through EnergyModel.ToIdfDocument and the private construction mapper. The upstream complete counts [6,11] and native compact counts [6,2] preserve all eight present material and construction fields, the Rough token, exact reciprocal-U resistance, fixed absorptances and material-to-construction-to-surface linkage while exhaustively classifying all nine Python None fields as compact omissions with no official-default omission. Two-call freshness and determinism, source-graph immutability and official EnergyPlus 24.2 IDD topology are verified without claiming standalone mutable-list shape, class or property closure, invalid or zero-U behavior, parent converters, global order, deduplication or conflicts.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1a6edabc9ac66ab0ddfaec232946f941185bea42588597e48902127e1effc70c",
+          "id": "dragon-construction-no-mass-construction-to-idf-object-2bc3fe98",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/ConstructionFamilyIdfOracleParityTests.cs",
+          "test_source_sha256": "sha256:10fc1f60fd44900f7752e37a022a7a94dfabd60780eeb1aad8316f1f5948932d",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.ConstructionFamilyIdfOracleParityTests.MatchesPinnedPythonConstructionFamilyEmissionThroughFreshEnergyModels",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "NoMassConstruction.to_idf_object",
+      "upstream_symbol_hash": "sha256:2bc3fe982f11770f5e4e23b97b52c608fc40f61d86d4d1afff00b0077626b096"
     },
     {
       "implementation": {
@@ -6635,9 +6765,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 255,
-    "passed_receipt_count": 255,
-    "receipt_count": 255,
+    "entry_count": 260,
+    "passed_receipt_count": 260,
+    "receipt_count": 260,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

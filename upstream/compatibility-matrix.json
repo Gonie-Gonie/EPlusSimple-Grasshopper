@@ -592,11 +592,43 @@
     "needs_reverification",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "exception",
     "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "exception",
+    "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "exception",
+    "needs_reverification",
+    "exception",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -608,39 +640,7 @@
     "needs_reverification",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
-    "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "out_of_scope",
-    "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:25cb62380522759f99805b129606468385bcd6c4b501f56399877b48f0516cde",
+  "content_sha256": "sha256:e58c95d8007d0e5c941f7519cdf34548d0267cffbbf2305c0fcbb759006769e5",
   "details": [
     {
       "evidence": [
@@ -2850,6 +2850,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-air-boundary-idf-emission",
+        "upstream/symbol-evidence.json#dragon-construction-air-boundary-to-idf-object-639a205f"
+      ],
+      "exception_id": "model-context-air-boundary-idf-emission",
+      "index": 592,
+      "rationale": "Trusted cross-language evidence verifies AirBoundary.to_idf_object across the exact two-case bounded common valid slice through the public EnergyModel route and private construction mapper: all three present fields, the exhaustive trailing None-to-compact-omission field, exact ACH values, SimpleMixing constant, host-surface linkage, freshness, determinism and source immutability. Standalone mutable-list shape, class and constructor contracts, invalid behavior, IdfObject policy, parent converters, global order, deduplication and conflicts remain separately unresolved."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#construction-equality-native-null-operand",
         "upstream/symbol-evidence.json#idragon-construction-equality-native-null-adaptation"
       ],
@@ -2868,6 +2877,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-construction-idf-emission",
+        "upstream/symbol-evidence.json#dragon-construction-construction-to-idf-object-71a76f27"
+      ],
+      "exception_id": "model-context-construction-idf-emission",
+      "index": 601,
+      "rationale": "Trusted cross-language evidence verifies Construction.to_idf_object across the exact one-layer and three-layer bounded common valid cases through the public EnergyModel route and private construction mapper: surface-scoped naming, ordered layer references, host linkage, all present fields, exhaustive nine-field and seven-field None omission tails, freshness, determinism and source immutability. Standalone surface-parameter and mutable-list shape, class contracts, Layer child conversion, invalid behavior, parent converters, global order, deduplication and conflicts remain separately unresolved."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-construction-py-glazing-repr-70c8d1bb"
       ],
       "index": 606,
@@ -2879,6 +2897,15 @@
       ],
       "index": 607,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-glazing-idf-emission",
+        "upstream/symbol-evidence.json#dragon-construction-glazing-to-idf-object-3350beaf"
+      ],
+      "exception_id": "model-context-glazing-idf-emission",
+      "index": 608,
+      "rationale": "Trusted cross-language evidence verifies Glazing.to_idf_object across the exact two-case bounded common valid slice through the public EnergyModel route and private glazing mapper: all five present material and construction fields, exact U-factor and solar-gain values, exhaustive ten-field None omission, complete material-to-construction-to-fenestration linkage, freshness, determinism and source immutability. Standalone mutable-list shape, class contracts, invalid behavior, parent Window, Surface and Zone converters, global order, deduplication and conflicts remain separately unresolved."
     },
     {
       "evidence": [
@@ -2897,6 +2924,15 @@
       "exception_id": "layer-hash-native-runtime-value",
       "index": 612,
       "rationale": "Trusted cross-language evidence verifies the name-only Layer hash dependency and the registered cross-runtime numeric-hash adaptation."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-layer-idf-emission",
+        "upstream/symbol-evidence.json#dragon-construction-layer-to-idf-object-66e6d458"
+      ],
+      "exception_id": "model-context-layer-idf-emission",
+      "index": 617,
+      "rationale": "Trusted cross-language evidence verifies Layer.to_idf_object across the exact two-case bounded common valid slice through the public EnergyModel route and private construction mapper: all nine Material fields with zero omissions, exact material values, roughness and absorptances, scoped-construction and host-surface linkage, freshness, determinism and source immutability. Standalone raw-object shape, Layer and Material class contracts, invalid behavior, parent Construction and Surface converters, global order, deduplication and conflicts remain separately unresolved."
     },
     {
       "evidence": [
@@ -2920,6 +2956,15 @@
       ],
       "index": 639,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-no-mass-construction-idf-emission",
+        "upstream/symbol-evidence.json#dragon-construction-no-mass-construction-to-idf-object-2bc3fe98"
+      ],
+      "exception_id": "model-context-no-mass-construction-idf-emission",
+      "index": 640,
+      "rationale": "Trusted cross-language evidence verifies NoMassConstruction.to_idf_object across the exact two-case bounded common valid slice through the public EnergyModel route and private construction mapper: all eight present material and construction fields, reciprocal-U resistance, fixed absorptances, exhaustive nine-field None omission, material-to-construction-to-surface linkage, freshness, determinism and source immutability. Standalone mutable-list shape, class and property contracts, invalid or zero-U behavior, parent converters, global order, deduplication and conflicts remain separately unresolved."
     },
     {
       "evidence": [
@@ -5046,8 +5091,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 133,
-      "exception": 122,
-      "needs_reverification": 735,
+      "exception": 127,
+      "needs_reverification": 730,
       "out_of_scope": 252
     },
     "entry_count": 1242

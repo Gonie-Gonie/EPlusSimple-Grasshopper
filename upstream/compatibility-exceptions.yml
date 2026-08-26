@@ -1800,3 +1800,73 @@
     api_contract: callers receive compact typed native IDF objects rather than a Python mutable list padded to every allowed field; compact omission changes raw object field counts and text length but not the verified EnergyPlus 24.2 effective values, and this receipt does not cover the PhotoVoltaicPanel class, constructor or properties, invalid or non-finite state, validation order or errors, isolated IdfObject policy, or parent EnergyModel orchestration
     compatibility_evidence: all three valid-domain cases spanning minimum and maximum angles, boundary efficiencies, default 0.7 and custom active-cell-area ratios, nonsquare-area square-root geometry, exact 33 present fields, the exhaustive 158 blank-or-None plus six official-default omission split, the 145-None extensible tail subset, complete six-object linkage and order, two-call freshness and determinism, source immutability, and independent official EnergyPlus 24.2 IDD default provenance remain required in a trusted cross-language receipt; PhotoVoltaicPanel, PhotoVoltaicPanel.__init__, its area, azimuth, effective_area_ratio, efficiency and tilt properties, invalid and non-finite behavior, validation precedence and diagnostics, IdfObject, IdfObject.__init__, isolated validation policy, and EnergyModel parent orchestration remain outside this symbol closure and separately tracked
   approval: accepted-native-api-adaptation
+
+- id: model-context-air-boundary-idf-emission
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: AirBoundary.to_idf_object
+    symbol_hash: sha256:639a205f5c73ed6febc52735b33521b20dbeb644fcc4fd6ac2e148439c4e9545
+  difference:
+    upstream: returns a fresh mutable one-object list on every call containing a fresh Construction:AirBoundary IdfObject with all four allowed fields, including the supplied name and air-changes-per-hour value, fixed SimpleMixing method, and a trailing Python None schedule
+    dotnet: has no standalone AirBoundary converter or mutable-list result; EnergyModel.ToIdfDocument reaches the private EnergyModelIdfAssembler.AppendSurfaceConstruction mapper through a host surface and emits a fresh compact Construction:AirBoundary object in each fresh document with the three present fields while omitting the trailing blank schedule
+  effect:
+    engineering_result: supported valid air boundaries preserve the exact name, SimpleMixing method, binary64 air-changes-per-hour value, host-surface construction link, deterministic repeat output, fresh documents and target objects, and unchanged immutable source graph; the omitted schedule is the same blank EnergyPlus field represented upstream by None
+    api_contract: callers attach a validated AirBoundary to a Surface and call EnergyModel.ToIdfDocument instead of invoking a standalone converter or receiving a mutable list; compact omission changes raw field count from four to three but not the verified effective value, and this receipt does not cover constructors, properties, invalid-state behavior, isolated IdfObject policy, parent Surface or Zone conversion, global object order, or construction deduplication and conflicts
+    compatibility_evidence: both bounded common valid cases, all three present fields and the exhaustive one-field None omission, exact binary64 values, SimpleMixing constant, host-surface linkage, two-call freshness and determinism, unchanged source graph, exact private mapper and public model route, and official EnergyPlus 24.2 IDD topology remain required in a trusted cross-language receipt; the AirBoundary class, constructor and display methods, invalid-domain and error semantics, IdfObject, Surface, Surface.to_idf_object, Zone, Zone.to_idf_object, EnergyModel.to_idf, global order, deduplication and conflict behavior remain separately unresolved
+  approval: accepted-native-api-adaptation
+
+- id: model-context-construction-idf-emission
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: Construction.to_idf_object
+    symbol_hash: sha256:71a76f27ebadf7476c2746f1634258a52b3f16bd19e01624d9ce3809afc37309
+  difference:
+    upstream: returns a fresh mutable one-object list on every call containing a fresh Construction IdfObject with all eleven allowed fields, a surface-scoped name formed as construction-name:for:surface-name, the ordered layer names, and trailing Python None layer slots
+    dotnet: has no standalone surface-parameter converter or mutable-list result; EnergyModel.ToIdfDocument reaches the private EnergyModelIdfAssembler.AppendSurfaceConstruction mapper through a host surface and emits a fresh compact Construction object with the same scoped name and ordered layer references while omitting the unused trailing blank layer slots
+  effect:
+    engineering_result: supported one-layer and three-layer assemblies preserve exact surface-scoped naming, ordered layer linkage, host-surface construction reference, deterministic repeat output, fresh documents and target objects, and unchanged immutable source graph; raw compact field counts of two or four replace the upstream fixed eleven fields without changing effective construction semantics
+    api_contract: callers attach a validated Construction to a Surface and call EnergyModel.ToIdfDocument instead of passing a surface into a standalone converter or receiving a mutable list; this receipt does not claim the class, constructor, equality, hashing, calculated properties or reversal contract, layer child emission, invalid-state behavior, isolated IdfObject policy, parent Surface or Zone conversion, global object order, or shared-material deduplication and conflicts
+    compatibility_evidence: the exact bounded single-layer and three-layer cases, all present scoped-name and ordered-layer fields, the exhaustive nine-field and seven-field None omission tails, exact host and layer references, two-call freshness and determinism, unchanged source graph, exact private mapper and public model route, and official EnergyPlus 24.2 IDD topology remain required in a trusted cross-language receipt; Construction class contracts, Layer.to_idf_object, invalid-domain and error semantics, IdfObject, Surface, Surface.to_idf_object, Zone, Zone.to_idf_object, EnergyModel.to_idf, global order, deduplication and conflict behavior remain separately unresolved
+  approval: accepted-native-api-adaptation
+
+- id: model-context-glazing-idf-emission
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: Glazing.to_idf_object
+    symbol_hash: sha256:3350beafdd06d7e477a86dedc271f9e4e71452dafd3137dcd8e512f94f58d093
+  difference:
+    upstream: returns a fresh mutable two-object list on every call containing WindowMaterial:SimpleGlazingSystem and Construction objects with complete field counts of four and eleven, the supplied name, U-factor and solar-heat-gain coefficient, a trailing Python None visible transmittance, a same-name construction-to-material reference, and nine trailing None layer slots
+    dotnet: has no standalone Glazing converter or mutable-list result; EnergyModel.ToIdfDocument reaches the private EnergyModelIdfAssembler.AppendGlazing mapper through a host window and emits fresh compact material and construction objects with field counts of three and two, preserving all five present values and their material-to-construction-to-fenestration linkage while omitting the ten blank fields
+  effect:
+    engineering_result: supported valid glazing preserves the exact name, binary64 U-factor and solar-heat-gain coefficient, material-to-construction and fenestration-to-construction links, host-surface reference, deterministic repeat output, fresh documents and target objects, and unchanged immutable source graph; the ten compact omissions are all upstream None fields rather than effective value changes
+    api_contract: callers assign a validated Glazing to a Window and call EnergyModel.ToIdfDocument instead of invoking a standalone converter or receiving a mutable two-object list; this receipt does not cover the class, constructor, calculated properties, invalid-state behavior, isolated IdfObject policy, parent Window, Surface or Zone conversion, global object order, or glazing deduplication and conflicts
+    compatibility_evidence: both bounded common valid cases, every present material and construction field, exact binary64 values, exhaustive ten-field None omission, complete material-construction-fenestration linkage, two-call freshness and determinism, unchanged source graph, exact private mapper and public model route, and official EnergyPlus 24.2 IDD topology remain required in a trusted cross-language receipt; Glazing class contracts, Window and Surface converters, invalid-domain and error semantics, IdfObject, Zone, Zone.to_idf_object, EnergyModel.to_idf, global order, deduplication and conflict behavior remain separately unresolved
+  approval: accepted-native-api-adaptation
+
+- id: model-context-layer-idf-emission
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: Layer.to_idf_object
+    symbol_hash: sha256:66e6d4589806a69db0d4023bcd6160f1e9a7079ed4aac3f3cb5f0839307fc884
+  difference:
+    upstream: returns one fresh Material IdfObject directly rather than a list on every call, with all nine fields populated from the layer and its material: name, roughness token, thickness, conductivity, density, specific heat, and fixed thermal, solar and visible absorptances
+    dotnet: has no standalone Layer converter returning an IdfObject; EnergyModel.ToIdfDocument reaches the private EnergyModelIdfAssembler.AppendSurfaceConstruction mapper through a construction and host surface, emits a fresh nine-field Material object in each fresh document, and preserves every upstream value while linking it through the surface-scoped Construction object
+  effect:
+    engineering_result: supported valid layers preserve all nine ordered fields, material roughness, exact binary64 thickness, conductivity, density and specific-heat values, fixed absorptances, construction linkage, deterministic repeat output, fresh documents and target objects, and unchanged immutable source graph with no compact field omissions
+    api_contract: callers place a validated Layer in a Construction attached to a Surface and call EnergyModel.ToIdfDocument instead of invoking a standalone converter or receiving its single raw IdfObject; this receipt does not cover the class, constructor, properties, equality or hashing, Material class behavior, invalid-state behavior, isolated IdfObject policy, parent Construction or Surface conversion, global object order, or shared-material deduplication and conflicts
+    compatibility_evidence: both bounded common valid cases, all nine fields and exact binary64 values, zero omissions, roughness and fixed absorptances, layer-to-scoped-construction-to-surface linkage, two-call freshness and determinism, unchanged source graph, exact private mapper and public model route, and official EnergyPlus 24.2 IDD topology remain required in a trusted cross-language receipt; Layer and Material class contracts, Construction.to_idf_object, invalid-domain and error semantics, IdfObject, Surface, Surface.to_idf_object, Zone, Zone.to_idf_object, EnergyModel.to_idf, global order, deduplication and conflict behavior remain separately unresolved
+  approval: accepted-native-api-adaptation
+
+- id: model-context-no-mass-construction-idf-emission
+  upstream:
+    path: src/idragon/dragon/construction.py
+    symbol: NoMassConstruction.to_idf_object
+    symbol_hash: sha256:2bc3fe982f11770f5e4e23b97b52c608fc40f61d86d4d1afff00b0077626b096
+  difference:
+    upstream: returns a fresh mutable two-object list on every call containing complete Material:NoMass and Construction objects with field counts of six and eleven, the supplied name, Rough token, resistance computed as the reciprocal of U, fixed absorptances 0.9, 0.7 and 0.7, a same-name construction-to-material reference, and nine trailing Python None layer slots
+    dotnet: has no standalone NoMassConstruction converter or mutable-list result; EnergyModel.ToIdfDocument reaches the private EnergyModelIdfAssembler.AppendSurfaceConstruction mapper through a host surface and emits fresh compact Material:NoMass and Construction objects with field counts of six and two, preserving all eight present values and material-to-construction-to-surface linkage while omitting the nine blank layer slots
+  effect:
+    engineering_result: supported valid no-mass constructions preserve the exact name, Rough token, binary64 reciprocal-U resistance, fixed absorptances, material-to-construction and host-surface links, deterministic repeat output, fresh documents and target objects, and unchanged immutable source graph; the compact omission affects only nine upstream None fields
+    api_contract: callers attach a validated NoMassConstruction to a Surface and call EnergyModel.ToIdfDocument instead of invoking a standalone converter or receiving a mutable two-object list; this receipt does not cover the class, constructor, U property or display methods, invalid or zero-U behavior, isolated IdfObject policy, parent Surface or Zone conversion, global object order, or no-mass definition deduplication and conflicts
+    compatibility_evidence: both bounded common valid cases, every present material and construction field, exact reciprocal-U and fixed absorptance values, exhaustive nine-field None omission, complete material-construction-surface linkage, two-call freshness and determinism, unchanged source graph, exact private mapper and public model route, and official EnergyPlus 24.2 IDD topology remain required in a trusted cross-language receipt; NoMassConstruction class contracts, invalid-domain and error semantics, IdfObject, Surface, Surface.to_idf_object, Zone, Zone.to_idf_object, EnergyModel.to_idf, global order, deduplication and conflict behavior remain separately unresolved
+  approval: accepted-native-api-adaptation
