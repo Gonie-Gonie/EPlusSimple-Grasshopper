@@ -1,0 +1,3489 @@
+{
+  "case_sha256": {
+    "constants-metadata.c01-directory-import-topology": "sha256:87e43700e8ba25721a4ee21650b3624560f1d6a91fc8219884b1c97fc2f5b095",
+    "constants-metadata.c02-directory-two-location-relocation": "sha256:44249e9ea23786160e587dae0f83625fbf8518eace0cefb3d2f9caa9603b2fb3",
+    "constants-metadata.c03-directory-class-attribute-mutation": "sha256:bf9457fdb18d10c5ba8dfd269ac6d92c72dd99d473b7827b3e010e34d0ad66e7",
+    "constants-metadata.c04-directory-instance-shadow-and-construction-errors": "sha256:c364e07d87ce34695dbd16e7f508dded48c476f0cc2edb9ecb7aeb2f7c4e4873",
+    "constants-metadata.c05-package-info-topology-and-values": "sha256:299cc5a1727fb2a56e2259a819c4fd3afc27265e7d85754e6e26795d72ce54b6",
+    "constants-metadata.c06-package-info-class-attribute-mutation": "sha256:b6119202c85bff43231484a0403f470cde457e759b6d8da60d1f9a5a0d2d2e4a",
+    "constants-metadata.c07-package-info-instance-shadow-and-construction-errors": "sha256:687aea6edaa94ce326633a784c3e678e92ce3fe3791da88861c25a5fcdbe847a",
+    "constants-metadata.c08-package-name-string-operations": "sha256:f3fa7c3244a09346e39ff52705dc191b57521ea8691aa83bab4e0741885ef8d7",
+    "constants-metadata.c09-package-version-tuple-operations": "sha256:3f5d9a78a7a86c1b76684e025c087374a3a7452e4f700c0d6eeb4c257c1a7582",
+    "constants-metadata.c10-required-python-comparison-and-errors": "sha256:bc1b4ff8c2e4315c865b6a0985bef3bf777a5fee5beec93d0d5c73d5a14d7e81"
+  },
+  "cases": [
+    {
+      "context_symbols": [],
+      "id": "constants-metadata.c01-directory-import-topology",
+      "python": {
+        "facts": {
+          "events": [
+            {
+              "outcome": "returned",
+              "phase": "read-public-class-namespace",
+              "return_type": "list",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "read-three-public-paths",
+              "return_type": "tuple",
+              "returned_none": false
+            }
+          ],
+          "observations": {
+            "anchor_state": {
+              "_DATA_DIR": {
+                "exists": false,
+                "is_absolute": true,
+                "relative_to_isolated_location": [
+                  "repository",
+                  "src",
+                  "idragon",
+                  "_data"
+                ]
+              },
+              "_MODULE_ROOT": {
+                "exists": true,
+                "is_absolute": true,
+                "relative_to_isolated_location": [
+                  "repository",
+                  "src",
+                  "idragon"
+                ]
+              },
+              "_PACKAGE_ROOT": {
+                "exists": true,
+                "is_absolute": true,
+                "relative_to_isolated_location": [
+                  "repository"
+                ]
+              }
+            },
+            "base_names": [
+              "object"
+            ],
+            "class_name": "Directory",
+            "public_member_names": [
+              "IDD_DIR",
+              "PROFILE_DIR",
+              "ENERGYPLUS_DIR"
+            ],
+            "repeated_read_identity": {
+              "ENERGYPLUS_DIR": true,
+              "IDD_DIR": true,
+              "PROFILE_DIR": true
+            },
+            "signature": "()",
+            "target_values": {
+              "ENERGYPLUS_DIR": {
+                "anchor": "package-root",
+                "exists": false,
+                "is_absolute": true,
+                "is_dir": false,
+                "is_file": false,
+                "kind": "path",
+                "relative_parts": [
+                  "runtime"
+                ]
+              },
+              "IDD_DIR": {
+                "anchor": "module-root",
+                "exists": false,
+                "is_absolute": true,
+                "is_dir": false,
+                "is_file": false,
+                "kind": "path",
+                "relative_parts": [
+                  "_data",
+                  "idd"
+                ]
+              },
+              "PROFILE_DIR": {
+                "anchor": "module-root",
+                "exists": false,
+                "is_absolute": true,
+                "is_dir": false,
+                "is_file": false,
+                "kind": "path",
+                "relative_parts": [
+                  "_data",
+                  "profile"
+                ]
+              }
+            }
+          },
+          "scenario": "C01",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:01838d77ce2aa61318bf555e87eca84a0ce331baaec9d7334d0873a7f003b93d",
+        "outcome": "observed"
+      },
+      "subfamily": "directory",
+      "target_symbols": [
+        "Directory",
+        "Directory.ENERGYPLUS_DIR",
+        "Directory.IDD_DIR",
+        "Directory.PROFILE_DIR"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Directory"
+      ],
+      "id": "constants-metadata.c02-directory-two-location-relocation",
+      "python": {
+        "facts": {
+          "events": [
+            {
+              "outcome": "returned",
+              "phase": "read-path-pairs",
+              "return_type": "tuple",
+              "returned_none": false
+            }
+          ],
+          "observations": {
+            "directory_class_identity": false,
+            "directory_class_names": [
+              "Directory",
+              "Directory"
+            ],
+            "path_pairs": {
+              "ENERGYPLUS_DIR": {
+                "location_a": {
+                  "anchor": "package-root",
+                  "exists": false,
+                  "is_absolute": true,
+                  "is_dir": false,
+                  "is_file": false,
+                  "kind": "path",
+                  "relative_parts": [
+                    "runtime"
+                  ]
+                },
+                "location_a_equals_location_b": false,
+                "location_a_is_location_b": false,
+                "location_b": {
+                  "anchor": "package-root",
+                  "exists": false,
+                  "is_absolute": true,
+                  "is_dir": false,
+                  "is_file": false,
+                  "kind": "path",
+                  "relative_parts": [
+                    "runtime"
+                  ]
+                }
+              },
+              "IDD_DIR": {
+                "location_a": {
+                  "anchor": "module-root",
+                  "exists": false,
+                  "is_absolute": true,
+                  "is_dir": false,
+                  "is_file": false,
+                  "kind": "path",
+                  "relative_parts": [
+                    "_data",
+                    "idd"
+                  ]
+                },
+                "location_a_equals_location_b": false,
+                "location_a_is_location_b": false,
+                "location_b": {
+                  "anchor": "module-root",
+                  "exists": false,
+                  "is_absolute": true,
+                  "is_dir": false,
+                  "is_file": false,
+                  "kind": "path",
+                  "relative_parts": [
+                    "_data",
+                    "idd"
+                  ]
+                }
+              },
+              "PROFILE_DIR": {
+                "location_a": {
+                  "anchor": "module-root",
+                  "exists": false,
+                  "is_absolute": true,
+                  "is_dir": false,
+                  "is_file": false,
+                  "kind": "path",
+                  "relative_parts": [
+                    "_data",
+                    "profile"
+                  ]
+                },
+                "location_a_equals_location_b": false,
+                "location_a_is_location_b": false,
+                "location_b": {
+                  "anchor": "module-root",
+                  "exists": false,
+                  "is_absolute": true,
+                  "is_dir": false,
+                  "is_file": false,
+                  "kind": "path",
+                  "relative_parts": [
+                    "_data",
+                    "profile"
+                  ]
+                }
+              }
+            }
+          },
+          "scenario": "C02",
+          "source_state": {
+            "snapshots": [
+              {
+                "anchor_state": {
+                  "_DATA_DIR": {
+                    "exists": false,
+                    "is_absolute": true,
+                    "relative_to_isolated_location": [
+                      "repository",
+                      "src",
+                      "idragon",
+                      "_data"
+                    ]
+                  },
+                  "_MODULE_ROOT": {
+                    "exists": true,
+                    "is_absolute": true,
+                    "relative_to_isolated_location": [
+                      "repository",
+                      "src",
+                      "idragon"
+                    ]
+                  },
+                  "_PACKAGE_ROOT": {
+                    "exists": true,
+                    "is_absolute": true,
+                    "relative_to_isolated_location": [
+                      "repository"
+                    ]
+                  }
+                },
+                "phase": "location-a",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "anchor_state": {
+                  "_DATA_DIR": {
+                    "exists": false,
+                    "is_absolute": true,
+                    "relative_to_isolated_location": [
+                      "repository",
+                      "src",
+                      "idragon",
+                      "_data"
+                    ]
+                  },
+                  "_MODULE_ROOT": {
+                    "exists": true,
+                    "is_absolute": true,
+                    "relative_to_isolated_location": [
+                      "repository",
+                      "src",
+                      "idragon"
+                    ]
+                  },
+                  "_PACKAGE_ROOT": {
+                    "exists": true,
+                    "is_absolute": true,
+                    "relative_to_isolated_location": [
+                      "repository"
+                    ]
+                  }
+                },
+                "phase": "location-b",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:82fce5c4b885ae5d8a216d807c6e2510b156e7fdfad8e9ce90425f04592c0c5f",
+        "outcome": "observed"
+      },
+      "subfamily": "directory",
+      "target_symbols": [
+        "Directory.ENERGYPLUS_DIR",
+        "Directory.IDD_DIR",
+        "Directory.PROFILE_DIR"
+      ]
+    },
+    {
+      "context_symbols": [],
+      "id": "constants-metadata.c03-directory-class-attribute-mutation",
+      "python": {
+        "facts": {
+          "events": [
+            {
+              "outcome": "returned",
+              "phase": "assign-IDD_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-IDD_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "error": {
+                "message": "type object 'Directory' has no attribute 'IDD_DIR'",
+                "type": "AttributeError"
+              },
+              "outcome": "raised",
+              "phase": "read-missing-IDD_DIR"
+            },
+            {
+              "outcome": "returned",
+              "phase": "restore-IDD_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-PROFILE_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-PROFILE_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "error": {
+                "message": "type object 'Directory' has no attribute 'PROFILE_DIR'",
+                "type": "AttributeError"
+              },
+              "outcome": "raised",
+              "phase": "read-missing-PROFILE_DIR"
+            },
+            {
+              "outcome": "returned",
+              "phase": "restore-PROFILE_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-ENERGYPLUS_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-ENERGYPLUS_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "error": {
+                "message": "type object 'Directory' has no attribute 'ENERGYPLUS_DIR'",
+                "type": "AttributeError"
+              },
+              "outcome": "raised",
+              "phase": "read-missing-ENERGYPLUS_DIR"
+            },
+            {
+              "outcome": "returned",
+              "phase": "restore-ENERGYPLUS_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            }
+          ],
+          "observations": {
+            "restored_object_identity": {
+              "ENERGYPLUS_DIR": true,
+              "IDD_DIR": true,
+              "PROFILE_DIR": true
+            }
+          },
+          "scenario": "C03",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-assign-IDD_DIR",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "is_absolute": false,
+                      "kind": "path",
+                      "parts": [
+                        "relative-probe",
+                        "idd_dir"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-delete-IDD_DIR",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": false
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-restore-IDD_DIR",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-assign-PROFILE_DIR",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "is_absolute": false,
+                      "kind": "path",
+                      "parts": [
+                        "relative-probe",
+                        "profile_dir"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-delete-PROFILE_DIR",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": false
+                  }
+                }
+              },
+              {
+                "phase": "after-restore-PROFILE_DIR",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-assign-ENERGYPLUS_DIR",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "is_absolute": false,
+                      "kind": "path",
+                      "parts": [
+                        "relative-probe",
+                        "energyplus_dir"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-delete-ENERGYPLUS_DIR",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": false
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-restore-ENERGYPLUS_DIR",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "finally",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:4633fc76d67fc86b86dd02cb5645cf63b0d1f1b1d0685fef32e4d9921c0a8801",
+        "outcome": "observed"
+      },
+      "subfamily": "directory",
+      "target_symbols": [
+        "Directory",
+        "Directory.ENERGYPLUS_DIR",
+        "Directory.IDD_DIR",
+        "Directory.PROFILE_DIR"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Directory.ENERGYPLUS_DIR",
+        "Directory.IDD_DIR",
+        "Directory.PROFILE_DIR"
+      ],
+      "id": "constants-metadata.c04-directory-instance-shadow-and-construction-errors",
+      "python": {
+        "facts": {
+          "events": [
+            {
+              "outcome": "returned",
+              "phase": "construct-first",
+              "return_type": "Directory",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "construct-second",
+              "return_type": "Directory",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-instance-IDD_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-instance-IDD_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-instance-PROFILE_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-instance-PROFILE_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-instance-ENERGYPLUS_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-instance-ENERGYPLUS_DIR",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "error": {
+                "message": "Directory() takes no arguments",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "construct-positional-error"
+            },
+            {
+              "error": {
+                "message": "Directory() takes no arguments",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "construct-keyword-error"
+            }
+          ],
+          "observations": {
+            "first_instance_dictionary_after": {},
+            "first_instance_dictionary_before": {},
+            "first_is_second": false,
+            "inherited_attributes": {
+              "ENERGYPLUS_DIR": {
+                "after_delete_is_class_value": true,
+                "assigned_value": {
+                  "is_absolute": false,
+                  "kind": "path",
+                  "parts": [
+                    "instance-probe",
+                    "energyplus_dir"
+                  ]
+                },
+                "before_is_class_value": true,
+                "owned_after_assignment": true,
+                "owned_after_delete": false,
+                "owned_before": false
+              },
+              "IDD_DIR": {
+                "after_delete_is_class_value": true,
+                "assigned_value": {
+                  "is_absolute": false,
+                  "kind": "path",
+                  "parts": [
+                    "instance-probe",
+                    "idd_dir"
+                  ]
+                },
+                "before_is_class_value": true,
+                "owned_after_assignment": true,
+                "owned_after_delete": false,
+                "owned_before": false
+              },
+              "PROFILE_DIR": {
+                "after_delete_is_class_value": true,
+                "assigned_value": {
+                  "is_absolute": false,
+                  "kind": "path",
+                  "parts": [
+                    "instance-probe",
+                    "profile_dir"
+                  ]
+                },
+                "before_is_class_value": true,
+                "owned_after_assignment": true,
+                "owned_after_delete": false,
+                "owned_before": false
+              }
+            },
+            "second_instance_dictionary": {}
+          },
+          "scenario": "C04",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after",
+                "state": {
+                  "ENERGYPLUS_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "package-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "runtime"
+                      ]
+                    }
+                  },
+                  "IDD_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "idd"
+                      ]
+                    }
+                  },
+                  "PROFILE_DIR": {
+                    "present": true,
+                    "value": {
+                      "anchor": "module-root",
+                      "exists": false,
+                      "is_absolute": true,
+                      "is_dir": false,
+                      "is_file": false,
+                      "kind": "path",
+                      "relative_parts": [
+                        "_data",
+                        "profile"
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:310219d06e081b707886cf51be5fd0cbdffc3f71ef175cfbe93245319f5c79e1",
+        "outcome": "observed"
+      },
+      "subfamily": "directory",
+      "target_symbols": [
+        "Directory"
+      ]
+    },
+    {
+      "context_symbols": [],
+      "id": "constants-metadata.c05-package-info-topology-and-values",
+      "python": {
+        "facts": {
+          "events": [
+            {
+              "outcome": "returned",
+              "phase": "read-public-class-namespace",
+              "return_type": "list",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "construct-first",
+              "return_type": "PackageInfo",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "construct-second",
+              "return_type": "PackageInfo",
+              "returned_none": false
+            }
+          ],
+          "observations": {
+            "base_names": [
+              "object"
+            ],
+            "class_name": "PackageInfo",
+            "first_is_second": false,
+            "public_member_names": [
+              "NAME",
+              "VERSION",
+              "REQUIRED_PYTHON"
+            ],
+            "repeated_read_identity": {
+              "NAME": true,
+              "REQUIRED_PYTHON": true,
+              "VERSION": true
+            },
+            "signature": "()",
+            "target_values": {
+              "NAME": {
+                "kind": "str",
+                "value": "invisible-dragon"
+              },
+              "REQUIRED_PYTHON": {
+                "items": [
+                  {
+                    "kind": "int",
+                    "value": "3"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "12"
+                  }
+                ],
+                "kind": "tuple"
+              },
+              "VERSION": {
+                "items": [
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "7"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  }
+                ],
+                "kind": "tuple"
+              }
+            }
+          },
+          "scenario": "C05",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:a12f09475a94391b4080dc1d268e3ef3f658a859c08e39e6d609a9b561ddc615",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo",
+        "PackageInfo.NAME",
+        "PackageInfo.REQUIRED_PYTHON",
+        "PackageInfo.VERSION"
+      ]
+    },
+    {
+      "context_symbols": [],
+      "id": "constants-metadata.c06-package-info-class-attribute-mutation",
+      "python": {
+        "facts": {
+          "events": [
+            {
+              "outcome": "returned",
+              "phase": "assign-NAME",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-NAME",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "error": {
+                "message": "type object 'PackageInfo' has no attribute 'NAME'",
+                "type": "AttributeError"
+              },
+              "outcome": "raised",
+              "phase": "read-missing-NAME"
+            },
+            {
+              "outcome": "returned",
+              "phase": "restore-NAME",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-VERSION",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-VERSION",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "error": {
+                "message": "type object 'PackageInfo' has no attribute 'VERSION'",
+                "type": "AttributeError"
+              },
+              "outcome": "raised",
+              "phase": "read-missing-VERSION"
+            },
+            {
+              "outcome": "returned",
+              "phase": "restore-VERSION",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-REQUIRED_PYTHON",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-REQUIRED_PYTHON",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "error": {
+                "message": "type object 'PackageInfo' has no attribute 'REQUIRED_PYTHON'",
+                "type": "AttributeError"
+              },
+              "outcome": "raised",
+              "phase": "read-missing-REQUIRED_PYTHON"
+            },
+            {
+              "outcome": "returned",
+              "phase": "restore-REQUIRED_PYTHON",
+              "return_type": "NoneType",
+              "returned_none": true
+            }
+          ],
+          "observations": {
+            "restored_object_identity": {
+              "NAME": true,
+              "REQUIRED_PYTHON": true,
+              "VERSION": true
+            }
+          },
+          "scenario": "C06",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-assign-NAME",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-delete-NAME",
+                "state": {
+                  "NAME": {
+                    "present": false
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-restore-NAME",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-assign-VERSION",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "0.7.0"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-delete-VERSION",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": false
+                  }
+                }
+              },
+              {
+                "phase": "after-restore-VERSION",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-assign-REQUIRED_PYTHON",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "list"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-delete-REQUIRED_PYTHON",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": false
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after-restore-REQUIRED_PYTHON",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "finally",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:0c68707d19661edbe03301456c008c83c2a9ca189f4e96b62f4888a9a88c5a0c",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo",
+        "PackageInfo.NAME",
+        "PackageInfo.REQUIRED_PYTHON",
+        "PackageInfo.VERSION"
+      ]
+    },
+    {
+      "context_symbols": [
+        "PackageInfo.NAME",
+        "PackageInfo.REQUIRED_PYTHON",
+        "PackageInfo.VERSION"
+      ],
+      "id": "constants-metadata.c07-package-info-instance-shadow-and-construction-errors",
+      "python": {
+        "facts": {
+          "events": [
+            {
+              "outcome": "returned",
+              "phase": "construct-first",
+              "return_type": "PackageInfo",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "construct-second",
+              "return_type": "PackageInfo",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-instance-NAME",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-instance-NAME",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-instance-VERSION",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-instance-VERSION",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "assign-instance-REQUIRED_PYTHON",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "outcome": "returned",
+              "phase": "delete-instance-REQUIRED_PYTHON",
+              "return_type": "NoneType",
+              "returned_none": true
+            },
+            {
+              "error": {
+                "message": "PackageInfo() takes no arguments",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "construct-positional-error"
+            },
+            {
+              "error": {
+                "message": "PackageInfo() takes no arguments",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "construct-keyword-error"
+            }
+          ],
+          "observations": {
+            "first_instance_dictionary_after": {},
+            "first_instance_dictionary_before": {},
+            "first_is_second": false,
+            "inherited_attributes": {
+              "NAME": {
+                "after_delete_is_class_value": true,
+                "assigned_value": {
+                  "kind": "str",
+                  "value": "instance-name"
+                },
+                "before_is_class_value": true,
+                "owned_after_assignment": true,
+                "owned_after_delete": false,
+                "owned_before": false
+              },
+              "REQUIRED_PYTHON": {
+                "after_delete_is_class_value": true,
+                "assigned_value": {
+                  "items": [
+                    {
+                      "kind": "int",
+                      "value": "2"
+                    }
+                  ],
+                  "kind": "tuple"
+                },
+                "before_is_class_value": true,
+                "owned_after_assignment": true,
+                "owned_after_delete": false,
+                "owned_before": false
+              },
+              "VERSION": {
+                "after_delete_is_class_value": true,
+                "assigned_value": {
+                  "items": [
+                    {
+                      "kind": "int",
+                      "value": "9"
+                    }
+                  ],
+                  "kind": "tuple"
+                },
+                "before_is_class_value": true,
+                "owned_after_assignment": true,
+                "owned_after_delete": false,
+                "owned_before": false
+              }
+            },
+            "second_instance_dictionary": {}
+          },
+          "scenario": "C07",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:5f1c49066b0e6e2834ebd814c4a3ec9478f6bef6a9529f95632f4e76fa66380f",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo"
+      ]
+    },
+    {
+      "context_symbols": [
+        "PackageInfo"
+      ],
+      "id": "constants-metadata.c08-package-name-string-operations",
+      "python": {
+        "facts": {
+          "events": [
+            {
+              "outcome": "returned",
+              "phase": "length",
+              "return_type": "int",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "split-hyphen",
+              "return_type": "list",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "upper",
+              "return_type": "str",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "placeholder-index-7",
+              "return_type": "str",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "temporary-prefix",
+              "return_type": "str",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "slice-first-nine",
+              "return_type": "str",
+              "returned_none": false
+            },
+            {
+              "error": {
+                "message": "'str' object does not support item assignment",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "assign-index-error"
+            }
+          ],
+          "observations": {
+            "operation_results": {
+              "length": {
+                "kind": "int",
+                "value": "16"
+              },
+              "placeholder-index-7": {
+                "kind": "str",
+                "value": "##invisible-dragon0007##"
+              },
+              "slice-first-nine": {
+                "kind": "str",
+                "value": "invisible"
+              },
+              "split-hyphen": {
+                "items": [
+                  {
+                    "kind": "str",
+                    "value": "invisible"
+                  },
+                  {
+                    "kind": "str",
+                    "value": "dragon"
+                  }
+                ],
+                "kind": "list"
+              },
+              "temporary-prefix": {
+                "kind": "str",
+                "value": "invisible-dragon-"
+              },
+              "upper": {
+                "kind": "str",
+                "value": "INVISIBLE-DRAGON"
+              }
+            }
+          },
+          "scenario": "C08",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:94c63c6bb305e4f6ee772888a6fa7bff0d320204a7cff7ce9c1512c58e0184ca",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo.NAME"
+      ]
+    },
+    {
+      "context_symbols": [
+        "PackageInfo"
+      ],
+      "id": "constants-metadata.c09-package-version-tuple-operations",
+      "python": {
+        "facts": {
+          "events": [
+            {
+              "outcome": "returned",
+              "phase": "length",
+              "return_type": "int",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "index-zero",
+              "return_type": "int",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "index-negative-one",
+              "return_type": "int",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "slice-first-two",
+              "return_type": "tuple",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "display-join",
+              "return_type": "str",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "less-than-0.7.1",
+              "return_type": "bool",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "greater-than-0.6.9",
+              "return_type": "bool",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "equals-list",
+              "return_type": "bool",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "concatenate-patch",
+              "return_type": "tuple",
+              "returned_none": false
+            },
+            {
+              "error": {
+                "message": "'tuple' object does not support item assignment",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "assign-index-error"
+            }
+          ],
+          "observations": {
+            "operation_results": {
+              "concatenate-patch": {
+                "items": [
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "7"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "1"
+                  }
+                ],
+                "kind": "tuple"
+              },
+              "display-join": {
+                "kind": "str",
+                "value": "0.7.0"
+              },
+              "equals-list": {
+                "kind": "bool",
+                "value": false
+              },
+              "greater-than-0.6.9": {
+                "kind": "bool",
+                "value": true
+              },
+              "index-negative-one": {
+                "kind": "int",
+                "value": "0"
+              },
+              "index-zero": {
+                "kind": "int",
+                "value": "0"
+              },
+              "length": {
+                "kind": "int",
+                "value": "3"
+              },
+              "less-than-0.7.1": {
+                "kind": "bool",
+                "value": true
+              },
+              "slice-first-two": {
+                "items": [
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "7"
+                  }
+                ],
+                "kind": "tuple"
+              }
+            }
+          },
+          "scenario": "C09",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:faa96f7e572407ded80e4eaedf19a9b3bfdac4f595d4ff02da6cdd6871714170",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo.VERSION"
+      ]
+    },
+    {
+      "context_symbols": [
+        "PackageInfo"
+      ],
+      "id": "constants-metadata.c10-required-python-comparison-and-errors",
+      "python": {
+        "facts": {
+          "events": [
+            {
+              "outcome": "returned",
+              "phase": "pinned-runtime-less-than-required",
+              "return_type": "bool",
+              "returned_none": false
+            },
+            {
+              "error": {
+                "message": "sequence item 0: expected str instance, int found",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "direct-comma-join-error"
+            },
+            {
+              "outcome": "returned",
+              "phase": "stringified-comma-join",
+              "return_type": "str",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "concatenate-patch",
+              "return_type": "tuple",
+              "returned_none": false
+            },
+            {
+              "error": {
+                "message": "'tuple' object does not support item assignment",
+                "type": "TypeError"
+              },
+              "outcome": "raised",
+              "phase": "assign-index-error"
+            },
+            {
+              "outcome": "returned",
+              "phase": "probe-3.11-less-than-required",
+              "return_type": "bool",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "probe-3.12-less-than-required",
+              "return_type": "bool",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "probe-3.12.0-less-than-required",
+              "return_type": "bool",
+              "returned_none": false
+            },
+            {
+              "outcome": "returned",
+              "phase": "probe-4.0-less-than-required",
+              "return_type": "bool",
+              "returned_none": false
+            }
+          ],
+          "observations": {
+            "operation_results": {
+              "concatenate-patch": {
+                "items": [
+                  {
+                    "kind": "int",
+                    "value": "3"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "12"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  }
+                ],
+                "kind": "tuple"
+              },
+              "pinned-runtime-less-than-required": {
+                "kind": "bool",
+                "value": false
+              },
+              "probe-3.11-less-than-required": {
+                "kind": "bool",
+                "value": true
+              },
+              "probe-3.12-less-than-required": {
+                "kind": "bool",
+                "value": false
+              },
+              "probe-3.12.0-less-than-required": {
+                "kind": "bool",
+                "value": false
+              },
+              "probe-4.0-less-than-required": {
+                "kind": "bool",
+                "value": false
+              },
+              "stringified-comma-join": {
+                "kind": "str",
+                "value": "3,12"
+              }
+            },
+            "pinned_runtime_version": {
+              "items": [
+                {
+                  "kind": "int",
+                  "value": "3"
+                },
+                {
+                  "kind": "int",
+                  "value": "12"
+                },
+                {
+                  "kind": "int",
+                  "value": "7"
+                }
+              ],
+              "kind": "tuple"
+            },
+            "probe_inputs": [
+              {
+                "items": [
+                  {
+                    "kind": "int",
+                    "value": "3"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "11"
+                  }
+                ],
+                "kind": "tuple"
+              },
+              {
+                "items": [
+                  {
+                    "kind": "int",
+                    "value": "3"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "12"
+                  }
+                ],
+                "kind": "tuple"
+              },
+              {
+                "items": [
+                  {
+                    "kind": "int",
+                    "value": "3"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "12"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  }
+                ],
+                "kind": "tuple"
+              },
+              {
+                "items": [
+                  {
+                    "kind": "int",
+                    "value": "4"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  }
+                ],
+                "kind": "tuple"
+              }
+            ]
+          },
+          "scenario": "C10",
+          "source_state": {
+            "snapshots": [
+              {
+                "phase": "before",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              },
+              {
+                "phase": "after",
+                "state": {
+                  "NAME": {
+                    "present": true,
+                    "value": {
+                      "kind": "str",
+                      "value": "invisible-dragon"
+                    }
+                  },
+                  "REQUIRED_PYTHON": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "3"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "12"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  },
+                  "VERSION": {
+                    "present": true,
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "7"
+                        },
+                        {
+                          "kind": "int",
+                          "value": "0"
+                        }
+                      ],
+                      "kind": "tuple"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:2615482afc26f694b11b990929b265d9c5bb18c1b9a376c29b3b665b22635c5b",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo.REQUIRED_PYTHON"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:e664bc6349a4965d94f50f5fcf31d544b5472163496a7117146fb3f9ce83a4e0",
+  "consumer_contract": {
+    "adaptations": {
+      "Directory": "resolved-native-runtime-and-resource-layout",
+      "Directory.ENERGYPLUS_DIR": "explicit-validated-native-energyplus-runtime-root",
+      "Directory.IDD_DIR": "validated-native-idd-path-resolution",
+      "Directory.PROFILE_DIR": "typed-native-profile-data-without-package-profile-directory",
+      "PackageInfo": "static-native-package-information",
+      "PackageInfo.NAME": "native-invisibledragon-package-name",
+      "PackageInfo.REQUIRED_PYTHON": "compiled-native-target-framework-contract",
+      "PackageInfo.VERSION": "native-semantic-version-string"
+    },
+    "assertion_ids": {
+      "Directory": "constants-metadata-568-5b876ad7",
+      "Directory.ENERGYPLUS_DIR": "constants-metadata-569-7e01ceac",
+      "Directory.IDD_DIR": "constants-metadata-570-1f0c2815",
+      "Directory.PROFILE_DIR": "constants-metadata-571-f65d5eae",
+      "PackageInfo": "constants-metadata-572-aaf5b98d",
+      "PackageInfo.NAME": "constants-metadata-573-3942a963",
+      "PackageInfo.REQUIRED_PYTHON": "constants-metadata-574-cf74d0eb",
+      "PackageInfo.VERSION": "constants-metadata-575-a8260e5f"
+    },
+    "case_count": 10,
+    "case_ids": [
+      "constants-metadata.c01-directory-import-topology",
+      "constants-metadata.c02-directory-two-location-relocation",
+      "constants-metadata.c03-directory-class-attribute-mutation",
+      "constants-metadata.c04-directory-instance-shadow-and-construction-errors",
+      "constants-metadata.c05-package-info-topology-and-values",
+      "constants-metadata.c06-package-info-class-attribute-mutation",
+      "constants-metadata.c07-package-info-instance-shadow-and-construction-errors",
+      "constants-metadata.c08-package-name-string-operations",
+      "constants-metadata.c09-package-version-tuple-operations",
+      "constants-metadata.c10-required-python-comparison-and-errors"
+    ],
+    "classification_counts": {
+      "equivalent": 0,
+      "exception": 8
+    },
+    "classifications": {
+      "Directory": "exception",
+      "Directory.ENERGYPLUS_DIR": "exception",
+      "Directory.IDD_DIR": "exception",
+      "Directory.PROFILE_DIR": "exception",
+      "PackageInfo": "exception",
+      "PackageInfo.NAME": "exception",
+      "PackageInfo.REQUIRED_PYTHON": "exception",
+      "PackageInfo.VERSION": "exception"
+    },
+    "closure": {
+      "full_symbol_closure": false,
+      "private_context_members_observed": [
+        "Directory._DATA_DIR",
+        "Directory._MODULE_ROOT",
+        "Directory._PACKAGE_ROOT"
+      ],
+      "resolved_receipts_not_retargeted": [
+        {
+          "body_hash": "sha256:0f180b3be66f76d002ae59f4b778f5dda999b86b84a380a298e4c5ee331e1fa9",
+          "inventory_index": 576,
+          "kind": "class",
+          "path": "src/idragon/constants.py",
+          "signature_hash": "sha256:2d310be6e0c12953280b4ae7c32d74687bf07cf40743879660dcbd25a74b4cc3",
+          "symbol": "SpecialTag",
+          "symbol_hash": "sha256:3a4b37818bef17a26ede76602478983f0d70840c5a61fce8475f47e491466e41"
+        },
+        {
+          "body_hash": "sha256:6446560bba87c8aff916dace718057f6b9a03bb1ea1d04171ece5cb8516bc6c8",
+          "inventory_index": 577,
+          "kind": "function",
+          "path": "src/idragon/constants.py",
+          "signature_hash": "sha256:9cdfbe97dbd56c9709c1449cead8a30f8c529922f871002291db5ef625709ba0",
+          "symbol": "SpecialTag.__format__",
+          "symbol_hash": "sha256:4ef932bb8135c4cfaf7e17e805cfb299e50d9400f4a106605bdb2fb75477d3a0"
+        },
+        {
+          "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+          "inventory_index": 578,
+          "kind": "function",
+          "path": "src/idragon/constants.py",
+          "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+          "symbol": "SpecialTag.__repr__",
+          "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+        },
+        {
+          "body_hash": "sha256:41f39e586a619e17144cefe663b44ef26f20f8e6dcb13433bcb31ebd4c066f1f",
+          "inventory_index": 579,
+          "kind": "function",
+          "path": "src/idragon/constants.py",
+          "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+          "symbol": "SpecialTag.__str__",
+          "symbol_hash": "sha256:13ed292afebbf1a59717e776df9d6ba3e220d2cc248ac2cc450deab9c2261c98"
+        }
+      ],
+      "target_coverage_complete": true,
+      "unresolved_boundaries": [
+        "imports whose loader supplies no real __file__, including frozen and zip imports",
+        "symlink or junction topology and resolve behavior outside the two ordinary isolated locations",
+        "POSIX, drive-relative, UNC, alternate-drive, and case-folding path flavor differences",
+        "filesystem permission failures and populated, missing, or concurrently replaced resource directories",
+        "concurrent class mutation, custom metaclasses, descriptors, and arbitrary replacement objects beyond the recorded probes",
+        "PackageInfo tuple consumer behavior for non-integer, non-finite, negative, huge, or mixed replacement members",
+        "Python interpreter versions and implementations other than exact CPython 3.12.7",
+        "native cross-language behavior until a separately pinned C# binding executes these adaptation candidates"
+      ]
+    },
+    "native_adaptation_candidates": {
+      "Directory": "GonieGonie.EnergyPlus.Runtime.RuntimeResolver and caller-supplied resource paths",
+      "Directory.ENERGYPLUS_DIR": "EnergyPlusRuntimeLayout.RootPath after manifest and payload validation",
+      "Directory.IDD_DIR": "EnergyPlusRuntimeLayout.IddPath or an explicit Grasshopper IDD path",
+      "Directory.PROFILE_DIR": "typed GonieGonie.InvisibleDragon.Profile values supplied by callers",
+      "PackageInfo": "GonieGonie.InvisibleDragon.PackageInfo static class",
+      "PackageInfo.NAME": "GonieGonie.InvisibleDragon.PackageInfo.Name (InvisibleDragon)",
+      "PackageInfo.REQUIRED_PYTHON": "net48, net7.0-windows, and net8.0-windows build targets",
+      "PackageInfo.VERSION": "GonieGonie.InvisibleDragon.PackageInfo.Version (0.1.0)"
+    },
+    "native_binding_status": "proposed-not-yet-cross-language-verified",
+    "path_encoding": "anchor-relative-parts-only-no-host-absolute-paths",
+    "runtime_contracts": {
+      "Directory": "class-signature:()",
+      "Directory.ENERGYPLUS_DIR": "class-attribute:pathlib.Path",
+      "Directory.IDD_DIR": "class-attribute:pathlib.Path",
+      "Directory.PROFILE_DIR": "class-attribute:pathlib.Path",
+      "PackageInfo": "class-signature:()",
+      "PackageInfo.NAME": "class-attribute:str",
+      "PackageInfo.REQUIRED_PYTHON": "class-attribute:tuple[int,int]",
+      "PackageInfo.VERSION": "class-attribute:tuple[int,int,int]"
+    },
+    "target_symbols": [
+      "Directory",
+      "Directory.ENERGYPLUS_DIR",
+      "Directory.IDD_DIR",
+      "Directory.PROFILE_DIR",
+      "PackageInfo",
+      "PackageInfo.NAME",
+      "PackageInfo.REQUIRED_PYTHON",
+      "PackageInfo.VERSION"
+    ]
+  },
+  "fact_sha256": {
+    "constants-metadata.c01-directory-import-topology": "sha256:01838d77ce2aa61318bf555e87eca84a0ce331baaec9d7334d0873a7f003b93d",
+    "constants-metadata.c02-directory-two-location-relocation": "sha256:82fce5c4b885ae5d8a216d807c6e2510b156e7fdfad8e9ce90425f04592c0c5f",
+    "constants-metadata.c03-directory-class-attribute-mutation": "sha256:4633fc76d67fc86b86dd02cb5645cf63b0d1f1b1d0685fef32e4d9921c0a8801",
+    "constants-metadata.c04-directory-instance-shadow-and-construction-errors": "sha256:310219d06e081b707886cf51be5fd0cbdffc3f71ef175cfbe93245319f5c79e1",
+    "constants-metadata.c05-package-info-topology-and-values": "sha256:a12f09475a94391b4080dc1d268e3ef3f658a859c08e39e6d609a9b561ddc615",
+    "constants-metadata.c06-package-info-class-attribute-mutation": "sha256:0c68707d19661edbe03301456c008c83c2a9ca189f4e96b62f4888a9a88c5a0c",
+    "constants-metadata.c07-package-info-instance-shadow-and-construction-errors": "sha256:5f1c49066b0e6e2834ebd814c4a3ec9478f6bef6a9529f95632f4e76fa66380f",
+    "constants-metadata.c08-package-name-string-operations": "sha256:94c63c6bb305e4f6ee772888a6fa7bff0d320204a7cff7ce9c1512c58e0184ca",
+    "constants-metadata.c09-package-version-tuple-operations": "sha256:faa96f7e572407ded80e4eaedf19a9b3bfdac4f595d4ff02da6cdd6871714170",
+    "constants-metadata.c10-required-python-comparison-and-errors": "sha256:2615482afc26f694b11b990929b265d9c5bb18c1b9a376c29b3b665b22635c5b"
+  },
+  "resolved_receipts": [
+    {
+      "body_hash": "sha256:0f180b3be66f76d002ae59f4b778f5dda999b86b84a380a298e4c5ee331e1fa9",
+      "inventory_index": 576,
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:2d310be6e0c12953280b4ae7c32d74687bf07cf40743879660dcbd25a74b4cc3",
+      "symbol": "SpecialTag",
+      "symbol_hash": "sha256:3a4b37818bef17a26ede76602478983f0d70840c5a61fce8475f47e491466e41"
+    },
+    {
+      "body_hash": "sha256:6446560bba87c8aff916dace718057f6b9a03bb1ea1d04171ece5cb8516bc6c8",
+      "inventory_index": 577,
+      "kind": "function",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:9cdfbe97dbd56c9709c1449cead8a30f8c529922f871002291db5ef625709ba0",
+      "symbol": "SpecialTag.__format__",
+      "symbol_hash": "sha256:4ef932bb8135c4cfaf7e17e805cfb299e50d9400f4a106605bdb2fb75477d3a0"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "inventory_index": 578,
+      "kind": "function",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "SpecialTag.__repr__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:41f39e586a619e17144cefe663b44ef26f20f8e6dcb13433bcb31ebd4c066f1f",
+      "inventory_index": 579,
+      "kind": "function",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "SpecialTag.__str__",
+      "symbol_hash": "sha256:13ed292afebbf1a59717e776df9d6ba3e220d2cc248ac2cc450deab9c2261c98"
+    }
+  ],
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.constants-metadata.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:9b095b8323bc225f2dc984ce84b448beb1c9ca385a260e7fc7fa0e20e9518d24",
+      "symbol": "Directory",
+      "symbol_hash": "sha256:5b876ad7fd9b11f66cc01ecb6c43d4e143b6f0258ba070c02551d968dd68aaf6"
+    },
+    {
+      "body_hash": "sha256:4c60beb875b71c3866ad7b2f6c4c2976c58edba859a3eb364608665539a37a30",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:3b7cde5117ef1f4f50cc31536156cfc47972e4891e14cef1873dbb21670bec45",
+      "symbol": "Directory.ENERGYPLUS_DIR",
+      "symbol_hash": "sha256:7e01ceac3f311fa9fbf2fde2b25cc1c7cd16c3b3f16a3dae9f55531d25ecef5d"
+    },
+    {
+      "body_hash": "sha256:611dabcf2c487823916965244bd620d3e2e8142f13418e7037648c2412df96b4",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:fc2b368da7a4f29b674e0243a9cc5f51932a415e16ce648aaa6f0952f2d5b803",
+      "symbol": "Directory.IDD_DIR",
+      "symbol_hash": "sha256:1f0c2815e4e0732316c71edc653a9a35e5081466805dfbf900c10971f1d171d5"
+    },
+    {
+      "body_hash": "sha256:14d09e816f44d227fd4799d8ebd5d1c6d1f0fccb28985882f54864bb86696fe8",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:e63d078f01a7657c55c23cdbdaa3fdc0b1bf9367a911885dd5706e22cf728d36",
+      "symbol": "Directory.PROFILE_DIR",
+      "symbol_hash": "sha256:f65d5eaefa2bc1cbb6f0c9b5904624194a1551f48e7966c7973d35526bad4fa6"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:2740bb2f2c36f7a928b58073cf72c4f955c0b9fbbb13d6586049071934b22209",
+      "symbol": "PackageInfo",
+      "symbol_hash": "sha256:aaf5b98d4a7dc29f83b698f1fb2881b7bb258885bd2aaf17a53b6da902d1eda1"
+    },
+    {
+      "body_hash": "sha256:cc58b284eb83d3af52e586f2af522b33b3dcb4a63d5675f752047b256874cce3",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:8a07b85ef52202817199529eb85bd9e57dc995f6e07f09ced1aeec0baf40513e",
+      "symbol": "PackageInfo.NAME",
+      "symbol_hash": "sha256:3942a963fcf59af7b1a181bea940b7a883dec4f7059b042451842334e47768cd"
+    },
+    {
+      "body_hash": "sha256:1f50b949f3e09514616d8d527374472d470a2693413a93ccf8df89205c4814c2",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:bda307293305fe13f76bb51ed2cdbf08110bf353393c5a3ba9b2c6e48c1825a8",
+      "symbol": "PackageInfo.REQUIRED_PYTHON",
+      "symbol_hash": "sha256:cf74d0eb707a3668aa515bdd31d767109337841bcf28f03b96c6e9264d9407a4"
+    },
+    {
+      "body_hash": "sha256:81e16ccea394a6f22e27d6a26210439f9099e8217d9d38c3f411ae7bd3f43936",
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:5c9774e81f3886d7a93f4152480e1ed58f8749a486ce411bd4e0830807b1e6e7",
+      "symbol": "PackageInfo.VERSION",
+      "symbol_hash": "sha256:a8260e5f38f8422e1ac38ce24fd0136b4bb3a4de24f268e9a262aa6034031ea4"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 568,
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:9b095b8323bc225f2dc984ce84b448beb1c9ca385a260e7fc7fa0e20e9518d24",
+      "symbol": "Directory",
+      "symbol_hash": "sha256:5b876ad7fd9b11f66cc01ecb6c43d4e143b6f0258ba070c02551d968dd68aaf6"
+    },
+    {
+      "body_hash": "sha256:4c60beb875b71c3866ad7b2f6c4c2976c58edba859a3eb364608665539a37a30",
+      "inventory_index": 569,
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:3b7cde5117ef1f4f50cc31536156cfc47972e4891e14cef1873dbb21670bec45",
+      "symbol": "Directory.ENERGYPLUS_DIR",
+      "symbol_hash": "sha256:7e01ceac3f311fa9fbf2fde2b25cc1c7cd16c3b3f16a3dae9f55531d25ecef5d"
+    },
+    {
+      "body_hash": "sha256:611dabcf2c487823916965244bd620d3e2e8142f13418e7037648c2412df96b4",
+      "inventory_index": 570,
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:fc2b368da7a4f29b674e0243a9cc5f51932a415e16ce648aaa6f0952f2d5b803",
+      "symbol": "Directory.IDD_DIR",
+      "symbol_hash": "sha256:1f0c2815e4e0732316c71edc653a9a35e5081466805dfbf900c10971f1d171d5"
+    },
+    {
+      "body_hash": "sha256:14d09e816f44d227fd4799d8ebd5d1c6d1f0fccb28985882f54864bb86696fe8",
+      "inventory_index": 571,
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:e63d078f01a7657c55c23cdbdaa3fdc0b1bf9367a911885dd5706e22cf728d36",
+      "symbol": "Directory.PROFILE_DIR",
+      "symbol_hash": "sha256:f65d5eaefa2bc1cbb6f0c9b5904624194a1551f48e7966c7973d35526bad4fa6"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 572,
+      "kind": "class",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:2740bb2f2c36f7a928b58073cf72c4f955c0b9fbbb13d6586049071934b22209",
+      "symbol": "PackageInfo",
+      "symbol_hash": "sha256:aaf5b98d4a7dc29f83b698f1fb2881b7bb258885bd2aaf17a53b6da902d1eda1"
+    },
+    {
+      "body_hash": "sha256:cc58b284eb83d3af52e586f2af522b33b3dcb4a63d5675f752047b256874cce3",
+      "inventory_index": 573,
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:8a07b85ef52202817199529eb85bd9e57dc995f6e07f09ced1aeec0baf40513e",
+      "symbol": "PackageInfo.NAME",
+      "symbol_hash": "sha256:3942a963fcf59af7b1a181bea940b7a883dec4f7059b042451842334e47768cd"
+    },
+    {
+      "body_hash": "sha256:1f50b949f3e09514616d8d527374472d470a2693413a93ccf8df89205c4814c2",
+      "inventory_index": 574,
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:bda307293305fe13f76bb51ed2cdbf08110bf353393c5a3ba9b2c6e48c1825a8",
+      "symbol": "PackageInfo.REQUIRED_PYTHON",
+      "symbol_hash": "sha256:cf74d0eb707a3668aa515bdd31d767109337841bcf28f03b96c6e9264d9407a4"
+    },
+    {
+      "body_hash": "sha256:81e16ccea394a6f22e27d6a26210439f9099e8217d9d38c3f411ae7bd3f43936",
+      "inventory_index": 575,
+      "kind": "constant",
+      "path": "src/idragon/constants.py",
+      "signature_hash": "sha256:5c9774e81f3886d7a93f4152480e1ed58f8749a486ce411bd4e0830807b1e6e7",
+      "symbol": "PackageInfo.VERSION",
+      "symbol_hash": "sha256:a8260e5f38f8422e1ac38ce24fd0136b4bb3a4de24f268e9a262aa6034031ea4"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory": {
+      "bytes": 518070,
+      "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+      "file_sha256": "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    },
+    "isolated_import": {
+      "files_after_execution": [
+        "location-a/repository/src/idragon/constants.py",
+        "location-b/repository/src/idragon/constants.py"
+      ],
+      "module_names": [
+        "_goniegonie_constants_metadata_location_a",
+        "_goniegonie_constants_metadata_location_b"
+      ],
+      "source_copy_sha256": {
+        "location-a/repository/src/idragon/constants.py": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520",
+        "location-b/repository/src/idragon/constants.py": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      }
+    },
+    "source": {
+      "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+      "bytes": 2590,
+      "path": "src/idragon/constants.py",
+      "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+    }
+  }
+}
