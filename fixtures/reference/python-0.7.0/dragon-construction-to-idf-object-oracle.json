@@ -1,0 +1,1914 @@
+{
+  "cases": [
+    {
+      "executor": "construction-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-air-boundary-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-construction-to-idf-object.air-boundary.alternate-ach",
+      "python": {
+        "facts": {
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 4,
+                "object_type": "Construction:AirBoundary",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Transfer Air Alternate"
+                    }
+                  },
+                  {
+                    "name": "Air Exchange Method",
+                    "value": {
+                      "kind": "str",
+                      "value": "SimpleMixing"
+                    }
+                  },
+                  {
+                    "name": "Simple Mixing Air Changes per Hour",
+                    "value": {
+                      "hex": "0x1.4000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.25"
+                    }
+                  },
+                  {
+                    "name": "Simple Mixing Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true
+            ],
+            "fresh_result_list": true,
+            "fresh_return_value": true,
+            "object_count": 1,
+            "object_types": [
+              "Construction:AirBoundary"
+            ],
+            "result_type": "list",
+            "same_idd_definition_flags": [
+              true
+            ],
+            "second_fields_equal_flags": [
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          },
+          "input_context": {
+            "captured_state_scope": "properties-read-by-target-method",
+            "source_state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Transfer Air Alternate"
+                }
+              },
+              {
+                "name": "ACH",
+                "value": {
+                  "hex": "0x1.4000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.25"
+                }
+              }
+            ],
+            "source_state_unchanged_after_two_emissions": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "AirBoundary.to_idf_object"
+    },
+    {
+      "executor": "construction-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-air-boundary-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-construction-to-idf-object.air-boundary.representative-ach",
+      "python": {
+        "facts": {
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 4,
+                "object_type": "Construction:AirBoundary",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Transfer Air Representative"
+                    }
+                  },
+                  {
+                    "name": "Air Exchange Method",
+                    "value": {
+                      "kind": "str",
+                      "value": "SimpleMixing"
+                    }
+                  },
+                  {
+                    "name": "Simple Mixing Air Changes per Hour",
+                    "value": {
+                      "hex": "0x1.0000000000000p-1",
+                      "kind": "float",
+                      "repr": "0.5"
+                    }
+                  },
+                  {
+                    "name": "Simple Mixing Schedule Name",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true
+            ],
+            "fresh_result_list": true,
+            "fresh_return_value": true,
+            "object_count": 1,
+            "object_types": [
+              "Construction:AirBoundary"
+            ],
+            "result_type": "list",
+            "same_idd_definition_flags": [
+              true
+            ],
+            "second_fields_equal_flags": [
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          },
+          "input_context": {
+            "captured_state_scope": "properties-read-by-target-method",
+            "source_state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Transfer Air Representative"
+                }
+              },
+              {
+                "name": "ACH",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              }
+            ],
+            "source_state_unchanged_after_two_emissions": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "AirBoundary.to_idf_object"
+    },
+    {
+      "executor": "construction-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-construction-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-construction-to-idf-object.construction.multi-layer-surface-scope",
+      "python": {
+        "facts": {
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 11,
+                "object_type": "Construction",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Wall Assembly:for:South Wall"
+                    }
+                  },
+                  {
+                    "name": "Outside Layer",
+                    "value": {
+                      "kind": "str",
+                      "value": "Exterior Render 20mm"
+                    }
+                  },
+                  {
+                    "name": "Layer 2",
+                    "value": {
+                      "kind": "str",
+                      "value": "Structural Core 180mm"
+                    }
+                  },
+                  {
+                    "name": "Layer 3",
+                    "value": {
+                      "kind": "str",
+                      "value": "Interior Finish 13mm"
+                    }
+                  },
+                  {
+                    "name": "Layer 4",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 5",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 6",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 7",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 8",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 9",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 10",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true
+            ],
+            "fresh_result_list": true,
+            "fresh_return_value": true,
+            "object_count": 1,
+            "object_types": [
+              "Construction"
+            ],
+            "result_type": "list",
+            "same_idd_definition_flags": [
+              true
+            ],
+            "second_fields_equal_flags": [
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          },
+          "input_context": {
+            "captured_state_scope": "properties-read-by-target-method",
+            "source_state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Wall Assembly"
+                }
+              },
+              {
+                "name": "layer_names",
+                "value": [
+                  {
+                    "kind": "str",
+                    "value": "Exterior Render 20mm"
+                  },
+                  {
+                    "kind": "str",
+                    "value": "Structural Core 180mm"
+                  },
+                  {
+                    "kind": "str",
+                    "value": "Interior Finish 13mm"
+                  }
+                ]
+              },
+              {
+                "name": "surface.name",
+                "value": {
+                  "kind": "str",
+                  "value": "South Wall"
+                }
+              }
+            ],
+            "source_state_unchanged_after_two_emissions": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Construction.to_idf_object"
+    },
+    {
+      "executor": "construction-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-construction-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-construction-to-idf-object.construction.single-layer-surface-scope",
+      "python": {
+        "facts": {
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 11,
+                "object_type": "Construction",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Roof Assembly:for:Roof Plane"
+                    }
+                  },
+                  {
+                    "name": "Outside Layer",
+                    "value": {
+                      "kind": "str",
+                      "value": "Roof Insulation 200mm"
+                    }
+                  },
+                  {
+                    "name": "Layer 2",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 3",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 4",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 5",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 6",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 7",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 8",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 9",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 10",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true
+            ],
+            "fresh_result_list": true,
+            "fresh_return_value": true,
+            "object_count": 1,
+            "object_types": [
+              "Construction"
+            ],
+            "result_type": "list",
+            "same_idd_definition_flags": [
+              true
+            ],
+            "second_fields_equal_flags": [
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          },
+          "input_context": {
+            "captured_state_scope": "properties-read-by-target-method",
+            "source_state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Roof Assembly"
+                }
+              },
+              {
+                "name": "layer_names",
+                "value": [
+                  {
+                    "kind": "str",
+                    "value": "Roof Insulation 200mm"
+                  }
+                ]
+              },
+              {
+                "name": "surface.name",
+                "value": {
+                  "kind": "str",
+                  "value": "Roof Plane"
+                }
+              }
+            ],
+            "source_state_unchanged_after_two_emissions": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Construction.to_idf_object"
+    },
+    {
+      "executor": "construction-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-glazing-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-construction-to-idf-object.glazing.alternate-values",
+      "python": {
+        "facts": {
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 4,
+                "object_type": "WindowMaterial:SimpleGlazingSystem",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "$GLAZING_FOR$Clear Glazing"
+                    }
+                  },
+                  {
+                    "name": "U-Factor",
+                    "value": {
+                      "hex": "0x1.6000000000000p+1",
+                      "kind": "float",
+                      "repr": "2.75"
+                    }
+                  },
+                  {
+                    "name": "Solar Heat Gain Coefficient",
+                    "value": {
+                      "hex": "0x1.4000000000000p-1",
+                      "kind": "float",
+                      "repr": "0.625"
+                    }
+                  },
+                  {
+                    "name": "Visible Transmittance",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 11,
+                "object_type": "Construction",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Clear Glazing"
+                    }
+                  },
+                  {
+                    "name": "Outside Layer",
+                    "value": {
+                      "kind": "str",
+                      "value": "$GLAZING_FOR$Clear Glazing"
+                    }
+                  },
+                  {
+                    "name": "Layer 2",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 3",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 4",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 5",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 6",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 7",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 8",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 9",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 10",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true,
+              true
+            ],
+            "fresh_result_list": true,
+            "fresh_return_value": true,
+            "object_count": 2,
+            "object_types": [
+              "WindowMaterial:SimpleGlazingSystem",
+              "Construction"
+            ],
+            "result_type": "list",
+            "same_idd_definition_flags": [
+              true,
+              true
+            ],
+            "second_fields_equal_flags": [
+              true,
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          },
+          "input_context": {
+            "captured_state_scope": "properties-read-by-target-method",
+            "source_state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Clear Glazing"
+                }
+              },
+              {
+                "name": "U",
+                "value": {
+                  "hex": "0x1.6000000000000p+1",
+                  "kind": "float",
+                  "repr": "2.75"
+                }
+              },
+              {
+                "name": "G",
+                "value": {
+                  "hex": "0x1.4000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.625"
+                }
+              }
+            ],
+            "source_state_unchanged_after_two_emissions": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Glazing.to_idf_object"
+    },
+    {
+      "executor": "construction-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-glazing-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-construction-to-idf-object.glazing.representative-values",
+      "python": {
+        "facts": {
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 4,
+                "object_type": "WindowMaterial:SimpleGlazingSystem",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "$GLAZING_FOR$Triple Glazing"
+                    }
+                  },
+                  {
+                    "name": "U-Factor",
+                    "value": {
+                      "hex": "0x1.999999999999ap-1",
+                      "kind": "float",
+                      "repr": "0.8"
+                    }
+                  },
+                  {
+                    "name": "Solar Heat Gain Coefficient",
+                    "value": {
+                      "hex": "0x1.ccccccccccccdp-2",
+                      "kind": "float",
+                      "repr": "0.45"
+                    }
+                  },
+                  {
+                    "name": "Visible Transmittance",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 11,
+                "object_type": "Construction",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Triple Glazing"
+                    }
+                  },
+                  {
+                    "name": "Outside Layer",
+                    "value": {
+                      "kind": "str",
+                      "value": "$GLAZING_FOR$Triple Glazing"
+                    }
+                  },
+                  {
+                    "name": "Layer 2",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 3",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 4",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 5",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 6",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 7",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 8",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 9",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 10",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true,
+              true
+            ],
+            "fresh_result_list": true,
+            "fresh_return_value": true,
+            "object_count": 2,
+            "object_types": [
+              "WindowMaterial:SimpleGlazingSystem",
+              "Construction"
+            ],
+            "result_type": "list",
+            "same_idd_definition_flags": [
+              true,
+              true
+            ],
+            "second_fields_equal_flags": [
+              true,
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          },
+          "input_context": {
+            "captured_state_scope": "properties-read-by-target-method",
+            "source_state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Triple Glazing"
+                }
+              },
+              {
+                "name": "U",
+                "value": {
+                  "hex": "0x1.999999999999ap-1",
+                  "kind": "float",
+                  "repr": "0.8"
+                }
+              },
+              {
+                "name": "G",
+                "value": {
+                  "hex": "0x1.ccccccccccccdp-2",
+                  "kind": "float",
+                  "repr": "0.45"
+                }
+              }
+            ],
+            "source_state_unchanged_after_two_emissions": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Glazing.to_idf_object"
+    },
+    {
+      "executor": "construction-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-layer-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-construction-to-idf-object.layer.alternate-material-values",
+      "python": {
+        "facts": {
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 9,
+                "object_type": "Material",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Wood Fibre 80mm"
+                    }
+                  },
+                  {
+                    "name": "Roughness",
+                    "value": {
+                      "kind": "str",
+                      "value": "Smooth"
+                    }
+                  },
+                  {
+                    "name": "Thickness",
+                    "value": {
+                      "hex": "0x1.47ae147ae147bp-4",
+                      "kind": "float",
+                      "repr": "0.08"
+                    }
+                  },
+                  {
+                    "name": "Conductivity",
+                    "value": {
+                      "hex": "0x1.0000000000000p-3",
+                      "kind": "float",
+                      "repr": "0.125"
+                    }
+                  },
+                  {
+                    "name": "Density",
+                    "value": {
+                      "hex": "0x1.4000000000000p+7",
+                      "kind": "float",
+                      "repr": "160.0"
+                    }
+                  },
+                  {
+                    "name": "Specific Heat",
+                    "value": {
+                      "hex": "0x1.0680000000000p+11",
+                      "kind": "float",
+                      "repr": "2100.0"
+                    }
+                  },
+                  {
+                    "name": "Thermal Absorptance",
+                    "value": {
+                      "hex": "0x1.b333333333333p-1",
+                      "kind": "float",
+                      "repr": "0.85"
+                    }
+                  },
+                  {
+                    "name": "Solar Absorptance",
+                    "value": {
+                      "hex": "0x1.0000000000000p-1",
+                      "kind": "float",
+                      "repr": "0.5"
+                    }
+                  },
+                  {
+                    "name": "Visible Absorptance",
+                    "value": {
+                      "hex": "0x1.ccccccccccccdp-2",
+                      "kind": "float",
+                      "repr": "0.45"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true
+            ],
+            "fresh_result_list": null,
+            "fresh_return_value": true,
+            "object_count": 1,
+            "object_types": [
+              "Material"
+            ],
+            "result_type": "IdfObject",
+            "same_idd_definition_flags": [
+              true
+            ],
+            "second_fields_equal_flags": [
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          },
+          "input_context": {
+            "captured_state_scope": "properties-read-by-target-method",
+            "source_state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Wood Fibre 80mm"
+                }
+              },
+              {
+                "name": "material.name",
+                "value": {
+                  "kind": "str",
+                  "value": "Wood Fibre"
+                }
+              },
+              {
+                "name": "material.roughness",
+                "value": {
+                  "kind": "str",
+                  "value": "Smooth"
+                }
+              },
+              {
+                "name": "thickness",
+                "value": {
+                  "hex": "0x1.47ae147ae147bp-4",
+                  "kind": "float",
+                  "repr": "0.08"
+                }
+              },
+              {
+                "name": "material.conductivity",
+                "value": {
+                  "hex": "0x1.0000000000000p-3",
+                  "kind": "float",
+                  "repr": "0.125"
+                }
+              },
+              {
+                "name": "material.density",
+                "value": {
+                  "hex": "0x1.4000000000000p+7",
+                  "kind": "float",
+                  "repr": "160.0"
+                }
+              },
+              {
+                "name": "material.specific_heat",
+                "value": {
+                  "hex": "0x1.0680000000000p+11",
+                  "kind": "float",
+                  "repr": "2100.0"
+                }
+              },
+              {
+                "name": "material.thermal_absorptance",
+                "value": {
+                  "hex": "0x1.b333333333333p-1",
+                  "kind": "float",
+                  "repr": "0.85"
+                }
+              },
+              {
+                "name": "material.solar_absorptance",
+                "value": {
+                  "hex": "0x1.0000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.5"
+                }
+              },
+              {
+                "name": "material.visible_absorptance",
+                "value": {
+                  "hex": "0x1.ccccccccccccdp-2",
+                  "kind": "float",
+                  "repr": "0.45"
+                }
+              }
+            ],
+            "source_state_unchanged_after_two_emissions": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Layer.to_idf_object"
+    },
+    {
+      "executor": "construction-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-layer-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-construction-to-idf-object.layer.representative-material-values",
+      "python": {
+        "facts": {
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 9,
+                "object_type": "Material",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Dense Concrete 180mm"
+                    }
+                  },
+                  {
+                    "name": "Roughness",
+                    "value": {
+                      "kind": "str",
+                      "value": "MediumRough"
+                    }
+                  },
+                  {
+                    "name": "Thickness",
+                    "value": {
+                      "hex": "0x1.70a3d70a3d70ap-3",
+                      "kind": "float",
+                      "repr": "0.18"
+                    }
+                  },
+                  {
+                    "name": "Conductivity",
+                    "value": {
+                      "hex": "0x1.c000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.75"
+                    }
+                  },
+                  {
+                    "name": "Density",
+                    "value": {
+                      "hex": "0x1.1f80000000000p+11",
+                      "kind": "float",
+                      "repr": "2300.0"
+                    }
+                  },
+                  {
+                    "name": "Specific Heat",
+                    "value": {
+                      "hex": "0x1.c200000000000p+9",
+                      "kind": "float",
+                      "repr": "900.0"
+                    }
+                  },
+                  {
+                    "name": "Thermal Absorptance",
+                    "value": {
+                      "hex": "0x1.ccccccccccccdp-1",
+                      "kind": "float",
+                      "repr": "0.9"
+                    }
+                  },
+                  {
+                    "name": "Solar Absorptance",
+                    "value": {
+                      "hex": "0x1.4cccccccccccdp-1",
+                      "kind": "float",
+                      "repr": "0.65"
+                    }
+                  },
+                  {
+                    "name": "Visible Absorptance",
+                    "value": {
+                      "hex": "0x1.199999999999ap-1",
+                      "kind": "float",
+                      "repr": "0.55"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true
+            ],
+            "fresh_result_list": null,
+            "fresh_return_value": true,
+            "object_count": 1,
+            "object_types": [
+              "Material"
+            ],
+            "result_type": "IdfObject",
+            "same_idd_definition_flags": [
+              true
+            ],
+            "second_fields_equal_flags": [
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          },
+          "input_context": {
+            "captured_state_scope": "properties-read-by-target-method",
+            "source_state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Dense Concrete 180mm"
+                }
+              },
+              {
+                "name": "material.name",
+                "value": {
+                  "kind": "str",
+                  "value": "Dense Concrete"
+                }
+              },
+              {
+                "name": "material.roughness",
+                "value": {
+                  "kind": "str",
+                  "value": "MediumRough"
+                }
+              },
+              {
+                "name": "thickness",
+                "value": {
+                  "hex": "0x1.70a3d70a3d70ap-3",
+                  "kind": "float",
+                  "repr": "0.18"
+                }
+              },
+              {
+                "name": "material.conductivity",
+                "value": {
+                  "hex": "0x1.c000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.75"
+                }
+              },
+              {
+                "name": "material.density",
+                "value": {
+                  "hex": "0x1.1f80000000000p+11",
+                  "kind": "float",
+                  "repr": "2300.0"
+                }
+              },
+              {
+                "name": "material.specific_heat",
+                "value": {
+                  "hex": "0x1.c200000000000p+9",
+                  "kind": "float",
+                  "repr": "900.0"
+                }
+              },
+              {
+                "name": "material.thermal_absorptance",
+                "value": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                }
+              },
+              {
+                "name": "material.solar_absorptance",
+                "value": {
+                  "hex": "0x1.4cccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.65"
+                }
+              },
+              {
+                "name": "material.visible_absorptance",
+                "value": {
+                  "hex": "0x1.199999999999ap-1",
+                  "kind": "float",
+                  "repr": "0.55"
+                }
+              }
+            ],
+            "source_state_unchanged_after_two_emissions": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "Layer.to_idf_object"
+    },
+    {
+      "executor": "construction-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-no-mass-construction-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-construction-to-idf-object.no-mass-construction.alternate-u",
+      "python": {
+        "facts": {
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 6,
+                "object_type": "Material:NoMass",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "$MaterialFor$_Light Partition"
+                    }
+                  },
+                  {
+                    "name": "Roughness",
+                    "value": {
+                      "kind": "str",
+                      "value": "Rough"
+                    }
+                  },
+                  {
+                    "name": "Thermal Resistance",
+                    "value": {
+                      "hex": "0x1.0000000000000p-1",
+                      "kind": "float",
+                      "repr": "0.5"
+                    }
+                  },
+                  {
+                    "name": "Thermal Absorptance",
+                    "value": {
+                      "hex": "0x1.ccccccccccccdp-1",
+                      "kind": "float",
+                      "repr": "0.9"
+                    }
+                  },
+                  {
+                    "name": "Solar Absorptance",
+                    "value": {
+                      "hex": "0x1.6666666666666p-1",
+                      "kind": "float",
+                      "repr": "0.7"
+                    }
+                  },
+                  {
+                    "name": "Visible Absorptance",
+                    "value": {
+                      "hex": "0x1.6666666666666p-1",
+                      "kind": "float",
+                      "repr": "0.7"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 11,
+                "object_type": "Construction",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Light Partition"
+                    }
+                  },
+                  {
+                    "name": "Outside Layer",
+                    "value": {
+                      "kind": "str",
+                      "value": "$MaterialFor$_Light Partition"
+                    }
+                  },
+                  {
+                    "name": "Layer 2",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 3",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 4",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 5",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 6",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 7",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 8",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 9",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 10",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true,
+              true
+            ],
+            "fresh_result_list": true,
+            "fresh_return_value": true,
+            "object_count": 2,
+            "object_types": [
+              "Material:NoMass",
+              "Construction"
+            ],
+            "result_type": "list",
+            "same_idd_definition_flags": [
+              true,
+              true
+            ],
+            "second_fields_equal_flags": [
+              true,
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          },
+          "input_context": {
+            "captured_state_scope": "properties-read-by-target-method",
+            "source_state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Light Partition"
+                }
+              },
+              {
+                "name": "U",
+                "value": {
+                  "hex": "0x1.0000000000000p+1",
+                  "kind": "float",
+                  "repr": "2.0"
+                }
+              }
+            ],
+            "source_state_unchanged_after_two_emissions": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "NoMassConstruction.to_idf_object"
+    },
+    {
+      "executor": "construction-to-idf-object",
+      "expected_dotnet": {
+        "adaptation": "model-context-no-mass-construction-idf-emission",
+        "outcome": "returned"
+      },
+      "id": "dragon-construction-to-idf-object.no-mass-construction.representative-u",
+      "python": {
+        "facts": {
+          "emission": {
+            "all_allowed_fields_covered_in_order": true,
+            "first_object_records": [
+              {
+                "field_count": 6,
+                "object_type": "Material:NoMass",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "$MaterialFor$_Insulated Panel"
+                    }
+                  },
+                  {
+                    "name": "Roughness",
+                    "value": {
+                      "kind": "str",
+                      "value": "Rough"
+                    }
+                  },
+                  {
+                    "name": "Thermal Resistance",
+                    "value": {
+                      "hex": "0x1.0000000000000p+2",
+                      "kind": "float",
+                      "repr": "4.0"
+                    }
+                  },
+                  {
+                    "name": "Thermal Absorptance",
+                    "value": {
+                      "hex": "0x1.ccccccccccccdp-1",
+                      "kind": "float",
+                      "repr": "0.9"
+                    }
+                  },
+                  {
+                    "name": "Solar Absorptance",
+                    "value": {
+                      "hex": "0x1.6666666666666p-1",
+                      "kind": "float",
+                      "repr": "0.7"
+                    }
+                  },
+                  {
+                    "name": "Visible Absorptance",
+                    "value": {
+                      "hex": "0x1.6666666666666p-1",
+                      "kind": "float",
+                      "repr": "0.7"
+                    }
+                  }
+                ]
+              },
+              {
+                "field_count": 11,
+                "object_type": "Construction",
+                "ordered_fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Insulated Panel"
+                    }
+                  },
+                  {
+                    "name": "Outside Layer",
+                    "value": {
+                      "kind": "str",
+                      "value": "$MaterialFor$_Insulated Panel"
+                    }
+                  },
+                  {
+                    "name": "Layer 2",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 3",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 4",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 5",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 6",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 7",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 8",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 9",
+                    "value": {
+                      "kind": "none"
+                    }
+                  },
+                  {
+                    "name": "Layer 10",
+                    "value": {
+                      "kind": "none"
+                    }
+                  }
+                ]
+              }
+            ],
+            "first_objects_pairwise_distinct": true,
+            "fresh_idf_object_flags": [
+              true,
+              true
+            ],
+            "fresh_result_list": true,
+            "fresh_return_value": true,
+            "object_count": 2,
+            "object_types": [
+              "Material:NoMass",
+              "Construction"
+            ],
+            "result_type": "list",
+            "same_idd_definition_flags": [
+              true,
+              true
+            ],
+            "second_fields_equal_flags": [
+              true,
+              true
+            ],
+            "second_objects_pairwise_distinct": true
+          },
+          "input_context": {
+            "captured_state_scope": "properties-read-by-target-method",
+            "source_state": [
+              {
+                "name": "name",
+                "value": {
+                  "kind": "str",
+                  "value": "Insulated Panel"
+                }
+              },
+              {
+                "name": "U",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              }
+            ],
+            "source_state_unchanged_after_two_emissions": true
+          }
+        },
+        "outcome": "returned"
+      },
+      "symbol": "NoMassConstruction.to_idf_object"
+    }
+  ],
+  "cases_sha256": "sha256:c99cd6cf0fabfa45e599866d7acb8be22d9c7d7d6d6ab13b8732ad811291cbf5",
+  "consumer_contract": {
+    "adaptations": {
+      "AirBoundary.to_idf_object": "model-context-air-boundary-idf-emission",
+      "Construction.to_idf_object": "model-context-construction-idf-emission",
+      "Glazing.to_idf_object": "model-context-glazing-idf-emission",
+      "Layer.to_idf_object": "model-context-layer-idf-emission",
+      "NoMassConstruction.to_idf_object": "model-context-no-mass-construction-idf-emission"
+    },
+    "assertion_ids": {
+      "AirBoundary.to_idf_object": "dragon-construction-air-boundary-to-idf-object-639a205f",
+      "Construction.to_idf_object": "dragon-construction-construction-to-idf-object-71a76f27",
+      "Glazing.to_idf_object": "dragon-construction-glazing-to-idf-object-3350beaf",
+      "Layer.to_idf_object": "dragon-construction-layer-to-idf-object-66e6d458",
+      "NoMassConstruction.to_idf_object": "dragon-construction-no-mass-construction-to-idf-object-2bc3fe98"
+    },
+    "case_count": 10,
+    "case_ids": [
+      "dragon-construction-to-idf-object.air-boundary.alternate-ach",
+      "dragon-construction-to-idf-object.air-boundary.representative-ach",
+      "dragon-construction-to-idf-object.construction.multi-layer-surface-scope",
+      "dragon-construction-to-idf-object.construction.single-layer-surface-scope",
+      "dragon-construction-to-idf-object.glazing.alternate-values",
+      "dragon-construction-to-idf-object.glazing.representative-values",
+      "dragon-construction-to-idf-object.layer.alternate-material-values",
+      "dragon-construction-to-idf-object.layer.representative-material-values",
+      "dragon-construction-to-idf-object.no-mass-construction.alternate-u",
+      "dragon-construction-to-idf-object.no-mass-construction.representative-u"
+    ],
+    "classification_basis": "native conversion is available only through private EnergyModelIdfAssembler model context, which compacts default fields and deduplicates shared definitions; standalone mutable-list parity is not claimed",
+    "classifications": {
+      "AirBoundary.to_idf_object": "exception",
+      "Construction.to_idf_object": "exception",
+      "Glazing.to_idf_object": "exception",
+      "Layer.to_idf_object": "exception",
+      "NoMassConstruction.to_idf_object": "exception"
+    },
+    "closure": {
+      "context_only_not_targeted": [
+        "AirBoundary",
+        "AirBoundary.__init__",
+        "AirBoundary.__repr__",
+        "AirBoundary.__str__",
+        "Construction",
+        "Construction.__eq__",
+        "Construction.__hash__",
+        "Construction.__init__",
+        "Construction.U",
+        "Construction.heat_capacity",
+        "Construction.reversed",
+        "Construction.thickness",
+        "Glazing",
+        "Glazing.__init__",
+        "Glazing.__repr__",
+        "Glazing.__str__",
+        "Glazing.G",
+        "Glazing.U",
+        "Layer",
+        "Layer.__eq__",
+        "Layer.__hash__",
+        "Layer.__init__",
+        "Layer.U",
+        "Layer.heat_capacity",
+        "Layer.material",
+        "Layer.thickness",
+        "Material",
+        "MaterialRoughness",
+        "NoMassConstruction",
+        "NoMassConstruction.__init__",
+        "NoMassConstruction.__repr__",
+        "NoMassConstruction.__str__",
+        "NoMassConstruction.U"
+      ],
+      "full_symbol_closure": false,
+      "scope": "bounded-common-valid-state-construction-family-idf-emission-in-model-context",
+      "unresolved_behavior": [
+        "all-five-class-constructor-property-equality-hash-contracts",
+        "invalid-domain-and-error-semantics",
+        "IdfObject",
+        "IdfObject.__init__",
+        "isolated-IdfObject-validation-policy",
+        "Surface",
+        "Surface.to_idf_object",
+        "Zone",
+        "Zone.to_idf_object",
+        "EnergyModel.to_idf",
+        "native-model-deduplication-and-conflict-semantics",
+        "native-global-object-order-and-shared-material-compaction"
+      ]
+    },
+    "identity_encoding": "booleans-only-no-id-or-address",
+    "native_targets": {
+      "AirBoundary.to_idf_object": "EnergyModel.ToIdfDocument via private EnergyModelIdfAssembler.AppendSurfaceConstruction",
+      "Construction.to_idf_object": "EnergyModel.ToIdfDocument via private EnergyModelIdfAssembler.AppendSurfaceConstruction",
+      "Glazing.to_idf_object": "EnergyModel.ToIdfDocument via private EnergyModelIdfAssembler.AppendGlazing",
+      "Layer.to_idf_object": "EnergyModel.ToIdfDocument via private EnergyModelIdfAssembler.AppendSurfaceConstruction",
+      "NoMassConstruction.to_idf_object": "EnergyModel.ToIdfDocument via private EnergyModelIdfAssembler.AppendSurfaceConstruction"
+    },
+    "source_import_policy": "external-temporary-copy-with-complete-loaded-local-module-audit",
+    "target_symbols": [
+      "AirBoundary.to_idf_object",
+      "Construction.to_idf_object",
+      "Glazing.to_idf_object",
+      "Layer.to_idf_object",
+      "NoMassConstruction.to_idf_object"
+    ]
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-construction-to-idf-object.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:ada40fa4a3bb88a012f0e91622290700bbae9e525bb8f07ac918f39290e2d325",
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "signature_hash": "sha256:aad6529bd53e6b00992b78af16eec99debb2fe8c83c692755dbdc772c8094008",
+      "symbol": "AirBoundary.to_idf_object",
+      "symbol_hash": "sha256:639a205f5c73ed6febc52735b33521b20dbeb644fcc4fd6ac2e148439c4e9545"
+    },
+    {
+      "body_hash": "sha256:a878a51cb6bbfabee7834f446fba29d5b996ba549dd02e93607132b203f47d4c",
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "signature_hash": "sha256:b55fe94795be2a00b3d45a008615fcf1e3efee2bfa89946d24c74488c2b8fb1c",
+      "symbol": "Construction.to_idf_object",
+      "symbol_hash": "sha256:71a76f27ebadf7476c2746f1634258a52b3f16bd19e01624d9ce3809afc37309"
+    },
+    {
+      "body_hash": "sha256:10b7267535d8de4d92cfa27a6718948e6819ff322d369c51cf9032aae397034b",
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "Glazing.to_idf_object",
+      "symbol_hash": "sha256:3350beafdd06d7e477a86dedc271f9e4e71452dafd3137dcd8e512f94f58d093"
+    },
+    {
+      "body_hash": "sha256:613dae616f8daa7794182d70a909db46722aff6a3c7f9fc68382082231959429",
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "signature_hash": "sha256:aad6529bd53e6b00992b78af16eec99debb2fe8c83c692755dbdc772c8094008",
+      "symbol": "Layer.to_idf_object",
+      "symbol_hash": "sha256:66e6d4589806a69db0d4023bcd6160f1e9a7079ed4aac3f3cb5f0839307fc884"
+    },
+    {
+      "body_hash": "sha256:ef1eb1b1d4ae714edb40b1feb6fec0c62e89a7623bc88353eb60c1093e2bfa6a",
+      "kind": "function",
+      "path": "src/idragon/dragon/construction.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "NoMassConstruction.to_idf_object",
+      "symbol_hash": "sha256:2bc3fe982f11770f5e4e23b97b52c608fc40f61d86d4d1afff00b0077626b096"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "loaded_local_modules": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "module": "idragon",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "module": "idragon.common",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "module": "idragon.constants",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "module": "idragon.dragon",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "module": "idragon.dragon.construction",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "module": "idragon.dragon.hvac",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "module": "idragon.dragon.model",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "module": "idragon.dragon.profile",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "module": "idragon.dragon.shape",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "module": "idragon.imugi",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "module": "idragon.launcher",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "module": "idragon.utils",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ],
+    "sources": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ]
+  }
+}
