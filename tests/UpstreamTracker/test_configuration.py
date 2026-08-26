@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(714, len(compatibility.needs_reverification))
+        self.assertEqual(713, len(compatibility.needs_reverification))
         self.assertEqual(
             133,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            143,
+            144,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -126,6 +126,30 @@ class ConfigurationTests(unittest.TestCase):
             ),
         }
         for symbol, (index, exception_id, assertion_id) in expected_zone_idf.items():
+            key = ("src/idragon/dragon/shape.py", symbol)
+            entry = by_key[key]
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual(entry, compatibility.matrix.entries[index], symbol)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            self.assertEqual(
+                (
+                    f"upstream/compatibility-exceptions.yml#{exception_id}",
+                    f"upstream/symbol-evidence.json#{assertion_id}",
+                ),
+                entry.evidence,
+                symbol,
+            )
+        expected_surface_idf = {
+            "Surface.to_idf_object": (
+                1045,
+                "legacy-rectangular-surface-idf-emission",
+                "dragon-shape-surface-to-idf-object-a03c4d52",
+            ),
+        }
+        for symbol, (index, exception_id, assertion_id) in (
+            expected_surface_idf.items()
+        ):
             key = ("src/idragon/dragon/shape.py", symbol)
             entry = by_key[key]
             self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)

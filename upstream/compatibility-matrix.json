@@ -1045,7 +1045,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:b9257512eaea4395904d6bc38821f261626cd68402eb6a66e925c8114f841df4",
+  "content_sha256": "sha256:1f0b46838a30518dd4a2ccd19f3cbf69606bf6a06f17d14a0c514e05d9773bf0",
   "details": [
     {
       "evidence": [
@@ -4850,6 +4850,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#legacy-rectangular-surface-idf-emission",
+        "upstream/symbol-evidence.json#dragon-shape-surface-to-idf-object-a03c4d52"
+      ],
+      "exception_id": "legacy-rectangular-surface-idf-emission",
+      "index": 1045,
+      "rationale": "Trusted cross-language evidence verifies Surface.to_idf_object across the exact five-case legacy-rectangular model-context slice: all 23 Python target objects and all 2437 official EnergyPlus 24.2 IDD fields are classified as native values, 2103 compact trailing omissions across eight spans, 91 explicit lexical or bounded-roundoff differences, and one corrected custom AirBoundary reference. Reciprocal two-window and two-door links, ground and roof classification, geometry, shading, target relocation and order, two-call document/object/field freshness and byte determinism, and the bounded captured source state are pinned. Standalone mutable-list shape, child classes and converters, invalid/error behavior, the native default detailed-fenestration route, IdfObject policy, broader global ordering/deduplication/conflict behavior, uncaptured source state, and EnergyModel parent-assembly closure remain unresolved."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-shape-py-vertex-eq-d11d670e"
       ],
       "index": 1062,
@@ -5235,8 +5244,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 133,
-      "exception": 143,
-      "needs_reverification": 714,
+      "exception": 144,
+      "needs_reverification": 713,
       "out_of_scope": 252
     },
     "entry_count": 1242

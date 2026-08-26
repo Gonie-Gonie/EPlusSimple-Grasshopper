@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:440a09efbbd72a4880c468cea2ad122a463820adbc5612140da6b542c11a44b1",
+  "content_sha256": "sha256:ad63332f80cd33eba8a08a4279aee1a4d95db6ad8d45a07703ea7ff26f043074",
   "entries": [
     {
       "implementation": {
@@ -6711,6 +6711,32 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendConstructionsAndGeometry"
+      },
+      "path": "src/idragon/dragon/shape.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify Surface.to_idf_object across its exact five-case legacy-rectangular model-context slice through public EnergyModel.ToIdfDocument and the private geometry mappers. All 23 Python target objects and all 2437 official EnergyPlus 24.2 IDD fields are classified as native values, 2103 compact trailing omissions across eight spans, 91 explicit lexical or bounded-roundoff differences, and one corrected custom AirBoundary reference. Reciprocal two-window and two-door links, ground and roof classification, geometry, shading, target relocation and order, two-call document/object/field freshness and byte determinism, and unchanged captured reference identities plus selected names, surface types, boundary/adjacency, surface vertices and opening areas are pinned. Standalone mutable-list shape, child classes and converters, invalid/error behavior, the native default detailed-fenestration route, IdfObject policy, broader global ordering/deduplication/conflict behavior, uncaptured source state, and EnergyModel parent-assembly closure remain unresolved.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:ce5d885ad999e85e029d8be3576f70c2762ed0d034eec18463669d7cc2761670",
+          "id": "dragon-shape-surface-to-idf-object-a03c4d52",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/SurfaceToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:d71721363bda3707be56f24af57de239c2b0494315103f085c6fe5841bafda48",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.SurfaceToIdfObjectOracleParityTests.MatchesPinnedPythonSurfaceEmissionThroughLegacyEnergyModelRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Surface.to_idf_object",
+      "upstream_symbol_hash": "sha256:a03c4d5229587498a9a3451a51c842e1f6df83e08ff5c42488a64959e384fece"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
         "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
         "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ConditionedZones"
@@ -7181,9 +7207,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 276,
-    "passed_receipt_count": 276,
-    "receipt_count": 276,
+    "entry_count": 277,
+    "passed_receipt_count": 277,
+    "receipt_count": 277,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

@@ -2094,3 +2094,17 @@
     api_contract: a typed abstract member and explicit unsupported boundary replace the upstream abstract method shape
     compatibility_evidence: only the one exact abstract-contract case, member identity, reflection binding, and unsupported boundary remain required; runtime emission, freshness, determinism, source-state mutation behavior, concrete systems, invalid behavior, and parent orchestration are explicitly not claimed here
   approval: accepted-native-api-adaptation
+
+- id: legacy-rectangular-surface-idf-emission
+  upstream:
+    path: src/idragon/dragon/shape.py
+    symbol: Surface.to_idf_object
+    symbol_hash: sha256:a03c4d5229587498a9a3451a51c842e1f6df83e08ff5c42488a64959e384fece
+  difference:
+    upstream: returns a fresh mutable standalone list of complete surface, opening and shading IDF objects in child-before-host order, uses positional interzone opening pairing, retains complete None/default tails, and can leave a custom AirBoundary host referencing the dangling name DefaultAirBoundary
+    dotnet: EnergyModel.ToIdfDocument with UseLegacyRectangularFenestration=true reaches typed private BuildingSurface, LegacyRectangularFenestration and AppendWindowShading mappers in model context, emits compact targets in definition and model assembly order, links reciprocal interzone openings by geometry, and emits and references the actual custom AirBoundary name
+  effect:
+    engineering_result: the exact five-case slice preserves all 23 Python target objects and classifies all 2437 official EnergyPlus 24.2 IDD fields as native values, 2103 compact trailing omissions across eight spans, 91 explicit lexical or bounded-roundoff differences, and the one corrected custom AirBoundary reference; reciprocal two-window and two-door links, ground and roof classification, geometry, shading, target relocation and order are pinned
+    api_contract: callers place typed validated geometry in an EnergyModel and use the legacy rectangular fenestration option; compact parent-model assembly replaces the standalone mutable Python list, and neither a standalone native Surface converter nor mutable-list-shape parity is claimed
+    compatibility_evidence: all five exact cases, public and private native bindings, official-IDD field positions and extensibles, two-call document/object/field freshness and byte determinism, and unchanged captured reference identities plus selected names, surface types, boundary/adjacency, surface vertices and opening areas remain required; child classes and converters, invalid/error behavior, the default detailed fenestration route, IdfObject policy, broader global ordering/deduplication/conflict behavior, broader source state, and EnergyModel parent-assembly closure remain unresolved
+  approval: accepted-native-api-adaptation
