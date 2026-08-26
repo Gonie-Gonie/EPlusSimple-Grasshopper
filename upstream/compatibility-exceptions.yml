@@ -1730,3 +1730,17 @@
     api_contract: callers observe logical source identity through EntityId rather than Python process object identity; no parity is claimed for retaining multiple distinct references with the same logical identifier or for the Python tuple representation
     compatibility_evidence: no-source filtering, repeated-reference collapse, distinct-source encounter order, fresh result collections, equal-but-distinct upstream identity retention and first-wins native EntityId collapse remain required in a trusted cross-language receipt
   approval: accepted-native-api-adaptation
+
+- id: model-context-supply-group-idf-assembly
+  upstream:
+    path: src/idragon/dragon/hvac.py
+    symbol: SupplyGroup.to_idf_object
+    symbol_hash: sha256:3f9c508c5b0d784d27bc327dfe65c84bd7d17ffc144615b852c37b59cbe51a41
+  difference:
+    upstream: returns fresh mutable object and processor lists after converting each system in order, reading heatability before coolability, passing the aligned availability object by identity, flattening each child result immediately, converting each non-None availability immediately after its system, and appending a fresh sequential-load controller last; exceptions stop later calls while already-created local objects remain only in the unreturned lists
+    dotnet: has no standalone SupplyGroup converter or returned processor list; EnergyModel.ToIdfDocument assembles valid conditioned-zone assignments from typed immutable SupplyGroup values, globally collects and conflict-checks schedules and sources, generates system fragments in membership order, and materializes sequential fractions, ALLOFF references, source topology, and the equipment list into a fresh document
+  effect:
+    engineering_result: supported valid assigned groups preserve ordered system membership, heating and cooling capabilities, aligned availability references, deterministic source and fragment ordering, and sequential equipment behavior; a conversion failure leaves the EnergyModel and SupplyGroup unchanged and does not return the fresh document under construction
+    api_contract: callers assign a SupplyGroup to a model zone and call EnergyModel.ToIdfDocument; no parity is claimed for standalone invocation, caller-owned IDF or list mutation, returned processor identity or execution, exact global object order, duck-typed or corrupted inputs, Python exception type or text, unconditioned assignments, or multiple assignments for one zone
+    compatibility_evidence: exact upstream capability-read, child-call, flatten, availability-conversion, controller-construction, freshness and failure-prefix behavior plus the native public route, system, source, schedule, fraction and equipment ordering, fresh-document isolation and failure transactionality remain required; concrete supply and source converters, SequentialLoadFractionController.run, postprocessors, and full EnergyModel.to_idf remain separately unresolved
+  approval: accepted-native-api-adaptation

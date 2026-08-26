@@ -796,7 +796,7 @@
     "equivalent",
     "equivalent",
     "exception",
-    "needs_reverification",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:7109c221a7ed894bfb6dcf413f33d162fe2380d4876050cd6536327e373747d3",
+  "content_sha256": "sha256:e9be2f22030b7dc6d5c72c1342a14e56de6281dccc7b828b248bb1792aae45a3",
   "details": [
     {
       "evidence": [
@@ -3008,6 +3008,15 @@
       "exception_id": "stable-entity-id-supply-source-deduplication",
       "index": 795,
       "rationale": "Trusted cross-language evidence verifies source order, None filtering, identity deduplication and fresh projections, plus the approved native stable-EntityId first-object-retention adaptation; downstream plant assembly remains unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-context-supply-group-idf-assembly",
+        "upstream/symbol-evidence.json#dragon-hvac-supply-group-to-idf-object-3f9c508c"
+      ],
+      "exception_id": "model-context-supply-group-idf-assembly",
+      "index": 796,
+      "rationale": "Trusted cross-language evidence verifies the bounded model-context SupplyGroup IDF assembly adaptation for ordered success and two failure boundaries while leaving the standalone converter API, concrete converters, controller execution, postprocessors, and EnergyModel.to_idf unresolved."
     },
     {
       "evidence": [
@@ -5001,8 +5010,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 133,
-      "exception": 117,
-      "needs_reverification": 740,
+      "exception": 118,
+      "needs_reverification": 739,
       "out_of_scope": 252
     },
     "entry_count": 1242

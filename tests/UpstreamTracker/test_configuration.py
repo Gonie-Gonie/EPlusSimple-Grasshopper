@@ -40,7 +40,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(740, len(compatibility.needs_reverification))
+        self.assertEqual(739, len(compatibility.needs_reverification))
         self.assertEqual(
             133,
             sum(
@@ -49,7 +49,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            117,
+            118,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -242,10 +242,27 @@ class ConfigurationTests(unittest.TestCase):
             "needs_reverification",
             by_key[("src/idragon/dragon/hvac.py", "SupplyGroup")].classification,
         )
+        supply_group_to_idf = by_key[
+            ("src/idragon/dragon/hvac.py", "SupplyGroup.to_idf_object")
+        ]
+        self.assertEqual("exception", supply_group_to_idf.classification)
+        self.assertEqual(
+            "model-context-supply-group-idf-assembly",
+            supply_group_to_idf.exception_id,
+        )
+        self.assertEqual(
+            (
+                "upstream/compatibility-exceptions.yml#"
+                "model-context-supply-group-idf-assembly",
+                "upstream/symbol-evidence.json#"
+                "dragon-hvac-supply-group-to-idf-object-3f9c508c",
+            ),
+            supply_group_to_idf.evidence,
+        )
         self.assertEqual(
             "needs_reverification",
             by_key[
-                ("src/idragon/dragon/hvac.py", "SupplyGroup.to_idf_object")
+                ("src/idragon/dragon/model.py", "EnergyModel.to_idf")
             ].classification,
         )
 

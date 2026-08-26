@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:e8d4430c33b210cb0c773cb728f8739d45f3770e58bd1388a40b36ff6aca1668",
+  "content_sha256": "sha256:5851c42e592322b34e24520c4fb97eab34df1fa4797c932232502417edb223dc",
   "entries": [
     {
       "implementation": {
@@ -1196,6 +1196,32 @@
       ],
       "symbol": "SupplyGroup.sources",
       "upstream_symbol_hash": "sha256:482d0fa2c4cc9f732bc33911ae01ea857e3042ff4cf60e680583f2abefdab423"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "source_sha256": "sha256:f4a5eab3c337fe8eeb12aeff0ffe0490c7d7cd5c2d89be16f88da4455167e2b3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendHvac"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify the bounded SupplyGroup.to_idf_object model-context adaptation across success, availability-conversion failure, and ordered child-system failure: exact upstream capability reads, aligned identities, immediate flattening, controller-last construction, fresh lists, and failure prefixes are bound to native deterministic schedule, source, fragment, sequential-fraction, ALLOFF, and equipment-list assembly plus fresh-document failure isolation. No closure is claimed for a standalone native converter, processor identity or execution, concrete supply/source converters, controller run behavior, postprocessors, or EnergyModel.to_idf.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:55a4128f410919e0a7466cd89f869ae7de9e1d5079508e36f23d7dd20795f1dc",
+          "id": "dragon-hvac-supply-group-to-idf-object-3f9c508c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/SupplyGroupToIdfObjectOracleParityTests.cs",
+          "test_source_sha256": "sha256:af9b8b38bda94c24be77437ca3a61c52484131d77fefe2120ec7e22c9d64cc97",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.SupplyGroupToIdfObjectOracleParityTests.MatchesPinnedPythonSupplyGroupToIdfObjectThroughNativeModelContext",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SupplyGroup.to_idf_object",
+      "upstream_symbol_hash": "sha256:3f9c508c5b0d784d27bc327dfe65c84bd7d17ffc144615b852c37b59cbe51a41"
     },
     {
       "implementation": {
@@ -6505,9 +6531,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 250,
-    "passed_receipt_count": 250,
-    "receipt_count": 250,
+    "entry_count": 251,
+    "passed_receipt_count": 251,
+    "receipt_count": 251,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
