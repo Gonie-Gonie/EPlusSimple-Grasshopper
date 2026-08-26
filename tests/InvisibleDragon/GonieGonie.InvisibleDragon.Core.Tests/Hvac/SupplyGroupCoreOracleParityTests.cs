@@ -563,7 +563,7 @@ public sealed class SupplyGroupCoreOracleParityTests
         return Facts(
             "native-can-cool=true",
             "native-input=heat-only,cool-only",
-            "native-short-circuit-order=heat-only,cool-only",
+            "native-capability-read-order=heat-only,cool-only",
             "native-python-facts-bound=true");
     }
 
@@ -645,7 +645,7 @@ public sealed class SupplyGroupCoreOracleParityTests
         return Facts(
             "native-can-heat=true",
             "native-input=cool-only,heat-only",
-            "native-short-circuit-order=cool-only,heat-only",
+            "native-capability-read-order=cool-only,heat-only",
             "native-python-facts-bound=true");
     }
 
