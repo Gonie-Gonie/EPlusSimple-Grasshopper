@@ -47,12 +47,12 @@ if spec is None or spec.loader is None:
 generator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(generator)
 
-EXPECTED_FIXTURE_BYTES = 3_927_647
+EXPECTED_FIXTURE_BYTES = 3_927_710
 EXPECTED_FIXTURE_SHA256 = (
-    "sha256:c8518ee123b04c9f554190d80ad2943e1f67ed07ca67b472e2345ca14497aebb"
+    "sha256:2fbc3ad2d810dee6b3e88f8b6e8c119e8ce709abf0c534233343e486f7bf9c7f"
 )
 EXPECTED_CASES_SHA256 = (
-    "sha256:8eb4666decd0c64f39d756fe758fff56d0f48aa7217e8b0d0cace6b9f209b2a8"
+    "sha256:755e2115db65a100fe1b4249c4b4507719e5083aa2ea22939955a7aae53c5c07"
 )
 
 
@@ -181,6 +181,10 @@ class DragonHvacSourceSystemToIdfObjectOracleTests(unittest.TestCase):
         self.assertEqual(set(generator.TARGET_SYMBOLS), set(generator.ADAPTATIONS))
         self.assertEqual(13, len(set(generator.ADAPTATIONS.values())))
         self.assertEqual(13, len(set(generator.ASSERTION_IDS.values())))
+        self.assertEqual(
+            "fresh-native-boiler-generator-idf-emission",
+            generator.ADAPTATIONS["Boiler.to_idf_object_as_generator"],
+        )
         self.assertTrue(
             all(
                 item["expected_dotnet"]
@@ -196,6 +200,14 @@ class DragonHvacSourceSystemToIdfObjectOracleTests(unittest.TestCase):
         contract = self.fixture()["consumer_contract"]
         self.assertEqual(generator.ADAPTATIONS, contract["adaptations"])
         self.assertEqual(generator.ASSERTION_IDS, contract["assertion_ids"])
+        self.assertEqual(generator.CLASSIFICATION_BASIS, contract["classification_basis"])
+        self.assertEqual(
+            "native source emitters return fresh result lists with pairwise-distinct "
+            "fresh IDF objects and deterministic fields without captured source-state "
+            "mutation; compact defaults and explicit generation context are bounded "
+            "here as exception evidence",
+            contract["classification_basis"],
+        )
         self.assertEqual(
             {symbol: "exception" for symbol in generator.TARGET_SYMBOLS},
             contract["classifications"],

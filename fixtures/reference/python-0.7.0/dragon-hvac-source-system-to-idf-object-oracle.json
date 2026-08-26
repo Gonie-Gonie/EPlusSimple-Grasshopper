@@ -45602,7 +45602,7 @@
     {
       "executor": "hvac-source-system-to-idf-object",
       "expected_dotnet": {
-        "adaptation": "immutable-native-boiler-generator-idf-emission",
+        "adaptation": "fresh-native-boiler-generator-idf-emission",
         "outcome": "returned"
       },
       "id": "dragon-hvac-source-system-to-idf-object.boiler-generator.topology",
@@ -123484,12 +123484,12 @@
       "symbol": "SourceSystem.to_idf_object"
     }
   ],
-  "cases_sha256": "sha256:8eb4666decd0c64f39d756fe758fff56d0f48aa7217e8b0d0cace6b9f209b2a8",
+  "cases_sha256": "sha256:755e2115db65a100fe1b4249c4b4507719e5083aa2ea22939955a7aae53c5c07",
   "consumer_contract": {
     "adaptations": {
       "AbsorptionChiller.to_idf_object": "legacy-context-absorption-chiller-idf-emission",
       "Boiler.to_idf_object": "compact-native-boiler-idf-emission",
-      "Boiler.to_idf_object_as_generator": "immutable-native-boiler-generator-idf-emission",
+      "Boiler.to_idf_object_as_generator": "fresh-native-boiler-generator-idf-emission",
       "Chiller.to_idf_object": "legacy-context-chiller-idf-emission",
       "ClosedSingleSpeedCoolingTower.to_idf_main_object": "cooling-tower-context-closed-single-speed-main-idf-emission",
       "ClosedTwoSpeedCoolingTower.to_idf_main_object": "cooling-tower-context-closed-two-speed-main-idf-emission",
@@ -123539,7 +123539,7 @@
       "dragon-hvac-source-system-to-idf-object.heat-pump.representative-autosize",
       "dragon-hvac-source-system-to-idf-object.source-system.abstract-contract"
     ],
-    "classification_basis": "native source emitters use immutable collections, compact defaults, and explicit generation context; legacy mutable standalone lists are bounded here as exception evidence",
+    "classification_basis": "native source emitters return fresh result lists with pairwise-distinct fresh IDF objects and deterministic fields without captured source-state mutation; compact defaults and explicit generation context are bounded here as exception evidence",
     "classifications": {
       "AbsorptionChiller.to_idf_object": "exception",
       "Boiler.to_idf_object": "exception",

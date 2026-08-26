@@ -23,21 +23,21 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
         "fixtures/reference/python-0.7.0/dragon-hvac-source-system-to-idf-object-oracle.json";
     private const string OracleSchema =
         "goniegonie.python-reference.dragon-hvac-source-system-to-idf-object.v1";
-    private const int OracleByteLength = 3_927_647;
+    private const int OracleByteLength = 3_927_710;
     private const string OracleSha256 =
-        "sha256:c8518ee123b04c9f554190d80ad2943e1f67ed07ca67b472e2345ca14497aebb";
+        "sha256:2fbc3ad2d810dee6b3e88f8b6e8c119e8ce709abf0c534233343e486f7bf9c7f";
     private const string CasesSha256 =
-        "sha256:8eb4666decd0c64f39d756fe758fff56d0f48aa7217e8b0d0cace6b9f209b2a8";
+        "sha256:755e2115db65a100fe1b4249c4b4507719e5083aa2ea22939955a7aae53c5c07";
     private const string GeneratorRepositoryPath =
         "tools/python-reference/generate_dragon_hvac_source_system_to_idf_object_oracle.py";
-    private const int GeneratorByteLength = 66_389;
+    private const int GeneratorByteLength = 66_475;
     private const string GeneratorSha256 =
-        "sha256:c0f7653ac319037aa90a52d0631f9abd72b2f34f1a69f27bf79644c84165227a";
+        "sha256:f8c3a031304554ecd43381867188c29bf38c2ce0ebf4bf284c394792f7817159";
     private const string PythonValidatorRepositoryPath =
         "tests/PythonReference/test_dragon_hvac_source_system_to_idf_object_oracle.py";
-    private const int PythonValidatorByteLength = 26_292;
+    private const int PythonValidatorByteLength = 26_934;
     private const string PythonValidatorSha256 =
-        "sha256:2759fa7195d1e023cff59c5a51d81332255c4f20f62ae8867f08d71594a154da";
+        "sha256:b86d4c8a2ea60de84a9d982fbf901f23f76c44e4e2216532cb4567baae802d0e";
 
     private const int ExpectedCaseCount = 20;
     private const int ExpectedPythonObjectCount = 519;
@@ -89,7 +89,7 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
             "sha256:b39bcfffa903f90ee98ddd5d79d4b6827d2e526aaa6acabe5667e446c80794c3",
             "sha256:32eebbda47034344f145d801a729648469cd7b24e0af847d97c1f9b6b7294cf2",
             "dragon-hvac-boiler-to-idf-object-as-generator-d239b10e",
-            "immutable-native-boiler-generator-idf-emission",
+            "fresh-native-boiler-generator-idf-emission",
             "Boiler.ToIdfObjects with generator demand connection",
             "GonieGonie.InvisibleDragon.Hvac.Boiler.ToIdfObjects"),
         new(660, "Chiller.to_idf_object",
@@ -470,7 +470,7 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
         AssertStringArray(contract.GetProperty("case_ids"), ExpectedCases.Select(item => item.CaseId).ToArray());
         AssertStringArray(contract.GetProperty("target_symbols"), ExpectedSymbols.Select(item => item.Symbol).ToArray());
         Assert.Equal(
-            "native source emitters use immutable collections, compact defaults, and explicit generation context; legacy mutable standalone lists are bounded here as exception evidence",
+            "native source emitters return fresh result lists with pairwise-distinct fresh IDF objects and deterministic fields without captured source-state mutation; compact defaults and explicit generation context are bounded here as exception evidence",
             RequiredString(contract, "classification_basis"));
         Assert.Equal("booleans-only-no-id-or-address", RequiredString(contract, "identity_encoding"));
         Assert.Equal("complete-ordered-IDD-fields-with-typed-values", RequiredString(contract, "raw_field_encoding"));
@@ -1157,7 +1157,7 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
             "object-order-relocations=" + firstAnalysis.ObjectRelocations.Length.ToString(CultureInfo.InvariantCulture),
             "two-call-freshness=distinct-lists-and-pairwise-distinct-fresh-idf-objects",
             "two-call-determinism=complete-native-object-order-and-fields-identical",
-            "source-values-and-references=immutable-across-two-emissions",
+            "source-state-mutation=none-across-two-emissions",
             "comparison-oracle=official-EnergyPlus-24.2.0-build-94a887817b-IDD",
         }.Concat(topologyFacts).ToArray();
         Assert.Equal(nativeFacts.Length, nativeFacts.Distinct(StringComparer.Ordinal).Count());
@@ -2090,7 +2090,15 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
                 complete_order_and_link_topology_compared = true,
                 context_enrichments_and_object_relocations_reported_separately = true,
                 official_idd_version = EnergyPlusVersion,
-                two_call_determinism_freshness_and_source_immutability = true,
+                two_call_native_emission = new
+                {
+                    guarantee = IsAbstractSymbol(symbol.Symbol)
+                        ? "reflection-only-contract-evidence-no-native-emission"
+                        : "fresh-distinct-results;deterministic-complete-output;no-source-state-mutation",
+                    status = IsAbstractSymbol(symbol.Symbol)
+                        ? "not_applicable_abstract_contract"
+                        : "verified",
+                },
             },
             scope = new
             {
@@ -2130,6 +2138,27 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
         Assert.Equal("exception", RequiredString(binding, "classification"));
         Assert.Equal(symbol.ImplementationSymbol, RequiredString(binding, "implementation_symbol"));
         Assert.Equal(symbol.NativeTarget, RequiredString(binding, "native_target"));
+        JsonElement representation = receipt.GetProperty("representation");
+        AssertKeys(
+            representation,
+            "abstract_contracts_use_reflection_not_fake_emission",
+            "compact_tail_policy",
+            "complete_order_and_link_topology_compared",
+            "context_enrichments_and_object_relocations_reported_separately",
+            "official_idd_version",
+            "two_call_native_emission");
+        JsonElement twoCall = representation.GetProperty("two_call_native_emission");
+        AssertKeys(twoCall, "guarantee", "status");
+        Assert.Equal(
+            IsAbstractSymbol(symbol.Symbol)
+                ? "not_applicable_abstract_contract"
+                : "verified",
+            RequiredString(twoCall, "status"));
+        Assert.Equal(
+            IsAbstractSymbol(symbol.Symbol)
+                ? "reflection-only-contract-evidence-no-native-emission"
+                : "fresh-distinct-results;deterministic-complete-output;no-source-state-mutation",
+            RequiredString(twoCall, "guarantee"));
         JsonElement[] encoded = receipt.GetProperty("observations").EnumerateArray().ToArray();
         Assert.Equal(observations.Count, encoded.Length);
         Assert.Equal(

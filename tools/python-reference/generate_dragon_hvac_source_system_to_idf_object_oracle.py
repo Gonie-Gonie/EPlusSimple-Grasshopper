@@ -119,7 +119,7 @@ TARGET_SYMBOLS = tuple(EXPECTED_SYMBOL_RECEIPTS)
 ADAPTATIONS = {
     "AbsorptionChiller.to_idf_object": "legacy-context-absorption-chiller-idf-emission",
     "Boiler.to_idf_object": "compact-native-boiler-idf-emission",
-    "Boiler.to_idf_object_as_generator": "immutable-native-boiler-generator-idf-emission",
+    "Boiler.to_idf_object_as_generator": "fresh-native-boiler-generator-idf-emission",
     "Chiller.to_idf_object": "legacy-context-chiller-idf-emission",
     "ClosedSingleSpeedCoolingTower.to_idf_main_object": "cooling-tower-context-closed-single-speed-main-idf-emission",
     "ClosedTwoSpeedCoolingTower.to_idf_main_object": "cooling-tower-context-closed-two-speed-main-idf-emission",
@@ -131,6 +131,12 @@ ADAPTATIONS = {
     "OpenTwoSpeedCoolingTower.to_idf_main_object": "cooling-tower-context-open-two-speed-main-idf-emission",
     "SourceSystem.to_idf_object": "contextual-native-source-system-idf-contract",
 }
+CLASSIFICATION_BASIS = (
+    "native source emitters return fresh result lists with pairwise-distinct fresh "
+    "IDF objects and deterministic fields without captured source-state mutation; "
+    "compact defaults and explicit generation context are bounded here as exception "
+    "evidence"
+)
 SYMBOL_SLUGS = {
     "AbsorptionChiller.to_idf_object": "absorption-chiller-to-idf-object",
     "Boiler.to_idf_object": "boiler-to-idf-object",
@@ -1235,11 +1241,7 @@ def _expected_consumer_contract() -> dict[str, Any]:
         "assertion_ids": ASSERTION_IDS,
         "case_count": EXPECTED_CASE_COUNT,
         "case_ids": list(EXPECTED_CASE_IDS),
-        "classification_basis": (
-            "native source emitters use immutable collections, compact defaults, "
-            "and explicit generation context; legacy mutable standalone lists are "
-            "bounded here as exception evidence"
-        ),
+        "classification_basis": CLASSIFICATION_BASIS,
         "classifications": {symbol: "exception" for symbol in TARGET_SYMBOLS},
         "closure": {
             "context_only_not_targeted": [
