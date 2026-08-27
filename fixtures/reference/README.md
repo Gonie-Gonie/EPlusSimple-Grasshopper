@@ -226,6 +226,20 @@ property-validation order and errors, invalid or nonfinite domain state,
 isolated `IdfObject` policy, and parent `EnergyModel.to_idf` remain explicit
 unresolved boundaries.
 
+`python-0.7.0/dragon-hvac-source-tower-core-oracle.json` pins ten bounded,
+relocatable CPython 3.12.7 cases for the source-system and cooling-tower core.
+Its exact 59 inventory receipts cover the `Fuel` and `CompressorType` enums,
+source abstractions and constructors, HeatPump/GeothermalHeatPump, boiler and
+chiller variants, four concrete cooling-tower types, and public naming and
+capacity branches. The corpus preserves legacy validation, coercion, abstract
+class, screw-compressor type, mutable-name, and closed-two-speed capacity
+omission quirks. Twenty-seven receipts are equivalent on reviewed public
+InvisibleDragon routes and 32 are conservative exceptions. Thirteen adjacent
+conversion receipts are hash-pinned to the existing source-system-to-IDF
+oracle, while `CompressorType.__str__` and `Fuel.__str__` remain out of scope,
+closing the exact 74-receipt family partition without executing native or
+EnergyPlus processes.
+
 `python-0.7.0/dragon-hvac-supply-group-core-oracle.json` pins 18 ordered
 CPython 3.12.7 observations, three each for the six bounded public
 `SupplyGroup` constructor and container-projection symbols. It records exact

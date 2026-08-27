@@ -1,0 +1,3906 @@
+{
+  "adjacent_receipts": [
+    {
+      "body_hash": "sha256:235dd3954501399871a0317fb9665091c192830665e9f95baae7eb9a3d80823b",
+      "inventory_index": 644,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+      "symbol": "AbsorptionChiller.to_idf_object",
+      "symbol_hash": "sha256:17d5fb8afe2207a9772bc47b4f5424d740b3df76301f04c9155c0fbd725af969"
+    },
+    {
+      "body_hash": "sha256:416b84930ac077833ccee544e07d01ea1e542df536d32b8a1d7c18b4a94725ed",
+      "inventory_index": 655,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+      "symbol": "Boiler.to_idf_object",
+      "symbol_hash": "sha256:b63a454be07eaaee80563cbac25cd78a3fb632e462e2ea37aed7906c2967a7ae"
+    },
+    {
+      "body_hash": "sha256:32eebbda47034344f145d801a729648469cd7b24e0af847d97c1f9b6b7294cf2",
+      "inventory_index": 656,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b39bcfffa903f90ee98ddd5d79d4b6827d2e526aaa6acabe5667e446c80794c3",
+      "symbol": "Boiler.to_idf_object_as_generator",
+      "symbol_hash": "sha256:d239b10e14f899ec4f7d9d914e7322fd684d3cfe5096609119f32eef9dc79aa0"
+    },
+    {
+      "body_hash": "sha256:72ef316133dec589de7deec328090b0d097b8370726a5c360d73953dd6dc9f25",
+      "inventory_index": 660,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+      "symbol": "Chiller.to_idf_object",
+      "symbol_hash": "sha256:fc75129f85debd982652240620407bcb408a73fcf5fef197871599da771e34d3"
+    },
+    {
+      "body_hash": "sha256:330c3494967559c366002476ef010eb8be6c27fde0e918832932f4c2daeb6162",
+      "inventory_index": 663,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:61ff646496aae3a4e3f5a07c18df33ddc0a2dd1cbeaca102be9de4f1da30f573",
+      "symbol": "ClosedSingleSpeedCoolingTower.to_idf_main_object",
+      "symbol_hash": "sha256:0e14065ae1ca788b3219a54f5d1ae41d7783e0dd6497667cf583e7387e0396d8"
+    },
+    {
+      "body_hash": "sha256:13c013239561f33e2d0ae10cde93531feea0f97a1557337402e2afe8407e2a0d",
+      "inventory_index": 666,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:61ff646496aae3a4e3f5a07c18df33ddc0a2dd1cbeaca102be9de4f1da30f573",
+      "symbol": "ClosedTwoSpeedCoolingTower.to_idf_main_object",
+      "symbol_hash": "sha256:30402683c6a9db760ad1727995d72c8357b93cf5704625779e5ce43b907739ae"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "inventory_index": 671,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "CompressorType.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:eba2dfb849d0251170f777cb131385bbaf7316d8231cba3d096d241ce9ddce00",
+      "inventory_index": 672,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:61ff646496aae3a4e3f5a07c18df33ddc0a2dd1cbeaca102be9de4f1da30f573",
+      "symbol": "CompressorType.to_idf_curve_object",
+      "symbol_hash": "sha256:8ca6c2d070a534718d90fe79dff5d8a1e015593a0551a5a53ec3bf1c3e932d81"
+    },
+    {
+      "body_hash": "sha256:d534464a3d86dfeb1f92e18bf2296fb90a71ce3810ab72675ff520fac00f4ce1",
+      "inventory_index": 684,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:679b45a374ed222434707e448b38c110efb7b0d13bc0089cadaaf661a48c7708",
+      "symbol": "CoolingTower.to_idf_main_object",
+      "symbol_hash": "sha256:4615e08c6ec284f9bac80d2a5f25beca2b9706f4c706e0b47cf27ab35c2c5915"
+    },
+    {
+      "body_hash": "sha256:77fa14ec4670bce06dd78b19a08c5be26bc01e0d947ed0ade6155954879d6b3f",
+      "inventory_index": 685,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:61ff646496aae3a4e3f5a07c18df33ddc0a2dd1cbeaca102be9de4f1da30f573",
+      "symbol": "CoolingTower.to_idf_object",
+      "symbol_hash": "sha256:74287ab5af4712528e239034183e43122280dcf9760ebece16161e93c629c762"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "inventory_index": 737,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "Fuel.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:601ab95c68822d4e94a03062618d0a29ab4b7c0c8f529742d9e1bd99ed850311",
+      "inventory_index": 743,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:9ce384ca48519051591ce6adac791b33a19b891ac5626bde847d37298c470519",
+      "symbol": "HeatPump.to_idf_object",
+      "symbol_hash": "sha256:b8cb28ab0ec6d2775a69548b0b5d7983afa38e0f980ec1e1835d40ccd1edacb1"
+    },
+    {
+      "body_hash": "sha256:6f24857ae8cda107880f2bf123e2401b2c1ab4ffffdf3b224195350b3465bfb5",
+      "inventory_index": 746,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:61ff646496aae3a4e3f5a07c18df33ddc0a2dd1cbeaca102be9de4f1da30f573",
+      "symbol": "OpenSingleSpeedCoolingTower.to_idf_main_object",
+      "symbol_hash": "sha256:102bccd9091484e0f915dc24010d22c22a91c69b95a17e10f44ab7d6b189e61f"
+    },
+    {
+      "body_hash": "sha256:a4e24f89a146eae7181177115cce1a89842869e9bd70e9f54e2b45e8bc6ead73",
+      "inventory_index": 749,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:61ff646496aae3a4e3f5a07c18df33ddc0a2dd1cbeaca102be9de4f1da30f573",
+      "symbol": "OpenTwoSpeedCoolingTower.to_idf_main_object",
+      "symbol_hash": "sha256:7fd75338aa5a98323eb0d3cfeac729d921c00f95e91f7e03cfddf4b2b885e736"
+    },
+    {
+      "body_hash": "sha256:d534464a3d86dfeb1f92e18bf2296fb90a71ce3810ab72675ff520fac00f4ce1",
+      "inventory_index": 788,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:d62b0f5a2745a3f0d6f1ace245fbc66899d0e8953e93173c8f4d815eec741a50",
+      "symbol": "SourceSystem.to_idf_object",
+      "symbol_hash": "sha256:63aa5eab420418dc4467359ae79d5b1b0b59f1a0501e6e5953039b3a3adfb57b"
+    }
+  ],
+  "case_sha256": {
+    "dragon-hvac-source-tower-core.absorption-chiller-core": "sha256:39d2f88b81636ed2e2195c0ec4d725ffc0a2ab198e4efbbf02de1a61c0e8d8c9",
+    "dragon-hvac-source-tower-core.boiler-core": "sha256:47d927710da70f1cc91fd75b15aa87204bf4119ab61c4bfe83bbd1af5f1b2c29",
+    "dragon-hvac-source-tower-core.chiller-core": "sha256:cc492c1c64cbcf9c73af038611414fbbf785717f0270ad1d18efe587e309db24",
+    "dragon-hvac-source-tower-core.compressor-enum": "sha256:b715cb79fab670b3a1f2afff587f66a0bee8962642010181a1af2eb88fc2498b",
+    "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity": "sha256:9f084b458a40c99123b9040fcfd8319620a7b9ec2a692824d63f9385bd359c2f",
+    "dragon-hvac-source-tower-core.cooling-tower-core-names": "sha256:318e32d8e53dddced2e62bc709960d6e876aad4968da77ea5e7b8cf32b45bd54",
+    "dragon-hvac-source-tower-core.fuel-enum": "sha256:22859d5ee16ed6cc66a72a9b54ca6e4ad2b32a379f629e3617013179d913d98d",
+    "dragon-hvac-source-tower-core.geothermal-heat-pump-core": "sha256:0398886648e9e9c6941c727979d98ed5c761cb0d63a0ba85bccbda622a71fbaf",
+    "dragon-hvac-source-tower-core.heat-pump-core": "sha256:f6ed5624e7964a76caa56a6d3f67a600a85303f7e63069df5db38ff270534602",
+    "dragon-hvac-source-tower-core.source-system-core-names": "sha256:41a331927b73f7f359d41b101df0db22c96788b3754a1accd9a7dd273cac9eec"
+  },
+  "cases": [
+    {
+      "code": "A01",
+      "id": "dragon-hvac-source-tower-core.absorption-chiller-core",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "SourceSystem"
+            ],
+            "mro": [
+              "AbsorptionChiller",
+              "SourceSystem",
+              "ABC",
+              "object"
+            ],
+            "signature": "(name: 'str', cop: 'int | float', capacity: 'int | float', heatsource: 'Boiler', coolingtower: 'CoolingTower', *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 6) -> 'None'"
+          },
+          "constructor_signature": "(self, name: 'str', cop: 'int | float', capacity: 'int | float', heatsource: 'Boiler', coolingtower: 'CoolingTower', *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 6) -> 'None'",
+          "default_state": {
+            "capacity": {
+              "kind": "none"
+            },
+            "coolingtower_identity_preserved": true,
+            "cop_before_mutation": {
+              "hex": "0x1.70a3d70a3d70ap-1",
+              "kind": "float",
+              "repr": "0.72"
+            },
+            "cop_mutable_after": {
+              "hex": "0x1.4000000000000p+0",
+              "kind": "float",
+              "repr": "1.25"
+            },
+            "heatsource_identity_preserved": true,
+            "idf_object_type": "Chiller:Absorption",
+            "name": "Absorber",
+            "pump_efficiency": {
+              "hex": "0x1.ccccccccccccdp-1",
+              "kind": "float",
+              "repr": "0.9"
+            },
+            "setpoint_temperature": {
+              "kind": "int",
+              "value": "6"
+            }
+          },
+          "missing_required_arguments": {
+            "args": [
+              "AbsorptionChiller.__init__() missing 3 required positional arguments: 'capacity', 'heatsource', and 'coolingtower'"
+            ],
+            "message": "AbsorptionChiller.__init__() missing 3 required positional arguments: 'capacity', 'heatsource', and 'coolingtower'",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "permissive_state": {
+            "capacity": {
+              "kind": "int",
+              "value": "-1"
+            },
+            "coolingtower_type": "object",
+            "cop": {
+              "kind": "int",
+              "value": "0"
+            },
+            "heatsource_type": "object",
+            "name": "",
+            "pump_efficiency": {
+              "kind": "special-float",
+              "token": "nan"
+            },
+            "setpoint_temperature": {
+              "kind": "int",
+              "value": "-50"
+            }
+          }
+        },
+        "facts_sha256": "sha256:a18e2e05f3a99a45a2c4a97c4f4ae652e1b542196cdec8a98fcc1d19c14a0505",
+        "outcome": "observed"
+      },
+      "subfamily": "absorption",
+      "target_symbols": [
+        "AbsorptionChiller",
+        "AbsorptionChiller.__init__",
+        "AbsorptionChiller.idf_objtypename"
+      ]
+    },
+    {
+      "code": "B01",
+      "id": "dragon-hvac-source-tower-core.boiler-core",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "SourceSystem"
+            ],
+            "mro": [
+              "Boiler",
+              "SourceSystem",
+              "ABC",
+              "object"
+            ],
+            "signature": "(name: 'str', fuel: 'Fuel', efficiency: 'int | float', capacity: 'int | float | None' = None, *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 60) -> 'None'"
+          },
+          "constructor_signature": "(self, name: 'str', fuel: 'Fuel', efficiency: 'int | float', capacity: 'int | float | None' = None, *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 60) -> 'None'",
+          "default_state": {
+            "capacity": {
+              "kind": "none"
+            },
+            "efficiency_before_mutation": {
+              "hex": "0x1.c28f5c28f5c29p-1",
+              "kind": "float",
+              "repr": "0.88"
+            },
+            "efficiency_mutable_after": {
+              "hex": "0x1.d1eb851eb851fp-1",
+              "kind": "float",
+              "repr": "0.91"
+            },
+            "fuel": {
+              "enum_type": "Fuel",
+              "kind": "enum",
+              "name": "PROPANE",
+              "value": {
+                "kind": "str",
+                "value": "Propane"
+              }
+            },
+            "idf_object_type": "Boiler:HotWater",
+            "name": "Boiler",
+            "pump_efficiency": {
+              "hex": "0x1.ccccccccccccdp-1",
+              "kind": "float",
+              "repr": "0.9"
+            },
+            "setpoint_temperature": {
+              "kind": "int",
+              "value": "60"
+            }
+          },
+          "permissive_state": {
+            "capacity": {
+              "kind": "int",
+              "value": "-2"
+            },
+            "efficiency": {
+              "kind": "int",
+              "value": "-1"
+            },
+            "fuel": {
+              "kind": "str",
+              "value": "not-a-fuel"
+            },
+            "fuel_not_coerced": true,
+            "name": "",
+            "pump_efficiency": {
+              "kind": "special-float",
+              "token": "nan"
+            },
+            "setpoint_temperature": {
+              "kind": "special-float",
+              "token": "positive-infinity"
+            }
+          }
+        },
+        "facts_sha256": "sha256:d557036c43e08f47d456b0dfb67967b43b03ac8748f0990e1da19a5ec4e39585",
+        "outcome": "observed"
+      },
+      "subfamily": "boiler",
+      "target_symbols": [
+        "Boiler",
+        "Boiler.__init__",
+        "Boiler.idf_objtypename"
+      ]
+    },
+    {
+      "code": "C01",
+      "id": "dragon-hvac-source-tower-core.chiller-core",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "SourceSystem"
+            ],
+            "mro": [
+              "Chiller",
+              "SourceSystem",
+              "ABC",
+              "object"
+            ],
+            "signature": "(name: 'str', cop: 'int | float', capacity: 'int | float | None', compressor: 'str | CompressorType', coolingtower: 'CoolingTower', *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 6) -> 'None'"
+          },
+          "constructor_signature": "(self, name: 'str', cop: 'int | float', capacity: 'int | float | None', compressor: 'str | CompressorType', coolingtower: 'CoolingTower', *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 6) -> 'None'",
+          "default_state": {
+            "capacity": {
+              "kind": "none"
+            },
+            "compressor": {
+              "enum_type": "CompressorType",
+              "kind": "enum",
+              "name": "TURBO",
+              "value": {
+                "kind": "str",
+                "value": "turbo"
+              }
+            },
+            "coolingtower_identity_preserved": true,
+            "cop_mutable_after": {
+              "hex": "0x1.2000000000000p+3",
+              "kind": "float",
+              "repr": "9.0"
+            },
+            "idf_object_type": "Chiller:Electric:EIR",
+            "name": "Chiller",
+            "pump_efficiency": {
+              "hex": "0x1.ccccccccccccdp-1",
+              "kind": "float",
+              "repr": "0.9"
+            },
+            "setpoint_temperature": {
+              "kind": "int",
+              "value": "6"
+            }
+          },
+          "invalid_compressor": {
+            "args": [
+              "'scroll' is not a valid CompressorType"
+            ],
+            "message": "'scroll' is not a valid CompressorType",
+            "outcome": "raised",
+            "type": "ValueError"
+          },
+          "missing_capacity": {
+            "args": [
+              "Chiller.__init__() missing 1 required positional argument: 'capacity'"
+            ],
+            "message": "Chiller.__init__() missing 1 required positional argument: 'capacity'",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "permissive_state": {
+            "capacity": {
+              "kind": "int",
+              "value": "-2"
+            },
+            "coolingtower_identity_preserved": true,
+            "cop": {
+              "kind": "int",
+              "value": "-1"
+            },
+            "name": "",
+            "pump_efficiency": {
+              "kind": "special-float",
+              "token": "nan"
+            },
+            "setpoint_temperature": {
+              "kind": "special-float",
+              "token": "positive-infinity"
+            }
+          },
+          "screw_object_type": "Chiller:Electric:EIR"
+        },
+        "facts_sha256": "sha256:85902c31cbc27b28bb4f24ac83d351b2a39b9b19a4b832f6c08c497243c29327",
+        "outcome": "observed"
+      },
+      "subfamily": "chiller",
+      "target_symbols": [
+        "Chiller",
+        "Chiller.__init__",
+        "Chiller.idf_objtypename"
+      ]
+    },
+    {
+      "code": "D01",
+      "id": "dragon-hvac-source-tower-core.compressor-enum",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "str",
+              "Enum"
+            ],
+            "mro": [
+              "CompressorType",
+              "str",
+              "Enum",
+              "object"
+            ],
+            "signature": "(*values)"
+          },
+          "equality_to_declared_value": [
+            true,
+            true,
+            true
+          ],
+          "invalid_name": {
+            "args": [
+              "NOT_DECLARED"
+            ],
+            "message": "'NOT_DECLARED'",
+            "outcome": "raised",
+            "type": "KeyError"
+          },
+          "invalid_value": {
+            "args": [
+              "'not-declared' is not a valid CompressorType"
+            ],
+            "message": "'not-declared' is not a valid CompressorType",
+            "outcome": "raised",
+            "type": "ValueError"
+          },
+          "members": [
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "TURBO",
+              "value": "turbo"
+            },
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "SCREW",
+              "value": "screw"
+            },
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "RECIPROCATING",
+              "value": "reciprocating"
+            }
+          ],
+          "unique_values": true
+        },
+        "facts_sha256": "sha256:406beba2fdc13b10784996cb350608b17d46d1ba426b303e83e4d5054a0458a3",
+        "outcome": "observed"
+      },
+      "subfamily": "compressor",
+      "target_symbols": [
+        "CompressorType",
+        "CompressorType.RECIPROCATING",
+        "CompressorType.SCREW",
+        "CompressorType.TURBO"
+      ]
+    },
+    {
+      "code": "E01",
+      "id": "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity",
+      "python": {
+        "facts": {
+          "families": [
+            {
+              "branches": [
+                {
+                  "branch": "tower-capacity",
+                  "capacity_field": "Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "hex": "0x1.b198000000000p+16",
+                    "kind": "float",
+                    "repr": "111000.0"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "FluidCooler:SingleSpeed",
+                  "source_capacity": {
+                    "hex": "0x1.b198000000000p+17",
+                    "kind": "float",
+                    "repr": "222000.0"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "hex": "0x1.b198000000000p+16",
+                    "kind": "float",
+                    "repr": "111000.0"
+                  }
+                },
+                {
+                  "branch": "source-capacity",
+                  "capacity_field": "Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "hex": "0x1.b198000000000p+17",
+                    "kind": "float",
+                    "repr": "222000.0"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "FluidCooler:SingleSpeed",
+                  "source_capacity": {
+                    "hex": "0x1.b198000000000p+17",
+                    "kind": "float",
+                    "repr": "222000.0"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "kind": "none"
+                  }
+                },
+                {
+                  "branch": "fallback-capacity",
+                  "capacity_field": "Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "hex": "0x1.e848000000000p+19",
+                    "kind": "float",
+                    "repr": "1000000.0"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "FluidCooler:SingleSpeed",
+                  "source_capacity": {
+                    "kind": "none"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "kind": "none"
+                  }
+                }
+              ],
+              "class_shape": {
+                "abstract": false,
+                "abstract_methods": [],
+                "bases": [
+                  "CoolingTower"
+                ],
+                "mro": [
+                  "ClosedSingleSpeedCoolingTower",
+                  "CoolingTower",
+                  "ABC",
+                  "object"
+                ],
+                "signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'"
+              },
+              "constructor_signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'",
+              "default_pump_efficiency": {
+                "hex": "0x1.ccccccccccccdp-1",
+                "kind": "float",
+                "repr": "0.9"
+              },
+              "idf_object_type": "FluidCooler:SingleSpeed",
+              "missing_capacity": {
+                "args": [
+                  "CoolingTower.__init__() missing 1 required positional argument: 'capacity'"
+                ],
+                "message": "CoolingTower.__init__() missing 1 required positional argument: 'capacity'",
+                "outcome": "raised",
+                "type": "TypeError"
+              },
+              "type": "ClosedSingleSpeedCoolingTower"
+            },
+            {
+              "branches": [
+                {
+                  "branch": "tower-capacity",
+                  "capacity_field": "High Speed Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "kind": "none"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "FluidCooler:TwoSpeed",
+                  "source_capacity": {
+                    "hex": "0x1.b198000000000p+17",
+                    "kind": "float",
+                    "repr": "222000.0"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "hex": "0x1.b198000000000p+16",
+                    "kind": "float",
+                    "repr": "111000.0"
+                  }
+                },
+                {
+                  "branch": "source-capacity",
+                  "capacity_field": "High Speed Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "kind": "none"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "FluidCooler:TwoSpeed",
+                  "source_capacity": {
+                    "hex": "0x1.b198000000000p+17",
+                    "kind": "float",
+                    "repr": "222000.0"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "kind": "none"
+                  }
+                },
+                {
+                  "branch": "fallback-capacity",
+                  "capacity_field": "High Speed Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "kind": "none"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "FluidCooler:TwoSpeed",
+                  "source_capacity": {
+                    "kind": "none"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "kind": "none"
+                  }
+                }
+              ],
+              "class_shape": {
+                "abstract": false,
+                "abstract_methods": [],
+                "bases": [
+                  "CoolingTower"
+                ],
+                "mro": [
+                  "ClosedTwoSpeedCoolingTower",
+                  "CoolingTower",
+                  "ABC",
+                  "object"
+                ],
+                "signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'"
+              },
+              "constructor_signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'",
+              "default_pump_efficiency": {
+                "hex": "0x1.ccccccccccccdp-1",
+                "kind": "float",
+                "repr": "0.9"
+              },
+              "idf_object_type": "FluidCooler:TwoSpeed",
+              "missing_capacity": {
+                "args": [
+                  "CoolingTower.__init__() missing 1 required positional argument: 'capacity'"
+                ],
+                "message": "CoolingTower.__init__() missing 1 required positional argument: 'capacity'",
+                "outcome": "raised",
+                "type": "TypeError"
+              },
+              "type": "ClosedTwoSpeedCoolingTower"
+            },
+            {
+              "branches": [
+                {
+                  "branch": "tower-capacity",
+                  "capacity_field": "Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "hex": "0x1.b198000000000p+16",
+                    "kind": "float",
+                    "repr": "111000.0"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "CoolingTower:SingleSpeed",
+                  "source_capacity": {
+                    "hex": "0x1.b198000000000p+17",
+                    "kind": "float",
+                    "repr": "222000.0"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "hex": "0x1.b198000000000p+16",
+                    "kind": "float",
+                    "repr": "111000.0"
+                  }
+                },
+                {
+                  "branch": "source-capacity",
+                  "capacity_field": "Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "hex": "0x1.b198000000000p+17",
+                    "kind": "float",
+                    "repr": "222000.0"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "CoolingTower:SingleSpeed",
+                  "source_capacity": {
+                    "hex": "0x1.b198000000000p+17",
+                    "kind": "float",
+                    "repr": "222000.0"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "kind": "none"
+                  }
+                },
+                {
+                  "branch": "fallback-capacity",
+                  "capacity_field": "Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "hex": "0x1.e848000000000p+19",
+                    "kind": "float",
+                    "repr": "1000000.0"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "CoolingTower:SingleSpeed",
+                  "source_capacity": {
+                    "kind": "none"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "kind": "none"
+                  }
+                }
+              ],
+              "class_shape": {
+                "abstract": false,
+                "abstract_methods": [],
+                "bases": [
+                  "CoolingTower"
+                ],
+                "mro": [
+                  "OpenSingleSpeedCoolingTower",
+                  "CoolingTower",
+                  "ABC",
+                  "object"
+                ],
+                "signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'"
+              },
+              "constructor_signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'",
+              "default_pump_efficiency": {
+                "hex": "0x1.ccccccccccccdp-1",
+                "kind": "float",
+                "repr": "0.9"
+              },
+              "idf_object_type": "CoolingTower:SingleSpeed",
+              "missing_capacity": {
+                "args": [
+                  "CoolingTower.__init__() missing 1 required positional argument: 'capacity'"
+                ],
+                "message": "CoolingTower.__init__() missing 1 required positional argument: 'capacity'",
+                "outcome": "raised",
+                "type": "TypeError"
+              },
+              "type": "OpenSingleSpeedCoolingTower"
+            },
+            {
+              "branches": [
+                {
+                  "branch": "tower-capacity",
+                  "capacity_field": "High Speed Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "hex": "0x1.b198000000000p+16",
+                    "kind": "float",
+                    "repr": "111000.0"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "CoolingTower:TwoSpeed",
+                  "source_capacity": {
+                    "hex": "0x1.b198000000000p+17",
+                    "kind": "float",
+                    "repr": "222000.0"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "hex": "0x1.b198000000000p+16",
+                    "kind": "float",
+                    "repr": "111000.0"
+                  }
+                },
+                {
+                  "branch": "source-capacity",
+                  "capacity_field": "High Speed Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "hex": "0x1.b198000000000p+17",
+                    "kind": "float",
+                    "repr": "222000.0"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "CoolingTower:TwoSpeed",
+                  "source_capacity": {
+                    "hex": "0x1.b198000000000p+17",
+                    "kind": "float",
+                    "repr": "222000.0"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "kind": "none"
+                  }
+                },
+                {
+                  "branch": "fallback-capacity",
+                  "capacity_field": "High Speed Nominal Capacity",
+                  "capacity_field_present": true,
+                  "capacity_value": {
+                    "hex": "0x1.e848000000000p+19",
+                    "kind": "float",
+                    "repr": "1000000.0"
+                  },
+                  "fresh_object": true,
+                  "fresh_result": true,
+                  "name": "CT_for_Chiller_named_Capacity Source",
+                  "object_type": "CoolingTower:TwoSpeed",
+                  "source_capacity": {
+                    "kind": "none"
+                  },
+                  "state_unchanged": true,
+                  "tower_capacity": {
+                    "kind": "none"
+                  }
+                }
+              ],
+              "class_shape": {
+                "abstract": false,
+                "abstract_methods": [],
+                "bases": [
+                  "CoolingTower"
+                ],
+                "mro": [
+                  "OpenTwoSpeedCoolingTower",
+                  "CoolingTower",
+                  "ABC",
+                  "object"
+                ],
+                "signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'"
+              },
+              "constructor_signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'",
+              "default_pump_efficiency": {
+                "hex": "0x1.ccccccccccccdp-1",
+                "kind": "float",
+                "repr": "0.9"
+              },
+              "idf_object_type": "CoolingTower:TwoSpeed",
+              "missing_capacity": {
+                "args": [
+                  "CoolingTower.__init__() missing 1 required positional argument: 'capacity'"
+                ],
+                "message": "CoolingTower.__init__() missing 1 required positional argument: 'capacity'",
+                "outcome": "raised",
+                "type": "TypeError"
+              },
+              "type": "OpenTwoSpeedCoolingTower"
+            }
+          ],
+          "permissive_state": {
+            "capacity": {
+              "kind": "int",
+              "value": "-1"
+            },
+            "name": "",
+            "pump_efficiency": {
+              "kind": "special-float",
+              "token": "nan"
+            }
+          }
+        },
+        "facts_sha256": "sha256:093154fe7b6adc95212d3f9c139e3148d7166d98348fef17c42497d9b072af56",
+        "outcome": "observed"
+      },
+      "subfamily": "tower-concrete",
+      "target_symbols": [
+        "ClosedSingleSpeedCoolingTower",
+        "ClosedSingleSpeedCoolingTower.idf_objtypename",
+        "ClosedTwoSpeedCoolingTower",
+        "ClosedTwoSpeedCoolingTower.idf_objtypename",
+        "OpenSingleSpeedCoolingTower",
+        "OpenSingleSpeedCoolingTower.idf_objtypename",
+        "OpenTwoSpeedCoolingTower",
+        "OpenTwoSpeedCoolingTower.idf_objtypename"
+      ]
+    },
+    {
+      "code": "F01",
+      "id": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "python": {
+        "facts": {
+          "abstract_idf_object_type_body": {
+            "kind": "none"
+          },
+          "abstract_main_body": {
+            "kind": "none"
+          },
+          "class_shape": {
+            "abstract": true,
+            "abstract_methods": [
+              "idf_objtypename",
+              "to_idf_main_object"
+            ],
+            "bases": [
+              "ABC"
+            ],
+            "mro": [
+              "CoolingTower",
+              "ABC",
+              "object"
+            ],
+            "signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'"
+          },
+          "constructor_signature": "(self, name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'",
+          "direct_instantiation": {
+            "args": [
+              "Can't instantiate abstract class CoolingTower without an implementation for abstract methods 'idf_objtypename', 'to_idf_main_object'"
+            ],
+            "message": "Can't instantiate abstract class CoolingTower without an implementation for abstract methods 'idf_objtypename', 'to_idf_main_object'",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "names": {
+            "demand_branch_list": "Loop_for_CT_for_Chiller_named_Name Context Demand BranchList",
+            "demand_mixer": "Loop_for_CT_for_Chiller_named_Name Context Demand Mixer",
+            "demand_splitter": "Loop_for_CT_for_Chiller_named_Name Context Demand Splitter",
+            "loop": "Loop_for_CT_for_Chiller_named_Name Context",
+            "object": "CT_for_Chiller_named_Name Context",
+            "supply_branch_list": "Loop_for_CT_for_Chiller_named_Name Context Supply BranchList",
+            "supply_mixer": "Loop_for_CT_for_Chiller_named_Name Context Supply Mixer",
+            "supply_splitter": "Loop_for_CT_for_Chiller_named_Name Context Supply Splitter"
+          },
+          "permissive_state": {
+            "capacity": {
+              "kind": "int",
+              "value": "-1"
+            },
+            "name": "",
+            "pump_efficiency": {
+              "kind": "special-float",
+              "token": "nan"
+            }
+          },
+          "probe_object_type": "Probe:Tower",
+          "tower_name_not_used_in_context_names": true
+        },
+        "facts_sha256": "sha256:c647e3382c9a37af793d4c80d537c2b1188ad34a222945fd1a76e3763c7bf67a",
+        "outcome": "observed"
+      },
+      "subfamily": "tower-core",
+      "target_symbols": [
+        "CoolingTower",
+        "CoolingTower.__init__",
+        "CoolingTower.idf_get_demandbranchlistname",
+        "CoolingTower.idf_get_demandmixername",
+        "CoolingTower.idf_get_demandsplittername",
+        "CoolingTower.idf_get_loopname",
+        "CoolingTower.idf_get_objname",
+        "CoolingTower.idf_get_supplybranchlistname",
+        "CoolingTower.idf_get_supplymixername",
+        "CoolingTower.idf_get_supplysplittername",
+        "CoolingTower.idf_objtypename"
+      ]
+    },
+    {
+      "code": "G01",
+      "id": "dragon-hvac-source-tower-core.fuel-enum",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "str",
+              "Enum"
+            ],
+            "mro": [
+              "Fuel",
+              "str",
+              "Enum",
+              "object"
+            ],
+            "signature": "(*values)"
+          },
+          "equality_to_declared_value": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "invalid_name": {
+            "args": [
+              "NOT_DECLARED"
+            ],
+            "message": "'NOT_DECLARED'",
+            "outcome": "raised",
+            "type": "KeyError"
+          },
+          "invalid_value": {
+            "args": [
+              "'not-declared' is not a valid Fuel"
+            ],
+            "message": "'not-declared' is not a valid Fuel",
+            "outcome": "raised",
+            "type": "ValueError"
+          },
+          "members": [
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "ELECTRICITY",
+              "value": "Electricity"
+            },
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "NATURALGAS",
+              "value": "NaturalGas"
+            },
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "PROPANE",
+              "value": "Propane"
+            },
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "FUELOILNO1",
+              "value": "FuelOilNo1"
+            },
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "FUELOILNO2",
+              "value": "FuelOilNo2"
+            },
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "COAL",
+              "value": "Coal"
+            },
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "DIESEL",
+              "value": "Diesel"
+            },
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "GASOLINE",
+              "value": "Gasoline"
+            },
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "OTHERFUEL1",
+              "value": "OtherFuel1"
+            },
+            {
+              "is_str_instance": true,
+              "lookup_by_name_identity": true,
+              "lookup_by_value_identity": true,
+              "name": "OTHERFUEL2",
+              "value": "OtherFuel2"
+            }
+          ],
+          "unique_values": true
+        },
+        "facts_sha256": "sha256:8b6044fbd9f678e0a7aa00f19a7d90155dc69bf864a6bb5b52105b94a9be96d3",
+        "outcome": "observed"
+      },
+      "subfamily": "fuel",
+      "target_symbols": [
+        "Fuel",
+        "Fuel.COAL",
+        "Fuel.DIESEL",
+        "Fuel.ELECTRICITY",
+        "Fuel.FUELOILNO1",
+        "Fuel.FUELOILNO2",
+        "Fuel.GASOLINE",
+        "Fuel.NATURALGAS",
+        "Fuel.OTHERFUEL1",
+        "Fuel.OTHERFUEL2",
+        "Fuel.PROPANE"
+      ]
+    },
+    {
+      "code": "H01",
+      "id": "dragon-hvac-source-tower-core.geothermal-heat-pump-core",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": true,
+            "abstract_methods": [
+              "to_idf_object"
+            ],
+            "bases": [
+              "SourceSystem"
+            ],
+            "mro": [
+              "GeothermalHeatPump",
+              "SourceSystem",
+              "ABC",
+              "object"
+            ],
+            "signature": "()"
+          },
+          "direct_idf_object_type_body": {
+            "kind": "none"
+          },
+          "direct_instantiation": {
+            "args": [
+              "Can't instantiate abstract class GeothermalHeatPump without an implementation for abstract method 'to_idf_object'"
+            ],
+            "message": "Can't instantiate abstract class GeothermalHeatPump without an implementation for abstract method 'to_idf_object'",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "inherits_source_system": true,
+          "to_idf_inherited_abstract": true
+        },
+        "facts_sha256": "sha256:e203fcb870566e744808738dda87b854705db541f585f2b2f42215122e18f630",
+        "outcome": "observed"
+      },
+      "subfamily": "geothermal",
+      "target_symbols": [
+        "GeothermalHeatPump",
+        "GeothermalHeatPump.idf_objtypename"
+      ]
+    },
+    {
+      "code": "I01",
+      "id": "dragon-hvac-source-tower-core.heat-pump-core",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "SourceSystem"
+            ],
+            "mro": [
+              "HeatPump",
+              "SourceSystem",
+              "ABC",
+              "object"
+            ],
+            "signature": "(name: 'str', fuel: 'str | Fuel', heating_cop: 'int | float', cooling_cop: 'int | float', heating_capacity: 'int | float | None' = None, cooling_capacity: 'int | float | None' = None) -> 'None'"
+          },
+          "constructor_signature": "(self, name: 'str', fuel: 'str | Fuel', heating_cop: 'int | float', cooling_cop: 'int | float', heating_capacity: 'int | float | None' = None, cooling_capacity: 'int | float | None' = None) -> 'None'",
+          "invalid_fuel": {
+            "args": [
+              "'electricity' is not a valid Fuel"
+            ],
+            "message": "'electricity' is not a valid Fuel",
+            "outcome": "raised",
+            "type": "ValueError"
+          },
+          "mutated_heating_cop": {
+            "hex": "0x1.0000000000000p+3",
+            "kind": "float",
+            "repr": "8.0"
+          },
+          "permissive_state": {
+            "cooling_capacity": {
+              "kind": "int",
+              "value": "-20"
+            },
+            "cooling_cop": {
+              "kind": "int",
+              "value": "0"
+            },
+            "fuel": {
+              "enum_type": "Fuel",
+              "kind": "enum",
+              "name": "NATURALGAS",
+              "value": {
+                "kind": "str",
+                "value": "NaturalGas"
+              }
+            },
+            "heating_capacity": {
+              "kind": "int",
+              "value": "-10"
+            },
+            "heating_cop": {
+              "kind": "special-float",
+              "token": "nan"
+            },
+            "idf_object_type": "AirConditioner:VariableRefrigerantFlow",
+            "name": ""
+          },
+          "state_before_mutation": {
+            "cooling_capacity": {
+              "kind": "none"
+            },
+            "cooling_cop": {
+              "hex": "0x1.7333333333333p+1",
+              "kind": "float",
+              "repr": "2.9"
+            },
+            "fuel": {
+              "enum_type": "Fuel",
+              "kind": "enum",
+              "name": "ELECTRICITY",
+              "value": {
+                "kind": "str",
+                "value": "Electricity"
+              }
+            },
+            "heating_capacity": {
+              "kind": "none"
+            },
+            "heating_cop": {
+              "hex": "0x1.b333333333333p+1",
+              "kind": "float",
+              "repr": "3.4"
+            },
+            "idf_object_type": "AirConditioner:VariableRefrigerantFlow",
+            "name": "Heat Pump"
+          },
+          "string_fuel_coerced": true
+        },
+        "facts_sha256": "sha256:29ec3f4fa65c31d6f8be8b73917d519d9e66e5855e05d2e4efbb6b88b0a7a8f3",
+        "outcome": "observed"
+      },
+      "subfamily": "heatpump",
+      "target_symbols": [
+        "HeatPump",
+        "HeatPump.__init__",
+        "HeatPump.idf_objtypename"
+      ]
+    },
+    {
+      "code": "J01",
+      "id": "dragon-hvac-source-tower-core.source-system-core-names",
+      "python": {
+        "facts": {
+          "abstract_idf_object_type_body": {
+            "kind": "none"
+          },
+          "abstract_to_idf_body": {
+            "kind": "none"
+          },
+          "class_shape": {
+            "abstract": true,
+            "abstract_methods": [
+              "idf_objtypename",
+              "to_idf_object"
+            ],
+            "bases": [
+              "ABC"
+            ],
+            "mro": [
+              "SourceSystem",
+              "ABC",
+              "object"
+            ],
+            "signature": "()"
+          },
+          "direct_instantiation": {
+            "args": [
+              "Can't instantiate abstract class SourceSystem without an implementation for abstract methods 'idf_objtypename', 'to_idf_object'"
+            ],
+            "message": "Can't instantiate abstract class SourceSystem without an implementation for abstract methods 'idf_objtypename', 'to_idf_object'",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "fresh_probe_results": true,
+          "names_after_mutation": {
+            "demand_branch_list": "Loop_for_Renamed Source Demand BranchList",
+            "demand_mixer": "Loop_for_Renamed Source Demand Mixer",
+            "demand_splitter": "Loop_for_Renamed Source Demand Splitter",
+            "loop": "Loop_for_Renamed Source",
+            "object": "ProbeSource_named_Renamed Source",
+            "object_type": "Probe:Source",
+            "supply_branch_list": "Loop_for_Renamed Source Supply BranchList",
+            "supply_mixer": "Loop_for_Renamed Source Supply Mixer",
+            "supply_splitter": "Loop_for_Renamed Source Supply Splitter",
+            "terminal_unit_list": "Terminal_Units_for_ProbeSource_named_Renamed Source"
+          },
+          "names_before_mutation": {
+            "demand_branch_list": "Loop_for_Source Name Demand BranchList",
+            "demand_mixer": "Loop_for_Source Name Demand Mixer",
+            "demand_splitter": "Loop_for_Source Name Demand Splitter",
+            "loop": "Loop_for_Source Name",
+            "object": "ProbeSource_named_Source Name",
+            "object_type": "Probe:Source",
+            "supply_branch_list": "Loop_for_Source Name Supply BranchList",
+            "supply_mixer": "Loop_for_Source Name Supply Mixer",
+            "supply_splitter": "Loop_for_Source Name Supply Splitter",
+            "terminal_unit_list": "Terminal_Units_for_ProbeSource_named_Source Name"
+          },
+          "probe_class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "SourceSystem"
+            ],
+            "mro": [
+              "ProbeSource",
+              "SourceSystem",
+              "ABC",
+              "object"
+            ],
+            "signature": "(name: 'str') -> 'None'"
+          }
+        },
+        "facts_sha256": "sha256:ca494b84caa01187faa7a674e0217b8980cf3e6e1798f87cda981892fc3d0a17",
+        "outcome": "observed"
+      },
+      "subfamily": "source",
+      "target_symbols": [
+        "SourceSystem",
+        "SourceSystem.idf_demandbranchlistname",
+        "SourceSystem.idf_demandmixername",
+        "SourceSystem.idf_demandsplittername",
+        "SourceSystem.idf_loopname",
+        "SourceSystem.idf_objname",
+        "SourceSystem.idf_objtypename",
+        "SourceSystem.idf_supplybranchlistname",
+        "SourceSystem.idf_supplymixername",
+        "SourceSystem.idf_supplysplittername",
+        "SourceSystem.idf_terminalunitlistname"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:3e5d0d06f45e91fbbda88b34e9c44944516a7107cf123b9052e373a347944459",
+  "consumer_contract": {
+    "adaptations": {
+      "AbsorptionChiller": "validated-immutable-entity-id-construction-641",
+      "AbsorptionChiller.__init__": "validated-immutable-entity-id-construction-642",
+      "Boiler": "validated-immutable-entity-id-construction-652",
+      "Boiler.__init__": "validated-immutable-entity-id-construction-653",
+      "Chiller": "validated-immutable-entity-id-construction-657",
+      "Chiller.__init__": "validated-immutable-entity-id-construction-658",
+      "Chiller.idf_objtypename": "safe-screw-reformulated-eir-type-659",
+      "ClosedSingleSpeedCoolingTower": "validated-immutable-entity-id-construction-661",
+      "ClosedTwoSpeedCoolingTower": "validated-immutable-entity-id-construction-664",
+      "CoolingTower": "validated-immutable-entity-id-construction-673",
+      "CoolingTower.__init__": "validated-immutable-entity-id-construction-674",
+      "CoolingTower.idf_get_demandbranchlistname": "public-context-emission-derived-name-675",
+      "CoolingTower.idf_get_demandmixername": "public-context-emission-derived-name-676",
+      "CoolingTower.idf_get_demandsplittername": "public-context-emission-derived-name-677",
+      "CoolingTower.idf_get_supplybranchlistname": "public-context-emission-derived-name-680",
+      "CoolingTower.idf_get_supplymixername": "public-context-emission-derived-name-681",
+      "CoolingTower.idf_get_supplysplittername": "public-context-emission-derived-name-682",
+      "GeothermalHeatPump": "functional-native-heatpump-route-for-incomplete-abstract-upstream-738",
+      "GeothermalHeatPump.idf_objtypename": "functional-native-heatpump-route-for-incomplete-abstract-upstream-739",
+      "HeatPump": "validated-immutable-entity-id-construction-740",
+      "HeatPump.__init__": "validated-immutable-entity-id-construction-741",
+      "OpenSingleSpeedCoolingTower": "validated-immutable-entity-id-construction-744",
+      "OpenTwoSpeedCoolingTower": "validated-immutable-entity-id-construction-747",
+      "SourceSystem": "validated-immutable-entity-id-construction-777",
+      "SourceSystem.idf_demandbranchlistname": "public-context-emission-derived-name-778",
+      "SourceSystem.idf_demandmixername": "public-context-emission-derived-name-779",
+      "SourceSystem.idf_demandsplittername": "public-context-emission-derived-name-780",
+      "SourceSystem.idf_objname": "concrete-native-idf-object-name-overrides-782",
+      "SourceSystem.idf_supplybranchlistname": "public-context-emission-derived-name-784",
+      "SourceSystem.idf_supplymixername": "public-context-emission-derived-name-785",
+      "SourceSystem.idf_supplysplittername": "public-context-emission-derived-name-786",
+      "SourceSystem.idf_terminalunitlistname": "public-context-emission-derived-name-787"
+    },
+    "assertion_ids": {
+      "AbsorptionChiller": "dragon-hvac-source-tower-core-641-3a1dd026",
+      "AbsorptionChiller.__init__": "dragon-hvac-source-tower-core-642-14ca97c1",
+      "AbsorptionChiller.idf_objtypename": "dragon-hvac-source-tower-core-643-3e4cd4b3",
+      "Boiler": "dragon-hvac-source-tower-core-652-fef90e4c",
+      "Boiler.__init__": "dragon-hvac-source-tower-core-653-735f922d",
+      "Boiler.idf_objtypename": "dragon-hvac-source-tower-core-654-b97f1590",
+      "Chiller": "dragon-hvac-source-tower-core-657-610bd83a",
+      "Chiller.__init__": "dragon-hvac-source-tower-core-658-65f8043a",
+      "Chiller.idf_objtypename": "dragon-hvac-source-tower-core-659-4ab109ff",
+      "ClosedSingleSpeedCoolingTower": "dragon-hvac-source-tower-core-661-a4d512bc",
+      "ClosedSingleSpeedCoolingTower.idf_objtypename": "dragon-hvac-source-tower-core-662-4b2767cd",
+      "ClosedTwoSpeedCoolingTower": "dragon-hvac-source-tower-core-664-a365cc0a",
+      "ClosedTwoSpeedCoolingTower.idf_objtypename": "dragon-hvac-source-tower-core-665-648bc45c",
+      "CompressorType": "dragon-hvac-source-tower-core-667-8785ee6d",
+      "CompressorType.RECIPROCATING": "dragon-hvac-source-tower-core-668-dfd51671",
+      "CompressorType.SCREW": "dragon-hvac-source-tower-core-669-2947a213",
+      "CompressorType.TURBO": "dragon-hvac-source-tower-core-670-5074351d",
+      "CoolingTower": "dragon-hvac-source-tower-core-673-4b07da75",
+      "CoolingTower.__init__": "dragon-hvac-source-tower-core-674-d388c8f3",
+      "CoolingTower.idf_get_demandbranchlistname": "dragon-hvac-source-tower-core-675-b754f9c4",
+      "CoolingTower.idf_get_demandmixername": "dragon-hvac-source-tower-core-676-482bcce0",
+      "CoolingTower.idf_get_demandsplittername": "dragon-hvac-source-tower-core-677-bc43234b",
+      "CoolingTower.idf_get_loopname": "dragon-hvac-source-tower-core-678-7da2b907",
+      "CoolingTower.idf_get_objname": "dragon-hvac-source-tower-core-679-53dba42f",
+      "CoolingTower.idf_get_supplybranchlistname": "dragon-hvac-source-tower-core-680-87efb2b8",
+      "CoolingTower.idf_get_supplymixername": "dragon-hvac-source-tower-core-681-8200f079",
+      "CoolingTower.idf_get_supplysplittername": "dragon-hvac-source-tower-core-682-c1e5599b",
+      "CoolingTower.idf_objtypename": "dragon-hvac-source-tower-core-683-65852008",
+      "Fuel": "dragon-hvac-source-tower-core-726-66a9b58b",
+      "Fuel.COAL": "dragon-hvac-source-tower-core-727-4d234c1e",
+      "Fuel.DIESEL": "dragon-hvac-source-tower-core-728-a3ee9ef5",
+      "Fuel.ELECTRICITY": "dragon-hvac-source-tower-core-729-8d1b877f",
+      "Fuel.FUELOILNO1": "dragon-hvac-source-tower-core-730-b26b5808",
+      "Fuel.FUELOILNO2": "dragon-hvac-source-tower-core-731-1f61e381",
+      "Fuel.GASOLINE": "dragon-hvac-source-tower-core-732-7fc1afe4",
+      "Fuel.NATURALGAS": "dragon-hvac-source-tower-core-733-5afbce03",
+      "Fuel.OTHERFUEL1": "dragon-hvac-source-tower-core-734-42a148cb",
+      "Fuel.OTHERFUEL2": "dragon-hvac-source-tower-core-735-914d30a5",
+      "Fuel.PROPANE": "dragon-hvac-source-tower-core-736-dea3dce6",
+      "GeothermalHeatPump": "dragon-hvac-source-tower-core-738-5016ceb5",
+      "GeothermalHeatPump.idf_objtypename": "dragon-hvac-source-tower-core-739-0189ef90",
+      "HeatPump": "dragon-hvac-source-tower-core-740-f862c5a4",
+      "HeatPump.__init__": "dragon-hvac-source-tower-core-741-498d6fec",
+      "HeatPump.idf_objtypename": "dragon-hvac-source-tower-core-742-66eef776",
+      "OpenSingleSpeedCoolingTower": "dragon-hvac-source-tower-core-744-219b5b22",
+      "OpenSingleSpeedCoolingTower.idf_objtypename": "dragon-hvac-source-tower-core-745-7ba0b88b",
+      "OpenTwoSpeedCoolingTower": "dragon-hvac-source-tower-core-747-3946064c",
+      "OpenTwoSpeedCoolingTower.idf_objtypename": "dragon-hvac-source-tower-core-748-3692dbe4",
+      "SourceSystem": "dragon-hvac-source-tower-core-777-d8fcbe86",
+      "SourceSystem.idf_demandbranchlistname": "dragon-hvac-source-tower-core-778-491d3dcc",
+      "SourceSystem.idf_demandmixername": "dragon-hvac-source-tower-core-779-dd1f2652",
+      "SourceSystem.idf_demandsplittername": "dragon-hvac-source-tower-core-780-9fcd3f6d",
+      "SourceSystem.idf_loopname": "dragon-hvac-source-tower-core-781-ee8dc7f9",
+      "SourceSystem.idf_objname": "dragon-hvac-source-tower-core-782-5b92cad7",
+      "SourceSystem.idf_objtypename": "dragon-hvac-source-tower-core-783-65852008",
+      "SourceSystem.idf_supplybranchlistname": "dragon-hvac-source-tower-core-784-6cd0d336",
+      "SourceSystem.idf_supplymixername": "dragon-hvac-source-tower-core-785-b62cdf0b",
+      "SourceSystem.idf_supplysplittername": "dragon-hvac-source-tower-core-786-8ad08f57",
+      "SourceSystem.idf_terminalunitlistname": "dragon-hvac-source-tower-core-787-14bb746e"
+    },
+    "case_count": 10,
+    "case_ids": [
+      "dragon-hvac-source-tower-core.absorption-chiller-core",
+      "dragon-hvac-source-tower-core.boiler-core",
+      "dragon-hvac-source-tower-core.chiller-core",
+      "dragon-hvac-source-tower-core.compressor-enum",
+      "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity",
+      "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "dragon-hvac-source-tower-core.fuel-enum",
+      "dragon-hvac-source-tower-core.geothermal-heat-pump-core",
+      "dragon-hvac-source-tower-core.heat-pump-core",
+      "dragon-hvac-source-tower-core.source-system-core-names"
+    ],
+    "classification_counts": {
+      "equivalent": 27,
+      "exception": 32
+    },
+    "classifications": {
+      "AbsorptionChiller": "exception",
+      "AbsorptionChiller.__init__": "exception",
+      "AbsorptionChiller.idf_objtypename": "equivalent",
+      "Boiler": "exception",
+      "Boiler.__init__": "exception",
+      "Boiler.idf_objtypename": "equivalent",
+      "Chiller": "exception",
+      "Chiller.__init__": "exception",
+      "Chiller.idf_objtypename": "exception",
+      "ClosedSingleSpeedCoolingTower": "exception",
+      "ClosedSingleSpeedCoolingTower.idf_objtypename": "equivalent",
+      "ClosedTwoSpeedCoolingTower": "exception",
+      "ClosedTwoSpeedCoolingTower.idf_objtypename": "equivalent",
+      "CompressorType": "equivalent",
+      "CompressorType.RECIPROCATING": "equivalent",
+      "CompressorType.SCREW": "equivalent",
+      "CompressorType.TURBO": "equivalent",
+      "CoolingTower": "exception",
+      "CoolingTower.__init__": "exception",
+      "CoolingTower.idf_get_demandbranchlistname": "exception",
+      "CoolingTower.idf_get_demandmixername": "exception",
+      "CoolingTower.idf_get_demandsplittername": "exception",
+      "CoolingTower.idf_get_loopname": "equivalent",
+      "CoolingTower.idf_get_objname": "equivalent",
+      "CoolingTower.idf_get_supplybranchlistname": "exception",
+      "CoolingTower.idf_get_supplymixername": "exception",
+      "CoolingTower.idf_get_supplysplittername": "exception",
+      "CoolingTower.idf_objtypename": "equivalent",
+      "Fuel": "equivalent",
+      "Fuel.COAL": "equivalent",
+      "Fuel.DIESEL": "equivalent",
+      "Fuel.ELECTRICITY": "equivalent",
+      "Fuel.FUELOILNO1": "equivalent",
+      "Fuel.FUELOILNO2": "equivalent",
+      "Fuel.GASOLINE": "equivalent",
+      "Fuel.NATURALGAS": "equivalent",
+      "Fuel.OTHERFUEL1": "equivalent",
+      "Fuel.OTHERFUEL2": "equivalent",
+      "Fuel.PROPANE": "equivalent",
+      "GeothermalHeatPump": "exception",
+      "GeothermalHeatPump.idf_objtypename": "exception",
+      "HeatPump": "exception",
+      "HeatPump.__init__": "exception",
+      "HeatPump.idf_objtypename": "equivalent",
+      "OpenSingleSpeedCoolingTower": "exception",
+      "OpenSingleSpeedCoolingTower.idf_objtypename": "equivalent",
+      "OpenTwoSpeedCoolingTower": "exception",
+      "OpenTwoSpeedCoolingTower.idf_objtypename": "equivalent",
+      "SourceSystem": "exception",
+      "SourceSystem.idf_demandbranchlistname": "exception",
+      "SourceSystem.idf_demandmixername": "exception",
+      "SourceSystem.idf_demandsplittername": "exception",
+      "SourceSystem.idf_loopname": "equivalent",
+      "SourceSystem.idf_objname": "exception",
+      "SourceSystem.idf_objtypename": "equivalent",
+      "SourceSystem.idf_supplybranchlistname": "exception",
+      "SourceSystem.idf_supplymixername": "exception",
+      "SourceSystem.idf_supplysplittername": "exception",
+      "SourceSystem.idf_terminalunitlistname": "exception"
+    },
+    "closure": {
+      "adjacent_classifications": {
+        "AbsorptionChiller.to_idf_object": "exception",
+        "Boiler.to_idf_object": "exception",
+        "Boiler.to_idf_object_as_generator": "exception",
+        "Chiller.to_idf_object": "exception",
+        "ClosedSingleSpeedCoolingTower.to_idf_main_object": "exception",
+        "ClosedTwoSpeedCoolingTower.to_idf_main_object": "exception",
+        "CompressorType.__str__": "out_of_scope",
+        "CompressorType.to_idf_curve_object": "exception",
+        "CoolingTower.to_idf_main_object": "exception",
+        "CoolingTower.to_idf_object": "exception",
+        "Fuel.__str__": "out_of_scope",
+        "HeatPump.to_idf_object": "exception",
+        "OpenSingleSpeedCoolingTower.to_idf_main_object": "exception",
+        "OpenTwoSpeedCoolingTower.to_idf_main_object": "exception",
+        "SourceSystem.to_idf_object": "exception"
+      },
+      "adjacent_count": 15,
+      "adjacent_indices": [
+        644,
+        655,
+        656,
+        660,
+        663,
+        666,
+        671,
+        672,
+        684,
+        685,
+        737,
+        743,
+        746,
+        749,
+        788
+      ],
+      "deferred_count": 100,
+      "deferred_indices": [
+        645,
+        646,
+        647,
+        648,
+        649,
+        650,
+        651,
+        686,
+        687,
+        688,
+        689,
+        690,
+        691,
+        692,
+        693,
+        694,
+        695,
+        696,
+        697,
+        698,
+        699,
+        700,
+        701,
+        702,
+        703,
+        704,
+        705,
+        706,
+        707,
+        708,
+        709,
+        710,
+        711,
+        712,
+        713,
+        714,
+        715,
+        716,
+        717,
+        718,
+        719,
+        720,
+        721,
+        722,
+        723,
+        724,
+        725,
+        750,
+        751,
+        752,
+        753,
+        754,
+        755,
+        756,
+        757,
+        758,
+        759,
+        760,
+        761,
+        762,
+        763,
+        764,
+        765,
+        766,
+        767,
+        768,
+        769,
+        770,
+        771,
+        772,
+        773,
+        774,
+        775,
+        776,
+        789,
+        790,
+        791,
+        792,
+        793,
+        794,
+        795,
+        796,
+        797,
+        798,
+        799,
+        800,
+        801,
+        802,
+        803,
+        804,
+        805,
+        806,
+        807,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814
+      ],
+      "exact_one_case_target_partition": true,
+      "full_hvac_source_partition": true,
+      "full_source_tower_family_closure": true,
+      "source_declaration_count": 174,
+      "source_tower_family_count": 74,
+      "target_count": 59,
+      "target_indices": [
+        641,
+        642,
+        643,
+        652,
+        653,
+        654,
+        657,
+        658,
+        659,
+        661,
+        662,
+        664,
+        665,
+        667,
+        668,
+        669,
+        670,
+        673,
+        674,
+        675,
+        676,
+        677,
+        678,
+        679,
+        680,
+        681,
+        682,
+        683,
+        726,
+        727,
+        728,
+        729,
+        730,
+        731,
+        732,
+        733,
+        734,
+        735,
+        736,
+        738,
+        739,
+        740,
+        741,
+        742,
+        744,
+        745,
+        747,
+        748,
+        777,
+        778,
+        779,
+        780,
+        781,
+        782,
+        783,
+        784,
+        785,
+        786,
+        787
+      ],
+      "target_symbols": [
+        "AbsorptionChiller",
+        "AbsorptionChiller.__init__",
+        "AbsorptionChiller.idf_objtypename",
+        "Boiler",
+        "Boiler.__init__",
+        "Boiler.idf_objtypename",
+        "Chiller",
+        "Chiller.__init__",
+        "Chiller.idf_objtypename",
+        "ClosedSingleSpeedCoolingTower",
+        "ClosedSingleSpeedCoolingTower.idf_objtypename",
+        "ClosedTwoSpeedCoolingTower",
+        "ClosedTwoSpeedCoolingTower.idf_objtypename",
+        "CompressorType",
+        "CompressorType.RECIPROCATING",
+        "CompressorType.SCREW",
+        "CompressorType.TURBO",
+        "CoolingTower",
+        "CoolingTower.__init__",
+        "CoolingTower.idf_get_demandbranchlistname",
+        "CoolingTower.idf_get_demandmixername",
+        "CoolingTower.idf_get_demandsplittername",
+        "CoolingTower.idf_get_loopname",
+        "CoolingTower.idf_get_objname",
+        "CoolingTower.idf_get_supplybranchlistname",
+        "CoolingTower.idf_get_supplymixername",
+        "CoolingTower.idf_get_supplysplittername",
+        "CoolingTower.idf_objtypename",
+        "Fuel",
+        "Fuel.COAL",
+        "Fuel.DIESEL",
+        "Fuel.ELECTRICITY",
+        "Fuel.FUELOILNO1",
+        "Fuel.FUELOILNO2",
+        "Fuel.GASOLINE",
+        "Fuel.NATURALGAS",
+        "Fuel.OTHERFUEL1",
+        "Fuel.OTHERFUEL2",
+        "Fuel.PROPANE",
+        "GeothermalHeatPump",
+        "GeothermalHeatPump.idf_objtypename",
+        "HeatPump",
+        "HeatPump.__init__",
+        "HeatPump.idf_objtypename",
+        "OpenSingleSpeedCoolingTower",
+        "OpenSingleSpeedCoolingTower.idf_objtypename",
+        "OpenTwoSpeedCoolingTower",
+        "OpenTwoSpeedCoolingTower.idf_objtypename",
+        "SourceSystem",
+        "SourceSystem.idf_demandbranchlistname",
+        "SourceSystem.idf_demandmixername",
+        "SourceSystem.idf_demandsplittername",
+        "SourceSystem.idf_loopname",
+        "SourceSystem.idf_objname",
+        "SourceSystem.idf_objtypename",
+        "SourceSystem.idf_supplybranchlistname",
+        "SourceSystem.idf_supplymixername",
+        "SourceSystem.idf_supplysplittername",
+        "SourceSystem.idf_terminalunitlistname"
+      ]
+    },
+    "coverage_by_symbol": {
+      "AbsorptionChiller": "dragon-hvac-source-tower-core.absorption-chiller-core",
+      "AbsorptionChiller.__init__": "dragon-hvac-source-tower-core.absorption-chiller-core",
+      "AbsorptionChiller.idf_objtypename": "dragon-hvac-source-tower-core.absorption-chiller-core",
+      "Boiler": "dragon-hvac-source-tower-core.boiler-core",
+      "Boiler.__init__": "dragon-hvac-source-tower-core.boiler-core",
+      "Boiler.idf_objtypename": "dragon-hvac-source-tower-core.boiler-core",
+      "Chiller": "dragon-hvac-source-tower-core.chiller-core",
+      "Chiller.__init__": "dragon-hvac-source-tower-core.chiller-core",
+      "Chiller.idf_objtypename": "dragon-hvac-source-tower-core.chiller-core",
+      "ClosedSingleSpeedCoolingTower": "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity",
+      "ClosedSingleSpeedCoolingTower.idf_objtypename": "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity",
+      "ClosedTwoSpeedCoolingTower": "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity",
+      "ClosedTwoSpeedCoolingTower.idf_objtypename": "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity",
+      "CompressorType": "dragon-hvac-source-tower-core.compressor-enum",
+      "CompressorType.RECIPROCATING": "dragon-hvac-source-tower-core.compressor-enum",
+      "CompressorType.SCREW": "dragon-hvac-source-tower-core.compressor-enum",
+      "CompressorType.TURBO": "dragon-hvac-source-tower-core.compressor-enum",
+      "CoolingTower": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "CoolingTower.__init__": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "CoolingTower.idf_get_demandbranchlistname": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "CoolingTower.idf_get_demandmixername": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "CoolingTower.idf_get_demandsplittername": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "CoolingTower.idf_get_loopname": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "CoolingTower.idf_get_objname": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "CoolingTower.idf_get_supplybranchlistname": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "CoolingTower.idf_get_supplymixername": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "CoolingTower.idf_get_supplysplittername": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "CoolingTower.idf_objtypename": "dragon-hvac-source-tower-core.cooling-tower-core-names",
+      "Fuel": "dragon-hvac-source-tower-core.fuel-enum",
+      "Fuel.COAL": "dragon-hvac-source-tower-core.fuel-enum",
+      "Fuel.DIESEL": "dragon-hvac-source-tower-core.fuel-enum",
+      "Fuel.ELECTRICITY": "dragon-hvac-source-tower-core.fuel-enum",
+      "Fuel.FUELOILNO1": "dragon-hvac-source-tower-core.fuel-enum",
+      "Fuel.FUELOILNO2": "dragon-hvac-source-tower-core.fuel-enum",
+      "Fuel.GASOLINE": "dragon-hvac-source-tower-core.fuel-enum",
+      "Fuel.NATURALGAS": "dragon-hvac-source-tower-core.fuel-enum",
+      "Fuel.OTHERFUEL1": "dragon-hvac-source-tower-core.fuel-enum",
+      "Fuel.OTHERFUEL2": "dragon-hvac-source-tower-core.fuel-enum",
+      "Fuel.PROPANE": "dragon-hvac-source-tower-core.fuel-enum",
+      "GeothermalHeatPump": "dragon-hvac-source-tower-core.geothermal-heat-pump-core",
+      "GeothermalHeatPump.idf_objtypename": "dragon-hvac-source-tower-core.geothermal-heat-pump-core",
+      "HeatPump": "dragon-hvac-source-tower-core.heat-pump-core",
+      "HeatPump.__init__": "dragon-hvac-source-tower-core.heat-pump-core",
+      "HeatPump.idf_objtypename": "dragon-hvac-source-tower-core.heat-pump-core",
+      "OpenSingleSpeedCoolingTower": "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity",
+      "OpenSingleSpeedCoolingTower.idf_objtypename": "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity",
+      "OpenTwoSpeedCoolingTower": "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity",
+      "OpenTwoSpeedCoolingTower.idf_objtypename": "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity",
+      "SourceSystem": "dragon-hvac-source-tower-core.source-system-core-names",
+      "SourceSystem.idf_demandbranchlistname": "dragon-hvac-source-tower-core.source-system-core-names",
+      "SourceSystem.idf_demandmixername": "dragon-hvac-source-tower-core.source-system-core-names",
+      "SourceSystem.idf_demandsplittername": "dragon-hvac-source-tower-core.source-system-core-names",
+      "SourceSystem.idf_loopname": "dragon-hvac-source-tower-core.source-system-core-names",
+      "SourceSystem.idf_objname": "dragon-hvac-source-tower-core.source-system-core-names",
+      "SourceSystem.idf_objtypename": "dragon-hvac-source-tower-core.source-system-core-names",
+      "SourceSystem.idf_supplybranchlistname": "dragon-hvac-source-tower-core.source-system-core-names",
+      "SourceSystem.idf_supplymixername": "dragon-hvac-source-tower-core.source-system-core-names",
+      "SourceSystem.idf_supplysplittername": "dragon-hvac-source-tower-core.source-system-core-names",
+      "SourceSystem.idf_terminalunitlistname": "dragon-hvac-source-tower-core.source-system-core-names"
+    },
+    "evidence_contract": {
+      "active_energyplus_process_claim": false,
+      "exact_cpython_behavior_oracle": true,
+      "expected_receipt_count": 59,
+      "native_runtime_executed_by_python_oracle": false,
+      "path_independent_relocated_import": true,
+      "resolved_idf_behavior_reused_from_support": true,
+      "target_coverage_complete": true
+    },
+    "expectations": {
+      "AbsorptionChiller": {
+        "adaptation": "validated-immutable-entity-id-construction-641",
+        "assertion_id": "dragon-hvac-source-tower-core-641-3a1dd026",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller"
+      },
+      "AbsorptionChiller.__init__": {
+        "adaptation": "validated-immutable-entity-id-construction-642",
+        "assertion_id": "dragon-hvac-source-tower-core-642-14ca97c1",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller(...)"
+      },
+      "AbsorptionChiller.idf_objtypename": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-643-3e4cd4b3",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller.IdfObjectType"
+      },
+      "Boiler": {
+        "adaptation": "validated-immutable-entity-id-construction-652",
+        "assertion_id": "dragon-hvac-source-tower-core-652-fef90e4c",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Boiler"
+      },
+      "Boiler.__init__": {
+        "adaptation": "validated-immutable-entity-id-construction-653",
+        "assertion_id": "dragon-hvac-source-tower-core-653-735f922d",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Boiler(...)"
+      },
+      "Boiler.idf_objtypename": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-654-b97f1590",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Boiler.IdfObjectType"
+      },
+      "Chiller": {
+        "adaptation": "validated-immutable-entity-id-construction-657",
+        "assertion_id": "dragon-hvac-source-tower-core-657-610bd83a",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Chiller"
+      },
+      "Chiller.__init__": {
+        "adaptation": "validated-immutable-entity-id-construction-658",
+        "assertion_id": "dragon-hvac-source-tower-core-658-65f8043a",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Chiller(...)"
+      },
+      "Chiller.idf_objtypename": {
+        "adaptation": "safe-screw-reformulated-eir-type-659",
+        "assertion_id": "dragon-hvac-source-tower-core-659-4ab109ff",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Chiller.IdfObjectType"
+      },
+      "ClosedSingleSpeedCoolingTower": {
+        "adaptation": "validated-immutable-entity-id-construction-661",
+        "assertion_id": "dragon-hvac-source-tower-core-661-a4d512bc",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower"
+      },
+      "ClosedSingleSpeedCoolingTower.idf_objtypename": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-662-4b2767cd",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower.IdfObjectType"
+      },
+      "ClosedTwoSpeedCoolingTower": {
+        "adaptation": "validated-immutable-entity-id-construction-664",
+        "assertion_id": "dragon-hvac-source-tower-core-664-a365cc0a",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower"
+      },
+      "ClosedTwoSpeedCoolingTower.idf_objtypename": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-665-648bc45c",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower.IdfObjectType"
+      },
+      "CompressorType": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-667-8785ee6d",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CompressorType"
+      },
+      "CompressorType.RECIPROCATING": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-668-dfd51671",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Reciprocating"
+      },
+      "CompressorType.SCREW": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-669-2947a213",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Screw"
+      },
+      "CompressorType.TURBO": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-670-5074351d",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Turbo"
+      },
+      "CoolingTower": {
+        "adaptation": "validated-immutable-entity-id-construction-673",
+        "assertion_id": "dragon-hvac-source-tower-core-673-4b07da75",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower"
+      },
+      "CoolingTower.__init__": {
+        "adaptation": "validated-immutable-entity-id-construction-674",
+        "assertion_id": "dragon-hvac-source-tower-core-674-d388c8f3",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower(...), OpenTwoSpeedCoolingTower(...), ClosedSingleSpeedCoolingTower(...), ClosedTwoSpeedCoolingTower(...)"
+      },
+      "CoolingTower.idf_get_demandbranchlistname": {
+        "adaptation": "public-context-emission-derived-name-675",
+        "assertion_id": "dragon-hvac-source-tower-core-675-b754f9c4",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "CoolingTower.idf_get_demandmixername": {
+        "adaptation": "public-context-emission-derived-name-676",
+        "assertion_id": "dragon-hvac-source-tower-core-676-482bcce0",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "CoolingTower.idf_get_demandsplittername": {
+        "adaptation": "public-context-emission-derived-name-677",
+        "assertion_id": "dragon-hvac-source-tower-core-677-bc43234b",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "CoolingTower.idf_get_loopname": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-678-7da2b907",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.LoopNameFor(SourceSystem)"
+      },
+      "CoolingTower.idf_get_objname": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-679-53dba42f",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ObjectNameFor(SourceSystem)"
+      },
+      "CoolingTower.idf_get_supplybranchlistname": {
+        "adaptation": "public-context-emission-derived-name-680",
+        "assertion_id": "dragon-hvac-source-tower-core-680-87efb2b8",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "CoolingTower.idf_get_supplymixername": {
+        "adaptation": "public-context-emission-derived-name-681",
+        "assertion_id": "dragon-hvac-source-tower-core-681-8200f079",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "CoolingTower.idf_get_supplysplittername": {
+        "adaptation": "public-context-emission-derived-name-682",
+        "assertion_id": "dragon-hvac-source-tower-core-682-c1e5599b",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "CoolingTower.idf_objtypename": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-683-65852008",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.IdfObjectType"
+      },
+      "Fuel": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-726-66a9b58b",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel"
+      },
+      "Fuel.COAL": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-727-4d234c1e",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.Coal"
+      },
+      "Fuel.DIESEL": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-728-a3ee9ef5",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.Diesel"
+      },
+      "Fuel.ELECTRICITY": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-729-8d1b877f",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.Electricity"
+      },
+      "Fuel.FUELOILNO1": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-730-b26b5808",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.FuelOilNo1"
+      },
+      "Fuel.FUELOILNO2": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-731-1f61e381",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.FuelOilNo2"
+      },
+      "Fuel.GASOLINE": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-732-7fc1afe4",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.Gasoline"
+      },
+      "Fuel.NATURALGAS": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-733-5afbce03",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.NaturalGas"
+      },
+      "Fuel.OTHERFUEL1": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-734-42a148cb",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.OtherFuel1"
+      },
+      "Fuel.OTHERFUEL2": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-735-914d30a5",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.OtherFuel2"
+      },
+      "Fuel.PROPANE": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-736-dea3dce6",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.Propane"
+      },
+      "GeothermalHeatPump": {
+        "adaptation": "functional-native-heatpump-route-for-incomplete-abstract-upstream-738",
+        "assertion_id": "dragon-hvac-source-tower-core-738-5016ceb5",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump"
+      },
+      "GeothermalHeatPump.idf_objtypename": {
+        "adaptation": "functional-native-heatpump-route-for-incomplete-abstract-upstream-739",
+        "assertion_id": "dragon-hvac-source-tower-core-739-0189ef90",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump.IdfObjectType"
+      },
+      "HeatPump": {
+        "adaptation": "validated-immutable-entity-id-construction-740",
+        "assertion_id": "dragon-hvac-source-tower-core-740-f862c5a4",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.HeatPump"
+      },
+      "HeatPump.__init__": {
+        "adaptation": "validated-immutable-entity-id-construction-741",
+        "assertion_id": "dragon-hvac-source-tower-core-741-498d6fec",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.HeatPump(...)"
+      },
+      "HeatPump.idf_objtypename": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-742-66eef776",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.HeatPump.IdfObjectType"
+      },
+      "OpenSingleSpeedCoolingTower": {
+        "adaptation": "validated-immutable-entity-id-construction-744",
+        "assertion_id": "dragon-hvac-source-tower-core-744-219b5b22",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower"
+      },
+      "OpenSingleSpeedCoolingTower.idf_objtypename": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-745-7ba0b88b",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower.IdfObjectType"
+      },
+      "OpenTwoSpeedCoolingTower": {
+        "adaptation": "validated-immutable-entity-id-construction-747",
+        "assertion_id": "dragon-hvac-source-tower-core-747-3946064c",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower"
+      },
+      "OpenTwoSpeedCoolingTower.idf_objtypename": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-748-3692dbe4",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower.IdfObjectType"
+      },
+      "SourceSystem": {
+        "adaptation": "validated-immutable-entity-id-construction-777",
+        "assertion_id": "dragon-hvac-source-tower-core-777-d8fcbe86",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem"
+      },
+      "SourceSystem.idf_demandbranchlistname": {
+        "adaptation": "public-context-emission-derived-name-778",
+        "assertion_id": "dragon-hvac-source-tower-core-778-491d3dcc",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "SourceSystem.idf_demandmixername": {
+        "adaptation": "public-context-emission-derived-name-779",
+        "assertion_id": "dragon-hvac-source-tower-core-779-dd1f2652",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "SourceSystem.idf_demandsplittername": {
+        "adaptation": "public-context-emission-derived-name-780",
+        "assertion_id": "dragon-hvac-source-tower-core-780-9fcd3f6d",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "SourceSystem.idf_loopname": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-781-ee8dc7f9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.LoopName"
+      },
+      "SourceSystem.idf_objname": {
+        "adaptation": "concrete-native-idf-object-name-overrides-782",
+        "assertion_id": "dragon-hvac-source-tower-core-782-5b92cad7",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.IdfObjectName"
+      },
+      "SourceSystem.idf_objtypename": {
+        "adaptation": "not_applicable",
+        "assertion_id": "dragon-hvac-source-tower-core-783-65852008",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.IdfObjectType"
+      },
+      "SourceSystem.idf_supplybranchlistname": {
+        "adaptation": "public-context-emission-derived-name-784",
+        "assertion_id": "dragon-hvac-source-tower-core-784-6cd0d336",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "SourceSystem.idf_supplymixername": {
+        "adaptation": "public-context-emission-derived-name-785",
+        "assertion_id": "dragon-hvac-source-tower-core-785-b62cdf0b",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "SourceSystem.idf_supplysplittername": {
+        "adaptation": "public-context-emission-derived-name-786",
+        "assertion_id": "dragon-hvac-source-tower-core-786-8ad08f57",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+      },
+      "SourceSystem.idf_terminalunitlistname": {
+        "adaptation": "public-context-emission-derived-name-787",
+        "assertion_id": "dragon-hvac-source-tower-core-787-14bb746e",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.HeatPump.TerminalUnitListName"
+      }
+    },
+    "native_routes": {
+      "AbsorptionChiller": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller",
+      "AbsorptionChiller.__init__": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller(...)",
+      "AbsorptionChiller.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller.IdfObjectType",
+      "Boiler": "GonieGonie.InvisibleDragon.Hvac.Boiler",
+      "Boiler.__init__": "GonieGonie.InvisibleDragon.Hvac.Boiler(...)",
+      "Boiler.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.Boiler.IdfObjectType",
+      "Chiller": "GonieGonie.InvisibleDragon.Hvac.Chiller",
+      "Chiller.__init__": "GonieGonie.InvisibleDragon.Hvac.Chiller(...)",
+      "Chiller.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.Chiller.IdfObjectType",
+      "ClosedSingleSpeedCoolingTower": "GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower",
+      "ClosedSingleSpeedCoolingTower.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower.IdfObjectType",
+      "ClosedTwoSpeedCoolingTower": "GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower",
+      "ClosedTwoSpeedCoolingTower.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower.IdfObjectType",
+      "CompressorType": "GonieGonie.InvisibleDragon.Hvac.CompressorType",
+      "CompressorType.RECIPROCATING": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Reciprocating",
+      "CompressorType.SCREW": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Screw",
+      "CompressorType.TURBO": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Turbo",
+      "CoolingTower": "GonieGonie.InvisibleDragon.Hvac.CoolingTower",
+      "CoolingTower.__init__": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower(...), OpenTwoSpeedCoolingTower(...), ClosedSingleSpeedCoolingTower(...), ClosedTwoSpeedCoolingTower(...)",
+      "CoolingTower.idf_get_demandbranchlistname": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_get_demandmixername": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_get_demandsplittername": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_get_loopname": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.LoopNameFor(SourceSystem)",
+      "CoolingTower.idf_get_objname": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ObjectNameFor(SourceSystem)",
+      "CoolingTower.idf_get_supplybranchlistname": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_get_supplymixername": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_get_supplysplittername": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.IdfObjectType",
+      "Fuel": "GonieGonie.InvisibleDragon.Hvac.Fuel",
+      "Fuel.COAL": "GonieGonie.InvisibleDragon.Hvac.Fuel.Coal",
+      "Fuel.DIESEL": "GonieGonie.InvisibleDragon.Hvac.Fuel.Diesel",
+      "Fuel.ELECTRICITY": "GonieGonie.InvisibleDragon.Hvac.Fuel.Electricity",
+      "Fuel.FUELOILNO1": "GonieGonie.InvisibleDragon.Hvac.Fuel.FuelOilNo1",
+      "Fuel.FUELOILNO2": "GonieGonie.InvisibleDragon.Hvac.Fuel.FuelOilNo2",
+      "Fuel.GASOLINE": "GonieGonie.InvisibleDragon.Hvac.Fuel.Gasoline",
+      "Fuel.NATURALGAS": "GonieGonie.InvisibleDragon.Hvac.Fuel.NaturalGas",
+      "Fuel.OTHERFUEL1": "GonieGonie.InvisibleDragon.Hvac.Fuel.OtherFuel1",
+      "Fuel.OTHERFUEL2": "GonieGonie.InvisibleDragon.Hvac.Fuel.OtherFuel2",
+      "Fuel.PROPANE": "GonieGonie.InvisibleDragon.Hvac.Fuel.Propane",
+      "GeothermalHeatPump": "GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump",
+      "GeothermalHeatPump.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump.IdfObjectType",
+      "HeatPump": "GonieGonie.InvisibleDragon.Hvac.HeatPump",
+      "HeatPump.__init__": "GonieGonie.InvisibleDragon.Hvac.HeatPump(...)",
+      "HeatPump.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.HeatPump.IdfObjectType",
+      "OpenSingleSpeedCoolingTower": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower",
+      "OpenSingleSpeedCoolingTower.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower.IdfObjectType",
+      "OpenTwoSpeedCoolingTower": "GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower",
+      "OpenTwoSpeedCoolingTower.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower.IdfObjectType",
+      "SourceSystem": "GonieGonie.InvisibleDragon.Hvac.SourceSystem",
+      "SourceSystem.idf_demandbranchlistname": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_demandmixername": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_demandsplittername": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_loopname": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.LoopName",
+      "SourceSystem.idf_objname": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.IdfObjectName",
+      "SourceSystem.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.IdfObjectType",
+      "SourceSystem.idf_supplybranchlistname": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_supplymixername": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_supplysplittername": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_terminalunitlistname": "GonieGonie.InvisibleDragon.Hvac.HeatPump.TerminalUnitListName"
+    },
+    "runtime_signatures": {
+      "AbsorptionChiller": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "AbsorptionChiller",
+        "signature": "(name: 'str', cop: 'int | float', capacity: 'int | float', heatsource: 'Boiler', coolingtower: 'CoolingTower', *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 6) -> 'None'"
+      },
+      "AbsorptionChiller.__init__": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "AbsorptionChiller.__init__",
+        "signature": "(self, name: 'str', cop: 'int | float', capacity: 'int | float', heatsource: 'Boiler', coolingtower: 'CoolingTower', *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 6) -> 'None'"
+      },
+      "AbsorptionChiller.idf_objtypename": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "AbsorptionChiller.idf_objtypename",
+        "signature": "(self) -> 'str'"
+      },
+      "Boiler": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "Boiler",
+        "signature": "(name: 'str', fuel: 'Fuel', efficiency: 'int | float', capacity: 'int | float | None' = None, *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 60) -> 'None'"
+      },
+      "Boiler.__init__": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "Boiler.__init__",
+        "signature": "(self, name: 'str', fuel: 'Fuel', efficiency: 'int | float', capacity: 'int | float | None' = None, *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 60) -> 'None'"
+      },
+      "Boiler.idf_objtypename": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "Boiler.idf_objtypename",
+        "signature": "(self) -> 'str'"
+      },
+      "Chiller": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "Chiller",
+        "signature": "(name: 'str', cop: 'int | float', capacity: 'int | float | None', compressor: 'str | CompressorType', coolingtower: 'CoolingTower', *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 6) -> 'None'"
+      },
+      "Chiller.__init__": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "Chiller.__init__",
+        "signature": "(self, name: 'str', cop: 'int | float', capacity: 'int | float | None', compressor: 'str | CompressorType', coolingtower: 'CoolingTower', *, pump_efficiency: 'int | float' = 0.9, setpoint_temperature: 'int | float' = 6) -> 'None'"
+      },
+      "Chiller.idf_objtypename": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "Chiller.idf_objtypename",
+        "signature": "(self) -> 'str'"
+      },
+      "ClosedSingleSpeedCoolingTower": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "ClosedSingleSpeedCoolingTower",
+        "signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'"
+      },
+      "ClosedSingleSpeedCoolingTower.idf_objtypename": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "ClosedSingleSpeedCoolingTower.idf_objtypename",
+        "signature": "(self) -> 'str'"
+      },
+      "ClosedTwoSpeedCoolingTower": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "ClosedTwoSpeedCoolingTower",
+        "signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'"
+      },
+      "ClosedTwoSpeedCoolingTower.idf_objtypename": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "ClosedTwoSpeedCoolingTower.idf_objtypename",
+        "signature": "(self) -> 'str'"
+      },
+      "CompressorType": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "CompressorType",
+        "signature": "(*values)"
+      },
+      "CompressorType.RECIPROCATING": {
+        "enum_name": "RECIPROCATING",
+        "enum_type": "CompressorType",
+        "kind": "constant",
+        "value": "reciprocating"
+      },
+      "CompressorType.SCREW": {
+        "enum_name": "SCREW",
+        "enum_type": "CompressorType",
+        "kind": "constant",
+        "value": "screw"
+      },
+      "CompressorType.TURBO": {
+        "enum_name": "TURBO",
+        "enum_type": "CompressorType",
+        "kind": "constant",
+        "value": "turbo"
+      },
+      "CoolingTower": {
+        "abstract": true,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "CoolingTower",
+        "signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'"
+      },
+      "CoolingTower.__init__": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "CoolingTower.__init__",
+        "signature": "(self, name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'"
+      },
+      "CoolingTower.idf_get_demandbranchlistname": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "CoolingTower.idf_get_demandbranchlistname",
+        "signature": "(self, chiller: 'Chiller') -> 'str'"
+      },
+      "CoolingTower.idf_get_demandmixername": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "CoolingTower.idf_get_demandmixername",
+        "signature": "(self, chiller: 'Chiller') -> 'str'"
+      },
+      "CoolingTower.idf_get_demandsplittername": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "CoolingTower.idf_get_demandsplittername",
+        "signature": "(self, chiller: 'Chiller') -> 'str'"
+      },
+      "CoolingTower.idf_get_loopname": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "CoolingTower.idf_get_loopname",
+        "signature": "(self, chiller: 'Chiller') -> 'str'"
+      },
+      "CoolingTower.idf_get_objname": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "CoolingTower.idf_get_objname",
+        "signature": "(self, chiller: 'Chiller') -> 'str'"
+      },
+      "CoolingTower.idf_get_supplybranchlistname": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "CoolingTower.idf_get_supplybranchlistname",
+        "signature": "(self, chiller: 'Chiller') -> 'str'"
+      },
+      "CoolingTower.idf_get_supplymixername": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "CoolingTower.idf_get_supplymixername",
+        "signature": "(self, chiller: 'Chiller') -> 'str'"
+      },
+      "CoolingTower.idf_get_supplysplittername": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "CoolingTower.idf_get_supplysplittername",
+        "signature": "(self, chiller: 'Chiller') -> 'str'"
+      },
+      "CoolingTower.idf_objtypename": {
+        "abstract": true,
+        "kind": "property",
+        "qualname": "CoolingTower.idf_objtypename",
+        "signature": "(self) -> 'str'"
+      },
+      "Fuel": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "Fuel",
+        "signature": "(*values)"
+      },
+      "Fuel.COAL": {
+        "enum_name": "COAL",
+        "enum_type": "Fuel",
+        "kind": "constant",
+        "value": "Coal"
+      },
+      "Fuel.DIESEL": {
+        "enum_name": "DIESEL",
+        "enum_type": "Fuel",
+        "kind": "constant",
+        "value": "Diesel"
+      },
+      "Fuel.ELECTRICITY": {
+        "enum_name": "ELECTRICITY",
+        "enum_type": "Fuel",
+        "kind": "constant",
+        "value": "Electricity"
+      },
+      "Fuel.FUELOILNO1": {
+        "enum_name": "FUELOILNO1",
+        "enum_type": "Fuel",
+        "kind": "constant",
+        "value": "FuelOilNo1"
+      },
+      "Fuel.FUELOILNO2": {
+        "enum_name": "FUELOILNO2",
+        "enum_type": "Fuel",
+        "kind": "constant",
+        "value": "FuelOilNo2"
+      },
+      "Fuel.GASOLINE": {
+        "enum_name": "GASOLINE",
+        "enum_type": "Fuel",
+        "kind": "constant",
+        "value": "Gasoline"
+      },
+      "Fuel.NATURALGAS": {
+        "enum_name": "NATURALGAS",
+        "enum_type": "Fuel",
+        "kind": "constant",
+        "value": "NaturalGas"
+      },
+      "Fuel.OTHERFUEL1": {
+        "enum_name": "OTHERFUEL1",
+        "enum_type": "Fuel",
+        "kind": "constant",
+        "value": "OtherFuel1"
+      },
+      "Fuel.OTHERFUEL2": {
+        "enum_name": "OTHERFUEL2",
+        "enum_type": "Fuel",
+        "kind": "constant",
+        "value": "OtherFuel2"
+      },
+      "Fuel.PROPANE": {
+        "enum_name": "PROPANE",
+        "enum_type": "Fuel",
+        "kind": "constant",
+        "value": "Propane"
+      },
+      "GeothermalHeatPump": {
+        "abstract": true,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "GeothermalHeatPump",
+        "signature": "()"
+      },
+      "GeothermalHeatPump.idf_objtypename": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "GeothermalHeatPump.idf_objtypename",
+        "signature": "(self) -> 'str'"
+      },
+      "HeatPump": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "HeatPump",
+        "signature": "(name: 'str', fuel: 'str | Fuel', heating_cop: 'int | float', cooling_cop: 'int | float', heating_capacity: 'int | float | None' = None, cooling_capacity: 'int | float | None' = None) -> 'None'"
+      },
+      "HeatPump.__init__": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "HeatPump.__init__",
+        "signature": "(self, name: 'str', fuel: 'str | Fuel', heating_cop: 'int | float', cooling_cop: 'int | float', heating_capacity: 'int | float | None' = None, cooling_capacity: 'int | float | None' = None) -> 'None'"
+      },
+      "HeatPump.idf_objtypename": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "HeatPump.idf_objtypename",
+        "signature": "(self) -> 'str'"
+      },
+      "OpenSingleSpeedCoolingTower": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "OpenSingleSpeedCoolingTower",
+        "signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'"
+      },
+      "OpenSingleSpeedCoolingTower.idf_objtypename": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "OpenSingleSpeedCoolingTower.idf_objtypename",
+        "signature": "(self) -> 'str'"
+      },
+      "OpenTwoSpeedCoolingTower": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "OpenTwoSpeedCoolingTower",
+        "signature": "(name: 'str', capacity: 'int | float', *, pump_efficiency: 'int | float' = 0.9) -> 'None'"
+      },
+      "OpenTwoSpeedCoolingTower.idf_objtypename": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "OpenTwoSpeedCoolingTower.idf_objtypename",
+        "signature": "(self) -> 'str'"
+      },
+      "SourceSystem": {
+        "abstract": true,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "SourceSystem",
+        "signature": "()"
+      },
+      "SourceSystem.idf_demandbranchlistname": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "SourceSystem.idf_demandbranchlistname",
+        "signature": "(self) -> 'str'"
+      },
+      "SourceSystem.idf_demandmixername": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "SourceSystem.idf_demandmixername",
+        "signature": "(self) -> 'str'"
+      },
+      "SourceSystem.idf_demandsplittername": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "SourceSystem.idf_demandsplittername",
+        "signature": "(self) -> 'str'"
+      },
+      "SourceSystem.idf_loopname": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "SourceSystem.idf_loopname",
+        "signature": "(self) -> 'str'"
+      },
+      "SourceSystem.idf_objname": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "SourceSystem.idf_objname",
+        "signature": "(self) -> 'str'"
+      },
+      "SourceSystem.idf_objtypename": {
+        "abstract": true,
+        "kind": "property",
+        "qualname": "SourceSystem.idf_objtypename",
+        "signature": "(self) -> 'str'"
+      },
+      "SourceSystem.idf_supplybranchlistname": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "SourceSystem.idf_supplybranchlistname",
+        "signature": "(self) -> 'str'"
+      },
+      "SourceSystem.idf_supplymixername": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "SourceSystem.idf_supplymixername",
+        "signature": "(self) -> 'str'"
+      },
+      "SourceSystem.idf_supplysplittername": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "SourceSystem.idf_supplysplittername",
+        "signature": "(self) -> 'str'"
+      },
+      "SourceSystem.idf_terminalunitlistname": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "SourceSystem.idf_terminalunitlistname",
+        "signature": "(self) -> 'str'"
+      }
+    }
+  },
+  "fact_sha256": {
+    "dragon-hvac-source-tower-core.absorption-chiller-core": "sha256:a18e2e05f3a99a45a2c4a97c4f4ae652e1b542196cdec8a98fcc1d19c14a0505",
+    "dragon-hvac-source-tower-core.boiler-core": "sha256:d557036c43e08f47d456b0dfb67967b43b03ac8748f0990e1da19a5ec4e39585",
+    "dragon-hvac-source-tower-core.chiller-core": "sha256:85902c31cbc27b28bb4f24ac83d351b2a39b9b19a4b832f6c08c497243c29327",
+    "dragon-hvac-source-tower-core.compressor-enum": "sha256:406beba2fdc13b10784996cb350608b17d46d1ba426b303e83e4d5054a0458a3",
+    "dragon-hvac-source-tower-core.cooling-tower-concrete-capacity": "sha256:093154fe7b6adc95212d3f9c139e3148d7166d98348fef17c42497d9b072af56",
+    "dragon-hvac-source-tower-core.cooling-tower-core-names": "sha256:c647e3382c9a37af793d4c80d537c2b1188ad34a222945fd1a76e3763c7bf67a",
+    "dragon-hvac-source-tower-core.fuel-enum": "sha256:8b6044fbd9f678e0a7aa00f19a7d90155dc69bf864a6bb5b52105b94a9be96d3",
+    "dragon-hvac-source-tower-core.geothermal-heat-pump-core": "sha256:e203fcb870566e744808738dda87b854705db541f585f2b2f42215122e18f630",
+    "dragon-hvac-source-tower-core.heat-pump-core": "sha256:29ec3f4fa65c31d6f8be8b73917d519d9e66e5855e05d2e4efbb6b88b0a7a8f3",
+    "dragon-hvac-source-tower-core.source-system-core-names": "sha256:ca494b84caa01187faa7a674e0217b8980cf3e6e1798f87cda981892fc3d0a17"
+  },
+  "native_review": {
+    "classification_sha256": "sha256:25004c97fa276f70c732c54520212ca1f3979f11f84bc8bbe75f5f3e9a03291f",
+    "public_production_routes_only": true,
+    "python_executes_native_runtime": false,
+    "routes_sha256": "sha256:6cbebb6f136b1e86a1edc9b8cab00eca578aa1bc40cc8834ce23f172d69fa3f2",
+    "source_receipts": [
+      {
+        "bytes": 7582,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"
+      },
+      {
+        "bytes": 18027,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs",
+        "sha256": "sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e"
+      },
+      {
+        "bytes": 1076,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/GeothermalHeatPump.cs",
+        "sha256": "sha256:40fcb9c008b953cf54dfa4581c95af4073e0040fc9efcd62598e056c5b2ca80a"
+      },
+      {
+        "bytes": 23777,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs",
+        "sha256": "sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be"
+      },
+      {
+        "bytes": 19554,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
+        "sha256": "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07"
+      }
+    ],
+    "source_receipts_sha256": "sha256:2b00b4902605bb3821275f5436e125bbee3fb2b5107a04680f2aef8e51ed6476"
+  },
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "dependencies_sha256": "sha256:f69d29212b5ce6432b0c02f356d036275ea01463a8e1974ac6f89b78854fefba",
+    "implementation": "cpython",
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-hvac-source-tower-core.v1",
+  "support": {
+    "case_count": 20,
+    "cases_sha256": "sha256:755e2115db65a100fe1b4249c4b4507719e5083aa2ea22939955a7aae53c5c07",
+    "fixture": {
+      "bytes": 3927710,
+      "path": "fixtures/reference/python-0.7.0/dragon-hvac-source-system-to-idf-object-oracle.json",
+      "sha256": "sha256:2fbc3ad2d810dee6b3e88f8b6e8c119e8ce709abf0c534233343e486f7bf9c7f"
+    },
+    "generator": {
+      "bytes": 66475,
+      "path": "tools/python-reference/generate_dragon_hvac_source_system_to_idf_object_oracle.py",
+      "sha256": "sha256:f8c3a031304554ecd43381867188c29bf38c2ce0ebf4bf284c394792f7817159"
+    },
+    "resolved_adjacent_symbols": [
+      "AbsorptionChiller.to_idf_object",
+      "Boiler.to_idf_object",
+      "Boiler.to_idf_object_as_generator",
+      "Chiller.to_idf_object",
+      "ClosedSingleSpeedCoolingTower.to_idf_main_object",
+      "ClosedTwoSpeedCoolingTower.to_idf_main_object",
+      "CompressorType.to_idf_curve_object",
+      "CoolingTower.to_idf_main_object",
+      "CoolingTower.to_idf_object",
+      "HeatPump.to_idf_object",
+      "OpenSingleSpeedCoolingTower.to_idf_main_object",
+      "OpenTwoSpeedCoolingTower.to_idf_main_object",
+      "SourceSystem.to_idf_object"
+    ],
+    "schema": "goniegonie.python-reference.dragon-hvac-source-system-to-idf-object.v1"
+  },
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:197f6bd7f4f53ed2b4f36fc51be027baf327086ce45d10f2d2693d87ca3085cd",
+      "symbol": "AbsorptionChiller",
+      "symbol_hash": "sha256:3a1dd02625e360d3868e7227c571e1209c39fde117de35d52e50f05b271bacfb"
+    },
+    {
+      "body_hash": "sha256:16d2482e8a299534166ee66643043c5c1d7f7b1a887a02cfec92050c853cbf5a",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:9f610818ae62b4ba3ce5fff9f8d9ec8fad8f58f121165e68d5f880e95fed6da2",
+      "symbol": "AbsorptionChiller.__init__",
+      "symbol_hash": "sha256:14ca97c14bb6467aac9221c08f2c3f7caa2072d19e2c846200bce0a2ef48efcf"
+    },
+    {
+      "body_hash": "sha256:11e38b7ac0f30e715666145ab41919b8182c9dfc28cd95134743d2e41f1c09b6",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "AbsorptionChiller.idf_objtypename",
+      "symbol_hash": "sha256:3e4cd4b3f17d040ec081cd1d6ebf3e59b539c8188a8446d4269f11366296cd29"
+    },
+    {
+      "body_hash": "sha256:8b8d4de15bc3ac3f97742e4883e96cfbd188a7b4195ba0bf2dd76d29fec1ec92",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:6c587d2756d9f3e1fc93de59ec1482ea151ff3a496b9f558f1278b8ad5a2a615",
+      "symbol": "Boiler",
+      "symbol_hash": "sha256:fef90e4c92d2eb17dd0a218392ca4fb689b0bade715a616f739cd10e02305d27"
+    },
+    {
+      "body_hash": "sha256:656ec59015eff641b8d4d097e8d92b6d5d93e98401ce8f00b95d8c4f7070cf12",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:ca2164ac340884342e53f90a4be93b49f536367784e03cb4fc1e95844baedaac",
+      "symbol": "Boiler.__init__",
+      "symbol_hash": "sha256:735f922d328beb72ea28e73c79e7d7a4fafebd548e4d0b435a35a33707e3f3dc"
+    },
+    {
+      "body_hash": "sha256:d9d5a315e20a79fee196eea766d8524dd2df66106f2f21b858e59a30c6229c3f",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Boiler.idf_objtypename",
+      "symbol_hash": "sha256:b97f159095ba80d380fd70a1d735db08fdb83da939fb4273c7cda45d4c001df6"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:64ca2c3d6bdf68fa01f483507de1348169d646b41ede1437e400a0a7df04ff1e",
+      "symbol": "Chiller",
+      "symbol_hash": "sha256:610bd83a3cb893234b6919415b1237cd17e7e8f5a0c9793295e174ef5b056fbd"
+    },
+    {
+      "body_hash": "sha256:e59172142cb144fbfde3f07f53c76cb0b13444e24c6cb6a2418903b98344066e",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:5ed37380fa95ba36989d044f23a1fcca9777ad8bd1ac88b827b66edf69de409b",
+      "symbol": "Chiller.__init__",
+      "symbol_hash": "sha256:65f8043a581199d99d55e0a33ce8ace15eb535fe5dce9b14ac1c34f2b3ae710a"
+    },
+    {
+      "body_hash": "sha256:bb79567e9d3807426186fa9af86a82b777a199a76f66c0fe9dc2d350c8e7d159",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Chiller.idf_objtypename",
+      "symbol_hash": "sha256:4ab109ff13801e565f0e5285a21f50ebce51520e6da0ab5ebe99007c10f0c30f"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:4e72c1526858d39161b80a7d382862dce6579e7d769a1466637777a7b957d30c",
+      "symbol": "ClosedSingleSpeedCoolingTower",
+      "symbol_hash": "sha256:a4d512bcbdd707a16b374ecb473b4fd0e373d25b1f9f292f95632331a3fbe8e4"
+    },
+    {
+      "body_hash": "sha256:1bbbd3ef8bfa5e4fef81dccbb30995d4992fd8beee47a1a5244c34bccb0eec0a",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ClosedSingleSpeedCoolingTower.idf_objtypename",
+      "symbol_hash": "sha256:4b2767cd5505cc19de3e55c5e0c69384085c1e4335d59a9229483c28ebc6f8c9"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:707c297c6d4e750592531d8e5107d7d3b9c2ec5b1d9535e881d015991a6d9103",
+      "symbol": "ClosedTwoSpeedCoolingTower",
+      "symbol_hash": "sha256:a365cc0a965a09a8443aa81dd6a6939c484604591d11c60ceb1cb22d47437e1f"
+    },
+    {
+      "body_hash": "sha256:23eaa74e77109d06e9853f0cb89f2f144960940d2c314775491b32aaf5d363ef",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ClosedTwoSpeedCoolingTower.idf_objtypename",
+      "symbol_hash": "sha256:648bc45c813a9dd7a30b8b208a28280ce1622b4e6bfff2d4ce18015478a194e8"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:ab5079fb2d6d55f1e976ecf2390324fa23f6f36699a42aaa4a781fc39b9db2c1",
+      "symbol": "CompressorType",
+      "symbol_hash": "sha256:8785ee6da143dbc022e1a9cdb6096fa870f2d9d99804c2ab5ba18641319dfd74"
+    },
+    {
+      "body_hash": "sha256:14ef710b785ec24de12978b3183cb333a82b5bc0f568de54939803660521f94b",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:7ee3e8a807c0d636c16019f63a60e8b459bcea3273c9bdfe1f6e1101b3f5e0e9",
+      "symbol": "CompressorType.RECIPROCATING",
+      "symbol_hash": "sha256:dfd51671c84116479c9ee96bf61343e6c32edc7a675ef8eb6127cb9b579c42a4"
+    },
+    {
+      "body_hash": "sha256:798047174afcabac9976d05149bfeba3f8cf8c8b06a2f43f88611e5bd07cf24f",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:7bdf36eaffe58a5b4664e1f40e728887db746c5d3fcb9afbc55abc405e6d32cb",
+      "symbol": "CompressorType.SCREW",
+      "symbol_hash": "sha256:2947a21386fbbd0393dfc0670795aba5ddb05be02e511da37cd0118a5d70573c"
+    },
+    {
+      "body_hash": "sha256:27568afe842cedb04fc44e3ae07f54630fce2c3f31a22f7b184b4b98cb0f1d6a",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:eb1dcdfed7b6604baf0028ad7458ce73be465bfe31a918b8e1718b123ffe4742",
+      "symbol": "CompressorType.TURBO",
+      "symbol_hash": "sha256:5074351dd266b5054fd70ac52d608a348ca3d3bd121be79c7aeb6655f9ad1449"
+    },
+    {
+      "body_hash": "sha256:8b8d4de15bc3ac3f97742e4883e96cfbd188a7b4195ba0bf2dd76d29fec1ec92",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:333e5c56ade4c93e55c62a274a9bb33f321bae9cfbe3d37f82d4cc6eff33c42f",
+      "symbol": "CoolingTower",
+      "symbol_hash": "sha256:4b07da759a3f1c822091d85129bfc1ae89eafe125e27297e5c154c04e6abd5ce"
+    },
+    {
+      "body_hash": "sha256:811ddc491cb7b2a1f2549687e8c0f1238abb2c2154d64cca87df015950f73fe3",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:ec0598962fdc24dda48028800e73e82517cf4a0bd30404237445099a7235bed0",
+      "symbol": "CoolingTower.__init__",
+      "symbol_hash": "sha256:d388c8f3e707db93101d6a5d0383a925d983e74027b50e7559c8642cbfb59002"
+    },
+    {
+      "body_hash": "sha256:e939c91bbe50d4d9a9979a690736781991e945355368df8dca2a8f22317dbe47",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_demandbranchlistname",
+      "symbol_hash": "sha256:b754f9c4ddad8ea422f8dfbac050ce72067b4dc8e161e481514609b4d4bf4ca9"
+    },
+    {
+      "body_hash": "sha256:372b18b96b7938d5c3ae0718af714da5591a175aaf70c55dbdc7ba3488cb14ed",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_demandmixername",
+      "symbol_hash": "sha256:482bcce0f0d8304f5018a64754f118fd03336f0b91cb398131759f65403f7acb"
+    },
+    {
+      "body_hash": "sha256:0fadaf8c9edd34248ddc119138791adeb3fdeba2ff40a5192ec132f7257aef89",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_demandsplittername",
+      "symbol_hash": "sha256:bc43234be143f4d9b9a13d297cf9c5413eff9793a1fb172e8c7ab727016d4cad"
+    },
+    {
+      "body_hash": "sha256:d5874769ae2b9d7966f83f74d5f8750c53f3a96c2a43c7570ea46c91da4a5976",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_loopname",
+      "symbol_hash": "sha256:7da2b9077a15684e7573478a6451fecffc745fae53b91ed7bbf6a6adb93027cc"
+    },
+    {
+      "body_hash": "sha256:aa5a301d7640d8ee60828ff20e8f12a54cdd87a278bced7fbbdf18b297aa14f2",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_objname",
+      "symbol_hash": "sha256:53dba42f6de8f01d61a04e5f2804912ff1f5c13e1c32b26a5e5c947e168534d9"
+    },
+    {
+      "body_hash": "sha256:43c3c982ae32a582a2d18bb27343487d34a14aecda3a109bbc35e2fdf0aaf6e7",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_supplybranchlistname",
+      "symbol_hash": "sha256:87efb2b8ab4fa2d7d10fce0880d7a9f2d35bd25da86f2f0923ce61da30c48cd1"
+    },
+    {
+      "body_hash": "sha256:f4e3a93453736cd2eed4101184a92f3b358043347a929e44e59838ad27f2d27c",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_supplymixername",
+      "symbol_hash": "sha256:8200f079bcae2560862cb1bd0756c46c834b73bf3a170027d9522a4c6c9ec783"
+    },
+    {
+      "body_hash": "sha256:8d49d61bd5dc2dca720a3fa7ab043d3a9f2712a101f3db95b9e84e0286d44e0b",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_supplysplittername",
+      "symbol_hash": "sha256:c1e5599b4e23f4f4618b33da0dd19926268f0a4935d21171ea85c555e4b5a5de"
+    },
+    {
+      "body_hash": "sha256:d534464a3d86dfeb1f92e18bf2296fb90a71ce3810ab72675ff520fac00f4ce1",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:a7a23c7757243d054b8e0e0ad954617076146d619fb572c68a1fb49bcaab2cf2",
+      "symbol": "CoolingTower.idf_objtypename",
+      "symbol_hash": "sha256:658520082df92fc4c03d549af63dad643ecb1962a52d7ce52cc27db4c5486918"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:635c8e3b9a25578e49277b0c78b37587a71851c812f655ddb6ce27e20aef6028",
+      "symbol": "Fuel",
+      "symbol_hash": "sha256:66a9b58b66331699893ea17fec4d94a5b9cd95e109774f0d31464255e1e445f9"
+    },
+    {
+      "body_hash": "sha256:43fbb38836020cb82520d9547b5ae150c4f5fbc30c53833999994b25b0f273d2",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:0d9110da210cd5621e2b986dba50e20543d4f9f1a9637e20a1692e7d19cabc98",
+      "symbol": "Fuel.COAL",
+      "symbol_hash": "sha256:4d234c1e90b9d77f72b2ee53651b2ecfe7a79cc897e62c8319c1ad509a30651f"
+    },
+    {
+      "body_hash": "sha256:63d0dfea66e415f70ffb3eb2ec9b36f104c7343e8e6426d2899368691ce6849c",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:5ae57da13adc380c5d04475e8abe46b6fd954d52c428b9f2fbdef8340c09c00c",
+      "symbol": "Fuel.DIESEL",
+      "symbol_hash": "sha256:a3ee9ef5126f8a62a22e0e47b2c83bf720b19f04a523424dfb9dcebb806a515d"
+    },
+    {
+      "body_hash": "sha256:3a21cd8df87101c1f87f6ebf6e8afa30a31a5d6a3cb89ebcee846c2a14db8c6f",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2843207402e54693bbb9439a6b0c6e41fcfdbf56a66599ca188c2d193f480742",
+      "symbol": "Fuel.ELECTRICITY",
+      "symbol_hash": "sha256:8d1b877f8cdd948498d498dea25445e3d0a335e5a3b261fcf32ef7df73b0c0de"
+    },
+    {
+      "body_hash": "sha256:092233c77978cac5a3bc39608c1086a5602ff55c0d36a3a3a8ee5129ee0176c0",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:6d1471ffb8d4b08053140874db34a3b3361589770b2b6ca4d1f4f900cb02dd50",
+      "symbol": "Fuel.FUELOILNO1",
+      "symbol_hash": "sha256:b26b58083d2317b2160b27f4d1defa93ed10bdb68e3c51c95ee2811e7352391d"
+    },
+    {
+      "body_hash": "sha256:afe4287bd6bda09d74d111f31bcab99bd3acc066e242f4a705914508c4a62288",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:5251d59d58efa118163e4c88850bb348f7113fd7945b6496eaa004eff3a29977",
+      "symbol": "Fuel.FUELOILNO2",
+      "symbol_hash": "sha256:1f61e381090e3233feac9d6b6b17d2982faabc0dab1594dc8b9fda344afe6a37"
+    },
+    {
+      "body_hash": "sha256:6dfa91e5ed59c4d130ddb9838ac9a9cef07c1f15ccc9dea03eed097518418b3e",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:95b0fd0fb30cb5444777b24bff0235436bfbc9e745d9e2290306a495a201d767",
+      "symbol": "Fuel.GASOLINE",
+      "symbol_hash": "sha256:7fc1afe43aa4a0e78138bb637d15285c6b96b0ca70e7b3dd49cefbed7472b8ce"
+    },
+    {
+      "body_hash": "sha256:8e908ce13688db2f2a1141da812df21e6b713989be4f07e334cbb17ab39a6444",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:f3f8fdbeeab11eb271ce5f12c06dc91911b5e1c9d37968720ac767c1aa2e2abb",
+      "symbol": "Fuel.NATURALGAS",
+      "symbol_hash": "sha256:5afbce03942e7a8a61570fbc3c7f29fd97952918e48bf4eb55df3436a9d21da6"
+    },
+    {
+      "body_hash": "sha256:fba5d265b42ea7c65ff4dfc14cb2844edb6e27a9d7649ea34cdc632604aab405",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:99fc2e0d0eeed9a1d7e82e27e3803e55cb389dfe5714a2fd2ef4420967987a7c",
+      "symbol": "Fuel.OTHERFUEL1",
+      "symbol_hash": "sha256:42a148cb292041f0a0644d3c93f87ec78a4f066afbc95014fcfbc60a43d04d5c"
+    },
+    {
+      "body_hash": "sha256:a8c0d4f010ee09ac98e59e728c2c942572317b4d45ebe75caf2a7c332fd393c6",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:4a48c037f6f2bd9b73c9b2d96ef18a19494855088cd9b25da50c01238aacedcf",
+      "symbol": "Fuel.OTHERFUEL2",
+      "symbol_hash": "sha256:914d30a548e2e4bcc1eec25b7223ba33fd3d836a2943a309aa0efcf71f4b1e8f"
+    },
+    {
+      "body_hash": "sha256:ec78f5ae672b177b994c63772da38a13cabf77c2f5128aa9a996e86a99851057",
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2bb4a70b1d578aa0ffbf3603c3a619d18b97f4d2f3ae40a19a524b47570bed3c",
+      "symbol": "Fuel.PROPANE",
+      "symbol_hash": "sha256:dea3dce676a70c85c8b6e9b7d0383fb749a90762e6d4df1e2186f65be5f1ad80"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b27f04dec47588b43f347f5ab11ef35814810a9c093bb1ce9752359b2b0c5119",
+      "symbol": "GeothermalHeatPump",
+      "symbol_hash": "sha256:5016ceb513a88e66610818a6a65dc50fc6ecf76004648c0733d5d611c127eeaa"
+    },
+    {
+      "body_hash": "sha256:69ee3e6f0fb7d958909b14349d6313a2b89d827e22269768d74cb04ec38a4b37",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "GeothermalHeatPump.idf_objtypename",
+      "symbol_hash": "sha256:0189ef903f1a286e2166ef62c1c4085ad4661d524fc4c309a3af4a509e3f3712"
+    },
+    {
+      "body_hash": "sha256:8b8d4de15bc3ac3f97742e4883e96cfbd188a7b4195ba0bf2dd76d29fec1ec92",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:ea4b405d80dd6ccb7d596496161420b8a23c1f5f743acbfd0bc1ca614bc37201",
+      "symbol": "HeatPump",
+      "symbol_hash": "sha256:f862c5a4167d1b8b65f47ec5b6b886f2619884c2b64b7502f6edc43b77a85012"
+    },
+    {
+      "body_hash": "sha256:343c26edcf4902c113541a67c07192b40494bd3e561a5fd15b0cecf39f5f64bb",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2390844dbdf38b09ef01cb5b74cf5ab384a873a07b0adefe6dd7b971b6386411",
+      "symbol": "HeatPump.__init__",
+      "symbol_hash": "sha256:498d6fecabd2d185628379e06c836ed6328eb0784102b1f716eecc60025ddd4d"
+    },
+    {
+      "body_hash": "sha256:cd5e9d8e2b2c7f64aa32300cfc08523dfa0e8bc8fad12622aa84cdcd1b2d1c27",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "HeatPump.idf_objtypename",
+      "symbol_hash": "sha256:66eef7768b8efdb0ddbcdca9ccca873d1391a838e43d0977df4f52fd122bc470"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:a3bb320f455f021152be954bc83d34cdd69179343f4923a3b5c6672d541ef185",
+      "symbol": "OpenSingleSpeedCoolingTower",
+      "symbol_hash": "sha256:219b5b22a3340c6e97289c67c0023c817823f91659f93dc6fb6dfa8f0e3c2b7d"
+    },
+    {
+      "body_hash": "sha256:740effdf7bde4e2e9105b8979a242897e31bf34265821ba5857a55686ceddcd5",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "OpenSingleSpeedCoolingTower.idf_objtypename",
+      "symbol_hash": "sha256:7ba0b88b8fd9a61d633fff97af4d3da82634c0cd451305dd8c3c62a3fd36c5d2"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:f4e16cdfcc73ba66ee27107db5792c1605adfbab727387e8f9d341f5c760a82e",
+      "symbol": "OpenTwoSpeedCoolingTower",
+      "symbol_hash": "sha256:3946064cbcde8477bd5da01eb9820d633652638a34675a9f526b439667cc7038"
+    },
+    {
+      "body_hash": "sha256:1e7c45fea0fce854bc6f0c98bd52f50d7fc667e8ee83dc3572f5d9c785afb1df",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "OpenTwoSpeedCoolingTower.idf_objtypename",
+      "symbol_hash": "sha256:3692dbe4cc80479cda75dd46bb5edff91601c3c917439896c4797a27839e8098"
+    },
+    {
+      "body_hash": "sha256:177656f25f67cef969ed84c217ab5c3f9d51e4805275135b5d2a2d4b522a6a09",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:eb0c18084db2ec14786569a9506a5ab55d28723c9e36ad1e43b42cb71078c578",
+      "symbol": "SourceSystem",
+      "symbol_hash": "sha256:d8fcbe86f017b859e628f37bcd2bd8af335fde9d52330c0344293184db847d6c"
+    },
+    {
+      "body_hash": "sha256:624c75c3ea4583c037b71a91330018e0c5bd9097737feacd9e2cebaf0f6498ad",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_demandbranchlistname",
+      "symbol_hash": "sha256:491d3dccb08bac8d9f22634d7fee5fac5e68f913dcc8ab5a0048467407757be3"
+    },
+    {
+      "body_hash": "sha256:15e2987b5da39f60a1d0286fef3b1ed3191be861d980d1600a84bc9f3945d1cb",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_demandmixername",
+      "symbol_hash": "sha256:dd1f2652fc2496130f64e5281f339a30ca9427039482c20368bbc3e7e0021ead"
+    },
+    {
+      "body_hash": "sha256:4f3130a12eb6a470eaa1a3f36cd7672ab410c09def4d59b92048719ce87c9163",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_demandsplittername",
+      "symbol_hash": "sha256:9fcd3f6db502c2fff61e9d3b8306f3bd71aa4e85bfd0d700c1f81568c060b510"
+    },
+    {
+      "body_hash": "sha256:6ca2e50d3374e5be76d2edde9191f42c705939ee0b4d5c7cec0b0bdada91cda9",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_loopname",
+      "symbol_hash": "sha256:ee8dc7f9161e86ea57abf1d785b3312eba0d18317270dbb826925fcb15e06b7a"
+    },
+    {
+      "body_hash": "sha256:850b6d90d69a395a8feee2ebcf0158e5c7bcc4aa10426754a288037d4aed233c",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_objname",
+      "symbol_hash": "sha256:5b92cad77b3a11eb139bb45e16c9a8f379f69ab6b6e15ebf7afa3ca4c8a07818"
+    },
+    {
+      "body_hash": "sha256:d534464a3d86dfeb1f92e18bf2296fb90a71ce3810ab72675ff520fac00f4ce1",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:a7a23c7757243d054b8e0e0ad954617076146d619fb572c68a1fb49bcaab2cf2",
+      "symbol": "SourceSystem.idf_objtypename",
+      "symbol_hash": "sha256:658520082df92fc4c03d549af63dad643ecb1962a52d7ce52cc27db4c5486918"
+    },
+    {
+      "body_hash": "sha256:48b0fe9997d5c6fb43c1560d97dfee84a9c3caaade2c944bd719ddfa558f75ef",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_supplybranchlistname",
+      "symbol_hash": "sha256:6cd0d3362215336fee43d17a3c45ed28f758c423d13bb374c078f2e81a644aa6"
+    },
+    {
+      "body_hash": "sha256:58fe3cdaf413fb46cfbd9bed35c00dd528656fd057e4ede27f2549888b6173a9",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_supplymixername",
+      "symbol_hash": "sha256:b62cdf0b36dd2e9492495b30d20614c190bf107b3e4acd729bbcf817f0cb82fd"
+    },
+    {
+      "body_hash": "sha256:2885f3797c01f217ae1b6a56a1098c73fe5c4efc6ce409affc8235d9141b15c0",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_supplysplittername",
+      "symbol_hash": "sha256:8ad08f5751bf023685adda28575f2a3f773ddc4da379348836e9159b516482de"
+    },
+    {
+      "body_hash": "sha256:279c4996d54298edf14345e0f63bfa993f992ab144a7320e01344dbd3229426e",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_terminalunitlistname",
+      "symbol_hash": "sha256:14bb746e8cd2994b3d52d6d3aacf9d39347352b6e62da56a0653f6415dca6e64"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 641,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:197f6bd7f4f53ed2b4f36fc51be027baf327086ce45d10f2d2693d87ca3085cd",
+      "symbol": "AbsorptionChiller",
+      "symbol_hash": "sha256:3a1dd02625e360d3868e7227c571e1209c39fde117de35d52e50f05b271bacfb"
+    },
+    {
+      "body_hash": "sha256:16d2482e8a299534166ee66643043c5c1d7f7b1a887a02cfec92050c853cbf5a",
+      "inventory_index": 642,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:9f610818ae62b4ba3ce5fff9f8d9ec8fad8f58f121165e68d5f880e95fed6da2",
+      "symbol": "AbsorptionChiller.__init__",
+      "symbol_hash": "sha256:14ca97c14bb6467aac9221c08f2c3f7caa2072d19e2c846200bce0a2ef48efcf"
+    },
+    {
+      "body_hash": "sha256:11e38b7ac0f30e715666145ab41919b8182c9dfc28cd95134743d2e41f1c09b6",
+      "inventory_index": 643,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "AbsorptionChiller.idf_objtypename",
+      "symbol_hash": "sha256:3e4cd4b3f17d040ec081cd1d6ebf3e59b539c8188a8446d4269f11366296cd29"
+    },
+    {
+      "body_hash": "sha256:8b8d4de15bc3ac3f97742e4883e96cfbd188a7b4195ba0bf2dd76d29fec1ec92",
+      "inventory_index": 652,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:6c587d2756d9f3e1fc93de59ec1482ea151ff3a496b9f558f1278b8ad5a2a615",
+      "symbol": "Boiler",
+      "symbol_hash": "sha256:fef90e4c92d2eb17dd0a218392ca4fb689b0bade715a616f739cd10e02305d27"
+    },
+    {
+      "body_hash": "sha256:656ec59015eff641b8d4d097e8d92b6d5d93e98401ce8f00b95d8c4f7070cf12",
+      "inventory_index": 653,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:ca2164ac340884342e53f90a4be93b49f536367784e03cb4fc1e95844baedaac",
+      "symbol": "Boiler.__init__",
+      "symbol_hash": "sha256:735f922d328beb72ea28e73c79e7d7a4fafebd548e4d0b435a35a33707e3f3dc"
+    },
+    {
+      "body_hash": "sha256:d9d5a315e20a79fee196eea766d8524dd2df66106f2f21b858e59a30c6229c3f",
+      "inventory_index": 654,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Boiler.idf_objtypename",
+      "symbol_hash": "sha256:b97f159095ba80d380fd70a1d735db08fdb83da939fb4273c7cda45d4c001df6"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 657,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:64ca2c3d6bdf68fa01f483507de1348169d646b41ede1437e400a0a7df04ff1e",
+      "symbol": "Chiller",
+      "symbol_hash": "sha256:610bd83a3cb893234b6919415b1237cd17e7e8f5a0c9793295e174ef5b056fbd"
+    },
+    {
+      "body_hash": "sha256:e59172142cb144fbfde3f07f53c76cb0b13444e24c6cb6a2418903b98344066e",
+      "inventory_index": 658,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:5ed37380fa95ba36989d044f23a1fcca9777ad8bd1ac88b827b66edf69de409b",
+      "symbol": "Chiller.__init__",
+      "symbol_hash": "sha256:65f8043a581199d99d55e0a33ce8ace15eb535fe5dce9b14ac1c34f2b3ae710a"
+    },
+    {
+      "body_hash": "sha256:bb79567e9d3807426186fa9af86a82b777a199a76f66c0fe9dc2d350c8e7d159",
+      "inventory_index": 659,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Chiller.idf_objtypename",
+      "symbol_hash": "sha256:4ab109ff13801e565f0e5285a21f50ebce51520e6da0ab5ebe99007c10f0c30f"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 661,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:4e72c1526858d39161b80a7d382862dce6579e7d769a1466637777a7b957d30c",
+      "symbol": "ClosedSingleSpeedCoolingTower",
+      "symbol_hash": "sha256:a4d512bcbdd707a16b374ecb473b4fd0e373d25b1f9f292f95632331a3fbe8e4"
+    },
+    {
+      "body_hash": "sha256:1bbbd3ef8bfa5e4fef81dccbb30995d4992fd8beee47a1a5244c34bccb0eec0a",
+      "inventory_index": 662,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ClosedSingleSpeedCoolingTower.idf_objtypename",
+      "symbol_hash": "sha256:4b2767cd5505cc19de3e55c5e0c69384085c1e4335d59a9229483c28ebc6f8c9"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 664,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:707c297c6d4e750592531d8e5107d7d3b9c2ec5b1d9535e881d015991a6d9103",
+      "symbol": "ClosedTwoSpeedCoolingTower",
+      "symbol_hash": "sha256:a365cc0a965a09a8443aa81dd6a6939c484604591d11c60ceb1cb22d47437e1f"
+    },
+    {
+      "body_hash": "sha256:23eaa74e77109d06e9853f0cb89f2f144960940d2c314775491b32aaf5d363ef",
+      "inventory_index": 665,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ClosedTwoSpeedCoolingTower.idf_objtypename",
+      "symbol_hash": "sha256:648bc45c813a9dd7a30b8b208a28280ce1622b4e6bfff2d4ce18015478a194e8"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 667,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:ab5079fb2d6d55f1e976ecf2390324fa23f6f36699a42aaa4a781fc39b9db2c1",
+      "symbol": "CompressorType",
+      "symbol_hash": "sha256:8785ee6da143dbc022e1a9cdb6096fa870f2d9d99804c2ab5ba18641319dfd74"
+    },
+    {
+      "body_hash": "sha256:14ef710b785ec24de12978b3183cb333a82b5bc0f568de54939803660521f94b",
+      "inventory_index": 668,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:7ee3e8a807c0d636c16019f63a60e8b459bcea3273c9bdfe1f6e1101b3f5e0e9",
+      "symbol": "CompressorType.RECIPROCATING",
+      "symbol_hash": "sha256:dfd51671c84116479c9ee96bf61343e6c32edc7a675ef8eb6127cb9b579c42a4"
+    },
+    {
+      "body_hash": "sha256:798047174afcabac9976d05149bfeba3f8cf8c8b06a2f43f88611e5bd07cf24f",
+      "inventory_index": 669,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:7bdf36eaffe58a5b4664e1f40e728887db746c5d3fcb9afbc55abc405e6d32cb",
+      "symbol": "CompressorType.SCREW",
+      "symbol_hash": "sha256:2947a21386fbbd0393dfc0670795aba5ddb05be02e511da37cd0118a5d70573c"
+    },
+    {
+      "body_hash": "sha256:27568afe842cedb04fc44e3ae07f54630fce2c3f31a22f7b184b4b98cb0f1d6a",
+      "inventory_index": 670,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:eb1dcdfed7b6604baf0028ad7458ce73be465bfe31a918b8e1718b123ffe4742",
+      "symbol": "CompressorType.TURBO",
+      "symbol_hash": "sha256:5074351dd266b5054fd70ac52d608a348ca3d3bd121be79c7aeb6655f9ad1449"
+    },
+    {
+      "body_hash": "sha256:8b8d4de15bc3ac3f97742e4883e96cfbd188a7b4195ba0bf2dd76d29fec1ec92",
+      "inventory_index": 673,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:333e5c56ade4c93e55c62a274a9bb33f321bae9cfbe3d37f82d4cc6eff33c42f",
+      "symbol": "CoolingTower",
+      "symbol_hash": "sha256:4b07da759a3f1c822091d85129bfc1ae89eafe125e27297e5c154c04e6abd5ce"
+    },
+    {
+      "body_hash": "sha256:811ddc491cb7b2a1f2549687e8c0f1238abb2c2154d64cca87df015950f73fe3",
+      "inventory_index": 674,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:ec0598962fdc24dda48028800e73e82517cf4a0bd30404237445099a7235bed0",
+      "symbol": "CoolingTower.__init__",
+      "symbol_hash": "sha256:d388c8f3e707db93101d6a5d0383a925d983e74027b50e7559c8642cbfb59002"
+    },
+    {
+      "body_hash": "sha256:e939c91bbe50d4d9a9979a690736781991e945355368df8dca2a8f22317dbe47",
+      "inventory_index": 675,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_demandbranchlistname",
+      "symbol_hash": "sha256:b754f9c4ddad8ea422f8dfbac050ce72067b4dc8e161e481514609b4d4bf4ca9"
+    },
+    {
+      "body_hash": "sha256:372b18b96b7938d5c3ae0718af714da5591a175aaf70c55dbdc7ba3488cb14ed",
+      "inventory_index": 676,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_demandmixername",
+      "symbol_hash": "sha256:482bcce0f0d8304f5018a64754f118fd03336f0b91cb398131759f65403f7acb"
+    },
+    {
+      "body_hash": "sha256:0fadaf8c9edd34248ddc119138791adeb3fdeba2ff40a5192ec132f7257aef89",
+      "inventory_index": 677,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_demandsplittername",
+      "symbol_hash": "sha256:bc43234be143f4d9b9a13d297cf9c5413eff9793a1fb172e8c7ab727016d4cad"
+    },
+    {
+      "body_hash": "sha256:d5874769ae2b9d7966f83f74d5f8750c53f3a96c2a43c7570ea46c91da4a5976",
+      "inventory_index": 678,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_loopname",
+      "symbol_hash": "sha256:7da2b9077a15684e7573478a6451fecffc745fae53b91ed7bbf6a6adb93027cc"
+    },
+    {
+      "body_hash": "sha256:aa5a301d7640d8ee60828ff20e8f12a54cdd87a278bced7fbbdf18b297aa14f2",
+      "inventory_index": 679,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_objname",
+      "symbol_hash": "sha256:53dba42f6de8f01d61a04e5f2804912ff1f5c13e1c32b26a5e5c947e168534d9"
+    },
+    {
+      "body_hash": "sha256:43c3c982ae32a582a2d18bb27343487d34a14aecda3a109bbc35e2fdf0aaf6e7",
+      "inventory_index": 680,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_supplybranchlistname",
+      "symbol_hash": "sha256:87efb2b8ab4fa2d7d10fce0880d7a9f2d35bd25da86f2f0923ce61da30c48cd1"
+    },
+    {
+      "body_hash": "sha256:f4e3a93453736cd2eed4101184a92f3b358043347a929e44e59838ad27f2d27c",
+      "inventory_index": 681,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_supplymixername",
+      "symbol_hash": "sha256:8200f079bcae2560862cb1bd0756c46c834b73bf3a170027d9522a4c6c9ec783"
+    },
+    {
+      "body_hash": "sha256:8d49d61bd5dc2dca720a3fa7ab043d3a9f2712a101f3db95b9e84e0286d44e0b",
+      "inventory_index": 682,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:088fd4f8f0631c71279d4aa37f066f151e263e18b9dd24ead2ea9fe68c763476",
+      "symbol": "CoolingTower.idf_get_supplysplittername",
+      "symbol_hash": "sha256:c1e5599b4e23f4f4618b33da0dd19926268f0a4935d21171ea85c555e4b5a5de"
+    },
+    {
+      "body_hash": "sha256:d534464a3d86dfeb1f92e18bf2296fb90a71ce3810ab72675ff520fac00f4ce1",
+      "inventory_index": 683,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:a7a23c7757243d054b8e0e0ad954617076146d619fb572c68a1fb49bcaab2cf2",
+      "symbol": "CoolingTower.idf_objtypename",
+      "symbol_hash": "sha256:658520082df92fc4c03d549af63dad643ecb1962a52d7ce52cc27db4c5486918"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 726,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:635c8e3b9a25578e49277b0c78b37587a71851c812f655ddb6ce27e20aef6028",
+      "symbol": "Fuel",
+      "symbol_hash": "sha256:66a9b58b66331699893ea17fec4d94a5b9cd95e109774f0d31464255e1e445f9"
+    },
+    {
+      "body_hash": "sha256:43fbb38836020cb82520d9547b5ae150c4f5fbc30c53833999994b25b0f273d2",
+      "inventory_index": 727,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:0d9110da210cd5621e2b986dba50e20543d4f9f1a9637e20a1692e7d19cabc98",
+      "symbol": "Fuel.COAL",
+      "symbol_hash": "sha256:4d234c1e90b9d77f72b2ee53651b2ecfe7a79cc897e62c8319c1ad509a30651f"
+    },
+    {
+      "body_hash": "sha256:63d0dfea66e415f70ffb3eb2ec9b36f104c7343e8e6426d2899368691ce6849c",
+      "inventory_index": 728,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:5ae57da13adc380c5d04475e8abe46b6fd954d52c428b9f2fbdef8340c09c00c",
+      "symbol": "Fuel.DIESEL",
+      "symbol_hash": "sha256:a3ee9ef5126f8a62a22e0e47b2c83bf720b19f04a523424dfb9dcebb806a515d"
+    },
+    {
+      "body_hash": "sha256:3a21cd8df87101c1f87f6ebf6e8afa30a31a5d6a3cb89ebcee846c2a14db8c6f",
+      "inventory_index": 729,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2843207402e54693bbb9439a6b0c6e41fcfdbf56a66599ca188c2d193f480742",
+      "symbol": "Fuel.ELECTRICITY",
+      "symbol_hash": "sha256:8d1b877f8cdd948498d498dea25445e3d0a335e5a3b261fcf32ef7df73b0c0de"
+    },
+    {
+      "body_hash": "sha256:092233c77978cac5a3bc39608c1086a5602ff55c0d36a3a3a8ee5129ee0176c0",
+      "inventory_index": 730,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:6d1471ffb8d4b08053140874db34a3b3361589770b2b6ca4d1f4f900cb02dd50",
+      "symbol": "Fuel.FUELOILNO1",
+      "symbol_hash": "sha256:b26b58083d2317b2160b27f4d1defa93ed10bdb68e3c51c95ee2811e7352391d"
+    },
+    {
+      "body_hash": "sha256:afe4287bd6bda09d74d111f31bcab99bd3acc066e242f4a705914508c4a62288",
+      "inventory_index": 731,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:5251d59d58efa118163e4c88850bb348f7113fd7945b6496eaa004eff3a29977",
+      "symbol": "Fuel.FUELOILNO2",
+      "symbol_hash": "sha256:1f61e381090e3233feac9d6b6b17d2982faabc0dab1594dc8b9fda344afe6a37"
+    },
+    {
+      "body_hash": "sha256:6dfa91e5ed59c4d130ddb9838ac9a9cef07c1f15ccc9dea03eed097518418b3e",
+      "inventory_index": 732,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:95b0fd0fb30cb5444777b24bff0235436bfbc9e745d9e2290306a495a201d767",
+      "symbol": "Fuel.GASOLINE",
+      "symbol_hash": "sha256:7fc1afe43aa4a0e78138bb637d15285c6b96b0ca70e7b3dd49cefbed7472b8ce"
+    },
+    {
+      "body_hash": "sha256:8e908ce13688db2f2a1141da812df21e6b713989be4f07e334cbb17ab39a6444",
+      "inventory_index": 733,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:f3f8fdbeeab11eb271ce5f12c06dc91911b5e1c9d37968720ac767c1aa2e2abb",
+      "symbol": "Fuel.NATURALGAS",
+      "symbol_hash": "sha256:5afbce03942e7a8a61570fbc3c7f29fd97952918e48bf4eb55df3436a9d21da6"
+    },
+    {
+      "body_hash": "sha256:fba5d265b42ea7c65ff4dfc14cb2844edb6e27a9d7649ea34cdc632604aab405",
+      "inventory_index": 734,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:99fc2e0d0eeed9a1d7e82e27e3803e55cb389dfe5714a2fd2ef4420967987a7c",
+      "symbol": "Fuel.OTHERFUEL1",
+      "symbol_hash": "sha256:42a148cb292041f0a0644d3c93f87ec78a4f066afbc95014fcfbc60a43d04d5c"
+    },
+    {
+      "body_hash": "sha256:a8c0d4f010ee09ac98e59e728c2c942572317b4d45ebe75caf2a7c332fd393c6",
+      "inventory_index": 735,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:4a48c037f6f2bd9b73c9b2d96ef18a19494855088cd9b25da50c01238aacedcf",
+      "symbol": "Fuel.OTHERFUEL2",
+      "symbol_hash": "sha256:914d30a548e2e4bcc1eec25b7223ba33fd3d836a2943a309aa0efcf71f4b1e8f"
+    },
+    {
+      "body_hash": "sha256:ec78f5ae672b177b994c63772da38a13cabf77c2f5128aa9a996e86a99851057",
+      "inventory_index": 736,
+      "kind": "constant",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2bb4a70b1d578aa0ffbf3603c3a619d18b97f4d2f3ae40a19a524b47570bed3c",
+      "symbol": "Fuel.PROPANE",
+      "symbol_hash": "sha256:dea3dce676a70c85c8b6e9b7d0383fb749a90762e6d4df1e2186f65be5f1ad80"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 738,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b27f04dec47588b43f347f5ab11ef35814810a9c093bb1ce9752359b2b0c5119",
+      "symbol": "GeothermalHeatPump",
+      "symbol_hash": "sha256:5016ceb513a88e66610818a6a65dc50fc6ecf76004648c0733d5d611c127eeaa"
+    },
+    {
+      "body_hash": "sha256:69ee3e6f0fb7d958909b14349d6313a2b89d827e22269768d74cb04ec38a4b37",
+      "inventory_index": 739,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "GeothermalHeatPump.idf_objtypename",
+      "symbol_hash": "sha256:0189ef903f1a286e2166ef62c1c4085ad4661d524fc4c309a3af4a509e3f3712"
+    },
+    {
+      "body_hash": "sha256:8b8d4de15bc3ac3f97742e4883e96cfbd188a7b4195ba0bf2dd76d29fec1ec92",
+      "inventory_index": 740,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:ea4b405d80dd6ccb7d596496161420b8a23c1f5f743acbfd0bc1ca614bc37201",
+      "symbol": "HeatPump",
+      "symbol_hash": "sha256:f862c5a4167d1b8b65f47ec5b6b886f2619884c2b64b7502f6edc43b77a85012"
+    },
+    {
+      "body_hash": "sha256:343c26edcf4902c113541a67c07192b40494bd3e561a5fd15b0cecf39f5f64bb",
+      "inventory_index": 741,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2390844dbdf38b09ef01cb5b74cf5ab384a873a07b0adefe6dd7b971b6386411",
+      "symbol": "HeatPump.__init__",
+      "symbol_hash": "sha256:498d6fecabd2d185628379e06c836ed6328eb0784102b1f716eecc60025ddd4d"
+    },
+    {
+      "body_hash": "sha256:cd5e9d8e2b2c7f64aa32300cfc08523dfa0e8bc8fad12622aa84cdcd1b2d1c27",
+      "inventory_index": 742,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "HeatPump.idf_objtypename",
+      "symbol_hash": "sha256:66eef7768b8efdb0ddbcdca9ccca873d1391a838e43d0977df4f52fd122bc470"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 744,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:a3bb320f455f021152be954bc83d34cdd69179343f4923a3b5c6672d541ef185",
+      "symbol": "OpenSingleSpeedCoolingTower",
+      "symbol_hash": "sha256:219b5b22a3340c6e97289c67c0023c817823f91659f93dc6fb6dfa8f0e3c2b7d"
+    },
+    {
+      "body_hash": "sha256:740effdf7bde4e2e9105b8979a242897e31bf34265821ba5857a55686ceddcd5",
+      "inventory_index": 745,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "OpenSingleSpeedCoolingTower.idf_objtypename",
+      "symbol_hash": "sha256:7ba0b88b8fd9a61d633fff97af4d3da82634c0cd451305dd8c3c62a3fd36c5d2"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 747,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:f4e16cdfcc73ba66ee27107db5792c1605adfbab727387e8f9d341f5c760a82e",
+      "symbol": "OpenTwoSpeedCoolingTower",
+      "symbol_hash": "sha256:3946064cbcde8477bd5da01eb9820d633652638a34675a9f526b439667cc7038"
+    },
+    {
+      "body_hash": "sha256:1e7c45fea0fce854bc6f0c98bd52f50d7fc667e8ee83dc3572f5d9c785afb1df",
+      "inventory_index": 748,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "OpenTwoSpeedCoolingTower.idf_objtypename",
+      "symbol_hash": "sha256:3692dbe4cc80479cda75dd46bb5edff91601c3c917439896c4797a27839e8098"
+    },
+    {
+      "body_hash": "sha256:177656f25f67cef969ed84c217ab5c3f9d51e4805275135b5d2a2d4b522a6a09",
+      "inventory_index": 777,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:eb0c18084db2ec14786569a9506a5ab55d28723c9e36ad1e43b42cb71078c578",
+      "symbol": "SourceSystem",
+      "symbol_hash": "sha256:d8fcbe86f017b859e628f37bcd2bd8af335fde9d52330c0344293184db847d6c"
+    },
+    {
+      "body_hash": "sha256:624c75c3ea4583c037b71a91330018e0c5bd9097737feacd9e2cebaf0f6498ad",
+      "inventory_index": 778,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_demandbranchlistname",
+      "symbol_hash": "sha256:491d3dccb08bac8d9f22634d7fee5fac5e68f913dcc8ab5a0048467407757be3"
+    },
+    {
+      "body_hash": "sha256:15e2987b5da39f60a1d0286fef3b1ed3191be861d980d1600a84bc9f3945d1cb",
+      "inventory_index": 779,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_demandmixername",
+      "symbol_hash": "sha256:dd1f2652fc2496130f64e5281f339a30ca9427039482c20368bbc3e7e0021ead"
+    },
+    {
+      "body_hash": "sha256:4f3130a12eb6a470eaa1a3f36cd7672ab410c09def4d59b92048719ce87c9163",
+      "inventory_index": 780,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_demandsplittername",
+      "symbol_hash": "sha256:9fcd3f6db502c2fff61e9d3b8306f3bd71aa4e85bfd0d700c1f81568c060b510"
+    },
+    {
+      "body_hash": "sha256:6ca2e50d3374e5be76d2edde9191f42c705939ee0b4d5c7cec0b0bdada91cda9",
+      "inventory_index": 781,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_loopname",
+      "symbol_hash": "sha256:ee8dc7f9161e86ea57abf1d785b3312eba0d18317270dbb826925fcb15e06b7a"
+    },
+    {
+      "body_hash": "sha256:850b6d90d69a395a8feee2ebcf0158e5c7bcc4aa10426754a288037d4aed233c",
+      "inventory_index": 782,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_objname",
+      "symbol_hash": "sha256:5b92cad77b3a11eb139bb45e16c9a8f379f69ab6b6e15ebf7afa3ca4c8a07818"
+    },
+    {
+      "body_hash": "sha256:d534464a3d86dfeb1f92e18bf2296fb90a71ce3810ab72675ff520fac00f4ce1",
+      "inventory_index": 783,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:a7a23c7757243d054b8e0e0ad954617076146d619fb572c68a1fb49bcaab2cf2",
+      "symbol": "SourceSystem.idf_objtypename",
+      "symbol_hash": "sha256:658520082df92fc4c03d549af63dad643ecb1962a52d7ce52cc27db4c5486918"
+    },
+    {
+      "body_hash": "sha256:48b0fe9997d5c6fb43c1560d97dfee84a9c3caaade2c944bd719ddfa558f75ef",
+      "inventory_index": 784,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_supplybranchlistname",
+      "symbol_hash": "sha256:6cd0d3362215336fee43d17a3c45ed28f758c423d13bb374c078f2e81a644aa6"
+    },
+    {
+      "body_hash": "sha256:58fe3cdaf413fb46cfbd9bed35c00dd528656fd057e4ede27f2549888b6173a9",
+      "inventory_index": 785,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_supplymixername",
+      "symbol_hash": "sha256:b62cdf0b36dd2e9492495b30d20614c190bf107b3e4acd729bbcf817f0cb82fd"
+    },
+    {
+      "body_hash": "sha256:2885f3797c01f217ae1b6a56a1098c73fe5c4efc6ce409affc8235d9141b15c0",
+      "inventory_index": 786,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_supplysplittername",
+      "symbol_hash": "sha256:8ad08f5751bf023685adda28575f2a3f773ddc4da379348836e9159b516482de"
+    },
+    {
+      "body_hash": "sha256:279c4996d54298edf14345e0f63bfa993f992ab144a7320e01344dbd3229426e",
+      "inventory_index": 787,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "SourceSystem.idf_terminalunitlistname",
+      "symbol_hash": "sha256:14bb746e8cd2994b3d52d6d3aacf9d39347352b6e62da56a0653f6415dca6e64"
+    }
+  ],
+  "upstream": {
+    "adjacent_receipts_sha256": "sha256:6e3440ca7a866008249ce603d92cb4da33cd9baf5f1b50be29e9f24e3207d769",
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory": {
+      "bytes": 518070,
+      "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+      "file_sha256": "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    },
+    "isolated_import": {
+      "loaded_local_modules": [
+        {
+          "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+          "module": "idragon",
+          "path": "src/idragon/__init__.py",
+          "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+        },
+        {
+          "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+          "module": "idragon.common",
+          "path": "src/idragon/common.py",
+          "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+        },
+        {
+          "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+          "module": "idragon.constants",
+          "path": "src/idragon/constants.py",
+          "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+        },
+        {
+          "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+          "module": "idragon.dragon",
+          "path": "src/idragon/dragon/__init__.py",
+          "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+        },
+        {
+          "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+          "module": "idragon.dragon.construction",
+          "path": "src/idragon/dragon/construction.py",
+          "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+        },
+        {
+          "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+          "module": "idragon.dragon.hvac",
+          "path": "src/idragon/dragon/hvac.py",
+          "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+        },
+        {
+          "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+          "module": "idragon.dragon.model",
+          "path": "src/idragon/dragon/model.py",
+          "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+        },
+        {
+          "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+          "module": "idragon.dragon.profile",
+          "path": "src/idragon/dragon/profile.py",
+          "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+        },
+        {
+          "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+          "module": "idragon.dragon.shape",
+          "path": "src/idragon/dragon/shape.py",
+          "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+        },
+        {
+          "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+          "module": "idragon.imugi",
+          "path": "src/idragon/imugi.py",
+          "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+        },
+        {
+          "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+          "module": "idragon.launcher",
+          "path": "src/idragon/launcher.py",
+          "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+        },
+        {
+          "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+          "module": "idragon.utils",
+          "path": "src/idragon/utils.py",
+          "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+        }
+      ],
+      "loaded_local_modules_sha256": "sha256:93cfad21e009eac906a4443998ad214eec82e2136ada5b7cea7888ababf30143",
+      "relocated_observations_sha256": "sha256:2eadd58ac936f71225de5f4181712dd6c8cebafefd12471258f719d02f193a44",
+      "relocated_source_copy": "two-byte-identical-repository-temp-copies",
+      "source_location_count": 2
+    },
+    "source": {
+      "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+      "bytes": 137833,
+      "path": "src/idragon/dragon/hvac.py",
+      "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+    },
+    "target_receipts_sha256": "sha256:894e31bb538cf8be2269a5b35b04e429ceb28b7fd881a7f6deff9d5166f360c1"
+  }
+}
