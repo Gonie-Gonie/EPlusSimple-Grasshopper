@@ -30,7 +30,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(356, len(configuration.exceptions))
+        self.assertEqual(379, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -44,16 +44,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(368, len(compatibility.needs_reverification))
+        self.assertEqual(321, len(compatibility.needs_reverification))
         self.assertEqual(
-            272,
+            296,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            350,
+            373,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:37f783aa11ef76442503341f77349d98b6ab76ae592da8c16dbcc5f99ba70e30",
+            "sha256:832744a78e146de7b469eea11b2a8de6177cd075030f07ea4bc6750292d96178",
             compatibility.matrix.content_sha256,
         )
-        self.assertEqual(622, len(symbol_evidence.entries))
-        self.assertEqual(622, len(symbol_evidence.receipts))
+        self.assertEqual(669, len(symbol_evidence.entries))
+        self.assertEqual(669, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:50963f895ca57f29d3595efcdf2f8ee99c7cefd5f50707afcd42137e152f681d",
+            "sha256:570fa5406f16158ac441c2859c23ed0bd6723417ae130d210561a6ddad8f5622",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -2581,6 +2581,9 @@ class ConfigurationTests(unittest.TestCase):
                 and not item.receipts[0].identifier.startswith(
                     "epsimple-hvac-enums-base-"
                 )
+                and not item.receipts[0].identifier.startswith(
+                    "epsimple-hvac-thermal-source-"
+                )
                 for item in symbol_evidence.entries
             ),
         )
@@ -2898,6 +2901,12 @@ class ConfigurationTests(unittest.TestCase):
             - sum(
                 item.receipts[0].identifier.startswith(
                     "epsimple-hvac-enums-base-"
+                )
+                for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "epsimple-hvac-thermal-source-"
                 )
                 for item in symbol_evidence.entries
             ),
@@ -3859,6 +3868,32 @@ class ConfigurationTests(unittest.TestCase):
             319,
             320,
         )
+        thermal_target_indices = (
+            135,
+            136,
+            139,
+            *range(142, 147),
+            157,
+            158,
+            161,
+            *range(164, 170),
+            170,
+            171,
+            174,
+            *range(177, 185),
+            199,
+            200,
+            203,
+            *range(206, 209),
+            248,
+            251,
+            252,
+            253,
+            254,
+            257,
+            *range(260, 267),
+        )
+        self.assertEqual(47, len(thermal_target_indices))
         hvac_targets = hvac_fixture["target_receipts"]
         self.assertEqual(
             hvac_target_indices,
@@ -4093,11 +4128,24 @@ class ConfigurationTests(unittest.TestCase):
             set(hvac_contract["target_symbols"]),
             {item.symbol for item in hvac_evidence_entries},
         )
-        self.assertEqual(594, len(symbol_evidence.entries) - len(hvac_evidence_entries))
+        self.assertEqual(
+            594,
+            len(symbol_evidence.entries)
+            - len(hvac_evidence_entries)
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "epsimple-hvac-thermal-source-"
+                )
+                for item in symbol_evidence.entries
+            ),
+        )
         self.assertEqual(
             346,
             sum(
                 item.identifier not in set(hvac_exception_ids.values())
+                and not item.identifier.startswith(
+                    "reviewed-native-discriminated-source-aggregate-and-conversion-route-"
+                )
                 for item in configuration.exceptions
             ),
         )
@@ -4106,6 +4154,14 @@ class ConfigurationTests(unittest.TestCase):
         hvac_deferred = tuple(hvac_fixture["deferred_receipts"])
         self.assertEqual(58, len(hvac_excluded))
         self.assertEqual(116, len(hvac_deferred))
+        self.assertEqual(
+            set(thermal_target_indices),
+            {
+                item["inventory_index"]
+                for item in hvac_deferred
+                if item["inventory_index"] in thermal_target_indices
+            },
+        )
         self.assertEqual(
             set(range(135, 337)),
             set(hvac_target_indices)
@@ -4122,6 +4178,8 @@ class ConfigurationTests(unittest.TestCase):
             self.assertNotIn(key, symbol_evidence.entries_by_key)
         for receipt in hvac_deferred:
             index = receipt["inventory_index"]
+            if index in thermal_target_indices:
+                continue
             key = (receipt["path"], receipt["symbol"])
             self.assertEqual(key, compatibility.inventory.symbols[index].key)
             self.assertEqual(
@@ -4129,6 +4187,292 @@ class ConfigurationTests(unittest.TestCase):
                 compatibility.matrix.entries[index].classification,
             )
             self.assertNotIn(key, symbol_evidence.entries_by_key)
+
+        thermal_fixture_path = (
+            REPOSITORY_ROOT
+            / "fixtures/reference/python-0.7.0/epsimple-hvac-thermal-source-oracle.json"
+        )
+        thermal_generator_path = (
+            REPOSITORY_ROOT
+            / "tools/python-reference/generate_epsimple_hvac_thermal_source_oracle.py"
+        )
+        thermal_validator_path = (
+            REPOSITORY_ROOT
+            / "tests/PythonReference/test_epsimple_hvac_thermal_source_oracle.py"
+        )
+        thermal_test_path = (
+            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "HvacThermalSourceOracleParityTests.cs"
+        )
+        thermal_test_symbol = (
+            "GonieGonie.SimpleDragon.Tests.HvacThermalSourceOracleParityTests."
+            "MatchesPinnedHvacThermalSourcesThroughProductionPublicRoutes"
+        )
+        thermal_fixture_sha256 = (
+            "sha256:e78e8bcbe42cd236775db63d50088bad82a9e9c5328e5fa5de6873d069984391"
+        )
+        thermal_generator_sha256 = (
+            "sha256:e930c9242c76b48500010e76f625e41baa07de96e4629b447df61db6c571e51c"
+        )
+        thermal_validator_sha256 = (
+            "sha256:ca7fb52d4a68ada17437d9e4590b129cf22cce842b37147aacf76d4f17c92265"
+        )
+        thermal_test_sha256 = (
+            "sha256:b7c9f676404298d22903b3f4c038eb37f9648612a41e6ee05cbe60368b93aee3"
+        )
+        for pinned_path, expected_sha256 in (
+            (thermal_fixture_path, thermal_fixture_sha256),
+            (thermal_generator_path, thermal_generator_sha256),
+            (thermal_validator_path, thermal_validator_sha256),
+            (REPOSITORY_ROOT / thermal_test_path, thermal_test_sha256),
+        ):
+            self.assertEqual(
+                expected_sha256,
+                "sha256:" + hashlib.sha256(pinned_path.read_bytes()).hexdigest(),
+                pinned_path,
+            )
+
+        thermal_fixture = json.loads(
+            thermal_fixture_path.read_text(encoding="utf-8")
+        )
+        thermal_contract = thermal_fixture["consumer_contract"]
+        thermal_targets = tuple(thermal_fixture["target_receipts"])
+        self.assertEqual(
+            thermal_target_indices,
+            tuple(item["inventory_index"] for item in thermal_targets),
+        )
+        self.assertEqual(
+            tuple(thermal_contract["closure"]["target_symbols"]),
+            tuple(item["symbol"] for item in thermal_targets),
+        )
+        self.assertEqual(6, thermal_contract["case_count"])
+        self.assertEqual(6, len(thermal_fixture["cases"]))
+        self.assertEqual(
+            {"equivalent": 24, "exception": 23},
+            thermal_contract["classification_counts"],
+        )
+        self.assertEqual(47, thermal_contract["closure"]["target_count"])
+        self.assertEqual(155, thermal_contract["closure"]["adjacent_count"])
+        self.assertEqual(202, thermal_contract["closure"]["source_declaration_count"])
+        self.assertTrue(
+            thermal_contract["closure"]["exact_one_case_target_partition"]
+        )
+        self.assertTrue(thermal_contract["closure"]["full_hvac_source_partition"])
+        self.assertEqual(
+            set(range(135, 337)),
+            set(thermal_target_indices)
+            | set(thermal_contract["closure"]["adjacent_indices"]),
+        )
+
+        thermal_case_by_symbol = {}
+        for case in thermal_fixture["cases"]:
+            for symbol in case["target_symbols"]:
+                self.assertNotIn(symbol, thermal_case_by_symbol)
+                thermal_case_by_symbol[symbol] = (case["code"], case["id"])
+        self.assertEqual(
+            set(thermal_contract["closure"]["target_symbols"]),
+            set(thermal_case_by_symbol),
+        )
+
+        thermal_test_bytes = (REPOSITORY_ROOT / thermal_test_path).read_bytes()
+        thermal_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
+            rb"\[(?P<body>.*?)\n\s*\];",
+            thermal_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(thermal_hash_block)
+        assert thermal_hash_block is not None
+        thermal_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                thermal_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(47, len(thermal_output_hashes))
+        self.assertEqual(47, len(set(thermal_output_hashes)))
+
+        def expected_thermal_implementation(symbol: str) -> tuple[str, str]:
+            route = thermal_contract["native_routes"][symbol]
+            if symbol.endswith(".from_json"):
+                return hvac_reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"
+            if symbol.endswith(".to_dragon"):
+                return (
+                    hvac_conversion_path,
+                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                )
+            if "." not in symbol or symbol.endswith(".__init__"):
+                return hvac_source_path, "GonieGonie.SimpleDragon.SourceSystem"
+            return hvac_source_path, route
+
+        thermal_exception_ids = set(thermal_contract["adaptations"].values())
+        self.assertEqual(23, len(thermal_exception_ids))
+        self.assertEqual(
+            set(thermal_contract["adaptations"]),
+            {
+                item.upstream_symbol
+                for item in configuration.exceptions
+                if item.identifier in thermal_exception_ids
+            },
+        )
+        for target, expected_output_hash in zip(
+            thermal_targets,
+            thermal_output_hashes,
+            strict=True,
+        ):
+            index = target["inventory_index"]
+            symbol = target["symbol"]
+            inventory_symbol = compatibility.inventory.symbols[index]
+            expected_descriptor = dict(target)
+            expected_descriptor.pop("inventory_index")
+            self.assertEqual(expected_descriptor, inventory_symbol.to_data(), symbol)
+            key = (target["path"], symbol)
+            entry = compatibility.matrix.entries[index]
+            classification = thermal_contract["classifications"][symbol]
+            exception_id = thermal_contract["adaptations"].get(symbol)
+            assertion_id = thermal_contract["assertion_ids"][symbol]
+            self.assertEqual(key, entry.key, symbol)
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            expected_references = [
+                f"upstream/symbol-evidence.json#{assertion_id}"
+            ]
+            if exception_id is not None:
+                expected_references.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_references)), entry.evidence, symbol)
+
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(
+                inventory_symbol.symbol_hash,
+                evidence_entry.upstream_symbol_hash,
+                symbol,
+            )
+            implementation_path, implementation_symbol = (
+                expected_thermal_implementation(symbol)
+            )
+            implementation_sha256 = "sha256:" + hashlib.sha256(
+                (REPOSITORY_ROOT / implementation_path).read_bytes()
+            ).hexdigest()
+            self.assertEqual(
+                implementation_path, evidence_entry.implementation_path, symbol
+            )
+            self.assertEqual(
+                implementation_symbol, evidence_entry.implementation_symbol, symbol
+            )
+            self.assertEqual(
+                implementation_sha256,
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertEqual(thermal_test_path, receipt.test_path, symbol)
+            self.assertEqual(thermal_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(thermal_test_sha256, receipt.test_source_sha256, symbol)
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+            code, case_id = thermal_case_by_symbol[symbol]
+            for exact_binding in (
+                thermal_fixture_sha256,
+                thermal_generator_sha256,
+                thermal_validator_sha256,
+                thermal_test_sha256,
+                "commit 0ef3a7d",
+                implementation_path + "@" + implementation_sha256,
+                expected_output_hash,
+                assertion_id,
+                thermal_contract["native_routes"][symbol],
+                code,
+                case_id,
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+            if exception_id is not None:
+                exception = exceptions_by_id[exception_id]
+                self.assertIn(exception_id, entry.rationale, symbol)
+                self.assertEqual(target["path"], exception.upstream_path, symbol)
+                self.assertEqual(symbol, exception.upstream_symbol, symbol)
+                self.assertEqual(
+                    inventory_symbol.symbol_hash,
+                    exception.upstream_symbol_hash,
+                    symbol,
+                )
+                self.assertIn(
+                    ("engineering_result", entry.rationale), exception.effects
+                )
+                self.assertEqual(
+                    "accepted-native-api-adaptation", exception.approval, symbol
+                )
+
+        thermal_evidence_entries = tuple(
+            item
+            for item in symbol_evidence.entries
+            if item.receipts[0].identifier.startswith(
+                "epsimple-hvac-thermal-source-"
+            )
+        )
+        self.assertEqual(47, len(thermal_evidence_entries))
+        self.assertEqual(
+            set(thermal_contract["closure"]["target_symbols"]),
+            {item.symbol for item in thermal_evidence_entries},
+        )
+        self.assertEqual(622, len(symbol_evidence.entries) - len(thermal_evidence_entries))
+        self.assertEqual(
+            356,
+            sum(
+                item.identifier not in thermal_exception_ids
+                for item in configuration.exceptions
+            ),
+        )
+
+        supply_fixture = json.loads(
+            (
+                REPOSITORY_ROOT
+                / "fixtures/reference/python-0.7.0/epsimple-hvac-supply-system-oracle.json"
+            ).read_text(encoding="utf-8")
+        )
+        other_fixture = json.loads(
+            (
+                REPOSITORY_ROOT
+                / "fixtures/reference/python-0.7.0/epsimple-hvac-other-systems-oracle.json"
+            ).read_text(encoding="utf-8")
+        )
+        supply_indices = {
+            item["inventory_index"] for item in supply_fixture["target_receipts"]
+        }
+        other_indices = {
+            item["inventory_index"] for item in other_fixture["target_receipts"]
+        }
+        self.assertEqual(52, len(supply_indices))
+        self.assertEqual(17, len(other_indices))
+        self.assertEqual(set(), supply_indices & other_indices)
+        self.assertEqual(
+            supply_indices | other_indices,
+            {
+                item["inventory_index"]
+                for item in hvac_deferred
+                if item["inventory_index"] not in thermal_target_indices
+            },
+        )
+        for index in supply_indices | other_indices:
+            entry = compatibility.matrix.entries[index]
+            self.assertEqual("needs_reverification", entry.classification, index)
+            self.assertIsNone(entry.exception_id, index)
+            self.assertEqual((), entry.evidence, index)
+            self.assertEqual(
+                "No symbol-level equivalence, verified exception, or out-of-scope evidence is registered.",
+                entry.rationale,
+                index,
+            )
 
         energy_model_to_idf_key = (
             "src/idragon/dragon/model.py",
