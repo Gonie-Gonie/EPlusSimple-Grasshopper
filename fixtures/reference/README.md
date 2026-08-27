@@ -100,6 +100,17 @@ representation/Excel declarations remain out of scope; the 14
 GreenRetrofitResult declarations remain explicitly deferred to their own
 bounded fixture.
 
+`python-0.7.0/epsimple-model-result-oracle.json` pins 11 ordered CPython
+3.12.7 cases for the exact 14 `GreenRetrofitResult` declarations in
+`epsimple/core/model.py`. It executes result construction, area and rounding,
+domestic-hot-water demand and server selection, site/source energy, carbon and
+cost factors, gross and per-area summaries, dictionary topology, and
+deterministic JSON file writing with overwrite and error boundaries. Isolated
+imports plus a byte-identical relocated source copy prove path independence.
+Nine targets are exact equivalents and five use reviewed immutable result,
+validated builder, typed DHW, or deterministic writer adaptations. The other
+38 declarations in `model.py` are bound as adjacent non-target receipts.
+
 `python-0.7.0/epsimple-shape-core-oracle.json` pins 17 ordered CPython
 3.12.7 cases for exactly 53 unresolved targets in
 `epsimple/core/shape.py`. It executes BlindType, Fenestration, Door, GlassDoor,
