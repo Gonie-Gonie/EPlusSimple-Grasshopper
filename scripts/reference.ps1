@@ -34,6 +34,7 @@ $commonCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\gen
 $constantsMetadataGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_constants_metadata_oracle.py'
 $constantsEngineeringGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_constants_engineering_oracle.py'
 $epsimpleConstantsNumericGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_constants_numeric_oracle.py'
+$epsimpleConstructionCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_construction_core_oracle.py'
 $epsimpleIdentifierConventionsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_identifier_conventions_oracle.py'
 $dragonConstructionAirBoundaryCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_construction_air_boundary_core_oracle.py'
 $dragonConstructionCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_construction_core_oracle.py'
@@ -84,6 +85,7 @@ $commonCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_comm
 $constantsMetadataTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_constants_metadata_oracle.py'
 $constantsEngineeringTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_constants_engineering_oracle.py'
 $epsimpleConstantsNumericTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_constants_numeric_oracle.py'
+$epsimpleConstructionCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_construction_core_oracle.py'
 $epsimpleIdentifierConventionsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_identifier_conventions_oracle.py'
 $dragonConstructionAirBoundaryCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_construction_air_boundary_core_oracle.py'
 $dragonConstructionCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_construction_core_oracle.py'
@@ -186,6 +188,7 @@ foreach ($requiredFile in @(
     $constantsMetadataGeneratorPath,
     $constantsEngineeringGeneratorPath,
     $epsimpleConstantsNumericGeneratorPath,
+    $epsimpleConstructionCoreGeneratorPath,
     $epsimpleIdentifierConventionsGeneratorPath,
     $dragonConstructionAirBoundaryCoreGeneratorPath,
     $dragonConstructionCoreGeneratorPath,
@@ -234,6 +237,7 @@ foreach ($requiredFile in @(
     $constantsMetadataTestPath,
     $constantsEngineeringTestPath,
     $epsimpleConstantsNumericTestPath,
+    $epsimpleConstructionCoreTestPath,
     $epsimpleIdentifierConventionsTestPath,
     $dragonConstructionAirBoundaryCoreTestPath,
     $dragonConstructionCoreTestPath,
@@ -736,7 +740,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants metadata/engineering, epsimple numeric constants, dragon construction AirBoundary core, construction core, and to-IDF-object, dragon HVAC photovoltaic/source-system/SupplyGroup core/to-IDF-object, dragon shape geometry/opening-adjacency core and shading-material/surface/Zone to-IDF-object, dragon shape Zone core, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants metadata/engineering, epsimple numeric constants, construction core, and identifier conventions, dragon construction AirBoundary core, construction core, and to-IDF-object, dragon HVAC photovoltaic/source-system/SupplyGroup core/to-IDF-object, dragon shape geometry/opening-adjacency core and shading-material/surface/Zone to-IDF-object, dragon shape Zone core, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -885,6 +889,25 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $epsimpleConstantsNumericGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-epsimple-constants-numeric-reference.log') `
     -FailureMessage 'Generating the Python epsimple numeric-constants oracle failed'
+
+$epsimpleConstructionCoreOraclePath = Join-Path $outputRoot 'epsimple-construction-core-oracle.json'
+$epsimpleConstructionCoreGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $epsimpleConstructionCoreGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $epsimpleConstructionCoreOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $epsimpleConstructionCoreGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-epsimple-construction-core-reference.log') `
+    -FailureMessage 'Generating the Python epsimple construction-core oracle failed'
 
 $epsimpleIdentifierConventionsOraclePath = Join-Path $outputRoot 'epsimple-identifier-conventions-oracle.json'
 $epsimpleIdentifierConventionsGeneratorArguments = @(

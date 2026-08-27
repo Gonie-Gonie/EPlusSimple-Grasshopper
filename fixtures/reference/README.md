@@ -63,6 +63,19 @@ with its model-file, AST, method, and `VALID_DIGITS` receipts included. The 24
 numeric members are exact equivalents and the five enum containers are
 reviewed native container or dispatch adaptations.
 
+`python-0.7.0/epsimple-construction-core-oracle.json` pins 19 ordered CPython
+3.12.7 cases for exactly 48 unresolved targets in
+`epsimple/core/construction.py`. It executes Material, FenestrationConstruction,
+SurfaceConstruction, and Special/Open/Unknown construction state, validation,
+ID generation, JSON/dictionary/dragon conversion, embedded-database load/get,
+derived U-value/depth/heat-capacity and unique-material behavior, regulation
+selection, simple construction creation, reversal, and singleton semantics.
+Isolated imports plus a byte-identical relocated `epsimple`/`idragon` source
+copy prove path independence. Seven targets are exact equivalents and 41 are
+explicit native-route exceptions with stable adaptation IDs. The 12 adjacent
+equality, hash, representation, and string declarations remain explicitly
+excluded from this bounded fixture.
+
 `python-0.7.0/epsimple-identifier-conventions-oracle.json` pins 22 ordered
 CPython 3.12.7 cases for the 34 unresolved `AUTOID_PREFIX`, `Directory`,
 `PackageInfo`, and `SpecialTag` symbols in `epsimple/constants.py`. It records
