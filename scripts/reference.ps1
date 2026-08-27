@@ -46,6 +46,7 @@ $epsimpleShapeCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-refere
 $dragonConstructionAirBoundaryCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_construction_air_boundary_core_oracle.py'
 $dragonConstructionCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_construction_core_oracle.py'
 $dragonConstructionToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_construction_to_idf_object_oracle.py'
+$dragonHvacAppendersControllersGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_appenders_controllers_oracle.py'
 $dragonHvacPhotovoltaicToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_photovoltaic_to_idf_object_oracle.py'
 $dragonHvacSourceSystemToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_source_system_to_idf_object_oracle.py'
 $dragonHvacSourceTowerCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_source_tower_core_oracle.py'
@@ -106,6 +107,7 @@ $epsimpleShapeCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\te
 $dragonConstructionAirBoundaryCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_construction_air_boundary_core_oracle.py'
 $dragonConstructionCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_construction_core_oracle.py'
 $dragonConstructionToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_construction_to_idf_object_oracle.py'
+$dragonHvacAppendersControllersTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_appenders_controllers_oracle.py'
 $dragonHvacPhotovoltaicToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_photovoltaic_to_idf_object_oracle.py'
 $dragonHvacSourceSystemToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_source_system_to_idf_object_oracle.py'
 $dragonHvacSourceTowerCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_source_tower_core_oracle.py'
@@ -218,6 +220,7 @@ foreach ($requiredFile in @(
     $dragonConstructionAirBoundaryCoreGeneratorPath,
     $dragonConstructionCoreGeneratorPath,
     $dragonConstructionToIdfObjectGeneratorPath,
+    $dragonHvacAppendersControllersGeneratorPath,
     $dragonHvacPhotovoltaicToIdfObjectGeneratorPath,
     $dragonHvacSourceSystemToIdfObjectGeneratorPath,
     $dragonHvacSourceTowerCoreGeneratorPath,
@@ -276,6 +279,7 @@ foreach ($requiredFile in @(
     $dragonConstructionAirBoundaryCoreTestPath,
     $dragonConstructionCoreTestPath,
     $dragonConstructionToIdfObjectTestPath,
+    $dragonHvacAppendersControllersTestPath,
     $dragonHvacPhotovoltaicToIdfObjectTestPath,
     $dragonHvacSourceSystemToIdfObjectTestPath,
     $dragonHvacSourceTowerCoreTestPath,
@@ -776,7 +780,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants metadata/engineering, epsimple numeric constants, construction core, HVAC enum/base, other-systems, thermal-source, and supply-system, identifier conventions, model core/result, and shape core, dragon construction AirBoundary core, construction core, and to-IDF-object, dragon HVAC photovoltaic/source-system/source-tower-core/supply-core/SupplyGroup core/to-IDF-object, dragon shape geometry/opening-adjacency core and shading-material/surface/Zone to-IDF-object, dragon shape Zone core, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants metadata/engineering, epsimple numeric constants, construction core, HVAC enum/base, other-systems, thermal-source, and supply-system, identifier conventions, model core/result, and shape core, dragon construction AirBoundary core, construction core, and to-IDF-object, dragon HVAC appenders/controllers, photovoltaic/source-system/source-tower-core/supply-core/SupplyGroup core/to-IDF-object, dragon shape geometry/opening-adjacency core and shading-material/surface/Zone to-IDF-object, dragon shape Zone core, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -1153,6 +1157,25 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $dragonConstructionToIdfObjectGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-dragon-construction-to-idf-object-reference.log') `
     -FailureMessage 'Generating the Python dragon construction-family to-IDF-object oracle failed'
+
+$dragonHvacAppendersControllersOraclePath = Join-Path $outputRoot 'dragon-hvac-appenders-controllers-oracle.json'
+$dragonHvacAppendersControllersGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $dragonHvacAppendersControllersGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $dragonHvacAppendersControllersOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $dragonHvacAppendersControllersGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-dragon-hvac-appenders-controllers-reference.log') `
+    -FailureMessage 'Generating the Python dragon HVAC appenders/controllers oracle failed'
 
 $dragonHvacPhotovoltaicToIdfObjectOraclePath = Join-Path $outputRoot 'dragon-hvac-photovoltaic-to-idf-object-oracle.json'
 $dragonHvacPhotovoltaicToIdfObjectGeneratorArguments = @(

@@ -1,0 +1,4446 @@
+{
+  "case_sha256": {
+    "dragon-hvac-appenders-controllers.demand-branch-appender": "sha256:ed597ff707a9e05f6e13272a2046862ddd012e9cc3e4153b88911e74145dfc03",
+    "dragon-hvac-appenders-controllers.equipment-list-appender": "sha256:be089ecb06d8b1831af4ccc2f1f47fabc14cbaec81a98418e8cd9253c20999a9",
+    "dragon-hvac-appenders-controllers.sequential-load-fraction-controller": "sha256:6db87a69044821b11b27016abd09eb7a0dffdc2764d66e71ce8a98cef2ef2fda",
+    "dragon-hvac-appenders-controllers.supply-system-postprocessor": "sha256:a9532aee0ed8dcee59d6c507a16bddde1e8e02a6e83e7d27a11a9e3831cf5ee8",
+    "dragon-hvac-appenders-controllers.zone-air-node-appender": "sha256:01734b8966710d9079ca632b73b357feafde8b4ca4a7bc41d6e4171f052dac93",
+    "dragon-hvac-appenders-controllers.zone-terminal-unit-appender": "sha256:0ef5b24143176c6dbc201a4477fe79c0008b2ba48277c179ae6f1ed9c6450e58"
+  },
+  "cases": [
+    {
+      "code": "A01",
+      "id": "dragon-hvac-appenders-controllers.demand-branch-appender",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "SupplySystemToIdfPostProcessor"
+            ],
+            "mro": [
+              "DemandBranchAppender",
+              "SupplySystemToIdfPostProcessor",
+              "ABC",
+              "object"
+            ],
+            "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+          },
+          "count_probes": {
+            "branchlist_two_nonnull": 2,
+            "connector_extra_nonbranch_is_counted": 2,
+            "connector_one": 1,
+            "connector_zero": 0
+          },
+          "failure_prefix_missing_mixer": {
+            "branchlist_unchanged": [
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "DemandBranchList_for_Demand Source"
+                    }
+                  },
+                  {
+                    "name": "Branch 1 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Demand Inlet"
+                    }
+                  },
+                  {
+                    "name": "Branch 2 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Demand Bypass"
+                    }
+                  },
+                  {
+                    "name": "Branch 3 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Demand Outlet"
+                    }
+                  }
+                ],
+                "object_type": "BranchList"
+              }
+            ],
+            "events": [
+              {
+                "event": "field.set",
+                "field": "Outlet Branch 2 Name",
+                "object": "DemandSplitter_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                }
+              }
+            ],
+            "outcome": {
+              "args": [
+                "DemandMixer_for_Demand Source"
+              ],
+              "message": "'DemandMixer_for_Demand Source'",
+              "outcome": "raised",
+              "type": "KeyError"
+            },
+            "splitter": [
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "DemandSplitter_for_Demand Source"
+                    }
+                  },
+                  {
+                    "name": "Inlet Branch Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Demand Inlet"
+                    }
+                  },
+                  {
+                    "name": "Outlet Branch 1 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Demand Bypass"
+                    }
+                  },
+                  {
+                    "name": "Outlet Branch 2 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                    }
+                  }
+                ],
+                "object_type": "Connector:Splitter"
+              }
+            ]
+          },
+          "method_signatures": {
+            "append_to_branchlist": "(self, idf: 'IDF') -> 'None'",
+            "append_to_mixer": "(self, idf: 'IDF') -> 'None'",
+            "append_to_spliter": "(self, idf: 'IDF') -> 'None'",
+            "count_current_branches_branchlist": "(branchlist: 'IdfObject') -> 'int'",
+            "count_current_branches_connector": "(splitter_or_mixer: 'IdfObject') -> 'int'",
+            "run": "(self, idf: 'IDF') -> 'None'"
+          },
+          "run_and_rerun": {
+            "first_events": [
+              {
+                "event": "field.set",
+                "field": "Outlet Branch 2 Name",
+                "object": "DemandSplitter_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Inlet Branch 2 Name",
+                "object": "DemandMixer_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Branch 3 Name",
+                "object": "DemandBranchList_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Branch 4 Name",
+                "object": "DemandBranchList_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "Demand Outlet"
+                }
+              }
+            ],
+            "first_return": {
+              "kind": "none"
+            },
+            "first_state": {
+              "BranchList": [
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranchList_for_Demand Source"
+                      }
+                    },
+                    {
+                      "name": "Branch 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Inlet"
+                      }
+                    },
+                    {
+                      "name": "Branch 2 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Bypass"
+                      }
+                    },
+                    {
+                      "name": "Branch 3 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    },
+                    {
+                      "name": "Branch 4 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Outlet"
+                      }
+                    }
+                  ],
+                  "object_type": "BranchList"
+                }
+              ],
+              "Connector:Mixer": [
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandMixer_for_Demand Source"
+                      }
+                    },
+                    {
+                      "name": "Outlet Branch Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Outlet"
+                      }
+                    },
+                    {
+                      "name": "Inlet Branch 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Bypass"
+                      }
+                    },
+                    {
+                      "name": "Inlet Branch 2 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    }
+                  ],
+                  "object_type": "Connector:Mixer"
+                }
+              ],
+              "Connector:Splitter": [
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandSplitter_for_Demand Source"
+                      }
+                    },
+                    {
+                      "name": "Inlet Branch Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Inlet"
+                      }
+                    },
+                    {
+                      "name": "Outlet Branch 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Bypass"
+                      }
+                    },
+                    {
+                      "name": "Outlet Branch 2 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    }
+                  ],
+                  "object_type": "Connector:Splitter"
+                }
+              ]
+            },
+            "second_events": [
+              {
+                "event": "field.set",
+                "field": "Outlet Branch 3 Name",
+                "object": "DemandSplitter_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Inlet Branch 3 Name",
+                "object": "DemandMixer_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Branch 4 Name",
+                "object": "DemandBranchList_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Branch 5 Name",
+                "object": "DemandBranchList_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "Demand Outlet"
+                }
+              }
+            ],
+            "second_return": {
+              "kind": "none"
+            },
+            "second_state": {
+              "BranchList": [
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranchList_for_Demand Source"
+                      }
+                    },
+                    {
+                      "name": "Branch 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Inlet"
+                      }
+                    },
+                    {
+                      "name": "Branch 2 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Bypass"
+                      }
+                    },
+                    {
+                      "name": "Branch 3 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    },
+                    {
+                      "name": "Branch 4 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    },
+                    {
+                      "name": "Branch 5 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Outlet"
+                      }
+                    }
+                  ],
+                  "object_type": "BranchList"
+                }
+              ],
+              "Connector:Mixer": [
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandMixer_for_Demand Source"
+                      }
+                    },
+                    {
+                      "name": "Outlet Branch Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Outlet"
+                      }
+                    },
+                    {
+                      "name": "Inlet Branch 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Bypass"
+                      }
+                    },
+                    {
+                      "name": "Inlet Branch 2 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    },
+                    {
+                      "name": "Inlet Branch 3 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    }
+                  ],
+                  "object_type": "Connector:Mixer"
+                }
+              ],
+              "Connector:Splitter": [
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandSplitter_for_Demand Source"
+                      }
+                    },
+                    {
+                      "name": "Inlet Branch Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Inlet"
+                      }
+                    },
+                    {
+                      "name": "Outlet Branch 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Bypass"
+                      }
+                    },
+                    {
+                      "name": "Outlet Branch 2 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    },
+                    {
+                      "name": "Outlet Branch 3 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    }
+                  ],
+                  "object_type": "Connector:Splitter"
+                }
+              ]
+            }
+          },
+          "standalone_methods": {
+            "events": [
+              {
+                "event": "field.set",
+                "field": "Outlet Branch 2 Name",
+                "object": "DemandSplitter_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Inlet Branch 2 Name",
+                "object": "DemandMixer_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Branch 3 Name",
+                "object": "DemandBranchList_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Branch 4 Name",
+                "object": "DemandBranchList_for_Demand Source",
+                "value": {
+                  "kind": "str",
+                  "value": "Demand Outlet"
+                }
+              }
+            ],
+            "returns": [
+              {
+                "kind": "none"
+              },
+              {
+                "kind": "none"
+              },
+              {
+                "kind": "none"
+              }
+            ],
+            "state": {
+              "BranchList": [
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranchList_for_Demand Source"
+                      }
+                    },
+                    {
+                      "name": "Branch 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Inlet"
+                      }
+                    },
+                    {
+                      "name": "Branch 2 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Bypass"
+                      }
+                    },
+                    {
+                      "name": "Branch 3 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    },
+                    {
+                      "name": "Branch 4 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Outlet"
+                      }
+                    }
+                  ],
+                  "object_type": "BranchList"
+                }
+              ],
+              "Connector:Mixer": [
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandMixer_for_Demand Source"
+                      }
+                    },
+                    {
+                      "name": "Outlet Branch Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Outlet"
+                      }
+                    },
+                    {
+                      "name": "Inlet Branch 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Bypass"
+                      }
+                    },
+                    {
+                      "name": "Inlet Branch 2 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    }
+                  ],
+                  "object_type": "Connector:Mixer"
+                }
+              ],
+              "Connector:Splitter": [
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandSplitter_for_Demand Source"
+                      }
+                    },
+                    {
+                      "name": "Inlet Branch Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Inlet"
+                      }
+                    },
+                    {
+                      "name": "Outlet Branch 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Demand Bypass"
+                      }
+                    },
+                    {
+                      "name": "Outlet Branch 2 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "DemandBranch_Demand Supply_for_Demand Zone"
+                      }
+                    }
+                  ],
+                  "object_type": "Connector:Splitter"
+                }
+              ]
+            }
+          }
+        },
+        "facts_sha256": "sha256:ad7d55e8192bef04c3f6509932e8760791f0bf8cc5bd67a81de7a1d80638ab53",
+        "outcome": "observed"
+      },
+      "subfamily": "demand-branch",
+      "target_symbols": [
+        "DemandBranchAppender",
+        "DemandBranchAppender.append_to_branchlist",
+        "DemandBranchAppender.append_to_mixer",
+        "DemandBranchAppender.append_to_spliter",
+        "DemandBranchAppender.count_current_branches_branchlist",
+        "DemandBranchAppender.count_current_branches_connector",
+        "DemandBranchAppender.run"
+      ]
+    },
+    {
+      "code": "B01",
+      "id": "dragon-hvac-appenders-controllers.equipment-list-appender",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "SupplySystemToIdfPostProcessor"
+            ],
+            "mro": [
+              "EquipmentListAppender",
+              "SupplySystemToIdfPostProcessor",
+              "ABC",
+              "object"
+            ],
+            "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+          },
+          "count_probes": {
+            "empty": {
+              "kind": "int",
+              "value": "0"
+            },
+            "first_hole_stops_scan": {
+              "kind": "int",
+              "value": "1"
+            },
+            "full_98": {
+              "kind": "int",
+              "value": "98"
+            },
+            "full_99_falls_through": {
+              "kind": "none"
+            },
+            "one": {
+              "kind": "int",
+              "value": "1"
+            }
+          },
+          "method_signatures": {
+            "count": "(equiplist: 'IdfObject') -> 'int'",
+            "run": "(self, idf: 'IDF') -> 'None'"
+          },
+          "missing_equipment_list": {
+            "args": [
+              "EquipmentList_for_Equipment Zone"
+            ],
+            "message": "'EquipmentList_for_Equipment Zone'",
+            "outcome": "raised",
+            "type": "KeyError"
+          },
+          "ninety_nine_limit": {
+            "events": [],
+            "outcome": {
+              "args": [
+                "unsupported operand type(s) for +: 'NoneType' and 'int'"
+              ],
+              "message": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "state_unchanged": true
+          },
+          "run_and_rerun": {
+            "first_events": [
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Object Type",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Stub:Supply:Equipment Supply"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Name",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Equipment Supply_for_Equipment Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Cooling Sequence",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "int",
+                  "value": "2"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Heating or No-Load Sequence",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "int",
+                  "value": "2"
+                }
+              }
+            ],
+            "first_return": {
+              "kind": "none"
+            },
+            "first_state": {
+              "fields": [
+                {
+                  "name": "Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "EquipmentList_for_Equipment Zone"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 1 Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "Existing"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Object Type",
+                  "value": {
+                    "kind": "str",
+                    "value": "Stub:Supply:Equipment Supply"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "Equipment Supply_for_Equipment Zone"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Cooling Sequence",
+                  "value": {
+                    "kind": "int",
+                    "value": "2"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Heating or No-Load Sequence",
+                  "value": {
+                    "kind": "int",
+                    "value": "2"
+                  }
+                }
+              ],
+              "object_type": "ZoneHVAC:EquipmentList"
+            },
+            "second_events": [
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 3 Object Type",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Stub:Supply:Equipment Supply"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 3 Name",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Equipment Supply_for_Equipment Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 3 Cooling Sequence",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "int",
+                  "value": "3"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 3 Heating or No-Load Sequence",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "int",
+                  "value": "3"
+                }
+              }
+            ],
+            "second_return": {
+              "kind": "none"
+            },
+            "second_state": {
+              "fields": [
+                {
+                  "name": "Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "EquipmentList_for_Equipment Zone"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 1 Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "Existing"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Object Type",
+                  "value": {
+                    "kind": "str",
+                    "value": "Stub:Supply:Equipment Supply"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "Equipment Supply_for_Equipment Zone"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Cooling Sequence",
+                  "value": {
+                    "kind": "int",
+                    "value": "2"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Heating or No-Load Sequence",
+                  "value": {
+                    "kind": "int",
+                    "value": "2"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 3 Object Type",
+                  "value": {
+                    "kind": "str",
+                    "value": "Stub:Supply:Equipment Supply"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 3 Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "Equipment Supply_for_Equipment Zone"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 3 Cooling Sequence",
+                  "value": {
+                    "kind": "int",
+                    "value": "3"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 3 Heating or No-Load Sequence",
+                  "value": {
+                    "kind": "int",
+                    "value": "3"
+                  }
+                }
+              ],
+              "object_type": "ZoneHVAC:EquipmentList"
+            }
+          },
+          "run_first_hole_overwrites_slot": {
+            "events": [
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Object Type",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Stub:Supply:Equipment Supply"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Name",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Equipment Supply_for_Equipment Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Cooling Sequence",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "int",
+                  "value": "2"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Heating or No-Load Sequence",
+                "object": "EquipmentList_for_Equipment Zone",
+                "value": {
+                  "kind": "int",
+                  "value": "2"
+                }
+              }
+            ],
+            "return": {
+              "kind": "none"
+            },
+            "state": {
+              "fields": [
+                {
+                  "name": "Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "EquipmentList_for_Equipment Zone"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 1 Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "First"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "Equipment Supply_for_Equipment Zone"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 3 Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "Third"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Object Type",
+                  "value": {
+                    "kind": "str",
+                    "value": "Stub:Supply:Equipment Supply"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Cooling Sequence",
+                  "value": {
+                    "kind": "int",
+                    "value": "2"
+                  }
+                },
+                {
+                  "name": "Zone Equipment 2 Heating or No-Load Sequence",
+                  "value": {
+                    "kind": "int",
+                    "value": "2"
+                  }
+                }
+              ],
+              "object_type": "ZoneHVAC:EquipmentList"
+            }
+          }
+        },
+        "facts_sha256": "sha256:6b292e7f7e56bb7a01ae1f5c43f16bad2bbd4f0c4592272546e5fa3e907e1f83",
+        "outcome": "observed"
+      },
+      "subfamily": "equipment-list",
+      "target_symbols": [
+        "EquipmentListAppender",
+        "EquipmentListAppender.count_current_equipments",
+        "EquipmentListAppender.run"
+      ]
+    },
+    {
+      "code": "C01",
+      "id": "dragon-hvac-appenders-controllers.sequential-load-fraction-controller",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "SupplySystemToIdfPostProcessor"
+            ],
+            "mro": [
+              "SequentialLoadFractionController",
+              "SupplySystemToIdfPostProcessor",
+              "ABC",
+              "object"
+            ],
+            "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+          },
+          "epsilon": {
+            "hex": "0x1.b7cdfd9d7bdbbp-34",
+            "kind": "float",
+            "repr": "1e-10"
+          },
+          "find_target": {
+            "found_second": 2,
+            "missing_at_first_empty": {
+              "args": [
+                "Cannot find 'Gamma' in 'EquipmentList_for_Lookup Zone'."
+              ],
+              "message": "Cannot find 'Gamma' in 'EquipmentList_for_Lookup Zone'.",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "overflow_after_99": {
+              "args": [
+                "Too many equipment entries in 'EquipmentList_for_Lookup Zone'."
+              ],
+              "message": "Too many equipment entries in 'EquipmentList_for_Lookup Zone'.",
+              "outcome": "raised",
+              "type": "ValueError"
+            }
+          },
+          "method_signatures": {
+            "find": "(equipmentlist: 'IdfObject', objname: 'str') -> 'int'",
+            "run": "(self, idf: 'IDF') -> 'None'"
+          },
+          "multi_active": {
+            "appended_schedules": [
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "heating_fraction_for_Dual_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "(changetype(availability-dual,REAL)*(1/(((constant(0)+changetype(availability-dual,REAL))+changetype(availability-heat,REAL))+1e-10)))"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.ffffffff24190p-3",
+                      "kind": "float",
+                      "repr": "0.249999999975"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "heating_fraction_for_Heat_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "(changetype(availability-heat,REAL)*(1/((((constant(0)+changetype(availability-dual,REAL))+changetype(availability-heat,REAL))-changetype(availability-dual,REAL))+1e-10)))"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.fffffffedacc0p-1",
+                      "kind": "float",
+                      "repr": "0.9999999998666667"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "cooling_fraction_for_Dual_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "(changetype(availability-dual,REAL)*(1/(((constant(0)+changetype(availability-dual,REAL))+constant(1))+1e-10)))"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.999999990cdcdp-3",
+                      "kind": "float",
+                      "repr": "0.199999999984"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "cooling_fraction_for_Cool_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "(constant(1)*(1/((((constant(0)+changetype(availability-dual,REAL))+constant(1))-changetype(availability-dual,REAL))+1e-10)))"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.ffffffff24190p-1",
+                      "kind": "float",
+                      "repr": "0.9999999999"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "heating_fraction_for_Dual_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "(changetype(availability-dual,REAL)*(1/(((constant(0)+changetype(availability-dual,REAL))+changetype(availability-heat,REAL))+1e-10)))"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.ffffffff24190p-3",
+                      "kind": "float",
+                      "repr": "0.249999999975"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "heating_fraction_for_Heat_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "(changetype(availability-heat,REAL)*(1/((((constant(0)+changetype(availability-dual,REAL))+changetype(availability-heat,REAL))-changetype(availability-dual,REAL))+1e-10)))"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.fffffffedacc0p-1",
+                      "kind": "float",
+                      "repr": "0.9999999998666667"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "cooling_fraction_for_Dual_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "(changetype(availability-dual,REAL)*(1/(((constant(0)+changetype(availability-dual,REAL))+constant(1))+1e-10)))"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.999999990cdcdp-3",
+                      "kind": "float",
+                      "repr": "0.199999999984"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "cooling_fraction_for_Cool_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "(constant(1)*(1/((((constant(0)+changetype(availability-dual,REAL))+constant(1))-changetype(availability-dual,REAL))+1e-10)))"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.ffffffff24190p-1",
+                      "kind": "float",
+                      "repr": "0.9999999999"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              }
+            ],
+            "equipment_fields_after_first": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "EquipmentList_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Dual_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 2 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Heat_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 3 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Cool_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Dual_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Dual_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 2 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 2 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "name": "Zone Equipment 3 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "name": "Zone Equipment 3 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Cool_for_Fraction Zone"
+                }
+              }
+            ],
+            "equipment_fields_final": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "EquipmentList_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Dual_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 2 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Heat_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 3 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Cool_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Dual_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Dual_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 2 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 2 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "name": "Zone Equipment 3 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "name": "Zone Equipment 3 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Cool_for_Fraction Zone"
+                }
+              }
+            ],
+            "first_append_count": 4,
+            "first_events": [
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "heating_fraction_for_Dual_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "heating_fraction_for_Heat_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "cooling_fraction_for_Dual_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "cooling_fraction_for_Cool_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Dual_for_Fraction Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Dual_for_Fraction Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Sequential Heating Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat_for_Fraction Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Sequential Cooling Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 3 Sequential Heating Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 3 Sequential Cooling Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Cool_for_Fraction Zone"
+                }
+              }
+            ],
+            "first_outcome": {
+              "outcome": "returned",
+              "value": {
+                "kind": "none"
+              }
+            },
+            "rerun_events": [
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "heating_fraction_for_Dual_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "heating_fraction_for_Heat_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "cooling_fraction_for_Dual_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "cooling_fraction_for_Cool_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Dual_for_Fraction Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Dual_for_Fraction Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Sequential Heating Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat_for_Fraction Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 2 Sequential Cooling Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 3 Sequential Heating Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 3 Sequential Cooling Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Cool_for_Fraction Zone"
+                }
+              }
+            ],
+            "rerun_outcome": {
+              "outcome": "returned",
+              "value": {
+                "kind": "none"
+              }
+            },
+            "schedule_trace": [
+              {
+                "event": "schedule.changetype",
+                "name": {
+                  "kind": "str",
+                  "value": "Availability Dual"
+                },
+                "schedule_type": "REAL",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              },
+              {
+                "event": "schedule.changetype",
+                "name": {
+                  "kind": "str",
+                  "value": "Availability Heat"
+                },
+                "schedule_type": "REAL",
+                "value": {
+                  "hex": "0x1.8000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.75"
+                }
+              },
+              {
+                "event": "schedule.from_constant",
+                "name": {
+                  "kind": "none"
+                },
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "event": "schedule.changetype",
+                "name": {
+                  "kind": "str",
+                  "value": "Availability Dual"
+                },
+                "schedule_type": "REAL",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              },
+              {
+                "event": "schedule.from_constant",
+                "name": {
+                  "kind": "none"
+                },
+                "value": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                }
+              },
+              {
+                "event": "schedule.from_constant",
+                "name": {
+                  "kind": "none"
+                },
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "(changetype(availability-dual,REAL)*(1/(((constant(0)+changetype(availability-dual,REAL))+changetype(availability-heat,REAL))+1e-10)))",
+                "name": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Dual_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.ffffffff24190p-3",
+                  "kind": "float",
+                  "repr": "0.249999999975"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "(changetype(availability-heat,REAL)*(1/((((constant(0)+changetype(availability-dual,REAL))+changetype(availability-heat,REAL))-changetype(availability-dual,REAL))+1e-10)))",
+                "name": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.fffffffedacc0p-1",
+                  "kind": "float",
+                  "repr": "0.9999999998666667"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "(changetype(availability-dual,REAL)*(1/(((constant(0)+changetype(availability-dual,REAL))+constant(1))+1e-10)))",
+                "name": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Dual_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.999999990cdcdp-3",
+                  "kind": "float",
+                  "repr": "0.199999999984"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "(constant(1)*(1/((((constant(0)+changetype(availability-dual,REAL))+constant(1))-changetype(availability-dual,REAL))+1e-10)))",
+                "name": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Cool_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.ffffffff24190p-1",
+                  "kind": "float",
+                  "repr": "0.9999999999"
+                }
+              },
+              {
+                "event": "schedule.changetype",
+                "name": {
+                  "kind": "str",
+                  "value": "Availability Dual"
+                },
+                "schedule_type": "REAL",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              },
+              {
+                "event": "schedule.changetype",
+                "name": {
+                  "kind": "str",
+                  "value": "Availability Heat"
+                },
+                "schedule_type": "REAL",
+                "value": {
+                  "hex": "0x1.8000000000000p-1",
+                  "kind": "float",
+                  "repr": "0.75"
+                }
+              },
+              {
+                "event": "schedule.from_constant",
+                "name": {
+                  "kind": "none"
+                },
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "event": "schedule.changetype",
+                "name": {
+                  "kind": "str",
+                  "value": "Availability Dual"
+                },
+                "schedule_type": "REAL",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              },
+              {
+                "event": "schedule.from_constant",
+                "name": {
+                  "kind": "none"
+                },
+                "value": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                }
+              },
+              {
+                "event": "schedule.from_constant",
+                "name": {
+                  "kind": "none"
+                },
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "(changetype(availability-dual,REAL)*(1/(((constant(0)+changetype(availability-dual,REAL))+changetype(availability-heat,REAL))+1e-10)))",
+                "name": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Dual_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.ffffffff24190p-3",
+                  "kind": "float",
+                  "repr": "0.249999999975"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "(changetype(availability-heat,REAL)*(1/((((constant(0)+changetype(availability-dual,REAL))+changetype(availability-heat,REAL))-changetype(availability-dual,REAL))+1e-10)))",
+                "name": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.fffffffedacc0p-1",
+                  "kind": "float",
+                  "repr": "0.9999999998666667"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "(changetype(availability-dual,REAL)*(1/(((constant(0)+changetype(availability-dual,REAL))+constant(1))+1e-10)))",
+                "name": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Dual_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.999999990cdcdp-3",
+                  "kind": "float",
+                  "repr": "0.199999999984"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "(constant(1)*(1/((((constant(0)+changetype(availability-dual,REAL))+constant(1))-changetype(availability-dual,REAL))+1e-10)))",
+                "name": {
+                  "kind": "str",
+                  "value": "cooling_fraction_for_Cool_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.ffffffff24190p-1",
+                  "kind": "float",
+                  "repr": "0.9999999999"
+                }
+              }
+            ]
+          },
+          "one_active": {
+            "appended_schedules": [
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "heating_fraction_for_Heat Only_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "constant(1)"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "heating_fraction_for_Heat Only_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "constant(1)"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              }
+            ],
+            "equipment_fields_after_first": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "EquipmentList_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Heat Only_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat Only_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              }
+            ],
+            "equipment_fields_final": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "EquipmentList_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Heat Only_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat Only_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              }
+            ],
+            "first_append_count": 1,
+            "first_events": [
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "heating_fraction_for_Heat Only_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat Only_for_Fraction Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              }
+            ],
+            "first_outcome": {
+              "outcome": "returned",
+              "value": {
+                "kind": "none"
+              }
+            },
+            "rerun_events": [
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "heating_fraction_for_Heat Only_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat Only_for_Fraction Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              }
+            ],
+            "rerun_outcome": {
+              "outcome": "returned",
+              "value": {
+                "kind": "none"
+              }
+            },
+            "schedule_trace": [
+              {
+                "event": "schedule.changetype",
+                "name": {
+                  "kind": "str",
+                  "value": "Ignored Availability"
+                },
+                "schedule_type": "REAL",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              },
+              {
+                "event": "schedule.from_constant",
+                "name": {
+                  "kind": "none"
+                },
+                "value": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "constant(1)",
+                "name": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat Only_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                }
+              },
+              {
+                "event": "schedule.changetype",
+                "name": {
+                  "kind": "str",
+                  "value": "Ignored Availability"
+                },
+                "schedule_type": "REAL",
+                "value": {
+                  "hex": "0x1.0000000000000p-2",
+                  "kind": "float",
+                  "repr": "0.25"
+                }
+              },
+              {
+                "event": "schedule.from_constant",
+                "name": {
+                  "kind": "none"
+                },
+                "value": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "constant(1)",
+                "name": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Heat Only_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                }
+              }
+            ]
+          },
+          "partial_failure_after_schedule_append": {
+            "appended_schedules": [
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "heating_fraction_for_Present_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "(constant(1)*(1/(((constant(0)+constant(1))+constant(1))+1e-10)))"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.ffffffff920c8p-2",
+                      "kind": "float",
+                      "repr": "0.499999999975"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "heating_fraction_for_Missing_for_Fraction Zone"
+                    }
+                  },
+                  {
+                    "name": "Observed Expression",
+                    "value": {
+                      "kind": "str",
+                      "value": "(constant(1)*(1/((((constant(0)+constant(1))+constant(1))-constant(1))+1e-10)))"
+                    }
+                  },
+                  {
+                    "name": "Observed Value",
+                    "value": {
+                      "hex": "0x1.ffffffff24190p-1",
+                      "kind": "float",
+                      "repr": "0.9999999999"
+                    }
+                  }
+                ],
+                "object_type": "Schedule:Compact"
+              }
+            ],
+            "equipment_fields_after_first": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "EquipmentList_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Present_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Present_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              }
+            ],
+            "equipment_fields_final": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "EquipmentList_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Present_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Present_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              }
+            ],
+            "first_append_count": 2,
+            "first_events": [
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "heating_fraction_for_Present_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "idf.append",
+                "names": [
+                  {
+                    "kind": "str",
+                    "value": "heating_fraction_for_Missing_for_Fraction Zone"
+                  }
+                ]
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Present_for_Fraction Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              }
+            ],
+            "first_outcome": {
+              "args": [
+                "Cannot find 'Missing_for_Fraction Zone' in 'EquipmentList_for_Fraction Zone'."
+              ],
+              "message": "Cannot find 'Missing_for_Fraction Zone' in 'EquipmentList_for_Fraction Zone'.",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "rerun_events": [],
+            "rerun_outcome": {
+              "outcome": "not-run"
+            },
+            "schedule_trace": [
+              {
+                "event": "schedule.from_constant",
+                "name": {
+                  "kind": "none"
+                },
+                "value": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                }
+              },
+              {
+                "event": "schedule.from_constant",
+                "name": {
+                  "kind": "none"
+                },
+                "value": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                }
+              },
+              {
+                "event": "schedule.from_constant",
+                "name": {
+                  "kind": "none"
+                },
+                "value": {
+                  "hex": "0x0.0p+0",
+                  "kind": "float",
+                  "repr": "0.0"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "(constant(1)*(1/(((constant(0)+constant(1))+constant(1))+1e-10)))",
+                "name": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Present_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.ffffffff920c8p-2",
+                  "kind": "float",
+                  "repr": "0.499999999975"
+                }
+              },
+              {
+                "event": "schedule.to_idf_object",
+                "expression": "(constant(1)*(1/((((constant(0)+constant(1))+constant(1))-constant(1))+1e-10)))",
+                "name": {
+                  "kind": "str",
+                  "value": "heating_fraction_for_Missing_for_Fraction Zone"
+                },
+                "value": {
+                  "hex": "0x1.ffffffff24190p-1",
+                  "kind": "float",
+                  "repr": "0.9999999999"
+                }
+              }
+            ]
+          },
+          "zero_active": {
+            "appended_schedules": [],
+            "equipment_fields_after_first": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "EquipmentList_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Idle_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              }
+            ],
+            "equipment_fields_final": [
+              {
+                "name": "Name",
+                "value": {
+                  "kind": "str",
+                  "value": "EquipmentList_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Name",
+                "value": {
+                  "kind": "str",
+                  "value": "Idle_for_Fraction Zone"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "name": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              }
+            ],
+            "first_append_count": 0,
+            "first_events": [
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              }
+            ],
+            "first_outcome": {
+              "outcome": "returned",
+              "value": {
+                "kind": "none"
+              }
+            },
+            "rerun_events": [
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Heating Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Equipment 1 Sequential Cooling Fraction Schedule Name",
+                "object": "EquipmentList_for_Fraction Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "ALLOFF"
+                }
+              }
+            ],
+            "rerun_outcome": {
+              "outcome": "returned",
+              "value": {
+                "kind": "none"
+              }
+            },
+            "schedule_trace": []
+          }
+        },
+        "facts_sha256": "sha256:d72589acfc903f580d3d4fb0f32942cc3e7178b5409e79e829b65c9e72b8f16c",
+        "outcome": "observed"
+      },
+      "subfamily": "sequential-controller",
+      "target_symbols": [
+        "SequentialLoadFractionController",
+        "SequentialLoadFractionController.find_target_equipment_number",
+        "SequentialLoadFractionController.run"
+      ]
+    },
+    {
+      "code": "D01",
+      "id": "dragon-hvac-appenders-controllers.supply-system-postprocessor",
+      "python": {
+        "facts": {
+          "abstract_run_body": {
+            "outcome": "returned",
+            "value": {
+              "kind": "none"
+            }
+          },
+          "class_shape": {
+            "abstract": true,
+            "abstract_methods": [
+              "run"
+            ],
+            "bases": [
+              "ABC"
+            ],
+            "mro": [
+              "SupplySystemToIdfPostProcessor",
+              "ABC",
+              "object"
+            ],
+            "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+          },
+          "constructor_final_marker": true,
+          "constructor_signature": "(self, supply: 'SupplySystem', zone: 'Zone') -> 'None'",
+          "direct_instantiation": {
+            "args": [
+              "Can't instantiate abstract class SupplySystemToIdfPostProcessor without an implementation for abstract method 'run'"
+            ],
+            "message": "Can't instantiate abstract class SupplySystemToIdfPostProcessor without an implementation for abstract method 'run'",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "probe": {
+            "class_shape": {
+              "abstract": false,
+              "abstract_methods": [],
+              "bases": [
+                "SupplySystemToIdfPostProcessor"
+              ],
+              "mro": [
+                "Probe",
+                "SupplySystemToIdfPostProcessor",
+                "ABC",
+                "object"
+              ],
+              "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+            },
+            "run_argument_identity_preserved": true,
+            "run_return": {
+              "kind": "none"
+            },
+            "source_dynamic_after_supply_mutation": true,
+            "source_identity_before_mutation": true,
+            "supply_alias_preserved": true,
+            "zone_alias_preserved": true
+          },
+          "run_signature": "(self, idf: 'IDF') -> 'None'",
+          "source_signature": "(self) -> 'SourceSystem'"
+        },
+        "facts_sha256": "sha256:200eee5adb57d9dbaac68ccff8b4cf34319881d280bbbd5ac50baee628947a90",
+        "outcome": "observed"
+      },
+      "subfamily": "postprocessor-base",
+      "target_symbols": [
+        "SupplySystemToIdfPostProcessor",
+        "SupplySystemToIdfPostProcessor.__init__",
+        "SupplySystemToIdfPostProcessor.run",
+        "SupplySystemToIdfPostProcessor.source"
+      ]
+    },
+    {
+      "code": "E01",
+      "id": "dragon-hvac-appenders-controllers.zone-air-node-appender",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "SupplySystemToIdfPostProcessor"
+            ],
+            "mro": [
+              "ZoneAirNodeAppender",
+              "SupplySystemToIdfPostProcessor",
+              "ABC",
+              "object"
+            ],
+            "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+          },
+          "count_probes": {
+            "two": 2,
+            "zero_none_ignored": 0
+          },
+          "existing_lists": {
+            "connection_unchanged": {
+              "fields": [
+                {
+                  "name": "Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "Existing Connection"
+                  }
+                },
+                {
+                  "name": "Zone Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "Air Zone"
+                  }
+                },
+                {
+                  "name": "Zone Air Inlet Node or NodeList Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "Authored Inlet"
+                  }
+                },
+                {
+                  "name": "Zone Air Exhaust Node or NodeList Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "Authored Exhaust"
+                  }
+                }
+              ],
+              "object_type": "ZoneHVAC:EquipmentConnections"
+            },
+            "events": [
+              {
+                "event": "field.set",
+                "field": "Node 2 Name",
+                "object": "AirInletNodeList_for_Air Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Air Supply_for_Air Zone Air OutletNode"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Node 2 Name",
+                "object": "AirExhaustNodeList_for_Air Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Air Supply_for_Air Zone Air InletNode"
+                }
+              }
+            ],
+            "nodelists": [
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "AirInletNodeList_for_Air Zone"
+                    }
+                  },
+                  {
+                    "name": "Node 1 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Existing Inlet"
+                    }
+                  },
+                  {
+                    "name": "Node 2 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Air Supply_for_Air Zone Air OutletNode"
+                    }
+                  }
+                ],
+                "object_type": "NodeList"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "AirExhaustNodeList_for_Air Zone"
+                    }
+                  },
+                  {
+                    "name": "Node 1 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Existing Exhaust"
+                    }
+                  },
+                  {
+                    "name": "Node 2 Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Air Supply_for_Air Zone Air InletNode"
+                    }
+                  }
+                ],
+                "object_type": "NodeList"
+              }
+            ],
+            "return": {
+              "kind": "none"
+            }
+          },
+          "method_signatures": {
+            "count": "(nodelist: 'IdfObject') -> 'int'",
+            "ensure": "(idf: 'IDF', zone: 'Zone') -> 'None'",
+            "run": "(self, idf: 'IDF') -> 'None'"
+          },
+          "missing_connection_failure_prefix": {
+            "events": [
+              {
+                "event": "collection.append",
+                "name": {
+                  "kind": "str",
+                  "value": "AirInletNodeList_for_Air Zone"
+                },
+                "object_type": "NodeList"
+              }
+            ],
+            "nodelists": [
+              {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "AirInletNodeList_for_Air Zone"
+                    }
+                  }
+                ],
+                "object_type": "NodeList"
+              }
+            ],
+            "outcome": {
+              "args": [
+                "list index out of range"
+              ],
+              "message": "list index out of range",
+              "outcome": "raised",
+              "type": "IndexError"
+            }
+          },
+          "missing_lists_run_and_rerun": {
+            "first_events": [
+              {
+                "event": "collection.append",
+                "name": {
+                  "kind": "str",
+                  "value": "AirInletNodeList_for_Air Zone"
+                },
+                "object_type": "NodeList"
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Air Inlet Node or NodeList Name",
+                "object": "Air Zone Connection",
+                "value": {
+                  "kind": "str",
+                  "value": "AirInletNodeList_for_Air Zone"
+                }
+              },
+              {
+                "event": "collection.append",
+                "name": {
+                  "kind": "str",
+                  "value": "AirExhaustNodeList_for_Air Zone"
+                },
+                "object_type": "NodeList"
+              },
+              {
+                "event": "field.set",
+                "field": "Zone Air Exhaust Node or NodeList Name",
+                "object": "Air Zone Connection",
+                "value": {
+                  "kind": "str",
+                  "value": "AirExhaustNodeList_for_Air Zone"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Node 1 Name",
+                "object": "AirInletNodeList_for_Air Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Air Supply_for_Air Zone Air OutletNode"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Node 1 Name",
+                "object": "AirExhaustNodeList_for_Air Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Air Supply_for_Air Zone Air InletNode"
+                }
+              }
+            ],
+            "first_return": {
+              "kind": "none"
+            },
+            "first_state": {
+              "connection": {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Air Zone Connection"
+                    }
+                  },
+                  {
+                    "name": "Zone Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Air Zone"
+                    }
+                  },
+                  {
+                    "name": "Zone Air Inlet Node or NodeList Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "AirInletNodeList_for_Air Zone"
+                    }
+                  },
+                  {
+                    "name": "Zone Air Exhaust Node or NodeList Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "AirExhaustNodeList_for_Air Zone"
+                    }
+                  }
+                ],
+                "object_type": "ZoneHVAC:EquipmentConnections"
+              },
+              "nodelists": [
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "AirInletNodeList_for_Air Zone"
+                      }
+                    },
+                    {
+                      "name": "Node 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Air Supply_for_Air Zone Air OutletNode"
+                      }
+                    }
+                  ],
+                  "object_type": "NodeList"
+                },
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "AirExhaustNodeList_for_Air Zone"
+                      }
+                    },
+                    {
+                      "name": "Node 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Air Supply_for_Air Zone Air InletNode"
+                      }
+                    }
+                  ],
+                  "object_type": "NodeList"
+                }
+              ]
+            },
+            "second_events": [
+              {
+                "event": "field.set",
+                "field": "Node 2 Name",
+                "object": "AirInletNodeList_for_Air Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Air Supply_for_Air Zone Air OutletNode"
+                }
+              },
+              {
+                "event": "field.set",
+                "field": "Node 2 Name",
+                "object": "AirExhaustNodeList_for_Air Zone",
+                "value": {
+                  "kind": "str",
+                  "value": "Air Supply_for_Air Zone Air InletNode"
+                }
+              }
+            ],
+            "second_return": {
+              "kind": "none"
+            },
+            "second_state": {
+              "connection": {
+                "fields": [
+                  {
+                    "name": "Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Air Zone Connection"
+                    }
+                  },
+                  {
+                    "name": "Zone Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "Air Zone"
+                    }
+                  },
+                  {
+                    "name": "Zone Air Inlet Node or NodeList Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "AirInletNodeList_for_Air Zone"
+                    }
+                  },
+                  {
+                    "name": "Zone Air Exhaust Node or NodeList Name",
+                    "value": {
+                      "kind": "str",
+                      "value": "AirExhaustNodeList_for_Air Zone"
+                    }
+                  }
+                ],
+                "object_type": "ZoneHVAC:EquipmentConnections"
+              },
+              "nodelists": [
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "AirInletNodeList_for_Air Zone"
+                      }
+                    },
+                    {
+                      "name": "Node 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Air Supply_for_Air Zone Air OutletNode"
+                      }
+                    },
+                    {
+                      "name": "Node 2 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Air Supply_for_Air Zone Air OutletNode"
+                      }
+                    }
+                  ],
+                  "object_type": "NodeList"
+                },
+                {
+                  "fields": [
+                    {
+                      "name": "Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "AirExhaustNodeList_for_Air Zone"
+                      }
+                    },
+                    {
+                      "name": "Node 1 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Air Supply_for_Air Zone Air InletNode"
+                      }
+                    },
+                    {
+                      "name": "Node 2 Name",
+                      "value": {
+                        "kind": "str",
+                        "value": "Air Supply_for_Air Zone Air InletNode"
+                      }
+                    }
+                  ],
+                  "object_type": "NodeList"
+                }
+              ]
+            }
+          }
+        },
+        "facts_sha256": "sha256:54ee0a2d373e153cf6a7ca02a361841b34e273999ba3cf0be2e97560b3496337",
+        "outcome": "observed"
+      },
+      "subfamily": "zone-air-node",
+      "target_symbols": [
+        "ZoneAirNodeAppender",
+        "ZoneAirNodeAppender.count_current_nodes",
+        "ZoneAirNodeAppender.ensure_nodelist_existence",
+        "ZoneAirNodeAppender.run"
+      ]
+    },
+    {
+      "code": "F01",
+      "id": "dragon-hvac-appenders-controllers.zone-terminal-unit-appender",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "SupplySystemToIdfPostProcessor"
+            ],
+            "mro": [
+              "ZoneTerminalUnitAppender",
+              "SupplySystemToIdfPostProcessor",
+              "ABC",
+              "object"
+            ],
+            "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+          },
+          "count_probes": {
+            "existing_one": 1,
+            "three_after_rerun": 3,
+            "zero_none_ignored": 0
+          },
+          "method_signatures": {
+            "count": "(nodelist: 'IdfObject') -> 'int'",
+            "run": "(self, idf: 'IDF') -> 'None'"
+          },
+          "missing_list": {
+            "events": [],
+            "outcome": {
+              "args": [
+                "list index out of range"
+              ],
+              "message": "list index out of range",
+              "outcome": "raised",
+              "type": "IndexError"
+            }
+          },
+          "run_and_rerun": {
+            "first_events": [
+              {
+                "event": "field.set",
+                "field": "Zone Terminal Unit Name 2",
+                "object": "TerminalUnitList_for_Terminal Source",
+                "value": {
+                  "kind": "str",
+                  "value": "Terminal Supply_for_Terminal Zone"
+                }
+              }
+            ],
+            "first_return": {
+              "kind": "none"
+            },
+            "first_state": {
+              "fields": [
+                {
+                  "name": "Zone Terminal Unit List Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "TerminalUnitList_for_Terminal Source"
+                  }
+                },
+                {
+                  "name": "Zone Terminal Unit Name 1",
+                  "value": {
+                    "kind": "str",
+                    "value": "Existing Terminal"
+                  }
+                },
+                {
+                  "name": "Zone Terminal Unit Name 2",
+                  "value": {
+                    "kind": "str",
+                    "value": "Terminal Supply_for_Terminal Zone"
+                  }
+                }
+              ],
+              "object_type": "ZoneTerminalUnitList"
+            },
+            "second_events": [
+              {
+                "event": "field.set",
+                "field": "Zone Terminal Unit Name 3",
+                "object": "TerminalUnitList_for_Terminal Source",
+                "value": {
+                  "kind": "str",
+                  "value": "Terminal Supply_for_Terminal Zone"
+                }
+              }
+            ],
+            "second_return": {
+              "kind": "none"
+            },
+            "second_state": {
+              "fields": [
+                {
+                  "name": "Zone Terminal Unit List Name",
+                  "value": {
+                    "kind": "str",
+                    "value": "TerminalUnitList_for_Terminal Source"
+                  }
+                },
+                {
+                  "name": "Zone Terminal Unit Name 1",
+                  "value": {
+                    "kind": "str",
+                    "value": "Existing Terminal"
+                  }
+                },
+                {
+                  "name": "Zone Terminal Unit Name 2",
+                  "value": {
+                    "kind": "str",
+                    "value": "Terminal Supply_for_Terminal Zone"
+                  }
+                },
+                {
+                  "name": "Zone Terminal Unit Name 3",
+                  "value": {
+                    "kind": "str",
+                    "value": "Terminal Supply_for_Terminal Zone"
+                  }
+                }
+              ],
+              "object_type": "ZoneTerminalUnitList"
+            }
+          }
+        },
+        "facts_sha256": "sha256:a77be5dbc43bf4b51ba33fd30573a8ec478281857ec5593fb78c68324436dddb",
+        "outcome": "observed"
+      },
+      "subfamily": "zone-terminal-unit",
+      "target_symbols": [
+        "ZoneTerminalUnitAppender",
+        "ZoneTerminalUnitAppender.count_current_units",
+        "ZoneTerminalUnitAppender.run"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:2282854918bee238667f1307ecbdf21fa79ff7ceb305810622e6827afec7dd3d",
+  "consumer_contract": {
+    "adaptations": {
+      "DemandBranchAppender": "public-aggregate-hvac-postprocessing-686",
+      "DemandBranchAppender.append_to_branchlist": "public-aggregate-hvac-postprocessing-687",
+      "DemandBranchAppender.append_to_mixer": "public-aggregate-hvac-postprocessing-688",
+      "DemandBranchAppender.append_to_spliter": "public-aggregate-hvac-postprocessing-689",
+      "DemandBranchAppender.count_current_branches_branchlist": "public-aggregate-hvac-postprocessing-690",
+      "DemandBranchAppender.count_current_branches_connector": "public-aggregate-hvac-postprocessing-691",
+      "DemandBranchAppender.run": "public-aggregate-hvac-postprocessing-692",
+      "EquipmentListAppender": "public-aggregate-hvac-postprocessing-717",
+      "EquipmentListAppender.count_current_equipments": "public-aggregate-hvac-postprocessing-718",
+      "EquipmentListAppender.run": "public-aggregate-hvac-postprocessing-719",
+      "SequentialLoadFractionController": "public-aggregate-hvac-postprocessing-774",
+      "SequentialLoadFractionController.find_target_equipment_number": "public-aggregate-hvac-postprocessing-775",
+      "SequentialLoadFractionController.run": "public-aggregate-hvac-postprocessing-776",
+      "SupplySystemToIdfPostProcessor": "public-aggregate-hvac-postprocessing-804",
+      "SupplySystemToIdfPostProcessor.__init__": "public-aggregate-hvac-postprocessing-805",
+      "SupplySystemToIdfPostProcessor.run": "public-aggregate-hvac-postprocessing-806",
+      "SupplySystemToIdfPostProcessor.source": "public-aggregate-hvac-postprocessing-807",
+      "ZoneAirNodeAppender": "public-aggregate-hvac-postprocessing-808",
+      "ZoneAirNodeAppender.count_current_nodes": "public-aggregate-hvac-postprocessing-809",
+      "ZoneAirNodeAppender.ensure_nodelist_existence": "public-aggregate-hvac-postprocessing-810",
+      "ZoneAirNodeAppender.run": "public-aggregate-hvac-postprocessing-811",
+      "ZoneTerminalUnitAppender": "public-aggregate-hvac-postprocessing-812",
+      "ZoneTerminalUnitAppender.count_current_units": "public-aggregate-hvac-postprocessing-813",
+      "ZoneTerminalUnitAppender.run": "public-aggregate-hvac-postprocessing-814"
+    },
+    "assertion_ids": {
+      "DemandBranchAppender": "dragon-hvac-appenders-controllers-686-cdbb9fb8",
+      "DemandBranchAppender.append_to_branchlist": "dragon-hvac-appenders-controllers-687-72c53b16",
+      "DemandBranchAppender.append_to_mixer": "dragon-hvac-appenders-controllers-688-bf8d6bd1",
+      "DemandBranchAppender.append_to_spliter": "dragon-hvac-appenders-controllers-689-29bdd382",
+      "DemandBranchAppender.count_current_branches_branchlist": "dragon-hvac-appenders-controllers-690-2fb35691",
+      "DemandBranchAppender.count_current_branches_connector": "dragon-hvac-appenders-controllers-691-4531204e",
+      "DemandBranchAppender.run": "dragon-hvac-appenders-controllers-692-3d176f2c",
+      "EquipmentListAppender": "dragon-hvac-appenders-controllers-717-268e7fb5",
+      "EquipmentListAppender.count_current_equipments": "dragon-hvac-appenders-controllers-718-ef88aa10",
+      "EquipmentListAppender.run": "dragon-hvac-appenders-controllers-719-9fbbb80e",
+      "SequentialLoadFractionController": "dragon-hvac-appenders-controllers-774-35b327ea",
+      "SequentialLoadFractionController.find_target_equipment_number": "dragon-hvac-appenders-controllers-775-5a959bd0",
+      "SequentialLoadFractionController.run": "dragon-hvac-appenders-controllers-776-efc3dc2d",
+      "SupplySystemToIdfPostProcessor": "dragon-hvac-appenders-controllers-804-9b4492ed",
+      "SupplySystemToIdfPostProcessor.__init__": "dragon-hvac-appenders-controllers-805-c63e7515",
+      "SupplySystemToIdfPostProcessor.run": "dragon-hvac-appenders-controllers-806-582cf3ef",
+      "SupplySystemToIdfPostProcessor.source": "dragon-hvac-appenders-controllers-807-ce40cc13",
+      "ZoneAirNodeAppender": "dragon-hvac-appenders-controllers-808-bff1883c",
+      "ZoneAirNodeAppender.count_current_nodes": "dragon-hvac-appenders-controllers-809-fc0fbad2",
+      "ZoneAirNodeAppender.ensure_nodelist_existence": "dragon-hvac-appenders-controllers-810-e3fabdb5",
+      "ZoneAirNodeAppender.run": "dragon-hvac-appenders-controllers-811-7cd1f8e9",
+      "ZoneTerminalUnitAppender": "dragon-hvac-appenders-controllers-812-4ae86427",
+      "ZoneTerminalUnitAppender.count_current_units": "dragon-hvac-appenders-controllers-813-fc0fbad2",
+      "ZoneTerminalUnitAppender.run": "dragon-hvac-appenders-controllers-814-46d42798"
+    },
+    "case_count": 6,
+    "case_ids": [
+      "dragon-hvac-appenders-controllers.demand-branch-appender",
+      "dragon-hvac-appenders-controllers.equipment-list-appender",
+      "dragon-hvac-appenders-controllers.sequential-load-fraction-controller",
+      "dragon-hvac-appenders-controllers.supply-system-postprocessor",
+      "dragon-hvac-appenders-controllers.zone-air-node-appender",
+      "dragon-hvac-appenders-controllers.zone-terminal-unit-appender"
+    ],
+    "classification_counts": {
+      "equivalent": 0,
+      "exception": 24
+    },
+    "classifications": {
+      "DemandBranchAppender": "exception",
+      "DemandBranchAppender.append_to_branchlist": "exception",
+      "DemandBranchAppender.append_to_mixer": "exception",
+      "DemandBranchAppender.append_to_spliter": "exception",
+      "DemandBranchAppender.count_current_branches_branchlist": "exception",
+      "DemandBranchAppender.count_current_branches_connector": "exception",
+      "DemandBranchAppender.run": "exception",
+      "EquipmentListAppender": "exception",
+      "EquipmentListAppender.count_current_equipments": "exception",
+      "EquipmentListAppender.run": "exception",
+      "SequentialLoadFractionController": "exception",
+      "SequentialLoadFractionController.find_target_equipment_number": "exception",
+      "SequentialLoadFractionController.run": "exception",
+      "SupplySystemToIdfPostProcessor": "exception",
+      "SupplySystemToIdfPostProcessor.__init__": "exception",
+      "SupplySystemToIdfPostProcessor.run": "exception",
+      "SupplySystemToIdfPostProcessor.source": "exception",
+      "ZoneAirNodeAppender": "exception",
+      "ZoneAirNodeAppender.count_current_nodes": "exception",
+      "ZoneAirNodeAppender.ensure_nodelist_existence": "exception",
+      "ZoneAirNodeAppender.run": "exception",
+      "ZoneTerminalUnitAppender": "exception",
+      "ZoneTerminalUnitAppender.count_current_units": "exception",
+      "ZoneTerminalUnitAppender.run": "exception"
+    },
+    "closure": {
+      "deferred_count": 149,
+      "deferred_indices": [
+        641,
+        642,
+        643,
+        644,
+        645,
+        646,
+        647,
+        648,
+        649,
+        650,
+        651,
+        652,
+        653,
+        654,
+        655,
+        656,
+        657,
+        658,
+        659,
+        660,
+        661,
+        662,
+        663,
+        664,
+        665,
+        666,
+        667,
+        668,
+        669,
+        670,
+        671,
+        672,
+        673,
+        674,
+        675,
+        676,
+        677,
+        678,
+        679,
+        680,
+        681,
+        682,
+        683,
+        684,
+        685,
+        693,
+        694,
+        695,
+        696,
+        697,
+        698,
+        699,
+        700,
+        701,
+        702,
+        703,
+        704,
+        705,
+        706,
+        707,
+        708,
+        709,
+        710,
+        711,
+        712,
+        713,
+        714,
+        715,
+        716,
+        720,
+        721,
+        722,
+        723,
+        724,
+        725,
+        726,
+        727,
+        728,
+        729,
+        730,
+        731,
+        732,
+        733,
+        734,
+        735,
+        736,
+        737,
+        738,
+        739,
+        740,
+        741,
+        742,
+        743,
+        744,
+        745,
+        746,
+        747,
+        748,
+        749,
+        750,
+        751,
+        752,
+        753,
+        754,
+        755,
+        756,
+        757,
+        758,
+        759,
+        760,
+        761,
+        762,
+        763,
+        764,
+        765,
+        766,
+        767,
+        768,
+        769,
+        770,
+        771,
+        772,
+        773,
+        777,
+        778,
+        779,
+        780,
+        781,
+        782,
+        783,
+        784,
+        785,
+        786,
+        787,
+        788,
+        789,
+        790,
+        791,
+        792,
+        793,
+        794,
+        795,
+        797,
+        798,
+        799,
+        800,
+        801,
+        802,
+        803
+      ],
+      "deferred_receipts_sha256": "sha256:2172f41f390f28cc737f78b6e476876c04fda668a64901778bcaf2199393b62e",
+      "exact_disjoint_source_partition": true,
+      "exact_one_case_target_partition": true,
+      "full_hvac_source_partition": true,
+      "full_source_receipts_sha256": "sha256:f5db7f1a79890387192db20619e055691700f48bfbe368efeffbe37b695593e7",
+      "resolved_support_count": 1,
+      "resolved_support_indices": [
+        796
+      ],
+      "resolved_support_receipts_sha256": "sha256:88586a379f20f459fe1500bdc3ec4843aa161e11ac2e4426eeed81754f59c052",
+      "resolved_support_symbols": [
+        "SupplyGroup.to_idf_object"
+      ],
+      "source_declaration_count": 174,
+      "target_count": 24,
+      "target_indices": [
+        686,
+        687,
+        688,
+        689,
+        690,
+        691,
+        692,
+        717,
+        718,
+        719,
+        774,
+        775,
+        776,
+        804,
+        805,
+        806,
+        807,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814
+      ],
+      "target_support_overlap": false,
+      "target_symbols": [
+        "DemandBranchAppender",
+        "DemandBranchAppender.append_to_branchlist",
+        "DemandBranchAppender.append_to_mixer",
+        "DemandBranchAppender.append_to_spliter",
+        "DemandBranchAppender.count_current_branches_branchlist",
+        "DemandBranchAppender.count_current_branches_connector",
+        "DemandBranchAppender.run",
+        "EquipmentListAppender",
+        "EquipmentListAppender.count_current_equipments",
+        "EquipmentListAppender.run",
+        "SequentialLoadFractionController",
+        "SequentialLoadFractionController.find_target_equipment_number",
+        "SequentialLoadFractionController.run",
+        "SupplySystemToIdfPostProcessor",
+        "SupplySystemToIdfPostProcessor.__init__",
+        "SupplySystemToIdfPostProcessor.run",
+        "SupplySystemToIdfPostProcessor.source",
+        "ZoneAirNodeAppender",
+        "ZoneAirNodeAppender.count_current_nodes",
+        "ZoneAirNodeAppender.ensure_nodelist_existence",
+        "ZoneAirNodeAppender.run",
+        "ZoneTerminalUnitAppender",
+        "ZoneTerminalUnitAppender.count_current_units",
+        "ZoneTerminalUnitAppender.run"
+      ]
+    },
+    "coverage_by_symbol": {
+      "DemandBranchAppender": "dragon-hvac-appenders-controllers.demand-branch-appender",
+      "DemandBranchAppender.append_to_branchlist": "dragon-hvac-appenders-controllers.demand-branch-appender",
+      "DemandBranchAppender.append_to_mixer": "dragon-hvac-appenders-controllers.demand-branch-appender",
+      "DemandBranchAppender.append_to_spliter": "dragon-hvac-appenders-controllers.demand-branch-appender",
+      "DemandBranchAppender.count_current_branches_branchlist": "dragon-hvac-appenders-controllers.demand-branch-appender",
+      "DemandBranchAppender.count_current_branches_connector": "dragon-hvac-appenders-controllers.demand-branch-appender",
+      "DemandBranchAppender.run": "dragon-hvac-appenders-controllers.demand-branch-appender",
+      "EquipmentListAppender": "dragon-hvac-appenders-controllers.equipment-list-appender",
+      "EquipmentListAppender.count_current_equipments": "dragon-hvac-appenders-controllers.equipment-list-appender",
+      "EquipmentListAppender.run": "dragon-hvac-appenders-controllers.equipment-list-appender",
+      "SequentialLoadFractionController": "dragon-hvac-appenders-controllers.sequential-load-fraction-controller",
+      "SequentialLoadFractionController.find_target_equipment_number": "dragon-hvac-appenders-controllers.sequential-load-fraction-controller",
+      "SequentialLoadFractionController.run": "dragon-hvac-appenders-controllers.sequential-load-fraction-controller",
+      "SupplySystemToIdfPostProcessor": "dragon-hvac-appenders-controllers.supply-system-postprocessor",
+      "SupplySystemToIdfPostProcessor.__init__": "dragon-hvac-appenders-controllers.supply-system-postprocessor",
+      "SupplySystemToIdfPostProcessor.run": "dragon-hvac-appenders-controllers.supply-system-postprocessor",
+      "SupplySystemToIdfPostProcessor.source": "dragon-hvac-appenders-controllers.supply-system-postprocessor",
+      "ZoneAirNodeAppender": "dragon-hvac-appenders-controllers.zone-air-node-appender",
+      "ZoneAirNodeAppender.count_current_nodes": "dragon-hvac-appenders-controllers.zone-air-node-appender",
+      "ZoneAirNodeAppender.ensure_nodelist_existence": "dragon-hvac-appenders-controllers.zone-air-node-appender",
+      "ZoneAirNodeAppender.run": "dragon-hvac-appenders-controllers.zone-air-node-appender",
+      "ZoneTerminalUnitAppender": "dragon-hvac-appenders-controllers.zone-terminal-unit-appender",
+      "ZoneTerminalUnitAppender.count_current_units": "dragon-hvac-appenders-controllers.zone-terminal-unit-appender",
+      "ZoneTerminalUnitAppender.run": "dragon-hvac-appenders-controllers.zone-terminal-unit-appender"
+    },
+    "evidence_contract": {
+      "active_energyplus_process_claim": false,
+      "exact_cpython_behavior_oracle": true,
+      "idf_objects_are_bounded_instrumented_stubs": true,
+      "internal_native_route_claim": false,
+      "native_runtime_executed_by_python_oracle": false,
+      "path_independent_relocated_import": true,
+      "resolved_index_796_reused_from_support": true,
+      "target_coverage_complete": true
+    },
+    "expectations": {
+      "DemandBranchAppender": {
+        "adaptation": "public-aggregate-hvac-postprocessing-686",
+        "assertion_id": "dragon-hvac-appenders-controllers-686-cdbb9fb8",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "DemandBranchAppender.append_to_branchlist": {
+        "adaptation": "public-aggregate-hvac-postprocessing-687",
+        "assertion_id": "dragon-hvac-appenders-controllers-687-72c53b16",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "DemandBranchAppender.append_to_mixer": {
+        "adaptation": "public-aggregate-hvac-postprocessing-688",
+        "assertion_id": "dragon-hvac-appenders-controllers-688-bf8d6bd1",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "DemandBranchAppender.append_to_spliter": {
+        "adaptation": "public-aggregate-hvac-postprocessing-689",
+        "assertion_id": "dragon-hvac-appenders-controllers-689-29bdd382",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "DemandBranchAppender.count_current_branches_branchlist": {
+        "adaptation": "public-aggregate-hvac-postprocessing-690",
+        "assertion_id": "dragon-hvac-appenders-controllers-690-2fb35691",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "DemandBranchAppender.count_current_branches_connector": {
+        "adaptation": "public-aggregate-hvac-postprocessing-691",
+        "assertion_id": "dragon-hvac-appenders-controllers-691-4531204e",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "DemandBranchAppender.run": {
+        "adaptation": "public-aggregate-hvac-postprocessing-692",
+        "assertion_id": "dragon-hvac-appenders-controllers-692-3d176f2c",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "EquipmentListAppender": {
+        "adaptation": "public-aggregate-hvac-postprocessing-717",
+        "assertion_id": "dragon-hvac-appenders-controllers-717-268e7fb5",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "EquipmentListAppender.count_current_equipments": {
+        "adaptation": "public-aggregate-hvac-postprocessing-718",
+        "assertion_id": "dragon-hvac-appenders-controllers-718-ef88aa10",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "EquipmentListAppender.run": {
+        "adaptation": "public-aggregate-hvac-postprocessing-719",
+        "assertion_id": "dragon-hvac-appenders-controllers-719-9fbbb80e",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "SequentialLoadFractionController": {
+        "adaptation": "public-aggregate-hvac-postprocessing-774",
+        "assertion_id": "dragon-hvac-appenders-controllers-774-35b327ea",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "SequentialLoadFractionController.find_target_equipment_number": {
+        "adaptation": "public-aggregate-hvac-postprocessing-775",
+        "assertion_id": "dragon-hvac-appenders-controllers-775-5a959bd0",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "SequentialLoadFractionController.run": {
+        "adaptation": "public-aggregate-hvac-postprocessing-776",
+        "assertion_id": "dragon-hvac-appenders-controllers-776-efc3dc2d",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "SupplySystemToIdfPostProcessor": {
+        "adaptation": "public-aggregate-hvac-postprocessing-804",
+        "assertion_id": "dragon-hvac-appenders-controllers-804-9b4492ed",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "SupplySystemToIdfPostProcessor.__init__": {
+        "adaptation": "public-aggregate-hvac-postprocessing-805",
+        "assertion_id": "dragon-hvac-appenders-controllers-805-c63e7515",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "SupplySystemToIdfPostProcessor.run": {
+        "adaptation": "public-aggregate-hvac-postprocessing-806",
+        "assertion_id": "dragon-hvac-appenders-controllers-806-582cf3ef",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "SupplySystemToIdfPostProcessor.source": {
+        "adaptation": "public-aggregate-hvac-postprocessing-807",
+        "assertion_id": "dragon-hvac-appenders-controllers-807-ce40cc13",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "ZoneAirNodeAppender": {
+        "adaptation": "public-aggregate-hvac-postprocessing-808",
+        "assertion_id": "dragon-hvac-appenders-controllers-808-bff1883c",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "ZoneAirNodeAppender.count_current_nodes": {
+        "adaptation": "public-aggregate-hvac-postprocessing-809",
+        "assertion_id": "dragon-hvac-appenders-controllers-809-fc0fbad2",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "ZoneAirNodeAppender.ensure_nodelist_existence": {
+        "adaptation": "public-aggregate-hvac-postprocessing-810",
+        "assertion_id": "dragon-hvac-appenders-controllers-810-e3fabdb5",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "ZoneAirNodeAppender.run": {
+        "adaptation": "public-aggregate-hvac-postprocessing-811",
+        "assertion_id": "dragon-hvac-appenders-controllers-811-7cd1f8e9",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "ZoneTerminalUnitAppender": {
+        "adaptation": "public-aggregate-hvac-postprocessing-812",
+        "assertion_id": "dragon-hvac-appenders-controllers-812-4ae86427",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "ZoneTerminalUnitAppender.count_current_units": {
+        "adaptation": "public-aggregate-hvac-postprocessing-813",
+        "assertion_id": "dragon-hvac-appenders-controllers-813-fc0fbad2",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      },
+      "ZoneTerminalUnitAppender.run": {
+        "adaptation": "public-aggregate-hvac-postprocessing-814",
+        "assertion_id": "dragon-hvac-appenders-controllers-814-46d42798",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+      }
+    },
+    "native_routes": {
+      "DemandBranchAppender": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "DemandBranchAppender.append_to_branchlist": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "DemandBranchAppender.append_to_mixer": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "DemandBranchAppender.append_to_spliter": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "DemandBranchAppender.count_current_branches_branchlist": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "DemandBranchAppender.count_current_branches_connector": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "DemandBranchAppender.run": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "EquipmentListAppender": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "EquipmentListAppender.count_current_equipments": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "EquipmentListAppender.run": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "SequentialLoadFractionController": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "SequentialLoadFractionController.find_target_equipment_number": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "SequentialLoadFractionController.run": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "SupplySystemToIdfPostProcessor": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "SupplySystemToIdfPostProcessor.__init__": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "SupplySystemToIdfPostProcessor.run": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "SupplySystemToIdfPostProcessor.source": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "ZoneAirNodeAppender": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "ZoneAirNodeAppender.count_current_nodes": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "ZoneAirNodeAppender.ensure_nodelist_existence": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "ZoneAirNodeAppender.run": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "ZoneTerminalUnitAppender": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "ZoneTerminalUnitAppender.count_current_units": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+      "ZoneTerminalUnitAppender.run": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument"
+    },
+    "runtime_signatures": {
+      "DemandBranchAppender": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "DemandBranchAppender",
+        "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+      },
+      "DemandBranchAppender.append_to_branchlist": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "DemandBranchAppender.append_to_branchlist",
+        "signature": "(self, idf: 'IDF') -> 'None'"
+      },
+      "DemandBranchAppender.append_to_mixer": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "DemandBranchAppender.append_to_mixer",
+        "signature": "(self, idf: 'IDF') -> 'None'"
+      },
+      "DemandBranchAppender.append_to_spliter": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "DemandBranchAppender.append_to_spliter",
+        "signature": "(self, idf: 'IDF') -> 'None'"
+      },
+      "DemandBranchAppender.count_current_branches_branchlist": {
+        "abstract": false,
+        "kind": "staticmethod",
+        "qualname": "DemandBranchAppender.count_current_branches_branchlist",
+        "signature": "(branchlist: 'IdfObject') -> 'int'"
+      },
+      "DemandBranchAppender.count_current_branches_connector": {
+        "abstract": false,
+        "kind": "staticmethod",
+        "qualname": "DemandBranchAppender.count_current_branches_connector",
+        "signature": "(splitter_or_mixer: 'IdfObject') -> 'int'"
+      },
+      "DemandBranchAppender.run": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "DemandBranchAppender.run",
+        "signature": "(self, idf: 'IDF') -> 'None'"
+      },
+      "EquipmentListAppender": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "EquipmentListAppender",
+        "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+      },
+      "EquipmentListAppender.count_current_equipments": {
+        "abstract": false,
+        "kind": "staticmethod",
+        "qualname": "EquipmentListAppender.count_current_equipments",
+        "signature": "(equiplist: 'IdfObject') -> 'int'"
+      },
+      "EquipmentListAppender.run": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "EquipmentListAppender.run",
+        "signature": "(self, idf: 'IDF') -> 'None'"
+      },
+      "SequentialLoadFractionController": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "SequentialLoadFractionController",
+        "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+      },
+      "SequentialLoadFractionController.find_target_equipment_number": {
+        "abstract": false,
+        "kind": "staticmethod",
+        "qualname": "SequentialLoadFractionController.find_target_equipment_number",
+        "signature": "(equipmentlist: 'IdfObject', objname: 'str') -> 'int'"
+      },
+      "SequentialLoadFractionController.run": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "SequentialLoadFractionController.run",
+        "signature": "(self, idf: 'IDF') -> 'None'"
+      },
+      "SupplySystemToIdfPostProcessor": {
+        "abstract": true,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "SupplySystemToIdfPostProcessor",
+        "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+      },
+      "SupplySystemToIdfPostProcessor.__init__": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "SupplySystemToIdfPostProcessor.__init__",
+        "signature": "(self, supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+      },
+      "SupplySystemToIdfPostProcessor.run": {
+        "abstract": true,
+        "kind": "function",
+        "qualname": "SupplySystemToIdfPostProcessor.run",
+        "signature": "(self, idf: 'IDF') -> 'None'"
+      },
+      "SupplySystemToIdfPostProcessor.source": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "SupplySystemToIdfPostProcessor.source",
+        "signature": "(self) -> 'SourceSystem'"
+      },
+      "ZoneAirNodeAppender": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "ZoneAirNodeAppender",
+        "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+      },
+      "ZoneAirNodeAppender.count_current_nodes": {
+        "abstract": false,
+        "kind": "staticmethod",
+        "qualname": "ZoneAirNodeAppender.count_current_nodes",
+        "signature": "(nodelist: 'IdfObject') -> 'int'"
+      },
+      "ZoneAirNodeAppender.ensure_nodelist_existence": {
+        "abstract": false,
+        "kind": "staticmethod",
+        "qualname": "ZoneAirNodeAppender.ensure_nodelist_existence",
+        "signature": "(idf: 'IDF', zone: 'Zone') -> 'None'"
+      },
+      "ZoneAirNodeAppender.run": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "ZoneAirNodeAppender.run",
+        "signature": "(self, idf: 'IDF') -> 'None'"
+      },
+      "ZoneTerminalUnitAppender": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.dragon.hvac",
+        "qualname": "ZoneTerminalUnitAppender",
+        "signature": "(supply: 'SupplySystem', zone: 'Zone') -> 'None'"
+      },
+      "ZoneTerminalUnitAppender.count_current_units": {
+        "abstract": false,
+        "kind": "staticmethod",
+        "qualname": "ZoneTerminalUnitAppender.count_current_units",
+        "signature": "(nodelist: 'IdfObject') -> 'int'"
+      },
+      "ZoneTerminalUnitAppender.run": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "ZoneTerminalUnitAppender.run",
+        "signature": "(self, idf: 'IDF') -> 'None'"
+      }
+    }
+  },
+  "fact_sha256": {
+    "dragon-hvac-appenders-controllers.demand-branch-appender": "sha256:ad7d55e8192bef04c3f6509932e8760791f0bf8cc5bd67a81de7a1d80638ab53",
+    "dragon-hvac-appenders-controllers.equipment-list-appender": "sha256:6b292e7f7e56bb7a01ae1f5c43f16bad2bbd4f0c4592272546e5fa3e907e1f83",
+    "dragon-hvac-appenders-controllers.sequential-load-fraction-controller": "sha256:d72589acfc903f580d3d4fb0f32942cc3e7178b5409e79e829b65c9e72b8f16c",
+    "dragon-hvac-appenders-controllers.supply-system-postprocessor": "sha256:200eee5adb57d9dbaac68ccff8b4cf34319881d280bbbd5ac50baee628947a90",
+    "dragon-hvac-appenders-controllers.zone-air-node-appender": "sha256:54ee0a2d373e153cf6a7ca02a361841b34e273999ba3cf0be2e97560b3496337",
+    "dragon-hvac-appenders-controllers.zone-terminal-unit-appender": "sha256:a77be5dbc43bf4b51ba33fd30573a8ec478281857ec5593fb78c68324436dddb"
+  },
+  "native_review": {
+    "classification_sha256": "sha256:b2abc7395c99e45184fc69f8cccc4f8215a44dc5d683fd7297ba4da43cfcf60e",
+    "internal_generate_route_claimed": false,
+    "internal_postprocessor_type_route_claimed": false,
+    "public_production_route": "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument",
+    "public_production_routes_only": true,
+    "python_executes_native_runtime": false,
+    "routes_sha256": "sha256:f9407672b46a4049a13ee55e7f418e5b74eb13ac5f3aea70a67b9c430406aef3",
+    "source_receipts": [
+      {
+        "bytes": 7582,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"
+      },
+      {
+        "bytes": 18267,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SupplySystems.cs",
+        "sha256": "sha256:4de030455a8a1b8db0ca4eca7745c6501930c984f9d1e156e17cb0b752d845cf"
+      },
+      {
+        "bytes": 22015,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3"
+      },
+      {
+        "bytes": 50764,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905"
+      },
+      {
+        "bytes": 13182,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"
+      }
+    ],
+    "source_receipts_sha256": "sha256:b82b2435acc2802eb55647a47650b135b82f1198b8d504dc1a2b710ab977cfa4"
+  },
+  "resolved_support_receipts": [
+    {
+      "body_hash": "sha256:8660a470290bde21a0cc246e107e2362b5698153e7585ea05a1a69367b1342fa",
+      "inventory_index": 796,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:1dd75b2e8cc87cb78c35a6df6c2423c532b8ea9e29f24b53d113cdffdd42d2ec",
+      "symbol": "SupplyGroup.to_idf_object",
+      "symbol_hash": "sha256:3f9c508c5b0d784d27bc327dfe65c84bd7d17ffc144615b852c37b59cbe51a41"
+    }
+  ],
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "dependencies_sha256": "sha256:f69d29212b5ce6432b0c02f356d036275ea01463a8e1974ac6f89b78854fefba",
+    "implementation": "cpython",
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-hvac-appenders-controllers.v1",
+  "support": {
+    "case_count": 9,
+    "cases_sha256": "sha256:29eacb2d29f528353302d1afd8e3ef646d7d35886237bb4a3fa494039a4ec36f",
+    "fixture": {
+      "bytes": 215698,
+      "path": "fixtures/reference/python-0.7.0/dragon-hvac-supply-core-oracle.json",
+      "sha256": "sha256:dcf355329a083f9fac82434e18fc3b847a44bc134eb7f593f497c0aeae4c6b9f"
+    },
+    "generator": {
+      "bytes": 65898,
+      "path": "tools/python-reference/generate_dragon_hvac_supply_core_oracle.py",
+      "sha256": "sha256:3f1bcbf28df62c3426f8d343dab3f123b9c730bcdd234e3c570aaff21b87cd97"
+    },
+    "resolved_receipts": [
+      {
+        "body_hash": "sha256:8660a470290bde21a0cc246e107e2362b5698153e7585ea05a1a69367b1342fa",
+        "inventory_index": 796,
+        "kind": "function",
+        "path": "src/idragon/dragon/hvac.py",
+        "signature_hash": "sha256:1dd75b2e8cc87cb78c35a6df6c2423c532b8ea9e29f24b53d113cdffdd42d2ec",
+        "symbol": "SupplyGroup.to_idf_object",
+        "symbol_hash": "sha256:3f9c508c5b0d784d27bc327dfe65c84bd7d17ffc144615b852c37b59cbe51a41"
+      }
+    ],
+    "resolved_receipts_sha256": "sha256:88586a379f20f459fe1500bdc3ec4843aa161e11ac2e4426eeed81754f59c052",
+    "role": "immutable-index-796-supply-group-conversion-support-only",
+    "schema": "goniegonie.python-reference.dragon-hvac-supply-core.v1",
+    "target_promoted": false
+  },
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2712299dbd136840987f61fe75a6109fcaa0d549ae40551ba12b9199dfee0dfe",
+      "symbol": "DemandBranchAppender",
+      "symbol_hash": "sha256:cdbb9fb813c5f881612be9e30cd352d75ef4fc6a96147f71c4ae45861c580a5c"
+    },
+    {
+      "body_hash": "sha256:72162e4733ac8b7623c81dfc865680fadac320ec3350c9de35689592e68cff6d",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "DemandBranchAppender.append_to_branchlist",
+      "symbol_hash": "sha256:72c53b16d16f58ba8c517aa34fd494dc87785aaf6b30f76c9f0f64fd9d292990"
+    },
+    {
+      "body_hash": "sha256:056d2f93b2fa5ac2e0f74cf6ef78f6fe7f28887abc7c43b4ecc03bcc867622ce",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "DemandBranchAppender.append_to_mixer",
+      "symbol_hash": "sha256:bf8d6bd141adb7bd3badb080765547123ad1a22464d89240750c3c66b5de2806"
+    },
+    {
+      "body_hash": "sha256:77441f23c891ac940cbd9061c0c52c9328f10add142f0cdc37c99b4e56358c85",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "DemandBranchAppender.append_to_spliter",
+      "symbol_hash": "sha256:29bdd382c4d5b2f21939a2395dc791ce3ee21903f0a2c0db8b58334ad90ae501"
+    },
+    {
+      "body_hash": "sha256:e14c34e179fc9cf9bafb4bf4eae489a2961d67c85cba05914df3d0411adedcc7",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:70c2c19152f8bad807d0695fefe3e39c7060b9ba0a19296d8f8bfe19623313c8",
+      "symbol": "DemandBranchAppender.count_current_branches_branchlist",
+      "symbol_hash": "sha256:2fb356913b47383bea1c194d3a5809d939e4100199dfdd8d6684f8944a2ff22d"
+    },
+    {
+      "body_hash": "sha256:a2c2ff842923c182a015d68b9a66b34bb7f75ad66fbd12a8cb45312598d1c079",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:645a419439f6f235675d6dc27ef325ab34944a5653240950628d240369c1c65b",
+      "symbol": "DemandBranchAppender.count_current_branches_connector",
+      "symbol_hash": "sha256:4531204ed44673efc4828037c45c8dc6234cc91bd4f04dc1de473be2c99b0c55"
+    },
+    {
+      "body_hash": "sha256:903b81a9f2bd48abdbb012a4b3242ef54403189ec98be464db204c283febfed5",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "DemandBranchAppender.run",
+      "symbol_hash": "sha256:3d176f2ca99d74e31ee8b0c3e8effa6553327480db87260dc794dc0d8cfde33e"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:0dfe56d0d72aa89a6dcd61cd0b438bada8dbfc09ff2b68be34f80242826a71d1",
+      "symbol": "EquipmentListAppender",
+      "symbol_hash": "sha256:268e7fb5a1453489ae6ec23facd2b3766674779c8bf2d4300f1970fd2ff3db79"
+    },
+    {
+      "body_hash": "sha256:06829ddf40b5aebaf5c6286353c57ef1d0ece97ad8c581f61aed6066dfc1f745",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:92e41d397d05843586592a367a535c207896dfd7428939c9fd5a95f494d83fcd",
+      "symbol": "EquipmentListAppender.count_current_equipments",
+      "symbol_hash": "sha256:ef88aa10062a97a020f25e8550040154d13080bf60989dadae25fdc9833ddb21"
+    },
+    {
+      "body_hash": "sha256:871f5b656a5458e410cd63b77dfa3f3445e0773c0f5491d6e5fa735a6668829f",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "EquipmentListAppender.run",
+      "symbol_hash": "sha256:9fbbb80eb23fdb62c9da0da36936230ef78de8eb2f1814fb2663372892cb0a1f"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:bed8ba1a9d5f410dd428f3b52a7f6b9e00857cf3eeae78ac529a76b2f58b6e8f",
+      "symbol": "SequentialLoadFractionController",
+      "symbol_hash": "sha256:35b327ea68293db8e0f2830f83396e2de06f40196120d1693d6f2c964e6abced"
+    },
+    {
+      "body_hash": "sha256:dfd9df908fcae346b9e794ab314530909117afaecaff1f818c7b571bb62ea187",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:d05024d1f57d208a9625e64b97f53c8ef0df2e2126ae9d901edfc7d329a39436",
+      "symbol": "SequentialLoadFractionController.find_target_equipment_number",
+      "symbol_hash": "sha256:5a959bd0ab84c571f0ef2a3c7bb84ed4d49322752e17a33a39db8b0fa472fb75"
+    },
+    {
+      "body_hash": "sha256:8629312f9a44a3f46d2587302b74194ed02aef49c97ffa4a591c95449a54ad5f",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "SequentialLoadFractionController.run",
+      "symbol_hash": "sha256:efc3dc2d2373986328ef6a81fd419b9145c067c8cd18d36d3b060a974cfb0fe9"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:7f9875cdaa2c873b263c1f470c14bea79e16b935f351541ede7d1a6d04282f2c",
+      "symbol": "SupplySystemToIdfPostProcessor",
+      "symbol_hash": "sha256:9b4492ed688d7beab83704f7dcce0560fea6cfe33ba8b044fe009be250445ed3"
+    },
+    {
+      "body_hash": "sha256:ace793b5efa6d1570f59d873fb3531e0ad13131b93474922fd19a0060f23fe68",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:9721a58ac183c5df074c693b6e8f51407a8e752c8c2630ffb0c049be15980467",
+      "symbol": "SupplySystemToIdfPostProcessor.__init__",
+      "symbol_hash": "sha256:c63e7515154905c4132cbb5ff86a27635bf3ca984e0c7748912a05bf04d16e2a"
+    },
+    {
+      "body_hash": "sha256:d534464a3d86dfeb1f92e18bf2296fb90a71ce3810ab72675ff520fac00f4ce1",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:0ac504f46414b19e7235188f12a2b97400a5d093d57833ecd61e548e9e5691dc",
+      "symbol": "SupplySystemToIdfPostProcessor.run",
+      "symbol_hash": "sha256:582cf3ef7c7552e3ea67ec22b70765e587eb5cfeab3c01682c588daf47bbed2c"
+    },
+    {
+      "body_hash": "sha256:3be3d29640092cc467524557cf1e7fb9f07635a62d991f6244c8ee0de1bafed6",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:5c1be7dec5ce07db86c088e6c778a56a0716119a42b385281aeb9ae13f9800cf",
+      "symbol": "SupplySystemToIdfPostProcessor.source",
+      "symbol_hash": "sha256:ce40cc1385a0fcca3b2abaf36b154852aebb21db3b95d69b692c6ded990809a3"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:44ee2918b35236e367b1bbdd71259fa3d4d42ba786748a6549c04031d3eb40dd",
+      "symbol": "ZoneAirNodeAppender",
+      "symbol_hash": "sha256:bff1883c812160a7b15704f26c165de22c212f7e2c86a5707b24d7b1f53c98c3"
+    },
+    {
+      "body_hash": "sha256:ea60bedc54f3999ee7e5583b3f6b83cc271891411f8fe1f3a0317bd00904180c",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2230c1c9c080c31024c114e611fefde314c12581454dbf232c0fddd999ea182b",
+      "symbol": "ZoneAirNodeAppender.count_current_nodes",
+      "symbol_hash": "sha256:fc0fbad24db77297df3ec35658bbff52503e53521172cda4c5659b1a5ba61395"
+    },
+    {
+      "body_hash": "sha256:c7219f2be07278dbf4ea799e1f26c39d4cbba51bd4f26b1eadf8762c23822b03",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:44ec876cc17495bae71d5068fd0a0a4b9af696dd81d4a44abba9534030533d55",
+      "symbol": "ZoneAirNodeAppender.ensure_nodelist_existence",
+      "symbol_hash": "sha256:e3fabdb5fc73caf314398e1ac5792a03346b56c8eb8f301b4293eeac16e166f3"
+    },
+    {
+      "body_hash": "sha256:ef68a17255706605780136d84c6337f6f3b10d97db7b8cd084a6d3c70337e569",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "ZoneAirNodeAppender.run",
+      "symbol_hash": "sha256:7cd1f8e90346e58cf43b9bee0ebc660158fc04b9ec09896317cdf239f9ed5d87"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:c54d53c286f070bfccbc4ff14ef67da0885c3bf20e9c50b22e402a73151cf2b6",
+      "symbol": "ZoneTerminalUnitAppender",
+      "symbol_hash": "sha256:4ae8642769a58a270ea00d02bb69019941a9a0fbf63c719aa5a20f2ea9279830"
+    },
+    {
+      "body_hash": "sha256:ea60bedc54f3999ee7e5583b3f6b83cc271891411f8fe1f3a0317bd00904180c",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2230c1c9c080c31024c114e611fefde314c12581454dbf232c0fddd999ea182b",
+      "symbol": "ZoneTerminalUnitAppender.count_current_units",
+      "symbol_hash": "sha256:fc0fbad24db77297df3ec35658bbff52503e53521172cda4c5659b1a5ba61395"
+    },
+    {
+      "body_hash": "sha256:57d1f97576711b136b23d25c0fea95fa09e695608bae9170dcad0643cb3ec15c",
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "ZoneTerminalUnitAppender.run",
+      "symbol_hash": "sha256:46d42798013a898988c7e73338a1997b78b5030605563f6fae57cd7228909295"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 686,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2712299dbd136840987f61fe75a6109fcaa0d549ae40551ba12b9199dfee0dfe",
+      "symbol": "DemandBranchAppender",
+      "symbol_hash": "sha256:cdbb9fb813c5f881612be9e30cd352d75ef4fc6a96147f71c4ae45861c580a5c"
+    },
+    {
+      "body_hash": "sha256:72162e4733ac8b7623c81dfc865680fadac320ec3350c9de35689592e68cff6d",
+      "inventory_index": 687,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "DemandBranchAppender.append_to_branchlist",
+      "symbol_hash": "sha256:72c53b16d16f58ba8c517aa34fd494dc87785aaf6b30f76c9f0f64fd9d292990"
+    },
+    {
+      "body_hash": "sha256:056d2f93b2fa5ac2e0f74cf6ef78f6fe7f28887abc7c43b4ecc03bcc867622ce",
+      "inventory_index": 688,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "DemandBranchAppender.append_to_mixer",
+      "symbol_hash": "sha256:bf8d6bd141adb7bd3badb080765547123ad1a22464d89240750c3c66b5de2806"
+    },
+    {
+      "body_hash": "sha256:77441f23c891ac940cbd9061c0c52c9328f10add142f0cdc37c99b4e56358c85",
+      "inventory_index": 689,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "DemandBranchAppender.append_to_spliter",
+      "symbol_hash": "sha256:29bdd382c4d5b2f21939a2395dc791ce3ee21903f0a2c0db8b58334ad90ae501"
+    },
+    {
+      "body_hash": "sha256:e14c34e179fc9cf9bafb4bf4eae489a2961d67c85cba05914df3d0411adedcc7",
+      "inventory_index": 690,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:70c2c19152f8bad807d0695fefe3e39c7060b9ba0a19296d8f8bfe19623313c8",
+      "symbol": "DemandBranchAppender.count_current_branches_branchlist",
+      "symbol_hash": "sha256:2fb356913b47383bea1c194d3a5809d939e4100199dfdd8d6684f8944a2ff22d"
+    },
+    {
+      "body_hash": "sha256:a2c2ff842923c182a015d68b9a66b34bb7f75ad66fbd12a8cb45312598d1c079",
+      "inventory_index": 691,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:645a419439f6f235675d6dc27ef325ab34944a5653240950628d240369c1c65b",
+      "symbol": "DemandBranchAppender.count_current_branches_connector",
+      "symbol_hash": "sha256:4531204ed44673efc4828037c45c8dc6234cc91bd4f04dc1de473be2c99b0c55"
+    },
+    {
+      "body_hash": "sha256:903b81a9f2bd48abdbb012a4b3242ef54403189ec98be464db204c283febfed5",
+      "inventory_index": 692,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "DemandBranchAppender.run",
+      "symbol_hash": "sha256:3d176f2ca99d74e31ee8b0c3e8effa6553327480db87260dc794dc0d8cfde33e"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 717,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:0dfe56d0d72aa89a6dcd61cd0b438bada8dbfc09ff2b68be34f80242826a71d1",
+      "symbol": "EquipmentListAppender",
+      "symbol_hash": "sha256:268e7fb5a1453489ae6ec23facd2b3766674779c8bf2d4300f1970fd2ff3db79"
+    },
+    {
+      "body_hash": "sha256:06829ddf40b5aebaf5c6286353c57ef1d0ece97ad8c581f61aed6066dfc1f745",
+      "inventory_index": 718,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:92e41d397d05843586592a367a535c207896dfd7428939c9fd5a95f494d83fcd",
+      "symbol": "EquipmentListAppender.count_current_equipments",
+      "symbol_hash": "sha256:ef88aa10062a97a020f25e8550040154d13080bf60989dadae25fdc9833ddb21"
+    },
+    {
+      "body_hash": "sha256:871f5b656a5458e410cd63b77dfa3f3445e0773c0f5491d6e5fa735a6668829f",
+      "inventory_index": 719,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "EquipmentListAppender.run",
+      "symbol_hash": "sha256:9fbbb80eb23fdb62c9da0da36936230ef78de8eb2f1814fb2663372892cb0a1f"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 774,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:bed8ba1a9d5f410dd428f3b52a7f6b9e00857cf3eeae78ac529a76b2f58b6e8f",
+      "symbol": "SequentialLoadFractionController",
+      "symbol_hash": "sha256:35b327ea68293db8e0f2830f83396e2de06f40196120d1693d6f2c964e6abced"
+    },
+    {
+      "body_hash": "sha256:dfd9df908fcae346b9e794ab314530909117afaecaff1f818c7b571bb62ea187",
+      "inventory_index": 775,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:d05024d1f57d208a9625e64b97f53c8ef0df2e2126ae9d901edfc7d329a39436",
+      "symbol": "SequentialLoadFractionController.find_target_equipment_number",
+      "symbol_hash": "sha256:5a959bd0ab84c571f0ef2a3c7bb84ed4d49322752e17a33a39db8b0fa472fb75"
+    },
+    {
+      "body_hash": "sha256:8629312f9a44a3f46d2587302b74194ed02aef49c97ffa4a591c95449a54ad5f",
+      "inventory_index": 776,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "SequentialLoadFractionController.run",
+      "symbol_hash": "sha256:efc3dc2d2373986328ef6a81fd419b9145c067c8cd18d36d3b060a974cfb0fe9"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 804,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:7f9875cdaa2c873b263c1f470c14bea79e16b935f351541ede7d1a6d04282f2c",
+      "symbol": "SupplySystemToIdfPostProcessor",
+      "symbol_hash": "sha256:9b4492ed688d7beab83704f7dcce0560fea6cfe33ba8b044fe009be250445ed3"
+    },
+    {
+      "body_hash": "sha256:ace793b5efa6d1570f59d873fb3531e0ad13131b93474922fd19a0060f23fe68",
+      "inventory_index": 805,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:9721a58ac183c5df074c693b6e8f51407a8e752c8c2630ffb0c049be15980467",
+      "symbol": "SupplySystemToIdfPostProcessor.__init__",
+      "symbol_hash": "sha256:c63e7515154905c4132cbb5ff86a27635bf3ca984e0c7748912a05bf04d16e2a"
+    },
+    {
+      "body_hash": "sha256:d534464a3d86dfeb1f92e18bf2296fb90a71ce3810ab72675ff520fac00f4ce1",
+      "inventory_index": 806,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:0ac504f46414b19e7235188f12a2b97400a5d093d57833ecd61e548e9e5691dc",
+      "symbol": "SupplySystemToIdfPostProcessor.run",
+      "symbol_hash": "sha256:582cf3ef7c7552e3ea67ec22b70765e587eb5cfeab3c01682c588daf47bbed2c"
+    },
+    {
+      "body_hash": "sha256:3be3d29640092cc467524557cf1e7fb9f07635a62d991f6244c8ee0de1bafed6",
+      "inventory_index": 807,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:5c1be7dec5ce07db86c088e6c778a56a0716119a42b385281aeb9ae13f9800cf",
+      "symbol": "SupplySystemToIdfPostProcessor.source",
+      "symbol_hash": "sha256:ce40cc1385a0fcca3b2abaf36b154852aebb21db3b95d69b692c6ded990809a3"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 808,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:44ee2918b35236e367b1bbdd71259fa3d4d42ba786748a6549c04031d3eb40dd",
+      "symbol": "ZoneAirNodeAppender",
+      "symbol_hash": "sha256:bff1883c812160a7b15704f26c165de22c212f7e2c86a5707b24d7b1f53c98c3"
+    },
+    {
+      "body_hash": "sha256:ea60bedc54f3999ee7e5583b3f6b83cc271891411f8fe1f3a0317bd00904180c",
+      "inventory_index": 809,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2230c1c9c080c31024c114e611fefde314c12581454dbf232c0fddd999ea182b",
+      "symbol": "ZoneAirNodeAppender.count_current_nodes",
+      "symbol_hash": "sha256:fc0fbad24db77297df3ec35658bbff52503e53521172cda4c5659b1a5ba61395"
+    },
+    {
+      "body_hash": "sha256:c7219f2be07278dbf4ea799e1f26c39d4cbba51bd4f26b1eadf8762c23822b03",
+      "inventory_index": 810,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:44ec876cc17495bae71d5068fd0a0a4b9af696dd81d4a44abba9534030533d55",
+      "symbol": "ZoneAirNodeAppender.ensure_nodelist_existence",
+      "symbol_hash": "sha256:e3fabdb5fc73caf314398e1ac5792a03346b56c8eb8f301b4293eeac16e166f3"
+    },
+    {
+      "body_hash": "sha256:ef68a17255706605780136d84c6337f6f3b10d97db7b8cd084a6d3c70337e569",
+      "inventory_index": 811,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "ZoneAirNodeAppender.run",
+      "symbol_hash": "sha256:7cd1f8e90346e58cf43b9bee0ebc660158fc04b9ec09896317cdf239f9ed5d87"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 812,
+      "kind": "class",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:c54d53c286f070bfccbc4ff14ef67da0885c3bf20e9c50b22e402a73151cf2b6",
+      "symbol": "ZoneTerminalUnitAppender",
+      "symbol_hash": "sha256:4ae8642769a58a270ea00d02bb69019941a9a0fbf63c719aa5a20f2ea9279830"
+    },
+    {
+      "body_hash": "sha256:ea60bedc54f3999ee7e5583b3f6b83cc271891411f8fe1f3a0317bd00904180c",
+      "inventory_index": 813,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:2230c1c9c080c31024c114e611fefde314c12581454dbf232c0fddd999ea182b",
+      "symbol": "ZoneTerminalUnitAppender.count_current_units",
+      "symbol_hash": "sha256:fc0fbad24db77297df3ec35658bbff52503e53521172cda4c5659b1a5ba61395"
+    },
+    {
+      "body_hash": "sha256:57d1f97576711b136b23d25c0fea95fa09e695608bae9170dcad0643cb3ec15c",
+      "inventory_index": 814,
+      "kind": "function",
+      "path": "src/idragon/dragon/hvac.py",
+      "signature_hash": "sha256:969967d048403821baf775140ba70a6e0e27cc6fc8a49170353886740b943ca6",
+      "symbol": "ZoneTerminalUnitAppender.run",
+      "symbol_hash": "sha256:46d42798013a898988c7e73338a1997b78b5030605563f6fae57cd7228909295"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "deferred_receipts_sha256": "sha256:2172f41f390f28cc737f78b6e476876c04fda668a64901778bcaf2199393b62e",
+    "full_source_receipts_sha256": "sha256:f5db7f1a79890387192db20619e055691700f48bfbe368efeffbe37b695593e7",
+    "inventory": {
+      "bytes": 518070,
+      "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+      "file_sha256": "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    },
+    "isolated_import": {
+      "loaded_local_modules": [
+        {
+          "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+          "module": "idragon",
+          "path": "src/idragon/__init__.py",
+          "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+        },
+        {
+          "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+          "module": "idragon.common",
+          "path": "src/idragon/common.py",
+          "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+        },
+        {
+          "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+          "module": "idragon.constants",
+          "path": "src/idragon/constants.py",
+          "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+        },
+        {
+          "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+          "module": "idragon.dragon",
+          "path": "src/idragon/dragon/__init__.py",
+          "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+        },
+        {
+          "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+          "module": "idragon.dragon.construction",
+          "path": "src/idragon/dragon/construction.py",
+          "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+        },
+        {
+          "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+          "module": "idragon.dragon.hvac",
+          "path": "src/idragon/dragon/hvac.py",
+          "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+        },
+        {
+          "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+          "module": "idragon.dragon.model",
+          "path": "src/idragon/dragon/model.py",
+          "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+        },
+        {
+          "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+          "module": "idragon.dragon.profile",
+          "path": "src/idragon/dragon/profile.py",
+          "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+        },
+        {
+          "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+          "module": "idragon.dragon.shape",
+          "path": "src/idragon/dragon/shape.py",
+          "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+        },
+        {
+          "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+          "module": "idragon.imugi",
+          "path": "src/idragon/imugi.py",
+          "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+        },
+        {
+          "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+          "module": "idragon.launcher",
+          "path": "src/idragon/launcher.py",
+          "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+        },
+        {
+          "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+          "module": "idragon.utils",
+          "path": "src/idragon/utils.py",
+          "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+        }
+      ],
+      "loaded_local_modules_sha256": "sha256:93cfad21e009eac906a4443998ad214eec82e2136ada5b7cea7888ababf30143",
+      "relocated_observations_sha256": "sha256:87cf389f96bf8041e9dca0b22291a465aff5715e209d190a175b03a70cbf7d65",
+      "relocated_source_copy": "two-byte-identical-repository-temp-copies",
+      "source_location_count": 2
+    },
+    "resolved_support_receipts_sha256": "sha256:88586a379f20f459fe1500bdc3ec4843aa161e11ac2e4426eeed81754f59c052",
+    "source": {
+      "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+      "bytes": 137833,
+      "path": "src/idragon/dragon/hvac.py",
+      "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+    },
+    "target_receipts_sha256": "sha256:5228c06e02e371e4da5106bb10ba5e2159bd38b452ecdb2be459245c318f2495"
+  }
+}

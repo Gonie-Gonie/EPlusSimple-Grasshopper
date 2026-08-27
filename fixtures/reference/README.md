@@ -212,6 +212,22 @@ equality/hash behavior, invalid-domain and error semantics, isolated
 deduplication, conflict, compaction, and global ordering remain explicit
 unresolved boundaries.
 
+`python-0.7.0/dragon-hvac-appenders-controllers-oracle.json` pins six bounded,
+relocatable CPython 3.12.7 cases for 24 exact appender/controller receipts.
+The cases execute DemandBranchAppender, EquipmentListAppender,
+SequentialLoadFractionController, SupplySystemToIdfPostProcessor,
+ZoneAirNodeAppender, and ZoneTerminalUnitAppender against deterministic IDF
+stubs. They preserve exact append counts and order, the 99-entry boundary,
+absent and existing node lists, terminal-list failures, target lookup and
+overflow errors, zero/one/multiple active schedules, ALLOFF and epsilon
+arithmetic, failure prefixes, and repeated-run mutation. All 24 receipts remain
+conservative exceptions because the reviewed public InvisibleDragon route is
+the model-level SupplyGroup-to-IdfDocument chain rather than standalone native
+appender/controller APIs. Existing SupplyGroup conversion receipt 796 is
+immutable hash-pinned support, and the remaining 149 declarations stay
+deferred, closing the exact 174-receipt source partition without executing
+native or EnergyPlus processes.
+
 `python-0.7.0/dragon-hvac-photovoltaic-to-idf-object-oracle.json` pins three
 ordered CPython 3.12.7 observations for `PhotoVoltaicPanel.to_idf_object` on
 the common valid constructor domain. It records the exact six-object family

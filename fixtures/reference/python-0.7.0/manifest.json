@@ -73,6 +73,11 @@
       "sha256": "415cda6877c71985f8943ddd328bc04500e9905f7561c908285bc1bfe95e6b91"
     },
     {
+      "path": "dragon-hvac-appenders-controllers-oracle.json",
+      "bytes": 179542,
+      "sha256": "2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054"
+    },
+    {
       "path": "dragon-hvac-photovoltaic-to-idf-object-oracle.json",
       "bytes": 147261,
       "sha256": "07c383c316989ccb22ac3eadcf9d8388764f76effbbf03c13b7a54f8af20f22b"
