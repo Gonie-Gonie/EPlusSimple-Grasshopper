@@ -168,6 +168,11 @@
       "sha256": "d4e9421c40c39dfaef948054798b03fb046fa31d1a5742cb8a53484c87d819f9"
     },
     {
+      "path": "epsimple-hvac-enums-base-oracle.json",
+      "bytes": 160001,
+      "sha256": "5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c"
+    },
+    {
       "path": "epsimple-identifier-conventions-oracle.json",
       "bytes": 121058,
       "sha256": "c4375d858409fae187776ab88ebb6c5a21c76ac7d0e98b38ed2912a419f2bf7f"

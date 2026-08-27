@@ -76,6 +76,18 @@ explicit native-route exceptions with stable adaptation IDs. The 12 adjacent
 equality, hash, representation, and string declarations remain explicitly
 excluded from this bounded fixture.
 
+`python-0.7.0/epsimple-hvac-enums-base-oracle.json` pins six ordered CPython
+3.12.7 cases for exactly 28 `CompressorType`, `CoolingTowerControl`,
+`CoolingTowerType`, `Fuel`, `NoneSource`, and `SourceSystem` declarations in
+`epsimple/core/hvac.py`. It executes enum topology, values, strings, lookups and
+dragon conversion; the NoneSource singleton, ID and null conversion; and the
+empty base-class and mutable type-mapper behavior with error boundaries.
+Isolated imports plus a byte-identical relocated source copy prove path
+independence. Eighteen targets are exact equivalents and ten use reviewed CLR
+enum, nullable source, sealed aggregate, or GRM dispatch adaptations. The other
+116 unresolved declarations are deferred and 58 representation/equality
+declarations remain explicitly excluded.
+
 `python-0.7.0/epsimple-identifier-conventions-oracle.json` pins 22 ordered
 CPython 3.12.7 cases for the 34 unresolved `AUTOID_PREFIX`, `Directory`,
 `PackageInfo`, and `SpecialTag` symbols in `epsimple/constants.py`. It records

@@ -1,0 +1,3378 @@
+{
+  "case_sha256": {
+    "epsimple-hvac-enums-base.compressor-values-order-lookup-string-and-conversion": "sha256:4b84056d792dc115be0625844d1ee81b63416861b9781a2ae1ce4be85349bb44",
+    "epsimple-hvac-enums-base.cooling-tower-control-values-order-string-and-lookup": "sha256:5b69b936cd8308c6b71198ec5b6c9fa0de0f5cafd783606e93ae1671102e2e6c",
+    "epsimple-hvac-enums-base.cooling-tower-type-values-order-string-and-lookup": "sha256:6f94330e40c55537f06af7c8516b12409db018611561834b0d83ec0f54c0d237",
+    "epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion": "sha256:21276d5ad5c506764f380b100bae58206233aaea51e0c4267534fd4e9fa950d8",
+    "epsimple-hvac-enums-base.none-source-singleton-id-new-and-conversion": "sha256:649b4f64a1aed7a8c45e179349352986650711a63534bb8ddf869277a64eed6f",
+    "epsimple-hvac-enums-base.source-system-base-and-type-mapper-topology": "sha256:7b8a645e61bdc99e1b6e1fe1770e59157d363a6af353b76afe13fb92d201034f"
+  },
+  "cases": [
+    {
+      "assertion_ids": {
+        "CompressorType": "epsimple-hvac-enums-base-185-8785ee6d",
+        "CompressorType.RECIPROCATING": "epsimple-hvac-enums-base-186-dfd51671",
+        "CompressorType.SCREW": "epsimple-hvac-enums-base-187-2947a213",
+        "CompressorType.TURBO": "epsimple-hvac-enums-base-188-5074351d",
+        "CompressorType.__str__": "epsimple-hvac-enums-base-189-f40e4929",
+        "CompressorType.to_dragon": "epsimple-hvac-enums-base-190-bff3a12f"
+      },
+      "category": "enum",
+      "code": "C01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-enums-base.compressor-values-order-lookup-string-and-conversion",
+      "python": {
+        "facts": {
+          "class": "CompressorType",
+          "class_module": "epsimple.core.hvac",
+          "duplicate_alias_count": 0,
+          "invalid_name": {
+            "message": "'NOT_A_MEMBER'",
+            "outcome": "raised",
+            "type": "KeyError"
+          },
+          "invalid_value": {
+            "message": "'not-a-member' is not a valid CompressorType",
+            "outcome": "raised",
+            "type": "ValueError"
+          },
+          "is_enum_subclass": true,
+          "is_str_subclass": true,
+          "iteration_names": [
+            "TURBO",
+            "SCREW",
+            "RECIPROCATING"
+          ],
+          "iteration_values": [
+            "turbo",
+            "screw",
+            "reciprocating"
+          ],
+          "member_count": 3,
+          "member_names": [
+            "TURBO",
+            "SCREW",
+            "RECIPROCATING"
+          ],
+          "members": [
+            {
+              "dragon": {
+                "module": "idragon.dragon.hvac",
+                "name": "TURBO",
+                "string": "turbo",
+                "type": "CompressorType",
+                "value": "turbo"
+              },
+              "dragon_repeat_same_identity": true,
+              "equal_to_raw_string": true,
+              "format_empty": "turbo",
+              "is_str_instance": true,
+              "name": "TURBO",
+              "name_lookup_is_same": true,
+              "repr": "<CompressorType.TURBO: 'turbo'>",
+              "string": "turbo",
+              "value": "turbo",
+              "value_lookup_is_same": true
+            },
+            {
+              "dragon": {
+                "module": "idragon.dragon.hvac",
+                "name": "SCREW",
+                "string": "screw",
+                "type": "CompressorType",
+                "value": "screw"
+              },
+              "dragon_repeat_same_identity": true,
+              "equal_to_raw_string": true,
+              "format_empty": "screw",
+              "is_str_instance": true,
+              "name": "SCREW",
+              "name_lookup_is_same": true,
+              "repr": "<CompressorType.SCREW: 'screw'>",
+              "string": "screw",
+              "value": "screw",
+              "value_lookup_is_same": true
+            },
+            {
+              "dragon": {
+                "module": "idragon.dragon.hvac",
+                "name": "RECIPROCATING",
+                "string": "reciprocating",
+                "type": "CompressorType",
+                "value": "reciprocating"
+              },
+              "dragon_repeat_same_identity": true,
+              "equal_to_raw_string": true,
+              "format_empty": "reciprocating",
+              "is_str_instance": true,
+              "name": "RECIPROCATING",
+              "name_lookup_is_same": true,
+              "repr": "<CompressorType.RECIPROCATING: 'reciprocating'>",
+              "string": "reciprocating",
+              "value": "reciprocating",
+              "value_lookup_is_same": true
+            }
+          ],
+          "mro_names": [
+            "CompressorType",
+            "str",
+            "Enum",
+            "object"
+          ],
+          "wrong_case_value": {
+            "message": "'TURBO' is not a valid CompressorType",
+            "outcome": "raised",
+            "type": "ValueError"
+          }
+        },
+        "facts_sha256": "sha256:8b67c867364b112d383744e8357daed43f93e75a32352ae0255474d93afc7f2d",
+        "outcome": "observed"
+      },
+      "target_symbols": [
+        "CompressorType",
+        "CompressorType.RECIPROCATING",
+        "CompressorType.SCREW",
+        "CompressorType.TURBO",
+        "CompressorType.__str__",
+        "CompressorType.to_dragon"
+      ]
+    },
+    {
+      "assertion_ids": {
+        "CoolingTowerControl": "epsimple-hvac-enums-base-191-31f279b7",
+        "CoolingTowerControl.SINGLESPEED": "epsimple-hvac-enums-base-192-536f3586",
+        "CoolingTowerControl.TWOSPEED": "epsimple-hvac-enums-base-193-bc3d3c6f",
+        "CoolingTowerControl.__str__": "epsimple-hvac-enums-base-194-f40e4929"
+      },
+      "category": "enum",
+      "code": "C02",
+      "context_symbols": [],
+      "id": "epsimple-hvac-enums-base.cooling-tower-control-values-order-string-and-lookup",
+      "python": {
+        "facts": {
+          "class": "CoolingTowerControl",
+          "class_module": "epsimple.core.hvac",
+          "duplicate_alias_count": 0,
+          "invalid_name": {
+            "message": "'NOT_A_MEMBER'",
+            "outcome": "raised",
+            "type": "KeyError"
+          },
+          "invalid_value": {
+            "message": "'not-a-member' is not a valid CoolingTowerControl",
+            "outcome": "raised",
+            "type": "ValueError"
+          },
+          "is_enum_subclass": true,
+          "is_str_subclass": true,
+          "iteration_names": [
+            "SINGLESPEED",
+            "TWOSPEED"
+          ],
+          "iteration_values": [
+            "single-speed",
+            "two-speed"
+          ],
+          "member_count": 2,
+          "member_names": [
+            "SINGLESPEED",
+            "TWOSPEED"
+          ],
+          "members": [
+            {
+              "equal_to_raw_string": true,
+              "format_empty": "single-speed",
+              "is_str_instance": true,
+              "name": "SINGLESPEED",
+              "name_lookup_is_same": true,
+              "repr": "<CoolingTowerControl.SINGLESPEED: 'single-speed'>",
+              "string": "single-speed",
+              "value": "single-speed",
+              "value_lookup_is_same": true
+            },
+            {
+              "equal_to_raw_string": true,
+              "format_empty": "two-speed",
+              "is_str_instance": true,
+              "name": "TWOSPEED",
+              "name_lookup_is_same": true,
+              "repr": "<CoolingTowerControl.TWOSPEED: 'two-speed'>",
+              "string": "two-speed",
+              "value": "two-speed",
+              "value_lookup_is_same": true
+            }
+          ],
+          "mro_names": [
+            "CoolingTowerControl",
+            "str",
+            "Enum",
+            "object"
+          ],
+          "wrong_case_value": {
+            "message": "'SINGLE-SPEED' is not a valid CoolingTowerControl",
+            "outcome": "raised",
+            "type": "ValueError"
+          }
+        },
+        "facts_sha256": "sha256:d843b804c6f08d29c482f9eac898fd8e6a169770e6f64889aa2488acb6930bfc",
+        "outcome": "observed"
+      },
+      "target_symbols": [
+        "CoolingTowerControl",
+        "CoolingTowerControl.SINGLESPEED",
+        "CoolingTowerControl.TWOSPEED",
+        "CoolingTowerControl.__str__"
+      ]
+    },
+    {
+      "assertion_ids": {
+        "CoolingTowerType": "epsimple-hvac-enums-base-195-9dd879be",
+        "CoolingTowerType.CLOSED": "epsimple-hvac-enums-base-196-ec6ad133",
+        "CoolingTowerType.OPEN": "epsimple-hvac-enums-base-197-0496e7cd",
+        "CoolingTowerType.__str__": "epsimple-hvac-enums-base-198-f40e4929"
+      },
+      "category": "enum",
+      "code": "C03",
+      "context_symbols": [],
+      "id": "epsimple-hvac-enums-base.cooling-tower-type-values-order-string-and-lookup",
+      "python": {
+        "facts": {
+          "class": "CoolingTowerType",
+          "class_module": "epsimple.core.hvac",
+          "duplicate_alias_count": 0,
+          "invalid_name": {
+            "message": "'NOT_A_MEMBER'",
+            "outcome": "raised",
+            "type": "KeyError"
+          },
+          "invalid_value": {
+            "message": "'not-a-member' is not a valid CoolingTowerType",
+            "outcome": "raised",
+            "type": "ValueError"
+          },
+          "is_enum_subclass": true,
+          "is_str_subclass": true,
+          "iteration_names": [
+            "CLOSED",
+            "OPEN"
+          ],
+          "iteration_values": [
+            "closed",
+            "open"
+          ],
+          "member_count": 2,
+          "member_names": [
+            "CLOSED",
+            "OPEN"
+          ],
+          "members": [
+            {
+              "equal_to_raw_string": true,
+              "format_empty": "closed",
+              "is_str_instance": true,
+              "name": "CLOSED",
+              "name_lookup_is_same": true,
+              "repr": "<CoolingTowerType.CLOSED: 'closed'>",
+              "string": "closed",
+              "value": "closed",
+              "value_lookup_is_same": true
+            },
+            {
+              "equal_to_raw_string": true,
+              "format_empty": "open",
+              "is_str_instance": true,
+              "name": "OPEN",
+              "name_lookup_is_same": true,
+              "repr": "<CoolingTowerType.OPEN: 'open'>",
+              "string": "open",
+              "value": "open",
+              "value_lookup_is_same": true
+            }
+          ],
+          "mro_names": [
+            "CoolingTowerType",
+            "str",
+            "Enum",
+            "object"
+          ],
+          "wrong_case_value": {
+            "message": "'CLOSED' is not a valid CoolingTowerType",
+            "outcome": "raised",
+            "type": "ValueError"
+          }
+        },
+        "facts_sha256": "sha256:43c5920065fa1fd0aa558b6f4f96ded8f8791494ff79899935d647d666407ab6",
+        "outcome": "observed"
+      },
+      "target_symbols": [
+        "CoolingTowerType",
+        "CoolingTowerType.CLOSED",
+        "CoolingTowerType.OPEN",
+        "CoolingTowerType.__str__"
+      ]
+    },
+    {
+      "assertion_ids": {
+        "Fuel": "epsimple-hvac-enums-base-240-66a9b58b",
+        "Fuel.DISTRICTHEATING": "epsimple-hvac-enums-base-241-806c9ca0",
+        "Fuel.ELECTRICITY": "epsimple-hvac-enums-base-242-dece9e85",
+        "Fuel.LPG": "epsimple-hvac-enums-base-243-c70f84e9",
+        "Fuel.NATURALGAS": "epsimple-hvac-enums-base-244-50160788",
+        "Fuel.OIL": "epsimple-hvac-enums-base-245-24bb42a1",
+        "Fuel.__str__": "epsimple-hvac-enums-base-246-f40e4929",
+        "Fuel.to_dragon": "epsimple-hvac-enums-base-247-7ce39626"
+      },
+      "category": "enum",
+      "code": "F01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion",
+      "python": {
+        "facts": {
+          "class": "Fuel",
+          "class_module": "epsimple.core.hvac",
+          "duplicate_alias_count": 0,
+          "invalid_name": {
+            "message": "'NOT_A_MEMBER'",
+            "outcome": "raised",
+            "type": "KeyError"
+          },
+          "invalid_value": {
+            "message": "'not-a-member' is not a valid Fuel",
+            "outcome": "raised",
+            "type": "ValueError"
+          },
+          "is_enum_subclass": true,
+          "is_str_subclass": true,
+          "iteration_names": [
+            "ELECTRICITY",
+            "NATURALGAS",
+            "LPG",
+            "OIL",
+            "DISTRICTHEATING"
+          ],
+          "iteration_values": [
+            "electricity",
+            "natural_gas",
+            "lpg",
+            "oil",
+            "district_heating"
+          ],
+          "member_count": 5,
+          "member_names": [
+            "ELECTRICITY",
+            "NATURALGAS",
+            "LPG",
+            "OIL",
+            "DISTRICTHEATING"
+          ],
+          "members": [
+            {
+              "dragon": {
+                "module": "idragon.dragon.hvac",
+                "name": "ELECTRICITY",
+                "string": "Electricity",
+                "type": "Fuel",
+                "value": "Electricity"
+              },
+              "dragon_repeat_same_identity": true,
+              "equal_to_raw_string": true,
+              "format_empty": "electricity",
+              "is_str_instance": true,
+              "name": "ELECTRICITY",
+              "name_lookup_is_same": true,
+              "repr": "<Fuel.ELECTRICITY: 'electricity'>",
+              "string": "electricity",
+              "value": "electricity",
+              "value_lookup_is_same": true
+            },
+            {
+              "dragon": {
+                "module": "idragon.dragon.hvac",
+                "name": "NATURALGAS",
+                "string": "NaturalGas",
+                "type": "Fuel",
+                "value": "NaturalGas"
+              },
+              "dragon_repeat_same_identity": true,
+              "equal_to_raw_string": true,
+              "format_empty": "natural_gas",
+              "is_str_instance": true,
+              "name": "NATURALGAS",
+              "name_lookup_is_same": true,
+              "repr": "<Fuel.NATURALGAS: 'natural_gas'>",
+              "string": "natural_gas",
+              "value": "natural_gas",
+              "value_lookup_is_same": true
+            },
+            {
+              "dragon": {
+                "module": "idragon.dragon.hvac",
+                "name": "PROPANE",
+                "string": "Propane",
+                "type": "Fuel",
+                "value": "Propane"
+              },
+              "dragon_repeat_same_identity": true,
+              "equal_to_raw_string": true,
+              "format_empty": "lpg",
+              "is_str_instance": true,
+              "name": "LPG",
+              "name_lookup_is_same": true,
+              "repr": "<Fuel.LPG: 'lpg'>",
+              "string": "lpg",
+              "value": "lpg",
+              "value_lookup_is_same": true
+            },
+            {
+              "dragon": {
+                "module": "idragon.dragon.hvac",
+                "name": "DIESEL",
+                "string": "Diesel",
+                "type": "Fuel",
+                "value": "Diesel"
+              },
+              "dragon_repeat_same_identity": true,
+              "equal_to_raw_string": true,
+              "format_empty": "oil",
+              "is_str_instance": true,
+              "name": "OIL",
+              "name_lookup_is_same": true,
+              "repr": "<Fuel.OIL: 'oil'>",
+              "string": "oil",
+              "value": "oil",
+              "value_lookup_is_same": true
+            },
+            {
+              "dragon": {
+                "module": "idragon.dragon.hvac",
+                "name": "OTHERFUEL1",
+                "string": "OtherFuel1",
+                "type": "Fuel",
+                "value": "OtherFuel1"
+              },
+              "dragon_repeat_same_identity": true,
+              "equal_to_raw_string": true,
+              "format_empty": "district_heating",
+              "is_str_instance": true,
+              "name": "DISTRICTHEATING",
+              "name_lookup_is_same": true,
+              "repr": "<Fuel.DISTRICTHEATING: 'district_heating'>",
+              "string": "district_heating",
+              "value": "district_heating",
+              "value_lookup_is_same": true
+            }
+          ],
+          "mro_names": [
+            "Fuel",
+            "str",
+            "Enum",
+            "object"
+          ],
+          "wrong_case_value": {
+            "message": "'ELECTRICITY' is not a valid Fuel",
+            "outcome": "raised",
+            "type": "ValueError"
+          }
+        },
+        "facts_sha256": "sha256:9429dc4285592819464151aae71b8fe663bd60227020e08a3255e764c4c87394",
+        "outcome": "observed"
+      },
+      "target_symbols": [
+        "Fuel",
+        "Fuel.DISTRICTHEATING",
+        "Fuel.ELECTRICITY",
+        "Fuel.LPG",
+        "Fuel.NATURALGAS",
+        "Fuel.OIL",
+        "Fuel.__str__",
+        "Fuel.to_dragon"
+      ]
+    },
+    {
+      "assertion_ids": {
+        "NoneSource": "epsimple-hvac-enums-base-267-8824a756",
+        "NoneSource.ID": "epsimple-hvac-enums-base-268-dbf0ef4b",
+        "NoneSource.__new__": "epsimple-hvac-enums-base-269-758d9c0b",
+        "NoneSource.to_dragon": "epsimple-hvac-enums-base-270-c8347dc8"
+      },
+      "category": "sentinel",
+      "code": "N01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-enums-base.none-source-singleton-id-new-and-conversion",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SourceSystem"
+          ],
+          "class_id": "$SPECIAL$:SRCE--NONE",
+          "constructor_arguments": {
+            "outcome": "returned"
+          },
+          "constructor_arguments_same_identity": true,
+          "constructor_is_direct_new": true,
+          "direct_new_arguments_ignored": true,
+          "first_instance_preexisting": false,
+          "instance_class": "NoneSource",
+          "instance_dictionary_empty": true,
+          "instance_id": "$SPECIAL$:SRCE--NONE",
+          "instance_is_source_system": true,
+          "mapper_inherited_by_identity": true,
+          "new_signature": "(cls, *args, **kwargs)",
+          "repeat_constructor_same_identity": true,
+          "to_dragon_is_none": true,
+          "to_dragon_repeat_is_none": true
+        },
+        "facts_sha256": "sha256:e92e8a5aa21f23c59ebab2ce092103d26ffa07d12ab3e91ed5e5d683ceacd5cb",
+        "outcome": "observed"
+      },
+      "target_symbols": [
+        "NoneSource",
+        "NoneSource.ID",
+        "NoneSource.__new__",
+        "NoneSource.to_dragon"
+      ]
+    },
+    {
+      "assertion_ids": {
+        "SourceSystem": "epsimple-hvac-enums-base-319-9b6905f8",
+        "SourceSystem.TYPE_MAPPER": "epsimple-hvac-enums-base-320-813567e3"
+      },
+      "category": "base",
+      "code": "S01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-enums-base.source-system-base-and-type-mapper-topology",
+      "python": {
+        "facts": {
+          "class_module": "epsimple.core.hvac",
+          "constructor_signature": "()",
+          "declared_public_members": [
+            "TYPE_MAPPER"
+          ],
+          "fresh_instances_are_distinct": true,
+          "fresh_instances_empty": true,
+          "has_to_dragon": false,
+          "keyword_constructor_error": {
+            "message": "SourceSystem() takes no arguments",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "mapped_types": [
+            {
+              "callable": true,
+              "inherited_mapper_by_identity": true,
+              "is_source_subclass": true,
+              "key": "heatpump",
+              "module": "epsimple.core.hvac",
+              "type": "HeatPump"
+            },
+            {
+              "callable": true,
+              "inherited_mapper_by_identity": true,
+              "is_source_subclass": true,
+              "key": "geothermal_heatpump",
+              "module": "epsimple.core.hvac",
+              "type": "GeothermalHeatPump"
+            },
+            {
+              "callable": true,
+              "inherited_mapper_by_identity": true,
+              "is_source_subclass": true,
+              "key": "chiller",
+              "module": "epsimple.core.hvac",
+              "type": "Chiller"
+            },
+            {
+              "callable": true,
+              "inherited_mapper_by_identity": true,
+              "is_source_subclass": true,
+              "key": "absorption_chiller",
+              "module": "epsimple.core.hvac",
+              "type": "AbsorptionChiller"
+            },
+            {
+              "callable": true,
+              "inherited_mapper_by_identity": true,
+              "is_source_subclass": true,
+              "key": "boiler",
+              "module": "epsimple.core.hvac",
+              "type": "Boiler"
+            },
+            {
+              "callable": true,
+              "inherited_mapper_by_identity": true,
+              "is_source_subclass": true,
+              "key": "district_heating",
+              "module": "epsimple.core.hvac",
+              "type": "DistrictHeating"
+            }
+          ],
+          "mapper_copy_mutation_preserves_original": true,
+          "mapper_identity_across_accesses": true,
+          "mapper_keys": [
+            "heatpump",
+            "geothermal_heatpump",
+            "chiller",
+            "absorption_chiller",
+            "boiler",
+            "district_heating"
+          ],
+          "mapper_type": "dict",
+          "missing_key_error": {
+            "message": "'missing'",
+            "outcome": "raised",
+            "type": "KeyError"
+          },
+          "none_source_absent_from_values": true,
+          "positional_constructor_error": {
+            "message": "SourceSystem() takes no arguments",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "unhashable_key_error": {
+            "message": "unhashable type: 'list'",
+            "outcome": "raised",
+            "type": "TypeError"
+          }
+        },
+        "facts_sha256": "sha256:db863d8ee217410e14ea263c8936b97a5085ce69d3b9debefb86f120b15da146",
+        "outcome": "observed"
+      },
+      "target_symbols": [
+        "SourceSystem",
+        "SourceSystem.TYPE_MAPPER"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:f90df1feee80855dfa215d58ce0ee856d0b9e128b0bf77332eabf4fba0c92d10",
+  "consumer_contract": {
+    "adaptations": {
+      "CompressorType.__str__": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
+      "CoolingTowerControl.__str__": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
+      "CoolingTowerType.__str__": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
+      "Fuel.__str__": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
+      "NoneSource": "nullable-resolved-source-reference-rather-than-singleton-sentinel-8824a756",
+      "NoneSource.ID": "null-source-reference-rather-than-special-string-identifier-dbf0ef4b",
+      "NoneSource.__new__": "nullable-source-state-rather-than-process-global-singleton-758d9c0b",
+      "NoneSource.to_dragon": "aggregate-converter-diagnostic-for-unresolved-source-rather-than-null-return-c8347dc8",
+      "SourceSystem": "sealed-validated-domain-aggregate-rather-than-empty-python-base-9b6905f8",
+      "SourceSystem.TYPE_MAPPER": "grm-reader-enum-dispatch-rather-than-public-mutable-class-map-813567e3"
+    },
+    "assertion_ids": {
+      "CompressorType": "epsimple-hvac-enums-base-185-8785ee6d",
+      "CompressorType.RECIPROCATING": "epsimple-hvac-enums-base-186-dfd51671",
+      "CompressorType.SCREW": "epsimple-hvac-enums-base-187-2947a213",
+      "CompressorType.TURBO": "epsimple-hvac-enums-base-188-5074351d",
+      "CompressorType.__str__": "epsimple-hvac-enums-base-189-f40e4929",
+      "CompressorType.to_dragon": "epsimple-hvac-enums-base-190-bff3a12f",
+      "CoolingTowerControl": "epsimple-hvac-enums-base-191-31f279b7",
+      "CoolingTowerControl.SINGLESPEED": "epsimple-hvac-enums-base-192-536f3586",
+      "CoolingTowerControl.TWOSPEED": "epsimple-hvac-enums-base-193-bc3d3c6f",
+      "CoolingTowerControl.__str__": "epsimple-hvac-enums-base-194-f40e4929",
+      "CoolingTowerType": "epsimple-hvac-enums-base-195-9dd879be",
+      "CoolingTowerType.CLOSED": "epsimple-hvac-enums-base-196-ec6ad133",
+      "CoolingTowerType.OPEN": "epsimple-hvac-enums-base-197-0496e7cd",
+      "CoolingTowerType.__str__": "epsimple-hvac-enums-base-198-f40e4929",
+      "Fuel": "epsimple-hvac-enums-base-240-66a9b58b",
+      "Fuel.DISTRICTHEATING": "epsimple-hvac-enums-base-241-806c9ca0",
+      "Fuel.ELECTRICITY": "epsimple-hvac-enums-base-242-dece9e85",
+      "Fuel.LPG": "epsimple-hvac-enums-base-243-c70f84e9",
+      "Fuel.NATURALGAS": "epsimple-hvac-enums-base-244-50160788",
+      "Fuel.OIL": "epsimple-hvac-enums-base-245-24bb42a1",
+      "Fuel.__str__": "epsimple-hvac-enums-base-246-f40e4929",
+      "Fuel.to_dragon": "epsimple-hvac-enums-base-247-7ce39626",
+      "NoneSource": "epsimple-hvac-enums-base-267-8824a756",
+      "NoneSource.ID": "epsimple-hvac-enums-base-268-dbf0ef4b",
+      "NoneSource.__new__": "epsimple-hvac-enums-base-269-758d9c0b",
+      "NoneSource.to_dragon": "epsimple-hvac-enums-base-270-c8347dc8",
+      "SourceSystem": "epsimple-hvac-enums-base-319-9b6905f8",
+      "SourceSystem.TYPE_MAPPER": "epsimple-hvac-enums-base-320-813567e3"
+    },
+    "case_count": 6,
+    "case_ids": [
+      "epsimple-hvac-enums-base.compressor-values-order-lookup-string-and-conversion",
+      "epsimple-hvac-enums-base.cooling-tower-control-values-order-string-and-lookup",
+      "epsimple-hvac-enums-base.cooling-tower-type-values-order-string-and-lookup",
+      "epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion",
+      "epsimple-hvac-enums-base.none-source-singleton-id-new-and-conversion",
+      "epsimple-hvac-enums-base.source-system-base-and-type-mapper-topology"
+    ],
+    "classification_counts": {
+      "equivalent": 18,
+      "exception": 10
+    },
+    "classifications": {
+      "CompressorType": "equivalent",
+      "CompressorType.RECIPROCATING": "equivalent",
+      "CompressorType.SCREW": "equivalent",
+      "CompressorType.TURBO": "equivalent",
+      "CompressorType.__str__": "exception",
+      "CompressorType.to_dragon": "equivalent",
+      "CoolingTowerControl": "equivalent",
+      "CoolingTowerControl.SINGLESPEED": "equivalent",
+      "CoolingTowerControl.TWOSPEED": "equivalent",
+      "CoolingTowerControl.__str__": "exception",
+      "CoolingTowerType": "equivalent",
+      "CoolingTowerType.CLOSED": "equivalent",
+      "CoolingTowerType.OPEN": "equivalent",
+      "CoolingTowerType.__str__": "exception",
+      "Fuel": "equivalent",
+      "Fuel.DISTRICTHEATING": "equivalent",
+      "Fuel.ELECTRICITY": "equivalent",
+      "Fuel.LPG": "equivalent",
+      "Fuel.NATURALGAS": "equivalent",
+      "Fuel.OIL": "equivalent",
+      "Fuel.__str__": "exception",
+      "Fuel.to_dragon": "equivalent",
+      "NoneSource": "exception",
+      "NoneSource.ID": "exception",
+      "NoneSource.__new__": "exception",
+      "NoneSource.to_dragon": "exception",
+      "SourceSystem": "exception",
+      "SourceSystem.TYPE_MAPPER": "exception"
+    },
+    "closure": {
+      "deferred_count": 116,
+      "exact_one_case_target_partition": true,
+      "excluded_count": 58,
+      "full_source_partition": true,
+      "source_declaration_count": 202,
+      "target_count": 28,
+      "target_indices": [
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        267,
+        268,
+        269,
+        270,
+        319,
+        320
+      ]
+    },
+    "evidence_contract": {
+      "active_energyplus_process_claim": false,
+      "expected_receipt_count": 28,
+      "full_hvac_declaration_parity_claim": false,
+      "native_runtime_executed_by_python_oracle": false,
+      "python_behavior_oracle_only": true,
+      "relocatable_import_claim": true
+    },
+    "expectations": {
+      "CompressorType": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-185-8785ee6d",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CompressorType.RECIPROCATING": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-186-dfd51671",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CompressorType.SCREW": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-187-2947a213",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CompressorType.TURBO": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-188-5074351d",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CompressorType.__str__": {
+        "adaptation": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
+        "assertion_id": "epsimple-hvac-enums-base-189-f40e4929",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CompressorType.to_dragon": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-190-bff3a12f",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "CoolingTowerControl": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-191-31f279b7",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CoolingTowerControl.SINGLESPEED": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-192-536f3586",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CoolingTowerControl.TWOSPEED": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-193-bc3d3c6f",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CoolingTowerControl.__str__": {
+        "adaptation": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
+        "assertion_id": "epsimple-hvac-enums-base-194-f40e4929",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CoolingTowerType": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-195-9dd879be",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CoolingTowerType.CLOSED": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-196-ec6ad133",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CoolingTowerType.OPEN": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-197-0496e7cd",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "CoolingTowerType.__str__": {
+        "adaptation": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
+        "assertion_id": "epsimple-hvac-enums-base-198-f40e4929",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "Fuel": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-240-66a9b58b",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "Fuel.DISTRICTHEATING": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-241-806c9ca0",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "Fuel.ELECTRICITY": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-242-dece9e85",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "Fuel.LPG": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-243-c70f84e9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "Fuel.NATURALGAS": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-244-50160788",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "Fuel.OIL": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-245-24bb42a1",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "Fuel.__str__": {
+        "adaptation": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
+        "assertion_id": "epsimple-hvac-enums-base-246-f40e4929",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+      },
+      "Fuel.to_dragon": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-enums-base-247-7ce39626",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "NoneSource": {
+        "adaptation": "nullable-resolved-source-reference-rather-than-singleton-sentinel-8824a756",
+        "assertion_id": "epsimple-hvac-enums-base-267-8824a756",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "NoneSource.ID": {
+        "adaptation": "null-source-reference-rather-than-special-string-identifier-dbf0ef4b",
+        "assertion_id": "epsimple-hvac-enums-base-268-dbf0ef4b",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "NoneSource.__new__": {
+        "adaptation": "nullable-source-state-rather-than-process-global-singleton-758d9c0b",
+        "assertion_id": "epsimple-hvac-enums-base-269-758d9c0b",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "NoneSource.to_dragon": {
+        "adaptation": "aggregate-converter-diagnostic-for-unresolved-source-rather-than-null-return-c8347dc8",
+        "assertion_id": "epsimple-hvac-enums-base-270-c8347dc8",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "SourceSystem": {
+        "adaptation": "sealed-validated-domain-aggregate-rather-than-empty-python-base-9b6905f8",
+        "assertion_id": "epsimple-hvac-enums-base-319-9b6905f8",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor and public properties"
+      },
+      "SourceSystem.TYPE_MAPPER": {
+        "adaptation": "grm-reader-enum-dispatch-rather-than-public-mutable-class-map-813567e3",
+        "assertion_id": "epsimple-hvac-enums-base-320-813567e3",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with GonieGonie.SimpleDragon.SourceSystemType"
+      }
+    },
+    "native_routes": {
+      "CompressorType": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CompressorType.RECIPROCATING": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CompressorType.SCREW": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CompressorType.TURBO": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CompressorType.__str__": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CompressorType.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "CoolingTowerControl": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerControl.SINGLESPEED": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerControl.TWOSPEED": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerControl.__str__": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerType": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerType.CLOSED": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerType.OPEN": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerType.__str__": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.DISTRICTHEATING": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.ELECTRICITY": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.LPG": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.NATURALGAS": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.OIL": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.__str__": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "NoneSource": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "NoneSource.ID": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "NoneSource.__new__": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "NoneSource.to_dragon": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "SourceSystem": "GonieGonie.SimpleDragon.SourceSystem constructor and public properties",
+      "SourceSystem.TYPE_MAPPER": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with GonieGonie.SimpleDragon.SourceSystemType"
+    },
+    "runtime_names": "pinned-python-only-no-native-runtime-name-claims",
+    "runtime_signatures": {
+      "CompressorType": {
+        "signature": "(*values)",
+        "type": "EnumType"
+      },
+      "CompressorType.RECIPROCATING": {
+        "runtime_class": "epsimple.core.hvac.CompressorType",
+        "type": "constant"
+      },
+      "CompressorType.SCREW": {
+        "runtime_class": "epsimple.core.hvac.CompressorType",
+        "type": "constant"
+      },
+      "CompressorType.TURBO": {
+        "runtime_class": "epsimple.core.hvac.CompressorType",
+        "type": "constant"
+      },
+      "CompressorType.__str__": {
+        "signature": "(self) -> 'str'",
+        "type": "function"
+      },
+      "CompressorType.to_dragon": {
+        "signature": "(self) -> 'dragon.CompressorType'",
+        "type": "function"
+      },
+      "CoolingTowerControl": {
+        "signature": "(*values)",
+        "type": "EnumType"
+      },
+      "CoolingTowerControl.SINGLESPEED": {
+        "runtime_class": "epsimple.core.hvac.CoolingTowerControl",
+        "type": "constant"
+      },
+      "CoolingTowerControl.TWOSPEED": {
+        "runtime_class": "epsimple.core.hvac.CoolingTowerControl",
+        "type": "constant"
+      },
+      "CoolingTowerControl.__str__": {
+        "signature": "(self) -> 'str'",
+        "type": "function"
+      },
+      "CoolingTowerType": {
+        "signature": "(*values)",
+        "type": "EnumType"
+      },
+      "CoolingTowerType.CLOSED": {
+        "runtime_class": "epsimple.core.hvac.CoolingTowerType",
+        "type": "constant"
+      },
+      "CoolingTowerType.OPEN": {
+        "runtime_class": "epsimple.core.hvac.CoolingTowerType",
+        "type": "constant"
+      },
+      "CoolingTowerType.__str__": {
+        "signature": "(self) -> 'str'",
+        "type": "function"
+      },
+      "Fuel": {
+        "signature": "(*values)",
+        "type": "EnumType"
+      },
+      "Fuel.DISTRICTHEATING": {
+        "runtime_class": "epsimple.core.hvac.Fuel",
+        "type": "constant"
+      },
+      "Fuel.ELECTRICITY": {
+        "runtime_class": "epsimple.core.hvac.Fuel",
+        "type": "constant"
+      },
+      "Fuel.LPG": {
+        "runtime_class": "epsimple.core.hvac.Fuel",
+        "type": "constant"
+      },
+      "Fuel.NATURALGAS": {
+        "runtime_class": "epsimple.core.hvac.Fuel",
+        "type": "constant"
+      },
+      "Fuel.OIL": {
+        "runtime_class": "epsimple.core.hvac.Fuel",
+        "type": "constant"
+      },
+      "Fuel.__str__": {
+        "signature": "(self) -> 'str'",
+        "type": "function"
+      },
+      "Fuel.to_dragon": {
+        "signature": "(self) -> 'dragon.Fuel'",
+        "type": "function"
+      },
+      "NoneSource": {
+        "signature": "(*args, **kwargs)",
+        "type": "type"
+      },
+      "NoneSource.ID": {
+        "runtime_class": "builtins.str",
+        "type": "constant"
+      },
+      "NoneSource.__new__": {
+        "signature": "(cls, *args, **kwargs)",
+        "type": "staticmethod"
+      },
+      "NoneSource.to_dragon": {
+        "signature": "(self) -> 'None'",
+        "type": "function"
+      },
+      "SourceSystem": {
+        "signature": "()",
+        "type": "type"
+      },
+      "SourceSystem.TYPE_MAPPER": {
+        "runtime_class": "builtins.dict",
+        "type": "constant"
+      }
+    },
+    "target_symbols": [
+      "CompressorType",
+      "CompressorType.RECIPROCATING",
+      "CompressorType.SCREW",
+      "CompressorType.TURBO",
+      "CompressorType.__str__",
+      "CompressorType.to_dragon",
+      "CoolingTowerControl",
+      "CoolingTowerControl.SINGLESPEED",
+      "CoolingTowerControl.TWOSPEED",
+      "CoolingTowerControl.__str__",
+      "CoolingTowerType",
+      "CoolingTowerType.CLOSED",
+      "CoolingTowerType.OPEN",
+      "CoolingTowerType.__str__",
+      "Fuel",
+      "Fuel.DISTRICTHEATING",
+      "Fuel.ELECTRICITY",
+      "Fuel.LPG",
+      "Fuel.NATURALGAS",
+      "Fuel.OIL",
+      "Fuel.__str__",
+      "Fuel.to_dragon",
+      "NoneSource",
+      "NoneSource.ID",
+      "NoneSource.__new__",
+      "NoneSource.to_dragon",
+      "SourceSystem",
+      "SourceSystem.TYPE_MAPPER"
+    ]
+  },
+  "deferred_receipts": [
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 135,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:197f6bd7f4f53ed2b4f36fc51be027baf327086ce45d10f2d2693d87ca3085cd",
+      "symbol": "AbsorptionChiller",
+      "symbol_hash": "sha256:c44e12f95a00cb5962ca8ad7d437ef2d161ff1771e6a511f01099e697f58c288"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 136,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "AbsorptionChiller.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:7a7e3afb0f50f0ac922afbb6e7d2b751102d9766156d4217e9b508a9873d6027",
+      "inventory_index": 139,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1854faa7f9da6126f0d05ed628ff31167b177edcc2939c5989d6ccdf01aa41d5",
+      "symbol": "AbsorptionChiller.__init__",
+      "symbol_hash": "sha256:4aae19c639fbe20444a95f99af9aaa0bceb7be04710b434fc99f8e80a2f53fdb"
+    },
+    {
+      "body_hash": "sha256:2a12cf8c3f4c699e2cc91ecdc17fa99878e58a87dd4ae3aeb1137f5915460565",
+      "inventory_index": 142,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:15b5169bd8d540ac00c6d9a9e50155b6945a50a7e029811e5e2eacac2ee4844e",
+      "symbol": "AbsorptionChiller.boiler_efficiency",
+      "symbol_hash": "sha256:be052579fc5a280692bed221f5c9dc6eb30dec184a455663dee100148dca7c15"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 143,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "AbsorptionChiller.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:a7f4e9f7638f69f248c7ba9d965a0c34f33b35868bc64d8be900345af2c33f7a",
+      "inventory_index": 144,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e2c78159fd7fabe7c33c1d1696213b0e724b3f5ad9ed9ce52dac6ea89e5342b",
+      "symbol": "AbsorptionChiller.cop",
+      "symbol_hash": "sha256:253d21d2755374e2581dc3d6431e81f5877448480981a16667ffde993d480089"
+    },
+    {
+      "body_hash": "sha256:c0ff729d75b227ead99231e04d5e6569498f46da386f0570046f9de7f72e2d51",
+      "inventory_index": 145,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2dce65a096ae0ba4a62de3fb096ba3aa5390c7d9b4bae150c00d708c20a1d710",
+      "symbol": "AbsorptionChiller.from_json",
+      "symbol_hash": "sha256:f305d7565898b256d9ad634f8e980ca458c5df316e291ed04e74b1193c74dec1"
+    },
+    {
+      "body_hash": "sha256:4413b1ca617b268c452b04c647b16ea6b595b4868d1b7b46c835834097767d7d",
+      "inventory_index": 146,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bed2fa93a5a6d0c700a44cadecfe1ce52111fb5748d839c10754e93e9c8ef063",
+      "symbol": "AbsorptionChiller.to_dragon",
+      "symbol_hash": "sha256:7a12c01556ae0ebb7acf661b54ff67ba16eaf12ea14800bda8686ce8dd79f08c"
+    },
+    {
+      "body_hash": "sha256:644081ff98e0d9dce3b1dd7f739431a71ce8c7524f85a0ec6bc3f40f6bf98de3",
+      "inventory_index": 147,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:034590641efa61c135722618e2bdb0d9425ef0cc6a593e8b7a7438b575e4bd9d",
+      "symbol": "AirHandlingUnit",
+      "symbol_hash": "sha256:6fd0030bb650b67798e4eb3d2b4b50a44cc9309e47f44858931dcf1b92d2baa5"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 148,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "AirHandlingUnit.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0cc8b1eb7455ed6cc1db0d1c38c63038f36496b63c5c02354464a99b86c90088",
+      "inventory_index": 151,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ff922c21296cd5a935d82405d1e2aded04638ff6871358bc0b608c7f6bffec3e",
+      "symbol": "AirHandlingUnit.__init__",
+      "symbol_hash": "sha256:ea6e311cb7493ec68f0be403fc02f1eae98dac5ef2d3c7891dd30c4a9ba49df8"
+    },
+    {
+      "body_hash": "sha256:4757bae32fa6dbc96eb6e60d9de9c51ba7e2c672e657c1427985a9efa18e45de",
+      "inventory_index": 154,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e72068dd7c37ad55411e8beda4080e4f6af75f99334b2119c195dd9d7a619b13",
+      "symbol": "AirHandlingUnit.from_json",
+      "symbol_hash": "sha256:148b0ee3185947c81beff56237a82cde44e855bcaf249925fb067b30b758af02"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "inventory_index": 155,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "AirHandlingUnit.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:167c908c16ef001dfaa09c9f5f4b390339fe0785c0f6be83067800dd2ac9d458",
+      "inventory_index": 156,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e590d06a61927a56c75f002322d6cf177d089441239094959799672a68bbbcb4",
+      "symbol": "AirHandlingUnit.to_dragon",
+      "symbol_hash": "sha256:11a6909a36a0459e5e84d8526678556dea762d1fad19c46318cf8cb9ef2b50c8"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 157,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6c587d2756d9f3e1fc93de59ec1482ea151ff3a496b9f558f1278b8ad5a2a615",
+      "symbol": "Boiler",
+      "symbol_hash": "sha256:8d52ff9e56a001d640fab8decad6c2c1b288c561c5243756d8fcbe09ea018528"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 158,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Boiler.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:24ab511ac7b3bb91e2b785efaf3f6ac1c4a9febfc98c6dd91e2b9bf699ab7f8c",
+      "inventory_index": 161,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2c0c0b66128e930a0a67c9ecfd08ad47ff6d145ee4d6f2de96c492159dc92437",
+      "symbol": "Boiler.__init__",
+      "symbol_hash": "sha256:f45db90e3bd9e0d7d7bf09b1625885e65948ddbecf23a92e9c5e13a794403469"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 164,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "Boiler.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:b449c78b5f6789e34ec6cf108ed58fc253c9778ca9b74142b39874ffcc6c2efc",
+      "inventory_index": 165,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7a05da5625820c6c82456f3e46373c9a45937c8d39440d6684a43098197dc63b",
+      "symbol": "Boiler.efficiency",
+      "symbol_hash": "sha256:80144f2f58577c9b96d6d6d012e949a459d23f8cfb4a3f77e5656154e80b6947"
+    },
+    {
+      "body_hash": "sha256:6f1c9c8c00e8861435e8c6ddc5ab6c1a39f26371affd567f94f1e82a82ec95a8",
+      "inventory_index": 166,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7032eecd93acd5362cfc6dad1834d16786483a7420cd560ce7845ac3f6046e85",
+      "symbol": "Boiler.from_json",
+      "symbol_hash": "sha256:bd3f1e5a20c905d27a7da940887638fad726b510f707826723015cbaeb1a0a63"
+    },
+    {
+      "body_hash": "sha256:336057118eaeb957134f4c98af1f688b1dfe2f2512ba3856db9fc064d68e5a8b",
+      "inventory_index": 167,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c933e21c7ee9bd9b6a580d730d6d513f2c3a10c57f80fceec7a7b528566d29e8",
+      "symbol": "Boiler.fuel",
+      "symbol_hash": "sha256:64d0443e2225b273f9021f371d0dd88a0051e57f9eb3c91673faa8d96ca23ae1"
+    },
+    {
+      "body_hash": "sha256:da1b2b65e62f38fd800a7f741317027fed63081c40cb61e615b137bd1d247246",
+      "inventory_index": 168,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f4be76fa1996185fb5c5575d4cdfc5267c7f2b15a7370d820be79667920f5751",
+      "symbol": "Boiler.hotwater_supply",
+      "symbol_hash": "sha256:f9effaf3b156faf96d9e3d71ab1ac3222b4933ad4cd29a51e9df1c28fc071124"
+    },
+    {
+      "body_hash": "sha256:f84b440673abc9bcc3e44890d2dd74b6695bf07abf399fc84b82cb925c0c01a2",
+      "inventory_index": 169,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:449509b78f4b094a8be5a83cea146f18b10155c63839da70733be347c89df9fa",
+      "symbol": "Boiler.to_dragon",
+      "symbol_hash": "sha256:86b77a933c317b02f06d37995f37906562c3a9d9f59fc36b3cda3f7369b333c7"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 170,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:64ca2c3d6bdf68fa01f483507de1348169d646b41ede1437e400a0a7df04ff1e",
+      "symbol": "Chiller",
+      "symbol_hash": "sha256:8baa00de497b53a61086ec3f181c1b3550b7a14763dcbd79b2d7334b3c837229"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 171,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Chiller.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:1a7c2c44e244006a8a6b071864be040e666140f1c9b4eb6c43c2bd61ad03010e",
+      "inventory_index": 174,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:fe0fe20ff70e1974731f85aa4c72e6a1d5c5e2a70f872c9c4e77c4c255248e42",
+      "symbol": "Chiller.__init__",
+      "symbol_hash": "sha256:9c5215c4ec2ee276bb72b874e53ad5da5867fb1b2c0f0426f0235b67cd13a553"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 177,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "Chiller.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:1c1716d452fe42635549e71f3bd2835a33f3c18f8f2c2d92ea68ebe544858511",
+      "inventory_index": 178,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:af6a3af6e37fb61884754e674514907dd775db68101599f1593f23b4fce1d531",
+      "symbol": "Chiller.compressor_type",
+      "symbol_hash": "sha256:000c99e32fb9a139e083042f27fc916b8e64a78b5ad843808bbc5fadfa0a69e1"
+    },
+    {
+      "body_hash": "sha256:4843111dd3b2d964636942490d02cd7a831f85172b3dbe17ec4d1092838ff118",
+      "inventory_index": 179,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:eecf4c401568cd53a1360e4edc2d766845f6ae4214701abd67a679cbd9ea2527",
+      "symbol": "Chiller.coolingtower_capacity",
+      "symbol_hash": "sha256:e56b52fb177c1ab6c0d13f9d228871e659e4af8720807ba77b6ac3e65108412b"
+    },
+    {
+      "body_hash": "sha256:5d2aa15aafcefa55111a4ee8cf4bcef42751f1afd87220a94f98ab8465d9391a",
+      "inventory_index": 180,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c28cd63afd90b0d25469e5dda22e11f67573cef6ad7ba6e0213a60cf902dec36",
+      "symbol": "Chiller.coolingtower_control",
+      "symbol_hash": "sha256:473c615ac03fcf57bbb3aeb96de55ea45c126624ddf2ba53f5ea71a587e6c369"
+    },
+    {
+      "body_hash": "sha256:d142d5add2ce7a4560c7361f184b52b7b70eec2b811bcbbfd96ecb7f7c6e83cf",
+      "inventory_index": 181,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0c4805efa22379b963cfb4e1d7790cca7e1fec914c89518ff8b8c6571feacce1",
+      "symbol": "Chiller.coolingtower_type",
+      "symbol_hash": "sha256:75acdde9fdf4e8eeaedb7245dad9151cde6f69e3fd3efe9dfa830a5bfb09f1aa"
+    },
+    {
+      "body_hash": "sha256:a7f4e9f7638f69f248c7ba9d965a0c34f33b35868bc64d8be900345af2c33f7a",
+      "inventory_index": 182,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e2c78159fd7fabe7c33c1d1696213b0e724b3f5ad9ed9ce52dac6ea89e5342b",
+      "symbol": "Chiller.cop",
+      "symbol_hash": "sha256:253d21d2755374e2581dc3d6431e81f5877448480981a16667ffde993d480089"
+    },
+    {
+      "body_hash": "sha256:0864cb6b1ae1d38253eb911630c624cb95ca5e420825b5445335d2b7ad093bdd",
+      "inventory_index": 183,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:cb50bc61899e7d12cd1c8464802ac31f20979eb2ebed6e1a247a3971e2769496",
+      "symbol": "Chiller.from_json",
+      "symbol_hash": "sha256:ca5a644592b7e7573475671f42d9a3f10cdd16db3c05f96f159035fba9324643"
+    },
+    {
+      "body_hash": "sha256:c4e3bacedfd77aba3c205683f4ddb2bb37e9c63a9f57f7edc98d2237591dd56d",
+      "inventory_index": 184,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9041af4cc269cce2e8cf0737cae7b6c2bae137ef1b28f2af094c92508c117fbf",
+      "symbol": "Chiller.to_dragon",
+      "symbol_hash": "sha256:b3b58ae8b0cd495b6f402aeab79f8b73009b1bf71a772fb47e015eeec26551b4"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 199,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:aa8dcf21c53ba2fbdde4dc4b5c5b51cb6a12b2210dcba1bf63eda222052233a8",
+      "symbol": "DistrictHeating",
+      "symbol_hash": "sha256:a1c6d574e77ca0ae9a864a7e216c3a6c268dc31c5144659793a67d2a5d054d2e"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 200,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "DistrictHeating.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:334bfb0cb24cf551efa851b63cd5991a3b44e119d04be80ec1f57aaad581cfcb",
+      "inventory_index": 203,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e5c5260e76ce25622caba4836eaa4d2381ed86479201d1445aaec22d59215a41",
+      "symbol": "DistrictHeating.__init__",
+      "symbol_hash": "sha256:f477c20bcf162bb58f12806e36a82d8c0d399ac3ec43eaa30d63dccadda6a000"
+    },
+    {
+      "body_hash": "sha256:fb7fbd38b392655d253b2f3ff34370125300f23b7dd906b42207317fa68c1b04",
+      "inventory_index": 206,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0f22469400fca4dd878455bbb0a61a793e3c100bc3e61cb06ecf913a723ef636",
+      "symbol": "DistrictHeating.from_json",
+      "symbol_hash": "sha256:c53a5bbb27eb5616cdc9c33b62b17a67476d859db3bd444539ad1a9d8cff589a"
+    },
+    {
+      "body_hash": "sha256:da1b2b65e62f38fd800a7f741317027fed63081c40cb61e615b137bd1d247246",
+      "inventory_index": 207,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f4be76fa1996185fb5c5575d4cdfc5267c7f2b15a7370d820be79667920f5751",
+      "symbol": "DistrictHeating.hotwater_supply",
+      "symbol_hash": "sha256:f9effaf3b156faf96d9e3d71ab1ac3222b4933ad4cd29a51e9df1c28fc071124"
+    },
+    {
+      "body_hash": "sha256:acb2774b37e34ee62fb6bd6ecde9b5d50790ce632923dc3d7eb5ee2507a22f32",
+      "inventory_index": 208,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "DistrictHeating.to_dragon",
+      "symbol_hash": "sha256:bf1c4c8b065467f0750b66841455facb472187eaa7c12c916f70812e9f2c8340"
+    },
+    {
+      "body_hash": "sha256:f4da9d03c6960b614b37bcd65261cdf4f77698a0fec10c7db147769c4b6e3311",
+      "inventory_index": 209,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9d974909f8251f2f7eeff6cb5712f3e288cfa45df22bff65f45a642891284513",
+      "symbol": "ElectricRadiantFloor",
+      "symbol_hash": "sha256:f7f03ff5a5f2cedccb30ad66919833a5b3ed346cf20d31a93123a814c3bda228"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 210,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ElectricRadiantFloor.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0000b51bf029340173e6fceaf716b4f4da7081e7b23efbfabaea1f5d0e80e19f",
+      "inventory_index": 213,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:105d8455b8c87957bb0de8711d90f3138b23fa0c713656af9e46572a6041cc7d",
+      "symbol": "ElectricRadiantFloor.__init__",
+      "symbol_hash": "sha256:f8bde28f68306fd83c30c36a380bf2a2d0ab8f08ff696a8ba543bf2aa6e02abb"
+    },
+    {
+      "body_hash": "sha256:9aefd7f08ac066bc60e48dbb21bfe85ffdc40a14d909aaa24d155b29c8a71bdf",
+      "inventory_index": 216,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ee7e08c298ad4ef7dfa8ed2f6c3aff4ecb16bd2ba67f337e679e632e9b3fbe90",
+      "symbol": "ElectricRadiantFloor.from_json",
+      "symbol_hash": "sha256:b13a953698a740ae6f0de057f21881cd97ade59b0fea0cc3c4af2fc28480c90c"
+    },
+    {
+      "body_hash": "sha256:dcb489f3c3932b57a7108b78b1823b683ce86e8d71e55948848cae1d7bb3566a",
+      "inventory_index": 217,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ae02a07321f7497f335eb6bf52e34eb18892e50361f4307f9c724a602317c0e",
+      "symbol": "ElectricRadiantFloor.source",
+      "symbol_hash": "sha256:b14aeb3a49b0c8bd8dfbe0581a0b1f67b12b366048d074b52786dcd726847fc7"
+    },
+    {
+      "body_hash": "sha256:e68494cd6b57ccbc7e78e89f0c06dc36b62c9f3a1d54298c3f3e08c7d14aaf5b",
+      "inventory_index": 218,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7e7cec81cc315dc37211e6000685127d4458a60d9f4817f56a4f44ce1bdb6f12",
+      "symbol": "ElectricRadiantFloor.to_dragon",
+      "symbol_hash": "sha256:01ae7da4573343c5acf5ba2474c697b860f78f9fee67c8dddbf8f6e522a171ef"
+    },
+    {
+      "body_hash": "sha256:f4da9d03c6960b614b37bcd65261cdf4f77698a0fec10c7db147769c4b6e3311",
+      "inventory_index": 219,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1c9170eb76b09c7feea649df317e2a08e6baf0c314de14d3f28859af519d9b05",
+      "symbol": "ElectricRadiator",
+      "symbol_hash": "sha256:6354666eadd3e2751913c17acc82528be12be62265bbc12daf0376f7bf3ef44c"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 220,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ElectricRadiator.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:6525afaad9d637d6fd6cd218cc660c3d9abee6fc45eac6efef710fafc94c91c1",
+      "inventory_index": 223,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:124207f8097a778aeb3af50ecfe35973b4898b097751c87322f4bc3ea86fccb6",
+      "symbol": "ElectricRadiator.__init__",
+      "symbol_hash": "sha256:3a47135f63f2cdb439eef5ed5f65dde63949f6a17a2c3d97f6be17106abfdcb4"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 226,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:cc93bb37e2ab0f82f6086da6acbfc044ca713c16ec8afec84a142c6a17312c4d",
+      "symbol": "ElectricRadiator.capacity",
+      "symbol_hash": "sha256:09cfea01a6a157d670e72cbe6db8f4f9d2dd5e6af6c77dd69c4cff1fe8f6d4e1"
+    },
+    {
+      "body_hash": "sha256:3555197f1a129ad548d474b19c008382af5582b769d9211e3057d9a314929508",
+      "inventory_index": 227,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e8357859f04daaa24672ca5422ea5340f07c4f1125ea63a1f3c2858cf0547a81",
+      "symbol": "ElectricRadiator.from_json",
+      "symbol_hash": "sha256:20bd3338f7cc185c10800f70fd4ddb46812fc5c886d8f3538f6eeae20fba1567"
+    },
+    {
+      "body_hash": "sha256:dcb489f3c3932b57a7108b78b1823b683ce86e8d71e55948848cae1d7bb3566a",
+      "inventory_index": 228,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ae02a07321f7497f335eb6bf52e34eb18892e50361f4307f9c724a602317c0e",
+      "symbol": "ElectricRadiator.source",
+      "symbol_hash": "sha256:b14aeb3a49b0c8bd8dfbe0581a0b1f67b12b366048d074b52786dcd726847fc7"
+    },
+    {
+      "body_hash": "sha256:ffb6972794a329be0127ddf4bf55a6e4b84869b248cb32246bef5cd1a0d812af",
+      "inventory_index": 229,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2f211a257843bef8a87ad6d5638f1e0049bc11fbb26e8c931b1679df154420f5",
+      "symbol": "ElectricRadiator.to_dragon",
+      "symbol_hash": "sha256:4b95c9d6e62b1dcc13813749df567fdbf471b577ef1f7573861d5ec67ca16ee6"
+    },
+    {
+      "body_hash": "sha256:b5c0e9c1f80ef5884ecae10360d7afe348ea648a90c1efa48455f57a1a2452d6",
+      "inventory_index": 230,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:de6cfd7ddb8721c72a3c936f2d1d1027c6f1a91c4b554fd05bab50e1defb6ee0",
+      "symbol": "FanCoilUnit",
+      "symbol_hash": "sha256:618e77c4c3ff965908603766f3804fbb7d490aff54e01196c77d7ac0f2d3ae1e"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 231,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "FanCoilUnit.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0cc8b1eb7455ed6cc1db0d1c38c63038f36496b63c5c02354464a99b86c90088",
+      "inventory_index": 234,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ff922c21296cd5a935d82405d1e2aded04638ff6871358bc0b608c7f6bffec3e",
+      "symbol": "FanCoilUnit.__init__",
+      "symbol_hash": "sha256:ea6e311cb7493ec68f0be403fc02f1eae98dac5ef2d3c7891dd30c4a9ba49df8"
+    },
+    {
+      "body_hash": "sha256:97aaa85b546f5c026f9f1263b63e44786ec00b261a8195d1661238909fa23885",
+      "inventory_index": 237,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a9e19e07c96957f320e3410ace244d3f9ab65320a99cf0912d0e64e696f1b8bf",
+      "symbol": "FanCoilUnit.from_json",
+      "symbol_hash": "sha256:4e773b8a6d49b9bc66097044489d7cd39d0c66cfea71b52b45c916c18a9e7b35"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "inventory_index": 238,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "FanCoilUnit.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:6aad66b1cd582f39fb4670bc1ab37bddb2b453d3750ec2ed52e9a19efc4d9e13",
+      "inventory_index": 239,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c6725ba1d0dc9eb74f17aead43049e141e49b0c867e00bd02b33479b2aafd9aa",
+      "symbol": "FanCoilUnit.to_dragon",
+      "symbol_hash": "sha256:09f124747387123277547f78b46e1c80651111dc6984dd26aa7adadd195b5ebf"
+    },
+    {
+      "body_hash": "sha256:eea5f60464fbf25d0f86d503b9cb73a1e5c0ebef95201afb63878cb533c87f8d",
+      "inventory_index": 248,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b7c9586223e94cb8bbe55c73612dd32541d93ace8e3f638ef0ab444d9d968351",
+      "symbol": "GeothermalHeatPump",
+      "symbol_hash": "sha256:a87f33ee237c0d521c0f28cddf441d18fe3f656aa2823b5bf6316e73e45cfb9d"
+    },
+    {
+      "body_hash": "sha256:a02e560c380ea9305ad75abb3fec033cd3ed8a82f380238c96da7c7e6da34d6b",
+      "inventory_index": 251,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0296f4713b99c0bf9da897637bb5d778ffb7facab6fa7715656cc0af4ed43971",
+      "symbol": "GeothermalHeatPump.from_json",
+      "symbol_hash": "sha256:81ac3508503c09174a23f3c4304a30d27941b877a5f442beeff3efb7348af57f"
+    },
+    {
+      "body_hash": "sha256:8b29e3c87e3e90e783734bdefb5778458e688e15ee585a02c091cb32c77cdadb",
+      "inventory_index": 252,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "GeothermalHeatPump.to_dragon",
+      "symbol_hash": "sha256:069a6710418875fdbb56df82bf0d75c5b6aa4466a8cfe74be2ec4e8f977f75d2"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 253,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ea4b405d80dd6ccb7d596496161420b8a23c1f5f743acbfd0bc1ca614bc37201",
+      "symbol": "HeatPump",
+      "symbol_hash": "sha256:3872db3154378456d1ab86ab5dd8ee1e8473ece56ce3c5e3c5d21c4aab3db56d"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 254,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "HeatPump.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:a9b347f0f70f73580556392e3053a39bf6e6eb90b534615c91b2b39b0a133850",
+      "inventory_index": 257,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:39d9cb1071124bc34aeb349be1bd750b3e9f80a011814259f9c325bee793a74c",
+      "symbol": "HeatPump.__init__",
+      "symbol_hash": "sha256:7e88c6cd0a0a1940ba7932b4d2991e2e9be925fce87ef78baebc0fae176a20b9"
+    },
+    {
+      "body_hash": "sha256:51970bfe0c47e57e70f6c898104e851ee40f1d0a66e8efe5dde7db3589bd38bb",
+      "inventory_index": 260,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:3e5ee18c6f80c0b5a8ceb340bcdce0031fc14295a09425e1517658dc7f9926f0",
+      "symbol": "HeatPump.cooling_capacity",
+      "symbol_hash": "sha256:2c36599247e8d0009bfd6d483f79501927cda80d905dc35c34b7951847beb6ba"
+    },
+    {
+      "body_hash": "sha256:0d6b9f259f06a1709324605664c4de028d218c0c2c6b66a5c6cd4b339df63e94",
+      "inventory_index": 261,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:71e9718dab4a568443dd8a275198c8d80091e6d38eaf74eb108259b334eff938",
+      "symbol": "HeatPump.cooling_cop",
+      "symbol_hash": "sha256:59bd79833f41971c5935ede33822d3986693f0eb608ee07431110d52dc8a6577"
+    },
+    {
+      "body_hash": "sha256:a2fc3dfa6b59eb28310266d88b0f9035fe5824b906a0e9fef39eb0fad28102f4",
+      "inventory_index": 262,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0def9f1d1f9b92a17f366a3c8b7ff0a8dab2b187cd0bd8cd1df8061cef6c0149",
+      "symbol": "HeatPump.from_json",
+      "symbol_hash": "sha256:20b220f016be64ce4dc06b873fe97718f8a0409e7a0344691d6bce7f2dd5b829"
+    },
+    {
+      "body_hash": "sha256:0da73324f74a3e7c4a914c8526ba86925e97a3bc79f67568933b175b4b4dc2c7",
+      "inventory_index": 263,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c933e21c7ee9bd9b6a580d730d6d513f2c3a10c57f80fceec7a7b528566d29e8",
+      "symbol": "HeatPump.fuel",
+      "symbol_hash": "sha256:3742042244a97d39c02c78bc2f4951361dfc5122def303875aaeb7b97e02cc41"
+    },
+    {
+      "body_hash": "sha256:0dbc87eebfcbdee8403f0f7aafc3b5e752eb42bcd53ad09be636deeb687003a2",
+      "inventory_index": 264,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a5915fda8d226f920f4daf2cc114b3f3685aaa47b85311e02ebbc1194b5af930",
+      "symbol": "HeatPump.heating_capacity",
+      "symbol_hash": "sha256:b48949da79c3f6581d75a61d294f60aa6d229657bf0c0119d111ab5730b65e3a"
+    },
+    {
+      "body_hash": "sha256:5bed166aee99318c7a61e3447f1a37176c33f57a4e785f0c27ef50c829aab70d",
+      "inventory_index": 265,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e6c9981e54db16db923dc987e0c91d50ea0b5e267ddccfc3925035eae878efb7",
+      "symbol": "HeatPump.heating_cop",
+      "symbol_hash": "sha256:55ddf021efaf696de09ff2ecc46d858a0f7906dd751bdc080eea738cf0ce8618"
+    },
+    {
+      "body_hash": "sha256:8b29e3c87e3e90e783734bdefb5778458e688e15ee585a02c091cb32c77cdadb",
+      "inventory_index": 266,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:97dfeb55a1697d1771209527da11e4b59937f80eb94165a6984c13ac7db6c80c",
+      "symbol": "HeatPump.to_dragon",
+      "symbol_hash": "sha256:0feeee0bbb444a2d16c5efe0d1e1d41d928ed66197c713cb535ed8eef466b130"
+    },
+    {
+      "body_hash": "sha256:6965df85b1111302b1158597b4e86976daddc109107b0819926ee396209489fc",
+      "inventory_index": 271,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a1f38707ed1ca8008369419a24a592c1268b446750d113f9b35d6a72df182bd1",
+      "symbol": "PackagedAirConditioner",
+      "symbol_hash": "sha256:fcef63398815558d11a3c48fe89d0c3e0051f24a79d55672cba849e08b6d2eaa"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 272,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "PackagedAirConditioner.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:8783fcb7be82ddb87838124d912a974b12ce6915edca0cbc63b51eb9b57195c0",
+      "inventory_index": 275,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:51da79096974318c99fe4e790c4515b51fb9ce8448421480f57f3ad7cd54f04b",
+      "symbol": "PackagedAirConditioner.__init__",
+      "symbol_hash": "sha256:b2021d847992c5a86a23d863d37050a80da355055500f1d912686561f4ef5288"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 278,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:cc93bb37e2ab0f82f6086da6acbfc044ca713c16ec8afec84a142c6a17312c4d",
+      "symbol": "PackagedAirConditioner.capacity",
+      "symbol_hash": "sha256:09cfea01a6a157d670e72cbe6db8f4f9d2dd5e6af6c77dd69c4cff1fe8f6d4e1"
+    },
+    {
+      "body_hash": "sha256:a7f4e9f7638f69f248c7ba9d965a0c34f33b35868bc64d8be900345af2c33f7a",
+      "inventory_index": 279,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9e252719c39ab6012f0bd288c4083d9d7a7e4ce2c7d86ff33e3dc4c5d31a7578",
+      "symbol": "PackagedAirConditioner.cop",
+      "symbol_hash": "sha256:873a49d321180f9f6396b44b23751ea3e025b5c874e7e311491d54e7bcafdcc5"
+    },
+    {
+      "body_hash": "sha256:da645adada745b2a0c391ff6d4f85041a4cb32fd6f0af1e4447c6aa75238da7b",
+      "inventory_index": 280,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:25e02dccf8701ca9a926ed4e21165a048abc08f7fa10a9ad0c7efc27e8bb19be",
+      "symbol": "PackagedAirConditioner.from_json",
+      "symbol_hash": "sha256:d49a3e1b427251ccd94d5bac5d99c50d9dcb60da1aa7fd2ebc97ec6c3766c9a1"
+    },
+    {
+      "body_hash": "sha256:dcb489f3c3932b57a7108b78b1823b683ce86e8d71e55948848cae1d7bb3566a",
+      "inventory_index": 281,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ae02a07321f7497f335eb6bf52e34eb18892e50361f4307f9c724a602317c0e",
+      "symbol": "PackagedAirConditioner.source",
+      "symbol_hash": "sha256:b14aeb3a49b0c8bd8dfbe0581a0b1f67b12b366048d074b52786dcd726847fc7"
+    },
+    {
+      "body_hash": "sha256:0d83ee8547a2553915f3e47991c88289310d59f33c16581a32acac6e9532b83e",
+      "inventory_index": 282,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:3de29776ccd933a3c65e81fd2dd359a42473f6a7a7c1881305c6a6208550afef",
+      "symbol": "PackagedAirConditioner.to_dragon",
+      "symbol_hash": "sha256:0be4894a1c2a75079fc1f5528c30fb1e01a0f3378617f5ce9b453e181154ae4c"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 283,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:8538fd06ff2115b195bd6fe1aa840bd72bf513fa74c70ab4924cb51140b40fbe",
+      "symbol": "PhotoVoltaicSystem",
+      "symbol_hash": "sha256:5a79715b942d118595ac1f1169381d51cc3c070f7859fa6fbd16d20e1f0b8f92"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 284,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "PhotoVoltaicSystem.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:5bf3ca3105b5c9b755bb7b4667d1f1a81e55c48e78ca991a2cdcb6c2cb35046b",
+      "inventory_index": 287,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:db3945c83aa4bb02dcd141f792b66a2faf8239c5c9eed8c487869207afd4d00f",
+      "symbol": "PhotoVoltaicSystem.__init__",
+      "symbol_hash": "sha256:b018746211f6b5223eb6dca39443c3e0e451421ec70cf9daad82a5499a60f8ad"
+    },
+    {
+      "body_hash": "sha256:e588872dc6972bed33a8a7331923fb9cea512910ef0d897ca5a7d2c83400dcb7",
+      "inventory_index": 290,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:525a1faf6e42740ef61f82b6a24773bfd87d60952f9393b477784bec26b9e4cf",
+      "symbol": "PhotoVoltaicSystem.area",
+      "symbol_hash": "sha256:aa93b96bd36a02c789e649c6beb5f1309eefbfa45fbc91d8318df3474ec06d7a"
+    },
+    {
+      "body_hash": "sha256:8fc199d010389df1784d072ad12b44ba74d404642c2b4271d4d78409f56c8a59",
+      "inventory_index": 291,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9f38ee6a5bfbbdb1c739e1d150c51388c5aa36e0eeeabe4750dd405339034ff2",
+      "symbol": "PhotoVoltaicSystem.azimuth",
+      "symbol_hash": "sha256:3b2cfc1a2acc215123de2b982147d0b2a74c978e531166fc7ac4aa7992d3c68f"
+    },
+    {
+      "body_hash": "sha256:b449c78b5f6789e34ec6cf108ed58fc253c9778ca9b74142b39874ffcc6c2efc",
+      "inventory_index": 292,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7a05da5625820c6c82456f3e46373c9a45937c8d39440d6684a43098197dc63b",
+      "symbol": "PhotoVoltaicSystem.efficiency",
+      "symbol_hash": "sha256:80144f2f58577c9b96d6d6d012e949a459d23f8cfb4a3f77e5656154e80b6947"
+    },
+    {
+      "body_hash": "sha256:427fb073ac996dc13a1265c560795ab221ab160198e2c2e47c26c0dca98fad94",
+      "inventory_index": 293,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:eec1058c435a3bfd26ed9bae90cd3afde9f5b6914c5e4635ef143a3196597389",
+      "symbol": "PhotoVoltaicSystem.from_json",
+      "symbol_hash": "sha256:1571f37e4253739f52c4df3a7d23012ba84be42075a54cd701e56fc59aa12812"
+    },
+    {
+      "body_hash": "sha256:217707e81716052ded8bcec282489c965a856b2bef201b8988cc704fd5029a0f",
+      "inventory_index": 294,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:430cb41df90f491b97c6de4b2624bc51f99e0c3f315bd924f66470822a5b8c86",
+      "symbol": "PhotoVoltaicSystem.tilt",
+      "symbol_hash": "sha256:abeb16e68a1dc65d3d43f76029e2824f9f73bd5351e65bb1c5b2f17348eb161d"
+    },
+    {
+      "body_hash": "sha256:8126424ff42b67c4ca7f75cc8eda51bb840b5993d85b9ab4c34d2eff56bb744f",
+      "inventory_index": 295,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "PhotoVoltaicSystem.to_dragon",
+      "symbol_hash": "sha256:6f67da14e037bd1fb08ad53109aeb2083c1f4b1d1a58ffedce0046604d18360e"
+    },
+    {
+      "body_hash": "sha256:333cc42746dff81f974eb6f6810893812fb9d300b5ba3d6e7111309cb7f92ad9",
+      "inventory_index": 296,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ac8e4688e63eb42b58f942cc69c0d425c2e2b16c0ca931c9a0c2fc9500c1471",
+      "symbol": "RadiantFloor",
+      "symbol_hash": "sha256:3a70e982c106c5212623a10732007a9852064f5ad425395b6e45bc62500beed4"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 297,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "RadiantFloor.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0cc8b1eb7455ed6cc1db0d1c38c63038f36496b63c5c02354464a99b86c90088",
+      "inventory_index": 300,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ff922c21296cd5a935d82405d1e2aded04638ff6871358bc0b608c7f6bffec3e",
+      "symbol": "RadiantFloor.__init__",
+      "symbol_hash": "sha256:ea6e311cb7493ec68f0be403fc02f1eae98dac5ef2d3c7891dd30c4a9ba49df8"
+    },
+    {
+      "body_hash": "sha256:fac934170d680a1a998c791b2d9a0e21abc210518d2f2ec8a56633facc2394a0",
+      "inventory_index": 303,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "RadiantFloor.coolable",
+      "symbol_hash": "sha256:b81ea250ac6244b33580b16bb18b30bf835ce33f4b947ae01243d866f94d9795"
+    },
+    {
+      "body_hash": "sha256:c326dd5cd32e05348b9b6353753974a9f67021c4afae5468552c0e026216643a",
+      "inventory_index": 304,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:dfbfe8c6ecbefd43dec9ec5e3e1811a7c021a7d4c936f74676706c63f143e286",
+      "symbol": "RadiantFloor.from_json",
+      "symbol_hash": "sha256:a3c19218d4a8a9106ef202bc83d5344709b7e5935967766c107b2595dae20733"
+    },
+    {
+      "body_hash": "sha256:a200989331792d789cc947c1b615c0eb8c31e552b2dbe4f805b7ad72e3f082d4",
+      "inventory_index": 305,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "RadiantFloor.heatable",
+      "symbol_hash": "sha256:0b60e64a309323590a641eb4ac517d15891d836f48176947c1f7a8df43d244db"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "inventory_index": 306,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "RadiantFloor.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:7d0905ff487f7dc632518e694f9ed1772ba8a76da2c1a86472489f44f620b2d0",
+      "inventory_index": 307,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0177243494086b0d6d20ad83d9adb434be666785699d3d7079b5223d2d9d829e",
+      "symbol": "RadiantFloor.to_dragon",
+      "symbol_hash": "sha256:db1248599e13656a85a83bc3af1716b755819ce437af3a3f245a9b52d9c1c106"
+    },
+    {
+      "body_hash": "sha256:333cc42746dff81f974eb6f6810893812fb9d300b5ba3d6e7111309cb7f92ad9",
+      "inventory_index": 308,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c6b48693d6dadbb8ae0abebc8271d507d00111e70927ac4caa1f34229e94d1db",
+      "symbol": "Radiator",
+      "symbol_hash": "sha256:8464a277a095d9e36a40b54c366b83405fc63809556dae795c5d1a1513112d73"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 309,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Radiator.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:a87f4596d58e071a70165fa2a955d67f11a8b734ccbf60661f30fc18162fec35",
+      "inventory_index": 312,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:8fa22f5eff68f7f34d4294f671aa876da59c4e57c7960bb9c4676e39a269af5c",
+      "symbol": "Radiator.__init__",
+      "symbol_hash": "sha256:35304b6f549ec68ca020d5db6d8a8412a038c5a07c18825b25b5fe9ef775a9f4"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 315,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "Radiator.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:331107434c11accd70633c311eb4289240f9eab9962336bb677976a5be5c7591",
+      "inventory_index": 316,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:53a1edbebf6d656971cf1f19b71b03ea025f49387b7bec20a7ecf6306a166017",
+      "symbol": "Radiator.from_json",
+      "symbol_hash": "sha256:349b941b7fb11e3009624a5a75e0707deecd733bacc496f50312779251f5ddf8"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "inventory_index": 317,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "Radiator.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:48bf1f2a74c0a55a019873f668c2a539ca419e40ff2e9fc799e373a63940b41f",
+      "inventory_index": 318,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a591803a0c769106be546c678cd7cbb08eaf9c4b433d4b526c03405d55e784d3",
+      "symbol": "Radiator.to_dragon",
+      "symbol_hash": "sha256:bb8edb65b591e39b622c1569a5969446a150d5e5b0ea7f58d65d34176faabdea"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 321,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:fc556e768556332704e50f080f462c730f7235a8d85b7ba9247517c53588d919",
+      "symbol": "SupplySystem",
+      "symbol_hash": "sha256:d236c0a04078304ea345cbd7c8c1869302365acb12658f8497b0826edc52332e"
+    },
+    {
+      "body_hash": "sha256:b9eba64579e158cc0b805b796a183e3a7be5ab8d11af2381a93a3bea7a73caad",
+      "inventory_index": 322,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7e528899651b38b262aa7c22be2b1a3277169c7406d887fb67f3454a9f44ace8",
+      "symbol": "SupplySystem.TYPE_MAPPER",
+      "symbol_hash": "sha256:3639f05812aac7d5fc787679da794f56e05943dc68307da0985c671386518022"
+    },
+    {
+      "body_hash": "sha256:53f089ff50733d36140fdcd3bac778d81c5165324206853953ec66075c5940b5",
+      "inventory_index": 323,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "SupplySystem.coolable",
+      "symbol_hash": "sha256:a658d7c48c13e1d67dd38898c56df5cabff584bd320d5dfe366247981fcde979"
+    },
+    {
+      "body_hash": "sha256:cd6c95a179a95ab99b2f0b173e9fb980866ddb81680871d64588621a6ce90e75",
+      "inventory_index": 324,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "SupplySystem.heatable",
+      "symbol_hash": "sha256:9d89b0d88c186efc0a1897ac3ad1658f6dc7d024b162188408a81461e13b7372"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 325,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f95992017959a0f7150618b3a1530e6058ad52be08e591e08619a5ca621ca56b",
+      "symbol": "VentilationSystem",
+      "symbol_hash": "sha256:b4f227351d8ab5efd177e61ec95a1ec8f5ff115abd3192cfb1d2f5d2956376b4"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 326,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "VentilationSystem.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:cd21ec881c0aca0378421daac09ce9c137ada1303435db24d7f439b0302caa05",
+      "inventory_index": 329,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7449c5865d5357f17c8680f86663e4b772a2f806181a5840c4df79a063f1ea56",
+      "symbol": "VentilationSystem.__init__",
+      "symbol_hash": "sha256:7d9d5173bcaf71fe63dbf9a8b4572b498db76f280f2ab6e0d4bb9d6d5af01a42"
+    },
+    {
+      "body_hash": "sha256:a1b5f099b791327d3fd1580b267e0487330ab441d32165d7b373896f017719de",
+      "inventory_index": 332,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ebf17326b32c40dff148e673f2f9fd53f2cdb204714c16837f1bb5799c01025a",
+      "symbol": "VentilationSystem.airflow_rate",
+      "symbol_hash": "sha256:b19eca15d6da2b74f791418ace2d3f9842b3325ee1275aa83d2c9a376f29cecf"
+    },
+    {
+      "body_hash": "sha256:bc9be31b88092612769aa683b9382352cf43ae50709f87d9d1e669704f1062cf",
+      "inventory_index": 333,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e05e54956fba4af8af5f1534e150dc6463f3e8650df104724484e5fa31fc8dab",
+      "symbol": "VentilationSystem.cooling_efficiency",
+      "symbol_hash": "sha256:839431378f98bb11537ad790591935959db0dabf46c58bf2ef2ce14db593605b"
+    },
+    {
+      "body_hash": "sha256:ef4d24e014eaec930ed906f6f3b49474d247a9cbdbf5821bbdc29f364750a2b7",
+      "inventory_index": 334,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e8490b3609e75eb4bc77408e8c95391c8d0566f25a62a06c94ccb419e46ac444",
+      "symbol": "VentilationSystem.from_json",
+      "symbol_hash": "sha256:acaa4faa2d86c79e192ff8b656f0f994bd68d5521d385c0ab73f87a3bf535e0f"
+    },
+    {
+      "body_hash": "sha256:3b9814062256bf3ea2ef2c16974a02293b86402be6048965d3cb6fcc0a4235ec",
+      "inventory_index": 335,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ef7dc696a100503d05975968cf1f5b5464412f894f7d1830d70af18c56e89867",
+      "symbol": "VentilationSystem.heating_efficiency",
+      "symbol_hash": "sha256:76edd9cd644cad9e21d4c774207f921a253c93ffd5d10031c3650a66747a2924"
+    },
+    {
+      "body_hash": "sha256:8f6cfd498bbc3f5c6b9579a78c165bb00e671d7ddde71c2c3c9abb3f2caa468e",
+      "inventory_index": 336,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a1cb1a18cbf0115a8c02928192e6e9da52ae4ee12cf2818024c93475d5954103",
+      "symbol": "VentilationSystem.to_dragon",
+      "symbol_hash": "sha256:fdc1293c0274742cb447238b18816105cb3feef83864b404fcf8b13a8270e47e"
+    }
+  ],
+  "excluded_receipts": [
+    {
+      "body_hash": "sha256:30e61c085f7c219644788b5f163d9b5375f445c28fc15eff9ad827504f17a4e4",
+      "inventory_index": 137,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:01bd196eec644aea438b478b473d8d0eb2939cd2d39ae16f04b348ff57f2f5c0",
+      "symbol": "AbsorptionChiller.__eq__",
+      "symbol_hash": "sha256:c012f21a604e16408ec517dd611115919de16a20ae87a8762be2763cb5d3ca3b"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 138,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "AbsorptionChiller.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:47472cf1788afae1d4fe6907528d598f206dd829a3567008748925d2e1842cd4",
+      "inventory_index": 140,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "AbsorptionChiller.__repr__",
+      "symbol_hash": "sha256:2d9744bbb82c6dbc4d785e477cb2631154d44aa55333ed55f8b543ebfb2b42f3"
+    },
+    {
+      "body_hash": "sha256:2621f5f579596abbece706367a3210d3b65b39372f817cf13e989ccb1ae502d5",
+      "inventory_index": 141,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "AbsorptionChiller.__str__",
+      "symbol_hash": "sha256:efffc8dc4438f71e082ac62cf09ebf53d22cc691ab80b1203ec2add519c3557d"
+    },
+    {
+      "body_hash": "sha256:067dca28c756df9e682af6415a46493fe0baccce462b465a5a090dc0cb622165",
+      "inventory_index": 149,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6b501038a3939fb11f9be3dbca5c07b40d3626e0191dee8b8b00da6056c64eab",
+      "symbol": "AirHandlingUnit.__eq__",
+      "symbol_hash": "sha256:b6e5634b13a932645f6f051663e44a7c1f00fa0564dd203c5ac259c142249f82"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 150,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "AirHandlingUnit.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:b797dfa702d84cc63e6bcec372324d394753fb05faa954d78c97bc0d8f4a077f",
+      "inventory_index": 152,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "AirHandlingUnit.__repr__",
+      "symbol_hash": "sha256:7ed3e34aa8ec5b299ab22f31f623d3b4fe69a00bd5df917cf38ddefef218fed5"
+    },
+    {
+      "body_hash": "sha256:9ab85e38218a0d5e5d8699c864fd315270fc4598a4f99b1b055fd81a56a5fa34",
+      "inventory_index": 153,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "AirHandlingUnit.__str__",
+      "symbol_hash": "sha256:ac7171116079c399e061cdcc26178393df0fd1e176acb85743f602459f59b193"
+    },
+    {
+      "body_hash": "sha256:2a3640e13a7103ebef9f38c863e8c47425308c770673dfbd3efca6b9cbdf9a76",
+      "inventory_index": 159,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:8f54d66c8b58974623d65962152ba3de10a35bbe583ac76493fbb0fa6b99fa88",
+      "symbol": "Boiler.__eq__",
+      "symbol_hash": "sha256:2b503f3d1cb2dbe68c89a252cb37f4a3bfb76a2f31f84beecfd06b1bcb2652cb"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 160,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "Boiler.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:251bc99dd75bab75bde040fdc1eee08c2f200406a7e8e43d6eadc9b621b95cc6",
+      "inventory_index": 162,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "Boiler.__repr__",
+      "symbol_hash": "sha256:a6483d4a2f2c65bf347ae5ffe251e1cd5268186d2759bc81b3aa878c4fb60412"
+    },
+    {
+      "body_hash": "sha256:7f43de60e757ab9e3135b6133219cd21f669caf75d02c4a82de643ee013b33de",
+      "inventory_index": 163,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "Boiler.__str__",
+      "symbol_hash": "sha256:b8479ae5ca7f11c274ab3e448caef2e73abbcc6057a20e4443b317e77e104853"
+    },
+    {
+      "body_hash": "sha256:5d95e639d6a32f99d7540a0fce3f7002bdb58f2d8b8111d6b14b765d19126de9",
+      "inventory_index": 172,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:296b4131db6f79bed2cb008ec7fdc1e774b734c992a1c7559b003f7095c6de46",
+      "symbol": "Chiller.__eq__",
+      "symbol_hash": "sha256:8de6da047fb844518ed5bbfe76f106db8e7f73ca0bbb6b222a2a4cde36acdd98"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 173,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "Chiller.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:3761b3fde870b5c85415da063413c8090fa95502a77620e2ea511a224a4b438f",
+      "inventory_index": 175,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "Chiller.__repr__",
+      "symbol_hash": "sha256:b825b20b91c5cfa8fd0dba860f869d0ffc3cb79540b78001b5800505188246de"
+    },
+    {
+      "body_hash": "sha256:89a00efa07999183296e8878d51d428cd309e38ee058c39b29387b068eb3c341",
+      "inventory_index": 176,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "Chiller.__str__",
+      "symbol_hash": "sha256:790c58cc96577621d300e9e786910a09a4e0a27232ba9ccfe6c66019b71cef00"
+    },
+    {
+      "body_hash": "sha256:8963e6ca6d6bec6c1ae9836036dd55ac04696cf88e1307485e7126264efa2158",
+      "inventory_index": 201,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ae579aff0cd61cd71b56ad9642013af8b648ce5b0dd776d602f1c7f6c706d4d9",
+      "symbol": "DistrictHeating.__eq__",
+      "symbol_hash": "sha256:706095a56923e4d2b043624b13ebed30174ee53f109d69a466dec33f53dde7c4"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 202,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "DistrictHeating.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:72b3e40aabc1b445d0fb76285724b22fd93861f1141f1106ac526609ebd40abc",
+      "inventory_index": 204,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "DistrictHeating.__repr__",
+      "symbol_hash": "sha256:76dcce404e568ecd583766c4fdf9dbac0e1786a7b7f2aef1453c230d3cdba522"
+    },
+    {
+      "body_hash": "sha256:d6a700daf176161ed7a142b0e3e42bc3749605fc1ddfb720f48c9dd5b2d48e3c",
+      "inventory_index": 205,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "DistrictHeating.__str__",
+      "symbol_hash": "sha256:5755e4a5d97ed57d1645ffae0945bb31aa9b59a42ade64f159cd923a8769cb2a"
+    },
+    {
+      "body_hash": "sha256:01d4973f3db6c5972f5a6a18db53401b32f74ec80e63289c7155029217663b3e",
+      "inventory_index": 211,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:685acae61885342a94c2ea674de25a8d49acd226f4f1ad6acc01f84c2ea5e35e",
+      "symbol": "ElectricRadiantFloor.__eq__",
+      "symbol_hash": "sha256:2079415d1085ae6d71176780a3eec9fe6c94f201f51d3b66b12e7e7da26c25ff"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 212,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "ElectricRadiantFloor.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:3830dbf2dca0a5f1c619548bd533475c5139565b34707dde27c691fe8f6dbe25",
+      "inventory_index": 214,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "ElectricRadiantFloor.__repr__",
+      "symbol_hash": "sha256:35e27bc1496e84cac14556871525aef0a510570d635e2fd5391bbbc7117c84ac"
+    },
+    {
+      "body_hash": "sha256:1f919382f8b87bc1b01065ada321b79d7e334dafb557e40efd98599ab7f982c2",
+      "inventory_index": 215,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "ElectricRadiantFloor.__str__",
+      "symbol_hash": "sha256:b0bb1b405f0a9de4be26e73a9047cd35b448612da9764168494781a3c669f174"
+    },
+    {
+      "body_hash": "sha256:dd762593d39d20a61aa43b78029dcf9fd719965159e14ec90ad44030ccf05475",
+      "inventory_index": 221,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:91adb3bb2c69e1a76bf7d5be0f13f168c653255c45536cb2daee09f24bed8c1e",
+      "symbol": "ElectricRadiator.__eq__",
+      "symbol_hash": "sha256:a27ed22f56823f4dcca9d04686c487a5a1c999cad587a90cfa20bf2ee129413f"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 222,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "ElectricRadiator.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:e851d70a9606b4a97d65311bb1f07d12c876d0afcdad238a5301b365d7739fd6",
+      "inventory_index": 224,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "ElectricRadiator.__repr__",
+      "symbol_hash": "sha256:6644ef1126e88408366f3ec4de55943aafba6c591c71a8a4c9743947f3d37ad8"
+    },
+    {
+      "body_hash": "sha256:b7e2c63ed83d7b937fbe331ed7ea5cc9b1acf51e48a606f2ca5cbe99cb42ccef",
+      "inventory_index": 225,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "ElectricRadiator.__str__",
+      "symbol_hash": "sha256:b131e49230e68a304bf03d8d66fa85541d76de0e06a9c9bac48cb19e2eb9718a"
+    },
+    {
+      "body_hash": "sha256:067dca28c756df9e682af6415a46493fe0baccce462b465a5a090dc0cb622165",
+      "inventory_index": 232,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b411bcd3785d080989a515e2ebbd66a9daa04152c0d140ad5485b3647b7f4b8c",
+      "symbol": "FanCoilUnit.__eq__",
+      "symbol_hash": "sha256:e61af711a62b05349656e31749c165e75739a10d9696876049612dd5f477ea89"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 233,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "FanCoilUnit.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:232f972352471ca68a9ce0c602b509630bdeafe99d26a0cbda7b434ac7c694f1",
+      "inventory_index": 235,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "FanCoilUnit.__repr__",
+      "symbol_hash": "sha256:18573f6297e93193f8f0faa460e89d3e40e5045192d6071d23c84871aba25a78"
+    },
+    {
+      "body_hash": "sha256:69ebe00d90cb90e3677b562743a3a010c552bee3571f88a02de923024c82c478",
+      "inventory_index": 236,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "FanCoilUnit.__str__",
+      "symbol_hash": "sha256:bb2a64c8a8caf96d3a8e9f1f9c8a0d6516f9b6ca45309bbea6fda0d011b2356d"
+    },
+    {
+      "body_hash": "sha256:e2962a9b6b3d1eb5312ed190bf3e31bfccba46e992e6f8772033bcfb53837a6e",
+      "inventory_index": 249,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "GeothermalHeatPump.__repr__",
+      "symbol_hash": "sha256:416f3c259d32c7f984551c2d3f5f07315931202e652ace5bc5fd52b6357e993e"
+    },
+    {
+      "body_hash": "sha256:da700e786065152ba9767c3af01be997910cd8df2fa370e926314bcfe75cf5a9",
+      "inventory_index": 250,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "GeothermalHeatPump.__str__",
+      "symbol_hash": "sha256:28deb246a59df4e9e4e76aefd48cf4b7c9fee4fb8f9fcd96b5a31c577828ae2b"
+    },
+    {
+      "body_hash": "sha256:c97c4ab839e8f642412e82b16a87e2921319581c94e2da159cf4c6f2c3346167",
+      "inventory_index": 255,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ba0f1623e63c3c0c0bcddacf436f5f17aeb2b3a781299cdc7598a5e0a451cacd",
+      "symbol": "HeatPump.__eq__",
+      "symbol_hash": "sha256:8ba373e20521d7ac02377b827892ac52262a84708ddde5d1d152899560c3de10"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 256,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "HeatPump.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:9bfda2ac0e3b5fa5aabfc9ccaa1c55ab7a44cfba0ab176843e47e32c45adb2c1",
+      "inventory_index": 258,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "HeatPump.__repr__",
+      "symbol_hash": "sha256:e883a8f33550acb2789715a57a7a285fc3deb1d1a2f7821c3b9251b3032657d2"
+    },
+    {
+      "body_hash": "sha256:976a2a583efd9a4c41538eb610cd08223da76936cf664a2a74916c4277f9eb4e",
+      "inventory_index": 259,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "HeatPump.__str__",
+      "symbol_hash": "sha256:309802d1fd1115386d0fbe1b50cab5755c586c4562e8bce9415eff293b728bb0"
+    },
+    {
+      "body_hash": "sha256:fcbfbbb54a141df15a34d4f7ac2a5b5e171df416241730cc26b93d893bfc7d43",
+      "inventory_index": 273,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ba15cdba825ecb655374d77ff84bef7fe07cf2410b4424c2410c77b6263fbddd",
+      "symbol": "PackagedAirConditioner.__eq__",
+      "symbol_hash": "sha256:51178e17ede67397ec492d8c1ceb9b7163bafdd2c45550a98dbce80cddb30271"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 274,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "PackagedAirConditioner.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:6f902d5cfd6803ea4355d05e9bc487bc9438932c42ac2a2b19bdfeecea2c8e88",
+      "inventory_index": 276,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "PackagedAirConditioner.__repr__",
+      "symbol_hash": "sha256:b5728b3d72635e229e1d784044fe8834d3f39f72a070c09ecfb79b0c8f6a2dfd"
+    },
+    {
+      "body_hash": "sha256:95a5e55248d1b7a7b8b82e749a56ecdfc9475e21b349fea6623bbff9b36375b1",
+      "inventory_index": 277,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "PackagedAirConditioner.__str__",
+      "symbol_hash": "sha256:23f742cc2c2cc8ec00aa8330e5dd27175ea8c7757d0d333ef916daf40de22bd6"
+    },
+    {
+      "body_hash": "sha256:aed69638cff59c8163366ae31b55d290f53252f19c23c1e115f5d4ac212a800d",
+      "inventory_index": 285,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4874aee16b96f066c07e83a9290dba76e9d9b3f468e7048ef080912d1ed818b8",
+      "symbol": "PhotoVoltaicSystem.__eq__",
+      "symbol_hash": "sha256:857cab3366a878790c718fee3937436c2c7eed77fc78672d2c9e00dea4b3de6a"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 286,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "PhotoVoltaicSystem.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:5cbcf14ff7da54981d6a2a305deb88195b8f2c1013f4163302d15ee07891b154",
+      "inventory_index": 288,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "PhotoVoltaicSystem.__repr__",
+      "symbol_hash": "sha256:c0e1d5cecf4fc4f39b905193fc4d77cc57206cb2bace55fd29e31acd3398166f"
+    },
+    {
+      "body_hash": "sha256:8479ac120baf00712d62211f6b80168e84c068c8cf57516a4a67a941f990b871",
+      "inventory_index": 289,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "PhotoVoltaicSystem.__str__",
+      "symbol_hash": "sha256:3f778814370c8e1674579ea0d1aa8efc43019f17045cef310c3620557830181c"
+    },
+    {
+      "body_hash": "sha256:6d97e18c625fb8d5fd59a7f70b94033c35fb9d6957e2b3ac881ef50089ac7f04",
+      "inventory_index": 298,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:db27484ee1e7c6164066e9485c1eafa6107ffec492f035ff994afdf07185d8a7",
+      "symbol": "RadiantFloor.__eq__",
+      "symbol_hash": "sha256:860d9927f9aca96bd5ecd66984d13e8b0dcd522959b98bf2a139011ed5fd1fbb"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 299,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "RadiantFloor.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:91bc794931feac87b5cf65fd4b8c75e96e4c0dd2c056b7b91fd60a50af7ff3fb",
+      "inventory_index": 301,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "RadiantFloor.__repr__",
+      "symbol_hash": "sha256:8ee82f62880af40c067f4d4ba14ad58ae6290979878d36aef4f66997f4586df2"
+    },
+    {
+      "body_hash": "sha256:7cf7931b394b37455292d6dc473d1e9575a8803cb8d7eed1ba0eca072679c8e7",
+      "inventory_index": 302,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "RadiantFloor.__str__",
+      "symbol_hash": "sha256:df8acdde4c1ef620473503530230f1a11adf1815a01786840ca072044622d407"
+    },
+    {
+      "body_hash": "sha256:ef58505f5f234fc7544b208ad7390a5611281acce992e4f66c0fd9e890a4aea8",
+      "inventory_index": 310,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b42aed053a3d0377ef945c4fc1d12c0a68df78903fdedba226fb8a13ebf5b599",
+      "symbol": "Radiator.__eq__",
+      "symbol_hash": "sha256:4c6c9781329b7a1d78fe04f544e570c6d120ea1a71c850a45bdb7fe431fd9a62"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 311,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "Radiator.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:6c1cb15dd1ce689822fcef46086c806e43b4ccf279de68d0d29830cad9aebc66",
+      "inventory_index": 313,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "Radiator.__repr__",
+      "symbol_hash": "sha256:b0f692e70113bcf6a6704ee831da37aa74d7b358c425a840ef46ccc44fa2b5ea"
+    },
+    {
+      "body_hash": "sha256:287f07cf5a723b2149bea10c8bcbea527f15484e7af372f0de58bc263b41ccd4",
+      "inventory_index": 314,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "Radiator.__str__",
+      "symbol_hash": "sha256:9295b82bfc9b20e87c1e6aaf7e989d1482bd988126e8cbe21613d6588709144c"
+    },
+    {
+      "body_hash": "sha256:0b8b822afc4d398c03608cffb7218846f6611fac4478dad91f4635e1d04e6656",
+      "inventory_index": 327,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:da21dd980a079908d960910f1c6a4f52df52edc6bd4ad29433c0139bfe89041d",
+      "symbol": "VentilationSystem.__eq__",
+      "symbol_hash": "sha256:9c28de4f966650967b86595fd37acd834708e60a8c98f01638df5062297fa9f1"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 328,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "VentilationSystem.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:61dc2715cd7f9024d7f5c53d0223934790ea406a4ddb84fcb545db3dea6fa7bc",
+      "inventory_index": 330,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "VentilationSystem.__repr__",
+      "symbol_hash": "sha256:fd46070cdcac5d092dcfe153da104c1857f262c04dddcd5ff0146041f1083586"
+    },
+    {
+      "body_hash": "sha256:d429c0226f691b9b85348004631b69b7f3ca7867dc63fd1b48017c4496a041f2",
+      "inventory_index": 331,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "VentilationSystem.__str__",
+      "symbol_hash": "sha256:5abb2e8f561eacdeeffeabe0b01b6a8c48ebca24823085df720cdc40afaf7561"
+    }
+  ],
+  "fact_sha256": {
+    "epsimple-hvac-enums-base.compressor-values-order-lookup-string-and-conversion": "sha256:8b67c867364b112d383744e8357daed43f93e75a32352ae0255474d93afc7f2d",
+    "epsimple-hvac-enums-base.cooling-tower-control-values-order-string-and-lookup": "sha256:d843b804c6f08d29c482f9eac898fd8e6a169770e6f64889aa2488acb6930bfc",
+    "epsimple-hvac-enums-base.cooling-tower-type-values-order-string-and-lookup": "sha256:43c5920065fa1fd0aa558b6f4f96ded8f8791494ff79899935d647d666407ab6",
+    "epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion": "sha256:9429dc4285592819464151aae71b8fe663bd60227020e08a3255e764c4c87394",
+    "epsimple-hvac-enums-base.none-source-singleton-id-new-and-conversion": "sha256:e92e8a5aa21f23c59ebab2ce092103d26ffa07d12ab3e91ed5e5d683ceacd5cb",
+    "epsimple-hvac-enums-base.source-system-base-and-type-mapper-topology": "sha256:db863d8ee217410e14ea263c8936b97a5085ce69d3b9debefb86f120b15da146"
+  },
+  "native_audit": {
+    "public_production_routes_only": true,
+    "routes_sha256": "sha256:1ab1aa1c19117170fb80eece3992ac0abf4e3f2b0046019da13f9063e6ac6dd0",
+    "source_receipts": [
+      {
+        "bytes": 6894,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs",
+        "sha256": "sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad"
+      },
+      {
+        "bytes": 6465,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SupplySystem.cs",
+        "sha256": "sha256:1858281dcb5ea2df12a09c0c19caba77cf785a10458fb8d265e882f5695a11c5"
+      },
+      {
+        "bytes": 48650,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs",
+        "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"
+      },
+      {
+        "bytes": 16652,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs",
+        "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"
+      },
+      {
+        "bytes": 87343,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
+        "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"
+      }
+    ],
+    "source_receipts_sha256": "sha256:fe23323ab73740345e6c7c1cc4539f2b09edf0346f34880a84df049c8ffc31ef"
+  },
+  "runtime": {
+    "bootstrap": {
+      "bytes": 1232,
+      "path": "tools/python-reference/bootstrap_reference.py",
+      "sha256": "sha256:0674dcf1fe966de2a4b873a360ef67be48d74f38ba80adba9c74405fd9be7e0f"
+    },
+    "dependencies": {
+      "eppy": "0.5.63",
+      "numpy": "2.3.1",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tzdata": "2024.2"
+    },
+    "dependencies_sha256": "sha256:85d50612b42b3818f054fd7d9cdb26a16bbf832c3afc56762ea732f55a48cb22",
+    "implementation": "cpython",
+    "platform": "win32",
+    "pointer_width_bits": 64,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7",
+    "strict_json_support": {
+      "bytes": 21114,
+      "path": "tools/python-reference/generate_schedule_type_oracle.py",
+      "sha256": "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc"
+    }
+  },
+  "schema": "goniegonie.python-reference.epsimple-hvac-enums-base.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ab5079fb2d6d55f1e976ecf2390324fa23f6f36699a42aaa4a781fc39b9db2c1",
+      "symbol": "CompressorType",
+      "symbol_hash": "sha256:8785ee6da143dbc022e1a9cdb6096fa870f2d9d99804c2ab5ba18641319dfd74"
+    },
+    {
+      "body_hash": "sha256:14ef710b785ec24de12978b3183cb333a82b5bc0f568de54939803660521f94b",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7ee3e8a807c0d636c16019f63a60e8b459bcea3273c9bdfe1f6e1101b3f5e0e9",
+      "symbol": "CompressorType.RECIPROCATING",
+      "symbol_hash": "sha256:dfd51671c84116479c9ee96bf61343e6c32edc7a675ef8eb6127cb9b579c42a4"
+    },
+    {
+      "body_hash": "sha256:798047174afcabac9976d05149bfeba3f8cf8c8b06a2f43f88611e5bd07cf24f",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7bdf36eaffe58a5b4664e1f40e728887db746c5d3fcb9afbc55abc405e6d32cb",
+      "symbol": "CompressorType.SCREW",
+      "symbol_hash": "sha256:2947a21386fbbd0393dfc0670795aba5ddb05be02e511da37cd0118a5d70573c"
+    },
+    {
+      "body_hash": "sha256:27568afe842cedb04fc44e3ae07f54630fce2c3f31a22f7b184b4b98cb0f1d6a",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:eb1dcdfed7b6604baf0028ad7458ce73be465bfe31a918b8e1718b123ffe4742",
+      "symbol": "CompressorType.TURBO",
+      "symbol_hash": "sha256:5074351dd266b5054fd70ac52d608a348ca3d3bd121be79c7aeb6655f9ad1449"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "CompressorType.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:cbab2d540d2face06ab18784eff867aa45244496194f49bedb2d528272d2a658",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ae9b2d48f5c0bd9d4abc023ce56cff228bdef92e0a406c572d6d12d1bdc6a1d5",
+      "symbol": "CompressorType.to_dragon",
+      "symbol_hash": "sha256:bff3a12f1d60fb8759d0c55825daa39375c624fb86ce31c03545d045fa2933fd"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1c9370d192e36e8c8137fa438146a2f6fc539941001bc1c22a92dd72c6aa22a7",
+      "symbol": "CoolingTowerControl",
+      "symbol_hash": "sha256:31f279b79019dfa39dedafb34b19d67eb9d77fdec455c45d5ac2b04e7cf0ed32"
+    },
+    {
+      "body_hash": "sha256:c481a5bc5736eadcc831c922d092401622c400201c9555abef5d93373129c952",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:33b9fb7e3ac286f14605378084c561760ed62da9f2f2568131cf7bd25d7e30cb",
+      "symbol": "CoolingTowerControl.SINGLESPEED",
+      "symbol_hash": "sha256:536f3586055ed157420436c6769db9d49ab058d1a510fc446e2a36334663635c"
+    },
+    {
+      "body_hash": "sha256:74cd6022869a3c1b12704ddcc37c18ebc2e1226ee0cefc62e75880d9b3e5d36f",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b2fed9be992df2a7e4798c5ec9d8d48e148f2f3f0676259da18378889aab9645",
+      "symbol": "CoolingTowerControl.TWOSPEED",
+      "symbol_hash": "sha256:bc3d3c6f75384b8448aee861fd14f0fb7c3899495493b91e83f29b46966bf4fd"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "CoolingTowerControl.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:8d6838d2866b425253e9ba32008780e3c316053ac93e18de26d3163687e4d9ee",
+      "symbol": "CoolingTowerType",
+      "symbol_hash": "sha256:9dd879be9b468d09c8ccb2a0c555fac28472d037d6168b5c71147d9e70fda4cc"
+    },
+    {
+      "body_hash": "sha256:4eca9c766d077cf0b4726a846ca96e7fce136ae1c84364db999306f57210961b",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:79bb9663ebb7296128246112cce823c8fad654b4d948c2c504952de5c0d8ddcd",
+      "symbol": "CoolingTowerType.CLOSED",
+      "symbol_hash": "sha256:ec6ad133c786c44f7d733ecfcc2c1cfb0148623df362a105ffd7c6504e07ba17"
+    },
+    {
+      "body_hash": "sha256:4b2264e63aa292ea89f891af4af5662052281f369d7ede7f669297782efd67b8",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:51d46d5499642bc02b961b93ad411ee2aaf05684fbbf32bd5988ef3ce09acab5",
+      "symbol": "CoolingTowerType.OPEN",
+      "symbol_hash": "sha256:0496e7cdd8ccf3a93d3007e6cbebcc3dc266029777e07dc717040659ea0d1fc0"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "CoolingTowerType.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:635c8e3b9a25578e49277b0c78b37587a71851c812f655ddb6ce27e20aef6028",
+      "symbol": "Fuel",
+      "symbol_hash": "sha256:66a9b58b66331699893ea17fec4d94a5b9cd95e109774f0d31464255e1e445f9"
+    },
+    {
+      "body_hash": "sha256:84aa18e9f957ae38a141ddaf3d4094c9b7eb732ac9d31a08beca92eb01681018",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:44fcb87674f3bca0666ad5e793e584402f1b77d3b247268f66d0c101a043c345",
+      "symbol": "Fuel.DISTRICTHEATING",
+      "symbol_hash": "sha256:806c9ca0ad5437ea710337989299e205820b791b56cd74060ad0b745b7b96763"
+    },
+    {
+      "body_hash": "sha256:b28247e70157f807cfa6cd873ef598aef56b444217859a27b96112696faefe6e",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2843207402e54693bbb9439a6b0c6e41fcfdbf56a66599ca188c2d193f480742",
+      "symbol": "Fuel.ELECTRICITY",
+      "symbol_hash": "sha256:dece9e858b853989bfd0ec919c8a06b11ad855c43ea68b022a3cceab563c33f6"
+    },
+    {
+      "body_hash": "sha256:bb9db9c99c8c3cf7c03f727751cdd78254971efcf82d2f6cd8ff288082ea20e8",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2fc54e9ce0fcd25daf93ff36fa981e652a7efb0ecde9f32d577f38f005bdf429",
+      "symbol": "Fuel.LPG",
+      "symbol_hash": "sha256:c70f84e9bfa4fbe3a6d4136ae396aabfadf1727b1bc5fa24322f4651603371aa"
+    },
+    {
+      "body_hash": "sha256:aadd2b15b687e587bb1b95172f5ac82cacc601847218dd5e2dd8a65b26fed89f",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f3f8fdbeeab11eb271ce5f12c06dc91911b5e1c9d37968720ac767c1aa2e2abb",
+      "symbol": "Fuel.NATURALGAS",
+      "symbol_hash": "sha256:501607887107fbad216e2e24aa4cfbe86101dcbd066bac82718df38a608b0b90"
+    },
+    {
+      "body_hash": "sha256:5b39538afcd29f0a39077426ffa4fbf5386e981d062fa71bc0c31a518488b0d8",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0acb7923f6ac235f1334f157a92549dce200704f11a1f9437ce54c64b9f9db49",
+      "symbol": "Fuel.OIL",
+      "symbol_hash": "sha256:24bb42a15323a13a7af5293bb7623ee5403ecdca81a2abc2aa5020e57b1125d8"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "Fuel.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:2f4d557d0c78aae9016358b851a6ce98c0ff01f8357df3b63ee8a049702736b5",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:d2a4cbd68de1f882056f396dcdb7c01023dacbfeddada1f18cc677fcfec750f1",
+      "symbol": "Fuel.to_dragon",
+      "symbol_hash": "sha256:7ce396261ba0090f0d97c04fd0535641ed453da15ce744c5cc90c1bea00f4c70"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7cdc1df6d2dd5a079f86b9dfbb2eb32f04766b0b826b1fdabbcd626d4f836efa",
+      "symbol": "NoneSource",
+      "symbol_hash": "sha256:8824a756e9240d1b2cf967300a6e1aee791ed895e490f57170f11c08dbdeea63"
+    },
+    {
+      "body_hash": "sha256:06fd821ee7d9de20392b3e8dff6dc0d2ae83b5e2a32e40d689305a2de3dcb7db",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:53aff98451b4446011fd6ceb8ad4c82d8b6496f9ed60f7e324e8316249540942",
+      "symbol": "NoneSource.ID",
+      "symbol_hash": "sha256:dbf0ef4b5a6dc77c2fafe0a6f5a56b533834750ecceab47d8894e9c7d0b4ba1d"
+    },
+    {
+      "body_hash": "sha256:c071aa1cf7e444a483ebbb51406c235041d08f1f875a86e72e8f850781bbf1dd",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:18f95cf2d0b4d9493b8ec7815066aa0ea4efcf73a25efdf8f6acd9776838bb86",
+      "symbol": "NoneSource.__new__",
+      "symbol_hash": "sha256:758d9c0bdcfdb11bb00e2fdade1b60d96bfe5ec0b21e2ccb0dae7939c32e0af4"
+    },
+    {
+      "body_hash": "sha256:3ffc574f787def97e42c77e072f21c33ba8a6bf1977ce88cd7928e3bdb5f4fcc",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a1cb1a18cbf0115a8c02928192e6e9da52ae4ee12cf2818024c93475d5954103",
+      "symbol": "NoneSource.to_dragon",
+      "symbol_hash": "sha256:c8347dc8847f80d58fe6883b055d22c24b5a42fa39582bf034a427e2ca9c5237"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bdedd67007aecfbec90d015dcd141a254e412ccf7c62e92b81704cebb53bdde9",
+      "symbol": "SourceSystem",
+      "symbol_hash": "sha256:9b6905f8f1fdfe2d10a2933b067e9b01d4213cee0e024433dfcbd4fb862ceaf1"
+    },
+    {
+      "body_hash": "sha256:b9eba64579e158cc0b805b796a183e3a7be5ab8d11af2381a93a3bea7a73caad",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:5d7527784e9e19021b8afabc0ff3bbdfebc4e85bcb909936d0e16b83d7cb4dff",
+      "symbol": "SourceSystem.TYPE_MAPPER",
+      "symbol_hash": "sha256:813567e31e57909cf80e52fba5cba56108f28f3d594203f3b1ab67212ecb4ca2"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 185,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ab5079fb2d6d55f1e976ecf2390324fa23f6f36699a42aaa4a781fc39b9db2c1",
+      "symbol": "CompressorType",
+      "symbol_hash": "sha256:8785ee6da143dbc022e1a9cdb6096fa870f2d9d99804c2ab5ba18641319dfd74"
+    },
+    {
+      "body_hash": "sha256:14ef710b785ec24de12978b3183cb333a82b5bc0f568de54939803660521f94b",
+      "inventory_index": 186,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7ee3e8a807c0d636c16019f63a60e8b459bcea3273c9bdfe1f6e1101b3f5e0e9",
+      "symbol": "CompressorType.RECIPROCATING",
+      "symbol_hash": "sha256:dfd51671c84116479c9ee96bf61343e6c32edc7a675ef8eb6127cb9b579c42a4"
+    },
+    {
+      "body_hash": "sha256:798047174afcabac9976d05149bfeba3f8cf8c8b06a2f43f88611e5bd07cf24f",
+      "inventory_index": 187,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7bdf36eaffe58a5b4664e1f40e728887db746c5d3fcb9afbc55abc405e6d32cb",
+      "symbol": "CompressorType.SCREW",
+      "symbol_hash": "sha256:2947a21386fbbd0393dfc0670795aba5ddb05be02e511da37cd0118a5d70573c"
+    },
+    {
+      "body_hash": "sha256:27568afe842cedb04fc44e3ae07f54630fce2c3f31a22f7b184b4b98cb0f1d6a",
+      "inventory_index": 188,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:eb1dcdfed7b6604baf0028ad7458ce73be465bfe31a918b8e1718b123ffe4742",
+      "symbol": "CompressorType.TURBO",
+      "symbol_hash": "sha256:5074351dd266b5054fd70ac52d608a348ca3d3bd121be79c7aeb6655f9ad1449"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "inventory_index": 189,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "CompressorType.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:cbab2d540d2face06ab18784eff867aa45244496194f49bedb2d528272d2a658",
+      "inventory_index": 190,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ae9b2d48f5c0bd9d4abc023ce56cff228bdef92e0a406c572d6d12d1bdc6a1d5",
+      "symbol": "CompressorType.to_dragon",
+      "symbol_hash": "sha256:bff3a12f1d60fb8759d0c55825daa39375c624fb86ce31c03545d045fa2933fd"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 191,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1c9370d192e36e8c8137fa438146a2f6fc539941001bc1c22a92dd72c6aa22a7",
+      "symbol": "CoolingTowerControl",
+      "symbol_hash": "sha256:31f279b79019dfa39dedafb34b19d67eb9d77fdec455c45d5ac2b04e7cf0ed32"
+    },
+    {
+      "body_hash": "sha256:c481a5bc5736eadcc831c922d092401622c400201c9555abef5d93373129c952",
+      "inventory_index": 192,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:33b9fb7e3ac286f14605378084c561760ed62da9f2f2568131cf7bd25d7e30cb",
+      "symbol": "CoolingTowerControl.SINGLESPEED",
+      "symbol_hash": "sha256:536f3586055ed157420436c6769db9d49ab058d1a510fc446e2a36334663635c"
+    },
+    {
+      "body_hash": "sha256:74cd6022869a3c1b12704ddcc37c18ebc2e1226ee0cefc62e75880d9b3e5d36f",
+      "inventory_index": 193,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b2fed9be992df2a7e4798c5ec9d8d48e148f2f3f0676259da18378889aab9645",
+      "symbol": "CoolingTowerControl.TWOSPEED",
+      "symbol_hash": "sha256:bc3d3c6f75384b8448aee861fd14f0fb7c3899495493b91e83f29b46966bf4fd"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "inventory_index": 194,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "CoolingTowerControl.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 195,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:8d6838d2866b425253e9ba32008780e3c316053ac93e18de26d3163687e4d9ee",
+      "symbol": "CoolingTowerType",
+      "symbol_hash": "sha256:9dd879be9b468d09c8ccb2a0c555fac28472d037d6168b5c71147d9e70fda4cc"
+    },
+    {
+      "body_hash": "sha256:4eca9c766d077cf0b4726a846ca96e7fce136ae1c84364db999306f57210961b",
+      "inventory_index": 196,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:79bb9663ebb7296128246112cce823c8fad654b4d948c2c504952de5c0d8ddcd",
+      "symbol": "CoolingTowerType.CLOSED",
+      "symbol_hash": "sha256:ec6ad133c786c44f7d733ecfcc2c1cfb0148623df362a105ffd7c6504e07ba17"
+    },
+    {
+      "body_hash": "sha256:4b2264e63aa292ea89f891af4af5662052281f369d7ede7f669297782efd67b8",
+      "inventory_index": 197,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:51d46d5499642bc02b961b93ad411ee2aaf05684fbbf32bd5988ef3ce09acab5",
+      "symbol": "CoolingTowerType.OPEN",
+      "symbol_hash": "sha256:0496e7cdd8ccf3a93d3007e6cbebcc3dc266029777e07dc717040659ea0d1fc0"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "inventory_index": 198,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "CoolingTowerType.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 240,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:635c8e3b9a25578e49277b0c78b37587a71851c812f655ddb6ce27e20aef6028",
+      "symbol": "Fuel",
+      "symbol_hash": "sha256:66a9b58b66331699893ea17fec4d94a5b9cd95e109774f0d31464255e1e445f9"
+    },
+    {
+      "body_hash": "sha256:84aa18e9f957ae38a141ddaf3d4094c9b7eb732ac9d31a08beca92eb01681018",
+      "inventory_index": 241,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:44fcb87674f3bca0666ad5e793e584402f1b77d3b247268f66d0c101a043c345",
+      "symbol": "Fuel.DISTRICTHEATING",
+      "symbol_hash": "sha256:806c9ca0ad5437ea710337989299e205820b791b56cd74060ad0b745b7b96763"
+    },
+    {
+      "body_hash": "sha256:b28247e70157f807cfa6cd873ef598aef56b444217859a27b96112696faefe6e",
+      "inventory_index": 242,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2843207402e54693bbb9439a6b0c6e41fcfdbf56a66599ca188c2d193f480742",
+      "symbol": "Fuel.ELECTRICITY",
+      "symbol_hash": "sha256:dece9e858b853989bfd0ec919c8a06b11ad855c43ea68b022a3cceab563c33f6"
+    },
+    {
+      "body_hash": "sha256:bb9db9c99c8c3cf7c03f727751cdd78254971efcf82d2f6cd8ff288082ea20e8",
+      "inventory_index": 243,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2fc54e9ce0fcd25daf93ff36fa981e652a7efb0ecde9f32d577f38f005bdf429",
+      "symbol": "Fuel.LPG",
+      "symbol_hash": "sha256:c70f84e9bfa4fbe3a6d4136ae396aabfadf1727b1bc5fa24322f4651603371aa"
+    },
+    {
+      "body_hash": "sha256:aadd2b15b687e587bb1b95172f5ac82cacc601847218dd5e2dd8a65b26fed89f",
+      "inventory_index": 244,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f3f8fdbeeab11eb271ce5f12c06dc91911b5e1c9d37968720ac767c1aa2e2abb",
+      "symbol": "Fuel.NATURALGAS",
+      "symbol_hash": "sha256:501607887107fbad216e2e24aa4cfbe86101dcbd066bac82718df38a608b0b90"
+    },
+    {
+      "body_hash": "sha256:5b39538afcd29f0a39077426ffa4fbf5386e981d062fa71bc0c31a518488b0d8",
+      "inventory_index": 245,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0acb7923f6ac235f1334f157a92549dce200704f11a1f9437ce54c64b9f9db49",
+      "symbol": "Fuel.OIL",
+      "symbol_hash": "sha256:24bb42a15323a13a7af5293bb7623ee5403ecdca81a2abc2aa5020e57b1125d8"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "inventory_index": 246,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "Fuel.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:2f4d557d0c78aae9016358b851a6ce98c0ff01f8357df3b63ee8a049702736b5",
+      "inventory_index": 247,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:d2a4cbd68de1f882056f396dcdb7c01023dacbfeddada1f18cc677fcfec750f1",
+      "symbol": "Fuel.to_dragon",
+      "symbol_hash": "sha256:7ce396261ba0090f0d97c04fd0535641ed453da15ce744c5cc90c1bea00f4c70"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 267,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7cdc1df6d2dd5a079f86b9dfbb2eb32f04766b0b826b1fdabbcd626d4f836efa",
+      "symbol": "NoneSource",
+      "symbol_hash": "sha256:8824a756e9240d1b2cf967300a6e1aee791ed895e490f57170f11c08dbdeea63"
+    },
+    {
+      "body_hash": "sha256:06fd821ee7d9de20392b3e8dff6dc0d2ae83b5e2a32e40d689305a2de3dcb7db",
+      "inventory_index": 268,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:53aff98451b4446011fd6ceb8ad4c82d8b6496f9ed60f7e324e8316249540942",
+      "symbol": "NoneSource.ID",
+      "symbol_hash": "sha256:dbf0ef4b5a6dc77c2fafe0a6f5a56b533834750ecceab47d8894e9c7d0b4ba1d"
+    },
+    {
+      "body_hash": "sha256:c071aa1cf7e444a483ebbb51406c235041d08f1f875a86e72e8f850781bbf1dd",
+      "inventory_index": 269,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:18f95cf2d0b4d9493b8ec7815066aa0ea4efcf73a25efdf8f6acd9776838bb86",
+      "symbol": "NoneSource.__new__",
+      "symbol_hash": "sha256:758d9c0bdcfdb11bb00e2fdade1b60d96bfe5ec0b21e2ccb0dae7939c32e0af4"
+    },
+    {
+      "body_hash": "sha256:3ffc574f787def97e42c77e072f21c33ba8a6bf1977ce88cd7928e3bdb5f4fcc",
+      "inventory_index": 270,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a1cb1a18cbf0115a8c02928192e6e9da52ae4ee12cf2818024c93475d5954103",
+      "symbol": "NoneSource.to_dragon",
+      "symbol_hash": "sha256:c8347dc8847f80d58fe6883b055d22c24b5a42fa39582bf034a427e2ca9c5237"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 319,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bdedd67007aecfbec90d015dcd141a254e412ccf7c62e92b81704cebb53bdde9",
+      "symbol": "SourceSystem",
+      "symbol_hash": "sha256:9b6905f8f1fdfe2d10a2933b067e9b01d4213cee0e024433dfcbd4fb862ceaf1"
+    },
+    {
+      "body_hash": "sha256:b9eba64579e158cc0b805b796a183e3a7be5ab8d11af2381a93a3bea7a73caad",
+      "inventory_index": 320,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:5d7527784e9e19021b8afabc0ff3bbdfebc4e85bcb909936d0e16b83d7cb4dff",
+      "symbol": "SourceSystem.TYPE_MAPPER",
+      "symbol_hash": "sha256:813567e31e57909cf80e52fba5cba56108f28f3d594203f3b1ab67212ecb4ca2"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "isolated_import": {
+      "epsimple_core_initializer_executed": false,
+      "epsimple_package_initializer_executed": false,
+      "loaded_local_modules": [
+        {
+          "ast_sha256": "sha256:f26684ea4b6e1bfe7b9576f06d45971e420d2e9e49da99b6c52ff9d0d424fae3",
+          "bytes": 2262,
+          "module": "epsimple",
+          "path": "src/epsimple/__init__.py",
+          "source_sha256": "sha256:adff45de2c37d23586de00015e05502b1ee4ff7c167f5017b946827f1f383996"
+        },
+        {
+          "ast_sha256": "sha256:6740f081f087834aadfef0c11da6cdbe11f907dc170b48ebaa287e000eb6e27b",
+          "bytes": 4873,
+          "module": "epsimple.constants",
+          "path": "src/epsimple/constants.py",
+          "source_sha256": "sha256:d5dd5241ec90b14ba3708a525cd74279a8cdc238164a5b8544c4c82b05a29897"
+        },
+        {
+          "ast_sha256": "sha256:7409c8f18e040e02d52a7e2a70ab56b4539212eb76035f5b218a5bacd84f4762",
+          "bytes": 1264,
+          "module": "epsimple.core",
+          "path": "src/epsimple/core/__init__.py",
+          "source_sha256": "sha256:e6d571f7bf775cd13cba7abf0f625802e92680fdc87838f4039b037174a1a4c9"
+        },
+        {
+          "ast_sha256": "sha256:dbbea63f51a001fae4fd73fba96dc099eab8cd5bcec39e3d9bf768e29b463873",
+          "bytes": 53850,
+          "module": "epsimple.core.hvac",
+          "path": "src/epsimple/core/hvac.py",
+          "source_sha256": "sha256:9f3ecb27ed612baeed530ccbfd5857f1f528de24f222e6ef5093e4a635665d9c"
+        },
+        {
+          "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+          "bytes": 2011,
+          "module": "idragon",
+          "path": "src/idragon/__init__.py",
+          "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+        },
+        {
+          "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+          "bytes": 6247,
+          "module": "idragon.common",
+          "path": "src/idragon/common.py",
+          "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+        },
+        {
+          "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+          "bytes": 2590,
+          "module": "idragon.constants",
+          "path": "src/idragon/constants.py",
+          "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+        },
+        {
+          "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+          "bytes": 1505,
+          "module": "idragon.dragon",
+          "path": "src/idragon/dragon/__init__.py",
+          "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+        },
+        {
+          "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+          "bytes": 11652,
+          "module": "idragon.dragon.construction",
+          "path": "src/idragon/dragon/construction.py",
+          "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+        },
+        {
+          "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+          "bytes": 137833,
+          "module": "idragon.dragon.hvac",
+          "path": "src/idragon/dragon/hvac.py",
+          "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+        },
+        {
+          "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+          "bytes": 8247,
+          "module": "idragon.dragon.model",
+          "path": "src/idragon/dragon/model.py",
+          "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+        },
+        {
+          "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+          "bytes": 117731,
+          "module": "idragon.dragon.profile",
+          "path": "src/idragon/dragon/profile.py",
+          "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+        },
+        {
+          "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+          "bytes": 27438,
+          "module": "idragon.dragon.shape",
+          "path": "src/idragon/dragon/shape.py",
+          "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+        },
+        {
+          "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+          "bytes": 91815,
+          "module": "idragon.imugi",
+          "path": "src/idragon/imugi.py",
+          "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+        },
+        {
+          "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+          "bytes": 12367,
+          "module": "idragon.launcher",
+          "path": "src/idragon/launcher.py",
+          "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+        },
+        {
+          "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+          "bytes": 2616,
+          "module": "idragon.utils",
+          "path": "src/idragon/utils.py",
+          "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+        }
+      ],
+      "loaded_local_modules_sha256": "sha256:e19bb4e2660bce5866feb71cdaf7d6906f7e8ce8043667f63a290adfeeb115b8",
+      "relocation_snapshot_sha256": "sha256:ee4d52a9bf09e386f30abb4498166fb4480d770ca2801bdbcad93910100bff7e",
+      "source_location_count": 2
+    },
+    "path": "src/epsimple/core/hvac.py",
+    "resource_receipts": [],
+    "resource_receipts_sha256": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "source": {
+      "ast_sha256": "sha256:dbbea63f51a001fae4fd73fba96dc099eab8cd5bcec39e3d9bf768e29b463873",
+      "bytes": 53850,
+      "source_sha256": "sha256:9f3ecb27ed612baeed530ccbfd5857f1f528de24f222e6ef5093e4a635665d9c"
+    }
+  }
+}
