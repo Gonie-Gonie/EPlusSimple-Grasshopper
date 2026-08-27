@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:15f14205bcba015a3b00c02a0ee68263b30fe7c6e3f8079ce60b07ffa2db1237"
+    "sha256:9cfcc40b21ffa2fc4f3f78eb78507ce1d44b6f6cad42323f7b5bda98745921f9"
 )
 
 
@@ -68,9 +68,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 227,
-                "exception": 270,
-                "needs_reverification": 493,
+                "equivalent": 234,
+                "exception": 311,
+                "needs_reverification": 445,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -713,6 +713,160 @@ class SafeScopePolicyTests(unittest.TestCase):
         for index, (symbol, classification) in expected_adjacent.items():
             self.assertEqual(symbol, entries[index].symbol)
             self.assertEqual(classification, entries[index].classification, symbol)
+
+    def test_epsimple_construction_core_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        target_symbols = {
+            75: "FenestrationConstruction",
+            76: "FenestrationConstruction.ID",
+            79: "FenestrationConstruction.__init__",
+            82: "FenestrationConstruction.from_json",
+            83: "FenestrationConstruction.g",
+            84: "FenestrationConstruction.get_DB",
+            85: "FenestrationConstruction.is_transparent",
+            86: "FenestrationConstruction.load_DB",
+            87: "FenestrationConstruction.to_dict",
+            88: "FenestrationConstruction.to_dragon",
+            89: "FenestrationConstruction.u",
+            90: "Material",
+            91: "Material.ID",
+            94: "Material.__init__",
+            97: "Material.conductivity",
+            98: "Material.density",
+            99: "Material.from_json",
+            100: "Material.get_DB",
+            101: "Material.load_DB",
+            102: "Material.specific_heat",
+            103: "Material.to_dict",
+            104: "Material.to_dragon",
+            105: "OpenConstruction",
+            106: "OpenConstruction.ID",
+            107: "OpenConstruction.to_dragon",
+            108: "SpecialConstruction",
+            109: "SpecialConstruction.__new__",
+            110: "SpecialConstruction.get_unique_materials",
+            111: "SpecialConstruction.reversed",
+            112: "SurfaceConstruction",
+            113: "SurfaceConstruction.ID",
+            114: "SurfaceConstruction.U_internal",
+            117: "SurfaceConstruction.__init__",
+            120: "SurfaceConstruction.create_simply",
+            121: "SurfaceConstruction.depth",
+            122: "SurfaceConstruction.from_json",
+            123: "SurfaceConstruction.get_DB",
+            124: "SurfaceConstruction.get_U",
+            125: "SurfaceConstruction.get_regulated_construction",
+            126: "SurfaceConstruction.get_unique_materials",
+            127: "SurfaceConstruction.heat_capacity",
+            128: "SurfaceConstruction.load_DB",
+            129: "SurfaceConstruction.reversed",
+            130: "SurfaceConstruction.to_dict",
+            131: "SurfaceConstruction.to_dragon",
+            132: "UnknownConstruction",
+            133: "UnknownConstruction.ID",
+            134: "UnknownConstruction.to_dragon",
+        }
+        equivalent_indices = {85, 107, 114, 121, 124, 126, 127}
+        exception_ids = {
+            75: "reviewed-native-adaptation-fenestrationconstruction-f86ec154",
+            76: "reviewed-native-adaptation-fenestrationconstruction-id-246156d9",
+            79: "reviewed-native-adaptation-fenestrationconstruction-init-92969825",
+            82: "reviewed-native-adaptation-fenestrationconstruction-from-json-e3c4284e",
+            83: "reviewed-native-adaptation-fenestrationconstruction-g-5025a060",
+            84: "reviewed-native-adaptation-fenestrationconstruction-get-db-87537fa6",
+            86: "reviewed-native-adaptation-fenestrationconstruction-load-db-538b0465",
+            87: "reviewed-native-adaptation-fenestrationconstruction-to-dict-8aaf803c",
+            88: "reviewed-native-adaptation-fenestrationconstruction-to-dragon-f430c29b",
+            89: "reviewed-native-adaptation-fenestrationconstruction-u-72e986b6",
+            90: "reviewed-native-adaptation-material-590c4070",
+            91: "reviewed-native-adaptation-material-id-246156d9",
+            94: "reviewed-native-adaptation-material-init-d909f493",
+            97: "reviewed-native-adaptation-material-conductivity-b733b56b",
+            98: "reviewed-native-adaptation-material-density-23136324",
+            99: "reviewed-native-adaptation-material-from-json-f2772e15",
+            100: "reviewed-native-adaptation-material-get-db-c3fc9501",
+            101: "reviewed-native-adaptation-material-load-db-f6b33018",
+            102: "reviewed-native-adaptation-material-specific-heat-abf4a2ea",
+            103: "reviewed-native-adaptation-material-to-dict-7326bc5b",
+            104: "reviewed-native-adaptation-material-to-dragon-352f66b1",
+            105: "reviewed-native-adaptation-openconstruction-3257fd04",
+            106: "reviewed-native-adaptation-openconstruction-id-45236b5b",
+            108: "reviewed-native-adaptation-specialconstruction-9f449287",
+            109: "reviewed-native-adaptation-specialconstruction-new-758d9c0b",
+            110: "reviewed-native-adaptation-specialconstruction-get-unique-materials-4f9ce2c0",
+            111: "reviewed-native-adaptation-specialconstruction-reversed-119ed204",
+            112: "reviewed-native-adaptation-surfaceconstruction-f3d6bd23",
+            113: "reviewed-native-adaptation-surfaceconstruction-id-246156d9",
+            117: "reviewed-native-adaptation-surfaceconstruction-init-6e437543",
+            120: "reviewed-native-adaptation-surfaceconstruction-create-simply-23907b76",
+            122: "reviewed-native-adaptation-surfaceconstruction-from-json-b1bb16e6",
+            123: "reviewed-native-adaptation-surfaceconstruction-get-db-d21ed4db",
+            125: "reviewed-native-adaptation-surfaceconstruction-get-regulated-construction-a806c4c3",
+            128: "reviewed-native-adaptation-surfaceconstruction-load-db-fec259a4",
+            129: "reviewed-native-adaptation-surfaceconstruction-reversed-d72c2143",
+            130: "reviewed-native-adaptation-surfaceconstruction-to-dict-59426aa2",
+            131: "reviewed-native-adaptation-surfaceconstruction-to-dragon-a204e680",
+            132: "reviewed-native-adaptation-unknownconstruction-d803cd9d",
+            133: "reviewed-native-adaptation-unknownconstruction-id-d6777d2d",
+            134: "reviewed-native-adaptation-unknownconstruction-to-dragon-558da4a7",
+        }
+        self.assertEqual(48, len(target_symbols))
+        self.assertEqual(7, len(equivalent_indices))
+        self.assertEqual(41, len(exception_ids))
+        self.assertEqual(set(target_symbols), equivalent_indices | set(exception_ids))
+
+        for index, symbol in target_symbols.items():
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual(
+                ("src/epsimple/core/construction.py", symbol),
+                inventory_symbol.key,
+                symbol,
+            )
+            exception_id = exception_ids.get(index)
+            classification = "exception" if exception_id is not None else "equivalent"
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            assertion_id = (
+                f"epsimple-construction-core-{index}-"
+                f"{inventory_symbol.symbol_hash.removeprefix('sha256:')[:8]}"
+            )
+            expected_evidence = [f"upstream/symbol-evidence.json#{assertion_id}"]
+            if exception_id is not None:
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, symbol)
+            self.assertIn(assertion_id, entry.rationale, symbol)
+            self.assertIn("commit 3053e74", entry.rationale, symbol)
+
+        excluded = {
+            77: "FenestrationConstruction.__eq__",
+            78: "FenestrationConstruction.__hash__",
+            80: "FenestrationConstruction.__repr__",
+            81: "FenestrationConstruction.__str__",
+            92: "Material.__eq__",
+            93: "Material.__hash__",
+            95: "Material.__repr__",
+            96: "Material.__str__",
+            115: "SurfaceConstruction.__eq__",
+            116: "SurfaceConstruction.__hash__",
+            118: "SurfaceConstruction.__repr__",
+            119: "SurfaceConstruction.__str__",
+        }
+        self.assertEqual(set(range(75, 135)), set(target_symbols) | set(excluded))
+        for index, symbol in excluded.items():
+            entry = entries[index]
+            self.assertEqual(
+                ("src/epsimple/core/construction.py", symbol), entry.key, symbol
+            )
+            self.assertEqual("out_of_scope", entry.classification, symbol)
+            self.assertIsNone(entry.exception_id, symbol)
+
+        self.assertEqual("Unit.W_TO_KW", entries[74].symbol)
+        self.assertEqual("equivalent", entries[74].classification)
+        self.assertEqual("AbsorptionChiller", entries[135].symbol)
+        self.assertEqual("needs_reverification", entries[135].classification)
 
     def test_energy_model_class_promotion_preserves_adjacent_model_scope(self) -> None:
         entries = self.configuration.matrix.entries

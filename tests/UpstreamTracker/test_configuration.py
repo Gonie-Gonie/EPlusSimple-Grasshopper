@@ -30,7 +30,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(276, len(configuration.exceptions))
+        self.assertEqual(317, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -44,16 +44,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(493, len(compatibility.needs_reverification))
+        self.assertEqual(445, len(compatibility.needs_reverification))
         self.assertEqual(
-            227,
+            234,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            270,
+            311,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:15f14205bcba015a3b00c02a0ee68263b30fe7c6e3f8079ce60b07ffa2db1237",
+            "sha256:9cfcc40b21ffa2fc4f3f78eb78507ce1d44b6f6cad42323f7b5bda98745921f9",
             compatibility.matrix.content_sha256,
         )
-        self.assertEqual(497, len(symbol_evidence.entries))
-        self.assertEqual(497, len(symbol_evidence.receipts))
+        self.assertEqual(545, len(symbol_evidence.entries))
+        self.assertEqual(545, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:f4a6ce4682ceb623ba1a467ca1b16f12ece59b2ae063cdcf19248caab67ab645",
+            "sha256:2289916f252df982e5ac51df25c7464a553ef6c57e3dbd9668ec14fa6887b2a8",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -2617,6 +2617,490 @@ class ConfigurationTests(unittest.TestCase):
             strict=True,
         ):
             key = ("src/epsimple/core/shape.py", symbol)
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual(
+                "out_of_scope",
+                compatibility.matrix.entries[index].classification,
+                symbol,
+            )
+            self.assertNotIn(key, symbol_evidence.entries_by_key, symbol)
+
+        construction_fixture_path = (
+            REPOSITORY_ROOT
+            / "fixtures/reference/python-0.7.0/epsimple-construction-core-oracle.json"
+        )
+        construction_test_path = (
+            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "ConstructionCoreOracleParityTests.cs"
+        )
+        construction_test_symbol = (
+            "GonieGonie.SimpleDragon.Tests.ConstructionCoreOracleParityTests."
+            "MatchesPinnedConstructionCoreThroughProductionPublicRoutes"
+        )
+        construction_fixture_sha256 = (
+            "sha256:d4e9421c40c39dfaef948054798b03fb046fa31d1a5742cb8a53484c87d819f9"
+        )
+        construction_test_sha256 = (
+            "sha256:616b3a6a2863dc8675014b7e750cf45e928023687da1a597bfe808a20052568f"
+        )
+        construction_fixture_bytes = construction_fixture_path.read_bytes()
+        self.assertEqual(
+            construction_fixture_sha256,
+            "sha256:" + hashlib.sha256(construction_fixture_bytes).hexdigest(),
+        )
+        construction_fixture = json.loads(construction_fixture_bytes.decode("utf-8"))
+        construction_contract = construction_fixture["consumer_contract"]
+        construction_target_indices = (
+            75,
+            76,
+            79,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            94,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            117,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+        )
+        construction_excluded_indices = (
+            77,
+            78,
+            80,
+            81,
+            92,
+            93,
+            95,
+            96,
+            115,
+            116,
+            118,
+            119,
+        )
+        self.assertEqual(
+            construction_target_indices,
+            tuple(construction_contract["closure"]["target_indices"]),
+        )
+        self.assertEqual(
+            construction_excluded_indices,
+            tuple(construction_contract["closure"]["excluded_indices"]),
+        )
+        self.assertEqual(
+            {"equivalent": 7, "exception": 41},
+            construction_contract["classification_counts"],
+        )
+        construction_targets = construction_fixture["target_receipts"]
+        self.assertEqual(
+            construction_target_indices,
+            tuple(item["inventory_index"] for item in construction_targets),
+        )
+        self.assertEqual(
+            tuple(construction_contract["closure"]["target_symbols"]),
+            tuple(item["symbol"] for item in construction_targets),
+        )
+        construction_case_by_symbol = {
+            symbol: (case["code"], case["id"])
+            for case in construction_fixture["cases"]
+            for symbol in case["target_symbols"]
+        }
+        self.assertEqual(48, len(construction_case_by_symbol))
+
+        construction_test_bytes = (
+            REPOSITORY_ROOT / construction_test_path
+        ).read_bytes()
+        self.assertEqual(
+            construction_test_sha256,
+            "sha256:" + hashlib.sha256(construction_test_bytes).hexdigest(),
+        )
+        construction_receipt_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            construction_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(construction_receipt_hash_block)
+        assert construction_receipt_hash_block is not None
+        construction_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                construction_receipt_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(48, len(construction_output_hashes))
+
+        material_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Construction/Material.cs"
+        )
+        fenestration_construction_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Construction/"
+            "FenestrationConstruction.cs"
+        )
+        surface_construction_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Construction/"
+            "SurfaceConstruction.cs"
+        )
+        construction_database_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Construction/"
+            "ConstructionDatabases.cs"
+        )
+        database_aggregate_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Data/"
+            "SimpleDragonDatabase.cs"
+        )
+
+        def expected_construction_implementation(symbol: str) -> tuple[str, str]:
+            if symbol == "FenestrationConstruction":
+                return (
+                    fenestration_construction_path,
+                    "GonieGonie.SimpleDragon.FenestrationConstruction",
+                )
+            if symbol.startswith("FenestrationConstruction."):
+                member_name = symbol.split(".", 1)[1]
+                routed = {
+                    "from_json": (reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"),
+                    "to_dict": (writer_path, "GonieGonie.SimpleDragon.GrmWriter.Serialize"),
+                    "to_dragon": (
+                        converter_path,
+                        "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    ),
+                    "get_DB": (
+                        construction_database_path,
+                        "GonieGonie.SimpleDragon.FenestrationConstructionDatabase.Find",
+                    ),
+                    "load_DB": (
+                        database_aggregate_path,
+                        "GonieGonie.SimpleDragon.SimpleDragonDatabase.LoadEmbedded",
+                    ),
+                }
+                if member_name in routed:
+                    return routed[member_name]
+                native_member = {
+                    "ID": "Id",
+                    "__init__": None,
+                    "g": "SolarHeatGainCoefficient",
+                    "is_transparent": "IsTransparent",
+                    "u": "UValue",
+                }[member_name]
+                suffix = "" if native_member is None else "." + native_member
+                return (
+                    fenestration_construction_path,
+                    "GonieGonie.SimpleDragon.FenestrationConstruction" + suffix,
+                )
+            if symbol == "Material":
+                return material_path, "GonieGonie.SimpleDragon.Material"
+            if symbol.startswith("Material."):
+                member_name = symbol.split(".", 1)[1]
+                routed = {
+                    "from_json": (reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"),
+                    "to_dict": (writer_path, "GonieGonie.SimpleDragon.GrmWriter.Serialize"),
+                    "to_dragon": (
+                        converter_path,
+                        "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    ),
+                    "get_DB": (
+                        construction_database_path,
+                        "GonieGonie.SimpleDragon.MaterialDatabase.Find",
+                    ),
+                    "load_DB": (
+                        database_aggregate_path,
+                        "GonieGonie.SimpleDragon.SimpleDragonDatabase.LoadEmbedded",
+                    ),
+                }
+                if member_name in routed:
+                    return routed[member_name]
+                native_member = {
+                    "ID": "Id",
+                    "__init__": None,
+                    "conductivity": "Conductivity",
+                    "density": "Density",
+                    "specific_heat": "SpecificHeat",
+                }[member_name]
+                suffix = "" if native_member is None else "." + native_member
+                return material_path, "GonieGonie.SimpleDragon.Material" + suffix
+            special_routes = {
+                "OpenConstruction": (
+                    surface_path,
+                    "GonieGonie.SimpleDragon.SurfaceConstructionReferenceKind.Open",
+                ),
+                "OpenConstruction.ID": (
+                    surface_path,
+                    "GonieGonie.SimpleDragon.Surface.ConstructionId",
+                ),
+                "OpenConstruction.to_dragon": (
+                    converter_path,
+                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                ),
+                "SpecialConstruction": (
+                    surface_path,
+                    "GonieGonie.SimpleDragon.SurfaceConstructionReferenceKind",
+                ),
+                "SpecialConstruction.__new__": (
+                    surface_path,
+                    "GonieGonie.SimpleDragon.Surface.ConstructionReferenceKind",
+                ),
+                "SpecialConstruction.get_unique_materials": (
+                    converter_path,
+                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                ),
+                "SpecialConstruction.reversed": (
+                    surface_path,
+                    "GonieGonie.SimpleDragon.Surface.Flip",
+                ),
+                "UnknownConstruction": (
+                    surface_path,
+                    "GonieGonie.SimpleDragon.SurfaceConstructionReferenceKind.Unknown",
+                ),
+                "UnknownConstruction.ID": (
+                    surface_path,
+                    "GonieGonie.SimpleDragon.Surface.ConstructionId",
+                ),
+                "UnknownConstruction.to_dragon": (
+                    converter_path,
+                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                ),
+            }
+            if symbol in special_routes:
+                return special_routes[symbol]
+            if symbol == "SurfaceConstruction":
+                return (
+                    surface_construction_path,
+                    "GonieGonie.SimpleDragon.SurfaceConstruction",
+                )
+            if symbol.startswith("SurfaceConstruction."):
+                member_name = symbol.split(".", 1)[1]
+                routed = {
+                    "from_json": (reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"),
+                    "to_dict": (writer_path, "GonieGonie.SimpleDragon.GrmWriter.Serialize"),
+                    "to_dragon": (
+                        converter_path,
+                        "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    ),
+                    "get_DB": (
+                        construction_database_path,
+                        "GonieGonie.SimpleDragon.SurfaceConstructionDatabase.Find",
+                    ),
+                    "get_regulated_construction": (
+                        construction_database_path,
+                        "GonieGonie.SimpleDragon.SurfaceConstructionDatabase.FindRegulated",
+                    ),
+                    "load_DB": (
+                        database_aggregate_path,
+                        "GonieGonie.SimpleDragon.SimpleDragonDatabase.LoadEmbedded",
+                    ),
+                }
+                if member_name in routed:
+                    return routed[member_name]
+                native_member = {
+                    "ID": "Id",
+                    "U_internal": "InternalUValue",
+                    "__init__": None,
+                    "create_simply": "CreateSimple",
+                    "depth": "Depth",
+                    "get_U": "GetUValue",
+                    "get_unique_materials": "Layers",
+                    "heat_capacity": "HeatCapacity",
+                    "reversed": "Reverse",
+                }[member_name]
+                suffix = "" if native_member is None else "." + native_member
+                return (
+                    surface_construction_path,
+                    "GonieGonie.SimpleDragon.SurfaceConstruction" + suffix,
+                )
+            self.fail(f"Missing expected construction implementation for {symbol}")
+            raise AssertionError(symbol)
+
+        construction_exception_symbols = {
+            symbol
+            for symbol, classification in construction_contract[
+                "classifications"
+            ].items()
+            if classification == "exception"
+        }
+        construction_exception_ids = {
+            construction_contract["adaptations"][symbol]
+            for symbol in construction_exception_symbols
+        }
+        self.assertEqual(41, len(construction_exception_ids))
+        self.assertTrue(
+            construction_exception_ids.isdisjoint(
+                {
+                    construction_contract["adaptations"][symbol]
+                    for symbol, classification in construction_contract[
+                        "classifications"
+                    ].items()
+                    if classification == "equivalent"
+                }
+            )
+        )
+        for target, expected_output_hash in zip(
+            construction_targets,
+            construction_output_hashes,
+            strict=True,
+        ):
+            index = target["inventory_index"]
+            symbol = target["symbol"]
+            inventory_symbol = compatibility.inventory.symbols[index]
+            expected_descriptor = dict(target)
+            expected_descriptor.pop("inventory_index")
+            self.assertEqual(expected_descriptor, inventory_symbol.to_data(), symbol)
+            key = (target["path"], symbol)
+            entry = compatibility.matrix.entries[index]
+            classification = construction_contract["classifications"][symbol]
+            adaptation = construction_contract["adaptations"][symbol]
+            assertion_id = construction_contract["assertion_ids"][symbol]
+            native_route = construction_contract["native_routes"][symbol]
+            exception_id = adaptation if classification == "exception" else None
+            self.assertEqual(key, entry.key, symbol)
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            expected_references = [
+                f"upstream/symbol-evidence.json#{assertion_id}"
+            ]
+            if exception_id is not None:
+                expected_references.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_references)), entry.evidence, symbol)
+
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            implementation_path, implementation_symbol = (
+                expected_construction_implementation(symbol)
+            )
+            implementation_sha256 = "sha256:" + hashlib.sha256(
+                (REPOSITORY_ROOT / implementation_path).read_bytes()
+            ).hexdigest()
+            self.assertEqual(
+                inventory_symbol.symbol_hash,
+                evidence_entry.upstream_symbol_hash,
+                symbol,
+            )
+            self.assertEqual(
+                implementation_path, evidence_entry.implementation_path, symbol
+            )
+            self.assertEqual(
+                implementation_symbol, evidence_entry.implementation_symbol, symbol
+            )
+            self.assertEqual(
+                implementation_sha256,
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertEqual(construction_test_path, receipt.test_path, symbol)
+            self.assertEqual(construction_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(construction_test_sha256, receipt.test_source_sha256, symbol)
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+            case_code, case_id = construction_case_by_symbol[symbol]
+            for exact_binding in (
+                construction_fixture_sha256,
+                construction_test_sha256,
+                "commit 3053e74",
+                implementation_path + "@" + implementation_sha256,
+                expected_output_hash,
+                assertion_id,
+                adaptation,
+                native_route,
+                case_code,
+                case_id,
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+            if exception_id is not None:
+                exception = exceptions_by_id[exception_id]
+                self.assertEqual(target["path"], exception.upstream_path, symbol)
+                self.assertEqual(symbol, exception.upstream_symbol, symbol)
+                self.assertEqual(
+                    inventory_symbol.symbol_hash,
+                    exception.upstream_symbol_hash,
+                    symbol,
+                )
+                self.assertIn(
+                    ("engineering_result", entry.rationale), exception.effects
+                )
+                self.assertEqual(
+                    "accepted-native-api-adaptation", exception.approval, symbol
+                )
+            else:
+                self.assertNotIn(adaptation, exceptions_by_id, symbol)
+
+        construction_evidence_entries = tuple(
+            item
+            for item in symbol_evidence.entries
+            if item.path == "src/epsimple/core/construction.py"
+        )
+        self.assertEqual(48, len(construction_evidence_entries))
+        self.assertEqual(
+            set(construction_contract["closure"]["target_symbols"]),
+            {item.symbol for item in construction_evidence_entries},
+        )
+        self.assertEqual(
+            construction_exception_symbols,
+            {
+                item.upstream_symbol
+                for item in configuration.exceptions
+                if item.upstream_path == "src/epsimple/core/construction.py"
+            },
+        )
+        self.assertEqual(
+            construction_exception_ids,
+            {
+                item.identifier
+                for item in configuration.exceptions
+                if item.upstream_path == "src/epsimple/core/construction.py"
+            },
+        )
+        for index, symbol in zip(
+            construction_excluded_indices,
+            construction_contract["closure"]["excluded_symbols"],
+            strict=True,
+        ):
+            key = ("src/epsimple/core/construction.py", symbol)
             self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
             self.assertEqual(
                 "out_of_scope",
