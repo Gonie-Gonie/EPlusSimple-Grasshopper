@@ -88,6 +88,20 @@ enum, nullable source, sealed aggregate, or GRM dispatch adaptations. The other
 116 unresolved declarations are deferred and 58 representation/equality
 declarations remain explicitly excluded.
 
+`python-0.7.0/epsimple-hvac-other-systems-oracle.json` pins two ordered
+CPython 3.12.7 cases for exactly 17 declarations at inventory indices
+`283,284,287,290-295;325,326,329,332-336` in `epsimple/core/hvac.py`. It
+executes `PhotoVoltaicSystem` and `VentilationSystem` constructors, process-
+identity default IDs, names, defaults, explicit and mutated state, property
+validation boundaries, `from_json`, and fresh `to_dragon` conversion. The
+observations preserve upstream acceptance of selected bool, NaN, infinity, and
+blank-name inputs and the legacy ventilation conversion that omits airflow.
+Isolated imports plus a byte-identical relocated source copy prove path
+independence. Nine targets are direct ID/property equivalents and eight use
+reviewed immutable-aggregate, GRM reader/writer, or GreenRetrofit-conversion
+adaptations. All 185 adjacent HVAC declarations are pinned as a fail-closed
+non-target closure and cannot be promoted by this fixture.
+
 `python-0.7.0/epsimple-hvac-thermal-source-oracle.json` pins six ordered
 CPython 3.12.7 cases for exactly 47 declarations at inventory indices
 `135,136,139,142-146;157,158,161,164-169;170,171,174,177-184;

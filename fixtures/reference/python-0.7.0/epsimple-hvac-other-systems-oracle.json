@@ -1,0 +1,1847 @@
+{
+  "case_sha256": {
+    "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon": "sha256:cf332ade7ae06a2da518e2904aaee751e5304bb3ec6971ffca6ee191025b1026",
+    "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon": "sha256:bb870af9eadf5e3e1c462b471b8f00e8cf02b3d8cffc8dec233f1a24f54a92eb"
+  },
+  "cases": [
+    {
+      "code": "P01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon",
+      "python": {
+        "facts": {
+          "accepted_boundaries": {
+            "area_nextafter_zero": {
+              "hex": "0x0.0000000000001p-1022",
+              "kind": "float",
+              "repr": "5e-324"
+            },
+            "azimuth_nextafter_360": {
+              "hex": "0x1.67fffffffffffp+8",
+              "kind": "float",
+              "repr": "359.99999999999994"
+            },
+            "efficiency_nextafter_zero": {
+              "hex": "0x0.0000000000001p-1022",
+              "kind": "float",
+              "repr": "5e-324"
+            },
+            "efficiency_one": {
+              "kind": "int",
+              "value": "1"
+            },
+            "tilt_ninety": {
+              "kind": "int",
+              "value": "90"
+            },
+            "tilt_zero": {
+              "kind": "int",
+              "value": "0"
+            }
+          },
+          "accepted_specials": {
+            "area_bool": {
+              "class": "PhotoVoltaicSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "PV-BOOL",
+                "area": {
+                  "kind": "bool",
+                  "value": true
+                },
+                "azimuth": {
+                  "kind": "int",
+                  "value": "0"
+                },
+                "efficiency": {
+                  "hex": "0x1.999999999999ap-4",
+                  "kind": "float",
+                  "repr": "0.1"
+                },
+                "name": "bool",
+                "tilt": {
+                  "kind": "int",
+                  "value": "0"
+                }
+              }
+            },
+            "area_infinity": {
+              "class": "PhotoVoltaicSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "PV-INF",
+                "area": {
+                  "kind": "float-nonfinite",
+                  "value": "positive-infinity"
+                },
+                "azimuth": {
+                  "kind": "int",
+                  "value": "0"
+                },
+                "efficiency": {
+                  "hex": "0x1.999999999999ap-4",
+                  "kind": "float",
+                  "repr": "0.1"
+                },
+                "name": "inf",
+                "tilt": {
+                  "kind": "int",
+                  "value": "0"
+                }
+              }
+            },
+            "area_nan": {
+              "class": "PhotoVoltaicSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "PV-NAN-A",
+                "area": {
+                  "kind": "float-nonfinite",
+                  "value": "nan"
+                },
+                "azimuth": {
+                  "kind": "int",
+                  "value": "0"
+                },
+                "efficiency": {
+                  "hex": "0x1.999999999999ap-4",
+                  "kind": "float",
+                  "repr": "0.1"
+                },
+                "name": "nan-area",
+                "tilt": {
+                  "kind": "int",
+                  "value": "0"
+                }
+              }
+            },
+            "azimuth_nan": {
+              "class": "PhotoVoltaicSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "PV-NAN-Z",
+                "area": {
+                  "kind": "int",
+                  "value": "1"
+                },
+                "azimuth": {
+                  "kind": "float-nonfinite",
+                  "value": "nan"
+                },
+                "efficiency": {
+                  "hex": "0x1.999999999999ap-4",
+                  "kind": "float",
+                  "repr": "0.1"
+                },
+                "name": "nan-az",
+                "tilt": {
+                  "kind": "int",
+                  "value": "0"
+                }
+              }
+            },
+            "blank_name": {
+              "class": "PhotoVoltaicSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "PV-BLANK",
+                "area": {
+                  "kind": "int",
+                  "value": "1"
+                },
+                "azimuth": {
+                  "kind": "int",
+                  "value": "0"
+                },
+                "efficiency": {
+                  "hex": "0x1.999999999999ap-4",
+                  "kind": "float",
+                  "repr": "0.1"
+                },
+                "name": "",
+                "tilt": {
+                  "kind": "int",
+                  "value": "0"
+                }
+              }
+            },
+            "efficiency_nan": {
+              "class": "PhotoVoltaicSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "PV-NAN-E",
+                "area": {
+                  "kind": "int",
+                  "value": "1"
+                },
+                "azimuth": {
+                  "kind": "int",
+                  "value": "0"
+                },
+                "efficiency": {
+                  "kind": "float-nonfinite",
+                  "value": "nan"
+                },
+                "name": "nan-eff",
+                "tilt": {
+                  "kind": "int",
+                  "value": "0"
+                }
+              }
+            },
+            "tilt_nan": {
+              "class": "PhotoVoltaicSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "PV-NAN-T",
+                "area": {
+                  "kind": "int",
+                  "value": "1"
+                },
+                "azimuth": {
+                  "kind": "int",
+                  "value": "0"
+                },
+                "efficiency": {
+                  "hex": "0x1.999999999999ap-4",
+                  "kind": "float",
+                  "repr": "0.1"
+                },
+                "name": "nan-tilt",
+                "tilt": {
+                  "kind": "float-nonfinite",
+                  "value": "nan"
+                }
+              }
+            }
+          },
+          "adjacent_behavior_executed": false,
+          "auto_id": {
+            "distinct_live_instances": true,
+            "first_matches_process_identity_pattern": true,
+            "prefix": "PVPN-",
+            "second_matches_process_identity_pattern": true
+          },
+          "base_classes": [
+            "object"
+          ],
+          "dragon": {
+            "attributes": {
+              "_PhotoVoltaicPanel__area": {
+                "hex": "0x1.8000000000000p+4",
+                "kind": "float",
+                "repr": "24.0"
+              },
+              "_PhotoVoltaicPanel__azimuth": {
+                "hex": "0x1.6800000000000p+7",
+                "kind": "float",
+                "repr": "180.0"
+              },
+              "_PhotoVoltaicPanel__effective_area_ratio": {
+                "hex": "0x1.6666666666666p-1",
+                "kind": "float",
+                "repr": "0.7"
+              },
+              "_PhotoVoltaicPanel__efficiency": {
+                "hex": "0x1.999999999999ap-3",
+                "kind": "float",
+                "repr": "0.2"
+              },
+              "_PhotoVoltaicPanel__tilt": {
+                "hex": "0x1.e000000000000p+4",
+                "kind": "float",
+                "repr": "30.0"
+              },
+              "name": "PV-EXPLICIT"
+            },
+            "module": "idragon.dragon.hvac",
+            "type": "PhotoVoltaicPanel"
+          },
+          "dragon_repeat_fresh": true,
+          "errors": {
+            "area_negative": {
+              "message_sha256": "sha256:d676faa5e48f05d6ce58fdacb728609785ef0d52e8f77f098b475aa39e0320bb",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "area_string": {
+              "message_sha256": "sha256:18104d9ac9631a44c06babe6336cc01cb92aba9e2f0295d28b5969284bb7c4a2",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "area_zero": {
+              "message_sha256": "sha256:bf690003c42d90a6cb1cd23aecd1c9683bf0ab0b4e8668584d706b4e37e4216d",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "azimuth_360": {
+              "message_sha256": "sha256:be6b4afdda84dd01d42d55255c3536b2c44fba82db35d26d91fdf4445a2e9bd5",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "azimuth_negative": {
+              "message_sha256": "sha256:6af476b5afcf5fe94595083fa7198a314de149b68065cb0897f0f1fe459fd0a2",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "efficiency_above_one": {
+              "message_sha256": "sha256:8286a2bfd4216117d209f33aca82161ac59d5015366a3f45f3d1265ea9d57be8",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "efficiency_zero": {
+              "message_sha256": "sha256:7cbd1ab0ca980383a39953735f331c1913d0dec68ea856e56750c34941cd5fd1",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "from_json_missing_tilt": {
+              "message_sha256": "sha256:ea75cc520153f29dd9fe046bc190ab00c29028424690d66ebfe42177e1d0b8fe",
+              "outcome": "raised",
+              "type": "AttributeError"
+            },
+            "setter_area_zero": {
+              "message_sha256": "sha256:bf690003c42d90a6cb1cd23aecd1c9683bf0ab0b4e8668584d706b4e37e4216d",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "setter_azimuth_360": {
+              "message_sha256": "sha256:be6b4afdda84dd01d42d55255c3536b2c44fba82db35d26d91fdf4445a2e9bd5",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "setter_efficiency_zero": {
+              "message_sha256": "sha256:7cbd1ab0ca980383a39953735f331c1913d0dec68ea856e56750c34941cd5fd1",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "setter_tilt_above_ninety": {
+              "message_sha256": "sha256:452e9d258a2eec576c4603bedc9c03ea25d47aad8b19265bf4e55f74aea75926",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "tilt_above_ninety": {
+              "message_sha256": "sha256:452e9d258a2eec576c4603bedc9c03ea25d47aad8b19265bf4e55f74aea75926",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "tilt_negative": {
+              "message_sha256": "sha256:171b76c9fbae9d1e4f6a63c596dc1556107b338243abb58fa4b9bb53ba2da0db",
+              "outcome": "raised",
+              "type": "ValueError"
+            }
+          },
+          "explicit": {
+            "class": "PhotoVoltaicSystem",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "PV-EXPLICIT",
+              "area": {
+                "hex": "0x1.8000000000000p+4",
+                "kind": "float",
+                "repr": "24.0"
+              },
+              "azimuth": {
+                "hex": "0x1.6800000000000p+7",
+                "kind": "float",
+                "repr": "180.0"
+              },
+              "efficiency": {
+                "hex": "0x1.999999999999ap-3",
+                "kind": "float",
+                "repr": "0.2"
+              },
+              "name": "Roof PV",
+              "tilt": {
+                "hex": "0x1.e000000000000p+4",
+                "kind": "float",
+                "repr": "30.0"
+              }
+            }
+          },
+          "from_json": {
+            "class": "PhotoVoltaicSystem",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "PV-JSON",
+              "area": {
+                "hex": "0x1.9000000000000p+3",
+                "kind": "float",
+                "repr": "12.5"
+              },
+              "azimuth": {
+                "hex": "0x1.c200000000000p+7",
+                "kind": "float",
+                "repr": "225.0"
+              },
+              "efficiency": {
+                "hex": "0x1.7ae147ae147aep-3",
+                "kind": "float",
+                "repr": "0.185"
+              },
+              "name": "Facade PV",
+              "tilt": {
+                "hex": "0x1.6800000000000p+6",
+                "kind": "float",
+                "repr": "90.0"
+              }
+            }
+          },
+          "mutated": {
+            "class": "PhotoVoltaicSystem",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "PV-MUTABLE",
+              "area": {
+                "kind": "int",
+                "value": "11"
+              },
+              "azimuth": {
+                "hex": "0x1.67fffffffffffp+8",
+                "kind": "float",
+                "repr": "359.99999999999994"
+              },
+              "efficiency": {
+                "hex": "0x1.0000000000000p+0",
+                "kind": "float",
+                "repr": "1.0"
+              },
+              "name": "Mutated PV",
+              "tilt": {
+                "kind": "int",
+                "value": "90"
+              }
+            }
+          }
+        },
+        "facts_sha256": "sha256:333b0d584dd37182a2a8a1cfb273680a1bafa4d08f9f0623492f79adf15a2cad",
+        "outcome": "observed"
+      },
+      "subfamily": "photovoltaic",
+      "target_symbols": [
+        "PhotoVoltaicSystem",
+        "PhotoVoltaicSystem.ID",
+        "PhotoVoltaicSystem.__init__",
+        "PhotoVoltaicSystem.area",
+        "PhotoVoltaicSystem.azimuth",
+        "PhotoVoltaicSystem.efficiency",
+        "PhotoVoltaicSystem.from_json",
+        "PhotoVoltaicSystem.tilt",
+        "PhotoVoltaicSystem.to_dragon"
+      ]
+    },
+    {
+      "code": "V01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon",
+      "python": {
+        "facts": {
+          "accepted_boundaries": {
+            "airflow_nextafter_zero": {
+              "hex": "0x0.0000000000001p-1022",
+              "kind": "float",
+              "repr": "5e-324"
+            },
+            "cooling_nextafter_one": {
+              "hex": "0x1.fffffffffffffp-1",
+              "kind": "float",
+              "repr": "0.9999999999999999"
+            },
+            "cooling_nextafter_zero": {
+              "hex": "0x0.0000000000001p-1022",
+              "kind": "float",
+              "repr": "5e-324"
+            },
+            "heating_nextafter_one": {
+              "hex": "0x1.fffffffffffffp-1",
+              "kind": "float",
+              "repr": "0.9999999999999999"
+            },
+            "heating_nextafter_zero": {
+              "hex": "0x0.0000000000001p-1022",
+              "kind": "float",
+              "repr": "5e-324"
+            }
+          },
+          "accepted_specials": {
+            "airflow_bool": {
+              "class": "VentilationSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "ERV-BOOL",
+                "airflow_rate": {
+                  "kind": "bool",
+                  "value": true
+                },
+                "cooling_efficiency": {
+                  "hex": "0x1.ccccccccccccdp-2",
+                  "kind": "float",
+                  "repr": "0.45"
+                },
+                "heating_efficiency": {
+                  "hex": "0x1.6666666666666p-1",
+                  "kind": "float",
+                  "repr": "0.7"
+                },
+                "name": "bool"
+              }
+            },
+            "airflow_infinity": {
+              "class": "VentilationSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "ERV-INF",
+                "airflow_rate": {
+                  "kind": "float-nonfinite",
+                  "value": "positive-infinity"
+                },
+                "cooling_efficiency": {
+                  "hex": "0x1.ccccccccccccdp-2",
+                  "kind": "float",
+                  "repr": "0.45"
+                },
+                "heating_efficiency": {
+                  "hex": "0x1.6666666666666p-1",
+                  "kind": "float",
+                  "repr": "0.7"
+                },
+                "name": "inf"
+              }
+            },
+            "airflow_nan": {
+              "class": "VentilationSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "ERV-NAN-F",
+                "airflow_rate": {
+                  "kind": "float-nonfinite",
+                  "value": "nan"
+                },
+                "cooling_efficiency": {
+                  "hex": "0x1.ccccccccccccdp-2",
+                  "kind": "float",
+                  "repr": "0.45"
+                },
+                "heating_efficiency": {
+                  "hex": "0x1.6666666666666p-1",
+                  "kind": "float",
+                  "repr": "0.7"
+                },
+                "name": "nan-flow"
+              }
+            },
+            "blank_name": {
+              "class": "VentilationSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "ERV-BLANK",
+                "airflow_rate": {
+                  "hex": "0x1.999999999999ap-4",
+                  "kind": "float",
+                  "repr": "0.1"
+                },
+                "cooling_efficiency": {
+                  "hex": "0x1.ccccccccccccdp-2",
+                  "kind": "float",
+                  "repr": "0.45"
+                },
+                "heating_efficiency": {
+                  "hex": "0x1.6666666666666p-1",
+                  "kind": "float",
+                  "repr": "0.7"
+                },
+                "name": ""
+              }
+            },
+            "cooling_nan": {
+              "class": "VentilationSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "ERV-NAN-C",
+                "airflow_rate": {
+                  "hex": "0x1.999999999999ap-4",
+                  "kind": "float",
+                  "repr": "0.1"
+                },
+                "cooling_efficiency": {
+                  "kind": "float-nonfinite",
+                  "value": "nan"
+                },
+                "heating_efficiency": {
+                  "hex": "0x1.6666666666666p-1",
+                  "kind": "float",
+                  "repr": "0.7"
+                },
+                "name": "nan-c"
+              }
+            },
+            "heating_nan": {
+              "class": "VentilationSystem",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "ERV-NAN-H",
+                "airflow_rate": {
+                  "hex": "0x1.999999999999ap-4",
+                  "kind": "float",
+                  "repr": "0.1"
+                },
+                "cooling_efficiency": {
+                  "hex": "0x1.ccccccccccccdp-2",
+                  "kind": "float",
+                  "repr": "0.45"
+                },
+                "heating_efficiency": {
+                  "kind": "float-nonfinite",
+                  "value": "nan"
+                },
+                "name": "nan-h"
+              }
+            }
+          },
+          "adjacent_behavior_executed": false,
+          "auto_id": {
+            "distinct_live_instances": true,
+            "first_matches_process_identity_pattern": true,
+            "prefix": "ERVT-",
+            "second_matches_process_identity_pattern": true
+          },
+          "base_classes": [
+            "object"
+          ],
+          "default": {
+            "class": "VentilationSystem",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "ERV-DEFAULT",
+              "airflow_rate": {
+                "hex": "0x1.0000000000000p-1",
+                "kind": "float",
+                "repr": "0.5"
+              },
+              "cooling_efficiency": {
+                "hex": "0x1.ccccccccccccdp-2",
+                "kind": "float",
+                "repr": "0.45"
+              },
+              "heating_efficiency": {
+                "hex": "0x1.6666666666666p-1",
+                "kind": "float",
+                "repr": "0.7"
+              },
+              "name": "Default ERV"
+            }
+          },
+          "dragon": {
+            "attributes": {
+              "cooling_efficiency": {
+                "hex": "0x1.3851eb851eb85p-1",
+                "kind": "float",
+                "repr": "0.61"
+              },
+              "heating_efficiency": {
+                "hex": "0x1.a3d70a3d70a3dp-1",
+                "kind": "float",
+                "repr": "0.82"
+              },
+              "name": "ERV-EXPLICIT"
+            },
+            "module": "idragon.dragon.hvac",
+            "type": "EnergyRecoveryVentilator"
+          },
+          "dragon_repeat_fresh": true,
+          "errors": {
+            "airflow_negative": {
+              "message_sha256": "sha256:f86e72cf3689ca3832c8b6feed4f950117c1befb2b0c95cc719d78b2cebaf613",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "airflow_string": {
+              "message_sha256": "sha256:18104d9ac9631a44c06babe6336cc01cb92aba9e2f0295d28b5969284bb7c4a2",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "airflow_zero": {
+              "message_sha256": "sha256:64892a7040a34a778a08d8609daad2cdbf003941bda7a855594c859fe68ad7de",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "cooling_efficiency_one": {
+              "message_sha256": "sha256:2f3793e24fed3c0669628f69a1433207ac6e914dd20b9584a226c5d0f31c04c2",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "cooling_efficiency_zero": {
+              "message_sha256": "sha256:347ae9a1007cab3c40b0606b4d4f4237337481191043893d45dc751836a0aa97",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "from_json_missing_airflow": {
+              "message_sha256": "sha256:b256d46c728458b35c750b8a391db90133162787cfe3dea91d71cb1e3677308b",
+              "outcome": "raised",
+              "type": "AttributeError"
+            },
+            "heating_efficiency_one": {
+              "message_sha256": "sha256:102d0a4d900689c303698622751fceec39bf9d56e4427adde22bd198f79997f1",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "heating_efficiency_zero": {
+              "message_sha256": "sha256:2604cb696baeb070f8d853273f38bd2748ff46a4771be153e2f805ae7eeeabee",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "setter_airflow_zero": {
+              "message_sha256": "sha256:64892a7040a34a778a08d8609daad2cdbf003941bda7a855594c859fe68ad7de",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "setter_cooling_one": {
+              "message_sha256": "sha256:2f3793e24fed3c0669628f69a1433207ac6e914dd20b9584a226c5d0f31c04c2",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "setter_heating_zero": {
+              "message_sha256": "sha256:2604cb696baeb070f8d853273f38bd2748ff46a4771be153e2f805ae7eeeabee",
+              "outcome": "raised",
+              "type": "ValueError"
+            }
+          },
+          "explicit": {
+            "class": "VentilationSystem",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "ERV-EXPLICIT",
+              "airflow_rate": {
+                "hex": "0x1.8000000000000p-1",
+                "kind": "float",
+                "repr": "0.75"
+              },
+              "cooling_efficiency": {
+                "hex": "0x1.3851eb851eb85p-1",
+                "kind": "float",
+                "repr": "0.61"
+              },
+              "heating_efficiency": {
+                "hex": "0x1.a3d70a3d70a3dp-1",
+                "kind": "float",
+                "repr": "0.82"
+              },
+              "name": "Explicit ERV"
+            }
+          },
+          "from_json_default": {
+            "class": "VentilationSystem",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "ERV-JSON-DEFAULT",
+              "airflow_rate": {
+                "hex": "0x1.999999999999ap-2",
+                "kind": "float",
+                "repr": "0.4"
+              },
+              "cooling_efficiency": {
+                "hex": "0x1.ccccccccccccdp-2",
+                "kind": "float",
+                "repr": "0.45"
+              },
+              "heating_efficiency": {
+                "hex": "0x1.6666666666666p-1",
+                "kind": "float",
+                "repr": "0.7"
+              },
+              "name": "JSON Default"
+            }
+          },
+          "from_json_explicit": {
+            "class": "VentilationSystem",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "ERV-JSON-EXPLICIT",
+              "airflow_rate": {
+                "hex": "0x1.ccccccccccccdp-1",
+                "kind": "float",
+                "repr": "0.9"
+              },
+              "cooling_efficiency": {
+                "hex": "0x1.1eb851eb851ecp-1",
+                "kind": "float",
+                "repr": "0.56"
+              },
+              "heating_efficiency": {
+                "hex": "0x1.8f5c28f5c28f6p-1",
+                "kind": "float",
+                "repr": "0.78"
+              },
+              "name": "JSON Explicit"
+            }
+          },
+          "mutated": {
+            "class": "VentilationSystem",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "ERV-MUTABLE",
+              "airflow_rate": {
+                "hex": "0x1.4000000000000p+0",
+                "kind": "float",
+                "repr": "1.25"
+              },
+              "cooling_efficiency": {
+                "hex": "0x0.0000000000001p-1022",
+                "kind": "float",
+                "repr": "5e-324"
+              },
+              "heating_efficiency": {
+                "hex": "0x1.fffffffffffffp-1",
+                "kind": "float",
+                "repr": "0.9999999999999999"
+              },
+              "name": "Mutated ERV"
+            }
+          }
+        },
+        "facts_sha256": "sha256:ec05927e73b3fad6290ad3b35c00825f282692e97f8c0ab5b75878185dbec920",
+        "outcome": "observed"
+      },
+      "subfamily": "ventilation",
+      "target_symbols": [
+        "VentilationSystem",
+        "VentilationSystem.ID",
+        "VentilationSystem.__init__",
+        "VentilationSystem.airflow_rate",
+        "VentilationSystem.cooling_efficiency",
+        "VentilationSystem.from_json",
+        "VentilationSystem.heating_efficiency",
+        "VentilationSystem.to_dragon"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:3d2d33dc4d341965a36f1af6e8b36ef072af9f9d91bb044596826099efdb2c6a",
+  "consumer_contract": {
+    "adaptations": {
+      "PhotoVoltaicSystem": "reviewed-native-immutable-other-system-and-aggregate-route-5a79715b",
+      "PhotoVoltaicSystem.__init__": "reviewed-native-immutable-other-system-and-aggregate-route-b0187462",
+      "PhotoVoltaicSystem.from_json": "reviewed-native-immutable-other-system-and-aggregate-route-1571f37e",
+      "PhotoVoltaicSystem.to_dragon": "reviewed-native-immutable-other-system-and-aggregate-route-6f67da14",
+      "VentilationSystem": "reviewed-native-immutable-other-system-and-aggregate-route-b4f22735",
+      "VentilationSystem.__init__": "reviewed-native-immutable-other-system-and-aggregate-route-7d9d5173",
+      "VentilationSystem.from_json": "reviewed-native-immutable-other-system-and-aggregate-route-acaa4faa",
+      "VentilationSystem.to_dragon": "reviewed-native-immutable-other-system-and-aggregate-route-fdc1293c"
+    },
+    "assertion_ids": {
+      "PhotoVoltaicSystem": "epsimple-hvac-other-systems-283-5a79715b",
+      "PhotoVoltaicSystem.ID": "epsimple-hvac-other-systems-284-246156d9",
+      "PhotoVoltaicSystem.__init__": "epsimple-hvac-other-systems-287-b0187462",
+      "PhotoVoltaicSystem.area": "epsimple-hvac-other-systems-290-aa93b96b",
+      "PhotoVoltaicSystem.azimuth": "epsimple-hvac-other-systems-291-3b2cfc1a",
+      "PhotoVoltaicSystem.efficiency": "epsimple-hvac-other-systems-292-80144f2f",
+      "PhotoVoltaicSystem.from_json": "epsimple-hvac-other-systems-293-1571f37e",
+      "PhotoVoltaicSystem.tilt": "epsimple-hvac-other-systems-294-abeb16e6",
+      "PhotoVoltaicSystem.to_dragon": "epsimple-hvac-other-systems-295-6f67da14",
+      "VentilationSystem": "epsimple-hvac-other-systems-325-b4f22735",
+      "VentilationSystem.ID": "epsimple-hvac-other-systems-326-246156d9",
+      "VentilationSystem.__init__": "epsimple-hvac-other-systems-329-7d9d5173",
+      "VentilationSystem.airflow_rate": "epsimple-hvac-other-systems-332-b19eca15",
+      "VentilationSystem.cooling_efficiency": "epsimple-hvac-other-systems-333-83943137",
+      "VentilationSystem.from_json": "epsimple-hvac-other-systems-334-acaa4faa",
+      "VentilationSystem.heating_efficiency": "epsimple-hvac-other-systems-335-76edd9cd",
+      "VentilationSystem.to_dragon": "epsimple-hvac-other-systems-336-fdc1293c"
+    },
+    "case_count": 2,
+    "case_ids": [
+      "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon",
+      "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon"
+    ],
+    "classification_counts": {
+      "equivalent": 9,
+      "exception": 8
+    },
+    "classifications": {
+      "PhotoVoltaicSystem": "exception",
+      "PhotoVoltaicSystem.ID": "equivalent",
+      "PhotoVoltaicSystem.__init__": "exception",
+      "PhotoVoltaicSystem.area": "equivalent",
+      "PhotoVoltaicSystem.azimuth": "equivalent",
+      "PhotoVoltaicSystem.efficiency": "equivalent",
+      "PhotoVoltaicSystem.from_json": "exception",
+      "PhotoVoltaicSystem.tilt": "equivalent",
+      "PhotoVoltaicSystem.to_dragon": "exception",
+      "VentilationSystem": "exception",
+      "VentilationSystem.ID": "equivalent",
+      "VentilationSystem.__init__": "exception",
+      "VentilationSystem.airflow_rate": "equivalent",
+      "VentilationSystem.cooling_efficiency": "equivalent",
+      "VentilationSystem.from_json": "exception",
+      "VentilationSystem.heating_efficiency": "equivalent",
+      "VentilationSystem.to_dragon": "exception"
+    },
+    "closure": {
+      "adjacent_count": 185,
+      "adjacent_indices": [
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        285,
+        286,
+        288,
+        289,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        327,
+        328,
+        330,
+        331
+      ],
+      "exact_one_case_target_partition": true,
+      "full_hvac_source_partition": true,
+      "source_declaration_count": 202,
+      "target_count": 17,
+      "target_indices": [
+        283,
+        284,
+        287,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        325,
+        326,
+        329,
+        332,
+        333,
+        334,
+        335,
+        336
+      ],
+      "target_symbols": [
+        "PhotoVoltaicSystem",
+        "PhotoVoltaicSystem.ID",
+        "PhotoVoltaicSystem.__init__",
+        "PhotoVoltaicSystem.area",
+        "PhotoVoltaicSystem.azimuth",
+        "PhotoVoltaicSystem.efficiency",
+        "PhotoVoltaicSystem.from_json",
+        "PhotoVoltaicSystem.tilt",
+        "PhotoVoltaicSystem.to_dragon",
+        "VentilationSystem",
+        "VentilationSystem.ID",
+        "VentilationSystem.__init__",
+        "VentilationSystem.airflow_rate",
+        "VentilationSystem.cooling_efficiency",
+        "VentilationSystem.from_json",
+        "VentilationSystem.heating_efficiency",
+        "VentilationSystem.to_dragon"
+      ]
+    },
+    "coverage_by_symbol": {
+      "PhotoVoltaicSystem": "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon",
+      "PhotoVoltaicSystem.ID": "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon",
+      "PhotoVoltaicSystem.__init__": "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon",
+      "PhotoVoltaicSystem.area": "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon",
+      "PhotoVoltaicSystem.azimuth": "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon",
+      "PhotoVoltaicSystem.efficiency": "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon",
+      "PhotoVoltaicSystem.from_json": "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon",
+      "PhotoVoltaicSystem.tilt": "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon",
+      "PhotoVoltaicSystem.to_dragon": "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon",
+      "VentilationSystem": "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon",
+      "VentilationSystem.ID": "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon",
+      "VentilationSystem.__init__": "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon",
+      "VentilationSystem.airflow_rate": "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon",
+      "VentilationSystem.cooling_efficiency": "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon",
+      "VentilationSystem.from_json": "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon",
+      "VentilationSystem.heating_efficiency": "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon",
+      "VentilationSystem.to_dragon": "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon"
+    },
+    "evidence_contract": {
+      "active_energyplus_process_claim": false,
+      "adjacent_behavior_promoted": false,
+      "exact_cpython_behavior_oracle": true,
+      "expected_receipt_count": 17,
+      "native_runtime_executed_by_python_oracle": false,
+      "path_independent_relocated_import": true,
+      "target_coverage_complete": true
+    },
+    "expectations": {
+      "PhotoVoltaicSystem": {
+        "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-5a79715b",
+        "assertion_id": "epsimple-hvac-other-systems-283-5a79715b",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
+      },
+      "PhotoVoltaicSystem.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-other-systems-284-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Id"
+      },
+      "PhotoVoltaicSystem.__init__": {
+        "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-b0187462",
+        "assertion_id": "epsimple-hvac-other-systems-287-b0187462",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
+      },
+      "PhotoVoltaicSystem.area": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-other-systems-290-aa93b96b",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Area"
+      },
+      "PhotoVoltaicSystem.azimuth": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-other-systems-291-3b2cfc1a",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Azimuth"
+      },
+      "PhotoVoltaicSystem.efficiency": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-other-systems-292-80144f2f",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Efficiency"
+      },
+      "PhotoVoltaicSystem.from_json": {
+        "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-1571f37e",
+        "assertion_id": "epsimple-hvac-other-systems-293-1571f37e",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) photovoltaic-system dispatch"
+      },
+      "PhotoVoltaicSystem.tilt": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-other-systems-294-abeb16e6",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Tilt"
+      },
+      "PhotoVoltaicSystem.to_dragon": {
+        "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-6f67da14",
+        "assertion_id": "epsimple-hvac-other-systems-295-6f67da14",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "VentilationSystem": {
+        "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-b4f22735",
+        "assertion_id": "epsimple-hvac-other-systems-325-b4f22735",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
+      },
+      "VentilationSystem.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-other-systems-326-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.VentilationSystem.Id"
+      },
+      "VentilationSystem.__init__": {
+        "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-7d9d5173",
+        "assertion_id": "epsimple-hvac-other-systems-329-7d9d5173",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
+      },
+      "VentilationSystem.airflow_rate": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-other-systems-332-b19eca15",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.VentilationSystem.AirflowRate"
+      },
+      "VentilationSystem.cooling_efficiency": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-other-systems-333-83943137",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.VentilationSystem.CoolingEfficiency"
+      },
+      "VentilationSystem.from_json": {
+        "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-acaa4faa",
+        "assertion_id": "epsimple-hvac-other-systems-334-acaa4faa",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) ventilation-system dispatch"
+      },
+      "VentilationSystem.heating_efficiency": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-other-systems-335-76edd9cd",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.VentilationSystem.HeatingEfficiency"
+      },
+      "VentilationSystem.to_dragon": {
+        "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-fdc1293c",
+        "assertion_id": "epsimple-hvac-other-systems-336-fdc1293c",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      }
+    },
+    "native_routes": {
+      "PhotoVoltaicSystem": "GonieGonie.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
+      "PhotoVoltaicSystem.ID": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Id",
+      "PhotoVoltaicSystem.__init__": "GonieGonie.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
+      "PhotoVoltaicSystem.area": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Area",
+      "PhotoVoltaicSystem.azimuth": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Azimuth",
+      "PhotoVoltaicSystem.efficiency": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Efficiency",
+      "PhotoVoltaicSystem.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) photovoltaic-system dispatch",
+      "PhotoVoltaicSystem.tilt": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Tilt",
+      "PhotoVoltaicSystem.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "VentilationSystem": "GonieGonie.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
+      "VentilationSystem.ID": "GonieGonie.SimpleDragon.VentilationSystem.Id",
+      "VentilationSystem.__init__": "GonieGonie.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
+      "VentilationSystem.airflow_rate": "GonieGonie.SimpleDragon.VentilationSystem.AirflowRate",
+      "VentilationSystem.cooling_efficiency": "GonieGonie.SimpleDragon.VentilationSystem.CoolingEfficiency",
+      "VentilationSystem.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) ventilation-system dispatch",
+      "VentilationSystem.heating_efficiency": "GonieGonie.SimpleDragon.VentilationSystem.HeatingEfficiency",
+      "VentilationSystem.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+    },
+    "runtime_signatures": {
+      "PhotoVoltaicSystem": {
+        "signature": "(name: 'str', area: 'int | float', efficiency: 'int | float', azimuth: 'int | float', tilt: 'int | float', *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "PhotoVoltaicSystem.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "PhotoVoltaicSystem.__init__": {
+        "signature": "(self, name: 'str', area: 'int | float', efficiency: 'int | float', azimuth: 'int | float', tilt: 'int | float', *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "PhotoVoltaicSystem.area": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "PhotoVoltaicSystem.azimuth": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "PhotoVoltaicSystem.efficiency": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "PhotoVoltaicSystem.from_json": {
+        "signature": "(input: 'SimpleNamespace') -> 'PhotoVoltaicSystem'",
+        "type": "staticmethod"
+      },
+      "PhotoVoltaicSystem.tilt": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "PhotoVoltaicSystem.to_dragon": {
+        "signature": "(self)",
+        "type": "function"
+      },
+      "VentilationSystem": {
+        "signature": "(name: 'str', airflow_rate: 'int | float', heating_efficiency: 'int | float | None' = None, cooling_efficiency: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "VentilationSystem.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "VentilationSystem.__init__": {
+        "signature": "(self, name: 'str', airflow_rate: 'int | float', heating_efficiency: 'int | float | None' = None, cooling_efficiency: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "VentilationSystem.airflow_rate": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "VentilationSystem.cooling_efficiency": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "VentilationSystem.from_json": {
+        "signature": "(input: 'SimpleNamespace') -> 'VentilationSystem'",
+        "type": "staticmethod"
+      },
+      "VentilationSystem.heating_efficiency": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "VentilationSystem.to_dragon": {
+        "signature": "(self) -> 'None'",
+        "type": "function"
+      }
+    }
+  },
+  "fact_sha256": {
+    "epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon": "sha256:333b0d584dd37182a2a8a1cfb273680a1bafa4d08f9f0623492f79adf15a2cad",
+    "epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon": "sha256:ec05927e73b3fad6290ad3b35c00825f282692e97f8c0ab5b75878185dbec920"
+  },
+  "native_review": {
+    "public_production_routes_only": true,
+    "python_executes_native_runtime": false,
+    "reviewed_semantics": {
+      "native_auto_ids_are_deterministic": true,
+      "native_models_are_immutable": true,
+      "native_rejects_blank_names_and_nonfinite_numbers": true,
+      "native_ventilation_conversion_preserves_airflow_and_assignment_count": true,
+      "python_auto_ids_use_process_identity": true,
+      "python_models_are_mutable": true,
+      "python_nonfinite_range_behavior_is_observed_not_normalized": true,
+      "python_ventilation_to_dragon_omits_airflow": true
+    },
+    "routes_sha256": "sha256:4e67d9033246e851e0730d75fe36074a6b2e0fa07b89164a0cdc4c817d9ecc36",
+    "source_receipts": [
+      {
+        "bytes": 3855,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs",
+        "sha256": "sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5"
+      },
+      {
+        "bytes": 48650,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs",
+        "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"
+      },
+      {
+        "bytes": 16652,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs",
+        "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"
+      },
+      {
+        "bytes": 87343,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
+        "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"
+      }
+    ],
+    "source_receipts_sha256": "sha256:8dcf88cd1fbda97b100a3aaec0d2474e9010b1afeeb0166d7a6c4ad957b08292"
+  },
+  "runtime": {
+    "bootstrap": {
+      "bytes": 1232,
+      "path": "tools/python-reference/bootstrap_reference.py",
+      "sha256": "sha256:0674dcf1fe966de2a4b873a360ef67be48d74f38ba80adba9c74405fd9be7e0f"
+    },
+    "dependencies": {
+      "eppy": "0.5.63",
+      "numpy": "2.3.1",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tzdata": "2024.2"
+    },
+    "dependencies_sha256": "sha256:85d50612b42b3818f054fd7d9cdb26a16bbf832c3afc56762ea732f55a48cb22",
+    "implementation": "cpython",
+    "other_systems_support": {
+      "bytes": 61458,
+      "path": "tools/python-reference/generate_epsimple_hvac_enums_base_oracle.py",
+      "sha256": "sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d"
+    },
+    "platform": "win32",
+    "pointer_width_bits": 64,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7",
+    "strict_json_support": {
+      "bytes": 21114,
+      "path": "tools/python-reference/generate_schedule_type_oracle.py",
+      "sha256": "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc"
+    }
+  },
+  "schema": "goniegonie.python-reference.epsimple-hvac-other-systems.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:8538fd06ff2115b195bd6fe1aa840bd72bf513fa74c70ab4924cb51140b40fbe",
+      "symbol": "PhotoVoltaicSystem",
+      "symbol_hash": "sha256:5a79715b942d118595ac1f1169381d51cc3c070f7859fa6fbd16d20e1f0b8f92"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "PhotoVoltaicSystem.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:5bf3ca3105b5c9b755bb7b4667d1f1a81e55c48e78ca991a2cdcb6c2cb35046b",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:db3945c83aa4bb02dcd141f792b66a2faf8239c5c9eed8c487869207afd4d00f",
+      "symbol": "PhotoVoltaicSystem.__init__",
+      "symbol_hash": "sha256:b018746211f6b5223eb6dca39443c3e0e451421ec70cf9daad82a5499a60f8ad"
+    },
+    {
+      "body_hash": "sha256:e588872dc6972bed33a8a7331923fb9cea512910ef0d897ca5a7d2c83400dcb7",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:525a1faf6e42740ef61f82b6a24773bfd87d60952f9393b477784bec26b9e4cf",
+      "symbol": "PhotoVoltaicSystem.area",
+      "symbol_hash": "sha256:aa93b96bd36a02c789e649c6beb5f1309eefbfa45fbc91d8318df3474ec06d7a"
+    },
+    {
+      "body_hash": "sha256:8fc199d010389df1784d072ad12b44ba74d404642c2b4271d4d78409f56c8a59",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9f38ee6a5bfbbdb1c739e1d150c51388c5aa36e0eeeabe4750dd405339034ff2",
+      "symbol": "PhotoVoltaicSystem.azimuth",
+      "symbol_hash": "sha256:3b2cfc1a2acc215123de2b982147d0b2a74c978e531166fc7ac4aa7992d3c68f"
+    },
+    {
+      "body_hash": "sha256:b449c78b5f6789e34ec6cf108ed58fc253c9778ca9b74142b39874ffcc6c2efc",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7a05da5625820c6c82456f3e46373c9a45937c8d39440d6684a43098197dc63b",
+      "symbol": "PhotoVoltaicSystem.efficiency",
+      "symbol_hash": "sha256:80144f2f58577c9b96d6d6d012e949a459d23f8cfb4a3f77e5656154e80b6947"
+    },
+    {
+      "body_hash": "sha256:427fb073ac996dc13a1265c560795ab221ab160198e2c2e47c26c0dca98fad94",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:eec1058c435a3bfd26ed9bae90cd3afde9f5b6914c5e4635ef143a3196597389",
+      "symbol": "PhotoVoltaicSystem.from_json",
+      "symbol_hash": "sha256:1571f37e4253739f52c4df3a7d23012ba84be42075a54cd701e56fc59aa12812"
+    },
+    {
+      "body_hash": "sha256:217707e81716052ded8bcec282489c965a856b2bef201b8988cc704fd5029a0f",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:430cb41df90f491b97c6de4b2624bc51f99e0c3f315bd924f66470822a5b8c86",
+      "symbol": "PhotoVoltaicSystem.tilt",
+      "symbol_hash": "sha256:abeb16e68a1dc65d3d43f76029e2824f9f73bd5351e65bb1c5b2f17348eb161d"
+    },
+    {
+      "body_hash": "sha256:8126424ff42b67c4ca7f75cc8eda51bb840b5993d85b9ab4c34d2eff56bb744f",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "PhotoVoltaicSystem.to_dragon",
+      "symbol_hash": "sha256:6f67da14e037bd1fb08ad53109aeb2083c1f4b1d1a58ffedce0046604d18360e"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f95992017959a0f7150618b3a1530e6058ad52be08e591e08619a5ca621ca56b",
+      "symbol": "VentilationSystem",
+      "symbol_hash": "sha256:b4f227351d8ab5efd177e61ec95a1ec8f5ff115abd3192cfb1d2f5d2956376b4"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "VentilationSystem.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:cd21ec881c0aca0378421daac09ce9c137ada1303435db24d7f439b0302caa05",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7449c5865d5357f17c8680f86663e4b772a2f806181a5840c4df79a063f1ea56",
+      "symbol": "VentilationSystem.__init__",
+      "symbol_hash": "sha256:7d9d5173bcaf71fe63dbf9a8b4572b498db76f280f2ab6e0d4bb9d6d5af01a42"
+    },
+    {
+      "body_hash": "sha256:a1b5f099b791327d3fd1580b267e0487330ab441d32165d7b373896f017719de",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ebf17326b32c40dff148e673f2f9fd53f2cdb204714c16837f1bb5799c01025a",
+      "symbol": "VentilationSystem.airflow_rate",
+      "symbol_hash": "sha256:b19eca15d6da2b74f791418ace2d3f9842b3325ee1275aa83d2c9a376f29cecf"
+    },
+    {
+      "body_hash": "sha256:bc9be31b88092612769aa683b9382352cf43ae50709f87d9d1e669704f1062cf",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e05e54956fba4af8af5f1534e150dc6463f3e8650df104724484e5fa31fc8dab",
+      "symbol": "VentilationSystem.cooling_efficiency",
+      "symbol_hash": "sha256:839431378f98bb11537ad790591935959db0dabf46c58bf2ef2ce14db593605b"
+    },
+    {
+      "body_hash": "sha256:ef4d24e014eaec930ed906f6f3b49474d247a9cbdbf5821bbdc29f364750a2b7",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e8490b3609e75eb4bc77408e8c95391c8d0566f25a62a06c94ccb419e46ac444",
+      "symbol": "VentilationSystem.from_json",
+      "symbol_hash": "sha256:acaa4faa2d86c79e192ff8b656f0f994bd68d5521d385c0ab73f87a3bf535e0f"
+    },
+    {
+      "body_hash": "sha256:3b9814062256bf3ea2ef2c16974a02293b86402be6048965d3cb6fcc0a4235ec",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ef7dc696a100503d05975968cf1f5b5464412f894f7d1830d70af18c56e89867",
+      "symbol": "VentilationSystem.heating_efficiency",
+      "symbol_hash": "sha256:76edd9cd644cad9e21d4c774207f921a253c93ffd5d10031c3650a66747a2924"
+    },
+    {
+      "body_hash": "sha256:8f6cfd498bbc3f5c6b9579a78c165bb00e671d7ddde71c2c3c9abb3f2caa468e",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a1cb1a18cbf0115a8c02928192e6e9da52ae4ee12cf2818024c93475d5954103",
+      "symbol": "VentilationSystem.to_dragon",
+      "symbol_hash": "sha256:fdc1293c0274742cb447238b18816105cb3feef83864b404fcf8b13a8270e47e"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 283,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:8538fd06ff2115b195bd6fe1aa840bd72bf513fa74c70ab4924cb51140b40fbe",
+      "symbol": "PhotoVoltaicSystem",
+      "symbol_hash": "sha256:5a79715b942d118595ac1f1169381d51cc3c070f7859fa6fbd16d20e1f0b8f92"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 284,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "PhotoVoltaicSystem.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:5bf3ca3105b5c9b755bb7b4667d1f1a81e55c48e78ca991a2cdcb6c2cb35046b",
+      "inventory_index": 287,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:db3945c83aa4bb02dcd141f792b66a2faf8239c5c9eed8c487869207afd4d00f",
+      "symbol": "PhotoVoltaicSystem.__init__",
+      "symbol_hash": "sha256:b018746211f6b5223eb6dca39443c3e0e451421ec70cf9daad82a5499a60f8ad"
+    },
+    {
+      "body_hash": "sha256:e588872dc6972bed33a8a7331923fb9cea512910ef0d897ca5a7d2c83400dcb7",
+      "inventory_index": 290,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:525a1faf6e42740ef61f82b6a24773bfd87d60952f9393b477784bec26b9e4cf",
+      "symbol": "PhotoVoltaicSystem.area",
+      "symbol_hash": "sha256:aa93b96bd36a02c789e649c6beb5f1309eefbfa45fbc91d8318df3474ec06d7a"
+    },
+    {
+      "body_hash": "sha256:8fc199d010389df1784d072ad12b44ba74d404642c2b4271d4d78409f56c8a59",
+      "inventory_index": 291,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9f38ee6a5bfbbdb1c739e1d150c51388c5aa36e0eeeabe4750dd405339034ff2",
+      "symbol": "PhotoVoltaicSystem.azimuth",
+      "symbol_hash": "sha256:3b2cfc1a2acc215123de2b982147d0b2a74c978e531166fc7ac4aa7992d3c68f"
+    },
+    {
+      "body_hash": "sha256:b449c78b5f6789e34ec6cf108ed58fc253c9778ca9b74142b39874ffcc6c2efc",
+      "inventory_index": 292,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7a05da5625820c6c82456f3e46373c9a45937c8d39440d6684a43098197dc63b",
+      "symbol": "PhotoVoltaicSystem.efficiency",
+      "symbol_hash": "sha256:80144f2f58577c9b96d6d6d012e949a459d23f8cfb4a3f77e5656154e80b6947"
+    },
+    {
+      "body_hash": "sha256:427fb073ac996dc13a1265c560795ab221ab160198e2c2e47c26c0dca98fad94",
+      "inventory_index": 293,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:eec1058c435a3bfd26ed9bae90cd3afde9f5b6914c5e4635ef143a3196597389",
+      "symbol": "PhotoVoltaicSystem.from_json",
+      "symbol_hash": "sha256:1571f37e4253739f52c4df3a7d23012ba84be42075a54cd701e56fc59aa12812"
+    },
+    {
+      "body_hash": "sha256:217707e81716052ded8bcec282489c965a856b2bef201b8988cc704fd5029a0f",
+      "inventory_index": 294,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:430cb41df90f491b97c6de4b2624bc51f99e0c3f315bd924f66470822a5b8c86",
+      "symbol": "PhotoVoltaicSystem.tilt",
+      "symbol_hash": "sha256:abeb16e68a1dc65d3d43f76029e2824f9f73bd5351e65bb1c5b2f17348eb161d"
+    },
+    {
+      "body_hash": "sha256:8126424ff42b67c4ca7f75cc8eda51bb840b5993d85b9ab4c34d2eff56bb744f",
+      "inventory_index": 295,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "PhotoVoltaicSystem.to_dragon",
+      "symbol_hash": "sha256:6f67da14e037bd1fb08ad53109aeb2083c1f4b1d1a58ffedce0046604d18360e"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 325,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f95992017959a0f7150618b3a1530e6058ad52be08e591e08619a5ca621ca56b",
+      "symbol": "VentilationSystem",
+      "symbol_hash": "sha256:b4f227351d8ab5efd177e61ec95a1ec8f5ff115abd3192cfb1d2f5d2956376b4"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 326,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "VentilationSystem.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:cd21ec881c0aca0378421daac09ce9c137ada1303435db24d7f439b0302caa05",
+      "inventory_index": 329,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7449c5865d5357f17c8680f86663e4b772a2f806181a5840c4df79a063f1ea56",
+      "symbol": "VentilationSystem.__init__",
+      "symbol_hash": "sha256:7d9d5173bcaf71fe63dbf9a8b4572b498db76f280f2ab6e0d4bb9d6d5af01a42"
+    },
+    {
+      "body_hash": "sha256:a1b5f099b791327d3fd1580b267e0487330ab441d32165d7b373896f017719de",
+      "inventory_index": 332,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ebf17326b32c40dff148e673f2f9fd53f2cdb204714c16837f1bb5799c01025a",
+      "symbol": "VentilationSystem.airflow_rate",
+      "symbol_hash": "sha256:b19eca15d6da2b74f791418ace2d3f9842b3325ee1275aa83d2c9a376f29cecf"
+    },
+    {
+      "body_hash": "sha256:bc9be31b88092612769aa683b9382352cf43ae50709f87d9d1e669704f1062cf",
+      "inventory_index": 333,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e05e54956fba4af8af5f1534e150dc6463f3e8650df104724484e5fa31fc8dab",
+      "symbol": "VentilationSystem.cooling_efficiency",
+      "symbol_hash": "sha256:839431378f98bb11537ad790591935959db0dabf46c58bf2ef2ce14db593605b"
+    },
+    {
+      "body_hash": "sha256:ef4d24e014eaec930ed906f6f3b49474d247a9cbdbf5821bbdc29f364750a2b7",
+      "inventory_index": 334,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e8490b3609e75eb4bc77408e8c95391c8d0566f25a62a06c94ccb419e46ac444",
+      "symbol": "VentilationSystem.from_json",
+      "symbol_hash": "sha256:acaa4faa2d86c79e192ff8b656f0f994bd68d5521d385c0ab73f87a3bf535e0f"
+    },
+    {
+      "body_hash": "sha256:3b9814062256bf3ea2ef2c16974a02293b86402be6048965d3cb6fcc0a4235ec",
+      "inventory_index": 335,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ef7dc696a100503d05975968cf1f5b5464412f894f7d1830d70af18c56e89867",
+      "symbol": "VentilationSystem.heating_efficiency",
+      "symbol_hash": "sha256:76edd9cd644cad9e21d4c774207f921a253c93ffd5d10031c3650a66747a2924"
+    },
+    {
+      "body_hash": "sha256:8f6cfd498bbc3f5c6b9579a78c165bb00e671d7ddde71c2c3c9abb3f2caa468e",
+      "inventory_index": 336,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a1cb1a18cbf0115a8c02928192e6e9da52ae4ee12cf2818024c93475d5954103",
+      "symbol": "VentilationSystem.to_dragon",
+      "symbol_hash": "sha256:fdc1293c0274742cb447238b18816105cb3feef83864b404fcf8b13a8270e47e"
+    }
+  ],
+  "upstream": {
+    "adjacent_receipts_sha256": "sha256:9496c1be4d58eee9816df92993a953e6c0c946a7254226cf7c52f2c80515b1a2",
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory": {
+      "bytes": 518070,
+      "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+      "file_sha256": "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    },
+    "isolated_import": {
+      "epsimple_core_initializer_executed": false,
+      "epsimple_package_initializer_executed": false,
+      "loaded_local_modules": [
+        {
+          "ast_sha256": "sha256:f26684ea4b6e1bfe7b9576f06d45971e420d2e9e49da99b6c52ff9d0d424fae3",
+          "bytes": 2262,
+          "module": "epsimple",
+          "path": "src/epsimple/__init__.py",
+          "source_sha256": "sha256:adff45de2c37d23586de00015e05502b1ee4ff7c167f5017b946827f1f383996"
+        },
+        {
+          "ast_sha256": "sha256:6740f081f087834aadfef0c11da6cdbe11f907dc170b48ebaa287e000eb6e27b",
+          "bytes": 4873,
+          "module": "epsimple.constants",
+          "path": "src/epsimple/constants.py",
+          "source_sha256": "sha256:d5dd5241ec90b14ba3708a525cd74279a8cdc238164a5b8544c4c82b05a29897"
+        },
+        {
+          "ast_sha256": "sha256:7409c8f18e040e02d52a7e2a70ab56b4539212eb76035f5b218a5bacd84f4762",
+          "bytes": 1264,
+          "module": "epsimple.core",
+          "path": "src/epsimple/core/__init__.py",
+          "source_sha256": "sha256:e6d571f7bf775cd13cba7abf0f625802e92680fdc87838f4039b037174a1a4c9"
+        },
+        {
+          "ast_sha256": "sha256:dbbea63f51a001fae4fd73fba96dc099eab8cd5bcec39e3d9bf768e29b463873",
+          "bytes": 53850,
+          "module": "epsimple.core.hvac",
+          "path": "src/epsimple/core/hvac.py",
+          "source_sha256": "sha256:9f3ecb27ed612baeed530ccbfd5857f1f528de24f222e6ef5093e4a635665d9c"
+        },
+        {
+          "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+          "bytes": 2011,
+          "module": "idragon",
+          "path": "src/idragon/__init__.py",
+          "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+        },
+        {
+          "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+          "bytes": 6247,
+          "module": "idragon.common",
+          "path": "src/idragon/common.py",
+          "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+        },
+        {
+          "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+          "bytes": 2590,
+          "module": "idragon.constants",
+          "path": "src/idragon/constants.py",
+          "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+        },
+        {
+          "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+          "bytes": 1505,
+          "module": "idragon.dragon",
+          "path": "src/idragon/dragon/__init__.py",
+          "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+        },
+        {
+          "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+          "bytes": 11652,
+          "module": "idragon.dragon.construction",
+          "path": "src/idragon/dragon/construction.py",
+          "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+        },
+        {
+          "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+          "bytes": 137833,
+          "module": "idragon.dragon.hvac",
+          "path": "src/idragon/dragon/hvac.py",
+          "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+        },
+        {
+          "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+          "bytes": 8247,
+          "module": "idragon.dragon.model",
+          "path": "src/idragon/dragon/model.py",
+          "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+        },
+        {
+          "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+          "bytes": 117731,
+          "module": "idragon.dragon.profile",
+          "path": "src/idragon/dragon/profile.py",
+          "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+        },
+        {
+          "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+          "bytes": 27438,
+          "module": "idragon.dragon.shape",
+          "path": "src/idragon/dragon/shape.py",
+          "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+        },
+        {
+          "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+          "bytes": 91815,
+          "module": "idragon.imugi",
+          "path": "src/idragon/imugi.py",
+          "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+        },
+        {
+          "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+          "bytes": 12367,
+          "module": "idragon.launcher",
+          "path": "src/idragon/launcher.py",
+          "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+        },
+        {
+          "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+          "bytes": 2616,
+          "module": "idragon.utils",
+          "path": "src/idragon/utils.py",
+          "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+        }
+      ],
+      "loaded_local_modules_sha256": "sha256:e19bb4e2660bce5866feb71cdaf7d6906f7e8ce8043667f63a290adfeeb115b8",
+      "relocated_observations_sha256": "sha256:ce5d3cd59eb175aa4fadbe2cb4cb4945a5c653f571f845c32d4ac0e0a6099f23",
+      "relocated_source_copy": "byte-identical-epsimple-and-idragon-trees",
+      "source_location_count": 2
+    },
+    "source": {
+      "ast_sha256": "sha256:dbbea63f51a001fae4fd73fba96dc099eab8cd5bcec39e3d9bf768e29b463873",
+      "bytes": 53850,
+      "path": "src/epsimple/core/hvac.py",
+      "source_sha256": "sha256:9f3ecb27ed612baeed530ccbfd5857f1f528de24f222e6ef5093e4a635665d9c"
+    },
+    "target_receipts_sha256": "sha256:c75dc2dc10c45ca2cc59300b130cc06399ec1ac07d6a138f69bebc43af70fe0f"
+  }
+}
