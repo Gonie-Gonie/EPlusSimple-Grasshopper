@@ -173,6 +173,11 @@
       "sha256": "5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c"
     },
     {
+      "path": "epsimple-hvac-thermal-source-oracle.json",
+      "bytes": 135657,
+      "sha256": "e78e8bcbe42cd236775db63d50088bad82a9e9c5328e5fa5de6873d069984391"
+    },
+    {
       "path": "epsimple-identifier-conventions-oracle.json",
       "bytes": 121058,
       "sha256": "c4375d858409fae187776ab88ebb6c5a21c76ac7d0e98b38ed2912a419f2bf7f"

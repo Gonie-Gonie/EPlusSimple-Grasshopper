@@ -1,0 +1,3139 @@
+{
+  "case_sha256": {
+    "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon": "sha256:07e2bba13da938db6c7bbd64d047bda378f2e40ca541615ee898fbb025da6919",
+    "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon": "sha256:eaaaacf0bd3ef08a080aca2bc2ab8f61fffe6a07dccaaaa664fc5bf798e7ddc2",
+    "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon": "sha256:2cb0247acde415dd8cc99296635057972415979af3754edb55930c2ea89055e3",
+    "epsimple-hvac-thermal-source.district-heating-state-validation-json-dragon": "sha256:4d2e2f6b199cdc3bc0eb2a569243fc4bd85b10c8b84be9f36e07d7eef3d94695",
+    "epsimple-hvac-thermal-source.geothermal-heatpump-json-dragon": "sha256:86697920fc6275852d414b00544844417927fb1e57f95d5a93718f7d262dffaf",
+    "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon": "sha256:8ac4a3fe84318f9f640b9f2387f5aa8185f97c35a423ba588c27462711050599"
+  },
+  "cases": [
+    {
+      "code": "A01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SourceSystem"
+          ],
+          "default": {
+            "class": "AbsorptionChiller",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-ABS-DEFAULT",
+              "boiler_efficiency": {
+                "hex": "0x1.b333333333333p-1",
+                "kind": "float",
+                "repr": "0.85"
+              },
+              "capacity": null,
+              "cop": {
+                "hex": "0x1.ccccccccccccdp-1",
+                "kind": "float",
+                "repr": "0.9"
+              },
+              "name": "Abs Default"
+            }
+          },
+          "dragon": {
+            "attributes": {
+              "capacity": {
+                "hex": "0x1.7700000000000p+13",
+                "kind": "float",
+                "repr": "12000.0"
+              },
+              "coolingtower": {
+                "attributes": {
+                  "capacity": {
+                    "hex": "0x1.7700000000000p+13",
+                    "kind": "float",
+                    "repr": "12000.0"
+                  },
+                  "name": "CoolingTower_for_SRC-ABS-EXPLICIT",
+                  "pump_efficiency": {
+                    "hex": "0x1.ccccccccccccdp-1",
+                    "kind": "float",
+                    "repr": "0.9"
+                  }
+                },
+                "module": "idragon.dragon.hvac",
+                "type": "OpenSingleSpeedCoolingTower"
+              },
+              "cop": {
+                "hex": "0x1.3333333333333p+0",
+                "kind": "float",
+                "repr": "1.2"
+              },
+              "heatsource": {
+                "attributes": {
+                  "capacity": null,
+                  "efficiency": {
+                    "hex": "0x1.999999999999ap-1",
+                    "kind": "float",
+                    "repr": "0.8"
+                  },
+                  "fuel": "Propane",
+                  "name": "Boiler_for_SRC-ABS-EXPLICIT",
+                  "pump_efficiency": {
+                    "hex": "0x1.ccccccccccccdp-1",
+                    "kind": "float",
+                    "repr": "0.9"
+                  },
+                  "setpoint_temperature": {
+                    "kind": "int",
+                    "value": "60"
+                  }
+                },
+                "module": "idragon.dragon.hvac",
+                "type": "Boiler"
+              },
+              "name": "SRC-ABS-EXPLICIT",
+              "pump_efficiency": {
+                "hex": "0x1.ccccccccccccdp-1",
+                "kind": "float",
+                "repr": "0.9"
+              },
+              "setpoint_temperature": {
+                "kind": "int",
+                "value": "6"
+              }
+            },
+            "module": "idragon.dragon.hvac",
+            "type": "AbsorptionChiller"
+          },
+          "dragon_repeat_fresh": true,
+          "errors": {
+            "boiler_efficiency_above_one": {
+              "message_sha256": "sha256:57a2a05e61ff0383804606a4be54eb6e708b8537cde2f1140b0c82484438001d",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "capacity_zero": {
+              "message_sha256": "sha256:d4b0a32716c1f7e77ab2b2f51e6394dd6f9e2b6003c6f56ff6361e121db7a7e4",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "cop_zero": {
+              "message_sha256": "sha256:85d133a6b91cfbe69a5ec3d561fc6da0eec1757614e65f5c84f0a55f6976a18c",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "fuel_none": {
+              "message_sha256": "sha256:e7e85556dfde5a9ad9023a97793e8938b5f2ddba683c58193c90e73d145b2a21",
+              "outcome": "raised",
+              "type": "ValueError"
+            }
+          },
+          "explicit": {
+            "class": "AbsorptionChiller",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-ABS-EXPLICIT",
+              "boiler_efficiency": {
+                "hex": "0x1.999999999999ap-1",
+                "kind": "float",
+                "repr": "0.8"
+              },
+              "capacity": {
+                "hex": "0x1.7700000000000p+13",
+                "kind": "float",
+                "repr": "12000.0"
+              },
+              "cop": {
+                "hex": "0x1.3333333333333p+0",
+                "kind": "float",
+                "repr": "1.2"
+              },
+              "name": "Abs Explicit"
+            }
+          },
+          "from_json": {
+            "class": "AbsorptionChiller",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-ABS-JSON",
+              "boiler_efficiency": {
+                "hex": "0x1.8000000000000p-1",
+                "kind": "float",
+                "repr": "0.75"
+              },
+              "capacity": {
+                "hex": "0x1.28e0000000000p+13",
+                "kind": "float",
+                "repr": "9500.0"
+              },
+              "cop": {
+                "hex": "0x1.199999999999ap+0",
+                "kind": "float",
+                "repr": "1.1"
+              },
+              "name": "Abs JSON"
+            }
+          },
+          "mutated": {
+            "class": "AbsorptionChiller",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-ABS-MUTABLE",
+              "boiler_efficiency": {
+                "hex": "0x1.0000000000000p+0",
+                "kind": "float",
+                "repr": "1.0"
+              },
+              "capacity": {
+                "kind": "int",
+                "value": "8000"
+              },
+              "cop": {
+                "hex": "0x1.0cccccccccccdp+0",
+                "kind": "float",
+                "repr": "1.05"
+              },
+              "name": "Abs Mutable"
+            }
+          }
+        },
+        "facts_sha256": "sha256:b14eee5f3b17ee6554f380af12eef43e8b5af07bcfc0aaa55e506cb2d26142eb",
+        "outcome": "observed"
+      },
+      "subfamily": "absorption",
+      "target_symbols": [
+        "AbsorptionChiller",
+        "AbsorptionChiller.ID",
+        "AbsorptionChiller.__init__",
+        "AbsorptionChiller.boiler_efficiency",
+        "AbsorptionChiller.capacity",
+        "AbsorptionChiller.cop",
+        "AbsorptionChiller.from_json",
+        "AbsorptionChiller.to_dragon"
+      ]
+    },
+    {
+      "code": "B01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SourceSystem"
+          ],
+          "default": {
+            "class": "Boiler",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-BOILER-DEFAULT",
+              "capacity": null,
+              "efficiency": {
+                "hex": "0x1.b333333333333p-1",
+                "kind": "float",
+                "repr": "0.85"
+              },
+              "fuel": "natural_gas",
+              "hotwater_supply": {
+                "kind": "bool",
+                "value": false
+              },
+              "name": "Boiler Default"
+            }
+          },
+          "dragon": {
+            "attributes": {
+              "capacity": {
+                "hex": "0x1.d4c0000000000p+13",
+                "kind": "float",
+                "repr": "15000.0"
+              },
+              "efficiency": {
+                "hex": "0x1.d70a3d70a3d71p-1",
+                "kind": "float",
+                "repr": "0.92"
+              },
+              "fuel": "Propane",
+              "name": "SRC-BOILER-EXPLICIT",
+              "pump_efficiency": {
+                "hex": "0x1.ccccccccccccdp-1",
+                "kind": "float",
+                "repr": "0.9"
+              },
+              "setpoint_temperature": {
+                "kind": "int",
+                "value": "60"
+              }
+            },
+            "module": "idragon.dragon.hvac",
+            "type": "Boiler"
+          },
+          "dragon_repeat_fresh": true,
+          "errors": {
+            "capacity_zero": {
+              "message_sha256": "sha256:d4b0a32716c1f7e77ab2b2f51e6394dd6f9e2b6003c6f56ff6361e121db7a7e4",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "efficiency_above_one": {
+              "message_sha256": "sha256:8286a2bfd4216117d209f33aca82161ac59d5015366a3f45f3d1265ea9d57be8",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "efficiency_zero": {
+              "message_sha256": "sha256:7cbd1ab0ca980383a39953735f331c1913d0dec68ea856e56750c34941cd5fd1",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "fuel_invalid": {
+              "message_sha256": "sha256:9acca0f5e92a0c8afc3d3317b1a3af5fe75f0f297458fb5bb80f10ad5668294f",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "hotwater_not_bool": {
+              "message_sha256": "sha256:7639b170e6635db8bdf12c8c08629e9f7f1d57b1a4cf122704c6c4177d82964e",
+              "outcome": "raised",
+              "type": "TypeError"
+            }
+          },
+          "explicit": {
+            "class": "Boiler",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-BOILER-EXPLICIT",
+              "capacity": {
+                "hex": "0x1.d4c0000000000p+13",
+                "kind": "float",
+                "repr": "15000.0"
+              },
+              "efficiency": {
+                "hex": "0x1.d70a3d70a3d71p-1",
+                "kind": "float",
+                "repr": "0.92"
+              },
+              "fuel": "lpg",
+              "hotwater_supply": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Boiler Explicit"
+            }
+          },
+          "from_json": {
+            "class": "Boiler",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-BOILER-JSON",
+              "capacity": {
+                "hex": "0x1.1170000000000p+14",
+                "kind": "float",
+                "repr": "17500.0"
+              },
+              "efficiency": {
+                "hex": "0x1.c28f5c28f5c29p-1",
+                "kind": "float",
+                "repr": "0.88"
+              },
+              "fuel": "oil",
+              "hotwater_supply": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Boiler JSON"
+            }
+          },
+          "mutated": {
+            "class": "Boiler",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-BOILER-MUTABLE",
+              "capacity": {
+                "kind": "int",
+                "value": "20000"
+              },
+              "efficiency": {
+                "hex": "0x1.0000000000000p+0",
+                "kind": "float",
+                "repr": "1.0"
+              },
+              "fuel": "district_heating",
+              "hotwater_supply": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Boiler Mutable"
+            }
+          }
+        },
+        "facts_sha256": "sha256:f82cb04c34c84047f95c9352634a6b01ba922c70a0b7b674e4a68d30d2985e54",
+        "outcome": "observed"
+      },
+      "subfamily": "boiler",
+      "target_symbols": [
+        "Boiler",
+        "Boiler.ID",
+        "Boiler.__init__",
+        "Boiler.capacity",
+        "Boiler.efficiency",
+        "Boiler.from_json",
+        "Boiler.fuel",
+        "Boiler.hotwater_supply",
+        "Boiler.to_dragon"
+      ]
+    },
+    {
+      "code": "C01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SourceSystem"
+          ],
+          "default": {
+            "class": "Chiller",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-CHILLER-DEFAULT",
+              "capacity": null,
+              "compressor_type": "turbo",
+              "coolingtower_capacity": null,
+              "coolingtower_control": "single-speed",
+              "coolingtower_type": "open",
+              "cop": {
+                "hex": "0x1.8000000000000p+1",
+                "kind": "float",
+                "repr": "3.0"
+              },
+              "name": "Chiller Default"
+            }
+          },
+          "errors": {
+            "capacity_zero": {
+              "message_sha256": "sha256:d4b0a32716c1f7e77ab2b2f51e6394dd6f9e2b6003c6f56ff6361e121db7a7e4",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "compressor_invalid": {
+              "message_sha256": "sha256:ef2d0c911ef716e29a087c87dfb758e101eefaf4e66f5a6e0da24d4fb42eb72b",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "coolingtower_capacity_zero": {
+              "message_sha256": "sha256:6de97f264ec5ec9cc36a0c3710f5a0d2b255ba22b1d31b3e73df622719d76688",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "coolingtower_control_invalid": {
+              "message_sha256": "sha256:febbbf142c29e81e376ba80980c6223949e21db7a14a90c463e10250d2d059eb",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "coolingtower_type_invalid": {
+              "message_sha256": "sha256:84bdb1e4a43d28156d0686b8daf9902cd1a41d9baabb36f21e07813e84bdb370",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "cop_zero": {
+              "message_sha256": "sha256:85d133a6b91cfbe69a5ec3d561fc6da0eec1757614e65f5c84f0a55f6976a18c",
+              "outcome": "raised",
+              "type": "ValueError"
+            }
+          },
+          "explicit": {
+            "class": "Chiller",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-CHILLER-EXPLICIT",
+              "capacity": {
+                "hex": "0x1.7700000000000p+14",
+                "kind": "float",
+                "repr": "24000.0"
+              },
+              "compressor_type": "screw",
+              "coolingtower_capacity": {
+                "hex": "0x1.e460000000000p+14",
+                "kind": "float",
+                "repr": "31000.0"
+              },
+              "coolingtower_control": "two-speed",
+              "coolingtower_type": "closed",
+              "cop": {
+                "hex": "0x1.1000000000000p+2",
+                "kind": "float",
+                "repr": "4.25"
+              },
+              "name": "Chiller SRC-CHILLER-EXPLICIT"
+            }
+          },
+          "from_json": {
+            "class": "Chiller",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-CHILLER-JSON",
+              "capacity": {
+                "hex": "0x1.28e0000000000p+14",
+                "kind": "float",
+                "repr": "19000.0"
+              },
+              "compressor_type": "reciprocating",
+              "coolingtower_capacity": {
+                "hex": "0x1.6760000000000p+14",
+                "kind": "float",
+                "repr": "23000.0"
+              },
+              "coolingtower_control": "two-speed",
+              "coolingtower_type": "open",
+              "cop": {
+                "hex": "0x1.e000000000000p+1",
+                "kind": "float",
+                "repr": "3.75"
+              },
+              "name": "Chiller JSON"
+            }
+          },
+          "mutated": {
+            "class": "Chiller",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-CHILLER-MUTABLE",
+              "capacity": {
+                "kind": "int",
+                "value": "20000"
+              },
+              "compressor_type": "screw",
+              "coolingtower_capacity": {
+                "kind": "int",
+                "value": "26000"
+              },
+              "coolingtower_control": "two-speed",
+              "coolingtower_type": "closed",
+              "cop": {
+                "hex": "0x1.4000000000000p+2",
+                "kind": "float",
+                "repr": "5.0"
+              },
+              "name": "Chiller Mutable"
+            }
+          },
+          "tower_branches": [
+            {
+              "control": "single-speed",
+              "dragon": {
+                "attributes": {
+                  "capacity": {
+                    "hex": "0x1.7700000000000p+14",
+                    "kind": "float",
+                    "repr": "24000.0"
+                  },
+                  "compressor": "screw",
+                  "coolingtower": {
+                    "attributes": {
+                      "capacity": {
+                        "hex": "0x1.e460000000000p+14",
+                        "kind": "float",
+                        "repr": "31000.0"
+                      },
+                      "name": "CoolingTower_for_SRC-CHILLER-OPEN-SINGLE-SPEED",
+                      "pump_efficiency": {
+                        "hex": "0x1.ccccccccccccdp-1",
+                        "kind": "float",
+                        "repr": "0.9"
+                      }
+                    },
+                    "module": "idragon.dragon.hvac",
+                    "type": "OpenSingleSpeedCoolingTower"
+                  },
+                  "cop": {
+                    "hex": "0x1.1000000000000p+2",
+                    "kind": "float",
+                    "repr": "4.25"
+                  },
+                  "name": "SRC-CHILLER-OPEN-SINGLE-SPEED",
+                  "pump_efficiency": {
+                    "hex": "0x1.ccccccccccccdp-1",
+                    "kind": "float",
+                    "repr": "0.9"
+                  },
+                  "setpoint_temperature": {
+                    "kind": "int",
+                    "value": "6"
+                  }
+                },
+                "module": "idragon.dragon.hvac",
+                "type": "Chiller"
+              },
+              "tower_type": "open"
+            },
+            {
+              "control": "two-speed",
+              "dragon": {
+                "attributes": {
+                  "capacity": {
+                    "hex": "0x1.7700000000000p+14",
+                    "kind": "float",
+                    "repr": "24000.0"
+                  },
+                  "compressor": "screw",
+                  "coolingtower": {
+                    "attributes": {
+                      "capacity": {
+                        "hex": "0x1.e460000000000p+14",
+                        "kind": "float",
+                        "repr": "31000.0"
+                      },
+                      "name": "CoolingTower_for_SRC-CHILLER-OPEN-TWO-SPEED",
+                      "pump_efficiency": {
+                        "hex": "0x1.ccccccccccccdp-1",
+                        "kind": "float",
+                        "repr": "0.9"
+                      }
+                    },
+                    "module": "idragon.dragon.hvac",
+                    "type": "OpenTwoSpeedCoolingTower"
+                  },
+                  "cop": {
+                    "hex": "0x1.1000000000000p+2",
+                    "kind": "float",
+                    "repr": "4.25"
+                  },
+                  "name": "SRC-CHILLER-OPEN-TWO-SPEED",
+                  "pump_efficiency": {
+                    "hex": "0x1.ccccccccccccdp-1",
+                    "kind": "float",
+                    "repr": "0.9"
+                  },
+                  "setpoint_temperature": {
+                    "kind": "int",
+                    "value": "6"
+                  }
+                },
+                "module": "idragon.dragon.hvac",
+                "type": "Chiller"
+              },
+              "tower_type": "open"
+            },
+            {
+              "control": "single-speed",
+              "dragon": {
+                "attributes": {
+                  "capacity": {
+                    "hex": "0x1.7700000000000p+14",
+                    "kind": "float",
+                    "repr": "24000.0"
+                  },
+                  "compressor": "screw",
+                  "coolingtower": {
+                    "attributes": {
+                      "capacity": {
+                        "hex": "0x1.e460000000000p+14",
+                        "kind": "float",
+                        "repr": "31000.0"
+                      },
+                      "name": "CoolingTower_for_SRC-CHILLER-CLOSED-SINGLE-SPEED",
+                      "pump_efficiency": {
+                        "hex": "0x1.ccccccccccccdp-1",
+                        "kind": "float",
+                        "repr": "0.9"
+                      }
+                    },
+                    "module": "idragon.dragon.hvac",
+                    "type": "ClosedSingleSpeedCoolingTower"
+                  },
+                  "cop": {
+                    "hex": "0x1.1000000000000p+2",
+                    "kind": "float",
+                    "repr": "4.25"
+                  },
+                  "name": "SRC-CHILLER-CLOSED-SINGLE-SPEED",
+                  "pump_efficiency": {
+                    "hex": "0x1.ccccccccccccdp-1",
+                    "kind": "float",
+                    "repr": "0.9"
+                  },
+                  "setpoint_temperature": {
+                    "kind": "int",
+                    "value": "6"
+                  }
+                },
+                "module": "idragon.dragon.hvac",
+                "type": "Chiller"
+              },
+              "tower_type": "closed"
+            },
+            {
+              "control": "two-speed",
+              "dragon": {
+                "attributes": {
+                  "capacity": {
+                    "hex": "0x1.7700000000000p+14",
+                    "kind": "float",
+                    "repr": "24000.0"
+                  },
+                  "compressor": "screw",
+                  "coolingtower": {
+                    "attributes": {
+                      "capacity": {
+                        "hex": "0x1.e460000000000p+14",
+                        "kind": "float",
+                        "repr": "31000.0"
+                      },
+                      "name": "CoolingTower_for_SRC-CHILLER-CLOSED-TWO-SPEED",
+                      "pump_efficiency": {
+                        "hex": "0x1.ccccccccccccdp-1",
+                        "kind": "float",
+                        "repr": "0.9"
+                      }
+                    },
+                    "module": "idragon.dragon.hvac",
+                    "type": "ClosedTwoSpeedCoolingTower"
+                  },
+                  "cop": {
+                    "hex": "0x1.1000000000000p+2",
+                    "kind": "float",
+                    "repr": "4.25"
+                  },
+                  "name": "SRC-CHILLER-CLOSED-TWO-SPEED",
+                  "pump_efficiency": {
+                    "hex": "0x1.ccccccccccccdp-1",
+                    "kind": "float",
+                    "repr": "0.9"
+                  },
+                  "setpoint_temperature": {
+                    "kind": "int",
+                    "value": "6"
+                  }
+                },
+                "module": "idragon.dragon.hvac",
+                "type": "Chiller"
+              },
+              "tower_type": "closed"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:108cee171ab3816a0817b6bd78412c74056e953eeb924e1a6909c8828e471de1",
+        "outcome": "observed"
+      },
+      "subfamily": "chiller",
+      "target_symbols": [
+        "Chiller",
+        "Chiller.ID",
+        "Chiller.__init__",
+        "Chiller.capacity",
+        "Chiller.compressor_type",
+        "Chiller.coolingtower_capacity",
+        "Chiller.coolingtower_control",
+        "Chiller.coolingtower_type",
+        "Chiller.cop",
+        "Chiller.from_json",
+        "Chiller.to_dragon"
+      ]
+    },
+    {
+      "code": "D01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-thermal-source.district-heating-state-validation-json-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SourceSystem"
+          ],
+          "dragon": {
+            "attributes": {
+              "capacity": null,
+              "efficiency": {
+                "hex": "0x1.0000000000000p+0",
+                "kind": "float",
+                "repr": "1.0"
+              },
+              "fuel": "OtherFuel1",
+              "name": "SRC-DISTRICT-TRUE",
+              "pump_efficiency": {
+                "hex": "0x1.ccccccccccccdp-1",
+                "kind": "float",
+                "repr": "0.9"
+              },
+              "setpoint_temperature": {
+                "kind": "int",
+                "value": "60"
+              }
+            },
+            "module": "idragon.dragon.hvac",
+            "type": "Boiler"
+          },
+          "dragon_repeat_fresh": true,
+          "errors": {
+            "hotwater_integer": {
+              "message_sha256": "sha256:7639b170e6635db8bdf12c8c08629e9f7f1d57b1a4cf122704c6c4177d82964e",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "hotwater_none": {
+              "message_sha256": "sha256:19983b671641a12bc866c88d358028b5fca9d457a963042889aa2f7b167370ad",
+              "outcome": "raised",
+              "type": "TypeError"
+            }
+          },
+          "false_then_mutated": {
+            "class": "DistrictHeating",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-DISTRICT-FALSE",
+              "hotwater_supply": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "District False"
+            }
+          },
+          "from_json": {
+            "class": "DistrictHeating",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-DISTRICT-JSON",
+              "hotwater_supply": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "District JSON"
+            }
+          },
+          "true": {
+            "class": "DistrictHeating",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-DISTRICT-TRUE",
+              "hotwater_supply": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "District True"
+            }
+          }
+        },
+        "facts_sha256": "sha256:2862c963664ca87858dbb43d3f98e432cd963edb196528912163488b6a940c50",
+        "outcome": "observed"
+      },
+      "subfamily": "district",
+      "target_symbols": [
+        "DistrictHeating",
+        "DistrictHeating.ID",
+        "DistrictHeating.__init__",
+        "DistrictHeating.from_json",
+        "DistrictHeating.hotwater_supply",
+        "DistrictHeating.to_dragon"
+      ]
+    },
+    {
+      "code": "G01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-thermal-source.geothermal-heatpump-json-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "HeatPump"
+          ],
+          "dragon": {
+            "attributes": {
+              "cooling_capacity": {
+                "hex": "0x1.f400000000000p+13",
+                "kind": "float",
+                "repr": "16000.0"
+              },
+              "cooling_cop": {
+                "hex": "0x1.4000000000000p+2",
+                "kind": "float",
+                "repr": "5.0"
+              },
+              "fuel": "Electricity",
+              "heating_capacity": {
+                "hex": "0x1.1940000000000p+14",
+                "kind": "float",
+                "repr": "18000.0"
+              },
+              "heating_cop": {
+                "hex": "0x1.2000000000000p+2",
+                "kind": "float",
+                "repr": "4.5"
+              },
+              "name": "SRC-GEO-EXPLICIT"
+            },
+            "module": "idragon.dragon.hvac",
+            "type": "HeatPump"
+          },
+          "dragon_repeat_fresh": true,
+          "dragon_type": "HeatPump",
+          "explicit": {
+            "class": "GeothermalHeatPump",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-GEO-EXPLICIT",
+              "cooling_capacity": {
+                "hex": "0x1.f400000000000p+13",
+                "kind": "float",
+                "repr": "16000.0"
+              },
+              "cooling_cop": {
+                "hex": "0x1.4000000000000p+2",
+                "kind": "float",
+                "repr": "5.0"
+              },
+              "fuel": "electricity",
+              "heating_capacity": {
+                "hex": "0x1.1940000000000p+14",
+                "kind": "float",
+                "repr": "18000.0"
+              },
+              "heating_cop": {
+                "hex": "0x1.2000000000000p+2",
+                "kind": "float",
+                "repr": "4.5"
+              },
+              "name": "Geo Explicit"
+            }
+          },
+          "from_json": {
+            "class": "GeothermalHeatPump",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-GEO-JSON",
+              "cooling_capacity": {
+                "hex": "0x1.d4c0000000000p+13",
+                "kind": "float",
+                "repr": "15000.0"
+              },
+              "cooling_cop": {
+                "hex": "0x1.3000000000000p+2",
+                "kind": "float",
+                "repr": "4.75"
+              },
+              "fuel": "electricity",
+              "heating_capacity": {
+                "hex": "0x1.09a0000000000p+14",
+                "kind": "float",
+                "repr": "17000.0"
+              },
+              "heating_cop": {
+                "hex": "0x1.1000000000000p+2",
+                "kind": "float",
+                "repr": "4.25"
+              },
+              "name": "Geo JSON"
+            }
+          },
+          "is_heatpump": true
+        },
+        "facts_sha256": "sha256:abd7c2a03dd1f1c9be3dd4d3009546fd2fddab3b9e0d5e7f9a63222b966d7b81",
+        "outcome": "observed"
+      },
+      "subfamily": "geothermal",
+      "target_symbols": [
+        "GeothermalHeatPump",
+        "GeothermalHeatPump.from_json",
+        "GeothermalHeatPump.to_dragon"
+      ]
+    },
+    {
+      "code": "H01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SourceSystem"
+          ],
+          "default": {
+            "class": "HeatPump",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-HP-DEFAULT",
+              "cooling_capacity": null,
+              "cooling_cop": {
+                "hex": "0x1.8000000000000p+1",
+                "kind": "float",
+                "repr": "3.0"
+              },
+              "fuel": "electricity",
+              "heating_capacity": null,
+              "heating_cop": {
+                "hex": "0x1.8000000000000p+1",
+                "kind": "float",
+                "repr": "3.0"
+              },
+              "name": "HeatPump Default"
+            }
+          },
+          "dragon": {
+            "attributes": {
+              "cooling_capacity": {
+                "hex": "0x1.7700000000000p+13",
+                "kind": "float",
+                "repr": "12000.0"
+              },
+              "cooling_cop": {
+                "hex": "0x1.0000000000000p+2",
+                "kind": "float",
+                "repr": "4.0"
+              },
+              "fuel": "NaturalGas",
+              "heating_capacity": {
+                "hex": "0x1.b580000000000p+13",
+                "kind": "float",
+                "repr": "14000.0"
+              },
+              "heating_cop": {
+                "hex": "0x1.c000000000000p+1",
+                "kind": "float",
+                "repr": "3.5"
+              },
+              "name": "SRC-HP-EXPLICIT"
+            },
+            "module": "idragon.dragon.hvac",
+            "type": "HeatPump"
+          },
+          "dragon_repeat_fresh": true,
+          "errors": {
+            "cooling_capacity_zero": {
+              "message_sha256": "sha256:cbe52bd2769e6165bc8bbf31ace2ee77a96a8f84505ed54ab80dd767fddd736d",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "cooling_cop_zero": {
+              "message_sha256": "sha256:b275b96d982f2b28162cbfb088164b7ac3d20e04840bf646d55acaa22bf3e776",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "fuel_invalid": {
+              "message_sha256": "sha256:9acca0f5e92a0c8afc3d3317b1a3af5fe75f0f297458fb5bb80f10ad5668294f",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "heating_capacity_zero": {
+              "message_sha256": "sha256:e6da18ea841a9ea740c76a0170f23fa58a845fbdafcf82b9b882f3b7b1f5995e",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "heating_cop_zero": {
+              "message_sha256": "sha256:4797aa7f97ce10f873e3f40e4c5b44df0093721f6d34b784c955f7b4e3abef3b",
+              "outcome": "raised",
+              "type": "ValueError"
+            }
+          },
+          "explicit": {
+            "class": "HeatPump",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-HP-EXPLICIT",
+              "cooling_capacity": {
+                "hex": "0x1.7700000000000p+13",
+                "kind": "float",
+                "repr": "12000.0"
+              },
+              "cooling_cop": {
+                "hex": "0x1.0000000000000p+2",
+                "kind": "float",
+                "repr": "4.0"
+              },
+              "fuel": "natural_gas",
+              "heating_capacity": {
+                "hex": "0x1.b580000000000p+13",
+                "kind": "float",
+                "repr": "14000.0"
+              },
+              "heating_cop": {
+                "hex": "0x1.c000000000000p+1",
+                "kind": "float",
+                "repr": "3.5"
+              },
+              "name": "HeatPump Explicit"
+            }
+          },
+          "from_json": {
+            "class": "HeatPump",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-HP-JSON",
+              "cooling_capacity": {
+                "hex": "0x1.57c0000000000p+13",
+                "kind": "float",
+                "repr": "11000.0"
+              },
+              "cooling_cop": {
+                "hex": "0x1.e000000000000p+1",
+                "kind": "float",
+                "repr": "3.75"
+              },
+              "fuel": "lpg",
+              "heating_capacity": {
+                "hex": "0x1.9640000000000p+13",
+                "kind": "float",
+                "repr": "13000.0"
+              },
+              "heating_cop": {
+                "hex": "0x1.a000000000000p+1",
+                "kind": "float",
+                "repr": "3.25"
+              },
+              "name": "HeatPump JSON"
+            }
+          },
+          "mutated": {
+            "class": "HeatPump",
+            "class_module": "epsimple.core.hvac",
+            "values": {
+              "ID": "SRC-HP-MUTABLE",
+              "cooling_capacity": {
+                "kind": "int",
+                "value": "12500"
+              },
+              "cooling_cop": {
+                "hex": "0x1.199999999999ap+2",
+                "kind": "float",
+                "repr": "4.4"
+              },
+              "fuel": "oil",
+              "heating_capacity": {
+                "kind": "int",
+                "value": "15000"
+              },
+              "heating_cop": {
+                "hex": "0x1.0cccccccccccdp+2",
+                "kind": "float",
+                "repr": "4.2"
+              },
+              "name": "HeatPump Mutable"
+            }
+          }
+        },
+        "facts_sha256": "sha256:ab6a248ed48834b7d4e84467aafa68962f306940fd704f66b52e3f59cfe9069e",
+        "outcome": "observed"
+      },
+      "subfamily": "heatpump",
+      "target_symbols": [
+        "HeatPump",
+        "HeatPump.ID",
+        "HeatPump.__init__",
+        "HeatPump.cooling_capacity",
+        "HeatPump.cooling_cop",
+        "HeatPump.from_json",
+        "HeatPump.fuel",
+        "HeatPump.heating_capacity",
+        "HeatPump.heating_cop",
+        "HeatPump.to_dragon"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:1648981844e29967326b4caeb0b466238e12c07e43fb25469d7325b73ac3feb2",
+  "consumer_contract": {
+    "adaptations": {
+      "AbsorptionChiller": "reviewed-native-discriminated-source-aggregate-and-conversion-route-c44e12f9",
+      "AbsorptionChiller.__init__": "reviewed-native-discriminated-source-aggregate-and-conversion-route-4aae19c6",
+      "AbsorptionChiller.from_json": "reviewed-native-discriminated-source-aggregate-and-conversion-route-f305d756",
+      "AbsorptionChiller.to_dragon": "reviewed-native-discriminated-source-aggregate-and-conversion-route-7a12c015",
+      "Boiler": "reviewed-native-discriminated-source-aggregate-and-conversion-route-8d52ff9e",
+      "Boiler.__init__": "reviewed-native-discriminated-source-aggregate-and-conversion-route-f45db90e",
+      "Boiler.from_json": "reviewed-native-discriminated-source-aggregate-and-conversion-route-bd3f1e5a",
+      "Boiler.to_dragon": "reviewed-native-discriminated-source-aggregate-and-conversion-route-86b77a93",
+      "Chiller": "reviewed-native-discriminated-source-aggregate-and-conversion-route-8baa00de",
+      "Chiller.__init__": "reviewed-native-discriminated-source-aggregate-and-conversion-route-9c5215c4",
+      "Chiller.from_json": "reviewed-native-discriminated-source-aggregate-and-conversion-route-ca5a6445",
+      "Chiller.to_dragon": "reviewed-native-discriminated-source-aggregate-and-conversion-route-b3b58ae8",
+      "DistrictHeating": "reviewed-native-discriminated-source-aggregate-and-conversion-route-a1c6d574",
+      "DistrictHeating.__init__": "reviewed-native-discriminated-source-aggregate-and-conversion-route-f477c20b",
+      "DistrictHeating.from_json": "reviewed-native-discriminated-source-aggregate-and-conversion-route-c53a5bbb",
+      "DistrictHeating.to_dragon": "reviewed-native-discriminated-source-aggregate-and-conversion-route-bf1c4c8b",
+      "GeothermalHeatPump": "reviewed-native-discriminated-source-aggregate-and-conversion-route-a87f33ee",
+      "GeothermalHeatPump.from_json": "reviewed-native-discriminated-source-aggregate-and-conversion-route-81ac3508",
+      "GeothermalHeatPump.to_dragon": "reviewed-native-discriminated-source-aggregate-and-conversion-route-069a6710",
+      "HeatPump": "reviewed-native-discriminated-source-aggregate-and-conversion-route-3872db31",
+      "HeatPump.__init__": "reviewed-native-discriminated-source-aggregate-and-conversion-route-7e88c6cd",
+      "HeatPump.from_json": "reviewed-native-discriminated-source-aggregate-and-conversion-route-20b220f0",
+      "HeatPump.to_dragon": "reviewed-native-discriminated-source-aggregate-and-conversion-route-0feeee0b"
+    },
+    "assertion_ids": {
+      "AbsorptionChiller": "epsimple-hvac-thermal-source-135-c44e12f9",
+      "AbsorptionChiller.ID": "epsimple-hvac-thermal-source-136-246156d9",
+      "AbsorptionChiller.__init__": "epsimple-hvac-thermal-source-139-4aae19c6",
+      "AbsorptionChiller.boiler_efficiency": "epsimple-hvac-thermal-source-142-be052579",
+      "AbsorptionChiller.capacity": "epsimple-hvac-thermal-source-143-d699d5f1",
+      "AbsorptionChiller.cop": "epsimple-hvac-thermal-source-144-253d21d2",
+      "AbsorptionChiller.from_json": "epsimple-hvac-thermal-source-145-f305d756",
+      "AbsorptionChiller.to_dragon": "epsimple-hvac-thermal-source-146-7a12c015",
+      "Boiler": "epsimple-hvac-thermal-source-157-8d52ff9e",
+      "Boiler.ID": "epsimple-hvac-thermal-source-158-246156d9",
+      "Boiler.__init__": "epsimple-hvac-thermal-source-161-f45db90e",
+      "Boiler.capacity": "epsimple-hvac-thermal-source-164-d699d5f1",
+      "Boiler.efficiency": "epsimple-hvac-thermal-source-165-80144f2f",
+      "Boiler.from_json": "epsimple-hvac-thermal-source-166-bd3f1e5a",
+      "Boiler.fuel": "epsimple-hvac-thermal-source-167-64d0443e",
+      "Boiler.hotwater_supply": "epsimple-hvac-thermal-source-168-f9effaf3",
+      "Boiler.to_dragon": "epsimple-hvac-thermal-source-169-86b77a93",
+      "Chiller": "epsimple-hvac-thermal-source-170-8baa00de",
+      "Chiller.ID": "epsimple-hvac-thermal-source-171-246156d9",
+      "Chiller.__init__": "epsimple-hvac-thermal-source-174-9c5215c4",
+      "Chiller.capacity": "epsimple-hvac-thermal-source-177-d699d5f1",
+      "Chiller.compressor_type": "epsimple-hvac-thermal-source-178-000c99e3",
+      "Chiller.coolingtower_capacity": "epsimple-hvac-thermal-source-179-e56b52fb",
+      "Chiller.coolingtower_control": "epsimple-hvac-thermal-source-180-473c615a",
+      "Chiller.coolingtower_type": "epsimple-hvac-thermal-source-181-75acdde9",
+      "Chiller.cop": "epsimple-hvac-thermal-source-182-253d21d2",
+      "Chiller.from_json": "epsimple-hvac-thermal-source-183-ca5a6445",
+      "Chiller.to_dragon": "epsimple-hvac-thermal-source-184-b3b58ae8",
+      "DistrictHeating": "epsimple-hvac-thermal-source-199-a1c6d574",
+      "DistrictHeating.ID": "epsimple-hvac-thermal-source-200-246156d9",
+      "DistrictHeating.__init__": "epsimple-hvac-thermal-source-203-f477c20b",
+      "DistrictHeating.from_json": "epsimple-hvac-thermal-source-206-c53a5bbb",
+      "DistrictHeating.hotwater_supply": "epsimple-hvac-thermal-source-207-f9effaf3",
+      "DistrictHeating.to_dragon": "epsimple-hvac-thermal-source-208-bf1c4c8b",
+      "GeothermalHeatPump": "epsimple-hvac-thermal-source-248-a87f33ee",
+      "GeothermalHeatPump.from_json": "epsimple-hvac-thermal-source-251-81ac3508",
+      "GeothermalHeatPump.to_dragon": "epsimple-hvac-thermal-source-252-069a6710",
+      "HeatPump": "epsimple-hvac-thermal-source-253-3872db31",
+      "HeatPump.ID": "epsimple-hvac-thermal-source-254-246156d9",
+      "HeatPump.__init__": "epsimple-hvac-thermal-source-257-7e88c6cd",
+      "HeatPump.cooling_capacity": "epsimple-hvac-thermal-source-260-2c365992",
+      "HeatPump.cooling_cop": "epsimple-hvac-thermal-source-261-59bd7983",
+      "HeatPump.from_json": "epsimple-hvac-thermal-source-262-20b220f0",
+      "HeatPump.fuel": "epsimple-hvac-thermal-source-263-37420422",
+      "HeatPump.heating_capacity": "epsimple-hvac-thermal-source-264-b48949da",
+      "HeatPump.heating_cop": "epsimple-hvac-thermal-source-265-55ddf021",
+      "HeatPump.to_dragon": "epsimple-hvac-thermal-source-266-0feeee0b"
+    },
+    "case_count": 6,
+    "case_ids": [
+      "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon",
+      "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon",
+      "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "epsimple-hvac-thermal-source.district-heating-state-validation-json-dragon",
+      "epsimple-hvac-thermal-source.geothermal-heatpump-json-dragon",
+      "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon"
+    ],
+    "classification_counts": {
+      "equivalent": 24,
+      "exception": 23
+    },
+    "classifications": {
+      "AbsorptionChiller": "exception",
+      "AbsorptionChiller.ID": "equivalent",
+      "AbsorptionChiller.__init__": "exception",
+      "AbsorptionChiller.boiler_efficiency": "equivalent",
+      "AbsorptionChiller.capacity": "equivalent",
+      "AbsorptionChiller.cop": "equivalent",
+      "AbsorptionChiller.from_json": "exception",
+      "AbsorptionChiller.to_dragon": "exception",
+      "Boiler": "exception",
+      "Boiler.ID": "equivalent",
+      "Boiler.__init__": "exception",
+      "Boiler.capacity": "equivalent",
+      "Boiler.efficiency": "equivalent",
+      "Boiler.from_json": "exception",
+      "Boiler.fuel": "equivalent",
+      "Boiler.hotwater_supply": "equivalent",
+      "Boiler.to_dragon": "exception",
+      "Chiller": "exception",
+      "Chiller.ID": "equivalent",
+      "Chiller.__init__": "exception",
+      "Chiller.capacity": "equivalent",
+      "Chiller.compressor_type": "equivalent",
+      "Chiller.coolingtower_capacity": "equivalent",
+      "Chiller.coolingtower_control": "equivalent",
+      "Chiller.coolingtower_type": "equivalent",
+      "Chiller.cop": "equivalent",
+      "Chiller.from_json": "exception",
+      "Chiller.to_dragon": "exception",
+      "DistrictHeating": "exception",
+      "DistrictHeating.ID": "equivalent",
+      "DistrictHeating.__init__": "exception",
+      "DistrictHeating.from_json": "exception",
+      "DistrictHeating.hotwater_supply": "equivalent",
+      "DistrictHeating.to_dragon": "exception",
+      "GeothermalHeatPump": "exception",
+      "GeothermalHeatPump.from_json": "exception",
+      "GeothermalHeatPump.to_dragon": "exception",
+      "HeatPump": "exception",
+      "HeatPump.ID": "equivalent",
+      "HeatPump.__init__": "exception",
+      "HeatPump.cooling_capacity": "equivalent",
+      "HeatPump.cooling_cop": "equivalent",
+      "HeatPump.from_json": "exception",
+      "HeatPump.fuel": "equivalent",
+      "HeatPump.heating_capacity": "equivalent",
+      "HeatPump.heating_cop": "equivalent",
+      "HeatPump.to_dragon": "exception"
+    },
+    "closure": {
+      "adjacent_count": 155,
+      "adjacent_indices": [
+        137,
+        138,
+        140,
+        141,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        159,
+        160,
+        162,
+        163,
+        172,
+        173,
+        175,
+        176,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        201,
+        202,
+        204,
+        205,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        249,
+        250,
+        255,
+        256,
+        258,
+        259,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336
+      ],
+      "exact_one_case_target_partition": true,
+      "full_hvac_source_partition": true,
+      "source_declaration_count": 202,
+      "target_count": 47,
+      "target_indices": [
+        135,
+        136,
+        139,
+        142,
+        143,
+        144,
+        145,
+        146,
+        157,
+        158,
+        161,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        174,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        199,
+        200,
+        203,
+        206,
+        207,
+        208,
+        248,
+        251,
+        252,
+        253,
+        254,
+        257,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266
+      ],
+      "target_symbols": [
+        "AbsorptionChiller",
+        "AbsorptionChiller.ID",
+        "AbsorptionChiller.__init__",
+        "AbsorptionChiller.boiler_efficiency",
+        "AbsorptionChiller.capacity",
+        "AbsorptionChiller.cop",
+        "AbsorptionChiller.from_json",
+        "AbsorptionChiller.to_dragon",
+        "Boiler",
+        "Boiler.ID",
+        "Boiler.__init__",
+        "Boiler.capacity",
+        "Boiler.efficiency",
+        "Boiler.from_json",
+        "Boiler.fuel",
+        "Boiler.hotwater_supply",
+        "Boiler.to_dragon",
+        "Chiller",
+        "Chiller.ID",
+        "Chiller.__init__",
+        "Chiller.capacity",
+        "Chiller.compressor_type",
+        "Chiller.coolingtower_capacity",
+        "Chiller.coolingtower_control",
+        "Chiller.coolingtower_type",
+        "Chiller.cop",
+        "Chiller.from_json",
+        "Chiller.to_dragon",
+        "DistrictHeating",
+        "DistrictHeating.ID",
+        "DistrictHeating.__init__",
+        "DistrictHeating.from_json",
+        "DistrictHeating.hotwater_supply",
+        "DistrictHeating.to_dragon",
+        "GeothermalHeatPump",
+        "GeothermalHeatPump.from_json",
+        "GeothermalHeatPump.to_dragon",
+        "HeatPump",
+        "HeatPump.ID",
+        "HeatPump.__init__",
+        "HeatPump.cooling_capacity",
+        "HeatPump.cooling_cop",
+        "HeatPump.from_json",
+        "HeatPump.fuel",
+        "HeatPump.heating_capacity",
+        "HeatPump.heating_cop",
+        "HeatPump.to_dragon"
+      ]
+    },
+    "coverage_by_symbol": {
+      "AbsorptionChiller": "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon",
+      "AbsorptionChiller.ID": "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon",
+      "AbsorptionChiller.__init__": "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon",
+      "AbsorptionChiller.boiler_efficiency": "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon",
+      "AbsorptionChiller.capacity": "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon",
+      "AbsorptionChiller.cop": "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon",
+      "AbsorptionChiller.from_json": "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon",
+      "AbsorptionChiller.to_dragon": "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon",
+      "Boiler": "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon",
+      "Boiler.ID": "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon",
+      "Boiler.__init__": "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon",
+      "Boiler.capacity": "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon",
+      "Boiler.efficiency": "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon",
+      "Boiler.from_json": "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon",
+      "Boiler.fuel": "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon",
+      "Boiler.hotwater_supply": "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon",
+      "Boiler.to_dragon": "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon",
+      "Chiller": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "Chiller.ID": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "Chiller.__init__": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "Chiller.capacity": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "Chiller.compressor_type": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "Chiller.coolingtower_capacity": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "Chiller.coolingtower_control": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "Chiller.coolingtower_type": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "Chiller.cop": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "Chiller.from_json": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "Chiller.to_dragon": "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon",
+      "DistrictHeating": "epsimple-hvac-thermal-source.district-heating-state-validation-json-dragon",
+      "DistrictHeating.ID": "epsimple-hvac-thermal-source.district-heating-state-validation-json-dragon",
+      "DistrictHeating.__init__": "epsimple-hvac-thermal-source.district-heating-state-validation-json-dragon",
+      "DistrictHeating.from_json": "epsimple-hvac-thermal-source.district-heating-state-validation-json-dragon",
+      "DistrictHeating.hotwater_supply": "epsimple-hvac-thermal-source.district-heating-state-validation-json-dragon",
+      "DistrictHeating.to_dragon": "epsimple-hvac-thermal-source.district-heating-state-validation-json-dragon",
+      "GeothermalHeatPump": "epsimple-hvac-thermal-source.geothermal-heatpump-json-dragon",
+      "GeothermalHeatPump.from_json": "epsimple-hvac-thermal-source.geothermal-heatpump-json-dragon",
+      "GeothermalHeatPump.to_dragon": "epsimple-hvac-thermal-source.geothermal-heatpump-json-dragon",
+      "HeatPump": "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon",
+      "HeatPump.ID": "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon",
+      "HeatPump.__init__": "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon",
+      "HeatPump.cooling_capacity": "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon",
+      "HeatPump.cooling_cop": "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon",
+      "HeatPump.from_json": "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon",
+      "HeatPump.fuel": "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon",
+      "HeatPump.heating_capacity": "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon",
+      "HeatPump.heating_cop": "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon",
+      "HeatPump.to_dragon": "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon"
+    },
+    "evidence_contract": {
+      "active_energyplus_process_claim": false,
+      "exact_cpython_behavior_oracle": true,
+      "expected_receipt_count": 47,
+      "native_runtime_executed_by_python_oracle": false,
+      "path_independent_relocated_import": true,
+      "target_coverage_complete": true
+    },
+    "expectations": {
+      "AbsorptionChiller": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-c44e12f9",
+        "assertion_id": "epsimple-hvac-thermal-source-135-c44e12f9",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties"
+      },
+      "AbsorptionChiller.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-136-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "AbsorptionChiller.__init__": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-4aae19c6",
+        "assertion_id": "epsimple-hvac-thermal-source-139-4aae19c6",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties"
+      },
+      "AbsorptionChiller.boiler_efficiency": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-142-be052579",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.BoilerEfficiency"
+      },
+      "AbsorptionChiller.capacity": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-143-d699d5f1",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity"
+      },
+      "AbsorptionChiller.cop": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-144-253d21d2",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop"
+      },
+      "AbsorptionChiller.from_json": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-f305d756",
+        "assertion_id": "epsimple-hvac-thermal-source-145-f305d756",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+      },
+      "AbsorptionChiller.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-7a12c015",
+        "assertion_id": "epsimple-hvac-thermal-source-146-7a12c015",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "Boiler": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-8d52ff9e",
+        "assertion_id": "epsimple-hvac-thermal-source-157-8d52ff9e",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties"
+      },
+      "Boiler.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-158-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "Boiler.__init__": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-f45db90e",
+        "assertion_id": "epsimple-hvac-thermal-source-161-f45db90e",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties"
+      },
+      "Boiler.capacity": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-164-d699d5f1",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity"
+      },
+      "Boiler.efficiency": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-165-80144f2f",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Efficiency"
+      },
+      "Boiler.from_json": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-bd3f1e5a",
+        "assertion_id": "epsimple-hvac-thermal-source-166-bd3f1e5a",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+      },
+      "Boiler.fuel": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-167-64d0443e",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.FuelType"
+      },
+      "Boiler.hotwater_supply": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-168-f9effaf3",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HotWaterSupply"
+      },
+      "Boiler.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-86b77a93",
+        "assertion_id": "epsimple-hvac-thermal-source-169-86b77a93",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "Chiller": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-8baa00de",
+        "assertion_id": "epsimple-hvac-thermal-source-170-8baa00de",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties"
+      },
+      "Chiller.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-171-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "Chiller.__init__": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-9c5215c4",
+        "assertion_id": "epsimple-hvac-thermal-source-174-9c5215c4",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties"
+      },
+      "Chiller.capacity": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-177-d699d5f1",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity"
+      },
+      "Chiller.compressor_type": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-178-000c99e3",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CompressorType"
+      },
+      "Chiller.coolingtower_capacity": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-179-e56b52fb",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerCapacity"
+      },
+      "Chiller.coolingtower_control": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-180-473c615a",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerControl"
+      },
+      "Chiller.coolingtower_type": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-181-75acdde9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerType"
+      },
+      "Chiller.cop": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-182-253d21d2",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop"
+      },
+      "Chiller.from_json": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-ca5a6445",
+        "assertion_id": "epsimple-hvac-thermal-source-183-ca5a6445",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+      },
+      "Chiller.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-b3b58ae8",
+        "assertion_id": "epsimple-hvac-thermal-source-184-b3b58ae8",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "DistrictHeating": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-a1c6d574",
+        "assertion_id": "epsimple-hvac-thermal-source-199-a1c6d574",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties"
+      },
+      "DistrictHeating.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-200-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "DistrictHeating.__init__": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-f477c20b",
+        "assertion_id": "epsimple-hvac-thermal-source-203-f477c20b",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties"
+      },
+      "DistrictHeating.from_json": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-c53a5bbb",
+        "assertion_id": "epsimple-hvac-thermal-source-206-c53a5bbb",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+      },
+      "DistrictHeating.hotwater_supply": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-207-f9effaf3",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HotWaterSupply"
+      },
+      "DistrictHeating.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-bf1c4c8b",
+        "assertion_id": "epsimple-hvac-thermal-source-208-bf1c4c8b",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "GeothermalHeatPump": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-a87f33ee",
+        "assertion_id": "epsimple-hvac-thermal-source-248-a87f33ee",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.GeothermalHeatPump and public properties"
+      },
+      "GeothermalHeatPump.from_json": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-81ac3508",
+        "assertion_id": "epsimple-hvac-thermal-source-251-81ac3508",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+      },
+      "GeothermalHeatPump.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-069a6710",
+        "assertion_id": "epsimple-hvac-thermal-source-252-069a6710",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "HeatPump": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-3872db31",
+        "assertion_id": "epsimple-hvac-thermal-source-253-3872db31",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties"
+      },
+      "HeatPump.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-254-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "HeatPump.__init__": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-7e88c6cd",
+        "assertion_id": "epsimple-hvac-thermal-source-257-7e88c6cd",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties"
+      },
+      "HeatPump.cooling_capacity": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-260-2c365992",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity"
+      },
+      "HeatPump.cooling_cop": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-261-59bd7983",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop"
+      },
+      "HeatPump.from_json": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-20b220f0",
+        "assertion_id": "epsimple-hvac-thermal-source-262-20b220f0",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+      },
+      "HeatPump.fuel": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-263-37420422",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.FuelType"
+      },
+      "HeatPump.heating_capacity": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-264-b48949da",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity"
+      },
+      "HeatPump.heating_cop": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-thermal-source-265-55ddf021",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HeatingCop"
+      },
+      "HeatPump.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-0feeee0b",
+        "assertion_id": "epsimple-hvac-thermal-source-266-0feeee0b",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      }
+    },
+    "native_routes": {
+      "AbsorptionChiller": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties",
+      "AbsorptionChiller.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "AbsorptionChiller.__init__": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties",
+      "AbsorptionChiller.boiler_efficiency": "GonieGonie.SimpleDragon.SourceSystem.BoilerEfficiency",
+      "AbsorptionChiller.capacity": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity",
+      "AbsorptionChiller.cop": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop",
+      "AbsorptionChiller.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "AbsorptionChiller.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "Boiler": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties",
+      "Boiler.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "Boiler.__init__": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties",
+      "Boiler.capacity": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity",
+      "Boiler.efficiency": "GonieGonie.SimpleDragon.SourceSystem.Efficiency",
+      "Boiler.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "Boiler.fuel": "GonieGonie.SimpleDragon.SourceSystem.FuelType",
+      "Boiler.hotwater_supply": "GonieGonie.SimpleDragon.SourceSystem.HotWaterSupply",
+      "Boiler.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "Chiller": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties",
+      "Chiller.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "Chiller.__init__": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties",
+      "Chiller.capacity": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity",
+      "Chiller.compressor_type": "GonieGonie.SimpleDragon.SourceSystem.CompressorType",
+      "Chiller.coolingtower_capacity": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerCapacity",
+      "Chiller.coolingtower_control": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerControl",
+      "Chiller.coolingtower_type": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerType",
+      "Chiller.cop": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop",
+      "Chiller.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "Chiller.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "DistrictHeating": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties",
+      "DistrictHeating.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "DistrictHeating.__init__": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties",
+      "DistrictHeating.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "DistrictHeating.hotwater_supply": "GonieGonie.SimpleDragon.SourceSystem.HotWaterSupply",
+      "DistrictHeating.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "GeothermalHeatPump": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.GeothermalHeatPump and public properties",
+      "GeothermalHeatPump.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "GeothermalHeatPump.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "HeatPump": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties",
+      "HeatPump.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "HeatPump.__init__": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties",
+      "HeatPump.cooling_capacity": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity",
+      "HeatPump.cooling_cop": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop",
+      "HeatPump.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "HeatPump.fuel": "GonieGonie.SimpleDragon.SourceSystem.FuelType",
+      "HeatPump.heating_capacity": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity",
+      "HeatPump.heating_cop": "GonieGonie.SimpleDragon.SourceSystem.HeatingCop",
+      "HeatPump.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+    },
+    "runtime_signatures": {
+      "AbsorptionChiller": {
+        "signature": "(name: 'str', cop: 'int | float | None' = None, capacity: 'int | float | None' = None, boiler_fuel: 'str | Fuel | None' = None, boiler_efficiency: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "AbsorptionChiller.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "AbsorptionChiller.__init__": {
+        "signature": "(self, name: 'str', cop: 'int | float | None' = None, capacity: 'int | float | None' = None, boiler_fuel: 'str | Fuel | None' = None, boiler_efficiency: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "AbsorptionChiller.boiler_efficiency": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "AbsorptionChiller.capacity": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "AbsorptionChiller.cop": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "AbsorptionChiller.from_json": {
+        "signature": "(input: 'SimpleNamespace') -> 'AbsorptionChiller'",
+        "type": "staticmethod"
+      },
+      "AbsorptionChiller.to_dragon": {
+        "signature": "(self) -> 'dragon.AbsorptionChiller'",
+        "type": "function"
+      },
+      "Boiler": {
+        "signature": "(name: 'str', fuel: 'str | Fuel', hotwater_supply: 'bool', efficiency: 'int | float | None' = None, capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'Boiler'",
+        "type": "type"
+      },
+      "Boiler.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "Boiler.__init__": {
+        "signature": "(self, name: 'str', fuel: 'str | Fuel', hotwater_supply: 'bool', efficiency: 'int | float | None' = None, capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'Boiler'",
+        "type": "function"
+      },
+      "Boiler.capacity": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "Boiler.efficiency": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "Boiler.from_json": {
+        "signature": "(input: 'SimpleNamespace') -> 'Boiler'",
+        "type": "staticmethod"
+      },
+      "Boiler.fuel": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": "(self, value: 'str') -> 'None'",
+        "type": "property"
+      },
+      "Boiler.hotwater_supply": {
+        "getter_signature": "(self) -> 'bool'",
+        "setter_signature": "(self, value: 'bool') -> 'None'",
+        "type": "property"
+      },
+      "Boiler.to_dragon": {
+        "signature": "(self) -> 'dragon.Boiler'",
+        "type": "function"
+      },
+      "Chiller": {
+        "signature": "(name: 'str', compressor_type: 'str | CompressorType', coolingtower_type: 'str | CoolingTowerType', coolingtower_control: 'str | CoolingTowerControl', cop: 'int | float | None' = None, capacity: 'int | float | None' = None, coolingtower_capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "Chiller.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "Chiller.__init__": {
+        "signature": "(self, name: 'str', compressor_type: 'str | CompressorType', coolingtower_type: 'str | CoolingTowerType', coolingtower_control: 'str | CoolingTowerControl', cop: 'int | float | None' = None, capacity: 'int | float | None' = None, coolingtower_capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "Chiller.capacity": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "Chiller.compressor_type": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": "(self, value: 'str') -> 'None'",
+        "type": "property"
+      },
+      "Chiller.coolingtower_capacity": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "Chiller.coolingtower_control": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": "(self, value: 'str') -> 'None'",
+        "type": "property"
+      },
+      "Chiller.coolingtower_type": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": "(self, value: 'str') -> 'None'",
+        "type": "property"
+      },
+      "Chiller.cop": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "Chiller.from_json": {
+        "signature": "(input: 'SimpleNamespace') -> 'Chiller'",
+        "type": "staticmethod"
+      },
+      "Chiller.to_dragon": {
+        "signature": "(self) -> 'dragon.Chiller'",
+        "type": "function"
+      },
+      "DistrictHeating": {
+        "signature": "(name: 'str', hotwater_supply: 'bool', *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "DistrictHeating.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "DistrictHeating.__init__": {
+        "signature": "(self, name: 'str', hotwater_supply: 'bool', *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "DistrictHeating.from_json": {
+        "signature": "(input: 'SimpleNamespace') -> 'DistrictHeating'",
+        "type": "staticmethod"
+      },
+      "DistrictHeating.hotwater_supply": {
+        "getter_signature": "(self) -> 'bool'",
+        "setter_signature": "(self, value: 'bool') -> 'None'",
+        "type": "property"
+      },
+      "DistrictHeating.to_dragon": {
+        "signature": "(self)",
+        "type": "function"
+      },
+      "GeothermalHeatPump": {
+        "signature": "(name: 'str', fuel: 'str | Fuel', heating_cop: 'int | float | None' = None, cooling_cop: 'int | float | None' = None, heating_capacity: 'int | float | None' = None, cooling_capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "GeothermalHeatPump.from_json": {
+        "signature": "(input: 'SimpleNamespace') -> 'GeothermalHeatPump'",
+        "type": "staticmethod"
+      },
+      "GeothermalHeatPump.to_dragon": {
+        "signature": "(self)",
+        "type": "function"
+      },
+      "HeatPump": {
+        "signature": "(name: 'str', fuel: 'str | Fuel', heating_cop: 'int | float | None' = None, cooling_cop: 'int | float | None' = None, heating_capacity: 'int | float | None' = None, cooling_capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "HeatPump.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "HeatPump.__init__": {
+        "signature": "(self, name: 'str', fuel: 'str | Fuel', heating_cop: 'int | float | None' = None, cooling_cop: 'int | float | None' = None, heating_capacity: 'int | float | None' = None, cooling_capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "HeatPump.cooling_capacity": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "HeatPump.cooling_cop": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "HeatPump.from_json": {
+        "signature": "(input: 'SimpleNamespace') -> 'HeatPump'",
+        "type": "staticmethod"
+      },
+      "HeatPump.fuel": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": "(self, value: 'str') -> 'None'",
+        "type": "property"
+      },
+      "HeatPump.heating_capacity": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "HeatPump.heating_cop": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "HeatPump.to_dragon": {
+        "signature": "(self) -> 'dragon.HeatPump'",
+        "type": "function"
+      }
+    }
+  },
+  "fact_sha256": {
+    "epsimple-hvac-thermal-source.absorption-chiller-state-validation-json-dragon": "sha256:b14eee5f3b17ee6554f380af12eef43e8b5af07bcfc0aaa55e506cb2d26142eb",
+    "epsimple-hvac-thermal-source.boiler-state-validation-json-dragon": "sha256:f82cb04c34c84047f95c9352634a6b01ba922c70a0b7b674e4a68d30d2985e54",
+    "epsimple-hvac-thermal-source.chiller-state-tower-branches-json-dragon": "sha256:108cee171ab3816a0817b6bd78412c74056e953eeb924e1a6909c8828e471de1",
+    "epsimple-hvac-thermal-source.district-heating-state-validation-json-dragon": "sha256:2862c963664ca87858dbb43d3f98e432cd963edb196528912163488b6a940c50",
+    "epsimple-hvac-thermal-source.geothermal-heatpump-json-dragon": "sha256:abd7c2a03dd1f1c9be3dd4d3009546fd2fddab3b9e0d5e7f9a63222b966d7b81",
+    "epsimple-hvac-thermal-source.heatpump-state-validation-json-dragon": "sha256:ab6a248ed48834b7d4e84467aafa68962f306940fd704f66b52e3f59cfe9069e"
+  },
+  "native_review": {
+    "public_production_routes_only": true,
+    "python_executes_native_runtime": false,
+    "routes_sha256": "sha256:862de5307de7fcebe494fb4c6691e3ac3ea7fb25abe4a8743f922e553fa9f215",
+    "source_receipts": [
+      {
+        "bytes": 6894,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs",
+        "sha256": "sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad"
+      },
+      {
+        "bytes": 48650,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs",
+        "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"
+      },
+      {
+        "bytes": 16652,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs",
+        "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"
+      },
+      {
+        "bytes": 87343,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
+        "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"
+      }
+    ],
+    "source_receipts_sha256": "sha256:25f9f683ca28ab928c3cad112c2a3f06cbab26da5c6c3d2867fd343d32c80d6f"
+  },
+  "runtime": {
+    "bootstrap": {
+      "bytes": 1232,
+      "path": "tools/python-reference/bootstrap_reference.py",
+      "sha256": "sha256:0674dcf1fe966de2a4b873a360ef67be48d74f38ba80adba9c74405fd9be7e0f"
+    },
+    "dependencies": {
+      "eppy": "0.5.63",
+      "numpy": "2.3.1",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tzdata": "2024.2"
+    },
+    "dependencies_sha256": "sha256:85d50612b42b3818f054fd7d9cdb26a16bbf832c3afc56762ea732f55a48cb22",
+    "implementation": "cpython",
+    "platform": "win32",
+    "pointer_width_bits": 64,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7",
+    "strict_json_support": {
+      "bytes": 21114,
+      "path": "tools/python-reference/generate_schedule_type_oracle.py",
+      "sha256": "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc"
+    },
+    "thermal_source_support": {
+      "bytes": 61458,
+      "path": "tools/python-reference/generate_epsimple_hvac_enums_base_oracle.py",
+      "sha256": "sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d"
+    }
+  },
+  "schema": "goniegonie.python-reference.epsimple-hvac-thermal-source.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:197f6bd7f4f53ed2b4f36fc51be027baf327086ce45d10f2d2693d87ca3085cd",
+      "symbol": "AbsorptionChiller",
+      "symbol_hash": "sha256:c44e12f95a00cb5962ca8ad7d437ef2d161ff1771e6a511f01099e697f58c288"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "AbsorptionChiller.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:7a7e3afb0f50f0ac922afbb6e7d2b751102d9766156d4217e9b508a9873d6027",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1854faa7f9da6126f0d05ed628ff31167b177edcc2939c5989d6ccdf01aa41d5",
+      "symbol": "AbsorptionChiller.__init__",
+      "symbol_hash": "sha256:4aae19c639fbe20444a95f99af9aaa0bceb7be04710b434fc99f8e80a2f53fdb"
+    },
+    {
+      "body_hash": "sha256:2a12cf8c3f4c699e2cc91ecdc17fa99878e58a87dd4ae3aeb1137f5915460565",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:15b5169bd8d540ac00c6d9a9e50155b6945a50a7e029811e5e2eacac2ee4844e",
+      "symbol": "AbsorptionChiller.boiler_efficiency",
+      "symbol_hash": "sha256:be052579fc5a280692bed221f5c9dc6eb30dec184a455663dee100148dca7c15"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "AbsorptionChiller.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:a7f4e9f7638f69f248c7ba9d965a0c34f33b35868bc64d8be900345af2c33f7a",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e2c78159fd7fabe7c33c1d1696213b0e724b3f5ad9ed9ce52dac6ea89e5342b",
+      "symbol": "AbsorptionChiller.cop",
+      "symbol_hash": "sha256:253d21d2755374e2581dc3d6431e81f5877448480981a16667ffde993d480089"
+    },
+    {
+      "body_hash": "sha256:c0ff729d75b227ead99231e04d5e6569498f46da386f0570046f9de7f72e2d51",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2dce65a096ae0ba4a62de3fb096ba3aa5390c7d9b4bae150c00d708c20a1d710",
+      "symbol": "AbsorptionChiller.from_json",
+      "symbol_hash": "sha256:f305d7565898b256d9ad634f8e980ca458c5df316e291ed04e74b1193c74dec1"
+    },
+    {
+      "body_hash": "sha256:4413b1ca617b268c452b04c647b16ea6b595b4868d1b7b46c835834097767d7d",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bed2fa93a5a6d0c700a44cadecfe1ce52111fb5748d839c10754e93e9c8ef063",
+      "symbol": "AbsorptionChiller.to_dragon",
+      "symbol_hash": "sha256:7a12c01556ae0ebb7acf661b54ff67ba16eaf12ea14800bda8686ce8dd79f08c"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6c587d2756d9f3e1fc93de59ec1482ea151ff3a496b9f558f1278b8ad5a2a615",
+      "symbol": "Boiler",
+      "symbol_hash": "sha256:8d52ff9e56a001d640fab8decad6c2c1b288c561c5243756d8fcbe09ea018528"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Boiler.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:24ab511ac7b3bb91e2b785efaf3f6ac1c4a9febfc98c6dd91e2b9bf699ab7f8c",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2c0c0b66128e930a0a67c9ecfd08ad47ff6d145ee4d6f2de96c492159dc92437",
+      "symbol": "Boiler.__init__",
+      "symbol_hash": "sha256:f45db90e3bd9e0d7d7bf09b1625885e65948ddbecf23a92e9c5e13a794403469"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "Boiler.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:b449c78b5f6789e34ec6cf108ed58fc253c9778ca9b74142b39874ffcc6c2efc",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7a05da5625820c6c82456f3e46373c9a45937c8d39440d6684a43098197dc63b",
+      "symbol": "Boiler.efficiency",
+      "symbol_hash": "sha256:80144f2f58577c9b96d6d6d012e949a459d23f8cfb4a3f77e5656154e80b6947"
+    },
+    {
+      "body_hash": "sha256:6f1c9c8c00e8861435e8c6ddc5ab6c1a39f26371affd567f94f1e82a82ec95a8",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7032eecd93acd5362cfc6dad1834d16786483a7420cd560ce7845ac3f6046e85",
+      "symbol": "Boiler.from_json",
+      "symbol_hash": "sha256:bd3f1e5a20c905d27a7da940887638fad726b510f707826723015cbaeb1a0a63"
+    },
+    {
+      "body_hash": "sha256:336057118eaeb957134f4c98af1f688b1dfe2f2512ba3856db9fc064d68e5a8b",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c933e21c7ee9bd9b6a580d730d6d513f2c3a10c57f80fceec7a7b528566d29e8",
+      "symbol": "Boiler.fuel",
+      "symbol_hash": "sha256:64d0443e2225b273f9021f371d0dd88a0051e57f9eb3c91673faa8d96ca23ae1"
+    },
+    {
+      "body_hash": "sha256:da1b2b65e62f38fd800a7f741317027fed63081c40cb61e615b137bd1d247246",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f4be76fa1996185fb5c5575d4cdfc5267c7f2b15a7370d820be79667920f5751",
+      "symbol": "Boiler.hotwater_supply",
+      "symbol_hash": "sha256:f9effaf3b156faf96d9e3d71ab1ac3222b4933ad4cd29a51e9df1c28fc071124"
+    },
+    {
+      "body_hash": "sha256:f84b440673abc9bcc3e44890d2dd74b6695bf07abf399fc84b82cb925c0c01a2",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:449509b78f4b094a8be5a83cea146f18b10155c63839da70733be347c89df9fa",
+      "symbol": "Boiler.to_dragon",
+      "symbol_hash": "sha256:86b77a933c317b02f06d37995f37906562c3a9d9f59fc36b3cda3f7369b333c7"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:64ca2c3d6bdf68fa01f483507de1348169d646b41ede1437e400a0a7df04ff1e",
+      "symbol": "Chiller",
+      "symbol_hash": "sha256:8baa00de497b53a61086ec3f181c1b3550b7a14763dcbd79b2d7334b3c837229"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Chiller.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:1a7c2c44e244006a8a6b071864be040e666140f1c9b4eb6c43c2bd61ad03010e",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:fe0fe20ff70e1974731f85aa4c72e6a1d5c5e2a70f872c9c4e77c4c255248e42",
+      "symbol": "Chiller.__init__",
+      "symbol_hash": "sha256:9c5215c4ec2ee276bb72b874e53ad5da5867fb1b2c0f0426f0235b67cd13a553"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "Chiller.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:1c1716d452fe42635549e71f3bd2835a33f3c18f8f2c2d92ea68ebe544858511",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:af6a3af6e37fb61884754e674514907dd775db68101599f1593f23b4fce1d531",
+      "symbol": "Chiller.compressor_type",
+      "symbol_hash": "sha256:000c99e32fb9a139e083042f27fc916b8e64a78b5ad843808bbc5fadfa0a69e1"
+    },
+    {
+      "body_hash": "sha256:4843111dd3b2d964636942490d02cd7a831f85172b3dbe17ec4d1092838ff118",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:eecf4c401568cd53a1360e4edc2d766845f6ae4214701abd67a679cbd9ea2527",
+      "symbol": "Chiller.coolingtower_capacity",
+      "symbol_hash": "sha256:e56b52fb177c1ab6c0d13f9d228871e659e4af8720807ba77b6ac3e65108412b"
+    },
+    {
+      "body_hash": "sha256:5d2aa15aafcefa55111a4ee8cf4bcef42751f1afd87220a94f98ab8465d9391a",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c28cd63afd90b0d25469e5dda22e11f67573cef6ad7ba6e0213a60cf902dec36",
+      "symbol": "Chiller.coolingtower_control",
+      "symbol_hash": "sha256:473c615ac03fcf57bbb3aeb96de55ea45c126624ddf2ba53f5ea71a587e6c369"
+    },
+    {
+      "body_hash": "sha256:d142d5add2ce7a4560c7361f184b52b7b70eec2b811bcbbfd96ecb7f7c6e83cf",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0c4805efa22379b963cfb4e1d7790cca7e1fec914c89518ff8b8c6571feacce1",
+      "symbol": "Chiller.coolingtower_type",
+      "symbol_hash": "sha256:75acdde9fdf4e8eeaedb7245dad9151cde6f69e3fd3efe9dfa830a5bfb09f1aa"
+    },
+    {
+      "body_hash": "sha256:a7f4e9f7638f69f248c7ba9d965a0c34f33b35868bc64d8be900345af2c33f7a",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e2c78159fd7fabe7c33c1d1696213b0e724b3f5ad9ed9ce52dac6ea89e5342b",
+      "symbol": "Chiller.cop",
+      "symbol_hash": "sha256:253d21d2755374e2581dc3d6431e81f5877448480981a16667ffde993d480089"
+    },
+    {
+      "body_hash": "sha256:0864cb6b1ae1d38253eb911630c624cb95ca5e420825b5445335d2b7ad093bdd",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:cb50bc61899e7d12cd1c8464802ac31f20979eb2ebed6e1a247a3971e2769496",
+      "symbol": "Chiller.from_json",
+      "symbol_hash": "sha256:ca5a644592b7e7573475671f42d9a3f10cdd16db3c05f96f159035fba9324643"
+    },
+    {
+      "body_hash": "sha256:c4e3bacedfd77aba3c205683f4ddb2bb37e9c63a9f57f7edc98d2237591dd56d",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9041af4cc269cce2e8cf0737cae7b6c2bae137ef1b28f2af094c92508c117fbf",
+      "symbol": "Chiller.to_dragon",
+      "symbol_hash": "sha256:b3b58ae8b0cd495b6f402aeab79f8b73009b1bf71a772fb47e015eeec26551b4"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:aa8dcf21c53ba2fbdde4dc4b5c5b51cb6a12b2210dcba1bf63eda222052233a8",
+      "symbol": "DistrictHeating",
+      "symbol_hash": "sha256:a1c6d574e77ca0ae9a864a7e216c3a6c268dc31c5144659793a67d2a5d054d2e"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "DistrictHeating.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:334bfb0cb24cf551efa851b63cd5991a3b44e119d04be80ec1f57aaad581cfcb",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e5c5260e76ce25622caba4836eaa4d2381ed86479201d1445aaec22d59215a41",
+      "symbol": "DistrictHeating.__init__",
+      "symbol_hash": "sha256:f477c20bcf162bb58f12806e36a82d8c0d399ac3ec43eaa30d63dccadda6a000"
+    },
+    {
+      "body_hash": "sha256:fb7fbd38b392655d253b2f3ff34370125300f23b7dd906b42207317fa68c1b04",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0f22469400fca4dd878455bbb0a61a793e3c100bc3e61cb06ecf913a723ef636",
+      "symbol": "DistrictHeating.from_json",
+      "symbol_hash": "sha256:c53a5bbb27eb5616cdc9c33b62b17a67476d859db3bd444539ad1a9d8cff589a"
+    },
+    {
+      "body_hash": "sha256:da1b2b65e62f38fd800a7f741317027fed63081c40cb61e615b137bd1d247246",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f4be76fa1996185fb5c5575d4cdfc5267c7f2b15a7370d820be79667920f5751",
+      "symbol": "DistrictHeating.hotwater_supply",
+      "symbol_hash": "sha256:f9effaf3b156faf96d9e3d71ab1ac3222b4933ad4cd29a51e9df1c28fc071124"
+    },
+    {
+      "body_hash": "sha256:acb2774b37e34ee62fb6bd6ecde9b5d50790ce632923dc3d7eb5ee2507a22f32",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "DistrictHeating.to_dragon",
+      "symbol_hash": "sha256:bf1c4c8b065467f0750b66841455facb472187eaa7c12c916f70812e9f2c8340"
+    },
+    {
+      "body_hash": "sha256:eea5f60464fbf25d0f86d503b9cb73a1e5c0ebef95201afb63878cb533c87f8d",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b7c9586223e94cb8bbe55c73612dd32541d93ace8e3f638ef0ab444d9d968351",
+      "symbol": "GeothermalHeatPump",
+      "symbol_hash": "sha256:a87f33ee237c0d521c0f28cddf441d18fe3f656aa2823b5bf6316e73e45cfb9d"
+    },
+    {
+      "body_hash": "sha256:a02e560c380ea9305ad75abb3fec033cd3ed8a82f380238c96da7c7e6da34d6b",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0296f4713b99c0bf9da897637bb5d778ffb7facab6fa7715656cc0af4ed43971",
+      "symbol": "GeothermalHeatPump.from_json",
+      "symbol_hash": "sha256:81ac3508503c09174a23f3c4304a30d27941b877a5f442beeff3efb7348af57f"
+    },
+    {
+      "body_hash": "sha256:8b29e3c87e3e90e783734bdefb5778458e688e15ee585a02c091cb32c77cdadb",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "GeothermalHeatPump.to_dragon",
+      "symbol_hash": "sha256:069a6710418875fdbb56df82bf0d75c5b6aa4466a8cfe74be2ec4e8f977f75d2"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ea4b405d80dd6ccb7d596496161420b8a23c1f5f743acbfd0bc1ca614bc37201",
+      "symbol": "HeatPump",
+      "symbol_hash": "sha256:3872db3154378456d1ab86ab5dd8ee1e8473ece56ce3c5e3c5d21c4aab3db56d"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "HeatPump.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:a9b347f0f70f73580556392e3053a39bf6e6eb90b534615c91b2b39b0a133850",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:39d9cb1071124bc34aeb349be1bd750b3e9f80a011814259f9c325bee793a74c",
+      "symbol": "HeatPump.__init__",
+      "symbol_hash": "sha256:7e88c6cd0a0a1940ba7932b4d2991e2e9be925fce87ef78baebc0fae176a20b9"
+    },
+    {
+      "body_hash": "sha256:51970bfe0c47e57e70f6c898104e851ee40f1d0a66e8efe5dde7db3589bd38bb",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:3e5ee18c6f80c0b5a8ceb340bcdce0031fc14295a09425e1517658dc7f9926f0",
+      "symbol": "HeatPump.cooling_capacity",
+      "symbol_hash": "sha256:2c36599247e8d0009bfd6d483f79501927cda80d905dc35c34b7951847beb6ba"
+    },
+    {
+      "body_hash": "sha256:0d6b9f259f06a1709324605664c4de028d218c0c2c6b66a5c6cd4b339df63e94",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:71e9718dab4a568443dd8a275198c8d80091e6d38eaf74eb108259b334eff938",
+      "symbol": "HeatPump.cooling_cop",
+      "symbol_hash": "sha256:59bd79833f41971c5935ede33822d3986693f0eb608ee07431110d52dc8a6577"
+    },
+    {
+      "body_hash": "sha256:a2fc3dfa6b59eb28310266d88b0f9035fe5824b906a0e9fef39eb0fad28102f4",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0def9f1d1f9b92a17f366a3c8b7ff0a8dab2b187cd0bd8cd1df8061cef6c0149",
+      "symbol": "HeatPump.from_json",
+      "symbol_hash": "sha256:20b220f016be64ce4dc06b873fe97718f8a0409e7a0344691d6bce7f2dd5b829"
+    },
+    {
+      "body_hash": "sha256:0da73324f74a3e7c4a914c8526ba86925e97a3bc79f67568933b175b4b4dc2c7",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c933e21c7ee9bd9b6a580d730d6d513f2c3a10c57f80fceec7a7b528566d29e8",
+      "symbol": "HeatPump.fuel",
+      "symbol_hash": "sha256:3742042244a97d39c02c78bc2f4951361dfc5122def303875aaeb7b97e02cc41"
+    },
+    {
+      "body_hash": "sha256:0dbc87eebfcbdee8403f0f7aafc3b5e752eb42bcd53ad09be636deeb687003a2",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a5915fda8d226f920f4daf2cc114b3f3685aaa47b85311e02ebbc1194b5af930",
+      "symbol": "HeatPump.heating_capacity",
+      "symbol_hash": "sha256:b48949da79c3f6581d75a61d294f60aa6d229657bf0c0119d111ab5730b65e3a"
+    },
+    {
+      "body_hash": "sha256:5bed166aee99318c7a61e3447f1a37176c33f57a4e785f0c27ef50c829aab70d",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e6c9981e54db16db923dc987e0c91d50ea0b5e267ddccfc3925035eae878efb7",
+      "symbol": "HeatPump.heating_cop",
+      "symbol_hash": "sha256:55ddf021efaf696de09ff2ecc46d858a0f7906dd751bdc080eea738cf0ce8618"
+    },
+    {
+      "body_hash": "sha256:8b29e3c87e3e90e783734bdefb5778458e688e15ee585a02c091cb32c77cdadb",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:97dfeb55a1697d1771209527da11e4b59937f80eb94165a6984c13ac7db6c80c",
+      "symbol": "HeatPump.to_dragon",
+      "symbol_hash": "sha256:0feeee0bbb444a2d16c5efe0d1e1d41d928ed66197c713cb535ed8eef466b130"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 135,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:197f6bd7f4f53ed2b4f36fc51be027baf327086ce45d10f2d2693d87ca3085cd",
+      "symbol": "AbsorptionChiller",
+      "symbol_hash": "sha256:c44e12f95a00cb5962ca8ad7d437ef2d161ff1771e6a511f01099e697f58c288"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 136,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "AbsorptionChiller.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:7a7e3afb0f50f0ac922afbb6e7d2b751102d9766156d4217e9b508a9873d6027",
+      "inventory_index": 139,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1854faa7f9da6126f0d05ed628ff31167b177edcc2939c5989d6ccdf01aa41d5",
+      "symbol": "AbsorptionChiller.__init__",
+      "symbol_hash": "sha256:4aae19c639fbe20444a95f99af9aaa0bceb7be04710b434fc99f8e80a2f53fdb"
+    },
+    {
+      "body_hash": "sha256:2a12cf8c3f4c699e2cc91ecdc17fa99878e58a87dd4ae3aeb1137f5915460565",
+      "inventory_index": 142,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:15b5169bd8d540ac00c6d9a9e50155b6945a50a7e029811e5e2eacac2ee4844e",
+      "symbol": "AbsorptionChiller.boiler_efficiency",
+      "symbol_hash": "sha256:be052579fc5a280692bed221f5c9dc6eb30dec184a455663dee100148dca7c15"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 143,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "AbsorptionChiller.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:a7f4e9f7638f69f248c7ba9d965a0c34f33b35868bc64d8be900345af2c33f7a",
+      "inventory_index": 144,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e2c78159fd7fabe7c33c1d1696213b0e724b3f5ad9ed9ce52dac6ea89e5342b",
+      "symbol": "AbsorptionChiller.cop",
+      "symbol_hash": "sha256:253d21d2755374e2581dc3d6431e81f5877448480981a16667ffde993d480089"
+    },
+    {
+      "body_hash": "sha256:c0ff729d75b227ead99231e04d5e6569498f46da386f0570046f9de7f72e2d51",
+      "inventory_index": 145,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2dce65a096ae0ba4a62de3fb096ba3aa5390c7d9b4bae150c00d708c20a1d710",
+      "symbol": "AbsorptionChiller.from_json",
+      "symbol_hash": "sha256:f305d7565898b256d9ad634f8e980ca458c5df316e291ed04e74b1193c74dec1"
+    },
+    {
+      "body_hash": "sha256:4413b1ca617b268c452b04c647b16ea6b595b4868d1b7b46c835834097767d7d",
+      "inventory_index": 146,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bed2fa93a5a6d0c700a44cadecfe1ce52111fb5748d839c10754e93e9c8ef063",
+      "symbol": "AbsorptionChiller.to_dragon",
+      "symbol_hash": "sha256:7a12c01556ae0ebb7acf661b54ff67ba16eaf12ea14800bda8686ce8dd79f08c"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 157,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6c587d2756d9f3e1fc93de59ec1482ea151ff3a496b9f558f1278b8ad5a2a615",
+      "symbol": "Boiler",
+      "symbol_hash": "sha256:8d52ff9e56a001d640fab8decad6c2c1b288c561c5243756d8fcbe09ea018528"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 158,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Boiler.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:24ab511ac7b3bb91e2b785efaf3f6ac1c4a9febfc98c6dd91e2b9bf699ab7f8c",
+      "inventory_index": 161,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2c0c0b66128e930a0a67c9ecfd08ad47ff6d145ee4d6f2de96c492159dc92437",
+      "symbol": "Boiler.__init__",
+      "symbol_hash": "sha256:f45db90e3bd9e0d7d7bf09b1625885e65948ddbecf23a92e9c5e13a794403469"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 164,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "Boiler.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:b449c78b5f6789e34ec6cf108ed58fc253c9778ca9b74142b39874ffcc6c2efc",
+      "inventory_index": 165,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7a05da5625820c6c82456f3e46373c9a45937c8d39440d6684a43098197dc63b",
+      "symbol": "Boiler.efficiency",
+      "symbol_hash": "sha256:80144f2f58577c9b96d6d6d012e949a459d23f8cfb4a3f77e5656154e80b6947"
+    },
+    {
+      "body_hash": "sha256:6f1c9c8c00e8861435e8c6ddc5ab6c1a39f26371affd567f94f1e82a82ec95a8",
+      "inventory_index": 166,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7032eecd93acd5362cfc6dad1834d16786483a7420cd560ce7845ac3f6046e85",
+      "symbol": "Boiler.from_json",
+      "symbol_hash": "sha256:bd3f1e5a20c905d27a7da940887638fad726b510f707826723015cbaeb1a0a63"
+    },
+    {
+      "body_hash": "sha256:336057118eaeb957134f4c98af1f688b1dfe2f2512ba3856db9fc064d68e5a8b",
+      "inventory_index": 167,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c933e21c7ee9bd9b6a580d730d6d513f2c3a10c57f80fceec7a7b528566d29e8",
+      "symbol": "Boiler.fuel",
+      "symbol_hash": "sha256:64d0443e2225b273f9021f371d0dd88a0051e57f9eb3c91673faa8d96ca23ae1"
+    },
+    {
+      "body_hash": "sha256:da1b2b65e62f38fd800a7f741317027fed63081c40cb61e615b137bd1d247246",
+      "inventory_index": 168,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f4be76fa1996185fb5c5575d4cdfc5267c7f2b15a7370d820be79667920f5751",
+      "symbol": "Boiler.hotwater_supply",
+      "symbol_hash": "sha256:f9effaf3b156faf96d9e3d71ab1ac3222b4933ad4cd29a51e9df1c28fc071124"
+    },
+    {
+      "body_hash": "sha256:f84b440673abc9bcc3e44890d2dd74b6695bf07abf399fc84b82cb925c0c01a2",
+      "inventory_index": 169,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:449509b78f4b094a8be5a83cea146f18b10155c63839da70733be347c89df9fa",
+      "symbol": "Boiler.to_dragon",
+      "symbol_hash": "sha256:86b77a933c317b02f06d37995f37906562c3a9d9f59fc36b3cda3f7369b333c7"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 170,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:64ca2c3d6bdf68fa01f483507de1348169d646b41ede1437e400a0a7df04ff1e",
+      "symbol": "Chiller",
+      "symbol_hash": "sha256:8baa00de497b53a61086ec3f181c1b3550b7a14763dcbd79b2d7334b3c837229"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 171,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Chiller.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:1a7c2c44e244006a8a6b071864be040e666140f1c9b4eb6c43c2bd61ad03010e",
+      "inventory_index": 174,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:fe0fe20ff70e1974731f85aa4c72e6a1d5c5e2a70f872c9c4e77c4c255248e42",
+      "symbol": "Chiller.__init__",
+      "symbol_hash": "sha256:9c5215c4ec2ee276bb72b874e53ad5da5867fb1b2c0f0426f0235b67cd13a553"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 177,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "Chiller.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:1c1716d452fe42635549e71f3bd2835a33f3c18f8f2c2d92ea68ebe544858511",
+      "inventory_index": 178,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:af6a3af6e37fb61884754e674514907dd775db68101599f1593f23b4fce1d531",
+      "symbol": "Chiller.compressor_type",
+      "symbol_hash": "sha256:000c99e32fb9a139e083042f27fc916b8e64a78b5ad843808bbc5fadfa0a69e1"
+    },
+    {
+      "body_hash": "sha256:4843111dd3b2d964636942490d02cd7a831f85172b3dbe17ec4d1092838ff118",
+      "inventory_index": 179,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:eecf4c401568cd53a1360e4edc2d766845f6ae4214701abd67a679cbd9ea2527",
+      "symbol": "Chiller.coolingtower_capacity",
+      "symbol_hash": "sha256:e56b52fb177c1ab6c0d13f9d228871e659e4af8720807ba77b6ac3e65108412b"
+    },
+    {
+      "body_hash": "sha256:5d2aa15aafcefa55111a4ee8cf4bcef42751f1afd87220a94f98ab8465d9391a",
+      "inventory_index": 180,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c28cd63afd90b0d25469e5dda22e11f67573cef6ad7ba6e0213a60cf902dec36",
+      "symbol": "Chiller.coolingtower_control",
+      "symbol_hash": "sha256:473c615ac03fcf57bbb3aeb96de55ea45c126624ddf2ba53f5ea71a587e6c369"
+    },
+    {
+      "body_hash": "sha256:d142d5add2ce7a4560c7361f184b52b7b70eec2b811bcbbfd96ecb7f7c6e83cf",
+      "inventory_index": 181,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0c4805efa22379b963cfb4e1d7790cca7e1fec914c89518ff8b8c6571feacce1",
+      "symbol": "Chiller.coolingtower_type",
+      "symbol_hash": "sha256:75acdde9fdf4e8eeaedb7245dad9151cde6f69e3fd3efe9dfa830a5bfb09f1aa"
+    },
+    {
+      "body_hash": "sha256:a7f4e9f7638f69f248c7ba9d965a0c34f33b35868bc64d8be900345af2c33f7a",
+      "inventory_index": 182,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1e2c78159fd7fabe7c33c1d1696213b0e724b3f5ad9ed9ce52dac6ea89e5342b",
+      "symbol": "Chiller.cop",
+      "symbol_hash": "sha256:253d21d2755374e2581dc3d6431e81f5877448480981a16667ffde993d480089"
+    },
+    {
+      "body_hash": "sha256:0864cb6b1ae1d38253eb911630c624cb95ca5e420825b5445335d2b7ad093bdd",
+      "inventory_index": 183,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:cb50bc61899e7d12cd1c8464802ac31f20979eb2ebed6e1a247a3971e2769496",
+      "symbol": "Chiller.from_json",
+      "symbol_hash": "sha256:ca5a644592b7e7573475671f42d9a3f10cdd16db3c05f96f159035fba9324643"
+    },
+    {
+      "body_hash": "sha256:c4e3bacedfd77aba3c205683f4ddb2bb37e9c63a9f57f7edc98d2237591dd56d",
+      "inventory_index": 184,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9041af4cc269cce2e8cf0737cae7b6c2bae137ef1b28f2af094c92508c117fbf",
+      "symbol": "Chiller.to_dragon",
+      "symbol_hash": "sha256:b3b58ae8b0cd495b6f402aeab79f8b73009b1bf71a772fb47e015eeec26551b4"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 199,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:aa8dcf21c53ba2fbdde4dc4b5c5b51cb6a12b2210dcba1bf63eda222052233a8",
+      "symbol": "DistrictHeating",
+      "symbol_hash": "sha256:a1c6d574e77ca0ae9a864a7e216c3a6c268dc31c5144659793a67d2a5d054d2e"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 200,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "DistrictHeating.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:334bfb0cb24cf551efa851b63cd5991a3b44e119d04be80ec1f57aaad581cfcb",
+      "inventory_index": 203,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e5c5260e76ce25622caba4836eaa4d2381ed86479201d1445aaec22d59215a41",
+      "symbol": "DistrictHeating.__init__",
+      "symbol_hash": "sha256:f477c20bcf162bb58f12806e36a82d8c0d399ac3ec43eaa30d63dccadda6a000"
+    },
+    {
+      "body_hash": "sha256:fb7fbd38b392655d253b2f3ff34370125300f23b7dd906b42207317fa68c1b04",
+      "inventory_index": 206,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0f22469400fca4dd878455bbb0a61a793e3c100bc3e61cb06ecf913a723ef636",
+      "symbol": "DistrictHeating.from_json",
+      "symbol_hash": "sha256:c53a5bbb27eb5616cdc9c33b62b17a67476d859db3bd444539ad1a9d8cff589a"
+    },
+    {
+      "body_hash": "sha256:da1b2b65e62f38fd800a7f741317027fed63081c40cb61e615b137bd1d247246",
+      "inventory_index": 207,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:f4be76fa1996185fb5c5575d4cdfc5267c7f2b15a7370d820be79667920f5751",
+      "symbol": "DistrictHeating.hotwater_supply",
+      "symbol_hash": "sha256:f9effaf3b156faf96d9e3d71ab1ac3222b4933ad4cd29a51e9df1c28fc071124"
+    },
+    {
+      "body_hash": "sha256:acb2774b37e34ee62fb6bd6ecde9b5d50790ce632923dc3d7eb5ee2507a22f32",
+      "inventory_index": 208,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "DistrictHeating.to_dragon",
+      "symbol_hash": "sha256:bf1c4c8b065467f0750b66841455facb472187eaa7c12c916f70812e9f2c8340"
+    },
+    {
+      "body_hash": "sha256:eea5f60464fbf25d0f86d503b9cb73a1e5c0ebef95201afb63878cb533c87f8d",
+      "inventory_index": 248,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b7c9586223e94cb8bbe55c73612dd32541d93ace8e3f638ef0ab444d9d968351",
+      "symbol": "GeothermalHeatPump",
+      "symbol_hash": "sha256:a87f33ee237c0d521c0f28cddf441d18fe3f656aa2823b5bf6316e73e45cfb9d"
+    },
+    {
+      "body_hash": "sha256:a02e560c380ea9305ad75abb3fec033cd3ed8a82f380238c96da7c7e6da34d6b",
+      "inventory_index": 251,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0296f4713b99c0bf9da897637bb5d778ffb7facab6fa7715656cc0af4ed43971",
+      "symbol": "GeothermalHeatPump.from_json",
+      "symbol_hash": "sha256:81ac3508503c09174a23f3c4304a30d27941b877a5f442beeff3efb7348af57f"
+    },
+    {
+      "body_hash": "sha256:8b29e3c87e3e90e783734bdefb5778458e688e15ee585a02c091cb32c77cdadb",
+      "inventory_index": 252,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "GeothermalHeatPump.to_dragon",
+      "symbol_hash": "sha256:069a6710418875fdbb56df82bf0d75c5b6aa4466a8cfe74be2ec4e8f977f75d2"
+    },
+    {
+      "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",
+      "inventory_index": 253,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ea4b405d80dd6ccb7d596496161420b8a23c1f5f743acbfd0bc1ca614bc37201",
+      "symbol": "HeatPump",
+      "symbol_hash": "sha256:3872db3154378456d1ab86ab5dd8ee1e8473ece56ce3c5e3c5d21c4aab3db56d"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 254,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "HeatPump.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:a9b347f0f70f73580556392e3053a39bf6e6eb90b534615c91b2b39b0a133850",
+      "inventory_index": 257,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:39d9cb1071124bc34aeb349be1bd750b3e9f80a011814259f9c325bee793a74c",
+      "symbol": "HeatPump.__init__",
+      "symbol_hash": "sha256:7e88c6cd0a0a1940ba7932b4d2991e2e9be925fce87ef78baebc0fae176a20b9"
+    },
+    {
+      "body_hash": "sha256:51970bfe0c47e57e70f6c898104e851ee40f1d0a66e8efe5dde7db3589bd38bb",
+      "inventory_index": 260,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:3e5ee18c6f80c0b5a8ceb340bcdce0031fc14295a09425e1517658dc7f9926f0",
+      "symbol": "HeatPump.cooling_capacity",
+      "symbol_hash": "sha256:2c36599247e8d0009bfd6d483f79501927cda80d905dc35c34b7951847beb6ba"
+    },
+    {
+      "body_hash": "sha256:0d6b9f259f06a1709324605664c4de028d218c0c2c6b66a5c6cd4b339df63e94",
+      "inventory_index": 261,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:71e9718dab4a568443dd8a275198c8d80091e6d38eaf74eb108259b334eff938",
+      "symbol": "HeatPump.cooling_cop",
+      "symbol_hash": "sha256:59bd79833f41971c5935ede33822d3986693f0eb608ee07431110d52dc8a6577"
+    },
+    {
+      "body_hash": "sha256:a2fc3dfa6b59eb28310266d88b0f9035fe5824b906a0e9fef39eb0fad28102f4",
+      "inventory_index": 262,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0def9f1d1f9b92a17f366a3c8b7ff0a8dab2b187cd0bd8cd1df8061cef6c0149",
+      "symbol": "HeatPump.from_json",
+      "symbol_hash": "sha256:20b220f016be64ce4dc06b873fe97718f8a0409e7a0344691d6bce7f2dd5b829"
+    },
+    {
+      "body_hash": "sha256:0da73324f74a3e7c4a914c8526ba86925e97a3bc79f67568933b175b4b4dc2c7",
+      "inventory_index": 263,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c933e21c7ee9bd9b6a580d730d6d513f2c3a10c57f80fceec7a7b528566d29e8",
+      "symbol": "HeatPump.fuel",
+      "symbol_hash": "sha256:3742042244a97d39c02c78bc2f4951361dfc5122def303875aaeb7b97e02cc41"
+    },
+    {
+      "body_hash": "sha256:0dbc87eebfcbdee8403f0f7aafc3b5e752eb42bcd53ad09be636deeb687003a2",
+      "inventory_index": 264,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a5915fda8d226f920f4daf2cc114b3f3685aaa47b85311e02ebbc1194b5af930",
+      "symbol": "HeatPump.heating_capacity",
+      "symbol_hash": "sha256:b48949da79c3f6581d75a61d294f60aa6d229657bf0c0119d111ab5730b65e3a"
+    },
+    {
+      "body_hash": "sha256:5bed166aee99318c7a61e3447f1a37176c33f57a4e785f0c27ef50c829aab70d",
+      "inventory_index": 265,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e6c9981e54db16db923dc987e0c91d50ea0b5e267ddccfc3925035eae878efb7",
+      "symbol": "HeatPump.heating_cop",
+      "symbol_hash": "sha256:55ddf021efaf696de09ff2ecc46d858a0f7906dd751bdc080eea738cf0ce8618"
+    },
+    {
+      "body_hash": "sha256:8b29e3c87e3e90e783734bdefb5778458e688e15ee585a02c091cb32c77cdadb",
+      "inventory_index": 266,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:97dfeb55a1697d1771209527da11e4b59937f80eb94165a6984c13ac7db6c80c",
+      "symbol": "HeatPump.to_dragon",
+      "symbol_hash": "sha256:0feeee0bbb444a2d16c5efe0d1e1d41d928ed66197c713cb535ed8eef466b130"
+    }
+  ],
+  "upstream": {
+    "adjacent_receipts_sha256": "sha256:ef4f76630b955cdfdb33b822b2fa3d59ef89c4d2b02d5435567e3f1684cfb15f",
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory": {
+      "bytes": 518070,
+      "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+      "file_sha256": "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    },
+    "isolated_import": {
+      "epsimple_core_initializer_executed": false,
+      "epsimple_package_initializer_executed": false,
+      "loaded_local_modules": [
+        {
+          "ast_sha256": "sha256:f26684ea4b6e1bfe7b9576f06d45971e420d2e9e49da99b6c52ff9d0d424fae3",
+          "bytes": 2262,
+          "module": "epsimple",
+          "path": "src/epsimple/__init__.py",
+          "source_sha256": "sha256:adff45de2c37d23586de00015e05502b1ee4ff7c167f5017b946827f1f383996"
+        },
+        {
+          "ast_sha256": "sha256:6740f081f087834aadfef0c11da6cdbe11f907dc170b48ebaa287e000eb6e27b",
+          "bytes": 4873,
+          "module": "epsimple.constants",
+          "path": "src/epsimple/constants.py",
+          "source_sha256": "sha256:d5dd5241ec90b14ba3708a525cd74279a8cdc238164a5b8544c4c82b05a29897"
+        },
+        {
+          "ast_sha256": "sha256:7409c8f18e040e02d52a7e2a70ab56b4539212eb76035f5b218a5bacd84f4762",
+          "bytes": 1264,
+          "module": "epsimple.core",
+          "path": "src/epsimple/core/__init__.py",
+          "source_sha256": "sha256:e6d571f7bf775cd13cba7abf0f625802e92680fdc87838f4039b037174a1a4c9"
+        },
+        {
+          "ast_sha256": "sha256:dbbea63f51a001fae4fd73fba96dc099eab8cd5bcec39e3d9bf768e29b463873",
+          "bytes": 53850,
+          "module": "epsimple.core.hvac",
+          "path": "src/epsimple/core/hvac.py",
+          "source_sha256": "sha256:9f3ecb27ed612baeed530ccbfd5857f1f528de24f222e6ef5093e4a635665d9c"
+        },
+        {
+          "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+          "bytes": 2011,
+          "module": "idragon",
+          "path": "src/idragon/__init__.py",
+          "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+        },
+        {
+          "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+          "bytes": 6247,
+          "module": "idragon.common",
+          "path": "src/idragon/common.py",
+          "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+        },
+        {
+          "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+          "bytes": 2590,
+          "module": "idragon.constants",
+          "path": "src/idragon/constants.py",
+          "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+        },
+        {
+          "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+          "bytes": 1505,
+          "module": "idragon.dragon",
+          "path": "src/idragon/dragon/__init__.py",
+          "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+        },
+        {
+          "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+          "bytes": 11652,
+          "module": "idragon.dragon.construction",
+          "path": "src/idragon/dragon/construction.py",
+          "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+        },
+        {
+          "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+          "bytes": 137833,
+          "module": "idragon.dragon.hvac",
+          "path": "src/idragon/dragon/hvac.py",
+          "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+        },
+        {
+          "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+          "bytes": 8247,
+          "module": "idragon.dragon.model",
+          "path": "src/idragon/dragon/model.py",
+          "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+        },
+        {
+          "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+          "bytes": 117731,
+          "module": "idragon.dragon.profile",
+          "path": "src/idragon/dragon/profile.py",
+          "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+        },
+        {
+          "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+          "bytes": 27438,
+          "module": "idragon.dragon.shape",
+          "path": "src/idragon/dragon/shape.py",
+          "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+        },
+        {
+          "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+          "bytes": 91815,
+          "module": "idragon.imugi",
+          "path": "src/idragon/imugi.py",
+          "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+        },
+        {
+          "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+          "bytes": 12367,
+          "module": "idragon.launcher",
+          "path": "src/idragon/launcher.py",
+          "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+        },
+        {
+          "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+          "bytes": 2616,
+          "module": "idragon.utils",
+          "path": "src/idragon/utils.py",
+          "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+        }
+      ],
+      "loaded_local_modules_sha256": "sha256:e19bb4e2660bce5866feb71cdaf7d6906f7e8ce8043667f63a290adfeeb115b8",
+      "relocated_observations_sha256": "sha256:bda0a2f6607b8ad2d72183e64c989e76ddb91b65890398aa7191cd2c636c6f03",
+      "relocated_source_copy": "byte-identical-epsimple-and-idragon-trees",
+      "source_location_count": 2
+    },
+    "source": {
+      "ast_sha256": "sha256:dbbea63f51a001fae4fd73fba96dc099eab8cd5bcec39e3d9bf768e29b463873",
+      "bytes": 53850,
+      "path": "src/epsimple/core/hvac.py",
+      "source_sha256": "sha256:9f3ecb27ed612baeed530ccbfd5857f1f528de24f222e6ef5093e4a635665d9c"
+    },
+    "target_receipts_sha256": "sha256:0374c74cedba9ecd7ce3e744f1b33cf490531c03cdd93f96bf3510c7f2d2caf1"
+  }
+}

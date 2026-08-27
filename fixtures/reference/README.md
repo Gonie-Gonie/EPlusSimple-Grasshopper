@@ -88,6 +88,21 @@ enum, nullable source, sealed aggregate, or GRM dispatch adaptations. The other
 116 unresolved declarations are deferred and 58 representation/equality
 declarations remain explicitly excluded.
 
+`python-0.7.0/epsimple-hvac-thermal-source-oracle.json` pins six ordered
+CPython 3.12.7 cases for exactly 47 declarations at inventory indices
+`135,136,139,142-146;157,158,161,164-169;170,171,174,177-184;
+199,200,203,206-208;248,251,252;253,254,257,260-266` in
+`epsimple/core/hvac.py`. It executes `AbsorptionChiller`, `Boiler`, `Chiller`,
+`DistrictHeating`, `GeothermalHeatPump`, and `HeatPump` constructors, defaults,
+explicit and mutated state, property validation, `from_json`, and recursive
+`to_dragon` behavior, including all four chiller cooling-tower type/control
+branches and fresh conversion outputs. Isolated imports plus a byte-identical
+relocated source copy prove path independence. Twenty-four targets are direct
+ID/property equivalents and 23 use reviewed sealed `SourceSystem`, GRM-
+dispatch, or GreenRetrofit-conversion adaptations. All 155 adjacent HVAC
+declarations are pinned as a fail-closed non-target closure and cannot be
+promoted by this fixture.
+
 `python-0.7.0/epsimple-identifier-conventions-oracle.json` pins 22 ordered
 CPython 3.12.7 cases for the 34 unresolved `AUTOID_PREFIX`, `Directory`,
 `PackageInfo`, and `SpecialTag` symbols in `epsimple/constants.py`. It records
