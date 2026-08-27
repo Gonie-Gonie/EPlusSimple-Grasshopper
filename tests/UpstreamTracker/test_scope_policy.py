@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:19b36481e388bac39f7d12693aaacebf4a9ec8cc0fd7d5ddceef40f7e379f9c3"
+    "sha256:ef99abb34d4eb0ce5f62f5b9a5dd9c3587453ced35ebfa75dc56ddc50037e32e"
 )
 
 
@@ -68,9 +68,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 245,
-                "exception": 335,
-                "needs_reverification": 410,
+                "equivalent": 254,
+                "exception": 340,
+                "needs_reverification": 396,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -612,12 +612,153 @@ class SafeScopePolicyTests(unittest.TestCase):
             self.assertEqual(("src/epsimple/core/model.py", symbol), entry.key, symbol)
             self.assertEqual("out_of_scope", entry.classification, symbol)
             self.assertIsNone(entry.exception_id, symbol)
-        for index, symbol in deferred.items():
+
+    def test_epsimple_model_result_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        targets = {
+            373: (
+                "GreenRetrofitResult",
+                "exception",
+                "reviewed-native-adaptation-immutable-complete-result-tree-rather-than-model-result-wrapper-8b407386",
+            ),
+            374: (
+                "GreenRetrofitResult.VALID_DIGITS",
+                "equivalent",
+                "direct-native-greenretrofitresult-valid-digits-ff1cddac",
+            ),
+            375: (
+                "GreenRetrofitResult.__init__",
+                "exception",
+                "reviewed-native-adaptation-validated-factory-and-diagnostic-build-result-boundary-856dd66b",
+            ),
+            376: (
+                "GreenRetrofitResult.area",
+                "equivalent",
+                "direct-native-greenretrofitresult-area-37a89b1c",
+            ),
+            377: (
+                "GreenRetrofitResult.calc_domestic_hotwater_site_energy",
+                "exception",
+                "reviewed-native-adaptation-typed-server-filtering-first-id-wins-and-structured-diagnostics-4e80e0ef",
+            ),
+            378: (
+                "GreenRetrofitResult.get_dhw_servers",
+                "exception",
+                "reviewed-native-adaptation-typed-boiler-district-filtering-rather-than-arbitrary-hotwater-object-a63f6fa2",
+            ),
+            379: (
+                "GreenRetrofitResult.get_domestic_hotwater_energy",
+                "equivalent",
+                "direct-native-greenretrofitresult-get-domestic-hotwater-energy-b7774317",
+            ),
+            380: (
+                "GreenRetrofitResult.summarize",
+                "equivalent",
+                "direct-native-greenretrofitresult-summarize-93d2bbd8",
+            ),
+            381: (
+                "GreenRetrofitResult.to_co2",
+                "equivalent",
+                "direct-native-greenretrofitresult-to-co2-72b97e85",
+            ),
+            382: (
+                "GreenRetrofitResult.to_cost",
+                "equivalent",
+                "direct-native-greenretrofitresult-to-cost-7d1d1cd9",
+            ),
+            383: (
+                "GreenRetrofitResult.to_dict",
+                "equivalent",
+                "direct-native-greenretrofitresult-to-dict-010fb599",
+            ),
+            384: (
+                "GreenRetrofitResult.to_site_uses",
+                "equivalent",
+                "direct-native-greenretrofitresult-to-site-uses-48114e14",
+            ),
+            385: (
+                "GreenRetrofitResult.to_source_uses",
+                "equivalent",
+                "direct-native-greenretrofitresult-to-source-uses-842eb853",
+            ),
+            386: (
+                "GreenRetrofitResult.write",
+                "exception",
+                "reviewed-native-adaptation-deterministic-grr-writer-with-terminal-newline-67ef521c",
+            ),
+        }
+        self.assertEqual(14, len(targets))
+        self.assertEqual(
+            {"equivalent": 9, "exception": 5},
+            {
+                classification: sum(
+                    target_classification == classification
+                    for _, target_classification, _ in targets.values()
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+
+        for index, (symbol, classification, adaptation_family) in targets.items():
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual(
+                ("src/epsimple/core/model.py", symbol),
+                inventory_symbol.key,
+                symbol,
+            )
+            self.assertEqual(classification, entry.classification, symbol)
+            exception_id = (
+                adaptation_family if classification == "exception" else None
+            )
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            assertion_id = (
+                f"epsimple-model-result-{index}-"
+                f"{inventory_symbol.symbol_hash.removeprefix('sha256:')[:8]}"
+            )
+            expected_evidence = [f"upstream/symbol-evidence.json#{assertion_id}"]
+            if exception_id is not None:
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, symbol)
+            for exact_binding in (
+                assertion_id,
+                adaptation_family,
+                "commit 61bb21b",
+                "sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520",
+                "sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4",
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+
+        excluded = {
+            343: "GreenRetrofitModel.__repr__",
+            344: "GreenRetrofitModel.__str__",
+            358: "GreenRetrofitModel.from_excel",
+        }
+        model_core_indices = (
+            set(range(337, 373)) - set(excluded)
+        ) | {387, 388}
+        self.assertEqual(35, len(model_core_indices))
+        self.assertEqual(
+            {"equivalent": 11, "exception": 24},
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in model_core_indices
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+        self.assertEqual(
+            set(range(337, 389)),
+            set(targets) | model_core_indices | set(excluded),
+        )
+        for index, symbol in excluded.items():
             entry = entries[index]
             self.assertEqual(("src/epsimple/core/model.py", symbol), entry.key, symbol)
-            self.assertEqual("needs_reverification", entry.classification, symbol)
+            self.assertEqual("out_of_scope", entry.classification, symbol)
             self.assertIsNone(entry.exception_id, symbol)
-            self.assertEqual(NEEDS_RATIONALE, entry.rationale, symbol)
 
     def test_epsimple_shape_core_promotion_is_exact_and_bounded(self) -> None:
         entries = self.configuration.matrix.entries

@@ -373,20 +373,20 @@
     "equivalent",
     "equivalent",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
     "exception",
     "exception",
     "exception",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:19b36481e388bac39f7d12693aaacebf4a9ec8cc0fd7d5ddceef40f7e379f9c3",
+  "content_sha256": "sha256:ef99abb34d4eb0ce5f62f5b9a5dd9c3587453ced35ebfa75dc56ddc50037e32e",
   "details": [
     {
       "evidence": [
@@ -3005,6 +3005,114 @@
       "exception_id": "epw-filename-with-caller-owned-directory-resolution-fa174585",
       "index": 372,
       "rationale": "Pinned CPython 3.12.7 and live .NET observations classify GreenRetrofitModel.weather_filepath for exact fixture case M01 (epsimple-model-core.model-constructor-fundamental-properties) through GonieGonie.SimpleDragon.WeatherSelection.EpwFileName and ResolveEpwPath(string). Adaptation family epw-filename-with-caller-owned-directory-resolution-fa174585 classifies the reviewed native API difference. Fixture sha256:e5cfdc9ba823dc891693864051ffb8cbc06cd08137becef9d6c06fd0c2942cf6, commit d48f97a native parity test sha256:1d3679ac9c0f3aa9469434235cedb17099bc728ede8a2afd9cb0c0b8af6f9832, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Weather/WeatherDatabase.cs@sha256:c7ddc71015eb375e56565a2898d7998cf865fb50d0c8626374f0f642644e9e98 are fail-closed bindings. The trusted evidence output is sha256:5efe9e9cce55c7cae37e1fda8956d0816a5433092b332ff620654a1bb64ce820. Only inventory index 372 and assertion epsimple-model-core-372-fa174585 are promoted; out-of-scope indices 343, 344, and 358, deferred indices 373-386, and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-adaptation-immutable-complete-result-tree-rather-than-model-result-wrapper-8b407386",
+        "upstream/symbol-evidence.json#epsimple-model-result-373-8b407386"
+      ],
+      "exception_id": "reviewed-native-adaptation-immutable-complete-result-tree-rather-than-model-result-wrapper-8b407386",
+      "index": 373,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify GreenRetrofitResult for exact fixture case R01 (epsimple-model-result.class-init-area-valid-digits) through GonieGonie.SimpleDragon.GreenRetrofitResult. Adaptation family reviewed-native-adaptation-immutable-complete-result-tree-rather-than-model-result-wrapper-8b407386 classifies the reviewed native API difference. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:1b88b24b581c4d91a226c94b3f1a647d22c1bb4264d478e1a32ecd78b239cb58. Only inventory index 373 and assertion epsimple-model-result-373-8b407386 are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-model-result-374-ff1cddac"
+      ],
+      "index": 374,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify GreenRetrofitResult.VALID_DIGITS for exact fixture case R01 (epsimple-model-result.class-init-area-valid-digits) through GonieGonie.SimpleDragon.GreenRetrofitResult.ValidDigits. Direct contract binding direct-native-greenretrofitresult-valid-digits-ff1cddac captures the equivalent production route. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:6b0ad9d05323c81d7aad66fd3de9155354421eb611bd5fa55fe1885a93e9c9cc. Only inventory index 374 and assertion epsimple-model-result-374-ff1cddac are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-adaptation-validated-factory-and-diagnostic-build-result-boundary-856dd66b",
+        "upstream/symbol-evidence.json#epsimple-model-result-375-856dd66b"
+      ],
+      "exception_id": "reviewed-native-adaptation-validated-factory-and-diagnostic-build-result-boundary-856dd66b",
+      "index": 375,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify GreenRetrofitResult.__init__ for exact fixture case R01 (epsimple-model-result.class-init-area-valid-digits) through GreenRetrofitResult.FromSiteUses(double, EnergyUseBreakdown) and GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?). Adaptation family reviewed-native-adaptation-validated-factory-and-diagnostic-build-result-boundary-856dd66b classifies the reviewed native API difference. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:23e9b2b56149056ce8b3d2a9bc67107f6ad661e02e0a6bfe65cd2ae1e3dd7395. Only inventory index 375 and assertion epsimple-model-result-375-856dd66b are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-model-result-376-37a89b1c"
+      ],
+      "index": 376,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify GreenRetrofitResult.area for exact fixture case R01 (epsimple-model-result.class-init-area-valid-digits) through GonieGonie.SimpleDragon.GreenRetrofitResult.TotalArea. Direct contract binding direct-native-greenretrofitresult-area-37a89b1c captures the equivalent production route. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:981cf3422b0face9d13f94f2c9e3a9690c5a44c9b79de67706e764d0d5786fc0. Only inventory index 376 and assertion epsimple-model-result-376-37a89b1c are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-adaptation-typed-server-filtering-first-id-wins-and-structured-diagnostics-4e80e0ef",
+        "upstream/symbol-evidence.json#epsimple-model-result-377-4e80e0ef"
+      ],
+      "exception_id": "reviewed-native-adaptation-typed-server-filtering-first-id-wins-and-structured-diagnostics-4e80e0ef",
+      "index": 377,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify GreenRetrofitResult.calc_domestic_hotwater_site_energy for exact fixture case D03 (epsimple-model-result.domestic-hotwater-site-energy) through GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build domestic-hot-water projection. Adaptation family reviewed-native-adaptation-typed-server-filtering-first-id-wins-and-structured-diagnostics-4e80e0ef classifies the reviewed native API difference. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:3f43de198cd4adc462bb28aa9c2e2413292257b2a84dfdb37e7b6faa0c358393. Only inventory index 377 and assertion epsimple-model-result-377-4e80e0ef are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-adaptation-typed-boiler-district-filtering-rather-than-arbitrary-hotwater-object-a63f6fa2",
+        "upstream/symbol-evidence.json#epsimple-model-result-378-a63f6fa2"
+      ],
+      "exception_id": "reviewed-native-adaptation-typed-boiler-district-filtering-rather-than-arbitrary-hotwater-object-a63f6fa2",
+      "index": 378,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify GreenRetrofitResult.get_dhw_servers for exact fixture case D02 (epsimple-model-result.domestic-hotwater-server-selection) through GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build source-system filtering and grouping. Adaptation family reviewed-native-adaptation-typed-boiler-district-filtering-rather-than-arbitrary-hotwater-object-a63f6fa2 classifies the reviewed native API difference. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:71eebef3731df315ccd8036f3e0ad2c18a0ad548a1de04461cb1035bf895af49. Only inventory index 378 and assertion epsimple-model-result-378-a63f6fa2 are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-model-result-379-b7774317"
+      ],
+      "index": 379,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify GreenRetrofitResult.get_domestic_hotwater_energy for exact fixture case D01 (epsimple-model-result.domestic-hotwater-demand-calendar) through GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build usage-profile domestic-hot-water demand. Direct contract binding direct-native-greenretrofitresult-get-domestic-hotwater-energy-b7774317 captures the equivalent production route. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:684c489703f61fa1b0fd916bd782685704c1bc409619afca19ea065df6bc2e0b. Only inventory index 379 and assertion epsimple-model-result-379-b7774317 are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-model-result-380-93d2bbd8"
+      ],
+      "index": 380,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify GreenRetrofitResult.summarize for exact fixture case S05 (epsimple-model-result.summary-per-area-gross-and-shape-boundaries) through GonieGonie.SimpleDragon.GreenRetrofitResult.PerAreaSummaries and GrossSummaries. Direct contract binding direct-native-greenretrofitresult-summarize-93d2bbd8 captures the equivalent production route. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:246812cf086981df1f35b6baf3c2d688c4672cdf74d75be3f36f61c6fc03f817. Only inventory index 380 and assertion epsimple-model-result-380-93d2bbd8 are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-model-result-381-72b97e85"
+      ],
+      "index": 381,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify GreenRetrofitResult.to_co2 for exact fixture case S03 (epsimple-model-result.carbon-factors) through GonieGonie.SimpleDragon.GreenRetrofitResult.Carbon. Direct contract binding direct-native-greenretrofitresult-to-co2-72b97e85 captures the equivalent production route. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:835f9f68fa71aaf8af06f4a6883d0935c0dc2dcf2ea76712d3fcd259b713d23a. Only inventory index 381 and assertion epsimple-model-result-381-72b97e85 are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-model-result-382-7d1d1cd9"
+      ],
+      "index": 382,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify GreenRetrofitResult.to_cost for exact fixture case S04 (epsimple-model-result.cost-factors) through GonieGonie.SimpleDragon.GreenRetrofitResult.Cost. Direct contract binding direct-native-greenretrofitresult-to-cost-7d1d1cd9 captures the equivalent production route. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:c65cdbd480f32d5472570b26e8fbba32750c893c5c359b51eaf518aa36ad22ce. Only inventory index 382 and assertion epsimple-model-result-382-7d1d1cd9 are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-model-result-383-010fb599"
+      ],
+      "index": 383,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify GreenRetrofitResult.to_dict for exact fixture case J01 (epsimple-model-result.dictionary-tree-and-call-topology) through GonieGonie.SimpleDragon.GrrWriter.Serialize(GreenRetrofitResult, bool). Direct contract binding direct-native-greenretrofitresult-to-dict-010fb599 captures the equivalent production route. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:8fc60eebda78501dc1eddaa4d935570493b35a77202d4b51c7dd870ea7055e7e. Only inventory index 383 and assertion epsimple-model-result-383-010fb599 are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-model-result-384-48114e14"
+      ],
+      "index": 384,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify GreenRetrofitResult.to_site_uses for exact fixture case S01 (epsimple-model-result.site-use-table-pv-and-boundaries) through GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build and GreenRetrofitResult.SiteUses. Direct contract binding direct-native-greenretrofitresult-to-site-uses-48114e14 captures the equivalent production route. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:18c8420fda7c29c48baad8e49c1912f9af726a6b14ce9e741c857ea4f30aaa20. Only inventory index 384 and assertion epsimple-model-result-384-48114e14 are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-model-result-385-842eb853"
+      ],
+      "index": 385,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify GreenRetrofitResult.to_source_uses for exact fixture case S02 (epsimple-model-result.source-use-factors-and-enum-alias) through GonieGonie.SimpleDragon.GreenRetrofitResult.SourceUses. Direct contract binding direct-native-greenretrofitresult-to-source-uses-842eb853 captures the equivalent production route. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:69e804207169505e25107fdd01d20d9f0c7e0250d4253201a07f62c90b617276. Only inventory index 385 and assertion epsimple-model-result-385-842eb853 are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-adaptation-deterministic-grr-writer-with-terminal-newline-67ef521c",
+        "upstream/symbol-evidence.json#epsimple-model-result-386-67ef521c"
+      ],
+      "exception_id": "reviewed-native-adaptation-deterministic-grr-writer-with-terminal-newline-67ef521c",
+      "index": 386,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify GreenRetrofitResult.write for exact fixture case J02 (epsimple-model-result.write-json-bytes-overwrite-and-errors) through GonieGonie.SimpleDragon.GrrWriter.WriteFile(string, GreenRetrofitResult, bool). Adaptation family reviewed-native-adaptation-deterministic-grr-writer-with-terminal-newline-67ef521c classifies the reviewed native API difference. Fixture sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520, commit 61bb21b native parity test sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4, and the recorder-bound production implementation are fail-closed bindings. The trusted evidence output is sha256:3a724ffa998ec81cc0d8fe4f540ddb4104a08b09bb283cd19bb52ec3b3d64a4d. Only inventory index 386 and assertion epsimple-model-result-386-67ef521c are promoted; model-core target indices 337-342, 345-357, 359-372, 387, and 388, out-of-scope indices 343, 344, and 358, and every HVAC or adjacent symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -7746,9 +7854,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 245,
-      "exception": 335,
-      "needs_reverification": 410,
+      "equivalent": 254,
+      "exception": 340,
+      "needs_reverification": 396,
       "out_of_scope": 252
     },
     "entry_count": 1242

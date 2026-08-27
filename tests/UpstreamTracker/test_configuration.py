@@ -30,7 +30,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(341, len(configuration.exceptions))
+        self.assertEqual(346, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -44,16 +44,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(410, len(compatibility.needs_reverification))
+        self.assertEqual(396, len(compatibility.needs_reverification))
         self.assertEqual(
-            245,
+            254,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            335,
+            340,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:19b36481e388bac39f7d12693aaacebf4a9ec8cc0fd7d5ddceef40f7e379f9c3",
+            "sha256:ef99abb34d4eb0ce5f62f5b9a5dd9c3587453ced35ebfa75dc56ddc50037e32e",
             compatibility.matrix.content_sha256,
         )
-        self.assertEqual(580, len(symbol_evidence.entries))
-        self.assertEqual(580, len(symbol_evidence.receipts))
+        self.assertEqual(594, len(symbol_evidence.entries))
+        self.assertEqual(594, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:328fc9717b47ce72a941b3446145bdae3a757aab9d180db172fafa198c1e8814",
+            "sha256:1115ce48086ce2db61bf4e9d449a5dd014f9758595341958c82cbaf1a6c91f67",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -2556,20 +2556,22 @@ class ConfigurationTests(unittest.TestCase):
         model_evidence_entries = tuple(
             item
             for item in symbol_evidence.entries
-            if item.path == "src/epsimple/core/model.py"
+            if item.receipts[0].identifier.startswith("epsimple-model-core-")
         )
         self.assertEqual(35, len(model_evidence_entries))
         self.assertEqual(
             set(model_contract["target_symbols"]),
             {item.symbol for item in model_evidence_entries},
         )
+        model_core_exception_ids = set(model_contract["adaptations"].values())
         self.assertEqual(
             set(model_contract["adaptations"])
             | {"GreenRetrofitModel._dragonize_surface"},
             {
                 item.upstream_symbol
                 for item in configuration.exceptions
-                if item.upstream_path == "src/epsimple/core/model.py"
+                if item.identifier in model_core_exception_ids
+                or item.identifier == "immutable-conversion"
             },
         )
         self.assertEqual(
@@ -2579,14 +2581,6 @@ class ConfigurationTests(unittest.TestCase):
                 for item in symbol_evidence.entries
             ),
         )
-        self.assertEqual(
-            317,
-            sum(
-                item.identifier not in set(model_contract["adaptations"].values())
-                for item in configuration.exceptions
-            ),
-        )
-
         model_excluded = tuple(model_fixture["excluded_receipts"])
         model_deferred = tuple(model_fixture["deferred_receipts"])
         self.assertEqual((343, 344, 358), tuple(item["inventory_index"] for item in model_excluded))
@@ -2605,15 +2599,337 @@ class ConfigurationTests(unittest.TestCase):
                 "out_of_scope", compatibility.matrix.entries[index].classification
             )
             self.assertNotIn(key, symbol_evidence.entries_by_key)
-        for receipt in model_deferred:
-            index = receipt["inventory_index"]
-            key = (receipt["path"], receipt["symbol"])
-            self.assertEqual(key, compatibility.inventory.symbols[index].key)
-            self.assertEqual(
-                "needs_reverification",
-                compatibility.matrix.entries[index].classification,
+
+        result_fixture_path = (
+            REPOSITORY_ROOT
+            / "fixtures/reference/python-0.7.0/epsimple-model-result-oracle.json"
+        )
+        result_test_path = (
+            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "ModelResultOracleParityTests.cs"
+        )
+        result_test_symbol = (
+            "GonieGonie.SimpleDragon.Tests.ModelResultOracleParityTests."
+            "MatchesPinnedModelResultThroughProductionPublicRoutes"
+        )
+        result_fixture_sha256 = (
+            "sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520"
+        )
+        result_test_sha256 = (
+            "sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4"
+        )
+        result_fixture_bytes = result_fixture_path.read_bytes()
+        self.assertEqual(
+            result_fixture_sha256,
+            "sha256:" + hashlib.sha256(result_fixture_bytes).hexdigest(),
+        )
+        result_fixture = json.loads(result_fixture_bytes.decode("utf-8"))
+        result_contract = result_fixture["consumer_contract"]
+        result_target_indices = tuple(range(373, 387))
+        result_targets = result_fixture["target_receipts"]
+        self.assertEqual(
+            result_target_indices,
+            tuple(item["inventory_index"] for item in result_targets),
+        )
+        self.assertEqual(
+            tuple(result_contract["closure"]["target_symbols"]),
+            tuple(item["symbol"] for item in result_targets),
+        )
+        self.assertEqual(14, result_contract["closure"]["target_count"])
+        self.assertEqual(11, result_contract["case_count"])
+        self.assertEqual(11, len(result_fixture["cases"]))
+        self.assertEqual(
+            {"equivalent": 9, "exception": 5},
+            result_contract["classification_counts"],
+        )
+        self.assertTrue(
+            result_contract["closure"]["exact_one_case_target_partition"]
+        )
+        self.assertTrue(result_contract["closure"]["full_model_source_partition"])
+
+        result_case_by_symbol = {}
+        for case in result_fixture["cases"]:
+            for symbol in case["target_symbols"]:
+                self.assertNotIn(symbol, result_case_by_symbol)
+                result_case_by_symbol[symbol] = (case["code"], case["id"])
+        self.assertEqual(
+            set(result_contract["closure"]["target_symbols"]),
+            set(result_case_by_symbol),
+        )
+        self.assertEqual(
+            result_contract["coverage_by_symbol"],
+            {
+                symbol: case_id
+                for symbol, (_, case_id) in result_case_by_symbol.items()
+            },
+        )
+
+        result_test_bytes = (REPOSITORY_ROOT / result_test_path).read_bytes()
+        self.assertEqual(
+            result_test_sha256,
+            "sha256:" + hashlib.sha256(result_test_bytes).hexdigest(),
+        )
+        result_receipt_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            result_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(result_receipt_hash_block)
+        assert result_receipt_hash_block is not None
+        result_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                result_receipt_hash_block.group("body"),
             )
-            self.assertNotIn(key, symbol_evidence.entries_by_key)
+        )
+        self.assertEqual(14, len(result_output_hashes))
+        self.assertEqual(14, len(set(result_output_hashes)))
+
+        result_models_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/"
+            "GreenRetrofitResultModels.cs"
+        )
+        result_builder_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/"
+            "GreenRetrofitResultBuilder.cs"
+        )
+        result_writer_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GrrWriter.cs"
+        )
+        result_implementations = {
+            "GreenRetrofitResult": (
+                result_models_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResult",
+            ),
+            "GreenRetrofitResult.VALID_DIGITS": (
+                result_models_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResult.ValidDigits",
+            ),
+            "GreenRetrofitResult.__init__": (
+                result_models_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResult.FromSiteUses",
+            ),
+            "GreenRetrofitResult.area": (
+                result_models_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResult.TotalArea",
+            ),
+            "GreenRetrofitResult.calc_domestic_hotwater_site_energy": (
+                result_builder_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build",
+            ),
+            "GreenRetrofitResult.get_dhw_servers": (
+                result_builder_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build",
+            ),
+            "GreenRetrofitResult.get_domestic_hotwater_energy": (
+                result_builder_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build",
+            ),
+            "GreenRetrofitResult.summarize": (
+                result_models_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResult.PerAreaSummaries",
+            ),
+            "GreenRetrofitResult.to_co2": (
+                result_models_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResult.Carbon",
+            ),
+            "GreenRetrofitResult.to_cost": (
+                result_models_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResult.Cost",
+            ),
+            "GreenRetrofitResult.to_dict": (
+                result_writer_path,
+                "GonieGonie.SimpleDragon.GrrWriter.Serialize",
+            ),
+            "GreenRetrofitResult.to_site_uses": (
+                result_builder_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build",
+            ),
+            "GreenRetrofitResult.to_source_uses": (
+                result_models_path,
+                "GonieGonie.SimpleDragon.GreenRetrofitResult.SourceUses",
+            ),
+            "GreenRetrofitResult.write": (
+                result_writer_path,
+                "GonieGonie.SimpleDragon.GrrWriter.WriteFile",
+            ),
+        }
+        result_exception_ids = {
+            result_contract["adaptations"][symbol]
+            for symbol, classification in result_contract["classifications"].items()
+            if classification == "exception"
+        }
+        self.assertEqual(5, len(result_exception_ids))
+
+        for target, expected_output_hash in zip(
+            result_targets,
+            result_output_hashes,
+            strict=True,
+        ):
+            index = target["inventory_index"]
+            symbol = target["symbol"]
+            inventory_symbol = compatibility.inventory.symbols[index]
+            expected_descriptor = dict(target)
+            expected_descriptor.pop("inventory_index")
+            self.assertEqual(expected_descriptor, inventory_symbol.to_data(), symbol)
+            key = (target["path"], symbol)
+            entry = compatibility.matrix.entries[index]
+            classification = result_contract["classifications"][symbol]
+            adaptation_family = result_contract["adaptations"][symbol]
+            exception_id = (
+                adaptation_family if classification == "exception" else None
+            )
+            assertion_id = result_contract["assertion_ids"][symbol]
+            native_route = result_contract["native_routes"][symbol]
+            self.assertEqual(key, entry.key, symbol)
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            expected_references = [
+                f"upstream/symbol-evidence.json#{assertion_id}"
+            ]
+            if exception_id is not None:
+                expected_references.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_references)), entry.evidence, symbol)
+
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(
+                inventory_symbol.symbol_hash,
+                evidence_entry.upstream_symbol_hash,
+                symbol,
+            )
+            implementation_path, implementation_symbol = result_implementations[symbol]
+            implementation_sha256 = "sha256:" + hashlib.sha256(
+                (REPOSITORY_ROOT / implementation_path).read_bytes()
+            ).hexdigest()
+            self.assertEqual(
+                implementation_path,
+                evidence_entry.implementation_path,
+                symbol,
+            )
+            self.assertEqual(
+                implementation_symbol,
+                evidence_entry.implementation_symbol,
+                symbol,
+            )
+            self.assertEqual(
+                implementation_sha256,
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertEqual(result_test_path, receipt.test_path, symbol)
+            self.assertEqual(result_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(result_test_sha256, receipt.test_source_sha256, symbol)
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+            case_code, case_id = result_case_by_symbol[symbol]
+            for exact_binding in (
+                result_fixture_sha256,
+                result_test_sha256,
+                "commit 61bb21b",
+                expected_output_hash,
+                assertion_id,
+                native_route,
+                adaptation_family,
+                case_code,
+                case_id,
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+            if exception_id is not None:
+                exception = exceptions_by_id[exception_id]
+                self.assertEqual(target["path"], exception.upstream_path, symbol)
+                self.assertEqual(symbol, exception.upstream_symbol, symbol)
+                self.assertEqual(
+                    inventory_symbol.symbol_hash,
+                    exception.upstream_symbol_hash,
+                    symbol,
+                )
+                self.assertIn(("engineering_result", entry.rationale), exception.effects)
+                self.assertEqual(
+                    "accepted-native-api-adaptation",
+                    exception.approval,
+                    symbol,
+                )
+            else:
+                self.assertNotIn(adaptation_family, exceptions_by_id, symbol)
+
+        result_evidence_entries = tuple(
+            item
+            for item in symbol_evidence.entries
+            if item.receipts[0].identifier.startswith("epsimple-model-result-")
+        )
+        self.assertEqual(14, len(result_evidence_entries))
+        self.assertEqual(
+            set(result_contract["closure"]["target_symbols"]),
+            {item.symbol for item in result_evidence_entries},
+        )
+        self.assertEqual(
+            {
+                symbol
+                for symbol, classification in result_contract["classifications"].items()
+                if classification == "exception"
+            },
+            {
+                item.upstream_symbol
+                for item in configuration.exceptions
+                if item.identifier in result_exception_ids
+            },
+        )
+        self.assertEqual(
+            545,
+            len(symbol_evidence.entries)
+            - len(model_evidence_entries)
+            - len(result_evidence_entries),
+        )
+        self.assertEqual(
+            317,
+            sum(
+                item.identifier
+                not in model_core_exception_ids | result_exception_ids
+                for item in configuration.exceptions
+            ),
+        )
+        self.assertEqual(
+            tuple(result_contract["closure"]["adjacent_indices"]),
+            tuple(
+                sorted(
+                    model_target_indices
+                    + tuple(item["inventory_index"] for item in model_excluded)
+                )
+            ),
+        )
+        self.assertEqual(
+            set(range(337, 389)),
+            set(result_target_indices)
+            | set(result_contract["closure"]["adjacent_indices"]),
+        )
+        self.assertEqual(
+            {"equivalent": 11, "exception": 24, "out_of_scope": 3},
+            {
+                classification: sum(
+                    compatibility.matrix.entries[index].classification
+                    == classification
+                    for index in result_contract["closure"]["adjacent_indices"]
+                )
+                for classification in (
+                    "equivalent",
+                    "exception",
+                    "out_of_scope",
+                )
+            },
+        )
 
         shape_fixture_path = (
             REPOSITORY_ROOT
