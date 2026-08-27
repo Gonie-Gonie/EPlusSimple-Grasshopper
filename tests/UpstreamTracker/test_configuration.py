@@ -30,7 +30,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(346, len(configuration.exceptions))
+        self.assertEqual(356, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -44,16 +44,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(396, len(compatibility.needs_reverification))
+        self.assertEqual(368, len(compatibility.needs_reverification))
         self.assertEqual(
-            254,
+            272,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            340,
+            350,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:ef99abb34d4eb0ce5f62f5b9a5dd9c3587453ced35ebfa75dc56ddc50037e32e",
+            "sha256:37f783aa11ef76442503341f77349d98b6ab76ae592da8c16dbcc5f99ba70e30",
             compatibility.matrix.content_sha256,
         )
-        self.assertEqual(594, len(symbol_evidence.entries))
-        self.assertEqual(594, len(symbol_evidence.receipts))
+        self.assertEqual(622, len(symbol_evidence.entries))
+        self.assertEqual(622, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:1115ce48086ce2db61bf4e9d449a5dd014f9758595341958c82cbaf1a6c91f67",
+            "sha256:50963f895ca57f29d3595efcdf2f8ee99c7cefd5f50707afcd42137e152f681d",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -2578,6 +2578,9 @@ class ConfigurationTests(unittest.TestCase):
             545,
             sum(
                 item.path != "src/epsimple/core/model.py"
+                and not item.receipts[0].identifier.startswith(
+                    "epsimple-hvac-enums-base-"
+                )
                 for item in symbol_evidence.entries
             ),
         )
@@ -2891,13 +2894,20 @@ class ConfigurationTests(unittest.TestCase):
             545,
             len(symbol_evidence.entries)
             - len(model_evidence_entries)
-            - len(result_evidence_entries),
+            - len(result_evidence_entries)
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "epsimple-hvac-enums-base-"
+                )
+                for item in symbol_evidence.entries
+            ),
         )
         self.assertEqual(
             317,
             sum(
                 item.identifier
                 not in model_core_exception_ids | result_exception_ids
+                and item.upstream_path != "src/epsimple/core/hvac.py"
                 for item in configuration.exceptions
             ),
         )
@@ -3795,6 +3805,330 @@ class ConfigurationTests(unittest.TestCase):
                 symbol,
             )
             self.assertNotIn(key, symbol_evidence.entries_by_key, symbol)
+
+        hvac_fixture_path = (
+            REPOSITORY_ROOT
+            / "fixtures/reference/python-0.7.0/epsimple-hvac-enums-base-oracle.json"
+        )
+        hvac_generator_path = (
+            REPOSITORY_ROOT
+            / "tools/python-reference/generate_epsimple_hvac_enums_base_oracle.py"
+        )
+        hvac_validator_path = (
+            REPOSITORY_ROOT
+            / "tests/PythonReference/test_epsimple_hvac_enums_base_oracle.py"
+        )
+        hvac_test_path = (
+            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "HvacEnumsBaseOracleParityTests.cs"
+        )
+        hvac_test_symbol = (
+            "GonieGonie.SimpleDragon.Tests.HvacEnumsBaseOracleParityTests."
+            "MatchesPinnedHvacEnumsBaseThroughProductionPublicRoutes"
+        )
+        hvac_fixture_sha256 = (
+            "sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c"
+        )
+        hvac_generator_sha256 = (
+            "sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d"
+        )
+        hvac_validator_sha256 = (
+            "sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428"
+        )
+        hvac_test_sha256 = (
+            "sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4"
+        )
+        for pinned_path, expected_sha256 in (
+            (hvac_fixture_path, hvac_fixture_sha256),
+            (hvac_generator_path, hvac_generator_sha256),
+            (hvac_validator_path, hvac_validator_sha256),
+            (REPOSITORY_ROOT / hvac_test_path, hvac_test_sha256),
+        ):
+            self.assertEqual(
+                expected_sha256,
+                "sha256:" + hashlib.sha256(pinned_path.read_bytes()).hexdigest(),
+                pinned_path,
+            )
+
+        hvac_fixture = json.loads(hvac_fixture_path.read_text(encoding="utf-8"))
+        hvac_contract = hvac_fixture["consumer_contract"]
+        hvac_target_indices = (
+            *range(185, 199),
+            *range(240, 248),
+            *range(267, 271),
+            319,
+            320,
+        )
+        hvac_targets = hvac_fixture["target_receipts"]
+        self.assertEqual(
+            hvac_target_indices,
+            tuple(item["inventory_index"] for item in hvac_targets),
+        )
+        self.assertEqual(
+            tuple(hvac_contract["target_symbols"]),
+            tuple(item["symbol"] for item in hvac_targets),
+        )
+        self.assertEqual(6, hvac_contract["case_count"])
+        self.assertEqual(6, len(hvac_fixture["cases"]))
+        self.assertEqual(
+            {"equivalent": 18, "exception": 10},
+            hvac_contract["classification_counts"],
+        )
+        self.assertEqual(28, hvac_contract["closure"]["target_count"])
+        self.assertEqual(58, hvac_contract["closure"]["excluded_count"])
+        self.assertEqual(116, hvac_contract["closure"]["deferred_count"])
+        self.assertTrue(hvac_contract["closure"]["full_source_partition"])
+        self.assertTrue(
+            hvac_contract["closure"]["exact_one_case_target_partition"]
+        )
+
+        hvac_case_by_symbol = {}
+        for case in hvac_fixture["cases"]:
+            for symbol in case["target_symbols"]:
+                self.assertNotIn(symbol, hvac_case_by_symbol)
+                hvac_case_by_symbol[symbol] = (case["code"], case["id"])
+        self.assertEqual(set(hvac_contract["target_symbols"]), set(hvac_case_by_symbol))
+
+        hvac_test_bytes = (REPOSITORY_ROOT / hvac_test_path).read_bytes()
+        hvac_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
+            rb"\[(?P<body>.*?)\n\s*\];",
+            hvac_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(hvac_hash_block)
+        assert hvac_hash_block is not None
+        hvac_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                hvac_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(28, len(hvac_output_hashes))
+        self.assertEqual(28, len(set(hvac_output_hashes)))
+
+        hvac_source_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs"
+        )
+        hvac_supply_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SupplySystem.cs"
+        )
+        hvac_reader_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs"
+        )
+        hvac_writer_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs"
+        )
+        hvac_conversion_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/"
+            "GreenRetrofitConversion.cs"
+        )
+
+        def expected_hvac_implementation(symbol: str) -> tuple[str, str]:
+            enum_members = {
+                "CompressorType": "GonieGonie.SimpleDragon.CompressorType",
+                "CompressorType.RECIPROCATING": "GonieGonie.SimpleDragon.CompressorType.Reciprocating",
+                "CompressorType.SCREW": "GonieGonie.SimpleDragon.CompressorType.Screw",
+                "CompressorType.TURBO": "GonieGonie.SimpleDragon.CompressorType.Turbo",
+                "CoolingTowerControl": "GonieGonie.SimpleDragon.CoolingTowerControl",
+                "CoolingTowerControl.SINGLESPEED": "GonieGonie.SimpleDragon.CoolingTowerControl.SingleSpeed",
+                "CoolingTowerControl.TWOSPEED": "GonieGonie.SimpleDragon.CoolingTowerControl.TwoSpeed",
+                "CoolingTowerType": "GonieGonie.SimpleDragon.CoolingTowerType",
+                "CoolingTowerType.CLOSED": "GonieGonie.SimpleDragon.CoolingTowerType.Closed",
+                "CoolingTowerType.OPEN": "GonieGonie.SimpleDragon.CoolingTowerType.Open",
+                "Fuel": "GonieGonie.SimpleDragon.FuelType",
+                "Fuel.DISTRICTHEATING": "GonieGonie.SimpleDragon.FuelType.DistrictHeating",
+                "Fuel.ELECTRICITY": "GonieGonie.SimpleDragon.FuelType.Electricity",
+                "Fuel.LPG": "GonieGonie.SimpleDragon.FuelType.LiquefiedPetroleumGas",
+                "Fuel.NATURALGAS": "GonieGonie.SimpleDragon.FuelType.NaturalGas",
+                "Fuel.OIL": "GonieGonie.SimpleDragon.FuelType.Oil",
+                "SourceSystem": "GonieGonie.SimpleDragon.SourceSystem",
+            }
+            if symbol in enum_members:
+                return hvac_source_path, enum_members[symbol]
+            if symbol.endswith(".__str__"):
+                return hvac_writer_path, "GonieGonie.SimpleDragon.GrmWriter.Serialize"
+            if symbol.endswith(".to_dragon"):
+                return (
+                    hvac_conversion_path,
+                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                )
+            if symbol == "NoneSource.ID":
+                return (
+                    hvac_supply_path,
+                    "GonieGonie.SimpleDragon.SupplySystem.SourceSystemId",
+                )
+            if symbol in {"NoneSource", "NoneSource.__new__"}:
+                return (
+                    hvac_supply_path,
+                    "GonieGonie.SimpleDragon.SupplySystem.SourceSystem",
+                )
+            if symbol == "SourceSystem.TYPE_MAPPER":
+                return hvac_reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"
+            raise AssertionError(symbol)
+
+        hvac_exception_ids = {
+            "CompressorType.__str__": "compressor-type-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+            "CoolingTowerControl.__str__": "cooling-tower-control-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+            "CoolingTowerType.__str__": "cooling-tower-type-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+            "Fuel.__str__": "fuel-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+            "NoneSource": "nullable-resolved-source-reference-rather-than-singleton-sentinel-8824a756",
+            "NoneSource.ID": "null-source-reference-rather-than-special-string-identifier-dbf0ef4b",
+            "NoneSource.__new__": "nullable-source-state-rather-than-process-global-singleton-758d9c0b",
+            "NoneSource.to_dragon": "aggregate-converter-diagnostic-for-unresolved-source-rather-than-null-return-c8347dc8",
+            "SourceSystem": "sealed-validated-domain-aggregate-rather-than-empty-python-base-9b6905f8",
+            "SourceSystem.TYPE_MAPPER": "grm-reader-enum-dispatch-rather-than-public-mutable-class-map-813567e3",
+        }
+        self.assertEqual(10, len(hvac_exception_ids))
+
+        for target, expected_output_hash in zip(
+            hvac_targets,
+            hvac_output_hashes,
+            strict=True,
+        ):
+            index = target["inventory_index"]
+            symbol = target["symbol"]
+            inventory_symbol = compatibility.inventory.symbols[index]
+            expected_descriptor = dict(target)
+            expected_descriptor.pop("inventory_index")
+            self.assertEqual(expected_descriptor, inventory_symbol.to_data(), symbol)
+            key = (target["path"], symbol)
+            entry = compatibility.matrix.entries[index]
+            classification = hvac_contract["classifications"][symbol]
+            exception_id = hvac_exception_ids.get(symbol)
+            assertion_id = hvac_contract["assertion_ids"][symbol]
+            self.assertEqual(key, entry.key, symbol)
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            expected_references = [
+                f"upstream/symbol-evidence.json#{assertion_id}"
+            ]
+            if exception_id is not None:
+                expected_references.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_references)), entry.evidence, symbol)
+
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(
+                inventory_symbol.symbol_hash,
+                evidence_entry.upstream_symbol_hash,
+                symbol,
+            )
+            implementation_path, implementation_symbol = (
+                expected_hvac_implementation(symbol)
+            )
+            implementation_sha256 = "sha256:" + hashlib.sha256(
+                (REPOSITORY_ROOT / implementation_path).read_bytes()
+            ).hexdigest()
+            self.assertEqual(
+                implementation_path, evidence_entry.implementation_path, symbol
+            )
+            self.assertEqual(
+                implementation_symbol, evidence_entry.implementation_symbol, symbol
+            )
+            self.assertEqual(
+                implementation_sha256,
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertEqual(hvac_test_path, receipt.test_path, symbol)
+            self.assertEqual(hvac_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(hvac_test_sha256, receipt.test_source_sha256, symbol)
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+            code, case_id = hvac_case_by_symbol[symbol]
+            for exact_binding in (
+                hvac_fixture_sha256,
+                hvac_generator_sha256,
+                hvac_validator_sha256,
+                hvac_test_sha256,
+                "commit 85264dd",
+                implementation_path + "@" + implementation_sha256,
+                expected_output_hash,
+                assertion_id,
+                hvac_contract["native_routes"][symbol],
+                code,
+                case_id,
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+            adaptation = hvac_contract["adaptations"].get(symbol)
+            if exception_id is not None:
+                self.assertIsNotNone(adaptation, symbol)
+                assert adaptation is not None
+                self.assertIn(adaptation, entry.rationale, symbol)
+                self.assertIn(exception_id, entry.rationale, symbol)
+                exception = exceptions_by_id[exception_id]
+                self.assertEqual(target["path"], exception.upstream_path, symbol)
+                self.assertEqual(symbol, exception.upstream_symbol, symbol)
+                self.assertEqual(
+                    inventory_symbol.symbol_hash,
+                    exception.upstream_symbol_hash,
+                    symbol,
+                )
+                self.assertIn(
+                    ("engineering_result", entry.rationale), exception.effects
+                )
+                self.assertEqual(
+                    "accepted-native-api-adaptation", exception.approval, symbol
+                )
+
+        hvac_evidence_entries = tuple(
+            item
+            for item in symbol_evidence.entries
+            if item.receipts[0].identifier.startswith("epsimple-hvac-enums-base-")
+        )
+        self.assertEqual(28, len(hvac_evidence_entries))
+        self.assertEqual(
+            set(hvac_contract["target_symbols"]),
+            {item.symbol for item in hvac_evidence_entries},
+        )
+        self.assertEqual(594, len(symbol_evidence.entries) - len(hvac_evidence_entries))
+        self.assertEqual(
+            346,
+            sum(
+                item.identifier not in set(hvac_exception_ids.values())
+                for item in configuration.exceptions
+            ),
+        )
+
+        hvac_excluded = tuple(hvac_fixture["excluded_receipts"])
+        hvac_deferred = tuple(hvac_fixture["deferred_receipts"])
+        self.assertEqual(58, len(hvac_excluded))
+        self.assertEqual(116, len(hvac_deferred))
+        self.assertEqual(
+            set(range(135, 337)),
+            set(hvac_target_indices)
+            | {item["inventory_index"] for item in hvac_excluded}
+            | {item["inventory_index"] for item in hvac_deferred},
+        )
+        for receipt in hvac_excluded:
+            index = receipt["inventory_index"]
+            key = (receipt["path"], receipt["symbol"])
+            self.assertEqual(key, compatibility.inventory.symbols[index].key)
+            self.assertEqual(
+                "out_of_scope", compatibility.matrix.entries[index].classification
+            )
+            self.assertNotIn(key, symbol_evidence.entries_by_key)
+        for receipt in hvac_deferred:
+            index = receipt["inventory_index"]
+            key = (receipt["path"], receipt["symbol"])
+            self.assertEqual(key, compatibility.inventory.symbols[index].key)
+            self.assertEqual(
+                "needs_reverification",
+                compatibility.matrix.entries[index].classification,
+            )
+            self.assertNotIn(key, symbol_evidence.entries_by_key)
 
         energy_model_to_idf_key = (
             "src/idragon/dragon/model.py",

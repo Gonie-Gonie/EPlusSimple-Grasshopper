@@ -185,30 +185,20 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "out_of_scope",
-    "needs_reverification",
-    "out_of_scope",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "out_of_scope",
@@ -231,42 +221,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
     "out_of_scope",
     "out_of_scope",
     "needs_reverification",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "out_of_scope",
-    "needs_reverification",
-    "out_of_scope",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -281,6 +240,17 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -296,6 +266,11 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "out_of_scope",
@@ -321,6 +296,31 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "out_of_scope",
+    "out_of_scope",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "exception",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:ef99abb34d4eb0ce5f62f5b9a5dd9c3587453ced35ebfa75dc56ddc50037e32e",
+  "content_sha256": "sha256:37f783aa11ef76442503341f77349d98b6ab76ae592da8c16dbcc5f99ba70e30",
   "details": [
     {
       "evidence": [
@@ -2418,6 +2418,110 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-185-8785ee6d"
+      ],
+      "index": 185,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CompressorType for exact fixture case C01 (epsimple-hvac-enums-base.compressor-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:adcf464334c327da9fc58d04947c71d4191fe447d047ff941fc7107a337c7301. Only inventory index 185 and assertion epsimple-hvac-enums-base-185-8785ee6d are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-186-dfd51671"
+      ],
+      "index": 186,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CompressorType.RECIPROCATING for exact fixture case C01 (epsimple-hvac-enums-base.compressor-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:603aa3375c990068d2182298f667bab036b01562c070c42cedc9f264c7146eaa. Only inventory index 186 and assertion epsimple-hvac-enums-base-186-dfd51671 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-187-2947a213"
+      ],
+      "index": 187,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CompressorType.SCREW for exact fixture case C01 (epsimple-hvac-enums-base.compressor-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:03cd8496b4acc917bd8e27bdde97a4b151fb9dc3c66efeba074853da02638366. Only inventory index 187 and assertion epsimple-hvac-enums-base-187-2947a213 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-188-5074351d"
+      ],
+      "index": 188,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CompressorType.TURBO for exact fixture case C01 (epsimple-hvac-enums-base.compressor-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:c5408ff2f5dc8db5798e44ed91e9a0ac313ad33ef583364a3dac27e8db36ed55. Only inventory index 188 and assertion epsimple-hvac-enums-base-188-5074351d are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#compressor-type-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-189-f40e4929"
+      ],
+      "exception_id": "compressor-type-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+      "index": 189,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CompressorType.__str__ for exact fixture case C01 (epsimple-hvac-enums-base.compressor-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). Adaptation family grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929 is represented by exact compatibility exception compressor-type-grm-vocabulary-rather-than-native-enum-tostring-f40e4929. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs@sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842 are fail-closed bindings. The trusted evidence output is sha256:10c70236e3af95581e61ff904dafca7b323a6e05e73f80285bf8096fe618a9d3. Only inventory index 189 and assertion epsimple-hvac-enums-base-189-f40e4929 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-190-bff3a12f"
+      ],
+      "index": 190,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CompressorType.to_dragon for exact fixture case C01 (epsimple-hvac-enums-base.compressor-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:e7d149c9bff81d66dadd7c1b979904fb8a10ab709ed08f6a5d2ce5693490d47a. Only inventory index 190 and assertion epsimple-hvac-enums-base-190-bff3a12f are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-191-31f279b7"
+      ],
+      "index": 191,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTowerControl for exact fixture case C02 (epsimple-hvac-enums-base.cooling-tower-control-values-order-string-and-lookup) through GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:80552d185eaae8042a0f8ceb8dd8b00553423fac1f0459d0b76949f3b2209742. Only inventory index 191 and assertion epsimple-hvac-enums-base-191-31f279b7 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-192-536f3586"
+      ],
+      "index": 192,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTowerControl.SINGLESPEED for exact fixture case C02 (epsimple-hvac-enums-base.cooling-tower-control-values-order-string-and-lookup) through GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:16a0d97aa9d88a80fe21d2386150169c9dfcb713badc8b3a29bd95bfdda9853c. Only inventory index 192 and assertion epsimple-hvac-enums-base-192-536f3586 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-193-bc3d3c6f"
+      ],
+      "index": 193,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTowerControl.TWOSPEED for exact fixture case C02 (epsimple-hvac-enums-base.cooling-tower-control-values-order-string-and-lookup) through GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:e31cf1a4920e53b690a0969a1078bc0695548151f74b18580a9be500acdaf964. Only inventory index 193 and assertion epsimple-hvac-enums-base-193-bc3d3c6f are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#cooling-tower-control-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-194-f40e4929"
+      ],
+      "exception_id": "cooling-tower-control-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+      "index": 194,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTowerControl.__str__ for exact fixture case C02 (epsimple-hvac-enums-base.cooling-tower-control-values-order-string-and-lookup) through GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). Adaptation family grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929 is represented by exact compatibility exception cooling-tower-control-grm-vocabulary-rather-than-native-enum-tostring-f40e4929. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs@sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842 are fail-closed bindings. The trusted evidence output is sha256:907df49d7994f418c9c5793cf7f2dee2760f943275b63938614e7fc67b10b2ea. Only inventory index 194 and assertion epsimple-hvac-enums-base-194-f40e4929 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-195-9dd879be"
+      ],
+      "index": 195,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTowerType for exact fixture case C03 (epsimple-hvac-enums-base.cooling-tower-type-values-order-string-and-lookup) through GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:4297a63549cbec6adbcb99f5b340ce4bbdfb0d91113ed4a2d67d33920665e5ee. Only inventory index 195 and assertion epsimple-hvac-enums-base-195-9dd879be are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-196-ec6ad133"
+      ],
+      "index": 196,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTowerType.CLOSED for exact fixture case C03 (epsimple-hvac-enums-base.cooling-tower-type-values-order-string-and-lookup) through GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:23405833d536470965779ffa98e6a2d0ce07ae276fdc9b42dddd05cf41ad8ae3. Only inventory index 196 and assertion epsimple-hvac-enums-base-196-ec6ad133 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-197-0496e7cd"
+      ],
+      "index": 197,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTowerType.OPEN for exact fixture case C03 (epsimple-hvac-enums-base.cooling-tower-type-values-order-string-and-lookup) through GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:bc9e89416d9c75316e102fff301f7c3ff37ebc36d700c55700acf35b3b712195. Only inventory index 197 and assertion epsimple-hvac-enums-base-197-0496e7cd are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#cooling-tower-type-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-198-f40e4929"
+      ],
+      "exception_id": "cooling-tower-type-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+      "index": 198,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTowerType.__str__ for exact fixture case C03 (epsimple-hvac-enums-base.cooling-tower-type-values-order-string-and-lookup) through GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). Adaptation family grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929 is represented by exact compatibility exception cooling-tower-type-grm-vocabulary-rather-than-native-enum-tostring-f40e4929. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs@sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842 are fail-closed bindings. The trusted evidence output is sha256:7ade5e07b1ccf59d7d4bc605663c1b9f55f6d3a5cd550549265e2981aa30aac4. Only inventory index 198 and assertion epsimple-hvac-enums-base-198-f40e4929 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-districtheating-eq-706095a5"
       ],
       "index": 201,
@@ -2530,6 +2634,64 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-240-66a9b58b"
+      ],
+      "index": 240,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel for exact fixture case F01 (epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:a465fa63675bd49eb86a18f816e5d3067345e5d7faad69ed3f6f8538b9fad1d7. Only inventory index 240 and assertion epsimple-hvac-enums-base-240-66a9b58b are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-241-806c9ca0"
+      ],
+      "index": 241,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.DISTRICTHEATING for exact fixture case F01 (epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:be691e7812e900135f08e1e2f2d8ed4cd732c91ef4a1761b45e338091a898d96. Only inventory index 241 and assertion epsimple-hvac-enums-base-241-806c9ca0 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-242-dece9e85"
+      ],
+      "index": 242,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.ELECTRICITY for exact fixture case F01 (epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:60752fd98600a49b7153a703287be4de75afa290c05629bef0bbc7e1b194067a. Only inventory index 242 and assertion epsimple-hvac-enums-base-242-dece9e85 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-243-c70f84e9"
+      ],
+      "index": 243,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.LPG for exact fixture case F01 (epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:7103b0a0311f18267038ca5f05d06fac22b6f2b84c60ccfdd5723552458c03e5. Only inventory index 243 and assertion epsimple-hvac-enums-base-243-c70f84e9 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-244-50160788"
+      ],
+      "index": 244,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.NATURALGAS for exact fixture case F01 (epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:e8e165be52a4914f52e41fe0c57e78e13a8b815c0b3dd474d86359d94a28c1f6. Only inventory index 244 and assertion epsimple-hvac-enums-base-244-50160788 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-245-24bb42a1"
+      ],
+      "index": 245,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.OIL for exact fixture case F01 (epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:476a42771edc56dc993eaa141463d81bb9b3a28f963a5063a2d7434f311e8c73. Only inventory index 245 and assertion epsimple-hvac-enums-base-245-24bb42a1 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#fuel-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-246-f40e4929"
+      ],
+      "exception_id": "fuel-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+      "index": 246,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.__str__ for exact fixture case F01 (epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool). Adaptation family grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929 is represented by exact compatibility exception fuel-grm-vocabulary-rather-than-native-enum-tostring-f40e4929. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs@sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842 are fail-closed bindings. The trusted evidence output is sha256:b9f55596673348fbe7c25954d6f13c4a6bbda0225375eb5ca56ad57738172abb. Only inventory index 246 and assertion epsimple-hvac-enums-base-246-f40e4929 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-247-7ce39626"
+      ],
+      "index": 247,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.to_dragon for exact fixture case F01 (epsimple-hvac-enums-base.fuel-values-order-lookup-string-and-conversion) through GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:a20a20dd3eeee876ffbd778977dcef693283e9387a7cf0ef710ca64ad8ab65fc. Only inventory index 247 and assertion epsimple-hvac-enums-base-247-7ce39626 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-geothermalheatpump-repr-416f3c25"
       ],
       "index": 249,
@@ -2569,6 +2731,42 @@
       ],
       "index": 259,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nullable-resolved-source-reference-rather-than-singleton-sentinel-8824a756",
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-267-8824a756"
+      ],
+      "exception_id": "nullable-resolved-source-reference-rather-than-singleton-sentinel-8824a756",
+      "index": 267,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify NoneSource for exact fixture case N01 (epsimple-hvac-enums-base.none-source-singleton-id-new-and-conversion) through GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Adaptation family nullable-resolved-source-reference-rather-than-singleton-sentinel-8824a756 is represented by exact compatibility exception nullable-resolved-source-reference-rather-than-singleton-sentinel-8824a756. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SupplySystem.cs@sha256:1858281dcb5ea2df12a09c0c19caba77cf785a10458fb8d265e882f5695a11c5 are fail-closed bindings. The trusted evidence output is sha256:69d0eb59c7ade63c321ca0eecaa07ca122ee8ea44d24f8acf58782c4d6af1676. Only inventory index 267 and assertion epsimple-hvac-enums-base-267-8824a756 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#null-source-reference-rather-than-special-string-identifier-dbf0ef4b",
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-268-dbf0ef4b"
+      ],
+      "exception_id": "null-source-reference-rather-than-special-string-identifier-dbf0ef4b",
+      "index": 268,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify NoneSource.ID for exact fixture case N01 (epsimple-hvac-enums-base.none-source-singleton-id-new-and-conversion) through GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Adaptation family null-source-reference-rather-than-special-string-identifier-dbf0ef4b is represented by exact compatibility exception null-source-reference-rather-than-special-string-identifier-dbf0ef4b. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SupplySystem.cs@sha256:1858281dcb5ea2df12a09c0c19caba77cf785a10458fb8d265e882f5695a11c5 are fail-closed bindings. The trusted evidence output is sha256:7f301ce900893652830470c0fbcb4cc81c4d0322f81650b87f7e53d00efbbb79. Only inventory index 268 and assertion epsimple-hvac-enums-base-268-dbf0ef4b are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#nullable-source-state-rather-than-process-global-singleton-758d9c0b",
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-269-758d9c0b"
+      ],
+      "exception_id": "nullable-source-state-rather-than-process-global-singleton-758d9c0b",
+      "index": 269,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify NoneSource.__new__ for exact fixture case N01 (epsimple-hvac-enums-base.none-source-singleton-id-new-and-conversion) through GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Adaptation family nullable-source-state-rather-than-process-global-singleton-758d9c0b is represented by exact compatibility exception nullable-source-state-rather-than-process-global-singleton-758d9c0b. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SupplySystem.cs@sha256:1858281dcb5ea2df12a09c0c19caba77cf785a10458fb8d265e882f5695a11c5 are fail-closed bindings. The trusted evidence output is sha256:07ebef0b0c0ed73daf1f665a86ff23995906c26f9c34fbc70be053d7c849751e. Only inventory index 269 and assertion epsimple-hvac-enums-base-269-758d9c0b are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#aggregate-converter-diagnostic-for-unresolved-source-rather-than-null-return-c8347dc8",
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-270-c8347dc8"
+      ],
+      "exception_id": "aggregate-converter-diagnostic-for-unresolved-source-rather-than-null-return-c8347dc8",
+      "index": 270,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify NoneSource.to_dragon for exact fixture case N01 (epsimple-hvac-enums-base.none-source-singleton-id-new-and-conversion) through GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Adaptation family aggregate-converter-diagnostic-for-unresolved-source-rather-than-null-return-c8347dc8 is represented by exact compatibility exception aggregate-converter-diagnostic-for-unresolved-source-rather-than-null-return-c8347dc8. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:161593b20dbcb50048f879282920f355b0a597879db3d16cb5e1c172ccd81ec7. Only inventory index 270 and assertion epsimple-hvac-enums-base-270-c8347dc8 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -2681,6 +2879,24 @@
       ],
       "index": 314,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#sealed-validated-domain-aggregate-rather-than-empty-python-base-9b6905f8",
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-319-9b6905f8"
+      ],
+      "exception_id": "sealed-validated-domain-aggregate-rather-than-empty-python-base-9b6905f8",
+      "index": 319,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem for exact fixture case S01 (epsimple-hvac-enums-base.source-system-base-and-type-mapper-topology) through GonieGonie.SimpleDragon.SourceSystem constructor and public properties. Adaptation family sealed-validated-domain-aggregate-rather-than-empty-python-base-9b6905f8 is represented by exact compatibility exception sealed-validated-domain-aggregate-rather-than-empty-python-base-9b6905f8. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs@sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad are fail-closed bindings. The trusted evidence output is sha256:72a42cb6abe4ed5f2ce0ef5d5dfdad450ff98b509c23e6a5dba1705b8de2a084. Only inventory index 319 and assertion epsimple-hvac-enums-base-319-9b6905f8 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#grm-reader-enum-dispatch-rather-than-public-mutable-class-map-813567e3",
+        "upstream/symbol-evidence.json#epsimple-hvac-enums-base-320-813567e3"
+      ],
+      "exception_id": "grm-reader-enum-dispatch-rather-than-public-mutable-class-map-813567e3",
+      "index": 320,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem.TYPE_MAPPER for exact fixture case S01 (epsimple-hvac-enums-base.source-system-base-and-type-mapper-topology) through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with GonieGonie.SimpleDragon.SourceSystemType. Adaptation family grm-reader-enum-dispatch-rather-than-public-mutable-class-map-813567e3 is represented by exact compatibility exception grm-reader-enum-dispatch-rather-than-public-mutable-class-map-813567e3. Fixture sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c, generator sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d, validator sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428, commit 85264dd native parity test sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs@sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968 are fail-closed bindings. The trusted evidence output is sha256:f8a6fad4c49332c8c40e5278edb9d49b33ca873732da208c7b5358d3237bbc9a. Only inventory index 320 and assertion epsimple-hvac-enums-base-320-813567e3 are promoted; all 58 excluded HVAC declarations, all 116 deferred thermal-source, supply-system, and other HVAC declarations, and every non-HVAC symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -7854,9 +8070,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 254,
-      "exception": 340,
-      "needs_reverification": 396,
+      "equivalent": 272,
+      "exception": 350,
+      "needs_reverification": 368,
       "out_of_scope": 252
     },
     "entry_count": 1242

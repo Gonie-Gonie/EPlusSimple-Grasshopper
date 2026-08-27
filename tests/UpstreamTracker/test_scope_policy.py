@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:ef99abb34d4eb0ce5f62f5b9a5dd9c3587453ced35ebfa75dc56ddc50037e32e"
+    "sha256:37f783aa11ef76442503341f77349d98b6ab76ae592da8c16dbcc5f99ba70e30"
 )
 
 
@@ -68,9 +68,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 254,
-                "exception": 340,
-                "needs_reverification": 396,
+                "equivalent": 272,
+                "exception": 350,
+                "needs_reverification": 368,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -612,6 +612,177 @@ class SafeScopePolicyTests(unittest.TestCase):
             self.assertEqual(("src/epsimple/core/model.py", symbol), entry.key, symbol)
             self.assertEqual("out_of_scope", entry.classification, symbol)
             self.assertIsNone(entry.exception_id, symbol)
+
+    def test_epsimple_hvac_enums_base_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        target_symbols = {
+            185: "CompressorType",
+            186: "CompressorType.RECIPROCATING",
+            187: "CompressorType.SCREW",
+            188: "CompressorType.TURBO",
+            189: "CompressorType.__str__",
+            190: "CompressorType.to_dragon",
+            191: "CoolingTowerControl",
+            192: "CoolingTowerControl.SINGLESPEED",
+            193: "CoolingTowerControl.TWOSPEED",
+            194: "CoolingTowerControl.__str__",
+            195: "CoolingTowerType",
+            196: "CoolingTowerType.CLOSED",
+            197: "CoolingTowerType.OPEN",
+            198: "CoolingTowerType.__str__",
+            240: "Fuel",
+            241: "Fuel.DISTRICTHEATING",
+            242: "Fuel.ELECTRICITY",
+            243: "Fuel.LPG",
+            244: "Fuel.NATURALGAS",
+            245: "Fuel.OIL",
+            246: "Fuel.__str__",
+            247: "Fuel.to_dragon",
+            267: "NoneSource",
+            268: "NoneSource.ID",
+            269: "NoneSource.__new__",
+            270: "NoneSource.to_dragon",
+            319: "SourceSystem",
+            320: "SourceSystem.TYPE_MAPPER",
+        }
+        exception_ids = {
+            "CompressorType.__str__": "compressor-type-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+            "CoolingTowerControl.__str__": "cooling-tower-control-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+            "CoolingTowerType.__str__": "cooling-tower-type-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+            "Fuel.__str__": "fuel-grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+            "NoneSource": "nullable-resolved-source-reference-rather-than-singleton-sentinel-8824a756",
+            "NoneSource.ID": "null-source-reference-rather-than-special-string-identifier-dbf0ef4b",
+            "NoneSource.__new__": "nullable-source-state-rather-than-process-global-singleton-758d9c0b",
+            "NoneSource.to_dragon": "aggregate-converter-diagnostic-for-unresolved-source-rather-than-null-return-c8347dc8",
+            "SourceSystem": "sealed-validated-domain-aggregate-rather-than-empty-python-base-9b6905f8",
+            "SourceSystem.TYPE_MAPPER": "grm-reader-enum-dispatch-rather-than-public-mutable-class-map-813567e3",
+        }
+        self.assertEqual(28, len(target_symbols))
+        self.assertEqual(10, len(exception_ids))
+
+        for index, symbol in target_symbols.items():
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual(
+                ("src/epsimple/core/hvac.py", symbol),
+                inventory_symbol.key,
+                symbol,
+            )
+            classification = "exception" if symbol in exception_ids else "equivalent"
+            exception_id = exception_ids.get(symbol)
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            assertion_id = (
+                f"epsimple-hvac-enums-base-{index}-"
+                f"{inventory_symbol.symbol_hash.removeprefix('sha256:')[:8]}"
+            )
+            expected_evidence = [f"upstream/symbol-evidence.json#{assertion_id}"]
+            if exception_id is not None:
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, symbol)
+            for exact_binding in (
+                assertion_id,
+                "commit 85264dd",
+                "sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c",
+                "sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d",
+                "sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428",
+                "sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4",
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+            if exception_id is not None:
+                self.assertIn(exception_id, entry.rationale, symbol)
+
+        self.assertEqual(
+            {"equivalent": 18, "exception": 10},
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in target_symbols
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+        excluded_indices = {
+            137,
+            138,
+            140,
+            141,
+            149,
+            150,
+            152,
+            153,
+            159,
+            160,
+            162,
+            163,
+            172,
+            173,
+            175,
+            176,
+            201,
+            202,
+            204,
+            205,
+            211,
+            212,
+            214,
+            215,
+            221,
+            222,
+            224,
+            225,
+            232,
+            233,
+            235,
+            236,
+            249,
+            250,
+            255,
+            256,
+            258,
+            259,
+            273,
+            274,
+            276,
+            277,
+            285,
+            286,
+            288,
+            289,
+            298,
+            299,
+            301,
+            302,
+            310,
+            311,
+            313,
+            314,
+            327,
+            328,
+            330,
+            331,
+        }
+        deferred_indices = (
+            set(range(135, 337)) - set(target_symbols) - excluded_indices
+        )
+        self.assertEqual(58, len(excluded_indices))
+        self.assertEqual(116, len(deferred_indices))
+        self.assertEqual(
+            set(range(135, 337)),
+            set(target_symbols) | excluded_indices | deferred_indices,
+        )
+        for index in excluded_indices:
+            entry = entries[index]
+            self.assertEqual("out_of_scope", entry.classification, index)
+            self.assertIsNone(entry.exception_id, index)
+        for index in deferred_indices:
+            entry = entries[index]
+            self.assertEqual("needs_reverification", entry.classification, index)
+            self.assertIsNone(entry.exception_id, index)
+            self.assertEqual((), entry.evidence, index)
+            self.assertEqual(NEEDS_RATIONALE, entry.rationale, index)
 
     def test_epsimple_model_result_promotion_is_exact_and_bounded(self) -> None:
         entries = self.configuration.matrix.entries
