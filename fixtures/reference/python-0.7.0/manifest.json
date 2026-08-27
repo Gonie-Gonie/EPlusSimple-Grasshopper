@@ -28,6 +28,11 @@
       "sha256": "e5261b2898a374722c24247f7d5a4fbc7df83cab1fbe8ad225827ee170d5cf54"
     },
     {
+      "path": "constants-metadata-oracle.json",
+      "bytes": 117164,
+      "sha256": "9289e629b6948ee28a9b52c90bbc2cc2b9bd78508a50b1073ea9ebb531423d9c"
+    },
+    {
       "path": "construction-equality-hash-oracle.json",
       "bytes": 4326,
       "sha256": "6a1de9268675565ab6a14467717ac38799c45d9fdbba4230b4be403a9b79dbe7"
@@ -53,6 +58,11 @@
       "sha256": "ffa9805fd16847484195eb001cb7530c718554d13db40f811f7fa1242c020355"
     },
     {
+      "path": "dragon-construction-air-boundary-core-oracle.json",
+      "bytes": 97764,
+      "sha256": "056d6dfbd9e0b0402ae6b19788f156eb799384e975ba1469fe7578f7d2736f2c"
+    },
+    {
       "path": "dragon-construction-to-idf-object-oracle.json",
       "bytes": 63256,
       "sha256": "415cda6877c71985f8943ddd328bc04500e9905f7561c908285bc1bfe95e6b91"
@@ -61,6 +71,11 @@
       "path": "dragon-hvac-photovoltaic-to-idf-object-oracle.json",
       "bytes": 147261,
       "sha256": "07c383c316989ccb22ac3eadcf9d8388764f76effbbf03c13b7a54f8af20f22b"
+    },
+    {
+      "path": "dragon-hvac-source-system-to-idf-object-oracle.json",
+      "bytes": 3927710,
+      "sha256": "2fbc3ad2d810dee6b3e88f8b6e8c119e8ce709abf0c534233343e486f7bf9c7f"
     },
     {
       "path": "dragon-hvac-supply-group-core-oracle.json",
@@ -103,9 +118,34 @@
       "sha256": "f371e7b98aebb4f5bb338185c32e804975801349a123c58aba4d78263658183e"
     },
     {
+      "path": "dragon-shape-geometry-core-oracle.json",
+      "bytes": 244637,
+      "sha256": "46f026a4ce39931ec1e9d3581f49600e4178f3c744d2c6e022263d0fc695d4d8"
+    },
+    {
+      "path": "dragon-shape-opening-adjacency-core-oracle.json",
+      "bytes": 260292,
+      "sha256": "62cffb90701ba585b44712b7cce76d1393bec01fe0dfc8eccad170e49a6e2a34"
+    },
+    {
       "path": "dragon-shape-shading-material-to-idf-object-oracle.json",
       "bytes": 56704,
       "sha256": "e805e1d8e953879012975cd8854e8737da29ed038f66d6176010337ace6f27fe"
+    },
+    {
+      "path": "dragon-shape-surface-to-idf-object-oracle.json",
+      "bytes": 535248,
+      "sha256": "4e8bafd045e32e94f343b83c08fa144e925f4aa8fc2b39f981c591d46d35dc9b"
+    },
+    {
+      "path": "dragon-shape-zone-core-oracle.json",
+      "bytes": 91202,
+      "sha256": "63d62d596d37c2e33adcbaf025f37ccda36d8a4291d96b3201d427d8caed59b3"
+    },
+    {
+      "path": "dragon-shape-zone-to-idf-object-oracle.json",
+      "bytes": 219578,
+      "sha256": "fb59f434db0aa0f4744d14b17d3354e61918241df112744f26ebffd44e7f8c5c"
     },
     {
       "path": "epsimple-constants-numeric-oracle.json",
