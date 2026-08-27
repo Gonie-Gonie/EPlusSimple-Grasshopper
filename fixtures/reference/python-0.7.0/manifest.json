@@ -103,6 +103,11 @@
       "sha256": "f01960724a367eadb8fbee9a5bef3b8d4304449eb9d3c71fa626f4db03024ef4"
     },
     {
+      "path": "dragon-model-class-oracle.json",
+      "bytes": 34711,
+      "sha256": "9a5e00a585e983d4a753acb94c46307848d32020e8d3960f9ad8184ccb4cfa7a"
+    },
+    {
       "path": "dragon-model-conditioning-oracle.json",
       "bytes": 19851,
       "sha256": "7cbdcad0691b3e56010981217f11e515c6cb7f417b6a22643925876b33e6de81"

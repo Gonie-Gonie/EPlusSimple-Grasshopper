@@ -166,6 +166,18 @@ AST receipts. This is behavioral evidence only: the symbol remains
 `needs_reverification`, with no adaptation, trusted assertion, child-converter
 closure, or full-symbol closure claim.
 
+`python-0.7.0/dragon-model-class-oracle.json` targets only public-inventory
+index 815, `EnergyModel`, through three CPython 3.12.7 observations: class and
+`supported_versions` topology, shared-list append visibility with unconditional
+`finally` restoration, and instance shadow/arbitrary-attribute/subclass
+topology. The classification exception is
+`sealed-read-only-native-energy-model-class-a7582a41`, its assertion is
+`dragon-model-energy-model-class-a7582a41`, and its native binding is
+`GonieGonie.InvisibleDragon.Model.EnergyModel`. Indices 816-825 are resolved
+receipts only; loaded `Version` symbols are context receipts only. Exact source
+and Python 3.12 AST receipts cover all twelve loaded local modules. Constructors
+and named members are not separate targets or compatibility claims.
+
 `python-0.7.0/dragon-model-conditioning-oracle.json` pins nine ordered
 CPython 3.12.7 observations for `EnergyModel.conditioned_zones`,
 `EnergyModel.unconditioned_zones`, and `Zone.is_conditioned` across

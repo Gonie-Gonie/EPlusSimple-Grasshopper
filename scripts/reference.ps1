@@ -49,6 +49,7 @@ $dragonShapeZoneCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-refe
 $dragonShapeZoneToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_shape_zone_to_idf_object_oracle.py'
 $dragonModelAddSupplySystemGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_add_supply_system_oracle.py'
 $dragonModelAssemblyGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_assembly_oracle.py'
+$dragonModelClassGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_class_oracle.py'
 $dragonModelConditioningGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_conditioning_oracle.py'
 $dragonModelConstructionDefaultsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_construction_defaults_oracle.py'
 $dragonModelProjectionsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_projections_oracle.py'
@@ -97,6 +98,7 @@ $dragonShapeZoneCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\
 $dragonShapeZoneToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_shape_zone_to_idf_object_oracle.py'
 $dragonModelAddSupplySystemTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_add_supply_system_oracle.py'
 $dragonModelAssemblyTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_assembly_oracle.py'
+$dragonModelClassTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_class_oracle.py'
 $dragonModelConditioningTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_conditioning_oracle.py'
 $dragonModelConstructionDefaultsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_construction_defaults_oracle.py'
 $dragonModelProjectionsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_projections_oracle.py'
@@ -197,6 +199,7 @@ foreach ($requiredFile in @(
     $dragonShapeZoneToIdfObjectGeneratorPath,
     $dragonModelAddSupplySystemGeneratorPath,
     $dragonModelAssemblyGeneratorPath,
+    $dragonModelClassGeneratorPath,
     $dragonModelConditioningGeneratorPath,
     $dragonModelConstructionDefaultsGeneratorPath,
     $dragonModelProjectionsGeneratorPath,
@@ -243,6 +246,7 @@ foreach ($requiredFile in @(
     $dragonShapeZoneToIdfObjectTestPath,
     $dragonModelAddSupplySystemTestPath,
     $dragonModelAssemblyTestPath,
+    $dragonModelClassTestPath,
     $dragonModelConditioningTestPath,
     $dragonModelConstructionDefaultsTestPath,
     $dragonModelProjectionsTestPath,
@@ -1162,6 +1166,25 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $dragonModelAssemblyGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-dragon-model-assembly-reference.log') `
     -FailureMessage 'Generating the Python dragon model assembly oracle failed'
+
+$dragonModelClassOraclePath = Join-Path $outputRoot 'dragon-model-class-oracle.json'
+$dragonModelClassGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $dragonModelClassGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $dragonModelClassOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $dragonModelClassGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-dragon-model-class-reference.log') `
+    -FailureMessage 'Generating the Python dragon model EnergyModel class oracle failed'
 
 $dragonModelConditioningOraclePath = Join-Path $outputRoot 'dragon-model-conditioning-oracle.json'
 $dragonModelConditioningGeneratorArguments = @(

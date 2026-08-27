@@ -1,0 +1,863 @@
+{
+  "case_sha256": {
+    "dragon-model-energy-model-class.c01-class-supported-versions-topology": "sha256:77e860eaed52a820286e037d3966e17135f7866dd306c3bcfc478fd44d47cb4a",
+    "dragon-model-energy-model-class.c02-shared-list-append-visibility-restoration": "sha256:6268a6f473231cc8f3d88043a51ef7721c16f1372ae2edbae0d122b7bfea2a29",
+    "dragon-model-energy-model-class.c03-instance-shadow-arbitrary-attribute-subclass-topology": "sha256:9a7170a7a3678ce436b450e2527d348fbca97cf817793b2fc00e8608ec6a0810"
+  },
+  "cases": [
+    {
+      "context_symbols": [
+        "Version",
+        "Version.__init__"
+      ],
+      "executor": "energy-model-class",
+      "expected_dotnet": {
+        "adaptations": [
+          "sealed-read-only-native-energy-model-class-a7582a41"
+        ],
+        "classifications": {
+          "EnergyModel": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-model-energy-model-class.c01-class-supported-versions-topology",
+      "python": {
+        "facts": {
+          "class_topology": {
+            "direct_base_names": [
+              "object"
+            ],
+            "metaclass_name": "type",
+            "module": "idragon.dragon.model",
+            "name": "EnergyModel",
+            "qualname": "EnergyModel"
+          },
+          "declared_public_member_topology": [
+            {
+              "name": "supported_versions",
+              "storage_type": "list"
+            },
+            {
+              "name": "surfaces",
+              "storage_type": "property"
+            },
+            {
+              "name": "used_constructions",
+              "storage_type": "property"
+            },
+            {
+              "name": "used_layers",
+              "storage_type": "property"
+            },
+            {
+              "name": "used_profiles",
+              "storage_type": "property"
+            },
+            {
+              "name": "conditioned_zones",
+              "storage_type": "property"
+            },
+            {
+              "name": "unconditioned_zones",
+              "storage_type": "property"
+            },
+            {
+              "name": "create_default_idf",
+              "storage_type": "staticmethod"
+            },
+            {
+              "name": "add_supply_system",
+              "storage_type": "staticmethod"
+            },
+            {
+              "name": "to_idf",
+              "storage_type": "function"
+            }
+          ],
+          "supported_versions": {
+            "class_dictionary_contains_name": true,
+            "class_dictionary_value_is_read_value": true,
+            "container_type": "list",
+            "count": {
+              "kind": "int",
+              "value": "1"
+            },
+            "items": [
+              {
+                "attribute_names": [
+                  "_Version__major",
+                  "_Version__minor",
+                  "_Version__patch"
+                ],
+                "components": [
+                  {
+                    "kind": "int",
+                    "value": "24"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "2"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  }
+                ],
+                "is_imported_version_instance": true,
+                "module": "idragon.common",
+                "type": "Version"
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:62b1cb7d44213516784a823cce69a6204e8e265107202c0ab06cc0b0197827a8",
+        "outcome": "observed"
+      },
+      "subfamily": "class-topology",
+      "target_symbols": [
+        "EnergyModel"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Version",
+        "Version.__init__"
+      ],
+      "executor": "energy-model-class",
+      "expected_dotnet": {
+        "adaptations": [
+          "sealed-read-only-native-energy-model-class-a7582a41"
+        ],
+        "classifications": {
+          "EnergyModel": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-model-energy-model-class.c02-shared-list-append-visibility-restoration",
+      "python": {
+        "facts": {
+          "before": {
+            "count": {
+              "kind": "int",
+              "value": "1"
+            },
+            "items": [
+              {
+                "attribute_names": [
+                  "_Version__major",
+                  "_Version__minor",
+                  "_Version__patch"
+                ],
+                "components": [
+                  {
+                    "kind": "int",
+                    "value": "24"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "2"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  }
+                ],
+                "is_imported_version_instance": true,
+                "module": "idragon.common",
+                "type": "Version"
+              }
+            ]
+          },
+          "mutation": {
+            "appended_item": {
+              "attribute_names": [
+                "_Version__major",
+                "_Version__minor",
+                "_Version__patch"
+              ],
+              "components": [
+                {
+                  "kind": "int",
+                  "value": "25"
+                },
+                {
+                  "kind": "int",
+                  "value": "1"
+                },
+                {
+                  "kind": "int",
+                  "value": "0"
+                }
+              ],
+              "is_imported_version_instance": true,
+              "module": "idragon.common",
+              "type": "Version"
+            },
+            "appended_item_identity_preserved": true,
+            "class_count": {
+              "kind": "int",
+              "value": "2"
+            },
+            "class_read_is_original_container": true,
+            "instance_count": {
+              "kind": "int",
+              "value": "2"
+            },
+            "instance_read_is_original_container": true,
+            "subclass_count": {
+              "kind": "int",
+              "value": "2"
+            },
+            "subclass_read_is_original_container": true,
+            "visible_items": [
+              {
+                "attribute_names": [
+                  "_Version__major",
+                  "_Version__minor",
+                  "_Version__patch"
+                ],
+                "components": [
+                  {
+                    "kind": "int",
+                    "value": "24"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "2"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  }
+                ],
+                "is_imported_version_instance": true,
+                "module": "idragon.common",
+                "type": "Version"
+              },
+              {
+                "attribute_names": [
+                  "_Version__major",
+                  "_Version__minor",
+                  "_Version__patch"
+                ],
+                "components": [
+                  {
+                    "kind": "int",
+                    "value": "25"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "1"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  }
+                ],
+                "is_imported_version_instance": true,
+                "module": "idragon.common",
+                "type": "Version"
+              }
+            ]
+          },
+          "restoration": {
+            "class_read_is_original_container": true,
+            "contents_equal_by_identity": true,
+            "count": {
+              "kind": "int",
+              "value": "1"
+            },
+            "items": [
+              {
+                "attribute_names": [
+                  "_Version__major",
+                  "_Version__minor",
+                  "_Version__patch"
+                ],
+                "components": [
+                  {
+                    "kind": "int",
+                    "value": "24"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "2"
+                  },
+                  {
+                    "kind": "int",
+                    "value": "0"
+                  }
+                ],
+                "is_imported_version_instance": true,
+                "module": "idragon.common",
+                "type": "Version"
+              }
+            ]
+          }
+        },
+        "facts_sha256": "sha256:69e12bb56ad9212f0380b92b1c7327f8f9875bd1a8e2e3aa42f6cc88fed04aa4",
+        "outcome": "observed"
+      },
+      "subfamily": "shared-class-state",
+      "target_symbols": [
+        "EnergyModel"
+      ]
+    },
+    {
+      "context_symbols": [
+        "Version",
+        "Version.__init__"
+      ],
+      "executor": "energy-model-class",
+      "expected_dotnet": {
+        "adaptations": [
+          "sealed-read-only-native-energy-model-class-a7582a41"
+        ],
+        "classifications": {
+          "EnergyModel": "exception"
+        },
+        "outcome": "adapted-as-pinned"
+      },
+      "id": "dragon-model-energy-model-class.c03-instance-shadow-arbitrary-attribute-subclass-topology",
+      "python": {
+        "facts": {
+          "instance_topology": {
+            "arbitrary_attribute_names": [
+              "review_marker",
+              "supported_versions"
+            ],
+            "arbitrary_attribute_type": "tuple",
+            "arbitrary_attribute_value": [
+              {
+                "kind": "str",
+                "value": "arbitrary"
+              },
+              {
+                "kind": "str",
+                "value": "attribute"
+              }
+            ],
+            "class_supported_versions_unchanged": true,
+            "created_without_constructor": true,
+            "initial_attribute_names": [],
+            "instance_is_energy_model": true,
+            "shadow_container_type": "list",
+            "shadow_is_class_container": false,
+            "shadow_is_input_container": true,
+            "shadow_value": [
+              {
+                "kind": "str",
+                "value": "instance-only-version-shadow"
+              }
+            ]
+          },
+          "subclass_topology": {
+            "arbitrary_instance_attribute_roundtrip": {
+              "kind": "str",
+              "value": "subclass-instance-attribute"
+            },
+            "base_instance_check": true,
+            "direct_base_names": [
+              "EnergyModel"
+            ],
+            "inherited_supported_versions_is_class_container": true,
+            "mro_names": [
+              "EnergyModelSubclassTopologyProbe",
+              "EnergyModel",
+              "object"
+            ],
+            "name": "EnergyModelSubclassTopologyProbe",
+            "subclass_definition_outcome": "returned"
+          }
+        },
+        "facts_sha256": "sha256:e9043277693366f6b7c69a36c46da49b7dcbfcda30a180a0888567192d76bceb",
+        "outcome": "observed"
+      },
+      "subfamily": "open-instance-type",
+      "target_symbols": [
+        "EnergyModel"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:ab27c0de1d256d0942a8db49523fe3ba3d6701ddd469684c2261818518f95a59",
+  "consumer_contract": {
+    "adaptations": {
+      "EnergyModel": "sealed-read-only-native-energy-model-class-a7582a41"
+    },
+    "assertion_ids": {
+      "EnergyModel": "dragon-model-energy-model-class-a7582a41"
+    },
+    "case_count": 3,
+    "case_ids": [
+      "dragon-model-energy-model-class.c01-class-supported-versions-topology",
+      "dragon-model-energy-model-class.c02-shared-list-append-visibility-restoration",
+      "dragon-model-energy-model-class.c03-instance-shadow-arbitrary-attribute-subclass-topology"
+    ],
+    "classification_basis": "Pinned Python EnergyModel is subclassable, exposes an inherited mutable class-level supported_versions list, and permits instance shadowing and arbitrary attributes. The native EnergyModel is sealed and exposes a fresh read-only SupportedVersions collection while retaining its validated, typed model contract.",
+    "classification_counts": {
+      "equivalent": 0,
+      "exception": 1
+    },
+    "classifications": {
+      "EnergyModel": "exception"
+    },
+    "closure": {
+      "case_coverage_by_symbol": {
+        "EnergyModel": [
+          "dragon-model-energy-model-class.c01-class-supported-versions-topology",
+          "dragon-model-energy-model-class.c02-shared-list-append-visibility-restoration",
+          "dragon-model-energy-model-class.c03-instance-shadow-arbitrary-attribute-subclass-topology"
+        ]
+      },
+      "context_receipts": [
+        {
+          "body_hash": "sha256:fb7b04e087cf5ee44ca605240380ca8847066ea9c7c879315419dc0b52446c3c",
+          "inventory_index": 556,
+          "kind": "class",
+          "path": "src/idragon/common.py",
+          "signature_hash": "sha256:127a8b300808358bf3f1a153c025fb3d53ef73e7fd1ba8cc098576acb458a6ed",
+          "symbol": "Version",
+          "symbol_hash": "sha256:1c497416f9054aec72cc23eb32f3740e6001e70183471e0453128ec74d7770c8"
+        },
+        {
+          "body_hash": "sha256:fca44c5193da96a1ce893264f7969f6edb34bc2f579bc0447f87386e417adbce",
+          "inventory_index": 558,
+          "kind": "function",
+          "path": "src/idragon/common.py",
+          "signature_hash": "sha256:03d7516c1730f6f95147d7ebd855ace566e32c4f896eab3ff830b5ba6e716413",
+          "symbol": "Version.__init__",
+          "symbol_hash": "sha256:a3def1029c1ebaf97d2c94d1efdc88f0c302c44e0c93d2045c38be0b12a0e983"
+        }
+      ],
+      "full_symbol_closure": false,
+      "resolved_receipts_not_retargeted": [
+        {
+          "body_hash": "sha256:e4e5ef56fd12719fe976231c03d867e932eff64870f9c0fd7a5107b7e11538f1",
+          "inventory_index": 816,
+          "kind": "function",
+          "path": "src/idragon/dragon/model.py",
+          "signature_hash": "sha256:9706dcab3a90048744a47f3596613b34247cb6cd1eb2903582e2fb2cb6342a2d",
+          "symbol": "EnergyModel.__init__",
+          "symbol_hash": "sha256:1d1dbee8fef8b70b2919c4e46a0ea60efbd748b360d31ff353ea121c72ad97d2"
+        },
+        {
+          "body_hash": "sha256:6bf509a4d5050f54bd748c516ed98b6ae249edf3aaa84a75c4c7bd11b7fbef4b",
+          "inventory_index": 817,
+          "kind": "function",
+          "path": "src/idragon/dragon/model.py",
+          "signature_hash": "sha256:576bb4584970582d94ae80ad061612e84dad263321a9e6288b39a92af7cd959f",
+          "symbol": "EnergyModel.add_supply_system",
+          "symbol_hash": "sha256:174532d0aa6b76826dd78f3d7020ba49eeba26494019da3fb361396e31c15a94"
+        },
+        {
+          "body_hash": "sha256:ae71f1c62c76cfdf6890e18c83f3dd2709b9fb72627f690db7dc52b7db719348",
+          "inventory_index": 818,
+          "kind": "function",
+          "path": "src/idragon/dragon/model.py",
+          "signature_hash": "sha256:e8822bd4d00ab05c8d049de4b8fedb8917e0b9cd2daa2c2a3f7503b1985b276e",
+          "symbol": "EnergyModel.conditioned_zones",
+          "symbol_hash": "sha256:90ceddf7de437a59950e7081185fefbf1f56354a49662431452f11ac24bc6f24"
+        },
+        {
+          "body_hash": "sha256:e505591e57b64f4f7ff0b6fb18e775ad88048d4eaddb9d8a4f9e5a0afd2c8ab7",
+          "inventory_index": 819,
+          "kind": "function",
+          "path": "src/idragon/dragon/model.py",
+          "signature_hash": "sha256:6750822d2a0b36e44dced756c45817742cfc0940e8646be6212eedfe3698d8cf",
+          "symbol": "EnergyModel.create_default_idf",
+          "symbol_hash": "sha256:585b53682bd5dbd4d2081e79eddc2789fa60925baafb5eae26de0541346ac9f4"
+        },
+        {
+          "body_hash": "sha256:9ac965df879ac38614b80c38800b8b7e28f3a584d20be71afac9301eea223c06",
+          "inventory_index": 820,
+          "kind": "function",
+          "path": "src/idragon/dragon/model.py",
+          "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+          "symbol": "EnergyModel.surfaces",
+          "symbol_hash": "sha256:9bd40b3fbdc974f1f3a7550b2df6ec8f4c41ce9cb55ecbc07b3f2fce264834c0"
+        },
+        {
+          "body_hash": "sha256:9d1b5a610b485aa782c0c1f39ed57b65d5534e1ba3271f1a325c52a109228189",
+          "inventory_index": 821,
+          "kind": "function",
+          "path": "src/idragon/dragon/model.py",
+          "signature_hash": "sha256:9389bd00d5a2180ea9f3cd1aa5695ba492e1665947515c34c31eff01f072bade",
+          "symbol": "EnergyModel.to_idf",
+          "symbol_hash": "sha256:de10251f38f220956e870d8faea1c7a879da9158b369cffc244f7afc6519eb35"
+        },
+        {
+          "body_hash": "sha256:e65c4689f16398a99be21f56cf6c046ee411718b151d637a75abc7e8076249c8",
+          "inventory_index": 822,
+          "kind": "function",
+          "path": "src/idragon/dragon/model.py",
+          "signature_hash": "sha256:e8822bd4d00ab05c8d049de4b8fedb8917e0b9cd2daa2c2a3f7503b1985b276e",
+          "symbol": "EnergyModel.unconditioned_zones",
+          "symbol_hash": "sha256:24b8c9a917df6c286d13dfb75c3ca04403b74cf0a70e6056cc933c9ed2822e08"
+        },
+        {
+          "body_hash": "sha256:56cc7c61d049242fa77c1c2457d6d9f5678ca41a41af86ddd2ff93be20ed78b3",
+          "inventory_index": 823,
+          "kind": "function",
+          "path": "src/idragon/dragon/model.py",
+          "signature_hash": "sha256:47d2fe431ebc01347b7bef0a612859f9d45131c67b7ee67971757a0694919023",
+          "symbol": "EnergyModel.used_constructions",
+          "symbol_hash": "sha256:b34dd26fdb9af00f053278e77ac3cc85394a646405e8e5e0b5c077342fd1bebd"
+        },
+        {
+          "body_hash": "sha256:bde4ae4c3efe1129e1c3ee19dc273a7e251f770f7173fbc1a3d2b67ec80d0733",
+          "inventory_index": 824,
+          "kind": "function",
+          "path": "src/idragon/dragon/model.py",
+          "signature_hash": "sha256:d5bc4e72ec91b9ecdbdd46cd7a50e3da18408ff227d9549c7ae42bf488381844",
+          "symbol": "EnergyModel.used_layers",
+          "symbol_hash": "sha256:e15c8d38a7b918895bf399bc319bbb2caf2810d416cb4c8792fedb5cec3358f0"
+        },
+        {
+          "body_hash": "sha256:5e04e97f3e1161b94743a1377272a037c646df7e0aa07b6a3ce51c3d4b61ae9a",
+          "inventory_index": 825,
+          "kind": "function",
+          "path": "src/idragon/dragon/model.py",
+          "signature_hash": "sha256:2417ee894af42b33af27bb335ee1a91c7205d1a2093879c28e6e4178554e4a60",
+          "symbol": "EnergyModel.used_profiles",
+          "symbol_hash": "sha256:b8a8a5f692a0cbeeec4215cbab71e89291a3f96e68d7702853631dc454a695ab"
+        }
+      ],
+      "scope": "exact-three-case-energy-model-class-surface",
+      "target_coverage_complete": true,
+      "target_symbols": [
+        "EnergyModel"
+      ],
+      "unresolved_boundaries": [
+        "concurrent-supported_versions-mutation",
+        "metaclass-or-descriptor-monkey-patching",
+        "custom-subclass-hooks-and-multiple-inheritance",
+        "Version-behavior-beyond-the-two-observed-context-instances"
+      ]
+    },
+    "identity_encoding": "stable-direct-is-relations-only-no-id-or-address",
+    "native_targets": {
+      "EnergyModel": "GonieGonie.InvisibleDragon.Model.EnergyModel"
+    },
+    "raw_fact_encoding": "typed-scalars-plus-stable-topology-and-direct-identity-relations",
+    "source_import_policy": "external-temporary-copy-with-complete-loaded-local-module-audit",
+    "target_receipts": [
+      {
+        "body_hash": "sha256:5a7db40c87570a3ae22c820c5b758ed19b5e8120a7cbf0510d3a88eb7c7f33d9",
+        "inventory_index": 815,
+        "kind": "class",
+        "path": "src/idragon/dragon/model.py",
+        "signature_hash": "sha256:0e5d2973f067f9c718303cadabe96e5f8ab87d9d83bce8ec4d369a77266db029",
+        "symbol": "EnergyModel",
+        "symbol_hash": "sha256:a7582a410b3e8189778cacda204ee15a6fd3039d6f136f9a9303bb4437fe2170"
+      }
+    ],
+    "target_symbols": [
+      "EnergyModel"
+    ]
+  },
+  "context_receipts": [
+    {
+      "body_hash": "sha256:fb7b04e087cf5ee44ca605240380ca8847066ea9c7c879315419dc0b52446c3c",
+      "inventory_index": 556,
+      "kind": "class",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:127a8b300808358bf3f1a153c025fb3d53ef73e7fd1ba8cc098576acb458a6ed",
+      "symbol": "Version",
+      "symbol_hash": "sha256:1c497416f9054aec72cc23eb32f3740e6001e70183471e0453128ec74d7770c8"
+    },
+    {
+      "body_hash": "sha256:fca44c5193da96a1ce893264f7969f6edb34bc2f579bc0447f87386e417adbce",
+      "inventory_index": 558,
+      "kind": "function",
+      "path": "src/idragon/common.py",
+      "signature_hash": "sha256:03d7516c1730f6f95147d7ebd855ace566e32c4f896eab3ff830b5ba6e716413",
+      "symbol": "Version.__init__",
+      "symbol_hash": "sha256:a3def1029c1ebaf97d2c94d1efdc88f0c302c44e0c93d2045c38be0b12a0e983"
+    }
+  ],
+  "fact_sha256": {
+    "dragon-model-energy-model-class.c01-class-supported-versions-topology": "sha256:62b1cb7d44213516784a823cce69a6204e8e265107202c0ab06cc0b0197827a8",
+    "dragon-model-energy-model-class.c02-shared-list-append-visibility-restoration": "sha256:69e12bb56ad9212f0380b92b1c7327f8f9875bd1a8e2e3aa42f6cc88fed04aa4",
+    "dragon-model-energy-model-class.c03-instance-shadow-arbitrary-attribute-subclass-topology": "sha256:e9043277693366f6b7c69a36c46da49b7dcbfcda30a180a0888567192d76bceb"
+  },
+  "resolved_receipts": [
+    {
+      "body_hash": "sha256:e4e5ef56fd12719fe976231c03d867e932eff64870f9c0fd7a5107b7e11538f1",
+      "inventory_index": 816,
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:9706dcab3a90048744a47f3596613b34247cb6cd1eb2903582e2fb2cb6342a2d",
+      "symbol": "EnergyModel.__init__",
+      "symbol_hash": "sha256:1d1dbee8fef8b70b2919c4e46a0ea60efbd748b360d31ff353ea121c72ad97d2"
+    },
+    {
+      "body_hash": "sha256:6bf509a4d5050f54bd748c516ed98b6ae249edf3aaa84a75c4c7bd11b7fbef4b",
+      "inventory_index": 817,
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:576bb4584970582d94ae80ad061612e84dad263321a9e6288b39a92af7cd959f",
+      "symbol": "EnergyModel.add_supply_system",
+      "symbol_hash": "sha256:174532d0aa6b76826dd78f3d7020ba49eeba26494019da3fb361396e31c15a94"
+    },
+    {
+      "body_hash": "sha256:ae71f1c62c76cfdf6890e18c83f3dd2709b9fb72627f690db7dc52b7db719348",
+      "inventory_index": 818,
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:e8822bd4d00ab05c8d049de4b8fedb8917e0b9cd2daa2c2a3f7503b1985b276e",
+      "symbol": "EnergyModel.conditioned_zones",
+      "symbol_hash": "sha256:90ceddf7de437a59950e7081185fefbf1f56354a49662431452f11ac24bc6f24"
+    },
+    {
+      "body_hash": "sha256:e505591e57b64f4f7ff0b6fb18e775ad88048d4eaddb9d8a4f9e5a0afd2c8ab7",
+      "inventory_index": 819,
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:6750822d2a0b36e44dced756c45817742cfc0940e8646be6212eedfe3698d8cf",
+      "symbol": "EnergyModel.create_default_idf",
+      "symbol_hash": "sha256:585b53682bd5dbd4d2081e79eddc2789fa60925baafb5eae26de0541346ac9f4"
+    },
+    {
+      "body_hash": "sha256:9ac965df879ac38614b80c38800b8b7e28f3a584d20be71afac9301eea223c06",
+      "inventory_index": 820,
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+      "symbol": "EnergyModel.surfaces",
+      "symbol_hash": "sha256:9bd40b3fbdc974f1f3a7550b2df6ec8f4c41ce9cb55ecbc07b3f2fce264834c0"
+    },
+    {
+      "body_hash": "sha256:9d1b5a610b485aa782c0c1f39ed57b65d5534e1ba3271f1a325c52a109228189",
+      "inventory_index": 821,
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:9389bd00d5a2180ea9f3cd1aa5695ba492e1665947515c34c31eff01f072bade",
+      "symbol": "EnergyModel.to_idf",
+      "symbol_hash": "sha256:de10251f38f220956e870d8faea1c7a879da9158b369cffc244f7afc6519eb35"
+    },
+    {
+      "body_hash": "sha256:e65c4689f16398a99be21f56cf6c046ee411718b151d637a75abc7e8076249c8",
+      "inventory_index": 822,
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:e8822bd4d00ab05c8d049de4b8fedb8917e0b9cd2daa2c2a3f7503b1985b276e",
+      "symbol": "EnergyModel.unconditioned_zones",
+      "symbol_hash": "sha256:24b8c9a917df6c286d13dfb75c3ca04403b74cf0a70e6056cc933c9ed2822e08"
+    },
+    {
+      "body_hash": "sha256:56cc7c61d049242fa77c1c2457d6d9f5678ca41a41af86ddd2ff93be20ed78b3",
+      "inventory_index": 823,
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:47d2fe431ebc01347b7bef0a612859f9d45131c67b7ee67971757a0694919023",
+      "symbol": "EnergyModel.used_constructions",
+      "symbol_hash": "sha256:b34dd26fdb9af00f053278e77ac3cc85394a646405e8e5e0b5c077342fd1bebd"
+    },
+    {
+      "body_hash": "sha256:bde4ae4c3efe1129e1c3ee19dc273a7e251f770f7173fbc1a3d2b67ec80d0733",
+      "inventory_index": 824,
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:d5bc4e72ec91b9ecdbdd46cd7a50e3da18408ff227d9549c7ae42bf488381844",
+      "symbol": "EnergyModel.used_layers",
+      "symbol_hash": "sha256:e15c8d38a7b918895bf399bc319bbb2caf2810d416cb4c8792fedb5cec3358f0"
+    },
+    {
+      "body_hash": "sha256:5e04e97f3e1161b94743a1377272a037c646df7e0aa07b6a3ce51c3d4b61ae9a",
+      "inventory_index": 825,
+      "kind": "function",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:2417ee894af42b33af27bb335ee1a91c7205d1a2093879c28e6e4178554e4a60",
+      "symbol": "EnergyModel.used_profiles",
+      "symbol_hash": "sha256:b8a8a5f692a0cbeeec4215cbab71e89291a3f96e68d7702853631dc454a695ab"
+    }
+  ],
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.dragon-model-class.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:5a7db40c87570a3ae22c820c5b758ed19b5e8120a7cbf0510d3a88eb7c7f33d9",
+      "kind": "class",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:0e5d2973f067f9c718303cadabe96e5f8ab87d9d83bce8ec4d369a77266db029",
+      "symbol": "EnergyModel",
+      "symbol_hash": "sha256:a7582a410b3e8189778cacda204ee15a6fd3039d6f136f9a9303bb4437fe2170"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:5a7db40c87570a3ae22c820c5b758ed19b5e8120a7cbf0510d3a88eb7c7f33d9",
+      "inventory_index": 815,
+      "kind": "class",
+      "path": "src/idragon/dragon/model.py",
+      "signature_hash": "sha256:0e5d2973f067f9c718303cadabe96e5f8ab87d9d83bce8ec4d369a77266db029",
+      "symbol": "EnergyModel",
+      "symbol_hash": "sha256:a7582a410b3e8189778cacda204ee15a6fd3039d6f136f9a9303bb4437fe2170"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "loaded_local_modules": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "module": "idragon",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "module": "idragon.common",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "module": "idragon.constants",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "module": "idragon.dragon",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "module": "idragon.dragon.construction",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "module": "idragon.dragon.hvac",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "module": "idragon.dragon.model",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "module": "idragon.dragon.profile",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "module": "idragon.dragon.shape",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "module": "idragon.imugi",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "module": "idragon.launcher",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "module": "idragon.utils",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ],
+    "model_source": {
+      "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+      "bytes": 8247,
+      "path": "src/idragon/dragon/model.py",
+      "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+    },
+    "sources": [
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ]
+  }
+}
