@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:9cfcc40b21ffa2fc4f3f78eb78507ce1d44b6f6cad42323f7b5bda98745921f9"
+    "sha256:19b36481e388bac39f7d12693aaacebf4a9ec8cc0fd7d5ddceef40f7e379f9c3"
 )
 
 
@@ -68,9 +68,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 234,
-                "exception": 311,
-                "needs_reverification": 445,
+                "equivalent": 245,
+                "exception": 335,
+                "needs_reverification": 410,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -521,6 +521,103 @@ class SafeScopePolicyTests(unittest.TestCase):
             "model-context-no-mass-construction-idf-emission",
             entries[640].exception_id,
         )
+
+    def test_epsimple_model_core_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        targets = {
+            337: ("ADDR_WEATHER_TABLE", "typed-packaged-weather-database-rather-than-mutable-dataframe-1a4029a1"),
+            338: ("CLIMATE_TABLE", "typed-date-indexed-weather-database-rather-than-mutable-dataframe-fbfb5af8"),
+            339: ("EnergyPlusError", "structured-diagnostics-rather-than-throwing-table-wrapper-3ed10042"),
+            340: ("EnergyPlusError.__init__", "energyplus-failure-and-result-builder-diagnostics-328cf73b"),
+            341: ("GreenRetrofitModel", "immutable-floor-and-catalog-aggregate-rather-than-mutable-zone-list-fb39a800"),
+            342: ("GreenRetrofitModel.__init__", "immutable-defensive-copy-constructor-with-explicit-weather-e8bd64b7"),
+            345: ("GreenRetrofitModel.address", "readonly-address-with-explicit-weather-selection-df358686"),
+            346: ("GreenRetrofitModel.area", None),
+            347: ("GreenRetrofitModel.averaged_exteriorfloor_Uvalue", "nullable-construction-filter-rather-than-singleton-identity-regulation-ef752eff"),
+            348: ("GreenRetrofitModel.averaged_exteriorroof_Uvalue", "nullable-construction-filter-rather-than-singleton-identity-regulation-871c1b93"),
+            349: ("GreenRetrofitModel.averaged_exteriorwall_Uvalue", "nullable-construction-filter-rather-than-singleton-identity-regulation-13f93b86"),
+            350: ("GreenRetrofitModel.averaged_infiltration", None),
+            351: ("GreenRetrofitModel.averaged_lightdensity", "nullable-light-density-excluded-from-weight-denominator-695c215a"),
+            352: ("GreenRetrofitModel.averaged_window_Uvalue", "native-window-projection-also-includes-glass-doors-235f45cc"),
+            353: ("GreenRetrofitModel.climate", None),
+            354: ("GreenRetrofitModel.exteriorfloors", None),
+            355: ("GreenRetrofitModel.exteriorroofs", None),
+            356: ("GreenRetrofitModel.exteriorwalls", None),
+            357: ("GreenRetrofitModel.exteriorwindows", "native-window-projection-also-includes-glass-doors-d363d717"),
+            359: ("GreenRetrofitModel.from_grjson", None),
+            360: ("GreenRetrofitModel.get_unique_fenestration_constructions", "explicit-validated-model-catalog-rather-than-derived-overwrite-map-0963ad71"),
+            361: ("GreenRetrofitModel.get_unique_materials", "explicit-validated-model-catalog-rather-than-derived-overwrite-map-ecb20cb3"),
+            362: ("GreenRetrofitModel.get_unique_profiles", "database-resolved-zone-profiles-rather-than-derived-overwrite-map-13af13a1"),
+            363: ("GreenRetrofitModel.get_unique_surface_constructions", "explicit-validated-model-catalog-rather-than-derived-overwrite-map-a05748b1"),
+            364: ("GreenRetrofitModel.north_axis", None),
+            365: ("GreenRetrofitModel.run", "async-runner-and-result-builder-diagnostic-boundary-bf192ec8"),
+            366: ("GreenRetrofitModel.source_system", "immutable-explicit-catalog-rather-than-computed-plus-unvalidated-merge-b2b62b80"),
+            367: ("GreenRetrofitModel.terrain", None),
+            368: ("GreenRetrofitModel.to_dragon", "nonthrowing-aggregate-conversion-result-with-diagnostics-5e2e21f3"),
+            369: ("GreenRetrofitModel.to_idf", "native-idf-document-conversion-result-with-diagnostics-e8d26d72"),
+            370: ("GreenRetrofitModel.vintage", None),
+            371: ("GreenRetrofitModel.weather", None),
+            372: ("GreenRetrofitModel.weather_filepath", "epw-filename-with-caller-owned-directory-resolution-fa174585"),
+            387: ("InvalidAddressError", "lookup-diagnostic-rather-than-address-exception-aee12b8f"),
+            388: ("address_to_weather", "typed-nonthrowing-weather-selection-result-6e86f546"),
+        }
+        self.assertEqual(35, len(targets))
+        self.assertEqual(24, sum(adaptation is not None for _, adaptation in targets.values()))
+        self.assertEqual(11, sum(adaptation is None for _, adaptation in targets.values()))
+
+        for index, (symbol, adaptation) in targets.items():
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual(
+                ("src/epsimple/core/model.py", symbol),
+                inventory_symbol.key,
+                symbol,
+            )
+            classification = "exception" if adaptation is not None else "equivalent"
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(adaptation, entry.exception_id, symbol)
+            assertion_id = (
+                f"epsimple-model-core-{index}-"
+                f"{inventory_symbol.symbol_hash.removeprefix('sha256:')[:8]}"
+            )
+            expected_evidence = [f"upstream/symbol-evidence.json#{assertion_id}"]
+            if adaptation is not None:
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{adaptation}"
+                )
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, symbol)
+            for exact_binding in (
+                assertion_id,
+                "commit d48f97a",
+                "sha256:e5cfdc9ba823dc891693864051ffb8cbc06cd08137becef9d6c06fd0c2942cf6",
+                "sha256:1d3679ac9c0f3aa9469434235cedb17099bc728ede8a2afd9cb0c0b8af6f9832",
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+
+        excluded = {
+            343: "GreenRetrofitModel.__repr__",
+            344: "GreenRetrofitModel.__str__",
+            358: "GreenRetrofitModel.from_excel",
+        }
+        deferred = {
+            index: self.configuration.inventory.symbols[index].symbol
+            for index in range(373, 387)
+        }
+        self.assertEqual(
+            set(range(337, 389)),
+            set(targets) | set(excluded) | set(deferred),
+        )
+        for index, symbol in excluded.items():
+            entry = entries[index]
+            self.assertEqual(("src/epsimple/core/model.py", symbol), entry.key, symbol)
+            self.assertEqual("out_of_scope", entry.classification, symbol)
+            self.assertIsNone(entry.exception_id, symbol)
+        for index, symbol in deferred.items():
+            entry = entries[index]
+            self.assertEqual(("src/epsimple/core/model.py", symbol), entry.key, symbol)
+            self.assertEqual("needs_reverification", entry.classification, symbol)
+            self.assertIsNone(entry.exception_id, symbol)
+            self.assertEqual(NEEDS_RATIONALE, entry.rationale, symbol)
 
     def test_epsimple_shape_core_promotion_is_exact_and_bounded(self) -> None:
         entries = self.configuration.matrix.entries
