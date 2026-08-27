@@ -240,6 +240,19 @@ oracle, while `CompressorType.__str__` and `Fuel.__str__` remain out of scope,
 closing the exact 74-receipt family partition without executing native or
 EnergyPlus processes.
 
+`python-0.7.0/dragon-hvac-supply-core-oracle.json` pins nine bounded,
+relocatable CPython 3.12.7 cases for 49 exact supply-system target receipts.
+The cases cover AirHandlingUnit, electric radiant floor/radiator, FanCoilUnit,
+PackagedAirConditioner, hydronic radiant floor/radiator, SupplyGroup, and the
+SupplySystem abstraction. They execute constructor state, source combinations,
+heating/cooling capability, naming, availability, concrete IDF-object order,
+validation quirks, deepcopy, and fresh result/projection behavior. Eight
+existing adjacent declarations remain unpromoted and preserve their prior
+out-of-scope/equivalent/exception status, closing the exact 57-receipt family
+partition. Reviewed public InvisibleDragon routes yield 18 equivalents and 31
+conservative exceptions; internal `Generate` methods are not claimed. Three
+existing SupplyGroup/model fixtures are immutable hash-pinned support.
+
 `python-0.7.0/dragon-hvac-supply-group-core-oracle.json` pins 18 ordered
 CPython 3.12.7 observations, three each for the six bounded public
 `SupplyGroup` constructor and container-projection symbols. It records exact
