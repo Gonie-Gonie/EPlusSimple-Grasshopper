@@ -87,6 +87,19 @@ use reviewed immutable, embedded-resource, caller-supplied-resource, package-
 metadata, or compiled-target adaptations. `AUTOID_PREFIX.__repr__` and
 `SpecialTag.__repr__` remain explicitly excluded from this bounded corpus.
 
+`python-0.7.0/epsimple-model-core-oracle.json` pins 11 ordered CPython 3.12.7
+cases for exactly 35 unresolved targets in `epsimple/core/model.py`. It executes
+the weather tables and lookup, EnergyPlusError state, GreenRetrofitModel
+construction and validation, area/exterior projections, six weighted averages
+and zero boundaries, source-system and unique-catalog behavior, full temporary
+GRM graph loading, adjacency, `to_dragon`, `to_idf`, and an instrumented `run`
+success and failure path without starting EnergyPlus. Isolated imports plus a
+byte-identical relocated source copy prove path independence. Eleven targets
+are exact equivalents and 24 are explicit native-route exceptions. The three
+representation/Excel declarations remain out of scope; the 14
+GreenRetrofitResult declarations remain explicitly deferred to their own
+bounded fixture.
+
 `python-0.7.0/epsimple-shape-core-oracle.json` pins 17 ordered CPython
 3.12.7 cases for exactly 53 unresolved targets in
 `epsimple/core/shape.py`. It executes BlindType, Fenestration, Door, GlassDoor,

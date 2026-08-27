@@ -173,6 +173,11 @@
       "sha256": "c4375d858409fae187776ab88ebb6c5a21c76ac7d0e98b38ed2912a419f2bf7f"
     },
     {
+      "path": "epsimple-model-core-oracle.json",
+      "bytes": 102172,
+      "sha256": "e5cfdc9ba823dc891693864051ffb8cbc06cd08137becef9d6c06fd0c2942cf6"
+    },
+    {
       "path": "epsimple-shape-core-oracle.json",
       "bytes": 108435,
       "sha256": "802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5"

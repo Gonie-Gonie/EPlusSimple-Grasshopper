@@ -1,0 +1,2192 @@
+{
+  "case_sha256": {
+    "epsimple-model-core.address-weather-resolution-and-failure": "sha256:ccd017b52eb63068b3c42277715c00604ece54b41435586350b754db6cb8ceed",
+    "epsimple-model-core.area-and-exterior-projections": "sha256:57ddb3d713362d7ff126361acacd97e33bf1742460bb03ff7a86cfaeb480c81f",
+    "epsimple-model-core.dragon-and-idf-conversion": "sha256:8556889dff89e16cab492bbf820498bc13857e9e7e293ed70a5c85cef77d7969",
+    "epsimple-model-core.energyplus-error-formatting": "sha256:940b5460270b4b6c5bba6f31f2c6b7ce2371e1efe75268660bd53ed6dd7bc106",
+    "epsimple-model-core.grjson-full-graph-and-adjacency-allocation": "sha256:209359d9ed17d9da99e5788b05c91dd29260ad1c8c0ed11d972051f6f4b9eb0a",
+    "epsimple-model-core.instrumented-run-success-and-failure": "sha256:178e2c718fe5cbe8951147d8fc16795fed65d4b3a5719ff4975f5e35e9e51c49",
+    "epsimple-model-core.model-constructor-fundamental-properties": "sha256:12e64a711ecfa0734eb3d47e890a696344745fc62e8b7a7bbe951af228d1195f",
+    "epsimple-model-core.source-system-dedup-and-explicit-merge": "sha256:23a3ab2d2234b2199f89ddb9c1d4d8338d6228fb56f23e28828bced7c80e0a38",
+    "epsimple-model-core.unique-catalog-projections": "sha256:1f971ab2878da05a73e6e551d1a02cd2f1d48dc3dfe83d1c61a0c92c9deee066",
+    "epsimple-model-core.weather-table-topology": "sha256:8c4c57200340370423cfba8ffa71ae82c0426242f035c7c2c2ef226cef1e0ad2",
+    "epsimple-model-core.weighted-averages-and-zero-cases": "sha256:6713975ddac523afde1ddc797fc53a08cfbeede94413b70f77f68641a474c331"
+  },
+  "cases": [
+    {
+      "code": "T01",
+      "context_symbols": [],
+      "id": "epsimple-model-core.weather-table-topology",
+      "python": {
+        "facts": {
+          "address_table": {
+            "column_order": [
+              "법정동코드",
+              "terrain",
+              "행정구역위도",
+              "행정구역경도",
+              "기상지역명",
+              "기상지역유형",
+              "기상지역위도",
+              "기상지역경도",
+              "EPW파일명"
+            ],
+            "index_is_unique": true,
+            "index_name": "행정구역명",
+            "shape": [
+              252,
+              9
+            ]
+          },
+          "climate_table": {
+            "column_order": [
+              "20180901",
+              "20010117",
+              "19870721",
+              "19840317",
+              "19000101"
+            ],
+            "columns_are_yyyymmdd": true,
+            "index_equals_address_table": false,
+            "index_is_unique": true,
+            "index_name": "행정구역명",
+            "shape": [
+              252,
+              5
+            ]
+          }
+        },
+        "facts_sha256": "sha256:7c707fa287c1ed8e0acf67f7f6344a34358ec504945dc873c314f74adda922eb",
+        "outcome": "observed"
+      },
+      "subfamily": "weather",
+      "target_symbols": [
+        "ADDR_WEATHER_TABLE",
+        "CLIMATE_TABLE"
+      ]
+    },
+    {
+      "code": "A01",
+      "context_symbols": [
+        "ADDR_WEATHER_TABLE",
+        "CLIMATE_TABLE"
+      ],
+      "id": "epsimple-model-core.address-weather-resolution-and-failure",
+      "python": {
+        "facts": {
+          "address_sha256": "sha256:8b3caf198174ea05b626fa7e56c9b59a23082aad9db5588c2997aa0df53a96dc",
+          "invalid_address": {
+            "message_sha256": "sha256:a113023eb45b21fd414fc8c63eaf1beb721d3a6ba28e2fc7432f56977dbf349d",
+            "outcome": "raised",
+            "type": "InvalidAddressError"
+          },
+          "invalid_error_bases": [
+            "Exception"
+          ],
+          "valid_observations": [
+            {
+              "climate": "중부1",
+              "epw_filename": "KOR_SO_Seoul.WS.471080_TMYx.2009-2023.epw",
+              "path_parent_matches_declared_weather_directory": true,
+              "terrain": "Suburbs",
+              "vintage": "2000-01-01",
+              "weather_location_sha256": "sha256:a7e6563df7cf91b6d8ce9703059455f1cf8f262578803f7714b9dd9661b57802"
+            },
+            {
+              "climate": "중부2",
+              "epw_filename": "KOR_SO_Seoul.WS.471080_TMYx.2009-2023.epw",
+              "path_parent_matches_declared_weather_directory": true,
+              "terrain": "Suburbs",
+              "vintage": "2020-01-01",
+              "weather_location_sha256": "sha256:a7e6563df7cf91b6d8ce9703059455f1cf8f262578803f7714b9dd9661b57802"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:c4a51fa76ebb12f444c38b9226963bd896e061b20ffa6283f4df92afe18e490a",
+        "outcome": "observed"
+      },
+      "subfamily": "weather",
+      "target_symbols": [
+        "InvalidAddressError",
+        "address_to_weather"
+      ]
+    },
+    {
+      "code": "E01",
+      "context_symbols": [],
+      "id": "epsimple-model-core.energyplus-error-formatting",
+      "python": {
+        "facts": {
+          "bases": [
+            "Exception"
+          ],
+          "filtered_args": [
+            "===EnergyPlusError===\nsevere-safe\nfatal-safe"
+          ],
+          "filtered_message": "===EnergyPlusError===\nsevere-safe\nfatal-safe",
+          "missing_args": [
+            "EP ERROR파일조차 생성되지 않음."
+          ],
+          "missing_message": "EP ERROR파일조차 생성되지 않음."
+        },
+        "facts_sha256": "sha256:fb6b2c39f7c7a69ece80c784ff87504299727a6f9e8ac29befb0651c415f3d4d",
+        "outcome": "observed"
+      },
+      "subfamily": "error",
+      "target_symbols": [
+        "EnergyPlusError",
+        "EnergyPlusError.__init__"
+      ]
+    },
+    {
+      "code": "M01",
+      "context_symbols": [
+        "address_to_weather"
+      ],
+      "id": "epsimple-model-core.model-constructor-fundamental-properties",
+      "python": {
+        "facts": {
+          "address_invalid": {
+            "message_sha256": "sha256:a113023eb45b21fd414fc8c63eaf1beb721d3a6ba28e2fc7432f56977dbf349d",
+            "outcome": "raised",
+            "type": "InvalidAddressError"
+          },
+          "address_retained_after_failure": true,
+          "address_sha256": "sha256:8b3caf198174ea05b626fa7e56c9b59a23082aad9db5588c2997aa0df53a96dc",
+          "class_module": "epsimple.core.model",
+          "fundamentals": {
+            "climate_equals_resolution": true,
+            "name": "Model Core Probe",
+            "north_axis": {
+              "kind": "int",
+              "value": "15"
+            },
+            "terrain_equals_resolution": true,
+            "vintage": "2001-02-03",
+            "weather_equals_resolution": true,
+            "weather_file_basename": "KOR_SO_Seoul.WS.471080_TMYx.2009-2023.epw"
+          },
+          "invalid_vintage": {
+            "message_sha256": "sha256:c39641cfc6e37a900a70f7fda0d4488149c1fcf318c43e1a8ca28c86f781bffe",
+            "outcome": "raised",
+            "type": "ValueError"
+          },
+          "mutable_default_alias": {
+            "default_pv_is_instance_list": true,
+            "default_zone_is_instance_list": true,
+            "pv_mutation_visible_in_second": true,
+            "same_pv_list": true,
+            "same_zone_list": true,
+            "zone_mutation_visible_in_second": true
+          },
+          "north_axis_probes": [
+            {
+              "input": {
+                "kind": "int",
+                "value": "0"
+              },
+              "outcome": {
+                "outcome": "returned"
+              },
+              "stored": {
+                "kind": "int",
+                "value": "0"
+              }
+            },
+            {
+              "input": {
+                "hex": "0x1.67ffbe76c8b44p+8",
+                "kind": "float",
+                "repr": "359.999"
+              },
+              "outcome": {
+                "outcome": "returned"
+              },
+              "stored": {
+                "hex": "0x1.67ffbe76c8b44p+8",
+                "kind": "float",
+                "repr": "359.999"
+              }
+            },
+            {
+              "input": {
+                "kind": "int",
+                "value": "360"
+              },
+              "outcome": {
+                "message_sha256": "sha256:e2ab6d86f99d0f88311c20b99383b79a7eaca37385b9a333fc1daafd71f68d8c",
+                "outcome": "raised",
+                "type": "ValueError"
+              },
+              "stored": {
+                "kind": "int",
+                "value": "15"
+              }
+            },
+            {
+              "input": {
+                "kind": "int",
+                "value": "-1"
+              },
+              "outcome": {
+                "message_sha256": "sha256:bf127e33fb6b4bee1672349b46978df2456e0fb69b7ab8ffe3fc00f07e85acb9",
+                "outcome": "raised",
+                "type": "ValueError"
+              },
+              "stored": {
+                "kind": "int",
+                "value": "15"
+              }
+            },
+            {
+              "input": "north",
+              "outcome": {
+                "message_sha256": "sha256:1843866ce2275ec2acfe393c1ed2df964d892af27a3a17e90809d616202cbe9f",
+                "outcome": "raised",
+                "type": "TypeError"
+              },
+              "stored": {
+                "kind": "int",
+                "value": "15"
+              }
+            }
+          ],
+          "vintage_from_list": "2024-05-06"
+        },
+        "facts_sha256": "sha256:d14a7bbabd527f0acd5f1898a17fb0e3c419cbd0cc185006525bddffcb2844d6",
+        "outcome": "observed"
+      },
+      "subfamily": "model",
+      "target_symbols": [
+        "GreenRetrofitModel",
+        "GreenRetrofitModel.__init__",
+        "GreenRetrofitModel.address",
+        "GreenRetrofitModel.climate",
+        "GreenRetrofitModel.north_axis",
+        "GreenRetrofitModel.terrain",
+        "GreenRetrofitModel.vintage",
+        "GreenRetrofitModel.weather",
+        "GreenRetrofitModel.weather_filepath"
+      ]
+    },
+    {
+      "code": "P01",
+      "context_symbols": [],
+      "id": "epsimple-model-core.area-and-exterior-projections",
+      "python": {
+        "facts": {
+          "area": {
+            "hex": "0x1.e000000000000p+5",
+            "kind": "float",
+            "repr": "60.0"
+          },
+          "exterior_floor_ids": [
+            "SURF-F1",
+            "SURF-F2"
+          ],
+          "exterior_roof_ids": [
+            "SURF-R1",
+            "SURF-R2"
+          ],
+          "exterior_wall_ids": [
+            "SURF-W1",
+            "SURF-W2"
+          ],
+          "exterior_window_ids": [
+            "WIN-1"
+          ],
+          "window_projection_runtime_types": [
+            "Window"
+          ]
+        },
+        "facts_sha256": "sha256:ff270cce43b17e56870f654764fa61cfb069867547d0caafcd1013346da10f19",
+        "outcome": "observed"
+      },
+      "subfamily": "projection",
+      "target_symbols": [
+        "GreenRetrofitModel.area",
+        "GreenRetrofitModel.exteriorfloors",
+        "GreenRetrofitModel.exteriorroofs",
+        "GreenRetrofitModel.exteriorwalls",
+        "GreenRetrofitModel.exteriorwindows"
+      ]
+    },
+    {
+      "code": "W01",
+      "context_symbols": [],
+      "id": "epsimple-model-core.weighted-averages-and-zero-cases",
+      "python": {
+        "facts": {
+          "unknown_identity_comparison": {
+            "fresh_constructor_is_same_singleton": true,
+            "source_predicate_for_unknown": true
+          },
+          "weighted": {
+            "averaged_exteriorfloor_Uvalue": {
+              "hex": "0x1.24121bbf29093p-1",
+              "kind": "float",
+              "repr": "0.5704506560182544"
+            },
+            "averaged_exteriorroof_Uvalue": {
+              "hex": "0x1.53f9335603666p+0",
+              "kind": "float",
+              "repr": "1.3280212483399736"
+            },
+            "averaged_exteriorwall_Uvalue": {
+              "hex": "0x1.7ec5ac5c6136ap+0",
+              "kind": "float",
+              "repr": "1.4952037549530481"
+            },
+            "averaged_infiltration": {
+              "hex": "0x1.ccccccccccccdp-1",
+              "kind": "float",
+              "repr": "0.9"
+            },
+            "averaged_lightdensity": {
+              "hex": "0x1.aaaaaaaaaaaabp+2",
+              "kind": "float",
+              "repr": "6.666666666666667"
+            },
+            "averaged_window_Uvalue": {
+              "hex": "0x1.3333333333333p+0",
+              "kind": "float",
+              "repr": "1.2"
+            }
+          },
+          "zero": {
+            "averaged_exteriorfloor_Uvalue": {
+              "kind": "int",
+              "value": "0"
+            },
+            "averaged_exteriorroof_Uvalue": {
+              "kind": "int",
+              "value": "0"
+            },
+            "averaged_exteriorwall_Uvalue": {
+              "kind": "int",
+              "value": "0"
+            },
+            "averaged_infiltration": {
+              "kind": "int",
+              "value": "0"
+            },
+            "averaged_lightdensity": {
+              "kind": "int",
+              "value": "0"
+            },
+            "averaged_window_Uvalue": {
+              "kind": "int",
+              "value": "0"
+            }
+          },
+          "zone_inputs": [
+            {
+              "area": {
+                "hex": "0x1.4000000000000p+5",
+                "kind": "float",
+                "repr": "40.0"
+              },
+              "height": {
+                "hex": "0x1.8000000000000p+1",
+                "kind": "float",
+                "repr": "3.0"
+              },
+              "infiltration": {
+                "hex": "0x1.8000000000000p+0",
+                "kind": "float",
+                "repr": "1.5"
+              },
+              "light_density": {
+                "hex": "0x1.4000000000000p+3",
+                "kind": "float",
+                "repr": "10.0"
+              }
+            },
+            {
+              "area": {
+                "hex": "0x1.4000000000000p+4",
+                "kind": "float",
+                "repr": "20.0"
+              },
+              "height": {
+                "hex": "0x1.0000000000000p+2",
+                "kind": "float",
+                "repr": "4.0"
+              },
+              "infiltration": {
+                "kind": "int",
+                "value": "0"
+              },
+              "light_density": null
+            }
+          ]
+        },
+        "facts_sha256": "sha256:1f4d9e053180a350462b0d2e8b46ba46b2beb0ad75fdd206219f117ac9ba5db8",
+        "outcome": "observed"
+      },
+      "subfamily": "projection",
+      "target_symbols": [
+        "GreenRetrofitModel.averaged_exteriorfloor_Uvalue",
+        "GreenRetrofitModel.averaged_exteriorroof_Uvalue",
+        "GreenRetrofitModel.averaged_exteriorwall_Uvalue",
+        "GreenRetrofitModel.averaged_infiltration",
+        "GreenRetrofitModel.averaged_lightdensity",
+        "GreenRetrofitModel.averaged_window_Uvalue"
+      ]
+    },
+    {
+      "code": "S01",
+      "context_symbols": [],
+      "id": "epsimple-model-core.source-system-dedup-and-explicit-merge",
+      "python": {
+        "facts": {
+          "computed_first_source_is_overwritten": true,
+          "computed_ids_after_last-write-dedup": [
+            "SRC-A",
+            "SRC-A",
+            "SRC-B"
+          ],
+          "explicit_invalid_item_preserved": true,
+          "explicit_source_duplicates_computed_source": true,
+          "iterable_validation_short_circuited": true,
+          "non_iterable_assignment": {
+            "message_sha256": "sha256:e12a0268458541f9b368f6c21d01d5cbc6e1d26137daa25a5cca8798aae54455",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "none_source_excluded": true
+        },
+        "facts_sha256": "sha256:7f03eb6c6ea5fd9f5e093cea126f9983d5bf929f9e3ffc6d30e6c96b9222afae",
+        "outcome": "observed"
+      },
+      "subfamily": "model",
+      "target_symbols": [
+        "GreenRetrofitModel.source_system"
+      ]
+    },
+    {
+      "code": "U01",
+      "context_symbols": [],
+      "id": "epsimple-model-core.unique-catalog-projections",
+      "python": {
+        "facts": {
+          "fenestration_construction_ids": [
+            "CON-WIN"
+          ],
+          "material_ids": [
+            "MAT-A",
+            "MAT-B"
+          ],
+          "profile_ids": [
+            "PROFILE-A",
+            "PROFILE-B"
+          ],
+          "surface_construction_ids": [
+            "CON-WALL-A",
+            "CON-WALL-B",
+            "CON-ROOF",
+            "CON-FLOOR"
+          ]
+        },
+        "facts_sha256": "sha256:61a5d1b8914d16b779f3e56c34666624d370d308e66e3df17c5b15dc63e3ef50",
+        "outcome": "observed"
+      },
+      "subfamily": "projection",
+      "target_symbols": [
+        "GreenRetrofitModel.get_unique_fenestration_constructions",
+        "GreenRetrofitModel.get_unique_materials",
+        "GreenRetrofitModel.get_unique_profiles",
+        "GreenRetrofitModel.get_unique_surface_constructions"
+      ]
+    },
+    {
+      "code": "J01",
+      "context_symbols": [],
+      "id": "epsimple-model-core.grjson-full-graph-and-adjacency-allocation",
+      "python": {
+        "facts": {
+          "adjacent_object_allocated": true,
+          "adjacent_zone_id": "ZONE-ADJ",
+          "area": {
+            "hex": "0x1.e000000000000p+5",
+            "kind": "float",
+            "repr": "60.0"
+          },
+          "fenestration_count": 2,
+          "material_count": 6,
+          "photovoltaic_count": 0,
+          "source_system_ids": [
+            "SRC-UNUSED",
+            "SRCE-0x000000",
+            "SRCE-0x000001"
+          ],
+          "surface_count": 8,
+          "unused_source_preserved": true,
+          "zone_ids": [
+            "ZONE-0x000000",
+            "ZONE-ADJ"
+          ]
+        },
+        "facts_sha256": "sha256:646a852bcceca7aad45be6df9be0b77bbe531b4630c29e37dae4f2f8a90579cd",
+        "outcome": "observed"
+      },
+      "subfamily": "serialization",
+      "target_symbols": [
+        "GreenRetrofitModel.from_grjson"
+      ]
+    },
+    {
+      "code": "C01",
+      "context_symbols": [],
+      "id": "epsimple-model-core.dragon-and-idf-conversion",
+      "python": {
+        "facts": {
+          "dragon": {
+            "conditioned_zone_count": 1,
+            "north_axis": {
+              "kind": "int",
+              "value": "0"
+            },
+            "photovoltaic_count": 0,
+            "runtime_type": "idragon.dragon.model.EnergyModel",
+            "terrain": "Suburbs",
+            "zone_count": 1
+          },
+          "idf": {
+            "first_object_classes": [
+              "Version",
+              "SimulationControl",
+              "PerformancePrecisionTradeoffs",
+              "Building",
+              "ShadowCalculation",
+              "SurfaceConvectionAlgorithm:Inside",
+              "SurfaceConvectionAlgorithm:Outside",
+              "HeatBalanceAlgorithm"
+            ],
+            "nonempty_object_class_count": 62,
+            "object_class_count": 136,
+            "object_count": 136,
+            "runtime_type": "idragon.imugi.IDF",
+            "version": [
+              24,
+              2,
+              0
+            ]
+          }
+        },
+        "facts_sha256": "sha256:07dded0daf3cf65f6d36031921359823ea75e209e6924df6b0460feea5fe29f4",
+        "outcome": "observed"
+      },
+      "subfamily": "conversion",
+      "target_symbols": [
+        "GreenRetrofitModel.to_dragon",
+        "GreenRetrofitModel.to_idf"
+      ]
+    },
+    {
+      "code": "R01",
+      "context_symbols": [
+        "EnergyPlusError"
+      ],
+      "id": "epsimple-model-core.instrumented-run-success-and-failure",
+      "python": {
+        "facts": {
+          "energyplus_process_started": false,
+          "failure": {
+            "message_sha256": "sha256:ec7e5480892e022ce18d49d0559c43115f4e76e3c8e94b1ac5d5c5ee99bf1103",
+            "outcome": "raised",
+            "type": "EnergyPlusError"
+          },
+          "failure_calls": [
+            "KOR_SO_Seoul.WS.471080_TMYx.2009-2023.epw"
+          ],
+          "success": {
+            "model_identity_retained": true,
+            "result_identity_retained": true,
+            "runtime_type": "GreenRetrofitResult",
+            "weather_calls": [
+              "KOR_SO_Seoul.WS.471080_TMYx.2009-2023.epw"
+            ]
+          }
+        },
+        "facts_sha256": "sha256:404d9f442aa7385107127a5309d372a57c52d6a8d7fb0ee39ee51c1b7f7606e1",
+        "outcome": "observed"
+      },
+      "subfamily": "runtime",
+      "target_symbols": [
+        "GreenRetrofitModel.run"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:1f7ed658cc9dc6908c0c3bbb31fe4f61927bfbe8881e62af6d04cc66072f8fa1",
+  "consumer_contract": {
+    "adaptations": {
+      "ADDR_WEATHER_TABLE": "typed-packaged-weather-database-rather-than-mutable-dataframe-1a4029a1",
+      "CLIMATE_TABLE": "typed-date-indexed-weather-database-rather-than-mutable-dataframe-fbfb5af8",
+      "EnergyPlusError": "structured-diagnostics-rather-than-throwing-table-wrapper-3ed10042",
+      "EnergyPlusError.__init__": "energyplus-failure-and-result-builder-diagnostics-328cf73b",
+      "GreenRetrofitModel": "immutable-floor-and-catalog-aggregate-rather-than-mutable-zone-list-fb39a800",
+      "GreenRetrofitModel.__init__": "immutable-defensive-copy-constructor-with-explicit-weather-e8bd64b7",
+      "GreenRetrofitModel.address": "readonly-address-with-explicit-weather-selection-df358686",
+      "GreenRetrofitModel.averaged_exteriorfloor_Uvalue": "nullable-construction-filter-rather-than-singleton-identity-regulation-ef752eff",
+      "GreenRetrofitModel.averaged_exteriorroof_Uvalue": "nullable-construction-filter-rather-than-singleton-identity-regulation-871c1b93",
+      "GreenRetrofitModel.averaged_exteriorwall_Uvalue": "nullable-construction-filter-rather-than-singleton-identity-regulation-13f93b86",
+      "GreenRetrofitModel.averaged_lightdensity": "nullable-light-density-excluded-from-weight-denominator-695c215a",
+      "GreenRetrofitModel.averaged_window_Uvalue": "native-window-projection-also-includes-glass-doors-235f45cc",
+      "GreenRetrofitModel.exteriorwindows": "native-window-projection-also-includes-glass-doors-d363d717",
+      "GreenRetrofitModel.get_unique_fenestration_constructions": "explicit-validated-model-catalog-rather-than-derived-overwrite-map-0963ad71",
+      "GreenRetrofitModel.get_unique_materials": "explicit-validated-model-catalog-rather-than-derived-overwrite-map-ecb20cb3",
+      "GreenRetrofitModel.get_unique_profiles": "database-resolved-zone-profiles-rather-than-derived-overwrite-map-13af13a1",
+      "GreenRetrofitModel.get_unique_surface_constructions": "explicit-validated-model-catalog-rather-than-derived-overwrite-map-a05748b1",
+      "GreenRetrofitModel.run": "async-runner-and-result-builder-diagnostic-boundary-bf192ec8",
+      "GreenRetrofitModel.source_system": "immutable-explicit-catalog-rather-than-computed-plus-unvalidated-merge-b2b62b80",
+      "GreenRetrofitModel.to_dragon": "nonthrowing-aggregate-conversion-result-with-diagnostics-5e2e21f3",
+      "GreenRetrofitModel.to_idf": "native-idf-document-conversion-result-with-diagnostics-e8d26d72",
+      "GreenRetrofitModel.weather_filepath": "epw-filename-with-caller-owned-directory-resolution-fa174585",
+      "InvalidAddressError": "lookup-diagnostic-rather-than-address-exception-aee12b8f",
+      "address_to_weather": "typed-nonthrowing-weather-selection-result-6e86f546"
+    },
+    "assertion_ids": {
+      "ADDR_WEATHER_TABLE": "epsimple-model-core-337-1a4029a1",
+      "CLIMATE_TABLE": "epsimple-model-core-338-fbfb5af8",
+      "EnergyPlusError": "epsimple-model-core-339-3ed10042",
+      "EnergyPlusError.__init__": "epsimple-model-core-340-328cf73b",
+      "GreenRetrofitModel": "epsimple-model-core-341-fb39a800",
+      "GreenRetrofitModel.__init__": "epsimple-model-core-342-e8bd64b7",
+      "GreenRetrofitModel.address": "epsimple-model-core-345-df358686",
+      "GreenRetrofitModel.area": "epsimple-model-core-346-bf31ed3c",
+      "GreenRetrofitModel.averaged_exteriorfloor_Uvalue": "epsimple-model-core-347-ef752eff",
+      "GreenRetrofitModel.averaged_exteriorroof_Uvalue": "epsimple-model-core-348-871c1b93",
+      "GreenRetrofitModel.averaged_exteriorwall_Uvalue": "epsimple-model-core-349-13f93b86",
+      "GreenRetrofitModel.averaged_infiltration": "epsimple-model-core-350-4046cce9",
+      "GreenRetrofitModel.averaged_lightdensity": "epsimple-model-core-351-695c215a",
+      "GreenRetrofitModel.averaged_window_Uvalue": "epsimple-model-core-352-235f45cc",
+      "GreenRetrofitModel.climate": "epsimple-model-core-353-27c207a5",
+      "GreenRetrofitModel.exteriorfloors": "epsimple-model-core-354-61333306",
+      "GreenRetrofitModel.exteriorroofs": "epsimple-model-core-355-9ba0cb63",
+      "GreenRetrofitModel.exteriorwalls": "epsimple-model-core-356-428acddc",
+      "GreenRetrofitModel.exteriorwindows": "epsimple-model-core-357-d363d717",
+      "GreenRetrofitModel.from_grjson": "epsimple-model-core-359-696d04c3",
+      "GreenRetrofitModel.get_unique_fenestration_constructions": "epsimple-model-core-360-0963ad71",
+      "GreenRetrofitModel.get_unique_materials": "epsimple-model-core-361-ecb20cb3",
+      "GreenRetrofitModel.get_unique_profiles": "epsimple-model-core-362-13af13a1",
+      "GreenRetrofitModel.get_unique_surface_constructions": "epsimple-model-core-363-a05748b1",
+      "GreenRetrofitModel.north_axis": "epsimple-model-core-364-fc0d665a",
+      "GreenRetrofitModel.run": "epsimple-model-core-365-bf192ec8",
+      "GreenRetrofitModel.source_system": "epsimple-model-core-366-b2b62b80",
+      "GreenRetrofitModel.terrain": "epsimple-model-core-367-152775fe",
+      "GreenRetrofitModel.to_dragon": "epsimple-model-core-368-5e2e21f3",
+      "GreenRetrofitModel.to_idf": "epsimple-model-core-369-e8d26d72",
+      "GreenRetrofitModel.vintage": "epsimple-model-core-370-e739b9d6",
+      "GreenRetrofitModel.weather": "epsimple-model-core-371-acd72fe8",
+      "GreenRetrofitModel.weather_filepath": "epsimple-model-core-372-fa174585",
+      "InvalidAddressError": "epsimple-model-core-387-aee12b8f",
+      "address_to_weather": "epsimple-model-core-388-6e86f546"
+    },
+    "case_count": 11,
+    "case_ids": [
+      "epsimple-model-core.weather-table-topology",
+      "epsimple-model-core.address-weather-resolution-and-failure",
+      "epsimple-model-core.energyplus-error-formatting",
+      "epsimple-model-core.model-constructor-fundamental-properties",
+      "epsimple-model-core.area-and-exterior-projections",
+      "epsimple-model-core.weighted-averages-and-zero-cases",
+      "epsimple-model-core.source-system-dedup-and-explicit-merge",
+      "epsimple-model-core.unique-catalog-projections",
+      "epsimple-model-core.grjson-full-graph-and-adjacency-allocation",
+      "epsimple-model-core.dragon-and-idf-conversion",
+      "epsimple-model-core.instrumented-run-success-and-failure"
+    ],
+    "classifications": {
+      "ADDR_WEATHER_TABLE": "exception",
+      "CLIMATE_TABLE": "exception",
+      "EnergyPlusError": "exception",
+      "EnergyPlusError.__init__": "exception",
+      "GreenRetrofitModel": "exception",
+      "GreenRetrofitModel.__init__": "exception",
+      "GreenRetrofitModel.address": "exception",
+      "GreenRetrofitModel.area": "equivalent",
+      "GreenRetrofitModel.averaged_exteriorfloor_Uvalue": "exception",
+      "GreenRetrofitModel.averaged_exteriorroof_Uvalue": "exception",
+      "GreenRetrofitModel.averaged_exteriorwall_Uvalue": "exception",
+      "GreenRetrofitModel.averaged_infiltration": "equivalent",
+      "GreenRetrofitModel.averaged_lightdensity": "exception",
+      "GreenRetrofitModel.averaged_window_Uvalue": "exception",
+      "GreenRetrofitModel.climate": "equivalent",
+      "GreenRetrofitModel.exteriorfloors": "equivalent",
+      "GreenRetrofitModel.exteriorroofs": "equivalent",
+      "GreenRetrofitModel.exteriorwalls": "equivalent",
+      "GreenRetrofitModel.exteriorwindows": "exception",
+      "GreenRetrofitModel.from_grjson": "equivalent",
+      "GreenRetrofitModel.get_unique_fenestration_constructions": "exception",
+      "GreenRetrofitModel.get_unique_materials": "exception",
+      "GreenRetrofitModel.get_unique_profiles": "exception",
+      "GreenRetrofitModel.get_unique_surface_constructions": "exception",
+      "GreenRetrofitModel.north_axis": "equivalent",
+      "GreenRetrofitModel.run": "exception",
+      "GreenRetrofitModel.source_system": "exception",
+      "GreenRetrofitModel.terrain": "equivalent",
+      "GreenRetrofitModel.to_dragon": "exception",
+      "GreenRetrofitModel.to_idf": "exception",
+      "GreenRetrofitModel.vintage": "equivalent",
+      "GreenRetrofitModel.weather": "equivalent",
+      "GreenRetrofitModel.weather_filepath": "exception",
+      "InvalidAddressError": "exception",
+      "address_to_weather": "exception"
+    },
+    "closure": {
+      "deferred_greenretrofitresult_count": 14,
+      "exact_one_case_target_partition": true,
+      "full_source_partition": true,
+      "out_of_scope_exclusion_count": 3,
+      "source_declaration_count": 52,
+      "target_count": 35
+    },
+    "evidence_contract": {
+      "active_energyplus_process_claim": false,
+      "expected_receipt_count": 35,
+      "full_grm_graph_claim": true,
+      "full_idf_semantic_parity_claim": false,
+      "python_behavior_oracle_only": true,
+      "run_boundary_instrumented": true
+    },
+    "expectations": {
+      "ADDR_WEATHER_TABLE": {
+        "adaptation": "typed-packaged-weather-database-rather-than-mutable-dataframe-1a4029a1",
+        "assertion_id": "epsimple-model-core-337-1a4029a1",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection"
+      },
+      "CLIMATE_TABLE": {
+        "adaptation": "typed-date-indexed-weather-database-rather-than-mutable-dataframe-fbfb5af8",
+        "assertion_id": "epsimple-model-core-338-fbfb5af8",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection"
+      },
+      "EnergyPlusError": {
+        "adaptation": "structured-diagnostics-rather-than-throwing-table-wrapper-3ed10042",
+        "assertion_id": "epsimple-model-core-339-3ed10042",
+        "classification": "exception",
+        "native_route": "GonieGonie.EnergyPlus.Runtime.EnergyPlusFailure and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
+      },
+      "EnergyPlusError.__init__": {
+        "adaptation": "energyplus-failure-and-result-builder-diagnostics-328cf73b",
+        "assertion_id": "epsimple-model-core-340-328cf73b",
+        "classification": "exception",
+        "native_route": "GonieGonie.EnergyPlus.Runtime.EnergyPlusFailure and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
+      },
+      "GreenRetrofitModel": {
+        "adaptation": "immutable-floor-and-catalog-aggregate-rather-than-mutable-zone-list-fb39a800",
+        "assertion_id": "epsimple-model-core-341-fb39a800",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel constructor"
+      },
+      "GreenRetrofitModel.__init__": {
+        "adaptation": "immutable-defensive-copy-constructor-with-explicit-weather-e8bd64b7",
+        "assertion_id": "epsimple-model-core-342-e8bd64b7",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel constructor"
+      },
+      "GreenRetrofitModel.address": {
+        "adaptation": "readonly-address-with-explicit-weather-selection-df358686",
+        "assertion_id": "epsimple-model-core-345-df358686",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Address"
+      },
+      "GreenRetrofitModel.area": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-model-core-346-bf31ed3c",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Area"
+      },
+      "GreenRetrofitModel.averaged_exteriorfloor_Uvalue": {
+        "adaptation": "nullable-construction-filter-rather-than-singleton-identity-regulation-ef752eff",
+        "assertion_id": "epsimple-model-core-347-ef752eff",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorFloorUValue"
+      },
+      "GreenRetrofitModel.averaged_exteriorroof_Uvalue": {
+        "adaptation": "nullable-construction-filter-rather-than-singleton-identity-regulation-871c1b93",
+        "assertion_id": "epsimple-model-core-348-871c1b93",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorRoofUValue"
+      },
+      "GreenRetrofitModel.averaged_exteriorwall_Uvalue": {
+        "adaptation": "nullable-construction-filter-rather-than-singleton-identity-regulation-13f93b86",
+        "assertion_id": "epsimple-model-core-349-13f93b86",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorWallUValue"
+      },
+      "GreenRetrofitModel.averaged_infiltration": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-model-core-350-4046cce9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageInfiltration"
+      },
+      "GreenRetrofitModel.averaged_lightdensity": {
+        "adaptation": "nullable-light-density-excluded-from-weight-denominator-695c215a",
+        "assertion_id": "epsimple-model-core-351-695c215a",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageLightDensity"
+      },
+      "GreenRetrofitModel.averaged_window_Uvalue": {
+        "adaptation": "native-window-projection-also-includes-glass-doors-235f45cc",
+        "assertion_id": "epsimple-model-core-352-235f45cc",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageWindowUValue"
+      },
+      "GreenRetrofitModel.climate": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-model-core-353-27c207a5",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.ClimateRegion"
+      },
+      "GreenRetrofitModel.exteriorfloors": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-model-core-354-61333306",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorFloors"
+      },
+      "GreenRetrofitModel.exteriorroofs": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-model-core-355-9ba0cb63",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorRoofs"
+      },
+      "GreenRetrofitModel.exteriorwalls": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-model-core-356-428acddc",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorWalls"
+      },
+      "GreenRetrofitModel.exteriorwindows": {
+        "adaptation": "native-window-projection-also-includes-glass-doors-d363d717",
+        "assertion_id": "epsimple-model-core-357-d363d717",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorWindows"
+      },
+      "GreenRetrofitModel.from_grjson": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-model-core-359-696d04c3",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.ReadFile(string, SimpleDragonDatabase?)"
+      },
+      "GreenRetrofitModel.get_unique_fenestration_constructions": {
+        "adaptation": "explicit-validated-model-catalog-rather-than-derived-overwrite-map-0963ad71",
+        "assertion_id": "epsimple-model-core-360-0963ad71",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions"
+      },
+      "GreenRetrofitModel.get_unique_materials": {
+        "adaptation": "explicit-validated-model-catalog-rather-than-derived-overwrite-map-ecb20cb3",
+        "assertion_id": "epsimple-model-core-361-ecb20cb3",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Materials"
+      },
+      "GreenRetrofitModel.get_unique_profiles": {
+        "adaptation": "database-resolved-zone-profiles-rather-than-derived-overwrite-map-13af13a1",
+        "assertion_id": "epsimple-model-core-362-13af13a1",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Zones with SimpleDragonDatabase.Profiles"
+      },
+      "GreenRetrofitModel.get_unique_surface_constructions": {
+        "adaptation": "explicit-validated-model-catalog-rather-than-derived-overwrite-map-a05748b1",
+        "assertion_id": "epsimple-model-core-363-a05748b1",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.SurfaceConstructions"
+      },
+      "GreenRetrofitModel.north_axis": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-model-core-364-fc0d665a",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.NorthAxis"
+      },
+      "GreenRetrofitModel.run": {
+        "adaptation": "async-runner-and-result-builder-diagnostic-boundary-bf192ec8",
+        "assertion_id": "epsimple-model-core-365-bf192ec8",
+        "classification": "exception",
+        "native_route": "GonieGonie.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync(EnergyPlusRunRequest, CancellationToken) and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
+      },
+      "GreenRetrofitModel.source_system": {
+        "adaptation": "immutable-explicit-catalog-rather-than-computed-plus-unvalidated-merge-b2b62b80",
+        "assertion_id": "epsimple-model-core-366-b2b62b80",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.SourceSystems and GonieGonie.SimpleDragon.GreenRetrofitModel.SupplySystems"
+      },
+      "GreenRetrofitModel.terrain": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-model-core-367-152775fe",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.Terrain"
+      },
+      "GreenRetrofitModel.to_dragon": {
+        "adaptation": "nonthrowing-aggregate-conversion-result-with-diagnostics-5e2e21f3",
+        "assertion_id": "epsimple-model-core-368-5e2e21f3",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "GreenRetrofitModel.to_idf": {
+        "adaptation": "native-idf-document-conversion-result-with-diagnostics-e8d26d72",
+        "assertion_id": "epsimple-model-core-369-e8d26d72",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.ToIdfDocument(GreenRetrofitModel, GreenRetrofitConversionOptions?, IddSchema?, EnergyModelIdfOptions?)"
+      },
+      "GreenRetrofitModel.vintage": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-model-core-370-e739b9d6",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Vintage"
+      },
+      "GreenRetrofitModel.weather": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-model-core-371-acd72fe8",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.WeatherLocation"
+      },
+      "GreenRetrofitModel.weather_filepath": {
+        "adaptation": "epw-filename-with-caller-owned-directory-resolution-fa174585",
+        "assertion_id": "epsimple-model-core-372-fa174585",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.WeatherSelection.EpwFileName and ResolveEpwPath(string)"
+      },
+      "InvalidAddressError": {
+        "adaptation": "lookup-diagnostic-rather-than-address-exception-aee12b8f",
+        "assertion_id": "epsimple-model-core-387-aee12b8f",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection"
+      },
+      "address_to_weather": {
+        "adaptation": "typed-nonthrowing-weather-selection-result-6e86f546",
+        "assertion_id": "epsimple-model-core-388-6e86f546",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection"
+      }
+    },
+    "native_routes": {
+      "ADDR_WEATHER_TABLE": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection",
+      "CLIMATE_TABLE": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection",
+      "EnergyPlusError": "GonieGonie.EnergyPlus.Runtime.EnergyPlusFailure and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)",
+      "EnergyPlusError.__init__": "GonieGonie.EnergyPlus.Runtime.EnergyPlusFailure and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)",
+      "GreenRetrofitModel": "GonieGonie.SimpleDragon.GreenRetrofitModel constructor",
+      "GreenRetrofitModel.__init__": "GonieGonie.SimpleDragon.GreenRetrofitModel constructor",
+      "GreenRetrofitModel.address": "GonieGonie.SimpleDragon.GreenRetrofitModel.Address",
+      "GreenRetrofitModel.area": "GonieGonie.SimpleDragon.GreenRetrofitModel.Area",
+      "GreenRetrofitModel.averaged_exteriorfloor_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorFloorUValue",
+      "GreenRetrofitModel.averaged_exteriorroof_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorRoofUValue",
+      "GreenRetrofitModel.averaged_exteriorwall_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorWallUValue",
+      "GreenRetrofitModel.averaged_infiltration": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageInfiltration",
+      "GreenRetrofitModel.averaged_lightdensity": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageLightDensity",
+      "GreenRetrofitModel.averaged_window_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageWindowUValue",
+      "GreenRetrofitModel.climate": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.ClimateRegion",
+      "GreenRetrofitModel.exteriorfloors": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorFloors",
+      "GreenRetrofitModel.exteriorroofs": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorRoofs",
+      "GreenRetrofitModel.exteriorwalls": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorWalls",
+      "GreenRetrofitModel.exteriorwindows": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorWindows",
+      "GreenRetrofitModel.from_grjson": "GonieGonie.SimpleDragon.GrmReader.ReadFile(string, SimpleDragonDatabase?)",
+      "GreenRetrofitModel.get_unique_fenestration_constructions": "GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions",
+      "GreenRetrofitModel.get_unique_materials": "GonieGonie.SimpleDragon.GreenRetrofitModel.Materials",
+      "GreenRetrofitModel.get_unique_profiles": "GonieGonie.SimpleDragon.GreenRetrofitModel.Zones with SimpleDragonDatabase.Profiles",
+      "GreenRetrofitModel.get_unique_surface_constructions": "GonieGonie.SimpleDragon.GreenRetrofitModel.SurfaceConstructions",
+      "GreenRetrofitModel.north_axis": "GonieGonie.SimpleDragon.GreenRetrofitModel.NorthAxis",
+      "GreenRetrofitModel.run": "GonieGonie.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync(EnergyPlusRunRequest, CancellationToken) and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)",
+      "GreenRetrofitModel.source_system": "GonieGonie.SimpleDragon.GreenRetrofitModel.SourceSystems and GonieGonie.SimpleDragon.GreenRetrofitModel.SupplySystems",
+      "GreenRetrofitModel.terrain": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.Terrain",
+      "GreenRetrofitModel.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "GreenRetrofitModel.to_idf": "GonieGonie.SimpleDragon.GreenRetrofitConverter.ToIdfDocument(GreenRetrofitModel, GreenRetrofitConversionOptions?, IddSchema?, EnergyModelIdfOptions?)",
+      "GreenRetrofitModel.vintage": "GonieGonie.SimpleDragon.GreenRetrofitModel.Vintage",
+      "GreenRetrofitModel.weather": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.WeatherLocation",
+      "GreenRetrofitModel.weather_filepath": "GonieGonie.SimpleDragon.WeatherSelection.EpwFileName and ResolveEpwPath(string)",
+      "InvalidAddressError": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection",
+      "address_to_weather": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection"
+    },
+    "runtime_names": "pinned-python-only-no-native-type-name-claims",
+    "runtime_signatures": {
+      "ADDR_WEATHER_TABLE": {
+        "shape": [
+          252,
+          9
+        ],
+        "type": "pandas.core.frame.DataFrame"
+      },
+      "CLIMATE_TABLE": {
+        "shape": [
+          252,
+          5
+        ],
+        "type": "pandas.core.frame.DataFrame"
+      },
+      "EnergyPlusError": {
+        "signature": "(err: 'pd.DataFrame')",
+        "type": "type"
+      },
+      "EnergyPlusError.__init__": {
+        "signature": "(self, err: 'pd.DataFrame')",
+        "type": "function"
+      },
+      "GreenRetrofitModel": {
+        "signature": "(name: 'str', address: 'str', vintage: 'list[int] | datetime', is_multifamily_housing: 'bool', north_axis: 'int | float', zone: 'list[Zone]' = [], pv: 'list[PhotoVoltaicSystem]' = []) -> 'None'",
+        "type": "type"
+      },
+      "GreenRetrofitModel.__init__": {
+        "signature": "(self, name: 'str', address: 'str', vintage: 'list[int] | datetime', is_multifamily_housing: 'bool', north_axis: 'int | float', zone: 'list[Zone]' = [], pv: 'list[PhotoVoltaicSystem]' = []) -> 'None'",
+        "type": "function"
+      },
+      "GreenRetrofitModel.address": {
+        "getter": "(self) -> 'str'",
+        "setter": "(self, value: 'str') -> 'None'",
+        "type": "property"
+      },
+      "GreenRetrofitModel.area": {
+        "getter": "(self) -> 'float'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.averaged_exteriorfloor_Uvalue": {
+        "getter": "(self) -> 'float'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.averaged_exteriorroof_Uvalue": {
+        "getter": "(self) -> 'float'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.averaged_exteriorwall_Uvalue": {
+        "getter": "(self) -> 'float'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.averaged_infiltration": {
+        "getter": "(self) -> 'float'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.averaged_lightdensity": {
+        "getter": "(self) -> 'float'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.averaged_window_Uvalue": {
+        "getter": "(self) -> 'float'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.climate": {
+        "getter": "(self) -> 'str'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.exteriorfloors": {
+        "getter": "(self) -> 'list[Surface]'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.exteriorroofs": {
+        "getter": "(self) -> 'list[Surface]'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.exteriorwalls": {
+        "getter": "(self) -> 'list[Surface]'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.exteriorwindows": {
+        "getter": "(self) -> 'list[Window]'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.from_grjson": {
+        "shape": null,
+        "type": "builtins.classmethod"
+      },
+      "GreenRetrofitModel.get_unique_fenestration_constructions": {
+        "signature": "(self) -> 'dict[str, FenestrationConstruction]'",
+        "type": "function"
+      },
+      "GreenRetrofitModel.get_unique_materials": {
+        "signature": "(self) -> 'dict[str, Material]'",
+        "type": "function"
+      },
+      "GreenRetrofitModel.get_unique_profiles": {
+        "signature": "(self) -> 'dict[str, Profile]'",
+        "type": "function"
+      },
+      "GreenRetrofitModel.get_unique_surface_constructions": {
+        "signature": "(self) -> 'dict[str, SurfaceConstruction]'",
+        "type": "function"
+      },
+      "GreenRetrofitModel.north_axis": {
+        "getter": "(self) -> 'int | float'",
+        "setter": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "GreenRetrofitModel.run": {
+        "signature": "(self) -> 'idragon.EnergyPlusResult'",
+        "type": "function"
+      },
+      "GreenRetrofitModel.source_system": {
+        "getter": "(self) -> 'list[SourceSystem]'",
+        "setter": "(self, value: 'list[SourceSystem]')",
+        "type": "property"
+      },
+      "GreenRetrofitModel.terrain": {
+        "getter": "(self) -> 'str'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.to_dragon": {
+        "signature": "(self)",
+        "type": "function"
+      },
+      "GreenRetrofitModel.to_idf": {
+        "signature": "(self)",
+        "type": "function"
+      },
+      "GreenRetrofitModel.vintage": {
+        "getter": "(self) -> 'datetime'",
+        "setter": "(self, value: 'datetime | list[int]') -> 'None'",
+        "type": "property"
+      },
+      "GreenRetrofitModel.weather": {
+        "getter": "(self) -> 'str'",
+        "setter": null,
+        "type": "property"
+      },
+      "GreenRetrofitModel.weather_filepath": {
+        "getter": "(self) -> 'str'",
+        "setter": null,
+        "type": "property"
+      },
+      "InvalidAddressError": {
+        "signature": "unavailable",
+        "type": "type"
+      },
+      "address_to_weather": {
+        "signature": "(address: 'str', vintage: 'datetime') -> 'tuple[str, str, str]'",
+        "type": "function"
+      }
+    },
+    "target_symbols": [
+      "ADDR_WEATHER_TABLE",
+      "CLIMATE_TABLE",
+      "EnergyPlusError",
+      "EnergyPlusError.__init__",
+      "GreenRetrofitModel",
+      "GreenRetrofitModel.__init__",
+      "GreenRetrofitModel.address",
+      "GreenRetrofitModel.area",
+      "GreenRetrofitModel.averaged_exteriorfloor_Uvalue",
+      "GreenRetrofitModel.averaged_exteriorroof_Uvalue",
+      "GreenRetrofitModel.averaged_exteriorwall_Uvalue",
+      "GreenRetrofitModel.averaged_infiltration",
+      "GreenRetrofitModel.averaged_lightdensity",
+      "GreenRetrofitModel.averaged_window_Uvalue",
+      "GreenRetrofitModel.climate",
+      "GreenRetrofitModel.exteriorfloors",
+      "GreenRetrofitModel.exteriorroofs",
+      "GreenRetrofitModel.exteriorwalls",
+      "GreenRetrofitModel.exteriorwindows",
+      "GreenRetrofitModel.from_grjson",
+      "GreenRetrofitModel.get_unique_fenestration_constructions",
+      "GreenRetrofitModel.get_unique_materials",
+      "GreenRetrofitModel.get_unique_profiles",
+      "GreenRetrofitModel.get_unique_surface_constructions",
+      "GreenRetrofitModel.north_axis",
+      "GreenRetrofitModel.run",
+      "GreenRetrofitModel.source_system",
+      "GreenRetrofitModel.terrain",
+      "GreenRetrofitModel.to_dragon",
+      "GreenRetrofitModel.to_idf",
+      "GreenRetrofitModel.vintage",
+      "GreenRetrofitModel.weather",
+      "GreenRetrofitModel.weather_filepath",
+      "InvalidAddressError",
+      "address_to_weather"
+    ]
+  },
+  "deferred_receipts": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 373,
+      "kind": "class",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:ad17da15ebe3f9a8b13f618e3a7d4d8a5d867b8573aab129f9bc0758c0449792",
+      "symbol": "GreenRetrofitResult",
+      "symbol_hash": "sha256:8b4073860c0a5ec5215658188d0e02cbdd83c2e792e35fc1de93180d2b76e2e0"
+    },
+    {
+      "body_hash": "sha256:ddcc9e26678f237b5f7892c086072a5962980b4d4b13bcee47bd9c0d98a52cc6",
+      "inventory_index": 374,
+      "kind": "constant",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:aa336779f69a8902021215ad36bc8925e1d599b84b1c2149a383d3313065b1a2",
+      "symbol": "GreenRetrofitResult.VALID_DIGITS",
+      "symbol_hash": "sha256:ff1cddacd1d221d604e80997d48ef03662bbeb531c45337abde8fcc3f9fc30df"
+    },
+    {
+      "body_hash": "sha256:7d8dee39517322f67931eb9ae4eeab47423ca33acb4bd9d48732687b11009213",
+      "inventory_index": 375,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:e3ea637489f15196a395d06b8784e4240a686044f045de1addec871f7ee124b0",
+      "symbol": "GreenRetrofitResult.__init__",
+      "symbol_hash": "sha256:856dd66b378dc69ca9fdf702af477ca308850afa30e1f79ddaf07c77007d2143"
+    },
+    {
+      "body_hash": "sha256:7335d117f821d4cc789535e20d1f1cb563895a2e27b6fcdbe9c5bf3a1978d037",
+      "inventory_index": 376,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitResult.area",
+      "symbol_hash": "sha256:37a89b1c8b8b29e09038b198162ad3edfe11206794c9b30e104febcdce483f89"
+    },
+    {
+      "body_hash": "sha256:3d20f42d58aa292c0cda8f36c2c29aba9fcb94cb3a65fe138eed6a7d40fcb26d",
+      "inventory_index": 377,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:01ce55e2ae511cb78ed4504c328bc6d4e06786c1bbe7157feb8bd6958d2a5ede",
+      "symbol": "GreenRetrofitResult.calc_domestic_hotwater_site_energy",
+      "symbol_hash": "sha256:4e80e0ef21caa93b8a0d7450676b1173677faec1ac8f3d15ad550f290b920c4c"
+    },
+    {
+      "body_hash": "sha256:757d1859c51226b31facdfb68107b5a90ce8e7c8d260e6ccb327e31f9203183c",
+      "inventory_index": 378,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:d2b4c877c3074459e858c8ddab98b4b507ad32ac856cab0c0358b2ff4487fce6",
+      "symbol": "GreenRetrofitResult.get_dhw_servers",
+      "symbol_hash": "sha256:a63f6fa21523147d50860abe9915f96111ca6ace3621e57716040c9f8cc22ff3"
+    },
+    {
+      "body_hash": "sha256:d43efb9ead93c11dacb01c2a869c6801e637018483c9524b390640381d1e0eb8",
+      "inventory_index": 379,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:c2d47451050e60f15a22d16146acba292a2a641fff5670ab1cec00ba7f863d58",
+      "symbol": "GreenRetrofitResult.get_domestic_hotwater_energy",
+      "symbol_hash": "sha256:b7774317313c4c32bb28168900a4ccd0af9162b9e9149f7bb58f5605784ed592"
+    },
+    {
+      "body_hash": "sha256:c2c71105186ffc370ee09c436ac894ee6bf797989dd622d36f302633f6009b6e",
+      "inventory_index": 380,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:808df99bb5631c7829bf7bce92d37533bbddbb2e35281ff3add1b89d35acbab7",
+      "symbol": "GreenRetrofitResult.summarize",
+      "symbol_hash": "sha256:93d2bbd846d5cf13baf88fcbacddc16e948ca205b53c7e4f25fd5887dcdc3f87"
+    },
+    {
+      "body_hash": "sha256:73699d8b52634390a3efab78dceae92be86d304fb90fbc8acc4c6092b0a2f0e6",
+      "inventory_index": 381,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:3a410f05d904cd573f15bd094908c64f55a72f6a804b455f752cf4d0a298d3ef",
+      "symbol": "GreenRetrofitResult.to_co2",
+      "symbol_hash": "sha256:72b97e85ef6741a8eb2dfcdb37de2a27b37772b2ec054fee14a061d3a3f2d358"
+    },
+    {
+      "body_hash": "sha256:3363e164857a1bc4c9f5f2e9904602b4d9912b9901888e2f5e55197c4c993f30",
+      "inventory_index": 382,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:3a410f05d904cd573f15bd094908c64f55a72f6a804b455f752cf4d0a298d3ef",
+      "symbol": "GreenRetrofitResult.to_cost",
+      "symbol_hash": "sha256:7d1d1cd964d4ab0842510bf94bac7aea393ed53469ed7ecdea1d7979057bf266"
+    },
+    {
+      "body_hash": "sha256:ff7f831331299a45e9c62ac55581b0c4dc6d311580a9abc84e73b53e2763324b",
+      "inventory_index": 383,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:b38b1b6e4f6aab6bc88bb0fcbf1620621166ceff9373e717951d554649663abf",
+      "symbol": "GreenRetrofitResult.to_dict",
+      "symbol_hash": "sha256:010fb59959bd7ec395c6e22acccaeb73626df3fa276c4fb7e5ed1c3172a8f8d3"
+    },
+    {
+      "body_hash": "sha256:b8a49f1b2b0bcbaf6c27042f1b6926bdd6954194a3db29531bdd8668d4052b7f",
+      "inventory_index": 384,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:3a410f05d904cd573f15bd094908c64f55a72f6a804b455f752cf4d0a298d3ef",
+      "symbol": "GreenRetrofitResult.to_site_uses",
+      "symbol_hash": "sha256:48114e1462753ab48eac6ca7d648438ad7e4381d4900cdbfd7618c701562bafa"
+    },
+    {
+      "body_hash": "sha256:d9c7d1b27a50ae9b04a5278c1d1881309fc297af097af411791f2f1d77e73d5d",
+      "inventory_index": 385,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:3a410f05d904cd573f15bd094908c64f55a72f6a804b455f752cf4d0a298d3ef",
+      "symbol": "GreenRetrofitResult.to_source_uses",
+      "symbol_hash": "sha256:842eb853a7216a84eab7ccc5a04d7454fc7f2572ea9c8e0bc32f73d6ffc84291"
+    },
+    {
+      "body_hash": "sha256:be074b70585f464b6e6172733e6fa39c8f8d94e716eddc77260516689568c898",
+      "inventory_index": 386,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:5294543e03913904c918f3367755b0cffe7f63c47d17de87fcd55fa0a846c288",
+      "symbol": "GreenRetrofitResult.write",
+      "symbol_hash": "sha256:67ef521c2bdac4646a52e20ba8da306765197f8cc27846cb9d715d605d21db2e"
+    }
+  ],
+  "excluded_receipts": [
+    {
+      "body_hash": "sha256:c296481c206fe665df151a1948cb07a623d2138929295dbf3e054f811a5b814a",
+      "inventory_index": 343,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "GreenRetrofitModel.__repr__",
+      "symbol_hash": "sha256:544b402cf2914882d8ed743d50403b1e01ad47743a9e1530587738fac0f12693"
+    },
+    {
+      "body_hash": "sha256:201b429fd2fab612d920f2fcfada48e931debb1621cbe0a09a91ee0ec29b6e14",
+      "inventory_index": 344,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "GreenRetrofitModel.__str__",
+      "symbol_hash": "sha256:39c346fc45abacc4f01d1d0e4e33233c9e458c8a81ee0e8b2ed426cfa9d057d3"
+    },
+    {
+      "body_hash": "sha256:b89287289cf4e9e9894cc40227ada1f3a1e91d4420662fbdfd8cc441f4a24221",
+      "inventory_index": 358,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:383773b6e47f5110bbf73dc5762cbf0c8a112394d47deffff47a2e002feb416d",
+      "symbol": "GreenRetrofitModel.from_excel",
+      "symbol_hash": "sha256:46935cc1aaff18b83281df944eb9f099d53c5894f7427ee98fedb8dccefdc206"
+    }
+  ],
+  "fact_sha256": {
+    "epsimple-model-core.address-weather-resolution-and-failure": "sha256:c4a51fa76ebb12f444c38b9226963bd896e061b20ffa6283f4df92afe18e490a",
+    "epsimple-model-core.area-and-exterior-projections": "sha256:ff270cce43b17e56870f654764fa61cfb069867547d0caafcd1013346da10f19",
+    "epsimple-model-core.dragon-and-idf-conversion": "sha256:07dded0daf3cf65f6d36031921359823ea75e209e6924df6b0460feea5fe29f4",
+    "epsimple-model-core.energyplus-error-formatting": "sha256:fb6b2c39f7c7a69ece80c784ff87504299727a6f9e8ac29befb0651c415f3d4d",
+    "epsimple-model-core.grjson-full-graph-and-adjacency-allocation": "sha256:646a852bcceca7aad45be6df9be0b77bbe531b4630c29e37dae4f2f8a90579cd",
+    "epsimple-model-core.instrumented-run-success-and-failure": "sha256:404d9f442aa7385107127a5309d372a57c52d6a8d7fb0ee39ee51c1b7f7606e1",
+    "epsimple-model-core.model-constructor-fundamental-properties": "sha256:d14a7bbabd527f0acd5f1898a17fb0e3c419cbd0cc185006525bddffcb2844d6",
+    "epsimple-model-core.source-system-dedup-and-explicit-merge": "sha256:7f03eb6c6ea5fd9f5e093cea126f9983d5bf929f9e3ffc6d30e6c96b9222afae",
+    "epsimple-model-core.unique-catalog-projections": "sha256:61a5d1b8914d16b779f3e56c34666624d370d308e66e3df17c5b15dc63e3ef50",
+    "epsimple-model-core.weather-table-topology": "sha256:7c707fa287c1ed8e0acf67f7f6344a34358ec504945dc873c314f74adda922eb",
+    "epsimple-model-core.weighted-averages-and-zero-cases": "sha256:1f4d9e053180a350462b0d2e8b46ba46b2beb0ad75fdd206219f117ac9ba5db8"
+  },
+  "runtime": {
+    "dependencies": {
+      "eppy": "0.5.63",
+      "numpy": "2.3.1",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tzdata": "2024.2"
+    },
+    "dependencies_sha256": "sha256:85d50612b42b3818f054fd7d9cdb26a16bbf832c3afc56762ea732f55a48cb22",
+    "implementation": "cpython",
+    "platform": "win32",
+    "pointer_width_bits": 64,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.epsimple-model-core.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:87be4b5360ff3816bcda24ff61d639a3676702dae470cde8f721d0159bc9edac",
+      "kind": "constant",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:9f383055f56d9882c11b76be1d5194f91e2adcb2dbda17bf2b8322d34cd24eac",
+      "symbol": "ADDR_WEATHER_TABLE",
+      "symbol_hash": "sha256:1a4029a135d1255a90f77a8b0d319de7e17b4fe70d3114e41485553ecb5a6a80"
+    },
+    {
+      "body_hash": "sha256:c343b539809241a3a55d0844f1aae7808bfe49eba6db271e28816324925dc14b",
+      "kind": "constant",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:9d72cb0728cc3438db822e424cfcaf72503250c37ed46d29ff07d7d47f61bb54",
+      "symbol": "CLIMATE_TABLE",
+      "symbol_hash": "sha256:fbfb5af8a7a829546e3cb9f84e035197804aa31b036e26af7862470a9eaf0760"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:2dfacdb4c9959692a46d69591cb908159e533d0f532cc3ce13e9f07b34c1d85e",
+      "symbol": "EnergyPlusError",
+      "symbol_hash": "sha256:3ed100420cd0b15df6d11143072a05f60220d7dd87deb1e6ead6689ba4a7624e"
+    },
+    {
+      "body_hash": "sha256:d48c948af596d4efa0f55e52b63173ea141319e3a0dde8d755407d153349d52f",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:496d71b65d95a84986bec0f9ba7b3e2c715cc5edf0e22c40646df768c35b1d57",
+      "symbol": "EnergyPlusError.__init__",
+      "symbol_hash": "sha256:328cf73b77278a305f62b23b960bb7658c9ae9be4c4a5fca9331e3a7fc4cdfd0"
+    },
+    {
+      "body_hash": "sha256:3505a6963aa2c06f8069c0f0b3b26be49d723cd2918ad6182f3258a5ce39f907",
+      "kind": "class",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:5261e2e3084f19f2da8304e608772d3764169f327fb214b843a351145fdb3201",
+      "symbol": "GreenRetrofitModel",
+      "symbol_hash": "sha256:fb39a800c06d7513705dab266bd7221e147db1e976750b1204e9ebb467819cbe"
+    },
+    {
+      "body_hash": "sha256:12ba4fa08d66617798365a14cd091da28bc3a5d25e47482246a8375f4139018b",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:09565d746abf49d633aabd75a994e05b279342356edcf1c46662ad06080d5bfe",
+      "symbol": "GreenRetrofitModel.__init__",
+      "symbol_hash": "sha256:e8bd64b762879f6d0c79c0375457ac1644cc80f3d9994ec3a0c9d124625bb6c0"
+    },
+    {
+      "body_hash": "sha256:ca04f161957043a71cf2d7aef8482c92dc4bc230ae112cb7208f7f60a9a66241",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:7b3f43294bb435e01776f384415ffa537d4314ed93dbf93b0a73eb3ad7b79acf",
+      "symbol": "GreenRetrofitModel.address",
+      "symbol_hash": "sha256:df3586867cd69bd15d94f3fc4e1ae11c51f449d80096f5f31cb57f47f3296744"
+    },
+    {
+      "body_hash": "sha256:830ef332868981d50d5ba31582760e8e3e5047621055fc826de0cdcdadadf967",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.area",
+      "symbol_hash": "sha256:bf31ed3c8d4218b3847c9509ed651f88c3220ebe435c0d74fe97b4a150d232eb"
+    },
+    {
+      "body_hash": "sha256:515e61cdebf396a5322ebede54f36ed0295d88f2db2a87082466d131336d7e4f",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_exteriorfloor_Uvalue",
+      "symbol_hash": "sha256:ef752eff55173cdf6098698760d7dec5481712fe27aa80a764b8967674b301e6"
+    },
+    {
+      "body_hash": "sha256:a7156006e43808607d0fcc9f5a62816a1e2cbd423889081bdc0739e02bdc3326",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_exteriorroof_Uvalue",
+      "symbol_hash": "sha256:871c1b932e6e641da7c28392514c2b6cc464ca9c925f2a0a1b9165177f20e726"
+    },
+    {
+      "body_hash": "sha256:bc39d98071026e251a16b4949bff063852b95496a3dab9b988cd7d6a7d5a9c25",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_exteriorwall_Uvalue",
+      "symbol_hash": "sha256:13f93b869df9add4d157aadf79b05bd22c453ff7fa29c70dbb08ba9ceb6423a2"
+    },
+    {
+      "body_hash": "sha256:acca6a62062fb29953e384edc34af51cf5ed625c1cb4e1353d676ed143a9a321",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_infiltration",
+      "symbol_hash": "sha256:4046cce9884dda1034f8adc0fa0b9c4ad98173939b77c121f968af70d0893c65"
+    },
+    {
+      "body_hash": "sha256:11a031a6dc531092bdd7bfced5a8fb16378d26a76c93be227e6b5a770ffb4891",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_lightdensity",
+      "symbol_hash": "sha256:695c215a8b62739fe7b603b73fef0754a8d0622b9dd5efb6ea0e3b10aa065dfe"
+    },
+    {
+      "body_hash": "sha256:8ce5bbae495287e41f2703d7c4f1e177006f290b3787d24ab3e85573316774db",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_window_Uvalue",
+      "symbol_hash": "sha256:235f45ccdb9970dc4448855a6e267a140b34f00b3b7f11d895a1f97ef2797d53"
+    },
+    {
+      "body_hash": "sha256:9523cdd9eae3fb7552c579ea34634ab40f825d56d7e9a47cebfe3e7ceaaf4dd8",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "GreenRetrofitModel.climate",
+      "symbol_hash": "sha256:27c207a5aa410a7847269e6a6b669e12c4fda738f1370cdbf4ae3d651f1901d0"
+    },
+    {
+      "body_hash": "sha256:450eee32ed8baece5e0556f18a5dfe5ba10aac11f9c67a3109d8ba25f3e181ba",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+      "symbol": "GreenRetrofitModel.exteriorfloors",
+      "symbol_hash": "sha256:613333060251b890b716889f9b4c182e6a7bbd40fdcb3560d5b52cacf6df0e3e"
+    },
+    {
+      "body_hash": "sha256:cf9fe02e3e0cf4d4f13817e729eda0ccece46957bf6049312aec47bdccde2ab5",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+      "symbol": "GreenRetrofitModel.exteriorroofs",
+      "symbol_hash": "sha256:9ba0cb6303c1e95763c7d1aa68959647034ac0b546f6e879b19418725a7866bd"
+    },
+    {
+      "body_hash": "sha256:901879974bf33621331356eaa6a16d46cc4071a2b28741e608b091a73bc95004",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+      "symbol": "GreenRetrofitModel.exteriorwalls",
+      "symbol_hash": "sha256:428acddc7bc811e7d4021f3f473a53fd2a7b4f65b9fb44125dcd711510df72f7"
+    },
+    {
+      "body_hash": "sha256:296bb1a735405edbd0c11bb041657ac0f5270156a47aa53cf17b3c313ccb6fce",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:6ed2bf44ec68a9cda9c9305419f2564c10dcf9ffa3541254a942a64ef21bd2d4",
+      "symbol": "GreenRetrofitModel.exteriorwindows",
+      "symbol_hash": "sha256:d363d7173bf7b1ff6b7128b2276c6422151662aaf73a9a1ddf01e0c8f44a267a"
+    },
+    {
+      "body_hash": "sha256:ae6d620b7d16d12e89a3570a713da137e875294b51136ac971e41518997b0e2d",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:383773b6e47f5110bbf73dc5762cbf0c8a112394d47deffff47a2e002feb416d",
+      "symbol": "GreenRetrofitModel.from_grjson",
+      "symbol_hash": "sha256:696d04c33af170f7372dae59b38e53b0e68580e89bac8b8a762cd3e683fdafe7"
+    },
+    {
+      "body_hash": "sha256:32e438d2f79eab5f8118743beb45acf39f8dcb71a2f99fbb1c9e706c631fb2cd",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:fd4e9c1ad3ff2824e64eafe498a14908ba218ecc7baa8ded8a3f316c2591de2d",
+      "symbol": "GreenRetrofitModel.get_unique_fenestration_constructions",
+      "symbol_hash": "sha256:0963ad7196e27f0227bdb56e8b72c2779a190a07b1063a9b8adf9378530a212c"
+    },
+    {
+      "body_hash": "sha256:a6810b28394f3548417f171684081a938dfa38b802ad1c823418e017a3a660c9",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:abfea80c9449326669efd9f474c37f074a049c0392c4c2198e2d3f911222f3e8",
+      "symbol": "GreenRetrofitModel.get_unique_materials",
+      "symbol_hash": "sha256:ecb20cb3d82efa5c493a99fa5863d3060531cabca284a696fe8e38a922ac2ee9"
+    },
+    {
+      "body_hash": "sha256:f5b326faed39b53be9e1eecdff83ca98c4a30443df5a86a66d1b47b768b95ebb",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:67df893862c0302efa08b30b163a056d97569f3b93a8dce10cebdf1272f393c4",
+      "symbol": "GreenRetrofitModel.get_unique_profiles",
+      "symbol_hash": "sha256:13af13a19a65f0b8d091ec2f86720c47249e9c0cc5e1d860393be68e569f3a1d"
+    },
+    {
+      "body_hash": "sha256:39b4d79a80ff49bad4a4245a7373bfa0b7f410a260b6e41364c808e5ec423b70",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:44f5e0b78dc39ab2968e7e7670a41af6cefc43abeb6b6647ed67a92ab7537d38",
+      "symbol": "GreenRetrofitModel.get_unique_surface_constructions",
+      "symbol_hash": "sha256:a05748b1a1da92805d794a2eb233350ba2e1f0ce61356bb67200ad1c758dc22e"
+    },
+    {
+      "body_hash": "sha256:2e72804ae3e080dc8b42cf8ef7d8adbb2dbb60c6a384b6eed385f7832be69402",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:01a32dc9a269f3e3447e6af35076197a0c8ba205cdfb6e0330079f9b8c4dd8aa",
+      "symbol": "GreenRetrofitModel.north_axis",
+      "symbol_hash": "sha256:fc0d665a25029abe7f854951352d805a206225bd43a338d3f37b0108deb74166"
+    },
+    {
+      "body_hash": "sha256:a2a869cc1a8f14ef0eafb7fb40becf3539f654c47897bc57ef7d79b454aa116b",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:51ddf9e4cf458b2de9ce6c9725a7c7a2cbb7249015a6dd8373ab1cd5c3e78d29",
+      "symbol": "GreenRetrofitModel.run",
+      "symbol_hash": "sha256:bf192ec837aebea5fb0f8ee5990899fd3a75f2fc818048a4ae1a5cf32f18a675"
+    },
+    {
+      "body_hash": "sha256:54eb05e80df84e18a44ee8dae7a3891ec4eb27e0d6af1fb1975ef38eb05eadfd",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:ecf0515fba0e7757fdd360ee89bbe791a2e1ca561618d704a9be05356bab4f3f",
+      "symbol": "GreenRetrofitModel.source_system",
+      "symbol_hash": "sha256:b2b62b8010ff62705e00918b972890132cf2c864442747f93973f70036a990de"
+    },
+    {
+      "body_hash": "sha256:3acd594cc04467fd73e657fce8e9ddea9fdd1b1827182009c1069daab0c7b800",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "GreenRetrofitModel.terrain",
+      "symbol_hash": "sha256:152775fe99a35584281e0312c9216be0aee3bfe76565c049822a296dbb001cfa"
+    },
+    {
+      "body_hash": "sha256:156c2a5aebc08703836b870b75187441fea57cce0b51c95efb6b99454738cd9e",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "GreenRetrofitModel.to_dragon",
+      "symbol_hash": "sha256:5e2e21f3341cc365406d4b00ab7d6ad7fe09125d1866cdf0e3f92aefbd1beaae"
+    },
+    {
+      "body_hash": "sha256:280e2b48b0efc0dc069bdab75256882099683fb2291b8a1eff9b91859a80187c",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "GreenRetrofitModel.to_idf",
+      "symbol_hash": "sha256:e8d26d7207e0d5eb131f29d9ff7c5b37d61b2a494748106c9e60038f55820a20"
+    },
+    {
+      "body_hash": "sha256:70a7b7756b467f40d28f0cffe8db7dae61b739cf663d6f2f9aec6d5fe957a621",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:b301fb283058f2355db7d2ba8b45324adf1418587837bba7cc58bb0dafe68310",
+      "symbol": "GreenRetrofitModel.vintage",
+      "symbol_hash": "sha256:e739b9d68aa3c20da6ed71d509299b8a6ee7b7d8309e4a9fda254efc65de1f8a"
+    },
+    {
+      "body_hash": "sha256:e37fbecf8c76ff119b2e0389f0f53d2716952a6b6594627429dea8927174f1d4",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "GreenRetrofitModel.weather",
+      "symbol_hash": "sha256:acd72fe86b0be527be1e08f77bd22b94dd50c7bfcfbb2a2ec56b984f1e030f2a"
+    },
+    {
+      "body_hash": "sha256:b3c6cd4617882c157ff1f2f8c6fd4b45bb102b680445c9b5a6a4107dfea8194c",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "GreenRetrofitModel.weather_filepath",
+      "symbol_hash": "sha256:fa174585e6b6a0b08679787056e604e2f229a3da568c53aa9adc71e6afd36722"
+    },
+    {
+      "body_hash": "sha256:921a63a3a05234e5b1c61efbee031114924c6587cc8d60b93d4932290c0b549a",
+      "kind": "class",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:eec23128512a858c49eb69a5b02fc2540567dce31954ec653d3fb6889b760256",
+      "symbol": "InvalidAddressError",
+      "symbol_hash": "sha256:aee12b8f2a2a21c18d4124e0f56b1dd5fce979942d7ece00b5f24d4d659532dc"
+    },
+    {
+      "body_hash": "sha256:1aef1106ab5dc74bc6e64f77155d0b07775dae8fe3c8b5817dadc3515fd8e774",
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:e7ae5ada01411afa2e22b34f55b2942d22555d266ad0092f2cc024bf092281a2",
+      "symbol": "address_to_weather",
+      "symbol_hash": "sha256:6e86f5469559d6a7149e2ccef4b88deebc9a88c6c952d08955ea835465add983"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:87be4b5360ff3816bcda24ff61d639a3676702dae470cde8f721d0159bc9edac",
+      "inventory_index": 337,
+      "kind": "constant",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:9f383055f56d9882c11b76be1d5194f91e2adcb2dbda17bf2b8322d34cd24eac",
+      "symbol": "ADDR_WEATHER_TABLE",
+      "symbol_hash": "sha256:1a4029a135d1255a90f77a8b0d319de7e17b4fe70d3114e41485553ecb5a6a80"
+    },
+    {
+      "body_hash": "sha256:c343b539809241a3a55d0844f1aae7808bfe49eba6db271e28816324925dc14b",
+      "inventory_index": 338,
+      "kind": "constant",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:9d72cb0728cc3438db822e424cfcaf72503250c37ed46d29ff07d7d47f61bb54",
+      "symbol": "CLIMATE_TABLE",
+      "symbol_hash": "sha256:fbfb5af8a7a829546e3cb9f84e035197804aa31b036e26af7862470a9eaf0760"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 339,
+      "kind": "class",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:2dfacdb4c9959692a46d69591cb908159e533d0f532cc3ce13e9f07b34c1d85e",
+      "symbol": "EnergyPlusError",
+      "symbol_hash": "sha256:3ed100420cd0b15df6d11143072a05f60220d7dd87deb1e6ead6689ba4a7624e"
+    },
+    {
+      "body_hash": "sha256:d48c948af596d4efa0f55e52b63173ea141319e3a0dde8d755407d153349d52f",
+      "inventory_index": 340,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:496d71b65d95a84986bec0f9ba7b3e2c715cc5edf0e22c40646df768c35b1d57",
+      "symbol": "EnergyPlusError.__init__",
+      "symbol_hash": "sha256:328cf73b77278a305f62b23b960bb7658c9ae9be4c4a5fca9331e3a7fc4cdfd0"
+    },
+    {
+      "body_hash": "sha256:3505a6963aa2c06f8069c0f0b3b26be49d723cd2918ad6182f3258a5ce39f907",
+      "inventory_index": 341,
+      "kind": "class",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:5261e2e3084f19f2da8304e608772d3764169f327fb214b843a351145fdb3201",
+      "symbol": "GreenRetrofitModel",
+      "symbol_hash": "sha256:fb39a800c06d7513705dab266bd7221e147db1e976750b1204e9ebb467819cbe"
+    },
+    {
+      "body_hash": "sha256:12ba4fa08d66617798365a14cd091da28bc3a5d25e47482246a8375f4139018b",
+      "inventory_index": 342,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:09565d746abf49d633aabd75a994e05b279342356edcf1c46662ad06080d5bfe",
+      "symbol": "GreenRetrofitModel.__init__",
+      "symbol_hash": "sha256:e8bd64b762879f6d0c79c0375457ac1644cc80f3d9994ec3a0c9d124625bb6c0"
+    },
+    {
+      "body_hash": "sha256:ca04f161957043a71cf2d7aef8482c92dc4bc230ae112cb7208f7f60a9a66241",
+      "inventory_index": 345,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:7b3f43294bb435e01776f384415ffa537d4314ed93dbf93b0a73eb3ad7b79acf",
+      "symbol": "GreenRetrofitModel.address",
+      "symbol_hash": "sha256:df3586867cd69bd15d94f3fc4e1ae11c51f449d80096f5f31cb57f47f3296744"
+    },
+    {
+      "body_hash": "sha256:830ef332868981d50d5ba31582760e8e3e5047621055fc826de0cdcdadadf967",
+      "inventory_index": 346,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.area",
+      "symbol_hash": "sha256:bf31ed3c8d4218b3847c9509ed651f88c3220ebe435c0d74fe97b4a150d232eb"
+    },
+    {
+      "body_hash": "sha256:515e61cdebf396a5322ebede54f36ed0295d88f2db2a87082466d131336d7e4f",
+      "inventory_index": 347,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_exteriorfloor_Uvalue",
+      "symbol_hash": "sha256:ef752eff55173cdf6098698760d7dec5481712fe27aa80a764b8967674b301e6"
+    },
+    {
+      "body_hash": "sha256:a7156006e43808607d0fcc9f5a62816a1e2cbd423889081bdc0739e02bdc3326",
+      "inventory_index": 348,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_exteriorroof_Uvalue",
+      "symbol_hash": "sha256:871c1b932e6e641da7c28392514c2b6cc464ca9c925f2a0a1b9165177f20e726"
+    },
+    {
+      "body_hash": "sha256:bc39d98071026e251a16b4949bff063852b95496a3dab9b988cd7d6a7d5a9c25",
+      "inventory_index": 349,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_exteriorwall_Uvalue",
+      "symbol_hash": "sha256:13f93b869df9add4d157aadf79b05bd22c453ff7fa29c70dbb08ba9ceb6423a2"
+    },
+    {
+      "body_hash": "sha256:acca6a62062fb29953e384edc34af51cf5ed625c1cb4e1353d676ed143a9a321",
+      "inventory_index": 350,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_infiltration",
+      "symbol_hash": "sha256:4046cce9884dda1034f8adc0fa0b9c4ad98173939b77c121f968af70d0893c65"
+    },
+    {
+      "body_hash": "sha256:11a031a6dc531092bdd7bfced5a8fb16378d26a76c93be227e6b5a770ffb4891",
+      "inventory_index": 351,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_lightdensity",
+      "symbol_hash": "sha256:695c215a8b62739fe7b603b73fef0754a8d0622b9dd5efb6ea0e3b10aa065dfe"
+    },
+    {
+      "body_hash": "sha256:8ce5bbae495287e41f2703d7c4f1e177006f290b3787d24ab3e85573316774db",
+      "inventory_index": 352,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "GreenRetrofitModel.averaged_window_Uvalue",
+      "symbol_hash": "sha256:235f45ccdb9970dc4448855a6e267a140b34f00b3b7f11d895a1f97ef2797d53"
+    },
+    {
+      "body_hash": "sha256:9523cdd9eae3fb7552c579ea34634ab40f825d56d7e9a47cebfe3e7ceaaf4dd8",
+      "inventory_index": 353,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "GreenRetrofitModel.climate",
+      "symbol_hash": "sha256:27c207a5aa410a7847269e6a6b669e12c4fda738f1370cdbf4ae3d651f1901d0"
+    },
+    {
+      "body_hash": "sha256:450eee32ed8baece5e0556f18a5dfe5ba10aac11f9c67a3109d8ba25f3e181ba",
+      "inventory_index": 354,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+      "symbol": "GreenRetrofitModel.exteriorfloors",
+      "symbol_hash": "sha256:613333060251b890b716889f9b4c182e6a7bbd40fdcb3560d5b52cacf6df0e3e"
+    },
+    {
+      "body_hash": "sha256:cf9fe02e3e0cf4d4f13817e729eda0ccece46957bf6049312aec47bdccde2ab5",
+      "inventory_index": 355,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+      "symbol": "GreenRetrofitModel.exteriorroofs",
+      "symbol_hash": "sha256:9ba0cb6303c1e95763c7d1aa68959647034ac0b546f6e879b19418725a7866bd"
+    },
+    {
+      "body_hash": "sha256:901879974bf33621331356eaa6a16d46cc4071a2b28741e608b091a73bc95004",
+      "inventory_index": 356,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:175c75a451212fe0099b1206d31f4f11195e5716bdbae2c993097a86e669a0ea",
+      "symbol": "GreenRetrofitModel.exteriorwalls",
+      "symbol_hash": "sha256:428acddc7bc811e7d4021f3f473a53fd2a7b4f65b9fb44125dcd711510df72f7"
+    },
+    {
+      "body_hash": "sha256:296bb1a735405edbd0c11bb041657ac0f5270156a47aa53cf17b3c313ccb6fce",
+      "inventory_index": 357,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:6ed2bf44ec68a9cda9c9305419f2564c10dcf9ffa3541254a942a64ef21bd2d4",
+      "symbol": "GreenRetrofitModel.exteriorwindows",
+      "symbol_hash": "sha256:d363d7173bf7b1ff6b7128b2276c6422151662aaf73a9a1ddf01e0c8f44a267a"
+    },
+    {
+      "body_hash": "sha256:ae6d620b7d16d12e89a3570a713da137e875294b51136ac971e41518997b0e2d",
+      "inventory_index": 359,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:383773b6e47f5110bbf73dc5762cbf0c8a112394d47deffff47a2e002feb416d",
+      "symbol": "GreenRetrofitModel.from_grjson",
+      "symbol_hash": "sha256:696d04c33af170f7372dae59b38e53b0e68580e89bac8b8a762cd3e683fdafe7"
+    },
+    {
+      "body_hash": "sha256:32e438d2f79eab5f8118743beb45acf39f8dcb71a2f99fbb1c9e706c631fb2cd",
+      "inventory_index": 360,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:fd4e9c1ad3ff2824e64eafe498a14908ba218ecc7baa8ded8a3f316c2591de2d",
+      "symbol": "GreenRetrofitModel.get_unique_fenestration_constructions",
+      "symbol_hash": "sha256:0963ad7196e27f0227bdb56e8b72c2779a190a07b1063a9b8adf9378530a212c"
+    },
+    {
+      "body_hash": "sha256:a6810b28394f3548417f171684081a938dfa38b802ad1c823418e017a3a660c9",
+      "inventory_index": 361,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:abfea80c9449326669efd9f474c37f074a049c0392c4c2198e2d3f911222f3e8",
+      "symbol": "GreenRetrofitModel.get_unique_materials",
+      "symbol_hash": "sha256:ecb20cb3d82efa5c493a99fa5863d3060531cabca284a696fe8e38a922ac2ee9"
+    },
+    {
+      "body_hash": "sha256:f5b326faed39b53be9e1eecdff83ca98c4a30443df5a86a66d1b47b768b95ebb",
+      "inventory_index": 362,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:67df893862c0302efa08b30b163a056d97569f3b93a8dce10cebdf1272f393c4",
+      "symbol": "GreenRetrofitModel.get_unique_profiles",
+      "symbol_hash": "sha256:13af13a19a65f0b8d091ec2f86720c47249e9c0cc5e1d860393be68e569f3a1d"
+    },
+    {
+      "body_hash": "sha256:39b4d79a80ff49bad4a4245a7373bfa0b7f410a260b6e41364c808e5ec423b70",
+      "inventory_index": 363,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:44f5e0b78dc39ab2968e7e7670a41af6cefc43abeb6b6647ed67a92ab7537d38",
+      "symbol": "GreenRetrofitModel.get_unique_surface_constructions",
+      "symbol_hash": "sha256:a05748b1a1da92805d794a2eb233350ba2e1f0ce61356bb67200ad1c758dc22e"
+    },
+    {
+      "body_hash": "sha256:2e72804ae3e080dc8b42cf8ef7d8adbb2dbb60c6a384b6eed385f7832be69402",
+      "inventory_index": 364,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:01a32dc9a269f3e3447e6af35076197a0c8ba205cdfb6e0330079f9b8c4dd8aa",
+      "symbol": "GreenRetrofitModel.north_axis",
+      "symbol_hash": "sha256:fc0d665a25029abe7f854951352d805a206225bd43a338d3f37b0108deb74166"
+    },
+    {
+      "body_hash": "sha256:a2a869cc1a8f14ef0eafb7fb40becf3539f654c47897bc57ef7d79b454aa116b",
+      "inventory_index": 365,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:51ddf9e4cf458b2de9ce6c9725a7c7a2cbb7249015a6dd8373ab1cd5c3e78d29",
+      "symbol": "GreenRetrofitModel.run",
+      "symbol_hash": "sha256:bf192ec837aebea5fb0f8ee5990899fd3a75f2fc818048a4ae1a5cf32f18a675"
+    },
+    {
+      "body_hash": "sha256:54eb05e80df84e18a44ee8dae7a3891ec4eb27e0d6af1fb1975ef38eb05eadfd",
+      "inventory_index": 366,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:ecf0515fba0e7757fdd360ee89bbe791a2e1ca561618d704a9be05356bab4f3f",
+      "symbol": "GreenRetrofitModel.source_system",
+      "symbol_hash": "sha256:b2b62b8010ff62705e00918b972890132cf2c864442747f93973f70036a990de"
+    },
+    {
+      "body_hash": "sha256:3acd594cc04467fd73e657fce8e9ddea9fdd1b1827182009c1069daab0c7b800",
+      "inventory_index": 367,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "GreenRetrofitModel.terrain",
+      "symbol_hash": "sha256:152775fe99a35584281e0312c9216be0aee3bfe76565c049822a296dbb001cfa"
+    },
+    {
+      "body_hash": "sha256:156c2a5aebc08703836b870b75187441fea57cce0b51c95efb6b99454738cd9e",
+      "inventory_index": 368,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "GreenRetrofitModel.to_dragon",
+      "symbol_hash": "sha256:5e2e21f3341cc365406d4b00ab7d6ad7fe09125d1866cdf0e3f92aefbd1beaae"
+    },
+    {
+      "body_hash": "sha256:280e2b48b0efc0dc069bdab75256882099683fb2291b8a1eff9b91859a80187c",
+      "inventory_index": 369,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "GreenRetrofitModel.to_idf",
+      "symbol_hash": "sha256:e8d26d7207e0d5eb131f29d9ff7c5b37d61b2a494748106c9e60038f55820a20"
+    },
+    {
+      "body_hash": "sha256:70a7b7756b467f40d28f0cffe8db7dae61b739cf663d6f2f9aec6d5fe957a621",
+      "inventory_index": 370,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:b301fb283058f2355db7d2ba8b45324adf1418587837bba7cc58bb0dafe68310",
+      "symbol": "GreenRetrofitModel.vintage",
+      "symbol_hash": "sha256:e739b9d68aa3c20da6ed71d509299b8a6ee7b7d8309e4a9fda254efc65de1f8a"
+    },
+    {
+      "body_hash": "sha256:e37fbecf8c76ff119b2e0389f0f53d2716952a6b6594627429dea8927174f1d4",
+      "inventory_index": 371,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "GreenRetrofitModel.weather",
+      "symbol_hash": "sha256:acd72fe86b0be527be1e08f77bd22b94dd50c7bfcfbb2a2ec56b984f1e030f2a"
+    },
+    {
+      "body_hash": "sha256:b3c6cd4617882c157ff1f2f8c6fd4b45bb102b680445c9b5a6a4107dfea8194c",
+      "inventory_index": 372,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "GreenRetrofitModel.weather_filepath",
+      "symbol_hash": "sha256:fa174585e6b6a0b08679787056e604e2f229a3da568c53aa9adc71e6afd36722"
+    },
+    {
+      "body_hash": "sha256:921a63a3a05234e5b1c61efbee031114924c6587cc8d60b93d4932290c0b549a",
+      "inventory_index": 387,
+      "kind": "class",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:eec23128512a858c49eb69a5b02fc2540567dce31954ec653d3fb6889b760256",
+      "symbol": "InvalidAddressError",
+      "symbol_hash": "sha256:aee12b8f2a2a21c18d4124e0f56b1dd5fce979942d7ece00b5f24d4d659532dc"
+    },
+    {
+      "body_hash": "sha256:1aef1106ab5dc74bc6e64f77155d0b07775dae8fe3c8b5817dadc3515fd8e774",
+      "inventory_index": 388,
+      "kind": "function",
+      "path": "src/epsimple/core/model.py",
+      "signature_hash": "sha256:e7ae5ada01411afa2e22b34f55b2942d22555d266ad0092f2cc024bf092281a2",
+      "symbol": "address_to_weather",
+      "symbol_hash": "sha256:6e86f5469559d6a7149e2ccef4b88deebc9a88c6c952d08955ea835465add983"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "isolated_import": {
+      "loaded_local_modules": [
+        {
+          "ast_sha256": "sha256:f26684ea4b6e1bfe7b9576f06d45971e420d2e9e49da99b6c52ff9d0d424fae3",
+          "bytes": 2262,
+          "module": "epsimple",
+          "path": "src/epsimple/__init__.py",
+          "sha256": "sha256:adff45de2c37d23586de00015e05502b1ee4ff7c167f5017b946827f1f383996"
+        },
+        {
+          "ast_sha256": "sha256:7910d7d9e0383b319b9374bdcdf5f8c069930c609fa8e9e6bd8c50a59f4858e5",
+          "bytes": 11149,
+          "module": "epsimple.api",
+          "path": "src/epsimple/api.py",
+          "sha256": "sha256:fb34501b221a34279dc4e408af04cd103448b71b563780e6eda9ca5ffdae8e10"
+        },
+        {
+          "ast_sha256": "sha256:6740f081f087834aadfef0c11da6cdbe11f907dc170b48ebaa287e000eb6e27b",
+          "bytes": 4873,
+          "module": "epsimple.constants",
+          "path": "src/epsimple/constants.py",
+          "sha256": "sha256:d5dd5241ec90b14ba3708a525cd74279a8cdc238164a5b8544c4c82b05a29897"
+        },
+        {
+          "ast_sha256": "sha256:7409c8f18e040e02d52a7e2a70ab56b4539212eb76035f5b218a5bacd84f4762",
+          "bytes": 1264,
+          "module": "epsimple.core",
+          "path": "src/epsimple/core/__init__.py",
+          "sha256": "sha256:e6d571f7bf775cd13cba7abf0f625802e92680fdc87838f4039b037174a1a4c9"
+        },
+        {
+          "ast_sha256": "sha256:fe40c8c89f2c3341ce4972976eabf96edd85ccba55a3a7619ca17e0a7603c0ab",
+          "bytes": 25902,
+          "module": "epsimple.core.construction",
+          "path": "src/epsimple/core/construction.py",
+          "sha256": "sha256:50b784d9c7ebd0df34fb6e524585482f04eb90ef915d5afd125fe779c0620816"
+        },
+        {
+          "ast_sha256": "sha256:dbbea63f51a001fae4fd73fba96dc099eab8cd5bcec39e3d9bf768e29b463873",
+          "bytes": 53850,
+          "module": "epsimple.core.hvac",
+          "path": "src/epsimple/core/hvac.py",
+          "sha256": "sha256:9f3ecb27ed612baeed530ccbfd5857f1f528de24f222e6ef5093e4a635665d9c"
+        },
+        {
+          "ast_sha256": "sha256:f79918272c07515ee4ae98fa62f4ca5d5d703e5e2faa334f72d6a6966e1e2447",
+          "bytes": 36949,
+          "module": "epsimple.core.model",
+          "path": "src/epsimple/core/model.py",
+          "sha256": "sha256:71dc9bb8d97e829c27d9b5d19ef88709af9613f9e53f60807d54ceb2922e4532"
+        },
+        {
+          "ast_sha256": "sha256:bf39751f2e76642e1dbad2c4196f23bcdcdeefaad28e750e5c28c616ea9434ed",
+          "bytes": 18964,
+          "module": "epsimple.core.profile",
+          "path": "src/epsimple/core/profile.py",
+          "sha256": "sha256:e43f07d41e1e90cb9dcb7207fce67d8a6cb93acf54242b7a87c0aa30dda1309c"
+        },
+        {
+          "ast_sha256": "sha256:63cfdec0aec079cfc2d2896091974a5c253656e198cbcb1ea328dbace92c1b7e",
+          "bytes": 22922,
+          "module": "epsimple.core.shape",
+          "path": "src/epsimple/core/shape.py",
+          "sha256": "sha256:9caa67d424693afc58ee6a456c86d42d504fce4e30e56d73e8ee658dc8e515c1"
+        },
+        {
+          "ast_sha256": "sha256:0cc9cc2ed116f8923f44277a62cc13371e5f687198276c54455c4198be0d84ad",
+          "bytes": 29858,
+          "module": "epsimple.debug",
+          "path": "src/epsimple/debug.py",
+          "sha256": "sha256:7fa33eea0c10970c770572e4206dc9d195dc90579a3ded33a53ce4c2b011db6e"
+        },
+        {
+          "ast_sha256": "sha256:d7757fa8a1fc22604c82479200d8af4338d9283d090bc764b2ed526ee9142135",
+          "bytes": 28288,
+          "module": "epsimple.utils",
+          "path": "src/epsimple/utils.py",
+          "sha256": "sha256:4b19874951feb696f0a5f1b42d85a11c405e5f83958828997af9a977a6aa9cf8"
+        },
+        {
+          "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+          "bytes": 2011,
+          "module": "idragon",
+          "path": "src/idragon/__init__.py",
+          "sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+        },
+        {
+          "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+          "bytes": 6247,
+          "module": "idragon.common",
+          "path": "src/idragon/common.py",
+          "sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+        },
+        {
+          "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+          "bytes": 2590,
+          "module": "idragon.constants",
+          "path": "src/idragon/constants.py",
+          "sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+        },
+        {
+          "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+          "bytes": 1505,
+          "module": "idragon.dragon",
+          "path": "src/idragon/dragon/__init__.py",
+          "sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+        },
+        {
+          "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+          "bytes": 11652,
+          "module": "idragon.dragon.construction",
+          "path": "src/idragon/dragon/construction.py",
+          "sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+        },
+        {
+          "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+          "bytes": 137833,
+          "module": "idragon.dragon.hvac",
+          "path": "src/idragon/dragon/hvac.py",
+          "sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+        },
+        {
+          "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+          "bytes": 8247,
+          "module": "idragon.dragon.model",
+          "path": "src/idragon/dragon/model.py",
+          "sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+        },
+        {
+          "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+          "bytes": 117731,
+          "module": "idragon.dragon.profile",
+          "path": "src/idragon/dragon/profile.py",
+          "sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+        },
+        {
+          "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+          "bytes": 27438,
+          "module": "idragon.dragon.shape",
+          "path": "src/idragon/dragon/shape.py",
+          "sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+        },
+        {
+          "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+          "bytes": 91815,
+          "module": "idragon.imugi",
+          "path": "src/idragon/imugi.py",
+          "sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+        },
+        {
+          "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+          "bytes": 12367,
+          "module": "idragon.launcher",
+          "path": "src/idragon/launcher.py",
+          "sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+        },
+        {
+          "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+          "bytes": 2616,
+          "module": "idragon.utils",
+          "path": "src/idragon/utils.py",
+          "sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+        }
+      ],
+      "loaded_local_modules_sha256": "sha256:998782cc65bc94d43ffc7538fae747639503f673586bc2815aaddac4dddc1fe1",
+      "relocation_snapshot_sha256": "sha256:311a666c7b67b8cd0fdd272362a33538c4a6dad6c35e7164ccf8b2f5c51204ab",
+      "source_location_count": 2
+    },
+    "model_resource": {
+      "bytes": 8900,
+      "path": "examples/grm/ASHRAE 140 modified.grm",
+      "sha256": "sha256:4dd307475207fd57599b43b99be22ab1c1d740c3e5a8a9d39e8ee0e30476257a"
+    },
+    "path": "src/epsimple/core/model.py",
+    "source": {
+      "ast_sha256": "sha256:f79918272c07515ee4ae98fa62f4ca5d5d703e5e2faa334f72d6a6966e1e2447",
+      "bytes": 36949,
+      "source_sha256": "sha256:71dc9bb8d97e829c27d9b5d19ef88709af9613f9e53f60807d54ceb2922e4532"
+    },
+    "weather_resources": [
+      {
+        "bytes": 16318,
+        "path": "epsimple/_data/weather/기후지역.csv",
+        "sha256": "sha256:a6949a4b3bc967aefc419f64b1da2b7180fd33a333fed0951560951831614c06"
+      },
+      {
+        "bytes": 38455,
+        "path": "epsimple/_data/weather/행정구역별기상데이터.csv",
+        "sha256": "sha256:ec667eeb0ade076272d23f89956add7b0f0ec7eeac6106c02a1c9c4888aa788e"
+      }
+    ]
+  }
+}
