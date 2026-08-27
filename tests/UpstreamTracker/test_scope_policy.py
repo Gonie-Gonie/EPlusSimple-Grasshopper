@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:b7c4d4d9ce37e66376078359b3c3dcb3b9805bb94e9c1ad6c1fa24a4b0264ec1"
+    "sha256:469507028f501ffbe3e41d3edfed690759e806d68d8b642dd5d24a22dbcd5d7e"
 )
 
 
@@ -68,9 +68,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 160,
-                "exception": 214,
-                "needs_reverification": 616,
+                "equivalent": 171,
+                "exception": 238,
+                "needs_reverification": 581,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -298,76 +298,92 @@ class SafeScopePolicyTests(unittest.TestCase):
                 self.assertEqual(classification, entry.classification, symbol)
                 self.assertIsNone(entry.exception_id, symbol)
 
-    def test_air_boundary_core_promotion_preserves_adjacent_construction_scope(self) -> None:
+    def test_construction_core_promotion_preserves_adjacent_construction_scope(self) -> None:
         entries = self.configuration.matrix.entries
         expected_targets = {
-            588: (
-                "AirBoundary",
-                "permissive-mutable-python-air-boundary-state-fd8f9bb9",
-            ),
-            589: (
-                "AirBoundary.__init__",
-                "unchecked-python-air-boundary-construction-a69bf707",
-            ),
+            588: ("AirBoundary", "exception", "permissive-mutable-python-air-boundary-state-fd8f9bb9"),
+            589: ("AirBoundary.__init__", "exception", "unchecked-python-air-boundary-construction-a69bf707"),
+            593: ("Construction", "exception", "immutable-validated-native-construction-451c832a"),
+            594: ("Construction.U", "equivalent", None),
+            597: ("Construction.__init__", "exception", "typed-nonempty-native-construction-init-c99eac6b"),
+            598: ("Construction.heat_capacity", "equivalent", None),
+            599: ("Construction.reversed", "exception", "immutable-validated-native-construction-reverse-f3f8b2b1"),
+            600: ("Construction.thickness", "equivalent", None),
+            602: ("Glazing", "exception", "immutable-validated-native-glazing-5615eebb"),
+            603: ("Glazing.G", "exception", "immutable-bounded-native-glazing-g-cb8ad4be"),
+            604: ("Glazing.U", "exception", "immutable-finite-native-glazing-u-98ebe259"),
+            605: ("Glazing.__init__", "exception", "validated-immutable-native-glazing-init-bfe7247a"),
+            609: ("Layer", "exception", "immutable-validated-native-layer-e6a3fe0d"),
+            610: ("Layer.U", "equivalent", None),
+            613: ("Layer.__init__", "exception", "validated-immutable-native-layer-init-60e437a1"),
+            614: ("Layer.heat_capacity", "equivalent", None),
+            615: ("Layer.material", "exception", "immutable-required-native-layer-material-6454844c"),
+            616: ("Layer.thickness", "exception", "immutable-finite-native-layer-thickness-d7d789d7"),
+            618: ("Material", "exception", "immutable-validated-native-material-15ad6614"),
+            620: ("Material.__init__", "exception", "validated-immutable-native-material-init-d78cab39"),
+            621: ("Material.conductivity", "exception", "immutable-finite-native-material-conductivity-b733b56b"),
+            622: ("Material.density", "exception", "immutable-finite-native-material-density-23136324"),
+            623: ("Material.roughness", "exception", "immutable-strongly-typed-native-material-roughness-be23eedd"),
+            624: ("Material.solar_absorptance", "exception", "immutable-finite-native-material-solar-absorptance-ae7ce02b"),
+            625: ("Material.specific_heat", "exception", "immutable-finite-native-material-specific-heat-abf4a2ea"),
+            626: ("Material.thermal_absorptance", "exception", "immutable-finite-native-material-thermal-absorptance-f17730ed"),
+            627: ("Material.visible_absorptance", "exception", "immutable-finite-native-material-visible-absorptance-ecf6d77d"),
+            628: ("MaterialRoughness", "exception", "strongly-typed-native-material-roughness-enum-fc281859"),
+            629: ("MaterialRoughness.MEDIUMROUGH", "equivalent", None),
+            630: ("MaterialRoughness.MEDIUMSMOOTH", "equivalent", None),
+            631: ("MaterialRoughness.ROUGH", "equivalent", None),
+            632: ("MaterialRoughness.SMOOTH", "equivalent", None),
+            633: ("MaterialRoughness.VERYROUGH", "equivalent", None),
+            634: ("MaterialRoughness.__str__", "equivalent", None),
+            635: ("NoMassConstruction", "exception", "immutable-validated-native-no-mass-construction-9dff867c"),
+            636: ("NoMassConstruction.U", "exception", "immutable-finite-native-no-mass-u-98ebe259"),
+            637: ("NoMassConstruction.__init__", "exception", "validated-immutable-native-no-mass-init-47497892"),
         }
-        for index, (symbol, exception_id) in expected_targets.items():
+        for index, (symbol, classification, exception_id) in expected_targets.items():
             entry = entries[index]
             self.assertEqual(("src/idragon/dragon/construction.py", symbol), entry.key)
-            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(classification, entry.classification, symbol)
             self.assertEqual(exception_id, entry.exception_id, symbol)
 
-        expected_adjacent_classifications = (
-            "out_of_scope",
-            "out_of_scope",
-            "exception",
-            "needs_reverification",
-            "needs_reverification",
-            "exception",
-            "exception",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "exception",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "out_of_scope",
-            "out_of_scope",
-            "exception",
-            "needs_reverification",
-            "needs_reverification",
-            "exception",
-            "exception",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "exception",
-            "needs_reverification",
-            "exception",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "needs_reverification",
-            "out_of_scope",
-            "out_of_scope",
-            "exception",
+        construction_core_targets = {
+            index: values for index, values in expected_targets.items() if index >= 593
+        }
+        self.assertEqual(35, len(construction_core_targets))
+        self.assertEqual(
+            {"equivalent": 11, "exception": 24},
+            {
+                classification: sum(
+                    values[1] == classification
+                    for values in construction_core_targets.values()
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+        expected_adjacent_overrides = {
+            590: "out_of_scope",
+            591: "out_of_scope",
+            592: "exception",
+            595: "exception",
+            596: "exception",
+            601: "exception",
+            606: "out_of_scope",
+            607: "out_of_scope",
+            608: "exception",
+            611: "exception",
+            612: "exception",
+            617: "exception",
+            619: "exception",
+            638: "out_of_scope",
+            639: "out_of_scope",
+            640: "exception",
+            **{
+                index: values[1]
+                for index, values in construction_core_targets.items()
+            },
+        }
+        expected_adjacent_classifications = tuple(
+            expected_adjacent_overrides.get(index, "needs_reverification")
+            for index in range(590, 641)
         )
         self.assertEqual(
             expected_adjacent_classifications,

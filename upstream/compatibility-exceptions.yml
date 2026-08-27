@@ -3093,3 +3093,339 @@
     api_contract: callers use the typed public constructor with one required name and one optional double ACH argument and receive validation before any AirBoundary value exists
     compatibility_evidence: only the exact AB01 through AB04 constructor, argument, default, rejection and captured state facts, primary SimpleConstructions.cs implementation binding and canonical two-target native receipt are claimed; the class has its own receipt, indices 590 through 640 are not retargeted, and no Python-only dynamic signature or full-construction-family closure is asserted
   approval: accepted-native-api-adaptation
+
+- id: immutable-validated-native-construction-451c832a
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Construction"
+    symbol_hash: sha256:451c832ae468ffe5d8cf9a462538dbd45df5d81c0d9a789d22b8ebc9cdc662c1
+  difference:
+    upstream: "Python accepts mutable names and child collections, permits empty and dynamic variadic material/thickness construction, retains aliases, and validates only when derived operations reach child behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Construction constructs a nonempty immutable typed layer sequence, defensively copies the input, and validates names and child values before an instance exists"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Construction through GonieGonie.InvisibleDragon.Construction.Construction for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation under adaptation family immutable-validated-native-construction-451c832a. The canonical direct receipt is sha256:652f3e47593c40f4ce3219b27512b5564012bfcb964f39132e2751602e1d8410. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Construction and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Construction are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: typed-nonempty-native-construction-init-c99eac6b
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Construction.__init__"
+    symbol_hash: sha256:c99eac6b7f0a56aefc53f3d6f67771870aa324f3e3e455a884ae3d046bcacbee
+  difference:
+    upstream: "Python accepts mutable names and child collections, permits empty and dynamic variadic material/thickness construction, retains aliases, and validates only when derived operations reach child behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Construction.Construction constructs a nonempty immutable typed layer sequence, defensively copies the input, and validates names and child values before an instance exists"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Construction.__init__ through GonieGonie.InvisibleDragon.Construction.Construction.Construction for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation under adaptation family typed-nonempty-native-construction-init-c99eac6b. The canonical direct receipt is sha256:dd717e081a81e69a56a5402da40f2cdf0aaf7a1b5ca3c2e83d164b23b6df2bee. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Construction.Construction and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Construction.__init__ are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-validated-native-construction-reverse-f3f8b2b1
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Construction.reversed"
+    symbol_hash: sha256:f3f8b2b13f2d35ab827dc50d35300299ffb4fdff84c23e1b61e1f75a9bd66ae6
+  difference:
+    upstream: "Python builds a new mutable construction from reversed references to the same mutable child objects"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Construction.Reverse returns a validated immutable construction over reversed immutable layer values"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Construction.reversed through GonieGonie.InvisibleDragon.Construction.Construction.Reverse for exact cases dragon-construction-core.c12-construction-reverse-order-alias under adaptation family immutable-validated-native-construction-reverse-f3f8b2b1. The canonical direct receipt is sha256:4ba57d50ed37a0d6a4ca715e66329112029cbb1c7bac4c1d89d533bd850bbb14. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Construction.Reverse and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Construction.reversed are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-validated-native-glazing-5615eebb
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Glazing"
+    symbol_hash: sha256:5615eebbd32c5598a861819f7d6b3a78e196195e4e75720f127efcb569e3b183
+  difference:
+    upstream: "Python exposes mutable name, U, and G attributes with dynamic validation, Python bool and nonfinite edge behavior, and post-construction reassignment"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Glazing is an immutable typed record with validated nonblank name, finite positive U-value, and finite G-value constrained to zero through one"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Glazing through GonieGonie.InvisibleDragon.Construction.Glazing for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c15-glazing-mutation, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family immutable-validated-native-glazing-5615eebb. The canonical direct receipt is sha256:d2fe69505c5f6e8889a8426214347e06d68ccbdeee45609f84510d849c2e64ca. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Glazing and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Glazing are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-bounded-native-glazing-g-cb8ad4be
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Glazing.G"
+    symbol_hash: sha256:cb8ad4be46db878574e1b2bd7d6acb89d14d3790e40fb103a36b9d2b55c06608
+  difference:
+    upstream: "Python G assignment is mutable, accepts Python bool, positive infinity, and values above one, and rejects only values that fail its dynamic greater-than-zero check"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Glazing.SolarHeatGainCoefficient exposes a get-only finite double constrained to the closed interval zero through one"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Glazing.G through GonieGonie.InvisibleDragon.Construction.Glazing.SolarHeatGainCoefficient for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c15-glazing-mutation, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family immutable-bounded-native-glazing-g-cb8ad4be. The canonical direct receipt is sha256:20ef38477d98a9ae6b851ccff3726ca318fc460b65370fab0d96acb055c72f6d. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Glazing.SolarHeatGainCoefficient and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Glazing.G are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-finite-native-glazing-u-98ebe259
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Glazing.U"
+    symbol_hash: sha256:98ebe259795ce2a3c2e4409a7f4b07ea156ce03ec82f75f80eaacf9443ea2c74
+  difference:
+    upstream: "Python U assignment is mutable and follows dynamic greater-than-zero comparison semantics including Python bool and nonfinite edge behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Glazing.UValueWattsPerSquareMetreKelvin exposes a get-only finite positive double"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Glazing.U through GonieGonie.InvisibleDragon.Construction.Glazing.UValueWattsPerSquareMetreKelvin for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c15-glazing-mutation, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family immutable-finite-native-glazing-u-98ebe259. The canonical direct receipt is sha256:763b0571e383f177526aa65925fb0c9d7ac20acbd4760353ed69fa1aff044812. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Glazing.UValueWattsPerSquareMetreKelvin and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Glazing.U are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: validated-immutable-native-glazing-init-bfe7247a
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Glazing.__init__"
+    symbol_hash: sha256:bfe7247a3ea9282f15591f6ddd95981b7d9d17090daa27f37963202cc5ec64f6
+  difference:
+    upstream: "Python exposes mutable name, U, and G attributes with dynamic validation, Python bool and nonfinite edge behavior, and post-construction reassignment"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Glazing.Glazing is an immutable typed record with validated nonblank name, finite positive U-value, and finite G-value constrained to zero through one"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Glazing.__init__ through GonieGonie.InvisibleDragon.Construction.Glazing.Glazing for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family validated-immutable-native-glazing-init-bfe7247a. The canonical direct receipt is sha256:1270dd680eaeb8175eddd103a2995a96a3ab16fd06f2821ae3c8b4935c8e4fa8. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Glazing.Glazing and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Glazing.__init__ are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-validated-native-layer-e6a3fe0d
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Layer"
+    symbol_hash: sha256:e6a3fe0d1609d906a38b41716b1b7c4a8023d8a8d2d994372be5220fe7ffa25b
+  difference:
+    upstream: "Python exposes mutable name, material alias, and thickness state with dynamic validators and Python-only type, bool, and nonfinite behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Layer is an immutable typed record with required material, validated name, and finite positive thickness"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Layer through GonieGonie.InvisibleDragon.Construction.Layer for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family immutable-validated-native-layer-e6a3fe0d. The canonical direct receipt is sha256:5d78339ab02ff19b0001595eafc38e07b298d80c794aa36491df102e2b2e1c2e. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Layer and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Layer are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: validated-immutable-native-layer-init-60e437a1
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Layer.__init__"
+    symbol_hash: sha256:60e437a193c85e3989efa3af43401cb41ed1dd2e4b67e71ca84e3a9c7f1eb05d
+  difference:
+    upstream: "Python exposes mutable name, material alias, and thickness state with dynamic validators and Python-only type, bool, and nonfinite behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Layer.Layer is an immutable typed record with required material, validated name, and finite positive thickness"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Layer.__init__ through GonieGonie.InvisibleDragon.Construction.Layer.Layer for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family validated-immutable-native-layer-init-60e437a1. The canonical direct receipt is sha256:fb2123c30c01866c066df22c119aac1d23cca74152bf5b586f2c34538bc2d3e3. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Layer.Layer and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Layer.__init__ are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-required-native-layer-material-6454844c
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Layer.material"
+    symbol_hash: sha256:6454844c03c2d78d936689815e815ac76301c7f135efdc361c6700b4a0391f61
+  difference:
+    upstream: "Python retains and permits reassignment of a mutable material alias and derived values observe later child mutation"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Layer.Material requires a typed non-null immutable Material value through a get-only property"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Layer.material through GonieGonie.InvisibleDragon.Construction.Layer.Material for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family immutable-required-native-layer-material-6454844c. The canonical direct receipt is sha256:84e79a77ca15a6957de9af019f1aaba12e8834a81c958c5f6e052980005b3884. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Layer.Material and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Layer.material are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-finite-native-layer-thickness-d7d789d7
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Layer.thickness"
+    symbol_hash: sha256:d7d789d7eddbbdc9b7f7db4e683689ddc362be53336654fe9930319b1ea25899
+  difference:
+    upstream: "Python thickness is mutable and follows dynamic greater-than-zero comparison semantics including Python bool and nonfinite edge behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Layer.ThicknessMetres exposes a get-only finite positive double"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Layer.thickness through GonieGonie.InvisibleDragon.Construction.Layer.ThicknessMetres for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family immutable-finite-native-layer-thickness-d7d789d7. The canonical direct receipt is sha256:3a2773ce1349f22db653b2e28f00b4271cfb94170e5fc51cd3fa6478789a6e6c. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Layer.ThicknessMetres and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Layer.thickness are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-validated-native-material-15ad6614
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Material"
+    symbol_hash: sha256:15ad6614da4693f24dc519c4a8ebc1503c18e90f5e7407194e7af2ee478878c2
+  difference:
+    upstream: "Python exposes mutable material state with dynamic validation order, string roughness values, and Python bool and nonfinite edge behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Material is an immutable typed material with a strongly typed roughness enum and eager finite and range validation"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Material through GonieGonie.InvisibleDragon.Construction.Material for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-validated-native-material-15ad6614. The canonical direct receipt is sha256:88bc1047e7b3a90cbaa8741181b79829efac4b977754e787a5e2aec2b328776c. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Material and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Material are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: validated-immutable-native-material-init-d78cab39
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Material.__init__"
+    symbol_hash: sha256:d78cab39fcf7243e0cd0c59653ff7514b95dbddf3cc9a28eb14a8834bfd9791d
+  difference:
+    upstream: "Python exposes mutable material state with dynamic validation order, string roughness values, and Python bool and nonfinite edge behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Material.Material is an immutable typed material with a strongly typed roughness enum and eager finite and range validation"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Material.__init__ through GonieGonie.InvisibleDragon.Construction.Material.Material for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family validated-immutable-native-material-init-d78cab39. The canonical direct receipt is sha256:8b1a550d46cb05c6d36cd40384c1c7e5091d54f074358fd287d360a4bcad6843. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Material.Material and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Material.__init__ are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-finite-native-material-conductivity-b733b56b
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Material.conductivity"
+    symbol_hash: sha256:b733b56b8a0acfcefc97c11b3fef116d8a1a5a29c847ed24e600839289383471
+  difference:
+    upstream: "Python conductivity is mutable and follows its dynamic comparison semantics including the fixture-pinned bool, range, validation-order, and nonfinite cases"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Material.ConductivityWattsPerMetreKelvin exposes a get-only double with eager finite and domain validation"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Material.conductivity through GonieGonie.InvisibleDragon.Construction.Material.ConductivityWattsPerMetreKelvin for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-conductivity-b733b56b. The canonical direct receipt is sha256:0a24c588a793f99d624fa82e19a67962a1d2e3cfd9afd24c341031697a7f1c3d. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Material.ConductivityWattsPerMetreKelvin and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Material.conductivity are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-finite-native-material-density-23136324
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Material.density"
+    symbol_hash: sha256:231363247e3bc2f63cd6b88174bb6e3f732f56e00f0abab5bc9eeb69d2ef8893
+  difference:
+    upstream: "Python density is mutable and follows its dynamic comparison semantics including the fixture-pinned bool, range, validation-order, and nonfinite cases"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Material.DensityKilogramsPerCubicMetre exposes a get-only double with eager finite and domain validation"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Material.density through GonieGonie.InvisibleDragon.Construction.Material.DensityKilogramsPerCubicMetre for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-density-23136324. The canonical direct receipt is sha256:a9ee090c9177441714e33bbad9554457e95ba74a3dabdd25c1483fad135b493a. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Material.DensityKilogramsPerCubicMetre and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Material.density are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-strongly-typed-native-material-roughness-be23eedd
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Material.roughness"
+    symbol_hash: sha256:be23eedd7fa255d7489768c6081e40cbc6361e17736f66dbea5609b89105465b
+  difference:
+    upstream: "Python roughness is a mutable MaterialRoughness string-Enum value and can be reassigned after construction"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Material.Roughness exposes a get-only strongly typed native MaterialRoughness enum"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Material.roughness through GonieGonie.InvisibleDragon.Construction.Material.Roughness for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation under adaptation family immutable-strongly-typed-native-material-roughness-be23eedd. The canonical direct receipt is sha256:b36d3f7fefebf46879dc638daf2376671bdc19ecf4cc0f0915697e772f7df5a3. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Material.Roughness and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Material.roughness are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-finite-native-material-solar-absorptance-ae7ce02b
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Material.solar_absorptance"
+    symbol_hash: sha256:ae7ce02bf1109ed4279c351fa9497272fef93c019b587fd237073bf1055d315f
+  difference:
+    upstream: "Python solar_absorptance is mutable and follows its dynamic comparison semantics including the fixture-pinned bool, range, validation-order, and nonfinite cases"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Material.SolarAbsorptance exposes a get-only double with eager finite and domain validation"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Material.solar_absorptance through GonieGonie.InvisibleDragon.Construction.Material.SolarAbsorptance for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-solar-absorptance-ae7ce02b. The canonical direct receipt is sha256:894fbcd9467fab6732cd2abf5f23f34ac6e4603a4deb6a3afe63ae254a150cd4. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Material.SolarAbsorptance and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Material.solar_absorptance are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-finite-native-material-specific-heat-abf4a2ea
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Material.specific_heat"
+    symbol_hash: sha256:abf4a2ea739fe17a9d04c787331534748bfd530f11baddf215ea17e5363f011b
+  difference:
+    upstream: "Python specific_heat is mutable and follows its dynamic comparison semantics including the fixture-pinned bool, range, validation-order, and nonfinite cases"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Material.SpecificHeatJoulesPerKilogramKelvin exposes a get-only double with eager finite and domain validation"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Material.specific_heat through GonieGonie.InvisibleDragon.Construction.Material.SpecificHeatJoulesPerKilogramKelvin for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-specific-heat-abf4a2ea. The canonical direct receipt is sha256:d47847530604652d8b75b72bce0e87526a703ad212a91ec1efe05bb85fc2095a. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Material.SpecificHeatJoulesPerKilogramKelvin and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Material.specific_heat are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-finite-native-material-thermal-absorptance-f17730ed
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Material.thermal_absorptance"
+    symbol_hash: sha256:f17730ed4aa6cc5d8aa673527cd0b43e3ef83ead9df7d5d5910ad26eaa87f784
+  difference:
+    upstream: "Python thermal_absorptance is mutable and follows its dynamic comparison semantics including the fixture-pinned bool, range, validation-order, and nonfinite cases"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Material.ThermalAbsorptance exposes a get-only double with eager finite and domain validation"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Material.thermal_absorptance through GonieGonie.InvisibleDragon.Construction.Material.ThermalAbsorptance for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-thermal-absorptance-f17730ed. The canonical direct receipt is sha256:8e7d28351545e5b5962997203dd526e9947588708d39fdc2056368e4af1ec2cf. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Material.ThermalAbsorptance and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Material.thermal_absorptance are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-finite-native-material-visible-absorptance-ecf6d77d
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "Material.visible_absorptance"
+    symbol_hash: sha256:ecf6d77de8ef2e870df1470b8113e2beaa1154e5ae54d6581d7c62840df71c9c
+  difference:
+    upstream: "Python visible_absorptance is mutable and follows its dynamic comparison semantics including the fixture-pinned bool, range, validation-order, and nonfinite cases"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.Material.VisibleAbsorptance exposes a get-only double with eager finite and domain validation"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify Material.visible_absorptance through GonieGonie.InvisibleDragon.Construction.Material.VisibleAbsorptance for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-visible-absorptance-ecf6d77d. The canonical direct receipt is sha256:de478b29d93c6ad02c814b3e136b4d92c66d50be21afe8e19d2fc9c342181354. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.Material.VisibleAbsorptance and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to Material.visible_absorptance are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: strongly-typed-native-material-roughness-enum-fc281859
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "MaterialRoughness"
+    symbol_hash: sha256:fc281859031701e047f11e96eac77ca6cb530ce23493a7ef77c1e0000d31ff08
+  difference:
+    upstream: "Python models roughness as a constructible string Enum with exact string values and Python Enum lookup and failure behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.MaterialRoughness is a strongly typed integral CLR enum whose member mappings are separately verified"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify MaterialRoughness through GonieGonie.InvisibleDragon.Construction.MaterialRoughness for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c03-roughness-construction-invalid under adaptation family strongly-typed-native-material-roughness-enum-fc281859. The canonical direct receipt is sha256:0e688e2fa39f51dfb1d1fe7a97ecae9a554ff8893a71c9fa0f1a2df9be27e281. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.MaterialRoughness and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to MaterialRoughness are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-validated-native-no-mass-construction-9dff867c
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "NoMassConstruction"
+    symbol_hash: sha256:9dff867c894980d4bda1f7c0cc731348382bef441677df6a70b79ebf876c23a2
+  difference:
+    upstream: "Python exposes mutable name and U state with dynamic validation and Python bool and nonfinite edge behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.NoMassConstruction is an immutable typed record with validated nonblank name and finite positive U-value"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify NoMassConstruction through GonieGonie.InvisibleDragon.Construction.NoMassConstruction for exact cases dragon-construction-core.c17-no-mass-state, dragon-construction-core.c18-no-mass-mutation, dragon-construction-core.c19-no-mass-type-range-nonfinite under adaptation family immutable-validated-native-no-mass-construction-9dff867c. The canonical direct receipt is sha256:6b886c2228a946b15aeaabba3871ba2007dfe6d07cc5e1a2727f13ba24839690. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.NoMassConstruction and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to NoMassConstruction are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-finite-native-no-mass-u-98ebe259
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "NoMassConstruction.U"
+    symbol_hash: sha256:98ebe259795ce2a3c2e4409a7f4b07ea156ce03ec82f75f80eaacf9443ea2c74
+  difference:
+    upstream: "Python U assignment is mutable and follows dynamic greater-than-zero comparison semantics including Python bool and nonfinite edge behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.NoMassConstruction.UValueWattsPerSquareMetreKelvin exposes a get-only finite positive double"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify NoMassConstruction.U through GonieGonie.InvisibleDragon.Construction.NoMassConstruction.UValueWattsPerSquareMetreKelvin for exact cases dragon-construction-core.c17-no-mass-state, dragon-construction-core.c18-no-mass-mutation, dragon-construction-core.c19-no-mass-type-range-nonfinite under adaptation family immutable-finite-native-no-mass-u-98ebe259. The canonical direct receipt is sha256:94d0d73f67963556147eea18e3e1b1cc19668739ddb601e0f2e6904346d48e9b. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.NoMassConstruction.UValueWattsPerSquareMetreKelvin and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to NoMassConstruction.U are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation
+
+- id: validated-immutable-native-no-mass-init-47497892
+  upstream:
+    path: "src/idragon/dragon/construction.py"
+    symbol: "NoMassConstruction.__init__"
+    symbol_hash: sha256:4749789207a6ac2baa1695fc65c6c280636e4dd352a9a7ae0369b7857a395338
+  difference:
+    upstream: "Python exposes mutable name and U state with dynamic validation and Python bool and nonfinite edge behavior"
+    dotnet: "GonieGonie.InvisibleDragon.Construction.NoMassConstruction.NoMassConstruction is an immutable typed record with validated nonblank name and finite positive U-value"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify NoMassConstruction.__init__ through GonieGonie.InvisibleDragon.Construction.NoMassConstruction.NoMassConstruction for exact cases dragon-construction-core.c17-no-mass-state, dragon-construction-core.c19-no-mass-type-range-nonfinite under adaptation family validated-immutable-native-no-mass-init-47497892. The canonical direct receipt is sha256:2ac2a08d050cfabdaaf3f0b19bcba3bf07588ed0d709e88da0594cdeb3bbe0a5. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.NoMassConstruction.NoMassConstruction and its immutable public contract"
+    compatibility_evidence: "only the exact recorder cases and native public route bound to NoMassConstruction.__init__ are claimed; adjacent construction symbols remain separately classified"
+  approval: accepted-native-api-adaptation

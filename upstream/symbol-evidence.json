@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:7abaac72229370cca3b9b8576c4c89164ff57bab0189405760671aa4f825ed68",
+  "content_sha256": "sha256:2e656c805de99a525323814c2ff0d83d4fdef2601931aa60c740be0fd50ad5ee",
   "entries": [
     {
       "implementation": {
@@ -1954,7 +1954,59 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
-        "source_sha256": "sha256:dde94beae39d1ba272e735c3e0738a405fada13e6884a10dd8190f030a1f80df",
+        "source_sha256": "sha256:935cfdeb3c6a5ced1c8fc0bbdb5ae91f46cc98f04ac74aa5ff0beadc3f6716a1",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Construction"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Construction through GonieGonie.InvisibleDragon.Construction.Construction for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation under adaptation family immutable-validated-native-construction-451c832a. The canonical direct receipt is sha256:652f3e47593c40f4ce3219b27512b5564012bfcb964f39132e2751602e1d8410. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:497e43c59a983d8a2aa09a24df5589bdd06ef8901e4cbabccb9e7ae088e70ab0",
+          "id": "dragon-construction-core-593-451c832a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Construction",
+      "upstream_symbol_hash": "sha256:451c832ae468ffe5d8cf9a462538dbd45df5d81c0d9a789d22b8ebc9cdc662c1"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
+        "source_sha256": "sha256:935cfdeb3c6a5ced1c8fc0bbdb5ae91f46cc98f04ac74aa5ff0beadc3f6716a1",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Construction.UValue"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only Construction.U result or member mapping through GonieGonie.InvisibleDragon.Construction.Construction.UValue for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation. The canonical direct receipt is sha256:13dbf0a9c3b23d923f1ebda91b38aaabb921ff3bb437ea9bdd8056d0cfbf60d7. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:44898c0c06578acd3a36e28867e09af35f0a95a379a8e6b486892eedbffb44fe",
+          "id": "dragon-construction-core-594-a29f2b11",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Construction.U",
+      "upstream_symbol_hash": "sha256:a29f2b11c458a80277b67b155ad434d7df69ed93e32c9bdaa7595bcfa41e111a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
+        "source_sha256": "sha256:935cfdeb3c6a5ced1c8fc0bbdb5ae91f46cc98f04ac74aa5ff0beadc3f6716a1",
         "symbol": "GonieGonie.InvisibleDragon.Construction.Construction.Equals"
       },
       "path": "src/idragon/dragon/construction.py",
@@ -1969,7 +2021,7 @@
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/ConstructionTests.cs",
-          "test_source_sha256": "sha256:956754259c78fcc5ffed0e3c34fdef05929f69ccbbc6e675e194f763cb484c61",
+          "test_source_sha256": "sha256:70189ef8918bf4863902149e0793fa0812333b41b83fb9a113086b2e0f611be9",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.ConstructionTests.ConstructionEqualityAndHashMatchPinnedInvisibleDragonBehavior",
           "verification_kind": "cross_language"
         }
@@ -1980,7 +2032,7 @@
     {
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
-        "source_sha256": "sha256:dde94beae39d1ba272e735c3e0738a405fada13e6884a10dd8190f030a1f80df",
+        "source_sha256": "sha256:935cfdeb3c6a5ced1c8fc0bbdb5ae91f46cc98f04ac74aa5ff0beadc3f6716a1",
         "symbol": "GonieGonie.InvisibleDragon.Construction.Construction.GetHashCode"
       },
       "path": "src/idragon/dragon/construction.py",
@@ -1995,13 +2047,117 @@
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/ConstructionTests.cs",
-          "test_source_sha256": "sha256:956754259c78fcc5ffed0e3c34fdef05929f69ccbbc6e675e194f763cb484c61",
+          "test_source_sha256": "sha256:70189ef8918bf4863902149e0793fa0812333b41b83fb9a113086b2e0f611be9",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.ConstructionTests.ConstructionEqualityAndHashMatchPinnedInvisibleDragonBehavior",
           "verification_kind": "cross_language"
         }
       ],
       "symbol": "Construction.__hash__",
       "upstream_symbol_hash": "sha256:5994dd14a598a335d7945a1e39b59d93fd6bed9afbaff1308019b57bf22d0889"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
+        "source_sha256": "sha256:935cfdeb3c6a5ced1c8fc0bbdb5ae91f46cc98f04ac74aa5ff0beadc3f6716a1",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Construction.Construction"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Construction.__init__ through GonieGonie.InvisibleDragon.Construction.Construction.Construction for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation under adaptation family typed-nonempty-native-construction-init-c99eac6b. The canonical direct receipt is sha256:dd717e081a81e69a56a5402da40f2cdf0aaf7a1b5ca3c2e83d164b23b6df2bee. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:007ce437d750a648fba8024df16f62fa545e36b8d2e5338324597d9a83e60939",
+          "id": "dragon-construction-core-597-c99eac6b",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Construction.__init__",
+      "upstream_symbol_hash": "sha256:c99eac6b7f0a56aefc53f3d6f67771870aa324f3e3e455a884ae3d046bcacbee"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
+        "source_sha256": "sha256:935cfdeb3c6a5ced1c8fc0bbdb5ae91f46cc98f04ac74aa5ff0beadc3f6716a1",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Construction.HeatCapacityJoulesPerSquareMetreKelvin"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only Construction.heat_capacity result or member mapping through GonieGonie.InvisibleDragon.Construction.Construction.HeatCapacityJoulesPerSquareMetreKelvin for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation. The canonical direct receipt is sha256:35b5e3f8fc6fa8c59bbe87c9479e3daaea5a65267ec01685de262870f2fec710. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:44799a3b0ea20ae8348620cd0f4bb237b5711d2d1765bcb240b7a465158e232f",
+          "id": "dragon-construction-core-598-cebc9acb",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Construction.heat_capacity",
+      "upstream_symbol_hash": "sha256:cebc9acb26c61981719622bc8621a2e46e71a856f7d735aa0ad1bac3ba924c3d"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
+        "source_sha256": "sha256:935cfdeb3c6a5ced1c8fc0bbdb5ae91f46cc98f04ac74aa5ff0beadc3f6716a1",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Construction.Reverse"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Construction.reversed through GonieGonie.InvisibleDragon.Construction.Construction.Reverse for exact cases dragon-construction-core.c12-construction-reverse-order-alias under adaptation family immutable-validated-native-construction-reverse-f3f8b2b1. The canonical direct receipt is sha256:4ba57d50ed37a0d6a4ca715e66329112029cbb1c7bac4c1d89d533bd850bbb14. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e8e0ede1bb6d0cea4ced87ad8b9c217eec5b1d38f8aadb118496976d9cf54c00",
+          "id": "dragon-construction-core-599-f3f8b2b1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Construction.reversed",
+      "upstream_symbol_hash": "sha256:f3f8b2b13f2d35ab827dc50d35300299ffb4fdff84c23e1b61e1f75a9bd66ae6"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
+        "source_sha256": "sha256:935cfdeb3c6a5ced1c8fc0bbdb5ae91f46cc98f04ac74aa5ff0beadc3f6716a1",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Construction.ThicknessMetres"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only Construction.thickness result or member mapping through GonieGonie.InvisibleDragon.Construction.Construction.ThicknessMetres for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation. The canonical direct receipt is sha256:9c83b75b1b026273a77856b83e4c09fb2f716a6d6311dfd1d3b490f87741a120. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6bb17711c4759e0e08257d5e22baaf03c602f24de308c13c5d84e430ced21c3c",
+          "id": "dragon-construction-core-600-bfcb0ba0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Construction.thickness",
+      "upstream_symbol_hash": "sha256:bfcb0ba0853de75fd7d905f75e1faf50c62c402bb560153f99095f2ae700b42a"
     },
     {
       "implementation": {
@@ -2028,6 +2184,110 @@
       ],
       "symbol": "Construction.to_idf_object",
       "upstream_symbol_hash": "sha256:71a76f27ebadf7476c2746f1634258a52b3f16bd19e01624d9ce3809afc37309"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+        "source_sha256": "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Glazing"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Glazing through GonieGonie.InvisibleDragon.Construction.Glazing for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c15-glazing-mutation, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family immutable-validated-native-glazing-5615eebb. The canonical direct receipt is sha256:d2fe69505c5f6e8889a8426214347e06d68ccbdeee45609f84510d849c2e64ca. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:cf2152e6aa80404b2b630e6563ac244509045677b48e53ea4db9aa61356d768d",
+          "id": "dragon-construction-core-602-5615eebb",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Glazing",
+      "upstream_symbol_hash": "sha256:5615eebbd32c5598a861819f7d6b3a78e196195e4e75720f127efcb569e3b183"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+        "source_sha256": "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Glazing.SolarHeatGainCoefficient"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Glazing.G through GonieGonie.InvisibleDragon.Construction.Glazing.SolarHeatGainCoefficient for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c15-glazing-mutation, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family immutable-bounded-native-glazing-g-cb8ad4be. The canonical direct receipt is sha256:20ef38477d98a9ae6b851ccff3726ca318fc460b65370fab0d96acb055c72f6d. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:070f8f3d83bd470ca401a26bd3706e989fb4a68ef4a54d69c7d7b25c6e83fb30",
+          "id": "dragon-construction-core-603-cb8ad4be",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Glazing.G",
+      "upstream_symbol_hash": "sha256:cb8ad4be46db878574e1b2bd7d6acb89d14d3790e40fb103a36b9d2b55c06608"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+        "source_sha256": "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Glazing.UValueWattsPerSquareMetreKelvin"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Glazing.U through GonieGonie.InvisibleDragon.Construction.Glazing.UValueWattsPerSquareMetreKelvin for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c15-glazing-mutation, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family immutable-finite-native-glazing-u-98ebe259. The canonical direct receipt is sha256:763b0571e383f177526aa65925fb0c9d7ac20acbd4760353ed69fa1aff044812. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:bcde87ecef242babd021572a1052c9f9c80a2068a6d6b8e2bbfdd639ea0015b6",
+          "id": "dragon-construction-core-604-98ebe259",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Glazing.U",
+      "upstream_symbol_hash": "sha256:98ebe259795ce2a3c2e4409a7f4b07ea156ce03ec82f75f80eaacf9443ea2c74"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+        "source_sha256": "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Glazing.Glazing"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Glazing.__init__ through GonieGonie.InvisibleDragon.Construction.Glazing.Glazing for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family validated-immutable-native-glazing-init-bfe7247a. The canonical direct receipt is sha256:1270dd680eaeb8175eddd103a2995a96a3ab16fd06f2821ae3c8b4935c8e4fa8. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f98b569caedbd199ddab442d2f14affa453267695d2d10e67dc8d297544c52b6",
+          "id": "dragon-construction-core-605-bfe7247a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Glazing.__init__",
+      "upstream_symbol_hash": "sha256:bfe7247a3ea9282f15591f6ddd95981b7d9d17090daa27f37963202cc5ec64f6"
     },
     {
       "implementation": {
@@ -2059,6 +2319,58 @@
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Layer.cs",
         "source_sha256": "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Layer"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Layer through GonieGonie.InvisibleDragon.Construction.Layer for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family immutable-validated-native-layer-e6a3fe0d. The canonical direct receipt is sha256:5d78339ab02ff19b0001595eafc38e07b298d80c794aa36491df102e2b2e1c2e. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1304d5e093ed05d9e9113d48fa6528b778101ffc55459747076db87915d32a63",
+          "id": "dragon-construction-core-609-e6a3fe0d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Layer",
+      "upstream_symbol_hash": "sha256:e6a3fe0d1609d906a38b41716b1b7c4a8023d8a8d2d994372be5220fe7ffa25b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Layer.cs",
+        "source_sha256": "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Layer.UValue"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only Layer.U result or member mapping through GonieGonie.InvisibleDragon.Construction.Layer.UValue for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation. The canonical direct receipt is sha256:f742b5e9ee7aa8c558aff5ea50d526d06cd3513e65e09b05eff6e6e809f20274. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:26647cc112260c3d83b09bf613f099491111afeefb1f18e15b2d4d8a4be0eedd",
+          "id": "dragon-construction-core-610-be30888f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Layer.U",
+      "upstream_symbol_hash": "sha256:be30888f37ab4d68b8032d65be2328c94c7297647b1b3ec7f6750a4d45bb60ac"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Layer.cs",
+        "source_sha256": "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc",
         "symbol": "GonieGonie.InvisibleDragon.Construction.Layer.Equals"
       },
       "path": "src/idragon/dragon/construction.py",
@@ -2073,7 +2385,7 @@
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/ConstructionTests.cs",
-          "test_source_sha256": "sha256:956754259c78fcc5ffed0e3c34fdef05929f69ccbbc6e675e194f763cb484c61",
+          "test_source_sha256": "sha256:70189ef8918bf4863902149e0793fa0812333b41b83fb9a113086b2e0f611be9",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.ConstructionTests.LayerEqualityAndHashMatchPinnedInvisibleDragonBehavior",
           "verification_kind": "cross_language"
         }
@@ -2099,13 +2411,117 @@
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/ConstructionTests.cs",
-          "test_source_sha256": "sha256:956754259c78fcc5ffed0e3c34fdef05929f69ccbbc6e675e194f763cb484c61",
+          "test_source_sha256": "sha256:70189ef8918bf4863902149e0793fa0812333b41b83fb9a113086b2e0f611be9",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.ConstructionTests.LayerEqualityAndHashMatchPinnedInvisibleDragonBehavior",
           "verification_kind": "cross_language"
         }
       ],
       "symbol": "Layer.__hash__",
       "upstream_symbol_hash": "sha256:5994dd14a598a335d7945a1e39b59d93fd6bed9afbaff1308019b57bf22d0889"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Layer.cs",
+        "source_sha256": "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Layer.Layer"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Layer.__init__ through GonieGonie.InvisibleDragon.Construction.Layer.Layer for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family validated-immutable-native-layer-init-60e437a1. The canonical direct receipt is sha256:fb2123c30c01866c066df22c119aac1d23cca74152bf5b586f2c34538bc2d3e3. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b4fd9a488bad4e1d8d63d2727044778083cfd203f3bfb945d57a8cb5fe8d692c",
+          "id": "dragon-construction-core-613-60e437a1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Layer.__init__",
+      "upstream_symbol_hash": "sha256:60e437a193c85e3989efa3af43401cb41ed1dd2e4b67e71ca84e3a9c7f1eb05d"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Layer.cs",
+        "source_sha256": "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Layer.HeatCapacityJoulesPerSquareMetreKelvin"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only Layer.heat_capacity result or member mapping through GonieGonie.InvisibleDragon.Construction.Layer.HeatCapacityJoulesPerSquareMetreKelvin for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation. The canonical direct receipt is sha256:69a6802104de81f481e7c5519a076a9fdede0d42749a0a180a3b3a8b49b63ea6. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:ec597e460150c3083e650a9cfa1d0d06a22c9fecad5344dafdaf1c6103bd4e88",
+          "id": "dragon-construction-core-614-ab4d9ecc",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Layer.heat_capacity",
+      "upstream_symbol_hash": "sha256:ab4d9ecc8b11fd1a97ce37861d9e672f36bf362cc6c0db3e1e0171a57483c31b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Layer.cs",
+        "source_sha256": "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Layer.Material"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Layer.material through GonieGonie.InvisibleDragon.Construction.Layer.Material for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family immutable-required-native-layer-material-6454844c. The canonical direct receipt is sha256:84e79a77ca15a6957de9af019f1aaba12e8834a81c958c5f6e052980005b3884. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:10811bca002cdaea6662bce2feddcfe955e3648407f3a412da4e6770d0d2328a",
+          "id": "dragon-construction-core-615-6454844c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Layer.material",
+      "upstream_symbol_hash": "sha256:6454844c03c2d78d936689815e815ac76301c7f135efdc361c6700b4a0391f61"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Layer.cs",
+        "source_sha256": "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Layer.ThicknessMetres"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Layer.thickness through GonieGonie.InvisibleDragon.Construction.Layer.ThicknessMetres for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family immutable-finite-native-layer-thickness-d7d789d7. The canonical direct receipt is sha256:3a2773ce1349f22db653b2e28f00b4271cfb94170e5fc51cd3fa6478789a6e6c. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:5b9664b963b83e71d6244fb6e120e54c75998fee2c86f9c8127d7a36927a766a",
+          "id": "dragon-construction-core-616-d7d789d7",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Layer.thickness",
+      "upstream_symbol_hash": "sha256:d7d789d7eddbbdc9b7f7db4e683689ddc362be53336654fe9930319b1ea25899"
     },
     {
       "implementation": {
@@ -2137,6 +2553,32 @@
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
         "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Material"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Material through GonieGonie.InvisibleDragon.Construction.Material for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-validated-native-material-15ad6614. The canonical direct receipt is sha256:88bc1047e7b3a90cbaa8741181b79829efac4b977754e787a5e2aec2b328776c. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c64849c96bb318a639ad1fb1b24904251d638dc883fe52590f97cb4b6b72ef4a",
+          "id": "dragon-construction-core-618-15ad6614",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Material",
+      "upstream_symbol_hash": "sha256:15ad6614da4693f24dc519c4a8ebc1503c18e90f5e7407194e7af2ee478878c2"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+        "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
         "symbol": "GonieGonie.InvisibleDragon.Construction.Material.Equals"
       },
       "path": "src/idragon/dragon/construction.py",
@@ -2151,13 +2593,481 @@
           "skipped": false,
           "structural_only": false,
           "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/ConstructionTests.cs",
-          "test_source_sha256": "sha256:956754259c78fcc5ffed0e3c34fdef05929f69ccbbc6e675e194f763cb484c61",
+          "test_source_sha256": "sha256:70189ef8918bf4863902149e0793fa0812333b41b83fb9a113086b2e0f611be9",
           "test_symbol": "GonieGonie.InvisibleDragon.Tests.ConstructionTests.MaterialEqualityMatchesPinnedInvisibleDragonProperties",
           "verification_kind": "cross_language"
         }
       ],
       "symbol": "Material.__eq__",
       "upstream_symbol_hash": "sha256:6ef680a2e300bcb56672f0d036de1b4aea3630cb90a635a3e45002ff8535dbf5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+        "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Material.Material"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Material.__init__ through GonieGonie.InvisibleDragon.Construction.Material.Material for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family validated-immutable-native-material-init-d78cab39. The canonical direct receipt is sha256:8b1a550d46cb05c6d36cd40384c1c7e5091d54f074358fd287d360a4bcad6843. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:04f720cebcf30a1cdec92eb00347bec90692530fa72080542a2dc1f8b4bed3a5",
+          "id": "dragon-construction-core-620-d78cab39",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Material.__init__",
+      "upstream_symbol_hash": "sha256:d78cab39fcf7243e0cd0c59653ff7514b95dbddf3cc9a28eb14a8834bfd9791d"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+        "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Material.ConductivityWattsPerMetreKelvin"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Material.conductivity through GonieGonie.InvisibleDragon.Construction.Material.ConductivityWattsPerMetreKelvin for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-conductivity-b733b56b. The canonical direct receipt is sha256:0a24c588a793f99d624fa82e19a67962a1d2e3cfd9afd24c341031697a7f1c3d. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:eb68ef1bbb8b4f68b96bd2df11f27d0509a7aa18c580ffc24a4878ced3183fb7",
+          "id": "dragon-construction-core-621-b733b56b",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Material.conductivity",
+      "upstream_symbol_hash": "sha256:b733b56b8a0acfcefc97c11b3fef116d8a1a5a29c847ed24e600839289383471"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+        "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Material.DensityKilogramsPerCubicMetre"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Material.density through GonieGonie.InvisibleDragon.Construction.Material.DensityKilogramsPerCubicMetre for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-density-23136324. The canonical direct receipt is sha256:a9ee090c9177441714e33bbad9554457e95ba74a3dabdd25c1483fad135b493a. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4b5673031289009c98f2b5f00d86bd3098502c7fe9f7be4b0ec4d2417bf02b76",
+          "id": "dragon-construction-core-622-23136324",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Material.density",
+      "upstream_symbol_hash": "sha256:231363247e3bc2f63cd6b88174bb6e3f732f56e00f0abab5bc9eeb69d2ef8893"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+        "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Material.Roughness"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Material.roughness through GonieGonie.InvisibleDragon.Construction.Material.Roughness for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation under adaptation family immutable-strongly-typed-native-material-roughness-be23eedd. The canonical direct receipt is sha256:b36d3f7fefebf46879dc638daf2376671bdc19ecf4cc0f0915697e772f7df5a3. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:510dcc98f63c7aea8a8c35705a52a0af68900b20cdfe15a5fb42b32fdab8e334",
+          "id": "dragon-construction-core-623-be23eedd",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Material.roughness",
+      "upstream_symbol_hash": "sha256:be23eedd7fa255d7489768c6081e40cbc6361e17736f66dbea5609b89105465b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+        "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Material.SolarAbsorptance"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Material.solar_absorptance through GonieGonie.InvisibleDragon.Construction.Material.SolarAbsorptance for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-solar-absorptance-ae7ce02b. The canonical direct receipt is sha256:894fbcd9467fab6732cd2abf5f23f34ac6e4603a4deb6a3afe63ae254a150cd4. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:be774cdfd931fb770b41cec00f6eaf22036a76f3c8be32e4f0504eab45980d22",
+          "id": "dragon-construction-core-624-ae7ce02b",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Material.solar_absorptance",
+      "upstream_symbol_hash": "sha256:ae7ce02bf1109ed4279c351fa9497272fef93c019b587fd237073bf1055d315f"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+        "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Material.SpecificHeatJoulesPerKilogramKelvin"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Material.specific_heat through GonieGonie.InvisibleDragon.Construction.Material.SpecificHeatJoulesPerKilogramKelvin for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-specific-heat-abf4a2ea. The canonical direct receipt is sha256:d47847530604652d8b75b72bce0e87526a703ad212a91ec1efe05bb85fc2095a. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e3cf160aad420112e1905123eea73e8be47bbec2d50ff39ac16038f6ffb1d29c",
+          "id": "dragon-construction-core-625-abf4a2ea",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Material.specific_heat",
+      "upstream_symbol_hash": "sha256:abf4a2ea739fe17a9d04c787331534748bfd530f11baddf215ea17e5363f011b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+        "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Material.ThermalAbsorptance"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Material.thermal_absorptance through GonieGonie.InvisibleDragon.Construction.Material.ThermalAbsorptance for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-thermal-absorptance-f17730ed. The canonical direct receipt is sha256:8e7d28351545e5b5962997203dd526e9947588708d39fdc2056368e4af1ec2cf. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:e2568208ce9baa109cdd92181bd1f40df982bee248c95e0082347904ced43dd9",
+          "id": "dragon-construction-core-626-f17730ed",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Material.thermal_absorptance",
+      "upstream_symbol_hash": "sha256:f17730ed4aa6cc5d8aa673527cd0b43e3ef83ead9df7d5d5910ad26eaa87f784"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+        "source_sha256": "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.Material.VisibleAbsorptance"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify Material.visible_absorptance through GonieGonie.InvisibleDragon.Construction.Material.VisibleAbsorptance for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-visible-absorptance-ecf6d77d. The canonical direct receipt is sha256:de478b29d93c6ad02c814b3e136b4d92c66d50be21afe8e19d2fc9c342181354. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0d0e22424d7d1722ba327a2af116a3cf3234ae182b6b42c8e58fb1685fb81299",
+          "id": "dragon-construction-core-627-ecf6d77d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "Material.visible_absorptance",
+      "upstream_symbol_hash": "sha256:ecf6d77de8ef2e870df1470b8113e2beaa1154e5ae54d6581d7c62840df71c9c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/MaterialRoughness.cs",
+        "source_sha256": "sha256:3e51b913e6323ed92af5d1121337ad9223113b349468866fa9e76c3f7634c6cf",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.MaterialRoughness"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify MaterialRoughness through GonieGonie.InvisibleDragon.Construction.MaterialRoughness for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c03-roughness-construction-invalid under adaptation family strongly-typed-native-material-roughness-enum-fc281859. The canonical direct receipt is sha256:0e688e2fa39f51dfb1d1fe7a97ecae9a554ff8893a71c9fa0f1a2df9be27e281. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:8850eb0679b224958b6efe67832e72ddaa8f67f7f0d1671508cddf7a4c8c2736",
+          "id": "dragon-construction-core-628-fc281859",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "MaterialRoughness",
+      "upstream_symbol_hash": "sha256:fc281859031701e047f11e96eac77ca6cb530ce23493a7ef77c1e0000d31ff08"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/MaterialRoughness.cs",
+        "source_sha256": "sha256:3e51b913e6323ed92af5d1121337ad9223113b349468866fa9e76c3f7634c6cf",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.MaterialRoughness.MediumRough"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.MEDIUMROUGH result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness.MediumRough for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:9945019e047fe3bf1b17c17d2d86fffe3e87fa07f5aec1d0220e433a160a9982. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:2bd0ee5e9ede272175ff6c0b9494007d7c5c43d93a6e2d7a9ec23e1e3351bb14",
+          "id": "dragon-construction-core-629-eda0d7d5",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "MaterialRoughness.MEDIUMROUGH",
+      "upstream_symbol_hash": "sha256:eda0d7d5e27bc9a869d83138fab36b72b59c5dc4cc013d3c8de181be8a683aa1"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/MaterialRoughness.cs",
+        "source_sha256": "sha256:3e51b913e6323ed92af5d1121337ad9223113b349468866fa9e76c3f7634c6cf",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.MaterialRoughness.MediumSmooth"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.MEDIUMSMOOTH result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness.MediumSmooth for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:de3a19dbf87836340b8f942e4e45942d5da9630acaedc7892fa220cc8fe2629e. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a970d2447790305621259c8b2113cc22a1b049343750fbd9b5805d23b7b72927",
+          "id": "dragon-construction-core-630-6d574d54",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "MaterialRoughness.MEDIUMSMOOTH",
+      "upstream_symbol_hash": "sha256:6d574d5473f00de478de3c31bb49dd0092748208c1b62b098f054b43b4d97023"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/MaterialRoughness.cs",
+        "source_sha256": "sha256:3e51b913e6323ed92af5d1121337ad9223113b349468866fa9e76c3f7634c6cf",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.MaterialRoughness.Rough"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.ROUGH result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness.Rough for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:966132fc97e4bdef7a5f01e348bb8c0797fbcfa747732835e5720ce104ffa0ff. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:87d357a588b97240d0157877eed951d46ffb48adfe21059102e9d211b1fc3903",
+          "id": "dragon-construction-core-631-beaf152f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "MaterialRoughness.ROUGH",
+      "upstream_symbol_hash": "sha256:beaf152fac9bd6bc2352e8a1ac6295cc9ba66bcf1d941a54753822672b961918"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/MaterialRoughness.cs",
+        "source_sha256": "sha256:3e51b913e6323ed92af5d1121337ad9223113b349468866fa9e76c3f7634c6cf",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.MaterialRoughness.Smooth"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.SMOOTH result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness.Smooth for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:a9008e028363cf75d155cdb2e80ca12a9e67fff44f711c9ab2aedc01817a6292. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:5ebc43664cf28029de6023e414267c6390eace71b4b0b5d9d7c5ab7a1b7154c5",
+          "id": "dragon-construction-core-632-fce6deeb",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "MaterialRoughness.SMOOTH",
+      "upstream_symbol_hash": "sha256:fce6deeb54d0293397f0279fb5ad9e25ff06f0bce3a0430a18d2935ad80739ff"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/MaterialRoughness.cs",
+        "source_sha256": "sha256:3e51b913e6323ed92af5d1121337ad9223113b349468866fa9e76c3f7634c6cf",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.MaterialRoughness.VeryRough"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.VERYROUGH result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness.VeryRough for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:cb44617d8efe59f332642846ae76369a83d7ab02f72e50d69f1b91cf55b1738e. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0184d994d37234940af9a0ed88c0328fb1c7628b8699c62346175a02bb7a1d4f",
+          "id": "dragon-construction-core-633-9848a0c6",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "MaterialRoughness.VERYROUGH",
+      "upstream_symbol_hash": "sha256:9848a0c66d3e174bd16efcbaac5d3f3a1b3f0e657f223306860a8f874ed0c7fd"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/MaterialRoughness.cs",
+        "source_sha256": "sha256:3e51b913e6323ed92af5d1121337ad9223113b349468866fa9e76c3f7634c6cf",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.MaterialRoughness"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.__str__ result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness for exact cases dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:f449ded5249782882e028ab17dd8db2395526e96c970ba022408e467ff7d262a. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6814e836ccb9b19dba614902ca5561a46eac74991fe52d151c79b9d8444ba8f9",
+          "id": "dragon-construction-core-634-f40e4929",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "MaterialRoughness.__str__",
+      "upstream_symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+        "source_sha256": "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.NoMassConstruction"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify NoMassConstruction through GonieGonie.InvisibleDragon.Construction.NoMassConstruction for exact cases dragon-construction-core.c17-no-mass-state, dragon-construction-core.c18-no-mass-mutation, dragon-construction-core.c19-no-mass-type-range-nonfinite under adaptation family immutable-validated-native-no-mass-construction-9dff867c. The canonical direct receipt is sha256:6b886c2228a946b15aeaabba3871ba2007dfe6d07cc5e1a2727f13ba24839690. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:69e55d71f8e1ecf3a364fcdb560f8a3a2263ae946bbc0574cdea6319f982e09d",
+          "id": "dragon-construction-core-635-9dff867c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "NoMassConstruction",
+      "upstream_symbol_hash": "sha256:9dff867c894980d4bda1f7c0cc731348382bef441677df6a70b79ebf876c23a2"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+        "source_sha256": "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.NoMassConstruction.UValueWattsPerSquareMetreKelvin"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify NoMassConstruction.U through GonieGonie.InvisibleDragon.Construction.NoMassConstruction.UValueWattsPerSquareMetreKelvin for exact cases dragon-construction-core.c17-no-mass-state, dragon-construction-core.c18-no-mass-mutation, dragon-construction-core.c19-no-mass-type-range-nonfinite under adaptation family immutable-finite-native-no-mass-u-98ebe259. The canonical direct receipt is sha256:94d0d73f67963556147eea18e3e1b1cc19668739ddb601e0f2e6904346d48e9b. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6704cafbc046dcd6c0eae4320b77bd37da5b86b664aadeec7b3b729c1db59292",
+          "id": "dragon-construction-core-636-98ebe259",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "NoMassConstruction.U",
+      "upstream_symbol_hash": "sha256:98ebe259795ce2a3c2e4409a7f4b07ea156ce03ec82f75f80eaacf9443ea2c74"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+        "source_sha256": "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
+        "symbol": "GonieGonie.InvisibleDragon.Construction.NoMassConstruction.NoMassConstruction"
+      },
+      "path": "src/idragon/dragon/construction.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify NoMassConstruction.__init__ through GonieGonie.InvisibleDragon.Construction.NoMassConstruction.NoMassConstruction for exact cases dragon-construction-core.c17-no-mass-state, dragon-construction-core.c19-no-mass-type-range-nonfinite under adaptation family validated-immutable-native-no-mass-init-47497892. The canonical direct receipt is sha256:2ac2a08d050cfabdaaf3f0b19bcba3bf07588ed0d709e88da0594cdeb3bbe0a5. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:151a06246ab153849410f5e883cf3a00856facea0f5326de7eb26933807463d2",
+          "id": "dragon-construction-core-637-47497892",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/ConstructionCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Construction.ConstructionCoreOracleParityTests.MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "NoMassConstruction.__init__",
+      "upstream_symbol_hash": "sha256:4749789207a6ac2baa1695fc65c6c280636e4dd352a9a7ae0369b7857a395338"
     },
     {
       "implementation": {
@@ -9729,9 +10639,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 374,
-    "passed_receipt_count": 374,
-    "receipt_count": 374,
+    "entry_count": 409,
+    "passed_receipt_count": 409,
+    "receipt_count": 409,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0

@@ -27,7 +27,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(220, len(configuration.exceptions))
+        self.assertEqual(244, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -41,16 +41,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(616, len(compatibility.needs_reverification))
+        self.assertEqual(581, len(compatibility.needs_reverification))
         self.assertEqual(
-            160,
+            171,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            214,
+            238,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -59,10 +59,10 @@ class ConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(compatibility.symbol_evidence)
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
-        self.assertEqual(374, len(symbol_evidence.entries))
-        self.assertEqual(374, len(symbol_evidence.receipts))
+        self.assertEqual(409, len(symbol_evidence.entries))
+        self.assertEqual(409, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:7abaac72229370cca3b9b8576c4c89164ff57bab0189405760671aa4f825ed68",
+            "sha256:2e656c805de99a525323814c2ff0d83d4fdef2601931aa60c740be0fd50ad5ee",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -328,6 +328,161 @@ class ConfigurationTests(unittest.TestCase):
             self.assertFalse(receipt.claims_active_load, symbol)
             self.assertEqual("not_applicable", receipt.exercised_load, symbol)
             air_boundary_assertions[symbol] = receipt.assertion
+        expected_construction_core = {
+            593: ("Construction", "exception", "immutable-validated-native-construction-451c832a", "dragon-construction-core-593-451c832a"),
+            594: ("Construction.U", "equivalent", None, "dragon-construction-core-594-a29f2b11"),
+            597: ("Construction.__init__", "exception", "typed-nonempty-native-construction-init-c99eac6b", "dragon-construction-core-597-c99eac6b"),
+            598: ("Construction.heat_capacity", "equivalent", None, "dragon-construction-core-598-cebc9acb"),
+            599: ("Construction.reversed", "exception", "immutable-validated-native-construction-reverse-f3f8b2b1", "dragon-construction-core-599-f3f8b2b1"),
+            600: ("Construction.thickness", "equivalent", None, "dragon-construction-core-600-bfcb0ba0"),
+            602: ("Glazing", "exception", "immutable-validated-native-glazing-5615eebb", "dragon-construction-core-602-5615eebb"),
+            603: ("Glazing.G", "exception", "immutable-bounded-native-glazing-g-cb8ad4be", "dragon-construction-core-603-cb8ad4be"),
+            604: ("Glazing.U", "exception", "immutable-finite-native-glazing-u-98ebe259", "dragon-construction-core-604-98ebe259"),
+            605: ("Glazing.__init__", "exception", "validated-immutable-native-glazing-init-bfe7247a", "dragon-construction-core-605-bfe7247a"),
+            609: ("Layer", "exception", "immutable-validated-native-layer-e6a3fe0d", "dragon-construction-core-609-e6a3fe0d"),
+            610: ("Layer.U", "equivalent", None, "dragon-construction-core-610-be30888f"),
+            613: ("Layer.__init__", "exception", "validated-immutable-native-layer-init-60e437a1", "dragon-construction-core-613-60e437a1"),
+            614: ("Layer.heat_capacity", "equivalent", None, "dragon-construction-core-614-ab4d9ecc"),
+            615: ("Layer.material", "exception", "immutable-required-native-layer-material-6454844c", "dragon-construction-core-615-6454844c"),
+            616: ("Layer.thickness", "exception", "immutable-finite-native-layer-thickness-d7d789d7", "dragon-construction-core-616-d7d789d7"),
+            618: ("Material", "exception", "immutable-validated-native-material-15ad6614", "dragon-construction-core-618-15ad6614"),
+            620: ("Material.__init__", "exception", "validated-immutable-native-material-init-d78cab39", "dragon-construction-core-620-d78cab39"),
+            621: ("Material.conductivity", "exception", "immutable-finite-native-material-conductivity-b733b56b", "dragon-construction-core-621-b733b56b"),
+            622: ("Material.density", "exception", "immutable-finite-native-material-density-23136324", "dragon-construction-core-622-23136324"),
+            623: ("Material.roughness", "exception", "immutable-strongly-typed-native-material-roughness-be23eedd", "dragon-construction-core-623-be23eedd"),
+            624: ("Material.solar_absorptance", "exception", "immutable-finite-native-material-solar-absorptance-ae7ce02b", "dragon-construction-core-624-ae7ce02b"),
+            625: ("Material.specific_heat", "exception", "immutable-finite-native-material-specific-heat-abf4a2ea", "dragon-construction-core-625-abf4a2ea"),
+            626: ("Material.thermal_absorptance", "exception", "immutable-finite-native-material-thermal-absorptance-f17730ed", "dragon-construction-core-626-f17730ed"),
+            627: ("Material.visible_absorptance", "exception", "immutable-finite-native-material-visible-absorptance-ecf6d77d", "dragon-construction-core-627-ecf6d77d"),
+            628: ("MaterialRoughness", "exception", "strongly-typed-native-material-roughness-enum-fc281859", "dragon-construction-core-628-fc281859"),
+            629: ("MaterialRoughness.MEDIUMROUGH", "equivalent", None, "dragon-construction-core-629-eda0d7d5"),
+            630: ("MaterialRoughness.MEDIUMSMOOTH", "equivalent", None, "dragon-construction-core-630-6d574d54"),
+            631: ("MaterialRoughness.ROUGH", "equivalent", None, "dragon-construction-core-631-beaf152f"),
+            632: ("MaterialRoughness.SMOOTH", "equivalent", None, "dragon-construction-core-632-fce6deeb"),
+            633: ("MaterialRoughness.VERYROUGH", "equivalent", None, "dragon-construction-core-633-9848a0c6"),
+            634: ("MaterialRoughness.__str__", "equivalent", None, "dragon-construction-core-634-f40e4929"),
+            635: ("NoMassConstruction", "exception", "immutable-validated-native-no-mass-construction-9dff867c", "dragon-construction-core-635-9dff867c"),
+            636: ("NoMassConstruction.U", "exception", "immutable-finite-native-no-mass-u-98ebe259", "dragon-construction-core-636-98ebe259"),
+            637: ("NoMassConstruction.__init__", "exception", "validated-immutable-native-no-mass-init-47497892", "dragon-construction-core-637-47497892"),
+        }
+        construction_core_implementation_files = {
+            "Construction": (
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
+                "sha256:935cfdeb3c6a5ced1c8fc0bbdb5ae91f46cc98f04ac74aa5ff0beadc3f6716a1",
+            ),
+            "Glazing": (
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+                "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
+            ),
+            "Layer": (
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Layer.cs",
+                "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc",
+            ),
+            "Material": (
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+                "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
+            ),
+            "MaterialRoughness": (
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/MaterialRoughness.cs",
+                "sha256:3e51b913e6323ed92af5d1121337ad9223113b349468866fa9e76c3f7634c6cf",
+            ),
+            "NoMassConstruction": (
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+                "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
+            ),
+        }
+        construction_core_test_path = (
+            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/"
+            "ConstructionCoreOracleParityTests.cs"
+        )
+        construction_core_test_symbol = (
+            "GonieGonie.InvisibleDragon.Tests.Construction."
+            "ConstructionCoreOracleParityTests."
+            "MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes"
+        )
+        construction_core_test_hash = (
+            "sha256:45fd9efec179e9c5e0018b2ce28d5ece3cfdd60f09cc47ace17036348edd664f"
+        )
+        construction_core_exceptions = {
+            item.identifier: item for item in configuration.exceptions
+        }
+        for index, (
+            symbol,
+            classification,
+            exception_id,
+            assertion_id,
+        ) in expected_construction_core.items():
+            key = ("src/idragon/dragon/construction.py", symbol)
+            inventory_symbol = compatibility.inventory.symbols[index]
+            entry = compatibility.matrix.entries[index]
+            self.assertEqual(key, inventory_symbol.key, symbol)
+            self.assertEqual(entry, by_key[key], symbol)
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            expected_references = [
+                f"upstream/symbol-evidence.json#{assertion_id}"
+            ]
+            if exception_id is not None:
+                expected_references.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+                exception = construction_core_exceptions[exception_id]
+                self.assertEqual(
+                    key,
+                    (exception.upstream_path, exception.upstream_symbol),
+                    symbol,
+                )
+                self.assertEqual(
+                    inventory_symbol.symbol_hash,
+                    exception.upstream_symbol_hash,
+                    symbol,
+                )
+                self.assertIn(("engineering_result", entry.rationale), exception.effects)
+            self.assertEqual(tuple(sorted(expected_references)), entry.evidence, symbol)
+
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            owner = symbol.split(".", 1)[0]
+            implementation_path, implementation_hash = (
+                construction_core_implementation_files[owner]
+            )
+            self.assertEqual(implementation_path, evidence_entry.implementation_path, symbol)
+            self.assertEqual(
+                implementation_hash,
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            self.assertTrue(
+                evidence_entry.implementation_symbol.startswith(
+                    f"GonieGonie.InvisibleDragon.Construction.{owner}"
+                ),
+                symbol,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertEqual(1, receipt.assertion.count("sha256:"), symbol)
+            self.assertIn("The canonical direct receipt is sha256:", receipt.assertion, symbol)
+            self.assertEqual(construction_core_test_path, receipt.test_path, symbol)
+            self.assertEqual(construction_core_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(construction_core_test_hash, receipt.test_source_sha256, symbol)
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+        self.assertEqual(35, len(expected_construction_core))
+        self.assertEqual(
+            {"equivalent": 11, "exception": 24},
+            {
+                classification: sum(
+                    values[1] == classification
+                    for values in expected_construction_core.values()
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
         self.assertEqual(2, len(expected_air_boundary_core))
         self.assertFalse(set(expected_air_boundary_core) & set(expected_construction_family))
         expected_adjacent_receipts = {
@@ -342,6 +497,12 @@ class ConfigurationTests(unittest.TestCase):
             619: "idragon-material-equality-native-null-adaptation",
             640: "dragon-construction-no-mass-construction-to-idf-object-2bc3fe98",
         }
+        expected_adjacent_receipts.update(
+            {
+                index: values[3]
+                for index, values in expected_construction_core.items()
+            }
+        )
         for index in range(590, 641):
             adjacent_key = compatibility.inventory.symbols[index].key
             if index in expected_adjacent_receipts:

@@ -593,51 +593,51 @@
     "out_of_scope",
     "out_of_scope",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
     "exception",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "out_of_scope",
     "out_of_scope",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
     "exception",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
-    "needs_reverification",
+    "equivalent",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
     "out_of_scope",
     "out_of_scope",
     "exception",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:b7c4d4d9ce37e66376078359b3c3dcb3b9805bb94e9c1ad6c1fa24a4b0264ec1",
+  "content_sha256": "sha256:469507028f501ffbe3e41d3edfed690759e806d68d8b642dd5d24a22dbcd5d7e",
   "details": [
     {
       "evidence": [
@@ -3162,6 +3162,22 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-validated-native-construction-451c832a",
+        "upstream/symbol-evidence.json#dragon-construction-core-593-451c832a"
+      ],
+      "exception_id": "immutable-validated-native-construction-451c832a",
+      "index": 593,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Construction through GonieGonie.InvisibleDragon.Construction.Construction for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation under adaptation family immutable-validated-native-construction-451c832a. The canonical direct receipt is sha256:652f3e47593c40f4ce3219b27512b5564012bfcb964f39132e2751602e1d8410. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-construction-core-594-a29f2b11"
+      ],
+      "index": 594,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only Construction.U result or member mapping through GonieGonie.InvisibleDragon.Construction.Construction.UValue for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation. The canonical direct receipt is sha256:13dbf0a9c3b23d923f1ebda91b38aaabb921ff3bb437ea9bdd8056d0cfbf60d7. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#construction-equality-native-null-operand",
         "upstream/symbol-evidence.json#idragon-construction-equality-native-null-adaptation"
       ],
@@ -3180,12 +3196,80 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#typed-nonempty-native-construction-init-c99eac6b",
+        "upstream/symbol-evidence.json#dragon-construction-core-597-c99eac6b"
+      ],
+      "exception_id": "typed-nonempty-native-construction-init-c99eac6b",
+      "index": 597,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Construction.__init__ through GonieGonie.InvisibleDragon.Construction.Construction.Construction for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation under adaptation family typed-nonempty-native-construction-init-c99eac6b. The canonical direct receipt is sha256:dd717e081a81e69a56a5402da40f2cdf0aaf7a1b5ca3c2e83d164b23b6df2bee. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-construction-core-598-cebc9acb"
+      ],
+      "index": 598,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only Construction.heat_capacity result or member mapping through GonieGonie.InvisibleDragon.Construction.Construction.HeatCapacityJoulesPerSquareMetreKelvin for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation. The canonical direct receipt is sha256:35b5e3f8fc6fa8c59bbe87c9479e3daaea5a65267ec01685de262870f2fec710. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-validated-native-construction-reverse-f3f8b2b1",
+        "upstream/symbol-evidence.json#dragon-construction-core-599-f3f8b2b1"
+      ],
+      "exception_id": "immutable-validated-native-construction-reverse-f3f8b2b1",
+      "index": 599,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Construction.reversed through GonieGonie.InvisibleDragon.Construction.Construction.Reverse for exact cases dragon-construction-core.c12-construction-reverse-order-alias under adaptation family immutable-validated-native-construction-reverse-f3f8b2b1. The canonical direct receipt is sha256:4ba57d50ed37a0d6a4ca715e66329112029cbb1c7bac4c1d89d533bd850bbb14. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-construction-core-600-bfcb0ba0"
+      ],
+      "index": 600,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only Construction.thickness result or member mapping through GonieGonie.InvisibleDragon.Construction.Construction.ThicknessMetres for exact cases dragon-construction-core.c10-construction-layer-overload-metrics, dragon-construction-core.c11-construction-material-thickness-overload, dragon-construction-core.c13-construction-empty-mixed-mutation. The canonical direct receipt is sha256:9c83b75b1b026273a77856b83e4c09fb2f716a6d6311dfd1d3b490f87741a120. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#model-context-construction-idf-emission",
         "upstream/symbol-evidence.json#dragon-construction-construction-to-idf-object-71a76f27"
       ],
       "exception_id": "model-context-construction-idf-emission",
       "index": 601,
       "rationale": "Trusted cross-language evidence verifies Construction.to_idf_object across the exact one-layer and three-layer bounded common valid cases through the public EnergyModel route and private construction mapper: surface-scoped naming, ordered layer references, host linkage, all present fields, exhaustive nine-field and seven-field None omission tails, freshness, determinism and source immutability. Standalone surface-parameter and mutable-list shape, class contracts, Layer child conversion, invalid behavior, parent converters, global order, deduplication and conflicts remain separately unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-validated-native-glazing-5615eebb",
+        "upstream/symbol-evidence.json#dragon-construction-core-602-5615eebb"
+      ],
+      "exception_id": "immutable-validated-native-glazing-5615eebb",
+      "index": 602,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Glazing through GonieGonie.InvisibleDragon.Construction.Glazing for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c15-glazing-mutation, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family immutable-validated-native-glazing-5615eebb. The canonical direct receipt is sha256:d2fe69505c5f6e8889a8426214347e06d68ccbdeee45609f84510d849c2e64ca. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-bounded-native-glazing-g-cb8ad4be",
+        "upstream/symbol-evidence.json#dragon-construction-core-603-cb8ad4be"
+      ],
+      "exception_id": "immutable-bounded-native-glazing-g-cb8ad4be",
+      "index": 603,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Glazing.G through GonieGonie.InvisibleDragon.Construction.Glazing.SolarHeatGainCoefficient for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c15-glazing-mutation, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family immutable-bounded-native-glazing-g-cb8ad4be. The canonical direct receipt is sha256:20ef38477d98a9ae6b851ccff3726ca318fc460b65370fab0d96acb055c72f6d. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-finite-native-glazing-u-98ebe259",
+        "upstream/symbol-evidence.json#dragon-construction-core-604-98ebe259"
+      ],
+      "exception_id": "immutable-finite-native-glazing-u-98ebe259",
+      "index": 604,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Glazing.U through GonieGonie.InvisibleDragon.Construction.Glazing.UValueWattsPerSquareMetreKelvin for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c15-glazing-mutation, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family immutable-finite-native-glazing-u-98ebe259. The canonical direct receipt is sha256:763b0571e383f177526aa65925fb0c9d7ac20acbd4760353ed69fa1aff044812. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-native-glazing-init-bfe7247a",
+        "upstream/symbol-evidence.json#dragon-construction-core-605-bfe7247a"
+      ],
+      "exception_id": "validated-immutable-native-glazing-init-bfe7247a",
+      "index": 605,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Glazing.__init__ through GonieGonie.InvisibleDragon.Construction.Glazing.Glazing for exact cases dragon-construction-core.c14-glazing-state, dragon-construction-core.c16-glazing-type-range-nonfinite under adaptation family validated-immutable-native-glazing-init-bfe7247a. The canonical direct receipt is sha256:1270dd680eaeb8175eddd103a2995a96a3ab16fd06f2821ae3c8b4935c8e4fa8. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
     },
     {
       "evidence": [
@@ -3212,6 +3296,22 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-validated-native-layer-e6a3fe0d",
+        "upstream/symbol-evidence.json#dragon-construction-core-609-e6a3fe0d"
+      ],
+      "exception_id": "immutable-validated-native-layer-e6a3fe0d",
+      "index": 609,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Layer through GonieGonie.InvisibleDragon.Construction.Layer for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family immutable-validated-native-layer-e6a3fe0d. The canonical direct receipt is sha256:5d78339ab02ff19b0001595eafc38e07b298d80c794aa36491df102e2b2e1c2e. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-construction-core-610-be30888f"
+      ],
+      "index": 610,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only Layer.U result or member mapping through GonieGonie.InvisibleDragon.Construction.Layer.UValue for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation. The canonical direct receipt is sha256:f742b5e9ee7aa8c558aff5ea50d526d06cd3513e65e09b05eff6e6e809f20274. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#layer-equality-native-null-operand",
         "upstream/symbol-evidence.json#idragon-layer-equality-native-null-adaptation"
       ],
@@ -3230,6 +3330,40 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-native-layer-init-60e437a1",
+        "upstream/symbol-evidence.json#dragon-construction-core-613-60e437a1"
+      ],
+      "exception_id": "validated-immutable-native-layer-init-60e437a1",
+      "index": 613,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Layer.__init__ through GonieGonie.InvisibleDragon.Construction.Layer.Layer for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family validated-immutable-native-layer-init-60e437a1. The canonical direct receipt is sha256:fb2123c30c01866c066df22c119aac1d23cca74152bf5b586f2c34538bc2d3e3. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-construction-core-614-ab4d9ecc"
+      ],
+      "index": 614,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only Layer.heat_capacity result or member mapping through GonieGonie.InvisibleDragon.Construction.Layer.HeatCapacityJoulesPerSquareMetreKelvin for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation. The canonical direct receipt is sha256:69a6802104de81f481e7c5519a076a9fdede0d42749a0a180a3b3a8b49b63ea6. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-required-native-layer-material-6454844c",
+        "upstream/symbol-evidence.json#dragon-construction-core-615-6454844c"
+      ],
+      "exception_id": "immutable-required-native-layer-material-6454844c",
+      "index": 615,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Layer.material through GonieGonie.InvisibleDragon.Construction.Layer.Material for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family immutable-required-native-layer-material-6454844c. The canonical direct receipt is sha256:84e79a77ca15a6957de9af019f1aaba12e8834a81c958c5f6e052980005b3884. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-finite-native-layer-thickness-d7d789d7",
+        "upstream/symbol-evidence.json#dragon-construction-core-616-d7d789d7"
+      ],
+      "exception_id": "immutable-finite-native-layer-thickness-d7d789d7",
+      "index": 616,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Layer.thickness through GonieGonie.InvisibleDragon.Construction.Layer.ThicknessMetres for exact cases dragon-construction-core.c07-layer-state-derived, dragon-construction-core.c08-layer-mutation, dragon-construction-core.c09-layer-type-range-nonfinite under adaptation family immutable-finite-native-layer-thickness-d7d789d7. The canonical direct receipt is sha256:3a2773ce1349f22db653b2e28f00b4271cfb94170e5fc51cd3fa6478789a6e6c. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#model-context-layer-idf-emission",
         "upstream/symbol-evidence.json#dragon-construction-layer-to-idf-object-66e6d458"
       ],
@@ -3239,12 +3373,171 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-validated-native-material-15ad6614",
+        "upstream/symbol-evidence.json#dragon-construction-core-618-15ad6614"
+      ],
+      "exception_id": "immutable-validated-native-material-15ad6614",
+      "index": 618,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Material through GonieGonie.InvisibleDragon.Construction.Material for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-validated-native-material-15ad6614. The canonical direct receipt is sha256:88bc1047e7b3a90cbaa8741181b79829efac4b977754e787a5e2aec2b328776c. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#material-equality-native-null-operand",
         "upstream/symbol-evidence.json#idragon-material-equality-native-null-adaptation"
       ],
       "exception_id": "material-equality-native-null-operand",
       "index": 619,
       "rationale": "Trusted cross-language evidence verifies the pinned Material equality fields and directly observes the null difference; the registered exception binds the full Python TypeError versus CLR false invalid-operand adaptation."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-native-material-init-d78cab39",
+        "upstream/symbol-evidence.json#dragon-construction-core-620-d78cab39"
+      ],
+      "exception_id": "validated-immutable-native-material-init-d78cab39",
+      "index": 620,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Material.__init__ through GonieGonie.InvisibleDragon.Construction.Material.Material for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family validated-immutable-native-material-init-d78cab39. The canonical direct receipt is sha256:8b1a550d46cb05c6d36cd40384c1c7e5091d54f074358fd287d360a4bcad6843. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-finite-native-material-conductivity-b733b56b",
+        "upstream/symbol-evidence.json#dragon-construction-core-621-b733b56b"
+      ],
+      "exception_id": "immutable-finite-native-material-conductivity-b733b56b",
+      "index": 621,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Material.conductivity through GonieGonie.InvisibleDragon.Construction.Material.ConductivityWattsPerMetreKelvin for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-conductivity-b733b56b. The canonical direct receipt is sha256:0a24c588a793f99d624fa82e19a67962a1d2e3cfd9afd24c341031697a7f1c3d. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-finite-native-material-density-23136324",
+        "upstream/symbol-evidence.json#dragon-construction-core-622-23136324"
+      ],
+      "exception_id": "immutable-finite-native-material-density-23136324",
+      "index": 622,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Material.density through GonieGonie.InvisibleDragon.Construction.Material.DensityKilogramsPerCubicMetre for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-density-23136324. The canonical direct receipt is sha256:a9ee090c9177441714e33bbad9554457e95ba74a3dabdd25c1483fad135b493a. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-strongly-typed-native-material-roughness-be23eedd",
+        "upstream/symbol-evidence.json#dragon-construction-core-623-be23eedd"
+      ],
+      "exception_id": "immutable-strongly-typed-native-material-roughness-be23eedd",
+      "index": 623,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Material.roughness through GonieGonie.InvisibleDragon.Construction.Material.Roughness for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation under adaptation family immutable-strongly-typed-native-material-roughness-be23eedd. The canonical direct receipt is sha256:b36d3f7fefebf46879dc638daf2376671bdc19ecf4cc0f0915697e772f7df5a3. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-finite-native-material-solar-absorptance-ae7ce02b",
+        "upstream/symbol-evidence.json#dragon-construction-core-624-ae7ce02b"
+      ],
+      "exception_id": "immutable-finite-native-material-solar-absorptance-ae7ce02b",
+      "index": 624,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Material.solar_absorptance through GonieGonie.InvisibleDragon.Construction.Material.SolarAbsorptance for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-solar-absorptance-ae7ce02b. The canonical direct receipt is sha256:894fbcd9467fab6732cd2abf5f23f34ac6e4603a4deb6a3afe63ae254a150cd4. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-finite-native-material-specific-heat-abf4a2ea",
+        "upstream/symbol-evidence.json#dragon-construction-core-625-abf4a2ea"
+      ],
+      "exception_id": "immutable-finite-native-material-specific-heat-abf4a2ea",
+      "index": 625,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Material.specific_heat through GonieGonie.InvisibleDragon.Construction.Material.SpecificHeatJoulesPerKilogramKelvin for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-specific-heat-abf4a2ea. The canonical direct receipt is sha256:d47847530604652d8b75b72bce0e87526a703ad212a91ec1efe05bb85fc2095a. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-finite-native-material-thermal-absorptance-f17730ed",
+        "upstream/symbol-evidence.json#dragon-construction-core-626-f17730ed"
+      ],
+      "exception_id": "immutable-finite-native-material-thermal-absorptance-f17730ed",
+      "index": 626,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Material.thermal_absorptance through GonieGonie.InvisibleDragon.Construction.Material.ThermalAbsorptance for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-thermal-absorptance-f17730ed. The canonical direct receipt is sha256:8e7d28351545e5b5962997203dd526e9947588708d39fdc2056368e4af1ec2cf. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-finite-native-material-visible-absorptance-ecf6d77d",
+        "upstream/symbol-evidence.json#dragon-construction-core-627-ecf6d77d"
+      ],
+      "exception_id": "immutable-finite-native-material-visible-absorptance-ecf6d77d",
+      "index": 627,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Material.visible_absorptance through GonieGonie.InvisibleDragon.Construction.Material.VisibleAbsorptance for exact cases dragon-construction-core.c04-material-default-state, dragon-construction-core.c05-material-explicit-mutation, dragon-construction-core.c06-material-type-range-nonfinite under adaptation family immutable-finite-native-material-visible-absorptance-ecf6d77d. The canonical direct receipt is sha256:de478b29d93c6ad02c814b3e136b4d92c66d50be21afe8e19d2fc9c342181354. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#strongly-typed-native-material-roughness-enum-fc281859",
+        "upstream/symbol-evidence.json#dragon-construction-core-628-fc281859"
+      ],
+      "exception_id": "strongly-typed-native-material-roughness-enum-fc281859",
+      "index": 628,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify MaterialRoughness through GonieGonie.InvisibleDragon.Construction.MaterialRoughness for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c03-roughness-construction-invalid under adaptation family strongly-typed-native-material-roughness-enum-fc281859. The canonical direct receipt is sha256:0e688e2fa39f51dfb1d1fe7a97ecae9a554ff8893a71c9fa0f1a2df9be27e281. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-construction-core-629-eda0d7d5"
+      ],
+      "index": 629,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.MEDIUMROUGH result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness.MediumRough for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:9945019e047fe3bf1b17c17d2d86fffe3e87fa07f5aec1d0220e433a160a9982. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-construction-core-630-6d574d54"
+      ],
+      "index": 630,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.MEDIUMSMOOTH result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness.MediumSmooth for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:de3a19dbf87836340b8f942e4e45942d5da9630acaedc7892fa220cc8fe2629e. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-construction-core-631-beaf152f"
+      ],
+      "index": 631,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.ROUGH result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness.Rough for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:966132fc97e4bdef7a5f01e348bb8c0797fbcfa747732835e5720ce104ffa0ff. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-construction-core-632-fce6deeb"
+      ],
+      "index": 632,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.SMOOTH result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness.Smooth for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:a9008e028363cf75d155cdb2e80ca12a9e67fff44f711c9ab2aedc01817a6292. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-construction-core-633-9848a0c6"
+      ],
+      "index": 633,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.VERYROUGH result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness.VeryRough for exact cases dragon-construction-core.c01-roughness-topology-order-values, dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:cb44617d8efe59f332642846ae76369a83d7ab02f72e50d69f1b91cf55b1738e. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-construction-core-634-f40e4929"
+      ],
+      "index": 634,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify only the read-only MaterialRoughness.__str__ result or member mapping through GonieGonie.InvisibleDragon.Construction.MaterialRoughness for exact cases dragon-construction-core.c02-roughness-strings. The canonical direct receipt is sha256:f449ded5249782882e028ab17dd8db2395526e96c970ba022408e467ff7d262a. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-validated-native-no-mass-construction-9dff867c",
+        "upstream/symbol-evidence.json#dragon-construction-core-635-9dff867c"
+      ],
+      "exception_id": "immutable-validated-native-no-mass-construction-9dff867c",
+      "index": 635,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify NoMassConstruction through GonieGonie.InvisibleDragon.Construction.NoMassConstruction for exact cases dragon-construction-core.c17-no-mass-state, dragon-construction-core.c18-no-mass-mutation, dragon-construction-core.c19-no-mass-type-range-nonfinite under adaptation family immutable-validated-native-no-mass-construction-9dff867c. The canonical direct receipt is sha256:6b886c2228a946b15aeaabba3871ba2007dfe6d07cc5e1a2727f13ba24839690. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-finite-native-no-mass-u-98ebe259",
+        "upstream/symbol-evidence.json#dragon-construction-core-636-98ebe259"
+      ],
+      "exception_id": "immutable-finite-native-no-mass-u-98ebe259",
+      "index": 636,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify NoMassConstruction.U through GonieGonie.InvisibleDragon.Construction.NoMassConstruction.UValueWattsPerSquareMetreKelvin for exact cases dragon-construction-core.c17-no-mass-state, dragon-construction-core.c18-no-mass-mutation, dragon-construction-core.c19-no-mass-type-range-nonfinite under adaptation family immutable-finite-native-no-mass-u-98ebe259. The canonical direct receipt is sha256:94d0d73f67963556147eea18e3e1b1cc19668739ddb601e0f2e6904346d48e9b. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-native-no-mass-init-47497892",
+        "upstream/symbol-evidence.json#dragon-construction-core-637-47497892"
+      ],
+      "exception_id": "validated-immutable-native-no-mass-init-47497892",
+      "index": 637,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify NoMassConstruction.__init__ through GonieGonie.InvisibleDragon.Construction.NoMassConstruction.NoMassConstruction for exact cases dragon-construction-core.c17-no-mass-state, dragon-construction-core.c19-no-mass-type-range-nonfinite under adaptation family validated-immutable-native-no-mass-init-47497892. The canonical direct receipt is sha256:2ac2a08d050cfabdaaf3f0b19bcba3bf07588ed0d709e88da0594cdeb3bbe0a5. The fixture's excluded AirBoundary, representation, equality and hash, and IDF-emission symbols, inputs beyond the pinned cases, serialization, and concurrency are not claimed."
     },
     {
       "evidence": [
@@ -6062,9 +6355,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 160,
-      "exception": 214,
-      "needs_reverification": 616,
+      "equivalent": 171,
+      "exception": 238,
+      "needs_reverification": 581,
       "out_of_scope": 252
     },
     "entry_count": 1242
