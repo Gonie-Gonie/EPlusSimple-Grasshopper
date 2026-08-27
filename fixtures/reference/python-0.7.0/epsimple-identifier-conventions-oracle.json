@@ -1,0 +1,3328 @@
+{
+  "artifacts": {
+    "bootstrap": {
+      "bytes": 1232,
+      "path": "tools/python-reference/bootstrap_reference.py",
+      "sha256": "sha256:0674dcf1fe966de2a4b873a360ef67be48d74f38ba80adba9c74405fd9be7e0f"
+    },
+    "strict_json_support": {
+      "bytes": 21114,
+      "path": "tools/python-reference/generate_schedule_type_oracle.py",
+      "sha256": "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc"
+    }
+  },
+  "case_sha256": {
+    "epsimple-identifier-conventions.autoid-construction-lookup-errors": "sha256:d172e2d8520295227932ab161d479145e4c603d1a521a04a34d433701822db95",
+    "epsimple-identifier-conventions.autoid-direct-format-type-context": "sha256:a52a1ad8f120251a61d24a56eff1b933f3fc0b16c2565805d75a3e0a2ab931e5",
+    "epsimple-identifier-conventions.autoid-format-empty-custom": "sha256:bfee63da4c39846ccf17d7fdeb0fb262f7ee3b9d4dc838bd6d94f926de357ca7",
+    "epsimple-identifier-conventions.autoid-mutation-copy-alias-context": "sha256:5f7f0b11edadb9b86ecaf0a15eeaebca0d65915e91a03ec9bd5e7819b29b96d8",
+    "epsimple-identifier-conventions.autoid-string-value-semantics": "sha256:86ee3d64986853ea3388c3c5e11e7b9598a1e3c0fd309e4dee7d31410e8d25f1",
+    "epsimple-identifier-conventions.autoid-topology-order-values": "sha256:f9f582260b35f90e65d14df7f968ed44d3969dea64071c5314f40bca80a286b9",
+    "epsimple-identifier-conventions.directory-class-attribute-mutation": "sha256:f87fa5a492ce71c964b1c2f499f34ae28ffee5c7e66fa305f0e9baf479f21694",
+    "epsimple-identifier-conventions.directory-import-topology-path-roles": "sha256:70c4bac4355394e0528f3eb2e7cc2d167f76ebc1a19106825ed8a4258ae7fd86",
+    "epsimple-identifier-conventions.directory-instance-shadow-construction-errors": "sha256:1df5c68fc31d36fd8f5019f9a0435a44f73636dc69ad94fc0716228d026acb05",
+    "epsimple-identifier-conventions.directory-two-location-relocation": "sha256:99a57fb24c50cbc2bbc2ad47bbe4ada4434eb782247386d4001438f2cdfd045a",
+    "epsimple-identifier-conventions.package-info-class-attribute-mutation": "sha256:9f47ac49cc441103847fc505f11787af0866e16dce0dab7ebde29a4ac4f1f4d3",
+    "epsimple-identifier-conventions.package-info-instance-shadow-construction-errors": "sha256:6c14827958990d69e12b316473e28340ef7d42580d321cfdec475cf5f2419d55",
+    "epsimple-identifier-conventions.package-info-topology-values": "sha256:295492546456eefd4bd71aecddf241b66f2078ceb3f2e30a0282c3c53db118d6",
+    "epsimple-identifier-conventions.package-name-string-operations-errors": "sha256:43a3ca062e10f6e2e070044b8f7e269138bc01432d1037d6e0336f460d2275ff",
+    "epsimple-identifier-conventions.package-version-tuple-operations-errors": "sha256:b957013dc67207cfc1e7f711fa9721facd61e1db89580c9b2d09d710536065a5",
+    "epsimple-identifier-conventions.required-python-comparison-errors": "sha256:1e946a62576ed7ef371090823414ce1398d83c505fe956aa707b61cb03934a52",
+    "epsimple-identifier-conventions.special-tag-construction-lookup-errors": "sha256:433cf040ce5c958055c731dbab8751e8f8046638ef62512c61041f91ed0964f1",
+    "epsimple-identifier-conventions.special-tag-direct-format-type-context": "sha256:baf99a9e112a1756b6d23933facd36551db0f0fcd8addb604faef8a1cfc6ebf7",
+    "epsimple-identifier-conventions.special-tag-format-empty-custom": "sha256:af690eade3cf4510005b0ebc3374dcaac2b372bf7eba0318ae61731a4beb86bc",
+    "epsimple-identifier-conventions.special-tag-mutation-copy-alias-context": "sha256:802e342589ebee34b8bdaf739cfcf7abd0bf2cbbc7cf377546d66c0e8976f22d",
+    "epsimple-identifier-conventions.special-tag-string-value-semantics": "sha256:90b472cb993e8237e5854101d697c50b85187c7deb8af22af561f652b8e7c42c",
+    "epsimple-identifier-conventions.special-tag-topology-order-values": "sha256:046e5d02046697287f196af925a8ee8c330d19fd894e0481a7c84924fb7fcaae"
+  },
+  "cases": [
+    {
+      "code": "A01",
+      "context_symbols": [],
+      "id": "epsimple-identifier-conventions.autoid-topology-order-values",
+      "python": {
+        "facts": {
+          "alias_groups": [],
+          "bases": [
+            "str",
+            "Enum"
+          ],
+          "class_name": "AUTOID_PREFIX",
+          "class_signature": "(*values)",
+          "declared_members": [
+            {
+              "canonical_name": "MATERIAL",
+              "name": "MATERIAL",
+              "value": "MTRL"
+            },
+            {
+              "canonical_name": "SURFACE_CONSTRUCTION",
+              "name": "SURFACE_CONSTRUCTION",
+              "value": "CTSF"
+            },
+            {
+              "canonical_name": "FENESTRATION_CONSTRUCTION",
+              "name": "FENESTRATION_CONSTRUCTION",
+              "value": "CTFN"
+            },
+            {
+              "canonical_name": "SOURCE_SYSTEM",
+              "name": "SOURCE_SYSTEM",
+              "value": "SRCE"
+            },
+            {
+              "canonical_name": "SUPPLY_SYSTEM",
+              "name": "SUPPLY_SYSTEM",
+              "value": "SUPL"
+            },
+            {
+              "canonical_name": "HEAT_EXCHANGER",
+              "name": "HEAT_EXCHANGER",
+              "value": "ERVT"
+            },
+            {
+              "canonical_name": "PV_PANEL",
+              "name": "PV_PANEL",
+              "value": "PVPN"
+            },
+            {
+              "canonical_name": "SURFACE",
+              "name": "SURFACE",
+              "value": "SURF"
+            },
+            {
+              "canonical_name": "FENESTRATION",
+              "name": "FENESTRATION",
+              "value": "FNST"
+            },
+            {
+              "canonical_name": "ZONE",
+              "name": "ZONE",
+              "value": "ZONE"
+            },
+            {
+              "canonical_name": "DAY_SCHEDULE",
+              "name": "DAY_SCHEDULE",
+              "value": "DYSC"
+            },
+            {
+              "canonical_name": "RULESET",
+              "name": "RULESET",
+              "value": "RLST"
+            },
+            {
+              "canonical_name": "SCHEDULE",
+              "name": "SCHEDULE",
+              "value": "SCHE"
+            },
+            {
+              "canonical_name": "PROFILE",
+              "name": "PROFILE",
+              "value": "PRFL"
+            }
+          ],
+          "iterated_names": [
+            "MATERIAL",
+            "SURFACE_CONSTRUCTION",
+            "FENESTRATION_CONSTRUCTION",
+            "SOURCE_SYSTEM",
+            "SUPPLY_SYSTEM",
+            "HEAT_EXCHANGER",
+            "PV_PANEL",
+            "SURFACE",
+            "FENESTRATION",
+            "ZONE",
+            "DAY_SCHEDULE",
+            "RULESET",
+            "SCHEDULE",
+            "PROFILE"
+          ],
+          "member_count": 14,
+          "unique_member_count": 14
+        },
+        "facts_sha256": "sha256:b86d8a037a51a8bbcc78576f1f3a47224eec0c1de54f0695835e397ba1b77082",
+        "outcome": "observed"
+      },
+      "subfamily": "autoid",
+      "target_symbols": [
+        "AUTOID_PREFIX",
+        "AUTOID_PREFIX.MATERIAL",
+        "AUTOID_PREFIX.SURFACE_CONSTRUCTION",
+        "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION",
+        "AUTOID_PREFIX.SOURCE_SYSTEM",
+        "AUTOID_PREFIX.SUPPLY_SYSTEM",
+        "AUTOID_PREFIX.HEAT_EXCHANGER",
+        "AUTOID_PREFIX.PV_PANEL",
+        "AUTOID_PREFIX.SURFACE",
+        "AUTOID_PREFIX.FENESTRATION",
+        "AUTOID_PREFIX.ZONE",
+        "AUTOID_PREFIX.DAY_SCHEDULE",
+        "AUTOID_PREFIX.RULESET",
+        "AUTOID_PREFIX.SCHEDULE",
+        "AUTOID_PREFIX.PROFILE"
+      ]
+    },
+    {
+      "code": "A02",
+      "context_symbols": [
+        "AUTOID_PREFIX"
+      ],
+      "id": "epsimple-identifier-conventions.autoid-string-value-semantics",
+      "python": {
+        "facts": {
+          "members": [
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/MTRL",
+              "concat_right": "MTRL/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "MATERIAL",
+              "raw_contains_token": true,
+              "raw_value": "MTRL",
+              "split_round_trip": "MTRL"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/CTSF",
+              "concat_right": "CTSF/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "SURFACE_CONSTRUCTION",
+              "raw_contains_token": true,
+              "raw_value": "CTSF",
+              "split_round_trip": "CTSF"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/CTFN",
+              "concat_right": "CTFN/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "FENESTRATION_CONSTRUCTION",
+              "raw_contains_token": true,
+              "raw_value": "CTFN",
+              "split_round_trip": "CTFN"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/SRCE",
+              "concat_right": "SRCE/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "SOURCE_SYSTEM",
+              "raw_contains_token": true,
+              "raw_value": "SRCE",
+              "split_round_trip": "SRCE"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/SUPL",
+              "concat_right": "SUPL/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "SUPPLY_SYSTEM",
+              "raw_contains_token": true,
+              "raw_value": "SUPL",
+              "split_round_trip": "SUPL"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/ERVT",
+              "concat_right": "ERVT/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "HEAT_EXCHANGER",
+              "raw_contains_token": true,
+              "raw_value": "ERVT",
+              "split_round_trip": "ERVT"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/PVPN",
+              "concat_right": "PVPN/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "PV_PANEL",
+              "raw_contains_token": true,
+              "raw_value": "PVPN",
+              "split_round_trip": "PVPN"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/SURF",
+              "concat_right": "SURF/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "SURFACE",
+              "raw_contains_token": true,
+              "raw_value": "SURF",
+              "split_round_trip": "SURF"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/FNST",
+              "concat_right": "FNST/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "FENESTRATION",
+              "raw_contains_token": true,
+              "raw_value": "FNST",
+              "split_round_trip": "FNST"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/ZONE",
+              "concat_right": "ZONE/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "ZONE",
+              "raw_contains_token": true,
+              "raw_value": "ZONE",
+              "split_round_trip": "ZONE"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/DYSC",
+              "concat_right": "DYSC/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "DAY_SCHEDULE",
+              "raw_contains_token": true,
+              "raw_value": "DYSC",
+              "split_round_trip": "DYSC"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/RLST",
+              "concat_right": "RLST/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "RULESET",
+              "raw_contains_token": true,
+              "raw_value": "RLST",
+              "split_round_trip": "RLST"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/SCHE",
+              "concat_right": "SCHE/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "SCHEDULE",
+              "raw_contains_token": true,
+              "raw_value": "SCHE",
+              "split_round_trip": "SCHE"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/PRFL",
+              "concat_right": "PRFL/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "PROFILE",
+              "raw_contains_token": true,
+              "raw_value": "PRFL",
+              "split_round_trip": "PRFL"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:abd961181c7f6abc5bd5d8e5e2b65fddd7f69a65e089c6732f2403ba134296da",
+        "outcome": "observed"
+      },
+      "subfamily": "autoid",
+      "target_symbols": [
+        "AUTOID_PREFIX.MATERIAL",
+        "AUTOID_PREFIX.SURFACE_CONSTRUCTION",
+        "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION",
+        "AUTOID_PREFIX.SOURCE_SYSTEM",
+        "AUTOID_PREFIX.SUPPLY_SYSTEM",
+        "AUTOID_PREFIX.HEAT_EXCHANGER",
+        "AUTOID_PREFIX.PV_PANEL",
+        "AUTOID_PREFIX.SURFACE",
+        "AUTOID_PREFIX.FENESTRATION",
+        "AUTOID_PREFIX.ZONE",
+        "AUTOID_PREFIX.DAY_SCHEDULE",
+        "AUTOID_PREFIX.RULESET",
+        "AUTOID_PREFIX.SCHEDULE",
+        "AUTOID_PREFIX.PROFILE"
+      ]
+    },
+    {
+      "code": "A03",
+      "context_symbols": [
+        "AUTOID_PREFIX.MATERIAL",
+        "AUTOID_PREFIX.SURFACE_CONSTRUCTION",
+        "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION",
+        "AUTOID_PREFIX.SOURCE_SYSTEM",
+        "AUTOID_PREFIX.SUPPLY_SYSTEM",
+        "AUTOID_PREFIX.HEAT_EXCHANGER",
+        "AUTOID_PREFIX.PV_PANEL",
+        "AUTOID_PREFIX.SURFACE",
+        "AUTOID_PREFIX.FENESTRATION",
+        "AUTOID_PREFIX.ZONE",
+        "AUTOID_PREFIX.DAY_SCHEDULE",
+        "AUTOID_PREFIX.RULESET",
+        "AUTOID_PREFIX.SCHEDULE",
+        "AUTOID_PREFIX.PROFILE"
+      ],
+      "id": "epsimple-identifier-conventions.autoid-construction-lookup-errors",
+      "python": {
+        "facts": {
+          "from_name": [
+            {
+              "name": "MATERIAL",
+              "same_member": true
+            },
+            {
+              "name": "SURFACE_CONSTRUCTION",
+              "same_member": true
+            },
+            {
+              "name": "FENESTRATION_CONSTRUCTION",
+              "same_member": true
+            },
+            {
+              "name": "SOURCE_SYSTEM",
+              "same_member": true
+            },
+            {
+              "name": "SUPPLY_SYSTEM",
+              "same_member": true
+            },
+            {
+              "name": "HEAT_EXCHANGER",
+              "same_member": true
+            },
+            {
+              "name": "PV_PANEL",
+              "same_member": true
+            },
+            {
+              "name": "SURFACE",
+              "same_member": true
+            },
+            {
+              "name": "FENESTRATION",
+              "same_member": true
+            },
+            {
+              "name": "ZONE",
+              "same_member": true
+            },
+            {
+              "name": "DAY_SCHEDULE",
+              "same_member": true
+            },
+            {
+              "name": "RULESET",
+              "same_member": true
+            },
+            {
+              "name": "SCHEDULE",
+              "same_member": true
+            },
+            {
+              "name": "PROFILE",
+              "same_member": true
+            }
+          ],
+          "from_name_as_value": [
+            {
+              "name": "MATERIAL",
+              "observation": {
+                "error": {
+                  "message": "'MATERIAL' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "SURFACE_CONSTRUCTION",
+              "observation": {
+                "error": {
+                  "message": "'SURFACE_CONSTRUCTION' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "FENESTRATION_CONSTRUCTION",
+              "observation": {
+                "error": {
+                  "message": "'FENESTRATION_CONSTRUCTION' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "SOURCE_SYSTEM",
+              "observation": {
+                "error": {
+                  "message": "'SOURCE_SYSTEM' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "SUPPLY_SYSTEM",
+              "observation": {
+                "error": {
+                  "message": "'SUPPLY_SYSTEM' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "HEAT_EXCHANGER",
+              "observation": {
+                "error": {
+                  "message": "'HEAT_EXCHANGER' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "PV_PANEL",
+              "observation": {
+                "error": {
+                  "message": "'PV_PANEL' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "SURFACE",
+              "observation": {
+                "error": {
+                  "message": "'SURFACE' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "FENESTRATION",
+              "observation": {
+                "error": {
+                  "message": "'FENESTRATION' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "ZONE",
+              "observation": {
+                "outcome": "returned",
+                "result": "ZONE"
+              }
+            },
+            {
+              "name": "DAY_SCHEDULE",
+              "observation": {
+                "error": {
+                  "message": "'DAY_SCHEDULE' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "RULESET",
+              "observation": {
+                "error": {
+                  "message": "'RULESET' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "SCHEDULE",
+              "observation": {
+                "error": {
+                  "message": "'SCHEDULE' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "PROFILE",
+              "observation": {
+                "error": {
+                  "message": "'PROFILE' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            }
+          ],
+          "from_value": [
+            {
+              "name": "MATERIAL",
+              "same_member": true,
+              "value": "MTRL"
+            },
+            {
+              "name": "SURFACE_CONSTRUCTION",
+              "same_member": true,
+              "value": "CTSF"
+            },
+            {
+              "name": "FENESTRATION_CONSTRUCTION",
+              "same_member": true,
+              "value": "CTFN"
+            },
+            {
+              "name": "SOURCE_SYSTEM",
+              "same_member": true,
+              "value": "SRCE"
+            },
+            {
+              "name": "SUPPLY_SYSTEM",
+              "same_member": true,
+              "value": "SUPL"
+            },
+            {
+              "name": "HEAT_EXCHANGER",
+              "same_member": true,
+              "value": "ERVT"
+            },
+            {
+              "name": "PV_PANEL",
+              "same_member": true,
+              "value": "PVPN"
+            },
+            {
+              "name": "SURFACE",
+              "same_member": true,
+              "value": "SURF"
+            },
+            {
+              "name": "FENESTRATION",
+              "same_member": true,
+              "value": "FNST"
+            },
+            {
+              "name": "ZONE",
+              "same_member": true,
+              "value": "ZONE"
+            },
+            {
+              "name": "DAY_SCHEDULE",
+              "same_member": true,
+              "value": "DYSC"
+            },
+            {
+              "name": "RULESET",
+              "same_member": true,
+              "value": "RLST"
+            },
+            {
+              "name": "SCHEDULE",
+              "same_member": true,
+              "value": "SCHE"
+            },
+            {
+              "name": "PROFILE",
+              "same_member": true,
+              "value": "PRFL"
+            }
+          ],
+          "invalid": [
+            {
+              "label": "no-argument",
+              "observation": {
+                "error": {
+                  "message": "EnumType.__call__() missing 1 required positional argument: 'value'",
+                  "type": "TypeError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "label": "none",
+              "observation": {
+                "error": {
+                  "message": "None is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "label": "integer",
+              "observation": {
+                "error": {
+                  "message": "7 is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "label": "missing-value",
+              "observation": {
+                "error": {
+                  "message": "'__MISSING__' is not a valid AUTOID_PREFIX",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "label": "missing-name",
+              "observation": {
+                "error": {
+                  "message": "'__MISSING__'",
+                  "type": "KeyError"
+                },
+                "outcome": "raised"
+              }
+            }
+          ]
+        },
+        "facts_sha256": "sha256:91cdc2fb8293eca7c9d7b2d13e73cfa3b6b924a0c06049a1d2a0af77ac816c01",
+        "outcome": "observed"
+      },
+      "subfamily": "autoid",
+      "target_symbols": [
+        "AUTOID_PREFIX"
+      ]
+    },
+    {
+      "code": "A04",
+      "context_symbols": [
+        "AUTOID_PREFIX",
+        "AUTOID_PREFIX.MATERIAL",
+        "AUTOID_PREFIX.SURFACE_CONSTRUCTION",
+        "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION",
+        "AUTOID_PREFIX.SOURCE_SYSTEM",
+        "AUTOID_PREFIX.SUPPLY_SYSTEM",
+        "AUTOID_PREFIX.HEAT_EXCHANGER",
+        "AUTOID_PREFIX.PV_PANEL",
+        "AUTOID_PREFIX.SURFACE",
+        "AUTOID_PREFIX.FENESTRATION",
+        "AUTOID_PREFIX.ZONE",
+        "AUTOID_PREFIX.DAY_SCHEDULE",
+        "AUTOID_PREFIX.RULESET",
+        "AUTOID_PREFIX.SCHEDULE",
+        "AUTOID_PREFIX.PROFILE"
+      ],
+      "id": "epsimple-identifier-conventions.autoid-format-empty-custom",
+      "python": {
+        "facts": {
+          "members": [
+            {
+              "formats": [
+                {
+                  "result": "MTRL-",
+                  "spec": ""
+                },
+                {
+                  "result": "MTRL:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "MTRL::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "MTRL:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "MTRL: -",
+                  "spec": " "
+                }
+              ],
+              "name": "MATERIAL",
+              "str": "MTRL-",
+              "value": "MTRL"
+            },
+            {
+              "formats": [
+                {
+                  "result": "CTSF-",
+                  "spec": ""
+                },
+                {
+                  "result": "CTSF:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "CTSF::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "CTSF:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "CTSF: -",
+                  "spec": " "
+                }
+              ],
+              "name": "SURFACE_CONSTRUCTION",
+              "str": "CTSF-",
+              "value": "CTSF"
+            },
+            {
+              "formats": [
+                {
+                  "result": "CTFN-",
+                  "spec": ""
+                },
+                {
+                  "result": "CTFN:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "CTFN::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "CTFN:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "CTFN: -",
+                  "spec": " "
+                }
+              ],
+              "name": "FENESTRATION_CONSTRUCTION",
+              "str": "CTFN-",
+              "value": "CTFN"
+            },
+            {
+              "formats": [
+                {
+                  "result": "SRCE-",
+                  "spec": ""
+                },
+                {
+                  "result": "SRCE:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "SRCE::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "SRCE:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "SRCE: -",
+                  "spec": " "
+                }
+              ],
+              "name": "SOURCE_SYSTEM",
+              "str": "SRCE-",
+              "value": "SRCE"
+            },
+            {
+              "formats": [
+                {
+                  "result": "SUPL-",
+                  "spec": ""
+                },
+                {
+                  "result": "SUPL:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "SUPL::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "SUPL:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "SUPL: -",
+                  "spec": " "
+                }
+              ],
+              "name": "SUPPLY_SYSTEM",
+              "str": "SUPL-",
+              "value": "SUPL"
+            },
+            {
+              "formats": [
+                {
+                  "result": "ERVT-",
+                  "spec": ""
+                },
+                {
+                  "result": "ERVT:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "ERVT::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "ERVT:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "ERVT: -",
+                  "spec": " "
+                }
+              ],
+              "name": "HEAT_EXCHANGER",
+              "str": "ERVT-",
+              "value": "ERVT"
+            },
+            {
+              "formats": [
+                {
+                  "result": "PVPN-",
+                  "spec": ""
+                },
+                {
+                  "result": "PVPN:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "PVPN::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "PVPN:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "PVPN: -",
+                  "spec": " "
+                }
+              ],
+              "name": "PV_PANEL",
+              "str": "PVPN-",
+              "value": "PVPN"
+            },
+            {
+              "formats": [
+                {
+                  "result": "SURF-",
+                  "spec": ""
+                },
+                {
+                  "result": "SURF:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "SURF::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "SURF:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "SURF: -",
+                  "spec": " "
+                }
+              ],
+              "name": "SURFACE",
+              "str": "SURF-",
+              "value": "SURF"
+            },
+            {
+              "formats": [
+                {
+                  "result": "FNST-",
+                  "spec": ""
+                },
+                {
+                  "result": "FNST:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "FNST::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "FNST:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "FNST: -",
+                  "spec": " "
+                }
+              ],
+              "name": "FENESTRATION",
+              "str": "FNST-",
+              "value": "FNST"
+            },
+            {
+              "formats": [
+                {
+                  "result": "ZONE-",
+                  "spec": ""
+                },
+                {
+                  "result": "ZONE:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "ZONE::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "ZONE:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "ZONE: -",
+                  "spec": " "
+                }
+              ],
+              "name": "ZONE",
+              "str": "ZONE-",
+              "value": "ZONE"
+            },
+            {
+              "formats": [
+                {
+                  "result": "DYSC-",
+                  "spec": ""
+                },
+                {
+                  "result": "DYSC:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "DYSC::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "DYSC:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "DYSC: -",
+                  "spec": " "
+                }
+              ],
+              "name": "DAY_SCHEDULE",
+              "str": "DYSC-",
+              "value": "DYSC"
+            },
+            {
+              "formats": [
+                {
+                  "result": "RLST-",
+                  "spec": ""
+                },
+                {
+                  "result": "RLST:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "RLST::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "RLST:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "RLST: -",
+                  "spec": " "
+                }
+              ],
+              "name": "RULESET",
+              "str": "RLST-",
+              "value": "RLST"
+            },
+            {
+              "formats": [
+                {
+                  "result": "SCHE-",
+                  "spec": ""
+                },
+                {
+                  "result": "SCHE:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "SCHE::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "SCHE:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "SCHE: -",
+                  "spec": " "
+                }
+              ],
+              "name": "SCHEDULE",
+              "str": "SCHE-",
+              "value": "SCHE"
+            },
+            {
+              "formats": [
+                {
+                  "result": "PRFL-",
+                  "spec": ""
+                },
+                {
+                  "result": "PRFL:SURFACE-",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "PRFL::-",
+                  "spec": ":"
+                },
+                {
+                  "result": "PRFL:표면-",
+                  "spec": "표면"
+                },
+                {
+                  "result": "PRFL: -",
+                  "spec": " "
+                }
+              ],
+              "name": "PROFILE",
+              "str": "PRFL-",
+              "value": "PRFL"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:5d2f30c684ebbef6bd7d8f504214a03d81701d09af5a9c667a378bc9c4d345a9",
+        "outcome": "observed"
+      },
+      "subfamily": "autoid",
+      "target_symbols": [
+        "AUTOID_PREFIX.__format__",
+        "AUTOID_PREFIX.__str__"
+      ]
+    },
+    {
+      "code": "A05",
+      "context_symbols": [
+        "AUTOID_PREFIX.__format__",
+        "AUTOID_PREFIX.__str__"
+      ],
+      "id": "epsimple-identifier-conventions.autoid-direct-format-type-context",
+      "python": {
+        "facts": {
+          "direct_format_int": {
+            "outcome": "returned",
+            "result": "MTRL:7-"
+          },
+          "direct_format_none": {
+            "outcome": "returned",
+            "result": "MTRL-"
+          },
+          "direct_format_object": {
+            "outcome": "returned",
+            "result": "MTRL:STABLE_OBJECT-"
+          },
+          "direct_str_extra_argument": {
+            "error": {
+              "message": "AUTOID_PREFIX.__str__() takes 1 positional argument but 2 were given",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "format_builtin_none": {
+            "error": {
+              "message": "format() argument 2 must be str, not None",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "member_name": "MATERIAL"
+        },
+        "facts_sha256": "sha256:195155edcd826e64a318ba975ed6161d64cfe02af65f8bb5ace2df07d61af007",
+        "outcome": "observed"
+      },
+      "subfamily": "autoid",
+      "target_symbols": [
+        "AUTOID_PREFIX"
+      ]
+    },
+    {
+      "code": "A06",
+      "context_symbols": [
+        "AUTOID_PREFIX.MATERIAL",
+        "AUTOID_PREFIX.SURFACE_CONSTRUCTION",
+        "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION",
+        "AUTOID_PREFIX.SOURCE_SYSTEM",
+        "AUTOID_PREFIX.SUPPLY_SYSTEM",
+        "AUTOID_PREFIX.HEAT_EXCHANGER",
+        "AUTOID_PREFIX.PV_PANEL",
+        "AUTOID_PREFIX.SURFACE",
+        "AUTOID_PREFIX.FENESTRATION",
+        "AUTOID_PREFIX.ZONE",
+        "AUTOID_PREFIX.DAY_SCHEDULE",
+        "AUTOID_PREFIX.RULESET",
+        "AUTOID_PREFIX.SCHEDULE",
+        "AUTOID_PREFIX.PROFILE"
+      ],
+      "id": "epsimple-identifier-conventions.autoid-mutation-copy-alias-context",
+      "python": {
+        "facts": {
+          "alias_groups": [],
+          "class_add_extra": {
+            "outcome": "returned",
+            "result": "class-extra"
+          },
+          "class_delete_member": {
+            "error": {
+              "message": "'AUTOID_PREFIX' cannot delete member 'MATERIAL'.",
+              "type": "AttributeError"
+            },
+            "outcome": "raised"
+          },
+          "class_reassign_member": {
+            "error": {
+              "message": "cannot reassign member 'MATERIAL'",
+              "type": "AttributeError"
+            },
+            "outcome": "raised"
+          },
+          "deepcopy_identity": true,
+          "member_add_extra": {
+            "outcome": "returned",
+            "result": "member-extra"
+          },
+          "member_name": "MATERIAL",
+          "member_set_name": {
+            "error": {
+              "message": "<enum 'Enum'> cannot set attribute 'name'",
+              "type": "AttributeError"
+            },
+            "outcome": "raised"
+          },
+          "member_set_value": {
+            "error": {
+              "message": "<enum 'Enum'> cannot set attribute 'value'",
+              "type": "AttributeError"
+            },
+            "outcome": "raised"
+          },
+          "shallow_copy_identity": true
+        },
+        "facts_sha256": "sha256:e4a73198d0fd5b15ceb948a25e2991dc3113e0c6f21641e0f670204122f1f62b",
+        "outcome": "observed"
+      },
+      "subfamily": "autoid",
+      "target_symbols": [
+        "AUTOID_PREFIX"
+      ]
+    },
+    {
+      "code": "D01",
+      "context_symbols": [],
+      "id": "epsimple-identifier-conventions.directory-import-topology-path-roles",
+      "python": {
+        "facts": {
+          "class_name": "Directory",
+          "class_signature": "()",
+          "data_root_relative": "repository/src/epsimple/_data",
+          "module_root_relative": "repository/src/epsimple",
+          "package_root_relative": "repository",
+          "public_attribute_order": [
+            "WEATHER_META_DIR",
+            "WEATHER_DATA_DIR",
+            "PROFILE_DIR",
+            "CONSTRUCTION_DIR"
+          ],
+          "state": {
+            "CONSTRUCTION_DIR": {
+              "anchor": "module-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/src/epsimple/_data/construction",
+              "suffix": "_data/construction"
+            },
+            "PROFILE_DIR": {
+              "anchor": "module-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/src/epsimple/_data/profile",
+              "suffix": "_data/profile"
+            },
+            "WEATHER_DATA_DIR": {
+              "anchor": "package-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/runtime/Weather/TMY",
+              "suffix": "runtime/Weather/TMY"
+            },
+            "WEATHER_META_DIR": {
+              "anchor": "module-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/src/epsimple/_data/weather",
+              "suffix": "_data/weather"
+            }
+          }
+        },
+        "facts_sha256": "sha256:7cac34d818f671dfacfea500ac2cca72f508083cac28ffeafb3be75a9c635c75",
+        "outcome": "observed"
+      },
+      "subfamily": "directory",
+      "target_symbols": [
+        "Directory",
+        "Directory.CONSTRUCTION_DIR",
+        "Directory.PROFILE_DIR",
+        "Directory.WEATHER_DATA_DIR",
+        "Directory.WEATHER_META_DIR"
+      ]
+    },
+    {
+      "code": "D02",
+      "context_symbols": [
+        "Directory"
+      ],
+      "id": "epsimple-identifier-conventions.directory-two-location-relocation",
+      "python": {
+        "facts": {
+          "class_identity_distinct": true,
+          "location_a": {
+            "CONSTRUCTION_DIR": {
+              "anchor": "module-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/src/epsimple/_data/construction",
+              "suffix": "_data/construction"
+            },
+            "PROFILE_DIR": {
+              "anchor": "module-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/src/epsimple/_data/profile",
+              "suffix": "_data/profile"
+            },
+            "WEATHER_DATA_DIR": {
+              "anchor": "package-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/runtime/Weather/TMY",
+              "suffix": "runtime/Weather/TMY"
+            },
+            "WEATHER_META_DIR": {
+              "anchor": "module-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/src/epsimple/_data/weather",
+              "suffix": "_data/weather"
+            }
+          },
+          "location_b": {
+            "CONSTRUCTION_DIR": {
+              "anchor": "module-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/src/epsimple/_data/construction",
+              "suffix": "_data/construction"
+            },
+            "PROFILE_DIR": {
+              "anchor": "module-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/src/epsimple/_data/profile",
+              "suffix": "_data/profile"
+            },
+            "WEATHER_DATA_DIR": {
+              "anchor": "package-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/runtime/Weather/TMY",
+              "suffix": "runtime/Weather/TMY"
+            },
+            "WEATHER_META_DIR": {
+              "anchor": "module-root",
+              "is_path": true,
+              "matches_role": true,
+              "relative_to_location": "repository/src/epsimple/_data/weather",
+              "suffix": "_data/weather"
+            }
+          },
+          "public_absolute_values_distinct": {
+            "CONSTRUCTION_DIR": true,
+            "PROFILE_DIR": true,
+            "WEATHER_DATA_DIR": true,
+            "WEATHER_META_DIR": true
+          },
+          "relative_roles_equal": true
+        },
+        "facts_sha256": "sha256:720d3c2f30f7b27ca8bc518cbb6464368beed73a571b49342f685f8ccdaf0815",
+        "outcome": "observed"
+      },
+      "subfamily": "directory",
+      "target_symbols": [
+        "Directory.CONSTRUCTION_DIR",
+        "Directory.PROFILE_DIR",
+        "Directory.WEATHER_DATA_DIR",
+        "Directory.WEATHER_META_DIR"
+      ]
+    },
+    {
+      "code": "D03",
+      "context_symbols": [],
+      "id": "epsimple-identifier-conventions.directory-class-attribute-mutation",
+      "python": {
+        "facts": {
+          "attributes": [
+            {
+              "assigned": {
+                "equals_replacement": true,
+                "type": "str"
+              },
+              "deleted_lookup": {
+                "error": {
+                  "message": "type object 'Directory' has no attribute 'WEATHER_META_DIR'",
+                  "type": "AttributeError"
+                },
+                "outcome": "raised"
+              },
+              "name": "WEATHER_META_DIR",
+              "restored_identity": true
+            },
+            {
+              "assigned": {
+                "equals_replacement": true,
+                "type": "str"
+              },
+              "deleted_lookup": {
+                "error": {
+                  "message": "type object 'Directory' has no attribute 'WEATHER_DATA_DIR'",
+                  "type": "AttributeError"
+                },
+                "outcome": "raised"
+              },
+              "name": "WEATHER_DATA_DIR",
+              "restored_identity": true
+            },
+            {
+              "assigned": {
+                "equals_replacement": true,
+                "type": "str"
+              },
+              "deleted_lookup": {
+                "error": {
+                  "message": "type object 'Directory' has no attribute 'PROFILE_DIR'",
+                  "type": "AttributeError"
+                },
+                "outcome": "raised"
+              },
+              "name": "PROFILE_DIR",
+              "restored_identity": true
+            },
+            {
+              "assigned": {
+                "equals_replacement": true,
+                "type": "str"
+              },
+              "deleted_lookup": {
+                "error": {
+                  "message": "type object 'Directory' has no attribute 'CONSTRUCTION_DIR'",
+                  "type": "AttributeError"
+                },
+                "outcome": "raised"
+              },
+              "name": "CONSTRUCTION_DIR",
+              "restored_identity": true
+            }
+          ]
+        },
+        "facts_sha256": "sha256:5b0aa58b88482801cf9868da1b383bdab6b8b21f5b3898f73d5ee07e365dc368",
+        "outcome": "observed"
+      },
+      "subfamily": "directory",
+      "target_symbols": [
+        "Directory",
+        "Directory.CONSTRUCTION_DIR",
+        "Directory.PROFILE_DIR",
+        "Directory.WEATHER_DATA_DIR",
+        "Directory.WEATHER_META_DIR"
+      ]
+    },
+    {
+      "code": "D04",
+      "context_symbols": [
+        "Directory.CONSTRUCTION_DIR",
+        "Directory.PROFILE_DIR",
+        "Directory.WEATHER_DATA_DIR",
+        "Directory.WEATHER_META_DIR"
+      ],
+      "id": "epsimple-identifier-conventions.directory-instance-shadow-construction-errors",
+      "python": {
+        "facts": {
+          "construction": {
+            "outcome": "returned",
+            "result": "Directory"
+          },
+          "keyword_argument": {
+            "error": {
+              "message": "Directory() takes no arguments",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "positional_argument": {
+            "error": {
+              "message": "Directory() takes no arguments",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "shadowed": [
+            {
+              "class_unchanged": true,
+              "instance_value": "instance/weather_meta_dir",
+              "name": "WEATHER_META_DIR"
+            },
+            {
+              "class_unchanged": true,
+              "instance_value": "instance/weather_data_dir",
+              "name": "WEATHER_DATA_DIR"
+            },
+            {
+              "class_unchanged": true,
+              "instance_value": "instance/profile_dir",
+              "name": "PROFILE_DIR"
+            },
+            {
+              "class_unchanged": true,
+              "instance_value": "instance/construction_dir",
+              "name": "CONSTRUCTION_DIR"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:6cb6ab832b426a84859b69a8a9e144279decaa3d7247755ca093bc98c1753261",
+        "outcome": "observed"
+      },
+      "subfamily": "directory",
+      "target_symbols": [
+        "Directory"
+      ]
+    },
+    {
+      "code": "P01",
+      "context_symbols": [],
+      "id": "epsimple-identifier-conventions.package-info-topology-values",
+      "python": {
+        "facts": {
+          "attribute_order": [
+            "NAME",
+            "VERSION",
+            "REQUIRED_PYTHON"
+          ],
+          "class_name": "PackageInfo",
+          "class_signature": "()",
+          "name": "epsimple",
+          "name_type": "str",
+          "required_python": [
+            3,
+            12
+          ],
+          "required_python_item_types": [
+            "int",
+            "int"
+          ],
+          "required_python_type": "tuple",
+          "version": [
+            0,
+            7,
+            0
+          ],
+          "version_item_types": [
+            "int",
+            "int",
+            "int"
+          ],
+          "version_type": "tuple"
+        },
+        "facts_sha256": "sha256:f59eb4d5b80189cc791d946e1d662b7209a5274e9aff5be78444ac8f736b3fb4",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo",
+        "PackageInfo.NAME",
+        "PackageInfo.REQUIRED_PYTHON",
+        "PackageInfo.VERSION"
+      ]
+    },
+    {
+      "code": "P02",
+      "context_symbols": [],
+      "id": "epsimple-identifier-conventions.package-info-class-attribute-mutation",
+      "python": {
+        "facts": {
+          "attributes": [
+            {
+              "assigned": {
+                "equals_replacement": true,
+                "type": "int"
+              },
+              "deleted_lookup": {
+                "error": {
+                  "message": "type object 'PackageInfo' has no attribute 'NAME'",
+                  "type": "AttributeError"
+                },
+                "outcome": "raised"
+              },
+              "name": "NAME",
+              "restored_identity": true
+            },
+            {
+              "assigned": {
+                "equals_replacement": true,
+                "type": "str"
+              },
+              "deleted_lookup": {
+                "error": {
+                  "message": "type object 'PackageInfo' has no attribute 'VERSION'",
+                  "type": "AttributeError"
+                },
+                "outcome": "raised"
+              },
+              "name": "VERSION",
+              "restored_identity": true
+            },
+            {
+              "assigned": {
+                "equals_replacement": true,
+                "type": "list"
+              },
+              "deleted_lookup": {
+                "error": {
+                  "message": "type object 'PackageInfo' has no attribute 'REQUIRED_PYTHON'",
+                  "type": "AttributeError"
+                },
+                "outcome": "raised"
+              },
+              "name": "REQUIRED_PYTHON",
+              "restored_identity": true
+            }
+          ]
+        },
+        "facts_sha256": "sha256:316bdcc43df9ccb8ddddb6a4163c7bdda00926a6220a6a4356910bc799aec100",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo",
+        "PackageInfo.NAME",
+        "PackageInfo.REQUIRED_PYTHON",
+        "PackageInfo.VERSION"
+      ]
+    },
+    {
+      "code": "P03",
+      "context_symbols": [
+        "PackageInfo.NAME",
+        "PackageInfo.REQUIRED_PYTHON",
+        "PackageInfo.VERSION"
+      ],
+      "id": "epsimple-identifier-conventions.package-info-instance-shadow-construction-errors",
+      "python": {
+        "facts": {
+          "construction": {
+            "outcome": "returned",
+            "result": "PackageInfo"
+          },
+          "keyword_argument": {
+            "error": {
+              "message": "PackageInfo() takes no arguments",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "positional_argument": {
+            "error": {
+              "message": "PackageInfo() takes no arguments",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "shadowed": [
+            {
+              "class_unchanged": true,
+              "instance_type": "str",
+              "name": "NAME"
+            },
+            {
+              "class_unchanged": true,
+              "instance_type": "list",
+              "name": "VERSION"
+            },
+            {
+              "class_unchanged": true,
+              "instance_type": "list",
+              "name": "REQUIRED_PYTHON"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:34e7d59eca31c2c1a8dc35fccf2a07970ec46c6889ef5eb14f158c10d1dbe380",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo"
+      ]
+    },
+    {
+      "code": "P04",
+      "context_symbols": [
+        "PackageInfo"
+      ],
+      "id": "epsimple-identifier-conventions.package-name-string-operations-errors",
+      "python": {
+        "facts": {
+          "concat": "epsimple-suffix",
+          "equals_exact": true,
+          "index": "e",
+          "item_assignment": {
+            "error": {
+              "message": "'str' object does not support item assignment",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "plus_integer": {
+            "error": {
+              "message": "can only concatenate str (not \"int\") to str",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "replace": "epSIMPLE",
+          "split": [
+            "ep",
+            "imple"
+          ],
+          "starts_with": true,
+          "upper": "EPSIMPLE"
+        },
+        "facts_sha256": "sha256:a6d812adb05f7d8c1d9c7618f3a893f401d8599cb4dcc7205050f409045bfc84",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo.NAME"
+      ]
+    },
+    {
+      "code": "P05",
+      "context_symbols": [
+        "PackageInfo"
+      ],
+      "id": "epsimple-identifier-conventions.package-version-tuple-operations-errors",
+      "python": {
+        "facts": {
+          "concat": [
+            0,
+            7,
+            0,
+            1
+          ],
+          "equals_exact": true,
+          "index": 7,
+          "item_assignment": {
+            "error": {
+              "message": "'tuple' object does not support item assignment",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "join": "0.7.0",
+          "less_than_next": true,
+          "mixed_comparison": {
+            "error": {
+              "message": "'<' not supported between instances of 'tuple' and 'str'",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "slice": [
+            7,
+            0
+          ],
+          "string_index": {
+            "error": {
+              "message": "tuple indices must be integers or slices, not str",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          }
+        },
+        "facts_sha256": "sha256:e5fcb3126fe49753262efdb8ccba508cfa1888bddeb7a06d7560fcbb97a7962c",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo.VERSION"
+      ]
+    },
+    {
+      "code": "P06",
+      "context_symbols": [
+        "PackageInfo"
+      ],
+      "id": "epsimple-identifier-conventions.required-python-comparison-errors",
+      "python": {
+        "facts": {
+          "concat": [
+            3,
+            12,
+            99
+          ],
+          "equals_exact": true,
+          "index": 3,
+          "item_assignment": {
+            "error": {
+              "message": "'tuple' object does not support item assignment",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "join_without_conversion": {
+            "error": {
+              "message": "sequence item 0: expected str instance, int found",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "mixed_comparison": {
+            "error": {
+              "message": "'<' not supported between instances of 'tuple' and 'str'",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "runtime_meets_requirement": true,
+          "slice": [
+            3
+          ],
+          "supports_3_11": false,
+          "supports_3_13": true
+        },
+        "facts_sha256": "sha256:c202a35f61b40c279248de8c640957455b1f6850c4b697bbf3957a2dbdef56b6",
+        "outcome": "observed"
+      },
+      "subfamily": "package",
+      "target_symbols": [
+        "PackageInfo.REQUIRED_PYTHON"
+      ]
+    },
+    {
+      "code": "S01",
+      "context_symbols": [],
+      "id": "epsimple-identifier-conventions.special-tag-topology-order-values",
+      "python": {
+        "facts": {
+          "alias_groups": [],
+          "bases": [
+            "str",
+            "Enum"
+          ],
+          "class_name": "SpecialTag",
+          "class_signature": "(*values)",
+          "declared_members": [
+            {
+              "canonical_name": "SPECIAL",
+              "name": "SPECIAL",
+              "value": "SPECIAL"
+            },
+            {
+              "canonical_name": "DB",
+              "name": "DB",
+              "value": "FROM_DB"
+            },
+            {
+              "canonical_name": "CLONE",
+              "name": "CLONE",
+              "value": "CLONE_OF"
+            },
+            {
+              "canonical_name": "FLIP",
+              "name": "FLIP",
+              "value": "REVERSED"
+            },
+            {
+              "canonical_name": "COOLROOF",
+              "name": "COOLROOF",
+              "value": "FOR_COOLROOF"
+            }
+          ],
+          "iterated_names": [
+            "SPECIAL",
+            "DB",
+            "CLONE",
+            "FLIP",
+            "COOLROOF"
+          ],
+          "member_count": 5,
+          "unique_member_count": 5
+        },
+        "facts_sha256": "sha256:26b4ec7fcb9add9a377ec5e9a71b09e145ba63ec7b3e1fb17238f4b4e47ec69a",
+        "outcome": "observed"
+      },
+      "subfamily": "special-tag",
+      "target_symbols": [
+        "SpecialTag",
+        "SpecialTag.SPECIAL",
+        "SpecialTag.DB",
+        "SpecialTag.CLONE",
+        "SpecialTag.FLIP",
+        "SpecialTag.COOLROOF"
+      ]
+    },
+    {
+      "code": "S02",
+      "context_symbols": [
+        "SpecialTag"
+      ],
+      "id": "epsimple-identifier-conventions.special-tag-string-value-semantics",
+      "python": {
+        "facts": {
+          "members": [
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/SPECIAL",
+              "concat_right": "SPECIAL/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "SPECIAL",
+              "raw_contains_token": true,
+              "raw_value": "SPECIAL",
+              "split_round_trip": "SPECIAL"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/FROM_DB",
+              "concat_right": "FROM_DB/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "DB",
+              "raw_contains_token": true,
+              "raw_value": "FROM_DB",
+              "split_round_trip": "FROM_DB"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/CLONE_OF",
+              "concat_right": "CLONE_OF/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "CLONE",
+              "raw_contains_token": true,
+              "raw_value": "CLONE_OF",
+              "split_round_trip": "CLONE_OF"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/REVERSED",
+              "concat_right": "REVERSED/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "FLIP",
+              "raw_contains_token": true,
+              "raw_value": "REVERSED",
+              "split_round_trip": "REVERSED"
+            },
+            {
+              "canonical_identity": true,
+              "concat_left": "prefix/FOR_COOLROOF",
+              "concat_right": "FOR_COOLROOF/suffix",
+              "equals_raw_value": true,
+              "hash_equals_raw_value": true,
+              "is_str_instance": true,
+              "name": "COOLROOF",
+              "raw_contains_token": true,
+              "raw_value": "FOR_COOLROOF",
+              "split_round_trip": "FOR_COOLROOF"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:4685cdfdcd892090ecab457b08f5c5f90476b738df722ccea650df3dd51de594",
+        "outcome": "observed"
+      },
+      "subfamily": "special-tag",
+      "target_symbols": [
+        "SpecialTag.SPECIAL",
+        "SpecialTag.DB",
+        "SpecialTag.CLONE",
+        "SpecialTag.FLIP",
+        "SpecialTag.COOLROOF"
+      ]
+    },
+    {
+      "code": "S03",
+      "context_symbols": [
+        "SpecialTag.SPECIAL",
+        "SpecialTag.DB",
+        "SpecialTag.CLONE",
+        "SpecialTag.FLIP",
+        "SpecialTag.COOLROOF"
+      ],
+      "id": "epsimple-identifier-conventions.special-tag-construction-lookup-errors",
+      "python": {
+        "facts": {
+          "from_name": [
+            {
+              "name": "SPECIAL",
+              "same_member": true
+            },
+            {
+              "name": "DB",
+              "same_member": true
+            },
+            {
+              "name": "CLONE",
+              "same_member": true
+            },
+            {
+              "name": "FLIP",
+              "same_member": true
+            },
+            {
+              "name": "COOLROOF",
+              "same_member": true
+            }
+          ],
+          "from_name_as_value": [
+            {
+              "name": "SPECIAL",
+              "observation": {
+                "outcome": "returned",
+                "result": "SPECIAL"
+              }
+            },
+            {
+              "name": "DB",
+              "observation": {
+                "error": {
+                  "message": "'DB' is not a valid SpecialTag",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "CLONE",
+              "observation": {
+                "error": {
+                  "message": "'CLONE' is not a valid SpecialTag",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "FLIP",
+              "observation": {
+                "error": {
+                  "message": "'FLIP' is not a valid SpecialTag",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "name": "COOLROOF",
+              "observation": {
+                "error": {
+                  "message": "'COOLROOF' is not a valid SpecialTag",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            }
+          ],
+          "from_value": [
+            {
+              "name": "SPECIAL",
+              "same_member": true,
+              "value": "SPECIAL"
+            },
+            {
+              "name": "DB",
+              "same_member": true,
+              "value": "FROM_DB"
+            },
+            {
+              "name": "CLONE",
+              "same_member": true,
+              "value": "CLONE_OF"
+            },
+            {
+              "name": "FLIP",
+              "same_member": true,
+              "value": "REVERSED"
+            },
+            {
+              "name": "COOLROOF",
+              "same_member": true,
+              "value": "FOR_COOLROOF"
+            }
+          ],
+          "invalid": [
+            {
+              "label": "no-argument",
+              "observation": {
+                "error": {
+                  "message": "EnumType.__call__() missing 1 required positional argument: 'value'",
+                  "type": "TypeError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "label": "none",
+              "observation": {
+                "error": {
+                  "message": "None is not a valid SpecialTag",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "label": "integer",
+              "observation": {
+                "error": {
+                  "message": "7 is not a valid SpecialTag",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "label": "missing-value",
+              "observation": {
+                "error": {
+                  "message": "'__MISSING__' is not a valid SpecialTag",
+                  "type": "ValueError"
+                },
+                "outcome": "raised"
+              }
+            },
+            {
+              "label": "missing-name",
+              "observation": {
+                "error": {
+                  "message": "'__MISSING__'",
+                  "type": "KeyError"
+                },
+                "outcome": "raised"
+              }
+            }
+          ]
+        },
+        "facts_sha256": "sha256:1bd97477876e5cfc9098df97e5073c2a99ad967538012458c2805e49fdf2fdc2",
+        "outcome": "observed"
+      },
+      "subfamily": "special-tag",
+      "target_symbols": [
+        "SpecialTag"
+      ]
+    },
+    {
+      "code": "S04",
+      "context_symbols": [
+        "SpecialTag",
+        "SpecialTag.SPECIAL",
+        "SpecialTag.DB",
+        "SpecialTag.CLONE",
+        "SpecialTag.FLIP",
+        "SpecialTag.COOLROOF"
+      ],
+      "id": "epsimple-identifier-conventions.special-tag-format-empty-custom",
+      "python": {
+        "facts": {
+          "members": [
+            {
+              "formats": [
+                {
+                  "result": "$SPECIAL$:",
+                  "spec": ""
+                },
+                {
+                  "result": "$SPECIAL:SURFACE$:",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "$SPECIAL::$:",
+                  "spec": ":"
+                },
+                {
+                  "result": "$SPECIAL:표면$:",
+                  "spec": "표면"
+                },
+                {
+                  "result": "$SPECIAL: $:",
+                  "spec": " "
+                }
+              ],
+              "name": "SPECIAL",
+              "str": "$SPECIAL$:",
+              "value": "SPECIAL"
+            },
+            {
+              "formats": [
+                {
+                  "result": "$FROM_DB$:",
+                  "spec": ""
+                },
+                {
+                  "result": "$FROM_DB:SURFACE$:",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "$FROM_DB::$:",
+                  "spec": ":"
+                },
+                {
+                  "result": "$FROM_DB:표면$:",
+                  "spec": "표면"
+                },
+                {
+                  "result": "$FROM_DB: $:",
+                  "spec": " "
+                }
+              ],
+              "name": "DB",
+              "str": "$FROM_DB$:",
+              "value": "FROM_DB"
+            },
+            {
+              "formats": [
+                {
+                  "result": "$CLONE_OF$:",
+                  "spec": ""
+                },
+                {
+                  "result": "$CLONE_OF:SURFACE$:",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "$CLONE_OF::$:",
+                  "spec": ":"
+                },
+                {
+                  "result": "$CLONE_OF:표면$:",
+                  "spec": "표면"
+                },
+                {
+                  "result": "$CLONE_OF: $:",
+                  "spec": " "
+                }
+              ],
+              "name": "CLONE",
+              "str": "$CLONE_OF$:",
+              "value": "CLONE_OF"
+            },
+            {
+              "formats": [
+                {
+                  "result": "$REVERSED$:",
+                  "spec": ""
+                },
+                {
+                  "result": "$REVERSED:SURFACE$:",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "$REVERSED::$:",
+                  "spec": ":"
+                },
+                {
+                  "result": "$REVERSED:표면$:",
+                  "spec": "표면"
+                },
+                {
+                  "result": "$REVERSED: $:",
+                  "spec": " "
+                }
+              ],
+              "name": "FLIP",
+              "str": "$REVERSED$:",
+              "value": "REVERSED"
+            },
+            {
+              "formats": [
+                {
+                  "result": "$FOR_COOLROOF$:",
+                  "spec": ""
+                },
+                {
+                  "result": "$FOR_COOLROOF:SURFACE$:",
+                  "spec": "SURFACE"
+                },
+                {
+                  "result": "$FOR_COOLROOF::$:",
+                  "spec": ":"
+                },
+                {
+                  "result": "$FOR_COOLROOF:표면$:",
+                  "spec": "표면"
+                },
+                {
+                  "result": "$FOR_COOLROOF: $:",
+                  "spec": " "
+                }
+              ],
+              "name": "COOLROOF",
+              "str": "$FOR_COOLROOF$:",
+              "value": "FOR_COOLROOF"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:e9474278e2a07499f9d77430c4d9e7b03349a50e1d060a9183f3ca7a1522acd1",
+        "outcome": "observed"
+      },
+      "subfamily": "special-tag",
+      "target_symbols": [
+        "SpecialTag.__format__",
+        "SpecialTag.__str__"
+      ]
+    },
+    {
+      "code": "S05",
+      "context_symbols": [
+        "SpecialTag.__format__",
+        "SpecialTag.__str__"
+      ],
+      "id": "epsimple-identifier-conventions.special-tag-direct-format-type-context",
+      "python": {
+        "facts": {
+          "direct_format_int": {
+            "outcome": "returned",
+            "result": "$SPECIAL:7$:"
+          },
+          "direct_format_none": {
+            "outcome": "returned",
+            "result": "$SPECIAL$:"
+          },
+          "direct_format_object": {
+            "outcome": "returned",
+            "result": "$SPECIAL:STABLE_OBJECT$:"
+          },
+          "direct_str_extra_argument": {
+            "error": {
+              "message": "SpecialTag.__str__() takes 1 positional argument but 2 were given",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "format_builtin_none": {
+            "error": {
+              "message": "format() argument 2 must be str, not None",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "member_name": "SPECIAL"
+        },
+        "facts_sha256": "sha256:0e8726490fd3628580c631915ed55145f54338f914780728be0e265fab9866f1",
+        "outcome": "observed"
+      },
+      "subfamily": "special-tag",
+      "target_symbols": [
+        "SpecialTag"
+      ]
+    },
+    {
+      "code": "S06",
+      "context_symbols": [
+        "SpecialTag.SPECIAL",
+        "SpecialTag.DB",
+        "SpecialTag.CLONE",
+        "SpecialTag.FLIP",
+        "SpecialTag.COOLROOF"
+      ],
+      "id": "epsimple-identifier-conventions.special-tag-mutation-copy-alias-context",
+      "python": {
+        "facts": {
+          "alias_groups": [],
+          "class_add_extra": {
+            "outcome": "returned",
+            "result": "class-extra"
+          },
+          "class_delete_member": {
+            "error": {
+              "message": "'SpecialTag' cannot delete member 'SPECIAL'.",
+              "type": "AttributeError"
+            },
+            "outcome": "raised"
+          },
+          "class_reassign_member": {
+            "error": {
+              "message": "cannot reassign member 'SPECIAL'",
+              "type": "AttributeError"
+            },
+            "outcome": "raised"
+          },
+          "deepcopy_identity": true,
+          "member_add_extra": {
+            "outcome": "returned",
+            "result": "member-extra"
+          },
+          "member_name": "SPECIAL",
+          "member_set_name": {
+            "error": {
+              "message": "<enum 'Enum'> cannot set attribute 'name'",
+              "type": "AttributeError"
+            },
+            "outcome": "raised"
+          },
+          "member_set_value": {
+            "error": {
+              "message": "<enum 'Enum'> cannot set attribute 'value'",
+              "type": "AttributeError"
+            },
+            "outcome": "raised"
+          },
+          "shallow_copy_identity": true
+        },
+        "facts_sha256": "sha256:9be4d17fde6cf7e53ab6e05c643b87539dd7c5ef9323acfba2651879fe416fb1",
+        "outcome": "observed"
+      },
+      "subfamily": "special-tag",
+      "target_symbols": [
+        "SpecialTag"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:6244a03437d0d6f50bfeb135c99bfaf284804391998f168a675b30dc60ef3c10",
+  "consumer_contract": {
+    "adaptations": {
+      "AUTOID_PREFIX": "immutable-native-auto-id-prefix-catalog-9a7c270a",
+      "Directory": "embedded-explicit-native-resource-layout-5b876ad7",
+      "Directory.CONSTRUCTION_DIR": "embedded-native-construction-resources-91c573a0",
+      "Directory.PROFILE_DIR": "embedded-native-profile-resources-f65d5eae",
+      "Directory.WEATHER_DATA_DIR": "caller-supplied-native-weather-data-root-8a5bf654",
+      "Directory.WEATHER_META_DIR": "embedded-native-weather-metadata-resources-15e81d1d",
+      "PackageInfo": "static-native-simpledragon-package-information-aaf5b98d",
+      "PackageInfo.NAME": "native-simpledragon-package-name-537c8c3b",
+      "PackageInfo.REQUIRED_PYTHON": "compiled-simpledragon-target-framework-contract-cf74d0eb",
+      "PackageInfo.VERSION": "native-simpledragon-and-upstream-version-identity-a8260e5f",
+      "SpecialTag": "immutable-native-special-tag-catalog-a66e2175"
+    },
+    "assertion_ids": {
+      "AUTOID_PREFIX": "epsimple-identifier-conventions-10-9a7c270a",
+      "AUTOID_PREFIX.DAY_SCHEDULE": "epsimple-identifier-conventions-11-7d4821ca",
+      "AUTOID_PREFIX.FENESTRATION": "epsimple-identifier-conventions-12-d327acd7",
+      "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION": "epsimple-identifier-conventions-13-a00d7b14",
+      "AUTOID_PREFIX.HEAT_EXCHANGER": "epsimple-identifier-conventions-14-d76b9ddc",
+      "AUTOID_PREFIX.MATERIAL": "epsimple-identifier-conventions-15-9b7489e4",
+      "AUTOID_PREFIX.PROFILE": "epsimple-identifier-conventions-16-f0401457",
+      "AUTOID_PREFIX.PV_PANEL": "epsimple-identifier-conventions-17-46500b8a",
+      "AUTOID_PREFIX.RULESET": "epsimple-identifier-conventions-18-e5ac2688",
+      "AUTOID_PREFIX.SCHEDULE": "epsimple-identifier-conventions-19-c61dbb42",
+      "AUTOID_PREFIX.SOURCE_SYSTEM": "epsimple-identifier-conventions-20-60d01621",
+      "AUTOID_PREFIX.SUPPLY_SYSTEM": "epsimple-identifier-conventions-21-c2e6d435",
+      "AUTOID_PREFIX.SURFACE": "epsimple-identifier-conventions-22-7fca2d17",
+      "AUTOID_PREFIX.SURFACE_CONSTRUCTION": "epsimple-identifier-conventions-23-147095a3",
+      "AUTOID_PREFIX.ZONE": "epsimple-identifier-conventions-24-5f36f901",
+      "AUTOID_PREFIX.__format__": "epsimple-identifier-conventions-25-d0c85092",
+      "AUTOID_PREFIX.__str__": "epsimple-identifier-conventions-27-13ed292a",
+      "Directory": "epsimple-identifier-conventions-31-5b876ad7",
+      "Directory.CONSTRUCTION_DIR": "epsimple-identifier-conventions-32-91c573a0",
+      "Directory.PROFILE_DIR": "epsimple-identifier-conventions-33-f65d5eae",
+      "Directory.WEATHER_DATA_DIR": "epsimple-identifier-conventions-34-8a5bf654",
+      "Directory.WEATHER_META_DIR": "epsimple-identifier-conventions-35-15e81d1d",
+      "PackageInfo": "epsimple-identifier-conventions-36-aaf5b98d",
+      "PackageInfo.NAME": "epsimple-identifier-conventions-37-537c8c3b",
+      "PackageInfo.REQUIRED_PYTHON": "epsimple-identifier-conventions-38-cf74d0eb",
+      "PackageInfo.VERSION": "epsimple-identifier-conventions-39-a8260e5f",
+      "SpecialTag": "epsimple-identifier-conventions-58-a66e2175",
+      "SpecialTag.CLONE": "epsimple-identifier-conventions-59-00989ee6",
+      "SpecialTag.COOLROOF": "epsimple-identifier-conventions-60-622c00d2",
+      "SpecialTag.DB": "epsimple-identifier-conventions-61-a43168ea",
+      "SpecialTag.FLIP": "epsimple-identifier-conventions-62-4a588438",
+      "SpecialTag.SPECIAL": "epsimple-identifier-conventions-63-0faf9b24",
+      "SpecialTag.__format__": "epsimple-identifier-conventions-64-4ef932bb",
+      "SpecialTag.__str__": "epsimple-identifier-conventions-66-13ed292a"
+    },
+    "case_count": 22,
+    "case_ids": [
+      "epsimple-identifier-conventions.autoid-topology-order-values",
+      "epsimple-identifier-conventions.autoid-string-value-semantics",
+      "epsimple-identifier-conventions.autoid-construction-lookup-errors",
+      "epsimple-identifier-conventions.autoid-format-empty-custom",
+      "epsimple-identifier-conventions.autoid-direct-format-type-context",
+      "epsimple-identifier-conventions.autoid-mutation-copy-alias-context",
+      "epsimple-identifier-conventions.directory-import-topology-path-roles",
+      "epsimple-identifier-conventions.directory-two-location-relocation",
+      "epsimple-identifier-conventions.directory-class-attribute-mutation",
+      "epsimple-identifier-conventions.directory-instance-shadow-construction-errors",
+      "epsimple-identifier-conventions.package-info-topology-values",
+      "epsimple-identifier-conventions.package-info-class-attribute-mutation",
+      "epsimple-identifier-conventions.package-info-instance-shadow-construction-errors",
+      "epsimple-identifier-conventions.package-name-string-operations-errors",
+      "epsimple-identifier-conventions.package-version-tuple-operations-errors",
+      "epsimple-identifier-conventions.required-python-comparison-errors",
+      "epsimple-identifier-conventions.special-tag-topology-order-values",
+      "epsimple-identifier-conventions.special-tag-string-value-semantics",
+      "epsimple-identifier-conventions.special-tag-construction-lookup-errors",
+      "epsimple-identifier-conventions.special-tag-format-empty-custom",
+      "epsimple-identifier-conventions.special-tag-direct-format-type-context",
+      "epsimple-identifier-conventions.special-tag-mutation-copy-alias-context"
+    ],
+    "classification_counts": {
+      "equivalent": 23,
+      "exception": 11
+    },
+    "classifications": {
+      "AUTOID_PREFIX": "exception",
+      "AUTOID_PREFIX.DAY_SCHEDULE": "equivalent",
+      "AUTOID_PREFIX.FENESTRATION": "equivalent",
+      "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION": "equivalent",
+      "AUTOID_PREFIX.HEAT_EXCHANGER": "equivalent",
+      "AUTOID_PREFIX.MATERIAL": "equivalent",
+      "AUTOID_PREFIX.PROFILE": "equivalent",
+      "AUTOID_PREFIX.PV_PANEL": "equivalent",
+      "AUTOID_PREFIX.RULESET": "equivalent",
+      "AUTOID_PREFIX.SCHEDULE": "equivalent",
+      "AUTOID_PREFIX.SOURCE_SYSTEM": "equivalent",
+      "AUTOID_PREFIX.SUPPLY_SYSTEM": "equivalent",
+      "AUTOID_PREFIX.SURFACE": "equivalent",
+      "AUTOID_PREFIX.SURFACE_CONSTRUCTION": "equivalent",
+      "AUTOID_PREFIX.ZONE": "equivalent",
+      "AUTOID_PREFIX.__format__": "equivalent",
+      "AUTOID_PREFIX.__str__": "equivalent",
+      "Directory": "exception",
+      "Directory.CONSTRUCTION_DIR": "exception",
+      "Directory.PROFILE_DIR": "exception",
+      "Directory.WEATHER_DATA_DIR": "exception",
+      "Directory.WEATHER_META_DIR": "exception",
+      "PackageInfo": "exception",
+      "PackageInfo.NAME": "exception",
+      "PackageInfo.REQUIRED_PYTHON": "exception",
+      "PackageInfo.VERSION": "exception",
+      "SpecialTag": "exception",
+      "SpecialTag.CLONE": "equivalent",
+      "SpecialTag.COOLROOF": "equivalent",
+      "SpecialTag.DB": "equivalent",
+      "SpecialTag.FLIP": "equivalent",
+      "SpecialTag.SPECIAL": "equivalent",
+      "SpecialTag.__format__": "equivalent",
+      "SpecialTag.__str__": "equivalent"
+    },
+    "closure": {
+      "excluded_repr_indices": [
+        26,
+        65
+      ],
+      "excluded_repr_symbols": [
+        "AUTOID_PREFIX.__repr__",
+        "SpecialTag.__repr__"
+      ],
+      "target_count": 34,
+      "target_indices": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        27,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        66
+      ]
+    },
+    "native_routes": {
+      "AUTOID_PREFIX": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.DAY_SCHEDULE": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.FENESTRATION": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.HEAT_EXCHANGER": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.MATERIAL": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.PROFILE": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.PV_PANEL": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.RULESET": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.SCHEDULE": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.SOURCE_SYSTEM": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.SUPPLY_SYSTEM": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.SURFACE": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.SURFACE_CONSTRUCTION": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.ZONE": "GonieGonie.SimpleDragon.AutoIdPrefix",
+      "AUTOID_PREFIX.__format__": "GonieGonie.SimpleDragon.AutoIdPrefix.ToString(string?, IFormatProvider?)",
+      "AUTOID_PREFIX.__str__": "GonieGonie.SimpleDragon.AutoIdPrefix.ToString()",
+      "Directory": "GonieGonie.SimpleDragon.SimpleDragonEmbeddedData and WeatherSelection.ResolveEpwPath",
+      "Directory.CONSTRUCTION_DIR": "GonieGonie.SimpleDragon.SimpleDragonEmbeddedData construction resources",
+      "Directory.PROFILE_DIR": "GonieGonie.SimpleDragon.SimpleDragonEmbeddedData profile resources",
+      "Directory.WEATHER_DATA_DIR": "GonieGonie.SimpleDragon.WeatherSelection.ResolveEpwPath",
+      "Directory.WEATHER_META_DIR": "GonieGonie.SimpleDragon.SimpleDragonEmbeddedData weather resources",
+      "PackageInfo": "GonieGonie.SimpleDragon.PackageInfo",
+      "PackageInfo.NAME": "GonieGonie.SimpleDragon.PackageInfo.Name",
+      "PackageInfo.REQUIRED_PYTHON": "net48, net7.0-windows, and net8.0-windows target frameworks",
+      "PackageInfo.VERSION": "GonieGonie.SimpleDragon.PackageInfo.Version and Compatibility.UpstreamVersion",
+      "SpecialTag": "GonieGonie.SimpleDragon.SpecialTag",
+      "SpecialTag.CLONE": "GonieGonie.SimpleDragon.SpecialTag",
+      "SpecialTag.COOLROOF": "GonieGonie.SimpleDragon.SpecialTag",
+      "SpecialTag.DB": "GonieGonie.SimpleDragon.SpecialTag",
+      "SpecialTag.FLIP": "GonieGonie.SimpleDragon.SpecialTag",
+      "SpecialTag.SPECIAL": "GonieGonie.SimpleDragon.SpecialTag",
+      "SpecialTag.__format__": "GonieGonie.SimpleDragon.SpecialTag.ToString(string?, IFormatProvider?)",
+      "SpecialTag.__str__": "GonieGonie.SimpleDragon.SpecialTag.ToString()"
+    },
+    "target_symbols": [
+      "AUTOID_PREFIX",
+      "AUTOID_PREFIX.DAY_SCHEDULE",
+      "AUTOID_PREFIX.FENESTRATION",
+      "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION",
+      "AUTOID_PREFIX.HEAT_EXCHANGER",
+      "AUTOID_PREFIX.MATERIAL",
+      "AUTOID_PREFIX.PROFILE",
+      "AUTOID_PREFIX.PV_PANEL",
+      "AUTOID_PREFIX.RULESET",
+      "AUTOID_PREFIX.SCHEDULE",
+      "AUTOID_PREFIX.SOURCE_SYSTEM",
+      "AUTOID_PREFIX.SUPPLY_SYSTEM",
+      "AUTOID_PREFIX.SURFACE",
+      "AUTOID_PREFIX.SURFACE_CONSTRUCTION",
+      "AUTOID_PREFIX.ZONE",
+      "AUTOID_PREFIX.__format__",
+      "AUTOID_PREFIX.__str__",
+      "Directory",
+      "Directory.CONSTRUCTION_DIR",
+      "Directory.PROFILE_DIR",
+      "Directory.WEATHER_DATA_DIR",
+      "Directory.WEATHER_META_DIR",
+      "PackageInfo",
+      "PackageInfo.NAME",
+      "PackageInfo.REQUIRED_PYTHON",
+      "PackageInfo.VERSION",
+      "SpecialTag",
+      "SpecialTag.CLONE",
+      "SpecialTag.COOLROOF",
+      "SpecialTag.DB",
+      "SpecialTag.FLIP",
+      "SpecialTag.SPECIAL",
+      "SpecialTag.__format__",
+      "SpecialTag.__str__"
+    ]
+  },
+  "excluded_receipts": [
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "inventory_index": 26,
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "AUTOID_PREFIX.__repr__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "inventory_index": 65,
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "SpecialTag.__repr__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    }
+  ],
+  "fact_sha256": {
+    "epsimple-identifier-conventions.autoid-construction-lookup-errors": "sha256:91cdc2fb8293eca7c9d7b2d13e73cfa3b6b924a0c06049a1d2a0af77ac816c01",
+    "epsimple-identifier-conventions.autoid-direct-format-type-context": "sha256:195155edcd826e64a318ba975ed6161d64cfe02af65f8bb5ace2df07d61af007",
+    "epsimple-identifier-conventions.autoid-format-empty-custom": "sha256:5d2f30c684ebbef6bd7d8f504214a03d81701d09af5a9c667a378bc9c4d345a9",
+    "epsimple-identifier-conventions.autoid-mutation-copy-alias-context": "sha256:e4a73198d0fd5b15ceb948a25e2991dc3113e0c6f21641e0f670204122f1f62b",
+    "epsimple-identifier-conventions.autoid-string-value-semantics": "sha256:abd961181c7f6abc5bd5d8e5e2b65fddd7f69a65e089c6732f2403ba134296da",
+    "epsimple-identifier-conventions.autoid-topology-order-values": "sha256:b86d8a037a51a8bbcc78576f1f3a47224eec0c1de54f0695835e397ba1b77082",
+    "epsimple-identifier-conventions.directory-class-attribute-mutation": "sha256:5b0aa58b88482801cf9868da1b383bdab6b8b21f5b3898f73d5ee07e365dc368",
+    "epsimple-identifier-conventions.directory-import-topology-path-roles": "sha256:7cac34d818f671dfacfea500ac2cca72f508083cac28ffeafb3be75a9c635c75",
+    "epsimple-identifier-conventions.directory-instance-shadow-construction-errors": "sha256:6cb6ab832b426a84859b69a8a9e144279decaa3d7247755ca093bc98c1753261",
+    "epsimple-identifier-conventions.directory-two-location-relocation": "sha256:720d3c2f30f7b27ca8bc518cbb6464368beed73a571b49342f685f8ccdaf0815",
+    "epsimple-identifier-conventions.package-info-class-attribute-mutation": "sha256:316bdcc43df9ccb8ddddb6a4163c7bdda00926a6220a6a4356910bc799aec100",
+    "epsimple-identifier-conventions.package-info-instance-shadow-construction-errors": "sha256:34e7d59eca31c2c1a8dc35fccf2a07970ec46c6889ef5eb14f158c10d1dbe380",
+    "epsimple-identifier-conventions.package-info-topology-values": "sha256:f59eb4d5b80189cc791d946e1d662b7209a5274e9aff5be78444ac8f736b3fb4",
+    "epsimple-identifier-conventions.package-name-string-operations-errors": "sha256:a6d812adb05f7d8c1d9c7618f3a893f401d8599cb4dcc7205050f409045bfc84",
+    "epsimple-identifier-conventions.package-version-tuple-operations-errors": "sha256:e5fcb3126fe49753262efdb8ccba508cfa1888bddeb7a06d7560fcbb97a7962c",
+    "epsimple-identifier-conventions.required-python-comparison-errors": "sha256:c202a35f61b40c279248de8c640957455b1f6850c4b697bbf3957a2dbdef56b6",
+    "epsimple-identifier-conventions.special-tag-construction-lookup-errors": "sha256:1bd97477876e5cfc9098df97e5073c2a99ad967538012458c2805e49fdf2fdc2",
+    "epsimple-identifier-conventions.special-tag-direct-format-type-context": "sha256:0e8726490fd3628580c631915ed55145f54338f914780728be0e265fab9866f1",
+    "epsimple-identifier-conventions.special-tag-format-empty-custom": "sha256:e9474278e2a07499f9d77430c4d9e7b03349a50e1d060a9183f3ca7a1522acd1",
+    "epsimple-identifier-conventions.special-tag-mutation-copy-alias-context": "sha256:9be4d17fde6cf7e53ab6e05c643b87539dd7c5ef9323acfba2651879fe416fb1",
+    "epsimple-identifier-conventions.special-tag-string-value-semantics": "sha256:4685cdfdcd892090ecab457b08f5c5f90476b738df722ccea650df3dd51de594",
+    "epsimple-identifier-conventions.special-tag-topology-order-values": "sha256:26b4ec7fcb9add9a377ec5e9a71b09e145ba63ec7b3e1fb17238f4b4e47ec69a"
+  },
+  "runtime": {
+    "byteorder": "little",
+    "implementation": "cpython",
+    "platform": "win32",
+    "pointer_width_bits": 64,
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.epsimple-identifier-conventions.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:8c71b39f2a32ab0ad3e8f4df902ea2cc77895207967eee4f0fd9e507add0b01e",
+      "symbol": "AUTOID_PREFIX",
+      "symbol_hash": "sha256:9a7c270abf554af2ac0d3455101382eca02debe8c0b23e6f8c3f8a465bb32355"
+    },
+    {
+      "body_hash": "sha256:7021e8295c887188c78bbdc513121f9f5561a62bb74212b15507e334df0e96d0",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:684975a78de3502b1d615fecff3b9c9415aa2e5ab9fadef883409c87f95e5187",
+      "symbol": "AUTOID_PREFIX.DAY_SCHEDULE",
+      "symbol_hash": "sha256:7d4821ca360166e6a06218c647b7ea935dd62080d896fd2f45cdff14da52eea0"
+    },
+    {
+      "body_hash": "sha256:78d3ab4338e930cf6ee39d052c1f3c394a574df9047d523ba24160899d5ee3a1",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:32eaa1c8f144a15012314241bca8aab9e6f3fde1f6e9d66f8b6a6c09a5bd1560",
+      "symbol": "AUTOID_PREFIX.FENESTRATION",
+      "symbol_hash": "sha256:d327acd7e82d257668484c17fe1ad79cca5a086b7977682c6e0a07af27987603"
+    },
+    {
+      "body_hash": "sha256:4d40b8da8cd53beae99b588cdb5635a4b7fb1492de8b22c26c625128465a125d",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9de702b64a86b770a5ae794ac61cd75a30e42a67e969ff9a3e8f86df4ee79329",
+      "symbol": "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION",
+      "symbol_hash": "sha256:a00d7b14c20b1fbeaedf4e6b456bff8555bcb9ee539f74799d9e7e42a40fcc80"
+    },
+    {
+      "body_hash": "sha256:8856dc3bd610f8b62914437eafe19380a201d1dc574f0e24b2271f846346dc32",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9ba182d395e6b0aae71e19165f86b9c79bd287be2074ca99e995a2c8ef3adadf",
+      "symbol": "AUTOID_PREFIX.HEAT_EXCHANGER",
+      "symbol_hash": "sha256:d76b9ddc6df8f01d27ebf334bb8797bf798947ed40835eea8f0cf5fc84d94ccd"
+    },
+    {
+      "body_hash": "sha256:c68c2c15e5c8a7b6a1079bd13a90b542614c79524c082d0e8eae96ef0a6a9a2f",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9db04787eb4de47e63a564518ec01143bfe608a6d30170ee6cb8b46d65371961",
+      "symbol": "AUTOID_PREFIX.MATERIAL",
+      "symbol_hash": "sha256:9b7489e4c9b530dab76d9d2dd9cc834d6f751d1d35188c70976af5ecea048275"
+    },
+    {
+      "body_hash": "sha256:8d7d4d137e4221940c538b7cd07bd8b18abf5cb26b9344ee07017e3434b9a859",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:884f29ffd4c5f4ce40b097b26ee5c1fa8ea2c1ef43342ef6205be8d0c563647b",
+      "symbol": "AUTOID_PREFIX.PROFILE",
+      "symbol_hash": "sha256:f04014577c229312753d0289ef8342419fb7fed9452799dc2bce8e6d5438c32e"
+    },
+    {
+      "body_hash": "sha256:0064870a7112b617627d1ffe9f0c1a2d4afa9fcbf510be3ab0982195e2831905",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:f67558fa7bb42379dd8bcbb62ddc7f40b84f083b2760f2681df572b11218afe7",
+      "symbol": "AUTOID_PREFIX.PV_PANEL",
+      "symbol_hash": "sha256:46500b8a4aa511167e9fcfb13e33c74b901d1ba1a274ec71390708960fee493a"
+    },
+    {
+      "body_hash": "sha256:87ae0b36ae8d68893db9ca49449bae8a906233e6420fe3c1e34fb6043ebab805",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:75733169ef1d853609c26f27e6b117f1f7effb499023fe463a923ab214c6948c",
+      "symbol": "AUTOID_PREFIX.RULESET",
+      "symbol_hash": "sha256:e5ac2688f0382545b277dae27cc3a02744e6d5f7f3de1c1111ce2b487751bc15"
+    },
+    {
+      "body_hash": "sha256:e25e761c3710bb99220eb6cbd5f2bfbcb6061cd505970c96779f600605744c1c",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:376ee0c14ec3785990374f5776f26c136f7dd92605e5ae595b455bc547985404",
+      "symbol": "AUTOID_PREFIX.SCHEDULE",
+      "symbol_hash": "sha256:c61dbb424961f11afedba70eabadd6c54ccdb52a7f7be1d56299ede42c0468c6"
+    },
+    {
+      "body_hash": "sha256:2b0fb7eb0efa5b241a76fb6c3bfb637f5071459da5dc38e8e7288b4ae29941e5",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9d6d3d2c3a2b868ee1d67f25ec7bcbc8cbbca0381d0c36e98c22feb1e69b385f",
+      "symbol": "AUTOID_PREFIX.SOURCE_SYSTEM",
+      "symbol_hash": "sha256:60d016219cabe29d48669ee37e1d223932bfc6556bcc8f0a4a5ea0af147655c3"
+    },
+    {
+      "body_hash": "sha256:f0359bb556e1e51b29d1e629a7974e5818a1a8d7fb3e5ad513cbeefe431f80b5",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:8d114d5cbc5cd86b95bfb31510dec3e2c688a48b5dc8d1feb5cb57a4dfba4bdb",
+      "symbol": "AUTOID_PREFIX.SUPPLY_SYSTEM",
+      "symbol_hash": "sha256:c2e6d435b1a6650d0998650fdb23d4310cd07ce02806553a645755990ca3bcd4"
+    },
+    {
+      "body_hash": "sha256:862dc21780a2d6e08a0b6729d4de5e658945ae13c63386ece7e4b5c44cf6abba",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:c69336294fc2aa2a789b8ce6bb316ae4de113e9343d0d3373dab62a4107abc6d",
+      "symbol": "AUTOID_PREFIX.SURFACE",
+      "symbol_hash": "sha256:7fca2d17fabcb91b32dd28349a50f44fe1ed0c0be63cf6dba21d37ffbf229472"
+    },
+    {
+      "body_hash": "sha256:db25d2b226216bf67f81d3c0702897e6ee580dad500a26ceb7b959ef74a8a799",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:13964193f70037161342d280099902e71824863813e858aed35baa3077767ec0",
+      "symbol": "AUTOID_PREFIX.SURFACE_CONSTRUCTION",
+      "symbol_hash": "sha256:147095a3d8aeedcd5fb82264a34c353733325268d6ad25b8e85222340fff3ca5"
+    },
+    {
+      "body_hash": "sha256:2e79005814197910dfdd1ffafd763335d3df1c8c1991598787c2fcf383897a03",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:ff8faeb3d8a30a3f1070769193916048b39199510f2d8658d98bdfd57a1d20b8",
+      "symbol": "AUTOID_PREFIX.ZONE",
+      "symbol_hash": "sha256:5f36f9019cc2b5ad1e96b3338a84b04d4da0360941a4499db6846ddafa926ccf"
+    },
+    {
+      "body_hash": "sha256:c6af75ce6d1cb5a518b7372fd3b15b71ae02bc0a2a0b69342c32fd53fe0ea9d7",
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9cdfbe97dbd56c9709c1449cead8a30f8c529922f871002291db5ef625709ba0",
+      "symbol": "AUTOID_PREFIX.__format__",
+      "symbol_hash": "sha256:d0c85092c98182b0366673cd287507b75d62850d9e272b32896597e787a58170"
+    },
+    {
+      "body_hash": "sha256:41f39e586a619e17144cefe663b44ef26f20f8e6dcb13433bcb31ebd4c066f1f",
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "AUTOID_PREFIX.__str__",
+      "symbol_hash": "sha256:13ed292afebbf1a59717e776df9d6ba3e220d2cc248ac2cc450deab9c2261c98"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9b095b8323bc225f2dc984ce84b448beb1c9ca385a260e7fc7fa0e20e9518d24",
+      "symbol": "Directory",
+      "symbol_hash": "sha256:5b876ad7fd9b11f66cc01ecb6c43d4e143b6f0258ba070c02551d968dd68aaf6"
+    },
+    {
+      "body_hash": "sha256:af2d79b22520327ed525f387a2e233fe8987bd4b981226cc73733373ee2255c0",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:d81fb5287869701c88d9b305cbd559766faf79b8c7f39b4250f907682037caa1",
+      "symbol": "Directory.CONSTRUCTION_DIR",
+      "symbol_hash": "sha256:91c573a02d0e3b2d93a1271fbe1c3ddb5d4d10c04083707c799fa1503f5b3dea"
+    },
+    {
+      "body_hash": "sha256:14d09e816f44d227fd4799d8ebd5d1c6d1f0fccb28985882f54864bb86696fe8",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:e63d078f01a7657c55c23cdbdaa3fdc0b1bf9367a911885dd5706e22cf728d36",
+      "symbol": "Directory.PROFILE_DIR",
+      "symbol_hash": "sha256:f65d5eaefa2bc1cbb6f0c9b5904624194a1551f48e7966c7973d35526bad4fa6"
+    },
+    {
+      "body_hash": "sha256:b1d6bad951f56d55e9caabb3d3f5dcedc2570b035ca1b3885b107e1d47bdc842",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:4a3a0322b37403298ff405437488e2ac2423709e7b7c307679c7d0e9acabe71f",
+      "symbol": "Directory.WEATHER_DATA_DIR",
+      "symbol_hash": "sha256:8a5bf6543c4f0db98ee0169deb7dfddd4c126e34d52aa67b512136dc3e8bcd01"
+    },
+    {
+      "body_hash": "sha256:fb39ba8c586e56685f9f0b969bea0b37ddcf680b4c1496e09ac75cfb7bb9d829",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:696be59dcbccfe70ebe3239a84daabed4289f911da4cc5a2f93d74c2fef1269e",
+      "symbol": "Directory.WEATHER_META_DIR",
+      "symbol_hash": "sha256:15e81d1d4205ffe651af323c3cc7352255847972301ad1753fd3d8d5098dc260"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:2740bb2f2c36f7a928b58073cf72c4f955c0b9fbbb13d6586049071934b22209",
+      "symbol": "PackageInfo",
+      "symbol_hash": "sha256:aaf5b98d4a7dc29f83b698f1fb2881b7bb258885bd2aaf17a53b6da902d1eda1"
+    },
+    {
+      "body_hash": "sha256:24d80084d27b2540831c263f9dedb58d098dd2631acbc12d707f1ac8611c7fa7",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:8a07b85ef52202817199529eb85bd9e57dc995f6e07f09ced1aeec0baf40513e",
+      "symbol": "PackageInfo.NAME",
+      "symbol_hash": "sha256:537c8c3bc3c2d48105e8e6c453208e725f985ac9d84f87e5f66c094ea5696cad"
+    },
+    {
+      "body_hash": "sha256:1f50b949f3e09514616d8d527374472d470a2693413a93ccf8df89205c4814c2",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:bda307293305fe13f76bb51ed2cdbf08110bf353393c5a3ba9b2c6e48c1825a8",
+      "symbol": "PackageInfo.REQUIRED_PYTHON",
+      "symbol_hash": "sha256:cf74d0eb707a3668aa515bdd31d767109337841bcf28f03b96c6e9264d9407a4"
+    },
+    {
+      "body_hash": "sha256:81e16ccea394a6f22e27d6a26210439f9099e8217d9d38c3f411ae7bd3f43936",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:5c9774e81f3886d7a93f4152480e1ed58f8749a486ce411bd4e0830807b1e6e7",
+      "symbol": "PackageInfo.VERSION",
+      "symbol_hash": "sha256:a8260e5f38f8422e1ac38ce24fd0136b4bb3a4de24f268e9a262aa6034031ea4"
+    },
+    {
+      "body_hash": "sha256:f36187b2f774f79b91262244b7598e0550b3142023904659e10684585275a1c1",
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:2d310be6e0c12953280b4ae7c32d74687bf07cf40743879660dcbd25a74b4cc3",
+      "symbol": "SpecialTag",
+      "symbol_hash": "sha256:a66e2175ee03b1d6d73c70998500b45ae7eac6989b60ddd2adb09882a17f2c9b"
+    },
+    {
+      "body_hash": "sha256:2aeddec6abe1145cc72980911dcf1d85938df51948642d44debe43d99326b3e0",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:dc8b1fe1f4260ac232bd623c0db012645380a8717b934e8922bfe8605f10a810",
+      "symbol": "SpecialTag.CLONE",
+      "symbol_hash": "sha256:00989ee6011feaa240308f2a1e1bb8c47def1f4be493b51b91e75c75ee7bf39f"
+    },
+    {
+      "body_hash": "sha256:fbbc76cfa6f0f2484dba6f166a49721ebf87db084363ef5cb469b8d15cbd486f",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:02f18c9d88333f78773ff9ea4f2c8eb4d0f5bb9511dea86a0f41cedd93f58631",
+      "symbol": "SpecialTag.COOLROOF",
+      "symbol_hash": "sha256:622c00d22fff7838ef72f37deeac6461b137ff084511ea1085717955cc893f4b"
+    },
+    {
+      "body_hash": "sha256:7d8c501e097c2b5c7aa23295e0adce83d060818dc417e6eacd31c512720e152d",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:1b9fdbef02c6209021ff4dac37b0363d4cfffe1e64e7f715ebb826a0f707bcbf",
+      "symbol": "SpecialTag.DB",
+      "symbol_hash": "sha256:a43168ea5003995edfe35fec6f3f6b25ad26eb9111e97337db7dece5e0ede870"
+    },
+    {
+      "body_hash": "sha256:ad8de9362235c7811c452c1438122d6110f6ec9167ba53e02f3948e4a796fe1c",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:a3a52fc59c55d02968fe70f659e7f3fbdcc7f72e09fbe9fa3d430ac8f169b494",
+      "symbol": "SpecialTag.FLIP",
+      "symbol_hash": "sha256:4a5884386e242adce385eb0991559fb93426172ac5e152276000036947d4683f"
+    },
+    {
+      "body_hash": "sha256:b64ac89113c9e92c684d2d93f897f6cba3b1cf0f3f23c13570c00320d79dc594",
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:7ebd8dc4c345c8d55dd358b59421f6b95bfcfbcdb2af668e21a088d955e0b7dc",
+      "symbol": "SpecialTag.SPECIAL",
+      "symbol_hash": "sha256:0faf9b24524c68d912d1b0d1438b85bf856778fbbdc7a11ef7c20137c8d08be6"
+    },
+    {
+      "body_hash": "sha256:6446560bba87c8aff916dace718057f6b9a03bb1ea1d04171ece5cb8516bc6c8",
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9cdfbe97dbd56c9709c1449cead8a30f8c529922f871002291db5ef625709ba0",
+      "symbol": "SpecialTag.__format__",
+      "symbol_hash": "sha256:4ef932bb8135c4cfaf7e17e805cfb299e50d9400f4a106605bdb2fb75477d3a0"
+    },
+    {
+      "body_hash": "sha256:41f39e586a619e17144cefe663b44ef26f20f8e6dcb13433bcb31ebd4c066f1f",
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "SpecialTag.__str__",
+      "symbol_hash": "sha256:13ed292afebbf1a59717e776df9d6ba3e220d2cc248ac2cc450deab9c2261c98"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 10,
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:8c71b39f2a32ab0ad3e8f4df902ea2cc77895207967eee4f0fd9e507add0b01e",
+      "symbol": "AUTOID_PREFIX",
+      "symbol_hash": "sha256:9a7c270abf554af2ac0d3455101382eca02debe8c0b23e6f8c3f8a465bb32355"
+    },
+    {
+      "body_hash": "sha256:7021e8295c887188c78bbdc513121f9f5561a62bb74212b15507e334df0e96d0",
+      "inventory_index": 11,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:684975a78de3502b1d615fecff3b9c9415aa2e5ab9fadef883409c87f95e5187",
+      "symbol": "AUTOID_PREFIX.DAY_SCHEDULE",
+      "symbol_hash": "sha256:7d4821ca360166e6a06218c647b7ea935dd62080d896fd2f45cdff14da52eea0"
+    },
+    {
+      "body_hash": "sha256:78d3ab4338e930cf6ee39d052c1f3c394a574df9047d523ba24160899d5ee3a1",
+      "inventory_index": 12,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:32eaa1c8f144a15012314241bca8aab9e6f3fde1f6e9d66f8b6a6c09a5bd1560",
+      "symbol": "AUTOID_PREFIX.FENESTRATION",
+      "symbol_hash": "sha256:d327acd7e82d257668484c17fe1ad79cca5a086b7977682c6e0a07af27987603"
+    },
+    {
+      "body_hash": "sha256:4d40b8da8cd53beae99b588cdb5635a4b7fb1492de8b22c26c625128465a125d",
+      "inventory_index": 13,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9de702b64a86b770a5ae794ac61cd75a30e42a67e969ff9a3e8f86df4ee79329",
+      "symbol": "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION",
+      "symbol_hash": "sha256:a00d7b14c20b1fbeaedf4e6b456bff8555bcb9ee539f74799d9e7e42a40fcc80"
+    },
+    {
+      "body_hash": "sha256:8856dc3bd610f8b62914437eafe19380a201d1dc574f0e24b2271f846346dc32",
+      "inventory_index": 14,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9ba182d395e6b0aae71e19165f86b9c79bd287be2074ca99e995a2c8ef3adadf",
+      "symbol": "AUTOID_PREFIX.HEAT_EXCHANGER",
+      "symbol_hash": "sha256:d76b9ddc6df8f01d27ebf334bb8797bf798947ed40835eea8f0cf5fc84d94ccd"
+    },
+    {
+      "body_hash": "sha256:c68c2c15e5c8a7b6a1079bd13a90b542614c79524c082d0e8eae96ef0a6a9a2f",
+      "inventory_index": 15,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9db04787eb4de47e63a564518ec01143bfe608a6d30170ee6cb8b46d65371961",
+      "symbol": "AUTOID_PREFIX.MATERIAL",
+      "symbol_hash": "sha256:9b7489e4c9b530dab76d9d2dd9cc834d6f751d1d35188c70976af5ecea048275"
+    },
+    {
+      "body_hash": "sha256:8d7d4d137e4221940c538b7cd07bd8b18abf5cb26b9344ee07017e3434b9a859",
+      "inventory_index": 16,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:884f29ffd4c5f4ce40b097b26ee5c1fa8ea2c1ef43342ef6205be8d0c563647b",
+      "symbol": "AUTOID_PREFIX.PROFILE",
+      "symbol_hash": "sha256:f04014577c229312753d0289ef8342419fb7fed9452799dc2bce8e6d5438c32e"
+    },
+    {
+      "body_hash": "sha256:0064870a7112b617627d1ffe9f0c1a2d4afa9fcbf510be3ab0982195e2831905",
+      "inventory_index": 17,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:f67558fa7bb42379dd8bcbb62ddc7f40b84f083b2760f2681df572b11218afe7",
+      "symbol": "AUTOID_PREFIX.PV_PANEL",
+      "symbol_hash": "sha256:46500b8a4aa511167e9fcfb13e33c74b901d1ba1a274ec71390708960fee493a"
+    },
+    {
+      "body_hash": "sha256:87ae0b36ae8d68893db9ca49449bae8a906233e6420fe3c1e34fb6043ebab805",
+      "inventory_index": 18,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:75733169ef1d853609c26f27e6b117f1f7effb499023fe463a923ab214c6948c",
+      "symbol": "AUTOID_PREFIX.RULESET",
+      "symbol_hash": "sha256:e5ac2688f0382545b277dae27cc3a02744e6d5f7f3de1c1111ce2b487751bc15"
+    },
+    {
+      "body_hash": "sha256:e25e761c3710bb99220eb6cbd5f2bfbcb6061cd505970c96779f600605744c1c",
+      "inventory_index": 19,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:376ee0c14ec3785990374f5776f26c136f7dd92605e5ae595b455bc547985404",
+      "symbol": "AUTOID_PREFIX.SCHEDULE",
+      "symbol_hash": "sha256:c61dbb424961f11afedba70eabadd6c54ccdb52a7f7be1d56299ede42c0468c6"
+    },
+    {
+      "body_hash": "sha256:2b0fb7eb0efa5b241a76fb6c3bfb637f5071459da5dc38e8e7288b4ae29941e5",
+      "inventory_index": 20,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9d6d3d2c3a2b868ee1d67f25ec7bcbc8cbbca0381d0c36e98c22feb1e69b385f",
+      "symbol": "AUTOID_PREFIX.SOURCE_SYSTEM",
+      "symbol_hash": "sha256:60d016219cabe29d48669ee37e1d223932bfc6556bcc8f0a4a5ea0af147655c3"
+    },
+    {
+      "body_hash": "sha256:f0359bb556e1e51b29d1e629a7974e5818a1a8d7fb3e5ad513cbeefe431f80b5",
+      "inventory_index": 21,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:8d114d5cbc5cd86b95bfb31510dec3e2c688a48b5dc8d1feb5cb57a4dfba4bdb",
+      "symbol": "AUTOID_PREFIX.SUPPLY_SYSTEM",
+      "symbol_hash": "sha256:c2e6d435b1a6650d0998650fdb23d4310cd07ce02806553a645755990ca3bcd4"
+    },
+    {
+      "body_hash": "sha256:862dc21780a2d6e08a0b6729d4de5e658945ae13c63386ece7e4b5c44cf6abba",
+      "inventory_index": 22,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:c69336294fc2aa2a789b8ce6bb316ae4de113e9343d0d3373dab62a4107abc6d",
+      "symbol": "AUTOID_PREFIX.SURFACE",
+      "symbol_hash": "sha256:7fca2d17fabcb91b32dd28349a50f44fe1ed0c0be63cf6dba21d37ffbf229472"
+    },
+    {
+      "body_hash": "sha256:db25d2b226216bf67f81d3c0702897e6ee580dad500a26ceb7b959ef74a8a799",
+      "inventory_index": 23,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:13964193f70037161342d280099902e71824863813e858aed35baa3077767ec0",
+      "symbol": "AUTOID_PREFIX.SURFACE_CONSTRUCTION",
+      "symbol_hash": "sha256:147095a3d8aeedcd5fb82264a34c353733325268d6ad25b8e85222340fff3ca5"
+    },
+    {
+      "body_hash": "sha256:2e79005814197910dfdd1ffafd763335d3df1c8c1991598787c2fcf383897a03",
+      "inventory_index": 24,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:ff8faeb3d8a30a3f1070769193916048b39199510f2d8658d98bdfd57a1d20b8",
+      "symbol": "AUTOID_PREFIX.ZONE",
+      "symbol_hash": "sha256:5f36f9019cc2b5ad1e96b3338a84b04d4da0360941a4499db6846ddafa926ccf"
+    },
+    {
+      "body_hash": "sha256:c6af75ce6d1cb5a518b7372fd3b15b71ae02bc0a2a0b69342c32fd53fe0ea9d7",
+      "inventory_index": 25,
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9cdfbe97dbd56c9709c1449cead8a30f8c529922f871002291db5ef625709ba0",
+      "symbol": "AUTOID_PREFIX.__format__",
+      "symbol_hash": "sha256:d0c85092c98182b0366673cd287507b75d62850d9e272b32896597e787a58170"
+    },
+    {
+      "body_hash": "sha256:41f39e586a619e17144cefe663b44ef26f20f8e6dcb13433bcb31ebd4c066f1f",
+      "inventory_index": 27,
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "AUTOID_PREFIX.__str__",
+      "symbol_hash": "sha256:13ed292afebbf1a59717e776df9d6ba3e220d2cc248ac2cc450deab9c2261c98"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 31,
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9b095b8323bc225f2dc984ce84b448beb1c9ca385a260e7fc7fa0e20e9518d24",
+      "symbol": "Directory",
+      "symbol_hash": "sha256:5b876ad7fd9b11f66cc01ecb6c43d4e143b6f0258ba070c02551d968dd68aaf6"
+    },
+    {
+      "body_hash": "sha256:af2d79b22520327ed525f387a2e233fe8987bd4b981226cc73733373ee2255c0",
+      "inventory_index": 32,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:d81fb5287869701c88d9b305cbd559766faf79b8c7f39b4250f907682037caa1",
+      "symbol": "Directory.CONSTRUCTION_DIR",
+      "symbol_hash": "sha256:91c573a02d0e3b2d93a1271fbe1c3ddb5d4d10c04083707c799fa1503f5b3dea"
+    },
+    {
+      "body_hash": "sha256:14d09e816f44d227fd4799d8ebd5d1c6d1f0fccb28985882f54864bb86696fe8",
+      "inventory_index": 33,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:e63d078f01a7657c55c23cdbdaa3fdc0b1bf9367a911885dd5706e22cf728d36",
+      "symbol": "Directory.PROFILE_DIR",
+      "symbol_hash": "sha256:f65d5eaefa2bc1cbb6f0c9b5904624194a1551f48e7966c7973d35526bad4fa6"
+    },
+    {
+      "body_hash": "sha256:b1d6bad951f56d55e9caabb3d3f5dcedc2570b035ca1b3885b107e1d47bdc842",
+      "inventory_index": 34,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:4a3a0322b37403298ff405437488e2ac2423709e7b7c307679c7d0e9acabe71f",
+      "symbol": "Directory.WEATHER_DATA_DIR",
+      "symbol_hash": "sha256:8a5bf6543c4f0db98ee0169deb7dfddd4c126e34d52aa67b512136dc3e8bcd01"
+    },
+    {
+      "body_hash": "sha256:fb39ba8c586e56685f9f0b969bea0b37ddcf680b4c1496e09ac75cfb7bb9d829",
+      "inventory_index": 35,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:696be59dcbccfe70ebe3239a84daabed4289f911da4cc5a2f93d74c2fef1269e",
+      "symbol": "Directory.WEATHER_META_DIR",
+      "symbol_hash": "sha256:15e81d1d4205ffe651af323c3cc7352255847972301ad1753fd3d8d5098dc260"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 36,
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:2740bb2f2c36f7a928b58073cf72c4f955c0b9fbbb13d6586049071934b22209",
+      "symbol": "PackageInfo",
+      "symbol_hash": "sha256:aaf5b98d4a7dc29f83b698f1fb2881b7bb258885bd2aaf17a53b6da902d1eda1"
+    },
+    {
+      "body_hash": "sha256:24d80084d27b2540831c263f9dedb58d098dd2631acbc12d707f1ac8611c7fa7",
+      "inventory_index": 37,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:8a07b85ef52202817199529eb85bd9e57dc995f6e07f09ced1aeec0baf40513e",
+      "symbol": "PackageInfo.NAME",
+      "symbol_hash": "sha256:537c8c3bc3c2d48105e8e6c453208e725f985ac9d84f87e5f66c094ea5696cad"
+    },
+    {
+      "body_hash": "sha256:1f50b949f3e09514616d8d527374472d470a2693413a93ccf8df89205c4814c2",
+      "inventory_index": 38,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:bda307293305fe13f76bb51ed2cdbf08110bf353393c5a3ba9b2c6e48c1825a8",
+      "symbol": "PackageInfo.REQUIRED_PYTHON",
+      "symbol_hash": "sha256:cf74d0eb707a3668aa515bdd31d767109337841bcf28f03b96c6e9264d9407a4"
+    },
+    {
+      "body_hash": "sha256:81e16ccea394a6f22e27d6a26210439f9099e8217d9d38c3f411ae7bd3f43936",
+      "inventory_index": 39,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:5c9774e81f3886d7a93f4152480e1ed58f8749a486ce411bd4e0830807b1e6e7",
+      "symbol": "PackageInfo.VERSION",
+      "symbol_hash": "sha256:a8260e5f38f8422e1ac38ce24fd0136b4bb3a4de24f268e9a262aa6034031ea4"
+    },
+    {
+      "body_hash": "sha256:f36187b2f774f79b91262244b7598e0550b3142023904659e10684585275a1c1",
+      "inventory_index": 58,
+      "kind": "class",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:2d310be6e0c12953280b4ae7c32d74687bf07cf40743879660dcbd25a74b4cc3",
+      "symbol": "SpecialTag",
+      "symbol_hash": "sha256:a66e2175ee03b1d6d73c70998500b45ae7eac6989b60ddd2adb09882a17f2c9b"
+    },
+    {
+      "body_hash": "sha256:2aeddec6abe1145cc72980911dcf1d85938df51948642d44debe43d99326b3e0",
+      "inventory_index": 59,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:dc8b1fe1f4260ac232bd623c0db012645380a8717b934e8922bfe8605f10a810",
+      "symbol": "SpecialTag.CLONE",
+      "symbol_hash": "sha256:00989ee6011feaa240308f2a1e1bb8c47def1f4be493b51b91e75c75ee7bf39f"
+    },
+    {
+      "body_hash": "sha256:fbbc76cfa6f0f2484dba6f166a49721ebf87db084363ef5cb469b8d15cbd486f",
+      "inventory_index": 60,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:02f18c9d88333f78773ff9ea4f2c8eb4d0f5bb9511dea86a0f41cedd93f58631",
+      "symbol": "SpecialTag.COOLROOF",
+      "symbol_hash": "sha256:622c00d22fff7838ef72f37deeac6461b137ff084511ea1085717955cc893f4b"
+    },
+    {
+      "body_hash": "sha256:7d8c501e097c2b5c7aa23295e0adce83d060818dc417e6eacd31c512720e152d",
+      "inventory_index": 61,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:1b9fdbef02c6209021ff4dac37b0363d4cfffe1e64e7f715ebb826a0f707bcbf",
+      "symbol": "SpecialTag.DB",
+      "symbol_hash": "sha256:a43168ea5003995edfe35fec6f3f6b25ad26eb9111e97337db7dece5e0ede870"
+    },
+    {
+      "body_hash": "sha256:ad8de9362235c7811c452c1438122d6110f6ec9167ba53e02f3948e4a796fe1c",
+      "inventory_index": 62,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:a3a52fc59c55d02968fe70f659e7f3fbdcc7f72e09fbe9fa3d430ac8f169b494",
+      "symbol": "SpecialTag.FLIP",
+      "symbol_hash": "sha256:4a5884386e242adce385eb0991559fb93426172ac5e152276000036947d4683f"
+    },
+    {
+      "body_hash": "sha256:b64ac89113c9e92c684d2d93f897f6cba3b1cf0f3f23c13570c00320d79dc594",
+      "inventory_index": 63,
+      "kind": "constant",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:7ebd8dc4c345c8d55dd358b59421f6b95bfcfbcdb2af668e21a088d955e0b7dc",
+      "symbol": "SpecialTag.SPECIAL",
+      "symbol_hash": "sha256:0faf9b24524c68d912d1b0d1438b85bf856778fbbdc7a11ef7c20137c8d08be6"
+    },
+    {
+      "body_hash": "sha256:6446560bba87c8aff916dace718057f6b9a03bb1ea1d04171ece5cb8516bc6c8",
+      "inventory_index": 64,
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:9cdfbe97dbd56c9709c1449cead8a30f8c529922f871002291db5ef625709ba0",
+      "symbol": "SpecialTag.__format__",
+      "symbol_hash": "sha256:4ef932bb8135c4cfaf7e17e805cfb299e50d9400f4a106605bdb2fb75477d3a0"
+    },
+    {
+      "body_hash": "sha256:41f39e586a619e17144cefe663b44ef26f20f8e6dcb13433bcb31ebd4c066f1f",
+      "inventory_index": 66,
+      "kind": "function",
+      "path": "src/epsimple/constants.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "SpecialTag.__str__",
+      "symbol_hash": "sha256:13ed292afebbf1a59717e776df9d6ba3e220d2cc248ac2cc450deab9c2261c98"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory": {
+      "bytes": 518070,
+      "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+      "file_sha256": "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    },
+    "isolated_import": {
+      "files_after_execution": [
+        "location-a/repository/src/epsimple/constants.py",
+        "location-b/repository/src/epsimple/constants.py"
+      ],
+      "module_names": [
+        "_goniegonie_epsimple_identifier_location_a",
+        "_goniegonie_epsimple_identifier_location_b"
+      ],
+      "source_copy_sha256": {
+        "location-a/repository/src/epsimple/constants.py": "sha256:d5dd5241ec90b14ba3708a525cd74279a8cdc238164a5b8544c4c82b05a29897",
+        "location-b/repository/src/epsimple/constants.py": "sha256:d5dd5241ec90b14ba3708a525cd74279a8cdc238164a5b8544c4c82b05a29897"
+      }
+    },
+    "source": {
+      "ast_sha256": "sha256:6740f081f087834aadfef0c11da6cdbe11f907dc170b48ebaa287e000eb6e27b",
+      "bytes": 4873,
+      "path": "src/epsimple/constants.py",
+      "source_sha256": "sha256:d5dd5241ec90b14ba3708a525cd74279a8cdc238164a5b8544c4c82b05a29897"
+    }
+  }
+}

@@ -63,6 +63,17 @@ with its model-file, AST, method, and `VALID_DIGITS` receipts included. The 24
 numeric members are exact equivalents and the five enum containers are
 reviewed native container or dispatch adaptations.
 
+`python-0.7.0/epsimple-identifier-conventions-oracle.json` pins 22 ordered
+CPython 3.12.7 cases for the 34 unresolved `AUTOID_PREFIX`, `Directory`,
+`PackageInfo`, and `SpecialTag` symbols in `epsimple/constants.py`. It records
+enum declaration and iteration topology, string and formatting behavior,
+construction and lookup failures, mutation and copy aliasing, relocatable
+resource-path roles, package metadata operations, and class-versus-instance
+attribute semantics. Twenty-three targets are exact equivalents and eleven
+use reviewed immutable, embedded-resource, caller-supplied-resource, package-
+metadata, or compiled-target adaptations. `AUTOID_PREFIX.__repr__` and
+`SpecialTag.__repr__` remain explicitly excluded from this bounded corpus.
+
 `python-0.7.0/dragon-construction-core-oracle.json` pins 19 ordered direct-state
 CPython 3.12.7 cases for exactly 35 class, constructor, property, enum, and
 reversal targets across `Construction`, `Glazing`, `Layer`, `Material`,

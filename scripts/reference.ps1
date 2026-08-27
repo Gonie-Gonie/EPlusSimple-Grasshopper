@@ -34,6 +34,7 @@ $commonCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\gen
 $constantsMetadataGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_constants_metadata_oracle.py'
 $constantsEngineeringGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_constants_engineering_oracle.py'
 $epsimpleConstantsNumericGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_constants_numeric_oracle.py'
+$epsimpleIdentifierConventionsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_identifier_conventions_oracle.py'
 $dragonConstructionAirBoundaryCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_construction_air_boundary_core_oracle.py'
 $dragonConstructionCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_construction_core_oracle.py'
 $dragonConstructionToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_construction_to_idf_object_oracle.py'
@@ -83,6 +84,7 @@ $commonCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_comm
 $constantsMetadataTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_constants_metadata_oracle.py'
 $constantsEngineeringTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_constants_engineering_oracle.py'
 $epsimpleConstantsNumericTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_constants_numeric_oracle.py'
+$epsimpleIdentifierConventionsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_identifier_conventions_oracle.py'
 $dragonConstructionAirBoundaryCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_construction_air_boundary_core_oracle.py'
 $dragonConstructionCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_construction_core_oracle.py'
 $dragonConstructionToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_construction_to_idf_object_oracle.py'
@@ -184,6 +186,7 @@ foreach ($requiredFile in @(
     $constantsMetadataGeneratorPath,
     $constantsEngineeringGeneratorPath,
     $epsimpleConstantsNumericGeneratorPath,
+    $epsimpleIdentifierConventionsGeneratorPath,
     $dragonConstructionAirBoundaryCoreGeneratorPath,
     $dragonConstructionCoreGeneratorPath,
     $dragonConstructionToIdfObjectGeneratorPath,
@@ -231,6 +234,7 @@ foreach ($requiredFile in @(
     $constantsMetadataTestPath,
     $constantsEngineeringTestPath,
     $epsimpleConstantsNumericTestPath,
+    $epsimpleIdentifierConventionsTestPath,
     $dragonConstructionAirBoundaryCoreTestPath,
     $dragonConstructionCoreTestPath,
     $dragonConstructionToIdfObjectTestPath,
@@ -881,6 +885,25 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $epsimpleConstantsNumericGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-epsimple-constants-numeric-reference.log') `
     -FailureMessage 'Generating the Python epsimple numeric-constants oracle failed'
+
+$epsimpleIdentifierConventionsOraclePath = Join-Path $outputRoot 'epsimple-identifier-conventions-oracle.json'
+$epsimpleIdentifierConventionsGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $epsimpleIdentifierConventionsGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $epsimpleIdentifierConventionsOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $epsimpleIdentifierConventionsGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-epsimple-identifier-conventions-reference.log') `
+    -FailureMessage 'Generating the Python epsimple identifier-conventions oracle failed'
 
 $dragonConstructionAirBoundaryCoreOraclePath = Join-Path $outputRoot 'dragon-construction-air-boundary-core-oracle.json'
 $dragonConstructionAirBoundaryCoreGeneratorArguments = @(

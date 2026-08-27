@@ -163,6 +163,11 @@
       "sha256": "252708fae632f2d587c8ab6f3659f0c94a34c1d2f2b3c70c70997a824c590ee2"
     },
     {
+      "path": "epsimple-identifier-conventions-oracle.json",
+      "bytes": 121058,
+      "sha256": "c4375d858409fae187776ab88ebb6c5a21c76ac7d0e98b38ed2912a419f2bf7f"
+    },
+    {
       "path": "fenestration-construction-database.json",
       "bytes": 54147,
       "sha256": "6fd2b18e1e4d464286c6f3a3a197e3c526e863e34ab392f52818435ae6872344"
