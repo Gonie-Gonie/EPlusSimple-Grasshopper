@@ -9,6 +9,8 @@ internal static class RhinoHost
 
     public static int Run(SmokeHostInputs inputs, string[] coreArguments)
     {
+        Progress("isolating installed Dragon package folders");
+        GrasshopperSmokeGate.BlockInstalledDragonPackages();
         Progress("starting RhinoCore");
         using var core = new Rhino.Runtime.InProcess.RhinoCore(coreArguments);
         Progress("RhinoCore started");

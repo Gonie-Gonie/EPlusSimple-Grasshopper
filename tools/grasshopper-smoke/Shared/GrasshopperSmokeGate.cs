@@ -14,6 +14,41 @@ internal static class GrasshopperSmokeGate
         "GonieGonie.SimpleDragon.GH"
     };
 
+    internal static void BlockInstalledDragonPackages()
+    {
+        const string fieldName = "_package_folder_blocklist";
+        FieldInfo? field = typeof(Rhino.Runtime.HostUtils).GetField(
+            fieldName,
+            BindingFlags.Static | BindingFlags.NonPublic);
+        if (field is null)
+        {
+            Require(
+                typeof(Rhino.Runtime.HostUtils).Assembly.GetName().Version?.Major < 8,
+                "Rhino 8 no longer exposes the package-folder isolation blocklist.");
+            return;
+        }
+        Require(
+            field.FieldType == typeof(string[]),
+            "Rhino's package-folder blocklist has an unexpected type.");
+
+        string[] existing = (string[]?)field.GetValue(null) ?? Array.Empty<string>();
+        string[] required =
+        {
+            "invisible-dragon",
+            "simple-dragon"
+        };
+        string[] blocked = existing
+            .Concat(required)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+        field.SetValue(null, blocked);
+
+        string[] applied = (string[]?)field.GetValue(null) ?? Array.Empty<string>();
+        Require(
+            required.All(package => applied.Contains(package, StringComparer.OrdinalIgnoreCase)),
+            "Rhino did not apply the Dragon package-folder isolation blocklist.");
+    }
+
     internal static void RestrictExternalLibraries(IReadOnlyList<string> pluginPaths)
     {
         MethodInfo method = typeof(GH_ComponentServer).GetMethod(

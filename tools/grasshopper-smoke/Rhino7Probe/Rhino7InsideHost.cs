@@ -8,6 +8,7 @@ internal static class Rhino7InsideHost
 
     public static int Run(SmokeHostInputs inputs)
     {
+        GrasshopperSmokeGate.BlockInstalledDragonPackages();
         using var core = new Rhino.Runtime.InProcess.RhinoCore(CoreArguments);
         if (Rhino.RhinoApp.Version.Major != 7)
         {
