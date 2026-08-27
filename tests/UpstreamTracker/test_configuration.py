@@ -27,7 +27,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(244, len(configuration.exceptions))
+        self.assertEqual(245, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -41,7 +41,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(581, len(compatibility.needs_reverification))
+        self.assertEqual(580, len(compatibility.needs_reverification))
         self.assertEqual(
             171,
             sum(
@@ -50,7 +50,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            238,
+            239,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -59,10 +59,10 @@ class ConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(compatibility.symbol_evidence)
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
-        self.assertEqual(409, len(symbol_evidence.entries))
-        self.assertEqual(409, len(symbol_evidence.receipts))
+        self.assertEqual(410, len(symbol_evidence.entries))
+        self.assertEqual(410, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:2e656c805de99a525323814c2ff0d83d4fdef2601931aa60c740be0fd50ad5ee",
+            "sha256:f58c9bed089bbb2d4ec82ecfd154898f9fcb4f19fd7cf2a9dae9a920810165c9",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -1769,6 +1769,99 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(
             "needs_reverification",
             by_key[("src/idragon/imugi.py", "IdfObjectList.set_wwr")].classification,
+        )
+        energy_model_key = ("src/idragon/dragon/model.py", "EnergyModel")
+        energy_model = by_key[energy_model_key]
+        self.assertEqual(energy_model_key, compatibility.inventory.symbols[815].key)
+        self.assertEqual(energy_model, compatibility.matrix.entries[815])
+        self.assertEqual("exception", energy_model.classification)
+        self.assertEqual(
+            "sealed-read-only-native-energy-model-class-a7582a41",
+            energy_model.exception_id,
+        )
+        self.assertEqual(
+            (
+                "upstream/compatibility-exceptions.yml#sealed-read-only-native-energy-model-class-a7582a41",
+                "upstream/symbol-evidence.json#dragon-model-energy-model-class-a7582a41",
+            ),
+            energy_model.evidence,
+        )
+        self.assertIn(
+            "sha256:bc64f0fa26cb1a352a7a96a8333038ae7922d30cdd75c27a78a45649f9a9a96e",
+            energy_model.rationale,
+        )
+        energy_model_exception = next(
+            item
+            for item in configuration.exceptions
+            if item.identifier
+            == "sealed-read-only-native-energy-model-class-a7582a41"
+        )
+        self.assertEqual(
+            energy_model_key,
+            (
+                energy_model_exception.upstream_path,
+                energy_model_exception.upstream_symbol,
+            ),
+        )
+        self.assertEqual(
+            compatibility.inventory.symbols[815].symbol_hash,
+            energy_model_exception.upstream_symbol_hash,
+        )
+        self.assertIn(
+            ("engineering_result", energy_model.rationale),
+            energy_model_exception.effects,
+        )
+        energy_model_evidence = symbol_evidence.entries_by_key[energy_model_key]
+        self.assertEqual(
+            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+            energy_model_evidence.implementation_path,
+        )
+        self.assertEqual(
+            "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+            energy_model_evidence.implementation_source_sha256,
+        )
+        self.assertEqual(
+            "GonieGonie.InvisibleDragon.Model.EnergyModel",
+            energy_model_evidence.implementation_symbol,
+        )
+        self.assertEqual(1, len(energy_model_evidence.receipts))
+        energy_model_receipt = energy_model_evidence.receipts[0]
+        self.assertEqual(
+            "dragon-model-energy-model-class-a7582a41",
+            energy_model_receipt.identifier,
+        )
+        self.assertEqual(energy_model.rationale, energy_model_receipt.assertion)
+        self.assertEqual(
+            "sha256:c2774991d73b05365682f5b0154453cf664dd1bc5f0b2ed2293a29be60703288",
+            energy_model_receipt.expected_output_sha256,
+        )
+        self.assertEqual(
+            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/"
+            "EnergyModelClassOracleParityTests.cs",
+            energy_model_receipt.test_path,
+        )
+        self.assertEqual(
+            "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelClassOracleParityTests."
+            "MatchesPinnedPythonEnergyModelClassThroughTypedNativeRoutes",
+            energy_model_receipt.test_symbol,
+        )
+        self.assertEqual(
+            "sha256:7873e0930e752467003931854872b1006ce529265cdef5e62830ee1091f045c2",
+            energy_model_receipt.test_source_sha256,
+        )
+        self.assertEqual("cross_language", energy_model_receipt.verification_kind)
+        self.assertEqual("passed", energy_model_receipt.outcome)
+        self.assertFalse(energy_model_receipt.skipped)
+        self.assertFalse(energy_model_receipt.structural_only)
+        self.assertFalse(energy_model_receipt.claims_active_load)
+        self.assertEqual("not_applicable", energy_model_receipt.exercised_load)
+        self.assertEqual(
+            "needs_reverification",
+            compatibility.matrix.entries[814].classification,
+        )
+        self.assertEqual(
+            "immutable-validated-energy-model-construction",
+            compatibility.matrix.entries[816].exception_id,
         )
         people_activity = by_key[
             (

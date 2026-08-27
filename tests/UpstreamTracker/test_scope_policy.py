@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:469507028f501ffbe3e41d3edfed690759e806d68d8b642dd5d24a22dbcd5d7e"
+    "sha256:bf01db17c70dbb36340782858dc38c1b564a15cb9eb715bd3f606e99485990cd"
 )
 
 
@@ -69,8 +69,8 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(
             {
                 "equivalent": 171,
-                "exception": 238,
-                "needs_reverification": 581,
+                "exception": 239,
+                "needs_reverification": 580,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -412,6 +412,47 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(
             "model-context-no-mass-construction-idf-emission",
             entries[640].exception_id,
+        )
+
+    def test_energy_model_class_promotion_preserves_adjacent_model_scope(self) -> None:
+        entries = self.configuration.matrix.entries
+        self.assertEqual(
+            (
+                (
+                    "src/idragon/dragon/hvac.py",
+                    "ZoneTerminalUnitAppender.run",
+                    "needs_reverification",
+                    None,
+                ),
+                (
+                    "src/idragon/dragon/model.py",
+                    "EnergyModel",
+                    "exception",
+                    "sealed-read-only-native-energy-model-class-a7582a41",
+                ),
+                (
+                    "src/idragon/dragon/model.py",
+                    "EnergyModel.__init__",
+                    "exception",
+                    "immutable-validated-energy-model-construction",
+                ),
+            ),
+            tuple(
+                (
+                    entry.path,
+                    entry.symbol,
+                    entry.classification,
+                    entry.exception_id,
+                )
+                for entry in entries[814:817]
+            ),
+        )
+        self.assertEqual(
+            (
+                "upstream/compatibility-exceptions.yml#sealed-read-only-native-energy-model-class-a7582a41",
+                "upstream/symbol-evidence.json#dragon-model-energy-model-class-a7582a41",
+            ),
+            entries[815].evidence,
         )
 
     def test_terminal_scope_additions_are_exactly_bound(self) -> None:

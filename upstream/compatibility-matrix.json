@@ -815,7 +815,7 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
+    "exception",
     "exception",
     "exception",
     "equivalent",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:469507028f501ffbe3e41d3edfed690759e806d68d8b642dd5d24a22dbcd5d7e",
+  "content_sha256": "sha256:bf01db17c70dbb36340782858dc38c1b564a15cb9eb715bd3f606e99485990cd",
   "details": [
     {
       "evidence": [
@@ -3784,6 +3784,15 @@
       "exception_id": "model-context-supply-group-idf-assembly",
       "index": 796,
       "rationale": "Trusted cross-language evidence verifies the bounded model-context SupplyGroup IDF assembly adaptation for ordered success and two failure boundaries while leaving the standalone converter API, concrete converters, controller execution, postprocessors, and EnergyModel.to_idf unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#sealed-read-only-native-energy-model-class-a7582a41",
+        "upstream/symbol-evidence.json#dragon-model-energy-model-class-a7582a41"
+      ],
+      "exception_id": "sealed-read-only-native-energy-model-class-a7582a41",
+      "index": 815,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify EnergyModel through GonieGonie.InvisibleDragon.Model.EnergyModel for exact cases dragon-model-energy-model-class.c01-class-supported-versions-topology, dragon-model-energy-model-class.c02-shared-list-append-visibility-restoration, dragon-model-energy-model-class.c03-instance-shadow-arbitrary-attribute-subclass-topology under adaptation family sealed-read-only-native-energy-model-class-a7582a41. The canonical direct receipt is sha256:bc64f0fa26cb1a352a7a96a8333038ae7922d30cdd75c27a78a45649f9a9a96e. Concurrent supported_versions mutation, metaclass or descriptor monkey-patching, custom subclass hooks and multiple inheritance, Version behavior beyond the two observed context instances, and the separately inventoried EnergyModel members at indices 816 through 825 are not claimed."
     },
     {
       "evidence": [
@@ -6356,8 +6365,8 @@
   "summary": {
     "classification_counts": {
       "equivalent": 171,
-      "exception": 238,
-      "needs_reverification": 581,
+      "exception": 239,
+      "needs_reverification": 580,
       "out_of_scope": 252
     },
     "entry_count": 1242

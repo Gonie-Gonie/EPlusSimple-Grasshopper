@@ -3429,3 +3429,17 @@
     api_contract: "callers use the validated typed native route GonieGonie.InvisibleDragon.Construction.NoMassConstruction.NoMassConstruction and its immutable public contract"
     compatibility_evidence: "only the exact recorder cases and native public route bound to NoMassConstruction.__init__ are claimed; adjacent construction symbols remain separately classified"
   approval: accepted-native-api-adaptation
+
+- id: sealed-read-only-native-energy-model-class-a7582a41
+  upstream:
+    path: "src/idragon/dragon/model.py"
+    symbol: "EnergyModel"
+    symbol_hash: sha256:a7582a410b3e8189778cacda204ee15a6fd3039d6f136f9a9303bb4437fe2170
+  difference:
+    upstream: "Python exposes a subclassable open EnergyModel class with an inherited mutable class-level supported_versions list, shared class-list mutation, instance shadowing, and arbitrary instance attributes"
+    dotnet: "GonieGonie.InvisibleDragon.Model.EnergyModel is sealed and typed, exposes SupportedVersions through a static getter returning fresh read-only collection wrappers, and rejects subclassing, instance shadowing, and arbitrary attributes"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations classify EnergyModel through GonieGonie.InvisibleDragon.Model.EnergyModel for exact cases dragon-model-energy-model-class.c01-class-supported-versions-topology, dragon-model-energy-model-class.c02-shared-list-append-visibility-restoration, dragon-model-energy-model-class.c03-instance-shadow-arbitrary-attribute-subclass-topology under adaptation family sealed-read-only-native-energy-model-class-a7582a41. The canonical direct receipt is sha256:bc64f0fa26cb1a352a7a96a8333038ae7922d30cdd75c27a78a45649f9a9a96e. Concurrent supported_versions mutation, metaclass or descriptor monkey-patching, custom subclass hooks and multiple inheritance, Version behavior beyond the two observed context instances, and the separately inventoried EnergyModel members at indices 816 through 825 are not claimed."
+    api_contract: "callers use the sealed typed GonieGonie.InvisibleDragon.Model.EnergyModel and its read-only SupportedVersions projection instead of mutating Python class or instance topology"
+    compatibility_evidence: "only inventory index 815, the fixture's exact three cases, and the recorded native public class route are claimed; indices 814 and 816 through 825 retain their existing independent classifications"
+  approval: accepted-native-api-adaptation

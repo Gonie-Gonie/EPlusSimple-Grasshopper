@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:2e656c805de99a525323814c2ff0d83d4fdef2601931aa60c740be0fd50ad5ee",
+  "content_sha256": "sha256:f58c9bed089bbb2d4ec82ecfd154898f9fcb4f19fd7cf2a9dae9a920810165c9",
   "entries": [
     {
       "implementation": {
@@ -3640,6 +3640,32 @@
       ],
       "symbol": "SupplyGroup.to_idf_object",
       "upstream_symbol_hash": "sha256:3f9c508c5b0d784d27bc327dfe65c84bd7d17ffc144615b852c37b59cbe51a41"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel"
+      },
+      "path": "src/idragon/dragon/model.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify EnergyModel through GonieGonie.InvisibleDragon.Model.EnergyModel for exact cases dragon-model-energy-model-class.c01-class-supported-versions-topology, dragon-model-energy-model-class.c02-shared-list-append-visibility-restoration, dragon-model-energy-model-class.c03-instance-shadow-arbitrary-attribute-subclass-topology under adaptation family sealed-read-only-native-energy-model-class-a7582a41. The canonical direct receipt is sha256:bc64f0fa26cb1a352a7a96a8333038ae7922d30cdd75c27a78a45649f9a9a96e. Concurrent supported_versions mutation, metaclass or descriptor monkey-patching, custom subclass hooks and multiple inheritance, Version behavior beyond the two observed context instances, and the separately inventoried EnergyModel members at indices 816 through 825 are not claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c2774991d73b05365682f5b0154453cf664dd1bc5f0b2ed2293a29be60703288",
+          "id": "dragon-model-energy-model-class-a7582a41",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/EnergyModelClassOracleParityTests.cs",
+          "test_source_sha256": "sha256:7873e0930e752467003931854872b1006ce529265cdef5e62830ee1091f045c2",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelClassOracleParityTests.MatchesPinnedPythonEnergyModelClassThroughTypedNativeRoutes",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EnergyModel",
+      "upstream_symbol_hash": "sha256:a7582a410b3e8189778cacda204ee15a6fd3039d6f136f9a9303bb4437fe2170"
     },
     {
       "implementation": {
@@ -10639,9 +10665,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 409,
-    "passed_receipt_count": 409,
-    "receipt_count": 409,
+    "entry_count": 410,
+    "passed_receipt_count": 410,
+    "receipt_count": 410,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
