@@ -79,7 +79,7 @@ function Invoke-Yak {
         throw "$FailureMessage (exit code $exitCode). See '$logPath'."
     }
 
-    return $lines
+    return @($lines | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
 }
 
 function Test-PackageListed {
@@ -252,70 +252,70 @@ if ([string]::IsNullOrWhiteSpace($version)) {
 }
 
 $installations = @()
-foreach ($host in $hosts) {
+foreach ($rhinoHost in $hosts) {
     $yakArtifacts = @($productIds | ForEach-Object {
         Resolve-IndexedYak `
             -PackageIndex $packageIndex `
             -ProductId $_ `
-            -PackageTarget ([string] $host.packageTarget)
+            -PackageTarget ([string] $rhinoHost.packageTarget)
     })
 
     Write-Host ''
-    Write-Host "Removing existing Dragon packages from $($host.name)..."
+    Write-Host "Removing existing Dragon packages from $($rhinoHost.name)..."
     $installedBefore = @(Invoke-Yak `
-        -Executable ([string] $host.yak) `
+        -Executable ([string] $rhinoHost.yak) `
         -Arguments @('list') `
-        -LogName ("$($host.name.ToLowerInvariant())-list-before.log") `
-        -FailureMessage "$($host.name) package listing failed")
+        -LogName ("$($rhinoHost.name.ToLowerInvariant())-list-before.log") `
+        -FailureMessage "$($rhinoHost.name) package listing failed")
     foreach ($productId in $productIds) {
         if (Test-PackageListed -Lines $installedBefore -ProductId $productId) {
             $null = Invoke-Yak `
-                -Executable ([string] $host.yak) `
+                -Executable ([string] $rhinoHost.yak) `
                 -Arguments @('uninstall', $productId) `
-                -LogName ("$($host.name.ToLowerInvariant())-uninstall-$productId.log") `
-                -FailureMessage "$($host.name) could not uninstall $productId"
+                -LogName ("$($rhinoHost.name.ToLowerInvariant())-uninstall-$productId.log") `
+                -FailureMessage "$($rhinoHost.name) could not uninstall $productId"
         }
         else {
-            Write-Host "$productId is not currently installed in $($host.name); continuing."
+            Write-Host "$productId is not currently installed in $($rhinoHost.name); continuing."
         }
     }
 
     $installedAfterRemoval = @(Invoke-Yak `
-        -Executable ([string] $host.yak) `
+        -Executable ([string] $rhinoHost.yak) `
         -Arguments @('list') `
-        -LogName ("$($host.name.ToLowerInvariant())-list-after-removal.log") `
-        -FailureMessage "$($host.name) post-removal package listing failed")
+        -LogName ("$($rhinoHost.name.ToLowerInvariant())-list-after-removal.log") `
+        -FailureMessage "$($rhinoHost.name) post-removal package listing failed")
     foreach ($productId in $productIds) {
         if (Test-PackageListed -Lines $installedAfterRemoval -ProductId $productId) {
-            throw "$productId remains installed in $($host.name) after uninstall."
+            throw "$productId remains installed in $($rhinoHost.name) after uninstall."
         }
     }
 
-    Write-Host "Installing Dragon $version packages into $($host.name)..."
+    Write-Host "Installing Dragon $version packages into $($rhinoHost.name)..."
     foreach ($artifact in $yakArtifacts) {
         $null = Invoke-Yak `
-            -Executable ([string] $host.yak) `
+            -Executable ([string] $rhinoHost.yak) `
             -Arguments @('install', [string] $artifact.path) `
-            -LogName ("$($host.name.ToLowerInvariant())-install-$($artifact.product).log") `
-            -FailureMessage "$($host.name) could not install $($artifact.product)"
+            -LogName ("$($rhinoHost.name.ToLowerInvariant())-install-$($artifact.product).log") `
+            -FailureMessage "$($rhinoHost.name) could not install $($artifact.product)"
     }
 
     $installedFinal = @(Invoke-Yak `
-        -Executable ([string] $host.yak) `
+        -Executable ([string] $rhinoHost.yak) `
         -Arguments @('list') `
-        -LogName ("$($host.name.ToLowerInvariant())-list-final.log") `
-        -FailureMessage "$($host.name) final package listing failed")
+        -LogName ("$($rhinoHost.name.ToLowerInvariant())-list-final.log") `
+        -FailureMessage "$($rhinoHost.name) final package listing failed")
     foreach ($productId in $productIds) {
         if (-not (Test-PackageListed `
                 -Lines $installedFinal `
                 -ProductId $productId `
                 -Version $version)) {
-            throw "$productId $version is not listed after installation in $($host.name)."
+            throw "$productId $version is not listed after installation in $($rhinoHost.name)."
         }
     }
 
     $installations += [pscustomobject] [ordered] @{
-        host = [string] $host.name
+        host = [string] $rhinoHost.name
         version = $version
         products = @($yakArtifacts | ForEach-Object {
             [pscustomobject] [ordered] @{
