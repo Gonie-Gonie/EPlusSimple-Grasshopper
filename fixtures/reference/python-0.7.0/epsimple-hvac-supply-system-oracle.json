@@ -1,0 +1,4009 @@
+{
+  "case_sha256": {
+    "epsimple-hvac-supply-system.air-handling-unit-construction-json-source-capabilities-dragon": "sha256:a698272c6fb8e6e337ce12d6f91ee271625452506115f29b4bf385febb5c9462",
+    "epsimple-hvac-supply-system.electric-radiant-floor-construction-json-null-source-dragon": "sha256:40591ce52129ae4400fe15825d3ebe78c8399cbff3b33ab1a32b8b3cfa15475c",
+    "epsimple-hvac-supply-system.electric-radiator-capacity-validation-json-null-source-dragon": "sha256:9c2e15187f22a4605cb2fd09eb17d56d4940a3f2f10ae796005cb0272ab904a6",
+    "epsimple-hvac-supply-system.fan-coil-unit-source-branches-json-dragon": "sha256:347f716087187af48ef8a99e73bf07ea900f9ad6e9ec90e969e4aba72387dfba",
+    "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon": "sha256:827b661ffea091fded609e07e1c9ccec144327e54e15230fdfe4bd8b71f89642",
+    "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon": "sha256:e6bfc2d25e7cbc00aea6f5a2a52c7df23f7076f9a5014b4c92e92f3de660c9f4",
+    "epsimple-hvac-supply-system.radiator-capacity-validation-json-dragon": "sha256:57b8d53ca5fc12088454084dcc0a581c14a46c79bef29d7470f3a2968105815a",
+    "epsimple-hvac-supply-system.supply-system-base-mapper-capability-topology": "sha256:c7ddd975217eab969087a73702d712dcaaf57c58514a79fd93ca22ea5ceb9dc0"
+  },
+  "cases": [
+    {
+      "code": "A01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-supply-system.air-handling-unit-construction-json-source-capabilities-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SupplySystem"
+          ],
+          "dragon_explicit": {
+            "class": "AirHandlingUnit",
+            "class_module": "idragon.dragon.hvac",
+            "source": {
+              "class": "HeatPump",
+              "class_module": "idragon.dragon.hvac",
+              "values": {
+                "cooling_capacity": {
+                  "hex": "0x1.9640000000000p+13",
+                  "kind": "float",
+                  "repr": "13000.0"
+                },
+                "cooling_cop": {
+                  "hex": "0x1.0000000000000p+2",
+                  "kind": "float",
+                  "repr": "4.0"
+                },
+                "fuel": "Electricity",
+                "heating_capacity": {
+                  "hex": "0x1.b580000000000p+13",
+                  "kind": "float",
+                  "repr": "14000.0"
+                },
+                "heating_cop": {
+                  "hex": "0x1.c000000000000p+1",
+                  "kind": "float",
+                  "repr": "3.5"
+                }
+              }
+            },
+            "values": {
+              "coolable": {
+                "kind": "bool",
+                "value": true
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "SUP-AHU-EXPLICIT"
+            }
+          },
+          "dragon_geothermal": {
+            "class": "AirHandlingUnit",
+            "class_module": "idragon.dragon.hvac",
+            "source": {
+              "class": "HeatPump",
+              "class_module": "idragon.dragon.hvac",
+              "values": {
+                "cooling_capacity": {
+                  "hex": "0x1.f400000000000p+13",
+                  "kind": "float",
+                  "repr": "16000.0"
+                },
+                "cooling_cop": {
+                  "hex": "0x1.4000000000000p+2",
+                  "kind": "float",
+                  "repr": "5.0"
+                },
+                "fuel": "Electricity",
+                "heating_capacity": {
+                  "hex": "0x1.09a0000000000p+14",
+                  "kind": "float",
+                  "repr": "17000.0"
+                },
+                "heating_cop": {
+                  "hex": "0x1.2000000000000p+2",
+                  "kind": "float",
+                  "repr": "4.5"
+                }
+              }
+            },
+            "values": {
+              "coolable": {
+                "kind": "bool",
+                "value": true
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "SUP-AHU-GEO"
+            }
+          },
+          "dragon_repeat_fresh": true,
+          "errors": {
+            "boiler_source": {
+              "message_sha256": "sha256:0c681cdad0e5a064ef8f15601d72212b7d543a2a3c5917f43c2289fcf21be4c6",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "from_json_missing_source": {
+              "message_sha256": "sha256:d7a73575b81b6e525fb7f815c172f779c9c2d5c4bbd96562f69059998626c987",
+              "outcome": "raised",
+              "type": "KeyError"
+            },
+            "none_source": {
+              "message_sha256": "sha256:200bcae80b26e971acd6a58a74e94053c3b2dbd1f0cd4a17d9c0d9e3861ada78",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "to_dragon_missing_source": {
+              "message_sha256": "sha256:c9b7cd0fe48c93475810ba100e91ab3f0c8e88f74559825e9444bfaf6c1ae90d",
+              "outcome": "raised",
+              "type": "KeyError"
+            }
+          },
+          "explicit_after_source_mutation": {
+            "class": "AirHandlingUnit",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "GeothermalHeatPump",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "SRC-GEOTHERMAL",
+                "cooling_capacity": {
+                  "hex": "0x1.f400000000000p+13",
+                  "kind": "float",
+                  "repr": "16000.0"
+                },
+                "cooling_cop": {
+                  "hex": "0x1.4000000000000p+2",
+                  "kind": "float",
+                  "repr": "5.0"
+                },
+                "fuel": "electricity",
+                "heating_capacity": {
+                  "hex": "0x1.09a0000000000p+14",
+                  "kind": "float",
+                  "repr": "17000.0"
+                },
+                "heating_cop": {
+                  "hex": "0x1.2000000000000p+2",
+                  "kind": "float",
+                  "repr": "4.5"
+                }
+              }
+            },
+            "values": {
+              "ID": "SUP-AHU-EXPLICIT",
+              "coolable": {
+                "kind": "bool",
+                "value": true
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "AHU Explicit"
+            }
+          },
+          "from_json": {
+            "class": "AirHandlingUnit",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "HeatPump",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "SRC-HEATPUMP",
+                "cooling_capacity": {
+                  "hex": "0x1.9640000000000p+13",
+                  "kind": "float",
+                  "repr": "13000.0"
+                },
+                "cooling_cop": {
+                  "hex": "0x1.0000000000000p+2",
+                  "kind": "float",
+                  "repr": "4.0"
+                },
+                "fuel": "electricity",
+                "heating_capacity": {
+                  "hex": "0x1.b580000000000p+13",
+                  "kind": "float",
+                  "repr": "14000.0"
+                },
+                "heating_cop": {
+                  "hex": "0x1.c000000000000p+1",
+                  "kind": "float",
+                  "repr": "3.5"
+                }
+              }
+            },
+            "values": {
+              "ID": "SUP-AHU-JSON",
+              "coolable": {
+                "kind": "bool",
+                "value": true
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "AHU JSON"
+            }
+          },
+          "geothermal": {
+            "class": "AirHandlingUnit",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "GeothermalHeatPump",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "SRC-GEOTHERMAL",
+                "cooling_capacity": {
+                  "hex": "0x1.f400000000000p+13",
+                  "kind": "float",
+                  "repr": "16000.0"
+                },
+                "cooling_cop": {
+                  "hex": "0x1.4000000000000p+2",
+                  "kind": "float",
+                  "repr": "5.0"
+                },
+                "fuel": "electricity",
+                "heating_capacity": {
+                  "hex": "0x1.09a0000000000p+14",
+                  "kind": "float",
+                  "repr": "17000.0"
+                },
+                "heating_cop": {
+                  "hex": "0x1.2000000000000p+2",
+                  "kind": "float",
+                  "repr": "4.5"
+                }
+              }
+            },
+            "values": {
+              "ID": "SUP-AHU-GEO",
+              "coolable": {
+                "kind": "bool",
+                "value": true
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "AHU Geothermal"
+            }
+          }
+        },
+        "facts_sha256": "sha256:647e2b09be67fe1e7d2af204ed2cad94bf2cf729d6b73976177cf330bd8a7fcf",
+        "outcome": "observed"
+      },
+      "subfamily": "air-handling-unit",
+      "target_symbols": [
+        "AirHandlingUnit",
+        "AirHandlingUnit.ID",
+        "AirHandlingUnit.__init__",
+        "AirHandlingUnit.from_json",
+        "AirHandlingUnit.source",
+        "AirHandlingUnit.to_dragon"
+      ]
+    },
+    {
+      "code": "E01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-supply-system.electric-radiant-floor-construction-json-null-source-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SupplySystem"
+          ],
+          "dragon": {
+            "class": "ElectricRadiantFloor",
+            "class_module": "idragon.dragon.hvac",
+            "source": {
+              "class": "NoneType",
+              "class_module": "builtins",
+              "values": {}
+            },
+            "values": {
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "SUP-ERF-EXPLICIT",
+              "throttling_range": {
+                "kind": "int",
+                "value": "2"
+              }
+            }
+          },
+          "dragon_repeat_fresh": true,
+          "errors": {
+            "from_json_missing_id": {
+              "message_sha256": "sha256:1abb0a81a7e99d60368f201f34b7c4f4befdf1f02d15075ae6bf019b82f856a6",
+              "outcome": "raised",
+              "type": "AttributeError"
+            },
+            "positional_id": {
+              "message_sha256": "sha256:6142c0c67007e4a4a62b89a196ba12b71f5667ccd410b3cf39cde6de5e450bb6",
+              "outcome": "raised",
+              "type": "TypeError"
+            }
+          },
+          "explicit": {
+            "class": "ElectricRadiantFloor",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "NoneSource",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "$SPECIAL$:SRCE--NONE"
+              }
+            },
+            "values": {
+              "ID": "SUP-ERF-EXPLICIT",
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Electric Floor Explicit"
+            }
+          },
+          "from_json": {
+            "class": "ElectricRadiantFloor",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "NoneSource",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "$SPECIAL$:SRCE--NONE"
+              }
+            },
+            "values": {
+              "ID": "SUP-ERF-JSON",
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Electric Floor JSON"
+            }
+          },
+          "none_source_singleton_identity": true
+        },
+        "facts_sha256": "sha256:3c35d57c9de0453c01b1baa5267c49f6da094fd78d8a85ecd88bdc1b02b1b6a7",
+        "outcome": "observed"
+      },
+      "subfamily": "electric-radiant-floor",
+      "target_symbols": [
+        "ElectricRadiantFloor",
+        "ElectricRadiantFloor.ID",
+        "ElectricRadiantFloor.__init__",
+        "ElectricRadiantFloor.from_json",
+        "ElectricRadiantFloor.source",
+        "ElectricRadiantFloor.to_dragon"
+      ]
+    },
+    {
+      "code": "E02",
+      "context_symbols": [],
+      "id": "epsimple-hvac-supply-system.electric-radiator-capacity-validation-json-null-source-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SupplySystem"
+          ],
+          "default": {
+            "class": "ElectricRadiator",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "NoneSource",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "$SPECIAL$:SRCE--NONE"
+              }
+            },
+            "values": {
+              "ID": "SUP-ER-DEFAULT",
+              "capacity": null,
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Electric Radiator Default"
+            }
+          },
+          "dragon_default": {
+            "class": "ElectricRadiator",
+            "class_module": "idragon.dragon.hvac",
+            "source": {
+              "class": "NoneType",
+              "class_module": "builtins",
+              "values": {}
+            },
+            "values": {
+              "capacity": null,
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "efficiency": {
+                "hex": "0x1.0000000000000p+0",
+                "kind": "float",
+                "repr": "1.0"
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "SUP-ER-DEFAULT",
+              "radiant_fraction": {
+                "kind": "int",
+                "value": "0"
+              }
+            }
+          },
+          "dragon_explicit": {
+            "class": "ElectricRadiator",
+            "class_module": "idragon.dragon.hvac",
+            "source": {
+              "class": "NoneType",
+              "class_module": "builtins",
+              "values": {}
+            },
+            "values": {
+              "capacity": {
+                "kind": "int",
+                "value": "3000"
+              },
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "efficiency": {
+                "hex": "0x1.0000000000000p+0",
+                "kind": "float",
+                "repr": "1.0"
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "SUP-ER-EXPLICIT",
+              "radiant_fraction": {
+                "kind": "int",
+                "value": "0"
+              }
+            }
+          },
+          "errors": {
+            "capacity_negative": {
+              "message_sha256": "sha256:f11166528878a6d2783721b0af821001abc18d8db1f8c817b9e1f278092c2d43",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "capacity_string": {
+              "message_sha256": "sha256:18104d9ac9631a44c06babe6336cc01cb92aba9e2f0295d28b5969284bb7c4a2",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "capacity_zero": {
+              "message_sha256": "sha256:d4b0a32716c1f7e77ab2b2f51e6394dd6f9e2b6003c6f56ff6361e121db7a7e4",
+              "outcome": "raised",
+              "type": "ValueError"
+            }
+          },
+          "explicit_mutated": {
+            "class": "ElectricRadiator",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "NoneSource",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "$SPECIAL$:SRCE--NONE"
+              }
+            },
+            "values": {
+              "ID": "SUP-ER-EXPLICIT",
+              "capacity": {
+                "kind": "int",
+                "value": "3000"
+              },
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Electric Radiator Explicit"
+            }
+          },
+          "from_json_default": {
+            "class": "ElectricRadiator",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "NoneSource",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "$SPECIAL$:SRCE--NONE"
+              }
+            },
+            "values": {
+              "ID": "SUP-ER-JSON-DEFAULT",
+              "capacity": null,
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "ER JSON Default"
+            }
+          },
+          "from_json_explicit": {
+            "class": "ElectricRadiator",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "NoneSource",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "$SPECIAL$:SRCE--NONE"
+              }
+            },
+            "values": {
+              "ID": "SUP-ER-JSON-EXPLICIT",
+              "capacity": {
+                "hex": "0x1.8380000000000p+11",
+                "kind": "float",
+                "repr": "3100.0"
+              },
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "ER JSON Explicit"
+            }
+          },
+          "none_source_singleton_identity": true
+        },
+        "facts_sha256": "sha256:5fd43fa8e2f25548aba0db4c4a14480faa98e1a52148962ea2422ac0603a91f3",
+        "outcome": "observed"
+      },
+      "subfamily": "electric-radiator",
+      "target_symbols": [
+        "ElectricRadiator",
+        "ElectricRadiator.ID",
+        "ElectricRadiator.__init__",
+        "ElectricRadiator.capacity",
+        "ElectricRadiator.from_json",
+        "ElectricRadiator.source",
+        "ElectricRadiator.to_dragon"
+      ]
+    },
+    {
+      "code": "F01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-supply-system.fan-coil-unit-source-branches-json-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "AirHandlingUnit"
+          ],
+          "branches": [
+            {
+              "branch": "boiler",
+              "dragon": {
+                "class": "FanCoilUnit",
+                "class_module": "idragon.dragon.hvac",
+                "source": {
+                  "class": "Boiler",
+                  "class_module": "idragon.dragon.hvac",
+                  "values": {
+                    "capacity": {
+                      "hex": "0x1.d4c0000000000p+13",
+                      "kind": "float",
+                      "repr": "15000.0"
+                    },
+                    "efficiency": {
+                      "hex": "0x1.ccccccccccccdp-1",
+                      "kind": "float",
+                      "repr": "0.9"
+                    },
+                    "fuel": "NaturalGas"
+                  }
+                },
+                "values": {
+                  "coolable": {
+                    "kind": "bool",
+                    "value": false
+                  },
+                  "heatable": {
+                    "kind": "bool",
+                    "value": true
+                  },
+                  "name": "SUP-FCU-BOILER"
+                }
+              },
+              "python": {
+                "class": "FanCoilUnit",
+                "class_module": "epsimple.core.hvac",
+                "source": {
+                  "class": "Boiler",
+                  "class_module": "epsimple.core.hvac",
+                  "values": {
+                    "ID": "SRC-BOILER",
+                    "capacity": {
+                      "hex": "0x1.d4c0000000000p+13",
+                      "kind": "float",
+                      "repr": "15000.0"
+                    },
+                    "efficiency": {
+                      "hex": "0x1.ccccccccccccdp-1",
+                      "kind": "float",
+                      "repr": "0.9"
+                    },
+                    "fuel": "natural_gas",
+                    "hotwater_supply": {
+                      "kind": "bool",
+                      "value": false
+                    }
+                  }
+                },
+                "values": {
+                  "ID": "SUP-FCU-BOILER",
+                  "coolable": {
+                    "kind": "bool",
+                    "value": false
+                  },
+                  "heatable": {
+                    "kind": "bool",
+                    "value": true
+                  },
+                  "name": "FCU boiler"
+                }
+              }
+            },
+            {
+              "branch": "district",
+              "dragon": {
+                "class": "FanCoilUnit",
+                "class_module": "idragon.dragon.hvac",
+                "source": {
+                  "class": "Boiler",
+                  "class_module": "idragon.dragon.hvac",
+                  "values": {
+                    "capacity": null,
+                    "efficiency": {
+                      "hex": "0x1.0000000000000p+0",
+                      "kind": "float",
+                      "repr": "1.0"
+                    },
+                    "fuel": "OtherFuel1"
+                  }
+                },
+                "values": {
+                  "coolable": {
+                    "kind": "bool",
+                    "value": false
+                  },
+                  "heatable": {
+                    "kind": "bool",
+                    "value": true
+                  },
+                  "name": "SUP-FCU-DISTRICT"
+                }
+              },
+              "python": {
+                "class": "FanCoilUnit",
+                "class_module": "epsimple.core.hvac",
+                "source": {
+                  "class": "DistrictHeating",
+                  "class_module": "epsimple.core.hvac",
+                  "values": {
+                    "ID": "SRC-DISTRICT",
+                    "hotwater_supply": {
+                      "kind": "bool",
+                      "value": false
+                    }
+                  }
+                },
+                "values": {
+                  "ID": "SUP-FCU-DISTRICT",
+                  "coolable": {
+                    "kind": "bool",
+                    "value": false
+                  },
+                  "heatable": {
+                    "kind": "bool",
+                    "value": true
+                  },
+                  "name": "FCU district"
+                }
+              }
+            },
+            {
+              "branch": "chiller",
+              "dragon": {
+                "class": "FanCoilUnit",
+                "class_module": "idragon.dragon.hvac",
+                "source": {
+                  "class": "Chiller",
+                  "class_module": "idragon.dragon.hvac",
+                  "values": {
+                    "capacity": {
+                      "hex": "0x1.1940000000000p+14",
+                      "kind": "float",
+                      "repr": "18000.0"
+                    },
+                    "cop": {
+                      "hex": "0x1.1000000000000p+2",
+                      "kind": "float",
+                      "repr": "4.25"
+                    }
+                  }
+                },
+                "values": {
+                  "coolable": {
+                    "kind": "bool",
+                    "value": true
+                  },
+                  "heatable": {
+                    "kind": "bool",
+                    "value": false
+                  },
+                  "name": "SUP-FCU-CHILLER"
+                }
+              },
+              "python": {
+                "class": "FanCoilUnit",
+                "class_module": "epsimple.core.hvac",
+                "source": {
+                  "class": "Chiller",
+                  "class_module": "epsimple.core.hvac",
+                  "values": {
+                    "ID": "SRC-CHILLER",
+                    "capacity": {
+                      "hex": "0x1.1940000000000p+14",
+                      "kind": "float",
+                      "repr": "18000.0"
+                    },
+                    "cop": {
+                      "hex": "0x1.1000000000000p+2",
+                      "kind": "float",
+                      "repr": "4.25"
+                    }
+                  }
+                },
+                "values": {
+                  "ID": "SUP-FCU-CHILLER",
+                  "coolable": {
+                    "kind": "bool",
+                    "value": true
+                  },
+                  "heatable": {
+                    "kind": "bool",
+                    "value": false
+                  },
+                  "name": "FCU chiller"
+                }
+              }
+            },
+            {
+              "branch": "absorption",
+              "dragon": {
+                "class": "FanCoilUnit",
+                "class_module": "idragon.dragon.hvac",
+                "source": {
+                  "class": "AbsorptionChiller",
+                  "class_module": "idragon.dragon.hvac",
+                  "values": {
+                    "capacity": {
+                      "hex": "0x1.7700000000000p+13",
+                      "kind": "float",
+                      "repr": "12000.0"
+                    },
+                    "cop": {
+                      "hex": "0x1.199999999999ap+0",
+                      "kind": "float",
+                      "repr": "1.1"
+                    }
+                  }
+                },
+                "values": {
+                  "coolable": {
+                    "kind": "bool",
+                    "value": true
+                  },
+                  "heatable": {
+                    "kind": "bool",
+                    "value": false
+                  },
+                  "name": "SUP-FCU-ABSORPTION"
+                }
+              },
+              "python": {
+                "class": "FanCoilUnit",
+                "class_module": "epsimple.core.hvac",
+                "source": {
+                  "class": "AbsorptionChiller",
+                  "class_module": "epsimple.core.hvac",
+                  "values": {
+                    "ID": "SRC-ABSORPTION",
+                    "boiler_efficiency": {
+                      "hex": "0x1.999999999999ap-1",
+                      "kind": "float",
+                      "repr": "0.8"
+                    },
+                    "capacity": {
+                      "hex": "0x1.7700000000000p+13",
+                      "kind": "float",
+                      "repr": "12000.0"
+                    },
+                    "cop": {
+                      "hex": "0x1.199999999999ap+0",
+                      "kind": "float",
+                      "repr": "1.1"
+                    }
+                  }
+                },
+                "values": {
+                  "ID": "SUP-FCU-ABSORPTION",
+                  "coolable": {
+                    "kind": "bool",
+                    "value": true
+                  },
+                  "heatable": {
+                    "kind": "bool",
+                    "value": false
+                  },
+                  "name": "FCU absorption"
+                }
+              }
+            }
+          ],
+          "errors": {
+            "from_json_missing_source": {
+              "message_sha256": "sha256:d7a73575b81b6e525fb7f815c172f779c9c2d5c4bbd96562f69059998626c987",
+              "outcome": "raised",
+              "type": "KeyError"
+            },
+            "heatpump_source": {
+              "message_sha256": "sha256:95dbff3c686583366501762178f0acd62c9cd80b730e0b821e695eee9511a036",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "to_dragon_missing_source": {
+              "message_sha256": "sha256:81ccfb15f0d976c660b3d86929c28a1aef1e8cc2fe70736afd879dc3a551322b",
+              "outcome": "raised",
+              "type": "KeyError"
+            }
+          },
+          "from_json": {
+            "class": "FanCoilUnit",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "Boiler",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "SRC-BOILER",
+                "capacity": {
+                  "hex": "0x1.d4c0000000000p+13",
+                  "kind": "float",
+                  "repr": "15000.0"
+                },
+                "efficiency": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                },
+                "fuel": "natural_gas",
+                "hotwater_supply": {
+                  "kind": "bool",
+                  "value": false
+                }
+              }
+            },
+            "values": {
+              "ID": "SUP-FCU-JSON",
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "FCU JSON"
+            }
+          }
+        },
+        "facts_sha256": "sha256:50a57e6921b7bcce8d810224e31861c4222455777e1e9628799b36294667c830",
+        "outcome": "observed"
+      },
+      "subfamily": "fan-coil-unit",
+      "target_symbols": [
+        "FanCoilUnit",
+        "FanCoilUnit.ID",
+        "FanCoilUnit.__init__",
+        "FanCoilUnit.from_json",
+        "FanCoilUnit.source",
+        "FanCoilUnit.to_dragon"
+      ]
+    },
+    {
+      "code": "P01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SupplySystem"
+          ],
+          "dedicated_source": {
+            "class": "HeatPump",
+            "class_module": "idragon.dragon.hvac",
+            "values": {
+              "cooling_capacity": {
+                "kind": "int",
+                "value": "9000"
+              },
+              "cooling_cop": {
+                "hex": "0x1.2000000000000p+2",
+                "kind": "float",
+                "repr": "4.5"
+              },
+              "fuel": "Electricity",
+              "heating_capacity": {
+                "hex": "0x1.0624dd2f1a9fcp-10",
+                "kind": "float",
+                "repr": "0.001"
+              },
+              "heating_cop": null
+            }
+          },
+          "default": {
+            "class": "PackagedAirConditioner",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "NoneSource",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "$SPECIAL$:SRCE--NONE"
+              }
+            },
+            "values": {
+              "ID": "SUP-PAC-DEFAULT",
+              "capacity": null,
+              "coolable": {
+                "kind": "bool",
+                "value": true
+              },
+              "cop": {
+                "hex": "0x1.8000000000000p+1",
+                "kind": "float",
+                "repr": "3.0"
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": false
+              },
+              "name": "PAC Default"
+            }
+          },
+          "dragon_first": {
+            "class": "PackagedAirConditioner",
+            "class_module": "idragon.dragon.hvac",
+            "source": {
+              "class": "HeatPump",
+              "class_module": "idragon.dragon.hvac",
+              "values": {
+                "cooling_capacity": {
+                  "kind": "int",
+                  "value": "9000"
+                },
+                "cooling_cop": {
+                  "hex": "0x1.2000000000000p+2",
+                  "kind": "float",
+                  "repr": "4.5"
+                },
+                "fuel": "Electricity",
+                "heating_capacity": {
+                  "hex": "0x1.0624dd2f1a9fcp-10",
+                  "kind": "float",
+                  "repr": "0.001"
+                },
+                "heating_cop": null
+              }
+            },
+            "values": {
+              "coolable": {
+                "kind": "bool",
+                "value": true
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": false
+              },
+              "name": "SUP-PAC-EXPLICIT"
+            }
+          },
+          "dragon_second": {
+            "class": "PackagedAirConditioner",
+            "class_module": "idragon.dragon.hvac",
+            "source": {
+              "class": "HeatPump",
+              "class_module": "idragon.dragon.hvac",
+              "values": {
+                "cooling_capacity": {
+                  "kind": "int",
+                  "value": "9000"
+                },
+                "cooling_cop": {
+                  "hex": "0x1.2000000000000p+2",
+                  "kind": "float",
+                  "repr": "4.5"
+                },
+                "fuel": "Electricity",
+                "heating_capacity": {
+                  "hex": "0x1.0624dd2f1a9fcp-10",
+                  "kind": "float",
+                  "repr": "0.001"
+                },
+                "heating_cop": null
+              }
+            },
+            "values": {
+              "coolable": {
+                "kind": "bool",
+                "value": true
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": false
+              },
+              "name": "SUP-PAC-EXPLICIT"
+            }
+          },
+          "errors": {
+            "capacity_negative": {
+              "message_sha256": "sha256:f11166528878a6d2783721b0af821001abc18d8db1f8c817b9e1f278092c2d43",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "capacity_string": {
+              "message_sha256": "sha256:18104d9ac9631a44c06babe6336cc01cb92aba9e2f0295d28b5969284bb7c4a2",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "capacity_zero": {
+              "message_sha256": "sha256:d4b0a32716c1f7e77ab2b2f51e6394dd6f9e2b6003c6f56ff6361e121db7a7e4",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "cop_none_setter": {
+              "message_sha256": "sha256:4fa716202460b03622cf874d4b8a0f7f07ad01e52945e98ee0a1d854a3484c19",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "cop_zero": {
+              "message_sha256": "sha256:85d133a6b91cfbe69a5ec3d561fc6da0eec1757614e65f5c84f0a55f6976a18c",
+              "outcome": "raised",
+              "type": "ValueError"
+            }
+          },
+          "explicit_mutated": {
+            "class": "PackagedAirConditioner",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "NoneSource",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "$SPECIAL$:SRCE--NONE"
+              }
+            },
+            "values": {
+              "ID": "SUP-PAC-EXPLICIT",
+              "capacity": {
+                "kind": "int",
+                "value": "9000"
+              },
+              "coolable": {
+                "kind": "bool",
+                "value": true
+              },
+              "cop": {
+                "hex": "0x1.2000000000000p+2",
+                "kind": "float",
+                "repr": "4.5"
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": false
+              },
+              "name": "PAC Explicit"
+            }
+          },
+          "from_json_default": {
+            "class": "PackagedAirConditioner",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "NoneSource",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "$SPECIAL$:SRCE--NONE"
+              }
+            },
+            "values": {
+              "ID": "SUP-PAC-JSON-DEFAULT",
+              "capacity": null,
+              "coolable": {
+                "kind": "bool",
+                "value": true
+              },
+              "cop": {
+                "hex": "0x1.8000000000000p+1",
+                "kind": "float",
+                "repr": "3.0"
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": false
+              },
+              "name": "PAC JSON Default"
+            }
+          },
+          "from_json_explicit": {
+            "class": "PackagedAirConditioner",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "NoneSource",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "$SPECIAL$:SRCE--NONE"
+              }
+            },
+            "values": {
+              "ID": "SUP-PAC-JSON-EXPLICIT",
+              "capacity": {
+                "hex": "0x1.2110000000000p+13",
+                "kind": "float",
+                "repr": "9250.0"
+              },
+              "coolable": {
+                "kind": "bool",
+                "value": true
+              },
+              "cop": {
+                "hex": "0x1.e666666666666p+1",
+                "kind": "float",
+                "repr": "3.8"
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": false
+              },
+              "name": "PAC JSON Explicit"
+            }
+          },
+          "none_source_singleton_identity": true,
+          "source_dict_count_after_first": {
+            "kind": "int",
+            "value": "1"
+          },
+          "source_dict_count_after_second": {
+            "kind": "int",
+            "value": "2"
+          },
+          "source_dict_values_distinct": true
+        },
+        "facts_sha256": "sha256:3ae220873d535c22a827c1a62e515c7659237a0d9794d3a9907418523a3103e9",
+        "outcome": "observed"
+      },
+      "subfamily": "packaged-air-conditioner",
+      "target_symbols": [
+        "PackagedAirConditioner",
+        "PackagedAirConditioner.ID",
+        "PackagedAirConditioner.__init__",
+        "PackagedAirConditioner.capacity",
+        "PackagedAirConditioner.cop",
+        "PackagedAirConditioner.from_json",
+        "PackagedAirConditioner.source",
+        "PackagedAirConditioner.to_dragon"
+      ]
+    },
+    {
+      "code": "R01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SupplySystem"
+          ],
+          "boiler": {
+            "class": "RadiantFloor",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "Boiler",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "SRC-BOILER",
+                "capacity": {
+                  "hex": "0x1.d4c0000000000p+13",
+                  "kind": "float",
+                  "repr": "15000.0"
+                },
+                "efficiency": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                },
+                "fuel": "natural_gas",
+                "hotwater_supply": {
+                  "kind": "bool",
+                  "value": false
+                }
+              }
+            },
+            "values": {
+              "ID": "SUP-RF-BOILER",
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Radiant Floor Boiler"
+            }
+          },
+          "district": {
+            "class": "RadiantFloor",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "DistrictHeating",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "SRC-DISTRICT",
+                "hotwater_supply": {
+                  "kind": "bool",
+                  "value": false
+                }
+              }
+            },
+            "values": {
+              "ID": "SUP-RF-DISTRICT",
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Radiant Floor District"
+            }
+          },
+          "dragon_boiler": {
+            "class": "RadiantFloor",
+            "class_module": "idragon.dragon.hvac",
+            "source": {
+              "class": "Boiler",
+              "class_module": "idragon.dragon.hvac",
+              "values": {
+                "capacity": {
+                  "hex": "0x1.d4c0000000000p+13",
+                  "kind": "float",
+                  "repr": "15000.0"
+                },
+                "efficiency": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                },
+                "fuel": "NaturalGas"
+              }
+            },
+            "values": {
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "SUP-RF-BOILER",
+              "throttling_range": {
+                "kind": "int",
+                "value": "2"
+              }
+            }
+          },
+          "dragon_district": {
+            "class": "RadiantFloor",
+            "class_module": "idragon.dragon.hvac",
+            "source": {
+              "class": "Boiler",
+              "class_module": "idragon.dragon.hvac",
+              "values": {
+                "capacity": null,
+                "efficiency": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                },
+                "fuel": "OtherFuel1"
+              }
+            },
+            "values": {
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "SUP-RF-DISTRICT",
+              "throttling_range": {
+                "kind": "int",
+                "value": "2"
+              }
+            }
+          },
+          "errors": {
+            "chiller_source": {
+              "message_sha256": "sha256:7f7ed51f27fce3c790d1ce24d1fd5c67302354c8949a64b1ef5dada584a57c66",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "from_json_missing_source": {
+              "message_sha256": "sha256:d7a73575b81b6e525fb7f815c172f779c9c2d5c4bbd96562f69059998626c987",
+              "outcome": "raised",
+              "type": "KeyError"
+            },
+            "to_dragon_missing_source": {
+              "message_sha256": "sha256:81ccfb15f0d976c660b3d86929c28a1aef1e8cc2fe70736afd879dc3a551322b",
+              "outcome": "raised",
+              "type": "KeyError"
+            }
+          },
+          "from_json": {
+            "class": "RadiantFloor",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "Boiler",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "SRC-BOILER",
+                "capacity": {
+                  "hex": "0x1.d4c0000000000p+13",
+                  "kind": "float",
+                  "repr": "15000.0"
+                },
+                "efficiency": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                },
+                "fuel": "natural_gas",
+                "hotwater_supply": {
+                  "kind": "bool",
+                  "value": false
+                }
+              }
+            },
+            "values": {
+              "ID": "SUP-RF-JSON",
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Radiant Floor JSON"
+            }
+          }
+        },
+        "facts_sha256": "sha256:24078204d3dce794bcc70ccdd50097fbe04e835b5fc23fd66f2abaa76d24199d",
+        "outcome": "observed"
+      },
+      "subfamily": "radiant-floor",
+      "target_symbols": [
+        "RadiantFloor",
+        "RadiantFloor.ID",
+        "RadiantFloor.__init__",
+        "RadiantFloor.coolable",
+        "RadiantFloor.from_json",
+        "RadiantFloor.heatable",
+        "RadiantFloor.source",
+        "RadiantFloor.to_dragon"
+      ]
+    },
+    {
+      "code": "R02",
+      "context_symbols": [],
+      "id": "epsimple-hvac-supply-system.radiator-capacity-validation-json-dragon",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "SupplySystem"
+          ],
+          "default": {
+            "class": "Radiator",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "Boiler",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "SRC-BOILER",
+                "capacity": {
+                  "hex": "0x1.d4c0000000000p+13",
+                  "kind": "float",
+                  "repr": "15000.0"
+                },
+                "efficiency": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                },
+                "fuel": "natural_gas",
+                "hotwater_supply": {
+                  "kind": "bool",
+                  "value": false
+                }
+              }
+            },
+            "values": {
+              "ID": "SUP-RAD-DEFAULT",
+              "capacity": null,
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Radiator Default"
+            }
+          },
+          "dragon_default": {
+            "class": "Radiator",
+            "class_module": "idragon.dragon.hvac",
+            "source": {
+              "class": "Boiler",
+              "class_module": "idragon.dragon.hvac",
+              "values": {
+                "capacity": {
+                  "hex": "0x1.d4c0000000000p+13",
+                  "kind": "float",
+                  "repr": "15000.0"
+                },
+                "efficiency": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                },
+                "fuel": "NaturalGas"
+              }
+            },
+            "values": {
+              "capacity": null,
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "SUP-RAD-DEFAULT",
+              "radiant_fraction": {
+                "kind": "int",
+                "value": "0"
+              }
+            }
+          },
+          "dragon_explicit": {
+            "class": "Radiator",
+            "class_module": "idragon.dragon.hvac",
+            "source": {
+              "class": "Boiler",
+              "class_module": "idragon.dragon.hvac",
+              "values": {
+                "capacity": null,
+                "efficiency": {
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.0"
+                },
+                "fuel": "OtherFuel1"
+              }
+            },
+            "values": {
+              "capacity": {
+                "kind": "int",
+                "value": "6000"
+              },
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "SUP-RAD-EXPLICIT",
+              "radiant_fraction": {
+                "kind": "int",
+                "value": "0"
+              }
+            }
+          },
+          "errors": {
+            "capacity_negative": {
+              "message_sha256": "sha256:f11166528878a6d2783721b0af821001abc18d8db1f8c817b9e1f278092c2d43",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "capacity_string": {
+              "message_sha256": "sha256:18104d9ac9631a44c06babe6336cc01cb92aba9e2f0295d28b5969284bb7c4a2",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "capacity_zero": {
+              "message_sha256": "sha256:d4b0a32716c1f7e77ab2b2f51e6394dd6f9e2b6003c6f56ff6361e121db7a7e4",
+              "outcome": "raised",
+              "type": "ValueError"
+            },
+            "chiller_source": {
+              "message_sha256": "sha256:7f7ed51f27fce3c790d1ce24d1fd5c67302354c8949a64b1ef5dada584a57c66",
+              "outcome": "raised",
+              "type": "TypeError"
+            },
+            "to_dragon_missing_source": {
+              "message_sha256": "sha256:81ccfb15f0d976c660b3d86929c28a1aef1e8cc2fe70736afd879dc3a551322b",
+              "outcome": "raised",
+              "type": "KeyError"
+            }
+          },
+          "explicit_mutated": {
+            "class": "Radiator",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "DistrictHeating",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "SRC-DISTRICT",
+                "hotwater_supply": {
+                  "kind": "bool",
+                  "value": false
+                }
+              }
+            },
+            "values": {
+              "ID": "SUP-RAD-EXPLICIT",
+              "capacity": {
+                "kind": "int",
+                "value": "6000"
+              },
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Radiator Explicit"
+            }
+          },
+          "from_json_default": {
+            "class": "Radiator",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "Boiler",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "SRC-BOILER",
+                "capacity": {
+                  "hex": "0x1.d4c0000000000p+13",
+                  "kind": "float",
+                  "repr": "15000.0"
+                },
+                "efficiency": {
+                  "hex": "0x1.ccccccccccccdp-1",
+                  "kind": "float",
+                  "repr": "0.9"
+                },
+                "fuel": "natural_gas",
+                "hotwater_supply": {
+                  "kind": "bool",
+                  "value": false
+                }
+              }
+            },
+            "values": {
+              "ID": "SUP-RAD-JSON-DEFAULT",
+              "capacity": null,
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Radiator JSON Default"
+            }
+          },
+          "from_json_explicit": {
+            "class": "Radiator",
+            "class_module": "epsimple.core.hvac",
+            "source": {
+              "class": "DistrictHeating",
+              "class_module": "epsimple.core.hvac",
+              "values": {
+                "ID": "SRC-DISTRICT",
+                "hotwater_supply": {
+                  "kind": "bool",
+                  "value": false
+                }
+              }
+            },
+            "values": {
+              "ID": "SUP-RAD-JSON-EXPLICIT",
+              "capacity": {
+                "hex": "0x1.86a0000000000p+12",
+                "kind": "float",
+                "repr": "6250.0"
+              },
+              "coolable": {
+                "kind": "bool",
+                "value": false
+              },
+              "heatable": {
+                "kind": "bool",
+                "value": true
+              },
+              "name": "Radiator JSON Explicit"
+            }
+          }
+        },
+        "facts_sha256": "sha256:ca419685a68ce1fc2810be16b609633882fc0a1d11dd7f7d73eea18e445c9d2e",
+        "outcome": "observed"
+      },
+      "subfamily": "radiator",
+      "target_symbols": [
+        "Radiator",
+        "Radiator.ID",
+        "Radiator.__init__",
+        "Radiator.capacity",
+        "Radiator.from_json",
+        "Radiator.source",
+        "Radiator.to_dragon"
+      ]
+    },
+    {
+      "code": "S01",
+      "context_symbols": [],
+      "id": "epsimple-hvac-supply-system.supply-system-base-mapper-capability-topology",
+      "python": {
+        "facts": {
+          "base_classes": [
+            "object"
+          ],
+          "base_instance_dictionary_empty": true,
+          "base_property_errors": {
+            "coolable": {
+              "message_sha256": "sha256:196b13f871ee3f67e310afaeb250f955b1a3f57e6137252c53efd80236bfa91f",
+              "outcome": "raised",
+              "type": "AttributeError"
+            },
+            "heatable": {
+              "message_sha256": "sha256:196b13f871ee3f67e310afaeb250f955b1a3f57e6137252c53efd80236bfa91f",
+              "outcome": "raised",
+              "type": "AttributeError"
+            }
+          },
+          "declared_public_members": [
+            "TYPE_MAPPER",
+            "coolable",
+            "heatable"
+          ],
+          "mapper_copy_mutation_preserves_original": true,
+          "mapper_identity_across_accesses": true,
+          "mapper_keys": [
+            "packaged_air_conditioner",
+            "air_handling_unit",
+            "fan_coil_unit",
+            "radiator",
+            "electric_radiator",
+            "radiant_floor",
+            "electric_radiant_floor"
+          ],
+          "mapper_rows": [
+            {
+              "base_is_supply_system": true,
+              "key": "packaged_air_conditioner",
+              "module": "epsimple.core.hvac",
+              "type": "PackagedAirConditioner"
+            },
+            {
+              "base_is_supply_system": true,
+              "key": "air_handling_unit",
+              "module": "epsimple.core.hvac",
+              "type": "AirHandlingUnit"
+            },
+            {
+              "base_is_supply_system": true,
+              "key": "fan_coil_unit",
+              "module": "epsimple.core.hvac",
+              "type": "FanCoilUnit"
+            },
+            {
+              "base_is_supply_system": true,
+              "key": "radiator",
+              "module": "epsimple.core.hvac",
+              "type": "Radiator"
+            },
+            {
+              "base_is_supply_system": true,
+              "key": "electric_radiator",
+              "module": "epsimple.core.hvac",
+              "type": "ElectricRadiator"
+            },
+            {
+              "base_is_supply_system": true,
+              "key": "radiant_floor",
+              "module": "epsimple.core.hvac",
+              "type": "RadiantFloor"
+            },
+            {
+              "base_is_supply_system": true,
+              "key": "electric_radiant_floor",
+              "module": "epsimple.core.hvac",
+              "type": "ElectricRadiantFloor"
+            }
+          ],
+          "mapper_type": "dict",
+          "probe_exact_type_behavior": {
+            "chiller": {
+              "coolable": true,
+              "heatable": false
+            },
+            "geothermal_subclass": {
+              "coolable": false,
+              "heatable": false
+            },
+            "heatpump": {
+              "coolable": false,
+              "heatable": true
+            }
+          },
+          "property_descriptors": {
+            "coolable": "property",
+            "heatable": "property"
+          },
+          "subclasses": [
+            "PackagedAirConditioner",
+            "AirHandlingUnit",
+            "Radiator",
+            "ElectricRadiator",
+            "RadiantFloor",
+            "ElectricRadiantFloor"
+          ]
+        },
+        "facts_sha256": "sha256:2f715484e1a9a16a8ae0ce1f4dbdda60d9fefe9e5ddfa2f4d522d072353698a1",
+        "outcome": "observed"
+      },
+      "subfamily": "supply-system",
+      "target_symbols": [
+        "SupplySystem",
+        "SupplySystem.TYPE_MAPPER",
+        "SupplySystem.coolable",
+        "SupplySystem.heatable"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:844e26e1e019dc9fea4d12cc594c6d83ab3c1823e58ab8253ba809a591dd10a2",
+  "consumer_contract": {
+    "adaptations": {
+      "AirHandlingUnit": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-6fd0030b",
+      "AirHandlingUnit.__init__": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c",
+      "AirHandlingUnit.from_json": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-148b0ee3",
+      "AirHandlingUnit.to_dragon": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-11a6909a",
+      "ElectricRadiantFloor": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-f7f03ff5",
+      "ElectricRadiantFloor.__init__": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-f8bde28f",
+      "ElectricRadiantFloor.from_json": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b13a9536",
+      "ElectricRadiantFloor.source": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a",
+      "ElectricRadiantFloor.to_dragon": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-01ae7da4",
+      "ElectricRadiator": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-6354666e",
+      "ElectricRadiator.__init__": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-3a47135f",
+      "ElectricRadiator.from_json": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-20bd3338",
+      "ElectricRadiator.source": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a",
+      "ElectricRadiator.to_dragon": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-4b95c9d6",
+      "FanCoilUnit": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-618e77c4",
+      "FanCoilUnit.__init__": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c",
+      "FanCoilUnit.from_json": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-4e773b8a",
+      "FanCoilUnit.to_dragon": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-09f12474",
+      "PackagedAirConditioner": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-fcef6339",
+      "PackagedAirConditioner.__init__": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b2021d84",
+      "PackagedAirConditioner.from_json": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-d49a3e1b",
+      "PackagedAirConditioner.source": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a",
+      "PackagedAirConditioner.to_dragon": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-0be4894a",
+      "RadiantFloor": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-3a70e982",
+      "RadiantFloor.__init__": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c",
+      "RadiantFloor.from_json": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-a3c19218",
+      "RadiantFloor.to_dragon": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-db124859",
+      "Radiator": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-8464a277",
+      "Radiator.__init__": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-35304b6f",
+      "Radiator.from_json": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-349b941b",
+      "Radiator.to_dragon": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-bb8edb65",
+      "SupplySystem": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-d236c0a0",
+      "SupplySystem.TYPE_MAPPER": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-3639f058"
+    },
+    "assertion_ids": {
+      "AirHandlingUnit": "epsimple-hvac-supply-system-147-6fd0030b",
+      "AirHandlingUnit.ID": "epsimple-hvac-supply-system-148-246156d9",
+      "AirHandlingUnit.__init__": "epsimple-hvac-supply-system-151-ea6e311c",
+      "AirHandlingUnit.from_json": "epsimple-hvac-supply-system-154-148b0ee3",
+      "AirHandlingUnit.source": "epsimple-hvac-supply-system-155-ef79e1d5",
+      "AirHandlingUnit.to_dragon": "epsimple-hvac-supply-system-156-11a6909a",
+      "ElectricRadiantFloor": "epsimple-hvac-supply-system-209-f7f03ff5",
+      "ElectricRadiantFloor.ID": "epsimple-hvac-supply-system-210-246156d9",
+      "ElectricRadiantFloor.__init__": "epsimple-hvac-supply-system-213-f8bde28f",
+      "ElectricRadiantFloor.from_json": "epsimple-hvac-supply-system-216-b13a9536",
+      "ElectricRadiantFloor.source": "epsimple-hvac-supply-system-217-b14aeb3a",
+      "ElectricRadiantFloor.to_dragon": "epsimple-hvac-supply-system-218-01ae7da4",
+      "ElectricRadiator": "epsimple-hvac-supply-system-219-6354666e",
+      "ElectricRadiator.ID": "epsimple-hvac-supply-system-220-246156d9",
+      "ElectricRadiator.__init__": "epsimple-hvac-supply-system-223-3a47135f",
+      "ElectricRadiator.capacity": "epsimple-hvac-supply-system-226-09cfea01",
+      "ElectricRadiator.from_json": "epsimple-hvac-supply-system-227-20bd3338",
+      "ElectricRadiator.source": "epsimple-hvac-supply-system-228-b14aeb3a",
+      "ElectricRadiator.to_dragon": "epsimple-hvac-supply-system-229-4b95c9d6",
+      "FanCoilUnit": "epsimple-hvac-supply-system-230-618e77c4",
+      "FanCoilUnit.ID": "epsimple-hvac-supply-system-231-246156d9",
+      "FanCoilUnit.__init__": "epsimple-hvac-supply-system-234-ea6e311c",
+      "FanCoilUnit.from_json": "epsimple-hvac-supply-system-237-4e773b8a",
+      "FanCoilUnit.source": "epsimple-hvac-supply-system-238-ef79e1d5",
+      "FanCoilUnit.to_dragon": "epsimple-hvac-supply-system-239-09f12474",
+      "PackagedAirConditioner": "epsimple-hvac-supply-system-271-fcef6339",
+      "PackagedAirConditioner.ID": "epsimple-hvac-supply-system-272-246156d9",
+      "PackagedAirConditioner.__init__": "epsimple-hvac-supply-system-275-b2021d84",
+      "PackagedAirConditioner.capacity": "epsimple-hvac-supply-system-278-09cfea01",
+      "PackagedAirConditioner.cop": "epsimple-hvac-supply-system-279-873a49d3",
+      "PackagedAirConditioner.from_json": "epsimple-hvac-supply-system-280-d49a3e1b",
+      "PackagedAirConditioner.source": "epsimple-hvac-supply-system-281-b14aeb3a",
+      "PackagedAirConditioner.to_dragon": "epsimple-hvac-supply-system-282-0be4894a",
+      "RadiantFloor": "epsimple-hvac-supply-system-296-3a70e982",
+      "RadiantFloor.ID": "epsimple-hvac-supply-system-297-246156d9",
+      "RadiantFloor.__init__": "epsimple-hvac-supply-system-300-ea6e311c",
+      "RadiantFloor.coolable": "epsimple-hvac-supply-system-303-b81ea250",
+      "RadiantFloor.from_json": "epsimple-hvac-supply-system-304-a3c19218",
+      "RadiantFloor.heatable": "epsimple-hvac-supply-system-305-0b60e64a",
+      "RadiantFloor.source": "epsimple-hvac-supply-system-306-ef79e1d5",
+      "RadiantFloor.to_dragon": "epsimple-hvac-supply-system-307-db124859",
+      "Radiator": "epsimple-hvac-supply-system-308-8464a277",
+      "Radiator.ID": "epsimple-hvac-supply-system-309-246156d9",
+      "Radiator.__init__": "epsimple-hvac-supply-system-312-35304b6f",
+      "Radiator.capacity": "epsimple-hvac-supply-system-315-d699d5f1",
+      "Radiator.from_json": "epsimple-hvac-supply-system-316-349b941b",
+      "Radiator.source": "epsimple-hvac-supply-system-317-ef79e1d5",
+      "Radiator.to_dragon": "epsimple-hvac-supply-system-318-bb8edb65",
+      "SupplySystem": "epsimple-hvac-supply-system-321-d236c0a0",
+      "SupplySystem.TYPE_MAPPER": "epsimple-hvac-supply-system-322-3639f058",
+      "SupplySystem.coolable": "epsimple-hvac-supply-system-323-a658d7c4",
+      "SupplySystem.heatable": "epsimple-hvac-supply-system-324-9d89b0d8"
+    },
+    "case_count": 8,
+    "case_ids": [
+      "epsimple-hvac-supply-system.air-handling-unit-construction-json-source-capabilities-dragon",
+      "epsimple-hvac-supply-system.electric-radiant-floor-construction-json-null-source-dragon",
+      "epsimple-hvac-supply-system.electric-radiator-capacity-validation-json-null-source-dragon",
+      "epsimple-hvac-supply-system.fan-coil-unit-source-branches-json-dragon",
+      "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon",
+      "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon",
+      "epsimple-hvac-supply-system.radiator-capacity-validation-json-dragon",
+      "epsimple-hvac-supply-system.supply-system-base-mapper-capability-topology"
+    ],
+    "classification_counts": {
+      "equivalent": 19,
+      "exception": 33
+    },
+    "classifications": {
+      "AirHandlingUnit": "exception",
+      "AirHandlingUnit.ID": "equivalent",
+      "AirHandlingUnit.__init__": "exception",
+      "AirHandlingUnit.from_json": "exception",
+      "AirHandlingUnit.source": "equivalent",
+      "AirHandlingUnit.to_dragon": "exception",
+      "ElectricRadiantFloor": "exception",
+      "ElectricRadiantFloor.ID": "equivalent",
+      "ElectricRadiantFloor.__init__": "exception",
+      "ElectricRadiantFloor.from_json": "exception",
+      "ElectricRadiantFloor.source": "exception",
+      "ElectricRadiantFloor.to_dragon": "exception",
+      "ElectricRadiator": "exception",
+      "ElectricRadiator.ID": "equivalent",
+      "ElectricRadiator.__init__": "exception",
+      "ElectricRadiator.capacity": "equivalent",
+      "ElectricRadiator.from_json": "exception",
+      "ElectricRadiator.source": "exception",
+      "ElectricRadiator.to_dragon": "exception",
+      "FanCoilUnit": "exception",
+      "FanCoilUnit.ID": "equivalent",
+      "FanCoilUnit.__init__": "exception",
+      "FanCoilUnit.from_json": "exception",
+      "FanCoilUnit.source": "equivalent",
+      "FanCoilUnit.to_dragon": "exception",
+      "PackagedAirConditioner": "exception",
+      "PackagedAirConditioner.ID": "equivalent",
+      "PackagedAirConditioner.__init__": "exception",
+      "PackagedAirConditioner.capacity": "equivalent",
+      "PackagedAirConditioner.cop": "equivalent",
+      "PackagedAirConditioner.from_json": "exception",
+      "PackagedAirConditioner.source": "exception",
+      "PackagedAirConditioner.to_dragon": "exception",
+      "RadiantFloor": "exception",
+      "RadiantFloor.ID": "equivalent",
+      "RadiantFloor.__init__": "exception",
+      "RadiantFloor.coolable": "equivalent",
+      "RadiantFloor.from_json": "exception",
+      "RadiantFloor.heatable": "equivalent",
+      "RadiantFloor.source": "equivalent",
+      "RadiantFloor.to_dragon": "exception",
+      "Radiator": "exception",
+      "Radiator.ID": "equivalent",
+      "Radiator.__init__": "exception",
+      "Radiator.capacity": "equivalent",
+      "Radiator.from_json": "exception",
+      "Radiator.source": "equivalent",
+      "Radiator.to_dragon": "exception",
+      "SupplySystem": "exception",
+      "SupplySystem.TYPE_MAPPER": "exception",
+      "SupplySystem.coolable": "equivalent",
+      "SupplySystem.heatable": "equivalent"
+    },
+    "closure": {
+      "adjacent_count": 150,
+      "adjacent_indices": [
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        149,
+        150,
+        152,
+        153,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        211,
+        212,
+        214,
+        215,
+        221,
+        222,
+        224,
+        225,
+        232,
+        233,
+        235,
+        236,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        273,
+        274,
+        276,
+        277,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        298,
+        299,
+        301,
+        302,
+        310,
+        311,
+        313,
+        314,
+        319,
+        320,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336
+      ],
+      "exact_one_case_target_partition": true,
+      "full_hvac_source_partition": true,
+      "source_declaration_count": 202,
+      "target_count": 52,
+      "target_indices": [
+        147,
+        148,
+        151,
+        154,
+        155,
+        156,
+        209,
+        210,
+        213,
+        216,
+        217,
+        218,
+        219,
+        220,
+        223,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        234,
+        237,
+        238,
+        239,
+        271,
+        272,
+        275,
+        278,
+        279,
+        280,
+        281,
+        282,
+        296,
+        297,
+        300,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        312,
+        315,
+        316,
+        317,
+        318,
+        321,
+        322,
+        323,
+        324
+      ],
+      "target_symbols": [
+        "AirHandlingUnit",
+        "AirHandlingUnit.ID",
+        "AirHandlingUnit.__init__",
+        "AirHandlingUnit.from_json",
+        "AirHandlingUnit.source",
+        "AirHandlingUnit.to_dragon",
+        "ElectricRadiantFloor",
+        "ElectricRadiantFloor.ID",
+        "ElectricRadiantFloor.__init__",
+        "ElectricRadiantFloor.from_json",
+        "ElectricRadiantFloor.source",
+        "ElectricRadiantFloor.to_dragon",
+        "ElectricRadiator",
+        "ElectricRadiator.ID",
+        "ElectricRadiator.__init__",
+        "ElectricRadiator.capacity",
+        "ElectricRadiator.from_json",
+        "ElectricRadiator.source",
+        "ElectricRadiator.to_dragon",
+        "FanCoilUnit",
+        "FanCoilUnit.ID",
+        "FanCoilUnit.__init__",
+        "FanCoilUnit.from_json",
+        "FanCoilUnit.source",
+        "FanCoilUnit.to_dragon",
+        "PackagedAirConditioner",
+        "PackagedAirConditioner.ID",
+        "PackagedAirConditioner.__init__",
+        "PackagedAirConditioner.capacity",
+        "PackagedAirConditioner.cop",
+        "PackagedAirConditioner.from_json",
+        "PackagedAirConditioner.source",
+        "PackagedAirConditioner.to_dragon",
+        "RadiantFloor",
+        "RadiantFloor.ID",
+        "RadiantFloor.__init__",
+        "RadiantFloor.coolable",
+        "RadiantFloor.from_json",
+        "RadiantFloor.heatable",
+        "RadiantFloor.source",
+        "RadiantFloor.to_dragon",
+        "Radiator",
+        "Radiator.ID",
+        "Radiator.__init__",
+        "Radiator.capacity",
+        "Radiator.from_json",
+        "Radiator.source",
+        "Radiator.to_dragon",
+        "SupplySystem",
+        "SupplySystem.TYPE_MAPPER",
+        "SupplySystem.coolable",
+        "SupplySystem.heatable"
+      ]
+    },
+    "coverage_by_symbol": {
+      "AirHandlingUnit": "epsimple-hvac-supply-system.air-handling-unit-construction-json-source-capabilities-dragon",
+      "AirHandlingUnit.ID": "epsimple-hvac-supply-system.air-handling-unit-construction-json-source-capabilities-dragon",
+      "AirHandlingUnit.__init__": "epsimple-hvac-supply-system.air-handling-unit-construction-json-source-capabilities-dragon",
+      "AirHandlingUnit.from_json": "epsimple-hvac-supply-system.air-handling-unit-construction-json-source-capabilities-dragon",
+      "AirHandlingUnit.source": "epsimple-hvac-supply-system.air-handling-unit-construction-json-source-capabilities-dragon",
+      "AirHandlingUnit.to_dragon": "epsimple-hvac-supply-system.air-handling-unit-construction-json-source-capabilities-dragon",
+      "ElectricRadiantFloor": "epsimple-hvac-supply-system.electric-radiant-floor-construction-json-null-source-dragon",
+      "ElectricRadiantFloor.ID": "epsimple-hvac-supply-system.electric-radiant-floor-construction-json-null-source-dragon",
+      "ElectricRadiantFloor.__init__": "epsimple-hvac-supply-system.electric-radiant-floor-construction-json-null-source-dragon",
+      "ElectricRadiantFloor.from_json": "epsimple-hvac-supply-system.electric-radiant-floor-construction-json-null-source-dragon",
+      "ElectricRadiantFloor.source": "epsimple-hvac-supply-system.electric-radiant-floor-construction-json-null-source-dragon",
+      "ElectricRadiantFloor.to_dragon": "epsimple-hvac-supply-system.electric-radiant-floor-construction-json-null-source-dragon",
+      "ElectricRadiator": "epsimple-hvac-supply-system.electric-radiator-capacity-validation-json-null-source-dragon",
+      "ElectricRadiator.ID": "epsimple-hvac-supply-system.electric-radiator-capacity-validation-json-null-source-dragon",
+      "ElectricRadiator.__init__": "epsimple-hvac-supply-system.electric-radiator-capacity-validation-json-null-source-dragon",
+      "ElectricRadiator.capacity": "epsimple-hvac-supply-system.electric-radiator-capacity-validation-json-null-source-dragon",
+      "ElectricRadiator.from_json": "epsimple-hvac-supply-system.electric-radiator-capacity-validation-json-null-source-dragon",
+      "ElectricRadiator.source": "epsimple-hvac-supply-system.electric-radiator-capacity-validation-json-null-source-dragon",
+      "ElectricRadiator.to_dragon": "epsimple-hvac-supply-system.electric-radiator-capacity-validation-json-null-source-dragon",
+      "FanCoilUnit": "epsimple-hvac-supply-system.fan-coil-unit-source-branches-json-dragon",
+      "FanCoilUnit.ID": "epsimple-hvac-supply-system.fan-coil-unit-source-branches-json-dragon",
+      "FanCoilUnit.__init__": "epsimple-hvac-supply-system.fan-coil-unit-source-branches-json-dragon",
+      "FanCoilUnit.from_json": "epsimple-hvac-supply-system.fan-coil-unit-source-branches-json-dragon",
+      "FanCoilUnit.source": "epsimple-hvac-supply-system.fan-coil-unit-source-branches-json-dragon",
+      "FanCoilUnit.to_dragon": "epsimple-hvac-supply-system.fan-coil-unit-source-branches-json-dragon",
+      "PackagedAirConditioner": "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon",
+      "PackagedAirConditioner.ID": "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon",
+      "PackagedAirConditioner.__init__": "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon",
+      "PackagedAirConditioner.capacity": "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon",
+      "PackagedAirConditioner.cop": "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon",
+      "PackagedAirConditioner.from_json": "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon",
+      "PackagedAirConditioner.source": "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon",
+      "PackagedAirConditioner.to_dragon": "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon",
+      "RadiantFloor": "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon",
+      "RadiantFloor.ID": "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon",
+      "RadiantFloor.__init__": "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon",
+      "RadiantFloor.coolable": "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon",
+      "RadiantFloor.from_json": "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon",
+      "RadiantFloor.heatable": "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon",
+      "RadiantFloor.source": "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon",
+      "RadiantFloor.to_dragon": "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon",
+      "Radiator": "epsimple-hvac-supply-system.radiator-capacity-validation-json-dragon",
+      "Radiator.ID": "epsimple-hvac-supply-system.radiator-capacity-validation-json-dragon",
+      "Radiator.__init__": "epsimple-hvac-supply-system.radiator-capacity-validation-json-dragon",
+      "Radiator.capacity": "epsimple-hvac-supply-system.radiator-capacity-validation-json-dragon",
+      "Radiator.from_json": "epsimple-hvac-supply-system.radiator-capacity-validation-json-dragon",
+      "Radiator.source": "epsimple-hvac-supply-system.radiator-capacity-validation-json-dragon",
+      "Radiator.to_dragon": "epsimple-hvac-supply-system.radiator-capacity-validation-json-dragon",
+      "SupplySystem": "epsimple-hvac-supply-system.supply-system-base-mapper-capability-topology",
+      "SupplySystem.TYPE_MAPPER": "epsimple-hvac-supply-system.supply-system-base-mapper-capability-topology",
+      "SupplySystem.coolable": "epsimple-hvac-supply-system.supply-system-base-mapper-capability-topology",
+      "SupplySystem.heatable": "epsimple-hvac-supply-system.supply-system-base-mapper-capability-topology"
+    },
+    "evidence_contract": {
+      "active_energyplus_process_claim": false,
+      "exact_cpython_behavior_oracle": true,
+      "expected_receipt_count": 52,
+      "native_runtime_executed_by_python_oracle": false,
+      "path_independent_relocated_import": true,
+      "target_coverage_complete": true
+    },
+    "expectations": {
+      "AirHandlingUnit": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-6fd0030b",
+        "assertion_id": "epsimple-hvac-supply-system-147-6fd0030b",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties"
+      },
+      "AirHandlingUnit.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-148-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "AirHandlingUnit.__init__": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c",
+        "assertion_id": "epsimple-hvac-supply-system-151-ea6e311c",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties"
+      },
+      "AirHandlingUnit.from_json": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-148b0ee3",
+        "assertion_id": "epsimple-hvac-supply-system-154-148b0ee3",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+      },
+      "AirHandlingUnit.source": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-155-ef79e1d5",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+      },
+      "AirHandlingUnit.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-11a6909a",
+        "assertion_id": "epsimple-hvac-supply-system-156-11a6909a",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "ElectricRadiantFloor": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-f7f03ff5",
+        "assertion_id": "epsimple-hvac-supply-system-209-f7f03ff5",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties"
+      },
+      "ElectricRadiantFloor.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-210-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "ElectricRadiantFloor.__init__": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-f8bde28f",
+        "assertion_id": "epsimple-hvac-supply-system-213-f8bde28f",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties"
+      },
+      "ElectricRadiantFloor.from_json": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b13a9536",
+        "assertion_id": "epsimple-hvac-supply-system-216-b13a9536",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+      },
+      "ElectricRadiantFloor.source": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a",
+        "assertion_id": "epsimple-hvac-supply-system-217-b14aeb3a",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+      },
+      "ElectricRadiantFloor.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-01ae7da4",
+        "assertion_id": "epsimple-hvac-supply-system-218-01ae7da4",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "ElectricRadiator": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-6354666e",
+        "assertion_id": "epsimple-hvac-supply-system-219-6354666e",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties"
+      },
+      "ElectricRadiator.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-220-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "ElectricRadiator.__init__": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-3a47135f",
+        "assertion_id": "epsimple-hvac-supply-system-223-3a47135f",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties"
+      },
+      "ElectricRadiator.capacity": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-226-09cfea01",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity"
+      },
+      "ElectricRadiator.from_json": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-20bd3338",
+        "assertion_id": "epsimple-hvac-supply-system-227-20bd3338",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+      },
+      "ElectricRadiator.source": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a",
+        "assertion_id": "epsimple-hvac-supply-system-228-b14aeb3a",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+      },
+      "ElectricRadiator.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-4b95c9d6",
+        "assertion_id": "epsimple-hvac-supply-system-229-4b95c9d6",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "FanCoilUnit": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-618e77c4",
+        "assertion_id": "epsimple-hvac-supply-system-230-618e77c4",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties"
+      },
+      "FanCoilUnit.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-231-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "FanCoilUnit.__init__": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c",
+        "assertion_id": "epsimple-hvac-supply-system-234-ea6e311c",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties"
+      },
+      "FanCoilUnit.from_json": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-4e773b8a",
+        "assertion_id": "epsimple-hvac-supply-system-237-4e773b8a",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+      },
+      "FanCoilUnit.source": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-238-ef79e1d5",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+      },
+      "FanCoilUnit.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-09f12474",
+        "assertion_id": "epsimple-hvac-supply-system-239-09f12474",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "PackagedAirConditioner": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-fcef6339",
+        "assertion_id": "epsimple-hvac-supply-system-271-fcef6339",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties"
+      },
+      "PackagedAirConditioner.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-272-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "PackagedAirConditioner.__init__": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b2021d84",
+        "assertion_id": "epsimple-hvac-supply-system-275-b2021d84",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties"
+      },
+      "PackagedAirConditioner.capacity": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-278-09cfea01",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity"
+      },
+      "PackagedAirConditioner.cop": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-279-873a49d3",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop"
+      },
+      "PackagedAirConditioner.from_json": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-d49a3e1b",
+        "assertion_id": "epsimple-hvac-supply-system-280-d49a3e1b",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+      },
+      "PackagedAirConditioner.source": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a",
+        "assertion_id": "epsimple-hvac-supply-system-281-b14aeb3a",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+      },
+      "PackagedAirConditioner.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-0be4894a",
+        "assertion_id": "epsimple-hvac-supply-system-282-0be4894a",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "RadiantFloor": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-3a70e982",
+        "assertion_id": "epsimple-hvac-supply-system-296-3a70e982",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties"
+      },
+      "RadiantFloor.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-297-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "RadiantFloor.__init__": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c",
+        "assertion_id": "epsimple-hvac-supply-system-300-ea6e311c",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties"
+      },
+      "RadiantFloor.coolable": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-303-b81ea250",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Coolable"
+      },
+      "RadiantFloor.from_json": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-a3c19218",
+        "assertion_id": "epsimple-hvac-supply-system-304-a3c19218",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+      },
+      "RadiantFloor.heatable": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-305-0b60e64a",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Heatable"
+      },
+      "RadiantFloor.source": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-306-ef79e1d5",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+      },
+      "RadiantFloor.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-db124859",
+        "assertion_id": "epsimple-hvac-supply-system-307-db124859",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "Radiator": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-8464a277",
+        "assertion_id": "epsimple-hvac-supply-system-308-8464a277",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties"
+      },
+      "Radiator.ID": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-309-246156d9",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+      },
+      "Radiator.__init__": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-35304b6f",
+        "assertion_id": "epsimple-hvac-supply-system-312-35304b6f",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties"
+      },
+      "Radiator.capacity": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-315-d699d5f1",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity"
+      },
+      "Radiator.from_json": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-349b941b",
+        "assertion_id": "epsimple-hvac-supply-system-316-349b941b",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+      },
+      "Radiator.source": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-317-ef79e1d5",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+      },
+      "Radiator.to_dragon": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-bb8edb65",
+        "assertion_id": "epsimple-hvac-supply-system-318-bb8edb65",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      },
+      "SupplySystem": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-d236c0a0",
+        "assertion_id": "epsimple-hvac-supply-system-321-d236c0a0",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor and public properties"
+      },
+      "SupplySystem.TYPE_MAPPER": {
+        "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-3639f058",
+        "assertion_id": "epsimple-hvac-supply-system-322-3639f058",
+        "classification": "exception",
+        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with SupplySystemType dispatch"
+      },
+      "SupplySystem.coolable": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-323-a658d7c4",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Coolable"
+      },
+      "SupplySystem.heatable": {
+        "adaptation": "not_applicable",
+        "assertion_id": "epsimple-hvac-supply-system-324-9d89b0d8",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Heatable"
+      }
+    },
+    "native_routes": {
+      "AirHandlingUnit": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties",
+      "AirHandlingUnit.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "AirHandlingUnit.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties",
+      "AirHandlingUnit.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "AirHandlingUnit.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
+      "AirHandlingUnit.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "ElectricRadiantFloor": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties",
+      "ElectricRadiantFloor.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "ElectricRadiantFloor.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties",
+      "ElectricRadiantFloor.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "ElectricRadiantFloor.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
+      "ElectricRadiantFloor.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "ElectricRadiator": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties",
+      "ElectricRadiator.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "ElectricRadiator.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties",
+      "ElectricRadiator.capacity": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity",
+      "ElectricRadiator.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "ElectricRadiator.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
+      "ElectricRadiator.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "FanCoilUnit": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties",
+      "FanCoilUnit.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "FanCoilUnit.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties",
+      "FanCoilUnit.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "FanCoilUnit.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
+      "FanCoilUnit.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "PackagedAirConditioner": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties",
+      "PackagedAirConditioner.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "PackagedAirConditioner.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties",
+      "PackagedAirConditioner.capacity": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity",
+      "PackagedAirConditioner.cop": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop",
+      "PackagedAirConditioner.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "PackagedAirConditioner.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
+      "PackagedAirConditioner.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "RadiantFloor": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties",
+      "RadiantFloor.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "RadiantFloor.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties",
+      "RadiantFloor.coolable": "GonieGonie.SimpleDragon.SourceSystem.Coolable",
+      "RadiantFloor.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "RadiantFloor.heatable": "GonieGonie.SimpleDragon.SourceSystem.Heatable",
+      "RadiantFloor.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
+      "RadiantFloor.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "Radiator": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties",
+      "Radiator.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
+      "Radiator.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties",
+      "Radiator.capacity": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity",
+      "Radiator.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "Radiator.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
+      "Radiator.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "SupplySystem": "GonieGonie.SimpleDragon.SupplySystem constructor and public properties",
+      "SupplySystem.TYPE_MAPPER": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with SupplySystemType dispatch",
+      "SupplySystem.coolable": "GonieGonie.SimpleDragon.SourceSystem.Coolable",
+      "SupplySystem.heatable": "GonieGonie.SimpleDragon.SourceSystem.Heatable"
+    },
+    "runtime_signatures": {
+      "AirHandlingUnit": {
+        "signature": "(name, source: 'SourceSystem', *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "AirHandlingUnit.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "AirHandlingUnit.__init__": {
+        "signature": "(self, name, source: 'SourceSystem', *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "AirHandlingUnit.from_json": {
+        "signature": "(input: 'SimpleNamespace', source_system_dict: 'dict[str, SourceSystem]') -> 'AirHandlingUnit'",
+        "type": "staticmethod"
+      },
+      "AirHandlingUnit.source": {
+        "getter_signature": "(self) -> 'SourceSystem'",
+        "setter_signature": "(self, value: 'SourceSystem') -> 'None'",
+        "type": "property"
+      },
+      "AirHandlingUnit.to_dragon": {
+        "signature": "(self, source_dict: 'dict[str, dragon.SourceSystem]') -> 'dragon.AirHandlingUnit'",
+        "type": "function"
+      },
+      "ElectricRadiantFloor": {
+        "signature": "(name: 'str', *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "ElectricRadiantFloor.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "ElectricRadiantFloor.__init__": {
+        "signature": "(self, name: 'str', *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "ElectricRadiantFloor.from_json": {
+        "signature": "(input: 'SimpleNamespace', source_system_dict: 'dict[str, SourceSystem]') -> 'ElectricRadiantFloor'",
+        "type": "staticmethod"
+      },
+      "ElectricRadiantFloor.source": {
+        "getter_signature": "(self) -> 'NoneSource'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "ElectricRadiantFloor.to_dragon": {
+        "signature": "(self, source_dict: 'dict[str, dragon.SourceSystem]') -> 'dragon.ElectricRadiantFloor'",
+        "type": "function"
+      },
+      "ElectricRadiator": {
+        "signature": "(name: 'str', capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "ElectricRadiator.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "ElectricRadiator.__init__": {
+        "signature": "(self, name: 'str', capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "ElectricRadiator.capacity": {
+        "getter_signature": "(self) -> 'int | float | None'",
+        "setter_signature": "(self, value: 'int | float | None') -> 'None'",
+        "type": "property"
+      },
+      "ElectricRadiator.from_json": {
+        "signature": "(input: 'SimpleNamespace', source_system_dict: 'dict[str, SourceSystem]') -> 'ElectricRadiator'",
+        "type": "staticmethod"
+      },
+      "ElectricRadiator.source": {
+        "getter_signature": "(self) -> 'NoneSource'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "ElectricRadiator.to_dragon": {
+        "signature": "(self, source_dict: 'dict[str, dragon.SourceSystem]') -> 'dragon.ElectricRadiator'",
+        "type": "function"
+      },
+      "FanCoilUnit": {
+        "signature": "(name, source: 'SourceSystem', *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "FanCoilUnit.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "FanCoilUnit.__init__": {
+        "signature": "(self, name, source: 'SourceSystem', *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "FanCoilUnit.from_json": {
+        "signature": "(input: 'SimpleNamespace', source_system_dict: 'dict[str, SourceSystem]') -> 'FanCoilUnit'",
+        "type": "staticmethod"
+      },
+      "FanCoilUnit.source": {
+        "getter_signature": "(self) -> 'SourceSystem'",
+        "setter_signature": "(self, value: 'SourceSystem') -> 'None'",
+        "type": "property"
+      },
+      "FanCoilUnit.to_dragon": {
+        "signature": "(self, source_dict: 'dict[str, dragon.SourceSystem]') -> 'dragon.FanCoilUnit'",
+        "type": "function"
+      },
+      "PackagedAirConditioner": {
+        "signature": "(name: 'str', cop: 'int | float | None' = None, capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "PackagedAirConditioner.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "PackagedAirConditioner.__init__": {
+        "signature": "(self, name: 'str', cop: 'int | float | None' = None, capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "PackagedAirConditioner.capacity": {
+        "getter_signature": "(self) -> 'int | float | None'",
+        "setter_signature": "(self, value: 'int | float | None') -> 'None'",
+        "type": "property"
+      },
+      "PackagedAirConditioner.cop": {
+        "getter_signature": "(self) -> 'int | float | None'",
+        "setter_signature": "(self, value: 'int | float | None') -> 'None'",
+        "type": "property"
+      },
+      "PackagedAirConditioner.from_json": {
+        "signature": "(input: 'SimpleNamespace', source_system_dict: 'dict[str, SourceSystem]') -> 'PackagedAirConditioner'",
+        "type": "staticmethod"
+      },
+      "PackagedAirConditioner.source": {
+        "getter_signature": "(self) -> 'NoneSource'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "PackagedAirConditioner.to_dragon": {
+        "signature": "(self, source_dict: 'dict[str, dragon.SourceSystem]') -> 'dragon.PackagedAirConditioner'",
+        "type": "function"
+      },
+      "RadiantFloor": {
+        "signature": "(name, source: 'SourceSystem', *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "RadiantFloor.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "RadiantFloor.__init__": {
+        "signature": "(self, name, source: 'SourceSystem', *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "RadiantFloor.coolable": {
+        "getter_signature": "(self) -> 'bool'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "RadiantFloor.from_json": {
+        "signature": "(input: 'SimpleNamespace', source_system_dict: 'dict[str, SourceSystem]') -> 'RadiantFloor'",
+        "type": "staticmethod"
+      },
+      "RadiantFloor.heatable": {
+        "getter_signature": "(self) -> 'bool'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "RadiantFloor.source": {
+        "getter_signature": "(self) -> 'SourceSystem'",
+        "setter_signature": "(self, value: 'SourceSystem') -> 'None'",
+        "type": "property"
+      },
+      "RadiantFloor.to_dragon": {
+        "signature": "(self, source_dict: 'dict[str, dragon.SourceSystem]') -> 'dragon.RadiantFloor'",
+        "type": "function"
+      },
+      "Radiator": {
+        "signature": "(name: 'str', source: 'SourceSystem', capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "type"
+      },
+      "Radiator.ID": {
+        "getter_signature": "(self) -> 'str'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "Radiator.__init__": {
+        "signature": "(self, name: 'str', source: 'SourceSystem', capacity: 'int | float | None' = None, *, ID: 'str | None' = None) -> 'None'",
+        "type": "function"
+      },
+      "Radiator.capacity": {
+        "getter_signature": "(self) -> 'int | float'",
+        "setter_signature": "(self, value: 'int | float') -> 'None'",
+        "type": "property"
+      },
+      "Radiator.from_json": {
+        "signature": "(input: 'SimpleNamespace', source_system_dict: 'dict[str, SourceSystem]') -> 'Radiator'",
+        "type": "staticmethod"
+      },
+      "Radiator.source": {
+        "getter_signature": "(self) -> 'SourceSystem'",
+        "setter_signature": "(self, value: 'SourceSystem') -> 'None'",
+        "type": "property"
+      },
+      "Radiator.to_dragon": {
+        "signature": "(self, source_dict: 'dict[str, dragon.SourceSystem]') -> 'dragon.Radiator'",
+        "type": "function"
+      },
+      "SupplySystem": {
+        "signature": "()",
+        "type": "type"
+      },
+      "SupplySystem.TYPE_MAPPER": {
+        "type": "dict"
+      },
+      "SupplySystem.coolable": {
+        "getter_signature": "(self) -> 'bool'",
+        "setter_signature": null,
+        "type": "property"
+      },
+      "SupplySystem.heatable": {
+        "getter_signature": "(self) -> 'bool'",
+        "setter_signature": null,
+        "type": "property"
+      }
+    }
+  },
+  "fact_sha256": {
+    "epsimple-hvac-supply-system.air-handling-unit-construction-json-source-capabilities-dragon": "sha256:647e2b09be67fe1e7d2af204ed2cad94bf2cf729d6b73976177cf330bd8a7fcf",
+    "epsimple-hvac-supply-system.electric-radiant-floor-construction-json-null-source-dragon": "sha256:3c35d57c9de0453c01b1baa5267c49f6da094fd78d8a85ecd88bdc1b02b1b6a7",
+    "epsimple-hvac-supply-system.electric-radiator-capacity-validation-json-null-source-dragon": "sha256:5fd43fa8e2f25548aba0db4c4a14480faa98e1a52148962ea2422ac0603a91f3",
+    "epsimple-hvac-supply-system.fan-coil-unit-source-branches-json-dragon": "sha256:50a57e6921b7bcce8d810224e31861c4222455777e1e9628799b36294667c830",
+    "epsimple-hvac-supply-system.packaged-air-conditioner-defaults-validation-json-dedicated-dragon": "sha256:3ae220873d535c22a827c1a62e515c7659237a0d9794d3a9907418523a3103e9",
+    "epsimple-hvac-supply-system.radiant-floor-source-capabilities-json-dragon": "sha256:24078204d3dce794bcc70ccdd50097fbe04e835b5fc23fd66f2abaa76d24199d",
+    "epsimple-hvac-supply-system.radiator-capacity-validation-json-dragon": "sha256:ca419685a68ce1fc2810be16b609633882fc0a1d11dd7f7d73eea18e445c9d2e",
+    "epsimple-hvac-supply-system.supply-system-base-mapper-capability-topology": "sha256:2f715484e1a9a16a8ae0ce1f4dbdda60d9fefe9e5ddfa2f4d522d072353698a1"
+  },
+  "native_review": {
+    "public_production_routes_only": true,
+    "python_executes_native_runtime": false,
+    "routes_sha256": "sha256:578ab9f3b1df7e5a9aa3ca30fe53edcbe8bc2620b41e6cb228267450af455145",
+    "source_receipts": [
+      {
+        "bytes": 6465,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SupplySystem.cs",
+        "sha256": "sha256:1858281dcb5ea2df12a09c0c19caba77cf785a10458fb8d265e882f5695a11c5"
+      },
+      {
+        "bytes": 48650,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs",
+        "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"
+      },
+      {
+        "bytes": 16652,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs",
+        "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"
+      },
+      {
+        "bytes": 87343,
+        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
+        "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"
+      }
+    ],
+    "source_receipts_sha256": "sha256:26021fb1a71c8c47b7e4d45e31d5703bc2694c996e85d5da670954fab24b2ca0"
+  },
+  "runtime": {
+    "bootstrap": {
+      "bytes": 1232,
+      "path": "tools/python-reference/bootstrap_reference.py",
+      "sha256": "sha256:0674dcf1fe966de2a4b873a360ef67be48d74f38ba80adba9c74405fd9be7e0f"
+    },
+    "dependencies": {
+      "eppy": "0.5.63",
+      "numpy": "2.3.1",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tzdata": "2024.2"
+    },
+    "dependencies_sha256": "sha256:85d50612b42b3818f054fd7d9cdb26a16bbf832c3afc56762ea732f55a48cb22",
+    "implementation": "cpython",
+    "platform": "win32",
+    "pointer_width_bits": 64,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7",
+    "strict_json_support": {
+      "bytes": 21114,
+      "path": "tools/python-reference/generate_schedule_type_oracle.py",
+      "sha256": "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc"
+    },
+    "supply_system_support": {
+      "bytes": 61458,
+      "path": "tools/python-reference/generate_epsimple_hvac_enums_base_oracle.py",
+      "sha256": "sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d"
+    }
+  },
+  "schema": "goniegonie.python-reference.epsimple-hvac-supply-system.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:644081ff98e0d9dce3b1dd7f739431a71ce8c7524f85a0ec6bc3f40f6bf98de3",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:034590641efa61c135722618e2bdb0d9425ef0cc6a593e8b7a7438b575e4bd9d",
+      "symbol": "AirHandlingUnit",
+      "symbol_hash": "sha256:6fd0030bb650b67798e4eb3d2b4b50a44cc9309e47f44858931dcf1b92d2baa5"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "AirHandlingUnit.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0cc8b1eb7455ed6cc1db0d1c38c63038f36496b63c5c02354464a99b86c90088",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ff922c21296cd5a935d82405d1e2aded04638ff6871358bc0b608c7f6bffec3e",
+      "symbol": "AirHandlingUnit.__init__",
+      "symbol_hash": "sha256:ea6e311cb7493ec68f0be403fc02f1eae98dac5ef2d3c7891dd30c4a9ba49df8"
+    },
+    {
+      "body_hash": "sha256:4757bae32fa6dbc96eb6e60d9de9c51ba7e2c672e657c1427985a9efa18e45de",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e72068dd7c37ad55411e8beda4080e4f6af75f99334b2119c195dd9d7a619b13",
+      "symbol": "AirHandlingUnit.from_json",
+      "symbol_hash": "sha256:148b0ee3185947c81beff56237a82cde44e855bcaf249925fb067b30b758af02"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "AirHandlingUnit.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:167c908c16ef001dfaa09c9f5f4b390339fe0785c0f6be83067800dd2ac9d458",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e590d06a61927a56c75f002322d6cf177d089441239094959799672a68bbbcb4",
+      "symbol": "AirHandlingUnit.to_dragon",
+      "symbol_hash": "sha256:11a6909a36a0459e5e84d8526678556dea762d1fad19c46318cf8cb9ef2b50c8"
+    },
+    {
+      "body_hash": "sha256:f4da9d03c6960b614b37bcd65261cdf4f77698a0fec10c7db147769c4b6e3311",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9d974909f8251f2f7eeff6cb5712f3e288cfa45df22bff65f45a642891284513",
+      "symbol": "ElectricRadiantFloor",
+      "symbol_hash": "sha256:f7f03ff5a5f2cedccb30ad66919833a5b3ed346cf20d31a93123a814c3bda228"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ElectricRadiantFloor.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0000b51bf029340173e6fceaf716b4f4da7081e7b23efbfabaea1f5d0e80e19f",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:105d8455b8c87957bb0de8711d90f3138b23fa0c713656af9e46572a6041cc7d",
+      "symbol": "ElectricRadiantFloor.__init__",
+      "symbol_hash": "sha256:f8bde28f68306fd83c30c36a380bf2a2d0ab8f08ff696a8ba543bf2aa6e02abb"
+    },
+    {
+      "body_hash": "sha256:9aefd7f08ac066bc60e48dbb21bfe85ffdc40a14d909aaa24d155b29c8a71bdf",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ee7e08c298ad4ef7dfa8ed2f6c3aff4ecb16bd2ba67f337e679e632e9b3fbe90",
+      "symbol": "ElectricRadiantFloor.from_json",
+      "symbol_hash": "sha256:b13a953698a740ae6f0de057f21881cd97ade59b0fea0cc3c4af2fc28480c90c"
+    },
+    {
+      "body_hash": "sha256:dcb489f3c3932b57a7108b78b1823b683ce86e8d71e55948848cae1d7bb3566a",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ae02a07321f7497f335eb6bf52e34eb18892e50361f4307f9c724a602317c0e",
+      "symbol": "ElectricRadiantFloor.source",
+      "symbol_hash": "sha256:b14aeb3a49b0c8bd8dfbe0581a0b1f67b12b366048d074b52786dcd726847fc7"
+    },
+    {
+      "body_hash": "sha256:e68494cd6b57ccbc7e78e89f0c06dc36b62c9f3a1d54298c3f3e08c7d14aaf5b",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7e7cec81cc315dc37211e6000685127d4458a60d9f4817f56a4f44ce1bdb6f12",
+      "symbol": "ElectricRadiantFloor.to_dragon",
+      "symbol_hash": "sha256:01ae7da4573343c5acf5ba2474c697b860f78f9fee67c8dddbf8f6e522a171ef"
+    },
+    {
+      "body_hash": "sha256:f4da9d03c6960b614b37bcd65261cdf4f77698a0fec10c7db147769c4b6e3311",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1c9170eb76b09c7feea649df317e2a08e6baf0c314de14d3f28859af519d9b05",
+      "symbol": "ElectricRadiator",
+      "symbol_hash": "sha256:6354666eadd3e2751913c17acc82528be12be62265bbc12daf0376f7bf3ef44c"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ElectricRadiator.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:6525afaad9d637d6fd6cd218cc660c3d9abee6fc45eac6efef710fafc94c91c1",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:124207f8097a778aeb3af50ecfe35973b4898b097751c87322f4bc3ea86fccb6",
+      "symbol": "ElectricRadiator.__init__",
+      "symbol_hash": "sha256:3a47135f63f2cdb439eef5ed5f65dde63949f6a17a2c3d97f6be17106abfdcb4"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:cc93bb37e2ab0f82f6086da6acbfc044ca713c16ec8afec84a142c6a17312c4d",
+      "symbol": "ElectricRadiator.capacity",
+      "symbol_hash": "sha256:09cfea01a6a157d670e72cbe6db8f4f9d2dd5e6af6c77dd69c4cff1fe8f6d4e1"
+    },
+    {
+      "body_hash": "sha256:3555197f1a129ad548d474b19c008382af5582b769d9211e3057d9a314929508",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e8357859f04daaa24672ca5422ea5340f07c4f1125ea63a1f3c2858cf0547a81",
+      "symbol": "ElectricRadiator.from_json",
+      "symbol_hash": "sha256:20bd3338f7cc185c10800f70fd4ddb46812fc5c886d8f3538f6eeae20fba1567"
+    },
+    {
+      "body_hash": "sha256:dcb489f3c3932b57a7108b78b1823b683ce86e8d71e55948848cae1d7bb3566a",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ae02a07321f7497f335eb6bf52e34eb18892e50361f4307f9c724a602317c0e",
+      "symbol": "ElectricRadiator.source",
+      "symbol_hash": "sha256:b14aeb3a49b0c8bd8dfbe0581a0b1f67b12b366048d074b52786dcd726847fc7"
+    },
+    {
+      "body_hash": "sha256:ffb6972794a329be0127ddf4bf55a6e4b84869b248cb32246bef5cd1a0d812af",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2f211a257843bef8a87ad6d5638f1e0049bc11fbb26e8c931b1679df154420f5",
+      "symbol": "ElectricRadiator.to_dragon",
+      "symbol_hash": "sha256:4b95c9d6e62b1dcc13813749df567fdbf471b577ef1f7573861d5ec67ca16ee6"
+    },
+    {
+      "body_hash": "sha256:b5c0e9c1f80ef5884ecae10360d7afe348ea648a90c1efa48455f57a1a2452d6",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:de6cfd7ddb8721c72a3c936f2d1d1027c6f1a91c4b554fd05bab50e1defb6ee0",
+      "symbol": "FanCoilUnit",
+      "symbol_hash": "sha256:618e77c4c3ff965908603766f3804fbb7d490aff54e01196c77d7ac0f2d3ae1e"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "FanCoilUnit.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0cc8b1eb7455ed6cc1db0d1c38c63038f36496b63c5c02354464a99b86c90088",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ff922c21296cd5a935d82405d1e2aded04638ff6871358bc0b608c7f6bffec3e",
+      "symbol": "FanCoilUnit.__init__",
+      "symbol_hash": "sha256:ea6e311cb7493ec68f0be403fc02f1eae98dac5ef2d3c7891dd30c4a9ba49df8"
+    },
+    {
+      "body_hash": "sha256:97aaa85b546f5c026f9f1263b63e44786ec00b261a8195d1661238909fa23885",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a9e19e07c96957f320e3410ace244d3f9ab65320a99cf0912d0e64e696f1b8bf",
+      "symbol": "FanCoilUnit.from_json",
+      "symbol_hash": "sha256:4e773b8a6d49b9bc66097044489d7cd39d0c66cfea71b52b45c916c18a9e7b35"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "FanCoilUnit.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:6aad66b1cd582f39fb4670bc1ab37bddb2b453d3750ec2ed52e9a19efc4d9e13",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c6725ba1d0dc9eb74f17aead43049e141e49b0c867e00bd02b33479b2aafd9aa",
+      "symbol": "FanCoilUnit.to_dragon",
+      "symbol_hash": "sha256:09f124747387123277547f78b46e1c80651111dc6984dd26aa7adadd195b5ebf"
+    },
+    {
+      "body_hash": "sha256:6965df85b1111302b1158597b4e86976daddc109107b0819926ee396209489fc",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a1f38707ed1ca8008369419a24a592c1268b446750d113f9b35d6a72df182bd1",
+      "symbol": "PackagedAirConditioner",
+      "symbol_hash": "sha256:fcef63398815558d11a3c48fe89d0c3e0051f24a79d55672cba849e08b6d2eaa"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "PackagedAirConditioner.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:8783fcb7be82ddb87838124d912a974b12ce6915edca0cbc63b51eb9b57195c0",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:51da79096974318c99fe4e790c4515b51fb9ce8448421480f57f3ad7cd54f04b",
+      "symbol": "PackagedAirConditioner.__init__",
+      "symbol_hash": "sha256:b2021d847992c5a86a23d863d37050a80da355055500f1d912686561f4ef5288"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:cc93bb37e2ab0f82f6086da6acbfc044ca713c16ec8afec84a142c6a17312c4d",
+      "symbol": "PackagedAirConditioner.capacity",
+      "symbol_hash": "sha256:09cfea01a6a157d670e72cbe6db8f4f9d2dd5e6af6c77dd69c4cff1fe8f6d4e1"
+    },
+    {
+      "body_hash": "sha256:a7f4e9f7638f69f248c7ba9d965a0c34f33b35868bc64d8be900345af2c33f7a",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9e252719c39ab6012f0bd288c4083d9d7a7e4ce2c7d86ff33e3dc4c5d31a7578",
+      "symbol": "PackagedAirConditioner.cop",
+      "symbol_hash": "sha256:873a49d321180f9f6396b44b23751ea3e025b5c874e7e311491d54e7bcafdcc5"
+    },
+    {
+      "body_hash": "sha256:da645adada745b2a0c391ff6d4f85041a4cb32fd6f0af1e4447c6aa75238da7b",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:25e02dccf8701ca9a926ed4e21165a048abc08f7fa10a9ad0c7efc27e8bb19be",
+      "symbol": "PackagedAirConditioner.from_json",
+      "symbol_hash": "sha256:d49a3e1b427251ccd94d5bac5d99c50d9dcb60da1aa7fd2ebc97ec6c3766c9a1"
+    },
+    {
+      "body_hash": "sha256:dcb489f3c3932b57a7108b78b1823b683ce86e8d71e55948848cae1d7bb3566a",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ae02a07321f7497f335eb6bf52e34eb18892e50361f4307f9c724a602317c0e",
+      "symbol": "PackagedAirConditioner.source",
+      "symbol_hash": "sha256:b14aeb3a49b0c8bd8dfbe0581a0b1f67b12b366048d074b52786dcd726847fc7"
+    },
+    {
+      "body_hash": "sha256:0d83ee8547a2553915f3e47991c88289310d59f33c16581a32acac6e9532b83e",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:3de29776ccd933a3c65e81fd2dd359a42473f6a7a7c1881305c6a6208550afef",
+      "symbol": "PackagedAirConditioner.to_dragon",
+      "symbol_hash": "sha256:0be4894a1c2a75079fc1f5528c30fb1e01a0f3378617f5ce9b453e181154ae4c"
+    },
+    {
+      "body_hash": "sha256:333cc42746dff81f974eb6f6810893812fb9d300b5ba3d6e7111309cb7f92ad9",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ac8e4688e63eb42b58f942cc69c0d425c2e2b16c0ca931c9a0c2fc9500c1471",
+      "symbol": "RadiantFloor",
+      "symbol_hash": "sha256:3a70e982c106c5212623a10732007a9852064f5ad425395b6e45bc62500beed4"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "RadiantFloor.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0cc8b1eb7455ed6cc1db0d1c38c63038f36496b63c5c02354464a99b86c90088",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ff922c21296cd5a935d82405d1e2aded04638ff6871358bc0b608c7f6bffec3e",
+      "symbol": "RadiantFloor.__init__",
+      "symbol_hash": "sha256:ea6e311cb7493ec68f0be403fc02f1eae98dac5ef2d3c7891dd30c4a9ba49df8"
+    },
+    {
+      "body_hash": "sha256:fac934170d680a1a998c791b2d9a0e21abc210518d2f2ec8a56633facc2394a0",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "RadiantFloor.coolable",
+      "symbol_hash": "sha256:b81ea250ac6244b33580b16bb18b30bf835ce33f4b947ae01243d866f94d9795"
+    },
+    {
+      "body_hash": "sha256:c326dd5cd32e05348b9b6353753974a9f67021c4afae5468552c0e026216643a",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:dfbfe8c6ecbefd43dec9ec5e3e1811a7c021a7d4c936f74676706c63f143e286",
+      "symbol": "RadiantFloor.from_json",
+      "symbol_hash": "sha256:a3c19218d4a8a9106ef202bc83d5344709b7e5935967766c107b2595dae20733"
+    },
+    {
+      "body_hash": "sha256:a200989331792d789cc947c1b615c0eb8c31e552b2dbe4f805b7ad72e3f082d4",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "RadiantFloor.heatable",
+      "symbol_hash": "sha256:0b60e64a309323590a641eb4ac517d15891d836f48176947c1f7a8df43d244db"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "RadiantFloor.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:7d0905ff487f7dc632518e694f9ed1772ba8a76da2c1a86472489f44f620b2d0",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0177243494086b0d6d20ad83d9adb434be666785699d3d7079b5223d2d9d829e",
+      "symbol": "RadiantFloor.to_dragon",
+      "symbol_hash": "sha256:db1248599e13656a85a83bc3af1716b755819ce437af3a3f245a9b52d9c1c106"
+    },
+    {
+      "body_hash": "sha256:333cc42746dff81f974eb6f6810893812fb9d300b5ba3d6e7111309cb7f92ad9",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c6b48693d6dadbb8ae0abebc8271d507d00111e70927ac4caa1f34229e94d1db",
+      "symbol": "Radiator",
+      "symbol_hash": "sha256:8464a277a095d9e36a40b54c366b83405fc63809556dae795c5d1a1513112d73"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Radiator.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:a87f4596d58e071a70165fa2a955d67f11a8b734ccbf60661f30fc18162fec35",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:8fa22f5eff68f7f34d4294f671aa876da59c4e57c7960bb9c4676e39a269af5c",
+      "symbol": "Radiator.__init__",
+      "symbol_hash": "sha256:35304b6f549ec68ca020d5db6d8a8412a038c5a07c18825b25b5fe9ef775a9f4"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "Radiator.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:331107434c11accd70633c311eb4289240f9eab9962336bb677976a5be5c7591",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:53a1edbebf6d656971cf1f19b71b03ea025f49387b7bec20a7ecf6306a166017",
+      "symbol": "Radiator.from_json",
+      "symbol_hash": "sha256:349b941b7fb11e3009624a5a75e0707deecd733bacc496f50312779251f5ddf8"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "Radiator.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:48bf1f2a74c0a55a019873f668c2a539ca419e40ff2e9fc799e373a63940b41f",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a591803a0c769106be546c678cd7cbb08eaf9c4b433d4b526c03405d55e784d3",
+      "symbol": "Radiator.to_dragon",
+      "symbol_hash": "sha256:bb8edb65b591e39b622c1569a5969446a150d5e5b0ea7f58d65d34176faabdea"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:fc556e768556332704e50f080f462c730f7235a8d85b7ba9247517c53588d919",
+      "symbol": "SupplySystem",
+      "symbol_hash": "sha256:d236c0a04078304ea345cbd7c8c1869302365acb12658f8497b0826edc52332e"
+    },
+    {
+      "body_hash": "sha256:b9eba64579e158cc0b805b796a183e3a7be5ab8d11af2381a93a3bea7a73caad",
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7e528899651b38b262aa7c22be2b1a3277169c7406d887fb67f3454a9f44ace8",
+      "symbol": "SupplySystem.TYPE_MAPPER",
+      "symbol_hash": "sha256:3639f05812aac7d5fc787679da794f56e05943dc68307da0985c671386518022"
+    },
+    {
+      "body_hash": "sha256:53f089ff50733d36140fdcd3bac778d81c5165324206853953ec66075c5940b5",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "SupplySystem.coolable",
+      "symbol_hash": "sha256:a658d7c48c13e1d67dd38898c56df5cabff584bd320d5dfe366247981fcde979"
+    },
+    {
+      "body_hash": "sha256:cd6c95a179a95ab99b2f0b173e9fb980866ddb81680871d64588621a6ce90e75",
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "SupplySystem.heatable",
+      "symbol_hash": "sha256:9d89b0d88c186efc0a1897ac3ad1658f6dc7d024b162188408a81461e13b7372"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:644081ff98e0d9dce3b1dd7f739431a71ce8c7524f85a0ec6bc3f40f6bf98de3",
+      "inventory_index": 147,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:034590641efa61c135722618e2bdb0d9425ef0cc6a593e8b7a7438b575e4bd9d",
+      "symbol": "AirHandlingUnit",
+      "symbol_hash": "sha256:6fd0030bb650b67798e4eb3d2b4b50a44cc9309e47f44858931dcf1b92d2baa5"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 148,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "AirHandlingUnit.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0cc8b1eb7455ed6cc1db0d1c38c63038f36496b63c5c02354464a99b86c90088",
+      "inventory_index": 151,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ff922c21296cd5a935d82405d1e2aded04638ff6871358bc0b608c7f6bffec3e",
+      "symbol": "AirHandlingUnit.__init__",
+      "symbol_hash": "sha256:ea6e311cb7493ec68f0be403fc02f1eae98dac5ef2d3c7891dd30c4a9ba49df8"
+    },
+    {
+      "body_hash": "sha256:4757bae32fa6dbc96eb6e60d9de9c51ba7e2c672e657c1427985a9efa18e45de",
+      "inventory_index": 154,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e72068dd7c37ad55411e8beda4080e4f6af75f99334b2119c195dd9d7a619b13",
+      "symbol": "AirHandlingUnit.from_json",
+      "symbol_hash": "sha256:148b0ee3185947c81beff56237a82cde44e855bcaf249925fb067b30b758af02"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "inventory_index": 155,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "AirHandlingUnit.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:167c908c16ef001dfaa09c9f5f4b390339fe0785c0f6be83067800dd2ac9d458",
+      "inventory_index": 156,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e590d06a61927a56c75f002322d6cf177d089441239094959799672a68bbbcb4",
+      "symbol": "AirHandlingUnit.to_dragon",
+      "symbol_hash": "sha256:11a6909a36a0459e5e84d8526678556dea762d1fad19c46318cf8cb9ef2b50c8"
+    },
+    {
+      "body_hash": "sha256:f4da9d03c6960b614b37bcd65261cdf4f77698a0fec10c7db147769c4b6e3311",
+      "inventory_index": 209,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9d974909f8251f2f7eeff6cb5712f3e288cfa45df22bff65f45a642891284513",
+      "symbol": "ElectricRadiantFloor",
+      "symbol_hash": "sha256:f7f03ff5a5f2cedccb30ad66919833a5b3ed346cf20d31a93123a814c3bda228"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 210,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ElectricRadiantFloor.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0000b51bf029340173e6fceaf716b4f4da7081e7b23efbfabaea1f5d0e80e19f",
+      "inventory_index": 213,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:105d8455b8c87957bb0de8711d90f3138b23fa0c713656af9e46572a6041cc7d",
+      "symbol": "ElectricRadiantFloor.__init__",
+      "symbol_hash": "sha256:f8bde28f68306fd83c30c36a380bf2a2d0ab8f08ff696a8ba543bf2aa6e02abb"
+    },
+    {
+      "body_hash": "sha256:9aefd7f08ac066bc60e48dbb21bfe85ffdc40a14d909aaa24d155b29c8a71bdf",
+      "inventory_index": 216,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ee7e08c298ad4ef7dfa8ed2f6c3aff4ecb16bd2ba67f337e679e632e9b3fbe90",
+      "symbol": "ElectricRadiantFloor.from_json",
+      "symbol_hash": "sha256:b13a953698a740ae6f0de057f21881cd97ade59b0fea0cc3c4af2fc28480c90c"
+    },
+    {
+      "body_hash": "sha256:dcb489f3c3932b57a7108b78b1823b683ce86e8d71e55948848cae1d7bb3566a",
+      "inventory_index": 217,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ae02a07321f7497f335eb6bf52e34eb18892e50361f4307f9c724a602317c0e",
+      "symbol": "ElectricRadiantFloor.source",
+      "symbol_hash": "sha256:b14aeb3a49b0c8bd8dfbe0581a0b1f67b12b366048d074b52786dcd726847fc7"
+    },
+    {
+      "body_hash": "sha256:e68494cd6b57ccbc7e78e89f0c06dc36b62c9f3a1d54298c3f3e08c7d14aaf5b",
+      "inventory_index": 218,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7e7cec81cc315dc37211e6000685127d4458a60d9f4817f56a4f44ce1bdb6f12",
+      "symbol": "ElectricRadiantFloor.to_dragon",
+      "symbol_hash": "sha256:01ae7da4573343c5acf5ba2474c697b860f78f9fee67c8dddbf8f6e522a171ef"
+    },
+    {
+      "body_hash": "sha256:f4da9d03c6960b614b37bcd65261cdf4f77698a0fec10c7db147769c4b6e3311",
+      "inventory_index": 219,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:1c9170eb76b09c7feea649df317e2a08e6baf0c314de14d3f28859af519d9b05",
+      "symbol": "ElectricRadiator",
+      "symbol_hash": "sha256:6354666eadd3e2751913c17acc82528be12be62265bbc12daf0376f7bf3ef44c"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 220,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "ElectricRadiator.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:6525afaad9d637d6fd6cd218cc660c3d9abee6fc45eac6efef710fafc94c91c1",
+      "inventory_index": 223,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:124207f8097a778aeb3af50ecfe35973b4898b097751c87322f4bc3ea86fccb6",
+      "symbol": "ElectricRadiator.__init__",
+      "symbol_hash": "sha256:3a47135f63f2cdb439eef5ed5f65dde63949f6a17a2c3d97f6be17106abfdcb4"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 226,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:cc93bb37e2ab0f82f6086da6acbfc044ca713c16ec8afec84a142c6a17312c4d",
+      "symbol": "ElectricRadiator.capacity",
+      "symbol_hash": "sha256:09cfea01a6a157d670e72cbe6db8f4f9d2dd5e6af6c77dd69c4cff1fe8f6d4e1"
+    },
+    {
+      "body_hash": "sha256:3555197f1a129ad548d474b19c008382af5582b769d9211e3057d9a314929508",
+      "inventory_index": 227,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:e8357859f04daaa24672ca5422ea5340f07c4f1125ea63a1f3c2858cf0547a81",
+      "symbol": "ElectricRadiator.from_json",
+      "symbol_hash": "sha256:20bd3338f7cc185c10800f70fd4ddb46812fc5c886d8f3538f6eeae20fba1567"
+    },
+    {
+      "body_hash": "sha256:dcb489f3c3932b57a7108b78b1823b683ce86e8d71e55948848cae1d7bb3566a",
+      "inventory_index": 228,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ae02a07321f7497f335eb6bf52e34eb18892e50361f4307f9c724a602317c0e",
+      "symbol": "ElectricRadiator.source",
+      "symbol_hash": "sha256:b14aeb3a49b0c8bd8dfbe0581a0b1f67b12b366048d074b52786dcd726847fc7"
+    },
+    {
+      "body_hash": "sha256:ffb6972794a329be0127ddf4bf55a6e4b84869b248cb32246bef5cd1a0d812af",
+      "inventory_index": 229,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:2f211a257843bef8a87ad6d5638f1e0049bc11fbb26e8c931b1679df154420f5",
+      "symbol": "ElectricRadiator.to_dragon",
+      "symbol_hash": "sha256:4b95c9d6e62b1dcc13813749df567fdbf471b577ef1f7573861d5ec67ca16ee6"
+    },
+    {
+      "body_hash": "sha256:b5c0e9c1f80ef5884ecae10360d7afe348ea648a90c1efa48455f57a1a2452d6",
+      "inventory_index": 230,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:de6cfd7ddb8721c72a3c936f2d1d1027c6f1a91c4b554fd05bab50e1defb6ee0",
+      "symbol": "FanCoilUnit",
+      "symbol_hash": "sha256:618e77c4c3ff965908603766f3804fbb7d490aff54e01196c77d7ac0f2d3ae1e"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 231,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "FanCoilUnit.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0cc8b1eb7455ed6cc1db0d1c38c63038f36496b63c5c02354464a99b86c90088",
+      "inventory_index": 234,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ff922c21296cd5a935d82405d1e2aded04638ff6871358bc0b608c7f6bffec3e",
+      "symbol": "FanCoilUnit.__init__",
+      "symbol_hash": "sha256:ea6e311cb7493ec68f0be403fc02f1eae98dac5ef2d3c7891dd30c4a9ba49df8"
+    },
+    {
+      "body_hash": "sha256:97aaa85b546f5c026f9f1263b63e44786ec00b261a8195d1661238909fa23885",
+      "inventory_index": 237,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a9e19e07c96957f320e3410ace244d3f9ab65320a99cf0912d0e64e696f1b8bf",
+      "symbol": "FanCoilUnit.from_json",
+      "symbol_hash": "sha256:4e773b8a6d49b9bc66097044489d7cd39d0c66cfea71b52b45c916c18a9e7b35"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "inventory_index": 238,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "FanCoilUnit.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:6aad66b1cd582f39fb4670bc1ab37bddb2b453d3750ec2ed52e9a19efc4d9e13",
+      "inventory_index": 239,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c6725ba1d0dc9eb74f17aead43049e141e49b0c867e00bd02b33479b2aafd9aa",
+      "symbol": "FanCoilUnit.to_dragon",
+      "symbol_hash": "sha256:09f124747387123277547f78b46e1c80651111dc6984dd26aa7adadd195b5ebf"
+    },
+    {
+      "body_hash": "sha256:6965df85b1111302b1158597b4e86976daddc109107b0819926ee396209489fc",
+      "inventory_index": 271,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a1f38707ed1ca8008369419a24a592c1268b446750d113f9b35d6a72df182bd1",
+      "symbol": "PackagedAirConditioner",
+      "symbol_hash": "sha256:fcef63398815558d11a3c48fe89d0c3e0051f24a79d55672cba849e08b6d2eaa"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 272,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "PackagedAirConditioner.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:8783fcb7be82ddb87838124d912a974b12ce6915edca0cbc63b51eb9b57195c0",
+      "inventory_index": 275,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:51da79096974318c99fe4e790c4515b51fb9ce8448421480f57f3ad7cd54f04b",
+      "symbol": "PackagedAirConditioner.__init__",
+      "symbol_hash": "sha256:b2021d847992c5a86a23d863d37050a80da355055500f1d912686561f4ef5288"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 278,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:cc93bb37e2ab0f82f6086da6acbfc044ca713c16ec8afec84a142c6a17312c4d",
+      "symbol": "PackagedAirConditioner.capacity",
+      "symbol_hash": "sha256:09cfea01a6a157d670e72cbe6db8f4f9d2dd5e6af6c77dd69c4cff1fe8f6d4e1"
+    },
+    {
+      "body_hash": "sha256:a7f4e9f7638f69f248c7ba9d965a0c34f33b35868bc64d8be900345af2c33f7a",
+      "inventory_index": 279,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:9e252719c39ab6012f0bd288c4083d9d7a7e4ce2c7d86ff33e3dc4c5d31a7578",
+      "symbol": "PackagedAirConditioner.cop",
+      "symbol_hash": "sha256:873a49d321180f9f6396b44b23751ea3e025b5c874e7e311491d54e7bcafdcc5"
+    },
+    {
+      "body_hash": "sha256:da645adada745b2a0c391ff6d4f85041a4cb32fd6f0af1e4447c6aa75238da7b",
+      "inventory_index": 280,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:25e02dccf8701ca9a926ed4e21165a048abc08f7fa10a9ad0c7efc27e8bb19be",
+      "symbol": "PackagedAirConditioner.from_json",
+      "symbol_hash": "sha256:d49a3e1b427251ccd94d5bac5d99c50d9dcb60da1aa7fd2ebc97ec6c3766c9a1"
+    },
+    {
+      "body_hash": "sha256:dcb489f3c3932b57a7108b78b1823b683ce86e8d71e55948848cae1d7bb3566a",
+      "inventory_index": 281,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ae02a07321f7497f335eb6bf52e34eb18892e50361f4307f9c724a602317c0e",
+      "symbol": "PackagedAirConditioner.source",
+      "symbol_hash": "sha256:b14aeb3a49b0c8bd8dfbe0581a0b1f67b12b366048d074b52786dcd726847fc7"
+    },
+    {
+      "body_hash": "sha256:0d83ee8547a2553915f3e47991c88289310d59f33c16581a32acac6e9532b83e",
+      "inventory_index": 282,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:3de29776ccd933a3c65e81fd2dd359a42473f6a7a7c1881305c6a6208550afef",
+      "symbol": "PackagedAirConditioner.to_dragon",
+      "symbol_hash": "sha256:0be4894a1c2a75079fc1f5528c30fb1e01a0f3378617f5ce9b453e181154ae4c"
+    },
+    {
+      "body_hash": "sha256:333cc42746dff81f974eb6f6810893812fb9d300b5ba3d6e7111309cb7f92ad9",
+      "inventory_index": 296,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:6ac8e4688e63eb42b58f942cc69c0d425c2e2b16c0ca931c9a0c2fc9500c1471",
+      "symbol": "RadiantFloor",
+      "symbol_hash": "sha256:3a70e982c106c5212623a10732007a9852064f5ad425395b6e45bc62500beed4"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 297,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "RadiantFloor.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:0cc8b1eb7455ed6cc1db0d1c38c63038f36496b63c5c02354464a99b86c90088",
+      "inventory_index": 300,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:ff922c21296cd5a935d82405d1e2aded04638ff6871358bc0b608c7f6bffec3e",
+      "symbol": "RadiantFloor.__init__",
+      "symbol_hash": "sha256:ea6e311cb7493ec68f0be403fc02f1eae98dac5ef2d3c7891dd30c4a9ba49df8"
+    },
+    {
+      "body_hash": "sha256:fac934170d680a1a998c791b2d9a0e21abc210518d2f2ec8a56633facc2394a0",
+      "inventory_index": 303,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "RadiantFloor.coolable",
+      "symbol_hash": "sha256:b81ea250ac6244b33580b16bb18b30bf835ce33f4b947ae01243d866f94d9795"
+    },
+    {
+      "body_hash": "sha256:c326dd5cd32e05348b9b6353753974a9f67021c4afae5468552c0e026216643a",
+      "inventory_index": 304,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:dfbfe8c6ecbefd43dec9ec5e3e1811a7c021a7d4c936f74676706c63f143e286",
+      "symbol": "RadiantFloor.from_json",
+      "symbol_hash": "sha256:a3c19218d4a8a9106ef202bc83d5344709b7e5935967766c107b2595dae20733"
+    },
+    {
+      "body_hash": "sha256:a200989331792d789cc947c1b615c0eb8c31e552b2dbe4f805b7ad72e3f082d4",
+      "inventory_index": 305,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "RadiantFloor.heatable",
+      "symbol_hash": "sha256:0b60e64a309323590a641eb4ac517d15891d836f48176947c1f7a8df43d244db"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "inventory_index": 306,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "RadiantFloor.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:7d0905ff487f7dc632518e694f9ed1772ba8a76da2c1a86472489f44f620b2d0",
+      "inventory_index": 307,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:0177243494086b0d6d20ad83d9adb434be666785699d3d7079b5223d2d9d829e",
+      "symbol": "RadiantFloor.to_dragon",
+      "symbol_hash": "sha256:db1248599e13656a85a83bc3af1716b755819ce437af3a3f245a9b52d9c1c106"
+    },
+    {
+      "body_hash": "sha256:333cc42746dff81f974eb6f6810893812fb9d300b5ba3d6e7111309cb7f92ad9",
+      "inventory_index": 308,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c6b48693d6dadbb8ae0abebc8271d507d00111e70927ac4caa1f34229e94d1db",
+      "symbol": "Radiator",
+      "symbol_hash": "sha256:8464a277a095d9e36a40b54c366b83405fc63809556dae795c5d1a1513112d73"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 309,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Radiator.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:a87f4596d58e071a70165fa2a955d67f11a8b734ccbf60661f30fc18162fec35",
+      "inventory_index": 312,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:8fa22f5eff68f7f34d4294f671aa876da59c4e57c7960bb9c4676e39a269af5c",
+      "symbol": "Radiator.__init__",
+      "symbol_hash": "sha256:35304b6f549ec68ca020d5db6d8a8412a038c5a07c18825b25b5fe9ef775a9f4"
+    },
+    {
+      "body_hash": "sha256:f4aa61cb14fb78877b25e1727abe6b859eb528573035851ef4823bf96386e5a4",
+      "inventory_index": 315,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:bbbc01de62864a8be9a07c61355493d534500ac6ebb3732f687667ec2b4dffbd",
+      "symbol": "Radiator.capacity",
+      "symbol_hash": "sha256:d699d5f1b04af7405ec421c7c72d1c1425f40bd007065cbec301d1ea9c5bffcb"
+    },
+    {
+      "body_hash": "sha256:331107434c11accd70633c311eb4289240f9eab9962336bb677976a5be5c7591",
+      "inventory_index": 316,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:53a1edbebf6d656971cf1f19b71b03ea025f49387b7bec20a7ecf6306a166017",
+      "symbol": "Radiator.from_json",
+      "symbol_hash": "sha256:349b941b7fb11e3009624a5a75e0707deecd733bacc496f50312779251f5ddf8"
+    },
+    {
+      "body_hash": "sha256:4442afe01a47794c3f7563dc933f47fd49ae9aaf6f85fb8c752ddd48a163c802",
+      "inventory_index": 317,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:c40ec870361be3716a817d13e5109cd53317ffea2213de16b2a6388ceeb8d40f",
+      "symbol": "Radiator.source",
+      "symbol_hash": "sha256:ef79e1d5dc6f6eaf3bf77fb3dbc3448b90e7460cfac7d82976d7a78024e337a8"
+    },
+    {
+      "body_hash": "sha256:48bf1f2a74c0a55a019873f668c2a539ca419e40ff2e9fc799e373a63940b41f",
+      "inventory_index": 318,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:a591803a0c769106be546c678cd7cbb08eaf9c4b433d4b526c03405d55e784d3",
+      "symbol": "Radiator.to_dragon",
+      "symbol_hash": "sha256:bb8edb65b591e39b622c1569a5969446a150d5e5b0ea7f58d65d34176faabdea"
+    },
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 321,
+      "kind": "class",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:fc556e768556332704e50f080f462c730f7235a8d85b7ba9247517c53588d919",
+      "symbol": "SupplySystem",
+      "symbol_hash": "sha256:d236c0a04078304ea345cbd7c8c1869302365acb12658f8497b0826edc52332e"
+    },
+    {
+      "body_hash": "sha256:b9eba64579e158cc0b805b796a183e3a7be5ab8d11af2381a93a3bea7a73caad",
+      "inventory_index": 322,
+      "kind": "constant",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:7e528899651b38b262aa7c22be2b1a3277169c7406d887fb67f3454a9f44ace8",
+      "symbol": "SupplySystem.TYPE_MAPPER",
+      "symbol_hash": "sha256:3639f05812aac7d5fc787679da794f56e05943dc68307da0985c671386518022"
+    },
+    {
+      "body_hash": "sha256:53f089ff50733d36140fdcd3bac778d81c5165324206853953ec66075c5940b5",
+      "inventory_index": 323,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "SupplySystem.coolable",
+      "symbol_hash": "sha256:a658d7c48c13e1d67dd38898c56df5cabff584bd320d5dfe366247981fcde979"
+    },
+    {
+      "body_hash": "sha256:cd6c95a179a95ab99b2f0b173e9fb980866ddb81680871d64588621a6ce90e75",
+      "inventory_index": 324,
+      "kind": "function",
+      "path": "src/epsimple/core/hvac.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "SupplySystem.heatable",
+      "symbol_hash": "sha256:9d89b0d88c186efc0a1897ac3ad1658f6dc7d024b162188408a81461e13b7372"
+    }
+  ],
+  "upstream": {
+    "adjacent_receipts_sha256": "sha256:8516665711bdf76cc747fe3843b097c8ee038dde68a4449278c365a0315542d4",
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory": {
+      "bytes": 518070,
+      "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+      "file_sha256": "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    },
+    "isolated_import": {
+      "epsimple_core_initializer_executed": false,
+      "epsimple_package_initializer_executed": false,
+      "loaded_local_modules": [
+        {
+          "ast_sha256": "sha256:f26684ea4b6e1bfe7b9576f06d45971e420d2e9e49da99b6c52ff9d0d424fae3",
+          "bytes": 2262,
+          "module": "epsimple",
+          "path": "src/epsimple/__init__.py",
+          "source_sha256": "sha256:adff45de2c37d23586de00015e05502b1ee4ff7c167f5017b946827f1f383996"
+        },
+        {
+          "ast_sha256": "sha256:6740f081f087834aadfef0c11da6cdbe11f907dc170b48ebaa287e000eb6e27b",
+          "bytes": 4873,
+          "module": "epsimple.constants",
+          "path": "src/epsimple/constants.py",
+          "source_sha256": "sha256:d5dd5241ec90b14ba3708a525cd74279a8cdc238164a5b8544c4c82b05a29897"
+        },
+        {
+          "ast_sha256": "sha256:7409c8f18e040e02d52a7e2a70ab56b4539212eb76035f5b218a5bacd84f4762",
+          "bytes": 1264,
+          "module": "epsimple.core",
+          "path": "src/epsimple/core/__init__.py",
+          "source_sha256": "sha256:e6d571f7bf775cd13cba7abf0f625802e92680fdc87838f4039b037174a1a4c9"
+        },
+        {
+          "ast_sha256": "sha256:dbbea63f51a001fae4fd73fba96dc099eab8cd5bcec39e3d9bf768e29b463873",
+          "bytes": 53850,
+          "module": "epsimple.core.hvac",
+          "path": "src/epsimple/core/hvac.py",
+          "source_sha256": "sha256:9f3ecb27ed612baeed530ccbfd5857f1f528de24f222e6ef5093e4a635665d9c"
+        },
+        {
+          "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+          "bytes": 2011,
+          "module": "idragon",
+          "path": "src/idragon/__init__.py",
+          "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+        },
+        {
+          "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+          "bytes": 6247,
+          "module": "idragon.common",
+          "path": "src/idragon/common.py",
+          "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+        },
+        {
+          "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+          "bytes": 2590,
+          "module": "idragon.constants",
+          "path": "src/idragon/constants.py",
+          "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+        },
+        {
+          "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+          "bytes": 1505,
+          "module": "idragon.dragon",
+          "path": "src/idragon/dragon/__init__.py",
+          "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+        },
+        {
+          "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+          "bytes": 11652,
+          "module": "idragon.dragon.construction",
+          "path": "src/idragon/dragon/construction.py",
+          "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+        },
+        {
+          "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+          "bytes": 137833,
+          "module": "idragon.dragon.hvac",
+          "path": "src/idragon/dragon/hvac.py",
+          "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+        },
+        {
+          "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+          "bytes": 8247,
+          "module": "idragon.dragon.model",
+          "path": "src/idragon/dragon/model.py",
+          "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+        },
+        {
+          "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+          "bytes": 117731,
+          "module": "idragon.dragon.profile",
+          "path": "src/idragon/dragon/profile.py",
+          "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+        },
+        {
+          "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+          "bytes": 27438,
+          "module": "idragon.dragon.shape",
+          "path": "src/idragon/dragon/shape.py",
+          "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+        },
+        {
+          "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+          "bytes": 91815,
+          "module": "idragon.imugi",
+          "path": "src/idragon/imugi.py",
+          "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+        },
+        {
+          "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+          "bytes": 12367,
+          "module": "idragon.launcher",
+          "path": "src/idragon/launcher.py",
+          "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+        },
+        {
+          "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+          "bytes": 2616,
+          "module": "idragon.utils",
+          "path": "src/idragon/utils.py",
+          "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+        }
+      ],
+      "loaded_local_modules_sha256": "sha256:e19bb4e2660bce5866feb71cdaf7d6906f7e8ce8043667f63a290adfeeb115b8",
+      "relocated_observations_sha256": "sha256:9aa09c93f083fd82df4a25c756fbebf5c8138a44db926f316ad42bb298e2fc64",
+      "relocated_source_copy": "byte-identical-epsimple-and-idragon-trees",
+      "source_location_count": 2
+    },
+    "source": {
+      "ast_sha256": "sha256:dbbea63f51a001fae4fd73fba96dc099eab8cd5bcec39e3d9bf768e29b463873",
+      "bytes": 53850,
+      "path": "src/epsimple/core/hvac.py",
+      "source_sha256": "sha256:9f3ecb27ed612baeed530ccbfd5857f1f528de24f222e6ef5093e4a635665d9c"
+    },
+    "target_receipts_sha256": "sha256:5753763192194cfdcef58cb9baf438770dd1bd07bb2a4b846c3e8168f032f839"
+  }
+}

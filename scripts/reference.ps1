@@ -37,6 +37,7 @@ $epsimpleConstantsNumericGeneratorPath = Join-Path $repositoryRoot 'tools\python
 $epsimpleConstructionCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_construction_core_oracle.py'
 $epsimpleHvacEnumsBaseGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_hvac_enums_base_oracle.py'
 $epsimpleHvacThermalSourceGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_hvac_thermal_source_oracle.py'
+$epsimpleHvacSupplySystemGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_hvac_supply_system_oracle.py'
 $epsimpleIdentifierConventionsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_identifier_conventions_oracle.py'
 $epsimpleModelCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_model_core_oracle.py'
 $epsimpleModelResultGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_epsimple_model_result_oracle.py'
@@ -93,6 +94,7 @@ $epsimpleConstantsNumericTestPath = Join-Path $repositoryRoot 'tests\PythonRefer
 $epsimpleConstructionCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_construction_core_oracle.py'
 $epsimpleHvacEnumsBaseTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_hvac_enums_base_oracle.py'
 $epsimpleHvacThermalSourceTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_hvac_thermal_source_oracle.py'
+$epsimpleHvacSupplySystemTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_hvac_supply_system_oracle.py'
 $epsimpleIdentifierConventionsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_identifier_conventions_oracle.py'
 $epsimpleModelCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_model_core_oracle.py'
 $epsimpleModelResultTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_epsimple_model_result_oracle.py'
@@ -201,6 +203,7 @@ foreach ($requiredFile in @(
     $epsimpleConstructionCoreGeneratorPath,
     $epsimpleHvacEnumsBaseGeneratorPath,
     $epsimpleHvacThermalSourceGeneratorPath,
+    $epsimpleHvacSupplySystemGeneratorPath,
     $epsimpleIdentifierConventionsGeneratorPath,
     $epsimpleModelCoreGeneratorPath,
     $epsimpleModelResultGeneratorPath,
@@ -255,6 +258,7 @@ foreach ($requiredFile in @(
     $epsimpleConstructionCoreTestPath,
     $epsimpleHvacEnumsBaseTestPath,
     $epsimpleHvacThermalSourceTestPath,
+    $epsimpleHvacSupplySystemTestPath,
     $epsimpleIdentifierConventionsTestPath,
     $epsimpleModelCoreTestPath,
     $epsimpleModelResultTestPath,
@@ -760,7 +764,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants metadata/engineering, epsimple numeric constants, construction core, HVAC enum/base and thermal-source, identifier conventions, model core/result, and shape core, dragon construction AirBoundary core, construction core, and to-IDF-object, dragon HVAC photovoltaic/source-system/SupplyGroup core/to-IDF-object, dragon shape geometry/opening-adjacency core and shading-material/surface/Zone to-IDF-object, dragon shape Zone core, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants metadata/engineering, epsimple numeric constants, construction core, HVAC enum/base, thermal-source, and supply-system, identifier conventions, model core/result, and shape core, dragon construction AirBoundary core, construction core, and to-IDF-object, dragon HVAC photovoltaic/source-system/SupplyGroup core/to-IDF-object, dragon shape geometry/opening-adjacency core and shading-material/surface/Zone to-IDF-object, dragon shape Zone core, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -966,6 +970,25 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $epsimpleHvacThermalSourceGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-epsimple-hvac-thermal-source-reference.log') `
     -FailureMessage 'Generating the Python epsimple HVAC thermal-source oracle failed'
+
+$epsimpleHvacSupplySystemOraclePath = Join-Path $outputRoot 'epsimple-hvac-supply-system-oracle.json'
+$epsimpleHvacSupplySystemGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $epsimpleHvacSupplySystemGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $epsimpleHvacSupplySystemOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $epsimpleHvacSupplySystemGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-epsimple-hvac-supply-system-reference.log') `
+    -FailureMessage 'Generating the Python epsimple HVAC supply-system oracle failed'
 
 $epsimpleIdentifierConventionsOraclePath = Join-Path $outputRoot 'epsimple-identifier-conventions-oracle.json'
 $epsimpleIdentifierConventionsGeneratorArguments = @(

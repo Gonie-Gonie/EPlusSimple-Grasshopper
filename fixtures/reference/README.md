@@ -103,6 +103,22 @@ dispatch, or GreenRetrofit-conversion adaptations. All 155 adjacent HVAC
 declarations are pinned as a fail-closed non-target closure and cannot be
 promoted by this fixture.
 
+`python-0.7.0/epsimple-hvac-supply-system-oracle.json` pins eight ordered
+CPython 3.12.7 cases for exactly 52 declarations at inventory indices
+`147,148,151,154-156;209,210,213,216-220,223,226-231,234,237-239;
+271,272,275,278-282;296,297,300,303-309,312,315-318;321-324` in
+`epsimple/core/hvac.py`. It executes `AirHandlingUnit`,
+`ElectricRadiantFloor`, `ElectricRadiator`, `FanCoilUnit`,
+`PackagedAirConditioner`, `RadiantFloor`, `Radiator`, and `SupplySystem`
+constructors, defaults, explicit and mutated state, source-system validation,
+`from_json`, and recursive `to_dragon` behavior, including the packaged-air-
+conditioner dedicated source map and the mutable supply-system type mapper.
+Isolated imports plus a byte-identical relocated source copy prove path
+independence. Nineteen targets are direct equivalents and 33 use reviewed
+sealed aggregate, nullable source, GRM-dispatch, or GreenRetrofit-conversion
+adaptations. All 150 adjacent HVAC declarations are pinned as a fail-closed
+non-target closure and cannot be promoted by this fixture.
+
 `python-0.7.0/epsimple-identifier-conventions-oracle.json` pins 22 ordered
 CPython 3.12.7 cases for the 34 unresolved `AUTOID_PREFIX`, `Directory`,
 `PackageInfo`, and `SpecialTag` symbols in `epsimple/constants.py`. It records
