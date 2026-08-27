@@ -326,6 +326,27 @@ public sealed class ConstructionTests
     }
 
     [Fact]
+    public void ConstructionUValueMatchesPinnedLayerConductanceOperationOrder()
+    {
+        var material = new Material("Witness", 0.03, 1, 100);
+        var construction = new OpaqueConstruction(
+            "Operation-order witness",
+            new[]
+            {
+                new Layer("Thin", material, 0.001),
+                new Layer("Thick", material, 0.01),
+            });
+
+        const long expectedUpstreamBits = 0x4005D1745D1745D2;
+        const long directResistanceBits = 0x4005D1745D1745D1;
+
+        Assert.Equal(expectedUpstreamBits, BitConverter.DoubleToInt64Bits(construction.UValue));
+        Assert.Equal(
+            directResistanceBits,
+            BitConverter.DoubleToInt64Bits(1 / construction.ThermalResistance));
+    }
+
+    [Fact]
     public void ReversedConstructionPreservesPropertiesAndReversesLayerOrder()
     {
         var first = new Layer("First", TestDomainFactory.Concrete(), 0.1);

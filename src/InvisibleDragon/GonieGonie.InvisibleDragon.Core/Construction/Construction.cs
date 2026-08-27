@@ -28,7 +28,7 @@ public sealed class Construction : ISurfaceConstruction, IEquatable<Construction
 
     public double ThermalResistance => Layers.Sum(layer => layer.ThermalResistance);
 
-    public double UValue => 1 / ThermalResistance;
+    public double UValue => 1 / Layers.Sum(layer => 1 / layer.UValue);
 
     public double HeatCapacityJoulesPerSquareMetreKelvin =>
         Layers.Sum(layer => layer.HeatCapacityJoulesPerSquareMetreKelvin);
