@@ -173,6 +173,11 @@
       "sha256": "c4375d858409fae187776ab88ebb6c5a21c76ac7d0e98b38ed2912a419f2bf7f"
     },
     {
+      "path": "epsimple-shape-core-oracle.json",
+      "bytes": 108435,
+      "sha256": "802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5"
+    },
+    {
       "path": "fenestration-construction-database.json",
       "bytes": 54147,
       "sha256": "6fd2b18e1e4d464286c6f3a3a197e3c526e863e34ab392f52818435ae6872344"

@@ -1,0 +1,2614 @@
+{
+  "artifacts": {
+    "bootstrap": {
+      "bytes": 1232,
+      "path": "tools/python-reference/bootstrap_reference.py",
+      "sha256": "sha256:0674dcf1fe966de2a4b873a360ef67be48d74f38ba80adba9c74405fd9be7e0f"
+    },
+    "strict_json_support": {
+      "bytes": 21114,
+      "path": "tools/python-reference/generate_schedule_type_oracle.py",
+      "sha256": "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc"
+    }
+  },
+  "case_sha256": {
+    "epsimple-shape-core.blind-type-values-and-string-semantics": "sha256:6a8ac8400beb6c4122c6fa6a1fc9908674c499f5adb571201a19d5417cc806e6",
+    "epsimple-shape-core.door-validation-json-and-dragon-conversion": "sha256:6b0994673eeaac9a47bdbfde027edebb65c7b4909385bb71b4e9520f621eaa94",
+    "epsimple-shape-core.fenestration-abstract-contract": "sha256:f467490337b86f2d9a5c655a16969520e69f39c02a2b851336c05ed447140126",
+    "epsimple-shape-core.fenestration-id-deepcopy-and-factory-dispatch": "sha256:20f684ccb9cd4ab8ea7479779199f89be239308e8176f3809bd82e80e1cf3140",
+    "epsimple-shape-core.glass-door-window-subtype-and-conversion": "sha256:861a3fd0e8cd792dc7e833a96af580b29bf8cb0fe7d23320f34f67fe4a856269",
+    "epsimple-shape-core.surface-constructor-properties-and-boundary-coupling": "sha256:ceb53ccba0964b9b75a9128fe407c44cf4be7b18cf582d42293a656f5e1c99fe",
+    "epsimple-shape-core.surface-deepcopy-and-flip-semantics": "sha256:4f9dadc6bf62c5c2bfc210a20e5aa9ec5cd18dcc7319baf7dad98bd5ccdd7ea4",
+    "epsimple-shape-core.surface-dragon-geometry-and-opening-partition": "sha256:4cc1736d5fdfebdbaef75032688585c656c8745feddc42bc15c9c232fe2fb337",
+    "epsimple-shape-core.surface-json-defined-open-unknown-constructions": "sha256:4035c1295cc3847d12ed743a40907129032105320affbf26121d3bda8150707b",
+    "epsimple-shape-core.surface-opening-counts-and-unique-constructions": "sha256:4bde8e1a5cf1ee711bf2de689fb8ff41b394ea44f556a788d4fc1950c55fbec2",
+    "epsimple-shape-core.window-constructor-blind-and-construction-validation": "sha256:1eb22483d6cf26f7e591a0a04261894d4276d98c499df475d5ea23322b22f8ca",
+    "epsimple-shape-core.window-json-and-dragon-blind-mapping": "sha256:6c9d395fd92f8c1308f7c3790e4eebae0b5a662c49f9ab4c318ebb4d56867d1e",
+    "epsimple-shape-core.zone-area-infiltration-and-supply-filtering": "sha256:5328b9ee32e0a71252006f2c2285800f8c1d2677dd80c899b3baa92f7b7d66ee",
+    "epsimple-shape-core.zone-constructor-id-height-and-supply-validation": "sha256:1b779e39a56312ee23d131296b4e73cc0f62512ba062d7287ad179fc8f2a4df9",
+    "epsimple-shape-core.zone-json-surface-profile-system-and-ventilation-counts": "sha256:1c6cfbb7efaf0115b9e781d13bbbbc5d9525256045616474972df37ae1763665",
+    "epsimple-shape-core.zone-to-dragon-upstream-failure": "sha256:817afda425049cf2992edaef2c9a9fff00352e80a619c8ee9aed2a96b76e28a1",
+    "epsimple-shape-core.zone-unique-construction-and-material-aggregation": "sha256:e1fe208bc5a494d8d91418e6943a80aaae62c6b19e4c106d0beb3b6e42a1f219"
+  },
+  "cases": [
+    {
+      "code": "B01",
+      "context_symbols": [],
+      "id": "epsimple-shape-core.blind-type-values-and-string-semantics",
+      "python": {
+        "facts": {
+          "construct_by_value": [
+            {
+              "input": "shade",
+              "member": "SHADE"
+            },
+            {
+              "input": "venetian",
+              "member": "VENETIAN"
+            }
+          ],
+          "invalid": {
+            "error": {
+              "message": "'roller' is not a valid BlindType",
+              "type": "ValueError"
+            },
+            "outcome": "raised"
+          },
+          "members": [
+            {
+              "is_str": true,
+              "name": "SHADE",
+              "string": "shade",
+              "value": "shade"
+            },
+            {
+              "is_str": true,
+              "name": "VENETIAN",
+              "string": "venetian",
+              "value": "venetian"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:15b8de85cd4d9332d48c04334d3636b4c865f2b5cb2d64a6ffc2257a00bb398c",
+        "outcome": "observed"
+      },
+      "subfamily": "blind",
+      "target_symbols": [
+        "BlindType",
+        "BlindType.SHADE",
+        "BlindType.VENETIAN",
+        "BlindType.__str__"
+      ]
+    },
+    {
+      "code": "D01",
+      "context_symbols": [
+        "Fenestration"
+      ],
+      "id": "epsimple-shape-core.door-validation-json-and-dragon-conversion",
+      "python": {
+        "facts": {
+          "class_topology": {
+            "is_abstract": false,
+            "is_fenestration_subclass": true
+          },
+          "construction_validation": {
+            "opaque": {
+              "area": {
+                "decimal": "1",
+                "hex": "0x1.0000000000000p+0",
+                "kind": "float"
+              },
+              "blind": null,
+              "construction_id": "FC-D",
+              "id": "DOOR-A",
+              "name": "door",
+              "type": "Door"
+            },
+            "transparent_error": {
+              "error": {
+                "message": "Construction for an <class 'epsimple.core.shape.Door'> should be not transparent",
+                "type": "ValueError"
+              },
+              "outcome": "raised"
+            }
+          },
+          "from_json": {
+            "area": {
+              "decimal": "1.25",
+              "hex": "0x1.4000000000000p+0",
+              "kind": "float"
+            },
+            "blind": null,
+            "construction_id": "FC-D",
+            "id": "DOOR-J",
+            "name": "parsed-door",
+            "type": "Door"
+          },
+          "to_dragon": {
+            "area": {
+              "decimal": "1",
+              "hex": "0x1.0000000000000p+0",
+              "kind": "float"
+            },
+            "construction_name": "FC-D",
+            "construction_type": "NoMassConstruction",
+            "name": "DOOR-A",
+            "type": "Door"
+          }
+        },
+        "facts_sha256": "sha256:31718b07756d58c19a76a2ddd2142050bc5929d2071a31aa52270c5293a2037a",
+        "outcome": "observed"
+      },
+      "subfamily": "fenestration",
+      "target_symbols": [
+        "Door",
+        "Door.construction",
+        "Door.from_json",
+        "Door.to_dragon"
+      ]
+    },
+    {
+      "code": "F01",
+      "context_symbols": [],
+      "id": "epsimple-shape-core.fenestration-abstract-contract",
+      "python": {
+        "facts": {
+          "abstract_methods": [
+            "construction",
+            "to_dragon"
+          ],
+          "construction_descriptor": {
+            "getter_abstract": false,
+            "setter_abstract": true
+          },
+          "direct_instantiation": {
+            "error": {
+              "message": "Can't instantiate abstract class Fenestration without an implementation for abstract methods 'construction', 'to_dragon'",
+              "type": "TypeError"
+            },
+            "outcome": "raised"
+          },
+          "is_abstract": true,
+          "to_dragon_abstract": true
+        },
+        "facts_sha256": "sha256:71fdfc17d5d49293c0e9e9ca8f67e93a17bdd1ece347a7843df6070f47aff15c",
+        "outcome": "observed"
+      },
+      "subfamily": "fenestration",
+      "target_symbols": [
+        "Fenestration",
+        "Fenestration.__init__",
+        "Fenestration.construction",
+        "Fenestration.to_dragon"
+      ]
+    },
+    {
+      "code": "F02",
+      "context_symbols": [
+        "Door",
+        "Window",
+        "GlassDoor"
+      ],
+      "id": "epsimple-shape-core.fenestration-id-deepcopy-and-factory-dispatch",
+      "python": {
+        "facts": {
+          "automatic_id": "FNST-AUTOID<address>",
+          "deepcopies": [
+            {
+              "construction_shared": true,
+              "copy": {
+                "area": {
+                  "decimal": "2",
+                  "hex": "0x1.0000000000000p+1",
+                  "kind": "float"
+                },
+                "blind": null,
+                "construction_id": "FC-G",
+                "id": "$CLONE_OF$:WIN-A",
+                "name": "window_copied",
+                "type": "Window"
+              },
+              "original": {
+                "area": {
+                  "decimal": "2",
+                  "hex": "0x1.0000000000000p+1",
+                  "kind": "float"
+                },
+                "blind": "shade",
+                "construction_id": "FC-G",
+                "id": "WIN-A",
+                "name": "window",
+                "type": "Window"
+              },
+              "same_object": false
+            },
+            {
+              "construction_shared": true,
+              "copy": {
+                "area": {
+                  "decimal": "1",
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float"
+                },
+                "blind": null,
+                "construction_id": "FC-D",
+                "id": "$CLONE_OF$:DOOR-A",
+                "name": "door_copied",
+                "type": "Door"
+              },
+              "original": {
+                "area": {
+                  "decimal": "1",
+                  "hex": "0x1.0000000000000p+0",
+                  "kind": "float"
+                },
+                "blind": null,
+                "construction_id": "FC-D",
+                "id": "DOOR-A",
+                "name": "door",
+                "type": "Door"
+              },
+              "same_object": false
+            },
+            {
+              "construction_shared": true,
+              "copy": {
+                "area": {
+                  "decimal": "1.5",
+                  "hex": "0x1.8000000000000p+0",
+                  "kind": "float"
+                },
+                "blind": null,
+                "construction_id": "FC-G",
+                "id": "$CLONE_OF$:GLASSDOOR-A",
+                "name": "glassdoor_copied",
+                "type": "GlassDoor"
+              },
+              "original": {
+                "area": {
+                  "decimal": "1.5",
+                  "hex": "0x1.8000000000000p+0",
+                  "kind": "float"
+                },
+                "blind": "venetian",
+                "construction_id": "FC-G",
+                "id": "GLASSDOOR-A",
+                "name": "glassdoor",
+                "type": "GlassDoor"
+              },
+              "same_object": false
+            }
+          ],
+          "explicit_id": "WIN-A",
+          "factory_dispatch": [
+            {
+              "area": 1,
+              "blind": "shade",
+              "construction_id": "FC-G",
+              "id": "W-J",
+              "name": "w",
+              "type": "Window"
+            },
+            {
+              "area": 1,
+              "blind": null,
+              "construction_id": "FC-D",
+              "id": "D-J",
+              "name": "d",
+              "type": "Door"
+            },
+            {
+              "area": 1,
+              "blind": "venetian",
+              "construction_id": "FC-G",
+              "id": "G-J",
+              "name": "g",
+              "type": "Window"
+            }
+          ],
+          "factory_unknown_type": {
+            "error": {
+              "message": "'skylight'",
+              "type": "KeyError"
+            },
+            "outcome": "raised"
+          }
+        },
+        "facts_sha256": "sha256:a369c9b79535f2f0e1b244ba2ae07b1531d043634bd02f03a16477de64f315bc",
+        "outcome": "observed"
+      },
+      "subfamily": "fenestration",
+      "target_symbols": [
+        "Fenestration.ID",
+        "Fenestration.__deepcopy__",
+        "Fenestration.from_json"
+      ]
+    },
+    {
+      "code": "G01",
+      "context_symbols": [
+        "Window",
+        "Fenestration"
+      ],
+      "id": "epsimple-shape-core.glass-door-window-subtype-and-conversion",
+      "python": {
+        "facts": {
+          "state": {
+            "area": {
+              "decimal": "1.5",
+              "hex": "0x1.8000000000000p+0",
+              "kind": "float"
+            },
+            "blind": "venetian",
+            "construction_id": "FC-G",
+            "id": "GLASSDOOR-A",
+            "name": "glassdoor",
+            "type": "GlassDoor"
+          },
+          "subclass_of_fenestration": true,
+          "subclass_of_window": true,
+          "to_dragon": {
+            "blind_type": "Blind",
+            "glazing_name": "FC-G",
+            "output_type": "Window"
+          }
+        },
+        "facts_sha256": "sha256:32873aa8ca4eadbae3fb8270ea83b8ab5962bd84b2adb8d17e4ffca8033da1f8",
+        "outcome": "observed"
+      },
+      "subfamily": "fenestration",
+      "target_symbols": [
+        "GlassDoor"
+      ]
+    },
+    {
+      "code": "S01",
+      "context_symbols": [
+        "Zone"
+      ],
+      "id": "epsimple-shape-core.surface-constructor-properties-and-boundary-coupling",
+      "python": {
+        "facts": {
+          "automatic_id": "SURF-AUTOID<address>",
+          "boundary_coupling": {
+            "after_adjacent_assignment": {
+              "adjacent_id": "ZONE-ADJ",
+              "boundary": "zone"
+            },
+            "after_boundary_reset": {
+              "adjacent_is_none": true,
+              "boundary": "adiabatic"
+            },
+            "invalid_adjacent": {
+              "error": {
+                "message": "Invalid type for adjacent_zone: expected Zone, got <class 'str'>",
+                "type": "TypeError"
+              },
+              "outcome": "raised"
+            }
+          },
+          "mutated_state": {
+            "area": 12,
+            "azimuth": null,
+            "construction_id": "$SPECIAL$:CTSF-UNKNOWN",
+            "reflectance": {
+              "decimal": "0.59999999999999998",
+              "hex": "0x1.3333333333333p-1",
+              "kind": "float"
+            },
+            "type": "ceiling"
+          },
+          "states": [
+            {
+              "area": 20,
+              "azimuth": 90,
+              "boundary": "outdoors",
+              "construction_id": "SC-A",
+              "id": "SURF-WALL",
+              "reflectance": null,
+              "type": "wall"
+            },
+            {
+              "area": 40,
+              "azimuth": null,
+              "boundary": "ground",
+              "construction_id": "SC-B",
+              "id": "SURF-FLOOR",
+              "reflectance": null,
+              "type": "floor"
+            },
+            {
+              "area": 40,
+              "azimuth": null,
+              "boundary": "outdoors",
+              "construction_id": "SC-B",
+              "id": "SURF-ROOF",
+              "reflectance": {
+                "decimal": "0.69999999999999996",
+                "hex": "0x1.6666666666666p-1",
+                "kind": "float"
+              },
+              "type": "ceiling"
+            }
+          ],
+          "validation": {
+            "area_zero": {
+              "error": {
+                "message": "Value '0' for area is below the minimum 5e-324.",
+                "type": "ValueError"
+              },
+              "outcome": "raised"
+            },
+            "floor_azimuth": {
+              "error": {
+                "message": "Azimuth property is not required for floor with ground condition",
+                "type": "ValueError"
+              },
+              "outcome": "raised"
+            },
+            "ground_opening": {
+              "error": {
+                "message": "Cannot assign windows or doors to a surface with bounary condition == ground or adiabatic.",
+                "type": "ValueError"
+              },
+              "outcome": "raised"
+            },
+            "invalid_construction": {
+              "error": {
+                "message": "Invalid type for construction: expected (<class 'epsimple.core.construction.SurfaceConstruction'>, <class 'epsimple.core.construction.UnknownConstruction'>, <class 'epsimple.core.construction.OpenConstruction'>), got <class 'object'>",
+                "type": "TypeError"
+              },
+              "outcome": "raised"
+            },
+            "reflectance_zero": {
+              "error": {
+                "message": "Value '0' for reflectance is below the minimum 5e-324.",
+                "type": "ValueError"
+              },
+              "outcome": "raised"
+            },
+            "wall_missing_azimuth": {
+              "error": {
+                "message": "Azimuth property is required for outdoor wall",
+                "type": "ValueError"
+              },
+              "outcome": "raised"
+            }
+          }
+        },
+        "facts_sha256": "sha256:5d8187491d8aeb46ed3bc6aaa94f0fa0d7e4f150b2675970dc94efc174feec6f",
+        "outcome": "observed"
+      },
+      "subfamily": "surface",
+      "target_symbols": [
+        "Surface",
+        "Surface.ID",
+        "Surface.__init__",
+        "Surface.adjacent_zone",
+        "Surface.area",
+        "Surface.azimuth",
+        "Surface.boundary",
+        "Surface.construction",
+        "Surface.reflectance",
+        "Surface.type"
+      ]
+    },
+    {
+      "code": "S02",
+      "context_symbols": [
+        "Surface.type",
+        "Surface.azimuth"
+      ],
+      "id": "epsimple-shape-core.surface-deepcopy-and-flip-semantics",
+      "python": {
+        "facts": {
+          "deepcopies": [
+            {
+              "copy_azimuth": 90,
+              "copy_id": "$CLONE_OF$:SURF-WALL",
+              "copy_name": "wall_copied",
+              "copy_type": "wall",
+              "same_object": false
+            },
+            {
+              "copy_azimuth": null,
+              "copy_id": "$CLONE_OF$:SURF-FLOOR",
+              "copy_name": "floor_copied",
+              "copy_type": "floor",
+              "same_object": false
+            },
+            {
+              "copy_azimuth": null,
+              "copy_id": "$CLONE_OF$:SURF-ROOF",
+              "copy_name": "roof_copied",
+              "copy_type": "ceiling",
+              "same_object": false
+            }
+          ],
+          "flips": [
+            {
+              "azimuth": 270,
+              "id": "$CLONE_OF$:SURF-WALL",
+              "name": "wall_copied",
+              "same_object": false,
+              "type": "wall"
+            },
+            {
+              "azimuth": null,
+              "id": "$CLONE_OF$:SURF-FLOOR",
+              "name": "floor_copied",
+              "same_object": false,
+              "type": "ceiling"
+            },
+            {
+              "azimuth": null,
+              "id": "$CLONE_OF$:SURF-ROOF",
+              "name": "roof_copied",
+              "same_object": false,
+              "type": "floor"
+            }
+          ],
+          "inplace": {
+            "azimuth": 225,
+            "returned_none": true,
+            "type": "wall"
+          }
+        },
+        "facts_sha256": "sha256:144124e7d1b568ae7feb1a2b0440f7be41276ba2b1d588195646744684f1c0b3",
+        "outcome": "observed"
+      },
+      "subfamily": "surface",
+      "target_symbols": [
+        "Surface.__deepcopy__",
+        "Surface.flip"
+      ]
+    },
+    {
+      "code": "S03",
+      "context_symbols": [
+        "Surface.construction",
+        "Fenestration.from_json"
+      ],
+      "id": "epsimple-shape-core.surface-json-defined-open-unknown-constructions",
+      "python": {
+        "facts": {
+          "construction_branches": [
+            {
+              "construction_id": "$SPECIAL$:CTSF-OPEN",
+              "construction_type": "OpenConstruction",
+              "id": "S-open",
+              "label": "open"
+            },
+            {
+              "construction_id": "$SPECIAL$:CTSF-UNKNOWN",
+              "construction_type": "UnknownConstruction",
+              "id": "S-unknown",
+              "label": "unknown"
+            },
+            {
+              "construction_id": "SC-B",
+              "construction_type": "SurfaceConstruction",
+              "id": "S-defined",
+              "label": "defined"
+            }
+          ],
+          "defined_wall": {
+            "azimuth": 180,
+            "fenestrations": [
+              {
+                "area": 2,
+                "blind": "shade",
+                "construction_id": "FC-G",
+                "id": "PW",
+                "name": "parsed-window",
+                "type": "Window"
+              },
+              {
+                "area": 1,
+                "blind": null,
+                "construction_id": "FC-D",
+                "id": "PD",
+                "name": "parsed-door",
+                "type": "Door"
+              }
+            ],
+            "id": "S-WALL-J"
+          }
+        },
+        "facts_sha256": "sha256:00984c4cbe9bf848f7ef23176d6b33fd566caf3894e96a1ac11aa2e2caf2ecba",
+        "outcome": "observed"
+      },
+      "subfamily": "surface",
+      "target_symbols": [
+        "Surface.from_json"
+      ]
+    },
+    {
+      "code": "S04",
+      "context_symbols": [
+        "Door",
+        "Window",
+        "GlassDoor"
+      ],
+      "id": "epsimple-shape-core.surface-opening-counts-and-unique-constructions",
+      "python": {
+        "facts": {
+          "door_count": 1,
+          "fenestration_count": 4,
+          "glassdoor_counts_as_window": true,
+          "unique_construction_keys": [
+            "FC-G",
+            "FC-D"
+          ],
+          "unique_fc_g_selected_name": "glass",
+          "window_count": 3
+        },
+        "facts_sha256": "sha256:54585f1a9f1dce957c3029eaeb64c1a63f070a7a2262a3611b2235272369af78",
+        "outcome": "observed"
+      },
+      "subfamily": "surface",
+      "target_symbols": [
+        "Surface.get_unique_fenestration_constructions",
+        "Surface.num_doors",
+        "Surface.num_windows"
+      ]
+    },
+    {
+      "code": "S05",
+      "context_symbols": [
+        "Window.to_dragon",
+        "Door.to_dragon"
+      ],
+      "id": "epsimple-shape-core.surface-dragon-geometry-and-opening-partition",
+      "python": {
+        "facts": {
+          "area_partition": {
+            "door_areas": [
+              {
+                "decimal": "1",
+                "hex": "0x1.0000000000000p+0",
+                "kind": "float"
+              }
+            ],
+            "window_areas": [
+              {
+                "decimal": "2",
+                "hex": "0x1.0000000000000p+1",
+                "kind": "float"
+              },
+              {
+                "decimal": "1.5",
+                "hex": "0x1.8000000000000p+0",
+                "kind": "float"
+              }
+            ]
+          },
+          "construction_name": "SC-A",
+          "door_names": [
+            "DOOR-A"
+          ],
+          "name": "SURF-WALL",
+          "output_type": "Surface",
+          "surface_boundary": "outdoors",
+          "surface_type": "wall",
+          "vertices": [
+            {
+              "x": {
+                "decimal": "-2.5",
+                "hex": "-0x1.4000000000000p+1",
+                "kind": "float"
+              },
+              "y": {
+                "decimal": "3.0616169978683831e-16",
+                "hex": "0x1.60fafbfd97309p-52",
+                "kind": "float"
+              },
+              "z": 4
+            },
+            {
+              "x": {
+                "decimal": "-2.5",
+                "hex": "-0x1.4000000000000p+1",
+                "kind": "float"
+              },
+              "y": {
+                "decimal": "3.0616169978683831e-16",
+                "hex": "0x1.60fafbfd97309p-52",
+                "kind": "float"
+              },
+              "z": 0
+            },
+            {
+              "x": {
+                "decimal": "2.5",
+                "hex": "0x1.4000000000000p+1",
+                "kind": "float"
+              },
+              "y": {
+                "decimal": "-3.0616169978683831e-16",
+                "hex": "-0x1.60fafbfd97309p-52",
+                "kind": "float"
+              },
+              "z": 0
+            },
+            {
+              "x": {
+                "decimal": "2.5",
+                "hex": "0x1.4000000000000p+1",
+                "kind": "float"
+              },
+              "y": {
+                "decimal": "-3.0616169978683831e-16",
+                "hex": "-0x1.60fafbfd97309p-52",
+                "kind": "float"
+              },
+              "z": 4
+            }
+          ],
+          "window_blind_types": [
+            "Shade",
+            "Blind"
+          ],
+          "window_names": [
+            "WIN-A",
+            "GLASSDOOR-A"
+          ]
+        },
+        "facts_sha256": "sha256:2ec9a3d6fa5dab7e066fd91144afecd64d319543382b84d3c99b658202333415",
+        "outcome": "observed"
+      },
+      "subfamily": "surface",
+      "target_symbols": [
+        "Surface.to_dragon"
+      ]
+    },
+    {
+      "code": "W01",
+      "context_symbols": [
+        "BlindType"
+      ],
+      "id": "epsimple-shape-core.window-constructor-blind-and-construction-validation",
+      "python": {
+        "facts": {
+          "automatic_id": "FNST-AUTOID<address>",
+          "blind_transitions": [
+            "shade",
+            "venetian",
+            null
+          ],
+          "class_topology": {
+            "is_abstract": false,
+            "is_fenestration_subclass": true
+          },
+          "explicit": {
+            "area": {
+              "decimal": "2",
+              "hex": "0x1.0000000000000p+1",
+              "kind": "float"
+            },
+            "blind": "shade",
+            "construction_id": "FC-G",
+            "id": "WIN-A",
+            "name": "window",
+            "type": "Window"
+          },
+          "validation": {
+            "invalid_blind": {
+              "error": {
+                "message": "sequence item 2: expected str instance, NoneType found",
+                "type": "TypeError"
+              },
+              "outcome": "raised"
+            },
+            "opaque_construction": {
+              "error": {
+                "message": "Construction for an <class 'epsimple.core.shape.Window'> should be transparent",
+                "type": "ValueError"
+              },
+              "outcome": "raised"
+            }
+          }
+        },
+        "facts_sha256": "sha256:e8d9eae97ecb3028407c3e44f341db74fb1f6aafef4d3ae7e6ee4fb87436c620",
+        "outcome": "observed"
+      },
+      "subfamily": "fenestration",
+      "target_symbols": [
+        "Window",
+        "Window.__init__",
+        "Window.blind",
+        "Window.construction"
+      ]
+    },
+    {
+      "code": "W02",
+      "context_symbols": [
+        "BlindType.SHADE",
+        "BlindType.VENETIAN"
+      ],
+      "id": "epsimple-shape-core.window-json-and-dragon-blind-mapping",
+      "python": {
+        "facts": {
+          "from_json": {
+            "area": {
+              "decimal": "1.75",
+              "hex": "0x1.c000000000000p+0",
+              "kind": "float"
+            },
+            "blind": "venetian",
+            "construction_id": "FC-G",
+            "id": "W-J",
+            "name": "parsed",
+            "type": "Window"
+          },
+          "to_dragon_mappings": [
+            {
+              "input": null,
+              "output_blind_type": null,
+              "output_glazing_name": "FC-G",
+              "output_name": "W-MAP-0"
+            },
+            {
+              "input": "shade",
+              "output_blind_type": "Shade",
+              "output_glazing_name": "FC-G",
+              "output_name": "W-MAP-1"
+            },
+            {
+              "input": "venetian",
+              "output_blind_type": "Blind",
+              "output_glazing_name": "FC-G",
+              "output_name": "W-MAP-2"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:35de73b349ee6459875511cc87b8bda256ec43faaec8e75565be856efa27704a",
+        "outcome": "observed"
+      },
+      "subfamily": "fenestration",
+      "target_symbols": [
+        "Window.from_json",
+        "Window.to_dragon"
+      ]
+    },
+    {
+      "code": "Z01",
+      "context_symbols": [],
+      "id": "epsimple-shape-core.zone-constructor-id-height-and-supply-validation",
+      "python": {
+        "facts": {
+          "automatic_id": "ZONE-AUTOID<address>",
+          "defensive_supply_copy": [
+            "SYS-HEAT"
+          ],
+          "explicit": {
+            "height": 3,
+            "id": "ZONE-A",
+            "supply_ids": [
+              "SYS-HEAT",
+              "SYS-COOL",
+              "SYS-BOTH"
+            ]
+          },
+          "validation": {
+            "duplicate_id": {
+              "error": {
+                "message": "Duplicated supply-system ID in one zone.",
+                "type": "ValueError"
+              },
+              "outcome": "raised"
+            },
+            "height_zero": {
+              "error": {
+                "message": "Value '0' for height is below the minimum 5e-324.",
+                "type": "ValueError"
+              },
+              "outcome": "raised"
+            },
+            "non_list": {
+              "error": {
+                "message": "supply_systems must be a list.",
+                "type": "TypeError"
+              },
+              "outcome": "raised"
+            },
+            "non_supply_item": {
+              "error": {
+                "message": "All items in supply_systems must be SupplySystem instances.",
+                "type": "TypeError"
+              },
+              "outcome": "raised"
+            },
+            "two_radiant_floors": {
+              "error": {
+                "message": "Cannot apply two or more radiant floor systems to one zone.",
+                "type": "ValueError"
+              },
+              "outcome": "raised"
+            }
+          }
+        },
+        "facts_sha256": "sha256:56416046eb966ea8ef36472c1afd7a8e91ca13dbfe3802937b067e6542f1e8d5",
+        "outcome": "observed"
+      },
+      "subfamily": "zone",
+      "target_symbols": [
+        "Zone",
+        "Zone.ID",
+        "Zone.__init__",
+        "Zone.height",
+        "Zone.supply_systems"
+      ]
+    },
+    {
+      "code": "Z02",
+      "context_symbols": [
+        "Surface.num_windows"
+      ],
+      "id": "epsimple-shape-core.zone-area-infiltration-and-supply-filtering",
+      "python": {
+        "facts": {
+          "area": 40,
+          "cooling_ids": [
+            "SYS-COOL",
+            "SYS-BOTH"
+          ],
+          "heating_ids": [
+            "SYS-HEAT",
+            "SYS-BOTH"
+          ],
+          "infiltration_cases": [
+            {
+              "id": "Z-NONE",
+              "value": 0
+            },
+            {
+              "id": "Z-DOOR",
+              "value": 0
+            },
+            {
+              "id": "Z-GLASS",
+              "value": {
+                "decimal": "1.5",
+                "hex": "0x1.8000000000000p+0",
+                "kind": "float"
+              }
+            },
+            {
+              "id": "ZONE-A",
+              "value": {
+                "decimal": "1.5",
+                "hex": "0x1.8000000000000p+0",
+                "kind": "float"
+              }
+            }
+          ]
+        },
+        "facts_sha256": "sha256:b6792937ff3ff7fe7267f5fa5718f486870213b03363346246a5059a6d36d8b4",
+        "outcome": "observed"
+      },
+      "subfamily": "zone",
+      "target_symbols": [
+        "Zone.area",
+        "Zone.cooling_supply_systems",
+        "Zone.heating_supply_systems",
+        "Zone.infiltration"
+      ]
+    },
+    {
+      "code": "Z03",
+      "context_symbols": [
+        "Surface.from_json"
+      ],
+      "id": "epsimple-shape-core.zone-json-surface-profile-system-and-ventilation-counts",
+      "python": {
+        "facts": {
+          "id": "ZONE-JSON",
+          "profile_identity_preserved": true,
+          "supply_ids": [
+            "SYS-HEAT"
+          ],
+          "surface_ids": [
+            "SURF-JSON"
+          ],
+          "ventilation_alias_identity": true,
+          "ventilation_ids": [
+            "VENT-A",
+            "VENT-A",
+            "VENT-A"
+          ]
+        },
+        "facts_sha256": "sha256:6e157cb3d0f65744730c4b504762681877f2b3e415fee1efb40e0f9aa3102f23",
+        "outcome": "observed"
+      },
+      "subfamily": "zone",
+      "target_symbols": [
+        "Zone.from_json"
+      ]
+    },
+    {
+      "code": "Z04",
+      "context_symbols": [
+        "Surface.get_unique_fenestration_constructions"
+      ],
+      "id": "epsimple-shape-core.zone-unique-construction-and-material-aggregation",
+      "python": {
+        "facts": {
+          "fenestration_constructions": [
+            {
+              "id": "FC-G",
+              "name": "glass"
+            },
+            {
+              "id": "FC-D",
+              "name": "door"
+            }
+          ],
+          "materials": [
+            {
+              "id": "MAT-B",
+              "name": "insulation"
+            },
+            {
+              "id": "MAT-A",
+              "name": "brick"
+            }
+          ],
+          "surface_constructions": [
+            {
+              "id": "SC-B",
+              "name": "floor"
+            },
+            {
+              "id": "SC-A",
+              "name": "wall"
+            }
+          ]
+        },
+        "facts_sha256": "sha256:5d888077c59733555f0eca8413bd45a7732f608f233b543791b762c0b957b731",
+        "outcome": "observed"
+      },
+      "subfamily": "zone",
+      "target_symbols": [
+        "Zone.get_unique_fenestration_constructions",
+        "Zone.get_unique_materials",
+        "Zone.get_unique_surface_constructions"
+      ]
+    },
+    {
+      "code": "Z05",
+      "context_symbols": [
+        "Zone"
+      ],
+      "id": "epsimple-shape-core.zone-to-dragon-upstream-failure",
+      "python": {
+        "facts": {
+          "to_dragon": {
+            "error": {
+              "message": "이거 쓰지 마세요",
+              "type": "NotImplementedError"
+            },
+            "outcome": "raised"
+          }
+        },
+        "facts_sha256": "sha256:493d789c6bc273ada4b17f0a776084c450311cf7a9ef5fd0bc54eb3d5cb1a778",
+        "outcome": "observed"
+      },
+      "subfamily": "zone",
+      "target_symbols": [
+        "Zone.to_dragon"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:1b6be41823b3a165d1e5c923f46278a44ae8ff68ccef1a0edd08d72ab637398e",
+  "consumer_contract": {
+    "adaptations": {
+      "BlindType.__str__": "grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+      "Door": "unified-immutable-fenestration-with-door-discriminator-8c468e24",
+      "Fenestration": "sealed-discriminated-native-fenestration-rather-than-abc-43d44ea1",
+      "Fenestration.__deepcopy__": "immutable-native-fenestration-explicit-reconstruction-a0dbc411",
+      "Fenestration.__init__": "deterministic-native-id-and-discriminated-constructor-1b22b2f1",
+      "Fenestration.construction": "immutable-resolved-native-construction-reference-0b0cbf2f",
+      "Fenestration.to_dragon": "aggregate-native-converter-rather-than-abstract-instance-method-ede823e2",
+      "GlassDoor": "unified-immutable-fenestration-with-glassdoor-discriminator-1981a404",
+      "Surface.__deepcopy__": "immutable-native-surface-explicit-reconstruction-0d951ae6",
+      "Surface.__init__": "deterministic-native-id-and-immutable-constructor-bd742aa0",
+      "Surface.adjacent_zone": "native-adjacent-zone-id-rather-than-object-reference-cf314ac6",
+      "Surface.flip": "pure-deterministic-native-flip-without-inplace-mutation-8e01b8fa",
+      "Surface.get_unique_fenestration_constructions": "model-catalog-native-aggregation-72d9807c",
+      "Window": "unified-immutable-fenestration-with-window-discriminator-00f305af",
+      "Window.__init__": "unified-native-fenestration-constructor-e8fad25a",
+      "Zone.__init__": "deterministic-native-id-and-immutable-zone-constructor-a5f3cee1",
+      "Zone.get_unique_fenestration_constructions": "model-level-native-fenestration-catalog-d8077110",
+      "Zone.get_unique_materials": "model-level-native-material-catalog-ecb20cb3",
+      "Zone.get_unique_surface_constructions": "model-level-native-surface-catalog-486d73d3",
+      "Zone.to_dragon": "native-greenretrofit-converter-implements-upstream-missing-operation-da336048"
+    },
+    "assertion_ids": {
+      "BlindType": "epsimple-shape-core-405-6008dd91",
+      "BlindType.SHADE": "epsimple-shape-core-406-bb03051d",
+      "BlindType.VENETIAN": "epsimple-shape-core-407-09c92f4a",
+      "BlindType.__str__": "epsimple-shape-core-408-f40e4929",
+      "Door": "epsimple-shape-core-409-8c468e24",
+      "Door.construction": "epsimple-shape-core-410-2ca0072c",
+      "Door.from_json": "epsimple-shape-core-411-26b0f9bb",
+      "Door.to_dragon": "epsimple-shape-core-412-eb81bd06",
+      "Fenestration": "epsimple-shape-core-413-43d44ea1",
+      "Fenestration.ID": "epsimple-shape-core-414-246156d9",
+      "Fenestration.__deepcopy__": "epsimple-shape-core-415-a0dbc411",
+      "Fenestration.__init__": "epsimple-shape-core-417-1b22b2f1",
+      "Fenestration.construction": "epsimple-shape-core-418-0b0cbf2f",
+      "Fenestration.from_json": "epsimple-shape-core-419-2e553f68",
+      "Fenestration.to_dragon": "epsimple-shape-core-420-ede823e2",
+      "GlassDoor": "epsimple-shape-core-421-1981a404",
+      "Surface": "epsimple-shape-core-422-996a596c",
+      "Surface.ID": "epsimple-shape-core-423-246156d9",
+      "Surface.__deepcopy__": "epsimple-shape-core-424-0d951ae6",
+      "Surface.__init__": "epsimple-shape-core-426-bd742aa0",
+      "Surface.adjacent_zone": "epsimple-shape-core-429-cf314ac6",
+      "Surface.area": "epsimple-shape-core-430-aa93b96b",
+      "Surface.azimuth": "epsimple-shape-core-431-98e03520",
+      "Surface.boundary": "epsimple-shape-core-432-3680772f",
+      "Surface.construction": "epsimple-shape-core-433-9aed8e71",
+      "Surface.flip": "epsimple-shape-core-434-8e01b8fa",
+      "Surface.from_json": "epsimple-shape-core-435-3da5f695",
+      "Surface.get_unique_fenestration_constructions": "epsimple-shape-core-436-72d9807c",
+      "Surface.num_doors": "epsimple-shape-core-437-42d0195c",
+      "Surface.num_windows": "epsimple-shape-core-438-4ec64b53",
+      "Surface.reflectance": "epsimple-shape-core-439-3a69bea0",
+      "Surface.to_dragon": "epsimple-shape-core-440-26abf64e",
+      "Surface.type": "epsimple-shape-core-441-5afcce2a",
+      "Window": "epsimple-shape-core-442-00f305af",
+      "Window.__init__": "epsimple-shape-core-443-e8fad25a",
+      "Window.blind": "epsimple-shape-core-444-92ce583d",
+      "Window.construction": "epsimple-shape-core-445-4f40b518",
+      "Window.from_json": "epsimple-shape-core-446-93259bed",
+      "Window.to_dragon": "epsimple-shape-core-447-f032bad2",
+      "Zone": "epsimple-shape-core-448-dda48f66",
+      "Zone.ID": "epsimple-shape-core-449-246156d9",
+      "Zone.__init__": "epsimple-shape-core-451-a5f3cee1",
+      "Zone.area": "epsimple-shape-core-452-51ef4a1e",
+      "Zone.cooling_supply_systems": "epsimple-shape-core-453-e0f58a2e",
+      "Zone.from_json": "epsimple-shape-core-454-1254d46e",
+      "Zone.get_unique_fenestration_constructions": "epsimple-shape-core-455-d8077110",
+      "Zone.get_unique_materials": "epsimple-shape-core-456-ecb20cb3",
+      "Zone.get_unique_surface_constructions": "epsimple-shape-core-457-486d73d3",
+      "Zone.heating_supply_systems": "epsimple-shape-core-458-c68b3d65",
+      "Zone.height": "epsimple-shape-core-459-349a48c8",
+      "Zone.infiltration": "epsimple-shape-core-460-3fffc5a8",
+      "Zone.supply_systems": "epsimple-shape-core-461-3eaf6c25",
+      "Zone.to_dragon": "epsimple-shape-core-462-da336048"
+    },
+    "case_count": 17,
+    "case_ids": [
+      "epsimple-shape-core.blind-type-values-and-string-semantics",
+      "epsimple-shape-core.door-validation-json-and-dragon-conversion",
+      "epsimple-shape-core.fenestration-abstract-contract",
+      "epsimple-shape-core.fenestration-id-deepcopy-and-factory-dispatch",
+      "epsimple-shape-core.glass-door-window-subtype-and-conversion",
+      "epsimple-shape-core.surface-constructor-properties-and-boundary-coupling",
+      "epsimple-shape-core.surface-deepcopy-and-flip-semantics",
+      "epsimple-shape-core.surface-json-defined-open-unknown-constructions",
+      "epsimple-shape-core.surface-opening-counts-and-unique-constructions",
+      "epsimple-shape-core.surface-dragon-geometry-and-opening-partition",
+      "epsimple-shape-core.window-constructor-blind-and-construction-validation",
+      "epsimple-shape-core.window-json-and-dragon-blind-mapping",
+      "epsimple-shape-core.zone-constructor-id-height-and-supply-validation",
+      "epsimple-shape-core.zone-area-infiltration-and-supply-filtering",
+      "epsimple-shape-core.zone-json-surface-profile-system-and-ventilation-counts",
+      "epsimple-shape-core.zone-unique-construction-and-material-aggregation",
+      "epsimple-shape-core.zone-to-dragon-upstream-failure"
+    ],
+    "classification_counts": {
+      "equivalent": 33,
+      "exception": 20
+    },
+    "classifications": {
+      "BlindType": "equivalent",
+      "BlindType.SHADE": "equivalent",
+      "BlindType.VENETIAN": "equivalent",
+      "BlindType.__str__": "exception",
+      "Door": "exception",
+      "Door.construction": "equivalent",
+      "Door.from_json": "equivalent",
+      "Door.to_dragon": "equivalent",
+      "Fenestration": "exception",
+      "Fenestration.ID": "equivalent",
+      "Fenestration.__deepcopy__": "exception",
+      "Fenestration.__init__": "exception",
+      "Fenestration.construction": "exception",
+      "Fenestration.from_json": "equivalent",
+      "Fenestration.to_dragon": "exception",
+      "GlassDoor": "exception",
+      "Surface": "equivalent",
+      "Surface.ID": "equivalent",
+      "Surface.__deepcopy__": "exception",
+      "Surface.__init__": "exception",
+      "Surface.adjacent_zone": "exception",
+      "Surface.area": "equivalent",
+      "Surface.azimuth": "equivalent",
+      "Surface.boundary": "equivalent",
+      "Surface.construction": "equivalent",
+      "Surface.flip": "exception",
+      "Surface.from_json": "equivalent",
+      "Surface.get_unique_fenestration_constructions": "exception",
+      "Surface.num_doors": "equivalent",
+      "Surface.num_windows": "equivalent",
+      "Surface.reflectance": "equivalent",
+      "Surface.to_dragon": "equivalent",
+      "Surface.type": "equivalent",
+      "Window": "exception",
+      "Window.__init__": "exception",
+      "Window.blind": "equivalent",
+      "Window.construction": "equivalent",
+      "Window.from_json": "equivalent",
+      "Window.to_dragon": "equivalent",
+      "Zone": "equivalent",
+      "Zone.ID": "equivalent",
+      "Zone.__init__": "exception",
+      "Zone.area": "equivalent",
+      "Zone.cooling_supply_systems": "equivalent",
+      "Zone.from_json": "equivalent",
+      "Zone.get_unique_fenestration_constructions": "exception",
+      "Zone.get_unique_materials": "exception",
+      "Zone.get_unique_surface_constructions": "exception",
+      "Zone.heating_supply_systems": "equivalent",
+      "Zone.height": "equivalent",
+      "Zone.infiltration": "equivalent",
+      "Zone.supply_systems": "equivalent",
+      "Zone.to_dragon": "exception"
+    },
+    "closure": {
+      "excluded_indices": [
+        416,
+        425,
+        427,
+        428,
+        450
+      ],
+      "excluded_symbols": [
+        "Fenestration.__hash__",
+        "Surface.__hash__",
+        "Surface.__repr__",
+        "Surface.__str__",
+        "Zone.__hash__"
+      ],
+      "target_count": 53,
+      "target_indices": [
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        426,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462
+      ]
+    },
+    "native_routes": {
+      "BlindType": "GonieGonie.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "BlindType.SHADE": "GonieGonie.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "BlindType.VENETIAN": "GonieGonie.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "BlindType.__str__": "GonieGonie.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Door": "GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType",
+      "Door.construction": "GonieGonie.SimpleDragon.Fenestration.Construction",
+      "Door.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?)",
+      "Door.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "Fenestration": "GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType",
+      "Fenestration.ID": "GonieGonie.SimpleDragon.Fenestration.Id",
+      "Fenestration.__deepcopy__": "GonieGonie.SimpleDragon.Fenestration constructor",
+      "Fenestration.__init__": "GonieGonie.SimpleDragon.Fenestration constructor",
+      "Fenestration.construction": "GonieGonie.SimpleDragon.Fenestration.Construction",
+      "Fenestration.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?)",
+      "Fenestration.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "GlassDoor": "GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType",
+      "Surface": "GonieGonie.SimpleDragon.Surface",
+      "Surface.ID": "GonieGonie.SimpleDragon.Surface.Id",
+      "Surface.__deepcopy__": "GonieGonie.SimpleDragon.Surface constructor",
+      "Surface.__init__": "GonieGonie.SimpleDragon.Surface constructor",
+      "Surface.adjacent_zone": "GonieGonie.SimpleDragon.Surface.AdjacentZoneId",
+      "Surface.area": "GonieGonie.SimpleDragon.Surface.Area",
+      "Surface.azimuth": "GonieGonie.SimpleDragon.Surface.Azimuth",
+      "Surface.boundary": "GonieGonie.SimpleDragon.Surface.BoundaryCondition",
+      "Surface.construction": "GonieGonie.SimpleDragon.Surface.Construction",
+      "Surface.flip": "GonieGonie.SimpleDragon.Surface.Flip()",
+      "Surface.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?)",
+      "Surface.get_unique_fenestration_constructions": "GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions",
+      "Surface.num_doors": "GonieGonie.SimpleDragon.Surface.DoorCount",
+      "Surface.num_windows": "GonieGonie.SimpleDragon.Surface.WindowCount",
+      "Surface.reflectance": "GonieGonie.SimpleDragon.Surface.CoolRoofReflectance",
+      "Surface.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "Surface.type": "GonieGonie.SimpleDragon.Surface.Type",
+      "Window": "GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType",
+      "Window.__init__": "GonieGonie.SimpleDragon.Fenestration constructor",
+      "Window.blind": "GonieGonie.SimpleDragon.Fenestration.Blind",
+      "Window.construction": "GonieGonie.SimpleDragon.Fenestration.Construction",
+      "Window.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?)",
+      "Window.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "Zone": "GonieGonie.SimpleDragon.Zone",
+      "Zone.ID": "GonieGonie.SimpleDragon.Zone.Id",
+      "Zone.__init__": "GonieGonie.SimpleDragon.Zone constructor",
+      "Zone.area": "GonieGonie.SimpleDragon.Zone.Area",
+      "Zone.cooling_supply_systems": "GonieGonie.SimpleDragon.Zone.CoolingSupplySystems",
+      "Zone.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?)",
+      "Zone.get_unique_fenestration_constructions": "GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions",
+      "Zone.get_unique_materials": "GonieGonie.SimpleDragon.GreenRetrofitModel.Materials",
+      "Zone.get_unique_surface_constructions": "GonieGonie.SimpleDragon.GreenRetrofitModel.SurfaceConstructions",
+      "Zone.heating_supply_systems": "GonieGonie.SimpleDragon.Zone.HeatingSupplySystems",
+      "Zone.height": "GonieGonie.SimpleDragon.Zone.Height",
+      "Zone.infiltration": "GonieGonie.SimpleDragon.Zone.Infiltration",
+      "Zone.supply_systems": "GonieGonie.SimpleDragon.Zone.SupplySystems",
+      "Zone.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+    },
+    "target_symbols": [
+      "BlindType",
+      "BlindType.SHADE",
+      "BlindType.VENETIAN",
+      "BlindType.__str__",
+      "Door",
+      "Door.construction",
+      "Door.from_json",
+      "Door.to_dragon",
+      "Fenestration",
+      "Fenestration.ID",
+      "Fenestration.__deepcopy__",
+      "Fenestration.__init__",
+      "Fenestration.construction",
+      "Fenestration.from_json",
+      "Fenestration.to_dragon",
+      "GlassDoor",
+      "Surface",
+      "Surface.ID",
+      "Surface.__deepcopy__",
+      "Surface.__init__",
+      "Surface.adjacent_zone",
+      "Surface.area",
+      "Surface.azimuth",
+      "Surface.boundary",
+      "Surface.construction",
+      "Surface.flip",
+      "Surface.from_json",
+      "Surface.get_unique_fenestration_constructions",
+      "Surface.num_doors",
+      "Surface.num_windows",
+      "Surface.reflectance",
+      "Surface.to_dragon",
+      "Surface.type",
+      "Window",
+      "Window.__init__",
+      "Window.blind",
+      "Window.construction",
+      "Window.from_json",
+      "Window.to_dragon",
+      "Zone",
+      "Zone.ID",
+      "Zone.__init__",
+      "Zone.area",
+      "Zone.cooling_supply_systems",
+      "Zone.from_json",
+      "Zone.get_unique_fenestration_constructions",
+      "Zone.get_unique_materials",
+      "Zone.get_unique_surface_constructions",
+      "Zone.heating_supply_systems",
+      "Zone.height",
+      "Zone.infiltration",
+      "Zone.supply_systems",
+      "Zone.to_dragon"
+    ]
+  },
+  "excluded_receipts": [
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 416,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "Fenestration.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 425,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "Surface.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    },
+    {
+      "body_hash": "sha256:ae4da1fdb5ae7bc9cd5a1e62a12e82b4132ef7a18c488be8cb59dd265f49b275",
+      "inventory_index": 427,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "Surface.__repr__",
+      "symbol_hash": "sha256:ac4399ab740bd268e10398e830e1f0a0ff8fe90879a6d7c1cfe83f2603adf1a0"
+    },
+    {
+      "body_hash": "sha256:ce8af54717fedd177c60664df66a6a1cee1575fdb0a9c9674d1dd396d1d2ac99",
+      "inventory_index": 428,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "Surface.__str__",
+      "symbol_hash": "sha256:f4142b9674e036ca2a501635b4b0ed750839c7509b0aeb9faa339a2ba57bbaac"
+    },
+    {
+      "body_hash": "sha256:077c262390b3e180d496642015ca2d5a0eb48d1a12f9724452917ef01d1fc1b5",
+      "inventory_index": 450,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "Zone.__hash__",
+      "symbol_hash": "sha256:60007ac6f6ff93642af22c6affa7e2d91ac81564499568cf87b6de5f9e73a0c9"
+    }
+  ],
+  "fact_sha256": {
+    "epsimple-shape-core.blind-type-values-and-string-semantics": "sha256:15b8de85cd4d9332d48c04334d3636b4c865f2b5cb2d64a6ffc2257a00bb398c",
+    "epsimple-shape-core.door-validation-json-and-dragon-conversion": "sha256:31718b07756d58c19a76a2ddd2142050bc5929d2071a31aa52270c5293a2037a",
+    "epsimple-shape-core.fenestration-abstract-contract": "sha256:71fdfc17d5d49293c0e9e9ca8f67e93a17bdd1ece347a7843df6070f47aff15c",
+    "epsimple-shape-core.fenestration-id-deepcopy-and-factory-dispatch": "sha256:a369c9b79535f2f0e1b244ba2ae07b1531d043634bd02f03a16477de64f315bc",
+    "epsimple-shape-core.glass-door-window-subtype-and-conversion": "sha256:32873aa8ca4eadbae3fb8270ea83b8ab5962bd84b2adb8d17e4ffca8033da1f8",
+    "epsimple-shape-core.surface-constructor-properties-and-boundary-coupling": "sha256:5d8187491d8aeb46ed3bc6aaa94f0fa0d7e4f150b2675970dc94efc174feec6f",
+    "epsimple-shape-core.surface-deepcopy-and-flip-semantics": "sha256:144124e7d1b568ae7feb1a2b0440f7be41276ba2b1d588195646744684f1c0b3",
+    "epsimple-shape-core.surface-dragon-geometry-and-opening-partition": "sha256:2ec9a3d6fa5dab7e066fd91144afecd64d319543382b84d3c99b658202333415",
+    "epsimple-shape-core.surface-json-defined-open-unknown-constructions": "sha256:00984c4cbe9bf848f7ef23176d6b33fd566caf3894e96a1ac11aa2e2caf2ecba",
+    "epsimple-shape-core.surface-opening-counts-and-unique-constructions": "sha256:54585f1a9f1dce957c3029eaeb64c1a63f070a7a2262a3611b2235272369af78",
+    "epsimple-shape-core.window-constructor-blind-and-construction-validation": "sha256:e8d9eae97ecb3028407c3e44f341db74fb1f6aafef4d3ae7e6ee4fb87436c620",
+    "epsimple-shape-core.window-json-and-dragon-blind-mapping": "sha256:35de73b349ee6459875511cc87b8bda256ec43faaec8e75565be856efa27704a",
+    "epsimple-shape-core.zone-area-infiltration-and-supply-filtering": "sha256:b6792937ff3ff7fe7267f5fa5718f486870213b03363346246a5059a6d36d8b4",
+    "epsimple-shape-core.zone-constructor-id-height-and-supply-validation": "sha256:56416046eb966ea8ef36472c1afd7a8e91ca13dbfe3802937b067e6542f1e8d5",
+    "epsimple-shape-core.zone-json-surface-profile-system-and-ventilation-counts": "sha256:6e157cb3d0f65744730c4b504762681877f2b3e415fee1efb40e0f9aa3102f23",
+    "epsimple-shape-core.zone-to-dragon-upstream-failure": "sha256:493d789c6bc273ada4b17f0a776084c450311cf7a9ef5fd0bc54eb3d5cb1a778",
+    "epsimple-shape-core.zone-unique-construction-and-material-aggregation": "sha256:5d888077c59733555f0eca8413bd45a7732f608f233b543791b762c0b957b731"
+  },
+  "runtime": {
+    "byteorder": "little",
+    "dependencies": {
+      "eppy": "0.5.63",
+      "numpy": "2.3.1",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tzdata": "2024.2"
+    },
+    "implementation": "cpython",
+    "platform": "win32",
+    "pointer_width_bits": 64,
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.epsimple-shape-core.v1",
+  "symbols": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:7c936bf47fa33e14a11d32af80d5846a5edd4b6a7b98595ac8b02c0d649505b4",
+      "symbol": "BlindType",
+      "symbol_hash": "sha256:6008dd91f9eff70327d99f32f7479d55adb49e8da0024588ae03c736c4baea91"
+    },
+    {
+      "body_hash": "sha256:bbaf7ba6b57b40e986042e67e90a25a303cd17bbb8874f247e5c311c49b97191",
+      "kind": "constant",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:ea9207a3e5674c0d86f8393d1be124e09a20a8c7b4001a005a2ad2b3f40db3ea",
+      "symbol": "BlindType.SHADE",
+      "symbol_hash": "sha256:bb03051d2c3d0af309e74730cf6b9f0487ef3bc734e3bb5d765e89c85f72792b"
+    },
+    {
+      "body_hash": "sha256:8a2e1f763aec7189604f44eb93bce09b6ae606879bfcd4151c61513b3471b5c5",
+      "kind": "constant",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:181c8265ab9a22fe999084f0f078ed472c7e92b389b2611e6a6205729c32c06c",
+      "symbol": "BlindType.VENETIAN",
+      "symbol_hash": "sha256:09c92f4a396529bc46f123f00266199afe7010a8552471ed2d8df7084dc36f8a"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "BlindType.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:339502787243fef35ca9d0bb8ff3feb910138667cb25226fb59c615cffbb2ec9",
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:00749ab91c0d0cf15799cdd6c59b87bf25e70ab532e4110e2da2c1d696bddefb",
+      "symbol": "Door",
+      "symbol_hash": "sha256:8c468e24f71eee70841b7374cd605a58ff596c9534f687cf96d848a11456e840"
+    },
+    {
+      "body_hash": "sha256:b93d3d696560666e1e6a4d593c27bda42749aa0e01aed49d85cba41e0bb37043",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:d80d057647d52c5578429e231d824a4cdc985b68c90d0c5b9c3625b49411f2ea",
+      "symbol": "Door.construction",
+      "symbol_hash": "sha256:2ca0072cbca39b5232786daac7992b2aed9295ce141409da2a865f020b906755"
+    },
+    {
+      "body_hash": "sha256:e1a1ba57001d92c84b1824a6c1c3d9f65db5e467507ee08723fe7c25bc9c1b7c",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:6fca3e23123f8dddfcf7ea184ce576891ebb9d12e19c43de10457569fa17595d",
+      "symbol": "Door.from_json",
+      "symbol_hash": "sha256:26b0f9bbc8e02311b2a024c1c1d4c3fed65546b19a58fe9e74af58c3785e69be"
+    },
+    {
+      "body_hash": "sha256:859bc816741ac38f5a1385c029d2ed7cd89936a09cee915e91c14cd1dda9e0cf",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:4e76bcfe0f3a64e5b0c5a022a6a2bc3a9f3a19691e27f4065eb5173bbc1afd5e",
+      "symbol": "Door.to_dragon",
+      "symbol_hash": "sha256:eb81bd06ff88de53694c0aebcc92a0d4fc50041396fb61450b88e7bddafa67b9"
+    },
+    {
+      "body_hash": "sha256:901584519ee598b29f87896565b722923a8003c2619884b699085437510f9804",
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:8979b9a18ccf61b3e3ae34a9b20a7e410a77f78b540c499937eb725db12e1ef1",
+      "symbol": "Fenestration",
+      "symbol_hash": "sha256:43d44ea17615d54a46086dccdae3b68d756ba66dc51043315394c398ce317506"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Fenestration.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:2b73db776820d10c2eaa1cc83b768180adefa3400451b51127c71b6890e9ba02",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a48ecac45468aac6505f32ed9b2be5fa78f0cd63c58f21da187af4da07e03e88",
+      "symbol": "Fenestration.__deepcopy__",
+      "symbol_hash": "sha256:a0dbc41130a29593da15c131fbb08fbc1213a8057821d7007fded50d504805f7"
+    },
+    {
+      "body_hash": "sha256:ab2fba7eb8e599e702c0b346285679bd3c4cb276c25c79d6ccc2ffec291b0760",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:e479f562e036c4b7b5f2a53944a64d565a4392e3fab0534111dd929f7c307245",
+      "symbol": "Fenestration.__init__",
+      "symbol_hash": "sha256:1b22b2f18a540de4aa832db02439453eedced6e7d4b9215568fd8df2e40e520a"
+    },
+    {
+      "body_hash": "sha256:82cbabbb09fc7571468b93d06760a61d29cc48a8b6fe6eabd279d72b10ec3abe",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:19fedb248c7a2621006606ea9422a401bea49ad05b501c11914d239936606c51",
+      "symbol": "Fenestration.construction",
+      "symbol_hash": "sha256:0b0cbf2f9f3cdd34c003b74bf9eb18deb9cadf62ebd427dc7c3ccf11030a37eb"
+    },
+    {
+      "body_hash": "sha256:e428a6a2cb42ddf94a8f6759c5da0b8e7a44d639b0e8b80e0328ba40ab41754b",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:b322db2ef4ecb5b28d9307e84777a095180b79c830ff6983b4dde4e9b90bbe2c",
+      "symbol": "Fenestration.from_json",
+      "symbol_hash": "sha256:2e553f683898606ece889675669b292f3e8273ada5d5cd7a882d6fe159a1d0ef"
+    },
+    {
+      "body_hash": "sha256:d534464a3d86dfeb1f92e18bf2296fb90a71ce3810ab72675ff520fac00f4ce1",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:21df5ce4e76b0452dbd123ca704c174cadc57b6cae6a732ed745ba1ff55e5855",
+      "symbol": "Fenestration.to_dragon",
+      "symbol_hash": "sha256:ede823e2a01313e006bfae12e1fcd912f22dd7eb65cb7acb424aa0bec9f4b9c3"
+    },
+    {
+      "body_hash": "sha256:4513e3ad8c5fdd3d24c220ec9d5fd4a9ddad87b93db2fcc5a0af8afcaa674fff",
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a7ec9732ad2284d85478e7b6470666a2d843d215af1fad8c13cfa16d6dd45b5d",
+      "symbol": "GlassDoor",
+      "symbol_hash": "sha256:1981a40487517cecff870298033d0956d6414d76e20c7ae55703e940379da1dd"
+    },
+    {
+      "body_hash": "sha256:be539890f15d2c88faf410c2a8df06b526b11ff4d30883f53fe062f66f31abe5",
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:570bcca6296bf984b2732617159dc1d1b13c10126d72c363fbd6058b9aa3e6bf",
+      "symbol": "Surface",
+      "symbol_hash": "sha256:996a596cf10c231190f1a33a734cdbd8dd0f6d642fa67c2d619b663486019069"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Surface.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:58e2467703414c8c95b6fdb2b37fe993e920dd303520097a756f3c526132d3a8",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:c96cbac79cead4dab49e589098203b5ec4dc76e6d2f4d4e495a25193868ad908",
+      "symbol": "Surface.__deepcopy__",
+      "symbol_hash": "sha256:0d951ae6777609e1a883c40873574a7a270224fe014783291d3e43db7ebb604f"
+    },
+    {
+      "body_hash": "sha256:6ed93e67a67eb95832e64e92f8f7ea0348275d003e8278864229759d956512c3",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:e6716b4f111e51ff7aad9dd0578e70f41f5a6dbf04bf071d2349f9c569c112a7",
+      "symbol": "Surface.__init__",
+      "symbol_hash": "sha256:bd742aa0e5cee63e774cb93eb9bb81267178cda8632b06462f3edc3a7621fe68"
+    },
+    {
+      "body_hash": "sha256:863c4244c2f9c6f3f23bd582d28851b2f7a01408317184714aa7114e85c5f715",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:de902b069c1bac9063c945364c25ae126f0a811385c024abd1569f75c8fc4ef8",
+      "symbol": "Surface.adjacent_zone",
+      "symbol_hash": "sha256:cf314ac63c9ce1c0c82a8c4e00bc733b383acdb7ce44199ea572e48d8b262912"
+    },
+    {
+      "body_hash": "sha256:e588872dc6972bed33a8a7331923fb9cea512910ef0d897ca5a7d2c83400dcb7",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:525a1faf6e42740ef61f82b6a24773bfd87d60952f9393b477784bec26b9e4cf",
+      "symbol": "Surface.area",
+      "symbol_hash": "sha256:aa93b96bd36a02c789e649c6beb5f1309eefbfa45fbc91d8318df3474ec06d7a"
+    },
+    {
+      "body_hash": "sha256:469b42faefc70e397a8b78ba1b342c81c3bc78047955f9360c3524dd39f08be8",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:5b4d89e73ba2b27430e50687cae83dfef184f205da6b3b032eee56ba3f030c49",
+      "symbol": "Surface.azimuth",
+      "symbol_hash": "sha256:98e03520fd17b6906c2e09b44672fb393581b59bd4df3dd361a811b5a05d3b7c"
+    },
+    {
+      "body_hash": "sha256:dd0877197f235ff8e88bfa446690af2c674cf4481c81715368381e9d2a2bdc4d",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:55d8dab86205073caae5f771c7bcff06e92572a7295ed1026479543e0da89877",
+      "symbol": "Surface.boundary",
+      "symbol_hash": "sha256:3680772f6d45c5b6b37b159f985365ec783c5ec20a8a517cb025c3f69fb5e821"
+    },
+    {
+      "body_hash": "sha256:f80ee15ef9b112b2061b0e4e26ed1e25cfa495371129c6e91204581673c85d48",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:05a296f800b33f937a643f027a4dc9defc04f2962de40e453bc61933d8239215",
+      "symbol": "Surface.construction",
+      "symbol_hash": "sha256:9aed8e7125912f3271f750a7cb03c1114bbc92a2a739e1eb187225684264d2d7"
+    },
+    {
+      "body_hash": "sha256:5791507817119502bc89daceac9d28378608b6c76dffd2f2cee662a1a890812b",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:78587c4535783fcdfa5278ae02d80e7a7d2ad6ef74ee5a0ff387fc13f4e73159",
+      "symbol": "Surface.flip",
+      "symbol_hash": "sha256:8e01b8fa930670a91c613f41808e368b165900c73b4caa8a8b4efd91342a1f21"
+    },
+    {
+      "body_hash": "sha256:68dc2d0b20a2c5309697ac061d490816bd490bb5732fc899ec89b6ad196db453",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:3e314e3881c3a589a2f4e6c40c98f7d257a97f566f9aa0a67e3ea7b6da19cf8d",
+      "symbol": "Surface.from_json",
+      "symbol_hash": "sha256:3da5f69584c40dd71d27b9f01d6123727c72d7891c962200d15ad8ad6c02c704"
+    },
+    {
+      "body_hash": "sha256:fbc871eadaef3ecaf758109ded5c7acfb9e863cceed397069b4e25e6ed2bb858",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:fd4e9c1ad3ff2824e64eafe498a14908ba218ecc7baa8ded8a3f316c2591de2d",
+      "symbol": "Surface.get_unique_fenestration_constructions",
+      "symbol_hash": "sha256:72d9807c6c2ca3eb6323e1a184d3f943206f21f2f9ed98745a747a666cf0664f"
+    },
+    {
+      "body_hash": "sha256:42ce3c3a13ef5c46a5b3540c769cc027f56f0a41327a44e83997f0264d5e9c6b",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:eb9fa11a201dd61305f0314fe0261cbc371edeb6909c805081c19c6b05e73876",
+      "symbol": "Surface.num_doors",
+      "symbol_hash": "sha256:42d0195ca4d164b19524043b0f8246de8c36046acb91d5e9796d3105dc92985d"
+    },
+    {
+      "body_hash": "sha256:fbd52e62512007655f3b5bdf1e29005528a06c51047bbe0042f23c223967ccee",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:eb9fa11a201dd61305f0314fe0261cbc371edeb6909c805081c19c6b05e73876",
+      "symbol": "Surface.num_windows",
+      "symbol_hash": "sha256:4ec64b535f7a5b9bce13317bb5e5ae6367f9bdfb3af3a0414343a9ac54146b23"
+    },
+    {
+      "body_hash": "sha256:eb84e881f0db250f6323054263a9f7e5868f7c3b3e2211ab254de0e654f1dadf",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:488e97f8bdbb3b5b52c7d6bc9914e6dcc1294c1fdef9c4faed9dcac72abc5ab4",
+      "symbol": "Surface.reflectance",
+      "symbol_hash": "sha256:3a69bea0c6b61870b1cadddc63cd700362e7298c7c2815b85278f523e5b43770"
+    },
+    {
+      "body_hash": "sha256:69bbc7f171921ecd5115d121b6581ecb60b99f09827000ead21eee61c22d27cd",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:231721994080206d842cdf6c6009ffbff1643406c9464f02df46568dcdcac4e7",
+      "symbol": "Surface.to_dragon",
+      "symbol_hash": "sha256:26abf64e462921ad823eade3b2fbe92d027d63d992122d2d90f27819be7efd2a"
+    },
+    {
+      "body_hash": "sha256:8df2efe6684e08b93d18f24067b58a17055b4a3a8154b96c3949c1b689221a1c",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a1dcf3effb913fd76f2641c4826ab160329e963a3258a404f60f48f5df4fe874",
+      "symbol": "Surface.type",
+      "symbol_hash": "sha256:5afcce2a27f1772b4a2213957cc8bc19878b1c9de7efc1ad7be96b0352d52b24"
+    },
+    {
+      "body_hash": "sha256:46ec884dae4ca099c32450d7278f1f03e654ec52f8e9894a71c2971562a7c4fd",
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:b03eee6d6203b3da7121f6a1747c3b2cee05fa62e273b303d568b6000a71d246",
+      "symbol": "Window",
+      "symbol_hash": "sha256:00f305afc68a9a36ee4cf733d6cdde693e412b951c9145e327eea2f2198d8689"
+    },
+    {
+      "body_hash": "sha256:e77a5810bef7ad4cf138d6a18453ab7b917b6415ea2e419a8755e9e61eb02981",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:bd5f72e205ddd7f8ab8357ff05e926e1bc8c2ecb53955dfeccefd12493cd1008",
+      "symbol": "Window.__init__",
+      "symbol_hash": "sha256:e8fad25a400b3c7b8edd138cfccde815de154546fc1f5224aa47f217bc32a441"
+    },
+    {
+      "body_hash": "sha256:17a8356082f10c744c4643f87e34caf730df51337dd70a1adb078c2e8965bc79",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:64b6d404f11d53a68292161c1a59a6678fe695ef84ed5ae745f8556a06cf7fb1",
+      "symbol": "Window.blind",
+      "symbol_hash": "sha256:92ce583d039b9c9f3cf7206db4af5dabfc85e215e9c5ddd9851a8bb7a72b80a4"
+    },
+    {
+      "body_hash": "sha256:cca7cef85458220be863c5c1198b1552d5c6dcdaf1a1f70baef3229c19dcb192",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:d80d057647d52c5578429e231d824a4cdc985b68c90d0c5b9c3625b49411f2ea",
+      "symbol": "Window.construction",
+      "symbol_hash": "sha256:4f40b518a9390d43ad0a88edfde01ef7a565309a4c5c620d11c66fae11ed6940"
+    },
+    {
+      "body_hash": "sha256:f58253f06ac49aea805e4705b027b4bf668187898c68af29d9d4a872209a41c9",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:d9cee3186d9880e5b50a612e714feb20057b3aa20890cc990386d4f2f12e334b",
+      "symbol": "Window.from_json",
+      "symbol_hash": "sha256:93259bede25daa11c0a6815d246063f1a2740150025245febcc47b2a0e73beb9"
+    },
+    {
+      "body_hash": "sha256:868406bbe77f191fcdbd0cb26e05ec1a26be6c059cbb28f8b77856f2f9eec2b0",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:8fec207d6c4a8ec0fffe6d10b90b946b806065a8962e13e7c4ac90e08c345d76",
+      "symbol": "Window.to_dragon",
+      "symbol_hash": "sha256:f032bad25197edd2e5af14b9ac9b7400ec92a1ed454a669e15ecc6b990237bb3"
+    },
+    {
+      "body_hash": "sha256:55a9dea3792b563821b5eda62c3254da02710c80be45f61d953741ea462414cf",
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:16fdf50a01e06bd39fd30bae2eee24f8902679a1db662214f3ba00345680a29e",
+      "symbol": "Zone",
+      "symbol_hash": "sha256:dda48f664e889804627559444713cfcd61ced3eaa43dbed0840cba179ea1e313"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Zone.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:d0160628c1226704aea73c5fc5d71fa942c1ecfa0b63ef7971139a03ba0ed7d0",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:5e5a6c15fae239baf8c54d627fd47ae1028237bd44977ab7902b37be11befbc7",
+      "symbol": "Zone.__init__",
+      "symbol_hash": "sha256:a5f3cee1e5928625be1d26e36c31e38514256bb1abc369275559c891afb0e361"
+    },
+    {
+      "body_hash": "sha256:b6d22fb8c3d1706673bbacd9bac6a528fd56f0a91a05e88e1b537ed241c5c1ef",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:f1b77727408acaea93a770200d99c9972e070fabcf19c0e2f6dbc4c1c1f3feea",
+      "symbol": "Zone.area",
+      "symbol_hash": "sha256:51ef4a1ee39d91ba10397558ba9b194d9e2a8788b30dcc131f778dae5c1eda8f"
+    },
+    {
+      "body_hash": "sha256:d7740eab794adc8af13a91e3bd2b325bd4fa788aac462e6917cfee56f94d0061",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:878910e891aaa968edbe452041e3a7f740a445ef599ee1fc014c351abea5267e",
+      "symbol": "Zone.cooling_supply_systems",
+      "symbol_hash": "sha256:e0f58a2eca488e9a88b46807bd3ac0b4f946022f8f065b303f37872e469be4fe"
+    },
+    {
+      "body_hash": "sha256:6caf7398435c8eacf562102815e0c2b9120c4e4c6ec31f60843d60254a4cb5bc",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:7fc4eae4ad05318e3c8101ed216e887b760c32ba9858dc9544bdbd261d50731f",
+      "symbol": "Zone.from_json",
+      "symbol_hash": "sha256:1254d46e8911bd87019d102dbd222a0a7d7f899540c91584d2ed8165f84a2c0c"
+    },
+    {
+      "body_hash": "sha256:40fa6915ed3efec718561db91ef3ac0db85158e0d7752b4aed1bedb7bd7ee09b",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:fd4e9c1ad3ff2824e64eafe498a14908ba218ecc7baa8ded8a3f316c2591de2d",
+      "symbol": "Zone.get_unique_fenestration_constructions",
+      "symbol_hash": "sha256:d807711017c58e9e6237547dbd4e8549650a4fc629e5b20ddcec2c24bff8db13"
+    },
+    {
+      "body_hash": "sha256:a6810b28394f3548417f171684081a938dfa38b802ad1c823418e017a3a660c9",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:abfea80c9449326669efd9f474c37f074a049c0392c4c2198e2d3f911222f3e8",
+      "symbol": "Zone.get_unique_materials",
+      "symbol_hash": "sha256:ecb20cb3d82efa5c493a99fa5863d3060531cabca284a696fe8e38a922ac2ee9"
+    },
+    {
+      "body_hash": "sha256:6ad20711f04ae08f8c74a9981129929b2387c94631e6b9d572c3a850865c44a1",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:44f5e0b78dc39ab2968e7e7670a41af6cefc43abeb6b6647ed67a92ab7537d38",
+      "symbol": "Zone.get_unique_surface_constructions",
+      "symbol_hash": "sha256:486d73d3932d12d15fae4387d79551b240ae97b05108de34422ae5906ee168c9"
+    },
+    {
+      "body_hash": "sha256:fd88437dc746c0172b74560c1de075b2ec4908ea385de93461e3ace477aca1fc",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:878910e891aaa968edbe452041e3a7f740a445ef599ee1fc014c351abea5267e",
+      "symbol": "Zone.heating_supply_systems",
+      "symbol_hash": "sha256:c68b3d6503165c08f86fbac458781a28e833f838c4483bd46e838ccf1901f565"
+    },
+    {
+      "body_hash": "sha256:f82491b953a93475ed2560c28ab878aac88e44245d465e72464b066440022c45",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:8db120537b4ba4d4439110fa768f72126f1d514bc4c4b3f9409489abaeda2e80",
+      "symbol": "Zone.height",
+      "symbol_hash": "sha256:349a48c8c6ecbeefebe0b475d63298d72258a5b03f3b8798e2e19c800066b58b"
+    },
+    {
+      "body_hash": "sha256:f6105379ecf465b1e4ef307ce768a62eb0fd1b5f0b9edf9ccc65139b82a17cff",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "Zone.infiltration",
+      "symbol_hash": "sha256:3fffc5a89798f969732ff5e45b8731caa0583e5e5b2cb2b30f37e26673738144"
+    },
+    {
+      "body_hash": "sha256:b90e187c7e535f4e7adc893fe0d8d47ecd6e01a6b13d666dd4639e7de3165308",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a406f62f4cd37b783a99f931791247e58315619c1c029f6f7981cbd13dc85e6c",
+      "symbol": "Zone.supply_systems",
+      "symbol_hash": "sha256:3eaf6c2588f29f53e73ce5a9773029a0cec51388db59ccccff48c94354e9d547"
+    },
+    {
+      "body_hash": "sha256:972604046017fae5f232681834ba053f1de8615c44f656e53f406ee38763c0a7",
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a1cb1a18cbf0115a8c02928192e6e9da52ae4ee12cf2818024c93475d5954103",
+      "symbol": "Zone.to_dragon",
+      "symbol_hash": "sha256:da336048a153f041d9d56ff87b6578fa464ce4dd9332aaa97e054d570faf12bd"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
+      "inventory_index": 405,
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:7c936bf47fa33e14a11d32af80d5846a5edd4b6a7b98595ac8b02c0d649505b4",
+      "symbol": "BlindType",
+      "symbol_hash": "sha256:6008dd91f9eff70327d99f32f7479d55adb49e8da0024588ae03c736c4baea91"
+    },
+    {
+      "body_hash": "sha256:bbaf7ba6b57b40e986042e67e90a25a303cd17bbb8874f247e5c311c49b97191",
+      "inventory_index": 406,
+      "kind": "constant",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:ea9207a3e5674c0d86f8393d1be124e09a20a8c7b4001a005a2ad2b3f40db3ea",
+      "symbol": "BlindType.SHADE",
+      "symbol_hash": "sha256:bb03051d2c3d0af309e74730cf6b9f0487ef3bc734e3bb5d765e89c85f72792b"
+    },
+    {
+      "body_hash": "sha256:8a2e1f763aec7189604f44eb93bce09b6ae606879bfcd4151c61513b3471b5c5",
+      "inventory_index": 407,
+      "kind": "constant",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:181c8265ab9a22fe999084f0f078ed472c7e92b389b2611e6a6205729c32c06c",
+      "symbol": "BlindType.VENETIAN",
+      "symbol_hash": "sha256:09c92f4a396529bc46f123f00266199afe7010a8552471ed2d8df7084dc36f8a"
+    },
+    {
+      "body_hash": "sha256:5c924f1658508d952a1e1f3a8f21de59dc5b45bd154d6721874df4eaed6930d8",
+      "inventory_index": 408,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "BlindType.__str__",
+      "symbol_hash": "sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e"
+    },
+    {
+      "body_hash": "sha256:339502787243fef35ca9d0bb8ff3feb910138667cb25226fb59c615cffbb2ec9",
+      "inventory_index": 409,
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:00749ab91c0d0cf15799cdd6c59b87bf25e70ab532e4110e2da2c1d696bddefb",
+      "symbol": "Door",
+      "symbol_hash": "sha256:8c468e24f71eee70841b7374cd605a58ff596c9534f687cf96d848a11456e840"
+    },
+    {
+      "body_hash": "sha256:b93d3d696560666e1e6a4d593c27bda42749aa0e01aed49d85cba41e0bb37043",
+      "inventory_index": 410,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:d80d057647d52c5578429e231d824a4cdc985b68c90d0c5b9c3625b49411f2ea",
+      "symbol": "Door.construction",
+      "symbol_hash": "sha256:2ca0072cbca39b5232786daac7992b2aed9295ce141409da2a865f020b906755"
+    },
+    {
+      "body_hash": "sha256:e1a1ba57001d92c84b1824a6c1c3d9f65db5e467507ee08723fe7c25bc9c1b7c",
+      "inventory_index": 411,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:6fca3e23123f8dddfcf7ea184ce576891ebb9d12e19c43de10457569fa17595d",
+      "symbol": "Door.from_json",
+      "symbol_hash": "sha256:26b0f9bbc8e02311b2a024c1c1d4c3fed65546b19a58fe9e74af58c3785e69be"
+    },
+    {
+      "body_hash": "sha256:859bc816741ac38f5a1385c029d2ed7cd89936a09cee915e91c14cd1dda9e0cf",
+      "inventory_index": 412,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:4e76bcfe0f3a64e5b0c5a022a6a2bc3a9f3a19691e27f4065eb5173bbc1afd5e",
+      "symbol": "Door.to_dragon",
+      "symbol_hash": "sha256:eb81bd06ff88de53694c0aebcc92a0d4fc50041396fb61450b88e7bddafa67b9"
+    },
+    {
+      "body_hash": "sha256:901584519ee598b29f87896565b722923a8003c2619884b699085437510f9804",
+      "inventory_index": 413,
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:8979b9a18ccf61b3e3ae34a9b20a7e410a77f78b540c499937eb725db12e1ef1",
+      "symbol": "Fenestration",
+      "symbol_hash": "sha256:43d44ea17615d54a46086dccdae3b68d756ba66dc51043315394c398ce317506"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 414,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Fenestration.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:2b73db776820d10c2eaa1cc83b768180adefa3400451b51127c71b6890e9ba02",
+      "inventory_index": 415,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a48ecac45468aac6505f32ed9b2be5fa78f0cd63c58f21da187af4da07e03e88",
+      "symbol": "Fenestration.__deepcopy__",
+      "symbol_hash": "sha256:a0dbc41130a29593da15c131fbb08fbc1213a8057821d7007fded50d504805f7"
+    },
+    {
+      "body_hash": "sha256:ab2fba7eb8e599e702c0b346285679bd3c4cb276c25c79d6ccc2ffec291b0760",
+      "inventory_index": 417,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:e479f562e036c4b7b5f2a53944a64d565a4392e3fab0534111dd929f7c307245",
+      "symbol": "Fenestration.__init__",
+      "symbol_hash": "sha256:1b22b2f18a540de4aa832db02439453eedced6e7d4b9215568fd8df2e40e520a"
+    },
+    {
+      "body_hash": "sha256:82cbabbb09fc7571468b93d06760a61d29cc48a8b6fe6eabd279d72b10ec3abe",
+      "inventory_index": 418,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:19fedb248c7a2621006606ea9422a401bea49ad05b501c11914d239936606c51",
+      "symbol": "Fenestration.construction",
+      "symbol_hash": "sha256:0b0cbf2f9f3cdd34c003b74bf9eb18deb9cadf62ebd427dc7c3ccf11030a37eb"
+    },
+    {
+      "body_hash": "sha256:e428a6a2cb42ddf94a8f6759c5da0b8e7a44d639b0e8b80e0328ba40ab41754b",
+      "inventory_index": 419,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:b322db2ef4ecb5b28d9307e84777a095180b79c830ff6983b4dde4e9b90bbe2c",
+      "symbol": "Fenestration.from_json",
+      "symbol_hash": "sha256:2e553f683898606ece889675669b292f3e8273ada5d5cd7a882d6fe159a1d0ef"
+    },
+    {
+      "body_hash": "sha256:d534464a3d86dfeb1f92e18bf2296fb90a71ce3810ab72675ff520fac00f4ce1",
+      "inventory_index": 420,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:21df5ce4e76b0452dbd123ca704c174cadc57b6cae6a732ed745ba1ff55e5855",
+      "symbol": "Fenestration.to_dragon",
+      "symbol_hash": "sha256:ede823e2a01313e006bfae12e1fcd912f22dd7eb65cb7acb424aa0bec9f4b9c3"
+    },
+    {
+      "body_hash": "sha256:4513e3ad8c5fdd3d24c220ec9d5fd4a9ddad87b93db2fcc5a0af8afcaa674fff",
+      "inventory_index": 421,
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a7ec9732ad2284d85478e7b6470666a2d843d215af1fad8c13cfa16d6dd45b5d",
+      "symbol": "GlassDoor",
+      "symbol_hash": "sha256:1981a40487517cecff870298033d0956d6414d76e20c7ae55703e940379da1dd"
+    },
+    {
+      "body_hash": "sha256:be539890f15d2c88faf410c2a8df06b526b11ff4d30883f53fe062f66f31abe5",
+      "inventory_index": 422,
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:570bcca6296bf984b2732617159dc1d1b13c10126d72c363fbd6058b9aa3e6bf",
+      "symbol": "Surface",
+      "symbol_hash": "sha256:996a596cf10c231190f1a33a734cdbd8dd0f6d642fa67c2d619b663486019069"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 423,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Surface.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:58e2467703414c8c95b6fdb2b37fe993e920dd303520097a756f3c526132d3a8",
+      "inventory_index": 424,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:c96cbac79cead4dab49e589098203b5ec4dc76e6d2f4d4e495a25193868ad908",
+      "symbol": "Surface.__deepcopy__",
+      "symbol_hash": "sha256:0d951ae6777609e1a883c40873574a7a270224fe014783291d3e43db7ebb604f"
+    },
+    {
+      "body_hash": "sha256:6ed93e67a67eb95832e64e92f8f7ea0348275d003e8278864229759d956512c3",
+      "inventory_index": 426,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:e6716b4f111e51ff7aad9dd0578e70f41f5a6dbf04bf071d2349f9c569c112a7",
+      "symbol": "Surface.__init__",
+      "symbol_hash": "sha256:bd742aa0e5cee63e774cb93eb9bb81267178cda8632b06462f3edc3a7621fe68"
+    },
+    {
+      "body_hash": "sha256:863c4244c2f9c6f3f23bd582d28851b2f7a01408317184714aa7114e85c5f715",
+      "inventory_index": 429,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:de902b069c1bac9063c945364c25ae126f0a811385c024abd1569f75c8fc4ef8",
+      "symbol": "Surface.adjacent_zone",
+      "symbol_hash": "sha256:cf314ac63c9ce1c0c82a8c4e00bc733b383acdb7ce44199ea572e48d8b262912"
+    },
+    {
+      "body_hash": "sha256:e588872dc6972bed33a8a7331923fb9cea512910ef0d897ca5a7d2c83400dcb7",
+      "inventory_index": 430,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:525a1faf6e42740ef61f82b6a24773bfd87d60952f9393b477784bec26b9e4cf",
+      "symbol": "Surface.area",
+      "symbol_hash": "sha256:aa93b96bd36a02c789e649c6beb5f1309eefbfa45fbc91d8318df3474ec06d7a"
+    },
+    {
+      "body_hash": "sha256:469b42faefc70e397a8b78ba1b342c81c3bc78047955f9360c3524dd39f08be8",
+      "inventory_index": 431,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:5b4d89e73ba2b27430e50687cae83dfef184f205da6b3b032eee56ba3f030c49",
+      "symbol": "Surface.azimuth",
+      "symbol_hash": "sha256:98e03520fd17b6906c2e09b44672fb393581b59bd4df3dd361a811b5a05d3b7c"
+    },
+    {
+      "body_hash": "sha256:dd0877197f235ff8e88bfa446690af2c674cf4481c81715368381e9d2a2bdc4d",
+      "inventory_index": 432,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:55d8dab86205073caae5f771c7bcff06e92572a7295ed1026479543e0da89877",
+      "symbol": "Surface.boundary",
+      "symbol_hash": "sha256:3680772f6d45c5b6b37b159f985365ec783c5ec20a8a517cb025c3f69fb5e821"
+    },
+    {
+      "body_hash": "sha256:f80ee15ef9b112b2061b0e4e26ed1e25cfa495371129c6e91204581673c85d48",
+      "inventory_index": 433,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:05a296f800b33f937a643f027a4dc9defc04f2962de40e453bc61933d8239215",
+      "symbol": "Surface.construction",
+      "symbol_hash": "sha256:9aed8e7125912f3271f750a7cb03c1114bbc92a2a739e1eb187225684264d2d7"
+    },
+    {
+      "body_hash": "sha256:5791507817119502bc89daceac9d28378608b6c76dffd2f2cee662a1a890812b",
+      "inventory_index": 434,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:78587c4535783fcdfa5278ae02d80e7a7d2ad6ef74ee5a0ff387fc13f4e73159",
+      "symbol": "Surface.flip",
+      "symbol_hash": "sha256:8e01b8fa930670a91c613f41808e368b165900c73b4caa8a8b4efd91342a1f21"
+    },
+    {
+      "body_hash": "sha256:68dc2d0b20a2c5309697ac061d490816bd490bb5732fc899ec89b6ad196db453",
+      "inventory_index": 435,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:3e314e3881c3a589a2f4e6c40c98f7d257a97f566f9aa0a67e3ea7b6da19cf8d",
+      "symbol": "Surface.from_json",
+      "symbol_hash": "sha256:3da5f69584c40dd71d27b9f01d6123727c72d7891c962200d15ad8ad6c02c704"
+    },
+    {
+      "body_hash": "sha256:fbc871eadaef3ecaf758109ded5c7acfb9e863cceed397069b4e25e6ed2bb858",
+      "inventory_index": 436,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:fd4e9c1ad3ff2824e64eafe498a14908ba218ecc7baa8ded8a3f316c2591de2d",
+      "symbol": "Surface.get_unique_fenestration_constructions",
+      "symbol_hash": "sha256:72d9807c6c2ca3eb6323e1a184d3f943206f21f2f9ed98745a747a666cf0664f"
+    },
+    {
+      "body_hash": "sha256:42ce3c3a13ef5c46a5b3540c769cc027f56f0a41327a44e83997f0264d5e9c6b",
+      "inventory_index": 437,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:eb9fa11a201dd61305f0314fe0261cbc371edeb6909c805081c19c6b05e73876",
+      "symbol": "Surface.num_doors",
+      "symbol_hash": "sha256:42d0195ca4d164b19524043b0f8246de8c36046acb91d5e9796d3105dc92985d"
+    },
+    {
+      "body_hash": "sha256:fbd52e62512007655f3b5bdf1e29005528a06c51047bbe0042f23c223967ccee",
+      "inventory_index": 438,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:eb9fa11a201dd61305f0314fe0261cbc371edeb6909c805081c19c6b05e73876",
+      "symbol": "Surface.num_windows",
+      "symbol_hash": "sha256:4ec64b535f7a5b9bce13317bb5e5ae6367f9bdfb3af3a0414343a9ac54146b23"
+    },
+    {
+      "body_hash": "sha256:eb84e881f0db250f6323054263a9f7e5868f7c3b3e2211ab254de0e654f1dadf",
+      "inventory_index": 439,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:488e97f8bdbb3b5b52c7d6bc9914e6dcc1294c1fdef9c4faed9dcac72abc5ab4",
+      "symbol": "Surface.reflectance",
+      "symbol_hash": "sha256:3a69bea0c6b61870b1cadddc63cd700362e7298c7c2815b85278f523e5b43770"
+    },
+    {
+      "body_hash": "sha256:69bbc7f171921ecd5115d121b6581ecb60b99f09827000ead21eee61c22d27cd",
+      "inventory_index": 440,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:231721994080206d842cdf6c6009ffbff1643406c9464f02df46568dcdcac4e7",
+      "symbol": "Surface.to_dragon",
+      "symbol_hash": "sha256:26abf64e462921ad823eade3b2fbe92d027d63d992122d2d90f27819be7efd2a"
+    },
+    {
+      "body_hash": "sha256:8df2efe6684e08b93d18f24067b58a17055b4a3a8154b96c3949c1b689221a1c",
+      "inventory_index": 441,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a1dcf3effb913fd76f2641c4826ab160329e963a3258a404f60f48f5df4fe874",
+      "symbol": "Surface.type",
+      "symbol_hash": "sha256:5afcce2a27f1772b4a2213957cc8bc19878b1c9de7efc1ad7be96b0352d52b24"
+    },
+    {
+      "body_hash": "sha256:46ec884dae4ca099c32450d7278f1f03e654ec52f8e9894a71c2971562a7c4fd",
+      "inventory_index": 442,
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:b03eee6d6203b3da7121f6a1747c3b2cee05fa62e273b303d568b6000a71d246",
+      "symbol": "Window",
+      "symbol_hash": "sha256:00f305afc68a9a36ee4cf733d6cdde693e412b951c9145e327eea2f2198d8689"
+    },
+    {
+      "body_hash": "sha256:e77a5810bef7ad4cf138d6a18453ab7b917b6415ea2e419a8755e9e61eb02981",
+      "inventory_index": 443,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:bd5f72e205ddd7f8ab8357ff05e926e1bc8c2ecb53955dfeccefd12493cd1008",
+      "symbol": "Window.__init__",
+      "symbol_hash": "sha256:e8fad25a400b3c7b8edd138cfccde815de154546fc1f5224aa47f217bc32a441"
+    },
+    {
+      "body_hash": "sha256:17a8356082f10c744c4643f87e34caf730df51337dd70a1adb078c2e8965bc79",
+      "inventory_index": 444,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:64b6d404f11d53a68292161c1a59a6678fe695ef84ed5ae745f8556a06cf7fb1",
+      "symbol": "Window.blind",
+      "symbol_hash": "sha256:92ce583d039b9c9f3cf7206db4af5dabfc85e215e9c5ddd9851a8bb7a72b80a4"
+    },
+    {
+      "body_hash": "sha256:cca7cef85458220be863c5c1198b1552d5c6dcdaf1a1f70baef3229c19dcb192",
+      "inventory_index": 445,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:d80d057647d52c5578429e231d824a4cdc985b68c90d0c5b9c3625b49411f2ea",
+      "symbol": "Window.construction",
+      "symbol_hash": "sha256:4f40b518a9390d43ad0a88edfde01ef7a565309a4c5c620d11c66fae11ed6940"
+    },
+    {
+      "body_hash": "sha256:f58253f06ac49aea805e4705b027b4bf668187898c68af29d9d4a872209a41c9",
+      "inventory_index": 446,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:d9cee3186d9880e5b50a612e714feb20057b3aa20890cc990386d4f2f12e334b",
+      "symbol": "Window.from_json",
+      "symbol_hash": "sha256:93259bede25daa11c0a6815d246063f1a2740150025245febcc47b2a0e73beb9"
+    },
+    {
+      "body_hash": "sha256:868406bbe77f191fcdbd0cb26e05ec1a26be6c059cbb28f8b77856f2f9eec2b0",
+      "inventory_index": 447,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:8fec207d6c4a8ec0fffe6d10b90b946b806065a8962e13e7c4ac90e08c345d76",
+      "symbol": "Window.to_dragon",
+      "symbol_hash": "sha256:f032bad25197edd2e5af14b9ac9b7400ec92a1ed454a669e15ecc6b990237bb3"
+    },
+    {
+      "body_hash": "sha256:55a9dea3792b563821b5eda62c3254da02710c80be45f61d953741ea462414cf",
+      "inventory_index": 448,
+      "kind": "class",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:16fdf50a01e06bd39fd30bae2eee24f8902679a1db662214f3ba00345680a29e",
+      "symbol": "Zone",
+      "symbol_hash": "sha256:dda48f664e889804627559444713cfcd61ced3eaa43dbed0840cba179ea1e313"
+    },
+    {
+      "body_hash": "sha256:8b81f98bc84a8caff11fe0920e2d11663748bc18953a73f761ef279d5db698da",
+      "inventory_index": 449,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "Zone.ID",
+      "symbol_hash": "sha256:246156d9c5e30456c2c58c64d1bc48da290df6081b24e05e52b95993f9e1b0e2"
+    },
+    {
+      "body_hash": "sha256:d0160628c1226704aea73c5fc5d71fa942c1ecfa0b63ef7971139a03ba0ed7d0",
+      "inventory_index": 451,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:5e5a6c15fae239baf8c54d627fd47ae1028237bd44977ab7902b37be11befbc7",
+      "symbol": "Zone.__init__",
+      "symbol_hash": "sha256:a5f3cee1e5928625be1d26e36c31e38514256bb1abc369275559c891afb0e361"
+    },
+    {
+      "body_hash": "sha256:b6d22fb8c3d1706673bbacd9bac6a528fd56f0a91a05e88e1b537ed241c5c1ef",
+      "inventory_index": 452,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:f1b77727408acaea93a770200d99c9972e070fabcf19c0e2f6dbc4c1c1f3feea",
+      "symbol": "Zone.area",
+      "symbol_hash": "sha256:51ef4a1ee39d91ba10397558ba9b194d9e2a8788b30dcc131f778dae5c1eda8f"
+    },
+    {
+      "body_hash": "sha256:d7740eab794adc8af13a91e3bd2b325bd4fa788aac462e6917cfee56f94d0061",
+      "inventory_index": 453,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:878910e891aaa968edbe452041e3a7f740a445ef599ee1fc014c351abea5267e",
+      "symbol": "Zone.cooling_supply_systems",
+      "symbol_hash": "sha256:e0f58a2eca488e9a88b46807bd3ac0b4f946022f8f065b303f37872e469be4fe"
+    },
+    {
+      "body_hash": "sha256:6caf7398435c8eacf562102815e0c2b9120c4e4c6ec31f60843d60254a4cb5bc",
+      "inventory_index": 454,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:7fc4eae4ad05318e3c8101ed216e887b760c32ba9858dc9544bdbd261d50731f",
+      "symbol": "Zone.from_json",
+      "symbol_hash": "sha256:1254d46e8911bd87019d102dbd222a0a7d7f899540c91584d2ed8165f84a2c0c"
+    },
+    {
+      "body_hash": "sha256:40fa6915ed3efec718561db91ef3ac0db85158e0d7752b4aed1bedb7bd7ee09b",
+      "inventory_index": 455,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:fd4e9c1ad3ff2824e64eafe498a14908ba218ecc7baa8ded8a3f316c2591de2d",
+      "symbol": "Zone.get_unique_fenestration_constructions",
+      "symbol_hash": "sha256:d807711017c58e9e6237547dbd4e8549650a4fc629e5b20ddcec2c24bff8db13"
+    },
+    {
+      "body_hash": "sha256:a6810b28394f3548417f171684081a938dfa38b802ad1c823418e017a3a660c9",
+      "inventory_index": 456,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:abfea80c9449326669efd9f474c37f074a049c0392c4c2198e2d3f911222f3e8",
+      "symbol": "Zone.get_unique_materials",
+      "symbol_hash": "sha256:ecb20cb3d82efa5c493a99fa5863d3060531cabca284a696fe8e38a922ac2ee9"
+    },
+    {
+      "body_hash": "sha256:6ad20711f04ae08f8c74a9981129929b2387c94631e6b9d572c3a850865c44a1",
+      "inventory_index": 457,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:44f5e0b78dc39ab2968e7e7670a41af6cefc43abeb6b6647ed67a92ab7537d38",
+      "symbol": "Zone.get_unique_surface_constructions",
+      "symbol_hash": "sha256:486d73d3932d12d15fae4387d79551b240ae97b05108de34422ae5906ee168c9"
+    },
+    {
+      "body_hash": "sha256:fd88437dc746c0172b74560c1de075b2ec4908ea385de93461e3ace477aca1fc",
+      "inventory_index": 458,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:878910e891aaa968edbe452041e3a7f740a445ef599ee1fc014c351abea5267e",
+      "symbol": "Zone.heating_supply_systems",
+      "symbol_hash": "sha256:c68b3d6503165c08f86fbac458781a28e833f838c4483bd46e838ccf1901f565"
+    },
+    {
+      "body_hash": "sha256:f82491b953a93475ed2560c28ab878aac88e44245d465e72464b066440022c45",
+      "inventory_index": 459,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:8db120537b4ba4d4439110fa768f72126f1d514bc4c4b3f9409489abaeda2e80",
+      "symbol": "Zone.height",
+      "symbol_hash": "sha256:349a48c8c6ecbeefebe0b475d63298d72258a5b03f3b8798e2e19c800066b58b"
+    },
+    {
+      "body_hash": "sha256:f6105379ecf465b1e4ef307ce768a62eb0fd1b5f0b9edf9ccc65139b82a17cff",
+      "inventory_index": 460,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a42366eda169c0da7d82ff37d52c5efd8af8f131bc96546d7c925077ed2036e4",
+      "symbol": "Zone.infiltration",
+      "symbol_hash": "sha256:3fffc5a89798f969732ff5e45b8731caa0583e5e5b2cb2b30f37e26673738144"
+    },
+    {
+      "body_hash": "sha256:b90e187c7e535f4e7adc893fe0d8d47ecd6e01a6b13d666dd4639e7de3165308",
+      "inventory_index": 461,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a406f62f4cd37b783a99f931791247e58315619c1c029f6f7981cbd13dc85e6c",
+      "symbol": "Zone.supply_systems",
+      "symbol_hash": "sha256:3eaf6c2588f29f53e73ce5a9773029a0cec51388db59ccccff48c94354e9d547"
+    },
+    {
+      "body_hash": "sha256:972604046017fae5f232681834ba053f1de8615c44f656e53f406ee38763c0a7",
+      "inventory_index": 462,
+      "kind": "function",
+      "path": "src/epsimple/core/shape.py",
+      "signature_hash": "sha256:a1cb1a18cbf0115a8c02928192e6e9da52ae4ee12cf2818024c93475d5954103",
+      "symbol": "Zone.to_dragon",
+      "symbol_hash": "sha256:da336048a153f041d9d56ff87b6578fa464ce4dd9332aaa97e054d570faf12bd"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory": {
+      "bytes": 518070,
+      "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+      "file_sha256": "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    },
+    "loaded_sources": [
+      {
+        "ast_sha256": "sha256:f26684ea4b6e1bfe7b9576f06d45971e420d2e9e49da99b6c52ff9d0d424fae3",
+        "bytes": 2262,
+        "module": "epsimple",
+        "path": "src/epsimple/__init__.py",
+        "source_sha256": "sha256:adff45de2c37d23586de00015e05502b1ee4ff7c167f5017b946827f1f383996"
+      },
+      {
+        "ast_sha256": "sha256:7910d7d9e0383b319b9374bdcdf5f8c069930c609fa8e9e6bd8c50a59f4858e5",
+        "bytes": 11149,
+        "module": "epsimple.api",
+        "path": "src/epsimple/api.py",
+        "source_sha256": "sha256:fb34501b221a34279dc4e408af04cd103448b71b563780e6eda9ca5ffdae8e10"
+      },
+      {
+        "ast_sha256": "sha256:6740f081f087834aadfef0c11da6cdbe11f907dc170b48ebaa287e000eb6e27b",
+        "bytes": 4873,
+        "module": "epsimple.constants",
+        "path": "src/epsimple/constants.py",
+        "source_sha256": "sha256:d5dd5241ec90b14ba3708a525cd74279a8cdc238164a5b8544c4c82b05a29897"
+      },
+      {
+        "ast_sha256": "sha256:7409c8f18e040e02d52a7e2a70ab56b4539212eb76035f5b218a5bacd84f4762",
+        "bytes": 1264,
+        "module": "epsimple.core",
+        "path": "src/epsimple/core/__init__.py",
+        "source_sha256": "sha256:e6d571f7bf775cd13cba7abf0f625802e92680fdc87838f4039b037174a1a4c9"
+      },
+      {
+        "ast_sha256": "sha256:fe40c8c89f2c3341ce4972976eabf96edd85ccba55a3a7619ca17e0a7603c0ab",
+        "bytes": 25902,
+        "module": "epsimple.core.construction",
+        "path": "src/epsimple/core/construction.py",
+        "source_sha256": "sha256:50b784d9c7ebd0df34fb6e524585482f04eb90ef915d5afd125fe779c0620816"
+      },
+      {
+        "ast_sha256": "sha256:dbbea63f51a001fae4fd73fba96dc099eab8cd5bcec39e3d9bf768e29b463873",
+        "bytes": 53850,
+        "module": "epsimple.core.hvac",
+        "path": "src/epsimple/core/hvac.py",
+        "source_sha256": "sha256:9f3ecb27ed612baeed530ccbfd5857f1f528de24f222e6ef5093e4a635665d9c"
+      },
+      {
+        "ast_sha256": "sha256:f79918272c07515ee4ae98fa62f4ca5d5d703e5e2faa334f72d6a6966e1e2447",
+        "bytes": 36949,
+        "module": "epsimple.core.model",
+        "path": "src/epsimple/core/model.py",
+        "source_sha256": "sha256:71dc9bb8d97e829c27d9b5d19ef88709af9613f9e53f60807d54ceb2922e4532"
+      },
+      {
+        "ast_sha256": "sha256:bf39751f2e76642e1dbad2c4196f23bcdcdeefaad28e750e5c28c616ea9434ed",
+        "bytes": 18964,
+        "module": "epsimple.core.profile",
+        "path": "src/epsimple/core/profile.py",
+        "source_sha256": "sha256:e43f07d41e1e90cb9dcb7207fce67d8a6cb93acf54242b7a87c0aa30dda1309c"
+      },
+      {
+        "ast_sha256": "sha256:63cfdec0aec079cfc2d2896091974a5c253656e198cbcb1ea328dbace92c1b7e",
+        "bytes": 22922,
+        "module": "epsimple.core.shape",
+        "path": "src/epsimple/core/shape.py",
+        "source_sha256": "sha256:9caa67d424693afc58ee6a456c86d42d504fce4e30e56d73e8ee658dc8e515c1"
+      },
+      {
+        "ast_sha256": "sha256:0cc9cc2ed116f8923f44277a62cc13371e5f687198276c54455c4198be0d84ad",
+        "bytes": 29858,
+        "module": "epsimple.debug",
+        "path": "src/epsimple/debug.py",
+        "source_sha256": "sha256:7fa33eea0c10970c770572e4206dc9d195dc90579a3ded33a53ce4c2b011db6e"
+      },
+      {
+        "ast_sha256": "sha256:d7757fa8a1fc22604c82479200d8af4338d9283d090bc764b2ed526ee9142135",
+        "bytes": 28288,
+        "module": "epsimple.utils",
+        "path": "src/epsimple/utils.py",
+        "source_sha256": "sha256:4b19874951feb696f0a5f1b42d85a11c405e5f83958828997af9a977a6aa9cf8"
+      },
+      {
+        "ast_sha256": "sha256:a486e6471fc9afa8f431ee1b63eea9054d8ba757863c617365a515751f881618",
+        "bytes": 2011,
+        "module": "idragon",
+        "path": "src/idragon/__init__.py",
+        "source_sha256": "sha256:1d80e812842f6ef6803fedfb9c996a8e50841c4a4399b89230f5178554597e50"
+      },
+      {
+        "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+        "bytes": 6247,
+        "module": "idragon.common",
+        "path": "src/idragon/common.py",
+        "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+      },
+      {
+        "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+        "bytes": 2590,
+        "module": "idragon.constants",
+        "path": "src/idragon/constants.py",
+        "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+      },
+      {
+        "ast_sha256": "sha256:1a1a599171964e2dfda806d66a5c46bb8b8c8514bdf997419a859187d9564d52",
+        "bytes": 1505,
+        "module": "idragon.dragon",
+        "path": "src/idragon/dragon/__init__.py",
+        "source_sha256": "sha256:88df519f22bc3b086d76e318a3a58bb07677da33d2947e1095d0236b270f048a"
+      },
+      {
+        "ast_sha256": "sha256:04bd33fb46d0e41adb681267ec8792eaa8985fd7a694b9e36971a63ca8d2757a",
+        "bytes": 11652,
+        "module": "idragon.dragon.construction",
+        "path": "src/idragon/dragon/construction.py",
+        "source_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622"
+      },
+      {
+        "ast_sha256": "sha256:ce151dba25ac7bf4f7dc0ba47be840440f13663950043ff8d1f5bffc302c7a31",
+        "bytes": 137833,
+        "module": "idragon.dragon.hvac",
+        "path": "src/idragon/dragon/hvac.py",
+        "source_sha256": "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0"
+      },
+      {
+        "ast_sha256": "sha256:89c4fa95b97d069fa62d2baf09055be9819893645e41c773a77723e26f62dd59",
+        "bytes": 8247,
+        "module": "idragon.dragon.model",
+        "path": "src/idragon/dragon/model.py",
+        "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
+      },
+      {
+        "ast_sha256": "sha256:7a58e27e28b9de5a32d3de5cb4b103cfc99c25699da88e7117fda707cbddeeef",
+        "bytes": 117731,
+        "module": "idragon.dragon.profile",
+        "path": "src/idragon/dragon/profile.py",
+        "source_sha256": "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445"
+      },
+      {
+        "ast_sha256": "sha256:905a14a9f05a12c26c75ee5401fd9cb7d5a732cdab231d590b1246cdbd8714c2",
+        "bytes": 27438,
+        "module": "idragon.dragon.shape",
+        "path": "src/idragon/dragon/shape.py",
+        "source_sha256": "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c"
+      },
+      {
+        "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+        "bytes": 91815,
+        "module": "idragon.imugi",
+        "path": "src/idragon/imugi.py",
+        "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+      },
+      {
+        "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+        "bytes": 12367,
+        "module": "idragon.launcher",
+        "path": "src/idragon/launcher.py",
+        "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+      },
+      {
+        "ast_sha256": "sha256:abda2bfa93ff7461fb412cd1dd8fe526d30983ff22017e714b17dea1aa9f7452",
+        "bytes": 2616,
+        "module": "idragon.utils",
+        "path": "src/idragon/utils.py",
+        "source_sha256": "sha256:aa4b4e66c4ea48a4a7a03e4fcc8041eb1cb06671196ad36d5b9d00e4bf6689cd"
+      }
+    ],
+    "source": {
+      "ast_sha256": "sha256:63cfdec0aec079cfc2d2896091974a5c253656e198cbcb1ea328dbace92c1b7e",
+      "bytes": 22922,
+      "path": "src/epsimple/core/shape.py",
+      "source_sha256": "sha256:9caa67d424693afc58ee6a456c86d42d504fce4e30e56d73e8ee658dc8e515c1"
+    }
+  }
+}

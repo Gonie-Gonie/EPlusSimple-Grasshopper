@@ -87,6 +87,18 @@ use reviewed immutable, embedded-resource, caller-supplied-resource, package-
 metadata, or compiled-target adaptations. `AUTOID_PREFIX.__repr__` and
 `SpecialTag.__repr__` remain explicitly excluded from this bounded corpus.
 
+`python-0.7.0/epsimple-shape-core-oracle.json` pins 17 ordered CPython
+3.12.7 cases for exactly 53 unresolved targets in
+`epsimple/core/shape.py`. It executes BlindType, Fenestration, Door, GlassDoor,
+Window, Surface, and Zone state and validation; ID generation; factory and JSON
+dispatch; copy and flip behavior; construction/material aggregation; opening
+counts; supply-system filtering; and dragon conversion or pinned upstream
+failure behavior. Isolated imports plus a byte-identical relocated
+`epsimple`/`idragon` source copy prove path independence. Thirty-three targets
+are exact equivalents and 20 are explicit native-route exceptions with stable
+adaptation IDs. The five adjacent representation/equality declarations remain
+explicitly excluded from this bounded fixture.
+
 `python-0.7.0/dragon-construction-core-oracle.json` pins 19 ordered direct-state
 CPython 3.12.7 cases for exactly 35 class, constructor, property, enum, and
 reversal targets across `Construction`, `Glazing`, `Layer`, `Material`,
