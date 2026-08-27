@@ -80,6 +80,13 @@ public sealed class DragonSupplySystemParam : DragonParam<Types.DragonSupplySyst
     public override Guid ComponentGuid => new("c6afcc1f-f11e-4a54-a84a-0e845a828d5d");
 }
 
+public sealed class DragonDomesticHotWaterParam : DragonParam<Types.DragonDomesticHotWaterGoo>
+{
+    public DragonDomesticHotWaterParam()
+        : base("InvisibleDragon Domestic Hot Water", "DHW", "An InvisibleDragon domestic-hot-water system.") { }
+    public override Guid ComponentGuid => new("9a8b4d80-3088-4898-9ea9-2743312aa1ae");
+}
+
 public sealed class DragonEnergyRecoveryVentilatorParam : DragonParam<Types.DragonEnergyRecoveryVentilatorGoo>
 {
     public DragonEnergyRecoveryVentilatorParam()

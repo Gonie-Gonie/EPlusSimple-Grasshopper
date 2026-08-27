@@ -1,4 +1,5 @@
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Types;
 using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
 using GonieGonie.InvisibleDragon.Grasshopper.Types;
@@ -6,6 +7,77 @@ using GonieGonie.InvisibleDragon.Hvac;
 using GonieGonie.InvisibleDragon.Shape;
 
 namespace GonieGonie.InvisibleDragon.Grasshopper.Components;
+
+public sealed class DomesticHotWaterComponent : DragonComponent
+{
+    public DomesticHotWaterComponent()
+        : base(
+            "Domestic Hot Water",
+            "DHW",
+            "Creates a domestic-hot-water system with an explicit fuel and conversion efficiency.",
+            "HVAC")
+    {
+    }
+
+    public override Guid ComponentGuid => new("6f59e771-5dc0-44aa-9b7d-a84c3d0c7d74");
+
+    protected override void RegisterInputParams(GH_InputParamManager pManager)
+    {
+        pManager.AddTextParameter("Name", "N", "Domestic-hot-water system name.", GH_ParamAccess.item, "Domestic Hot Water");
+        int fuel = pManager.AddIntegerParameter(
+            "Fuel",
+            "F",
+            "Fuel selection.",
+            GH_ParamAccess.item,
+            (int)Fuel.NaturalGas);
+        HeatPumpComponent.AddFuelValues((Param_Integer)pManager[fuel]);
+        pManager.AddNumberParameter(
+            "Efficiency",
+            "Eff",
+            "Fuel-to-water conversion efficiency greater than 0 and no greater than 1.",
+            GH_ParamAccess.item,
+            0.85);
+        pManager.AddTextParameter("ID", "ID", "Optional stable domestic-hot-water identifier.", GH_ParamAccess.item, string.Empty);
+    }
+
+    protected override void RegisterOutputParams(GH_OutputParamManager pManager)
+    {
+        pManager.AddParameter(
+            new DragonDomesticHotWaterParam(),
+            "Domestic Hot Water",
+            "DHW",
+            "InvisibleDragon domestic-hot-water system.",
+            GH_ParamAccess.item);
+    }
+
+    protected override void Solve(IGH_DataAccess DA)
+    {
+        string name = "Domestic Hot Water";
+        int fuelValue = (int)Fuel.NaturalGas;
+        double efficiency = 0.85;
+        string id = string.Empty;
+        if (!DA.GetData(0, ref name) ||
+            !DA.GetData(1, ref fuelValue) ||
+            !DA.GetData(2, ref efficiency))
+        {
+            return;
+        }
+
+        DA.GetData(3, ref id);
+        Fuel fuel = HvacComponentSupport.EnumValue<Fuel>(fuelValue, "Fuel");
+        var domesticHotWater = new DomesticHotWater(
+            StableIds.Resolve(
+                id,
+                "domestic-hot-water",
+                name,
+                fuel.ToString(),
+                HvacComponentSupport.Number(efficiency)),
+            name,
+            fuel,
+            efficiency);
+        DA.SetData(0, new DragonDomesticHotWaterGoo(domesticHotWater));
+    }
+}
 
 public sealed class EnergyRecoveryVentilatorComponent : DragonComponent
 {

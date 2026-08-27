@@ -35,6 +35,8 @@ internal static class DragonGooSnapshot
             Zone zone => ("zone", ToJson(ZoneSnapshot.From(zone))),
             SourceSystem source => ("source-system", ToJson(SourceGraphSnapshot.From(source))),
             SupplySystem supply => ("supply-system", ToJson(SupplyGraphSnapshot.From(supply))),
+            DomesticHotWater domesticHotWater =>
+                ("domestic-hot-water", ToJson(DomesticHotWaterSnapshot.From(domesticHotWater))),
             EnergyRecoveryVentilator ventilator =>
                 ("energy-recovery-ventilator", ToJson(EnergyRecoveryVentilatorSnapshot.From(ventilator))),
             PhotovoltaicPanel panel => ("photovoltaic-panel", ToJson(PhotovoltaicPanelSnapshot.From(panel))),
@@ -70,6 +72,7 @@ internal static class DragonGooSnapshot
             "zone" => FromJson<ZoneSnapshot>(envelope.Payload).ToDomain(),
             "source-system" => FromJson<SourceGraphSnapshot>(envelope.Payload).ToDomain(),
             "supply-system" => FromJson<SupplyGraphSnapshot>(envelope.Payload).ToDomain(),
+            "domestic-hot-water" => FromJson<DomesticHotWaterSnapshot>(envelope.Payload).ToDomain(),
             "energy-recovery-ventilator" =>
                 FromJson<EnergyRecoveryVentilatorSnapshot>(envelope.Payload).ToDomain(),
             "photovoltaic-panel" => FromJson<PhotovoltaicPanelSnapshot>(envelope.Payload).ToDomain(),
@@ -1144,6 +1147,28 @@ internal static class DragonGooSnapshot
             SupplyAirFlowCubicMetresPerSecond,
             FanTotalEfficiency,
             FanPressureRisePascals);
+    }
+
+    private sealed class DomesticHotWaterSnapshot
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public Fuel Fuel { get; set; }
+        public double Efficiency { get; set; }
+
+        public static DomesticHotWaterSnapshot From(DomesticHotWater value) => new()
+        {
+            Id = value.Id.Value,
+            Name = value.Name,
+            Fuel = value.Fuel,
+            Efficiency = value.Efficiency,
+        };
+
+        public DomesticHotWater ToDomain() => new(
+            new EntityId(Id),
+            Name,
+            Fuel,
+            Efficiency);
     }
 
     private sealed class EnergyRecoveryVentilatorGraphBuilder

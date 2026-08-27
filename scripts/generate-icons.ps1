@@ -13,10 +13,16 @@ function New-ComponentIcon {
     param(
         [Parameter(Mandatory = $true)] [string] $Name,
         [Parameter(Mandatory = $true)] [ValidateRange(0, 15)] [int] $Tile,
-        [Parameter(Mandatory = $true)] [string] $Overlay
+        [Parameter(Mandatory = $true)] [string] $Overlay,
+        [string] $Illustration = ''
     )
 
-    [pscustomobject]@{ Name = $Name; Tile = $Tile; Overlay = $Overlay }
+    [pscustomobject]@{
+        Name = $Name
+        Tile = $Tile
+        Overlay = $Overlay
+        Illustration = $Illustration
+    }
 }
 
 $products = @(
@@ -57,6 +63,11 @@ $products = @(
             (New-ComponentIcon 'ChillerComponent' 14 'snowflake'),
             (New-ComponentIcon 'AbsorptionChillerComponent' 14 'absorption'),
             (New-ComponentIcon 'BoilerComponent' 13 'flame'),
+            (New-ComponentIcon `
+                'DomesticHotWaterComponent' `
+                13 `
+                'none' `
+                (Join-Path $repositoryRoot 'assets\icons\illustrated\invisible-dragon-domestic-hot-water.png')),
             (New-ComponentIcon 'DistrictHeatingComponent' 13 'network'),
             (New-ComponentIcon 'PackagedAirConditionerComponent' 12 'packaged'),
             (New-ComponentIcon 'AirHandlingUnitComponent' 12 'ahu'),
@@ -778,10 +789,18 @@ function Write-ComponentPng {
         [Parameter(Mandatory = $true)] [ValidateRange(0, 15)] [int] $Tile,
         [Parameter(Mandatory = $true)] [string] $Overlay,
         [Parameter(Mandatory = $true)] [object] $Palette,
-        [Parameter(Mandatory = $true)] [string] $Destination
+        [Parameter(Mandatory = $true)] [string] $Destination,
+        [System.Drawing.Bitmap] $Illustration
     )
 
-    $source = Get-OpaqueBounds $Atlas (Get-AtlasCell $Atlas $Tile)
+    $sourceBitmap = if ($null -ne $Illustration) { $Illustration } else { $Atlas }
+    $source = if ($null -ne $Illustration) {
+        Get-OpaqueBounds $Illustration `
+            ([System.Drawing.Rectangle]::new(0, 0, $Illustration.Width, $Illustration.Height))
+    }
+    else {
+        Get-OpaqueBounds $Atlas (Get-AtlasCell $Atlas $Tile)
+    }
     $maximum = 76.0
     $scale = [Math]::Min($maximum / $source.Width, $maximum / $source.Height)
     $width = [Math]::Max(1, [int][Math]::Round($source.Width * $scale))
@@ -800,7 +819,7 @@ function Write-ComponentPng {
             $graphics.Clear([System.Drawing.Color]::Transparent)
             $graphics.CompositingMode = [System.Drawing.Drawing2D.CompositingMode]::SourceCopy
             Set-HighQualityDrawing $graphics
-            Draw-ImageRegion $graphics $Atlas $destinationRectangle $source
+            Draw-ImageRegion $graphics $sourceBitmap $destinationRectangle $source
             $graphics.CompositingMode = [System.Drawing.Drawing2D.CompositingMode]::SourceOver
             Draw-Overlay $graphics $Overlay $Palette
         }
@@ -1108,7 +1127,25 @@ foreach ($product in $products) {
         foreach ($component in $product.Components) {
             $destination = Join-Path $componentDirectory "$($component.Name).png"
             [void]$expectedPaths.Add([System.IO.Path]::GetFullPath($destination))
-            Write-ComponentPng $atlas $component.Tile $component.Overlay $product.Palette $destination
+            $illustration = $null
+            try {
+                if (-not [string]::IsNullOrWhiteSpace($component.Illustration)) {
+                    if (-not (Test-Path -LiteralPath $component.Illustration -PathType Leaf)) {
+                        throw "Component illustration does not exist: $($component.Illustration)"
+                    }
+                    $illustration = [System.Drawing.Bitmap]::new($component.Illustration)
+                }
+                Write-ComponentPng `
+                    $atlas `
+                    $component.Tile `
+                    $component.Overlay `
+                    $product.Palette `
+                    $destination `
+                    -Illustration $illustration
+            }
+            finally {
+                if ($null -ne $illustration) { $illustration.Dispose() }
+            }
             Write-Host "Generated $destination"
         }
         foreach ($existing in [System.IO.Directory]::GetFiles($componentDirectory, '*.png')) {

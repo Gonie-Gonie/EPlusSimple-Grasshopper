@@ -129,6 +129,18 @@ public sealed class DragonSupplySystemGoo : DragonGoo<SupplySystem>
     protected override string DisplayText(SupplySystem value) => $"Supply System {value.Name} ({value.GetType().Name})";
 }
 
+public sealed class DragonDomesticHotWaterGoo : DragonGoo<DomesticHotWater>
+{
+    public DragonDomesticHotWaterGoo() { }
+    public DragonDomesticHotWaterGoo(DomesticHotWater value) : base(value) { }
+    public override string TypeName => "InvisibleDragon Domestic Hot Water";
+    public override string TypeDescription => "An InvisibleDragon domestic-hot-water system definition.";
+    protected override DragonGoo<DomesticHotWater> Create(DomesticHotWater value) =>
+        new DragonDomesticHotWaterGoo(value);
+    protected override DragonGoo<DomesticHotWater> CreateEmpty() => new DragonDomesticHotWaterGoo();
+    protected override string DisplayText(DomesticHotWater value) => value.ToString();
+}
+
 public sealed class DragonEnergyRecoveryVentilatorGoo : DragonGoo<EnergyRecoveryVentilator>
 {
     public DragonEnergyRecoveryVentilatorGoo() { }

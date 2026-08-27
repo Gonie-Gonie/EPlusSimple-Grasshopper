@@ -31,6 +31,7 @@ public sealed class HvacComponentContractTests
             ["ElectricRadiatorComponent"] = (new("f18b4488-39e9-406c-b632-5e635c9972bb"), "HVAC"),
             ["RadiantFloorComponent"] = (new("e3bd88b6-54b6-43ec-9c94-ee0e36218618"), "HVAC"),
             ["ElectricRadiantFloorComponent"] = (new("b59c6585-0c85-4c68-bb43-1f37e4aade22"), "HVAC"),
+            ["DomesticHotWaterComponent"] = (new("6f59e771-5dc0-44aa-9b7d-a84c3d0c7d74"), "HVAC"),
             ["EnergyRecoveryVentilatorComponent"] = (new("3d5f630e-66c3-43da-b73c-50d5be1792c3"), "HVAC"),
             ["PhotovoltaicPanelComponent"] = (new("237bc85d-769a-468b-a048-70e3b5c382ee"), "Systems"),
             ["SupplyGroupAssignmentComponent"] = (new("1c78fc6e-952f-4513-a39f-b107daba9677"), "HVAC"),
@@ -115,7 +116,7 @@ public sealed class HvacComponentContractTests
             .Select(name => Component(assembly, name))
             .ToArray();
 
-        Assert.Equal(17, components.Length);
+        Assert.Equal(18, components.Length);
         Assert.All(components, component =>
         {
             (Guid guid, string panel) = ExpectedComponents[component.GetType().Name];
@@ -134,6 +135,9 @@ public sealed class HvacComponentContractTests
         Assert.Equal(
             "DragonEnergyRecoveryVentilatorParam",
             Component(assembly, "EnergyRecoveryVentilatorComponent").Params.Output[0].GetType().Name);
+        Assert.Equal(
+            "DragonDomesticHotWaterParam",
+            Component(assembly, "DomesticHotWaterComponent").Params.Output[0].GetType().Name);
         Assert.Equal(
             "DragonPhotovoltaicPanelParam",
             Component(assembly, "PhotovoltaicPanelComponent").Params.Output[0].GetType().Name);
@@ -180,6 +184,14 @@ public sealed class HvacComponentContractTests
         Assert.Contains("m", photovoltaic.Params.Input[1].Description, StringComparison.Ordinal);
         Assert.Contains("degrees", photovoltaic.Params.Input[2].Description, StringComparison.Ordinal);
         Assert.Contains("0 to 1", photovoltaic.Params.Input[4].Description, StringComparison.Ordinal);
+
+        GH_Component domesticHotWater = Component(assembly, "DomesticHotWaterComponent");
+        Assert.Equal("Param_Integer", domesticHotWater.Params.Input[1].GetType().Name);
+        Assert.Equal("Domestic Hot Water", PersistentDefault(domesticHotWater.Params.Input[0]));
+        Assert.Equal((int)Fuel.NaturalGas, PersistentDefault(domesticHotWater.Params.Input[1]));
+        Assert.Equal(0.85d, PersistentDefault(domesticHotWater.Params.Input[2]));
+        Assert.Contains("greater than 0", domesticHotWater.Params.Input[2].Description, StringComparison.Ordinal);
+        Assert.Contains("no greater than 1", domesticHotWater.Params.Input[2].Description, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -390,6 +402,18 @@ public sealed class HvacComponentContractTests
         var photovoltaicGoo = Assert.IsType<DragonPhotovoltaicPanelGoo>(photovoltaicAccess.Outputs[0]);
         Assert.Equal(18d, photovoltaicGoo.Value.AreaSquareMetres);
 
+        var domesticHotWaterAccess = new TestDataAccess(new Dictionary<int, object?>
+        {
+            [0] = "Authored Hot Water", [1] = (int)Fuel.Propane, [2] = 0.91d,
+            [3] = "dhw-authored",
+        });
+        InvokeSolve(Component(assembly, "DomesticHotWaterComponent"), domesticHotWaterAccess);
+        var domesticHotWaterGoo = Assert.IsType<DragonDomesticHotWaterGoo>(domesticHotWaterAccess.Outputs[0]);
+        Assert.Equal(new EntityId("dhw-authored"), domesticHotWaterGoo.Value.Id);
+        Assert.Equal("Authored Hot Water", domesticHotWaterGoo.Value.Name);
+        Assert.Equal(Fuel.Propane, domesticHotWaterGoo.Value.Fuel);
+        Assert.Equal(0.91d, domesticHotWaterGoo.Value.Efficiency);
+
         GonieGonie.InvisibleDragon.Shape.Zone zone = HvacDragonGooTests.FullHvacModel().Zones[0];
         var assignmentAccess = new TestDataAccess(new Dictionary<int, object?>
         {
@@ -404,6 +428,52 @@ public sealed class HvacComponentContractTests
         var assignment = Assert.IsType<ZoneHvacAssignment>(assignmentWrapper.Value);
         Assert.Equal(zone.Id, assignment.ZoneId);
         Assert.Equal(3, assignmentAccess.OutputList(2).Count);
+    }
+
+    [Fact]
+    public void DomesticHotWaterComponentUsesDeterministicIdsAndReportsInvalidEngineeringInputs()
+    {
+        Assembly assembly = LoadPlugin();
+        IReadOnlyDictionary<int, object?> inputs = new Dictionary<int, object?>
+        {
+            [0] = "Deterministic Hot Water", [1] = (int)Fuel.Electricity,
+            [2] = 0.95d, [3] = string.Empty,
+        };
+
+        var firstAccess = new TestDataAccess(inputs);
+        var secondAccess = new TestDataAccess(inputs);
+        GH_Component firstComponent = Component(assembly, "DomesticHotWaterComponent");
+        GH_Component secondComponent = Component(assembly, "DomesticHotWaterComponent");
+        InvokeSolve(firstComponent, firstAccess);
+        InvokeSolve(secondComponent, secondAccess);
+        Assert.Empty(firstComponent.RuntimeMessages(GH_RuntimeMessageLevel.Error));
+        Assert.Empty(secondComponent.RuntimeMessages(GH_RuntimeMessageLevel.Error));
+        Assert.Equal(
+            Assert.IsType<DragonDomesticHotWaterGoo>(firstAccess.Outputs[0]).Value.Id,
+            Assert.IsType<DragonDomesticHotWaterGoo>(secondAccess.Outputs[0]).Value.Id);
+
+        var invalidFuelAccess = new TestDataAccess(new Dictionary<int, object?>
+        {
+            [0] = "Invalid Fuel", [1] = int.MaxValue, [2] = 0.9d, [3] = string.Empty,
+        });
+        GH_Component invalidFuel = Component(assembly, "DomesticHotWaterComponent");
+        InvokeSolve(invalidFuel, invalidFuelAccess);
+        Assert.False(invalidFuelAccess.Outputs.ContainsKey(0));
+        Assert.Contains(
+            invalidFuel.RuntimeMessages(GH_RuntimeMessageLevel.Error),
+            message => message.Contains("Fuel value", StringComparison.Ordinal));
+
+        var invalidEfficiencyAccess = new TestDataAccess(new Dictionary<int, object?>
+        {
+            [0] = "Invalid Efficiency", [1] = (int)Fuel.NaturalGas,
+            [2] = 0d, [3] = string.Empty,
+        });
+        GH_Component invalidEfficiency = Component(assembly, "DomesticHotWaterComponent");
+        InvokeSolve(invalidEfficiency, invalidEfficiencyAccess);
+        Assert.False(invalidEfficiencyAccess.Outputs.ContainsKey(0));
+        Assert.Contains(
+            invalidEfficiency.RuntimeMessages(GH_RuntimeMessageLevel.Error),
+            message => message.Contains("greater than zero", StringComparison.Ordinal));
     }
 
     [Fact]

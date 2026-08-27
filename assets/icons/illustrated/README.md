@@ -14,6 +14,12 @@ schedule, surface, window, zone, model, IDF, validation, runtime, run, heat pump
 chiller, and results. Transparent background, no labels, no border, consistent viewpoint and
 padding, with a fierce invisible-dragon energy language.
 
+`invisible-dragon-domestic-hot-water.png` is a separate transparent ImageGen
+master for the Domestic Hot Water component. It depicts a vertical storage
+cylinder with a dominant water droplet, shower outlet, and compact orange
+heating coil in the same spectral dragon language. A dedicated master keeps
+the 24-pixel silhouette distinct from the boiler and other HVAC equipment.
+
 ## SimpleDragon atlas
 
 Prompt summary: a strict 4-by-4 atlas of sixteen isolated Grasshopper toolbar symbols, in a

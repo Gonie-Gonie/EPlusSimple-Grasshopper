@@ -3,7 +3,8 @@
 - `source/` contains the full product artwork used for assembly, package, and Yak icons.
 - `illustrated/` contains transparent 4-by-4 functional illustration atlases. These are the
   high-resolution product signatures and the visual masters for components whose atlas subject
-  remains legible at toolbar scale.
+  remains legible at toolbar scale. It can also contain a type-specific transparent master when
+  an added component needs a silhouette that the existing atlas does not provide.
 - `generated/<product>/components/` contains the exact 24-by-24 embedded component resources.
   Every public component has a type-named PNG, a two-pixel transparent border, and a unique
   content hash.

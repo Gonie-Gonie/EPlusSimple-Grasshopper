@@ -22,6 +22,7 @@ public sealed class GrasshopperAssemblyTests
         new("f18b4488-39e9-406c-b632-5e635c9972bb"),
         new("e3bd88b6-54b6-43ec-9c94-ee0e36218618"),
         new("b59c6585-0c85-4c68-bb43-1f37e4aade22"),
+        new("6f59e771-5dc0-44aa-9b7d-a84c3d0c7d74"),
         new("3d5f630e-66c3-43da-b73c-50d5be1792c3"),
         new("237bc85d-769a-468b-a048-70e3b5c382ee"),
         new("1c78fc6e-952f-4513-a39f-b107daba9677"),
@@ -48,7 +49,7 @@ public sealed class GrasshopperAssemblyTests
         Type[] componentTypes = ComponentTypes(assembly);
 
         Assert.EndsWith(".gha", assembly.Location, StringComparison.OrdinalIgnoreCase);
-        Assert.Equal(31, componentTypes.Length);
+        Assert.Equal(32, componentTypes.Length);
         Assert.All(componentTypes, type => Assert.NotNull(Activator.CreateInstance(type)));
     }
 

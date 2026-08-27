@@ -207,6 +207,36 @@ public sealed class HvacDragonGooTests
     }
 
     [Fact]
+    public void DomesticHotWaterGooDuplicatesCastsAndArchiveRoundTripsLosslessly()
+    {
+        var system = new DomesticHotWater(
+            new EntityId("dhw-goo"),
+            "Goo Hot Water",
+            Fuel.NaturalGas,
+            0.88);
+        var goo = new DragonDomesticHotWaterGoo(system);
+
+        var duplicate = Assert.IsType<DragonDomesticHotWaterGoo>(goo.Duplicate());
+        DragonDomesticHotWaterGoo archived = ArchiveRoundTrip(
+            goo,
+            new DragonDomesticHotWaterGoo());
+        string snapshot = DragonGooSnapshot.Serialize(system);
+        DomesticHotWater restored = DragonGooSnapshot.Deserialize<DomesticHotWater>(snapshot);
+
+        AssertDomesticHotWaterEquivalent(system, duplicate.Value);
+        AssertDomesticHotWaterEquivalent(system, archived.Value);
+        AssertDomesticHotWaterEquivalent(system, restored);
+        Assert.Equal(snapshot, DragonGooSnapshot.Serialize(restored));
+        Assert.Contains("\"kind\":\"domestic-hot-water\"", snapshot, StringComparison.Ordinal);
+
+        var empty = new DragonDomesticHotWaterGoo();
+        Assert.True(empty.CastFrom(system));
+        DomesticHotWater? cast = null;
+        Assert.True(empty.CastTo(ref cast));
+        Assert.Same(system, cast);
+    }
+
+    [Fact]
     public void FullEnergyModelRoundTripPreservesHvacGraphsAndEngineeringProperties()
     {
         EnergyModel source = FullHvacModel();
@@ -288,6 +318,7 @@ public sealed class HvacDragonGooTests
         {
             typeof(DragonSourceSystemGoo),
             typeof(DragonSupplySystemGoo),
+            typeof(DragonDomesticHotWaterGoo),
             typeof(DragonEnergyRecoveryVentilatorGoo),
             typeof(DragonPhotovoltaicPanelGoo),
         };
@@ -295,6 +326,7 @@ public sealed class HvacDragonGooTests
         {
             typeof(DragonSourceSystemParam),
             typeof(DragonSupplySystemParam),
+            typeof(DragonDomesticHotWaterParam),
             typeof(DragonEnergyRecoveryVentilatorParam),
             typeof(DragonPhotovoltaicPanelParam),
         };
@@ -598,6 +630,17 @@ public sealed class HvacDragonGooTests
         Assert.Equal(expected.AzimuthDegrees, actual.AzimuthDegrees);
         Assert.Equal(expected.Efficiency, actual.Efficiency);
         Assert.Equal(expected.ActiveCellAreaFraction, actual.ActiveCellAreaFraction);
+    }
+
+    private static void AssertDomesticHotWaterEquivalent(
+        DomesticHotWater expected,
+        DomesticHotWater actual)
+    {
+        Assert.NotSame(expected, actual);
+        Assert.Equal(expected.Id, actual.Id);
+        Assert.Equal(expected.Name, actual.Name);
+        Assert.Equal(expected.Fuel, actual.Fuel);
+        Assert.Equal(expected.Efficiency, actual.Efficiency);
     }
 
     private static TGoo ArchiveRoundTrip<TGoo>(TGoo source, TGoo target)
