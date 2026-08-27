@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:66f25e3e5ef9b502ff40eb27979d6ac5e2a1c53dd80c943659e245d199640156"
+    "sha256:00d7b6051248e3e204fb55c816e1c170652b94039fcf58e0d65cab2ad2ce46c1"
 )
 
 
@@ -68,9 +68,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 315,
-                "exception": 406,
-                "needs_reverification": 269,
+                "equivalent": 324,
+                "exception": 414,
+                "needs_reverification": 252,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -814,22 +814,35 @@ class SafeScopePolicyTests(unittest.TestCase):
             *range(315, 319),
             *range(321, 325),
         }
+        other_target_indices = {
+            283,
+            284,
+            287,
+            *range(290, 296),
+            325,
+            326,
+            329,
+            *range(332, 337),
+        }
         deferred_indices = (
             set(range(135, 337))
             - set(target_symbols)
             - excluded_indices
             - thermal_target_indices
             - supply_target_indices
+            - other_target_indices
         )
         self.assertEqual(58, len(excluded_indices))
         self.assertEqual(47, len(thermal_target_indices))
         self.assertEqual(52, len(supply_target_indices))
-        self.assertEqual(17, len(deferred_indices))
+        self.assertEqual(17, len(other_target_indices))
+        self.assertEqual(0, len(deferred_indices))
         self.assertEqual(
             set(range(135, 337)),
             set(target_symbols)
             | thermal_target_indices
             | supply_target_indices
+            | other_target_indices
             | excluded_indices
             | deferred_indices,
         )
@@ -1083,12 +1096,6 @@ class SafeScopePolicyTests(unittest.TestCase):
                 for classification in ("equivalent", "exception")
             },
         )
-        for index in other_indices:
-            entry = entries[index]
-            self.assertEqual("needs_reverification", entry.classification, index)
-            self.assertIsNone(entry.exception_id, index)
-            self.assertEqual((), entry.evidence, index)
-            self.assertEqual(NEEDS_RATIONALE, entry.rationale, index)
         for index in excluded_indices:
             entry = entries[index]
             self.assertEqual("out_of_scope", entry.classification, index)
@@ -1244,16 +1251,151 @@ class SafeScopePolicyTests(unittest.TestCase):
                 for classification in ("equivalent", "exception")
             },
         )
-        for index in other_indices:
-            entry = entries[index]
-            self.assertEqual("needs_reverification", entry.classification, index)
-            self.assertIsNone(entry.exception_id, index)
-            self.assertEqual((), entry.evidence, index)
-            self.assertEqual(NEEDS_RATIONALE, entry.rationale, index)
         for index in excluded_indices:
             entry = entries[index]
             self.assertEqual("out_of_scope", entry.classification, index)
             self.assertIsNone(entry.exception_id, index)
+
+    def test_epsimple_hvac_other_systems_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        targets = {
+            283: ('PhotoVoltaicSystem', 'exception', 'reviewed-native-immutable-other-system-and-aggregate-route-5a79715b'),
+            284: ('PhotoVoltaicSystem.ID', 'equivalent', None),
+            287: ('PhotoVoltaicSystem.__init__', 'exception', 'reviewed-native-immutable-other-system-and-aggregate-route-b0187462'),
+            290: ('PhotoVoltaicSystem.area', 'equivalent', None),
+            291: ('PhotoVoltaicSystem.azimuth', 'equivalent', None),
+            292: ('PhotoVoltaicSystem.efficiency', 'equivalent', None),
+            293: ('PhotoVoltaicSystem.from_json', 'exception', 'reviewed-native-immutable-other-system-and-aggregate-route-1571f37e'),
+            294: ('PhotoVoltaicSystem.tilt', 'equivalent', None),
+            295: ('PhotoVoltaicSystem.to_dragon', 'exception', 'reviewed-native-immutable-other-system-and-aggregate-route-6f67da14'),
+            325: ('VentilationSystem', 'exception', 'reviewed-native-immutable-other-system-and-aggregate-route-b4f22735'),
+            326: ('VentilationSystem.ID', 'equivalent', None),
+            329: ('VentilationSystem.__init__', 'exception', 'reviewed-native-immutable-other-system-and-aggregate-route-7d9d5173'),
+            332: ('VentilationSystem.airflow_rate', 'equivalent', None),
+            333: ('VentilationSystem.cooling_efficiency', 'equivalent', None),
+            334: ('VentilationSystem.from_json', 'exception', 'reviewed-native-immutable-other-system-and-aggregate-route-acaa4faa'),
+            335: ('VentilationSystem.heating_efficiency', 'equivalent', None),
+            336: ('VentilationSystem.to_dragon', 'exception', 'reviewed-native-immutable-other-system-and-aggregate-route-fdc1293c'),
+        }
+        self.assertEqual(17, len(targets))
+        self.assertEqual(
+            {"equivalent": 9, "exception": 8},
+            {
+                classification: sum(
+                    target_classification == classification
+                    for _, target_classification, _ in targets.values()
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+
+        for index, (symbol, classification, exception_id) in targets.items():
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual(
+                ("src/epsimple/core/hvac.py", symbol),
+                inventory_symbol.key,
+                symbol,
+            )
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            assertion_id = (
+                f"epsimple-hvac-other-systems-{index}-"
+                f"{inventory_symbol.symbol_hash.removeprefix('sha256:')[:8]}"
+            )
+            expected_evidence = [f"upstream/symbol-evidence.json#{assertion_id}"]
+            if exception_id is not None:
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, symbol)
+            for exact_binding in (
+                assertion_id,
+                "commit 7e69d81",
+                "sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc",
+                "sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b",
+                "sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22",
+                "sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6",
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+            if exception_id is not None:
+                self.assertIn(exception_id, entry.rationale, symbol)
+
+        thermal_indices = {
+            135, 136, 139, *range(142, 147), 157, 158, 161,
+            *range(164, 172), 174, *range(177, 185), 199, 200, 203,
+            *range(206, 209), 248, 251, 252, 253, 254, 257, *range(260, 267),
+        }
+        supply_indices = {
+            147, 148, 151, *range(154, 157), 209, 210, 213,
+            *range(216, 221), 223, *range(226, 232), 234, *range(237, 240),
+            271, 272, 275, *range(278, 283), 296, 297, 300,
+            *range(303, 310), 312, *range(315, 319), *range(321, 325),
+        }
+        enum_indices = {
+            *range(185, 199), *range(240, 248), *range(267, 271), 319, 320,
+        }
+        excluded_indices = (
+            set(range(135, 337))
+            - set(targets)
+            - thermal_indices
+            - supply_indices
+            - enum_indices
+        )
+        self.assertEqual(47, len(thermal_indices))
+        self.assertEqual(52, len(supply_indices))
+        self.assertEqual(28, len(enum_indices))
+        self.assertEqual(58, len(excluded_indices))
+        self.assertEqual(
+            set(range(135, 337)),
+            set(targets)
+            | thermal_indices
+            | supply_indices
+            | enum_indices
+            | excluded_indices,
+        )
+        self.assertEqual(
+            {"equivalent": 24, "exception": 23},
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in thermal_indices
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+        self.assertEqual(
+            {"equivalent": 19, "exception": 33},
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in supply_indices
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+        self.assertEqual(
+            {"equivalent": 18, "exception": 10},
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in enum_indices
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+        for index in excluded_indices:
+            entry = entries[index]
+            self.assertEqual("out_of_scope", entry.classification, index)
+            self.assertIsNone(entry.exception_id, index)
+        self.assertEqual(
+            0,
+            sum(
+                entry.path == "src/epsimple/core/hvac.py"
+                and entry.classification == "needs_reverification"
+                for entry in entries
+            ),
+        )
 
     def test_epsimple_model_result_promotion_is_exact_and_bounded(self) -> None:
         entries = self.configuration.matrix.entries

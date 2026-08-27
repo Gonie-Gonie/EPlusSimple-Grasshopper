@@ -283,19 +283,6 @@
     "exception",
     "exception",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "out_of_scope",
-    "needs_reverification",
-    "out_of_scope",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
     "equivalent",
     "out_of_scope",
@@ -304,8 +291,9 @@
     "out_of_scope",
     "out_of_scope",
     "equivalent",
-    "exception",
     "equivalent",
+    "equivalent",
+    "exception",
     "equivalent",
     "exception",
     "exception",
@@ -318,6 +306,18 @@
     "equivalent",
     "exception",
     "equivalent",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "out_of_scope",
+    "out_of_scope",
+    "exception",
+    "out_of_scope",
+    "out_of_scope",
+    "equivalent",
+    "exception",
+    "equivalent",
     "exception",
     "exception",
     "exception",
@@ -325,18 +325,18 @@
     "exception",
     "equivalent",
     "equivalent",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
+    "exception",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
     "exception",
     "exception",
     "exception",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:66f25e3e5ef9b502ff40eb27979d6ac5e2a1c53dd80c943659e245d199640156",
+  "content_sha256": "sha256:00d7b6051248e3e204fb55c816e1c170652b94039fcf58e0d65cab2ad2ce46c1",
   "details": [
     {
       "evidence": [
@@ -3450,6 +3450,22 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-immutable-other-system-and-aggregate-route-5a79715b",
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-283-5a79715b"
+      ],
+      "exception_id": "reviewed-native-immutable-other-system-and-aggregate-route-5a79715b",
+      "index": 283,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicSystem for exact fixture case P01 (epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon) through GonieGonie.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool). Adaptation family reviewed-native-immutable-other-system-and-aggregate-route-5a79715b is represented by exact compatibility exception reviewed-native-immutable-other-system-and-aggregate-route-5a79715b. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:caedac3da7f6c576e391afaa060dc2043be7f9d38f2ace87ff3751a91cfba233. Only inventory index 283 and assertion epsimple-hvac-other-systems-283-5a79715b are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-284-246156d9"
+      ],
+      "index": 284,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicSystem.ID for exact fixture case P01 (epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon) through GonieGonie.SimpleDragon.PhotovoltaicSystem.Id. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:2ff69a5a32e6bef1df46d5de1f84608819f7dbc8ccac9c44bed7c03d947ea751. Only inventory index 284 and assertion epsimple-hvac-other-systems-284-246156d9 are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-photovoltaicsystem-eq-857cab33"
       ],
       "index": 285,
@@ -3464,6 +3480,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-immutable-other-system-and-aggregate-route-b0187462",
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-287-b0187462"
+      ],
+      "exception_id": "reviewed-native-immutable-other-system-and-aggregate-route-b0187462",
+      "index": 287,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicSystem.__init__ for exact fixture case P01 (epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon) through GonieGonie.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool). Adaptation family reviewed-native-immutable-other-system-and-aggregate-route-b0187462 is represented by exact compatibility exception reviewed-native-immutable-other-system-and-aggregate-route-b0187462. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:2b88c8d06863c7628fffd4de2f49964778ee40a2e2cc4cdaacae70e31abaaaa6. Only inventory index 287 and assertion epsimple-hvac-other-systems-287-b0187462 are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-photovoltaicsystem-repr-c0e1d5ce"
       ],
       "index": 288,
@@ -3475,6 +3500,52 @@
       ],
       "index": 289,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-290-aa93b96b"
+      ],
+      "index": 290,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicSystem.area for exact fixture case P01 (epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon) through GonieGonie.SimpleDragon.PhotovoltaicSystem.Area. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:860e210a2adb5a28b40c94abccba1314c240c248fec6ee37ac40f623c05c4dce. Only inventory index 290 and assertion epsimple-hvac-other-systems-290-aa93b96b are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-291-3b2cfc1a"
+      ],
+      "index": 291,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicSystem.azimuth for exact fixture case P01 (epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon) through GonieGonie.SimpleDragon.PhotovoltaicSystem.Azimuth. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:018476fc2103fd5e26bc6af030dd9fd0201a24cf5c6384e60bb51340733b89e4. Only inventory index 291 and assertion epsimple-hvac-other-systems-291-3b2cfc1a are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-292-80144f2f"
+      ],
+      "index": 292,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicSystem.efficiency for exact fixture case P01 (epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon) through GonieGonie.SimpleDragon.PhotovoltaicSystem.Efficiency. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:3bfbbd8f9fe415d3b7d2656d89fdb540552a46677f6fc0abcb45064dcf3ec2ee. Only inventory index 292 and assertion epsimple-hvac-other-systems-292-80144f2f are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-immutable-other-system-and-aggregate-route-1571f37e",
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-293-1571f37e"
+      ],
+      "exception_id": "reviewed-native-immutable-other-system-and-aggregate-route-1571f37e",
+      "index": 293,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicSystem.from_json for exact fixture case P01 (epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon) through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) photovoltaic-system dispatch. Adaptation family reviewed-native-immutable-other-system-and-aggregate-route-1571f37e is represented by exact compatibility exception reviewed-native-immutable-other-system-and-aggregate-route-1571f37e. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs@sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968 are fail-closed bindings. The trusted evidence output is sha256:64f35ae5581bdf64ec979f327c47548693852c0faf83226d3d3e894746ba7fdf. Only inventory index 293 and assertion epsimple-hvac-other-systems-293-1571f37e are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-294-abeb16e6"
+      ],
+      "index": 294,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicSystem.tilt for exact fixture case P01 (epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon) through GonieGonie.SimpleDragon.PhotovoltaicSystem.Tilt. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:d39de57a8436e626979199f35788b2e82110d33afab9e28b2ad3c760e1bf4af0. Only inventory index 294 and assertion epsimple-hvac-other-systems-294-abeb16e6 are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-immutable-other-system-and-aggregate-route-6f67da14",
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-295-6f67da14"
+      ],
+      "exception_id": "reviewed-native-immutable-other-system-and-aggregate-route-6f67da14",
+      "index": 295,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicSystem.to_dragon for exact fixture case P01 (epsimple-hvac-other-systems.photovoltaic-state-validation-json-dragon) through GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Adaptation family reviewed-native-immutable-other-system-and-aggregate-route-6f67da14 is represented by exact compatibility exception reviewed-native-immutable-other-system-and-aggregate-route-6f67da14. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:22ed3bf6a1aeb3fe9c48688ecc21ddba53c37fbf8af58c167ee987f57781add0. Only inventory index 295 and assertion epsimple-hvac-other-systems-295-6f67da14 are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
     },
     {
       "evidence": [
@@ -3705,6 +3776,22 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-immutable-other-system-and-aggregate-route-b4f22735",
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-325-b4f22735"
+      ],
+      "exception_id": "reviewed-native-immutable-other-system-and-aggregate-route-b4f22735",
+      "index": 325,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify VentilationSystem for exact fixture case V01 (epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon) through GonieGonie.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool). Adaptation family reviewed-native-immutable-other-system-and-aggregate-route-b4f22735 is represented by exact compatibility exception reviewed-native-immutable-other-system-and-aggregate-route-b4f22735. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:77025b4b77695ce1144de6d8b1248608e1e9530761cc59001031344053826580. Only inventory index 325 and assertion epsimple-hvac-other-systems-325-b4f22735 are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-326-246156d9"
+      ],
+      "index": 326,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify VentilationSystem.ID for exact fixture case V01 (epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon) through GonieGonie.SimpleDragon.VentilationSystem.Id. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:85af7130a4be71cab2d0b860175d90f96f057ba5eebfe65a64242ea74b282ce1. Only inventory index 326 and assertion epsimple-hvac-other-systems-326-246156d9 are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-ventilationsystem-eq-9c28de4f"
       ],
       "index": 327,
@@ -3719,6 +3806,15 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-immutable-other-system-and-aggregate-route-7d9d5173",
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-329-7d9d5173"
+      ],
+      "exception_id": "reviewed-native-immutable-other-system-and-aggregate-route-7d9d5173",
+      "index": 329,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify VentilationSystem.__init__ for exact fixture case V01 (epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon) through GonieGonie.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool). Adaptation family reviewed-native-immutable-other-system-and-aggregate-route-7d9d5173 is represented by exact compatibility exception reviewed-native-immutable-other-system-and-aggregate-route-7d9d5173. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:9289f2d1f7b583e172c11e35fdedfb1258c19c290b5eba08574baf7e7d3c2604. Only inventory index 329 and assertion epsimple-hvac-other-systems-329-7d9d5173 are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-core-hvac-py-ventilationsystem-repr-fd46070c"
       ],
       "index": 330,
@@ -3730,6 +3826,45 @@
       ],
       "index": 331,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-332-b19eca15"
+      ],
+      "index": 332,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify VentilationSystem.airflow_rate for exact fixture case V01 (epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon) through GonieGonie.SimpleDragon.VentilationSystem.AirflowRate. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:67d3242b2bb29444001a7536b0998717addbee84ddf1e59a3aa3e71628c7aa33. Only inventory index 332 and assertion epsimple-hvac-other-systems-332-b19eca15 are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-333-83943137"
+      ],
+      "index": 333,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify VentilationSystem.cooling_efficiency for exact fixture case V01 (epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon) through GonieGonie.SimpleDragon.VentilationSystem.CoolingEfficiency. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:8f0ea458dffcef51f1b2f1023285c5494751251b9c5811b657248bae3a15b457. Only inventory index 333 and assertion epsimple-hvac-other-systems-333-83943137 are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-immutable-other-system-and-aggregate-route-acaa4faa",
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-334-acaa4faa"
+      ],
+      "exception_id": "reviewed-native-immutable-other-system-and-aggregate-route-acaa4faa",
+      "index": 334,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify VentilationSystem.from_json for exact fixture case V01 (epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon) through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) ventilation-system dispatch. Adaptation family reviewed-native-immutable-other-system-and-aggregate-route-acaa4faa is represented by exact compatibility exception reviewed-native-immutable-other-system-and-aggregate-route-acaa4faa. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs@sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968 are fail-closed bindings. The trusted evidence output is sha256:2a3e37ee1a0cba7ae42aa3caca07716089dc76a3f6904c15a9f7c4a0888551f4. Only inventory index 334 and assertion epsimple-hvac-other-systems-334-acaa4faa are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-335-76edd9cd"
+      ],
+      "index": 335,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify VentilationSystem.heating_efficiency for exact fixture case V01 (epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon) through GonieGonie.SimpleDragon.VentilationSystem.HeatingEfficiency. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs@sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5 are fail-closed bindings. The trusted evidence output is sha256:1f62b1b8c2d12ef04811624f7c1d8b79769ec607a3d8f8bc47272aba21a24d8c. Only inventory index 335 and assertion epsimple-hvac-other-systems-335-76edd9cd are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#reviewed-native-immutable-other-system-and-aggregate-route-fdc1293c",
+        "upstream/symbol-evidence.json#epsimple-hvac-other-systems-336-fdc1293c"
+      ],
+      "exception_id": "reviewed-native-immutable-other-system-and-aggregate-route-fdc1293c",
+      "index": 336,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify VentilationSystem.to_dragon for exact fixture case V01 (epsimple-hvac-other-systems.ventilation-defaults-state-validation-json-dragon) through GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Adaptation family reviewed-native-immutable-other-system-and-aggregate-route-fdc1293c is represented by exact compatibility exception reviewed-native-immutable-other-system-and-aggregate-route-fdc1293c. Fixture sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc, generator sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b, validator sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22, commit 7e69d81 native parity test sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:172001d50a8f9afd1013f7c9bd31d21eb475e88dab4879cba0485b4a57f36b1c. Only inventory index 336 and assertion epsimple-hvac-other-systems-336-fdc1293c are promoted; the 52 exact HVAC supply-system, 47 thermal-source, and 28 enums/base targets retain their reviewed classifications, all 58 excluded HVAC declarations remain out of scope, every remaining HVAC declaration is covered by exact reviewed evidence, and every non-HVAC symbol retains its prior classification."
     },
     {
       "evidence": [
@@ -8875,9 +9010,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 315,
-      "exception": 406,
-      "needs_reverification": 269,
+      "equivalent": 324,
+      "exception": 414,
+      "needs_reverification": 252,
       "out_of_scope": 252
     },
     "entry_count": 1242
