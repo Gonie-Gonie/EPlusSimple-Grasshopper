@@ -3597,3 +3597,283 @@
     api_contract: "callers use the sealed GonieGonie.SimpleDragon.SpecialTag catalog and typed lookup instead of constructing or mutating a Python Enum class"
     compatibility_evidence: "only inventory index 58 (src/epsimple/constants.py::SpecialTag), exact cases S01, S03, S05, S06, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
   approval: accepted-native-api-adaptation
+
+- id: grm-vocabulary-rather-than-native-enum-tostring-f40e4929
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: BlindType.__str__
+    symbol_hash: sha256:f40e4929e52296ef884601b57579680f005907a223f96e12fc07cce3d637265e
+  difference:
+    upstream: BlindType.__str__ returns the lowercase Python string-enum value directly.
+    dotnet: SimpleDragon keeps a CLR enum and maps the pinned lowercase GRM vocabulary through GrmReader.Read and GrmWriter.Serialize rather than relying on Enum.ToString.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify BlindType.__str__ for exact fixture case B01 (epsimple-shape-core.blind-type-values-and-string-semantics) through GonieGonie.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool). Adaptation family grm-vocabulary-rather-than-native-enum-tostring-f40e4929 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs@sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842 are fail-closed bindings. The trusted evidence output is sha256:f123f0bf380b29d580d37479e11f1b0d60a08ec8dc78c88dbba8fe29565cb8e1. Only inventory index 408 and assertion epsimple-shape-core-408-f40e4929 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool); the Python-only dynamic surface identified by adaptation family grm-vocabulary-rather-than-native-enum-tostring-f40e4929 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 408, assertion epsimple-shape-core-408-f40e4929, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: unified-immutable-fenestration-with-door-discriminator-8c468e24
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Door
+    symbol_hash: sha256:8c468e24f71eee70841b7374cd605a58ff596c9534f687cf96d848a11456e840
+  difference:
+    upstream: Door is a dedicated mutable Python Fenestration subtype with subtype-specific validation and conversion behavior.
+    dotnet: SimpleDragon represents a door with the sealed immutable Fenestration value and the FenestrationType.Door discriminator.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Door for exact fixture case D01 (epsimple-shape-core.door-validation-json-and-dragon-conversion) through GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType. Adaptation family unified-immutable-fenestration-with-door-discriminator-8c468e24 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:df9411469e9e6b56ae5a148b9d1256a227ef26472ab3885e7bd0164992aa120b. Only inventory index 409 and assertion epsimple-shape-core-409-8c468e24 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType; the Python-only dynamic surface identified by adaptation family unified-immutable-fenestration-with-door-discriminator-8c468e24 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 409, assertion epsimple-shape-core-409-8c468e24, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: sealed-discriminated-native-fenestration-rather-than-abc-43d44ea1
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Fenestration
+    symbol_hash: sha256:43d44ea17615d54a46086dccdae3b68d756ba66dc51043315394c398ce317506
+  difference:
+    upstream: Fenestration is an abstract mutable Python base class whose constructor and conversion surface are completed by subclasses.
+    dotnet: SimpleDragon exposes one sealed immutable Fenestration value discriminated by FenestrationType.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Fenestration for exact fixture case F01 (epsimple-shape-core.fenestration-abstract-contract) through GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType. Adaptation family sealed-discriminated-native-fenestration-rather-than-abc-43d44ea1 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:828cfc9976cee6dbcf58d317c4a9f0d765ced88af5ace65642e0eca1f9fcbc5b. Only inventory index 413 and assertion epsimple-shape-core-413-43d44ea1 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType; the Python-only dynamic surface identified by adaptation family sealed-discriminated-native-fenestration-rather-than-abc-43d44ea1 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 413, assertion epsimple-shape-core-413-43d44ea1, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: immutable-native-fenestration-explicit-reconstruction-a0dbc411
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Fenestration.__deepcopy__
+    symbol_hash: sha256:a0dbc41130a29593da15c131fbb08fbc1213a8057821d7007fded50d504805f7
+  difference:
+    upstream: Fenestration.__deepcopy__ creates a mutable subtype clone and participates in caller-controlled Python memo semantics.
+    dotnet: The immutable native Fenestration is copied by explicit typed reconstruction with stable state and no caller-controlled memo surface.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Fenestration.__deepcopy__ for exact fixture case F02 (epsimple-shape-core.fenestration-id-deepcopy-and-factory-dispatch) through GonieGonie.SimpleDragon.Fenestration constructor. Adaptation family immutable-native-fenestration-explicit-reconstruction-a0dbc411 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:6d26c2cbedd21261294cf94e0367b8c84d1d8a0057244f49f8f0343dfbf9492d. Only inventory index 415 and assertion epsimple-shape-core-415-a0dbc411 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Fenestration constructor; the Python-only dynamic surface identified by adaptation family immutable-native-fenestration-explicit-reconstruction-a0dbc411 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 415, assertion epsimple-shape-core-415-a0dbc411, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: deterministic-native-id-and-discriminated-constructor-1b22b2f1
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Fenestration.__init__
+    symbol_hash: sha256:1b22b2f18a540de4aa832db02439453eedced6e7d4b9215568fd8df2e40e520a
+  difference:
+    upstream: Fenestration.__init__ supports Python subclass construction and generates an address-derived ID when omitted.
+    dotnet: The typed native Fenestration constructor requires a FenestrationType and uses an explicit or deterministic stable EntityId.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Fenestration.__init__ for exact fixture case F01 (epsimple-shape-core.fenestration-abstract-contract) through GonieGonie.SimpleDragon.Fenestration constructor. Adaptation family deterministic-native-id-and-discriminated-constructor-1b22b2f1 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:ccd1d3a93ec95a03b69d5492ccf2e38acf96eb403f9222e3e2ca4a073dd23e75. Only inventory index 417 and assertion epsimple-shape-core-417-1b22b2f1 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Fenestration constructor; the Python-only dynamic surface identified by adaptation family deterministic-native-id-and-discriminated-constructor-1b22b2f1 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 417, assertion epsimple-shape-core-417-1b22b2f1, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: immutable-resolved-native-construction-reference-0b0cbf2f
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Fenestration.construction
+    symbol_hash: sha256:0b0cbf2f9f3cdd34c003b74bf9eb18deb9cadf62ebd427dc7c3ccf11030a37eb
+  difference:
+    upstream: Fenestration.construction is a mutable abstract Python property implemented and validated by each subtype.
+    dotnet: Fenestration.Construction is a get-only resolved typed reference paired with the validated ConstructionId.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Fenestration.construction for exact fixture case F01 (epsimple-shape-core.fenestration-abstract-contract) through GonieGonie.SimpleDragon.Fenestration.Construction. Adaptation family immutable-resolved-native-construction-reference-0b0cbf2f classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:1b9c78a65fe702383218a10772158326aa2186e4b0f8c38c35de2d8df8f81c90. Only inventory index 418 and assertion epsimple-shape-core-418-0b0cbf2f are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Fenestration.Construction; the Python-only dynamic surface identified by adaptation family immutable-resolved-native-construction-reference-0b0cbf2f is intentionally not exposed.
+    compatibility_evidence: Only inventory index 418, assertion epsimple-shape-core-418-0b0cbf2f, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: aggregate-native-converter-rather-than-abstract-instance-method-ede823e2
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Fenestration.to_dragon
+    symbol_hash: sha256:ede823e2a01313e006bfae12e1fcd912f22dd7eb65cb7acb424aa0bec9f4b9c3
+  difference:
+    upstream: Fenestration.to_dragon is an abstract Python instance operation implemented by concrete subtypes.
+    dotnet: SimpleDragon performs the observed conversion through aggregate GreenRetrofitConverter.Convert instead of an abstract instance method.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Fenestration.to_dragon for exact fixture case F01 (epsimple-shape-core.fenestration-abstract-contract) through GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Adaptation family aggregate-native-converter-rather-than-abstract-instance-method-ede823e2 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:402cf192b70650333d40da12120c816ccb0d6bb7e7ab21af0e59acb669cdd90b. Only inventory index 420 and assertion epsimple-shape-core-420-ede823e2 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?); the Python-only dynamic surface identified by adaptation family aggregate-native-converter-rather-than-abstract-instance-method-ede823e2 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 420, assertion epsimple-shape-core-420-ede823e2, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: unified-immutable-fenestration-with-glassdoor-discriminator-1981a404
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: GlassDoor
+    symbol_hash: sha256:1981a40487517cecff870298033d0956d6414d76e20c7ae55703e940379da1dd
+  difference:
+    upstream: GlassDoor is a distinct mutable Python Window subtype with inherited conversion behavior.
+    dotnet: SimpleDragon represents a glass door with the sealed immutable Fenestration value and FenestrationType.GlassDoor.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify GlassDoor for exact fixture case G01 (epsimple-shape-core.glass-door-window-subtype-and-conversion) through GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType. Adaptation family unified-immutable-fenestration-with-glassdoor-discriminator-1981a404 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:3b410c64208d8ea43ba8cc5b581de11db2a5a3e11f724eb0c18f776176cf684e. Only inventory index 421 and assertion epsimple-shape-core-421-1981a404 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType; the Python-only dynamic surface identified by adaptation family unified-immutable-fenestration-with-glassdoor-discriminator-1981a404 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 421, assertion epsimple-shape-core-421-1981a404, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: immutable-native-surface-explicit-reconstruction-0d951ae6
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Surface.__deepcopy__
+    symbol_hash: sha256:0d951ae6777609e1a883c40873574a7a270224fe014783291d3e43db7ebb604f
+  difference:
+    upstream: Surface.__deepcopy__ creates a renamed mutable graph clone with Python memo and nested fenestration copy semantics.
+    dotnet: The immutable native Surface is copied by explicit typed reconstruction with deterministic identity and read-only children.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Surface.__deepcopy__ for exact fixture case S02 (epsimple-shape-core.surface-deepcopy-and-flip-semantics) through GonieGonie.SimpleDragon.Surface constructor. Adaptation family immutable-native-surface-explicit-reconstruction-0d951ae6 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:c10249072d2f7797a84d85751c61d59d7b1936ca570ac11de3e0bdcc72f0282b. Only inventory index 424 and assertion epsimple-shape-core-424-0d951ae6 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Surface constructor; the Python-only dynamic surface identified by adaptation family immutable-native-surface-explicit-reconstruction-0d951ae6 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 424, assertion epsimple-shape-core-424-0d951ae6, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: deterministic-native-id-and-immutable-constructor-bd742aa0
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Surface.__init__
+    symbol_hash: sha256:bd742aa0e5cee63e774cb93eb9bb81267178cda8632b06462f3edc3a7621fe68
+  difference:
+    upstream: Surface.__init__ accepts a mutable dynamic graph and generates an address-derived ID when omitted.
+    dotnet: The typed native Surface constructor validates the complete immutable state and uses an explicit or deterministic stable EntityId.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Surface.__init__ for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface constructor. Adaptation family deterministic-native-id-and-immutable-constructor-bd742aa0 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:edb876a1a25cfb54e29b790dae13014a290d778330b3351e0a4a8872071bb6e9. Only inventory index 426 and assertion epsimple-shape-core-426-bd742aa0 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Surface constructor; the Python-only dynamic surface identified by adaptation family deterministic-native-id-and-immutable-constructor-bd742aa0 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 426, assertion epsimple-shape-core-426-bd742aa0, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: native-adjacent-zone-id-rather-than-object-reference-cf314ac6
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Surface.adjacent_zone
+    symbol_hash: sha256:cf314ac63c9ce1c0c82a8c4e00bc733b383acdb7ce44199ea572e48d8b262912
+  difference:
+    upstream: Surface.adjacent_zone stores a mutable Zone object reference and couples assignment to the Python boundary property.
+    dotnet: Surface.AdjacentZoneId stores the validated stable zone identifier on a zone boundary rather than retaining an object reference.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Surface.adjacent_zone for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface.AdjacentZoneId. Adaptation family native-adjacent-zone-id-rather-than-object-reference-cf314ac6 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:19b6cd5c44f0aca9a1b8355cb642a3eb07b48d4742db6b5e225772d4e310dd4e. Only inventory index 429 and assertion epsimple-shape-core-429-cf314ac6 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Surface.AdjacentZoneId; the Python-only dynamic surface identified by adaptation family native-adjacent-zone-id-rather-than-object-reference-cf314ac6 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 429, assertion epsimple-shape-core-429-cf314ac6, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: pure-deterministic-native-flip-without-inplace-mutation-8e01b8fa
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Surface.flip
+    symbol_hash: sha256:8e01b8fa930670a91c613f41808e368b165900c73b4caa8a8b4efd91342a1f21
+  difference:
+    upstream: Surface.flip optionally mutates the Python instance in place or returns a deepcopy with Python clone identity.
+    dotnet: Surface.Flip always returns a validated deterministic immutable Surface and leaves the source unchanged.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Surface.flip for exact fixture case S02 (epsimple-shape-core.surface-deepcopy-and-flip-semantics) through GonieGonie.SimpleDragon.Surface.Flip(). Adaptation family pure-deterministic-native-flip-without-inplace-mutation-8e01b8fa classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:1202598d119100e3c185ccfebf049dd25cdae86cbe15a57ee3741d5ce11ad8e0. Only inventory index 434 and assertion epsimple-shape-core-434-8e01b8fa are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Surface.Flip(); the Python-only dynamic surface identified by adaptation family pure-deterministic-native-flip-without-inplace-mutation-8e01b8fa is intentionally not exposed.
+    compatibility_evidence: Only inventory index 434, assertion epsimple-shape-core-434-8e01b8fa, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: model-catalog-native-aggregation-72d9807c
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Surface.get_unique_fenestration_constructions
+    symbol_hash: sha256:72d9807c6c2ca3eb6323e1a184d3f943206f21f2f9ed98745a747a666cf0664f
+  difference:
+    upstream: Surface.get_unique_fenestration_constructions builds a mutable dictionary directly from opening objects.
+    dotnet: SimpleDragon exposes the validated read-only FenestrationConstructions catalog on GreenRetrofitModel.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Surface.get_unique_fenestration_constructions for exact fixture case S04 (epsimple-shape-core.surface-opening-counts-and-unique-constructions) through GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions. Adaptation family model-catalog-native-aggregation-72d9807c classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/GreenRetrofitModel.cs@sha256:7bf2f7dfb922f4d85982ada0f5622bfbef59dce8cb4d7a90b2759ed6978935ea are fail-closed bindings. The trusted evidence output is sha256:722157ee9277cbf0a2d47ddd594d5451a3b2d009aaf61d3f1083e826e396ddb5. Only inventory index 436 and assertion epsimple-shape-core-436-72d9807c are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions; the Python-only dynamic surface identified by adaptation family model-catalog-native-aggregation-72d9807c is intentionally not exposed.
+    compatibility_evidence: Only inventory index 436, assertion epsimple-shape-core-436-72d9807c, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: unified-immutable-fenestration-with-window-discriminator-00f305af
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Window
+    symbol_hash: sha256:00f305afc68a9a36ee4cf733d6cdde693e412b951c9145e327eea2f2198d8689
+  difference:
+    upstream: Window is a dedicated mutable Python Fenestration subtype with blind state and subtype conversion behavior.
+    dotnet: SimpleDragon represents a window with the sealed immutable Fenestration value and FenestrationType.Window.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Window for exact fixture case W01 (epsimple-shape-core.window-constructor-blind-and-construction-validation) through GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType. Adaptation family unified-immutable-fenestration-with-window-discriminator-00f305af classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:9d147afd0c4b343d8e60a2cabf491696086cba7c98967e4cd89b4a4f863afdf8. Only inventory index 442 and assertion epsimple-shape-core-442-00f305af are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType; the Python-only dynamic surface identified by adaptation family unified-immutable-fenestration-with-window-discriminator-00f305af is intentionally not exposed.
+    compatibility_evidence: Only inventory index 442, assertion epsimple-shape-core-442-00f305af, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: unified-native-fenestration-constructor-e8fad25a
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Window.__init__
+    symbol_hash: sha256:e8fad25a400b3c7b8edd138cfccde815de154546fc1f5224aa47f217bc32a441
+  difference:
+    upstream: Window.__init__ accepts Python variadic forwarding plus a mutable blind value before base-class initialization.
+    dotnet: The single typed Fenestration constructor validates window type, blind, construction and deterministic identity atomically.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Window.__init__ for exact fixture case W01 (epsimple-shape-core.window-constructor-blind-and-construction-validation) through GonieGonie.SimpleDragon.Fenestration constructor. Adaptation family unified-native-fenestration-constructor-e8fad25a classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:d279db700d7515474d83de0f05732aee2dea8b88a0d08e0cf99ad2d042244dae. Only inventory index 443 and assertion epsimple-shape-core-443-e8fad25a are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Fenestration constructor; the Python-only dynamic surface identified by adaptation family unified-native-fenestration-constructor-e8fad25a is intentionally not exposed.
+    compatibility_evidence: Only inventory index 443, assertion epsimple-shape-core-443-e8fad25a, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: deterministic-native-id-and-immutable-zone-constructor-a5f3cee1
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Zone.__init__
+    symbol_hash: sha256:a5f3cee1e5928625be1d26e36c31e38514256bb1abc369275559c891afb0e361
+  difference:
+    upstream: Zone.__init__ accepts mutable Python child collections and generates an address-derived ID when omitted.
+    dotnet: The typed native Zone constructor validates copied read-only collections and uses an explicit or deterministic stable EntityId.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Zone.__init__ for exact fixture case Z01 (epsimple-shape-core.zone-constructor-id-height-and-supply-validation) through GonieGonie.SimpleDragon.Zone constructor. Adaptation family deterministic-native-id-and-immutable-zone-constructor-a5f3cee1 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs@sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b are fail-closed bindings. The trusted evidence output is sha256:e2fd819467791dd5c9e61146e4c1eb487f3e578e78d9ff4b6c5e86a3885ff3dc. Only inventory index 451 and assertion epsimple-shape-core-451-a5f3cee1 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.Zone constructor; the Python-only dynamic surface identified by adaptation family deterministic-native-id-and-immutable-zone-constructor-a5f3cee1 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 451, assertion epsimple-shape-core-451-a5f3cee1, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: model-level-native-fenestration-catalog-d8077110
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Zone.get_unique_fenestration_constructions
+    symbol_hash: sha256:d807711017c58e9e6237547dbd4e8549650a4fc629e5b20ddcec2c24bff8db13
+  difference:
+    upstream: Zone.get_unique_fenestration_constructions walks mutable zone surfaces and returns a new Python dictionary.
+    dotnet: GreenRetrofitModel.FenestrationConstructions is the validated read-only model-level native catalog.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Zone.get_unique_fenestration_constructions for exact fixture case Z04 (epsimple-shape-core.zone-unique-construction-and-material-aggregation) through GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions. Adaptation family model-level-native-fenestration-catalog-d8077110 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/GreenRetrofitModel.cs@sha256:7bf2f7dfb922f4d85982ada0f5622bfbef59dce8cb4d7a90b2759ed6978935ea are fail-closed bindings. The trusted evidence output is sha256:542b33db5555279cb4014249430989f2a2eb6551db490a3adb532ba761624156. Only inventory index 455 and assertion epsimple-shape-core-455-d8077110 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions; the Python-only dynamic surface identified by adaptation family model-level-native-fenestration-catalog-d8077110 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 455, assertion epsimple-shape-core-455-d8077110, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: model-level-native-material-catalog-ecb20cb3
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Zone.get_unique_materials
+    symbol_hash: sha256:ecb20cb3d82efa5c493a99fa5863d3060531cabca284a696fe8e38a922ac2ee9
+  difference:
+    upstream: Zone.get_unique_materials walks mutable construction graphs and returns a new Python dictionary.
+    dotnet: GreenRetrofitModel.Materials is the validated read-only model-level native catalog.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Zone.get_unique_materials for exact fixture case Z04 (epsimple-shape-core.zone-unique-construction-and-material-aggregation) through GonieGonie.SimpleDragon.GreenRetrofitModel.Materials. Adaptation family model-level-native-material-catalog-ecb20cb3 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/GreenRetrofitModel.cs@sha256:7bf2f7dfb922f4d85982ada0f5622bfbef59dce8cb4d7a90b2759ed6978935ea are fail-closed bindings. The trusted evidence output is sha256:934baa12adf58a63de7820ccf998656407e9d2e6394272d157651751e98f0295. Only inventory index 456 and assertion epsimple-shape-core-456-ecb20cb3 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.GreenRetrofitModel.Materials; the Python-only dynamic surface identified by adaptation family model-level-native-material-catalog-ecb20cb3 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 456, assertion epsimple-shape-core-456-ecb20cb3, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: model-level-native-surface-catalog-486d73d3
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Zone.get_unique_surface_constructions
+    symbol_hash: sha256:486d73d3932d12d15fae4387d79551b240ae97b05108de34422ae5906ee168c9
+  difference:
+    upstream: Zone.get_unique_surface_constructions walks mutable zone surfaces and returns a new Python dictionary.
+    dotnet: GreenRetrofitModel.SurfaceConstructions is the validated read-only model-level native catalog.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Zone.get_unique_surface_constructions for exact fixture case Z04 (epsimple-shape-core.zone-unique-construction-and-material-aggregation) through GonieGonie.SimpleDragon.GreenRetrofitModel.SurfaceConstructions. Adaptation family model-level-native-surface-catalog-486d73d3 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/GreenRetrofitModel.cs@sha256:7bf2f7dfb922f4d85982ada0f5622bfbef59dce8cb4d7a90b2759ed6978935ea are fail-closed bindings. The trusted evidence output is sha256:c25bca8ce860c72a8a3924b8df6a7e75394e4993840e8908cf525847c1063fb6. Only inventory index 457 and assertion epsimple-shape-core-457-486d73d3 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.GreenRetrofitModel.SurfaceConstructions; the Python-only dynamic surface identified by adaptation family model-level-native-surface-catalog-486d73d3 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 457, assertion epsimple-shape-core-457-486d73d3, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation
+
+- id: native-greenretrofit-converter-implements-upstream-missing-operation-da336048
+  upstream:
+    path: src/epsimple/core/shape.py
+    symbol: Zone.to_dragon
+    symbol_hash: sha256:da336048a153f041d9d56ff87b6578fa464ce4dd9332aaa97e054d570faf12bd
+  difference:
+    upstream: Zone.to_dragon reaches the pinned upstream missing-operation failure observed by case Z05.
+    dotnet: GreenRetrofitConverter.Convert implements validated aggregate zone conversion and returns typed conversion state.
+  effect:
+    engineering_result: Pinned CPython 3.12.7 and live .NET observations classify Zone.to_dragon for exact fixture case Z05 (epsimple-shape-core.zone-to-dragon-upstream-failure) through GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Adaptation family native-greenretrofit-converter-implements-upstream-missing-operation-da336048 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:8ab3a77bb4628a15d2a242119db9c6c25813631a7ad088af7b2d3e6d1b1ecdca. Only inventory index 462 and assertion epsimple-shape-core-462-da336048 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications.
+    api_contract: Callers use the reviewed typed native route GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?); the Python-only dynamic surface identified by adaptation family native-greenretrofit-converter-implements-upstream-missing-operation-da336048 is intentionally not exposed.
+    compatibility_evidence: Only inventory index 462, assertion epsimple-shape-core-462-da336048, its exact fixture case, fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, and commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7 are claimed; excluded indices 416, 425, 427, 428, and 450 and all non-target construction or model symbols are not retargeted.
+  approval: accepted-native-api-adaptation

@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:c76a9f5a3287f4eff1dc6901250a9968faca7ceff8e3aa9d37924d41521e6e95"
+    "sha256:15f14205bcba015a3b00c02a0ee68263b30fe7c6e3f8079ce60b07ffa2db1237"
 )
 
 
@@ -68,9 +68,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 194,
-                "exception": 250,
-                "needs_reverification": 546,
+                "equivalent": 227,
+                "exception": 270,
+                "needs_reverification": 493,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -521,6 +521,198 @@ class SafeScopePolicyTests(unittest.TestCase):
             "model-context-no-mass-construction-idf-emission",
             entries[640].exception_id,
         )
+
+    def test_epsimple_shape_core_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        target_symbols = {
+            405: "BlindType",
+            406: "BlindType.SHADE",
+            407: "BlindType.VENETIAN",
+            408: "BlindType.__str__",
+            409: "Door",
+            410: "Door.construction",
+            411: "Door.from_json",
+            412: "Door.to_dragon",
+            413: "Fenestration",
+            414: "Fenestration.ID",
+            415: "Fenestration.__deepcopy__",
+            417: "Fenestration.__init__",
+            418: "Fenestration.construction",
+            419: "Fenestration.from_json",
+            420: "Fenestration.to_dragon",
+            421: "GlassDoor",
+            422: "Surface",
+            423: "Surface.ID",
+            424: "Surface.__deepcopy__",
+            426: "Surface.__init__",
+            429: "Surface.adjacent_zone",
+            430: "Surface.area",
+            431: "Surface.azimuth",
+            432: "Surface.boundary",
+            433: "Surface.construction",
+            434: "Surface.flip",
+            435: "Surface.from_json",
+            436: "Surface.get_unique_fenestration_constructions",
+            437: "Surface.num_doors",
+            438: "Surface.num_windows",
+            439: "Surface.reflectance",
+            440: "Surface.to_dragon",
+            441: "Surface.type",
+            442: "Window",
+            443: "Window.__init__",
+            444: "Window.blind",
+            445: "Window.construction",
+            446: "Window.from_json",
+            447: "Window.to_dragon",
+            448: "Zone",
+            449: "Zone.ID",
+            451: "Zone.__init__",
+            452: "Zone.area",
+            453: "Zone.cooling_supply_systems",
+            454: "Zone.from_json",
+            455: "Zone.get_unique_fenestration_constructions",
+            456: "Zone.get_unique_materials",
+            457: "Zone.get_unique_surface_constructions",
+            458: "Zone.heating_supply_systems",
+            459: "Zone.height",
+            460: "Zone.infiltration",
+            461: "Zone.supply_systems",
+            462: "Zone.to_dragon",
+        }
+        exception_ids = {
+            408: "grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+            409: "unified-immutable-fenestration-with-door-discriminator-8c468e24",
+            413: "sealed-discriminated-native-fenestration-rather-than-abc-43d44ea1",
+            415: "immutable-native-fenestration-explicit-reconstruction-a0dbc411",
+            417: "deterministic-native-id-and-discriminated-constructor-1b22b2f1",
+            418: "immutable-resolved-native-construction-reference-0b0cbf2f",
+            420: "aggregate-native-converter-rather-than-abstract-instance-method-ede823e2",
+            421: "unified-immutable-fenestration-with-glassdoor-discriminator-1981a404",
+            424: "immutable-native-surface-explicit-reconstruction-0d951ae6",
+            426: "deterministic-native-id-and-immutable-constructor-bd742aa0",
+            429: "native-adjacent-zone-id-rather-than-object-reference-cf314ac6",
+            434: "pure-deterministic-native-flip-without-inplace-mutation-8e01b8fa",
+            436: "model-catalog-native-aggregation-72d9807c",
+            442: "unified-immutable-fenestration-with-window-discriminator-00f305af",
+            443: "unified-native-fenestration-constructor-e8fad25a",
+            451: "deterministic-native-id-and-immutable-zone-constructor-a5f3cee1",
+            455: "model-level-native-fenestration-catalog-d8077110",
+            456: "model-level-native-material-catalog-ecb20cb3",
+            457: "model-level-native-surface-catalog-486d73d3",
+            462: "native-greenretrofit-converter-implements-upstream-missing-operation-da336048",
+        }
+        target_indices = (
+            405,
+            406,
+            407,
+            408,
+            409,
+            410,
+            411,
+            412,
+            413,
+            414,
+            415,
+            417,
+            418,
+            419,
+            420,
+            421,
+            422,
+            423,
+            424,
+            426,
+            429,
+            430,
+            431,
+            432,
+            433,
+            434,
+            435,
+            436,
+            437,
+            438,
+            439,
+            440,
+            441,
+            442,
+            443,
+            444,
+            445,
+            446,
+            447,
+            448,
+            449,
+            451,
+            452,
+            453,
+            454,
+            455,
+            456,
+            457,
+            458,
+            459,
+            460,
+            461,
+            462,
+        )
+        self.assertEqual(target_indices, tuple(target_symbols))
+        self.assertEqual(53, len(target_symbols))
+        self.assertEqual(20, len(exception_ids))
+        self.assertEqual(33, len(target_symbols) - len(exception_ids))
+
+        for index, symbol in target_symbols.items():
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual(
+                ("src/epsimple/core/shape.py", symbol),
+                inventory_symbol.key,
+                symbol,
+            )
+            classification = "exception" if index in exception_ids else "equivalent"
+            exception_id = exception_ids.get(index)
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            assertion_id = (
+                f"epsimple-shape-core-{index}-"
+                f"{inventory_symbol.symbol_hash.removeprefix('sha256:')[:8]}"
+            )
+            expected_evidence = [f"upstream/symbol-evidence.json#{assertion_id}"]
+            if exception_id is not None:
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, symbol)
+            self.assertIn(assertion_id, entry.rationale, symbol)
+            self.assertIn("commit a198a7c", entry.rationale, symbol)
+
+        excluded = {
+            416: "Fenestration.__hash__",
+            425: "Surface.__hash__",
+            427: "Surface.__repr__",
+            428: "Surface.__str__",
+            450: "Zone.__hash__",
+        }
+        self.assertEqual(set(range(405, 463)), set(target_symbols) | set(excluded))
+        for index, symbol in excluded.items():
+            entry = entries[index]
+            self.assertEqual(("src/epsimple/core/shape.py", symbol), entry.key, symbol)
+            self.assertEqual("out_of_scope", entry.classification, symbol)
+            self.assertIsNone(entry.exception_id, symbol)
+
+        expected_adjacent = {
+            400: ("KoreanUsageProfile.to_dragon", "equivalent"),
+            401: ("KoreanUsageProfileExtended", "exception"),
+            402: ("Profile", "exception"),
+            403: ("Profile.get_DB", "exception"),
+            404: ("read_csv_without_units", "exception"),
+            463: ("BlindForNonOutdoorWindow", "out_of_scope"),
+            464: ("BlindForNonOutdoorWindow.__init__", "out_of_scope"),
+            465: ("BlindForNonOutdoorWindow.inspect", "out_of_scope"),
+        }
+        for index, (symbol, classification) in expected_adjacent.items():
+            self.assertEqual(symbol, entries[index].symbol)
+            self.assertEqual(classification, entries[index].classification, symbol)
 
     def test_energy_model_class_promotion_preserves_adjacent_model_scope(self) -> None:
         entries = self.configuration.matrix.entries

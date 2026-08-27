@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import hashlib
+import json
 from pathlib import Path
+import re
 import unittest
 
 from support import REPOSITORY_ROOT, TemporaryWorkspace, write_configuration
@@ -27,7 +30,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(256, len(configuration.exceptions))
+        self.assertEqual(276, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -41,16 +44,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(546, len(compatibility.needs_reverification))
+        self.assertEqual(493, len(compatibility.needs_reverification))
         self.assertEqual(
-            194,
+            227,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            250,
+            270,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -60,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:c76a9f5a3287f4eff1dc6901250a9968faca7ceff8e3aa9d37924d41521e6e95",
+            "sha256:15f14205bcba015a3b00c02a0ee68263b30fe7c6e3f8079ce60b07ffa2db1237",
             compatibility.matrix.content_sha256,
         )
-        self.assertEqual(444, len(symbol_evidence.entries))
-        self.assertEqual(444, len(symbol_evidence.receipts))
+        self.assertEqual(497, len(symbol_evidence.entries))
+        self.assertEqual(497, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:2560606b99de05ec997793ef40870e79ab8114bcb4a5344a24e1352452041aca",
+            "sha256:f4a6ce4682ceb623ba1a467ca1b16f12ece59b2ae063cdcf19248caab67ab645",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -2240,6 +2243,388 @@ class ConfigurationTests(unittest.TestCase):
             self.assertEqual("exception", entry.classification, symbol)
             self.assertEqual(exception_id, entry.exception_id, symbol)
             self.assertEqual(evidence, entry.evidence, symbol)
+
+        shape_fixture_path = (
+            REPOSITORY_ROOT
+            / "fixtures/reference/python-0.7.0/epsimple-shape-core-oracle.json"
+        )
+        shape_test_path = (
+            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "ShapeCoreOracleParityTests.cs"
+        )
+        shape_test_symbol = (
+            "GonieGonie.SimpleDragon.Tests.ShapeCoreOracleParityTests."
+            "MatchesPinnedShapeCoreThroughProductionPublicRoutes"
+        )
+        shape_fixture_sha256 = (
+            "sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5"
+        )
+        shape_test_sha256 = (
+            "sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7"
+        )
+        shape_fixture_bytes = shape_fixture_path.read_bytes()
+        self.assertEqual(
+            shape_fixture_sha256,
+            "sha256:" + hashlib.sha256(shape_fixture_bytes).hexdigest(),
+        )
+        shape_fixture = json.loads(shape_fixture_bytes.decode("utf-8"))
+        shape_contract = shape_fixture["consumer_contract"]
+        shape_target_indices = (
+            405,
+            406,
+            407,
+            408,
+            409,
+            410,
+            411,
+            412,
+            413,
+            414,
+            415,
+            417,
+            418,
+            419,
+            420,
+            421,
+            422,
+            423,
+            424,
+            426,
+            429,
+            430,
+            431,
+            432,
+            433,
+            434,
+            435,
+            436,
+            437,
+            438,
+            439,
+            440,
+            441,
+            442,
+            443,
+            444,
+            445,
+            446,
+            447,
+            448,
+            449,
+            451,
+            452,
+            453,
+            454,
+            455,
+            456,
+            457,
+            458,
+            459,
+            460,
+            461,
+            462,
+        )
+        shape_excluded_indices = (416, 425, 427, 428, 450)
+        self.assertEqual(
+            shape_target_indices,
+            tuple(shape_contract["closure"]["target_indices"]),
+        )
+        self.assertEqual(
+            shape_excluded_indices,
+            tuple(shape_contract["closure"]["excluded_indices"]),
+        )
+        self.assertEqual(
+            {"equivalent": 33, "exception": 20},
+            shape_contract["classification_counts"],
+        )
+        shape_targets = shape_fixture["target_receipts"]
+        self.assertEqual(
+            shape_target_indices,
+            tuple(item["inventory_index"] for item in shape_targets),
+        )
+        self.assertEqual(
+            tuple(shape_contract["target_symbols"]),
+            tuple(item["symbol"] for item in shape_targets),
+        )
+        shape_case_by_symbol = {
+            symbol: (case["code"], case["id"])
+            for case in shape_fixture["cases"]
+            for symbol in case["target_symbols"]
+        }
+        self.assertEqual(53, len(shape_case_by_symbol))
+
+        shape_test_bytes = (REPOSITORY_ROOT / shape_test_path).read_bytes()
+        self.assertEqual(
+            shape_test_sha256,
+            "sha256:" + hashlib.sha256(shape_test_bytes).hexdigest(),
+        )
+        receipt_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            shape_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(receipt_hash_block)
+        assert receipt_hash_block is not None
+        shape_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                receipt_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(53, len(shape_output_hashes))
+
+        fenestration_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs"
+        )
+        surface_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs"
+        )
+        zone_path = "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs"
+        reader_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs"
+        )
+        writer_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs"
+        )
+        converter_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/"
+            "GreenRetrofitConversion.cs"
+        )
+        model_path = (
+            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/GreenRetrofitModel.cs"
+        )
+
+        def expected_shape_implementation(symbol: str) -> tuple[str, str]:
+            if symbol == "BlindType":
+                return fenestration_path, "GonieGonie.SimpleDragon.BlindType"
+            if symbol == "BlindType.SHADE":
+                return fenestration_path, "GonieGonie.SimpleDragon.BlindType.Shade"
+            if symbol == "BlindType.VENETIAN":
+                return fenestration_path, "GonieGonie.SimpleDragon.BlindType.Venetian"
+            if symbol == "BlindType.__str__":
+                return writer_path, "GonieGonie.SimpleDragon.GrmWriter.Serialize"
+            if symbol.endswith(".from_json"):
+                return reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"
+            if symbol.endswith(".to_dragon"):
+                return (
+                    converter_path,
+                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                )
+            if symbol in {"Door", "Fenestration", "GlassDoor", "Window"}:
+                return fenestration_path, "GonieGonie.SimpleDragon.Fenestration"
+            if symbol.startswith(("Door.", "Fenestration.", "Window.")):
+                member = {
+                    "construction": "Construction",
+                    "ID": "Id",
+                    "__deepcopy__": "Fenestration",
+                    "__init__": "Fenestration",
+                    "blind": "Blind",
+                }[symbol.split(".", 1)[1]]
+                return (
+                    fenestration_path,
+                    "GonieGonie.SimpleDragon.Fenestration." + member,
+                )
+            if symbol == "Surface":
+                return surface_path, "GonieGonie.SimpleDragon.Surface"
+            if symbol.startswith("Surface."):
+                member_name = symbol.split(".", 1)[1]
+                if member_name == "get_unique_fenestration_constructions":
+                    return (
+                        model_path,
+                        "GonieGonie.SimpleDragon.GreenRetrofitModel."
+                        "FenestrationConstructions",
+                    )
+                member = {
+                    "ID": "Id",
+                    "__deepcopy__": "Surface",
+                    "__init__": "Surface",
+                    "adjacent_zone": "AdjacentZoneId",
+                    "area": "Area",
+                    "azimuth": "Azimuth",
+                    "boundary": "BoundaryCondition",
+                    "construction": "Construction",
+                    "flip": "Flip",
+                    "num_doors": "DoorCount",
+                    "num_windows": "WindowCount",
+                    "reflectance": "CoolRoofReflectance",
+                    "type": "Type",
+                }[member_name]
+                return surface_path, "GonieGonie.SimpleDragon.Surface." + member
+            if symbol == "Zone":
+                return zone_path, "GonieGonie.SimpleDragon.Zone"
+            if symbol.startswith("Zone."):
+                member_name = symbol.split(".", 1)[1]
+                catalogs = {
+                    "get_unique_fenestration_constructions": (
+                        "FenestrationConstructions"
+                    ),
+                    "get_unique_materials": "Materials",
+                    "get_unique_surface_constructions": "SurfaceConstructions",
+                }
+                if member_name in catalogs:
+                    return (
+                        model_path,
+                        "GonieGonie.SimpleDragon.GreenRetrofitModel."
+                        + catalogs[member_name],
+                    )
+                member = {
+                    "ID": "Id",
+                    "__init__": "Zone",
+                    "area": "Area",
+                    "cooling_supply_systems": "CoolingSupplySystems",
+                    "heating_supply_systems": "HeatingSupplySystems",
+                    "height": "Height",
+                    "infiltration": "Infiltration",
+                    "supply_systems": "SupplySystems",
+                }[member_name]
+                return zone_path, "GonieGonie.SimpleDragon.Zone." + member
+            self.fail(f"Missing expected shape implementation for {symbol}")
+            raise AssertionError(symbol)
+
+        exceptions_by_id = {
+            item.identifier: item for item in configuration.exceptions
+        }
+        shape_exception_symbols = set(shape_contract["adaptations"])
+        for target, expected_output_hash in zip(
+            shape_targets,
+            shape_output_hashes,
+            strict=True,
+        ):
+            index = target["inventory_index"]
+            symbol = target["symbol"]
+            inventory_symbol = compatibility.inventory.symbols[index]
+            expected_descriptor = dict(target)
+            expected_descriptor.pop("inventory_index")
+            self.assertEqual(expected_descriptor, inventory_symbol.to_data(), symbol)
+            key = (target["path"], symbol)
+            entry = compatibility.matrix.entries[index]
+            self.assertEqual(key, entry.key, symbol)
+            classification = shape_contract["classifications"][symbol]
+            adaptation = shape_contract["adaptations"].get(symbol)
+            assertion_id = shape_contract["assertion_ids"][symbol]
+            native_route = shape_contract["native_routes"][symbol]
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(adaptation, entry.exception_id, symbol)
+            expected_references = [
+                f"upstream/symbol-evidence.json#{assertion_id}"
+            ]
+            if adaptation is not None:
+                expected_references.append(
+                    f"upstream/compatibility-exceptions.yml#{adaptation}"
+                )
+            self.assertEqual(tuple(sorted(expected_references)), entry.evidence, symbol)
+
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(
+                inventory_symbol.symbol_hash,
+                evidence_entry.upstream_symbol_hash,
+                symbol,
+            )
+            implementation_path, implementation_symbol = (
+                expected_shape_implementation(symbol)
+            )
+            implementation_sha256 = "sha256:" + hashlib.sha256(
+                (REPOSITORY_ROOT / implementation_path).read_bytes()
+            ).hexdigest()
+            self.assertEqual(
+                implementation_path,
+                evidence_entry.implementation_path,
+                symbol,
+            )
+            self.assertEqual(
+                implementation_symbol,
+                evidence_entry.implementation_symbol,
+                symbol,
+            )
+            self.assertEqual(
+                implementation_sha256,
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertEqual(shape_test_path, receipt.test_path, symbol)
+            self.assertEqual(shape_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(shape_test_sha256, receipt.test_source_sha256, symbol)
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+            case_code, case_id = shape_case_by_symbol[symbol]
+            for exact_binding in (
+                shape_fixture_sha256,
+                shape_test_sha256,
+                "commit a198a7c",
+                implementation_path + "@" + implementation_sha256,
+                expected_output_hash,
+                assertion_id,
+                native_route,
+                case_code,
+                case_id,
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+            if adaptation is not None:
+                exception = exceptions_by_id[adaptation]
+                self.assertEqual(target["path"], exception.upstream_path, symbol)
+                self.assertEqual(symbol, exception.upstream_symbol, symbol)
+                self.assertEqual(
+                    inventory_symbol.symbol_hash,
+                    exception.upstream_symbol_hash,
+                    symbol,
+                )
+                self.assertIn(("engineering_result", entry.rationale), exception.effects)
+                self.assertEqual(
+                    "accepted-native-api-adaptation",
+                    exception.approval,
+                    symbol,
+                )
+
+        shape_evidence_entries = tuple(
+            item
+            for item in symbol_evidence.entries
+            if item.path == "src/epsimple/core/shape.py"
+        )
+        self.assertEqual(53, len(shape_evidence_entries))
+        self.assertEqual(
+            set(shape_contract["target_symbols"]),
+            {item.symbol for item in shape_evidence_entries},
+        )
+        self.assertEqual(
+            20,
+            sum(
+                item.classification == "exception"
+                for item in compatibility.matrix.entries[405:463]
+            ),
+        )
+        self.assertEqual(
+            shape_exception_symbols,
+            {
+                item.upstream_symbol
+                for item in configuration.exceptions
+                if item.upstream_path == "src/epsimple/core/shape.py"
+            },
+        )
+        for index, symbol in zip(
+            shape_excluded_indices,
+            shape_contract["closure"]["excluded_symbols"],
+            strict=True,
+        ):
+            key = ("src/epsimple/core/shape.py", symbol)
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
+            self.assertEqual(
+                "out_of_scope",
+                compatibility.matrix.entries[index].classification,
+                symbol,
+            )
+            self.assertNotIn(key, symbol_evidence.entries_by_key, symbol)
+
         energy_model_to_idf_key = (
             "src/idragon/dragon/model.py",
             "EnergyModel.to_idf",

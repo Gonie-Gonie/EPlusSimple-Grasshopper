@@ -405,64 +405,64 @@
     "exception",
     "exception",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "exception",
     "out_of_scope",
-    "needs_reverification",
+    "exception",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
     "out_of_scope",
     "out_of_scope",
     "out_of_scope",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:c76a9f5a3287f4eff1dc6901250a9968faca7ceff8e3aa9d37924d41521e6e95",
+  "content_sha256": "sha256:15f14205bcba015a3b00c02a0ee68263b30fe7c6e3f8079ce60b07ffa2db1237",
   "details": [
     {
       "evidence": [
@@ -2443,6 +2443,91 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-405-6008dd91"
+      ],
+      "index": 405,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify BlindType for exact fixture case B01 (epsimple-shape-core.blind-type-values-and-string-semantics) through GonieGonie.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool). Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:c91053c8621ff85b6ef3b5433806c7ea3dcc1b21de57542c6dcdabf92e6b1644. Only inventory index 405 and assertion epsimple-shape-core-405-6008dd91 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-406-bb03051d"
+      ],
+      "index": 406,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify BlindType.SHADE for exact fixture case B01 (epsimple-shape-core.blind-type-values-and-string-semantics) through GonieGonie.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool). Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:249ea441d842f497603575c9c9c2079682d6411f97572d2dfbef7101f9b0bf27. Only inventory index 406 and assertion epsimple-shape-core-406-bb03051d are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-407-09c92f4a"
+      ],
+      "index": 407,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify BlindType.VENETIAN for exact fixture case B01 (epsimple-shape-core.blind-type-values-and-string-semantics) through GonieGonie.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool). Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:bb6518827f5e01a8fa3fa384ba1ecea3d829377f23505b21f36959e10d4c3c64. Only inventory index 407 and assertion epsimple-shape-core-407-09c92f4a are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+        "upstream/symbol-evidence.json#epsimple-shape-core-408-f40e4929"
+      ],
+      "exception_id": "grm-vocabulary-rather-than-native-enum-tostring-f40e4929",
+      "index": 408,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify BlindType.__str__ for exact fixture case B01 (epsimple-shape-core.blind-type-values-and-string-semantics) through GonieGonie.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool). Adaptation family grm-vocabulary-rather-than-native-enum-tostring-f40e4929 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs@sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842 are fail-closed bindings. The trusted evidence output is sha256:f123f0bf380b29d580d37479e11f1b0d60a08ec8dc78c88dbba8fe29565cb8e1. Only inventory index 408 and assertion epsimple-shape-core-408-f40e4929 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#unified-immutable-fenestration-with-door-discriminator-8c468e24",
+        "upstream/symbol-evidence.json#epsimple-shape-core-409-8c468e24"
+      ],
+      "exception_id": "unified-immutable-fenestration-with-door-discriminator-8c468e24",
+      "index": 409,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Door for exact fixture case D01 (epsimple-shape-core.door-validation-json-and-dragon-conversion) through GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType. Adaptation family unified-immutable-fenestration-with-door-discriminator-8c468e24 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:df9411469e9e6b56ae5a148b9d1256a227ef26472ab3885e7bd0164992aa120b. Only inventory index 409 and assertion epsimple-shape-core-409-8c468e24 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-410-2ca0072c"
+      ],
+      "index": 410,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Door.construction for exact fixture case D01 (epsimple-shape-core.door-validation-json-and-dragon-conversion) through GonieGonie.SimpleDragon.Fenestration.Construction. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:5851a4df77ce53345039feca424379f156ef80579feb691c6795555ecec7dcb8. Only inventory index 410 and assertion epsimple-shape-core-410-2ca0072c are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-411-26b0f9bb"
+      ],
+      "index": 411,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Door.from_json for exact fixture case D01 (epsimple-shape-core.door-validation-json-and-dragon-conversion) through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?). Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs@sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968 are fail-closed bindings. The trusted evidence output is sha256:e439e96ed77f6fdf559d27fd574abb7c166933ec6b5711c86a4299788bc202ed. Only inventory index 411 and assertion epsimple-shape-core-411-26b0f9bb are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-412-eb81bd06"
+      ],
+      "index": 412,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Door.to_dragon for exact fixture case D01 (epsimple-shape-core.door-validation-json-and-dragon-conversion) through GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:6064b935a453421cb7e46c0d874e0030a67bf804008f10e9230ea4ae2de2e75c. Only inventory index 412 and assertion epsimple-shape-core-412-eb81bd06 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#sealed-discriminated-native-fenestration-rather-than-abc-43d44ea1",
+        "upstream/symbol-evidence.json#epsimple-shape-core-413-43d44ea1"
+      ],
+      "exception_id": "sealed-discriminated-native-fenestration-rather-than-abc-43d44ea1",
+      "index": 413,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fenestration for exact fixture case F01 (epsimple-shape-core.fenestration-abstract-contract) through GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType. Adaptation family sealed-discriminated-native-fenestration-rather-than-abc-43d44ea1 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:828cfc9976cee6dbcf58d317c4a9f0d765ced88af5ace65642e0eca1f9fcbc5b. Only inventory index 413 and assertion epsimple-shape-core-413-43d44ea1 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-414-246156d9"
+      ],
+      "index": 414,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Fenestration.ID for exact fixture case F02 (epsimple-shape-core.fenestration-id-deepcopy-and-factory-dispatch) through GonieGonie.SimpleDragon.Fenestration.Id. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:0b77f43701b02d723429062bb23532932e3a40f4d69f587aab6090f8c47b6146. Only inventory index 414 and assertion epsimple-shape-core-414-246156d9 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-native-fenestration-explicit-reconstruction-a0dbc411",
+        "upstream/symbol-evidence.json#epsimple-shape-core-415-a0dbc411"
+      ],
+      "exception_id": "immutable-native-fenestration-explicit-reconstruction-a0dbc411",
+      "index": 415,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fenestration.__deepcopy__ for exact fixture case F02 (epsimple-shape-core.fenestration-id-deepcopy-and-factory-dispatch) through GonieGonie.SimpleDragon.Fenestration constructor. Adaptation family immutable-native-fenestration-explicit-reconstruction-a0dbc411 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:6d26c2cbedd21261294cf94e0367b8c84d1d8a0057244f49f8f0343dfbf9492d. Only inventory index 415 and assertion epsimple-shape-core-415-a0dbc411 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-core-shape-py-fenestration-hash-60007ac6"
       ],
       "index": 416,
@@ -2450,10 +2535,85 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-native-id-and-discriminated-constructor-1b22b2f1",
+        "upstream/symbol-evidence.json#epsimple-shape-core-417-1b22b2f1"
+      ],
+      "exception_id": "deterministic-native-id-and-discriminated-constructor-1b22b2f1",
+      "index": 417,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fenestration.__init__ for exact fixture case F01 (epsimple-shape-core.fenestration-abstract-contract) through GonieGonie.SimpleDragon.Fenestration constructor. Adaptation family deterministic-native-id-and-discriminated-constructor-1b22b2f1 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:ccd1d3a93ec95a03b69d5492ccf2e38acf96eb403f9222e3e2ca4a073dd23e75. Only inventory index 417 and assertion epsimple-shape-core-417-1b22b2f1 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-resolved-native-construction-reference-0b0cbf2f",
+        "upstream/symbol-evidence.json#epsimple-shape-core-418-0b0cbf2f"
+      ],
+      "exception_id": "immutable-resolved-native-construction-reference-0b0cbf2f",
+      "index": 418,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fenestration.construction for exact fixture case F01 (epsimple-shape-core.fenestration-abstract-contract) through GonieGonie.SimpleDragon.Fenestration.Construction. Adaptation family immutable-resolved-native-construction-reference-0b0cbf2f classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:1b9c78a65fe702383218a10772158326aa2186e4b0f8c38c35de2d8df8f81c90. Only inventory index 418 and assertion epsimple-shape-core-418-0b0cbf2f are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-419-2e553f68"
+      ],
+      "index": 419,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Fenestration.from_json for exact fixture case F02 (epsimple-shape-core.fenestration-id-deepcopy-and-factory-dispatch) through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?). Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs@sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968 are fail-closed bindings. The trusted evidence output is sha256:49fef807a087dcb3479d5dbf11cc02ff5c2a8184e5e624a80921be52046e32b8. Only inventory index 419 and assertion epsimple-shape-core-419-2e553f68 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#aggregate-native-converter-rather-than-abstract-instance-method-ede823e2",
+        "upstream/symbol-evidence.json#epsimple-shape-core-420-ede823e2"
+      ],
+      "exception_id": "aggregate-native-converter-rather-than-abstract-instance-method-ede823e2",
+      "index": 420,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fenestration.to_dragon for exact fixture case F01 (epsimple-shape-core.fenestration-abstract-contract) through GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Adaptation family aggregate-native-converter-rather-than-abstract-instance-method-ede823e2 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:402cf192b70650333d40da12120c816ccb0d6bb7e7ab21af0e59acb669cdd90b. Only inventory index 420 and assertion epsimple-shape-core-420-ede823e2 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#unified-immutable-fenestration-with-glassdoor-discriminator-1981a404",
+        "upstream/symbol-evidence.json#epsimple-shape-core-421-1981a404"
+      ],
+      "exception_id": "unified-immutable-fenestration-with-glassdoor-discriminator-1981a404",
+      "index": 421,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify GlassDoor for exact fixture case G01 (epsimple-shape-core.glass-door-window-subtype-and-conversion) through GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType. Adaptation family unified-immutable-fenestration-with-glassdoor-discriminator-1981a404 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:3b410c64208d8ea43ba8cc5b581de11db2a5a3e11f724eb0c18f776176cf684e. Only inventory index 421 and assertion epsimple-shape-core-421-1981a404 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-422-996a596c"
+      ],
+      "index": 422,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:eade22e11fa771331b1a7e9fe3816022e171264b9ded1830129b45fbade5f0f4. Only inventory index 422 and assertion epsimple-shape-core-422-996a596c are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-423-246156d9"
+      ],
+      "index": 423,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.ID for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface.Id. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:ed73b6cc24784ca991b35b26d8d88e22f8a1ae6f8ad910859d133bb3b31a25af. Only inventory index 423 and assertion epsimple-shape-core-423-246156d9 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-native-surface-explicit-reconstruction-0d951ae6",
+        "upstream/symbol-evidence.json#epsimple-shape-core-424-0d951ae6"
+      ],
+      "exception_id": "immutable-native-surface-explicit-reconstruction-0d951ae6",
+      "index": 424,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Surface.__deepcopy__ for exact fixture case S02 (epsimple-shape-core.surface-deepcopy-and-flip-semantics) through GonieGonie.SimpleDragon.Surface constructor. Adaptation family immutable-native-surface-explicit-reconstruction-0d951ae6 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:c10249072d2f7797a84d85751c61d59d7b1936ca570ac11de3e0bdcc72f0282b. Only inventory index 424 and assertion epsimple-shape-core-424-0d951ae6 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-core-shape-py-surface-hash-60007ac6"
       ],
       "index": 425,
       "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-native-id-and-immutable-constructor-bd742aa0",
+        "upstream/symbol-evidence.json#epsimple-shape-core-426-bd742aa0"
+      ],
+      "exception_id": "deterministic-native-id-and-immutable-constructor-bd742aa0",
+      "index": 426,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Surface.__init__ for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface constructor. Adaptation family deterministic-native-id-and-immutable-constructor-bd742aa0 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:edb876a1a25cfb54e29b790dae13014a290d778330b3351e0a4a8872071bb6e9. Only inventory index 426 and assertion epsimple-shape-core-426-bd742aa0 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -2471,10 +2631,261 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#native-adjacent-zone-id-rather-than-object-reference-cf314ac6",
+        "upstream/symbol-evidence.json#epsimple-shape-core-429-cf314ac6"
+      ],
+      "exception_id": "native-adjacent-zone-id-rather-than-object-reference-cf314ac6",
+      "index": 429,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Surface.adjacent_zone for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface.AdjacentZoneId. Adaptation family native-adjacent-zone-id-rather-than-object-reference-cf314ac6 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:19b6cd5c44f0aca9a1b8355cb642a3eb07b48d4742db6b5e225772d4e310dd4e. Only inventory index 429 and assertion epsimple-shape-core-429-cf314ac6 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-430-aa93b96b"
+      ],
+      "index": 430,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.area for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface.Area. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:5d58b415ec0ea02090111fc41f98a0061f3b4834e2c334a27f32521004be7cd9. Only inventory index 430 and assertion epsimple-shape-core-430-aa93b96b are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-431-98e03520"
+      ],
+      "index": 431,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.azimuth for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface.Azimuth. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:54732d735006a832ceacbcff38e9827b9ccffae59a4e7fccc31320d9ddb7dd98. Only inventory index 431 and assertion epsimple-shape-core-431-98e03520 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-432-3680772f"
+      ],
+      "index": 432,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.boundary for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface.BoundaryCondition. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:3a11f5c4df71dd7f76f79c47b08472c07f3118c307576b21c7b8fff8cb66f658. Only inventory index 432 and assertion epsimple-shape-core-432-3680772f are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-433-9aed8e71"
+      ],
+      "index": 433,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.construction for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface.Construction. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:b61279b3e6837db174a553c50c5e0a33600d5871111619488ad30458ba2b1baa. Only inventory index 433 and assertion epsimple-shape-core-433-9aed8e71 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#pure-deterministic-native-flip-without-inplace-mutation-8e01b8fa",
+        "upstream/symbol-evidence.json#epsimple-shape-core-434-8e01b8fa"
+      ],
+      "exception_id": "pure-deterministic-native-flip-without-inplace-mutation-8e01b8fa",
+      "index": 434,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Surface.flip for exact fixture case S02 (epsimple-shape-core.surface-deepcopy-and-flip-semantics) through GonieGonie.SimpleDragon.Surface.Flip(). Adaptation family pure-deterministic-native-flip-without-inplace-mutation-8e01b8fa classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:1202598d119100e3c185ccfebf049dd25cdae86cbe15a57ee3741d5ce11ad8e0. Only inventory index 434 and assertion epsimple-shape-core-434-8e01b8fa are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-435-3da5f695"
+      ],
+      "index": 435,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.from_json for exact fixture case S03 (epsimple-shape-core.surface-json-defined-open-unknown-constructions) through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?). Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs@sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968 are fail-closed bindings. The trusted evidence output is sha256:a5813c4c053c38e8e9706abb01cb870b09a999d8d5b87a79b421d9529dbea46b. Only inventory index 435 and assertion epsimple-shape-core-435-3da5f695 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-catalog-native-aggregation-72d9807c",
+        "upstream/symbol-evidence.json#epsimple-shape-core-436-72d9807c"
+      ],
+      "exception_id": "model-catalog-native-aggregation-72d9807c",
+      "index": 436,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Surface.get_unique_fenestration_constructions for exact fixture case S04 (epsimple-shape-core.surface-opening-counts-and-unique-constructions) through GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions. Adaptation family model-catalog-native-aggregation-72d9807c classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/GreenRetrofitModel.cs@sha256:7bf2f7dfb922f4d85982ada0f5622bfbef59dce8cb4d7a90b2759ed6978935ea are fail-closed bindings. The trusted evidence output is sha256:722157ee9277cbf0a2d47ddd594d5451a3b2d009aaf61d3f1083e826e396ddb5. Only inventory index 436 and assertion epsimple-shape-core-436-72d9807c are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-437-42d0195c"
+      ],
+      "index": 437,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.num_doors for exact fixture case S04 (epsimple-shape-core.surface-opening-counts-and-unique-constructions) through GonieGonie.SimpleDragon.Surface.DoorCount. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:73a9290c396fdff94a91676ec23af3059d0728102229959624be9da6ff4e0ab2. Only inventory index 437 and assertion epsimple-shape-core-437-42d0195c are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-438-4ec64b53"
+      ],
+      "index": 438,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.num_windows for exact fixture case S04 (epsimple-shape-core.surface-opening-counts-and-unique-constructions) through GonieGonie.SimpleDragon.Surface.WindowCount. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:ea816387e7a8e05055a45bc8478409283f51179c4c4853c7837e548e0dcf9d14. Only inventory index 438 and assertion epsimple-shape-core-438-4ec64b53 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-439-3a69bea0"
+      ],
+      "index": 439,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.reflectance for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface.CoolRoofReflectance. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:41fd0b9676a71b406b12694d8e41016f2ce0d29114ea673e37ba0ef2ef0122b3. Only inventory index 439 and assertion epsimple-shape-core-439-3a69bea0 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-440-26abf64e"
+      ],
+      "index": 440,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.to_dragon for exact fixture case S05 (epsimple-shape-core.surface-dragon-geometry-and-opening-partition) through GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:bd48c53490e6e19be65c670333dec94f8aa68c91690371044147ad97f35ac63a. Only inventory index 440 and assertion epsimple-shape-core-440-26abf64e are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-441-5afcce2a"
+      ],
+      "index": 441,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Surface.type for exact fixture case S01 (epsimple-shape-core.surface-constructor-properties-and-boundary-coupling) through GonieGonie.SimpleDragon.Surface.Type. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs@sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809 are fail-closed bindings. The trusted evidence output is sha256:f01a8a90a5b787ad691b237f84d598b64035013740c5885fb4cedfc8efed54e3. Only inventory index 441 and assertion epsimple-shape-core-441-5afcce2a are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#unified-immutable-fenestration-with-window-discriminator-00f305af",
+        "upstream/symbol-evidence.json#epsimple-shape-core-442-00f305af"
+      ],
+      "exception_id": "unified-immutable-fenestration-with-window-discriminator-00f305af",
+      "index": 442,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Window for exact fixture case W01 (epsimple-shape-core.window-constructor-blind-and-construction-validation) through GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType. Adaptation family unified-immutable-fenestration-with-window-discriminator-00f305af classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:9d147afd0c4b343d8e60a2cabf491696086cba7c98967e4cd89b4a4f863afdf8. Only inventory index 442 and assertion epsimple-shape-core-442-00f305af are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#unified-native-fenestration-constructor-e8fad25a",
+        "upstream/symbol-evidence.json#epsimple-shape-core-443-e8fad25a"
+      ],
+      "exception_id": "unified-native-fenestration-constructor-e8fad25a",
+      "index": 443,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Window.__init__ for exact fixture case W01 (epsimple-shape-core.window-constructor-blind-and-construction-validation) through GonieGonie.SimpleDragon.Fenestration constructor. Adaptation family unified-native-fenestration-constructor-e8fad25a classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:d279db700d7515474d83de0f05732aee2dea8b88a0d08e0cf99ad2d042244dae. Only inventory index 443 and assertion epsimple-shape-core-443-e8fad25a are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-444-92ce583d"
+      ],
+      "index": 444,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Window.blind for exact fixture case W01 (epsimple-shape-core.window-constructor-blind-and-construction-validation) through GonieGonie.SimpleDragon.Fenestration.Blind. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:aef0b974bce1c63ba0e3790ac9512f271e988f26e5c989df243c2e8318018ffa. Only inventory index 444 and assertion epsimple-shape-core-444-92ce583d are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-445-4f40b518"
+      ],
+      "index": 445,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Window.construction for exact fixture case W01 (epsimple-shape-core.window-constructor-blind-and-construction-validation) through GonieGonie.SimpleDragon.Fenestration.Construction. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs@sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78 are fail-closed bindings. The trusted evidence output is sha256:6472d9b36a01318d98733c558ae25e8faa0e54f8f8f2ddab6c58dec8820cf33b. Only inventory index 445 and assertion epsimple-shape-core-445-4f40b518 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-446-93259bed"
+      ],
+      "index": 446,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Window.from_json for exact fixture case W02 (epsimple-shape-core.window-json-and-dragon-blind-mapping) through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?). Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs@sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968 are fail-closed bindings. The trusted evidence output is sha256:3939e13476fcd3bd195292296fd531ee16ecfb4cc33fcf174cc3effd12dcda93. Only inventory index 446 and assertion epsimple-shape-core-446-93259bed are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-447-f032bad2"
+      ],
+      "index": 447,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Window.to_dragon for exact fixture case W02 (epsimple-shape-core.window-json-and-dragon-blind-mapping) through GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:6cc26afe2a83e6b03a96dd44e7dea4c002fdeda2df20608edb7a2c5233d50291. Only inventory index 447 and assertion epsimple-shape-core-447-f032bad2 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-448-dda48f66"
+      ],
+      "index": 448,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone for exact fixture case Z01 (epsimple-shape-core.zone-constructor-id-height-and-supply-validation) through GonieGonie.SimpleDragon.Zone. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs@sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b are fail-closed bindings. The trusted evidence output is sha256:c84337b58e5d0a6e3188658f921f65d1f712702e8bd6918d3f20420738afb0df. Only inventory index 448 and assertion epsimple-shape-core-448-dda48f66 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-449-246156d9"
+      ],
+      "index": 449,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.ID for exact fixture case Z01 (epsimple-shape-core.zone-constructor-id-height-and-supply-validation) through GonieGonie.SimpleDragon.Zone.Id. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs@sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b are fail-closed bindings. The trusted evidence output is sha256:257c4e040154a6c72edca73e90bd2c23e50e097afa2b40bce4def1323145ae0b. Only inventory index 449 and assertion epsimple-shape-core-449-246156d9 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-core-shape-py-zone-hash-60007ac6"
       ],
       "index": 450,
       "rationale": "No epsimple conversion call site uses this object equality/hash protocol. Model collection and reference topology are keyed explicitly by ID strings in epsimple/core/model.py and shape.py, so the Python comparison surface can be excluded while ID/reference outcomes remain gated."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#deterministic-native-id-and-immutable-zone-constructor-a5f3cee1",
+        "upstream/symbol-evidence.json#epsimple-shape-core-451-a5f3cee1"
+      ],
+      "exception_id": "deterministic-native-id-and-immutable-zone-constructor-a5f3cee1",
+      "index": 451,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Zone.__init__ for exact fixture case Z01 (epsimple-shape-core.zone-constructor-id-height-and-supply-validation) through GonieGonie.SimpleDragon.Zone constructor. Adaptation family deterministic-native-id-and-immutable-zone-constructor-a5f3cee1 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs@sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b are fail-closed bindings. The trusted evidence output is sha256:e2fd819467791dd5c9e61146e4c1eb487f3e578e78d9ff4b6c5e86a3885ff3dc. Only inventory index 451 and assertion epsimple-shape-core-451-a5f3cee1 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-452-51ef4a1e"
+      ],
+      "index": 452,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.area for exact fixture case Z02 (epsimple-shape-core.zone-area-infiltration-and-supply-filtering) through GonieGonie.SimpleDragon.Zone.Area. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs@sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b are fail-closed bindings. The trusted evidence output is sha256:86857191473c42c13e020e1a7c001ed5d886f6246a1be302da8302911d6378a7. Only inventory index 452 and assertion epsimple-shape-core-452-51ef4a1e are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-453-e0f58a2e"
+      ],
+      "index": 453,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.cooling_supply_systems for exact fixture case Z02 (epsimple-shape-core.zone-area-infiltration-and-supply-filtering) through GonieGonie.SimpleDragon.Zone.CoolingSupplySystems. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs@sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b are fail-closed bindings. The trusted evidence output is sha256:3e68d8d5364c3a0a28a75503ae1df4831b7cccb1b381468eb440ccf4afda3fde. Only inventory index 453 and assertion epsimple-shape-core-453-e0f58a2e are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-454-1254d46e"
+      ],
+      "index": 454,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.from_json for exact fixture case Z03 (epsimple-shape-core.zone-json-surface-profile-system-and-ventilation-counts) through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?). Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs@sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968 are fail-closed bindings. The trusted evidence output is sha256:5551f27d85a6d565484cf751665a4459dafca98be89d66c1a914b00add5c0cba. Only inventory index 454 and assertion epsimple-shape-core-454-1254d46e are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-level-native-fenestration-catalog-d8077110",
+        "upstream/symbol-evidence.json#epsimple-shape-core-455-d8077110"
+      ],
+      "exception_id": "model-level-native-fenestration-catalog-d8077110",
+      "index": 455,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Zone.get_unique_fenestration_constructions for exact fixture case Z04 (epsimple-shape-core.zone-unique-construction-and-material-aggregation) through GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions. Adaptation family model-level-native-fenestration-catalog-d8077110 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/GreenRetrofitModel.cs@sha256:7bf2f7dfb922f4d85982ada0f5622bfbef59dce8cb4d7a90b2759ed6978935ea are fail-closed bindings. The trusted evidence output is sha256:542b33db5555279cb4014249430989f2a2eb6551db490a3adb532ba761624156. Only inventory index 455 and assertion epsimple-shape-core-455-d8077110 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-level-native-material-catalog-ecb20cb3",
+        "upstream/symbol-evidence.json#epsimple-shape-core-456-ecb20cb3"
+      ],
+      "exception_id": "model-level-native-material-catalog-ecb20cb3",
+      "index": 456,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Zone.get_unique_materials for exact fixture case Z04 (epsimple-shape-core.zone-unique-construction-and-material-aggregation) through GonieGonie.SimpleDragon.GreenRetrofitModel.Materials. Adaptation family model-level-native-material-catalog-ecb20cb3 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/GreenRetrofitModel.cs@sha256:7bf2f7dfb922f4d85982ada0f5622bfbef59dce8cb4d7a90b2759ed6978935ea are fail-closed bindings. The trusted evidence output is sha256:934baa12adf58a63de7820ccf998656407e9d2e6394272d157651751e98f0295. Only inventory index 456 and assertion epsimple-shape-core-456-ecb20cb3 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#model-level-native-surface-catalog-486d73d3",
+        "upstream/symbol-evidence.json#epsimple-shape-core-457-486d73d3"
+      ],
+      "exception_id": "model-level-native-surface-catalog-486d73d3",
+      "index": 457,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Zone.get_unique_surface_constructions for exact fixture case Z04 (epsimple-shape-core.zone-unique-construction-and-material-aggregation) through GonieGonie.SimpleDragon.GreenRetrofitModel.SurfaceConstructions. Adaptation family model-level-native-surface-catalog-486d73d3 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/GreenRetrofitModel.cs@sha256:7bf2f7dfb922f4d85982ada0f5622bfbef59dce8cb4d7a90b2759ed6978935ea are fail-closed bindings. The trusted evidence output is sha256:c25bca8ce860c72a8a3924b8df6a7e75394e4993840e8908cf525847c1063fb6. Only inventory index 457 and assertion epsimple-shape-core-457-486d73d3 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-458-c68b3d65"
+      ],
+      "index": 458,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.heating_supply_systems for exact fixture case Z02 (epsimple-shape-core.zone-area-infiltration-and-supply-filtering) through GonieGonie.SimpleDragon.Zone.HeatingSupplySystems. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs@sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b are fail-closed bindings. The trusted evidence output is sha256:fdcdbf61ce1f9635aef0f6f24e03294ea9fa280f56a5d787a9064c5d4050d26a. Only inventory index 458 and assertion epsimple-shape-core-458-c68b3d65 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-459-349a48c8"
+      ],
+      "index": 459,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.height for exact fixture case Z01 (epsimple-shape-core.zone-constructor-id-height-and-supply-validation) through GonieGonie.SimpleDragon.Zone.Height. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs@sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b are fail-closed bindings. The trusted evidence output is sha256:d04acf486afff0b9dc467048c34e510af82abfd3f0685be1744964f6edb963b9. Only inventory index 459 and assertion epsimple-shape-core-459-349a48c8 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-460-3fffc5a8"
+      ],
+      "index": 460,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.infiltration for exact fixture case Z02 (epsimple-shape-core.zone-area-infiltration-and-supply-filtering) through GonieGonie.SimpleDragon.Zone.Infiltration. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs@sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b are fail-closed bindings. The trusted evidence output is sha256:23684e21723560507e0f489599970b44426991cf93a69d8a4b721089fb1c6be6. Only inventory index 460 and assertion epsimple-shape-core-460-3fffc5a8 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-shape-core-461-3eaf6c25"
+      ],
+      "index": 461,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Zone.supply_systems for exact fixture case Z01 (epsimple-shape-core.zone-constructor-id-height-and-supply-validation) through GonieGonie.SimpleDragon.Zone.SupplySystems. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs@sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b are fail-closed bindings. The trusted evidence output is sha256:257250202b6d31736de8502a19ef5c6f4d3bf1b09cc5ec431e76844535d7a6f5. Only inventory index 461 and assertion epsimple-shape-core-461-3eaf6c25 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#native-greenretrofit-converter-implements-upstream-missing-operation-da336048",
+        "upstream/symbol-evidence.json#epsimple-shape-core-462-da336048"
+      ],
+      "exception_id": "native-greenretrofit-converter-implements-upstream-missing-operation-da336048",
+      "index": 462,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Zone.to_dragon for exact fixture case Z05 (epsimple-shape-core.zone-to-dragon-upstream-failure) through GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?). Adaptation family native-greenretrofit-converter-implements-upstream-missing-operation-da336048 classifies the reviewed native API difference. Fixture sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5, commit a198a7c native parity test sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7, and primary implementation src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs@sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd are fail-closed bindings. The trusted evidence output is sha256:8ab3a77bb4628a15d2a242119db9c6c25813631a7ad088af7b2d3e6d1b1ecdca. Only inventory index 462 and assertion epsimple-shape-core-462-da336048 are promoted; excluded indices 416, 425, 427, 428, and 450 and every adjacent symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -6624,9 +7035,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 194,
-      "exception": 250,
-      "needs_reverification": 546,
+      "equivalent": 227,
+      "exception": 270,
+      "needs_reverification": 493,
       "out_of_scope": 252
     },
     "entry_count": 1242
