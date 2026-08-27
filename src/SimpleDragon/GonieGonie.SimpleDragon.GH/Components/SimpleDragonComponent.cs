@@ -47,6 +47,14 @@ public abstract class SimpleDragonComponent : GH_Component
         return GrasshopperDocumentPathResolver.Resolve(path, OnPingDocument());
     }
 
+    protected string ResolveDocumentPath(string path, string unsavedDocumentDirectory)
+    {
+        return GrasshopperDocumentPathResolver.Resolve(
+            path,
+            OnPingDocument(),
+            unsavedDocumentDirectory);
+    }
+
     protected void Report(IEnumerable<Diagnostic> diagnostics)
     {
         foreach (Diagnostic diagnostic in diagnostics)

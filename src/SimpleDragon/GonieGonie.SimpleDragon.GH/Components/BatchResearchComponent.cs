@@ -58,19 +58,19 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
         pManager.AddTextParameter(
             "EPW Paths",
             "EPW",
-            "Optional EPW paths. Supply none, one shared path, or exactly one per model.",
+            "Optional EPW paths. Relative paths use the saved Grasshopper document. Supply none, one shared path, or exactly one per model.",
             GH_ParamAccess.list);
         pManager[2].Optional = true;
         pManager.AddTextParameter(
             "Runtime Root",
             "E+",
-            "Optional EnergyPlus 24.2 runtime root.",
+            "Optional EnergyPlus 24.2 runtime root. Relative paths use the saved Grasshopper document.",
             GH_ParamAccess.item);
         pManager[3].Optional = true;
         pManager.AddTextParameter(
             "Output Root",
             "Out",
-            "Optional batch root. Defaults to the operating-system temp directory.",
+            "Optional batch root. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. Empty uses the operating-system temp directory.",
             GH_ParamAccess.item);
         pManager[4].Optional = true;
         pManager.AddIntegerParameter(
@@ -238,6 +238,12 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
             return null;
         }
 
+        GH_Document? document = OnPingDocument();
+        string? documentFilePath = document is not null && document.IsFilePathDefined
+            ? document.FilePath
+            : null;
+        string currentDirectory = Directory.GetCurrentDirectory();
+
         var definitions = new List<BatchCaseDefinition>(models.Length);
         for (int index = 0; index < models.Length; index++)
         {
@@ -248,16 +254,49 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
                 1 => weatherPaths[0],
                 _ => weatherPaths[index],
             };
+            weatherPath = ResolveBatchReadPath(
+                weatherPath,
+                documentFilePath,
+                currentDirectory);
+
             definitions.Add(new BatchCaseDefinition(models[index], caseId, weatherPath));
         }
 
-        string effectiveOutputRoot = string.IsNullOrWhiteSpace(outputRoot)
-            ? new BatchRunOptions().OutputRootPath
-            : Path.GetFullPath(outputRoot.Trim());
-        string? effectiveRuntimeRoot = string.IsNullOrWhiteSpace(runtimeRoot)
-            ? null
-            : Path.GetFullPath(runtimeRoot.Trim());
+        string effectiveOutputRoot = ResolveBatchOutputRoot(
+            outputRoot,
+            documentFilePath,
+            Path.GetTempPath());
+        string? effectiveRuntimeRoot = ResolveBatchReadPath(
+            runtimeRoot,
+            documentFilePath,
+            currentDirectory);
         return new BatchInputs(definitions, effectiveRuntimeRoot, effectiveOutputRoot, parallelLimit);
+    }
+
+    private static string? ResolveBatchReadPath(
+        string? suppliedPath,
+        string? documentFilePath,
+        string currentDirectory)
+    {
+        return string.IsNullOrWhiteSpace(suppliedPath)
+            ? null
+            : GrasshopperDocumentPathResolver.Resolve(
+                suppliedPath!,
+                documentFilePath,
+                currentDirectory);
+    }
+
+    private static string ResolveBatchOutputRoot(
+        string suppliedPath,
+        string? documentFilePath,
+        string tempDirectory)
+    {
+        return string.IsNullOrWhiteSpace(suppliedPath)
+            ? new BatchRunOptions().OutputRootPath
+            : GrasshopperDocumentPathResolver.Resolve(
+                suppliedPath,
+                documentFilePath,
+                tempDirectory);
     }
 
     private void StartBatch(BatchInputs inputs)

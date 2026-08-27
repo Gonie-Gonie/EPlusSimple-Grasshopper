@@ -129,7 +129,11 @@ public sealed class WriteGreenRetrofitResultComponent : SimpleDragonComponent
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddParameter(new GreenRetrofitResultParam(), "GRR", "GRR", "GRR result to serialize.", GH_ParamAccess.item);
-        pManager.AddTextParameter("Path", "P", "Destination .grr or JSON path.", GH_ParamAccess.item);
+        pManager.AddTextParameter(
+            "Path",
+            "P",
+            "Destination .grr or JSON path. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory.",
+            GH_ParamAccess.item);
         pManager.AddBooleanParameter("Write", "W", "Explicit write trigger.", GH_ParamAccess.item, false);
     }
 
@@ -153,7 +157,7 @@ public sealed class WriteGreenRetrofitResultComponent : SimpleDragonComponent
             return;
         }
 
-        string fullPath = ResolveDocumentPath(path);
+        string fullPath = ResolveDocumentPath(path, Path.GetTempPath());
         string json = GrrWriter.Serialize(resultGoo.Value);
         if (write)
         {

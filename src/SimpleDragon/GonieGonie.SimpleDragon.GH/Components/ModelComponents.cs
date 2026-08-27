@@ -312,7 +312,11 @@ public sealed class WriteGreenRetrofitModelComponent : SimpleDragonComponent
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddParameter(new GreenRetrofitModelParam(), "GRM", "GRM", "GRM model to serialize.", GH_ParamAccess.item);
-        pManager.AddTextParameter("Path", "P", "Destination .grm or JSON path.", GH_ParamAccess.item);
+        pManager.AddTextParameter(
+            "Path",
+            "P",
+            "Destination .grm or JSON path. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory.",
+            GH_ParamAccess.item);
         pManager.AddBooleanParameter("Write", "W", "Explicit write trigger.", GH_ParamAccess.item, false);
     }
 
@@ -336,7 +340,7 @@ public sealed class WriteGreenRetrofitModelComponent : SimpleDragonComponent
             return;
         }
 
-        string fullPath = ResolveDocumentPath(path);
+        string fullPath = ResolveDocumentPath(path, Path.GetTempPath());
         string json = GrmWriter.Serialize(modelGoo.Value);
         if (write)
         {
@@ -374,7 +378,7 @@ public sealed class ConvertGreenRetrofitModelComponent : SimpleDragonComponent
         pManager.AddTextParameter(
             "IDD Path",
             "IDD",
-            "Optional Energy+.idd path or EnergyPlus root. Empty uses configured/default EnergyPlus 24.2 when available.",
+            "Optional Energy+.idd path or EnergyPlus root. Relative paths use the saved Grasshopper document. Empty uses configured/default EnergyPlus 24.2 when available.",
             GH_ParamAccess.item,
             string.Empty);
     }
@@ -441,18 +445,24 @@ public sealed class ConvertGreenRetrofitModelComponent : SimpleDragonComponent
         DA.SetDataList(5, diagnostics.Select(item => new DiagnosticGoo(item)));
     }
 
-    private static IddSchema? ResolveIdd(string suppliedPath)
+    private IddSchema? ResolveIdd(string suppliedPath)
     {
         string? path = ResolveIddPath(suppliedPath);
         return path is null ? null : IddParser.ParseFile(path);
     }
 
-    private static string? ResolveIddPath(string suppliedPath)
+    private string? ResolveIddPath(string suppliedPath)
     {
         if (!string.IsNullOrWhiteSpace(suppliedPath))
         {
-            string full = Path.GetFullPath(suppliedPath.Trim());
-            return Directory.Exists(full) ? Path.Combine(full, "Energy+.idd") : full;
+            GH_Document? document = OnPingDocument();
+            string? documentFilePath = document is not null && document.IsFilePathDefined
+                ? document.FilePath
+                : null;
+            return ResolveExplicitIddPath(
+                suppliedPath,
+                documentFilePath,
+                Directory.GetCurrentDirectory());
         }
 
         foreach (string variable in new[]
@@ -478,5 +488,17 @@ public sealed class ConvertGreenRetrofitModelComponent : SimpleDragonComponent
             "EnergyPlusV24-2-0",
             "Energy+.idd");
         return File.Exists(conventional) ? conventional : null;
+    }
+
+    private static string ResolveExplicitIddPath(
+        string suppliedPath,
+        string? documentFilePath,
+        string currentDirectory)
+    {
+        string full = GrasshopperDocumentPathResolver.Resolve(
+            suppliedPath,
+            documentFilePath,
+            currentDirectory);
+        return Directory.Exists(full) ? Path.Combine(full, "Energy+.idd") : full;
     }
 }

@@ -45,19 +45,19 @@ public sealed class RunEnergyPlusComponent : DragonComponent
         pManager.AddTextParameter(
             "Weather",
             "EPW",
-            "Optional user-supplied EPW weather-file path. InvisibleDragon never downloads weather files.",
+            "Optional user-supplied EPW weather-file path. Relative paths use the saved Grasshopper document. InvisibleDragon never downloads weather files.",
             GH_ParamAccess.item,
             string.Empty);
         pManager.AddTextParameter(
             "Runtime Root",
             "E+",
-            "Optional EnergyPlus 24.2 root. Empty checks the verified per-user cache, environment hints, and default install.",
+            "Optional EnergyPlus 24.2 root. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory so Prepare Missing Runtime remains writable. Empty checks the verified per-user cache, environment hints, and default install.",
             GH_ParamAccess.item,
             string.Empty);
         pManager.AddTextParameter(
             "Temp Root",
             "Temp",
-            "Optional caller-owned temporary root for isolated runs.",
+            "Optional caller-owned temporary root for isolated runs. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory.",
             GH_ParamAccess.item,
             string.Empty);
         pManager.AddBooleanParameter(
@@ -149,12 +149,16 @@ public sealed class RunEnergyPlusComponent : DragonComponent
             return;
         }
 
+        GH_Document? document = OnPingDocument();
+        string? documentFilePath = document is not null && document.IsFilePathDefined
+            ? document.FilePath
+            : null;
         string idfText = IdfWriter.Write(idfGoo.Value);
         var inputs = new RunInputs(
             idfText,
-            OptionalFullPath(weatherPath),
-            OptionalFullPath(runtimeRoot),
-            ResolveTempRoot(tempRoot),
+            OptionalFullPath(weatherPath, documentFilePath, Directory.GetCurrentDirectory()),
+            OptionalFullPath(runtimeRoot, documentFilePath, Path.GetTempPath()),
+            ResolveTempRoot(tempRoot, documentFilePath),
             TimeSpan.FromMinutes(timeoutMinutes),
             keepWorkDirectory,
             prepareMissingRuntime);
@@ -416,22 +420,38 @@ public sealed class RunEnergyPlusComponent : DragonComponent
         }
     }
 
-    private static string ResolveTempRoot(string supplied)
+    private static string ResolveTempRoot(string supplied, string? documentFilePath)
     {
         if (!string.IsNullOrWhiteSpace(supplied))
         {
-            return Path.GetFullPath(supplied.Trim());
+            return ResolvePath(supplied, documentFilePath, Path.GetTempPath());
         }
 
         string? configured = Environment.GetEnvironmentVariable("GONIEGONIE_TEMP_ROOT");
         return !string.IsNullOrWhiteSpace(configured)
-            ? Path.GetFullPath(configured)
+            ? ResolvePath(configured, null, Path.GetTempPath())
             : Path.Combine(Path.GetTempPath(), "GonieGonie", "Dragons", "temp");
     }
 
-    private static string? OptionalFullPath(string value)
+    private static string? OptionalFullPath(
+        string value,
+        string? documentFilePath,
+        string fallbackDirectory)
     {
-        return string.IsNullOrWhiteSpace(value) ? null : Path.GetFullPath(value.Trim());
+        return string.IsNullOrWhiteSpace(value)
+            ? null
+            : ResolvePath(value, documentFilePath, fallbackDirectory);
+    }
+
+    private static string ResolvePath(
+        string path,
+        string? documentFilePath,
+        string fallbackDirectory)
+    {
+        return GrasshopperDocumentPathResolver.Resolve(
+            path,
+            documentFilePath,
+            fallbackDirectory);
     }
 
     private static string ComputeRunKey(RunInputs inputs)

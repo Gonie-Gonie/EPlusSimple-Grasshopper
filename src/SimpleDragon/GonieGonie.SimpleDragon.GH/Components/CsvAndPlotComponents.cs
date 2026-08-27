@@ -32,7 +32,11 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
             "GRM",
             "Optional source model metadata for manifest.json.",
             GH_ParamAccess.item);
-        pManager.AddTextParameter("Directory", "D", "Requested export directory.", GH_ParamAccess.item);
+        pManager.AddTextParameter(
+            "Directory",
+            "D",
+            "Requested export directory. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory.",
+            GH_ParamAccess.item);
         pManager.AddTextParameter("Case ID", "Case", "Stable case identifier written to every CSV row.", GH_ParamAccess.item, string.Empty);
         pManager.AddParameter(new DiagnosticParam(), "Diagnostics", "Diag", "Optional diagnostics to include.", GH_ParamAccess.list);
         pManager.AddGenericParameter(
@@ -111,7 +115,7 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
             geometryMap,
             caseId,
             modelGoo?.Value);
-        string fullDirectory = ResolveDocumentPath(directory);
+        string fullDirectory = ResolveDocumentPath(directory, Path.GetTempPath());
         GreenRetrofitCsvExportResult preview = GreenRetrofitCsvExporter.ExportDirectory(
             fullDirectory,
             resultGoo.Value,

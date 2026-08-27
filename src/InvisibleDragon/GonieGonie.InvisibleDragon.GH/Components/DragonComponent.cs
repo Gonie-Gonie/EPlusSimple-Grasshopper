@@ -46,6 +46,14 @@ public abstract class DragonComponent : GH_Component
 
     protected abstract void Solve(IGH_DataAccess DA);
 
+    protected string ResolveDocumentPath(string path)
+    {
+        return GrasshopperDocumentPathResolver.Resolve(
+            path,
+            OnPingDocument(),
+            Directory.GetCurrentDirectory());
+    }
+
     protected void Report(IEnumerable<Diagnostic> diagnostics)
     {
         foreach (Diagnostic diagnostic in diagnostics)

@@ -53,6 +53,36 @@ public sealed class GrasshopperDocumentPathResolverTests
         Assert.Equal(absolutePath, resolved);
     }
 
+    [Fact]
+    public void UnsavedDocumentCanUseSystemTempAsItsExplicitFallback()
+    {
+        string tempDirectory = Path.GetFullPath(Path.GetTempPath());
+
+        string resolved = ResolveForUnsavedDocument(
+            Path.Combine("simpledragon-batch", "results"),
+            tempDirectory);
+
+        Assert.Equal(
+            Path.Combine(tempDirectory, "simpledragon-batch", "results"),
+            resolved);
+    }
+
+    [Fact]
+    public void SavedDocumentOverridesAnExplicitSystemTempFallback()
+    {
+        string root = TestRoot();
+        string documentPath = Path.Combine(root, "definitions", "batch-study.gh");
+
+        string resolved = Resolve(
+            Path.Combine("..", "temp", "batch-results"),
+            documentPath,
+            Path.GetTempPath());
+
+        Assert.Equal(
+            Path.Combine(root, "temp", "batch-results"),
+            resolved);
+    }
+
     private static string Resolve(
         string path,
         string? documentFilePath,
@@ -72,6 +102,31 @@ public sealed class GrasshopperDocumentPathResolverTests
         return Assert.IsType<string>(method.Invoke(
             obj: null,
             parameters: new object?[] { path, documentFilePath, currentDirectory }));
+    }
+
+    private static string ResolveForUnsavedDocument(
+        string path,
+        string fallbackDirectory)
+    {
+        Assembly assembly = LoadPlugin();
+        Type? resolver = assembly.GetType(
+            "GonieGonie.SimpleDragon.Grasshopper.Components.GrasshopperDocumentPathResolver");
+        Assert.NotNull(resolver);
+        Type? documentType = assembly.GetReferencedAssemblies()
+            .Where(item => item.Name == "Grasshopper")
+            .Select(item => Assembly.Load(item).GetType("Grasshopper.Kernel.GH_Document"))
+            .Single();
+        Assert.NotNull(documentType);
+        MethodInfo? method = resolver.GetMethod(
+            "Resolve",
+            BindingFlags.Static | BindingFlags.NonPublic,
+            binder: null,
+            types: new[] { typeof(string), documentType!, typeof(string) },
+            modifiers: null);
+        Assert.NotNull(method);
+        return Assert.IsType<string>(method.Invoke(
+            obj: null,
+            parameters: new object?[] { path, null, fallbackDirectory }));
     }
 
     private static Assembly LoadPlugin()

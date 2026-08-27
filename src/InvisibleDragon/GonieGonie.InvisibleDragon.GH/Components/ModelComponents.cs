@@ -348,7 +348,7 @@ public sealed class CompileIdfComponent : DragonComponent
         pManager.AddTextParameter(
             "IDD Path",
             "IDD",
-            "Optional Energy+.idd file or EnergyPlus root. Empty uses configured/default EnergyPlus 24.2.",
+            "Optional Energy+.idd file or EnergyPlus root. Relative paths use the saved Grasshopper document. Empty uses configured/default EnergyPlus 24.2.",
             GH_ParamAccess.item,
             string.Empty);
     }
@@ -377,7 +377,10 @@ public sealed class CompileIdfComponent : DragonComponent
             return;
         }
 
-        Idd.IddSchema? schema = IddSchemaProvider.Resolve(iddPath);
+        string? resolvedIddPath = string.IsNullOrWhiteSpace(iddPath)
+            ? null
+            : ResolveDocumentPath(iddPath);
+        Idd.IddSchema? schema = IddSchemaProvider.Resolve(resolvedIddPath);
         IdfDocument document = modelGoo.Value.ToIdfDocument(
             schema,
             new EnergyModelIdfOptions { ThrowOnValidationErrors = false });
@@ -423,7 +426,7 @@ public sealed class ValidateIdfComponent : DragonComponent
         pManager.AddTextParameter(
             "IDD Path",
             "IDD",
-            "Optional Energy+.idd file or EnergyPlus root. Empty uses configured/default EnergyPlus 24.2.",
+            "Optional Energy+.idd file or EnergyPlus root. Relative paths use the saved Grasshopper document. Empty uses configured/default EnergyPlus 24.2.",
             GH_ParamAccess.item,
             string.Empty);
     }
@@ -450,7 +453,10 @@ public sealed class ValidateIdfComponent : DragonComponent
             return;
         }
 
-        Idd.IddSchema? schema = IddSchemaProvider.Resolve(iddPath);
+        string? resolvedIddPath = string.IsNullOrWhiteSpace(iddPath)
+            ? null
+            : ResolveDocumentPath(iddPath);
+        Idd.IddSchema? schema = IddSchemaProvider.Resolve(resolvedIddPath);
         IdfDocument document = schema is null
             ? idfGoo.Value
             : IdfParser.Parse(IdfWriter.Write(idfGoo.Value), schema);

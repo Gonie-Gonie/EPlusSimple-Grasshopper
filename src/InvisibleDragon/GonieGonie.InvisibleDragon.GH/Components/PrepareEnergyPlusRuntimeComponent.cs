@@ -46,7 +46,7 @@ public sealed class PrepareEnergyPlusRuntimeComponent : DragonComponent
         pManager.AddTextParameter(
             "Target Root",
             "Root",
-            "Optional per-user target directory. Empty uses the pinned GonieGonie LocalAppData cache.",
+            "Optional per-user target directory. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. Empty uses the pinned GonieGonie LocalAppData cache.",
             GH_ParamAccess.item,
             string.Empty);
         pManager.AddBooleanParameter(
@@ -128,12 +128,21 @@ public sealed class PrepareEnergyPlusRuntimeComponent : DragonComponent
             CancelActivePreparation();
         }
 
-        string requestKey = RequestKey(targetRoot, replaceInvalidCustomTarget, lockTimeoutMinutes);
+        GH_Document? document = OnPingDocument();
+        string? documentFilePath = document is not null && document.IsFilePathDefined
+            ? document.FilePath
+            : null;
+        string? resolvedTargetRoot = OptionalFullPath(targetRoot, documentFilePath);
+
+        string requestKey = RequestKey(
+            resolvedTargetRoot ?? string.Empty,
+            replaceInvalidCustomTarget,
+            lockTimeoutMinutes);
         if (triggers.Start)
         {
             StartPreparation(
                 new BootstrapInputs(
-                    OptionalFullPath(targetRoot),
+                    resolvedTargetRoot,
                     replaceInvalidCustomTarget,
                     TimeSpan.FromMinutes(lockTimeoutMinutes)),
                 requestKey);
@@ -349,9 +358,14 @@ public sealed class PrepareEnergyPlusRuntimeComponent : DragonComponent
         }
     }
 
-    private static string? OptionalFullPath(string value)
+    private static string? OptionalFullPath(string value, string? documentFilePath)
     {
-        return string.IsNullOrWhiteSpace(value) ? null : Path.GetFullPath(value.Trim());
+        return string.IsNullOrWhiteSpace(value)
+            ? null
+            : GrasshopperDocumentPathResolver.Resolve(
+                value,
+                documentFilePath,
+                Path.GetTempPath());
     }
 
     private static string RequestKey(string targetRoot, bool replaceInvalidCustomTarget, double lockTimeoutMinutes)

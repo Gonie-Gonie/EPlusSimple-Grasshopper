@@ -43,10 +43,18 @@ Grasshopper document:
 ```
 
 SimpleDragon resolves relative GRM, GRR, and CSV paths from the folder that
-contains the saved `.gh` file, regardless of Rhino's working directory. For an
-unsaved definition it falls back to the current working directory. `Export CSV`
-is held at `False`; its directory and file-content outputs are previews only,
-so this example does not create the preview directory or write CSV files.
+contains the saved `.gh` file, regardless of Rhino's working directory. In an
+unsaved definition, read-only GRM/GRR inputs use the current working directory,
+while GRM/GRR/CSV output paths use the system temp directory. `Export CSV` is
+held at `False`; its directory and file-content outputs are previews only, so
+this example does not create the preview directory or write CSV files.
+
+`Run EnergyPlus`, `Prepare EnergyPlus Runtime`, `Run SimpleDragon Batch`, and the
+IDD inputs likewise resolve relative paths from the saved `.gh` file. For an
+unsaved definition, relative run, runtime-preparation, batch, GRM/GRR, and CSV
+output paths use the per-user system temp directory as their base rather than
+Rhino's installation directory. Read-only EPW and IDD inputs should be absolute
+until the definition has been saved.
 
 ## Relink the two-zone definition to live Rhino objects
 
