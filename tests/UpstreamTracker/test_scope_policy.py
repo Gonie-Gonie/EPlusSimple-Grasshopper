@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:832744a78e146de7b469eea11b2a8de6177cd075030f07ea4bc6750292d96178"
+    "sha256:66f25e3e5ef9b502ff40eb27979d6ac5e2a1c53dd80c943659e245d199640156"
 )
 
 
@@ -68,9 +68,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 296,
-                "exception": 373,
-                "needs_reverification": 321,
+                "equivalent": 315,
+                "exception": 406,
+                "needs_reverification": 269,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -789,19 +789,47 @@ class SafeScopePolicyTests(unittest.TestCase):
             257,
             *range(260, 267),
         }
+        supply_target_indices = {
+            147,
+            148,
+            151,
+            *range(154, 157),
+            209,
+            210,
+            213,
+            *range(216, 221),
+            223,
+            *range(226, 232),
+            234,
+            *range(237, 240),
+            271,
+            272,
+            275,
+            *range(278, 283),
+            296,
+            297,
+            300,
+            *range(303, 310),
+            312,
+            *range(315, 319),
+            *range(321, 325),
+        }
         deferred_indices = (
             set(range(135, 337))
             - set(target_symbols)
             - excluded_indices
             - thermal_target_indices
+            - supply_target_indices
         )
         self.assertEqual(58, len(excluded_indices))
         self.assertEqual(47, len(thermal_target_indices))
-        self.assertEqual(69, len(deferred_indices))
+        self.assertEqual(52, len(supply_target_indices))
+        self.assertEqual(17, len(deferred_indices))
         self.assertEqual(
             set(range(135, 337)),
             set(target_symbols)
             | thermal_target_indices
+            | supply_target_indices
             | excluded_indices
             | deferred_indices,
         )
@@ -1055,7 +1083,168 @@ class SafeScopePolicyTests(unittest.TestCase):
                 for classification in ("equivalent", "exception")
             },
         )
-        for index in supply_indices | other_indices:
+        for index in other_indices:
+            entry = entries[index]
+            self.assertEqual("needs_reverification", entry.classification, index)
+            self.assertIsNone(entry.exception_id, index)
+            self.assertEqual((), entry.evidence, index)
+            self.assertEqual(NEEDS_RATIONALE, entry.rationale, index)
+        for index in excluded_indices:
+            entry = entries[index]
+            self.assertEqual("out_of_scope", entry.classification, index)
+            self.assertIsNone(entry.exception_id, index)
+
+    def test_epsimple_hvac_supply_system_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        targets = {
+            147: ('AirHandlingUnit', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-6fd0030b'),
+            148: ('AirHandlingUnit.ID', 'equivalent', None),
+            151: ('AirHandlingUnit.__init__', 'exception', 'air-handling-unit-reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c'),
+            154: ('AirHandlingUnit.from_json', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-148b0ee3'),
+            155: ('AirHandlingUnit.source', 'equivalent', None),
+            156: ('AirHandlingUnit.to_dragon', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-11a6909a'),
+            209: ('ElectricRadiantFloor', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-f7f03ff5'),
+            210: ('ElectricRadiantFloor.ID', 'equivalent', None),
+            213: ('ElectricRadiantFloor.__init__', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-f8bde28f'),
+            216: ('ElectricRadiantFloor.from_json', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-b13a9536'),
+            217: ('ElectricRadiantFloor.source', 'exception', 'electric-radiant-floor-reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a'),
+            218: ('ElectricRadiantFloor.to_dragon', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-01ae7da4'),
+            219: ('ElectricRadiator', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-6354666e'),
+            220: ('ElectricRadiator.ID', 'equivalent', None),
+            223: ('ElectricRadiator.__init__', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-3a47135f'),
+            226: ('ElectricRadiator.capacity', 'equivalent', None),
+            227: ('ElectricRadiator.from_json', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-20bd3338'),
+            228: ('ElectricRadiator.source', 'exception', 'electric-radiator-reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a'),
+            229: ('ElectricRadiator.to_dragon', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-4b95c9d6'),
+            230: ('FanCoilUnit', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-618e77c4'),
+            231: ('FanCoilUnit.ID', 'equivalent', None),
+            234: ('FanCoilUnit.__init__', 'exception', 'fan-coil-unit-reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c'),
+            237: ('FanCoilUnit.from_json', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-4e773b8a'),
+            238: ('FanCoilUnit.source', 'equivalent', None),
+            239: ('FanCoilUnit.to_dragon', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-09f12474'),
+            271: ('PackagedAirConditioner', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-fcef6339'),
+            272: ('PackagedAirConditioner.ID', 'equivalent', None),
+            275: ('PackagedAirConditioner.__init__', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-b2021d84'),
+            278: ('PackagedAirConditioner.capacity', 'equivalent', None),
+            279: ('PackagedAirConditioner.cop', 'equivalent', None),
+            280: ('PackagedAirConditioner.from_json', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-d49a3e1b'),
+            281: ('PackagedAirConditioner.source', 'exception', 'packaged-air-conditioner-reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a'),
+            282: ('PackagedAirConditioner.to_dragon', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-0be4894a'),
+            296: ('RadiantFloor', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-3a70e982'),
+            297: ('RadiantFloor.ID', 'equivalent', None),
+            300: ('RadiantFloor.__init__', 'exception', 'radiant-floor-reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c'),
+            303: ('RadiantFloor.coolable', 'equivalent', None),
+            304: ('RadiantFloor.from_json', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-a3c19218'),
+            305: ('RadiantFloor.heatable', 'equivalent', None),
+            306: ('RadiantFloor.source', 'equivalent', None),
+            307: ('RadiantFloor.to_dragon', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-db124859'),
+            308: ('Radiator', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-8464a277'),
+            309: ('Radiator.ID', 'equivalent', None),
+            312: ('Radiator.__init__', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-35304b6f'),
+            315: ('Radiator.capacity', 'equivalent', None),
+            316: ('Radiator.from_json', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-349b941b'),
+            317: ('Radiator.source', 'equivalent', None),
+            318: ('Radiator.to_dragon', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-bb8edb65'),
+            321: ('SupplySystem', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-d236c0a0'),
+            322: ('SupplySystem.TYPE_MAPPER', 'exception', 'reviewed-native-discriminated-supply-aggregate-and-conversion-route-3639f058'),
+            323: ('SupplySystem.coolable', 'equivalent', None),
+            324: ('SupplySystem.heatable', 'equivalent', None),
+        }
+        self.assertEqual(52, len(targets))
+        self.assertEqual(
+            {"equivalent": 19, "exception": 33},
+            {
+                classification: sum(
+                    target_classification == classification
+                    for _, target_classification, _ in targets.values()
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+
+        for index, (symbol, classification, exception_id) in targets.items():
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual(
+                ("src/epsimple/core/hvac.py", symbol),
+                inventory_symbol.key,
+                symbol,
+            )
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            assertion_id = (
+                f"epsimple-hvac-supply-system-{index}-"
+                f"{inventory_symbol.symbol_hash.removeprefix('sha256:')[:8]}"
+            )
+            expected_evidence = [f"upstream/symbol-evidence.json#{assertion_id}"]
+            if exception_id is not None:
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, symbol)
+            for exact_binding in (
+                assertion_id,
+                "commit 6517fb9",
+                "sha256:b9a98ea739bf4181a4f93c8bed161f559c03bb93a4926ee56dccc100ddd49d65",
+                "sha256:e7874d74d2338c4fa71ab7ddf3cf33b17ce713dcefa0a3d6519cd5a5dd28780d",
+                "sha256:91d1c96ea25e25804b747999e80b78993ff1b58fe8563dc32e0ba8f1a73d9534",
+                "sha256:59a8555cec7c643d7de152fb4a168a01ad8089bc8f014c0ed85f5d0be3a57753",
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+            if exception_id is not None:
+                self.assertIn(exception_id, entry.rationale, symbol)
+
+        thermal_indices = {
+            135, 136, 139, *range(142, 147), 157, 158, 161,
+            *range(164, 172), 174, *range(177, 185), 199, 200, 203,
+            *range(206, 209), 248, 251, 252, 253, 254, 257, *range(260, 267),
+        }
+        enum_indices = {
+            *range(185, 199), *range(240, 248), *range(267, 271), 319, 320,
+        }
+        other_indices = {
+            283, 284, 287, *range(290, 296), 325, 326, 329, *range(332, 337),
+        }
+        excluded_indices = (
+            set(range(135, 337))
+            - set(targets)
+            - thermal_indices
+            - enum_indices
+            - other_indices
+        )
+        self.assertEqual(47, len(thermal_indices))
+        self.assertEqual(28, len(enum_indices))
+        self.assertEqual(17, len(other_indices))
+        self.assertEqual(58, len(excluded_indices))
+        self.assertEqual(
+            set(range(135, 337)),
+            set(targets)
+            | thermal_indices
+            | enum_indices
+            | other_indices
+            | excluded_indices,
+        )
+        self.assertEqual(
+            {"equivalent": 24, "exception": 23},
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in thermal_indices
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+        self.assertEqual(
+            {"equivalent": 18, "exception": 10},
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in enum_indices
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+        for index in other_indices:
             entry = entries[index]
             self.assertEqual("needs_reverification", entry.classification, index)
             self.assertIsNone(entry.exception_id, index)
