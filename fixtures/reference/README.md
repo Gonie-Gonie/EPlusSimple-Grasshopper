@@ -63,6 +63,20 @@ with its model-file, AST, method, and `VALID_DIGITS` receipts included. The 24
 numeric members are exact equivalents and the five enum containers are
 reviewed native container or dispatch adaptations.
 
+`python-0.7.0/dragon-construction-core-oracle.json` pins 19 ordered direct-state
+CPython 3.12.7 cases for exactly 35 class, constructor, property, enum, and
+reversal targets across `Construction`, `Glazing`, `Layer`, `Material`,
+`MaterialRoughness`, and `NoMassConstruction`. It preserves default, explicit,
+and mutated state; bool, range, and nonfinite boundaries plus error timing;
+exact binary64 derived-property operation order; and child/container alias
+topology. Eleven targets are exact equivalents and 24 are reviewed native
+adaptations. `Construction.reversed` remains an adaptation because the native
+model validates names and copies only the container around shared immutable
+`Layer` references, while the upstream result shares mutable `Layer` objects.
+AirBoundary, representation strings,
+equality/hash behavior, and all IDF emission are explicitly outside this
+direct-state fixture.
+
 `python-0.7.0/dragon-construction-to-idf-object-oracle.json` pins two common-
 valid-state observations each for `AirBoundary.to_idf_object`,
 `Construction.to_idf_object`, `Glazing.to_idf_object`, `Layer.to_idf_object`,
