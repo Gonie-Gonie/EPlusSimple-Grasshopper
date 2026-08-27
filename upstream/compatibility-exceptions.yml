@@ -3443,3 +3443,157 @@
     api_contract: "callers use the sealed typed GonieGonie.InvisibleDragon.Model.EnergyModel and its read-only SupportedVersions projection instead of mutating Python class or instance topology"
     compatibility_evidence: "only inventory index 815, the fixture's exact three cases, and the recorded native public class route are claimed; indices 814 and 816 through 825 retain their existing independent classifications"
   approval: accepted-native-api-adaptation
+
+- id: immutable-native-auto-id-prefix-catalog-9a7c270a
+  upstream:
+    path: "src/epsimple/constants.py"
+    symbol: "AUTOID_PREFIX"
+    symbol_hash: sha256:9a7c270abf554af2ac0d3455101382eca02debe8c0b23e6f8c3f8a465bb32355
+  difference:
+    upstream: "Python exposes a constructible string Enum class with runtime lookup, copy and alias semantics, class-level topology, and Python formatting behavior"
+    dotnet: "GonieGonie.SimpleDragon.AutoIdPrefix is a sealed immutable singleton catalog with typed exact-token lookup, a read-only ordered Values projection, and explicit IFormattable behavior"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX across exact identifier-conventions cases A01, A03, A05, A06: the exact 14-member order and tokens, construction and lookup failures, direct formatting context, copy and alias identity, and mutation boundaries. Adaptation family immutable-native-auto-id-prefix-catalog-9a7c270a classifies the bounded native API difference through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:932c6d32716f0b8faed38496ff5ce45f7a9e246de9b4257aa6e02075c45935f0. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    api_contract: "callers use the sealed GonieGonie.SimpleDragon.AutoIdPrefix catalog and typed lookup instead of constructing or mutating a Python Enum class"
+    compatibility_evidence: "only inventory index 10 (src/epsimple/constants.py::AUTOID_PREFIX), exact cases A01, A03, A05, A06, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
+  approval: accepted-native-api-adaptation
+
+- id: embedded-explicit-native-resource-layout-5b876ad7
+  upstream:
+    path: "src/epsimple/constants.py"
+    symbol: "Directory"
+    symbol_hash: sha256:5b876ad7fd9b11f66cc01ecb6c43d4e143b6f0258ba070c02551d968dd68aaf6
+  difference:
+    upstream: "Python exposes import-relative mutable class attributes for package construction, profile, weather-data, and weather-metadata directories"
+    dotnet: "SimpleDragon embeds construction, profile, and weather-metadata resources and resolves weather files from an explicit caller-supplied root"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations verify Directory across exact identifier-conventions cases D01, D03, D04: all four import-relative path roles, class-attribute mutation, instance shadowing, and construction boundaries. Adaptation family embedded-explicit-native-resource-layout-5b876ad7 classifies the bounded native API difference through GonieGonie.SimpleDragon.SimpleDragonEmbeddedData and WeatherSelection.ResolveEpwPath. The canonical direct receipt is sha256:3046f6ba580d8aef049f5071dcbe0faf3d3626d44822030a7614c2a55d44097f. Only inventory symbol src/epsimple/constants.py::Directory, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    api_contract: "callers use SimpleDragonEmbeddedData for packaged resources and WeatherSelection.ResolveEpwPath for a caller-owned EPW directory"
+    compatibility_evidence: "only inventory index 31 (src/epsimple/constants.py::Directory), exact cases D01, D03, D04, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
+  approval: accepted-native-api-adaptation
+
+- id: embedded-native-construction-resources-91c573a0
+  upstream:
+    path: "src/epsimple/constants.py"
+    symbol: "Directory.CONSTRUCTION_DIR"
+    symbol_hash: sha256:91c573a02d0e3b2d93a1271fbe1c3ddb5d4d10c04083707c799fa1503f5b3dea
+  difference:
+    upstream: "Python exposes a mutable import-relative filesystem directory containing construction CSV resources"
+    dotnet: "SimpleDragonEmbeddedData exposes named construction resources embedded in the compiled assembly"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations verify Directory.CONSTRUCTION_DIR across exact identifier-conventions cases D01, D02, D03: its exact upstream path role, two-location relocation behavior, class mutation visibility, and the bounded native resource-resolution route. Adaptation family embedded-native-construction-resources-91c573a0 classifies the bounded native API difference through GonieGonie.SimpleDragon.SimpleDragonEmbeddedData construction resources. The canonical direct receipt is sha256:068406460c76db769dcd76e19c518df6bc5c28b22d07f762c64a877641fa12c0. Only inventory symbol src/epsimple/constants.py::Directory.CONSTRUCTION_DIR, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    api_contract: "callers read construction resources through GonieGonie.SimpleDragon.SimpleDragonEmbeddedData rather than a mutable package directory"
+    compatibility_evidence: "only inventory index 32 (src/epsimple/constants.py::Directory.CONSTRUCTION_DIR), exact cases D01, D02, D03, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
+  approval: accepted-native-api-adaptation
+
+- id: embedded-native-profile-resources-f65d5eae
+  upstream:
+    path: "src/epsimple/constants.py"
+    symbol: "Directory.PROFILE_DIR"
+    symbol_hash: sha256:f65d5eaefa2bc1cbb6f0c9b5904624194a1551f48e7966c7973d35526bad4fa6
+  difference:
+    upstream: "Python exposes a mutable import-relative filesystem directory containing profile CSV resources"
+    dotnet: "SimpleDragonEmbeddedData exposes named profile resources embedded in the compiled assembly"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations verify Directory.PROFILE_DIR across exact identifier-conventions cases D01, D02, D03: its exact upstream path role, two-location relocation behavior, class mutation visibility, and the bounded native resource-resolution route. Adaptation family embedded-native-profile-resources-f65d5eae classifies the bounded native API difference through GonieGonie.SimpleDragon.SimpleDragonEmbeddedData profile resources. The canonical direct receipt is sha256:877e7d9801850ceb344153374696d0390c212d07f8c7f5b45a681890153ea5fe. Only inventory symbol src/epsimple/constants.py::Directory.PROFILE_DIR, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    api_contract: "callers read profile resources through GonieGonie.SimpleDragon.SimpleDragonEmbeddedData rather than a mutable package directory"
+    compatibility_evidence: "only inventory index 33 (src/epsimple/constants.py::Directory.PROFILE_DIR), exact cases D01, D02, D03, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
+  approval: accepted-native-api-adaptation
+
+- id: caller-supplied-native-weather-data-root-8a5bf654
+  upstream:
+    path: "src/epsimple/constants.py"
+    symbol: "Directory.WEATHER_DATA_DIR"
+    symbol_hash: sha256:8a5bf6543c4f0db98ee0169deb7dfddd4c126e34d52aa67b512136dc3e8bcd01
+  difference:
+    upstream: "Python exposes a mutable import-relative default filesystem directory for EPW files"
+    dotnet: "WeatherSelection.ResolveEpwPath requires an explicit caller-supplied weather root and combines it with the selected EPW file name"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations verify Directory.WEATHER_DATA_DIR across exact identifier-conventions cases D01, D02, D03: its exact upstream path role, two-location relocation behavior, class mutation visibility, and the bounded native resource-resolution route. Adaptation family caller-supplied-native-weather-data-root-8a5bf654 classifies the bounded native API difference through GonieGonie.SimpleDragon.WeatherSelection.ResolveEpwPath. The canonical direct receipt is sha256:edff49b7e5557f27963ab4e925ab857db60f9e517b286d299295d6ed0f82d829. Only inventory symbol src/epsimple/constants.py::Directory.WEATHER_DATA_DIR, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    api_contract: "callers provide a weather root to GonieGonie.SimpleDragon.WeatherSelection.ResolveEpwPath rather than relying on a mutable package default"
+    compatibility_evidence: "only inventory index 34 (src/epsimple/constants.py::Directory.WEATHER_DATA_DIR), exact cases D01, D02, D03, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
+  approval: accepted-native-api-adaptation
+
+- id: embedded-native-weather-metadata-resources-15e81d1d
+  upstream:
+    path: "src/epsimple/constants.py"
+    symbol: "Directory.WEATHER_META_DIR"
+    symbol_hash: sha256:15e81d1d4205ffe651af323c3cc7352255847972301ad1753fd3d8d5098dc260
+  difference:
+    upstream: "Python exposes a mutable import-relative filesystem directory containing weather metadata CSV resources"
+    dotnet: "SimpleDragonEmbeddedData exposes named weather-metadata resources embedded in the compiled assembly"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations verify Directory.WEATHER_META_DIR across exact identifier-conventions cases D01, D02, D03: its exact upstream path role, two-location relocation behavior, class mutation visibility, and the bounded native resource-resolution route. Adaptation family embedded-native-weather-metadata-resources-15e81d1d classifies the bounded native API difference through GonieGonie.SimpleDragon.SimpleDragonEmbeddedData weather resources. The canonical direct receipt is sha256:d8d97a9bdfdbabcbb08dd3dc1299456ff8705b7a21d815a3b85bd53e1c5dbd93. Only inventory symbol src/epsimple/constants.py::Directory.WEATHER_META_DIR, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    api_contract: "callers read weather metadata through GonieGonie.SimpleDragon.SimpleDragonEmbeddedData rather than a mutable package directory"
+    compatibility_evidence: "only inventory index 35 (src/epsimple/constants.py::Directory.WEATHER_META_DIR), exact cases D01, D02, D03, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
+  approval: accepted-native-api-adaptation
+
+- id: static-native-simpledragon-package-information-aaf5b98d
+  upstream:
+    path: "src/epsimple/constants.py"
+    symbol: "PackageInfo"
+    symbol_hash: sha256:aaf5b98d4a7dc29f83b698f1fb2881b7bb258885bd2aaf17a53b6da902d1eda1
+  difference:
+    upstream: "Python exposes a constructible mutable class with replaceable class attributes and arbitrary instance shadowing"
+    dotnet: "GonieGonie.SimpleDragon.PackageInfo is a static compiled metadata class with constant product name and version plus a typed compatibility identity"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo across exact identifier-conventions cases P01, P02, P03: class topology and metadata values, class mutation, instance shadowing, arbitrary attributes, and construction boundaries. Adaptation family static-native-simpledragon-package-information-aaf5b98d classifies the bounded native API difference through GonieGonie.SimpleDragon.PackageInfo. The canonical direct receipt is sha256:a21f0f63974f846d9cb7f5e5c0c8239e8ce4a01bdb2b2d49135b900d45ea95d4. Only inventory symbol src/epsimple/constants.py::PackageInfo, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    api_contract: "callers use the static GonieGonie.SimpleDragon.PackageInfo contract rather than constructing or mutating Python metadata objects"
+    compatibility_evidence: "only inventory index 36 (src/epsimple/constants.py::PackageInfo), exact cases P01, P02, P03, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
+  approval: accepted-native-api-adaptation
+
+- id: native-simpledragon-package-name-537c8c3b
+  upstream:
+    path: "src/epsimple/constants.py"
+    symbol: "PackageInfo.NAME"
+    symbol_hash: sha256:537c8c3bc3c2d48105e8e6c453208e725f985ac9d84f87e5f66c094ea5696cad
+  difference:
+    upstream: "Python exposes the mutable package-name string eplus-simple with normal Python class replacement and instance shadowing"
+    dotnet: "GonieGonie.SimpleDragon.PackageInfo.Name is the immutable compiled product name SimpleDragon"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.NAME across exact identifier-conventions cases P01, P02, P04: the upstream package-name value, string operations and failures, and the intentional native SimpleDragon product identity. Adaptation family native-simpledragon-package-name-537c8c3b classifies the bounded native API difference through GonieGonie.SimpleDragon.PackageInfo.Name. The canonical direct receipt is sha256:76c30b25200bb1c2b106b6cfcfe43f8728129f1d1e29993beab1b39f70eaef08. Only inventory symbol src/epsimple/constants.py::PackageInfo.NAME, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    api_contract: "callers use GonieGonie.SimpleDragon.PackageInfo.Name as the native product identity"
+    compatibility_evidence: "only inventory index 37 (src/epsimple/constants.py::PackageInfo.NAME), exact cases P01, P02, P04, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
+  approval: accepted-native-api-adaptation
+
+- id: compiled-simpledragon-target-framework-contract-cf74d0eb
+  upstream:
+    path: "src/epsimple/constants.py"
+    symbol: "PackageInfo.REQUIRED_PYTHON"
+    symbol_hash: sha256:cf74d0eb707a3668aa515bdd31d767109337841bcf28f03b96c6e9264d9407a4
+  difference:
+    upstream: "Python exposes a mutable (3, 8, 0) runtime-version tuple with Python tuple comparison and error behavior"
+    dotnet: "the compiled SimpleDragon product has no Python runtime dependency and targets net48, net7.0-windows, and net8.0-windows"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.REQUIRED_PYTHON across exact identifier-conventions cases P01, P02, P06: the upstream runtime-version tuple comparisons and failures against the exact compiled native target-framework set. Adaptation family compiled-simpledragon-target-framework-contract-cf74d0eb classifies the bounded native API difference through net48, net7.0-windows, and net8.0-windows target frameworks. The canonical direct receipt is sha256:08478079c3571980ac582eb777323bdbf60c17579242ffbb7b179ba78aaeaf9f. Only inventory symbol src/epsimple/constants.py::PackageInfo.REQUIRED_PYTHON, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    api_contract: "callers use the compiled target-framework contract represented by GonieGonie.SimpleDragon.PackageInfo rather than a Python runtime-version tuple"
+    compatibility_evidence: "only inventory index 38 (src/epsimple/constants.py::PackageInfo.REQUIRED_PYTHON), exact cases P01, P02, P06, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
+  approval: accepted-native-api-adaptation
+
+- id: native-simpledragon-and-upstream-version-identity-a8260e5f
+  upstream:
+    path: "src/epsimple/constants.py"
+    symbol: "PackageInfo.VERSION"
+    symbol_hash: sha256:a8260e5f38f8422e1ac38ce24fd0136b4bb3a4de24f268e9a262aa6034031ea4
+  difference:
+    upstream: "Python exposes mutable class tuple (0, 7, 0) with Python tuple operations and replacement behavior"
+    dotnet: "GonieGonie.SimpleDragon.PackageInfo.Version exposes native release 0.1.0 while Compatibility.UpstreamVersion pins upstream semantic identity 0.7.0"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.VERSION across exact identifier-conventions cases P01, P02, P05: the upstream version tuple operations and failures against native release and pinned upstream semantic-version identities. Adaptation family native-simpledragon-and-upstream-version-identity-a8260e5f classifies the bounded native API difference through GonieGonie.SimpleDragon.PackageInfo.Version and Compatibility.UpstreamVersion. The canonical direct receipt is sha256:c492a285dc39958141c4217c888a49afbf633836cc99eb53b3878617cd5451c8. Only inventory symbol src/epsimple/constants.py::PackageInfo.VERSION, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    api_contract: "callers use GonieGonie.SimpleDragon.PackageInfo.Version for the native release and its typed Compatibility identity for the pinned upstream version"
+    compatibility_evidence: "only inventory index 39 (src/epsimple/constants.py::PackageInfo.VERSION), exact cases P01, P02, P05, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
+  approval: accepted-native-api-adaptation
+
+- id: immutable-native-special-tag-catalog-a66e2175
+  upstream:
+    path: "src/epsimple/constants.py"
+    symbol: "SpecialTag"
+    symbol_hash: sha256:a66e2175ee03b1d6d73c70998500b45ae7eac6989b60ddd2adb09882a17f2c9b
+  difference:
+    upstream: "Python exposes a constructible string Enum class with runtime lookup, copy and alias semantics, class-level topology, and Python formatting behavior"
+    dotnet: "GonieGonie.SimpleDragon.SpecialTag is a sealed immutable singleton catalog with typed exact-token lookup, a read-only ordered Values projection, and explicit IFormattable behavior"
+  effect:
+    engineering_result: "Pinned CPython 3.12.7 and live .NET observations verify SpecialTag across exact identifier-conventions cases S01, S03, S05, S06: the exact five-member order and tokens, construction and lookup failures, direct formatting context, copy and alias identity, and mutation boundaries. Adaptation family immutable-native-special-tag-catalog-a66e2175 classifies the bounded native API difference through GonieGonie.SimpleDragon.SpecialTag. The canonical direct receipt is sha256:983992aec696b1e85ed30959c5c092b22f0e8e49e8d912bdba51fc520a99acab. Only inventory symbol src/epsimple/constants.py::SpecialTag, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    api_contract: "callers use the sealed GonieGonie.SimpleDragon.SpecialTag catalog and typed lookup instead of constructing or mutating a Python Enum class"
+    compatibility_evidence: "only inventory index 58 (src/epsimple/constants.py::SpecialTag), exact cases S01, S03, S05, S06, and its one recorder receipt are claimed; AUTOID_PREFIX.__repr__ and SpecialTag.__repr__ remain out of scope and every adjacent symbol retains an independent classification"
+  approval: accepted-native-api-adaptation

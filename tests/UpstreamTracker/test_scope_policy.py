@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:bf01db17c70dbb36340782858dc38c1b564a15cb9eb715bd3f606e99485990cd"
+    "sha256:c76a9f5a3287f4eff1dc6901250a9968faca7ceff8e3aa9d37924d41521e6e95"
 )
 
 
@@ -68,9 +68,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 171,
-                "exception": 239,
-                "needs_reverification": 580,
+                "equivalent": 194,
+                "exception": 250,
+                "needs_reverification": 546,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -153,23 +153,43 @@ class SafeScopePolicyTests(unittest.TestCase):
             self.assertEqual(("src/idragon/constants.py", symbol), entry.key)
             self.assertEqual("out_of_scope", entry.classification, symbol)
 
-        for index, symbol in enumerate(
-            (
-                "Directory",
+        expected_epsimple_metadata = {
+            31: ("Directory", "embedded-explicit-native-resource-layout-5b876ad7"),
+            32: (
                 "Directory.CONSTRUCTION_DIR",
-                "Directory.PROFILE_DIR",
-                "Directory.WEATHER_DATA_DIR",
-                "Directory.WEATHER_META_DIR",
-                "PackageInfo",
-                "PackageInfo.NAME",
-                "PackageInfo.REQUIRED_PYTHON",
-                "PackageInfo.VERSION",
+                "embedded-native-construction-resources-91c573a0",
             ),
-            start=31,
-        ):
+            33: (
+                "Directory.PROFILE_DIR",
+                "embedded-native-profile-resources-f65d5eae",
+            ),
+            34: (
+                "Directory.WEATHER_DATA_DIR",
+                "caller-supplied-native-weather-data-root-8a5bf654",
+            ),
+            35: (
+                "Directory.WEATHER_META_DIR",
+                "embedded-native-weather-metadata-resources-15e81d1d",
+            ),
+            36: (
+                "PackageInfo",
+                "static-native-simpledragon-package-information-aaf5b98d",
+            ),
+            37: ("PackageInfo.NAME", "native-simpledragon-package-name-537c8c3b"),
+            38: (
+                "PackageInfo.REQUIRED_PYTHON",
+                "compiled-simpledragon-target-framework-contract-cf74d0eb",
+            ),
+            39: (
+                "PackageInfo.VERSION",
+                "native-simpledragon-and-upstream-version-identity-a8260e5f",
+            ),
+        }
+        for index, (symbol, exception_id) in expected_epsimple_metadata.items():
             entry = entries[index]
             self.assertEqual(("src/epsimple/constants.py", symbol), entry.key)
-            self.assertEqual("needs_reverification", entry.classification, symbol)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
 
     def test_epsimple_numeric_constants_promotion_preserves_adjacent_scope(self) -> None:
         entries = self.configuration.matrix.entries
@@ -242,61 +262,149 @@ class SafeScopePolicyTests(unittest.TestCase):
             (
                 10,
                 (
-                    ("AUTOID_PREFIX", "needs_reverification"),
-                    ("AUTOID_PREFIX.DAY_SCHEDULE", "needs_reverification"),
-                    ("AUTOID_PREFIX.FENESTRATION", "needs_reverification"),
-                    ("AUTOID_PREFIX.FENESTRATION_CONSTRUCTION", "needs_reverification"),
-                    ("AUTOID_PREFIX.HEAT_EXCHANGER", "needs_reverification"),
-                    ("AUTOID_PREFIX.MATERIAL", "needs_reverification"),
-                    ("AUTOID_PREFIX.PROFILE", "needs_reverification"),
-                    ("AUTOID_PREFIX.PV_PANEL", "needs_reverification"),
-                    ("AUTOID_PREFIX.RULESET", "needs_reverification"),
-                    ("AUTOID_PREFIX.SCHEDULE", "needs_reverification"),
-                    ("AUTOID_PREFIX.SOURCE_SYSTEM", "needs_reverification"),
-                    ("AUTOID_PREFIX.SUPPLY_SYSTEM", "needs_reverification"),
-                    ("AUTOID_PREFIX.SURFACE", "needs_reverification"),
-                    ("AUTOID_PREFIX.SURFACE_CONSTRUCTION", "needs_reverification"),
-                    ("AUTOID_PREFIX.ZONE", "needs_reverification"),
-                    ("AUTOID_PREFIX.__format__", "needs_reverification"),
-                    ("AUTOID_PREFIX.__repr__", "out_of_scope"),
-                    ("AUTOID_PREFIX.__str__", "needs_reverification"),
+                    (
+                        "AUTOID_PREFIX",
+                        "exception",
+                        "immutable-native-auto-id-prefix-catalog-9a7c270a",
+                    ),
+                    ("AUTOID_PREFIX.DAY_SCHEDULE", "equivalent", None),
+                    ("AUTOID_PREFIX.FENESTRATION", "equivalent", None),
+                    ("AUTOID_PREFIX.FENESTRATION_CONSTRUCTION", "equivalent", None),
+                    ("AUTOID_PREFIX.HEAT_EXCHANGER", "equivalent", None),
+                    ("AUTOID_PREFIX.MATERIAL", "equivalent", None),
+                    ("AUTOID_PREFIX.PROFILE", "equivalent", None),
+                    ("AUTOID_PREFIX.PV_PANEL", "equivalent", None),
+                    ("AUTOID_PREFIX.RULESET", "equivalent", None),
+                    ("AUTOID_PREFIX.SCHEDULE", "equivalent", None),
+                    ("AUTOID_PREFIX.SOURCE_SYSTEM", "equivalent", None),
+                    ("AUTOID_PREFIX.SUPPLY_SYSTEM", "equivalent", None),
+                    ("AUTOID_PREFIX.SURFACE", "equivalent", None),
+                    ("AUTOID_PREFIX.SURFACE_CONSTRUCTION", "equivalent", None),
+                    ("AUTOID_PREFIX.ZONE", "equivalent", None),
+                    ("AUTOID_PREFIX.__format__", "equivalent", None),
+                    ("AUTOID_PREFIX.__repr__", "out_of_scope", None),
+                    ("AUTOID_PREFIX.__str__", "equivalent", None),
                 ),
             ),
             (
                 31,
                 (
-                    ("Directory", "needs_reverification"),
-                    ("Directory.CONSTRUCTION_DIR", "needs_reverification"),
-                    ("Directory.PROFILE_DIR", "needs_reverification"),
-                    ("Directory.WEATHER_DATA_DIR", "needs_reverification"),
-                    ("Directory.WEATHER_META_DIR", "needs_reverification"),
-                    ("PackageInfo", "needs_reverification"),
-                    ("PackageInfo.NAME", "needs_reverification"),
-                    ("PackageInfo.REQUIRED_PYTHON", "needs_reverification"),
-                    ("PackageInfo.VERSION", "needs_reverification"),
+                    (
+                        "Directory",
+                        "exception",
+                        "embedded-explicit-native-resource-layout-5b876ad7",
+                    ),
+                    (
+                        "Directory.CONSTRUCTION_DIR",
+                        "exception",
+                        "embedded-native-construction-resources-91c573a0",
+                    ),
+                    (
+                        "Directory.PROFILE_DIR",
+                        "exception",
+                        "embedded-native-profile-resources-f65d5eae",
+                    ),
+                    (
+                        "Directory.WEATHER_DATA_DIR",
+                        "exception",
+                        "caller-supplied-native-weather-data-root-8a5bf654",
+                    ),
+                    (
+                        "Directory.WEATHER_META_DIR",
+                        "exception",
+                        "embedded-native-weather-metadata-resources-15e81d1d",
+                    ),
+                    (
+                        "PackageInfo",
+                        "exception",
+                        "static-native-simpledragon-package-information-aaf5b98d",
+                    ),
+                    (
+                        "PackageInfo.NAME",
+                        "exception",
+                        "native-simpledragon-package-name-537c8c3b",
+                    ),
+                    (
+                        "PackageInfo.REQUIRED_PYTHON",
+                        "exception",
+                        "compiled-simpledragon-target-framework-contract-cf74d0eb",
+                    ),
+                    (
+                        "PackageInfo.VERSION",
+                        "exception",
+                        "native-simpledragon-and-upstream-version-identity-a8260e5f",
+                    ),
                 ),
             ),
             (
                 58,
                 (
-                    ("SpecialTag", "needs_reverification"),
-                    ("SpecialTag.CLONE", "needs_reverification"),
-                    ("SpecialTag.COOLROOF", "needs_reverification"),
-                    ("SpecialTag.DB", "needs_reverification"),
-                    ("SpecialTag.FLIP", "needs_reverification"),
-                    ("SpecialTag.SPECIAL", "needs_reverification"),
-                    ("SpecialTag.__format__", "needs_reverification"),
-                    ("SpecialTag.__repr__", "out_of_scope"),
-                    ("SpecialTag.__str__", "needs_reverification"),
+                    (
+                        "SpecialTag",
+                        "exception",
+                        "immutable-native-special-tag-catalog-a66e2175",
+                    ),
+                    ("SpecialTag.CLONE", "equivalent", None),
+                    ("SpecialTag.COOLROOF", "equivalent", None),
+                    ("SpecialTag.DB", "equivalent", None),
+                    ("SpecialTag.FLIP", "equivalent", None),
+                    ("SpecialTag.SPECIAL", "equivalent", None),
+                    ("SpecialTag.__format__", "equivalent", None),
+                    ("SpecialTag.__repr__", "out_of_scope", None),
+                    ("SpecialTag.__str__", "equivalent", None),
                 ),
             ),
         )
         for start, expected in adjacent_families:
-            for offset, (symbol, classification) in enumerate(expected):
+            for offset, (symbol, classification, exception_id) in enumerate(expected):
                 entry = entries[start + offset]
                 self.assertEqual(("src/epsimple/constants.py", symbol), entry.key)
                 self.assertEqual(classification, entry.classification, symbol)
-                self.assertIsNone(entry.exception_id, symbol)
+                self.assertEqual(exception_id, entry.exception_id, symbol)
+
+        identifier_indices = (
+            *range(10, 26),
+            27,
+            *range(31, 40),
+            *range(58, 65),
+            66,
+        )
+        self.assertEqual(34, len(identifier_indices))
+        self.assertEqual(
+            {"equivalent": 23, "exception": 11},
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in identifier_indices
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+        for index in identifier_indices:
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            assertion_id = (
+                f"epsimple-identifier-conventions-{index}-"
+                f"{inventory_symbol.symbol_hash.removeprefix('sha256:')[:8]}"
+            )
+            expected_evidence = [f"upstream/symbol-evidence.json#{assertion_id}"]
+            if entry.exception_id is not None:
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{entry.exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, entry.key)
+        for index, symbol in (
+            (26, "AUTOID_PREFIX.__repr__"),
+            (65, "SpecialTag.__repr__"),
+        ):
+            entry = entries[index]
+            self.assertEqual(("src/epsimple/constants.py", symbol), entry.key)
+            self.assertEqual("out_of_scope", entry.classification, symbol)
+            self.assertEqual(1, len(entry.evidence), symbol)
+            self.assertTrue(
+                entry.evidence[0].startswith("upstream/scope-decisions.json#"),
+                symbol,
+            )
 
     def test_construction_core_promotion_preserves_adjacent_construction_scope(self) -> None:
         entries = self.configuration.matrix.entries

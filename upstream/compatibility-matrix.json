@@ -10,42 +10,36 @@
     "out_of_scope",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
     "out_of_scope",
-    "needs_reverification",
+    "equivalent",
     "exception",
     "equivalent",
     "equivalent",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
-    "equivalent",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "exception",
     "equivalent",
     "equivalent",
@@ -58,15 +52,21 @@
     "equivalent",
     "equivalent",
     "equivalent",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
     "out_of_scope",
-    "needs_reverification",
+    "equivalent",
     "exception",
     "equivalent",
     "equivalent",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:bf01db17c70dbb36340782858dc38c1b564a15cb9eb715bd3f606e99485990cd",
+  "content_sha256": "sha256:c76a9f5a3287f4eff1dc6901250a9968faca7ceff8e3aa9d37924d41521e6e95",
   "details": [
     {
       "evidence": [
@@ -1317,10 +1317,131 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-native-auto-id-prefix-catalog-9a7c270a",
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-10-9a7c270a"
+      ],
+      "exception_id": "immutable-native-auto-id-prefix-catalog-9a7c270a",
+      "index": 10,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX across exact identifier-conventions cases A01, A03, A05, A06: the exact 14-member order and tokens, construction and lookup failures, direct formatting context, copy and alias identity, and mutation boundaries. Adaptation family immutable-native-auto-id-prefix-catalog-9a7c270a classifies the bounded native API difference through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:932c6d32716f0b8faed38496ff5ce45f7a9e246de9b4257aa6e02075c45935f0. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-11-7d4821ca"
+      ],
+      "index": 11,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.DAY_SCHEDULE across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:5f63e792dc08ca5f07b37e149043e9cba5ae925d12e6ff97f5fdcc163109a89d. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.DAY_SCHEDULE, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-12-d327acd7"
+      ],
+      "index": 12,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.FENESTRATION across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:425c166dd221f3cb1b884a7fd946f3ffd3e40acdeebf911bac561ea26db53c06. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.FENESTRATION, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-13-a00d7b14"
+      ],
+      "index": 13,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.FENESTRATION_CONSTRUCTION across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:b64923b4c774f1397612a78fe733be041b30737452e63763e40c2344659c5771. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.FENESTRATION_CONSTRUCTION, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-14-d76b9ddc"
+      ],
+      "index": 14,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.HEAT_EXCHANGER across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:9368944138655124a65767bc509b18b7509ca818595c7bb1c8e4925fe861231f. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.HEAT_EXCHANGER, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-15-9b7489e4"
+      ],
+      "index": 15,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.MATERIAL across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:7675ebfa894f68759b864b3e42b60c6255a9017e8912317e2306a279fe8c1d44. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.MATERIAL, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-16-f0401457"
+      ],
+      "index": 16,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.PROFILE across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:95f933bba3df636af7915bcd0b6d4a18ab4f9fc17e560b89ecaf63fdade12e08. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.PROFILE, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-17-46500b8a"
+      ],
+      "index": 17,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.PV_PANEL across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:f21b2425c5c30a789c7d8d19124f09016c2e2dac073136defff7284bed5f1e89. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.PV_PANEL, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-18-e5ac2688"
+      ],
+      "index": 18,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.RULESET across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:fd1ae34399559856372e7b0e205d916d800397107c8f5ee13c1e9886e6fd38d0. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.RULESET, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-19-c61dbb42"
+      ],
+      "index": 19,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.SCHEDULE across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:18f30b3fc88e1c980f0a9bb2874a7c61ba036e90a718bcb440d7f33f208e9552. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.SCHEDULE, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-20-60d01621"
+      ],
+      "index": 20,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.SOURCE_SYSTEM across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:da7b42fa6ffb943b46e7462adc118469605ffafec80df79f905ca8061700cda5. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.SOURCE_SYSTEM, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-21-c2e6d435"
+      ],
+      "index": 21,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.SUPPLY_SYSTEM across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:69a467cbc4aec5c093c9553834e1bb9012d22ae1ba441c9595adc64e0823b0f3. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.SUPPLY_SYSTEM, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-22-7fca2d17"
+      ],
+      "index": 22,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.SURFACE across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:70d90cae555ec2e58b3af2ae0d57e73a3bc4dd42c90b759f3f13f6252de485df. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.SURFACE, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-23-147095a3"
+      ],
+      "index": 23,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.SURFACE_CONSTRUCTION across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:76001718e88d91bbbf4ee9697b8923bd77c98d0d6bc5e00164b9fbcce2b583c1. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.SURFACE_CONSTRUCTION, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-24-5f36f901"
+      ],
+      "index": 24,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.ZONE across exact identifier-conventions cases A01, A02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.AutoIdPrefix. The canonical direct receipt is sha256:ce30e289687b37af26595db467bcd1f020fd8256ec91c8b4cbc2f2e8274a063a. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.ZONE, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-25-d0c85092"
+      ],
+      "index": 25,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.__format__ across exact identifier-conventions cases A04: empty and custom format output plus direct IFormattable dispatch for all 14 pinned members through GonieGonie.SimpleDragon.AutoIdPrefix.ToString(string?, IFormatProvider?). The canonical direct receipt is sha256:f895f1fb9c815c50b40e06f5ab9da08a5c7b31061a521603fe201ac45241d7c8. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.__format__, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-constants-py-autoid-prefix-repr-f40e4929"
       ],
       "index": 26,
       "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-27-13ed292a"
+      ],
+      "index": 27,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify AUTOID_PREFIX.__str__ across exact identifier-conventions cases A04: default prefix formatting for all 14 pinned members through GonieGonie.SimpleDragon.AutoIdPrefix.ToString(). The canonical direct receipt is sha256:eead6fd67728f2ed539134e7eb6348d319dc09267356ca882890406a2bbe689e. Only inventory symbol src/epsimple/constants.py::AUTOID_PREFIX.__str__, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
     },
     {
       "evidence": [
@@ -1344,6 +1465,87 @@
       ],
       "index": 30,
       "rationale": "Pinned CPython 3.12.7 and live .NET observations verify ConvectionHeatTransfer.OUT across its exact three-case EPlusSimple numeric constants slice: its exact declared binary64 value and representative engineering projection through GonieGonie.SimpleDragon.ConvectionHeatTransfer.Exterior. The canonical direct receipt is sha256:7cd9fb6cf1e1f1f138ffee1fe6c311f8fb5e674ac86d666e9dca4904c233a563."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#embedded-explicit-native-resource-layout-5b876ad7",
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-31-5b876ad7"
+      ],
+      "exception_id": "embedded-explicit-native-resource-layout-5b876ad7",
+      "index": 31,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Directory across exact identifier-conventions cases D01, D03, D04: all four import-relative path roles, class-attribute mutation, instance shadowing, and construction boundaries. Adaptation family embedded-explicit-native-resource-layout-5b876ad7 classifies the bounded native API difference through GonieGonie.SimpleDragon.SimpleDragonEmbeddedData and WeatherSelection.ResolveEpwPath. The canonical direct receipt is sha256:3046f6ba580d8aef049f5071dcbe0faf3d3626d44822030a7614c2a55d44097f. Only inventory symbol src/epsimple/constants.py::Directory, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#embedded-native-construction-resources-91c573a0",
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-32-91c573a0"
+      ],
+      "exception_id": "embedded-native-construction-resources-91c573a0",
+      "index": 32,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Directory.CONSTRUCTION_DIR across exact identifier-conventions cases D01, D02, D03: its exact upstream path role, two-location relocation behavior, class mutation visibility, and the bounded native resource-resolution route. Adaptation family embedded-native-construction-resources-91c573a0 classifies the bounded native API difference through GonieGonie.SimpleDragon.SimpleDragonEmbeddedData construction resources. The canonical direct receipt is sha256:068406460c76db769dcd76e19c518df6bc5c28b22d07f762c64a877641fa12c0. Only inventory symbol src/epsimple/constants.py::Directory.CONSTRUCTION_DIR, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#embedded-native-profile-resources-f65d5eae",
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-33-f65d5eae"
+      ],
+      "exception_id": "embedded-native-profile-resources-f65d5eae",
+      "index": 33,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Directory.PROFILE_DIR across exact identifier-conventions cases D01, D02, D03: its exact upstream path role, two-location relocation behavior, class mutation visibility, and the bounded native resource-resolution route. Adaptation family embedded-native-profile-resources-f65d5eae classifies the bounded native API difference through GonieGonie.SimpleDragon.SimpleDragonEmbeddedData profile resources. The canonical direct receipt is sha256:877e7d9801850ceb344153374696d0390c212d07f8c7f5b45a681890153ea5fe. Only inventory symbol src/epsimple/constants.py::Directory.PROFILE_DIR, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#caller-supplied-native-weather-data-root-8a5bf654",
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-34-8a5bf654"
+      ],
+      "exception_id": "caller-supplied-native-weather-data-root-8a5bf654",
+      "index": 34,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Directory.WEATHER_DATA_DIR across exact identifier-conventions cases D01, D02, D03: its exact upstream path role, two-location relocation behavior, class mutation visibility, and the bounded native resource-resolution route. Adaptation family caller-supplied-native-weather-data-root-8a5bf654 classifies the bounded native API difference through GonieGonie.SimpleDragon.WeatherSelection.ResolveEpwPath. The canonical direct receipt is sha256:edff49b7e5557f27963ab4e925ab857db60f9e517b286d299295d6ed0f82d829. Only inventory symbol src/epsimple/constants.py::Directory.WEATHER_DATA_DIR, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#embedded-native-weather-metadata-resources-15e81d1d",
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-35-15e81d1d"
+      ],
+      "exception_id": "embedded-native-weather-metadata-resources-15e81d1d",
+      "index": 35,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify Directory.WEATHER_META_DIR across exact identifier-conventions cases D01, D02, D03: its exact upstream path role, two-location relocation behavior, class mutation visibility, and the bounded native resource-resolution route. Adaptation family embedded-native-weather-metadata-resources-15e81d1d classifies the bounded native API difference through GonieGonie.SimpleDragon.SimpleDragonEmbeddedData weather resources. The canonical direct receipt is sha256:d8d97a9bdfdbabcbb08dd3dc1299456ff8705b7a21d815a3b85bd53e1c5dbd93. Only inventory symbol src/epsimple/constants.py::Directory.WEATHER_META_DIR, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#static-native-simpledragon-package-information-aaf5b98d",
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-36-aaf5b98d"
+      ],
+      "exception_id": "static-native-simpledragon-package-information-aaf5b98d",
+      "index": 36,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo across exact identifier-conventions cases P01, P02, P03: class topology and metadata values, class mutation, instance shadowing, arbitrary attributes, and construction boundaries. Adaptation family static-native-simpledragon-package-information-aaf5b98d classifies the bounded native API difference through GonieGonie.SimpleDragon.PackageInfo. The canonical direct receipt is sha256:a21f0f63974f846d9cb7f5e5c0c8239e8ce4a01bdb2b2d49135b900d45ea95d4. Only inventory symbol src/epsimple/constants.py::PackageInfo, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#native-simpledragon-package-name-537c8c3b",
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-37-537c8c3b"
+      ],
+      "exception_id": "native-simpledragon-package-name-537c8c3b",
+      "index": 37,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.NAME across exact identifier-conventions cases P01, P02, P04: the upstream package-name value, string operations and failures, and the intentional native SimpleDragon product identity. Adaptation family native-simpledragon-package-name-537c8c3b classifies the bounded native API difference through GonieGonie.SimpleDragon.PackageInfo.Name. The canonical direct receipt is sha256:76c30b25200bb1c2b106b6cfcfe43f8728129f1d1e29993beab1b39f70eaef08. Only inventory symbol src/epsimple/constants.py::PackageInfo.NAME, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#compiled-simpledragon-target-framework-contract-cf74d0eb",
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-38-cf74d0eb"
+      ],
+      "exception_id": "compiled-simpledragon-target-framework-contract-cf74d0eb",
+      "index": 38,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.REQUIRED_PYTHON across exact identifier-conventions cases P01, P02, P06: the upstream runtime-version tuple comparisons and failures against the exact compiled native target-framework set. Adaptation family compiled-simpledragon-target-framework-contract-cf74d0eb classifies the bounded native API difference through net48, net7.0-windows, and net8.0-windows target frameworks. The canonical direct receipt is sha256:08478079c3571980ac582eb777323bdbf60c17579242ffbb7b179ba78aaeaf9f. Only inventory symbol src/epsimple/constants.py::PackageInfo.REQUIRED_PYTHON, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#native-simpledragon-and-upstream-version-identity-a8260e5f",
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-39-a8260e5f"
+      ],
+      "exception_id": "native-simpledragon-and-upstream-version-identity-a8260e5f",
+      "index": 39,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify PackageInfo.VERSION across exact identifier-conventions cases P01, P02, P05: the upstream version tuple operations and failures against native release and pinned upstream semantic-version identities. Adaptation family native-simpledragon-and-upstream-version-identity-a8260e5f classifies the bounded native API difference through GonieGonie.SimpleDragon.PackageInfo.Version and Compatibility.UpstreamVersion. The canonical direct receipt is sha256:c492a285dc39958141c4217c888a49afbf633836cc99eb53b3878617cd5451c8. Only inventory symbol src/epsimple/constants.py::PackageInfo.VERSION, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
     },
     {
       "evidence": [
@@ -1479,10 +1681,68 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-native-special-tag-catalog-a66e2175",
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-58-a66e2175"
+      ],
+      "exception_id": "immutable-native-special-tag-catalog-a66e2175",
+      "index": 58,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SpecialTag across exact identifier-conventions cases S01, S03, S05, S06: the exact five-member order and tokens, construction and lookup failures, direct formatting context, copy and alias identity, and mutation boundaries. Adaptation family immutable-native-special-tag-catalog-a66e2175 classifies the bounded native API difference through GonieGonie.SimpleDragon.SpecialTag. The canonical direct receipt is sha256:983992aec696b1e85ed30959c5c092b22f0e8e49e8d912bdba51fc520a99acab. Only inventory symbol src/epsimple/constants.py::SpecialTag, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-59-00989ee6"
+      ],
+      "index": 59,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SpecialTag.CLONE across exact identifier-conventions cases S01, S02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.SpecialTag. The canonical direct receipt is sha256:e454a800642ae763bb593deb733a932f98b9161ae5a999bd12c2a648af04d009. Only inventory symbol src/epsimple/constants.py::SpecialTag.CLONE, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-60-622c00d2"
+      ],
+      "index": 60,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SpecialTag.COOLROOF across exact identifier-conventions cases S01, S02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.SpecialTag. The canonical direct receipt is sha256:8df5180f91f8429f57cb72538646083dcf2890e15087c12f71cd9a3a180da984. Only inventory symbol src/epsimple/constants.py::SpecialTag.COOLROOF, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-61-a43168ea"
+      ],
+      "index": 61,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SpecialTag.DB across exact identifier-conventions cases S01, S02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.SpecialTag. The canonical direct receipt is sha256:454982ca777bb65a1cd117299ed818adc8dd06701e9818de023b70dd10b94ec6. Only inventory symbol src/epsimple/constants.py::SpecialTag.DB, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-62-4a588438"
+      ],
+      "index": 62,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SpecialTag.FLIP across exact identifier-conventions cases S01, S02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.SpecialTag. The canonical direct receipt is sha256:bb0b650b28cbcd813fa41a564a8bbb9575f6dc8a67048496a863f70797312f61. Only inventory symbol src/epsimple/constants.py::SpecialTag.FLIP, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-63-0faf9b24"
+      ],
+      "index": 63,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SpecialTag.SPECIAL across exact identifier-conventions cases S01, S02: its exact token, declaration-order membership, raw-string projection, canonical singleton identity, and immutable native binding through GonieGonie.SimpleDragon.SpecialTag. The canonical direct receipt is sha256:eddc4a0734f145bdc82be3be67cd2ccfa676ec45159bb5453db0b686127ad7a7. Only inventory symbol src/epsimple/constants.py::SpecialTag.SPECIAL, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-64-4ef932bb"
+      ],
+      "index": 64,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SpecialTag.__format__ across exact identifier-conventions cases S04: empty and custom format output plus direct IFormattable dispatch for all five pinned members through GonieGonie.SimpleDragon.SpecialTag.ToString(string?, IFormatProvider?). The canonical direct receipt is sha256:034924fe777cc40f3f29968a0a00cbdf5b25c2b77982e936a19e64783fbbbe27. Only inventory symbol src/epsimple/constants.py::SpecialTag.__format__, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-epsimple-constants-py-specialtag-repr-f40e4929"
       ],
       "index": 65,
       "rationale": "Human/debug representation only. The body is not consumed by GRM/IDF writing or conversion; many variants include process memory addresses. Python representation syntax is outside the native Grasshopper interface."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#epsimple-identifier-conventions-66-13ed292a"
+      ],
+      "index": 66,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations verify SpecialTag.__str__ across exact identifier-conventions cases S04: default special-tag formatting for all five pinned members through GonieGonie.SimpleDragon.SpecialTag.ToString(). The canonical direct receipt is sha256:2ad3752c91d171891102944ac0a09b660c9f48ddc763cc1631d26eb45a08e55d. Only inventory symbol src/epsimple/constants.py::SpecialTag.__str__, the listed fixture cases, and the recorder-bound native route are claimed; representation members, unlisted inputs, class or descriptor monkey-patching, concurrency, filesystem races, arbitrary loaders, and adjacent constants remain separately classified."
     },
     {
       "evidence": [
@@ -6364,9 +6624,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 171,
-      "exception": 239,
-      "needs_reverification": 580,
+      "equivalent": 194,
+      "exception": 250,
+      "needs_reverification": 546,
       "out_of_scope": 252
     },
     "entry_count": 1242

@@ -27,7 +27,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(245, len(configuration.exceptions))
+        self.assertEqual(256, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -41,16 +41,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(580, len(compatibility.needs_reverification))
+        self.assertEqual(546, len(compatibility.needs_reverification))
         self.assertEqual(
-            171,
+            194,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            239,
+            250,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -59,10 +59,14 @@ class ConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(compatibility.symbol_evidence)
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
-        self.assertEqual(410, len(symbol_evidence.entries))
-        self.assertEqual(410, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:f58c9bed089bbb2d4ec82ecfd154898f9fcb4f19fd7cf2a9dae9a920810165c9",
+            "sha256:c76a9f5a3287f4eff1dc6901250a9968faca7ceff8e3aa9d37924d41521e6e95",
+            compatibility.matrix.content_sha256,
+        )
+        self.assertEqual(444, len(symbol_evidence.entries))
+        self.assertEqual(444, len(symbol_evidence.receipts))
+        self.assertEqual(
+            "sha256:2560606b99de05ec997793ef40870e79ab8114bcb4a5344a24e1352452041aca",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -176,6 +180,196 @@ class ConfigurationTests(unittest.TestCase):
                 )
             self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, key)
         self.assertEqual(29, len(numeric_indices))
+
+        expected_identifier_conventions = {
+            10: ("AUTOID_PREFIX", "exception", "immutable-native-auto-id-prefix-catalog-9a7c270a", "sha256:932c6d32716f0b8faed38496ff5ce45f7a9e246de9b4257aa6e02075c45935f0", "sha256:7de1dfebb1a307d75de843979550d9c6fa13c3cb0f89346f5bc11f47b4a910ab", "auto"),
+            11: ("AUTOID_PREFIX.DAY_SCHEDULE", "equivalent", None, "sha256:5f63e792dc08ca5f07b37e149043e9cba5ae925d12e6ff97f5fdcc163109a89d", "sha256:53ba83f11da71ab8592a1823c606a83c7ce6a5ba862ff5ef530a5ce07c861b8e", "auto"),
+            12: ("AUTOID_PREFIX.FENESTRATION", "equivalent", None, "sha256:425c166dd221f3cb1b884a7fd946f3ffd3e40acdeebf911bac561ea26db53c06", "sha256:8c8f953c02c8208eb601252d6b94a28d3398c9da35a997731e240a8ef3de868e", "auto"),
+            13: ("AUTOID_PREFIX.FENESTRATION_CONSTRUCTION", "equivalent", None, "sha256:b64923b4c774f1397612a78fe733be041b30737452e63763e40c2344659c5771", "sha256:2a18d875432a8174c786c4be3df748730c1404e920cfb779990b7f371c7b5553", "auto"),
+            14: ("AUTOID_PREFIX.HEAT_EXCHANGER", "equivalent", None, "sha256:9368944138655124a65767bc509b18b7509ca818595c7bb1c8e4925fe861231f", "sha256:bd9c363e61df49643069520d5f0a7b6df848151a01dff7c35b771f1b7964d73a", "auto"),
+            15: ("AUTOID_PREFIX.MATERIAL", "equivalent", None, "sha256:7675ebfa894f68759b864b3e42b60c6255a9017e8912317e2306a279fe8c1d44", "sha256:8ec6709d1eecb50dc45cab6b1cb23110bd260af0507592b37bb0dd01f62aa052", "auto"),
+            16: ("AUTOID_PREFIX.PROFILE", "equivalent", None, "sha256:95f933bba3df636af7915bcd0b6d4a18ab4f9fc17e560b89ecaf63fdade12e08", "sha256:4c88fa37f39a3a89d29b55dc8e9ea96db79d30143a295ba061701519c66ed5cf", "auto"),
+            17: ("AUTOID_PREFIX.PV_PANEL", "equivalent", None, "sha256:f21b2425c5c30a789c7d8d19124f09016c2e2dac073136defff7284bed5f1e89", "sha256:b9c3bb0b4cdeac7feaf390eb8b4b278481bc0351d7cd4a627995157fd8610744", "auto"),
+            18: ("AUTOID_PREFIX.RULESET", "equivalent", None, "sha256:fd1ae34399559856372e7b0e205d916d800397107c8f5ee13c1e9886e6fd38d0", "sha256:55b6bad9e47b18ff85e5dc9e64a4345e0f468e920d237c58238322b6fae34fbc", "auto"),
+            19: ("AUTOID_PREFIX.SCHEDULE", "equivalent", None, "sha256:18f30b3fc88e1c980f0a9bb2874a7c61ba036e90a718bcb440d7f33f208e9552", "sha256:d429b23302863bd6fb65143131d005f843719a077ca85ef302bfbfe7a11f51bf", "auto"),
+            20: ("AUTOID_PREFIX.SOURCE_SYSTEM", "equivalent", None, "sha256:da7b42fa6ffb943b46e7462adc118469605ffafec80df79f905ca8061700cda5", "sha256:d062b03e5ce6ff12ef1a0865843ce4df8e5acedebee2ff8426ef39ee74da86be", "auto"),
+            21: ("AUTOID_PREFIX.SUPPLY_SYSTEM", "equivalent", None, "sha256:69a467cbc4aec5c093c9553834e1bb9012d22ae1ba441c9595adc64e0823b0f3", "sha256:1ef925c9af6995f68373d1e8b58677feb1eabb7addc066060bb957bafc121a29", "auto"),
+            22: ("AUTOID_PREFIX.SURFACE", "equivalent", None, "sha256:70d90cae555ec2e58b3af2ae0d57e73a3bc4dd42c90b759f3f13f6252de485df", "sha256:e18f92ba193890be4cb9b335e370f241781daf59031f6f7e0d30b673afbcc71d", "auto"),
+            23: ("AUTOID_PREFIX.SURFACE_CONSTRUCTION", "equivalent", None, "sha256:76001718e88d91bbbf4ee9697b8923bd77c98d0d6bc5e00164b9fbcce2b583c1", "sha256:ad8de2efca23b7163c1754c74a9a6167d8fd2a1904ad5935f5a34f86c4f525a8", "auto"),
+            24: ("AUTOID_PREFIX.ZONE", "equivalent", None, "sha256:ce30e289687b37af26595db467bcd1f020fd8256ec91c8b4cbc2f2e8274a063a", "sha256:8bfabb2ca4da8ead72d1c42fa46dbe9ea33af9559579ff512725bd16a77ddc39", "auto"),
+            25: ("AUTOID_PREFIX.__format__", "equivalent", None, "sha256:f895f1fb9c815c50b40e06f5ab9da08a5c7b31061a521603fe201ac45241d7c8", "sha256:3a706e30c638ed8b087ba7d7f0ff3a2cabd11b19558a83d15d024f1e9a9e93d3", "auto_format"),
+            27: ("AUTOID_PREFIX.__str__", "equivalent", None, "sha256:eead6fd67728f2ed539134e7eb6348d319dc09267356ca882890406a2bbe689e", "sha256:ba6e2240289107b416e5adee60a77b60545bf2dd2c3282add7366ff2e04e327f", "auto_format"),
+            31: ("Directory", "exception", "embedded-explicit-native-resource-layout-5b876ad7", "sha256:3046f6ba580d8aef049f5071dcbe0faf3d3626d44822030a7614c2a55d44097f", "sha256:139985a4920f9a1f34026455a48b73a9099f95e32dfb40c9d9741b1287f77386", "embedded"),
+            32: ("Directory.CONSTRUCTION_DIR", "exception", "embedded-native-construction-resources-91c573a0", "sha256:068406460c76db769dcd76e19c518df6bc5c28b22d07f762c64a877641fa12c0", "sha256:2ed76c19a435c36895ffceeeb058e5a5c542398960baf002a36a38932e0ae8fd", "embedded"),
+            33: ("Directory.PROFILE_DIR", "exception", "embedded-native-profile-resources-f65d5eae", "sha256:877e7d9801850ceb344153374696d0390c212d07f8c7f5b45a681890153ea5fe", "sha256:2972c8fbf370eaa9c6b68ca301866b3906e91969fd9c368bd4595bd28e8f65da", "embedded"),
+            34: ("Directory.WEATHER_DATA_DIR", "exception", "caller-supplied-native-weather-data-root-8a5bf654", "sha256:edff49b7e5557f27963ab4e925ab857db60f9e517b286d299295d6ed0f82d829", "sha256:54e88ddf5e4df7fff3cea6dd3171eb51a1cb3dccc19e8b37d549923f7e656eb6", "weather"),
+            35: ("Directory.WEATHER_META_DIR", "exception", "embedded-native-weather-metadata-resources-15e81d1d", "sha256:d8d97a9bdfdbabcbb08dd3dc1299456ff8705b7a21d815a3b85bd53e1c5dbd93", "sha256:53740e4831b004bccd94c14bf2d889f3ba6b77b596b29835ccbefaf60a923e7d", "embedded"),
+            36: ("PackageInfo", "exception", "static-native-simpledragon-package-information-aaf5b98d", "sha256:a21f0f63974f846d9cb7f5e5c0c8239e8ce4a01bdb2b2d49135b900d45ea95d4", "sha256:4d56b7172732cf98f1a7ac499f6b3e9098ec350a1ba6950e6877554d77f10aca", "package"),
+            37: ("PackageInfo.NAME", "exception", "native-simpledragon-package-name-537c8c3b", "sha256:76c30b25200bb1c2b106b6cfcfe43f8728129f1d1e29993beab1b39f70eaef08", "sha256:37f16a2c0f8ccef66f8a5d747c8f7726ecd5ed2d7dfc15912ff15d68d414a570", "package_name"),
+            38: ("PackageInfo.REQUIRED_PYTHON", "exception", "compiled-simpledragon-target-framework-contract-cf74d0eb", "sha256:08478079c3571980ac582eb777323bdbf60c17579242ffbb7b179ba78aaeaf9f", "sha256:37df4c9385078ede5f8d27bc8a3d5a4f4c2bf0701d994bc49035b7e3afbce64d", "package"),
+            39: ("PackageInfo.VERSION", "exception", "native-simpledragon-and-upstream-version-identity-a8260e5f", "sha256:c492a285dc39958141c4217c888a49afbf633836cc99eb53b3878617cd5451c8", "sha256:20d0ce838c4c3987c182d7db3489df0aaaefb5035271e81b07bb0800ba01e36e", "package_version"),
+            58: ("SpecialTag", "exception", "immutable-native-special-tag-catalog-a66e2175", "sha256:983992aec696b1e85ed30959c5c092b22f0e8e49e8d912bdba51fc520a99acab", "sha256:e86b3f72ad93716ad1d970830ce4a18ec9d4c88fa38afebe258afbf62d0fcad8", "special"),
+            59: ("SpecialTag.CLONE", "equivalent", None, "sha256:e454a800642ae763bb593deb733a932f98b9161ae5a999bd12c2a648af04d009", "sha256:f597d9d6dc1cd77fa54e70f5b24d619f396786018bc1e06a4c1da3cebbf83146", "special"),
+            60: ("SpecialTag.COOLROOF", "equivalent", None, "sha256:8df5180f91f8429f57cb72538646083dcf2890e15087c12f71cd9a3a180da984", "sha256:73ab59950e1ba83971dea217c9cda6bbe4b654c898fef74df016fe903b8b7c09", "special"),
+            61: ("SpecialTag.DB", "equivalent", None, "sha256:454982ca777bb65a1cd117299ed818adc8dd06701e9818de023b70dd10b94ec6", "sha256:6880f4294a3f090ba0231c821af3f80432dce346e7fdd1748a3af09af4e6b1d7", "special"),
+            62: ("SpecialTag.FLIP", "equivalent", None, "sha256:bb0b650b28cbcd813fa41a564a8bbb9575f6dc8a67048496a863f70797312f61", "sha256:a461e8a318563ce8e2a72b6a9131ec6c9a28a8a45495c69d5f296b7d5342f7ee", "special"),
+            63: ("SpecialTag.SPECIAL", "equivalent", None, "sha256:eddc4a0734f145bdc82be3be67cd2ccfa676ec45159bb5453db0b686127ad7a7", "sha256:26b79d14f4523b7b27938d366e67fd8ff017e402969cfabcca46ff65a7fb7f3a", "special"),
+            64: ("SpecialTag.__format__", "equivalent", None, "sha256:034924fe777cc40f3f29968a0a00cbdf5b25c2b77982e936a19e64783fbbbe27", "sha256:447945bbb6573f277346130200f9df3f1ae686c9a168400ffca5a7638f79879c", "special_format"),
+            66: ("SpecialTag.__str__", "equivalent", None, "sha256:2ad3752c91d171891102944ac0a09b660c9f48ddc763cc1631d26eb45a08e55d", "sha256:374193fffd07ee272b2ae95855d9616858f63ea29746b72b9c2d84716b4a06e7", "special_format"),
+        }
+        identifier_implementations = {
+            "auto": (
+                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/IdentifierConventions.cs",
+                "GonieGonie.SimpleDragon.AutoIdPrefix",
+                "sha256:0dfe1e82e58c30dcbe9d5cc031363950a7b5c0ddd10c85c6ea29003eaf90d012",
+            ),
+            "auto_format": (
+                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/IdentifierConventions.cs",
+                "GonieGonie.SimpleDragon.AutoIdPrefix.ToString",
+                "sha256:0dfe1e82e58c30dcbe9d5cc031363950a7b5c0ddd10c85c6ea29003eaf90d012",
+            ),
+            "embedded": (
+                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Data/SimpleDragonEmbeddedData.cs",
+                "GonieGonie.SimpleDragon.SimpleDragonEmbeddedData",
+                "sha256:76915a821bccc2dbc8e3f185c1faf6c3da07dfe64cd50301b336367d8c5d2d81",
+            ),
+            "weather": (
+                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Weather/WeatherDatabase.cs",
+                "GonieGonie.SimpleDragon.WeatherSelection.ResolveEpwPath",
+                "sha256:c7ddc71015eb375e56565a2898d7998cf865fb50d0c8626374f0f642644e9e98",
+            ),
+            "package": (
+                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/PackageInfo.cs",
+                "GonieGonie.SimpleDragon.PackageInfo",
+                "sha256:29de3c056446d3ad69084ae681d05a73b8185c881ab0e2d9863423e0ecf3c5f0",
+            ),
+            "package_name": (
+                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/PackageInfo.cs",
+                "GonieGonie.SimpleDragon.PackageInfo.Name",
+                "sha256:29de3c056446d3ad69084ae681d05a73b8185c881ab0e2d9863423e0ecf3c5f0",
+            ),
+            "package_version": (
+                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/PackageInfo.cs",
+                "GonieGonie.SimpleDragon.PackageInfo.Version",
+                "sha256:29de3c056446d3ad69084ae681d05a73b8185c881ab0e2d9863423e0ecf3c5f0",
+            ),
+            "special": (
+                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/IdentifierConventions.cs",
+                "GonieGonie.SimpleDragon.SpecialTag",
+                "sha256:0dfe1e82e58c30dcbe9d5cc031363950a7b5c0ddd10c85c6ea29003eaf90d012",
+            ),
+            "special_format": (
+                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/IdentifierConventions.cs",
+                "GonieGonie.SimpleDragon.SpecialTag.ToString",
+                "sha256:0dfe1e82e58c30dcbe9d5cc031363950a7b5c0ddd10c85c6ea29003eaf90d012",
+            ),
+        }
+        identifier_test_path = (
+            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "IdentifierConventionsOracleParityTests.cs"
+        )
+        identifier_test_symbol = (
+            "GonieGonie.SimpleDragon.Tests.IdentifierConventionsOracleParityTests."
+            "MatchesPinnedPythonIdentifierAndMetadataConventions"
+        )
+        identifier_test_hash = (
+            "sha256:d4123cb2202de9fae040d4b312f570d57d99be1d7e6fdd8f633d42954caad80e"
+        )
+        identifier_exceptions = {
+            item.identifier: item for item in configuration.exceptions
+        }
+        self.assertEqual(
+            (*range(10, 26), 27, *range(31, 40), *range(58, 65), 66),
+            tuple(expected_identifier_conventions),
+        )
+        for index, (
+            symbol,
+            classification,
+            exception_id,
+            direct_hash,
+            collector_hash,
+            implementation_key,
+        ) in expected_identifier_conventions.items():
+            key = ("src/epsimple/constants.py", symbol)
+            inventory_symbol = compatibility.inventory.symbols[index]
+            self.assertEqual(key, inventory_symbol.key, key)
+            entry = compatibility.matrix.entries[index]
+            self.assertEqual(entry, by_key[key], key)
+            self.assertEqual(classification, entry.classification, key)
+            self.assertEqual(exception_id, entry.exception_id, key)
+            assertion_id = (
+                f"epsimple-identifier-conventions-{index}-"
+                f"{inventory_symbol.symbol_hash.removeprefix('sha256:')[:8]}"
+            )
+            expected_evidence = [f"upstream/symbol-evidence.json#{assertion_id}"]
+            if exception_id is not None:
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+                exception = identifier_exceptions[exception_id]
+                self.assertEqual(
+                    key,
+                    (exception.upstream_path, exception.upstream_symbol),
+                    key,
+                )
+                self.assertEqual(
+                    inventory_symbol.symbol_hash,
+                    exception.upstream_symbol_hash,
+                    key,
+                )
+                self.assertIn(("engineering_result", entry.rationale), exception.effects)
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, key)
+
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            expected_implementation = identifier_implementations[implementation_key]
+            self.assertEqual(
+                expected_implementation,
+                (
+                    evidence_entry.implementation_path,
+                    evidence_entry.implementation_symbol,
+                    evidence_entry.implementation_source_sha256,
+                ),
+                key,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), key)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, key)
+            self.assertEqual(entry.rationale, receipt.assertion, key)
+            self.assertIn(direct_hash, receipt.assertion, key)
+            self.assertEqual(collector_hash, receipt.expected_output_sha256, key)
+            self.assertEqual(identifier_test_path, receipt.test_path, key)
+            self.assertEqual(identifier_test_symbol, receipt.test_symbol, key)
+            self.assertEqual(identifier_test_hash, receipt.test_source_sha256, key)
+            self.assertEqual("cross_language", receipt.verification_kind, key)
+            self.assertEqual("passed", receipt.outcome, key)
+            self.assertFalse(receipt.skipped, key)
+            self.assertFalse(receipt.structural_only, key)
+            self.assertFalse(receipt.claims_active_load, key)
+            self.assertEqual("not_applicable", receipt.exercised_load, key)
+        self.assertEqual(
+            {"equivalent": 23, "exception": 11},
+            {
+                classification: sum(
+                    values[1] == classification
+                    for values in expected_identifier_conventions.values()
+                )
+                for classification in ("equivalent", "exception")
+            },
+        )
+        for index, symbol in (
+            (26, "AUTOID_PREFIX.__repr__"),
+            (65, "SpecialTag.__repr__"),
+        ):
+            key = ("src/epsimple/constants.py", symbol)
+            self.assertEqual(key, compatibility.inventory.symbols[index].key, key)
+            adjacent = by_key[key]
+            self.assertEqual("out_of_scope", adjacent.classification, key)
+            self.assertEqual(1, len(adjacent.evidence), key)
+            self.assertTrue(
+                adjacent.evidence[0].startswith("upstream/scope-decisions.json#"),
+                key,
+            )
+            self.assertNotIn(key, symbol_evidence.entries_by_key, key)
 
         expected_construction_family = {
             "AirBoundary.to_idf_object": (
@@ -1694,24 +1888,44 @@ class ConfigurationTests(unittest.TestCase):
                 symbol,
             )
             self.assertNotIn(key, symbol_evidence.entries_by_key, symbol)
-        for index, symbol in enumerate(
-            (
-                "Directory",
+        expected_epsimple_metadata = {
+            31: ("Directory", "embedded-explicit-native-resource-layout-5b876ad7"),
+            32: (
                 "Directory.CONSTRUCTION_DIR",
-                "Directory.PROFILE_DIR",
-                "Directory.WEATHER_DATA_DIR",
-                "Directory.WEATHER_META_DIR",
-                "PackageInfo",
-                "PackageInfo.NAME",
-                "PackageInfo.REQUIRED_PYTHON",
-                "PackageInfo.VERSION",
+                "embedded-native-construction-resources-91c573a0",
             ),
-            start=31,
-        ):
+            33: (
+                "Directory.PROFILE_DIR",
+                "embedded-native-profile-resources-f65d5eae",
+            ),
+            34: (
+                "Directory.WEATHER_DATA_DIR",
+                "caller-supplied-native-weather-data-root-8a5bf654",
+            ),
+            35: (
+                "Directory.WEATHER_META_DIR",
+                "embedded-native-weather-metadata-resources-15e81d1d",
+            ),
+            36: (
+                "PackageInfo",
+                "static-native-simpledragon-package-information-aaf5b98d",
+            ),
+            37: ("PackageInfo.NAME", "native-simpledragon-package-name-537c8c3b"),
+            38: (
+                "PackageInfo.REQUIRED_PYTHON",
+                "compiled-simpledragon-target-framework-contract-cf74d0eb",
+            ),
+            39: (
+                "PackageInfo.VERSION",
+                "native-simpledragon-and-upstream-version-identity-a8260e5f",
+            ),
+        }
+        for index, (symbol, exception_id) in expected_epsimple_metadata.items():
             key = ("src/epsimple/constants.py", symbol)
             self.assertEqual(key, compatibility.inventory.symbols[index].key, symbol)
-            self.assertEqual("needs_reverification", by_key[key].classification, symbol)
-            self.assertNotIn(key, symbol_evidence.entries_by_key, symbol)
+            self.assertEqual("exception", by_key[key].classification, symbol)
+            self.assertEqual(exception_id, by_key[key].exception_id, symbol)
+            self.assertIn(key, symbol_evidence.entries_by_key, symbol)
         expected_common_core = {
             "Setting": ("equivalent", None),
             "Setting.DEFAULT_EP_VERSION": ("equivalent", None),
