@@ -1,0 +1,4205 @@
+{
+  "case_sha256": {
+    "imugi-idd-definitions-core.field-class-and-construction": "sha256:7db966a34658ab56826ff09313db42fdc890b3395e90ff91d2fa9ae2af8c951a",
+    "imugi-idd-definitions-core.field-equality": "sha256:202813e7ba7c1b561a2bc375bdcae66e698ecb2cee300dc130e7be479bc4884c",
+    "imugi-idd-definitions-core.field-fragment-parsing": "sha256:8916ca69542e0f3b232febad12877b394d9070594dfe7ea4b2d6c3bca9bc7815",
+    "imugi-idd-definitions-core.field-properties": "sha256:fc1a4435bcd89569e412aee78d85a14fcd8f48cde9ef0c800e2174f1e13223c2",
+    "imugi-idd-definitions-core.object-class-and-construction": "sha256:485dae80cd1fce309c039161fa42f291bc775f2e7a103983da5acf61ba4ed21e",
+    "imugi-idd-definitions-core.object-equality": "sha256:6074b9ff57024b8f660643a3088ea9c791f174c8627de316563d3760648a1c40",
+    "imugi-idd-definitions-core.object-fragment-parsing": "sha256:a9ad860cacce1bd0ef4b92c3662d7f58ab5f1d801c6c2c5e7fb03f2b717fd86b",
+    "imugi-idd-definitions-core.object-properties": "sha256:6d103260cb4ef1a89d451028abda8844cacfe5ce93628ad69721330a64bf87b3"
+  },
+  "cases": [
+    {
+      "code": "A01",
+      "id": "imugi-idd-definitions-core.field-class-and-construction",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "object"
+            ],
+            "mro": [
+              "IddField",
+              "object"
+            ],
+            "signature": "(*, name='', memo='', unit='', is_required=False, is_extensible=False, is_deprecated=False, is_autosizable=False, is_autocalculatable=False, default=None, type=None, key=[], object_list=[], external_list=None, minimum=None, maximum=None, is_retaincase=False, reference=[], reference_cls='') -> 'None'"
+          },
+          "constructor_signature": "(self, *, name='', memo='', unit='', is_required=False, is_extensible=False, is_deprecated=False, is_autosizable=False, is_autocalculatable=False, default=None, type=None, key=[], object_list=[], external_list=None, minimum=None, maximum=None, is_retaincase=False, reference=[], reference_cls='') -> 'None'",
+          "defaults": {
+            "default": {
+              "kind": "none"
+            },
+            "external_list": {
+              "kind": "none"
+            },
+            "is_autocalculatable": {
+              "kind": "bool",
+              "value": false
+            },
+            "is_autosizable": {
+              "kind": "bool",
+              "value": false
+            },
+            "is_deprecated": {
+              "kind": "bool",
+              "value": false
+            },
+            "is_extensible": {
+              "kind": "bool",
+              "value": false
+            },
+            "is_required": {
+              "kind": "bool",
+              "value": false
+            },
+            "is_retaincase": {
+              "kind": "bool",
+              "value": false
+            },
+            "key": {
+              "items": [],
+              "kind": "list"
+            },
+            "maximum": {
+              "kind": "none"
+            },
+            "memo": {
+              "kind": "str",
+              "value": ""
+            },
+            "minimum": {
+              "kind": "none"
+            },
+            "name": {
+              "kind": "str",
+              "value": ""
+            },
+            "object_list": {
+              "items": [],
+              "kind": "list"
+            },
+            "reference": {
+              "items": [],
+              "kind": "list"
+            },
+            "reference_cls": {
+              "kind": "str",
+              "value": ""
+            },
+            "referenceable": {
+              "items": [],
+              "kind": "list"
+            },
+            "type": {
+              "kind": "none"
+            },
+            "unit": {
+              "kind": "str",
+              "value": ""
+            }
+          },
+          "explicit_list_identities_preserved": {
+            "key": true,
+            "object_list": true,
+            "reference": true,
+            "reference_cls": true
+          },
+          "explicit_state": {
+            "default": {
+              "hex": "0x1.4000000000000p+0",
+              "kind": "float",
+              "repr": "1.25"
+            },
+            "external_list": {
+              "kind": "str",
+              "value": "ExternalNames"
+            },
+            "is_autocalculatable": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_autosizable": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_deprecated": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_extensible": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_required": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_retaincase": {
+              "kind": "bool",
+              "value": true
+            },
+            "key": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "On"
+                },
+                {
+                  "kind": "str",
+                  "value": "Off"
+                }
+              ],
+              "kind": "list"
+            },
+            "maximum": {
+              "hex": "0x1.4000000000000p+3",
+              "kind": "float",
+              "repr": "10.0"
+            },
+            "memo": {
+              "kind": "str",
+              "value": "- First sentence.\n- Second sentence."
+            },
+            "minimum": {
+              "hex": "0x0.0p+0",
+              "kind": "float",
+              "repr": "0.0"
+            },
+            "name": {
+              "kind": "str",
+              "value": "Mode"
+            },
+            "object_list": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "ObjectNames"
+                }
+              ],
+              "kind": "list"
+            },
+            "reference": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "ReferenceNames"
+                }
+              ],
+              "kind": "list"
+            },
+            "reference_cls": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "ReferenceClasses"
+                }
+              ],
+              "kind": "list"
+            },
+            "referenceable": {
+              "items": [],
+              "kind": "list"
+            },
+            "type": {
+              "kind": "str",
+              "value": "choice"
+            },
+            "unit": {
+              "kind": "str",
+              "value": "m"
+            }
+          },
+          "keyword_only_rejection": {
+            "args": [
+              "IddField.__init__() takes 1 positional argument but 2 were given"
+            ],
+            "message": "IddField.__init__() takes 1 positional argument but 2 were given",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "mutable_default_aliases": {
+            "key": true,
+            "object_list": true,
+            "reference": true,
+            "reference_cls": true,
+            "referenceable": false
+          },
+          "shared_default_key_mutation_visible": true
+        },
+        "facts_sha256": "sha256:d9af6e406b1a21cedc127a4168d1c65fe9bf67d919c76e774187b9749ab84748",
+        "outcome": "observed"
+      },
+      "subfamily": "field-construction",
+      "target_symbols": [
+        "IddField",
+        "IddField.__init__"
+      ]
+    },
+    {
+      "code": "B01",
+      "id": "imugi-idd-definitions-core.field-equality",
+      "python": {
+        "facts": {
+          "different_key": false,
+          "equal_before_mutation": true,
+          "equal_referenceable_ignored": true,
+          "equality_after_mutating_other_key": false,
+          "identity": true,
+          "wrong_type": {
+            "args": [
+              "Cannot compare IddField instnace with <class 'dict'>."
+            ],
+            "message": "Cannot compare IddField instnace with <class 'dict'>.",
+            "outcome": "raised",
+            "type": "TypeError"
+          }
+        },
+        "facts_sha256": "sha256:5686c751946a0d9980d837d7f13b9bfd3b46347d0bf55ffd5344c784f47fba71",
+        "outcome": "observed"
+      },
+      "subfamily": "field-equality",
+      "target_symbols": [
+        "IddField.__eq__"
+      ]
+    },
+    {
+      "code": "C01",
+      "id": "imugi-idd-definitions-core.field-fragment-parsing",
+      "python": {
+        "facts": {
+          "based_on_field_unit": {
+            "kind": "str",
+            "value": "BasedOn:A2"
+          },
+          "class_method_signature": "(text: 'str') -> 'IddField'",
+          "exclusive_maximum_failure": {
+            "args": [
+              "must be real number, not str"
+            ],
+            "message": "must be real number, not str",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "exclusive_minimum_failure": {
+            "args": [
+              "must be real number, not str"
+            ],
+            "message": "must be real number, not str",
+            "outcome": "raised",
+            "type": "TypeError"
+          },
+          "numeric_default_coercion": {
+            "-1": {
+              "kind": "str",
+              "value": "-1"
+            },
+            "0": {
+              "hex": "0x0.0p+0",
+              "kind": "float",
+              "repr": "0.0"
+            },
+            "12.5": {
+              "hex": "0x1.9000000000000p+3",
+              "kind": "float",
+              "repr": "12.5"
+            },
+            "1e3": {
+              "kind": "str",
+              "value": "1e3"
+            },
+            "Autosize": {
+              "kind": "str",
+              "value": "Autosize"
+            }
+          },
+          "representative_state": {
+            "default": {
+              "hex": "0x1.4000000000000p+0",
+              "kind": "float",
+              "repr": "1.25"
+            },
+            "external_list": {
+              "kind": "str",
+              "value": "ExternalNames"
+            },
+            "is_autocalculatable": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_autosizable": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_deprecated": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_extensible": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_required": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_retaincase": {
+              "kind": "bool",
+              "value": true
+            },
+            "key": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "On"
+                },
+                {
+                  "kind": "str",
+                  "value": "Off"
+                }
+              ],
+              "kind": "list"
+            },
+            "maximum": {
+              "hex": "0x1.4000000000000p+3",
+              "kind": "float",
+              "repr": "10.0"
+            },
+            "memo": {
+              "kind": "str",
+              "value": "- First sentence.\n- Second sentence.\n- Third sentence. "
+            },
+            "minimum": {
+              "hex": "0x0.0p+0",
+              "kind": "float",
+              "repr": "0.0"
+            },
+            "name": {
+              "kind": "str",
+              "value": "Mode"
+            },
+            "object_list": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "ObjectNames"
+                }
+              ],
+              "kind": "list"
+            },
+            "reference": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "ReferenceNames"
+                }
+              ],
+              "kind": "list"
+            },
+            "reference_cls": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "ReferenceClasses"
+                }
+              ],
+              "kind": "list"
+            },
+            "referenceable": {
+              "items": [],
+              "kind": "list"
+            },
+            "type": {
+              "kind": "str",
+              "value": "choice"
+            },
+            "unit": {
+              "kind": "str",
+              "value": "m"
+            }
+          },
+          "unknown_directive": {
+            "args": [
+              "Unknown idd field flag: not-a-field-flag"
+            ],
+            "message": "'Unknown idd field flag: not-a-field-flag'",
+            "outcome": "raised",
+            "type": "KeyError"
+          }
+        },
+        "facts_sha256": "sha256:138e8e32a2a070e3ef2e9f1452b748d0851e52b0370ff9f5ebeb6279f5b92961",
+        "outcome": "observed"
+      },
+      "subfamily": "field-parser",
+      "target_symbols": [
+        "IddField.from_text"
+      ]
+    },
+    {
+      "code": "D01",
+      "id": "imugi-idd-definitions-core.field-properties",
+      "python": {
+        "facts": {
+          "after_external_list_mutation": {
+            "default": {
+              "kind": "str",
+              "value": "Autosize"
+            },
+            "external_list": {
+              "kind": "str",
+              "value": "External"
+            },
+            "is_autocalculatable": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_autosizable": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_deprecated": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_extensible": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_required": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_retaincase": {
+              "kind": "bool",
+              "value": true
+            },
+            "key": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "A"
+                },
+                {
+                  "kind": "str",
+                  "value": "B"
+                },
+                {
+                  "kind": "str",
+                  "value": "C"
+                }
+              ],
+              "kind": "list"
+            },
+            "maximum": {
+              "kind": "int",
+              "value": "9"
+            },
+            "memo": {
+              "kind": "str",
+              "value": "- One.\n- Two."
+            },
+            "minimum": {
+              "hex": "-0x1.c000000000000p+1",
+              "kind": "float",
+              "repr": "-3.5"
+            },
+            "name": {
+              "kind": "str",
+              "value": "Field Name"
+            },
+            "object_list": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Objects"
+                },
+                {
+                  "kind": "str",
+                  "value": "MoreObjects"
+                }
+              ],
+              "kind": "list"
+            },
+            "reference": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Refs"
+                },
+                {
+                  "kind": "str",
+                  "value": "MoreRefs"
+                }
+              ],
+              "kind": "list"
+            },
+            "reference_cls": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Classes"
+                },
+                {
+                  "kind": "str",
+                  "value": "MoreClasses"
+                }
+              ],
+              "kind": "list"
+            },
+            "referenceable": {
+              "items": [
+                {
+                  "items": [
+                    {
+                      "key": {
+                        "kind": "str",
+                        "value": "object"
+                      },
+                      "value": {
+                        "kind": "str",
+                        "value": "Thing"
+                      }
+                    },
+                    {
+                      "key": {
+                        "kind": "str",
+                        "value": "field"
+                      },
+                      "value": {
+                        "kind": "str",
+                        "value": "Name"
+                      }
+                    }
+                  ],
+                  "kind": "dict"
+                }
+              ],
+              "kind": "list"
+            },
+            "type": {
+              "kind": "str",
+              "value": "real"
+            },
+            "unit": {
+              "kind": "str",
+              "value": "kg/s"
+            }
+          },
+          "before_external_list_mutation": {
+            "default": {
+              "kind": "str",
+              "value": "Autosize"
+            },
+            "external_list": {
+              "kind": "str",
+              "value": "External"
+            },
+            "is_autocalculatable": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_autosizable": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_deprecated": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_extensible": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_required": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_retaincase": {
+              "kind": "bool",
+              "value": true
+            },
+            "key": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "A"
+                },
+                {
+                  "kind": "str",
+                  "value": "B"
+                }
+              ],
+              "kind": "list"
+            },
+            "maximum": {
+              "kind": "int",
+              "value": "9"
+            },
+            "memo": {
+              "kind": "str",
+              "value": "- One.\n- Two."
+            },
+            "minimum": {
+              "hex": "-0x1.c000000000000p+1",
+              "kind": "float",
+              "repr": "-3.5"
+            },
+            "name": {
+              "kind": "str",
+              "value": "Field Name"
+            },
+            "object_list": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Objects"
+                }
+              ],
+              "kind": "list"
+            },
+            "reference": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Refs"
+                }
+              ],
+              "kind": "list"
+            },
+            "reference_cls": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Classes"
+                }
+              ],
+              "kind": "list"
+            },
+            "referenceable": {
+              "items": [],
+              "kind": "list"
+            },
+            "type": {
+              "kind": "str",
+              "value": "real"
+            },
+            "unit": {
+              "kind": "str",
+              "value": "kg/s"
+            }
+          },
+          "property_names": [
+            "name",
+            "memo",
+            "is_required",
+            "is_extensible",
+            "unit",
+            "minimum",
+            "maximum",
+            "default",
+            "is_deprecated",
+            "is_autosizable",
+            "is_autocalculatable",
+            "type",
+            "is_retaincase",
+            "key",
+            "object_list",
+            "external_list",
+            "reference",
+            "reference_cls",
+            "referenceable"
+          ]
+        },
+        "facts_sha256": "sha256:8350e46049c9d06038368828ea991d6d87e5cce74895f916151128dd0d1c7d20",
+        "outcome": "observed"
+      },
+      "subfamily": "field-properties",
+      "target_symbols": [
+        "IddField.default",
+        "IddField.external_list",
+        "IddField.is_autocalculatable",
+        "IddField.is_autosizable",
+        "IddField.is_deprecated",
+        "IddField.is_extensible",
+        "IddField.is_required",
+        "IddField.is_retaincase",
+        "IddField.key",
+        "IddField.maximum",
+        "IddField.memo",
+        "IddField.minimum",
+        "IddField.name",
+        "IddField.object_list",
+        "IddField.reference",
+        "IddField.reference_cls",
+        "IddField.referenceable",
+        "IddField.type",
+        "IddField.unit"
+      ]
+    },
+    {
+      "code": "E01",
+      "id": "imugi-idd-definitions-core.object-class-and-construction",
+      "python": {
+        "facts": {
+          "class_shape": {
+            "abstract": false,
+            "abstract_methods": [],
+            "bases": [
+              "StaticIndexedDict"
+            ],
+            "mro": [
+              "IddObject",
+              "StaticIndexedDict",
+              "UserDict",
+              "MutableMapping",
+              "Mapping",
+              "Collection",
+              "Sized",
+              "Iterable",
+              "Container",
+              "object"
+            ],
+            "signature": "(*args: 'tuple[IddField]', name='', index=None, memo='', is_unique=False, is_required=False, is_obsolete=False, min_fields=None, extensible=None, begin_extensible=None, format=None, reference=None) -> 'None'"
+          },
+          "constructor_signature": "(self, *args: 'tuple[IddField]', name='', index=None, memo='', is_unique=False, is_required=False, is_obsolete=False, min_fields=None, extensible=None, begin_extensible=None, format=None, reference=None) -> 'None'",
+          "duplicate_field_resolution": {
+            "field_count": 1,
+            "stored_second_identity": true
+          },
+          "empty_state": {
+            "begin_extensible": {
+              "kind": "none"
+            },
+            "default": {
+              "items": [],
+              "kind": "list"
+            },
+            "extensible": {
+              "kind": "none"
+            },
+            "field_names": {
+              "items": [],
+              "kind": "list"
+            },
+            "format": {
+              "kind": "none"
+            },
+            "idd_index": {
+              "kind": "none"
+            },
+            "is_obsolete": {
+              "kind": "bool",
+              "value": false
+            },
+            "is_required": {
+              "kind": "bool",
+              "value": false
+            },
+            "is_unique": {
+              "kind": "bool",
+              "value": false
+            },
+            "memo": {
+              "kind": "str",
+              "value": ""
+            },
+            "min_fields": {
+              "kind": "none"
+            },
+            "name": {
+              "kind": "str",
+              "value": ""
+            },
+            "reference": {
+              "kind": "none"
+            },
+            "required_fields": {
+              "items": [],
+              "kind": "list"
+            }
+          },
+          "explicit_field_identities_preserved": [
+            true,
+            true
+          ],
+          "explicit_state": {
+            "begin_extensible": {
+              "kind": "str",
+              "value": "N1"
+            },
+            "default": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Unnamed"
+                },
+                {
+                  "hex": "0x1.8000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.5"
+                }
+              ],
+              "kind": "list"
+            },
+            "extensible": {
+              "kind": "int",
+              "value": "1"
+            },
+            "field_names": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Name"
+                },
+                {
+                  "kind": "str",
+                  "value": "Size"
+                }
+              ],
+              "kind": "list"
+            },
+            "format": {
+              "kind": "str",
+              "value": "vertices"
+            },
+            "idd_index": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "A1"
+                },
+                {
+                  "kind": "str",
+                  "value": "N1"
+                }
+              ],
+              "kind": "list"
+            },
+            "is_obsolete": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_required": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_unique": {
+              "kind": "bool",
+              "value": true
+            },
+            "memo": {
+              "kind": "str",
+              "value": "- First sentence.\n- Second sentence."
+            },
+            "min_fields": {
+              "kind": "int",
+              "value": "2"
+            },
+            "name": {
+              "kind": "str",
+              "value": "Test:Object"
+            },
+            "reference": {
+              "kind": "str",
+              "value": "TestClasses"
+            },
+            "required_fields": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Name"
+                }
+              ],
+              "kind": "list"
+            }
+          },
+          "invalid_positional_field": {
+            "args": [
+              "All of positional arguments for 'IddObject' must be 'IddField' instances."
+            ],
+            "message": "All of positional arguments for 'IddObject' must be 'IddField' instances.",
+            "outcome": "raised",
+            "type": "TypeError"
+          }
+        },
+        "facts_sha256": "sha256:67e38ac935576b850b0675f82947a500e59de1e91dab203d9b598e4c49016872",
+        "outcome": "observed"
+      },
+      "subfamily": "object-construction",
+      "target_symbols": [
+        "IddObject",
+        "IddObject.__init__"
+      ]
+    },
+    {
+      "code": "F01",
+      "id": "imugi-idd-definitions-core.object-equality",
+      "python": {
+        "facts": {
+          "different_attribute": false,
+          "different_field": false,
+          "equal": true,
+          "idd_index_ignored": true,
+          "identity": true,
+          "wrong_type": {
+            "args": [
+              "Cannot compare IddObject instnace with <class 'dict'>."
+            ],
+            "message": "Cannot compare IddObject instnace with <class 'dict'>.",
+            "outcome": "raised",
+            "type": "TypeError"
+          }
+        },
+        "facts_sha256": "sha256:6738956989a52db24baebc8806c95a9f50e4e6fc718435ca99ddd423f3dfcfa2",
+        "outcome": "observed"
+      },
+      "subfamily": "object-equality",
+      "target_symbols": [
+        "IddObject.__eq__"
+      ]
+    },
+    {
+      "code": "G01",
+      "id": "imugi-idd-definitions-core.object-fragment-parsing",
+      "python": {
+        "facts": {
+          "class_method_signature": "(text: 'str') -> 'IddObject'",
+          "field_states": [
+            {
+              "default": {
+                "kind": "str",
+                "value": "Unnamed"
+              },
+              "external_list": {
+                "kind": "none"
+              },
+              "is_autocalculatable": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_autosizable": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_deprecated": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_extensible": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_required": {
+                "kind": "bool",
+                "value": true
+              },
+              "is_retaincase": {
+                "kind": "bool",
+                "value": false
+              },
+              "key": {
+                "items": [],
+                "kind": "list"
+              },
+              "maximum": {
+                "kind": "none"
+              },
+              "memo": {
+                "kind": "str",
+                "value": ""
+              },
+              "minimum": {
+                "kind": "none"
+              },
+              "name": {
+                "kind": "str",
+                "value": "Name"
+              },
+              "object_list": {
+                "items": [],
+                "kind": "list"
+              },
+              "reference": {
+                "items": [],
+                "kind": "list"
+              },
+              "reference_cls": {
+                "items": [],
+                "kind": "list"
+              },
+              "referenceable": {
+                "items": [],
+                "kind": "list"
+              },
+              "type": {
+                "kind": "none"
+              },
+              "unit": {
+                "kind": "str",
+                "value": ""
+              }
+            },
+            {
+              "default": {
+                "kind": "none"
+              },
+              "external_list": {
+                "kind": "none"
+              },
+              "is_autocalculatable": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_autosizable": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_deprecated": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_extensible": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_required": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_retaincase": {
+                "kind": "bool",
+                "value": false
+              },
+              "key": {
+                "items": [],
+                "kind": "list"
+              },
+              "maximum": {
+                "kind": "none"
+              },
+              "memo": {
+                "kind": "str",
+                "value": ""
+              },
+              "minimum": {
+                "hex": "0x0.0p+0",
+                "kind": "float",
+                "repr": "0.0"
+              },
+              "name": {
+                "kind": "str",
+                "value": "Size"
+              },
+              "object_list": {
+                "items": [],
+                "kind": "list"
+              },
+              "reference": {
+                "items": [],
+                "kind": "list"
+              },
+              "reference_cls": {
+                "items": [],
+                "kind": "list"
+              },
+              "referenceable": {
+                "items": [],
+                "kind": "list"
+              },
+              "type": {
+                "kind": "none"
+              },
+              "unit": {
+                "kind": "str",
+                "value": "m"
+              }
+            },
+            {
+              "default": {
+                "kind": "none"
+              },
+              "external_list": {
+                "kind": "none"
+              },
+              "is_autocalculatable": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_autosizable": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_deprecated": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_extensible": {
+                "kind": "bool",
+                "value": true
+              },
+              "is_required": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_retaincase": {
+                "kind": "bool",
+                "value": false
+              },
+              "key": {
+                "items": [],
+                "kind": "list"
+              },
+              "maximum": {
+                "kind": "none"
+              },
+              "memo": {
+                "kind": "str",
+                "value": ""
+              },
+              "minimum": {
+                "kind": "none"
+              },
+              "name": {
+                "kind": "str",
+                "value": "Vertex Name"
+              },
+              "object_list": {
+                "items": [],
+                "kind": "list"
+              },
+              "reference": {
+                "items": [],
+                "kind": "list"
+              },
+              "reference_cls": {
+                "items": [],
+                "kind": "list"
+              },
+              "referenceable": {
+                "items": [],
+                "kind": "list"
+              },
+              "type": {
+                "kind": "none"
+              },
+              "unit": {
+                "kind": "str",
+                "value": ""
+              }
+            },
+            {
+              "default": {
+                "hex": "0x1.8000000000000p+0",
+                "kind": "float",
+                "repr": "1.5"
+              },
+              "external_list": {
+                "kind": "none"
+              },
+              "is_autocalculatable": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_autosizable": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_deprecated": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_extensible": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_required": {
+                "kind": "bool",
+                "value": false
+              },
+              "is_retaincase": {
+                "kind": "bool",
+                "value": false
+              },
+              "key": {
+                "items": [],
+                "kind": "list"
+              },
+              "maximum": {
+                "kind": "none"
+              },
+              "memo": {
+                "kind": "str",
+                "value": ""
+              },
+              "minimum": {
+                "kind": "none"
+              },
+              "name": {
+                "kind": "str",
+                "value": "Vertex Value"
+              },
+              "object_list": {
+                "items": [],
+                "kind": "list"
+              },
+              "reference": {
+                "items": [],
+                "kind": "list"
+              },
+              "reference_cls": {
+                "items": [],
+                "kind": "list"
+              },
+              "referenceable": {
+                "items": [],
+                "kind": "list"
+              },
+              "type": {
+                "kind": "none"
+              },
+              "unit": {
+                "kind": "str",
+                "value": ""
+              }
+            }
+          ],
+          "no_fields": {
+            "args": [
+              "'NoneType' object has no attribute 'group'"
+            ],
+            "message": "'NoneType' object has no attribute 'group'",
+            "outcome": "raised",
+            "type": "AttributeError"
+          },
+          "representative_state": {
+            "begin_extensible": {
+              "kind": "str",
+              "value": "A2"
+            },
+            "default": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Unnamed"
+                },
+                {
+                  "kind": "none"
+                },
+                {
+                  "kind": "none"
+                },
+                {
+                  "hex": "0x1.8000000000000p+0",
+                  "kind": "float",
+                  "repr": "1.5"
+                }
+              ],
+              "kind": "list"
+            },
+            "extensible": {
+              "kind": "int",
+              "value": "2"
+            },
+            "field_names": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Name"
+                },
+                {
+                  "kind": "str",
+                  "value": "Size"
+                },
+                {
+                  "kind": "str",
+                  "value": "Vertex Name"
+                },
+                {
+                  "kind": "str",
+                  "value": "Vertex Value"
+                }
+              ],
+              "kind": "list"
+            },
+            "format": {
+              "kind": "str",
+              "value": "vertices"
+            },
+            "idd_index": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "A1"
+                },
+                {
+                  "kind": "str",
+                  "value": "N1"
+                },
+                {
+                  "kind": "str",
+                  "value": "A2"
+                },
+                {
+                  "kind": "str",
+                  "value": "N2"
+                }
+              ],
+              "kind": "list"
+            },
+            "is_obsolete": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_required": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_unique": {
+              "kind": "bool",
+              "value": true
+            },
+            "memo": {
+              "kind": "str",
+              "value": "- First sentence.\n- Second sentence. "
+            },
+            "min_fields": {
+              "kind": "int",
+              "value": "2"
+            },
+            "name": {
+              "kind": "str",
+              "value": "Test:Object"
+            },
+            "reference": {
+              "kind": "str",
+              "value": "TestClasses"
+            },
+            "required_fields": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Name"
+                }
+              ],
+              "kind": "list"
+            }
+          },
+          "unknown_directive": {
+            "args": [
+              "Unknown idd object flag: not-an-object-flag"
+            ],
+            "message": "'Unknown idd object flag: not-an-object-flag'",
+            "outcome": "raised",
+            "type": "KeyError"
+          }
+        },
+        "facts_sha256": "sha256:2fd8b5d6fb596da60a3ec3c79ca175f79fdc5ef7f93b5a1f85f48bb1be684d2a",
+        "outcome": "observed"
+      },
+      "subfamily": "object-parser",
+      "target_symbols": [
+        "IddObject.from_text"
+      ]
+    },
+    {
+      "code": "H01",
+      "id": "imugi-idd-definitions-core.object-properties",
+      "python": {
+        "facts": {
+          "after_private_field_mutation": {
+            "begin_extensible": {
+              "kind": "str",
+              "value": "A1"
+            },
+            "default": {
+              "items": [
+                {
+                  "kind": "int",
+                  "value": "1"
+                },
+                {
+                  "kind": "str",
+                  "value": "X"
+                }
+              ],
+              "kind": "list"
+            },
+            "extensible": {
+              "kind": "int",
+              "value": "2"
+            },
+            "field_names": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Required"
+                },
+                {
+                  "kind": "str",
+                  "value": "Optional"
+                }
+              ],
+              "kind": "list"
+            },
+            "format": {
+              "kind": "str",
+              "value": "singleLine"
+            },
+            "idd_index": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "N1"
+                },
+                {
+                  "kind": "str",
+                  "value": "A1"
+                }
+              ],
+              "kind": "tuple"
+            },
+            "is_obsolete": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_required": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_unique": {
+              "kind": "bool",
+              "value": true
+            },
+            "memo": {
+              "kind": "str",
+              "value": "- One.\n- Two."
+            },
+            "min_fields": {
+              "kind": "int",
+              "value": "1"
+            },
+            "name": {
+              "kind": "str",
+              "value": "Property:Object"
+            },
+            "reference": {
+              "kind": "str",
+              "value": "PropertyClasses"
+            },
+            "required_fields": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Required"
+                }
+              ],
+              "kind": "list"
+            }
+          },
+          "before_private_field_mutation": {
+            "begin_extensible": {
+              "kind": "str",
+              "value": "A1"
+            },
+            "default": {
+              "items": [
+                {
+                  "kind": "int",
+                  "value": "1"
+                },
+                {
+                  "kind": "str",
+                  "value": "X"
+                }
+              ],
+              "kind": "list"
+            },
+            "extensible": {
+              "kind": "int",
+              "value": "2"
+            },
+            "field_names": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Required"
+                },
+                {
+                  "kind": "str",
+                  "value": "Optional"
+                }
+              ],
+              "kind": "list"
+            },
+            "format": {
+              "kind": "str",
+              "value": "singleLine"
+            },
+            "idd_index": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "N1"
+                },
+                {
+                  "kind": "str",
+                  "value": "A1"
+                }
+              ],
+              "kind": "tuple"
+            },
+            "is_obsolete": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_required": {
+              "kind": "bool",
+              "value": true
+            },
+            "is_unique": {
+              "kind": "bool",
+              "value": true
+            },
+            "memo": {
+              "kind": "str",
+              "value": "- One.\n- Two."
+            },
+            "min_fields": {
+              "kind": "int",
+              "value": "1"
+            },
+            "name": {
+              "kind": "str",
+              "value": "Property:Object"
+            },
+            "reference": {
+              "kind": "str",
+              "value": "PropertyClasses"
+            },
+            "required_fields": {
+              "items": [
+                {
+                  "kind": "str",
+                  "value": "Required"
+                }
+              ],
+              "kind": "list"
+            }
+          },
+          "property_names": [
+            "name",
+            "memo",
+            "is_unique",
+            "is_required",
+            "is_obsolete",
+            "min_fields",
+            "extensible",
+            "begin_extensible",
+            "format",
+            "reference",
+            "idd_index",
+            "required_fields",
+            "default"
+          ]
+        },
+        "facts_sha256": "sha256:e92e05c38c65d60b046bfb9944b5c9dc65ea3f79897ea35beb9e29ea9627a522",
+        "outcome": "observed"
+      },
+      "subfamily": "object-properties",
+      "target_symbols": [
+        "IddObject.begin_extensible",
+        "IddObject.default",
+        "IddObject.extensible",
+        "IddObject.format",
+        "IddObject.idd_index",
+        "IddObject.is_obsolete",
+        "IddObject.is_required",
+        "IddObject.is_unique",
+        "IddObject.memo",
+        "IddObject.min_fields",
+        "IddObject.name",
+        "IddObject.reference",
+        "IddObject.required_fields"
+      ]
+    }
+  ],
+  "cases_sha256": "sha256:002239e3f457bc553c44b4144c0e45e1b470ba7ababe0e2a4aa33c0038abc6ce",
+  "consumer_contract": {
+    "adaptations": {
+      "IddField": "typed-immutable-field-definition-1123",
+      "IddField.__eq__": "field-by-field-structural-parity-without-value-equality-override-1124",
+      "IddField.__init__": "token-position-kind-explicit-validated-construction-1125",
+      "IddField.default": "lossless-string-default-instead-of-legacy-numeric-coercion-1128",
+      "IddField.from_text": "full-schema-parser-route-instead-of-field-fragment-parser-1130",
+      "IddField.maximum": "explicit-inclusive-bound-instead-of-nextafter-sentinel-1138",
+      "IddField.memo": "ordered-note-list-instead-of-formatted-sentence-string-1139",
+      "IddField.minimum": "explicit-inclusive-bound-instead-of-nextafter-sentinel-1140",
+      "IddField.referenceable": "schema-projection-instead-of-mutable-backreference-list-1145",
+      "IddField.type": "closed-idd-data-type-enum-with-kind-derived-default-1146",
+      "IddField.unit": "separate-units-ip-units-and-units-based-on-field-metadata-1147",
+      "IddObject": "typed-immutable-object-definition-1148",
+      "IddObject.__eq__": "field-by-field-structural-parity-without-value-equality-override-1149",
+      "IddObject.__init__": "ordered-consecutive-field-definition-construction-1150",
+      "IddObject.begin_extensible": "resolved-zero-based-extensible-start-index-1153",
+      "IddObject.default": "field-default-projection-instead-of-cached-list-1154",
+      "IddObject.from_text": "full-schema-parser-route-instead-of-object-fragment-parser-1157",
+      "IddObject.idd_index": "ordered-field-token-projection-1158",
+      "IddObject.is_obsolete": "obsolete-message-preservation-instead-of-boolean-only-1159",
+      "IddObject.memo": "ordered-memo-list-instead-of-formatted-sentence-string-1162",
+      "IddObject.reference": "additional-directive-preservation-for-reference-class-name-1165",
+      "IddObject.required_fields": "required-field-definition-projection-instead-of-cached-name-list-1166"
+    },
+    "assertion_ids": {
+      "IddField": "imugi-idd-definitions-core-1123-209ee073",
+      "IddField.__eq__": "imugi-idd-definitions-core-1124-cc926b4c",
+      "IddField.__init__": "imugi-idd-definitions-core-1125-e4303f76",
+      "IddField.default": "imugi-idd-definitions-core-1128-4748d03a",
+      "IddField.external_list": "imugi-idd-definitions-core-1129-d3f9ed1f",
+      "IddField.from_text": "imugi-idd-definitions-core-1130-2b6d880a",
+      "IddField.is_autocalculatable": "imugi-idd-definitions-core-1131-d0349be4",
+      "IddField.is_autosizable": "imugi-idd-definitions-core-1132-a5aa4b09",
+      "IddField.is_deprecated": "imugi-idd-definitions-core-1133-83922a08",
+      "IddField.is_extensible": "imugi-idd-definitions-core-1134-6f8cd3f1",
+      "IddField.is_required": "imugi-idd-definitions-core-1135-b64e2145",
+      "IddField.is_retaincase": "imugi-idd-definitions-core-1136-46f42932",
+      "IddField.key": "imugi-idd-definitions-core-1137-b2a62552",
+      "IddField.maximum": "imugi-idd-definitions-core-1138-0fc0df49",
+      "IddField.memo": "imugi-idd-definitions-core-1139-203215fc",
+      "IddField.minimum": "imugi-idd-definitions-core-1140-04d44d1d",
+      "IddField.name": "imugi-idd-definitions-core-1141-dc05a34b",
+      "IddField.object_list": "imugi-idd-definitions-core-1142-f35f045c",
+      "IddField.reference": "imugi-idd-definitions-core-1143-ecceb577",
+      "IddField.reference_cls": "imugi-idd-definitions-core-1144-704213be",
+      "IddField.referenceable": "imugi-idd-definitions-core-1145-4695751c",
+      "IddField.type": "imugi-idd-definitions-core-1146-5b7e3d73",
+      "IddField.unit": "imugi-idd-definitions-core-1147-59edda63",
+      "IddObject": "imugi-idd-definitions-core-1148-8a75cdbc",
+      "IddObject.__eq__": "imugi-idd-definitions-core-1149-355edc7a",
+      "IddObject.__init__": "imugi-idd-definitions-core-1150-a85878fd",
+      "IddObject.begin_extensible": "imugi-idd-definitions-core-1153-cc944d8e",
+      "IddObject.default": "imugi-idd-definitions-core-1154-ceed741c",
+      "IddObject.extensible": "imugi-idd-definitions-core-1155-656dae5a",
+      "IddObject.format": "imugi-idd-definitions-core-1156-54aa570d",
+      "IddObject.from_text": "imugi-idd-definitions-core-1157-e55a8f89",
+      "IddObject.idd_index": "imugi-idd-definitions-core-1158-b7a1f5de",
+      "IddObject.is_obsolete": "imugi-idd-definitions-core-1159-b654e577",
+      "IddObject.is_required": "imugi-idd-definitions-core-1160-b64e2145",
+      "IddObject.is_unique": "imugi-idd-definitions-core-1161-9f99bd10",
+      "IddObject.memo": "imugi-idd-definitions-core-1162-203215fc",
+      "IddObject.min_fields": "imugi-idd-definitions-core-1163-1821fd04",
+      "IddObject.name": "imugi-idd-definitions-core-1164-dc05a34b",
+      "IddObject.reference": "imugi-idd-definitions-core-1165-ecceb577",
+      "IddObject.required_fields": "imugi-idd-definitions-core-1166-b01c46a0"
+    },
+    "case_count": 8,
+    "case_ids": [
+      "imugi-idd-definitions-core.field-class-and-construction",
+      "imugi-idd-definitions-core.field-equality",
+      "imugi-idd-definitions-core.field-fragment-parsing",
+      "imugi-idd-definitions-core.field-properties",
+      "imugi-idd-definitions-core.object-class-and-construction",
+      "imugi-idd-definitions-core.object-equality",
+      "imugi-idd-definitions-core.object-fragment-parsing",
+      "imugi-idd-definitions-core.object-properties"
+    ],
+    "classification_counts": {
+      "equivalent": 18,
+      "exception": 22
+    },
+    "classifications": {
+      "IddField": "exception",
+      "IddField.__eq__": "exception",
+      "IddField.__init__": "exception",
+      "IddField.default": "exception",
+      "IddField.external_list": "equivalent",
+      "IddField.from_text": "exception",
+      "IddField.is_autocalculatable": "equivalent",
+      "IddField.is_autosizable": "equivalent",
+      "IddField.is_deprecated": "equivalent",
+      "IddField.is_extensible": "equivalent",
+      "IddField.is_required": "equivalent",
+      "IddField.is_retaincase": "equivalent",
+      "IddField.key": "equivalent",
+      "IddField.maximum": "exception",
+      "IddField.memo": "exception",
+      "IddField.minimum": "exception",
+      "IddField.name": "equivalent",
+      "IddField.object_list": "equivalent",
+      "IddField.reference": "equivalent",
+      "IddField.reference_cls": "equivalent",
+      "IddField.referenceable": "exception",
+      "IddField.type": "exception",
+      "IddField.unit": "exception",
+      "IddObject": "exception",
+      "IddObject.__eq__": "exception",
+      "IddObject.__init__": "exception",
+      "IddObject.begin_extensible": "exception",
+      "IddObject.default": "exception",
+      "IddObject.extensible": "equivalent",
+      "IddObject.format": "equivalent",
+      "IddObject.from_text": "exception",
+      "IddObject.idd_index": "exception",
+      "IddObject.is_obsolete": "exception",
+      "IddObject.is_required": "equivalent",
+      "IddObject.is_unique": "equivalent",
+      "IddObject.memo": "exception",
+      "IddObject.min_fields": "equivalent",
+      "IddObject.name": "equivalent",
+      "IddObject.reference": "exception",
+      "IddObject.required_fields": "exception"
+    },
+    "closure": {
+      "deferred_count": 65,
+      "deferred_indices": [
+        1095,
+        1097,
+        1100,
+        1101,
+        1102,
+        1103,
+        1104,
+        1105,
+        1106,
+        1107,
+        1108,
+        1109,
+        1112,
+        1113,
+        1114,
+        1115,
+        1116,
+        1118,
+        1119,
+        1121,
+        1122,
+        1167,
+        1170,
+        1171,
+        1173,
+        1174,
+        1175,
+        1176,
+        1177,
+        1178,
+        1179,
+        1180,
+        1181,
+        1182,
+        1183,
+        1190,
+        1194,
+        1195,
+        1197,
+        1198,
+        1199,
+        1201,
+        1203,
+        1204,
+        1205,
+        1206,
+        1207,
+        1208,
+        1209,
+        1210,
+        1211,
+        1212,
+        1214,
+        1215,
+        1217,
+        1218,
+        1219,
+        1220,
+        1221,
+        1222,
+        1223,
+        1224,
+        1225,
+        1226,
+        1227
+      ],
+      "exact_one_case_target_partition": true,
+      "full_imugi_source_partition": true,
+      "out_of_scope_count": 28,
+      "out_of_scope_indices": [
+        1096,
+        1098,
+        1099,
+        1110,
+        1111,
+        1117,
+        1120,
+        1126,
+        1127,
+        1151,
+        1152,
+        1168,
+        1169,
+        1172,
+        1184,
+        1185,
+        1186,
+        1187,
+        1188,
+        1189,
+        1191,
+        1192,
+        1193,
+        1196,
+        1200,
+        1202,
+        1213,
+        1216
+      ],
+      "source_declaration_count": 133,
+      "target_count": 40,
+      "target_indices": [
+        1123,
+        1124,
+        1125,
+        1128,
+        1129,
+        1130,
+        1131,
+        1132,
+        1133,
+        1134,
+        1135,
+        1136,
+        1137,
+        1138,
+        1139,
+        1140,
+        1141,
+        1142,
+        1143,
+        1144,
+        1145,
+        1146,
+        1147,
+        1148,
+        1149,
+        1150,
+        1153,
+        1154,
+        1155,
+        1156,
+        1157,
+        1158,
+        1159,
+        1160,
+        1161,
+        1162,
+        1163,
+        1164,
+        1165,
+        1166
+      ],
+      "target_symbols": [
+        "IddField",
+        "IddField.__eq__",
+        "IddField.__init__",
+        "IddField.default",
+        "IddField.external_list",
+        "IddField.from_text",
+        "IddField.is_autocalculatable",
+        "IddField.is_autosizable",
+        "IddField.is_deprecated",
+        "IddField.is_extensible",
+        "IddField.is_required",
+        "IddField.is_retaincase",
+        "IddField.key",
+        "IddField.maximum",
+        "IddField.memo",
+        "IddField.minimum",
+        "IddField.name",
+        "IddField.object_list",
+        "IddField.reference",
+        "IddField.reference_cls",
+        "IddField.referenceable",
+        "IddField.type",
+        "IddField.unit",
+        "IddObject",
+        "IddObject.__eq__",
+        "IddObject.__init__",
+        "IddObject.begin_extensible",
+        "IddObject.default",
+        "IddObject.extensible",
+        "IddObject.format",
+        "IddObject.from_text",
+        "IddObject.idd_index",
+        "IddObject.is_obsolete",
+        "IddObject.is_required",
+        "IddObject.is_unique",
+        "IddObject.memo",
+        "IddObject.min_fields",
+        "IddObject.name",
+        "IddObject.reference",
+        "IddObject.required_fields"
+      ]
+    },
+    "coverage_by_symbol": {
+      "IddField": "imugi-idd-definitions-core.field-class-and-construction",
+      "IddField.__eq__": "imugi-idd-definitions-core.field-equality",
+      "IddField.__init__": "imugi-idd-definitions-core.field-class-and-construction",
+      "IddField.default": "imugi-idd-definitions-core.field-properties",
+      "IddField.external_list": "imugi-idd-definitions-core.field-properties",
+      "IddField.from_text": "imugi-idd-definitions-core.field-fragment-parsing",
+      "IddField.is_autocalculatable": "imugi-idd-definitions-core.field-properties",
+      "IddField.is_autosizable": "imugi-idd-definitions-core.field-properties",
+      "IddField.is_deprecated": "imugi-idd-definitions-core.field-properties",
+      "IddField.is_extensible": "imugi-idd-definitions-core.field-properties",
+      "IddField.is_required": "imugi-idd-definitions-core.field-properties",
+      "IddField.is_retaincase": "imugi-idd-definitions-core.field-properties",
+      "IddField.key": "imugi-idd-definitions-core.field-properties",
+      "IddField.maximum": "imugi-idd-definitions-core.field-properties",
+      "IddField.memo": "imugi-idd-definitions-core.field-properties",
+      "IddField.minimum": "imugi-idd-definitions-core.field-properties",
+      "IddField.name": "imugi-idd-definitions-core.field-properties",
+      "IddField.object_list": "imugi-idd-definitions-core.field-properties",
+      "IddField.reference": "imugi-idd-definitions-core.field-properties",
+      "IddField.reference_cls": "imugi-idd-definitions-core.field-properties",
+      "IddField.referenceable": "imugi-idd-definitions-core.field-properties",
+      "IddField.type": "imugi-idd-definitions-core.field-properties",
+      "IddField.unit": "imugi-idd-definitions-core.field-properties",
+      "IddObject": "imugi-idd-definitions-core.object-class-and-construction",
+      "IddObject.__eq__": "imugi-idd-definitions-core.object-equality",
+      "IddObject.__init__": "imugi-idd-definitions-core.object-class-and-construction",
+      "IddObject.begin_extensible": "imugi-idd-definitions-core.object-properties",
+      "IddObject.default": "imugi-idd-definitions-core.object-properties",
+      "IddObject.extensible": "imugi-idd-definitions-core.object-properties",
+      "IddObject.format": "imugi-idd-definitions-core.object-properties",
+      "IddObject.from_text": "imugi-idd-definitions-core.object-fragment-parsing",
+      "IddObject.idd_index": "imugi-idd-definitions-core.object-properties",
+      "IddObject.is_obsolete": "imugi-idd-definitions-core.object-properties",
+      "IddObject.is_required": "imugi-idd-definitions-core.object-properties",
+      "IddObject.is_unique": "imugi-idd-definitions-core.object-properties",
+      "IddObject.memo": "imugi-idd-definitions-core.object-properties",
+      "IddObject.min_fields": "imugi-idd-definitions-core.object-properties",
+      "IddObject.name": "imugi-idd-definitions-core.object-properties",
+      "IddObject.reference": "imugi-idd-definitions-core.object-properties",
+      "IddObject.required_fields": "imugi-idd-definitions-core.object-properties"
+    },
+    "evidence_contract": {
+      "active_energyplus_process_claim": false,
+      "exact_cpython_behavior_oracle": true,
+      "expected_receipt_count": 40,
+      "full_energyplus_idd_support_hash_pinned": true,
+      "native_runtime_executed_by_python_oracle": false,
+      "path_independent_relocated_import": true,
+      "target_coverage_complete": true
+    },
+    "expectations": {
+      "IddField": {
+        "adaptation": "typed-immutable-field-definition-1123",
+        "assertion_id": "imugi-idd-definitions-core-1123-209ee073",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition"
+      },
+      "IddField.__eq__": {
+        "adaptation": "field-by-field-structural-parity-without-value-equality-override-1124",
+        "assertion_id": "imugi-idd-definitions-core-1124-cc926b4c",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition public properties (structural comparison)"
+      },
+      "IddField.__init__": {
+        "adaptation": "token-position-kind-explicit-validated-construction-1125",
+        "assertion_id": "imugi-idd-definitions-core-1125-e4303f76",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition(...) constructor"
+      },
+      "IddField.default": {
+        "adaptation": "lossless-string-default-instead-of-legacy-numeric-coercion-1128",
+        "assertion_id": "imugi-idd-definitions-core-1128-4748d03a",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.DefaultValue"
+      },
+      "IddField.external_list": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1129-d3f9ed1f",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ExternalList"
+      },
+      "IddField.from_text": {
+        "adaptation": "full-schema-parser-route-instead-of-field-fragment-parser-1130",
+        "assertion_id": "imugi-idd-definitions-core-1130-2b6d880a",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0].Fields[0]"
+      },
+      "IddField.is_autocalculatable": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1131-d0349be4",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsAutocalculatable"
+      },
+      "IddField.is_autosizable": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1132-a5aa4b09",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsAutosizable"
+      },
+      "IddField.is_deprecated": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1133-83922a08",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsDeprecated"
+      },
+      "IddField.is_extensible": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1134-6f8cd3f1",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.BeginsExtensible"
+      },
+      "IddField.is_required": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1135-b64e2145",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsRequired"
+      },
+      "IddField.is_retaincase": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1136-46f42932",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.RetainsCase"
+      },
+      "IddField.key": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1137-b2a62552",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Choices"
+      },
+      "IddField.maximum": {
+        "adaptation": "explicit-inclusive-bound-instead-of-nextafter-sentinel-1138",
+        "assertion_id": "imugi-idd-definitions-core-1138-0fc0df49",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Maximum"
+      },
+      "IddField.memo": {
+        "adaptation": "ordered-note-list-instead-of-formatted-sentence-string-1139",
+        "assertion_id": "imugi-idd-definitions-core-1139-203215fc",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Notes"
+      },
+      "IddField.minimum": {
+        "adaptation": "explicit-inclusive-bound-instead-of-nextafter-sentinel-1140",
+        "assertion_id": "imugi-idd-definitions-core-1140-04d44d1d",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Minimum"
+      },
+      "IddField.name": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1141-dc05a34b",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Name"
+      },
+      "IddField.object_list": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1142-f35f045c",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ObjectLists"
+      },
+      "IddField.reference": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1143-ecceb577",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.References"
+      },
+      "IddField.reference_cls": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1144-704213be",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ReferenceClassNames"
+      },
+      "IddField.referenceable": {
+        "adaptation": "schema-projection-instead-of-mutable-backreference-list-1145",
+        "assertion_id": "imugi-idd-definitions-core-1145-4695751c",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects projection over IddFieldDefinition.References"
+      },
+      "IddField.type": {
+        "adaptation": "closed-idd-data-type-enum-with-kind-derived-default-1146",
+        "assertion_id": "imugi-idd-definitions-core-1146-5b7e3d73",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.DataType"
+      },
+      "IddField.unit": {
+        "adaptation": "separate-units-ip-units-and-units-based-on-field-metadata-1147",
+        "assertion_id": "imugi-idd-definitions-core-1147-59edda63",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Units and UnitsBasedOnField"
+      },
+      "IddObject": {
+        "adaptation": "typed-immutable-object-definition-1148",
+        "assertion_id": "imugi-idd-definitions-core-1148-8a75cdbc",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition"
+      },
+      "IddObject.__eq__": {
+        "adaptation": "field-by-field-structural-parity-without-value-equality-override-1149",
+        "assertion_id": "imugi-idd-definitions-core-1149-355edc7a",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition public properties (structural comparison)"
+      },
+      "IddObject.__init__": {
+        "adaptation": "ordered-consecutive-field-definition-construction-1150",
+        "assertion_id": "imugi-idd-definitions-core-1150-a85878fd",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition(...) constructor"
+      },
+      "IddObject.begin_extensible": {
+        "adaptation": "resolved-zero-based-extensible-start-index-1153",
+        "assertion_id": "imugi-idd-definitions-core-1153-cc944d8e",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleStartIndex"
+      },
+      "IddObject.default": {
+        "adaptation": "field-default-projection-instead-of-cached-list-1154",
+        "assertion_id": "imugi-idd-definitions-core-1154-ceed741c",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over DefaultValue"
+      },
+      "IddObject.extensible": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1155-656dae5a",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleGroupSize"
+      },
+      "IddObject.format": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1156-54aa570d",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Format"
+      },
+      "IddObject.from_text": {
+        "adaptation": "full-schema-parser-route-instead-of-object-fragment-parser-1157",
+        "assertion_id": "imugi-idd-definitions-core-1157-e55a8f89",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0]"
+      },
+      "IddObject.idd_index": {
+        "adaptation": "ordered-field-token-projection-1158",
+        "assertion_id": "imugi-idd-definitions-core-1158-b7a1f5de",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over Token"
+      },
+      "IddObject.is_obsolete": {
+        "adaptation": "obsolete-message-preservation-instead-of-boolean-only-1159",
+        "assertion_id": "imugi-idd-definitions-core-1159-b654e577",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ObsoleteMessage"
+      },
+      "IddObject.is_required": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1160-b64e2145",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.IsRequired"
+      },
+      "IddObject.is_unique": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1161-9f99bd10",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.IsUnique"
+      },
+      "IddObject.memo": {
+        "adaptation": "ordered-memo-list-instead-of-formatted-sentence-string-1162",
+        "assertion_id": "imugi-idd-definitions-core-1162-203215fc",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Memo"
+      },
+      "IddObject.min_fields": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1163-1821fd04",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.MinimumFields"
+      },
+      "IddObject.name": {
+        "adaptation": "not_applicable",
+        "assertion_id": "imugi-idd-definitions-core-1164-dc05a34b",
+        "classification": "equivalent",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Name"
+      },
+      "IddObject.reference": {
+        "adaptation": "additional-directive-preservation-for-reference-class-name-1165",
+        "assertion_id": "imugi-idd-definitions-core-1165-ecceb577",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.AdditionalDirectives"
+      },
+      "IddObject.required_fields": {
+        "adaptation": "required-field-definition-projection-instead-of-cached-name-list-1166",
+        "assertion_id": "imugi-idd-definitions-core-1166-b01c46a0",
+        "classification": "exception",
+        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over IsRequired"
+      }
+    },
+    "native_routes": {
+      "IddField": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition",
+      "IddField.__eq__": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition public properties (structural comparison)",
+      "IddField.__init__": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition(...) constructor",
+      "IddField.default": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.DefaultValue",
+      "IddField.external_list": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ExternalList",
+      "IddField.from_text": "GonieGonie.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0].Fields[0]",
+      "IddField.is_autocalculatable": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsAutocalculatable",
+      "IddField.is_autosizable": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsAutosizable",
+      "IddField.is_deprecated": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsDeprecated",
+      "IddField.is_extensible": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.BeginsExtensible",
+      "IddField.is_required": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsRequired",
+      "IddField.is_retaincase": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.RetainsCase",
+      "IddField.key": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Choices",
+      "IddField.maximum": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Maximum",
+      "IddField.memo": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Notes",
+      "IddField.minimum": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Minimum",
+      "IddField.name": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Name",
+      "IddField.object_list": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ObjectLists",
+      "IddField.reference": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.References",
+      "IddField.reference_cls": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ReferenceClassNames",
+      "IddField.referenceable": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects projection over IddFieldDefinition.References",
+      "IddField.type": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.DataType",
+      "IddField.unit": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Units and UnitsBasedOnField",
+      "IddObject": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition",
+      "IddObject.__eq__": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition public properties (structural comparison)",
+      "IddObject.__init__": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition(...) constructor",
+      "IddObject.begin_extensible": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleStartIndex",
+      "IddObject.default": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over DefaultValue",
+      "IddObject.extensible": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleGroupSize",
+      "IddObject.format": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Format",
+      "IddObject.from_text": "GonieGonie.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0]",
+      "IddObject.idd_index": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over Token",
+      "IddObject.is_obsolete": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ObsoleteMessage",
+      "IddObject.is_required": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.IsRequired",
+      "IddObject.is_unique": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.IsUnique",
+      "IddObject.memo": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Memo",
+      "IddObject.min_fields": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.MinimumFields",
+      "IddObject.name": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Name",
+      "IddObject.reference": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.AdditionalDirectives",
+      "IddObject.required_fields": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over IsRequired"
+    },
+    "runtime_signatures": {
+      "IddField": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.imugi",
+        "qualname": "IddField",
+        "signature": "(*, name='', memo='', unit='', is_required=False, is_extensible=False, is_deprecated=False, is_autosizable=False, is_autocalculatable=False, default=None, type=None, key=[], object_list=[], external_list=None, minimum=None, maximum=None, is_retaincase=False, reference=[], reference_cls='') -> 'None'"
+      },
+      "IddField.__eq__": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "IddField.__eq__",
+        "signature": "(self, other: \"'IddField'\") -> 'bool'"
+      },
+      "IddField.__init__": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "IddField.__init__",
+        "signature": "(self, *, name='', memo='', unit='', is_required=False, is_extensible=False, is_deprecated=False, is_autosizable=False, is_autocalculatable=False, default=None, type=None, key=[], object_list=[], external_list=None, minimum=None, maximum=None, is_retaincase=False, reference=[], reference_cls='') -> 'None'"
+      },
+      "IddField.default": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.default",
+        "signature": "(self) -> 'int | float | str'"
+      },
+      "IddField.external_list": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.external_list",
+        "signature": "(self) -> 'str'"
+      },
+      "IddField.from_text": {
+        "abstract": false,
+        "binding": "classmethod",
+        "kind": "function",
+        "qualname": "IddField.from_text",
+        "signature": "(cls, text: 'str') -> 'IddField'"
+      },
+      "IddField.is_autocalculatable": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.is_autocalculatable",
+        "signature": "(self) -> 'bool'"
+      },
+      "IddField.is_autosizable": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.is_autosizable",
+        "signature": "(self) -> 'bool'"
+      },
+      "IddField.is_deprecated": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.is_deprecated",
+        "signature": "(self) -> 'bool'"
+      },
+      "IddField.is_extensible": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.is_extensible",
+        "signature": "(self) -> 'bool'"
+      },
+      "IddField.is_required": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.is_required",
+        "signature": "(self) -> 'bool'"
+      },
+      "IddField.is_retaincase": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.is_retaincase",
+        "signature": "(self) -> 'bool'"
+      },
+      "IddField.key": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.key",
+        "signature": "(self) -> 'list'"
+      },
+      "IddField.maximum": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.maximum",
+        "signature": "(self) -> 'int | float'"
+      },
+      "IddField.memo": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.memo",
+        "signature": "(self) -> 'str'"
+      },
+      "IddField.minimum": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.minimum",
+        "signature": "(self) -> 'int | float'"
+      },
+      "IddField.name": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.name",
+        "signature": "(self) -> 'str'"
+      },
+      "IddField.object_list": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.object_list",
+        "signature": "(self) -> 'str'"
+      },
+      "IddField.reference": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.reference",
+        "signature": "(self) -> 'str'"
+      },
+      "IddField.reference_cls": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.reference_cls",
+        "signature": "(self) -> 'str'"
+      },
+      "IddField.referenceable": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.referenceable",
+        "signature": "(self) -> 'list[dict[str, str]]'"
+      },
+      "IddField.type": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.type",
+        "signature": "(self) -> 'str'"
+      },
+      "IddField.unit": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddField.unit",
+        "signature": "(self) -> 'str'"
+      },
+      "IddObject": {
+        "abstract": false,
+        "kind": "class",
+        "module": "idragon.imugi",
+        "qualname": "IddObject",
+        "signature": "(*args: 'tuple[IddField]', name='', index=None, memo='', is_unique=False, is_required=False, is_obsolete=False, min_fields=None, extensible=None, begin_extensible=None, format=None, reference=None) -> 'None'"
+      },
+      "IddObject.__eq__": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "IddObject.__eq__",
+        "signature": "(self, other: \"'IddObject'\") -> 'bool'"
+      },
+      "IddObject.__init__": {
+        "abstract": false,
+        "kind": "function",
+        "qualname": "IddObject.__init__",
+        "signature": "(self, *args: 'tuple[IddField]', name='', index=None, memo='', is_unique=False, is_required=False, is_obsolete=False, min_fields=None, extensible=None, begin_extensible=None, format=None, reference=None) -> 'None'"
+      },
+      "IddObject.begin_extensible": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.begin_extensible",
+        "signature": "(self) -> 'bool'"
+      },
+      "IddObject.default": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.default",
+        "signature": "(self) -> 'list'"
+      },
+      "IddObject.extensible": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.extensible",
+        "signature": "(self) -> 'bool'"
+      },
+      "IddObject.format": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.format",
+        "signature": "(self) -> 'str'"
+      },
+      "IddObject.from_text": {
+        "abstract": false,
+        "binding": "classmethod",
+        "kind": "function",
+        "qualname": "IddObject.from_text",
+        "signature": "(cls, text: 'str') -> 'IddObject'"
+      },
+      "IddObject.idd_index": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.idd_index",
+        "signature": "(self) -> 'str'"
+      },
+      "IddObject.is_obsolete": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.is_obsolete",
+        "signature": "(self) -> 'bool'"
+      },
+      "IddObject.is_required": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.is_required",
+        "signature": "(self) -> 'bool'"
+      },
+      "IddObject.is_unique": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.is_unique",
+        "signature": "(self) -> 'bool'"
+      },
+      "IddObject.memo": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.memo",
+        "signature": "(self) -> 'str'"
+      },
+      "IddObject.min_fields": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.min_fields",
+        "signature": "(self) -> 'int'"
+      },
+      "IddObject.name": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.name",
+        "signature": "(self) -> 'str'"
+      },
+      "IddObject.reference": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.reference",
+        "signature": "(self) -> 'str'"
+      },
+      "IddObject.required_fields": {
+        "abstract": false,
+        "kind": "property",
+        "qualname": "IddObject.required_fields",
+        "signature": "(self) -> 'list[str]'"
+      }
+    }
+  },
+  "deferred_receipts": [
+    {
+      "body_hash": "sha256:a331715b6d5f64193dad7fd49acbab373f1d1310d4cbe9d9e30759bdab31efd3",
+      "inventory_index": 1095,
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:e3a7ddb9d9d51d260a53f73b3da77a58feb27d162ca1575851aa25958c784946",
+      "symbol": "IDD",
+      "symbol_hash": "sha256:394fdc55f48dd088d8aca9e08ad1551904556297b21f3df006fd2ff60380300b"
+    },
+    {
+      "body_hash": "sha256:6f11b7dc550e0383b1114046951a734d8b69669d8f83e14da8c0727184b79203",
+      "inventory_index": 1097,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:cbb2586573fd54b50d5a2684c80f1099742ecbd1a021db3a03a849351dca3c67",
+      "symbol": "IDD.__init__",
+      "symbol_hash": "sha256:369f30e0e83a3ce8b91e87e703ef1c78ec5eb0c05dd96b6a27e3a5db851f6095"
+    },
+    {
+      "body_hash": "sha256:69174cbf0340293fba21917e167e235a6840d620b71c88459a38439fc261e4cd",
+      "inventory_index": 1100,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:86a2873354f7cdb7fb7f6753ce26828fe749852ccebc56402590ae7c97506396",
+      "symbol": "IDD.load",
+      "symbol_hash": "sha256:3b6538ba505d18de08c5ff0ee5b2c49557f19e065cdea220fba5ed5643183144"
+    },
+    {
+      "body_hash": "sha256:eb4917abc62d60472f3949d18b32cd9daef3dbe0c81c7962cc52b6bc9a5f93fd",
+      "inventory_index": 1101,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:8ed5c1b4e5e30bb2cc3668cb9411035f7b1775d5ae53fd2525e6e02f6b514837",
+      "symbol": "IDD.read_idd",
+      "symbol_hash": "sha256:0b48b62a5aea8fb7598aa5724c8cf90046677d7e016952c9aafccda740f8024f"
+    },
+    {
+      "body_hash": "sha256:7a29cb6f28c133581ad9682dc2767cb4bb82cb79565c652c0a0fc17ecfbf8090",
+      "inventory_index": 1102,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:1dccc6a04e28476cc77c415315d361e8f0b8a70ed13f673ccaeca2bf23654b3c",
+      "symbol": "IDD.reference_map_cls",
+      "symbol_hash": "sha256:1772eedce3236a508206b04d6cacb474b09446e346510798350b636738777b50"
+    },
+    {
+      "body_hash": "sha256:9069a0b6720c699f76cd94ac246c18a1b5d33e61e0ff9d6d5ee94b42d0f6bb72",
+      "inventory_index": 1103,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f4544b82376ce5a9e9e03a53ffa4dcf14ac6234608672b2d6e3b37cfeb23fb88",
+      "symbol": "IDD.reference_map_obj",
+      "symbol_hash": "sha256:9cf45886e630dd02f7a96ca3db1bf5eb1ea411487771944396cf6df09ed1cba1"
+    },
+    {
+      "body_hash": "sha256:85a840eac573caf4674c2e69a26332209b7e5ca3b0b97f4ca41619febfb32b80",
+      "inventory_index": 1104,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f4544b82376ce5a9e9e03a53ffa4dcf14ac6234608672b2d6e3b37cfeb23fb88",
+      "symbol": "IDD.referenced_map_obj",
+      "symbol_hash": "sha256:ae43213f9ec6c540cdcaac73160055cff676abcc550bac3ba98edf453d327f88"
+    },
+    {
+      "body_hash": "sha256:44a2634873cfa4d4cd63e1432ebfab176e6a6ec4775b8d356992eeff225877ec",
+      "inventory_index": 1105,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:3600cccc11bc6800f262c4e5f0aacb4e7f2bf7ca486cbc455c0376a25e228afd",
+      "symbol": "IDD.required_objects",
+      "symbol_hash": "sha256:3bdf9b9f1261b152ae1ba91e42e96844a2e5768922e4978f7048296247fcef2a"
+    },
+    {
+      "body_hash": "sha256:3cbf66831935570d30aa016c7807b261008cdff6f01f6fa1fdbc3756cfd6cae5",
+      "inventory_index": 1106,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:9ec615141a0af53bb8a3d5abd9d7f5e4bcc5db7a96f678df2eb0546ed4fa1138",
+      "symbol": "IDD.to_pickle",
+      "symbol_hash": "sha256:78d65e39461eccc962e7389e5e0dccfa98f75268c225e280ecf3d02dc4e9581b"
+    },
+    {
+      "body_hash": "sha256:35096658d33a57b9b7d4ecd346d99d4aec2d4646673a1f73ec476d97c1c42e72",
+      "inventory_index": 1107,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f744c3c6a5f0aa81439964037cebfd8aee40690f9359b705f202bc864e925682",
+      "symbol": "IDD.version",
+      "symbol_hash": "sha256:648c3654122ab1f1e2bb8a23bcf79105c8067f09b687259cdec9bf9319f06dcc"
+    },
+    {
+      "body_hash": "sha256:095afbd4670a13d1db9ab176dad524e687718ad7cd7f3c30f6096d6591c18f30",
+      "inventory_index": 1108,
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:1b45f935e16df3171a6c7f92c63741eee4240d5230907a64123844b294f4249e",
+      "symbol": "IDF",
+      "symbol_hash": "sha256:3b57fb0ae1ece36517350784c4c56c534df083858c4a0d4010df4b3e253ccc16"
+    },
+    {
+      "body_hash": "sha256:9d83a3d39a61559a3852dba34aab36795da03a3b075c62cbed97396e20cafd68",
+      "inventory_index": 1109,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:dd3ae94f9f8f16123f4e760a5119b7cd629196fa008737f0032108c56de49623",
+      "symbol": "IDF.__init__",
+      "symbol_hash": "sha256:c84d94847b8bda65845b0e3de19d958d00b4a4fc193b49a9284a414e797c4b5e"
+    },
+    {
+      "body_hash": "sha256:8ecf880627e9064cbbf34504857631e24cb115000d662307c3a045558aedf3e6",
+      "inventory_index": 1112,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IDF.__str__",
+      "symbol_hash": "sha256:b41fbee07064a122956f6b62f98d80d654cff6371a7b6535f254f5686cad6c30"
+    },
+    {
+      "body_hash": "sha256:39e9edf70ac61864e744233148a4b117a50a32947d309b0d18583fd753c39c13",
+      "inventory_index": 1113,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:9e7308ada71ac89aba30a86e6fa556017559661b8a81955d41eefe3985665e8f",
+      "symbol": "IDF.append",
+      "symbol_hash": "sha256:76a5dc3bfc643024fd6eae23754a02c59860ca8f565941bf6cbace0eb6d452c4"
+    },
+    {
+      "body_hash": "sha256:9b8d81739e15461b8081e93a1dd5b063c001397bccc90c26f81ad8ddc19564bf",
+      "inventory_index": 1114,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:3a314d36570f07b58c55592656925e828faa3532f54755e501d07fa1f3242257",
+      "symbol": "IDF.check_validity",
+      "symbol_hash": "sha256:0d2a4fc88a16ed213a4c7b8ee73fd864c6b2113f8894d97c1248e2aa77ab9f6c"
+    },
+    {
+      "body_hash": "sha256:33fae861b8b39ff274786d1870624fdb6a05ac50062dd609154e88bc4a70b7f4",
+      "inventory_index": 1115,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:ca6c409b2a95e8fd9dd599ffeec882c7f2e02db19058a3fe6f3689616f6e1bd4",
+      "symbol": "IDF.default_filename",
+      "symbol_hash": "sha256:ff88765dd7e9e8cefab195959a9556c51ccfab563cb91c02584b05d6c8601f27"
+    },
+    {
+      "body_hash": "sha256:8992f1bbebf99bebcd39bb6a5db4aeca52faadd9c9e90e7c8fa80f74e041c4f0",
+      "inventory_index": 1116,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:c69ccb5096ffe0791d380355fb7daef0a5b1093dfaa4e866558a2d038c673c1c",
+      "symbol": "IDF.idd",
+      "symbol_hash": "sha256:2df95cae787c062c618a6c1e8ea4b313a986a0d09460818ec186eab4a35d4c5c"
+    },
+    {
+      "body_hash": "sha256:a37b9df9bcbdf66f050a320675300a341afe09497e9dfdd300d71af1fa3bd8be",
+      "inventory_index": 1118,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:801e5bc38f163726472a10ed09349578792bb767322bc9749edab2175a1e9a62",
+      "symbol": "IDF.read_idf",
+      "symbol_hash": "sha256:45215a15ff8a479c98db581fabe04a97428f8812d7c54428e96f166b60ec841a"
+    },
+    {
+      "body_hash": "sha256:98be34507bfa16f56f1d04ef1f74bc3187a48550208bc4582f48700ab0c68a20",
+      "inventory_index": 1119,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:be0b68b45032a4b32386ee793690fb9996e9e14902bf38d08bd7ac21055c02ad",
+      "symbol": "IDF.run",
+      "symbol_hash": "sha256:7eabf8a58d7336cafc8bf3bb697a921633640d99df9d8aeae26212f9cd1e0c5a"
+    },
+    {
+      "body_hash": "sha256:35096658d33a57b9b7d4ecd346d99d4aec2d4646673a1f73ec476d97c1c42e72",
+      "inventory_index": 1121,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f744c3c6a5f0aa81439964037cebfd8aee40690f9359b705f202bc864e925682",
+      "symbol": "IDF.version",
+      "symbol_hash": "sha256:648c3654122ab1f1e2bb8a23bcf79105c8067f09b687259cdec9bf9319f06dcc"
+    },
+    {
+      "body_hash": "sha256:3a65771c4e8da1db82f00d562b6891878a1ae217c337a235b8e5e13a87fff818",
+      "inventory_index": 1122,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:df0092f100c49630b076c7a755edc95de65736565c6d70daf6f0e5607503429d",
+      "symbol": "IDF.write",
+      "symbol_hash": "sha256:5624d4fa979fb6ee8e92a1f230b9ff5a9b77e2cf9cc38b98375046f62824dee2"
+    },
+    {
+      "body_hash": "sha256:a0a83b39119ef2964b92b397cabf63744b733e2f4a830d7e00cd64a0af4dbf8a",
+      "inventory_index": 1167,
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4eabeee642652a4c4d911c78969ff0298e0aba87d11c9453ae6240134001b3d7",
+      "symbol": "IdfObject",
+      "symbol_hash": "sha256:923e8b98b7404f2913c39c209e69107afef566f97e4fea01b63317999f146460"
+    },
+    {
+      "body_hash": "sha256:d90fc29259ce2c6ecd7fab0b7755edd2f622786b9c2760d7224d1e30efb6a523",
+      "inventory_index": 1170,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:aed7d445be193894f2e6250b16bcbcd36900b1e2b90aab783e1c1d417dc2f3fa",
+      "symbol": "IdfObject.__getitem__",
+      "symbol_hash": "sha256:1d95c9caa0fe30516384250da39a2287bde86a556871f48c139177bc111ffd4f"
+    },
+    {
+      "body_hash": "sha256:3cee99666a43fe306945e12854d539f05e567f81f1b63f395c770f4ce65495db",
+      "inventory_index": 1171,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:cfa54b7b00483cd80560e896962d233ae17611c0653ce83ff1d91b3767ac8a81",
+      "symbol": "IdfObject.__init__",
+      "symbol_hash": "sha256:d09e061e9b917042b2a3b44881a8f185cae3c9ab1b1076883916a23f0a6b8181"
+    },
+    {
+      "body_hash": "sha256:a3837afc4654e58fc69df47db7582f30482c95e7b3eeda110926cc02029920fa",
+      "inventory_index": 1173,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:ed3a3c1d3385df2a6cd81dd494c41a9fc22832ff94a603b0d082b9ac5d64fa31",
+      "symbol": "IdfObject.__setitem__",
+      "symbol_hash": "sha256:9e35e079929afd51bffbd32897beb200c7d52269e26eca169b1d04d57d84d1fe"
+    },
+    {
+      "body_hash": "sha256:a1f3fc183ed825b6c04d961b0533b19e565b3666d61b4fc2d8231c7774ceacc8",
+      "inventory_index": 1174,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IdfObject.__str__",
+      "symbol_hash": "sha256:c106cbb369f7a75933c3074e0b7a5a19fe2fafff321ca6c75ae9e57b9f971718"
+    },
+    {
+      "body_hash": "sha256:393c6747c8f3cdbc176c0b48d55949a33468bf706cca3a1b16cfaf2194f49748",
+      "inventory_index": 1175,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:e7c25de703d93d42491700200460e1c4fb259910469f3ef46987b5d8085058ab",
+      "symbol": "IdfObject.check_field_validity",
+      "symbol_hash": "sha256:1200442edab0775369ebd081fdcfcda8dbc07d4807e69ef02fc75f24b5b10e9b"
+    },
+    {
+      "body_hash": "sha256:f6598e2bd7fd587b0bc597bcf4ee0c32ce39ef2a2fd03ac59c499a12675ef0ce",
+      "inventory_index": 1176,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:3a314d36570f07b58c55592656925e828faa3532f54755e501d07fa1f3242257",
+      "symbol": "IdfObject.check_validity",
+      "symbol_hash": "sha256:1df929f199087462fbc42dca6de3d680556c53ff71d34d67f4a00f7168ba56f1"
+    },
+    {
+      "body_hash": "sha256:8fa41bcc18d567bfd9f7f7fe51c8e42e404e9340c81029141bccf1c2e141ac84",
+      "inventory_index": 1177,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:20950f3ec678073bf52f86af83cb4b73eafaf4020e9d3ae89f96cd7e6413d67d",
+      "symbol": "IdfObject.choices",
+      "symbol_hash": "sha256:519485ef35ce848372945b6e62a9c2b833965c1fa1a8fe0278fb1bd989ee62ae"
+    },
+    {
+      "body_hash": "sha256:e44c427575897a5cc37d29da5f47da72296e9669deae79027aeada46f296da9d",
+      "inventory_index": 1178,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:9f85215b59f4b04ecab5c586c27c6ed7c2fb59dbfe53505a506f8e20136d6d8b",
+      "symbol": "IdfObject.ensure_validity",
+      "symbol_hash": "sha256:776f5dda560d26eac176ab6659d00b43d969bbf5d19a15ffc33b31d7df07c8ce"
+    },
+    {
+      "body_hash": "sha256:86b0958551a5269a19859bed5430cac8bc843201c258d683a91efabd4da9ff4f",
+      "inventory_index": 1179,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:34777efde458b6e7fb1005e983d98ad1fa37563ffb48b6cd15a2b9914d609a6d",
+      "symbol": "IdfObject.grandparent",
+      "symbol_hash": "sha256:2a48d91b401044a56b95b63655c48162c770f6a9bd01b5cbfef3db2f75ed7223"
+    },
+    {
+      "body_hash": "sha256:cc809bf66e9359730e9c2f1cfa50cd2e82406fb6e600e72b2a9c50655eb386c2",
+      "inventory_index": 1180,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IdfObject.has_parent",
+      "symbol_hash": "sha256:ef080548568039a631fbf6748fa9eb0eddae83d945f2930ad2d8ab706f8d8897"
+    },
+    {
+      "body_hash": "sha256:8992f1bbebf99bebcd39bb6a5db4aeca52faadd9c9e90e7c8fa80f74e041c4f0",
+      "inventory_index": 1181,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:3f12f5eb18ab411f4f999513a2bdf5d180ff726f02d93225e69a1430f125c364",
+      "symbol": "IdfObject.idd",
+      "symbol_hash": "sha256:c86632ef98a7d8d50a5d3b541a48c04413f14a7a7d31022919dfaf0acaba50d7"
+    },
+    {
+      "body_hash": "sha256:90d154ecc1ed0cc81b2c5435be3b3c2436931b0676c6a1b2c97512451d7dfce5",
+      "inventory_index": 1182,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:ef32e4e0bd14b15f080e5d62148de4ed15fd993c5ee689360e78343eb2be00fa",
+      "symbol": "IdfObject.parent",
+      "symbol_hash": "sha256:42cae948f6b910a8aa6eccaa4bff7915c3eb625371bb9468a522d0fdd8d6f24f"
+    },
+    {
+      "body_hash": "sha256:2e154ef645c399a97507193a3ee3fa623563d47c1bdad1cdd1fda45d4feff1f0",
+      "inventory_index": 1183,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:61f429ecf1e360fb7fb37c1c145f93df0a8a42b71de1b8a64d5d2a94723fe159",
+      "symbol": "IdfObject.rename",
+      "symbol_hash": "sha256:a00419ab1bef9b421414b0d631602075a52958819b10b2d8499da41364d0ce16"
+    },
+    {
+      "body_hash": "sha256:df8705d2384e567eca1d38e33b290db00cd99e7a354609db38235c8156bcec52",
+      "inventory_index": 1190,
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:6a26aa45622cae3bb35bf7a1aa84239e6abcd65391130a68aaecb3a5f744a44a",
+      "symbol": "IdfObjectList",
+      "symbol_hash": "sha256:4b3a42871d244525dad54064f3163631c7241b870e04c16336acd6909512d824"
+    },
+    {
+      "body_hash": "sha256:343ffa080328e0b2fb244312ac7eba3dbbad9579f16ad13ff6edc334151ddc1d",
+      "inventory_index": 1194,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:31340308e2c550a385d8d9bbfb75e79dbd8ea2eee80cc731ab663885d8d97745",
+      "symbol": "IdfObjectList.__getitem__",
+      "symbol_hash": "sha256:04ed31e575da6f0a1f0c71cc3e9fbd872b0696ed937f7355d730a9551d2c1dbb"
+    },
+    {
+      "body_hash": "sha256:142cb96a8afbef742980876ca5d3b5e410eb65487b356dcdc27d9131614ac78e",
+      "inventory_index": 1195,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:11a89996d3313cd353d6e237ced01a7d5ac9474899a9e4229d7a05f784e879a8",
+      "symbol": "IdfObjectList.__init__",
+      "symbol_hash": "sha256:0ba8255aca2e1ed7825e6456ee2027d1cd2e56f630a66ba3743f349ce1e36e36"
+    },
+    {
+      "body_hash": "sha256:dd4ddf26cb17a7547b4c7a1aeffa3d87f9e6173531b7efd862e0edffd6a9046e",
+      "inventory_index": 1197,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:97b79bf0aa7ecbc2e79baea1679a59137fbd86d2c0cce9c2a2aed3e06afbf065",
+      "symbol": "IdfObjectList.__setitem__",
+      "symbol_hash": "sha256:c359709ede5a363cc0c1bcb06198714888e6e39346d33cbbca7887416d33883b"
+    },
+    {
+      "body_hash": "sha256:3ab1a13d3f0ccfd076266544e35f82a950f24ea50ecb6f255510db531ff240b8",
+      "inventory_index": 1198,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IdfObjectList.__str__",
+      "symbol_hash": "sha256:f43cff6d764e37b0f92cba9991c6c250f2780f1170fd021acb23235fd73679d1"
+    },
+    {
+      "body_hash": "sha256:a4e949ba9d849987baace2641d8ecf378db7fc1bbb80a76c0ce4abb7f19ab2ce",
+      "inventory_index": 1199,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:92f724297489f0140324f032753f2ed103ea0e15f0f7b842a44cbca9e61be8f8",
+      "symbol": "IdfObjectList.append",
+      "symbol_hash": "sha256:9b83e8ed88e7550d8cad892932cef004957569c1ee0c386e2cbe6f33615dd320"
+    },
+    {
+      "body_hash": "sha256:435aa37576e0f24d0d7c4428901a1362bd144955ce5fa330ce6d79c93db28d4a",
+      "inventory_index": 1201,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "IdfObjectList.check_validity",
+      "symbol_hash": "sha256:1da2f24305cb8c190a7fe5e9d554ba2007310db6f51a35ebdf517ce95a19796e"
+    },
+    {
+      "body_hash": "sha256:ea66782a413e464fbfc7842ad8bbb210a52cd52a25214dcab1e6aaad1620dfad",
+      "inventory_index": 1203,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:9f85215b59f4b04ecab5c586c27c6ed7c2fb59dbfe53505a506f8e20136d6d8b",
+      "symbol": "IdfObjectList.ensure_validity",
+      "symbol_hash": "sha256:7c164fd72e797db5dc15cf66c309c52584184157dfd8af15d0fdefad5e7cdd08"
+    },
+    {
+      "body_hash": "sha256:5fb18e40c21f0ba6e0815466c6ced6ae2986905ce096d81b373e2a594f1891b1",
+      "inventory_index": 1204,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:636cf3ce72c5b8fab425c494f6300a642ea6dcc1bbec8f0653a7746285088cb8",
+      "symbol": "IdfObjectList.fieldnames",
+      "symbol_hash": "sha256:61fda4e421328534378d69da459edf84223c61fbd9308a943a27b5606d297134"
+    },
+    {
+      "body_hash": "sha256:385d070fdbfe8de59c470cdfa21cac5380492053cc644eb002fa8c4b60f2277b",
+      "inventory_index": 1205,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:d12d1907bd1471b5b363ddcae2839c34983e4d760cf668b638f2ecaf25f0144f",
+      "symbol": "IdfObjectList.get_fields",
+      "symbol_hash": "sha256:10365edcd1414b192880de0df98aefc9a645ee8aa9450e1aee7aba480ce25165"
+    },
+    {
+      "body_hash": "sha256:0a408f83790574f7668b12005d1d76ebba7f8bf44477f456365d207d8ff4d061",
+      "inventory_index": 1206,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IdfObjectList.has_name",
+      "symbol_hash": "sha256:11099959227efbbabdd38815778051908e21aa198a626d08e80c27c6bd3e0e8b"
+    },
+    {
+      "body_hash": "sha256:cc809bf66e9359730e9c2f1cfa50cd2e82406fb6e600e72b2a9c50655eb386c2",
+      "inventory_index": 1207,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IdfObjectList.has_parent",
+      "symbol_hash": "sha256:ef080548568039a631fbf6748fa9eb0eddae83d945f2930ad2d8ab706f8d8897"
+    },
+    {
+      "body_hash": "sha256:8992f1bbebf99bebcd39bb6a5db4aeca52faadd9c9e90e7c8fa80f74e041c4f0",
+      "inventory_index": 1208,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:3f12f5eb18ab411f4f999513a2bdf5d180ff726f02d93225e69a1430f125c364",
+      "symbol": "IdfObjectList.idd",
+      "symbol_hash": "sha256:c86632ef98a7d8d50a5d3b541a48c04413f14a7a7d31022919dfaf0acaba50d7"
+    },
+    {
+      "body_hash": "sha256:656aab72148cfe3f6b00bee9e7c291986a77cec013aa8d84e3f336dc85cd2933",
+      "inventory_index": 1209,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4bb01a2fc29e2e5ce5e367d9ca2882f516ba66cb8f48351399a9759c19c9feac",
+      "symbol": "IdfObjectList.insert",
+      "symbol_hash": "sha256:6acf1d7ba20ac6b5237e82d50e1c52ffc8faf57532ce02bfbce8eb104c4414a3"
+    },
+    {
+      "body_hash": "sha256:7dd9d34b8198da977867824b3d462a955ec3060ac0fbaf92480c81dd948216e3",
+      "inventory_index": 1210,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IdfObjectList.is_containor",
+      "symbol_hash": "sha256:fc71ddc4bbfdf0f3fa5766a5afafb8207229fb3791332251d24edc3044460d9c"
+    },
+    {
+      "body_hash": "sha256:84845994f07efa8952e23a9cebbaf77b1cac253af42c687668e2dde379a9e32c",
+      "inventory_index": 1211,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:3600cccc11bc6800f262c4e5f0aacb4e7f2bf7ca486cbc455c0376a25e228afd",
+      "symbol": "IdfObjectList.names",
+      "symbol_hash": "sha256:41302cfede9ceff50f51e8075a0ecbe32f3bec5ae9bfaa105eb7fc2765f8b4ff"
+    },
+    {
+      "body_hash": "sha256:90d154ecc1ed0cc81b2c5435be3b3c2436931b0676c6a1b2c97512451d7dfce5",
+      "inventory_index": 1212,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:131c484de0d232aa88a88fbda8080ea56bfb92dc6f8a05ed2ec9252f4ab34c67",
+      "symbol": "IdfObjectList.parent",
+      "symbol_hash": "sha256:f2aee26ad07b6cf1e6859c6234cad2be89520ef13a2135c6d99cb00ce50f5f1d"
+    },
+    {
+      "body_hash": "sha256:d1685b1a4e748905d0032f3812785992751aaaf72f25717c81ebcdc0ecf9a127",
+      "inventory_index": 1214,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:de1f3b29943ecb3f4f850d32e3514624a62c94424d0bedb4bc12a2d11edaa467",
+      "symbol": "IdfObjectList.set_fields",
+      "symbol_hash": "sha256:bca2bc7c8dc46628faf1a98e345a63f85e8002148e51ee5e9e5ba869d4f4fc78"
+    },
+    {
+      "body_hash": "sha256:0d58798932e89691395c56f49364c7bed4f55cdaf14aa7f860a3678a11055068",
+      "inventory_index": 1215,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4fdde76d59da37131688e8b5e32e6abb1b0f09d34bdf849782197d76e91a9d7d",
+      "symbol": "IdfObjectList.set_wwr",
+      "symbol_hash": "sha256:0544091527e65a91af5b260fc692dec59371d5ad7fcde2cb33869123fa01ecd2"
+    },
+    {
+      "body_hash": "sha256:921a63a3a05234e5b1c61efbee031114924c6587cc8d60b93d4932290c0b549a",
+      "inventory_index": 1217,
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:e633c5403d4cdb79e61dce1629bcde18dfa53570d02f9b7ad45c31c2114718e7",
+      "symbol": "InvalidFieldValue",
+      "symbol_hash": "sha256:73314d435f9b36d7d5b9e9904f7127db38fe6354c42217038b5242590d3749a9"
+    },
+    {
+      "body_hash": "sha256:921a63a3a05234e5b1c61efbee031114924c6587cc8d60b93d4932290c0b549a",
+      "inventory_index": 1218,
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:781b5de3e6da60e85defcef95f184775186e1e27b85b6b393926023e185f48d4",
+      "symbol": "InvalidParentManagement",
+      "symbol_hash": "sha256:a3c45a4a197c1131f740fe8786f9c5196d33c0c7c340fb4c241b610d0280899d"
+    },
+    {
+      "body_hash": "sha256:7d60a85cc8e7c7a13212e6c06d6f45056a84410c52b50b70749684ce367d948c",
+      "inventory_index": 1219,
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:732b7f7b2d88fdc3c1c6318e3941448a0a9bbdd325e13fb079f66a19174d74ac",
+      "symbol": "StaticIndexedDict",
+      "symbol_hash": "sha256:04e0277ab2b2bf6821c79f1e32476574f2d69abb44eb963b333c3b8e15008b4f"
+    },
+    {
+      "body_hash": "sha256:07bc294eb49fc53e43c63deea7ec9da591c3987510100dbf6ba56e75990399b5",
+      "inventory_index": 1220,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:da13304658e257f8023fafa320a918db94505e8d5d429b7a75bd112f51b404c4",
+      "symbol": "StaticIndexedDict.__getitem__",
+      "symbol_hash": "sha256:c84cef47bed071fab6ae9ce83de9226fc41c7cab2d9a10e48ae0bfa7afdacbea"
+    },
+    {
+      "body_hash": "sha256:84a75c344a4df7cbb2e51f06915b90f67cf1d5c6673d7b8096dab3b44eff3af4",
+      "inventory_index": 1221,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:7290ada1ad647abedbbab7401ebdbd2b5a0c73bf060820ccc2a66ba6543274c5",
+      "symbol": "StaticIndexedDict.__init__",
+      "symbol_hash": "sha256:303db42cbe721b5b6a7bee1cd59b9961901974c1606f0e93b3e0332b98606ed1"
+    },
+    {
+      "body_hash": "sha256:4e3c04eda95d774217a9674ea96eb6b33e734212b032c2ecca1a6b3f08e0a95a",
+      "inventory_index": 1222,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:e64f59838ea0f778cf272e5689976303984a205719ff42e0c42e10947bd476f0",
+      "symbol": "StaticIndexedDict.__setitem__",
+      "symbol_hash": "sha256:6a048e255b2328e1a87b74cd4fa82691cdd1da1eb99794b914f08dbdb45d5e85"
+    },
+    {
+      "body_hash": "sha256:d28c1220e491af51bd7dc55ce16b3f3d1c20b4dd04b4446bb8a1669b78c16c47",
+      "inventory_index": 1223,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4e8513bcc96fbcc31dc0bc70e972edbc5e1fae6934b5c09da7efbe3cafa00567",
+      "symbol": "StaticIndexedDict.allowed_keys",
+      "symbol_hash": "sha256:45e68e36a94154a7f798f2d291da1a73cf207234157d29af32684db1ab69c66a"
+    },
+    {
+      "body_hash": "sha256:fbae7ca8a806047a8b75effbefb969a95dfa8f03af53ee90efd7cad68dbd3d72",
+      "inventory_index": 1224,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "StaticIndexedDict.items",
+      "symbol_hash": "sha256:ce753c48af155d1faca3ce572419ee7ddd19f4b2639c5de5a8310ce285af3e09"
+    },
+    {
+      "body_hash": "sha256:44d9ffeb433ce74606587e37dbc241a048004b20c9f7fc29d0a5d85240f483ab",
+      "inventory_index": 1225,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "StaticIndexedDict.keys",
+      "symbol_hash": "sha256:880aaf035f5baee6b6722fd235bd20e6c2d2e495ee8ed996b847df10971601fd"
+    },
+    {
+      "body_hash": "sha256:5c17845beaf0249dbc49b1679503d5afd442451e61dd46940901fa76ed653c76",
+      "inventory_index": 1226,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "StaticIndexedDict.values",
+      "symbol_hash": "sha256:7487511d15e9cbeaf8b55041b02c9ff3412cadc5046ddff1bd3045e0baf42bdf"
+    },
+    {
+      "body_hash": "sha256:921a63a3a05234e5b1c61efbee031114924c6587cc8d60b93d4932290c0b549a",
+      "inventory_index": 1227,
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:7b8f02b355969944367c547803b3baa75f93047d8f12572f4bd833cd43431700",
+      "symbol": "VersionIdentificationError",
+      "symbol_hash": "sha256:47e8a463cedd83dabab7fd8f7b8a62fc0316a44ad539be2473a60630c76bf5df"
+    }
+  ],
+  "fact_sha256": {
+    "imugi-idd-definitions-core.field-class-and-construction": "sha256:d9af6e406b1a21cedc127a4168d1c65fe9bf67d919c76e774187b9749ab84748",
+    "imugi-idd-definitions-core.field-equality": "sha256:5686c751946a0d9980d837d7f13b9bfd3b46347d0bf55ffd5344c784f47fba71",
+    "imugi-idd-definitions-core.field-fragment-parsing": "sha256:138e8e32a2a070e3ef2e9f1452b748d0851e52b0370ff9f5ebeb6279f5b92961",
+    "imugi-idd-definitions-core.field-properties": "sha256:8350e46049c9d06038368828ea991d6d87e5cce74895f916151128dd0d1c7d20",
+    "imugi-idd-definitions-core.object-class-and-construction": "sha256:67e38ac935576b850b0675f82947a500e59de1e91dab203d9b598e4c49016872",
+    "imugi-idd-definitions-core.object-equality": "sha256:6738956989a52db24baebc8806c95a9f50e4e6fc718435ca99ddd423f3dfcfa2",
+    "imugi-idd-definitions-core.object-fragment-parsing": "sha256:2fd8b5d6fb596da60a3ec3c79ca175f79fdc5ef7f93b5a1f85f48bb1be684d2a",
+    "imugi-idd-definitions-core.object-properties": "sha256:e92e05c38c65d60b046bfb9944b5c9dc65ea3f79897ea35beb9e29ea9627a522"
+  },
+  "native_review": {
+    "classification_sha256": "sha256:18ec23c265e1ec4e1a03900cabb555878be94260721f3e3e0917494b636aa8ae",
+    "public_production_routes_only": true,
+    "python_executes_native_runtime": false,
+    "routes_sha256": "sha256:5d667ff19b24ac69c71cb9cc6b28421ac7a94b74a1607cc49e2efd1044a42418",
+    "source_receipts": [
+      {
+        "bytes": 13005,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed"
+      },
+      {
+        "bytes": 19960,
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddParser.cs",
+        "sha256": "sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f"
+      },
+      {
+        "bytes": 8339,
+        "path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/IddParserTests.cs",
+        "sha256": "sha256:783ff125aa66cd72afe67ef5c45b69bc208a7c7f9a9d04fe99a930d9ec7a1eaa"
+      },
+      {
+        "bytes": 16860,
+        "path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/IddSchemaOracleTests.cs",
+        "sha256": "sha256:04d3a61e8c5d2a6bf7addc6900f5a8e0c2736005f90955f97641457cb27ea31f"
+      }
+    ],
+    "source_receipts_sha256": "sha256:79a9fdb0bbb7ab52d9203cda6225fa12bef234175f618c31f449334ae0e3fd02"
+  },
+  "out_of_scope_receipts": [
+    {
+      "body_hash": "sha256:acefee6e24980313304d97c60f1cfd0a28a30efcd09d7f1e1165854460a34592",
+      "inventory_index": 1096,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:56417af52fc8be342a70eb169c2899e075de150681f65c27eae763a7d6cfe8bf",
+      "symbol": "IDD.__eq__",
+      "symbol_hash": "sha256:be42dfb26cc36cfe438d9a6692f01268e6793f0399481194eb7a8330c667a793"
+    },
+    {
+      "body_hash": "sha256:588675da66ea1cfc65e364320fde9e6a2840d1318d9df0376a7bc4d872bfd03b",
+      "inventory_index": 1098,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IDD.__repr__",
+      "symbol_hash": "sha256:372cdb12b4c44d39ab67518fd0ca9814c3d6aed00e62f8796322493b0710154d"
+    },
+    {
+      "body_hash": "sha256:a9c5eae39c97f4f9dc874dfad02afc95b2a0fe59c172d1058fac09fd6403b627",
+      "inventory_index": 1099,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IDD.__str__",
+      "symbol_hash": "sha256:e03d34d80311787697c857ddb397176dfd902f11b99a7116035c3187d5b872bb"
+    },
+    {
+      "body_hash": "sha256:1fda05f576fdec44df4051303f9daf680fdfdd9dd46d17a60c8db36265e9cc0f",
+      "inventory_index": 1110,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:1e9bc05f5a8588970559462f4b1ff6118775cc82d0229ba62f3a868e3aac5cbb",
+      "symbol": "IDF.__len__",
+      "symbol_hash": "sha256:4fd4391601e1445e151f7d8c14d0c48e0ea29ed9ab08920b5bbd0f130343b2c0"
+    },
+    {
+      "body_hash": "sha256:3aa3e0e616aa2284420aa7e71140c83c2c6807fd36bdd2517f93a4a71f717f6a",
+      "inventory_index": 1111,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IDF.__repr__",
+      "symbol_hash": "sha256:4e75ca35722fbd8d418ed07a61cc8f0164789f8ee64c5b82f6a63554584a4548"
+    },
+    {
+      "body_hash": "sha256:4b6d7e9d7914146c3a795e69e1b9682b36eb73fdcd5840525dcb38c8346e2602",
+      "inventory_index": 1117,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:8a753ca7a73f2926a5950a23d31e49a739cf0074935f8e1d2cdbf23e558361ac",
+      "symbol": "IDF.quick_map",
+      "symbol_hash": "sha256:0b3ea58f3983c9e0b0a8df66a74b63ff505031fbab39843da7d2d0d1355c8a60"
+    },
+    {
+      "body_hash": "sha256:22a57da059a511cb6468a544caa8f38d5f70de9a87190456c2928f0494c7af43",
+      "inventory_index": 1120,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:a1b8e2868ca866051a531968b768a948af47bfe0326701a02949b85b73c3c78e",
+      "symbol": "IDF.shrink",
+      "symbol_hash": "sha256:835a12e8f893c1724eddcec683f0bfbb219ca30ee32dacaf958ffdc4afb35ba5"
+    },
+    {
+      "body_hash": "sha256:2a0fc0a3a5d9e2067292442a30ca06739401c616c2b2ba62a17d72a1cd4f46ed",
+      "inventory_index": 1126,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IddField.__repr__",
+      "symbol_hash": "sha256:53e7dea30ab23ecf00e8e7f0277cb9565bf91bc7da8b14d5fb8572259e06fa59"
+    },
+    {
+      "body_hash": "sha256:60ee996f85864d28e957410cec98dc8a05ff8d2ac3d1971c64cd1337a6964d72",
+      "inventory_index": 1127,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IddField.__str__",
+      "symbol_hash": "sha256:2071030fc0520fab5b8029593cd16dfe9866ac15ea3fbb0912bc21d97cd34896"
+    },
+    {
+      "body_hash": "sha256:52172444958ae7af5a10c7d966dfa4229a14b3534663e287bf7d21547200293c",
+      "inventory_index": 1151,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IddObject.__repr__",
+      "symbol_hash": "sha256:04f9e22dc65c053fdba62b07f954e01ddc9044c6c8ddb723f97c716cef709a89"
+    },
+    {
+      "body_hash": "sha256:6301b3399e88d7e06438d0db4ec7c52c161a6ecb9a3e923b99276a2b8eae378a",
+      "inventory_index": 1152,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IddObject.__str__",
+      "symbol_hash": "sha256:3f50631e5ba971e6b60b58c7f06344ce0298a640bc6fe92ac5bdaa093edcd8f9"
+    },
+    {
+      "body_hash": "sha256:62a899a04824b8e10292f7e335284b141f9893007855dfa6ebb4cca82e5c7591",
+      "inventory_index": 1168,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:520ee536d924ac7323d561d9d85957e67316c14aea8bd80a5664a796409a796f",
+      "symbol": "IdfObject.__deepcopy__",
+      "symbol_hash": "sha256:d3136f86d540e6093067a5f02344ca1bdfe9897a53bdc2865be411a47d9ae61b"
+    },
+    {
+      "body_hash": "sha256:052906a83ecb8728facf8e6999b56c005157d6f05a7e960488fe0390be45bae8",
+      "inventory_index": 1169,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f70f3f7ed205df5e90853b394b58596e089718d4d410d20f480f87b64dba7e91",
+      "symbol": "IdfObject.__eq__",
+      "symbol_hash": "sha256:1cbdc9a348c36b1cc3fe56e70df01310fe42569502306caed1e987485fb2bd8e"
+    },
+    {
+      "body_hash": "sha256:38ed95464b660772be06ddd5a854e06b67e04a20834d300d58504029de151594",
+      "inventory_index": 1172,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IdfObject.__repr__",
+      "symbol_hash": "sha256:61d42a6b18ca0942f4a7180fdc4067b435c1830e085b3c82f02b4652da5ce07d"
+    },
+    {
+      "body_hash": "sha256:455b351f36c13c6d8766e89dd574873c16c9dc29936025cc721579eff055f382",
+      "inventory_index": 1184,
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:e4e539673e49766b23f6518b27fd3449d10dcfaf59bff0ab582cff5d11ea8d22",
+      "symbol": "IdfObjectLinkedDataFrame",
+      "symbol_hash": "sha256:eb25bba55b2cfb9dc3c4ab23fdb53fc9def400bf599bf0b22f4c69745240c111"
+    },
+    {
+      "body_hash": "sha256:7bbe7b4705ac0eb1f40ff49292204dc92ac26b880af4c513d1ca6be825d4e2bc",
+      "inventory_index": 1185,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:c18576b7d48d758c1f59db635dcec82a506939c64b7fd2f182b00306be1661dd",
+      "symbol": "IdfObjectLinkedDataFrame.__enter__",
+      "symbol_hash": "sha256:9c7fa506f0ced172f3ca758827e2986d53c86bdbe67ed67620d4e87c171082c0"
+    },
+    {
+      "body_hash": "sha256:44a5d0475856a4cb59de1350cb9766fbc1e95e82d52a00e6fbc5a3b34477bbec",
+      "inventory_index": 1186,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:51952364ac4d8c629c0f78cae96105142a2e025e47f76b7d9d35777424048e19",
+      "symbol": "IdfObjectLinkedDataFrame.__exit__",
+      "symbol_hash": "sha256:147879d2f680972ac19db30634ff5cbf3e146f4821c3774614be0a5e825da9e6"
+    },
+    {
+      "body_hash": "sha256:402c82ec62fefaf8542740e6dd6a6c97fb87e9215b3687757c0faf97a3fc7d26",
+      "inventory_index": 1187,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:c8fbada193bcbaea657fb8ef3e47b75987b3d0904edca4a326a34111bab41468",
+      "symbol": "IdfObjectLinkedDataFrame.__init__",
+      "symbol_hash": "sha256:939ad76d0d435acb6025a63b6c0d2a0eb002216699da27060a4b5e9b12ffae81"
+    },
+    {
+      "body_hash": "sha256:bfb836ec53e560a746485d88788b25d7349fdd5de0cbeca0d1cd4dddfa9bcf56",
+      "inventory_index": 1188,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:0bc04a9d57cb5f58fcff5c3da03f424b0f78b29307d5f237c48a5ec3eccc6ab6",
+      "symbol": "IdfObjectLinkedDataFrame.columns",
+      "symbol_hash": "sha256:ea45e0e4ff6f967fc5e2da7670a1eed9e48287bc4b032445a5c8e2ab46b4080d"
+    },
+    {
+      "body_hash": "sha256:0f8c69a1445c2401623d8b6bd0d818317aa5bcd9b6e0eb812cc4ade7f1328ee2",
+      "inventory_index": 1189,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:59de88f90702cbd144818c78767c39e430b1a99f049b467c0ba7b812a4e55366",
+      "symbol": "IdfObjectLinkedDataFrame.linked",
+      "symbol_hash": "sha256:4c721f36c39608dc5f80c1e63189218286b553bb2342355c0a4d90455497ef5b"
+    },
+    {
+      "body_hash": "sha256:381397823e83761e6eb7e03477534b0a9c7d12c0ac890d107b12ae40493ade58",
+      "inventory_index": 1191,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:2eb87a641f15a8a9a6b5109a83a844ebda5791d5c8c1083f6afccdffa8c4217b",
+      "symbol": "IdfObjectList.__add__",
+      "symbol_hash": "sha256:b431b2599d70f6dbf638705fbc3f90e05a9d15786db171cc2ad9ffdd14b0f908"
+    },
+    {
+      "body_hash": "sha256:780f64f905a5ebe83d6ee7630bd1f604f71328865af1645e0af6c0144bf34fa6",
+      "inventory_index": 1192,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f489eba7d00abcf9da87ad8604c94ff1557cb675a5b3781bc44c4783fb7ce881",
+      "symbol": "IdfObjectList.__deepcopy__",
+      "symbol_hash": "sha256:f788b16f8014a90c1c87cb1b02a37992c0424383ad0fb3e8ee3c8c033f886bc5"
+    },
+    {
+      "body_hash": "sha256:916634f4a39471d9c755980cae9a441d51786f4a148426d050aabe581bb82f7b",
+      "inventory_index": 1193,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:ea27cc5f6fb799f434324f7faa3fc7d3952e5fbbc7eb12688bf432290612e1b9",
+      "symbol": "IdfObjectList.__eq__",
+      "symbol_hash": "sha256:9829bf6c058479e4018069783e8f750b84ef31eea4c5def8175a6452b72e6bc9"
+    },
+    {
+      "body_hash": "sha256:572f37d447543323ca02a73d3baede30eed4f06382f6392267d2de8ebc8baa16",
+      "inventory_index": 1196,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f422dd08dc32ca6866adf6b2fc835616ecd56dfe2fdd6803d424398609700eab",
+      "symbol": "IdfObjectList.__repr__",
+      "symbol_hash": "sha256:7ea313e286a02d2b5d91dbad013147073955ae7a8d62af949c54743dcf862a70"
+    },
+    {
+      "body_hash": "sha256:3ffded2fca90e352cbac9ea37eab0d5abf42a1f22dcf829a28c61ff1a29098ab",
+      "inventory_index": 1200,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:c18576b7d48d758c1f59db635dcec82a506939c64b7fd2f182b00306be1661dd",
+      "symbol": "IdfObjectList.as_dataframe",
+      "symbol_hash": "sha256:66309c6b9267cd3bf8cafa1668478eeaf6df51f48b4cb4133b8a1617b171f7d2"
+    },
+    {
+      "body_hash": "sha256:37eaa540d10ed1500ab7d698157c220b3f86e81b8ae151e8b605cc04be9eff1a",
+      "inventory_index": 1202,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:a100b1521302f5a4be62ff692f110f299cc3b33f4d633fae0968c7054d76051b",
+      "symbol": "IdfObjectList.clear",
+      "symbol_hash": "sha256:e019c42e54380e107a39cca7f547e0fc9bde02bd36e68f76098d9599af53ad0b"
+    },
+    {
+      "body_hash": "sha256:3438af0b839783b0a0db545441ebfb4fbea11f7b2ec547779f5cd9672e88d19c",
+      "inventory_index": 1213,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:31340308e2c550a385d8d9bbfb75e79dbd8ea2eee80cc731ab663885d8d97745",
+      "symbol": "IdfObjectList.pop",
+      "symbol_hash": "sha256:1d2c571c6549a2a91eb00dd242e4bbd5d4da0922f19852eb941654d866b679d1"
+    },
+    {
+      "body_hash": "sha256:79efcd54fc3574c2a72e958adc1d2e68890bb1e0f304f3e5d35d542460238102",
+      "inventory_index": 1216,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:3a410f05d904cd573f15bd094908c64f55a72f6a804b455f752cf4d0a298d3ef",
+      "symbol": "IdfObjectList.to_dataframe",
+      "symbol_hash": "sha256:ea3a8f1769cf2fc59f066bb0ebf59e5673823c946aaf9ea5930965d7e9beea4c"
+    }
+  ],
+  "runtime": {
+    "dependencies": {
+      "colorama": "0.4.6",
+      "et_xmlfile": "2.0.0",
+      "numpy": "2.3.1",
+      "openpyxl": "3.1.5",
+      "pandas": "2.3.0",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2024.2",
+      "six": "1.16.0",
+      "tqdm": "4.67.1",
+      "tzdata": "2024.2"
+    },
+    "dependencies_sha256": "sha256:f69d29212b5ce6432b0c02f356d036275ea01463a8e1974ac6f89b78854fefba",
+    "implementation": "cpython",
+    "python_dont_write_bytecode": true,
+    "python_hash_algorithm": "siphash13",
+    "python_hash_seed": 0,
+    "python_hash_width_bits": 64,
+    "python_version": "3.12.7"
+  },
+  "schema": "goniegonie.python-reference.imugi-idd-definitions-core.v1",
+  "support": {
+    "fixture": {
+      "bytes": 585482,
+      "path": "fixtures/reference/python-0.7.0/idd-24.2.0.schema.json.gz",
+      "sha256": "sha256:f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705"
+    },
+    "full_schema_identity": {
+      "energyplus_build": "94a887817b",
+      "energyplus_version": "24.2.0",
+      "field_count": 13702,
+      "object_count": 848,
+      "official_epjson_validation": {
+        "energyplus_version": "24.2",
+        "field_definition_count": 13469,
+        "object_count": 848,
+        "paired_energyplus_build": "94a887817b",
+        "source_bytes": 10469751,
+        "source_sha256": "aefb16d63495d170468ecab3c935f1aeb68eb07c6551403dd11cbba61cb136fa",
+        "validated_dimensions": [
+          "object-name-order-group-unique-required-min-fields-format",
+          "field-order-name-kind-required-default-enum",
+          "field-type-units-bounds-autosize-autocalculate",
+          "field-object-list-external-list-reference-reference-class",
+          "extensible-start-size-prototype-kind-cycle"
+        ],
+        "validated_field_occurrence_count": 13469
+      },
+      "oracle_schema": "goniegonie.energyplus-idd-schema.v1",
+      "source_bytes": 4556412,
+      "source_sha256": "3b56fd8afb02a557f1c2cfb963cbc6f53963738bc6aa169f996d7a5175b324a2",
+      "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897"
+    },
+    "full_schema_identity_sha256": "sha256:7e37ecb64566277e54a8c406dffd8df81517df6babfecba1a5a6feb6a9ba15af",
+    "generator": {
+      "bytes": 38634,
+      "path": "tools/python-reference/generate_idd_schema_oracle.py",
+      "sha256": "sha256:64986549c0e3a3aadfef16606396006257d1be4e3b301058098ce364db8391f0"
+    },
+    "native_full_schema_test_route": "GonieGonie.InvisibleDragon.Tests.Idd.IddSchemaOracleTests.EnergyPlus242FullSchemaMatchesRawIddRegressionOracleWhenRuntimeReady"
+  },
+  "symbols": [
+    {
+      "body_hash": "sha256:c411743b7a22c9604d52320facc868d537a2649d5fc3be0958759382336f323d",
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:1c885862922126a62004a703eb2e58f7746430f37550ea0ff1c8b83b50b4ac84",
+      "symbol": "IddField",
+      "symbol_hash": "sha256:209ee0732aa01e04fe36fb9d8b343da1db06ad0b61e4dd5ac2ca4bb51e54828c"
+    },
+    {
+      "body_hash": "sha256:0d9d38bfa4874ff358083631fa963b0b8140dfa804353702828f6a6ffb0bb95b",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:01931580940e7e1190016598c7845a350e95c883fb6b7cdf8461c14d89f63d9a",
+      "symbol": "IddField.__eq__",
+      "symbol_hash": "sha256:cc926b4c004774e340ca94860214ada51f03ae52472a3815ab62cdf4045dc3d0"
+    },
+    {
+      "body_hash": "sha256:eefa6e31944b26a986c14c495a9da517f4d417219f0abf5d2fa24cc4922b49ee",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b0c03bd4852c4c4f6258c20cc177fa993c9ba89301ae60de0fe2c21c9e0a485b",
+      "symbol": "IddField.__init__",
+      "symbol_hash": "sha256:e4303f761ffd753b0f13f0e7787f0a5678244d6ba52c262982825f2e8bd0fe00"
+    },
+    {
+      "body_hash": "sha256:b94ef9e8731c3b4dae3bd5403df70ed7c58d0ee2e51ec91e09f9233dd989c331",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:ef0f73d9d09ec8d966ab342dddfdead484c034726a4694edd956d78db79518df",
+      "symbol": "IddField.default",
+      "symbol_hash": "sha256:4748d03a1c5f03ba7311bb44fc86dd2cdd539472398068e1561be04f64a6025c"
+    },
+    {
+      "body_hash": "sha256:955132a072a9ac106a91c0ec537d8dc157e82b2d6b5c2953abc26b7e38587f90",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.external_list",
+      "symbol_hash": "sha256:d3f9ed1ff2902468ffde530ec83ca689d33630c538ed2a1b92bbdb6172ae9411"
+    },
+    {
+      "body_hash": "sha256:bddbf4a84a1ad379f5650ba76d58f1f0e1cc1f291289c2a7129a2501ce5fd60f",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:db59632e63d9a82f74786d094210a7fae20312dcec48d102a74cf79cd7b3b769",
+      "symbol": "IddField.from_text",
+      "symbol_hash": "sha256:2b6d880add7b01117f24cb3903f951d22f50757f33326a3767b3e2da7b1b0ec3"
+    },
+    {
+      "body_hash": "sha256:3bb8eeab2371b0c998b8cd395bc243479cd8a5f9a0a67e6cc4d56716fb642a48",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_autocalculatable",
+      "symbol_hash": "sha256:d0349be4c39e53ad17cf0e0c3e7559ad1d4fe4888d634dfec12d58cacb27953f"
+    },
+    {
+      "body_hash": "sha256:26f296f9b2eb575039897e05b8ba882e0fa377f222e06489d06a678d69d88233",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_autosizable",
+      "symbol_hash": "sha256:a5aa4b09ed294aada05b999e8ee091143080fd3abb7a87eb1522bed2e9343ee9"
+    },
+    {
+      "body_hash": "sha256:3751219997bc27d2a69ea56930c26b61a6fa8ce47a403be626cfe854bb1c5cbd",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_deprecated",
+      "symbol_hash": "sha256:83922a08bed877914ce9235575d50cc12ec06c6c0c0c3c44df0a2bfbbbb376db"
+    },
+    {
+      "body_hash": "sha256:668787687b5d268c4393172820636896c207ac61ad502b73dc90dc7644796f03",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_extensible",
+      "symbol_hash": "sha256:6f8cd3f124bb3e157a750e7c5364a01df927fb4249d81cb817d04e5a0aaf56a4"
+    },
+    {
+      "body_hash": "sha256:b67b1493b339394473353521d4b3909ebba5ace0f0a6a4c1c138c4f746504cd4",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_required",
+      "symbol_hash": "sha256:b64e21456b9791c019fdef355056d7e5c6940768ff8f5d535f9fa8ec4d7754db"
+    },
+    {
+      "body_hash": "sha256:e47d5d11c9335377e62eeed6c67a9b8039c448cb040b7e04764008b0af339b65",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_retaincase",
+      "symbol_hash": "sha256:46f4293276fe07cd6c66d7b9475d0c0cafc8eb8d44a4509894bde75a7266d769"
+    },
+    {
+      "body_hash": "sha256:44aafb44ffc02bbfdb01d8c47afa35ce67eac3ab80fae3fb96cd4464832acefd",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:8accb5cc40af7afc8a7aeaad91e5f497ec1134fb27b5489d3b6afda6afc4536d",
+      "symbol": "IddField.key",
+      "symbol_hash": "sha256:b2a62552400e9c38d1834cbc8d93986e38e9a4ec9f09ef94f47bc5600d505f62"
+    },
+    {
+      "body_hash": "sha256:78a67e9a7f45675654d7ab751d0bf8ba64ad65ee0f95c7a76351e9fe69bc4105",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f1b77727408acaea93a770200d99c9972e070fabcf19c0e2f6dbc4c1c1f3feea",
+      "symbol": "IddField.maximum",
+      "symbol_hash": "sha256:0fc0df498a3c76c45082dd2adbf853ae6ac36c3d1b68ae51fa6a479ce14ffb70"
+    },
+    {
+      "body_hash": "sha256:0f60520a06514ed2219adfdc2c05a666ec0ec1e647063b33ca1bdf1ed18ac854",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.memo",
+      "symbol_hash": "sha256:203215fc3599a4174a2f54eabfff299cac752874f66079a230df9a436268ed6c"
+    },
+    {
+      "body_hash": "sha256:c042a6dad92c014aa65c63df3fbeb4b707e0a07429d4dbe7a500fc5ce925c00e",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f1b77727408acaea93a770200d99c9972e070fabcf19c0e2f6dbc4c1c1f3feea",
+      "symbol": "IddField.minimum",
+      "symbol_hash": "sha256:04d44d1d59dc3d1afe44806ee1aef4bd7f36883b6a085d961deaf0632484b29a"
+    },
+    {
+      "body_hash": "sha256:454cbcaacaa600fe9a3898044a921b8987b3ee094de83a56d3c7eacae4c80ad4",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.name",
+      "symbol_hash": "sha256:dc05a34b412c0963f73610621ae4c7befa1efdce2bf905c59c9edf231cb64f77"
+    },
+    {
+      "body_hash": "sha256:e7b922bc23aca79e39e053e009239fcc1f13311d9a9cc977e8bb5204afce471b",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.object_list",
+      "symbol_hash": "sha256:f35f045ca2aa3b5cceb7649fdae15f615601e2f3c7790b4fb64d783cf07b67d8"
+    },
+    {
+      "body_hash": "sha256:0fa7a97176b55863e8175e6166fca9a7dc8c3a8b3326494198d8f1d9d62bba82",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.reference",
+      "symbol_hash": "sha256:ecceb577b64a032652be4208494314bd23b7eff64d0861182f88461fa4fe8f80"
+    },
+    {
+      "body_hash": "sha256:c04a813c21bffdba54edba140544f1c3967d3c5cd08a6c2a7cde5111ea33b139",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.reference_cls",
+      "symbol_hash": "sha256:704213becfa64b3f0e063a379b41995c8416067f02098d2f3fc61ae13a73c3a2"
+    },
+    {
+      "body_hash": "sha256:25afc19ef62997fd26572ac68df9bc574ecb3f53d6b3947b944e21e9e8275291",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:0b201bb4b7a375a13ffd76fdd099aae0ac6cadf8c924c67c744b34c939881709",
+      "symbol": "IddField.referenceable",
+      "symbol_hash": "sha256:4695751c1aa9e251af37469066247f690589c2330beb72fa89438ad04a4c9a8d"
+    },
+    {
+      "body_hash": "sha256:c127d9c3b77bd9baf591dbecb6bac00e4249af93aa7b3ef5a503333c07abc581",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.type",
+      "symbol_hash": "sha256:5b7e3d73506d79c8de9c7a2bd15951fe3351c543969a4ccc6df83308d370387f"
+    },
+    {
+      "body_hash": "sha256:cee23df43be6648df234ab6b726d42e1bc1915f239ecdba6aa2f3e7c45e4e252",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.unit",
+      "symbol_hash": "sha256:59edda63773ac040eeef9bc941906168d56459deaa79b7efbb93dac8a7bfd011"
+    },
+    {
+      "body_hash": "sha256:ffd88d5b3e5b7deae3444431882436bb9c7f11743e842f0e7a30e7ca5e2a851b",
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b87b9b0fb86e5b2072d79b70fd35000bd2709bc965955befe2dd8718a52916f9",
+      "symbol": "IddObject",
+      "symbol_hash": "sha256:8a75cdbcff665d5d249df5fd70d6be7b3c4ff1cf62d4924796b5a8309b9c26af"
+    },
+    {
+      "body_hash": "sha256:1ae730d07ef0a1ce8704eceb3efea74aff6e7416c126df0e7f31e20082c98474",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:30a1df688e2680b0dd26954028e2863af01b7f2367308dc27b2e0a7ebe1a1281",
+      "symbol": "IddObject.__eq__",
+      "symbol_hash": "sha256:355edc7a0ebf1dcdc410c30ce703816b335848009bf0a47d8ca6affcb57bfa23"
+    },
+    {
+      "body_hash": "sha256:408916150a60f5b94142b6a6ac75dee7806fbd6708be49aec353271e496818c0",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:69ec82eae1b61306eb958f7931cb71af18f5d4eb7704c012e5613cddcebdad39",
+      "symbol": "IddObject.__init__",
+      "symbol_hash": "sha256:a85878fd438a00a8c9391dc3c81dad3e34dfebc8a79d89172868753401542d19"
+    },
+    {
+      "body_hash": "sha256:8213adbfc184659dc1bb2b0d98757b4d787348cd3328c8f9f5f98d68ef48c398",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddObject.begin_extensible",
+      "symbol_hash": "sha256:cc944d8ebdc2d6ab8c5515a8a41de1920f9ca2a3459622eab9c2e81b5336e7ba"
+    },
+    {
+      "body_hash": "sha256:b94ef9e8731c3b4dae3bd5403df70ed7c58d0ee2e51ec91e09f9233dd989c331",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:8accb5cc40af7afc8a7aeaad91e5f497ec1134fb27b5489d3b6afda6afc4536d",
+      "symbol": "IddObject.default",
+      "symbol_hash": "sha256:ceed741c69fb49b6bc12f8455f3b875b8e146b0b2fef5b6f8cd9f8d127d8a4db"
+    },
+    {
+      "body_hash": "sha256:e63cebea81ddd7edc880f6a459a3c5513aacb563122afef5bb32e6edf6579f93",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddObject.extensible",
+      "symbol_hash": "sha256:656dae5addd602463386d773d8094419e466d8320eced25422ed22f8306f3293"
+    },
+    {
+      "body_hash": "sha256:c0b79b3a76ee300fa3952e1d0058f971722faed3a3665582cf1a8ee0a0403cbc",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddObject.format",
+      "symbol_hash": "sha256:54aa570dce77d57fbdc4fd6aea8abf9699bc533d8f765fd3d99747adc1b4cf44"
+    },
+    {
+      "body_hash": "sha256:f9c7c7d2da860cb2bca7720b9262effb0013e0dae13af39db7b2ff48f4134ef2",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:c3856c65eff6bf2f2cd857ae90b984ed80879c9a0aef8ba17ac5664078a2e6b8",
+      "symbol": "IddObject.from_text",
+      "symbol_hash": "sha256:e55a8f894fc1486c07c5853a8f3d41ea444dd58c29d8357588f47a3dea32e695"
+    },
+    {
+      "body_hash": "sha256:96a8f1c0e01af084a07686c6e47631baf4076033cbf6a60c82429b9b7b4ad404",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddObject.idd_index",
+      "symbol_hash": "sha256:b7a1f5de05d189e74c63972c5105da91b69700743a056bb9373e9c3c81e64941"
+    },
+    {
+      "body_hash": "sha256:d91e886640b3216db585e929ddf6784a755d2ea363a0535c1bf6ca0132ab5b6e",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddObject.is_obsolete",
+      "symbol_hash": "sha256:b654e57780f9263390dc8d45d58cd57ff675fa9feaa7c55ea0066e26aee173b0"
+    },
+    {
+      "body_hash": "sha256:b67b1493b339394473353521d4b3909ebba5ace0f0a6a4c1c138c4f746504cd4",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddObject.is_required",
+      "symbol_hash": "sha256:b64e21456b9791c019fdef355056d7e5c6940768ff8f5d535f9fa8ec4d7754db"
+    },
+    {
+      "body_hash": "sha256:1d3e393a196fecc2383b6426dc75f707b896318300e02cb16791d4c34a503027",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddObject.is_unique",
+      "symbol_hash": "sha256:9f99bd10fd99f8d79cca0d4f43d2af065f9947b8b725f402d78aa7065794e861"
+    },
+    {
+      "body_hash": "sha256:0f60520a06514ed2219adfdc2c05a666ec0ec1e647063b33ca1bdf1ed18ac854",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddObject.memo",
+      "symbol_hash": "sha256:203215fc3599a4174a2f54eabfff299cac752874f66079a230df9a436268ed6c"
+    },
+    {
+      "body_hash": "sha256:f8853b19a115d3e241ae5d8e2c2a162e4172ce532e6070f4c599b71b4ad4252e",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:eb9fa11a201dd61305f0314fe0261cbc371edeb6909c805081c19c6b05e73876",
+      "symbol": "IddObject.min_fields",
+      "symbol_hash": "sha256:1821fd046dacffa6cb854bb3fffac25f28f40c626e2425a90979a5539630c04a"
+    },
+    {
+      "body_hash": "sha256:454cbcaacaa600fe9a3898044a921b8987b3ee094de83a56d3c7eacae4c80ad4",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddObject.name",
+      "symbol_hash": "sha256:dc05a34b412c0963f73610621ae4c7befa1efdce2bf905c59c9edf231cb64f77"
+    },
+    {
+      "body_hash": "sha256:0fa7a97176b55863e8175e6166fca9a7dc8c3a8b3326494198d8f1d9d62bba82",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddObject.reference",
+      "symbol_hash": "sha256:ecceb577b64a032652be4208494314bd23b7eff64d0861182f88461fa4fe8f80"
+    },
+    {
+      "body_hash": "sha256:2fd852b6f259cc890c7de93d0b9eea5f31a2a08fb109838b6bcc0c4c34e3aaf2",
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:3600cccc11bc6800f262c4e5f0aacb4e7f2bf7ca486cbc455c0376a25e228afd",
+      "symbol": "IddObject.required_fields",
+      "symbol_hash": "sha256:b01c46a03850c3e5209c78a96141d1a125c934404d2f2024c845b8a21f6b8c39"
+    }
+  ],
+  "target_receipts": [
+    {
+      "body_hash": "sha256:c411743b7a22c9604d52320facc868d537a2649d5fc3be0958759382336f323d",
+      "inventory_index": 1123,
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:1c885862922126a62004a703eb2e58f7746430f37550ea0ff1c8b83b50b4ac84",
+      "symbol": "IddField",
+      "symbol_hash": "sha256:209ee0732aa01e04fe36fb9d8b343da1db06ad0b61e4dd5ac2ca4bb51e54828c"
+    },
+    {
+      "body_hash": "sha256:0d9d38bfa4874ff358083631fa963b0b8140dfa804353702828f6a6ffb0bb95b",
+      "inventory_index": 1124,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:01931580940e7e1190016598c7845a350e95c883fb6b7cdf8461c14d89f63d9a",
+      "symbol": "IddField.__eq__",
+      "symbol_hash": "sha256:cc926b4c004774e340ca94860214ada51f03ae52472a3815ab62cdf4045dc3d0"
+    },
+    {
+      "body_hash": "sha256:eefa6e31944b26a986c14c495a9da517f4d417219f0abf5d2fa24cc4922b49ee",
+      "inventory_index": 1125,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b0c03bd4852c4c4f6258c20cc177fa993c9ba89301ae60de0fe2c21c9e0a485b",
+      "symbol": "IddField.__init__",
+      "symbol_hash": "sha256:e4303f761ffd753b0f13f0e7787f0a5678244d6ba52c262982825f2e8bd0fe00"
+    },
+    {
+      "body_hash": "sha256:b94ef9e8731c3b4dae3bd5403df70ed7c58d0ee2e51ec91e09f9233dd989c331",
+      "inventory_index": 1128,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:ef0f73d9d09ec8d966ab342dddfdead484c034726a4694edd956d78db79518df",
+      "symbol": "IddField.default",
+      "symbol_hash": "sha256:4748d03a1c5f03ba7311bb44fc86dd2cdd539472398068e1561be04f64a6025c"
+    },
+    {
+      "body_hash": "sha256:955132a072a9ac106a91c0ec537d8dc157e82b2d6b5c2953abc26b7e38587f90",
+      "inventory_index": 1129,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.external_list",
+      "symbol_hash": "sha256:d3f9ed1ff2902468ffde530ec83ca689d33630c538ed2a1b92bbdb6172ae9411"
+    },
+    {
+      "body_hash": "sha256:bddbf4a84a1ad379f5650ba76d58f1f0e1cc1f291289c2a7129a2501ce5fd60f",
+      "inventory_index": 1130,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:db59632e63d9a82f74786d094210a7fae20312dcec48d102a74cf79cd7b3b769",
+      "symbol": "IddField.from_text",
+      "symbol_hash": "sha256:2b6d880add7b01117f24cb3903f951d22f50757f33326a3767b3e2da7b1b0ec3"
+    },
+    {
+      "body_hash": "sha256:3bb8eeab2371b0c998b8cd395bc243479cd8a5f9a0a67e6cc4d56716fb642a48",
+      "inventory_index": 1131,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_autocalculatable",
+      "symbol_hash": "sha256:d0349be4c39e53ad17cf0e0c3e7559ad1d4fe4888d634dfec12d58cacb27953f"
+    },
+    {
+      "body_hash": "sha256:26f296f9b2eb575039897e05b8ba882e0fa377f222e06489d06a678d69d88233",
+      "inventory_index": 1132,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_autosizable",
+      "symbol_hash": "sha256:a5aa4b09ed294aada05b999e8ee091143080fd3abb7a87eb1522bed2e9343ee9"
+    },
+    {
+      "body_hash": "sha256:3751219997bc27d2a69ea56930c26b61a6fa8ce47a403be626cfe854bb1c5cbd",
+      "inventory_index": 1133,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_deprecated",
+      "symbol_hash": "sha256:83922a08bed877914ce9235575d50cc12ec06c6c0c0c3c44df0a2bfbbbb376db"
+    },
+    {
+      "body_hash": "sha256:668787687b5d268c4393172820636896c207ac61ad502b73dc90dc7644796f03",
+      "inventory_index": 1134,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_extensible",
+      "symbol_hash": "sha256:6f8cd3f124bb3e157a750e7c5364a01df927fb4249d81cb817d04e5a0aaf56a4"
+    },
+    {
+      "body_hash": "sha256:b67b1493b339394473353521d4b3909ebba5ace0f0a6a4c1c138c4f746504cd4",
+      "inventory_index": 1135,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_required",
+      "symbol_hash": "sha256:b64e21456b9791c019fdef355056d7e5c6940768ff8f5d535f9fa8ec4d7754db"
+    },
+    {
+      "body_hash": "sha256:e47d5d11c9335377e62eeed6c67a9b8039c448cb040b7e04764008b0af339b65",
+      "inventory_index": 1136,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddField.is_retaincase",
+      "symbol_hash": "sha256:46f4293276fe07cd6c66d7b9475d0c0cafc8eb8d44a4509894bde75a7266d769"
+    },
+    {
+      "body_hash": "sha256:44aafb44ffc02bbfdb01d8c47afa35ce67eac3ab80fae3fb96cd4464832acefd",
+      "inventory_index": 1137,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:8accb5cc40af7afc8a7aeaad91e5f497ec1134fb27b5489d3b6afda6afc4536d",
+      "symbol": "IddField.key",
+      "symbol_hash": "sha256:b2a62552400e9c38d1834cbc8d93986e38e9a4ec9f09ef94f47bc5600d505f62"
+    },
+    {
+      "body_hash": "sha256:78a67e9a7f45675654d7ab751d0bf8ba64ad65ee0f95c7a76351e9fe69bc4105",
+      "inventory_index": 1138,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f1b77727408acaea93a770200d99c9972e070fabcf19c0e2f6dbc4c1c1f3feea",
+      "symbol": "IddField.maximum",
+      "symbol_hash": "sha256:0fc0df498a3c76c45082dd2adbf853ae6ac36c3d1b68ae51fa6a479ce14ffb70"
+    },
+    {
+      "body_hash": "sha256:0f60520a06514ed2219adfdc2c05a666ec0ec1e647063b33ca1bdf1ed18ac854",
+      "inventory_index": 1139,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.memo",
+      "symbol_hash": "sha256:203215fc3599a4174a2f54eabfff299cac752874f66079a230df9a436268ed6c"
+    },
+    {
+      "body_hash": "sha256:c042a6dad92c014aa65c63df3fbeb4b707e0a07429d4dbe7a500fc5ce925c00e",
+      "inventory_index": 1140,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:f1b77727408acaea93a770200d99c9972e070fabcf19c0e2f6dbc4c1c1f3feea",
+      "symbol": "IddField.minimum",
+      "symbol_hash": "sha256:04d44d1d59dc3d1afe44806ee1aef4bd7f36883b6a085d961deaf0632484b29a"
+    },
+    {
+      "body_hash": "sha256:454cbcaacaa600fe9a3898044a921b8987b3ee094de83a56d3c7eacae4c80ad4",
+      "inventory_index": 1141,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.name",
+      "symbol_hash": "sha256:dc05a34b412c0963f73610621ae4c7befa1efdce2bf905c59c9edf231cb64f77"
+    },
+    {
+      "body_hash": "sha256:e7b922bc23aca79e39e053e009239fcc1f13311d9a9cc977e8bb5204afce471b",
+      "inventory_index": 1142,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.object_list",
+      "symbol_hash": "sha256:f35f045ca2aa3b5cceb7649fdae15f615601e2f3c7790b4fb64d783cf07b67d8"
+    },
+    {
+      "body_hash": "sha256:0fa7a97176b55863e8175e6166fca9a7dc8c3a8b3326494198d8f1d9d62bba82",
+      "inventory_index": 1143,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.reference",
+      "symbol_hash": "sha256:ecceb577b64a032652be4208494314bd23b7eff64d0861182f88461fa4fe8f80"
+    },
+    {
+      "body_hash": "sha256:c04a813c21bffdba54edba140544f1c3967d3c5cd08a6c2a7cde5111ea33b139",
+      "inventory_index": 1144,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.reference_cls",
+      "symbol_hash": "sha256:704213becfa64b3f0e063a379b41995c8416067f02098d2f3fc61ae13a73c3a2"
+    },
+    {
+      "body_hash": "sha256:25afc19ef62997fd26572ac68df9bc574ecb3f53d6b3947b944e21e9e8275291",
+      "inventory_index": 1145,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:0b201bb4b7a375a13ffd76fdd099aae0ac6cadf8c924c67c744b34c939881709",
+      "symbol": "IddField.referenceable",
+      "symbol_hash": "sha256:4695751c1aa9e251af37469066247f690589c2330beb72fa89438ad04a4c9a8d"
+    },
+    {
+      "body_hash": "sha256:c127d9c3b77bd9baf591dbecb6bac00e4249af93aa7b3ef5a503333c07abc581",
+      "inventory_index": 1146,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.type",
+      "symbol_hash": "sha256:5b7e3d73506d79c8de9c7a2bd15951fe3351c543969a4ccc6df83308d370387f"
+    },
+    {
+      "body_hash": "sha256:cee23df43be6648df234ab6b726d42e1bc1915f239ecdba6aa2f3e7c45e4e252",
+      "inventory_index": 1147,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddField.unit",
+      "symbol_hash": "sha256:59edda63773ac040eeef9bc941906168d56459deaa79b7efbb93dac8a7bfd011"
+    },
+    {
+      "body_hash": "sha256:ffd88d5b3e5b7deae3444431882436bb9c7f11743e842f0e7a30e7ca5e2a851b",
+      "inventory_index": 1148,
+      "kind": "class",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b87b9b0fb86e5b2072d79b70fd35000bd2709bc965955befe2dd8718a52916f9",
+      "symbol": "IddObject",
+      "symbol_hash": "sha256:8a75cdbcff665d5d249df5fd70d6be7b3c4ff1cf62d4924796b5a8309b9c26af"
+    },
+    {
+      "body_hash": "sha256:1ae730d07ef0a1ce8704eceb3efea74aff6e7416c126df0e7f31e20082c98474",
+      "inventory_index": 1149,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:30a1df688e2680b0dd26954028e2863af01b7f2367308dc27b2e0a7ebe1a1281",
+      "symbol": "IddObject.__eq__",
+      "symbol_hash": "sha256:355edc7a0ebf1dcdc410c30ce703816b335848009bf0a47d8ca6affcb57bfa23"
+    },
+    {
+      "body_hash": "sha256:408916150a60f5b94142b6a6ac75dee7806fbd6708be49aec353271e496818c0",
+      "inventory_index": 1150,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:69ec82eae1b61306eb958f7931cb71af18f5d4eb7704c012e5613cddcebdad39",
+      "symbol": "IddObject.__init__",
+      "symbol_hash": "sha256:a85878fd438a00a8c9391dc3c81dad3e34dfebc8a79d89172868753401542d19"
+    },
+    {
+      "body_hash": "sha256:8213adbfc184659dc1bb2b0d98757b4d787348cd3328c8f9f5f98d68ef48c398",
+      "inventory_index": 1153,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddObject.begin_extensible",
+      "symbol_hash": "sha256:cc944d8ebdc2d6ab8c5515a8a41de1920f9ca2a3459622eab9c2e81b5336e7ba"
+    },
+    {
+      "body_hash": "sha256:b94ef9e8731c3b4dae3bd5403df70ed7c58d0ee2e51ec91e09f9233dd989c331",
+      "inventory_index": 1154,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:8accb5cc40af7afc8a7aeaad91e5f497ec1134fb27b5489d3b6afda6afc4536d",
+      "symbol": "IddObject.default",
+      "symbol_hash": "sha256:ceed741c69fb49b6bc12f8455f3b875b8e146b0b2fef5b6f8cd9f8d127d8a4db"
+    },
+    {
+      "body_hash": "sha256:e63cebea81ddd7edc880f6a459a3c5513aacb563122afef5bb32e6edf6579f93",
+      "inventory_index": 1155,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddObject.extensible",
+      "symbol_hash": "sha256:656dae5addd602463386d773d8094419e466d8320eced25422ed22f8306f3293"
+    },
+    {
+      "body_hash": "sha256:c0b79b3a76ee300fa3952e1d0058f971722faed3a3665582cf1a8ee0a0403cbc",
+      "inventory_index": 1156,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddObject.format",
+      "symbol_hash": "sha256:54aa570dce77d57fbdc4fd6aea8abf9699bc533d8f765fd3d99747adc1b4cf44"
+    },
+    {
+      "body_hash": "sha256:f9c7c7d2da860cb2bca7720b9262effb0013e0dae13af39db7b2ff48f4134ef2",
+      "inventory_index": 1157,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:c3856c65eff6bf2f2cd857ae90b984ed80879c9a0aef8ba17ac5664078a2e6b8",
+      "symbol": "IddObject.from_text",
+      "symbol_hash": "sha256:e55a8f894fc1486c07c5853a8f3d41ea444dd58c29d8357588f47a3dea32e695"
+    },
+    {
+      "body_hash": "sha256:96a8f1c0e01af084a07686c6e47631baf4076033cbf6a60c82429b9b7b4ad404",
+      "inventory_index": 1158,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddObject.idd_index",
+      "symbol_hash": "sha256:b7a1f5de05d189e74c63972c5105da91b69700743a056bb9373e9c3c81e64941"
+    },
+    {
+      "body_hash": "sha256:d91e886640b3216db585e929ddf6784a755d2ea363a0535c1bf6ca0132ab5b6e",
+      "inventory_index": 1159,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddObject.is_obsolete",
+      "symbol_hash": "sha256:b654e57780f9263390dc8d45d58cd57ff675fa9feaa7c55ea0066e26aee173b0"
+    },
+    {
+      "body_hash": "sha256:b67b1493b339394473353521d4b3909ebba5ace0f0a6a4c1c138c4f746504cd4",
+      "inventory_index": 1160,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddObject.is_required",
+      "symbol_hash": "sha256:b64e21456b9791c019fdef355056d7e5c6940768ff8f5d535f9fa8ec4d7754db"
+    },
+    {
+      "body_hash": "sha256:1d3e393a196fecc2383b6426dc75f707b896318300e02cb16791d4c34a503027",
+      "inventory_index": 1161,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:4d8304d5438dea6290c4bc8f7da2ecae177f6dacdbaa0bbb164b5181953b43f3",
+      "symbol": "IddObject.is_unique",
+      "symbol_hash": "sha256:9f99bd10fd99f8d79cca0d4f43d2af065f9947b8b725f402d78aa7065794e861"
+    },
+    {
+      "body_hash": "sha256:0f60520a06514ed2219adfdc2c05a666ec0ec1e647063b33ca1bdf1ed18ac854",
+      "inventory_index": 1162,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddObject.memo",
+      "symbol_hash": "sha256:203215fc3599a4174a2f54eabfff299cac752874f66079a230df9a436268ed6c"
+    },
+    {
+      "body_hash": "sha256:f8853b19a115d3e241ae5d8e2c2a162e4172ce532e6070f4c599b71b4ad4252e",
+      "inventory_index": 1163,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:eb9fa11a201dd61305f0314fe0261cbc371edeb6909c805081c19c6b05e73876",
+      "symbol": "IddObject.min_fields",
+      "symbol_hash": "sha256:1821fd046dacffa6cb854bb3fffac25f28f40c626e2425a90979a5539630c04a"
+    },
+    {
+      "body_hash": "sha256:454cbcaacaa600fe9a3898044a921b8987b3ee094de83a56d3c7eacae4c80ad4",
+      "inventory_index": 1164,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddObject.name",
+      "symbol_hash": "sha256:dc05a34b412c0963f73610621ae4c7befa1efdce2bf905c59c9edf231cb64f77"
+    },
+    {
+      "body_hash": "sha256:0fa7a97176b55863e8175e6166fca9a7dc8c3a8b3326494198d8f1d9d62bba82",
+      "inventory_index": 1165,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:b14de42215f3df7a3eb60763850f7ddb187c7effeafa2a8816b4168ca283fcdb",
+      "symbol": "IddObject.reference",
+      "symbol_hash": "sha256:ecceb577b64a032652be4208494314bd23b7eff64d0861182f88461fa4fe8f80"
+    },
+    {
+      "body_hash": "sha256:2fd852b6f259cc890c7de93d0b9eea5f31a2a08fb109838b6bcc0c4c34e3aaf2",
+      "inventory_index": 1166,
+      "kind": "function",
+      "path": "src/idragon/imugi.py",
+      "signature_hash": "sha256:3600cccc11bc6800f262c4e5f0aacb4e7f2bf7ca486cbc455c0376a25e228afd",
+      "symbol": "IddObject.required_fields",
+      "symbol_hash": "sha256:b01c46a03850c3e5209c78a96141d1a125c934404d2f2024c845b8a21f6b8c39"
+    }
+  ],
+  "upstream": {
+    "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
+    "inventory": {
+      "bytes": 518070,
+      "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+      "file_sha256": "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    },
+    "isolated_import": {
+      "loaded_local_modules": [
+        {
+          "ast_sha256": "sha256:a361e8780970d1070591443cef73e2242ab6a45908af8901e6925c881a5982e9",
+          "bytes": 6247,
+          "module": "idragon.common",
+          "path": "src/idragon/common.py",
+          "source_sha256": "sha256:0445472b3e0551365bbaf9d3576e408fed8d2736d72521ff5d6d2f6cdbbd6c9d"
+        },
+        {
+          "ast_sha256": "sha256:b8487539fc6085f2d4e3db229a88f9fdab37c0f9f42233b91b4259478e37a084",
+          "bytes": 2590,
+          "module": "idragon.constants",
+          "path": "src/idragon/constants.py",
+          "source_sha256": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520"
+        },
+        {
+          "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+          "bytes": 91815,
+          "module": "idragon.imugi",
+          "path": "src/idragon/imugi.py",
+          "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+        },
+        {
+          "ast_sha256": "sha256:80fdaa33ba9ac3b524719c8fd312a3abcc928996a95b90e20c2f3ed98b3dc26e",
+          "bytes": 12367,
+          "module": "idragon.launcher",
+          "path": "src/idragon/launcher.py",
+          "source_sha256": "sha256:741f3319c18aae63d6c9a73f828b36e138e51ddaa263505926088ce565aed68f"
+        }
+      ],
+      "loaded_local_modules_sha256": "sha256:b38033bf44c4359f5ee8cf44f8a12b2b267a2f4ddf83a25f0a13b5628b20f692",
+      "relocated_observations_sha256": "sha256:757fa1f6f1a78f595eb2894b11427cb2ee7ec9ceb61fe98df86d9d1eb3e939d4",
+      "relocated_source_copy": "two-byte-identical-repository-temp-copies",
+      "source_location_count": 2
+    },
+    "partition_receipts_sha256": {
+      "deferred": "sha256:61f4342d8b5391b714de9ae1a37d505ed58d169d13fb1c739bac607c54056c96",
+      "out_of_scope": "sha256:3ad4f99816b0591241fe459bd60a0af70f9a40e497be34bab7b132ced2fe42da",
+      "target": "sha256:cea1bdce699efee3b7f152d932f8dd1b52affe0ad139b642e3be2371446e5223"
+    },
+    "source": {
+      "ast_sha256": "sha256:e3d5d9756c4c75c1adf4d7ee8ec90112cba34e4c9258b1e800bd4c5604d4fa90",
+      "bytes": 91815,
+      "path": "src/idragon/imugi.py",
+      "source_sha256": "sha256:cde6cf0415ac97086a58b9fc2c213528311746c9782d2af2fcea336622ce6613"
+    }
+  }
+}
