@@ -47,6 +47,7 @@ $dragonConstructionAirBoundaryCoreGeneratorPath = Join-Path $repositoryRoot 'too
 $dragonConstructionCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_construction_core_oracle.py'
 $dragonConstructionToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_construction_to_idf_object_oracle.py'
 $dragonHvacAppendersControllersGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_appenders_controllers_oracle.py'
+$dragonHvacMiscSystemsCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_misc_systems_core_oracle.py'
 $dragonHvacPhotovoltaicToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_photovoltaic_to_idf_object_oracle.py'
 $dragonHvacSourceSystemToIdfObjectGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_source_system_to_idf_object_oracle.py'
 $dragonHvacSourceTowerCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_hvac_source_tower_core_oracle.py'
@@ -66,6 +67,7 @@ $dragonModelConditioningGeneratorPath = Join-Path $repositoryRoot 'tools\python-
 $dragonModelConstructionDefaultsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_construction_defaults_oracle.py'
 $dragonModelProjectionsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_projections_oracle.py'
 $dragonModelTerrainGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_terrain_oracle.py'
+$imugiIddDefinitionsCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_imugi_idd_definitions_core_oracle.py'
 $launcherResultParserGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_launcher_result_parser_oracle.py'
 $launcherRuntimeGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_launcher_runtime_oracle.py'
 $iddGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_idd_schema_oracle.py'
@@ -108,6 +110,7 @@ $dragonConstructionAirBoundaryCoreTestPath = Join-Path $repositoryRoot 'tests\Py
 $dragonConstructionCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_construction_core_oracle.py'
 $dragonConstructionToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_construction_to_idf_object_oracle.py'
 $dragonHvacAppendersControllersTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_appenders_controllers_oracle.py'
+$dragonHvacMiscSystemsCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_misc_systems_core_oracle.py'
 $dragonHvacPhotovoltaicToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_photovoltaic_to_idf_object_oracle.py'
 $dragonHvacSourceSystemToIdfObjectTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_source_system_to_idf_object_oracle.py'
 $dragonHvacSourceTowerCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_hvac_source_tower_core_oracle.py'
@@ -127,6 +130,7 @@ $dragonModelConditioningTestPath = Join-Path $repositoryRoot 'tests\PythonRefere
 $dragonModelConstructionDefaultsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_construction_defaults_oracle.py'
 $dragonModelProjectionsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_projections_oracle.py'
 $dragonModelTerrainTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_terrain_oracle.py'
+$imugiIddDefinitionsCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_imugi_idd_definitions_core_oracle.py'
 $publicSymbolInventoryPath = Join-Path $repositoryRoot 'upstream\public-symbol-inventory.json'
 $tempRoot = Join-Path $repositoryRoot 'temp'
 $referenceTempRoot = Join-Path $tempRoot 'reference'
@@ -221,6 +225,7 @@ foreach ($requiredFile in @(
     $dragonConstructionCoreGeneratorPath,
     $dragonConstructionToIdfObjectGeneratorPath,
     $dragonHvacAppendersControllersGeneratorPath,
+    $dragonHvacMiscSystemsCoreGeneratorPath,
     $dragonHvacPhotovoltaicToIdfObjectGeneratorPath,
     $dragonHvacSourceSystemToIdfObjectGeneratorPath,
     $dragonHvacSourceTowerCoreGeneratorPath,
@@ -240,6 +245,7 @@ foreach ($requiredFile in @(
     $dragonModelConstructionDefaultsGeneratorPath,
     $dragonModelProjectionsGeneratorPath,
     $dragonModelTerrainGeneratorPath,
+    $imugiIddDefinitionsCoreGeneratorPath,
     $iddGeneratorPath,
     $constructionEqualityGeneratorPath,
     $scheduleTypeGeneratorPath,
@@ -280,6 +286,7 @@ foreach ($requiredFile in @(
     $dragonConstructionCoreTestPath,
     $dragonConstructionToIdfObjectTestPath,
     $dragonHvacAppendersControllersTestPath,
+    $dragonHvacMiscSystemsCoreTestPath,
     $dragonHvacPhotovoltaicToIdfObjectTestPath,
     $dragonHvacSourceSystemToIdfObjectTestPath,
     $dragonHvacSourceTowerCoreTestPath,
@@ -299,6 +306,7 @@ foreach ($requiredFile in @(
     $dragonModelConstructionDefaultsTestPath,
     $dragonModelProjectionsTestPath,
     $dragonModelTerrainTestPath,
+    $imugiIddDefinitionsCoreTestPath,
     $publicSymbolInventoryPath
 )) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
@@ -780,7 +788,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants metadata/engineering, epsimple numeric constants, construction core, HVAC enum/base, other-systems, thermal-source, and supply-system, identifier conventions, model core/result, and shape core, dragon construction AirBoundary core, construction core, and to-IDF-object, dragon HVAC appenders/controllers, photovoltaic/source-system/source-tower-core/supply-core/SupplyGroup core/to-IDF-object, dragon shape geometry/opening-adjacency core and shading-material/surface/Zone to-IDF-object, dragon shape Zone core, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants metadata/engineering, epsimple numeric constants, construction core, HVAC enum/base, other-systems, thermal-source, and supply-system, identifier conventions, model core/result, and shape core, dragon construction AirBoundary core, construction core, and to-IDF-object, dragon HVAC appenders/controllers, misc-systems core, photovoltaic/source-system/source-tower-core/supply-core/SupplyGroup core/to-IDF-object, dragon shape geometry/opening-adjacency core and shading-material/surface/Zone to-IDF-object, dragon shape Zone core, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, Imugi IDD definitions, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -1177,6 +1185,25 @@ Invoke-LoggedNativeCommand `
     -LogPath (Join-Path $logsRoot 'python-dragon-hvac-appenders-controllers-reference.log') `
     -FailureMessage 'Generating the Python dragon HVAC appenders/controllers oracle failed'
 
+$dragonHvacMiscSystemsCoreOraclePath = Join-Path $outputRoot 'dragon-hvac-misc-systems-core-oracle.json'
+$dragonHvacMiscSystemsCoreGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $dragonHvacMiscSystemsCoreGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $dragonHvacMiscSystemsCoreOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $dragonHvacMiscSystemsCoreGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-dragon-hvac-misc-systems-core-reference.log') `
+    -FailureMessage 'Generating the Python dragon HVAC misc-systems core oracle failed'
+
 $dragonHvacPhotovoltaicToIdfObjectOraclePath = Join-Path $outputRoot 'dragon-hvac-photovoltaic-to-idf-object-oracle.json'
 $dragonHvacPhotovoltaicToIdfObjectGeneratorArguments = @(
     '-B',
@@ -1569,6 +1596,25 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $launcherRuntimeGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-launcher-runtime-reference.log') `
     -FailureMessage 'Generating the Python launcher runtime oracle failed'
+
+$imugiIddDefinitionsCoreOraclePath = Join-Path $outputRoot 'imugi-idd-definitions-core-oracle.json'
+$imugiIddDefinitionsCoreGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $imugiIddDefinitionsCoreGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $imugiIddDefinitionsCoreOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $imugiIddDefinitionsCoreGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-imugi-idd-definitions-core-reference.log') `
+    -FailureMessage 'Generating the Python Imugi IDD definitions core oracle failed'
 
 $iddOraclePath = Join-Path $outputRoot 'idd-24.2.0.schema.json.gz'
 $iddGeneratorArguments = @(

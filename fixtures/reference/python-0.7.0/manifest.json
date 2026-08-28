@@ -78,6 +78,11 @@
       "sha256": "2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054"
     },
     {
+      "path": "dragon-hvac-misc-systems-core-oracle.json",
+      "bytes": 290479,
+      "sha256": "2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89"
+    },
+    {
       "path": "dragon-hvac-photovoltaic-to-idf-object-oracle.json",
       "bytes": 147261,
       "sha256": "07c383c316989ccb22ac3eadcf9d8388764f76effbbf03c13b7a54f8af20f22b"
@@ -231,6 +236,11 @@
       "path": "idd-24.2.0.schema.json.gz",
       "bytes": 585482,
       "sha256": "f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705"
+    },
+    {
+      "path": "imugi-idd-definitions-core-oracle.json",
+      "bytes": 165323,
+      "sha256": "3e56e7fe6026fef3146a62aadf3248940c65aa9a2b5c624b519fbc0e3d99dd69"
     },
     {
       "path": "launcher-result-parser-oracle.json",

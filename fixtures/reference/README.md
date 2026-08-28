@@ -228,6 +228,20 @@ immutable hash-pinned support, and the remaining 149 declarations stay
 deferred, closing the exact 174-receipt source partition without executing
 native or EnergyPlus processes.
 
+`python-0.7.0/dragon-hvac-misc-systems-core-oracle.json` pins six bounded,
+relocatable CPython 3.12.7 cases for the exact 15 `DomesticHotWater`,
+`EnergyRecoveryVentilator`, and `PhotoVoltaicPanel` class, constructor,
+property, and empty-emission receipts. It records constructor validation,
+post-construction mutation, minimum-subnormal and upper boundaries, tagged NaN
+and infinity behavior, bool-as-int quirks, the photovoltaic `azimuth=None`
+omission, and fresh empty DHW/ERV result lists. The reviewed public native
+routes conservatively classify seven property/empty-emission receipts as
+equivalent and eight aggregate or domain-model receipts as exceptions. Existing
+photovoltaic emission receipt 761 remains immutable hash-pinned support. The
+59 source/tower, 49 supply, 24 appender/controller, 15 misc, 21 resolved, and
+six out-of-scope sets form an exact disjoint 174-receipt HVAC source partition;
+the generator executes neither native code nor EnergyPlus.
+
 `python-0.7.0/dragon-hvac-photovoltaic-to-idf-object-oracle.json` pins three
 ordered CPython 3.12.7 observations for `PhotoVoltaicPanel.to_idf_object` on
 the common valid constructor domain. It records the exact six-object family
@@ -383,6 +397,14 @@ nonnumeric failure boundary. The reviewed
 material emission through `EnergyModel.ToIdfDocument`; constructors, invalid
 native emission parity, standalone converters, shading controls, surfaces, and
 parent `EnergyModel.to_idf` remain explicit unresolved boundaries.
+
+`python-0.7.0/imugi-idd-definitions-core-oracle.json` pins eight relocatable
+CPython 3.12.7 cases for the exact 40 `IddField` and `IddObject` definition
+receipts in `idragon/imugi.py`. Eighteen receipts are reviewed equivalents and
+22 are explicit exceptions; 65 deferred and 28 out-of-scope declarations close
+the exact disjoint 133-receipt Imugi source partition. The observations use two
+byte-identical relocated source copies and hash-pin the EnergyPlus 24.2 IDD
+schema support without executing native code or EnergyPlus.
 
 `python-0.7.0/launcher-result-parser-oracle.json` pins 21 ordered CPython
 3.12.7 observations for the seven result-parser symbols in
