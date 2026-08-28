@@ -33,7 +33,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:8abdc700b9bfa612dec67f562ee8d689f0b13b897277f43bf0186695e71f35c9"
+    "sha256:c51cebedd150eeb9db7f62077d5645a31ceb7f5fe2beaf3ea456270d752bbf18"
 )
 
 
@@ -69,9 +69,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 403,
-                "exception": 543,
-                "needs_reverification": 44,
+                "equivalent": 409,
+                "exception": 562,
+                "needs_reverification": 19,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -104,10 +104,14 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(11, len(RISKY_AUTHORING_KEYS))
         self.assertFalse(RISKY_AUTHORING_KEYS & set(plan.decisions.decisions_by_key))
         promoted_risky_keys = {
+            ("src/idragon/imugi.py", "IDF.append"),
+            ("src/idragon/imugi.py", "IdfObject.__getitem__"),
+            ("src/idragon/imugi.py", "IdfObject.__setitem__"),
+            ("src/idragon/imugi.py", "IdfObject.__str__"),
             ("src/idragon/imugi.py", "StaticIndexedDict.__getitem__"),
             ("src/idragon/imugi.py", "StaticIndexedDict.__setitem__"),
         }
-        self.assertEqual(2, len(promoted_risky_keys))
+        self.assertEqual(6, len(promoted_risky_keys))
         self.assertTrue(promoted_risky_keys <= RISKY_AUTHORING_KEYS)
         self.assertTrue(
             all(
@@ -117,17 +121,40 @@ class SafeScopePolicyTests(unittest.TestCase):
         )
         self.assertEqual(
             {
+                "IDF.append": (
+                    "equivalent",
+                    None,
+                    "imugi-idf-object-core-1113-1114979d",
+                ),
+                "IdfObject.__getitem__": (
+                    "equivalent",
+                    None,
+                    "imugi-idf-object-core-1170-7799d464",
+                ),
+                "IdfObject.__setitem__": (
+                    "exception",
+                    "typed-immutable-native-idf-adaptation-1173",
+                    "imugi-idf-object-core-1173-d94a9b97",
+                ),
+                "IdfObject.__str__": (
+                    "equivalent",
+                    None,
+                    "imugi-idf-object-core-1174-f978bc66",
+                ),
                 "StaticIndexedDict.__getitem__": (
+                    "exception",
                     "typed-case-insensitive-indexers-with-conventional-boundary-semantics",
                     "imugi-idd-schema-static-core-1220-c84cef47",
                 ),
                 "StaticIndexedDict.__setitem__": (
+                    "exception",
                     "immutable-read-only-production-collections",
                     "imugi-idd-schema-static-core-1222-6a048e25",
                 ),
             },
             {
                 key[1]: (
+                    entries[key].classification,
                     entries[key].exception_id,
                     next(
                         reference.rsplit("#", 1)[1]
@@ -137,9 +164,6 @@ class SafeScopePolicyTests(unittest.TestCase):
                 )
                 for key in promoted_risky_keys
             },
-        )
-        self.assertTrue(
-            all(entries[key].classification == "exception" for key in promoted_risky_keys)
         )
         self.assertEqual(
             "needs_reverification",
@@ -2515,11 +2539,27 @@ class SafeScopePolicyTests(unittest.TestCase):
             *range(1100, 1108),
             *range(1217, 1228),
         }
-        remaining_deferred_indices = deferred_indices - schema_static_indices
+        idf_object_indices = {
+            1108,
+            1109,
+            *range(1112, 1117),
+            1118,
+            1119,
+            1121,
+            1122,
+            1167,
+            1170,
+            1171,
+            *range(1173, 1184),
+        }
+        remaining_deferred_indices = (
+            deferred_indices - schema_static_indices - idf_object_indices
+        )
         self.assertEqual(28, len(out_of_scope_indices))
         self.assertEqual(65, len(deferred_indices))
         self.assertEqual(21, len(schema_static_indices))
-        self.assertEqual(44, len(remaining_deferred_indices))
+        self.assertEqual(25, len(idf_object_indices))
+        self.assertEqual(19, len(remaining_deferred_indices))
         self.assertTrue(
             all(
                 entries[index].classification == "out_of_scope"
@@ -2534,9 +2574,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "equivalent": 27,
-                "exception": 34,
-                "needs_reverification": 44,
+                "equivalent": 33,
+                "exception": 53,
+                "needs_reverification": 19,
                 "out_of_scope": 28,
             },
             {
@@ -2678,14 +2718,43 @@ class SafeScopePolicyTests(unittest.TestCase):
             set(range(1095, 1228))
             - target_indices
             - batch1_indices
+            - {
+                1108,
+                1109,
+                *range(1112, 1117),
+                1118,
+                1119,
+                1121,
+                1122,
+                1167,
+                1170,
+                1171,
+                *range(1173, 1184),
+            }
             - out_of_scope_indices
         )
         self.assertEqual(40, len(batch1_indices))
         self.assertEqual(28, len(out_of_scope_indices))
-        self.assertEqual(44, len(deferred_indices))
+        self.assertEqual(19, len(deferred_indices))
         self.assertEqual(
             set(range(1095, 1228)),
-            target_indices | batch1_indices | deferred_indices | out_of_scope_indices,
+            target_indices
+            | batch1_indices
+            | {
+                1108,
+                1109,
+                *range(1112, 1117),
+                1118,
+                1119,
+                1121,
+                1122,
+                1167,
+                1170,
+                1171,
+                *range(1173, 1184),
+            }
+            | deferred_indices
+            | out_of_scope_indices,
         )
         self.assertTrue(
             all(
@@ -2707,9 +2776,217 @@ class SafeScopePolicyTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "equivalent": 27,
-                "exception": 34,
-                "needs_reverification": 44,
+                "equivalent": 33,
+                "exception": 53,
+                "needs_reverification": 19,
+                "out_of_scope": 28,
+            },
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in range(1095, 1228)
+                )
+                for classification in (
+                    "equivalent",
+                    "exception",
+                    "needs_reverification",
+                    "out_of_scope",
+                )
+            },
+        )
+
+    def test_imugi_idf_object_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        target_indices = {
+            1108,
+            1109,
+            *range(1112, 1117),
+            1118,
+            1119,
+            1121,
+            1122,
+            1167,
+            1170,
+            1171,
+            *range(1173, 1184),
+        }
+        equivalent_indices = {1112, 1113, 1118, 1170, 1174, 1181}
+        exception_indices = target_indices - equivalent_indices
+        exception_ids = {
+            index: f"typed-immutable-native-idf-adaptation-{index}"
+            for index in exception_indices
+        }
+        receipt_ids = {
+            1108: "imugi-idf-object-core-1108-9fa0a86a",
+            1109: "imugi-idf-object-core-1109-a0cef595",
+            1112: "imugi-idf-object-core-1112-641b4167",
+            1113: "imugi-idf-object-core-1113-1114979d",
+            1114: "imugi-idf-object-core-1114-ca419512",
+            1115: "imugi-idf-object-core-1115-019279b8",
+            1116: "imugi-idf-object-core-1116-d7e9a2d3",
+            1118: "imugi-idf-object-core-1118-78c83655",
+            1119: "imugi-idf-object-core-1119-bcd90001",
+            1121: "imugi-idf-object-core-1121-013ee380",
+            1122: "imugi-idf-object-core-1122-d79138b0",
+            1167: "imugi-idf-object-core-1167-57c5d21a",
+            1170: "imugi-idf-object-core-1170-7799d464",
+            1171: "imugi-idf-object-core-1171-1f86dc75",
+            1173: "imugi-idf-object-core-1173-d94a9b97",
+            1174: "imugi-idf-object-core-1174-f978bc66",
+            1175: "imugi-idf-object-core-1175-8eee76b2",
+            1176: "imugi-idf-object-core-1176-2046c730",
+            1177: "imugi-idf-object-core-1177-823cd22d",
+            1178: "imugi-idf-object-core-1178-a24d2160",
+            1179: "imugi-idf-object-core-1179-9ee8bea6",
+            1180: "imugi-idf-object-core-1180-efacd493",
+            1181: "imugi-idf-object-core-1181-37692960",
+            1182: "imugi-idf-object-core-1182-8f974416",
+            1183: "imugi-idf-object-core-1183-8dfd0cfa",
+        }
+        self.assertEqual(25, len(target_indices))
+        self.assertEqual(6, len(equivalent_indices))
+        self.assertEqual(19, len(exception_indices))
+
+        expected_receipt_ids = set()
+        for index in sorted(target_indices):
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual("src/idragon/imugi.py", entry.path, index)
+            self.assertEqual(inventory_symbol.key, entry.key, index)
+            expected_classification = (
+                "equivalent" if index in equivalent_indices else "exception"
+            )
+            self.assertEqual(expected_classification, entry.classification, index)
+            receipt_id = receipt_ids[index]
+            expected_receipt_ids.add(receipt_id)
+            expected_evidence = [f"upstream/symbol-evidence.json#{receipt_id}"]
+            if index in exception_indices:
+                exception_id = exception_ids[index]
+                self.assertEqual(exception_id, entry.exception_id, index)
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+                self.assertIn("typed-immutable-native-idf-adaptation", entry.rationale)
+            else:
+                self.assertIsNone(entry.exception_id, index)
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, index)
+            for binding in (
+                "Oracle commit aa53eda",
+                "commit d616392",
+                "sha256:7237e974d6d938c6f8f7215661f54db4f26a2a7afc664765b895656a7720babd",
+                "sha256:8589497feab58cc9d9c05479c50264a091182c2d68531398d1decddd24f7cc43",
+                "sha256:5c296ed4b6129dfbb40523136f91877169191a4ff42b5be63411d46bc91e5c73",
+                "sha256:51fc6b40f71cd0a4bec0e9a59c2879c5d2e3d16246d2b099df0238f10b05178d",
+                "all previous receipts, batch1 IDD definition evidence, batch2 IDD schema/static evidence, and every non-target Imugi",
+                "No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+            ):
+                self.assertIn(binding, entry.rationale, index)
+
+        evidence = self.configuration.symbol_evidence
+        assert evidence is not None
+        imugi_idf_object_entries = {
+            item.receipts[0].identifier: item
+            for item in evidence.entries
+            if item.receipts[0].identifier.startswith("imugi-idf-object-core-")
+        }
+        self.assertEqual(expected_receipt_ids, set(imugi_idf_object_entries))
+        self.assertEqual(25, len(imugi_idf_object_entries))
+        self.assertTrue(
+            all(
+                len(item.receipts) == 1
+                and item.receipts[0].outcome == "passed"
+                and not item.receipts[0].skipped
+                and not item.receipts[0].structural_only
+                and not item.receipts[0].claims_active_load
+                and item.receipts[0].exercised_load == "not_applicable"
+                for item in imugi_idf_object_entries.values()
+            )
+        )
+        self.assertEqual(
+            set(exception_ids.values()),
+            {
+                entry.exception_id
+                for entry in entries
+                if entry.exception_id in set(exception_ids.values())
+            },
+        )
+
+        append_entry = entries[1113]
+        self.assertEqual("IDF.append", append_entry.symbol)
+        self.assertEqual("equivalent", append_entry.classification)
+        self.assertIsNone(append_entry.exception_id)
+        self.assertIn(
+            "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
+            append_entry.rationale,
+        )
+        append_evidence = evidence.entries_by_key[append_entry.key]
+        self.assertEqual(
+            "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append",
+            append_evidence.implementation_symbol,
+        )
+        self.assertNotIn("IdfDocument.Add", append_entry.rationale)
+
+        batch1_indices = {
+            1123,
+            1124,
+            1125,
+            *range(1128, 1151),
+            *range(1153, 1167),
+        }
+        batch2_indices = {
+            1095,
+            1097,
+            *range(1100, 1108),
+            *range(1217, 1228),
+        }
+        batch4_indices = {
+            1190,
+            1194,
+            1195,
+            *range(1197, 1200),
+            1201,
+            *range(1203, 1213),
+            1214,
+            1215,
+        }
+        out_of_scope_indices = set(range(1095, 1228)) - (
+            target_indices | batch1_indices | batch2_indices | batch4_indices
+        )
+        self.assertEqual(40, len(batch1_indices))
+        self.assertEqual(21, len(batch2_indices))
+        self.assertEqual(19, len(batch4_indices))
+        self.assertEqual(28, len(out_of_scope_indices))
+        self.assertEqual(
+            set(range(1095, 1228)),
+            target_indices
+            | batch1_indices
+            | batch2_indices
+            | batch4_indices
+            | out_of_scope_indices,
+        )
+        self.assertTrue(
+            all(
+                entries[index].classification in {"equivalent", "exception"}
+                for index in batch1_indices | batch2_indices
+            )
+        )
+        self.assertTrue(
+            all(
+                entries[index].classification == "needs_reverification"
+                for index in batch4_indices
+            )
+        )
+        self.assertTrue(
+            all(
+                entries[index].classification == "out_of_scope"
+                for index in out_of_scope_indices
+            )
+        )
+        self.assertEqual(
+            {
+                "equivalent": 33,
+                "exception": 53,
+                "needs_reverification": 19,
                 "out_of_scope": 28,
             },
             {
