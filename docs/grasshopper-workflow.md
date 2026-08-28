@@ -79,8 +79,9 @@ and bar-plot components expose the same ordered month/fuel/end-use data without
 requiring a file round trip.
 
 Relative paths on GRM/GRR readers and writers and CSV export are resolved from
-the saved Grasshopper document's folder. Unsaved definitions use Rhino's current
-working directory, while absolute paths are unchanged.
+the saved Grasshopper document's folder. In unsaved definitions, read-only
+GRM/GRR inputs use Rhino's current working directory, while GRM/GRR writers and
+CSV export use the per-user system temp directory. Absolute paths are unchanged.
 
 Batch Research accepts an ordered model list and stable case IDs. It limits
 parallel EnergyPlus processes, supports cancellation and partial failure,
@@ -90,8 +91,9 @@ All temporary case directories remain below the configured temp root.
 ## Runnable example matrix
 
 The tracked files under `examples/` cover the workflow in progressively larger
-graphs. The most complete direct path is
-`02-invisibledragon-single-zone-hvac-idf.gh`; the most complete compatibility
+graphs. The complete direct path is
+`02-invisibledragon-single-zone-hvac-idf.gh`, including runtime preparation,
+EnergyPlus execution, and result summary. The complete compatibility authoring
 path is `12-simpledragon-two-zone-to-idf.gh`. The latter internalizes geometry
 that is geometrically identical to the named objects in
 `30-two-zone-office.3dm`, allowing either a portable self-contained solve or

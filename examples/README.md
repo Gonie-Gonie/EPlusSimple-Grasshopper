@@ -9,7 +9,7 @@ window curves that can be referenced directly from Grasshopper.
 | --- | --- |
 | `00-invisibledragon-material-construction.gh` | Minimal InvisibleDragon material, thickness, construction, and U-value graph |
 | `01-invisibledragon-envelope-profile.gh` | Three-layer envelope, no-mass construction, constant annual profile, and typed output previews |
-| `02-invisibledragon-single-zone-hvac-idf.gh` | Six planar surfaces, closed zone, heat-pump/AHU and boiler/radiant systems, ERV, PV, energy model, IDF compile, and validation |
+| `02-invisibledragon-single-zone-hvac-idf.gh` | Six planar surfaces, closed zone, HVAC/ERV/PV, energy model, IDF compile/validation, runtime preparation, EnergyPlus run, and result summary |
 | `10-simpledragon-material-construction.gh` | Minimal SimpleDragon material and surface-construction graph |
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
 | `12-simpledragon-two-zone-to-idf.gh` | Two Brep zones and windows through extraction, immutable HVAC/ERV assignment, GRM assembly, and InvisibleDragon IDF conversion |
@@ -27,12 +27,16 @@ file in Grasshopper:
 .\dev.cmd install
 ```
 
-Opening an example manually is safe: all Run, Cancel, Force, Export, Overwrite,
-Batch Run, and Batch Cancel triggers are persisted as `False`. The IDF examples
-still compile deterministic input text; an unresolved EnergyPlus IDD is reported
-as a warning and can be resolved by running `.\dev.cmd setup -InstallEnergyPlus`.
-To execute example 14 interactively, supply an EnergyPlus 24.2 EPW and create a
-fresh False-to-True edge on only the operation you intend to run.
+Opening an example manually is safe: all Prepare, Run, Cancel, Repair, Force,
+Export, Overwrite, Batch Run, and Batch Cancel triggers are persisted as
+`False`. The IDF examples still compile deterministic input text; an unresolved
+EnergyPlus IDD is reported as a warning and can be resolved by running
+`.\dev.cmd setup -InstallEnergyPlus`.
+Examples 02 and 14 are the complete InvisibleDragon and SimpleDragon execution
+paths. Supply an absolute EnergyPlus 24.2 EPW, then create a fresh False-to-True
+edge on only the operation you intend to run. In example 02, first toggle
+`Prepare` and wait for `Ready`, then toggle `Run`; its verified Runtime Root is
+already connected to Run EnergyPlus.
 
 `13-simpledragon-results-and-plots.gh` keeps both paths relative to the saved
 Grasshopper document:
@@ -109,8 +113,8 @@ as a successful simulation.
 
 ## Further workflow recipes
 
-- Connect Prepare EnergyPlus Runtime and Run EnergyPlus after either IDF example
-  to execute a simulation with a user-supplied EPW.
+- Use the persisted Prepare → Run → Result chain in example 02 for a direct
+  InvisibleDragon simulation with a user-supplied EPW.
 - Use Read GRM with `fixtures\simple-dragon\grm\ASHRAE 140 modified.grm`, then
   Convert GRM to inspect compatibility diagnostics for an existing model.
 - Feed ordered GRM cases and stable IDs into Batch Research for parallel studies;

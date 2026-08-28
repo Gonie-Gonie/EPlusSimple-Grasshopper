@@ -29,11 +29,13 @@ Boolean/numeric results, outward envelope winding, solve, save, reopen, and
 round trip. Hosts run from a disposable system-temp directory outside the
 repository, and the result example proves that saved-document-relative file
 paths do not depend on the host process working directory.
-The two-zone run example additionally verifies the typed Run-to-Result-to-GRR-to-
-CSV path and a separate batch path. Every persisted execution, cancellation,
-overwrite, and export trigger must remain false. When EnergyPlus and an EPW are
-ready, the host enables the operations only in memory; disabled or unavailable
-states remain explicitly `Not Run` in the summary.
+The InvisibleDragon single-zone example persists a guarded Prepare-to-Run-to-
+Result path, and the SimpleDragon two-zone run example adds the typed Result-to-
+GRR-to-CSV path plus a separate batch path. Every persisted preparation,
+execution, cancellation, repair, overwrite, and export trigger must remain
+false. When EnergyPlus and an EPW are ready, the host enables the two-zone
+operations only in memory; disabled or unavailable states remain explicitly
+`Not Run` in the summary.
 Building-model checks cover metre units, layers, object names and user strings,
 closed solid zone Breps, exact bounds, expected adjacency pairs, and closed
 planar window curves. The two-zone GRM-to-IDF graph also proves that its

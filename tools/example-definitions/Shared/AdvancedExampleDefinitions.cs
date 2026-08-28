@@ -263,6 +263,73 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(compile, 0, validate, 0);
         graph.Connect(compile, 1, idfText, null);
         graph.Connect(validate, 0, valid, null);
+
+        GraphNode runtimeTarget = graph.Panel(90, "Runtime target root (optional)", string.Empty, 2360, 80);
+        GraphNode prepareTrigger = graph.Boolean(91, "Prepare runtime - explicit rising edge", false, 2360, 180);
+        GraphNode prepareCancel = graph.Boolean(92, "Cancel runtime preparation", false, 2360, 260);
+        GraphNode repairRuntime = graph.Boolean(93, "Repair invalid custom target", false, 2360, 340);
+        GraphNode prepareTimeout = graph.Slider(94, "Runtime lock timeout 2 min", 2m, 1m, 30m, 2360, 420);
+        GraphNode prepareRuntime = graph.Component(95, Catalog.InvisiblePrepareRuntime, 2720, 210);
+        graph.Connect(runtimeTarget, null, prepareRuntime, 0);
+        graph.Connect(prepareTrigger, null, prepareRuntime, 1);
+        graph.Connect(prepareCancel, null, prepareRuntime, 2);
+        graph.Connect(repairRuntime, null, prepareRuntime, 3);
+        graph.Connect(prepareTimeout, null, prepareRuntime, 4);
+
+        GraphNode prepareState = graph.Panel(96, "Runtime preparation state", string.Empty, 3070, 150);
+        GraphNode prepareReady = graph.Panel(97, "Runtime ready", string.Empty, 3070, 260);
+        GraphNode prepareMessage = graph.Panel(98, "Runtime preparation message", string.Empty, 3070, 370);
+        graph.Connect(prepareRuntime, 2, prepareState, null);
+        graph.Connect(prepareRuntime, 3, prepareReady, null);
+        graph.Connect(prepareRuntime, 5, prepareMessage, null);
+
+        GraphNode weatherPath = graph.Panel(100, "EPW path - choose a local weather file", string.Empty, 2360, 650);
+        GraphNode tempRoot = graph.Panel(101, "Run temp root (optional)", string.Empty, 2360, 750);
+        GraphNode runTrigger = graph.Boolean(102, "Run - explicit rising edge", false, 2360, 850);
+        GraphNode runCancel = graph.Boolean(103, "Cancel active run", false, 2360, 930);
+        GraphNode forceRerun = graph.Boolean(104, "Force rerun", false, 2360, 1010);
+        GraphNode keepWork = graph.Boolean(105, "Keep work directory", true, 2360, 1090);
+        GraphNode runTimeout = graph.Slider(106, "Run timeout 30 min", 30m, 1m, 60m, 2360, 1170);
+        GraphNode prepareMissing = graph.Boolean(107, "Prepare missing runtime during run", false, 2360, 1250);
+        GraphNode run = graph.Component(108, Catalog.InvisibleRun, 2720, 800);
+        graph.Connect(compile, 0, run, 0);
+        graph.Connect(weatherPath, null, run, 1);
+        graph.Connect(prepareRuntime, 0, run, 2);
+        graph.Connect(tempRoot, null, run, 3);
+        graph.Connect(runTrigger, null, run, 4);
+        graph.Connect(runCancel, null, run, 5);
+        graph.Connect(forceRerun, null, run, 6);
+        graph.Connect(keepWork, null, run, 7);
+        graph.Connect(runTimeout, null, run, 8);
+        graph.Connect(prepareMissing, null, run, 9);
+
+        GraphNode runState = graph.Panel(109, "EnergyPlus state", string.Empty, 3070, 690);
+        GraphNode runSuccess = graph.Panel(110, "EnergyPlus success", string.Empty, 3070, 800);
+        GraphNode runDirectory = graph.Panel(111, "EnergyPlus work directory", string.Empty, 3070, 910);
+        graph.Connect(run, 1, runState, null);
+        graph.Connect(run, 2, runSuccess, null);
+        graph.Connect(run, 3, runDirectory, null);
+
+        GraphNode resultSummary = graph.Component(112, Catalog.InvisibleResultSummary, 3070, 1090);
+        graph.Connect(run, 0, resultSummary, 0);
+        GraphNode resultRunId = graph.Panel(113, "Result run ID", string.Empty, 3440, 1010);
+        GraphNode resultState = graph.Panel(114, "Result state", string.Empty, 3440, 1100);
+        GraphNode resultSuccess = graph.Panel(115, "Result success", string.Empty, 3440, 1190);
+        GraphNode resultWarnings = graph.Panel(116, "Result warning count", string.Empty, 3440, 1280);
+        GraphNode resultSevere = graph.Panel(117, "Result severe count", string.Empty, 3440, 1370);
+        GraphNode resultFatal = graph.Panel(118, "Result fatal count", string.Empty, 3440, 1460);
+        GraphNode resultElapsed = graph.Panel(119, "Result elapsed seconds", string.Empty, 3440, 1550);
+        GraphNode resultMonthly = graph.Panel(120, "Result monthly tables", string.Empty, 3440, 1640);
+        GraphNode resultDirectory = graph.Panel(121, "Result work directory", string.Empty, 3440, 1730);
+        graph.Connect(resultSummary, 0, resultRunId, null);
+        graph.Connect(resultSummary, 1, resultState, null);
+        graph.Connect(resultSummary, 2, resultSuccess, null);
+        graph.Connect(resultSummary, 3, resultWarnings, null);
+        graph.Connect(resultSummary, 4, resultSevere, null);
+        graph.Connect(resultSummary, 5, resultFatal, null);
+        graph.Connect(resultSummary, 6, resultElapsed, null);
+        graph.Connect(resultSummary, 7, resultMonthly, null);
+        graph.Connect(resultSummary, 8, resultDirectory, null);
         graph.ExpectOutput(zone, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonZoneGoo");
         graph.ExpectOutput(airHandler, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSupplySystemGoo");
         graph.ExpectOutput(radiantFloor, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSupplySystemGoo");
@@ -270,10 +337,21 @@ internal static class AdvancedExampleDefinitions
         graph.ExpectOutput(compile, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo");
         graph.ExpectOutput(validate, 0, 1);
         graph.ExpectOutput(idfText, null, 1);
+        graph.ExpectOutput(prepareRuntime, 2, 1);
+        graph.ExpectOutput(prepareRuntime, 3, 1);
+        graph.ExpectOutput(prepareRuntime, 4, 1);
+        graph.ExpectOutput(prepareState, null, 1);
+        graph.ExpectOutput(prepareReady, null, 1);
+        graph.ExpectOutput(run, 1, 1);
+        graph.ExpectOutput(run, 2, 1);
+        graph.ExpectOutput(runState, null, 1);
+        graph.ExpectOutput(runSuccess, null, 1);
         graph.ExpectBoolean(zone, 1, true);
         graph.ExpectBoolean(model, 1, true);
         graph.ExpectBoolean(compile, 2, true);
         graph.ExpectBoolean(validate, 0, true);
+        graph.ExpectBoolean(prepareRuntime, 3, false);
+        graph.ExpectBoolean(run, 2, false);
         return graph.Build(
             InvisibleProduct,
             "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo",
@@ -1984,6 +2062,7 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity InvisibleModel = I("fee2629c-94d8-4eed-8be2-14ba108ce825", "EnergyModelComponent");
         internal static readonly ComponentIdentity InvisibleCompile = I("2743be88-ef3a-4f0d-abf8-cf062d93aafe", "CompileIdfComponent");
         internal static readonly ComponentIdentity InvisibleValidate = I("fa664eeb-5503-4366-831d-e3478c8a1832", "ValidateIdfComponent");
+        internal static readonly ComponentIdentity InvisiblePrepareRuntime = I("5199b03c-644b-4194-b38c-37f3c7a423aa", "PrepareEnergyPlusRuntimeComponent");
         internal static readonly ComponentIdentity InvisibleRun = I("5f1a9663-6f81-4635-b54d-607b48c9fd47", "RunEnergyPlusComponent");
         internal static readonly ComponentIdentity InvisibleResultSummary = I("31967aee-84ae-4536-b091-b301d1ab2c3d", "EnergyPlusResultSummaryComponent");
         internal static readonly ComponentIdentity SimpleMaterial = S("fee586e8-692c-407e-a803-d5c43f3c7222", "SimpleDragonMaterialComponent");
@@ -2016,8 +2095,8 @@ internal static class AdvancedExampleDefinitions
         {
             InvisibleMaterial, InvisibleConstruction, InvisibleNoMass, InvisibleProfile, InvisibleSurface,
             InvisibleZone, InvisibleHeatPump, InvisibleAirHandler, InvisibleBoiler, InvisibleRadiantFloor,
-            InvisibleErv, InvisiblePv, InvisibleModel, InvisibleCompile, InvisibleValidate, InvisibleRun,
-            InvisibleResultSummary,
+            InvisibleErv, InvisiblePv, InvisibleModel, InvisibleCompile, InvisibleValidate,
+            InvisiblePrepareRuntime, InvisibleRun, InvisibleResultSummary,
             SimpleMaterial, SimpleConstruction, SimpleFenestration, SimpleProfile, SimpleHeatPump,
             SimpleAirHandler, SimpleBoiler, SimpleRadiator, SimpleChiller, SimpleFanCoil, SimpleErv,
             SimplePv, SimpleExtractZones, SimpleAssignSupplies, SimpleAssignVentilation, SimpleAssemble,
