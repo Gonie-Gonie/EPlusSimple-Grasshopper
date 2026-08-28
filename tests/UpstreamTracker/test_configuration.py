@@ -30,7 +30,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(568, len(configuration.exceptions))
+        self.assertEqual(583, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -44,16 +44,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(19, len(compatibility.needs_reverification))
+        self.assertEqual(0, len(compatibility.needs_reverification))
         self.assertEqual(
-            409,
+            413,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            562,
+            577,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:c51cebedd150eeb9db7f62077d5645a31ceb7f5fe2beaf3ea456270d752bbf18",
+            "sha256:0d1c89358a2b0fbae2b3eddbe6986ae021af97ca3e12b7108d34f1af10f52744",
             compatibility.matrix.content_sha256,
         )
-        self.assertEqual(971, len(symbol_evidence.entries))
-        self.assertEqual(971, len(symbol_evidence.receipts))
+        self.assertEqual(990, len(symbol_evidence.entries))
+        self.assertEqual(990, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:6b94eaaee8f393cca134b7c4551fb30e4899434e94726050f96505f55b2d660d",
+            "sha256:3e9e0bb0ed3d4204815e3101b54e72cdb9fbc00b74505132da1b5dae54ccd3ea",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -270,6 +270,39 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(25, len(imugi_idf_object_target_indices))
         self.assertEqual(19, len(imugi_idf_object_exception_ids))
         self.assertEqual(25, len(imugi_idf_object_evidence_entries))
+
+        imugi_idf_object_list_fixture_path = (
+            REPOSITORY_ROOT
+            / "fixtures/reference/python-0.7.0/imugi-idf-object-list-core-oracle.json"
+        )
+        imugi_idf_object_list_fixture = json.loads(
+            imugi_idf_object_list_fixture_path.read_text(encoding="utf-8")
+        )
+        imugi_idf_object_list_contract = imugi_idf_object_list_fixture[
+            "consumer_contract"
+        ]
+        imugi_idf_object_list_targets = tuple(
+            imugi_idf_object_list_fixture["target_receipts"]
+        )
+        imugi_idf_object_list_target_indices = tuple(
+            item["inventory_index"] for item in imugi_idf_object_list_targets
+        )
+        imugi_idf_object_list_exception_ids = {
+            f"typed-native-collection-adaptation-{item['inventory_index']}"
+            for item in imugi_idf_object_list_targets
+            if imugi_idf_object_list_contract["classifications"][item["symbol"]]
+            == "exception"
+        }
+        imugi_idf_object_list_evidence_entries = tuple(
+            item
+            for item in symbol_evidence.entries
+            if item.receipts[0].identifier.startswith(
+                "imugi-idf-object-list-core-"
+            )
+        )
+        self.assertEqual(19, len(imugi_idf_object_list_target_indices))
+        self.assertEqual(15, len(imugi_idf_object_list_exception_ids))
+        self.assertEqual(19, len(imugi_idf_object_list_evidence_entries))
 
         by_key = compatibility.matrix.entries_by_key
         numeric_indices = (
@@ -2175,8 +2208,12 @@ class ConfigurationTests(unittest.TestCase):
                 by_key[key].evidence,
             )
         self.assertEqual(
-            "needs_reverification",
+            "exception",
             by_key[("src/idragon/imugi.py", "IdfObjectList.set_wwr")].classification,
+        )
+        self.assertEqual(
+            "typed-native-collection-adaptation-1215",
+            by_key[("src/idragon/imugi.py", "IdfObjectList.set_wwr")].exception_id,
         )
         energy_model_key = ("src/idragon/dragon/model.py", "EnergyModel")
         energy_model = by_key[energy_model_key]
@@ -2802,6 +2839,9 @@ class ConfigurationTests(unittest.TestCase):
                 and not item.receipts[0].identifier.startswith(
                     "imugi-idf-object-core-"
                 )
+                and not item.receipts[0].identifier.startswith(
+                    "imugi-idf-object-list-core-"
+                )
                 for item in symbol_evidence.entries
             ),
         )
@@ -3181,6 +3221,12 @@ class ConfigurationTests(unittest.TestCase):
                     "imugi-idf-object-core-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "imugi-idf-object-list-core-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -3196,6 +3242,7 @@ class ConfigurationTests(unittest.TestCase):
                 and item.identifier not in imugi_idd_definitions_exception_ids
                 and item.identifier not in imugi_idd_schema_static_exception_ids
                 and item.identifier not in imugi_idf_object_exception_ids
+                and item.identifier not in imugi_idf_object_list_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -4513,6 +4560,12 @@ class ConfigurationTests(unittest.TestCase):
                     "imugi-idf-object-core-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "imugi-idf-object-list-core-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -4534,6 +4587,7 @@ class ConfigurationTests(unittest.TestCase):
                 and item.identifier not in imugi_idd_definitions_exception_ids
                 and item.identifier not in imugi_idd_schema_static_exception_ids
                 and item.identifier not in imugi_idf_object_exception_ids
+                and item.identifier not in imugi_idf_object_list_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -4890,6 +4944,12 @@ class ConfigurationTests(unittest.TestCase):
                     "imugi-idf-object-core-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "imugi-idf-object-list-core-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -4908,6 +4968,7 @@ class ConfigurationTests(unittest.TestCase):
                 and item.identifier not in imugi_idd_definitions_exception_ids
                 and item.identifier not in imugi_idd_schema_static_exception_ids
                 and item.identifier not in imugi_idf_object_exception_ids
+                and item.identifier not in imugi_idf_object_list_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -5254,6 +5315,12 @@ class ConfigurationTests(unittest.TestCase):
                     "imugi-idf-object-core-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "imugi-idf-object-list-core-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -5270,6 +5337,7 @@ class ConfigurationTests(unittest.TestCase):
                 and item.identifier not in imugi_idd_definitions_exception_ids
                 and item.identifier not in imugi_idd_schema_static_exception_ids
                 and item.identifier not in imugi_idf_object_exception_ids
+                and item.identifier not in imugi_idf_object_list_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -5528,7 +5596,8 @@ class ConfigurationTests(unittest.TestCase):
             - len(misc_systems_evidence_entries)
             - len(imugi_idd_definitions_evidence_entries)
             - len(imugi_idd_schema_static_evidence_entries)
-            - len(imugi_idf_object_evidence_entries),
+            - len(imugi_idf_object_evidence_entries)
+            - len(imugi_idf_object_list_evidence_entries),
         )
         self.assertEqual(
             412,
@@ -5541,6 +5610,7 @@ class ConfigurationTests(unittest.TestCase):
                 and item.identifier not in imugi_idd_definitions_exception_ids
                 and item.identifier not in imugi_idd_schema_static_exception_ids
                 and item.identifier not in imugi_idf_object_exception_ids
+                and item.identifier not in imugi_idf_object_list_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -7183,6 +7253,7 @@ class ConfigurationTests(unittest.TestCase):
                 for index in imugi_idd_definitions_closure["deferred_indices"]
                 if index not in set(imugi_idd_schema_static_target_indices)
                 and index not in set(imugi_idf_object_target_indices)
+                and index not in set(imugi_idf_object_list_target_indices)
             )
         )
         self.assertTrue(
@@ -7193,9 +7264,9 @@ class ConfigurationTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "equivalent": 33,
-                "exception": 53,
-                "needs_reverification": 19,
+                "equivalent": 37,
+                "exception": 68,
+                "needs_reverification": 0,
                 "out_of_scope": 28,
             },
             {
@@ -7717,6 +7788,7 @@ class ConfigurationTests(unittest.TestCase):
                 == "needs_reverification"
                 for index in imugi_idd_schema_static_closure["deferred_indices"]
                 if index not in set(imugi_idf_object_target_indices)
+                and index not in set(imugi_idf_object_list_target_indices)
             )
         )
         self.assertTrue(
@@ -7727,9 +7799,9 @@ class ConfigurationTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "equivalent": 33,
-                "exception": 53,
-                "needs_reverification": 19,
+                "equivalent": 37,
+                "exception": 68,
+                "needs_reverification": 0,
                 "out_of_scope": 28,
             },
             {
@@ -8101,7 +8173,7 @@ class ConfigurationTests(unittest.TestCase):
         self.assertTrue(
             all(
                 compatibility.matrix.entries[index].classification
-                == "needs_reverification"
+                in {"equivalent", "exception"}
                 for index in imugi_idf_object_closure["batch4_indices"]
             )
         )
@@ -8113,9 +8185,9 @@ class ConfigurationTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "equivalent": 33,
-                "exception": 53,
-                "needs_reverification": 19,
+                "equivalent": 37,
+                "exception": 68,
+                "needs_reverification": 0,
                 "out_of_scope": 28,
             },
             {
@@ -8132,6 +8204,411 @@ class ConfigurationTests(unittest.TestCase):
                 )
             },
         )
+
+        imugi_idf_object_list_generator_path = (
+            REPOSITORY_ROOT
+            / "tools/python-reference/generate_imugi_idf_object_list_core_oracle.py"
+        )
+        imugi_idf_object_list_validator_path = (
+            REPOSITORY_ROOT
+            / "tests/PythonReference/test_imugi_idf_object_list_core_oracle.py"
+        )
+        imugi_idf_object_list_test_path = (
+            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/"
+            "ImugiIdfObjectListCoreOracleParityTests.cs"
+        )
+        imugi_idf_object_list_test_symbol = (
+            "GonieGonie.InvisibleDragon.Tests.Idf."
+            "ImugiIdfObjectListCoreOracleParityTests."
+            "MatchesPinnedImugiIdfObjectListThroughPublicProductionApis"
+        )
+        imugi_idf_object_list_fixture_sha256 = (
+            "sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba"
+        )
+        imugi_idf_object_list_generator_sha256 = (
+            "sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4"
+        )
+        imugi_idf_object_list_validator_sha256 = (
+            "sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef"
+        )
+        imugi_idf_object_list_test_sha256 = (
+            "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54"
+        )
+        for pinned_path, expected_bytes, expected_sha256 in (
+            (
+                imugi_idf_object_list_fixture_path,
+                105236,
+                imugi_idf_object_list_fixture_sha256,
+            ),
+            (
+                imugi_idf_object_list_generator_path,
+                22838,
+                imugi_idf_object_list_generator_sha256,
+            ),
+            (
+                imugi_idf_object_list_validator_path,
+                7509,
+                imugi_idf_object_list_validator_sha256,
+            ),
+            (
+                REPOSITORY_ROOT / imugi_idf_object_list_test_path,
+                20688,
+                imugi_idf_object_list_test_sha256,
+            ),
+        ):
+            content = pinned_path.read_bytes()
+            self.assertEqual(expected_bytes, len(content), pinned_path)
+            self.assertEqual(
+                expected_sha256,
+                "sha256:" + hashlib.sha256(content).hexdigest(),
+                pinned_path,
+            )
+
+        self.assertEqual(
+            (
+                1190,
+                1194,
+                1195,
+                *range(1197, 1200),
+                1201,
+                *range(1203, 1213),
+                1214,
+                1215,
+            ),
+            imugi_idf_object_list_target_indices,
+        )
+        self.assertEqual(
+            "IdfObjectList.is_containor",
+            imugi_idf_object_list_targets[14]["symbol"],
+        )
+        self.assertEqual(
+            "IdfObjectList.is_containor",
+            compatibility.inventory.symbols[1210].symbol,
+        )
+        self.assertNotIn(
+            "IdfObjectList.is_container",
+            imugi_idf_object_list_contract["classifications"],
+        )
+
+        imugi_idf_object_list_closure = imugi_idf_object_list_contract["closure"]
+        self.assertEqual(
+            imugi_idf_object_list_target_indices,
+            tuple(imugi_idf_object_list_closure["target_indices"]),
+        )
+        self.assertEqual(19, imugi_idf_object_list_closure["target_count"])
+        self.assertEqual(40, imugi_idf_object_list_closure["batch1_count"])
+        self.assertEqual(21, imugi_idf_object_list_closure["batch2_count"])
+        self.assertEqual(25, imugi_idf_object_list_closure["batch3_count"])
+        self.assertEqual(28, imugi_idf_object_list_closure["out_of_scope_count"])
+        self.assertEqual(133, imugi_idf_object_list_closure["source_declaration_count"])
+        self.assertTrue(
+            imugi_idf_object_list_closure["exact_disjoint_source_partition"]
+        )
+        imugi_idf_object_list_partitions = {
+            name: tuple(item["inventory_index"] for item in receipts)
+            for name, receipts in imugi_idf_object_list_fixture["partitions"].items()
+        }
+        self.assertEqual(
+            imugi_idd_definitions_target_indices,
+            imugi_idf_object_list_partitions["batch1"],
+        )
+        self.assertEqual(
+            imugi_idd_schema_static_target_indices,
+            imugi_idf_object_list_partitions["batch2"],
+        )
+        self.assertEqual(
+            imugi_idf_object_target_indices,
+            imugi_idf_object_list_partitions["batch3"],
+        )
+        self.assertEqual(
+            imugi_idf_object_list_target_indices,
+            imugi_idf_object_list_partitions["target"],
+        )
+        partition_sets = tuple(
+            set(indices) for indices in imugi_idf_object_list_partitions.values()
+        )
+        self.assertEqual(set(range(1095, 1228)), set().union(*partition_sets))
+        for left_index, left_partition in enumerate(partition_sets):
+            for right_partition in partition_sets[left_index + 1 :]:
+                self.assertFalse(left_partition & right_partition)
+        for receipts in imugi_idf_object_list_fixture["partitions"].values():
+            for descriptor in receipts:
+                expected_descriptor = dict(descriptor)
+                index = expected_descriptor.pop("inventory_index")
+                self.assertEqual(
+                    expected_descriptor,
+                    compatibility.inventory.symbols[index].to_data(),
+                    index,
+                )
+        self.assertEqual(
+            {"equivalent": 4, "exception": 15},
+            imugi_idf_object_list_contract["classification_counts"],
+        )
+        self.assertEqual(5, len(imugi_idf_object_list_fixture["cases"]))
+
+        evidence_contract = imugi_idf_object_list_contract["evidence_contract"]
+        self.assertEqual(19, evidence_contract["expected_receipt_count"])
+        self.assertTrue(evidence_contract["path_independent_relocated_import"])
+        for false_claim in (
+            "structural_only",
+            "active_energyplus_process_claim",
+            "internal_native_route_claim",
+            "native_runtime_executed_by_python_oracle",
+            "python_api_or_source_compatibility_claim",
+        ):
+            self.assertFalse(evidence_contract[false_claim])
+        native_review = imugi_idf_object_list_fixture["native_review"]
+        self.assertTrue(native_review["public_production_routes_only"])
+        self.assertTrue(native_review["no_python_api_or_source_compatibility_claim"])
+        self.assertFalse(native_review["python_executes_native_runtime"])
+        for source_receipt in native_review["sources"]:
+            source_content = (REPOSITORY_ROOT / source_receipt["path"]).read_bytes()
+            self.assertEqual(source_receipt["bytes"], len(source_content))
+            self.assertEqual(
+                source_receipt["sha256"],
+                "sha256:" + hashlib.sha256(source_content).hexdigest(),
+                source_receipt["path"],
+            )
+        for support_receipt in imugi_idf_object_list_fixture["support"]:
+            support_content = (
+                REPOSITORY_ROOT / support_receipt["path"]
+            ).read_bytes()
+            self.assertEqual(support_receipt["bytes"], len(support_content))
+            self.assertEqual(
+                support_receipt["sha256"],
+                "sha256:" + hashlib.sha256(support_content).hexdigest(),
+                support_receipt["path"],
+            )
+
+        case_by_symbol = {}
+        for case in imugi_idf_object_list_fixture["cases"]:
+            for symbol in case["target_symbols"]:
+                self.assertNotIn(symbol, case_by_symbol)
+                case_by_symbol[symbol] = (case["code"], case["id"])
+        self.assertEqual(
+            set(imugi_idf_object_list_contract["classifications"]),
+            set(case_by_symbol),
+        )
+        native_test_bytes = (
+            REPOSITORY_ROOT / imugi_idf_object_list_test_path
+        ).read_bytes()
+        hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            native_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(hash_block)
+        assert hash_block is not None
+        output_hashes = tuple(
+            value.decode("ascii")
+            for value in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"', hash_block.group("body")
+            )
+        )
+        self.assertEqual(19, len(output_hashes))
+        self.assertEqual(19, len(set(output_hashes)))
+
+        def expected_imugi_idf_object_list_implementation(
+            symbol: str,
+        ) -> tuple[str, str]:
+            model_path = (
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/"
+                "IdfModel.cs"
+            )
+            validator_path = (
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/"
+                "IdfValidator.cs"
+            )
+            writer_path = (
+                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/"
+                "IdfWriter.cs"
+            )
+            if symbol == "IdfObjectList.__str__":
+                return writer_path, "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write"
+            if symbol == "IdfObjectList.check_validity":
+                return (
+                    validator_path,
+                    "GonieGonie.InvisibleDragon.Idf.IdfValidator.Validate",
+                )
+            if symbol == "IdfObjectList.append":
+                return (
+                    model_path,
+                    "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Append",
+                )
+            if symbol == "IdfObjectList.insert":
+                return (
+                    model_path,
+                    "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Insert",
+                )
+            if symbol == "IdfObjectList.names":
+                return model_path, "GonieGonie.InvisibleDragon.Idf.IdfObject.Name"
+            return (
+                model_path,
+                "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection",
+            )
+
+        self.assertEqual(
+            "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject)",
+            imugi_idf_object_list_contract["native_routes"][
+                "IdfObjectList.append"
+            ],
+        )
+        self.assertEqual(
+            "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject)",
+            imugi_idf_object_list_contract["native_routes"][
+                "IdfObjectList.insert"
+            ],
+        )
+        self.assertEqual(
+            {
+                item["symbol"]
+                for item in imugi_idf_object_list_targets
+                if imugi_idf_object_list_contract["classifications"][item["symbol"]]
+                == "exception"
+            },
+            {
+                item.upstream_symbol
+                for item in configuration.exceptions
+                if item.identifier in imugi_idf_object_list_exception_ids
+            },
+        )
+
+        for target, expected_output_hash in zip(
+            imugi_idf_object_list_targets,
+            output_hashes,
+            strict=True,
+        ):
+            index = target["inventory_index"]
+            symbol = target["symbol"]
+            key = (target["path"], symbol)
+            inventory_symbol = compatibility.inventory.symbols[index]
+            expected_descriptor = dict(target)
+            expected_descriptor.pop("inventory_index")
+            self.assertEqual(expected_descriptor, inventory_symbol.to_data(), symbol)
+            assertion_id = imugi_idf_object_list_contract["assertion_ids"][symbol]
+            self.assertRegex(assertion_id, r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+            classification = imugi_idf_object_list_contract["classifications"][symbol]
+            exception_id = (
+                f"typed-native-collection-adaptation-{index}"
+                if classification == "exception"
+                else None
+            )
+            native_route = imugi_idf_object_list_contract["native_routes"][symbol]
+            code, case_id = case_by_symbol[symbol]
+            entry = compatibility.matrix.entries[index]
+            self.assertEqual(key, entry.key, symbol)
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            expected_references = [f"upstream/symbol-evidence.json#{assertion_id}"]
+            if exception_id is not None:
+                expected_references.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_references)), entry.evidence, symbol)
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(
+                inventory_symbol.symbol_hash,
+                evidence_entry.upstream_symbol_hash,
+                symbol,
+            )
+            implementation_path, implementation_symbol = (
+                expected_imugi_idf_object_list_implementation(symbol)
+            )
+            implementation_sha256 = "sha256:" + hashlib.sha256(
+                (REPOSITORY_ROOT / implementation_path).read_bytes()
+            ).hexdigest()
+            self.assertEqual(
+                implementation_path, evidence_entry.implementation_path, symbol
+            )
+            self.assertEqual(
+                implementation_symbol, evidence_entry.implementation_symbol, symbol
+            )
+            self.assertEqual(
+                implementation_sha256,
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertEqual(imugi_idf_object_list_test_path, receipt.test_path, symbol)
+            self.assertEqual(imugi_idf_object_list_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(
+                imugi_idf_object_list_test_sha256,
+                receipt.test_source_sha256,
+                symbol,
+            )
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+            for exact_binding in (
+                "Oracle commit db1f31e",
+                "commit 9adac2b",
+                imugi_idf_object_list_fixture_sha256,
+                imugi_idf_object_list_generator_sha256,
+                imugi_idf_object_list_validator_sha256,
+                imugi_idf_object_list_test_sha256,
+                implementation_path + "@" + implementation_sha256,
+                expected_output_hash,
+                assertion_id,
+                native_route,
+                code,
+                case_id,
+                f"Only inventory index {index}",
+                "all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence",
+                "No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+            if exception_id is not None:
+                self.assertIn("typed-native-collection-adaptation", entry.rationale)
+                self.assertIn(exception_id, entry.rationale)
+                exception = exceptions_by_id[exception_id]
+                self.assertEqual(target["path"], exception.upstream_path, symbol)
+                self.assertEqual(symbol, exception.upstream_symbol, symbol)
+                self.assertEqual(
+                    inventory_symbol.symbol_hash,
+                    exception.upstream_symbol_hash,
+                    symbol,
+                )
+                self.assertIn(
+                    ("engineering_result", entry.rationale), exception.effects
+                )
+                self.assertEqual(
+                    "accepted-native-api-adaptation", exception.approval, symbol
+                )
+
+        self.assertEqual(
+            set(imugi_idf_object_list_contract["classifications"]),
+            {item.symbol for item in imugi_idf_object_list_evidence_entries},
+        )
+        self.assertEqual(
+            {
+                "equivalent": 37,
+                "exception": 68,
+                "needs_reverification": 0,
+                "out_of_scope": 28,
+            },
+            {
+                classification: sum(
+                    compatibility.matrix.entries[index].classification
+                    == classification
+                    for index in range(1095, 1228)
+                )
+                for classification in (
+                    "equivalent",
+                    "exception",
+                    "needs_reverification",
+                    "out_of_scope",
+                )
+            },
+        )
+        self.assertFalse(compatibility.needs_reverification)
 
         energy_model_to_idf_key = (
             "src/idragon/dragon/model.py",

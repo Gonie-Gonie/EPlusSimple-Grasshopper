@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:6b94eaaee8f393cca134b7c4551fb30e4899434e94726050f96505f55b2d660d",
+  "content_sha256": "sha256:3e9e0bb0ed3d4204815e3101b54e72cdb9fbc00b74505132da1b5dae54ccd3ea",
   "entries": [
     {
       "implementation": {
@@ -24599,6 +24599,500 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList for exact fixture case A01 (imugi-idf-object-list-core.construction-and-properties) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1190. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:3f2b4b1d0c62bd92b686229ab6ea48e9cc1aad9ea8af10db84c68ead088185a9. Only inventory index 1190 and authoritative assertion imugi-idf-object-list-core-1190-eb2835ed are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3f2b4b1d0c62bd92b686229ab6ea48e9cc1aad9ea8af10db84c68ead088185a9",
+          "id": "imugi-idf-object-list-core-1190-eb2835ed",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList",
+      "upstream_symbol_hash": "sha256:4b3a42871d244525dad54064f3163631c7241b870e04c16336acd6909512d824"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.__getitem__ for exact fixture case A02 (imugi-idf-object-list-core.append-insert-index-and-set) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.this[int|string]. The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:c5deb0c9099e1437f492a89b65dff9701163a26ca1e1f9e483d1e538e8cc7d07. Only inventory index 1194 and authoritative assertion imugi-idf-object-list-core-1194-034c2864 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c5deb0c9099e1437f492a89b65dff9701163a26ca1e1f9e483d1e538e8cc7d07",
+          "id": "imugi-idf-object-list-core-1194-034c2864",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.__getitem__",
+      "upstream_symbol_hash": "sha256:04ed31e575da6f0a1f0c71cc3e9fbd872b0696ed937f7355d730a9551d2c1dbb"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.__init__ for exact fixture case A01 (imugi-idf-object-list-core.construction-and-properties) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1195. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:0e27e06199f4905773d51875116dfb501431e2fcdb609408160a9f3ba3b52c17. Only inventory index 1195 and authoritative assertion imugi-idf-object-list-core-1195-24887408 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0e27e06199f4905773d51875116dfb501431e2fcdb609408160a9f3ba3b52c17",
+          "id": "imugi-idf-object-list-core-1195-24887408",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.__init__",
+      "upstream_symbol_hash": "sha256:0ba8255aca2e1ed7825e6456ee2027d1cd2e56f630a66ba3743f349ce1e36e36"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.__setitem__ for exact fixture case A02 (imugi-idf-object-list-core.append-insert-index-and-set) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1197. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:6002f6ea5c4a4ca30d6da6aec51f7d9f13ceed4287db368846329fd337986654. Only inventory index 1197 and authoritative assertion imugi-idf-object-list-core-1197-d30f53e9 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6002f6ea5c4a4ca30d6da6aec51f7d9f13ceed4287db368846329fd337986654",
+          "id": "imugi-idf-object-list-core-1197-d30f53e9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.__setitem__",
+      "upstream_symbol_hash": "sha256:c359709ede5a363cc0c1bcb06198714888e6e39346d33cbbca7887416d33883b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfWriter.cs",
+        "source_sha256": "sha256:cc7cc49afcd98a4d4067371686feb49d120a4dd5f7bf30611599a6512c062892",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.__str__ for exact fixture case A04 (imugi-idf-object-list-core.text-and-validity) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1198. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfWriter.cs@sha256:cc7cc49afcd98a4d4067371686feb49d120a4dd5f7bf30611599a6512c062892 are fail-closed bindings. The trusted evidence output is sha256:32d5dfc5c677fe27f0f56709eb4368968bde3002523ce07a5c7d5d4629fefb3c. Only inventory index 1198 and authoritative assertion imugi-idf-object-list-core-1198-f05c55da are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:32d5dfc5c677fe27f0f56709eb4368968bde3002523ce07a5c7d5d4629fefb3c",
+          "id": "imugi-idf-object-list-core-1198-f05c55da",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.__str__",
+      "upstream_symbol_hash": "sha256:f43cff6d764e37b0f92cba9991c6c250f2780f1170fd021acb23235fd73679d1"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Append"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.append for exact fixture case A02 (imugi-idf-object-list-core.append-insert-index-and-set) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject). The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:bbb65da967688a2979eba54e830a62e6f88615e6d408bbba439015bf100daade. Only inventory index 1199 and authoritative assertion imugi-idf-object-list-core-1199-06fd9750 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:bbb65da967688a2979eba54e830a62e6f88615e6d408bbba439015bf100daade",
+          "id": "imugi-idf-object-list-core-1199-06fd9750",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.append",
+      "upstream_symbol_hash": "sha256:9b83e8ed88e7550d8cad892932cef004957569c1ee0c386e2cbe6f33615dd320"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfValidator.cs",
+        "source_sha256": "sha256:3f1c8c191cf7054ebdbf674895a2efcabe0b4d265c0de093d900efbb369ed3dd",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfValidator.Validate"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.check_validity for exact fixture case A04 (imugi-idf-object-list-core.text-and-validity) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1201. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfValidator.cs@sha256:3f1c8c191cf7054ebdbf674895a2efcabe0b4d265c0de093d900efbb369ed3dd are fail-closed bindings. The trusted evidence output is sha256:892d36e2af1cf82a153e15eb5260c4867ce7f834337ab3ea6bb06ac6525a1ebf. Only inventory index 1201 and authoritative assertion imugi-idf-object-list-core-1201-b4caf414 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:892d36e2af1cf82a153e15eb5260c4867ce7f834337ab3ea6bb06ac6525a1ebf",
+          "id": "imugi-idf-object-list-core-1201-b4caf414",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.check_validity",
+      "upstream_symbol_hash": "sha256:1da2f24305cb8c190a7fe5e9d554ba2007310db6f51a35ebdf517ce95a19796e"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.ensure_validity for exact fixture case A01 (imugi-idf-object-list-core.construction-and-properties) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1203. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:12216a28d4a840deec78c9183ba2a6b1f640bd66387acab4496cf6f402e14fdf. Only inventory index 1203 and authoritative assertion imugi-idf-object-list-core-1203-72a3014e are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:12216a28d4a840deec78c9183ba2a6b1f640bd66387acab4496cf6f402e14fdf",
+          "id": "imugi-idf-object-list-core-1203-72a3014e",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.ensure_validity",
+      "upstream_symbol_hash": "sha256:7c164fd72e797db5dc15cf66c309c52584184157dfd8af15d0fdefad5e7cdd08"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.fieldnames for exact fixture case A03 (imugi-idf-object-list-core.fields-and-names) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1204. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:61ae8807ed25cde238c51043177865412bb28b11506736025034d1b47d0eac92. Only inventory index 1204 and authoritative assertion imugi-idf-object-list-core-1204-3d1f6b46 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:61ae8807ed25cde238c51043177865412bb28b11506736025034d1b47d0eac92",
+          "id": "imugi-idf-object-list-core-1204-3d1f6b46",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.fieldnames",
+      "upstream_symbol_hash": "sha256:61fda4e421328534378d69da459edf84223c61fbd9308a943a27b5606d297134"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.get_fields for exact fixture case A03 (imugi-idf-object-list-core.fields-and-names) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1205. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:f039ee95081f54cd5220fcfac652c2c70d6afb7ad3daf24f37b5e85af38e6f1d. Only inventory index 1205 and authoritative assertion imugi-idf-object-list-core-1205-2c80edf4 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f039ee95081f54cd5220fcfac652c2c70d6afb7ad3daf24f37b5e85af38e6f1d",
+          "id": "imugi-idf-object-list-core-1205-2c80edf4",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.get_fields",
+      "upstream_symbol_hash": "sha256:10365edcd1414b192880de0df98aefc9a645ee8aa9450e1aee7aba480ce25165"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.has_name for exact fixture case A01 (imugi-idf-object-list-core.construction-and-properties) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1206. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:1bf4e64095ca4515da48eb37236bb8d7ff3da7c889a04aaef2d3db8d7c06326c. Only inventory index 1206 and authoritative assertion imugi-idf-object-list-core-1206-16829ca5 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1bf4e64095ca4515da48eb37236bb8d7ff3da7c889a04aaef2d3db8d7c06326c",
+          "id": "imugi-idf-object-list-core-1206-16829ca5",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.has_name",
+      "upstream_symbol_hash": "sha256:11099959227efbbabdd38815778051908e21aa198a626d08e80c27c6bd3e0e8b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.has_parent for exact fixture case A01 (imugi-idf-object-list-core.construction-and-properties) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1207. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:0bdc86658236f5d43067473a0a8c793c942a736d16a1e4d96e468bc4fbca4fc8. Only inventory index 1207 and authoritative assertion imugi-idf-object-list-core-1207-0087b1d2 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0bdc86658236f5d43067473a0a8c793c942a736d16a1e4d96e468bc4fbca4fc8",
+          "id": "imugi-idf-object-list-core-1207-0087b1d2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.has_parent",
+      "upstream_symbol_hash": "sha256:ef080548568039a631fbf6748fa9eb0eddae83d945f2930ad2d8ab706f8d8897"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.idd for exact fixture case A01 (imugi-idf-object-list-core.construction-and-properties) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1208. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:eb97e34c666177bde8749a09b1ca24900b2db5314cee33dc77dc16fe8035c843. Only inventory index 1208 and authoritative assertion imugi-idf-object-list-core-1208-19646451 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:eb97e34c666177bde8749a09b1ca24900b2db5314cee33dc77dc16fe8035c843",
+          "id": "imugi-idf-object-list-core-1208-19646451",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.idd",
+      "upstream_symbol_hash": "sha256:c86632ef98a7d8d50a5d3b541a48c04413f14a7a7d31022919dfaf0acaba50d7"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Insert"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.insert for exact fixture case A02 (imugi-idf-object-list-core.append-insert-index-and-set) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject). The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:63cd50d9fccdc1e88e18972a29c8cd937d6e47ab0ebd384479f8fa21f0efc509. Only inventory index 1209 and authoritative assertion imugi-idf-object-list-core-1209-31a2a780 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:63cd50d9fccdc1e88e18972a29c8cd937d6e47ab0ebd384479f8fa21f0efc509",
+          "id": "imugi-idf-object-list-core-1209-31a2a780",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.insert",
+      "upstream_symbol_hash": "sha256:6acf1d7ba20ac6b5237e82d50e1c52ffc8faf57532ce02bfbce8eb104c4414a3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.is_containor for exact fixture case A01 (imugi-idf-object-list-core.construction-and-properties) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1210. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:0d3699e544335733dfb42064e6aea27c30f458badb59a5af8658f6abe2d6f201. Only inventory index 1210 and authoritative assertion imugi-idf-object-list-core-1210-52ef6813 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0d3699e544335733dfb42064e6aea27c30f458badb59a5af8658f6abe2d6f201",
+          "id": "imugi-idf-object-list-core-1210-52ef6813",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.is_containor",
+      "upstream_symbol_hash": "sha256:fc71ddc4bbfdf0f3fa5766a5afafb8207229fb3791332251d24edc3044460d9c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObject.Name"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.names for exact fixture case A03 (imugi-idf-object-list-core.fields-and-names) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection -> IdfObject.Name. The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:3ae815e7977d66cc8b1c59f8c1ef2cd0e158c84842553334e8587750040ab2f0. Only inventory index 1211 and authoritative assertion imugi-idf-object-list-core-1211-585d5ffa are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3ae815e7977d66cc8b1c59f8c1ef2cd0e158c84842553334e8587750040ab2f0",
+          "id": "imugi-idf-object-list-core-1211-585d5ffa",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.names",
+      "upstream_symbol_hash": "sha256:41302cfede9ceff50f51e8075a0ecbe32f3bec5ae9bfaa105eb7fc2765f8b4ff"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.parent for exact fixture case A01 (imugi-idf-object-list-core.construction-and-properties) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1212. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:45f7e5beea6f0bfaeb2d356cdd95bc7d530a31a2ad13c4cc6901c5c1d9c41e9e. Only inventory index 1212 and authoritative assertion imugi-idf-object-list-core-1212-063a0bdd are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:45f7e5beea6f0bfaeb2d356cdd95bc7d530a31a2ad13c4cc6901c5c1d9c41e9e",
+          "id": "imugi-idf-object-list-core-1212-063a0bdd",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.parent",
+      "upstream_symbol_hash": "sha256:f2aee26ad07b6cf1e6859c6234cad2be89520ef13a2135c6d99cb00ce50f5f1d"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.set_fields for exact fixture case A03 (imugi-idf-object-list-core.fields-and-names) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1214. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:05864e4e2d0d60fe66b8bac3666d5c652dff7c418066d9723e6e37f17ed9dd29. Only inventory index 1214 and authoritative assertion imugi-idf-object-list-core-1214-9a9bd1c1 are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:05864e4e2d0d60fe66b8bac3666d5c652dff7c418066d9723e6e37f17ed9dd29",
+          "id": "imugi-idf-object-list-core-1214-9a9bd1c1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.set_fields",
+      "upstream_symbol_hash": "sha256:bca2bc7c8dc46628faf1a98e345a63f85e8002148e51ee5e9e5ba869d4f4fc78"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "source_sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "symbol": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IdfObjectList.set_wwr for exact fixture case A05 (imugi-idf-object-list-core.set-window-wall-ratio-placeholder) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim). Raw native adaptation typed-native-collection-adaptation is represented by exact symbol-bound compatibility exception typed-native-collection-adaptation-1215. Oracle commit db1f31e, fixture sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba, generator sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4, validator sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef, commit 9adac2b native parity test sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs@sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495 are fail-closed bindings. The trusted evidence output is sha256:4318fa206e74e772f41b79b0615d449728db041116f31159cb3be3a11a33caed. Only inventory index 1215 and authoritative assertion imugi-idf-object-list-core-1215-45bc5d0e are promoted by this receipt; all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence, plus every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4318fa206e74e772f41b79b0615d449728db041116f31159cb3be3a11a33caed",
+          "id": "imugi-idf-object-list-core-1215-45bc5d0e",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/ImugiIdfObjectListCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idf.ImugiIdfObjectListCoreOracleParityTests.MatchesPinnedImugiIdfObjectListThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IdfObjectList.set_wwr",
+      "upstream_symbol_hash": "sha256:0544091527e65a91af5b260fc692dec59371d5ad7fcde2cb33869123fa01ecd2"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
         "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
         "symbol": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition"
@@ -25251,9 +25745,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 971,
-    "passed_receipt_count": 971,
-    "receipt_count": 971,
+    "entry_count": 990,
+    "passed_receipt_count": 990,
+    "receipt_count": 990,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
