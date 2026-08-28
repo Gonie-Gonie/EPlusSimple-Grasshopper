@@ -1,6 +1,6 @@
 # Generated deliverables
 
-`build.cmd` recreates this directory as the stable hand-off location for current
+`dev.cmd build` recreates this directory as the stable hand-off location for current
 build results. Generated contents are intentionally ignored by Git.
 
 Expected layout once the plugin projects are available:
@@ -27,6 +27,6 @@ artifacts/
     `-- test-summary.json
 ```
 
-Delete the generated files at any time and run `build.cmd` to reproduce them.
-Run `package.cmd` to reproduce the lean package stages, Yak distributions, and
+Delete the generated files at any time and run `dev.cmd build` to reproduce them.
+Run `dev.cmd package` to reproduce the lean package stages, Yak distributions, and
 portable plugin ZIPs after the normal build artifacts are available.
