@@ -117,10 +117,18 @@ For diagnosis, its constituent commands are:
 `.\dev.cmd release` creates local evidence only. It never creates a tag, GitHub
 release, plugin installation, or Yak publication.
 
+The manually dispatched `Build verified local release candidate` workflow runs
+that same authoritative `dev.cmd release` gate and uploads its local candidate
+and evidence as workflow artifacts. It does not react to tags and does not
+create a GitHub release or publish to Yak. Its self-hosted Windows x64 runner
+must carry the `rhino7`, `rhino8`, `energyplus-24-2`, and `dragons-release`
+labels and have licensed Rhino 7 and Rhino 8 installations available to the
+interactive host gates. The gate still verifies the pinned EnergyPlus runtime
+and every required tool rather than trusting runner labels alone.
+
 Do not push an `invisible-dragon-vX.Y.Z` or `simple-dragon-vX.Y.Z` tag, upload a
 binary, create or publish a GitHub release, or publish to Yak while the
 historical upstream standalone-license omission recorded in `NOTICE.md` remains
-under review. After that review is explicitly resolved, a matching tag may
-start the attested workflow and create a GitHub **draft** release for separate
-inspection. Yak publication remains a distinct, explicitly authorized manual
-operation.
+under review. After that review is explicitly resolved, any tag, GitHub
+release, binary upload, or Yak publication remains a distinct, explicitly
+authorized manual operation outside this candidate workflow.

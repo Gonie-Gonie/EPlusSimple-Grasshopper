@@ -1,115 +1,121 @@
-name: Build release candidate
+name: Build verified local release candidate
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - invisible-dragon-v*
-      - simple-dragon-v*
 
 permissions:
   contents: read
 
 concurrency:
-  group: release-candidate-${{ github.ref }}
+  group: release-candidate-main
   cancel-in-progress: false
 
 jobs:
-  package:
-    name: Verify and package Dragon 0.1.0
-    runs-on: windows-latest
-    timeout-minutes: 90
+  release-candidate:
+    name: Verify complete Rhino 7+ local candidate
+    runs-on: [self-hosted, Windows, X64, rhino7, rhino8, energyplus-24-2, dragons-release]
+    timeout-minutes: 180
     permissions:
       attestations: write
-      contents: write
+      contents: read
       id-token: write
 
     steps:
-      - name: Check out exact release source
+      - name: Check out exact origin main
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Select exact Python oracle
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: 3.12.7
-          check-latest: false
+          ref: main
+          fetch-depth: 0
 
-      - name: Validate tag and package version
-        id: release
+      - name: Bind workflow to clean pushed main
+        id: source
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
-          $spec = Get-Content -LiteralPath 'packaging/package-spec.json' -Raw | ConvertFrom-Json
-          $product = 'all'
-          $tagVersion = [string] $spec.version
-          if ($env:GITHUB_REF_TYPE -eq 'tag') {
-            if ($env:GITHUB_REF_NAME -notmatch '^(invisible-dragon|simple-dragon)-v(?<version>[0-9]+\.[0-9]+\.[0-9]+)$') {
-              throw "Unsupported release tag '$env:GITHUB_REF_NAME'."
-            }
+          $head = (git rev-parse HEAD).Trim()
+          $originMain = (git rev-parse origin/main).Trim()
+          $branch = (git branch --show-current).Trim()
+          $status = @(git status --porcelain=v1 --untracked-files=all)
+          if ($LASTEXITCODE -ne 0 -or
+              $head -notmatch '^[0-9a-f]{40}$' -or
+              $head -cne $originMain -or
+              $branch -cne 'main' -or
+              $status.Count -ne 0) {
+            throw 'Release workflow did not check out the exact clean origin/main commit.'
+          }
+          "sha=$head" | Out-File -LiteralPath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
-            $product = $Matches[1]
-            $tagVersion = $Matches['version']
-            if ($tagVersion -ne [string] $spec.version) {
-              throw "Tag version $tagVersion does not match package-spec version $($spec.version)."
-            }
+      - name: Run authoritative complete release gate
+        shell: powershell
+        run: .\dev.cmd release
+
+      - name: Verify exact non-public release evidence
+        shell: powershell
+        env:
+          EXPECTED_SHA: ${{ steps.source.outputs.sha }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $gatePath = 'artifacts/release/release-gate.json'
+          if (-not (Test-Path -LiteralPath $gatePath -PathType Leaf)) {
+            throw "Release gate is missing: '$gatePath'."
+          }
+          $gate = Get-Content -LiteralPath $gatePath -Raw | ConvertFrom-Json
+          $engineering = $gate.verification.engineeringCompatibility
+          $publication = $gate.publication
+          if ([string] $gate.schema -cne 'goniegonie.dragons-grasshopper.release-gate.v1' -or
+              [string] $gate.status -cne 'passed' -or
+              [string] $gate.source.commit -cne $env:EXPECTED_SHA -or
+              [string] $gate.source.branch -cne 'main' -or
+              -not [bool] $gate.source.clean -or
+              -not [bool] $gate.source.pushedToOriginMain -or
+              [int] $engineering.declaredCaseCount -ne 11 -or
+              [int] $engineering.executedCaseCount -ne 11 -or
+              [int] $engineering.skippedStageCount -ne 0 -or
+              [string] $engineering.status -cne 'passed' -or
+              [string] $gate.verification.grasshopperExamples -cne 'passed' -or
+              [string] $gate.verification.packageCompatibility -cne 'passed' -or
+              [bool] $publication.publicPublicationAuthorized -or
+              [bool] $publication.tagCreated -or
+              [bool] $publication.githubReleaseCreated -or
+              [bool] $publication.yakPublished) {
+            throw 'Release gate identity, verification, or non-publication policy is invalid.'
           }
 
-          "product=$product" | Out-File -LiteralPath $env:GITHUB_OUTPUT -Encoding utf8 -Append
-          "version=$tagVersion" | Out-File -LiteralPath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          $expectedScenarios = @(
+            'Rhino7/InvisibleOnly', 'Rhino7/SimpleOnly', 'Rhino7/Both',
+            'Rhino8/InvisibleOnly', 'Rhino8/SimpleOnly', 'Rhino8/Both'
+          ) | Sort-Object
+          $hostRows = @($gate.verification.portableHostGate)
+          $actualScenarios = @($hostRows | ForEach-Object {
+            ([string] $_.host) + '/' + ([string] $_.scenario)
+          } | Sort-Object)
+          if ($hostRows.Count -ne 6 -or
+              @($actualScenarios | Select-Object -Unique).Count -ne 6 -or
+              @(Compare-Object -ReferenceObject $expectedScenarios -DifferenceObject $actualScenarios).Count -ne 0 -or
+              @($hostRows | Where-Object {
+                [int] $_.reopenedObjects -lt 1 -or
+                @($_.portableArchives).Count -lt 1 -or
+                @($_.loadedPlugins).Count -lt 1
+              }).Count -ne 0) {
+            throw 'Release gate does not attest all six real Rhino package-host scenarios.'
+          }
 
-      - name: Run compatibility reporter regression tests
-        shell: cmd
-        run: tests\CompatibilityRunner\run-tests.cmd
-
-      - name: Bootstrap pinned SDK, Python, and EnergyPlus
-        shell: powershell
-        run: .\dev.cmd setup -InstallEnergyPlus -RequireEnergyPlus
-
-      - name: Verify pinned Python compatibility oracle
-        shell: powershell
-        run: .\dev.cmd reference -Mode Verify
-
-      - name: Build and test every Rhino target
-        shell: powershell
-        run: .\dev.cmd build -NoRestore -RequireEnergyPlus
-
-      - name: Verify cross-language engineering compatibility
-        shell: powershell
-        run: .\dev.cmd compatibility -SkipReferencePreparation -NoRestore
-
-      - name: Upload release compatibility diagnostics
+      - name: Upload release diagnostics
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: release-compatibility-diagnostics-${{ github.sha }}
+          name: release-diagnostics-${{ steps.source.outputs.sha || github.sha }}
           path: |
-            artifacts/reports/engineering-compatibility.json
-            temp/compatibility/logs/
-            temp/reference/logs/
+            artifacts/release/
+            artifacts/reports/
             temp/logs/
+            temp/reference/logs/
+            temp/compatibility/logs/
+            temp/example-definitions/
+            temp/grasshopper-smoke/
+            temp/release-candidate/
           if-no-files-found: warn
           retention-days: 30
-
-      - name: Build and verify Yak and portable packages
-        shell: powershell
-        run: .\dev.cmd package -SkipBuild -NoRestore
-
-      - name: Reject dirty or untracked release inputs
-        shell: powershell
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $status = @(git status --porcelain --untracked-files=all)
-          if ($LASTEXITCODE -ne 0) {
-            throw 'git status failed.'
-          }
-
-          $unexpected = @($status | Where-Object {
-            $_ -notmatch '^\?\? artifacts/' -and
-            $_ -notmatch '^\?\? temp/'
-          })
-          if ($unexpected.Count -ne 0) {
-            throw "Release source changed during verification:`n$($unexpected -join [Environment]::NewLine)"
-          }
 
       - name: Attest packaged binaries
         uses: actions/attest-build-provenance@43d14bc2b83dec42d39ecae14e916627a18bb661 # v3
@@ -119,45 +125,13 @@ jobs:
             artifacts/packages/**/*-portable-plugin-win.zip
             artifacts/packages/checksums.sha256
 
-      - name: Upload complete release candidate
+      - name: Upload complete verified local candidate
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: dragons-${{ steps.release.outputs.version }}-${{ github.sha }}
+          name: dragons-local-candidate-${{ steps.source.outputs.sha }}
           path: |
+            artifacts/release/
             artifacts/packages/
             artifacts/reports/
           if-no-files-found: error
           retention-days: 30
-
-      - name: Create product GitHub draft release
-        if: github.ref_type == 'tag'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RELEASE_PRODUCT: ${{ steps.release.outputs.product }}
-          RELEASE_VERSION: ${{ steps.release.outputs.version }}
-        shell: powershell
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $productRoot = Join-Path 'artifacts/packages' $env:RELEASE_PRODUCT
-          $assets = @(
-            Get-ChildItem -LiteralPath (Join-Path $productRoot 'yak') -Filter '*.yak' -File
-            Get-ChildItem -LiteralPath (Join-Path $productRoot 'portable') -Filter '*-portable-plugin-win.zip' -File
-            Get-Item -LiteralPath 'artifacts/packages/package-index.json'
-            Get-Item -LiteralPath 'artifacts/packages/compatibility-report.json'
-            Get-Item -LiteralPath 'artifacts/packages/checksums.sha256'
-            Get-Item -LiteralPath 'artifacts/reports/engineering-compatibility.json'
-          ) | ForEach-Object FullName
-          if ($assets.Count -ne 7) {
-            throw "Expected seven release assets for $env:RELEASE_PRODUCT; found $($assets.Count)."
-          }
-
-          gh release create $env:GITHUB_REF_NAME `
-            --repo $env:GITHUB_REPOSITORY `
-            --verify-tag `
-            --draft `
-            --generate-notes `
-            --title "$env:RELEASE_PRODUCT $env:RELEASE_VERSION" `
-            @assets
-          if ($LASTEXITCODE -ne 0) {
-            throw 'Creating the GitHub draft release failed.'
-          }
