@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import replace
+import re
 import unittest
 
 from support import REPOSITORY_ROOT
@@ -32,7 +33,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:6173fe85f6ef70f46b62fa4cdd7405025d322deb4686b3a192f645aad1657360"
+    "sha256:928d922cee8638b3046aafede6b8b37fdaaf1b26872024960bb49fa350254462"
 )
 
 
@@ -68,9 +69,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 351,
-                "exception": 446,
-                "needs_reverification": 193,
+                "equivalent": 369,
+                "exception": 477,
+                "needs_reverification": 144,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -1951,9 +1952,9 @@ class SafeScopePolicyTests(unittest.TestCase):
 
         self.assertEqual(
             {
-                "equivalent": 31,
-                "exception": 49,
-                "needs_reverification": 88,
+                "equivalent": 49,
+                "exception": 80,
+                "needs_reverification": 39,
                 "out_of_scope": 6,
             },
             {
@@ -1986,6 +1987,132 @@ class SafeScopePolicyTests(unittest.TestCase):
                 for index in target_indices
             },
             source_tower_receipts,
+        )
+
+    def test_dragon_hvac_supply_core_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        target_indices = {
+            645,
+            *range(647, 652),
+            *range(700, 714),
+            *range(720, 726),
+            *range(750, 753),
+            *range(762, 774),
+            789,
+            *range(797, 804),
+        }
+        equivalent_indices = {
+            648,
+            649,
+            702,
+            703,
+            705,
+            709,
+            710,
+            712,
+            722,
+            723,
+            751,
+            752,
+            764,
+            765,
+            770,
+            771,
+            797,
+            801,
+        }
+        exception_indices = target_indices - equivalent_indices
+        self.assertEqual(49, len(target_indices))
+        self.assertEqual(18, len(equivalent_indices))
+        self.assertEqual(31, len(exception_indices))
+
+        expected_receipt_ids = set()
+        for index in sorted(target_indices):
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual("src/idragon/dragon/hvac.py", entry.path, index)
+            self.assertEqual(inventory_symbol.key, entry.key, index)
+            expected_classification = (
+                "equivalent" if index in equivalent_indices else "exception"
+            )
+            self.assertEqual(expected_classification, entry.classification, index)
+            symbol_slug = re.sub(
+                r"[^a-z0-9]+",
+                "-",
+                inventory_symbol.symbol.lower(),
+            ).strip("-")
+            receipt_id = f"dragon-hvac-supply-core-{index}-{symbol_slug}"
+            expected_receipt_ids.add(receipt_id)
+            expected_evidence = [f"upstream/symbol-evidence.json#{receipt_id}"]
+            if index in exception_indices:
+                self.assertIsNotNone(entry.exception_id, index)
+                assert entry.exception_id is not None
+                self.assertTrue(
+                    entry.exception_id.startswith(
+                        "reviewed-public-aggregate-supply-emission-"
+                    ),
+                    index,
+                )
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{entry.exception_id}"
+                )
+            else:
+                self.assertIsNone(entry.exception_id, index)
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, index)
+            for binding in (
+                "Oracle commit 07bcb7e",
+                "commit 606f247",
+                "sha256:dcf355329a083f9fac82434e18fc3b847a44bc134eb7f593f497c0aeae4c6b9f",
+                "sha256:3f1bcbf28df62c3426f8d343dab3f123b9c730bcdd234e3c570aaff21b87cd97",
+                "sha256:6832bde12cb4e5ab213f2f12307267ebe571de1bf2fc1a8ffa37db728014eabd",
+                "sha256:17eac584b001cc62c7b1ca77a5ba76ef29ac88c02c082c67ffa94e2bb8c1e65e",
+            ):
+                self.assertIn(binding, entry.rationale, index)
+
+        evidence = self.configuration.symbol_evidence
+        assert evidence is not None
+        supply_core_receipts = {
+            receipt.identifier
+            for item in evidence.entries
+            for receipt in item.receipts
+            if receipt.identifier.startswith("dragon-hvac-supply-core-")
+        }
+        self.assertEqual(expected_receipt_ids, supply_core_receipts)
+        self.assertEqual(
+            (
+                (646, "out_of_scope"),
+                (790, "exception"),
+                (791, "equivalent"),
+                (792, "equivalent"),
+                (793, "equivalent"),
+                (794, "equivalent"),
+                (795, "exception"),
+                (796, "exception"),
+            ),
+            tuple(
+                (index, entries[index].classification)
+                for index in (646, *range(790, 797))
+            ),
+        )
+        self.assertEqual(
+            {
+                "equivalent": 49,
+                "exception": 80,
+                "needs_reverification": 39,
+                "out_of_scope": 6,
+            },
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in range(641, 815)
+                )
+                for classification in (
+                    "equivalent",
+                    "exception",
+                    "needs_reverification",
+                    "out_of_scope",
+                )
+            },
         )
 
     def test_energy_model_class_promotion_preserves_adjacent_model_scope(self) -> None:
