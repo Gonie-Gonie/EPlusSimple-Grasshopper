@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Hvac;
 using GonieGonie.InvisibleDragon.Idf;
@@ -286,7 +287,7 @@ public sealed class SupplyCoreOracleParityTests
             JsonElement receipt = JsonSerializer.SerializeToElement(receipts[index]);
             ValidateReceipt(receipt, corpus.Targets[index], observations);
             TrustedEvidenceRecorder.Record(
-                corpus.Targets[index].AssertionId,
+                RegistryAssertionId(corpus.Targets[index].AssertionId),
                 EvidenceTestCase,
                 "not_applicable",
                 receipts[index]);
@@ -295,7 +296,11 @@ public sealed class SupplyCoreOracleParityTests
 
         Assert.Equal(49, recordCount);
         Assert.Equal(49, corpus.Targets.Length);
-        Assert.Equal(49, corpus.Targets.Select(item => item.AssertionId).Distinct(StringComparer.Ordinal).Count());
+        Assert.Equal(
+            49,
+            corpus.Targets.Select(item => RegistryAssertionId(item.AssertionId))
+                .Distinct(StringComparer.Ordinal)
+                .Count());
         Assert.Equal(18, corpus.Targets.Count(item => item.Classification == "equivalent"));
         Assert.Equal(31, corpus.Targets.Count(item => item.Classification == "exception"));
         Assert.Equal(0, corpus.Targets.Count(item => item.Classification is not ("equivalent" or "exception")));
@@ -987,6 +992,15 @@ public sealed class SupplyCoreOracleParityTests
         JsonElement value = item.GetProperty(propertyName);
         Assert.Equal(JsonValueKind.String, value.ValueKind);
         return Assert.IsType<string>(value.GetString());
+    }
+
+    private static string RegistryAssertionId(string fixtureAssertionId)
+    {
+        Assert.Equal(fixtureAssertionId, fixtureAssertionId.Trim());
+        Assert.Matches("^[a-z0-9_-]+$", fixtureAssertionId);
+        string identifier = Regex.Replace(fixtureAssertionId, "[^a-z0-9]+", "-").Trim('-');
+        Assert.Matches("^[a-z0-9]+(?:-[a-z0-9]+)*$", identifier);
+        return identifier;
     }
 
     private static string[] ReadStringArray(JsonElement value) =>

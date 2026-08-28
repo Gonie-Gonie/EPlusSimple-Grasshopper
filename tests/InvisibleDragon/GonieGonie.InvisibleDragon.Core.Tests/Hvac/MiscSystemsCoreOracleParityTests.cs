@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Hvac;
 using GonieGonie.InvisibleDragon.Idf;
@@ -192,8 +193,13 @@ public sealed class MiscSystemsCoreOracleParityTests
         var recordedIds = new HashSet<string>(StringComparer.Ordinal);
         foreach ((TargetBinding target, object receipt) in corpus.Targets.Zip(receipts))
         {
-            Assert.True(recordedIds.Add(target.AssertionId));
-            TrustedEvidenceRecorder.Record(target.AssertionId, EvidenceTestCase, "not_applicable", receipt);
+            string registryAssertionId = RegistryAssertionId(target.AssertionId);
+            Assert.True(recordedIds.Add(registryAssertionId));
+            TrustedEvidenceRecorder.Record(
+                registryAssertionId,
+                EvidenceTestCase,
+                "not_applicable",
+                receipt);
         }
 
         Assert.Equal(15, recordedIds.Count);
@@ -684,6 +690,15 @@ public sealed class MiscSystemsCoreOracleParityTests
         JsonElement value = item.GetProperty(propertyName);
         Assert.Equal(JsonValueKind.String, value.ValueKind);
         return Assert.IsType<string>(value.GetString());
+    }
+
+    private static string RegistryAssertionId(string fixtureAssertionId)
+    {
+        Assert.Equal(fixtureAssertionId, fixtureAssertionId.Trim());
+        Assert.Matches("^[a-z0-9_-]+$", fixtureAssertionId);
+        string identifier = Regex.Replace(fixtureAssertionId, "[^a-z0-9]+", "-").Trim('-');
+        Assert.Matches("^[a-z0-9]+(?:-[a-z0-9]+)*$", identifier);
+        return identifier;
     }
 
     private static void AssertUniqueObjectKeysRecursive(JsonElement value)

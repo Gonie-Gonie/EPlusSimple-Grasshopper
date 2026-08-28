@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:0d1c89358a2b0fbae2b3eddbe6986ae021af97ca3e12b7108d34f1af10f52744",
+            "sha256:00e4198ed14ff88dcd94ef88eebff7ae9e61bd1628029d3023e5614493cda429",
             compatibility.matrix.content_sha256,
         )
         self.assertEqual(990, len(symbol_evidence.entries))
         self.assertEqual(990, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:3e9e0bb0ed3d4204815e3101b54e72cdb9fbc00b74505132da1b5dae54ccd3ea",
+            "sha256:45932cdacaba3185c10b8345ae818133e40aa9c174aff23c3359f86b2aef1453",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -5928,7 +5928,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:6832bde12cb4e5ab213f2f12307267ebe571de1bf2fc1a8ffa37db728014eabd"
         )
         supply_core_test_sha256 = (
-            "sha256:17eac584b001cc62c7b1ca77a5ba76ef29ac88c02c082c67ffa94e2bb8c1e65e"
+            "sha256:d5cfab07e19c5dd74f70ec048680f114409e300756492dd7d3336a9ae42fbb62"
         )
         for pinned_path, expected_sha256 in (
             (supply_core_fixture_path, supply_core_fixture_sha256),
@@ -6521,7 +6521,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117"
         )
         misc_systems_test_sha256 = (
-            "sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3"
+            "sha256:523014c73637070ac2b22b9db31c6d589c61f3ad3934396a5ea3213c9b3d2f81"
         )
         for pinned_path, expected_sha256 in (
             (misc_systems_fixture_path, misc_systems_fixture_sha256),
@@ -7308,10 +7308,10 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83"
         )
         imugi_idd_schema_static_validator_sha256 = (
-            "sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee"
+            "sha256:e2029fe7810eeaa4ad046a6102926245740ad1e2ed11a746ba45c57f2909b242"
         )
         imugi_idd_schema_static_test_sha256 = (
-            "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a"
+            "sha256:2a309de77c9909cd5757295f1f98697fb6ef2d980786f4bf8b0252981a47d0e1"
         )
         for pinned_path, expected_sha256 in (
             (
