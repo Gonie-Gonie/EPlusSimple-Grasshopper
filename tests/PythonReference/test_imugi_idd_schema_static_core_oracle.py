@@ -38,6 +38,15 @@ FIXTURE_PATH = (
     / "python-0.7.0"
     / "imugi-idd-schema-static-core-oracle.json"
 )
+FINAL_PROMOTION_FIXTURE_PATHS = tuple(
+    FIXTURE_PATH.parent / name
+    for name in (
+        "imugi-idd-definitions-core-oracle.json",
+        "imugi-idd-schema-static-core-oracle.json",
+        "imugi-idf-object-core-oracle.json",
+        "imugi-idf-object-list-core-oracle.json",
+    )
+)
 PINNED_SOURCE_ROOT = (
     REPOSITORY_ROOT / "temp" / "reference" / "upstream" / "eplussimple" / "src"
 )
@@ -257,18 +266,57 @@ class ImugiIddSchemaStaticCoreOracleTests(unittest.TestCase):
         self.assertTrue(closure["matrix_batch1_promotion_deferred"])
 
         matrix = json.loads(MATRIX_PATH.read_text(encoding="utf-8"))
-        for key in ("target_receipts", "batch1_resolved_receipts"):
+        self.assertEqual(
+            {
+                "equivalent": 413,
+                "exception": 577,
+                "needs_reverification": 0,
+                "out_of_scope": 252,
+            },
+            matrix["summary"]["classification_counts"],
+        )
+
+        promoted_by_index = {}
+        for fixture_path in FINAL_PROMOTION_FIXTURE_PATHS:
+            promoted_fixture = generator.load_json_without_duplicates(fixture_path)
+            classifications = promoted_fixture["consumer_contract"]["classifications"]
+            receipts = promoted_fixture["target_receipts"]
+            self.assertEqual(
+                set(classifications), {receipt["symbol"] for receipt in receipts}
+            )
+            for receipt in receipts:
+                inventory_index = receipt["inventory_index"]
+                self.assertNotIn(inventory_index, promoted_by_index)
+                promoted_by_index[inventory_index] = (
+                    receipt["symbol"],
+                    classifications[receipt["symbol"]],
+                )
+
+        promoted_indices = set().union(
+            set(generator.TARGET_INDICES),
+            set(generator.BATCH1_RESOLVED_INDICES),
+            set(generator.DEFERRED_INDICES),
+        )
+        self.assertEqual(promoted_indices, set(promoted_by_index))
+        self.assertEqual(
+            Counter({"equivalent": 37, "exception": 68}),
+            Counter(classification for _, classification in promoted_by_index.values()),
+        )
+        for key in (
+            "target_receipts",
+            "batch1_resolved_receipts",
+            "deferred_receipts",
+        ):
             for receipt in value[key]:
+                expected_symbol, expected_classification = promoted_by_index[
+                    receipt["inventory_index"]
+                ]
+                self.assertEqual(expected_symbol, receipt["symbol"])
                 self.assertEqual(
-                    "needs_reverification",
+                    expected_classification,
                     matrix["classifications"][receipt["inventory_index"]],
                     receipt["symbol"],
                 )
-        for receipt in value["deferred_receipts"]:
-            self.assertIn(
-                matrix["classifications"][receipt["inventory_index"]],
-                {"needs_reverification", "equivalent", "exception"},
-            )
         for receipt in value["out_of_scope_receipts"]:
             self.assertEqual(
                 "out_of_scope",
