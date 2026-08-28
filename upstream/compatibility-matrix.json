@@ -693,13 +693,13 @@
     "exception",
     "exception",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
     "out_of_scope",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "exception",
+    "equivalent",
     "exception",
     "exception",
     "equivalent",
@@ -714,9 +714,9 @@
     "exception",
     "equivalent",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
     "exception",
     "exception",
     "exception",
@@ -753,14 +753,14 @@
     "exception",
     "equivalent",
     "equivalent",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
     "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
     "exception",
     "exception",
     "exception",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:42c3ae32039b1f38c3847cef2d2a7c5afd28e9f700a78a3a56f1d5af1fad1ea8",
+  "content_sha256": "sha256:51d0d8889fc25140629e0d1333be0fa370a2df0875f66dabefda474df1b9072f",
   "details": [
     {
       "evidence": [
@@ -6648,6 +6648,24 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-native-domain-model-693",
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-693-domestichotwater"
+      ],
+      "exception_id": "immutable-native-domain-model-693",
+      "index": 693,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify DomesticHotWater for exact fixture case A01 (dragon-hvac-misc-systems-core.domestic-hot-water-constructor-fuel) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.DomesticHotWater. Adaptation family immutable-native-domain-model is represented by exact compatibility exception immutable-native-domain-model-693. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/DomesticHotWater.cs@sha256:586f020b82c50c70ad20d8a667fa338ce3372d39bb1bd48291ea42c97b8d4e2d are fail-closed bindings. The trusted evidence output is sha256:fb8acacf8a2859a292d2b0220936f09897d5fac6b2a5c311d821034cf5b48f9c. Only inventory index 693 and raw native assertion dragon-hvac-misc-systems-core-693-domestichotwater (registry receipt dragon-hvac-misc-systems-core-693-domestichotwater) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-native-domain-model-694",
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-694-domestichotwater-init"
+      ],
+      "exception_id": "immutable-native-domain-model-694",
+      "index": 694,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify DomesticHotWater.__init__ for exact fixture case A01 (dragon-hvac-misc-systems-core.domestic-hot-water-constructor-fuel) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.DomesticHotWater(EntityId, string, Fuel, double). Adaptation family immutable-native-domain-model is represented by exact compatibility exception immutable-native-domain-model-694. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/DomesticHotWater.cs@sha256:586f020b82c50c70ad20d8a667fa338ce3372d39bb1bd48291ea42c97b8d4e2d are fail-closed bindings. The trusted evidence output is sha256:e69532849718f4503971fd563f6fb9f438c32b108c0e6bdeb8bcae3368b68a38. Only inventory index 694 and raw native assertion dragon-hvac-misc-systems-core-694-domestichotwater-__init__ (registry receipt dragon-hvac-misc-systems-core-694-domestichotwater-init) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-domestichotwater-repr-a09db461"
       ],
       "index": 695,
@@ -6659,6 +6677,29 @@
       ],
       "index": 696,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-697-domestichotwater-efficiency"
+      ],
+      "index": 697,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify DomesticHotWater.efficiency for exact fixture case A02 (dragon-hvac-misc-systems-core.domestic-hot-water-efficiency-emission) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.Efficiency. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/DomesticHotWater.cs@sha256:586f020b82c50c70ad20d8a667fa338ce3372d39bb1bd48291ea42c97b8d4e2d are fail-closed bindings. The trusted evidence output is sha256:d1ce8137b8e834ec8ed2603fa90c6564f9185fb927e97fa79179bfbd471431ed. Only inventory index 697 and raw native assertion dragon-hvac-misc-systems-core-697-domestichotwater-efficiency (registry receipt dragon-hvac-misc-systems-core-697-domestichotwater-efficiency) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-native-domain-model-698",
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-698-domestichotwater-fuel"
+      ],
+      "exception_id": "immutable-native-domain-model-698",
+      "index": 698,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify DomesticHotWater.fuel for exact fixture case A01 (dragon-hvac-misc-systems-core.domestic-hot-water-constructor-fuel) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.Fuel. Adaptation family immutable-native-domain-model is represented by exact compatibility exception immutable-native-domain-model-698. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/DomesticHotWater.cs@sha256:586f020b82c50c70ad20d8a667fa338ce3372d39bb1bd48291ea42c97b8d4e2d are fail-closed bindings. The trusted evidence output is sha256:30890a1468c2395a92c0d03a51b7517fc07b8ad5818b9d37f040a70cf30a0bcf. Only inventory index 698 and raw native assertion dragon-hvac-misc-systems-core-698-domestichotwater-fuel (registry receipt dragon-hvac-misc-systems-core-698-domestichotwater-fuel) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-699-domestichotwater-to-idf-object"
+      ],
+      "index": 699,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify DomesticHotWater.to_idf_object for exact fixture case A02 (dragon-hvac-misc-systems-core.domestic-hot-water-efficiency-emission) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.ToIdfObjects(IdfGenerationContext). The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/DomesticHotWater.cs@sha256:586f020b82c50c70ad20d8a667fa338ce3372d39bb1bd48291ea42c97b8d4e2d are fail-closed bindings. The trusted evidence output is sha256:ff7e019736f12dc8a0016f23d6ba0fd78b5dfa2b5a335423f13a0a74be281881. Only inventory index 699 and raw native assertion dragon-hvac-misc-systems-core-699-domestichotwater-to_idf_object (registry receipt dragon-hvac-misc-systems-core-699-domestichotwater-to-idf-object) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
     },
     {
       "evidence": [
@@ -6773,6 +6814,33 @@
       "exception_id": "reviewed-public-aggregate-supply-emission-c25777d6",
       "index": 713,
       "rationale": "Pinned CPython 3.12.7 and live .NET observations classify ElectricRadiator.to_idf_object for exact fixture case E01 (dragon-hvac-supply-core.electric-radiator-state-capability-source-idf) through GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) public aggregate emission. Adaptation family reviewed-public-aggregate-supply-emission-c25777d6 is represented by exact compatibility exception reviewed-public-aggregate-supply-emission-c25777d6. Oracle commit 07bcb7e, fixture sha256:dcf355329a083f9fac82434e18fc3b847a44bc134eb7f593f497c0aeae4c6b9f, generator sha256:3f1bcbf28df62c3426f8d343dab3f123b9c730bcdd234e3c570aaff21b87cd97, validator sha256:6832bde12cb4e5ab213f2f12307267ebe571de1bf2fc1a8ffa37db728014eabd, commit 606f247 native parity test sha256:17eac584b001cc62c7b1ca77a5ba76ef29ac88c02c082c67ffa94e2bb8c1e65e, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:c39e5bea0bd680f93d7bdb88ce88b93b8e9c8144162570a87e066df9a4c9a2a6. Only inventory index 713 and assertion dragon-hvac-supply-core-713-electricradiator-to_idf_object are promoted by this receipt; the source/tower baseline and every non-target supply, appender/controller, DHW, miscellaneous HVAC, and Imugi symbol remain unchanged."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-native-domain-model-714",
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-714-energyrecoveryventilator"
+      ],
+      "exception_id": "immutable-native-domain-model-714",
+      "index": 714,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify EnergyRecoveryVentilator for exact fixture case B01 (dragon-hvac-misc-systems-core.energy-recovery-ventilator-permissive-empty) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.EnergyRecoveryVentilator. Adaptation family immutable-native-domain-model is represented by exact compatibility exception immutable-native-domain-model-714. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs@sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82 are fail-closed bindings. The trusted evidence output is sha256:60eec34b8b5129939037dd962d8a129f826696c47f934edacee6245e7b156b8e. Only inventory index 714 and raw native assertion dragon-hvac-misc-systems-core-714-energyrecoveryventilator (registry receipt dragon-hvac-misc-systems-core-714-energyrecoveryventilator) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-native-domain-model-715",
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-715-energyrecoveryventilator-init"
+      ],
+      "exception_id": "immutable-native-domain-model-715",
+      "index": 715,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify EnergyRecoveryVentilator.__init__ for exact fixture case B01 (dragon-hvac-misc-systems-core.energy-recovery-ventilator-permissive-empty) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.EnergyRecoveryVentilator.EnergyRecoveryVentilator(EntityId, string, double, double, double?, double, double). Adaptation family immutable-native-domain-model is represented by exact compatibility exception immutable-native-domain-model-715. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs@sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82 are fail-closed bindings. The trusted evidence output is sha256:5c39462f5320d0cf19919a7f97d449b31241cf4908c8a639f43f8ef5d5b7dfba. Only inventory index 715 and raw native assertion dragon-hvac-misc-systems-core-715-energyrecoveryventilator-__init__ (registry receipt dragon-hvac-misc-systems-core-715-energyrecoveryventilator-init) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#aggregate-public-energy-model-ventilation-emission-716",
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-716-energyrecoveryventilator-to-idf-object"
+      ],
+      "exception_id": "aggregate-public-energy-model-ventilation-emission-716",
+      "index": 716,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify EnergyRecoveryVentilator.to_idf_object for exact fixture case B01 (dragon-hvac-misc-systems-core.energy-recovery-ventilator-permissive-empty) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.ZoneVentilationAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?). Adaptation family aggregate-public-energy-model-ventilation-emission is represented by exact compatibility exception aggregate-public-energy-model-ventilation-emission-716. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:f6a8bbdbd9ae2e6911472b3bdf405d004ffaec5dea891d2d2580366bc39f3385. Only inventory index 716 and raw native assertion dragon-hvac-misc-systems-core-716-energyrecoveryventilator-to_idf_object (registry receipt dragon-hvac-misc-systems-core-716-energyrecoveryventilator-to-idf-object) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
     },
     {
       "evidence": [
@@ -7062,10 +7130,63 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-native-domain-model-753",
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-753-photovoltaicpanel"
+      ],
+      "exception_id": "immutable-native-domain-model-753",
+      "index": 753,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicPanel for exact fixture case C01 (dragon-hvac-misc-systems-core.photovoltaic-constructor-shape) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel. Adaptation family immutable-native-domain-model is represented by exact compatibility exception immutable-native-domain-model-753. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs@sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82 are fail-closed bindings. The trusted evidence output is sha256:1203db3639d74a5452b21d8b869ec17ca0d92d35ce2262771213a12853e6a7aa. Only inventory index 753 and raw native assertion dragon-hvac-misc-systems-core-753-photovoltaicpanel (registry receipt dragon-hvac-misc-systems-core-753-photovoltaicpanel) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#immutable-native-domain-model-754",
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-754-photovoltaicpanel-init"
+      ],
+      "exception_id": "immutable-native-domain-model-754",
+      "index": 754,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicPanel.__init__ for exact fixture case C01 (dragon-hvac-misc-systems-core.photovoltaic-constructor-shape) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.PhotovoltaicPanel(EntityId, string, double, double, double, double, double). Adaptation family immutable-native-domain-model is represented by exact compatibility exception immutable-native-domain-model-754. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs@sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82 are fail-closed bindings. The trusted evidence output is sha256:c2d8c6166e529f15eddc9622681a37c3843d0da4b86a1aa2a7d214931b116590. Only inventory index 754 and raw native assertion dragon-hvac-misc-systems-core-754-photovoltaicpanel-__init__ (registry receipt dragon-hvac-misc-systems-core-754-photovoltaicpanel-init) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-photovoltaicpanel-str-ba95fcfe"
       ],
       "index": 755,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-756-photovoltaicpanel-area"
+      ],
+      "index": 756,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicPanel.area for exact fixture case C02 (dragon-hvac-misc-systems-core.photovoltaic-geometry-properties) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.AreaSquareMetres. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs@sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82 are fail-closed bindings. The trusted evidence output is sha256:1d138cdbbd31817127ee54a8e132dc68863a08d6c0a59963b2f3e1dcde5589f4. Only inventory index 756 and raw native assertion dragon-hvac-misc-systems-core-756-photovoltaicpanel-area (registry receipt dragon-hvac-misc-systems-core-756-photovoltaicpanel-area) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-757-photovoltaicpanel-azimuth"
+      ],
+      "index": 757,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicPanel.azimuth for exact fixture case C02 (dragon-hvac-misc-systems-core.photovoltaic-geometry-properties) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.AzimuthDegrees. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs@sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82 are fail-closed bindings. The trusted evidence output is sha256:a6b5cbf8f9656851e10d2f3702214889ac2db22107551a72189240c8872e5c1e. Only inventory index 757 and raw native assertion dragon-hvac-misc-systems-core-757-photovoltaicpanel-azimuth (registry receipt dragon-hvac-misc-systems-core-757-photovoltaicpanel-azimuth) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-758-photovoltaicpanel-effective-area-ratio"
+      ],
+      "index": 758,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicPanel.effective_area_ratio for exact fixture case C03 (dragon-hvac-misc-systems-core.photovoltaic-efficiency-properties) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.ActiveCellAreaFraction. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs@sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82 are fail-closed bindings. The trusted evidence output is sha256:6e712f4c7437ae00d3c2211f40802cef614471c203d9dbae8e1b79da1bb200a5. Only inventory index 758 and raw native assertion dragon-hvac-misc-systems-core-758-photovoltaicpanel-effective_area_ratio (registry receipt dragon-hvac-misc-systems-core-758-photovoltaicpanel-effective-area-ratio) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-759-photovoltaicpanel-efficiency"
+      ],
+      "index": 759,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicPanel.efficiency for exact fixture case C03 (dragon-hvac-misc-systems-core.photovoltaic-efficiency-properties) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.Efficiency. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs@sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82 are fail-closed bindings. The trusted evidence output is sha256:b0e62e5f756f9509366948eb15cc763f47e8064b4cfb604b228846d8e8af9ee3. Only inventory index 759 and raw native assertion dragon-hvac-misc-systems-core-759-photovoltaicpanel-efficiency (registry receipt dragon-hvac-misc-systems-core-759-photovoltaicpanel-efficiency) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-misc-systems-core-760-photovoltaicpanel-tilt"
+      ],
+      "index": 760,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify PhotoVoltaicPanel.tilt for exact fixture case C02 (dragon-hvac-misc-systems-core.photovoltaic-geometry-properties) exclusively through the reviewed public route GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.TiltDegrees. The pinned Python and native observations are equivalent for this bounded public contract; no compatibility exception is claimed. Oracle commit c99f216, fixture sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89, generator sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421, validator sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117, commit 597bf21 native parity test sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs@sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82 are fail-closed bindings. The trusted evidence output is sha256:5dbb12930a21167f4985d51e3107c54dbc7258faa8fe9741ab21866bff47cae6. Only inventory index 760 and raw native assertion dragon-hvac-misc-systems-core-760-photovoltaicpanel-tilt (registry receipt dragon-hvac-misc-systems-core-760-photovoltaicpanel-tilt) are promoted; source/tower, supply-core, appender/controller, all non-target HVAC, and Imugi classifications remain unchanged. No active EnergyPlus process or internal generate route is claimed."
     },
     {
       "evidence": [
@@ -10108,9 +10229,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 369,
-      "exception": 501,
-      "needs_reverification": 120,
+      "equivalent": 376,
+      "exception": 509,
+      "needs_reverification": 105,
       "out_of_scope": 252
     },
     "entry_count": 1242

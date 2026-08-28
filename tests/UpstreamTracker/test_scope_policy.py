@@ -33,7 +33,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:42c3ae32039b1f38c3847cef2d2a7c5afd28e9f700a78a3a56f1d5af1fad1ea8"
+    "sha256:51d0d8889fc25140629e0d1333be0fa370a2df0875f66dabefda474df1b9072f"
 )
 
 
@@ -69,9 +69,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 369,
-                "exception": 501,
-                "needs_reverification": 120,
+                "equivalent": 376,
+                "exception": 509,
+                "needs_reverification": 105,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -1952,9 +1952,9 @@ class SafeScopePolicyTests(unittest.TestCase):
 
         self.assertEqual(
             {
-                "equivalent": 49,
-                "exception": 104,
-                "needs_reverification": 15,
+                "equivalent": 56,
+                "exception": 112,
+                "needs_reverification": 0,
                 "out_of_scope": 6,
             },
             {
@@ -2096,9 +2096,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "equivalent": 49,
-                "exception": 104,
-                "needs_reverification": 15,
+                "equivalent": 56,
+                "exception": 112,
+                "needs_reverification": 0,
                 "out_of_scope": 6,
             },
             {
@@ -2198,9 +2198,138 @@ class SafeScopePolicyTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "equivalent": 49,
-                "exception": 104,
-                "needs_reverification": 15,
+                "equivalent": 56,
+                "exception": 112,
+                "needs_reverification": 0,
+                "out_of_scope": 6,
+            },
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in range(641, 815)
+                )
+                for classification in (
+                    "equivalent",
+                    "exception",
+                    "needs_reverification",
+                    "out_of_scope",
+                )
+            },
+        )
+
+    def test_dragon_hvac_misc_systems_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        target_indices = {
+            693,
+            694,
+            697,
+            698,
+            699,
+            714,
+            715,
+            716,
+            753,
+            754,
+            756,
+            757,
+            758,
+            759,
+            760,
+        }
+        equivalent_indices = {697, 699, 756, 757, 758, 759, 760}
+        exception_families = {
+            693: "immutable-native-domain-model",
+            694: "immutable-native-domain-model",
+            698: "immutable-native-domain-model",
+            714: "immutable-native-domain-model",
+            715: "immutable-native-domain-model",
+            716: "aggregate-public-energy-model-ventilation-emission",
+            753: "immutable-native-domain-model",
+            754: "immutable-native-domain-model",
+        }
+        exception_indices = target_indices - equivalent_indices
+        self.assertEqual(15, len(target_indices))
+        self.assertEqual(7, len(equivalent_indices))
+        self.assertEqual(8, len(exception_indices))
+        self.assertEqual(exception_indices, set(exception_families))
+
+        expected_receipt_ids = set()
+        expected_exception_ids = set()
+        for index in sorted(target_indices):
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual("src/idragon/dragon/hvac.py", entry.path, index)
+            self.assertEqual(inventory_symbol.key, entry.key, index)
+            expected_classification = (
+                "equivalent" if index in equivalent_indices else "exception"
+            )
+            self.assertEqual(expected_classification, entry.classification, index)
+            symbol_slug = re.sub(
+                r"[^a-z0-9]+",
+                "-",
+                inventory_symbol.symbol.lower(),
+            ).strip("-")
+            receipt_id = f"dragon-hvac-misc-systems-core-{index}-{symbol_slug}"
+            expected_receipt_ids.add(receipt_id)
+            expected_evidence = [f"upstream/symbol-evidence.json#{receipt_id}"]
+            if index in exception_indices:
+                exception_id = f"{exception_families[index]}-{index}"
+                expected_exception_ids.add(exception_id)
+                self.assertEqual(exception_id, entry.exception_id, index)
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            else:
+                self.assertIsNone(entry.exception_id, index)
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, index)
+            for binding in (
+                "Oracle commit c99f216",
+                "commit 597bf21",
+                "sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89",
+                "sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421",
+                "sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117",
+                "sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3",
+                "No active EnergyPlus process or internal generate route is claimed.",
+            ):
+                self.assertIn(binding, entry.rationale, index)
+
+        evidence = self.configuration.symbol_evidence
+        assert evidence is not None
+        misc_systems_receipts = {
+            receipt.identifier
+            for item in evidence.entries
+            for receipt in item.receipts
+            if receipt.identifier.startswith("dragon-hvac-misc-systems-core-")
+        }
+        self.assertEqual(expected_receipt_ids, misc_systems_receipts)
+        self.assertEqual(
+            expected_exception_ids,
+            {
+                entry.exception_id
+                for entry in entries
+                if entry.exception_id in expected_exception_ids
+            },
+        )
+        self.assertEqual(
+            (
+                "src/idragon/dragon/hvac.py",
+                "PhotoVoltaicPanel.to_idf_object",
+                "exception",
+                "compact-native-photovoltaic-idf-emission",
+            ),
+            (
+                entries[761].path,
+                entries[761].symbol,
+                entries[761].classification,
+                entries[761].exception_id,
+            ),
+        )
+        self.assertNotIn(761, target_indices)
+        self.assertEqual(
+            {
+                "equivalent": 56,
+                "exception": 112,
+                "needs_reverification": 0,
                 "out_of_scope": 6,
             },
             {
