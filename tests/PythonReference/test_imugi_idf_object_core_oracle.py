@@ -32,10 +32,10 @@ if spec is None or spec.loader is None:
 generator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(generator)
 
-EXPECTED_GENERATOR_BYTES = 30_113
-EXPECTED_GENERATOR_SHA256 = "sha256:71b1b35644a6520b3c4ad467629cdc91d5a5003bf31a67f05978f9b78889dcab"
-EXPECTED_FIXTURE_BYTES = 119_199
-EXPECTED_FIXTURE_SHA256 = "sha256:e20c2330badd57b2e8851b010eb5a1bf5520854f6dcf9baa852e6dfd957eacf8"
+EXPECTED_GENERATOR_BYTES = 30_116
+EXPECTED_GENERATOR_SHA256 = "sha256:8589497feab58cc9d9c05479c50264a091182c2d68531398d1decddd24f7cc43"
+EXPECTED_FIXTURE_BYTES = 119_205
+EXPECTED_FIXTURE_SHA256 = "sha256:7237e974d6d938c6f8f7215661f54db4f26a2a7afc664765b895656a7720babd"
 
 
 class ImugiIdfObjectCoreOracleTests(unittest.TestCase):
@@ -137,6 +137,10 @@ class ImugiIdfObjectCoreOracleTests(unittest.TestCase):
         self.assertEqual(set(generator.TARGET_SYMBOLS), set(contract["native_routes"]))
         self.assertEqual(25, len(set(contract["assertion_ids"].values())))
         self.assertTrue(all(route.startswith("GonieGonie.") for route in contract["native_routes"].values()))
+        self.assertEqual(
+            "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
+            contract["native_routes"]["IDF.append"],
+        )
 
     def test_relocated_cpython_runtime_and_dependencies_are_fully_pinned(self) -> None:
         isolated = self.value["upstream"]["isolated_import"]

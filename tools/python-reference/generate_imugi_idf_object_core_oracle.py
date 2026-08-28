@@ -355,7 +355,7 @@ def _runtime_signatures(imugi: Any) -> dict[str, Any]:
 def _route(symbol: str) -> str:
     routes = {
         "IDF.__str__": "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
-        "IDF.append": "GonieGonie.InvisibleDragon.Idf.IdfDocument.Add(IdfObject)",
+        "IDF.append": "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
         "IDF.read_idf": "GonieGonie.InvisibleDragon.Idf.IdfParser.ParseFile(string, IddSchema?, Encoding?)",
         "IdfObject.__getitem__": "GonieGonie.InvisibleDragon.Idf.IdfObject.this[int|string]",
         "IdfObject.__str__": "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
