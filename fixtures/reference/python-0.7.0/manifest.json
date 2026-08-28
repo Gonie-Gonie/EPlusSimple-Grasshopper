@@ -243,6 +243,21 @@
       "sha256": "3e56e7fe6026fef3146a62aadf3248940c65aa9a2b5c624b519fbc0e3d99dd69"
     },
     {
+      "path": "imugi-idd-schema-static-core-oracle.json",
+      "bytes": 124762,
+      "sha256": "86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0"
+    },
+    {
+      "path": "imugi-idf-object-core-oracle.json",
+      "bytes": 119205,
+      "sha256": "7237e974d6d938c6f8f7215661f54db4f26a2a7afc664765b895656a7720babd"
+    },
+    {
+      "path": "imugi-idf-object-list-core-oracle.json",
+      "bytes": 105236,
+      "sha256": "6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba"
+    },
+    {
       "path": "launcher-result-parser-oracle.json",
       "bytes": 43608,
       "sha256": "a5e4024e46ed30d2cfed54b8f158a167de796bde898cc5cc451701ded4d3df6e"

@@ -406,6 +406,16 @@ the exact disjoint 133-receipt Imugi source partition. The observations use two
 byte-identical relocated source copies and hash-pin the EnergyPlus 24.2 IDD
 schema support without executing native code or EnergyPlus.
 
+`python-0.7.0/imugi-idd-schema-static-core-oracle.json` pins eight cases for
+the next 21 `IDD`, exception, and `StaticIndexedDict` receipts: nine reviewed
+equivalents and 12 typed-native exceptions. `python-0.7.0/imugi-idf-object-core-oracle.json`
+pins seven cases for 25 `IDF` and `IdfObject` receipts (six equivalents and 19
+exceptions), including the exact public `IdfDocument.Append` route.
+`python-0.7.0/imugi-idf-object-list-core-oracle.json` pins five cases for the
+final 19 `IdfObjectList` receipts (four equivalents and 15 exceptions). Together
+the four corpora and 28 out-of-scope declarations form an exact, disjoint
+133-receipt Imugi partition; none executes native code or EnergyPlus.
+
 `python-0.7.0/launcher-result-parser-oracle.json` pins 21 ordered CPython
 3.12.7 observations for the seven result-parser symbols in
 `idragon/launcher.py`. It records constructor dispatch and partial failures,

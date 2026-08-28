@@ -68,6 +68,9 @@ $dragonModelConstructionDefaultsGeneratorPath = Join-Path $repositoryRoot 'tools
 $dragonModelProjectionsGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_projections_oracle.py'
 $dragonModelTerrainGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_dragon_model_terrain_oracle.py'
 $imugiIddDefinitionsCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_imugi_idd_definitions_core_oracle.py'
+$imugiIddSchemaStaticCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_imugi_idd_schema_static_core_oracle.py'
+$imugiIdfObjectCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_imugi_idf_object_core_oracle.py'
+$imugiIdfObjectListCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_imugi_idf_object_list_core_oracle.py'
 $launcherResultParserGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_launcher_result_parser_oracle.py'
 $launcherRuntimeGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_launcher_runtime_oracle.py'
 $iddGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_idd_schema_oracle.py'
@@ -131,6 +134,9 @@ $dragonModelConstructionDefaultsTestPath = Join-Path $repositoryRoot 'tests\Pyth
 $dragonModelProjectionsTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_projections_oracle.py'
 $dragonModelTerrainTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_dragon_model_terrain_oracle.py'
 $imugiIddDefinitionsCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_imugi_idd_definitions_core_oracle.py'
+$imugiIddSchemaStaticCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_imugi_idd_schema_static_core_oracle.py'
+$imugiIdfObjectCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_imugi_idf_object_core_oracle.py'
+$imugiIdfObjectListCoreTestPath = Join-Path $repositoryRoot 'tests\PythonReference\test_imugi_idf_object_list_core_oracle.py'
 $publicSymbolInventoryPath = Join-Path $repositoryRoot 'upstream\public-symbol-inventory.json'
 $tempRoot = Join-Path $repositoryRoot 'temp'
 $referenceTempRoot = Join-Path $tempRoot 'reference'
@@ -246,6 +252,9 @@ foreach ($requiredFile in @(
     $dragonModelProjectionsGeneratorPath,
     $dragonModelTerrainGeneratorPath,
     $imugiIddDefinitionsCoreGeneratorPath,
+    $imugiIddSchemaStaticCoreGeneratorPath,
+    $imugiIdfObjectCoreGeneratorPath,
+    $imugiIdfObjectListCoreGeneratorPath,
     $iddGeneratorPath,
     $constructionEqualityGeneratorPath,
     $scheduleTypeGeneratorPath,
@@ -307,6 +316,9 @@ foreach ($requiredFile in @(
     $dragonModelProjectionsTestPath,
     $dragonModelTerrainTestPath,
     $imugiIddDefinitionsCoreTestPath,
+    $imugiIddSchemaStaticCoreTestPath,
+    $imugiIdfObjectCoreTestPath,
+    $imugiIdfObjectListCoreTestPath,
     $publicSymbolInventoryPath
 )) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
@@ -788,7 +800,7 @@ Install-ReferenceDependencies
 Reset-OutputDirectory
 
 if ($WhatIfPreference) {
-    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants metadata/engineering, epsimple numeric constants, construction core, HVAC enum/base, other-systems, thermal-source, and supply-system, identifier conventions, model core/result, and shape core, dragon construction AirBoundary core, construction core, and to-IDF-object, dragon HVAC appenders/controllers, misc-systems core, photovoltaic/source-system/source-tower-core/supply-core/SupplyGroup core/to-IDF-object, dragon shape geometry/opening-adjacency core and shading-material/surface/Zone to-IDF-object, dragon shape Zone core, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, Imugi IDD definitions, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
+    Write-Host "What if: run the pinned Python profile schedule/core, utils core, common core, constants metadata/engineering, epsimple numeric constants, construction core, HVAC enum/base, other-systems, thermal-source, and supply-system, identifier conventions, model core/result, and shape core, dragon construction AirBoundary core, construction core, and to-IDF-object, dragon HVAC appenders/controllers, misc-systems core, photovoltaic/source-system/source-tower-core/supply-core/SupplyGroup core/to-IDF-object, dragon shape geometry/opening-adjacency core and shading-material/surface/Zone to-IDF-object, dragon shape Zone core, dragon model add-supply-system/assembly/conditioning/construction-defaults/projections/Terrain, launcher result-parser/runtime, Imugi IDD definitions/schema-static and IDF object/object-list core, IDD, construction equality/hash, ScheduleType, DaySchedule core/metrics/operations, RuleSet core/operations, Schedule core/operations, profile residual, and reference generators into '$outputRoot'."
     exit 0
 }
 
@@ -1615,6 +1627,63 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $imugiIddDefinitionsCoreGeneratorArguments `
     -LogPath (Join-Path $logsRoot 'python-imugi-idd-definitions-core-reference.log') `
     -FailureMessage 'Generating the Python Imugi IDD definitions core oracle failed'
+
+$imugiIddSchemaStaticCoreOraclePath = Join-Path $outputRoot 'imugi-idd-schema-static-core-oracle.json'
+$imugiIddSchemaStaticCoreGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $imugiIddSchemaStaticCoreGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $imugiIddSchemaStaticCoreOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $imugiIddSchemaStaticCoreGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-imugi-idd-schema-static-core-reference.log') `
+    -FailureMessage 'Generating the Python Imugi IDD schema/static core oracle failed'
+
+$imugiIdfObjectCoreOraclePath = Join-Path $outputRoot 'imugi-idf-object-core-oracle.json'
+$imugiIdfObjectCoreGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $imugiIdfObjectCoreGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $imugiIdfObjectCoreOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $imugiIdfObjectCoreGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-imugi-idf-object-core-reference.log') `
+    -FailureMessage 'Generating the Python Imugi IDF/object core oracle failed'
+
+$imugiIdfObjectListCoreOraclePath = Join-Path $outputRoot 'imugi-idf-object-list-core-oracle.json'
+$imugiIdfObjectListCoreGeneratorArguments = @(
+    '-B',
+    '-X', 'utf8',
+    $bootstrapPath,
+    '--dependency-root', $dependencyRoot,
+    '--upstream-source', $upstreamSource,
+    '--generator', $imugiIdfObjectListCoreGeneratorPath,
+    '--',
+    '--inventory', $publicSymbolInventoryPath,
+    '--output', $imugiIdfObjectListCoreOraclePath,
+    '--upstream-commit', $upstreamCommit
+)
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList $imugiIdfObjectListCoreGeneratorArguments `
+    -LogPath (Join-Path $logsRoot 'python-imugi-idf-object-list-core-reference.log') `
+    -FailureMessage 'Generating the Python Imugi IDF object-list core oracle failed'
 
 $iddOraclePath = Join-Path $outputRoot 'idd-24.2.0.schema.json.gz'
 $iddGeneratorArguments = @(
