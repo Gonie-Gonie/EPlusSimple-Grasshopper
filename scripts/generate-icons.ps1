@@ -79,6 +79,26 @@ $products = @(
             (New-ComponentIcon 'EnergyRecoveryVentilatorComponent' 12 'erv'),
             (New-ComponentIcon 'PhotovoltaicPanelComponent' 7 'photovoltaic'),
             (New-ComponentIcon 'SupplyGroupAssignmentComponent' 12 'assign'))
+        Parameters = @(
+            (New-ComponentIcon 'DragonMaterialParam' 1 'none'),
+            (New-ComponentIcon 'DragonConstructionParam' 2 'none'),
+            (New-ComponentIcon 'DragonScheduleParam' 3 'none'),
+            (New-ComponentIcon 'DragonProfileParam' 3 'profile'),
+            (New-ComponentIcon 'DragonSurfaceParam' 4 'polyline'),
+            (New-ComponentIcon 'DragonZoneParam' 6 'none'),
+            (New-ComponentIcon 'DragonEnergyModelParam' 7 'assemble'),
+            (New-ComponentIcon 'DragonSourceSystemParam' 13 'network'),
+            (New-ComponentIcon 'DragonSupplySystemParam' 12 'assign'),
+            (New-ComponentIcon `
+                'DragonDomesticHotWaterParam' `
+                13 `
+                'none' `
+                (Join-Path $repositoryRoot 'assets\icons\illustrated\invisible-dragon-domestic-hot-water.png')),
+            (New-ComponentIcon 'DragonEnergyRecoveryVentilatorParam' 12 'erv'),
+            (New-ComponentIcon 'DragonPhotovoltaicPanelParam' 7 'photovoltaic'),
+            (New-ComponentIcon 'DragonIdfParam' 8 'none'),
+            (New-ComponentIcon 'EnergyPlusResultParam' 15 'none'),
+            (New-ComponentIcon 'DiagnosticParam' 9 'none'))
     },
     [pscustomobject]@{
         Slug = 'simple-dragon'
@@ -133,6 +153,19 @@ $products = @(
             (New-ComponentIcon 'GreenRetrofitMonthlyBarPlotComponent' 14 'none'),
             (New-ComponentIcon 'ExportGreenRetrofitCsvComponent' 15 'none'),
             (New-ComponentIcon 'RunSimpleDragonBatchComponent' 8 'batch'))
+        Parameters = @(
+            (New-ComponentIcon 'SimpleDragonMaterialParam' 1 'none'),
+            (New-ComponentIcon 'SimpleDragonSurfaceConstructionParam' 2 'none'),
+            (New-ComponentIcon 'SimpleDragonFenestrationConstructionParam' 3 'none'),
+            (New-ComponentIcon 'SimpleDragonUsageProfileParam' 4 'none'),
+            (New-ComponentIcon 'SimpleDragonSurfaceParam' 5 'none'),
+            (New-ComponentIcon 'SimpleDragonZoneParam' 6 'none'),
+            (New-ComponentIcon 'SimpleDragonSourceSystemParam' 7 'network'),
+            (New-ComponentIcon 'SimpleDragonSupplySystemParam' 7 'assign'),
+            (New-ComponentIcon 'SimpleDragonEnergyRecoveryVentilatorParam' 7 'erv'),
+            (New-ComponentIcon 'SimpleDragonPhotovoltaicPanelParam' 7 'photovoltaic'),
+            (New-ComponentIcon 'GreenRetrofitModelParam' 8 'none'),
+            (New-ComponentIcon 'GreenRetrofitResultParam' 10 'none'))
     })
 
 function New-TransparentBitmap {
@@ -590,6 +623,20 @@ function Draw-Overlay {
                     [System.Drawing.PointF]::new(58, 41), [System.Drawing.PointF]::new(58, 75),
                     [System.Drawing.PointF]::new(84, 58)))
             }
+            'profile' {
+                $Graphics.FillEllipse($neutralBrush, 37, 16, 22, 22)
+                $Graphics.DrawEllipse($inkPen, 37, 16, 22, 22)
+                $body = [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(23, 75),
+                    [System.Drawing.PointF]::new(28, 51),
+                    [System.Drawing.PointF]::new(48, 40),
+                    [System.Drawing.PointF]::new(68, 51),
+                    [System.Drawing.PointF]::new(73, 75))
+                $Graphics.FillPolygon($primaryBrush, $body)
+                $Graphics.DrawPolygon($inkPen, $body)
+                $Graphics.DrawArc($accentPen, 58, 18, 25, 25, -75, 250)
+                Draw-Arrow $Graphics $accentPen 80 28 74 20 5
+            }
             'heat-pump' {
                 $Graphics.FillEllipse($inkBrush, 20, 18, 56, 60)
                 Draw-Arrow $Graphics $primaryPen 24 35 70 35 10
@@ -783,6 +830,39 @@ function Draw-Overlay {
     }
 }
 
+function Draw-ParameterFrame {
+    param(
+        [Parameter(Mandatory = $true)] [System.Drawing.Graphics] $Graphics,
+        [Parameter(Mandatory = $true)] [object] $Palette
+    )
+
+    $framePen = New-RoundPen $Palette.Border 5.0
+    $socketPen = New-RoundPen $Palette.Ink 3.5
+    $socketBrush = [System.Drawing.SolidBrush]::new($Palette.Neutral)
+    try {
+        foreach ($points in @(
+            @(@(29, 10), @(10, 10), @(10, 29)),
+            @(@(67, 10), @(86, 10), @(86, 29)),
+            @(@(10, 67), @(10, 86), @(29, 86)),
+            @(@(86, 67), @(86, 86), @(67, 86)))) {
+            $Graphics.DrawLines($framePen, [System.Drawing.PointF[]]@(
+                [System.Drawing.PointF]::new($points[0][0], $points[0][1]),
+                [System.Drawing.PointF]::new($points[1][0], $points[1][1]),
+                [System.Drawing.PointF]::new($points[2][0], $points[2][1])))
+        }
+
+        foreach ($x in @(5, 77)) {
+            $Graphics.FillEllipse($socketBrush, $x, 41, 14, 14)
+            $Graphics.DrawEllipse($socketPen, $x, 41, 14, 14)
+        }
+    }
+    finally {
+        $socketBrush.Dispose()
+        $socketPen.Dispose()
+        $framePen.Dispose()
+    }
+}
+
 function Write-ComponentPng {
     param(
         [Parameter(Mandatory = $true)] [System.Drawing.Bitmap] $Atlas,
@@ -790,7 +870,8 @@ function Write-ComponentPng {
         [Parameter(Mandatory = $true)] [string] $Overlay,
         [Parameter(Mandatory = $true)] [object] $Palette,
         [Parameter(Mandatory = $true)] [string] $Destination,
-        [System.Drawing.Bitmap] $Illustration
+        [System.Drawing.Bitmap] $Illustration,
+        [ValidateSet('component', 'parameter')] [string] $Role = 'component'
     )
 
     $sourceBitmap = if ($null -ne $Illustration) { $Illustration } else { $Atlas }
@@ -801,7 +882,7 @@ function Write-ComponentPng {
     else {
         Get-OpaqueBounds $Atlas (Get-AtlasCell $Atlas $Tile)
     }
-    $maximum = 76.0
+    $maximum = if ($Role -eq 'parameter') { 64.0 } else { 76.0 }
     $scale = [Math]::Min($maximum / $source.Width, $maximum / $source.Height)
     $width = [Math]::Max(1, [int][Math]::Round($source.Width * $scale))
     $height = [Math]::Max(1, [int][Math]::Round($source.Height * $scale))
@@ -817,11 +898,20 @@ function Write-ComponentPng {
         $graphics = [System.Drawing.Graphics]::FromImage($working)
         try {
             $graphics.Clear([System.Drawing.Color]::Transparent)
-            $graphics.CompositingMode = [System.Drawing.Drawing2D.CompositingMode]::SourceCopy
             Set-HighQualityDrawing $graphics
+            if ($Role -eq 'parameter') {
+                $graphics.CompositingMode = [System.Drawing.Drawing2D.CompositingMode]::SourceOver
+                Draw-FunctionalBackplate $graphics $Palette
+            }
+            else {
+                $graphics.CompositingMode = [System.Drawing.Drawing2D.CompositingMode]::SourceCopy
+            }
             Draw-ImageRegion $graphics $sourceBitmap $destinationRectangle $source
             $graphics.CompositingMode = [System.Drawing.Drawing2D.CompositingMode]::SourceOver
             Draw-Overlay $graphics $Overlay $Palette
+            if ($Role -eq 'parameter') {
+                Draw-ParameterFrame $graphics $Palette
+            }
         }
         finally { $graphics.Dispose() }
 
@@ -857,7 +947,8 @@ function Write-ContactSheet {
         [Parameter(Mandatory = $true)] [string] $ProductSlug,
         [Parameter(Mandatory = $true)] [object[]] $Components,
         [Parameter(Mandatory = $true)] [string] $ComponentDirectory,
-        [Parameter(Mandatory = $true)] [string] $Destination
+        [Parameter(Mandatory = $true)] [string] $Destination,
+        [ValidateSet('component', 'parameter')] [string] $Role = 'component'
     )
 
     $columns = 4
@@ -877,7 +968,7 @@ function Write-ContactSheet {
             $labelBrush = [System.Drawing.SolidBrush]::new([System.Drawing.Color]::FromArgb(255, 26, 38, 57))
             $gridPen = [System.Drawing.Pen]::new([System.Drawing.Color]::FromArgb(255, 218, 225, 234), 1)
             try {
-                $graphics.DrawString("$ProductSlug component icons", $headingFont, $headingBrush, 12, 10)
+                $graphics.DrawString("$ProductSlug $Role icons", $headingFont, $headingBrush, 12, 10)
                 for ($index = 0; $index -lt $Components.Count; $index++) {
                     $component = $Components[$index]
                     $column = $index % $columns
@@ -895,7 +986,7 @@ function Write-ContactSheet {
                     finally { $icon.Dispose() }
 
                     $graphics.DrawString(
-                        ($component.Name -replace 'Component$', ''),
+                        ($component.Name -replace '(Component|Param)$', ''),
                         $labelFont,
                         $labelBrush,
                         $x + 70,
@@ -1018,7 +1109,7 @@ function Assert-IconVisualSeparation {
     }
 
     if ($maximumIdentical.Value -gt $maximumIdenticalPixelRatio) {
-        throw ("Component icons are too pixel-similar in {0}: '{1}' and '{2}' share {3:P1}; maximum is {4:P0}." -f
+        throw ("Icons are too pixel-similar in {0}: '{1}' and '{2}' share {3:P1}; maximum is {4:P0}." -f
             $Scope,
             $maximumIdentical.Left,
             $maximumIdentical.Right,
@@ -1026,7 +1117,7 @@ function Assert-IconVisualSeparation {
             $maximumIdenticalPixelRatio)
     }
     if ($minimumDistance.Value -lt $minimumPerceptualDistance) {
-        throw ("Component icons are not perceptually separated in {0}: '{1}' and '{2}' have distance {3:F3}; minimum is {4:F2}." -f
+        throw ("Icons are not perceptually separated in {0}: '{1}' and '{2}' have distance {3:F3}; minimum is {4:F2}." -f
             $Scope,
             $minimumDistance.Left,
             $minimumDistance.Right,
@@ -1044,34 +1135,34 @@ function Assert-IconVisualSeparation {
         $minimumDistance.Right)
 }
 
-function Assert-ComponentIcons {
+function Assert-GeneratedIcons {
     param(
-        [Parameter(Mandatory = $true)] [object[]] $Components,
-        [Parameter(Mandatory = $true)] [string] $ComponentDirectory,
-        [Parameter(Mandatory = $true)] [string] $ProductSlug,
+        [Parameter(Mandatory = $true)] [object[]] $Icons,
+        [Parameter(Mandatory = $true)] [string] $IconDirectory,
+        [Parameter(Mandatory = $true)] [string] $Scope,
         [AllowEmptyCollection()]
         [Parameter(Mandatory = $true)] [System.Collections.Generic.List[object]] $AllVisualSamples
     )
 
     $hashes = @{}
     $productVisualSamples = [System.Collections.Generic.List[object]]::new()
-    foreach ($component in $Components) {
-        $path = Join-Path $ComponentDirectory "$($component.Name).png"
+    foreach ($icon in $Icons) {
+        $path = Join-Path $IconDirectory "$($icon.Name).png"
         $bitmap = [System.Drawing.Bitmap]::new($path)
         try {
             if ($bitmap.Width -ne 24 -or $bitmap.Height -ne 24) {
-                throw "Component icon must be exactly 24x24: $path"
+                throw "Generated icon must be exactly 24x24: $path"
             }
 
             for ($pixel = 0; $pixel -lt 24; $pixel++) {
                 foreach ($edge in @(0, 1, 22, 23)) {
                     if ($bitmap.GetPixel($edge, $pixel).A -ne 0 -or $bitmap.GetPixel($pixel, $edge).A -ne 0) {
-                        throw "Component icon must preserve a two-pixel transparent border: $path"
+                        throw "Generated icon must preserve a two-pixel transparent border: $path"
                     }
                 }
             }
             $visualSample = [pscustomobject]@{
-                Name = "$ProductSlug/$($component.Name)"
+                Name = "$Scope/$($icon.Name)"
                 Sample = New-IconVisualSample $bitmap
             }
             $productVisualSamples.Add($visualSample)
@@ -1081,14 +1172,14 @@ function Assert-ComponentIcons {
 
         $hash = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash
         if ($hashes.ContainsKey($hash)) {
-            throw "Component icons must not be byte-identical: '$($hashes[$hash])' and '$($component.Name)'."
+            throw "Generated icons must not be byte-identical: '$($hashes[$hash])' and '$($icon.Name)'."
         }
-        $hashes[$hash] = $component.Name
+        $hashes[$hash] = $icon.Name
     }
 
     Assert-IconVisualSeparation `
         -Samples $productVisualSamples.ToArray() `
-        -Scope $ProductSlug
+        -Scope $Scope
 }
 
 $allVisualSamples = [System.Collections.Generic.List[object]]::new()
@@ -1099,9 +1190,12 @@ foreach ($product in $products) {
         }
     }
 
-    $duplicateNames = @($product.Components | Group-Object Name | Where-Object Count -ne 1)
+    $duplicateNames = @(
+        @($product.Components) + @($product.Parameters) |
+            Group-Object Name |
+            Where-Object Count -ne 1)
     if ($duplicateNames.Count -ne 0) {
-        throw "Duplicate component icon names for $($product.Slug): $($duplicateNames.Name -join ', ')"
+        throw "Duplicate icon names for $($product.Slug): $($duplicateNames.Name -join ', ')"
     }
 
     $generatedDirectory = Join-Path $repositoryRoot "assets\icons\generated\$($product.Slug)"
@@ -1155,14 +1249,65 @@ foreach ($product in $products) {
             }
         }
 
-        Assert-ComponentIcons `
-            -Components $product.Components `
-            -ComponentDirectory $componentDirectory `
-            -ProductSlug $product.Slug `
+        Assert-GeneratedIcons `
+            -Icons $product.Components `
+            -IconDirectory $componentDirectory `
+            -Scope "$($product.Slug)/components" `
             -AllVisualSamples $allVisualSamples
         $contactSheet = Join-Path $generatedDirectory "$($product.Slug)-component-contact-sheet.png"
         Write-ContactSheet $product.Slug $product.Components $componentDirectory $contactSheet
         Write-Host "Generated $contactSheet"
+
+        $parameterDirectory = Join-Path $generatedDirectory 'parameters'
+        [System.IO.Directory]::CreateDirectory($parameterDirectory) | Out-Null
+        $expectedParameterPaths = [System.Collections.Generic.HashSet[string]]::new(
+            [System.StringComparer]::OrdinalIgnoreCase)
+        foreach ($parameter in $product.Parameters) {
+            $destination = Join-Path $parameterDirectory "$($parameter.Name).png"
+            [void]$expectedParameterPaths.Add([System.IO.Path]::GetFullPath($destination))
+            $illustration = $null
+            try {
+                if (-not [string]::IsNullOrWhiteSpace($parameter.Illustration)) {
+                    if (-not (Test-Path -LiteralPath $parameter.Illustration -PathType Leaf)) {
+                        throw "Parameter illustration does not exist: $($parameter.Illustration)"
+                    }
+                    $illustration = [System.Drawing.Bitmap]::new($parameter.Illustration)
+                }
+                Write-ComponentPng `
+                    $atlas `
+                    $parameter.Tile `
+                    $parameter.Overlay `
+                    $product.Palette `
+                    $destination `
+                    -Illustration $illustration `
+                    -Role parameter
+            }
+            finally {
+                if ($null -ne $illustration) { $illustration.Dispose() }
+            }
+            Write-Host "Generated $destination"
+        }
+        foreach ($existing in [System.IO.Directory]::GetFiles($parameterDirectory, '*.png')) {
+            if (-not $expectedParameterPaths.Contains([System.IO.Path]::GetFullPath($existing))) {
+                Remove-Item -LiteralPath $existing -Force
+                Write-Host "Removed stale parameter icon $existing"
+            }
+        }
+
+        Assert-GeneratedIcons `
+            -Icons $product.Parameters `
+            -IconDirectory $parameterDirectory `
+            -Scope "$($product.Slug)/parameters" `
+            -AllVisualSamples $allVisualSamples
+        $parameterContactSheet =
+            Join-Path $generatedDirectory "$($product.Slug)-parameter-contact-sheet.png"
+        Write-ContactSheet `
+            $product.Slug `
+            $product.Parameters `
+            $parameterDirectory `
+            $parameterContactSheet `
+            -Role parameter
+        Write-Host "Generated $parameterContactSheet"
     }
     finally { $atlas.Dispose() }
 

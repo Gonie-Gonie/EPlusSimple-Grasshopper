@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 
 namespace GonieGonie.SimpleDragon.Grasshopper.Tests;
 
@@ -103,6 +104,86 @@ public sealed class GrasshopperAssemblyTests
         }
     }
 
+    [Fact]
+    public void EveryParameterHasItsOwnEmbeddedTwentyFourPixelIcon()
+    {
+        const string prefix =
+            "GonieGonie.SimpleDragon.Grasshopper.Resources.Parameters.";
+        Assembly assembly = typeof(SimpleDragonMaterialParam).Assembly;
+        Type[] parameterTypes = ParameterTypes(assembly);
+        string[] resources = assembly.GetManifestResourceNames()
+            .Where(name => name.StartsWith(prefix, StringComparison.Ordinal))
+            .OrderBy(name => name, StringComparer.Ordinal)
+            .ToArray();
+
+        Assert.Equal(12, parameterTypes.Length);
+        Assert.Equal(parameterTypes.Length, resources.Length);
+        var resourceHashes = new HashSet<string>(StringComparer.Ordinal);
+        var runtimeHashes = new HashSet<string>(StringComparer.Ordinal);
+        Bitmap? defaultIcon = new NullIconStringParam().Icon_24x24;
+        Assert.NotNull(defaultIcon);
+        string defaultHash = PixelHash(defaultIcon);
+
+        foreach (Type type in parameterTypes)
+        {
+            string resourceName = prefix + type.Name + ".png";
+            Assert.Contains(resourceName, resources);
+            using Stream stream = Assert.IsAssignableFrom<Stream>(
+                assembly.GetManifestResourceStream(resourceName));
+            using var bitmap = new Bitmap(stream);
+            Assert.Equal(24, bitmap.Width);
+            Assert.Equal(24, bitmap.Height);
+            AssertTransparentBorder(bitmap);
+
+            stream.Position = 0;
+            using SHA256 sha = SHA256.Create();
+            Assert.True(
+                resourceHashes.Add(Convert.ToHexString(sha.ComputeHash(stream))),
+                resourceName);
+
+            GH_DocumentObject parameter = Assert.IsAssignableFrom<GH_DocumentObject>(
+                Activator.CreateInstance(type));
+            Bitmap? icon = parameter.Icon_24x24;
+            Assert.NotNull(icon);
+            Assert.Equal(24, icon.Width);
+            Assert.Equal(24, icon.Height);
+            string runtimeHash = PixelHash(icon);
+            Assert.NotEqual(defaultHash, runtimeHash);
+            Assert.True(runtimeHashes.Add(runtimeHash), type.FullName);
+        }
+    }
+
+    [Fact]
+    public void ParameterIconResourcesAreByteUniqueAcrossBothProducts()
+    {
+        var hashes = new HashSet<string>(StringComparer.Ordinal);
+        int count = 0;
+        foreach ((Assembly Assembly, string Prefix) source in new[]
+        {
+            (
+                typeof(DragonMaterialParam).Assembly,
+                "GonieGonie.InvisibleDragon.Grasshopper.Resources.Parameters."),
+            (
+                typeof(SimpleDragonMaterialParam).Assembly,
+                "GonieGonie.SimpleDragon.Grasshopper.Resources.Parameters."),
+        })
+        {
+            foreach (string resourceName in source.Assembly.GetManifestResourceNames()
+                .Where(name => name.StartsWith(source.Prefix, StringComparison.Ordinal)))
+            {
+                using Stream stream = Assert.IsAssignableFrom<Stream>(
+                    source.Assembly.GetManifestResourceStream(resourceName));
+                using SHA256 sha = SHA256.Create();
+                Assert.True(
+                    hashes.Add(Convert.ToHexString(sha.ComputeHash(stream))),
+                    resourceName);
+                count++;
+            }
+        }
+
+        Assert.Equal(27, count);
+    }
+
     private static void AssertTransparentBorder(Bitmap bitmap)
     {
         for (int pixel = 0; pixel < 24; pixel++)
@@ -195,6 +276,33 @@ public sealed class GrasshopperAssemblyTests
             .ToArray();
     }
 
+    private static Type[] ParameterTypes(Assembly assembly)
+    {
+        return assembly
+            .GetTypes()
+            .Where(type => type.IsPublic
+                && !type.IsAbstract
+                && typeof(IGH_Param).IsAssignableFrom(type)
+                && type.Namespace == "GonieGonie.SimpleDragon.Grasshopper.Parameters")
+            .ToArray();
+    }
+
+    private static string PixelHash(Bitmap bitmap)
+    {
+        byte[] bytes = new byte[bitmap.Width * bitmap.Height * sizeof(int)];
+        int offset = 0;
+        for (int y = 0; y < bitmap.Height; y++)
+        {
+            for (int x = 0; x < bitmap.Width; x++)
+            {
+                BitConverter.GetBytes(bitmap.GetPixel(x, y).ToArgb()).CopyTo(bytes, offset);
+                offset += sizeof(int);
+            }
+        }
+
+        return Convert.ToHexString(SHA256.HashData(bytes));
+    }
+
     private static GH_Component Component(Assembly assembly, string typeName)
     {
         Type type = Assert.Single(ComponentTypes(assembly), type => type.Name == typeName);
@@ -231,5 +339,29 @@ public sealed class GrasshopperAssemblyTests
         }
 
         throw new DirectoryNotFoundException("Could not locate the Dragons.Grasshopper.sln repository root.");
+    }
+
+    private sealed class NullIconStringParam : GH_PersistentParam<GH_String>
+    {
+        internal NullIconStringParam()
+            : base("Default Icon Probe", "Probe", "Default icon probe.", "Tests", "Tests")
+        {
+        }
+
+        public override Guid ComponentGuid => new("0e346f03-ce9a-48dd-898e-ea2540902304");
+
+        public override GH_Exposure Exposure => GH_Exposure.secondary;
+
+        protected override Bitmap? Icon => null;
+
+        protected override GH_GetterResult Prompt_Singular(ref GH_String value)
+        {
+            return GH_GetterResult.cancel;
+        }
+
+        protected override GH_GetterResult Prompt_Plural(ref List<GH_String> values)
+        {
+            return GH_GetterResult.cancel;
+        }
     }
 }

@@ -13,7 +13,7 @@ public abstract class SimpleDragonParam<TGoo> : GH_PersistentParam<TGoo>
 
     public override GH_Exposure Exposure => GH_Exposure.secondary;
 
-    protected override Bitmap? Icon => null;
+    protected override Bitmap? Icon => ParameterIcons.ForParameter(GetType());
 
     protected override GH_GetterResult Prompt_Singular(ref TGoo value)
     {

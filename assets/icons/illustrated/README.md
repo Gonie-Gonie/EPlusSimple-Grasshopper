@@ -3,8 +3,9 @@
 These transparent raster atlases were generated in `generate` mode with OpenAI ImageGen and
 then copied into the repository as editable visual source assets. They deliberately contain no
 text. At toolbar scale, `scripts/generate-icons.ps1` retains their palette and product signature
-but draws large deterministic functional silhouettes for equipment and operations. Fine atlas
-detail or a small corner badge must never be the only distinction between two 24-pixel icons.
+but draws large deterministic functional silhouettes for equipment, operations, and persistent
+data types. Parameter resources add a prominent corner-and-socket data frame. Fine atlas detail
+or a small corner badge must never be the only distinction between two 24-pixel icons.
 
 ## InvisibleDragon atlas
 
