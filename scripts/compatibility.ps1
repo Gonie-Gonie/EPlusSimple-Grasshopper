@@ -29,6 +29,84 @@ $upstreamRoot = Join-Path $repositoryRoot 'temp\reference\upstream\eplussimple'
 $logsRoot = Join-Path $repositoryRoot 'temp\compatibility\logs'
 $artifactReport = Join-Path $repositoryRoot 'artifacts\reports\engineering-compatibility.json'
 
+function Get-EngineeringSha256([string] $Path) {
+    return 'sha256:' + (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
+}
+
+function Get-EngineeringGitState {
+    $gitCommand = Get-Command git.exe -ErrorAction SilentlyContinue
+    if ($null -eq $gitCommand) { $gitCommand = Get-Command git -ErrorAction SilentlyContinue }
+    if ($null -eq $gitCommand) { throw 'Git is required to bind engineering compatibility provenance.' }
+    $head = (& $gitCommand.Source -C $repositoryRoot rev-parse HEAD 2>&1 | Out-String).Trim()
+    if ($LASTEXITCODE -ne 0 -or $head -cnotmatch '^[0-9a-f]{40}$') {
+        throw 'Unable to bind engineering compatibility to the port HEAD.'
+    }
+    $status = @(& $gitCommand.Source -C $repositoryRoot status --porcelain=v1 --untracked-files=all 2>&1)
+    if ($LASTEXITCODE -ne 0) { throw 'Unable to determine the port worktree state.' }
+    return [pscustomobject] [ordered] @{ commit = $head; dirty = $status.Count -ne 0 }
+}
+
+function Get-EngineeringSourceSet {
+    $roots = @(
+        'src/Shared/GonieGonie.BuildingEnergy.Contracts',
+        'src/Shared/GonieGonie.EnergyPlus.Runtime',
+        'src/InvisibleDragon/GonieGonie.InvisibleDragon.Core',
+        'src/SimpleDragon/GonieGonie.SimpleDragon.Core',
+        'tools/compatibility-runner'
+    )
+    $files = @($roots | ForEach-Object {
+        Get-ChildItem -LiteralPath (Join-Path $repositoryRoot $_) -File -Recurse |
+            Where-Object { $_.Extension -in @('.cs', '.csproj') }
+    } | Sort-Object FullName -Unique)
+    if ($files.Count -lt 5) { throw 'Engineering production source set is unexpectedly incomplete.' }
+    $entries = @($files | ForEach-Object {
+        $relative = $_.FullName.Substring($repositoryRoot.Length + 1).Replace('\', '/')
+        [pscustomobject] [ordered] @{
+            path = $relative
+            bytes = [long] $_.Length
+            sha256 = Get-EngineeringSha256 -Path $_.FullName
+        }
+    })
+    $lines = @($entries | ForEach-Object { "$($_.sha256)  $($_.bytes)  $($_.path)" })
+    $encoded = [System.Text.UTF8Encoding]::new($false).GetBytes(($lines -join "`n") + "`n")
+    $sha = [System.Security.Cryptography.SHA256]::Create()
+    try { $aggregate = 'sha256:' + ([BitConverter]::ToString($sha.ComputeHash($encoded)) -replace '-', '').ToLowerInvariant() }
+    finally { $sha.Dispose() }
+    return [pscustomobject] [ordered] @{ file_count = $entries.Count; sha256 = $aggregate; files = $entries }
+}
+
+function Get-EngineeringBinarySet {
+    $directory = Join-Path $repositoryRoot 'temp\build\bin\GonieGonie.CompatibilityRunner\Release\net8.0-windows'
+    $names = @(
+        'GonieGonie.CompatibilityRunner.dll',
+        'GonieGonie.BuildingEnergy.Contracts.dll',
+        'GonieGonie.EnergyPlus.Runtime.dll',
+        'GonieGonie.InvisibleDragon.Core.dll',
+        'GonieGonie.SimpleDragon.Core.dll'
+    )
+    $entries = @($names | ForEach-Object {
+        $path = Join-Path $directory $_
+        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Executed engineering binary is missing: '$path'." }
+        $item = Get-Item -LiteralPath $path
+        $identity = [Reflection.AssemblyName]::GetAssemblyName($path)
+        [pscustomobject] [ordered] @{
+            path = $item.FullName.Substring($repositoryRoot.Length + 1).Replace('\', '/')
+            bytes = [long] $item.Length
+            sha256 = Get-EngineeringSha256 -Path $path
+            assembly_name = $identity.Name
+            assembly_version = $identity.Version.ToString()
+            target_framework = 'net8.0-windows'
+        }
+    })
+    return [pscustomobject] [ordered] @{
+        target_framework = 'net8.0-windows'
+        configuration = 'Release'
+        gha_executed = $false
+        gha_reason = 'The engineering runner executes production Core and Runtime assemblies directly; no Grasshopper host participates.'
+        files = $entries
+    }
+}
+
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
     $OutputDirectory = Join-Path $repositoryRoot 'temp\compatibility\current'
 }
@@ -188,6 +266,22 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $reportArguments `
     -LogPath (Join-Path $logsRoot 'comparison.log') `
     -FailureMessage 'Engineering compatibility differences were found'
+
+# Bind the semantic comparison to the exact port sources and production
+# binaries that produced it. This is additive to the v1 report schema so older
+# readers can continue consuming the established comparison fields.
+$engineeringReport = Get-Content -LiteralPath $artifactReport -Raw | ConvertFrom-Json
+$provenance = [pscustomobject] [ordered] @{
+    schema = 'goniegonie.dragons.engineering-port-provenance.v1'
+    git = Get-EngineeringGitState
+    production_source_set = Get-EngineeringSourceSet
+    executed_binaries = Get-EngineeringBinarySet
+}
+$engineeringReport | Add-Member -NotePropertyName port_provenance -NotePropertyValue $provenance -Force
+[System.IO.File]::WriteAllText(
+    $artifactReport,
+    ($engineeringReport | ConvertTo-Json -Depth 100) + "`n",
+    [System.Text.UTF8Encoding]::new($false))
 
 Write-Host "Compatibility output: $outputRoot"
 Write-Host "Engineering report: $artifactReport"

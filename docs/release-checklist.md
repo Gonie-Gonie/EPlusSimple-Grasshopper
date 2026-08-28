@@ -71,6 +71,13 @@ For diagnosis, its constituent commands are:
 - Require every declared Python/C# engineering compatibility case to pass with
   zero skipped stages, including authoring/expanded IDF, EnergyPlus, GRR, and
   warning comparisons declared by that case.
+- Require the engineering report to bind all eight cases and their exact six
+  stages to the clean release HEAD, the complete declared production C# source
+  set, and the five `net8.0-windows` Release assemblies actually executed by
+  the compatibility runner. The release gate recomputes every file and
+  aggregate SHA-256 and rejects dirty, stale, omitted, or substituted inputs.
+  This runner executes Core and Runtime assemblies directly; it must not claim
+  that a Grasshopper GHA was exercised by this evidence.
 - Require zero unregistered `Severe` and `Fatal` EnergyPlus diagnostics in both
   engines. An allowed diagnostic must match its normalized title and count
   exactly, and every diagnostic or `not_verified` limitation must reference an

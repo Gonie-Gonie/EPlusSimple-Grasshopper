@@ -195,6 +195,83 @@ function Require-Json {
     return $json
 }
 
+function Assert-EngineeringPortProvenance {
+    param(
+        [Parameter(Mandatory = $true)] [object] $Report,
+        [Parameter(Mandatory = $true)] [string] $ExpectedCommit
+    )
+    $provenance = $Report.port_provenance
+    if ($null -eq $provenance -or
+        [string] $provenance.schema -cne 'goniegonie.dragons.engineering-port-provenance.v1' -or
+        [string] $provenance.git.commit -cne $ExpectedCommit -or
+        $provenance.git.dirty -isnot [bool] -or [bool] $provenance.git.dirty) {
+        throw 'Engineering compatibility is not bound to the clean release HEAD.'
+    }
+
+    $sourceRoots = @(
+        'src/Shared/GonieGonie.BuildingEnergy.Contracts',
+        'src/Shared/GonieGonie.EnergyPlus.Runtime',
+        'src/InvisibleDragon/GonieGonie.InvisibleDragon.Core',
+        'src/SimpleDragon/GonieGonie.SimpleDragon.Core',
+        'tools/compatibility-runner'
+    )
+    $expectedPaths = @($sourceRoots | ForEach-Object {
+        Get-ChildItem -LiteralPath (Join-Path $repositoryRoot $_) -File -Recurse |
+            Where-Object { $_.Extension -in @('.cs', '.csproj') } |
+            ForEach-Object { Get-RelativeUnixPath -Root $repositoryRoot -Path $_.FullName }
+    } | Sort-Object -Unique)
+    $reportedFiles = @($provenance.production_source_set.files)
+    $reportedPaths = @($reportedFiles | ForEach-Object { [string] $_.path })
+    if ([int] $provenance.production_source_set.file_count -ne $reportedFiles.Count -or
+        $reportedFiles.Count -ne $expectedPaths.Count -or
+        @(Compare-Object -CaseSensitive -ReferenceObject $expectedPaths -DifferenceObject @($reportedPaths | Sort-Object)).Count -ne 0 -or
+        @($reportedPaths | Sort-Object -Unique).Count -ne $reportedPaths.Count) {
+        throw 'Engineering production source-set membership differs from the release tree.'
+    }
+    $sourceLines = @()
+    foreach ($entry in @($reportedFiles | Sort-Object path)) {
+        $path = Join-Path $repositoryRoot ([string] $entry.path).Replace('/', '\')
+        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Engineering source is missing: '$path'." }
+        $item = Get-Item -LiteralPath $path
+        $hash = 'sha256:' + (Get-Sha256 -Path $path)
+        if ([long] $entry.bytes -ne $item.Length -or [string] $entry.sha256 -cne $hash) {
+            throw "Engineering source binding drifted: '$($entry.path)'."
+        }
+        $sourceLines += "$hash  $($item.Length)  $($entry.path)"
+    }
+    $sourceBytes = [System.Text.UTF8Encoding]::new($false).GetBytes(($sourceLines -join "`n") + "`n")
+    $sourceHash = 'sha256:' + (Get-BytesSha256 -Bytes $sourceBytes)
+    if ([string] $provenance.production_source_set.sha256 -cne $sourceHash) {
+        throw 'Engineering production source-set aggregate hash drifted.'
+    }
+
+    $binaries = @($provenance.executed_binaries.files)
+    $expectedAssemblies = @(
+        'GonieGonie.BuildingEnergy.Contracts', 'GonieGonie.CompatibilityRunner',
+        'GonieGonie.EnergyPlus.Runtime', 'GonieGonie.InvisibleDragon.Core',
+        'GonieGonie.SimpleDragon.Core') | Sort-Object
+    if ([string] $provenance.executed_binaries.target_framework -cne 'net8.0-windows' -or
+        [string] $provenance.executed_binaries.configuration -cne 'Release' -or
+        $provenance.executed_binaries.gha_executed -isnot [bool] -or
+        [bool] $provenance.executed_binaries.gha_executed -or
+        @(Compare-Object -CaseSensitive -ReferenceObject $expectedAssemblies -DifferenceObject @($binaries.assembly_name | Sort-Object)).Count -ne 0) {
+        throw 'Engineering executed-binary identity is incomplete or falsely claims a GHA host.'
+    }
+    foreach ($entry in $binaries) {
+        $path = Join-Path $repositoryRoot ([string] $entry.path).Replace('/', '\')
+        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Engineering binary is missing: '$path'." }
+        $item = Get-Item -LiteralPath $path
+        $identity = [Reflection.AssemblyName]::GetAssemblyName($path)
+        if ([long] $entry.bytes -ne $item.Length -or
+            [string] $entry.sha256 -cne ('sha256:' + (Get-Sha256 -Path $path)) -or
+            [string] $entry.assembly_name -cne $identity.Name -or
+            [string] $entry.assembly_version -cne $identity.Version.ToString() -or
+            [string] $entry.target_framework -cne 'net8.0-windows') {
+            throw "Engineering binary binding drifted: '$($entry.path)'."
+        }
+    }
+}
+
 function Get-BytesSha256 {
     param(
         [Parameter(Mandatory = $true)]
@@ -2898,6 +2975,9 @@ $testSummary = Require-Json `
 $engineeringCompatibility = Require-Json `
     -Path $engineeringCompatibilityPath `
     -Schema 'goniegonie.dragons.engineering-compatibility-report.v1'
+Assert-EngineeringPortProvenance `
+    -Report $engineeringCompatibility `
+    -ExpectedCommit $commit
 $packageIndex = Require-Json `
     -Path $packageIndexPath `
     -Schema 'goniegonie.dragons-grasshopper.package-index.v1'
@@ -2922,12 +3002,12 @@ if ([string] $testSummary.status -ne 'passed') {
 }
 $engineeringCases = @($engineeringCompatibility.cases)
 if (-not [bool] $engineeringCompatibility.passed -or
-    [int] $engineeringCompatibility.declared_case_count -lt 1 -or
+    [int] $engineeringCompatibility.declared_case_count -ne 8 -or
     [int] $engineeringCompatibility.executed_case_count -ne [int] $engineeringCompatibility.declared_case_count -or
     [int] $engineeringCompatibility.passed_case_count -ne [int] $engineeringCompatibility.declared_case_count -or
     [int] $engineeringCompatibility.failed_case_count -ne 0 -or
     [int] $engineeringCompatibility.skip_count -ne 0 -or
-    $engineeringCases.Count -ne [int] $engineeringCompatibility.declared_case_count -or
+    $engineeringCases.Count -ne 8 -or
     @($engineeringCases | Where-Object {
         -not [bool] $_.passed -or
         [int] $_.skip_count -ne 0 -or
