@@ -46,7 +46,8 @@ EPW before either engine runs. An immutable Actions cache avoids repeated runtim
 setup still revalidates restored runtime files. The oracle job reuses its single reference
 preparation and restores only the compatibility runner project graph. Any available engineering
 report and the setup, oracle, and compatibility diagnostic logs are retained even when a gate
-fails.
+fails. Release-candidate runs repeat the reporter regression before their expensive bootstrap and
+retain the same diagnostics independently of the complete package artifact.
 
 Numeric comparisons use `|a-b| <= absolute + relative * max(|a|, |b|)`.
 The tracked case manifest is authoritative: IDF fields use absolute and relative

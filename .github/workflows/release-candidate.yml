@@ -57,6 +57,10 @@ jobs:
           "product=$product" | Out-File -LiteralPath $env:GITHUB_OUTPUT -Encoding utf8 -Append
           "version=$tagVersion" | Out-File -LiteralPath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
+      - name: Run compatibility reporter regression tests
+        shell: cmd
+        run: tests\CompatibilityRunner\run-tests.cmd
+
       - name: Bootstrap pinned SDK, Python, and EnergyPlus
         shell: powershell
         run: .\dev.cmd setup -InstallEnergyPlus -RequireEnergyPlus
@@ -72,6 +76,19 @@ jobs:
       - name: Verify cross-language engineering compatibility
         shell: powershell
         run: .\dev.cmd compatibility -SkipReferencePreparation -NoRestore
+
+      - name: Upload release compatibility diagnostics
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: release-compatibility-diagnostics-${{ github.sha }}
+          path: |
+            artifacts/reports/engineering-compatibility.json
+            temp/compatibility/logs/
+            temp/reference/logs/
+            temp/logs/
+          if-no-files-found: warn
+          retention-days: 30
 
       - name: Build and verify Yak and portable packages
         shell: powershell
