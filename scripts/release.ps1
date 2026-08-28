@@ -3001,13 +3001,33 @@ if ([string] $testSummary.status -ne 'passed') {
     throw "Release tests did not report passed status: '$($testSummary.status)'."
 }
 $engineeringCases = @($engineeringCompatibility.cases)
+$requiredEngineeringCaseIds = @(
+    'ashrae-140-modified',
+    'two-zone-one-sided-adjacency-shared-hp',
+    'screw-chiller-closed-two-speed-fcu',
+    'packaged-erv-pv-openings',
+    'packaged-erv-pv-openings--tampa',
+    'packaged-erv-pv-openings--golden',
+    'packaged-erv-pv-openings--san-francisco',
+    'geothermal-heat-pump-ahu',
+    'boiler-heating-fuel-shared-matrix',
+    'absorption-default-explicit-electric-radiant',
+    'district-shared-fcu-radiator-radiant-dhw'
+) | Sort-Object
+$engineeringCaseIds = @($engineeringCases | ForEach-Object { [string] $_.id } | Sort-Object)
+$engineeringStageReceiptCount = [int] ($engineeringCases | ForEach-Object {
+    @($_.executed_stages).Count
+} | Measure-Object -Sum).Sum
 if (-not [bool] $engineeringCompatibility.passed -or
-    [int] $engineeringCompatibility.declared_case_count -ne 8 -or
+    [int] $engineeringCompatibility.declared_case_count -ne 11 -or
     [int] $engineeringCompatibility.executed_case_count -ne [int] $engineeringCompatibility.declared_case_count -or
     [int] $engineeringCompatibility.passed_case_count -ne [int] $engineeringCompatibility.declared_case_count -or
     [int] $engineeringCompatibility.failed_case_count -ne 0 -or
     [int] $engineeringCompatibility.skip_count -ne 0 -or
-    $engineeringCases.Count -ne 8 -or
+    $engineeringCases.Count -ne 11 -or
+    $engineeringStageReceiptCount -ne 66 -or
+    @($engineeringCaseIds | Select-Object -Unique).Count -ne 11 -or
+    @(Compare-Object -ReferenceObject $requiredEngineeringCaseIds -DifferenceObject $engineeringCaseIds).Count -ne 0 -or
     @($engineeringCases | Where-Object {
         -not [bool] $_.passed -or
         [int] $_.skip_count -ne 0 -or

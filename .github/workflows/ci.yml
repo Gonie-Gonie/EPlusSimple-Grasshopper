@@ -93,11 +93,11 @@ jobs:
       # Reference preparation above is reused. Omitting -NoRestore limits the
       # second job to restoring the compatibility runner's project graph rather
       # than restoring the full solution a second time.
-      - name: Run strict eight-case paired EnergyPlus gate
+      - name: Run strict eleven-case paired EnergyPlus climate gate
         shell: powershell
         run: .\dev.cmd compatibility -SkipReferencePreparation
 
-      - name: Require exact clean 8x6 compatibility evidence
+      - name: Require exact clean 11x6 compatibility evidence
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
@@ -110,18 +110,38 @@ jobs:
           $cases = @($report.cases)
           if ([string] $report.schema -cne 'goniegonie.dragons.engineering-compatibility-report.v1' -or
               -not [bool] $report.passed -or
-              [int] $report.declared_case_count -ne 8 -or
-              [int] $report.executed_case_count -ne 8 -or
-              [int] $report.passed_case_count -ne 8 -or
+              [int] $report.declared_case_count -ne 11 -or
+              [int] $report.executed_case_count -ne 11 -or
+              [int] $report.passed_case_count -ne 11 -or
               [int] $report.failed_case_count -ne 0 -or
               [int] $report.skip_count -ne 0 -or
-              $cases.Count -ne 8 -or
+              $cases.Count -ne 11 -or
+              [int] ($cases | ForEach-Object { @($_.executed_stages).Count } | Measure-Object -Sum).Sum -ne 66 -or
               @($cases | Where-Object {
                 -not [bool] $_.passed -or
                 [int] $_.skip_count -ne 0 -or
                 @($_.skipped_stages).Count -ne 0
               }).Count -ne 0) {
             throw 'Engineering compatibility report is incomplete, skipped, or failed.'
+          }
+
+          $requiredCaseIds = @(
+            'ashrae-140-modified',
+            'two-zone-one-sided-adjacency-shared-hp',
+            'screw-chiller-closed-two-speed-fcu',
+            'packaged-erv-pv-openings',
+            'packaged-erv-pv-openings--tampa',
+            'packaged-erv-pv-openings--golden',
+            'packaged-erv-pv-openings--san-francisco',
+            'geothermal-heat-pump-ahu',
+            'boiler-heating-fuel-shared-matrix',
+            'absorption-default-explicit-electric-radiant',
+            'district-shared-fcu-radiator-radiant-dhw'
+          ) | Sort-Object
+          $caseIds = @($cases | ForEach-Object { [string] $_.id } | Sort-Object)
+          if (@($caseIds | Select-Object -Unique).Count -ne 11 -or
+              @(Compare-Object -ReferenceObject $requiredCaseIds -DifferenceObject $caseIds).Count -ne 0) {
+            throw 'Engineering compatibility report does not contain the exact eleven case IDs.'
           }
 
           $requiredStages = @(

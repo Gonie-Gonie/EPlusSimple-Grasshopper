@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 from pathlib import Path
 import shutil
 import subprocess
@@ -10,6 +11,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 COMPATIBILITY = ROOT / "scripts" / "compatibility.ps1"
 RELEASE = ROOT / "scripts" / "release.ps1"
+MANIFEST = ROOT / "fixtures" / "compatibility" / "cases.json"
 SOURCE_ROOTS = (
     "src/Shared/GonieGonie.BuildingEnergy.Contracts",
     "src/Shared/GonieGonie.EnergyPlus.Runtime",
@@ -20,6 +22,43 @@ SOURCE_ROOTS = (
 
 
 class EngineeringProvenanceContractTests(unittest.TestCase):
+    def test_manifest_is_exact_eleven_case_sixty_six_stage_climate_contract(self) -> None:
+        data = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        cases = data["cases"]
+        expected_ids = {
+            "ashrae-140-modified",
+            "two-zone-one-sided-adjacency-shared-hp",
+            "screw-chiller-closed-two-speed-fcu",
+            "packaged-erv-pv-openings",
+            "packaged-erv-pv-openings--tampa",
+            "packaged-erv-pv-openings--golden",
+            "packaged-erv-pv-openings--san-francisco",
+            "geothermal-heat-pump-ahu",
+            "boiler-heating-fuel-shared-matrix",
+            "absorption-default-explicit-electric-radiant",
+            "district-shared-fcu-radiator-radiant-dhw",
+        }
+        required_stages = {
+            "grm_cross_read", "authoring_idf", "expanded_idf",
+            "energyplus", "grr", "warnings",
+        }
+        self.assertEqual(11, len(cases))
+        self.assertEqual(expected_ids, {case["id"] for case in cases})
+        self.assertEqual(66, sum(len(case["stages"]) for case in cases))
+        for case in cases:
+            self.assertEqual(required_stages, set(case["stages"]))
+            self.assertRegex(case["weather_sha256"], r"^[0-9a-f]{64}$")
+            self.assertTrue(case["weather"].startswith("WeatherData/"))
+            self.assertTrue(case["weather_header"].startswith("LOCATION,"))
+
+        climate_cases = {
+            case["id"]: case for case in cases
+            if case["id"].startswith("packaged-erv-pv-openings")
+        }
+        self.assertEqual(4, len(climate_cases))
+        self.assertEqual(4, len({case["weather_sha256"] for case in climate_cases.values()}))
+        self.assertEqual(4, len({case["weather_header"] for case in climate_cases.values()}))
+
     def test_source_set_is_explicit_nonempty_and_has_deterministic_receipt(self) -> None:
         files = sorted(
             path
@@ -52,7 +91,7 @@ class EngineeringProvenanceContractTests(unittest.TestCase):
             self.assertIn(required, text)
         self.assertLess(text.index("comparison.log"), text.index("port_provenance"))
 
-    def test_release_fails_closed_on_commit_dirty_source_binary_and_exact_8x6(self) -> None:
+    def test_release_fails_closed_on_commit_dirty_source_binary_and_exact_11x6(self) -> None:
         text = RELEASE.read_text(encoding="utf-8")
         for required in (
             "Assert-EngineeringPortProvenance",
@@ -61,8 +100,12 @@ class EngineeringProvenanceContractTests(unittest.TestCase):
             "production source-set membership differs",
             "production source-set aggregate hash drifted",
             "Engineering binary binding drifted",
-            "declared_case_count -ne 8",
-            "$engineeringCases.Count -ne 8",
+            "declared_case_count -ne 11",
+            "$engineeringCases.Count -ne 11",
+            "$engineeringStageReceiptCount -ne 66",
+            "packaged-erv-pv-openings--tampa",
+            "packaged-erv-pv-openings--golden",
+            "packaged-erv-pv-openings--san-francisco",
             "did not declare and execute the exact six release stages",
             "[int] $engineeringCompatibility.skip_count -ne 0",
         ):

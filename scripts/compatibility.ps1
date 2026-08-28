@@ -131,6 +131,44 @@ foreach ($requiredFile in @(
     }
 }
 
+$expectedCaseIds = @(
+    'ashrae-140-modified',
+    'two-zone-one-sided-adjacency-shared-hp',
+    'screw-chiller-closed-two-speed-fcu',
+    'packaged-erv-pv-openings',
+    'packaged-erv-pv-openings--tampa',
+    'packaged-erv-pv-openings--golden',
+    'packaged-erv-pv-openings--san-francisco',
+    'geothermal-heat-pump-ahu',
+    'boiler-heating-fuel-shared-matrix',
+    'absorption-default-explicit-electric-radiant',
+    'district-shared-fcu-radiator-radiant-dhw'
+) | Sort-Object
+$expectedStages = @(
+    'grm_cross_read', 'authoring_idf', 'expanded_idf',
+    'energyplus', 'grr', 'warnings'
+) | Sort-Object
+$compatibilityManifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+$manifestCases = @($compatibilityManifest.cases)
+$manifestCaseIds = @($manifestCases | ForEach-Object { [string] $_.id } | Sort-Object)
+if ([string] $compatibilityManifest.schema -cne 'goniegonie.dragons.compatibility-cases.v1' -or
+    $manifestCases.Count -ne 11 -or
+    [int] ($manifestCases | ForEach-Object { @($_.stages).Count } | Measure-Object -Sum).Sum -ne 66 -or
+    @($manifestCaseIds | Select-Object -Unique).Count -ne 11 -or
+    @(Compare-Object -ReferenceObject $expectedCaseIds -DifferenceObject $manifestCaseIds).Count -ne 0) {
+    throw 'Compatibility manifest must declare the exact eleven-case climate matrix.'
+}
+foreach ($manifestCase in $manifestCases) {
+    $caseStages = @($manifestCase.stages | ForEach-Object { [string] $_ } | Sort-Object)
+    if ($caseStages.Count -ne 6 -or
+        @(Compare-Object -ReferenceObject $expectedStages -DifferenceObject $caseStages).Count -ne 0 -or
+        [string] $manifestCase.weather_sha256 -cnotmatch '^[0-9a-f]{64}$' -or
+        [string]::IsNullOrWhiteSpace([string] $manifestCase.weather_header) -or
+        -not ([string] $manifestCase.weather_header).StartsWith('LOCATION,', [StringComparison]::Ordinal)) {
+        throw "Compatibility case '$($manifestCase.id)' does not bind six stages and a pinned EPW hash/header receipt."
+    }
+}
+
 $settings = Get-Content -LiteralPath $settingsPath -Raw | ConvertFrom-Json
 if ([string] $settings.pythonOracle.status -ne 'ready') {
     throw "Python 3.12.7 is not ready. Run 'dev.cmd setup'."
@@ -146,6 +184,21 @@ $pythonExecutable = [string] $settings.pythonOracle.executable
 $runtimeRoot = [string] $settings.energyPlus.root
 $dotnetExecutable = [string] $settings.dotnet.executable
 $iddPath = Join-Path $runtimeRoot 'Energy+.idd'
+
+$resolvedRuntimeRoot = [IO.Path]::GetFullPath($runtimeRoot).TrimEnd('\') + '\'
+foreach ($manifestCase in $manifestCases) {
+    $weatherPath = [IO.Path]::GetFullPath((Join-Path $runtimeRoot ([string] $manifestCase.weather)))
+    if (-not $weatherPath.StartsWith($resolvedRuntimeRoot, [StringComparison]::OrdinalIgnoreCase) -or
+        -not (Test-Path -LiteralPath $weatherPath -PathType Leaf)) {
+        throw "Compatibility case '$($manifestCase.id)' has a missing or unsafe EPW path."
+    }
+    $weatherHash = (Get-FileHash -LiteralPath $weatherPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    $weatherHeader = Get-Content -LiteralPath $weatherPath -TotalCount 1
+    if ($weatherHash -cne [string] $manifestCase.weather_sha256 -or
+        [string] $weatherHeader -cne [string] $manifestCase.weather_header) {
+        throw "Compatibility case '$($manifestCase.id)' EPW hash/header receipt drifted."
+    }
+}
 
 if (-not (Test-Path -LiteralPath $iddPath -PathType Leaf)) {
     throw "Pinned EnergyPlus IDD is missing: '$iddPath'."

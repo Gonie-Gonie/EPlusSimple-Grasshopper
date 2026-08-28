@@ -30,8 +30,9 @@ Compatibility is assessed at several levels:
 5. Rhino geometry conversion and real Grasshopper host load/save/reopen gates.
 6. Package-only, dual-package, shared-assembly, and no-Python checks.
 
-The paired engineering gate is `dev.cmd compatibility`. Every case records the GRM and EPW
-SHA-256 in `fixtures/compatibility/cases.json`; both engines reject changed inputs before model
+The paired engineering gate is `dev.cmd compatibility`. Every case records the GRM SHA-256 and
+the EPW runtime-relative path, SHA-256, and `LOCATION` header receipt in
+`fixtures/compatibility/cases.json`; both engines reject changed inputs before model
 generation. The gate also fixes the upstream commit and EnergyPlus executable/IDD/ExpandObjects
 hashes. For every case, the C# writer emits a deterministic GRM that the pinned Python 0.7.0
 reader must accept and convert to the same semantic IDF. The gate then compares authoring and
@@ -40,7 +41,9 @@ expanded IDF separately and records path-level GRR numeric errors and warning di
 `-AllowDifferences` is a development-only reporting mode and is never evidence of compatibility.
 
 Every push and pull request runs the compatibility reporter regression suite and the same strict
-eight-case paired EnergyPlus gate on Windows. CI prepares the hash-pinned EnergyPlus 24.2 runtime,
+eleven-case, sixty-six-stage paired EnergyPlus gate on Windows. It retains all eight Chicago cases
+and reruns `packaged-erv-pv-openings` with Tampa, Golden, and San Francisco weather. CI prepares
+the hash-pinned EnergyPlus 24.2 runtime,
 IDD, and ExpandObjects through `dev.cmd setup`; the gate then requires and hash-checks its pinned
 EPW before either engine runs. An immutable Actions cache avoids repeated runtime downloads, while
 setup still revalidates restored runtime files. The oracle job reuses its single reference
@@ -48,6 +51,9 @@ preparation and restores only the compatibility runner project graph. Any availa
 report and the setup, oracle, and compatibility diagnostic logs are retained even when a gate
 fails. Release-candidate runs repeat the reporter regression before their expensive bootstrap and
 retain the same diagnostics independently of the complete package artifact.
+
+EPW payloads remain part of the separately installed official EnergyPlus runtime. They are not
+copied into this repository, packages, reports, or release artifacts.
 
 Numeric comparisons use `|a-b| <= absolute + relative * max(|a|, |b|)`.
 The tracked case manifest is authoritative: IDF fields use absolute and relative
