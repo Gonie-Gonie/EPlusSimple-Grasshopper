@@ -33,7 +33,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:51d0d8889fc25140629e0d1333be0fa370a2df0875f66dabefda474df1b9072f"
+    "sha256:cdb613105f515866ebeb4c4d9a8deeeef47373b76c28c993ddbd5b120dcf6b0a"
 )
 
 
@@ -69,9 +69,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 376,
-                "exception": 509,
-                "needs_reverification": 105,
+                "equivalent": 394,
+                "exception": 531,
+                "needs_reverification": 65,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -2336,6 +2336,172 @@ class SafeScopePolicyTests(unittest.TestCase):
                 classification: sum(
                     entries[index].classification == classification
                     for index in range(641, 815)
+                )
+                for classification in (
+                    "equivalent",
+                    "exception",
+                    "needs_reverification",
+                    "out_of_scope",
+                )
+            },
+        )
+
+    def test_imugi_idd_definitions_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        target_indices = {
+            1123,
+            1124,
+            1125,
+            *range(1128, 1148),
+            1148,
+            1149,
+            1150,
+            *range(1153, 1167),
+        }
+        equivalent_indices = {
+            1129,
+            *range(1131, 1138),
+            *range(1141, 1145),
+            1155,
+            1156,
+            1160,
+            1161,
+            1163,
+            1164,
+        }
+        exception_ids = {
+            1123: "typed-immutable-field-definition-1123",
+            1124: "field-by-field-structural-parity-without-value-equality-override-1124",
+            1125: "token-position-kind-explicit-validated-construction-1125",
+            1128: "lossless-string-default-instead-of-legacy-numeric-coercion-1128",
+            1130: "full-schema-parser-route-instead-of-field-fragment-parser-1130",
+            1138: "explicit-inclusive-bound-instead-of-nextafter-sentinel-1138",
+            1139: "ordered-note-list-instead-of-formatted-sentence-string-1139",
+            1140: "explicit-inclusive-bound-instead-of-nextafter-sentinel-1140",
+            1145: "schema-projection-instead-of-mutable-backreference-list-1145",
+            1146: "closed-idd-data-type-enum-with-kind-derived-default-1146",
+            1147: "separate-units-ip-units-and-units-based-on-field-metadata-1147",
+            1148: "typed-immutable-object-definition-1148",
+            1149: "field-by-field-structural-parity-without-value-equality-override-1149",
+            1150: "ordered-consecutive-field-definition-construction-1150",
+            1153: "resolved-zero-based-extensible-start-index-1153",
+            1154: "field-default-projection-instead-of-cached-list-1154",
+            1157: "full-schema-parser-route-instead-of-object-fragment-parser-1157",
+            1158: "ordered-field-token-projection-1158",
+            1159: "obsolete-message-preservation-instead-of-boolean-only-1159",
+            1162: "ordered-memo-list-instead-of-formatted-sentence-string-1162",
+            1165: "additional-directive-preservation-for-reference-class-name-1165",
+            1166: "required-field-definition-projection-instead-of-cached-name-list-1166",
+        }
+        exception_indices = target_indices - equivalent_indices
+        self.assertEqual(40, len(target_indices))
+        self.assertEqual(18, len(equivalent_indices))
+        self.assertEqual(22, len(exception_indices))
+        self.assertEqual(exception_indices, set(exception_ids))
+
+        expected_receipt_ids = set()
+        for index in sorted(target_indices):
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual("src/idragon/imugi.py", entry.path, index)
+            self.assertEqual(inventory_symbol.key, entry.key, index)
+            expected_classification = (
+                "equivalent" if index in equivalent_indices else "exception"
+            )
+            self.assertEqual(expected_classification, entry.classification, index)
+            symbol_hash_suffix = inventory_symbol.symbol_hash.removeprefix("sha256:")[:8]
+            receipt_id = (
+                f"imugi-idd-definitions-core-{index}-{symbol_hash_suffix}"
+            )
+            expected_receipt_ids.add(receipt_id)
+            expected_evidence = [f"upstream/symbol-evidence.json#{receipt_id}"]
+            if index in exception_indices:
+                exception_id = exception_ids[index]
+                self.assertEqual(exception_id, entry.exception_id, index)
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            else:
+                self.assertIsNone(entry.exception_id, index)
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, index)
+            for binding in (
+                "Oracle commit f208041",
+                "commit adcda65",
+                "sha256:3e56e7fe6026fef3146a62aadf3248940c65aa9a2b5c624b519fbc0e3d99dd69",
+                "sha256:fa70dfc565a30542f58697cee512701356cf2200b3f07332de4e345f0b7b1398",
+                "sha256:b797ab5cb57509672d644bdc733ff2b8bd8534c4d697972f7722b944a7ff66f9",
+                "sha256:1782390684d440ece9c849f4d4c9f6a892577681a45038e46bf074a322142541",
+                "No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+            ):
+                self.assertIn(binding, entry.rationale, index)
+
+        evidence = self.configuration.symbol_evidence
+        assert evidence is not None
+        imugi_idd_definition_receipts = {
+            receipt.identifier
+            for item in evidence.entries
+            for receipt in item.receipts
+            if receipt.identifier.startswith("imugi-idd-definitions-core-")
+        }
+        self.assertEqual(expected_receipt_ids, imugi_idd_definition_receipts)
+        self.assertEqual(
+            set(exception_ids.values()),
+            {
+                entry.exception_id
+                for entry in entries
+                if entry.exception_id in set(exception_ids.values())
+            },
+        )
+
+        out_of_scope_indices = {
+            1096,
+            1098,
+            1099,
+            1110,
+            1111,
+            1117,
+            1120,
+            1126,
+            1127,
+            1151,
+            1152,
+            1168,
+            1169,
+            1172,
+            *range(1184, 1190),
+            *range(1191, 1194),
+            1196,
+            1200,
+            1202,
+            1213,
+            1216,
+        }
+        deferred_indices = set(range(1095, 1228)) - target_indices - out_of_scope_indices
+        self.assertEqual(28, len(out_of_scope_indices))
+        self.assertEqual(65, len(deferred_indices))
+        self.assertTrue(
+            all(
+                entries[index].classification == "out_of_scope"
+                for index in out_of_scope_indices
+            )
+        )
+        self.assertTrue(
+            all(
+                entries[index].classification == "needs_reverification"
+                for index in deferred_indices
+            )
+        )
+        self.assertEqual(
+            {
+                "equivalent": 18,
+                "exception": 22,
+                "needs_reverification": 65,
+                "out_of_scope": 28,
+            },
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in range(1095, 1228)
                 )
                 for classification in (
                     "equivalent",
