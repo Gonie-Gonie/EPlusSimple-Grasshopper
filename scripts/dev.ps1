@@ -27,7 +27,7 @@ Usage:
   dev.cmd <command> [arguments]
 
 Commands:
-  setup       Prepare the pinned SDK, Python, Rhino, and optional EnergyPlus
+  setup       Prepare SDK/Python/Rhino detection and verified embedded archives
   build       Build both Dragon products and run the test gates
   reference   Generate or verify the historical Python compatibility oracle
   package     Create portable ZIP and Yak packages

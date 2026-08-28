@@ -12,7 +12,9 @@ authorize publication, Yak upload, tag creation, or a GitHub release.
   reference fixtures.
 - Recheck `LICENSE` and `NOTICE.md`. Resolve the recorded historical upstream
   standalone-license omission before public binary release.
-- Confirm that no weather payload or unlicensed EPW is present.
+- Confirm that SimpleDragon contains only the exact hash-pinned KoreanTMY
+  archive, no expanded or arbitrary EPW files, and that redistribution rights
+  are resolved before any public binary release.
 - Require both Rhino 7 and Rhino 8 for the complete release gate. A normal
   developer build may skip tests for a missing Rhino generation, but a release
   candidate may not.
@@ -92,8 +94,9 @@ For diagnosis, its constituent commands are:
   their real wires and typed construction values, and round-trip without
   structural drift in Rhino 7 and Rhino 8.
 - Confirm the package verifier reports correct Yak tags, framework layout,
-  shared DLL hashes, component interoperability, and no Python/Rhino SDK/runtime
-  payload leakage.
+  shared DLL hashes, component interoperability, the exact product-exclusive
+  EnergyPlus/KoreanTMY archive pins, and no Python/Rhino SDK or directly
+  expanded runtime/weather payload leakage.
 - Confirm all generated output and logs are under `artifacts` or `temp`.
 
 ## Candidate review
@@ -109,7 +112,8 @@ For diagnosis, its constituent commands are:
   HVAC graph and a SimpleDragon HVAC-to-InvisibleDragon conversion using the
   recipes in `examples\README.md`.
 - Verify explicit Run/Prepare trigger behavior, cancellation, cache reuse,
-  user-supplied EPW handling, CSV schema, and saved Goo persistence.
+  address-selected packaged EPW handling plus explicit overrides, CSV schema,
+  and saved Goo persistence.
 - Review release notes for exact supported and intentionally unsupported scope.
 
 ## Publication

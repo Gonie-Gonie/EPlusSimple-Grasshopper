@@ -23,6 +23,8 @@ $specPath = Join-Path $repositoryRoot 'packaging\package-spec.json'
 $settingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
 $licensePath = Join-Path $repositoryRoot 'LICENSE'
 $noticePath = Join-Path $repositoryRoot 'NOTICE.md'
+$distributionManifestPath = Join-Path $repositoryRoot 'runtime\distributions.json'
+$distributionRoot = Join-Path $repositoryRoot '.tools\distributions'
 
 function Reset-GeneratedDirectory {
     param(
@@ -112,21 +114,111 @@ function Copy-PackageRootFiles {
     Copy-Item -LiteralPath $licensePath -Destination (Join-Path $Destination 'LICENSE.txt') -Force
     Copy-Item -LiteralPath $noticePath -Destination (Join-Path $Destination 'NOTICE.md') -Force
 
+    $embeddedDescription = if ([string] $Product.id -eq 'invisible-dragon') {
+        'It includes the exact, hash-verified official EnergyPlus 24.2.0 Windows archive under `runtime/energyplus/`, plus `runtime/energyplus/LICENSE.txt` copied byte-for-byte from that archive. The runtime bootstrap extracts and validates the archive when needed.'
+    }
+    else {
+        'It includes the exact, hash-verified KoreanTMY v1 weather archive under `runtime/weather/`. SimpleDragon resolves the tracked address metadata against that embedded archive.'
+    }
     $readme = @"
 # $($Product.display_name) $($spec.version)
 
 This is a Gonie-Gonie $PayloadDescription for Grasshopper on Windows.
 
-It contains only managed plugin/runtime-bootstrap assemblies. RhinoCommon,
-Grasshopper, debug symbols, XML documentation, Python, EnergyPlus binaries,
-and weather files are intentionally excluded. When a simulation is requested,
-the Gonie-Gonie runtime bootstrap validates/reuses a compatible EnergyPlus
-installation or securely prepares the pinned runtime. Supply an EPW separately.
+It contains managed plugin/runtime-bootstrap assemblies and one product-specific
+embedded distribution archive. $embeddedDescription RhinoCommon, Grasshopper,
+debug symbols, XML documentation, Python, directly expanded EnergyPlus files,
+and directly expanded EPW files are excluded.
 
 See `package-manifest.json`, `checksums.sha256`, `LICENSE.txt`, and `NOTICE.md`
 in this directory for identity, integrity, licensing, and provenance details.
 "@
     Write-Utf8Text -Path (Join-Path $Destination 'README.md') -Content ($readme.Trim() + [Environment]::NewLine)
+}
+
+function Get-ProductDistribution {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $ProductId
+    )
+
+    $matches = @($distributionManifest.payloads | Where-Object { [string] $_.product -eq $ProductId })
+    if ($matches.Count -ne 1) {
+        throw "Expected exactly one embedded distribution for '$ProductId'; found $($matches.Count)."
+    }
+    return $matches[0]
+}
+
+function Copy-EmbeddedDistribution {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object] $Product,
+
+        [Parameter(Mandatory = $true)]
+        [string] $Destination
+    )
+
+    $distribution = Get-ProductDistribution -ProductId ([string] $Product.id)
+    $source = Join-Path $distributionRoot (([string] $distribution.developmentPath).Replace('/', '\'))
+    if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
+        throw "Verified embedded payload is missing: '$source'. Run 'dev.cmd setup' without -SkipEmbeddedPayloads."
+    }
+    $sourceItem = Get-Item -LiteralPath $source
+    if ([int64] $sourceItem.Length -ne [int64] $distribution.size -or
+        (Get-Sha256 -Path $source).ToLowerInvariant() -ne ([string] $distribution.sha256).ToLowerInvariant()) {
+        throw "Embedded payload identity mismatch: '$source'. Rerun 'dev.cmd setup'."
+    }
+
+    $relativePath = [string] $distribution.packagePath
+    if ($relativePath -ne ('runtime/' + $(if ([string] $Product.id -eq 'invisible-dragon') { 'energyplus/' } else { 'weather/' }) + [string] $distribution.fileName)) {
+        throw "Embedded payload path/product contract mismatch for '$($Product.id)': '$relativePath'."
+    }
+    $target = Join-Path $Destination ($relativePath.Replace('/', '\'))
+    if (Test-Path -LiteralPath $target) {
+        throw "Embedded payload would be copied more than once at '$target'."
+    }
+    Ensure-Directory -Path (Split-Path -Parent $target)
+    Copy-Item -LiteralPath $source -Destination $target
+    if ([int64] (Get-Item -LiteralPath $target).Length -ne [int64] $distribution.size -or
+        (Get-Sha256 -Path $target).ToLowerInvariant() -ne ([string] $distribution.sha256).ToLowerInvariant()) {
+        throw "Copied embedded payload failed identity verification: '$target'."
+    }
+
+    $result = [ordered] @{
+        id = [string] $distribution.id
+        kind = [string] $distribution.kind
+        path = $relativePath
+        fileName = [string] $distribution.fileName
+        size = [int64] $distribution.size
+        sha256 = ([string] $distribution.sha256).ToLowerInvariant()
+    }
+    if ([string] $Product.id -eq 'invisible-dragon') {
+        Add-Type -AssemblyName System.IO.Compression.FileSystem
+        $archive = [System.IO.Compression.ZipFile]::OpenRead($source)
+        try {
+            $entry = $archive.GetEntry([string] $distribution.licenseEntry)
+            if ($null -eq $entry -or [int64] $entry.Length -ne [int64] $distribution.licenseSize) {
+                throw 'Pinned EnergyPlus archive license entry is missing or has the wrong size.'
+            }
+            $licenseTarget = Join-Path $Destination (([string] $distribution.packageLicensePath).Replace('/', '\'))
+            Ensure-Directory -Path (Split-Path -Parent $licenseTarget)
+            [System.IO.Compression.ZipFileExtensions]::ExtractToFile($entry, $licenseTarget, $false)
+        }
+        finally {
+            $archive.Dispose()
+        }
+        if ((Get-Sha256 -Path $licenseTarget).ToLowerInvariant() -ne ([string] $distribution.licenseSha256).ToLowerInvariant()) {
+            throw 'Extracted EnergyPlus LICENSE.txt differs from the exact archive entry.'
+        }
+        $result.license = [pscustomobject] [ordered] @{
+            archiveEntry = [string] $distribution.licenseEntry
+            path = [string] $distribution.packageLicensePath
+            size = [int64] $distribution.licenseSize
+            sha256 = ([string] $distribution.licenseSha256).ToLowerInvariant()
+        }
+    }
+
+    return [pscustomobject] $result
 }
 
 function Copy-FrameworkPayload {
@@ -189,7 +281,10 @@ function Write-PayloadManifest {
         [string] $Kind,
 
         [Parameter(Mandatory = $true)]
-        [object[]] $Targets
+        [object[]] $Targets,
+
+        [Parameter(Mandatory = $true)]
+        [object] $EmbeddedPayload
     )
 
     $payload = foreach ($file in @(Get-ChildItem -LiteralPath $Root -File -Recurse |
@@ -217,10 +312,11 @@ function Write-PayloadManifest {
         platform = 'win-x64'
         targets = @($Targets)
         runtime = [pscustomobject] [ordered] @{
-            energyPlus = 'external-pinned-bootstrap-or-reuse'
-            energyPlusBinariesIncluded = $false
-            weatherIncluded = $false
+            energyPlus = if ([string] $Product.id -eq 'invisible-dragon') { 'embedded-pinned-archive' } else { 'external-pinned-bootstrap-or-reuse' }
+            energyPlusBinariesIncluded = ([string] $Product.id -eq 'invisible-dragon')
+            weatherIncluded = ([string] $Product.id -eq 'simple-dragon')
             pythonRequired = $false
+            embeddedPayloads = @($EmbeddedPayload)
         }
         payload = @($payload)
     }
@@ -376,10 +472,67 @@ if (-not (Test-Path -LiteralPath $specPath -PathType Leaf)) {
 if (-not (Test-Path -LiteralPath $settingsPath -PathType Leaf)) {
     throw "Local setup is missing. Run 'dev.cmd setup' first; expected '$settingsPath'."
 }
+if (-not (Test-Path -LiteralPath $distributionManifestPath -PathType Leaf)) {
+    throw "Distribution manifest is missing: '$distributionManifestPath'."
+}
 
 $spec = Get-Content -LiteralPath $specPath -Raw | ConvertFrom-Json
 if ([string] $spec.schema -ne 'goniegonie.dragons-grasshopper.package-spec.v1') {
     throw "Unsupported package spec schema in '$specPath'."
+}
+$distributionManifest = Get-Content -LiteralPath $distributionManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v1' -or
+    @($distributionManifest.payloads).Count -ne 2 -or
+    @($distributionManifest.payloads | Group-Object product | Where-Object { $_.Count -ne 1 }).Count -ne 0) {
+    throw "Distribution manifest must define exactly one reviewed payload for each product: '$distributionManifestPath'."
+}
+$reviewedDistributions = @{
+    'invisible-dragon' = @{
+        id = 'energyplus-24.2.0-windows-x64'
+        kind = 'energyplus-archive'
+        fileName = 'EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip'
+        url = 'https://github.com/NREL/EnergyPlus/releases/download/v24.2.0a/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip'
+        size = [int64] 179248139
+        sha256 = '26c7c22b731f54031626750284c8b613fb8f03c3aa56b6bc7ec65b6bf8668df1'
+        developmentPath = 'energyplus/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip'
+        packagePath = 'runtime/energyplus/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip'
+        licenseEntry = 'EnergyPlus-24.2.0-94a887817b-Windows-x86_64/LICENSE.txt'
+        packageLicensePath = 'runtime/energyplus/LICENSE.txt'
+        licenseSize = [int64] 3182
+        licenseSha256 = 'b43f1553459a4bcc49d180b42123a64a54fcbb6213cd99ac6ac6aa32cb1c1a05'
+    }
+    'simple-dragon' = @{
+        id = 'korean-tmy-v1'
+        kind = 'weather-archive'
+        fileName = 'KoreanTMY-v1.zip'
+        url = 'https://github.com/snu-bslab/EPlusSimple-resources/releases/download/weather/v1/KoreanTMY-v1.zip'
+        size = [int64] 128349513
+        sha256 = 'fa88b8d69364b6a6b663afdc6dc2eb30c0ddee17cd37e5802ce5a5dec63d92d0'
+        developmentPath = 'weather/KoreanTMY-v1.zip'
+        packagePath = 'runtime/weather/KoreanTMY-v1.zip'
+    }
+}
+foreach ($distribution in @($distributionManifest.payloads)) {
+    $productId = [string] $distribution.product
+    if (-not $reviewedDistributions.ContainsKey($productId)) {
+        throw "Distribution manifest contains an unreviewed product '$productId'."
+    }
+    $expected = $reviewedDistributions[$productId]
+    if ([string] $distribution.id -ne [string] $expected.id -or
+        [string] $distribution.kind -ne [string] $expected.kind -or
+        [string] $distribution.fileName -ne [string] $expected.fileName -or
+        [string] $distribution.url -ne [string] $expected.url -or
+        [int64] $distribution.size -ne [int64] $expected.size -or
+        ([string] $distribution.sha256).ToLowerInvariant() -ne [string] $expected.sha256 -or
+        [string] $distribution.developmentPath -ne [string] $expected.developmentPath -or
+        [string] $distribution.packagePath -ne [string] $expected.packagePath -or
+        ($productId -eq 'invisible-dragon' -and (
+            [string] $distribution.licenseEntry -ne [string] $expected.licenseEntry -or
+            [string] $distribution.packageLicensePath -ne [string] $expected.packageLicensePath -or
+            [int64] $distribution.licenseSize -ne [int64] $expected.licenseSize -or
+            ([string] $distribution.licenseSha256).ToLowerInvariant() -ne [string] $expected.licenseSha256))) {
+        throw "Distribution pin differs from the reviewed product/path contract for '$productId'."
+    }
 }
 $settings = Get-Content -LiteralPath $settingsPath -Raw | ConvertFrom-Json
 $dotnet = [string] $settings.dotnet.executable
@@ -463,6 +616,7 @@ foreach ($product in @($spec.products)) {
             -Product $product `
             -Destination $stageRoot `
             -PayloadDescription ("Yak stage for " + [string] $target.id)
+        $stageEmbeddedPayload = Copy-EmbeddedDistribution -Product $product -Destination $stageRoot
 
         $targetManifest = @()
         foreach ($framework in @($target.frameworks)) {
@@ -490,7 +644,8 @@ foreach ($product in @($spec.products)) {
             -Product $product `
             -Root $stageRoot `
             -Kind 'yak-stage' `
-            -Targets $targetManifest
+            -Targets $targetManifest `
+            -EmbeddedPayload $stageEmbeddedPayload
         $inspectionHost = $yakInspectionHosts[[string] $target.id]
         $payloadProbeDirectories = @()
         if ([string] $target.yak_layout -eq 'flat') {
@@ -517,6 +672,7 @@ foreach ($product in @($spec.products)) {
         -Product $product `
         -Destination $portableStage `
         -PayloadDescription 'portable plugin bundle'
+    $portableEmbeddedPayload = Copy-EmbeddedDistribution -Product $product -Destination $portableStage
     $portableTargets = @()
     foreach ($target in @($spec.targets)) {
         foreach ($framework in @($target.frameworks)) {
@@ -539,7 +695,8 @@ foreach ($product in @($spec.products)) {
         -Product $product `
         -Root $portableStage `
         -Kind 'portable-plugin' `
-        -Targets $portableTargets
+        -Targets $portableTargets `
+        -EmbeddedPayload $portableEmbeddedPayload
 
     $portableName = '{0}-{1}-portable-plugin-win.zip' -f $product.id, $spec.version
     $portablePath = Join-Path $portableOutputRoot $portableName
@@ -558,6 +715,12 @@ foreach ($product in @($spec.products)) {
             artifact = Get-RelativeUnixPath -Root $packagesRoot -Path $portablePath
             sha256 = Get-Sha256 -Path $portablePath
         }
+        runtime = [pscustomobject] [ordered] @{
+            energyPlusBinariesIncluded = ([string] $product.id -eq 'invisible-dragon')
+            weatherIncluded = ([string] $product.id -eq 'simple-dragon')
+            pythonRequired = $false
+            embeddedPayload = $portableEmbeddedPayload
+        }
     }
 }
 
@@ -567,9 +730,10 @@ $index = [pscustomobject] [ordered] @{
     owner = 'Gonie-Gonie'
     products = @($indexProducts)
     redistribution = [pscustomobject] [ordered] @{
-        energyPlusBinariesIncluded = $false
-        weatherIncluded = $false
-        portableArchivesArePluginOnly = $true
+        energyPlusBinariesIncluded = $true
+        weatherIncluded = $true
+        portableArchivesArePluginOnly = $false
+        publicPublicationAuthorized = $false
     }
 }
 Write-Utf8JsonIfChanged -InputObject $index -Path (Join-Path $packagesRoot 'package-index.json') -Depth 10

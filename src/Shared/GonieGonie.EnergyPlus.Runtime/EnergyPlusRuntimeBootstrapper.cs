@@ -1,27 +1,40 @@
 namespace GonieGonie.EnergyPlus.Runtime;
 
 /// <summary>
-/// Downloads, verifies, and transactionally prepares a pinned EnergyPlus runtime in a per-user cache.
+/// Acquires, verifies, and transactionally prepares a pinned EnergyPlus runtime in a per-user cache.
 /// </summary>
 public sealed class EnergyPlusRuntimeBootstrapper
 {
+    private const int ArchiveCopyBufferSize = 81920;
+
     private readonly EnergyPlusRuntimeDistribution distribution;
     private readonly IEnergyPlusRuntimeArchiveDownloader downloader;
+    private readonly IEnergyPlusRuntimeBundledArchiveLocator? bundledArchiveLocator;
     private readonly RuntimeResolver resolver;
 
     public EnergyPlusRuntimeBootstrapper()
         : this(
             EnergyPlusRuntimeDistribution.Supported,
-            new HttpEnergyPlusRuntimeArchiveDownloader())
+            new HttpEnergyPlusRuntimeArchiveDownloader(),
+            new AssemblyAdjacentEnergyPlusRuntimeArchiveLocator())
     {
     }
 
     public EnergyPlusRuntimeBootstrapper(
         EnergyPlusRuntimeDistribution distribution,
         IEnergyPlusRuntimeArchiveDownloader downloader)
+        : this(distribution, downloader, bundledArchiveLocator: null)
+    {
+    }
+
+    internal EnergyPlusRuntimeBootstrapper(
+        EnergyPlusRuntimeDistribution distribution,
+        IEnergyPlusRuntimeArchiveDownloader downloader,
+        IEnergyPlusRuntimeBundledArchiveLocator? bundledArchiveLocator)
     {
         this.distribution = distribution ?? throw new ArgumentNullException(nameof(distribution));
         this.downloader = downloader ?? throw new ArgumentNullException(nameof(downloader));
+        this.bundledArchiveLocator = bundledArchiveLocator;
 
         var archiveUri = distribution.ArchiveUri
             ?? throw new ArgumentException("The runtime distribution requires an archive URI.", nameof(distribution));
@@ -196,10 +209,14 @@ public sealed class EnergyPlusRuntimeBootstrapper
         {
             EnsureOperationPathIsUnused(partialArchivePath);
             EnsureOperationPathIsUnused(stagingRoot);
+            var bundledArchivePath = bundledArchiveLocator?.FindArchivePath();
+            var acquisitionMessage = bundledArchivePath is null
+                ? "Downloading the pinned EnergyPlus archive from the verified HTTPS source."
+                : "Copying the bundled pinned EnergyPlus archive into the per-user operation cache.";
             Report(
                 progress,
                 EnergyPlusRuntimeBootstrapStage.DownloadingArchive,
-                "Downloading the pinned EnergyPlus archive.",
+                acquisitionMessage,
                 0,
                 distribution.Manifest.EnergyPlusArchiveSize);
             var downloadProgress = new CallbackProgress<EnergyPlusRuntimeDownloadProgress>(update =>
@@ -221,17 +238,29 @@ public sealed class EnergyPlusRuntimeBootstrapper
                 Report(
                     progress,
                     EnergyPlusRuntimeBootstrapStage.DownloadingArchive,
-                    "Downloading the pinned EnergyPlus archive.",
+                    acquisitionMessage,
                     update.BytesReceived,
                     update.TotalBytes ?? expectedSize);
             });
             try
             {
-                await downloader.DownloadAsync(
-                    distribution.ArchiveUri,
-                    partialArchivePath,
-                    downloadProgress,
-                    cancellationToken).ConfigureAwait(false);
+                if (bundledArchivePath is null)
+                {
+                    await downloader.DownloadAsync(
+                        distribution.ArchiveUri,
+                        partialArchivePath,
+                        downloadProgress,
+                        cancellationToken).ConfigureAwait(false);
+                }
+                else
+                {
+                    EnsurePathIsNotReparsePoint(bundledArchivePath, "bundled runtime archive");
+                    await CopyBundledArchiveAsync(
+                        bundledArchivePath,
+                        partialArchivePath,
+                        downloadProgress,
+                        cancellationToken).ConfigureAwait(false);
+                }
             }
             catch (RuntimeBootstrapException)
             {
@@ -243,11 +272,18 @@ public sealed class EnergyPlusRuntimeBootstrapper
             }
             catch (Exception exception)
             {
+                var sourceDescription = bundledArchivePath is null
+                    ? distribution.ArchiveUri.ToString()
+                    : bundledArchivePath;
                 throw BootstrapFailure(
                     EnergyPlusFailureCategory.RuntimeEnvironment,
-                    "RUNTIME_ARCHIVE_DOWNLOAD_FAILED",
-                    "The pinned EnergyPlus archive could not be downloaded.",
-                    distribution.ArchiveUri + " " + exception.Message);
+                    bundledArchivePath is null
+                        ? "RUNTIME_ARCHIVE_DOWNLOAD_FAILED"
+                        : "RUNTIME_BUNDLED_ARCHIVE_COPY_FAILED",
+                    bundledArchivePath is null
+                        ? "The pinned EnergyPlus archive could not be downloaded."
+                        : "The bundled pinned EnergyPlus archive could not be copied into the per-user cache.",
+                    sourceDescription + " " + exception.Message);
             }
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -314,6 +350,64 @@ public sealed class EnergyPlusRuntimeBootstrapper
         }
     }
 
+    private static async Task CopyBundledArchiveAsync(
+        string sourcePath,
+        string destinationPartialPath,
+        IProgress<EnergyPlusRuntimeDownloadProgress>? progress,
+        CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        using var source = new FileStream(
+            sourcePath,
+            FileMode.Open,
+            FileAccess.Read,
+            FileShare.Read,
+            ArchiveCopyBufferSize,
+            FileOptions.Asynchronous | FileOptions.SequentialScan);
+        using var destination = new FileStream(
+            destinationPartialPath,
+            FileMode.CreateNew,
+            FileAccess.Write,
+            FileShare.None,
+            ArchiveCopyBufferSize,
+            FileOptions.Asynchronous | FileOptions.SequentialScan);
+
+        var total = source.Length;
+        long copied = 0;
+        progress?.Report(new EnergyPlusRuntimeDownloadProgress(copied, total));
+        var buffer = new byte[ArchiveCopyBufferSize];
+        while (true)
+        {
+#if NET7_0_OR_GREATER
+            var count = await source.ReadAsync(buffer.AsMemory(), cancellationToken).ConfigureAwait(false);
+#else
+            var count = await source.ReadAsync(
+                buffer,
+                0,
+                buffer.Length,
+                cancellationToken).ConfigureAwait(false);
+#endif
+            if (count == 0)
+            {
+                break;
+            }
+
+#if NET7_0_OR_GREATER
+            await destination.WriteAsync(buffer.AsMemory(0, count), cancellationToken).ConfigureAwait(false);
+#else
+            await destination.WriteAsync(
+                buffer,
+                0,
+                count,
+                cancellationToken).ConfigureAwait(false);
+#endif
+            copied += count;
+            progress?.Report(new EnergyPlusRuntimeDownloadProgress(copied, total));
+        }
+
+        await destination.FlushAsync(cancellationToken).ConfigureAwait(false);
+    }
+
     private async Task VerifyArchiveAsync(
         string archivePath,
         IProgress<EnergyPlusRuntimeBootstrapProgress>? progress,
@@ -328,7 +422,7 @@ public sealed class EnergyPlusRuntimeBootstrapper
             throw BootstrapFailure(
                 EnergyPlusFailureCategory.RuntimeEnvironment,
                 "RUNTIME_ARCHIVE_NOT_CREATED",
-                "The archive downloader did not create its partial destination.",
+                "The archive acquisition did not create its partial destination.",
                 archivePath);
         }
 
@@ -343,7 +437,7 @@ public sealed class EnergyPlusRuntimeBootstrapper
             throw BootstrapFailure(
                 EnergyPlusFailureCategory.RuntimeEnvironment,
                 "RUNTIME_ARCHIVE_UNREADABLE",
-                "The downloaded EnergyPlus archive cannot be read.",
+                "The acquired EnergyPlus archive cannot be read.",
                 exception.Message);
         }
 
@@ -352,7 +446,7 @@ public sealed class EnergyPlusRuntimeBootstrapper
             throw BootstrapFailure(
                 EnergyPlusFailureCategory.RuntimeIntegrity,
                 "RUNTIME_ARCHIVE_SIZE_MISMATCH",
-                "The downloaded EnergyPlus archive size does not match the pinned manifest.",
+                "The acquired EnergyPlus archive size does not match the pinned manifest.",
                 $"Expected {distribution.Manifest.EnergyPlusArchiveSize}; actual {actualSize}.");
         }
 
@@ -373,7 +467,7 @@ public sealed class EnergyPlusRuntimeBootstrapper
             throw BootstrapFailure(
                 EnergyPlusFailureCategory.RuntimeEnvironment,
                 "RUNTIME_ARCHIVE_UNREADABLE",
-                "The downloaded EnergyPlus archive cannot be hashed.",
+                "The acquired EnergyPlus archive cannot be hashed.",
                 exception.Message);
         }
 
@@ -385,7 +479,7 @@ public sealed class EnergyPlusRuntimeBootstrapper
             throw BootstrapFailure(
                 EnergyPlusFailureCategory.RuntimeIntegrity,
                 "RUNTIME_ARCHIVE_HASH_MISMATCH",
-                "The downloaded EnergyPlus archive SHA-256 does not match the pinned manifest.",
+                "The acquired EnergyPlus archive SHA-256 does not match the pinned manifest.",
                 $"Expected {distribution.Manifest.EnergyPlusArchiveSha256}; actual {actualHash}.");
         }
     }

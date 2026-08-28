@@ -20,12 +20,17 @@ internal static class Program
             Dictionary<string, string> options = ParseArguments(args);
             string packagesRoot = RequiredOption(options, "--packages-root");
             string specPath = RequiredOption(options, "--spec");
+            string distributionsPath = RequiredOption(options, "--distributions");
             options.TryGetValue("--report", out string? reportPath);
 
             PackageSpec spec = JsonSerializer.Deserialize<PackageSpec>(
                 File.ReadAllText(specPath),
                 JsonOptions()) ?? throw new InvalidDataException("Package specification is empty.");
-            var verifier = new PackageVerifier(Path.GetFullPath(packagesRoot), spec);
+            DistributionManifest distributions = JsonSerializer.Deserialize<DistributionManifest>(
+                File.ReadAllText(distributionsPath),
+                JsonOptions()) ?? throw new InvalidDataException("Distribution manifest is empty.");
+            string repositoryRoot = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(distributionsPath))!, ".."));
+            var verifier = new PackageVerifier(Path.GetFullPath(packagesRoot), repositoryRoot, spec, distributions);
             VerificationReport report = verifier.Verify();
             string json = JsonSerializer.Serialize(report, JsonOptions(writeIndented: true)) + Environment.NewLine;
             if (!string.IsNullOrWhiteSpace(reportPath))
@@ -92,17 +97,27 @@ internal sealed class PackageVerifier
         "checksums.sha256",
     };
     private static readonly string[] NewLineSeparators = { "\r\n", "\n" };
+    private static readonly string[] EmbeddedRuntimeRootDirectory = { "runtime" };
 
     private readonly string _packagesRoot;
+    private readonly string _repositoryRoot;
     private readonly PackageSpec _spec;
+    private readonly DistributionManifest _distributions;
     private readonly List<VerificationFailure> _failures = new();
     private readonly SortedDictionary<string, SortedDictionary<string, string>> _sharedHashes =
         new(StringComparer.Ordinal);
+    private readonly HashSet<string> _deepValidatedDistributionHashes = new(StringComparer.Ordinal);
 
-    public PackageVerifier(string packagesRoot, PackageSpec spec)
+    public PackageVerifier(
+        string packagesRoot,
+        string repositoryRoot,
+        PackageSpec spec,
+        DistributionManifest distributions)
     {
         _packagesRoot = packagesRoot;
+        _repositoryRoot = repositoryRoot;
         _spec = spec;
+        _distributions = distributions;
     }
 
     public VerificationReport Verify()
@@ -112,6 +127,7 @@ internal sealed class PackageVerifier
         Check(BothScenario, Regex.IsMatch(_spec.Version, @"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$"),
             "Package version is not SemVer: '" + _spec.Version + "'.");
         Check(BothScenario, Directory.Exists(_packagesRoot), "Packages root does not exist: '" + _packagesRoot + "'.");
+        VerifyDistributionManifest();
 
         foreach (ProductSpec product in _spec.Products)
         {
@@ -119,6 +135,7 @@ internal sealed class PackageVerifier
         }
 
         VerifySharedCompatibility();
+        VerifyPackageIndex();
         string rootChecksums = Path.Combine(_packagesRoot, "checksums.sha256");
         if (File.Exists(rootChecksums))
         {
@@ -142,6 +159,126 @@ internal sealed class PackageVerifier
             SharedAssemblies = _sharedHashes,
             Failures = _failures,
         };
+    }
+
+    private void VerifyDistributionManifest()
+    {
+        Check(BothScenario, _distributions.Schema == "goniegonie.dragons-grasshopper.distributions.v1",
+            "Unsupported distribution manifest schema '" + _distributions.Schema + "'.");
+        Check(BothScenario, _distributions.Payloads.Count == 2,
+            "Distribution manifest must contain exactly two reviewed payloads.");
+
+        VerifyDistributionPin(
+            "invisible-dragon",
+            "energyplus-24.2.0-windows-x64",
+            "energyplus-archive",
+            "EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip",
+            "https://github.com/NREL/EnergyPlus/releases/download/v24.2.0a/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip",
+            179248139,
+            "26c7c22b731f54031626750284c8b613fb8f03c3aa56b6bc7ec65b6bf8668df1",
+            "energyplus/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip",
+            "runtime/energyplus/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip");
+        VerifyDistributionPin(
+            "simple-dragon",
+            "korean-tmy-v1",
+            "weather-archive",
+            "KoreanTMY-v1.zip",
+            "https://github.com/snu-bslab/EPlusSimple-resources/releases/download/weather/v1/KoreanTMY-v1.zip",
+            128349513,
+            "fa88b8d69364b6a6b663afdc6dc2eb30c0ddee17cd37e5802ce5a5dec63d92d0",
+            "weather/KoreanTMY-v1.zip",
+            "runtime/weather/KoreanTMY-v1.zip");
+
+        DistributionPayload? weather = DistributionFor("simple-dragon");
+        if (weather is not null)
+        {
+            Check(SimpleScenario, weather.ArchiveEpwCount == 80
+                    && weather.MetadataReferencedUniqueEpwCount == 78
+                    && weather.MetadataPath == "data/simple-dragon/weather/행정구역별기상데이터.csv"
+                    && weather.MetadataColumn == "EPW파일명",
+                "KoreanTMY distribution coverage metadata must pin 80 root EPWs and all 78 metadata-referenced EPWs.");
+        }
+        DistributionPayload? energyPlus = DistributionFor("invisible-dragon");
+        if (energyPlus is not null)
+        {
+            Check(InvisibleScenario,
+                energyPlus.LicenseEntry == "EnergyPlus-24.2.0-94a887817b-Windows-x86_64/LICENSE.txt"
+                && energyPlus.PackageLicensePath == "runtime/energyplus/LICENSE.txt"
+                && energyPlus.LicenseSize == 3182
+                && energyPlus.LicenseSha256 == "b43f1553459a4bcc49d180b42123a64a54fcbb6213cd99ac6ac6aa32cb1c1a05",
+                "EnergyPlus archive/package license identity differs from the reviewed contract.");
+        }
+    }
+
+    private void VerifyDistributionPin(
+        string product,
+        string id,
+        string kind,
+        string fileName,
+        string url,
+        long size,
+        string sha256,
+        string developmentPath,
+        string packagePath)
+    {
+        DistributionPayload[] matches = _distributions.Payloads.Where(item => item.Product == product).ToArray();
+        string scenario = product == "invisible-dragon" ? InvisibleScenario : SimpleScenario;
+        Check(scenario, matches.Length == 1, "Distribution manifest must define exactly one payload for " + product + ".");
+        if (matches.Length != 1)
+        {
+            return;
+        }
+
+        DistributionPayload item = matches[0];
+        Check(scenario, item.Id == id && item.Kind == kind && item.FileName == fileName
+                && item.Url == url && item.Size == size && item.Sha256 == sha256
+                && item.DevelopmentPath == developmentPath && item.PackagePath == packagePath,
+            "Distribution identity/path pin differs from the reviewed contract for " + product + ".");
+        Check(scenario, Uri.TryCreate(item.Url, UriKind.Absolute, out Uri? uri) && uri.Scheme == Uri.UriSchemeHttps,
+            "Distribution URL must be HTTPS for " + product + ".");
+    }
+
+    private DistributionPayload? DistributionFor(string productId)
+    {
+        DistributionPayload[] matches = _distributions.Payloads.Where(item => item.Product == productId).ToArray();
+        return matches.Length == 1 ? matches[0] : null;
+    }
+
+    private void VerifyPackageIndex()
+    {
+        string path = Path.Combine(_packagesRoot, "package-index.json");
+        Check(BothScenario, File.Exists(path), "Package index is missing: '" + path + "'.");
+        if (!File.Exists(path))
+        {
+            return;
+        }
+
+        using JsonDocument document = JsonDocument.Parse(File.ReadAllText(path));
+        JsonElement root = document.RootElement;
+        Check(BothScenario, root.GetProperty("schema").GetString()
+                == "goniegonie.dragons-grasshopper.package-index.v1",
+            "Package index schema mismatch.");
+        JsonElement redistribution = root.GetProperty("redistribution");
+        Check(BothScenario, redistribution.GetProperty("energyPlusBinariesIncluded").GetBoolean()
+                && redistribution.GetProperty("weatherIncluded").GetBoolean()
+                && !redistribution.GetProperty("portableArchivesArePluginOnly").GetBoolean()
+                && !redistribution.GetProperty("publicPublicationAuthorized").GetBoolean(),
+            "Package index redistribution/publication flags are not truthful for the embedded archives.");
+
+        JsonElement[] products = root.GetProperty("products").EnumerateArray().ToArray();
+        Check(BothScenario, products.Length == 2, "Package index must contain exactly two products.");
+        foreach (ProductSpec product in _spec.Products)
+        {
+            JsonElement[] matches = products.Where(item => item.GetProperty("id").GetString() == product.Id).ToArray();
+            string scenario = product.Id == "invisible-dragon" ? InvisibleScenario : SimpleScenario;
+            Check(scenario, matches.Length == 1, "Package index must contain exactly one " + product.Id + " entry.");
+            if (matches.Length == 1)
+            {
+                JsonElement runtime = matches[0].GetProperty("runtime");
+                VerifyRuntimeFlags(scenario, product, runtime, "package index");
+                VerifyEmbeddedPayloadElement(scenario, product, runtime.GetProperty("embeddedPayload"), "package index");
+            }
+        }
     }
 
     private void VerifyProduct(ProductSpec product)
@@ -172,8 +309,9 @@ internal sealed class PackageVerifier
         }
 
         VerifyRootMetadata(scenario, product, stageRoot, "yak-stage");
-        VerifyForbiddenPaths(scenario, Directory.EnumerateFiles(stageRoot, "*", SearchOption.AllDirectories)
+        VerifyForbiddenPaths(scenario, product, Directory.EnumerateFiles(stageRoot, "*", SearchOption.AllDirectories)
             .Select(path => Path.GetRelativePath(stageRoot, path)));
+        VerifyEmbeddedPayloadFile(scenario, product, stageRoot);
         VerifyChecksums(scenario, stageRoot);
 
         if (target.YakLayout == "flat")
@@ -182,8 +320,10 @@ internal sealed class PackageVerifier
                 "Rhino 7 must have exactly one net48 framework in the package spec.");
             Check(scenario, File.Exists(Path.Combine(stageRoot, product.EntryAssembly)),
                 "Rhino 7 entry GHA must be at the Yak root for " + product.DisplayName + ".");
-            Check(scenario, !Directory.EnumerateDirectories(stageRoot).Any(),
-                "Rhino 7 Yak stage must be flat and cannot contain framework directories.");
+            string[] actualDirectories = Directory.EnumerateDirectories(stageRoot)
+                .Select(Path.GetFileName).OrderBy(name => name, StringComparer.Ordinal).ToArray()!;
+            Check(scenario, actualDirectories.SequenceEqual(EmbeddedRuntimeRootDirectory, StringComparer.Ordinal),
+                "Rhino 7 Yak stage may contain only the product runtime archive directory.");
             VerifyPayloadDirectory(scenario, product, "rhino7/net48", stageRoot);
         }
         else
@@ -192,7 +332,8 @@ internal sealed class PackageVerifier
                 .Select(Path.GetFileName)
                 .OrderBy(name => name, StringComparer.Ordinal)
                 .ToArray()!;
-            string[] expectedDirectories = target.Frameworks.OrderBy(name => name, StringComparer.Ordinal).ToArray();
+            string[] expectedDirectories = target.Frameworks.Concat(EmbeddedRuntimeRootDirectory)
+                .OrderBy(name => name, StringComparer.Ordinal).ToArray();
             Check(scenario, actualDirectories.SequenceEqual(expectedDirectories, StringComparer.Ordinal),
                 "Rhino 8 stage framework directories differ. Expected "
                 + string.Join(", ", expectedDirectories) + "; found " + string.Join(", ", actualDirectories) + ".");
@@ -239,11 +380,232 @@ internal sealed class PackageVerifier
             Check(scenario, package.GetProperty("kind").GetString() == expectedKind,
                 "Payload manifest kind mismatch in '" + payloadManifestPath + "'.");
             JsonElement runtime = package.GetProperty("runtime");
-            Check(scenario, !runtime.GetProperty("energyPlusBinariesIncluded").GetBoolean()
-                    && !runtime.GetProperty("weatherIncluded").GetBoolean()
-                    && !runtime.GetProperty("pythonRequired").GetBoolean(),
-                "Payload manifest must declare a Python-free plugin payload without EnergyPlus/weather redistribution.");
+            VerifyRuntimeFlags(scenario, product, runtime, payloadManifestPath);
+            JsonElement[] embedded = runtime.GetProperty("embeddedPayloads").EnumerateArray().ToArray();
+            Check(scenario, embedded.Length == 1,
+                "Payload manifest must declare exactly one product-specific embedded archive in '" + payloadManifestPath + "'.");
+            if (embedded.Length == 1)
+            {
+                VerifyEmbeddedPayloadElement(scenario, product, embedded[0], payloadManifestPath);
+            }
         }
+    }
+
+    private void VerifyRuntimeFlags(string scenario, ProductSpec product, JsonElement runtime, string description)
+    {
+        bool invisible = product.Id == "invisible-dragon";
+        Check(scenario,
+            runtime.GetProperty("energyPlusBinariesIncluded").GetBoolean() == invisible
+            && runtime.GetProperty("weatherIncluded").GetBoolean() == !invisible
+            && !runtime.GetProperty("pythonRequired").GetBoolean(),
+            "Runtime flags are not product-exclusive/Python-free in " + description + ".");
+    }
+
+    private void VerifyEmbeddedPayloadElement(
+        string scenario,
+        ProductSpec product,
+        JsonElement embedded,
+        string description)
+    {
+        DistributionPayload? expected = DistributionFor(product.Id);
+        if (expected is null)
+        {
+            Failure(scenario, "No unique distribution pin is available for " + product.Id + ".");
+            return;
+        }
+
+        Check(scenario,
+            embedded.GetProperty("id").GetString() == expected.Id
+            && embedded.GetProperty("kind").GetString() == expected.Kind
+            && embedded.GetProperty("path").GetString() == expected.PackagePath
+            && embedded.GetProperty("fileName").GetString() == expected.FileName
+            && embedded.GetProperty("size").GetInt64() == expected.Size
+            && embedded.GetProperty("sha256").GetString() == expected.Sha256,
+            "Embedded payload metadata differs from the reviewed distribution pin in " + description + ".");
+        bool hasLicense = embedded.TryGetProperty("license", out JsonElement license);
+        if (product.Id == "invisible-dragon")
+        {
+            Check(scenario, hasLicense
+                    && license.GetProperty("archiveEntry").GetString() == expected.LicenseEntry
+                    && license.GetProperty("path").GetString() == expected.PackageLicensePath
+                    && license.GetProperty("size").GetInt64() == expected.LicenseSize
+                    && license.GetProperty("sha256").GetString() == expected.LicenseSha256,
+                "EnergyPlus license metadata differs from the exact nested archive entry in " + description + ".");
+        }
+        else
+        {
+            Check(scenario, !hasLicense, "SimpleDragon must not declare an EnergyPlus license payload in " + description + ".");
+        }
+    }
+
+    private void VerifyEmbeddedPayloadFile(string scenario, ProductSpec product, string root)
+    {
+        DistributionPayload? expected = DistributionFor(product.Id);
+        if (expected is null)
+        {
+            Failure(scenario, "No unique distribution pin is available for " + product.Id + ".");
+            return;
+        }
+
+        string path = SafeRelativePath(root, expected.PackagePath);
+        Check(scenario, File.Exists(path), "Embedded payload is missing: '" + path + "'.");
+        if (File.Exists(path))
+        {
+            Check(scenario, new FileInfo(path).Length == expected.Size,
+                "Embedded payload size mismatch: '" + path + "'.");
+            string actualHash = Sha256(path);
+            Check(scenario, actualHash == expected.Sha256,
+                "Embedded payload SHA-256 mismatch: '" + path + "'.");
+            if (actualHash == expected.Sha256 && _deepValidatedDistributionHashes.Add(expected.Sha256))
+            {
+                VerifyEmbeddedZipStructure(scenario, expected, path);
+            }
+            VerifyPackagedLicenseFile(scenario, product, expected, root, path);
+        }
+    }
+
+    private void VerifyPackagedLicenseFile(
+        string scenario,
+        ProductSpec product,
+        DistributionPayload expected,
+        string root,
+        string archivePath)
+    {
+        if (product.Id != "invisible-dragon")
+        {
+            return;
+        }
+        string licensePath = SafeRelativePath(root, expected.PackageLicensePath);
+        Check(scenario, File.Exists(licensePath), "EnergyPlus package license is missing: '" + licensePath + "'.");
+        if (!File.Exists(licensePath))
+        {
+            return;
+        }
+        Check(scenario, new FileInfo(licensePath).Length == expected.LicenseSize
+                && Sha256(licensePath) == expected.LicenseSha256,
+            "EnergyPlus package license identity mismatch: '" + licensePath + "'.");
+        using ZipArchive archive = ZipFile.OpenRead(archivePath);
+        ZipArchiveEntry? entry = archive.GetEntry(expected.LicenseEntry);
+        Check(scenario, entry is not null, "EnergyPlus archive is missing its pinned LICENSE.txt entry.");
+        if (entry is not null)
+        {
+            using Stream stream = entry.Open();
+            Check(scenario, entry.Length == expected.LicenseSize && Sha256(stream) == expected.LicenseSha256,
+                "Packaged EnergyPlus LICENSE.txt is not byte-identical to the pinned archive entry.");
+        }
+    }
+
+    private void VerifyEmbeddedZipStructure(string scenario, DistributionPayload expected, string path)
+    {
+        using ZipArchive archive = ZipFile.OpenRead(path);
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var fileNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        long expandedBytes = 0;
+        foreach (ZipArchiveEntry entry in archive.Entries)
+        {
+            string name = entry.FullName.Replace('\\', '/');
+            string[] parts = name.Split('/', StringSplitOptions.RemoveEmptyEntries);
+            bool unsafeName = string.IsNullOrWhiteSpace(name)
+                || (name.Length > 0 && name[0] == '/')
+                || Regex.IsMatch(name, "^[A-Za-z]:", RegexOptions.CultureInvariant)
+                || Path.IsPathRooted(name)
+                || parts.Any(part => part is "." or ".." || part.Contains(':'));
+            Check(scenario, !unsafeName, "Unsafe nested distribution ZIP entry: '" + name + "'.");
+            Check(scenario, seen.Add(name), "Duplicate nested distribution ZIP entry: '" + name + "'.");
+            int unixType = (entry.ExternalAttributes >> 16) & 0xF000;
+            Check(scenario, unixType != 0xA000, "Symbolic-link nested ZIP entry is forbidden: '" + name + "'.");
+            if (!string.IsNullOrEmpty(entry.Name))
+            {
+                expandedBytes += entry.Length;
+                fileNames.Add(entry.Name);
+            }
+        }
+        Check(scenario, archive.Entries.Count <= 20000 && expandedBytes <= 8589934592L,
+            "Nested distribution ZIP exceeds safety limits.");
+
+        if (expected.Kind != "weather-archive")
+        {
+            return;
+        }
+
+        ZipArchiveEntry[] epwEntries = archive.Entries.Where(entry =>
+            !string.IsNullOrEmpty(entry.Name)
+            && !entry.FullName.Replace('\\', '/').Contains('/', StringComparison.Ordinal)
+            && Path.GetExtension(entry.Name).Equals(".epw", StringComparison.OrdinalIgnoreCase)).ToArray();
+        int fileEntryCount = archive.Entries.Count(entry => !string.IsNullOrEmpty(entry.Name));
+        Check(scenario, fileEntryCount == expected.ArchiveEpwCount
+                && epwEntries.Length == expected.ArchiveEpwCount,
+            "KoreanTMY ZIP must contain exactly 80 root EPW files and nothing else.");
+
+        string metadataPath = SafeRelativePath(_repositoryRoot, expected.MetadataPath);
+        Check(scenario, File.Exists(metadataPath), "Weather metadata is missing: '" + metadataPath + "'.");
+        if (!File.Exists(metadataPath))
+        {
+            return;
+        }
+        string[] lines = File.ReadAllLines(metadataPath, Encoding.UTF8);
+        Check(scenario, lines.Length > 1, "Weather metadata CSV is empty.");
+        if (lines.Length <= 1)
+        {
+            return;
+        }
+        string[] header = ParseCsvLine(lines[0]);
+        int column = Array.IndexOf(header, expected.MetadataColumn);
+        Check(scenario, column >= 0, "Weather metadata column is missing: '" + expected.MetadataColumn + "'.");
+        if (column < 0)
+        {
+            return;
+        }
+        var references = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (string line in lines.Skip(1).Where(item => !string.IsNullOrWhiteSpace(item)))
+        {
+            string[] fields = ParseCsvLine(line);
+            if (column < fields.Length && !string.IsNullOrWhiteSpace(fields[column]))
+            {
+                references.Add(fields[column]);
+            }
+        }
+        Check(scenario, references.Count == expected.MetadataReferencedUniqueEpwCount,
+            "Weather metadata unique EPW coverage mismatch: expected 78, found " + references.Count + ".");
+        foreach (string reference in references)
+        {
+            Check(scenario, fileNames.Contains(reference),
+                "KoreanTMY ZIP is missing metadata-referenced EPW '" + reference + "'.");
+        }
+    }
+
+    private static string[] ParseCsvLine(string line)
+    {
+        var fields = new List<string>();
+        var current = new StringBuilder();
+        bool quoted = false;
+        for (int index = 0; index < line.Length; index++)
+        {
+            char character = line[index];
+            if (character == '"')
+            {
+                if (quoted && index + 1 < line.Length && line[index + 1] == '"')
+                {
+                    current.Append('"');
+                    index++;
+                }
+                else
+                {
+                    quoted = !quoted;
+                }
+            }
+            else if (character == ',' && !quoted)
+            {
+                fields.Add(current.ToString());
+                current.Clear();
+            }
+            else
+            {
+                current.Append(character);
+            }
+        }
+        fields.Add(current.ToString());
+        return fields.ToArray();
     }
 
     private void VerifyManifest(string scenario, ProductSpec product, string text, string root)
@@ -376,7 +738,9 @@ internal sealed class PackageVerifier
     {
         string[] entries = archive.Entries.Where(item => !string.IsNullOrEmpty(item.Name))
             .Select(item => NormalizeArchivePath(item.FullName)).ToArray();
-        VerifyForbiddenPaths(scenario, entries);
+        VerifyForbiddenPaths(scenario, product, entries);
+        VerifyEmbeddedPayloadEntry(scenario, product, archive, "Yak archive");
+        VerifyArchivePayloadManifest(scenario, product, archive, "yak-stage", "Yak archive");
         foreach (string name in RequiredRootFiles)
         {
             Check(scenario, entries.Contains(name, StringComparer.Ordinal),
@@ -425,7 +789,9 @@ internal sealed class PackageVerifier
         using ZipArchive archive = ZipFile.OpenRead(path);
         string[] entries = archive.Entries.Where(item => !string.IsNullOrEmpty(item.Name))
             .Select(item => NormalizeArchivePath(item.FullName)).ToArray();
-        VerifyForbiddenPaths(scenario, entries);
+        VerifyForbiddenPaths(scenario, product, entries);
+        VerifyEmbeddedPayloadEntry(scenario, product, archive, "portable ZIP");
+        VerifyArchivePayloadManifest(scenario, product, archive, "portable-plugin", "portable ZIP");
         foreach (string name in RequiredRootFiles)
         {
             Check(scenario, entries.Contains(name, StringComparer.Ordinal),
@@ -442,6 +808,76 @@ internal sealed class PackageVerifier
             }
         }
         VerifyArchiveChecksums(scenario, archive);
+    }
+
+    private void VerifyEmbeddedPayloadEntry(
+        string scenario,
+        ProductSpec product,
+        ZipArchive archive,
+        string description)
+    {
+        DistributionPayload? expected = DistributionFor(product.Id);
+        if (expected is null)
+        {
+            Failure(scenario, "No unique distribution pin is available for " + product.Id + ".");
+            return;
+        }
+
+        ZipArchiveEntry[] matches = archive.Entries.Where(item =>
+            NormalizeArchivePath(item.FullName).Equals(expected.PackagePath, StringComparison.Ordinal)).ToArray();
+        Check(scenario, matches.Length == 1,
+            description + " must contain the product distribution exactly once at '" + expected.PackagePath + "'.");
+        if (matches.Length == 1)
+        {
+            Check(scenario, matches[0].Length == expected.Size,
+                description + " embedded payload size mismatch for " + product.DisplayName + ".");
+            using Stream stream = matches[0].Open();
+            Check(scenario, Sha256(stream) == expected.Sha256,
+                description + " embedded payload SHA-256 mismatch for " + product.DisplayName + ".");
+        }
+        if (product.Id == "invisible-dragon")
+        {
+            ZipArchiveEntry[] licenses = archive.Entries.Where(item =>
+                NormalizeArchivePath(item.FullName).Equals(expected.PackageLicensePath, StringComparison.Ordinal)).ToArray();
+            Check(scenario, licenses.Length == 1,
+                description + " must contain the EnergyPlus archive license exactly once at '"
+                + expected.PackageLicensePath + "'.");
+            if (licenses.Length == 1)
+            {
+                using Stream licenseStream = licenses[0].Open();
+                Check(scenario, licenses[0].Length == expected.LicenseSize
+                        && Sha256(licenseStream) == expected.LicenseSha256,
+                    description + " EnergyPlus LICENSE.txt differs from the pinned nested archive entry.");
+            }
+        }
+    }
+
+    private void VerifyArchivePayloadManifest(
+        string scenario,
+        ProductSpec product,
+        ZipArchive archive,
+        string expectedKind,
+        string description)
+    {
+        ZipArchiveEntry? entry = FindEntry(archive, "package-manifest.json");
+        if (entry is null)
+        {
+            return;
+        }
+        using Stream stream = entry.Open();
+        using JsonDocument document = JsonDocument.Parse(stream);
+        JsonElement package = document.RootElement;
+        Check(scenario, package.GetProperty("kind").GetString() == expectedKind,
+            description + " payload manifest kind mismatch.");
+        JsonElement runtime = package.GetProperty("runtime");
+        VerifyRuntimeFlags(scenario, product, runtime, description);
+        JsonElement[] embedded = runtime.GetProperty("embeddedPayloads").EnumerateArray().ToArray();
+        Check(scenario, embedded.Length == 1,
+            description + " must declare exactly one embedded payload.");
+        if (embedded.Length == 1)
+        {
+            VerifyEmbeddedPayloadElement(scenario, product, embedded[0], description);
+        }
     }
 
     private void VerifyArchiveAssemblyDuplicates(
@@ -544,14 +980,24 @@ internal sealed class PackageVerifier
         return target.YakLayout == "flat" ? stage : Path.Combine(stage, framework);
     }
 
-    private void VerifyForbiddenPaths(string scenario, IEnumerable<string> paths)
+    private void VerifyForbiddenPaths(string scenario, ProductSpec product, IEnumerable<string> paths)
     {
+        DistributionPayload? expected = DistributionFor(product.Id);
         foreach (string rawPath in paths)
         {
             string path = rawPath.Replace('\\', '/');
             string lower = path.ToLowerInvariant();
             string name = Path.GetFileName(lower);
-            bool forbidden = lower.Split('/').Any(part => part is "__pycache__" or "python" or "weather")
+            bool isExpectedArchive = expected is not null
+                && path.Equals(expected.PackagePath, StringComparison.Ordinal);
+            bool isExpectedLicense = expected is not null
+                && product.Id == "invisible-dragon"
+                && path.Equals(expected.PackageLicensePath, StringComparison.Ordinal);
+            bool distributionPath = lower.StartsWith("runtime/", StringComparison.Ordinal)
+                || lower.Split('/').Any(part => part is "weather" or "energyplus")
+                || name.EndsWith(".zip", StringComparison.Ordinal);
+            bool forbidden = (!isExpectedArchive && !isExpectedLicense && distributionPath)
+                || lower.Split('/').Any(part => part is "__pycache__" or "python")
                 || name.EndsWith(".py", StringComparison.Ordinal)
                 || name.EndsWith(".pyc", StringComparison.Ordinal)
                 || name.EndsWith(".pyd", StringComparison.Ordinal)
@@ -777,6 +1223,69 @@ internal sealed class PackageSpec
 
     [JsonPropertyName("products")]
     public List<ProductSpec> Products { get; set; } = new();
+}
+
+internal sealed class DistributionManifest
+{
+    [JsonPropertyName("schema")]
+    public string Schema { get; set; } = string.Empty;
+
+    [JsonPropertyName("payloads")]
+    public List<DistributionPayload> Payloads { get; set; } = new();
+}
+
+internal sealed class DistributionPayload
+{
+    [JsonPropertyName("id")]
+    public string Id { get; set; } = string.Empty;
+
+    [JsonPropertyName("product")]
+    public string Product { get; set; } = string.Empty;
+
+    [JsonPropertyName("kind")]
+    public string Kind { get; set; } = string.Empty;
+
+    [JsonPropertyName("fileName")]
+    public string FileName { get; set; } = string.Empty;
+
+    [JsonPropertyName("url")]
+    public string Url { get; set; } = string.Empty;
+
+    [JsonPropertyName("size")]
+    public long Size { get; set; }
+
+    [JsonPropertyName("sha256")]
+    public string Sha256 { get; set; } = string.Empty;
+
+    [JsonPropertyName("packagePath")]
+    public string PackagePath { get; set; } = string.Empty;
+
+    [JsonPropertyName("developmentPath")]
+    public string DevelopmentPath { get; set; } = string.Empty;
+
+    [JsonPropertyName("archiveEpwCount")]
+    public int ArchiveEpwCount { get; set; }
+
+    [JsonPropertyName("metadataReferencedUniqueEpwCount")]
+    public int MetadataReferencedUniqueEpwCount { get; set; }
+
+    [JsonPropertyName("metadataPath")]
+    public string MetadataPath { get; set; } = string.Empty;
+
+    [JsonPropertyName("metadataColumn")]
+    public string MetadataColumn { get; set; } = string.Empty;
+
+    [JsonPropertyName("licenseEntry")]
+    public string LicenseEntry { get; set; } = string.Empty;
+
+    [JsonPropertyName("packageLicensePath")]
+    public string PackageLicensePath { get; set; } = string.Empty;
+
+    [JsonPropertyName("licenseSize")]
+    public long LicenseSize { get; set; }
+
+    [JsonPropertyName("licenseSha256")]
+    public string LicenseSha256 { get; set; } = string.Empty;
 }
 
 internal sealed class TargetSpec

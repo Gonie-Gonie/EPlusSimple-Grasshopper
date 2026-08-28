@@ -16,16 +16,23 @@ InvisibleDragon. The tracked upstream commit does not contain a standalone
 a public binary release.
 
 EnergyPlus is a separate product of the U.S. Department of Energy and its
-contributors. EnergyPlus binaries and data are not stored in this repository or
-redistributed inside plugin packages. Development setup and the installed-plugin
-bootstrap obtain or locate the pinned EnergyPlus runtime and retain its own
-license and notices.
+contributors. Source control does not store its binaries. Development setup
+downloads the exact official EnergyPlus 24.2.0 Windows archive pinned by URL,
+byte length, and SHA-256 in `runtime/distributions.json`; InvisibleDragon package
+candidates embed that archive unchanged under `runtime/energyplus/`. EnergyPlus
+retains its own license and notices; `runtime/energyplus/LICENSE.txt` is copied
+byte-for-byte from the pinned archive and separately hash-checked. This
+packaging implementation is not, by itself, authorization to publish the
+resulting candidate publicly.
 
 Rhino, RhinoCommon, Grasshopper, and Yak are products or technologies of Robert
 McNeel & Associates. Their SDK assemblies are restored from McNeel's NuGet
 packages and are not redistributed as part of the plugin payload.
 
-Korean TMY weather files are not stored in this repository, downloaded by
-setup, or redistributed in packages. Users must supply an EPW file. Weather
-redistribution rights must be established separately before any weather payload
-is added to a future distribution.
+Korean TMY EPW files are not expanded or stored in source control. Development
+setup downloads the exact `KoreanTMY-v1.zip` pinned by URL, byte length, and
+SHA-256 in `runtime/distributions.json`; SimpleDragon package candidates embed
+that archive unchanged under `runtime/weather/`. The archive contains 80 root
+EPWs and covers all 78 unique EPW names referenced by the tracked address
+metadata. Redistribution/publication rights for this weather payload have not
+been established, so public package publication remains unauthorized.

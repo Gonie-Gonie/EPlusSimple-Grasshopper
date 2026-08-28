@@ -61,7 +61,7 @@ public interface IEnergyPlusRuntimeArchiveDownloader
 }
 
 /// <summary>
-/// Reports byte-level archive download progress.
+/// Reports byte-level archive acquisition progress for a bundled copy or HTTPS download.
 /// </summary>
 public sealed record EnergyPlusRuntimeDownloadProgress(
     long BytesReceived,

@@ -14,7 +14,9 @@ The installed-plugin default cache is:
 
 Preparation is per-user and transactional. It does not require administrator
 rights and does not modify a machine-wide EnergyPlus installation. Valid
-existing runtimes are reused without a download.
+existing runtimes are reused. InvisibleDragon candidates carry the unchanged
+pinned archive, so preparation can use it without an administrator-level or
+machine-wide install.
 
 ## Preparing from Grasshopper
 
@@ -38,14 +40,15 @@ when network acquisition must be administratively separated from simulation.
 
 ## Weather policy
 
-No setup script, plugin package, or runtime bootstrap downloads an EPW. The
-user must supply a weather file whose provenance and license are appropriate
-for the project. The weather path is an input to Run EnergyPlus or to a batch
-case, not part of the EnergyPlus runtime cache.
+Developer setup downloads and verifies the pinned `KoreanTMY-v1.zip`, and each
+SimpleDragon candidate embeds that ZIP unchanged. It contains 80 root EPWs and
+covers all 78 unique filenames referenced by the address database. The runtime
+resolver may use an address-selected entry from this archive; workflows that
+accept an explicit weather path may still use an appropriate user-supplied EPW.
+Directly expanded EPW files are not stored in source control or packages.
 
-The SimpleDragon address database resolves climate and weather metadata used by
-the compatibility model. A metadata filename is not a licensed weather-file
-payload and does not make the matching EPW available locally.
+This local candidate mechanism does not establish redistribution rights. Public
+publication remains unauthorized as recorded in `NOTICE.md`.
 
 ## Security and recovery
 

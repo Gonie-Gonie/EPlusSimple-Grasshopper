@@ -83,6 +83,9 @@ function Resolve-EnergyPlusWorkflow {
 
     $runtimeRoot = $EnergyPlusRoot
     $configuredWeather = $WeatherPath
+    $weatherArchivePath = Join-Path $repoRoot ".tools\distributions\weather\KoreanTMY-v1.zip"
+    $expectedWeatherArchiveSize = 128349513L
+    $expectedWeatherArchiveSha256 = "fa88b8d69364b6a6b663afdc6dc2eb30c0ddee17cd37e5802ce5a5dec63d92d0"
     $settingsPath = Join-Path $repoRoot ".config\local.settings.json"
     if ([string]::IsNullOrWhiteSpace($runtimeRoot) -and (Test-Path -LiteralPath $settingsPath -PathType Leaf)) {
         try {
@@ -123,27 +126,87 @@ function Resolve-EnergyPlusWorkflow {
         }
     }
 
-    if ([string]::IsNullOrWhiteSpace($configuredWeather)) {
-        $configuredWeather = Get-ChildItem -LiteralPath (Join-Path $runtimeRoot "WeatherData") `
-            -Filter "*.epw" -File -ErrorAction SilentlyContinue |
-            Sort-Object Name |
-            Select-Object -First 1 -ExpandProperty FullName
+    if (-not [string]::IsNullOrWhiteSpace($configuredWeather)) {
+        try {
+            $configuredWeather = Require-File $configuredWeather "Optional EPW override"
+        }
+        catch {
+            return @{
+                Status = "unavailable"
+                Reason = $_.Exception.Message
+                RuntimeRoot = $runtimeRoot
+                WeatherPath = ""
+            }
+        }
+
+        if (-not [string]::Equals(
+                [IO.Path]::GetExtension($configuredWeather),
+                ".epw",
+                [StringComparison]::OrdinalIgnoreCase)) {
+            return @{
+                Status = "unavailable"
+                Reason = "The optional weather override is not an EPW file: $configuredWeather"
+                RuntimeRoot = $runtimeRoot
+                WeatherPath = ""
+            }
+        }
     }
-    if ([string]::IsNullOrWhiteSpace($configuredWeather) -or
-        -not (Test-Path -LiteralPath $configuredWeather -PathType Leaf)) {
+
+    if (-not (Test-Path -LiteralPath $weatherArchivePath -PathType Leaf)) {
         return @{
             Status = "unavailable"
-            Reason = "No EPW file is available for the installed EnergyPlus runtime."
+            Reason = "The pinned SimpleDragon weather archive is missing. Run 'dev.cmd setup': $weatherArchivePath"
             RuntimeRoot = $runtimeRoot
-            WeatherPath = ""
+            WeatherPath = if ([string]::IsNullOrWhiteSpace($configuredWeather)) { "" } else { $configuredWeather }
         }
+    }
+
+    $weatherArchive = Get-Item -LiteralPath $weatherArchivePath
+    if ($weatherArchive.Length -ne $expectedWeatherArchiveSize) {
+        return @{
+            Status = "unavailable"
+            Reason = "The pinned SimpleDragon weather archive has size $($weatherArchive.Length); expected $expectedWeatherArchiveSize bytes. Run 'dev.cmd setup'."
+            RuntimeRoot = $runtimeRoot
+            WeatherPath = if ([string]::IsNullOrWhiteSpace($configuredWeather)) { "" } else { $configuredWeather }
+        }
+    }
+
+    try {
+        $weatherArchiveSha256 = (Get-FileHash -LiteralPath $weatherArchivePath -Algorithm SHA256).Hash.ToLowerInvariant()
+    }
+    catch {
+        return @{
+            Status = "unavailable"
+            Reason = "The pinned SimpleDragon weather archive could not be hashed: $($_.Exception.Message)"
+            RuntimeRoot = $runtimeRoot
+            WeatherPath = if ([string]::IsNullOrWhiteSpace($configuredWeather)) { "" } else { $configuredWeather }
+        }
+    }
+
+    if (-not [string]::Equals(
+            $weatherArchiveSha256,
+            $expectedWeatherArchiveSha256,
+            [StringComparison]::Ordinal)) {
+        return @{
+            Status = "unavailable"
+            Reason = "The pinned SimpleDragon weather archive failed SHA-256 verification. Run 'dev.cmd setup'."
+            RuntimeRoot = $runtimeRoot
+            WeatherPath = if ([string]::IsNullOrWhiteSpace($configuredWeather)) { "" } else { $configuredWeather }
+        }
+    }
+
+    $weatherReason = if ([string]::IsNullOrWhiteSpace($configuredWeather)) {
+        "address-selected packaged EPW"
+    }
+    else {
+        "address-selected packaged EPW plus optional override '$configuredWeather'"
     }
 
     return @{
         Status = "ready"
-        Reason = "Verified EnergyPlus executable, IDD, and EPW are available."
+        Reason = "Verified EnergyPlus executable, IDD, and pinned SimpleDragon weather archive for $weatherReason."
         RuntimeRoot = $runtimeRoot
-        WeatherPath = [IO.Path]::GetFullPath($configuredWeather)
+        WeatherPath = if ([string]::IsNullOrWhiteSpace($configuredWeather)) { "" } else { $configuredWeather }
     }
 }
 

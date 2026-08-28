@@ -38,12 +38,13 @@ artifacts/packages/<product>/
 ```
 
 The stage and ZIP roots include their manifest, icon, Gonie-Gonie notices,
-payload manifest, and SHA-256 list. Plugin payloads contain runtime assemblies
-only: RhinoCommon, Grasshopper, PDB, XML documentation, Python, EnergyPlus
-binaries, and weather files are excluded. The Gonie-Gonie runtime bootstrap
-locates or prepares the separately pinned EnergyPlus runtime after install.
-The user must provide an EPW file, so the portable ZIP is not a fully offline
-simulation bundle.
+payload manifest, and SHA-256 list. Each package root additionally contains
+exactly one product-specific verified archive: EnergyPlus for InvisibleDragon,
+or KoreanTMY weather for SimpleDragon. RhinoCommon, Grasshopper, PDB, XML
+documentation, Python, and directly expanded EnergyPlus/EPW files are excluded.
+The package manifest and index record the archive path, length, SHA-256, and
+product exclusivity. InvisibleDragon also exposes the EnergyPlus archive's
+exact `LICENSE.txt` at `runtime/energyplus/LICENSE.txt`.
 
 Yak 0.13.0 is executed from a SHA-256-verified temp copy. A source-built startup
 hook gives Yak's inspection-only process access to the staged dependencies and

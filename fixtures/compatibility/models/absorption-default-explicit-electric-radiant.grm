@@ -18,7 +18,7 @@
             "name": "Absorption Matrix Office",
             "height": 3.0,
             "profile": "\ubd80\uc18d\uacf5\uac04",
-            "light_density": 0.0,
+            "light_density": 10.0,
             "supply_system_ids": [
               "SUPL-0x600000",
               "SUPL-0x600001",
@@ -112,13 +112,14 @@
           "name": "Explicit Natural Gas Absorption Chiller",
           "fuel_type": "natural_gas",
           "cop_cooling": 0.82,
-          "capacity_cooling": 18000.0,
+          "capacity_cooling": 250.0,
           "boiler_efficiency": 0.88
         },
         {
           "id": "SRCE-0x600001",
           "name": "Default Oil Absorption Chiller",
-          "fuel_type": "oil"
+          "fuel_type": "oil",
+          "capacity_cooling": 250.0
         }
       ]
     },

@@ -21,11 +21,11 @@ namespace GonieGonie.SimpleDragon.Grasshopper.Components;
 public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
 {
     private readonly object _syncRoot = new();
+    private readonly ExplicitBatchTriggerGate _triggerGate = new();
     private CancellationTokenSource? _activeCancellation;
     private Task<BatchOutcome>? _activeTask;
     private BatchOutcome? _lastOutcome;
     private BatchProgressSnapshot? _latestProgress;
-    private bool _previousRunSignal;
     private bool _removed;
     private int _solutionScheduled;
     private string _state = "Idle";
@@ -58,13 +58,13 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
         pManager.AddTextParameter(
             "EPW Paths",
             "EPW",
-            "Optional EPW paths. Relative paths use the saved Grasshopper document. Supply none, one shared path, or exactly one per model.",
+            "Optional EPW overrides. Empty automatically resolves each model address from the packaged SimpleDragon weather archive. Relative overrides use the saved Grasshopper document; supply none, one shared path, or exactly one per model.",
             GH_ParamAccess.list);
         pManager[2].Optional = true;
         pManager.AddTextParameter(
             "Runtime Root",
             "E+",
-            "Optional EnergyPlus 24.2 runtime root. Relative paths use the saved Grasshopper document.",
+            "Optional EnergyPlus 24.2 runtime root. Empty reuses or prepares InvisibleDragon's packaged runtime in LocalAppData. Relative paths use the saved Grasshopper document.",
             GH_ParamAccess.item);
         pManager[3].Optional = true;
         pManager.AddTextParameter(
@@ -82,7 +82,7 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
         pManager.AddBooleanParameter(
             "Run",
             "R",
-            "Toggle false then true to explicitly start a new batch.",
+            "Toggle false then true to explicitly start a new batch. A saved True value does not run when a document opens.",
             GH_ParamAccess.item,
             false);
         pManager.AddBooleanParameter(
@@ -132,14 +132,13 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
         DA.GetData(3, ref runtimeRoot);
         DA.GetData(4, ref outputRoot);
 
-        if (cancel)
+        ExplicitBatchTriggerObservation triggers = _triggerGate.Observe(run, cancel);
+        if (triggers.Cancel)
         {
             CancelActiveBatch();
         }
 
-        bool start = run && !_previousRunSignal;
-        _previousRunSignal = run;
-        if (start)
+        if (triggers.Start && !triggers.Cancel)
         {
             BatchInputs? inputs = TryCreateInputs(
                 modelGoos,
@@ -187,6 +186,16 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
         IReadOnlyList<Diagnostic> diagnostics = outcome?.Diagnostics ?? Array.Empty<Diagnostic>();
         Report(diagnostics);
         DA.SetDataList(6, diagnostics.Select(item => new DiagnosticGoo(item)));
+    }
+
+    public override void AddedToDocument(GH_Document document)
+    {
+        base.AddedToDocument(document);
+        lock (_syncRoot)
+        {
+            _removed = false;
+            _triggerGate.Reset();
+        }
     }
 
     public override void RemovedFromDocument(GH_Document document)
@@ -333,6 +342,36 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
                 RuntimeRoot = inputs.RuntimeRoot,
             },
             cancellationToken).ConfigureAwait(false);
+        if (!resolution.IsSuccess && inputs.RuntimeRoot is null)
+        {
+            UpdateState("Preparing Runtime");
+
+            EnergyPlusRuntimeBootstrapResult bootstrap = await new EnergyPlusRuntimeBootstrapper()
+                .EnsureInstalledAsync(cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
+            if (bootstrap.IsSuccess)
+            {
+                resolution = new EnergyPlusRuntimeResolution(
+                    bootstrap.Runtime,
+                    null,
+                    resolution.AttemptedRoots);
+            }
+            else
+            {
+                EnergyPlusFailure failure = bootstrap.Failure!;
+                if (failure.Category == EnergyPlusFailureCategory.Cancelled)
+                {
+                    return BatchOutcome.Cancelled();
+                }
+
+                return BatchOutcome.Failed(new Diagnostic(
+                    "ENERGYPLUS.RUNTIME." + failure.Code,
+                    DiagnosticSeverity.Error,
+                    failure.Message,
+                    suggestedAction: OptionalTrim(failure.Detail)));
+            }
+        }
+
         if (!resolution.IsSuccess)
         {
             EnergyPlusFailure failure = resolution.Failure!;
@@ -343,16 +382,9 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
 
             return BatchOutcome.Failed(new Diagnostic(
                 "ENERGYPLUS.RUNTIME." + failure.Code,
-                failure.Category == EnergyPlusFailureCategory.Cancelled
-                    ? DiagnosticSeverity.Info
-                    : DiagnosticSeverity.Error,
+                DiagnosticSeverity.Error,
                 failure.Message,
                 suggestedAction: OptionalTrim(failure.Detail)));
-        }
-
-        lock (_syncRoot)
-        {
-            _state = "Running";
         }
 
         var options = new BatchRunOptions
@@ -363,9 +395,23 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
             WriteOutputs = true,
         };
         var progress = new InlineProgress<BatchProgressSnapshot>(ReportProgress);
-        BatchCaseDefinition[] resolvedCases = ResolveDefaultWeatherPaths(
-            inputs.Cases,
-            resolution.Runtime!);
+        UpdateState("Preparing Weather");
+        if (!TryResolveDefaultWeatherPaths(
+                inputs.Cases,
+                cancellationToken,
+                out BatchCaseDefinition[] resolvedCases,
+                out Diagnostic? weatherFailure,
+                out bool weatherCancelled))
+        {
+            if (weatherCancelled)
+            {
+                return BatchOutcome.Cancelled();
+            }
+
+            return BatchOutcome.Failed(weatherFailure!);
+        }
+
+        UpdateState("Running");
         BatchRunResult result = await BatchRunner.RunAsync(
             resolvedCases,
             new EnergyPlusBatchCaseExecutor(resolution.Runtime!),
@@ -375,23 +421,88 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
         return BatchOutcome.FromResult(result);
     }
 
-    private static BatchCaseDefinition[] ResolveDefaultWeatherPaths(
+    private static bool TryResolveDefaultWeatherPaths(
         IReadOnlyList<BatchCaseDefinition> cases,
-        EnergyPlusRuntimeLayout runtime)
+        CancellationToken cancellationToken,
+        out BatchCaseDefinition[] resolved,
+        out Diagnostic? failure,
+        out bool cancelled)
     {
-        var resolved = new BatchCaseDefinition[cases.Count];
-        string weatherDirectory = Path.Combine(runtime.RootPath, "WeatherData");
+        resolved = new BatchCaseDefinition[cases.Count];
+        failure = null;
+        cancelled = false;
+        var weatherIndexByFileName = new Dictionary<string, int>(StringComparer.Ordinal);
+        var weatherSelections = new List<WeatherSelection>();
+        foreach (BatchCaseDefinition item in cases)
+        {
+            if (item.WeatherFilePath is null && item.Model.Weather is not null)
+            {
+                string weatherKey = item.Model.Weather.EpwFileName;
+                if (!weatherIndexByFileName.ContainsKey(weatherKey))
+                {
+                    weatherIndexByFileName.Add(weatherKey, weatherSelections.Count);
+                    weatherSelections.Add(item.Model.Weather);
+                }
+            }
+        }
+
+        IReadOnlyList<SimpleDragonWeatherFileResolution> weatherResults =
+            new SimpleDragonWeatherPackResolver().ResolveMany(
+                weatherSelections,
+                cancellationToken: cancellationToken);
+        if (cancellationToken.IsCancellationRequested
+            || weatherResults.Any(item => item.Diagnostics.Any(diagnostic => string.Equals(
+                diagnostic.Code,
+                "SD.WEATHER.EXTRACTION_CANCELLED",
+                StringComparison.Ordinal))))
+        {
+            cancelled = true;
+            return false;
+        }
+
         for (int index = 0; index < cases.Count; index++)
         {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                cancelled = true;
+                return false;
+            }
+
             BatchCaseDefinition item = cases[index];
             string? weatherPath = item.WeatherFilePath;
             if (weatherPath is null && item.Model.Weather is not null)
             {
-                string candidate = item.Model.Weather.ResolveEpwPath(weatherDirectory);
-                if (File.Exists(candidate))
+                string weatherKey = item.Model.Weather.EpwFileName;
+                SimpleDragonWeatherFileResolution weather =
+                    weatherResults[weatherIndexByFileName[weatherKey]];
+                if (!weather.IsSuccess)
                 {
-                    weatherPath = candidate;
+                    Diagnostic detail = weather.Diagnostics.Count > 0
+                        ? weather.Diagnostics[0]
+                        : new Diagnostic(
+                            "SD.WEATHER.PACK_NOT_FOUND",
+                            DiagnosticSeverity.Error,
+                            "The packaged weather file could not be resolved.");
+                    if (cancellationToken.IsCancellationRequested
+                        || string.Equals(
+                            detail.Code,
+                            "SD.WEATHER.EXTRACTION_CANCELLED",
+                            StringComparison.Ordinal))
+                    {
+                        cancelled = true;
+                        return false;
+                    }
+
+                    failure = new Diagnostic(
+                        "SD.GH.BATCH_WEATHER_NOT_RESOLVED",
+                        DiagnosticSeverity.Error,
+                        "Case '" + item.CaseId + "' could not resolve its address-selected EPW: "
+                            + detail.Message,
+                        suggestedAction: detail.SuggestedAction);
+                    return false;
                 }
+
+                weatherPath = weather.FilePath;
             }
 
             resolved[index] = new BatchCaseDefinition(
@@ -401,13 +512,68 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
                 item.Options);
         }
 
-        return resolved;
+        return true;
+    }
+
+    private sealed class ExplicitBatchTriggerGate
+    {
+        private bool _observed;
+        private bool _previousStart;
+        private bool _previousCancel;
+
+        internal ExplicitBatchTriggerObservation Observe(bool start, bool cancel)
+        {
+            if (!_observed)
+            {
+                _observed = true;
+                _previousStart = start;
+                _previousCancel = cancel;
+                return default;
+            }
+
+            var observation = new ExplicitBatchTriggerObservation(
+                start && !_previousStart,
+                cancel && !_previousCancel);
+            _previousStart = start;
+            _previousCancel = cancel;
+            return observation;
+        }
+
+        internal void Reset()
+        {
+            _observed = false;
+            _previousStart = false;
+            _previousCancel = false;
+        }
+    }
+
+    private readonly struct ExplicitBatchTriggerObservation
+    {
+        internal ExplicitBatchTriggerObservation(bool start, bool cancel)
+        {
+            Start = start;
+            Cancel = cancel;
+        }
+
+        internal bool Start { get; }
+
+        internal bool Cancel { get; }
     }
 
     private static string? OptionalTrim(string? value)
     {
         string? normalized = value?.Trim();
         return string.IsNullOrEmpty(normalized) ? null : normalized;
+    }
+
+    private void UpdateState(string state)
+    {
+        lock (_syncRoot)
+        {
+            _state = state;
+        }
+
+        ScheduleSolution();
     }
 
     private void ReportProgress(BatchProgressSnapshot progress)
@@ -569,10 +735,16 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
 
         internal static BatchOutcome Cancelled()
         {
-            return Failed(new Diagnostic(
-                "SD.GH.BATCH_CANCELLED",
-                DiagnosticSeverity.Info,
-                "The batch was cancelled."));
+            return new BatchOutcome(
+                "Cancelled",
+                null,
+                new[]
+                {
+                    new Diagnostic(
+                        "SD.GH.BATCH_CANCELLED",
+                        DiagnosticSeverity.Info,
+                        "The batch was cancelled."),
+                });
         }
     }
 }

@@ -6,6 +6,7 @@ param(
     [string] $Rhino7Path,
     [string] $Rhino8Path,
     [switch] $InstallEnergyPlus,
+    [switch] $SkipEmbeddedPayloads,
     [switch] $SkipPythonInstall,
     [switch] $SkipRestore,
     [switch] $RequireEnergyPlus,
@@ -25,6 +26,9 @@ $bootstrapRoot = Join-Path $tempRoot 'bootstrap'
 $logsRoot = Join-Path $tempRoot 'logs'
 $configPath = Join-Path $repositoryRoot '.config\local.settings.json'
 $runtimeManifestPath = Join-Path $repositoryRoot 'runtime\manifest.template.json'
+$distributionManifestPath = Join-Path $repositoryRoot 'runtime\distributions.json'
+$distributionRoot = Join-Path $toolsRoot 'distributions'
+$preparedDistributions = @{}
 
 $globalSettings = Get-Content -LiteralPath (Join-Path $repositoryRoot 'global.json') -Raw | ConvertFrom-Json
 $requiredDotNetSdk = [string] $globalSettings.sdk.version
@@ -47,6 +51,72 @@ $runtimeManifest = Get-Content -LiteralPath $runtimeManifestPath -Raw | ConvertF
 if ([string] $runtimeManifest.energyplus_version -ne $requiredEnergyPlusVersion -or
     [string] $runtimeManifest.energyplus_build -ne $requiredEnergyPlusBuild) {
     throw 'runtime/manifest.template.json does not match the pinned EnergyPlus runtime identity.'
+}
+
+if (-not (Test-Path -LiteralPath $distributionManifestPath -PathType Leaf)) {
+    throw "Pinned distribution manifest not found: '$distributionManifestPath'."
+}
+
+$distributionManifest = Get-Content -LiteralPath $distributionManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v1') {
+    throw "Unsupported distribution manifest schema in '$distributionManifestPath'."
+}
+
+$expectedDistributions = @{
+    'energyplus-24.2.0-windows-x64' = @{
+        product = 'invisible-dragon'
+        kind = 'energyplus-archive'
+        fileName = 'EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip'
+        url = 'https://github.com/NREL/EnergyPlus/releases/download/v24.2.0a/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip'
+        size = [int64] 179248139
+        sha256 = '26c7c22b731f54031626750284c8b613fb8f03c3aa56b6bc7ec65b6bf8668df1'
+        developmentPath = 'energyplus/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip'
+        packagePath = 'runtime/energyplus/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip'
+        licenseEntry = 'EnergyPlus-24.2.0-94a887817b-Windows-x86_64/LICENSE.txt'
+        packageLicensePath = 'runtime/energyplus/LICENSE.txt'
+        licenseSize = [int64] 3182
+        licenseSha256 = 'b43f1553459a4bcc49d180b42123a64a54fcbb6213cd99ac6ac6aa32cb1c1a05'
+    }
+    'korean-tmy-v1' = @{
+        product = 'simple-dragon'
+        kind = 'weather-archive'
+        fileName = 'KoreanTMY-v1.zip'
+        url = 'https://github.com/snu-bslab/EPlusSimple-resources/releases/download/weather/v1/KoreanTMY-v1.zip'
+        size = [int64] 128349513
+        sha256 = 'fa88b8d69364b6a6b663afdc6dc2eb30c0ddee17cd37e5802ce5a5dec63d92d0'
+        developmentPath = 'weather/KoreanTMY-v1.zip'
+        packagePath = 'runtime/weather/KoreanTMY-v1.zip'
+    }
+}
+
+$distributionPayloads = @($distributionManifest.payloads)
+if ($distributionPayloads.Count -ne $expectedDistributions.Count) {
+    throw 'runtime/distributions.json must contain exactly the two reviewed embedded payloads.'
+}
+$seenDistributionIds = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::Ordinal)
+foreach ($payload in $distributionPayloads) {
+    $id = [string] $payload.id
+    if (-not $expectedDistributions.ContainsKey($id) -or -not $seenDistributionIds.Add($id)) {
+        throw "Unreviewed distribution payload '$id' is present in runtime/distributions.json."
+    }
+    $expected = $expectedDistributions[$id]
+    $uri = [uri] ([string] $payload.url)
+    if ($uri.Scheme -ne 'https' -or
+        [string] $payload.product -ne [string] $expected.product -or
+        [string] $payload.kind -ne [string] $expected.kind -or
+        [string] $payload.fileName -ne [string] $expected.fileName -or
+        [string] $payload.url -ne [string] $expected.url -or
+        [int64] $payload.size -ne [int64] $expected.size -or
+        ([string] $payload.sha256).ToLowerInvariant() -ne [string] $expected.sha256 -or
+        [string] $payload.developmentPath -ne [string] $expected.developmentPath -or
+        [string] $payload.packagePath -ne [string] $expected.packagePath -or
+        ($id -eq 'energyplus-24.2.0-windows-x64' -and (
+            [string] $payload.licenseEntry -ne [string] $expected.licenseEntry -or
+            [string] $payload.packageLicensePath -ne [string] $expected.packageLicensePath -or
+            [int64] $payload.licenseSize -ne [int64] $expected.licenseSize -or
+            ([string] $payload.licenseSha256).ToLowerInvariant() -ne [string] $expected.licenseSha256))) {
+        throw "Distribution payload '$id' differs from the reviewed HTTPS identity/product/path contract."
+    }
 }
 
 # Windows PowerShell 5.1 otherwise negotiates an obsolete TLS version on some
@@ -133,6 +203,217 @@ function Invoke-OfficialDownload {
 
     Invoke-WebRequest -Uri $Uri -OutFile $partial -UseBasicParsing
     Move-Item -LiteralPath $partial -Destination $Destination -Force
+}
+
+function Get-DistributionPayload {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Product
+    )
+
+    $matches = @($distributionPayloads | Where-Object { [string] $_.product -eq $Product })
+    if ($matches.Count -ne 1) {
+        throw "Expected exactly one distribution payload for '$Product'; found $($matches.Count)."
+    }
+    return $matches[0]
+}
+
+function Get-DistributionArchivePath {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object] $Payload
+    )
+
+    return Join-Path $distributionRoot (([string] $Payload.developmentPath).Replace('/', '\'))
+}
+
+function Assert-SafeDistributionZip {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Path,
+
+        [Parameter(Mandatory = $true)]
+        [object] $Payload
+    )
+
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $archive = [System.IO.Compression.ZipFile]::OpenRead($Path)
+    try {
+        $seen = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
+        $fileEntries = @()
+        [int64] $expandedBytes = 0
+        foreach ($entry in @($archive.Entries)) {
+            $name = ([string] $entry.FullName).Replace('\', '/')
+            $parts = @($name.Split('/') | Where-Object { $_ -ne '' })
+            if ([string]::IsNullOrWhiteSpace($name) -or
+                $name.StartsWith('/') -or
+                $name -match '^[A-Za-z]:' -or
+                [System.IO.Path]::IsPathRooted($name) -or
+                $parts -contains '..') {
+                throw "Unsafe ZIP entry '$name' in '$Path'."
+            }
+            if (-not $seen.Add($name)) {
+                throw "Case-insensitive duplicate ZIP entry '$name' in '$Path'."
+            }
+            $unixType = (($entry.ExternalAttributes -shr 16) -band 0xF000)
+            if ($unixType -eq 0xA000) {
+                throw "Symbolic-link ZIP entry '$name' is not allowed in '$Path'."
+            }
+            if (-not [string]::IsNullOrEmpty($entry.Name)) {
+                $fileEntries += $entry
+                $expandedBytes += [int64] $entry.Length
+            }
+        }
+        if ($archive.Entries.Count -gt 20000 -or $expandedBytes -gt [int64] 8589934592) {
+            throw "ZIP safety limits were exceeded by '$Path'."
+        }
+
+        if ([string] $Payload.kind -eq 'weather-archive') {
+            $epwEntries = @($fileEntries | Where-Object {
+                ([string] $_.FullName).Replace('\', '/') -notmatch '/' -and
+                [System.IO.Path]::GetExtension([string] $_.Name).Equals('.epw', [System.StringComparison]::OrdinalIgnoreCase)
+            })
+            if ($fileEntries.Count -ne [int] $Payload.archiveEpwCount -or
+                $epwEntries.Count -ne [int] $Payload.archiveEpwCount) {
+                throw "Weather archive must contain exactly $($Payload.archiveEpwCount) root EPW files and nothing else."
+            }
+
+            $metadataPath = Join-Path $repositoryRoot (([string] $Payload.metadataPath).Replace('/', '\'))
+            if (-not (Test-Path -LiteralPath $metadataPath -PathType Leaf)) {
+                throw "Weather metadata is missing: '$metadataPath'."
+            }
+            $metadataColumn = [string] $Payload.metadataColumn
+            $metadataNames = @(Import-Csv -LiteralPath $metadataPath -Encoding UTF8 |
+                ForEach-Object { [string] $_.$metadataColumn } |
+                Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+                Sort-Object -Unique)
+            if ($metadataNames.Count -ne [int] $Payload.metadataReferencedUniqueEpwCount) {
+                throw "Weather metadata references $($metadataNames.Count) unique EPWs; expected $($Payload.metadataReferencedUniqueEpwCount)."
+            }
+            $archiveNames = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
+            foreach ($entry in $epwEntries) {
+                $null = $archiveNames.Add([string] $entry.Name)
+            }
+            foreach ($metadataName in $metadataNames) {
+                if (-not $archiveNames.Contains($metadataName)) {
+                    throw "Weather metadata references missing archive entry '$metadataName'."
+                }
+            }
+        }
+        elseif ([string] $Payload.kind -eq 'energyplus-archive') {
+            $licenseEntry = @($fileEntries | Where-Object {
+                ([string] $_.FullName).Replace('\', '/') -ceq [string] $Payload.licenseEntry
+            })
+            if ($licenseEntry.Count -ne 1 -or
+                [int64] $licenseEntry[0].Length -ne [int64] $Payload.licenseSize) {
+                throw "EnergyPlus archive license entry is missing or has the wrong size in '$Path'."
+            }
+            $stream = $licenseEntry[0].Open()
+            try {
+                $sha = [System.Security.Cryptography.SHA256]::Create()
+                try {
+                    $licenseHash = ([System.BitConverter]::ToString($sha.ComputeHash($stream))).Replace('-', '').ToLowerInvariant()
+                }
+                finally {
+                    $sha.Dispose()
+                }
+            }
+            finally {
+                $stream.Dispose()
+            }
+            if ($licenseHash -ne ([string] $Payload.licenseSha256).ToLowerInvariant()) {
+                throw "EnergyPlus archive license SHA-256 mismatch in '$Path'."
+            }
+        }
+    }
+    finally {
+        $archive.Dispose()
+    }
+}
+
+function Assert-DistributionArchive {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Path,
+
+        [Parameter(Mandatory = $true)]
+        [object] $Payload
+    )
+
+    $item = Get-Item -LiteralPath $Path
+    if ([int64] $item.Length -ne [int64] $Payload.size) {
+        throw "Distribution size mismatch for '$Path': expected $($Payload.size), found $($item.Length)."
+    }
+    $hash = (Get-Sha256 -Path $Path).ToLowerInvariant()
+    if ($hash -ne ([string] $Payload.sha256).ToLowerInvariant()) {
+        throw "Distribution SHA-256 mismatch for '$Path'."
+    }
+    Assert-SafeDistributionZip -Path $Path -Payload $Payload
+}
+
+function Ensure-DistributionPayload {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object] $Payload
+    )
+
+    $id = [string] $Payload.id
+    if ($preparedDistributions.ContainsKey($id)) {
+        return $preparedDistributions[$id]
+    }
+
+    $archivePath = Get-DistributionArchivePath -Payload $Payload
+    $archiveReady = $false
+    if (Test-Path -LiteralPath $archivePath -PathType Leaf) {
+        try {
+            Assert-DistributionArchive -Path $archivePath -Payload $Payload
+            $archiveReady = $true
+            Write-Host "Verified cached distribution: $archivePath"
+        }
+        catch {
+            Write-Warning "Cached distribution is invalid and will be replaced: $($_.Exception.Message)"
+            if ($WhatIfPreference) {
+                Write-Host "What if: remove invalid cached distribution '$archivePath'."
+            }
+            else {
+                Remove-Item -LiteralPath $archivePath -Force
+            }
+        }
+    }
+    if (-not $archiveReady -and $WhatIfPreference) {
+        Write-Host "What if: download and verify $($Payload.url) to '$archivePath'."
+    }
+    elseif (-not $archiveReady) {
+        Ensure-Directory -Path (Split-Path -Parent $archivePath)
+        $partial = $archivePath + '.partial'
+        if (Test-Path -LiteralPath $partial) {
+            Remove-Item -LiteralPath $partial -Force
+        }
+        try {
+            Write-Host "Downloading pinned embedded payload: $($Payload.url)"
+            Invoke-WebRequest -Uri ([uri] ([string] $Payload.url)) -OutFile $partial -UseBasicParsing
+            Assert-DistributionArchive -Path $partial -Payload $Payload
+            Move-Item -LiteralPath $partial -Destination $archivePath -Force
+        }
+        finally {
+            if (Test-Path -LiteralPath $partial) {
+                Remove-Item -LiteralPath $partial -Force
+            }
+        }
+        Write-Host "Prepared verified distribution: $archivePath"
+    }
+
+    $result = [pscustomobject] [ordered] @{
+        id = $id
+        product = [string] $Payload.product
+        status = if ($WhatIfPreference -and -not $archiveReady) { 'planned' } else { 'ready' }
+        path = $archivePath
+        size = [int64] $Payload.size
+        sha256 = ([string] $Payload.sha256).ToLowerInvariant()
+        packagePath = [string] $Payload.packagePath
+    }
+    $preparedDistributions[$id] = $result
+    return $result
 }
 
 function Get-DotNetSdkSelection {
@@ -535,18 +816,11 @@ function Get-EnergyPlusSelection {
 }
 
 function Install-PinnedEnergyPlus {
-    # v24.2.0a is the corrected 24.2.0 release whose build identity is
-    # 94a887817b. The NREL URL redirects to the project's current official
-    # GitHub organization if the organization name changes.
-    $archiveName = 'EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip'
-    $downloadUri = 'https://github.com/NREL/EnergyPlus/releases/download/v24.2.0a/' + $archiveName
-    $archivePath = Join-Path $bootstrapRoot $archiveName
+    $payload = Get-DistributionPayload -Product 'invisible-dragon'
+    $prepared = Ensure-DistributionPayload -Payload $payload
+    $archivePath = [string] $prepared.path
     $staging = Join-Path $bootstrapRoot 'energyplus-24.2.0-extracted'
     $target = Join-Path $toolsRoot 'energyplus\24.2.0-94a887817b'
-
-    if (-not (Test-Path -LiteralPath $archivePath -PathType Leaf)) {
-        Invoke-OfficialDownload -Uri $downloadUri -Destination $archivePath
-    }
 
     if ($WhatIfPreference) {
         Write-Host "What if: extract and verify EnergyPlus $requiredEnergyPlusVersion-$requiredEnergyPlusBuild into '$target'."
@@ -695,11 +969,21 @@ function Get-RhinoSelection {
 }
 
 Write-Host "Repository: $repositoryRoot"
-Write-Host 'EnergyPlus default policy: detect and verify only; pass -InstallEnergyPlus to download the official portable ZIP.'
+Write-Host 'Embedded payload policy: cache and verify the two reviewed archives by default; pass -SkipEmbeddedPayloads to opt out.'
+Write-Host 'EnergyPlus extraction policy: detect and verify only; pass -InstallEnergyPlus to extract the verified official archive.'
 Write-Host 'Rhino policy: detect Rhino 7 and Rhino 8 independently; never install licensed Rhino software.'
 
 foreach ($directory in @($toolsRoot, $tempRoot, $bootstrapRoot, $logsRoot)) {
     Ensure-Directory -Path $directory
+}
+
+if ($SkipEmbeddedPayloads) {
+    Write-Host 'Embedded payload preparation skipped by -SkipEmbeddedPayloads.'
+}
+else {
+    foreach ($payload in $distributionPayloads) {
+        $null = Ensure-DistributionPayload -Payload $payload
+    }
 }
 
 $dotnet = Get-DotNetSdkSelection
@@ -812,6 +1096,7 @@ $localSettings = [ordered] @{
     dotnet = $dotnet
     pythonOracle = $python
     energyPlus = $energyPlus
+    distributions = @($preparedDistributions.Values | Sort-Object product)
     rhino = [ordered] @{
         rhino7 = $rhino7
         rhino8 = $rhino8

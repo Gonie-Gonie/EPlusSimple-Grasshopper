@@ -1,0 +1,35 @@
+{
+  "schema": "goniegonie.dragons-grasshopper.distributions.v1",
+  "payloads": [
+    {
+      "id": "energyplus-24.2.0-windows-x64",
+      "product": "invisible-dragon",
+      "kind": "energyplus-archive",
+      "fileName": "EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip",
+      "url": "https://github.com/NREL/EnergyPlus/releases/download/v24.2.0a/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip",
+      "size": 179248139,
+      "sha256": "26c7c22b731f54031626750284c8b613fb8f03c3aa56b6bc7ec65b6bf8668df1",
+      "developmentPath": "energyplus/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip",
+      "packagePath": "runtime/energyplus/EnergyPlus-24.2.0-94a887817b-Windows-x86_64.zip",
+      "licenseEntry": "EnergyPlus-24.2.0-94a887817b-Windows-x86_64/LICENSE.txt",
+      "packageLicensePath": "runtime/energyplus/LICENSE.txt",
+      "licenseSize": 3182,
+      "licenseSha256": "b43f1553459a4bcc49d180b42123a64a54fcbb6213cd99ac6ac6aa32cb1c1a05"
+    },
+    {
+      "id": "korean-tmy-v1",
+      "product": "simple-dragon",
+      "kind": "weather-archive",
+      "fileName": "KoreanTMY-v1.zip",
+      "url": "https://github.com/snu-bslab/EPlusSimple-resources/releases/download/weather/v1/KoreanTMY-v1.zip",
+      "size": 128349513,
+      "sha256": "fa88b8d69364b6a6b663afdc6dc2eb30c0ddee17cd37e5802ce5a5dec63d92d0",
+      "developmentPath": "weather/KoreanTMY-v1.zip",
+      "packagePath": "runtime/weather/KoreanTMY-v1.zip",
+      "archiveEpwCount": 80,
+      "metadataReferencedUniqueEpwCount": 78,
+      "metadataPath": "data/simple-dragon/weather/행정구역별기상데이터.csv",
+      "metadataColumn": "EPW파일명"
+    }
+  ]
+}

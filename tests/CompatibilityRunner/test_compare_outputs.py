@@ -455,6 +455,66 @@ class EngineeringResultComparisonTests(unittest.TestCase):
         )
         self.assertEqual("numeric_tolerance", result["mismatches"][0]["reason"])
 
+    def test_grr_nonzero_expectations_require_both_engines_to_exercise_paths(self) -> None:
+        expectations = {
+            "required_nonzero_paths": [
+                "$.site_uses.cooling.ELECTRICITY",
+                "$.site_uses.heating.NATURALGAS",
+                "$.site_uses.heating.OIL",
+            ]
+        }
+        active = {
+            "site_uses": {
+                "cooling": {"ELECTRICITY": [0.01, 0.02]},
+                "heating": {
+                    "NATURALGAS": [0.4, 0.5],
+                    "OIL": [0.3, 0.4],
+                },
+            }
+        }
+        inactive_csharp = copy.deepcopy(active)
+        inactive_csharp["site_uses"]["heating"]["OIL"] = [0.0, 0.0]
+
+        passing = runner.check_grr_expectations(
+            active,
+            copy.deepcopy(active),
+            expectations,
+            near_zero=0.005,
+        )
+        failing = runner.check_grr_expectations(
+            active,
+            inactive_csharp,
+            expectations,
+            near_zero=0.005,
+        )
+
+        self.assertTrue(passing["passed"], passing["measurements"])
+        self.assertEqual(0, passing["mismatch_count"])
+        self.assertFalse(failing["passed"])
+        self.assertEqual(1, failing["mismatch_count"])
+        self.assertEqual(
+            [{"engine": "csharp", "reason": "not_above_near_zero_threshold"}],
+            failing["measurements"][2]["failures"],
+        )
+
+    def test_grr_nonzero_expectations_report_missing_or_non_numeric_paths(self) -> None:
+        result = runner.check_grr_expectations(
+            {"site_uses": {"cooling": {"ELECTRICITY": [0.01]}}},
+            {"site_uses": {"cooling": {"ELECTRICITY": "not numeric"}}},
+            {
+                "required_nonzero_paths": [
+                    "$.site_uses.cooling.ELECTRICITY",
+                    "$.site_uses.heating.NATURALGAS",
+                ]
+            },
+            near_zero=0.005,
+        )
+
+        self.assertFalse(result["passed"])
+        self.assertEqual(2, result["mismatch_count"])
+        self.assertEqual(1, len(result["measurements"][0]["failures"]))
+        self.assertEqual(2, len(result["measurements"][1]["failures"]))
+
 
 class WarningAndIdentityTests(unittest.TestCase):
     def test_case_exception_references_must_be_registered(self) -> None:
@@ -785,7 +845,7 @@ class CaseStageTests(unittest.TestCase):
         self.assertNotIn("warnings", result["checks"])
         self.assertEqual(case["stage_scope"], result["stage_scope"])
 
-    def test_full_stage_zero_cooling_limitation_is_preserved(self) -> None:
+    def test_full_stage_declared_limitation_is_preserved(self) -> None:
         stages = [
             "grm_cross_read",
             "authoring_idf",
@@ -795,15 +855,15 @@ class CaseStageTests(unittest.TestCase):
             "warnings",
         ]
         stage_scope = {
-            "classification": "legacy-zero-cooling-runtime-parity",
+            "classification": "bounded-runtime-parity",
             "excluded_stages": [],
-            "exception_id": "legacy-absorption-hot-water-generator-runaway",
-            "verified": ["zero_cooling_energyplus_runtime_parity"],
-            "not_verified": ["active_absorption_cooling_and_generator_energy_parity"],
-            "diagnostic": "Active legacy absorption cooling reaches runaway plant temperatures.",
+            "exception_id": "example-active-load-limitation",
+            "verified": ["bounded_runtime_parity"],
+            "not_verified": ["active_load_runtime_parity"],
+            "diagnostic": "The synthetic active-load branch is outside this test case.",
         }
         case = {
-            "id": "zero-cooling-absorption",
+            "id": "bounded-runtime-case",
             "stages": stages,
             "stage_scope": stage_scope,
         }
@@ -816,7 +876,7 @@ class CaseStageTests(unittest.TestCase):
             python_root = workspace.path / "python"
             csharp_root = workspace.path / "csharp"
             for root in (python_root, csharp_root):
-                case_root = root / "zero-cooling-absorption"
+                case_root = root / "bounded-runtime-case"
                 case_root.mkdir(parents=True)
                 workspace.write_json(
                     str((case_root / "metadata.json").relative_to(workspace.path)).replace("\\", "/"),
@@ -836,7 +896,7 @@ class CaseStageTests(unittest.TestCase):
                         "Version, 24.2;\n",
                     )
             workspace.write_text(
-                "python/zero-cooling-absorption/csharp-roundtrip-authoring.idf",
+                "python/bounded-runtime-case/csharp-roundtrip-authoring.idf",
                 "Version, 24.2;\n",
             )
 
@@ -850,7 +910,7 @@ class CaseStageTests(unittest.TestCase):
             {
                 "limitation_count": 1,
                 "limitation_exception_ids": [
-                    "legacy-absorption-hot-water-generator-runaway"
+                    "example-active-load-limitation"
                 ],
                 "diagnostic_exception_count": 0,
                 "diagnostic_exception_ids": [],

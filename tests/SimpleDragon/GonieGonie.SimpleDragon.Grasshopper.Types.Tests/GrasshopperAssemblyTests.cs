@@ -39,6 +39,16 @@ public sealed class GrasshopperAssemblyTests
         "Written",
     };
 
+    private static readonly string[] ConvertOutputNames =
+    {
+        "Energy Model",
+        "IDF",
+        "IDF Text",
+        "EPW File",
+        "Success",
+        "Diagnostics",
+    };
+
     [Fact]
     public void PluginAssemblyUsesGhaExtensionAndLoadsRequiredComponents()
     {
@@ -216,6 +226,32 @@ public sealed class GrasshopperAssemblyTests
         Assert.Equal("Bars", bars.Params.Output[0].Name);
         Assert.Equal(GH_ParamAccess.tree, bars.Params.Output[0].Access);
         Assert.Equal(GH_ParamAccess.tree, bars.Params.Output[5].Access);
+    }
+
+    [Fact]
+    public void WeatherAutomationPreservesPortsAndAdvertisesExecutableReadiness()
+    {
+        Assembly assembly = LoadPlugin("GonieGonie.SimpleDragon.GH");
+        GH_Component convert = Component(assembly, "ConvertGreenRetrofitModelComponent");
+        GH_Component batch = Component(assembly, "RunSimpleDragonBatchComponent");
+
+        Assert.Equal(ConvertOutputNames, convert.Params.Output.Select(parameter => parameter.Name));
+        Assert.Contains(
+            "automatically selected",
+            convert.Params.Output[3].Description,
+            StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(
+            "EPW is ready",
+            convert.Params.Output[4].Description,
+            StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(
+            "packaged SimpleDragon weather archive",
+            batch.Params.Input[2].Description,
+            StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(
+            "saved True value does not run",
+            batch.Params.Input[6].Description,
+            StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

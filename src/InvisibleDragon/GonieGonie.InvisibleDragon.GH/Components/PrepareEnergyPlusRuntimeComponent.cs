@@ -34,7 +34,8 @@ public sealed class PrepareEnergyPlusRuntimeComponent : DragonComponent
             "Prepare EnergyPlus Runtime",
             "Prepare E+",
             "Checks or securely prepares the pinned per-user EnergyPlus 24.2 runtime on an explicit Boolean rising edge. "
-            + "EnergyPlus is downloaded only when required; weather files are never downloaded and the user must supply an EPW.",
+            + "The bundled archive is used first and verified HTTPS is used only when the bundle is absent. "
+            + "The managed default is stored safely in LocalAppData; weather files are never acquired.",
             DragonPanels.Core)
     {
     }
@@ -81,7 +82,7 @@ public sealed class PrepareEnergyPlusRuntimeComponent : DragonComponent
         pManager.AddTextParameter("Executable", "E+", "Verified energyplus.exe path, when ready.", GH_ParamAccess.item);
         pManager.AddTextParameter("State", "State", "Idle, active bootstrap stage, Ready, Cancelled, or Failed.", GH_ParamAccess.item);
         pManager.AddBooleanParameter("Ready", "Ready", "True only when the pinned runtime was hash-verified.", GH_ParamAccess.item);
-        pManager.AddNumberParameter("Progress", "%", "Download progress from 0 to 1 when byte totals are known.", GH_ParamAccess.item);
+        pManager.AddNumberParameter("Progress", "%", "Bundled-copy or HTTPS-download progress from 0 to 1 when byte totals are known.", GH_ParamAccess.item);
         pManager.AddTextParameter("Message", "Message", "Current bootstrap progress or terminal message.", GH_ParamAccess.item);
         pManager.AddParameter(new DiagnosticParam(), "Diagnostics", "D", "Structured bootstrap diagnostics.", GH_ParamAccess.list);
     }
@@ -383,7 +384,7 @@ public sealed class PrepareEnergyPlusRuntimeComponent : DragonComponent
         {
             EnergyPlusRuntimeBootstrapStage.CheckingExistingRuntime => "Checking",
             EnergyPlusRuntimeBootstrapStage.WaitingForInstallLock => "Waiting",
-            EnergyPlusRuntimeBootstrapStage.DownloadingArchive => "Downloading",
+            EnergyPlusRuntimeBootstrapStage.DownloadingArchive => "Acquiring",
             EnergyPlusRuntimeBootstrapStage.VerifyingArchive => "Verifying Archive",
             EnergyPlusRuntimeBootstrapStage.ExtractingArchive => "Extracting",
             EnergyPlusRuntimeBootstrapStage.VerifyingExtractedRuntime => "Verifying Runtime",

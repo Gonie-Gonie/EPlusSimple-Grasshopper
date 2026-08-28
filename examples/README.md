@@ -27,16 +27,20 @@ file in Grasshopper:
 .\dev.cmd install
 ```
 
-Opening an example manually is safe: all Prepare, Run, Cancel, Repair, Force,
-Export, Overwrite, Batch Run, and Batch Cancel triggers are persisted as
-`False`. The IDF examples still compile deterministic input text; an unresolved
+Opening an example manually is safe: all action triggers, including Run,
+Cancel, Repair, Force, Export, Overwrite, Batch Run, and Batch Cancel, are
+persisted as `False`. Example 14 keeps `Prepare packaged runtime` at `True` as a
+run policy; it performs no work until Run receives an explicit False-to-True
+edge. The IDF examples still compile deterministic input text; an unresolved
 EnergyPlus IDD is reported as a warning and can be resolved by running
 `.\dev.cmd setup -InstallEnergyPlus`.
 Examples 02 and 14 are the complete InvisibleDragon and SimpleDragon execution
-paths. Supply an absolute EnergyPlus 24.2 EPW, then create a fresh False-to-True
-edge on only the operation you intend to run. In example 02, first toggle
+paths. Example 02 requires an absolute EPW supplied by the user: first toggle
 `Prepare` and wait for `Ready`, then toggle `Run`; its verified Runtime Root is
-already connected to Run EnergyPlus.
+already connected to Run EnergyPlus. Example 14 derives the Seoul EPW from the
+model address and SimpleDragon's packaged KoreanTMY archive. Wait until the
+`Address-selected packaged EPW` panel contains the absolute cached path, then
+create a fresh False-to-True edge on only Run or Batch Run.
 
 `13-simpledragon-results-and-plots.gh` keeps both paths relative to the saved
 Grasshopper document:
@@ -103,18 +107,20 @@ closed planar windows, and equality between the model geometry and the
 internalized two-zone Grasshopper inputs. Candidates, logs, summaries, and
 round-trip copies remain below `temp/example-definitions/`.
 
-When a verified EnergyPlus runtime and EPW are available, the gate temporarily
-enables example 14 in memory and verifies Run, Result, GRR, CSV, cache,
-cancellation, and batch behavior in both hosts. The saved trigger values remain
-`False`. Use `-SkipEnergyPlusWorkflow` to test the explicit disabled state,
-`-EnergyPlusRoot` to select a runtime, or `-WeatherPath` to select an EPW. A
-missing runtime or weather file is reported as `unavailable` and `Not Run`, not
-as a successful simulation.
+When the verified distribution payloads and EnergyPlus runtime are available,
+the gate temporarily enables example 14 in memory and verifies the address to
+packaged-EPW path, Run, Result, GRR, CSV, cache, cancellation, and batch behavior
+in both hosts. The saved trigger values remain `False`. Use
+`-SkipEnergyPlusWorkflow` to test the explicit disabled state or
+`-EnergyPlusRoot` to select a runtime. `-WeatherPath` remains an explicit test
+override for workflows that require one. An unavailable prerequisite is
+reported as `Not Run`, not as a successful simulation.
 
 ## Further workflow recipes
 
 - Use the persisted Prepare → Run → Result chain in example 02 for a direct
-  InvisibleDragon simulation with a user-supplied EPW.
+  InvisibleDragon simulation with an explicit EPW, or use example 14 to see
+  SimpleDragon resolve the EPW automatically from its model address.
 - Use Read GRM with `fixtures\simple-dragon\grm\ASHRAE 140 modified.grm`, then
   Convert GRM to inspect compatibility diagnostics for an existing model.
 - Feed ordered GRM cases and stable IDs into Batch Research for parallel studies;

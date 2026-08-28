@@ -1,9 +1,65 @@
 using System.Reflection;
+using GonieGonie.BuildingEnergy.Contracts;
 
 namespace GonieGonie.SimpleDragon.Grasshopper.Tests;
 
 public sealed class BatchPathResolutionTests
 {
+    [Fact]
+    public void BatchTriggerUsesEdgesAndTreatsTheFirstSavedValuesAsBaseline()
+    {
+        Type? component = LoadPlugin().GetType(
+            "GonieGonie.SimpleDragon.Grasshopper.Components.RunSimpleDragonBatchComponent");
+        Assert.NotNull(component);
+        Type? gateType = component.GetNestedType(
+            "ExplicitBatchTriggerGate",
+            BindingFlags.NonPublic);
+        Assert.NotNull(gateType);
+        object? gate = Activator.CreateInstance(gateType, nonPublic: true);
+        Assert.NotNull(gate);
+        MethodInfo? observe = gateType.GetMethod(
+            "Observe",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        Assert.NotNull(observe);
+
+        AssertObservation(observe.Invoke(gate, new object[] { true, true }), start: false, cancel: false);
+        AssertObservation(observe.Invoke(gate, new object[] { false, false }), start: false, cancel: false);
+        AssertObservation(observe.Invoke(gate, new object[] { true, false }), start: true, cancel: false);
+        AssertObservation(observe.Invoke(gate, new object[] { true, true }), start: false, cancel: true);
+        AssertObservation(observe.Invoke(gate, new object[] { true, true }), start: false, cancel: false);
+    }
+
+    [Fact]
+    public void PreparationCancellationProducesACancelledTerminalOutcome()
+    {
+        Type? component = LoadPlugin().GetType(
+            "GonieGonie.SimpleDragon.Grasshopper.Components.RunSimpleDragonBatchComponent");
+        Assert.NotNull(component);
+        Type? outcomeType = component.GetNestedType("BatchOutcome", BindingFlags.NonPublic);
+        Assert.NotNull(outcomeType);
+        MethodInfo? cancelled = outcomeType.GetMethod(
+            "Cancelled",
+            BindingFlags.Static | BindingFlags.NonPublic);
+        Assert.NotNull(cancelled);
+
+        object? outcome = cancelled.Invoke(obj: null, parameters: null);
+        Assert.NotNull(outcome);
+        PropertyInfo? state = outcomeType.GetProperty(
+            "State",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        PropertyInfo? diagnostics = outcomeType.GetProperty(
+            "Diagnostics",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        Assert.NotNull(state);
+        Assert.NotNull(diagnostics);
+        Assert.Equal("Cancelled", Assert.IsType<string>(state.GetValue(outcome)));
+        IReadOnlyList<Diagnostic> items = Assert.IsAssignableFrom<IReadOnlyList<Diagnostic>>(
+            diagnostics.GetValue(outcome));
+        Diagnostic diagnostic = Assert.Single(items);
+        Assert.Equal("SD.GH.BATCH_CANCELLED", diagnostic.Code);
+        Assert.False(diagnostic.IsFailure);
+    }
+
     [Theory]
     [InlineData("weather", "seoul.epw")]
     [InlineData("runtime", "EnergyPlusV24-2-0")]
@@ -90,6 +146,22 @@ public sealed class BatchPathResolutionTests
             modifiers: null);
         Assert.NotNull(method);
         return method;
+    }
+
+    private static void AssertObservation(object? observation, bool start, bool cancel)
+    {
+        Assert.NotNull(observation);
+        Type type = observation.GetType();
+        PropertyInfo? startProperty = type.GetProperty(
+            "Start",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        PropertyInfo? cancelProperty = type.GetProperty(
+            "Cancel",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        Assert.NotNull(startProperty);
+        Assert.NotNull(cancelProperty);
+        Assert.Equal(start, Assert.IsType<bool>(startProperty.GetValue(observation)));
+        Assert.Equal(cancel, Assert.IsType<bool>(cancelProperty.GetValue(observation)));
     }
 
     private static Assembly LoadPlugin()

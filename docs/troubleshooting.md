@@ -35,10 +35,21 @@ ordinary recompute.
 
 ## The simulation has no weather or fails on EPW
 
-EnergyPlus preparation installs only the runtime. Supply a real local EPW path
-separately. SimpleDragon weather metadata may name an expected station file but
-does not contain or download that file. Confirm that the EPW is readable and
-appropriate for EnergyPlus 24.2.0.
+InvisibleDragon prepares only EnergyPlus; its Weather input still requires an
+executable EPW path. In a SimpleDragon graph, connect Convert GRM's `EPW` output:
+the model address selects a Korean station and the verified packaged archive
+extracts that one EPW into the per-user LocalAppData cache. If this output is
+empty, rerun `dev.cmd setup`, rebuild/reinstall both packages from the same
+candidate, and inspect `SD.WEATHER.*` diagnostics. Explicit EPW overrides must
+be readable and appropriate for EnergyPlus 24.2.0.
+
+## Rhino reports access denied when Run is clicked
+
+Leave Runtime Root and Temp Root empty unless a custom writable location is
+required. The defaults use `%LOCALAPPDATA%` for the verified runtime/weather
+caches and the operating-system temp directory for simulation work; they do not
+write below Rhino's `Program Files` directory. Save the Grasshopper definition
+before using relative paths, or use absolute paths for explicit overrides.
 
 ## A model compiles but EnergyPlus reports severe errors
 

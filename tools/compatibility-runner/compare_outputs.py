@@ -282,6 +282,105 @@ class JsonComparison:
         }
 
 
+def _resolve_json_object_path(document: Any, path: str) -> Any:
+    if not isinstance(path, str) or not path.startswith("$."):
+        raise ValueError("GRR expectation paths must start with '$.'")
+    segments = path[2:].split(".")
+    if not segments or any(not segment for segment in segments):
+        raise ValueError(f"GRR expectation path is malformed: {path!r}")
+
+    value = document
+    for segment in segments:
+        if not isinstance(value, dict) or segment not in value:
+            raise KeyError(f"GRR expectation path does not exist: {path!r}")
+        value = value[segment]
+    return value
+
+
+def _sum_finite_measurements(value: Any, path: str) -> float:
+    if isinstance(value, bool):
+        raise TypeError(f"GRR expectation path is not numeric: {path!r}")
+    if isinstance(value, (int, float)):
+        number = float(value)
+        if not math.isfinite(number):
+            raise ValueError(f"GRR expectation path is not finite: {path!r}")
+        return number
+    if isinstance(value, list):
+        if not value:
+            raise ValueError(f"GRR expectation path is an empty array: {path!r}")
+        return sum(_sum_finite_measurements(item, path) for item in value)
+    raise TypeError(f"GRR expectation path is not numeric: {path!r}")
+
+
+def check_grr_expectations(
+    python_result: Any,
+    csharp_result: Any,
+    expectations: Any,
+    near_zero: float,
+) -> dict[str, Any]:
+    if not isinstance(expectations, dict):
+        raise ValueError("grr_expectations must be a mapping")
+    paths = expectations.get("required_nonzero_paths")
+    if (
+        not isinstance(paths, list)
+        or not paths
+        or any(not isinstance(path, str) or not path for path in paths)
+        or len(set(paths)) != len(paths)
+    ):
+        raise ValueError(
+            "grr_expectations.required_nonzero_paths must be a non-empty unique string array"
+        )
+    if not math.isfinite(near_zero) or near_zero < 0:
+        raise ValueError("near_zero must be a finite non-negative number")
+
+    measurements: list[dict[str, Any]] = []
+    mismatch_count = 0
+    for path in paths:
+        values: dict[str, float | None] = {}
+        failures: list[dict[str, str]] = []
+        for engine, document in (("python", python_result), ("csharp", csharp_result)):
+            try:
+                total = _sum_finite_measurements(
+                    _resolve_json_object_path(document, path),
+                    path,
+                )
+            except (KeyError, TypeError, ValueError) as exception:
+                values[engine] = None
+                failures.append(
+                    {
+                        "engine": engine,
+                        "reason": str(exception),
+                    }
+                )
+            else:
+                values[engine] = total
+                if total <= near_zero:
+                    failures.append(
+                        {
+                            "engine": engine,
+                            "reason": "not_above_near_zero_threshold",
+                        }
+                    )
+        if failures:
+            mismatch_count += 1
+        measurements.append(
+            {
+                "path": path,
+                "python_sum": values.get("python"),
+                "csharp_sum": values.get("csharp"),
+                "passed": not failures,
+                "failures": failures,
+            }
+        )
+
+    return {
+        "passed": mismatch_count == 0,
+        "near_zero_threshold": near_zero,
+        "mismatch_count": mismatch_count,
+        "measurements": measurements,
+    }
+
+
 def strip_idf_comments(text: str) -> str:
     result: list[str] = []
     quoted = False
@@ -1107,18 +1206,28 @@ def compare_case(
         )
     skipped_stages: list[str] = []
     if "grr" in case["stages"] and not skip_energyplus:
+        python_grr = load_json(python_case / "result.grr")
+        csharp_grr = load_json(csharp_case / "result.grr")
         comparison = JsonComparison(
             float(tolerance["grr_absolute"]),
             float(tolerance["grr_relative"]),
             float(tolerance["near_zero"]),
         )
-        comparison.compare(
-            load_json(python_case / "result.grr"),
-            load_json(csharp_case / "result.grr"),
-        )
+        comparison.compare(python_grr, csharp_grr)
         checks["grr"] = comparison.result()
+        if case.get("grr_expectations") is not None:
+            checks["grr_expectations"] = check_grr_expectations(
+                python_grr,
+                csharp_grr,
+                case["grr_expectations"],
+                float(tolerance["near_zero"]),
+            )
     elif "grr" in case["stages"]:
         skipped_stages.append("grr")
+    elif case.get("grr_expectations") is not None:
+        raise ValueError(
+            f"case '{case_id}' declares grr_expectations without the grr stage"
+        )
     if "warnings" in case["stages"] and not skip_energyplus:
         checks["warnings"] = compare_warnings(
             python_case / "warnings.json",

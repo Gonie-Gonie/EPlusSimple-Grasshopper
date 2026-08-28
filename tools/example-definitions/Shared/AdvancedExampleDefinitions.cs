@@ -533,7 +533,12 @@ internal static class AdvancedExampleDefinitions
         if (includeRuntimeWorkflow)
         {
             GraphNode runtimeRoot = graph.Panel(100, "EnergyPlus 24.2 root", string.Empty, 2770, 870);
-            GraphNode weatherPath = graph.Panel(101, "EPW path", string.Empty, 2770, 970);
+            GraphNode weatherPath = graph.Panel(
+                101,
+                "Address-selected packaged EPW",
+                string.Empty,
+                2770,
+                970);
             GraphNode tempRoot = graph.Panel(
                 102,
                 "Run temp root",
@@ -545,10 +550,11 @@ internal static class AdvancedExampleDefinitions
             GraphNode forceRerun = graph.Boolean(105, "Force rerun", false, 2770, 1330);
             GraphNode keepWork = graph.Boolean(106, "Keep work directory", true, 2770, 1410);
             GraphNode timeout = graph.Slider(107, "Run timeout 2 min", 2m, 1m, 30m, 2770, 1490);
-            GraphNode prepareRuntime = graph.Boolean(108, "Prepare missing runtime", false, 2770, 1570);
+            GraphNode prepareRuntime = graph.Boolean(108, "Prepare packaged runtime", true, 2770, 1570);
             GraphNode run = graph.Component(110, Catalog.InvisibleRun, 3150, 1050);
             graph.Connect(convert, 1, run, 0);
-            graph.Connect(weatherPath, null, run, 1);
+            graph.Connect(convert, 3, weatherPath, null);
+            graph.Connect(convert, 3, run, 1);
             graph.Connect(runtimeRoot, null, run, 2);
             graph.Connect(tempRoot, null, run, 3);
             graph.Connect(runTrigger, null, run, 4);
@@ -596,7 +602,7 @@ internal static class AdvancedExampleDefinitions
             GraphNode batch = graph.Component(124, Catalog.SimpleBatch, 3150, 1900);
             graph.Connect(assemble, 0, batch, 0);
             graph.Connect(caseId, null, batch, 1);
-            graph.Connect(weatherPath, null, batch, 2);
+            graph.Connect(convert, 3, batch, 2);
             graph.Connect(runtimeRoot, null, batch, 3);
             graph.Connect(batchOutputRoot, null, batch, 4);
             graph.Connect(parallelLimit, null, batch, 5);
@@ -642,6 +648,7 @@ internal static class AdvancedExampleDefinitions
                 cancelTrigger.InstanceGuid,
                 forceRerun.InstanceGuid,
                 runtimeRoot.InstanceGuid,
+                convert.InstanceGuid,
                 weatherPath.InstanceGuid,
                 tempRoot.InstanceGuid,
                 energyPlusSummary.InstanceGuid,
@@ -773,6 +780,20 @@ internal static class AdvancedExampleDefinitions
         GH_Document.EnableSolutions = true;
         document.Enabled = true;
         document.NewSolution(true, GH_SolutionMode.Silent);
+        foreach (BooleanExpectation expected in graph.Booleans.Where(item => item.Expected))
+        {
+            GH_Component? component = document.FindObject(expected.ObjectGuid, topLevelOnly: true) as GH_Component;
+            if (component is not null && component.ComponentGuid == Catalog.SimpleConvert.Id)
+            {
+                WaitForBooleanOutput(
+                    document,
+                    expected.ObjectGuid,
+                    expected.OutputIndex,
+                    inputs.EnergyPlusWorkflowTimeout,
+                    "Convert SimpleDragon GRM did not finish preparing its address-selected packaged EPW");
+            }
+        }
+
         foreach (GH_ActiveObject active in document.Objects.OfType<GH_ActiveObject>())
         {
             string[] errors = active.RuntimeMessages(GH_RuntimeMessageLevel.Error).ToArray();
@@ -902,8 +923,6 @@ internal static class AdvancedExampleDefinitions
 
         string runtimeRoot = inputs.EnergyPlusRuntimeRoot
             ?? throw new InvalidOperationException("The ready EnergyPlus gate has no runtime root.");
-        string weatherPath = inputs.EnergyPlusWeatherPath
-            ?? throw new InvalidOperationException("The ready EnergyPlus gate has no weather path.");
         string workflowRoot = Path.Combine(inputs.OutputDirectory, "runtime-workflow");
         string tempRoot = Path.Combine(workflowRoot, "energyplus-temp");
         string csvRoot = Path.Combine(workflowRoot, "csv-package");
@@ -918,7 +937,6 @@ internal static class AdvancedExampleDefinitions
         try
         {
             SetPanel(document, expectation.RuntimeRootGuid, runtimeRoot);
-            SetPanel(document, expectation.WeatherPathGuid, weatherPath);
             SetPanel(document, expectation.TempRootGuid, tempRoot);
             SetPanel(document, expectation.ExportDirectoryGuid, csvRoot);
             SetPanel(document, expectation.BatchOutputRootGuid, batchRoot);
@@ -930,6 +948,21 @@ internal static class AdvancedExampleDefinitions
             SetBoolean(document, expectation.BatchRunTriggerGuid, false);
             SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
             Solve(document);
+
+            string addressSelectedWeatherPath = WaitForAddressSelectedWeatherPath(
+                document,
+                expectation.WeatherComponentGuid,
+                expectation.WeatherPathGuid,
+                inputs.EnergyPlusWorkflowTimeout);
+            string localApplicationData = Path.GetFullPath(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
+                .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            Require(
+                Path.GetFullPath(addressSelectedWeatherPath).StartsWith(
+                    localApplicationData + Path.DirectorySeparatorChar,
+                    StringComparison.OrdinalIgnoreCase),
+                "The packaged EPW was not prepared below the per-user LocalAppData cache: "
+                    + addressSelectedWeatherPath);
 
             SetBoolean(document, expectation.RunTriggerGuid, true);
             Solve(document);
@@ -1325,6 +1358,108 @@ internal static class AdvancedExampleDefinitions
             componentGuid + " did not reach a terminal state within "
                 + timeout.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)
                 + " seconds. Last state: " + snapshot.State + ". " + RuntimeMessages(document, componentGuid));
+    }
+
+    private static string WaitForAddressSelectedWeatherPath(
+        GH_Document document,
+        Guid weatherComponentGuid,
+        Guid weatherParameterGuid,
+        TimeSpan timeout)
+    {
+        const string expectedFileName = "KOR_SO_Seoul.WS.471080_TMYx.2009-2023.epw";
+        var stopwatch = Stopwatch.StartNew();
+        string lastPath = string.Empty;
+        while (stopwatch.Elapsed < timeout)
+        {
+            Solve(document);
+            lastPath = ReadParameterStringOrEmpty(document, weatherParameterGuid);
+            if (!string.IsNullOrWhiteSpace(lastPath))
+            {
+                if (!Path.IsPathRooted(lastPath))
+                {
+                    throw new InvalidOperationException(
+                        "Convert SimpleDragon GRM resolved a non-rooted packaged EPW path: "
+                            + lastPath + ". " + RuntimeMessages(document, weatherComponentGuid));
+                }
+
+                if (!string.Equals(
+                        Path.GetFileName(lastPath),
+                        expectedFileName,
+                        StringComparison.Ordinal))
+                {
+                    throw new InvalidOperationException(
+                        "The Seoul model address resolved the wrong packaged EPW: "
+                            + lastPath + ". Expected " + expectedFileName + ". "
+                            + RuntimeMessages(document, weatherComponentGuid));
+                }
+
+                if (File.Exists(lastPath))
+                {
+                    return Path.GetFullPath(lastPath);
+                }
+            }
+
+            GH_ActiveObject component = RequireObject<GH_ActiveObject>(document, weatherComponentGuid);
+            string[] errors = component
+                .RuntimeMessages(GH_RuntimeMessageLevel.Error)
+                .Distinct(StringComparer.Ordinal)
+                .ToArray();
+            if (errors.Length > 0)
+            {
+                throw new InvalidOperationException(
+                    "Convert SimpleDragon GRM failed while preparing the address-selected packaged EPW. "
+                        + string.Join(" | ", errors)
+                        + (string.IsNullOrWhiteSpace(lastPath) ? string.Empty : " Last path: " + lastPath));
+            }
+
+            System.Threading.Thread.Sleep(50);
+        }
+
+        throw new TimeoutException(
+            "Convert SimpleDragon GRM did not prepare the address-selected Seoul EPW within "
+                + timeout.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                + " seconds. Last path: "
+                + (string.IsNullOrWhiteSpace(lastPath) ? "<empty>" : lastPath)
+                + ". " + RuntimeMessages(document, weatherComponentGuid));
+    }
+
+    private static void WaitForBooleanOutput(
+        GH_Document document,
+        Guid componentGuid,
+        int outputIndex,
+        TimeSpan timeout,
+        string failureMessage)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        while (stopwatch.Elapsed < timeout)
+        {
+            Solve(document);
+            object? value = ResolveParam(document, componentGuid, outputIndex, output: true)
+                .VolatileData
+                .AllData(true)
+                .FirstOrDefault();
+            if (value is GH_Boolean boolean && boolean.Value)
+            {
+                return;
+            }
+
+            GH_ActiveObject component = RequireObject<GH_ActiveObject>(document, componentGuid);
+            string[] errors = component
+                .RuntimeMessages(GH_RuntimeMessageLevel.Error)
+                .Distinct(StringComparer.Ordinal)
+                .ToArray();
+            if (errors.Length > 0)
+            {
+                throw new InvalidOperationException(failureMessage + ". " + string.Join(" | ", errors));
+            }
+
+            System.Threading.Thread.Sleep(50);
+        }
+
+        throw new TimeoutException(
+            failureMessage + " within "
+                + timeout.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                + " seconds. " + RuntimeMessages(document, componentGuid));
     }
 
     private static string WaitForState(
@@ -1796,6 +1931,22 @@ internal static class AdvancedExampleDefinitions
         return value is GH_String text
             ? text.Value
             : throw new InvalidOperationException(componentGuid + " output " + outputIndex + " is not text.");
+    }
+
+    private static string ReadParameterStringOrEmpty(GH_Document document, Guid parameterGuid)
+    {
+        object? value = ResolveParam(document, parameterGuid, index: null, output: true)
+            .VolatileData
+            .AllData(true)
+            .FirstOrDefault();
+        if (value is null)
+        {
+            return string.Empty;
+        }
+
+        return value is GH_String text
+            ? text.Value
+            : throw new InvalidOperationException(parameterGuid + " does not contain text.");
     }
 
     private static string[] ReadStrings(GH_Document document, Guid componentGuid, int outputIndex)
@@ -2356,6 +2507,7 @@ internal sealed record RuntimeWorkflowExpectation(
     Guid CancelTriggerGuid,
     Guid ForceRerunGuid,
     Guid RuntimeRootGuid,
+    Guid WeatherComponentGuid,
     Guid WeatherPathGuid,
     Guid TempRootGuid,
     Guid EnergyPlusSummaryGuid,

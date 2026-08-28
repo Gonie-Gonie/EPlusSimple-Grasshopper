@@ -35,9 +35,11 @@ supplies, ERVs, and PV panels in addition to the zone graph so that unassigned
 plant objects are never inferred silently.
 
 Compile IDF produces a typed IDF value and deterministic text. Validation can
-use the pinned EnergyPlus IDD. Run EnergyPlus accepts the typed IDF, a
-user-supplied EPW, an optional runtime root, an isolated temp root, timeout and
-cleanup choices. A repeated input is cached unless Force Rerun is enabled.
+use the pinned EnergyPlus IDD. Run EnergyPlus accepts the typed IDF, an EPW
+path, an optional runtime root, an isolated temp root, timeout and cleanup
+choices. The EPW may come from SimpleDragon's address-selected packaged weather
+output or from an explicit user file. A repeated input is cached unless Force
+Rerun is enabled.
 
 ## SimpleDragon
 
@@ -68,8 +70,12 @@ PV collections. Existing definitions that used only the earlier inputs retain
 their input order and optional behavior.
 
 Convert GRM is the authoritative SimpleDragon-to-InvisibleDragon path. Inspect
-its diagnostic list and converted Breps before simulation. Build GRR applies
-the SimpleDragon result aggregation after the EnergyPlus result is available.
+its diagnostic list and converted Breps before simulation. Its existing `EPW`
+output now resolves the GRM address to an executable path from the verified
+SimpleDragon weather archive, extracting only the selected file to the safe
+per-user cache. Connect that output directly to InvisibleDragon Run. Build GRR
+applies the SimpleDragon result aggregation after the EnergyPlus result is
+available.
 
 ## CSV and batch studies
 
@@ -83,10 +89,13 @@ the saved Grasshopper document's folder. In unsaved definitions, read-only
 GRM/GRR inputs use Rhino's current working directory, while GRM/GRR writers and
 CSV export use the per-user system temp directory. Absolute paths are unchanged.
 
-Batch Research accepts an ordered model list and stable case IDs. It limits
-parallel EnergyPlus processes, supports cancellation and partial failure,
-caches matching cases, and writes a combined CSV plus reproducibility manifest.
-All temporary case directories remain below the configured temp root.
+Batch Research accepts an ordered model list and stable case IDs. Empty EPW
+inputs resolve each model's address from the same packaged weather archive, and
+an absent default EnergyPlus runtime is prepared from InvisibleDragon's bundled
+archive. It limits parallel EnergyPlus processes, supports cancellation and
+partial failure, caches matching cases, and writes a combined CSV plus
+reproducibility manifest. All temporary case directories remain below the
+configured temp root.
 
 ## Runnable example matrix
 

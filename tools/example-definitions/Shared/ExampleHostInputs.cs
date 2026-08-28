@@ -109,10 +109,10 @@ internal sealed class ExampleHostInputs
                     $"{EnergyPlusRootVariable} must identify an existing runtime when the gate is ready: {runtimeRoot}");
             }
 
-            if (weatherPath is null || !File.Exists(weatherPath))
+            if (weatherPath is not null && !File.Exists(weatherPath))
             {
                 throw new FileNotFoundException(
-                    $"{EnergyPlusWeatherVariable} must identify an EPW file when the gate is ready.",
+                    $"{EnergyPlusWeatherVariable}, when supplied, must identify an EPW file.",
                     weatherPath);
             }
         }

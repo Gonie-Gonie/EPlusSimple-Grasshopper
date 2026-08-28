@@ -4,9 +4,12 @@
 
 - Windows x64.
 - Rhino 7 or Rhino 8 with Grasshopper. Both versions may be installed.
-- An EPW weather file for any weather-based annual simulation.
-- Network access the first time the optional EnergyPlus runtime preparation is
-  used, unless a hash-matching EnergyPlus 24.2.0 runtime is already available.
+- An explicit EPW for workflows that do not use SimpleDragon's embedded
+  address-resolved KoreanTMY archive.
+- Network access while setup downloads the pinned archives, or only as a
+  verified fallback if an installed package's embedded EnergyPlus archive is
+  absent. A normal InvisibleDragon package prepares its embedded runtime
+  offline.
 
 Installed plugins do not require the .NET SDK, Python, Visual Studio, or a
 machine-wide EnergyPlus installer. Rhino is licensed separately and is never
@@ -20,13 +23,16 @@ Each release candidate contains independent `invisible-dragon` and
 - Two Yak files per product: `rh7-win` and `rh8-win`.
 - One portable plugin ZIP per product containing all supported Windows host
   variants.
+- One hash-pinned product archive at the package root: EnergyPlus for
+  InvisibleDragon or KoreanTMY weather for SimpleDragon.
 - SHA-256 inventories and a package compatibility report.
 
 Yak is the preferred installation format because Rhino selects the correct
 payload. Rhino 7 uses `net48`. Rhino 8.0–8.19 uses the `net7.0` payload, and
 Rhino 8.20 or later uses `net8.0`. The portable ZIP is intended for inspection,
-controlled deployment, and recovery; it is not a complete offline simulation
-bundle because EnergyPlus and weather data are deliberately excluded.
+controlled deployment, and recovery. Embedded archives remain compressed and
+are verified before use; Python and directly expanded runtime/weather files are
+deliberately excluded.
 
 Do not combine files from different commits or versions. When both products
 are installed, their shared `GonieGonie.*` assemblies must be byte-identical.

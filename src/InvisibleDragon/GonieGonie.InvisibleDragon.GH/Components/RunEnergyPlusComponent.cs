@@ -32,7 +32,9 @@ public sealed class RunEnergyPlusComponent : DragonComponent
         : base(
             "Run EnergyPlus",
             "Run",
-            "Runs EnergyPlus 24.2 off the Rhino UI thread on an explicit Boolean rising edge.",
+            "Runs EnergyPlus 24.2 off the Rhino UI thread on an explicit Boolean rising edge. "
+            + "Missing runtimes are prepared in the safe per-user LocalAppData cache from the bundled archive first, "
+            + "with verified HTTPS fallback only when the bundle is absent.",
             DragonPanels.Core)
     {
     }
@@ -45,13 +47,13 @@ public sealed class RunEnergyPlusComponent : DragonComponent
         pManager.AddTextParameter(
             "Weather",
             "EPW",
-            "Optional user-supplied EPW weather-file path. Relative paths use the saved Grasshopper document. InvisibleDragon never downloads weather files.",
+            "Executable EPW weather-file path. Connect SimpleDragon's address-selected packaged EPW, or provide a user-supplied EPW. Relative paths use the saved Grasshopper document; InvisibleDragon itself never acquires weather.",
             GH_ParamAccess.item,
             string.Empty);
         pManager.AddTextParameter(
             "Runtime Root",
             "E+",
-            "Optional EnergyPlus 24.2 root. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory so Prepare Missing Runtime remains writable. Empty checks the verified per-user cache, environment hints, and default install.",
+            "Optional EnergyPlus 24.2 root. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. Empty checks verified runtime hints and prepares into the safe GonieGonie LocalAppData cache when needed.",
             GH_ParamAccess.item,
             string.Empty);
         pManager.AddTextParameter(
@@ -79,9 +81,10 @@ public sealed class RunEnergyPlusComponent : DragonComponent
             "Prepare Missing Runtime",
             "Prepare",
             "When Run rises and no verified runtime is available, securely prepare the pinned per-user runtime before running. "
-            + "This may download EnergyPlus, never weather, and cannot occur during an ordinary recompute.",
+            + "The bundled archive is used first; verified HTTPS is used only when the bundle is absent. "
+            + "The empty Runtime Root uses LocalAppData. This never acquires weather and cannot occur during an ordinary recompute.",
             GH_ParamAccess.item,
-            false);
+            true);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)

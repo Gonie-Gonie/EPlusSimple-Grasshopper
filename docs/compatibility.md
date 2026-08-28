@@ -52,8 +52,10 @@ report and the setup, oracle, and compatibility diagnostic logs are retained eve
 fails. Release-candidate runs repeat the reporter regression before their expensive bootstrap and
 retain the same diagnostics independently of the complete package artifact.
 
-EPW payloads remain part of the separately installed official EnergyPlus runtime. They are not
-copied into this repository, packages, reports, or release artifacts.
+EPW payloads remain outside source control and reports. Setup verifies the pinned KoreanTMY ZIP,
+and SimpleDragon package candidates embed that archive unchanged; directly expanded EPW files
+remain forbidden. InvisibleDragon candidates likewise embed the unchanged pinned official
+EnergyPlus archive rather than directly expanded runtime files.
 
 Numeric comparisons use `|a-b| <= absolute + relative * max(|a|, |b|)`.
 The tracked case manifest is authoritative: IDF fields use absolute and relative
@@ -103,23 +105,26 @@ objects while preserving the verified model meaning. Any such difference that
 affects authoring text, expanded IDF, warnings, or results must be registered in
 `upstream/compatibility-exceptions.yml`; otherwise it is a release failure.
 
+Active absorption parity is exercised by
+`absorption-default-explicit-electric-radiant`: a 10 W/m² internal lighting load
+dispatches two 250 W absorption chillers with natural-gas and oil hot-water
+generators. The pinned Python and C# paths both complete the annual Chicago run
+with 27 warnings, no Severe or Fatal diagnostics, and matching non-zero GRR
+values for cooling electricity, natural-gas heating, and oil heating. The
+bounded capacities make this a deterministic compatibility fixture, not an
+equipment-sizing recommendation. Its declared `grr_expectations` fail closed if
+either engine returns a zero active-load result.
+
 ## Current limitations
 
 - Windows is the only supported operating system.
 - One pinned EnergyPlus version is supported.
-- Weather files are user-supplied and never redistributed.
+- SimpleDragon candidates include the hash-pinned KoreanTMY archive; callers may still supply an
+  explicit compatible EPW where the workflow supports it.
 - Neither module exposes every EnergyPlus object or a full HVAC node/branch
   graph editor.
 - SimpleDragon intentionally loses arbitrary source vertices during its
   area-and-azimuth abstraction.
-- The pinned Python `AbsorptionChiller.to_idf_object` hot-water generator loop
-  reaches runaway plant temperatures as soon as a non-zero absorption cooling
-  load is dispatched in EnergyPlus 24.2. The paired fixture therefore proves
-  all six stages at zero absorption cooling load plus non-zero electric-radiant
-  heating, but explicitly does not claim active absorption cooling or generator-
-  energy parity. This is tracked as
-  `legacy-absorption-hot-water-generator-runaway` rather than counted as hidden
-  numerical coverage.
 - Public binary publication remains blocked until the historical upstream
   license omission recorded in `NOTICE.md` is resolved or release counsel
   confirms the required attribution basis.

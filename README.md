@@ -37,7 +37,9 @@ Installed plugins require Rhino 7 or Rhino 8 on Windows, but not the .NET SDK,
 Python, or Visual Studio. Local candidate builds produce a matching Yak archive
 and portable plugin ZIP for each product. These outputs are currently for
 controlled verification and inspection only; they are not publicly published.
-EnergyPlus and EPW weather files are separate from every plugin package.
+InvisibleDragon candidates carry the exact pinned EnergyPlus ZIP and
+SimpleDragon candidates carry the exact pinned KoreanTMY ZIP; neither payload
+is expanded in source control or directly inside a package.
 
 Read [Installation](docs/installation.md), [Choosing a Dragon](docs/choosing-a-dragon.md),
 and [EnergyPlus and weather](docs/energyplus-and-weather.md) before using a
@@ -82,10 +84,12 @@ already present, first run
 `.\dev.cmd reference -Mode Verify` to compare them byte-for-byte with the reviewed
 baseline in `fixtures\reference\python-0.7.0`. Python remains development-only.
 
-EnergyPlus uses a deliberate detect-only default. Setup validates the corrected
+EnergyPlus extraction uses a deliberate detect-only default. Setup always
+prepares the exact EnergyPlus and KoreanTMY distribution ZIPs under
+`.tools\distributions` unless `-SkipEmbeddedPayloads` is passed, and validates the corrected
 24.2.0 build `94a887817b` at `C:\EnergyPlusV24-2-0` or under `.tools` by the
 executable, IDD, and ExpandObjects SHA-256 values. To download and verify the
-official portable ZIP when no compatible runtime exists, run:
+official portable ZIP and extract it when no compatible runtime exists, run:
 
 ```text
 .\dev.cmd setup -InstallEnergyPlus

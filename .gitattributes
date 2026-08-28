@@ -21,6 +21,8 @@
 # Preserve byte-for-byte upstream oracle payloads so their pinned SHA-256 values survive checkout.
 data/simple-dragon/** binary
 fixtures/simple-dragon/** binary
+# Compatibility manifests pin these editable JSON model bytes; force LF on every host.
+fixtures/compatibility/models/*.grm text eol=lf
 
 *.gh binary
 *.ghx text eol=lf

@@ -19,6 +19,7 @@ Set-StrictMode -Version 2.0
 
 $repositoryRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 . (Join-Path $repositoryRoot 'scripts\common.ps1')
+$distributionManifestPath = Join-Path $repositoryRoot 'runtime\distributions.json'
 
 $spec = Get-Content -LiteralPath $SpecPath -Raw | ConvertFrom-Json
 $version = [string] $spec.version
@@ -78,7 +79,8 @@ $arguments = @(
     '--no-build',
     '--',
     '--packages-root', [System.IO.Path]::GetFullPath($PackagesRoot),
-    '--spec', [System.IO.Path]::GetFullPath($SpecPath))
+    '--spec', [System.IO.Path]::GetFullPath($SpecPath),
+    '--distributions', [System.IO.Path]::GetFullPath($distributionManifestPath))
 if (-not [string]::IsNullOrWhiteSpace($ReportPath)) {
     $arguments += @('--report', [System.IO.Path]::GetFullPath($ReportPath))
 }
@@ -90,4 +92,4 @@ Invoke-LoggedNativeCommand `
     -LogPath $verifyLog `
     -FailureMessage 'Package layout/shared-assembly compatibility tests failed'
 
-Write-Host 'Package tests passed: layout, shared SHA/type identity, Python-free payload, versions, and duplicate assemblies.'
+Write-Host 'Package tests passed: layout, product-exclusive embedded archives, exact SHA/size pins, ZIP safety, KoreanTMY 80/78 coverage, EnergyPlus license identity, no expanded EP/EPW or Python, shared identity, and versions.'

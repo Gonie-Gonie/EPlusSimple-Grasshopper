@@ -12,6 +12,10 @@
     <PackageReference Include="System.Text.Json" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <Reference Include="System.IO.Compression" />
+  </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="..\..\..\data\simple-dragon\construction\material.csv"
                       Link="Data\construction\material.csv"
