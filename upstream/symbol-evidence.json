@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:4df61b16db7b6d964470fbef1341ea705514679c8cad0ef6c220c3a7079f529e",
+  "content_sha256": "sha256:719c4bb2f61a93e0b011f3f02e04ae2683e7f01007a92d62bd89be75926dc55f",
   "entries": [
     {
       "implementation": {
@@ -22651,6 +22651,266 @@
       "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
         "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IDD for exact fixture case F01 (imugi-idd-schema-static-core.f-idd-construction-and-maps) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema. Adaptation typed-immutable-idd-schema-instead-of-mutable-user-dictionary is represented by exact compatibility exception typed-immutable-idd-schema-instead-of-mutable-user-dictionary. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:15a9c3dae649c8d7b3a9c6b272bc14b059139ea3ac58ea593685e8d93d43377e. Only inventory index 1095 and assertion imugi-idd-schema-static-core-1095-394fdc55 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:15a9c3dae649c8d7b3a9c6b272bc14b059139ea3ac58ea593685e8d93d43377e",
+          "id": "imugi-idd-schema-static-core-1095-394fdc55",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IDD",
+      "upstream_symbol_hash": "sha256:394fdc55f48dd088d8aca9e08ad1551904556297b21f3df006fd2ff60380300b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IDD.__init__ for exact fixture case F01 (imugi-idd-schema-static-core.f-idd-construction-and-maps) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema(...) constructor. Adaptation validated-immutable-schema-construction-with-explicit-source-identity is represented by exact compatibility exception validated-immutable-schema-construction-with-explicit-source-identity. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:bc15d0f03f335d599fc21e204b6932c7330ae3d2b819a13fdc35afdfe05b1eb4. Only inventory index 1097 and assertion imugi-idd-schema-static-core-1097-369f30e0 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:bc15d0f03f335d599fc21e204b6932c7330ae3d2b819a13fdc35afdfe05b1eb4",
+          "id": "imugi-idd-schema-static-core-1097-369f30e0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IDD.__init__",
+      "upstream_symbol_hash": "sha256:369f30e0e83a3ce8b91e87e703ef1c78ec5eb0c05dd96b6a27e3a5db851f6095"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddSchemaCache.cs",
+        "source_sha256": "sha256:80f2e2a803128b52aec6df95b0ff2567a5b53bd51e72b1154e7c9a8a3ebf9e4b",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchemaCache.Read"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IDD.load for exact fixture case H01 (imugi-idd-schema-static-core.h-idd-cache-roundtrip) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchemaCache.Read/TryRead. Adaptation source-hash-bound-json-gzip-cache-instead-of-global-pickle-cache is represented by exact compatibility exception source-hash-bound-json-gzip-cache-instead-of-global-pickle-cache. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddSchemaCache.cs@sha256:80f2e2a803128b52aec6df95b0ff2567a5b53bd51e72b1154e7c9a8a3ebf9e4b are fail-closed bindings. The trusted evidence output is sha256:78bad4ab030af280e024b5ec114338dd797b9bef7d4c7f43b56c6b945088c772. Only inventory index 1100 and assertion imugi-idd-schema-static-core-1100-3b6538ba are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:78bad4ab030af280e024b5ec114338dd797b9bef7d4c7f43b56c6b945088c772",
+          "id": "imugi-idd-schema-static-core-1100-3b6538ba",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IDD.load",
+      "upstream_symbol_hash": "sha256:3b6538ba505d18de08c5ff0ee5b2c49557f19e065cdea220fba5ed5643183144"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddParser.cs",
+        "source_sha256": "sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddParser.ParseFile"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IDD.read_idd for exact fixture case G01 (imugi-idd-schema-static-core.g-idd-read) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddParser.ParseFile. The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddParser.cs@sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f are fail-closed bindings. The trusted evidence output is sha256:abd0dc36e551d53496eae3505f9281c95e9b9db120ca9acab74c6dac3b9b31d8. Only inventory index 1101 and assertion imugi-idd-schema-static-core-1101-0b48b62a are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:abd0dc36e551d53496eae3505f9281c95e9b9db120ca9acab74c6dac3b9b31d8",
+          "id": "imugi-idd-schema-static-core-1101-0b48b62a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IDD.read_idd",
+      "upstream_symbol_hash": "sha256:0b48b62a5aea8fb7598aa5724c8cf90046677d7e016952c9aafccda740f8024f"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IDD.reference_map_cls for exact fixture case F01 (imugi-idd-schema-static-core.f-idd-construction-and-maps) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema.Objects/Fields/ReferenceClassNames projection. The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:3ad1f650cc08f24f15a2250ca02f2738b5261a12225792e6436714c8bf9619b7. Only inventory index 1102 and assertion imugi-idd-schema-static-core-1102-1772eedc are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3ad1f650cc08f24f15a2250ca02f2738b5261a12225792e6436714c8bf9619b7",
+          "id": "imugi-idd-schema-static-core-1102-1772eedc",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IDD.reference_map_cls",
+      "upstream_symbol_hash": "sha256:1772eedce3236a508206b04d6cacb474b09446e346510798350b636738777b50"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IDD.reference_map_obj for exact fixture case F01 (imugi-idd-schema-static-core.f-idd-construction-and-maps) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema.Objects/Fields/References projection. The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:48ff5a25b5de0443f349c3359da59f7e119eb07649cc0d1058f1d358106e7eff. Only inventory index 1103 and assertion imugi-idd-schema-static-core-1103-9cf45886 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:48ff5a25b5de0443f349c3359da59f7e119eb07649cc0d1058f1d358106e7eff",
+          "id": "imugi-idd-schema-static-core-1103-9cf45886",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IDD.reference_map_obj",
+      "upstream_symbol_hash": "sha256:9cf45886e630dd02f7a96ca3db1bf5eb1ea411487771944396cf6df09ed1cba1"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IDD.referenced_map_obj for exact fixture case F01 (imugi-idd-schema-static-core.f-idd-construction-and-maps) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema.Objects/Fields/ObjectLists projection. Adaptation explicit-public-schema-projection-instead-of-absent-legacy-private-state is represented by exact compatibility exception explicit-public-schema-projection-instead-of-absent-legacy-private-state. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:fe2a767b65ffab9a34261ee1e91305008e8c4dd957df4b1179205a59838b9515. Only inventory index 1104 and assertion imugi-idd-schema-static-core-1104-ae43213f are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:fe2a767b65ffab9a34261ee1e91305008e8c4dd957df4b1179205a59838b9515",
+          "id": "imugi-idd-schema-static-core-1104-ae43213f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IDD.referenced_map_obj",
+      "upstream_symbol_hash": "sha256:ae43213f9ec6c540cdcaac73160055cff676abcc550bac3ba98edf453d327f88"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IDD.required_objects for exact fixture case F01 (imugi-idd-schema-static-core.f-idd-construction-and-maps) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema.Objects projection over IsRequired. The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:68142a8c420379d555b510e803ef8e4d8242a10a5cd648dfa93964f71fe1668c. Only inventory index 1105 and assertion imugi-idd-schema-static-core-1105-3bdf9b9f are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:68142a8c420379d555b510e803ef8e4d8242a10a5cd648dfa93964f71fe1668c",
+          "id": "imugi-idd-schema-static-core-1105-3bdf9b9f",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IDD.required_objects",
+      "upstream_symbol_hash": "sha256:3bdf9b9f1261b152ae1ba91e42e96844a2e5768922e4978f7048296247fcef2a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddSchemaCache.cs",
+        "source_sha256": "sha256:80f2e2a803128b52aec6df95b0ff2567a5b53bd51e72b1154e7c9a8a3ebf9e4b",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchemaCache.Write"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IDD.to_pickle for exact fixture case H01 (imugi-idd-schema-static-core.h-idd-cache-roundtrip) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchemaCache.Write. Adaptation portable-json-gzip-cache-instead-of-arbitrary-python-pickle is represented by exact compatibility exception portable-json-gzip-cache-instead-of-arbitrary-python-pickle. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddSchemaCache.cs@sha256:80f2e2a803128b52aec6df95b0ff2567a5b53bd51e72b1154e7c9a8a3ebf9e4b are fail-closed bindings. The trusted evidence output is sha256:9fcc94441519cb8ef94b3bd0c67729f975d8613ca70f1f415a010b9f0965b820. Only inventory index 1106 and assertion imugi-idd-schema-static-core-1106-78d65e39 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9fcc94441519cb8ef94b3bd0c67729f975d8613ca70f1f415a010b9f0965b820",
+          "id": "imugi-idd-schema-static-core-1106-78d65e39",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IDD.to_pickle",
+      "upstream_symbol_hash": "sha256:78d65e39461eccc962e7389e5e0dccfa98f75268c225e280ecf3d02dc4e9581b"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema.Version"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify IDD.version for exact fixture case F01 (imugi-idd-schema-static-core.f-idd-construction-and-maps) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema.Version. The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:f1912859e592c68e78b4859dc093e9496749b0d2641ab73c350a48310e04586a. Only inventory index 1107 and assertion imugi-idd-schema-static-core-1107-648c3654 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f1912859e592c68e78b4859dc093e9496749b0d2641ab73c350a48310e04586a",
+          "id": "imugi-idd-schema-static-core-1107-648c3654",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "IDD.version",
+      "upstream_symbol_hash": "sha256:648c3654122ab1f1e2bb8a23bcf79105c8067f09b687259cdec9bf9319f06dcc"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
         "symbol": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition"
       },
       "path": "src/idragon/imugi.py",
@@ -23689,6 +23949,292 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify InvalidFieldValue for exact fixture case A01 (imugi-idd-schema-static-core.a-exception-types) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddFieldDefinition/IddObjectDefinition public validation. Adaptation standard-public-argument-and-format-exceptions-instead-of-legacy-marker-type is represented by exact compatibility exception standard-public-argument-and-format-exceptions-instead-of-legacy-marker-type. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:6f17d2047e3c23c9e1e4d20bf06fa6c119d320ed7df247d60e0482119d2f92a6. Only inventory index 1217 and assertion imugi-idd-schema-static-core-1217-73314d43 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:6f17d2047e3c23c9e1e4d20bf06fa6c119d320ed7df247d60e0482119d2f92a6",
+          "id": "imugi-idd-schema-static-core-1217-73314d43",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "InvalidFieldValue",
+      "upstream_symbol_hash": "sha256:73314d435f9b36d7d5b9e9904f7127db38fe6354c42217038b5242590d3749a9"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify InvalidParentManagement for exact fixture case A01 (imugi-idd-schema-static-core.a-exception-types) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddObjectDefinition immutable public ownership. Adaptation immutable-definition-ownership-instead-of-parent-mutation-exception is represented by exact compatibility exception immutable-definition-ownership-instead-of-parent-mutation-exception. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:a0e2ac9e2112bdf6a5a35f4991f631c542d9e473563a71d3d165f6057f8fce08. Only inventory index 1218 and assertion imugi-idd-schema-static-core-1218-a3c45a4a are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:a0e2ac9e2112bdf6a5a35f4991f631c542d9e473563a71d3d165f6057f8fce08",
+          "id": "imugi-idd-schema-static-core-1218-a3c45a4a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "InvalidParentManagement",
+      "upstream_symbol_hash": "sha256:a3c45a4a197c1131f740fe8786f9c5196d33c0c7c340fb4c241b610d0280899d"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify StaticIndexedDict for exact fixture case B01 (imugi-idd-schema-static-core.b-static-construction) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema and IddObjectDefinition typed collections. Adaptation typed-immutable-schema-collections-instead-of-generic-mutable-user-dictionary is represented by exact compatibility exception typed-immutable-schema-collections-instead-of-generic-mutable-user-dictionary. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:dbbdb193266b491b97788ffce15f9b42a3fba7f116ad25929e43ce525fa6e29a. Only inventory index 1219 and assertion imugi-idd-schema-static-core-1219-04e0277a are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:dbbdb193266b491b97788ffce15f9b42a3fba7f116ad25929e43ce525fa6e29a",
+          "id": "imugi-idd-schema-static-core-1219-04e0277a",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "StaticIndexedDict",
+      "upstream_symbol_hash": "sha256:04e0277ab2b2bf6821c79f1e32476574f2d69abb44eb963b333c3b8e15008b4f"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify StaticIndexedDict.__getitem__ for exact fixture case C01 (imugi-idd-schema-static-core.c-static-index-read) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema.this[int|string]. Adaptation typed-case-insensitive-indexers-with-conventional-boundary-semantics is represented by exact compatibility exception typed-case-insensitive-indexers-with-conventional-boundary-semantics. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:268bdfa63a269cd8e2145d81f1116260262afa2425156ef6cd15f5d9fc5019a9. Only inventory index 1220 and assertion imugi-idd-schema-static-core-1220-c84cef47 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:268bdfa63a269cd8e2145d81f1116260262afa2425156ef6cd15f5d9fc5019a9",
+          "id": "imugi-idd-schema-static-core-1220-c84cef47",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "StaticIndexedDict.__getitem__",
+      "upstream_symbol_hash": "sha256:c84cef47bed071fab6ae9ce83de9226fc41c7cab2d9a10e48ae0bfa7afdacbea"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify StaticIndexedDict.__init__ for exact fixture case B01 (imugi-idd-schema-static-core.b-static-construction) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema(...) constructor. Adaptation typed-schema-constructors-instead-of-allowed-key-user-dictionary is represented by exact compatibility exception typed-schema-constructors-instead-of-allowed-key-user-dictionary. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:0b0092f9c8d64571177ddc01f664abcd1166abca0e1c2aabe56154228d68d773. Only inventory index 1221 and assertion imugi-idd-schema-static-core-1221-303db42c are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0b0092f9c8d64571177ddc01f664abcd1166abca0e1c2aabe56154228d68d773",
+          "id": "imugi-idd-schema-static-core-1221-303db42c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "StaticIndexedDict.__init__",
+      "upstream_symbol_hash": "sha256:303db42cbe721b5b6a7bee1cd59b9961901974c1606f0e93b3e0332b98606ed1"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify StaticIndexedDict.__setitem__ for exact fixture case D01 (imugi-idd-schema-static-core.d-static-index-write) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema.Objects read-only collection. Adaptation immutable-read-only-production-collections is represented by exact compatibility exception immutable-read-only-production-collections. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:d4f2f07b42dfb6999b9bed18d1bc555ef1d832f3bf5905fe7022dcdfa14f4f38. Only inventory index 1222 and assertion imugi-idd-schema-static-core-1222-6a048e25 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d4f2f07b42dfb6999b9bed18d1bc555ef1d832f3bf5905fe7022dcdfa14f4f38",
+          "id": "imugi-idd-schema-static-core-1222-6a048e25",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "StaticIndexedDict.__setitem__",
+      "upstream_symbol_hash": "sha256:6a048e255b2328e1a87b74cd4fa82691cdd1da1eb99794b914f08dbdb45d5e85"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify StaticIndexedDict.allowed_keys for exact fixture case B01 (imugi-idd-schema-static-core.b-static-construction) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema.Objects projection over Name. The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:f90e9744847a7b0e6a161d09f0dbd49279b46d0f1d24b10adc9bb7273f4f9452. Only inventory index 1223 and assertion imugi-idd-schema-static-core-1223-45e68e36 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f90e9744847a7b0e6a161d09f0dbd49279b46d0f1d24b10adc9bb7273f4f9452",
+          "id": "imugi-idd-schema-static-core-1223-45e68e36",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "StaticIndexedDict.allowed_keys",
+      "upstream_symbol_hash": "sha256:45e68e36a94154a7f798f2d291da1a73cf207234157d29af32684db1ab69c66a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify StaticIndexedDict.items for exact fixture case E01 (imugi-idd-schema-static-core.e-static-views) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema.Objects key/value projection. The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:4175bbce76b803df9031e60c3d8455a3f779195e8217acd18317734a9e64d919. Only inventory index 1224 and assertion imugi-idd-schema-static-core-1224-ce753c48 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:4175bbce76b803df9031e60c3d8455a3f779195e8217acd18317734a9e64d919",
+          "id": "imugi-idd-schema-static-core-1224-ce753c48",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "StaticIndexedDict.items",
+      "upstream_symbol_hash": "sha256:ce753c48af155d1faca3ce572419ee7ddd19f4b2639c5de5a8310ce285af3e09"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify StaticIndexedDict.keys for exact fixture case E01 (imugi-idd-schema-static-core.e-static-views) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema.Objects projection over Name. The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:9693a85868a015c5f4624c4393cbee1a70f18f6d4e1dcf2d833ed785bfe00213. Only inventory index 1225 and assertion imugi-idd-schema-static-core-1225-880aaf03 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9693a85868a015c5f4624c4393cbee1a70f18f6d4e1dcf2d833ed785bfe00213",
+          "id": "imugi-idd-schema-static-core-1225-880aaf03",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "StaticIndexedDict.keys",
+      "upstream_symbol_hash": "sha256:880aaf035f5baee6b6722fd235bd20e6c2d2e495ee8ed996b847df10971601fd"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "source_sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify StaticIndexedDict.values for exact fixture case E01 (imugi-idd-schema-static-core.e-static-views) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddSchema.Objects. The pinned Python and native observations are equivalent for this bounded public production contract; no compatibility exception is claimed. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs@sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed are fail-closed bindings. The trusted evidence output is sha256:90e9860268e0b487124476076d330af08f0dc3d3237f03e44b073e6bb924ed50. Only inventory index 1226 and assertion imugi-idd-schema-static-core-1226-7487511d are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:90e9860268e0b487124476076d330af08f0dc3d3237f03e44b073e6bb924ed50",
+          "id": "imugi-idd-schema-static-core-1226-7487511d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "StaticIndexedDict.values",
+      "upstream_symbol_hash": "sha256:7487511d15e9cbeaf8b55041b02c9ff3412cadc5046ddff1bd3045e0baf42bdf"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddParser.cs",
+        "source_sha256": "sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f",
+        "symbol": "GonieGonie.InvisibleDragon.Idd.IddParser.Parse"
+      },
+      "path": "src/idragon/imugi.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify VersionIdentificationError for exact fixture case A01 (imugi-idd-schema-static-core.a-exception-types) exclusively through the reviewed public production route GonieGonie.InvisibleDragon.Idd.IddParser.Parse/ParseFile version contract. Adaptation empty-version-parser-result-instead-of-legacy-dedicated-exception is represented by exact compatibility exception empty-version-parser-result-instead-of-legacy-dedicated-exception. Oracle commit 2fa8cf5, fixture sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0, generator sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83, validator sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee, commit 20135d0 native parity test sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddParser.cs@sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f are fail-closed bindings. The trusted evidence output is sha256:1df091ced3bf42b6c956e31111eb06f6447b05bef8fc9caede553a5341ebaa1e. Only inventory index 1227 and assertion imugi-idd-schema-static-core-1227-47e8a463 are promoted by this receipt; all previous receipts, batch1 IDD definition evidence, and every non-target Imugi, InvisibleDragon HVAC, SimpleDragon, and adjacent symbol remain unchanged. No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1df091ced3bf42b6c956e31111eb06f6447b05bef8fc9caede553a5341ebaa1e",
+          "id": "imugi-idd-schema-static-core-1227-47e8a463",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/ImugiIddSchemaStaticCoreOracleParityTests.cs",
+          "test_source_sha256": "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Idd.ImugiIddSchemaStaticCoreOracleParityTests.MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "VersionIdentificationError",
+      "upstream_symbol_hash": "sha256:47e8a463cedd83dabab7fd8f7b8a62fc0316a44ad539be2473a60630c76bf5df"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Results/EnergyPlusResultModels.cs",
         "source_sha256": "sha256:d7f8ae53dd548f8c24cdcc5f1e0478bc3edfecfac9ec9ab7f0d846ba93501fa8",
         "symbol": "GonieGonie.InvisibleDragon.Results.EnergyPlusSimulationResult"
@@ -24055,9 +24601,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 925,
-    "passed_receipt_count": 925,
-    "receipt_count": 925,
+    "entry_count": 946,
+    "passed_receipt_count": 946,
+    "receipt_count": 946,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
