@@ -83,7 +83,10 @@ For diagnosis, its constituent commands are:
 - Require 66 executed stage receipts with no skips: all eight Chicago cases plus
   `packaged-erv-pv-openings` under the pinned Tampa, Golden, and San Francisco
   EPWs. Track only runtime-relative paths, SHA-256 values, and `LOCATION` header
-  receipts; weather payloads must not enter release artifacts.
+  receipts in engineering compatibility evidence and reports; those evidence
+  artifacts must not contain EPW bytes. The SimpleDragon product package
+  intentionally contains the exact pinned compressed KoreanTMY archive, while
+  directly expanded EPW files remain excluded from every product package.
 - Require zero unregistered `Severe` and `Fatal` EnergyPlus diagnostics in both
   engines. An allowed diagnostic must match its normalized title and count
   exactly, and every diagnostic or `not_verified` limitation must reference an
