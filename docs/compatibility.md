@@ -39,6 +39,15 @@ expanded IDF separately and records path-level GRR numeric errors and warning di
 `artifacts/reports/engineering-compatibility.json`.
 `-AllowDifferences` is a development-only reporting mode and is never evidence of compatibility.
 
+Every push and pull request runs the compatibility reporter regression suite and the same strict
+eight-case paired EnergyPlus gate on Windows. CI prepares the hash-pinned EnergyPlus 24.2 runtime,
+IDD, and ExpandObjects through `dev.cmd setup`; the gate then requires and hash-checks its pinned
+EPW before either engine runs. An immutable Actions cache avoids repeated runtime downloads, while
+setup still revalidates restored runtime files. The oracle job reuses its single reference
+preparation and restores only the compatibility runner project graph. Any available engineering
+report and the setup, oracle, and compatibility diagnostic logs are retained even when a gate
+fails.
+
 Numeric comparisons use `|a-b| <= absolute + relative * max(|a|, |b|)`.
 The tracked case manifest is authoritative: IDF fields use absolute and relative
 `1e-9`; GRR values use absolute `0.01` and relative `0.001`; values whose

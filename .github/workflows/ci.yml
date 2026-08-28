@@ -23,6 +23,12 @@ jobs:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      - name: Restore pinned EnergyPlus runtime cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .tools/energyplus/24.2.0-94a887817b
+          key: energyplus-windows-24.2.0-94a887817b-26c7c22b731f54031626750284c8b613fb8f03c3aa56b6bc7ec65b6bf8668df1
+
       - name: Bootstrap pinned local environment
         shell: powershell
         run: .\dev.cmd setup -SkipPythonInstall -InstallEnergyPlus -RequireEnergyPlus
@@ -52,9 +58,9 @@ jobs:
           retention-days: 14
 
   python-reference:
-    name: Verify pinned Python oracle
+    name: Verify Python oracle and paired EnergyPlus
     runs-on: windows-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
       - name: Check out source
@@ -66,6 +72,16 @@ jobs:
           python-version: 3.12.7
           check-latest: false
 
+      - name: Run compatibility reporter regression tests
+        shell: cmd
+        run: tests\CompatibilityRunner\run-tests.cmd
+
+      - name: Restore pinned EnergyPlus runtime cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .tools/energyplus/24.2.0-94a887817b
+          key: energyplus-windows-24.2.0-94a887817b-26c7c22b731f54031626750284c8b613fb8f03c3aa56b6bc7ec65b6bf8668df1
+
       - name: Bootstrap local configuration
         shell: powershell
         run: .\dev.cmd setup -SkipRestore -InstallEnergyPlus -RequireEnergyPlus
@@ -74,11 +90,75 @@ jobs:
         shell: powershell
         run: .\dev.cmd reference -Mode Verify
 
-      - name: Upload oracle logs on failure
-        if: failure()
+      # Reference preparation above is reused. Omitting -NoRestore limits the
+      # second job to restoring the compatibility runner's project graph rather
+      # than restoring the full solution a second time.
+      - name: Run strict eight-case paired EnergyPlus gate
+        shell: powershell
+        run: .\dev.cmd compatibility -SkipReferencePreparation
+
+      - name: Require exact clean 8x6 compatibility evidence
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $reportPath = 'artifacts/reports/engineering-compatibility.json'
+          if (-not (Test-Path -LiteralPath $reportPath -PathType Leaf)) {
+            throw "Engineering compatibility report is missing: '$reportPath'."
+          }
+
+          $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
+          $cases = @($report.cases)
+          if ([string] $report.schema -cne 'goniegonie.dragons.engineering-compatibility-report.v1' -or
+              -not [bool] $report.passed -or
+              [int] $report.declared_case_count -ne 8 -or
+              [int] $report.executed_case_count -ne 8 -or
+              [int] $report.passed_case_count -ne 8 -or
+              [int] $report.failed_case_count -ne 0 -or
+              [int] $report.skip_count -ne 0 -or
+              $cases.Count -ne 8 -or
+              @($cases | Where-Object {
+                -not [bool] $_.passed -or
+                [int] $_.skip_count -ne 0 -or
+                @($_.skipped_stages).Count -ne 0
+              }).Count -ne 0) {
+            throw 'Engineering compatibility report is incomplete, skipped, or failed.'
+          }
+
+          $requiredStages = @(
+            'grm_cross_read',
+            'authoring_idf',
+            'expanded_idf',
+            'energyplus',
+            'grr',
+            'warnings'
+          ) | Sort-Object
+          foreach ($case in $cases) {
+            $declared = @($case.declared_stages | ForEach-Object { [string] $_ } | Sort-Object)
+            $executed = @($case.executed_stages | ForEach-Object { [string] $_ } | Sort-Object)
+            if (@(Compare-Object -ReferenceObject $requiredStages -DifferenceObject $declared).Count -ne 0 -or
+                @(Compare-Object -ReferenceObject $requiredStages -DifferenceObject $executed).Count -ne 0) {
+              throw "Engineering case '$($case.id)' did not declare and execute the exact six stages."
+            }
+          }
+
+          $provenance = $report.port_provenance
+          if ($null -eq $provenance -or
+              [string] $provenance.schema -cne 'goniegonie.dragons.engineering-port-provenance.v1' -or
+              [string] $provenance.git.commit -cne $env:GITHUB_SHA -or
+              $provenance.git.dirty -isnot [bool] -or
+              [bool] $provenance.git.dirty) {
+            throw 'Engineering compatibility evidence is not bound to the clean CI commit.'
+          }
+
+      - name: Upload CI compatibility evidence and logs
+        if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: python-reference-logs-${{ github.sha }}
-          path: temp/reference/logs/
+          name: engineering-compatibility-${{ github.sha }}
+          path: |
+            artifacts/reports/engineering-compatibility.json
+            temp/compatibility/logs/
+            temp/reference/logs/
+            temp/logs/
           if-no-files-found: warn
           retention-days: 14
