@@ -30,7 +30,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(420, len(configuration.exceptions))
+        self.assertEqual(452, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -44,16 +44,16 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(252, len(compatibility.needs_reverification))
+        self.assertEqual(193, len(compatibility.needs_reverification))
         self.assertEqual(
-            324,
+            351,
             sum(
                 entry.classification == "equivalent"
                 for entry in compatibility.matrix.entries
             ),
         )
         self.assertEqual(
-            414,
+            446,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:00d7b6051248e3e204fb55c816e1c170652b94039fcf58e0d65cab2ad2ce46c1",
+            "sha256:6173fe85f6ef70f46b62fa4cdd7405025d322deb4686b3a192f645aad1657360",
             compatibility.matrix.content_sha256,
         )
-        self.assertEqual(738, len(symbol_evidence.entries))
-        self.assertEqual(738, len(symbol_evidence.receipts))
+        self.assertEqual(797, len(symbol_evidence.entries))
+        self.assertEqual(797, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:db8e1ae72e7ac18ec3ed9eba58884f8181f8c26d803f088dc26c70feba17b971",
+            "sha256:6e6dcdbd0185134262e0291f0631b49e3a1f8fea835ebb670832e5e9ae9bcc02",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -79,6 +79,32 @@ class ConfigurationTests(unittest.TestCase):
                 for entry in compatibility.matrix.entries
             ),
         )
+
+        source_tower_fixture_path = (
+            REPOSITORY_ROOT
+            / "fixtures/reference/python-0.7.0/dragon-hvac-source-tower-core-oracle.json"
+        )
+        source_tower_fixture = json.loads(
+            source_tower_fixture_path.read_text(encoding="utf-8")
+        )
+        source_tower_contract = source_tower_fixture["consumer_contract"]
+        source_tower_targets = tuple(source_tower_fixture["target_receipts"])
+        source_tower_target_indices = tuple(
+            item["inventory_index"] for item in source_tower_targets
+        )
+        source_tower_exception_ids = set(
+            source_tower_contract["adaptations"].values()
+        )
+        source_tower_evidence_entries = tuple(
+            item
+            for item in symbol_evidence.entries
+            if item.receipts[0].identifier.startswith(
+                "dragon-hvac-source-tower-core-"
+            )
+        )
+        self.assertEqual(59, len(source_tower_target_indices))
+        self.assertEqual(32, len(source_tower_exception_ids))
+        self.assertEqual(59, len(source_tower_evidence_entries))
 
         by_key = compatibility.matrix.entries_by_key
         numeric_indices = (
@@ -2590,6 +2616,9 @@ class ConfigurationTests(unittest.TestCase):
                 and not item.receipts[0].identifier.startswith(
                     "epsimple-hvac-other-systems-"
                 )
+                and not item.receipts[0].identifier.startswith(
+                    "dragon-hvac-source-tower-core-"
+                )
                 for item in symbol_evidence.entries
             ),
         )
@@ -2927,6 +2956,12 @@ class ConfigurationTests(unittest.TestCase):
                     "epsimple-hvac-other-systems-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "dragon-hvac-source-tower-core-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -2935,6 +2970,7 @@ class ConfigurationTests(unittest.TestCase):
                 item.identifier
                 not in model_core_exception_ids | result_exception_ids
                 and item.upstream_path != "src/epsimple/core/hvac.py"
+                and item.identifier not in source_tower_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -4210,6 +4246,12 @@ class ConfigurationTests(unittest.TestCase):
                     "epsimple-hvac-other-systems-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "dragon-hvac-source-tower-core-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -4224,6 +4266,7 @@ class ConfigurationTests(unittest.TestCase):
                 and not item.identifier.startswith(
                     "reviewed-native-immutable-other-system-and-aggregate-route-"
                 )
+                and item.identifier not in source_tower_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -4538,6 +4581,12 @@ class ConfigurationTests(unittest.TestCase):
                     "epsimple-hvac-other-systems-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "dragon-hvac-source-tower-core-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -4549,6 +4598,7 @@ class ConfigurationTests(unittest.TestCase):
                 and not item.identifier.startswith(
                     "reviewed-native-immutable-other-system-and-aggregate-route-"
                 )
+                and item.identifier not in source_tower_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -4853,6 +4903,12 @@ class ConfigurationTests(unittest.TestCase):
                     "epsimple-hvac-other-systems-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "dragon-hvac-source-tower-core-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -4862,6 +4918,7 @@ class ConfigurationTests(unittest.TestCase):
                 and not item.identifier.startswith(
                     "reviewed-native-immutable-other-system-and-aggregate-route-"
                 )
+                and item.identifier not in source_tower_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -5110,11 +5167,17 @@ class ConfigurationTests(unittest.TestCase):
             set(other_contract["closure"]["target_symbols"]),
             {item.symbol for item in other_evidence_entries},
         )
-        self.assertEqual(721, len(symbol_evidence.entries) - len(other_evidence_entries))
+        self.assertEqual(
+            721,
+            len(symbol_evidence.entries)
+            - len(other_evidence_entries)
+            - len(source_tower_evidence_entries),
+        )
         self.assertEqual(
             412,
             sum(
                 item.identifier not in other_exception_ids
+                and item.identifier not in source_tower_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -5122,6 +5185,282 @@ class ConfigurationTests(unittest.TestCase):
             0,
             sum(
                 entry.path == "src/epsimple/core/hvac.py"
+                and entry.classification == "needs_reverification"
+                for entry in compatibility.matrix.entries
+            ),
+        )
+
+        source_tower_generator_path = (
+            REPOSITORY_ROOT
+            / "tools/python-reference/generate_dragon_hvac_source_tower_core_oracle.py"
+        )
+        source_tower_validator_path = (
+            REPOSITORY_ROOT
+            / "tests/PythonReference/test_dragon_hvac_source_tower_core_oracle.py"
+        )
+        source_tower_test_path = (
+            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/"
+            "SourceTowerCoreOracleParityTests.cs"
+        )
+        source_tower_test_symbol = (
+            "GonieGonie.InvisibleDragon.Tests.Hvac.SourceTowerCoreOracleParityTests."
+            "MatchesPinnedSourceTowerCoreThroughProductionPublicRoutes"
+        )
+        source_tower_fixture_sha256 = (
+            "sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5"
+        )
+        source_tower_generator_sha256 = (
+            "sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5"
+        )
+        source_tower_validator_sha256 = (
+            "sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058"
+        )
+        source_tower_test_sha256 = (
+            "sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6"
+        )
+        for pinned_path, expected_sha256 in (
+            (source_tower_fixture_path, source_tower_fixture_sha256),
+            (source_tower_generator_path, source_tower_generator_sha256),
+            (source_tower_validator_path, source_tower_validator_sha256),
+            (REPOSITORY_ROOT / source_tower_test_path, source_tower_test_sha256),
+        ):
+            self.assertEqual(
+                expected_sha256,
+                "sha256:" + hashlib.sha256(pinned_path.read_bytes()).hexdigest(),
+                pinned_path,
+            )
+
+        source_tower_closure = source_tower_contract["closure"]
+        self.assertEqual(source_tower_target_indices, tuple(source_tower_closure["target_indices"]))
+        self.assertEqual(59, source_tower_closure["target_count"])
+        self.assertEqual(15, source_tower_closure["adjacent_count"])
+        self.assertEqual(174, source_tower_closure["source_declaration_count"])
+        self.assertEqual(74, source_tower_closure["source_tower_family_count"])
+        self.assertTrue(source_tower_closure["exact_one_case_target_partition"])
+        self.assertTrue(source_tower_closure["full_hvac_source_partition"])
+        self.assertTrue(source_tower_closure["full_source_tower_family_closure"])
+        self.assertEqual(
+            {"equivalent": 27, "exception": 32},
+            source_tower_contract["classification_counts"],
+        )
+        self.assertEqual(10, source_tower_contract["case_count"])
+        self.assertEqual(10, len(source_tower_fixture["cases"]))
+        self.assertEqual(
+            set(range(641, 815)),
+            set(source_tower_target_indices)
+            | set(source_tower_closure["adjacent_indices"])
+            | set(source_tower_closure["deferred_indices"]),
+        )
+
+        source_tower_case_by_symbol = {}
+        for case in source_tower_fixture["cases"]:
+            for symbol in case["target_symbols"]:
+                self.assertNotIn(symbol, source_tower_case_by_symbol)
+                source_tower_case_by_symbol[symbol] = (case["code"], case["id"])
+        self.assertEqual(
+            set(source_tower_closure["target_symbols"]),
+            set(source_tower_case_by_symbol),
+        )
+
+        source_tower_test_bytes = (
+            REPOSITORY_ROOT / source_tower_test_path
+        ).read_bytes()
+        source_tower_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            source_tower_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(source_tower_hash_block)
+        assert source_tower_hash_block is not None
+        source_tower_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                source_tower_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(59, len(source_tower_output_hashes))
+        self.assertEqual(59, len(set(source_tower_output_hashes)))
+
+        def expected_source_tower_implementation(
+            symbol: str,
+            native_route: str,
+        ) -> tuple[str, str]:
+            if symbol.startswith(("AbsorptionChiller", "Chiller", "CompressorType")):
+                implementation_path = (
+                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs"
+                )
+            elif symbol.startswith(("CoolingTower", "Closed", "Open")):
+                implementation_path = (
+                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "CoolingTowers.cs"
+                )
+            elif symbol.startswith("GeothermalHeatPump"):
+                implementation_path = (
+                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "GeothermalHeatPump.cs"
+                )
+            elif symbol == "SourceSystem.idf_terminalunitlistname" or symbol.startswith(
+                ("Boiler", "HeatPump")
+            ):
+                implementation_path = (
+                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "SourceSystems.cs"
+                )
+            else:
+                implementation_path = (
+                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "HvacAbstractions.cs"
+                )
+
+            if ".__init__" in symbol or "." not in symbol:
+                owner = symbol.split(".", 1)[0]
+                implementation_symbol = f"GonieGonie.InvisibleDragon.Hvac.{owner}"
+            elif "ToIdfObjects(...) ->" in native_route:
+                owner = symbol.split(".", 1)[0]
+                implementation_symbol = (
+                    f"GonieGonie.InvisibleDragon.Hvac.{owner}.ToIdfObjects"
+                )
+            else:
+                implementation_symbol = native_route
+                if "(" in implementation_symbol:
+                    implementation_symbol = implementation_symbol.split("(", 1)[0]
+            if symbol == "GeothermalHeatPump.idf_objtypename":
+                implementation_symbol = (
+                    "GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump"
+                )
+            return implementation_path, implementation_symbol
+
+        self.assertEqual(
+            set(source_tower_contract["adaptations"]),
+            {
+                item.upstream_symbol
+                for item in configuration.exceptions
+                if item.identifier in source_tower_exception_ids
+            },
+        )
+        for target, expected_output_hash in zip(
+            source_tower_targets,
+            source_tower_output_hashes,
+            strict=True,
+        ):
+            index = target["inventory_index"]
+            symbol = target["symbol"]
+            key = (target["path"], symbol)
+            inventory_symbol = compatibility.inventory.symbols[index]
+            expected_descriptor = dict(target)
+            expected_descriptor.pop("inventory_index")
+            self.assertEqual(expected_descriptor, inventory_symbol.to_data(), symbol)
+            classification = source_tower_contract["classifications"][symbol]
+            exception_id = source_tower_contract["adaptations"].get(symbol)
+            assertion_id = source_tower_contract["assertion_ids"][symbol]
+            native_route = source_tower_contract["native_routes"][symbol]
+            code, case_id = source_tower_case_by_symbol[symbol]
+
+            entry = compatibility.matrix.entries[index]
+            self.assertEqual(key, entry.key, symbol)
+            self.assertEqual(classification, entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            expected_references = [
+                f"upstream/symbol-evidence.json#{assertion_id}"
+            ]
+            if exception_id is not None:
+                expected_references.append(
+                    f"upstream/compatibility-exceptions.yml#{exception_id}"
+                )
+            self.assertEqual(tuple(sorted(expected_references)), entry.evidence, symbol)
+
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(
+                inventory_symbol.symbol_hash,
+                evidence_entry.upstream_symbol_hash,
+                symbol,
+            )
+            implementation_path, implementation_symbol = (
+                expected_source_tower_implementation(symbol, native_route)
+            )
+            implementation_sha256 = "sha256:" + hashlib.sha256(
+                (REPOSITORY_ROOT / implementation_path).read_bytes()
+            ).hexdigest()
+            self.assertEqual(
+                implementation_path,
+                evidence_entry.implementation_path,
+                symbol,
+            )
+            self.assertEqual(
+                implementation_symbol,
+                evidence_entry.implementation_symbol,
+                symbol,
+            )
+            self.assertEqual(
+                implementation_sha256,
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertEqual(source_tower_test_path, receipt.test_path, symbol)
+            self.assertEqual(source_tower_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(source_tower_test_sha256, receipt.test_source_sha256, symbol)
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+            for exact_binding in (
+                source_tower_fixture_sha256,
+                source_tower_generator_sha256,
+                source_tower_validator_sha256,
+                source_tower_test_sha256,
+                "commit 33d0be9",
+                implementation_path + "@" + implementation_sha256,
+                expected_output_hash,
+                assertion_id,
+                native_route,
+                code,
+                case_id,
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+            if exception_id is not None:
+                exception = exceptions_by_id[exception_id]
+                self.assertEqual(target["path"], exception.upstream_path, symbol)
+                self.assertEqual(symbol, exception.upstream_symbol, symbol)
+                self.assertEqual(
+                    inventory_symbol.symbol_hash,
+                    exception.upstream_symbol_hash,
+                    symbol,
+                )
+                self.assertIn(
+                    ("engineering_result", entry.rationale),
+                    exception.effects,
+                )
+                self.assertEqual(
+                    "accepted-native-api-adaptation",
+                    exception.approval,
+                    symbol,
+                )
+
+        self.assertEqual(
+            set(source_tower_contract["closure"]["target_symbols"]),
+            {item.symbol for item in source_tower_evidence_entries},
+        )
+        for symbol, expected_classification in source_tower_closure[
+            "adjacent_classifications"
+        ].items():
+            self.assertEqual(
+                expected_classification,
+                by_key[("src/idragon/dragon/hvac.py", symbol)].classification,
+                symbol,
+            )
+        self.assertEqual(
+            88,
+            sum(
+                entry.path == "src/idragon/dragon/hvac.py"
                 and entry.classification == "needs_reverification"
                 for entry in compatibility.matrix.entries
             ),

@@ -641,9 +641,9 @@
     "out_of_scope",
     "out_of_scope",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "equivalent",
     "exception",
     "needs_reverification",
     "out_of_scope",
@@ -652,82 +652,40 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "equivalent",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
     "out_of_scope",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "out_of_scope",
-    "out_of_scope",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
@@ -738,17 +696,59 @@
     "needs_reverification",
     "needs_reverification",
     "out_of_scope",
+    "out_of_scope",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "needs_reverification",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "equivalent",
+    "out_of_scope",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
     "exception",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "equivalent",
     "exception",
     "needs_reverification",
     "needs_reverification",
@@ -777,17 +777,17 @@
     "needs_reverification",
     "needs_reverification",
     "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
-    "needs_reverification",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
+    "equivalent",
+    "exception",
+    "equivalent",
+    "exception",
+    "exception",
+    "exception",
+    "exception",
     "exception",
     "needs_reverification",
     "exception",
@@ -1243,7 +1243,7 @@
     "exception",
     "exception"
   ],
-  "content_sha256": "sha256:00d7b6051248e3e204fb55c816e1c170652b94039fcf58e0d65cab2ad2ce46c1",
+  "content_sha256": "sha256:6173fe85f6ef70f46b62fa4cdd7405025d322deb4686b3a192f645aad1657360",
   "details": [
     {
       "evidence": [
@@ -6210,6 +6210,31 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-641",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-641-3a1dd026"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-641",
+      "index": 641,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify AbsorptionChiller for exact fixture case A01 (dragon-hvac-source-tower-core.absorption-chiller-core) through GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller. Adaptation family validated-immutable-entity-id-construction-641 is represented by exact compatibility exception validated-immutable-entity-id-construction-641. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs@sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be are fail-closed bindings. The trusted evidence output is sha256:bc1a28f636fcaf3b10171bc76537b14b651108ac4b2064a26632908d20a4c381. Only inventory index 641 and assertion dragon-hvac-source-tower-core-641-3a1dd026 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-642",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-642-14ca97c1"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-642",
+      "index": 642,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify AbsorptionChiller.__init__ for exact fixture case A01 (dragon-hvac-source-tower-core.absorption-chiller-core) through GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller(...). Adaptation family validated-immutable-entity-id-construction-642 is represented by exact compatibility exception validated-immutable-entity-id-construction-642. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs@sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be are fail-closed bindings. The trusted evidence output is sha256:aeb211a1b94ef18566c45702355c1fccdfb71c3ee5d2f769f4e901939372d1fe. Only inventory index 642 and assertion dragon-hvac-source-tower-core-642-14ca97c1 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-643-3e4cd4b3"
+      ],
+      "index": 643,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify AbsorptionChiller.idf_objtypename for exact fixture case A01 (dragon-hvac-source-tower-core.absorption-chiller-core) through GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller.IdfObjectType. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs@sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be are fail-closed bindings. The trusted evidence output is sha256:6701b6d84e136f96768379cfa9cf2ed54172b23ab66cc20e6f092b09e6389116. Only inventory index 643 and assertion dragon-hvac-source-tower-core-643-3e4cd4b3 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#legacy-context-absorption-chiller-idf-emission",
         "upstream/symbol-evidence.json#dragon-hvac-absorption-chiller-to-idf-object-17d5fb8a"
       ],
@@ -6223,6 +6248,31 @@
       ],
       "index": 646,
       "rationale": "No upstream production call site deep-copies an IDragon AirHandlingUnit. Python copy syntax can be excluded; shared source identity/reference topology remains covered by the native model, persistence, and authored-IDF gates."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-652",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-652-fef90e4c"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-652",
+      "index": 652,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Boiler for exact fixture case B01 (dragon-hvac-source-tower-core.boiler-core) through GonieGonie.InvisibleDragon.Hvac.Boiler. Adaptation family validated-immutable-entity-id-construction-652 is represented by exact compatibility exception validated-immutable-entity-id-construction-652. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs@sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e are fail-closed bindings. The trusted evidence output is sha256:40c9f3a7284afe7ee2539874f1cedc713bce7b263855cd828ebbb2c5875d8881. Only inventory index 652 and assertion dragon-hvac-source-tower-core-652-fef90e4c are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-653",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-653-735f922d"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-653",
+      "index": 653,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Boiler.__init__ for exact fixture case B01 (dragon-hvac-source-tower-core.boiler-core) through GonieGonie.InvisibleDragon.Hvac.Boiler(...). Adaptation family validated-immutable-entity-id-construction-653 is represented by exact compatibility exception validated-immutable-entity-id-construction-653. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs@sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e are fail-closed bindings. The trusted evidence output is sha256:d600a36f515159e4f9a7c235e6f6beb6c786489d6d5a4bc8fcdbbdea9f550fd1. Only inventory index 653 and assertion dragon-hvac-source-tower-core-653-735f922d are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-654-b97f1590"
+      ],
+      "index": 654,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Boiler.idf_objtypename for exact fixture case B01 (dragon-hvac-source-tower-core.boiler-core) through GonieGonie.InvisibleDragon.Hvac.Boiler.IdfObjectType. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs@sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e are fail-closed bindings. The trusted evidence output is sha256:87a355fe652e5746db288ec7b59ac87e9c9856ac0287e6778bbbcdac9e438b84. Only inventory index 654 and assertion dragon-hvac-source-tower-core-654-b97f1590 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -6244,12 +6294,55 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-657",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-657-610bd83a"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-657",
+      "index": 657,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Chiller for exact fixture case C01 (dragon-hvac-source-tower-core.chiller-core) through GonieGonie.InvisibleDragon.Hvac.Chiller. Adaptation family validated-immutable-entity-id-construction-657 is represented by exact compatibility exception validated-immutable-entity-id-construction-657. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs@sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be are fail-closed bindings. The trusted evidence output is sha256:1d2dc9a30e14dbf625851da7fc68472b444f7fcbe46c81d9f3290d291ba25503. Only inventory index 657 and assertion dragon-hvac-source-tower-core-657-610bd83a are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-658",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-658-65f8043a"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-658",
+      "index": 658,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Chiller.__init__ for exact fixture case C01 (dragon-hvac-source-tower-core.chiller-core) through GonieGonie.InvisibleDragon.Hvac.Chiller(...). Adaptation family validated-immutable-entity-id-construction-658 is represented by exact compatibility exception validated-immutable-entity-id-construction-658. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs@sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be are fail-closed bindings. The trusted evidence output is sha256:7dc0422f6167dd0d812e344abc8113b90e0cf031e97a7f8cfdf35ebfe6f7e1e4. Only inventory index 658 and assertion dragon-hvac-source-tower-core-658-65f8043a are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#safe-screw-reformulated-eir-type-659",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-659-4ab109ff"
+      ],
+      "exception_id": "safe-screw-reformulated-eir-type-659",
+      "index": 659,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Chiller.idf_objtypename for exact fixture case C01 (dragon-hvac-source-tower-core.chiller-core) through GonieGonie.InvisibleDragon.Hvac.Chiller.IdfObjectType. Adaptation family safe-screw-reformulated-eir-type-659 is represented by exact compatibility exception safe-screw-reformulated-eir-type-659. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs@sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be are fail-closed bindings. The trusted evidence output is sha256:8328fcb095f2d6322b2cee28dded80423ef9d66e13a3e25e8f5d851e8dd8d645. Only inventory index 659 and assertion dragon-hvac-source-tower-core-659-4ab109ff are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#legacy-context-chiller-idf-emission",
         "upstream/symbol-evidence.json#dragon-hvac-chiller-to-idf-object-fc75129f"
       ],
       "exception_id": "legacy-context-chiller-idf-emission",
       "index": 660,
       "rationale": "Trusted cross-language evidence verifies Chiller.to_idf_object across its exact 2-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-661",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-661-a4d512bc"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-661",
+      "index": 661,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify ClosedSingleSpeedCoolingTower for exact fixture case E01 (dragon-hvac-source-tower-core.cooling-tower-concrete-capacity) through GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower. Adaptation family validated-immutable-entity-id-construction-661 is represented by exact compatibility exception validated-immutable-entity-id-construction-661. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:2dc061b4551171409c8d5e77bacc98f35f33c2b4bf90b091ceaf6ba83fa0ace6. Only inventory index 661 and assertion dragon-hvac-source-tower-core-661-a4d512bc are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-662-4b2767cd"
+      ],
+      "index": 662,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify ClosedSingleSpeedCoolingTower.idf_objtypename for exact fixture case E01 (dragon-hvac-source-tower-core.cooling-tower-concrete-capacity) through GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower.IdfObjectType. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:15574b25447ef5f455226613946d11ef5710e468a45441066e618c14f83efbfa. Only inventory index 662 and assertion dragon-hvac-source-tower-core-662-4b2767cd are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -6262,12 +6355,56 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-664",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-664-a365cc0a"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-664",
+      "index": 664,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify ClosedTwoSpeedCoolingTower for exact fixture case E01 (dragon-hvac-source-tower-core.cooling-tower-concrete-capacity) through GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower. Adaptation family validated-immutable-entity-id-construction-664 is represented by exact compatibility exception validated-immutable-entity-id-construction-664. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:10138bd7c1582ab59dbd57a7eedef048927bc6d8c8e0cabfc2945f8634c22b2a. Only inventory index 664 and assertion dragon-hvac-source-tower-core-664-a365cc0a are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-665-648bc45c"
+      ],
+      "index": 665,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify ClosedTwoSpeedCoolingTower.idf_objtypename for exact fixture case E01 (dragon-hvac-source-tower-core.cooling-tower-concrete-capacity) through GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower.IdfObjectType. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:8a5d7f075f19e634c03565d53a34305981ca512ef9882f671241d6b39bba3918. Only inventory index 665 and assertion dragon-hvac-source-tower-core-665-648bc45c are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#cooling-tower-context-closed-two-speed-main-idf-emission",
         "upstream/symbol-evidence.json#dragon-hvac-closed-two-speed-cooling-tower-to-idf-main-object-30402683"
       ],
       "exception_id": "cooling-tower-context-closed-two-speed-main-idf-emission",
       "index": 666,
       "rationale": "Trusted cross-language evidence verifies ClosedTwoSpeedCoolingTower.to_idf_main_object across its exact 1-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-667-8785ee6d"
+      ],
+      "index": 667,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CompressorType for exact fixture case D01 (dragon-hvac-source-tower-core.compressor-enum) through GonieGonie.InvisibleDragon.Hvac.CompressorType. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs@sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be are fail-closed bindings. The trusted evidence output is sha256:bdd0f8c25abfac28f074e6de6c7b087b33a9a3fa8821a0950b896bf78f67fb97. Only inventory index 667 and assertion dragon-hvac-source-tower-core-667-8785ee6d are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-668-dfd51671"
+      ],
+      "index": 668,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CompressorType.RECIPROCATING for exact fixture case D01 (dragon-hvac-source-tower-core.compressor-enum) through GonieGonie.InvisibleDragon.Hvac.CompressorType.Reciprocating. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs@sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be are fail-closed bindings. The trusted evidence output is sha256:4835afd85c7b862895d2825f20d788be8d152c7a0f700212777f5d896c7036c5. Only inventory index 668 and assertion dragon-hvac-source-tower-core-668-dfd51671 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-669-2947a213"
+      ],
+      "index": 669,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CompressorType.SCREW for exact fixture case D01 (dragon-hvac-source-tower-core.compressor-enum) through GonieGonie.InvisibleDragon.Hvac.CompressorType.Screw. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs@sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be are fail-closed bindings. The trusted evidence output is sha256:56477ec89f388d4ca36d31124ef89eef2f8d404b9b6b5f0d1f0ba96750a75824. Only inventory index 669 and assertion dragon-hvac-source-tower-core-669-2947a213 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-670-5074351d"
+      ],
+      "index": 670,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CompressorType.TURBO for exact fixture case D01 (dragon-hvac-source-tower-core.compressor-enum) through GonieGonie.InvisibleDragon.Hvac.CompressorType.Turbo. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs@sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be are fail-closed bindings. The trusted evidence output is sha256:21c045692817e154d0757521742ceb11ac8c13cb0832dc0a0953c99ae6999b3d. Only inventory index 670 and assertion dragon-hvac-source-tower-core-670-5074351d are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -6284,6 +6421,99 @@
       "exception_id": "chiller-context-compressor-curve-idf-emission",
       "index": 672,
       "rationale": "Trusted cross-language evidence verifies CompressorType.to_idf_curve_object across its exact 3-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-673",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-673-4b07da75"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-673",
+      "index": 673,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTower for exact fixture case F01 (dragon-hvac-source-tower-core.cooling-tower-core-names) through GonieGonie.InvisibleDragon.Hvac.CoolingTower. Adaptation family validated-immutable-entity-id-construction-673 is represented by exact compatibility exception validated-immutable-entity-id-construction-673. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:0c558f1353f58b851e25bf91203622ec99428c1156326531b0b90ff3b91e1b1c. Only inventory index 673 and assertion dragon-hvac-source-tower-core-673-4b07da75 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-674",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-674-d388c8f3"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-674",
+      "index": 674,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTower.__init__ for exact fixture case F01 (dragon-hvac-source-tower-core.cooling-tower-core-names) through GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower(...), OpenTwoSpeedCoolingTower(...), ClosedSingleSpeedCoolingTower(...), ClosedTwoSpeedCoolingTower(...). Adaptation family validated-immutable-entity-id-construction-674 is represented by exact compatibility exception validated-immutable-entity-id-construction-674. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:9c495f90be94fe28c5ab393ab6c14b6e940284cad6cff9aa6da19dbb28bd0854. Only inventory index 674 and assertion dragon-hvac-source-tower-core-674-d388c8f3 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-675",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-675-b754f9c4"
+      ],
+      "exception_id": "public-context-emission-derived-name-675",
+      "index": 675,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTower.idf_get_demandbranchlistname for exact fixture case F01 (dragon-hvac-source-tower-core.cooling-tower-core-names) through GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-675 is represented by exact compatibility exception public-context-emission-derived-name-675. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:62e0c7cea00e4ccb8f34e20e947ea30b6e938695651c94e1d0112fd75741fe26. Only inventory index 675 and assertion dragon-hvac-source-tower-core-675-b754f9c4 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-676",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-676-482bcce0"
+      ],
+      "exception_id": "public-context-emission-derived-name-676",
+      "index": 676,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTower.idf_get_demandmixername for exact fixture case F01 (dragon-hvac-source-tower-core.cooling-tower-core-names) through GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-676 is represented by exact compatibility exception public-context-emission-derived-name-676. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:841286fc1045e46f606b24ec73f29ca909ff69b347e5ae98651c7c21fb625d78. Only inventory index 676 and assertion dragon-hvac-source-tower-core-676-482bcce0 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-677",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-677-bc43234b"
+      ],
+      "exception_id": "public-context-emission-derived-name-677",
+      "index": 677,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTower.idf_get_demandsplittername for exact fixture case F01 (dragon-hvac-source-tower-core.cooling-tower-core-names) through GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-677 is represented by exact compatibility exception public-context-emission-derived-name-677. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:7c094eaf2667b09063f464e89f1601b1cf2ea657090c63a02d88bbc644294ecd. Only inventory index 677 and assertion dragon-hvac-source-tower-core-677-bc43234b are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-678-7da2b907"
+      ],
+      "index": 678,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTower.idf_get_loopname for exact fixture case F01 (dragon-hvac-source-tower-core.cooling-tower-core-names) through GonieGonie.InvisibleDragon.Hvac.CoolingTower.LoopNameFor(SourceSystem). Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:03078e831f4fbec2793c859543ce0b49d8e81616e07c131285d458afd702751e. Only inventory index 678 and assertion dragon-hvac-source-tower-core-678-7da2b907 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-679-53dba42f"
+      ],
+      "index": 679,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTower.idf_get_objname for exact fixture case F01 (dragon-hvac-source-tower-core.cooling-tower-core-names) through GonieGonie.InvisibleDragon.Hvac.CoolingTower.ObjectNameFor(SourceSystem). Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:9ff1b97b3efd7be5e4359d78030377acc106fe50d270890c9df0661f08977bed. Only inventory index 679 and assertion dragon-hvac-source-tower-core-679-53dba42f are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-680",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-680-87efb2b8"
+      ],
+      "exception_id": "public-context-emission-derived-name-680",
+      "index": 680,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTower.idf_get_supplybranchlistname for exact fixture case F01 (dragon-hvac-source-tower-core.cooling-tower-core-names) through GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-680 is represented by exact compatibility exception public-context-emission-derived-name-680. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:ce3074f2c876d468cc11c1b99cc45d96be5c3a2b416586e6728461ba8ee4ad96. Only inventory index 680 and assertion dragon-hvac-source-tower-core-680-87efb2b8 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-681",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-681-8200f079"
+      ],
+      "exception_id": "public-context-emission-derived-name-681",
+      "index": 681,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTower.idf_get_supplymixername for exact fixture case F01 (dragon-hvac-source-tower-core.cooling-tower-core-names) through GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-681 is represented by exact compatibility exception public-context-emission-derived-name-681. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:033734835dc1d121ecb4e7e8f1a90b0714a8c37fdf8e011ec4c37b9f2e788be9. Only inventory index 681 and assertion dragon-hvac-source-tower-core-681-8200f079 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-682",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-682-c1e5599b"
+      ],
+      "exception_id": "public-context-emission-derived-name-682",
+      "index": 682,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTower.idf_get_supplysplittername for exact fixture case F01 (dragon-hvac-source-tower-core.cooling-tower-core-names) through GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-682 is represented by exact compatibility exception public-context-emission-derived-name-682. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:7a8fdbd84686e23ceee91486b7e63e60e4390757c9268c2c258efc6c307f907e. Only inventory index 682 and assertion dragon-hvac-source-tower-core-682-c1e5599b are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-683-65852008"
+      ],
+      "index": 683,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify CoolingTower.idf_objtypename for exact fixture case F01 (dragon-hvac-source-tower-core.cooling-tower-core-names) through GonieGonie.InvisibleDragon.Hvac.CoolingTower.IdfObjectType. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:a5dbd9b657185df3f23447e6629b7ba2663cfa3160371922735151da278c4441. Only inventory index 683 and assertion dragon-hvac-source-tower-core-683-65852008 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -6319,10 +6549,130 @@
     },
     {
       "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-726-66a9b58b"
+      ],
+      "index": 726,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel for exact fixture case G01 (dragon-hvac-source-tower-core.fuel-enum) through GonieGonie.InvisibleDragon.Hvac.Fuel. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:094a33cf546f4204ecc3669ae95d45d475efe20c970f093bfaf43831760dd834. Only inventory index 726 and assertion dragon-hvac-source-tower-core-726-66a9b58b are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-727-4d234c1e"
+      ],
+      "index": 727,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.COAL for exact fixture case G01 (dragon-hvac-source-tower-core.fuel-enum) through GonieGonie.InvisibleDragon.Hvac.Fuel.Coal. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:aee19b05578ce4bcccd8a6e0c79b3058cca11a87d374d9f62fa5412cfe131d69. Only inventory index 727 and assertion dragon-hvac-source-tower-core-727-4d234c1e are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-728-a3ee9ef5"
+      ],
+      "index": 728,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.DIESEL for exact fixture case G01 (dragon-hvac-source-tower-core.fuel-enum) through GonieGonie.InvisibleDragon.Hvac.Fuel.Diesel. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:81ea36680b46976ba70f30e0110e8ff8c868a6464c3fc3f632d427d7a5b56ec4. Only inventory index 728 and assertion dragon-hvac-source-tower-core-728-a3ee9ef5 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-729-8d1b877f"
+      ],
+      "index": 729,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.ELECTRICITY for exact fixture case G01 (dragon-hvac-source-tower-core.fuel-enum) through GonieGonie.InvisibleDragon.Hvac.Fuel.Electricity. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:6655c225bb5b527bdf9b3323c243d843b81ad92f31f81ed4ff0c30c4f4a88160. Only inventory index 729 and assertion dragon-hvac-source-tower-core-729-8d1b877f are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-730-b26b5808"
+      ],
+      "index": 730,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.FUELOILNO1 for exact fixture case G01 (dragon-hvac-source-tower-core.fuel-enum) through GonieGonie.InvisibleDragon.Hvac.Fuel.FuelOilNo1. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:38ca9f00447153d0ea614ab4a6e4eb1909aab9e10cd35e246b57c3f2711ed691. Only inventory index 730 and assertion dragon-hvac-source-tower-core-730-b26b5808 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-731-1f61e381"
+      ],
+      "index": 731,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.FUELOILNO2 for exact fixture case G01 (dragon-hvac-source-tower-core.fuel-enum) through GonieGonie.InvisibleDragon.Hvac.Fuel.FuelOilNo2. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:02ef27074ea6471261b16e2109d10af6c897913719eceb02b1f0d930cf75f47a. Only inventory index 731 and assertion dragon-hvac-source-tower-core-731-1f61e381 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-732-7fc1afe4"
+      ],
+      "index": 732,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.GASOLINE for exact fixture case G01 (dragon-hvac-source-tower-core.fuel-enum) through GonieGonie.InvisibleDragon.Hvac.Fuel.Gasoline. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:5f9ae6cb39487213c351869c537a2c459b899e1d0dff428cd36b5afb971e5062. Only inventory index 732 and assertion dragon-hvac-source-tower-core-732-7fc1afe4 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-733-5afbce03"
+      ],
+      "index": 733,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.NATURALGAS for exact fixture case G01 (dragon-hvac-source-tower-core.fuel-enum) through GonieGonie.InvisibleDragon.Hvac.Fuel.NaturalGas. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:6ca47cf873a95d0cbc4763d340ed40cae3384fb32d828d96fbadb882a118bf67. Only inventory index 733 and assertion dragon-hvac-source-tower-core-733-5afbce03 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-734-42a148cb"
+      ],
+      "index": 734,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.OTHERFUEL1 for exact fixture case G01 (dragon-hvac-source-tower-core.fuel-enum) through GonieGonie.InvisibleDragon.Hvac.Fuel.OtherFuel1. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:0958d8b26fc0cb9c878de48e93cd7c3f02e6543949ed899066a3572c4945952c. Only inventory index 734 and assertion dragon-hvac-source-tower-core-734-42a148cb are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-735-914d30a5"
+      ],
+      "index": 735,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.OTHERFUEL2 for exact fixture case G01 (dragon-hvac-source-tower-core.fuel-enum) through GonieGonie.InvisibleDragon.Hvac.Fuel.OtherFuel2. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:dc550253fb8e475b93a63bad6283f2039bf631869eb42e0c77a61fb96c826c85. Only inventory index 735 and assertion dragon-hvac-source-tower-core-735-914d30a5 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-736-dea3dce6"
+      ],
+      "index": 736,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify Fuel.PROPANE for exact fixture case G01 (dragon-hvac-source-tower-core.fuel-enum) through GonieGonie.InvisibleDragon.Hvac.Fuel.Propane. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:427aa142b3ab92939f66418c978c115bd7aee0471b358258ad257d7d6fc5b8f6. Only inventory index 736 and assertion dragon-hvac-source-tower-core-736-dea3dce6 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
         "upstream/scope-decisions.json#scope-src-idragon-dragon-hvac-py-fuel-str-f40e4929"
       ],
       "index": 737,
       "rationale": "The reviewed call sites use this result only for human summaries/errors (or do not call it at all); engineering tokens for this type are obtained through .value, explicit mapping, or a separately retained writer symbol. Console/display formatting is outside scope."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#functional-native-heatpump-route-for-incomplete-abstract-upstream-738",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-738-5016ceb5"
+      ],
+      "exception_id": "functional-native-heatpump-route-for-incomplete-abstract-upstream-738",
+      "index": 738,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify GeothermalHeatPump for exact fixture case H01 (dragon-hvac-source-tower-core.geothermal-heat-pump-core) through GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump. Adaptation family functional-native-heatpump-route-for-incomplete-abstract-upstream-738 is represented by exact compatibility exception functional-native-heatpump-route-for-incomplete-abstract-upstream-738. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/GeothermalHeatPump.cs@sha256:40fcb9c008b953cf54dfa4581c95af4073e0040fc9efcd62598e056c5b2ca80a are fail-closed bindings. The trusted evidence output is sha256:cbfd7d70e3e657b538b8f9220e8b2725ab423e9621d09bcae043ee3d88bd5628. Only inventory index 738 and assertion dragon-hvac-source-tower-core-738-5016ceb5 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#functional-native-heatpump-route-for-incomplete-abstract-upstream-739",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-739-0189ef90"
+      ],
+      "exception_id": "functional-native-heatpump-route-for-incomplete-abstract-upstream-739",
+      "index": 739,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify GeothermalHeatPump.idf_objtypename for exact fixture case H01 (dragon-hvac-source-tower-core.geothermal-heat-pump-core) through GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump.IdfObjectType. Adaptation family functional-native-heatpump-route-for-incomplete-abstract-upstream-739 is represented by exact compatibility exception functional-native-heatpump-route-for-incomplete-abstract-upstream-739. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/GeothermalHeatPump.cs@sha256:40fcb9c008b953cf54dfa4581c95af4073e0040fc9efcd62598e056c5b2ca80a are fail-closed bindings. The trusted evidence output is sha256:3094b7d489b0b3191c5cd52d2951a5486135522c954353789017705a5af9d650. Only inventory index 739 and assertion dragon-hvac-source-tower-core-739-0189ef90 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-740",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-740-f862c5a4"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-740",
+      "index": 740,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify HeatPump for exact fixture case I01 (dragon-hvac-source-tower-core.heat-pump-core) through GonieGonie.InvisibleDragon.Hvac.HeatPump. Adaptation family validated-immutable-entity-id-construction-740 is represented by exact compatibility exception validated-immutable-entity-id-construction-740. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs@sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e are fail-closed bindings. The trusted evidence output is sha256:64730ec0ae1de813f22d3dd75fced6b58d191869ee2f768f1e5ec1daa36adc27. Only inventory index 740 and assertion dragon-hvac-source-tower-core-740-f862c5a4 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-741",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-741-498d6fec"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-741",
+      "index": 741,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify HeatPump.__init__ for exact fixture case I01 (dragon-hvac-source-tower-core.heat-pump-core) through GonieGonie.InvisibleDragon.Hvac.HeatPump(...). Adaptation family validated-immutable-entity-id-construction-741 is represented by exact compatibility exception validated-immutable-entity-id-construction-741. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs@sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e are fail-closed bindings. The trusted evidence output is sha256:1fe7c3b8b9eea03f8a330ef796d156cdeac881b614a7bd2edbf4608638bbf89d. Only inventory index 741 and assertion dragon-hvac-source-tower-core-741-498d6fec are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-742-66eef776"
+      ],
+      "index": 742,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify HeatPump.idf_objtypename for exact fixture case I01 (dragon-hvac-source-tower-core.heat-pump-core) through GonieGonie.InvisibleDragon.Hvac.HeatPump.IdfObjectType. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs@sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e are fail-closed bindings. The trusted evidence output is sha256:90ed5c72378b5508ce56121bdc73f9f32d99c46fbb4627731ed778c94bf858f0. Only inventory index 742 and assertion dragon-hvac-source-tower-core-742-66eef776 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -6335,12 +6685,44 @@
     },
     {
       "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-744",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-744-219b5b22"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-744",
+      "index": 744,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify OpenSingleSpeedCoolingTower for exact fixture case E01 (dragon-hvac-source-tower-core.cooling-tower-concrete-capacity) through GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower. Adaptation family validated-immutable-entity-id-construction-744 is represented by exact compatibility exception validated-immutable-entity-id-construction-744. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:845e17b14a41f826705416c0a4ecfc993511a704b911ceb117cadefae69c69f7. Only inventory index 744 and assertion dragon-hvac-source-tower-core-744-219b5b22 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-745-7ba0b88b"
+      ],
+      "index": 745,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify OpenSingleSpeedCoolingTower.idf_objtypename for exact fixture case E01 (dragon-hvac-source-tower-core.cooling-tower-concrete-capacity) through GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower.IdfObjectType. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:1dfe8fc8a09d85f2679534d3e6bb8d69179e94a3239b586f122ee52e9ff194f6. Only inventory index 745 and assertion dragon-hvac-source-tower-core-745-7ba0b88b are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
         "upstream/compatibility-exceptions.yml#cooling-tower-context-open-single-speed-main-idf-emission",
         "upstream/symbol-evidence.json#dragon-hvac-open-single-speed-cooling-tower-to-idf-main-object-102bccd9"
       ],
       "exception_id": "cooling-tower-context-open-single-speed-main-idf-emission",
       "index": 746,
       "rationale": "Trusted cross-language evidence verifies OpenSingleSpeedCoolingTower.to_idf_main_object across its exact 1-case bounded common-valid-state SourceSystem-family slice: ordered object families, exhaustive upstream-field classification against native compact/default/context behavior, exact native and reflection linkage, deterministic repeated values, fresh distinct mutable result lists and child objects, and unchanged source state. Collection immutability, constructors, properties and enum closure, invalid or non-finite behavior, isolated IdfObject policy, unrelated source families and EnergyModel parent orchestration are explicitly not claimed."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-747",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-747-3946064c"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-747",
+      "index": 747,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify OpenTwoSpeedCoolingTower for exact fixture case E01 (dragon-hvac-source-tower-core.cooling-tower-concrete-capacity) through GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower. Adaptation family validated-immutable-entity-id-construction-747 is represented by exact compatibility exception validated-immutable-entity-id-construction-747. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:d97cb13010e4df1f7f23395dbc703763b66561e403e096afec65ce330c91c464. Only inventory index 747 and assertion dragon-hvac-source-tower-core-747-3946064c are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-748-3692dbe4"
+      ],
+      "index": 748,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify OpenTwoSpeedCoolingTower.idf_objtypename for exact fixture case E01 (dragon-hvac-source-tower-core.cooling-tower-concrete-capacity) through GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower.IdfObjectType. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs@sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07 are fail-closed bindings. The trusted evidence output is sha256:604c14e7103c3bfbae162dcf7480662c43a1815ba06931710e1e5eccdb569947. Only inventory index 748 and assertion dragon-hvac-source-tower-core-748-3692dbe4 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -6366,6 +6748,101 @@
       "exception_id": "compact-native-photovoltaic-idf-emission",
       "index": 761,
       "rationale": "Trusted cross-language evidence verifies all 33 native-present fields, exact six-object order and linkage, boundary and custom inputs, default and custom effective-area ratios, square-root geometry, freshness, determinism and source immutability across the bounded valid domain. The 164 compact omissions are exhaustively partitioned into 158 Python None or blank fields and six independently verified official EnergyPlus 24.2 IDD defaults, including the 145-None extensible generator tail; the class, constructor, properties, invalid and non-finite state, validation behavior, isolated IdfObject policy and parent EnergyModel orchestration remain separately unresolved."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#validated-immutable-entity-id-construction-777",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-777-d8fcbe86"
+      ],
+      "exception_id": "validated-immutable-entity-id-construction-777",
+      "index": 777,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem for exact fixture case J01 (dragon-hvac-source-tower-core.source-system-core-names) through GonieGonie.InvisibleDragon.Hvac.SourceSystem. Adaptation family validated-immutable-entity-id-construction-777 is represented by exact compatibility exception validated-immutable-entity-id-construction-777. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:d7ca39afc098eaf98e89c946acfd95ccf4e961fbd17c71377004381d0dca921c. Only inventory index 777 and assertion dragon-hvac-source-tower-core-777-d8fcbe86 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-778",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-778-491d3dcc"
+      ],
+      "exception_id": "public-context-emission-derived-name-778",
+      "index": 778,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem.idf_demandbranchlistname for exact fixture case J01 (dragon-hvac-source-tower-core.source-system-core-names) through GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-778 is represented by exact compatibility exception public-context-emission-derived-name-778. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:1b813e0640336dc2dfa8f519ab141bb55e9e02d1087e22e924288a13b451e3f2. Only inventory index 778 and assertion dragon-hvac-source-tower-core-778-491d3dcc are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-779",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-779-dd1f2652"
+      ],
+      "exception_id": "public-context-emission-derived-name-779",
+      "index": 779,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem.idf_demandmixername for exact fixture case J01 (dragon-hvac-source-tower-core.source-system-core-names) through GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-779 is represented by exact compatibility exception public-context-emission-derived-name-779. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:1b94cd0da6569ded3e8ca3fb7fc564ed62bf95703bee621618fba0c9bbf2da9f. Only inventory index 779 and assertion dragon-hvac-source-tower-core-779-dd1f2652 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-780",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-780-9fcd3f6d"
+      ],
+      "exception_id": "public-context-emission-derived-name-780",
+      "index": 780,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem.idf_demandsplittername for exact fixture case J01 (dragon-hvac-source-tower-core.source-system-core-names) through GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-780 is represented by exact compatibility exception public-context-emission-derived-name-780. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:06c21470a97110c43477e825462d7cb82548daa25bece4183e13c102c577e1e1. Only inventory index 780 and assertion dragon-hvac-source-tower-core-780-9fcd3f6d are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-781-ee8dc7f9"
+      ],
+      "index": 781,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem.idf_loopname for exact fixture case J01 (dragon-hvac-source-tower-core.source-system-core-names) through GonieGonie.InvisibleDragon.Hvac.SourceSystem.LoopName. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:8efb6738afac9ca75f9da37881e4cd44b95e12164b26adffc34f66dd36d42745. Only inventory index 781 and assertion dragon-hvac-source-tower-core-781-ee8dc7f9 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#concrete-native-idf-object-name-overrides-782",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-782-5b92cad7"
+      ],
+      "exception_id": "concrete-native-idf-object-name-overrides-782",
+      "index": 782,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem.idf_objname for exact fixture case J01 (dragon-hvac-source-tower-core.source-system-core-names) through GonieGonie.InvisibleDragon.Hvac.SourceSystem.IdfObjectName. Adaptation family concrete-native-idf-object-name-overrides-782 is represented by exact compatibility exception concrete-native-idf-object-name-overrides-782. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:7a0c7be6c444b39ad0693797b0b13a74c15a45e9340b3a1d66eb9b01bd316b7d. Only inventory index 782 and assertion dragon-hvac-source-tower-core-782-5b92cad7 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-783-65852008"
+      ],
+      "index": 783,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem.idf_objtypename for exact fixture case J01 (dragon-hvac-source-tower-core.source-system-core-names) through GonieGonie.InvisibleDragon.Hvac.SourceSystem.IdfObjectType. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:b78978e5dac52d4869bc1fa012e3468d059c4db8d4baa3e0877af72117c3f5a4. Only inventory index 783 and assertion dragon-hvac-source-tower-core-783-65852008 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-784",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-784-6cd0d336"
+      ],
+      "exception_id": "public-context-emission-derived-name-784",
+      "index": 784,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem.idf_supplybranchlistname for exact fixture case J01 (dragon-hvac-source-tower-core.source-system-core-names) through GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-784 is represented by exact compatibility exception public-context-emission-derived-name-784. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:61a3032a682ed25f5e2226eb3550570f27e1fbf1d71f772b31d03a29fd8d6c83. Only inventory index 784 and assertion dragon-hvac-source-tower-core-784-6cd0d336 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-785",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-785-b62cdf0b"
+      ],
+      "exception_id": "public-context-emission-derived-name-785",
+      "index": 785,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem.idf_supplymixername for exact fixture case J01 (dragon-hvac-source-tower-core.source-system-core-names) through GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-785 is represented by exact compatibility exception public-context-emission-derived-name-785. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:29bb671190876fbce6f1e81bc1eca314fdfb01136ee16dc4ddb18bc09ae47f2f. Only inventory index 785 and assertion dragon-hvac-source-tower-core-785-b62cdf0b are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-786",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-786-8ad08f57"
+      ],
+      "exception_id": "public-context-emission-derived-name-786",
+      "index": 786,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem.idf_supplysplittername for exact fixture case J01 (dragon-hvac-source-tower-core.source-system-core-names) through GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields. Adaptation family public-context-emission-derived-name-786 is represented by exact compatibility exception public-context-emission-derived-name-786. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs@sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a are fail-closed bindings. The trusted evidence output is sha256:f53a270a5d6a08e664067d9fbe78315239b09affdf24f46f0d815fd421801ff2. Only inventory index 786 and assertion dragon-hvac-source-tower-core-786-8ad08f57 are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
+    },
+    {
+      "evidence": [
+        "upstream/compatibility-exceptions.yml#public-context-emission-derived-name-787",
+        "upstream/symbol-evidence.json#dragon-hvac-source-tower-core-787-14bb746e"
+      ],
+      "exception_id": "public-context-emission-derived-name-787",
+      "index": 787,
+      "rationale": "Pinned CPython 3.12.7 and live .NET observations classify SourceSystem.idf_terminalunitlistname for exact fixture case J01 (dragon-hvac-source-tower-core.source-system-core-names) through GonieGonie.InvisibleDragon.Hvac.HeatPump.TerminalUnitListName. Adaptation family public-context-emission-derived-name-787 is represented by exact compatibility exception public-context-emission-derived-name-787. Fixture sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5, generator sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5, validator sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058, commit 33d0be9 native parity test sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6, and primary implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs@sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e are fail-closed bindings. The trusted evidence output is sha256:c57ee020b08fa26a62fed57d7910fd3bf577041d3e052880283d8ec4b8e5a525. Only inventory index 787 and assertion dragon-hvac-source-tower-core-787-14bb746e are promoted; the other source/tower targets and every supply, appender/controller, miscellaneous HVAC, and Imugi symbol retain their prior classifications."
     },
     {
       "evidence": [
@@ -9010,9 +9487,9 @@
   "schema": "goniegonie.upstream-compatibility-matrix.v1",
   "summary": {
     "classification_counts": {
-      "equivalent": 324,
-      "exception": 414,
-      "needs_reverification": 252,
+      "equivalent": 351,
+      "exception": 446,
+      "needs_reverification": 193,
       "out_of_scope": 252
     },
     "entry_count": 1242

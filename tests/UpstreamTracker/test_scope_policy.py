@@ -32,7 +32,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:00d7b6051248e3e204fb55c816e1c170652b94039fcf58e0d65cab2ad2ce46c1"
+    "sha256:6173fe85f6ef70f46b62fa4cdd7405025d322deb4686b3a192f645aad1657360"
 )
 
 
@@ -68,9 +68,9 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(EXPECTED_SAFE_SCOPE_COUNT, len(plan.decisions.decisions))
         self.assertEqual(
             {
-                "equivalent": 324,
-                "exception": 414,
-                "needs_reverification": 252,
+                "equivalent": 351,
+                "exception": 446,
+                "needs_reverification": 193,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -1892,6 +1892,100 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(
             "reviewed-native-discriminated-source-aggregate-and-conversion-route-c44e12f9",
             entries[135].exception_id,
+        )
+
+    def test_dragon_hvac_source_tower_promotion_is_exact_and_bounded(self) -> None:
+        entries = self.configuration.matrix.entries
+        target_indices = {
+            641, 642, 643, 652, 653, 654, 657, 658, 659, 661, 662,
+            664, 665, 667, 668, 669, 670, 673, 674, 675, 676, 677,
+            678, 679, 680, 681, 682, 683, 726, 727, 728, 729, 730,
+            731, 732, 733, 734, 735, 736, 738, 739, 740, 741, 742,
+            744, 745, 747, 748, 777, 778, 779, 780, 781, 782, 783,
+            784, 785, 786, 787,
+        }
+        equivalent_indices = {
+            643, 654, 662, 665, 667, 668, 669, 670, 678, 679, 683,
+            726, 727, 728, 729, 730, 731, 732, 733, 734, 735, 736,
+            742, 745, 748, 781, 783,
+        }
+        exception_indices = target_indices - equivalent_indices
+        self.assertEqual(59, len(target_indices))
+        self.assertEqual(27, len(equivalent_indices))
+        self.assertEqual(32, len(exception_indices))
+
+        for index in sorted(target_indices):
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual("src/idragon/dragon/hvac.py", entry.path, index)
+            self.assertEqual(inventory_symbol.key, entry.key, index)
+            expected_classification = (
+                "equivalent" if index in equivalent_indices else "exception"
+            )
+            self.assertEqual(expected_classification, entry.classification, index)
+            assertion_id = (
+                f"dragon-hvac-source-tower-core-{index}-"
+                f"{inventory_symbol.symbol_hash.removeprefix('sha256:')[:8]}"
+            )
+            expected_evidence = [
+                f"upstream/symbol-evidence.json#{assertion_id}"
+            ]
+            if index in exception_indices:
+                self.assertIsNotNone(entry.exception_id, index)
+                expected_evidence.append(
+                    f"upstream/compatibility-exceptions.yml#{entry.exception_id}"
+                )
+                self.assertIn(str(index), entry.exception_id, index)
+            else:
+                self.assertIsNone(entry.exception_id, index)
+            self.assertEqual(tuple(sorted(expected_evidence)), entry.evidence, index)
+            for binding in (
+                assertion_id,
+                "commit 33d0be9",
+                "sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5",
+                "sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5",
+                "sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058",
+                "sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6",
+            ):
+                self.assertIn(binding, entry.rationale, index)
+
+        self.assertEqual(
+            {
+                "equivalent": 31,
+                "exception": 49,
+                "needs_reverification": 88,
+                "out_of_scope": 6,
+            },
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in range(641, 815)
+                )
+                for classification in (
+                    "equivalent",
+                    "exception",
+                    "needs_reverification",
+                    "out_of_scope",
+                )
+            },
+        )
+        evidence = self.configuration.symbol_evidence
+        assert evidence is not None
+        source_tower_receipts = {
+            receipt.identifier
+            for item in evidence.entries
+            for receipt in item.receipts
+            if receipt.identifier.startswith("dragon-hvac-source-tower-core-")
+        }
+        self.assertEqual(
+            {
+                (
+                    f"dragon-hvac-source-tower-core-{index}-"
+                    f"{self.configuration.inventory.symbols[index].symbol_hash.removeprefix('sha256:')[:8]}"
+                )
+                for index in target_indices
+            },
+            source_tower_receipts,
         )
 
     def test_energy_model_class_promotion_preserves_adjacent_model_scope(self) -> None:
