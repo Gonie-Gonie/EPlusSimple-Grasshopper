@@ -151,6 +151,25 @@ public sealed class ModelResultOracleParityTests
         "sha256:3a724ffa998ec81cc0d8fe4f540ddb4104a08b09bb283cd19bb52ec3b3d64a4d",
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:e911c14d3c813bc5b43b2cb90a16fdb94df818527ec3da52af4ffe946e21baf7", // epsimple-model-result-373-8b407386
+        "sha256:df925407b2b85ccd5c10a3a478b3da331793346d93e987542922b3b1624a0c98", // epsimple-model-result-374-ff1cddac
+        "sha256:4e675409d346846b9beac564083195fcc8a4ddedc876509750a45bbffcc93b4e", // epsimple-model-result-375-856dd66b
+        "sha256:3cb36d3cb8399dae6de969611d4e07c77d6354ddc49116dd6ee57f27a7c5336e", // epsimple-model-result-376-37a89b1c
+        "sha256:f7391e151dd695f6dcf38a07e91f1c36e70bf9207ebf2dad8eb6664071196b80", // epsimple-model-result-377-4e80e0ef
+        "sha256:065da15639826e57cfa385c5eee3c019a426d85a8ab047909ce9230c6428b5ec", // epsimple-model-result-378-a63f6fa2
+        "sha256:1b0e9c6a519d97628b881db5fd98b02180667d6f221e8602d50c1dd8793f7e5a", // epsimple-model-result-379-b7774317
+        "sha256:bf414e097422b1fc25f05097c0db28d5a4635b0723008f38b5efff6315657a94", // epsimple-model-result-380-93d2bbd8
+        "sha256:f0ca2f5130317e1a05158356731a2e4467cfb4c951f1b78d09e7eb9b8dbe300f", // epsimple-model-result-381-72b97e85
+        "sha256:6548057f35cb8b0db13a0852918d2402c27a228f10ca4e486e98a2a8abec6a52", // epsimple-model-result-382-7d1d1cd9
+        "sha256:1873d250f1bf2f4333933ff902edc5008ac37465f587b2845695c00226351578", // epsimple-model-result-383-010fb599
+        "sha256:c263d5ceb77af08101cf78017e8c6861821e9aa40b41eaf93cd189ef5fd7f61b", // epsimple-model-result-384-48114e14
+        "sha256:c88ca4766eb1bffb2f5674ed81e9bcc5b64405526a2323d80b9f40ee6062179d", // epsimple-model-result-385-842eb853
+        "sha256:bc0a0e3d5e2b47b80ce40cb836de147e21117e3bfdcef1d53e1f502f528ce03b", // epsimple-model-result-386-67ef521c
+    };
+
     [Fact]
     public void MatchesPinnedModelResultThroughProductionPublicRoutes()
     {
@@ -167,6 +186,19 @@ public sealed class ModelResultOracleParityTests
             .ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -197,6 +229,7 @@ public sealed class ModelResultOracleParityTests
             Assert.Equal(ExpectedNativePins[index].FactsSha256, observations[index].FactsSha256);
         }
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
 
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)

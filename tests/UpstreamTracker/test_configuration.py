@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:00e4198ed14ff88dcd94ef88eebff7ae9e61bd1628029d3023e5614493cda429",
+            "sha256:d0920ef26c19036400578a11c19d9496b941e398d37bf7f9adbe35a7de6fef1a",
             compatibility.matrix.content_sha256,
         )
         self.assertEqual(990, len(symbol_evidence.entries))
         self.assertEqual(990, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:45932cdacaba3185c10b8345ae818133e40aa9c174aff23c3359f86b2aef1453",
+            "sha256:a96f8b5745aeca3adf41a7f53607b6f6bad244be2e17b65a3bd5ea67fbf65ba7",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -2488,7 +2488,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:e5cfdc9ba823dc891693864051ffb8cbc06cd08137becef9d6c06fd0c2942cf6"
         )
         model_test_sha256 = (
-            "sha256:1d3679ac9c0f3aa9469434235cedb17099bc728ede8a2afd9cb0c0b8af6f9832"
+            "sha256:3e31b35e5858eca554f60c6bdc1e391d5777faf954c8cd5cf25773bf9f72a02e"
         )
         model_fixture_bytes = model_fixture_path.read_bytes()
         self.assertEqual(
@@ -2571,23 +2571,41 @@ class ConfigurationTests(unittest.TestCase):
             model_test_sha256,
             "sha256:" + hashlib.sha256(model_test_bytes).hexdigest(),
         )
-        model_receipt_hash_block = re.search(
+        model_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             model_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(model_receipt_hash_block)
-        assert model_receipt_hash_block is not None
-        model_output_hashes = tuple(
+        self.assertIsNotNone(model_direct_receipt_hash_block)
+        assert model_direct_receipt_hash_block is not None
+        model_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                model_receipt_hash_block.group("body"),
+                model_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(35, len(model_output_hashes))
-        self.assertEqual(35, len(set(model_output_hashes)))
+        self.assertEqual(35, len(model_direct_receipt_hashes))
+        self.assertEqual(35, len(set(model_direct_receipt_hashes)))
+
+        model_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            model_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(model_collector_output_hash_block)
+        assert model_collector_output_hash_block is not None
+        model_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                model_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(35, len(model_collector_output_hashes))
+        self.assertEqual(35, len(set(model_collector_output_hashes)))
 
         model_native_path = (
             "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/"
@@ -2682,9 +2700,10 @@ class ConfigurationTests(unittest.TestCase):
         exceptions_by_id = {
             item.identifier: item for item in configuration.exceptions
         }
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             model_targets,
-            model_output_hashes,
+            model_direct_receipt_hashes,
+            model_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -2742,7 +2761,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(model_test_path, receipt.test_path, symbol)
             self.assertEqual(model_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(model_test_sha256, receipt.test_source_sha256, symbol)
@@ -2758,7 +2780,8 @@ class ConfigurationTests(unittest.TestCase):
                 model_test_sha256,
                 "commit d48f97a",
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 native_route,
                 case_code,
@@ -2880,7 +2903,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520"
         )
         result_test_sha256 = (
-            "sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4"
+            "sha256:1cfc16db5802c21bafe6157b7c52b4fa490f66379ac7139223aecde9c45ebf02"
         )
         result_fixture_bytes = result_fixture_path.read_bytes()
         self.assertEqual(
@@ -2933,23 +2956,41 @@ class ConfigurationTests(unittest.TestCase):
             result_test_sha256,
             "sha256:" + hashlib.sha256(result_test_bytes).hexdigest(),
         )
-        result_receipt_hash_block = re.search(
+        result_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             result_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(result_receipt_hash_block)
-        assert result_receipt_hash_block is not None
-        result_output_hashes = tuple(
+        self.assertIsNotNone(result_direct_receipt_hash_block)
+        assert result_direct_receipt_hash_block is not None
+        result_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                result_receipt_hash_block.group("body"),
+                result_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(14, len(result_output_hashes))
-        self.assertEqual(14, len(set(result_output_hashes)))
+        self.assertEqual(14, len(result_direct_receipt_hashes))
+        self.assertEqual(14, len(set(result_direct_receipt_hashes)))
+
+        result_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            result_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(result_collector_output_hash_block)
+        assert result_collector_output_hash_block is not None
+        result_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                result_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(14, len(result_collector_output_hashes))
+        self.assertEqual(14, len(set(result_collector_output_hashes)))
 
         result_models_path = (
             "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/"
@@ -3027,9 +3068,10 @@ class ConfigurationTests(unittest.TestCase):
         }
         self.assertEqual(5, len(result_exception_ids))
 
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             result_targets,
-            result_output_hashes,
+            result_direct_receipt_hashes,
+            result_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -3088,7 +3130,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(result_test_path, receipt.test_path, symbol)
             self.assertEqual(result_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(result_test_sha256, receipt.test_source_sha256, symbol)
@@ -3103,7 +3148,8 @@ class ConfigurationTests(unittest.TestCase):
                 result_fixture_sha256,
                 result_test_sha256,
                 "commit 61bb21b",
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 native_route,
                 adaptation_family,
@@ -3292,7 +3338,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5"
         )
         shape_test_sha256 = (
-            "sha256:f220dbb7bedeb3ee3cddba75e5024200c89e814fbb1184f04c72eae91f2417d7"
+            "sha256:3c74009029f33d199702e6dc9eaab1bb10bf88c6a14b53279be33751115fcb96"
         )
         shape_fixture_bytes = shape_fixture_path.read_bytes()
         self.assertEqual(
@@ -3390,22 +3436,41 @@ class ConfigurationTests(unittest.TestCase):
             shape_test_sha256,
             "sha256:" + hashlib.sha256(shape_test_bytes).hexdigest(),
         )
-        receipt_hash_block = re.search(
+        shape_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             shape_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(receipt_hash_block)
-        assert receipt_hash_block is not None
-        shape_output_hashes = tuple(
+        self.assertIsNotNone(shape_direct_receipt_hash_block)
+        assert shape_direct_receipt_hash_block is not None
+        shape_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                receipt_hash_block.group("body"),
+                shape_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(53, len(shape_output_hashes))
+        self.assertEqual(53, len(shape_direct_receipt_hashes))
+        self.assertEqual(53, len(set(shape_direct_receipt_hashes)))
+
+        shape_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            shape_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(shape_collector_output_hash_block)
+        assert shape_collector_output_hash_block is not None
+        shape_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                shape_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(53, len(shape_collector_output_hashes))
+        self.assertEqual(53, len(set(shape_collector_output_hashes)))
 
         fenestration_path = (
             "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs"
@@ -3519,9 +3584,10 @@ class ConfigurationTests(unittest.TestCase):
             item.identifier: item for item in configuration.exceptions
         }
         shape_exception_symbols = set(shape_contract["adaptations"])
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             shape_targets,
-            shape_output_hashes,
+            shape_direct_receipt_hashes,
+            shape_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -3579,7 +3645,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(shape_test_path, receipt.test_path, symbol)
             self.assertEqual(shape_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(shape_test_sha256, receipt.test_source_sha256, symbol)
@@ -3595,7 +3664,8 @@ class ConfigurationTests(unittest.TestCase):
                 shape_test_sha256,
                 "commit a198a7c",
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 native_route,
                 case_code,
@@ -3673,7 +3743,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:d4e9421c40c39dfaef948054798b03fb046fa31d1a5742cb8a53484c87d819f9"
         )
         construction_test_sha256 = (
-            "sha256:616b3a6a2863dc8675014b7e750cf45e928023687da1a597bfe808a20052568f"
+            "sha256:d84adeb2aede8e6cb0c42e5d132b7d491cca6abd0fb69697d19c897db1ef0d98"
         )
         construction_fixture_bytes = construction_fixture_path.read_bytes()
         self.assertEqual(
@@ -3781,22 +3851,41 @@ class ConfigurationTests(unittest.TestCase):
             construction_test_sha256,
             "sha256:" + hashlib.sha256(construction_test_bytes).hexdigest(),
         )
-        construction_receipt_hash_block = re.search(
+        construction_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             construction_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(construction_receipt_hash_block)
-        assert construction_receipt_hash_block is not None
-        construction_output_hashes = tuple(
+        self.assertIsNotNone(construction_direct_receipt_hash_block)
+        assert construction_direct_receipt_hash_block is not None
+        construction_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                construction_receipt_hash_block.group("body"),
+                construction_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(48, len(construction_output_hashes))
+        self.assertEqual(48, len(construction_direct_receipt_hashes))
+        self.assertEqual(48, len(set(construction_direct_receipt_hashes)))
+
+        construction_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            construction_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(construction_collector_output_hash_block)
+        assert construction_collector_output_hash_block is not None
+        construction_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                construction_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(48, len(construction_collector_output_hashes))
+        self.assertEqual(48, len(set(construction_collector_output_hashes)))
 
         material_path = (
             "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Construction/Material.cs"
@@ -4002,9 +4091,10 @@ class ConfigurationTests(unittest.TestCase):
                 }
             )
         )
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             construction_targets,
-            construction_output_hashes,
+            construction_direct_receipt_hashes,
+            construction_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -4059,7 +4149,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(construction_test_path, receipt.test_path, symbol)
             self.assertEqual(construction_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(construction_test_sha256, receipt.test_source_sha256, symbol)
@@ -4075,7 +4168,8 @@ class ConfigurationTests(unittest.TestCase):
                 construction_test_sha256,
                 "commit 3053e74",
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 adaptation,
                 native_route,
@@ -4171,7 +4265,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428"
         )
         hvac_test_sha256 = (
-            "sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4"
+            "sha256:5f4360181c32738c4c742d365529a3b6a07206cde0a68de573c5a65ed59a92d3"
         )
         for pinned_path, expected_sha256 in (
             (hvac_fixture_path, hvac_fixture_sha256),
@@ -4294,23 +4388,41 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(set(hvac_contract["target_symbols"]), set(hvac_case_by_symbol))
 
         hvac_test_bytes = (REPOSITORY_ROOT / hvac_test_path).read_bytes()
-        hvac_hash_block = re.search(
+        hvac_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\[(?P<body>.*?)\n\s*\];",
             hvac_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(hvac_hash_block)
-        assert hvac_hash_block is not None
-        hvac_output_hashes = tuple(
+        self.assertIsNotNone(hvac_direct_receipt_hash_block)
+        assert hvac_direct_receipt_hash_block is not None
+        hvac_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                hvac_hash_block.group("body"),
+                hvac_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(28, len(hvac_output_hashes))
-        self.assertEqual(28, len(set(hvac_output_hashes)))
+        self.assertEqual(28, len(hvac_direct_receipt_hashes))
+        self.assertEqual(28, len(set(hvac_direct_receipt_hashes)))
+
+        hvac_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\[(?P<body>.*?)\n\s*\];",
+            hvac_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(hvac_collector_output_hash_block)
+        assert hvac_collector_output_hash_block is not None
+        hvac_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                hvac_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(28, len(hvac_collector_output_hashes))
+        self.assertEqual(28, len(set(hvac_collector_output_hashes)))
 
         hvac_source_path = (
             "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs"
@@ -4386,9 +4498,10 @@ class ConfigurationTests(unittest.TestCase):
         }
         self.assertEqual(10, len(hvac_exception_ids))
 
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             hvac_targets,
-            hvac_output_hashes,
+            hvac_direct_receipt_hashes,
+            hvac_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -4441,7 +4554,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(hvac_test_path, receipt.test_path, symbol)
             self.assertEqual(hvac_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(hvac_test_sha256, receipt.test_source_sha256, symbol)
@@ -4459,7 +4575,8 @@ class ConfigurationTests(unittest.TestCase):
                 hvac_test_sha256,
                 "commit 85264dd",
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 hvac_contract["native_routes"][symbol],
                 code,
@@ -4680,7 +4797,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:ca7fb52d4a68ada17437d9e4590b129cf22cce842b37147aacf76d4f17c92265"
         )
         thermal_test_sha256 = (
-            "sha256:b7c9f676404298d22903b3f4c038eb37f9648612a41e6ee05cbe60368b93aee3"
+            "sha256:1d87d2cc6f8e356d4421a309ac0ce80e3f5b8d0796bfae4677b6167dbf24a40e"
         )
         for pinned_path, expected_sha256 in (
             (thermal_fixture_path, thermal_fixture_sha256),
@@ -4737,23 +4854,41 @@ class ConfigurationTests(unittest.TestCase):
         )
 
         thermal_test_bytes = (REPOSITORY_ROOT / thermal_test_path).read_bytes()
-        thermal_hash_block = re.search(
+        thermal_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\[(?P<body>.*?)\n\s*\];",
             thermal_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(thermal_hash_block)
-        assert thermal_hash_block is not None
-        thermal_output_hashes = tuple(
+        self.assertIsNotNone(thermal_direct_receipt_hash_block)
+        assert thermal_direct_receipt_hash_block is not None
+        thermal_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                thermal_hash_block.group("body"),
+                thermal_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(47, len(thermal_output_hashes))
-        self.assertEqual(47, len(set(thermal_output_hashes)))
+        self.assertEqual(47, len(thermal_direct_receipt_hashes))
+        self.assertEqual(47, len(set(thermal_direct_receipt_hashes)))
+
+        thermal_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\[(?P<body>.*?)\n\s*\];",
+            thermal_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(thermal_collector_output_hash_block)
+        assert thermal_collector_output_hash_block is not None
+        thermal_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                thermal_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(47, len(thermal_collector_output_hashes))
+        self.assertEqual(47, len(set(thermal_collector_output_hashes)))
 
         def expected_thermal_implementation(symbol: str) -> tuple[str, str]:
             route = thermal_contract["native_routes"][symbol]
@@ -4778,9 +4913,10 @@ class ConfigurationTests(unittest.TestCase):
                 if item.identifier in thermal_exception_ids
             },
         )
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             thermal_targets,
-            thermal_output_hashes,
+            thermal_direct_receipt_hashes,
+            thermal_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -4833,7 +4969,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(thermal_test_path, receipt.test_path, symbol)
             self.assertEqual(thermal_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(thermal_test_sha256, receipt.test_source_sha256, symbol)
@@ -4851,7 +4990,8 @@ class ConfigurationTests(unittest.TestCase):
                 thermal_test_sha256,
                 "commit 0ef3a7d",
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 thermal_contract["native_routes"][symbol],
                 code,
@@ -5030,7 +5170,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:91d1c96ea25e25804b747999e80b78993ff1b58fe8563dc32e0ba8f1a73d9534"
         )
         supply_test_sha256 = (
-            "sha256:59a8555cec7c643d7de152fb4a168a01ad8089bc8f014c0ed85f5d0be3a57753"
+            "sha256:9cef29fa99faddea2376c38f8b1749464b1b608914b2a8f8674cfcb703bd91f1"
         )
         for pinned_path, expected_sha256 in (
             (supply_fixture_path, supply_fixture_sha256),
@@ -5084,23 +5224,41 @@ class ConfigurationTests(unittest.TestCase):
         )
 
         supply_test_bytes = (REPOSITORY_ROOT / supply_test_path).read_bytes()
-        supply_hash_block = re.search(
+        supply_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             supply_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(supply_hash_block)
-        assert supply_hash_block is not None
-        supply_output_hashes = tuple(
+        self.assertIsNotNone(supply_direct_receipt_hash_block)
+        assert supply_direct_receipt_hash_block is not None
+        supply_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                supply_hash_block.group("body"),
+                supply_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(52, len(supply_output_hashes))
-        self.assertEqual(52, len(set(supply_output_hashes)))
+        self.assertEqual(52, len(supply_direct_receipt_hashes))
+        self.assertEqual(52, len(set(supply_direct_receipt_hashes)))
+
+        supply_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            supply_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(supply_collector_output_hash_block)
+        assert supply_collector_output_hash_block is not None
+        supply_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                supply_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(52, len(supply_collector_output_hashes))
+        self.assertEqual(52, len(set(supply_collector_output_hashes)))
 
         def expected_supply_implementation(symbol: str) -> tuple[str, str]:
             route = supply_contract["native_routes"][symbol]
@@ -5152,9 +5310,10 @@ class ConfigurationTests(unittest.TestCase):
                 if item.identifier in supply_exception_ids
             },
         )
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             supply_targets,
-            supply_output_hashes,
+            supply_direct_receipt_hashes,
+            supply_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -5207,7 +5366,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(supply_test_path, receipt.test_path, symbol)
             self.assertEqual(supply_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(supply_test_sha256, receipt.test_source_sha256, symbol)
@@ -5225,7 +5387,8 @@ class ConfigurationTests(unittest.TestCase):
                 supply_test_sha256,
                 "commit 6517fb9",
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 supply_contract["native_routes"][symbol],
                 code,
@@ -5376,7 +5539,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22"
         )
         other_test_sha256 = (
-            "sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6"
+            "sha256:8dcbb92391ab55dc808d6cfcb85839127f3f4dcf026b4c81e07213f2ede21326"
         )
         for pinned_path, expected_sha256 in (
             (other_fixture_path, other_fixture_sha256),
@@ -5428,23 +5591,41 @@ class ConfigurationTests(unittest.TestCase):
         )
 
         other_test_bytes = (REPOSITORY_ROOT / other_test_path).read_bytes()
-        other_hash_block = re.search(
+        other_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             other_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(other_hash_block)
-        assert other_hash_block is not None
-        other_output_hashes = tuple(
+        self.assertIsNotNone(other_direct_receipt_hash_block)
+        assert other_direct_receipt_hash_block is not None
+        other_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                other_hash_block.group("body"),
+                other_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(17, len(other_output_hashes))
-        self.assertEqual(17, len(set(other_output_hashes)))
+        self.assertEqual(17, len(other_direct_receipt_hashes))
+        self.assertEqual(17, len(set(other_direct_receipt_hashes)))
+
+        other_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            other_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(other_collector_output_hash_block)
+        assert other_collector_output_hash_block is not None
+        other_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                other_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(17, len(other_collector_output_hashes))
+        self.assertEqual(17, len(set(other_collector_output_hashes)))
 
         hvac_other_path = (
             "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs"
@@ -5477,9 +5658,10 @@ class ConfigurationTests(unittest.TestCase):
                 if item.identifier in other_exception_ids
             },
         )
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             other_targets,
-            other_output_hashes,
+            other_direct_receipt_hashes,
+            other_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -5532,7 +5714,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(other_test_path, receipt.test_path, symbol)
             self.assertEqual(other_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(other_test_sha256, receipt.test_source_sha256, symbol)
@@ -5550,7 +5735,8 @@ class ConfigurationTests(unittest.TestCase):
                 other_test_sha256,
                 "commit 7e69d81",
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 other_contract["native_routes"][symbol],
                 code,
@@ -5649,7 +5835,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058"
         )
         source_tower_test_sha256 = (
-            "sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6"
+            "sha256:2dcced74b037732c9147ce60e71569ff3563a757b3b63b0eadaad80aaa7a4ed6"
         )
         for pinned_path, expected_sha256 in (
             (source_tower_fixture_path, source_tower_fixture_sha256),
@@ -5698,23 +5884,41 @@ class ConfigurationTests(unittest.TestCase):
         source_tower_test_bytes = (
             REPOSITORY_ROOT / source_tower_test_path
         ).read_bytes()
-        source_tower_hash_block = re.search(
+        source_tower_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             source_tower_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(source_tower_hash_block)
-        assert source_tower_hash_block is not None
-        source_tower_output_hashes = tuple(
+        self.assertIsNotNone(source_tower_direct_receipt_hash_block)
+        assert source_tower_direct_receipt_hash_block is not None
+        source_tower_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                source_tower_hash_block.group("body"),
+                source_tower_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(59, len(source_tower_output_hashes))
-        self.assertEqual(59, len(set(source_tower_output_hashes)))
+        self.assertEqual(59, len(source_tower_direct_receipt_hashes))
+        self.assertEqual(59, len(set(source_tower_direct_receipt_hashes)))
+
+        source_tower_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            source_tower_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(source_tower_collector_output_hash_block)
+        assert source_tower_collector_output_hash_block is not None
+        source_tower_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                source_tower_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(59, len(source_tower_collector_output_hashes))
+        self.assertEqual(59, len(set(source_tower_collector_output_hashes)))
 
         def expected_source_tower_implementation(
             symbol: str,
@@ -5773,9 +5977,10 @@ class ConfigurationTests(unittest.TestCase):
                 if item.identifier in source_tower_exception_ids
             },
         )
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             source_tower_targets,
-            source_tower_output_hashes,
+            source_tower_direct_receipt_hashes,
+            source_tower_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -5835,7 +6040,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(source_tower_test_path, receipt.test_path, symbol)
             self.assertEqual(source_tower_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(source_tower_test_sha256, receipt.test_source_sha256, symbol)
@@ -5852,7 +6060,8 @@ class ConfigurationTests(unittest.TestCase):
                 source_tower_test_sha256,
                 "commit 33d0be9",
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 native_route,
                 code,
@@ -5928,7 +6137,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:6832bde12cb4e5ab213f2f12307267ebe571de1bf2fc1a8ffa37db728014eabd"
         )
         supply_core_test_sha256 = (
-            "sha256:d5cfab07e19c5dd74f70ec048680f114409e300756492dd7d3336a9ae42fbb62"
+            "sha256:4dac9b429af4833841d19c1449589e5501ca2f66f88cb55385a9642eff8e66c6"
         )
         for pinned_path, expected_sha256 in (
             (supply_core_fixture_path, supply_core_fixture_sha256),
@@ -6000,23 +6209,41 @@ class ConfigurationTests(unittest.TestCase):
         supply_core_test_bytes = (
             REPOSITORY_ROOT / supply_core_test_path
         ).read_bytes()
-        supply_core_hash_block = re.search(
+        supply_core_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             supply_core_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(supply_core_hash_block)
-        assert supply_core_hash_block is not None
-        supply_core_output_hashes = tuple(
+        self.assertIsNotNone(supply_core_direct_receipt_hash_block)
+        assert supply_core_direct_receipt_hash_block is not None
+        supply_core_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                supply_core_hash_block.group("body"),
+                supply_core_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(49, len(supply_core_output_hashes))
-        self.assertEqual(49, len(set(supply_core_output_hashes)))
+        self.assertEqual(49, len(supply_core_direct_receipt_hashes))
+        self.assertEqual(49, len(set(supply_core_direct_receipt_hashes)))
+
+        supply_core_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            supply_core_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(supply_core_collector_output_hash_block)
+        assert supply_core_collector_output_hash_block is not None
+        supply_core_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                supply_core_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(49, len(supply_core_collector_output_hashes))
+        self.assertEqual(49, len(set(supply_core_collector_output_hashes)))
 
         def expected_supply_core_implementation(
             symbol: str,
@@ -6086,9 +6313,10 @@ class ConfigurationTests(unittest.TestCase):
                 if item.identifier in supply_core_exception_ids
             },
         )
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             supply_core_targets,
-            supply_core_output_hashes,
+            supply_core_direct_receipt_hashes,
+            supply_core_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -6148,7 +6376,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(registry_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(supply_core_test_path, receipt.test_path, symbol)
             self.assertEqual(supply_core_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(supply_core_test_sha256, receipt.test_source_sha256, symbol)
@@ -6166,7 +6397,8 @@ class ConfigurationTests(unittest.TestCase):
                 supply_core_test_sha256,
                 "commit 606f247",
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 native_route,
                 code,
@@ -6243,7 +6475,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf"
         )
         appender_controller_test_sha256 = (
-            "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4"
+            "sha256:5aa8742d1090473cb9af8420fab2fc1159c20b2c9603e09712e7481daf03d678"
         )
         for pinned_path, expected_sha256 in (
             (appender_controller_fixture_path, appender_controller_fixture_sha256),
@@ -6327,23 +6559,41 @@ class ConfigurationTests(unittest.TestCase):
         appender_controller_test_bytes = (
             REPOSITORY_ROOT / appender_controller_test_path
         ).read_bytes()
-        appender_controller_hash_block = re.search(
+        appender_controller_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             appender_controller_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(appender_controller_hash_block)
-        assert appender_controller_hash_block is not None
-        appender_controller_output_hashes = tuple(
+        self.assertIsNotNone(appender_controller_direct_receipt_hash_block)
+        assert appender_controller_direct_receipt_hash_block is not None
+        appender_controller_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                appender_controller_hash_block.group("body"),
+                appender_controller_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(24, len(appender_controller_output_hashes))
-        self.assertEqual(24, len(set(appender_controller_output_hashes)))
+        self.assertEqual(24, len(appender_controller_direct_receipt_hashes))
+        self.assertEqual(24, len(set(appender_controller_direct_receipt_hashes)))
+
+        appender_controller_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            appender_controller_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(appender_controller_collector_output_hash_block)
+        assert appender_controller_collector_output_hash_block is not None
+        appender_controller_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                appender_controller_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(24, len(appender_controller_collector_output_hashes))
+        self.assertEqual(24, len(set(appender_controller_collector_output_hashes)))
 
         appender_controller_implementation_path = (
             "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs"
@@ -6364,9 +6614,10 @@ class ConfigurationTests(unittest.TestCase):
                 if item.identifier in appender_controller_exception_ids
             },
         )
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             appender_controller_targets,
-            appender_controller_output_hashes,
+            appender_controller_direct_receipt_hashes,
+            appender_controller_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -6420,7 +6671,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(appender_controller_test_path, receipt.test_path, symbol)
             self.assertEqual(appender_controller_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(
@@ -6444,7 +6698,8 @@ class ConfigurationTests(unittest.TestCase):
                 appender_controller_implementation_path
                 + "@"
                 + appender_controller_implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 native_route,
                 code,
@@ -6521,7 +6776,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117"
         )
         misc_systems_test_sha256 = (
-            "sha256:523014c73637070ac2b22b9db31c6d589c61f3ad3934396a5ea3213c9b3d2f81"
+            "sha256:4e2f01a04b3454faf08e82b3710b244396a01dffd6f6d09ffcda0f1704ebb519"
         )
         for pinned_path, expected_sha256 in (
             (misc_systems_fixture_path, misc_systems_fixture_sha256),
@@ -6618,23 +6873,41 @@ class ConfigurationTests(unittest.TestCase):
         misc_systems_test_bytes = (
             REPOSITORY_ROOT / misc_systems_test_path
         ).read_bytes()
-        misc_systems_hash_block = re.search(
+        misc_systems_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             misc_systems_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(misc_systems_hash_block)
-        assert misc_systems_hash_block is not None
-        misc_systems_output_hashes = tuple(
+        self.assertIsNotNone(misc_systems_direct_receipt_hash_block)
+        assert misc_systems_direct_receipt_hash_block is not None
+        misc_systems_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                misc_systems_hash_block.group("body"),
+                misc_systems_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(15, len(misc_systems_output_hashes))
-        self.assertEqual(15, len(set(misc_systems_output_hashes)))
+        self.assertEqual(15, len(misc_systems_direct_receipt_hashes))
+        self.assertEqual(15, len(set(misc_systems_direct_receipt_hashes)))
+
+        misc_systems_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            misc_systems_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(misc_systems_collector_output_hash_block)
+        assert misc_systems_collector_output_hash_block is not None
+        misc_systems_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                misc_systems_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(15, len(misc_systems_collector_output_hashes))
+        self.assertEqual(15, len(set(misc_systems_collector_output_hashes)))
 
         def expected_misc_systems_implementation(
             symbol: str,
@@ -6681,9 +6954,10 @@ class ConfigurationTests(unittest.TestCase):
                 if item.identifier in misc_systems_exception_ids
             },
         )
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             misc_systems_targets,
-            misc_systems_output_hashes,
+            misc_systems_direct_receipt_hashes,
+            misc_systems_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -6749,7 +7023,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(registry_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(misc_systems_test_path, receipt.test_path, symbol)
             self.assertEqual(misc_systems_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(
@@ -6771,7 +7048,8 @@ class ConfigurationTests(unittest.TestCase):
                 misc_systems_validator_sha256,
                 misc_systems_test_sha256,
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 raw_assertion_id,
                 registry_id,
                 native_route,
@@ -6857,7 +7135,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:b797ab5cb57509672d644bdc733ff2b8bd8534c4d697972f7722b944a7ff66f9"
         )
         imugi_idd_definitions_test_sha256 = (
-            "sha256:1782390684d440ece9c849f4d4c9f6a892577681a45038e46bf074a322142541"
+            "sha256:86b20cc221c58489f4815fcfd591e9635a197d9ba560bff40fa7425b1f9b320c"
         )
         for pinned_path, expected_sha256 in (
             (
@@ -7061,23 +7339,41 @@ class ConfigurationTests(unittest.TestCase):
         imugi_idd_definitions_test_bytes = (
             REPOSITORY_ROOT / imugi_idd_definitions_test_path
         ).read_bytes()
-        imugi_idd_definitions_hash_block = re.search(
+        imugi_idd_definitions_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             imugi_idd_definitions_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(imugi_idd_definitions_hash_block)
-        assert imugi_idd_definitions_hash_block is not None
-        imugi_idd_definitions_output_hashes = tuple(
+        self.assertIsNotNone(imugi_idd_definitions_direct_receipt_hash_block)
+        assert imugi_idd_definitions_direct_receipt_hash_block is not None
+        imugi_idd_definitions_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                imugi_idd_definitions_hash_block.group("body"),
+                imugi_idd_definitions_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(40, len(imugi_idd_definitions_output_hashes))
-        self.assertEqual(40, len(set(imugi_idd_definitions_output_hashes)))
+        self.assertEqual(40, len(imugi_idd_definitions_direct_receipt_hashes))
+        self.assertEqual(40, len(set(imugi_idd_definitions_direct_receipt_hashes)))
+
+        imugi_idd_definitions_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            imugi_idd_definitions_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(imugi_idd_definitions_collector_output_hash_block)
+        assert imugi_idd_definitions_collector_output_hash_block is not None
+        imugi_idd_definitions_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                imugi_idd_definitions_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(40, len(imugi_idd_definitions_collector_output_hashes))
+        self.assertEqual(40, len(set(imugi_idd_definitions_collector_output_hashes)))
 
         def expected_imugi_idd_definitions_implementation(
             symbol: str,
@@ -7125,9 +7421,10 @@ class ConfigurationTests(unittest.TestCase):
                 if item.identifier in imugi_idd_definitions_exception_ids
             },
         )
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             imugi_idd_definitions_targets,
-            imugi_idd_definitions_output_hashes,
+            imugi_idd_definitions_direct_receipt_hashes,
+            imugi_idd_definitions_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -7189,7 +7486,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(imugi_idd_definitions_test_path, receipt.test_path, symbol)
             self.assertEqual(imugi_idd_definitions_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(
@@ -7211,7 +7511,8 @@ class ConfigurationTests(unittest.TestCase):
                 imugi_idd_definitions_validator_sha256,
                 imugi_idd_definitions_test_sha256,
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 native_route,
                 code,
@@ -7311,7 +7612,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:e2029fe7810eeaa4ad046a6102926245740ad1e2ed11a746ba45c57f2909b242"
         )
         imugi_idd_schema_static_test_sha256 = (
-            "sha256:2a309de77c9909cd5757295f1f98697fb6ef2d980786f4bf8b0252981a47d0e1"
+            "sha256:69d5187942a9da3b20fec19ef225685e7f07a47861bc0956aa7d4e57dfa29208"
         )
         for pinned_path, expected_sha256 in (
             (
@@ -7563,23 +7864,41 @@ class ConfigurationTests(unittest.TestCase):
         imugi_idd_schema_static_test_bytes = (
             REPOSITORY_ROOT / imugi_idd_schema_static_test_path
         ).read_bytes()
-        imugi_idd_schema_static_hash_block = re.search(
+        imugi_idd_schema_static_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\[(?P<body>.*?)\n\s*\];",
             imugi_idd_schema_static_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(imugi_idd_schema_static_hash_block)
-        assert imugi_idd_schema_static_hash_block is not None
-        imugi_idd_schema_static_output_hashes = tuple(
+        self.assertIsNotNone(imugi_idd_schema_static_direct_receipt_hash_block)
+        assert imugi_idd_schema_static_direct_receipt_hash_block is not None
+        imugi_idd_schema_static_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                imugi_idd_schema_static_hash_block.group("body"),
+                imugi_idd_schema_static_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(21, len(imugi_idd_schema_static_output_hashes))
-        self.assertEqual(21, len(set(imugi_idd_schema_static_output_hashes)))
+        self.assertEqual(21, len(imugi_idd_schema_static_direct_receipt_hashes))
+        self.assertEqual(21, len(set(imugi_idd_schema_static_direct_receipt_hashes)))
+
+        imugi_idd_schema_static_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\[(?P<body>.*?)\n\s*\];",
+            imugi_idd_schema_static_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(imugi_idd_schema_static_collector_output_hash_block)
+        assert imugi_idd_schema_static_collector_output_hash_block is not None
+        imugi_idd_schema_static_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                imugi_idd_schema_static_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(21, len(imugi_idd_schema_static_collector_output_hashes))
+        self.assertEqual(21, len(set(imugi_idd_schema_static_collector_output_hashes)))
 
         def expected_imugi_idd_schema_static_implementation(
             symbol: str,
@@ -7661,9 +7980,10 @@ class ConfigurationTests(unittest.TestCase):
                 if item.identifier in imugi_idd_schema_static_exception_ids
             },
         )
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             imugi_idd_schema_static_targets,
-            imugi_idd_schema_static_output_hashes,
+            imugi_idd_schema_static_direct_receipt_hashes,
+            imugi_idd_schema_static_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -7725,7 +8045,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(imugi_idd_schema_static_test_path, receipt.test_path, symbol)
             self.assertEqual(imugi_idd_schema_static_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(
@@ -7747,7 +8070,8 @@ class ConfigurationTests(unittest.TestCase):
                 imugi_idd_schema_static_validator_sha256,
                 imugi_idd_schema_static_test_sha256,
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 native_route,
                 code,
@@ -7846,7 +8170,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:5c296ed4b6129dfbb40523136f91877169191a4ff42b5be63411d46bc91e5c73"
         )
         imugi_idf_object_test_sha256 = (
-            "sha256:51fc6b40f71cd0a4bec0e9a59c2879c5d2e3d16246d2b099df0238f10b05178d"
+            "sha256:7e5826a6cd5bfe5227a86a0fc0a7b840960a8175944c11bc32136958bbcab67f"
         )
         for pinned_path, expected_bytes, expected_sha256 in (
             (
@@ -7866,7 +8190,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
             (
                 REPOSITORY_ROOT / imugi_idf_object_test_path,
-                34350,
+                37982,
                 imugi_idf_object_test_sha256,
             ),
         ):
@@ -7986,23 +8310,41 @@ class ConfigurationTests(unittest.TestCase):
         imugi_idf_object_test_bytes = (
             REPOSITORY_ROOT / imugi_idf_object_test_path
         ).read_bytes()
-        imugi_idf_object_hash_block = re.search(
+        imugi_idf_object_direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             imugi_idf_object_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(imugi_idf_object_hash_block)
-        assert imugi_idf_object_hash_block is not None
-        imugi_idf_object_output_hashes = tuple(
+        self.assertIsNotNone(imugi_idf_object_direct_receipt_hash_block)
+        assert imugi_idf_object_direct_receipt_hash_block is not None
+        imugi_idf_object_direct_receipt_hashes = tuple(
             item.decode("ascii")
             for item in re.findall(
                 rb'"(sha256:[0-9a-f]{64})"',
-                imugi_idf_object_hash_block.group("body"),
+                imugi_idf_object_direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(25, len(imugi_idf_object_output_hashes))
-        self.assertEqual(25, len(set(imugi_idf_object_output_hashes)))
+        self.assertEqual(25, len(imugi_idf_object_direct_receipt_hashes))
+        self.assertEqual(25, len(set(imugi_idf_object_direct_receipt_hashes)))
+
+        imugi_idf_object_collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            imugi_idf_object_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(imugi_idf_object_collector_output_hash_block)
+        assert imugi_idf_object_collector_output_hash_block is not None
+        imugi_idf_object_collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                imugi_idf_object_collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(25, len(imugi_idf_object_collector_output_hashes))
+        self.assertEqual(25, len(set(imugi_idf_object_collector_output_hashes)))
 
         def expected_imugi_idf_object_implementation(
             symbol: str,
@@ -8054,9 +8396,10 @@ class ConfigurationTests(unittest.TestCase):
                 if item.identifier in imugi_idf_object_exception_ids
             },
         )
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             imugi_idf_object_targets,
-            imugi_idf_object_output_hashes,
+            imugi_idf_object_direct_receipt_hashes,
+            imugi_idf_object_collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -8116,7 +8459,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(imugi_idf_object_test_path, receipt.test_path, symbol)
             self.assertEqual(imugi_idf_object_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(
@@ -8138,7 +8484,8 @@ class ConfigurationTests(unittest.TestCase):
                 imugi_idf_object_validator_sha256,
                 imugi_idf_object_test_sha256,
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 native_route,
                 code,
@@ -8232,7 +8579,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef"
         )
         imugi_idf_object_list_test_sha256 = (
-            "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54"
+            "sha256:6135638ec726c95d1d858d5dd43f1322de1e37aff5827642bd21a87adf095771"
         )
         for pinned_path, expected_bytes, expected_sha256 in (
             (
@@ -8252,7 +8599,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
             (
                 REPOSITORY_ROOT / imugi_idf_object_list_test_path,
-                20688,
+                23672,
                 imugi_idf_object_list_test_sha256,
             ),
         ):
@@ -8392,22 +8739,41 @@ class ConfigurationTests(unittest.TestCase):
         native_test_bytes = (
             REPOSITORY_ROOT / imugi_idf_object_list_test_path
         ).read_bytes()
-        hash_block = re.search(
+        direct_receipt_hash_block = re.search(
             rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
             rb"\{(?P<body>.*?)\n\s*\};",
             native_test_bytes,
             re.DOTALL,
         )
-        self.assertIsNotNone(hash_block)
-        assert hash_block is not None
-        output_hashes = tuple(
-            value.decode("ascii")
-            for value in re.findall(
-                rb'"(sha256:[0-9a-f]{64})"', hash_block.group("body")
+        self.assertIsNotNone(direct_receipt_hash_block)
+        assert direct_receipt_hash_block is not None
+        direct_receipt_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                direct_receipt_hash_block.group("body"),
             )
         )
-        self.assertEqual(19, len(output_hashes))
-        self.assertEqual(19, len(set(output_hashes)))
+        self.assertEqual(19, len(direct_receipt_hashes))
+        self.assertEqual(19, len(set(direct_receipt_hashes)))
+
+        collector_output_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedCollectorOutputHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            native_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(collector_output_hash_block)
+        assert collector_output_hash_block is not None
+        collector_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                collector_output_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(19, len(collector_output_hashes))
+        self.assertEqual(19, len(set(collector_output_hashes)))
 
         def expected_imugi_idf_object_list_implementation(
             symbol: str,
@@ -8474,9 +8840,10 @@ class ConfigurationTests(unittest.TestCase):
             },
         )
 
-        for target, expected_output_hash in zip(
+        for target, direct_receipt_hash, collector_output_hash in zip(
             imugi_idf_object_list_targets,
-            output_hashes,
+            direct_receipt_hashes,
+            collector_output_hashes,
             strict=True,
         ):
             index = target["inventory_index"]
@@ -8533,7 +8900,10 @@ class ConfigurationTests(unittest.TestCase):
             receipt = evidence_entry.receipts[0]
             self.assertEqual(assertion_id, receipt.identifier, symbol)
             self.assertEqual(entry.rationale, receipt.assertion, symbol)
-            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertIn(direct_receipt_hash, receipt.assertion, symbol)
+            self.assertEqual(
+                collector_output_hash, receipt.expected_output_sha256, symbol
+            )
             self.assertEqual(imugi_idf_object_list_test_path, receipt.test_path, symbol)
             self.assertEqual(imugi_idf_object_list_test_symbol, receipt.test_symbol, symbol)
             self.assertEqual(
@@ -8555,7 +8925,8 @@ class ConfigurationTests(unittest.TestCase):
                 imugi_idf_object_list_validator_sha256,
                 imugi_idf_object_list_test_sha256,
                 implementation_path + "@" + implementation_sha256,
-                expected_output_hash,
+                direct_receipt_hash,
+                collector_output_hash,
                 assertion_id,
                 native_route,
                 code,

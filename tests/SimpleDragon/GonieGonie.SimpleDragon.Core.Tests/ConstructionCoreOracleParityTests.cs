@@ -272,6 +272,59 @@ public sealed class ConstructionCoreOracleParityTests
         "sha256:f43151a366c579e24d78d588438afeaf523227c9492c909284d99b61ba943f44",
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:be15b5d17e49845f3d341b4c71a21a15389dbaf3b5e05df9615f9ada48aa365d", // epsimple-construction-core-75-f86ec154
+        "sha256:20840f7f7f4fe5f1d2c7a82ed7161567eb1d601a5e0c74cf01a99e7b78824974", // epsimple-construction-core-76-246156d9
+        "sha256:55660d7ebfe63caea0e15f3fbc2d73bd67e538b4daee8308da233809c9776178", // epsimple-construction-core-79-92969825
+        "sha256:f6509287b9b977dbcd3f18669b0f621bdad81acb2c832e86cf57381ff0c5f3fe", // epsimple-construction-core-82-e3c4284e
+        "sha256:185dba0977d6508d63193baaa7c0055e26d3572e9e0fdbc07d4fbd47e3b969c2", // epsimple-construction-core-83-5025a060
+        "sha256:2160362137025871f7dd976e71c34a6012646eddc6bdbb56b58be7a88a352ac6", // epsimple-construction-core-84-87537fa6
+        "sha256:e49b2bd15781c8fe3db43c595c55839daae50b27b94552125ea0b0a45659fc2c", // epsimple-construction-core-85-c288c4c2
+        "sha256:99e3f3d2eb12797716219cd41719360887f243cb80fda8ccda859a3cfbe76386", // epsimple-construction-core-86-538b0465
+        "sha256:552be7eb306d7e32eb5c8568f846485a3e0f2dcf4e7b4f057bfc123223d945a2", // epsimple-construction-core-87-8aaf803c
+        "sha256:e3d91265e74478a42666e2a5734d6614fa589313fa23b48f6ccde44d21a6ae5e", // epsimple-construction-core-88-f430c29b
+        "sha256:9ef79f9cfd4082e9716477420d25ce9de0f56ecb7eb180eebbfd9fca17d71346", // epsimple-construction-core-89-72e986b6
+        "sha256:298b2d3418132658f494afe64615eea2d8c03013399083b0f85d4271c54588f2", // epsimple-construction-core-90-590c4070
+        "sha256:97752afb6e1ac932083f5d6325a415f669e8746c00817f5b58f2736bfdab9577", // epsimple-construction-core-91-246156d9
+        "sha256:4aea70b4b9c28c75c3b42af943ab4cd8c3de450dad3cf112ef8c5cb4954de19e", // epsimple-construction-core-94-d909f493
+        "sha256:f3b853874379764ec7a27ae5c212217078c21876580957c2b410054097d21e42", // epsimple-construction-core-97-b733b56b
+        "sha256:fa99bee4c9c034d70fb0e64a16824186374f961a2ba7b539aa9eb8f4e072784d", // epsimple-construction-core-98-23136324
+        "sha256:4c07223c4fe705977d225e197bd4b349d234fa63ea04f997cf48b2f8d0641d05", // epsimple-construction-core-99-f2772e15
+        "sha256:d702e7bee9fcc86a7ea6731f963f257df202d72aa5c1e6c50eb19155ca7089d9", // epsimple-construction-core-100-c3fc9501
+        "sha256:b39ab879ece874f05063457768818ec2a9c24c56deea6c58ce775d613252e80a", // epsimple-construction-core-101-f6b33018
+        "sha256:1c06e5dd5ed1c967ea3765e5f14285e6a62aef75973207492dbd1d53c6f7faf1", // epsimple-construction-core-102-abf4a2ea
+        "sha256:ea4c117883bf41744435a24153d7ae93dc73575fbb8f2f57e019a1df3ec21cfa", // epsimple-construction-core-103-7326bc5b
+        "sha256:3a1ab91e190772255b34e4a615fc0b3aa5dc16bb5ca4e8101e1c89af90073615", // epsimple-construction-core-104-352f66b1
+        "sha256:8b31a074872bf8606d548b300a26c3b195c14e45ec0f31c5f24d8142860b4462", // epsimple-construction-core-105-3257fd04
+        "sha256:77a634a2c35b40dc7a610447e4e78754f6443516aab7a17b005bd847dd2f32ea", // epsimple-construction-core-106-45236b5b
+        "sha256:5cbc32e069e1f8bd99ef49ae2f6616a3c4d96de001bf9a21aa65d8c397c27bc5", // epsimple-construction-core-107-3f5ae9f0
+        "sha256:e24f9402e50fa327679d7e3366eebab0177f7e6d8e57a8af4a0357750973d138", // epsimple-construction-core-108-9f449287
+        "sha256:bad3cedc5b3a2b9d5dd916d400f0bcaf048f712f365152fec77e00ac977dc6d4", // epsimple-construction-core-109-758d9c0b
+        "sha256:121d5fdaa1a925235c725695bbbf6f8478975c105d297617c2c7c32f0cc7cb32", // epsimple-construction-core-110-4f9ce2c0
+        "sha256:6a53f7ef253728de24ae91ff52a8456cd2250e8c6cea27910203b13101d437a3", // epsimple-construction-core-111-119ed204
+        "sha256:dfef9bad91ae09af49e85ec0de89630a9b9af833282dcf2b5e927289e0acd2bd", // epsimple-construction-core-112-f3d6bd23
+        "sha256:0657b4cd89dc56675a49a77dd496ac68c0316cb4d25d012f85b7b12ee7e1110a", // epsimple-construction-core-113-246156d9
+        "sha256:649a0c199fd3076dafa4bb6939ef3822d86fab404758e16acc29c9b152aade56", // epsimple-construction-core-114-c6b969b4
+        "sha256:726c25b4649a8dd6da318b329df28903e1f9db023e7762defd2eae737bbc0287", // epsimple-construction-core-117-6e437543
+        "sha256:32e2241f16ffe2c24b8817be2fb0c8acb24f8cd7b024e733677de0e6c64abc02", // epsimple-construction-core-120-23907b76
+        "sha256:fdda2f1308642f24d877735705a3d0094536560cf48a8cb5785d6ef5d7749d48", // epsimple-construction-core-121-60a500a8
+        "sha256:cf44cc3226af313b36d7a4bbb49712610fa640225cff9f54c08cc41d514acd38", // epsimple-construction-core-122-b1bb16e6
+        "sha256:aae519998ee504d88b3645af63b0e19798b1104e174144664121014882061657", // epsimple-construction-core-123-d21ed4db
+        "sha256:b55b36af1b228767852caf6a82e952ecc96afa4807824cb5ba45902bffbcde97", // epsimple-construction-core-124-8a480443
+        "sha256:f0f792fb32c28afee1d8e850d16aca223a2479a1619ff4fcb87aa7c663c9a557", // epsimple-construction-core-125-a806c4c3
+        "sha256:9f53176553501f2726460f965a66700ee83012958faca874913dfc808d2d584e", // epsimple-construction-core-126-71552576
+        "sha256:40a6592b910a659b550f01869bc358991b389f482f428596bfdfd1682d590f59", // epsimple-construction-core-127-dc8c7ebc
+        "sha256:27d6fc1b325fa5be5257466628db7827dc3d13c1085a148799d19f090f88a47d", // epsimple-construction-core-128-fec259a4
+        "sha256:f3f75136694ef229d139934dc61dd51ca83269630d1455db28721ea1de5fd69e", // epsimple-construction-core-129-d72c2143
+        "sha256:eb7491571cb82df7de81bdd66e4875ac17737293eea4812cca609649a651a3b3", // epsimple-construction-core-130-59426aa2
+        "sha256:0fe1d465e43816e5de87c9434d90f7ace11b58b45d6fc71a3c11af9a167abde7", // epsimple-construction-core-131-a204e680
+        "sha256:f975d1b4aaa2f1deac4ec39c347ec1c605bc16a94629f8f64069103875375a57", // epsimple-construction-core-132-d803cd9d
+        "sha256:641c341314c719098e068bf63a11daa2a918db4ed541cd55a5bf2cb33fdd08c2", // epsimple-construction-core-133-d6777d2d
+        "sha256:9aada2b7196181f42e2312c3eee48d1e20bcdcc0ba2348d99a2fe56ec202155a", // epsimple-construction-core-134-558da4a7
+    };
+
     [Fact]
     public void MatchesPinnedConstructionCoreThroughProductionPublicRoutes()
     {
@@ -289,6 +342,19 @@ public sealed class ConstructionCoreOracleParityTests
             .ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -320,6 +386,7 @@ public sealed class ConstructionCoreOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

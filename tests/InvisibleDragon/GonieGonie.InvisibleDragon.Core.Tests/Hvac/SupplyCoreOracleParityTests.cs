@@ -242,6 +242,60 @@ public sealed class SupplyCoreOracleParityTests
         "sha256:4f87151118b5f36af0e6a2af1a861caef2168797032a337ccfcea5b98ed06adf", // 803 SupplySystem.to_idf_object
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:ee9ef8c5a31fac1d87c3675a133858e82f3b759f176f23f8ce37c7df175d073a", // dragon-hvac-supply-core-645-airhandlingunit
+        "sha256:79ee5dee5eb093733234a6006950128999e6459e6828096dbd8a457b5b236050", // dragon-hvac-supply-core-647-airhandlingunit-init
+        "sha256:22527360608480b941fd3dbb125d4d5aa7ff0684fea2f8d9f24114e83cc0c477", // dragon-hvac-supply-core-648-airhandlingunit-coolable
+        "sha256:62a8d44cada80cd3470c4efa6012433f21266aaee0863b77dccee12ad36fd0d2", // dragon-hvac-supply-core-649-airhandlingunit-heatable
+        "sha256:d6ad6dc28b7ffd68ba18c2a452b55b7ffc6f542cefeef1e2661bc02bc6c59984", // dragon-hvac-supply-core-650-airhandlingunit-idf-objtypename
+        "sha256:f4fb3ff1e856618841dbed677c7f1b3f16e295bb4382c0085d236f59d8e4e65a", // dragon-hvac-supply-core-651-airhandlingunit-to-idf-object
+        "sha256:89c669968c792c98f0a5332fd0140a815749a8df1a07c219ba02f243cc76541c", // dragon-hvac-supply-core-700-electricradiantfloor
+        "sha256:6e62f998af5228ba92238332fe1de718e22c2a1d7fe02164b2488f9f7c04f5cb", // dragon-hvac-supply-core-701-electricradiantfloor-init
+        "sha256:18a41f9eabb94503ce330d5d9843505dfd61800681fcd3624b2351aa300eb1d9", // dragon-hvac-supply-core-702-electricradiantfloor-coolable
+        "sha256:0c767a32526dcde373c5ec32ba80b54c50cc3ddb30c9c85369d7bbdd7eea4e4b", // dragon-hvac-supply-core-703-electricradiantfloor-heatable
+        "sha256:3fa02c810e5dfa88c7c7cb7c8f9693aea209fea486062c485e1c20a688f3c80c", // dragon-hvac-supply-core-704-electricradiantfloor-idf-objtypename
+        "sha256:ce4432a1586d319ef4ea7beff465cbb18960abbb9f83eeea184c35c18aa6b83e", // dragon-hvac-supply-core-705-electricradiantfloor-source
+        "sha256:c307aa03e4b5c8e3cfd8215b72b8e29155b7405b0c1475196215ce543afb8238", // dragon-hvac-supply-core-706-electricradiantfloor-to-idf-object
+        "sha256:d67c80dd496db4cc39f8f9c015a21e050c294b145c0b2208bd5cca7f1cf0efb3", // dragon-hvac-supply-core-707-electricradiator
+        "sha256:999fa90a4bebfb0cd7cd01104763059ab8d54986c757cc17652964f5ec29ed9f", // dragon-hvac-supply-core-708-electricradiator-init
+        "sha256:95afb31cb8649592786ba5b8d1efa4216dae82a23d690e9b70be9281d7ff6498", // dragon-hvac-supply-core-709-electricradiator-coolable
+        "sha256:487e0bd1a4d6e53af67dd75fb511c6292a5f5cc479b9e1b3d225cc3027baec8e", // dragon-hvac-supply-core-710-electricradiator-heatable
+        "sha256:dbd30b3b75d71df1501d6e9718c75b37a53647dc2dab273ceec57b8aed268968", // dragon-hvac-supply-core-711-electricradiator-idf-objtypename
+        "sha256:c3d2030312bec4d714b351ca49ef2b7e264d682118ce11c92b670250ea706451", // dragon-hvac-supply-core-712-electricradiator-source
+        "sha256:28ba9ee28df6d9c36bce09234b1af0f334a6ebfb028ae6e75d234e3fb70884ae", // dragon-hvac-supply-core-713-electricradiator-to-idf-object
+        "sha256:c3ebbe0f16e7b74570cbd2afb2171553bd6d257a35c53e07906ef554ba990b2c", // dragon-hvac-supply-core-720-fancoilunit
+        "sha256:90fc5dafc4edac158aad231b1679edd3f0af037d6952609fba40f0941fecb284", // dragon-hvac-supply-core-721-fancoilunit-init
+        "sha256:66e9aae8ac16619880eb78a9dd9a5c3e518116fd17810d0cdc73c7568efb01c2", // dragon-hvac-supply-core-722-fancoilunit-coolable
+        "sha256:16014d3b51b94dd8e97bda82a539e0860a9b5157a4f91755851001b676d73b6d", // dragon-hvac-supply-core-723-fancoilunit-heatable
+        "sha256:11ec45b6ceda866bc617ef517a90af93c5580ca61e204497b0a32d353c9d3c3c", // dragon-hvac-supply-core-724-fancoilunit-idf-objtypename
+        "sha256:7718279d3852bac6adfd1b88e429f95648a9ba4055e32fb30bc7f5a6ac045889", // dragon-hvac-supply-core-725-fancoilunit-to-idf-object
+        "sha256:2e612609a386b445f8085de91be6824ab068d4d62defa3eb96e7630b08758b54", // dragon-hvac-supply-core-750-packagedairconditioner
+        "sha256:b734aeac074fcda18ed8dd0de72809533d5953480e6812b4a30bbe56f738c19d", // dragon-hvac-supply-core-751-packagedairconditioner-coolable
+        "sha256:e394da0b39df826ceab6892117299af48a851062210fbca88ccc346497a5fd21", // dragon-hvac-supply-core-752-packagedairconditioner-heatable
+        "sha256:344b99ba611607c20b6203d84db3ff95f065fca2bedc61ec5bd9bb820536dafb", // dragon-hvac-supply-core-762-radiantfloor
+        "sha256:cbece4a27dee1556ff993fcb3a956bda5f3f65ddc2f484ba274052f1f83192b1", // dragon-hvac-supply-core-763-radiantfloor-init
+        "sha256:a564d58d722ff4e4bbdbd7a614d1cd0bee786ea6d6dd0213e9fc3d530df735fa", // dragon-hvac-supply-core-764-radiantfloor-coolable
+        "sha256:bbbb1d1316103978a619923fdfde1719fbabf0bf57fdaf1699a12d841b6e1331", // dragon-hvac-supply-core-765-radiantfloor-heatable
+        "sha256:2edbbbcf3ceceed8131e69d836afc399ae3e23f0660a1393b7619ac1d4e1d682", // dragon-hvac-supply-core-766-radiantfloor-idf-objtypename
+        "sha256:8d5504d1c007fffeee7406535b2eeed73fa8ff2a1b6c375668de1491f2a8b184", // dragon-hvac-supply-core-767-radiantfloor-to-idf-object
+        "sha256:26550db83577b2c168af49034d98c6f694b8aa064cc4826e65c8bbea4e94a6c1", // dragon-hvac-supply-core-768-radiator
+        "sha256:81d4f1ed47d999035fac1835822739de56f4fd9aea2c99e796b5753cb7b33098", // dragon-hvac-supply-core-769-radiator-init
+        "sha256:6fcb3eced65ca01f4ac7031ca408f3280112cef262fa7e382901c5778bdd3014", // dragon-hvac-supply-core-770-radiator-coolable
+        "sha256:075fc8c105aebd92f444e11dcbfb20796639e85c9a1dc64bb283de90fea35f9d", // dragon-hvac-supply-core-771-radiator-heatable
+        "sha256:0ede03a26dc2746816b495f1fffb192fa33026b145a5c6e3e4d7a430d218dcd0", // dragon-hvac-supply-core-772-radiator-idf-objtypename
+        "sha256:71fc2e2bd7354284dc063a9fb5d5be06d5974f35945fa2d01d87812eda9e51f8", // dragon-hvac-supply-core-773-radiator-to-idf-object
+        "sha256:539d6c951ae58f934293d977d1d217e5e2d1f49d2a28c785734a924478b4217c", // dragon-hvac-supply-core-789-supplygroup
+        "sha256:1175daab0d228c61e43ede21ff5753e12c50f86b78fe65e41e1813f94d33df9f", // dragon-hvac-supply-core-797-supplysystem
+        "sha256:be6c1ddfdf8cb66ef9d2d5364dbe96ccdf9e951363180bd647d981bbee4cffdd", // dragon-hvac-supply-core-798-supplysystem-idf-get-airinletnodename
+        "sha256:a5386271e93d9c1d055220242b9a6cce4d536f21c2faa720c64b35811d8dffa9", // dragon-hvac-supply-core-799-supplysystem-idf-get-airoutletnodename
+        "sha256:82ffc12bf42d1c199584d242b72539809822a4e634d0db3b4adb2a67405af21d", // dragon-hvac-supply-core-800-supplysystem-idf-get-demandbranchname
+        "sha256:4c1e68ba3176516ce968fc026aede8ea560c77ead460b69b839cb5f63e97933e", // dragon-hvac-supply-core-801-supplysystem-idf-get-objname
+        "sha256:b69dced4f902af99b10226b8eda89a3e75dbc54a5df28593d376d756b0d27ef4", // dragon-hvac-supply-core-802-supplysystem-idf-objtypename
+        "sha256:bac3a9b8a28b3775c4537ff3683cece1bf4afeef6ee20440098aedaba2338296", // dragon-hvac-supply-core-803-supplysystem-to-idf-object
+    };
+
     [Fact]
     public void MatchesPinnedSupplyCoreThroughProductionPublicRoutes()
     {
@@ -254,6 +308,19 @@ public sealed class SupplyCoreOracleParityTests
         object[] receipts = corpus.Targets.Select(target => CreateReceipt(target, observations)).ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -281,6 +348,7 @@ public sealed class SupplyCoreOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

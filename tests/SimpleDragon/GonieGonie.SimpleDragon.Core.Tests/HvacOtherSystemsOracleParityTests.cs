@@ -162,6 +162,28 @@ public sealed class HvacOtherSystemsOracleParityTests
         "sha256:172001d50a8f9afd1013f7c9bd31d21eb475e88dab4879cba0485b4a57f36b1c",
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:26a05bc20bf1e09a9dc5807626bee13c71b872c81898ae04fef45d243cb57f52", // epsimple-hvac-other-systems-283-5a79715b
+        "sha256:20ca5530e9cd6c0b49fe0274e0f496e71b29d14e574e67df20a3129b5c00ac77", // epsimple-hvac-other-systems-284-246156d9
+        "sha256:0dc167854636dc54aa93b61ff053fa60739ed297634e1c46bef8f06fc28d6553", // epsimple-hvac-other-systems-287-b0187462
+        "sha256:cb9f17948da78e0fe3e00aa6eb3cd4d9aea4eb356514513367d66f686486f4e3", // epsimple-hvac-other-systems-290-aa93b96b
+        "sha256:71587cb4d888ecc6afd9f6faac8fdcfe07648de4a32adc55282bfcd01158ce77", // epsimple-hvac-other-systems-291-3b2cfc1a
+        "sha256:16796fe4379ee41d27fbb5b6aaf4172fc11fc06d4e27cd7da5b33e459c0132cb", // epsimple-hvac-other-systems-292-80144f2f
+        "sha256:84a0527a97b950494afb4e9f1d542c165a55259840e56a93db7cb73866452ffd", // epsimple-hvac-other-systems-293-1571f37e
+        "sha256:f52989547a57dc8f29b5c7f2fe7e6b3ff046c3d3fd9b349330d6387b761346d9", // epsimple-hvac-other-systems-294-abeb16e6
+        "sha256:5236b9ae4016699e7a806865801b201ee9775f2481630144fda9ce254d3ed53f", // epsimple-hvac-other-systems-295-6f67da14
+        "sha256:fcf221f7a28813421996f1b6ffaadc00dc1baacd62ddd1ca80dedeea6b0116b2", // epsimple-hvac-other-systems-325-b4f22735
+        "sha256:69c12009e3bede0e17679f0762f636bbe9c34487c08a0c92f517d1f1aff2ee58", // epsimple-hvac-other-systems-326-246156d9
+        "sha256:75187cc119f45cefb65496a947743c02c0cb1f70b17be8d106b44dced581c921", // epsimple-hvac-other-systems-329-7d9d5173
+        "sha256:36e5a7cd726835dd70cd037edb04542401e72de000165d998dfbb2b2fea46701", // epsimple-hvac-other-systems-332-b19eca15
+        "sha256:a8a36c7b2909e5796aa97fe91c605c4ab18a9ff77ed1198790b3f865976ad140", // epsimple-hvac-other-systems-333-83943137
+        "sha256:1be5148468268cfa4d870d5470504f6b2ed676124497a182dc02536ef3afe6e4", // epsimple-hvac-other-systems-334-acaa4faa
+        "sha256:d90f716300fff0ebb42dad961fed4f546ca448cc09922298fb716b207ec475a4", // epsimple-hvac-other-systems-335-76edd9cd
+        "sha256:4d4a27a21b43f9fee2c21dd535127a04391f65fb81ce6aac351ed0d487b73ffc", // epsimple-hvac-other-systems-336-fdc1293c
+    };
+
     [Fact]
     public void MatchesPinnedHvacOtherSystemsThroughProductionPublicRoutes()
     {
@@ -178,6 +200,19 @@ public sealed class HvacOtherSystemsOracleParityTests
             .ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -209,6 +244,7 @@ public sealed class HvacOtherSystemsOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

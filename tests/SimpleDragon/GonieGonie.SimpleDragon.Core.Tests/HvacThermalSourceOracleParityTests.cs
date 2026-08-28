@@ -225,6 +225,58 @@ public sealed class HvacThermalSourceOracleParityTests
         "sha256:12349574668d8886aacf0b0fd22c56fa19449cebc2b05cc34e76dc5318346135",
     ];
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    [
+        "sha256:b716febd96c3b2b7b8179d0c092443be3b2568973acd4d333f141afcb4a79f73", // epsimple-hvac-thermal-source-135-c44e12f9
+        "sha256:4f3ca9cece28d4392f8184bd8eb6efa013a4dea2d52f776ee3cf5f34f004438c", // epsimple-hvac-thermal-source-136-246156d9
+        "sha256:3634f3aed984b29f2d6ab8b5fc2af86157bc9830ad73e05120bc3fdbde4e8785", // epsimple-hvac-thermal-source-139-4aae19c6
+        "sha256:852fd186de4bf39f2c39da5b676de8c88866fbfc0d8f2e40e06d3ac714634872", // epsimple-hvac-thermal-source-142-be052579
+        "sha256:b201e7fe0af6577a12e170600fbd5153f147303c711e660032dcdf90fd181a43", // epsimple-hvac-thermal-source-143-d699d5f1
+        "sha256:6a6c2852004ce82f007b81124f645391da1bfc383626ba2114fe2d5af9e14d3a", // epsimple-hvac-thermal-source-144-253d21d2
+        "sha256:ba927766ab1f387b163bdc35c9f949323ece65062eeaf25d7f1bac0de8e64c92", // epsimple-hvac-thermal-source-145-f305d756
+        "sha256:b0670a6a45214ee1c789b7e6da8c12a1b18497f7d39ee2be99b2649229b67433", // epsimple-hvac-thermal-source-146-7a12c015
+        "sha256:e5bebd5b0a67e654fcd026c62af2ed148cc2ae7fd6ed612c56e4952824801ac5", // epsimple-hvac-thermal-source-157-8d52ff9e
+        "sha256:7e3264fd1a4b2333ce91ab4d1e8ed4e6ffc2e5446afeb0a3e6d4dcfb8e605b64", // epsimple-hvac-thermal-source-158-246156d9
+        "sha256:af1991ecf3a5b89169a37a44bf2be5160166cfd55e2ccade4b0633ad2c60a429", // epsimple-hvac-thermal-source-161-f45db90e
+        "sha256:e64c317a3ec71fc1e9c47bb92f2daa89a65410f4fd0c583342cad308f5660aac", // epsimple-hvac-thermal-source-164-d699d5f1
+        "sha256:cab7a61a9531e151bf49e31b7480fa159dbeb8003c5d256637d1fb4841d8302e", // epsimple-hvac-thermal-source-165-80144f2f
+        "sha256:2e4a0f94410af992c78f7197a507c330f2bbdc127dc84f539ba1a022b756edc5", // epsimple-hvac-thermal-source-166-bd3f1e5a
+        "sha256:a8c933e84abb05bf99b44f3ccda3321c6eb68d518c19e13ae84ea8b08b0e9364", // epsimple-hvac-thermal-source-167-64d0443e
+        "sha256:4fe87b5b667657385bcd50410616672b367ae0f852ece6298704ad9ac78274b5", // epsimple-hvac-thermal-source-168-f9effaf3
+        "sha256:9d88904657f7c5bb19ee024790d7ffd998296e4f678b149ad6aef5f59f5165c1", // epsimple-hvac-thermal-source-169-86b77a93
+        "sha256:d37a13f01e7a27468325c3dc0b015814d2a6b81f3ff91647b4bbf1efe5b3ede4", // epsimple-hvac-thermal-source-170-8baa00de
+        "sha256:475bcda1b622cead02bc5c9385128e7f5a23c9a63cd6878eaba6252eae3de545", // epsimple-hvac-thermal-source-171-246156d9
+        "sha256:288cdb3354822d77d51764b89dc54d61cc07065db67d1e93a0c3d7e36f00df85", // epsimple-hvac-thermal-source-174-9c5215c4
+        "sha256:98a4fe46bbdaaac41d196048670807fb76e4c78a8a3594db665a14475a914c0c", // epsimple-hvac-thermal-source-177-d699d5f1
+        "sha256:2fe3451618f68e088360fcb36739a90402d3b7679782cafc251c272b538c55d0", // epsimple-hvac-thermal-source-178-000c99e3
+        "sha256:1eba63512e312c2cfc4be2a2b50069104442b1fae22d167c9af526ba7be09a86", // epsimple-hvac-thermal-source-179-e56b52fb
+        "sha256:642f0633dc7956582014cdd34d7867e346f692d4ba4c989717d8083379c6bdf0", // epsimple-hvac-thermal-source-180-473c615a
+        "sha256:9e06fc69950f2bbb034e06df3b9b5f6cf1c0458bb44f5aa8f9658c76866ca02a", // epsimple-hvac-thermal-source-181-75acdde9
+        "sha256:32ab862e5152b822ed5341df81e945a0411289d440f5c5cf411a4eba15f7c946", // epsimple-hvac-thermal-source-182-253d21d2
+        "sha256:7ef5b5319454472a76dd7f041f12cc162395defd8bbf74907eaee917fb7469ac", // epsimple-hvac-thermal-source-183-ca5a6445
+        "sha256:95bf0d07d127e0c57a6eb8b06991c2cd8c70530daf839d1d4aba78b10bdbc245", // epsimple-hvac-thermal-source-184-b3b58ae8
+        "sha256:473e79b7bc45e8d18a755891c835abc3b2508c3c7b422ca939f0d236c8bd945a", // epsimple-hvac-thermal-source-199-a1c6d574
+        "sha256:adf04da0ce5f264d9af58f215c696699bac6f924d432c97038d17c45a11cb09d", // epsimple-hvac-thermal-source-200-246156d9
+        "sha256:ce3644625cd3d2c278ced579e32206de7313cb5adbcf128a3f3c1855a25610dc", // epsimple-hvac-thermal-source-203-f477c20b
+        "sha256:914d350fdd81e3aa942b3915779d0d945c9b045c9b39058df870e9a0be428206", // epsimple-hvac-thermal-source-206-c53a5bbb
+        "sha256:320f3d7b05fe1dcda83f66e5c8f5f140d761c49fdde0f24acd033671f92ade6f", // epsimple-hvac-thermal-source-207-f9effaf3
+        "sha256:afe92a278708a00e24facedf6f9d9b2193e27b9454c2fcee6b4cf1537452d5ac", // epsimple-hvac-thermal-source-208-bf1c4c8b
+        "sha256:1353b60f38d8696e33d01e7680579b699f6023b75031567d2aa3fd9cf98d93de", // epsimple-hvac-thermal-source-248-a87f33ee
+        "sha256:908ca1834e524eb0aa934863077a4d9c985d0bb752b39f5683ee266e6de55c68", // epsimple-hvac-thermal-source-251-81ac3508
+        "sha256:dec5c204d9abbf79eadaaaf673d79914ca7a7327944b6fe3d249b29ccfdd61b4", // epsimple-hvac-thermal-source-252-069a6710
+        "sha256:af8aeb5902e4bde1a784e36c10de9b03a31f8b7d98697e1788f573bfe28ae376", // epsimple-hvac-thermal-source-253-3872db31
+        "sha256:b377167f5fc91c900e99a19d36f32439fd4bd13947c49eb8a30fbf5d6935436e", // epsimple-hvac-thermal-source-254-246156d9
+        "sha256:81707fa359bb1a84f57b9aa444b17bbf83900c711388b6eaea232fd7084860b2", // epsimple-hvac-thermal-source-257-7e88c6cd
+        "sha256:01cd52d09f33230ac5563557b13674e3e5df9c375dc2b8aff3ed1b726d6c0387", // epsimple-hvac-thermal-source-260-2c365992
+        "sha256:7d4632b913d3eb000b8e70f3c6a75a7cc49cdfac04a0ce9bf2a69c03cc399039", // epsimple-hvac-thermal-source-261-59bd7983
+        "sha256:e60b614ca5768313011c8d180407ff10e2fb94a05e55a3652ca351f40d1accfa", // epsimple-hvac-thermal-source-262-20b220f0
+        "sha256:64acfc83b9cbc71d1ccf1819b49195cf3b97ba49a94cde36655616a3095c7240", // epsimple-hvac-thermal-source-263-37420422
+        "sha256:7610b721ad8a32e35ee1bc690a51b37db593863e85b73ddab84a800173bc1352", // epsimple-hvac-thermal-source-264-b48949da
+        "sha256:b24fb0df19a14844039bb768d6e32c701ddf94839e1de93d45a1a67e837448a6", // epsimple-hvac-thermal-source-265-55ddf021
+        "sha256:8c1ea607dde3384c3f49283173ed23038f47a638007aafba744698a2546f7d03", // epsimple-hvac-thermal-source-266-0feeee0b
+    ];
+
     [Fact]
     public void MatchesPinnedHvacThermalSourcesThroughProductionPublicRoutes()
     {
@@ -241,6 +293,19 @@ public sealed class HvacThermalSourceOracleParityTests
             .ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -272,6 +337,7 @@ public sealed class HvacThermalSourceOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

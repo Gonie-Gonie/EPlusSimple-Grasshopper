@@ -286,6 +286,70 @@ public sealed class SourceTowerCoreOracleParityTests
         "sha256:c57ee020b08fa26a62fed57d7910fd3bf577041d3e052880283d8ec4b8e5a525",
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:c101fe4c61f1b5fc2e5e918911b2873d08d58e1cad781ce087c9eef8086c2687", // dragon-hvac-source-tower-core-641-3a1dd026
+        "sha256:bef09d3986d78f26f6577bd95dc05818ae743ff953be48043c2b1c7bcfc3b3e5", // dragon-hvac-source-tower-core-642-14ca97c1
+        "sha256:9c86f627a34a0776f57d021dba83625063fc6fac1a82c6e2e4b413364bf40b6b", // dragon-hvac-source-tower-core-643-3e4cd4b3
+        "sha256:ac8f16c0cf36d1452ec00298d04c249d806be88a70e74155fcc31cf0367996a4", // dragon-hvac-source-tower-core-652-fef90e4c
+        "sha256:ce6fff64233e9cce7e857379122086d62ab48702c3e9563297aea29a40c96af4", // dragon-hvac-source-tower-core-653-735f922d
+        "sha256:614280337651e9f3079d60f31383cca483a66e8f62f9f0cd2eac20b430e63a88", // dragon-hvac-source-tower-core-654-b97f1590
+        "sha256:3d77ff757a936b4fd9ed405ee2bbf082f2b54afc525900a5c3eebf187e4fc084", // dragon-hvac-source-tower-core-657-610bd83a
+        "sha256:308393e8b2311865e76018f3ee8af5b2c080ec0d4610b3884e5ac3308a97f470", // dragon-hvac-source-tower-core-658-65f8043a
+        "sha256:20d114844d67123689165d2859fa3b160e7408d3af01bf16b77d746fea21a145", // dragon-hvac-source-tower-core-659-4ab109ff
+        "sha256:b98ef9ebeeb47f129f55000e7043c0a093cd813ff8810f9817404165738a0d8d", // dragon-hvac-source-tower-core-661-a4d512bc
+        "sha256:2a353eefc2626fe3d95bd65abafa7142ddfa0db34bc57c2a06ab957d3df51d7f", // dragon-hvac-source-tower-core-662-4b2767cd
+        "sha256:69f7f2410c6b130601c15d70d73889d629b1103f3d4588894e0f5b5758c8666f", // dragon-hvac-source-tower-core-664-a365cc0a
+        "sha256:f309ce93a52bb035228e6bfa38ded50d2f5b8a041c8140fbecf9b5037a7a737d", // dragon-hvac-source-tower-core-665-648bc45c
+        "sha256:b3b4e3da4013e8bbe570cc7c328f9edb622bfcd2422cfe38723c83ef1467d3d6", // dragon-hvac-source-tower-core-667-8785ee6d
+        "sha256:e5db69b1b6a4e6940c3c6e55493ac1184231f74aa51a2fc999039e29b16d3de9", // dragon-hvac-source-tower-core-668-dfd51671
+        "sha256:7af6d2a76a0ed248eafd93af9e0cb74e6f79b52ee0b864daab2572f34d30a2bb", // dragon-hvac-source-tower-core-669-2947a213
+        "sha256:081a757d3a7681fc97e3ddb89e3e1aaf7f1b8b0c784cc77c3f755192f8e79adb", // dragon-hvac-source-tower-core-670-5074351d
+        "sha256:2aa2d677868645e1c1d14e45369397b4548ba6d016a8f18729b89bf70d418257", // dragon-hvac-source-tower-core-673-4b07da75
+        "sha256:17c9be1c2259014f70a304181e65cf9c148e1a90f85c42ace7a74118bcfa0c8c", // dragon-hvac-source-tower-core-674-d388c8f3
+        "sha256:31f448f399a5ab1dfa54d377a194e4a87515b8026882e7b0bba414bea968967c", // dragon-hvac-source-tower-core-675-b754f9c4
+        "sha256:4ec2543f19799d1000717b139107c1719817cb77bd0c7dd6980d88c45ef28bd2", // dragon-hvac-source-tower-core-676-482bcce0
+        "sha256:d362eb3c9037cdbb1474edeb0ca3f8a9b118107b3fd12b728bcde566c21b2d48", // dragon-hvac-source-tower-core-677-bc43234b
+        "sha256:491b998b5bd80a3ba791a190098b7960980544ea82f677e8a1fcb5dc96bbf820", // dragon-hvac-source-tower-core-678-7da2b907
+        "sha256:e3ccff7f7a9015e4cc41eb686e0f1a052e8300a5119bc7f5db751305ed692dab", // dragon-hvac-source-tower-core-679-53dba42f
+        "sha256:59c412dcf586e4232beeaa10a77eee5a53efabff9e634e456b220881f7742c99", // dragon-hvac-source-tower-core-680-87efb2b8
+        "sha256:1e06c5ccbf831992b1e63c7fb3a6e6838f394ad87f58988b3709e79f7079db70", // dragon-hvac-source-tower-core-681-8200f079
+        "sha256:125ad05c035cc0dd62ee60bc36900e27a55ae92b2288445c7cfe35bbab685119", // dragon-hvac-source-tower-core-682-c1e5599b
+        "sha256:50f5d1b3dc33d78a9eb900b3dad5685f99209949013bb664e2794fbd2e301717", // dragon-hvac-source-tower-core-683-65852008
+        "sha256:1c3144ea560fc01409775751faf956b908010c609a2d74238c06319b0848992d", // dragon-hvac-source-tower-core-726-66a9b58b
+        "sha256:ba068ff29a902ae73c1db2c47402b97fdd7e1c82f72169648754debc19dc7139", // dragon-hvac-source-tower-core-727-4d234c1e
+        "sha256:9dc856adde46d71f57dc806c925743c0a9d5170a4e1b690331b1aee432f601a5", // dragon-hvac-source-tower-core-728-a3ee9ef5
+        "sha256:76a3eb3adcd9ab3898d2f65cbd77177f0b659decd9fa226743981075c23f597a", // dragon-hvac-source-tower-core-729-8d1b877f
+        "sha256:b06f4e35a404ddabf3c5c646d76e2ce78f1f4bc90df07cf3dff248fecfb93a69", // dragon-hvac-source-tower-core-730-b26b5808
+        "sha256:fa6921038dbc67aae8195f9c7f02e1442f8f3b46325efe1ef2417a9a61d7ddd8", // dragon-hvac-source-tower-core-731-1f61e381
+        "sha256:05dc23910403d315b927f15267b3edef7d60db0507594712a8b270cb6a2e3b97", // dragon-hvac-source-tower-core-732-7fc1afe4
+        "sha256:f5ca6ee4a89d0a48f77a17c670455d601a6ca57a93f925e147229b046d31217c", // dragon-hvac-source-tower-core-733-5afbce03
+        "sha256:cbb3728a6fe5bb70e85e80fdd0262dda2b58631461c8bc0663551ac00b7e03dc", // dragon-hvac-source-tower-core-734-42a148cb
+        "sha256:327ee053a9f6d64d93e9009b72f2d16bfe4c38427e16c3830a2e3e6f4703a6a9", // dragon-hvac-source-tower-core-735-914d30a5
+        "sha256:4a852faa475f1b432f2a88e1d2b52658132f0b9d5c3ca92bff03e8454f3ee276", // dragon-hvac-source-tower-core-736-dea3dce6
+        "sha256:34ad9e6cd3cacdf31459c8a8f77674f3d79b7d73d6d8496c87ea45892ba4d0d8", // dragon-hvac-source-tower-core-738-5016ceb5
+        "sha256:c3d6aab1451ab799787fa0bfb643427a03382ea289ab6b3e072bc31ad8cd85d0", // dragon-hvac-source-tower-core-739-0189ef90
+        "sha256:2f0d791d315fed8afdc251e54edf5fcd3375f5956250bff680b9f24c27ab8b30", // dragon-hvac-source-tower-core-740-f862c5a4
+        "sha256:28b50e6d72eec22392323bee01cb9e322aec9caf2a001f25ff3ba89d9ca866b7", // dragon-hvac-source-tower-core-741-498d6fec
+        "sha256:476b1045fdcf0f0cc01d60a6fd0a2fe461928b0a4fc5477bc2dde1852440e99d", // dragon-hvac-source-tower-core-742-66eef776
+        "sha256:1a5cd82b508c0262f1784941fd4fc1b3f7ab7e648f14b621f0ac1e14a6aa215f", // dragon-hvac-source-tower-core-744-219b5b22
+        "sha256:79a9fca1396901720e60efbb873edb2e07325613e5eb1c1298e2c46bf72c49bd", // dragon-hvac-source-tower-core-745-7ba0b88b
+        "sha256:669dc022c2b134fcebf5c7128b3ab392707a4b1eac8caef6c26e05c62f892079", // dragon-hvac-source-tower-core-747-3946064c
+        "sha256:c1d4d83048036ce6dcead9056d651a5fe72a9dfe9f77560da537cadc3bebdafa", // dragon-hvac-source-tower-core-748-3692dbe4
+        "sha256:ac25bd74ecdb59d5fcf4328cd454ab45b5901165ceb666272663495f206fde58", // dragon-hvac-source-tower-core-777-d8fcbe86
+        "sha256:5df3ba5c358df0ac9c9f9071b354c8b8b606d7d666e1e208d08e0ff6fb0e388d", // dragon-hvac-source-tower-core-778-491d3dcc
+        "sha256:312ad86a42c42bca15d0ba9ab41f326392049eafa2ebaf470d5d61c06a7066cf", // dragon-hvac-source-tower-core-779-dd1f2652
+        "sha256:dfb6569edcb4023f31935eaa5996e127a134bde6ddedb21d072f5aad61ce72d4", // dragon-hvac-source-tower-core-780-9fcd3f6d
+        "sha256:6fb1cb624b56498078e98997c3d5c36799c83dca907672359c672859f8d59f55", // dragon-hvac-source-tower-core-781-ee8dc7f9
+        "sha256:35967b26b3a3769975d8ac2664cf6105bf3c5e10a8729f412fd8ae378ab7a1f8", // dragon-hvac-source-tower-core-782-5b92cad7
+        "sha256:0aa7a4a3be09d1e342685579e6c204f2d75951c02150e71304d86be3ef7537a2", // dragon-hvac-source-tower-core-783-65852008
+        "sha256:79c236afbb681f5712c486b2b889dd7ba75338c46ad2884dc13e5cb27d853566", // dragon-hvac-source-tower-core-784-6cd0d336
+        "sha256:d8e65d523ab681d037d51fd0e0e47bf685a774f9de05894aa114207f4a64cc43", // dragon-hvac-source-tower-core-785-b62cdf0b
+        "sha256:f18da24f17541001ff7da79159ff2b5bfe2a5f833f870151c29a19660ff6d585", // dragon-hvac-source-tower-core-786-8ad08f57
+        "sha256:64cedafef6171d8ab44ba19f8f7089eb93cbfcd4c20b52c017b71464b17fda74", // dragon-hvac-source-tower-core-787-14bb746e
+    };
+
     [Fact]
     public void MatchesPinnedSourceTowerCoreThroughProductionPublicRoutes()
     {
@@ -298,6 +362,19 @@ public sealed class SourceTowerCoreOracleParityTests
         object[] receipts = corpus.Targets.Select(target => CreateReceipt(target, observations)).ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -329,6 +406,7 @@ public sealed class SourceTowerCoreOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

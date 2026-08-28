@@ -159,6 +159,26 @@ public sealed class MiscSystemsCoreOracleParityTests
         "sha256:5dbb12930a21167f4985d51e3107c54dbc7258faa8fe9741ab21866bff47cae6", // 760 PhotoVoltaicPanel.tilt
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:b91a3b4427dac338a46825ff18ec78aea1e018426753a08c468d79d9e8e6db01", // dragon-hvac-misc-systems-core-693-domestichotwater
+        "sha256:eede3d03a9da4bc09d58574919911582e4073f8b7a0370e3003d2c9bd58c6790", // dragon-hvac-misc-systems-core-694-domestichotwater-init
+        "sha256:a1350be80dd5627d8570fa65229c7d2fe0ec628bc7b4599832eeec85f85b75d6", // dragon-hvac-misc-systems-core-697-domestichotwater-efficiency
+        "sha256:e2601eb1dd249096e84e6f26434d5fdca6f62972db19d11656f3a50783003bcc", // dragon-hvac-misc-systems-core-698-domestichotwater-fuel
+        "sha256:8d90cebf76b5aeb0a9e5fe34d8a64a3287ddf8197c0a9f225321a46f24f8fef3", // dragon-hvac-misc-systems-core-699-domestichotwater-to-idf-object
+        "sha256:3ce22c8008597924eda94d439aed0dff791aca04ef21be686dbd32fcd30156dc", // dragon-hvac-misc-systems-core-714-energyrecoveryventilator
+        "sha256:d99d07164a86069bee982f36d0adb8558482a1691d4314c34b78e5b2a55e65d4", // dragon-hvac-misc-systems-core-715-energyrecoveryventilator-init
+        "sha256:2e247ca6157f0d1d7b5636b6eabf8c379da19344767fe97f65d69a9d65187721", // dragon-hvac-misc-systems-core-716-energyrecoveryventilator-to-idf-object
+        "sha256:f9abec816bc299289404479f6f3882dc6ae4bf6f14485a14cf922408db2564ef", // dragon-hvac-misc-systems-core-753-photovoltaicpanel
+        "sha256:218aaff4095be7ddb65456f52bac455af36159746dd755816bdf6c5052dfaea3", // dragon-hvac-misc-systems-core-754-photovoltaicpanel-init
+        "sha256:ad6f896506c021e207c523bcf2e22b3ba3c23f2b7cea3c8e4d059cdda8c89e2b", // dragon-hvac-misc-systems-core-756-photovoltaicpanel-area
+        "sha256:3ab9565751d133f837e4579b86db7e725f7bf31f4deda4c05afb31496327d6c1", // dragon-hvac-misc-systems-core-757-photovoltaicpanel-azimuth
+        "sha256:0e6738976198190046dc57e9aded7fa22f59d82e9252b560341928c371befd2f", // dragon-hvac-misc-systems-core-758-photovoltaicpanel-effective-area-ratio
+        "sha256:22744b7a1f87ae7380e66a96df7be537d158adb40f05b2c47b0269786f5859e3", // dragon-hvac-misc-systems-core-759-photovoltaicpanel-efficiency
+        "sha256:ae346cd3fccc4a206242c7f5b10fbdd847bf5884af960171bdcaf6ad0d423074", // dragon-hvac-misc-systems-core-760-photovoltaicpanel-tilt
+    };
+
     [Fact]
     public void MatchesPinnedMiscSystemsThroughPublicProductionApis()
     {
@@ -169,6 +189,19 @@ public sealed class MiscSystemsCoreOracleParityTests
         object[] receipts = corpus.Targets.Select(target => CreateReceipt(target, observations)).ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -190,6 +223,7 @@ public sealed class MiscSystemsCoreOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         var recordedIds = new HashSet<string>(StringComparer.Ordinal);
         foreach ((TargetBinding target, object receipt) in corpus.Targets.Zip(receipts))
         {

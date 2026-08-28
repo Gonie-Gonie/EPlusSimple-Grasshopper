@@ -223,6 +223,32 @@ public sealed class ImugiIddSchemaStaticCoreOracleParityTests
         "sha256:dc79d2ebfdba8e372589711b73c90853a4e2a1442d2821401d51971ab63c7462",
     ];
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    [
+        "sha256:c7da66b5eb3fe8ece4e4a214912391ebbce41b479c8d9c870197523dc701c94f", // imugi-idd-schema-static-core-1095-394fdc55
+        "sha256:47e46c5ebc707fdad48ca70860f551ac94a2cf73c316147d0a6548ba2bbbcaf6", // imugi-idd-schema-static-core-1097-369f30e0
+        "sha256:dc979fde5fe64daf08e9203d83e81f6c33edfc1f1d3a9b8377f0331501e8038f", // imugi-idd-schema-static-core-1100-3b6538ba
+        "sha256:498b44afcbd57962954955e809724d2e049dd358f10819a23dc3be9198ce8d29", // imugi-idd-schema-static-core-1101-0b48b62a
+        "sha256:0a3f0f22dedb53860c294b1235489577b01c86c197f15cfc69b8e972f419f6f5", // imugi-idd-schema-static-core-1102-1772eedc
+        "sha256:d81c81119dc45e7eca7ef10c9c9ce30a5b8ea0677952cf0dad4c3525068af82f", // imugi-idd-schema-static-core-1103-9cf45886
+        "sha256:4ea92ecdd4e57cb1995648e6cd0c4b18d48beaf8ebbb24152e3cb5de2a9ce9bf", // imugi-idd-schema-static-core-1104-ae43213f
+        "sha256:fd998f1c6a1392e368ae5798fc148848f6bd022e8b43a0500d8e8b2690fff34b", // imugi-idd-schema-static-core-1105-3bdf9b9f
+        "sha256:8f42ba22fc0d29a98ab9836aad6444c5a72e7cba38216d4697799127ce41a756", // imugi-idd-schema-static-core-1106-78d65e39
+        "sha256:f68ca80977ece52a313e5f3ed0f555f9523a6da6bd1de7e5253abaef4aa690f8", // imugi-idd-schema-static-core-1107-648c3654
+        "sha256:e85d6f436a102e44d8136cd1ba6f4b3222131e0c00a4436a06bbe8e10ba5d196", // imugi-idd-schema-static-core-1217-73314d43
+        "sha256:94a8ed64ed8f76f11ec5e1a832f89b5fc8a27f03f85a9b4dd11bdab1d87e7574", // imugi-idd-schema-static-core-1218-a3c45a4a
+        "sha256:44b2457728213b895293b61b9695c6a3b94e5359f0b0e52b39e073d2364d9d7d", // imugi-idd-schema-static-core-1219-04e0277a
+        "sha256:95c4b1e5562eaf8b30a438d82e46f927c1b1970f6df0acba3e89897bf9802bd3", // imugi-idd-schema-static-core-1220-c84cef47
+        "sha256:51c1f4b59f19e1c0f091980c9e06f66504a81a932fb90e2db5b1407eb4bd8c77", // imugi-idd-schema-static-core-1221-303db42c
+        "sha256:68c88741a73036c87932d3b74e75551eb3136642eb2709192fe90101b79bb5df", // imugi-idd-schema-static-core-1222-6a048e25
+        "sha256:dbce538b18f38bcc8c465e04094084ae86e39e56126938078c1a34e61a8bba15", // imugi-idd-schema-static-core-1223-45e68e36
+        "sha256:7bf12a1a43a4dd40b987f3227ceea367cd11301f6d5b3b91ba01447435dd0c3c", // imugi-idd-schema-static-core-1224-ce753c48
+        "sha256:0adb5627132f739dbab7309b36b369f79454bd0c7f2574fc035a8912946ab1ff", // imugi-idd-schema-static-core-1225-880aaf03
+        "sha256:2b22b0698aa113e8ac39b1757d58bc32e608f5377e2fd8bb53b5ba2280c7d6f4", // imugi-idd-schema-static-core-1226-7487511d
+        "sha256:bb9dc73e9fa7894e2cc2498c0fc016c16800d93679a77238fbdeb1ea3bac6b8b", // imugi-idd-schema-static-core-1227-47e8a463
+    ];
+
     [Fact]
     public void MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis()
     {
@@ -236,6 +262,19 @@ public sealed class ImugiIddSchemaStaticCoreOracleParityTests
         object[] receipts = corpus.Targets.Select(target => CreateReceipt(target, observations)).ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -263,6 +302,7 @@ public sealed class ImugiIddSchemaStaticCoreOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

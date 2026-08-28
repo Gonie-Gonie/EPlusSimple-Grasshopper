@@ -198,6 +198,35 @@ public sealed class AppendersControllersOracleParityTests
         "sha256:284d35f5c088e38bb31570cb8dc45d3cd40ee099ba0fb35dbb080989c6edcead", // 814 ZoneTerminalUnitAppender.run
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:541d59c847aa752ec51a9c82ccfc19c284a080dd4f7e34747625ef40c296c51e", // dragon-hvac-appenders-controllers-686-cdbb9fb8
+        "sha256:f738d29fda8ae9e1f4af2553622e141cfaf3d41692ccd1e4131da3b175a3e634", // dragon-hvac-appenders-controllers-687-72c53b16
+        "sha256:96092dc1c02cd1dd9f992628715478a09bb449af0d81d400f762107c0501b021", // dragon-hvac-appenders-controllers-688-bf8d6bd1
+        "sha256:e7f47df2d225fe056f68196901aa7b786790230fe34deb316adc86a859a696b6", // dragon-hvac-appenders-controllers-689-29bdd382
+        "sha256:7e55e2a81e145ff4093c8b91493a44545e76ba009ed10e03578f7e5b8b4b4d6f", // dragon-hvac-appenders-controllers-690-2fb35691
+        "sha256:efd7a08f11b86656ae691784f5b8daa48cab23d115be02729900587d7cd27e40", // dragon-hvac-appenders-controllers-691-4531204e
+        "sha256:990c5edc75293e362089dcba811b39d6841dbdfbbd2bcd38723970d11ce7c64b", // dragon-hvac-appenders-controllers-692-3d176f2c
+        "sha256:b19bcd2b392e08caf883f8b3d6d0d18b8d641077fdb6a78989673dfb9efb08ab", // dragon-hvac-appenders-controllers-717-268e7fb5
+        "sha256:cfd7c498530284d23cc6b7fbc7cdf309c4ac9ab17318dc8d31796eab6670b324", // dragon-hvac-appenders-controllers-718-ef88aa10
+        "sha256:6c9a4a23a2537692e4268bdffd6bbfd21ef1606d6a35c3c424b5aa5860395de5", // dragon-hvac-appenders-controllers-719-9fbbb80e
+        "sha256:91632a9cd138fcdbf2344d3ad40329cfcee656f1dd8bdfeadbaab346667af90f", // dragon-hvac-appenders-controllers-774-35b327ea
+        "sha256:6940527267832cbee56db21d54cd2cf171243596cf19963b20354b691208b691", // dragon-hvac-appenders-controllers-775-5a959bd0
+        "sha256:c23cfa2c731f47f41e18bebda04eb5bb7bc6794951597fae6227420b8535e612", // dragon-hvac-appenders-controllers-776-efc3dc2d
+        "sha256:8cfd3dc25e272633376a93438d55dc815a32f33135f36a09cd927a493d0c245e", // dragon-hvac-appenders-controllers-804-9b4492ed
+        "sha256:3e1515c6518d716e7053ebe872ba2fada8edc2b2be147565a0b2e1370a78227d", // dragon-hvac-appenders-controllers-805-c63e7515
+        "sha256:06524f904c51f6910dd347a75e7e33fe5de0d90c5f052707b9f4af8125433ba5", // dragon-hvac-appenders-controllers-806-582cf3ef
+        "sha256:6a1b2cbec41240470de7cb6cdff37cbdc36b131249c93e8558b39db65c4ba5cd", // dragon-hvac-appenders-controllers-807-ce40cc13
+        "sha256:1d63b99ae4facb709e35b0e58383f11aadbdb8c2f927742708a71b3afcb40a60", // dragon-hvac-appenders-controllers-808-bff1883c
+        "sha256:16c7c322749adafb68ceb4e0fa93accfb8699af9f841175e4452173734dfbea8", // dragon-hvac-appenders-controllers-809-fc0fbad2
+        "sha256:78dec6c11f67c086cd6e3ade4bca8e71018615ce154602789974fe1aba887763", // dragon-hvac-appenders-controllers-810-e3fabdb5
+        "sha256:d118b0761044f9860427add7c67c1e26dbce0da4dcbc0387e207068ab0d79538", // dragon-hvac-appenders-controllers-811-7cd1f8e9
+        "sha256:49e843213c8dde6a917548c7a95381c3a63acafd4789f19107063cf92d84289b", // dragon-hvac-appenders-controllers-812-4ae86427
+        "sha256:9c73447947c0738b8ef5e01fda0653f475abcaf6eb219e834dfab790e4c2e556", // dragon-hvac-appenders-controllers-813-fc0fbad2
+        "sha256:38774ba7e6f1a3b350af9ff0967aba86569cd0376dab50d9ef9f04dc90b6b51e", // dragon-hvac-appenders-controllers-814-46d42798
+    };
+
     [Fact]
     public void MatchesPinnedAppendersControllersThroughPublicAggregateRoute()
     {
@@ -210,6 +239,19 @@ public sealed class AppendersControllersOracleParityTests
         object[] receipts = corpus.Targets.Select(target => CreateReceipt(target, observations)).ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -237,6 +279,7 @@ public sealed class AppendersControllersOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

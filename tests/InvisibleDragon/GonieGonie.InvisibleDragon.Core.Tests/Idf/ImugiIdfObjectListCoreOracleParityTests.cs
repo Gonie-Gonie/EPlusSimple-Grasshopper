@@ -85,6 +85,30 @@ public sealed class ImugiIdfObjectListCoreOracleParityTests
         "sha256:4318fa206e74e772f41b79b0615d449728db041116f31159cb3be3a11a33caed",
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:f590aec6b5355bac7e1423ab409654e785b67a11cf1314053d60ec25e622c9c4", // imugi-idf-object-list-core-1190-eb2835ed
+        "sha256:1c4c6458d97c48a3168d20ffa3c0e6afde7a9a31bd8ae9e4913e096e7bc86b82", // imugi-idf-object-list-core-1194-034c2864
+        "sha256:fe8ab778170d8d90f07742b15353f9051dd6c2a34d10baa15f51b54964d2f659", // imugi-idf-object-list-core-1195-24887408
+        "sha256:98c612dff733226ae26295f4ce3d63a787e67f4307eb7edb74a7d3aa7b0ae7c3", // imugi-idf-object-list-core-1197-d30f53e9
+        "sha256:eee149798af3a5c498eaca1aad4360abbb8d36c106355ad39be60f38dc5871a9", // imugi-idf-object-list-core-1198-f05c55da
+        "sha256:9f7642cc00e07e3b21a3ea075ed6b8b6c58b1c8ee4013cb264a38c554bebdcad", // imugi-idf-object-list-core-1199-06fd9750
+        "sha256:abacf0cf4c49a7d7b6e3a2c1f9eaa18efb98549e934f2175bc3d28498681546c", // imugi-idf-object-list-core-1201-b4caf414
+        "sha256:00bc5766ce41c656281d6126f282e8ed65f2d6026b60b3a2e2d664f891cd51ce", // imugi-idf-object-list-core-1203-72a3014e
+        "sha256:48bc53427fec6caa7ac75fc9c244b1133f10fbf5ccb791ccd672c7403bb3dc39", // imugi-idf-object-list-core-1204-3d1f6b46
+        "sha256:487f450912629b27492c2c2a9807d52c300a70a204d30cc76ffbd9688b96ee8a", // imugi-idf-object-list-core-1205-2c80edf4
+        "sha256:b92712324b5cbc7b37eafc1a6ec89906d6243614b607cbebc296d6e90e5a17b7", // imugi-idf-object-list-core-1206-16829ca5
+        "sha256:b1b50578dc808cf282242fa26e51558c68a34d46abbc9ee49b90f80de113b1b0", // imugi-idf-object-list-core-1207-0087b1d2
+        "sha256:9c1d0533258a65641ca406e2186efa90c8cd9f64dc69c0d3e54b8312bfb40472", // imugi-idf-object-list-core-1208-19646451
+        "sha256:520a407a8e246b5f833a28892bf90414cee1781f3edee7c8b6e1fb26737575ff", // imugi-idf-object-list-core-1209-31a2a780
+        "sha256:e3b2dee6cbf5790e970589b37c113ba96a6e7d32f6546ce15d041bcbbc364464", // imugi-idf-object-list-core-1210-52ef6813
+        "sha256:7dff741da121e9a526b9b3385a6e9fba00378c5614c65f168ef2e5e660df21aa", // imugi-idf-object-list-core-1211-585d5ffa
+        "sha256:060c6fab0afcad8f39b134717d61b5315687e9d82a6f48922f3f7f57ddf8e68a", // imugi-idf-object-list-core-1212-063a0bdd
+        "sha256:d36555b839510c1d2904d11fe9df02b693776432143da72134aa7aa1aaa3bf23", // imugi-idf-object-list-core-1214-9a9bd1c1
+        "sha256:44a88d6a5639b7b168f10e5907396ba7444f5acf6236dd26f58147ca5151417c", // imugi-idf-object-list-core-1215-45bc5d0e
+    };
+
     [Fact]
     public void MatchesPinnedImugiIdfObjectListThroughPublicProductionApis()
     {
@@ -94,6 +118,19 @@ public sealed class ImugiIdfObjectListCoreOracleParityTests
         Observation[] observations = Cases.Select(Observe).ToArray();
         object[] receipts = targets.Select(target => Receipt(target, observations)).ToArray();
         string[] hashes = receipts.Select(value => CanonicalSha(JsonSerializer.SerializeToElement(value))).ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = TestCase,
+                    },
+                },
+            })))
+            .ToArray();
         if (DiscoverPins)
         {
             string native = string.Join(Environment.NewLine, observations.Select(x => $"new(\"{x.Code}\", {x.Facts.Length}, \"{x.Hash}\"),"));
@@ -102,6 +139,7 @@ public sealed class ImugiIdfObjectListCoreOracleParityTests
         }
         Assert.Equal(ExpectedNativePins, observations.Select(x => new NativePin(x.Code, x.Facts.Length, x.Hash)).ToArray());
         Assert.Equal(ExpectedReceiptHashes, hashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         var ids = new HashSet<string>(StringComparer.Ordinal);
         foreach ((Target target, object receipt) in targets.Zip(receipts))
         {

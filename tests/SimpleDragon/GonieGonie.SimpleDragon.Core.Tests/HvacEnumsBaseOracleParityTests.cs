@@ -192,6 +192,39 @@ public sealed class HvacEnumsBaseOracleParityTests
         "sha256:f8a6fad4c49332c8c40e5278edb9d49b33ca873732da208c7b5358d3237bbc9a",
     ];
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    [
+        "sha256:950013fd15434033cf8e37a7bb12a094bb51e8b90824de2ab6ea8b2736d8f30c", // epsimple-hvac-enums-base-185-8785ee6d
+        "sha256:aa959097cb6294e37f1fac44dff2003e5316588cb1865997d69e3a7197e8c729", // epsimple-hvac-enums-base-186-dfd51671
+        "sha256:2c51cfe25243ca9cf717cc6003f7784fa8bf1ed0e9287515153c1ff5d43fb4bc", // epsimple-hvac-enums-base-187-2947a213
+        "sha256:33a97f247b1cbb0fba927a9260d99314a0238ec9261faabc64da1387cf4680ae", // epsimple-hvac-enums-base-188-5074351d
+        "sha256:62625508919f4ab588b864c26da273868e48f24e225d79fc8191e66c1d2c6bb1", // epsimple-hvac-enums-base-189-f40e4929
+        "sha256:8668693481c37071b740d4cf0e9abc7a6f94548d4799ca0061bac19c34db6413", // epsimple-hvac-enums-base-190-bff3a12f
+        "sha256:53ae143694b2d79dd449ede0154c742663131826ab98f5f0d1c9d9929a65c0e0", // epsimple-hvac-enums-base-191-31f279b7
+        "sha256:ebfeac2d698ddb2011f029ae7a616b7008f9e1c4e58f93a71a7059e447a343f3", // epsimple-hvac-enums-base-192-536f3586
+        "sha256:196a6acad734ec234bf2ac1a757b52fa781c56e1145491e8b0b3fefafe39d9f8", // epsimple-hvac-enums-base-193-bc3d3c6f
+        "sha256:ef034b161cc731715ef1516ebbc59f8320890a4a4fdd02c2188871adb7945256", // epsimple-hvac-enums-base-194-f40e4929
+        "sha256:0cff4cd6441640db3738690b215af5eca31ed4c3ec492b3ee47f2d59fb06838f", // epsimple-hvac-enums-base-195-9dd879be
+        "sha256:3f6a0f8f82fa4807d33dd718302c2a8491e105a33e009523126dfee422fcd413", // epsimple-hvac-enums-base-196-ec6ad133
+        "sha256:8817feefdc283507af6260cfd3d6b180ba5c123a32d97a37b62fd911f4befde7", // epsimple-hvac-enums-base-197-0496e7cd
+        "sha256:45a08f65a380f37be893ce63a99643d3a8a17ee943e5557fef4b9da639e1b016", // epsimple-hvac-enums-base-198-f40e4929
+        "sha256:30bacce82e76e6ae83ff6565f38e7d458fbeb63c95416359ae3db585439a30a1", // epsimple-hvac-enums-base-240-66a9b58b
+        "sha256:4c6384c6b827b6a7e229de6f43622e613e278ae36f3eacfce3c383329d88d890", // epsimple-hvac-enums-base-241-806c9ca0
+        "sha256:5e571af037e530bbf9c2c4121379f1f187f94cabe6f97817389cacbf22200e42", // epsimple-hvac-enums-base-242-dece9e85
+        "sha256:b58100a279a6f03f898788a833956406edb3e6947cb69e9def047d663441fc44", // epsimple-hvac-enums-base-243-c70f84e9
+        "sha256:7dcc001f26e6256fd93a0d4598a605cce7f5e81242127c605b8eb3a06cb061f7", // epsimple-hvac-enums-base-244-50160788
+        "sha256:9e84df62bd0dea36757970ec9dbdb754437f50bf5e0f4af3b588eed0d0771242", // epsimple-hvac-enums-base-245-24bb42a1
+        "sha256:e0458d6040472fb64e141a2c6a51f930d455ccd0c47ddf8c888f34bad239c639", // epsimple-hvac-enums-base-246-f40e4929
+        "sha256:5799dd21e95a0e14ca18cbedc31ea039e0b7c031e747ca1284a0cb585138f779", // epsimple-hvac-enums-base-247-7ce39626
+        "sha256:c256a8f6c1ecb0a809263e13a2c99cb742e7ce3881b215a9bb491d3cd8c1e437", // epsimple-hvac-enums-base-267-8824a756
+        "sha256:dd6bebd223338a9efb21132637bda446ff59b8a0634a6a1c95ae9fb2cdf46818", // epsimple-hvac-enums-base-268-dbf0ef4b
+        "sha256:9dc32af362e8b219f5ebe517324b4a170c8c34305cb300abb28eb88283a3dae4", // epsimple-hvac-enums-base-269-758d9c0b
+        "sha256:4fb43e922d5f2f35883875292e159d9ddec858a262023cbc51a460e98f4f026f", // epsimple-hvac-enums-base-270-c8347dc8
+        "sha256:4392869feaf9b9f90fdeb9ed19fc5cb76d47dc7532a4ae8a94f063830310170e", // epsimple-hvac-enums-base-319-9b6905f8
+        "sha256:557c539679c4af2acb35f0b0b566143d5f85960aaaf8f0ab917e5054b3b7fa79", // epsimple-hvac-enums-base-320-813567e3
+    ];
+
     [Fact]
     public void MatchesPinnedHvacEnumsBaseThroughProductionPublicRoutes()
     {
@@ -209,6 +242,19 @@ public sealed class HvacEnumsBaseOracleParityTests
             .ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -240,6 +286,7 @@ public sealed class HvacEnumsBaseOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

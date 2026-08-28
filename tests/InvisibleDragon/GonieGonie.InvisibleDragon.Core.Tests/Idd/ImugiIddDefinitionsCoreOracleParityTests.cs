@@ -249,6 +249,51 @@ public sealed class ImugiIddDefinitionsCoreOracleParityTests
         "sha256:c530c822b4dbb341fe0690d38dc4a0a0e85136a481845204f981c06f3295596e", // 1166 IddObject.required_fields
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:9d137d5283eeff82b72ddd1fa2e47e626a4a9446dbbcac83242caa9083dd2b4d", // imugi-idd-definitions-core-1123-209ee073
+        "sha256:f4c227c209456056a8b725767d9c62baf6cfb77183e27057a5801c382942b118", // imugi-idd-definitions-core-1124-cc926b4c
+        "sha256:3cb6067f47094592c4937818512b9b8fa46ee3a06674896b0fbf0dbeb5009131", // imugi-idd-definitions-core-1125-e4303f76
+        "sha256:15ff9327b246e8b08123764a74e157887e7304006687189ed7d805335fe0a054", // imugi-idd-definitions-core-1128-4748d03a
+        "sha256:2bfe79d483eb810c2deb3397e55f33dd2c56a82aef070dd9c21df85a7b2f0cf8", // imugi-idd-definitions-core-1129-d3f9ed1f
+        "sha256:341cb5e4afaa61813b6266831688bdf8c86b653cdd5d5ee4bb22ac34727ddab8", // imugi-idd-definitions-core-1130-2b6d880a
+        "sha256:be4180f9a9424a8a0a4901a0c616ae1332b5ddc7283bb3256091c1b34d450d2e", // imugi-idd-definitions-core-1131-d0349be4
+        "sha256:173fc29335d8dde40595636790c2414e0a2da379a45608c7cbebb97bbb55dd10", // imugi-idd-definitions-core-1132-a5aa4b09
+        "sha256:f32dd7ffdf61c8cc0190df4518fd039403d08a670ce47ca39b61eea09ff7e690", // imugi-idd-definitions-core-1133-83922a08
+        "sha256:d62c9814d8215d835516a2322a904cab7a74963c970807e396182b529e94129a", // imugi-idd-definitions-core-1134-6f8cd3f1
+        "sha256:415c13a372bbc7c54d388675b8f50b17ebf4429ff279553683ba5704c8563302", // imugi-idd-definitions-core-1135-b64e2145
+        "sha256:37689102cc70615d32125dea8d6e90849123b0571fd70e667efde1ef1250a8ee", // imugi-idd-definitions-core-1136-46f42932
+        "sha256:fa551b81235d4ba36d4809ebb893a73b51aa80f5a8d732fd1a815c2bc74eb4fb", // imugi-idd-definitions-core-1137-b2a62552
+        "sha256:4703770c22ea3018b781bb07d1f3e8f761a90a95adb36187250b98aaa153c43c", // imugi-idd-definitions-core-1138-0fc0df49
+        "sha256:87662be1d512ed73fff82aa5023c42c1677d35f93a39faa5d88fde1ef9c0a6fe", // imugi-idd-definitions-core-1139-203215fc
+        "sha256:4aee0fa6e55413e119d35e70d225e549644e1b06101739c4f2cf642fb5a3167d", // imugi-idd-definitions-core-1140-04d44d1d
+        "sha256:176ad20d5e2698c95b7c571aaf8c846b2fd8b26b361026721c1effc7ecb248e7", // imugi-idd-definitions-core-1141-dc05a34b
+        "sha256:58b4526e67e448fe36e43eff876e311865459ff2479adda684f77d8bb2a0f05f", // imugi-idd-definitions-core-1142-f35f045c
+        "sha256:893510f276fa098d06b719bf6de9169672ae985e705a29a7c31cb6b27c056881", // imugi-idd-definitions-core-1143-ecceb577
+        "sha256:588690135b7f5f7b99c464b5adae6b28ffb8e6c8ea9063b1d5c57f8caf434209", // imugi-idd-definitions-core-1144-704213be
+        "sha256:393aebbd921b380982b50cd96868d0908e50457cd4c4d51fe9128493c0cc653e", // imugi-idd-definitions-core-1145-4695751c
+        "sha256:f1c935a3cce0915630ad58e2861694edffad299eb7d398152f8d0188937dfd33", // imugi-idd-definitions-core-1146-5b7e3d73
+        "sha256:924605805d6ad918e4b52c5fb7d82ae13ef96984359cf52709cdf8271aaf8b8e", // imugi-idd-definitions-core-1147-59edda63
+        "sha256:c3ee9252bc55c14689fa778d202b826eabb6db0d498b95635a867ff19c09074e", // imugi-idd-definitions-core-1148-8a75cdbc
+        "sha256:b2931121bc1f80a86839aeefb28ab315649c5ce872a1faa5106e2d931cb5d8e8", // imugi-idd-definitions-core-1149-355edc7a
+        "sha256:a5d9b8a39a73a532245f137eef0feb02f7b8e2b445adf469ae3ced73606ec236", // imugi-idd-definitions-core-1150-a85878fd
+        "sha256:ab82d0d0a8e1d70bb9e08eef686b8979c0ab528b704fe8e4cac24e38db9c1c1c", // imugi-idd-definitions-core-1153-cc944d8e
+        "sha256:3a3616ae83e2a3027cd7781b0e02e1f7ff9ee5ac76018e655af8e14e916c8902", // imugi-idd-definitions-core-1154-ceed741c
+        "sha256:f114d072e4a8f16f06a43bea6f929f8b052aa270a386a1f48d1c5d1b1bad05f9", // imugi-idd-definitions-core-1155-656dae5a
+        "sha256:f966d8d93570263c81ee8990b826ffdad14a6c86a72cd4857d010833a98e6b8f", // imugi-idd-definitions-core-1156-54aa570d
+        "sha256:999060046e6470b63e782d66eaec66bfea422a9b82b1176859c512111cc503e8", // imugi-idd-definitions-core-1157-e55a8f89
+        "sha256:c04a03e27c8862a5366a98c0a7428052d7a667834d1e7a8b15133a461f345451", // imugi-idd-definitions-core-1158-b7a1f5de
+        "sha256:4f99e9b3f31f9f8723e6d3d21c023cee2ac15dde5c17fbf7281775dbe8fabd74", // imugi-idd-definitions-core-1159-b654e577
+        "sha256:61b392a42c719febd001d5bf07bb90a8d5587ec5166dda3a513458dbe31b13c7", // imugi-idd-definitions-core-1160-b64e2145
+        "sha256:6ee5b51dab7226e62d61ae91a9a88793bb71ce9fac07edca5c77e40cb1855d8d", // imugi-idd-definitions-core-1161-9f99bd10
+        "sha256:fd240675909c8ba3848269184a2302f95676e4eddf7dd7a49424f56e29f2b8b8", // imugi-idd-definitions-core-1162-203215fc
+        "sha256:874a67f14644a76eaf0110d679a402ab8796cf804b0d43467234eb9b14e77cfd", // imugi-idd-definitions-core-1163-1821fd04
+        "sha256:c093f5045e5f3c7568b750eeed7547c0c3382888f98d718a0ec39e4b4f7f6459", // imugi-idd-definitions-core-1164-dc05a34b
+        "sha256:39b5eb618540d1d550d82c4b3b61a71b4a487425798647655374d5dea4730cb7", // imugi-idd-definitions-core-1165-ecceb577
+        "sha256:87ef21bf335b669ed0d47c30fa3e6f218cd93389d919a7acb49891042cc75033", // imugi-idd-definitions-core-1166-b01c46a0
+    };
+
     [Fact]
     public void MatchesPinnedImugiIddDefinitionsThroughPublicProductionApis()
     {
@@ -262,6 +307,19 @@ public sealed class ImugiIddDefinitionsCoreOracleParityTests
         object[] receipts = corpus.Targets.Select(target => CreateReceipt(target, observations)).ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -289,6 +347,7 @@ public sealed class ImugiIddDefinitionsCoreOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

@@ -257,6 +257,64 @@ public sealed class ShapeCoreOracleParityTests
         "sha256:8ab3a77bb4628a15d2a242119db9c6c25813631a7ad088af7b2d3e6d1b1ecdca",
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:6a912e79b185d0ab6ab40efc600f617c5cc04071d337152030a21d4c6084a4a9", // epsimple-shape-core-405-6008dd91
+        "sha256:aa9241036c2b91520bc849d217d493465a929fe170c50ab8e14ae39a20148e10", // epsimple-shape-core-406-bb03051d
+        "sha256:3bb19bfb68417af9869a334c92aeefd82f6ab299755f395356a1cc0266b54c2e", // epsimple-shape-core-407-09c92f4a
+        "sha256:fdb6b82bc61548b7ee1cead61b1971dbdb4f36b6615412528de194f8b28ae785", // epsimple-shape-core-408-f40e4929
+        "sha256:1b2321c58e32104ee487d7bf9659e62768111be5e81f8dfd977e1c8bebc9b932", // epsimple-shape-core-409-8c468e24
+        "sha256:482b5abf11a1011f23c2e43ba73789abdff54b84674c51637dd9635fcb78aea7", // epsimple-shape-core-410-2ca0072c
+        "sha256:0b205f347ed2bdda90ef6584894b51f906e5e1bb183103759b46b05b45f24494", // epsimple-shape-core-411-26b0f9bb
+        "sha256:78ee715368380f4b16e7b8d0687754049906e2a3a2782c92f1e40e1d76b20f22", // epsimple-shape-core-412-eb81bd06
+        "sha256:e5b1dea92acd091b68cffac57f8e4e57307614f8a7fc38ee0fea372f5ed1c9d6", // epsimple-shape-core-413-43d44ea1
+        "sha256:d1becc96b87aff61fac206fc83d6cb18434a5b6566b843b9f0e716f26d436e68", // epsimple-shape-core-414-246156d9
+        "sha256:ba61fa25c83851b987f60f58d9b4d1cd042217525b5ee66e36d1c9693ce49c01", // epsimple-shape-core-415-a0dbc411
+        "sha256:c2aabad9e104c189cb71d8f8ac939279de462488459100112ad56c6a3f48237f", // epsimple-shape-core-417-1b22b2f1
+        "sha256:23fb3694a208957a05c939dadf5e51c7656b3706dae67acef5aeece505a8725d", // epsimple-shape-core-418-0b0cbf2f
+        "sha256:61662c8eb3f522c9329fdfb63c014ad98c7af96c064479db31e8c4149751cdd7", // epsimple-shape-core-419-2e553f68
+        "sha256:0cb38e1141a685dba73d726e6190b6a5b5f5a501ead91406c9542c723f259344", // epsimple-shape-core-420-ede823e2
+        "sha256:c7502e59d16247399599b881e5d0bc6c5c38f47ea15d16d07ccf31cb14ea4f68", // epsimple-shape-core-421-1981a404
+        "sha256:4f7e321cdebc0679d61ebbc251f5a3d637bc9c570a18877bad92250faffe2e1a", // epsimple-shape-core-422-996a596c
+        "sha256:30090495fc11fe53be68f80df9b0e8998e939bffa541c970e020bebd352f8767", // epsimple-shape-core-423-246156d9
+        "sha256:675c74ddc7cb05a6199d1ddd7bfe9bf4ed7bbe5fa0e417adf2e72999d4da172b", // epsimple-shape-core-424-0d951ae6
+        "sha256:031e3b76154daa19a270633573b38f0bcbf9ff0bace1a67128f4cf88ff8802b8", // epsimple-shape-core-426-bd742aa0
+        "sha256:f845805a5ea886d2ad87c24f8d9823134743ad36905010456808d5ed79208b5b", // epsimple-shape-core-429-cf314ac6
+        "sha256:8e60064a82ff649be1fbe8faba1df8816367f059b1b6c2aa17a36b6eb70cc5be", // epsimple-shape-core-430-aa93b96b
+        "sha256:7a79bc4d5b05900b5cf13b40b529d2d0090c1ed54f6bd23e01a237bb6b2ab9b9", // epsimple-shape-core-431-98e03520
+        "sha256:d53595bf046190ad04a260afd792d28e81e2f11674ff589824ec391dc0ebcf17", // epsimple-shape-core-432-3680772f
+        "sha256:512e21a3f819b9657bc8b939066007ca9884f8f66fa1ce67c9b9bfe4e96f5e35", // epsimple-shape-core-433-9aed8e71
+        "sha256:df481fb0f8d349eac64f48d61261f98ff89c30fe5bd5fc171401359a0a523b76", // epsimple-shape-core-434-8e01b8fa
+        "sha256:88dae5e7b59f91bea94ecaf92e724157b96bc985cfbfb3de7b72e5dc8a975f9c", // epsimple-shape-core-435-3da5f695
+        "sha256:f15758d4d1371d94a1d9a8032471cbe5331a45b26b1b703da9b20ef79f2bd676", // epsimple-shape-core-436-72d9807c
+        "sha256:c4aad8ff5b12ae4f16f302f6cc211748fae0b17a700808b788f3748dcd346a01", // epsimple-shape-core-437-42d0195c
+        "sha256:e8f614b494c0ef57d69cf26489abca4412df09391eebb2cc6a2531f169823ed8", // epsimple-shape-core-438-4ec64b53
+        "sha256:668f71c9d6f65ec762f9f62289ea6ffa0ed9cf495ffd26c6b0e3974a845b6025", // epsimple-shape-core-439-3a69bea0
+        "sha256:2cbf5715a41c952aaffc378a9f823b71101fda921401cbc622994bd2ea21ed01", // epsimple-shape-core-440-26abf64e
+        "sha256:8877d85d7c229c1bbc1834a45c665e4bf241e41f35a29abbe578af642b7fbda4", // epsimple-shape-core-441-5afcce2a
+        "sha256:3546205a2db5a52a82b9c92fcca76d9d953f1abcf176b69ef6491366deaeb4fc", // epsimple-shape-core-442-00f305af
+        "sha256:98ae9bbe2eb72a1650e05a5a243ac114eca31becbf3091deca4e5912ebd6e19e", // epsimple-shape-core-443-e8fad25a
+        "sha256:64611b1b71fe0082f2af3d5ba41c0bbc68be86f34b5b8909f18c06de19839e2d", // epsimple-shape-core-444-92ce583d
+        "sha256:9db1582df64c53f07b3b63b27cf3137a1120b0b47e6bd8760fd9a0730e512b19", // epsimple-shape-core-445-4f40b518
+        "sha256:3da04156ef0482111842f42ce3b4b79cc46ebcee641948104fb9ecb57a88c2ff", // epsimple-shape-core-446-93259bed
+        "sha256:44b036eb8fa06100a9a87757373ce6f55249d96f6da6b57f12ba6c8e61e13172", // epsimple-shape-core-447-f032bad2
+        "sha256:b6c8caa6832e12340305245ab16768197ab673323b6ece1c2f0d3922b9f37732", // epsimple-shape-core-448-dda48f66
+        "sha256:79cf6808b695ab24dc08ea0f1241519935f43b8b1830517c3d4fc5d82ec3e6bd", // epsimple-shape-core-449-246156d9
+        "sha256:fce3629fb5295527dcecb07d81fb23e1ed9decf1fea3ed108e9e749d64a6401b", // epsimple-shape-core-451-a5f3cee1
+        "sha256:fe1942a46e4fb8955e4e9321160787fd6754a4a4aec3c58bd54fb3ee1d937cd2", // epsimple-shape-core-452-51ef4a1e
+        "sha256:2be40379493229bc6223ee9c0ecf1f90dd2f1aaa3d542f38768874a939a453e6", // epsimple-shape-core-453-e0f58a2e
+        "sha256:b53e471e9eb85a71cc248dd61e509e412d13ed2af5f09563a037b5e181a7fb45", // epsimple-shape-core-454-1254d46e
+        "sha256:9955f6fa79a55b12401615893ada0c9b5a3429e11769f2421e835212818669b1", // epsimple-shape-core-455-d8077110
+        "sha256:5fed2c7ddb8819de98cff249bdfc61fc38f210102940d9fa1245512021c31148", // epsimple-shape-core-456-ecb20cb3
+        "sha256:14cdd478ba8a71a9eb1d2ec05cdc986d99c0542e4b02240f8eab2c040ba68e18", // epsimple-shape-core-457-486d73d3
+        "sha256:f1978d4547e9db7f7fb119cae53efc3e9da4cc44dbe6d2b92ae2cf4e4590f862", // epsimple-shape-core-458-c68b3d65
+        "sha256:f172a13b6c83729a8c69cf8e7e872e54b6da87a344a0d99e9d963d8964789fbf", // epsimple-shape-core-459-349a48c8
+        "sha256:b5b837cc1a8a790d5dd64f45253bd2f8be1097b3b1dc63b12f6fe50080740185", // epsimple-shape-core-460-3fffc5a8
+        "sha256:32be0733ed8961692a2fd088a96eea7d8771efb2bcf29be226718ea2391c3cc4", // epsimple-shape-core-461-3eaf6c25
+        "sha256:18362fe3a5cbeb306493abeea18ffad2d8f8ff97dc371fac4dee8808d9166d49", // epsimple-shape-core-462-da336048
+    };
+
     [Fact]
     public void MatchesPinnedShapeCoreThroughProductionPublicRoutes()
     {
@@ -274,6 +332,19 @@ public sealed class ShapeCoreOracleParityTests
             .ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -305,6 +376,7 @@ public sealed class ShapeCoreOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

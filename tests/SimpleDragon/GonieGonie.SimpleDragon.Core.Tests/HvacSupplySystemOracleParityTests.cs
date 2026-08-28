@@ -239,6 +239,63 @@ public sealed class HvacSupplySystemOracleParityTests
         "sha256:7c7b2c092fc6116c7b64eb087a8431057a5b9512496f7abfa7490b9474d6fca1",
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:0335dace4b26d2ac8b0415c0dfa3631454a8598ba21b7c2517f72ddc90bab12f", // epsimple-hvac-supply-system-147-6fd0030b
+        "sha256:deba663b2203b55b9ba369fa89f0b49637c91ac0ba9374c87199c7cbd58a9d0c", // epsimple-hvac-supply-system-148-246156d9
+        "sha256:acd496316ff873d18692282756e51d08a6348530012fde28fbfc581bf4b8c129", // epsimple-hvac-supply-system-151-ea6e311c
+        "sha256:e4fdb6d182021c1daea7c16b151469b1a60f7a48a771886dccc78a79d523253f", // epsimple-hvac-supply-system-154-148b0ee3
+        "sha256:7ef39f1f6a971dcb26cba42a485f1ef7f5fb2f5d33974b3a228572aab5e73005", // epsimple-hvac-supply-system-155-ef79e1d5
+        "sha256:83cbd21a0df12f4e994e96e9a0324ae369a56783c0ec8879ea3d784b59e85b50", // epsimple-hvac-supply-system-156-11a6909a
+        "sha256:13d3b880df4d2b0ee88a22aceb2093531e095c39c7796e5409d1e5f95bb29ec0", // epsimple-hvac-supply-system-209-f7f03ff5
+        "sha256:eb8ebd3b67974e9544a2cd5007818f87f4e06eadcb52b63caf62f35b21e24cb0", // epsimple-hvac-supply-system-210-246156d9
+        "sha256:9b7504274a5ca982039ea5e0ffc865d8131f53bf2d586d5ba12f1c6791999def", // epsimple-hvac-supply-system-213-f8bde28f
+        "sha256:9e2ae7435035e981f54a11d719e600f360205cbce472167bb9f926aa1dc3faab", // epsimple-hvac-supply-system-216-b13a9536
+        "sha256:f998ff5e6c28cc34e0348b013f902154f8bc07c2c311fd7419f636321a50e0e1", // epsimple-hvac-supply-system-217-b14aeb3a
+        "sha256:d25b4b88d37c433174bb2879e87d240161f727f6efe5f85cdcab859d4ac82246", // epsimple-hvac-supply-system-218-01ae7da4
+        "sha256:91f7baece75fb38eea1850d680b1705e941c1775ba75654fd2b9abad2bf60e51", // epsimple-hvac-supply-system-219-6354666e
+        "sha256:04004923b21c4d9a35e59ab80410ca208b3529d1b1a23410468e351db60750d1", // epsimple-hvac-supply-system-220-246156d9
+        "sha256:f237b8014437590ecc40cbab0d6a139c90137667b6a54185076f3b00506bd449", // epsimple-hvac-supply-system-223-3a47135f
+        "sha256:52be54f593b47ad834d985da0b26628d6c6ddbb4873bd8e29c47e0c115dba2d9", // epsimple-hvac-supply-system-226-09cfea01
+        "sha256:025bcf9fc0167fa1973b1a0a60ae5130daaaa36a4439f02aafb462523bdb42d2", // epsimple-hvac-supply-system-227-20bd3338
+        "sha256:069ef7a1d0b4fe9d87a26be3aafd9e7a0655c4a39c05636ac4b98e2d7bb0c8c2", // epsimple-hvac-supply-system-228-b14aeb3a
+        "sha256:358faa833d45e62aafdb476c123a6cf2607f5c245675d014cdb58f3c8eabf5fd", // epsimple-hvac-supply-system-229-4b95c9d6
+        "sha256:3e2191b7c8f5f6df493f8868691ce583494696f05bcdbe1b25f54761ba309ff4", // epsimple-hvac-supply-system-230-618e77c4
+        "sha256:348fcacbebe145283a7c237771215ce778a659b1e9bdd025d41291b4501f8bd7", // epsimple-hvac-supply-system-231-246156d9
+        "sha256:093d6909678492f5d971809dafc84245697a3a5c98c57ae933a3f36f14d8e70c", // epsimple-hvac-supply-system-234-ea6e311c
+        "sha256:ab8179809ac05188c6fba2bd98d2471d5a53084bd05412e555b81b44917a08b2", // epsimple-hvac-supply-system-237-4e773b8a
+        "sha256:ff22903465c8323104e91e480428eec2c62876416bfadba769d1ad15de1b6b67", // epsimple-hvac-supply-system-238-ef79e1d5
+        "sha256:3a001f18f8564b3d980f84abc8f87d373360e57127d3402fac1db36763f19248", // epsimple-hvac-supply-system-239-09f12474
+        "sha256:4d26b4cb4bf22e22d233b419cf725b0a21575b155d9e4a94aac4ae62c3e1e7e7", // epsimple-hvac-supply-system-271-fcef6339
+        "sha256:e2bb86867952fc13c2e45af3226dc5bbb3ef1ae88eccf9c347c2772cbf04ee29", // epsimple-hvac-supply-system-272-246156d9
+        "sha256:d782a325ec9b28edb9c2cee0e553be86b0c4da37f8cfafed7b19e723ff01dee4", // epsimple-hvac-supply-system-275-b2021d84
+        "sha256:947596c386e496ba11d0f562db75ae829e6ecac3df44e8a3ec095374d83f0d19", // epsimple-hvac-supply-system-278-09cfea01
+        "sha256:4519ab0a9947098dc02465cb5329024bac470d1fce83f7a86b0724f637749ae7", // epsimple-hvac-supply-system-279-873a49d3
+        "sha256:68180e2844c04a0ca5d01d4b6cf8b2d2fd50095ee5b7b345fb93af5831fd948c", // epsimple-hvac-supply-system-280-d49a3e1b
+        "sha256:034564395894a086d3ece08d29fafdce96bdb72b4d263a5466c553ab4cdf72b9", // epsimple-hvac-supply-system-281-b14aeb3a
+        "sha256:56c56c39dac3e903ddd336d30bc55650a185026aafda1c07ea9a2300c161760e", // epsimple-hvac-supply-system-282-0be4894a
+        "sha256:83bb0323b0aa4b3f35849b391807e97ded5ed4dbfdef97cc5834240934a7e9e8", // epsimple-hvac-supply-system-296-3a70e982
+        "sha256:88b39fce1db60edb6a5f963f471346564711e03b8d976de2fc363d516c606074", // epsimple-hvac-supply-system-297-246156d9
+        "sha256:32347890aa86124000b07518cc014d213bf0fb6ca109fc04137690b080a2ad19", // epsimple-hvac-supply-system-300-ea6e311c
+        "sha256:4e23e97e9fa5e378bde87a32f4f22268c8eaa2d94f6a16119cb1c54a0ffd33c5", // epsimple-hvac-supply-system-303-b81ea250
+        "sha256:9a772fb6a357e66499f3b1a20bf07f69b1fec08bbbc93945ec5241f6298d6fbb", // epsimple-hvac-supply-system-304-a3c19218
+        "sha256:2a19fb58ffaa0ea2f855b838adb2113a07d2f79c5da9cf596f74c3eaba98f558", // epsimple-hvac-supply-system-305-0b60e64a
+        "sha256:f43d524da8f303ee37b4633c702a4c9d839cb6486a6e5601abbdc5fd41c7fca0", // epsimple-hvac-supply-system-306-ef79e1d5
+        "sha256:eb86d7912488c425fa132a6d0a4951b4c69753f7df9408b639d4567dd91dbe9a", // epsimple-hvac-supply-system-307-db124859
+        "sha256:31429562150ec17a2b9f89bb302731786192a89045d6e72bdf920e6946905673", // epsimple-hvac-supply-system-308-8464a277
+        "sha256:f567413113b58ea0c0ba21dc14369c3630449b964c78c9d798dd784ba2a5de64", // epsimple-hvac-supply-system-309-246156d9
+        "sha256:32a3675b6a9e6716e51404a9ed7b3f0c14430881291ef0c4cdca14eac2106e91", // epsimple-hvac-supply-system-312-35304b6f
+        "sha256:452d84f70a7d16d418bbaa2178fbcc82e4d9c213285d38d38aeff43e89e7b870", // epsimple-hvac-supply-system-315-d699d5f1
+        "sha256:71a1b53e0346dbe1928cf1a5fc9a5b758547eff93f4db54276d576464619b1ec", // epsimple-hvac-supply-system-316-349b941b
+        "sha256:98e482d345ce139783c48ca952f79ae152a371133e6aaae3e272c3614d9b74ff", // epsimple-hvac-supply-system-317-ef79e1d5
+        "sha256:cfc972797eee80fdcf8bc0af65e66bb64077826741b7b61d00b8841cb4b2a4c3", // epsimple-hvac-supply-system-318-bb8edb65
+        "sha256:3b4605238452690ef69c52f1a5ca8cf4d7bb8c3383602a51f16add462294b9b0", // epsimple-hvac-supply-system-321-d236c0a0
+        "sha256:5b4226bf2e69aeb89d17850c0d94d15f9b2226eeb97ea92130968eac58af49b9", // epsimple-hvac-supply-system-322-3639f058
+        "sha256:d42278e7bef972c55779cc0ed97714ec4660a3d293219fab2a94cf0d7d56a72a", // epsimple-hvac-supply-system-323-a658d7c4
+        "sha256:a5f070c91b0f5278da56d571c1e0cc83b187d8ced470152c6c0c3a4b0e580a50", // epsimple-hvac-supply-system-324-9d89b0d8
+    };
+
     [Fact]
     public void MatchesPinnedHvacSupplySystemsThroughProductionPublicRoutes()
     {
@@ -255,6 +312,19 @@ public sealed class HvacSupplySystemOracleParityTests
             .ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -286,6 +356,7 @@ public sealed class HvacSupplySystemOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

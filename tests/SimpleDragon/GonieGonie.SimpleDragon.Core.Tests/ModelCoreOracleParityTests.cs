@@ -257,6 +257,46 @@ public sealed class ModelCoreOracleParityTests
         "sha256:c896a2eccafc626b3496465edf2eaf2bc6a4282ba7c6b3db20b30900a2ee7331",
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:e1ef66cca7150c99c1bcbb5c1c5fc20191769b8d09b5687a68ad0946715b2a35", // epsimple-model-core-337-1a4029a1
+        "sha256:099b302a6dbda8f1233acb091d7b0ca575483501915324b34ca7032283d3cfc6", // epsimple-model-core-338-fbfb5af8
+        "sha256:46341bc4f0b3f1a55c47e73fad340e1dcd89f42cf8cc51a68374f9a006513d8e", // epsimple-model-core-339-3ed10042
+        "sha256:d3ed844e918d2e5d955fa4c3ebf9195dbfa4b40c5b3511d1c2f9163a1d60a31b", // epsimple-model-core-340-328cf73b
+        "sha256:b752ed7c522abd17909db6ed5d2d34755c68cd968a8db0f6e7d62d3d620730b1", // epsimple-model-core-341-fb39a800
+        "sha256:6ef4dc094bdbd960087eb03743ef33f19989b0fcebed5a7d676e2ebae5579524", // epsimple-model-core-342-e8bd64b7
+        "sha256:a8f1094c373fecd055ad3a4f9640b2ccf1594841a143367282b06313bf769e94", // epsimple-model-core-345-df358686
+        "sha256:45bbe1b2de793c0fe8e87c21ebeee34258a9fcf86471fb1e4c279980dc37fdbb", // epsimple-model-core-346-bf31ed3c
+        "sha256:6629d805fbb99464b27b65d906dcd929353bf713ce5581bbfb7a0e83c15f8ab0", // epsimple-model-core-347-ef752eff
+        "sha256:40819d73efb81511b51f88440484a7bd672a746b7a6b166ba4750c50ddb190ac", // epsimple-model-core-348-871c1b93
+        "sha256:15f056c61c99e65a5a6260cf2d7acce05650eda41eb2a0ca5941b6b224cde4aa", // epsimple-model-core-349-13f93b86
+        "sha256:b9c94f25d34c880e05e48a0e46a5bd6efd8c8b962a1451aeae5b02b614e1fe31", // epsimple-model-core-350-4046cce9
+        "sha256:838bdcb39b21287955cd598f8d36d1058540032c6803aa11f00b8bde882c805a", // epsimple-model-core-351-695c215a
+        "sha256:2b493460b475deba3c5d38d63aee83cb23bc68c7b76c8ba71e7d324eabcb396e", // epsimple-model-core-352-235f45cc
+        "sha256:665dc0d05f0ad0189a982d84212ebfd49dc2e5250dd04bec8194c44e40c19869", // epsimple-model-core-353-27c207a5
+        "sha256:5f01d0844d3e9aa7590e1b63301c9e7cdb21f52502fecc68e292af4a0e86e72c", // epsimple-model-core-354-61333306
+        "sha256:c78a53e56311d7164479fbcf2a3c38cbc54e774f0965862ef849120bf7649bc3", // epsimple-model-core-355-9ba0cb63
+        "sha256:12564ec2b4c84dcd6b60477f7b6ce5db17484fb932b373c7aa21bf5f8464fdee", // epsimple-model-core-356-428acddc
+        "sha256:79eb7aef87a98e980c4bceed6af1c6d29bfa7e1e59d09264f3d47b4cf602a9e1", // epsimple-model-core-357-d363d717
+        "sha256:704770692af36e8e373a752081d3b4cf7559c5354cf6f83c620f937cdb87c8ee", // epsimple-model-core-359-696d04c3
+        "sha256:9101f9be325f1352bf240633d4d598bbbcc2883509392175561e347b515079f0", // epsimple-model-core-360-0963ad71
+        "sha256:b83cf9bbc5429fa6b911a7ec703aeff40089bdae633fd0aaf94201109bc9189d", // epsimple-model-core-361-ecb20cb3
+        "sha256:7c59aadd08910d8fe75d29b97d14b9eb3f04d4209317ce23a1932c0f2597ddc5", // epsimple-model-core-362-13af13a1
+        "sha256:9734a07e27a28eb4cb63306c8fd98da0970892f920ba8a1b9a263f1c4e13af37", // epsimple-model-core-363-a05748b1
+        "sha256:7e2af092dd39d79bec060082c60e3a45ae55880a3c92f65e99dbc3ea9ecdaf07", // epsimple-model-core-364-fc0d665a
+        "sha256:8499ee372f3f5b31cb97124e128189eea75289485e0cfedc345ffd77ff2cc2ec", // epsimple-model-core-365-bf192ec8
+        "sha256:ec993c2fc6f3f39c32e91d13516b37b482df6133ef50e416dab614cb776d4890", // epsimple-model-core-366-b2b62b80
+        "sha256:b7284bb5d1951519f12dd398ab8a4a395e8c3cf4749dc13b023846ef30166ac0", // epsimple-model-core-367-152775fe
+        "sha256:cf621e5ee19c4abde8d875e3696d6a8a391392ed4c9a39ab043726279a3935d7", // epsimple-model-core-368-5e2e21f3
+        "sha256:b248d362df4eed9ee0bdca2776748466d10920c700e8c41385a4fc84c096cd3f", // epsimple-model-core-369-e8d26d72
+        "sha256:b26477ae76dd3d2a786d572410905e97dcad428aba16706cfeda923969443c50", // epsimple-model-core-370-e739b9d6
+        "sha256:d432f31cfcc8eb72fa76fe482ebb58b8df58cf376f07907e77220635fe72803b", // epsimple-model-core-371-acd72fe8
+        "sha256:4b714e7d385a4bb24636fb912839446bd751c8f190205f7665d2e7b3b60fdc17", // epsimple-model-core-372-fa174585
+        "sha256:f5c47ccf28abf6dfa8661e27f0d2e4abc4186a13fbeb31f3afe73aa685022072", // epsimple-model-core-387-aee12b8f
+        "sha256:377629baeaf441b387ecec0988f66385bf9a1f9e3845c6f130ef6c4ede5e112e", // epsimple-model-core-388-6e86f546
+    };
+
     [Fact]
     public void MatchesPinnedModelCoreThroughProductionPublicRoutes()
     {
@@ -274,6 +314,19 @@ public sealed class ModelCoreOracleParityTests
             .ToArray();
         string[] receiptHashes = receipts
             .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(receipt)))
+            .ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
             .ToArray();
 
         if (DiscoverPins)
@@ -305,6 +358,7 @@ public sealed class ModelCoreOracleParityTests
         }
 
         Assert.Equal(ExpectedReceiptHashes, receiptHashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
         int recordCount = 0;
         for (int index = 0; index < corpus.Targets.Length; index++)
         {

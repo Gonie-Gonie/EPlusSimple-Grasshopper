@@ -142,6 +142,36 @@ public sealed class ImugiIdfObjectCoreOracleParityTests
         "sha256:f45e9352886198f542f717d8263b2314a9ea7c85b6c6b2d8dbf89a86531a55c3", // 1183 IdfObject.rename
     };
 
+
+    private static readonly string[] ExpectedCollectorOutputHashes =
+    {
+        "sha256:933db336c8bb06d9544093ec379953084c5e44b2715cf6166a2aae827869d12e", // imugi-idf-object-core-1108-9fa0a86a
+        "sha256:72b5a8356f771935bc967cf23c38af94a3a52c4661d450a6274d0e98c9e18c02", // imugi-idf-object-core-1109-a0cef595
+        "sha256:d7003432ddd2ae1158bb6bc2b45ee08d4a4a94c3919523977859490aa9b896e5", // imugi-idf-object-core-1112-641b4167
+        "sha256:0f9a71b3502321a72386ca3cef9509a9e571ccfacff0a3a53841cea1a53efd8e", // imugi-idf-object-core-1113-1114979d
+        "sha256:54449c47f09a3b9efe144646196b1db6325b6a9d31d6fed56c05db089849c7bb", // imugi-idf-object-core-1114-ca419512
+        "sha256:bd338a13734d488305b660314526617efd68ecb951154b1719567e3f0ad2ef17", // imugi-idf-object-core-1115-019279b8
+        "sha256:c54cb5566d0471e3135d13cfc39f5a1d2d940c9a25d0ab38aa2c7b381cee45bc", // imugi-idf-object-core-1116-d7e9a2d3
+        "sha256:0d725b19abf1486ff6bc960007d4857fef30bc26156b2ac0cd662e25ffb30dfa", // imugi-idf-object-core-1118-78c83655
+        "sha256:f901914a30d80a85c7f946c3a9ba754a1a2eba50e691f104cc36f0c4966f0d60", // imugi-idf-object-core-1119-bcd90001
+        "sha256:292481b8c36fcf414d5fb6c6f9e0be47a7421fdd42e806d5db15aee2b13f9686", // imugi-idf-object-core-1121-013ee380
+        "sha256:9806cb73f874ff0d1832b5cf8eb8c9c9110c1aefff395739505b3cc3f023c68d", // imugi-idf-object-core-1122-d79138b0
+        "sha256:b225a692ea0b8e5c6c3e4d805350216b4cd4a76a5919970e9b19473b0184d5d2", // imugi-idf-object-core-1167-57c5d21a
+        "sha256:bfc9d08076fe21c258beb2990fba7a652e941a33e058916978e72f5931f581eb", // imugi-idf-object-core-1170-7799d464
+        "sha256:2e0797e5fa1cda289061dc19a21f6c32902e411a8f72de2b28800e60163c3bda", // imugi-idf-object-core-1171-1f86dc75
+        "sha256:ea5e90536aefe5562ab5e946b49f2f74de0b2ac9c57898f6e227fb77929dce65", // imugi-idf-object-core-1173-d94a9b97
+        "sha256:69e52c5c297a9566ed6f99cdf7a05f72f4af2b2db107ac5424f23e29011598fc", // imugi-idf-object-core-1174-f978bc66
+        "sha256:db7aebf9d409d991d0df3da94590ad94daa7036aa98c9cbc9093398176244f9e", // imugi-idf-object-core-1175-8eee76b2
+        "sha256:453bbb52ac75364900560b4d04e5dc1a8f21affc7490892deffc176d45c95202", // imugi-idf-object-core-1176-2046c730
+        "sha256:0cba8d9ed8de24827caaaa0638a4db599bb0d231efe0c7187bf6f8fae750898d", // imugi-idf-object-core-1177-823cd22d
+        "sha256:c8772909dc5834b601d6cf213885fb0ad004f8cd73a6599385a4baf9e3a93fb9", // imugi-idf-object-core-1178-a24d2160
+        "sha256:a5f899a0e47d4b66cf2bf82042091afb4288aa72b4c698fed5a68cea4981f45e", // imugi-idf-object-core-1179-9ee8bea6
+        "sha256:81872dfce091202d1a65a8ca41ef829cda0ceca2f3bec7fac67491378d25b7ba", // imugi-idf-object-core-1180-efacd493
+        "sha256:75653d5ab08393c004ba4de7efbc86cd133763172517fabf3cc4dbfa95086aa4", // imugi-idf-object-core-1181-37692960
+        "sha256:82576636de2739cd77229b7bbfc4bea8b6af7b50335f164a77a63ea5d6f17c9a", // imugi-idf-object-core-1182-8f974416
+        "sha256:8579d271d3c0e23cda51d1c4613fbd8523b6b959129e96ef8a2ad6e293feccb7", // imugi-idf-object-core-1183-8dfd0cfa
+    };
+
     [Fact]
     public void MatchesPinnedImugiIdfObjectThroughPublicProductionApis()
     {
@@ -151,6 +181,19 @@ public sealed class ImugiIdfObjectCoreOracleParityTests
         NativeObservation[] observations = Cases.Select(Observe).ToArray();
         object[] receipts = corpus.Targets.Select(target => Receipt(target, observations)).ToArray();
         string[] hashes = receipts.Select(item => CanonicalSha256(JsonSerializer.SerializeToElement(item))).ToArray();
+        string[] collectorOutputHashes = receipts
+            .Select(receipt => CanonicalSha256(JsonSerializer.SerializeToElement(new
+            {
+                cases = new[]
+                {
+                    new
+                    {
+                        output = receipt,
+                        test_case = EvidenceTestCase,
+                    },
+                },
+            })))
+            .ToArray();
 
         if (DiscoverPins)
         {
@@ -169,6 +212,7 @@ public sealed class ImugiIdfObjectCoreOracleParityTests
             Assert.Equal(ExpectedNativePins[index].FactsSha256, observations[index].FactsSha256);
         }
         Assert.Equal(ExpectedReceiptHashes, hashes);
+        Assert.Equal(ExpectedCollectorOutputHashes, collectorOutputHashes);
 
         var ids = new HashSet<string>(StringComparer.Ordinal);
         foreach ((TargetBinding target, object receipt) in corpus.Targets.Zip(receipts))
