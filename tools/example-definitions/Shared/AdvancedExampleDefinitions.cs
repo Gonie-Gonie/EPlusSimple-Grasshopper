@@ -83,7 +83,15 @@ internal static class AdvancedExampleDefinitions
             inputs,
             exerciseRuntimeWorkflow: false);
         string canonicalPath = Path.Combine(inputs.ExamplesRoot, definition.FileName);
-        File.Copy(candidatePath, canonicalPath, overwrite: true);
+        CanonicalExamplePublisher.Publish(
+            candidatePath,
+            canonicalPath,
+            inputs.OutputDirectory,
+            path => ValidateGraph(
+                Open(path),
+                graph,
+                inputs,
+                exerciseRuntimeWorkflow: false));
         GH_Document canonical = Open(canonicalPath);
         ValidationFacts canonicalFacts = ValidateGraph(
             canonical,

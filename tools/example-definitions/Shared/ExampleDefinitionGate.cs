@@ -128,7 +128,11 @@ internal static class ExampleDefinitionGate
         ValidationFacts candidateFacts = ValidateGraph(candidate, definition);
         string canonicalPath = Path.Combine(inputs.ExamplesRoot, definition.FileName);
         Directory.CreateDirectory(inputs.ExamplesRoot);
-        File.Copy(candidatePath, canonicalPath, overwrite: true);
+        CanonicalExamplePublisher.Publish(
+            candidatePath,
+            canonicalPath,
+            inputs.OutputDirectory,
+            path => ValidateGraph(Open(path), definition));
         GH_Document canonical = Open(canonicalPath);
         ValidationFacts canonicalFacts = ValidateGraph(canonical, definition);
         Require(

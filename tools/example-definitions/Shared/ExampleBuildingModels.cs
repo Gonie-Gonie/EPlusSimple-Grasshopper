@@ -115,7 +115,11 @@ internal static class ExampleBuildingModels
         ValidateFile(candidatePath, spec);
         string canonicalPath = Path.Combine(inputs.ExamplesRoot, spec.FileName);
         Directory.CreateDirectory(inputs.ExamplesRoot);
-        File.Copy(candidatePath, canonicalPath, overwrite: true);
+        CanonicalExamplePublisher.Publish(
+            candidatePath,
+            canonicalPath,
+            inputs.OutputDirectory,
+            path => ValidateFile(path, spec));
         ValidateFile(canonicalPath, spec);
         return Result(canonicalPath, spec, generated: true);
     }

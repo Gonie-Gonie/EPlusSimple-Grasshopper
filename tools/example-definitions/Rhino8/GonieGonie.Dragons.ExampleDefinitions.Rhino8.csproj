@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\Shared\CanonicalExamplePublisher.cs" Link="Shared\CanonicalExamplePublisher.cs" />
     <Compile Include="..\Shared\AdvancedExampleDefinitions.cs" Link="Shared\AdvancedExampleDefinitions.cs" />
     <Compile Include="..\Shared\ExampleBuildingModels.cs" Link="Shared\ExampleBuildingModels.cs" />
     <Compile Include="..\Shared\ExampleDefinitionGate.cs" Link="Shared\ExampleDefinitionGate.cs" />
