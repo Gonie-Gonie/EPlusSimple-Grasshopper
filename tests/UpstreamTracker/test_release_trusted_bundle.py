@@ -18,6 +18,11 @@ NONCE = "5" * 64
 PROJECT_PATH = "tests/Product.Tests/Product.Tests.csproj"
 PROJECT_SLUG = "abc123def456"
 ASSERTION_ID = "service-parity"
+ORDINAL_ASSERTION_IDS = (
+    "epsimple-constants-numeric-unit-m-to-mm-b49a8507",
+    "epsimple-constants-numeric-unit-m3-per-s-to-cmh-c67e87d9",
+    "epsimple-constants-numeric-unit-mm-to-m-78d61c82",
+)
 HASH_A = "sha256:" + "a" * 64
 HASH_B = "sha256:" + "b" * 64
 HASH_C = "sha256:" + "c" * 64
@@ -94,6 +99,27 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                 16,
                 len([path for path in destination.rglob("*") if path.is_file()]),
             )
+
+    def test_project_assertion_closure_uses_ordinal_sorting(self) -> None:
+        powershell = shutil.which("powershell") or shutil.which("pwsh")
+        if powershell is None:
+            self.skipTest("PowerShell is unavailable")
+        with TemporaryWorkspace() as workspace:
+            fixture = self._write_bundle(
+                workspace,
+                assertion_ids=ORDINAL_ASSERTION_IDS,
+            )
+            completed = self._run_packager(powershell, fixture)
+            self.assertEqual(
+                0,
+                completed.returncode,
+                msg=(
+                    "PowerShell bundle packaging did not preserve ordinal "
+                    f"assertion ordering:\n{completed.stdout}\n{completed.stderr}"
+                ),
+            )
+            result = json.loads(fixture["result"].read_text(encoding="utf-8"))
+            self.assertEqual(len(ORDINAL_ASSERTION_IDS), result["assertionCount"])
 
     def test_report_arrays_must_be_real_json_arrays(self) -> None:
         powershell = shutil.which("powershell") or shutil.which("pwsh")
@@ -226,7 +252,19 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             self.assertNotEqual(0, completed.returncode)
             self.assertIn("reparse point", completed.stderr)
 
-    def _write_bundle(self, workspace: TemporaryWorkspace) -> dict[str, object]:
+    def _write_bundle(
+        self,
+        workspace: TemporaryWorkspace,
+        *,
+        assertion_ids: tuple[str, ...] = (ASSERTION_ID,),
+    ) -> dict[str, object]:
+        if (
+            not assertion_ids
+            or len(set(assertion_ids)) != len(assertion_ids)
+            or tuple(sorted(assertion_ids)) != assertion_ids
+        ):
+            raise ValueError("assertion_ids must be nonempty, unique, and ordinally sorted")
+        assertion_count = len(assertion_ids)
         repository = workspace.path / "repo"
         session = repository / "temp" / "u" / SESSION_ID
         release = workspace.path / "release"
@@ -248,6 +286,10 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             "test_symbol": "Product.Tests.ParityTests.Matches",
             "verification_kind": "unit_behavior",
         }
+        canonical_receipts = [
+            {**canonical_receipt, "id": assertion_id}
+            for assertion_id in assertion_ids
+        ]
         evidence_entries = [
             {
                 "implementation": {
@@ -256,7 +298,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                     "symbol": "Product.Service.Run",
                 },
                 "path": "upstream/service.py",
-                "receipts": [canonical_receipt],
+                "receipts": canonical_receipts,
                 "symbol": "Service.run",
                 "upstream_symbol_hash": HASH_A,
             }
@@ -273,8 +315,8 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             "schema": "goniegonie.upstream-symbol-evidence.v1",
             "summary": {
                 "entry_count": 1,
-                "passed_receipt_count": 1,
-                "receipt_count": 1,
+                "passed_receipt_count": assertion_count,
+                "receipt_count": assertion_count,
                 "skipped_receipt_count": 0,
                 "structural_only_receipt_count": 0,
                 "zero_load_active_claim_count": 0,
@@ -319,8 +361,22 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             f"p/{PROJECT_SLUG}/b/Product.Tests.dll": b"fresh test dll",
             f"p/{PROJECT_SLUG}/b/Product.dll": b"fresh implementation dll",
             f"p/{PROJECT_SLUG}/t/results.trx": b"<TestRun />\n",
-            f"p/{PROJECT_SLUG}/r/case.json": b'{"outcome":"exact"}\n',
         }
+        record_paths = []
+        for position, assertion_id in enumerate(assertion_ids):
+            record_name = (
+                "case.json" if position == 0 else f"case-{position + 1}.json"
+            )
+            record_path = f"p/{PROJECT_SLUG}/r/{record_name}"
+            record_paths.append(record_path)
+            artifact_bytes[record_path] = (
+                json.dumps(
+                    {"assertion_id": assertion_id, "outcome": "exact"},
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+                + b"\n"
+            )
         for relative, content in artifact_bytes.items():
             path = session / Path(relative)
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -331,7 +387,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             for relative in artifact_bytes
         }
         request = {
-            "assertion_count": 1,
+            "assertion_count": assertion_count,
             "dotnet": {
                 "path": "C:/pinned/dotnet/dotnet.exe",
                 "sdk_manifest": {
@@ -368,11 +424,12 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                     "assertions": [
                         {
                             "exercised_load": "not_applicable",
-                            "id": ASSERTION_ID,
+                            "id": assertion_id,
                             "test_path": "tests/Product.Tests/ParityTests.cs",
                             "test_source_sha256": HASH_A,
                             "test_symbol": "Product.Tests.ParityTests.Matches",
                         }
+                        for assertion_id in assertion_ids
                     ],
                     "build_props": descriptors[f"c/{PROJECT_SLUG}/d.props"],
                     "evaluated_graph": {},
@@ -387,7 +444,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             ],
             "repository_head": REPOSITORY_HEAD,
             "repository_root": repository.as_posix(),
-            "required_assertion_ids": [ASSERTION_ID],
+            "required_assertion_ids": list(assertion_ids),
             "schema": "goniegonie.trusted-evidence-request.v1",
             "session_directory": session.as_posix(),
             "session_id": SESSION_ID,
@@ -412,10 +469,15 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             "test_source_sha256": HASH_A,
             "test_symbol": "Product.Tests.ParityTests.Matches",
         }
+        executed_assertions = [
+            {**executed_assertion, "assertion_id": assertion_id}
+            for assertion_id in assertion_ids
+        ]
+        artifact_count = 2 + len(artifact_bytes)
         child = {
-            "artifact_count": 14,
-            "assertion_count": 1,
-            "assertions": [executed_assertion],
+            "artifact_count": artifact_count,
+            "assertion_count": assertion_count,
+            "assertions": executed_assertions,
             "git_executable_sha256": HASH_B,
             "inputs": source_files,
             "nonce": NONCE,
@@ -424,7 +486,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             "projects": [
                 {
                     "arguments": expected_arguments,
-                    "assertions": [executed_assertion],
+                    "assertions": executed_assertions,
                     "evaluated_graph": {},
                     "evaluation_build_props": descriptors[
                         f"g1/{PROJECT_SLUG}/d.props"
@@ -437,7 +499,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                     "parent_validation_build_props": descriptors[
                         f"g2/{PROJECT_SLUG}/d.props"
                     ],
-                    "records": [descriptors[f"p/{PROJECT_SLUG}/r/case.json"]],
+                    "records": [descriptors[path] for path in record_paths],
                     "restore_arguments": expected_restore_arguments,
                     "restore_exit_code": 0,
                     "restore_stderr": descriptors[
@@ -508,13 +570,13 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                 descriptors[f"p/{PROJECT_SLUG}/b/Product.dll"],
             ),
             indexed("trx", descriptors[f"p/{PROJECT_SLUG}/t/results.trx"]),
-            indexed("record", descriptors[f"p/{PROJECT_SLUG}/r/case.json"]),
+            *[indexed("record", descriptors[path]) for path in record_paths],
         ]
         entries.sort(key=lambda item: (item["path"], item["kind"]))
         index = {
-            "artifact_count": 14,
+            "artifact_count": artifact_count,
             "artifacts": entries,
-            "assertion_count": 1,
+            "assertion_count": assertion_count,
             "child_result_sha256": child_descriptor["sha256"],
             "dotnet_executable_sha256": HASH_C,
             "git_executable_sha256": HASH_B,
@@ -530,16 +592,16 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
         self._write_json(session / "i.json", index)
         index_descriptor = self._descriptor(session, "i.json")
         receipt = {
-            "artifact_count": 14,
+            "artifact_count": artifact_count,
             "artifact_index_path": "i.json",
             "artifact_index_sha256": index_descriptor["sha256"],
-            "assertion_count": 1,
+            "assertion_count": assertion_count,
             "child_result_sha256": child_descriptor["sha256"],
             "collector_source_sha256": HASH_A,
             "dotnet_executable_sha256": HASH_C,
             "evidence_results_sha256": _sha256_data(
                 {
-                    "assertions": [executed_assertion],
+                    "assertions": executed_assertions,
                     "collector": {
                         "path": "tools/upstream-tracker/goniegonie_upstream_tracker/trusted_collector.py",
                         "source_sha256": HASH_A,
@@ -568,10 +630,10 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
         self._write_json(session / "a.json", receipt)
         receipt_descriptor = self._descriptor(session, "a.json")
         trace = {
-            "artifact_count": 14,
+            "artifact_count": artifact_count,
             "artifact_index_path": f"temp/u/{SESSION_ID}/i.json",
             "artifact_index_sha256": index_descriptor["sha256"],
-            "assertion_count": 1,
+            "assertion_count": assertion_count,
             "authority_receipt_path": f"temp/u/{SESSION_ID}/a.json",
             "authority_receipt_sha256": receipt_descriptor["sha256"],
             "project_count": 1,
@@ -584,8 +646,8 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                 "target_frameworks": ["net8.0-windows"],
             },
             "expected": {
-                "assertion_count": 1,
-                "assertion_ids": [ASSERTION_ID],
+                "assertion_count": assertion_count,
+                "assertion_ids": list(assertion_ids),
                 "inventory_sha256": HASH_A,
                 "matrix_sha256": HASH_B,
                 "repository_head": REPOSITORY_HEAD,

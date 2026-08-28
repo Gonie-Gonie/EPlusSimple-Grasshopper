@@ -2115,7 +2115,8 @@ function Copy-TrustedEvidenceSession {
             -ProjectPath $projectPath `
             -Label 'parent evaluation build props'
     }
-    $plannedArray = @($plannedAssertionIds | Sort-Object)
+    [string[]] $plannedArray = $plannedAssertionIds.ToArray()
+    [System.Array]::Sort($plannedArray, [System.StringComparer]::Ordinal)
     if ($plannedArray.Count -ne $requiredAssertionIds.Count) {
         throw 'Trusted evidence request project assertions do not match the required count.'
     }
@@ -2404,7 +2405,10 @@ function Copy-TrustedEvidenceSession {
             throw 'Trusted evidence parent validation build props path is not canonical.'
         }
     }
-    $childProjectAssertionArray = @($childProjectAssertionIds | Sort-Object)
+    [string[]] $childProjectAssertionArray = $childProjectAssertionIds.ToArray()
+    [System.Array]::Sort(
+        $childProjectAssertionArray,
+        [System.StringComparer]::Ordinal)
     if ($childProjectAssertionArray.Count -ne $requiredAssertionIds.Count) {
         throw 'Trusted evidence child project assertions have the wrong count.'
     }
