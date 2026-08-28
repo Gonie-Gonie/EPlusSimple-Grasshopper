@@ -33,7 +33,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:928d922cee8638b3046aafede6b8b37fdaaf1b26872024960bb49fa350254462"
+    "sha256:42c3ae32039b1f38c3847cef2d2a7c5afd28e9f700a78a3a56f1d5af1fad1ea8"
 )
 
 
@@ -70,8 +70,8 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(
             {
                 "equivalent": 369,
-                "exception": 477,
-                "needs_reverification": 144,
+                "exception": 501,
+                "needs_reverification": 120,
                 "out_of_scope": 252,
             },
             plan.classification_counts,
@@ -1953,8 +1953,8 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(
             {
                 "equivalent": 49,
-                "exception": 80,
-                "needs_reverification": 39,
+                "exception": 104,
+                "needs_reverification": 15,
                 "out_of_scope": 6,
             },
             {
@@ -2097,8 +2097,110 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual(
             {
                 "equivalent": 49,
-                "exception": 80,
-                "needs_reverification": 39,
+                "exception": 104,
+                "needs_reverification": 15,
+                "out_of_scope": 6,
+            },
+            {
+                classification: sum(
+                    entries[index].classification == classification
+                    for index in range(641, 815)
+                )
+                for classification in (
+                    "equivalent",
+                    "exception",
+                    "needs_reverification",
+                    "out_of_scope",
+                )
+            },
+        )
+
+    def test_dragon_hvac_appender_controller_promotion_is_exact_and_bounded(
+        self,
+    ) -> None:
+        entries = self.configuration.matrix.entries
+        target_indices = {
+            *range(686, 693),
+            *range(717, 720),
+            *range(774, 777),
+            *range(804, 815),
+        }
+        self.assertEqual(24, len(target_indices))
+
+        expected_receipt_ids = set()
+        expected_exception_ids = set()
+        for index in sorted(target_indices):
+            entry = entries[index]
+            inventory_symbol = self.configuration.inventory.symbols[index]
+            self.assertEqual("src/idragon/dragon/hvac.py", entry.path, index)
+            self.assertEqual(inventory_symbol.key, entry.key, index)
+            self.assertEqual("exception", entry.classification, index)
+            receipt_id = (
+                f"dragon-hvac-appenders-controllers-{index}-"
+                f"{inventory_symbol.symbol_hash.removeprefix('sha256:')[:8]}"
+            )
+            exception_id = f"public-aggregate-hvac-postprocessing-{index}"
+            expected_receipt_ids.add(receipt_id)
+            expected_exception_ids.add(exception_id)
+            self.assertEqual(exception_id, entry.exception_id, index)
+            self.assertEqual(
+                (
+                    f"upstream/compatibility-exceptions.yml#{exception_id}",
+                    f"upstream/symbol-evidence.json#{receipt_id}",
+                ),
+                entry.evidence,
+                index,
+            )
+            for binding in (
+                "Oracle commit d14de9e",
+                "commit c33fa05",
+                "sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054",
+                "sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31",
+                "sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf",
+                "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+                "No standalone or internal postprocessor API equivalence is claimed.",
+            ):
+                self.assertIn(binding, entry.rationale, index)
+
+        evidence = self.configuration.symbol_evidence
+        assert evidence is not None
+        appender_controller_receipts = {
+            receipt.identifier
+            for item in evidence.entries
+            for receipt in item.receipts
+            if receipt.identifier.startswith("dragon-hvac-appenders-controllers-")
+        }
+        self.assertEqual(expected_receipt_ids, appender_controller_receipts)
+        self.assertEqual(
+            expected_exception_ids,
+            {
+                entry.exception_id
+                for entry in entries
+                if entry.exception_id is not None
+                and entry.exception_id.startswith(
+                    "public-aggregate-hvac-postprocessing-"
+                )
+            },
+        )
+        self.assertEqual(
+            (
+                "src/idragon/dragon/hvac.py",
+                "SupplyGroup.to_idf_object",
+                "exception",
+                "model-context-supply-group-idf-assembly",
+            ),
+            (
+                entries[796].path,
+                entries[796].symbol,
+                entries[796].classification,
+                entries[796].exception_id,
+            ),
+        )
+        self.assertEqual(
+            {
+                "equivalent": 49,
+                "exception": 104,
+                "needs_reverification": 15,
                 "out_of_scope": 6,
             },
             {
@@ -2122,8 +2224,8 @@ class SafeScopePolicyTests(unittest.TestCase):
                 (
                     "src/idragon/dragon/hvac.py",
                     "ZoneTerminalUnitAppender.run",
-                    "needs_reverification",
-                    None,
+                    "exception",
+                    "public-aggregate-hvac-postprocessing-814",
                 ),
                 (
                     "src/idragon/dragon/model.py",

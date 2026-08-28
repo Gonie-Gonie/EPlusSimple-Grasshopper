@@ -30,7 +30,7 @@ class ConfigurationTests(unittest.TestCase):
                 for mapping in configuration.mappings
             )
         )
-        self.assertEqual(483, len(configuration.exceptions))
+        self.assertEqual(507, len(configuration.exceptions))
         compatibility = load_compatibility_configuration(
             configuration,
             REPOSITORY_ROOT / "upstream" / "compatibility-scope.json",
@@ -44,7 +44,7 @@ class ConfigurationTests(unittest.TestCase):
             len(compatibility.inventory.symbols),
             len(compatibility.matrix.entries),
         )
-        self.assertEqual(144, len(compatibility.needs_reverification))
+        self.assertEqual(120, len(compatibility.needs_reverification))
         self.assertEqual(
             369,
             sum(
@@ -53,7 +53,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            477,
+            501,
             sum(
                 entry.classification == "exception"
                 for entry in compatibility.matrix.entries
@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:928d922cee8638b3046aafede6b8b37fdaaf1b26872024960bb49fa350254462",
+            "sha256:42c3ae32039b1f38c3847cef2d2a7c5afd28e9f700a78a3a56f1d5af1fad1ea8",
             compatibility.matrix.content_sha256,
         )
-        self.assertEqual(846, len(symbol_evidence.entries))
-        self.assertEqual(846, len(symbol_evidence.receipts))
+        self.assertEqual(870, len(symbol_evidence.entries))
+        self.assertEqual(870, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:9e628a2ab76fafef78a50aadb5b024324a0b8f04c10729920f8152313bb52709",
+            "sha256:260161a47bd82d0a310cfd661369ed9e479e14f8e72f678f7454c1d2db82d3b2",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -127,6 +127,34 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(49, len(supply_core_target_indices))
         self.assertEqual(31, len(supply_core_exception_ids))
         self.assertEqual(49, len(supply_core_evidence_entries))
+
+        appender_controller_fixture_path = (
+            REPOSITORY_ROOT
+            / "fixtures/reference/python-0.7.0/dragon-hvac-appenders-controllers-oracle.json"
+        )
+        appender_controller_fixture = json.loads(
+            appender_controller_fixture_path.read_text(encoding="utf-8")
+        )
+        appender_controller_contract = appender_controller_fixture["consumer_contract"]
+        appender_controller_targets = tuple(
+            appender_controller_fixture["target_receipts"]
+        )
+        appender_controller_target_indices = tuple(
+            item["inventory_index"] for item in appender_controller_targets
+        )
+        appender_controller_exception_ids = set(
+            appender_controller_contract["adaptations"].values()
+        )
+        appender_controller_evidence_entries = tuple(
+            item
+            for item in symbol_evidence.entries
+            if item.receipts[0].identifier.startswith(
+                "dragon-hvac-appenders-controllers-"
+            )
+        )
+        self.assertEqual(24, len(appender_controller_target_indices))
+        self.assertEqual(24, len(appender_controller_exception_ids))
+        self.assertEqual(24, len(appender_controller_evidence_entries))
 
         by_key = compatibility.matrix.entries_by_key
         numeric_indices = (
@@ -2121,7 +2149,7 @@ class ConfigurationTests(unittest.TestCase):
         self.assertFalse(energy_model_receipt.claims_active_load)
         self.assertEqual("not_applicable", energy_model_receipt.exercised_load)
         self.assertEqual(
-            "needs_reverification",
+            "exception",
             compatibility.matrix.entries[814].classification,
         )
         self.assertEqual(
@@ -2644,6 +2672,9 @@ class ConfigurationTests(unittest.TestCase):
                 and not item.receipts[0].identifier.startswith(
                     "dragon-hvac-supply-core-"
                 )
+                and not item.receipts[0].identifier.startswith(
+                    "dragon-hvac-appenders-controllers-"
+                )
                 for item in symbol_evidence.entries
             ),
         )
@@ -2993,6 +3024,12 @@ class ConfigurationTests(unittest.TestCase):
                     "dragon-hvac-supply-core-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "dragon-hvac-appenders-controllers-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -3003,6 +3040,7 @@ class ConfigurationTests(unittest.TestCase):
                 and item.upstream_path != "src/epsimple/core/hvac.py"
                 and item.identifier not in source_tower_exception_ids
                 and item.identifier not in supply_core_exception_ids
+                and item.identifier not in appender_controller_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -4290,6 +4328,12 @@ class ConfigurationTests(unittest.TestCase):
                     "dragon-hvac-supply-core-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "dragon-hvac-appenders-controllers-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -4306,6 +4350,7 @@ class ConfigurationTests(unittest.TestCase):
                 )
                 and item.identifier not in source_tower_exception_ids
                 and item.identifier not in supply_core_exception_ids
+                and item.identifier not in appender_controller_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -4632,6 +4677,12 @@ class ConfigurationTests(unittest.TestCase):
                     "dragon-hvac-supply-core-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "dragon-hvac-appenders-controllers-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -4645,6 +4696,7 @@ class ConfigurationTests(unittest.TestCase):
                 )
                 and item.identifier not in source_tower_exception_ids
                 and item.identifier not in supply_core_exception_ids
+                and item.identifier not in appender_controller_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -4961,6 +5013,12 @@ class ConfigurationTests(unittest.TestCase):
                     "dragon-hvac-supply-core-"
                 )
                 for item in symbol_evidence.entries
+            )
+            - sum(
+                item.receipts[0].identifier.startswith(
+                    "dragon-hvac-appenders-controllers-"
+                )
+                for item in symbol_evidence.entries
             ),
         )
         self.assertEqual(
@@ -4972,6 +5030,7 @@ class ConfigurationTests(unittest.TestCase):
                 )
                 and item.identifier not in source_tower_exception_ids
                 and item.identifier not in supply_core_exception_ids
+                and item.identifier not in appender_controller_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -5225,7 +5284,8 @@ class ConfigurationTests(unittest.TestCase):
             len(symbol_evidence.entries)
             - len(other_evidence_entries)
             - len(source_tower_evidence_entries)
-            - len(supply_core_evidence_entries),
+            - len(supply_core_evidence_entries)
+            - len(appender_controller_evidence_entries),
         )
         self.assertEqual(
             412,
@@ -5233,6 +5293,7 @@ class ConfigurationTests(unittest.TestCase):
                 item.identifier not in other_exception_ids
                 and item.identifier not in source_tower_exception_ids
                 and item.identifier not in supply_core_exception_ids
+                and item.identifier not in appender_controller_exception_ids
                 for item in configuration.exceptions
             ),
         )
@@ -5515,6 +5576,7 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(
             88,
             len(supply_core_target_indices)
+            + len(appender_controller_target_indices)
             + sum(
                 entry.path == "src/idragon/dragon/hvac.py"
                 and entry.classification == "needs_reverification"
@@ -5826,6 +5888,286 @@ class ConfigurationTests(unittest.TestCase):
             )
         self.assertEqual(
             39,
+            len(appender_controller_target_indices)
+            + sum(
+                entry.path == "src/idragon/dragon/hvac.py"
+                and entry.classification == "needs_reverification"
+                for entry in compatibility.matrix.entries
+            ),
+        )
+
+        appender_controller_generator_path = (
+            REPOSITORY_ROOT
+            / "tools/python-reference/"
+            "generate_dragon_hvac_appenders_controllers_oracle.py"
+        )
+        appender_controller_validator_path = (
+            REPOSITORY_ROOT
+            / "tests/PythonReference/test_dragon_hvac_appenders_controllers_oracle.py"
+        )
+        appender_controller_test_path = (
+            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/"
+            "AppendersControllersOracleParityTests.cs"
+        )
+        appender_controller_test_symbol = (
+            "GonieGonie.InvisibleDragon.Tests.Hvac."
+            "AppendersControllersOracleParityTests."
+            "MatchesPinnedAppendersControllersThroughPublicAggregateRoute"
+        )
+        appender_controller_fixture_sha256 = (
+            "sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054"
+        )
+        appender_controller_generator_sha256 = (
+            "sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31"
+        )
+        appender_controller_validator_sha256 = (
+            "sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf"
+        )
+        appender_controller_test_sha256 = (
+            "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4"
+        )
+        for pinned_path, expected_sha256 in (
+            (appender_controller_fixture_path, appender_controller_fixture_sha256),
+            (appender_controller_generator_path, appender_controller_generator_sha256),
+            (appender_controller_validator_path, appender_controller_validator_sha256),
+            (
+                REPOSITORY_ROOT / appender_controller_test_path,
+                appender_controller_test_sha256,
+            ),
+        ):
+            self.assertEqual(
+                expected_sha256,
+                "sha256:" + hashlib.sha256(pinned_path.read_bytes()).hexdigest(),
+                pinned_path,
+            )
+
+        appender_controller_closure = appender_controller_contract["closure"]
+        self.assertEqual(
+            (
+                *range(686, 693),
+                *range(717, 720),
+                *range(774, 777),
+                *range(804, 815),
+            ),
+            appender_controller_target_indices,
+        )
+        self.assertEqual(
+            appender_controller_target_indices,
+            tuple(appender_controller_closure["target_indices"]),
+        )
+        self.assertEqual(24, appender_controller_closure["target_count"])
+        self.assertEqual(149, appender_controller_closure["deferred_count"])
+        self.assertEqual(1, appender_controller_closure["resolved_support_count"])
+        self.assertEqual((796,), tuple(appender_controller_closure["resolved_support_indices"]))
+        self.assertEqual(174, appender_controller_closure["source_declaration_count"])
+        self.assertTrue(appender_controller_closure["exact_disjoint_source_partition"])
+        self.assertTrue(appender_controller_closure["exact_one_case_target_partition"])
+        self.assertTrue(appender_controller_closure["full_hvac_source_partition"])
+        self.assertFalse(appender_controller_closure["target_support_overlap"])
+        self.assertEqual(
+            set(range(641, 815)),
+            set(appender_controller_target_indices)
+            | set(appender_controller_closure["resolved_support_indices"])
+            | set(appender_controller_closure["deferred_indices"]),
+        )
+        self.assertEqual(
+            {"equivalent": 0, "exception": 24},
+            appender_controller_contract["classification_counts"],
+        )
+        self.assertEqual(6, appender_controller_contract["case_count"])
+        self.assertEqual(6, len(appender_controller_fixture["cases"]))
+        self.assertTrue(
+            appender_controller_contract["evidence_contract"][
+                "target_coverage_complete"
+            ]
+        )
+        self.assertFalse(
+            appender_controller_contract["evidence_contract"][
+                "internal_native_route_claim"
+            ]
+        )
+        self.assertFalse(
+            appender_controller_contract["evidence_contract"][
+                "active_energyplus_process_claim"
+            ]
+        )
+
+        appender_controller_case_by_symbol = {}
+        for case in appender_controller_fixture["cases"]:
+            for symbol in case["target_symbols"]:
+                self.assertNotIn(symbol, appender_controller_case_by_symbol)
+                appender_controller_case_by_symbol[symbol] = (
+                    case["code"],
+                    case["id"],
+                )
+        self.assertEqual(
+            set(appender_controller_closure["target_symbols"]),
+            set(appender_controller_case_by_symbol),
+        )
+
+        appender_controller_test_bytes = (
+            REPOSITORY_ROOT / appender_controller_test_path
+        ).read_bytes()
+        appender_controller_hash_block = re.search(
+            rb"private static readonly string\[\] ExpectedReceiptHashes\s*=\s*"
+            rb"\{(?P<body>.*?)\n\s*\};",
+            appender_controller_test_bytes,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(appender_controller_hash_block)
+        assert appender_controller_hash_block is not None
+        appender_controller_output_hashes = tuple(
+            item.decode("ascii")
+            for item in re.findall(
+                rb'"(sha256:[0-9a-f]{64})"',
+                appender_controller_hash_block.group("body"),
+            )
+        )
+        self.assertEqual(24, len(appender_controller_output_hashes))
+        self.assertEqual(24, len(set(appender_controller_output_hashes)))
+
+        appender_controller_implementation_path = (
+            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs"
+        )
+        appender_controller_implementation_symbol = (
+            "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+        )
+        appender_controller_implementation_sha256 = (
+            "sha256:" + hashlib.sha256(
+                (REPOSITORY_ROOT / appender_controller_implementation_path).read_bytes()
+            ).hexdigest()
+        )
+        self.assertEqual(
+            set(appender_controller_contract["adaptations"]),
+            {
+                item.upstream_symbol
+                for item in configuration.exceptions
+                if item.identifier in appender_controller_exception_ids
+            },
+        )
+        for target, expected_output_hash in zip(
+            appender_controller_targets,
+            appender_controller_output_hashes,
+            strict=True,
+        ):
+            index = target["inventory_index"]
+            symbol = target["symbol"]
+            key = (target["path"], symbol)
+            inventory_symbol = compatibility.inventory.symbols[index]
+            expected_descriptor = dict(target)
+            expected_descriptor.pop("inventory_index")
+            self.assertEqual(expected_descriptor, inventory_symbol.to_data(), symbol)
+            assertion_id = appender_controller_contract["assertion_ids"][symbol]
+            self.assertRegex(assertion_id, r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+            exception_id = appender_controller_contract["adaptations"][symbol]
+            native_route = appender_controller_contract["native_routes"][symbol]
+            code, case_id = appender_controller_case_by_symbol[symbol]
+
+            entry = compatibility.matrix.entries[index]
+            self.assertEqual(key, entry.key, symbol)
+            self.assertEqual("exception", entry.classification, symbol)
+            self.assertEqual(exception_id, entry.exception_id, symbol)
+            self.assertEqual(
+                (
+                    f"upstream/compatibility-exceptions.yml#{exception_id}",
+                    f"upstream/symbol-evidence.json#{assertion_id}",
+                ),
+                entry.evidence,
+                symbol,
+            )
+
+            evidence_entry = symbol_evidence.entries_by_key[key]
+            self.assertEqual(
+                inventory_symbol.symbol_hash,
+                evidence_entry.upstream_symbol_hash,
+                symbol,
+            )
+            self.assertEqual(
+                appender_controller_implementation_path,
+                evidence_entry.implementation_path,
+                symbol,
+            )
+            self.assertEqual(
+                appender_controller_implementation_symbol,
+                evidence_entry.implementation_symbol,
+                symbol,
+            )
+            self.assertEqual(
+                appender_controller_implementation_sha256,
+                evidence_entry.implementation_source_sha256,
+                symbol,
+            )
+            self.assertEqual(1, len(evidence_entry.receipts), symbol)
+            receipt = evidence_entry.receipts[0]
+            self.assertEqual(assertion_id, receipt.identifier, symbol)
+            self.assertEqual(entry.rationale, receipt.assertion, symbol)
+            self.assertEqual(expected_output_hash, receipt.expected_output_sha256, symbol)
+            self.assertEqual(appender_controller_test_path, receipt.test_path, symbol)
+            self.assertEqual(appender_controller_test_symbol, receipt.test_symbol, symbol)
+            self.assertEqual(
+                appender_controller_test_sha256,
+                receipt.test_source_sha256,
+                symbol,
+            )
+            self.assertEqual("cross_language", receipt.verification_kind, symbol)
+            self.assertEqual("passed", receipt.outcome, symbol)
+            self.assertFalse(receipt.skipped, symbol)
+            self.assertFalse(receipt.structural_only, symbol)
+            self.assertFalse(receipt.claims_active_load, symbol)
+            self.assertEqual("not_applicable", receipt.exercised_load, symbol)
+            for exact_binding in (
+                "Oracle commit d14de9e",
+                appender_controller_fixture_sha256,
+                appender_controller_generator_sha256,
+                appender_controller_validator_sha256,
+                appender_controller_test_sha256,
+                "commit c33fa05",
+                appender_controller_implementation_path
+                + "@"
+                + appender_controller_implementation_sha256,
+                expected_output_hash,
+                assertion_id,
+                native_route,
+                code,
+                case_id,
+                "No standalone or internal postprocessor API equivalence is claimed.",
+            ):
+                self.assertIn(exact_binding, entry.rationale, symbol)
+
+            exception = exceptions_by_id[exception_id]
+            self.assertEqual(target["path"], exception.upstream_path, symbol)
+            self.assertEqual(symbol, exception.upstream_symbol, symbol)
+            self.assertEqual(
+                inventory_symbol.symbol_hash,
+                exception.upstream_symbol_hash,
+                symbol,
+            )
+            self.assertIn(
+                ("engineering_result", entry.rationale),
+                exception.effects,
+            )
+            self.assertEqual(
+                "accepted-native-api-adaptation",
+                exception.approval,
+                symbol,
+            )
+
+        self.assertEqual(
+            set(appender_controller_closure["target_symbols"]),
+            {item.symbol for item in appender_controller_evidence_entries},
+        )
+        support_entry = compatibility.matrix.entries[796]
+        self.assertEqual(
+            ("src/idragon/dragon/hvac.py", "SupplyGroup.to_idf_object"),
+            support_entry.key,
+        )
+        self.assertEqual("exception", support_entry.classification)
+        self.assertNotIn(
+            796,
+            appender_controller_target_indices,
+        )
+        self.assertEqual(
+            15,
             sum(
                 entry.path == "src/idragon/dragon/hvac.py"
                 and entry.classification == "needs_reverification"

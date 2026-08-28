@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:9e628a2ab76fafef78a50aadb5b024324a0b8f04c10729920f8152313bb52709",
+  "content_sha256": "sha256:260161a47bd82d0a310cfd661369ed9e479e14f8e72f678f7454c1d2db82d3b2",
   "entries": [
     {
       "implementation": {
@@ -12743,6 +12743,188 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify DemandBranchAppender as an exception for exact fixture case A01 (dragon-hvac-appenders-controllers.demand-branch-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-686 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-686. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:f9558f0bd716b64491bdb4ca0849da8c8eae5a999a72f7b279b50128c9efc646. Only inventory index 686 and assertion dragon-hvac-appenders-controllers-686-cdbb9fb8 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:f9558f0bd716b64491bdb4ca0849da8c8eae5a999a72f7b279b50128c9efc646",
+          "id": "dragon-hvac-appenders-controllers-686-cdbb9fb8",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DemandBranchAppender",
+      "upstream_symbol_hash": "sha256:cdbb9fb813c5f881612be9e30cd352d75ef4fc6a96147f71c4ae45861c580a5c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify DemandBranchAppender.append_to_branchlist as an exception for exact fixture case A01 (dragon-hvac-appenders-controllers.demand-branch-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-687 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-687. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:9b55b9ca6e938630161a286ab6826813822065588434b3479b0a27ee575be577. Only inventory index 687 and assertion dragon-hvac-appenders-controllers-687-72c53b16 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9b55b9ca6e938630161a286ab6826813822065588434b3479b0a27ee575be577",
+          "id": "dragon-hvac-appenders-controllers-687-72c53b16",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DemandBranchAppender.append_to_branchlist",
+      "upstream_symbol_hash": "sha256:72c53b16d16f58ba8c517aa34fd494dc87785aaf6b30f76c9f0f64fd9d292990"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify DemandBranchAppender.append_to_mixer as an exception for exact fixture case A01 (dragon-hvac-appenders-controllers.demand-branch-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-688 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-688. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:3f92bcc54df0d1444b3d5e9113ee6eed77250dd36d41ed337e3265a5ab77965f. Only inventory index 688 and assertion dragon-hvac-appenders-controllers-688-bf8d6bd1 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3f92bcc54df0d1444b3d5e9113ee6eed77250dd36d41ed337e3265a5ab77965f",
+          "id": "dragon-hvac-appenders-controllers-688-bf8d6bd1",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DemandBranchAppender.append_to_mixer",
+      "upstream_symbol_hash": "sha256:bf8d6bd141adb7bd3badb080765547123ad1a22464d89240750c3c66b5de2806"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify DemandBranchAppender.append_to_spliter as an exception for exact fixture case A01 (dragon-hvac-appenders-controllers.demand-branch-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-689 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-689. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:fd06c3eddbda57b305f1ed419c8f0f2832df9d77a70e090eeaa3774197e51625. Only inventory index 689 and assertion dragon-hvac-appenders-controllers-689-29bdd382 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:fd06c3eddbda57b305f1ed419c8f0f2832df9d77a70e090eeaa3774197e51625",
+          "id": "dragon-hvac-appenders-controllers-689-29bdd382",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DemandBranchAppender.append_to_spliter",
+      "upstream_symbol_hash": "sha256:29bdd382c4d5b2f21939a2395dc791ce3ee21903f0a2c0db8b58334ad90ae501"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify DemandBranchAppender.count_current_branches_branchlist as an exception for exact fixture case A01 (dragon-hvac-appenders-controllers.demand-branch-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-690 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-690. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:5b03c6a5540f8ab420689585c79dfdeefd67715f4ab39789b451219f95cce024. Only inventory index 690 and assertion dragon-hvac-appenders-controllers-690-2fb35691 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:5b03c6a5540f8ab420689585c79dfdeefd67715f4ab39789b451219f95cce024",
+          "id": "dragon-hvac-appenders-controllers-690-2fb35691",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DemandBranchAppender.count_current_branches_branchlist",
+      "upstream_symbol_hash": "sha256:2fb356913b47383bea1c194d3a5809d939e4100199dfdd8d6684f8944a2ff22d"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify DemandBranchAppender.count_current_branches_connector as an exception for exact fixture case A01 (dragon-hvac-appenders-controllers.demand-branch-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-691 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-691. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:16188c2b077773a129a8308efe20818c12fc61d6a3d95a253f54cf67dd7a26eb. Only inventory index 691 and assertion dragon-hvac-appenders-controllers-691-4531204e are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:16188c2b077773a129a8308efe20818c12fc61d6a3d95a253f54cf67dd7a26eb",
+          "id": "dragon-hvac-appenders-controllers-691-4531204e",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DemandBranchAppender.count_current_branches_connector",
+      "upstream_symbol_hash": "sha256:4531204ed44673efc4828037c45c8dc6234cc91bd4f04dc1de473be2c99b0c55"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify DemandBranchAppender.run as an exception for exact fixture case A01 (dragon-hvac-appenders-controllers.demand-branch-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-692 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-692. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:c5ba2a105cd2cc229853028f4ba821ec8f2afa1b6db508ca37784c4caa0acb9a. Only inventory index 692 and assertion dragon-hvac-appenders-controllers-692-3d176f2c are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c5ba2a105cd2cc229853028f4ba821ec8f2afa1b6db508ca37784c4caa0acb9a",
+          "id": "dragon-hvac-appenders-controllers-692-3d176f2c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "DemandBranchAppender.run",
+      "upstream_symbol_hash": "sha256:3d176f2ca99d74e31ee8b0c3e8effa6553327480db87260dc794dc0d8cfde33e"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SupplySystems.cs",
         "source_sha256": "sha256:4de030455a8a1b8db0ca4eca7745c6501930c984f9d1e156e17cb0b752d845cf",
         "symbol": "GonieGonie.InvisibleDragon.Hvac.ElectricRadiantFloor"
@@ -13104,6 +13286,84 @@
       ],
       "symbol": "ElectricRadiator.to_idf_object",
       "upstream_symbol_hash": "sha256:e15931923550afa35476f5cdcf01c7bbfa434329b26fed648611f1b673303be5"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify EquipmentListAppender as an exception for exact fixture case B01 (dragon-hvac-appenders-controllers.equipment-list-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-717 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-717. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:ead9109a17bf184c92b0e91722ef2084b57306772728893671a05046df9b68bf. Only inventory index 717 and assertion dragon-hvac-appenders-controllers-717-268e7fb5 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:ead9109a17bf184c92b0e91722ef2084b57306772728893671a05046df9b68bf",
+          "id": "dragon-hvac-appenders-controllers-717-268e7fb5",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EquipmentListAppender",
+      "upstream_symbol_hash": "sha256:268e7fb5a1453489ae6ec23facd2b3766674779c8bf2d4300f1970fd2ff3db79"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify EquipmentListAppender.count_current_equipments as an exception for exact fixture case B01 (dragon-hvac-appenders-controllers.equipment-list-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-718 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-718. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:3225344c89e812c666dbc8180cb57576c26b5471104d769c0864589cf926e860. Only inventory index 718 and assertion dragon-hvac-appenders-controllers-718-ef88aa10 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3225344c89e812c666dbc8180cb57576c26b5471104d769c0864589cf926e860",
+          "id": "dragon-hvac-appenders-controllers-718-ef88aa10",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EquipmentListAppender.count_current_equipments",
+      "upstream_symbol_hash": "sha256:ef88aa10062a97a020f25e8550040154d13080bf60989dadae25fdc9833ddb21"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify EquipmentListAppender.run as an exception for exact fixture case B01 (dragon-hvac-appenders-controllers.equipment-list-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-719 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-719. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:d347c660e8428636b4b86cce79a77758f41e5a7a3b07f8244ca4fe239cc31eaf. Only inventory index 719 and assertion dragon-hvac-appenders-controllers-719-9fbbb80e are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:d347c660e8428636b4b86cce79a77758f41e5a7a3b07f8244ca4fe239cc31eaf",
+          "id": "dragon-hvac-appenders-controllers-719-9fbbb80e",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "EquipmentListAppender.run",
+      "upstream_symbol_hash": "sha256:9fbbb80eb23fdb62c9da0da36936230ef78de8eb2f1814fb2663372892cb0a1f"
     },
     {
       "implementation": {
@@ -14277,6 +14537,84 @@
     },
     {
       "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify SequentialLoadFractionController as an exception for exact fixture case C01 (dragon-hvac-appenders-controllers.sequential-load-fraction-controller) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-774 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-774. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:1571ab6f1a186168e0df3c4241e5c505871b75261a2fc0886706789e9a6d7b93. Only inventory index 774 and assertion dragon-hvac-appenders-controllers-774-35b327ea are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1571ab6f1a186168e0df3c4241e5c505871b75261a2fc0886706789e9a6d7b93",
+          "id": "dragon-hvac-appenders-controllers-774-35b327ea",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SequentialLoadFractionController",
+      "upstream_symbol_hash": "sha256:35b327ea68293db8e0f2830f83396e2de06f40196120d1693d6f2c964e6abced"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify SequentialLoadFractionController.find_target_equipment_number as an exception for exact fixture case C01 (dragon-hvac-appenders-controllers.sequential-load-fraction-controller) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-775 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-775. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:bd7c5a76b01c491c69b49e2cea58d9272dbebd1e9aded669cd6712dfcb2732cb. Only inventory index 775 and assertion dragon-hvac-appenders-controllers-775-5a959bd0 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:bd7c5a76b01c491c69b49e2cea58d9272dbebd1e9aded669cd6712dfcb2732cb",
+          "id": "dragon-hvac-appenders-controllers-775-5a959bd0",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SequentialLoadFractionController.find_target_equipment_number",
+      "upstream_symbol_hash": "sha256:5a959bd0ab84c571f0ef2a3c7bb84ed4d49322752e17a33a39db8b0fa472fb75"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify SequentialLoadFractionController.run as an exception for exact fixture case C01 (dragon-hvac-appenders-controllers.sequential-load-fraction-controller) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-776 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-776. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:001ee32660f4721c5c8892a4edbcd6a41bf3f4602dea4e02ff3a4e4248e0a027. Only inventory index 776 and assertion dragon-hvac-appenders-controllers-776-efc3dc2d are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:001ee32660f4721c5c8892a4edbcd6a41bf3f4602dea4e02ff3a4e4248e0a027",
+          "id": "dragon-hvac-appenders-controllers-776-efc3dc2d",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SequentialLoadFractionController.run",
+      "upstream_symbol_hash": "sha256:efc3dc2d2373986328ef6a81fd419b9145c067c8cd18d36d3b060a974cfb0fe9"
+    },
+    {
+      "implementation": {
         "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
         "source_sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
         "symbol": "GonieGonie.InvisibleDragon.Hvac.SourceSystem"
@@ -14976,6 +15314,292 @@
       ],
       "symbol": "SupplySystem.to_idf_object",
       "upstream_symbol_hash": "sha256:186909537d0e1c3f8e7e6fdcdac153f3ce50c8816fbef58a88266f97f3e59f87"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify SupplySystemToIdfPostProcessor as an exception for exact fixture case D01 (dragon-hvac-appenders-controllers.supply-system-postprocessor) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-804 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-804. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:c147c87a91ba218114e1474eca6e799a40120f5b8c5862d7217656d9cd267d0b. Only inventory index 804 and assertion dragon-hvac-appenders-controllers-804-9b4492ed are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:c147c87a91ba218114e1474eca6e799a40120f5b8c5862d7217656d9cd267d0b",
+          "id": "dragon-hvac-appenders-controllers-804-9b4492ed",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SupplySystemToIdfPostProcessor",
+      "upstream_symbol_hash": "sha256:9b4492ed688d7beab83704f7dcce0560fea6cfe33ba8b044fe009be250445ed3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify SupplySystemToIdfPostProcessor.__init__ as an exception for exact fixture case D01 (dragon-hvac-appenders-controllers.supply-system-postprocessor) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-805 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-805. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:b77cd26879e8ceceee727547e6b4af33c6f47aca411e9a66c18d677e9ff30ed4. Only inventory index 805 and assertion dragon-hvac-appenders-controllers-805-c63e7515 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:b77cd26879e8ceceee727547e6b4af33c6f47aca411e9a66c18d677e9ff30ed4",
+          "id": "dragon-hvac-appenders-controllers-805-c63e7515",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SupplySystemToIdfPostProcessor.__init__",
+      "upstream_symbol_hash": "sha256:c63e7515154905c4132cbb5ff86a27635bf3ca984e0c7748912a05bf04d16e2a"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify SupplySystemToIdfPostProcessor.run as an exception for exact fixture case D01 (dragon-hvac-appenders-controllers.supply-system-postprocessor) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-806 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-806. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:1bcebc77c04fc668244f4159e8de5a603f56991cee98faedf8e5777554135aed. Only inventory index 806 and assertion dragon-hvac-appenders-controllers-806-582cf3ef are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:1bcebc77c04fc668244f4159e8de5a603f56991cee98faedf8e5777554135aed",
+          "id": "dragon-hvac-appenders-controllers-806-582cf3ef",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SupplySystemToIdfPostProcessor.run",
+      "upstream_symbol_hash": "sha256:582cf3ef7c7552e3ea67ec22b70765e587eb5cfeab3c01682c588daf47bbed2c"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify SupplySystemToIdfPostProcessor.source as an exception for exact fixture case D01 (dragon-hvac-appenders-controllers.supply-system-postprocessor) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-807 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-807. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:60c80ba8dafbb39e98505bb68bc29b1fdb15ecb1fcf52d9021883be8f2946c44. Only inventory index 807 and assertion dragon-hvac-appenders-controllers-807-ce40cc13 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:60c80ba8dafbb39e98505bb68bc29b1fdb15ecb1fcf52d9021883be8f2946c44",
+          "id": "dragon-hvac-appenders-controllers-807-ce40cc13",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "SupplySystemToIdfPostProcessor.source",
+      "upstream_symbol_hash": "sha256:ce40cc1385a0fcca3b2abaf36b154852aebb21db3b95d69b692c6ded990809a3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify ZoneAirNodeAppender as an exception for exact fixture case E01 (dragon-hvac-appenders-controllers.zone-air-node-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-808 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-808. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:0ff15a0a58336ef3929425b79833d058638860cb62fed363fde9ab3ca354252e. Only inventory index 808 and assertion dragon-hvac-appenders-controllers-808-bff1883c are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:0ff15a0a58336ef3929425b79833d058638860cb62fed363fde9ab3ca354252e",
+          "id": "dragon-hvac-appenders-controllers-808-bff1883c",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ZoneAirNodeAppender",
+      "upstream_symbol_hash": "sha256:bff1883c812160a7b15704f26c165de22c212f7e2c86a5707b24d7b1f53c98c3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify ZoneAirNodeAppender.count_current_nodes as an exception for exact fixture case E01 (dragon-hvac-appenders-controllers.zone-air-node-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-809 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-809. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:38809c1f55a404cfebf488714d28226ed4afa57f6e72d49960ac20f6efab948b. Only inventory index 809 and assertion dragon-hvac-appenders-controllers-809-fc0fbad2 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:38809c1f55a404cfebf488714d28226ed4afa57f6e72d49960ac20f6efab948b",
+          "id": "dragon-hvac-appenders-controllers-809-fc0fbad2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ZoneAirNodeAppender.count_current_nodes",
+      "upstream_symbol_hash": "sha256:fc0fbad24db77297df3ec35658bbff52503e53521172cda4c5659b1a5ba61395"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify ZoneAirNodeAppender.ensure_nodelist_existence as an exception for exact fixture case E01 (dragon-hvac-appenders-controllers.zone-air-node-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-810 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-810. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:3e9de1a0dca14626a77d8e927c9b56a35098859e4e22f5d25d8efe5691b658c6. Only inventory index 810 and assertion dragon-hvac-appenders-controllers-810-e3fabdb5 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:3e9de1a0dca14626a77d8e927c9b56a35098859e4e22f5d25d8efe5691b658c6",
+          "id": "dragon-hvac-appenders-controllers-810-e3fabdb5",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ZoneAirNodeAppender.ensure_nodelist_existence",
+      "upstream_symbol_hash": "sha256:e3fabdb5fc73caf314398e1ac5792a03346b56c8eb8f301b4293eeac16e166f3"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify ZoneAirNodeAppender.run as an exception for exact fixture case E01 (dragon-hvac-appenders-controllers.zone-air-node-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-811 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-811. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:70b32d5d953a10fb1f28de51a958f4af5966b026b378f303f802b95b74c154c5. Only inventory index 811 and assertion dragon-hvac-appenders-controllers-811-7cd1f8e9 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:70b32d5d953a10fb1f28de51a958f4af5966b026b378f303f802b95b74c154c5",
+          "id": "dragon-hvac-appenders-controllers-811-7cd1f8e9",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ZoneAirNodeAppender.run",
+      "upstream_symbol_hash": "sha256:7cd1f8e90346e58cf43b9bee0ebc660158fc04b9ec09896317cdf239f9ed5d87"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify ZoneTerminalUnitAppender as an exception for exact fixture case F01 (dragon-hvac-appenders-controllers.zone-terminal-unit-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-812 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-812. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:da8aca7c21917e886de0b24e4a3e5e5d4f8b5ef9b693371dafb3718b67bd4825. Only inventory index 812 and assertion dragon-hvac-appenders-controllers-812-4ae86427 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:da8aca7c21917e886de0b24e4a3e5e5d4f8b5ef9b693371dafb3718b67bd4825",
+          "id": "dragon-hvac-appenders-controllers-812-4ae86427",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ZoneTerminalUnitAppender",
+      "upstream_symbol_hash": "sha256:4ae8642769a58a270ea00d02bb69019941a9a0fbf63c719aa5a20f2ea9279830"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify ZoneTerminalUnitAppender.count_current_units as an exception for exact fixture case F01 (dragon-hvac-appenders-controllers.zone-terminal-unit-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-813 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-813. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:9b2d7f01e22bdc404dc9d85c53d9e57b26c5773c79d1ca65bfa3c04fdc72008d. Only inventory index 813 and assertion dragon-hvac-appenders-controllers-813-fc0fbad2 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:9b2d7f01e22bdc404dc9d85c53d9e57b26c5773c79d1ca65bfa3c04fdc72008d",
+          "id": "dragon-hvac-appenders-controllers-813-fc0fbad2",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ZoneTerminalUnitAppender.count_current_units",
+      "upstream_symbol_hash": "sha256:fc0fbad24db77297df3ec35658bbff52503e53521172cda4c5659b1a5ba61395"
+    },
+    {
+      "implementation": {
+        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "source_sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "symbol": "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+      },
+      "path": "src/idragon/dragon/hvac.py",
+      "receipts": [
+        {
+          "assertion": "Pinned CPython 3.12.7 and live .NET observations classify ZoneTerminalUnitAppender.run as an exception for exact fixture case F01 (dragon-hvac-appenders-controllers.zone-terminal-unit-appender) exclusively through the public aggregate route GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?) -> GonieGonie.InvisibleDragon.Idf.IdfDocument. Adaptation public-aggregate-hvac-postprocessing-814 is represented by exact compatibility exception public-aggregate-hvac-postprocessing-814. Oracle commit d14de9e, fixture sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054, generator sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31, validator sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf, commit c33fa05 native parity test sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4, and primary public aggregate implementation src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs@sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3 are fail-closed bindings. The trusted evidence output is sha256:284d35f5c088e38bb31570cb8dc45d3cd40ee099ba0fb35dbb080989c6edcead. Only inventory index 814 and assertion dragon-hvac-appenders-controllers-814-46d42798 are promoted by this receipt; source/tower, supply-core, DHW, miscellaneous HVAC, and Imugi classifications remain unchanged. No standalone or internal postprocessor API equivalence is claimed.",
+          "claims_active_load": false,
+          "exercised_load": "not_applicable",
+          "expected_output_sha256": "sha256:284d35f5c088e38bb31570cb8dc45d3cd40ee099ba0fb35dbb080989c6edcead",
+          "id": "dragon-hvac-appenders-controllers-814-46d42798",
+          "outcome": "passed",
+          "skipped": false,
+          "structural_only": false,
+          "test_path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/AppendersControllersOracleParityTests.cs",
+          "test_source_sha256": "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
+          "test_symbol": "GonieGonie.InvisibleDragon.Tests.Hvac.AppendersControllersOracleParityTests.MatchesPinnedAppendersControllersThroughPublicAggregateRoute",
+          "verification_kind": "cross_language"
+        }
+      ],
+      "symbol": "ZoneTerminalUnitAppender.run",
+      "upstream_symbol_hash": "sha256:46d42798013a898988c7e73338a1997b78b5030605563f6fae57cd7228909295"
     },
     {
       "implementation": {
@@ -22001,9 +22625,9 @@
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
   "schema": "goniegonie.upstream-symbol-evidence.v1",
   "summary": {
-    "entry_count": 846,
-    "passed_receipt_count": 846,
-    "receipt_count": 846,
+    "entry_count": 870,
+    "passed_receipt_count": 870,
+    "receipt_count": 870,
     "skipped_receipt_count": 0,
     "structural_only_receipt_count": 0,
     "zero_load_active_claim_count": 0
