@@ -11,7 +11,7 @@ and workflow guides.
 - [Grasshopper workflow](grasshopper-workflow.md): authoring, HVAC connections,
   conversion, simulation, results, CSV, and batch studies.
 - [EnergyPlus and weather](energyplus-and-weather.md): the pinned runtime,
-  bundled preparation, cache locations, address-selected EPW behavior, and
+  bundled preparation, cache locations, Address/Vintage-selected EPW behavior, and
   explicit override policy.
 - [Compatibility](compatibility.md): supported hosts, upstream baseline,
   interoperability, and current limitations.

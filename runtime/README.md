@@ -9,8 +9,12 @@ Installed plugins use the same validated identity and can securely prepare it
 under `%LOCALAPPDATA%\GonieGonie\BuildingEnergyRuntime`. Runtime identity is
 based on hashes, not on a machine-specific path.
 
-Simulation work directories, copied input files, stdout/stderr, and raw output
-belong under `temp/runs/<run-id>` and can be removed as a single tree.
+Canonical simulation work directories, copied input files, stdout/stderr, and
+raw output live below `%TEMP%\GonieGonie\Dragons\energyplus-runs`. Successful
+runs are removed after their result is parsed; failed or cancelled runs are
+retained for diagnosis and can later be removed as disposable directories.
+Repository build, test, and example work remains below `temp` and can be cleared
+with `.\dev.cmd clean -TempOnly`.
 
 Each candidate package copies one verified archive unchanged at its root:
 InvisibleDragon uses `runtime/energyplus/` and SimpleDragon uses

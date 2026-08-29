@@ -2,127 +2,85 @@
 
 ## Shared conventions
 
-- Numeric geometry and HVAC inputs use SI units shown in each parameter
-  description. Capacity is W, flow is m³/s, area is m², and efficiencies/COPs
-  are dimensionless.
-- Leave an optional numeric input disconnected to preserve `null`/autosize
-  semantics. Supplying zero is not the same as leaving it disconnected.
-- IDs are deterministic when the ID input is empty. Supply an explicit stable
-  ID when another file or system refers to that object.
-- Red runtime messages stop that component's output. Warnings identify a valid
-  result with a compatibility, geometry-loss, or authoring concern.
-- Run, Prepare, Write, Export, and Batch actions require an explicit Boolean
-  edge. Hold the input at False between attempts.
+- Numeric geometry and HVAC inputs use the SI units shown in each parameter description.
+- Leave an optional numeric input disconnected to preserve `null` or autosize semantics. Zero is a real value.
+- IDs are deterministic when the ID input is empty. Supply one only when another system must refer to that object.
+- Red runtime messages stop that component's output. Warnings describe a usable result that needs review.
+- Run, Write, Export, and Batch actions require a new False-to-True Boolean edge. A saved True value never starts work when a document opens.
 
-## InvisibleDragon
+## Canonical SimpleDragon graph
 
-The normal left-to-right graph is:
+Build each object where its ownership is visible in the wires:
 
 ```text
-Material → Construction → Surface → Zone
-                                  ↘
-Source / Tower → Supply → Supply Group → Energy Model → Compile IDF
-ERV / PV ───────────────────────────────↗                  ↓
-Prepare EnergyPlus Runtime → Run EnergyPlus → Result → Summary
+Opening Curve -> SD Opening -------------------+
+                                                |
+Zone Brep + Profile + HVAC + ERV ------------> SD Zone --+
+Opening Curve -> SD Opening -------------------+          |
+                                                           +-> SD Model (Address)
+Zone Brep + Profile + HVAC + ERV ------------> SD Zone --+          |
+                                                                      v
+                                                                  SD to IDF
+                                                               IDF + Weather
+                                                                      |
+                                                                      v
+                                                             Run InvisibleDragon
+                                                                      |
+                                                                      v
+                                                        Result / GRR / Plot / CSV
 ```
 
-Create source and supply systems with the dedicated HVAC components. Hydronic
-or air-side supplies take their compatible source on the input wire; this wire
-is the system relationship rather than a separate node/loop editor. Use Supply
-Group/assignment to associate one or more supplies with a zone and optional
-availability schedules. The Energy Model component accepts explicit sources,
-supplies, ERVs, and PV panels in addition to the zone graph so that unassigned
-plant objects are never inferred silently.
+`SD Opening` has no Zone Index or Face Index. Connect it only to the `SD Zone` that owns it; the host face is inferred from coplanarity and containment. Connect supply systems and ERVs directly to that same Zone. A raw ERV means one unit, while `SD ERV Count` is available only when a count greater than one is needed.
 
-Compile IDF produces a typed IDF value and deterministic text. Validation can
-use the pinned EnergyPlus IDD. Run EnergyPlus accepts the typed IDF, an EPW
-path, an optional runtime root, an isolated temp root, timeout and cleanup
-choices. The EPW may come from SimpleDragon's address-selected packaged weather
-output or from an explicit user file. A repeated input is cached unless Force
-Rerun is enabled.
+`SD Model` resolves every Zone together, so shared Brep faces still become inter-zone adjacency. It also derives the material, construction, supply, source, and ventilation catalogs from the connected objects. Those catalogs do not need parallel wires into a later assembly component.
 
-## SimpleDragon
+The model Address and Vintage select the weather record. `SD to IDF` preserves the SimpleDragon conversion semantics while emitting the valid EnergyPlus 24.2 HVAC field layout, then asynchronously prepares the matching packaged EPW. Its `Weather` output is a verified typed handle, not a path panel.
 
-Two entry paths are supported:
+## InvisibleDragon execution boundary
 
-```text
-Read GRM ───────────────────────────────────────────────┐
-                                                       ↓
-Rhino Brep → Extract Zones → Assign Supply / ERV → Assemble GRM
-Source → Supply ────────────────────────────────────────↗
-PV ─────────────────────────────────────────────────────↗
-                                                       ↓
-             Convert GRM → InvisibleDragon model + IDF + diagnostics
-                                                       ↓
-             Run EnergyPlus → Build GRR → Summary / DataTree / Plot / CSV
-```
+For low-level authoring, connect `Energy Model -> Compile InvisibleDragon`.
+The compiler has only a typed Model input and resolves the managed EnergyPlus
+24.2 IDD or its embedded execution mapping internally. Its typed IDF can then
+join the verified SimpleDragon Weather handle at the execution boundary.
 
-SimpleDragon sources comprise Heat Pump, Geothermal Heat Pump, Chiller,
-Absorption Chiller, Boiler, and District Heating. Supplies comprise Packaged
-Air Conditioner, Air Handling Unit, Fan Coil Unit, Radiator, Electric
-Radiator, Radiant Floor, and Electric Radiant Floor. The source-to-supply wire
-is validated; incompatible combinations return actionable diagnostics instead
-of inventing a different system.
+`Run InvisibleDragon` accepts only:
 
-Assignments copy the immutable zone and either append or replace its current
-systems. Assemble GRM accepts the explicit model-level source, supply, ERV, and
-PV collections. Existing definitions that used only the earlier inputs retain
-their input order and optional behavior.
+- a typed IDF;
+- the typed `Weather` produced by SimpleDragon;
+- Run, Cancel, Force Rerun, and Timeout controls.
 
-Convert GRM is the authoritative SimpleDragon-to-InvisibleDragon path. Inspect
-its diagnostic list and converted Breps before simulation. Its existing `EPW`
-output now resolves the GRM address to an executable path from the verified
-SimpleDragon weather archive, extracting only the selected file to the safe
-per-user cache. Connect that output directly to InvisibleDragon Run. Build GRR
-applies the SimpleDragon result aggregation after the EnergyPlus result is
-available.
+EnergyPlus, Energy+.idd, the runtime cache, EPW extraction, working directories, and cleanup are module-owned. The runtime is verified and prepared below the current user's LocalAppData; simulations use the operating-system temp directory. Nothing writes below the Rhino installation directory, and no administrator permission is required.
 
-## CSV and batch studies
+The first observed Run or Cancel value is a baseline. Toggle False, allow one solution, then toggle True to request an action. Identical IDF/weather/timeout inputs reuse the last result unless Force Rerun is enabled.
 
-CSV export writes deterministic invariant-culture tables and uses UTF-8 BOM
-where spreadsheet interoperability requires it. Monthly DataTree, line-plot,
-and bar-plot components expose the same ordered month/fuel/end-use data without
-requiring a file round trip.
+InvisibleDragon still contains the low-level model and HVAC types used by the port. Earlier path-oriented Compile, Validate, Prepare Runtime, and Run components retain their GUIDs and ports so historical `.gh` files load, but they are hidden from the normal palette.
 
-Relative paths on GRM/GRR readers and writers and CSV export are resolved from
-the saved Grasshopper document's folder. In unsaved definitions, read-only
-GRM/GRR inputs use Rhino's current working directory, while GRM/GRR writers and
-CSV export use the per-user system temp directory. Absolute paths are unchanged.
+## Results, CSV, and batch studies
 
-Batch Research accepts an ordered model list and stable case IDs. Empty EPW
-inputs resolve each model's address from the same packaged weather archive, and
-an absent default EnergyPlus runtime is prepared from InvisibleDragon's bundled
-archive. It limits parallel EnergyPlus processes, supports cancellation and
-partial failure, caches matching cases, and writes a combined CSV plus
-reproducibility manifest. All temporary case directories remain below the
-configured temp root.
+Build GRR applies the SimpleDragon result aggregation after an InvisibleDragon result is available. Summary, DataTree, line-plot, and bar-plot components expose the same ordered month, fuel, and end-use data without a file round trip.
 
-## Runnable example matrix
+GRM/GRR readers, writers, and CSV export intentionally expose artifact destinations because those are user-owned results, not simulation setup. Relative output paths use the saved Grasshopper document folder; unsaved definitions fall back to the per-user temp directory.
 
-The tracked files under `examples/` cover the workflow in progressively larger
-graphs. The complete direct path is
-`02-invisibledragon-single-zone-hvac-idf.gh`, including runtime preparation,
-EnergyPlus execution, and result summary. The complete compatibility authoring
-path is `12-simpledragon-two-zone-to-idf.gh`. The latter internalizes geometry
-that is geometrically identical to the named objects in
-`30-two-zone-office.3dm`, allowing either a portable self-contained solve or
-live Rhino document references. `13-simpledragon-results-and-plots.gh` uses the
-real GRR fixture to exercise all non-writing result views and CSV preview.
-`14-simpledragon-two-zone-run-results-csv.gh` carries the same two-zone geometry
-through GRM and IDF into a real, gated EnergyPlus run, Result summary, GRR,
-CSV, cache/cancellation controls, and a separate batch branch. All action
-triggers are persisted as false, so opening the file never starts work by
-itself.
+`Managed Run SimpleDragon Batch` accepts models, optional case IDs, a parallel limit, and explicit Run/Cancel controls. It selects packaged weather from each model's Address/Vintage and manages EnergyPlus/runtime/temp paths internally. Combined CSV and reproducibility-manifest paths are outputs only.
 
-Run `.\dev.cmd examples` to solve and round-trip every `.gh` and `.3dm` example in
-Rhino 7 and Rhino 8. With a verified EnergyPlus runtime and EPW, this also
-executes the full workflow in memory; use `-SkipEnergyPlusWorkflow` to verify
-the explicit `Not Run` path. Run `.\dev.cmd examples -Generate` only when
-deliberately refreshing the Rhino 7-authored canonical binaries.
+## Runnable examples
+
+The tracked definitions under `examples/` progress from materials and profiles to linked Rhino geometry and a complete two-zone simulation. The principal authoring examples are:
+
+- `12-simpledragon-two-zone-to-idf.gh`: the complex authoring demonstration,
+  with two independently owned Zones and Openings, heat-pump/AHU and
+  boiler/radiator systems, ERV, and PV resolved into one GRM/IDF;
+- `14-simpledragon-two-zone-run-results-csv.gh`: the stable end-to-end gate,
+  with an electric radiator connected directly to each Zone, Address/Vintage-selected
+  Weather, InvisibleDragon execution, GRR, summaries, and CSV.
+
+`02-invisibledragon-single-zone-hvac-idf.gh` shows the standalone low-level
+authoring path through the path-free `Compile InvisibleDragon` component.
+
+The geometry is also available as `30-two-zone-office.3dm` and `31-three-zone-stepped-office.3dm`. All action triggers are saved False.
+
+Run `./dev.cmd examples` to solve and round-trip every `.gh` and `.3dm` example in Rhino 7 and Rhino 8. Use `-SkipEnergyPlusWorkflow` to verify the explicit Not Run path. Run `./dev.cmd examples -Generate` only when deliberately refreshing the Rhino 7-authored canonical binaries.
 
 ## Saving and reopening
 
-Dragon Goo stores a deterministic schema-versioned snapshot in the Grasshopper
-document. Model, HVAC, ERV, PV, IDF, result, and diagnostic values survive
-save/reopen. Existing v1 zone/model snapshots remain readable. Component and
-parameter GUIDs are release contracts and must not be changed after publication.
+Dragon Goo stores deterministic, schema-versioned snapshots in the Grasshopper document. Opening and Zone definitions include their Rhino geometry, and model/HVAC/weather/result values survive save and reopen. Existing v1 snapshots and legacy component GUIDs remain readable.

@@ -4,8 +4,6 @@
 
 - Windows x64.
 - Rhino 7 or Rhino 8 with Grasshopper. Both versions may be installed.
-- An explicit EPW for workflows that do not use SimpleDragon's embedded
-  address-resolved KoreanTMY archive.
 - Network access while setup downloads the pinned archives, or only as a
   verified fallback if an installed package's embedded EnergyPlus archive is
   absent. A normal InvisibleDragon package prepares its embedded runtime
@@ -87,6 +85,9 @@ InvisibleDragon can be installed by itself. SimpleDragon can also be installed
 by itself; its package carries the shared InvisibleDragon model/type libraries
 needed for conversion, but it does not install the InvisibleDragon GHA or tab.
 Installing both products enables typed conversion and result connections.
+The canonical full simulation uses both tabs: SimpleDragon selects and verifies
+the Address/Vintage-based packaged Weather, and InvisibleDragon consumes it with the
+typed IDF. No explicit EnergyPlus, IDD, EPW, runtime, or temp path is required.
 
 ## Updating or removing
 
@@ -94,7 +95,7 @@ Close Rhino before updating. Replace the complete product package rather than
 individual DLLs. A mixed directory can load one shared assembly from an older
 version and make the second GHA fail even though both files exist.
 
-The EnergyPlus per-user cache is separate from the plugin. Removing a Dragon
-package does not remove that cache or any user-supplied EPW files. See
-[EnergyPlus and weather](energyplus-and-weather.md) before deleting runtime
-data.
+The module-owned EnergyPlus and packaged-weather per-user caches are separate
+from the plugins. Removing a Dragon package does not remove either cache. See
+[EnergyPlus and weather](energyplus-and-weather.md) before deleting runtime or
+weather data.

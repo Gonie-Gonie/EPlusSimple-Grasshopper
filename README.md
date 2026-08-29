@@ -46,6 +46,20 @@ and [EnergyPlus and weather](docs/energyplus-and-weather.md) before using a
 candidate. InvisibleDragon and SimpleDragon may be installed independently or
 together when they come from the same release commit.
 
+The canonical Grasshopper flow keeps ownership local and simulation setup internal:
+
+```text
+Curve -> SD Opening -> SD Zone <- Brep / Profile / HVAC / ERV
+                         |
+                         +-> SD Model (Address/Vintage) -> SD to IDF -> IDF + Weather -> Run InvisibleDragon
+
+ID Material / Surface / HVAC -> Energy Model -> Compile InvisibleDragon -> IDF
+```
+
+No Zone/Face indices, assignment pass, EnergyPlus/IDD/EPW path, runtime root, or
+temporary-work input is required. Earlier path-oriented components retain their
+GUIDs for existing `.gh` files but are hidden from the normal palette.
+
 ## Developer quick start
 
 From a Windows command prompt or PowerShell:
@@ -116,8 +130,11 @@ portable plugin ZIPs, run:
 
 The eight tracked definitions and two named-building Rhino models under
 [`examples`](examples/README.md) cover materials, profiles, geometry, HVAC,
-two-zone GRM-to-IDF conversion, result plots, CSV previews, and the gated
-Run-to-GRR/CSV/batch workflow. Rhino 7 writes the canonical files;
+two-zone GRM-to-IDF conversion, Address/Vintage-selected packaged weather, result plots,
+CSV previews, and the gated Run-to-GRR/CSV workflow. Example 12 is the complex
+two-zone composition/IDF authoring demonstration; example 14 uses direct Zone
+composition with electric radiators for a stable end-to-end EnergyPlus run.
+Rhino 7 writes the canonical files;
 `.\dev.cmd examples` solves and round-trip validates them in both Rhino 7 and
 Rhino 8.
 

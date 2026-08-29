@@ -566,9 +566,7 @@ function Invoke-ExampleHost(
             "runtimeResultVerified",
             "runtimeCsvVerified",
             "runtimeCacheVerified",
-            "runtimeCancellationVerified",
-            "runtimeBatchVerified",
-            "runtimeBatchCancellationVerified"
+            "runtimeCancellationVerified"
         )
         if ([string]$workflow.runtimeGateStatus -ne "ready") {
             throw "$HostName $Action did not use the ready EnergyPlus gate: $($workflow.runtimeGateStatus)"
@@ -584,9 +582,6 @@ function Invoke-ExampleHost(
             runtimeFirstRunState = "Succeeded"
             runtimeCachedRunState = "Cached"
             runtimeCancellationState = "Cancelled"
-            runtimeFirstBatchState = "Succeeded"
-            runtimeCachedBatchState = "Succeeded"
-            runtimeBatchCancellationState = "Cancelled"
         }
         foreach ($property in $requiredStates.Keys) {
             if ([string]$workflow.$property -ne $requiredStates[$property]) {
@@ -621,16 +616,6 @@ function Invoke-ExampleHost(
                 [string]$_ -notmatch '^[^=]+=[0-9a-f]{64}$'
             }).Count -ne 0) {
             throw "$HostName $Action summary did not contain complete CSV evidence hashes."
-        }
-
-        foreach ($property in @(
-                "runtimeBatchCombinedCsvSha256",
-                "runtimeBatchManifestSha256",
-                "runtimeBatchCancellationCsvSha256",
-                "runtimeBatchCancellationManifestSha256")) {
-            if ([string]$workflow.$property -notmatch '^[0-9a-f]{64}$') {
-                throw "$HostName $Action summary did not contain a valid $property hash."
-            }
         }
     }
 }

@@ -2,66 +2,49 @@
 
 ## The Grasshopper tab does not appear
 
-Close all Rhino processes, verify that the package targets the running Rhino
-generation, and unblock the downloaded archive before reinstalling. Do not copy
-only the GHA: its adjacent `GonieGonie.*` dependencies are required. Check
-Grasshopper's loading/protection settings for the exact rejected path.
+Close all Rhino processes, verify that the package targets the running Rhino generation, and unblock the downloaded archive before reinstalling. Do not copy only the GHA; its adjacent `GonieGonie.*` dependencies are required.
 
-For a source checkout, rerun `.\dev.cmd setup` after installing Rhino, then run
-`.\dev.cmd build`. Generated host logs are below `temp\grasshopper-smoke`; stable
-build reports are below `artifacts\reports`.
+For a source checkout, rerun `./dev.cmd setup` after installing Rhino, then run `./dev.cmd build`. Generated host logs are below `temp/grasshopper-smoke`; stable reports are below `artifacts/reports`.
 
 ## One Dragon loads and the other fails
 
-This usually indicates mixed shared assemblies. Remove both product directories
-with Rhino closed and reinstall both packages from the same release commit.
-Do not merge DLLs from separate release candidates. `package-index.json` and
-`checksums.sha256` identify the matching set.
+This usually indicates mixed shared assemblies. Close Rhino, remove both installed product directories, and reinstall both products from the same release commit. `package-index.json` and `checksums.sha256` identify a matching candidate set.
 
 ## EnergyPlus is not found
 
-Use Prepare EnergyPlus Runtime and create a new False-to-True Prepare edge. If
-Ready remains False, inspect the structured diagnostic code and suggested
-action. A custom target containing invalid files is not overwritten unless the
-Repair input is explicitly enabled. The default managed cache can repair its
-own invalid transaction safely.
+Use `Run InvisibleDragon`; no separate Prepare Runtime component is needed. Toggle Run False, allow one Grasshopper solution, then toggle True. InvisibleDragon verifies the per-user cache and prepares the pinned bundled runtime when needed.
 
-## Preparation stays idle
+If it still fails, inspect the structured diagnostics. For a source checkout, run `./dev.cmd setup` and `./dev.cmd install` again with Rhino closed. Do not point the graph at Rhino's `Program Files` directory or manually copy an unverified EnergyPlus folder.
 
-This is expected when a saved Boolean is already True. Set it to False, allow
-one Grasshopper solution, then set it to True. The same rule prevents Run,
-Cancel, Write, Export, and Batch actions from repeating on document load or
-ordinary recompute.
+## An action stays idle
 
-## The simulation has no weather or fails on EPW
+This is expected when a saved Boolean is already True. Set it False, allow one solution, then set it True. The same edge rule prevents Run, Cancel, Write, Export, and Batch actions from repeating on document load or ordinary recompute.
 
-InvisibleDragon prepares only EnergyPlus; its Weather input still requires an
-executable EPW path. In a SimpleDragon graph, connect Convert GRM's `EPW` output:
-the model address selects a Korean station and the verified packaged archive
-extracts that one EPW into the per-user LocalAppData cache. If this output is
-empty, rerun `dev.cmd setup`, rebuild/reinstall both packages from the same
-candidate, and inspect `SD.WEATHER.*` diagnostics. Explicit EPW overrides must
-be readable and appropriate for EnergyPlus 24.2.0.
+## The simulation has no weather
+
+Connect `SD Model` to `SD to IDF`, then connect its typed `Weather` output directly to `Run InvisibleDragon`. The GRM Address and Vintage must resolve to a supported Korean weather record.
+
+If Weather remains empty, inspect `SD.GH.WEATHER_*` and `SD.WEATHER.*` diagnostics, then rebuild/reinstall both products from the same candidate. There is no EPW path panel in the canonical workflow.
 
 ## Rhino reports access denied when Run is clicked
 
-Leave Runtime Root and Temp Root empty unless a custom writable location is
-required. The defaults use `%LOCALAPPDATA%` for the verified runtime/weather
-caches and the operating-system temp directory for simulation work; they do not
-write below Rhino's `Program Files` directory. Save the Grasshopper definition
-before using relative paths, or use absolute paths for explicit overrides.
+The canonical runner uses `%LOCALAPPDATA%` for verified runtime/weather caches and `%TEMP%/GonieGonie/Dragons` for simulation work. It does not write below Rhino's installation directory and requires no administrator rights.
+
+If the definition contains Runtime Root, Temp Root, IDD Path, or EPW Path inputs, it is using a hidden legacy component. Replace that branch with `SD to IDF` and `Run InvisibleDragon`. If access is still denied, verify that the current Windows profile can write to LocalAppData and the operating-system temp directory and include the diagnostic code in the report.
+
+## An opening has no host face
+
+Connect each `SD Opening` only to its owning `SD Zone`. Its curve must be a closed planar polygon lying on exactly one planar Brep face and contained by that face. No Zone Index or Face Index is required. Coincident duplicate faces produce an ambiguity diagnostic instead of an arbitrary assignment.
 
 ## A model compiles but EnergyPlus reports severe errors
 
-Read the structured Diagnostics output and retained `.err` file. Check source
-and supply compatibility, zone assignments, duplicate explicit IDs, positive
-capacities/flows, schedule ranges, construction references, and whether the
-selected IDD is the pinned version. Keep the work directory for diagnosis and
-remove it only after the case is understood.
+Read the structured Diagnostics and Result outputs. Check source/supply compatibility, direct Zone HVAC ownership, duplicate explicit IDs, positive capacities and flows, schedule ranges, construction references, and the model address. A successful run removes its temporary working directory after parsing the result. A failed or cancelled run is retained below `%TEMP%\GonieGonie\Dragons\energyplus-runs` so its EnergyPlus output and logs can be inspected.
 
 ## Cleaning local work
 
-`.\dev.cmd clean` removes disposable `temp` output and generated artifacts
-only after validating their repository paths. It preserves `.tools` and the
-tracked artifact documentation. Never delete or edit a user's EPW, project GH
-definition, GRM, GRR, or per-user runtime cache as part of repository cleanup.
+`.\dev.cmd clean -TempOnly` removes only the disposable repository `temp`
+tree; `.\dev.cmd clean` also removes generated artifact content after validating
+the target paths. Both preserve `.tools`, tracked artifact documentation,
+GH/3DM/GRM/GRR files, per-user runtime/weather caches, and retained system-temp
+simulation failures. Remove a retained failure directory only after collecting
+the diagnostics you need.

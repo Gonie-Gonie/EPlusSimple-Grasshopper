@@ -1,61 +1,44 @@
 # EnergyPlus and weather
 
-## Pinned runtime
+## No setup paths in the normal graph
 
-The supported runtime is EnergyPlus 24.2.0 build `94a887817b`. The executable,
-IDD, ExpandObjects executable, and official Windows archive are pinned by size
-and SHA-256. A directory that merely has the expected name is not trusted.
+The canonical Grasshopper workflow does not ask for an EnergyPlus executable, Energy+.idd, runtime root, EPW path, temp root, or output working directory.
 
-The installed-plugin default cache is:
+`SD Model` selects weather from Address and Vintage. `SD to IDF` verifies and prepares that packaged EPW and emits an opaque typed `Weather` value. `Run InvisibleDragon` consumes the typed IDF and Weather, resolves the supported runtime, and runs EnergyPlus asynchronously.
+
+The module-owned locations are:
 
 ```text
-%LOCALAPPDATA%\GonieGonie\BuildingEnergyRuntime\EnergyPlus\24.2.0-94a887817b
+Runtime: %LOCALAPPDATA%\GonieGonie\BuildingEnergyRuntime\EnergyPlus\24.2.0-94a887817b
+Weather: %LOCALAPPDATA%\GonieGonie\BuildingEnergyWeather\SimpleDragon\korean-tmy-v1
+Runs:    %TEMP%\GonieGonie\Dragons\energyplus-runs
 ```
 
-Preparation is per-user and transactional. It does not require administrator
-rights and does not modify a machine-wide EnergyPlus installation. Valid
-existing runtimes are reused. InvisibleDragon candidates carry the unchanged
-pinned archive, so preparation can use it without an administrator-level or
-machine-wide install.
+These locations are implementation details rather than Grasshopper inputs. They are per-user and writable without administrator rights. Rhino's installation folders are never used as write targets.
 
-## Preparing from Grasshopper
+## Pinned runtime
 
-Use `InvisibleDragon > Core > Prepare EnergyPlus Runtime`:
+The supported runtime is EnergyPlus 24.2.0 build `94a887817b`. The executable, IDD, ExpandObjects executable, and official Windows archive are pinned by size and SHA-256. A directory that merely has the expected name is not trusted.
 
-1. Leave Target Root empty for the managed cache.
-2. Set Prepare to False once, then toggle it to True.
-3. Observe State, Progress, Message, Ready, and Diagnostics.
-4. Keep the verified Runtime Root output with the project record if a custom
-   location was used.
+InvisibleDragon packages carry the unchanged pinned archive. On the first explicit run, the module reuses a verified per-user cache or transactionally prepares it from that archive. A saved `Run=True` is only a baseline; a new False-to-True edge is required, so opening a document never extracts a runtime or launches EnergyPlus.
 
-The first observation of a True toggle is treated as a baseline. Consequently,
-opening a saved Grasshopper document with Prepare=True cannot start a download.
-An operation begins only after a new False-to-True edge. A held True value and
-ordinary recomputes are coalesced. Cancel uses the same edge rule.
+## Packaged weather
 
-`Run EnergyPlus` first resolves a verified cache, explicit root, environment
-hint, or conventional installation. Its optional `Prepare Missing Runtime`
-input permits bootstrap only as part of a new explicit Run edge. Leave it False
-when network acquisition must be administratively separated from simulation.
+SimpleDragon packages carry the pinned `KoreanTMY-v1.zip`. It contains 80 root EPWs covering all 78 unique filenames referenced by the address database. Only the address-selected EPW is atomically extracted and content-hash verified.
 
-## Weather policy
+InvisibleDragon does not choose or download weather. It accepts the verified `Weather` handle produced by SimpleDragon and rejects an artifact that is missing or whose SHA-256 has changed. Local paths are deliberately omitted from Grasshopper display text and ports.
 
-Developer setup downloads and verifies the pinned `KoreanTMY-v1.zip`, and each
-SimpleDragon candidate embeds that ZIP unchanged. It contains 80 root EPWs and
-covers all 78 unique filenames referenced by the address database. The runtime
-resolver may use an address-selected entry from this archive; workflows that
-accept an explicit weather path may still use an appropriate user-supplied EPW.
-Directly expanded EPW files are not stored in source control or packages.
-
-This local candidate mechanism does not establish redistribution rights. Public
-publication remains unauthorized as recorded in `NOTICE.md`.
+Developer setup verifies the same archives used by candidate packaging. Released plugins do not need Python, the .NET SDK, or a machine-wide EnergyPlus installation.
 
 ## Security and recovery
 
-Bootstrap accepts only the pinned HTTPS archive identity, rejects archive path
-traversal, links, device paths, excessive entries/expanded size, and hash
-mismatches, and promotes a verified staging directory atomically. Invalid
-custom targets are preserved unless `Replace Invalid Custom Target` is
-explicitly enabled. A failed or cancelled operation cleans its owned partial
-and staging paths; the inert lock file may remain to prevent unlink/recreate
-races.
+Runtime bootstrap rejects archive traversal, links, device paths, excessive entries/expanded size, and hash mismatches. Staging is promoted atomically. Failed or cancelled operations clean their owned partial directories.
+
+If a runtime or weather cache becomes invalid, the next explicit solve reports a structured diagnostic and can prepare the module-owned cache again. Historical components with explicit path inputs retain their GUIDs only for old-file compatibility and are hidden from the normal palette.
+
+Successful simulations remove their temporary working directories after the
+result is parsed. Failed or cancelled simulations are retained below
+`%TEMP%\GonieGonie\Dragons\energyplus-runs` so their EnergyPlus output and logs
+can be inspected; that whole location is disposable after diagnosis.
+
+The local candidate mechanism does not establish redistribution rights. Public publication remains unauthorized as recorded in `NOTICE.md`.

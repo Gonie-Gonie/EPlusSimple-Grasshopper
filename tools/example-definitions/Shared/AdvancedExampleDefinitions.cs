@@ -15,7 +15,6 @@ internal static class AdvancedExampleDefinitions
     private const string InvisibleProduct = "InvisibleDragon";
     private const string SimpleProduct = "SimpleDragon";
     private const string TwoZoneModel = "30-two-zone-office.3dm";
-    private static readonly int[] SingleBatchParallelLimit = { 1 };
     private static readonly string[] CsvLineSeparators = { "\r\n", "\n", "\r" };
 
     private static readonly AdvancedDefinition[] Definitions =
@@ -256,102 +255,23 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(ventilator, 0, model, 8);
         graph.Connect(photovoltaic, 0, model, 10);
         GraphNode compile = graph.Component(71, Catalog.InvisibleCompile, 1650, 900);
-        GraphNode validate = graph.Component(72, Catalog.InvisibleValidate, 1960, 1000);
         GraphNode idfText = graph.Panel(80, "Compiled IDF", string.Empty, 1960, 820);
-        GraphNode valid = graph.Panel(81, "IDD validation", string.Empty, 2260, 1020);
+        GraphNode valid = graph.Panel(81, "Managed IDF validation", string.Empty, 1960, 1020);
+        GraphNode diagnostics = graph.Panel(82, "Compilation diagnostics", string.Empty, 2260, 1020);
         graph.Connect(model, 0, compile, 0);
-        graph.Connect(compile, 0, validate, 0);
         graph.Connect(compile, 1, idfText, null);
-        graph.Connect(validate, 0, valid, null);
-
-        GraphNode runtimeTarget = graph.Panel(90, "Runtime target root (optional)", string.Empty, 2360, 80);
-        GraphNode prepareTrigger = graph.Boolean(91, "Prepare runtime - explicit rising edge", false, 2360, 180);
-        GraphNode prepareCancel = graph.Boolean(92, "Cancel runtime preparation", false, 2360, 260);
-        GraphNode repairRuntime = graph.Boolean(93, "Repair invalid custom target", false, 2360, 340);
-        GraphNode prepareTimeout = graph.Slider(94, "Runtime lock timeout 2 min", 2m, 1m, 30m, 2360, 420);
-        GraphNode prepareRuntime = graph.Component(95, Catalog.InvisiblePrepareRuntime, 2720, 210);
-        graph.Connect(runtimeTarget, null, prepareRuntime, 0);
-        graph.Connect(prepareTrigger, null, prepareRuntime, 1);
-        graph.Connect(prepareCancel, null, prepareRuntime, 2);
-        graph.Connect(repairRuntime, null, prepareRuntime, 3);
-        graph.Connect(prepareTimeout, null, prepareRuntime, 4);
-
-        GraphNode prepareState = graph.Panel(96, "Runtime preparation state", string.Empty, 3070, 150);
-        GraphNode prepareReady = graph.Panel(97, "Runtime ready", string.Empty, 3070, 260);
-        GraphNode prepareMessage = graph.Panel(98, "Runtime preparation message", string.Empty, 3070, 370);
-        graph.Connect(prepareRuntime, 2, prepareState, null);
-        graph.Connect(prepareRuntime, 3, prepareReady, null);
-        graph.Connect(prepareRuntime, 5, prepareMessage, null);
-
-        GraphNode weatherPath = graph.Panel(100, "EPW path - choose a local weather file", string.Empty, 2360, 650);
-        GraphNode tempRoot = graph.Panel(101, "Run temp root (optional)", string.Empty, 2360, 750);
-        GraphNode runTrigger = graph.Boolean(102, "Run - explicit rising edge", false, 2360, 850);
-        GraphNode runCancel = graph.Boolean(103, "Cancel active run", false, 2360, 930);
-        GraphNode forceRerun = graph.Boolean(104, "Force rerun", false, 2360, 1010);
-        GraphNode keepWork = graph.Boolean(105, "Keep work directory", true, 2360, 1090);
-        GraphNode runTimeout = graph.Slider(106, "Run timeout 30 min", 30m, 1m, 60m, 2360, 1170);
-        GraphNode prepareMissing = graph.Boolean(107, "Prepare missing runtime during run", false, 2360, 1250);
-        GraphNode run = graph.Component(108, Catalog.InvisibleRun, 2720, 800);
-        graph.Connect(compile, 0, run, 0);
-        graph.Connect(weatherPath, null, run, 1);
-        graph.Connect(prepareRuntime, 0, run, 2);
-        graph.Connect(tempRoot, null, run, 3);
-        graph.Connect(runTrigger, null, run, 4);
-        graph.Connect(runCancel, null, run, 5);
-        graph.Connect(forceRerun, null, run, 6);
-        graph.Connect(keepWork, null, run, 7);
-        graph.Connect(runTimeout, null, run, 8);
-        graph.Connect(prepareMissing, null, run, 9);
-
-        GraphNode runState = graph.Panel(109, "EnergyPlus state", string.Empty, 3070, 690);
-        GraphNode runSuccess = graph.Panel(110, "EnergyPlus success", string.Empty, 3070, 800);
-        GraphNode runDirectory = graph.Panel(111, "EnergyPlus work directory", string.Empty, 3070, 910);
-        graph.Connect(run, 1, runState, null);
-        graph.Connect(run, 2, runSuccess, null);
-        graph.Connect(run, 3, runDirectory, null);
-
-        GraphNode resultSummary = graph.Component(112, Catalog.InvisibleResultSummary, 3070, 1090);
-        graph.Connect(run, 0, resultSummary, 0);
-        GraphNode resultRunId = graph.Panel(113, "Result run ID", string.Empty, 3440, 1010);
-        GraphNode resultState = graph.Panel(114, "Result state", string.Empty, 3440, 1100);
-        GraphNode resultSuccess = graph.Panel(115, "Result success", string.Empty, 3440, 1190);
-        GraphNode resultWarnings = graph.Panel(116, "Result warning count", string.Empty, 3440, 1280);
-        GraphNode resultSevere = graph.Panel(117, "Result severe count", string.Empty, 3440, 1370);
-        GraphNode resultFatal = graph.Panel(118, "Result fatal count", string.Empty, 3440, 1460);
-        GraphNode resultElapsed = graph.Panel(119, "Result elapsed seconds", string.Empty, 3440, 1550);
-        GraphNode resultMonthly = graph.Panel(120, "Result monthly tables", string.Empty, 3440, 1640);
-        GraphNode resultDirectory = graph.Panel(121, "Result work directory", string.Empty, 3440, 1730);
-        graph.Connect(resultSummary, 0, resultRunId, null);
-        graph.Connect(resultSummary, 1, resultState, null);
-        graph.Connect(resultSummary, 2, resultSuccess, null);
-        graph.Connect(resultSummary, 3, resultWarnings, null);
-        graph.Connect(resultSummary, 4, resultSevere, null);
-        graph.Connect(resultSummary, 5, resultFatal, null);
-        graph.Connect(resultSummary, 6, resultElapsed, null);
-        graph.Connect(resultSummary, 7, resultMonthly, null);
-        graph.Connect(resultSummary, 8, resultDirectory, null);
+        graph.Connect(compile, 2, valid, null);
+        graph.Connect(compile, 3, diagnostics, null);
         graph.ExpectOutput(zone, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonZoneGoo");
         graph.ExpectOutput(airHandler, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSupplySystemGoo");
         graph.ExpectOutput(radiantFloor, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSupplySystemGoo");
         graph.ExpectOutput(model, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonEnergyModelGoo");
         graph.ExpectOutput(compile, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo");
-        graph.ExpectOutput(validate, 0, 1);
         graph.ExpectOutput(idfText, null, 1);
-        graph.ExpectOutput(prepareRuntime, 2, 1);
-        graph.ExpectOutput(prepareRuntime, 3, 1);
-        graph.ExpectOutput(prepareRuntime, 4, 1);
-        graph.ExpectOutput(prepareState, null, 1);
-        graph.ExpectOutput(prepareReady, null, 1);
-        graph.ExpectOutput(run, 1, 1);
-        graph.ExpectOutput(run, 2, 1);
-        graph.ExpectOutput(runState, null, 1);
-        graph.ExpectOutput(runSuccess, null, 1);
+        graph.ExpectOutput(valid, null, 1);
         graph.ExpectBoolean(zone, 1, true);
         graph.ExpectBoolean(model, 1, true);
         graph.ExpectBoolean(compile, 2, true);
-        graph.ExpectBoolean(validate, 0, true);
-        graph.ExpectBoolean(prepareRuntime, 3, false);
-        graph.ExpectBoolean(run, 2, false);
         return graph.Build(
             InvisibleProduct,
             "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo",
@@ -441,185 +361,166 @@ internal static class AdvancedExampleDefinitions
         var graph = new ScenarioGraphBuilder(server, instancePrefix);
         Brep[] zoneGeometry = ExampleBuildingModels.CreateZoneBreps(TwoZoneModel);
         Curve[] openingGeometry = ExampleBuildingModels.CreateOpeningCurves(TwoZoneModel);
+        Require(zoneGeometry.Length == 2, TwoZoneModel + " must provide exactly two Zone Breps.");
+        Require(openingGeometry.Length == 2, TwoZoneModel + " must provide exactly two opening curves.");
         GraphNode modelInfo = graph.Panel(
             1,
             "Rhino source model",
-            "Open 30-two-zone-office.3dm; relink by object names when live references are preferred.",
+            "Open 30-two-zone-office.3dm; relink each named Brep and window to its matching local Zone cluster.",
             40,
             40);
-        GraphNode breps = graph.Breps(2, "Two closed office zones", zoneGeometry, 60, 180);
-        GraphNode openings = graph.Curves(3, "South facade windows", openingGeometry, 60, 360);
-        GraphNode openingZoneIndices = graph.Integers(
-            4,
-            "Opening zone indices",
-            ExampleBuildingModels.OpeningZoneIndices(TwoZoneModel),
-            60,
-            510);
-        GraphNode openingFaceIndices = graph.Integers(
-            5,
-            "Opening face indices",
-            ExampleBuildingModels.OpeningFaceIndices(TwoZoneModel),
-            60,
-            620);
+        GraphNode westBrep = graph.Breps(2, "ZONE_01_WEST", new[] { zoneGeometry[0] }, 60, 180);
+        GraphNode eastBrep = graph.Breps(3, "ZONE_02_EAST", new[] { zoneGeometry[1] }, 60, 650);
+        GraphNode westCurve = graph.Curves(4, "WINDOW_ZONE_01_SOUTH", new[] { openingGeometry[0] }, 60, 330);
+        GraphNode eastCurve = graph.Curves(5, "WINDOW_ZONE_02_SOUTH", new[] { openingGeometry[1] }, 60, 800);
         GraphNode profileName = graph.Panel(6, "Packaged office profile", "\uC18C\uADDC\uBAA8\uC0AC\uBB34\uC2E4", 330, 40);
         GraphNode profile = graph.Component(7, Catalog.SimpleProfile, 620, 40);
-        GraphNode material = graph.Component(8, Catalog.SimpleMaterial, 330, 180);
-        GraphNode thickness = graph.Slider(9, "Envelope 0.200 m", 0.2m, 0.01m, 0.5m, 350, 350);
-        GraphNode construction = graph.Component(10, Catalog.SimpleConstruction, 620, 210);
-        GraphNode fenestration = graph.Component(11, Catalog.SimpleFenestration, 620, 430);
-        GraphNode extract = graph.Component(12, Catalog.SimpleExtractZones, 980, 260);
+        GraphNode material = graph.Component(8, Catalog.SimpleMaterial, 330, 120);
+        GraphNode thickness = graph.Slider(9, "Envelope 0.200 m", 0.2m, 0.01m, 0.5m, 350, 290);
+        GraphNode construction = graph.Component(10, Catalog.SimpleConstruction, 620, 160);
+        GraphNode fenestration = graph.Component(11, Catalog.SimpleFenestration, 620, 360);
+        GraphNode westOpening = graph.Component(12, Catalog.SimpleOpening, 410, 430);
+        GraphNode eastOpening = graph.Component(13, Catalog.SimpleOpening, 410, 900);
         graph.Connect(profileName, null, profile, 0);
         graph.Connect(material, 0, construction, 1);
         graph.Connect(thickness, null, construction, 2);
-        graph.Connect(breps, null, extract, 0);
-        graph.Connect(profile, 0, extract, 3);
-        graph.Connect(construction, 0, extract, 4);
-        graph.Connect(fenestration, 0, extract, 5);
-        graph.Connect(openings, null, extract, 8);
-        graph.Connect(openingZoneIndices, null, extract, 9);
-        graph.Connect(openingFaceIndices, null, extract, 10);
+        graph.Connect(westCurve, null, westOpening, 0);
+        graph.Connect(eastCurve, null, eastOpening, 0);
+        graph.Connect(fenestration, 0, westOpening, 3);
+        graph.Connect(fenestration, 0, eastOpening, 3);
 
-        GraphNode heatPump = graph.Component(20, Catalog.SimpleHeatPump, 330, 780);
-        GraphNode airHandler = graph.Component(21, Catalog.SimpleAirHandler, 620, 780);
-        GraphNode boiler = graph.Component(22, Catalog.SimpleBoiler, 330, 970);
-        GraphNode radiator = graph.Component(23, Catalog.SimpleRadiator, 620, 970);
-        GraphNode assignSupplies = graph.Component(24, Catalog.SimpleAssignSupplies, 1320, 650);
-        GraphNode ventilator = graph.Component(25, Catalog.SimpleErv, 980, 1050);
-        GraphNode assignVentilation = graph.Component(26, Catalog.SimpleAssignVentilation, 1630, 720);
-        GraphNode photovoltaic = graph.Component(27, Catalog.SimplePv, 1320, 1080);
-        graph.Connect(heatPump, 0, airHandler, 1);
-        graph.Connect(boiler, 0, radiator, 1);
-        graph.Connect(extract, 0, assignSupplies, 0);
-        graph.Connect(airHandler, 0, assignSupplies, 1);
-        graph.Connect(radiator, 0, assignSupplies, 1);
-        graph.Connect(assignSupplies, 0, assignVentilation, 0);
-        graph.Connect(ventilator, 0, assignVentilation, 1);
+        GraphNode? airHandler = null;
+        GraphNode? radiator = null;
+        GraphNode? ventilator = null;
+        GraphNode? photovoltaic = null;
+        if (!includeRuntimeWorkflow)
+        {
+            GraphNode heatPump = graph.Component(20, Catalog.SimpleHeatPump, 820, 160);
+            airHandler = graph.Component(21, Catalog.SimpleAirHandler, 1080, 160);
+            GraphNode boiler = graph.Component(22, Catalog.SimpleBoiler, 820, 370);
+            radiator = graph.Component(23, Catalog.SimpleRadiator, 1080, 370);
+            ventilator = graph.Component(25, Catalog.SimpleErv, 1080, 570);
+            photovoltaic = graph.Component(27, Catalog.SimplePv, 1460, 1030);
+            graph.Connect(heatPump, 0, airHandler, 1);
+            graph.Connect(boiler, 0, radiator, 1);
+        }
+        else
+        {
+            radiator = graph.Component(24, Catalog.SimpleElectricRadiator, 1080, 370);
+        }
 
-        GraphNode assemble = graph.Component(30, Catalog.SimpleAssemble, 1960, 510);
-        graph.Connect(assignVentilation, 0, assemble, 1);
-        graph.Connect(material, 0, assemble, 6);
-        graph.Connect(construction, 0, assemble, 7);
-        graph.Connect(fenestration, 0, assemble, 8);
-        graph.Connect(heatPump, 0, assemble, 9);
-        graph.Connect(boiler, 0, assemble, 9);
-        graph.Connect(airHandler, 0, assemble, 10);
-        graph.Connect(radiator, 0, assemble, 10);
-        graph.Connect(ventilator, 0, assemble, 11);
-        graph.Connect(photovoltaic, 0, assemble, 12);
-        GraphNode convert = graph.Component(31, Catalog.SimpleConvert, 2310, 540);
-        graph.Connect(assemble, 0, convert, 0);
-        GraphNode map = graph.Panel(40, "Geometry provenance map", string.Empty, 1320, 250);
-        GraphNode area = graph.Panel(41, "Total floor area", string.Empty, 2310, 370);
-        GraphNode idf = graph.Panel(42, "Converted IDF", string.Empty, 2640, 510);
-        GraphNode success = graph.Panel(43, "Conversion success", string.Empty, 2640, 760);
-        graph.Connect(extract, 2, map, null);
-        graph.Connect(assemble, 2, area, null);
-        graph.Connect(convert, 2, idf, null);
-        graph.Connect(convert, 4, success, null);
-        graph.ExpectOutput(extract, 0, 2, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneGoo");
-        graph.ExpectOutput(assignSupplies, 0, 2, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneGoo");
-        graph.ExpectOutput(assignVentilation, 0, 2, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneGoo");
-        graph.ExpectOutput(assemble, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitModelGoo");
-        graph.ExpectOutput(convert, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonEnergyModelGoo");
-        graph.ExpectOutput(convert, 1, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo");
-        graph.ExpectOutput(convert, 2, 1);
+        GraphNode westZone = graph.Component(30, Catalog.SimpleZone, 1390, 250);
+        GraphNode eastZone = graph.Component(31, Catalog.SimpleZone, 1390, 720);
+        foreach ((GraphNode brep, GraphNode opening, GraphNode zone) in new[]
+        {
+            (westBrep, westOpening, westZone),
+            (eastBrep, eastOpening, eastZone),
+        })
+        {
+            graph.Connect(brep, null, zone, 0);
+            graph.Connect(profile, 0, zone, 3);
+            graph.Connect(construction, 0, zone, 4);
+            graph.Connect(fenestration, 0, zone, 5);
+            graph.Connect(opening, 0, zone, 6);
+            if (airHandler is not null)
+            {
+                graph.Connect(airHandler, 0, zone, 7);
+            }
+
+            if (radiator is not null)
+            {
+                graph.Connect(radiator, 0, zone, 7);
+            }
+
+            if (ventilator is not null)
+            {
+                graph.Connect(ventilator, 0, zone, 8);
+            }
+        }
+
+        GraphNode model = graph.Component(32, Catalog.SimpleModel, 1770, 500);
+        graph.Connect(westZone, 0, model, 1);
+        graph.Connect(eastZone, 0, model, 1);
+        if (photovoltaic is not null)
+        {
+            graph.Connect(photovoltaic, 0, model, 6);
+        }
+        GraphNode prepare = graph.Component(33, Catalog.SimplePrepare, 2110, 520);
+        graph.Connect(model, 0, prepare, 0);
+        GraphNode map = graph.Panel(40, "Geometry provenance map", string.Empty, 1770, 230);
+        GraphNode area = graph.Panel(41, "Total floor area", string.Empty, 2110, 320);
+        GraphNode idf = graph.Panel(42, "Prepared IDF", string.Empty, 2450, 500);
+        GraphNode weather = graph.Panel(43, "Verified packaged weather", string.Empty, 2450, 670);
+        GraphNode success = graph.Panel(44, "Preparation success", string.Empty, 2450, 820);
+        graph.Connect(model, 3, map, null);
+        graph.Connect(model, 6, area, null);
+        graph.Connect(prepare, 1, idf, null);
+        graph.Connect(prepare, 2, weather, null);
+        graph.Connect(prepare, 3, success, null);
+        graph.ExpectOutput(westOpening, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
+        graph.ExpectOutput(eastOpening, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
+        graph.ExpectOutput(westZone, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneDefinitionGoo");
+        graph.ExpectOutput(eastZone, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneDefinitionGoo");
+        graph.ExpectOutput(model, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitModelGoo");
+        graph.ExpectOutput(model, 1, 2, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneGoo");
+        graph.ExpectOutput(prepare, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonEnergyModelGoo");
+        graph.ExpectOutput(prepare, 1, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo");
+        graph.ExpectOutput(prepare, 2, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.PreparedWeatherFileGoo");
         graph.ExpectOutput(map, null, 1);
         graph.ExpectOutput(area, null, 1);
+        graph.ExpectOutput(idf, null, 1);
+        graph.ExpectOutput(weather, null, 1);
         graph.ExpectOutput(success, null, 1);
-        graph.ExpectNumber(assemble, 2, 96, 1e-8);
-        graph.ExpectBoolean(convert, 4, true);
+        graph.ExpectNumber(model, 6, 96, 1e-8);
+        graph.ExpectBoolean(prepare, 3, true);
 
         RuntimeWorkflowExpectation? runtimeWorkflow = null;
         if (includeRuntimeWorkflow)
         {
-            GraphNode runtimeRoot = graph.Panel(100, "EnergyPlus 24.2 root", string.Empty, 2770, 870);
-            GraphNode weatherPath = graph.Panel(
-                101,
-                "Address-selected packaged EPW",
-                string.Empty,
-                2770,
-                970);
-            GraphNode tempRoot = graph.Panel(
-                102,
-                "Run temp root",
-                @"..\temp\example-preview\energyplus-run",
-                2770,
-                1070);
-            GraphNode runTrigger = graph.Boolean(103, "Run - explicit rising edge", false, 2770, 1170);
-            GraphNode cancelTrigger = graph.Boolean(104, "Cancel active run", false, 2770, 1250);
-            GraphNode forceRerun = graph.Boolean(105, "Force rerun", false, 2770, 1330);
-            GraphNode keepWork = graph.Boolean(106, "Keep work directory", true, 2770, 1410);
-            GraphNode timeout = graph.Slider(107, "Run timeout 2 min", 2m, 1m, 30m, 2770, 1490);
-            GraphNode prepareRuntime = graph.Boolean(108, "Prepare packaged runtime", true, 2770, 1570);
-            GraphNode run = graph.Component(110, Catalog.InvisibleRun, 3150, 1050);
-            graph.Connect(convert, 1, run, 0);
-            graph.Connect(convert, 3, weatherPath, null);
-            graph.Connect(convert, 3, run, 1);
-            graph.Connect(runtimeRoot, null, run, 2);
-            graph.Connect(tempRoot, null, run, 3);
-            graph.Connect(runTrigger, null, run, 4);
-            graph.Connect(cancelTrigger, null, run, 5);
-            graph.Connect(forceRerun, null, run, 6);
-            graph.Connect(keepWork, null, run, 7);
-            graph.Connect(timeout, null, run, 8);
-            graph.Connect(prepareRuntime, null, run, 9);
+            GraphNode runTrigger = graph.Boolean(103, "Run - explicit rising edge", false, 2750, 920);
+            GraphNode cancelTrigger = graph.Boolean(104, "Cancel active run", false, 2750, 1000);
+            GraphNode forceRerun = graph.Boolean(105, "Force rerun", false, 2750, 1080);
+            GraphNode timeout = graph.Slider(107, "Run timeout 2 min", 2m, 1m, 30m, 2750, 1160);
+            GraphNode run = graph.Component(110, Catalog.InvisibleManagedRun, 3100, 850);
+            graph.Connect(prepare, 1, run, 0);
+            graph.Connect(prepare, 2, run, 1);
+            graph.Connect(runTrigger, null, run, 2);
+            graph.Connect(cancelTrigger, null, run, 3);
+            graph.Connect(forceRerun, null, run, 4);
+            graph.Connect(timeout, null, run, 5);
 
-            GraphNode energyPlusSummary = graph.Component(111, Catalog.InvisibleResultSummary, 3540, 920);
-            GraphNode buildResult = graph.Component(112, Catalog.SimpleBuildResult, 3540, 1180);
-            GraphNode resultSummary = graph.Component(113, Catalog.SimpleResultSummary, 3900, 1160);
+            GraphNode energyPlusSummary = graph.Component(111, Catalog.InvisibleResultSummary, 3480, 850);
+            GraphNode buildResult = graph.Component(112, Catalog.SimpleBuildResult, 3480, 1110);
+            GraphNode resultSummary = graph.Component(113, Catalog.SimpleResultSummary, 3850, 1090);
             GraphNode exportDirectory = graph.Panel(
                 114,
                 "CSV export directory",
                 @"..\temp\example-preview\run-results-csv",
-                3540,
-                1510);
-            GraphNode caseId = graph.Panel(115, "CSV case ID", "two-zone-office", 3540, 1600);
-            GraphNode exportTrigger = graph.Boolean(116, "Export CSV", false, 3540, 1690);
-            GraphNode overwrite = graph.Boolean(117, "Overwrite CSV", false, 3540, 1770);
-            GraphNode exportCsv = graph.Component(118, Catalog.SimpleExportCsv, 3900, 1540);
+                3480,
+                1440);
+            GraphNode caseId = graph.Panel(115, "CSV case ID", "two-zone-office", 3480, 1530);
+            GraphNode exportTrigger = graph.Boolean(116, "Export CSV", false, 3480, 1620);
+            GraphNode overwrite = graph.Boolean(117, "Overwrite CSV", false, 3480, 1700);
+            GraphNode exportCsv = graph.Component(118, Catalog.SimpleExportCsv, 3850, 1470);
             graph.Connect(run, 0, energyPlusSummary, 0);
-            graph.Connect(assemble, 0, buildResult, 0);
+            graph.Connect(model, 0, buildResult, 0);
             graph.Connect(run, 0, buildResult, 1);
             graph.Connect(buildResult, 0, resultSummary, 0);
             graph.Connect(buildResult, 0, exportCsv, 0);
-            graph.Connect(assemble, 0, exportCsv, 1);
+            graph.Connect(model, 0, exportCsv, 1);
             graph.Connect(exportDirectory, null, exportCsv, 2);
             graph.Connect(caseId, null, exportCsv, 3);
-            graph.Connect(run, 4, exportCsv, 4);
-            graph.Connect(extract, 4, exportCsv, 5);
+            graph.Connect(run, 3, exportCsv, 4);
+            graph.Connect(model, 4, exportCsv, 5);
             graph.Connect(exportTrigger, null, exportCsv, 6);
             graph.Connect(overwrite, null, exportCsv, 7);
-
-            GraphNode batchOutputRoot = graph.Panel(
-                120,
-                "Batch output root",
-                @"..\temp\example-preview\simpledragon-batch",
-                2770,
-                1870);
-            GraphNode parallelLimit = graph.Integers(121, "Batch parallel limit", SingleBatchParallelLimit, 2770, 1960);
-            GraphNode batchRunTrigger = graph.Boolean(122, "Run batch - explicit rising edge", false, 2770, 2050);
-            GraphNode batchCancelTrigger = graph.Boolean(123, "Cancel active batch", false, 2770, 2130);
-            GraphNode batch = graph.Component(124, Catalog.SimpleBatch, 3150, 1900);
-            graph.Connect(assemble, 0, batch, 0);
-            graph.Connect(caseId, null, batch, 1);
-            graph.Connect(convert, 3, batch, 2);
-            graph.Connect(runtimeRoot, null, batch, 3);
-            graph.Connect(batchOutputRoot, null, batch, 4);
-            graph.Connect(parallelLimit, null, batch, 5);
-            graph.Connect(batchRunTrigger, null, batch, 6);
-            graph.Connect(batchCancelTrigger, null, batch, 7);
-
-            GraphNode runState = graph.Panel(130, "EnergyPlus state", string.Empty, 3540, 700);
-            GraphNode runSuccess = graph.Panel(131, "EnergyPlus success", string.Empty, 3900, 700);
-            GraphNode summarySuccess = graph.Panel(132, "Parsed result success", string.Empty, 4280, 920);
-            GraphNode grrSuccess = graph.Panel(133, "GRR build success", string.Empty, 3900, 1370);
-            GraphNode annualResult = graph.Panel(134, "Annual site result", string.Empty, 4280, 1170);
-            GraphNode csvFiles = graph.Panel(135, "CSV package files", string.Empty, 4280, 1540);
-            GraphNode csvWritten = graph.Panel(136, "CSV written", string.Empty, 4280, 1740);
-            GraphNode batchState = graph.Panel(137, "Batch state", string.Empty, 3540, 2050);
-            GraphNode batchCsv = graph.Panel(138, "Batch combined CSV", string.Empty, 3900, 2000);
-            GraphNode batchManifest = graph.Panel(139, "Batch manifest", string.Empty, 3900, 2130);
-            GraphNode batchComplete = graph.Panel(140, "Batch complete", string.Empty, 4280, 2050);
+            GraphNode runState = graph.Panel(130, "EnergyPlus state", string.Empty, 3480, 670);
+            GraphNode runSuccess = graph.Panel(131, "EnergyPlus success", string.Empty, 3850, 670);
+            GraphNode summarySuccess = graph.Panel(132, "Parsed result success", string.Empty, 4220, 850);
+            GraphNode grrSuccess = graph.Panel(133, "GRR build success", string.Empty, 3850, 1300);
+            GraphNode annualResult = graph.Panel(134, "Annual site result", string.Empty, 4220, 1090);
+            GraphNode csvFiles = graph.Panel(135, "CSV package files", string.Empty, 4220, 1470);
+            GraphNode csvWritten = graph.Panel(136, "CSV written", string.Empty, 4220, 1670);
             graph.Connect(run, 1, runState, null);
             graph.Connect(run, 2, runSuccess, null);
             graph.Connect(energyPlusSummary, 2, summarySuccess, null);
@@ -627,30 +528,21 @@ internal static class AdvancedExampleDefinitions
             graph.Connect(resultSummary, 1, annualResult, null);
             graph.Connect(exportCsv, 2, csvFiles, null);
             graph.Connect(exportCsv, 4, csvWritten, null);
-            graph.Connect(batch, 0, batchState, null);
-            graph.Connect(batch, 3, batchCsv, null);
-            graph.Connect(batch, 4, batchManifest, null);
-            graph.Connect(batch, 5, batchComplete, null);
             graph.ExpectOutput(run, 1, 1);
             graph.ExpectOutput(run, 2, 1);
             graph.ExpectOutput(runState, null, 1);
             graph.ExpectOutput(runSuccess, null, 1);
-            graph.ExpectOutput(batch, 0, 1);
-            graph.ExpectOutput(batch, 5, 1);
-            graph.ExpectOutput(batchState, null, 1);
-            graph.ExpectOutput(batchComplete, null, 1);
             graph.ExpectBoolean(run, 2, false);
-            graph.ExpectBoolean(batch, 5, false);
 
             runtimeWorkflow = new RuntimeWorkflowExpectation(
                 run.InstanceGuid,
                 runTrigger.InstanceGuid,
                 cancelTrigger.InstanceGuid,
                 forceRerun.InstanceGuid,
-                runtimeRoot.InstanceGuid,
-                convert.InstanceGuid,
-                weatherPath.InstanceGuid,
-                tempRoot.InstanceGuid,
+                Guid.Empty,
+                Guid.Empty,
+                Guid.Empty,
+                Guid.Empty,
                 energyPlusSummary.InstanceGuid,
                 buildResult.InstanceGuid,
                 resultSummary.InstanceGuid,
@@ -658,16 +550,19 @@ internal static class AdvancedExampleDefinitions
                 exportDirectory.InstanceGuid,
                 exportTrigger.InstanceGuid,
                 overwrite.InstanceGuid,
-                batch.InstanceGuid,
-                batchOutputRoot.InstanceGuid,
-                batchRunTrigger.InstanceGuid,
-                batchCancelTrigger.InstanceGuid);
+                Guid.Empty,
+                Guid.Empty,
+                Guid.Empty,
+                Guid.Empty);
         }
 
         return graph.Build(
             SimpleProduct,
             "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo",
-            new LinkedModelExpectation(TwoZoneModel, breps.InstanceGuid, openings.InstanceGuid),
+            new LinkedModelExpectation(
+                TwoZoneModel,
+                new[] { westBrep.InstanceGuid, eastBrep.InstanceGuid },
+                new[] { westCurve.InstanceGuid, eastCurve.InstanceGuid }),
             runtimeWorkflow: runtimeWorkflow);
     }
 
@@ -774,6 +669,16 @@ internal static class AdvancedExampleDefinitions
                 Require(
                     target.Sources[index].InstanceGuid == source.InstanceGuid,
                     "Wire target " + targetGroup.Key.ObjectGuid + " source order or identity changed.");
+                Require(
+                    string.Equals(source.Name, expected.SourceParameterName, StringComparison.Ordinal)
+                        && string.Equals(source.GetType().FullName, expected.SourceParameterType, StringComparison.Ordinal)
+                        && source.Access == expected.SourceAccess,
+                    "Wire source contract changed for " + expected.SourceObjectGuid + ".");
+                Require(
+                    string.Equals(target.Name, expected.TargetParameterName, StringComparison.Ordinal)
+                        && string.Equals(target.GetType().FullName, expected.TargetParameterType, StringComparison.Ordinal)
+                        && target.Access == expected.TargetAccess,
+                    "Wire target contract changed for " + targetGroup.Key.ObjectGuid + ".");
             }
         }
 
@@ -783,14 +688,18 @@ internal static class AdvancedExampleDefinitions
         foreach (BooleanExpectation expected in graph.Booleans.Where(item => item.Expected))
         {
             GH_Component? component = document.FindObject(expected.ObjectGuid, topLevelOnly: true) as GH_Component;
-            if (component is not null && component.ComponentGuid == Catalog.SimpleConvert.Id)
+            if (component is not null
+                && (component.ComponentGuid == Catalog.SimpleConvert.Id
+                    || component.ComponentGuid == Catalog.SimplePrepare.Id))
             {
                 WaitForBooleanOutput(
                     document,
                     expected.ObjectGuid,
                     expected.OutputIndex,
                     inputs.EnergyPlusWorkflowTimeout,
-                    "Convert SimpleDragon GRM did not finish preparing its address-selected packaged EPW");
+                    component.ComponentGuid == Catalog.SimplePrepare.Id
+                        ? "Prepare SimpleDragon Simulation did not finish preparing its address-selected packaged EPW"
+                        : "Convert SimpleDragon GRM did not finish preparing its address-selected packaged EPW");
             }
         }
 
@@ -853,15 +762,23 @@ internal static class AdvancedExampleDefinitions
 
         if (graph.LinkedModel is not null)
         {
-            Param_Brep brepParam = RequireObject<Param_Brep>(document, graph.LinkedModel.BrepParameterGuid);
-            Param_Curve curveParam = RequireObject<Param_Curve>(document, graph.LinkedModel.CurveParameterGuid);
-            Brep[] breps = brepParam.VolatileData.AllData(true)
+            Require(
+                graph.LinkedModel.BrepParameterGuids.Length > 0,
+                graph.LinkedModel.FileName + " must bind at least one Brep parameter.");
+            Require(
+                graph.LinkedModel.CurveParameterGuids.Length > 0,
+                graph.LinkedModel.FileName + " must bind at least one Curve parameter.");
+            Brep[] breps = graph.LinkedModel.BrepParameterGuids
+                .Select(guid => RequireObject<Param_Brep>(document, guid))
+                .SelectMany(parameter => parameter.VolatileData.AllData(true))
                 .OfType<GH_Brep>()
                 .Select(item => item.Value)
                 .Where(item => item is not null)
                 .Cast<Brep>()
                 .ToArray();
-            Curve[] curves = curveParam.VolatileData.AllData(true)
+            Curve[] curves = graph.LinkedModel.CurveParameterGuids
+                .Select(guid => RequireObject<Param_Curve>(document, guid))
+                .SelectMany(parameter => parameter.VolatileData.AllData(true))
                 .OfType<GH_Curve>()
                 .Select(item => item.Value)
                 .Where(item => item is not null)
@@ -904,8 +821,6 @@ internal static class AdvancedExampleDefinitions
         RequirePersistentBoolean(document, expectation.ForceRerunGuid, false);
         RequirePersistentBoolean(document, expectation.ExportTriggerGuid, false);
         RequirePersistentBoolean(document, expectation.OverwriteGuid, false);
-        RequirePersistentBoolean(document, expectation.BatchRunTriggerGuid, false);
-        RequirePersistentBoolean(document, expectation.BatchCancelTriggerGuid, false);
 
         if (!exercise)
         {
@@ -921,57 +836,30 @@ internal static class AdvancedExampleDefinitions
                 inputs.EnergyPlusGateReason);
         }
 
-        string runtimeRoot = inputs.EnergyPlusRuntimeRoot
-            ?? throw new InvalidOperationException("The ready EnergyPlus gate has no runtime root.");
         string workflowRoot = Path.Combine(inputs.OutputDirectory, "runtime-workflow");
-        string tempRoot = Path.Combine(workflowRoot, "energyplus-temp");
         string csvRoot = Path.Combine(workflowRoot, "csv-package");
-        // Keep the batch roots beneath the host output while staying below the legacy
-        // MAX_PATH limit exercised by Rhino 7 and the batch runner's hashed run paths.
-        string batchRoot = Path.Combine(inputs.OutputDirectory, "b");
-        string batchCancellationRoot = Path.Combine(inputs.OutputDirectory, "c");
         Require(!Directory.Exists(workflowRoot), "The runtime evidence directory already exists: " + workflowRoot);
         Directory.CreateDirectory(workflowRoot);
         DateTime evidenceNotBeforeUtc = DateTime.UtcNow.AddSeconds(-2);
 
         try
         {
-            SetPanel(document, expectation.RuntimeRootGuid, runtimeRoot);
-            SetPanel(document, expectation.TempRootGuid, tempRoot);
             SetPanel(document, expectation.ExportDirectoryGuid, csvRoot);
-            SetPanel(document, expectation.BatchOutputRootGuid, batchRoot);
             SetBoolean(document, expectation.RunTriggerGuid, false);
             SetBoolean(document, expectation.CancelTriggerGuid, false);
             SetBoolean(document, expectation.ForceRerunGuid, false);
             SetBoolean(document, expectation.ExportTriggerGuid, false);
             SetBoolean(document, expectation.OverwriteGuid, false);
-            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
-            SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
             Solve(document);
-
-            string addressSelectedWeatherPath = WaitForAddressSelectedWeatherPath(
-                document,
-                expectation.WeatherComponentGuid,
-                expectation.WeatherPathGuid,
-                inputs.EnergyPlusWorkflowTimeout);
-            string localApplicationData = Path.GetFullPath(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
-                .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-            Require(
-                Path.GetFullPath(addressSelectedWeatherPath).StartsWith(
-                    localApplicationData + Path.DirectorySeparatorChar,
-                    StringComparison.OrdinalIgnoreCase),
-                "The packaged EPW was not prepared below the per-user LocalAppData cache: "
-                    + addressSelectedWeatherPath);
 
             SetBoolean(document, expectation.RunTriggerGuid, true);
             Solve(document);
             string firstRunState = WaitForTerminalState(
                 document,
                 expectation.RunComponentGuid,
-                "syncRoot",
-                "activeTask",
-                "stateText",
+                "_sync",
+                "_activeTask",
+                "_state",
                 inputs.EnergyPlusWorkflowTimeout,
                 "Succeeded",
                 "Failed",
@@ -988,8 +876,6 @@ internal static class AdvancedExampleDefinitions
                 expectation.RunComponentGuid,
                 0,
                 "GonieGonie.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo");
-            string workDirectory = ReadString(document, expectation.RunComponentGuid, 3);
-            RequireContainedDirectory(workDirectory, tempRoot, "EnergyPlus work directory");
             Require(
                 ReadBoolean(document, expectation.EnergyPlusSummaryGuid, 2),
                 "EnergyPlus Result Summary did not confirm the successful runtime result.");
@@ -1081,9 +967,9 @@ internal static class AdvancedExampleDefinitions
             string cachedRunState = WaitForTerminalState(
                 document,
                 expectation.RunComponentGuid,
-                "syncRoot",
-                "activeTask",
-                "stateText",
+                "_sync",
+                "_activeTask",
+                "_state",
                 inputs.EnergyPlusWorkflowTimeout,
                 "Cached",
                 "Succeeded",
@@ -1110,9 +996,9 @@ internal static class AdvancedExampleDefinitions
             string cancellationState = WaitForTerminalState(
                 document,
                 expectation.RunComponentGuid,
-                "syncRoot",
-                "activeTask",
-                "stateText",
+                "_sync",
+                "_activeTask",
+                "_state",
                 inputs.EnergyPlusWorkflowTimeout,
                 "Cancelled",
                 "Succeeded",
@@ -1129,9 +1015,21 @@ internal static class AdvancedExampleDefinitions
             SetBoolean(document, expectation.ForceRerunGuid, false);
             Solve(document);
 
-            SetBoolean(document, expectation.BatchRunTriggerGuid, true);
-            Solve(document);
-            string firstBatchState = WaitForTerminalState(
+            string firstBatchState = "Not Run";
+            string cachedBatchState = "Not Run";
+            string batchCancellationState = "Not Run";
+            string combinedCsv = string.Empty;
+            string manifest = string.Empty;
+            string cancelledBatchCsv = string.Empty;
+            string cancelledBatchManifest = string.Empty;
+            if (expectation.BatchComponentGuid != Guid.Empty)
+            {
+                string batchRoot = Path.Combine(inputs.OutputDirectory, "b");
+                string batchCancellationRoot = Path.Combine(inputs.OutputDirectory, "c");
+                SetPanel(document, expectation.BatchOutputRootGuid, batchRoot);
+                SetBoolean(document, expectation.BatchRunTriggerGuid, true);
+                Solve(document);
+                firstBatchState = WaitForTerminalState(
                 document,
                 expectation.BatchComponentGuid,
                 "_syncRoot",
@@ -1150,12 +1048,12 @@ internal static class AdvancedExampleDefinitions
                     + RuntimeMessages(document, expectation.BatchComponentGuid));
             Require(ReadBoolean(document, expectation.BatchComponentGuid, 5), "The SimpleDragon batch was not complete.");
             RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Succeeded");
-            string combinedCsv = RequireFreshContainedFile(
+            combinedCsv = RequireFreshContainedFile(
                 ReadString(document, expectation.BatchComponentGuid, 3),
                 batchRoot,
                 evidenceNotBeforeUtc,
                 "SimpleDragon batch combined CSV");
-            string manifest = RequireFreshContainedFile(
+            manifest = RequireFreshContainedFile(
                 ReadString(document, expectation.BatchComponentGuid, 4),
                 batchRoot,
                 evidenceNotBeforeUtc,
@@ -1175,7 +1073,7 @@ internal static class AdvancedExampleDefinitions
 
             SetBoolean(document, expectation.BatchRunTriggerGuid, true);
             Solve(document);
-            string cachedBatchState = WaitForTerminalState(
+            cachedBatchState = WaitForTerminalState(
                 document,
                 expectation.BatchComponentGuid,
                 "_syncRoot",
@@ -1218,7 +1116,7 @@ internal static class AdvancedExampleDefinitions
                 "The batch cancellation exercise reached " + batchStartState + " before cancellation could be requested.");
             SetBoolean(document, expectation.BatchCancelTriggerGuid, true);
             Solve(document);
-            string batchCancellationState = WaitForTerminalState(
+            batchCancellationState = WaitForTerminalState(
                 document,
                 expectation.BatchComponentGuid,
                 "_syncRoot",
@@ -1239,12 +1137,12 @@ internal static class AdvancedExampleDefinitions
                 !ReadBoolean(document, expectation.BatchComponentGuid, 5),
                 "A cancelled SimpleDragon batch incorrectly reported complete success.");
             RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Cancelled");
-            string cancelledBatchCsv = RequireFreshContainedFile(
+            cancelledBatchCsv = RequireFreshContainedFile(
                 ReadString(document, expectation.BatchComponentGuid, 3),
                 batchCancellationRoot,
                 evidenceNotBeforeUtc,
                 "Cancelled SimpleDragon batch combined CSV");
-            string cancelledBatchManifest = RequireFreshContainedFile(
+            cancelledBatchManifest = RequireFreshContainedFile(
                 ReadString(document, expectation.BatchComponentGuid, 4),
                 batchCancellationRoot,
                 evidenceNotBeforeUtc,
@@ -1255,13 +1153,14 @@ internal static class AdvancedExampleDefinitions
             Require(
                 File.ReadAllText(cancelledBatchManifest).Contains("\"status\": \"Cancelled\""),
                 "The cancelled batch manifest does not preserve the cancelled case status.");
+            }
 
             string finalRunState = ReadRuntimeSnapshot(
                 document,
                 expectation.RunComponentGuid,
-                "syncRoot",
-                "activeTask",
-                "stateText").State;
+                "_sync",
+                "_activeTask",
+                "_state").State;
             return new RuntimeValidationFacts(
                 "ready",
                 inputs.EnergyPlusGateReason,
@@ -1277,15 +1176,15 @@ internal static class AdvancedExampleDefinitions
                 true,
                 true,
                 true,
-                true,
-                true,
+                expectation.BatchComponentGuid != Guid.Empty,
+                expectation.BatchComponentGuid != Guid.Empty,
                 Path.GetFullPath(inputs.OutputDirectory),
                 annualResult,
                 csvHashes,
-                ComputeSha256(combinedCsv),
-                ComputeSha256(manifest),
-                ComputeSha256(cancelledBatchCsv),
-                ComputeSha256(cancelledBatchManifest));
+                combinedCsv.Length == 0 ? string.Empty : ComputeSha256(combinedCsv),
+                manifest.Length == 0 ? string.Empty : ComputeSha256(manifest),
+                cancelledBatchCsv.Length == 0 ? string.Empty : ComputeSha256(cancelledBatchCsv),
+                cancelledBatchManifest.Length == 0 ? string.Empty : ComputeSha256(cancelledBatchManifest));
         }
         finally
         {
@@ -1558,22 +1457,29 @@ internal static class AdvancedExampleDefinitions
             SetBoolean(document, expectation.ForceRerunGuid, false);
             SetBoolean(document, expectation.ExportTriggerGuid, false);
             SetBoolean(document, expectation.OverwriteGuid, false);
-            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
-            SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+            bool hasBatch = expectation.BatchComponentGuid != Guid.Empty;
+            if (hasBatch)
+            {
+                SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+                SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+            }
+
             Solve(document);
 
             RuntimeComponentSnapshot run = ReadRuntimeSnapshot(
                 document,
                 expectation.RunComponentGuid,
-                "syncRoot",
-                "activeTask",
-                "stateText");
-            RuntimeComponentSnapshot batch = ReadRuntimeSnapshot(
-                document,
-                expectation.BatchComponentGuid,
-                "_syncRoot",
+                "_sync",
                 "_activeTask",
                 "_state");
+            RuntimeComponentSnapshot batch = hasBatch
+                ? ReadRuntimeSnapshot(
+                    document,
+                    expectation.BatchComponentGuid,
+                    "_syncRoot",
+                    "_activeTask",
+                    "_state")
+                : new RuntimeComponentSnapshot("Not Run", false);
             if (run.HasActiveTask)
             {
                 SetBoolean(document, expectation.CancelTriggerGuid, true);
@@ -1593,15 +1499,18 @@ internal static class AdvancedExampleDefinitions
                     run = ReadRuntimeSnapshot(
                         document,
                         expectation.RunComponentGuid,
-                        "syncRoot",
-                        "activeTask",
-                        "stateText");
-                    batch = ReadRuntimeSnapshot(
-                        document,
-                        expectation.BatchComponentGuid,
-                        "_syncRoot",
+                        "_sync",
                         "_activeTask",
                         "_state");
+                    if (hasBatch)
+                    {
+                        batch = ReadRuntimeSnapshot(
+                            document,
+                            expectation.BatchComponentGuid,
+                            "_syncRoot",
+                            "_activeTask",
+                            "_state");
+                    }
                     if (!run.HasActiveTask && !batch.HasActiveTask)
                     {
                         break;
@@ -1632,8 +1541,12 @@ internal static class AdvancedExampleDefinitions
                 SetBoolean(document, expectation.ForceRerunGuid, false);
                 SetBoolean(document, expectation.ExportTriggerGuid, false);
                 SetBoolean(document, expectation.OverwriteGuid, false);
-                SetBoolean(document, expectation.BatchRunTriggerGuid, false);
-                SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+                if (expectation.BatchComponentGuid != Guid.Empty)
+                {
+                    SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+                    SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+                }
+
                 Solve(document);
             }
             catch (Exception exception)
@@ -2211,10 +2124,11 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity InvisibleErv = I("3d5f630e-66c3-43da-b73c-50d5be1792c3", "EnergyRecoveryVentilatorComponent");
         internal static readonly ComponentIdentity InvisiblePv = I("237bc85d-769a-468b-a048-70e3b5c382ee", "PhotovoltaicPanelComponent");
         internal static readonly ComponentIdentity InvisibleModel = I("fee2629c-94d8-4eed-8be2-14ba108ce825", "EnergyModelComponent");
-        internal static readonly ComponentIdentity InvisibleCompile = I("2743be88-ef3a-4f0d-abf8-cf062d93aafe", "CompileIdfComponent");
+        internal static readonly ComponentIdentity InvisibleCompile = I("e3e4d8f9-4fd8-4b17-9ec7-a27cb5627802", "CompileInvisibleDragonComponent");
         internal static readonly ComponentIdentity InvisibleValidate = I("fa664eeb-5503-4366-831d-e3478c8a1832", "ValidateIdfComponent");
         internal static readonly ComponentIdentity InvisiblePrepareRuntime = I("5199b03c-644b-4194-b38c-37f3c7a423aa", "PrepareEnergyPlusRuntimeComponent");
         internal static readonly ComponentIdentity InvisibleRun = I("5f1a9663-6f81-4635-b54d-607b48c9fd47", "RunEnergyPlusComponent");
+        internal static readonly ComponentIdentity InvisibleManagedRun = I("50e4f5bf-f174-458f-bfaa-aaf4e25ce5b5", "ManagedRunEnergyPlusComponent");
         internal static readonly ComponentIdentity InvisibleResultSummary = I("31967aee-84ae-4536-b091-b301d1ab2c3d", "EnergyPlusResultSummaryComponent");
         internal static readonly ComponentIdentity SimpleMaterial = S("fee586e8-692c-407e-a803-d5c43f3c7222", "SimpleDragonMaterialComponent");
         internal static readonly ComponentIdentity SimpleConstruction = S("3e1fa67f-dbb2-4c19-b54b-226c295f5751", "SimpleDragonSurfaceConstructionComponent");
@@ -2224,10 +2138,16 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity SimpleAirHandler = S("8b0839fc-d03d-46af-8897-1ba4a41eab46", "SimpleDragonAirHandlingUnitComponent");
         internal static readonly ComponentIdentity SimpleBoiler = S("7b973e2c-7254-4730-9326-c320abedde5a", "SimpleDragonBoilerComponent");
         internal static readonly ComponentIdentity SimpleRadiator = S("2e77eee2-c354-40ba-abae-b501373046bc", "SimpleDragonRadiatorComponent");
+        internal static readonly ComponentIdentity SimpleElectricRadiator = S("3a3f5157-23bb-4094-83fd-e5cf4dc4d891", "SimpleDragonElectricRadiatorComponent");
         internal static readonly ComponentIdentity SimpleChiller = S("d5cedc15-8b76-49e3-842b-5b0c498556fd", "SimpleDragonChillerComponent");
         internal static readonly ComponentIdentity SimpleFanCoil = S("dd41df8f-9e3e-4663-8ce7-89025cfde30c", "SimpleDragonFanCoilUnitComponent");
         internal static readonly ComponentIdentity SimpleErv = S("15afd6e6-1c05-4715-909b-b6e98ef91375", "SimpleDragonEnergyRecoveryVentilatorComponent");
         internal static readonly ComponentIdentity SimplePv = S("7fcb5c47-3d49-4aa0-8fbc-bd765711401f", "SimpleDragonPhotovoltaicPanelComponent");
+        internal static readonly ComponentIdentity SimpleOpening = S("7d41fd2c-b93f-4fc8-88ea-db1f3abeb2f1", "CreateSimpleDragonOpeningComponent");
+        internal static readonly ComponentIdentity SimpleZone = S("f7389ac4-51dd-44dc-803a-e8e0989e7638", "CreateSimpleDragonZoneComponent");
+        internal static readonly ComponentIdentity SimpleVentilationAssignment = S("596158ca-aaa8-42e5-b22a-b4cfbead4a36", "CreateSimpleDragonVentilationAssignmentComponent");
+        internal static readonly ComponentIdentity SimpleModel = S("ce38124b-f99b-4d09-be3b-e5e5717db707", "CreateSimpleDragonModelComponent");
+        internal static readonly ComponentIdentity SimplePrepare = S("ca666fd7-788c-4682-8b04-fad8c7252fe0", "PrepareSimpleDragonSimulationComponent");
         internal static readonly ComponentIdentity SimpleExtractZones = S("668591e2-458a-42a2-a924-6c3862f1b2c6", "ExtractSimpleDragonZonesComponent");
         internal static readonly ComponentIdentity SimpleAssignSupplies = S("82b8b48c-5930-4649-bc5f-6c17b05daa52", "AssignSimpleDragonSupplySystemsComponent");
         internal static readonly ComponentIdentity SimpleAssignVentilation = S("5f66b3fd-e69c-4c33-92db-839c07dcbda5", "AssignSimpleDragonVentilationSystemsComponent");
@@ -2247,10 +2167,11 @@ internal static class AdvancedExampleDefinitions
             InvisibleMaterial, InvisibleConstruction, InvisibleNoMass, InvisibleProfile, InvisibleSurface,
             InvisibleZone, InvisibleHeatPump, InvisibleAirHandler, InvisibleBoiler, InvisibleRadiantFloor,
             InvisibleErv, InvisiblePv, InvisibleModel, InvisibleCompile, InvisibleValidate,
-            InvisiblePrepareRuntime, InvisibleRun, InvisibleResultSummary,
+            InvisiblePrepareRuntime, InvisibleRun, InvisibleManagedRun, InvisibleResultSummary,
             SimpleMaterial, SimpleConstruction, SimpleFenestration, SimpleProfile, SimpleHeatPump,
-            SimpleAirHandler, SimpleBoiler, SimpleRadiator, SimpleChiller, SimpleFanCoil, SimpleErv,
-            SimplePv, SimpleExtractZones, SimpleAssignSupplies, SimpleAssignVentilation, SimpleAssemble,
+            SimpleAirHandler, SimpleBoiler, SimpleRadiator, SimpleElectricRadiator, SimpleChiller, SimpleFanCoil, SimpleErv,
+            SimplePv, SimpleOpening, SimpleZone, SimpleVentilationAssignment, SimpleModel, SimplePrepare,
+            SimpleExtractZones, SimpleAssignSupplies, SimpleAssignVentilation, SimpleAssemble,
             SimpleConvert, SimpleBuildResult, SimpleReadResult, SimpleResultSummary, SimpleDataTree,
             SimpleLinePlot, SimpleBarPlot, SimpleExportCsv, SimpleBatch,
         };
@@ -2401,7 +2322,13 @@ internal sealed class ScenarioGraphBuilder
         _wires.Add(new WireExpectation(
             source.InstanceGuid,
             sourceOutput,
-            new TargetKey(target.InstanceGuid, targetInput)));
+            new TargetKey(target.InstanceGuid, targetInput),
+            sourceParam.Name,
+            sourceParam.GetType().FullName!,
+            sourceParam.Access,
+            targetParam.Name,
+            targetParam.GetType().FullName!,
+            targetParam.Access));
     }
 
     internal void ExpectOutput(GraphNode node, int? outputIndex, int minimumCount, string? gooType = null)
@@ -2489,7 +2416,16 @@ internal sealed record ObjectExpectation(Guid InstanceGuid, string TypeName, Gui
 
 internal sealed record TargetKey(Guid ObjectGuid, int? Index);
 
-internal sealed record WireExpectation(Guid SourceObjectGuid, int? SourceOutputIndex, TargetKey Target);
+internal sealed record WireExpectation(
+    Guid SourceObjectGuid,
+    int? SourceOutputIndex,
+    TargetKey Target,
+    string SourceParameterName,
+    string SourceParameterType,
+    GH_ParamAccess SourceAccess,
+    string TargetParameterName,
+    string TargetParameterType,
+    GH_ParamAccess TargetAccess);
 
 internal sealed record OutputExpectation(Guid ObjectGuid, int? OutputIndex, int MinimumCount, string? GooType);
 
@@ -2497,7 +2433,10 @@ internal sealed record BooleanExpectation(Guid ObjectGuid, int OutputIndex, bool
 
 internal sealed record NumberExpectation(Guid ObjectGuid, int OutputIndex, double Expected, double Tolerance);
 
-internal sealed record LinkedModelExpectation(string FileName, Guid BrepParameterGuid, Guid CurveParameterGuid);
+internal sealed record LinkedModelExpectation(
+    string FileName,
+    Guid[] BrepParameterGuids,
+    Guid[] CurveParameterGuids);
 
 internal sealed record OutwardEnvelopeExpectation(Guid[] CurveParameterGuids, Point3d ZoneCentroid);
 

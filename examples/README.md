@@ -9,12 +9,12 @@ window curves that can be referenced directly from Grasshopper.
 | --- | --- |
 | `00-invisibledragon-material-construction.gh` | Minimal InvisibleDragon material, thickness, construction, and U-value graph |
 | `01-invisibledragon-envelope-profile.gh` | Three-layer envelope, no-mass construction, constant annual profile, and typed output previews |
-| `02-invisibledragon-single-zone-hvac-idf.gh` | Six planar surfaces, closed zone, HVAC/ERV/PV, energy model, IDF compile/validation, runtime preparation, EnergyPlus run, and result summary |
+| `02-invisibledragon-single-zone-hvac-idf.gh` | Six planar surfaces, closed zone, HVAC/ERV/PV, energy model, and path-free EnergyPlus 24.2 IDF compile/validation |
 | `10-simpledragon-material-construction.gh` | Minimal SimpleDragon material and surface-construction graph |
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
-| `12-simpledragon-two-zone-to-idf.gh` | Two Brep zones and windows through extraction, immutable HVAC/ERV assignment, GRM assembly, and InvisibleDragon IDF conversion |
+| `12-simpledragon-two-zone-to-idf.gh` | Complex two-Zone composition/IDF authoring: local Brep and Opening ownership, heat-pump/AHU, boiler/radiator, ERV, PV, then path-free IDF and packaged Weather preparation |
 | `13-simpledragon-results-and-plots.gh` | Real GRR read, annual summary, monthly DataTree, line plot, bar plot, and non-writing CSV preview |
-| `14-simpledragon-two-zone-run-results-csv.gh` | Two Brep zones through GRM/IDF conversion, a gated EnergyPlus run, result summary, GRR build/summary, CSV export, cache/cancellation controls, and a separate batch branch |
+| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: electric radiators connect directly to two Zones, then typed IDF and Weather feed managed InvisibleDragon Run, result summary, GRR, CSV, cache, and cancellation controls |
 | `30-two-zone-office.3dm` | Two adjacent named office-zone solids and two named south-window curves |
 | `31-three-zone-stepped-office.3dm` | Two adjacent ground-floor zones plus an adjacent upper zone and three named windows |
 
@@ -27,20 +27,20 @@ file in Grasshopper:
 .\dev.cmd install
 ```
 
-Opening an example manually is safe: all action triggers, including Run,
-Cancel, Repair, Force, Export, Overwrite, Batch Run, and Batch Cancel, are
-persisted as `False`. Example 14 keeps `Prepare packaged runtime` at `True` as a
-run policy; it performs no work until Run receives an explicit False-to-True
-edge. The IDF examples still compile deterministic input text; an unresolved
-EnergyPlus IDD is reported as a warning and can be resolved by running
-`.\dev.cmd setup -InstallEnergyPlus`.
-Examples 02 and 14 are the complete InvisibleDragon and SimpleDragon execution
-paths. Example 02 requires an absolute EPW supplied by the user: first toggle
-`Prepare` and wait for `Ready`, then toggle `Run`; its verified Runtime Root is
-already connected to Run EnergyPlus. Example 14 derives the Seoul EPW from the
-model address and SimpleDragon's packaged KoreanTMY archive. Wait until the
-`Address-selected packaged EPW` panel contains the absolute cached path, then
-create a fresh False-to-True edge on only Run or Batch Run.
+Opening an example manually is safe: Run, Cancel, Force, Export, and Overwrite
+are persisted as `False`. SimpleDragon prepares the Address/Vintage-selected packaged
+weather handle without exposing its cache path; InvisibleDragon resolves its
+managed EnergyPlus runtime and system-temp work directory only after Run
+receives an explicit False-to-True edge.
+Example 02 is the complete standalone InvisibleDragon authoring-to-IDF path;
+example 14 is the complete simulation path shared by the two products. Example
+14 derives Seoul weather from the Model Address/Vintage: wait until
+`Preparation success` is `True` and `Verified packaged weather` contains a typed
+weather value, then create a fresh False-to-True edge on Run. Its intentionally
+simple electric-radiator HVAC keeps this full-process execution example stable;
+use example 12 for the broader HVAC/ERV/PV composition demonstration. No EnergyPlus,
+IDD, EPW, runtime-root, or temporary-directory path belongs on this canonical
+canvas.
 
 `13-simpledragon-results-and-plots.gh` keeps both paths relative to the saved
 Grasshopper document:
@@ -57,12 +57,11 @@ while GRM/GRR/CSV output paths use the system temp directory. `Export CSV` is
 held at `False`; its directory and file-content outputs are previews only, so
 this example does not create the preview directory or write CSV files.
 
-`Run EnergyPlus`, `Prepare EnergyPlus Runtime`, `Run SimpleDragon Batch`, and the
-IDD inputs likewise resolve relative paths from the saved `.gh` file. For an
-unsaved definition, relative run, runtime-preparation, batch, GRM/GRR, and CSV
-output paths use the per-user system temp directory as their base rather than
-Rhino's installation directory. Read-only EPW and IDD inputs should be absolute
-until the definition has been saved.
+Legacy path-based runtime and batch components still resolve relative paths from
+the saved `.gh` file. The canonical SimpleDragon Prepare and InvisibleDragon
+Run components deliberately expose no EnergyPlus, IDD, EPW, or temp path;
+implementation-owned artifacts remain in verified per-user caches or the system
+temporary directory. User-selected CSV export destinations remain visible.
 
 ## Relink the two-zone definition to live Rhino objects
 
@@ -71,11 +70,13 @@ geometry in `30-two-zone-office.3dm`, so it runs immediately and remains
 portable. To use live document references instead:
 
 1. Open `30-two-zone-office.3dm` in Rhino.
-2. In Grasshopper, right-click `Two closed office zones`, choose **Set Multiple
-   Breps**, and select `ZONE_01_WEST` followed by `ZONE_02_EAST`.
-3. Right-click `South facade windows`, choose **Set Multiple Curves**, and
-   select `WINDOW_ZONE_01_SOUTH` followed by `WINDOW_ZONE_02_SOUTH`.
-4. Keep the persisted zone-index and face-index inputs in their original order.
+2. Right-click `ZONE_01_WEST` and `ZONE_02_EAST` in Grasshopper and set each
+   parameter to its same-named Rhino Brep.
+3. Right-click `WINDOW_ZONE_01_SOUTH` and `WINDOW_ZONE_02_SOUTH` and set each
+   parameter to its same-named Rhino curve.
+4. Keep each curve wired to the SimpleDragon Opening in the same local Zone
+   cluster. The owning Zone and host face are inferred from that connection and
+   geometry; there are no zone-index or face-index panels.
 
 The Rhino objects are on `DRAGON_ZONES` and `DRAGON_OPENINGS`. Their attributes
 also carry `DragonRole` and, for windows, `ZoneName` user strings. The stepped
@@ -108,9 +109,10 @@ internalized two-zone Grasshopper inputs. Candidates, logs, summaries, and
 round-trip copies remain below `temp/example-definitions/`.
 
 When the verified distribution payloads and EnergyPlus runtime are available,
-the gate temporarily enables example 14 in memory and verifies the address to
-packaged-EPW path, Run, Result, GRR, CSV, cache, cancellation, and batch behavior
-in both hosts. The saved trigger values remain `False`. Use
+the gate temporarily enables example 14 in memory and verifies typed packaged
+weather preparation, its direct-Zone electric-radiator model, managed Run,
+Result, GRR, CSV, cache, and cancellation in both hosts. The saved trigger
+values remain `False`. Use
 `-SkipEnergyPlusWorkflow` to test the explicit disabled state or
 `-EnergyPlusRoot` to select a runtime. `-WeatherPath` remains an explicit test
 override for workflows that require one. An unavailable prerequisite is
@@ -118,13 +120,15 @@ reported as `Not Run`, not as a successful simulation.
 
 ## Further workflow recipes
 
-- Use the persisted Prepare → Run → Result chain in example 02 for a direct
-  InvisibleDragon simulation with an explicit EPW, or use example 14 to see
-  SimpleDragon resolve the EPW automatically from its model address.
+- Example 02 uses `Compile InvisibleDragon`, whose managed IDD and embedded
+  EnergyPlus 24.2 execution mapping require no path input. Use example 14 to see
+  SimpleDragon select and verify weather from Model Address/Vintage, then pass
+  typed IDF and Weather directly to the managed InvisibleDragon runner.
 - Use Read GRM with `fixtures\simple-dragon\grm\ASHRAE 140 modified.grm`, then
   Convert GRM to inspect compatibility diagnostics for an existing model.
-- Feed ordered GRM cases and stable IDs into Batch Research for parallel studies;
-  keep its case temp root and result root under `temp/` while developing.
+- Feed ordered Models and stable IDs into Managed Run SimpleDragon Batch, set a
+  parallel limit, and use only the Run/Cancel triggers. Runtime, weather, case
+  temp, and result storage paths are managed internally.
 
 See [the workflow guide](../docs/grasshopper-workflow.md) for units, optional
 inputs, triggers, and persistence rules.

@@ -24,27 +24,34 @@ written below `temp/example-definitions/run-*`. Generation stages candidates
 there and only replaces tracked files after they reopen and pass their checks.
 
 Definition checks cover exact object/component identities, source order for
-every wire and its exact total, runtime errors, typed outputs, selected
+every wire and its exact total, source/target parameter names, runtime types and
+access contracts, runtime errors, typed outputs, selected
 Boolean/numeric results, outward envelope winding, solve, save, reopen, and
 round trip. Hosts run from a disposable system-temp directory outside the
 repository, and the result example proves that saved-document-relative file
 paths do not depend on the host process working directory.
-The InvisibleDragon single-zone example persists a guarded Prepare-to-Run-to-
-Result path, and the SimpleDragon two-zone run example adds the typed Result-to-
-GRR-to-CSV path plus a separate batch path. Every persisted preparation,
-execution, cancellation, repair, overwrite, and export trigger must remain
-false. When EnergyPlus and an EPW are ready, the host enables the two-zone
-operations only in memory; disabled or unavailable states remain explicitly
-`Not Run` in the summary.
+The SimpleDragon two-zone examples use one Brep and opening parameter per local
+Zone cluster. Typed Opening definitions, HVAC, and ventilation feed Zone;
+Zone definitions feed Model; and Model feeds the path-free Prepare component.
+Example 12 is the complex composition/IDF authoring case with heat-pump/AHU,
+boiler/radiator, ERV, and PV. Example 14 uses direct-Zone electric radiators as
+the stable execution case and connects Prepare's typed IDF and verified Weather
+outputs directly to the managed InvisibleDragon runner before
+Result-to-GRR-to-CSV. Every persisted
+execution, cancellation, overwrite, and export trigger remains false. Runtime,
+IDD, weather-cache, and run-temp paths are implementation-owned and never appear
+on the canonical canvas or in its manifest description.
 Building-model checks cover metre units, layers, object names and user strings,
 closed solid zone Breps, exact bounds, expected adjacency pairs, and closed
-planar window curves. The two-zone GRM-to-IDF graph also proves that its
-internalized Breps and curves match `30-two-zone-office.3dm`.
+planar window curves. The two-zone graphs aggregate and validate all of their
+separate internalized Brep and Curve parameters against
+`30-two-zone-office.3dm`.
 
 Use `-Target Rhino7` or `-Target Rhino8` for a single validation host. Generation
 requires the default `-Target All`: Rhino 7 writes every canonical binary, then
 Rhino 7 and Rhino 8 both validate it before the command succeeds. Custom Rhino
 executable locations can be supplied with `-Rhino7Exe` and `-Rhino8Exe`.
-Use `-EnergyPlusRoot` and `-WeatherPath` for explicit runtime inputs, or
-`-SkipEnergyPlusWorkflow` to verify the disabled state without executing a
-simulation.
+Use `-EnergyPlusRoot` to select the runtime gate or `-SkipEnergyPlusWorkflow` to
+verify the disabled state without executing a simulation. `-WeatherPath` remains
+an optional legacy/test override; the canonical SimpleDragon examples select
+and verify packaged weather internally from the Model Address/Vintage.
