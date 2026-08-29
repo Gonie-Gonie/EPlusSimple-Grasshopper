@@ -4,9 +4,11 @@ using Grasshopper.Kernel;
 using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Types;
 using GonieGonie.BuildingEnergy.Contracts;
+using GonieGonie.InvisibleDragon.Construction;
 using GonieGonie.InvisibleDragon.Grasshopper.Types;
 using GonieGonie.InvisibleDragon.Hvac;
 using GonieGonie.InvisibleDragon.Model;
+using GonieGonie.InvisibleDragon.Shape;
 
 namespace GonieGonie.InvisibleDragon.Grasshopper.Tests;
 
@@ -34,7 +36,6 @@ public sealed class HvacComponentContractTests
             ["DomesticHotWaterComponent"] = (new("6f59e771-5dc0-44aa-9b7d-a84c3d0c7d74"), "HVAC"),
             ["EnergyRecoveryVentilatorComponent"] = (new("3d5f630e-66c3-43da-b73c-50d5be1792c3"), "HVAC"),
             ["PhotovoltaicPanelComponent"] = (new("237bc85d-769a-468b-a048-70e3b5c382ee"), "Systems"),
-            ["SupplyGroupAssignmentComponent"] = (new("1c78fc6e-952f-4513-a39f-b107daba9677"), "HVAC"),
         };
 
     private static readonly string[] SourceComponentNames =
@@ -58,43 +59,6 @@ public sealed class HvacComponentContractTests
         "ElectricRadiantFloorComponent",
     };
 
-    private static readonly string[] LegacyModelInputNames =
-    {
-        "Name",
-        "Zones",
-        "North Axis",
-        "Terrain",
-    };
-
-    private static readonly string[] AppendedModelInputNames =
-    {
-        "Sources",
-        "Supply Systems",
-        "Supply Zone Indices",
-        "HVAC Assignments",
-        "Ventilators",
-        "Ventilator Zone Indices",
-        "PV Panels",
-    };
-
-    private static readonly string[] AssignmentOutputParamTypeNames =
-    {
-        "Param_GenericObject",
-        "Param_GenericObject",
-        "DragonSourceSystemParam",
-    };
-
-    private static readonly string[] AppendedModelInputTypeNames =
-    {
-        "DragonSourceSystemParam",
-        "DragonSupplySystemParam",
-        "Param_Integer",
-        "Param_GenericObject",
-        "DragonEnergyRecoveryVentilatorParam",
-        "Param_Integer",
-        "DragonPhotovoltaicPanelParam",
-    };
-
     private static readonly string[] ModelOutputNames =
     {
         "Model",
@@ -102,11 +66,29 @@ public sealed class HvacComponentContractTests
         "Diagnostics",
     };
 
-    private static readonly int[] ThreeZeroZoneIndices = { 0, 0, 0 };
+    private static readonly string[] ZoneInputNames =
+    {
+        "Name", "Surfaces", "Profile", "Infiltration", "Lighting Power Density",
+        "Outdoor Air Flow", "HVAC", "ERVs", "ID",
+    };
 
-    private static readonly int[] SingleZeroZoneIndex = { 0 };
+    private static readonly string[] ZoneInputTypes =
+    {
+        "Param_String", "DragonSurfaceParam", "DragonProfileParam", "Param_Number",
+        "Param_Number", "Param_Number", "DragonSupplySystemParam",
+        "DragonEnergyRecoveryVentilatorParam", "Param_String",
+    };
 
-    private static readonly int[] InvalidZoneIndex = { 2 };
+    private static readonly string[] EnergyModelInputNames =
+    {
+        "Name", "Zones", "North Axis", "Terrain", "PV Panels",
+    };
+
+    private static readonly string[] EnergyModelInputTypes =
+    {
+        "Param_String", "DragonZoneDefinitionParam", "Param_Number", "Param_String",
+        "DragonPhotovoltaicPanelParam",
+    };
 
     [Fact]
     public void HvacAuthoringCatalogIsCompleteTypedAndGuidStable()
@@ -116,7 +98,7 @@ public sealed class HvacComponentContractTests
             .Select(name => Component(assembly, name))
             .ToArray();
 
-        Assert.Equal(18, components.Length);
+        Assert.Equal(17, components.Length);
         Assert.All(components, component =>
         {
             (Guid guid, string panel) = ExpectedComponents[component.GetType().Name];
@@ -142,12 +124,6 @@ public sealed class HvacComponentContractTests
             "DragonPhotovoltaicPanelParam",
             Component(assembly, "PhotovoltaicPanelComponent").Params.Output[0].GetType().Name);
 
-        GH_Component assignment = Component(assembly, "SupplyGroupAssignmentComponent");
-        Assert.Equal("DragonZoneParam", assignment.Params.Input[0].GetType().Name);
-        Assert.Equal("DragonSupplySystemParam", assignment.Params.Input[1].GetType().Name);
-        Assert.Equal("DragonScheduleParam", assignment.Params.Input[2].GetType().Name);
-        Assert.True(assignment.Params.Input[2].Optional);
-        Assert.Equal(AssignmentOutputParamTypeNames, assignment.Params.Output.Select(item => item.GetType().Name));
     }
 
     [Fact]
@@ -195,15 +171,174 @@ public sealed class HvacComponentContractTests
     }
 
     [Fact]
-    public void EnergyModelPreservesLegacyPortsAndAppendsOptionalTypedHvacPorts()
+    public void ZoneOwnsSystemsAndEnergyModelHasOnlyDirectObjectPorts()
     {
-        GH_Component component = Component(LoadPlugin(), "EnergyModelComponent");
+        Assembly assembly = LoadPlugin();
+        GH_Component zone = Component(assembly, "ZoneComponent");
+        GH_Component model = Component(assembly, "EnergyModelComponent");
 
-        Assert.Equal(LegacyModelInputNames, component.Params.Input.Take(4).Select(item => item.Name));
-        Assert.Equal(AppendedModelInputNames, component.Params.Input.Skip(4).Select(item => item.Name));
-        Assert.Equal(AppendedModelInputTypeNames, component.Params.Input.Skip(4).Select(item => item.GetType().Name));
-        Assert.All(component.Params.Input.Skip(4), item => Assert.True(item.Optional));
-        Assert.Equal(ModelOutputNames, component.Params.Output.Select(item => item.Name));
+        Assert.Equal(ZoneInputNames, zone.Params.Input.Select(item => item.Name));
+        Assert.Equal(ZoneInputTypes, zone.Params.Input.Select(item => item.GetType().Name));
+        Assert.Equal("DragonZoneDefinitionParam", zone.Params.Output[0].GetType().Name);
+        Assert.True(zone.Params.Input[6].Optional);
+        Assert.True(zone.Params.Input[7].Optional);
+
+        Assert.Equal(EnergyModelInputNames, model.Params.Input.Select(item => item.Name));
+        Assert.Equal(EnergyModelInputTypes, model.Params.Input.Select(item => item.GetType().Name));
+        Assert.True(model.Params.Input[4].Optional);
+        Assert.Equal(ModelOutputNames, model.Params.Output.Select(item => item.Name));
+        Assert.DoesNotContain(
+            zone.Params.Input.Concat(model.Params.Input),
+            item => item.Name.Contains("Index", StringComparison.OrdinalIgnoreCase)
+                || item.Name.Contains("Assignment", StringComparison.OrdinalIgnoreCase)
+                || item.Name.Contains("Adjacent", StringComparison.OrdinalIgnoreCase));
+    }
+
+    [Fact]
+    public void ZoneComponentStoresDirectlyConnectedHvacAndErvsInItsDefinition()
+    {
+        Assembly assembly = LoadPlugin();
+        EnergyModel fixture = HvacDragonGooTests.FullHvacModel();
+        GonieGonie.InvisibleDragon.Shape.Zone source = fixture.Zones[0];
+        SupplySystem[] systems = fixture.HvacAssignments[0].Supply.Systems.Take(2).ToArray();
+        EnergyRecoveryVentilator ventilator = fixture.VentilationAssignments[0].Ventilator;
+        var access = new TestDataAccess(new Dictionary<int, object?>
+        {
+            [0] = "Direct Zone",
+            [1] = source.Surfaces.Select(item => new DragonSurfaceGoo(item)).ToArray(),
+            [2] = new DragonProfileGoo(source.Profile),
+            [3] = source.InfiltrationAirChangesPerHour,
+            [4] = source.LightingPowerDensityWattsPerSquareMetre,
+            [5] = source.OutdoorAirFlowCubicMetresPerSecond,
+            [6] = systems.Select(item => new DragonSupplySystemGoo(item)).ToArray(),
+            [7] = new[] { new DragonEnergyRecoveryVentilatorGoo(ventilator) },
+            [8] = "zone-direct",
+        });
+
+        InvokeSolve(Component(assembly, "ZoneComponent"), access);
+
+        InvisibleDragonZoneDefinition definition = Assert.IsType<DragonZoneDefinitionGoo>(access.Outputs[0]).Value;
+        Assert.Equal(new EntityId("zone-direct"), definition.Zone.Id);
+        Assert.Equal(2, definition.SupplySystems.Count);
+        Assert.Single(definition.Ventilators);
+        Assert.Equal(systems[0].Id, definition.SupplySystems[0].Id);
+        Assert.Equal(ventilator.Id, definition.Ventilators[0].Id);
+    }
+
+    [Fact]
+    public void EnergyModelAutomaticallyPairsExactlyTwoCoincidentZoneSurfaces()
+    {
+        Assembly assembly = LoadPlugin();
+        GonieGonie.InvisibleDragon.Shape.Zone fixture = HvacDragonGooTests.FullHvacModel().Zones[0];
+        Surface firstSurface = CoincidentSurface("surface-a", "Shared A", reversed: false);
+        Surface secondSurface = CoincidentSurface("surface-b", "Shared B", reversed: true);
+        var first = new GonieGonie.InvisibleDragon.Shape.Zone(
+            new EntityId("zone-a"), "Zone A", new[] { firstSurface }, fixture.Profile);
+        var second = new GonieGonie.InvisibleDragon.Shape.Zone(
+            new EntityId("zone-b"), "Zone B", new[] { secondSurface }, fixture.Profile);
+        var access = new TestDataAccess(new Dictionary<int, object?>
+        {
+            [0] = "Auto Adjacency",
+            [1] = new[]
+            {
+                new DragonZoneDefinitionGoo(new InvisibleDragonZoneDefinition(first)),
+                new DragonZoneDefinitionGoo(new InvisibleDragonZoneDefinition(second)),
+            },
+            [2] = 0d,
+            [3] = "Suburbs",
+        });
+
+        InvokeSolve(Component(assembly, "EnergyModelComponent"), access);
+
+        EnergyModel model = Assert.IsType<DragonEnergyModelGoo>(access.Outputs[0]).Value;
+        Surface resolvedFirst = Assert.Single(model.Zones[0].Surfaces);
+        Surface resolvedSecond = Assert.Single(model.Zones[1].Surfaces);
+        Assert.Equal(SurfaceBoundaryCondition.Zone, resolvedFirst.Boundary.Condition);
+        Assert.Equal(SurfaceBoundaryCondition.Zone, resolvedSecond.Boundary.Condition);
+        Assert.Equal(resolvedSecond.Id, resolvedFirst.Boundary.AdjacentSurfaceId);
+        Assert.Equal(resolvedFirst.Id, resolvedSecond.Boundary.AdjacentSurfaceId);
+        Assert.DoesNotContain(
+            access.OutputList(2),
+            item => item is DiagnosticGoo diagnostic
+                && diagnostic.Value.Code == "INVISIBLEDRAGON.GH.ADJACENCY_AMBIGUOUS");
+    }
+
+    [Fact]
+    public void EnergyModelReportsAmbiguousThreeWayCoincidenceWithoutChoosingIndices()
+    {
+        Assembly assembly = LoadPlugin();
+        GonieGonie.InvisibleDragon.Shape.Zone fixture = HvacDragonGooTests.FullHvacModel().Zones[0];
+        DragonZoneDefinitionGoo[] definitions = Enumerable.Range(0, 3)
+            .Select(index => new GonieGonie.InvisibleDragon.Shape.Zone(
+                new EntityId("zone-ambiguous-" + index),
+                "Ambiguous " + index,
+                new[] { CoincidentSurface("surface-ambiguous-" + index, "Shared " + index, index % 2 == 1) },
+                fixture.Profile))
+            .Select(zone => new DragonZoneDefinitionGoo(new InvisibleDragonZoneDefinition(zone)))
+            .ToArray();
+        var access = new TestDataAccess(new Dictionary<int, object?>
+        {
+            [0] = "Ambiguous Adjacency",
+            [1] = definitions,
+            [2] = 0d,
+            [3] = "Suburbs",
+        });
+
+        InvokeSolve(Component(assembly, "EnergyModelComponent"), access);
+
+        Assert.False(Assert.IsType<bool>(access.Outputs[1]));
+        Assert.Contains(
+            access.OutputList(2),
+            item => item is DiagnosticGoo diagnostic
+                && diagnostic.Value.Code == "INVISIBLEDRAGON.GH.ADJACENCY_AMBIGUOUS"
+                && diagnostic.Value.Message.Contains("multiple coincident candidates", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void GeometryCatalogUsesDirectOpenings()
+    {
+        Assembly assembly = LoadPlugin();
+        GH_Component glazing = Component(assembly, "GlazingComponent");
+        GH_Component window = Component(assembly, "WindowFromPolylineComponent");
+        GH_Component door = Component(assembly, "DoorFromPolylineComponent");
+        GH_Component surface = Component(assembly, "SurfaceComponent");
+
+        Assert.Equal(new Guid("ecfd5cdd-3e4c-4261-8ddd-ecea8eaf5599"), glazing.ComponentGuid);
+        Assert.Equal(new Guid("54bb0065-1b10-420c-a90e-0ce75e746781"), window.ComponentGuid);
+        Assert.Equal(new Guid("b2e1e805-a126-44fe-bf6c-4dbf16a76aae"), door.ComponentGuid);
+        Assert.Equal(new Guid("c25eb6d8-9500-44e5-9909-58d41de0a320"), surface.ComponentGuid);
+        Assert.Equal("Name|U-Value|SHGC", string.Join("|", glazing.Params.Input.Select(item => item.Name)));
+        Assert.Equal("Curve|Name|Glazing|ID", string.Join("|", window.Params.Input.Select(item => item.Name)));
+        Assert.Equal("Curve|Name|Construction|ID", string.Join("|", door.Params.Input.Select(item => item.Name)));
+        Assert.Equal(
+            "Curve|Name|Type|Construction|Boundary Intent|Openings|ID",
+            string.Join("|", surface.Params.Input.Select(item => item.Name)));
+        Assert.Equal("DragonGlazingParam", glazing.Params.Output[0].GetType().Name);
+        Assert.Equal("DragonOpeningParam", window.Params.Output[0].GetType().Name);
+        Assert.Equal("DragonOpeningParam", door.Params.Output[0].GetType().Name);
+        Assert.Equal("DragonOpeningParam", surface.Params.Input[5].GetType().Name);
+        Assert.DoesNotContain(
+            surface.Params.Input,
+            item => item.Name.Contains("Adjacent", StringComparison.OrdinalIgnoreCase)
+                || item.Name.Contains("Index", StringComparison.OrdinalIgnoreCase));
+        var host = new Surface(
+            new EntityId("host"),
+            "Host",
+            SurfaceType.Wall,
+            new NoMassConstruction("Wall", 0.4),
+            SurfaceBoundary.Outdoors,
+            Rectangle(0, 0, 4, 4),
+            new IOpening[]
+            {
+                new Window(
+                    new EntityId("outside-window"),
+                    "Outside Window",
+                    new Glazing("Glass", 1.8, 0.5),
+                    Rectangle(3, 1, 5, 3)),
+            });
+        Assert.Contains(
+            host.Validate().Diagnostics,
+            diagnostic => diagnostic.Code == "INVISIBLEDRAGON.SURFACE.OPENING_OUTSIDE_HOST");
     }
 
     [Fact]
@@ -294,7 +429,7 @@ public sealed class HvacComponentContractTests
     }
 
     [Fact]
-    public void SupplyVentilationPvAndAssignmentComponentsCreateRepresentativeValues()
+    public void SupplyVentilationAndPvComponentsCreateRepresentativeValues()
     {
         Assembly assembly = LoadPlugin();
         var heatPump = new HeatPump(
@@ -414,20 +549,6 @@ public sealed class HvacComponentContractTests
         Assert.Equal(Fuel.Propane, domesticHotWaterGoo.Value.Fuel);
         Assert.Equal(0.91d, domesticHotWaterGoo.Value.Efficiency);
 
-        GonieGonie.InvisibleDragon.Shape.Zone zone = HvacDragonGooTests.FullHvacModel().Zones[0];
-        var assignmentAccess = new TestDataAccess(new Dictionary<int, object?>
-        {
-            [0] = new DragonZoneGoo(zone),
-            [1] = supplies.Take(4).Select(item => new DragonSupplySystemGoo(item)).ToArray(),
-        });
-        InvokeSolve(Component(assembly, "SupplyGroupAssignmentComponent"), assignmentAccess);
-        var groupWrapper = Assert.IsType<GH_ObjectWrapper>(assignmentAccess.Outputs[0]);
-        var group = Assert.IsType<SupplyGroup>(groupWrapper.Value);
-        Assert.Equal(4, group.Systems.Count);
-        var assignmentWrapper = Assert.IsType<GH_ObjectWrapper>(assignmentAccess.Outputs[1]);
-        var assignment = Assert.IsType<ZoneHvacAssignment>(assignmentWrapper.Value);
-        Assert.Equal(zone.Id, assignment.ZoneId);
-        Assert.Equal(3, assignmentAccess.OutputList(2).Count);
     }
 
     [Fact]
@@ -477,7 +598,7 @@ public sealed class HvacComponentContractTests
     }
 
     [Fact]
-    public void CompleteEnergyModelAssemblyPreservesSharedSourcesAndAllExplicitAssignments()
+    public void CompleteEnergyModelAssemblyUsesZoneOwnedSystemsWithoutMappingPorts()
     {
         Assembly assembly = LoadPlugin();
         EnergyModel fixture = HvacDragonGooTests.FullHvacModel();
@@ -486,28 +607,16 @@ public sealed class HvacComponentContractTests
             .Where(item => item is AirHandlingUnit or FanCoilUnit or Radiator)
             .Take(3)
             .ToArray();
-        SourceSystem[] sources = systems
-            .Select(item => item.Source)
-            .Where(item => item is not null)
-            .Cast<SourceSystem>()
-            .GroupBy(item => item.Id)
-            .Select(group => group.First())
-            .ToArray();
         EnergyRecoveryVentilator ventilator = fixture.VentilationAssignments[0].Ventilator;
         PhotovoltaicPanel panel = fixture.PhotovoltaicPanels[0];
+        var definition = new InvisibleDragonZoneDefinition(zone, systems, new[] { ventilator });
         var access = new TestDataAccess(new Dictionary<int, object?>
         {
             [0] = "Authored Complete Model",
-            [1] = new[] { new DragonZoneGoo(zone) },
+            [1] = new[] { new DragonZoneDefinitionGoo(definition) },
             [2] = 17d,
             [3] = "City",
-            [4] = sources.Select(item => new DragonSourceSystemGoo(item)).ToArray(),
-            [5] = systems.Select(item => new DragonSupplySystemGoo(item)).ToArray(),
-            [6] = ThreeZeroZoneIndices,
-            [7] = Array.Empty<object>(),
-            [8] = new[] { new DragonEnergyRecoveryVentilatorGoo(ventilator) },
-            [9] = SingleZeroZoneIndex,
-            [10] = new[] { new DragonPhotovoltaicPanelGoo(panel) },
+            [4] = new[] { new DragonPhotovoltaicPanelGoo(panel) },
         });
 
         InvokeSolve(Component(assembly, "EnergyModelComponent"), access);
@@ -519,30 +628,30 @@ public sealed class HvacComponentContractTests
         Assert.Equal(Terrain.City, model.Terrain);
         ZoneHvacAssignment assignment = Assert.Single(model.HvacAssignments);
         Assert.Equal(3, assignment.Supply.Systems.Count);
-        Assert.Same(systems[0].Source, assignment.Supply.Systems[0].Source);
-        Assert.Same(assignment.Supply.Systems[1].Source, assignment.Supply.Systems[2].Source);
+        Assert.Equal(systems[0].Source?.Id, assignment.Supply.Systems[0].Source?.Id);
+        Assert.Equal(assignment.Supply.Systems[1].Source?.Id, assignment.Supply.Systems[2].Source?.Id);
         Assert.Single(model.VentilationAssignments);
-        Assert.Same(ventilator, model.VentilationAssignments[0].Ventilator);
+        Assert.Equal(ventilator.Id, model.VentilationAssignments[0].Ventilator.Id);
         Assert.Single(model.PhotovoltaicPanels);
-        Assert.Same(panel, model.PhotovoltaicPanels[0]);
+        Assert.Equal(panel.Id, model.PhotovoltaicPanels[0].Id);
         Assert.True(Assert.IsType<bool>(access.Outputs[1]));
 
-        var legacyAccess = new TestDataAccess(new Dictionary<int, object?>
+        var unconditionedAccess = new TestDataAccess(new Dictionary<int, object?>
         {
-            [0] = "Legacy Model",
-            [1] = new[] { new DragonZoneGoo(zone) },
+            [0] = "Unconditioned Model",
+            [1] = new[] { new DragonZoneDefinitionGoo(new InvisibleDragonZoneDefinition(zone)) },
             [2] = 0d,
             [3] = "Suburbs",
         });
-        InvokeSolve(Component(assembly, "EnergyModelComponent"), legacyAccess);
-        EnergyModel legacy = Assert.IsType<DragonEnergyModelGoo>(legacyAccess.Outputs[0]).Value;
-        Assert.Empty(legacy.HvacAssignments);
-        Assert.Empty(legacy.VentilationAssignments);
-        Assert.Empty(legacy.PhotovoltaicPanels);
+        InvokeSolve(Component(assembly, "EnergyModelComponent"), unconditionedAccess);
+        EnergyModel unconditioned = Assert.IsType<DragonEnergyModelGoo>(unconditionedAccess.Outputs[0]).Value;
+        Assert.Empty(unconditioned.HvacAssignments);
+        Assert.Empty(unconditioned.VentilationAssignments);
+        Assert.Empty(unconditioned.PhotovoltaicPanels);
     }
 
     [Fact]
-    public void InvalidEnumsSourceCombinationsAndMappingsReportActionableRuntimeErrors()
+    public void InvalidEnumsAndSourceCombinationsReportActionableRuntimeErrors()
     {
         Assembly assembly = LoadPlugin();
         var invalidTowerAccess = new TestDataAccess(new Dictionary<int, object?>
@@ -576,20 +685,40 @@ public sealed class HvacComponentContractTests
         Assert.Contains("Heat Pump requires HeatPump", ahuError, StringComparison.Ordinal);
         Assert.Contains("Boiler", ahuError, StringComparison.Ordinal);
 
-        GonieGonie.InvisibleDragon.Shape.Zone zone = HvacDragonGooTests.FullHvacModel().Zones[0];
-        var electric = new ElectricRadiator(new EntityId("bad-map-supply"), "Electric", null, 1, 0);
-        var invalidMappingAccess = new TestDataAccess(new Dictionary<int, object?>
+    }
+
+    private static Surface CoincidentSurface(string id, string name, bool reversed)
+    {
+        List<Vertex> vertices = new()
         {
-            [0] = "Invalid Mapping", [1] = new[] { new DragonZoneGoo(zone) },
-            [2] = 0d, [3] = "Suburbs", [4] = Array.Empty<DragonSourceSystemGoo>(),
-            [5] = new[] { new DragonSupplySystemGoo(electric) }, [6] = InvalidZoneIndex,
+            new Vertex(0, 0, 0),
+            new Vertex(4, 0, 0),
+            new Vertex(4, 0, 3),
+            new Vertex(0, 0, 3),
+        };
+        if (reversed)
+        {
+            vertices.Reverse();
+        }
+
+        return new Surface(
+            new EntityId(id),
+            name,
+            SurfaceType.Wall,
+            new NoMassConstruction("Shared Wall", 0.4),
+            SurfaceBoundary.Outdoors,
+            new PlanarPolygon(vertices));
+    }
+
+    private static PlanarPolygon Rectangle(double minimumX, double minimumY, double maximumX, double maximumY)
+    {
+        return new PlanarPolygon(new List<Vertex>
+        {
+            new Vertex(minimumX, minimumY, 0),
+            new Vertex(maximumX, minimumY, 0),
+            new Vertex(maximumX, maximumY, 0),
+            new Vertex(minimumX, maximumY, 0),
         });
-        GH_Component invalidMapping = Component(assembly, "EnergyModelComponent");
-        InvokeSolve(invalidMapping, invalidMappingAccess);
-        Assert.False(invalidMappingAccess.Outputs.ContainsKey(0));
-        Assert.Contains(
-            invalidMapping.RuntimeMessages(GH_RuntimeMessageLevel.Error),
-            message => message.Contains("zero-based zone indices", StringComparison.Ordinal));
     }
 
     private static DragonSourceSystemGoo Source(

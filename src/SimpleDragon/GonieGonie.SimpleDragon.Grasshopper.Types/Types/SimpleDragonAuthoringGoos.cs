@@ -61,24 +61,24 @@ public sealed class SimpleDragonZoneDefinitionGoo : SimpleDragonGoo<ZoneDefiniti
 }
 
 /// <summary>
-/// Grasshopper wrapper for an ERV assignment, including the number of identical units.
+/// Grasshopper wrapper for an ERV owned by one Zone, including the number of identical units.
 /// </summary>
-public sealed class SimpleDragonVentilationAssignmentGoo
+public sealed class SimpleDragonZoneErvGoo
     : SimpleDragonGoo<VentilationAssignment>
 {
-    public SimpleDragonVentilationAssignmentGoo()
+    public SimpleDragonZoneErvGoo()
     {
     }
 
-    public SimpleDragonVentilationAssignmentGoo(VentilationAssignment value)
+    public SimpleDragonZoneErvGoo(VentilationAssignment value)
         : base(value)
     {
     }
 
-    public override string TypeName => "SimpleDragon Ventilation Assignment";
+    public override string TypeName => "SimpleDragon Zone ERV";
 
     public override string TypeDescription =>
-        "A SimpleDragon energy-recovery ventilator assignment with a unit count.";
+        "An ERV owned by a SimpleDragon Zone, including its positive unit count.";
 
     public override bool CastFrom(object source)
     {
@@ -86,9 +86,6 @@ public sealed class SimpleDragonVentilationAssignmentGoo
         {
             case VentilationSystem system:
                 Value = CreateSingleUnitAssignment(system);
-                return true;
-            case SimpleDragonEnergyRecoveryVentilatorGoo { Value: not null } goo:
-                Value = CreateSingleUnitAssignment(goo.Value);
                 return true;
             case GH_ObjectWrapper { Value: VentilationSystem wrapped }:
                 Value = CreateSingleUnitAssignment(wrapped);
@@ -99,13 +96,13 @@ public sealed class SimpleDragonVentilationAssignmentGoo
     }
 
     protected override SimpleDragonGoo<VentilationAssignment> Create(VentilationAssignment value) =>
-        new SimpleDragonVentilationAssignmentGoo(value);
+        new SimpleDragonZoneErvGoo(value);
 
     protected override SimpleDragonGoo<VentilationAssignment> CreateEmpty() =>
-        new SimpleDragonVentilationAssignmentGoo();
+        new SimpleDragonZoneErvGoo();
 
     protected override string DisplayText(VentilationAssignment value) =>
-        $"Ventilation {value.VentilationSystemId} (x{value.Count})";
+        $"Zone ERV {value.VentilationSystemId} (x{value.Count})";
 
     private static VentilationAssignment CreateSingleUnitAssignment(VentilationSystem system)
     {

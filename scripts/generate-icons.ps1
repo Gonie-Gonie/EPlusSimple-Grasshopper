@@ -45,17 +45,17 @@ $products = @(
         Components = @(
             (New-ComponentIcon 'InvisibleDragonVersionComponent' 0 'none'),
             (New-ComponentIcon 'OpaqueMaterialComponent' 1 'none'),
+            (New-ComponentIcon 'ConstructionLayerComponent' 2 'layer'),
             (New-ComponentIcon 'LayeredConstructionComponent' 2 'none'),
             (New-ComponentIcon 'NoMassConstructionComponent' 2 'membrane'),
             (New-ComponentIcon 'ConstantProfileComponent' 3 'none'),
-            (New-ComponentIcon 'SurfaceFromPolylineComponent' 4 'polyline'),
+            (New-ComponentIcon 'GlazingComponent' 3 'glazing'),
+            (New-ComponentIcon 'WindowFromPolylineComponent' 4 'window'),
+            (New-ComponentIcon 'DoorFromPolylineComponent' 4 'door'),
+            (New-ComponentIcon 'SurfaceComponent' 4 'surface'),
             (New-ComponentIcon 'ZoneComponent' 6 'none'),
             (New-ComponentIcon 'EnergyModelComponent' 7 'assemble'),
-            (New-ComponentIcon 'CompileIdfComponent' 8 'compile'),
             (New-ComponentIcon 'CompileInvisibleDragonComponent' 9 'build'),
-            (New-ComponentIcon 'ValidateIdfComponent' 9 'none'),
-            (New-ComponentIcon 'PrepareEnergyPlusRuntimeComponent' 10 'none'),
-            (New-ComponentIcon 'RunEnergyPlusComponent' 11 'none'),
             (New-ComponentIcon 'ManagedRunEnergyPlusComponent' 11 'batch'),
             (New-ComponentIcon 'ReadEnergyPlusResultsComponent' 8 'read'),
             (New-ComponentIcon 'EnergyPlusResultSummaryComponent' 15 'none'),
@@ -79,15 +79,17 @@ $products = @(
             (New-ComponentIcon 'RadiantFloorComponent' 13 'radiant-floor'),
             (New-ComponentIcon 'ElectricRadiantFloorComponent' 13 'electric-floor'),
             (New-ComponentIcon 'EnergyRecoveryVentilatorComponent' 12 'erv'),
-            (New-ComponentIcon 'PhotovoltaicPanelComponent' 7 'photovoltaic'),
-            (New-ComponentIcon 'SupplyGroupAssignmentComponent' 12 'assign'))
+            (New-ComponentIcon 'PhotovoltaicPanelComponent' 7 'photovoltaic'))
         Parameters = @(
             (New-ComponentIcon 'DragonMaterialParam' 1 'none'),
+            (New-ComponentIcon 'DragonLayerParam' 2 'layer'),
             (New-ComponentIcon 'DragonConstructionParam' 2 'none'),
+            (New-ComponentIcon 'DragonGlazingParam' 3 'glazing'),
             (New-ComponentIcon 'DragonScheduleParam' 3 'none'),
             (New-ComponentIcon 'DragonProfileParam' 3 'profile'),
-            (New-ComponentIcon 'DragonSurfaceParam' 4 'polyline'),
-            (New-ComponentIcon 'DragonZoneParam' 6 'none'),
+            (New-ComponentIcon 'DragonOpeningParam' 4 'window'),
+            (New-ComponentIcon 'DragonSurfaceParam' 4 'surface'),
+            (New-ComponentIcon 'DragonZoneDefinitionParam' 6 'none'),
             (New-ComponentIcon 'DragonEnergyModelParam' 7 'assemble'),
             (New-ComponentIcon 'DragonSourceSystemParam' 13 'network'),
             (New-ComponentIcon 'DragonSupplySystemParam' 12 'assign'),
@@ -122,10 +124,10 @@ $products = @(
         Components = @(
             (New-ComponentIcon 'SimpleDragonVersionComponent' 0 'none'),
             (New-ComponentIcon 'SimpleDragonMaterialComponent' 1 'none'),
+            (New-ComponentIcon 'SimpleDragonSurfaceConstructionLayerComponent' 2 'layer'),
             (New-ComponentIcon 'SimpleDragonSurfaceConstructionComponent' 2 'none'),
             (New-ComponentIcon 'SimpleDragonFenestrationConstructionComponent' 3 'none'),
             (New-ComponentIcon 'LookupUsageProfileComponent' 4 'none'),
-            (New-ComponentIcon 'ExtractSimpleDragonZonesComponent' 6 'extract'),
             (New-ComponentIcon 'CreateSimpleDragonOpeningComponent' 5 'polyline'),
             (New-ComponentIcon 'CreateSimpleDragonZoneComponent' 6 'membrane'),
             (New-ComponentIcon 'SimpleDragonHeatPumpComponent' 7 'heat-pump'),
@@ -143,14 +145,9 @@ $products = @(
             (New-ComponentIcon 'SimpleDragonElectricRadiantFloorComponent' 7 'electric-floor'),
             (New-ComponentIcon 'SimpleDragonEnergyRecoveryVentilatorComponent' 7 'erv'),
             (New-ComponentIcon 'SimpleDragonPhotovoltaicPanelComponent' 7 'photovoltaic'),
-            (New-ComponentIcon 'AssignSimpleDragonVentilationSystemsComponent' 7 'assign-air'),
-            (New-ComponentIcon 'AssignSimpleDragonSupplySystemsComponent' 7 'assign-supply'),
-            (New-ComponentIcon 'CreateSimpleDragonVentilationAssignmentComponent' 12 'ventilation-link'),
-            (New-ComponentIcon 'AssembleGreenRetrofitModelComponent' 8 'assemble'),
             (New-ComponentIcon 'CreateSimpleDragonModelComponent' 8 'model-compose'),
             (New-ComponentIcon 'ReadGreenRetrofitModelComponent' 8 'read-model'),
             (New-ComponentIcon 'WriteGreenRetrofitModelComponent' 8 'write-model'),
-            (New-ComponentIcon 'ConvertGreenRetrofitModelComponent' 9 'convert'),
             (New-ComponentIcon 'PrepareSimpleDragonSimulationComponent' 9 'compile'),
             (New-ComponentIcon 'BuildGreenRetrofitResultComponent' 10 'build'),
             (New-ComponentIcon 'ReadGreenRetrofitResultComponent' 10 'read-result'),
@@ -160,10 +157,11 @@ $products = @(
             (New-ComponentIcon 'GreenRetrofitMonthlyLinePlotComponent' 13 'none'),
             (New-ComponentIcon 'GreenRetrofitMonthlyBarPlotComponent' 14 'none'),
             (New-ComponentIcon 'ExportGreenRetrofitCsvComponent' 15 'none'),
-            (New-ComponentIcon 'RunSimpleDragonBatchComponent' 8 'batch'),
+            (New-ComponentIcon 'SimpleDragonBatchCaseComponent' 9 'batch-case'),
             (New-ComponentIcon 'ManagedRunSimpleDragonBatchComponent' 9 'managed-batch'))
         Parameters = @(
             (New-ComponentIcon 'SimpleDragonMaterialParam' 1 'none'),
+            (New-ComponentIcon 'SimpleDragonSurfaceConstructionLayerParam' 2 'layer'),
             (New-ComponentIcon 'SimpleDragonSurfaceConstructionParam' 2 'none'),
             (New-ComponentIcon 'SimpleDragonFenestrationConstructionParam' 3 'none'),
             (New-ComponentIcon 'SimpleDragonUsageProfileParam' 4 'none'),
@@ -173,11 +171,11 @@ $products = @(
             (New-ComponentIcon 'SimpleDragonZoneDefinitionParam' 6 'assemble'),
             (New-ComponentIcon 'SimpleDragonSourceSystemParam' 7 'network'),
             (New-ComponentIcon 'SimpleDragonSupplySystemParam' 7 'assign'),
-            (New-ComponentIcon 'SimpleDragonEnergyRecoveryVentilatorParam' 7 'erv'),
-            (New-ComponentIcon 'SimpleDragonVentilationAssignmentParam' 12 'ventilation-link'),
+            (New-ComponentIcon 'SimpleDragonZoneErvParam' 7 'erv'),
             (New-ComponentIcon 'SimpleDragonPhotovoltaicPanelParam' 7 'photovoltaic'),
             (New-ComponentIcon 'GreenRetrofitModelParam' 8 'none'),
-            (New-ComponentIcon 'GreenRetrofitResultParam' 10 'none'))
+            (New-ComponentIcon 'GreenRetrofitResultParam' 10 'none'),
+            (New-ComponentIcon 'SimpleDragonBatchCaseParam' 9 'batch'))
     })
 
 function New-TransparentBitmap {
@@ -532,6 +530,78 @@ function Draw-Overlay {
                     $Graphics.DrawLine($primaryPen, 25, $y, 71, $y)
                 }
                 $Graphics.DrawLine($accentPen, 28, 67, 68, 28)
+            }
+            'layer' {
+                $Graphics.FillPolygon($primaryBrush, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(16, 29), [System.Drawing.PointF]::new(65, 17),
+                    [System.Drawing.PointF]::new(81, 29), [System.Drawing.PointF]::new(32, 42)))
+                $Graphics.FillPolygon($secondaryBrush, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(16, 45), [System.Drawing.PointF]::new(65, 33),
+                    [System.Drawing.PointF]::new(81, 45), [System.Drawing.PointF]::new(32, 58)))
+                $Graphics.FillPolygon($accentBrush, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(16, 61), [System.Drawing.PointF]::new(65, 49),
+                    [System.Drawing.PointF]::new(81, 61), [System.Drawing.PointF]::new(32, 74)))
+                foreach ($offset in @(0, 16, 32)) {
+                    $Graphics.DrawPolygon($thinInkPen, [System.Drawing.PointF[]]@(
+                        [System.Drawing.PointF]::new(16, 29 + $offset),
+                        [System.Drawing.PointF]::new(65, 17 + $offset),
+                        [System.Drawing.PointF]::new(81, 29 + $offset),
+                        [System.Drawing.PointF]::new(32, 42 + $offset)))
+                }
+            }
+            'glazing' {
+                $Graphics.FillRectangle($primaryBrush, 19, 19, 58, 58)
+                $Graphics.DrawRectangle($inkPen, 19, 19, 58, 58)
+                $Graphics.DrawLine($neutralPen, 48, 22, 48, 74)
+                $Graphics.DrawLine($neutralPen, 22, 48, 74, 48)
+                $Graphics.FillEllipse($accentBrush, 65, 10, 20, 20)
+                $Graphics.DrawEllipse($thinInkPen, 65, 10, 20, 20)
+                $Graphics.DrawLine($accentPen, 16, 78, 78, 16)
+            }
+            'window' {
+                $Graphics.FillRectangle($neutralBrush, 14, 16, 68, 66)
+                $Graphics.DrawRectangle($inkPen, 14, 16, 68, 66)
+                $Graphics.FillRectangle($primaryBrush, 25, 27, 46, 42)
+                $Graphics.DrawRectangle($thinInkPen, 25, 27, 46, 42)
+                $Graphics.DrawLine($neutralPen, 48, 29, 48, 67)
+                $Graphics.DrawLine($neutralPen, 27, 48, 69, 48)
+                $Graphics.DrawLine($accentPen, 19, 78, 77, 78)
+            }
+            'door' {
+                $Graphics.FillRectangle($neutralBrush, 22, 14, 52, 68)
+                $Graphics.DrawRectangle($inkPen, 22, 14, 52, 68)
+                $Graphics.FillPolygon($primaryBrush, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(29, 22), [System.Drawing.PointF]::new(61, 30),
+                    [System.Drawing.PointF]::new(61, 75), [System.Drawing.PointF]::new(29, 75)))
+                $Graphics.DrawPolygon($thinInkPen, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(29, 22), [System.Drawing.PointF]::new(61, 30),
+                    [System.Drawing.PointF]::new(61, 75), [System.Drawing.PointF]::new(29, 75)))
+                $Graphics.FillEllipse($accentBrush, 51, 49, 8, 8)
+                $Graphics.DrawArc($secondaryPen, 43, 23, 38, 55, -90, 90)
+            }
+            'surface' {
+                $face = [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(17, 69), [System.Drawing.PointF]::new(29, 20),
+                    [System.Drawing.PointF]::new(79, 28), [System.Drawing.PointF]::new(68, 77))
+                $Graphics.FillPolygon($secondaryBrush, $face)
+                $Graphics.DrawPolygon($inkPen, $face)
+                $Graphics.DrawLine($primaryPen, 24, 49, 73, 56)
+                $Graphics.DrawLine($accentPen, 29, 70, 66, 27)
+                foreach ($point in @(@(17,69), @(29,20), @(79,28), @(68,77))) {
+                    $Graphics.FillEllipse($neutralBrush, $point[0] - 4, $point[1] - 4, 8, 8)
+                }
+            }
+            'batch-case' {
+                $Graphics.FillRectangle($neutralBrush, 18, 14, 60, 68)
+                $Graphics.DrawRectangle($inkPen, 18, 14, 60, 68)
+                $Graphics.FillRectangle($primaryBrush, 27, 25, 20, 17)
+                $Graphics.DrawRectangle($thinInkPen, 27, 25, 20, 17)
+                $Graphics.FillRectangle($secondaryBrush, 49, 33, 20, 17)
+                $Graphics.DrawRectangle($thinInkPen, 49, 33, 20, 17)
+                $Graphics.DrawLine($accentPen, 27, 59, 67, 59)
+                $Graphics.DrawLine($accentPen, 27, 69, 56, 69)
+                $Graphics.FillEllipse($hotBrush, 64, 62, 20, 20)
+                $Graphics.DrawEllipse($thinInkPen, 64, 62, 20, 20)
             }
             'polyline' {
                 $Graphics.DrawLines($neutralPen, [System.Drawing.PointF[]]@(

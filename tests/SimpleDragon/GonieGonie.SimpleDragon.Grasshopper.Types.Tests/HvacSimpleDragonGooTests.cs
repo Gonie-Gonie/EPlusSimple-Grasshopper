@@ -63,7 +63,7 @@ public sealed class HvacSimpleDragonGooTests
     }
 
     [Fact]
-    public void EnergyRecoveryVentilatorAndPhotovoltaicPanelGoosPreserveEveryField()
+    public void OwnedZoneErvAndPhotovoltaicPanelGoosPreserveEveryField()
     {
         var ventilator = new VentilationSystem(
             "High Performance ERV",
@@ -79,14 +79,17 @@ public sealed class HvacSimpleDragonGooTests
             31.2d,
             new EntityId("PV-GOO"));
 
-        var ventilatorGoo = new SimpleDragonEnergyRecoveryVentilatorGoo(ventilator);
-        var ventilatorDuplicate = Assert.IsType<SimpleDragonEnergyRecoveryVentilatorGoo>(
-            ventilatorGoo.Duplicate());
-        SimpleDragonEnergyRecoveryVentilatorGoo ventilatorArchived = ArchiveRoundTrip(
-            ventilatorGoo,
-            new SimpleDragonEnergyRecoveryVentilatorGoo());
-        AssertVentilatorEquivalent(ventilator, ventilatorDuplicate.Value);
-        AssertVentilatorEquivalent(ventilator, ventilatorArchived.Value);
+        var ownedErv = new VentilationAssignment(ventilator.Id.Value, 3, ventilator);
+        var ownedErvGoo = new SimpleDragonZoneErvGoo(ownedErv);
+        var ownedErvDuplicate = Assert.IsType<SimpleDragonZoneErvGoo>(
+            ownedErvGoo.Duplicate());
+        SimpleDragonZoneErvGoo ownedErvArchived = ArchiveRoundTrip(
+            ownedErvGoo,
+            new SimpleDragonZoneErvGoo());
+        Assert.Equal(3, ownedErvDuplicate.Value.Count);
+        Assert.Equal(3, ownedErvArchived.Value.Count);
+        AssertVentilatorEquivalent(ventilator, ownedErvDuplicate.Value.VentilationSystem!);
+        AssertVentilatorEquivalent(ventilator, ownedErvArchived.Value.VentilationSystem!);
 
         var panelGoo = new SimpleDragonPhotovoltaicPanelGoo(panel);
         var panelDuplicate = Assert.IsType<SimpleDragonPhotovoltaicPanelGoo>(panelGoo.Duplicate());
@@ -95,12 +98,6 @@ public sealed class HvacSimpleDragonGooTests
             new SimpleDragonPhotovoltaicPanelGoo());
         AssertPanelEquivalent(panel, panelDuplicate.Value);
         AssertPanelEquivalent(panel, panelArchived.Value);
-
-        var ventilatorCast = new SimpleDragonEnergyRecoveryVentilatorGoo();
-        Assert.True(ventilatorCast.CastFrom(ventilator));
-        VentilationSystem? castVentilator = null;
-        Assert.True(ventilatorCast.CastTo(ref castVentilator));
-        Assert.Same(ventilator, castVentilator);
 
         var panelCast = new SimpleDragonPhotovoltaicPanelGoo();
         Assert.True(panelCast.CastFrom(panel));
@@ -116,7 +113,7 @@ public sealed class HvacSimpleDragonGooTests
         {
             new SimpleDragonSourceSystemGoo(),
             new SimpleDragonSupplySystemGoo(),
-            new SimpleDragonEnergyRecoveryVentilatorGoo(),
+            new SimpleDragonZoneErvGoo(),
             new SimpleDragonPhotovoltaicPanelGoo(),
         };
 
@@ -136,15 +133,15 @@ public sealed class HvacSimpleDragonGooTests
         SimpleDragonSupplySystemGoo archivedSupply = ArchiveRoundTrip(
             new SimpleDragonSupplySystemGoo(),
             new SimpleDragonSupplySystemGoo());
-        SimpleDragonEnergyRecoveryVentilatorGoo archivedVentilator = ArchiveRoundTrip(
-            new SimpleDragonEnergyRecoveryVentilatorGoo(),
-            new SimpleDragonEnergyRecoveryVentilatorGoo());
+        SimpleDragonZoneErvGoo archivedOwnedErv = ArchiveRoundTrip(
+            new SimpleDragonZoneErvGoo(),
+            new SimpleDragonZoneErvGoo());
         SimpleDragonPhotovoltaicPanelGoo archivedPanel = ArchiveRoundTrip(
             new SimpleDragonPhotovoltaicPanelGoo(),
             new SimpleDragonPhotovoltaicPanelGoo());
         Assert.Null(archivedSource.Value);
         Assert.Null(archivedSupply.Value);
-        Assert.Null(archivedVentilator.Value);
+        Assert.Null(archivedOwnedErv.Value);
         Assert.Null(archivedPanel.Value);
     }
 
@@ -209,16 +206,14 @@ public sealed class HvacSimpleDragonGooTests
         {
             typeof(SimpleDragonSourceSystemGoo),
             typeof(SimpleDragonSupplySystemGoo),
-            typeof(SimpleDragonEnergyRecoveryVentilatorGoo),
-            typeof(SimpleDragonVentilationAssignmentGoo),
+            typeof(SimpleDragonZoneErvGoo),
             typeof(SimpleDragonPhotovoltaicPanelGoo),
         };
         Type[] expectedParameters =
         {
             typeof(SimpleDragonSourceSystemParam),
             typeof(SimpleDragonSupplySystemParam),
-            typeof(SimpleDragonEnergyRecoveryVentilatorParam),
-            typeof(SimpleDragonVentilationAssignmentParam),
+            typeof(SimpleDragonZoneErvParam),
             typeof(SimpleDragonPhotovoltaicPanelParam),
         };
         Type[] exported = typeof(SimpleDragonSourceSystemGoo).Assembly.GetExportedTypes();

@@ -32,10 +32,27 @@ public sealed class DragonMaterialParam : DragonParam<Types.DragonMaterialGoo>
     public override Guid ComponentGuid => new("02652d26-0b4e-467f-b079-c660bb7243c2");
 }
 
+public sealed class DragonLayerParam : DragonParam<Types.DragonLayerGoo>
+{
+    public DragonLayerParam()
+        : base(
+            "InvisibleDragon Construction Layer",
+            "Layer",
+            "One material and thickness in an InvisibleDragon opaque construction.") { }
+    public override Guid ComponentGuid => new("bf8556b8-ce25-4f0e-8f50-3ca49463e9d4");
+}
+
 public sealed class DragonConstructionParam : DragonParam<Types.DragonConstructionGoo>
 {
     public DragonConstructionParam() : base("InvisibleDragon Construction", "Construction", "An InvisibleDragon surface construction.") { }
     public override Guid ComponentGuid => new("3e7d571e-6914-47b1-b130-7bd1b2121a86");
+}
+
+public sealed class DragonGlazingParam : DragonParam<Types.DragonGlazingGoo>
+{
+    public DragonGlazingParam()
+        : base("InvisibleDragon Glazing", "Glazing", "An InvisibleDragon transparent opening construction.") { }
+    public override Guid ComponentGuid => new("a22adfb7-d7cb-4b8a-bda5-13d07626f405");
 }
 
 public sealed class DragonScheduleParam : DragonParam<Types.DragonScheduleGoo>
@@ -56,10 +73,21 @@ public sealed class DragonSurfaceParam : DragonParam<Types.DragonSurfaceGoo>
     public override Guid ComponentGuid => new("1ce3f493-c9c4-4549-893a-0a950998da62");
 }
 
-public sealed class DragonZoneParam : DragonParam<Types.DragonZoneGoo>
+public sealed class DragonOpeningParam : DragonParam<Types.DragonOpeningGoo>
 {
-    public DragonZoneParam() : base("InvisibleDragon Zone", "Zone", "An InvisibleDragon thermal zone.") { }
-    public override Guid ComponentGuid => new("cff53fa0-0cc2-4c50-832e-fdf82691b9cc");
+    public DragonOpeningParam()
+        : base("InvisibleDragon Opening", "Opening", "An InvisibleDragon polygonal window or door.") { }
+    public override Guid ComponentGuid => new("d12ac46e-0e15-4d41-8643-5771940991f7");
+}
+
+public sealed class DragonZoneDefinitionParam : DragonParam<Types.DragonZoneDefinitionGoo>
+{
+    public DragonZoneDefinitionParam()
+        : base(
+            "InvisibleDragon Zone Definition",
+            "Zone",
+            "An InvisibleDragon thermal zone with its owned HVAC and ventilation systems.") { }
+    public override Guid ComponentGuid => new("999ffa44-88d8-4652-a767-c662f877b709");
 }
 
 public sealed class DragonEnergyModelParam : DragonParam<Types.DragonEnergyModelGoo>

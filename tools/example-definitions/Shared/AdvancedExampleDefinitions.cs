@@ -154,7 +154,10 @@ internal static class AdvancedExampleDefinitions
         GraphNode concreteThickness = graph.Slider(7, "Concrete 0.200 m", 0.2m, 0.01m, 0.5m, 280, 480);
         GraphNode insulationThickness = graph.Slider(8, "Insulation 0.120 m", 0.12m, 0.01m, 0.5m, 280, 570);
         GraphNode finishThickness = graph.Slider(9, "Finish 0.013 m", 0.013m, 0.001m, 0.1m, 280, 660);
-        GraphNode construction = graph.Component(10, Catalog.InvisibleConstruction, 650, 240);
+        GraphNode concreteLayer = graph.Component(20, Catalog.InvisibleLayer, 520, 60);
+        GraphNode insulationLayer = graph.Component(21, Catalog.InvisibleLayer, 520, 200);
+        GraphNode finishLayer = graph.Component(22, Catalog.InvisibleLayer, 520, 340);
+        GraphNode construction = graph.Component(10, Catalog.InvisibleConstruction, 800, 240);
         GraphNode noMass = graph.Component(11, Catalog.InvisibleNoMass, 650, 500);
         GraphNode profile = graph.Component(12, Catalog.InvisibleProfile, 650, 650);
         GraphNode uValue = graph.Panel(13, "Layered U-value", string.Empty, 980, 270);
@@ -165,14 +168,16 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(concreteName, null, concrete, 0);
         graph.Connect(insulationName, null, insulation, 0);
         graph.Connect(finishName, null, finish, 0);
-        foreach (GraphNode material in new[] { concrete, insulation, finish })
+        graph.Connect(concrete, 0, concreteLayer, 0);
+        graph.Connect(concreteThickness, null, concreteLayer, 1);
+        graph.Connect(insulation, 0, insulationLayer, 0);
+        graph.Connect(insulationThickness, null, insulationLayer, 1);
+        graph.Connect(finish, 0, finishLayer, 0);
+        graph.Connect(finishThickness, null, finishLayer, 1);
+        foreach (GraphNode layer in new[] { concreteLayer, insulationLayer, finishLayer })
         {
-            graph.Connect(material, 0, construction, 1);
-        }
-
-        foreach (GraphNode thickness in new[] { concreteThickness, insulationThickness, finishThickness })
-        {
-            graph.Connect(thickness, null, construction, 2);
+            graph.Connect(layer, 0, construction, 1);
+            graph.ExpectOutput(layer, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonLayerGoo");
         }
 
         graph.Connect(construction, 1, uValue, null);
@@ -194,10 +199,31 @@ internal static class AdvancedExampleDefinitions
         var graph = new ScenarioGraphBuilder(server, "12000000");
         GraphNode material = graph.Component(1, Catalog.InvisibleMaterial, 80, 80);
         GraphNode thickness = graph.Slider(2, "Envelope 0.200 m", 0.2m, 0.01m, 0.5m, 100, 230);
-        GraphNode construction = graph.Component(3, Catalog.InvisibleConstruction, 360, 120);
+        GraphNode layer = graph.Component(8, Catalog.InvisibleLayer, 360, 120);
+        GraphNode construction = graph.Component(3, Catalog.InvisibleConstruction, 650, 120);
         GraphNode profile = graph.Component(4, Catalog.InvisibleProfile, 360, 600);
-        graph.Connect(material, 0, construction, 1);
-        graph.Connect(thickness, null, construction, 2);
+        GraphNode glazing = graph.Component(5, Catalog.InvisibleGlazing, 360, 800);
+        GraphNode windowBoundary = graph.Curves(
+            6,
+            "South window boundary",
+            new[]
+            {
+                ClosedCurve(new[]
+                {
+                    new Point3d(2, 0, 1),
+                    new Point3d(6, 0, 1),
+                    new Point3d(6, 0, 2.2),
+                    new Point3d(2, 0, 2.2),
+                }),
+            },
+            80,
+            900);
+        GraphNode window = graph.Component(7, Catalog.InvisibleWindow, 650, 850);
+        graph.Connect(material, 0, layer, 0);
+        graph.Connect(thickness, null, layer, 1);
+        graph.Connect(layer, 0, construction, 1);
+        graph.Connect(windowBoundary, null, window, 0);
+        graph.Connect(glazing, 0, window, 2);
 
         Point3d[][] polygons =
         {
@@ -229,6 +255,7 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(floorType, null, surfaces[0], 2);
         graph.Connect(groundBoundary, null, surfaces[0], 4);
         graph.Connect(ceilingType, null, surfaces[1], 2);
+        graph.Connect(window, 0, surfaces[2], 5);
 
         GraphNode zone = graph.Component(50, Catalog.InvisibleZone, 980, 560);
         foreach (GraphNode surface in surfaces)
@@ -245,15 +272,13 @@ internal static class AdvancedExampleDefinitions
         GraphNode photovoltaic = graph.Component(65, Catalog.InvisiblePv, 360, 1680);
         graph.Connect(heatPump, 0, airHandler, 1);
         graph.Connect(boiler, 0, radiantFloor, 1);
+        graph.Connect(airHandler, 0, zone, 6);
+        graph.Connect(radiantFloor, 0, zone, 6);
+        graph.Connect(ventilator, 0, zone, 7);
 
         GraphNode model = graph.Component(70, Catalog.InvisibleModel, 1320, 900);
         graph.Connect(zone, 0, model, 1);
-        graph.Connect(heatPump, 0, model, 4);
-        graph.Connect(boiler, 0, model, 4);
-        graph.Connect(airHandler, 0, model, 5);
-        graph.Connect(radiantFloor, 0, model, 5);
-        graph.Connect(ventilator, 0, model, 8);
-        graph.Connect(photovoltaic, 0, model, 10);
+        graph.Connect(photovoltaic, 0, model, 4);
         GraphNode compile = graph.Component(71, Catalog.InvisibleCompile, 1650, 900);
         GraphNode idfText = graph.Panel(80, "Compiled IDF", string.Empty, 1960, 820);
         GraphNode valid = graph.Panel(81, "Managed IDF validation", string.Empty, 1960, 1020);
@@ -262,7 +287,10 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(compile, 1, idfText, null);
         graph.Connect(compile, 2, valid, null);
         graph.Connect(compile, 3, diagnostics, null);
-        graph.ExpectOutput(zone, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonZoneGoo");
+        graph.ExpectOutput(glazing, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonGlazingGoo");
+        graph.ExpectOutput(layer, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonLayerGoo");
+        graph.ExpectOutput(window, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonOpeningGoo");
+        graph.ExpectOutput(zone, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonZoneDefinitionGoo");
         graph.ExpectOutput(airHandler, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSupplySystemGoo");
         graph.ExpectOutput(radiantFloor, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSupplySystemGoo");
         graph.ExpectOutput(model, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonEnergyModelGoo");
@@ -296,14 +324,18 @@ internal static class AdvancedExampleDefinitions
         }
 
         GraphNode construction = graph.Component(30, Catalog.SimpleConstruction, 680, 230);
-        foreach (GraphNode material in materials)
+        GraphNode[] layers = new GraphNode[3];
+        for (int index = 0; index < layers.Length; index++)
         {
-            graph.Connect(material, 0, construction, 1);
-        }
-
-        foreach (GraphNode layerThickness in thicknesses)
-        {
-            graph.Connect(layerThickness, null, construction, 2);
+            layers[index] = graph.Component(23 + index, Catalog.SimpleLayer, 500, 60 + (index * 150));
+            graph.Connect(materials[index], 0, layers[index], 0);
+            graph.Connect(thicknesses[index], null, layers[index], 1);
+            graph.Connect(layers[index], 0, construction, 1);
+            graph.ExpectOutput(
+                layers[index],
+                0,
+                1,
+                "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionLayerGoo");
         }
 
         GraphNode fenestration = graph.Component(31, Catalog.SimpleFenestration, 680, 520);
@@ -335,7 +367,7 @@ internal static class AdvancedExampleDefinitions
         graph.ExpectOutput(airHandler, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSupplySystemGoo");
         graph.ExpectOutput(radiator, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSupplySystemGoo");
         graph.ExpectOutput(fanCoil, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSupplySystemGoo");
-        graph.ExpectOutput(ventilator, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonEnergyRecoveryVentilatorGoo");
+        graph.ExpectOutput(ventilator, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneErvGoo");
         graph.ExpectOutput(photovoltaic, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonPhotovoltaicPanelGoo");
         graph.ExpectOutput(systems, null, 3);
         return graph.Build(
@@ -377,13 +409,15 @@ internal static class AdvancedExampleDefinitions
         GraphNode profile = graph.Component(7, Catalog.SimpleProfile, 620, 40);
         GraphNode material = graph.Component(8, Catalog.SimpleMaterial, 330, 120);
         GraphNode thickness = graph.Slider(9, "Envelope 0.200 m", 0.2m, 0.01m, 0.5m, 350, 290);
-        GraphNode construction = graph.Component(10, Catalog.SimpleConstruction, 620, 160);
+        GraphNode layer = graph.Component(14, Catalog.SimpleLayer, 620, 160);
+        GraphNode construction = graph.Component(10, Catalog.SimpleConstruction, 900, 160);
         GraphNode fenestration = graph.Component(11, Catalog.SimpleFenestration, 620, 360);
         GraphNode westOpening = graph.Component(12, Catalog.SimpleOpening, 410, 430);
         GraphNode eastOpening = graph.Component(13, Catalog.SimpleOpening, 410, 900);
         graph.Connect(profileName, null, profile, 0);
-        graph.Connect(material, 0, construction, 1);
-        graph.Connect(thickness, null, construction, 2);
+        graph.Connect(material, 0, layer, 0);
+        graph.Connect(thickness, null, layer, 1);
+        graph.Connect(layer, 0, construction, 1);
         graph.Connect(westCurve, null, westOpening, 0);
         graph.Connect(eastCurve, null, eastOpening, 0);
         graph.Connect(fenestration, 0, westOpening, 3);
@@ -407,6 +441,7 @@ internal static class AdvancedExampleDefinitions
         else
         {
             radiator = graph.Component(24, Catalog.SimpleElectricRadiator, 1080, 370);
+            ventilator = graph.Component(25, Catalog.SimpleErv, 1080, 570);
         }
 
         GraphNode westZone = graph.Component(30, Catalog.SimpleZone, 1390, 250);
@@ -438,7 +473,9 @@ internal static class AdvancedExampleDefinitions
             }
         }
 
+        GraphNode modelName = graph.Panel(28, "Model name", "Two-Zone Office", 1460, 120);
         GraphNode model = graph.Component(32, Catalog.SimpleModel, 1770, 500);
+        graph.Connect(modelName, null, model, 0);
         graph.Connect(westZone, 0, model, 1);
         graph.Connect(eastZone, 0, model, 1);
         if (photovoltaic is not null)
@@ -459,6 +496,11 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(prepare, 3, success, null);
         graph.ExpectOutput(westOpening, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
         graph.ExpectOutput(eastOpening, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
+        graph.ExpectOutput(
+            layer,
+            0,
+            1,
+            "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionLayerGoo");
         graph.ExpectOutput(westZone, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneDefinitionGoo");
         graph.ExpectOutput(eastZone, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneDefinitionGoo");
         graph.ExpectOutput(model, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitModelGoo");
@@ -534,15 +576,37 @@ internal static class AdvancedExampleDefinitions
             graph.ExpectOutput(runSuccess, null, 1);
             graph.ExpectBoolean(run, 2, false);
 
+            GraphNode batchCaseId = graph.Panel(140, "Batch case ID", "two-zone-office", 2750, 1320);
+            GraphNode batchCase = graph.Component(141, Catalog.SimpleBatchCase, 3100, 1280);
+            GraphNode batchParallel = graph.Slider(142, "Batch parallel limit", 1m, 1m, 16m, 3100, 1430);
+            GraphNode batchRun = graph.Boolean(143, "Run batch", false, 3100, 1510);
+            GraphNode batchCancel = graph.Boolean(144, "Cancel batch", false, 3100, 1590);
+            GraphNode managedBatch = graph.Component(145, Catalog.SimpleManagedBatch, 3480, 1370);
+            GraphNode batchState = graph.Panel(146, "Managed batch state", string.Empty, 3850, 1810);
+            GraphNode batchComplete = graph.Panel(147, "Managed batch complete", string.Empty, 4220, 1810);
+            graph.Connect(model, 0, batchCase, 0);
+            graph.Connect(batchCaseId, null, batchCase, 1);
+            graph.Connect(batchCase, 0, managedBatch, 0);
+            graph.Connect(batchParallel, null, managedBatch, 1);
+            graph.Connect(batchRun, null, managedBatch, 2);
+            graph.Connect(batchCancel, null, managedBatch, 3);
+            graph.Connect(managedBatch, 0, batchState, null);
+            graph.Connect(managedBatch, 5, batchComplete, null);
+            graph.ExpectOutput(
+                batchCase,
+                0,
+                1,
+                "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonBatchCaseGoo");
+            graph.ExpectOutput(managedBatch, 0, 1);
+            graph.ExpectOutput(batchState, null, 1);
+            graph.ExpectOutput(batchComplete, null, 1);
+            graph.ExpectBoolean(managedBatch, 5, false);
+
             runtimeWorkflow = new RuntimeWorkflowExpectation(
                 run.InstanceGuid,
                 runTrigger.InstanceGuid,
                 cancelTrigger.InstanceGuid,
                 forceRerun.InstanceGuid,
-                Guid.Empty,
-                Guid.Empty,
-                Guid.Empty,
-                Guid.Empty,
                 energyPlusSummary.InstanceGuid,
                 buildResult.InstanceGuid,
                 resultSummary.InstanceGuid,
@@ -550,10 +614,10 @@ internal static class AdvancedExampleDefinitions
                 exportDirectory.InstanceGuid,
                 exportTrigger.InstanceGuid,
                 overwrite.InstanceGuid,
-                Guid.Empty,
-                Guid.Empty,
-                Guid.Empty,
-                Guid.Empty);
+                managedBatch.InstanceGuid,
+                modelName.InstanceGuid,
+                batchRun.InstanceGuid,
+                batchCancel.InstanceGuid);
         }
 
         return graph.Build(
@@ -689,17 +753,14 @@ internal static class AdvancedExampleDefinitions
         {
             GH_Component? component = document.FindObject(expected.ObjectGuid, topLevelOnly: true) as GH_Component;
             if (component is not null
-                && (component.ComponentGuid == Catalog.SimpleConvert.Id
-                    || component.ComponentGuid == Catalog.SimplePrepare.Id))
+                && component.ComponentGuid == Catalog.SimplePrepare.Id)
             {
                 WaitForBooleanOutput(
                     document,
                     expected.ObjectGuid,
                     expected.OutputIndex,
                     inputs.EnergyPlusWorkflowTimeout,
-                    component.ComponentGuid == Catalog.SimplePrepare.Id
-                        ? "Prepare SimpleDragon Simulation did not finish preparing its address-selected packaged EPW"
-                        : "Convert SimpleDragon GRM did not finish preparing its address-selected packaged EPW");
+                    "Prepare SimpleDragon Simulation did not finish preparing its address-selected packaged EPW");
             }
         }
 
@@ -821,6 +882,8 @@ internal static class AdvancedExampleDefinitions
         RequirePersistentBoolean(document, expectation.ForceRerunGuid, false);
         RequirePersistentBoolean(document, expectation.ExportTriggerGuid, false);
         RequirePersistentBoolean(document, expectation.OverwriteGuid, false);
+        RequirePersistentBoolean(document, expectation.BatchRunTriggerGuid, false);
+        RequirePersistentBoolean(document, expectation.BatchCancelTriggerGuid, false);
 
         if (!exercise)
         {
@@ -1015,21 +1078,20 @@ internal static class AdvancedExampleDefinitions
             SetBoolean(document, expectation.ForceRerunGuid, false);
             Solve(document);
 
-            string firstBatchState = "Not Run";
-            string cachedBatchState = "Not Run";
-            string batchCancellationState = "Not Run";
-            string combinedCsv = string.Empty;
-            string manifest = string.Empty;
-            string cancelledBatchCsv = string.Empty;
-            string cancelledBatchManifest = string.Empty;
-            if (expectation.BatchComponentGuid != Guid.Empty)
-            {
-                string batchRoot = Path.Combine(inputs.OutputDirectory, "b");
-                string batchCancellationRoot = Path.Combine(inputs.OutputDirectory, "c");
-                SetPanel(document, expectation.BatchOutputRootGuid, batchRoot);
-                SetBoolean(document, expectation.BatchRunTriggerGuid, true);
-                Solve(document);
-                firstBatchState = WaitForTerminalState(
+            string managedBatchRoot = Path.Combine(
+                Path.GetTempPath(),
+                "GonieGonie",
+                "Dragons",
+                "temp",
+                "simpledragon-managed-batch");
+            SetPanel(
+                document,
+                expectation.BatchModelNameGuid,
+                "Two-Zone Office Runtime " + Guid.NewGuid().ToString("N"));
+            Solve(document);
+            SetBoolean(document, expectation.BatchRunTriggerGuid, true);
+            Solve(document);
+            string firstBatchState = WaitForTerminalState(
                 document,
                 expectation.BatchComponentGuid,
                 "_syncRoot",
@@ -1048,14 +1110,14 @@ internal static class AdvancedExampleDefinitions
                     + RuntimeMessages(document, expectation.BatchComponentGuid));
             Require(ReadBoolean(document, expectation.BatchComponentGuid, 5), "The SimpleDragon batch was not complete.");
             RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Succeeded");
-            combinedCsv = RequireFreshContainedFile(
+            string combinedCsv = RequireFreshContainedFile(
                 ReadString(document, expectation.BatchComponentGuid, 3),
-                batchRoot,
+                managedBatchRoot,
                 evidenceNotBeforeUtc,
                 "SimpleDragon batch combined CSV");
-            manifest = RequireFreshContainedFile(
+            string manifest = RequireFreshContainedFile(
                 ReadString(document, expectation.BatchComponentGuid, 4),
-                batchRoot,
+                managedBatchRoot,
                 evidenceNotBeforeUtc,
                 "SimpleDragon batch manifest");
             string combinedCsvContent = File.ReadAllText(combinedCsv);
@@ -1073,7 +1135,7 @@ internal static class AdvancedExampleDefinitions
 
             SetBoolean(document, expectation.BatchRunTriggerGuid, true);
             Solve(document);
-            cachedBatchState = WaitForTerminalState(
+            string cachedBatchState = WaitForTerminalState(
                 document,
                 expectation.BatchComponentGuid,
                 "_syncRoot",
@@ -1094,7 +1156,10 @@ internal static class AdvancedExampleDefinitions
                 "The identical SimpleDragon batch rerun did not report a cache hit.");
             RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Succeeded");
 
-            SetPanel(document, expectation.BatchOutputRootGuid, batchCancellationRoot);
+            SetPanel(
+                document,
+                expectation.BatchModelNameGuid,
+                "Two-Zone Office Cancellation " + Guid.NewGuid().ToString("N"));
             SetBoolean(document, expectation.BatchRunTriggerGuid, false);
             SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
             Solve(document);
@@ -1116,7 +1181,7 @@ internal static class AdvancedExampleDefinitions
                 "The batch cancellation exercise reached " + batchStartState + " before cancellation could be requested.");
             SetBoolean(document, expectation.BatchCancelTriggerGuid, true);
             Solve(document);
-            batchCancellationState = WaitForTerminalState(
+            string batchCancellationState = WaitForTerminalState(
                 document,
                 expectation.BatchComponentGuid,
                 "_syncRoot",
@@ -1137,14 +1202,14 @@ internal static class AdvancedExampleDefinitions
                 !ReadBoolean(document, expectation.BatchComponentGuid, 5),
                 "A cancelled SimpleDragon batch incorrectly reported complete success.");
             RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Cancelled");
-            cancelledBatchCsv = RequireFreshContainedFile(
+            string cancelledBatchCsv = RequireFreshContainedFile(
                 ReadString(document, expectation.BatchComponentGuid, 3),
-                batchCancellationRoot,
+                managedBatchRoot,
                 evidenceNotBeforeUtc,
                 "Cancelled SimpleDragon batch combined CSV");
-            cancelledBatchManifest = RequireFreshContainedFile(
+            string cancelledBatchManifest = RequireFreshContainedFile(
                 ReadString(document, expectation.BatchComponentGuid, 4),
-                batchCancellationRoot,
+                managedBatchRoot,
                 evidenceNotBeforeUtc,
                 "Cancelled SimpleDragon batch manifest");
             Require(
@@ -1153,7 +1218,6 @@ internal static class AdvancedExampleDefinitions
             Require(
                 File.ReadAllText(cancelledBatchManifest).Contains("\"status\": \"Cancelled\""),
                 "The cancelled batch manifest does not preserve the cancelled case status.");
-            }
 
             string finalRunState = ReadRuntimeSnapshot(
                 document,
@@ -1176,8 +1240,8 @@ internal static class AdvancedExampleDefinitions
                 true,
                 true,
                 true,
-                expectation.BatchComponentGuid != Guid.Empty,
-                expectation.BatchComponentGuid != Guid.Empty,
+                true,
+                true,
                 Path.GetFullPath(inputs.OutputDirectory),
                 annualResult,
                 csvHashes,
@@ -1277,7 +1341,7 @@ internal static class AdvancedExampleDefinitions
                 if (!Path.IsPathRooted(lastPath))
                 {
                     throw new InvalidOperationException(
-                        "Convert SimpleDragon GRM resolved a non-rooted packaged EPW path: "
+                        "Prepare SimpleDragon Simulation resolved a non-rooted packaged EPW path: "
                             + lastPath + ". " + RuntimeMessages(document, weatherComponentGuid));
                 }
 
@@ -1306,7 +1370,7 @@ internal static class AdvancedExampleDefinitions
             if (errors.Length > 0)
             {
                 throw new InvalidOperationException(
-                    "Convert SimpleDragon GRM failed while preparing the address-selected packaged EPW. "
+                    "Prepare SimpleDragon Simulation failed while preparing the address-selected packaged EPW. "
                         + string.Join(" | ", errors)
                         + (string.IsNullOrWhiteSpace(lastPath) ? string.Empty : " Last path: " + lastPath));
             }
@@ -1315,7 +1379,7 @@ internal static class AdvancedExampleDefinitions
         }
 
         throw new TimeoutException(
-            "Convert SimpleDragon GRM did not prepare the address-selected Seoul EPW within "
+            "Prepare SimpleDragon Simulation did not prepare the address-selected Seoul EPW within "
                 + timeout.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)
                 + " seconds. Last path: "
                 + (string.IsNullOrWhiteSpace(lastPath) ? "<empty>" : lastPath)
@@ -1457,12 +1521,8 @@ internal static class AdvancedExampleDefinitions
             SetBoolean(document, expectation.ForceRerunGuid, false);
             SetBoolean(document, expectation.ExportTriggerGuid, false);
             SetBoolean(document, expectation.OverwriteGuid, false);
-            bool hasBatch = expectation.BatchComponentGuid != Guid.Empty;
-            if (hasBatch)
-            {
-                SetBoolean(document, expectation.BatchRunTriggerGuid, false);
-                SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
-            }
+            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+            SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
 
             Solve(document);
 
@@ -1472,14 +1532,12 @@ internal static class AdvancedExampleDefinitions
                 "_sync",
                 "_activeTask",
                 "_state");
-            RuntimeComponentSnapshot batch = hasBatch
-                ? ReadRuntimeSnapshot(
-                    document,
-                    expectation.BatchComponentGuid,
-                    "_syncRoot",
-                    "_activeTask",
-                    "_state")
-                : new RuntimeComponentSnapshot("Not Run", false);
+            RuntimeComponentSnapshot batch = ReadRuntimeSnapshot(
+                document,
+                expectation.BatchComponentGuid,
+                "_syncRoot",
+                "_activeTask",
+                "_state");
             if (run.HasActiveTask)
             {
                 SetBoolean(document, expectation.CancelTriggerGuid, true);
@@ -1502,15 +1560,12 @@ internal static class AdvancedExampleDefinitions
                         "_sync",
                         "_activeTask",
                         "_state");
-                    if (hasBatch)
-                    {
-                        batch = ReadRuntimeSnapshot(
-                            document,
-                            expectation.BatchComponentGuid,
-                            "_syncRoot",
-                            "_activeTask",
-                            "_state");
-                    }
+                    batch = ReadRuntimeSnapshot(
+                        document,
+                        expectation.BatchComponentGuid,
+                        "_syncRoot",
+                        "_activeTask",
+                        "_state");
                     if (!run.HasActiveTask && !batch.HasActiveTask)
                     {
                         break;
@@ -1541,11 +1596,8 @@ internal static class AdvancedExampleDefinitions
                 SetBoolean(document, expectation.ForceRerunGuid, false);
                 SetBoolean(document, expectation.ExportTriggerGuid, false);
                 SetBoolean(document, expectation.OverwriteGuid, false);
-                if (expectation.BatchComponentGuid != Guid.Empty)
-                {
-                    SetBoolean(document, expectation.BatchRunTriggerGuid, false);
-                    SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
-                }
+                SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+                SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
 
                 Solve(document);
             }
@@ -2112,25 +2164,27 @@ internal static class AdvancedExampleDefinitions
     private static class Catalog
     {
         internal static readonly ComponentIdentity InvisibleMaterial = I("dca742da-0ac5-4520-8022-97f98974dfea", "OpaqueMaterialComponent");
+        internal static readonly ComponentIdentity InvisibleLayer = I("d15984d5-cd3f-4798-a67c-73138b54859e", "ConstructionLayerComponent");
         internal static readonly ComponentIdentity InvisibleConstruction = I("6d5a9b54-8a9e-4c95-91df-469e21a783c9", "LayeredConstructionComponent");
         internal static readonly ComponentIdentity InvisibleNoMass = I("e292a44e-9d8d-4796-95fb-126f77e83796", "NoMassConstructionComponent");
         internal static readonly ComponentIdentity InvisibleProfile = I("3d5717de-1b16-406a-91e0-7a392c08aa51", "ConstantProfileComponent");
-        internal static readonly ComponentIdentity InvisibleSurface = I("291150ba-bbb5-41c2-99ac-914a5183d3ed", "SurfaceFromPolylineComponent");
-        internal static readonly ComponentIdentity InvisibleZone = I("e5627899-dcdb-4154-98fc-f7c547d50d2e", "ZoneComponent");
+        internal static readonly ComponentIdentity InvisibleGlazing = I("ecfd5cdd-3e4c-4261-8ddd-ecea8eaf5599", "GlazingComponent");
+        internal static readonly ComponentIdentity InvisibleWindow = I("54bb0065-1b10-420c-a90e-0ce75e746781", "WindowFromPolylineComponent");
+        internal static readonly ComponentIdentity InvisibleDoor = I("b2e1e805-a126-44fe-bf6c-4dbf16a76aae", "DoorFromPolylineComponent");
+        internal static readonly ComponentIdentity InvisibleSurface = I("c25eb6d8-9500-44e5-9909-58d41de0a320", "SurfaceComponent");
+        internal static readonly ComponentIdentity InvisibleZone = I("21ece4e9-87dd-4f34-9b95-8bc87fb0bfd2", "ZoneComponent");
         internal static readonly ComponentIdentity InvisibleHeatPump = I("e8751fda-24b9-4727-ad66-f81de722f64f", "HeatPumpComponent");
         internal static readonly ComponentIdentity InvisibleAirHandler = I("a3a4afd8-17e1-4d9f-8da5-5883331c360f", "AirHandlingUnitComponent");
         internal static readonly ComponentIdentity InvisibleBoiler = I("e732f5f9-db94-405b-9221-f4449b4baad7", "BoilerComponent");
         internal static readonly ComponentIdentity InvisibleRadiantFloor = I("e3bd88b6-54b6-43ec-9c94-ee0e36218618", "RadiantFloorComponent");
         internal static readonly ComponentIdentity InvisibleErv = I("3d5f630e-66c3-43da-b73c-50d5be1792c3", "EnergyRecoveryVentilatorComponent");
         internal static readonly ComponentIdentity InvisiblePv = I("237bc85d-769a-468b-a048-70e3b5c382ee", "PhotovoltaicPanelComponent");
-        internal static readonly ComponentIdentity InvisibleModel = I("fee2629c-94d8-4eed-8be2-14ba108ce825", "EnergyModelComponent");
+        internal static readonly ComponentIdentity InvisibleModel = I("057ee08b-759f-43e0-8ab8-625747d951ef", "EnergyModelComponent");
         internal static readonly ComponentIdentity InvisibleCompile = I("e3e4d8f9-4fd8-4b17-9ec7-a27cb5627802", "CompileInvisibleDragonComponent");
-        internal static readonly ComponentIdentity InvisibleValidate = I("fa664eeb-5503-4366-831d-e3478c8a1832", "ValidateIdfComponent");
-        internal static readonly ComponentIdentity InvisiblePrepareRuntime = I("5199b03c-644b-4194-b38c-37f3c7a423aa", "PrepareEnergyPlusRuntimeComponent");
-        internal static readonly ComponentIdentity InvisibleRun = I("5f1a9663-6f81-4635-b54d-607b48c9fd47", "RunEnergyPlusComponent");
         internal static readonly ComponentIdentity InvisibleManagedRun = I("50e4f5bf-f174-458f-bfaa-aaf4e25ce5b5", "ManagedRunEnergyPlusComponent");
         internal static readonly ComponentIdentity InvisibleResultSummary = I("31967aee-84ae-4536-b091-b301d1ab2c3d", "EnergyPlusResultSummaryComponent");
         internal static readonly ComponentIdentity SimpleMaterial = S("fee586e8-692c-407e-a803-d5c43f3c7222", "SimpleDragonMaterialComponent");
+        internal static readonly ComponentIdentity SimpleLayer = S("b97da4a1-7b1c-472a-a4b0-83603e202c2b", "SimpleDragonSurfaceConstructionLayerComponent");
         internal static readonly ComponentIdentity SimpleConstruction = S("3e1fa67f-dbb2-4c19-b54b-226c295f5751", "SimpleDragonSurfaceConstructionComponent");
         internal static readonly ComponentIdentity SimpleFenestration = S("b9af07b4-d08e-4335-ab55-a6fd33cb1a93", "SimpleDragonFenestrationConstructionComponent");
         internal static readonly ComponentIdentity SimpleProfile = S("fb92c938-41e1-475f-ad03-ca6a1a8e42e1", "LookupUsageProfileComponent");
@@ -2145,14 +2199,8 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity SimplePv = S("7fcb5c47-3d49-4aa0-8fbc-bd765711401f", "SimpleDragonPhotovoltaicPanelComponent");
         internal static readonly ComponentIdentity SimpleOpening = S("7d41fd2c-b93f-4fc8-88ea-db1f3abeb2f1", "CreateSimpleDragonOpeningComponent");
         internal static readonly ComponentIdentity SimpleZone = S("f7389ac4-51dd-44dc-803a-e8e0989e7638", "CreateSimpleDragonZoneComponent");
-        internal static readonly ComponentIdentity SimpleVentilationAssignment = S("596158ca-aaa8-42e5-b22a-b4cfbead4a36", "CreateSimpleDragonVentilationAssignmentComponent");
         internal static readonly ComponentIdentity SimpleModel = S("ce38124b-f99b-4d09-be3b-e5e5717db707", "CreateSimpleDragonModelComponent");
         internal static readonly ComponentIdentity SimplePrepare = S("ca666fd7-788c-4682-8b04-fad8c7252fe0", "PrepareSimpleDragonSimulationComponent");
-        internal static readonly ComponentIdentity SimpleExtractZones = S("668591e2-458a-42a2-a924-6c3862f1b2c6", "ExtractSimpleDragonZonesComponent");
-        internal static readonly ComponentIdentity SimpleAssignSupplies = S("82b8b48c-5930-4649-bc5f-6c17b05daa52", "AssignSimpleDragonSupplySystemsComponent");
-        internal static readonly ComponentIdentity SimpleAssignVentilation = S("5f66b3fd-e69c-4c33-92db-839c07dcbda5", "AssignSimpleDragonVentilationSystemsComponent");
-        internal static readonly ComponentIdentity SimpleAssemble = S("f0a131e0-7cfe-45fc-945a-7e52237535ee", "AssembleGreenRetrofitModelComponent");
-        internal static readonly ComponentIdentity SimpleConvert = S("b38f2e41-f63b-42a8-b549-65cd60c7a994", "ConvertGreenRetrofitModelComponent");
         internal static readonly ComponentIdentity SimpleBuildResult = S("2a9f3a4e-56f2-4227-8725-e8befe43cf53", "BuildGreenRetrofitResultComponent");
         internal static readonly ComponentIdentity SimpleReadResult = S("a03fb1d7-7ae2-4e2c-ab31-0e626af50163", "ReadGreenRetrofitResultComponent");
         internal static readonly ComponentIdentity SimpleResultSummary = S("577809aa-2d1c-40ea-aa50-f71d73f19f83", "GreenRetrofitResultSummaryComponent");
@@ -2160,20 +2208,20 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity SimpleLinePlot = S("76e0c1b6-68d6-4cdc-a418-eea18aa131c1", "GreenRetrofitMonthlyLinePlotComponent");
         internal static readonly ComponentIdentity SimpleBarPlot = S("a73acba4-d98d-4fec-a846-dc982256d6b1", "GreenRetrofitMonthlyBarPlotComponent");
         internal static readonly ComponentIdentity SimpleExportCsv = S("9fe8a410-ea95-4eb8-81ec-56c45cdd029c", "ExportGreenRetrofitCsvComponent");
-        internal static readonly ComponentIdentity SimpleBatch = S("c0af86b6-5f6e-478c-b069-a7892a31dadd", "RunSimpleDragonBatchComponent");
-
+        internal static readonly ComponentIdentity SimpleBatchCase = S("11336c6a-5bd4-4d6b-80a1-89bd168f8d54", "SimpleDragonBatchCaseComponent");
+        internal static readonly ComponentIdentity SimpleManagedBatch = S("e0a54494-3d69-4681-8756-cc3cd86df4e1", "ManagedRunSimpleDragonBatchComponent");
         internal static IReadOnlyList<ComponentIdentity> All { get; } = new[]
         {
-            InvisibleMaterial, InvisibleConstruction, InvisibleNoMass, InvisibleProfile, InvisibleSurface,
+            InvisibleMaterial, InvisibleLayer, InvisibleConstruction, InvisibleNoMass, InvisibleProfile,
+            InvisibleGlazing, InvisibleWindow, InvisibleDoor, InvisibleSurface,
             InvisibleZone, InvisibleHeatPump, InvisibleAirHandler, InvisibleBoiler, InvisibleRadiantFloor,
-            InvisibleErv, InvisiblePv, InvisibleModel, InvisibleCompile, InvisibleValidate,
-            InvisiblePrepareRuntime, InvisibleRun, InvisibleManagedRun, InvisibleResultSummary,
-            SimpleMaterial, SimpleConstruction, SimpleFenestration, SimpleProfile, SimpleHeatPump,
+            InvisibleErv, InvisiblePv, InvisibleModel, InvisibleCompile,
+            InvisibleManagedRun, InvisibleResultSummary,
+            SimpleMaterial, SimpleLayer, SimpleConstruction, SimpleFenestration, SimpleProfile, SimpleHeatPump,
             SimpleAirHandler, SimpleBoiler, SimpleRadiator, SimpleElectricRadiator, SimpleChiller, SimpleFanCoil, SimpleErv,
-            SimplePv, SimpleOpening, SimpleZone, SimpleVentilationAssignment, SimpleModel, SimplePrepare,
-            SimpleExtractZones, SimpleAssignSupplies, SimpleAssignVentilation, SimpleAssemble,
-            SimpleConvert, SimpleBuildResult, SimpleReadResult, SimpleResultSummary, SimpleDataTree,
-            SimpleLinePlot, SimpleBarPlot, SimpleExportCsv, SimpleBatch,
+            SimplePv, SimpleOpening, SimpleZone, SimpleModel, SimplePrepare,
+            SimpleBuildResult, SimpleReadResult, SimpleResultSummary, SimpleDataTree,
+            SimpleLinePlot, SimpleBarPlot, SimpleExportCsv, SimpleBatchCase, SimpleManagedBatch,
         };
 
         private static ComponentIdentity I(string id, string type)
@@ -2445,10 +2493,6 @@ internal sealed record RuntimeWorkflowExpectation(
     Guid RunTriggerGuid,
     Guid CancelTriggerGuid,
     Guid ForceRerunGuid,
-    Guid RuntimeRootGuid,
-    Guid WeatherComponentGuid,
-    Guid WeatherPathGuid,
-    Guid TempRootGuid,
     Guid EnergyPlusSummaryGuid,
     Guid BuildResultGuid,
     Guid ResultSummaryGuid,
@@ -2457,7 +2501,7 @@ internal sealed record RuntimeWorkflowExpectation(
     Guid ExportTriggerGuid,
     Guid OverwriteGuid,
     Guid BatchComponentGuid,
-    Guid BatchOutputRootGuid,
+    Guid BatchModelNameGuid,
     Guid BatchRunTriggerGuid,
     Guid BatchCancelTriggerGuid);
 

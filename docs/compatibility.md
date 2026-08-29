@@ -94,7 +94,7 @@ that have symbol-level evidence or a reviewed exception.
 | GRM 0.7.0 read/write semantics, defaults, nulls, and references | Python package import and function-call syntax |
 | Pinned construction, profile, climate, and weather data/query results | Excel/GREXCEL input conversion and execution |
 | EPlusSimple-to-IDragon model conversion and deterministic identities | Original Python CLI commands and console formatting |
-| Authoring IDF in the explicit legacy compatibility path | pandas/DataFrame-linked IDF mutation APIs |
+| Typed model authoring and deterministic EnergyPlus 24.2 IDF compilation | pandas/DataFrame-linked IDF mutation APIs |
 | Expanded IDF meaning, reference topology, and geometry | regex/callable/list Python indexing behavior |
 | EnergyPlus 24.2.0 results, GRR values, and warnings within declared tolerances | Python mutable-container behavior, `shrink`, and `quick_map` syntax |
 | Rhino 7/8 geometry adapters, Grasshopper persistence, and packaged workflows | General editing support for every EnergyPlus object |

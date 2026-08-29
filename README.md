@@ -53,12 +53,16 @@ Curve -> SD Opening -> SD Zone <- Brep / Profile / HVAC / ERV
                          |
                          +-> SD Model (Address/Vintage) -> SD to IDF -> IDF + Weather -> Run InvisibleDragon
 
-ID Material / Surface / HVAC -> Energy Model -> Compile InvisibleDragon -> IDF
+Curve -> ID Window / Door -> ID Surface -> ID Zone <- Profile / HVAC / ERV
+                                             |
+                                             +-> ID Model <- PV
+                                                   |
+                                                   +-> Compile InvisibleDragon -> IDF
 ```
 
 No Zone/Face indices, assignment pass, EnergyPlus/IDD/EPW path, runtime root, or
-temporary-work input is required. Earlier path-oriented components retain their
-GUIDs for existing `.gh` files but are hidden from the normal palette.
+temporary-work input is required. Inter-zone surfaces are paired from coincident
+geometry when the InvisibleDragon model is composed; no adjacent-surface ID is typed.
 
 ## Developer quick start
 

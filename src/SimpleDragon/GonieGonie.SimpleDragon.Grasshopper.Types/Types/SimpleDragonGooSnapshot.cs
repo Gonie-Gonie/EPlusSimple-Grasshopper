@@ -20,9 +20,11 @@ internal static class SimpleDragonGooSnapshot
     {
         (string kind, string payload) = value switch
         {
+            SimpleDragonBatchCase batchCase => ("batch-case", ToJson(BatchCaseSnapshot.From(batchCase))),
             OpeningDefinition opening => ("opening-definition", ToJson(OpeningDefinitionSnapshot.From(opening))),
             ZoneDefinition zone => ("zone-definition", ToJson(ZoneDefinitionSnapshot.From(zone))),
             Material material => ("material", ToJson(MaterialSnapshot.From(material))),
+            SurfaceConstructionLayer layer => ("surface-construction-layer", ToJson(SurfaceLayerSnapshot.From(layer))),
             SurfaceConstruction construction => ("surface-construction", ToJson(SurfaceConstructionSnapshot.From(construction))),
             FenestrationConstruction construction => ("fenestration-construction", ToJson(FenestrationConstructionSnapshot.From(construction))),
             UsageProfile profile => ("usage-profile", ToJson(UsageProfileSnapshot.From(profile))),
@@ -56,9 +58,11 @@ internal static class SimpleDragonGooSnapshot
 
         object value = envelope.Kind switch
         {
+            "batch-case" => FromJson<BatchCaseSnapshot>(envelope.Payload).ToDomain(),
             "opening-definition" => FromJson<OpeningDefinitionSnapshot>(envelope.Payload).ToDomain(),
             "zone-definition" => FromJson<ZoneDefinitionSnapshot>(envelope.Payload).ToDomain(),
             "material" => FromJson<MaterialSnapshot>(envelope.Payload).ToDomain(),
+            "surface-construction-layer" => FromJson<SurfaceLayerSnapshot>(envelope.Payload).ToDomain(),
             "surface-construction" => FromJson<SurfaceConstructionSnapshot>(envelope.Payload).ToDomain(),
             "fenestration-construction" => FromJson<FenestrationConstructionSnapshot>(envelope.Payload).ToDomain(),
             "usage-profile" => FromJson<UsageProfileSnapshot>(envelope.Payload).ToDomain(),
@@ -847,6 +851,21 @@ internal static class SimpleDragonGooSnapshot
             Metadata.ToDomain(),
             ClimateRegion,
             ClimateEffectiveDate);
+    }
+
+    private sealed class BatchCaseSnapshot
+    {
+        public ModelSnapshot Model { get; set; } = new();
+
+        public string? CaseId { get; set; }
+
+        public static BatchCaseSnapshot From(SimpleDragonBatchCase value) => new()
+        {
+            Model = ModelSnapshot.From(value.Model),
+            CaseId = value.CaseId,
+        };
+
+        public SimpleDragonBatchCase ToDomain() => new(Model.ToDomain(), CaseId);
     }
 
     private sealed class ModelSnapshot

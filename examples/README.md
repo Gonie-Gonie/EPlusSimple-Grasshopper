@@ -7,14 +7,14 @@ window curves that can be referenced directly from Grasshopper.
 
 | File | Coverage |
 | --- | --- |
-| `00-invisibledragon-material-construction.gh` | Minimal InvisibleDragon material, thickness, construction, and U-value graph |
+| `00-invisibledragon-material-construction.gh` | Minimal InvisibleDragon Material -> Construction Layer -> Construction -> U-value graph |
 | `01-invisibledragon-envelope-profile.gh` | Three-layer envelope, no-mass construction, constant annual profile, and typed output previews |
-| `02-invisibledragon-single-zone-hvac-idf.gh` | Six planar surfaces, closed zone, HVAC/ERV/PV, energy model, and path-free EnergyPlus 24.2 IDF compile/validation |
-| `10-simpledragon-material-construction.gh` | Minimal SimpleDragon material and surface-construction graph |
+| `02-invisibledragon-single-zone-hvac-idf.gh` | Window→Surface→Zone and HVAC/ERV→Zone direct ownership, PV, energy model, and path-free EnergyPlus 24.2 IDF compile/validation |
+| `10-simpledragon-material-construction.gh` | Minimal SimpleDragon Material -> Construction Layer -> Surface Construction graph |
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
 | `12-simpledragon-two-zone-to-idf.gh` | Complex two-Zone composition/IDF authoring: local Brep and Opening ownership, heat-pump/AHU, boiler/radiator, ERV, PV, then path-free IDF and packaged Weather preparation |
 | `13-simpledragon-results-and-plots.gh` | Real GRR read, annual summary, monthly DataTree, line plot, bar plot, and non-writing CSV preview |
-| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: electric radiators connect directly to two Zones, then typed IDF and Weather feed managed InvisibleDragon Run, result summary, GRR, CSV, cache, and cancellation controls |
+| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: electric radiators and ERV connect directly to two Zones, typed IDF and Weather feed managed InvisibleDragon Run, and a typed Batch Case feeds managed batch without parallel model/ID lists |
 | `30-two-zone-office.3dm` | Two adjacent named office-zone solids and two named south-window curves |
 | `31-three-zone-stepped-office.3dm` | Two adjacent ground-floor zones plus an adjacent upper zone and three named windows |
 
@@ -57,9 +57,8 @@ while GRM/GRR/CSV output paths use the system temp directory. `Export CSV` is
 held at `False`; its directory and file-content outputs are previews only, so
 this example does not create the preview directory or write CSV files.
 
-Legacy path-based runtime and batch components still resolve relative paths from
-the saved `.gh` file. The canonical SimpleDragon Prepare and InvisibleDragon
-Run components deliberately expose no EnergyPlus, IDD, EPW, or temp path;
+The canonical SimpleDragon Prepare and InvisibleDragon Run components expose no
+EnergyPlus, IDD, EPW, or temp path;
 implementation-owned artifacts remain in verified per-user caches or the system
 temporary directory. User-selected CSV export destinations remain visible.
 
@@ -125,10 +124,11 @@ reported as `Not Run`, not as a successful simulation.
   SimpleDragon select and verify weather from Model Address/Vintage, then pass
   typed IDF and Weather directly to the managed InvisibleDragon runner.
 - Use Read GRM with `fixtures\simple-dragon\grm\ASHRAE 140 modified.grm`, then
-  Convert GRM to inspect compatibility diagnostics for an existing model.
-- Feed ordered Models and stable IDs into Managed Run SimpleDragon Batch, set a
-  parallel limit, and use only the Run/Cancel triggers. Runtime, weather, case
-  temp, and result storage paths are managed internally.
+  connect the typed model directly to Prepare to inspect or simulate an existing model.
+- Wrap each model and its optional stable ID in a SimpleDragon Batch Case, feed
+  the Cases list into Managed Run SimpleDragon Batch, set a parallel limit, and
+  use only the Run/Cancel triggers. Runtime, weather, case temp, and result
+  storage paths are managed internally.
 
 See [the workflow guide](../docs/grasshopper-workflow.md) for units, optional
 inputs, triggers, and persistence rules.

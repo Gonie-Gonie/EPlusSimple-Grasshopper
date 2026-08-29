@@ -2,6 +2,7 @@ using Grasshopper.Kernel;
 using GonieGonie.InvisibleDragon.Construction;
 using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
 using GonieGonie.InvisibleDragon.Grasshopper.Types;
+using System.Globalization;
 using OpaqueConstruction = GonieGonie.InvisibleDragon.Construction.Construction;
 
 namespace GonieGonie.InvisibleDragon.Grasshopper.Components;
@@ -55,13 +56,78 @@ public sealed class OpaqueMaterialComponent : DragonComponent
     }
 }
 
+public sealed class ConstructionLayerComponent : DragonComponent
+{
+    public ConstructionLayerComponent()
+        : base(
+            "Construction Layer",
+            "Layer",
+            "Combines one opaque material with its thickness for direct construction composition.",
+            DragonPanels.Construction)
+    {
+    }
+
+    public override Guid ComponentGuid => new("d15984d5-cd3f-4798-a67c-73138b54859e");
+
+    protected override void RegisterInputParams(GH_InputParamManager pManager)
+    {
+        pManager.AddParameter(
+            new DragonMaterialParam(),
+            "Material",
+            "M",
+            "Opaque material owned by this layer.",
+            GH_ParamAccess.item);
+        pManager.AddNumberParameter(
+            "Thickness",
+            "T",
+            "Layer thickness in metres.",
+            GH_ParamAccess.item,
+            0.1d);
+        pManager.AddTextParameter(
+            "Name",
+            "N",
+            "Optional layer name. Blank generates a stable descriptive name.",
+            GH_ParamAccess.item,
+            string.Empty);
+    }
+
+    protected override void RegisterOutputParams(GH_OutputParamManager pManager)
+    {
+        pManager.AddParameter(
+            new DragonLayerParam(),
+            "Layer",
+            "L",
+            "Typed construction layer.",
+            GH_ParamAccess.item);
+    }
+
+    protected override void Solve(IGH_DataAccess DA)
+    {
+        DragonMaterialGoo? materialGoo = null;
+        double thickness = 0.1d;
+        string name = string.Empty;
+        if (!DA.GetData(0, ref materialGoo)
+            || !DA.GetData(1, ref thickness)
+            || materialGoo?.Value is null)
+        {
+            return;
+        }
+
+        DA.GetData(2, ref name);
+        string resolvedName = string.IsNullOrWhiteSpace(name)
+            ? materialGoo.Value.Name + ":" + thickness.ToString("0.########", CultureInfo.InvariantCulture) + "m"
+            : name.Trim();
+        DA.SetData(0, new DragonLayerGoo(new Layer(resolvedName, materialGoo.Value, thickness)));
+    }
+}
+
 public sealed class LayeredConstructionComponent : DragonComponent
 {
     public LayeredConstructionComponent()
         : base(
             "Layered Construction",
             "Con",
-            "Creates an outside-to-inside opaque construction from materials and layer thicknesses.",
+            "Creates an outside-to-inside opaque construction from directly connected layers.",
             DragonPanels.Construction)
     {
     }
@@ -72,15 +138,10 @@ public sealed class LayeredConstructionComponent : DragonComponent
     {
         pManager.AddTextParameter("Name", "N", "Construction name.", GH_ParamAccess.item, "Layered Construction");
         pManager.AddParameter(
-            new DragonMaterialParam(),
-            "Materials",
-            "M",
-            "Materials ordered from outside to inside.",
-            GH_ParamAccess.list);
-        pManager.AddNumberParameter(
-            "Thicknesses",
-            "T",
-            "Layer thicknesses in metres, in the same order as Materials.",
+            new DragonLayerParam(),
+            "Layers",
+            "L",
+            "Construction layers ordered from outside to inside.",
             GH_ParamAccess.list);
     }
 
@@ -98,29 +159,21 @@ public sealed class LayeredConstructionComponent : DragonComponent
     protected override void Solve(IGH_DataAccess DA)
     {
         string name = "Layered Construction";
-        var materials = new List<DragonMaterialGoo>();
-        var thicknesses = new List<double>();
+        var layerGoos = new List<DragonLayerGoo>();
         if (!DA.GetData(0, ref name) ||
-            !DA.GetDataList(1, materials) ||
-            !DA.GetDataList(2, thicknesses))
+            !DA.GetDataList(1, layerGoos))
         {
             return;
         }
 
-        if (materials.Count != thicknesses.Count)
-        {
-            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Materials and Thicknesses must have equal lengths.");
-            return;
-        }
-
-        Layer[] layers = materials.Select((goo, index) =>
+        Layer[] layers = layerGoos.Select((goo, index) =>
         {
             if (goo?.Value is null)
             {
-                throw new ArgumentException($"Material at index {index} is empty.");
+                throw new ArgumentException($"Layer at position {index + 1} is empty.");
             }
 
-            return new Layer($"{name}:Layer:{index + 1}", goo.Value, thicknesses[index]);
+            return goo.Value;
         }).ToArray();
         var construction = new OpaqueConstruction(name, layers);
         DA.SetData(0, new DragonConstructionGoo(construction));

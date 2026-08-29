@@ -105,12 +105,6 @@ public sealed class RhinoDomainGeometryMapEntry
     /// </summary>
     public int? FenestrationSourceIndex { get; }
 
-    /// <summary>
-    /// Gets the legacy single geometry index for display compatibility. Prefer
-    /// <see cref="BrepLoopIndex"/> and <see cref="FenestrationSourceIndex"/> when tracing geometry.
-    /// </summary>
-    public int? LoopIndex => BrepLoopIndex ?? FenestrationSourceIndex;
-
     public GeometryProvenance Provenance { get; }
 }
 

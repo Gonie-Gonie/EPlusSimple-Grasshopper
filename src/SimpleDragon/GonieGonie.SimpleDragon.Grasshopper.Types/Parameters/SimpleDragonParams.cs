@@ -32,6 +32,17 @@ public sealed class SimpleDragonMaterialParam : SimpleDragonParam<Types.SimpleDr
     public override Guid ComponentGuid => new("f03481bf-f063-4991-b610-82af1d11aeae");
 }
 
+public sealed class SimpleDragonSurfaceConstructionLayerParam
+    : SimpleDragonParam<Types.SimpleDragonSurfaceConstructionLayerGoo>
+{
+    public SimpleDragonSurfaceConstructionLayerParam()
+        : base(
+            "SimpleDragon Construction Layer",
+            "Layer",
+            "One material and thickness in a SimpleDragon opaque construction.") { }
+    public override Guid ComponentGuid => new("06f57aae-c0dc-46f9-8af8-e9fa4429fcb7");
+}
+
 public sealed class SimpleDragonSurfaceConstructionParam : SimpleDragonParam<Types.SimpleDragonSurfaceConstructionGoo>
 {
     public SimpleDragonSurfaceConstructionParam() : base("SimpleDragon Surface Construction", "Construction", "A layered SimpleDragon opaque construction.") { }
@@ -98,22 +109,14 @@ public sealed class SimpleDragonSupplySystemParam : SimpleDragonParam<Types.Simp
     public override Guid ComponentGuid => new("51b809c1-a4ae-4dc7-bca8-81e06d49a806");
 }
 
-public sealed class SimpleDragonEnergyRecoveryVentilatorParam
-    : SimpleDragonParam<Types.SimpleDragonEnergyRecoveryVentilatorGoo>
+public sealed class SimpleDragonZoneErvParam
+    : SimpleDragonParam<Types.SimpleDragonZoneErvGoo>
 {
-    public SimpleDragonEnergyRecoveryVentilatorParam()
-        : base("SimpleDragon Energy Recovery Ventilator", "ERV", "A SimpleDragon energy-recovery ventilator.") { }
-    public override Guid ComponentGuid => new("4a980e9a-a954-47c0-a34b-2026eb86b2ad");
-}
-
-public sealed class SimpleDragonVentilationAssignmentParam
-    : SimpleDragonParam<Types.SimpleDragonVentilationAssignmentGoo>
-{
-    public SimpleDragonVentilationAssignmentParam()
+    public SimpleDragonZoneErvParam()
         : base(
-            "SimpleDragon Ventilation Assignment",
-            "Ventilation",
-            "A SimpleDragon energy-recovery ventilator assignment with a unit count.") { }
+            "SimpleDragon Zone ERV",
+            "Zone ERV",
+            "An ERV owned by a SimpleDragon Zone, including its positive unit count.") { }
     public override Guid ComponentGuid => new("14f1683e-4b0a-4754-aac5-6b85331c2126");
 }
 
@@ -129,6 +132,17 @@ public sealed class GreenRetrofitModelParam : SimpleDragonParam<Types.GreenRetro
 {
     public GreenRetrofitModelParam() : base("SimpleDragon GRM", "GRM", "A complete GRM 0.7 SimpleDragon model.") { }
     public override Guid ComponentGuid => new("e0546c97-2fba-4c51-9613-340dfb1fc416");
+}
+
+public sealed class SimpleDragonBatchCaseParam
+    : SimpleDragonParam<Types.SimpleDragonBatchCaseGoo>
+{
+    public SimpleDragonBatchCaseParam()
+        : base(
+            "SimpleDragon Batch Case",
+            "Batch Case",
+            "One SimpleDragon GRM alternative with its optional stable batch case ID.") { }
+    public override Guid ComponentGuid => new("c30c8d9a-15bd-4dd1-b1dd-3d1d3a2d7169");
 }
 
 public sealed class GreenRetrofitResultParam : SimpleDragonParam<Types.GreenRetrofitResultGoo>

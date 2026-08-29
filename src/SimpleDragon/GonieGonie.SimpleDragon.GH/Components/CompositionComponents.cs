@@ -237,10 +237,10 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
             "Supply systems owned by this Zone.",
             GH_ParamAccess.list);
         pManager.AddParameter(
-            new SimpleDragonVentilationAssignmentParam(),
-            "Ventilation",
+            new SimpleDragonZoneErvParam(),
+            "ERVs",
             "ERV",
-            "ERV assignments owned by this Zone. A raw ERV is accepted as one unit.",
+            "ERV values owned by this Zone.",
             GH_ParamAccess.list);
         pManager.AddTextParameter(
             "Floor Boundary",
@@ -282,7 +282,7 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
         SimpleDragonFenestrationConstructionGoo? openingConstructionGoo = null;
         var openingGoos = new List<SimpleDragonOpeningDefinitionGoo>();
         var supplyGoos = new List<SimpleDragonSupplySystemGoo>();
-        var ventilationGoos = new List<SimpleDragonVentilationAssignmentGoo>();
+        var ventilationGoos = new List<SimpleDragonZoneErvGoo>();
         string floorBoundaryText = "Ground";
         double lightDensity = 10d;
         if (!DA.GetData(0, ref geometry)
@@ -320,7 +320,7 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
                 ?? throw new ArgumentException("HVAC[" + index + "] contains no value."))
                 .ToArray();
             VentilationAssignment[] ventilation = ventilationGoos.Select((goo, index) => goo?.Value
-                ?? throw new ArgumentException("Ventilation[" + index + "] contains no value."))
+                ?? throw new ArgumentException("ERVs[" + index + "] contains no value."))
                 .ToArray();
             var definition = new ZoneDefinition(
                 geometry!,
@@ -347,65 +347,6 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
             Report(new[] { diagnostic });
             DA.SetDataList(1, new[] { new DiagnosticGoo(diagnostic) });
         }
-    }
-}
-
-public sealed class CreateSimpleDragonVentilationAssignmentComponent : SimpleDragonHvacComponent
-{
-    public CreateSimpleDragonVentilationAssignmentComponent()
-        : base(
-            "SimpleDragon ERV Assignment",
-            "SD ERV Count",
-            "Sets the unit count for an ERV before it is connected directly to a Zone. A raw ERV already means one unit.")
-    {
-    }
-
-    public override Guid ComponentGuid => new("596158ca-aaa8-42e5-b22a-b4cfbead4a36");
-
-    protected override void RegisterInputParams(GH_InputParamManager pManager)
-    {
-        pManager.AddParameter(
-            new SimpleDragonEnergyRecoveryVentilatorParam(),
-            "ERV",
-            "ERV",
-            "Energy-recovery ventilator.",
-            GH_ParamAccess.item);
-        pManager.AddIntegerParameter("Count", "N", "Positive number of identical units.", GH_ParamAccess.item, 1);
-    }
-
-    protected override void RegisterOutputParams(GH_OutputParamManager pManager)
-    {
-        pManager.AddParameter(
-            new SimpleDragonVentilationAssignmentParam(),
-            "Ventilation",
-            "V",
-            "Typed Zone ventilation assignment.",
-            GH_ParamAccess.item);
-        pManager.AddParameter(new DiagnosticParam(), "Diagnostics", "D", "Assignment diagnostics.", GH_ParamAccess.list);
-    }
-
-    protected override void Solve(IGH_DataAccess DA)
-    {
-        SimpleDragonEnergyRecoveryVentilatorGoo? ventilatorGoo = null;
-        int count = 1;
-        if (!DA.GetData(0, ref ventilatorGoo) || !DA.GetData(1, ref count))
-        {
-            return;
-        }
-
-        Author(
-            DA,
-            1,
-            "SD.GH.ERV_ASSIGNMENT_INVALID",
-            "Connect a valid ERV and use a positive unit count.",
-            () =>
-            {
-                VentilationSystem ventilator = Value<
-                    SimpleDragonEnergyRecoveryVentilatorGoo,
-                    VentilationSystem>(ventilatorGoo, "ERV");
-                var assignment = new VentilationAssignment(ventilator.Id.Value, count, ventilator);
-                DA.SetData(0, new SimpleDragonVentilationAssignmentGoo(assignment));
-            });
     }
 }
 
@@ -745,12 +686,14 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
     private static string FormatMap(RhinoDomainGeometryMapEntry entry)
     {
         string face = entry.FaceIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
-        string loop = entry.LoopIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
+        string brepLoop = entry.BrepLoopIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
+        string openingSource = entry.FenestrationSourceIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
         return entry.EntityId.Value
             + " | " + entry.Kind
             + " | source " + entry.SourceIndex.ToString(CultureInfo.InvariantCulture)
             + " | face " + face
-            + " | loop " + loop
+            + " | brep loop " + brepLoop
+            + " | opening source " + openingSource
             + " | " + entry.Provenance.GeometryFingerprint;
     }
 

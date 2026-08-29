@@ -23,10 +23,14 @@ independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
   indices, assignment passes, or repeated model-catalog connections.
 - Add an Address/Vintage-selected typed Weather handoff and `Run InvisibleDragon`,
   which manage EnergyPlus, IDD, EPW, runtime-cache, and temporary paths inside
-  the modules while retaining historical component GUIDs for old definitions.
+  the modules.
+- Use direct Window/Door -> Surface -> Zone -> Model ownership wires in
+  InvisibleDragon and Opening/HVAC/ERV -> Zone -> Model wires in SimpleDragon.
+- Represent opaque construction layers and managed simulation cases as typed
+  values, so no authoring relationship depends on matching positions in two lists.
 - Add `Compile InvisibleDragon`, a visible path-free EnergyPlus 24.2 compiler
   for standalone low-level InvisibleDragon model authoring.
-- Add explicit EnergyPlus 24.2 runtime preparation and simulation components,
+- Add managed EnergyPlus 24.2 runtime preparation and simulation components,
   deterministic result/CSV handling, plots, DataTrees, and parallel batch
   research workflows. InvisibleDragon candidates carry the exact pinned
   EnergyPlus archive, while SimpleDragon candidates carry the exact pinned

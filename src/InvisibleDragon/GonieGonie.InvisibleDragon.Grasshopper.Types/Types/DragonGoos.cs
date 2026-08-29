@@ -21,6 +21,19 @@ public sealed class DragonMaterialGoo : DragonGoo<Material>
     protected override string DisplayText(Material value) => $"Material {value.Name}";
 }
 
+public sealed class DragonLayerGoo : DragonGoo<Layer>
+{
+    public DragonLayerGoo() { }
+    public DragonLayerGoo(Layer value) : base(value) { }
+    public override string TypeName => "InvisibleDragon Construction Layer";
+    public override string TypeDescription =>
+        "One opaque material and thickness, ready to be ordered in a construction.";
+    protected override DragonGoo<Layer> Create(Layer value) => new DragonLayerGoo(value);
+    protected override DragonGoo<Layer> CreateEmpty() => new DragonLayerGoo();
+    protected override string DisplayText(Layer value) =>
+        $"Layer {value.Name} ({value.ThicknessMetres:0.###} m)";
+}
+
 public sealed class DragonConstructionGoo : DragonGoo<ISurfaceConstruction>
 {
     public DragonConstructionGoo() { }
@@ -30,6 +43,18 @@ public sealed class DragonConstructionGoo : DragonGoo<ISurfaceConstruction>
     protected override DragonGoo<ISurfaceConstruction> Create(ISurfaceConstruction value) => new DragonConstructionGoo(value);
     protected override DragonGoo<ISurfaceConstruction> CreateEmpty() => new DragonConstructionGoo();
     protected override string DisplayText(ISurfaceConstruction value) => $"Construction {value.Name}";
+}
+
+public sealed class DragonGlazingGoo : DragonGoo<Glazing>
+{
+    public DragonGlazingGoo() { }
+    public DragonGlazingGoo(Glazing value) : base(value) { }
+    public override string TypeName => "InvisibleDragon Glazing";
+    public override string TypeDescription => "A transparent InvisibleDragon opening construction.";
+    protected override DragonGoo<Glazing> Create(Glazing value) => new DragonGlazingGoo(value);
+    protected override DragonGoo<Glazing> CreateEmpty() => new DragonGlazingGoo();
+    protected override string DisplayText(Glazing value) =>
+        $"Glazing {value.Name} (U {value.UValueWattsPerSquareMetreKelvin:0.###})";
 }
 
 public sealed class DragonScheduleGoo : DragonGoo<Schedule>
@@ -75,16 +100,34 @@ public sealed class DragonSurfaceGoo : DragonGoo<Surface>
         : string.Join(" ", validation.Diagnostics.Where(item => item.IsFailure).Select(item => item.Message));
 }
 
-public sealed class DragonZoneGoo : DragonGoo<Zone>
+public sealed class DragonOpeningGoo : DragonGoo<IOpening>
 {
-    public DragonZoneGoo() { }
-    public DragonZoneGoo(Zone value) : base(value) { }
-    public override string TypeName => "InvisibleDragon Zone";
-    public override string TypeDescription => "A thermal zone with explicit polygon surfaces.";
-    protected override DragonGoo<Zone> Create(Zone value) => new DragonZoneGoo(value);
-    protected override DragonGoo<Zone> CreateEmpty() => new DragonZoneGoo();
-    protected override string DisplayText(Zone value) => $"Zone {value.Name} ({value.Surfaces.Count} surfaces)";
-    protected override string? InvalidReason(Zone value) => FailureText(value.Validate());
+    public DragonOpeningGoo() { }
+    public DragonOpeningGoo(IOpening value) : base(value) { }
+    public override string TypeName => "InvisibleDragon Opening";
+    public override string TypeDescription => "A polygonal InvisibleDragon window or door.";
+    protected override DragonGoo<IOpening> Create(IOpening value) => new DragonOpeningGoo(value);
+    protected override DragonGoo<IOpening> CreateEmpty() => new DragonOpeningGoo();
+    protected override string DisplayText(IOpening value) =>
+        $"{value.Type} {value.Name} ({value.Polygon.Area:0.###} m²)";
+}
+
+public sealed class DragonZoneDefinitionGoo : DragonGoo<InvisibleDragonZoneDefinition>
+{
+    public DragonZoneDefinitionGoo() { }
+    public DragonZoneDefinitionGoo(InvisibleDragonZoneDefinition value) : base(value) { }
+    public override string TypeName => "InvisibleDragon Zone Definition";
+    public override string TypeDescription =>
+        "A thermal zone together with the HVAC and ventilation systems it owns.";
+    protected override DragonGoo<InvisibleDragonZoneDefinition> Create(
+        InvisibleDragonZoneDefinition value) => new DragonZoneDefinitionGoo(value);
+    protected override DragonGoo<InvisibleDragonZoneDefinition> CreateEmpty() =>
+        new DragonZoneDefinitionGoo();
+    protected override string DisplayText(InvisibleDragonZoneDefinition value) =>
+        $"Zone {value.Zone.Name} ({value.Zone.Surfaces.Count} surfaces, "
+        + $"{value.SupplySystems.Count} HVAC, {value.Ventilators.Count} ERV)";
+    protected override string? InvalidReason(InvisibleDragonZoneDefinition value) =>
+        FailureText(value.Zone.Validate());
 
     private static string? FailureText(ValidationResult validation) => validation.IsValid
         ? null

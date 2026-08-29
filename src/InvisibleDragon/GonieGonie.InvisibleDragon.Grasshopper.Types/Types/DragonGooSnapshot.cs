@@ -28,11 +28,16 @@ internal static class DragonGooSnapshot
         (string kind, string json) = value switch
         {
             Material material => ("material", ToJson(MaterialSnapshot.From(material))),
+            Layer layer => ("layer", ToJson(LayerSnapshot.From(layer))),
             ISurfaceConstruction construction => ("construction", ToJson(ConstructionSnapshot.From(construction))),
+            Glazing glazing => ("glazing", ToJson(GlazingSnapshot.From(glazing))),
             Schedule schedule => ("schedule", ToJson(ScheduleSnapshot.From(schedule))),
             ZoneProfile profile => ("profile", ToJson(ProfileSnapshot.From(profile))),
+            IOpening opening => ("opening", ToJson(OpeningSnapshot.From(opening))),
             Surface surface => ("surface", ToJson(SurfaceSnapshot.From(surface))),
             Zone zone => ("zone", ToJson(ZoneSnapshot.From(zone))),
+            InvisibleDragonZoneDefinition definition =>
+                ("zone-definition", ToJson(ZoneDefinitionSnapshot.From(definition))),
             SourceSystem source => ("source-system", ToJson(SourceGraphSnapshot.From(source))),
             SupplySystem supply => ("supply-system", ToJson(SupplyGraphSnapshot.From(supply))),
             DomesticHotWater domesticHotWater =>
@@ -66,11 +71,15 @@ internal static class DragonGooSnapshot
         object value = envelope.Kind switch
         {
             "material" => FromJson<MaterialSnapshot>(envelope.Payload).ToDomain(),
+            "layer" => FromJson<LayerSnapshot>(envelope.Payload).ToDomain(),
             "construction" => FromJson<ConstructionSnapshot>(envelope.Payload).ToDomain(),
+            "glazing" => FromJson<GlazingSnapshot>(envelope.Payload).ToDomain(),
             "schedule" => FromJson<ScheduleSnapshot>(envelope.Payload).ToDomain(),
             "profile" => FromJson<ProfileSnapshot>(envelope.Payload).ToDomain(),
+            "opening" => FromJson<OpeningSnapshot>(envelope.Payload).ToDomain(),
             "surface" => FromJson<SurfaceSnapshot>(envelope.Payload).ToDomain(),
             "zone" => FromJson<ZoneSnapshot>(envelope.Payload).ToDomain(),
+            "zone-definition" => FromJson<ZoneDefinitionSnapshot>(envelope.Payload).ToDomain(),
             "source-system" => FromJson<SourceGraphSnapshot>(envelope.Payload).ToDomain(),
             "supply-system" => FromJson<SupplyGraphSnapshot>(envelope.Payload).ToDomain(),
             "domestic-hot-water" => FromJson<DomesticHotWaterSnapshot>(envelope.Payload).ToDomain(),
@@ -1170,6 +1179,36 @@ internal static class DragonGooSnapshot
             SupplyAirFlowCubicMetresPerSecond,
             FanTotalEfficiency,
             FanPressureRisePascals);
+    }
+
+    private sealed class ZoneDefinitionSnapshot
+    {
+        public ZoneSnapshot Zone { get; set; } = new();
+        public List<SupplyGraphSnapshot> SupplySystems { get; set; } = new();
+        public List<EnergyRecoveryVentilatorSnapshot> Ventilators { get; set; } = new();
+
+        public static ZoneDefinitionSnapshot From(InvisibleDragonZoneDefinition value) => new()
+        {
+            Zone = ZoneSnapshot.From(value.Zone),
+            SupplySystems = value.SupplySystems.Select(SupplyGraphSnapshot.From).ToList(),
+            Ventilators = value.Ventilators.Select(EnergyRecoveryVentilatorSnapshot.From).ToList(),
+        };
+
+        public InvisibleDragonZoneDefinition ToDomain()
+        {
+            List<SupplyGraphSnapshot> supplySystems = Required(
+                SupplySystems,
+                nameof(SupplySystems));
+            List<EnergyRecoveryVentilatorSnapshot> ventilators = Required(
+                Ventilators,
+                nameof(Ventilators));
+            return new InvisibleDragonZoneDefinition(
+                Required(Zone, nameof(Zone)).ToDomain(),
+                supplySystems.Select((item, index) =>
+                    Required(item, $"{nameof(SupplySystems)}[{index}]").ToDomain()),
+                ventilators.Select((item, index) =>
+                    Required(item, $"{nameof(Ventilators)}[{index}]").ToDomain()));
+        }
     }
 
     private sealed class DomesticHotWaterSnapshot

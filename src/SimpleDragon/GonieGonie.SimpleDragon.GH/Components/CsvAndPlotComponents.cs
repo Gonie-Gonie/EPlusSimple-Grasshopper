@@ -42,7 +42,7 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
         pManager.AddGenericParameter(
             "Geometry Map Data",
             "Map",
-            "Structured GreenRetrofitGeometryMapEntry values from Extract SimpleDragon Zones.",
+            "Structured GreenRetrofitGeometryMapEntry values from SimpleDragon Model.",
             GH_ParamAccess.list);
         pManager.AddBooleanParameter(
             "Export",

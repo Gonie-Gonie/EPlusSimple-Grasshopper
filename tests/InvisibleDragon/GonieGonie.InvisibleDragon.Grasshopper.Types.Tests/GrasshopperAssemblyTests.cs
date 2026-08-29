@@ -27,7 +27,6 @@ public sealed class GrasshopperAssemblyTests
         new("6f59e771-5dc0-44aa-9b7d-a84c3d0c7d74"),
         new("3d5f630e-66c3-43da-b73c-50d5be1792c3"),
         new("237bc85d-769a-468b-a048-70e3b5c382ee"),
-        new("1c78fc6e-952f-4513-a39f-b107daba9677"),
     };
 
     [Fact]
@@ -40,7 +39,7 @@ public sealed class GrasshopperAssemblyTests
 
         Assert.All(components, component => Assert.Equal("InvisibleDragon", component.Category));
         Assert.Equal(components.Count, components.Select(component => component.ComponentGuid).Distinct().Count());
-        Assert.Contains(new Guid("5f1a9663-6f81-4635-b54d-607b48c9fd47"), components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("c25eb6d8-9500-44e5-9909-58d41de0a320"), components.Select(component => component.ComponentGuid));
         Assert.All(HvacComponentGuids, guid => Assert.Contains(guid, components.Select(component => component.ComponentGuid)));
     }
 
@@ -51,7 +50,7 @@ public sealed class GrasshopperAssemblyTests
         Type[] componentTypes = ComponentTypes(assembly);
 
         Assert.EndsWith(".gha", assembly.Location, StringComparison.OrdinalIgnoreCase);
-        Assert.Equal(34, componentTypes.Length);
+        Assert.Equal(33, componentTypes.Length);
         Assert.All(componentTypes, type => Assert.NotNull(Activator.CreateInstance(type)));
     }
 
@@ -104,7 +103,7 @@ public sealed class GrasshopperAssemblyTests
             .OrderBy(name => name, StringComparer.Ordinal)
             .ToArray();
 
-        Assert.Equal(16, parameterTypes.Length);
+        Assert.Equal(19, parameterTypes.Length);
         Assert.Equal(parameterTypes.Length, resources.Length);
         var resourceHashes = new HashSet<string>(StringComparer.Ordinal);
         var runtimeHashes = new HashSet<string>(StringComparer.Ordinal);

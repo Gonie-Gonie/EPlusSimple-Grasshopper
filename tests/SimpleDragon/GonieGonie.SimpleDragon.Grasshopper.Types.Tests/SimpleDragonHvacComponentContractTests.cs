@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Globalization;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Grasshopper.Types;
@@ -10,34 +10,12 @@ using Grasshopper.Kernel.Types;
 
 namespace GonieGonie.SimpleDragon.Grasshopper.Tests;
 
+[SuppressMessage(
+    "Performance",
+    "CA1861:Avoid constant arrays as arguments",
+    Justification = "Inline arrays keep each Grasshopper port contract local and readable.")]
 public sealed class SimpleDragonHvacComponentContractTests
 {
-    private static readonly int[] TwoVentilators = { 2 };
-
-    private static readonly string[] AppendedModelInputNames =
-    {
-        "Source Systems",
-        "Supply Systems",
-        "ERV Systems",
-        "Photovoltaic Panels",
-    };
-
-    private static readonly string[] AppendedModelInputTypes =
-    {
-        "SimpleDragonSourceSystemParam",
-        "SimpleDragonSupplySystemParam",
-        "SimpleDragonEnergyRecoveryVentilatorParam",
-        "SimpleDragonPhotovoltaicPanelParam",
-    };
-
-    private static readonly string[] ModelOutputNames =
-    {
-        "GRM",
-        "JSON",
-        "Floor Area",
-        "Diagnostics",
-    };
-
     private static readonly IReadOnlyDictionary<string, Guid> ExpectedComponents =
         new Dictionary<string, Guid>(StringComparer.Ordinal)
         {
@@ -56,8 +34,6 @@ public sealed class SimpleDragonHvacComponentContractTests
             ["SimpleDragonElectricRadiantFloorComponent"] = new("e7d20017-8999-4cc1-bc12-f288f3f2ceb7"),
             ["SimpleDragonEnergyRecoveryVentilatorComponent"] = new("15afd6e6-1c05-4715-909b-b6e98ef91375"),
             ["SimpleDragonPhotovoltaicPanelComponent"] = new("7fcb5c47-3d49-4aa0-8fbc-bd765711401f"),
-            ["AssignSimpleDragonSupplySystemsComponent"] = new("82b8b48c-5930-4649-bc5f-6c17b05daa52"),
-            ["AssignSimpleDragonVentilationSystemsComponent"] = new("5f66b3fd-e69c-4c33-92db-839c07dcbda5"),
         };
 
     [Fact]
@@ -68,7 +44,7 @@ public sealed class SimpleDragonHvacComponentContractTests
             .Select(name => Component(assembly, name))
             .ToArray();
 
-        Assert.Equal(17, components.Length);
+        Assert.Equal(15, components.Length);
         Assert.All(components, component =>
         {
             Assert.Equal("SimpleDragon", component.Category);
@@ -89,17 +65,11 @@ public sealed class SimpleDragonHvacComponentContractTests
             "SimpleDragonSupplySystemParam",
             Component(assembly, name).Params.Output[0].GetType().Name));
         Assert.Equal(
-            "SimpleDragonEnergyRecoveryVentilatorParam",
+            "SimpleDragonZoneErvParam",
             Component(assembly, "SimpleDragonEnergyRecoveryVentilatorComponent").Params.Output[0].GetType().Name);
         Assert.Equal(
             "SimpleDragonPhotovoltaicPanelParam",
             Component(assembly, "SimpleDragonPhotovoltaicPanelComponent").Params.Output[0].GetType().Name);
-        Assert.Equal(
-            "SimpleDragonZoneParam",
-            Component(assembly, "AssignSimpleDragonSupplySystemsComponent").Params.Output[0].GetType().Name);
-        Assert.Equal(
-            "SimpleDragonZoneParam",
-            Component(assembly, "AssignSimpleDragonVentilationSystemsComponent").Params.Output[0].GetType().Name);
     }
 
     [Fact]
@@ -327,116 +297,35 @@ public sealed class SimpleDragonHvacComponentContractTests
     }
 
     [Fact]
-    public void AssignmentsAndExplicitCatalogInputsProduceCompleteGreenRetrofitModel()
+    public void ErvComponentProducesOwnedZoneErvWithCountInOneStep()
     {
         Assembly assembly = LoadPlugin();
-        GreenRetrofitModel template = GrmReader.ReadFile(Fixture()).RequireModel();
-        Zone templateZone = Assert.Single(template.Zones);
-        var boiler = new SourceSystem(
-            "Authored Boiler",
-            SourceSystemType.Boiler,
-            FuelType.NaturalGas,
-            heatingCapacity: 25_000d,
-            efficiency: 0.9d,
-            hotWaterSupply: false,
-            id: new EntityId("SOURCE-AUTHORED"));
-        var radiator = new SupplySystem(
-            "Authored Radiator",
-            SupplySystemType.Radiator,
-            boiler.Id.Value,
-            boiler,
-            heatingCapacity: 9_000d,
-            id: new EntityId("SUPPLY-AUTHORED"));
-        var ventilator = new VentilationSystem(
-            "Authored ERV",
-            0.3d,
-            0.8d,
-            0.6d,
-            new EntityId("ERV-AUTHORED"));
-        var panel = new PhotovoltaicSystem(
-            "Authored PV",
-            20d,
-            0.21d,
-            180d,
-            25d,
-            new EntityId("PV-AUTHORED"));
+        GH_Component component = Component(assembly, "SimpleDragonEnergyRecoveryVentilatorComponent");
+        Assert.Equal(
+            new[] { "Name", "Airflow", "Heating Efficiency", "Cooling Efficiency", "ID", "Count" },
+            component.Params.Input.Select(parameter => parameter.Name));
+        Assert.True(component.Params.Input[5].Optional);
+        Assert.Equal("Zone ERV", component.Params.Output[0].Name);
+        Assert.Equal("SimpleDragonZoneErvParam", component.Params.Output[0].GetType().Name);
 
-        var supplyAssignmentAccess = new TestDataAccess(new Dictionary<int, object?>
+        var access = new TestDataAccess(new Dictionary<int, object?>
         {
-            [0] = new SimpleDragonZoneGoo(templateZone),
-            [1] = new[] { new SimpleDragonSupplySystemGoo(radiator) },
-            [2] = false,
+            [0] = "Authored ERV",
+            [1] = 0.3d,
+            [2] = 0.8d,
+            [3] = 0.6d,
+            [4] = "ERV-AUTHORED",
+            [5] = 2,
         });
-        InvokeSolve(Component(assembly, "AssignSimpleDragonSupplySystemsComponent"), supplyAssignmentAccess);
-        SimpleDragonZoneGoo zoneWithSupply = Assert.IsType<SimpleDragonZoneGoo>(supplyAssignmentAccess.Outputs[0]);
-        Assert.Contains(zoneWithSupply.Value.SupplySystems, item => item.Id.Equals(radiator.Id));
+        InvokeSolve(component, access);
 
-        var ventilationAssignmentAccess = new TestDataAccess(new Dictionary<int, object?>
-        {
-            [0] = zoneWithSupply,
-            [1] = new[] { new SimpleDragonEnergyRecoveryVentilatorGoo(ventilator) },
-            [2] = TwoVentilators,
-            [3] = false,
-        });
-        InvokeSolve(Component(assembly, "AssignSimpleDragonVentilationSystemsComponent"), ventilationAssignmentAccess);
-        SimpleDragonZoneGoo authoredZone = Assert.IsType<SimpleDragonZoneGoo>(ventilationAssignmentAccess.Outputs[0]);
-        VentilationAssignment assignment = Assert.Single(
-            authoredZone.Value.VentilationAssignments,
-            item => item.VentilationSystemId == ventilator.Id.Value);
+        SimpleDragonZoneErvGoo goo =
+            Assert.IsType<SimpleDragonZoneErvGoo>(access.Outputs[0]);
+        VentilationAssignment assignment = goo.Value;
         Assert.Equal(2, assignment.Count);
-
-        GH_Component assemble = Component(assembly, "AssembleGreenRetrofitModelComponent");
-        var assembleAccess = new TestDataAccess(new Dictionary<int, object?>
-        {
-            [0] = "Authored Complete Model",
-            [1] = new[] { authoredZone },
-            [2] = template.NorthAxis,
-            [3] = template.Address,
-            [4] = template.Vintage.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
-            [5] = template.IsMultifamilyHousing,
-            [6] = Array.Empty<SimpleDragonMaterialGoo>(),
-            [7] = Array.Empty<SimpleDragonSurfaceConstructionGoo>(),
-            [8] = Array.Empty<SimpleDragonFenestrationConstructionGoo>(),
-            [9] = new[] { new SimpleDragonSourceSystemGoo(boiler) },
-            [10] = new[] { new SimpleDragonSupplySystemGoo(radiator) },
-            [11] = new[] { new SimpleDragonEnergyRecoveryVentilatorGoo(ventilator) },
-            [12] = new[] { new SimpleDragonPhotovoltaicPanelGoo(panel) },
-        });
-        InvokeSolve(assemble, assembleAccess);
-
-        GreenRetrofitModelGoo modelGoo = Assert.IsType<GreenRetrofitModelGoo>(assembleAccess.Outputs[0]);
-        GreenRetrofitModel model = modelGoo.Value;
-        Assert.Contains(model.SourceSystems, item => item.Id.Equals(boiler.Id));
-        Assert.Contains(model.SupplySystems, item => item.Id.Equals(radiator.Id));
-        Assert.Contains(model.VentilationSystems, item => item.Id.Equals(ventilator.Id));
-        Assert.Contains(model.PhotovoltaicSystems, item => item.Id.Equals(panel.Id));
-        Assert.Contains(model.Zones[0].SupplySystems, item => item.Id.Equals(radiator.Id));
-        Assert.Contains(model.Zones[0].VentilationAssignments, item =>
-            item.VentilationSystemId == ventilator.Id.Value && item.Count == 2);
-        Assert.Equal(GrmWriter.Serialize(model), Assert.IsType<string>(assembleAccess.Outputs[1]));
-    }
-
-    [Fact]
-    public void AssembleGrmPreservesExistingInputIndexesAndAppendsOptionalTypedCatalogs()
-    {
-        GH_Component component = Component(LoadPlugin(), "AssembleGreenRetrofitModelComponent");
-        string[] legacyNames =
-        {
-            "Name",
-            "Zones",
-            "North Axis",
-            "Address",
-            "Vintage",
-            "Multifamily Housing",
-            "Materials",
-            "Surface Constructions",
-            "Fenestration Constructions",
-        };
-        Assert.Equal(legacyNames, component.Params.Input.Take(9).Select(item => item.Name));
-        Assert.Equal(AppendedModelInputNames, component.Params.Input.Skip(9).Select(item => item.Name));
-        Assert.Equal(AppendedModelInputTypes, component.Params.Input.Skip(9).Select(item => item.GetType().Name));
-        Assert.All(component.Params.Input.Skip(9), item => Assert.True(item.Optional));
-        Assert.Equal(ModelOutputNames, component.Params.Output.Select(item => item.Name));
+        Assert.Equal("ERV-AUTHORED", assignment.VentilationSystemId);
+        Assert.NotNull(assignment.VentilationSystem);
+        Assert.Equal("Authored ERV", assignment.VentilationSystem!.Name);
     }
 
     private static SimpleDragonSourceSystemGoo Source(

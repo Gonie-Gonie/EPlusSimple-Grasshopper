@@ -30,7 +30,9 @@ If Weather remains empty, inspect `SD.GH.WEATHER_*` and `SD.WEATHER.*` diagnosti
 
 The canonical runner uses `%LOCALAPPDATA%` for verified runtime/weather caches and `%TEMP%/GonieGonie/Dragons` for simulation work. It does not write below Rhino's installation directory and requires no administrator rights.
 
-If the definition contains Runtime Root, Temp Root, IDD Path, or EPW Path inputs, it is using a hidden legacy component. Replace that branch with `SD to IDF` and `Run InvisibleDragon`. If access is still denied, verify that the current Windows profile can write to LocalAppData and the operating-system temp directory and include the diagnostic code in the report.
+If access is still denied, verify that the current Windows profile can write to
+LocalAppData and the operating-system temp directory, reinstall the current
+packages, and include the diagnostic code in the report.
 
 ## An opening has no host face
 

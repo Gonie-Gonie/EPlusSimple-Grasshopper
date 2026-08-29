@@ -151,8 +151,7 @@ public sealed class PrepareSimpleDragonSimulationComponent : SimpleDragonCompone
     /// <summary>
     /// Retains the SimpleDragon conversion semantics that affect model meaning,
     /// while using the valid EnergyPlus 24.2 HVAC field layout for the path-free
-    /// execution document. The legacy HVAC layout remains available only through
-    /// the hidden compatibility converter.
+    /// execution document. The canonical execution handoff always uses this layout.
     /// </summary>
     internal static EnergyModelIdfOptions CreateExecutionIdfOptions() =>
         new()

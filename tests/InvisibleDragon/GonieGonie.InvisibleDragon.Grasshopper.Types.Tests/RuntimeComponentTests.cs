@@ -20,26 +20,6 @@ public sealed class RuntimeComponentTests
         "Diagnostics",
     };
 
-    private static readonly string[] PrepareInputNames =
-    {
-        "Target Root",
-        "Prepare",
-        "Cancel",
-        "Replace Invalid Custom Target",
-        "Lock Timeout",
-    };
-
-    private static readonly string[] PrepareOutputNames =
-    {
-        "Runtime Root",
-        "Executable",
-        "State",
-        "Ready",
-        "Progress",
-        "Message",
-        "Diagnostics",
-    };
-
     private static readonly string[] ManagedRunInputNames =
     {
         "IDF",
@@ -96,62 +76,6 @@ public sealed class RuntimeComponentTests
     }
 
     [Fact]
-    public void PrepareRuntimeComponentMakesBundledFirstAcquisitionAndSafeCacheExplicit()
-    {
-        Assembly assembly = LoadPlugin();
-        GH_Component component = CreateComponent(
-            assembly,
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.PrepareEnergyPlusRuntimeComponent");
-
-        Assert.Equal(new Guid("5199b03c-644b-4194-b38c-37f3c7a423aa"), component.ComponentGuid);
-        Assert.Equal("InvisibleDragon", component.Category);
-        Assert.Contains("bundled archive is used first", component.Description, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("LocalAppData", component.Description, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("weather files are never acquired", component.Description, StringComparison.OrdinalIgnoreCase);
-        Assert.Equal(PrepareInputNames, component.Params.Input.Select(parameter => parameter.Name));
-        Assert.Equal(PrepareOutputNames, component.Params.Output.Select(parameter => parameter.Name));
-        Assert.Contains("saved True value does not run", component.Params.Input[1].Description, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("False to True", component.Params.Input[2].Description, StringComparison.Ordinal);
-        Assert.Contains("Bundled-copy", component.Params.Output[4].Description, StringComparison.Ordinal);
-        Assert.Contains("0 to 1", component.Params.Output[4].Description, StringComparison.Ordinal);
-        Assert.Equal(false, PersistentDefault(component.Params.Input[1]));
-    }
-
-    [Fact]
-    public void RunComponentOnlyBootstrapsAsPartOfAnExplicitRunRequest()
-    {
-        Assembly assembly = LoadPlugin();
-        GH_Component component = CreateComponent(
-            assembly,
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.RunEnergyPlusComponent");
-
-        Assert.Equal(10, component.Params.Input.Count);
-        Assert.Equal("Prepare Missing Runtime", component.Params.Input[9].Name);
-        Assert.Contains("When Run rises", component.Params.Input[9].Description, StringComparison.Ordinal);
-        Assert.Contains("bundled archive is used first", component.Params.Input[9].Description, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("LocalAppData", component.Params.Input[9].Description, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("never acquires weather", component.Params.Input[9].Description, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("user-supplied EPW", component.Params.Input[1].Description, StringComparison.OrdinalIgnoreCase);
-        Assert.Equal(true, PersistentDefault(component.Params.Input[9]));
-
-        Type gateType = assembly.GetType(
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.ExplicitTriggerGate",
-            throwOnError: true)!;
-        foreach (string componentTypeName in new[]
-        {
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.PrepareEnergyPlusRuntimeComponent",
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.RunEnergyPlusComponent",
-        })
-        {
-            Type componentType = assembly.GetType(componentTypeName, throwOnError: true)!;
-            FieldInfo field = componentType.GetField(
-                "triggerGate",
-                BindingFlags.Instance | BindingFlags.NonPublic)!;
-            Assert.Equal(gateType, field.FieldType);
-        }
-    }
-
-    [Fact]
     public void CanonicalCompileUsesNoUserManagedIddPath()
     {
         Assembly assembly = LoadPlugin();
@@ -197,23 +121,6 @@ public sealed class RuntimeComponentTests
         Assert.Contains("managed internally", component.Description, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("only consumes", component.Description, StringComparison.OrdinalIgnoreCase);
         Assert.Equal(false, PersistentDefault(component.Params.Input[2]));
-
-        GH_Component legacyRun = CreateComponent(
-            assembly,
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.RunEnergyPlusComponent");
-        GH_Component legacyPrepare = CreateComponent(
-            assembly,
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.PrepareEnergyPlusRuntimeComponent");
-        GH_Component legacyCompile = CreateComponent(
-            assembly,
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.CompileIdfComponent");
-        GH_Component legacyValidate = CreateComponent(
-            assembly,
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.ValidateIdfComponent");
-        Assert.Equal(GH_Exposure.hidden, legacyRun.Exposure);
-        Assert.Equal(GH_Exposure.hidden, legacyPrepare.Exposure);
-        Assert.Equal(GH_Exposure.hidden, legacyCompile.Exposure);
-        Assert.Equal(GH_Exposure.hidden, legacyValidate.Exposure);
     }
 
     [Fact]

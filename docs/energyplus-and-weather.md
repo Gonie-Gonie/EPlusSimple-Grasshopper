@@ -34,7 +34,7 @@ Developer setup verifies the same archives used by candidate packaging. Released
 
 Runtime bootstrap rejects archive traversal, links, device paths, excessive entries/expanded size, and hash mismatches. Staging is promoted atomically. Failed or cancelled operations clean their owned partial directories.
 
-If a runtime or weather cache becomes invalid, the next explicit solve reports a structured diagnostic and can prepare the module-owned cache again. Historical components with explicit path inputs retain their GUIDs only for old-file compatibility and are hidden from the normal palette.
+If a runtime or weather cache becomes invalid, the next explicit solve reports a structured diagnostic and can prepare the module-owned cache again. The Grasshopper products expose only the managed path-free preparation, compilation, and execution components.
 
 Successful simulations remove their temporary working directories after the
 result is parsed. Failed or cancelled simulations are retained below

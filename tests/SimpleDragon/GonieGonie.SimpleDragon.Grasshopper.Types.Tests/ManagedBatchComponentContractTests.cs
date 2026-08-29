@@ -15,74 +15,30 @@ public sealed class ManagedBatchComponentContractTests
 {
     private const string ManagedTypeName =
         "GonieGonie.SimpleDragon.Grasshopper.Components.ManagedRunSimpleDragonBatchComponent";
-    private const string LegacyTypeName =
-        "GonieGonie.SimpleDragon.Grasshopper.Components.RunSimpleDragonBatchComponent";
 
     [Fact]
     public void ManagedBatchHasStablePathlessTypedContract()
     {
         GH_Component component = Component(ManagedTypeName);
 
-        Assert.Equal(new Guid("49b71334-f6f0-4964-b1ed-c80e03a3a574"), component.ComponentGuid);
+        Assert.Equal(new Guid("e0a54494-3d69-4681-8756-cc3cd86df4e1"), component.ComponentGuid);
         Assert.Equal(GH_Exposure.primary, component.Exposure);
         Assert.Equal(
-            new[] { "Models", "Case IDs", "Parallel Limit", "Run", "Cancel" },
+            new[] { "Cases", "Parallel Limit", "Run", "Cancel" },
             component.Params.Input.Select(parameter => parameter.Name));
         Assert.Equal(
             new[] { "State", "Case IDs", "Statuses", "Combined CSV", "Manifest", "Complete", "Diagnostics" },
             component.Params.Output.Select(parameter => parameter.Name));
-        Assert.IsType<GreenRetrofitModelParam>(component.Params.Input[0]);
+        Assert.IsType<SimpleDragonBatchCaseParam>(component.Params.Input[0]);
         Assert.Equal(GH_ParamAccess.list, component.Params.Input[0].Access);
-        Assert.Equal(GH_ParamAccess.list, component.Params.Input[1].Access);
-        Assert.True(component.Params.Input[1].Optional);
+        Assert.Equal(GH_ParamAccess.item, component.Params.Input[1].Access);
         Assert.Equal(GH_ParamAccess.item, component.Params.Input[2].Access);
         Assert.Equal(GH_ParamAccess.item, component.Params.Input[3].Access);
-        Assert.Equal(GH_ParamAccess.item, component.Params.Input[4].Access);
         Assert.All(
             component.Params.Input,
             parameter => Assert.DoesNotContain(
                 new[] { "Path", "Root", "EPW", "IDD", "Runtime", "Output", "Temp" },
                 forbidden => parameter.Name.Contains(forbidden, StringComparison.OrdinalIgnoreCase)));
-    }
-
-    [Fact]
-    public void LegacyBatchIsHiddenWithoutChangingGuidOrPorts()
-    {
-        GH_Component component = Component(LegacyTypeName);
-
-        Assert.Equal(new Guid("c0af86b6-5f6e-478c-b069-a7892a31dadd"), component.ComponentGuid);
-        Assert.Equal(GH_Exposure.hidden, component.Exposure);
-        Assert.Equal(
-            new[]
-            {
-                "Models",
-                "Case IDs",
-                "EPW Paths",
-                "Runtime Root",
-                "Output Root",
-                "Parallel Limit",
-                "Run",
-                "Cancel",
-            },
-            component.Params.Input.Select(parameter => parameter.Name));
-        Assert.Equal(
-            new[] { "State", "Case IDs", "Statuses", "Combined CSV", "Manifest", "Complete", "Diagnostics" },
-            component.Params.Output.Select(parameter => parameter.Name));
-        Assert.Equal(
-            new[]
-            {
-                GH_ParamAccess.list,
-                GH_ParamAccess.list,
-                GH_ParamAccess.list,
-                GH_ParamAccess.item,
-                GH_ParamAccess.item,
-                GH_ParamAccess.item,
-                GH_ParamAccess.item,
-                GH_ParamAccess.item,
-            },
-            component.Params.Input.Select(parameter => parameter.Access));
-        Assert.Equal(new[] { false, true, true, true, true, false, false, false },
-            component.Params.Input.Select(parameter => parameter.Optional));
     }
 
     [Fact]
@@ -137,8 +93,10 @@ public sealed class ManagedBatchComponentContractTests
             component,
             new object[]
             {
-                new List<GreenRetrofitModelGoo> { new(model) },
-                Array.Empty<string>(),
+                new List<SimpleDragonBatchCaseGoo>
+                {
+                    new(new SimpleDragonBatchCase(model, "address-model")),
+                },
                 2,
             });
 
@@ -151,8 +109,10 @@ public sealed class ManagedBatchComponentContractTests
             component,
             new object[]
             {
-                new List<GreenRetrofitModelGoo> { new(model) },
-                Array.Empty<string>(),
+                new List<SimpleDragonBatchCaseGoo>
+                {
+                    new(new SimpleDragonBatchCase(model, "address-model")),
+                },
                 1025,
             });
         Assert.Null(excessiveParallelism);

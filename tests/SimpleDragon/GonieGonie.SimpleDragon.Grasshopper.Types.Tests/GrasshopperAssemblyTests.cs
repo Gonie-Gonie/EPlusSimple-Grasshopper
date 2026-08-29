@@ -9,15 +9,6 @@ namespace GonieGonie.SimpleDragon.Grasshopper.Tests;
 
 public sealed class GrasshopperAssemblyTests
 {
-    private static readonly string[] GeometryOutputNames =
-    {
-        "Zones",
-        "Surfaces",
-        "Geometry Map",
-        "Diagnostics",
-        "Geometry Map Data",
-    };
-
     private static readonly string[] CsvInputNames =
     {
         "GRR",
@@ -39,16 +30,6 @@ public sealed class GrasshopperAssemblyTests
         "Written",
     };
 
-    private static readonly string[] ConvertOutputNames =
-    {
-        "Energy Model",
-        "IDF",
-        "IDF Text",
-        "EPW File",
-        "Success",
-        "Diagnostics",
-    };
-
     [Fact]
     public void PluginAssemblyUsesGhaExtensionAndLoadsRequiredComponents()
     {
@@ -61,8 +42,6 @@ public sealed class GrasshopperAssemblyTests
         Assert.True(components.Length >= 35);
         Assert.All(components, component => Assert.Equal("SimpleDragon", component.Category));
         Assert.Equal(components.Length, components.Select(component => component.ComponentGuid).Distinct().Count());
-        Assert.Contains(new Guid("b38f2e41-f63b-42a8-b549-65cd60c7a994"),
-            components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("9fe8a410-ea95-4eb8-81ec-56c45cdd029c"),
             components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("cb5a98f8-4188-4323-b55d-795b4a7ba20e"),
@@ -73,9 +52,9 @@ public sealed class GrasshopperAssemblyTests
             components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("e6e14d7b-55b4-45a9-97f9-9b99715f5ebc"),
             components.Select(component => component.ComponentGuid));
-        Assert.Contains(new Guid("5f66b3fd-e69c-4c33-92db-839c07dcbda5"),
+        Assert.Contains(new Guid("e0a54494-3d69-4681-8756-cc3cd86df4e1"),
             components.Select(component => component.ComponentGuid));
-        Assert.Contains(new Guid("49b71334-f6f0-4964-b1ed-c80e03a3a574"),
+        Assert.Contains(new Guid("11336c6a-5bd4-4d6b-80a1-89bd168f8d54"),
             components.Select(component => component.ComponentGuid));
     }
 
@@ -128,7 +107,7 @@ public sealed class GrasshopperAssemblyTests
             .OrderBy(name => name, StringComparer.Ordinal)
             .ToArray();
 
-        Assert.Equal(15, parameterTypes.Length);
+        Assert.Equal(16, parameterTypes.Length);
         Assert.Equal(parameterTypes.Length, resources.Length);
         var resourceHashes = new HashSet<string>(StringComparer.Ordinal);
         var runtimeHashes = new HashSet<string>(StringComparer.Ordinal);
@@ -193,7 +172,7 @@ public sealed class GrasshopperAssemblyTests
             }
         }
 
-        Assert.Equal(31, count);
+        Assert.Equal(35, count);
     }
 
     private static void AssertTransparentBorder(Bitmap bitmap)
@@ -209,16 +188,14 @@ public sealed class GrasshopperAssemblyTests
     }
 
     [Fact]
-    public void GeometryAndCsvPlotPortsPreserveOldOrderAndExposeStructuredData()
+    public void CsvAndPlotPortsExposeStructuredData()
     {
         Assembly assembly = LoadPlugin("GonieGonie.SimpleDragon.GH");
-        GH_Component geometry = Component(assembly, "ExtractSimpleDragonZonesComponent");
         GH_Component export = Component(assembly, "ExportGreenRetrofitCsvComponent");
         GH_Component dataTree = Component(assembly, "GreenRetrofitDataTreeComponent");
         GH_Component line = Component(assembly, "GreenRetrofitMonthlyLinePlotComponent");
         GH_Component bars = Component(assembly, "GreenRetrofitMonthlyBarPlotComponent");
 
-        Assert.Equal(GeometryOutputNames, geometry.Params.Output.Select(parameter => parameter.Name));
         Assert.Equal(CsvInputNames, export.Params.Input.Select(parameter => parameter.Name));
         Assert.Equal(CsvOutputNames, export.Params.Output.Select(parameter => parameter.Name));
         Assert.Equal(GH_ParamAccess.tree, dataTree.Params.Output[2].Access);
@@ -231,29 +208,30 @@ public sealed class GrasshopperAssemblyTests
     }
 
     [Fact]
-    public void WeatherAutomationPreservesPortsAndAdvertisesExecutableReadiness()
+    public void CanonicalComponentsHaveNoHiddenOrRelationshipStageResidue()
     {
         Assembly assembly = LoadPlugin("GonieGonie.SimpleDragon.GH");
-        GH_Component convert = Component(assembly, "ConvertGreenRetrofitModelComponent");
-        GH_Component batch = Component(assembly, "RunSimpleDragonBatchComponent");
+        GH_Component[] components = ComponentTypes(assembly)
+            .Select(type => Assert.IsAssignableFrom<GH_Component>(Activator.CreateInstance(type)))
+            .ToArray();
+        string[] forbiddenStageWords = { "Assign", "Assemble", "Extract" };
 
-        Assert.Equal(ConvertOutputNames, convert.Params.Output.Select(parameter => parameter.Name));
-        Assert.Contains(
-            "automatically selected",
-            convert.Params.Output[3].Description,
-            StringComparison.OrdinalIgnoreCase);
-        Assert.Contains(
-            "EPW is ready",
-            convert.Params.Output[4].Description,
-            StringComparison.OrdinalIgnoreCase);
-        Assert.Contains(
-            "packaged SimpleDragon weather archive",
-            batch.Params.Input[2].Description,
-            StringComparison.OrdinalIgnoreCase);
-        Assert.Contains(
-            "saved True value does not run",
-            batch.Params.Input[6].Description,
-            StringComparison.OrdinalIgnoreCase);
+        Assert.All(components, component =>
+        {
+            Assert.NotEqual(GH_Exposure.hidden, component.Exposure);
+            Assert.All(forbiddenStageWords, word =>
+            {
+                Assert.DoesNotContain(word, component.Name, StringComparison.OrdinalIgnoreCase);
+                Assert.DoesNotContain(word, component.NickName, StringComparison.OrdinalIgnoreCase);
+            });
+            Assert.All(component.Params.Input, input =>
+            {
+                Assert.DoesNotContain("Index", input.Name, StringComparison.OrdinalIgnoreCase);
+                Assert.DoesNotContain("Indices", input.Name, StringComparison.OrdinalIgnoreCase);
+                Assert.DoesNotContain("Index", input.Description, StringComparison.OrdinalIgnoreCase);
+                Assert.DoesNotContain("Indices", input.Description, StringComparison.OrdinalIgnoreCase);
+            });
+        });
     }
 
     [Fact]
@@ -262,6 +240,7 @@ public sealed class GrasshopperAssemblyTests
         Guid[] simpleParameters =
         {
             new SimpleDragonMaterialParam().ComponentGuid,
+            new SimpleDragonSurfaceConstructionLayerParam().ComponentGuid,
             new SimpleDragonSurfaceConstructionParam().ComponentGuid,
             new SimpleDragonFenestrationConstructionParam().ComponentGuid,
             new SimpleDragonUsageProfileParam().ComponentGuid,
@@ -271,23 +250,27 @@ public sealed class GrasshopperAssemblyTests
             new SimpleDragonZoneDefinitionParam().ComponentGuid,
             new SimpleDragonSourceSystemParam().ComponentGuid,
             new SimpleDragonSupplySystemParam().ComponentGuid,
-            new SimpleDragonEnergyRecoveryVentilatorParam().ComponentGuid,
-            new SimpleDragonVentilationAssignmentParam().ComponentGuid,
+            new SimpleDragonZoneErvParam().ComponentGuid,
             new SimpleDragonPhotovoltaicPanelParam().ComponentGuid,
             new GreenRetrofitModelParam().ComponentGuid,
+            new SimpleDragonBatchCaseParam().ComponentGuid,
             new GreenRetrofitResultParam().ComponentGuid,
         };
         Guid[] invisibleParameters =
         {
             new DragonMaterialParam().ComponentGuid,
+            new DragonLayerParam().ComponentGuid,
             new DragonConstructionParam().ComponentGuid,
+            new DragonGlazingParam().ComponentGuid,
             new DragonScheduleParam().ComponentGuid,
             new DragonProfileParam().ComponentGuid,
             new DragonSurfaceParam().ComponentGuid,
-            new DragonZoneParam().ComponentGuid,
+            new DragonOpeningParam().ComponentGuid,
+            new DragonZoneDefinitionParam().ComponentGuid,
             new DragonEnergyModelParam().ComponentGuid,
             new DragonSourceSystemParam().ComponentGuid,
             new DragonSupplySystemParam().ComponentGuid,
+            new DragonDomesticHotWaterParam().ComponentGuid,
             new DragonEnergyRecoveryVentilatorParam().ComponentGuid,
             new DragonPhotovoltaicPanelParam().ComponentGuid,
             new DragonIdfParam().ComponentGuid,

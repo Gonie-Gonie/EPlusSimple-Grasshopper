@@ -39,24 +39,18 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
     {
     }
 
-    public override Guid ComponentGuid => new("49b71334-f6f0-4964-b1ed-c80e03a3a574");
+    public override Guid ComponentGuid => new("e0a54494-3d69-4681-8756-cc3cd86df4e1");
 
     public override GH_Exposure Exposure => GH_Exposure.primary;
 
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddParameter(
-            new GreenRetrofitModelParam(),
-            "Models",
-            "M",
-            "Ordered GRM alternatives. Model-carried weather is used when present; otherwise address and vintage select packaged weather.",
+            new SimpleDragonBatchCaseParam(),
+            "Cases",
+            "Cases",
+            "Ordered typed batch cases. Each case owns its GRM and optional stable ID; weather is selected within SimpleDragon.",
             GH_ParamAccess.list);
-        pManager.AddTextParameter(
-            "Case IDs",
-            "IDs",
-            "Optional stable case IDs. Supply none or exactly one per model.",
-            GH_ParamAccess.list);
-        pManager[1].Optional = true;
         pManager.AddIntegerParameter(
             "Parallel Limit",
             "N",
@@ -95,20 +89,17 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 
     protected override void Solve(IGH_DataAccess DA)
     {
-        var modelGoos = new List<GreenRetrofitModelGoo>();
-        var caseIds = new List<string>();
+        var caseGoos = new List<SimpleDragonBatchCaseGoo>();
         int parallelLimit = Math.Max(1, Math.Min(Environment.ProcessorCount, 4));
         bool run = false;
         bool cancel = false;
-        if (!DA.GetDataList(0, modelGoos)
-            || !DA.GetData(2, ref parallelLimit)
-            || !DA.GetData(3, ref run)
-            || !DA.GetData(4, ref cancel))
+        if (!DA.GetDataList(0, caseGoos)
+            || !DA.GetData(1, ref parallelLimit)
+            || !DA.GetData(2, ref run)
+            || !DA.GetData(3, ref cancel))
         {
             return;
         }
-
-        DA.GetDataList(1, caseIds);
 
         ExplicitManagedBatchTriggerObservation triggers = _triggerGate.Observe(run, cancel);
         if (triggers.Cancel)
@@ -118,7 +109,7 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 
         if (triggers.Start && !triggers.Cancel)
         {
-            ManagedBatchInputs? inputs = TryCreateInputs(modelGoos, caseIds, parallelLimit);
+            ManagedBatchInputs? inputs = TryCreateInputs(caseGoos, parallelLimit);
             if (inputs is not null)
             {
                 StartBatch(inputs);
@@ -183,23 +174,16 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
     }
 
     private ManagedBatchInputs? TryCreateInputs(
-        IReadOnlyList<GreenRetrofitModelGoo> modelGoos,
-        IReadOnlyList<string> caseIds,
+        IReadOnlyList<SimpleDragonBatchCaseGoo> caseGoos,
         int parallelLimit)
     {
-        GreenRetrofitModel[] models = modelGoos
+        SimpleDragonBatchCase[] cases = caseGoos
             .Where(item => item?.Value is not null)
             .Select(item => item.Value!)
             .ToArray();
-        if (models.Length != modelGoos.Count || models.Length == 0)
+        if (cases.Length != caseGoos.Count || cases.Length == 0)
         {
-            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "At least one valid GRM model is required.");
-            return null;
-        }
-
-        if (caseIds.Count != 0 && caseIds.Count != models.Length)
-        {
-            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Case IDs must be empty or match the model count.");
+            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "At least one valid SimpleDragon Batch Case is required.");
             return null;
         }
 
@@ -211,10 +195,8 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 
         try
         {
-            BatchCaseDefinition[] definitions = models
-                .Select((model, index) => new BatchCaseDefinition(
-                    model,
-                    caseIds.Count == 0 ? null : caseIds[index]))
+            BatchCaseDefinition[] definitions = cases
+                .Select(item => new BatchCaseDefinition(item.Model, item.CaseId))
                 .ToArray();
             return new ManagedBatchInputs(
                 definitions,

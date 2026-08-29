@@ -33,6 +33,9 @@ paths do not depend on the host process working directory.
 The SimpleDragon two-zone examples use one Brep and opening parameter per local
 Zone cluster. Typed Opening definitions, HVAC, and ventilation feed Zone;
 Zone definitions feed Model; and Model feeds the path-free Prepare component.
+The standalone InvisibleDragon example follows the same rule: Window feeds its
+owning Surface, Surface/HVAC/ERV feed Zone, and only Zone plus model-level PV
+feed Model. The gate rejects any relationship-index or assignment-stage graph.
 Example 12 is the complex composition/IDF authoring case with heat-pump/AHU,
 boiler/radiator, ERV, and PV. Example 14 uses direct-Zone electric radiators as
 the stable execution case and connects Prepare's typed IDF and verified Weather

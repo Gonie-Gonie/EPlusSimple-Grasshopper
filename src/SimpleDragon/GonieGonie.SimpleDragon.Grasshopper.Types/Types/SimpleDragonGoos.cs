@@ -11,6 +11,22 @@ public sealed class SimpleDragonMaterialGoo : SimpleDragonGoo<Material>
     protected override string DisplayText(Material value) => $"Material {value.Name}";
 }
 
+public sealed class SimpleDragonSurfaceConstructionLayerGoo
+    : SimpleDragonGoo<SurfaceConstructionLayer>
+{
+    public SimpleDragonSurfaceConstructionLayerGoo() { }
+    public SimpleDragonSurfaceConstructionLayerGoo(SurfaceConstructionLayer value) : base(value) { }
+    public override string TypeName => "SimpleDragon Construction Layer";
+    public override string TypeDescription =>
+        "One opaque material and thickness, ready to be ordered in a surface construction.";
+    protected override SimpleDragonGoo<SurfaceConstructionLayer> Create(
+        SurfaceConstructionLayer value) => new SimpleDragonSurfaceConstructionLayerGoo(value);
+    protected override SimpleDragonGoo<SurfaceConstructionLayer> CreateEmpty() =>
+        new SimpleDragonSurfaceConstructionLayerGoo();
+    protected override string DisplayText(SurfaceConstructionLayer value) =>
+        $"Layer {value.Material.Name} ({value.Thickness:0.###} m)";
+}
+
 public sealed class SimpleDragonSurfaceConstructionGoo : SimpleDragonGoo<SurfaceConstruction>
 {
     public SimpleDragonSurfaceConstructionGoo() { }
@@ -86,20 +102,6 @@ public sealed class SimpleDragonSupplySystemGoo : SimpleDragonGoo<SupplySystem>
     protected override SimpleDragonGoo<SupplySystem> Create(SupplySystem value) => new SimpleDragonSupplySystemGoo(value);
     protected override SimpleDragonGoo<SupplySystem> CreateEmpty() => new SimpleDragonSupplySystemGoo();
     protected override string DisplayText(SupplySystem value) => $"Supply {value.Name} ({value.Type})";
-}
-
-public sealed class SimpleDragonEnergyRecoveryVentilatorGoo : SimpleDragonGoo<VentilationSystem>
-{
-    public SimpleDragonEnergyRecoveryVentilatorGoo() { }
-    public SimpleDragonEnergyRecoveryVentilatorGoo(VentilationSystem value) : base(value) { }
-    public override string TypeName => "SimpleDragon Energy Recovery Ventilator";
-    public override string TypeDescription => "A SimpleDragon energy-recovery ventilator.";
-    protected override SimpleDragonGoo<VentilationSystem> Create(VentilationSystem value) =>
-        new SimpleDragonEnergyRecoveryVentilatorGoo(value);
-    protected override SimpleDragonGoo<VentilationSystem> CreateEmpty() =>
-        new SimpleDragonEnergyRecoveryVentilatorGoo();
-    protected override string DisplayText(VentilationSystem value) =>
-        $"Energy Recovery Ventilator {value.Name} ({value.AirflowRate:0.###} m\u00B3/s)";
 }
 
 public sealed class SimpleDragonPhotovoltaicPanelGoo : SimpleDragonGoo<PhotovoltaicSystem>

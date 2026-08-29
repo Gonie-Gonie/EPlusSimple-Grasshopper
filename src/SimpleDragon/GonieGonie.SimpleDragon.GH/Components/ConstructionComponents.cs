@@ -60,13 +60,70 @@ public sealed class SimpleDragonMaterialComponent : SimpleDragonComponent
     }
 }
 
+public sealed class SimpleDragonSurfaceConstructionLayerComponent : SimpleDragonComponent
+{
+    public SimpleDragonSurfaceConstructionLayerComponent()
+        : base(
+            "SimpleDragon Construction Layer",
+            "SD Layer",
+            "Combines one opaque material with its thickness for direct construction composition.",
+            SimpleDragonPanels.Construction)
+    {
+    }
+
+    public override Guid ComponentGuid => new("b97da4a1-7b1c-472a-a4b0-83603e202c2b");
+
+    protected override void RegisterInputParams(GH_InputParamManager pManager)
+    {
+        pManager.AddParameter(
+            new SimpleDragonMaterialParam(),
+            "Material",
+            "M",
+            "Opaque material owned by this layer.",
+            GH_ParamAccess.item);
+        pManager.AddNumberParameter(
+            "Thickness",
+            "T",
+            "Layer thickness in metres.",
+            GH_ParamAccess.item,
+            0.1d);
+    }
+
+    protected override void RegisterOutputParams(GH_OutputParamManager pManager)
+    {
+        pManager.AddParameter(
+            new SimpleDragonSurfaceConstructionLayerParam(),
+            "Layer",
+            "L",
+            "Typed SimpleDragon construction layer.",
+            GH_ParamAccess.item);
+    }
+
+    protected override void Solve(IGH_DataAccess DA)
+    {
+        SimpleDragonMaterialGoo? materialGoo = null;
+        double thickness = 0.1d;
+        if (!DA.GetData(0, ref materialGoo)
+            || !DA.GetData(1, ref thickness)
+            || materialGoo?.Value is null)
+        {
+            return;
+        }
+
+        DA.SetData(
+            0,
+            new SimpleDragonSurfaceConstructionLayerGoo(
+                new SurfaceConstructionLayer(materialGoo.Value, thickness)));
+    }
+}
+
 public sealed class SimpleDragonSurfaceConstructionComponent : SimpleDragonComponent
 {
     public SimpleDragonSurfaceConstructionComponent()
         : base(
             "SimpleDragon Surface Construction",
             "SD Construction",
-            "Creates a layered SimpleDragon surface construction in the given database order.",
+            "Creates a layered SimpleDragon surface construction from directly connected layers.",
             SimpleDragonPanels.Construction)
     {
     }
@@ -76,8 +133,12 @@ public sealed class SimpleDragonSurfaceConstructionComponent : SimpleDragonCompo
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddTextParameter("Name", "N", "Construction name.", GH_ParamAccess.item, "Simple Construction");
-        pManager.AddParameter(new SimpleDragonMaterialParam(), "Materials", "M", "Ordered material layers.", GH_ParamAccess.list);
-        pManager.AddNumberParameter("Thicknesses", "T", "Layer thicknesses in metres.", GH_ParamAccess.list);
+        pManager.AddParameter(
+            new SimpleDragonSurfaceConstructionLayerParam(),
+            "Layers",
+            "L",
+            "Construction layers in SimpleDragon database order.",
+            GH_ParamAccess.list);
         pManager.AddTextParameter("ID", "ID", "Optional stable identifier.", GH_ParamAccess.item, string.Empty);
     }
 
@@ -95,31 +156,23 @@ public sealed class SimpleDragonSurfaceConstructionComponent : SimpleDragonCompo
     protected override void Solve(IGH_DataAccess DA)
     {
         string name = "Simple Construction";
-        var materials = new List<SimpleDragonMaterialGoo>();
-        var thicknesses = new List<double>();
+        var layerGoos = new List<SimpleDragonSurfaceConstructionLayerGoo>();
         string id = string.Empty;
         if (!DA.GetData(0, ref name)
-            || !DA.GetDataList(1, materials)
-            || !DA.GetDataList(2, thicknesses))
+            || !DA.GetDataList(1, layerGoos))
         {
             return;
         }
 
-        DA.GetData(3, ref id);
-        if (materials.Count != thicknesses.Count)
-        {
-            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Materials and Thicknesses must have equal lengths.");
-            return;
-        }
-
-        SurfaceConstructionLayer[] layers = materials.Select((goo, index) =>
+        DA.GetData(2, ref id);
+        SurfaceConstructionLayer[] layers = layerGoos.Select((goo, index) =>
         {
             if (goo?.Value is null)
             {
-                throw new ArgumentException("Material at index " + index + " is empty.");
+                throw new ArgumentException("Layer at position " + (index + 1) + " is empty.");
             }
 
-            return new SurfaceConstructionLayer(goo.Value, thicknesses[index]);
+            return goo.Value;
         }).ToArray();
         var construction = new SurfaceConstruction(
             name,

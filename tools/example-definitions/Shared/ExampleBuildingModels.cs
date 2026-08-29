@@ -27,10 +27,10 @@ internal static class ExampleBuildingModels
             },
             new[]
             {
-                new OpeningSpec("WINDOW_ZONE_01_SOUTH", 0, 1.5, 4.5, 0.9, 2.2),
-                new OpeningSpec("WINDOW_ZONE_02_SOUTH", 1, 7.5, 10.5, 0.9, 2.2),
+                new OpeningSpec("WINDOW_ZONE_01_SOUTH", "ZONE_01_WEST", 1.5, 4.5, 0.9, 2.2),
+                new OpeningSpec("WINDOW_ZONE_02_SOUTH", "ZONE_02_EAST", 7.5, 10.5, 0.9, 2.2),
             },
-            new[] { new AdjacencySpec(0, 1) }),
+            new[] { new AdjacencySpec("ZONE_01_WEST", "ZONE_02_EAST") }),
         new(
             "31-three-zone-stepped-office.3dm",
             new[]
@@ -41,11 +41,15 @@ internal static class ExampleBuildingModels
             },
             new[]
             {
-                new OpeningSpec("WINDOW_ZONE_01_SOUTH", 0, 1.2, 3.8, 0.9, 2.1),
-                new OpeningSpec("WINDOW_ZONE_02_SOUTH", 1, 6.4, 9.6, 0.9, 2.1),
-                new OpeningSpec("WINDOW_ZONE_03_SOUTH", 2, 1.2, 3.8, 3.9, 5.1),
+                new OpeningSpec("WINDOW_ZONE_01_SOUTH", "ZONE_01_WEST_GROUND", 1.2, 3.8, 0.9, 2.1),
+                new OpeningSpec("WINDOW_ZONE_02_SOUTH", "ZONE_02_EAST_GROUND", 6.4, 9.6, 0.9, 2.1),
+                new OpeningSpec("WINDOW_ZONE_03_SOUTH", "ZONE_03_WEST_UPPER", 1.2, 3.8, 3.9, 5.1),
             },
-            new[] { new AdjacencySpec(0, 1), new AdjacencySpec(0, 2) }),
+            new[]
+            {
+                new AdjacencySpec("ZONE_01_WEST_GROUND", "ZONE_02_EAST_GROUND"),
+                new AdjacencySpec("ZONE_01_WEST_GROUND", "ZONE_03_WEST_UPPER"),
+            }),
     };
 
     internal static IReadOnlyList<ExampleBuildingModelResult> Run(ExampleHostInputs inputs)
@@ -65,18 +69,6 @@ internal static class ExampleBuildingModels
     {
         BuildingModelSpec spec = RequireSpec(fileName);
         return spec.Openings.Select(CreateOpeningCurve).ToArray();
-    }
-
-    internal static int[] OpeningZoneIndices(string fileName)
-    {
-        return RequireSpec(fileName).Openings.Select(item => item.ZoneIndex).ToArray();
-    }
-
-    internal static int[] OpeningFaceIndices(string fileName)
-    {
-        BuildingModelSpec spec = RequireSpec(fileName);
-        Brep[] zones = spec.Zones.Select(CreateBrep).ToArray();
-        return spec.Openings.Select(opening => FindSouthFaceIndex(zones[opening.ZoneIndex])).ToArray();
     }
 
     internal static void ValidateEmbeddedGeometry(
@@ -175,7 +167,7 @@ internal static class ExampleBuildingModels
                 Name = opening.Name,
             };
             attributes.SetUserString(RoleKey, OpeningRole);
-            attributes.SetUserString("ZoneName", spec.Zones[opening.ZoneIndex].Name);
+            attributes.SetUserString("ZoneName", opening.ZoneName);
             Require(
                 model.Objects.AddCurve(CreateOpeningCurve(opening), attributes) != Guid.Empty,
                 "Rhino refused to add opening " + opening.Name + ".");
@@ -231,7 +223,7 @@ internal static class ExampleBuildingModels
             Require(
                 string.Equals(
                     actual.Attributes.GetUserString("ZoneName"),
-                    spec.Zones[expected.ZoneIndex].Name,
+                    expected.ZoneName,
                     StringComparison.Ordinal),
                 expected.Name + " has the wrong ZoneName user string.");
             ValidateOpening((Curve)actual.Geometry, expected, spec.FileName + " opening");
@@ -241,11 +233,11 @@ internal static class ExampleBuildingModels
         {
             BoundingBox first = ((Brep)zoneObjects.Single(item => string.Equals(
                 item.Attributes.Name,
-                spec.Zones[pair.FirstZone].Name,
+                pair.FirstZoneName,
                 StringComparison.Ordinal)).Geometry).GetBoundingBox(true);
             BoundingBox second = ((Brep)zoneObjects.Single(item => string.Equals(
                 item.Attributes.Name,
-                spec.Zones[pair.SecondZone].Name,
+                pair.SecondZoneName,
                 StringComparison.Ordinal)).Geometry).GetBoundingBox(true);
             Require(AreAdjacent(first, second), spec.FileName + " lost an expected zone adjacency.");
         }
@@ -314,20 +306,6 @@ internal static class ExampleBuildingModels
         });
     }
 
-    private static int FindSouthFaceIndex(Brep brep)
-    {
-        for (int index = 0; index < brep.Faces.Count; index++)
-        {
-            BoundingBox bounds = brep.Faces[index].GetBoundingBox(true);
-            if (Math.Abs(bounds.Min.Y) <= Tolerance && Math.Abs(bounds.Max.Y) <= Tolerance)
-            {
-                return index;
-            }
-        }
-
-        throw new InvalidOperationException("A generated example zone has no south face.");
-    }
-
     private static ExampleBuildingModelResult Result(string path, BuildingModelSpec spec, bool generated)
     {
         return new ExampleBuildingModelResult
@@ -388,13 +366,13 @@ internal static class ExampleBuildingModels
 
     private sealed record OpeningSpec(
         string Name,
-        int ZoneIndex,
+        string ZoneName,
         double X0,
         double X1,
         double Z0,
         double Z1);
 
-    private sealed record AdjacencySpec(int FirstZone, int SecondZone);
+    private sealed record AdjacencySpec(string FirstZoneName, string SecondZoneName);
 }
 
 [DataContract]

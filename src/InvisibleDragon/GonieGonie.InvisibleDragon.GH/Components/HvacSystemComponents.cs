@@ -1,10 +1,8 @@
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
-using Grasshopper.Kernel.Types;
 using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
 using GonieGonie.InvisibleDragon.Grasshopper.Types;
 using GonieGonie.InvisibleDragon.Hvac;
-using GonieGonie.InvisibleDragon.Shape;
 
 namespace GonieGonie.InvisibleDragon.Grasshopper.Components;
 
@@ -85,7 +83,7 @@ public sealed class EnergyRecoveryVentilatorComponent : DragonComponent
         : base(
             "Energy Recovery Ventilator",
             "ERV",
-            "Creates a sensible-and-latent energy recovery ventilator for zone assignment.",
+            "Creates a sensible-and-latent energy recovery ventilator owned directly by a Zone.",
             "HVAC")
     {
     }
@@ -208,64 +206,5 @@ public sealed class PhotovoltaicPanelComponent : DragonComponent
             efficiency,
             activeCellFraction);
         DA.SetData(0, new DragonPhotovoltaicPanelGoo(panel));
-    }
-}
-
-public sealed class SupplyGroupAssignmentComponent : DragonComponent
-{
-    public SupplyGroupAssignmentComponent()
-        : base(
-            "Supply Group Assignment",
-            "AssignHVAC",
-            "Groups zone supply systems with optional availability schedules and assigns them to a thermal zone.",
-            "HVAC")
-    {
-    }
-
-    public override Guid ComponentGuid => new("1c78fc6e-952f-4513-a39f-b107daba9677");
-
-    protected override void RegisterInputParams(GH_InputParamManager pManager)
-    {
-        pManager.AddParameter(new DragonZoneParam(), "Zone", "Z", "Thermal zone receiving this supply group.", GH_ParamAccess.item);
-        pManager.AddParameter(new DragonSupplySystemParam(), "Supply Systems", "S", "Ordered heating and cooling supply systems.", GH_ParamAccess.list);
-        int availability = pManager.AddParameter(
-            new DragonScheduleParam(),
-            "Availability Schedules",
-            "A",
-            "Optional OnOff schedules: empty uses zone/default availability, one broadcasts, or provide one per system.",
-            GH_ParamAccess.list);
-        pManager[availability].Optional = true;
-    }
-
-    protected override void RegisterOutputParams(GH_OutputParamManager pManager)
-    {
-        pManager.AddGenericParameter("Supply Group", "G", "SupplyGroup domain value.", GH_ParamAccess.item);
-        pManager.AddGenericParameter("HVAC Assignment", "A", "ZoneHvacAssignment domain value for Energy Model.", GH_ParamAccess.item);
-        pManager.AddParameter(new DragonSourceSystemParam(), "Sources", "Src", "Distinct source systems referenced by the group.", GH_ParamAccess.list);
-    }
-
-    protected override void Solve(IGH_DataAccess DA)
-    {
-        DragonZoneGoo? zoneGoo = null;
-        var supplyGoos = new List<DragonSupplySystemGoo>();
-        var availabilityGoos = new List<DragonScheduleGoo>();
-        if (!DA.GetData(0, ref zoneGoo) || !DA.GetDataList(1, supplyGoos))
-        {
-            return;
-        }
-
-        DA.GetDataList(2, availabilityGoos);
-        Zone zone = zoneGoo?.Value
-            ?? throw new ArgumentException("Zone requires a non-empty thermal-zone value.");
-        SupplySystem[] systems = supplyGoos
-            .Select((goo, index) => HvacComponentSupport.Supply(goo, "Supply Systems", index))
-            .ToArray();
-        var group = new SupplyGroup(
-            systems,
-            HvacComponentSupport.AvailabilitySchedules(availabilityGoos, systems.Length));
-        var assignment = new ZoneHvacAssignment(zone.Id, group);
-        DA.SetData(0, new GH_ObjectWrapper(group));
-        DA.SetData(1, new GH_ObjectWrapper(assignment));
-        DA.SetDataList(2, group.Sources.Select(source => new DragonSourceSystemGoo(source)));
     }
 }

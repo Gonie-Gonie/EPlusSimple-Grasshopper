@@ -109,34 +109,30 @@ public sealed class AuthoringDefinitionGooTests
     }
 
     [Fact]
-    public void VentilationAssignmentGooPromotesRawErvInputsToOneUnit()
+    public void ZoneErvGooPromotesRawErvInputsToOneUnit()
     {
         VentilationSystem ventilator = Ventilator();
 
-        var direct = new SimpleDragonVentilationAssignmentGoo();
+        var direct = new SimpleDragonZoneErvGoo();
         Assert.True(direct.CastFrom(ventilator));
         AssertSingleUnitCopy(ventilator, direct.Value);
 
-        var fromGoo = new SimpleDragonVentilationAssignmentGoo();
-        Assert.True(fromGoo.CastFrom(new SimpleDragonEnergyRecoveryVentilatorGoo(ventilator)));
-        AssertSingleUnitCopy(ventilator, fromGoo.Value);
-
-        var fromWrapper = new SimpleDragonVentilationAssignmentGoo();
+        var fromWrapper = new SimpleDragonZoneErvGoo();
         Assert.True(fromWrapper.CastFrom(new GH_ObjectWrapper(ventilator)));
         AssertSingleUnitCopy(ventilator, fromWrapper.Value);
     }
 
     [Fact]
-    public void VentilationAssignmentGooPreservesExplicitCountsAndNestedErv()
+    public void ZoneErvGooPreservesExplicitCountsAndNestedErv()
     {
         VentilationSystem ventilator = Ventilator();
         var assignment = new VentilationAssignment(ventilator.Id.Value, 4, ventilator);
-        var goo = new SimpleDragonVentilationAssignmentGoo(assignment);
+        var goo = new SimpleDragonZoneErvGoo(assignment);
 
-        var duplicate = Assert.IsType<SimpleDragonVentilationAssignmentGoo>(goo.Duplicate());
-        SimpleDragonVentilationAssignmentGoo archived = ArchiveRoundTrip(
+        var duplicate = Assert.IsType<SimpleDragonZoneErvGoo>(goo.Duplicate());
+        SimpleDragonZoneErvGoo archived = ArchiveRoundTrip(
             goo,
-            new SimpleDragonVentilationAssignmentGoo());
+            new SimpleDragonZoneErvGoo());
 
         AssertAssignmentEquivalent(assignment, duplicate.Value);
         AssertAssignmentEquivalent(assignment, archived.Value);
@@ -202,13 +198,13 @@ public sealed class AuthoringDefinitionGooTests
         {
             typeof(SimpleDragonOpeningDefinitionGoo),
             typeof(SimpleDragonZoneDefinitionGoo),
-            typeof(SimpleDragonVentilationAssignmentGoo),
+            typeof(SimpleDragonZoneErvGoo),
         };
         (Type Type, Guid Guid)[] parameters =
         {
             (typeof(SimpleDragonOpeningDefinitionParam), new Guid("51610fe9-ecf1-43b4-9157-7260b3ba89ad")),
             (typeof(SimpleDragonZoneDefinitionParam), new Guid("3fe45962-67fe-43d4-be95-ad81b91b19eb")),
-            (typeof(SimpleDragonVentilationAssignmentParam), new Guid("14f1683e-4b0a-4754-aac5-6b85331c2126")),
+            (typeof(SimpleDragonZoneErvParam), new Guid("14f1683e-4b0a-4754-aac5-6b85331c2126")),
         };
         Type[] exported = typeof(SimpleDragonOpeningDefinitionGoo).Assembly.GetExportedTypes();
 

@@ -18,24 +18,30 @@ internal static class ExampleDefinitionGate
             "InvisibleDragon",
             InvisibleFileName,
             new Guid("dca742da-0ac5-4520-8022-97f98974dfea"),
+            new Guid("d15984d5-cd3f-4798-a67c-73138b54859e"),
             new Guid("6d5a9b54-8a9e-4c95-91df-469e21a783c9"),
             "GonieGonie.InvisibleDragon.Grasshopper.Components.OpaqueMaterialComponent",
+            "GonieGonie.InvisibleDragon.Grasshopper.Components.ConstructionLayerComponent",
             "GonieGonie.InvisibleDragon.Grasshopper.Components.LayeredConstructionComponent",
             "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonConstructionGoo",
             new Guid("01000000-0000-4000-8000-000000000001"),
             new Guid("01000000-0000-4000-8000-000000000002"),
+            new Guid("01000000-0000-4000-8000-000000000005"),
             new Guid("01000000-0000-4000-8000-000000000003"),
             new Guid("01000000-0000-4000-8000-000000000004")),
         new(
             "SimpleDragon",
             SimpleFileName,
             new Guid("fee586e8-692c-407e-a803-d5c43f3c7222"),
+            new Guid("b97da4a1-7b1c-472a-a4b0-83603e202c2b"),
             new Guid("3e1fa67f-dbb2-4c19-b54b-226c295f5751"),
             "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonMaterialComponent",
+            "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonSurfaceConstructionLayerComponent",
             "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonSurfaceConstructionComponent",
             "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionGoo",
             new Guid("02000000-0000-4000-8000-000000000001"),
             new Guid("02000000-0000-4000-8000-000000000002"),
+            new Guid("02000000-0000-4000-8000-000000000005"),
             new Guid("02000000-0000-4000-8000-000000000003"),
             new Guid("02000000-0000-4000-8000-000000000004"))
     };
@@ -172,6 +178,7 @@ internal static class ExampleDefinitionGate
     {
         GH_ComponentServer server = Instances.ComponentServer;
         GH_Component material = EmitComponent(server, definition.MaterialComponentGuid, definition.MaterialType);
+        GH_Component layer = EmitComponent(server, definition.LayerComponentGuid, definition.LayerType);
         GH_Component construction = EmitComponent(
             server,
             definition.ConstructionComponentGuid,
@@ -192,18 +199,21 @@ internal static class ExampleDefinitionGate
         var document = new GH_Document();
         Add(document, material, definition.MaterialInstanceGuid, new System.Drawing.PointF(80, 100));
         Add(document, thickness, definition.ThicknessInstanceGuid, new System.Drawing.PointF(100, 260));
-        Add(document, construction, definition.ConstructionInstanceGuid, new System.Drawing.PointF(400, 140));
-        Add(document, result, definition.PanelInstanceGuid, new System.Drawing.PointF(720, 190));
-        construction.Params.Input[1].AddSource(material.Params.Output[0]);
-        construction.Params.Input[2].AddSource(thickness);
+        Add(document, layer, definition.LayerInstanceGuid, new System.Drawing.PointF(390, 140));
+        Add(document, construction, definition.ConstructionInstanceGuid, new System.Drawing.PointF(680, 140));
+        Add(document, result, definition.PanelInstanceGuid, new System.Drawing.PointF(1000, 190));
+        layer.Params.Input[0].AddSource(material.Params.Output[0]);
+        layer.Params.Input[1].AddSource(thickness);
+        construction.Params.Input[1].AddSource(layer.Params.Output[0]);
         result.AddSource(construction.Params.Output[1]);
         return document;
     }
 
     private static ValidationFacts ValidateGraph(GH_Document document, DefinitionSpec definition)
     {
-        Require(document.ObjectCount == 4, $"{definition.Product} example must contain exactly four objects.");
+        Require(document.ObjectCount == 5, $"{definition.Product} example must contain exactly five objects.");
         GH_Component material = RequireObject<GH_Component>(document, definition.MaterialInstanceGuid, "material");
+        GH_Component layer = RequireObject<GH_Component>(document, definition.LayerInstanceGuid, "construction layer");
         GH_Component construction = RequireObject<GH_Component>(
             document,
             definition.ConstructionInstanceGuid,
@@ -218,19 +228,29 @@ internal static class ExampleDefinitionGate
                 && string.Equals(material.GetType().FullName, definition.MaterialType, StringComparison.Ordinal),
             $"{definition.Product} material component identity changed.");
         Require(
+            layer.ComponentGuid == definition.LayerComponentGuid
+                && string.Equals(layer.GetType().FullName, definition.LayerType, StringComparison.Ordinal),
+            $"{definition.Product} construction-layer component identity changed.");
+        Require(
             construction.ComponentGuid == definition.ConstructionComponentGuid
                 && string.Equals(construction.GetType().FullName, definition.ConstructionType, StringComparison.Ordinal),
             $"{definition.Product} construction component identity changed.");
-        Require(construction.Params.Input.Count >= 3, $"{definition.Product} construction inputs changed.");
+        Require(layer.Params.Input.Count >= 2, $"{definition.Product} construction-layer inputs changed.");
+        Require(layer.Params.Output.Count >= 1, $"{definition.Product} construction-layer outputs changed.");
+        Require(construction.Params.Input.Count >= 2, $"{definition.Product} construction inputs changed.");
         Require(construction.Params.Output.Count >= 2, $"{definition.Product} construction outputs changed.");
         RequireSingleSource(
-            construction.Params.Input[1],
+            layer.Params.Input[0],
             material.Params.Output[0].InstanceGuid,
-            $"{definition.Product} material-to-construction wire");
+            $"{definition.Product} material-to-layer wire");
         RequireSingleSource(
-            construction.Params.Input[2],
+            layer.Params.Input[1],
             thickness.InstanceGuid,
-            $"{definition.Product} thickness-to-construction wire");
+            $"{definition.Product} thickness-to-layer wire");
+        RequireSingleSource(
+            construction.Params.Input[1],
+            layer.Params.Output[0].InstanceGuid,
+            $"{definition.Product} layer-to-construction wire");
         RequireSingleSource(
             panel,
             construction.Params.Output[1].InstanceGuid,
@@ -241,7 +261,7 @@ internal static class ExampleDefinitionGate
             IGH_Param parameter => parameter.SourceCount,
             _ => 0,
         });
-        Require(actualWireCount == 3, $"{definition.Product} starter wire count changed.");
+        Require(actualWireCount == 4, $"{definition.Product} starter wire count changed.");
 
         GH_Document.EnableSolutions = true;
         document.Enabled = true;
@@ -262,11 +282,13 @@ internal static class ExampleDefinitionGate
                 $"{definition.Product} construction produced no typed value. "
                 + $"DocumentEnabled={document.Enabled}; GlobalSolutions={GH_Document.EnableSolutions}; "
                 + $"SolutionState={document.SolutionState}; MaterialPhase={material.Phase}; "
+                + $"LayerPhase={layer.Phase}; "
                 + $"ConstructionPhase={construction.Phase}; MaterialOutput="
                 + $"{material.Params.Output[0].VolatileData.DataCount}; ThicknessOutput="
-                + $"{thickness.VolatileData.DataCount}; MaterialInput="
-                + $"{construction.Params.Input[1].VolatileData.DataCount}; ThicknessInput="
-                + $"{construction.Params.Input[2].VolatileData.DataCount}.");
+                + $"{thickness.VolatileData.DataCount}; LayerMaterialInput="
+                + $"{layer.Params.Input[0].VolatileData.DataCount}; LayerThicknessInput="
+                + $"{layer.Params.Input[1].VolatileData.DataCount}; ConstructionLayerInput="
+                + $"{construction.Params.Input[1].VolatileData.DataCount}.");
         Require(
             string.Equals(constructionValue.GetType().FullName, definition.OutputGooType, StringComparison.Ordinal),
             $"{definition.Product} construction produced {constructionValue.GetType().FullName} "
@@ -431,24 +453,30 @@ internal static class ExampleDefinitionGate
             string product,
             string fileName,
             Guid materialComponentGuid,
+            Guid layerComponentGuid,
             Guid constructionComponentGuid,
             string materialType,
+            string layerType,
             string constructionType,
             string outputGooType,
             Guid materialInstanceGuid,
             Guid thicknessInstanceGuid,
+            Guid layerInstanceGuid,
             Guid constructionInstanceGuid,
             Guid panelInstanceGuid)
         {
             Product = product;
             FileName = fileName;
             MaterialComponentGuid = materialComponentGuid;
+            LayerComponentGuid = layerComponentGuid;
             ConstructionComponentGuid = constructionComponentGuid;
             MaterialType = materialType;
+            LayerType = layerType;
             ConstructionType = constructionType;
             OutputGooType = outputGooType;
             MaterialInstanceGuid = materialInstanceGuid;
             ThicknessInstanceGuid = thicknessInstanceGuid;
+            LayerInstanceGuid = layerInstanceGuid;
             ConstructionInstanceGuid = constructionInstanceGuid;
             PanelInstanceGuid = panelInstanceGuid;
         }
@@ -459,9 +487,13 @@ internal static class ExampleDefinitionGate
 
         internal Guid MaterialComponentGuid { get; }
 
+        internal Guid LayerComponentGuid { get; }
+
         internal Guid ConstructionComponentGuid { get; }
 
         internal string MaterialType { get; }
+
+        internal string LayerType { get; }
 
         internal string ConstructionType { get; }
 
@@ -470,6 +502,8 @@ internal static class ExampleDefinitionGate
         internal Guid MaterialInstanceGuid { get; }
 
         internal Guid ThicknessInstanceGuid { get; }
+
+        internal Guid LayerInstanceGuid { get; }
 
         internal Guid ConstructionInstanceGuid { get; }
 

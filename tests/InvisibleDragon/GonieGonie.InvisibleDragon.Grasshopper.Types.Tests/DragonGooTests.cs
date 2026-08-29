@@ -64,11 +64,14 @@ public sealed class DragonGooTests
         Guid[] identifiers =
         {
             new DragonMaterialParam().ComponentGuid,
+            new DragonLayerParam().ComponentGuid,
             new DragonConstructionParam().ComponentGuid,
             new DragonScheduleParam().ComponentGuid,
             new DragonProfileParam().ComponentGuid,
             new DragonSurfaceParam().ComponentGuid,
-            new DragonZoneParam().ComponentGuid,
+            new DragonGlazingParam().ComponentGuid,
+            new DragonOpeningParam().ComponentGuid,
+            new DragonZoneDefinitionParam().ComponentGuid,
             new DragonEnergyModelParam().ComponentGuid,
             new DragonSourceSystemParam().ComponentGuid,
             new DragonSupplySystemParam().ComponentGuid,
