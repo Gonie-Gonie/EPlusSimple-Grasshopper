@@ -342,6 +342,8 @@ public sealed class CompileIdfComponent : DragonComponent
 
     public override Guid ComponentGuid => new("2743be88-ef3a-4f0d-abf8-cf062d93aafe");
 
+    public override GH_Exposure Exposure => GH_Exposure.hidden;
+
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddParameter(new DragonEnergyModelParam(), "Model", "M", "InvisibleDragon energy model.", GH_ParamAccess.item);
@@ -419,6 +421,8 @@ public sealed class ValidateIdfComponent : DragonComponent
     }
 
     public override Guid ComponentGuid => new("fa664eeb-5503-4366-831d-e3478c8a1832");
+
+    public override GH_Exposure Exposure => GH_Exposure.hidden;
 
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {

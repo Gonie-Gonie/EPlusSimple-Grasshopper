@@ -156,20 +156,26 @@ public sealed class SimpleDragonGooTests
             new SimpleDragonUsageProfileParam().ComponentGuid,
             new SimpleDragonSurfaceParam().ComponentGuid,
             new SimpleDragonZoneParam().ComponentGuid,
+            new SimpleDragonOpeningDefinitionParam().ComponentGuid,
+            new SimpleDragonZoneDefinitionParam().ComponentGuid,
             new SimpleDragonSourceSystemParam().ComponentGuid,
             new SimpleDragonSupplySystemParam().ComponentGuid,
             new SimpleDragonEnergyRecoveryVentilatorParam().ComponentGuid,
+            new SimpleDragonVentilationAssignmentParam().ComponentGuid,
             new SimpleDragonPhotovoltaicPanelParam().ComponentGuid,
             new GreenRetrofitModelParam().ComponentGuid,
             new GreenRetrofitResultParam().ComponentGuid,
         };
 
-        Assert.Equal(12, identifiers.Length);
+        Assert.Equal(15, identifiers.Length);
         Assert.Equal(identifiers.Length, identifiers.Distinct().Count());
         Assert.Contains(new Guid("e0546c97-2fba-4c51-9613-340dfb1fc416"), identifiers);
         Assert.Contains(new Guid("11dead46-9ee4-48ce-913e-50ff7f10d319"), identifiers);
         Assert.Contains(new Guid("51b809c1-a4ae-4dc7-bca8-81e06d49a806"), identifiers);
         Assert.Contains(new Guid("4a980e9a-a954-47c0-a34b-2026eb86b2ad"), identifiers);
+        Assert.Contains(new Guid("51610fe9-ecf1-43b4-9157-7260b3ba89ad"), identifiers);
+        Assert.Contains(new Guid("3fe45962-67fe-43d4-be95-ad81b91b19eb"), identifiers);
+        Assert.Contains(new Guid("14f1683e-4b0a-4754-aac5-6b85331c2126"), identifiers);
         Assert.Contains(new Guid("731f38e6-55dd-4d1e-b9cb-ae33faf23154"), identifiers);
     }
 

@@ -351,6 +351,8 @@ public sealed class AssignSimpleDragonSupplySystemsComponent : SimpleDragonHvacC
 
     public override Guid ComponentGuid => new("82b8b48c-5930-4649-bc5f-6c17b05daa52");
 
+    public override GH_Exposure Exposure => GH_Exposure.hidden;
+
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddParameter(new SimpleDragonZoneParam(), "Zone", "Z", "Zone to copy and update.", GH_ParamAccess.item);

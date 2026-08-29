@@ -118,3 +118,16 @@ public sealed class DiagnosticParam : DragonParam<Types.DiagnosticGoo>
     public DiagnosticParam() : base("InvisibleDragon Diagnostic", "Diagnostic", "A validation or execution diagnostic.") { }
     public override Guid ComponentGuid => new("84cffc02-1023-428b-b96a-e327b5a73c65");
 }
+
+public sealed class PreparedWeatherFileParam : DragonParam<Types.PreparedWeatherFileGoo>
+{
+    public PreparedWeatherFileParam()
+        : base(
+            "InvisibleDragon Prepared Weather",
+            "Weather",
+            "A content-addressed EPW artifact prepared for InvisibleDragon execution.")
+    {
+    }
+
+    public override Guid ComponentGuid => new("9571341c-3795-417d-9908-5833d234d815");
+}

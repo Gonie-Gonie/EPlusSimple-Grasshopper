@@ -25,6 +25,8 @@ public sealed class ExtractSimpleDragonZonesComponent : SimpleDragonComponent
 
     public override Guid ComponentGuid => new("668591e2-458a-42a2-a924-6c3862f1b2c6");
 
+    public override GH_Exposure Exposure => GH_Exposure.hidden;
+
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddBrepParameter("Zone Breps", "B", "Closed polygonal Breps, one per thermal zone.", GH_ParamAccess.list);

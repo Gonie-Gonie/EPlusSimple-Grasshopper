@@ -42,6 +42,8 @@ public sealed class PrepareEnergyPlusRuntimeComponent : DragonComponent
 
     public override Guid ComponentGuid => new("5199b03c-644b-4194-b38c-37f3c7a423aa");
 
+    public override GH_Exposure Exposure => GH_Exposure.hidden;
+
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddTextParameter(

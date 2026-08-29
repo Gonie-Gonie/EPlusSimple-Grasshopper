@@ -26,6 +26,8 @@ public sealed class AssembleGreenRetrofitModelComponent : SimpleDragonComponent
 
     public override Guid ComponentGuid => new("f0a131e0-7cfe-45fc-945a-7e52237535ee");
 
+    public override GH_Exposure Exposure => GH_Exposure.hidden;
+
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddTextParameter("Name", "N", "Building/model name.", GH_ParamAccess.item, "SimpleDragon Model");
@@ -385,6 +387,8 @@ public sealed class ConvertGreenRetrofitModelComponent : SimpleDragonComponent
     }
 
     public override Guid ComponentGuid => new("b38f2e41-f63b-42a8-b549-65cd60c7a994");
+
+    public override GH_Exposure Exposure => GH_Exposure.hidden;
 
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {

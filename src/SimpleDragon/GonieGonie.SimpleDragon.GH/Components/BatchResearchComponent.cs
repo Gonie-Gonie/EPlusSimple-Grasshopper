@@ -41,6 +41,8 @@ public sealed class RunSimpleDragonBatchComponent : SimpleDragonComponent
 
     public override Guid ComponentGuid => new("c0af86b6-5f6e-478c-b069-a7892a31dadd");
 
+    public override GH_Exposure Exposure => GH_Exposure.hidden;
+
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddParameter(

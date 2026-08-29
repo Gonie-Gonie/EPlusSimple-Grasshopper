@@ -51,7 +51,7 @@ public sealed class GrasshopperAssemblyTests
         Type[] componentTypes = ComponentTypes(assembly);
 
         Assert.EndsWith(".gha", assembly.Location, StringComparison.OrdinalIgnoreCase);
-        Assert.Equal(32, componentTypes.Length);
+        Assert.Equal(34, componentTypes.Length);
         Assert.All(componentTypes, type => Assert.NotNull(Activator.CreateInstance(type)));
     }
 
@@ -104,7 +104,7 @@ public sealed class GrasshopperAssemblyTests
             .OrderBy(name => name, StringComparer.Ordinal)
             .ToArray();
 
-        Assert.Equal(15, parameterTypes.Length);
+        Assert.Equal(16, parameterTypes.Length);
         Assert.Equal(parameterTypes.Length, resources.Length);
         var resourceHashes = new HashSet<string>(StringComparer.Ordinal);
         var runtimeHashes = new HashSet<string>(StringComparer.Ordinal);

@@ -77,6 +77,7 @@ public sealed class DragonGooTests
             new DragonIdfParam().ComponentGuid,
             new EnergyPlusResultParam().ComponentGuid,
             new DiagnosticParam().ComponentGuid,
+            new PreparedWeatherFileParam().ComponentGuid,
         };
 
         Assert.Equal(identifiers.Length, identifiers.Distinct().Count());
@@ -85,6 +86,7 @@ public sealed class DragonGooTests
         Assert.Contains(new Guid("c6afcc1f-f11e-4a54-a84a-0e845a828d5d"), identifiers);
         Assert.Contains(new Guid("bc8c67a8-e853-4eec-a576-acdeedbe371b"), identifiers);
         Assert.Contains(new Guid("26ef6130-77e3-4c6d-a802-9460bcc386ed"), identifiers);
+        Assert.Contains(new Guid("9571341c-3795-417d-9908-5833d234d815"), identifiers);
     }
 
     [Fact]

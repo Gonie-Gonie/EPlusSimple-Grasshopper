@@ -224,7 +224,10 @@ public sealed class RhinoZoneSource
         Guid? rhinoObjectId = null,
         string? grasshopperPath = null,
         int? grasshopperIndex = null,
-        IEnumerable<RhinoFenestrationSource>? fenestrations = null)
+        IEnumerable<RhinoFenestrationSource>? fenestrations = null,
+        SurfaceConstruction? defaultSurfaceConstruction = null,
+        FenestrationConstruction? defaultFenestrationConstruction = null,
+        SurfaceBoundaryCondition? unmatchedFloorBoundary = null)
     {
         Geometry = geometry ?? throw new ArgumentNullException(nameof(geometry));
         if (string.IsNullOrWhiteSpace(name))
@@ -256,6 +259,16 @@ public sealed class RhinoZoneSource
         }
 
         RhinoZoneExtractor.RequireNullableNonNegative(grasshopperIndex, nameof(grasshopperIndex));
+        if (unmatchedFloorBoundary.HasValue
+            && unmatchedFloorBoundary.Value != SurfaceBoundaryCondition.Ground
+            && unmatchedFloorBoundary.Value != SurfaceBoundaryCondition.Outdoors
+            && unmatchedFloorBoundary.Value != SurfaceBoundaryCondition.Adiabatic)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(unmatchedFloorBoundary),
+                unmatchedFloorBoundary,
+                "An unmatched floor boundary must be Ground, Outdoors, or Adiabatic.");
+        }
 
         RhinoFenestrationSource[] fenestrationArray = fenestrations?.ToArray()
             ?? Array.Empty<RhinoFenestrationSource>();
@@ -274,6 +287,9 @@ public sealed class RhinoZoneSource
         GrasshopperPath = string.IsNullOrWhiteSpace(grasshopperPath) ? null : grasshopperPath!.Trim();
         GrasshopperIndex = grasshopperIndex;
         Fenestrations = new ReadOnlyCollection<RhinoFenestrationSource>(fenestrationArray);
+        DefaultSurfaceConstruction = defaultSurfaceConstruction;
+        DefaultFenestrationConstruction = defaultFenestrationConstruction;
+        UnmatchedFloorBoundary = unmatchedFloorBoundary;
     }
 
     public Brep Geometry { get; }
@@ -297,6 +313,24 @@ public sealed class RhinoZoneSource
     public int? GrasshopperIndex { get; }
 
     public IReadOnlyList<RhinoFenestrationSource> Fenestrations { get; }
+
+    /// <summary>
+    /// Gets the per-zone default surface construction, or <see langword="null"/>
+    /// to use the extraction-wide option.
+    /// </summary>
+    public SurfaceConstruction? DefaultSurfaceConstruction { get; }
+
+    /// <summary>
+    /// Gets the per-zone default construction for Brep inner-loop openings, or
+    /// <see langword="null"/> to use the extraction-wide option.
+    /// </summary>
+    public FenestrationConstruction? DefaultFenestrationConstruction { get; }
+
+    /// <summary>
+    /// Gets the per-zone boundary for unmatched floor faces, or
+    /// <see langword="null"/> to use the extraction-wide option.
+    /// </summary>
+    public SurfaceBoundaryCondition? UnmatchedFloorBoundary { get; }
 }
 
 public sealed class RhinoZoneExtractionOptions
@@ -465,13 +499,16 @@ public static class RhinoZoneExtractor
                 for (int loopIndex = 0; loopIndex < extraction.InnerLoops.Count; loopIndex++)
                 {
                     DragonPolygon loop = extraction.InnerLoops[loopIndex];
+                    FenestrationConstruction? defaultFenestrationConstruction =
+                        source.DefaultFenestrationConstruction
+                        ?? options.DefaultFenestrationConstruction;
                     faceWork.Openings.Add(new OpeningWork(
                         source.Name + ":Face:" + face.FaceIndex.ToString(CultureInfo.InvariantCulture)
                             + ":Opening:" + loopIndex.ToString(CultureInfo.InvariantCulture),
                         options.DefaultFenestrationType,
-                        options.DefaultFenestrationConstruction?.Id.Value
+                        defaultFenestrationConstruction?.Id.Value
                             ?? options.UnresolvedFenestrationConstructionId.Trim(),
-                        options.DefaultFenestrationConstruction,
+                        defaultFenestrationConstruction,
                         options.DefaultBlind,
                         null,
                         loop,
@@ -763,7 +800,7 @@ public static class RhinoZoneExtractor
             SurfaceBoundaryCondition boundary = adjacentZoneId is not null
                 ? SurfaceBoundaryCondition.Zone
                 : type == SurfaceType.Floor
-                    ? options.UnmatchedFloorBoundary
+                    ? work.Source.UnmatchedFloorBoundary ?? options.UnmatchedFloorBoundary
                     : SurfaceBoundaryCondition.Outdoors;
             double? azimuth = type == SurfaceType.Wall && boundary == SurfaceBoundaryCondition.Outdoors
                 ? Azimuth(face.Extraction.OuterLoop)
@@ -777,7 +814,10 @@ public static class RhinoZoneExtractor
                 boundary,
                 geometryMap,
                 diagnostics);
-            string? constructionId = options.DefaultSurfaceConstruction?.Id.Value;
+            SurfaceConstruction? defaultSurfaceConstruction =
+                work.Source.DefaultSurfaceConstruction
+                ?? options.DefaultSurfaceConstruction;
+            string? constructionId = defaultSurfaceConstruction?.Id.Value;
             try
             {
                 var surface = new SimpleSurface(
@@ -787,7 +827,7 @@ public static class RhinoZoneExtractor
                     face.Extraction.OuterLoop.Area,
                     azimuth,
                     constructionId,
-                    options.DefaultSurfaceConstruction,
+                    defaultSurfaceConstruction,
                     fenestrations,
                     adjacentZoneId: adjacentZoneId?.Value,
                     id: surfaceId);

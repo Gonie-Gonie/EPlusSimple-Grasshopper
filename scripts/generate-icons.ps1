@@ -52,9 +52,11 @@ $products = @(
             (New-ComponentIcon 'ZoneComponent' 6 'none'),
             (New-ComponentIcon 'EnergyModelComponent' 7 'assemble'),
             (New-ComponentIcon 'CompileIdfComponent' 8 'compile'),
+            (New-ComponentIcon 'CompileInvisibleDragonComponent' 9 'build'),
             (New-ComponentIcon 'ValidateIdfComponent' 9 'none'),
             (New-ComponentIcon 'PrepareEnergyPlusRuntimeComponent' 10 'none'),
             (New-ComponentIcon 'RunEnergyPlusComponent' 11 'none'),
+            (New-ComponentIcon 'ManagedRunEnergyPlusComponent' 11 'batch'),
             (New-ComponentIcon 'ReadEnergyPlusResultsComponent' 8 'read'),
             (New-ComponentIcon 'EnergyPlusResultSummaryComponent' 15 'none'),
             (New-ComponentIcon 'HeatPumpComponent' 12 'heat-pump'),
@@ -98,6 +100,7 @@ $products = @(
             (New-ComponentIcon 'DragonPhotovoltaicPanelParam' 7 'photovoltaic'),
             (New-ComponentIcon 'DragonIdfParam' 8 'none'),
             (New-ComponentIcon 'EnergyPlusResultParam' 15 'none'),
+            (New-ComponentIcon 'PreparedWeatherFileParam' 11 'read'),
             (New-ComponentIcon 'DiagnosticParam' 9 'none'))
     },
     [pscustomobject]@{
@@ -123,6 +126,8 @@ $products = @(
             (New-ComponentIcon 'SimpleDragonFenestrationConstructionComponent' 3 'none'),
             (New-ComponentIcon 'LookupUsageProfileComponent' 4 'none'),
             (New-ComponentIcon 'ExtractSimpleDragonZonesComponent' 6 'extract'),
+            (New-ComponentIcon 'CreateSimpleDragonOpeningComponent' 5 'polyline'),
+            (New-ComponentIcon 'CreateSimpleDragonZoneComponent' 6 'membrane'),
             (New-ComponentIcon 'SimpleDragonHeatPumpComponent' 7 'heat-pump'),
             (New-ComponentIcon 'SimpleDragonGeothermalHeatPumpComponent' 7 'ground'),
             (New-ComponentIcon 'SimpleDragonChillerComponent' 7 'snowflake'),
@@ -140,10 +145,13 @@ $products = @(
             (New-ComponentIcon 'SimpleDragonPhotovoltaicPanelComponent' 7 'photovoltaic'),
             (New-ComponentIcon 'AssignSimpleDragonVentilationSystemsComponent' 7 'assign-air'),
             (New-ComponentIcon 'AssignSimpleDragonSupplySystemsComponent' 7 'assign-supply'),
+            (New-ComponentIcon 'CreateSimpleDragonVentilationAssignmentComponent' 12 'ventilation-link'),
             (New-ComponentIcon 'AssembleGreenRetrofitModelComponent' 8 'assemble'),
+            (New-ComponentIcon 'CreateSimpleDragonModelComponent' 8 'model-compose'),
             (New-ComponentIcon 'ReadGreenRetrofitModelComponent' 8 'read-model'),
             (New-ComponentIcon 'WriteGreenRetrofitModelComponent' 8 'write-model'),
             (New-ComponentIcon 'ConvertGreenRetrofitModelComponent' 9 'convert'),
+            (New-ComponentIcon 'PrepareSimpleDragonSimulationComponent' 9 'compile'),
             (New-ComponentIcon 'BuildGreenRetrofitResultComponent' 10 'build'),
             (New-ComponentIcon 'ReadGreenRetrofitResultComponent' 10 'read-result'),
             (New-ComponentIcon 'WriteGreenRetrofitResultComponent' 10 'write-result'),
@@ -152,7 +160,8 @@ $products = @(
             (New-ComponentIcon 'GreenRetrofitMonthlyLinePlotComponent' 13 'none'),
             (New-ComponentIcon 'GreenRetrofitMonthlyBarPlotComponent' 14 'none'),
             (New-ComponentIcon 'ExportGreenRetrofitCsvComponent' 15 'none'),
-            (New-ComponentIcon 'RunSimpleDragonBatchComponent' 8 'batch'))
+            (New-ComponentIcon 'RunSimpleDragonBatchComponent' 8 'batch'),
+            (New-ComponentIcon 'ManagedRunSimpleDragonBatchComponent' 9 'managed-batch'))
         Parameters = @(
             (New-ComponentIcon 'SimpleDragonMaterialParam' 1 'none'),
             (New-ComponentIcon 'SimpleDragonSurfaceConstructionParam' 2 'none'),
@@ -160,9 +169,12 @@ $products = @(
             (New-ComponentIcon 'SimpleDragonUsageProfileParam' 4 'none'),
             (New-ComponentIcon 'SimpleDragonSurfaceParam' 5 'none'),
             (New-ComponentIcon 'SimpleDragonZoneParam' 6 'none'),
+            (New-ComponentIcon 'SimpleDragonOpeningDefinitionParam' 5 'polyline'),
+            (New-ComponentIcon 'SimpleDragonZoneDefinitionParam' 6 'assemble'),
             (New-ComponentIcon 'SimpleDragonSourceSystemParam' 7 'network'),
             (New-ComponentIcon 'SimpleDragonSupplySystemParam' 7 'assign'),
             (New-ComponentIcon 'SimpleDragonEnergyRecoveryVentilatorParam' 7 'erv'),
+            (New-ComponentIcon 'SimpleDragonVentilationAssignmentParam' 12 'ventilation-link'),
             (New-ComponentIcon 'SimpleDragonPhotovoltaicPanelParam' 7 'photovoltaic'),
             (New-ComponentIcon 'GreenRetrofitModelParam' 8 'none'),
             (New-ComponentIcon 'GreenRetrofitResultParam' 10 'none'))
@@ -549,6 +561,21 @@ function Draw-Overlay {
                 $Graphics.DrawLine($neutralPen, 51, 65, 67, 65)
                 $Graphics.DrawLine($neutralPen, 59, 57, 59, 73)
             }
+            'model-compose' {
+                foreach ($y in @(23, 59)) {
+                    $Graphics.FillRectangle($primaryBrush, 15, $y, 17, 14)
+                    $Graphics.DrawRectangle($thinInkPen, 15, $y, 17, 14)
+                }
+                $Graphics.DrawLine($secondaryPen, 33, 30, 47, 43)
+                $Graphics.DrawLine($secondaryPen, 33, 66, 47, 53)
+                $Graphics.FillEllipse($accentBrush, 39, 37, 22, 22)
+                $Graphics.DrawEllipse($inkPen, 39, 37, 22, 22)
+                Draw-Arrow $Graphics $hotPen 61 48 79 48 8
+                $Graphics.DrawRectangle($thinInkPen, 69, 25, 13, 46)
+                $Graphics.FillRectangle($neutralBrush, 72, 31, 7, 7)
+                $Graphics.FillRectangle($neutralBrush, 72, 43, 7, 7)
+                $Graphics.FillRectangle($neutralBrush, 72, 55, 7, 7)
+            }
             'compile' {
                 $Graphics.DrawLines($primaryPen, [System.Drawing.PointF[]]@(
                     [System.Drawing.PointF]::new(38, 22), [System.Drawing.PointF]::new(17, 48),
@@ -623,6 +650,24 @@ function Draw-Overlay {
                     [System.Drawing.PointF]::new(58, 41), [System.Drawing.PointF]::new(58, 75),
                     [System.Drawing.PointF]::new(84, 58)))
             }
+            'managed-batch' {
+                $diamond = [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(48, 10), [System.Drawing.PointF]::new(86, 48),
+                    [System.Drawing.PointF]::new(48, 86), [System.Drawing.PointF]::new(10, 48))
+                $Graphics.FillPolygon($secondaryBrush, $diamond)
+                $Graphics.DrawPolygon($inkPen, $diamond)
+                $Graphics.FillRectangle($neutralBrush, 25, 26, 42, 44)
+                $Graphics.DrawRectangle($thinInkPen, 25, 26, 42, 44)
+                foreach ($y in @(36, 47, 58)) {
+                    $Graphics.DrawLine($primaryPen, 31, $y, 48, $y)
+                }
+                $Graphics.FillPolygon($hotBrush, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(51, 40), [System.Drawing.PointF]::new(51, 62),
+                    [System.Drawing.PointF]::new(68, 51)))
+                $Graphics.DrawPolygon($thinInkPen, [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(51, 40), [System.Drawing.PointF]::new(51, 62),
+                    [System.Drawing.PointF]::new(68, 51)))
+            }
             'profile' {
                 $Graphics.FillEllipse($neutralBrush, 37, 16, 22, 22)
                 $Graphics.DrawEllipse($inkPen, 37, 16, 22, 22)
@@ -681,6 +726,16 @@ function Draw-Overlay {
                 $Graphics.DrawLine($inkPen, 33, 17, 33, 10)
                 $Graphics.DrawLine($inkPen, 63, 17, 63, 10)
                 Draw-Flame $Graphics $hotBrush $accentBrush $inkPen 32 33 33 40
+            }
+            'ventilation-link' {
+                Draw-Fan $Graphics $primaryBrush $accentBrush $inkPen 27 48 15
+                $Graphics.DrawLine($secondaryPen, 43, 48, 63, 48)
+                $Graphics.DrawLine($thinInkPen, 63, 25, 63, 71)
+                foreach ($y in @(28, 48, 68)) {
+                    $Graphics.DrawLine($secondaryPen, 63, $y, 72, $y)
+                    $Graphics.FillEllipse($neutralBrush, 70, $y - 6, 12, 12)
+                    $Graphics.DrawEllipse($thinInkPen, 70, $y - 6, 12, 12)
+                }
             }
             { $_ -in @('network', 'assign', 'assign-air', 'assign-supply') } {
                 $flowPen = if ($Kind -eq 'assign-air') {

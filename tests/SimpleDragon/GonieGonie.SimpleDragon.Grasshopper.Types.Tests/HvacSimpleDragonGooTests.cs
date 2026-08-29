@@ -210,6 +210,7 @@ public sealed class HvacSimpleDragonGooTests
             typeof(SimpleDragonSourceSystemGoo),
             typeof(SimpleDragonSupplySystemGoo),
             typeof(SimpleDragonEnergyRecoveryVentilatorGoo),
+            typeof(SimpleDragonVentilationAssignmentGoo),
             typeof(SimpleDragonPhotovoltaicPanelGoo),
         };
         Type[] expectedParameters =
@@ -217,6 +218,7 @@ public sealed class HvacSimpleDragonGooTests
             typeof(SimpleDragonSourceSystemParam),
             typeof(SimpleDragonSupplySystemParam),
             typeof(SimpleDragonEnergyRecoveryVentilatorParam),
+            typeof(SimpleDragonVentilationAssignmentParam),
             typeof(SimpleDragonPhotovoltaicPanelParam),
         };
         Type[] exported = typeof(SimpleDragonSourceSystemGoo).Assembly.GetExportedTypes();

@@ -41,6 +41,8 @@ public sealed class RunEnergyPlusComponent : DragonComponent
 
     public override Guid ComponentGuid => new("5f1a9663-6f81-4635-b54d-607b48c9fd47");
 
+    public override GH_Exposure Exposure => GH_Exposure.hidden;
+
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddParameter(new DragonIdfParam(), "IDF", "IDF", "Compiled EnergyPlus IDF document.", GH_ParamAccess.item);

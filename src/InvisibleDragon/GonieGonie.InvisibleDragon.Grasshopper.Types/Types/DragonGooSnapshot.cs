@@ -44,6 +44,7 @@ internal static class DragonGooSnapshot
             IdfDocument idf => ("idf", IdfWriter.Write(idf, new IdfWriterOptions { IncludeSchemaFieldComments = false })),
             EnergyPlusSimulationResult result => ("energyplus-result", EnergyPlusResultJson.Serialize(result)),
             Diagnostic diagnostic => ("diagnostic", JsonSerializer.Serialize(diagnostic, BuildingEnergyJson.CreateOptions())),
+            PreparedWeatherFile weather => ("prepared-weather-file", ToJson(PreparedWeatherFileSnapshot.From(weather))),
             _ => throw new NotSupportedException($"Grasshopper persistence is not implemented for '{value.GetType().FullName}'."),
         };
 
@@ -81,6 +82,7 @@ internal static class DragonGooSnapshot
             "energyplus-result" => EnergyPlusResultJson.Deserialize(envelope.Payload),
             "diagnostic" => JsonSerializer.Deserialize<Diagnostic>(envelope.Payload, BuildingEnergyJson.CreateOptions())
                 ?? throw new InvalidDataException("The diagnostic snapshot is empty."),
+            "prepared-weather-file" => FromJson<PreparedWeatherFileSnapshot>(envelope.Payload).ToDomain(),
             _ => throw new InvalidDataException($"Unsupported Grasshopper value kind '{envelope.Kind}'."),
         };
 
@@ -108,6 +110,27 @@ internal static class DragonGooSnapshot
         public string Kind { get; set; } = string.Empty;
 
         public string Payload { get; set; } = string.Empty;
+    }
+
+    private sealed class PreparedWeatherFileSnapshot
+    {
+        public string Provider { get; set; } = string.Empty;
+
+        public string WeatherIdentity { get; set; } = string.Empty;
+
+        public string Sha256 { get; set; } = string.Empty;
+
+        internal static PreparedWeatherFileSnapshot From(PreparedWeatherFile value) => new()
+        {
+            Provider = value.Provider,
+            WeatherIdentity = value.WeatherIdentity,
+            Sha256 = value.Sha256,
+        };
+
+        internal PreparedWeatherFile ToDomain() => PreparedWeatherFile.FromPersistedMetadata(
+            RequiredText(Provider, nameof(Provider)),
+            RequiredText(WeatherIdentity, nameof(WeatherIdentity)),
+            RequiredText(Sha256, nameof(Sha256)));
     }
 
     private sealed class MaterialSnapshot

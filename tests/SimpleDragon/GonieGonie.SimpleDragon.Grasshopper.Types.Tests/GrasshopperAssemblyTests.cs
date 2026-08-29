@@ -75,6 +75,8 @@ public sealed class GrasshopperAssemblyTests
             components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("5f66b3fd-e69c-4c33-92db-839c07dcbda5"),
             components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("49b71334-f6f0-4964-b1ed-c80e03a3a574"),
+            components.Select(component => component.ComponentGuid));
     }
 
     [Fact]
@@ -126,7 +128,7 @@ public sealed class GrasshopperAssemblyTests
             .OrderBy(name => name, StringComparer.Ordinal)
             .ToArray();
 
-        Assert.Equal(12, parameterTypes.Length);
+        Assert.Equal(15, parameterTypes.Length);
         Assert.Equal(parameterTypes.Length, resources.Length);
         var resourceHashes = new HashSet<string>(StringComparer.Ordinal);
         var runtimeHashes = new HashSet<string>(StringComparer.Ordinal);
@@ -191,7 +193,7 @@ public sealed class GrasshopperAssemblyTests
             }
         }
 
-        Assert.Equal(27, count);
+        Assert.Equal(31, count);
     }
 
     private static void AssertTransparentBorder(Bitmap bitmap)
@@ -265,9 +267,12 @@ public sealed class GrasshopperAssemblyTests
             new SimpleDragonUsageProfileParam().ComponentGuid,
             new SimpleDragonSurfaceParam().ComponentGuid,
             new SimpleDragonZoneParam().ComponentGuid,
+            new SimpleDragonOpeningDefinitionParam().ComponentGuid,
+            new SimpleDragonZoneDefinitionParam().ComponentGuid,
             new SimpleDragonSourceSystemParam().ComponentGuid,
             new SimpleDragonSupplySystemParam().ComponentGuid,
             new SimpleDragonEnergyRecoveryVentilatorParam().ComponentGuid,
+            new SimpleDragonVentilationAssignmentParam().ComponentGuid,
             new SimpleDragonPhotovoltaicPanelParam().ComponentGuid,
             new GreenRetrofitModelParam().ComponentGuid,
             new GreenRetrofitResultParam().ComponentGuid,
@@ -287,6 +292,7 @@ public sealed class GrasshopperAssemblyTests
             new DragonPhotovoltaicPanelParam().ComponentGuid,
             new DragonIdfParam().ComponentGuid,
             new EnergyPlusResultParam().ComponentGuid,
+            new PreparedWeatherFileParam().ComponentGuid,
             new DiagnosticParam().ComponentGuid,
         };
         Guid[] simpleComponents = ComponentTypes(LoadPlugin("GonieGonie.SimpleDragon.GH"))

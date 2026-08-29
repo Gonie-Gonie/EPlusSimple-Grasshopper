@@ -1,5 +1,6 @@
 using System.Text.Json;
 using GonieGonie.BuildingEnergy.Contracts;
+using Rhino.Geometry;
 
 namespace GonieGonie.SimpleDragon.Grasshopper.Types;
 
@@ -19,6 +20,8 @@ internal static class SimpleDragonGooSnapshot
     {
         (string kind, string payload) = value switch
         {
+            OpeningDefinition opening => ("opening-definition", ToJson(OpeningDefinitionSnapshot.From(opening))),
+            ZoneDefinition zone => ("zone-definition", ToJson(ZoneDefinitionSnapshot.From(zone))),
             Material material => ("material", ToJson(MaterialSnapshot.From(material))),
             SurfaceConstruction construction => ("surface-construction", ToJson(SurfaceConstructionSnapshot.From(construction))),
             FenestrationConstruction construction => ("fenestration-construction", ToJson(FenestrationConstructionSnapshot.From(construction))),
@@ -27,6 +30,7 @@ internal static class SimpleDragonGooSnapshot
             Zone zone => ("zone", ToJson(ZoneSnapshot.From(zone))),
             SourceSystem source => ("source-system", ToJson(SourceSystemSnapshot.From(source))),
             SupplySystem supply => ("supply-system", ToJson(SupplySystemSnapshot.From(supply))),
+            VentilationAssignment assignment => ("ventilation-assignment", ToJson(VentilationAssignmentSnapshot.From(assignment))),
             VentilationSystem ventilator => ("energy-recovery-ventilator", ToJson(VentilationSystemSnapshot.From(ventilator))),
             PhotovoltaicSystem panel => ("photovoltaic-panel", ToJson(PhotovoltaicSnapshot.From(panel))),
             GreenRetrofitModel model => ("green-retrofit-model", ToJson(ModelSnapshot.From(model))),
@@ -52,6 +56,8 @@ internal static class SimpleDragonGooSnapshot
 
         object value = envelope.Kind switch
         {
+            "opening-definition" => FromJson<OpeningDefinitionSnapshot>(envelope.Payload).ToDomain(),
+            "zone-definition" => FromJson<ZoneDefinitionSnapshot>(envelope.Payload).ToDomain(),
             "material" => FromJson<MaterialSnapshot>(envelope.Payload).ToDomain(),
             "surface-construction" => FromJson<SurfaceConstructionSnapshot>(envelope.Payload).ToDomain(),
             "fenestration-construction" => FromJson<FenestrationConstructionSnapshot>(envelope.Payload).ToDomain(),
@@ -60,6 +66,7 @@ internal static class SimpleDragonGooSnapshot
             "zone" => FromJson<ZoneSnapshot>(envelope.Payload).ToDomain(),
             "source-system" => FromJson<SourceSystemSnapshot>(envelope.Payload).ToDomain(),
             "supply-system" => FromJson<SupplySystemSnapshot>(envelope.Payload).ToDomain(),
+            "ventilation-assignment" => FromJson<VentilationAssignmentSnapshot>(envelope.Payload).ToDomain(),
             "energy-recovery-ventilator" => FromJson<VentilationSystemSnapshot>(envelope.Payload).ToDomain(),
             "photovoltaic-panel" => FromJson<PhotovoltaicSnapshot>(envelope.Payload).ToDomain(),
             "green-retrofit-model" => FromJson<ModelSnapshot>(envelope.Payload).ToDomain(),
@@ -569,6 +576,110 @@ internal static class SimpleDragonGooSnapshot
             VentilationSystemId,
             Count,
             VentilationSystem?.ToDomain());
+    }
+
+    private sealed class OpeningDefinitionSnapshot
+    {
+        public string GeometryArchive { get; set; } = string.Empty;
+
+        public string Name { get; set; } = string.Empty;
+
+        public FenestrationType Type { get; set; }
+
+        public FenestrationConstructionSnapshot? Construction { get; set; }
+
+        public BlindType? Blind { get; set; }
+
+        public string? Id { get; set; }
+
+        public static OpeningDefinitionSnapshot From(OpeningDefinition value) => new()
+        {
+            GeometryArchive = Convert.ToBase64String(value.GeometryArchive),
+            Name = value.Name,
+            Type = value.Type,
+            Construction = value.Construction is null
+                ? null
+                : FenestrationConstructionSnapshot.From(value.Construction),
+            Blind = value.Blind,
+            Id = value.Id?.Value,
+        };
+
+        public OpeningDefinition ToDomain()
+        {
+            using Curve geometry = RhinoGeometryArchive.Decode<Curve>(
+                Convert.FromBase64String(GeometryArchive));
+            return new OpeningDefinition(
+                geometry,
+                Name,
+                Type,
+                Construction?.ToDomain(),
+                Blind,
+                Id is null ? null : new EntityId(Id));
+        }
+    }
+
+    private sealed class ZoneDefinitionSnapshot
+    {
+        public string GeometryArchive { get; set; } = string.Empty;
+
+        public string Name { get; set; } = string.Empty;
+
+        public int FloorNumber { get; set; }
+
+        public UsageProfileSnapshot Profile { get; set; } = new();
+
+        public SurfaceConstructionSnapshot? SurfaceConstruction { get; set; }
+
+        public FenestrationConstructionSnapshot? DefaultFenestrationConstruction { get; set; }
+
+        public SurfaceBoundaryCondition UnmatchedFloorBoundary { get; set; }
+
+        public double? LightDensity { get; set; }
+
+        public List<OpeningDefinitionSnapshot> Openings { get; set; } = new();
+
+        public List<SupplySystemSnapshot> SupplySystems { get; set; } = new();
+
+        public List<VentilationAssignmentSnapshot> VentilationAssignments { get; set; } = new();
+
+        public static ZoneDefinitionSnapshot From(ZoneDefinition value) => new()
+        {
+            GeometryArchive = Convert.ToBase64String(value.GeometryArchive),
+            Name = value.Name,
+            FloorNumber = value.FloorNumber,
+            Profile = UsageProfileSnapshot.From(value.Profile),
+            SurfaceConstruction = value.SurfaceConstruction is null
+                ? null
+                : SurfaceConstructionSnapshot.From(value.SurfaceConstruction),
+            DefaultFenestrationConstruction = value.DefaultFenestrationConstruction is null
+                ? null
+                : FenestrationConstructionSnapshot.From(value.DefaultFenestrationConstruction),
+            UnmatchedFloorBoundary = value.UnmatchedFloorBoundary,
+            LightDensity = value.LightDensity,
+            Openings = value.Openings.Select(OpeningDefinitionSnapshot.From).ToList(),
+            SupplySystems = value.SupplySystems.Select(SupplySystemSnapshot.From).ToList(),
+            VentilationAssignments = value.VentilationAssignments
+                .Select(VentilationAssignmentSnapshot.From)
+                .ToList(),
+        };
+
+        public ZoneDefinition ToDomain()
+        {
+            using Brep geometry = RhinoGeometryArchive.Decode<Brep>(
+                Convert.FromBase64String(GeometryArchive));
+            return new ZoneDefinition(
+                geometry,
+                Name,
+                FloorNumber,
+                Profile.ToDomain(),
+                SurfaceConstruction?.ToDomain(),
+                DefaultFenestrationConstruction?.ToDomain(),
+                UnmatchedFloorBoundary,
+                LightDensity,
+                Openings.Select(item => item.ToDomain()),
+                SupplySystems.Select(item => item.ToDomain()),
+                VentilationAssignments.Select(item => item.ToDomain()));
+        }
     }
 
     private sealed class ZoneSnapshot

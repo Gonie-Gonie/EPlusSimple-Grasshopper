@@ -62,6 +62,28 @@ public sealed class SimpleDragonZoneParam : SimpleDragonParam<Types.SimpleDragon
     public override Guid ComponentGuid => new("aa522b2d-9eac-47bc-885d-202d6d1741f4");
 }
 
+public sealed class SimpleDragonOpeningDefinitionParam
+    : SimpleDragonParam<Types.SimpleDragonOpeningDefinitionGoo>
+{
+    public SimpleDragonOpeningDefinitionParam()
+        : base(
+            "SimpleDragon Opening Definition",
+            "Opening",
+            "A geometry-backed opening connected directly to its owning SimpleDragon zone.") { }
+    public override Guid ComponentGuid => new("51610fe9-ecf1-43b4-9157-7260b3ba89ad");
+}
+
+public sealed class SimpleDragonZoneDefinitionParam
+    : SimpleDragonParam<Types.SimpleDragonZoneDefinitionGoo>
+{
+    public SimpleDragonZoneDefinitionParam()
+        : base(
+            "SimpleDragon Zone Definition",
+            "Zone Definition",
+            "A geometry-backed SimpleDragon zone with its openings, usage, and HVAC inputs.") { }
+    public override Guid ComponentGuid => new("3fe45962-67fe-43d4-be95-ad81b91b19eb");
+}
+
 public sealed class SimpleDragonSourceSystemParam : SimpleDragonParam<Types.SimpleDragonSourceSystemGoo>
 {
     public SimpleDragonSourceSystemParam()
@@ -82,6 +104,17 @@ public sealed class SimpleDragonEnergyRecoveryVentilatorParam
     public SimpleDragonEnergyRecoveryVentilatorParam()
         : base("SimpleDragon Energy Recovery Ventilator", "ERV", "A SimpleDragon energy-recovery ventilator.") { }
     public override Guid ComponentGuid => new("4a980e9a-a954-47c0-a34b-2026eb86b2ad");
+}
+
+public sealed class SimpleDragonVentilationAssignmentParam
+    : SimpleDragonParam<Types.SimpleDragonVentilationAssignmentGoo>
+{
+    public SimpleDragonVentilationAssignmentParam()
+        : base(
+            "SimpleDragon Ventilation Assignment",
+            "Ventilation",
+            "A SimpleDragon energy-recovery ventilator assignment with a unit count.") { }
+    public override Guid ComponentGuid => new("14f1683e-4b0a-4754-aac5-6b85331c2126");
 }
 
 public sealed class SimpleDragonPhotovoltaicPanelParam
