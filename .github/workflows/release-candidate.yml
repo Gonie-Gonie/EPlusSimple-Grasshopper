@@ -61,6 +61,7 @@ jobs:
           }
           $gate = Get-Content -LiteralPath $gatePath -Raw | ConvertFrom-Json
           $engineering = $gate.verification.engineeringCompatibility
+          $exampleGate = $gate.verification.grasshopperExampleGate
           $publication = $gate.publication
           if ([string] $gate.schema -cne 'goniegonie.dragons-grasshopper.release-gate.v1' -or
               [string] $gate.status -cne 'passed' -or
@@ -73,6 +74,8 @@ jobs:
               [int] $engineering.skippedStageCount -ne 0 -or
               [string] $engineering.status -cne 'passed' -or
               [string] $gate.verification.grasshopperExamples -cne 'passed' -or
+              [string] $exampleGate.status -cne 'passed' -or
+              [string] $exampleGate.sourceRun -notmatch '^[0-9a-f]{8}$' -or
               [string] $gate.verification.packageCompatibility -cne 'passed' -or
               [bool] $publication.publicPublicationAuthorized -or
               [bool] $publication.tagCreated -or
@@ -98,6 +101,99 @@ jobs:
                 @($_.loadedPlugins).Count -lt 1
               }).Count -ne 0) {
             throw 'Release gate does not attest all six real Rhino package-host scenarios.'
+          }
+
+          $checksumPath = 'artifacts/release/checksums.sha256'
+          if (-not (Test-Path -LiteralPath $checksumPath -PathType Leaf)) {
+            throw "Release checksum inventory is missing: '$checksumPath'."
+          }
+          $checksumLines = @(Get-Content -LiteralPath $checksumPath)
+          function Assert-ExampleEvidenceFile {
+            param(
+              [Parameter(Mandatory = $true)] [string] $Report,
+              [Parameter(Mandatory = $true)] [string] $ExpectedSha256
+            )
+
+            if (-not $Report.StartsWith(
+                  'release/grasshopper-example-gate/',
+                  [System.StringComparison]::Ordinal) -or
+                $Report.Contains('..') -or
+                $Report.Contains('\') -or
+                $ExpectedSha256 -notmatch '^[0-9a-f]{64}$') {
+              throw "Grasshopper example evidence has an unsafe path or hash: '$Report'."
+            }
+            $artifactPath = Join-Path 'artifacts' ($Report -replace '/', '\')
+            if (-not (Test-Path -LiteralPath $artifactPath -PathType Leaf)) {
+              throw "Grasshopper example evidence is missing: '$artifactPath'."
+            }
+            $actualSha256 = (Get-FileHash -LiteralPath $artifactPath -Algorithm SHA256).Hash.ToLowerInvariant()
+            if ($actualSha256 -cne $ExpectedSha256) {
+              throw "Grasshopper example evidence hash changed: '$artifactPath'."
+            }
+            $checksumRelative = $Report.Substring('release/'.Length)
+            if ($checksumLines -notcontains ($ExpectedSha256 + '  ' + $checksumRelative)) {
+              throw "Release checksum inventory does not bind '$checksumRelative'."
+            }
+            return $artifactPath
+          }
+
+          $expectedExampleReports = @{
+            Rhino7 = 'release/grasshopper-example-gate/rhino7-summary.json'
+            Rhino8 = 'release/grasshopper-example-gate/rhino8-summary.json'
+          }
+          $exampleRows = @($exampleGate.hosts)
+          $actualExampleHosts = @($exampleRows | ForEach-Object { [string] $_.host } | Sort-Object)
+          if ($exampleRows.Count -ne 2 -or
+              @($actualExampleHosts | Select-Object -Unique).Count -ne 2 -or
+              @(Compare-Object `
+                  -ReferenceObject @('Rhino7', 'Rhino8') `
+                  -DifferenceObject $actualExampleHosts).Count -ne 0) {
+            throw 'Release gate does not attest exactly one Rhino 7 and one Rhino 8 example summary.'
+          }
+          foreach ($row in $exampleRows) {
+            $host = [string] $row.host
+            $expectedReport = [string] $expectedExampleReports[$host]
+            if ([string] $row.action -cne 'Validate' -or
+                [int] $row.definitionCount -ne 8 -or
+                [int] $row.modelCount -ne 2 -or
+                [string] $row.report -cne $expectedReport) {
+              throw "Release example evidence metadata is invalid for '$host'."
+            }
+            $summaryPath = Assert-ExampleEvidenceFile `
+              -Report $expectedReport `
+              -ExpectedSha256 ([string] $row.sha256)
+            $summary = Get-Content -LiteralPath $summaryPath -Raw | ConvertFrom-Json
+            if ([string] $summary.schema -cne 'goniegonie.dragons-grasshopper.examples.v3' -or
+                [string] $summary.host -cne $host -or
+                [string] $summary.action -cne 'Validate' -or
+                @($summary.definitions).Count -ne 8 -or
+                @($summary.models).Count -ne 2) {
+              throw "Copied Grasshopper example summary is invalid for '$host'."
+            }
+          }
+
+          $expectedMarkers = @{
+            'PASS.txt' = 'release/grasshopper-example-gate/PASS.txt'
+            'ENERGYPLUS-WORKFLOW-PASS.txt' = 'release/grasshopper-example-gate/ENERGYPLUS-WORKFLOW-PASS.txt'
+          }
+          $markerRows = @($exampleGate.markers)
+          $actualMarkers = @($markerRows | ForEach-Object { [string] $_.name } | Sort-Object)
+          if ($markerRows.Count -ne 2 -or
+              @($actualMarkers | Select-Object -Unique).Count -ne 2 -or
+              @(Compare-Object `
+                  -ReferenceObject @($expectedMarkers.Keys | Sort-Object) `
+                  -DifferenceObject $actualMarkers).Count -ne 0) {
+            throw 'Release gate does not attest the exact two Grasshopper example pass markers.'
+          }
+          foreach ($marker in $markerRows) {
+            $name = [string] $marker.name
+            $expectedReport = [string] $expectedMarkers[$name]
+            if ([string] $marker.report -cne $expectedReport) {
+              throw "Release example marker metadata is invalid for '$name'."
+            }
+            $null = Assert-ExampleEvidenceFile `
+              -Report $expectedReport `
+              -ExpectedSha256 ([string] $marker.sha256)
           }
 
       - name: Upload release diagnostics

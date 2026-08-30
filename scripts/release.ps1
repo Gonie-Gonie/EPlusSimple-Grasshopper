@@ -18,6 +18,7 @@ $finalReleaseRoot = Join-Path $artifactsRoot 'release'
 $releaseScratchRoot = Join-Path $repositoryRoot 'temp\release-candidate'
 $releaseRoot = Join-Path $releaseScratchRoot ("staging-" + $releaseStamp)
 $hostReportRoot = Join-Path $releaseRoot 'portable-host-gate'
+$exampleEvidenceRoot = Join-Path $releaseRoot 'grasshopper-example-gate'
 $settingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
 $upstreamRoot = Join-Path $repositoryRoot 'temp\reference\upstream\eplussimple'
 $upstreamGatePath = Join-Path $repositoryRoot 'temp\upstream-tracker\compatibility-gate.json'
@@ -2680,6 +2681,287 @@ function Publish-ReleaseWorkspace {
     Move-Item -LiteralPath $safeStaging -Destination $safeFinal
 }
 
+function Get-ExampleGateRunPaths {
+    $exampleRoot = Join-Path $repositoryRoot 'temp\e'
+    if (-not (Test-Path -LiteralPath $exampleRoot -PathType Container)) {
+        return @()
+    }
+
+    return @(Get-ChildItem -LiteralPath $exampleRoot -Directory |
+        ForEach-Object { [System.IO.Path]::GetFullPath($_.FullName) })
+}
+
+function Find-ExampleGateRun {
+    param(
+        [string[]] $ExistingPaths = @()
+    )
+
+    $exampleRoot = [System.IO.Path]::GetFullPath((Join-Path $repositoryRoot 'temp\e'))
+    if (-not (Test-Path -LiteralPath $exampleRoot -PathType Container)) {
+        throw 'The Grasshopper example gate produced no run directory.'
+    }
+
+    $existingFullPaths = @($ExistingPaths | ForEach-Object {
+        [System.IO.Path]::GetFullPath([string] $_)
+    })
+    $candidates = @(Get-ChildItem -LiteralPath $exampleRoot -Directory |
+        Where-Object {
+            $existingFullPaths -notcontains [System.IO.Path]::GetFullPath($_.FullName)
+        })
+    if ($candidates.Count -ne 1) {
+        throw "Expected exactly one new Grasshopper example-gate run; found $($candidates.Count)."
+    }
+
+    $candidate = $candidates[0]
+    $candidateFull = [System.IO.Path]::GetFullPath($candidate.FullName)
+    if ($candidate.Name -notmatch '^[0-9a-f]{8}$' -or
+        -not (Test-PathWithin -Root $exampleRoot -Candidate $candidateFull)) {
+        throw "The new Grasshopper example-gate run has an unsafe or unexpected path: '$candidateFull'."
+    }
+    Assert-NoReparseAncestorChain -Root $repositoryRoot -Candidate $candidateFull
+    Assert-NoReparsePoints -Path $candidateFull -AnchorPath $repositoryRoot
+
+    if (Test-Path -LiteralPath (Join-Path $candidateFull 'FAIL.txt') -PathType Leaf) {
+        throw "The new Grasshopper example-gate run contains FAIL.txt: '$candidateFull'."
+    }
+
+    $requiredRelativeFiles = @(
+        'PASS.txt',
+        'ENERGYPLUS-WORKFLOW-PASS.txt',
+        'v7/summary.json',
+        'v8/summary.json'
+    ) | Sort-Object
+    foreach ($relativePath in $requiredRelativeFiles) {
+        $sourcePath = Join-Path $candidateFull ($relativePath -replace '/', '\')
+        if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
+            throw "The Grasshopper example-gate run is missing '$relativePath'."
+        }
+    }
+
+    $actualSummaryPaths = @(Get-ChildItem -LiteralPath $candidateFull -Recurse -File -Filter 'summary.json' |
+        ForEach-Object { Get-RelativeUnixPath -Root $candidateFull -Path $_.FullName } |
+        Sort-Object)
+    $expectedSummaryPaths = @('v7/summary.json', 'v8/summary.json') | Sort-Object
+    if ($actualSummaryPaths.Count -ne 2 -or
+        @(Compare-Object `
+                -ReferenceObject $expectedSummaryPaths `
+                -DifferenceObject $actualSummaryPaths).Count -ne 0) {
+        throw 'The Grasshopper example gate must produce exactly the Rhino 7 and Rhino 8 validation summaries.'
+    }
+
+    return $candidate
+}
+
+function Copy-ExampleGateEvidence {
+    param(
+        [Parameter(Mandatory = $true)]
+        [System.IO.DirectoryInfo] $Run
+    )
+
+    $runFull = [System.IO.Path]::GetFullPath($Run.FullName)
+    Ensure-Directory -Path $exampleEvidenceRoot
+    Assert-NoReparseAncestorChain -Root $repositoryRoot -Candidate $exampleEvidenceRoot
+
+    $copySpecs = @(
+        [pscustomobject] [ordered] @{
+            source = 'v7/summary.json'
+            destination = 'rhino7-summary.json'
+        },
+        [pscustomobject] [ordered] @{
+            source = 'v8/summary.json'
+            destination = 'rhino8-summary.json'
+        },
+        [pscustomobject] [ordered] @{
+            source = 'PASS.txt'
+            destination = 'PASS.txt'
+        },
+        [pscustomobject] [ordered] @{
+            source = 'ENERGYPLUS-WORKFLOW-PASS.txt'
+            destination = 'ENERGYPLUS-WORKFLOW-PASS.txt'
+        }
+    )
+    foreach ($copySpec in $copySpecs) {
+        $sourcePath = [System.IO.Path]::GetFullPath((
+            Join-Path $runFull (([string] $copySpec.source) -replace '/', '\')
+        ))
+        $destinationPath = [System.IO.Path]::GetFullPath((
+            Join-Path $exampleEvidenceRoot ([string] $copySpec.destination)
+        ))
+        if (-not (Test-PathWithin -Root $runFull -Candidate $sourcePath) -or
+            -not (Test-Path -LiteralPath $sourcePath -PathType Leaf) -or
+            -not (Test-PathWithin -Root $releaseRoot -Candidate $destinationPath)) {
+            throw "Grasshopper example evidence path validation failed for '$($copySpec.source)'."
+        }
+        Assert-NoReparseAncestorChain -Root $repositoryRoot -Candidate $sourcePath
+        Copy-Item -LiteralPath $sourcePath -Destination $destinationPath
+        $sourceHash = Get-Sha256 -Path $sourcePath
+        $destinationHash = Get-Sha256 -Path $destinationPath
+        if ($sourceHash -cne $destinationHash) {
+            throw "Copied Grasshopper example evidence differs from '$($copySpec.source)'."
+        }
+    }
+
+    $expectedEvidenceNames = @($copySpecs | ForEach-Object { [string] $_.destination } | Sort-Object)
+    $actualEvidenceFiles = @(Get-ChildItem -LiteralPath $exampleEvidenceRoot -File)
+    $actualEvidenceNames = @($actualEvidenceFiles | ForEach-Object { $_.Name } | Sort-Object)
+    if ($actualEvidenceFiles.Count -ne 4 -or
+        @(Compare-Object `
+                -ReferenceObject $expectedEvidenceNames `
+                -DifferenceObject $actualEvidenceNames).Count -ne 0) {
+        throw 'The copied Grasshopper example evidence set must contain only two summaries and two pass markers.'
+    }
+
+    $expectedDefinitionFiles = @(Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'examples') -File -Filter '*.gh' |
+        ForEach-Object { $_.Name } |
+        Sort-Object)
+    $expectedModelFiles = @(Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'examples') -File -Filter '*.3dm' |
+        ForEach-Object { $_.Name } |
+        Sort-Object)
+    if ($expectedDefinitionFiles.Count -eq 0 -or $expectedModelFiles.Count -eq 0) {
+        throw 'Tracked Grasshopper definitions and Rhino models are required for release evidence.'
+    }
+
+    $hostSpecs = @(
+        [pscustomobject] [ordered] @{
+            host = 'Rhino7'
+            sourceDirectory = 'v7'
+            report = 'rhino7-summary.json'
+        },
+        [pscustomobject] [ordered] @{
+            host = 'Rhino8'
+            sourceDirectory = 'v8'
+            report = 'rhino8-summary.json'
+        }
+    )
+    $hostReports = @()
+    foreach ($hostSpec in $hostSpecs) {
+        $reportPath = Join-Path $exampleEvidenceRoot ([string] $hostSpec.report)
+        $summary = Require-Json `
+            -Path $reportPath `
+            -Schema 'goniegonie.dragons-grasshopper.examples.v3'
+        if ([string] $summary.host -cne [string] $hostSpec.host -or
+            [string] $summary.action -cne 'Validate' -or
+            [string]::IsNullOrWhiteSpace([string] $summary.rhinoVersion) -or
+            [string]::IsNullOrWhiteSpace([string] $summary.grasshopperVersion)) {
+            throw "Grasshopper example evidence has the wrong host/action identity for '$($hostSpec.host)'."
+        }
+
+        $definitions = @($summary.definitions)
+        $definitionFiles = @($definitions | ForEach-Object { [string] $_.fileName } | Sort-Object)
+        if ($definitions.Count -ne $expectedDefinitionFiles.Count -or
+            @($definitionFiles | Select-Object -Unique).Count -ne $definitionFiles.Count -or
+            @(Compare-Object `
+                    -ReferenceObject $expectedDefinitionFiles `
+                    -DifferenceObject $definitionFiles).Count -ne 0) {
+            throw "Grasshopper example evidence for '$($hostSpec.host)' does not cover every tracked definition exactly once."
+        }
+        foreach ($definition in $definitions) {
+            $canonicalPath = Join-Path $repositoryRoot (Join-Path 'examples' ([string] $definition.fileName))
+            if ([bool] $definition.generated -or
+                [int] $definition.objectCount -lt 1 -or
+                [int] $definition.wireCount -lt 1 -or
+                [string]::IsNullOrWhiteSpace([string] $definition.outputGooType) -or
+                -not [System.IO.Path]::GetFullPath([string] $definition.canonicalPath).Equals(
+                    [System.IO.Path]::GetFullPath($canonicalPath),
+                    [System.StringComparison]::OrdinalIgnoreCase) -or
+                -not (Get-Sha256 -Path $canonicalPath).Equals(
+                    [string] $definition.sha256,
+                    [System.StringComparison]::OrdinalIgnoreCase)) {
+                throw "Grasshopper example evidence for '$($hostSpec.host)' is not bound to '$($definition.fileName)'."
+            }
+        }
+
+        $models = @($summary.models)
+        $modelFiles = @($models | ForEach-Object { [string] $_.fileName } | Sort-Object)
+        if ($models.Count -ne $expectedModelFiles.Count -or
+            @($modelFiles | Select-Object -Unique).Count -ne $modelFiles.Count -or
+            @(Compare-Object `
+                    -ReferenceObject $expectedModelFiles `
+                    -DifferenceObject $modelFiles).Count -ne 0) {
+            throw "Grasshopper example evidence for '$($hostSpec.host)' does not cover every tracked Rhino model exactly once."
+        }
+        foreach ($model in $models) {
+            $canonicalPath = Join-Path $repositoryRoot (Join-Path 'examples' ([string] $model.fileName))
+            if ([bool] $model.generated -or
+                [int] $model.zoneCount -lt 1 -or
+                -not [System.IO.Path]::GetFullPath([string] $model.canonicalPath).Equals(
+                    [System.IO.Path]::GetFullPath($canonicalPath),
+                    [System.StringComparison]::OrdinalIgnoreCase) -or
+                -not (Get-Sha256 -Path $canonicalPath).Equals(
+                    [string] $model.sha256,
+                    [System.StringComparison]::OrdinalIgnoreCase)) {
+                throw "Grasshopper example evidence for '$($hostSpec.host)' is not bound to '$($model.fileName)'."
+            }
+        }
+
+        $invisibleRows = @($definitions | Where-Object {
+            [string] $_.fileName -ceq '02-invisibledragon-single-zone-hvac-idf.gh'
+        })
+        $simpleRows = @($definitions | Where-Object {
+            [string] $_.fileName -ceq '14-simpledragon-two-zone-run-results-csv.gh'
+        })
+        if ($invisibleRows.Count -ne 1 -or $simpleRows.Count -ne 1) {
+            throw "Grasshopper example evidence for '$($hostSpec.host)' is missing an executable workflow."
+        }
+        foreach ($runtimeRow in @($invisibleRows[0], $simpleRows[0])) {
+            $expectedEvidenceDirectory = Join-Path $runFull ([string] $hostSpec.sourceDirectory)
+            if ([string] $runtimeRow.runtimeGateStatus -cne 'ready' -or
+                $runtimeRow.runtimeExecuted -ne $true -or
+                $runtimeRow.runtimeResultVerified -ne $true -or
+                $runtimeRow.runtimeCacheVerified -ne $true -or
+                $runtimeRow.runtimeCancellationVerified -ne $true -or
+                [string] $runtimeRow.runtimeFirstRunState -cne 'Succeeded' -or
+                [string] $runtimeRow.runtimeCachedRunState -cne 'Cached' -or
+                [string] $runtimeRow.runtimeCancellationState -cne 'Cancelled' -or
+                -not [System.IO.Path]::GetFullPath([string] $runtimeRow.runtimeEvidenceDirectory).Equals(
+                    [System.IO.Path]::GetFullPath($expectedEvidenceDirectory),
+                    [System.StringComparison]::OrdinalIgnoreCase)) {
+                throw "Grasshopper runtime evidence for '$($hostSpec.host)/$($runtimeRow.fileName)' is incomplete."
+            }
+        }
+        if ($invisibleRows[0].runtimeCsvVerified -ne $false -or
+            $invisibleRows[0].runtimeBatchVerified -ne $false -or
+            $invisibleRows[0].runtimeBatchCancellationVerified -ne $false -or
+            $simpleRows[0].runtimeCsvVerified -ne $true -or
+            $simpleRows[0].runtimeBatchVerified -ne $true -or
+            $simpleRows[0].runtimeBatchCancellationVerified -ne $true) {
+            throw "Grasshopper example evidence for '$($hostSpec.host)' has invalid product-specific workflow claims."
+        }
+
+        $hostReports += [pscustomobject] [ordered] @{
+            host = [string] $summary.host
+            rhinoVersion = [string] $summary.rhinoVersion
+            grasshopperVersion = [string] $summary.grasshopperVersion
+            action = [string] $summary.action
+            definitionCount = $definitions.Count
+            modelCount = $models.Count
+            report = 'release/' + (Get-RelativeUnixPath -Root $releaseRoot -Path $reportPath)
+            sha256 = Get-Sha256 -Path $reportPath
+        }
+    }
+
+    $markerReports = @($copySpecs | Where-Object {
+        ([string] $_.destination).EndsWith('.txt', [System.StringComparison]::OrdinalIgnoreCase)
+    } | ForEach-Object {
+        $markerPath = Join-Path $exampleEvidenceRoot ([string] $_.destination)
+        if ((Get-Item -LiteralPath $markerPath).Length -le 0) {
+            throw "Grasshopper example pass marker is empty: '$markerPath'."
+        }
+        [pscustomobject] [ordered] @{
+            name = [string] $_.destination
+            report = 'release/' + (Get-RelativeUnixPath -Root $releaseRoot -Path $markerPath)
+            sha256 = Get-Sha256 -Path $markerPath
+        }
+    })
+
+    return [pscustomobject] [ordered] @{
+        status = 'passed'
+        sourceRun = $Run.Name
+        hosts = @($hostReports | Sort-Object host)
+        markers = @($markerReports | Sort-Object name)
+    }
+}
+
 function Get-PortableHostGateRunPaths {
     $smokeRoot = Join-Path $repositoryRoot 'temp\grasshopper-smoke'
     if (-not (Test-Path -LiteralPath $smokeRoot -PathType Container)) {
@@ -2940,6 +3222,7 @@ Invoke-RepositoryCommand `
     -FailureMessage 'Engineering compatibility gate failed'
 
 Write-Host 'Opening and round-trip validating the tracked examples in Rhino 7 and Rhino 8...'
+$exampleRunsBeforeGate = @(Get-ExampleGateRunPaths)
 Invoke-RepositoryCommand `
     -Path (Join-Path $repositoryRoot 'dev.cmd') `
     -Arguments @(
@@ -2949,6 +3232,8 @@ Invoke-RepositoryCommand `
         '-TimeoutSeconds', '900',
         '-WorkflowStageTimeoutSeconds', '240') `
     -FailureMessage 'Verified Grasshopper example gate failed'
+$exampleRun = Find-ExampleGateRun -ExistingPaths $exampleRunsBeforeGate
+$exampleGateEvidence = Copy-ExampleGateEvidence -Run $exampleRun
 
 Write-Host 'Packaging and loading the exact portable ZIPs in six fresh Rhino hosts...'
 $hostRunsBeforePackage = @(Get-PortableHostGateRunPaths)
@@ -3474,6 +3759,7 @@ $releaseGate = [pscustomobject] [ordered] @{
             sha256 = Get-Sha256 -Path $engineeringReleasePath
         }
         grasshopperExamples = 'passed'
+        grasshopperExampleGate = $exampleGateEvidence
         packageCompatibility = 'passed'
         buildManifest = [pscustomobject] [ordered] @{
             path = Get-RelativeUnixPath -Root $artifactsRoot -Path $buildManifestPath
@@ -3502,6 +3788,7 @@ $checksumFiles = @(
     Get-Item -LiteralPath $engineeringReleasePath
     Get-Item -LiteralPath $upstreamReleasePath
     Get-ChildItem -LiteralPath $trustedEvidenceReleaseRoot -File -Recurse
+    Get-ChildItem -LiteralPath $exampleEvidenceRoot -File
     Get-ChildItem -LiteralPath $hostReportRoot -File -Filter '*.json'
 )
 $checksumLines = @($checksumFiles | Sort-Object FullName | ForEach-Object {

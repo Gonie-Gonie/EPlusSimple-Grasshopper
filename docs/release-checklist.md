@@ -105,6 +105,8 @@ For diagnosis, its constituent commands are:
 ## Candidate review
 
 - Inspect `artifacts\release\release-gate.json`, its checksum inventory, the
+  two copied Rhino 7/8 example summaries and two pass markers under
+  `grasshopper-example-gate`,
   copied `upstream-compatibility-gate.json` and
   complete `trusted-evidence\<session-id>` bundle (receipt, index, and indexed
   `artifacts` tree),
