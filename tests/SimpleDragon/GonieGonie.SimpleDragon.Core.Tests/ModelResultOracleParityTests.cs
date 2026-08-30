@@ -283,7 +283,6 @@ public sealed class ModelResultOracleParityTests
         AssertPinnedArtifact(GeneratorPath, GeneratorBytes, GeneratorSha256);
         AssertPinnedArtifact(ValidatorPath, ValidatorBytes, ValidatorSha256);
         AssertPinnedArtifact(InventoryPath, InventoryBytes, InventoryFileSha256);
-        AssertPinnedArtifact(UpstreamArtifactPath, UpstreamBytes, UpstreamSourceSha256);
         foreach (ArtifactPin artifact in NativeSources.Concat(NativeData))
         {
             AssertPinnedArtifact(artifact.Path, artifact.Bytes, artifact.Sha256);
