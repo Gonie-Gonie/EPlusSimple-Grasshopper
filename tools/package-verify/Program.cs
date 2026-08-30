@@ -761,6 +761,8 @@ internal sealed class PackageVerifier
                 "Yak archive manifest identity/version/icon mismatch for " + product.DisplayName + " " + target + ".");
         }
 
+        VerifyArchiveChecksums(scenario, archive, "Yak archive");
+
         if (target == "rhino7")
         {
             Check(scenario, entries.Contains(product.EntryAssembly, StringComparer.Ordinal),
@@ -810,7 +812,7 @@ internal sealed class PackageVerifier
                 VerifyArchiveAssemblyDuplicates(scenario, product, archive, prefix);
             }
         }
-        VerifyArchiveChecksums(scenario, archive);
+        VerifyArchiveChecksums(scenario, archive, "Portable ZIP");
     }
 
     private void VerifyEmbeddedPayloadEntry(
@@ -1040,12 +1042,12 @@ internal sealed class PackageVerifier
             "Checksum inventory is incomplete or contains extra paths in '" + root + "'.");
     }
 
-    private void VerifyArchiveChecksums(string scenario, ZipArchive archive)
+    private void VerifyArchiveChecksums(string scenario, ZipArchive archive, string description)
     {
         ZipArchiveEntry? checksumEntry = FindEntry(archive, "checksums.sha256");
         if (checksumEntry is null)
         {
-            Failure(scenario, "Archive checksum file is missing.");
+            Failure(scenario, description + " checksum file is missing.");
             return;
         }
 
@@ -1060,18 +1062,19 @@ internal sealed class PackageVerifier
             Match match = Regex.Match(line, "^(?<hash>[0-9a-f]{64})  (?<path>.+)$", RegexOptions.CultureInvariant);
             if (!match.Success)
             {
-                Failure(scenario, "Invalid checksum line inside portable ZIP: '" + line + "'.");
+                Failure(scenario, "Invalid checksum line inside " + description + ": '" + line + "'.");
                 continue;
             }
             string path = match.Groups["path"].Value;
-            listed.Add(path);
+            Check(scenario, listed.Add(path),
+                description + " checksum inventory contains duplicate path '" + path + "'.");
             ZipArchiveEntry? entry = FindEntry(archive, path);
-            Check(scenario, entry is not null, "Portable ZIP checksum target is missing: '" + path + "'.");
+            Check(scenario, entry is not null, description + " checksum target is missing: '" + path + "'.");
             if (entry is not null)
             {
                 using Stream stream = entry.Open();
                 Check(scenario, Sha256(stream) == match.Groups["hash"].Value,
-                    "Portable ZIP SHA-256 mismatch for '" + path + "'.");
+                    description + " SHA-256 mismatch for '" + path + "'.");
             }
         }
 
@@ -1080,7 +1083,7 @@ internal sealed class PackageVerifier
             .Where(path => path != "checksums.sha256")
             .OrderBy(path => path, StringComparer.Ordinal).ToArray();
         Check(scenario, listed.OrderBy(path => path, StringComparer.Ordinal).SequenceEqual(expected, StringComparer.Ordinal),
-            "Portable ZIP checksum inventory is incomplete or contains extra paths.");
+            description + " checksum inventory is incomplete or contains extra paths.");
     }
 
     private static AssemblyMetadata ReadAssembly(string path)

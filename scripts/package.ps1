@@ -95,6 +95,116 @@ function Write-Checksums {
     Write-Utf8Text -Path $checksumPath -Content (($lines -join [Environment]::NewLine) + [Environment]::NewLine)
 }
 
+function Write-YakArchiveChecksums {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Path
+    )
+
+    $archivePath = [System.IO.Path]::GetFullPath($Path)
+    $archive = [System.IO.Compression.ZipFile]::OpenRead($archivePath)
+    try {
+        $checksumEntries = @($archive.Entries | Where-Object {
+            $_.FullName -ceq 'checksums.sha256'
+        })
+        if ($checksumEntries.Count -ne 1) {
+            throw "Yak archive must contain exactly one checksums.sha256 entry: '$archivePath'."
+        }
+
+        $reader = New-Object System.IO.StreamReader($checksumEntries[0].Open())
+        try {
+            $checksumText = $reader.ReadToEnd()
+        }
+        finally {
+            $reader.Dispose()
+        }
+        $expectedHashes = [System.Collections.Generic.Dictionary[string, string]]::new(
+            [System.StringComparer]::Ordinal)
+        foreach ($line in @($checksumText -split '\r?\n' | Where-Object {
+            -not [string]::IsNullOrWhiteSpace($_)
+        })) {
+            if ($line -cnotmatch '^(?<hash>[0-9a-f]{64})  (?<path>.+)$') {
+                throw "Yak archive contains an invalid checksum line '$line': '$archivePath'."
+            }
+            if ($expectedHashes.ContainsKey($Matches['path'])) {
+                throw "Yak archive checksum inventory contains a duplicate path '$($Matches['path'])': '$archivePath'."
+            }
+            $expectedHashes.Add($Matches['path'], $Matches['hash'])
+        }
+
+        $payloadEntries = @($archive.Entries | Where-Object {
+            -not [string]::IsNullOrEmpty($_.Name) -and
+            $_.FullName -cne 'checksums.sha256'
+        } | Sort-Object FullName)
+        $duplicateEntries = @($payloadEntries | Group-Object FullName | Where-Object { $_.Count -ne 1 })
+        if ($duplicateEntries.Count -ne 0) {
+            throw "Yak archive contains duplicate payload paths: '$archivePath'."
+        }
+        $unknownEntries = @($payloadEntries | Where-Object {
+            -not $expectedHashes.ContainsKey($_.FullName.Replace('\', '/'))
+        })
+        if ($payloadEntries.Count -ne $expectedHashes.Count -or $unknownEntries.Count -ne 0) {
+            throw "Yak changed the payload inventory while building '$archivePath'."
+        }
+        if (-not $expectedHashes.ContainsKey('manifest.yml')) {
+            throw "Yak archive checksum inventory does not contain manifest.yml: '$archivePath'."
+        }
+
+        $lines = foreach ($entry in $payloadEntries) {
+            $relativePath = $entry.FullName.Replace('\', '/')
+            $stream = $entry.Open()
+            $sha256 = [System.Security.Cryptography.SHA256]::Create()
+            try {
+                $hash = [System.BitConverter]::ToString($sha256.ComputeHash($stream)).Replace('-', '').ToLowerInvariant()
+            }
+            finally {
+                $sha256.Dispose()
+                $stream.Dispose()
+            }
+            if ($relativePath -ne 'manifest.yml' -and $hash -ne $expectedHashes[$relativePath]) {
+                throw "Yak unexpectedly changed '$relativePath' while building '$archivePath'."
+            }
+            '{0}  {1}' -f $hash, $relativePath
+        }
+        $lastWriteTime = $checksumEntries[0].LastWriteTime
+    }
+    finally {
+        $archive.Dispose()
+    }
+
+    # Reopen in update mode only after validating the archive in read mode. This
+    # keeps the large embedded distribution entry streaming and changes only the
+    # checksum entry that Yak invalidated by rewriting manifest.yml.
+    $archive = [System.IO.Compression.ZipFile]::Open(
+        $archivePath,
+        [System.IO.Compression.ZipArchiveMode]::Update)
+    try {
+        $checksumEntries = @($archive.Entries | Where-Object {
+            $_.FullName -ceq 'checksums.sha256'
+        })
+        if ($checksumEntries.Count -ne 1) {
+            throw "Yak archive must contain exactly one checksums.sha256 entry: '$archivePath'."
+        }
+        $checksumEntries[0].Delete()
+        $replacement = $archive.CreateEntry(
+            'checksums.sha256',
+            [System.IO.Compression.CompressionLevel]::Optimal)
+        $replacement.LastWriteTime = $lastWriteTime
+        $writer = New-Object System.IO.StreamWriter(
+            $replacement.Open(),
+            (New-Object System.Text.UTF8Encoding($false)))
+        try {
+            $writer.Write(($lines -join [Environment]::NewLine) + [Environment]::NewLine)
+        }
+        finally {
+            $writer.Dispose()
+        }
+    }
+    finally {
+        $archive.Dispose()
+    }
+}
+
 function Copy-PackageRootFiles {
     param(
         [Parameter(Mandatory = $true)]
@@ -452,6 +562,11 @@ function New-YakDistribution {
     if (-not $rhinoMatch.Success -or $rhinoMatch.Groups['major'].Value -ne $expectedMajor) {
         throw "Yak emitted unexpected distribution filename '$($built[0].Name)' for $($Target.id)."
     }
+
+    # Yak normalizes and augments manifest.yml while creating the archive. Refresh
+    # the embedded checksum inventory against the final archive entries so that
+    # an installed package can be verified byte-for-byte.
+    Write-YakArchiveChecksums -Path $built[0].FullName
 
     Ensure-Directory -Path $YakOutputRoot
     $canonicalName = '{0}-{1}-rh{2}-win.yak' -f $Product.id, $spec.version, $expectedMajor
