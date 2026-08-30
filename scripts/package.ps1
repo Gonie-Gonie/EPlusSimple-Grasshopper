@@ -98,7 +98,13 @@ function Write-Checksums {
 function Write-YakArchiveChecksums {
     param(
         [Parameter(Mandatory = $true)]
-        [string] $Path
+        [string] $Path,
+
+        [Parameter(Mandatory = $true)]
+        [string] $ExpectedChecksumText,
+
+        [Parameter(Mandatory = $true)]
+        [string] $ExpectedChecksumSha256
     )
 
     $archivePath = [System.IO.Path]::GetFullPath($Path)
@@ -111,16 +117,32 @@ function Write-YakArchiveChecksums {
             throw "Yak archive must contain exactly one checksums.sha256 entry: '$archivePath'."
         }
 
+        $checksumStream = $checksumEntries[0].Open()
+        $sha256 = [System.Security.Cryptography.SHA256]::Create()
+        try {
+            $archiveChecksumSha256 = [System.BitConverter]::ToString(
+                $sha256.ComputeHash($checksumStream)).Replace('-', '').ToLowerInvariant()
+        }
+        finally {
+            $sha256.Dispose()
+            $checksumStream.Dispose()
+        }
+        if ($archiveChecksumSha256 -cne $ExpectedChecksumSha256) {
+            throw "Yak unexpectedly changed checksums.sha256 bytes while building '$archivePath'."
+        }
         $reader = New-Object System.IO.StreamReader($checksumEntries[0].Open())
         try {
-            $checksumText = $reader.ReadToEnd()
+            $archiveChecksumText = $reader.ReadToEnd()
         }
         finally {
             $reader.Dispose()
         }
+        if ($archiveChecksumText -cne $ExpectedChecksumText) {
+            throw "Yak unexpectedly changed checksums.sha256 while building '$archivePath'."
+        }
         $expectedHashes = [System.Collections.Generic.Dictionary[string, string]]::new(
             [System.StringComparer]::Ordinal)
-        foreach ($line in @($checksumText -split '\r?\n' | Where-Object {
+        foreach ($line in @($ExpectedChecksumText -split '\r?\n' | Where-Object {
             -not [string]::IsNullOrWhiteSpace($_)
         })) {
             if ($line -cnotmatch '^(?<hash>[0-9a-f]{64})  (?<path>.+)$') {
@@ -530,6 +552,15 @@ function New-YakDistribution {
     $probePaths = @($ProbeDirectories |
         ForEach-Object { [System.IO.Path]::GetFullPath($_) } |
         Select-Object -Unique) -join [System.IO.Path]::PathSeparator
+    $stageChecksumPath = Join-Path $StageRoot 'checksums.sha256'
+    if (-not (Test-Path -LiteralPath $stageChecksumPath -PathType Leaf)) {
+        throw "Yak stage checksum inventory is missing: '$stageChecksumPath'."
+    }
+    $expectedChecksumText = [System.IO.File]::ReadAllText($stageChecksumPath)
+    $expectedChecksumSha256 = Get-Sha256 -Path $stageChecksumPath
+    if ([string]::IsNullOrWhiteSpace($expectedChecksumText)) {
+        throw "Yak stage checksum inventory is empty: '$stageChecksumPath'."
+    }
 
     Push-Location $StageRoot
     try {
@@ -566,7 +597,10 @@ function New-YakDistribution {
     # Yak normalizes and augments manifest.yml while creating the archive. Refresh
     # the embedded checksum inventory against the final archive entries so that
     # an installed package can be verified byte-for-byte.
-    Write-YakArchiveChecksums -Path $built[0].FullName
+    Write-YakArchiveChecksums `
+        -Path $built[0].FullName `
+        -ExpectedChecksumText $expectedChecksumText `
+        -ExpectedChecksumSha256 $expectedChecksumSha256
 
     Ensure-Directory -Path $YakOutputRoot
     $canonicalName = '{0}-{1}-rh{2}-win.yak' -f $Product.id, $spec.version, $expectedMajor

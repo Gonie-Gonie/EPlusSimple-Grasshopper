@@ -296,7 +296,11 @@ internal sealed class PackageVerifier
             VerifyStage(scenario, product, target, Path.Combine(productRoot, "stage", target.Id));
         }
 
-        VerifyYakArchives(scenario, product, Path.Combine(productRoot, "yak"));
+        VerifyYakArchives(
+            scenario,
+            product,
+            Path.Combine(productRoot, "yak"),
+            Path.Combine(productRoot, "stage"));
         VerifyPortableArchive(scenario, product, Path.Combine(productRoot, "portable"));
     }
 
@@ -702,7 +706,7 @@ internal sealed class PackageVerifier
         }
     }
 
-    private void VerifyYakArchives(string scenario, ProductSpec product, string yakRoot)
+    private void VerifyYakArchives(string scenario, ProductSpec product, string yakRoot, string stageRoot)
     {
         Check(scenario, Directory.Exists(yakRoot), "Yak output directory is missing for " + product.DisplayName + ".");
         if (!Directory.Exists(yakRoot))
@@ -733,11 +737,17 @@ internal sealed class PackageVerifier
 
             bool rhino7 = fileName.EndsWith("-rh7-win.yak", StringComparison.Ordinal);
             using ZipArchive archive = ZipFile.OpenRead(path);
-            VerifyArchiveRoot(scenario, product, archive, rhino7 ? "rhino7" : "rhino8");
+            string target = rhino7 ? "rhino7" : "rhino8";
+            VerifyArchiveRoot(scenario, product, archive, target, Path.Combine(stageRoot, target));
         }
     }
 
-    private void VerifyArchiveRoot(string scenario, ProductSpec product, ZipArchive archive, string target)
+    private void VerifyArchiveRoot(
+        string scenario,
+        ProductSpec product,
+        ZipArchive archive,
+        string target,
+        string stageRoot)
     {
         string[] entries = archive.Entries.Where(item => !string.IsNullOrEmpty(item.Name))
             .Select(item => NormalizeArchivePath(item.FullName)).ToArray();
@@ -761,7 +771,11 @@ internal sealed class PackageVerifier
                 "Yak archive manifest identity/version/icon mismatch for " + product.DisplayName + " " + target + ".");
         }
 
-        VerifyArchiveChecksums(scenario, archive, "Yak archive");
+        VerifyArchiveChecksums(
+            scenario,
+            archive,
+            "Yak archive",
+            Path.Combine(stageRoot, "checksums.sha256"));
 
         if (target == "rhino7")
         {
@@ -1042,21 +1056,28 @@ internal sealed class PackageVerifier
             "Checksum inventory is incomplete or contains extra paths in '" + root + "'.");
     }
 
-    private void VerifyArchiveChecksums(string scenario, ZipArchive archive, string description)
+    private void VerifyArchiveChecksums(
+        string scenario,
+        ZipArchive archive,
+        string description,
+        string? baselineChecksumPath = null)
     {
-        ZipArchiveEntry? checksumEntry = FindEntry(archive, "checksums.sha256");
-        if (checksumEntry is null)
+        ZipArchiveEntry[] checksumEntries = archive.Entries.Where(item =>
+            NormalizeArchivePath(item.FullName).Equals("checksums.sha256", StringComparison.Ordinal)).ToArray();
+        Check(scenario, checksumEntries.Length == 1,
+            description + " must contain exactly one checksums.sha256 entry.");
+        if (checksumEntries.Length != 1)
         {
-            Failure(scenario, description + " checksum file is missing.");
             return;
         }
+        ZipArchiveEntry checksumEntry = checksumEntries[0];
 
         string checksumText;
         using (var reader = new StreamReader(checksumEntry.Open(), Encoding.UTF8, true, 1024, leaveOpen: false))
         {
             checksumText = reader.ReadToEnd();
         }
-        var listed = new HashSet<string>(StringComparer.Ordinal);
+        var listed = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (string line in checksumText.Split(NewLineSeparators, StringSplitOptions.RemoveEmptyEntries))
         {
             Match match = Regex.Match(line, "^(?<hash>[0-9a-f]{64})  (?<path>.+)$", RegexOptions.CultureInvariant);
@@ -1066,8 +1087,12 @@ internal sealed class PackageVerifier
                 continue;
             }
             string path = match.Groups["path"].Value;
-            Check(scenario, listed.Add(path),
-                description + " checksum inventory contains duplicate path '" + path + "'.");
+            bool unique = !listed.ContainsKey(path);
+            Check(scenario, unique, description + " checksum inventory contains duplicate path '" + path + "'.");
+            if (unique)
+            {
+                listed.Add(path, match.Groups["hash"].Value);
+            }
             ZipArchiveEntry? entry = FindEntry(archive, path);
             Check(scenario, entry is not null, description + " checksum target is missing: '" + path + "'.");
             if (entry is not null)
@@ -1082,8 +1107,52 @@ internal sealed class PackageVerifier
             .Select(item => NormalizeArchivePath(item.FullName))
             .Where(path => path != "checksums.sha256")
             .OrderBy(path => path, StringComparer.Ordinal).ToArray();
-        Check(scenario, listed.OrderBy(path => path, StringComparer.Ordinal).SequenceEqual(expected, StringComparer.Ordinal),
+        Check(scenario, listed.Keys.OrderBy(path => path, StringComparer.Ordinal).SequenceEqual(expected, StringComparer.Ordinal),
             description + " checksum inventory is incomplete or contains extra paths.");
+
+        if (baselineChecksumPath is null)
+        {
+            return;
+        }
+        Check(scenario, File.Exists(baselineChecksumPath),
+            description + " baseline checksum file is missing: '" + baselineChecksumPath + "'.");
+        if (!File.Exists(baselineChecksumPath))
+        {
+            return;
+        }
+
+        var baseline = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (string line in File.ReadAllLines(baselineChecksumPath))
+        {
+            Match match = Regex.Match(line, "^(?<hash>[0-9a-f]{64})  (?<path>.+)$", RegexOptions.CultureInvariant);
+            if (!match.Success)
+            {
+                Failure(scenario, "Invalid checksum line in archive baseline '" + baselineChecksumPath + "': '" + line + "'.");
+                continue;
+            }
+            string path = match.Groups["path"].Value;
+            bool unique = !baseline.ContainsKey(path);
+            Check(scenario, unique,
+                description + " baseline checksum inventory contains duplicate path '" + path + "'.");
+            if (unique)
+            {
+                baseline.Add(path, match.Groups["hash"].Value);
+            }
+        }
+
+        Check(scenario,
+            baseline.Keys.OrderBy(path => path, StringComparer.Ordinal)
+                .SequenceEqual(listed.Keys.OrderBy(path => path, StringComparer.Ordinal), StringComparer.Ordinal),
+            description + " checksum inventory differs from its pre-Yak stage baseline.");
+        foreach ((string path, string hash) in baseline)
+        {
+            if (path == "manifest.yml" || !listed.TryGetValue(path, out string? archiveHash))
+            {
+                continue;
+            }
+            Check(scenario, archiveHash == hash,
+                description + " checksum for '" + path + "' differs from its pre-Yak stage baseline.");
+        }
     }
 
     private static AssemblyMetadata ReadAssembly(string path)
