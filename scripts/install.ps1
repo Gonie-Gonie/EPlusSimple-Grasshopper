@@ -222,10 +222,10 @@ foreach ($hostSpecification in $requestedHostSpecifications) {
             -ExplicitPath ([string] $hostSpecification.explicitPath) `
             -LocalSettings $localSettings `
             -StandardExecutable ([string] $hostSpecification.standardExecutable)
-        $host = Confirm-RhinoHostCandidate -Candidate $candidate
-        $hosts += $host
+        $confirmedHost = Confirm-RhinoHostCandidate -Candidate $candidate
+        $hosts += $confirmedHost
         Write-Host (
-            "$($host.name): $($host.version) at $($host.rhino) [$($host.source)]")
+            "$($confirmedHost.name): $($confirmedHost.version) at $($confirmedHost.rhino) [$($confirmedHost.source)]")
     }
     catch {
         $missingHosts += [pscustomobject] [ordered] @{

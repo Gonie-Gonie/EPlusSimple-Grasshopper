@@ -48,6 +48,44 @@ function Assert-ThrowsLike {
     throw "Expected action to fail with an error like '$Pattern'."
 }
 
+function Assert-NoHostVariableWrites {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Path
+    )
+
+    $tokens = $null
+    $parseErrors = $null
+    $ast = [System.Management.Automation.Language.Parser]::ParseFile(
+        $Path,
+        [ref] $tokens,
+        [ref] $parseErrors)
+    if ($parseErrors.Count -ne 0) {
+        throw "Installer script could not be parsed: $($parseErrors[0].Message)"
+    }
+
+    $writes = @($ast.FindAll({
+        param($node)
+
+        if ($node -is [System.Management.Automation.Language.AssignmentStatementAst]) {
+            return $node.Left -is [System.Management.Automation.Language.VariableExpressionAst] -and
+                $node.Left.VariablePath.UserPath -ieq 'Host'
+        }
+        if ($node -is [System.Management.Automation.Language.ForEachStatementAst]) {
+            return $node.Variable.VariablePath.UserPath -ieq 'Host'
+        }
+        if ($node -is [System.Management.Automation.Language.ParameterAst]) {
+            return $node.Name.VariablePath.UserPath -ieq 'Host'
+        }
+
+        return $false
+    }, $true))
+    Assert-Equal -Expected 0 -Actual $writes.Count `
+        -Message 'Installer must not write PowerShell automatic read-only variable $Host.'
+}
+
+Assert-NoHostVariableWrites -Path (Join-Path $repositoryRoot 'scripts\install.ps1')
+
 $testRoot = Join-Path $repositoryRoot (
     Join-Path 'temp\installer-tests' ([Guid]::NewGuid().ToString('N')))
 $tempParent = [System.IO.Path]::GetFullPath((Join-Path $repositoryRoot 'temp'))
