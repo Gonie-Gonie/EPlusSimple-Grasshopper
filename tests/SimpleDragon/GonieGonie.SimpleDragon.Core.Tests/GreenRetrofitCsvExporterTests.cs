@@ -180,80 +180,90 @@ public sealed class GreenRetrofitCsvExporterTests
         string requested = Path.Combine(parent, "requested");
         string sibling = Path.Combine(parent, "outside-sentinel.txt");
         Directory.CreateDirectory(parent);
-        File.WriteAllText(sibling, "outside");
+        try
+        {
+            File.WriteAllText(sibling, "outside");
 
-        GreenRetrofitCsvExportResult preview = GreenRetrofitCsvExporter.ExportDirectory(
-            requested,
-            result,
-            Diagnostics(),
-            GeometryMap(),
-            "../must,remain,data",
-            model,
-            export: false,
-            overwrite: false);
+            GreenRetrofitCsvExportResult preview = GreenRetrofitCsvExporter.ExportDirectory(
+                requested,
+                result,
+                Diagnostics(),
+                GeometryMap(),
+                "../must,remain,data",
+                model,
+                export: false,
+                overwrite: false);
 
-        Assert.False(preview.ExportRequested);
-        Assert.False(preview.Written);
-        Assert.False(Directory.Exists(requested));
-        Assert.Equal("outside", File.ReadAllText(sibling));
+            Assert.False(preview.ExportRequested);
+            Assert.False(preview.Written);
+            Assert.False(Directory.Exists(requested));
+            Assert.Equal("outside", File.ReadAllText(sibling));
 
-        GreenRetrofitCsvExportResult written = GreenRetrofitCsvExporter.ExportDirectory(
-            requested,
-            result,
-            Diagnostics(),
-            GeometryMap(),
-            "../must,remain,data",
-            model,
-            export: true,
-            overwrite: false);
+            GreenRetrofitCsvExportResult written = GreenRetrofitCsvExporter.ExportDirectory(
+                requested,
+                result,
+                Diagnostics(),
+                GeometryMap(),
+                "../must,remain,data",
+                model,
+                export: true,
+                overwrite: false);
 
-        Assert.True(written.ExportRequested);
-        Assert.True(written.Written);
-        Assert.Equal(8, written.FilePaths.Count);
-        Assert.All(
-            written.FilePaths,
-            path => Assert.StartsWith(
-                Path.GetFullPath(requested) + Path.DirectorySeparatorChar,
-                path,
-                StringComparison.OrdinalIgnoreCase));
-        Assert.Equal(
-            "outside-sentinel.txt",
-            Assert.Single(Directory.GetFiles(parent).Select(Path.GetFileName)));
-        Assert.All(
-            written.FilePaths.Where(path => path.EndsWith(".csv", StringComparison.OrdinalIgnoreCase)),
-            path => Assert.Equal(Utf8Bom, File.ReadAllBytes(path).Take(Utf8Bom.Length).ToArray()));
-        Assert.NotEqual(
-            Utf8Bom,
-            File.ReadAllBytes(Path.Combine(requested, GreenRetrofitCsvExporter.ManifestFileName))
-                .Take(Utf8Bom.Length)
-                .ToArray());
+            Assert.True(written.ExportRequested);
+            Assert.True(written.Written);
+            Assert.Equal(8, written.FilePaths.Count);
+            Assert.All(
+                written.FilePaths,
+                path => Assert.StartsWith(
+                    Path.GetFullPath(requested) + Path.DirectorySeparatorChar,
+                    path,
+                    StringComparison.OrdinalIgnoreCase));
+            Assert.Equal(
+                "outside-sentinel.txt",
+                Assert.Single(Directory.GetFiles(parent).Select(Path.GetFileName)));
+            Assert.All(
+                written.FilePaths.Where(path => path.EndsWith(".csv", StringComparison.OrdinalIgnoreCase)),
+                path => Assert.Equal(Utf8Bom, File.ReadAllBytes(path).Take(Utf8Bom.Length).ToArray()));
+            Assert.NotEqual(
+                Utf8Bom,
+                File.ReadAllBytes(Path.Combine(requested, GreenRetrofitCsvExporter.ManifestFileName))
+                    .Take(Utf8Bom.Length)
+                    .ToArray());
 
-        string summaryPath = Path.Combine(requested, GreenRetrofitCsvExporter.SummaryFileName);
-        File.WriteAllText(summaryPath, "protected");
-        Assert.Throws<IOException>(() => GreenRetrofitCsvExporter.ExportDirectory(
-            requested,
-            result,
-            Diagnostics(),
-            GeometryMap(),
-            "case",
-            model,
-            export: true,
-            overwrite: false));
-        Assert.Equal("protected", File.ReadAllText(summaryPath));
+            string summaryPath = Path.Combine(requested, GreenRetrofitCsvExporter.SummaryFileName);
+            File.WriteAllText(summaryPath, "protected");
+            Assert.Throws<IOException>(() => GreenRetrofitCsvExporter.ExportDirectory(
+                requested,
+                result,
+                Diagnostics(),
+                GeometryMap(),
+                "case",
+                model,
+                export: true,
+                overwrite: false));
+            Assert.Equal("protected", File.ReadAllText(summaryPath));
 
-        GreenRetrofitCsvExportResult overwritten = GreenRetrofitCsvExporter.ExportDirectory(
-            requested,
-            result,
-            Diagnostics(),
-            GeometryMap(),
-            "case",
-            model,
-            export: true,
-            overwrite: true);
-        Assert.True(overwritten.Written);
-        Assert.Equal(Utf8Bom, File.ReadAllBytes(summaryPath).Take(Utf8Bom.Length).ToArray());
-        Assert.Equal("outside", File.ReadAllText(sibling));
-        Assert.False(File.Exists(Path.Combine(parent, GreenRetrofitCsvExporter.SummaryFileName)));
+            GreenRetrofitCsvExportResult overwritten = GreenRetrofitCsvExporter.ExportDirectory(
+                requested,
+                result,
+                Diagnostics(),
+                GeometryMap(),
+                "case",
+                model,
+                export: true,
+                overwrite: true);
+            Assert.True(overwritten.Written);
+            Assert.Equal(Utf8Bom, File.ReadAllBytes(summaryPath).Take(Utf8Bom.Length).ToArray());
+            Assert.Equal("outside", File.ReadAllText(sibling));
+            Assert.False(File.Exists(Path.Combine(parent, GreenRetrofitCsvExporter.SummaryFileName)));
+        }
+        finally
+        {
+            if (Directory.Exists(parent))
+            {
+                Directory.Delete(parent, recursive: true);
+            }
+        }
     }
 
     [Fact]

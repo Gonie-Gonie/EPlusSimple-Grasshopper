@@ -19,6 +19,7 @@ internal static class Program
         {
             Dictionary<string, string> options = ParseArguments(args);
             string packagesRoot = RequiredOption(options, "--packages-root");
+            string stageRoot = RequiredOption(options, "--stage-root");
             string specPath = RequiredOption(options, "--spec");
             string distributionsPath = RequiredOption(options, "--distributions");
             options.TryGetValue("--report", out string? reportPath);
@@ -30,7 +31,12 @@ internal static class Program
                 File.ReadAllText(distributionsPath),
                 JsonOptions()) ?? throw new InvalidDataException("Distribution manifest is empty.");
             string repositoryRoot = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(distributionsPath))!, ".."));
-            var verifier = new PackageVerifier(Path.GetFullPath(packagesRoot), repositoryRoot, spec, distributions);
+            var verifier = new PackageVerifier(
+                Path.GetFullPath(packagesRoot),
+                Path.GetFullPath(stageRoot),
+                repositoryRoot,
+                spec,
+                distributions);
             VerificationReport report = verifier.Verify();
             string json = JsonSerializer.Serialize(report, JsonOptions(writeIndented: true)) + Environment.NewLine;
             if (!string.IsNullOrWhiteSpace(reportPath))
@@ -100,6 +106,7 @@ internal sealed class PackageVerifier
     private static readonly string[] EmbeddedRuntimeRootDirectory = { "runtime" };
 
     private readonly string _packagesRoot;
+    private readonly string _stageRoot;
     private readonly string _repositoryRoot;
     private readonly PackageSpec _spec;
     private readonly DistributionManifest _distributions;
@@ -110,11 +117,13 @@ internal sealed class PackageVerifier
 
     public PackageVerifier(
         string packagesRoot,
+        string stageRoot,
         string repositoryRoot,
         PackageSpec spec,
         DistributionManifest distributions)
     {
         _packagesRoot = packagesRoot;
+        _stageRoot = stageRoot;
         _repositoryRoot = repositoryRoot;
         _spec = spec;
         _distributions = distributions;
@@ -293,14 +302,14 @@ internal sealed class PackageVerifier
 
         foreach (TargetSpec target in _spec.Targets)
         {
-            VerifyStage(scenario, product, target, Path.Combine(productRoot, "stage", target.Id));
+            VerifyStage(scenario, product, target, Path.Combine(_stageRoot, product.Id, target.Id));
         }
 
         VerifyYakArchives(
             scenario,
             product,
             Path.Combine(productRoot, "yak"),
-            Path.Combine(productRoot, "stage"));
+            Path.Combine(_stageRoot, product.Id));
         VerifyPortableArchive(scenario, product, Path.Combine(productRoot, "portable"));
     }
 
@@ -979,7 +988,7 @@ internal sealed class PackageVerifier
 
     private string PayloadRoot(ProductSpec product, TargetSpec target, string framework)
     {
-        string stage = Path.Combine(_packagesRoot, product.Id, "stage", target.Id);
+        string stage = Path.Combine(_stageRoot, product.Id, target.Id);
         return target.YakLayout == "flat" ? stage : Path.Combine(stage, framework);
     }
 

@@ -114,10 +114,26 @@ verification succeeds; otherwise ambiguous state is retained with recovery
 evidence instead of overwritten. A process crash leaves its snapshots under
 `.tools\package-lock-normalization`, and the next restore fails closed before
 doing work so they are not silently reused.
-`dev.cmd clean` acquires the same lease before removing the fully disposable
-`temp` tree and preserves `.tools` recovery state. This lease coordinates the
-supplied repository commands; it is not an operating-system sandbox against a
-malicious same-user process swapping filesystem paths mid-operation.
+Every top-level `dev.cmd` workflow also holds a repository-local temp lease, so
+two supplied workflows cannot prune or overwrite each other's current run.
+Release's nested `dev.cmd` stages inherit that lease. Before a normal workflow,
+exact-name heavy run collections for Grasshopper smoke checks, examples,
+trusted-evidence sessions, release staging, and interrupted installer tests are
+emptied. Afterward they are empty on success, while a failure keeps only its
+newest diagnostic until the next explicit workflow. Small install receipts keep
+their newest entry. A successful release also drops superseded `previous-*`
+rollback copies; a failed release keeps its newest recovery copy. Unknown temp
+content, the reusable `temp\build` output, and the current reference workspace
+are never selected by automatic retention. `-WhatIf` workflows do not create
+the temp lease or prune anything.
+`dev.cmd clean` acquires the NuGet workflow lease as well before removing the
+fully disposable `temp` tree and generated source caches while preserving
+`.tools` recovery state. `dev.cmd clean -CachesOnly` removes only ignored
+`bin`, `obj`, `TestResults`, `__pycache__`, and `.pytest_cache` directories
+beneath source, test, script, and tool roots. These
+leases coordinate the supplied repository commands; they are not an
+operating-system sandbox against a malicious same-user process swapping
+filesystem paths mid-operation.
 
 For port-equivalence work, `.\dev.cmd reference` runs the pinned historical Python
 implementation plus the hash-locked EnergyPlus 24.2 IDD and official epJSON
@@ -148,8 +164,11 @@ missing Rhino version; headless projects continue to build.
 
 All disposable downloads, build intermediates, test runs, logs, and simulations
 are routed under `temp`; NuGet packages and reusable local toolchains are under
-`.tools`. Run `.\dev.cmd clean` to safely remove only `temp` and generated
-artifact contents while preserving `.tools` and `artifacts\README.md`.
+`.tools`. Successful heavy runs are removed automatically; a failed run's newest
+diagnostics remain available until the next workflow. Run
+`.\dev.cmd clean -TempOnly` to remove the complete repository `temp` tree, or
+`.\dev.cmd clean` to remove `temp`, generated artifact contents, and ignored
+source-tree caches, while preserving `.tools` and `artifacts\README.md`.
 
 To package an already successful build into deterministic Yak archives and
 portable plugin ZIPs, run:

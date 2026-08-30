@@ -3,7 +3,8 @@
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
 param(
     [switch] $TempOnly,
-    [switch] $ArtifactsOnly
+    [switch] $ArtifactsOnly,
+    [switch] $CachesOnly
 )
 
 $ErrorActionPreference = 'Stop'
@@ -11,13 +12,15 @@ Set-StrictMode -Version 2.0
 
 . (Join-Path $PSScriptRoot 'common.ps1')
 
-if ($TempOnly -and $ArtifactsOnly) {
-    throw '-TempOnly and -ArtifactsOnly cannot be used together.'
+$exclusiveOptions = @(@($TempOnly, $ArtifactsOnly, $CachesOnly) | Where-Object { $_ }).Count
+if ($exclusiveOptions -gt 1) {
+    throw '-TempOnly, -ArtifactsOnly, and -CachesOnly cannot be used together.'
 }
 
 $repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
-$cleanTemp = -not $ArtifactsOnly
-$cleanArtifacts = -not $TempOnly
+$cleanTemp = -not ($ArtifactsOnly -or $CachesOnly)
+$cleanArtifacts = -not ($TempOnly -or $CachesOnly)
+$cleanCaches = -not ($TempOnly -or $ArtifactsOnly)
 
 if ($cleanTemp) {
     $tempPath = Assert-RepositoryChildPath `
@@ -72,6 +75,61 @@ if ($cleanArtifacts) {
     }
     else {
         Write-Host "Already clean: $artifactsPath"
+    }
+}
+
+if ($cleanCaches) {
+    $cacheNames = @('__pycache__', '.pytest_cache', 'TestResults', 'bin', 'obj')
+    $cacheRoots = @('scripts', 'src', 'tests', 'tools')
+    $gitExecutable = (Get-Command git -CommandType Application -ErrorAction Stop).Source
+    $cacheDirectories = @()
+    foreach ($relativeRoot in $cacheRoots) {
+        $cacheRoot = Assert-RepositoryChildPath `
+            -RepositoryRoot $repositoryRoot `
+            -Path (Join-Path $repositoryRoot $relativeRoot) `
+            -AllowedTopLevelNames $cacheRoots
+        if (Test-Path -LiteralPath $cacheRoot -PathType Container) {
+            $cacheDirectories += @(Get-ChildItem -LiteralPath $cacheRoot -Directory -Force -Recurse |
+                Where-Object { $_.Name -in $cacheNames })
+        }
+    }
+
+    $cacheDirectories = @($cacheDirectories |
+        Sort-Object @{ Expression = { $_.FullName.Length }; Descending = $true }, FullName -Unique)
+    foreach ($cacheDirectory in $cacheDirectories) {
+        if (-not (Test-Path -LiteralPath $cacheDirectory.FullName -PathType Container)) {
+            continue
+        }
+        $safeCache = Assert-RepositoryChildPath `
+            -RepositoryRoot $repositoryRoot `
+            -Path $cacheDirectory.FullName `
+            -AllowedTopLevelNames $cacheRoots
+        $relativeCache = $safeCache.Substring($repositoryRoot.Length + 1) -replace '\\', '/'
+        $trackedEntries = @(& $gitExecutable `
+                --literal-pathspecs `
+                -C $repositoryRoot `
+                ls-files `
+                -- `
+                $relativeCache)
+        if ($LASTEXITCODE -ne 0) {
+            throw "Could not verify tracked content below cache candidate '$relativeCache'."
+        }
+        if ($trackedEntries.Count -ne 0) {
+            throw "Refusing to remove cache candidate with tracked content: '$relativeCache'."
+        }
+        & $gitExecutable -C $repositoryRoot check-ignore --quiet --no-index -- ($relativeCache + '/')
+        if ($LASTEXITCODE -ne 0) {
+            throw "Refusing to remove cache candidate not covered by .gitignore: '$relativeCache'."
+        }
+        if ($PSCmdlet.ShouldProcess($safeCache, 'Remove generated source-tree cache')) {
+            Assert-NoReparsePoints -Path $safeCache -AnchorPath $repositoryRoot
+            Remove-Item -LiteralPath $safeCache -Recurse -Force
+            Write-Host "Removed generated cache: $safeCache"
+        }
+    }
+
+    if ($cacheDirectories.Count -eq 0) {
+        Write-Host 'Source-tree caches are already clean.'
     }
 }
 

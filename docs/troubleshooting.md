@@ -4,7 +4,9 @@
 
 Close all Rhino processes, verify that the package targets the running Rhino generation, and unblock the downloaded archive before reinstalling. Do not copy only the GHA; its adjacent `GonieGonie.*` dependencies are required.
 
-For a source checkout, rerun `./dev.cmd setup` after installing Rhino, then run `./dev.cmd build`. Generated host logs are below `temp/grasshopper-smoke`; stable reports are below `artifacts/reports`.
+For a source checkout, rerun `./dev.cmd setup` after installing Rhino, then run
+`./dev.cmd build`. Stable reports are below `artifacts/reports`; the newest
+failed host run remains below `temp/grasshopper-smoke` until the next workflow.
 
 ## One Dragon loads and the other fails
 
@@ -93,9 +95,22 @@ Read the structured Diagnostics and Result outputs. Check source/supply compatib
 
 ## Cleaning local work
 
-`.\dev.cmd clean -TempOnly` removes only the disposable repository `temp`
-tree; `.\dev.cmd clean` also removes generated artifact content after validating
-the target paths. Both preserve `.tools`, tracked artifact documentation,
+Each non-clean top-level `dev.cmd` workflow empties exact-name heavy run
+collections before execution. On success it removes the new Grasshopper smoke,
+example, trusted-evidence, and release-test runs too; their durable evidence is
+already tracked or copied under `artifacts`. On failure it retains only the
+newest run until the next explicit workflow. Small install receipts always keep
+their newest entry. The policy never selects an unknown name and leaves reusable
+build/reference workspaces intact. A repository-local lease prevents supported
+concurrent workflows from deleting the current run; `-WhatIf` creates no lease
+and performs no automatic deletion.
+
+`.\dev.cmd clean -TempOnly` removes the complete disposable repository `temp`
+tree; `.\dev.cmd clean` also removes generated artifact content and ignored
+source-tree caches after validating the target paths. Use
+`.\dev.cmd clean -CachesOnly` to remove only ignored `bin`, `obj`,
+`TestResults`, `__pycache__`, and `.pytest_cache` directories beneath source,
+test, script, and tool roots. All modes preserve `.tools`, tracked artifact documentation,
 GH/3DM/GRM/GRR files, per-user runtime/weather caches, and retained system-temp
-simulation failures. Remove a retained failure directory only after collecting
-the diagnostics you need.
+simulation failures. Remove or copy a retained failure directory only after
+collecting the diagnostics you need.

@@ -384,6 +384,26 @@ else {
         $executedTestProjects += $installerTestScript
     }
 
+    # Temp retention deletes developer evidence, so its path and lease safety
+    # rules stay in the normal gate as a small PowerShell regression suite.
+    $tempLifecycleTestScript = Join-Path $repositoryRoot 'tests\TempLifecycle\run.ps1'
+    if (Test-Path -LiteralPath $tempLifecycleTestScript -PathType Leaf) {
+        $windowsPowerShell = Join-Path $PSHOME 'powershell.exe'
+        if ($PSCmdlet.ShouldProcess($tempLifecycleTestScript, 'Run repository temp lifecycle checks')) {
+            Invoke-LoggedNativeCommand `
+                -FilePath $windowsPowerShell `
+                -ArgumentList @(
+                    '-NoLogo',
+                    '-NoProfile',
+                    '-ExecutionPolicy', 'Bypass',
+                    '-File', $tempLifecycleTestScript
+                ) `
+                -LogPath (Join-Path $logsRoot 'test-GonieGonie.Dragons.TempLifecycle.log') `
+                -FailureMessage 'Repository temp lifecycle checks failed'
+        }
+        $executedTestProjects += $tempLifecycleTestScript
+    }
+
     # RhinoCommon's native geometry API must be hosted on an STA thread. These
     # dedicated executables initialize Rhino 8 through Rhino.Inside and cover
     # both Dragon geometry adapters with real Breps.

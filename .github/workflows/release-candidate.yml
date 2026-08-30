@@ -208,7 +208,6 @@ jobs:
             temp/reference/logs/
             temp/compatibility/logs/
             temp/e/
-            temp/example-definitions/
             temp/grasshopper-smoke/
             temp/release-candidate/
           if-no-files-found: warn

@@ -19,6 +19,7 @@ $repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
 $artifactsRoot = Join-Path $repositoryRoot 'artifacts'
 $packagesRoot = Join-Path $artifactsRoot 'packages'
 $workingRoot = Join-Path $repositoryRoot 'temp\packaging'
+$packageStageRoot = Join-Path $workingRoot 'stage'
 $specPath = Join-Path $repositoryRoot 'packaging\package-spec.json'
 $settingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
 $licensePath = Join-Path $repositoryRoot 'LICENSE'
@@ -753,7 +754,7 @@ foreach ($product in @($spec.products)) {
     }
 
     $productRoot = Join-Path $packagesRoot ([string] $product.id)
-    $stageOutputRoot = Join-Path $productRoot 'stage'
+    $stageOutputRoot = Join-Path $packageStageRoot ([string] $product.id)
     $yakOutputRoot = Join-Path $productRoot 'yak'
     $portableOutputRoot = Join-Path $productRoot 'portable'
     Ensure-Directory -Path $stageOutputRoot
@@ -892,6 +893,7 @@ Write-Utf8JsonIfChanged -InputObject $index -Path (Join-Path $packagesRoot 'pack
 $reportPath = Join-Path $packagesRoot 'compatibility-report.json'
 & (Join-Path $repositoryRoot 'tests\Packaging\run.ps1') `
     -PackagesRoot $packagesRoot `
+    -StageRoot $packageStageRoot `
     -SpecPath $specPath `
     -DotNetExecutable $dotnet `
     -ReportPath $reportPath
@@ -902,6 +904,7 @@ if ($LASTEXITCODE -ne 0) {
 Write-Checksums -Root $packagesRoot
 & (Join-Path $repositoryRoot 'tests\Packaging\run.ps1') `
     -PackagesRoot $packagesRoot `
+    -StageRoot $packageStageRoot `
     -SpecPath $specPath `
     -DotNetExecutable $dotnet
 if ($LASTEXITCODE -ne 0) {
@@ -924,6 +927,16 @@ if ($RunPortableHostGate) {
     if ($LASTEXITCODE -ne 0) {
         throw "Portable package host gate failed with exit code $LASTEXITCODE."
     }
+}
+
+$safeWorkingRoot = Assert-RepositoryChildPath `
+    -RepositoryRoot $repositoryRoot `
+    -Path $workingRoot `
+    -AllowedTopLevelNames @('temp')
+if (Test-Path -LiteralPath $safeWorkingRoot -PathType Container) {
+    Assert-NoReparsePoints -Path $safeWorkingRoot -AnchorPath $repositoryRoot
+    Remove-Item -LiteralPath $safeWorkingRoot -Recurse -Force
+    Write-Host "Removed successful packaging scratch: $safeWorkingRoot"
 }
 
 Write-Host "Packaging complete: $packagesRoot"

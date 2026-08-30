@@ -6,6 +6,9 @@ param(
     [string] $PackagesRoot,
 
     [Parameter(Mandatory = $true)]
+    [string] $StageRoot,
+
+    [Parameter(Mandatory = $true)]
     [string] $SpecPath,
 
     [Parameter(Mandatory = $true)]
@@ -56,10 +59,13 @@ foreach ($product in @($spec.products)) {
     }
 }
 
-foreach ($path in @(Get-ChildItem -LiteralPath $PackagesRoot -Recurse -Force)) {
-    $relative = $path.FullName.Substring([System.IO.Path]::GetFullPath($PackagesRoot).TrimEnd('\', '/').Length)
-    if ($relative -match '(?i)(?:^|[\\/])(idragon|epsimple|snu-bslab)(?:[\\/]|$)') {
-        throw "Generated package path uses a non-product ownership/name segment: '$relative'."
+foreach ($generatedRoot in @($PackagesRoot, $StageRoot)) {
+    foreach ($path in @(Get-ChildItem -LiteralPath $generatedRoot -Recurse -Force)) {
+        $relative = $path.FullName.Substring(
+            [System.IO.Path]::GetFullPath($generatedRoot).TrimEnd('\', '/').Length)
+        if ($relative -match '(?i)(?:^|[\\/])(idragon|epsimple|snu-bslab)(?:[\\/]|$)') {
+            throw "Generated package path uses a non-product ownership/name segment: '$relative'."
+        }
     }
 }
 
@@ -79,6 +85,7 @@ $arguments = @(
     '--no-build',
     '--',
     '--packages-root', [System.IO.Path]::GetFullPath($PackagesRoot),
+    '--stage-root', [System.IO.Path]::GetFullPath($StageRoot),
     '--spec', [System.IO.Path]::GetFullPath($SpecPath),
     '--distributions', [System.IO.Path]::GetFullPath($distributionManifestPath))
 if (-not [string]::IsNullOrWhiteSpace($ReportPath)) {

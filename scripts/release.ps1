@@ -3659,10 +3659,7 @@ if (@(Compare-Object `
 }
 
 $binaryAssets = @(Get-ChildItem -LiteralPath $packagesRoot -Recurse -File |
-    Where-Object {
-        $_.Extension -in @('.yak', '.zip') -and
-        (Get-RelativeUnixPath -Root $packagesRoot -Path $_.FullName) -notmatch '^[^/]+/stage/'
-    })
+    Where-Object { $_.Extension -in @('.yak', '.zip') })
 $expectedBinaryPaths = @($indexedBinaryExpectations |
     ForEach-Object { [System.IO.Path]::GetFullPath([string] $_.path) } |
     Sort-Object)

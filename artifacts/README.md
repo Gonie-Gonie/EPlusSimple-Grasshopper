@@ -18,8 +18,8 @@ artifacts/
 |       |-- net7.0/
 |       `-- net8.0/
 |-- packages/
-|   |-- invisible-dragon/{stage,yak,portable}/
-|   |-- simple-dragon/{stage,yak,portable}/
+|   |-- invisible-dragon/{yak,portable}/
+|   |-- simple-dragon/{yak,portable}/
 |   |-- compatibility-report.json
 |   `-- checksums.sha256
 `-- reports/
@@ -28,5 +28,6 @@ artifacts/
 ```
 
 Delete the generated files at any time and run `dev.cmd build` to reproduce them.
-Run `dev.cmd package` to reproduce the lean package stages, Yak distributions, and
-portable plugin ZIPs after the normal build artifacts are available.
+Run `dev.cmd package` to recreate transient verification stages plus the retained
+Yak distributions and portable plugin ZIPs after normal build artifacts are
+available. Successful package runs remove their scratch stages automatically.

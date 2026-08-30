@@ -135,13 +135,10 @@ class EngineeringProvenanceContractTests(unittest.TestCase):
         }
         self.assertEqual(5, len(binary_names))
 
-    def test_release_binary_inventory_excludes_embedded_stage_archives(self) -> None:
+    def test_release_binary_inventory_rejects_every_extra_archive(self) -> None:
         text = RELEASE.read_text(encoding="utf-8")
-        self.assertIn(
-            "(Get-RelativeUnixPath -Root $packagesRoot -Path $_.FullName) "
-            "-notmatch '^[^/]+/stage/'",
-            text,
-        )
+        self.assertNotIn("-notmatch '^[^/]+/stage/'", text)
+        self.assertIn("Where-Object { $_.Extension -in @('.yak', '.zip') }", text)
         self.assertIn("$binaryAssets.Count -ne 6", text)
         self.assertIn("$indexedBinaryExpectations.Count -ne 6", text)
 
@@ -150,6 +147,7 @@ class EngineeringProvenanceContractTests(unittest.TestCase):
         tool_readme = EXAMPLE_TOOL_README.read_text(encoding="utf-8")
         examples_readme = EXAMPLES_README.read_text(encoding="utf-8")
         self.assertIn("temp/e/", workflow)
+        self.assertNotIn("temp/example-definitions/", workflow)
         self.assertIn("temp/e/<token>", tool_readme)
         self.assertIn("temp/e/<token>", examples_readme)
         self.assertNotIn("temp/example-definitions/run-*", tool_readme)

@@ -22,14 +22,14 @@ assemblies. Each host summary carries the package-index-verified archive path an
 SHA-256 plus the SHA-256 of every loaded GHA. Omitting the switch keeps the
 existing no-Rhino packaging behavior.
 
-Generated output is written below `artifacts/packages`; disposable work and
-logs stay below `temp/packaging`. Each product is independent:
+Final output is written below `artifacts/packages`. Verification stages and
+logs stay below `temp/packaging` only while packaging is running and are
+removed after a successful run. Failed-run scratch remains available until the
+next package run resets it or `dev.cmd clean -TempOnly` removes it. Each product
+is independent:
 
 ```text
 artifacts/packages/<product>/
-|-- stage/
-|   |-- rhino7/                  # flat net48 Yak payload
-|   `-- rhino8/                  # net7.0 + net8.0 Yak multi-target payload
 |-- yak/
 |   |-- <product>-0.1.0-rh7-win.yak
 |   `-- <product>-0.1.0-rh8-win.yak
@@ -37,7 +37,7 @@ artifacts/packages/<product>/
     `-- <product>-0.1.0-portable-plugin-win.zip
 ```
 
-The stage and ZIP roots include their manifest, icon, Gonie-Gonie notices,
+The transient stage and final ZIP roots include their manifest, icon, Gonie-Gonie notices,
 payload manifest, and SHA-256 list. Each package root additionally contains
 exactly one product-specific verified archive: EnergyPlus for InvisibleDragon,
 or KoreanTMY weather for SimpleDragon. RhinoCommon, Grasshopper, PDB, XML
@@ -49,8 +49,9 @@ exact `LICENSE.txt` at `runtime/energyplus/LICENSE.txt`.
 Yak 0.13.0 is executed from a SHA-256-verified temp copy. A source-built startup
 hook gives Yak's inspection-only process access to the staged dependencies and
 the locked RhinoCommon/Grasshopper NuGet reference assemblies. Those resolver
-files remain below `temp/packaging`; the verifier rejects them from every stage,
-Yak archive, portable ZIP, and artifact tree. Packaging accepts only the real
+files remain below `temp/packaging` while verification runs; the verifier rejects
+them from every stage, Yak archive, portable ZIP, and artifact tree. Packaging
+then removes that scratch tree. Packaging accepts only the real
 `rh7_*`/`rh8_*` tags inferred by Yak from the entry GHA; an `any` tag is a hard
 failure.
 

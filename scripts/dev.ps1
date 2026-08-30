@@ -4,6 +4,7 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
 $repositoryRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..')).TrimEnd('\', '/')
+. (Join-Path $PSScriptRoot 'temp-lifecycle.ps1')
 $commands = [ordered]@{
     setup = Join-Path $PSScriptRoot 'setup.ps1'
     build = Join-Path $PSScriptRoot 'build.ps1'
@@ -35,7 +36,7 @@ Commands:
   examples    Generate or validate tracked Grasshopper and Rhino examples
   smoke       Run Grasshopper host loading scenarios
   release     Create a fully verified local release candidate
-  clean       Remove disposable temp and generated artifact content
+  clean       Remove disposable temp, artifact content, or source caches
   icons       Regenerate component and package icons
   compatibility  Run paired Python/C# IDF, EnergyPlus, warning, and GRR parity
   upstream    Validate, hash, or compare the pinned upstream source
@@ -48,6 +49,7 @@ Examples:
   dev.cmd install -UseExistingPackages
   dev.cmd compatibility -AllowDifferences
   dev.cmd clean -TempOnly
+  dev.cmd clean -CachesOnly
 '@
 }
 
@@ -82,10 +84,90 @@ if ($args.Count -gt 1) {
 # Start a child Windows PowerShell process so forwarded strings such as
 # -NoRestore and -Target bind as named parameters in the selected script.
 $powerShell = Join-Path $PSHOME 'powershell.exe'
-& $powerShell `
-    -NoLogo `
-    -NoProfile `
-    -ExecutionPolicy Bypass `
-    -File $target `
-    @forwardedArguments
-exit $LASTEXITCODE
+$tempWorkflowContext = $null
+$exitCode = 1
+$retentionEnabled = $false
+$retentionProtectedPaths = @()
+$previewRequested = Test-ForwardedWhatIfRequest -Arguments $forwardedArguments
+
+function Invoke-DevTempRetention {
+    param(
+        [Parameter(Mandatory = $true)]
+        [ValidateSet('Before', 'Success', 'Failure')]
+        [string] $Phase,
+
+        [AllowEmptyCollection()]
+        [string[]] $ProtectedPaths = @()
+    )
+
+    try {
+        $retention = Invoke-RepositoryTempRunRetention `
+            -RepositoryRoot $repositoryRoot `
+            -KeepLatest 1 `
+            -Phase $Phase `
+            -ProtectedPaths $ProtectedPaths
+        if ($retention.removed.Count -gt 0) {
+            $directoryWord = if ($retention.removed.Count -eq 1) {
+                'directory'
+            }
+            else {
+                'directories'
+            }
+            Write-Host (
+                "Temp retention removed $($retention.removed.Count) superseded run $directoryWord.")
+        }
+        return $retention
+    }
+    catch {
+        # Retention is housekeeping. A locked or malformed disposable path must
+        # be visible, but must not replace the requested workflow's result.
+        Write-Warning "Automatic temp retention was skipped: $($_.Exception.Message)"
+    }
+}
+
+try {
+    # Preview context creation is completely read-only, including on a fresh
+    # checkout that does not have the repository-local .tools directory yet.
+    $tempWorkflowContext = Start-RepositoryTempWorkflowContext `
+        -RepositoryRoot $repositoryRoot `
+        -Preview:$previewRequested
+
+    if ([string] $tempWorkflowContext.mode -eq 'owner') {
+
+        # A full clean removes the complete temp tree itself. Every other
+        # top-level workflow prunes only superseded, known run directories.
+        if ($command -ne 'clean') {
+            $retentionEnabled = $true
+            $beforeRetention = Invoke-DevTempRetention -Phase Before
+            if ($null -ne $beforeRetention) {
+                $retentionProtectedPaths = @($beforeRetention.unremoved)
+            }
+        }
+    }
+
+    & $powerShell `
+        -NoLogo `
+        -NoProfile `
+        -ExecutionPolicy Bypass `
+        -File $target `
+        @forwardedArguments
+    $exitCode = $LASTEXITCODE
+}
+finally {
+    if ($null -ne $tempWorkflowContext -and
+        [string] $tempWorkflowContext.mode -eq 'owner') {
+        # The requested workflow has now closed its run directories. Prune a
+        # second time so its new result replaces, rather than joins, the prior
+        # retained diagnostic. A failed run remains newest and is preserved.
+        if ($retentionEnabled) {
+            $retentionPhase = if ($exitCode -eq 0) { 'Success' } else { 'Failure' }
+            $null = Invoke-DevTempRetention `
+                -Phase $retentionPhase `
+                -ProtectedPaths $retentionProtectedPaths
+        }
+    }
+    if ($null -ne $tempWorkflowContext) {
+        Stop-RepositoryTempWorkflowContext -Context $tempWorkflowContext
+    }
+}
+exit $exitCode
