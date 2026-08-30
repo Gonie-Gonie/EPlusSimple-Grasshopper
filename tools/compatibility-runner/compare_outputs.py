@@ -14,6 +14,8 @@ from typing import Any
 
 
 MAX_MISMATCHES = 500
+MAX_AUTO_ID_SEARCH_STATES = 100_000
+MAX_AUTO_ID_SEARCH_DEPTH = 512
 ADDRESS_PATTERN = re.compile(r"0x(?:AUTO\d{4}|[0-9a-f]{7,16})", re.IGNORECASE)
 IDD_OBJECT_PATTERN = re.compile(r"^\s*([^\s!\\][^,;]*?)\s*,\s*$")
 IDD_FIELD_PATTERN = re.compile(
@@ -428,11 +430,15 @@ def split_quoted(text: str, separator: str) -> list[str]:
     return values
 
 
-def normalize_idf_field(value: str) -> str:
+def unquote_idf_field(value: str) -> str:
     result = value.strip()
     if len(result) >= 2 and result[0] == '"' and result[-1] == '"':
         result = result[1:-1].replace('""', '"')
-    return ADDRESS_PATTERN.sub("0xAUTO", result).strip()
+    return result.strip()
+
+
+def normalize_idf_field(value: str) -> str:
+    return ADDRESS_PATTERN.sub("0xAUTO", unquote_idf_field(value))
 
 
 class IddParseError(ValueError):
@@ -570,7 +576,13 @@ def parse_idf(path: Path) -> dict[str, list[list[str]]]:
     text = strip_idf_comments(path.read_text(encoding="utf-8", errors="replace"))
     objects: dict[str, list[list[str]]] = collections.defaultdict(list)
     for record in split_quoted(text, ";"):
-        fields = [normalize_idf_field(item) for item in split_quoted(record, ",")]
+        # Preserve generated identities in IDF documents. Scalar comparison
+        # still normalizes their unstable address fragments through
+        # ``normalize_text``; retaining raw fields lets the topology gate prove
+        # one consistent bijection across names and references. IDD defaults
+        # continue using ``normalize_idf_field`` and therefore retain their
+        # previous normalization behavior.
+        fields = [unquote_idf_field(item) for item in split_quoted(record, ",")]
         if not fields or not fields[0]:
             continue
         objects[fields[0].casefold()].append(fields[1:])
@@ -895,6 +907,283 @@ def schedule_compact_difference(
     return len(differences), differences
 
 
+AutoIdSymbol = tuple[str, str]
+AutoIdSymbolPair = tuple[AutoIdSymbol, AutoIdSymbol]
+
+
+def auto_id_symbol(value: str) -> AutoIdSymbol | None:
+    """Return a template-scoped identity for one complete generated field.
+
+    A bare address token is intentionally not an identity.  Independent name
+    families may safely reuse a deterministic token such as ``0xAUTO0000``;
+    EnergyPlus references the complete field value, not the embedded token.
+    """
+
+    if ADDRESS_PATTERN.search(value) is None:
+        return None
+    return normalize_text(value), " ".join(value.split()).casefold()
+
+
+def auto_id_symbol_pairs(
+    expected: list[str],
+    actual: list[str],
+) -> tuple[AutoIdSymbolPair, ...] | None:
+    """Collect compatible generated-symbol pairs from aligned IDF fields."""
+
+    pairs: list[AutoIdSymbolPair] = []
+    width = max(len(expected), len(actual))
+    for index in range(width):
+        left = auto_id_symbol(expected[index]) if index < len(expected) else None
+        right = auto_id_symbol(actual[index]) if index < len(actual) else None
+        if (left is None) != (right is None):
+            return None
+        if left is not None and right is not None:
+            if left[0] != right[0]:
+                return None
+            pairs.append((left, right))
+    return tuple(pairs)
+
+
+def compare_auto_id_topology(
+    expected: dict[str, list[list[str]]],
+    actual: dict[str, list[list[str]]],
+    absolute: float,
+    relative: float,
+    idd_schema: IddSchema | None,
+) -> dict[str, Any]:
+    """Prove generated full-field identities are related by one bijection.
+
+    Candidate objects retain the existing semantic IDF comparison rules,
+    including IDD defaults/extensible tails and Schedule:Compact expansion.
+    A global constrained matching then prevents per-object matching from hiding
+    reference swaps, aliases, or dangling generated references.
+    """
+
+    expected_symbols_by_template: dict[str, set[str]] = collections.defaultdict(set)
+    actual_symbols_by_template: dict[str, set[str]] = collections.defaultdict(set)
+    expected_auto_object_count = 0
+    actual_auto_object_count = 0
+
+    def collect(
+        objects: dict[str, list[list[str]]],
+        symbols_by_template: dict[str, set[str]],
+    ) -> int:
+        auto_object_count = 0
+        for items in objects.values():
+            for fields in items:
+                contains_auto_id = False
+                for value in fields:
+                    symbol = auto_id_symbol(value)
+                    if symbol is None:
+                        continue
+                    contains_auto_id = True
+                    symbols_by_template[symbol[0]].add(symbol[1])
+                if contains_auto_id:
+                    auto_object_count += 1
+        return auto_object_count
+
+    expected_auto_object_count = collect(expected, expected_symbols_by_template)
+    actual_auto_object_count = collect(actual, actual_symbols_by_template)
+    expected_symbol_count = sum(len(values) for values in expected_symbols_by_template.values())
+    actual_symbol_count = sum(len(values) for values in actual_symbols_by_template.values())
+    template_mismatches = [
+        {
+            "template": template,
+            "expected_symbol_count": len(expected_symbols_by_template.get(template, set())),
+            "actual_symbol_count": len(actual_symbols_by_template.get(template, set())),
+        }
+        for template in sorted(
+            set(expected_symbols_by_template) | set(actual_symbols_by_template)
+        )
+        if len(expected_symbols_by_template.get(template, set()))
+        != len(actual_symbols_by_template.get(template, set()))
+    ]
+
+    base_receipt: dict[str, Any] = {
+        "comparison": (
+            "global object-order-independent matching with template-scoped "
+            "full-field generated-identity bijections"
+        ),
+        "expected_auto_object_count": expected_auto_object_count,
+        "actual_auto_object_count": actual_auto_object_count,
+        "expected_symbol_count": expected_symbol_count,
+        "actual_symbol_count": actual_symbol_count,
+        "expected_template_count": len(expected_symbols_by_template),
+        "actual_template_count": len(actual_symbols_by_template),
+        "matched_auto_object_count": 0,
+        "search_state_count": 0,
+        "search_state_limit": MAX_AUTO_ID_SEARCH_STATES,
+        "search_depth_limit": MAX_AUTO_ID_SEARCH_DEPTH,
+        "failure_reason": None,
+        "template_symbol_count_mismatch_count": len(template_mismatches),
+        "template_symbol_count_mismatches": template_mismatches[:MAX_MISMATCHES],
+        "truncated": len(template_mismatches) > MAX_MISMATCHES,
+    }
+
+    if expected_auto_object_count != actual_auto_object_count:
+        return {
+            **base_receipt,
+            "passed": False,
+            "failure_reason": "auto_object_count",
+        }
+    if template_mismatches:
+        return {
+            **base_receipt,
+            "passed": False,
+            "failure_reason": "symbol_count_by_template",
+        }
+    if expected_auto_object_count == 0:
+        return {**base_receipt, "passed": True}
+
+    # Each row is one expected auto-bearing object and all semantically equal
+    # actual objects of the same type, together with the generated-symbol
+    # constraints that pairing would introduce.
+    candidate_rows: list[
+        tuple[str, int, tuple[tuple[int, tuple[AutoIdSymbolPair, ...]], ...]]
+    ] = []
+    for object_type in sorted(expected):
+        left_items = expected[object_type]
+        right_items = actual.get(object_type, [])
+        definition = idd_schema.get(object_type) if idd_schema is not None else None
+        defaults = definition.defaults if definition is not None else None
+        difference_function = (
+            schedule_compact_difference
+            if object_type == "schedule:compact"
+            else field_difference
+        )
+        for object_index, left in enumerate(left_items):
+            if not any(auto_id_symbol(value) is not None for value in left):
+                continue
+            candidates: list[tuple[int, tuple[AutoIdSymbolPair, ...]]] = []
+            for actual_index, right in enumerate(right_items):
+                difference_count, _ = difference_function(
+                    left,
+                    right,
+                    absolute,
+                    relative,
+                    defaults,
+                    trailing_blank_limit(definition, len(left), len(right)),
+                )
+                if difference_count != 0:
+                    continue
+                symbol_pairs = auto_id_symbol_pairs(left, right)
+                if symbol_pairs is not None:
+                    candidates.append((actual_index, symbol_pairs))
+            if not candidates:
+                return {
+                    **base_receipt,
+                    "passed": False,
+                    "failure_reason": "no_semantically_equivalent_auto_object_candidate",
+                    "unmatched_expected_object": {
+                        "object_type": object_type,
+                        "object_index": object_index,
+                    },
+                }
+            candidate_rows.append((object_type, object_index, tuple(candidates)))
+
+    if len(candidate_rows) != expected_auto_object_count:
+        return {
+            **base_receipt,
+            "passed": False,
+            "failure_reason": "auto_object_inventory",
+        }
+
+    used_actual: dict[str, set[int]] = collections.defaultdict(set)
+    forward: dict[AutoIdSymbol, AutoIdSymbol] = {}
+    reverse: dict[AutoIdSymbol, AutoIdSymbol] = {}
+    search_state_count = 0
+    maximum_matched = 0
+    search_limit_failure: str | None = None
+
+    def extensions_for(
+        pairs: tuple[AutoIdSymbolPair, ...],
+    ) -> tuple[AutoIdSymbolPair, ...] | None:
+        proposed_forward: dict[AutoIdSymbol, AutoIdSymbol] = {}
+        proposed_reverse: dict[AutoIdSymbol, AutoIdSymbol] = {}
+        for left, right in pairs:
+            if left in forward and forward[left] != right:
+                return None
+            if right in reverse and reverse[right] != left:
+                return None
+            if left in proposed_forward and proposed_forward[left] != right:
+                return None
+            if right in proposed_reverse and proposed_reverse[right] != left:
+                return None
+            proposed_forward[left] = right
+            proposed_reverse[right] = left
+        return tuple(
+            (left, right)
+            for left, right in proposed_forward.items()
+            if left not in forward
+        )
+
+    def search(remaining: tuple[int, ...], matched: int) -> bool:
+        nonlocal search_state_count, maximum_matched, search_limit_failure
+        if search_limit_failure is not None:
+            return False
+        if search_state_count >= MAX_AUTO_ID_SEARCH_STATES:
+            search_limit_failure = "search_state_limit"
+            return False
+        if remaining and matched >= MAX_AUTO_ID_SEARCH_DEPTH:
+            search_limit_failure = "search_depth_limit"
+            return False
+        search_state_count += 1
+        maximum_matched = max(maximum_matched, matched)
+        if not remaining:
+            return True
+
+        selected_position = -1
+        selected_options: list[
+            tuple[int, tuple[AutoIdSymbolPair, ...]]
+        ] | None = None
+        for position, row_index in enumerate(remaining):
+            object_type, _, candidates = candidate_rows[row_index]
+            options: list[tuple[int, tuple[AutoIdSymbolPair, ...]]] = []
+            for actual_index, pairs in candidates:
+                if actual_index in used_actual[object_type]:
+                    continue
+                extensions = extensions_for(pairs)
+                if extensions is not None:
+                    options.append((actual_index, extensions))
+            if not options:
+                return False
+            if selected_options is None or len(options) < len(selected_options):
+                selected_position = position
+                selected_options = options
+
+        assert selected_options is not None
+        selected_row_index = remaining[selected_position]
+        object_type, _, _ = candidate_rows[selected_row_index]
+        next_remaining = remaining[:selected_position] + remaining[selected_position + 1 :]
+        for actual_index, extensions in selected_options:
+            used_actual[object_type].add(actual_index)
+            for left, right in extensions:
+                forward[left] = right
+                reverse[right] = left
+            if search(next_remaining, matched + 1):
+                return True
+            for left, right in reversed(extensions):
+                del forward[left]
+                del reverse[right]
+            used_actual[object_type].remove(actual_index)
+            if search_limit_failure is not None:
+                return False
+        return False
+
+    passed = search(tuple(range(len(candidate_rows))), 0)
+    return {
+        **base_receipt,
+        "passed": passed,
+        "matched_auto_object_count": (
+            expected_auto_object_count if passed else maximum_matched
+        ),
+        "search_state_count": search_state_count,
+        "failure_reason": (
+            None if passed else search_limit_failure or "no_consistent_bijection"
+        ),
+    }
+
+
 def compare_idf(
     expected_path: Path,
     actual_path: Path,
@@ -904,6 +1193,13 @@ def compare_idf(
 ) -> dict[str, Any]:
     expected = parse_idf(expected_path)
     actual = parse_idf(actual_path)
+    auto_id_topology = compare_auto_id_topology(
+        expected,
+        actual,
+        absolute,
+        relative,
+        idd_schema,
+    )
     mismatches: list[dict[str, Any]] = []
     mismatch_count = 0
 
@@ -963,6 +1259,24 @@ def compare_idf(
                         "actual": actual_value,
                     }
                 )
+    if not auto_id_topology["passed"]:
+        add_mismatch(
+            {
+                "path": "$.auto_id_topology",
+                "reason": "auto_id_topology",
+                "expected": {
+                    "auto_object_count": auto_id_topology["expected_auto_object_count"],
+                    "symbol_count": auto_id_topology["expected_symbol_count"],
+                    "template_count": auto_id_topology["expected_template_count"],
+                },
+                "actual": {
+                    "auto_object_count": auto_id_topology["actual_auto_object_count"],
+                    "symbol_count": auto_id_topology["actual_symbol_count"],
+                    "template_count": auto_id_topology["actual_template_count"],
+                    "failure_reason": auto_id_topology["failure_reason"],
+                },
+            }
+        )
     return {
         "passed": not mismatches,
         "expected_object_count": sum(expected_counts.values()),
@@ -974,6 +1288,7 @@ def compare_idf(
         "reported_mismatch_count": len(mismatches),
         "truncated": mismatch_count > len(mismatches),
         "mismatches": mismatches,
+        "auto_id_topology": auto_id_topology,
         "comparison": (
             "order-independent object-type grouping with tolerant field matching and "
             "pinned-IDD omitted-default plus trailing-empty normalization"

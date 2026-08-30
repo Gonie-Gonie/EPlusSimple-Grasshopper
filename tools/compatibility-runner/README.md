@@ -6,6 +6,10 @@ authoring IDF, expanded IDF, warnings, and full GRR output. The reporter perform
 IDD-aware semantic IDF matching and tolerance-aware numeric GRR comparison, then writes
 `artifacts/reports/engineering-compatibility.json`.
 
+Runtime-derived IDF names may use different address tokens in the two engines. The reporter accepts
+only a template-scoped, one-to-one rename that remains consistent across object names and every
+reference; swapped references, merged aliases, and dangling target/reference identities fail the gate.
+
 The reporter requires the repository runtime manifest and rejects a reporter IDD or engine runtime
 whose executable, IDD, or ExpandObjects hash is not the pinned EnergyPlus 24.2.0 identity.
 

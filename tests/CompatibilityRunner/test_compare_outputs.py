@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import unittest
+from unittest import mock
 
 from support import TemporaryWorkspace, manifest, metadata, runner
 
@@ -99,6 +100,138 @@ Schedule:Compact,
             },
             result["mismatches"],
         )
+
+
+class AutoIdTopologyTests(unittest.TestCase):
+    IDD = r"""Zone,
+  A1, \field Name
+      \reference ZoneNames
+  N1; \field Multiplier
+Surface,
+  A1, \field Name
+  A2; \field Zone Name
+      \type object-list
+      \object-list ZoneNames
+Schedule:Constant,
+  A1, \field Name
+      \reference ScheduleNames
+  N1; \field Hourly Value
+Coil:Test,
+  A1, \field Name
+      \reference CoilNames
+  A2; \field Schedule Name
+      \type object-list
+      \object-list ScheduleNames
+"""
+
+    ZONES_AND_REFERENCES = """Zone, Zone-0x1111111, 1;
+Zone, Zone-0x2222222, 2;
+Surface, Wall-A, Zone-0x1111111;
+Surface, Wall-B, Zone-0x2222222;
+"""
+
+    def compare(self, expected_text: str, actual_text: str) -> dict[str, object]:
+        with TemporaryWorkspace() as workspace:
+            idd = workspace.write_text("Energy+.idd", self.IDD)
+            expected = workspace.write_text("expected.idf", expected_text)
+            actual = workspace.write_text("actual.idf", actual_text)
+            schema = runner.parse_idd(idd)
+            return runner.compare_idf(expected, actual, 0.0, 0.0, schema)
+
+    def assert_topology_failure(
+        self,
+        result: dict[str, object],
+        failure_reason: str,
+    ) -> None:
+        self.assertFalse(result["passed"])
+        receipt = result["auto_id_topology"]
+        self.assertFalse(receipt["passed"])
+        self.assertEqual(failure_reason, receipt["failure_reason"])
+        self.assertEqual(1, result["mismatch_count"])
+        self.assertEqual(
+            ["auto_id_topology"],
+            [item["reason"] for item in result["mismatches"]],
+        )
+
+    def test_auto_ids_accept_consistent_bijective_rename_and_object_reorder(self) -> None:
+        actual = """Surface, Wall-B, Zone-0xAUTO0001;
+Zone, Zone-0xAUTO0001, 2.0;
+Surface, Wall-A, Zone-0xAUTO0000;
+Zone, Zone-0xAUTO0000, 1e0;
+"""
+
+        result = self.compare(self.ZONES_AND_REFERENCES, actual)
+
+        self.assertTrue(result["passed"], result["mismatches"])
+        receipt = result["auto_id_topology"]
+        self.assertTrue(receipt["passed"])
+        self.assertEqual(4, receipt["matched_auto_object_count"])
+        self.assertEqual(2, receipt["expected_symbol_count"])
+        self.assertEqual(2, receipt["actual_symbol_count"])
+
+    def test_auto_id_reference_swap_between_distinguishable_targets_fails(self) -> None:
+        actual = """Zone, Zone-0xAUTO0000, 1;
+Zone, Zone-0xAUTO0001, 2;
+Surface, Wall-A, Zone-0xAUTO0001;
+Surface, Wall-B, Zone-0xAUTO0000;
+"""
+
+        result = self.compare(self.ZONES_AND_REFERENCES, actual)
+
+        self.assert_topology_failure(result, "no_consistent_bijection")
+
+    def test_auto_id_alias_merge_fails(self) -> None:
+        actual = """Zone, Zone-0xAUTO0000, 1;
+Zone, Zone-0xAUTO0001, 2;
+Surface, Wall-A, Zone-0xAUTO0000;
+Surface, Wall-B, Zone-0xAUTO0000;
+"""
+
+        result = self.compare(self.ZONES_AND_REFERENCES, actual)
+
+        self.assert_topology_failure(result, "no_consistent_bijection")
+
+    def test_auto_id_target_reference_split_dangling_fails(self) -> None:
+        actual = """Zone, Zone-0xAUTO0000, 1;
+Zone, Zone-0xAUTO0000, 2;
+Surface, Wall-A, Zone-0xAUTO0000;
+Surface, Wall-B, Zone-0xAUTO0001;
+"""
+
+        result = self.compare(self.ZONES_AND_REFERENCES, actual)
+
+        self.assert_topology_failure(result, "no_consistent_bijection")
+
+    def test_same_auto_token_may_be_reused_in_distinct_full_name_templates(self) -> None:
+        expected = """Schedule:Constant, Schedule-0x1111111, 1;
+Coil:Test, Coil-0x2222222, Schedule-0x1111111;
+"""
+        actual = """Coil:Test, Coil-0xAUTO0000, Schedule-0xAUTO0000;
+Schedule:Constant, Schedule-0xAUTO0000, 1.0;
+"""
+
+        result = self.compare(expected, actual)
+
+        self.assertTrue(result["passed"], result["mismatches"])
+        receipt = result["auto_id_topology"]
+        self.assertTrue(receipt["passed"])
+        self.assertEqual(2, receipt["expected_template_count"])
+        self.assertEqual(2, receipt["actual_template_count"])
+
+    def test_auto_id_search_limit_fails_closed(self) -> None:
+        actual = """Surface, Wall-B, Zone-0xAUTO0001;
+Zone, Zone-0xAUTO0001, 2;
+Surface, Wall-A, Zone-0xAUTO0000;
+Zone, Zone-0xAUTO0000, 1;
+"""
+
+        with mock.patch.object(runner, "MAX_AUTO_ID_SEARCH_STATES", 1):
+            result = self.compare(self.ZONES_AND_REFERENCES, actual)
+
+        self.assert_topology_failure(result, "search_state_limit")
+        receipt = result["auto_id_topology"]
+        self.assertEqual(1, receipt["search_state_count"])
+        self.assertEqual(1, receipt["search_state_limit"])
 
 
 class IddDefaultNormalizationTests(unittest.TestCase):

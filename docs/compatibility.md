@@ -101,6 +101,11 @@ that have symbol-level evidence or a reviewed exception.
 | EnergyPlus 24.2.0 results, GRR values, and warnings within declared tolerances | Python mutable-container behavior, `shrink`, and `quick_map` syntax |
 | Rhino 7/8 geometry adapters, Grasshopper persistence, and packaged workflows | General editing support for every EnergyPlus object |
 
+Generated address tokens are nondeterministic implementation details, but their graph is not ignored.
+IDF comparison permits a template-scoped one-to-one token rename only when the same mapping is used
+by each defining name and reference. Reference swaps, alias merges, and dangling identities therefore
+remain release failures even when object order and the raw address text differ.
+
 The C# APIs and Grasshopper components are native product interfaces. They may
 be more immutable, deterministic, or strongly typed than the historical Python
 objects while preserving the verified model meaning. Any such difference that
