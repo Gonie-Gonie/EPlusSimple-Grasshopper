@@ -71,6 +71,19 @@ Use `-Target Rhino7` or `-Target Rhino8` to limit the operation. Logs and the
 installation receipt are written below `temp\install`; the script never
 publishes a package and never removes unrelated Rhino packages.
 
+Setup remembers nonstandard Rhino locations in `.config\local.settings.json`,
+and `install` reuses those exact locations before trying the standard `Program
+Files` paths. A location may be the Rhino installation root, its `System`
+directory, or `Rhino.exe` itself. You can also override either host explicitly:
+
+```text
+.\dev.cmd install -Rhino7Path "D:\Apps\Rhino 7" -Rhino8Path "D:\Apps\Rhino 8"
+```
+
+The selected `Rhino.exe` and its sibling `yak.exe` must both exist and report
+the requested Rhino major version. When install rebuilds packages, it forwards
+the same resolved executables back to setup so a custom location is not lost.
+
 ## First load
 
 1. Close every Rhino process before changing installed plugin files.

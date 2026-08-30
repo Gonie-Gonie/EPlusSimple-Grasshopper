@@ -5,6 +5,10 @@ param(
     [ValidateSet('All', 'Rhino7', 'Rhino8')]
     [string] $Target = 'All',
 
+    [string] $Rhino7Path,
+
+    [string] $Rhino8Path,
+
     [switch] $UseExistingPackages
 )
 
@@ -12,10 +16,12 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
 . (Join-Path $PSScriptRoot 'common.ps1')
+. (Join-Path $PSScriptRoot 'install-rhino-host.ps1')
 
 $repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
 $packagesRoot = Join-Path $repositoryRoot 'artifacts\packages'
 $packageIndexPath = Join-Path $packagesRoot 'package-index.json'
+$localSettingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
 $runStamp = [DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss-fff')
 $runRoot = Join-Path $repositoryRoot (Join-Path 'temp\install' ("run-" + $runStamp))
 $productIds = @('invisible-dragon', 'simple-dragon')
@@ -171,51 +177,79 @@ if ($runningRhino.Count -ne 0) {
     throw "Close every Rhino process before reinstalling Dragon packages. Running Rhino process IDs: $processIds."
 }
 
-$knownHosts = @(
+$knownHostSpecifications = @(
     [pscustomobject] [ordered] @{
         name = 'Rhino7'
+        majorVersion = 7
         packageTarget = 'rhino7'
-        rhino = 'C:\Program Files\Rhino 7\System\Rhino.exe'
-        yak = 'C:\Program Files\Rhino 7\System\yak.exe'
+        explicitPath = $Rhino7Path
+        standardExecutable = 'C:\Program Files\Rhino 7\System\Rhino.exe'
     },
     [pscustomobject] [ordered] @{
         name = 'Rhino8'
+        majorVersion = 8
         packageTarget = 'rhino8'
-        rhino = 'C:\Program Files\Rhino 8\System\Rhino.exe'
-        yak = 'C:\Program Files\Rhino 8\System\yak.exe'
+        explicitPath = $Rhino8Path
+        standardExecutable = 'C:\Program Files\Rhino 8\System\Rhino.exe'
     }
 )
-$requestedHosts = @($knownHosts | Where-Object {
+$requestedHostSpecifications = @($knownHostSpecifications | Where-Object {
     $Target -eq 'All' -or $_.name -eq $Target
 })
-$missingHosts = @($requestedHosts | Where-Object {
-    -not (Test-Path -LiteralPath $_.rhino -PathType Leaf) -or
-    -not (Test-Path -LiteralPath $_.yak -PathType Leaf)
-})
-if ($Target -ne 'All' -and $missingHosts.Count -ne 0) {
-    throw "$Target or its Yak executable is not installed in the standard location."
+
+$localSettings = $null
+$localSettingsError = $null
+try {
+    $localSettings = Read-RhinoLocalSettings -Path $localSettingsPath
 }
-$hosts = @($requestedHosts | Where-Object {
-    (Test-Path -LiteralPath $_.rhino -PathType Leaf) -and
-    (Test-Path -LiteralPath $_.yak -PathType Leaf)
-})
+catch {
+    $localSettingsError = $_.Exception.Message
+}
+
+$hosts = @()
+$missingHosts = @()
+foreach ($hostSpecification in $requestedHostSpecifications) {
+    try {
+        if ([string]::IsNullOrWhiteSpace([string] $hostSpecification.explicitPath) -and
+            -not [string]::IsNullOrWhiteSpace($localSettingsError)) {
+            throw $localSettingsError
+        }
+
+        $candidate = Resolve-RhinoHostCandidate `
+            -Name ([string] $hostSpecification.name) `
+            -MajorVersion ([int] $hostSpecification.majorVersion) `
+            -PackageTarget ([string] $hostSpecification.packageTarget) `
+            -ExplicitPath ([string] $hostSpecification.explicitPath) `
+            -LocalSettings $localSettings `
+            -StandardExecutable ([string] $hostSpecification.standardExecutable)
+        $host = Confirm-RhinoHostCandidate -Candidate $candidate
+        $hosts += $host
+        Write-Host (
+            "$($host.name): $($host.version) at $($host.rhino) [$($host.source)]")
+    }
+    catch {
+        $missingHosts += [pscustomobject] [ordered] @{
+            name = [string] $hostSpecification.name
+            reason = $_.Exception.Message
+        }
+    }
+}
+
+if ($Target -ne 'All' -and $missingHosts.Count -ne 0) {
+    throw "$Target is unavailable: $($missingHosts[0].reason)"
+}
 if ($hosts.Count -eq 0) {
-    throw 'No supported Rhino 7 or Rhino 8 installation was found.'
+    $reasons = @($missingHosts | ForEach-Object { "$($_.name): $($_.reason)" }) -join '; '
+    throw "No supported Rhino 7 or Rhino 8 installation was found. $reasons"
 }
 foreach ($missingHost in $missingHosts) {
-    Write-Warning "$($missingHost.name) is unavailable and will be skipped."
+    Write-Warning "$($missingHost.name) is unavailable and will be skipped: $($missingHost.reason)"
 }
 
 Ensure-Directory -Path $runRoot
 
 if (-not $UseExistingPackages) {
-    $setupArguments = @()
-    if (@($hosts | Where-Object { $_.name -eq 'Rhino7' }).Count -ne 0) {
-        $setupArguments += '-RequireRhino7'
-    }
-    if (@($hosts | Where-Object { $_.name -eq 'Rhino8' }).Count -ne 0) {
-        $setupArguments += '-RequireRhino8'
-    }
+    $setupArguments = @(Get-RhinoSetupArguments -Hosts $hosts)
 
     Write-Host 'Preparing the reproducible build environment...'
     Invoke-RepositoryCommand `
@@ -316,6 +350,10 @@ foreach ($rhinoHost in $hosts) {
 
     $installations += [pscustomobject] [ordered] @{
         host = [string] $rhinoHost.name
+        rhinoVersion = [string] $rhinoHost.version
+        rhinoExecutable = [string] $rhinoHost.rhino
+        yakExecutable = [string] $rhinoHost.yak
+        pathSource = [string] $rhinoHost.source
         version = $version
         products = @($yakArtifacts | ForEach-Object {
             [pscustomobject] [ordered] @{

@@ -364,6 +364,26 @@ else {
         }
     }
 
+    # The installer path resolver is PowerShell-only, so keep its regression
+    # suite in the normal build gate instead of leaving it as a manual check.
+    $installerTestScript = Join-Path $repositoryRoot 'tests\Installer\run.ps1'
+    if (Test-Path -LiteralPath $installerTestScript -PathType Leaf) {
+        $windowsPowerShell = Join-Path $PSHOME 'powershell.exe'
+        if ($PSCmdlet.ShouldProcess($installerTestScript, 'Run installer Rhino path checks')) {
+            Invoke-LoggedNativeCommand `
+                -FilePath $windowsPowerShell `
+                -ArgumentList @(
+                    '-NoLogo',
+                    '-NoProfile',
+                    '-ExecutionPolicy', 'Bypass',
+                    '-File', $installerTestScript
+                ) `
+                -LogPath (Join-Path $logsRoot 'test-GonieGonie.Dragons.Installer.log') `
+                -FailureMessage 'Installer Rhino path checks failed'
+        }
+        $executedTestProjects += $installerTestScript
+    }
+
     # RhinoCommon's native geometry API must be hosted on an STA thread. These
     # dedicated executables initialize Rhino 8 through Rhino.Inside and cover
     # both Dragon geometry adapters with real Breps.
