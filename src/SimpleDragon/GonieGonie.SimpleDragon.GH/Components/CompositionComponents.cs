@@ -5,7 +5,7 @@ using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
 using GonieGonie.SimpleDragon.Rhino;
 using Grasshopper.Kernel;
-using Grasshopper.Kernel.Parameters;
+using Grasshopper.Kernel.Data;
 using Rhino;
 using Rhino.Geometry;
 
@@ -36,17 +36,12 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
             "Closed planar polygonal opening curve on its intended Surface.",
             GH_ParamAccess.item);
         pManager.AddTextParameter("Name", "N", "Opening name.", GH_ParamAccess.item, "Opening");
-        int type = pManager.AddIntegerParameter(
+        ChoiceInputs.AddEnum(
+            pManager,
             "Type",
             "T",
             "Opening type.",
-            GH_ParamAccess.item,
-            (int)FenestrationType.Window);
-        var typeParameter = (Param_Integer)pManager[type];
-        foreach (FenestrationType value in Enum.GetValues(typeof(FenestrationType)))
-        {
-            typeParameter.AddNamedValue(value.ToString(), (int)value);
-        }
+            FenestrationType.Window);
 
         pManager.AddParameter(
             new SimpleDragonFenestrationConstructionParam(),
@@ -54,12 +49,15 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
             "FC",
             "Fenestration construction owned by this opening.",
             GH_ParamAccess.item);
-        pManager.AddTextParameter(
+        ChoiceInputs.Add(
+            pManager,
             "Blind",
             "Blind",
             "Optional Shade or Venetian; leave empty or use None for no blind.",
-            GH_ParamAccess.item,
-            "None");
+            "None",
+            "None",
+            "Shade",
+            "Venetian");
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -82,12 +80,12 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
     {
         Curve? boundary = null;
         string name = "Opening";
-        int typeValue = (int)FenestrationType.Window;
+        string typeText = FenestrationType.Window.ToString();
         SimpleDragonFenestrationConstructionGoo? constructionGoo = null;
         string blindText = "None";
         if (!DA.GetData(0, ref boundary)
             || !DA.GetData(1, ref name)
-            || !DA.GetData(2, ref typeValue)
+            || !DA.GetData(2, ref typeText)
             || !DA.GetData(3, ref constructionGoo))
         {
             return;
@@ -96,7 +94,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
         DA.GetData(4, ref blindText);
         try
         {
-            FenestrationType type = DefinedEnum<FenestrationType>(typeValue, "Type");
+            FenestrationType type = ChoiceInputs.ParseEnum<FenestrationType>(typeText, "Type");
             BlindType? blind = OptionalEnum<BlindType>(blindText, "Blind");
             var opening = new OpeningDefinition(
                 boundary!,
@@ -119,17 +117,6 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
         }
     }
 
-    internal static T DefinedEnum<T>(int value, string inputName)
-        where T : struct, Enum
-    {
-        if (!Enum.IsDefined(typeof(T), value))
-        {
-            throw new ArgumentOutOfRangeException(inputName, value, "Unknown " + inputName + " value.");
-        }
-
-        return (T)Enum.ToObject(typeof(T), value);
-    }
-
     private static T? OptionalEnum<T>(string value, string inputName)
         where T : struct, Enum
     {
@@ -139,14 +126,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
             return null;
         }
 
-        if (!Enum.TryParse(normalized, true, out T parsed)
-            || !Enum.IsDefined(typeof(T), parsed))
-        {
-            throw new ArgumentException(
-                inputName + " must be None, " + string.Join(", ", Enum.GetNames(typeof(T))) + ".");
-        }
-
-        return parsed;
+        return ChoiceInputs.ParseEnum<T>(normalized, inputName);
     }
 
     internal static bool IsAuthoringException(Exception exception)
@@ -177,85 +157,88 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
 /// Authors one geometry-backed EPlusSimple surface. All envelope and opening
 /// properties are owned here rather than inherited from a Zone.
 /// </summary>
-public sealed class CreateSimpleDragonSurfaceComponent : SimpleDragonComponent
+public abstract class SimpleDragonOpaqueSurfaceComponent : SimpleDragonComponent
 {
-    public CreateSimpleDragonSurfaceComponent()
+    private static readonly SurfaceBoundaryCondition[] BoundaryChoices =
+    {
+        SurfaceBoundaryCondition.Outdoors,
+        SurfaceBoundaryCondition.Ground,
+        SurfaceBoundaryCondition.Adiabatic,
+    };
+
+    protected SimpleDragonOpaqueSurfaceComponent(
+        string name,
+        string nickname,
+        string description)
         : base(
-            "SimpleDragon Surface",
-            "SD Surface",
-            "Creates one typed Surface from a single planar Brep face with its own construction, boundary intent, and openings.",
+            name,
+            nickname,
+            description,
             SimpleDragonPanels.Geometry)
     {
     }
 
-    public override Guid ComponentGuid => new("039bf7bb-da65-49e2-80fe-86d636cf0a48");
+    protected abstract SurfaceType FixedSurfaceType { get; }
 
-    protected override void RegisterInputParams(GH_InputParamManager pManager)
+    protected abstract string DefaultSurfaceName { get; }
+
+    protected abstract SurfaceBoundaryCondition DefaultBoundaryCondition { get; }
+
+    protected virtual bool SupportsCoolRoof => false;
+
+    protected sealed override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddBrepParameter(
             "Face",
             "F",
             "One valid single-face planar polygon Brep.",
             GH_ParamAccess.item);
-        pManager.AddTextParameter("Name", "N", "Surface name.", GH_ParamAccess.item, "Surface");
-        int type = pManager.AddIntegerParameter(
-            "Type",
-            "T",
-            "EPlusSimple surface type.",
+        pManager.AddTextParameter(
+            "Name",
+            "N",
+            FixedSurfaceType + " name.",
             GH_ParamAccess.item,
-            (int)SurfaceType.Wall);
-        var typeParameter = (Param_Integer)pManager[type];
-        foreach (SurfaceType value in Enum.GetValues(typeof(SurfaceType)))
-        {
-            typeParameter.AddNamedValue(value.ToString(), (int)value);
-        }
-
+            DefaultSurfaceName);
         pManager.AddParameter(
             new SimpleDragonSurfaceConstructionParam(),
             "Construction",
             "SC",
-            "Optional opaque construction owned by this Surface; leave empty for an unknown construction.",
+            "Optional opaque construction owned by this " + FixedSurfaceType + "; leave empty for an unknown construction.",
             GH_ParamAccess.item);
-        int boundary = pManager.AddIntegerParameter(
-            "Boundary Intent",
+        ChoiceInputs.AddEnum(
+            pManager,
+            "Boundary Condition",
             "BC",
             "Outdoors, Ground, or Adiabatic. Coincident Outdoors surfaces in different Zones become reciprocal Zone boundaries.",
-            GH_ParamAccess.item,
-            (int)SurfaceBoundaryCondition.Outdoors);
-        var boundaryParameter = (Param_Integer)pManager[boundary];
-        foreach (SurfaceBoundaryCondition value in new[]
-                 {
-                     SurfaceBoundaryCondition.Outdoors,
-                     SurfaceBoundaryCondition.Ground,
-                     SurfaceBoundaryCondition.Adiabatic,
-                 })
-        {
-            boundaryParameter.AddNamedValue(value.ToString(), (int)value);
-        }
+            DefaultBoundaryCondition,
+            BoundaryChoices);
 
         pManager.AddParameter(
             new SimpleDragonOpeningDefinitionParam(),
             "Openings",
             "O",
-            "Completed openings owned by this Surface. Each opening owns its fenestration Construction.",
+            "Completed openings owned by this " + FixedSurfaceType + ". Each opening owns its fenestration Construction.",
             GH_ParamAccess.list);
-        pManager.AddNumberParameter(
-            "Cool Roof Reflectance",
-            "CR",
-            "Optional value in (0, 1], valid only for an outdoor Ceiling.",
-            GH_ParamAccess.item);
-        pManager[3].Optional = true;
-        pManager[5].Optional = true;
-        pManager[6].Optional = true;
+        pManager[2].Optional = true;
+        pManager[4].Optional = true;
+        if (SupportsCoolRoof)
+        {
+            int reflectance = pManager.AddNumberParameter(
+                "Cool Roof Reflectance",
+                "CR",
+                "Optional value in (0, 1], valid only when this Ceiling is Outdoors.",
+                GH_ParamAccess.item);
+            pManager[reflectance].Optional = true;
+        }
     }
 
-    protected override void RegisterOutputParams(GH_OutputParamManager pManager)
+    protected sealed override void RegisterOutputParams(GH_OutputParamManager pManager)
     {
         pManager.AddParameter(
             new SimpleDragonSurfaceDefinitionParam(),
             "Surface",
             "S",
-            "Geometry-backed Surface definition for one Zone.",
+            "Geometry-backed " + FixedSurfaceType + " definition for one Zone.",
             GH_ParamAccess.item);
         pManager.AddParameter(
             new SimpleDragonDiagnosticParam(),
@@ -265,49 +248,38 @@ public sealed class CreateSimpleDragonSurfaceComponent : SimpleDragonComponent
             GH_ParamAccess.list);
     }
 
-    protected override void Solve(IGH_DataAccess DA)
+    protected sealed override void Solve(IGH_DataAccess DA)
     {
         Brep? geometry = null;
-        string name = "Surface";
-        int typeValue = (int)SurfaceType.Wall;
+        string name = DefaultSurfaceName;
         SimpleDragonSurfaceConstructionGoo? constructionGoo = null;
-        int boundaryValue = (int)SurfaceBoundaryCondition.Outdoors;
+        string boundaryText = DefaultBoundaryCondition.ToString();
         var openingGoos = new List<SimpleDragonOpeningDefinitionGoo>();
         double reflectance = 0d;
         if (!DA.GetData(0, ref geometry)
             || !DA.GetData(1, ref name)
-            || !DA.GetData(2, ref typeValue)
-            || !DA.GetData(4, ref boundaryValue))
+            || !DA.GetData(3, ref boundaryText))
         {
             return;
         }
 
-        DA.GetData(3, ref constructionGoo);
-        DA.GetDataList(5, openingGoos);
-        bool hasReflectance = DA.GetData(6, ref reflectance);
+        DA.GetData(2, ref constructionGoo);
+        DA.GetDataList(4, openingGoos);
+        bool hasReflectance = SupportsCoolRoof && DA.GetData(5, ref reflectance);
         try
         {
-            SurfaceType type = CreateSimpleDragonOpeningComponent.DefinedEnum<SurfaceType>(typeValue, "Type");
-            SurfaceBoundaryCondition boundaryIntent =
-                CreateSimpleDragonOpeningComponent.DefinedEnum<SurfaceBoundaryCondition>(
-                    boundaryValue,
-                    "Boundary Intent");
-            if (boundaryIntent != SurfaceBoundaryCondition.Outdoors
-                && boundaryIntent != SurfaceBoundaryCondition.Ground
-                && boundaryIntent != SurfaceBoundaryCondition.Adiabatic)
-            {
-                throw new ArgumentException(
-                    "Boundary Intent must be Outdoors, Ground, or Adiabatic. Zone boundaries are resolved from coincident Surfaces.");
-            }
-
+            SurfaceBoundaryCondition boundaryCondition = ChoiceInputs.ParseEnum(
+                boundaryText,
+                "Boundary Condition",
+                BoundaryChoices);
             OpeningDefinition[] openings = openingGoos.Select((goo, index) => goo?.Value
                 ?? throw new ArgumentException("Openings[" + index + "] contains no value."))
                 .ToArray();
             var definition = new SurfaceDefinition(
                 geometry!,
                 name,
-                type,
-                boundaryIntent,
+                FixedSurfaceType,
+                boundaryCondition,
                 constructionGoo?.Value,
                 openings,
                 hasReflectance ? reflectance : null);
@@ -325,6 +297,65 @@ public sealed class CreateSimpleDragonSurfaceComponent : SimpleDragonComponent
             DA.SetDataList(1, new[] { new SimpleDragonDiagnosticGoo(diagnostic) });
         }
     }
+}
+
+public sealed class CreateSimpleDragonFloorComponent : SimpleDragonOpaqueSurfaceComponent
+{
+    public CreateSimpleDragonFloorComponent()
+        : base(
+            "SimpleDragon Floor",
+            "SD Floor",
+            "Creates one Floor from a planar Brep face with its own construction, boundary condition, and openings.")
+    {
+    }
+
+    public override Guid ComponentGuid => new("e15d7475-e5cf-4e37-81a4-e656c69ee250");
+
+    protected override SurfaceType FixedSurfaceType => SurfaceType.Floor;
+
+    protected override string DefaultSurfaceName => "Floor";
+
+    protected override SurfaceBoundaryCondition DefaultBoundaryCondition => SurfaceBoundaryCondition.Ground;
+}
+
+public sealed class CreateSimpleDragonCeilingComponent : SimpleDragonOpaqueSurfaceComponent
+{
+    public CreateSimpleDragonCeilingComponent()
+        : base(
+            "SimpleDragon Ceiling",
+            "SD Ceiling",
+            "Creates one Ceiling from a planar Brep face with its own construction, boundary condition, openings, and optional cool-roof reflectance.")
+    {
+    }
+
+    public override Guid ComponentGuid => new("39e2ad8c-8fbb-40bd-84cc-218de37bb720");
+
+    protected override SurfaceType FixedSurfaceType => SurfaceType.Ceiling;
+
+    protected override string DefaultSurfaceName => "Ceiling";
+
+    protected override SurfaceBoundaryCondition DefaultBoundaryCondition => SurfaceBoundaryCondition.Outdoors;
+
+    protected override bool SupportsCoolRoof => true;
+}
+
+public sealed class CreateSimpleDragonWallComponent : SimpleDragonOpaqueSurfaceComponent
+{
+    public CreateSimpleDragonWallComponent()
+        : base(
+            "SimpleDragon Wall",
+            "SD Wall",
+            "Creates one Wall from a planar Brep face with its own construction, boundary condition, and openings.")
+    {
+    }
+
+    public override Guid ComponentGuid => new("2c0bc0e2-df1d-4e42-9b97-d841e8c83214");
+
+    protected override SurfaceType FixedSurfaceType => SurfaceType.Wall;
+
+    protected override string DefaultSurfaceName => "Wall";
+
+    protected override SurfaceBoundaryCondition DefaultBoundaryCondition => SurfaceBoundaryCondition.Outdoors;
 }
 
 /// <summary>
@@ -497,7 +528,12 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
     {
         pManager.AddParameter(new GreenRetrofitModelParam(), "GRM", "GRM", "Complete GRM 0.7 model.", GH_ParamAccess.item);
         pManager.AddParameter(new SimpleDragonZoneParam(), "Zones", "Z", "Resolved immutable thermal zones.", GH_ParamAccess.list);
-        pManager.AddParameter(new SimpleDragonSurfaceParam(), "Surfaces", "S", "Resolved area-based surfaces.", GH_ParamAccess.list);
+        pManager.AddParameter(
+            new SimpleDragonSurfaceParam(),
+            "Surfaces",
+            "S",
+            "Resolved area-based surfaces, one branch per Zone.",
+            GH_ParamAccess.tree);
         pManager.AddTextParameter("Geometry Map", "Map", "Domain ID to Zone/Surface/Opening/trim source-provenance mapping.", GH_ParamAccess.list);
         pManager.AddGenericParameter(
             "Geometry Map Data",
@@ -558,14 +594,18 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
             }
 
             RhinoGeometryContext context = RhinoGeometryContext.FromDocument(document);
+            GH_Path modelPath = DA.ParameterTargetPath(1);
             var sources = new List<RhinoZoneSource>(definitions.Length);
             for (int zoneIndex = 0; zoneIndex < definitions.Length; zoneIndex++)
             {
                 ZoneDefinition definition = definitions[zoneIndex];
+                GH_Path zoneTargetPath = modelPath.AppendElement(zoneIndex);
+                string zonePath = zoneTargetPath.ToString();
                 var surfaceSources = new List<RhinoSurfaceSource>(definition.Surfaces.Count);
                 for (int surfaceIndex = 0; surfaceIndex < definition.Surfaces.Count; surfaceIndex++)
                 {
                     SurfaceDefinition surface = definition.Surfaces[surfaceIndex];
+                    string surfacePath = zoneTargetPath.AppendElement(surfaceIndex).ToString();
                     Brep face = surface.Geometry;
                     disposableGeometry.Add(face);
                     var openingSources = new List<RhinoFenestrationSource>(surface.Openings.Count);
@@ -581,6 +621,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
                             opening.Construction,
                             opening.Blind,
                             opening.Id,
+                            grasshopperPath: surfacePath,
                             grasshopperIndex: openingIndex));
                     }
 
@@ -593,6 +634,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
                         openingSources,
                         surface.CoolRoofReflectance,
                         surface.Id,
+                        grasshopperPath: zonePath,
                         grasshopperIndex: surfaceIndex));
                 }
 
@@ -605,7 +647,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
                     definition.LightDensity,
                     definition.Id,
                     grasshopperIndex: zoneIndex,
-                    grasshopperPath: null));
+                    grasshopperPath: zonePath));
             }
 
             RhinoZoneExtractionResult extraction = RhinoZoneExtractor.Extract(
@@ -684,7 +726,17 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
 
             DA.SetData(0, new GreenRetrofitModelGoo(model));
             DA.SetDataList(1, zones.Select(item => new SimpleDragonZoneGoo(item)));
-            DA.SetDataList(2, zones.SelectMany(item => item.Surfaces).Select(item => new SimpleDragonSurfaceGoo(item)));
+            var surfaceTree = new GH_Structure<SimpleDragonSurfaceGoo>();
+            for (int zoneIndex = 0; zoneIndex < zones.Length; zoneIndex++)
+            {
+                GH_Path zonePath = modelPath.AppendElement(zoneIndex);
+                foreach (Surface surface in zones[zoneIndex].Surfaces)
+                {
+                    surfaceTree.Append(new SimpleDragonSurfaceGoo(surface), zonePath);
+                }
+            }
+
+            DA.SetDataTree(2, surfaceTree);
             DA.SetDataList(3, extraction.GeometryMap.Select(FormatMap));
             DA.SetDataList(4, extraction.GeometryMap.Select(ToCoreGeometryMapEntry));
             DA.SetData(5, GrmWriter.Serialize(model));

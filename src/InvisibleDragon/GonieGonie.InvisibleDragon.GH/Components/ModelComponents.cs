@@ -131,7 +131,12 @@ public sealed class EnergyModelComponent : DragonComponent
             "Zone definitions. Coincident surfaces across distinct Zones are paired automatically.",
             GH_ParamAccess.list);
         pManager.AddNumberParameter("North Axis", "North", "North-axis rotation in degrees.", GH_ParamAccess.item, 0);
-        pManager.AddTextParameter("Terrain", "T", "Country, Suburbs, City, Ocean, or Urban.", GH_ParamAccess.item, "Suburbs");
+        ChoiceInputs.AddEnum(
+            pManager,
+            "Terrain",
+            "T",
+            "Site terrain used by the EnergyPlus model.",
+            Terrain.Suburbs);
         int photovoltaicPanels = pManager.AddParameter(
             new DragonPhotovoltaicPanelParam(),
             "PV Panels",
@@ -164,12 +169,7 @@ public sealed class EnergyModelComponent : DragonComponent
         }
 
         DA.GetDataList(4, photovoltaicGoos);
-        if (!Enum.TryParse(terrainText.Trim(), true, out Terrain terrain)
-            || !Enum.IsDefined(typeof(Terrain), terrain))
-        {
-            throw new ArgumentException(
-                "Terrain must be Country, Suburbs, City, Ocean, or Urban.");
-        }
+        Terrain terrain = ChoiceInputs.ParseEnum<Terrain>(terrainText, "Terrain");
 
         InvisibleDragonZoneDefinition[] definitions = definitionGoos.Select((goo, index) => goo?.Value
             ?? throw new ArgumentException("Zones contains an empty value at position " + index + "."))
@@ -244,6 +244,7 @@ internal static class InvisibleDragonAdjacencyResolver
             {
                 SurfaceReference second = surfaces[secondIndex];
                 if (first.ZoneIndex != second.ZoneIndex
+                    && CanBecomeAdjacent(first.Surface, second.Surface)
                     && first.Surface.Polygon.IsGeometricallyEquivalentTo(
                         second.Surface.Polygon,
                         allowReversedWinding: true,
@@ -311,6 +312,23 @@ internal static class InvisibleDragonAdjacencyResolver
             zone.OutdoorAirFlowCubicMetresPerSecond))
             .ToArray();
         return new AdjacencyResolution(zones, diagnostics);
+    }
+
+    private static bool CanBecomeAdjacent(Surface first, Surface second)
+    {
+        if (first.Boundary.Condition != SurfaceBoundaryCondition.Outdoors
+            || second.Boundary.Condition != SurfaceBoundaryCondition.Outdoors)
+        {
+            return false;
+        }
+
+        return (first.Type, second.Type) switch
+        {
+            (SurfaceType.Wall, SurfaceType.Wall) => true,
+            (SurfaceType.Floor, SurfaceType.Ceiling) => true,
+            (SurfaceType.Ceiling, SurfaceType.Floor) => true,
+            _ => false,
+        };
     }
 
     private sealed class SurfaceReference

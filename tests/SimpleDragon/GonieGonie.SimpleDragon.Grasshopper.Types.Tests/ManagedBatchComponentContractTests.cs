@@ -4,6 +4,7 @@ using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Data;
 
 namespace GonieGonie.SimpleDragon.Grasshopper.Tests;
 
@@ -31,10 +32,12 @@ public sealed class ManagedBatchComponentContractTests
             component.Params.Output.Select(parameter => parameter.Name));
         Assert.IsType<SimpleDragonBatchCaseParam>(component.Params.Input[0]);
         Assert.IsType<SimpleDragonDiagnosticParam>(component.Params.Output[6]);
-        Assert.Equal(GH_ParamAccess.list, component.Params.Input[0].Access);
+        Assert.Equal(GH_ParamAccess.tree, component.Params.Input[0].Access);
         Assert.Equal(GH_ParamAccess.item, component.Params.Input[1].Access);
         Assert.Equal(GH_ParamAccess.item, component.Params.Input[2].Access);
         Assert.Equal(GH_ParamAccess.item, component.Params.Input[3].Access);
+        Assert.Equal(GH_ParamAccess.tree, component.Params.Output[1].Access);
+        Assert.Equal(GH_ParamAccess.tree, component.Params.Output[2].Access);
         Assert.All(
             component.Params.Input,
             parameter => Assert.DoesNotContain(
@@ -98,6 +101,7 @@ public sealed class ManagedBatchComponentContractTests
                 {
                     new(new SimpleDragonBatchCase(model, "address-model")),
                 },
+                new List<GH_Path> { new(7, 2) },
                 2,
             });
 
@@ -105,6 +109,8 @@ public sealed class ManagedBatchComponentContractTests
         Assert.Equal(2, Property<int>(inputs, "MaxDegreeOfParallelism"));
         object cases = Property<object>(inputs, "Cases");
         Assert.Single(Assert.IsAssignableFrom<System.Collections.IEnumerable>(cases).Cast<object>());
+        GH_Path path = Assert.Single(Property<IReadOnlyList<GH_Path>>(inputs, "CasePaths"));
+        Assert.Equal(new GH_Path(7, 2), path);
 
         object? excessiveParallelism = method.Invoke(
             component,
@@ -114,6 +120,7 @@ public sealed class ManagedBatchComponentContractTests
                 {
                     new(new SimpleDragonBatchCase(model, "address-model")),
                 },
+                new List<GH_Path> { new(7, 2) },
                 1025,
             });
         Assert.Null(excessiveParallelism);

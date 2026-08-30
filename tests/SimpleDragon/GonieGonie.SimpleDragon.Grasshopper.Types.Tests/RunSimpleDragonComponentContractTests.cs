@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.EnergyPlus.Runtime;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Types;
 
 namespace GonieGonie.SimpleDragon.Grasshopper.Tests;
@@ -57,6 +58,30 @@ public sealed class RunSimpleDragonComponentContractTests
             Assert.DoesNotContain("IDF", parameter.Name, StringComparison.OrdinalIgnoreCase);
             Assert.DoesNotContain("EnergyPlus", parameter.Name, StringComparison.OrdinalIgnoreCase);
         });
+    }
+
+    [Fact]
+    public void DirectRunRejectsMultipleDataMatchedInputSets()
+    {
+        GH_Component component = Component();
+        Assert.True(component.Params.Input[1].AddVolatileData(
+            new GH_Path(2),
+            0,
+            new GH_Boolean(false)));
+        Assert.True(component.Params.Input[1].AddVolatileData(
+            new GH_Path(5),
+            0,
+            new GH_Boolean(false)));
+
+        Method(
+                component.GetType(),
+                "BeforeSolveInstance",
+                BindingFlags.Instance | BindingFlags.NonPublic)
+            .Invoke(component, null);
+
+        string error = Assert.Single(component.RuntimeMessages(GH_RuntimeMessageLevel.Error));
+        Assert.Contains("one data-matched input set", error, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Managed Run SimpleDragon Batch", error, StringComparison.Ordinal);
     }
 
     [Fact]

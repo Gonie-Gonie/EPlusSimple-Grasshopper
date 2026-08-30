@@ -100,18 +100,23 @@ public sealed class SimpleDragonHvacComponentContractTests
 
         GH_Component heatPump = Component(assembly, "SimpleDragonHeatPumpComponent");
         Assert.Equal("Heat Pump", PersistentDefault(heatPump.Params.Input[0]));
+        Assert.Equal(nameof(FuelType.Electricity), PersistentDefault(heatPump.Params.Input[1]));
+        Assert.Equal("ChoiceStringParam", heatPump.Params.Input[1].GetType().Name);
         Assert.Equal(3d, PersistentDefault(heatPump.Params.Input[2]));
         Assert.Equal(3d, PersistentDefault(heatPump.Params.Input[3]));
         GH_Component geothermal = Component(assembly, "SimpleDragonGeothermalHeatPumpComponent");
         Assert.Equal("Geothermal Heat Pump", PersistentDefault(geothermal.Params.Input[0]));
 
         GH_Component chiller = Component(assembly, "SimpleDragonChillerComponent");
-        Assert.Equal("Param_Integer", chiller.Params.Input[3].GetType().Name);
-        Assert.Equal("Param_Integer", chiller.Params.Input[4].GetType().Name);
-        Assert.Equal("Param_Integer", chiller.Params.Input[5].GetType().Name);
-        Assert.Contains("Turbo=0", chiller.Params.Input[3].Description, StringComparison.Ordinal);
-        Assert.Contains("Closed=0", chiller.Params.Input[4].Description, StringComparison.Ordinal);
-        Assert.Contains("SingleSpeed=0", chiller.Params.Input[5].Description, StringComparison.Ordinal);
+        Assert.Equal("ChoiceStringParam", chiller.Params.Input[3].GetType().Name);
+        Assert.Equal("ChoiceStringParam", chiller.Params.Input[4].GetType().Name);
+        Assert.Equal("ChoiceStringParam", chiller.Params.Input[5].GetType().Name);
+        Assert.Equal(nameof(CompressorType.Turbo), PersistentDefault(chiller.Params.Input[3]));
+        Assert.Equal(nameof(CoolingTowerType.Open), PersistentDefault(chiller.Params.Input[4]));
+        Assert.Equal(nameof(CoolingTowerControl.SingleSpeed), PersistentDefault(chiller.Params.Input[5]));
+        Assert.Contains("Turbo", chiller.Params.Input[3].Description, StringComparison.Ordinal);
+        Assert.Contains("Closed", chiller.Params.Input[4].Description, StringComparison.Ordinal);
+        Assert.Contains("Single Speed", chiller.Params.Input[5].Description, StringComparison.Ordinal);
 
         GH_Component erv = Component(assembly, "SimpleDragonEnergyRecoveryVentilatorComponent");
         Assert.Contains("m³/s", erv.Params.Input[1].Description, StringComparison.Ordinal);
@@ -127,28 +132,28 @@ public sealed class SimpleDragonHvacComponentContractTests
         Assembly assembly = LoadPlugin();
         SimpleDragonSourceSystemGoo heatPump = Source(assembly, "SimpleDragonHeatPumpComponent", new Dictionary<int, object?>
         {
-            [0] = "HP", [1] = (int)FuelType.Electricity, [2] = 3.2d, [3] = 4.3d,
+            [0] = "HP", [1] = nameof(FuelType.Electricity), [2] = 3.2d, [3] = 4.3d,
             [4] = 10_000d, [5] = 11_000d,
         });
         SimpleDragonSourceSystemGoo geothermal = Source(assembly, "SimpleDragonGeothermalHeatPumpComponent", new Dictionary<int, object?>
         {
-            [0] = "Geo", [1] = (int)FuelType.Electricity, [2] = 4.2d, [3] = 5.3d,
+            [0] = "Geo", [1] = nameof(FuelType.Electricity), [2] = 4.2d, [3] = 5.3d,
             [4] = 12_000d, [5] = 13_000d,
         });
         SimpleDragonSourceSystemGoo chiller = Source(assembly, "SimpleDragonChillerComponent", new Dictionary<int, object?>
         {
-            [0] = "Chiller", [1] = 5.1d, [2] = 14_000d, [3] = (int)CompressorType.Screw,
-            [4] = (int)CoolingTowerType.Closed, [5] = (int)CoolingTowerControl.TwoSpeed,
+            [0] = "Chiller", [1] = 5.1d, [2] = 14_000d, [3] = nameof(CompressorType.Screw),
+            [4] = nameof(CoolingTowerType.Closed), [5] = nameof(CoolingTowerControl.TwoSpeed),
             [6] = 15_000d,
         });
         SimpleDragonSourceSystemGoo absorption = Source(assembly, "SimpleDragonAbsorptionChillerComponent", new Dictionary<int, object?>
         {
-            [0] = "Absorption", [1] = (int)FuelType.NaturalGas, [2] = 0.9d,
+            [0] = "Absorption", [1] = nameof(FuelType.NaturalGas), [2] = 0.9d,
             [3] = 16_000d, [4] = 0.86d,
         });
         SimpleDragonSourceSystemGoo boiler = Source(assembly, "SimpleDragonBoilerComponent", new Dictionary<int, object?>
         {
-            [0] = "Boiler", [1] = (int)FuelType.NaturalGas, [2] = 0.91d,
+            [0] = "Boiler", [1] = nameof(FuelType.NaturalGas), [2] = 0.91d,
             [3] = 17_000d, [4] = true,
         });
         SimpleDragonSourceSystemGoo district = Source(assembly, "SimpleDragonDistrictHeatingComponent", new Dictionary<int, object?>
@@ -224,7 +229,7 @@ public sealed class SimpleDragonHvacComponentContractTests
         var sourceInputs = new Dictionary<int, object?>
         {
             [0] = "Deterministic Heat Pump",
-            [1] = (int)FuelType.Electricity,
+            [1] = nameof(FuelType.Electricity),
             [2] = 3.25d,
             [3] = 4.5d,
             [4] = 12_000d,

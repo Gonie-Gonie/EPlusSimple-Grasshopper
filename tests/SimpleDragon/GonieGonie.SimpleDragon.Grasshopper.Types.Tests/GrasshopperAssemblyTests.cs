@@ -4,6 +4,7 @@ using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
@@ -59,6 +60,14 @@ public sealed class GrasshopperAssemblyTests
         Assert.Contains(new Guid("11336c6a-5bd4-4d6b-80a1-89bd168f8d54"),
             components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("6e242e51-77ce-4f77-8445-a17d636c7310"),
+            components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("e15d7475-e5cf-4e37-81a4-e656c69ee250"),
+            components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("39e2ad8c-8fbb-40bd-84cc-218de37bb720"),
+            components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("2c0bc0e2-df1d-4e42-9b97-d841e8c83214"),
+            components.Select(component => component.ComponentGuid));
+        Assert.DoesNotContain(new Guid("039bf7bb-da65-49e2-80fe-86d636cf0a48"),
             components.Select(component => component.ComponentGuid));
     }
 
@@ -209,6 +218,11 @@ public sealed class GrasshopperAssemblyTests
         Assert.Equal("Bars", bars.Params.Output[0].Name);
         Assert.Equal(GH_ParamAccess.tree, bars.Params.Output[0].Access);
         Assert.Equal(GH_ParamAccess.tree, bars.Params.Output[5].Access);
+        foreach (GH_Component component in new[] { dataTree, line, bars })
+        {
+            Assert.Equal("ChoiceStringParam", component.Params.Input[1].GetType().Name);
+            Assert.Equal("ChoiceStringParam", component.Params.Input[3].GetType().Name);
+        }
     }
 
     [Fact]
@@ -271,8 +285,32 @@ public sealed class GrasshopperAssemblyTests
         InvokeSolve(line, access);
 
         string error = Assert.Single(line.RuntimeMessages(GH_RuntimeMessageLevel.Error));
-        Assert.Contains("Unknown GRR metric", error, StringComparison.Ordinal);
+        Assert.Contains("Metric must be", error, StringComparison.Ordinal);
         Assert.Equal(0, probe.OutputSetCount);
+    }
+
+    [Fact]
+    public void MonthlyDataTreesAppendSeriesToTheCurrentResultPath()
+    {
+        Assembly assembly = LoadPlugin("GonieGonie.SimpleDragon.GH");
+        string fixture = Path.Combine(
+            FindRepositoryRoot(AppContext.BaseDirectory),
+            "fixtures",
+            "simple-dragon",
+            "grr",
+            "ASHRAE 140 modified.grr");
+        var result = new GreenRetrofitResultGoo(GrrReader.ReadFile(fixture).RequireResult());
+        var targetPath = new GH_Path(4, 2);
+
+        GH_Component dataTree = Component(assembly, "GreenRetrofitDataTreeComponent");
+        MissingResultDataAccess dataTreeProbe = Probe(
+            targetPath,
+            result,
+            includePlotInputs: false);
+        InvokeSolve(dataTree, dataTreeProbe.Access);
+
+        AssertSeriesPaths<GH_Number>(dataTreeProbe.OutputTrees[2], targetPath);
+        AssertSeriesPaths<GH_Number>(dataTreeProbe.OutputTrees[3], targetPath);
     }
 
     [Fact]
@@ -415,7 +453,7 @@ public sealed class GrasshopperAssemblyTests
 
     private static string StringDefault(GH_Component component, int index) =>
         Assert.IsType<GH_String>(Assert.Single(
-            Assert.IsType<Param_String>(component.Params.Input[index]).PersistentData.AllData(true))).Value;
+            Assert.IsAssignableFrom<Param_String>(component.Params.Input[index]).PersistentData.AllData(true))).Value;
 
     private static bool BooleanDefault(GH_Component component, int index) =>
         Assert.IsType<GH_Boolean>(Assert.Single(
@@ -435,6 +473,40 @@ public sealed class GrasshopperAssemblyTests
             "SolveInstance",
             BindingFlags.Instance | BindingFlags.NonPublic));
         solve.Invoke(component, new object[] { access });
+    }
+
+    private static MissingResultDataAccess Probe(
+        GH_Path targetPath,
+        GreenRetrofitResultGoo result,
+        bool includePlotInputs)
+    {
+        IGH_DataAccess access = DispatchProxy.Create<IGH_DataAccess, MissingResultDataAccess>();
+        var probe = Assert.IsAssignableFrom<MissingResultDataAccess>(access);
+        probe.Access = access;
+        probe.TargetPath = targetPath;
+        probe.Inputs.Add(0, result);
+        probe.Inputs.Add(1, "SiteUses");
+        probe.Inputs.Add(2, false);
+        probe.Inputs.Add(3, "Fuel");
+        if (includePlotInputs)
+        {
+            probe.Inputs.Add(4, Plane.WorldXY);
+            probe.Inputs.Add(5, 12d);
+            probe.Inputs.Add(6, 6d);
+        }
+
+        return probe;
+    }
+
+    private static void AssertSeriesPaths<T>(object value, GH_Path targetPath)
+        where T : IGH_Goo
+    {
+        GH_Structure<T> tree = Assert.IsType<GH_Structure<T>>(value);
+        Assert.NotEmpty(tree.Paths);
+        for (int index = 0; index < tree.PathCount; index++)
+        {
+            Assert.Equal(targetPath.AppendElement(index), tree.Paths[index]);
+        }
     }
 
     private static GH_Component Component(Assembly assembly, string typeName)
@@ -481,7 +553,13 @@ public sealed class GrasshopperAssemblyTests
         Justification = "DispatchProxy creates a runtime subclass of this probe.")]
     private class MissingResultDataAccess : DispatchProxy
     {
+        internal IGH_DataAccess Access { get; set; } = null!;
+
         internal Dictionary<int, object?> Inputs { get; } = new();
+
+        internal Dictionary<int, object> OutputTrees { get; } = new();
+
+        internal GH_Path TargetPath { get; set; } = new(0);
 
         internal int OutputSetCount { get; private set; }
 
@@ -494,6 +572,21 @@ public sealed class GrasshopperAssemblyTests
                 && Inputs.TryGetValue(inputIndex, out object? inputValue))
             {
                 args[1] = inputValue;
+                return true;
+            }
+
+            if (string.Equals(targetMethod.Name, "ParameterTargetPath", StringComparison.Ordinal))
+            {
+                return TargetPath;
+            }
+
+            if (string.Equals(targetMethod.Name, "SetDataTree", StringComparison.Ordinal)
+                && args is { Length: 2 }
+                && args[0] is int outputIndex
+                && args[1] is not null)
+            {
+                OutputTrees[outputIndex] = args[1]!;
+                OutputSetCount++;
                 return true;
             }
 

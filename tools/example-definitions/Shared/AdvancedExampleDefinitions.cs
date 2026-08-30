@@ -16,6 +16,8 @@ internal static class AdvancedExampleDefinitions
     private const string SimpleProduct = "SimpleDragon";
     private const string TwoZoneModel = "30-two-zone-office.3dm";
     private static readonly string[] CsvLineSeparators = { "\r\n", "\n", "\r" };
+    private static readonly string[] SurfaceBoundaryChoices = { "Outdoors", "Ground", "Adiabatic" };
+    private static readonly string[] InvisiblePlainWallNames = { "North Wall", "West Wall", "East Wall" };
 
     private static readonly AdvancedDefinition[] Definitions =
     {
@@ -234,28 +236,56 @@ internal static class AdvancedExampleDefinitions
             new[] { new Point3d(0, 0, 0), new Point3d(0, 0, 3), new Point3d(0, 6, 3), new Point3d(0, 6, 0) },
             new[] { new Point3d(8, 0, 0), new Point3d(8, 6, 0), new Point3d(8, 6, 3), new Point3d(8, 0, 3) },
         };
-        string[] names = { "Floor", "Roof", "South Wall", "North Wall", "West Wall", "East Wall" };
-        GraphNode[] curves = new GraphNode[6];
-        GraphNode[] surfaces = new GraphNode[6];
-        GraphNode[] namePanels = new GraphNode[6];
-        for (int index = 0; index < 6; index++)
-        {
-            curves[index] = graph.Curves(10 + index, names[index] + " boundary", new[] { ClosedCurve(polygons[index]) }, 80, 390 + (index * 120));
-            surfaces[index] = graph.Component(20 + index, Catalog.InvisibleSurface, 650, 350 + (index * 130));
-            namePanels[index] = graph.Panel(30 + index, names[index] + " name", names[index], 360, 350 + (index * 130));
-            graph.Connect(curves[index], null, surfaces[index], 0);
-            graph.Connect(namePanels[index], null, surfaces[index], 1);
-            graph.Connect(construction, 0, surfaces[index], 3);
-            graph.ExpectOutput(surfaces[index], 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
-        }
+        GraphNode floorCurve = graph.Curves(10, "Floor boundary", new[] { ClosedCurve(polygons[0]) }, 80, 390);
+        GraphNode ceilingCurve = graph.Curves(11, "Ceiling boundary", new[] { ClosedCurve(polygons[1]) }, 80, 540);
+        GraphNode plainWallCurves = graph.Curves(
+            12,
+            "Plain walls (list)",
+            new[] { ClosedCurve(polygons[3]), ClosedCurve(polygons[4]), ClosedCurve(polygons[5]) },
+            80,
+            690);
+        GraphNode southWallCurve = graph.Curves(13, "South wall boundary", new[] { ClosedCurve(polygons[2]) }, 80, 840);
+        GraphNode floorName = graph.Panel(30, "Floor name", "Floor", 360, 390);
+        GraphNode ceilingName = graph.Panel(31, "Ceiling name", "Roof", 360, 540);
+        GraphNode plainWallNames = graph.Strings(
+            32,
+            "Plain wall names (list)",
+            InvisiblePlainWallNames,
+            360,
+            690);
+        GraphNode southWallName = graph.Panel(33, "South wall name", "South Wall", 360, 840);
+        GraphNode groundBoundary = graph.ValueList(
+            40,
+            "Floor boundary",
+            SurfaceBoundaryChoices,
+            "Ground",
+            480,
+            470);
+        GraphNode floor = graph.Component(20, Catalog.InvisibleFloor, 650, 370);
+        GraphNode ceiling = graph.Component(21, Catalog.InvisibleCeiling, 650, 520);
+        GraphNode plainWalls = graph.Component(22, Catalog.InvisibleWall, 650, 670);
+        GraphNode southWall = graph.Component(23, Catalog.InvisibleWall, 650, 820);
+        GraphNode[] curves = { floorCurve, ceilingCurve, plainWallCurves, southWallCurve };
+        GraphNode[] surfaces = { floor, ceiling, plainWalls, southWall };
 
-        GraphNode floorType = graph.Panel(40, "Floor type", "Floor", 470, 980);
-        GraphNode ceilingType = graph.Panel(41, "Ceiling type", "Ceiling", 470, 1070);
-        GraphNode groundBoundary = graph.Panel(42, "Ground boundary", "Ground", 470, 1160);
-        graph.Connect(floorType, null, surfaces[0], 2);
-        graph.Connect(groundBoundary, null, surfaces[0], 4);
-        graph.Connect(ceilingType, null, surfaces[1], 2);
-        graph.Connect(window, 0, surfaces[2], 5);
+        graph.Connect(floorCurve, null, floor, 0);
+        graph.Connect(floorName, null, floor, 1);
+        graph.Connect(construction, 0, floor, 2);
+        graph.Connect(groundBoundary, null, floor, 3);
+        graph.Connect(ceilingCurve, null, ceiling, 0);
+        graph.Connect(ceilingName, null, ceiling, 1);
+        graph.Connect(construction, 0, ceiling, 2);
+        graph.Connect(plainWallCurves, null, plainWalls, 0);
+        graph.Connect(plainWallNames, null, plainWalls, 1);
+        graph.Connect(construction, 0, plainWalls, 2);
+        graph.Connect(southWallCurve, null, southWall, 0);
+        graph.Connect(southWallName, null, southWall, 1);
+        graph.Connect(construction, 0, southWall, 2);
+        graph.Connect(window, 0, southWall, 4);
+        graph.ExpectOutput(floor, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
+        graph.ExpectOutput(ceiling, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
+        graph.ExpectOutput(plainWalls, 0, 3, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
+        graph.ExpectOutput(southWall, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
 
         GraphNode zone = graph.Component(50, Catalog.InvisibleZone, 980, 560);
         foreach (GraphNode surface in surfaces)
@@ -682,60 +712,90 @@ internal static class AdvancedExampleDefinitions
             .Where(item => string.Equals(item.ZoneName, zoneName, StringComparison.Ordinal))
             .ToArray();
         Require(definitions.Length == 6, zoneName + " must provide exactly six named Surface Breps.");
-        var surfaces = new GraphNode[definitions.Length];
-        var faceParameters = new GraphNode[definitions.Length];
-        int openingConnections = 0;
-        for (int index = 0; index < definitions.Length; index++)
-        {
-            ExampleSurfaceGeometry definition = definitions[index];
-            int key = keyBase + (index * 5);
-            float y = yStart + (index * 180);
-            GraphNode face = graph.Breps(key, definition.Name, new[] { definition.Geometry }, 60, y);
-            GraphNode name = graph.Panel(key + 1, definition.Name + " name", definition.Name, 270, y);
-            GraphNode type = graph.Integers(
-                key + 2,
-                definition.Name + " type: " + definition.Type,
-                new[] { (int)definition.Type },
-                270,
-                y + 60);
-            GraphNode boundary = graph.Integers(
-                key + 3,
-                definition.Name + " boundary",
-                new[] { SimpleBoundaryValue(definition.BoundaryIntent) },
-                430,
-                y + 60);
-            GraphNode surface = graph.Component(key + 4, Catalog.SimpleSurface, 930, y + 10);
-            graph.Connect(face, null, surface, 0);
-            graph.Connect(name, null, surface, 1);
-            graph.Connect(type, null, surface, 2);
-            graph.Connect(construction, 0, surface, 3);
-            graph.Connect(boundary, null, surface, 4);
-            if (definition.Name.EndsWith("_SOUTH", StringComparison.Ordinal))
-            {
-                graph.Connect(opening, 0, surface, 5);
-                openingConnections++;
-            }
+        ExampleSurfaceGeometry floorDefinition = definitions.Single(item => item.Type == ExampleSurfaceType.Floor);
+        ExampleSurfaceGeometry ceilingDefinition = definitions.Single(item => item.Type == ExampleSurfaceType.Ceiling);
+        ExampleSurfaceGeometry southWallDefinition = definitions.Single(item =>
+            item.Type == ExampleSurfaceType.Wall
+            && item.Name.EndsWith("_SOUTH", StringComparison.Ordinal));
+        ExampleSurfaceGeometry[] plainWallDefinitions = definitions
+            .Where(item => item.Type == ExampleSurfaceType.Wall && !ReferenceEquals(item, southWallDefinition))
+            .ToArray();
+        Require(plainWallDefinitions.Length == 3, zoneName + " must provide exactly three opening-free Wall Breps.");
+        Require(
+            string.Equals(floorDefinition.BoundaryIntent, "Ground", StringComparison.Ordinal),
+            zoneName + " example Floor must use the Ground boundary selector.");
 
-            faceParameters[index] = face;
-            surfaces[index] = surface;
-        }
+        GraphNode floorFace = graph.Breps(keyBase, floorDefinition.Name, new[] { floorDefinition.Geometry }, 60, yStart);
+        GraphNode floorName = graph.Panel(keyBase + 1, floorDefinition.Name + " name", floorDefinition.Name, 300, yStart);
+        GraphNode floorBoundary = graph.ValueList(
+            keyBase + 2,
+            floorDefinition.Name + " boundary",
+            SurfaceBoundaryChoices,
+            "Ground",
+            530,
+            yStart + 60);
+        GraphNode floor = graph.Component(keyBase + 3, Catalog.SimpleFloor, 930, yStart + 10);
 
-        Require(openingConnections == 1, zoneName + " opening must feed exactly one south Surface.");
-        return (surfaces, faceParameters);
-    }
+        GraphNode ceilingFace = graph.Breps(
+            keyBase + 10,
+            ceilingDefinition.Name,
+            new[] { ceilingDefinition.Geometry },
+            60,
+            yStart + 220);
+        GraphNode ceilingName = graph.Panel(
+            keyBase + 11,
+            ceilingDefinition.Name + " name",
+            ceilingDefinition.Name,
+            300,
+            yStart + 220);
+        GraphNode ceiling = graph.Component(keyBase + 13, Catalog.SimpleCeiling, 930, yStart + 230);
 
-    private static int SimpleBoundaryValue(string boundaryIntent)
-    {
-        return boundaryIntent switch
-        {
-            "Outdoors" => 0,
-            "Ground" => 1,
-            "Adiabatic" => 3,
-            _ => throw new ArgumentOutOfRangeException(
-                nameof(boundaryIntent),
-                boundaryIntent,
-                "A SimpleDragon Surface example must use Outdoors, Ground, or Adiabatic."),
-        };
+        GraphNode plainWallFaces = graph.Breps(
+            keyBase + 20,
+            zoneName + " plain walls (list)",
+            plainWallDefinitions.Select(item => item.Geometry),
+            60,
+            yStart + 440);
+        GraphNode plainWallNames = graph.Strings(
+            keyBase + 21,
+            zoneName + " plain wall names (list)",
+            plainWallDefinitions.Select(item => item.Name),
+            300,
+            yStart + 440);
+        GraphNode plainWalls = graph.Component(keyBase + 23, Catalog.SimpleWall, 930, yStart + 450);
+
+        GraphNode southWallFace = graph.Breps(
+            keyBase + 30,
+            southWallDefinition.Name,
+            new[] { southWallDefinition.Geometry },
+            60,
+            yStart + 660);
+        GraphNode southWallName = graph.Panel(
+            keyBase + 31,
+            southWallDefinition.Name + " name",
+            southWallDefinition.Name,
+            300,
+            yStart + 660);
+        GraphNode southWall = graph.Component(keyBase + 33, Catalog.SimpleWall, 930, yStart + 670);
+
+        graph.Connect(floorFace, null, floor, 0);
+        graph.Connect(floorName, null, floor, 1);
+        graph.Connect(construction, 0, floor, 2);
+        graph.Connect(floorBoundary, null, floor, 3);
+        graph.Connect(ceilingFace, null, ceiling, 0);
+        graph.Connect(ceilingName, null, ceiling, 1);
+        graph.Connect(construction, 0, ceiling, 2);
+        graph.Connect(plainWallFaces, null, plainWalls, 0);
+        graph.Connect(plainWallNames, null, plainWalls, 1);
+        graph.Connect(construction, 0, plainWalls, 2);
+        graph.Connect(southWallFace, null, southWall, 0);
+        graph.Connect(southWallName, null, southWall, 1);
+        graph.Connect(construction, 0, southWall, 2);
+        graph.Connect(opening, 0, southWall, 4);
+
+        return (
+            new[] { floor, ceiling, plainWalls, southWall },
+            new[] { floorFace, ceilingFace, plainWallFaces, southWallFace });
     }
 
     private static ScenarioGraph BuildSimpleResultsAndPlots(GH_ComponentServer server)
@@ -1973,29 +2033,33 @@ internal static class AdvancedExampleDefinitions
         foreach (Guid curveParameterGuid in expectation.CurveParameterGuids)
         {
             Param_Curve parameter = RequireObject<Param_Curve>(document, curveParameterGuid);
-            GH_Curve goo = parameter.VolatileData.AllData(true).OfType<GH_Curve>().Single();
-            Curve curve = goo.Value
-                ?? throw new InvalidOperationException(curveParameterGuid + " contains an empty curve.");
-            Require(curve.TryGetPolyline(out Polyline polyline), curveParameterGuid + " must remain a polyline.");
-            int vertexCount = polyline.IsClosed ? polyline.Count - 1 : polyline.Count;
-            Require(vertexCount >= 3, curveParameterGuid + " has fewer than three polygon vertices.");
-            var normal = new Vector3d();
-            for (int index = 0; index < vertexCount; index++)
+            GH_Curve[] values = parameter.VolatileData.AllData(true).OfType<GH_Curve>().ToArray();
+            Require(values.Length > 0, curveParameterGuid + " contains no curve.");
+            foreach (GH_Curve goo in values)
             {
-                Point3d current = polyline[index];
-                Point3d next = polyline[(index + 1) % vertexCount];
-                normal.X += (current.Y - next.Y) * (current.Z + next.Z);
-                normal.Y += (current.Z - next.Z) * (current.X + next.X);
-                normal.Z += (current.X - next.X) * (current.Y + next.Y);
-            }
+                Curve curve = goo.Value
+                    ?? throw new InvalidOperationException(curveParameterGuid + " contains an empty curve.");
+                Require(curve.TryGetPolyline(out Polyline polyline), curveParameterGuid + " must remain a polyline.");
+                int vertexCount = polyline.IsClosed ? polyline.Count - 1 : polyline.Count;
+                Require(vertexCount >= 3, curveParameterGuid + " has fewer than three polygon vertices.");
+                var normal = new Vector3d();
+                for (int index = 0; index < vertexCount; index++)
+                {
+                    Point3d current = polyline[index];
+                    Point3d next = polyline[(index + 1) % vertexCount];
+                    normal.X += (current.Y - next.Y) * (current.Z + next.Z);
+                    normal.Y += (current.Z - next.Z) * (current.X + next.X);
+                    normal.Z += (current.X - next.X) * (current.Y + next.Y);
+                }
 
-            Require(normal.Unitize(), curveParameterGuid + " has a degenerate polygon normal.");
-            using AreaMassProperties properties = AreaMassProperties.Compute(curve)
-                ?? throw new InvalidOperationException(curveParameterGuid + " has no planar area centroid.");
-            Vector3d fromZoneCentroid = properties.Centroid - expectation.ZoneCentroid;
-            Require(
-                Vector3d.Multiply(normal, fromZoneCentroid) > 1e-8,
-                curveParameterGuid + " points inward relative to the zone centroid.");
+                Require(normal.Unitize(), curveParameterGuid + " has a degenerate polygon normal.");
+                using AreaMassProperties properties = AreaMassProperties.Compute(curve)
+                    ?? throw new InvalidOperationException(curveParameterGuid + " has no planar area centroid.");
+                Vector3d fromZoneCentroid = properties.Centroid - expectation.ZoneCentroid;
+                Require(
+                    Vector3d.Multiply(normal, fromZoneCentroid) > 1e-8,
+                    curveParameterGuid + " points inward relative to the zone centroid.");
+            }
         }
     }
 
@@ -2193,7 +2257,9 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity InvisibleGlazing = I("ecfd5cdd-3e4c-4261-8ddd-ecea8eaf5599", "GlazingComponent");
         internal static readonly ComponentIdentity InvisibleWindow = I("54bb0065-1b10-420c-a90e-0ce75e746781", "WindowFromPolylineComponent");
         internal static readonly ComponentIdentity InvisibleDoor = I("b2e1e805-a126-44fe-bf6c-4dbf16a76aae", "DoorFromPolylineComponent");
-        internal static readonly ComponentIdentity InvisibleSurface = I("c25eb6d8-9500-44e5-9909-58d41de0a320", "SurfaceComponent");
+        internal static readonly ComponentIdentity InvisibleFloor = I("1938b273-3a60-459b-beb2-92e7c4905053", "FloorComponent");
+        internal static readonly ComponentIdentity InvisibleCeiling = I("d1930bb6-4398-46b9-a661-451370f09103", "CeilingComponent");
+        internal static readonly ComponentIdentity InvisibleWall = I("20a8a2f5-845e-4a46-aa03-fb8849f592e2", "WallComponent");
         internal static readonly ComponentIdentity InvisibleZone = I("21ece4e9-87dd-4f34-9b95-8bc87fb0bfd2", "ZoneComponent");
         internal static readonly ComponentIdentity InvisibleHeatPump = I("e8751fda-24b9-4727-ad66-f81de722f64f", "HeatPumpComponent");
         internal static readonly ComponentIdentity InvisibleAirHandler = I("a3a4afd8-17e1-4d9f-8da5-5883331c360f", "AirHandlingUnitComponent");
@@ -2221,7 +2287,9 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity SimpleErv = S("15afd6e6-1c05-4715-909b-b6e98ef91375", "SimpleDragonEnergyRecoveryVentilatorComponent");
         internal static readonly ComponentIdentity SimplePv = S("7fcb5c47-3d49-4aa0-8fbc-bd765711401f", "SimpleDragonPhotovoltaicPanelComponent");
         internal static readonly ComponentIdentity SimpleOpening = S("7d41fd2c-b93f-4fc8-88ea-db1f3abeb2f1", "CreateSimpleDragonOpeningComponent");
-        internal static readonly ComponentIdentity SimpleSurface = S("039bf7bb-da65-49e2-80fe-86d636cf0a48", "CreateSimpleDragonSurfaceComponent");
+        internal static readonly ComponentIdentity SimpleFloor = S("e15d7475-e5cf-4e37-81a4-e656c69ee250", "CreateSimpleDragonFloorComponent");
+        internal static readonly ComponentIdentity SimpleCeiling = S("39e2ad8c-8fbb-40bd-84cc-218de37bb720", "CreateSimpleDragonCeilingComponent");
+        internal static readonly ComponentIdentity SimpleWall = S("2c0bc0e2-df1d-4e42-9b97-d841e8c83214", "CreateSimpleDragonWallComponent");
         internal static readonly ComponentIdentity SimpleZone = S("30b8e2c4-207a-4cf5-9801-ac4ae16d33e2", "CreateSimpleDragonZoneComponent");
         internal static readonly ComponentIdentity SimpleModel = S("ce38124b-f99b-4d09-be3b-e5e5717db707", "CreateSimpleDragonModelComponent");
         internal static readonly ComponentIdentity SimpleRun = S("6e242e51-77ce-4f77-8445-a17d636c7310", "RunSimpleDragonComponent");
@@ -2236,13 +2304,13 @@ internal static class AdvancedExampleDefinitions
         internal static IReadOnlyList<ComponentIdentity> All { get; } = new[]
         {
             InvisibleMaterial, InvisibleLayer, InvisibleConstruction, InvisibleNoMass, InvisibleProfile,
-            InvisibleGlazing, InvisibleWindow, InvisibleDoor, InvisibleSurface,
+            InvisibleGlazing, InvisibleWindow, InvisibleDoor, InvisibleFloor, InvisibleCeiling, InvisibleWall,
             InvisibleZone, InvisibleHeatPump, InvisibleAirHandler, InvisibleBoiler, InvisibleRadiantFloor,
             InvisibleErv, InvisiblePv, InvisibleModel, InvisibleCompile,
             InvisibleWeather, InvisibleManagedRun, InvisibleResultSummary,
             SimpleMaterial, SimpleLayer, SimpleConstruction, SimpleFenestration, SimpleProfile, SimpleHeatPump,
             SimpleAirHandler, SimpleBoiler, SimpleRadiator, SimpleElectricRadiator, SimpleChiller, SimpleFanCoil, SimpleErv,
-            SimplePv, SimpleOpening, SimpleSurface, SimpleZone, SimpleModel, SimpleRun,
+            SimplePv, SimpleOpening, SimpleFloor, SimpleCeiling, SimpleWall, SimpleZone, SimpleModel, SimpleRun,
             SimpleReadResult, SimpleResultSummary, SimpleDataTree,
             SimpleLinePlot, SimpleBarPlot, SimpleExportCsv, SimpleBatchCase, SimpleManagedBatch,
         };
@@ -2355,15 +2423,51 @@ internal sealed class ScenarioGraphBuilder
         return AddSpecial(key, parameter, x, y);
     }
 
-    internal GraphNode Integers(int key, string nickName, IEnumerable<int> values, float x, float y)
+    internal GraphNode Strings(int key, string nickName, IEnumerable<string> values, float x, float y)
     {
-        var parameter = new Param_Integer { NickName = nickName };
-        foreach (int value in values)
+        var parameter = new Param_String { NickName = nickName };
+        foreach (string value in values)
         {
-            parameter.PersistentData.Append(new GH_Integer(value));
+            parameter.PersistentData.Append(new GH_String(value));
         }
 
         return AddSpecial(key, parameter, x, y);
+    }
+
+    internal GraphNode ValueList(
+        int key,
+        string nickName,
+        IEnumerable<string> values,
+        string selectedValue,
+        float x,
+        float y)
+    {
+        var valueList = new GH_ValueList
+        {
+            NickName = nickName,
+            ListMode = GH_ValueListMode.DropDown,
+        };
+        valueList.ListItems.Clear();
+        bool selected = false;
+        foreach (string value in values)
+        {
+            var item = new GH_ValueListItem(value, "\"" + value.Replace("\"", "\\\"") + "\"")
+            {
+                Selected = string.Equals(value, selectedValue, StringComparison.Ordinal),
+            };
+            selected |= item.Selected;
+            valueList.ListItems.Add(item);
+        }
+
+        if (!selected)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(selectedValue),
+                selectedValue,
+                "The selected Value List item must be one of the supplied choices.");
+        }
+
+        return AddSpecial(key, valueList, x, y);
     }
 
     internal GraphNode Boolean(int key, string nickName, bool value, float x, float y)

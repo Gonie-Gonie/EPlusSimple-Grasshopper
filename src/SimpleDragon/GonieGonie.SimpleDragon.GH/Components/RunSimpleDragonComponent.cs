@@ -50,6 +50,7 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
     private string? _lastRunKey;
     private string _state = "Idle";
     private bool _removed;
+    private bool _rejectMultipleInputItems;
     private readonly SolutionScheduleGate _solutionScheduleGate = new();
 
     public RunSimpleDragonComponent()
@@ -125,6 +126,20 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
             GH_ParamAccess.list);
     }
 
+    protected override void BeforeSolveInstance()
+    {
+        base.BeforeSolveInstance();
+        _rejectMultipleInputItems = Params.Input.Any(
+            parameter => parameter.VolatileData.DataCount > 1);
+        if (_rejectMultipleInputItems)
+        {
+            AddRuntimeMessage(
+                GH_RuntimeMessageLevel.Error,
+                "Run SimpleDragon accepts one data-matched input set per component. "
+                + "Use Batch Case and Managed Run SimpleDragon Batch for model lists or trees.");
+        }
+    }
+
     public override void AddedToDocument(GH_Document document)
     {
         base.AddedToDocument(document);
@@ -160,6 +175,11 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
         if (triggers.Cancel)
         {
             CancelActiveRun();
+        }
+
+        if (_rejectMultipleInputItems)
+        {
+            return;
         }
 
         GreenRetrofitModelGoo? modelGoo = null;

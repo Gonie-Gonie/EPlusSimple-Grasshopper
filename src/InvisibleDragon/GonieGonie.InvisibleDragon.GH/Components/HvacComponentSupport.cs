@@ -7,22 +7,6 @@ namespace GonieGonie.InvisibleDragon.Grasshopper.Components;
 
 internal static class HvacComponentSupport
 {
-    internal static TEnum EnumValue<TEnum>(int value, string inputName)
-        where TEnum : struct
-    {
-        if (!typeof(TEnum).IsEnum || !Enum.IsDefined(typeof(TEnum), value))
-        {
-            string choices = string.Join(
-                ", ",
-                Enum.GetNames(typeof(TEnum)));
-            throw new ArgumentException(
-                $"{inputName} value '{value}' is invalid. Choose one of: {choices}.",
-                inputName);
-        }
-
-        return (TEnum)Enum.ToObject(typeof(TEnum), value);
-    }
-
     internal static double? OptionalPositive(double value, string inputName)
     {
         if (double.IsNaN(value) || double.IsInfinity(value) || value < 0)

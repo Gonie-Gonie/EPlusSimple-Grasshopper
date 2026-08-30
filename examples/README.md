@@ -9,12 +9,12 @@ Surface Breps and window curves that can be referenced directly from Grasshopper
 | --- | --- |
 | `00-invisibledragon-material-construction.gh` | Minimal InvisibleDragon Material -> Construction Layer -> Construction -> U-value graph |
 | `01-invisibledragon-envelope-profile.gh` | Three-layer envelope, no-mass construction, constant annual profile, and typed output previews |
-| `02-invisibledragon-single-zone-hvac-idf.gh` | Window→Surface→Zone and HVAC/ERV→Zone ownership, PV, `ID Model -> Compile -> Run`, and the deliberate `EPW File -> ID Weather -> Run` standalone boundary |
+| `02-invisibledragon-single-zone-hvac-idf.gh` | Window -> opening-bearing Wall, list-authored plain Walls, explicit Floor/Ceiling/Wall -> Zone and HVAC/ERV -> Zone ownership, PV, `ID Model -> Compile -> Run`, and the deliberate `EPW File -> ID Weather -> Run` standalone boundary |
 | `10-simpledragon-material-construction.gh` | Minimal SimpleDragon Material -> Construction Layer -> Surface Construction graph |
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
-| `12-simpledragon-two-zone-model.gh` | Complex two-Zone model authoring: Fenestration Construction -> Opening -> local Surface, six Surfaces -> each Zone, west heat-pump/AHU, east boiler/radiator, dedicated ERVs, PV, then one complete GRM with JSON, provenance, and area previews |
+| `12-simpledragon-two-zone-model.gh` | Complex two-Zone model authoring: explicit Floor/Ceiling/Wall components, opening-free Walls authored as a list, each opening-bearing Wall kept separate, one owned Surface branch per Zone, west heat-pump/AHU, east boiler/radiator, dedicated ERVs, PV, then one complete GRM with JSON, provenance, and area previews |
 | `13-simpledragon-results-and-plots.gh` | Real GRR read, annual summary, monthly DataTree, line plot, bar plot, and non-writing CSV preview |
-| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: explicit Surface ownership, dedicated electric radiators and ERVs connect to their own Zones, the complete model feeds `Run SimpleDragon` directly, and GRR feeds a zero-configuration monthly graph, summaries, and CSV; a typed Batch Case feeds managed batch with its identity derived internally |
+| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: explicit Floor/Ceiling/Wall ownership with plain-wall lists and separate opening hosts, dedicated electric radiators and ERVs connect to their own Zones, the complete model feeds `Run SimpleDragon` directly, and GRR feeds a zero-configuration monthly graph, summaries, and CSV; a typed Batch Case feeds managed batch with its identity derived internally |
 | `30-two-zone-office.3dm` | Twelve named planar Surface Breps forming two adjacent office Zones, plus two named south-window curves |
 | `31-three-zone-stepped-office.3dm` | Eighteen named planar Surface Breps forming two adjacent ground-floor Zones and an adjacent upper Zone, plus three named windows |
 
@@ -49,7 +49,7 @@ SimpleDragon canvas.
 
 Neither Dragon authoring graph asks for entity or relationship IDs. The modules
 derive them deterministically from the authored content, while typed wires carry
-Opening, Surface, Zone, HVAC, ERV, PV, and model relationships. Example 14 also
+Opening, Floor/Ceiling/Wall Surface, Zone, HVAC, ERV, PV, and model relationships. Example 14 also
 derives its CSV and batch case identities from the connected GRM.
 Component labels such as `ID Model` use `ID` as the InvisibleDragon prefix, not
 as an identifier port.
@@ -81,16 +81,24 @@ Surface and opening geometry in `30-two-zone-office.3dm`, so it runs immediately
 and remains portable. To use live document references instead:
 
 1. Open `30-two-zone-office.3dm` in Rhino.
-2. For each Grasshopper Brep parameter ending in `_FLOOR`, `_CEILING`,
-   `_SOUTH`, `_NORTH`, `_WEST`, or `_EAST`, set it to the same-named Rhino
-   single-face Brep. Each parameter feeds exactly one `SD Surface`; no face list
-   or positional selection is involved.
-3. Set `WINDOW_ZONE_01_SOUTH` and `WINDOW_ZONE_02_SOUTH` to their same-named
+2. Relink each `_FLOOR`, `_CEILING`, and opening-bearing `_SOUTH` Brep
+   parameter to the same-named Rhino single-face Brep.
+3. For each `plain walls (list)` Brep parameter, use **Set Multiple Breps** and
+   select that Zone's `_NORTH`, `_WEST`, and `_EAST` objects. The item-access
+   Face input on `SD Wall` vectorizes this list and preserves its branch path.
+4. Set `WINDOW_ZONE_01_SOUTH` and `WINDOW_ZONE_02_SOUTH` to their same-named
    Rhino curves.
-4. Keep each curve wired through `SD Opening` to the matching `_SOUTH`
-   `SD Surface`, and keep the six completed Surfaces wired to their local Zone.
-   Construction and Boundary Intent belong to Surface; Height, Profile, HVAC,
-   and ERV belong to Zone. There are no zone-index or face-index panels.
+5. Keep each curve wired through `SD Opening` to the separate matching `_SOUTH`
+   `SD Wall`. Combine the completed `SD Floor`, `SD Ceiling`, opening-free `SD
+   Wall` list, and opening-bearing `SD Wall` into that Zone's Surfaces branch.
+   `SD Zone` consumes each branch as one owned Surface list. Construction and
+   the named Boundary Condition choice belong to Floor/Ceiling/Wall; their Type
+   is fixed by the component, not an integer input. Height, Profile, HVAC, and
+   ERV belong to Zone. There are no zone-index or face-index panels.
+
+Keep an opening-bearing Wall outside the plain-wall list unless you deliberately
+build matching tree paths. The Openings input is branch-local; mixing the host
+with unrelated faces can broadcast the same Opening list to those faces.
 
 The Rhino objects are on `DRAGON_SURFACES` and `DRAGON_OPENINGS`. Surface
 attributes carry `DragonRole=ThermalSurface`, `ZoneName`, `SurfaceType`, and
@@ -131,7 +139,7 @@ and round trip; the automated gate does not invent a standalone weather path.
 
 When the verified distribution payloads and EnergyPlus runtime are available,
 the gate temporarily enables example 14 in memory and verifies internal
-packaged-weather selection, its Surface-to-Zone electric-radiator model, direct
+packaged-weather selection, its Floor/Ceiling/Wall-to-Zone electric-radiator model, direct
 SimpleDragon Run-to-GRR execution, the default monthly graph, CSV, cache, and cancellation in both hosts. The saved trigger
 values remain `False`. Use
 `-SkipEnergyPlusWorkflow` to test the explicit disabled state or
@@ -153,10 +161,11 @@ successful simulation.
 - Use Read GRM with `fixtures\simple-dragon\grm\ASHRAE 140 modified.grm`, then
   connect the typed model directly to `Run SimpleDragon` to simulate an existing model.
 - Wrap each model in a SimpleDragon Batch Case; its deterministic case identity
-  is derived from the GRM. Feed
-  the Cases list into Managed Run SimpleDragon Batch, set a parallel limit, and
-  use only the Run/Cancel triggers. Runtime, weather, case temp, and result
-  storage paths are managed internally.
+  is derived from the GRM. Feed the Cases list or tree into Managed Run
+  SimpleDragon Batch, set a parallel limit, and use only the Run/Cancel
+  triggers. The complete tree is one batch, and Case IDs/Statuses preserve its
+  paths. Runtime, weather, case temp, and result storage paths are managed
+  internally.
 
 See [the workflow guide](../docs/grasshopper-workflow.md) for units, optional
 inputs, triggers, and persistence rules.

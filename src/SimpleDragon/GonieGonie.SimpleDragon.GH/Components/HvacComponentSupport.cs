@@ -1,7 +1,6 @@
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
 using Grasshopper.Kernel;
-using Grasshopper.Kernel.Parameters;
 
 namespace GonieGonie.SimpleDragon.Grasshopper.Components;
 
@@ -17,19 +16,12 @@ public abstract class SimpleDragonHvacComponent : SimpleDragonComponent
         string description,
         FuelType defaultValue)
     {
-        int index = manager.AddIntegerParameter(
+        return ChoiceInputs.AddEnum(
+            manager,
             "Fuel",
             "Fuel",
-            description + " Named values: Electricity, Natural Gas, LPG, Oil, District Heating.",
-            GH_ParamAccess.item,
-            (int)defaultValue);
-        var parameter = (Param_Integer)manager[index];
-        parameter.AddNamedValue("Electricity", (int)FuelType.Electricity);
-        parameter.AddNamedValue("Natural Gas", (int)FuelType.NaturalGas);
-        parameter.AddNamedValue("LPG", (int)FuelType.LiquefiedPetroleumGas);
-        parameter.AddNamedValue("Oil", (int)FuelType.Oil);
-        parameter.AddNamedValue("District Heating", (int)FuelType.DistrictHeating);
-        return index;
+            description,
+            defaultValue);
     }
 
     protected static int AddEnumParameter<TEnum>(
@@ -40,38 +32,18 @@ public abstract class SimpleDragonHvacComponent : SimpleDragonComponent
         TEnum defaultValue)
         where TEnum : struct, Enum
     {
-        int index = manager.AddIntegerParameter(
+        return ChoiceInputs.AddEnum(
+            manager,
             name,
             nickname,
             description,
-            GH_ParamAccess.item,
-            Convert.ToInt32(defaultValue, System.Globalization.CultureInfo.InvariantCulture));
-        var parameter = (Param_Integer)manager[index];
-        foreach (TEnum value in Enum.GetValues(typeof(TEnum)))
-        {
-            parameter.AddNamedValue(
-                Enum.GetName(typeof(TEnum), value) ?? value.ToString(),
-                Convert.ToInt32(value, System.Globalization.CultureInfo.InvariantCulture));
-        }
-
-        return index;
+            defaultValue);
     }
 
-    protected static TEnum EnumValue<TEnum>(int value, string inputName)
+    protected static TEnum EnumValue<TEnum>(string value, string inputName)
         where TEnum : struct, Enum
     {
-        if (Enum.IsDefined(typeof(TEnum), value))
-        {
-            return (TEnum)Enum.ToObject(typeof(TEnum), value);
-        }
-
-        string allowed = string.Join(
-            ", ",
-            Enum.GetNames(typeof(TEnum)).Select((name, index) => name + "=" + index));
-        throw new ArgumentOutOfRangeException(
-            inputName,
-            value,
-            inputName + " must be one of " + allowed + ".");
+        return ChoiceInputs.ParseEnum<TEnum>(value, inputName);
     }
 
     protected static double? OptionalNumber(IGH_DataAccess access, int index)

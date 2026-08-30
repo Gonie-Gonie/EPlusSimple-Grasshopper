@@ -5,6 +5,8 @@
 - Numeric geometry and HVAC inputs use the SI units shown in each parameter description.
 - Leave an optional numeric input disconnected to preserve `null` or autosize semantics. Zero is a real value.
 - Entity and relationship IDs are generated deterministically inside both Dragon modules; they are not authoring inputs. Express ownership and references by connecting the typed objects instead of passing text IDs.
+- Choose finite categories such as Boundary Condition from the named choices on the input. Integer enum codes are not part of the public authoring workflow.
+- Item-access geometry inputs accept ordinary items, lists, or Data Trees. Grasshopper vectorizes the component and preserves branch paths; ownership-list inputs such as Zone Surfaces consume their values branch by branch.
 - Red runtime messages stop that component's output. Warnings describe a usable result that needs review.
 - Run, Write, Export, and Batch actions require a new False-to-True Boolean edge. A saved True value never starts work when a document opens.
 
@@ -13,28 +15,33 @@
 Build each object where its ownership is visible in the wires:
 
 ```text
-Opening Curve + Fenestration Construction -> SD Opening -> West SD Surface <- Face / Type / Construction / Boundary
-                                                              |
-                                                              +-> West SD Zone <- Height / Profile / HVAC / ERV --+
-
-Opening Curve + Fenestration Construction -> SD Opening -> East SD Surface <- Face / Type / Construction / Boundary
-                                                              |
-                                                              +-> East SD Zone <- Height / Profile / HVAC / ERV --+-> SD Model (Address)
-                                                                                                                       |
-                                                                                                                       v
-                                                                                                              Run SimpleDragon
-                                                                                                                       |
-                                                                                                                       v
-                                                                                                            GRR / Plot / CSV
+Opening Curve + Fenestration Construction -> SD Opening -> SD Wall (opening-bearing face) --+
+Plain wall Brep list -----------------------------------------> SD Wall ---------------------+
+Floor Brep(s) + Construction + Boundary choice --------------> SD Floor --------------------+-> West Surface branch -> West SD Zone --+
+Ceiling Brep(s) + Construction + Boundary choice ------------> SD Ceiling ------------------+                                          |
+                                                                                                                                       +-> SD Model (Address) -> Run SimpleDragon -> GRR / Plot / CSV
+East Floor / Ceiling / Wall outputs -------------------------> East Surface branch -> East SD Zone ------------------------------------+
 ```
 
 `SD Opening` has no Zone Index or Face Index. Its Construction input is required
 and belongs to the Opening. Connect that completed Opening only to its owning
-`SD Surface`. Each Surface owns one planar single-face Brep, its Wall/Ceiling/Floor
-type, opaque Construction, Boundary Intent, Openings, and optional cool-roof
-reflectance. The opening curve must be coplanar with and contained by that face;
-a trimmed inner loop needs a matching explicit Opening rather than guessed
-metadata.
+`SD Wall`, `SD Ceiling`, or `SD Floor`--normally `SD Wall`. There is no generic
+public `SD Surface` authoring component or Type input: the selected component
+fixes the surface type. Each output Surface owns one planar single-face Brep,
+opaque Construction, named Boundary Condition, and its Openings. `SD Ceiling`
+also exposes optional cool-roof reflectance. Floor defaults to Ground; Wall and
+Ceiling default to Outdoors. The opening curve must be coplanar with and
+contained by that face; a trimmed inner loop needs a matching explicit Opening
+rather than guessed metadata.
+
+A Floor, Ceiling, or Wall Face input may receive a list or tree. The component
+creates one typed Surface for each face and preserves its path. Combine the
+completed typed outputs into one Surfaces branch for each enclosure; `SD Zone`
+then creates one Zone from each branch-local owned list. Openings are also a
+branch-local ownership list. A practical graph therefore sends opening-free
+walls through one list while keeping each opening-bearing wall separate, unless
+the tree paths deliberately match openings to hosts. This prevents an Opening
+list from being broadcast to unrelated faces.
 
 Connect the completed Surfaces of one closed thermal enclosure to `SD Zone`.
 The Zone owns only those Surfaces plus its Name, Floor Number, positive Height,
@@ -44,7 +51,7 @@ only to that Zone. Set the ERV's Count input when a Zone has multiple identical
 units; no intermediate assignment component is involved.
 
 `SD Model` resolves every Zone together. Coincident opposite Surfaces with
-`Outdoors` intent in different Zones are promoted to reciprocal Zone boundaries
+the Outdoors Boundary Condition in different Zones are promoted to reciprocal Zone boundaries
 automatically. The Model also derives the material, construction,
 supply, source, and ventilation catalogs from the connected objects, so those
 catalogs need no parallel wires into a later assembly component.
@@ -73,21 +80,27 @@ Low-level authoring uses the same local-ownership rule:
 ```text
 Curve + Glazing -> ID Window --------------------+
                                                     |
-Curve + Construction + owned Openings -> ID Surface -> ID Zone <- Profile / HVAC / ERV
-                                                        |
-                                                        +-> ID Model <- PV
-                                                                 |
-                                                                 v
-                                                        Compile InvisibleDragon -> IDF --+-> Run InvisibleDragon
-                                                                                          ^
-                                                           EPW File -> ID Weather --------+
+Curve + Construction + owned Openings -> ID Wall --+
+Curve + Construction ----------------------> ID Floor --+-> owned Surface branch -> ID Zone <- Profile / HVAC / ERV
+Curve + Construction --------------------> ID Ceiling --+                                |
+                                                                                         +-> ID Model <- PV
+                                                                                                  |
+                                                                                                  v
+                                                                                         Compile InvisibleDragon -> IDF --+-> Run InvisibleDragon
+                                                                                                                           ^
+                                                                                            EPW File -> ID Weather --------+
 ```
 
 Here `ID` is the InvisibleDragon component prefix, not an identifier input.
 
-Connect each Window or Door to its owning Surface, each Surface and system to
-its owning Zone, and only completed Zone definitions to the Model. Coincident,
-opposite-facing Surfaces with `Outdoors` intent in different Zones are paired
+Connect each Window or Door to its owning `ID Wall`, `ID Ceiling`, or `ID
+Floor`; connect the completed typed Surface outputs and systems to their owning
+Zone, and only completed Zone definitions to the Model. The three components
+fix the type and expose a named Boundary Condition choice instead of integer
+Type or Boundary inputs. Floor defaults to Ground; Wall and Ceiling default to
+Outdoors. Their curve inputs also vectorize lists and trees, preserve paths, and
+feed each Zone as a branch-local Surface list. Coincident, opposite-facing
+Surfaces with the Outdoors Boundary Condition in different Zones are paired
 automatically into reciprocal inter-zone boundaries. The Model derives HVAC
 assignments and nested sources from the Zone wires, so there are no Zone
 indices, adjacent-surface IDs, source catalogs, or assignment components on the
@@ -123,6 +136,8 @@ required.
 `Run SimpleDragon` emits the completed GRR directly. Summary, DataTree,
 line-plot, and bar-plot components expose the same ordered month, fuel, and
 end-use data without an InvisibleDragon-result handoff or file round trip.
+Their result trees append series indices to the incoming GRR path instead of
+collapsing separate branches.
 
 For an immediate Rhino preview, connect GRR to `Monthly Lines` or `Monthly
 Bars` and leave every other input alone. The defaults draw SiteUses per area,
@@ -131,12 +146,18 @@ bars. Before Run has produced a GRR, these result components simply wait without
 raising a red error. Metric, grouping, plane, size, and stacking remain optional
 controls for a customized graph.
 
+A direct `Run SimpleDragon` or `Run InvisibleDragon` component owns one
+asynchronous simulation state and therefore accepts one data-matched run. For a
+SimpleDragon model list or tree, use Batch Case and Managed Batch; for separate
+low-level InvisibleDragon simulations, use one Run component per simulation.
+
 GRM/GRR readers, writers, and CSV export intentionally expose artifact destinations because those are user-owned results, not simulation setup. Relative output paths use the saved Grasshopper document folder; unsaved definitions fall back to the per-user temp directory. When a GRM is connected, CSV export derives its case identity from that model rather than asking for a text ID.
 
 Wrap each model in a `SimpleDragon Batch Case`, which derives a deterministic
-case identity from the GRM, then
-connect the Cases list to `Managed Run SimpleDragon Batch` with a parallel limit
-and explicit Run/Cancel controls. It selects packaged weather from each model's
+case identity from the GRM, then connect the Cases list or tree to `Managed Run
+SimpleDragon Batch` with a parallel limit and explicit Run/Cancel controls. The
+runner consumes the complete tree as one batch and preserves its paths in the
+Case IDs and Statuses outputs. It selects packaged weather from each model's
 Address/Vintage and manages EnergyPlus/runtime/temp paths internally. Combined
 CSV and reproducibility-manifest paths are outputs only.
 
@@ -145,8 +166,10 @@ CSV and reproducibility-manifest paths are outputs only.
 The tracked definitions under `examples/` progress from materials and profiles to linked Rhino geometry and a complete two-zone simulation. The principal authoring examples are:
 
 - `12-simpledragon-two-zone-model.gh`: the complex authoring demonstration,
-  with named face Breps composed as Surface-owned Openings, constructions, and
-  boundary intents, then two independently owned Zones, terminal systems, and ERVs;
+  with named face Breps authored through explicit Floor, Ceiling, and Wall
+  components, opening-free walls grouped as lists, opening-bearing walls kept
+  separate, and each Zone owning one Surface branch; terminal systems and ERVs
+  remain directly owned by their Zones;
   a heat-pump/AHU serves the west Zone, a boiler/radiator serves the east Zone,
   and PV is resolved with both into one complete GRM;
 - `14-simpledragon-two-zone-run-results-csv.gh`: the stable end-to-end gate,

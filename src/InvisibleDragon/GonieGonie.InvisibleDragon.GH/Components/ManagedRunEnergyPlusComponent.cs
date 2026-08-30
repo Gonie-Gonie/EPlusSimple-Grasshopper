@@ -31,6 +31,7 @@ public sealed class ManagedRunEnergyPlusComponent : DragonComponent
     private string? _lastRunKey;
     private string _state = "Idle";
     private bool _removed;
+    private bool _rejectMultipleInputItems;
 
     public ManagedRunEnergyPlusComponent()
         : base(
@@ -109,6 +110,20 @@ public sealed class ManagedRunEnergyPlusComponent : DragonComponent
             GH_ParamAccess.list);
     }
 
+    protected override void BeforeSolveInstance()
+    {
+        base.BeforeSolveInstance();
+        _rejectMultipleInputItems = Params.Input.Any(
+            parameter => parameter.VolatileData.DataCount > 1);
+        if (_rejectMultipleInputItems)
+        {
+            AddRuntimeMessage(
+                GH_RuntimeMessageLevel.Error,
+                "Run InvisibleDragon accepts one data-matched input set per component. "
+                + "Use one Run InvisibleDragon component per simulation for model lists or trees.");
+        }
+    }
+
     public override void AddedToDocument(GH_Document document)
     {
         base.AddedToDocument(document);
@@ -146,6 +161,11 @@ public sealed class ManagedRunEnergyPlusComponent : DragonComponent
         if (triggers.Cancel)
         {
             CancelActiveRun();
+        }
+
+        if (_rejectMultipleInputItems)
+        {
+            return;
         }
 
         if (!DA.GetData(0, ref idfGoo)

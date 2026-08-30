@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
+using Grasshopper.Kernel.Types;
 
 namespace GonieGonie.SimpleDragon.Grasshopper.Tests;
 
@@ -16,29 +17,39 @@ public sealed class CompositionComponentContractTests
     {
         Assembly assembly = LoadPlugin();
         GH_Component opening = Component(assembly, "CreateSimpleDragonOpeningComponent");
-        GH_Component surface = Component(assembly, "CreateSimpleDragonSurfaceComponent");
+        GH_Component floor = Component(assembly, "CreateSimpleDragonFloorComponent");
+        GH_Component ceiling = Component(assembly, "CreateSimpleDragonCeilingComponent");
+        GH_Component wall = Component(assembly, "CreateSimpleDragonWallComponent");
         GH_Component zone = Component(assembly, "CreateSimpleDragonZoneComponent");
         GH_Component model = Component(assembly, "CreateSimpleDragonModelComponent");
         GH_Component run = Component(assembly, "RunSimpleDragonComponent");
 
         Assert.Equal(new Guid("7d41fd2c-b93f-4fc8-88ea-db1f3abeb2f1"), opening.ComponentGuid);
-        Assert.Equal(new Guid("039bf7bb-da65-49e2-80fe-86d636cf0a48"), surface.ComponentGuid);
+        Assert.Equal(new Guid("e15d7475-e5cf-4e37-81a4-e656c69ee250"), floor.ComponentGuid);
+        Assert.Equal(new Guid("39e2ad8c-8fbb-40bd-84cc-218de37bb720"), ceiling.ComponentGuid);
+        Assert.Equal(new Guid("2c0bc0e2-df1d-4e42-9b97-d841e8c83214"), wall.ComponentGuid);
         Assert.Equal(new Guid("30b8e2c4-207a-4cf5-9801-ac4ae16d33e2"), zone.ComponentGuid);
         Assert.Equal(new Guid("ce38124b-f99b-4d09-be3b-e5e5717db707"), model.ComponentGuid);
         Assert.Equal(new Guid("6e242e51-77ce-4f77-8445-a17d636c7310"), run.ComponentGuid);
+
+        foreach (GH_Component surface in new[] { floor, wall })
+        {
+            Assert.Equal(
+                new[] { "Face", "Name", "Construction", "Boundary Condition", "Openings" },
+                surface.Params.Input.Select(parameter => parameter.Name));
+        }
 
         Assert.Equal(
             new[]
             {
                 "Face",
                 "Name",
-                "Type",
                 "Construction",
-                "Boundary Intent",
+                "Boundary Condition",
                 "Openings",
                 "Cool Roof Reflectance",
             },
-            surface.Params.Input.Select(parameter => parameter.Name));
+            ceiling.Params.Input.Select(parameter => parameter.Name));
         Assert.Equal(
             new[]
             {
@@ -54,6 +65,10 @@ public sealed class CompositionComponentContractTests
             zone.Params.Input.Select(parameter => parameter.Name));
         Assert.Equal("SimpleDragonFenestrationConstructionParam", opening.Params.Input[3].GetType().Name);
         Assert.False(opening.Params.Input[3].Optional);
+        Assert.Equal("ChoiceStringParam", opening.Params.Input[2].GetType().Name);
+        Assert.Equal("Window", StringDefault(opening.Params.Input[2]));
+        Assert.Equal("ChoiceStringParam", opening.Params.Input[4].GetType().Name);
+        Assert.Equal("None", StringDefault(opening.Params.Input[4]));
         Assert.DoesNotContain(
             zone.Params.Input,
             parameter => parameter.GetType().Name == "SimpleDragonFenestrationConstructionParam");
@@ -61,16 +76,22 @@ public sealed class CompositionComponentContractTests
         Assert.DoesNotContain(zone.Params.Input, parameter => parameter.Name == "Surface Construction");
         Assert.DoesNotContain(zone.Params.Input, parameter => parameter.Name == "Openings");
         Assert.DoesNotContain(zone.Params.Input, parameter => parameter.Name == "Floor Boundary");
-        Param_Integer surfaceType = Assert.IsType<Param_Integer>(surface.Params.Input[2]);
-        Param_Integer boundaryIntent = Assert.IsType<Param_Integer>(surface.Params.Input[4]);
-        Assert.True(surfaceType.HasNamedValues);
-        Assert.True(boundaryIntent.HasNamedValues);
-        Assert.Equal("SimpleDragonSurfaceConstructionParam", surface.Params.Input[3].GetType().Name);
-        Assert.True(surface.Params.Input[3].Optional);
-        Assert.Equal("SimpleDragonOpeningDefinitionParam", surface.Params.Input[5].GetType().Name);
-        Assert.Equal(GH_ParamAccess.list, surface.Params.Input[5].Access);
-        Assert.True(surface.Params.Input[5].Optional);
-        Assert.Equal("SimpleDragonSurfaceDefinitionParam", surface.Params.Output[0].GetType().Name);
+        Assert.Equal("Ground", StringDefault(floor.Params.Input[3]));
+        Assert.Equal("Outdoors", StringDefault(ceiling.Params.Input[3]));
+        Assert.Equal("Outdoors", StringDefault(wall.Params.Input[3]));
+        foreach (GH_Component surface in new[] { floor, ceiling, wall })
+        {
+            Assert.Equal(GH_ParamAccess.item, surface.Params.Input[0].Access);
+            Assert.Equal("SimpleDragonSurfaceConstructionParam", surface.Params.Input[2].GetType().Name);
+            Assert.True(surface.Params.Input[2].Optional);
+            Assert.Equal("ChoiceStringParam", surface.Params.Input[3].GetType().Name);
+            Assert.Equal(GH_ParamAccess.item, surface.Params.Input[3].Access);
+            Assert.Equal("SimpleDragonOpeningDefinitionParam", surface.Params.Input[4].GetType().Name);
+            Assert.Equal(GH_ParamAccess.list, surface.Params.Input[4].Access);
+            Assert.True(surface.Params.Input[4].Optional);
+            Assert.Equal("SimpleDragonSurfaceDefinitionParam", surface.Params.Output[0].GetType().Name);
+            Assert.Equal(GH_ParamAccess.item, surface.Params.Output[0].Access);
+        }
         Assert.Equal("SimpleDragonSurfaceDefinitionParam", zone.Params.Input[0].GetType().Name);
         Assert.Equal(GH_ParamAccess.list, zone.Params.Input[0].Access);
         Assert.False(zone.Params.Input[0].Optional);
@@ -86,6 +107,7 @@ public sealed class CompositionComponentContractTests
         Assert.Equal("SimpleDragonZoneDefinitionParam", model.Params.Input[1].GetType().Name);
         Assert.Equal(GH_ParamAccess.list, model.Params.Input[1].Access);
         Assert.Equal("GreenRetrofitModelParam", model.Params.Output[0].GetType().Name);
+        Assert.Equal(GH_ParamAccess.tree, model.Params.Output[2].Access);
         Assert.Equal("GreenRetrofitModelParam", run.Params.Input[0].GetType().Name);
         Assert.Equal(
             new[] { "GRM", "Run", "Cancel", "Force Rerun", "Timeout" },
@@ -95,6 +117,12 @@ public sealed class CompositionComponentContractTests
             run.Params.Output.Select(parameter => parameter.Name));
         Assert.Equal("GreenRetrofitResultParam", run.Params.Output[0].GetType().Name);
         Assert.Equal("SimpleDragonDiagnosticParam", run.Params.Output[3].GetType().Name);
+    }
+
+    private static string StringDefault(IGH_Param parameter)
+    {
+        Param_String choice = Assert.IsAssignableFrom<Param_String>(parameter);
+        return Assert.IsType<GH_String>(Assert.Single(choice.PersistentData.AllData(true))).Value;
     }
 
     [Fact]

@@ -49,32 +49,39 @@ together when they come from the same release commit.
 The canonical Grasshopper flow keeps ownership local and simulation setup internal:
 
 ```text
-Curve + Fenestration Construction -> SD Opening --------+
-                                                        v
-Face Brep + Type + Construction + Boundary Intent -> SD Surface -> SD Zone <- Height / Profile / HVAC / ERV
-                                                                       |
-                                                                       +-> SD Model (Address/Vintage) -> Run SimpleDragon -> GRR
+Curve + Fenestration Construction -> SD Opening ----------------+
+                                                                v
+Face Brep(s) + Construction + Boundary choice -> SD Wall / Ceiling / Floor -> SD Zone <- Height / Profile / HVAC / ERV
+                                                                                     |
+                                                                                     +-> SD Model (Address/Vintage) -> Run SimpleDragon -> GRR
 
-Curve -> ID Window / Door -> ID Surface -> ID Zone <- Profile / HVAC / ERV
-                                             |
-                                             +-> ID Model <- PV
-                                                   |
-                                                   +-> Compile InvisibleDragon -> IDF --+-> Run InvisibleDragon -> Result
-                                                                                         ^
-                                                        EPW File -> ID Weather -----------+
+Curve -> ID Window / Door -> ID Wall / Ceiling / Floor -> ID Zone <- Profile / HVAC / ERV
+                                                                |
+                                                                +-> ID Model <- PV
+                                                                      |
+                                                                      +-> Compile InvisibleDragon -> IDF --+-> Run InvisibleDragon -> Result
+                                                                                                            ^
+                                                                           EPW File -> ID Weather -----------+
 ```
 
 In these component labels, `ID` abbreviates InvisibleDragon; it is not an
 identifier port.
 
 No entity-ID or Zone/Face-index input, parent-level construction fallback, assignment pass,
-EnergyPlus/IDD path, runtime root, or temporary-work input is required.
-Openings and opaque constructions belong to `SD Surface`; a Zone receives only
-its completed Surfaces and Zone-level values. Coincident, opposite-facing
-Surfaces with `Outdoors` intent are paired as inter-zone boundaries when either
-model is composed. Both Dragon modules create their deterministic relationship
-IDs internally; users express ownership by wiring typed objects rather than
-typing identifiers.
+EnergyPlus/IDD path, runtime root, or temporary-work input is required. The
+generic Surface authoring component has been replaced by explicit Floor,
+Ceiling, and Wall components; each fixes its surface type. Boundary Condition
+and other finite categories are named choices available from the input menu,
+not integer codes.
+
+Openings and opaque constructions belong to their completed Floor, Ceiling, or
+Wall. A Zone receives only those owned Surfaces and Zone-level values.
+Grasshopper item inputs naturally vectorize over lists and trees and preserve
+their paths, while a Zone consumes each branch of its Surfaces input as one
+owned list. Coincident, opposite-facing Surfaces with `Outdoors` selected are
+paired as inter-zone boundaries when either model is composed. Both Dragon
+modules create their deterministic relationship IDs internally; users express
+ownership by wiring typed objects rather than typing identifiers.
 SimpleDragon's direct runner performs weather selection, conversion, IDF
 generation, EnergyPlus execution, and GRR construction internally; no
 EPW path or InvisibleDragon execution type appears on the SimpleDragon canvas.
@@ -157,8 +164,9 @@ standalone InvisibleDragon compile/weather/run wiring, two-zone GRM authoring,
 Address/Vintage-selected packaged weather, direct simulation, result plots,
 CSV previews, and the gated Run-to-GRR/CSV workflow. Example 02 keeps its EPW
 File input empty and every action trigger False, so opening it never reads a
-weather path or starts EnergyPlus. Example 12 is the complex
-two-zone Surface-to-Zone model-authoring demonstration; example 14
+weather path or starts EnergyPlus. Example 12 is the complex two-zone
+Floor/Ceiling/Wall-to-Zone model-authoring demonstration; its opening-free walls
+are authored as lists while opening-bearing walls remain separate. Example 14
 uses the same explicit Surface ownership with electric radiators for a stable
 end-to-end `SD Model -> Run SimpleDragon -> GRR` workflow.
 Rhino 7 writes the canonical files;

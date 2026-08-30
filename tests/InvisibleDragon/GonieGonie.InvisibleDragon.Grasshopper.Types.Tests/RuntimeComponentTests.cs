@@ -2,6 +2,7 @@ using System.Reflection;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.EnergyPlus.Runtime;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Types;
 
 namespace GonieGonie.InvisibleDragon.Grasshopper.Tests;
@@ -145,6 +146,32 @@ public sealed class RuntimeComponentTests
                 "SimpleDragon",
                 StringComparison.OrdinalIgnoreCase));
         Assert.Equal(false, PersistentDefault(component.Params.Input[2]));
+    }
+
+    [Fact]
+    public void ManagedRunRejectsMultipleDataMatchedInputSets()
+    {
+        Assembly assembly = LoadPlugin();
+        GH_Component component = CreateComponent(
+            assembly,
+            "GonieGonie.InvisibleDragon.Grasshopper.Components.ManagedRunEnergyPlusComponent");
+        Assert.True(component.Params.Input[2].AddVolatileData(
+            new GH_Path(2),
+            0,
+            new GH_Boolean(false)));
+        Assert.True(component.Params.Input[2].AddVolatileData(
+            new GH_Path(5),
+            0,
+            new GH_Boolean(false)));
+
+        MethodInfo beforeSolve = Assert.IsAssignableFrom<MethodInfo>(component.GetType().GetMethod(
+            "BeforeSolveInstance",
+            BindingFlags.Instance | BindingFlags.NonPublic));
+        beforeSolve.Invoke(component, null);
+
+        string error = Assert.Single(component.RuntimeMessages(GH_RuntimeMessageLevel.Error));
+        Assert.Contains("one data-matched input set", error, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("one Run InvisibleDragon component", error, StringComparison.Ordinal);
     }
 
     [Fact]

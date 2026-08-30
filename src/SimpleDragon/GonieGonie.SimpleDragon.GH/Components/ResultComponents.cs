@@ -131,7 +131,12 @@ public sealed class GreenRetrofitResultSummaryComponent : SimpleDragonComponent
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddParameter(new GreenRetrofitResultParam(), "GRR", "GRR", "SimpleDragon result.", GH_ParamAccess.item);
-        pManager.AddTextParameter("Metric", "M", "SiteUses, SourceUses, Carbon, or Cost.", GH_ParamAccess.item, "SiteUses");
+        ChoiceInputs.AddEnum(
+            pManager,
+            "Metric",
+            "M",
+            "GRR summary metric.",
+            GreenRetrofitMetric.SiteUses);
         pManager.AddBooleanParameter("Gross", "G", "False for per-area values; true for gross building values.", GH_ParamAccess.item, false);
     }
 
@@ -160,9 +165,14 @@ public sealed class GreenRetrofitResultSummaryComponent : SimpleDragonComponent
             return;
         }
 
-        if (!Enum.TryParse(metricText.Trim(), true, out GreenRetrofitMetric metric))
+        GreenRetrofitMetric metric;
+        try
         {
-            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Unknown GRR metric '" + metricText + "'.");
+            metric = ChoiceInputs.ParseEnum<GreenRetrofitMetric>(metricText, "Metric");
+        }
+        catch (ArgumentException exception)
+        {
+            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, exception.Message);
             return;
         }
 

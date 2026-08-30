@@ -164,9 +164,19 @@ public abstract class MonthlySimpleDragonComponent : SimpleDragonComponent
     protected static void RegisterDataInputs(GH_InputParamManager pManager)
     {
         pManager.AddParameter(new GreenRetrofitResultParam(), "GRR", "GRR", "SimpleDragon result.", GH_ParamAccess.item);
-        pManager.AddTextParameter("Metric", "M", "SiteUses, SourceUses, Carbon, or Cost.", GH_ParamAccess.item, "SiteUses");
+        ChoiceInputs.AddEnum(
+            pManager,
+            "Metric",
+            "M",
+            "Monthly GRR metric.",
+            GreenRetrofitMetric.SiteUses);
         pManager.AddBooleanParameter("Gross", "G", "False for per-area values; true for gross values.", GH_ParamAccess.item, false);
-        pManager.AddTextParameter("Grouping", "By", "Fuel or EndUse.", GH_ParamAccess.item, "Fuel");
+        ChoiceInputs.AddEnum(
+            pManager,
+            "Grouping",
+            "By",
+            "Monthly series grouping.",
+            GreenRetrofitSeriesGrouping.Fuel);
     }
 
     protected static void RegisterPlotInputs(GH_InputParamManager pManager)
@@ -340,7 +350,15 @@ public sealed class GreenRetrofitMonthlyBarPlotComponent : MonthlySimpleDragonCo
         }
 
         PlotScale scale = PlotGeometry.CreateScale(input.Data, height, stacked);
-        DA.SetDataTree(0, PlotGeometry.Bars(input.Data, plane, width, scale, stacked));
+        DA.SetDataTree(
+            0,
+            PlotGeometry.Bars(
+                input.Data,
+                plane,
+                width,
+                scale,
+                stacked,
+                DA.ParameterTargetPath(0)));
         DA.SetData(1, PlotGeometry.Frame(plane, width, height));
         DA.SetData(2, PlotGeometry.ZeroAxis(plane, width, scale));
         MonthlyComponentSupport.SetDataOutputs(DA, input.Data, 3);
@@ -387,20 +405,17 @@ internal static class MonthlyComponentSupport
             return false;
         }
 
-        if (!Enum.TryParse(metricText.Trim(), true, out GreenRetrofitMetric metric))
+        GreenRetrofitMetric metric;
+        GreenRetrofitSeriesGrouping grouping;
+        try
         {
-            input = null!;
-            error = "Unknown GRR metric '" + metricText + "'.";
-            return false;
+            metric = ChoiceInputs.ParseEnum<GreenRetrofitMetric>(metricText, "Metric");
+            grouping = ChoiceInputs.ParseEnum<GreenRetrofitSeriesGrouping>(groupingText, "Grouping");
         }
-
-        string normalizedGrouping = new string(groupingText
-            .Where(char.IsLetterOrDigit)
-            .ToArray());
-        if (!Enum.TryParse(normalizedGrouping, true, out GreenRetrofitSeriesGrouping grouping))
+        catch (ArgumentException exception)
         {
             input = null!;
-            error = "Unknown grouping '" + groupingText + "'. Use Fuel or EndUse.";
+            error = exception.Message;
             return false;
         }
 
@@ -457,19 +472,30 @@ internal static class MonthlyComponentSupport
     {
         DA.SetDataList(startIndex, data.Series.Select(series => series.Name));
         DA.SetDataList(startIndex + 1, data.XLabels);
-        DA.SetDataTree(startIndex + 2, NumberTree(data, useXValues: true));
-        DA.SetDataTree(startIndex + 3, NumberTree(data, useXValues: false));
+        DA.SetDataTree(
+            startIndex + 2,
+            NumberTree(
+                data,
+                useXValues: true,
+                DA.ParameterTargetPath(0)));
+        DA.SetDataTree(
+            startIndex + 3,
+            NumberTree(
+                data,
+                useXValues: false,
+                DA.ParameterTargetPath(0)));
         DA.SetData(startIndex + 4, data.Unit);
     }
 
     private static GH_Structure<GH_Number> NumberTree(
         GreenRetrofitMonthlyData data,
-        bool useXValues)
+        bool useXValues,
+        GH_Path targetPath)
     {
         var tree = new GH_Structure<GH_Number>();
         for (int seriesIndex = 0; seriesIndex < data.Series.Count; seriesIndex++)
         {
-            var path = new GH_Path(seriesIndex);
+            GH_Path path = targetPath.AppendElement(seriesIndex);
             IEnumerable<double> values = useXValues
                 ? data.XValues.Select(value => (double)value)
                 : data.Series[seriesIndex].Values;
@@ -558,7 +584,8 @@ internal static class PlotGeometry
         Plane plane,
         double width,
         PlotScale scale,
-        bool stacked)
+        bool stacked,
+        GH_Path targetPath)
     {
         var tree = new GH_Structure<GH_Curve>();
         double monthWidth = width / MonthlySeries.MonthCount;
@@ -566,7 +593,7 @@ internal static class PlotGeometry
         var negative = new double[MonthlySeries.MonthCount];
         for (int seriesIndex = 0; seriesIndex < data.Series.Count; seriesIndex++)
         {
-            var path = new GH_Path(seriesIndex);
+            GH_Path path = targetPath.AppendElement(seriesIndex);
             for (int month = 0; month < MonthlySeries.MonthCount; month++)
             {
                 double value = data.Series[seriesIndex].Values[month];

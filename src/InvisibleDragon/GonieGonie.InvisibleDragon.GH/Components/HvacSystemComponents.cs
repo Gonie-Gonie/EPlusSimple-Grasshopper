@@ -1,5 +1,4 @@
 using Grasshopper.Kernel;
-using Grasshopper.Kernel.Parameters;
 using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
 using GonieGonie.InvisibleDragon.Grasshopper.Types;
 using GonieGonie.InvisibleDragon.Hvac;
@@ -22,13 +21,12 @@ public sealed class DomesticHotWaterComponent : DragonComponent
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddTextParameter("Name", "N", "Domestic-hot-water system name.", GH_ParamAccess.item, "Domestic Hot Water");
-        int fuel = pManager.AddIntegerParameter(
+        ChoiceInputs.AddEnum(
+            pManager,
             "Fuel",
             "F",
             "Fuel selection.",
-            GH_ParamAccess.item,
-            (int)Fuel.NaturalGas);
-        HeatPumpComponent.AddFuelValues((Param_Integer)pManager[fuel]);
+            Fuel.NaturalGas);
         pManager.AddNumberParameter(
             "Efficiency",
             "Eff",
@@ -50,16 +48,16 @@ public sealed class DomesticHotWaterComponent : DragonComponent
     protected override void Solve(IGH_DataAccess DA)
     {
         string name = "Domestic Hot Water";
-        int fuelValue = (int)Fuel.NaturalGas;
+        string fuelText = nameof(Fuel.NaturalGas);
         double efficiency = 0.85;
         if (!DA.GetData(0, ref name) ||
-            !DA.GetData(1, ref fuelValue) ||
+            !DA.GetData(1, ref fuelText) ||
             !DA.GetData(2, ref efficiency))
         {
             return;
         }
 
-        Fuel fuel = HvacComponentSupport.EnumValue<Fuel>(fuelValue, "Fuel");
+        Fuel fuel = ChoiceInputs.ParseEnum<Fuel>(fuelText, "Fuel");
         var domesticHotWater = new DomesticHotWater(
             StableIds.Create(
                 "domestic-hot-water",

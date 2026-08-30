@@ -39,7 +39,10 @@ public sealed class GrasshopperAssemblyTests
 
         Assert.All(components, component => Assert.Equal("InvisibleDragon", component.Category));
         Assert.Equal(components.Count, components.Select(component => component.ComponentGuid).Distinct().Count());
-        Assert.Contains(new Guid("c25eb6d8-9500-44e5-9909-58d41de0a320"), components.Select(component => component.ComponentGuid));
+        Assert.DoesNotContain(new Guid("c25eb6d8-9500-44e5-9909-58d41de0a320"), components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("1938b273-3a60-459b-beb2-92e7c4905053"), components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("d1930bb6-4398-46b9-a661-451370f09103"), components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("20a8a2f5-845e-4a46-aa03-fb8849f592e2"), components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("4f443564-2e13-4a79-8845-27d1e6eb285d"), components.Select(component => component.ComponentGuid));
         Assert.All(HvacComponentGuids, guid => Assert.Contains(guid, components.Select(component => component.ComponentGuid)));
     }
@@ -51,7 +54,7 @@ public sealed class GrasshopperAssemblyTests
         Type[] componentTypes = ComponentTypes(assembly);
 
         Assert.EndsWith(".gha", assembly.Location, StringComparison.OrdinalIgnoreCase);
-        Assert.Equal(34, componentTypes.Length);
+        Assert.Equal(36, componentTypes.Length);
         Assert.All(componentTypes, type => Assert.NotNull(Activator.CreateInstance(type)));
     }
 

@@ -5,6 +5,8 @@ using GonieGonie.SimpleDragon.Batch;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Data;
+using Grasshopper.Kernel.Types;
 using Rhino;
 
 namespace GonieGonie.SimpleDragon.Grasshopper.Components;
@@ -47,8 +49,8 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
             new SimpleDragonBatchCaseParam(),
             "Cases",
             "Cases",
-            "Ordered typed batch cases. Each case owns its GRM; execution identity and weather are resolved within SimpleDragon.",
-            GH_ParamAccess.list);
+            "Typed batch-case tree. Branches are preserved in Case IDs and Statuses; execution identity and weather are resolved within SimpleDragon.",
+            GH_ParamAccess.tree);
         pManager.AddIntegerParameter(
             "Parallel Limit",
             "N",
@@ -72,8 +74,8 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
     {
         pManager.AddTextParameter("State", "S", "Current managed batch state and progress.", GH_ParamAccess.item);
-        pManager.AddTextParameter("Case IDs", "IDs", "Cases in original input order.", GH_ParamAccess.list);
-        pManager.AddTextParameter("Statuses", "Status", "Case statuses in original input order.", GH_ParamAccess.list);
+        pManager.AddTextParameter("Case IDs", "IDs", "Case identities in the original input paths.", GH_ParamAccess.tree);
+        pManager.AddTextParameter("Statuses", "Status", "Case statuses in the original input paths.", GH_ParamAccess.tree);
         pManager.AddTextParameter("Combined CSV", "CSV", "Deterministic combined CSV result path.", GH_ParamAccess.item);
         pManager.AddTextParameter("Manifest", "Manifest", "Deterministic reproducibility manifest result path.", GH_ParamAccess.item);
         pManager.AddBooleanParameter("Complete", "OK", "True when every case succeeded.", GH_ParamAccess.item);
@@ -87,16 +89,28 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 
     protected override void Solve(IGH_DataAccess DA)
     {
-        var caseGoos = new List<SimpleDragonBatchCaseGoo>();
+        GH_Structure<SimpleDragonBatchCaseGoo>? caseTree = null;
         int parallelLimit = Math.Max(1, Math.Min(Environment.ProcessorCount, 4));
         bool run = false;
         bool cancel = false;
-        if (!DA.GetDataList(0, caseGoos)
+        if (!DA.GetDataTree(0, out caseTree)
             || !DA.GetData(1, ref parallelLimit)
             || !DA.GetData(2, ref run)
             || !DA.GetData(3, ref cancel))
         {
             return;
+        }
+
+        var caseGoos = new List<SimpleDragonBatchCaseGoo>();
+        var casePaths = new List<GH_Path>();
+        for (int branchIndex = 0; branchIndex < caseTree.PathCount; branchIndex++)
+        {
+            GH_Path path = caseTree.Paths[branchIndex];
+            foreach (SimpleDragonBatchCaseGoo goo in caseTree.Branches[branchIndex])
+            {
+                caseGoos.Add(goo);
+                casePaths.Add(path);
+            }
         }
 
         ExplicitManagedBatchTriggerObservation triggers = _triggerGate.Observe(run, cancel);
@@ -107,7 +121,7 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 
         if (triggers.Start && !triggers.Cancel)
         {
-            ManagedBatchInputs? inputs = TryCreateInputs(caseGoos, parallelLimit);
+            ManagedBatchInputs? inputs = TryCreateInputs(caseGoos, casePaths, parallelLimit);
             if (inputs is not null)
             {
                 StartBatch(inputs);
@@ -134,8 +148,18 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
         DA.SetData(0, state);
         if (outcome?.Result is not null)
         {
-            DA.SetDataList(1, outcome.Result.Cases.Select(item => item.CaseId));
-            DA.SetDataList(2, outcome.Result.Cases.Select(item => item.Status.ToString()));
+            var caseIds = new GH_Structure<GH_String>();
+            var statuses = new GH_Structure<GH_String>();
+            for (int index = 0; index < outcome.Result.Cases.Count; index++)
+            {
+                BatchCaseResult item = outcome.Result.Cases[index];
+                GH_Path path = outcome.CasePaths[index];
+                caseIds.Append(new GH_String(item.CaseId), path);
+                statuses.Append(new GH_String(item.Status.ToString()), path);
+            }
+
+            DA.SetDataTree(1, caseIds);
+            DA.SetDataTree(2, statuses);
             DA.SetData(3, outcome.Result.CombinedCsvPath);
             DA.SetData(4, outcome.Result.ManifestPath);
             DA.SetData(5, outcome.Result.CompletedWithoutFailures);
@@ -173,8 +197,14 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 
     private ManagedBatchInputs? TryCreateInputs(
         IReadOnlyList<SimpleDragonBatchCaseGoo> caseGoos,
+        IReadOnlyList<GH_Path> casePaths,
         int parallelLimit)
     {
+        if (casePaths.Count != caseGoos.Count)
+        {
+            throw new ArgumentException("Each managed batch case requires one Grasshopper path.", nameof(casePaths));
+        }
+
         SimpleDragonBatchCase[] cases = caseGoos
             .Where(item => item?.Value is not null)
             .Select(item => item.Value!)
@@ -198,6 +228,7 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
                 .ToArray();
             return new ManagedBatchInputs(
                 definitions,
+                casePaths.ToArray(),
                 ManagedBatchPaths.Create(Path.GetTempPath()),
                 parallelLimit);
         }
@@ -277,7 +308,7 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
                 options,
                 progress,
                 cancellationToken).ConfigureAwait(false);
-            return ManagedBatchOutcome.FromResult(result, weather.Diagnostics);
+            return ManagedBatchOutcome.FromResult(result, weather.Diagnostics, inputs.CasePaths);
         }
         catch (OperationCanceledException)
         {
@@ -614,15 +645,19 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
     {
         internal ManagedBatchInputs(
             IReadOnlyList<BatchCaseDefinition> cases,
+            IReadOnlyList<GH_Path> casePaths,
             ManagedBatchPaths paths,
             int maxDegreeOfParallelism)
         {
             Cases = cases;
+            CasePaths = casePaths;
             Paths = paths;
             MaxDegreeOfParallelism = maxDegreeOfParallelism;
         }
 
         internal IReadOnlyList<BatchCaseDefinition> Cases { get; }
+
+        internal IReadOnlyList<GH_Path> CasePaths { get; }
 
         internal ManagedBatchPaths Paths { get; }
 
@@ -720,11 +755,13 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
         private ManagedBatchOutcome(
             string state,
             BatchRunResult? result,
-            IReadOnlyList<Diagnostic> diagnostics)
+            IReadOnlyList<Diagnostic> diagnostics,
+            IReadOnlyList<GH_Path>? casePaths = null)
         {
             State = state;
             Result = result;
             Diagnostics = diagnostics;
+            CasePaths = casePaths ?? Array.Empty<GH_Path>();
         }
 
         internal string State { get; }
@@ -733,10 +770,18 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 
         internal IReadOnlyList<Diagnostic> Diagnostics { get; }
 
+        internal IReadOnlyList<GH_Path> CasePaths { get; }
+
         internal static ManagedBatchOutcome FromResult(
             BatchRunResult result,
-            IReadOnlyList<Diagnostic> preparationDiagnostics)
+            IReadOnlyList<Diagnostic> preparationDiagnostics,
+            IReadOnlyList<GH_Path> casePaths)
         {
+            if (casePaths.Count != result.Cases.Count)
+            {
+                throw new ArgumentException("Batch result paths must match the result case count.", nameof(casePaths));
+            }
+
             Diagnostic[] diagnostics = preparationDiagnostics
                 .Concat(result.Cases.SelectMany(item => item.Diagnostics).Select(PublicDiagnostic))
                 .ToArray();
@@ -745,7 +790,7 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
                 : result.CancelledCount > 0 && result.FailureCount == 0
                     ? "Cancelled"
                     : "Completed With Failures";
-            return new ManagedBatchOutcome(state, result, diagnostics);
+            return new ManagedBatchOutcome(state, result, diagnostics, casePaths);
         }
 
         internal static ManagedBatchOutcome Failed(params Diagnostic[] diagnostics) =>

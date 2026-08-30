@@ -52,7 +52,9 @@ $products = @(
             (New-ComponentIcon 'GlazingComponent' 3 'glazing'),
             (New-ComponentIcon 'WindowFromPolylineComponent' 4 'window'),
             (New-ComponentIcon 'DoorFromPolylineComponent' 4 'door'),
-            (New-ComponentIcon 'SurfaceComponent' 4 'surface'),
+            (New-ComponentIcon 'FloorComponent' 4 'floor'),
+            (New-ComponentIcon 'CeilingComponent' 4 'ceiling'),
+            (New-ComponentIcon 'WallComponent' 4 'surface'),
             (New-ComponentIcon 'ZoneComponent' 6 'none'),
             (New-ComponentIcon 'EnergyModelComponent' 7 'assemble'),
             (New-ComponentIcon 'CompileInvisibleDragonComponent' 9 'build'),
@@ -130,7 +132,9 @@ $products = @(
             (New-ComponentIcon 'SimpleDragonFenestrationConstructionComponent' 3 'none'),
             (New-ComponentIcon 'LookupUsageProfileComponent' 4 'none'),
             (New-ComponentIcon 'CreateSimpleDragonOpeningComponent' 5 'polyline'),
-            (New-ComponentIcon 'CreateSimpleDragonSurfaceComponent' 5 'surface'),
+            (New-ComponentIcon 'CreateSimpleDragonFloorComponent' 5 'floor'),
+            (New-ComponentIcon 'CreateSimpleDragonCeilingComponent' 5 'ceiling'),
+            (New-ComponentIcon 'CreateSimpleDragonWallComponent' 5 'surface'),
             (New-ComponentIcon 'CreateSimpleDragonZoneComponent' 6 'membrane'),
             (New-ComponentIcon 'SimpleDragonHeatPumpComponent' 7 'heat-pump'),
             (New-ComponentIcon 'SimpleDragonGeothermalHeatPumpComponent' 7 'ground'),
@@ -533,6 +537,34 @@ function Draw-Overlay {
                     $Graphics.DrawLine($primaryPen, 25, $y, 71, $y)
                 }
                 $Graphics.DrawLine($accentPen, 28, 67, 68, 28)
+            }
+            'ceiling' {
+                $slab = [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(14, 39), [System.Drawing.PointF]::new(59, 18),
+                    [System.Drawing.PointF]::new(82, 32), [System.Drawing.PointF]::new(37, 54))
+                $edge = [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(14, 39), [System.Drawing.PointF]::new(37, 54),
+                    [System.Drawing.PointF]::new(37, 67), [System.Drawing.PointF]::new(14, 52))
+                $Graphics.FillPolygon($neutralBrush, $slab)
+                $Graphics.DrawPolygon($inkPen, $slab)
+                $Graphics.FillPolygon($secondaryBrush, $edge)
+                $Graphics.DrawPolygon($thinInkPen, $edge)
+                $Graphics.DrawLine($accentPen, 37, 54, 82, 32)
+                Draw-Arrow $Graphics $primaryPen 57 74 57 45 9
+            }
+            'floor' {
+                $slab = [System.Drawing.PointF[]]@(
+                    [System.Drawing.PointF]::new(14, 57), [System.Drawing.PointF]::new(57, 35),
+                    [System.Drawing.PointF]::new(82, 49), [System.Drawing.PointF]::new(39, 72))
+                $Graphics.FillPolygon($neutralBrush, $slab)
+                $Graphics.DrawPolygon($inkPen, $slab)
+                $Graphics.DrawLine($secondaryPen, 18, 66, 38, 78)
+                $Graphics.DrawLine($secondaryPen, 42, 76, 78, 57)
+                foreach ($point in @(@(23,45), @(43,38), @(66,42))) {
+                    $Graphics.FillEllipse($accentBrush, $point[0] - 4, $point[1] - 4, 8, 8)
+                    $Graphics.DrawEllipse($thinInkPen, $point[0] - 4, $point[1] - 4, 8, 8)
+                }
+                Draw-Arrow $Graphics $hotPen 48 16 48 43 9
             }
             'layer' {
                 $Graphics.FillPolygon($primaryBrush, [System.Drawing.PointF[]]@(

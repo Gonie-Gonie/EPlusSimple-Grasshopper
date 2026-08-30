@@ -1,4 +1,5 @@
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Data;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.InvisibleDragon.Construction;
 using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
@@ -111,7 +112,11 @@ public sealed class WindowFromPolylineComponent : DragonComponent
 
         Glazing glazing = glazingGoo?.Value
             ?? throw new ArgumentException("Glazing requires a non-empty value.");
-        OpeningGeometry geometry = OpeningGeometry.FromCurve(curve, "Window");
+        OpeningGeometry geometry = OpeningGeometry.FromCurve(
+            curve,
+            "Window",
+            GrasshopperTarget.Path(DA, 0),
+            GrasshopperTarget.Index(DA, 0));
         var window = new Window(
             StableIds.Create("window", name, geometry.Fingerprint, glazing.Name),
             name,
@@ -171,7 +176,11 @@ public sealed class DoorFromPolylineComponent : DragonComponent
 
         ISurfaceConstruction construction = constructionGoo?.Value
             ?? throw new ArgumentException("Construction requires a non-empty value.");
-        OpeningGeometry geometry = OpeningGeometry.FromCurve(curve, "Door");
+        OpeningGeometry geometry = OpeningGeometry.FromCurve(
+            curve,
+            "Door",
+            GrasshopperTarget.Path(DA, 0),
+            GrasshopperTarget.Index(DA, 0));
         var door = new Door(
             StableIds.Create("door", name, geometry.Fingerprint, construction.Name),
             name,
@@ -182,46 +191,65 @@ public sealed class DoorFromPolylineComponent : DragonComponent
     }
 }
 
-public sealed class SurfaceComponent : DragonComponent
+public abstract class OpaqueSurfaceComponent : DragonComponent
 {
-    public SurfaceComponent()
+    private static readonly SurfaceBoundaryCondition[] BoundaryChoices =
+    {
+        SurfaceBoundaryCondition.Outdoors,
+        SurfaceBoundaryCondition.Ground,
+        SurfaceBoundaryCondition.Adiabatic,
+    };
+
+    protected OpaqueSurfaceComponent(
+        string name,
+        string nickname,
+        string description)
         : base(
-            "Surface",
-            "Surface",
-            "Creates an opaque surface with directly owned openings. Interzone adjacency is inferred by Energy Model.",
+            name,
+            nickname,
+            description,
             DragonPanels.Geometry)
     {
     }
 
-    public override Guid ComponentGuid => new("c25eb6d8-9500-44e5-9909-58d41de0a320");
+    protected abstract SurfaceType FixedSurfaceType { get; }
 
-    protected override void RegisterInputParams(GH_InputParamManager pManager)
+    protected abstract string DefaultSurfaceName { get; }
+
+    protected abstract SurfaceBoundaryCondition DefaultBoundaryCondition { get; }
+
+    protected sealed override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddCurveParameter("Curve", "C", "Closed planar polygonal surface boundary.", GH_ParamAccess.item);
-        pManager.AddTextParameter("Name", "N", "Surface name.", GH_ParamAccess.item, "Surface");
-        pManager.AddTextParameter("Type", "T", "Wall, Ceiling, or Floor.", GH_ParamAccess.item, "Wall");
+        pManager.AddTextParameter(
+            "Name",
+            "N",
+            FixedSurfaceType + " name.",
+            GH_ParamAccess.item,
+            DefaultSurfaceName);
         pManager.AddParameter(
             new DragonConstructionParam(),
             "Construction",
             "C",
-            "Opaque surface construction.",
+            "Opaque " + FixedSurfaceType + " construction.",
             GH_ParamAccess.item);
-        pManager.AddTextParameter(
-            "Boundary Intent",
+        ChoiceInputs.AddEnum(
+            pManager,
+            "Boundary Condition",
             "BC",
             "Outdoors, Ground, or Adiabatic. Coincident surfaces in distinct Zones become reciprocal Zone boundaries automatically.",
-            GH_ParamAccess.item,
-            "Outdoors");
+            DefaultBoundaryCondition,
+            BoundaryChoices);
         int openings = pManager.AddParameter(
             new DragonOpeningParam(),
             "Openings",
             "O",
-            "Windows and doors owned by this Surface.",
+            "Windows and doors owned by this " + FixedSurfaceType + ".",
             GH_ParamAccess.list);
         pManager[openings].Optional = true;
     }
 
-    protected override void RegisterOutputParams(GH_OutputParamManager pManager)
+    protected sealed override void RegisterOutputParams(GH_OutputParamManager pManager)
     {
         pManager.AddParameter(new DragonSurfaceParam(), "Surface", "S", "InvisibleDragon surface.", GH_ParamAccess.item);
         pManager.AddNumberParameter("Gross Area", "Gross", "Surface gross area in m².", GH_ParamAccess.item);
@@ -230,49 +258,40 @@ public sealed class SurfaceComponent : DragonComponent
         pManager.AddParameter(new DiagnosticParam(), "Diagnostics", "D", "Surface and opening diagnostics.", GH_ParamAccess.list);
     }
 
-    protected override void Solve(IGH_DataAccess DA)
+    protected sealed override void Solve(IGH_DataAccess DA)
     {
         Curve? curve = null;
-        string name = "Surface";
-        string typeText = "Wall";
+        string name = DefaultSurfaceName;
         DragonConstructionGoo? constructionGoo = null;
-        string boundaryText = "Outdoors";
+        string boundaryText = DefaultBoundaryCondition.ToString();
         var openingGoos = new List<DragonOpeningGoo>();
         if (!DA.GetData(0, ref curve)
             || !DA.GetData(1, ref name)
-            || !DA.GetData(2, ref typeText)
-            || !DA.GetData(3, ref constructionGoo)
-            || !DA.GetData(4, ref boundaryText))
+            || !DA.GetData(2, ref constructionGoo)
+            || !DA.GetData(3, ref boundaryText))
         {
             return;
         }
 
-        DA.GetDataList(5, openingGoos);
+        DA.GetDataList(4, openingGoos);
         ISurfaceConstruction construction = constructionGoo?.Value
             ?? throw new ArgumentException("Construction requires a non-empty value.");
-        if (!Enum.TryParse(typeText.Trim(), true, out SurfaceType surfaceType)
-            || !Enum.IsDefined(typeof(SurfaceType), surfaceType))
-        {
-            throw new ArgumentException("Type must be Wall, Ceiling, or Floor.");
-        }
-
-        if (!Enum.TryParse(boundaryText.Trim(), true, out SurfaceBoundaryCondition boundaryCondition)
-            || (boundaryCondition != SurfaceBoundaryCondition.Outdoors
-                && boundaryCondition != SurfaceBoundaryCondition.Ground
-                && boundaryCondition != SurfaceBoundaryCondition.Adiabatic))
-        {
-            throw new ArgumentException(
-                "Boundary Intent must be Outdoors, Ground, or Adiabatic. Interzone adjacency is inferred automatically.");
-        }
-
-        OpeningGeometry geometry = OpeningGeometry.FromCurve(curve, "Surface");
+        SurfaceBoundaryCondition boundaryCondition = ChoiceInputs.ParseEnum(
+            boundaryText,
+            "Boundary Condition",
+            BoundaryChoices);
+        OpeningGeometry geometry = OpeningGeometry.FromCurve(
+            curve,
+            FixedSurfaceType.ToString(),
+            GrasshopperTarget.Path(DA, 0),
+            GrasshopperTarget.Index(DA, 0));
         IOpening[] openingValues = openingGoos.Select((goo, index) => goo?.Value
             ?? throw new ArgumentException("Openings contains an empty value at position " + index + "."))
             .ToArray();
         var surface = new DragonSurface(
-            StableIds.Create("surface", name, geometry.Fingerprint),
+            StableIds.Create("surface", name, FixedSurfaceType.ToString(), geometry.Fingerprint),
             name,
-            surfaceType,
+            FixedSurfaceType,
             construction,
             new SurfaceBoundary(boundaryCondition),
             geometry.Polygon,
@@ -286,6 +305,63 @@ public sealed class SurfaceComponent : DragonComponent
         DA.SetData(3, validation.IsValid);
         DA.SetDataList(4, validation.Diagnostics.Select(item => new DiagnosticGoo(item)));
     }
+}
+
+public sealed class FloorComponent : OpaqueSurfaceComponent
+{
+    public FloorComponent()
+        : base(
+            "Floor",
+            "Floor",
+            "Creates an opaque Floor with directly owned openings. Interzone adjacency is inferred by Energy Model.")
+    {
+    }
+
+    public override Guid ComponentGuid => new("1938b273-3a60-459b-beb2-92e7c4905053");
+
+    protected override SurfaceType FixedSurfaceType => SurfaceType.Floor;
+
+    protected override string DefaultSurfaceName => "Floor";
+
+    protected override SurfaceBoundaryCondition DefaultBoundaryCondition => SurfaceBoundaryCondition.Ground;
+}
+
+public sealed class CeilingComponent : OpaqueSurfaceComponent
+{
+    public CeilingComponent()
+        : base(
+            "Ceiling",
+            "Ceiling",
+            "Creates an opaque Ceiling with directly owned openings. Interzone adjacency is inferred by Energy Model.")
+    {
+    }
+
+    public override Guid ComponentGuid => new("d1930bb6-4398-46b9-a661-451370f09103");
+
+    protected override SurfaceType FixedSurfaceType => SurfaceType.Ceiling;
+
+    protected override string DefaultSurfaceName => "Ceiling";
+
+    protected override SurfaceBoundaryCondition DefaultBoundaryCondition => SurfaceBoundaryCondition.Outdoors;
+}
+
+public sealed class WallComponent : OpaqueSurfaceComponent
+{
+    public WallComponent()
+        : base(
+            "Wall",
+            "Wall",
+            "Creates an opaque Wall with directly owned openings. Interzone adjacency is inferred by Energy Model.")
+    {
+    }
+
+    public override Guid ComponentGuid => new("20a8a2f5-845e-4a46-aa03-fb8849f592e2");
+
+    protected override SurfaceType FixedSurfaceType => SurfaceType.Wall;
+
+    protected override string DefaultSurfaceName => "Wall";
+
+    protected override SurfaceBoundaryCondition DefaultBoundaryCondition => SurfaceBoundaryCondition.Outdoors;
 }
 
 internal sealed class OpeningGeometry
@@ -303,7 +379,11 @@ internal sealed class OpeningGeometry
 
     internal GeometryProvenance Provenance { get; }
 
-    internal static OpeningGeometry FromCurve(Curve? curve, string inputName)
+    internal static OpeningGeometry FromCurve(
+        Curve? curve,
+        string inputName,
+        string? grasshopperPath = null,
+        int? grasshopperIndex = null)
     {
         if (curve is null)
         {
@@ -323,6 +403,26 @@ internal sealed class OpeningGeometry
         return new OpeningGeometry(
             polygon,
             fingerprint,
-            new GeometryProvenance(null, null, fingerprint, null, null));
+            new GeometryProvenance(
+                null,
+                null,
+                fingerprint,
+                grasshopperPath,
+                grasshopperIndex));
+    }
+}
+
+internal static class GrasshopperTarget
+{
+    internal static string Path(IGH_DataAccess access, int parameterIndex)
+    {
+        GH_Path path = access.ParameterTargetPath(parameterIndex);
+        return path.ToString();
+    }
+
+    internal static int? Index(IGH_DataAccess access, int parameterIndex)
+    {
+        int index = access.ParameterTargetIndex(parameterIndex);
+        return index < 0 ? null : index;
     }
 }

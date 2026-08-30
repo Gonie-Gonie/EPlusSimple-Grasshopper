@@ -63,7 +63,9 @@ public sealed class HvacComponentContractTests
     {
         "WindowFromPolylineComponent",
         "DoorFromPolylineComponent",
-        "SurfaceComponent",
+        "FloorComponent",
+        "CeilingComponent",
+        "WallComponent",
         "ZoneComponent",
         "ConstantProfileComponent",
     };
@@ -95,7 +97,7 @@ public sealed class HvacComponentContractTests
 
     private static readonly string[] EnergyModelInputTypes =
     {
-        "Param_String", "DragonZoneDefinitionParam", "Param_Number", "Param_String",
+        "Param_String", "DragonZoneDefinitionParam", "Param_Number", "ChoiceStringParam",
         "DragonPhotovoltaicPanelParam",
     };
 
@@ -143,18 +145,19 @@ public sealed class HvacComponentContractTests
             .Concat(GeometryModelAndProfileComponentNames)
             .ToArray();
 
-        Assert.Equal(22, componentNames.Length);
+        Assert.Equal(24, componentNames.Length);
         Assert.All(componentNames, name => Assert.DoesNotContain(
             Component(assembly, name).Params.Input,
             parameter => string.Equals(parameter.Name, "ID", StringComparison.OrdinalIgnoreCase)));
     }
 
     [Fact]
-    public void EngineeringPortsExposeUnitsDefaultsAndNamedEnumChoices()
+    public void EngineeringPortsExposeUnitsDefaultsAndSelectableTextChoices()
     {
         Assembly assembly = LoadPlugin();
         GH_Component heatPump = Component(assembly, "HeatPumpComponent");
-        Assert.Equal("Param_Integer", heatPump.Params.Input[1].GetType().Name);
+        Assert.Equal("ChoiceStringParam", heatPump.Params.Input[1].GetType().Name);
+        Assert.Equal(nameof(Fuel.Electricity), PersistentDefault(heatPump.Params.Input[1]));
         Assert.Equal("Heat Pump", PersistentDefault(heatPump.Params.Input[0]));
         Assert.Equal(3.5d, PersistentDefault(heatPump.Params.Input[2]));
         Assert.Contains("COP", heatPump.Params.Input[2].Name, StringComparison.Ordinal);
@@ -162,15 +165,18 @@ public sealed class HvacComponentContractTests
         Assert.Contains("0 means autosize", heatPump.Params.Input[4].Description, StringComparison.OrdinalIgnoreCase);
 
         GH_Component tower = Component(assembly, "CoolingTowerComponent");
-        Assert.Equal("Param_Integer", tower.Params.Input[1].GetType().Name);
-        Assert.Equal("Param_Integer", tower.Params.Input[2].GetType().Name);
+        Assert.Equal("ChoiceStringParam", tower.Params.Input[1].GetType().Name);
+        Assert.Equal("ChoiceStringParam", tower.Params.Input[2].GetType().Name);
+        Assert.Equal("Open", PersistentDefault(tower.Params.Input[1]));
+        Assert.Equal("Single", PersistentDefault(tower.Params.Input[2]));
         Assert.Contains("Open", tower.Params.Input[1].Description, StringComparison.Ordinal);
         Assert.Contains("Closed", tower.Params.Input[1].Description, StringComparison.Ordinal);
         Assert.Contains("Single", tower.Params.Input[2].Description, StringComparison.Ordinal);
         Assert.Contains("Two", tower.Params.Input[2].Description, StringComparison.Ordinal);
 
         GH_Component chiller = Component(assembly, "ChillerComponent");
-        Assert.Equal("Param_Integer", chiller.Params.Input[2].GetType().Name);
+        Assert.Equal("ChoiceStringParam", chiller.Params.Input[2].GetType().Name);
+        Assert.Equal(nameof(CompressorType.Turbo), PersistentDefault(chiller.Params.Input[2]));
         Assert.Contains("Turbo", chiller.Params.Input[2].Description, StringComparison.Ordinal);
         Assert.Contains("Screw", chiller.Params.Input[2].Description, StringComparison.Ordinal);
         Assert.Contains("degrees C", chiller.Params.Input[6].Description, StringComparison.Ordinal);
@@ -185,9 +191,9 @@ public sealed class HvacComponentContractTests
         Assert.Contains("0 to 1", photovoltaic.Params.Input[4].Description, StringComparison.Ordinal);
 
         GH_Component domesticHotWater = Component(assembly, "DomesticHotWaterComponent");
-        Assert.Equal("Param_Integer", domesticHotWater.Params.Input[1].GetType().Name);
+        Assert.Equal("ChoiceStringParam", domesticHotWater.Params.Input[1].GetType().Name);
         Assert.Equal("Domestic Hot Water", PersistentDefault(domesticHotWater.Params.Input[0]));
-        Assert.Equal((int)Fuel.NaturalGas, PersistentDefault(domesticHotWater.Params.Input[1]));
+        Assert.Equal(nameof(Fuel.NaturalGas), PersistentDefault(domesticHotWater.Params.Input[1]));
         Assert.Equal(0.85d, PersistentDefault(domesticHotWater.Params.Input[2]));
         Assert.Contains("greater than 0", domesticHotWater.Params.Input[2].Description, StringComparison.Ordinal);
         Assert.Contains("no greater than 1", domesticHotWater.Params.Input[2].Description, StringComparison.Ordinal);
@@ -323,26 +329,43 @@ public sealed class HvacComponentContractTests
         GH_Component glazing = Component(assembly, "GlazingComponent");
         GH_Component window = Component(assembly, "WindowFromPolylineComponent");
         GH_Component door = Component(assembly, "DoorFromPolylineComponent");
-        GH_Component surface = Component(assembly, "SurfaceComponent");
+        GH_Component floor = Component(assembly, "FloorComponent");
+        GH_Component ceiling = Component(assembly, "CeilingComponent");
+        GH_Component wall = Component(assembly, "WallComponent");
+        GH_Component[] surfaces = { floor, ceiling, wall };
 
         Assert.Equal(new Guid("ecfd5cdd-3e4c-4261-8ddd-ecea8eaf5599"), glazing.ComponentGuid);
         Assert.Equal(new Guid("54bb0065-1b10-420c-a90e-0ce75e746781"), window.ComponentGuid);
         Assert.Equal(new Guid("b2e1e805-a126-44fe-bf6c-4dbf16a76aae"), door.ComponentGuid);
-        Assert.Equal(new Guid("c25eb6d8-9500-44e5-9909-58d41de0a320"), surface.ComponentGuid);
+        Assert.Equal(new Guid("1938b273-3a60-459b-beb2-92e7c4905053"), floor.ComponentGuid);
+        Assert.Equal(new Guid("d1930bb6-4398-46b9-a661-451370f09103"), ceiling.ComponentGuid);
+        Assert.Equal(new Guid("20a8a2f5-845e-4a46-aa03-fb8849f592e2"), wall.ComponentGuid);
         Assert.Equal("Name|U-Value|SHGC", string.Join("|", glazing.Params.Input.Select(item => item.Name)));
         Assert.Equal("Curve|Name|Glazing", string.Join("|", window.Params.Input.Select(item => item.Name)));
         Assert.Equal("Curve|Name|Construction", string.Join("|", door.Params.Input.Select(item => item.Name)));
-        Assert.Equal(
-            "Curve|Name|Type|Construction|Boundary Intent|Openings",
-            string.Join("|", surface.Params.Input.Select(item => item.Name)));
+        Assert.All(surfaces, surface => Assert.Equal(
+            "Curve|Name|Construction|Boundary Condition|Openings",
+            string.Join("|", surface.Params.Input.Select(item => item.Name))));
         Assert.Equal("DragonGlazingParam", glazing.Params.Output[0].GetType().Name);
         Assert.Equal("DragonOpeningParam", window.Params.Output[0].GetType().Name);
         Assert.Equal("DragonOpeningParam", door.Params.Output[0].GetType().Name);
-        Assert.Equal("DragonOpeningParam", surface.Params.Input[5].GetType().Name);
+        Assert.All(surfaces, surface =>
+        {
+            Assert.Equal("ChoiceStringParam", surface.Params.Input[3].GetType().Name);
+            Assert.Equal("DragonOpeningParam", surface.Params.Input[4].GetType().Name);
+            Assert.DoesNotContain(
+                surface.Params.Input,
+                item => item.Name.Contains("Adjacent", StringComparison.OrdinalIgnoreCase)
+                    || item.Name.Contains("Index", StringComparison.OrdinalIgnoreCase));
+        });
+        Assert.Equal(nameof(SurfaceBoundaryCondition.Ground), PersistentDefault(floor.Params.Input[3]));
+        Assert.Equal(nameof(SurfaceBoundaryCondition.Outdoors), PersistentDefault(ceiling.Params.Input[3]));
+        Assert.Equal(nameof(SurfaceBoundaryCondition.Outdoors), PersistentDefault(wall.Params.Input[3]));
+        Assert.Null(assembly.GetType(ComponentsNamespace + "SurfaceComponent", throwOnError: false));
         Assert.DoesNotContain(
-            surface.Params.Input,
-            item => item.Name.Contains("Adjacent", StringComparison.OrdinalIgnoreCase)
-                || item.Name.Contains("Index", StringComparison.OrdinalIgnoreCase));
+            assembly.GetTypes().Where(type => !type.IsAbstract && typeof(GH_Component).IsAssignableFrom(type)),
+            type => Assert.IsAssignableFrom<GH_Component>(Activator.CreateInstance(type)).ComponentGuid
+                == new Guid("c25eb6d8-9500-44e5-9909-58d41de0a320"));
         var host = new Surface(
             new EntityId("host"),
             "Host",
@@ -369,7 +392,7 @@ public sealed class HvacComponentContractTests
         Assembly assembly = LoadPlugin();
         DragonSourceSystemGoo heatPumpGoo = Source(assembly, "HeatPumpComponent", new Dictionary<int, object?>
         {
-            [0] = "Authored HP", [1] = (int)Fuel.Electricity, [2] = 3.7d, [3] = 4.8d,
+            [0] = "Authored HP", [1] = nameof(Fuel.Electricity), [2] = 3.7d, [3] = 4.8d,
             [4] = 20_000d, [5] = 21_000d,
         });
         var heatPump = Assert.IsType<HeatPump>(heatPumpGoo.Value);
@@ -382,17 +405,17 @@ public sealed class HvacComponentContractTests
             "GeothermalHeatPumpComponent",
             new Dictionary<int, object?>
             {
-                [0] = "Authored Geo", [1] = (int)Fuel.Electricity, [2] = 4.2d, [3] = 5.3d,
+                [0] = "Authored Geo", [1] = nameof(Fuel.Electricity), [2] = 4.2d, [3] = 5.3d,
                 [4] = 22_000d, [5] = 23_000d,
             }).Value);
         Assert.False(string.IsNullOrWhiteSpace(geothermal.Id.Value));
 
         CoolingTower[] towers =
         {
-            Tower(assembly, 0, 0, "tower-open-single"),
-            Tower(assembly, 0, 1, "tower-open-two"),
-            Tower(assembly, 1, 0, "tower-closed-single"),
-            Tower(assembly, 1, 1, "tower-closed-two"),
+            Tower(assembly, "Open", "Single", "tower-open-single"),
+            Tower(assembly, "Open", "Two", "tower-open-two"),
+            Tower(assembly, "Closed", "Single", "tower-closed-single"),
+            Tower(assembly, "Closed", "Two", "tower-closed-two"),
         };
         Assert.IsType<OpenSingleSpeedCoolingTower>(towers[0]);
         Assert.IsType<OpenTwoSpeedCoolingTower>(towers[1]);
@@ -401,7 +424,7 @@ public sealed class HvacComponentContractTests
 
         DragonSourceSystemGoo boilerGoo = Source(assembly, "BoilerComponent", new Dictionary<int, object?>
         {
-            [0] = "Authored Boiler", [1] = (int)Fuel.NaturalGas, [2] = 0.92d,
+            [0] = "Authored Boiler", [1] = nameof(Fuel.NaturalGas), [2] = 0.92d,
             [3] = 31_000d, [4] = 0.88d, [5] = 62d,
         });
         var boiler = Assert.IsType<Boiler>(boilerGoo.Value);
@@ -418,7 +441,7 @@ public sealed class HvacComponentContractTests
 
         var chiller = Assert.IsType<Chiller>(Source(assembly, "ChillerComponent", new Dictionary<int, object?>
         {
-            [0] = "Authored Chiller", [1] = 5.4d, [2] = (int)CompressorType.Screw,
+            [0] = "Authored Chiller", [1] = 5.4d, [2] = nameof(CompressorType.Screw),
             [3] = towers[3], [4] = 41_000d, [5] = 0.86d, [6] = 5.8d,
         }).Value);
         Assert.Same(towers[3], chiller.CoolingTower);
@@ -437,12 +460,12 @@ public sealed class HvacComponentContractTests
 
         DragonSourceSystemGoo repeat = Source(assembly, "HeatPumpComponent", new Dictionary<int, object?>
         {
-            [0] = "Deterministic", [1] = (int)Fuel.Electricity, [2] = 3.5d, [3] = 4d,
+            [0] = "Deterministic", [1] = nameof(Fuel.Electricity), [2] = 3.5d, [3] = 4d,
             [4] = 0d, [5] = 0d,
         });
         DragonSourceSystemGoo repeatAgain = Source(assembly, "HeatPumpComponent", new Dictionary<int, object?>
         {
-            [0] = "Deterministic", [1] = (int)Fuel.Electricity, [2] = 3.5d, [3] = 4d,
+            [0] = "Deterministic", [1] = nameof(Fuel.Electricity), [2] = 3.5d, [3] = 4d,
             [4] = 0d, [5] = 0d,
         });
         Assert.Equal(repeat.Value.Id, repeatAgain.Value.Id);
@@ -557,7 +580,7 @@ public sealed class HvacComponentContractTests
 
         var domesticHotWaterAccess = new TestDataAccess(new Dictionary<int, object?>
         {
-            [0] = "Authored Hot Water", [1] = (int)Fuel.Propane, [2] = 0.91d,
+            [0] = "Authored Hot Water", [1] = nameof(Fuel.Propane), [2] = 0.91d,
         });
         InvokeSolve(Component(assembly, "DomesticHotWaterComponent"), domesticHotWaterAccess);
         var domesticHotWaterGoo = Assert.IsType<DragonDomesticHotWaterGoo>(domesticHotWaterAccess.Outputs[0]);
@@ -574,7 +597,7 @@ public sealed class HvacComponentContractTests
         Assembly assembly = LoadPlugin();
         IReadOnlyDictionary<int, object?> inputs = new Dictionary<int, object?>
         {
-            [0] = "Deterministic Hot Water", [1] = (int)Fuel.Electricity,
+            [0] = "Deterministic Hot Water", [1] = nameof(Fuel.Electricity),
             [2] = 0.95d,
         };
 
@@ -592,18 +615,18 @@ public sealed class HvacComponentContractTests
 
         var invalidFuelAccess = new TestDataAccess(new Dictionary<int, object?>
         {
-            [0] = "Invalid Fuel", [1] = int.MaxValue, [2] = 0.9d,
+            [0] = "Invalid Fuel", [1] = "Uranium", [2] = 0.9d,
         });
         GH_Component invalidFuel = Component(assembly, "DomesticHotWaterComponent");
         InvokeSolve(invalidFuel, invalidFuelAccess);
         Assert.False(invalidFuelAccess.Outputs.ContainsKey(0));
         Assert.Contains(
             invalidFuel.RuntimeMessages(GH_RuntimeMessageLevel.Error),
-            message => message.Contains("Fuel value", StringComparison.Ordinal));
+            message => message.Contains("Fuel must be", StringComparison.Ordinal));
 
         var invalidEfficiencyAccess = new TestDataAccess(new Dictionary<int, object?>
         {
-            [0] = "Invalid Efficiency", [1] = (int)Fuel.NaturalGas,
+            [0] = "Invalid Efficiency", [1] = nameof(Fuel.NaturalGas),
             [2] = 0d,
         });
         GH_Component invalidEfficiency = Component(assembly, "DomesticHotWaterComponent");
@@ -673,14 +696,14 @@ public sealed class HvacComponentContractTests
         Assembly assembly = LoadPlugin();
         var invalidTowerAccess = new TestDataAccess(new Dictionary<int, object?>
         {
-            [0] = "Invalid Tower", [1] = 9, [2] = 0, [3] = 0d, [4] = 0.9d,
+            [0] = "Invalid Tower", [1] = "Loop", [2] = "Single", [3] = 0d, [4] = 0.9d,
         });
         GH_Component invalidTower = Component(assembly, "CoolingTowerComponent");
         InvokeSolve(invalidTower, invalidTowerAccess);
         Assert.False(invalidTowerAccess.Outputs.ContainsKey(0));
         Assert.Contains(
             invalidTower.RuntimeMessages(GH_RuntimeMessageLevel.Error),
-            message => message.Contains("Circuit must be Open (0) or Closed (1)", StringComparison.Ordinal));
+            message => message.Contains("Circuit must be Open, Closed", StringComparison.Ordinal));
 
         var boiler = new Boiler(
             new EntityId("wrong-ahu-source"),
@@ -762,7 +785,7 @@ public sealed class HvacComponentContractTests
         return Assert.IsType<DragonSupplySystemGoo>(access.Outputs[0]).Value;
     }
 
-    private static CoolingTower Tower(Assembly assembly, int circuit, int speeds, string name)
+    private static CoolingTower Tower(Assembly assembly, string circuit, string speeds, string name)
     {
         var access = new TestDataAccess(new Dictionary<int, object?>
         {

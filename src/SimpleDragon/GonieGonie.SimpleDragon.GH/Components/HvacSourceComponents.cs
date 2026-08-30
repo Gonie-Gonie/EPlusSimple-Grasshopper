@@ -39,7 +39,7 @@ public abstract class SimpleDragonHeatPumpSourceComponent : SimpleDragonHvacComp
     protected override void Solve(IGH_DataAccess DA)
     {
         string name = DefaultName;
-        int fuel = (int)FuelType.Electricity;
+        string fuel = nameof(FuelType.Electricity);
         double heatingCop = 3d;
         double coolingCop = 3d;
         if (!DA.GetData(0, ref name)
@@ -123,9 +123,9 @@ public sealed class SimpleDragonChillerComponent : SimpleDragonHvacComponent
         pManager.AddTextParameter("Name", "N", "Chiller name.", GH_ParamAccess.item, "Chiller");
         pManager.AddNumberParameter("Cooling COP", "COP", "Dimensionless reference cooling COP (> 0).", GH_ParamAccess.item, 3d);
         pManager.AddNumberParameter("Cooling Capacity", "Cap", "Optional nominal cooling capacity in W; leave disconnected for autosize/unset.", GH_ParamAccess.item);
-        AddEnumParameter(pManager, "Compressor", "Comp", "Compressor family: Turbo=0, Screw=1, Reciprocating=2.", CompressorType.Turbo);
-        AddEnumParameter(pManager, "Tower Circuit", "Tower", "Cooling-tower circuit: Closed=0 or Open=1.", CoolingTowerType.Open);
-        AddEnumParameter(pManager, "Tower Control", "Control", "Cooling-tower fan control: SingleSpeed=0 or TwoSpeed=1.", CoolingTowerControl.SingleSpeed);
+        AddEnumParameter(pManager, "Compressor", "Comp", "Compressor family.", CompressorType.Turbo);
+        AddEnumParameter(pManager, "Tower Circuit", "Tower", "Cooling-tower circuit.", CoolingTowerType.Open);
+        AddEnumParameter(pManager, "Tower Control", "Control", "Cooling-tower fan control.", CoolingTowerControl.SingleSpeed);
         pManager.AddNumberParameter("Tower Capacity", "TCap", "Optional nominal cooling-tower capacity in W; leave disconnected for autosize/unset.", GH_ParamAccess.item);
         pManager[2].Optional = true;
         pManager[6].Optional = true;
@@ -141,9 +141,9 @@ public sealed class SimpleDragonChillerComponent : SimpleDragonHvacComponent
     {
         string name = "Chiller";
         double cop = 3d;
-        int compressor = (int)CompressorType.Turbo;
-        int towerType = (int)CoolingTowerType.Open;
-        int towerControl = (int)CoolingTowerControl.SingleSpeed;
+        string compressor = nameof(CompressorType.Turbo);
+        string towerType = nameof(CoolingTowerType.Open);
+        string towerControl = nameof(CoolingTowerControl.SingleSpeed);
         if (!DA.GetData(0, ref name)
             || !DA.GetData(1, ref cop)
             || !DA.GetData(3, ref compressor)
@@ -207,7 +207,7 @@ public sealed class SimpleDragonAbsorptionChillerComponent : SimpleDragonHvacCom
     protected override void Solve(IGH_DataAccess DA)
     {
         string name = "Absorption Chiller";
-        int fuel = (int)FuelType.NaturalGas;
+        string fuel = nameof(FuelType.NaturalGas);
         double cop = 0.9d;
         double efficiency = 0.85d;
         if (!DA.GetData(0, ref name)
@@ -269,7 +269,7 @@ public sealed class SimpleDragonBoilerComponent : SimpleDragonHvacComponent
     protected override void Solve(IGH_DataAccess DA)
     {
         string name = "Boiler";
-        int fuel = (int)FuelType.NaturalGas;
+        string fuel = nameof(FuelType.NaturalGas);
         double efficiency = 0.85d;
         bool hotWater = false;
         if (!DA.GetData(0, ref name)
