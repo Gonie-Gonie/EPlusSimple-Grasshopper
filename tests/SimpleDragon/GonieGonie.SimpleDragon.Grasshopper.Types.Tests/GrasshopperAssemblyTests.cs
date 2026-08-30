@@ -2,8 +2,11 @@ using System.Reflection;
 using System.Security.Cryptography;
 using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
+using GonieGonie.SimpleDragon.Grasshopper.Types;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Types;
+using Rhino.Geometry;
 
 namespace GonieGonie.SimpleDragon.Grasshopper.Tests;
 
@@ -210,6 +213,70 @@ public sealed class GrasshopperAssemblyTests
     }
 
     [Fact]
+    public void MonthlyConsumersKeepDirectGrrDefaultsAndWaitQuietlyForAResult()
+    {
+        Assembly assembly = LoadPlugin("GonieGonie.SimpleDragon.GH");
+        GH_Component dataTree = Component(assembly, "GreenRetrofitDataTreeComponent");
+        GH_Component line = Component(assembly, "GreenRetrofitMonthlyLinePlotComponent");
+        GH_Component bars = Component(assembly, "GreenRetrofitMonthlyBarPlotComponent");
+
+        foreach (GH_Component component in new[] { dataTree, line, bars })
+        {
+            Assert.Equal("SiteUses", StringDefault(component, 1));
+            Assert.False(BooleanDefault(component, 2));
+            Assert.Equal("Fuel", StringDefault(component, 3));
+        }
+
+        foreach (GH_Component component in new[] { line, bars })
+        {
+            Assert.Equal(Plane.WorldXY, PlaneDefault(component, 4));
+            Assert.Equal(12d, NumberDefault(component, 5));
+            Assert.Equal(6d, NumberDefault(component, 6));
+        }
+
+        Assert.False(BooleanDefault(bars, 7));
+
+        foreach (GH_Component component in new[] { dataTree, line, bars })
+        {
+            IGH_DataAccess access = DispatchProxy.Create<IGH_DataAccess, MissingResultDataAccess>();
+            var probe = Assert.IsAssignableFrom<MissingResultDataAccess>(access);
+
+            InvokeSolve(component, access);
+
+            Assert.Empty(component.RuntimeMessages(GH_RuntimeMessageLevel.Error));
+            Assert.Equal(0, probe.OutputSetCount);
+        }
+    }
+
+    [Fact]
+    public void MonthlyPlotStillRejectsInvalidConnectedAdvancedInputs()
+    {
+        Assembly assembly = LoadPlugin("GonieGonie.SimpleDragon.GH");
+        GH_Component line = Component(assembly, "GreenRetrofitMonthlyLinePlotComponent");
+        string fixture = Path.Combine(
+            FindRepositoryRoot(AppContext.BaseDirectory),
+            "fixtures",
+            "simple-dragon",
+            "grr",
+            "ASHRAE 140 modified.grr");
+        IGH_DataAccess access = DispatchProxy.Create<IGH_DataAccess, MissingResultDataAccess>();
+        var probe = Assert.IsAssignableFrom<MissingResultDataAccess>(access);
+        probe.Inputs.Add(0, new GreenRetrofitResultGoo(GrrReader.ReadFile(fixture).RequireResult()));
+        probe.Inputs.Add(1, "not-a-metric");
+        probe.Inputs.Add(2, false);
+        probe.Inputs.Add(3, "Fuel");
+        probe.Inputs.Add(4, Plane.WorldXY);
+        probe.Inputs.Add(5, 12d);
+        probe.Inputs.Add(6, 6d);
+
+        InvokeSolve(line, access);
+
+        string error = Assert.Single(line.RuntimeMessages(GH_RuntimeMessageLevel.Error));
+        Assert.Contains("Unknown GRR metric", error, StringComparison.Ordinal);
+        Assert.Equal(0, probe.OutputSetCount);
+    }
+
+    [Fact]
     public void CanonicalComponentsHaveNoHiddenOrRelationshipStageResidue()
     {
         Assembly assembly = LoadPlugin("GonieGonie.SimpleDragon.GH");
@@ -332,6 +399,30 @@ public sealed class GrasshopperAssemblyTests
         return Convert.ToHexString(SHA256.HashData(bytes));
     }
 
+    private static string StringDefault(GH_Component component, int index) =>
+        Assert.IsType<GH_String>(Assert.Single(
+            Assert.IsType<Param_String>(component.Params.Input[index]).PersistentData.AllData(true))).Value;
+
+    private static bool BooleanDefault(GH_Component component, int index) =>
+        Assert.IsType<GH_Boolean>(Assert.Single(
+            Assert.IsType<Param_Boolean>(component.Params.Input[index]).PersistentData.AllData(true))).Value;
+
+    private static double NumberDefault(GH_Component component, int index) =>
+        Assert.IsType<GH_Number>(Assert.Single(
+            Assert.IsType<Param_Number>(component.Params.Input[index]).PersistentData.AllData(true))).Value;
+
+    private static Plane PlaneDefault(GH_Component component, int index) =>
+        Assert.IsType<GH_Plane>(Assert.Single(
+            Assert.IsType<Param_Plane>(component.Params.Input[index]).PersistentData.AllData(true))).Value;
+
+    private static void InvokeSolve(GH_Component component, IGH_DataAccess access)
+    {
+        MethodInfo solve = Assert.IsAssignableFrom<MethodInfo>(component.GetType().BaseType?.GetMethod(
+            "SolveInstance",
+            BindingFlags.Instance | BindingFlags.NonPublic));
+        solve.Invoke(component, new object[] { access });
+    }
+
     private static GH_Component Component(Assembly assembly, string typeName)
     {
         Type type = Assert.Single(ComponentTypes(assembly), type => type.Name == typeName);
@@ -368,6 +459,47 @@ public sealed class GrasshopperAssemblyTests
         }
 
         throw new DirectoryNotFoundException("Could not locate the Dragons.Grasshopper.sln repository root.");
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Performance",
+        "CA1852:Seal internal types",
+        Justification = "DispatchProxy creates a runtime subclass of this probe.")]
+    private class MissingResultDataAccess : DispatchProxy
+    {
+        internal Dictionary<int, object?> Inputs { get; } = new();
+
+        internal int OutputSetCount { get; private set; }
+
+        protected override object? Invoke(MethodInfo? targetMethod, object?[]? args)
+        {
+            Assert.NotNull(targetMethod);
+            if (string.Equals(targetMethod!.Name, "GetData", StringComparison.Ordinal)
+                && args is { Length: 2 }
+                && args[0] is int inputIndex
+                && Inputs.TryGetValue(inputIndex, out object? inputValue))
+            {
+                args[1] = inputValue;
+                return true;
+            }
+
+            if (targetMethod!.Name.StartsWith("SetData", StringComparison.Ordinal))
+            {
+                OutputSetCount++;
+            }
+
+            if (targetMethod.ReturnType == typeof(bool))
+            {
+                return false;
+            }
+
+            if (targetMethod.ReturnType == typeof(int))
+            {
+                return 0;
+            }
+
+            return null;
+        }
     }
 
     private sealed class NullIconStringParam : GH_PersistentParam<GH_String>

@@ -215,7 +215,11 @@ public sealed class GreenRetrofitDataTreeComponent : MonthlySimpleDragonComponen
     {
         if (!MonthlyComponentSupport.TryRead(DA, out MonthlyInput input, out string error))
         {
-            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, error);
+            }
+
             return;
         }
 
@@ -262,7 +266,11 @@ public sealed class GreenRetrofitMonthlyLinePlotComponent : MonthlySimpleDragonC
                 out double height,
                 out string error))
         {
-            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, error);
+            }
+
             return;
         }
 
@@ -319,7 +327,11 @@ public sealed class GreenRetrofitMonthlyBarPlotComponent : MonthlySimpleDragonCo
                 out double height,
                 out string error))
         {
-            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, error);
+            }
+
             return;
         }
 
@@ -361,14 +373,19 @@ internal static class MonthlyComponentSupport
         string metricText = "SiteUses";
         bool gross = false;
         string groupingText = "Fuel";
-        if (!DA.GetData(0, ref resultGoo)
-            || !DA.GetData(1, ref metricText)
-            || !DA.GetData(2, ref gross)
-            || !DA.GetData(3, ref groupingText)
-            || resultGoo?.Value is null)
+        if (!DA.GetData(0, ref resultGoo) || resultGoo?.Value is null)
         {
             input = null!;
-            error = "GRR, Metric, Gross, and Grouping inputs are required.";
+            error = string.Empty;
+            return false;
+        }
+
+        if (!DA.GetData(1, ref metricText)
+            || !DA.GetData(2, ref gross)
+            || !DA.GetData(3, ref groupingText))
+        {
+            input = null!;
+            error = "Metric, Gross, and Grouping inputs are required.";
             return false;
         }
 

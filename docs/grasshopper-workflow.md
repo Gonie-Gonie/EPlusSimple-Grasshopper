@@ -121,6 +121,13 @@ required.
 line-plot, and bar-plot components expose the same ordered month, fuel, and
 end-use data without an InvisibleDragon-result handoff or file round trip.
 
+For an immediate Rhino preview, connect GRR to `Monthly Lines` or `Monthly
+Bars` and leave every other input alone. The defaults draw SiteUses per area,
+grouped by fuel, on a 12 x 6 World XY frame; the bar variant defaults to grouped
+bars. Before Run has produced a GRR, these result components simply wait without
+raising a red error. Metric, grouping, plane, size, and stacking remain optional
+controls for a customized graph.
+
 GRM/GRR readers, writers, and CSV export intentionally expose artifact destinations because those are user-owned results, not simulation setup. Relative output paths use the saved Grasshopper document folder; unsaved definitions fall back to the per-user temp directory.
 
 Wrap each model and its optional stable ID in a `SimpleDragon Batch Case`, then
@@ -140,8 +147,9 @@ The tracked definitions under `examples/` progress from materials and profiles t
   and PV is resolved with both into one complete GRM;
 - `14-simpledragon-two-zone-run-results-csv.gh`: the stable end-to-end gate,
   with an electric radiator and ERV connected directly to each Zone,
-  `SD Model -> Run SimpleDragon -> GRR`, summaries, CSV, and a typed Batch Case
-  feeding the managed batch runner.
+  `SD Model -> Run SimpleDragon -> GRR`, a directly connected default monthly
+  line graph, summaries, CSV, and a typed Batch Case feeding the managed batch
+  runner.
 
 `02-invisibledragon-single-zone-hvac-idf.gh` shows the complete standalone
 low-level topology: authoring, path-free compile, explicit EPW verification,

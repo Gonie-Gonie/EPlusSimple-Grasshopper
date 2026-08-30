@@ -581,17 +581,19 @@ internal static class AdvancedExampleDefinitions
             graph.Connect(timeout, null, run, 4);
 
             GraphNode resultSummary = graph.Component(113, Catalog.SimpleResultSummary, 2830, 870);
+            GraphNode monthlyLines = graph.Component(119, Catalog.SimpleLinePlot, 2830, 1040);
             GraphNode exportDirectory = graph.Panel(
                 114,
                 "CSV export directory",
                 @"..\temp\example-preview\run-results-csv",
                 2830,
-                1190);
-            GraphNode caseId = graph.Panel(115, "CSV case ID", "two-zone-office", 2830, 1280);
-            GraphNode exportTrigger = graph.Boolean(116, "Export CSV", false, 2830, 1370);
-            GraphNode overwrite = graph.Boolean(117, "Overwrite CSV", false, 2830, 1450);
-            GraphNode exportCsv = graph.Component(118, Catalog.SimpleExportCsv, 3210, 1220);
+                1300);
+            GraphNode caseId = graph.Panel(115, "CSV case ID", "two-zone-office", 2830, 1390);
+            GraphNode exportTrigger = graph.Boolean(116, "Export CSV", false, 2830, 1480);
+            GraphNode overwrite = graph.Boolean(117, "Overwrite CSV", false, 2830, 1560);
+            GraphNode exportCsv = graph.Component(118, Catalog.SimpleExportCsv, 3210, 1330);
             graph.Connect(run, 0, resultSummary, 0);
+            graph.Connect(run, 0, monthlyLines, 0);
             graph.Connect(run, 0, exportCsv, 0);
             graph.Connect(model, 0, exportCsv, 1);
             graph.Connect(exportDirectory, null, exportCsv, 2);
@@ -603,8 +605,8 @@ internal static class AdvancedExampleDefinitions
             GraphNode runState = graph.Panel(130, "SimpleDragon run state", string.Empty, 2830, 650);
             GraphNode runSuccess = graph.Panel(131, "SimpleDragon run success", string.Empty, 3210, 650);
             GraphNode annualResult = graph.Panel(134, "Annual site result", string.Empty, 3210, 870);
-            GraphNode csvFiles = graph.Panel(135, "CSV package files", string.Empty, 3580, 1220);
-            GraphNode csvWritten = graph.Panel(136, "CSV written", string.Empty, 3580, 1420);
+            GraphNode csvFiles = graph.Panel(135, "CSV package files", string.Empty, 3580, 1330);
+            GraphNode csvWritten = graph.Panel(136, "CSV written", string.Empty, 3580, 1530);
             graph.Connect(run, 1, runState, null);
             graph.Connect(run, 2, runSuccess, null);
             graph.Connect(resultSummary, 1, annualResult, null);
@@ -648,6 +650,7 @@ internal static class AdvancedExampleDefinitions
                 cancelTrigger.InstanceGuid,
                 forceRerun.InstanceGuid,
                 resultSummary.InstanceGuid,
+                monthlyLines.InstanceGuid,
                 exportCsv.InstanceGuid,
                 exportDirectory.InstanceGuid,
                 exportTrigger.InstanceGuid,
@@ -1047,6 +1050,33 @@ internal static class AdvancedExampleDefinitions
             Require(
                 Math.Abs(monthlySum - annualResult) <= annualTolerance,
                 "SimpleDragon GRR annual result did not equal the twelve monthly values.");
+            RequireValidCurveOutput(
+                document,
+                expectation.MonthlyLinePlotGuid,
+                0,
+                5,
+                "default monthly fuel lines");
+            RequireValidCurveOutput(
+                document,
+                expectation.MonthlyLinePlotGuid,
+                1,
+                1,
+                "default monthly plot frame");
+            RequireValidCurveOutput(
+                document,
+                expectation.MonthlyLinePlotGuid,
+                2,
+                1,
+                "default monthly plot zero axis");
+            Require(
+                string.Equals(ReadString(document, expectation.MonthlyLinePlotGuid, 7), "kWh/m2", StringComparison.Ordinal),
+                "The zero-configuration monthly plot did not use the SiteUses per-area default.");
+            string[] plotErrors = RequireObject<GH_ActiveObject>(document, expectation.MonthlyLinePlotGuid)
+                .RuntimeMessages(GH_RuntimeMessageLevel.Error)
+                .ToArray();
+            Require(
+                plotErrors.Length == 0,
+                "The zero-configuration monthly plot reported errors: " + string.Join(" | ", plotErrors));
 
             SetBoolean(document, expectation.OverwriteGuid, true);
             SetBoolean(document, expectation.ExportTriggerGuid, true);
@@ -1808,6 +1838,26 @@ internal static class AdvancedExampleDefinitions
                 + " instead of " + expectedType + ".");
     }
 
+    private static void RequireValidCurveOutput(
+        GH_Document document,
+        Guid componentGuid,
+        int outputIndex,
+        int expectedCount,
+        string label)
+    {
+        object[] values = ResolveParam(document, componentGuid, outputIndex, output: true)
+            .VolatileData
+            .AllData(true)
+            .ToArray();
+        GH_Curve[] curves = values.OfType<GH_Curve>().ToArray();
+        Require(
+            values.Length == expectedCount
+                && curves.Length == expectedCount
+                && curves.All(curve => curve.Value is not null && curve.Value.IsValid),
+            componentGuid + " produced invalid " + label + "; expected " + expectedCount
+                + " valid curves but received " + values.Length + ".");
+    }
+
     private static bool ReadBoolean(GH_Document document, Guid componentGuid, int outputIndex)
     {
         object value = ResolveParam(document, componentGuid, outputIndex, output: true)
@@ -2480,6 +2530,7 @@ internal sealed record RuntimeWorkflowExpectation(
     Guid CancelTriggerGuid,
     Guid ForceRerunGuid,
     Guid ResultSummaryGuid,
+    Guid MonthlyLinePlotGuid,
     Guid ExportCsvGuid,
     Guid ExportDirectoryGuid,
     Guid ExportTriggerGuid,

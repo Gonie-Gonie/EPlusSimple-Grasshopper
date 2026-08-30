@@ -14,7 +14,7 @@ Surface Breps and window curves that can be referenced directly from Grasshopper
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
 | `12-simpledragon-two-zone-model.gh` | Complex two-Zone model authoring: Fenestration Construction -> Opening -> local Surface, six Surfaces -> each Zone, west heat-pump/AHU, east boiler/radiator, dedicated ERVs, PV, then one complete GRM with JSON, provenance, and area previews |
 | `13-simpledragon-results-and-plots.gh` | Real GRR read, annual summary, monthly DataTree, line plot, bar plot, and non-writing CSV preview |
-| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: explicit Surface ownership, dedicated electric radiators and ERVs connect to their own Zones, the complete model feeds `Run SimpleDragon` directly, GRR feeds summaries/CSV, and a typed Batch Case feeds managed batch without parallel model/ID lists |
+| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: explicit Surface ownership, dedicated electric radiators and ERVs connect to their own Zones, the complete model feeds `Run SimpleDragon` directly, and GRR feeds a zero-configuration monthly graph, summaries, and CSV; a typed Batch Case feeds managed batch without parallel model/ID lists |
 | `30-two-zone-office.3dm` | Twelve named planar Surface Breps forming two adjacent office Zones, plus two named south-window curves |
 | `31-three-zone-stepped-office.3dm` | Eighteen named planar Surface Breps forming two adjacent ground-floor Zones and an adjacent upper Zone, plus three named windows |
 
@@ -39,7 +39,9 @@ an EPW and creates a fresh Run edge. The Run, Cancel, and Force controls are
 saved False.
 Example 14 is the complete SimpleDragon simulation path. It derives Seoul
 weather from the Model Address/Vintage internally: create a fresh False-to-True
-edge on Run and follow the State, Success, and Diagnostics outputs. Its intentionally
+edge on Run and follow the State, Success, Diagnostics, and monthly line-graph
+outputs. The Run GRR is the graph's only connected input; its defaults draw
+monthly SiteUses per area, grouped by fuel, on a 12 x 6 World XY frame. Its intentionally
 simple electric-radiator HVAC keeps this full-process execution example stable;
 use example 12 for the broader HVAC/ERV/PV composition demonstration. No EnergyPlus,
 IDD, EPW, runtime-root, or temporary-directory path belongs on this canonical
@@ -123,7 +125,7 @@ and round trip; the automated gate does not invent a standalone weather path.
 When the verified distribution payloads and EnergyPlus runtime are available,
 the gate temporarily enables example 14 in memory and verifies internal
 packaged-weather selection, its Surface-to-Zone electric-radiator model, direct
-SimpleDragon Run-to-GRR execution, CSV, cache, and cancellation in both hosts. The saved trigger
+SimpleDragon Run-to-GRR execution, the default monthly graph, CSV, cache, and cancellation in both hosts. The saved trigger
 values remain `False`. Use
 `-SkipEnergyPlusWorkflow` to test the explicit disabled state or
 `-EnergyPlusRoot` to select a runtime. The gate supplies that root, its IDD, and
