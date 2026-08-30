@@ -12,6 +12,18 @@ internal static class ExampleDefinitionGate
 {
     private const string InvisibleFileName = "00-invisibledragon-material-construction.gh";
     private const string SimpleFileName = "10-simpledragon-material-construction.gh";
+    private const string MaterialGroupName = "1. Material Inputs";
+    private const string AssemblyGroupName = "2. Construction Assembly";
+    private const string ResultGroupName = "3. Calculated Result";
+    private const string AssemblyNoteText =
+        "Combine material and thickness into a layer.\nAdd the layer to the construction.";
+    private const string ResultNoteText = "Read the calculated U-value.";
+    private static readonly System.Drawing.Color MaterialGroupColour =
+        System.Drawing.Color.FromArgb(255, 221, 235, 250);
+    private static readonly System.Drawing.Color AssemblyGroupColour =
+        System.Drawing.Color.FromArgb(255, 225, 243, 226);
+    private static readonly System.Drawing.Color ResultGroupColour =
+        System.Drawing.Color.FromArgb(255, 221, 242, 241);
     private static readonly DefinitionSpec[] Definitions =
     {
         new(
@@ -28,7 +40,13 @@ internal static class ExampleDefinitionGate
             new Guid("01000000-0000-4000-8000-000000000002"),
             new Guid("01000000-0000-4000-8000-000000000005"),
             new Guid("01000000-0000-4000-8000-000000000003"),
-            new Guid("01000000-0000-4000-8000-000000000004")),
+            new Guid("01000000-0000-4000-8000-000000000004"),
+            new Guid("01000000-0000-4000-8000-000000000006"),
+            new Guid("01000000-0000-4000-8000-000000000007"),
+            new Guid("01000000-0000-4000-8000-000000000008"),
+            new Guid("01000000-0000-4000-8000-000000000009"),
+            new Guid("01000000-0000-4000-8000-000000000010"),
+            new Guid("01000000-0000-4000-8000-000000000011")),
         new(
             "SimpleDragon",
             SimpleFileName,
@@ -43,7 +61,13 @@ internal static class ExampleDefinitionGate
             new Guid("02000000-0000-4000-8000-000000000002"),
             new Guid("02000000-0000-4000-8000-000000000005"),
             new Guid("02000000-0000-4000-8000-000000000003"),
-            new Guid("02000000-0000-4000-8000-000000000004"))
+            new Guid("02000000-0000-4000-8000-000000000004"),
+            new Guid("02000000-0000-4000-8000-000000000006"),
+            new Guid("02000000-0000-4000-8000-000000000007"),
+            new Guid("02000000-0000-4000-8000-000000000008"),
+            new Guid("02000000-0000-4000-8000-000000000009"),
+            new Guid("02000000-0000-4000-8000-000000000010"),
+            new Guid("02000000-0000-4000-8000-000000000011"))
     };
 
     internal static void RestrictExternalLibraries(IReadOnlyList<string> pluginPaths)
@@ -195,23 +219,70 @@ internal static class ExampleDefinitionGate
         {
             NickName = "U-Value"
         };
+        var materialNote = new GH_Scribble
+        {
+            Text = MaterialNoteText(definition),
+            Font = GH_FontServer.Large,
+        };
+        var assemblyNote = new GH_Scribble
+        {
+            Text = AssemblyNoteText,
+            Font = GH_FontServer.Large,
+        };
+        var resultNote = new GH_Scribble
+        {
+            Text = ResultNoteText,
+            Font = GH_FontServer.Large,
+        };
+        GH_Group materialGroup = CreateGroup(
+            MaterialGroupName,
+            MaterialGroupColour);
+        GH_Group assemblyGroup = CreateGroup(
+            AssemblyGroupName,
+            AssemblyGroupColour);
+        GH_Group resultGroup = CreateGroup(
+            ResultGroupName,
+            ResultGroupColour);
 
         var document = new GH_Document();
-        Add(document, material, definition.MaterialInstanceGuid, new System.Drawing.PointF(80, 100));
+        Add(document, materialNote, definition.MaterialNoteInstanceGuid, new System.Drawing.PointF(60, 40));
+        Add(document, material, definition.MaterialInstanceGuid, new System.Drawing.PointF(80, 120));
         Add(document, thickness, definition.ThicknessInstanceGuid, new System.Drawing.PointF(100, 260));
-        Add(document, layer, definition.LayerInstanceGuid, new System.Drawing.PointF(390, 140));
-        Add(document, construction, definition.ConstructionInstanceGuid, new System.Drawing.PointF(680, 140));
-        Add(document, result, definition.PanelInstanceGuid, new System.Drawing.PointF(1000, 190));
+        Add(document, assemblyNote, definition.AssemblyNoteInstanceGuid, new System.Drawing.PointF(370, 40));
+        Add(document, layer, definition.LayerInstanceGuid, new System.Drawing.PointF(390, 150));
+        Add(document, construction, definition.ConstructionInstanceGuid, new System.Drawing.PointF(700, 150));
+        Add(document, resultNote, definition.ResultNoteInstanceGuid, new System.Drawing.PointF(1010, 100));
+        Add(document, result, definition.PanelInstanceGuid, new System.Drawing.PointF(1030, 190));
         layer.Params.Input[0].AddSource(material.Params.Output[0]);
         layer.Params.Input[1].AddSource(thickness);
         construction.Params.Input[1].AddSource(layer.Params.Output[0]);
         result.AddSource(construction.Params.Output[1]);
+        AddGroup(
+            document,
+            materialGroup,
+            definition.MaterialGroupInstanceGuid,
+            definition.MaterialNoteInstanceGuid,
+            definition.MaterialInstanceGuid,
+            definition.ThicknessInstanceGuid);
+        AddGroup(
+            document,
+            assemblyGroup,
+            definition.AssemblyGroupInstanceGuid,
+            definition.AssemblyNoteInstanceGuid,
+            definition.LayerInstanceGuid,
+            definition.ConstructionInstanceGuid);
+        AddGroup(
+            document,
+            resultGroup,
+            definition.ResultGroupInstanceGuid,
+            definition.ResultNoteInstanceGuid,
+            definition.PanelInstanceGuid);
         return document;
     }
 
     private static ValidationFacts ValidateGraph(GH_Document document, DefinitionSpec definition)
     {
-        Require(document.ObjectCount == 5, $"{definition.Product} example must contain exactly five objects.");
+        Require(document.ObjectCount == 11, $"{definition.Product} example must contain exactly eleven objects.");
         GH_Component material = RequireObject<GH_Component>(document, definition.MaterialInstanceGuid, "material");
         GH_Component layer = RequireObject<GH_Component>(document, definition.LayerInstanceGuid, "construction layer");
         GH_Component construction = RequireObject<GH_Component>(
@@ -223,6 +294,65 @@ internal static class ExampleDefinitionGate
             definition.ThicknessInstanceGuid,
             "thickness slider");
         GH_Panel panel = RequireObject<GH_Panel>(document, definition.PanelInstanceGuid, "result panel");
+        GH_Scribble materialNote = RequireNote(
+            document,
+            definition.MaterialNoteInstanceGuid,
+            MaterialNoteText(definition),
+            "material note");
+        GH_Scribble assemblyNote = RequireNote(
+            document,
+            definition.AssemblyNoteInstanceGuid,
+            AssemblyNoteText,
+            "assembly note");
+        GH_Scribble resultNote = RequireNote(
+            document,
+            definition.ResultNoteInstanceGuid,
+            ResultNoteText,
+            "result note");
+        RequirePivot(materialNote, 60, 40, definition.Product + " material note");
+        RequirePivot(material, 80, 120, definition.Product + " material component");
+        RequirePivot(thickness, 100, 260, definition.Product + " thickness slider");
+        RequirePivot(assemblyNote, 370, 40, definition.Product + " assembly note");
+        RequirePivot(layer, 390, 150, definition.Product + " layer component");
+        RequirePivot(construction, 700, 150, definition.Product + " construction component");
+        RequirePivot(resultNote, 1010, 100, definition.Product + " result note");
+        RequirePivot(panel, 1030, 190, definition.Product + " result panel");
+        GH_Group materialGroup = RequireGroup(
+            document,
+            definition.MaterialGroupInstanceGuid,
+            MaterialGroupName,
+            MaterialGroupColour,
+            new[]
+            {
+                definition.MaterialNoteInstanceGuid,
+                definition.MaterialInstanceGuid,
+                definition.ThicknessInstanceGuid,
+            });
+        GH_Group assemblyGroup = RequireGroup(
+            document,
+            definition.AssemblyGroupInstanceGuid,
+            AssemblyGroupName,
+            AssemblyGroupColour,
+            new[]
+            {
+                definition.AssemblyNoteInstanceGuid,
+                definition.LayerInstanceGuid,
+                definition.ConstructionInstanceGuid,
+            });
+        GH_Group resultGroup = RequireGroup(
+            document,
+            definition.ResultGroupInstanceGuid,
+            ResultGroupName,
+            ResultGroupColour,
+            new[]
+            {
+                definition.ResultNoteInstanceGuid,
+                definition.PanelInstanceGuid,
+            });
+        RequireExclusiveGrouping(
+            document,
+            definition.Product,
+            new[] { materialGroup, assemblyGroup, resultGroup });
         Require(
             material.ComponentGuid == definition.MaterialComponentGuid
                 && string.Equals(material.GetType().FullName, definition.MaterialType, StringComparison.Ordinal),
@@ -255,6 +385,26 @@ internal static class ExampleDefinitionGate
             panel,
             construction.Params.Output[1].InstanceGuid,
             $"{definition.Product} U-value-to-panel wire");
+        RequireLeftToRight(material, layer, definition.Product + " material-to-layer wire");
+        RequireLeftToRight(thickness, layer, definition.Product + " thickness-to-layer wire");
+        RequireLeftToRight(layer, construction, definition.Product + " layer-to-construction wire");
+        RequireLeftToRight(construction, panel, definition.Product + " construction-to-result wire");
+        RequirePortLeftToRight(
+            material.Params.Output[0],
+            layer.Params.Input[0],
+            definition.Product + " material-to-layer ports");
+        RequirePortLeftToRight(
+            thickness,
+            layer.Params.Input[1],
+            definition.Product + " thickness-to-layer ports");
+        RequirePortLeftToRight(
+            layer.Params.Output[0],
+            construction.Params.Input[1],
+            definition.Product + " layer-to-construction ports");
+        RequirePortLeftToRight(
+            construction.Params.Output[1],
+            panel,
+            definition.Product + " construction-to-result ports");
         int actualWireCount = document.Objects.Sum(value => value switch
         {
             GH_Component component => component.Params.Input.Sum(input => input.SourceCount),
@@ -361,6 +511,21 @@ internal static class ExampleDefinitionGate
         return (GH_Component)value;
     }
 
+    private static string MaterialNoteText(DefinitionSpec definition)
+    {
+        return definition.Product + " starter: choose an opaque material.\nSet its layer thickness.";
+    }
+
+    private static GH_Group CreateGroup(string name, System.Drawing.Color colour)
+    {
+        return new GH_Group
+        {
+            NickName = name,
+            Border = GH_GroupBorder.Box,
+            Colour = colour,
+        };
+    }
+
     private static void Add(
         GH_Document document,
         IGH_DocumentObject value,
@@ -373,6 +538,29 @@ internal static class ExampleDefinitionGate
         Require(
             document.AddObject(value, update: false, index: document.ObjectCount),
             $"Grasshopper refused to add {value.GetType().FullName} to the example document.");
+        value.Attributes.ExpireLayout();
+        value.Attributes.PerformLayout();
+    }
+
+    private static void AddGroup(
+        GH_Document document,
+        GH_Group group,
+        Guid instanceGuid,
+        params Guid[] memberGuids)
+    {
+        Require(memberGuids.Length >= 2, "A native example group must contain at least two objects.");
+        Require(
+            memberGuids.Distinct().Count() == memberGuids.Length,
+            "A native example group cannot list the same object more than once.");
+        Add(document, group, instanceGuid, System.Drawing.PointF.Empty);
+        foreach (Guid memberGuid in memberGuids)
+        {
+            group.AddObject(memberGuid);
+        }
+
+        group.ExpireCaches();
+        group.Attributes.ExpireLayout();
+        group.Attributes.PerformLayout();
     }
 
     private static T RequireObject<T>(GH_Document document, Guid instanceGuid, string label)
@@ -385,10 +573,133 @@ internal static class ExampleDefinitionGate
                 $"The {label} object reopened as {value.GetType().FullName}, not {typeof(T).FullName}.");
     }
 
+    private static GH_Scribble RequireNote(
+        GH_Document document,
+        Guid instanceGuid,
+        string expectedText,
+        string label)
+    {
+        GH_Scribble note = RequireObject<GH_Scribble>(document, instanceGuid, label);
+        Require(
+            string.Equals(note.Text, expectedText, StringComparison.Ordinal),
+            $"The {label} text changed after reopening the definition.");
+        Require(
+            string.Equals(note.Font.Name, GH_FontServer.Large.Name, StringComparison.Ordinal)
+                && Math.Abs(note.Font.Size - GH_FontServer.Large.Size) <= 0.1f
+                && note.Font.Style == GH_FontServer.Large.Style,
+            $"The {label} font changed after reopening the definition.");
+        Require(
+            note.Attributes.Bounds.Width > 20 && note.Attributes.Bounds.Height > 10,
+            $"The {label} has invalid display bounds.");
+        return note;
+    }
+
+    private static GH_Group RequireGroup(
+        GH_Document document,
+        Guid instanceGuid,
+        string expectedName,
+        System.Drawing.Color expectedColour,
+        IReadOnlyCollection<Guid> expectedMemberGuids)
+    {
+        GH_Group group = RequireObject<GH_Group>(document, instanceGuid, expectedName + " group");
+        Require(
+            string.Equals(group.NickName, expectedName, StringComparison.Ordinal),
+            $"The {expectedName} group name changed after reopening the definition.");
+        Require(
+            group.Border == GH_GroupBorder.Box && group.Colour.ToArgb() == expectedColour.ToArgb(),
+            $"The {expectedName} group appearance changed after reopening the definition.");
+        Require(
+            group.ObjectIDs.Count == expectedMemberGuids.Count
+                && group.ObjectIDs.ToHashSet().SetEquals(expectedMemberGuids),
+            $"The {expectedName} group membership changed after reopening the definition.");
+        Require(
+            group.Attributes.Bounds.Width > 20 && group.Attributes.Bounds.Height > 20,
+            $"The {expectedName} group has invalid display bounds.");
+        IGH_DocumentObject[] members = expectedMemberGuids
+            .Select(memberGuid => document.FindObject(memberGuid, topLevelOnly: true)
+                ?? throw new InvalidOperationException($"The {expectedName} group lost a member."))
+            .ToArray();
+        for (int first = 0; first < members.Length; first++)
+        {
+            for (int second = first + 1; second < members.Length; second++)
+            {
+                System.Drawing.RectangleF intersection = System.Drawing.RectangleF.Intersect(
+                    members[first].Attributes.Bounds,
+                    members[second].Attributes.Bounds);
+                Require(
+                    intersection.Width <= 1 || intersection.Height <= 1,
+                    $"Objects overlap inside the {expectedName} group.");
+            }
+        }
+
+        return group;
+    }
+
+    private static void RequireExclusiveGrouping(
+        GH_Document document,
+        string product,
+        IReadOnlyCollection<GH_Group> groups)
+    {
+        Guid[] groupableObjectGuids = document.Objects
+            .Where(value => value is not GH_Group)
+            .Select(value => value.InstanceGuid)
+            .ToArray();
+        Guid[] groupedObjectGuids = groups
+            .SelectMany(group => group.ObjectIDs)
+            .ToArray();
+        Require(
+            groupedObjectGuids.Length == groupableObjectGuids.Length
+                && groupedObjectGuids.ToHashSet().SetEquals(groupableObjectGuids),
+            $"Every {product} functional object and canvas note must belong to exactly one native group.");
+        GH_Group[] displayedGroups = groups.ToArray();
+        for (int first = 0; first < displayedGroups.Length; first++)
+        {
+            for (int second = first + 1; second < displayedGroups.Length; second++)
+            {
+                System.Drawing.RectangleF intersection = System.Drawing.RectangleF.Intersect(
+                    displayedGroups[first].Attributes.Bounds,
+                    displayedGroups[second].Attributes.Bounds);
+                Require(
+                    intersection.Width <= 1 || intersection.Height <= 1,
+                    $"The {product} groups '{displayedGroups[first].NickName}' and "
+                        + $"'{displayedGroups[second].NickName}' overlap.");
+            }
+        }
+    }
+
     private static void RequireSingleSource(IGH_Param target, Guid sourceGuid, string label)
     {
         Require(target.SourceCount == 1, $"{label} must have exactly one source.");
         Require(target.Sources[0].InstanceGuid == sourceGuid, $"{label} points to the wrong source.");
+    }
+
+    private static void RequireLeftToRight(
+        IGH_DocumentObject source,
+        IGH_DocumentObject target,
+        string label)
+    {
+        Require(
+            source.Attributes.Pivot.X < target.Attributes.Pivot.X,
+            $"{label} must flow from left to right on the example canvas.");
+    }
+
+    private static void RequirePivot(
+        IGH_DocumentObject value,
+        float expectedX,
+        float expectedY,
+        string label)
+    {
+        Require(
+            Math.Abs(value.Attributes.Pivot.X - expectedX) <= 0.1f
+                && Math.Abs(value.Attributes.Pivot.Y - expectedY) <= 0.1f,
+            $"{label} canvas position changed after reopening the definition.");
+    }
+
+    private static void RequirePortLeftToRight(IGH_Param source, IGH_Param target, string label)
+    {
+        Require(
+            source.Attributes.Pivot.X < target.Attributes.Pivot.X,
+            $"{label} must flow from left to right without a reverse hook.");
     }
 
     private static void Save(GH_Document document, string path)
@@ -463,7 +774,13 @@ internal static class ExampleDefinitionGate
             Guid thicknessInstanceGuid,
             Guid layerInstanceGuid,
             Guid constructionInstanceGuid,
-            Guid panelInstanceGuid)
+            Guid panelInstanceGuid,
+            Guid materialNoteInstanceGuid,
+            Guid assemblyNoteInstanceGuid,
+            Guid resultNoteInstanceGuid,
+            Guid materialGroupInstanceGuid,
+            Guid assemblyGroupInstanceGuid,
+            Guid resultGroupInstanceGuid)
         {
             Product = product;
             FileName = fileName;
@@ -479,6 +796,12 @@ internal static class ExampleDefinitionGate
             LayerInstanceGuid = layerInstanceGuid;
             ConstructionInstanceGuid = constructionInstanceGuid;
             PanelInstanceGuid = panelInstanceGuid;
+            MaterialNoteInstanceGuid = materialNoteInstanceGuid;
+            AssemblyNoteInstanceGuid = assemblyNoteInstanceGuid;
+            ResultNoteInstanceGuid = resultNoteInstanceGuid;
+            MaterialGroupInstanceGuid = materialGroupInstanceGuid;
+            AssemblyGroupInstanceGuid = assemblyGroupInstanceGuid;
+            ResultGroupInstanceGuid = resultGroupInstanceGuid;
         }
 
         internal string Product { get; }
@@ -508,6 +831,18 @@ internal static class ExampleDefinitionGate
         internal Guid ConstructionInstanceGuid { get; }
 
         internal Guid PanelInstanceGuid { get; }
+
+        internal Guid MaterialNoteInstanceGuid { get; }
+
+        internal Guid AssemblyNoteInstanceGuid { get; }
+
+        internal Guid ResultNoteInstanceGuid { get; }
+
+        internal Guid MaterialGroupInstanceGuid { get; }
+
+        internal Guid AssemblyGroupInstanceGuid { get; }
+
+        internal Guid ResultGroupInstanceGuid { get; }
     }
 
     private sealed class ValidationFacts

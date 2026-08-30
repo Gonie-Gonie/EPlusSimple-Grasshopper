@@ -153,19 +153,19 @@ internal static class AdvancedExampleDefinitions
         GraphNode concrete = graph.Component(4, Catalog.InvisibleMaterial, 280, 60);
         GraphNode insulation = graph.Component(5, Catalog.InvisibleMaterial, 280, 200);
         GraphNode finish = graph.Component(6, Catalog.InvisibleMaterial, 280, 340);
-        GraphNode concreteThickness = graph.Slider(7, "Concrete 0.200 m", 0.2m, 0.01m, 0.5m, 280, 480);
-        GraphNode insulationThickness = graph.Slider(8, "Insulation 0.120 m", 0.12m, 0.01m, 0.5m, 280, 570);
-        GraphNode finishThickness = graph.Slider(9, "Finish 0.013 m", 0.013m, 0.001m, 0.1m, 280, 660);
+        GraphNode concreteThickness = graph.Slider(7, "Concrete 0.200 m", 0.2m, 0.01m, 0.5m, 300, 130);
+        GraphNode insulationThickness = graph.Slider(8, "Insulation 0.120 m", 0.12m, 0.01m, 0.5m, 300, 270);
+        GraphNode finishThickness = graph.Slider(9, "Finish 0.013 m", 0.013m, 0.001m, 0.1m, 300, 410);
         GraphNode concreteLayer = graph.Component(20, Catalog.InvisibleLayer, 520, 60);
         GraphNode insulationLayer = graph.Component(21, Catalog.InvisibleLayer, 520, 200);
         GraphNode finishLayer = graph.Component(22, Catalog.InvisibleLayer, 520, 340);
         GraphNode construction = graph.Component(10, Catalog.InvisibleConstruction, 800, 240);
-        GraphNode noMass = graph.Component(11, Catalog.InvisibleNoMass, 650, 500);
-        GraphNode profile = graph.Component(12, Catalog.InvisibleProfile, 650, 650);
+        GraphNode noMass = graph.Component(11, Catalog.InvisibleNoMass, 650, 700);
+        GraphNode profile = graph.Component(12, Catalog.InvisibleProfile, 650, 850);
         GraphNode uValue = graph.Panel(13, "Layered U-value", string.Empty, 980, 270);
         GraphNode layeredValue = graph.Panel(14, "Layered construction", string.Empty, 980, 370);
-        GraphNode noMassValue = graph.Panel(15, "No-mass construction", string.Empty, 980, 520);
-        GraphNode profileValue = graph.Panel(16, "Annual profile", string.Empty, 980, 670);
+        GraphNode noMassValue = graph.Panel(15, "No-mass construction", string.Empty, 980, 720);
+        GraphNode profileValue = graph.Panel(16, "Annual profile", string.Empty, 980, 870);
 
         graph.Connect(concreteName, null, concrete, 0);
         graph.Connect(insulationName, null, insulation, 0);
@@ -191,6 +191,55 @@ internal static class AdvancedExampleDefinitions
         graph.ExpectOutput(noMass, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonConstructionGoo");
         graph.ExpectOutput(profile, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonProfileGoo");
         graph.ExpectOutput(uValue, null, 1);
+        GraphNode materialNote = graph.Note(
+            800,
+            "Define each material and its thickness, then combine the three layer outputs.",
+            60,
+            -60);
+        GraphNode constructionNote = graph.Note(
+            801,
+            "The ordered layer list becomes one opaque construction with a calculated U-value.",
+            760,
+            120);
+        GraphNode presetNote = graph.Note(
+            802,
+            "No-mass constructions and annual profiles are independent reusable definitions.",
+            620,
+            600);
+        graph.Group(
+            900,
+            "1  Materials and layers",
+            ExampleGroupTheme.Inputs,
+            materialNote,
+            concreteName,
+            insulationName,
+            finishName,
+            concrete,
+            insulation,
+            finish,
+            concreteThickness,
+            insulationThickness,
+            finishThickness,
+            concreteLayer,
+            insulationLayer,
+            finishLayer);
+        graph.Group(
+            901,
+            "2  Layered construction",
+            ExampleGroupTheme.Envelope,
+            constructionNote,
+            construction,
+            uValue,
+            layeredValue);
+        graph.Group(
+            902,
+            "Reusable presets",
+            ExampleGroupTheme.Model,
+            presetNote,
+            noMass,
+            profile,
+            noMassValue,
+            profileValue);
         return graph.Build(
             InvisibleProduct,
             "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonConstructionGoo");
@@ -203,7 +252,7 @@ internal static class AdvancedExampleDefinitions
         GraphNode thickness = graph.Slider(2, "Envelope 0.200 m", 0.2m, 0.01m, 0.5m, 100, 230);
         GraphNode layer = graph.Component(8, Catalog.InvisibleLayer, 360, 120);
         GraphNode construction = graph.Component(3, Catalog.InvisibleConstruction, 650, 120);
-        GraphNode profile = graph.Component(4, Catalog.InvisibleProfile, 360, 600);
+        GraphNode profile = graph.Component(4, Catalog.InvisibleProfile, 650, 1050);
         GraphNode glazing = graph.Component(5, Catalog.InvisibleGlazing, 360, 800);
         GraphNode windowBoundary = graph.Curves(
             6,
@@ -259,12 +308,12 @@ internal static class AdvancedExampleDefinitions
             "Floor boundary",
             SurfaceBoundaryChoices,
             "Ground",
-            480,
-            470);
-        GraphNode floor = graph.Component(20, Catalog.InvisibleFloor, 650, 370);
-        GraphNode ceiling = graph.Component(21, Catalog.InvisibleCeiling, 650, 520);
-        GraphNode plainWalls = graph.Component(22, Catalog.InvisibleWall, 650, 670);
-        GraphNode southWall = graph.Component(23, Catalog.InvisibleWall, 650, 820);
+            700,
+            450);
+        GraphNode floor = graph.Component(20, Catalog.InvisibleFloor, 900, 370);
+        GraphNode ceiling = graph.Component(21, Catalog.InvisibleCeiling, 900, 520);
+        GraphNode plainWalls = graph.Component(22, Catalog.InvisibleWall, 900, 670);
+        GraphNode southWall = graph.Component(23, Catalog.InvisibleWall, 900, 820);
         GraphNode[] curves = { floorCurve, ceilingCurve, plainWallCurves, southWallCurve };
         GraphNode[] surfaces = { floor, ceiling, plainWalls, southWall };
 
@@ -287,7 +336,7 @@ internal static class AdvancedExampleDefinitions
         graph.ExpectOutput(plainWalls, 0, 3, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
         graph.ExpectOutput(southWall, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
 
-        GraphNode zone = graph.Component(50, Catalog.InvisibleZone, 980, 560);
+        GraphNode zone = graph.Component(50, Catalog.InvisibleZone, 1230, 1050);
         foreach (GraphNode surface in surfaces)
         {
             graph.Connect(surface, 0, zone, 1);
@@ -295,37 +344,37 @@ internal static class AdvancedExampleDefinitions
 
         graph.Connect(profile, 0, zone, 2);
         GraphNode heatPump = graph.Component(60, Catalog.InvisibleHeatPump, 80, 1280);
-        GraphNode airHandler = graph.Component(61, Catalog.InvisibleAirHandler, 360, 1280);
+        GraphNode airHandler = graph.Component(61, Catalog.InvisibleAirHandler, 620, 1280);
         GraphNode boiler = graph.Component(62, Catalog.InvisibleBoiler, 80, 1480);
-        GraphNode radiantFloor = graph.Component(63, Catalog.InvisibleRadiantFloor, 360, 1480);
-        GraphNode ventilator = graph.Component(64, Catalog.InvisibleErv, 80, 1680);
-        GraphNode photovoltaic = graph.Component(65, Catalog.InvisiblePv, 360, 1680);
+        GraphNode radiantFloor = graph.Component(63, Catalog.InvisibleRadiantFloor, 620, 1480);
+        GraphNode ventilator = graph.Component(64, Catalog.InvisibleErv, 620, 1680);
+        GraphNode photovoltaic = graph.Component(65, Catalog.InvisiblePv, 1230, 1600);
         graph.Connect(heatPump, 0, airHandler, 1);
         graph.Connect(boiler, 0, radiantFloor, 1);
         graph.Connect(airHandler, 0, zone, 6);
         graph.Connect(radiantFloor, 0, zone, 6);
         graph.Connect(ventilator, 0, zone, 7);
 
-        GraphNode model = graph.Component(70, Catalog.InvisibleModel, 1320, 900);
+        GraphNode model = graph.Component(70, Catalog.InvisibleModel, 1560, 1150);
         graph.Connect(zone, 0, model, 1);
         graph.Connect(photovoltaic, 0, model, 4);
-        GraphNode compile = graph.Component(71, Catalog.InvisibleCompile, 1650, 700);
-        GraphNode idfText = graph.Panel(80, "Compiled IDF", string.Empty, 1960, 440);
-        GraphNode valid = graph.Panel(81, "Managed IDF validation", string.Empty, 1960, 580);
-        GraphNode diagnostics = graph.Panel(82, "Compilation diagnostics", string.Empty, 1960, 720);
-        GraphNode epwPath = graph.EmptyFilePath(83, "EPW File", "EnergyPlus weather (*.epw)|*.epw|All files (*.*)|*.*", 1650, 1080);
-        GraphNode weather = graph.Component(84, Catalog.InvisibleWeather, 1960, 1060);
-        GraphNode weatherSuccess = graph.Panel(85, "Weather verified", string.Empty, 2260, 1190);
-        GraphNode weatherDiagnostics = graph.Panel(86, "Weather diagnostics", string.Empty, 2260, 1320);
-        GraphNode runTrigger = graph.Boolean(87, "Run - explicit rising edge", false, 2260, 660);
-        GraphNode cancelTrigger = graph.Boolean(88, "Cancel active run", false, 2260, 740);
-        GraphNode forceRerun = graph.Boolean(89, "Force rerun", false, 2260, 820);
-        GraphNode timeout = graph.Slider(90, "Run timeout 30 min", 30m, 1m, 120m, 2260, 900);
-        GraphNode run = graph.Component(91, Catalog.InvisibleManagedRun, 2600, 760);
-        GraphNode result = graph.Panel(92, "EnergyPlus result", string.Empty, 2920, 700);
-        GraphNode runState = graph.Panel(93, "InvisibleDragon run state", string.Empty, 2920, 830);
-        GraphNode runSuccess = graph.Panel(94, "InvisibleDragon run success", string.Empty, 2920, 960);
-        GraphNode runDiagnostics = graph.Panel(95, "Run diagnostics", string.Empty, 2920, 1090);
+        GraphNode compile = graph.Component(71, Catalog.InvisibleCompile, 1840, 500);
+        GraphNode idfText = graph.Panel(80, "Compiled IDF", string.Empty, 2120, 330);
+        GraphNode valid = graph.Panel(81, "Managed IDF validation", string.Empty, 2120, 460);
+        GraphNode diagnostics = graph.Panel(82, "Compilation diagnostics", string.Empty, 2120, 590);
+        GraphNode epwPath = graph.EmptyFilePath(83, "EPW File", "EnergyPlus weather (*.epw)|*.epw|All files (*.*)|*.*", 1840, 1400);
+        GraphNode weather = graph.Component(84, Catalog.InvisibleWeather, 2120, 1380);
+        GraphNode weatherSuccess = graph.Panel(85, "Weather verified", string.Empty, 2400, 1400);
+        GraphNode weatherDiagnostics = graph.Panel(86, "Weather diagnostics", string.Empty, 2400, 1530);
+        GraphNode runTrigger = graph.Boolean(87, "Run - explicit rising edge", false, 2480, 760);
+        GraphNode cancelTrigger = graph.Boolean(88, "Cancel active run", false, 2480, 840);
+        GraphNode forceRerun = graph.Boolean(89, "Force rerun", false, 2480, 920);
+        GraphNode timeout = graph.Slider(90, "Run timeout 30 min", 30m, 1m, 120m, 2480, 1000);
+        GraphNode run = graph.Component(91, Catalog.InvisibleManagedRun, 2800, 850);
+        GraphNode result = graph.Panel(92, "EnergyPlus result", string.Empty, 3120, 760);
+        GraphNode runState = graph.Panel(93, "InvisibleDragon run state", string.Empty, 3120, 890);
+        GraphNode runSuccess = graph.Panel(94, "InvisibleDragon run success", string.Empty, 3120, 1020);
+        GraphNode runDiagnostics = graph.Panel(95, "Run diagnostics", string.Empty, 3120, 1150);
         graph.Connect(model, 0, compile, 0);
         graph.Connect(compile, 1, idfText, null);
         graph.Connect(compile, 2, valid, null);
@@ -356,6 +405,120 @@ internal static class AdvancedExampleDefinitions
         graph.ExpectBoolean(zone, 1, true);
         graph.ExpectBoolean(model, 1, true);
         graph.ExpectBoolean(compile, 2, true);
+        GraphNode constructionNote = graph.Note(
+            800,
+            "Build one reusable opaque construction before authoring the zone envelope.",
+            60,
+            10);
+        GraphNode envelopeNote = graph.Note(
+            801,
+            "Floor, ceiling and wall lists own their geometry; the south wall also owns its window.",
+            60,
+            330);
+        GraphNode systemsNote = graph.Note(
+            802,
+            "Plant components feed terminal systems; terminal and ERV outputs connect directly to the zone.",
+            60,
+            1180);
+        GraphNode modelNote = graph.Note(
+            803,
+            "The completed zone and optional photovoltaic system form the energy model.",
+            1200,
+            940);
+        GraphNode compileNote = graph.Note(
+            804,
+            "Compile the model internally to an IDF and inspect validation before running.",
+            1810,
+            250);
+        GraphNode weatherNote = graph.Note(
+            805,
+            "InvisibleDragon accepts the user-selected EPW and verifies it before simulation.",
+            1810,
+            1300);
+        GraphNode runNote = graph.Note(
+            806,
+            "Set Run to True for a rising edge. Cancel, force-rerun and timeout remain optional controls.",
+            2460,
+            690);
+        graph.Group(
+            900,
+            "1  Envelope construction",
+            ExampleGroupTheme.Inputs,
+            constructionNote,
+            material,
+            thickness,
+            layer,
+            construction);
+        graph.Group(
+            901,
+            "2  Zone envelope, opening and profile",
+            ExampleGroupTheme.Envelope,
+            new[]
+            {
+                envelopeNote,
+                profile,
+                glazing,
+                windowBoundary,
+                window,
+                floorName,
+                ceilingName,
+                plainWallNames,
+                southWallName,
+                groundBoundary,
+            }
+                .Concat(curves)
+                .Concat(surfaces)
+                .ToArray());
+        graph.Group(
+            902,
+            "3  Zone systems",
+            ExampleGroupTheme.Systems,
+            systemsNote,
+            heatPump,
+            airHandler,
+            boiler,
+            radiantFloor,
+            ventilator);
+        graph.Group(
+            903,
+            "4  Zone and energy model",
+            ExampleGroupTheme.Model,
+            modelNote,
+            zone,
+            photovoltaic,
+            model);
+        graph.Group(
+            904,
+            "5  Managed IDF compile",
+            ExampleGroupTheme.Model,
+            compileNote,
+            compile,
+            idfText,
+            valid,
+            diagnostics);
+        graph.Group(
+            905,
+            "6  Weather",
+            ExampleGroupTheme.Inputs,
+            weatherNote,
+            epwPath,
+            weather,
+            weatherSuccess,
+            weatherDiagnostics);
+        graph.Group(
+            906,
+            "7  Managed EnergyPlus run",
+            ExampleGroupTheme.Runtime,
+            runNote,
+            runTrigger,
+            cancelTrigger,
+            forceRerun,
+            timeout,
+            run,
+            result,
+            runState,
+            runSuccess,
+            runDiagnostics);
         return graph.Build(
             InvisibleProduct,
             "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo",
@@ -369,21 +532,22 @@ internal static class AdvancedExampleDefinitions
         var graph = new ScenarioGraphBuilder(server, "21000000");
         string[] materialNames = { "Exterior Concrete", "Mineral Wool", "Gypsum Board" };
         decimal[] values = { 0.2m, 0.12m, 0.013m };
+        GraphNode[] names = new GraphNode[3];
         GraphNode[] materials = new GraphNode[3];
         GraphNode[] thicknesses = new GraphNode[3];
         for (int index = 0; index < 3; index++)
         {
-            GraphNode name = graph.Panel(1 + index, materialNames[index] + " name", materialNames[index], 60, 80 + (index * 150));
+            names[index] = graph.Panel(1 + index, materialNames[index] + " name", materialNames[index], 60, 80 + (index * 150));
             materials[index] = graph.Component(10 + index, Catalog.SimpleMaterial, 300, 60 + (index * 150));
-            thicknesses[index] = graph.Slider(20 + index, materialNames[index] + " thickness", values[index], 0.001m, 0.5m, 300, 500 + (index * 90));
-            graph.Connect(name, null, materials[index], 0);
+            thicknesses[index] = graph.Slider(20 + index, materialNames[index] + " thickness", values[index], 0.001m, 0.5m, 320, 130 + (index * 150));
+            graph.Connect(names[index], null, materials[index], 0);
         }
 
-        GraphNode construction = graph.Component(30, Catalog.SimpleConstruction, 680, 230);
+        GraphNode construction = graph.Component(30, Catalog.SimpleConstruction, 860, 230);
         GraphNode[] layers = new GraphNode[3];
         for (int index = 0; index < layers.Length; index++)
         {
-            layers[index] = graph.Component(23 + index, Catalog.SimpleLayer, 500, 60 + (index * 150));
+            layers[index] = graph.Component(23 + index, Catalog.SimpleLayer, 580, 60 + (index * 150));
             graph.Connect(materials[index], 0, layers[index], 0);
             graph.Connect(thicknesses[index], null, layers[index], 1);
             graph.Connect(layers[index], 0, construction, 1);
@@ -394,24 +558,24 @@ internal static class AdvancedExampleDefinitions
                 "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionLayerGoo");
         }
 
-        GraphNode fenestration = graph.Component(31, Catalog.SimpleFenestration, 680, 520);
+        GraphNode fenestration = graph.Component(31, Catalog.SimpleFenestration, 860, 520);
         GraphNode profileName = graph.Panel(32, "Packaged office profile", "\uC18C\uADDC\uBAA8\uC0AC\uBB34\uC2E4", 680, 730);
         GraphNode profile = graph.Component(33, Catalog.SimpleProfile, 980, 700);
         graph.Connect(profileName, null, profile, 0);
-        GraphNode heatPump = graph.Component(40, Catalog.SimpleHeatPump, 60, 900);
-        GraphNode airHandler = graph.Component(41, Catalog.SimpleAirHandler, 360, 900);
-        GraphNode boiler = graph.Component(42, Catalog.SimpleBoiler, 60, 1090);
-        GraphNode radiator = graph.Component(43, Catalog.SimpleRadiator, 360, 1090);
-        GraphNode chiller = graph.Component(44, Catalog.SimpleChiller, 60, 1280);
-        GraphNode fanCoil = graph.Component(45, Catalog.SimpleFanCoil, 360, 1280);
-        GraphNode ventilator = graph.Component(46, Catalog.SimpleErv, 680, 970);
-        GraphNode photovoltaic = graph.Component(47, Catalog.SimplePv, 680, 1180);
+        GraphNode heatPump = graph.Component(40, Catalog.SimpleHeatPump, 60, 1000);
+        GraphNode airHandler = graph.Component(41, Catalog.SimpleAirHandler, 360, 1000);
+        GraphNode boiler = graph.Component(42, Catalog.SimpleBoiler, 60, 1190);
+        GraphNode radiator = graph.Component(43, Catalog.SimpleRadiator, 360, 1190);
+        GraphNode chiller = graph.Component(44, Catalog.SimpleChiller, 60, 1380);
+        GraphNode fanCoil = graph.Component(45, Catalog.SimpleFanCoil, 360, 1380);
+        GraphNode ventilator = graph.Component(46, Catalog.SimpleErv, 60, 1580);
+        GraphNode photovoltaic = graph.Component(47, Catalog.SimplePv, 360, 1580);
         graph.Connect(heatPump, 0, airHandler, 1);
         graph.Connect(boiler, 0, radiator, 1);
         graph.Connect(chiller, 0, fanCoil, 1);
         GraphNode uValue = graph.Panel(50, "Envelope U-value", string.Empty, 1040, 250);
         GraphNode profileValue = graph.Panel(51, "Resolved profile", string.Empty, 1280, 720);
-        GraphNode systems = graph.Panel(52, "HVAC families", string.Empty, 1040, 1050);
+        GraphNode systems = graph.Panel(52, "HVAC families", string.Empty, 1040, 1150);
         graph.Connect(construction, 1, uValue, null);
         graph.Connect(profile, 0, profileValue, null);
         graph.Connect(airHandler, 0, systems, null);
@@ -426,6 +590,66 @@ internal static class AdvancedExampleDefinitions
         graph.ExpectOutput(ventilator, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneErvGoo");
         graph.ExpectOutput(photovoltaic, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonPhotovoltaicPanelGoo");
         graph.ExpectOutput(systems, null, 3);
+        GraphNode materialNote = graph.Note(
+            800,
+            "Create reusable materials, pair each with a thickness, then collect the layer outputs.",
+            60,
+            -60);
+        GraphNode envelopeNote = graph.Note(
+            801,
+            "Opaque and fenestration constructions are independent envelope resources.",
+            820,
+            120);
+        GraphNode profileNote = graph.Note(
+            802,
+            "The packaged office profile resolves occupancy and operational schedules.",
+            300,
+            650);
+        GraphNode systemsNote = graph.Note(
+            803,
+            "Compare plant-to-terminal HVAC families; ERV and photovoltaic definitions remain optional.",
+            60,
+            880);
+        graph.Group(
+            900,
+            "1  Materials and layers",
+            ExampleGroupTheme.Inputs,
+            new[] { materialNote }
+                .Concat(names)
+                .Concat(materials)
+                .Concat(thicknesses)
+                .Concat(layers)
+                .ToArray());
+        graph.Group(
+            901,
+            "2  Envelope constructions",
+            ExampleGroupTheme.Envelope,
+            envelopeNote,
+            construction,
+            fenestration,
+            uValue);
+        graph.Group(
+            902,
+            "3  Usage profile",
+            ExampleGroupTheme.Model,
+            profileNote,
+            profileName,
+            profile,
+            profileValue);
+        graph.Group(
+            903,
+            "4  HVAC, ERV and PV families",
+            ExampleGroupTheme.Systems,
+            systemsNote,
+            heatPump,
+            airHandler,
+            boiler,
+            radiator,
+            chiller,
+            fanCoil,
+            ventilator,
+            photovoltaic,
+            systems);
         return graph.Build(
             SimpleProduct,
             "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionGoo");
@@ -451,23 +675,22 @@ internal static class AdvancedExampleDefinitions
         Curve[] openingGeometry = ExampleBuildingModels.CreateOpeningCurves(TwoZoneModel);
         Require(surfaceGeometry.Length == 12, TwoZoneModel + " must provide exactly twelve Zone-owned Surface Breps.");
         Require(openingGeometry.Length == 2, TwoZoneModel + " must provide exactly two opening curves.");
-        GraphNode modelInfo = graph.Panel(
+        GraphNode modelInfo = graph.Note(
             1,
-            "Rhino source model",
             "Open 30-two-zone-office.3dm; relink each named face Brep and window to its matching local Surface cluster.",
             40,
-            40);
+            -60);
         GraphNode westCurve = graph.Curves(4, "WINDOW_ZONE_01_SOUTH", new[] { openingGeometry[0] }, 60, 760);
-        GraphNode eastCurve = graph.Curves(5, "WINDOW_ZONE_02_SOUTH", new[] { openingGeometry[1] }, 60, 1930);
-        GraphNode profileName = graph.Panel(6, "Packaged office profile", "\uC18C\uADDC\uBAA8\uC0AC\uBB34\uC2E4", 780, 40);
-        GraphNode profile = graph.Component(7, Catalog.SimpleProfile, 1080, 40);
-        GraphNode material = graph.Component(8, Catalog.SimpleMaterial, 330, 120);
-        GraphNode thickness = graph.Slider(9, "Envelope 0.200 m", 0.2m, 0.01m, 0.5m, 350, 290);
-        GraphNode layer = graph.Component(14, Catalog.SimpleLayer, 620, 160);
-        GraphNode construction = graph.Component(10, Catalog.SimpleConstruction, 730, 160);
-        GraphNode fenestration = graph.Component(11, Catalog.SimpleFenestration, 620, 360);
-        GraphNode westOpening = graph.Component(12, Catalog.SimpleOpening, 730, 750);
-        GraphNode eastOpening = graph.Component(13, Catalog.SimpleOpening, 730, 1920);
+        GraphNode eastCurve = graph.Curves(5, "WINDOW_ZONE_02_SOUTH", new[] { openingGeometry[1] }, 60, 2170);
+        GraphNode profileName = graph.Panel(6, "Packaged office profile", "\uC18C\uADDC\uBAA8\uC0AC\uBB34\uC2E4", 780, -80);
+        GraphNode profile = graph.Component(7, Catalog.SimpleProfile, 1080, -80);
+        GraphNode material = graph.Component(8, Catalog.SimpleMaterial, 330, 80);
+        GraphNode thickness = graph.Slider(9, "Envelope 0.200 m", 0.2m, 0.01m, 0.5m, 350, 220);
+        GraphNode layer = graph.Component(14, Catalog.SimpleLayer, 620, 100);
+        GraphNode construction = graph.Component(10, Catalog.SimpleConstruction, 730, 100);
+        GraphNode fenestration = graph.Component(11, Catalog.SimpleFenestration, 850, 180);
+        GraphNode westOpening = graph.Component(12, Catalog.SimpleOpening, 950, 750);
+        GraphNode eastOpening = graph.Component(13, Catalog.SimpleOpening, 950, 2160);
         graph.Connect(profileName, null, profile, 0);
         graph.Connect(material, 0, layer, 0);
         graph.Connect(thickness, null, layer, 1);
@@ -483,6 +706,7 @@ internal static class AdvancedExampleDefinitions
             "ZONE_01_WEST",
             construction,
             westOpening,
+            westCurve,
             keyBase: 200,
             yStart: 390);
         (GraphNode[] eastSurfaces, GraphNode[] eastFaceParameters) = BuildSimpleSurfaceCluster(
@@ -491,45 +715,50 @@ internal static class AdvancedExampleDefinitions
             "ZONE_02_EAST",
             construction,
             eastOpening,
+            eastCurve,
             keyBase: 300,
-            yStart: 1560);
+            yStart: 1800);
 
         GraphNode westHvac;
         GraphNode eastHvac;
-        GraphNode westVentilator = graph.Component(25, Catalog.SimpleErv, 1080, 1460);
-        GraphNode eastVentilator = graph.Component(26, Catalog.SimpleErv, 1080, 2630);
+        GraphNode? westPlant = null;
+        GraphNode? eastPlant = null;
+        GraphNode westVentilator = graph.Component(25, Catalog.SimpleErv, 1250, 1560);
+        GraphNode eastVentilator = graph.Component(26, Catalog.SimpleErv, 1250, 2950);
         GraphNode? photovoltaic = null;
         if (!includeRuntimeWorkflow)
         {
-            GraphNode heatPump = graph.Component(20, Catalog.SimpleHeatPump, 680, 1260);
-            westHvac = graph.Component(21, Catalog.SimpleAirHandler, 1080, 1360);
-            GraphNode boiler = graph.Component(22, Catalog.SimpleBoiler, 680, 2430);
-            eastHvac = graph.Component(23, Catalog.SimpleRadiator, 1080, 2530);
-            photovoltaic = graph.Component(27, Catalog.SimplePv, 1470, 2600);
+            GraphNode heatPump = graph.Component(20, Catalog.SimpleHeatPump, 680, 1460);
+            westHvac = graph.Component(21, Catalog.SimpleAirHandler, 1080, 1460);
+            GraphNode boiler = graph.Component(22, Catalog.SimpleBoiler, 680, 2850);
+            eastHvac = graph.Component(23, Catalog.SimpleRadiator, 1080, 2850);
+            photovoltaic = graph.Component(27, Catalog.SimplePv, 1470, 2150);
+            westPlant = heatPump;
+            eastPlant = boiler;
             graph.Connect(heatPump, 0, westHvac, 1);
             graph.Connect(boiler, 0, eastHvac, 1);
         }
         else
         {
-            westHvac = graph.Component(21, Catalog.SimpleElectricRadiator, 1080, 1360);
-            eastHvac = graph.Component(23, Catalog.SimpleElectricRadiator, 1080, 2530);
+            westHvac = graph.Component(21, Catalog.SimpleElectricRadiator, 1080, 1460);
+            eastHvac = graph.Component(23, Catalog.SimpleElectricRadiator, 1080, 2850);
         }
 
-        GraphNode westHvacName = graph.Panel(15, "West Zone HVAC", "West Zone HVAC", 780, 1360);
-        GraphNode eastHvacName = graph.Panel(16, "East Zone HVAC", "East Zone HVAC", 780, 2530);
-        GraphNode westErvName = graph.Panel(17, "West Zone ERV", "West Zone ERV", 780, 1460);
-        GraphNode eastErvName = graph.Panel(18, "East Zone ERV", "East Zone ERV", 780, 2630);
+        GraphNode westHvacName = graph.Panel(15, "West Zone HVAC", "West Zone HVAC", 780, 1460);
+        GraphNode eastHvacName = graph.Panel(16, "East Zone HVAC", "East Zone HVAC", 780, 2850);
+        GraphNode westErvName = graph.Panel(17, "West Zone ERV", "West Zone ERV", 780, 1560);
+        GraphNode eastErvName = graph.Panel(18, "East Zone ERV", "East Zone ERV", 780, 2950);
         graph.Connect(westHvacName, null, westHvac, 0);
         graph.Connect(eastHvacName, null, eastHvac, 0);
         graph.Connect(westErvName, null, westVentilator, 0);
         graph.Connect(eastErvName, null, eastVentilator, 0);
 
-        GraphNode westZone = graph.Component(30, Catalog.SimpleZone, 1280, 820);
-        GraphNode eastZone = graph.Component(31, Catalog.SimpleZone, 1280, 1990);
-        GraphNode westZoneName = graph.Panel(180, "West Zone name", "West Office Zone", 990, 780);
-        GraphNode eastZoneName = graph.Panel(181, "East Zone name", "East Office Zone", 990, 1950);
-        GraphNode westHeight = graph.Slider(182, "West Zone height 3.200 m", 3.2m, 0.1m, 20m, 990, 860);
-        GraphNode eastHeight = graph.Slider(183, "East Zone height 3.200 m", 3.2m, 0.1m, 20m, 990, 2030);
+        GraphNode westZone = graph.Component(30, Catalog.SimpleZone, 1400, 1350);
+        GraphNode eastZone = graph.Component(31, Catalog.SimpleZone, 1400, 2740);
+        GraphNode westZoneName = graph.Panel(180, "West Zone name", "West Office Zone", 990, 1270);
+        GraphNode eastZoneName = graph.Panel(181, "East Zone name", "East Office Zone", 990, 2660);
+        GraphNode westHeight = graph.Slider(182, "West Zone height 3.200 m", 3.2m, 0.1m, 20m, 300, 1390);
+        GraphNode eastHeight = graph.Slider(183, "East Zone height 3.200 m", 3.2m, 0.1m, 20m, 300, 2780);
         foreach (GraphNode surface in westSurfaces)
         {
             graph.Connect(surface, 0, westZone, 0);
@@ -551,8 +780,8 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(westVentilator, 0, westZone, 6);
         graph.Connect(eastVentilator, 0, eastZone, 6);
 
-        GraphNode modelName = graph.Panel(28, "Model name", "Two-Zone Office", 1470, 1320);
-        GraphNode model = graph.Component(32, Catalog.SimpleModel, 1770, 1410);
+        GraphNode modelName = graph.Panel(28, "Model name", "Two-Zone Office", 1470, 1960);
+        GraphNode model = graph.Component(32, Catalog.SimpleModel, 1770, 2000);
         graph.Connect(modelName, null, model, 0);
         graph.Connect(westZone, 0, model, 1);
         graph.Connect(eastZone, 0, model, 1);
@@ -560,8 +789,8 @@ internal static class AdvancedExampleDefinitions
         {
             graph.Connect(photovoltaic, 0, model, 6);
         }
-        GraphNode map = graph.Panel(40, "Geometry provenance map", string.Empty, 1770, 230);
-        GraphNode area = graph.Panel(41, "Total floor area", string.Empty, 2110, 320);
+        GraphNode map = graph.Panel(40, "Geometry provenance map", string.Empty, 2000, 1880);
+        GraphNode area = graph.Panel(41, "Total floor area", string.Empty, 2000, 2010);
         graph.Connect(model, 3, map, null);
         graph.Connect(model, 6, area, null);
         graph.ExpectOutput(westOpening, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
@@ -587,40 +816,147 @@ internal static class AdvancedExampleDefinitions
         graph.ExpectOutput(area, null, 1);
         graph.ExpectNumber(model, 6, 96, 1e-8);
 
+        GraphNode sharedNote = graph.Note(
+            800,
+            "Shared construction, fenestration and office-profile definitions feed both zone lanes.",
+            1300,
+            10);
+        GraphNode westSystemsNote = graph.Note(
+            801,
+            "West zone: attach HVAC and ERV directly after collecting the west surface list.",
+            660,
+            1190);
+        GraphNode eastSystemsNote = graph.Note(
+            802,
+            "East zone: the parallel lane repeats the same ownership pattern without index matching.",
+            660,
+            2600);
+        graph.Group(
+            900,
+            "1  Rhino source and shared definitions",
+            ExampleGroupTheme.Inputs,
+            modelInfo,
+            sharedNote,
+            profileName,
+            profile,
+            material,
+            thickness,
+            layer,
+            construction,
+            fenestration);
+        var westSystemMembers = new List<GraphNode>
+        {
+            westSystemsNote,
+            westHvacName,
+            westHvac,
+            westErvName,
+            westVentilator,
+            westZoneName,
+            westHeight,
+            westZone,
+        };
+        var eastSystemMembers = new List<GraphNode>
+        {
+            eastSystemsNote,
+            eastHvacName,
+            eastHvac,
+            eastErvName,
+            eastVentilator,
+            eastZoneName,
+            eastHeight,
+            eastZone,
+        };
+        if (westPlant is not null)
+        {
+            westSystemMembers.Add(westPlant);
+        }
+
+        if (eastPlant is not null)
+        {
+            eastSystemMembers.Add(eastPlant);
+        }
+
+        graph.Group(
+            901,
+            "3  West systems and zone",
+            ExampleGroupTheme.Systems,
+            westSystemMembers.ToArray());
+        graph.Group(
+            902,
+            "5  East systems and zone",
+            ExampleGroupTheme.Systems,
+            eastSystemMembers.ToArray());
+
         RuntimeWorkflowExpectation? runtimeWorkflow = null;
         if (!includeRuntimeWorkflow)
         {
-            GraphNode json = graph.Panel(42, "Complete GRM JSON", string.Empty, 2110, 500);
-            GraphNode diagnostics = graph.Panel(43, "Model diagnostics", string.Empty, 2450, 500);
+            GraphNode json = graph.Panel(42, "Complete GRM JSON", string.Empty, 2230, 1880);
+            GraphNode diagnostics = graph.Panel(43, "Model diagnostics", string.Empty, 2230, 2050);
             graph.Connect(model, 5, json, null);
             graph.Connect(model, 7, diagnostics, null);
             graph.ExpectOutput(json, null, 1);
             graph.ExpectOutput(diagnostics, null, 1);
+            GraphNode modelNote = graph.Note(
+                803,
+                "Collect both zone objects into one model; inspect area, provenance, GRM JSON and diagnostics.",
+                1450,
+                1810);
+            graph.Group(
+                903,
+                "6  Two-zone model and inspection",
+                ExampleGroupTheme.Model,
+                new[]
+                {
+                    modelNote,
+                    modelName,
+                    model,
+                    map,
+                    area,
+                    json,
+                    diagnostics,
+                }
+                    .Concat(photovoltaic is null ? Array.Empty<GraphNode>() : new[] { photovoltaic! })
+                    .ToArray());
         }
         else
         {
-            GraphNode runTrigger = graph.Boolean(103, "Run - explicit rising edge", false, 2110, 700);
-            GraphNode cancelTrigger = graph.Boolean(104, "Cancel active run", false, 2110, 780);
-            GraphNode forceRerun = graph.Boolean(105, "Force rerun", false, 2110, 860);
-            GraphNode timeout = graph.Slider(107, "Run timeout 2 min", 2m, 1m, 30m, 2110, 940);
-            GraphNode run = graph.Component(110, Catalog.SimpleRun, 2450, 650);
+            GraphNode modelNote = graph.Note(
+                803,
+                "The two completed zones form the model passed directly into SimpleDragon Run.",
+                1450,
+                1810);
+            graph.Group(
+                903,
+                "6  Two-zone model",
+                ExampleGroupTheme.Model,
+                modelNote,
+                modelName,
+                model,
+                map,
+                area);
+
+            GraphNode runTrigger = graph.Boolean(103, "Run - explicit rising edge", false, 2500, 1700);
+            GraphNode cancelTrigger = graph.Boolean(104, "Cancel active run", false, 2500, 1780);
+            GraphNode forceRerun = graph.Boolean(105, "Force rerun", false, 2500, 1860);
+            GraphNode timeout = graph.Slider(107, "Run timeout 2 min", 2m, 1m, 30m, 2500, 1940);
+            GraphNode run = graph.Component(110, Catalog.SimpleRun, 2850, 1780);
             graph.Connect(model, 0, run, 0);
             graph.Connect(runTrigger, null, run, 1);
             graph.Connect(cancelTrigger, null, run, 2);
             graph.Connect(forceRerun, null, run, 3);
             graph.Connect(timeout, null, run, 4);
 
-            GraphNode resultSummary = graph.Component(113, Catalog.SimpleResultSummary, 2830, 870);
-            GraphNode monthlyLines = graph.Component(119, Catalog.SimpleLinePlot, 2830, 1040);
+            GraphNode resultSummary = graph.Component(113, Catalog.SimpleResultSummary, 3200, 1180);
+            GraphNode monthlyLines = graph.Component(119, Catalog.SimpleLinePlot, 3200, 1390);
             GraphNode exportDirectory = graph.Panel(
                 114,
                 "CSV export directory",
                 @"..\temp\example-preview\run-results-csv",
-                2830,
-                1300);
-            GraphNode exportTrigger = graph.Boolean(116, "Export CSV", false, 2830, 1480);
-            GraphNode overwrite = graph.Boolean(117, "Overwrite CSV", false, 2830, 1560);
-            GraphNode exportCsv = graph.Component(118, Catalog.SimpleExportCsv, 3210, 1330);
+                3200,
+                2520);
+            GraphNode exportTrigger = graph.Boolean(116, "Export CSV", false, 3200, 2700);
+            GraphNode overwrite = graph.Boolean(117, "Overwrite CSV", false, 3200, 2780);
+            GraphNode exportCsv = graph.Component(118, Catalog.SimpleExportCsv, 3550, 2550);
             graph.Connect(run, 0, resultSummary, 0);
             graph.Connect(run, 0, monthlyLines, 0);
             graph.Connect(run, 0, exportCsv, 0);
@@ -630,11 +966,11 @@ internal static class AdvancedExampleDefinitions
             graph.Connect(model, 4, exportCsv, 4);
             graph.Connect(exportTrigger, null, exportCsv, 5);
             graph.Connect(overwrite, null, exportCsv, 6);
-            GraphNode runState = graph.Panel(130, "SimpleDragon run state", string.Empty, 2830, 650);
-            GraphNode runSuccess = graph.Panel(131, "SimpleDragon run success", string.Empty, 3210, 650);
-            GraphNode annualResult = graph.Panel(134, "Annual site result", string.Empty, 3210, 870);
-            GraphNode csvFiles = graph.Panel(135, "CSV package files", string.Empty, 3580, 1330);
-            GraphNode csvWritten = graph.Panel(136, "CSV written", string.Empty, 3580, 1530);
+            GraphNode runState = graph.Panel(130, "SimpleDragon run state", string.Empty, 3200, 1740);
+            GraphNode runSuccess = graph.Panel(131, "SimpleDragon run success", string.Empty, 3200, 1900);
+            GraphNode annualResult = graph.Panel(134, "Annual site result", string.Empty, 3550, 1210);
+            GraphNode csvFiles = graph.Panel(135, "CSV package files", string.Empty, 3920, 2550);
+            GraphNode csvWritten = graph.Panel(136, "CSV written", string.Empty, 3920, 2750);
             graph.Connect(run, 1, runState, null);
             graph.Connect(run, 2, runSuccess, null);
             graph.Connect(resultSummary, 1, annualResult, null);
@@ -646,13 +982,13 @@ internal static class AdvancedExampleDefinitions
             graph.ExpectOutput(runSuccess, null, 1);
             graph.ExpectBoolean(run, 2, false);
 
-            GraphNode batchCase = graph.Component(141, Catalog.SimpleBatchCase, 2450, 1760);
-            GraphNode batchParallel = graph.Slider(142, "Batch parallel limit", 1m, 1m, 16m, 2450, 1910);
-            GraphNode batchRun = graph.Boolean(143, "Run batch", false, 2450, 1990);
-            GraphNode batchCancel = graph.Boolean(144, "Cancel batch", false, 2450, 2070);
-            GraphNode managedBatch = graph.Component(145, Catalog.SimpleManagedBatch, 2830, 1850);
-            GraphNode batchState = graph.Panel(146, "Managed batch state", string.Empty, 3210, 1810);
-            GraphNode batchComplete = graph.Panel(147, "Managed batch complete", string.Empty, 3580, 1810);
+            GraphNode batchCase = graph.Component(141, Catalog.SimpleBatchCase, 2850, 3020);
+            GraphNode batchParallel = graph.Slider(142, "Batch parallel limit", 1m, 1m, 16m, 2850, 3170);
+            GraphNode batchRun = graph.Boolean(143, "Run batch", false, 2850, 3250);
+            GraphNode batchCancel = graph.Boolean(144, "Cancel batch", false, 2850, 3330);
+            GraphNode managedBatch = graph.Component(145, Catalog.SimpleManagedBatch, 3200, 3110);
+            GraphNode batchState = graph.Panel(146, "Managed batch state", string.Empty, 3550, 3070);
+            GraphNode batchComplete = graph.Panel(147, "Managed batch complete", string.Empty, 3550, 3230);
             graph.Connect(model, 0, batchCase, 0);
             graph.Connect(batchCase, 0, managedBatch, 0);
             graph.Connect(batchParallel, null, managedBatch, 1);
@@ -669,6 +1005,70 @@ internal static class AdvancedExampleDefinitions
             graph.ExpectOutput(batchState, null, 1);
             graph.ExpectOutput(batchComplete, null, 1);
             graph.ExpectBoolean(managedBatch, 5, false);
+
+            GraphNode runNote = graph.Note(
+                804,
+                "SimpleDragon resolves EnergyPlus and weather internally; toggle Run for a rising edge.",
+                2480,
+                1630);
+            GraphNode resultsNote = graph.Note(
+                805,
+                "Connect the Run result directly for annual summary and default monthly line geometry.",
+                3180,
+                1020);
+            GraphNode csvNote = graph.Note(
+                806,
+                "CSV export is optional; choose a temporary directory and toggle Export CSV.",
+                3180,
+                2440);
+            GraphNode batchNote = graph.Note(
+                807,
+                "The same model can become a managed batch case with explicit run and cancel controls.",
+                2830,
+                2940);
+            graph.Group(
+                904,
+                "7  Single simulation",
+                ExampleGroupTheme.Runtime,
+                runNote,
+                runTrigger,
+                cancelTrigger,
+                forceRerun,
+                timeout,
+                run,
+                runState,
+                runSuccess);
+            graph.Group(
+                905,
+                "8  Results and monthly graph",
+                ExampleGroupTheme.Results,
+                resultsNote,
+                resultSummary,
+                monthlyLines,
+                annualResult);
+            graph.Group(
+                906,
+                "9  Optional CSV package",
+                ExampleGroupTheme.Results,
+                csvNote,
+                exportDirectory,
+                exportTrigger,
+                overwrite,
+                exportCsv,
+                csvFiles,
+                csvWritten);
+            graph.Group(
+                907,
+                "10  Managed batch",
+                ExampleGroupTheme.Runtime,
+                batchNote,
+                batchCase,
+                batchParallel,
+                batchRun,
+                batchCancel,
+                managedBatch,
+                batchState,
+                batchComplete);
 
             runtimeWorkflow = new RuntimeWorkflowExpectation(
                 run.InstanceGuid,
@@ -705,6 +1105,7 @@ internal static class AdvancedExampleDefinitions
         string zoneName,
         GraphNode construction,
         GraphNode opening,
+        GraphNode openingSource,
         int keyBase,
         float yStart)
     {
@@ -732,9 +1133,9 @@ internal static class AdvancedExampleDefinitions
             floorDefinition.Name + " boundary",
             SurfaceBoundaryChoices,
             "Ground",
-            530,
+            760,
             yStart + 60);
-        GraphNode floor = graph.Component(keyBase + 3, Catalog.SimpleFloor, 930, yStart + 10);
+        GraphNode floor = graph.Component(keyBase + 3, Catalog.SimpleFloor, 1150, yStart + 10);
 
         GraphNode ceilingFace = graph.Breps(
             keyBase + 10,
@@ -748,7 +1149,7 @@ internal static class AdvancedExampleDefinitions
             ceilingDefinition.Name,
             300,
             yStart + 220);
-        GraphNode ceiling = graph.Component(keyBase + 13, Catalog.SimpleCeiling, 930, yStart + 230);
+        GraphNode ceiling = graph.Component(keyBase + 13, Catalog.SimpleCeiling, 1150, yStart + 230);
 
         GraphNode plainWallFaces = graph.Breps(
             keyBase + 20,
@@ -762,7 +1163,7 @@ internal static class AdvancedExampleDefinitions
             plainWallDefinitions.Select(item => item.Name),
             300,
             yStart + 440);
-        GraphNode plainWalls = graph.Component(keyBase + 23, Catalog.SimpleWall, 930, yStart + 450);
+        GraphNode plainWalls = graph.Component(keyBase + 23, Catalog.SimpleWall, 1150, yStart + 450);
 
         GraphNode southWallFace = graph.Breps(
             keyBase + 30,
@@ -776,7 +1177,7 @@ internal static class AdvancedExampleDefinitions
             southWallDefinition.Name,
             300,
             yStart + 660);
-        GraphNode southWall = graph.Component(keyBase + 33, Catalog.SimpleWall, 930, yStart + 670);
+        GraphNode southWall = graph.Component(keyBase + 33, Catalog.SimpleWall, 1150, yStart + 670);
 
         graph.Connect(floorFace, null, floor, 0);
         graph.Connect(floorName, null, floor, 1);
@@ -793,6 +1194,33 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(construction, 0, southWall, 2);
         graph.Connect(opening, 0, southWall, 4);
 
+        string zoneLabel = zoneName == "ZONE_01_WEST" ? "West" : "East";
+        GraphNode note = graph.Note(
+            keyBase + 90,
+            zoneLabel + " envelope: lists author repeated walls; the south wall owns its opening.",
+            40,
+            yStart - 70);
+        graph.Group(
+            keyBase + 91,
+            (zoneLabel == "West" ? "2  " : "4  ") + zoneLabel + " zone envelope",
+            ExampleGroupTheme.Envelope,
+            note,
+            openingSource,
+            opening,
+            floorFace,
+            floorName,
+            floorBoundary,
+            floor,
+            ceilingFace,
+            ceilingName,
+            ceiling,
+            plainWallFaces,
+            plainWallNames,
+            plainWalls,
+            southWallFace,
+            southWallName,
+            southWall);
+
         return (
             new[] { floor, ceiling, plainWalls, southWall },
             new[] { floorFace, ceilingFace, plainWallFaces, southWallFace });
@@ -806,24 +1234,24 @@ internal static class AdvancedExampleDefinitions
             "GRR fixture path",
             @"..\fixtures\simple-dragon\grr\ASHRAE 140 modified.grr",
             60,
-            100);
-        GraphNode read = graph.Component(2, Catalog.SimpleReadResult, 390, 90);
+            500);
+        GraphNode read = graph.Component(2, Catalog.SimpleReadResult, 390, 490);
         GraphNode summary = graph.Component(3, Catalog.SimpleResultSummary, 760, 40);
         GraphNode dataTree = graph.Component(4, Catalog.SimpleDataTree, 760, 300);
-        GraphNode linePlot = graph.Component(5, Catalog.SimpleLinePlot, 760, 560);
-        GraphNode barPlot = graph.Component(6, Catalog.SimpleBarPlot, 760, 840);
-        GraphNode export = graph.Component(7, Catalog.SimpleExportCsv, 760, 1160);
+        GraphNode linePlot = graph.Component(5, Catalog.SimpleLinePlot, 760, 680);
+        GraphNode barPlot = graph.Component(6, Catalog.SimpleBarPlot, 760, 960);
+        GraphNode export = graph.Component(7, Catalog.SimpleExportCsv, 760, 1280);
         GraphNode exportDirectory = graph.Panel(
             8,
             "Preview export directory",
             @"..\temp\example-preview\simpledragon-csv",
             390,
-            1210);
+            1330);
         GraphNode annual = graph.Panel(10, "Annual site use", string.Empty, 1160, 70);
         GraphNode monthly = graph.Panel(11, "Monthly data tree", string.Empty, 1160, 330);
-        GraphNode lines = graph.Panel(12, "Line plot curves", string.Empty, 1160, 590);
-        GraphNode bars = graph.Panel(13, "Bar plot curves", string.Empty, 1160, 870);
-        GraphNode csvFiles = graph.Panel(14, "CSV preview files", string.Empty, 1160, 1190);
+        GraphNode lines = graph.Panel(12, "Line plot curves", string.Empty, 1160, 710);
+        GraphNode bars = graph.Panel(13, "Bar plot curves", string.Empty, 1160, 990);
+        GraphNode csvFiles = graph.Panel(14, "CSV preview files", string.Empty, 1160, 1310);
         graph.Connect(resultPath, null, read, 0);
         foreach (GraphNode consumer in new[] { summary, dataTree, linePlot, barPlot, export })
         {
@@ -851,6 +1279,59 @@ internal static class AdvancedExampleDefinitions
         graph.ExpectNumber(summary, 0, 48, 1e-8);
         graph.ExpectNumber(summary, 1, 79.34, 1e-8);
         graph.ExpectBoolean(export, 4, false);
+        GraphNode sourceNote = graph.Note(
+            800,
+            "Read the bundled GRR fixture once, then fan the typed result out to parallel consumers.",
+            40,
+            420);
+        GraphNode summaryNote = graph.Note(
+            801,
+            "Summary and data-tree components expose annual and monthly numeric results.",
+            730,
+            -120);
+        GraphNode plotNote = graph.Note(
+            802,
+            "Line and bar components create preview geometry from the same result object.",
+            730,
+            500);
+        GraphNode csvNote = graph.Note(
+            803,
+            "CSV export writes only when explicitly triggered; this example previews the target package.",
+            360,
+            1160);
+        graph.Group(
+            900,
+            "1  Result source",
+            ExampleGroupTheme.Inputs,
+            sourceNote,
+            resultPath,
+            read);
+        graph.Group(
+            901,
+            "2  Numeric summaries",
+            ExampleGroupTheme.Results,
+            summaryNote,
+            summary,
+            dataTree,
+            annual,
+            monthly);
+        graph.Group(
+            902,
+            "3  Preview graphs",
+            ExampleGroupTheme.Results,
+            plotNote,
+            linePlot,
+            barPlot,
+            lines,
+            bars);
+        graph.Group(
+            903,
+            "4  Optional CSV export",
+            ExampleGroupTheme.Results,
+            csvNote,
+            exportDirectory,
+            export,
+            csvFiles);
         return graph.Build(
             SimpleProduct,
             "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo");
@@ -872,12 +1353,93 @@ internal static class AdvancedExampleDefinitions
             Require(
                 string.Equals(actual.GetType().FullName, expected.TypeName, StringComparison.Ordinal),
                 expected.InstanceGuid + " reopened as " + actual.GetType().FullName + " instead of " + expected.TypeName + ".");
+            if (actual is not GH_Group)
+            {
+                Require(
+                    Math.Abs(actual.Attributes.Pivot.X - expected.Pivot.X) <= 0.1f
+                        && Math.Abs(actual.Attributes.Pivot.Y - expected.Pivot.Y) <= 0.1f,
+                    expected.InstanceGuid + " canvas position changed: expected " + expected.Pivot
+                        + " but reopened at " + actual.Attributes.Pivot + ".");
+            }
+
             if (expected.ComponentGuid.HasValue)
             {
                 Require(actual is GH_Component, expected.InstanceGuid + " must remain a Grasshopper component.");
                 Require(
                     ((GH_Component)actual).ComponentGuid == expected.ComponentGuid.Value,
                     expected.InstanceGuid + " component identity changed.");
+            }
+        }
+
+        foreach (NoteExpectation expected in graph.Notes)
+        {
+            GH_Scribble note = RequireObject<GH_Scribble>(document, expected.InstanceGuid);
+            Require(
+                string.Equals(note.Text, expected.Text, StringComparison.Ordinal),
+                expected.InstanceGuid + " canvas note text changed.");
+            Require(
+                string.Equals(note.Font.Name, GH_FontServer.Large.Name, StringComparison.Ordinal)
+                    && Math.Abs(note.Font.Size - GH_FontServer.Large.Size) <= 0.1f
+                    && note.Font.Style == GH_FontServer.Large.Style,
+                expected.InstanceGuid + " canvas note font changed.");
+            Require(
+                note.Attributes.Bounds.Width > 20 && note.Attributes.Bounds.Height > 10,
+                expected.InstanceGuid + " canvas note has invalid display bounds.");
+        }
+
+        foreach (GroupExpectation expected in graph.Groups)
+        {
+            GH_Group group = RequireObject<GH_Group>(document, expected.InstanceGuid);
+            Require(
+                string.Equals(group.NickName, expected.Name, StringComparison.Ordinal),
+                expected.InstanceGuid + " canvas group name changed.");
+            Require(
+                group.Border == expected.Border && group.Colour.ToArgb() == expected.ColourArgb,
+                expected.InstanceGuid + " canvas group appearance changed.");
+            Require(
+                group.ObjectIDs.Count == expected.MemberGuids.Length
+                    && group.ObjectIDs.ToHashSet().SetEquals(expected.MemberGuids),
+                expected.InstanceGuid + " canvas group membership changed.");
+            Require(
+                group.Attributes.Bounds.Width > 20 && group.Attributes.Bounds.Height > 20,
+                expected.InstanceGuid + " canvas group has invalid display bounds.");
+            IGH_DocumentObject[] memberObjects = expected.MemberGuids
+                .Select(memberGuid => document.FindObject(memberGuid, topLevelOnly: true)
+                    ?? throw new InvalidOperationException("Canvas group member is absent."))
+                .ToArray();
+            for (int first = 0; first < memberObjects.Length; first++)
+            {
+                for (int second = first + 1; second < memberObjects.Length; second++)
+                {
+                    System.Drawing.RectangleF intersection = System.Drawing.RectangleF.Intersect(
+                        memberObjects[first].Attributes.Bounds,
+                        memberObjects[second].Attributes.Bounds);
+                    Require(
+                        intersection.Width <= 1 || intersection.Height <= 1,
+                        "Objects " + memberObjects[first].InstanceGuid + " and "
+                            + memberObjects[second].InstanceGuid + " overlap inside canvas group '"
+                            + group.NickName + "': " + memberObjects[first].Attributes.Bounds + " vs "
+                            + memberObjects[second].Attributes.Bounds + ".");
+                }
+            }
+        }
+
+        GH_Group[] displayedGroups = graph.Groups
+            .Select(expected => RequireObject<GH_Group>(document, expected.InstanceGuid))
+            .ToArray();
+        for (int first = 0; first < displayedGroups.Length; first++)
+        {
+            for (int second = first + 1; second < displayedGroups.Length; second++)
+            {
+                System.Drawing.RectangleF intersection = System.Drawing.RectangleF.Intersect(
+                    displayedGroups[first].Attributes.Bounds,
+                    displayedGroups[second].Attributes.Bounds);
+                Require(
+                    intersection.Width <= 1 || intersection.Height <= 1,
+                    "Canvas groups '" + displayedGroups[first].NickName + "' and '"
+                        + displayedGroups[second].NickName + "' overlap: "
+                        + displayedGroups[first].Attributes.Bounds + " vs "
+                        + displayedGroups[second].Attributes.Bounds + ".");
             }
         }
 
@@ -911,6 +1473,22 @@ internal static class AdvancedExampleDefinitions
                         && string.Equals(target.GetType().FullName, expected.TargetParameterType, StringComparison.Ordinal)
                         && target.Access == expected.TargetAccess,
                     "Wire target contract changed for " + targetGroup.Key.ObjectGuid + ".");
+                IGH_DocumentObject sourceObject = document.FindObject(
+                    expected.SourceObjectGuid,
+                    topLevelOnly: true)
+                    ?? throw new InvalidOperationException("Wire source object is absent.");
+                IGH_DocumentObject targetObject = document.FindObject(
+                    expected.Target.ObjectGuid,
+                    topLevelOnly: true)
+                    ?? throw new InvalidOperationException("Wire target object is absent.");
+                Require(
+                    sourceObject.Attributes.Pivot.X < targetObject.Attributes.Pivot.X,
+                    "Wire " + expected.SourceObjectGuid + " -> " + expected.Target.ObjectGuid
+                        + " must flow from left to right on the example canvas.");
+                Require(
+                    source.Attributes.Pivot.X < target.Attributes.Pivot.X,
+                    "Wire ports on " + expected.SourceObjectGuid + " -> " + expected.Target.ObjectGuid
+                        + " must also flow from left to right without a reverse hook.");
             }
         }
 
@@ -2339,6 +2917,7 @@ internal static class AdvancedExampleDefinitions
     Justification = "Ownership of the Grasshopper document is transferred to ScenarioGraph.")]
 internal sealed class ScenarioGraphBuilder
 {
+    private static readonly char[] NoteWordSeparators = { ' ' };
     private readonly GH_ComponentServer _server;
     private readonly string _instancePrefix;
     private readonly GH_Document _document = new();
@@ -2347,6 +2926,8 @@ internal sealed class ScenarioGraphBuilder
     private readonly List<OutputExpectation> _outputs = new();
     private readonly List<BooleanExpectation> _booleans = new();
     private readonly List<NumberExpectation> _numbers = new();
+    private readonly List<NoteExpectation> _notes = new();
+    private readonly List<GroupExpectation> _groups = new();
 
     internal ScenarioGraphBuilder(GH_ComponentServer server, string instancePrefix)
     {
@@ -2370,7 +2951,11 @@ internal sealed class ScenarioGraphBuilder
         }
 
         GraphNode node = Add(key, component, x, y);
-        _objects.Add(new ObjectExpectation(node.InstanceGuid, identity.TypeName, identity.Id));
+        _objects.Add(new ObjectExpectation(
+            node.InstanceGuid,
+            identity.TypeName,
+            identity.Id,
+            new System.Drawing.PointF(x, y)));
         return node;
     }
 
@@ -2382,6 +2967,81 @@ internal sealed class ScenarioGraphBuilder
             UserText = text,
         };
         return AddSpecial(key, panel, x, y);
+    }
+
+    internal GraphNode Note(int key, string text, float x, float y)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            throw new ArgumentException("Canvas notes must contain explanatory text.", nameof(text));
+        }
+
+        string formattedText = WrapNote(text, 62);
+        var scribble = new GH_Scribble
+        {
+            Text = formattedText,
+            Font = GH_FontServer.Large,
+        };
+        GraphNode node = AddSpecial(key, scribble, x, y);
+        _notes.Add(new NoteExpectation(node.InstanceGuid, formattedText));
+        return node;
+    }
+
+    internal GraphNode Group(
+        int key,
+        string name,
+        ExampleGroupTheme theme,
+        params GraphNode[] members)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException("Canvas groups must have a visible name.", nameof(name));
+        }
+
+        GraphNode[] distinctMembers = members
+            .GroupBy(member => member.InstanceGuid)
+            .Select(group => group.First())
+            .ToArray();
+        if (distinctMembers.Length < 2)
+        {
+            throw new ArgumentException("Canvas groups must contain at least two objects.", nameof(members));
+        }
+
+        if (distinctMembers.Length != members.Length)
+        {
+            throw new ArgumentException("Canvas groups cannot repeat a member.", nameof(members));
+        }
+
+        if (distinctMembers.Any(member => member.Object is GH_Group
+            || !ReferenceEquals(_document.FindObject(member.InstanceGuid, topLevelOnly: true), member.Object)))
+        {
+            throw new ArgumentException(
+                "Canvas groups can contain only top-level objects from the current example document.",
+                nameof(members));
+        }
+
+        var group = new GH_Group
+        {
+            NickName = name,
+            Border = GH_GroupBorder.Box,
+            Colour = ExamplePresentation.GroupColour(theme),
+        };
+        GraphNode node = AddSpecial(key, group, 0, 0);
+        foreach (GraphNode member in distinctMembers)
+        {
+            group.AddObject(member.InstanceGuid);
+        }
+
+        group.ExpireCaches();
+        group.Attributes.ExpireLayout();
+        group.Attributes.PerformLayout();
+        _groups.Add(new GroupExpectation(
+            node.InstanceGuid,
+            name,
+            group.Border,
+            group.Colour.ToArgb(),
+            distinctMembers.Select(member => member.InstanceGuid).ToArray()));
+        return node;
     }
 
     internal GraphNode Slider(
@@ -2562,6 +3222,23 @@ internal sealed class ScenarioGraphBuilder
         OutwardEnvelopeExpectation? envelope = null,
         RuntimeWorkflowExpectation? runtimeWorkflow = null)
     {
+        if (_notes.Count == 0 || _groups.Count == 0)
+        {
+            throw new InvalidOperationException("Every advanced example must contain canvas notes and native groups.");
+        }
+
+        Guid[] groupableObjectGuids = _objects
+            .Where(item => !string.Equals(item.TypeName, typeof(GH_Group).FullName, StringComparison.Ordinal))
+            .Select(item => item.InstanceGuid)
+            .ToArray();
+        Guid[] groupedObjectGuids = _groups.SelectMany(group => group.MemberGuids).ToArray();
+        if (groupedObjectGuids.Length != groupableObjectGuids.Length
+            || !groupedObjectGuids.ToHashSet().SetEquals(groupableObjectGuids))
+        {
+            throw new InvalidOperationException(
+                "Every example object must belong to exactly one meaningful native group.");
+        }
+
         return new ScenarioGraph(
             product,
             _document,
@@ -2570,6 +3247,8 @@ internal sealed class ScenarioGraphBuilder
             _outputs.ToArray(),
             _booleans.ToArray(),
             _numbers.ToArray(),
+            _notes.ToArray(),
+            _groups.ToArray(),
             primaryOutputGooType,
             linkedModel,
             envelope,
@@ -2580,7 +3259,11 @@ internal sealed class ScenarioGraphBuilder
         where T : class, IGH_DocumentObject
     {
         GraphNode node = Add(key, value, x, y);
-        _objects.Add(new ObjectExpectation(node.InstanceGuid, value.GetType().FullName!, null));
+        _objects.Add(new ObjectExpectation(
+            node.InstanceGuid,
+            value.GetType().FullName!,
+            null,
+            new System.Drawing.PointF(x, y)));
         return node;
     }
 
@@ -2595,12 +3278,43 @@ internal sealed class ScenarioGraphBuilder
             throw new InvalidOperationException("Grasshopper refused to add " + value.GetType().FullName + ".");
         }
 
+        value.Attributes.ExpireLayout();
+        value.Attributes.PerformLayout();
+
         return new GraphNode(id, value);
     }
 
     private Guid InstanceGuid(int key)
     {
         return new Guid(_instancePrefix + "-0000-4000-8000-" + key.ToString("D12", System.Globalization.CultureInfo.InvariantCulture));
+    }
+
+    private static string WrapNote(string text, int maximumLineLength)
+    {
+        var lines = new List<string>();
+        var current = new System.Text.StringBuilder();
+        foreach (string word in text.Split(NoteWordSeparators, StringSplitOptions.RemoveEmptyEntries))
+        {
+            if (current.Length > 0 && current.Length + 1 + word.Length > maximumLineLength)
+            {
+                lines.Add(current.ToString());
+                current.Clear();
+            }
+
+            if (current.Length > 0)
+            {
+                current.Append(' ');
+            }
+
+            current.Append(word);
+        }
+
+        if (current.Length > 0)
+        {
+            lines.Add(current.ToString());
+        }
+
+        return string.Join(Environment.NewLine, lines);
     }
 
     private static IGH_Param Parameter(IGH_DocumentObject value, int? index, bool output)
@@ -2621,7 +3335,11 @@ internal sealed record ComponentIdentity(string Product, Guid Id, string TypeNam
 
 internal sealed record GraphNode(Guid InstanceGuid, IGH_DocumentObject Object);
 
-internal sealed record ObjectExpectation(Guid InstanceGuid, string TypeName, Guid? ComponentGuid);
+internal sealed record ObjectExpectation(
+    Guid InstanceGuid,
+    string TypeName,
+    Guid? ComponentGuid,
+    System.Drawing.PointF Pivot);
 
 internal sealed record TargetKey(Guid ObjectGuid, int? Index);
 
@@ -2641,6 +3359,15 @@ internal sealed record OutputExpectation(Guid ObjectGuid, int? OutputIndex, int 
 internal sealed record BooleanExpectation(Guid ObjectGuid, int OutputIndex, bool Expected);
 
 internal sealed record NumberExpectation(Guid ObjectGuid, int OutputIndex, double Expected, double Tolerance);
+
+internal sealed record NoteExpectation(Guid InstanceGuid, string Text);
+
+internal sealed record GroupExpectation(
+    Guid InstanceGuid,
+    string Name,
+    GH_GroupBorder Border,
+    int ColourArgb,
+    Guid[] MemberGuids);
 
 internal sealed record LinkedModelExpectation(
     string FileName,
@@ -2673,7 +3400,36 @@ internal sealed record ScenarioGraph(
     IReadOnlyList<OutputExpectation> Outputs,
     IReadOnlyList<BooleanExpectation> Booleans,
     IReadOnlyList<NumberExpectation> Numbers,
+    IReadOnlyList<NoteExpectation> Notes,
+    IReadOnlyList<GroupExpectation> Groups,
     string PrimaryOutputGooType,
     LinkedModelExpectation? LinkedModel,
     OutwardEnvelopeExpectation? Envelope,
     RuntimeWorkflowExpectation? RuntimeWorkflow);
+
+internal enum ExampleGroupTheme
+{
+    Inputs,
+    Envelope,
+    Systems,
+    Model,
+    Runtime,
+    Results,
+}
+
+internal static class ExamplePresentation
+{
+    internal static System.Drawing.Color GroupColour(ExampleGroupTheme theme)
+    {
+        return theme switch
+        {
+            ExampleGroupTheme.Inputs => System.Drawing.Color.FromArgb(255, 221, 235, 250),
+            ExampleGroupTheme.Envelope => System.Drawing.Color.FromArgb(255, 225, 243, 226),
+            ExampleGroupTheme.Systems => System.Drawing.Color.FromArgb(255, 255, 238, 203),
+            ExampleGroupTheme.Model => System.Drawing.Color.FromArgb(255, 232, 224, 246),
+            ExampleGroupTheme.Runtime => System.Drawing.Color.FromArgb(255, 255, 224, 224),
+            ExampleGroupTheme.Results => System.Drawing.Color.FromArgb(255, 221, 242, 241),
+            _ => throw new ArgumentOutOfRangeException(nameof(theme), theme, null),
+        };
+    }
+}
