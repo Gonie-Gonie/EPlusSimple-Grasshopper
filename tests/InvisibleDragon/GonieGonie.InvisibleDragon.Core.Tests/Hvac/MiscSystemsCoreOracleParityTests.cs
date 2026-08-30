@@ -134,7 +134,7 @@ public sealed class MiscSystemsCoreOracleParityTests
     {
         new("A01", 7, "sha256:c0d45e20c7b0a60054cd7a0cfa110bf8985437ff0239ee691dae570044868f60"),
         new("A02", 7, "sha256:fca24e1d2ca2f86b679e441b2a29adfe8f0e34882b307ad4fb6ba1f0e695cf44"),
-        new("B01", 13, "sha256:fc96123b456b1fad9981be1d36974df5fccb32da6b2a7332a47604f9d5dcccdd"),
+        new("B01", 13, "sha256:64ae7415d4afb9eca09a7532d99451825e8820574765af86bf8f6f47a3140968"),
         new("C01", 6, "sha256:c30afcb4e4b30db2a83e0686f45f89bd0dac9fc05409afd0652ceca72c2778cf"),
         new("C02", 6, "sha256:9c9dd7c4c87629fe127ad7c12b9fe9ec37158f3017f45062b90a1110877ef8f7"),
         new("C03", 6, "sha256:7a9faeec325fcde4fd9a20f1eea37d80f67be9bb84dfbbcf5d5e41707be727fa"),
@@ -147,9 +147,9 @@ public sealed class MiscSystemsCoreOracleParityTests
         "sha256:d1ce8137b8e834ec8ed2603fa90c6564f9185fb927e97fa79179bfbd471431ed", // 697 DomesticHotWater.efficiency
         "sha256:30890a1468c2395a92c0d03a51b7517fc07b8ad5818b9d37f040a70cf30a0bcf", // 698 DomesticHotWater.fuel
         "sha256:ff7e019736f12dc8a0016f23d6ba0fd78b5dfa2b5a335423f13a0a74be281881", // 699 DomesticHotWater.to_idf_object
-        "sha256:60eec34b8b5129939037dd962d8a129f826696c47f934edacee6245e7b156b8e", // 714 EnergyRecoveryVentilator
-        "sha256:5c39462f5320d0cf19919a7f97d449b31241cf4908c8a639f43f8ef5d5b7dfba", // 715 EnergyRecoveryVentilator.__init__
-        "sha256:f6a8bbdbd9ae2e6911472b3bdf405d004ffaec5dea891d2d2580366bc39f3385", // 716 EnergyRecoveryVentilator.to_idf_object
+        "sha256:cae7563b39576627c0013c050d16761b4daaadfff273d5862768f3127c7e3b4c", // 714 EnergyRecoveryVentilator
+        "sha256:b1659ecad59286ebe96d4f7f33d5eb97aa43a8a4c0264ab2407673c952b12e28", // 715 EnergyRecoveryVentilator.__init__
+        "sha256:57a17e62fb93cf611874f038e9de0bfde6cead8486b538620f6372c2e6af2d07", // 716 EnergyRecoveryVentilator.to_idf_object
         "sha256:1203db3639d74a5452b21d8b869ec17ca0d92d35ce2262771213a12853e6a7aa", // 753 PhotoVoltaicPanel
         "sha256:c2d8c6166e529f15eddc9622681a37c3843d0da4b86a1aa2a7d214931b116590", // 754 PhotoVoltaicPanel.__init__
         "sha256:1d138cdbbd31817127ee54a8e132dc68863a08d6c0a59963b2f3e1dcde5589f4", // 756 PhotoVoltaicPanel.area
@@ -163,18 +163,18 @@ public sealed class MiscSystemsCoreOracleParityTests
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
         "sha256:b91a3b4427dac338a46825ff18ec78aea1e018426753a08c468d79d9e8e6db01", // dragon-hvac-misc-systems-core-693-domestichotwater
-        "sha256:eede3d03a9da4bc09d58574919911582e4073f8b7a0370e3003d2c9bd58c6790", // dragon-hvac-misc-systems-core-694-domestichotwater-init
+        "sha256:eede3d03a9da4bc09d58574919911582e4073f8b7a0370e3003d2c9bd58c6790", // dragon-hvac-misc-systems-core-694-domestichotwater-__init__
         "sha256:a1350be80dd5627d8570fa65229c7d2fe0ec628bc7b4599832eeec85f85b75d6", // dragon-hvac-misc-systems-core-697-domestichotwater-efficiency
         "sha256:e2601eb1dd249096e84e6f26434d5fdca6f62972db19d11656f3a50783003bcc", // dragon-hvac-misc-systems-core-698-domestichotwater-fuel
-        "sha256:8d90cebf76b5aeb0a9e5fe34d8a64a3287ddf8197c0a9f225321a46f24f8fef3", // dragon-hvac-misc-systems-core-699-domestichotwater-to-idf-object
-        "sha256:3ce22c8008597924eda94d439aed0dff791aca04ef21be686dbd32fcd30156dc", // dragon-hvac-misc-systems-core-714-energyrecoveryventilator
-        "sha256:d99d07164a86069bee982f36d0adb8558482a1691d4314c34b78e5b2a55e65d4", // dragon-hvac-misc-systems-core-715-energyrecoveryventilator-init
-        "sha256:2e247ca6157f0d1d7b5636b6eabf8c379da19344767fe97f65d69a9d65187721", // dragon-hvac-misc-systems-core-716-energyrecoveryventilator-to-idf-object
+        "sha256:8d90cebf76b5aeb0a9e5fe34d8a64a3287ddf8197c0a9f225321a46f24f8fef3", // dragon-hvac-misc-systems-core-699-domestichotwater-to_idf_object
+        "sha256:f22feb490e0d3d3f4cf8bbbd490fc5a9719cbbad7120510b3549723b1a87f9bc", // dragon-hvac-misc-systems-core-714-energyrecoveryventilator
+        "sha256:adb33eae6b012f5572e28fd1edf765ff2d3b027ad6d296912d80b65099ed38fd", // dragon-hvac-misc-systems-core-715-energyrecoveryventilator-__init__
+        "sha256:1aa4af88f192d47dedc512468de04e9f91b7f827c1c944ddbe43e63cab7051c7", // dragon-hvac-misc-systems-core-716-energyrecoveryventilator-to_idf_object
         "sha256:f9abec816bc299289404479f6f3882dc6ae4bf6f14485a14cf922408db2564ef", // dragon-hvac-misc-systems-core-753-photovoltaicpanel
-        "sha256:218aaff4095be7ddb65456f52bac455af36159746dd755816bdf6c5052dfaea3", // dragon-hvac-misc-systems-core-754-photovoltaicpanel-init
+        "sha256:218aaff4095be7ddb65456f52bac455af36159746dd755816bdf6c5052dfaea3", // dragon-hvac-misc-systems-core-754-photovoltaicpanel-__init__
         "sha256:ad6f896506c021e207c523bcf2e22b3ba3c23f2b7cea3c8e4d059cdda8c89e2b", // dragon-hvac-misc-systems-core-756-photovoltaicpanel-area
         "sha256:3ab9565751d133f837e4579b86db7e725f7bf31f4deda4c05afb31496327d6c1", // dragon-hvac-misc-systems-core-757-photovoltaicpanel-azimuth
-        "sha256:0e6738976198190046dc57e9aded7fa22f59d82e9252b560341928c371befd2f", // dragon-hvac-misc-systems-core-758-photovoltaicpanel-effective-area-ratio
+        "sha256:0e6738976198190046dc57e9aded7fa22f59d82e9252b560341928c371befd2f", // dragon-hvac-misc-systems-core-758-photovoltaicpanel-effective_area_ratio
         "sha256:22744b7a1f87ae7380e66a96df7be537d158adb40f05b2c47b0269786f5859e3", // dragon-hvac-misc-systems-core-759-photovoltaicpanel-efficiency
         "sha256:ae346cd3fccc4a206242c7f5b10fbdd847bf5884af960171bdcaf6ad0d423074", // dragon-hvac-misc-systems-core-760-photovoltaicpanel-tilt
     };
@@ -210,8 +210,13 @@ public sealed class MiscSystemsCoreOracleParityTests
                 $"        new(\"{item.Code}\", {item.Facts.Length}, \"{item.FactsSha256}\"),"));
             string hashes = string.Join(Environment.NewLine, corpus.Targets.Select((target, index) =>
                 $"        \"{receiptHashes[index]}\", // {target.InventoryIndex} {target.Symbol}"));
+            string collectorPins = string.Join(Environment.NewLine, corpus.Targets.Select((target, index) =>
+                $"        \"{collectorOutputHashes[index]}\", // {target.AssertionId}"));
             throw new Xunit.Sdk.XunitException(
-                "MISC_SYSTEMS_NATIVE_PINS" + Environment.NewLine + facts + Environment.NewLine + hashes);
+                "MISC_SYSTEMS_NATIVE_PINS" + Environment.NewLine +
+                "CASES" + Environment.NewLine + facts + Environment.NewLine +
+                "RECEIPTS" + Environment.NewLine + hashes + Environment.NewLine +
+                "COLLECTOR_OUTPUTS" + Environment.NewLine + collectorPins);
         }
 
         Assert.Equal(ExpectedNativePins.Length, observations.Length);

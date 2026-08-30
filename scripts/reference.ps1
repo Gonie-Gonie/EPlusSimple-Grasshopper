@@ -26,6 +26,8 @@ $settingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
 $lockPath = Join-Path $repositoryRoot 'upstream\upstream.lock.json'
 $requirementsPath = Join-Path $repositoryRoot 'tools\python-reference\requirements.lock.txt'
 $bootstrapPath = Join-Path $repositoryRoot 'tools\python-reference\bootstrap_reference.py'
+$dependencyVerifierPath = Join-Path $repositoryRoot 'tools\python-reference\verify_dependencies.py'
+$referenceTestRunnerPath = Join-Path $repositoryRoot 'tools\python-reference\run_reference_tests.py'
 $generatorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_reference.py'
 $profileGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_usage_profile_schedule_oracle.py'
 $usageProfileCoreGeneratorPath = Join-Path $repositoryRoot 'tools\python-reference\generate_usage_profile_core_oracle.py'
@@ -210,6 +212,8 @@ foreach ($requiredFile in @(
     $lockPath,
     $requirementsPath,
     $bootstrapPath,
+    $dependencyVerifierPath,
+    $referenceTestRunnerPath,
     $generatorPath,
     $profileGeneratorPath,
     $usageProfileCoreGeneratorPath,
@@ -337,7 +341,11 @@ if (-not (Test-Path -LiteralPath $pythonExecutable -PathType Leaf)) {
     throw "The setup-selected Python executable no longer exists: '$pythonExecutable'. Re-run 'dev.cmd setup'."
 }
 
-$pythonIdentity = @(& $pythonExecutable -c "import sys; print('%d.%d.%d' % sys.version_info[:3])" 2>$null)
+# Preserve the pinned hash seed while preventing inherited Python search paths
+# and automatic site-package discovery from entering the oracle process tree.
+$env:PYTHONHOME = $null
+$env:PYTHONPATH = $null
+$pythonIdentity = @(& $pythonExecutable -S -P -B -X utf8 -c "import sys; print('%d.%d.%d' % sys.version_info[:3])" 2>$null)
 if ($LASTEXITCODE -ne 0 -or $pythonIdentity.Count -eq 0 -or [string] $pythonIdentity[-1] -ne $requiredPythonVersion) {
     $reported = if ($pythonIdentity.Count -gt 0) { [string] $pythonIdentity[-1] } else { '<none>' }
     throw "Python $requiredPythonVersion is required for the reference oracle; configured interpreter reported '$reported'."
@@ -474,7 +482,7 @@ raise SystemExit(0 if identity.pin_verified else 1)
     try {
         $env:PYTHONDONTWRITEBYTECODE = '1'
         $ErrorActionPreference = 'Continue'
-        $null = @(& $pythonExecutable -I -X utf8 -c $program `
+        $null = @(& $pythonExecutable -S -P -B -X utf8 -c $program `
             $trackerRoot $Path $Commit $Repository 2>&1)
         return $LASTEXITCODE -eq 0
     }
@@ -613,12 +621,32 @@ function Initialize-UpstreamCheckout {
     }
 }
 
+function Assert-ReferenceDependencies {
+    $verificationArguments = @(
+        '-I', '-S', '-B',
+        '-X', 'utf8',
+        $dependencyVerifierPath,
+        '--dependency-root', $dependencyRoot,
+        '--requirements', $requirementsPath,
+        '--pip-wheel', $pipWheel
+    )
+    Invoke-LoggedNativeCommand `
+        -FilePath $pythonExecutable `
+        -ArgumentList $verificationArguments `
+        -LogPath (Join-Path $logsRoot 'python-dependencies-verify.log') `
+        -FailureMessage 'Verifying the exact repo-local Python dependency closure failed'
+}
+
 function Install-ReferenceDependencies {
     $requirementsSha256 = Get-Sha256 -Path $requirementsPath
     $dependencyReady = $false
+    $pipWheelReady = `
+        (Test-Path -LiteralPath $pipWheel -PathType Leaf) -and `
+        ((Get-Sha256 -Path $pipWheel) -eq $pipWheelSha256)
     if (-not $RefreshDependencies -and
         (Test-Path -LiteralPath $dependencyRoot -PathType Container) -and
-        (Test-Path -LiteralPath $dependencyStamp -PathType Leaf)) {
+        (Test-Path -LiteralPath $dependencyStamp -PathType Leaf) -and
+        $pipWheelReady) {
         try {
             $stamp = Get-Content -LiteralPath $dependencyStamp -Raw | ConvertFrom-Json
             $dependencyReady = `
@@ -632,6 +660,7 @@ function Install-ReferenceDependencies {
     }
 
     if ($dependencyReady) {
+        Assert-ReferenceDependencies
         Write-Host "Python reference dependencies: ready ($dependencyRoot)"
         return
     }
@@ -670,6 +699,7 @@ from pip._internal.cli.main import main
 raise SystemExit(main(sys.argv[2:]))
 '@
     $pipArguments = @(
+        '-I', '-S', '-B',
         '-X', 'utf8',
         '-c', $pipCode,
         $pipWheel,
@@ -689,6 +719,7 @@ raise SystemExit(main(sys.argv[2:]))
 
     Reset-ReferenceOwnedTree -Path $dependencyRoot -AllowedTopLevelNames @('.tools')
     Move-Item -LiteralPath $stagingRoot -Destination $dependencyRoot
+    Assert-ReferenceDependencies
     $stamp = [ordered] @{
         schema = 'goniegonie.python-reference.dependencies.v1'
         pythonVersion = $requiredPythonVersion
@@ -809,13 +840,12 @@ $env:PYTHONUTF8 = '1'
 $env:PYTHONDONTWRITEBYTECODE = '1'
 $upstreamSource = Join-Path $UpstreamPath 'src'
 $constructionEqualityTestArguments = @(
-    '-B',
+    '-S', '-P', '-B',
     '-X', 'utf8',
-    '-m', 'unittest',
-    'discover',
-    '-s', (Split-Path -Parent $constructionEqualityTestPath),
-    '-p', 'test_*.py',
-    '-v'
+    $referenceTestRunnerPath,
+    '--start-directory', (Split-Path -Parent $constructionEqualityTestPath),
+    '--pattern', 'test_*.py',
+    '--verbosity', '2'
 )
 Invoke-LoggedNativeCommand `
     -FilePath $pythonExecutable `
@@ -825,6 +855,7 @@ Invoke-LoggedNativeCommand `
 
 $profileOraclePath = Join-Path $outputRoot 'usage-profile-schedule-oracle.json'
 $profileGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -842,6 +873,7 @@ Invoke-LoggedNativeCommand `
 
 $usageProfileCoreOraclePath = Join-Path $outputRoot 'usage-profile-core-oracle.json'
 $usageProfileCoreGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -860,6 +892,7 @@ Invoke-LoggedNativeCommand `
 
 $utilsCoreOraclePath = Join-Path $outputRoot 'utils-core-oracle.json'
 $utilsCoreGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -878,6 +911,7 @@ Invoke-LoggedNativeCommand `
 
 $commonCoreOraclePath = Join-Path $outputRoot 'common-core-oracle.json'
 $commonCoreGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -896,6 +930,7 @@ Invoke-LoggedNativeCommand `
 
 $constantsMetadataOraclePath = Join-Path $outputRoot 'constants-metadata-oracle.json'
 $constantsMetadataGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -915,6 +950,7 @@ Invoke-LoggedNativeCommand `
 
 $constantsEngineeringOraclePath = Join-Path $outputRoot 'constants-engineering-oracle.json'
 $constantsEngineeringGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -933,6 +969,7 @@ Invoke-LoggedNativeCommand `
 
 $epsimpleConstantsNumericOraclePath = Join-Path $outputRoot 'epsimple-constants-numeric-oracle.json'
 $epsimpleConstantsNumericGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -952,6 +989,7 @@ Invoke-LoggedNativeCommand `
 
 $epsimpleConstructionCoreOraclePath = Join-Path $outputRoot 'epsimple-construction-core-oracle.json'
 $epsimpleConstructionCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -971,6 +1009,7 @@ Invoke-LoggedNativeCommand `
 
 $epsimpleHvacEnumsBaseOraclePath = Join-Path $outputRoot 'epsimple-hvac-enums-base-oracle.json'
 $epsimpleHvacEnumsBaseGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -990,6 +1029,7 @@ Invoke-LoggedNativeCommand `
 
 $epsimpleHvacOtherSystemsOraclePath = Join-Path $outputRoot 'epsimple-hvac-other-systems-oracle.json'
 $epsimpleHvacOtherSystemsGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1009,6 +1049,7 @@ Invoke-LoggedNativeCommand `
 
 $epsimpleHvacThermalSourceOraclePath = Join-Path $outputRoot 'epsimple-hvac-thermal-source-oracle.json'
 $epsimpleHvacThermalSourceGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1028,6 +1069,7 @@ Invoke-LoggedNativeCommand `
 
 $epsimpleHvacSupplySystemOraclePath = Join-Path $outputRoot 'epsimple-hvac-supply-system-oracle.json'
 $epsimpleHvacSupplySystemGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1047,6 +1089,7 @@ Invoke-LoggedNativeCommand `
 
 $epsimpleIdentifierConventionsOraclePath = Join-Path $outputRoot 'epsimple-identifier-conventions-oracle.json'
 $epsimpleIdentifierConventionsGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1066,6 +1109,7 @@ Invoke-LoggedNativeCommand `
 
 $epsimpleModelCoreOraclePath = Join-Path $outputRoot 'epsimple-model-core-oracle.json'
 $epsimpleModelCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1085,6 +1129,7 @@ Invoke-LoggedNativeCommand `
 
 $epsimpleModelResultOraclePath = Join-Path $outputRoot 'epsimple-model-result-oracle.json'
 $epsimpleModelResultGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1104,6 +1149,7 @@ Invoke-LoggedNativeCommand `
 
 $epsimpleShapeCoreOraclePath = Join-Path $outputRoot 'epsimple-shape-core-oracle.json'
 $epsimpleShapeCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1123,6 +1169,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonConstructionAirBoundaryCoreOraclePath = Join-Path $outputRoot 'dragon-construction-air-boundary-core-oracle.json'
 $dragonConstructionAirBoundaryCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1142,6 +1189,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonConstructionCoreOraclePath = Join-Path $outputRoot 'dragon-construction-core-oracle.json'
 $dragonConstructionCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1161,6 +1209,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonConstructionToIdfObjectOraclePath = Join-Path $outputRoot 'dragon-construction-to-idf-object-oracle.json'
 $dragonConstructionToIdfObjectGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1180,6 +1229,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonHvacAppendersControllersOraclePath = Join-Path $outputRoot 'dragon-hvac-appenders-controllers-oracle.json'
 $dragonHvacAppendersControllersGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1199,6 +1249,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonHvacMiscSystemsCoreOraclePath = Join-Path $outputRoot 'dragon-hvac-misc-systems-core-oracle.json'
 $dragonHvacMiscSystemsCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1218,6 +1269,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonHvacPhotovoltaicToIdfObjectOraclePath = Join-Path $outputRoot 'dragon-hvac-photovoltaic-to-idf-object-oracle.json'
 $dragonHvacPhotovoltaicToIdfObjectGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1237,6 +1289,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonHvacSourceSystemToIdfObjectOraclePath = Join-Path $outputRoot 'dragon-hvac-source-system-to-idf-object-oracle.json'
 $dragonHvacSourceSystemToIdfObjectGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1256,6 +1309,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonHvacSourceTowerCoreOraclePath = Join-Path $outputRoot 'dragon-hvac-source-tower-core-oracle.json'
 $dragonHvacSourceTowerCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1275,6 +1329,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonHvacSupplyCoreOraclePath = Join-Path $outputRoot 'dragon-hvac-supply-core-oracle.json'
 $dragonHvacSupplyCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1294,6 +1349,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonHvacSupplyGroupCoreOraclePath = Join-Path $outputRoot 'dragon-hvac-supply-group-core-oracle.json'
 $dragonHvacSupplyGroupCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1313,6 +1369,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonHvacSupplyGroupToIdfObjectOraclePath = Join-Path $outputRoot 'dragon-hvac-supply-group-to-idf-object-oracle.json'
 $dragonHvacSupplyGroupToIdfObjectGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1332,6 +1389,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonShapeGeometryCoreOraclePath = Join-Path $outputRoot 'dragon-shape-geometry-core-oracle.json'
 $dragonShapeGeometryCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1351,6 +1409,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonShapeOpeningAdjacencyCoreOraclePath = Join-Path $outputRoot 'dragon-shape-opening-adjacency-core-oracle.json'
 $dragonShapeOpeningAdjacencyCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1370,6 +1429,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonShapeShadingMaterialToIdfObjectOraclePath = Join-Path $outputRoot 'dragon-shape-shading-material-to-idf-object-oracle.json'
 $dragonShapeShadingMaterialToIdfObjectGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1389,6 +1449,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonShapeSurfaceToIdfObjectOraclePath = Join-Path $outputRoot 'dragon-shape-surface-to-idf-object-oracle.json'
 $dragonShapeSurfaceToIdfObjectGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1408,6 +1469,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonShapeZoneCoreOraclePath = Join-Path $outputRoot 'dragon-shape-zone-core-oracle.json'
 $dragonShapeZoneCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1427,6 +1489,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonShapeZoneToIdfObjectOraclePath = Join-Path $outputRoot 'dragon-shape-zone-to-idf-object-oracle.json'
 $dragonShapeZoneToIdfObjectGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1446,6 +1509,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonModelAddSupplySystemOraclePath = Join-Path $outputRoot 'dragon-model-add-supply-system-oracle.json'
 $dragonModelAddSupplySystemGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1465,6 +1529,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonModelAssemblyOraclePath = Join-Path $outputRoot 'dragon-model-assembly-oracle.json'
 $dragonModelAssemblyGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1484,6 +1549,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonModelClassOraclePath = Join-Path $outputRoot 'dragon-model-class-oracle.json'
 $dragonModelClassGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1503,6 +1569,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonModelConditioningOraclePath = Join-Path $outputRoot 'dragon-model-conditioning-oracle.json'
 $dragonModelConditioningGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1521,6 +1588,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonModelConstructionDefaultsOraclePath = Join-Path $outputRoot 'dragon-model-construction-defaults-oracle.json'
 $dragonModelConstructionDefaultsGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1539,6 +1607,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonModelProjectionsOraclePath = Join-Path $outputRoot 'dragon-model-projections-oracle.json'
 $dragonModelProjectionsGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1557,6 +1626,7 @@ Invoke-LoggedNativeCommand `
 
 $dragonModelTerrainOraclePath = Join-Path $outputRoot 'dragon-model-terrain-oracle.json'
 $dragonModelTerrainGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1575,6 +1645,7 @@ Invoke-LoggedNativeCommand `
 
 $launcherResultParserOraclePath = Join-Path $outputRoot 'launcher-result-parser-oracle.json'
 $launcherResultParserGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1593,6 +1664,7 @@ Invoke-LoggedNativeCommand `
 
 $launcherRuntimeOraclePath = Join-Path $outputRoot 'launcher-runtime-oracle.json'
 $launcherRuntimeGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1611,6 +1683,7 @@ Invoke-LoggedNativeCommand `
 
 $imugiIddDefinitionsCoreOraclePath = Join-Path $outputRoot 'imugi-idd-definitions-core-oracle.json'
 $imugiIddDefinitionsCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1630,6 +1703,7 @@ Invoke-LoggedNativeCommand `
 
 $imugiIddSchemaStaticCoreOraclePath = Join-Path $outputRoot 'imugi-idd-schema-static-core-oracle.json'
 $imugiIddSchemaStaticCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1649,6 +1723,7 @@ Invoke-LoggedNativeCommand `
 
 $imugiIdfObjectCoreOraclePath = Join-Path $outputRoot 'imugi-idf-object-core-oracle.json'
 $imugiIdfObjectCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1668,6 +1743,7 @@ Invoke-LoggedNativeCommand `
 
 $imugiIdfObjectListCoreOraclePath = Join-Path $outputRoot 'imugi-idf-object-list-core-oracle.json'
 $imugiIdfObjectListCoreGeneratorArguments = @(
+    '-S', '-P',
     '-B',
     '-X', 'utf8',
     $bootstrapPath,
@@ -1687,6 +1763,7 @@ Invoke-LoggedNativeCommand `
 
 $iddOraclePath = Join-Path $outputRoot 'idd-24.2.0.schema.json.gz'
 $iddGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1710,6 +1787,7 @@ Invoke-LoggedNativeCommand `
 
 $constructionEqualityOraclePath = Join-Path $outputRoot 'construction-equality-hash-oracle.json'
 $constructionEqualityGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1728,6 +1806,7 @@ Invoke-LoggedNativeCommand `
 
 $scheduleTypeOraclePath = Join-Path $outputRoot 'schedule-type-oracle.json'
 $scheduleTypeGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1746,6 +1825,7 @@ Invoke-LoggedNativeCommand `
 
 $dayScheduleCoreOraclePath = Join-Path $outputRoot 'day-schedule-core-oracle.json'
 $dayScheduleCoreGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1764,6 +1844,7 @@ Invoke-LoggedNativeCommand `
 
 $dayScheduleMetricsOraclePath = Join-Path $outputRoot 'day-schedule-metrics-oracle.json'
 $dayScheduleMetricsGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1782,6 +1863,7 @@ Invoke-LoggedNativeCommand `
 
 $dayScheduleOperationsOraclePath = Join-Path $outputRoot 'day-schedule-operations-oracle.json'
 $dayScheduleOperationsGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1800,6 +1882,7 @@ Invoke-LoggedNativeCommand `
 
 $ruleSetCoreOraclePath = Join-Path $outputRoot 'rule-set-core-oracle.json'
 $ruleSetCoreGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1818,6 +1901,7 @@ Invoke-LoggedNativeCommand `
 
 $ruleSetOperationsOraclePath = Join-Path $outputRoot 'rule-set-operations-oracle.json'
 $ruleSetOperationsGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1836,6 +1920,7 @@ Invoke-LoggedNativeCommand `
 
 $scheduleCoreOraclePath = Join-Path $outputRoot 'schedule-core-oracle.json'
 $scheduleCoreGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1854,6 +1939,7 @@ Invoke-LoggedNativeCommand `
 
 $scheduleOperationsOraclePath = Join-Path $outputRoot 'schedule-operations-oracle.json'
 $scheduleOperationsGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1872,6 +1958,7 @@ Invoke-LoggedNativeCommand `
 
 $profileResidualOraclePath = Join-Path $outputRoot 'profile-residual-oracle.json'
 $profileResidualGeneratorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -1889,6 +1976,7 @@ Invoke-LoggedNativeCommand `
     -FailureMessage 'Generating the Python profile residual oracle failed'
 
 $generatorArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,

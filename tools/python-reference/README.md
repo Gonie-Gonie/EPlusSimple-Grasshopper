@@ -9,6 +9,14 @@ for the C# port.
 the exact requirements into `.tools/python-reference`, and writes all generated
 work to `temp/reference/python-output`.
 
+The requirements file is a complete `--no-deps` closure. Every run verifies
+that the repo-local directory contains exactly those pinned distributions and
+that all active package metadata requirements are present and compatible; a
+global Python installation cannot satisfy a missing oracle dependency.
+Oracle, compatibility, and nested regeneration processes also disable Python's
+automatic site loading and unsafe path prefix, clear inherited `PYTHONHOME` and
+`PYTHONPATH`, and preserve the pinned `PYTHONHASHSEED=0` behavior.
+
 ```text
 .\dev.cmd reference
 .\dev.cmd reference -Mode Verify

@@ -181,6 +181,8 @@ if ([string] $settings.dotnet.status -ne 'ready') {
 }
 
 $pythonExecutable = [string] $settings.pythonOracle.executable
+$env:PYTHONHOME = $null
+$env:PYTHONPATH = $null
 $runtimeRoot = [string] $settings.energyPlus.root
 $dotnetExecutable = [string] $settings.dotnet.executable
 $iddPath = Join-Path $runtimeRoot 'Energy+.idd'
@@ -271,6 +273,7 @@ $env:PYTHONHASHSEED = '0'
 $env:PYTHONUTF8 = '1'
 $env:PYTHONDONTWRITEBYTECODE = '1'
 $pythonArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $bootstrapPath,
     '--dependency-root', $dependencyRoot,
@@ -296,6 +299,7 @@ Invoke-LoggedNativeCommand `
     -FailureMessage 'The Python compatibility engine failed'
 
 $reportArguments = @(
+    '-S', '-P', '-B',
     '-X', 'utf8',
     $reporterPath,
     '--manifest', $manifestPath,

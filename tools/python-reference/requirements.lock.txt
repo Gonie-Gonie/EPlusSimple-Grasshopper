@@ -1,11 +1,23 @@
-# Exact release dependencies of upstream EPlusSimple 0.7.0 at the pinned commit.
+# Exact, transitively closed oracle dependencies for upstream EPlusSimple 0.7.0.
+beautifulsoup4==4.8.0
 colorama==0.4.6
+decorator==5.1.1
+eppy==0.5.63
 et_xmlfile==2.0.0
+future==1.0.0
+lxml==5.3.0
+munch==4.0.0
 numpy==2.3.1
 openpyxl==3.1.5
 pandas==2.3.0
+pydot3k==1.0.17
+pyparsing==3.2.0
 python-dateutil==2.9.0.post0
 pytz==2024.2
+setuptools==75.4.0
+shapely==2.0.6
 six==1.16.0
+soupsieve==2.6
+tinynumpy==1.2.1
 tqdm==4.67.1
 tzdata==2024.2

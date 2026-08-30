@@ -59,9 +59,11 @@ internal static class ScheduleIdfExporter
         };
         foreach (SchedulePeriod period in schedule.Compactize())
         {
-            fields.Add(legacySimpleDragon
-                ? $"Through: {period.End.Month}/{period.End.Day}"
-                : $"Through: {period.End:M/d}");
+            fields.Add(
+                "Through: "
+                + period.End.Month.ToString(CultureInfo.InvariantCulture)
+                + "/"
+                + period.End.Day.ToString(CultureInfo.InvariantCulture));
             if (legacySimpleDragon)
             {
                 AddLegacyRuleSet(fields, period.RuleSet);
