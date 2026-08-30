@@ -12,6 +12,9 @@ ROOT = Path(__file__).resolve().parents[2]
 COMPATIBILITY = ROOT / "scripts" / "compatibility.ps1"
 RELEASE = ROOT / "scripts" / "release.ps1"
 MANIFEST = ROOT / "fixtures" / "compatibility" / "cases.json"
+RELEASE_WORKFLOW = ROOT / ".github" / "workflows" / "release-candidate.yml"
+EXAMPLE_TOOL_README = ROOT / "tools" / "example-definitions" / "README.md"
+EXAMPLES_README = ROOT / "examples" / "README.md"
 SOURCE_ROOTS = (
     "src/Shared/GonieGonie.BuildingEnergy.Contracts",
     "src/Shared/GonieGonie.EnergyPlus.Runtime",
@@ -124,6 +127,26 @@ class EngineeringProvenanceContractTests(unittest.TestCase):
             "GonieGonie.SimpleDragon.Core",
         }
         self.assertEqual(5, len(binary_names))
+
+    def test_release_binary_inventory_excludes_embedded_stage_archives(self) -> None:
+        text = RELEASE.read_text(encoding="utf-8")
+        self.assertIn(
+            "(Get-RelativeUnixPath -Root $packagesRoot -Path $_.FullName) "
+            "-notmatch '^[^/]+/stage/'",
+            text,
+        )
+        self.assertIn("$binaryAssets.Count -ne 6", text)
+        self.assertIn("$indexedBinaryExpectations.Count -ne 6", text)
+
+    def test_release_diagnostics_follow_the_example_runner_short_path(self) -> None:
+        workflow = RELEASE_WORKFLOW.read_text(encoding="utf-8")
+        tool_readme = EXAMPLE_TOOL_README.read_text(encoding="utf-8")
+        examples_readme = EXAMPLES_README.read_text(encoding="utf-8")
+        self.assertIn("temp/e/", workflow)
+        self.assertIn("temp/e/<token>", tool_readme)
+        self.assertIn("temp/e/<token>", examples_readme)
+        self.assertNotIn("temp/example-definitions/run-*", tool_readme)
+        self.assertNotIn("`temp/example-definitions/`", examples_readme)
 
     def test_powershell_scripts_parse(self) -> None:
         powershell = shutil.which("powershell") or shutil.which("pwsh")

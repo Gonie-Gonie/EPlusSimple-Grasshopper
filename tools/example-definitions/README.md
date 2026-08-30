@@ -20,8 +20,9 @@ supported host generations:
 Rhino 7 is the canonical writer so the committed `.gh` and `.3dm` files remain
 readable by the oldest supported host. Rhino 8 only writes round-trip copies
 below `temp/`. Every build log, host log, summary, and round-trip artifact is
-written below `temp/example-definitions/run-*`. Generation stages candidates
-there and only replaces tracked files after they reopen and pass their checks.
+written below the short-path run directory `temp/e/<token>`. Generation stages
+candidates there and only replaces tracked files after they reopen and pass
+their checks.
 
 Definition checks cover exact object/component identities, source order for
 every wire and its exact total, source/target parameter names, runtime types and

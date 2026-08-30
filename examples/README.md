@@ -129,8 +129,8 @@ document-relative GRR fixture path. For `.3dm` files it also checks metre units,
 layer, object names and ownership attributes, single-face planar Breps, exact
 bounds and normals, required Zone adjacencies, closed planar windows, and
 equality between model geometry and the internalized two-Zone Grasshopper
-inputs. Candidates, logs, summaries, and round-trip copies remain below
-`temp/example-definitions/`.
+inputs. Candidates, logs, summaries, and round-trip copies remain below the
+short-path run directory `temp/e/<token>`.
 
 For example 02, that topology check includes `ID Weather`, `Run
 InvisibleDragon`, and every compile/weather/run wire. Its deliberately data-empty
