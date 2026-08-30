@@ -25,7 +25,6 @@ public sealed class ConstantProfileComponent : DragonComponent
         pManager.AddNumberParameter("Heating Setpoint", "Heat", "Constant heating setpoint in °C.", GH_ParamAccess.item, 20);
         pManager.AddNumberParameter("Cooling Setpoint", "Cool", "Constant cooling setpoint in °C.", GH_ParamAccess.item, 26);
         pManager.AddNumberParameter("Occupancy", "Occ", "Constant non-negative occupant schedule value.", GH_ParamAccess.item, 0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable profile identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -40,7 +39,6 @@ public sealed class ConstantProfileComponent : DragonComponent
         double heating = 20;
         double cooling = 26;
         double occupancy = 0;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref heating) ||
             !DA.GetData(2, ref cooling) ||
@@ -49,9 +47,8 @@ public sealed class ConstantProfileComponent : DragonComponent
             return;
         }
 
-        DA.GetData(4, ref id);
         var profile = new ZoneProfile(
-            StableIds.Resolve(id, "profile", name),
+            StableIds.Create("profile", name),
             name,
             Schedule.Constant($"{name}:Heating", heating, ScheduleType.Temperature),
             Schedule.Constant($"{name}:Cooling", cooling, ScheduleType.Temperature),

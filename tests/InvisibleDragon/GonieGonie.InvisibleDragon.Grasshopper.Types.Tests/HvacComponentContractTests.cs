@@ -59,6 +59,15 @@ public sealed class HvacComponentContractTests
         "ElectricRadiantFloorComponent",
     };
 
+    private static readonly string[] GeometryModelAndProfileComponentNames =
+    {
+        "WindowFromPolylineComponent",
+        "DoorFromPolylineComponent",
+        "SurfaceComponent",
+        "ZoneComponent",
+        "ConstantProfileComponent",
+    };
+
     private static readonly string[] ModelOutputNames =
     {
         "Model",
@@ -69,14 +78,14 @@ public sealed class HvacComponentContractTests
     private static readonly string[] ZoneInputNames =
     {
         "Name", "Surfaces", "Profile", "Infiltration", "Lighting Power Density",
-        "Outdoor Air Flow", "HVAC", "ERVs", "ID",
+        "Outdoor Air Flow", "HVAC", "ERVs",
     };
 
     private static readonly string[] ZoneInputTypes =
     {
         "Param_String", "DragonSurfaceParam", "DragonProfileParam", "Param_Number",
         "Param_Number", "Param_Number", "DragonSupplySystemParam",
-        "DragonEnergyRecoveryVentilatorParam", "Param_String",
+        "DragonEnergyRecoveryVentilatorParam",
     };
 
     private static readonly string[] EnergyModelInputNames =
@@ -124,6 +133,20 @@ public sealed class HvacComponentContractTests
             "DragonPhotovoltaicPanelParam",
             Component(assembly, "PhotovoltaicPanelComponent").Params.Output[0].GetType().Name);
 
+    }
+
+    [Fact]
+    public void PublicAuthoringComponentsDoNotExposeEntityIdentifierInputs()
+    {
+        Assembly assembly = LoadPlugin();
+        string[] componentNames = ExpectedComponents.Keys
+            .Concat(GeometryModelAndProfileComponentNames)
+            .ToArray();
+
+        Assert.Equal(22, componentNames.Length);
+        Assert.All(componentNames, name => Assert.DoesNotContain(
+            Component(assembly, name).Params.Input,
+            parameter => string.Equals(parameter.Name, "ID", StringComparison.OrdinalIgnoreCase)));
     }
 
     [Fact]
@@ -212,13 +235,12 @@ public sealed class HvacComponentContractTests
             [5] = source.OutdoorAirFlowCubicMetresPerSecond,
             [6] = systems.Select(item => new DragonSupplySystemGoo(item)).ToArray(),
             [7] = new[] { new DragonEnergyRecoveryVentilatorGoo(ventilator) },
-            [8] = "zone-direct",
         });
 
         InvokeSolve(Component(assembly, "ZoneComponent"), access);
 
         InvisibleDragonZoneDefinition definition = Assert.IsType<DragonZoneDefinitionGoo>(access.Outputs[0]).Value;
-        Assert.Equal(new EntityId("zone-direct"), definition.Zone.Id);
+        Assert.False(string.IsNullOrWhiteSpace(definition.Zone.Id.Value));
         Assert.Equal(2, definition.SupplySystems.Count);
         Assert.Single(definition.Ventilators);
         Assert.Equal(systems[0].Id, definition.SupplySystems[0].Id);
@@ -308,10 +330,10 @@ public sealed class HvacComponentContractTests
         Assert.Equal(new Guid("b2e1e805-a126-44fe-bf6c-4dbf16a76aae"), door.ComponentGuid);
         Assert.Equal(new Guid("c25eb6d8-9500-44e5-9909-58d41de0a320"), surface.ComponentGuid);
         Assert.Equal("Name|U-Value|SHGC", string.Join("|", glazing.Params.Input.Select(item => item.Name)));
-        Assert.Equal("Curve|Name|Glazing|ID", string.Join("|", window.Params.Input.Select(item => item.Name)));
-        Assert.Equal("Curve|Name|Construction|ID", string.Join("|", door.Params.Input.Select(item => item.Name)));
+        Assert.Equal("Curve|Name|Glazing", string.Join("|", window.Params.Input.Select(item => item.Name)));
+        Assert.Equal("Curve|Name|Construction", string.Join("|", door.Params.Input.Select(item => item.Name)));
         Assert.Equal(
-            "Curve|Name|Type|Construction|Boundary Intent|Openings|ID",
+            "Curve|Name|Type|Construction|Boundary Intent|Openings",
             string.Join("|", surface.Params.Input.Select(item => item.Name)));
         Assert.Equal("DragonGlazingParam", glazing.Params.Output[0].GetType().Name);
         Assert.Equal("DragonOpeningParam", window.Params.Output[0].GetType().Name);
@@ -348,10 +370,10 @@ public sealed class HvacComponentContractTests
         DragonSourceSystemGoo heatPumpGoo = Source(assembly, "HeatPumpComponent", new Dictionary<int, object?>
         {
             [0] = "Authored HP", [1] = (int)Fuel.Electricity, [2] = 3.7d, [3] = 4.8d,
-            [4] = 20_000d, [5] = 21_000d, [6] = "source-authored-hp",
+            [4] = 20_000d, [5] = 21_000d,
         });
         var heatPump = Assert.IsType<HeatPump>(heatPumpGoo.Value);
-        Assert.Equal(new EntityId("source-authored-hp"), heatPump.Id);
+        Assert.False(string.IsNullOrWhiteSpace(heatPump.Id.Value));
         Assert.Equal(3.7d, heatPump.HeatingCoefficientOfPerformance);
         Assert.Equal(21_000d, heatPump.CoolingCapacityWatts);
 
@@ -361,9 +383,9 @@ public sealed class HvacComponentContractTests
             new Dictionary<int, object?>
             {
                 [0] = "Authored Geo", [1] = (int)Fuel.Electricity, [2] = 4.2d, [3] = 5.3d,
-                [4] = 22_000d, [5] = 23_000d, [6] = "source-authored-geo",
+                [4] = 22_000d, [5] = 23_000d,
             }).Value);
-        Assert.Equal(new EntityId("source-authored-geo"), geothermal.Id);
+        Assert.False(string.IsNullOrWhiteSpace(geothermal.Id.Value));
 
         CoolingTower[] towers =
         {
@@ -380,7 +402,7 @@ public sealed class HvacComponentContractTests
         DragonSourceSystemGoo boilerGoo = Source(assembly, "BoilerComponent", new Dictionary<int, object?>
         {
             [0] = "Authored Boiler", [1] = (int)Fuel.NaturalGas, [2] = 0.92d,
-            [3] = 31_000d, [4] = 0.88d, [5] = 62d, [6] = "source-authored-boiler",
+            [3] = 31_000d, [4] = 0.88d, [5] = 62d,
         });
         var boiler = Assert.IsType<Boiler>(boilerGoo.Value);
         Assert.Equal(0.92d, boiler.NominalThermalEfficiency);
@@ -390,7 +412,7 @@ public sealed class HvacComponentContractTests
             new Dictionary<int, object?>
             {
                 [0] = "Authored District", [1] = 32_000d, [2] = 0.87d,
-                [3] = 58d, [4] = "source-authored-district",
+                [3] = 58d,
             }).Value);
         Assert.Equal(58d, district.SetpointTemperatureCelsius);
 
@@ -398,7 +420,6 @@ public sealed class HvacComponentContractTests
         {
             [0] = "Authored Chiller", [1] = 5.4d, [2] = (int)CompressorType.Screw,
             [3] = towers[3], [4] = 41_000d, [5] = 0.86d, [6] = 5.8d,
-            [7] = "source-authored-chiller",
         }).Value);
         Assert.Same(towers[3], chiller.CoolingTower);
         Assert.Equal(CompressorType.Screw, chiller.Compressor);
@@ -410,7 +431,6 @@ public sealed class HvacComponentContractTests
             {
                 [0] = "Authored Absorption", [1] = 1.15d, [2] = boilerGoo,
                 [3] = towers[1], [4] = 42_000d, [5] = 0.85d, [6] = 5.9d,
-                [7] = "source-authored-absorption",
             }).Value);
         Assert.Same(boiler, absorption.HeatSource);
         Assert.Same(towers[1], absorption.CoolingTower);
@@ -418,12 +438,12 @@ public sealed class HvacComponentContractTests
         DragonSourceSystemGoo repeat = Source(assembly, "HeatPumpComponent", new Dictionary<int, object?>
         {
             [0] = "Deterministic", [1] = (int)Fuel.Electricity, [2] = 3.5d, [3] = 4d,
-            [4] = 0d, [5] = 0d, [6] = string.Empty,
+            [4] = 0d, [5] = 0d,
         });
         DragonSourceSystemGoo repeatAgain = Source(assembly, "HeatPumpComponent", new Dictionary<int, object?>
         {
             [0] = "Deterministic", [1] = (int)Fuel.Electricity, [2] = 3.5d, [3] = 4d,
-            [4] = 0d, [5] = 0d, [6] = string.Empty,
+            [4] = 0d, [5] = 0d,
         });
         Assert.Equal(repeat.Value.Id, repeatAgain.Value.Id);
     }
@@ -472,36 +492,34 @@ public sealed class HvacComponentContractTests
         {
             Supply(assembly, "PackagedAirConditionerComponent", new Dictionary<int, object?>
             {
-                [0] = "Packaged", [1] = heatPumpGoo, [2] = "supply-packaged",
+                [0] = "Packaged", [1] = heatPumpGoo,
             }),
             Supply(assembly, "AirHandlingUnitComponent", new Dictionary<int, object?>
             {
                 [0] = "AHU", [1] = heatPumpGoo, [2] = 0.74d, [3] = 135d,
-                [4] = 0.93d, [5] = "supply-ahu",
+                [4] = 0.93d,
             }),
             Supply(assembly, "FanCoilUnitComponent", new Dictionary<int, object?>
             {
                 [0] = "Cooling FCU", [1] = chillerGoo, [2] = 0.75d, [3] = 136d,
-                [4] = 0.92d, [5] = "supply-fcu",
+                [4] = 0.92d,
             }),
             Supply(assembly, "RadiatorComponent", new Dictionary<int, object?>
             {
                 [0] = "Radiator", [1] = boilerGoo, [2] = 8_000d, [3] = 0.3d,
-                [4] = "supply-radiator",
             }),
             Supply(assembly, "ElectricRadiatorComponent", new Dictionary<int, object?>
             {
                 [0] = "Electric Radiator", [1] = 8_100d, [2] = 0.98d,
-                [3] = 0.31d, [4] = "supply-electric-radiator",
+                [3] = 0.31d,
             }),
             Supply(assembly, "RadiantFloorComponent", new Dictionary<int, object?>
             {
                 [0] = "Radiant Floor", [1] = districtGoo, [2] = 2.8d,
-                [3] = "supply-radiant-floor",
             }),
             Supply(assembly, "ElectricRadiantFloorComponent", new Dictionary<int, object?>
             {
-                [0] = "Electric Floor", [1] = 2.9d, [2] = "supply-electric-floor",
+                [0] = "Electric Floor", [1] = 2.9d,
             }),
         };
         Assert.Collection(
@@ -522,7 +540,7 @@ public sealed class HvacComponentContractTests
         var ventilatorAccess = new TestDataAccess(new Dictionary<int, object?>
         {
             [0] = "Authored ERV", [1] = 0.8d, [2] = 0.67d, [3] = 0.4d,
-            [4] = 0.72d, [5] = 120d, [6] = "erv-authored",
+            [4] = 0.72d, [5] = 120d,
         });
         InvokeSolve(Component(assembly, "EnergyRecoveryVentilatorComponent"), ventilatorAccess);
         var ventilatorGoo = Assert.IsType<DragonEnergyRecoveryVentilatorGoo>(ventilatorAccess.Outputs[0]);
@@ -531,7 +549,7 @@ public sealed class HvacComponentContractTests
         var photovoltaicAccess = new TestDataAccess(new Dictionary<int, object?>
         {
             [0] = "Authored PV", [1] = 18d, [2] = 25d, [3] = 185d,
-            [4] = 0.21d, [5] = 0.75d, [6] = "pv-authored",
+            [4] = 0.21d, [5] = 0.75d,
         });
         InvokeSolve(Component(assembly, "PhotovoltaicPanelComponent"), photovoltaicAccess);
         var photovoltaicGoo = Assert.IsType<DragonPhotovoltaicPanelGoo>(photovoltaicAccess.Outputs[0]);
@@ -540,11 +558,10 @@ public sealed class HvacComponentContractTests
         var domesticHotWaterAccess = new TestDataAccess(new Dictionary<int, object?>
         {
             [0] = "Authored Hot Water", [1] = (int)Fuel.Propane, [2] = 0.91d,
-            [3] = "dhw-authored",
         });
         InvokeSolve(Component(assembly, "DomesticHotWaterComponent"), domesticHotWaterAccess);
         var domesticHotWaterGoo = Assert.IsType<DragonDomesticHotWaterGoo>(domesticHotWaterAccess.Outputs[0]);
-        Assert.Equal(new EntityId("dhw-authored"), domesticHotWaterGoo.Value.Id);
+        Assert.False(string.IsNullOrWhiteSpace(domesticHotWaterGoo.Value.Id.Value));
         Assert.Equal("Authored Hot Water", domesticHotWaterGoo.Value.Name);
         Assert.Equal(Fuel.Propane, domesticHotWaterGoo.Value.Fuel);
         Assert.Equal(0.91d, domesticHotWaterGoo.Value.Efficiency);
@@ -558,7 +575,7 @@ public sealed class HvacComponentContractTests
         IReadOnlyDictionary<int, object?> inputs = new Dictionary<int, object?>
         {
             [0] = "Deterministic Hot Water", [1] = (int)Fuel.Electricity,
-            [2] = 0.95d, [3] = string.Empty,
+            [2] = 0.95d,
         };
 
         var firstAccess = new TestDataAccess(inputs);
@@ -575,7 +592,7 @@ public sealed class HvacComponentContractTests
 
         var invalidFuelAccess = new TestDataAccess(new Dictionary<int, object?>
         {
-            [0] = "Invalid Fuel", [1] = int.MaxValue, [2] = 0.9d, [3] = string.Empty,
+            [0] = "Invalid Fuel", [1] = int.MaxValue, [2] = 0.9d,
         });
         GH_Component invalidFuel = Component(assembly, "DomesticHotWaterComponent");
         InvokeSolve(invalidFuel, invalidFuelAccess);
@@ -587,7 +604,7 @@ public sealed class HvacComponentContractTests
         var invalidEfficiencyAccess = new TestDataAccess(new Dictionary<int, object?>
         {
             [0] = "Invalid Efficiency", [1] = (int)Fuel.NaturalGas,
-            [2] = 0d, [3] = string.Empty,
+            [2] = 0d,
         });
         GH_Component invalidEfficiency = Component(assembly, "DomesticHotWaterComponent");
         InvokeSolve(invalidEfficiency, invalidEfficiencyAccess);
@@ -656,7 +673,7 @@ public sealed class HvacComponentContractTests
         Assembly assembly = LoadPlugin();
         var invalidTowerAccess = new TestDataAccess(new Dictionary<int, object?>
         {
-            [0] = "Invalid Tower", [1] = 9, [2] = 0, [3] = 0d, [4] = 0.9d, [5] = string.Empty,
+            [0] = "Invalid Tower", [1] = 9, [2] = 0, [3] = 0d, [4] = 0.9d,
         });
         GH_Component invalidTower = Component(assembly, "CoolingTowerComponent");
         InvokeSolve(invalidTower, invalidTowerAccess);
@@ -676,7 +693,7 @@ public sealed class HvacComponentContractTests
         var invalidAhuAccess = new TestDataAccess(new Dictionary<int, object?>
         {
             [0] = "Invalid AHU", [1] = new DragonSourceSystemGoo(boiler),
-            [2] = 0.7d, [3] = 100d, [4] = 0.9d, [5] = string.Empty,
+            [2] = 0.7d, [3] = 100d, [4] = 0.9d,
         });
         GH_Component invalidAhu = Component(assembly, "AirHandlingUnitComponent");
         InvokeSolve(invalidAhu, invalidAhuAccess);
@@ -745,11 +762,11 @@ public sealed class HvacComponentContractTests
         return Assert.IsType<DragonSupplySystemGoo>(access.Outputs[0]).Value;
     }
 
-    private static CoolingTower Tower(Assembly assembly, int circuit, int speeds, string id)
+    private static CoolingTower Tower(Assembly assembly, int circuit, int speeds, string name)
     {
         var access = new TestDataAccess(new Dictionary<int, object?>
         {
-            [0] = id, [1] = circuit, [2] = speeds, [3] = 30_000d, [4] = 0.9d, [5] = id,
+            [0] = name, [1] = circuit, [2] = speeds, [3] = 30_000d, [4] = 0.9d,
         });
         GH_Component component = Component(assembly, "CoolingTowerComponent");
         InvokeSolve(component, access);

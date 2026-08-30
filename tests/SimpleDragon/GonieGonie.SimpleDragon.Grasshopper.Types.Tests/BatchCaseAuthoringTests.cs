@@ -54,9 +54,8 @@ public sealed class BatchCaseAuthoringTests
 
         Assert.Equal(new Guid("11336c6a-5bd4-4d6b-80a1-89bd168f8d54"), component.ComponentGuid);
         Assert.Equal(GH_Exposure.primary, component.Exposure);
-        Assert.Equal(new[] { "GRM", "Case ID" }, component.Params.Input.Select(item => item.Name));
+        Assert.Equal(new[] { "GRM" }, component.Params.Input.Select(item => item.Name));
         Assert.IsType<GreenRetrofitModelParam>(component.Params.Input[0]);
-        Assert.True(component.Params.Input[1].Optional);
         Assert.Equal(new[] { "Case" }, component.Params.Output.Select(item => item.Name));
         Assert.IsType<SimpleDragonBatchCaseParam>(component.Params.Output[0]);
         Assert.All(

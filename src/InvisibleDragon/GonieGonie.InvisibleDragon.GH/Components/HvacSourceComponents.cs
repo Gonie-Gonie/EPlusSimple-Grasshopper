@@ -35,7 +35,6 @@ public sealed class HeatPumpComponent : DragonComponent
         pManager.AddNumberParameter("Cooling COP", "CCOP", "Rated cooling coefficient of performance.", GH_ParamAccess.item, 4.0);
         pManager.AddNumberParameter("Heating Capacity", "HCap", "Rated heating capacity in W; 0 means autosize.", GH_ParamAccess.item, 0);
         pManager.AddNumberParameter("Cooling Capacity", "CCap", "Rated cooling capacity in W; 0 means autosize.", GH_ParamAccess.item, 0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable source-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -51,7 +50,6 @@ public sealed class HeatPumpComponent : DragonComponent
         double coolingCop = 4.0;
         double heatingCapacity = 0;
         double coolingCapacity = 0;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref fuelValue) ||
             !DA.GetData(2, ref heatingCop) ||
@@ -62,11 +60,9 @@ public sealed class HeatPumpComponent : DragonComponent
             return;
         }
 
-        DA.GetData(6, ref id);
         Fuel fuel = HvacComponentSupport.EnumValue<Fuel>(fuelValue, "Fuel");
         var source = new HeatPump(
-            StableIds.Resolve(
-                id,
+            StableIds.Create(
                 "heat-pump",
                 name,
                 fuel.ToString(),
@@ -119,7 +115,6 @@ public sealed class GeothermalHeatPumpComponent : DragonComponent
         pManager.AddNumberParameter("Cooling COP", "CCOP", "Rated cooling coefficient of performance.", GH_ParamAccess.item, 5.0);
         pManager.AddNumberParameter("Heating Capacity", "HCap", "Rated heating capacity in W; 0 means autosize.", GH_ParamAccess.item, 0);
         pManager.AddNumberParameter("Cooling Capacity", "CCap", "Rated cooling capacity in W; 0 means autosize.", GH_ParamAccess.item, 0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable source-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -135,7 +130,6 @@ public sealed class GeothermalHeatPumpComponent : DragonComponent
         double coolingCop = 5.0;
         double heatingCapacity = 0;
         double coolingCapacity = 0;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref fuelValue) ||
             !DA.GetData(2, ref heatingCop) ||
@@ -146,11 +140,9 @@ public sealed class GeothermalHeatPumpComponent : DragonComponent
             return;
         }
 
-        DA.GetData(6, ref id);
         Fuel fuel = HvacComponentSupport.EnumValue<Fuel>(fuelValue, "Fuel");
         var source = new GeothermalHeatPump(
-            StableIds.Resolve(
-                id,
+            StableIds.Create(
                 "geothermal-heat-pump",
                 name,
                 fuel.ToString(),
@@ -204,7 +196,6 @@ public sealed class CoolingTowerComponent : DragonComponent
         speedParameter.AddNamedValue("Two", 1);
         pManager.AddNumberParameter("Nominal Capacity", "Cap", "Heat-rejection capacity in W; 0 means autosize.", GH_ParamAccess.item, 0);
         pManager.AddNumberParameter("Pump Motor Efficiency", "Eff", "Condenser-loop pump motor efficiency from 0 to 1.", GH_ParamAccess.item, 0.9);
-        pManager.AddTextParameter("ID", "ID", "Optional stable cooling-tower identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -219,7 +210,6 @@ public sealed class CoolingTowerComponent : DragonComponent
         int speed = 0;
         double nominalCapacity = 0;
         double pumpEfficiency = 0.9;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref circuit) ||
             !DA.GetData(2, ref speed) ||
@@ -229,7 +219,6 @@ public sealed class CoolingTowerComponent : DragonComponent
             return;
         }
 
-        DA.GetData(5, ref id);
         if (circuit < 0 || circuit > 1)
         {
             throw new ArgumentException("Circuit must be Open (0) or Closed (1).");
@@ -240,8 +229,7 @@ public sealed class CoolingTowerComponent : DragonComponent
             throw new ArgumentException("Fan Speeds must be Single (0) or Two (1).");
         }
 
-        var towerId = StableIds.Resolve(
-            id,
+        var towerId = StableIds.Create(
             "cooling-tower",
             name,
             circuit.ToString(CultureInfo.InvariantCulture),
@@ -292,7 +280,6 @@ public sealed class ChillerComponent : DragonComponent
         pManager.AddNumberParameter("Nominal Capacity", "Cap", "Rated cooling capacity in W; 0 means autosize.", GH_ParamAccess.item, 0);
         pManager.AddNumberParameter("Pump Motor Efficiency", "Eff", "Chilled-water pump motor efficiency from 0 to 1.", GH_ParamAccess.item, 0.9);
         pManager.AddNumberParameter("Chilled Water Setpoint", "Tset", "Chilled-water supply setpoint in degrees C.", GH_ParamAccess.item, 6.0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable source-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -309,7 +296,6 @@ public sealed class ChillerComponent : DragonComponent
         double nominalCapacity = 0;
         double pumpEfficiency = 0.9;
         double setpoint = 6.0;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref referenceCop) ||
             !DA.GetData(2, ref compressorValue) ||
@@ -321,12 +307,10 @@ public sealed class ChillerComponent : DragonComponent
             return;
         }
 
-        DA.GetData(7, ref id);
         CoolingTower tower = HvacComponentSupport.RequireObject<CoolingTower>(towerObject, "Cooling Tower");
         CompressorType compressor = HvacComponentSupport.EnumValue<CompressorType>(compressorValue, "Compressor");
         var source = new Chiller(
-            StableIds.Resolve(
-                id,
+            StableIds.Create(
                 "chiller",
                 name,
                 compressor.ToString(),
@@ -368,7 +352,6 @@ public sealed class AbsorptionChillerComponent : DragonComponent
         pManager.AddNumberParameter("Nominal Capacity", "Cap", "Rated cooling capacity in W; 0 means autosize.", GH_ParamAccess.item, 0);
         pManager.AddNumberParameter("Pump Motor Efficiency", "Eff", "Chilled-water pump motor efficiency from 0 to 1.", GH_ParamAccess.item, 0.9);
         pManager.AddNumberParameter("Chilled Water Setpoint", "Tset", "Chilled-water supply setpoint in degrees C.", GH_ParamAccess.item, 6.0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable source-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -385,7 +368,6 @@ public sealed class AbsorptionChillerComponent : DragonComponent
         double nominalCapacity = 0;
         double pumpEfficiency = 0.9;
         double setpoint = 6.0;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref thermalCop) ||
             !DA.GetData(2, ref boilerGoo) ||
@@ -397,12 +379,10 @@ public sealed class AbsorptionChillerComponent : DragonComponent
             return;
         }
 
-        DA.GetData(7, ref id);
         Boiler boiler = HvacComponentSupport.Source<Boiler>(boilerGoo, "Generator Boiler");
         CoolingTower tower = HvacComponentSupport.RequireObject<CoolingTower>(towerObject, "Cooling Tower");
         var source = new AbsorptionChiller(
-            StableIds.Resolve(
-                id,
+            StableIds.Create(
                 "absorption-chiller",
                 name,
                 boiler.Id.Value,
@@ -444,7 +424,6 @@ public sealed class BoilerComponent : DragonComponent
         pManager.AddNumberParameter("Nominal Capacity", "Cap", "Rated heating capacity in W; 0 means autosize.", GH_ParamAccess.item, 0);
         pManager.AddNumberParameter("Pump Motor Efficiency", "Pump", "Hot-water pump motor efficiency from 0 to 1.", GH_ParamAccess.item, 0.9);
         pManager.AddNumberParameter("Hot Water Setpoint", "Tset", "Hot-water supply setpoint in degrees C.", GH_ParamAccess.item, 60.0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable source-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -460,7 +439,6 @@ public sealed class BoilerComponent : DragonComponent
         double nominalCapacity = 0;
         double pumpEfficiency = 0.9;
         double setpoint = 60;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref fuelValue) ||
             !DA.GetData(2, ref efficiency) ||
@@ -471,11 +449,9 @@ public sealed class BoilerComponent : DragonComponent
             return;
         }
 
-        DA.GetData(6, ref id);
         Fuel fuel = HvacComponentSupport.EnumValue<Fuel>(fuelValue, "Fuel");
         var source = new Boiler(
-            StableIds.Resolve(
-                id,
+            StableIds.Create(
                 "boiler",
                 name,
                 fuel.ToString(),
@@ -512,7 +488,6 @@ public sealed class DistrictHeatingComponent : DragonComponent
         pManager.AddNumberParameter("Nominal Capacity", "Cap", "Available heating capacity in W; 0 means autosize.", GH_ParamAccess.item, 0);
         pManager.AddNumberParameter("Pump Motor Efficiency", "Pump", "Distribution-pump motor efficiency from 0 to 1.", GH_ParamAccess.item, 0.9);
         pManager.AddNumberParameter("Hot Water Setpoint", "Tset", "Hot-water supply setpoint in degrees C.", GH_ParamAccess.item, 60.0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable source-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -526,7 +501,6 @@ public sealed class DistrictHeatingComponent : DragonComponent
         double nominalCapacity = 0;
         double pumpEfficiency = 0.9;
         double setpoint = 60;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref nominalCapacity) ||
             !DA.GetData(2, ref pumpEfficiency) ||
@@ -535,10 +509,8 @@ public sealed class DistrictHeatingComponent : DragonComponent
             return;
         }
 
-        DA.GetData(4, ref id);
         var source = new DistrictHeating(
-            StableIds.Resolve(
-                id,
+            StableIds.Create(
                 "district-heating",
                 name,
                 HvacComponentSupport.Number(nominalCapacity),

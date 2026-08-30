@@ -35,7 +35,6 @@ public sealed class DomesticHotWaterComponent : DragonComponent
             "Fuel-to-water conversion efficiency greater than 0 and no greater than 1.",
             GH_ParamAccess.item,
             0.85);
-        pManager.AddTextParameter("ID", "ID", "Optional stable domestic-hot-water identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -53,7 +52,6 @@ public sealed class DomesticHotWaterComponent : DragonComponent
         string name = "Domestic Hot Water";
         int fuelValue = (int)Fuel.NaturalGas;
         double efficiency = 0.85;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref fuelValue) ||
             !DA.GetData(2, ref efficiency))
@@ -61,11 +59,9 @@ public sealed class DomesticHotWaterComponent : DragonComponent
             return;
         }
 
-        DA.GetData(3, ref id);
         Fuel fuel = HvacComponentSupport.EnumValue<Fuel>(fuelValue, "Fuel");
         var domesticHotWater = new DomesticHotWater(
-            StableIds.Resolve(
-                id,
+            StableIds.Create(
                 "domestic-hot-water",
                 name,
                 fuel.ToString(),
@@ -98,7 +94,6 @@ public sealed class EnergyRecoveryVentilatorComponent : DragonComponent
         pManager.AddNumberParameter("Supply Air Flow", "Flow", "Supply air flow in m³/s; 0 means autosize.", GH_ParamAccess.item, 0);
         pManager.AddNumberParameter("Fan Total Efficiency", "FanEff", "Supply and exhaust fan total efficiency from 0 to 1.", GH_ParamAccess.item, 0.7);
         pManager.AddNumberParameter("Fan Pressure Rise", "dP", "Supply and exhaust fan pressure rise in Pa.", GH_ParamAccess.item, 100.0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ventilator identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -119,7 +114,6 @@ public sealed class EnergyRecoveryVentilatorComponent : DragonComponent
         double flow = 0;
         double fanEfficiency = 0.7;
         double pressureRise = 100;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref sensible) ||
             !DA.GetData(2, ref latent) ||
@@ -130,9 +124,8 @@ public sealed class EnergyRecoveryVentilatorComponent : DragonComponent
             return;
         }
 
-        DA.GetData(6, ref id);
         var ventilator = new EnergyRecoveryVentilator(
-            StableIds.Resolve(id, "energy-recovery-ventilator", name),
+            StableIds.Create("energy-recovery-ventilator", name),
             name,
             sensible,
             latent,
@@ -164,7 +157,6 @@ public sealed class PhotovoltaicPanelComponent : DragonComponent
         pManager.AddNumberParameter("Azimuth", "Az", "Panel azimuth in degrees clockwise from north, 0 to less than 360.", GH_ParamAccess.item, 180.0);
         pManager.AddNumberParameter("Efficiency", "Eff", "Module conversion efficiency from 0 to 1.", GH_ParamAccess.item, 0.2);
         pManager.AddNumberParameter("Active Cell Area Fraction", "Cell", "Fraction of gross area occupied by active cells, from 0 to 1.", GH_ParamAccess.item, 0.7);
-        pManager.AddTextParameter("ID", "ID", "Optional stable photovoltaic-panel identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -185,7 +177,6 @@ public sealed class PhotovoltaicPanelComponent : DragonComponent
         double azimuth = 180;
         double efficiency = 0.2;
         double activeCellFraction = 0.7;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref area) ||
             !DA.GetData(2, ref tilt) ||
@@ -196,9 +187,8 @@ public sealed class PhotovoltaicPanelComponent : DragonComponent
             return;
         }
 
-        DA.GetData(6, ref id);
         var panel = new PhotovoltaicPanel(
-            StableIds.Resolve(id, "photovoltaic-panel", name),
+            StableIds.Create("photovoltaic-panel", name),
             name,
             area,
             tilt,

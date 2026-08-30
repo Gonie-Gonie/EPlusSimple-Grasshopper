@@ -60,7 +60,7 @@ public sealed class ConstructionLayerCompositionTests
             "SimpleDragonSurfaceConstructionLayerParam",
             layer.Params.Output[0].GetType().Name);
 
-        Assert.Equal(new[] { "Name", "Layers", "ID" },
+        Assert.Equal(new[] { "Name", "Layers" },
             construction.Params.Input.Select(parameter => parameter.Name));
         Assert.Equal(
             "SimpleDragonSurfaceConstructionLayerParam",

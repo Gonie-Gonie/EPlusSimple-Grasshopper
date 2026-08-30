@@ -21,7 +21,6 @@ public sealed class SimpleDragonPackagedAirConditionerComponent : SimpleDragonHv
         pManager.AddTextParameter("Name", "N", "Packaged-air-conditioner name.", GH_ParamAccess.item, "Packaged Air Conditioner");
         pManager.AddNumberParameter("Cooling COP", "COP", "Dimensionless cooling COP (> 0).", GH_ParamAccess.item, 3d);
         pManager.AddNumberParameter("Cooling Capacity", "Cap", "Optional cooling capacity in W; leave disconnected for autosize/unset.", GH_ParamAccess.item);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
         pManager[2].Optional = true;
     }
 
@@ -34,14 +33,12 @@ public sealed class SimpleDragonPackagedAirConditionerComponent : SimpleDragonHv
     {
         string name = "Packaged Air Conditioner";
         double cop = 3d;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) || !DA.GetData(1, ref cop))
         {
             return;
         }
 
         double? capacity = OptionalNumber(DA, 2);
-        DA.GetData(3, ref id);
         Author(
             DA,
             1,
@@ -53,8 +50,7 @@ public sealed class SimpleDragonPackagedAirConditionerComponent : SimpleDragonHv
                     name,
                     SupplySystemType.PackagedAirConditioner,
                     coolingCop: cop,
-                    coolingCapacity: capacity,
-                    id: OptionalId(id));
+                    coolingCapacity: capacity);
                 DA.SetData(0, new SimpleDragonSupplySystemGoo(supply));
             });
     }
@@ -84,7 +80,6 @@ public abstract class SimpleDragonSourceSupplyComponent : SimpleDragonHvacCompon
     {
         pManager.AddTextParameter("Name", "N", "Supply-system name.", GH_ParamAccess.item, DefaultName);
         pManager.AddParameter(new SimpleDragonSourceSystemParam(), "Source", "Src", "Required compatible SimpleDragon source system.", GH_ParamAccess.item);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -97,13 +92,11 @@ public abstract class SimpleDragonSourceSupplyComponent : SimpleDragonHvacCompon
     {
         string name = DefaultName;
         SimpleDragonSourceSystemGoo? sourceGoo = null;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) || !DA.GetData(1, ref sourceGoo))
         {
             return;
         }
 
-        DA.GetData(2, ref id);
         Author(
             DA,
             1,
@@ -117,8 +110,7 @@ public abstract class SimpleDragonSourceSupplyComponent : SimpleDragonHvacCompon
                     name,
                     SupplyType,
                     source.Id.Value,
-                    source,
-                    id: OptionalId(id));
+                    source);
                 DA.SetData(0, new SimpleDragonSupplySystemGoo(supply));
             });
     }
@@ -175,7 +167,6 @@ public sealed class SimpleDragonRadiatorComponent : SimpleDragonHvacComponent
         pManager.AddTextParameter("Name", "N", "Radiator name.", GH_ParamAccess.item, "Radiator");
         pManager.AddParameter(new SimpleDragonSourceSystemParam(), "Source", "Src", "Required Boiler or District Heating source.", GH_ParamAccess.item);
         pManager.AddNumberParameter("Heating Capacity", "Cap", "Optional heating capacity in W; leave disconnected for autosize/unset.", GH_ParamAccess.item);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
         pManager[2].Optional = true;
     }
 
@@ -189,14 +180,12 @@ public sealed class SimpleDragonRadiatorComponent : SimpleDragonHvacComponent
     {
         string name = "Radiator";
         SimpleDragonSourceSystemGoo? sourceGoo = null;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) || !DA.GetData(1, ref sourceGoo))
         {
             return;
         }
 
         double? capacity = OptionalNumber(DA, 2);
-        DA.GetData(3, ref id);
         Author(
             DA,
             1,
@@ -211,8 +200,7 @@ public sealed class SimpleDragonRadiatorComponent : SimpleDragonHvacComponent
                     SupplySystemType.Radiator,
                     source.Id.Value,
                     source,
-                    heatingCapacity: capacity,
-                    id: OptionalId(id));
+                    heatingCapacity: capacity);
                 DA.SetData(0, new SimpleDragonSupplySystemGoo(supply));
             });
     }
@@ -234,7 +222,6 @@ public sealed class SimpleDragonElectricRadiatorComponent : SimpleDragonHvacComp
     {
         pManager.AddTextParameter("Name", "N", "Electric-radiator name.", GH_ParamAccess.item, "Electric Radiator");
         pManager.AddNumberParameter("Heating Capacity", "Cap", "Optional heating capacity in W; leave disconnected for autosize/unset.", GH_ParamAccess.item);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
         pManager[1].Optional = true;
     }
 
@@ -247,14 +234,12 @@ public sealed class SimpleDragonElectricRadiatorComponent : SimpleDragonHvacComp
     protected override void Solve(IGH_DataAccess DA)
     {
         string name = "Electric Radiator";
-        string id = string.Empty;
         if (!DA.GetData(0, ref name))
         {
             return;
         }
 
         double? capacity = OptionalNumber(DA, 1);
-        DA.GetData(2, ref id);
         Author(
             DA,
             1,
@@ -265,8 +250,7 @@ public sealed class SimpleDragonElectricRadiatorComponent : SimpleDragonHvacComp
                 var supply = new SupplySystem(
                     name,
                     SupplySystemType.ElectricRadiator,
-                    heatingCapacity: capacity,
-                    id: OptionalId(id));
+                    heatingCapacity: capacity);
                 DA.SetData(0, new SimpleDragonSupplySystemGoo(supply));
             });
     }
@@ -304,7 +288,6 @@ public sealed class SimpleDragonElectricRadiantFloorComponent : SimpleDragonHvac
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddTextParameter("Name", "N", "Electric-radiant-floor name.", GH_ParamAccess.item, "Electric Radiant Floor");
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -316,24 +299,21 @@ public sealed class SimpleDragonElectricRadiantFloorComponent : SimpleDragonHvac
     protected override void Solve(IGH_DataAccess DA)
     {
         string name = "Electric Radiant Floor";
-        string id = string.Empty;
         if (!DA.GetData(0, ref name))
         {
             return;
         }
 
-        DA.GetData(1, ref id);
         Author(
             DA,
             1,
             "SD.GH.HVAC.ELECTRIC_FLOOR_INVALID",
-            "Use a non-empty name and a valid optional ID.",
+            "Use a non-empty name.",
             () =>
             {
                 var supply = new SupplySystem(
                     name,
-                    SupplySystemType.ElectricRadiantFloor,
-                    id: OptionalId(id));
+                    SupplySystemType.ElectricRadiantFloor);
                 DA.SetData(0, new SimpleDragonSupplySystemGoo(supply));
             });
     }

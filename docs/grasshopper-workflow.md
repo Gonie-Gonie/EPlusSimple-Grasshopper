@@ -4,7 +4,7 @@
 
 - Numeric geometry and HVAC inputs use the SI units shown in each parameter description.
 - Leave an optional numeric input disconnected to preserve `null` or autosize semantics. Zero is a real value.
-- IDs are deterministic when the ID input is empty. Supply one only when a stable external identity is useful for auditing or exported data.
+- Entity and relationship IDs are generated deterministically inside both Dragon modules; they are not authoring inputs. Express ownership and references by connecting the typed objects instead of passing text IDs.
 - Red runtime messages stop that component's output. Warnings describe a usable result that needs review.
 - Run, Write, Export, and Batch actions require a new False-to-True Boolean edge. A saved True value never starts work when a document opens.
 
@@ -83,13 +83,16 @@ Curve + Construction + owned Openings -> ID Surface -> ID Zone <- Profile / HVAC
                                                            EPW File -> ID Weather --------+
 ```
 
+Here `ID` is the InvisibleDragon component prefix, not an identifier input.
+
 Connect each Window or Door to its owning Surface, each Surface and system to
 its owning Zone, and only completed Zone definitions to the Model. Coincident,
 opposite-facing Surfaces with `Outdoors` intent in different Zones are paired
 automatically into reciprocal inter-zone boundaries. The Model derives HVAC
 assignments and nested sources from the Zone wires, so there are no Zone
 indices, adjacent-surface IDs, source catalogs, or assignment components on the
-canvas.
+canvas. Material, geometry, profile, Zone, HVAC, ERV, and PV components also
+generate their entity IDs internally; none exposes a relationship-ID input.
 
 Connect `ID Model -> Compile InvisibleDragon -> Run InvisibleDragon`.
 The compiler has only a typed Model input and resolves the managed EnergyPlus
@@ -128,9 +131,10 @@ bars. Before Run has produced a GRR, these result components simply wait without
 raising a red error. Metric, grouping, plane, size, and stacking remain optional
 controls for a customized graph.
 
-GRM/GRR readers, writers, and CSV export intentionally expose artifact destinations because those are user-owned results, not simulation setup. Relative output paths use the saved Grasshopper document folder; unsaved definitions fall back to the per-user temp directory.
+GRM/GRR readers, writers, and CSV export intentionally expose artifact destinations because those are user-owned results, not simulation setup. Relative output paths use the saved Grasshopper document folder; unsaved definitions fall back to the per-user temp directory. When a GRM is connected, CSV export derives its case identity from that model rather than asking for a text ID.
 
-Wrap each model and its optional stable ID in a `SimpleDragon Batch Case`, then
+Wrap each model in a `SimpleDragon Batch Case`, which derives a deterministic
+case identity from the GRM, then
 connect the Cases list to `Managed Run SimpleDragon Batch` with a parallel limit
 and explicit Run/Cancel controls. It selects packaged weather from each model's
 Address/Vintage and manages EnergyPlus/runtime/temp paths internally. Combined

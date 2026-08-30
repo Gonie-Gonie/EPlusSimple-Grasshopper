@@ -47,7 +47,7 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
             new SimpleDragonBatchCaseParam(),
             "Cases",
             "Cases",
-            "Ordered typed batch cases. Each case owns its GRM and optional stable ID; weather is selected within SimpleDragon.",
+            "Ordered typed batch cases. Each case owns its GRM; execution identity and weather are resolved within SimpleDragon.",
             GH_ParamAccess.list);
         pManager.AddIntegerParameter(
             "Parallel Limit",

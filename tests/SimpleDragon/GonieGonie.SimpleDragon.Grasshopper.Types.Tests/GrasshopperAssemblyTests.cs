@@ -17,7 +17,6 @@ public sealed class GrasshopperAssemblyTests
         "GRR",
         "GRM",
         "Directory",
-        "Case ID",
         "Diagnostics",
         "Geometry Map Data",
         "Export",
@@ -301,6 +300,21 @@ public sealed class GrasshopperAssemblyTests
                 Assert.DoesNotContain("Indices", input.Description, StringComparison.OrdinalIgnoreCase);
             });
         });
+    }
+
+    [Fact]
+    public void PublicComponentsDoNotExposeEntityOrCaseIdentifierInputs()
+    {
+        Assembly assembly = LoadPlugin("GonieGonie.SimpleDragon.GH");
+        GH_Component[] components = ComponentTypes(assembly)
+            .Select(type => Assert.IsAssignableFrom<GH_Component>(Activator.CreateInstance(type)))
+            .ToArray();
+
+        Assert.DoesNotContain(
+            components.SelectMany(component => component.Params.Input),
+            parameter => string.Equals(parameter.Name, "ID", StringComparison.OrdinalIgnoreCase)
+                || parameter.Name.EndsWith(" ID", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(parameter.NickName, "ID", StringComparison.OrdinalIgnoreCase));
     }
 
     [Fact]

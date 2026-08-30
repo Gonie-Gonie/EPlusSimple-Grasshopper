@@ -1,4 +1,3 @@
-using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
 using Grasshopper.Kernel;
@@ -24,7 +23,6 @@ public sealed class SimpleDragonMaterialComponent : SimpleDragonComponent
         pManager.AddNumberParameter("Conductivity", "k", "Conductivity in W/(m K).", GH_ParamAccess.item, 0.04);
         pManager.AddNumberParameter("Density", "ρ", "Density in kg/m\u00B3.", GH_ParamAccess.item, 30);
         pManager.AddNumberParameter("Specific Heat", "Cp", "Specific heat in J/(kg K).", GH_ParamAccess.item, 1400);
-        pManager.AddTextParameter("ID", "ID", "Optional stable identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -38,7 +36,6 @@ public sealed class SimpleDragonMaterialComponent : SimpleDragonComponent
         double conductivity = 0.04;
         double density = 30;
         double specificHeat = 1400;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name)
             || !DA.GetData(1, ref conductivity)
             || !DA.GetData(2, ref density)
@@ -47,13 +44,11 @@ public sealed class SimpleDragonMaterialComponent : SimpleDragonComponent
             return;
         }
 
-        DA.GetData(4, ref id);
         var material = new Material(
             name,
             conductivity,
             density,
-            specificHeat,
-            string.IsNullOrWhiteSpace(id) ? null : new EntityId(id.Trim()));
+            specificHeat);
         DA.SetData(0, new SimpleDragonMaterialGoo(material));
     }
 }
@@ -137,7 +132,6 @@ public sealed class SimpleDragonSurfaceConstructionComponent : SimpleDragonCompo
             "L",
             "Construction layers in SimpleDragon database order.",
             GH_ParamAccess.list);
-        pManager.AddTextParameter("ID", "ID", "Optional stable identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -155,14 +149,12 @@ public sealed class SimpleDragonSurfaceConstructionComponent : SimpleDragonCompo
     {
         string name = "Simple Construction";
         var layerGoos = new List<SimpleDragonSurfaceConstructionLayerGoo>();
-        string id = string.Empty;
         if (!DA.GetData(0, ref name)
             || !DA.GetDataList(1, layerGoos))
         {
             return;
         }
 
-        DA.GetData(2, ref id);
         SurfaceConstructionLayer[] layers = layerGoos.Select((goo, index) =>
         {
             if (goo?.Value is null)
@@ -172,10 +164,7 @@ public sealed class SimpleDragonSurfaceConstructionComponent : SimpleDragonCompo
 
             return goo.Value;
         }).ToArray();
-        var construction = new SurfaceConstruction(
-            name,
-            layers,
-            string.IsNullOrWhiteSpace(id) ? null : new EntityId(id.Trim()));
+        var construction = new SurfaceConstruction(name, layers);
         DA.SetData(0, new SimpleDragonSurfaceConstructionGoo(construction));
         DA.SetData(1, construction.GetUValue());
     }
@@ -199,7 +188,6 @@ public sealed class SimpleDragonFenestrationConstructionComponent : SimpleDragon
         pManager.AddTextParameter("Name", "N", "Fenestration construction name.", GH_ParamAccess.item, "Simple Window");
         pManager.AddNumberParameter("U-Value", "U", "U-value in W/(m\u00B2 K).", GH_ParamAccess.item, 1.5);
         pManager.AddNumberParameter("SHGC", "g", "Solar heat gain coefficient. Set zero for an opaque door.", GH_ParamAccess.item, 0.5);
-        pManager.AddTextParameter("ID", "ID", "Optional stable identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -218,7 +206,6 @@ public sealed class SimpleDragonFenestrationConstructionComponent : SimpleDragon
         string name = "Simple Window";
         double uValue = 1.5;
         double solarGain = 0.5;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name)
             || !DA.GetData(1, ref uValue)
             || !DA.GetData(2, ref solarGain))
@@ -226,12 +213,10 @@ public sealed class SimpleDragonFenestrationConstructionComponent : SimpleDragon
             return;
         }
 
-        DA.GetData(3, ref id);
         var construction = new FenestrationConstruction(
             name,
             uValue,
-            solarGain == 0 ? null : solarGain,
-            string.IsNullOrWhiteSpace(id) ? null : new EntityId(id.Trim()));
+            solarGain == 0 ? null : solarGain);
         DA.SetData(0, new SimpleDragonFenestrationConstructionGoo(construction));
         DA.SetData(1, construction.IsTransparent);
     }

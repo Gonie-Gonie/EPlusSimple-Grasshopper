@@ -5,7 +5,8 @@ using Grasshopper.Kernel;
 namespace GonieGonie.SimpleDragon.Grasshopper.Components;
 
 /// <summary>
-/// Directly composes one model alternative with its optional stable batch identity.
+/// Directly composes one model alternative. The batch runner derives its stable
+/// execution identity internally from the model and its input order.
 /// </summary>
 public sealed class SimpleDragonBatchCaseComponent : SimpleDragonComponent
 {
@@ -13,7 +14,7 @@ public sealed class SimpleDragonBatchCaseComponent : SimpleDragonComponent
         : base(
             "SimpleDragon Batch Case",
             "SD Batch Case",
-            "Creates one typed batch case from a GRM model and optional stable case ID. Runtime and weather remain module-managed.",
+            "Creates one typed batch case from a GRM model. Identity, runtime, and weather remain module-managed.",
             SimpleDragonPanels.Results)
     {
     }
@@ -30,13 +31,6 @@ public sealed class SimpleDragonBatchCaseComponent : SimpleDragonComponent
             "GRM",
             "One complete SimpleDragon model alternative.",
             GH_ParamAccess.item);
-        pManager.AddTextParameter(
-            "Case ID",
-            "ID",
-            "Optional stable case ID. Leave empty to derive a deterministic ID from the model.",
-            GH_ParamAccess.item,
-            string.Empty);
-        pManager[1].Optional = true;
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -52,15 +46,13 @@ public sealed class SimpleDragonBatchCaseComponent : SimpleDragonComponent
     protected override void Solve(IGH_DataAccess DA)
     {
         GreenRetrofitModelGoo? modelGoo = null;
-        string caseId = string.Empty;
         if (!DA.GetData(0, ref modelGoo) || modelGoo?.Value is null)
         {
             return;
         }
 
-        DA.GetData(1, ref caseId);
         DA.SetData(
             0,
-            new SimpleDragonBatchCaseGoo(new SimpleDragonBatchCase(modelGoo.Value, caseId)));
+            new SimpleDragonBatchCaseGoo(new SimpleDragonBatchCase(modelGoo.Value)));
     }
 }

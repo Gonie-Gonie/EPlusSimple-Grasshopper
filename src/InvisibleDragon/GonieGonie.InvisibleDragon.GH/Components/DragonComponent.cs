@@ -63,13 +63,8 @@ public abstract class DragonComponent : GH_Component
 
 internal static class StableIds
 {
-    internal static EntityId Resolve(string? explicitId, string prefix, params string[] parts)
+    internal static EntityId Create(string prefix, params string[] parts)
     {
-        if (!string.IsNullOrWhiteSpace(explicitId))
-        {
-            return new EntityId(explicitId!.Trim());
-        }
-
         string source = prefix + "\n" + string.Join("\n", parts);
         byte[] bytes = Encoding.UTF8.GetBytes(source);
 #if NET6_0_OR_GREATER

@@ -588,7 +588,6 @@ internal static class AdvancedExampleDefinitions
                 @"..\temp\example-preview\run-results-csv",
                 2830,
                 1300);
-            GraphNode caseId = graph.Panel(115, "CSV case ID", "two-zone-office", 2830, 1390);
             GraphNode exportTrigger = graph.Boolean(116, "Export CSV", false, 2830, 1480);
             GraphNode overwrite = graph.Boolean(117, "Overwrite CSV", false, 2830, 1560);
             GraphNode exportCsv = graph.Component(118, Catalog.SimpleExportCsv, 3210, 1330);
@@ -597,11 +596,10 @@ internal static class AdvancedExampleDefinitions
             graph.Connect(run, 0, exportCsv, 0);
             graph.Connect(model, 0, exportCsv, 1);
             graph.Connect(exportDirectory, null, exportCsv, 2);
-            graph.Connect(caseId, null, exportCsv, 3);
-            graph.Connect(run, 3, exportCsv, 4);
-            graph.Connect(model, 4, exportCsv, 5);
-            graph.Connect(exportTrigger, null, exportCsv, 6);
-            graph.Connect(overwrite, null, exportCsv, 7);
+            graph.Connect(run, 3, exportCsv, 3);
+            graph.Connect(model, 4, exportCsv, 4);
+            graph.Connect(exportTrigger, null, exportCsv, 5);
+            graph.Connect(overwrite, null, exportCsv, 6);
             GraphNode runState = graph.Panel(130, "SimpleDragon run state", string.Empty, 2830, 650);
             GraphNode runSuccess = graph.Panel(131, "SimpleDragon run success", string.Empty, 3210, 650);
             GraphNode annualResult = graph.Panel(134, "Annual site result", string.Empty, 3210, 870);
@@ -618,7 +616,6 @@ internal static class AdvancedExampleDefinitions
             graph.ExpectOutput(runSuccess, null, 1);
             graph.ExpectBoolean(run, 2, false);
 
-            GraphNode batchCaseId = graph.Panel(140, "Batch case ID", "two-zone-office", 2110, 1800);
             GraphNode batchCase = graph.Component(141, Catalog.SimpleBatchCase, 2450, 1760);
             GraphNode batchParallel = graph.Slider(142, "Batch parallel limit", 1m, 1m, 16m, 2450, 1910);
             GraphNode batchRun = graph.Boolean(143, "Run batch", false, 2450, 1990);
@@ -627,7 +624,6 @@ internal static class AdvancedExampleDefinitions
             GraphNode batchState = graph.Panel(146, "Managed batch state", string.Empty, 3210, 1810);
             GraphNode batchComplete = graph.Panel(147, "Managed batch complete", string.Empty, 3580, 1810);
             graph.Connect(model, 0, batchCase, 0);
-            graph.Connect(batchCaseId, null, batchCase, 1);
             graph.Connect(batchCase, 0, managedBatch, 0);
             graph.Connect(batchParallel, null, managedBatch, 1);
             graph.Connect(batchRun, null, managedBatch, 2);
@@ -1119,17 +1115,20 @@ internal static class AdvancedExampleDefinitions
 
             Require(
                 csvContents.Any(content => content.Contains("goniegonie-simpledragon-csv-export.v2")
-                    && content.Contains("\"csv_schema\": \"2\"")
-                    && content.Contains("two-zone-office")),
-                "The CSV package manifest does not identify its schema and case.");
+                    && content.Contains("\"csv_schema\": \"2\"")),
+                "The CSV package manifest does not identify its schema.");
             int summaryCsvIndex = Array.FindIndex(
                 csvNames,
                 name => string.Equals(name, "summary.csv", StringComparison.Ordinal));
             Require(summaryCsvIndex >= 0, "The CSV package contains no summary.csv file.");
-            RequireSummaryCsvMatchesResult(
+            string csvCaseId = RequireSummaryCsvMatchesResult(
                 csvContents[summaryCsvIndex],
                 totalArea,
                 annualResult);
+            Require(
+                csvContents.Any(content => content.Contains("goniegonie-simpledragon-csv-export.v2")
+                    && content.Contains(csvCaseId)),
+                "The CSV package manifest does not preserve its model-derived case ID.");
             SetBoolean(document, expectation.ExportTriggerGuid, false);
             SetBoolean(document, expectation.OverwriteGuid, false);
             Solve(document);
@@ -1220,7 +1219,10 @@ internal static class AdvancedExampleDefinitions
                 "The real SimpleDragon batch ended in " + firstBatchState + ". "
                     + RuntimeMessages(document, expectation.BatchComponentGuid));
             Require(ReadBoolean(document, expectation.BatchComponentGuid, 5), "The SimpleDragon batch was not complete.");
-            RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Succeeded");
+            string batchCaseId = RequireSingleBatchCase(
+                document,
+                expectation.BatchComponentGuid,
+                "Succeeded");
             string combinedCsv = RequireFreshContainedFile(
                 ReadString(document, expectation.BatchComponentGuid, 3),
                 managedBatchRoot,
@@ -1235,12 +1237,12 @@ internal static class AdvancedExampleDefinitions
             string manifestContent = File.ReadAllText(manifest);
             Require(
                 combinedCsvContent.StartsWith("index,case_id,status", StringComparison.Ordinal)
-                    && combinedCsvContent.Contains("two-zone-office,Succeeded"),
+                    && combinedCsvContent.Contains(batchCaseId + ",Succeeded"),
                 "The SimpleDragon batch combined CSV does not contain the successful ordered case.");
-            RequireBatchCsvMatchesResult(combinedCsvContent, totalArea, annualResult);
+            RequireBatchCsvMatchesResult(combinedCsvContent, batchCaseId, totalArea, annualResult);
             Require(
                 manifestContent.Contains("goniegonie.simple-dragon.batch-manifest.v1")
-                    && manifestContent.Contains("two-zone-office")
+                    && manifestContent.Contains(batchCaseId)
                     && manifestContent.Contains("\"status\": \"Succeeded\""),
                 "The SimpleDragon batch manifest does not contain its schema and successful case.");
 
@@ -1265,7 +1267,12 @@ internal static class AdvancedExampleDefinitions
             Require(
                 ReadBatchCacheHits(document, expectation.BatchComponentGuid) >= 1,
                 "The identical SimpleDragon batch rerun did not report a cache hit.");
-            RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Succeeded");
+            Require(
+                string.Equals(
+                    RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Succeeded"),
+                    batchCaseId,
+                    StringComparison.Ordinal),
+                "The identical SimpleDragon batch rerun changed its model-derived case ID.");
 
             SetPanel(
                 document,
@@ -1312,7 +1319,10 @@ internal static class AdvancedExampleDefinitions
             Require(
                 !ReadBoolean(document, expectation.BatchComponentGuid, 5),
                 "A cancelled SimpleDragon batch incorrectly reported complete success.");
-            RequireSingleBatchCase(document, expectation.BatchComponentGuid, "Cancelled");
+            string cancelledBatchCaseId = RequireSingleBatchCase(
+                document,
+                expectation.BatchComponentGuid,
+                "Cancelled");
             string cancelledBatchCsv = RequireFreshContainedFile(
                 ReadString(document, expectation.BatchComponentGuid, 3),
                 managedBatchRoot,
@@ -1324,11 +1334,13 @@ internal static class AdvancedExampleDefinitions
                 evidenceNotBeforeUtc,
                 "Cancelled SimpleDragon batch manifest");
             Require(
-                File.ReadAllText(cancelledBatchCsv).Contains("two-zone-office,Cancelled"),
+                File.ReadAllText(cancelledBatchCsv).Contains(cancelledBatchCaseId + ",Cancelled"),
                 "The cancelled batch CSV does not preserve the cancelled case status.");
+            string cancelledManifestContent = File.ReadAllText(cancelledBatchManifest);
             Require(
-                File.ReadAllText(cancelledBatchManifest).Contains("\"status\": \"Cancelled\""),
-                "The cancelled batch manifest does not preserve the cancelled case status.");
+                cancelledManifestContent.Contains(cancelledBatchCaseId)
+                    && cancelledManifestContent.Contains("\"status\": \"Cancelled\""),
+                "The cancelled batch manifest does not preserve the model-derived case ID and cancelled status.");
 
             string finalRunState = ReadRuntimeSnapshot(
                 document,
@@ -1617,22 +1629,24 @@ internal static class AdvancedExampleDefinitions
         }
     }
 
-    private static void RequireSingleBatchCase(
+    private static string RequireSingleBatchCase(
         GH_Document document,
         Guid componentGuid,
         string expectedStatus)
     {
         string[] caseIds = ReadStrings(document, componentGuid, 1);
         string[] caseStatuses = ReadStrings(document, componentGuid, 2);
+        Require(caseIds.Length == 1, "The single-case example batch did not emit exactly one case ID.");
         Require(
-            caseIds.Length == 1 && string.Equals(caseIds[0], "two-zone-office", StringComparison.Ordinal),
-            "The single-case example batch did not preserve its ordered case ID.");
+            !string.IsNullOrWhiteSpace(caseIds[0]),
+            "The single-case example batch emitted an empty model-derived case ID.");
         Require(
             caseStatuses.Length == 1 && string.Equals(caseStatuses[0], expectedStatus, StringComparison.Ordinal),
             "The single-case example batch status was not " + expectedStatus + ".");
+        return caseIds[0];
     }
 
-    private static void RequireSummaryCsvMatchesResult(
+    private static string RequireSummaryCsvMatchesResult(
         string content,
         double expectedTotalArea,
         double expectedAnnualResult)
@@ -1653,12 +1667,17 @@ internal static class AdvancedExampleDefinitions
         Require(rows.Length > 1, "The SimpleDragon summary CSV contains no data rows.");
 
         string[]? sitePerArea = null;
+        string? derivedCaseId = null;
         foreach (string[] row in rows.Skip(1))
         {
             Require(row.Length == expectedHeader.Length, "The SimpleDragon summary CSV contains a malformed row.");
             Require(
-                string.Equals(row[0], "two-zone-office", StringComparison.Ordinal),
-                "The SimpleDragon summary CSV contains an unexpected case ID.");
+                !string.IsNullOrWhiteSpace(row[0]),
+                "The SimpleDragon summary CSV contains an empty model-derived case ID.");
+            derivedCaseId ??= row[0];
+            Require(
+                string.Equals(row[0], derivedCaseId, StringComparison.Ordinal),
+                "The SimpleDragon summary CSV changed its model-derived case ID between rows.");
             double totalArea = ParseFiniteCsvNumber(row[3], "summary total_area_m2");
             ParseFiniteCsvNumber(row[4], "summary annual_total");
             RequireNearlyEqual(totalArea, expectedTotalArea, "summary total_area_m2");
@@ -1675,10 +1694,12 @@ internal static class AdvancedExampleDefinitions
             ParseFiniteCsvNumber(sitePerArea![4], "summary site_uses/per_area annual_total"),
             expectedAnnualResult,
             "summary site_uses/per_area annual_total");
+        return derivedCaseId!;
     }
 
     private static void RequireBatchCsvMatchesResult(
         string content,
+        string expectedCaseId,
         double expectedTotalArea,
         double expectedAnnualResult)
     {
@@ -1696,7 +1717,7 @@ internal static class AdvancedExampleDefinitions
             caseIndex >= 0 && statusIndex >= 0 && annualIndex >= 0 && totalAreaIndex >= 0,
             "The batch combined CSV is missing required identity, status, or GRR metric columns.");
         Require(
-            string.Equals(row[caseIndex], "two-zone-office", StringComparison.Ordinal)
+            string.Equals(row[caseIndex], expectedCaseId, StringComparison.Ordinal)
                 && string.Equals(row[statusIndex], "Succeeded", StringComparison.Ordinal),
             "The batch combined CSV does not identify the successful two-zone case.");
 

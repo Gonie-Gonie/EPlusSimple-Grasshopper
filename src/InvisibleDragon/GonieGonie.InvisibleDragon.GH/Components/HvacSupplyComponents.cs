@@ -22,7 +22,6 @@ public sealed class PackagedAirConditionerComponent : DragonComponent
     {
         pManager.AddTextParameter("Name", "N", "Supply-system name.", GH_ParamAccess.item, "Packaged AC");
         pManager.AddParameter(new DragonSourceSystemParam(), "Heat Pump", "HP", "HeatPump or GeothermalHeatPump source.", GH_ParamAccess.item);
-        pManager.AddTextParameter("ID", "ID", "Optional stable supply-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -34,16 +33,14 @@ public sealed class PackagedAirConditionerComponent : DragonComponent
     {
         string name = "Packaged AC";
         DragonSourceSystemGoo? sourceGoo = null;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) || !DA.GetData(1, ref sourceGoo))
         {
             return;
         }
 
-        DA.GetData(2, ref id);
         HeatPump source = HvacComponentSupport.Source<HeatPump>(sourceGoo, "Heat Pump");
         var supply = new PackagedAirConditioner(
-            StableIds.Resolve(id, "packaged-air-conditioner", name, source.Id.Value),
+            StableIds.Create("packaged-air-conditioner", name, source.Id.Value),
             name,
             source);
         DA.SetData(0, new DragonSupplySystemGoo(supply));
@@ -70,7 +67,6 @@ public sealed class AirHandlingUnitComponent : DragonComponent
         pManager.AddNumberParameter("Fan Total Efficiency", "FanEff", "Supply-fan total efficiency from 0 to 1.", GH_ParamAccess.item, 0.7);
         pManager.AddNumberParameter("Fan Pressure Rise", "dP", "Supply-fan pressure rise in Pa.", GH_ParamAccess.item, 100.0);
         pManager.AddNumberParameter("Motor Efficiency", "Motor", "Fan motor efficiency from 0 to 1.", GH_ParamAccess.item, 0.9);
-        pManager.AddTextParameter("ID", "ID", "Optional stable supply-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -85,7 +81,6 @@ public sealed class AirHandlingUnitComponent : DragonComponent
         double fanEfficiency = 0.7;
         double pressureRise = 100;
         double motorEfficiency = 0.9;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref sourceGoo) ||
             !DA.GetData(2, ref fanEfficiency) ||
@@ -95,10 +90,9 @@ public sealed class AirHandlingUnitComponent : DragonComponent
             return;
         }
 
-        DA.GetData(5, ref id);
         HeatPump source = HvacComponentSupport.Source<HeatPump>(sourceGoo, "Heat Pump");
         var supply = new AirHandlingUnit(
-            StableIds.Resolve(id, "air-handling-unit", name, source.Id.Value),
+            StableIds.Create("air-handling-unit", name, source.Id.Value),
             name,
             source,
             fanEfficiency,
@@ -133,7 +127,6 @@ public sealed class FanCoilUnitComponent : DragonComponent
         pManager.AddNumberParameter("Fan Total Efficiency", "FanEff", "Fan total efficiency from 0 to 1.", GH_ParamAccess.item, 0.7);
         pManager.AddNumberParameter("Fan Pressure Rise", "dP", "Fan pressure rise in Pa.", GH_ParamAccess.item, 100.0);
         pManager.AddNumberParameter("Motor Efficiency", "Motor", "Fan motor efficiency from 0 to 1.", GH_ParamAccess.item, 0.9);
-        pManager.AddTextParameter("ID", "ID", "Optional stable supply-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -148,7 +141,6 @@ public sealed class FanCoilUnitComponent : DragonComponent
         double fanEfficiency = 0.7;
         double pressureRise = 100;
         double motorEfficiency = 0.9;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref sourceGoo) ||
             !DA.GetData(2, ref fanEfficiency) ||
@@ -158,7 +150,6 @@ public sealed class FanCoilUnitComponent : DragonComponent
             return;
         }
 
-        DA.GetData(5, ref id);
         SourceSystem source = HvacComponentSupport.Source(sourceGoo, "Plant Source");
         if (source is not Boiler and not DistrictHeating and not Chiller and not AbsorptionChiller)
         {
@@ -167,7 +158,7 @@ public sealed class FanCoilUnitComponent : DragonComponent
         }
 
         var supply = new FanCoilUnit(
-            StableIds.Resolve(id, "fan-coil-unit", name, source.Id.Value),
+            StableIds.Create("fan-coil-unit", name, source.Id.Value),
             name,
             source,
             fanEfficiency,
@@ -196,7 +187,6 @@ public sealed class RadiatorComponent : DragonComponent
         pManager.AddParameter(new DragonSourceSystemParam(), "Heating Source", "Plant", "Boiler or DistrictHeating source.", GH_ParamAccess.item);
         pManager.AddNumberParameter("Heating Capacity", "Cap", "Rated heating capacity in W; 0 means autosize.", GH_ParamAccess.item, 0);
         pManager.AddNumberParameter("Radiant Fraction", "Rad", "Fraction of heat emitted radiantly, from 0 to 1.", GH_ParamAccess.item, 0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable supply-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -210,7 +200,6 @@ public sealed class RadiatorComponent : DragonComponent
         DragonSourceSystemGoo? sourceGoo = null;
         double heatingCapacity = 0;
         double radiantFraction = 0;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref sourceGoo) ||
             !DA.GetData(2, ref heatingCapacity) ||
@@ -219,7 +208,6 @@ public sealed class RadiatorComponent : DragonComponent
             return;
         }
 
-        DA.GetData(4, ref id);
         SourceSystem source = HvacComponentSupport.Source(sourceGoo, "Heating Source");
         if (source is not Boiler and not DistrictHeating)
         {
@@ -228,7 +216,7 @@ public sealed class RadiatorComponent : DragonComponent
         }
 
         var supply = new Radiator(
-            StableIds.Resolve(id, "radiator", name, source.Id.Value),
+            StableIds.Create("radiator", name, source.Id.Value),
             name,
             source,
             HvacComponentSupport.OptionalPositive(heatingCapacity, "Heating Capacity"),
@@ -256,7 +244,6 @@ public sealed class ElectricRadiatorComponent : DragonComponent
         pManager.AddNumberParameter("Heating Capacity", "Cap", "Rated heating capacity in W; 0 means autosize.", GH_ParamAccess.item, 0);
         pManager.AddNumberParameter("Efficiency", "Eff", "Electric conversion efficiency from 0 to 1.", GH_ParamAccess.item, 1.0);
         pManager.AddNumberParameter("Radiant Fraction", "Rad", "Fraction of heat emitted radiantly, from 0 to 1.", GH_ParamAccess.item, 0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable supply-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -270,7 +257,6 @@ public sealed class ElectricRadiatorComponent : DragonComponent
         double heatingCapacity = 0;
         double efficiency = 1;
         double radiantFraction = 0;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref heatingCapacity) ||
             !DA.GetData(2, ref efficiency) ||
@@ -279,9 +265,8 @@ public sealed class ElectricRadiatorComponent : DragonComponent
             return;
         }
 
-        DA.GetData(4, ref id);
         var supply = new ElectricRadiator(
-            StableIds.Resolve(id, "electric-radiator", name),
+            StableIds.Create("electric-radiator", name),
             name,
             HvacComponentSupport.OptionalPositive(heatingCapacity, "Heating Capacity"),
             efficiency,
@@ -308,7 +293,6 @@ public sealed class RadiantFloorComponent : DragonComponent
         pManager.AddTextParameter("Name", "N", "Supply-system name.", GH_ParamAccess.item, "Radiant Floor");
         pManager.AddParameter(new DragonSourceSystemParam(), "Hydronic Source", "Plant", "Non-heat-pump hydronic plant source.", GH_ParamAccess.item);
         pManager.AddNumberParameter("Throttling Range", "dT", "Heating control throttling range in degrees C.", GH_ParamAccess.item, 2.0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable supply-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -321,7 +305,6 @@ public sealed class RadiantFloorComponent : DragonComponent
         string name = "Radiant Floor";
         DragonSourceSystemGoo? sourceGoo = null;
         double throttlingRange = 2;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) ||
             !DA.GetData(1, ref sourceGoo) ||
             !DA.GetData(2, ref throttlingRange))
@@ -329,10 +312,9 @@ public sealed class RadiantFloorComponent : DragonComponent
             return;
         }
 
-        DA.GetData(3, ref id);
         SourceSystem source = HvacComponentSupport.Source(sourceGoo, "Hydronic Source");
         var supply = new RadiantFloor(
-            StableIds.Resolve(id, "radiant-floor", name, source.Id.Value),
+            StableIds.Create("radiant-floor", name, source.Id.Value),
             name,
             source,
             throttlingRange);
@@ -357,7 +339,6 @@ public sealed class ElectricRadiantFloorComponent : DragonComponent
     {
         pManager.AddTextParameter("Name", "N", "Supply-system name.", GH_ParamAccess.item, "Electric Radiant Floor");
         pManager.AddNumberParameter("Throttling Range", "dT", "Heating control throttling range in degrees C.", GH_ParamAccess.item, 2.0);
-        pManager.AddTextParameter("ID", "ID", "Optional stable supply-system identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -369,15 +350,13 @@ public sealed class ElectricRadiantFloorComponent : DragonComponent
     {
         string name = "Electric Radiant Floor";
         double throttlingRange = 2;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) || !DA.GetData(1, ref throttlingRange))
         {
             return;
         }
 
-        DA.GetData(2, ref id);
         var supply = new ElectricRadiantFloor(
-            StableIds.Resolve(id, "electric-radiant-floor", name),
+            StableIds.Create("electric-radiant-floor", name),
             name,
             throttlingRange);
         DA.SetData(0, new DragonSupplySystemGoo(supply));

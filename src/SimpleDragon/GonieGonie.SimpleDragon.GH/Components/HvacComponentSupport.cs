@@ -80,11 +80,6 @@ public abstract class SimpleDragonHvacComponent : SimpleDragonComponent
         return access.GetData(index, ref value) ? value : null;
     }
 
-    protected static EntityId? OptionalId(string value)
-    {
-        return string.IsNullOrWhiteSpace(value) ? null : new EntityId(value.Trim());
-    }
-
     protected static T Value<TGoo, T>(TGoo? goo, string inputName)
         where TGoo : SimpleDragonGoo<T>
         where T : class

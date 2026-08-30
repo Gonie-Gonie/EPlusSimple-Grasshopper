@@ -85,7 +85,6 @@ public sealed class WindowFromPolylineComponent : DragonComponent
         pManager.AddCurveParameter("Curve", "C", "Closed planar polygonal window boundary.", GH_ParamAccess.item);
         pManager.AddTextParameter("Name", "N", "Window name.", GH_ParamAccess.item, "Window");
         pManager.AddParameter(new DragonGlazingParam(), "Glazing", "G", "Window glazing.", GH_ParamAccess.item);
-        pManager.AddTextParameter("ID", "ID", "Optional stable window identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -103,7 +102,6 @@ public sealed class WindowFromPolylineComponent : DragonComponent
         Curve? curve = null;
         string name = "Window";
         DragonGlazingGoo? glazingGoo = null;
-        string id = string.Empty;
         if (!DA.GetData(0, ref curve)
             || !DA.GetData(1, ref name)
             || !DA.GetData(2, ref glazingGoo))
@@ -111,12 +109,11 @@ public sealed class WindowFromPolylineComponent : DragonComponent
             return;
         }
 
-        DA.GetData(3, ref id);
         Glazing glazing = glazingGoo?.Value
             ?? throw new ArgumentException("Glazing requires a non-empty value.");
         OpeningGeometry geometry = OpeningGeometry.FromCurve(curve, "Window");
         var window = new Window(
-            StableIds.Resolve(id, "window", name, geometry.Fingerprint, glazing.Name),
+            StableIds.Create("window", name, geometry.Fingerprint, glazing.Name),
             name,
             glazing,
             geometry.Polygon,
@@ -148,7 +145,6 @@ public sealed class DoorFromPolylineComponent : DragonComponent
             "C",
             "Opaque door construction.",
             GH_ParamAccess.item);
-        pManager.AddTextParameter("ID", "ID", "Optional stable door identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -166,7 +162,6 @@ public sealed class DoorFromPolylineComponent : DragonComponent
         Curve? curve = null;
         string name = "Door";
         DragonConstructionGoo? constructionGoo = null;
-        string id = string.Empty;
         if (!DA.GetData(0, ref curve)
             || !DA.GetData(1, ref name)
             || !DA.GetData(2, ref constructionGoo))
@@ -174,12 +169,11 @@ public sealed class DoorFromPolylineComponent : DragonComponent
             return;
         }
 
-        DA.GetData(3, ref id);
         ISurfaceConstruction construction = constructionGoo?.Value
             ?? throw new ArgumentException("Construction requires a non-empty value.");
         OpeningGeometry geometry = OpeningGeometry.FromCurve(curve, "Door");
         var door = new Door(
-            StableIds.Resolve(id, "door", name, geometry.Fingerprint, construction.Name),
+            StableIds.Create("door", name, geometry.Fingerprint, construction.Name),
             name,
             construction,
             geometry.Polygon,
@@ -225,7 +219,6 @@ public sealed class SurfaceComponent : DragonComponent
             "Windows and doors owned by this Surface.",
             GH_ParamAccess.list);
         pManager[openings].Optional = true;
-        pManager.AddTextParameter("ID", "ID", "Optional stable surface identifier.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -245,7 +238,6 @@ public sealed class SurfaceComponent : DragonComponent
         DragonConstructionGoo? constructionGoo = null;
         string boundaryText = "Outdoors";
         var openingGoos = new List<DragonOpeningGoo>();
-        string id = string.Empty;
         if (!DA.GetData(0, ref curve)
             || !DA.GetData(1, ref name)
             || !DA.GetData(2, ref typeText)
@@ -256,7 +248,6 @@ public sealed class SurfaceComponent : DragonComponent
         }
 
         DA.GetDataList(5, openingGoos);
-        DA.GetData(6, ref id);
         ISurfaceConstruction construction = constructionGoo?.Value
             ?? throw new ArgumentException("Construction requires a non-empty value.");
         if (!Enum.TryParse(typeText.Trim(), true, out SurfaceType surfaceType)
@@ -279,7 +270,7 @@ public sealed class SurfaceComponent : DragonComponent
             ?? throw new ArgumentException("Openings contains an empty value at position " + index + "."))
             .ToArray();
         var surface = new DragonSurface(
-            StableIds.Resolve(id, "surface", name, geometry.Fingerprint),
+            StableIds.Create("surface", name, geometry.Fingerprint),
             name,
             surfaceType,
             construction,

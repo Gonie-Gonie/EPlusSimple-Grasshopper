@@ -56,6 +56,21 @@ public sealed class GrasshopperAssemblyTests
     }
 
     [Fact]
+    public void PublicComponentsDoNotExposeEntityIdentifierInputs()
+    {
+        Assembly assembly = LoadPlugin();
+        GH_Component[] components = ComponentTypes(assembly)
+            .Select(type => Assert.IsAssignableFrom<GH_Component>(Activator.CreateInstance(type)))
+            .ToArray();
+
+        Assert.DoesNotContain(
+            components.SelectMany(component => component.Params.Input),
+            parameter => string.Equals(parameter.Name, "ID", StringComparison.OrdinalIgnoreCase)
+                || parameter.Name.EndsWith(" ID", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(parameter.NickName, "ID", StringComparison.OrdinalIgnoreCase));
+    }
+
+    [Fact]
     public void EveryComponentHasItsOwnEmbeddedTwentyFourPixelIcon()
     {
         const string prefix =

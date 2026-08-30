@@ -26,7 +26,6 @@ public abstract class SimpleDragonHeatPumpSourceComponent : SimpleDragonHvacComp
         pManager.AddNumberParameter("Cooling COP", "CCOP", "Dimensionless cooling coefficient of performance (> 0).", GH_ParamAccess.item, 3d);
         pManager.AddNumberParameter("Heating Capacity", "HCap", "Optional nominal heating capacity in W; leave disconnected for autosize/unset.", GH_ParamAccess.item);
         pManager.AddNumberParameter("Cooling Capacity", "CCap", "Optional nominal cooling capacity in W; leave disconnected for autosize/unset.", GH_ParamAccess.item);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
         pManager[4].Optional = true;
         pManager[5].Optional = true;
     }
@@ -43,7 +42,6 @@ public abstract class SimpleDragonHeatPumpSourceComponent : SimpleDragonHvacComp
         int fuel = (int)FuelType.Electricity;
         double heatingCop = 3d;
         double coolingCop = 3d;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name)
             || !DA.GetData(1, ref fuel)
             || !DA.GetData(2, ref heatingCop)
@@ -54,7 +52,6 @@ public abstract class SimpleDragonHeatPumpSourceComponent : SimpleDragonHvacComp
 
         double? heatingCapacity = OptionalNumber(DA, 4);
         double? coolingCapacity = OptionalNumber(DA, 5);
-        DA.GetData(6, ref id);
         Author(
             DA,
             1,
@@ -69,8 +66,7 @@ public abstract class SimpleDragonHeatPumpSourceComponent : SimpleDragonHvacComp
                     heatingCop,
                     coolingCop,
                     heatingCapacity,
-                    coolingCapacity,
-                    id: OptionalId(id));
+                    coolingCapacity);
                 DA.SetData(0, new SimpleDragonSourceSystemGoo(source));
             });
     }
@@ -131,7 +127,6 @@ public sealed class SimpleDragonChillerComponent : SimpleDragonHvacComponent
         AddEnumParameter(pManager, "Tower Circuit", "Tower", "Cooling-tower circuit: Closed=0 or Open=1.", CoolingTowerType.Open);
         AddEnumParameter(pManager, "Tower Control", "Control", "Cooling-tower fan control: SingleSpeed=0 or TwoSpeed=1.", CoolingTowerControl.SingleSpeed);
         pManager.AddNumberParameter("Tower Capacity", "TCap", "Optional nominal cooling-tower capacity in W; leave disconnected for autosize/unset.", GH_ParamAccess.item);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
         pManager[2].Optional = true;
         pManager[6].Optional = true;
     }
@@ -149,7 +144,6 @@ public sealed class SimpleDragonChillerComponent : SimpleDragonHvacComponent
         int compressor = (int)CompressorType.Turbo;
         int towerType = (int)CoolingTowerType.Open;
         int towerControl = (int)CoolingTowerControl.SingleSpeed;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name)
             || !DA.GetData(1, ref cop)
             || !DA.GetData(3, ref compressor)
@@ -161,7 +155,6 @@ public sealed class SimpleDragonChillerComponent : SimpleDragonHvacComponent
 
         double? coolingCapacity = OptionalNumber(DA, 2);
         double? towerCapacity = OptionalNumber(DA, 6);
-        DA.GetData(7, ref id);
         Author(
             DA,
             1,
@@ -177,8 +170,7 @@ public sealed class SimpleDragonChillerComponent : SimpleDragonHvacComponent
                     compressorType: EnumValue<CompressorType>(compressor, "Compressor"),
                     coolingTowerType: EnumValue<CoolingTowerType>(towerType, "Tower Circuit"),
                     coolingTowerCapacity: towerCapacity,
-                    coolingTowerControl: EnumValue<CoolingTowerControl>(towerControl, "Tower Control"),
-                    id: OptionalId(id));
+                    coolingTowerControl: EnumValue<CoolingTowerControl>(towerControl, "Tower Control"));
                 DA.SetData(0, new SimpleDragonSourceSystemGoo(source));
             });
     }
@@ -203,7 +195,6 @@ public sealed class SimpleDragonAbsorptionChillerComponent : SimpleDragonHvacCom
         pManager.AddNumberParameter("Thermal COP", "COP", "Dimensionless thermal cooling COP (> 0).", GH_ParamAccess.item, 0.9d);
         pManager.AddNumberParameter("Cooling Capacity", "Cap", "Optional nominal cooling capacity in W; leave disconnected for autosize/unset.", GH_ParamAccess.item);
         pManager.AddNumberParameter("Boiler Efficiency", "Eff", "Generator-boiler thermal efficiency fraction in (0, 1].", GH_ParamAccess.item, 0.85d);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
         pManager[3].Optional = true;
     }
 
@@ -219,7 +210,6 @@ public sealed class SimpleDragonAbsorptionChillerComponent : SimpleDragonHvacCom
         int fuel = (int)FuelType.NaturalGas;
         double cop = 0.9d;
         double efficiency = 0.85d;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name)
             || !DA.GetData(1, ref fuel)
             || !DA.GetData(2, ref cop)
@@ -229,7 +219,6 @@ public sealed class SimpleDragonAbsorptionChillerComponent : SimpleDragonHvacCom
         }
 
         double? capacity = OptionalNumber(DA, 3);
-        DA.GetData(5, ref id);
         Author(
             DA,
             1,
@@ -243,8 +232,7 @@ public sealed class SimpleDragonAbsorptionChillerComponent : SimpleDragonHvacCom
                     EnumValue<FuelType>(fuel, "Fuel"),
                     coolingCop: cop,
                     coolingCapacity: capacity,
-                    boilerEfficiency: efficiency,
-                    id: OptionalId(id));
+                    boilerEfficiency: efficiency);
                 DA.SetData(0, new SimpleDragonSourceSystemGoo(source));
             });
     }
@@ -269,7 +257,6 @@ public sealed class SimpleDragonBoilerComponent : SimpleDragonHvacComponent
         pManager.AddNumberParameter("Efficiency", "Eff", "Nominal thermal efficiency fraction in (0, 1].", GH_ParamAccess.item, 0.85d);
         pManager.AddNumberParameter("Heating Capacity", "Cap", "Optional nominal heating capacity in W; leave disconnected for autosize/unset.", GH_ParamAccess.item);
         pManager.AddBooleanParameter("Hot Water Supply", "DHW", "Whether the boiler also serves domestic hot water metadata.", GH_ParamAccess.item, false);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
         pManager[3].Optional = true;
     }
 
@@ -285,7 +272,6 @@ public sealed class SimpleDragonBoilerComponent : SimpleDragonHvacComponent
         int fuel = (int)FuelType.NaturalGas;
         double efficiency = 0.85d;
         bool hotWater = false;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name)
             || !DA.GetData(1, ref fuel)
             || !DA.GetData(2, ref efficiency)
@@ -295,7 +281,6 @@ public sealed class SimpleDragonBoilerComponent : SimpleDragonHvacComponent
         }
 
         double? capacity = OptionalNumber(DA, 3);
-        DA.GetData(5, ref id);
         Author(
             DA,
             1,
@@ -309,8 +294,7 @@ public sealed class SimpleDragonBoilerComponent : SimpleDragonHvacComponent
                     EnumValue<FuelType>(fuel, "Fuel"),
                     heatingCapacity: capacity,
                     efficiency: efficiency,
-                    hotWaterSupply: hotWater,
-                    id: OptionalId(id));
+                    hotWaterSupply: hotWater);
                 DA.SetData(0, new SimpleDragonSourceSystemGoo(source));
             });
     }
@@ -333,7 +317,6 @@ public sealed class SimpleDragonDistrictHeatingComponent : SimpleDragonHvacCompo
         pManager.AddTextParameter("Name", "N", "District-heating service name.", GH_ParamAccess.item, "District Heating");
         pManager.AddNumberParameter("Heating Capacity", "Cap", "Optional nominal heating capacity in W; leave disconnected for autosize/unset.", GH_ParamAccess.item);
         pManager.AddBooleanParameter("Hot Water Supply", "DHW", "Whether the service also supplies domestic hot water metadata.", GH_ParamAccess.item, false);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
         pManager[1].Optional = true;
     }
 
@@ -347,14 +330,12 @@ public sealed class SimpleDragonDistrictHeatingComponent : SimpleDragonHvacCompo
     {
         string name = "District Heating";
         bool hotWater = false;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name) || !DA.GetData(2, ref hotWater))
         {
             return;
         }
 
         double? capacity = OptionalNumber(DA, 1);
-        DA.GetData(3, ref id);
         Author(
             DA,
             1,
@@ -366,8 +347,7 @@ public sealed class SimpleDragonDistrictHeatingComponent : SimpleDragonHvacCompo
                     name,
                     SourceSystemType.DistrictHeating,
                     heatingCapacity: capacity,
-                    hotWaterSupply: hotWater,
-                    id: OptionalId(id));
+                    hotWaterSupply: hotWater);
                 DA.SetData(0, new SimpleDragonSourceSystemGoo(source));
             });
     }

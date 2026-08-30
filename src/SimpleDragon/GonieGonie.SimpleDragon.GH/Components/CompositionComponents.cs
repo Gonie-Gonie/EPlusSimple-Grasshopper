@@ -60,12 +60,6 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
             "Optional Shade or Venetian; leave empty or use None for no blind.",
             GH_ParamAccess.item,
             "None");
-        pManager.AddTextParameter(
-            "ID",
-            "ID",
-            "Optional stable opening identifier.",
-            GH_ParamAccess.item,
-            string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -91,7 +85,6 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
         int typeValue = (int)FenestrationType.Window;
         SimpleDragonFenestrationConstructionGoo? constructionGoo = null;
         string blindText = "None";
-        string id = string.Empty;
         if (!DA.GetData(0, ref boundary)
             || !DA.GetData(1, ref name)
             || !DA.GetData(2, ref typeValue)
@@ -101,7 +94,6 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
         }
 
         DA.GetData(4, ref blindText);
-        DA.GetData(5, ref id);
         try
         {
             FenestrationType type = DefinedEnum<FenestrationType>(typeValue, "Type");
@@ -112,8 +104,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
                 type,
                 constructionGoo?.Value
                     ?? throw new ArgumentException("Construction contains no value."),
-                blind,
-                OptionalId(id));
+                blind);
             DA.SetData(0, new SimpleDragonOpeningDefinitionGoo(opening));
             DA.SetDataList(1, Array.Empty<SimpleDragonDiagnosticGoo>());
         }
@@ -124,7 +115,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
                 1,
                 "SD.GH.OPENING_INVALID",
                 exception.Message,
-                "Use a closed planar polygon, compatible construction/type, and valid optional ID.");
+                "Use a closed planar polygon and a compatible construction/type.");
         }
     }
 
@@ -156,11 +147,6 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
         }
 
         return parsed;
-    }
-
-    internal static EntityId? OptionalId(string value)
-    {
-        return string.IsNullOrWhiteSpace(value) ? null : new EntityId(value.Trim());
     }
 
     internal static bool IsAuthoringException(Exception exception)
@@ -258,7 +244,6 @@ public sealed class CreateSimpleDragonSurfaceComponent : SimpleDragonComponent
             "CR",
             "Optional value in (0, 1], valid only for an outdoor Ceiling.",
             GH_ParamAccess.item);
-        pManager.AddTextParameter("ID", "ID", "Optional stable surface identifier.", GH_ParamAccess.item, string.Empty);
         pManager[3].Optional = true;
         pManager[5].Optional = true;
         pManager[6].Optional = true;
@@ -289,7 +274,6 @@ public sealed class CreateSimpleDragonSurfaceComponent : SimpleDragonComponent
         int boundaryValue = (int)SurfaceBoundaryCondition.Outdoors;
         var openingGoos = new List<SimpleDragonOpeningDefinitionGoo>();
         double reflectance = 0d;
-        string id = string.Empty;
         if (!DA.GetData(0, ref geometry)
             || !DA.GetData(1, ref name)
             || !DA.GetData(2, ref typeValue)
@@ -301,7 +285,6 @@ public sealed class CreateSimpleDragonSurfaceComponent : SimpleDragonComponent
         DA.GetData(3, ref constructionGoo);
         DA.GetDataList(5, openingGoos);
         bool hasReflectance = DA.GetData(6, ref reflectance);
-        DA.GetData(7, ref id);
         try
         {
             SurfaceType type = CreateSimpleDragonOpeningComponent.DefinedEnum<SurfaceType>(typeValue, "Type");
@@ -327,8 +310,7 @@ public sealed class CreateSimpleDragonSurfaceComponent : SimpleDragonComponent
                 boundaryIntent,
                 constructionGoo?.Value,
                 openings,
-                hasReflectance ? reflectance : null,
-                CreateSimpleDragonOpeningComponent.OptionalId(id));
+                hasReflectance ? reflectance : null);
             DA.SetData(0, new SimpleDragonSurfaceDefinitionGoo(definition));
             DA.SetDataList(1, Array.Empty<SimpleDragonDiagnosticGoo>());
         }
@@ -392,7 +374,6 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
             "Lighting power density in W/m².",
             GH_ParamAccess.item,
             10d);
-        pManager.AddTextParameter("ID", "ID", "Optional stable zone identifier.", GH_ParamAccess.item, string.Empty);
         pManager[5].Optional = true;
         pManager[6].Optional = true;
     }
@@ -418,7 +399,6 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
         var supplyGoos = new List<SimpleDragonSupplySystemGoo>();
         var ventilationGoos = new List<SimpleDragonZoneErvGoo>();
         double lightDensity = 10d;
-        string id = string.Empty;
         if (!DA.GetDataList(0, surfaceGoos)
             || !DA.GetData(1, ref name)
             || !DA.GetData(2, ref floor)
@@ -431,7 +411,6 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
 
         DA.GetDataList(5, supplyGoos);
         DA.GetDataList(6, ventilationGoos);
-        DA.GetData(8, ref id);
         try
         {
             UsageProfile profile = profileGoo?.Value
@@ -453,8 +432,7 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
                 profile,
                 lightDensity,
                 supplies,
-                ventilation,
-                CreateSimpleDragonOpeningComponent.OptionalId(id));
+                ventilation);
             DA.SetData(0, new SimpleDragonZoneDefinitionGoo(definition));
             DA.SetDataList(1, Array.Empty<SimpleDragonDiagnosticGoo>());
         }

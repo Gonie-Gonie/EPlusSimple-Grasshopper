@@ -35,7 +35,6 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
             "D",
             "Requested export directory. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory.",
             GH_ParamAccess.item);
-        pManager.AddTextParameter("Case ID", "Case", "Stable case identifier written to every CSV row.", GH_ParamAccess.item, string.Empty);
         pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "Diag", "Optional diagnostics to include.", GH_ParamAccess.list);
         pManager.AddGenericParameter(
             "Geometry Map Data",
@@ -55,8 +54,8 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
             GH_ParamAccess.item,
             false);
         pManager[1].Optional = true;
+        pManager[3].Optional = true;
         pManager[4].Optional = true;
-        pManager[5].Optional = true;
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -73,24 +72,23 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
         GreenRetrofitResultGoo? resultGoo = null;
         GreenRetrofitModelGoo? modelGoo = null;
         string directory = string.Empty;
-        string caseId = string.Empty;
         var diagnosticGoos = new List<SimpleDragonDiagnosticGoo>();
         var geometryWrappers = new List<GH_ObjectWrapper>();
         bool export = false;
         bool overwrite = false;
         if (!DA.GetData(0, ref resultGoo)
             || !DA.GetData(2, ref directory)
-            || !DA.GetData(3, ref caseId)
-            || !DA.GetData(6, ref export)
-            || !DA.GetData(7, ref overwrite)
+            || !DA.GetData(5, ref export)
+            || !DA.GetData(6, ref overwrite)
             || resultGoo?.Value is null)
         {
             return;
         }
 
         DA.GetData(1, ref modelGoo);
-        DA.GetDataList(4, diagnosticGoos);
-        DA.GetDataList(5, geometryWrappers);
+        DA.GetDataList(3, diagnosticGoos);
+        DA.GetDataList(4, geometryWrappers);
+        string caseId = modelGoo?.Value?.Id.Value ?? string.Empty;
         Diagnostic[] diagnostics = diagnosticGoos
             .Where(item => item?.Value is not null)
             .Select(item => item.Value!)

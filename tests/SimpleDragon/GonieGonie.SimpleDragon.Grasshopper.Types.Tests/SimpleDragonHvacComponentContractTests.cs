@@ -128,32 +128,32 @@ public sealed class SimpleDragonHvacComponentContractTests
         SimpleDragonSourceSystemGoo heatPump = Source(assembly, "SimpleDragonHeatPumpComponent", new Dictionary<int, object?>
         {
             [0] = "HP", [1] = (int)FuelType.Electricity, [2] = 3.2d, [3] = 4.3d,
-            [4] = 10_000d, [5] = 11_000d, [6] = "SRC-HP",
+            [4] = 10_000d, [5] = 11_000d,
         });
         SimpleDragonSourceSystemGoo geothermal = Source(assembly, "SimpleDragonGeothermalHeatPumpComponent", new Dictionary<int, object?>
         {
             [0] = "Geo", [1] = (int)FuelType.Electricity, [2] = 4.2d, [3] = 5.3d,
-            [4] = 12_000d, [5] = 13_000d, [6] = "SRC-GEO",
+            [4] = 12_000d, [5] = 13_000d,
         });
         SimpleDragonSourceSystemGoo chiller = Source(assembly, "SimpleDragonChillerComponent", new Dictionary<int, object?>
         {
             [0] = "Chiller", [1] = 5.1d, [2] = 14_000d, [3] = (int)CompressorType.Screw,
             [4] = (int)CoolingTowerType.Closed, [5] = (int)CoolingTowerControl.TwoSpeed,
-            [6] = 15_000d, [7] = "SRC-CHILLER",
+            [6] = 15_000d,
         });
         SimpleDragonSourceSystemGoo absorption = Source(assembly, "SimpleDragonAbsorptionChillerComponent", new Dictionary<int, object?>
         {
             [0] = "Absorption", [1] = (int)FuelType.NaturalGas, [2] = 0.9d,
-            [3] = 16_000d, [4] = 0.86d, [5] = "SRC-ABSORPTION",
+            [3] = 16_000d, [4] = 0.86d,
         });
         SimpleDragonSourceSystemGoo boiler = Source(assembly, "SimpleDragonBoilerComponent", new Dictionary<int, object?>
         {
             [0] = "Boiler", [1] = (int)FuelType.NaturalGas, [2] = 0.91d,
-            [3] = 17_000d, [4] = true, [5] = "SRC-BOILER",
+            [3] = 17_000d, [4] = true,
         });
         SimpleDragonSourceSystemGoo district = Source(assembly, "SimpleDragonDistrictHeatingComponent", new Dictionary<int, object?>
         {
-            [0] = "District", [1] = 18_000d, [2] = false, [3] = "SRC-DISTRICT",
+            [0] = "District", [1] = 18_000d, [2] = false,
         });
         Assert.Equal(
             Enum.GetValues<SourceSystemType>(),
@@ -176,31 +176,31 @@ public sealed class SimpleDragonHvacComponentContractTests
 
         SimpleDragonSupplySystemGoo packaged = Supply(assembly, "SimpleDragonPackagedAirConditionerComponent", new Dictionary<int, object?>
         {
-            [0] = "Packaged", [1] = 4.4d, [2] = 19_000d, [3] = "SUP-PACKAGED",
+            [0] = "Packaged", [1] = 4.4d, [2] = 19_000d,
         });
         SimpleDragonSupplySystemGoo ahu = Supply(assembly, "SimpleDragonAirHandlingUnitComponent", new Dictionary<int, object?>
         {
-            [0] = "AHU", [1] = heatPump, [2] = "SUP-AHU",
+            [0] = "AHU", [1] = heatPump,
         });
         SimpleDragonSupplySystemGoo fanCoil = Supply(assembly, "SimpleDragonFanCoilUnitComponent", new Dictionary<int, object?>
         {
-            [0] = "FCU", [1] = chiller, [2] = "SUP-FCU",
+            [0] = "FCU", [1] = chiller,
         });
         SimpleDragonSupplySystemGoo radiator = Supply(assembly, "SimpleDragonRadiatorComponent", new Dictionary<int, object?>
         {
-            [0] = "Radiator", [1] = boiler, [2] = 8_000d, [3] = "SUP-RADIATOR",
+            [0] = "Radiator", [1] = boiler, [2] = 8_000d,
         });
         SimpleDragonSupplySystemGoo electricRadiator = Supply(assembly, "SimpleDragonElectricRadiatorComponent", new Dictionary<int, object?>
         {
-            [0] = "Electric Radiator", [1] = 8_100d, [2] = "SUP-ELECTRIC-RADIATOR",
+            [0] = "Electric Radiator", [1] = 8_100d,
         });
         SimpleDragonSupplySystemGoo radiantFloor = Supply(assembly, "SimpleDragonRadiantFloorComponent", new Dictionary<int, object?>
         {
-            [0] = "Radiant Floor", [1] = district, [2] = "SUP-RADIANT-FLOOR",
+            [0] = "Radiant Floor", [1] = district,
         });
         SimpleDragonSupplySystemGoo electricFloor = Supply(assembly, "SimpleDragonElectricRadiantFloorComponent", new Dictionary<int, object?>
         {
-            [0] = "Electric Floor", [1] = "SUP-ELECTRIC-FLOOR",
+            [0] = "Electric Floor",
         });
         Assert.Equal(
             Enum.GetValues<SupplySystemType>(),
@@ -218,7 +218,7 @@ public sealed class SimpleDragonHvacComponentContractTests
     }
 
     [Fact]
-    public void DisconnectedIdsAreDeterministicAndTrackMeaningfulAuthoredContent()
+    public void ComponentGeneratedIdsAreDeterministicAndTrackMeaningfulAuthoredContent()
     {
         Assembly assembly = LoadPlugin();
         var sourceInputs = new Dictionary<int, object?>
@@ -282,7 +282,6 @@ public sealed class SimpleDragonHvacComponentContractTests
         {
             [0] = "Invalid Fan Coil",
             [1] = new SimpleDragonSourceSystemGoo(heatPump),
-            [2] = "SUPPLY-WRONG",
         });
 
         InvokeSolve(Component(assembly, "SimpleDragonFanCoilUnitComponent"), access);
@@ -302,9 +301,9 @@ public sealed class SimpleDragonHvacComponentContractTests
         Assembly assembly = LoadPlugin();
         GH_Component component = Component(assembly, "SimpleDragonEnergyRecoveryVentilatorComponent");
         Assert.Equal(
-            new[] { "Name", "Airflow", "Heating Efficiency", "Cooling Efficiency", "ID", "Count" },
+            new[] { "Name", "Airflow", "Heating Efficiency", "Cooling Efficiency", "Count" },
             component.Params.Input.Select(parameter => parameter.Name));
-        Assert.True(component.Params.Input[5].Optional);
+        Assert.True(component.Params.Input[4].Optional);
         Assert.Equal("Zone ERV", component.Params.Output[0].Name);
         Assert.Equal("SimpleDragonZoneErvParam", component.Params.Output[0].GetType().Name);
 
@@ -314,8 +313,7 @@ public sealed class SimpleDragonHvacComponentContractTests
             [1] = 0.3d,
             [2] = 0.8d,
             [3] = 0.6d,
-            [4] = "ERV-AUTHORED",
-            [5] = 2,
+            [4] = 2,
         });
         InvokeSolve(component, access);
 
@@ -323,8 +321,9 @@ public sealed class SimpleDragonHvacComponentContractTests
             Assert.IsType<SimpleDragonZoneErvGoo>(access.Outputs[0]);
         VentilationAssignment assignment = goo.Value;
         Assert.Equal(2, assignment.Count);
-        Assert.Equal("ERV-AUTHORED", assignment.VentilationSystemId);
+        Assert.False(string.IsNullOrWhiteSpace(assignment.VentilationSystemId));
         Assert.NotNull(assignment.VentilationSystem);
+        Assert.Equal(assignment.VentilationSystem!.Id.Value, assignment.VentilationSystemId);
         Assert.Equal("Authored ERV", assignment.VentilationSystem!.Name);
     }
 

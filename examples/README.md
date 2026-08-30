@@ -14,7 +14,7 @@ Surface Breps and window curves that can be referenced directly from Grasshopper
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
 | `12-simpledragon-two-zone-model.gh` | Complex two-Zone model authoring: Fenestration Construction -> Opening -> local Surface, six Surfaces -> each Zone, west heat-pump/AHU, east boiler/radiator, dedicated ERVs, PV, then one complete GRM with JSON, provenance, and area previews |
 | `13-simpledragon-results-and-plots.gh` | Real GRR read, annual summary, monthly DataTree, line plot, bar plot, and non-writing CSV preview |
-| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: explicit Surface ownership, dedicated electric radiators and ERVs connect to their own Zones, the complete model feeds `Run SimpleDragon` directly, and GRR feeds a zero-configuration monthly graph, summaries, and CSV; a typed Batch Case feeds managed batch without parallel model/ID lists |
+| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: explicit Surface ownership, dedicated electric radiators and ERVs connect to their own Zones, the complete model feeds `Run SimpleDragon` directly, and GRR feeds a zero-configuration monthly graph, summaries, and CSV; a typed Batch Case feeds managed batch with its identity derived internally |
 | `30-two-zone-office.3dm` | Twelve named planar Surface Breps forming two adjacent office Zones, plus two named south-window curves |
 | `31-three-zone-stepped-office.3dm` | Eighteen named planar Surface Breps forming two adjacent ground-floor Zones and an adjacent upper Zone, plus three named windows |
 
@@ -46,6 +46,13 @@ simple electric-radiator HVAC keeps this full-process execution example stable;
 use example 12 for the broader HVAC/ERV/PV composition demonstration. No EnergyPlus,
 IDD, EPW, runtime-root, or temporary-directory path belongs on this canonical
 SimpleDragon canvas.
+
+Neither Dragon authoring graph asks for entity or relationship IDs. The modules
+derive them deterministically from the authored content, while typed wires carry
+Opening, Surface, Zone, HVAC, ERV, PV, and model relationships. Example 14 also
+derives its CSV and batch case identities from the connected GRM.
+Component labels such as `ID Model` use `ID` as the InvisibleDragon prefix, not
+as an identifier port.
 
 `13-simpledragon-results-and-plots.gh` keeps both paths relative to the saved
 Grasshopper document:
@@ -145,7 +152,8 @@ successful simulation.
   the complete managed simulation without exposing its internal IDF or Weather.
 - Use Read GRM with `fixtures\simple-dragon\grm\ASHRAE 140 modified.grm`, then
   connect the typed model directly to `Run SimpleDragon` to simulate an existing model.
-- Wrap each model and its optional stable ID in a SimpleDragon Batch Case, feed
+- Wrap each model in a SimpleDragon Batch Case; its deterministic case identity
+  is derived from the GRM. Feed
   the Cases list into Managed Run SimpleDragon Batch, set a parallel limit, and
   use only the Run/Cancel triggers. Runtime, weather, case temp, and result
   storage paths are managed internally.

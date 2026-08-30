@@ -64,12 +64,17 @@ Curve -> ID Window / Door -> ID Surface -> ID Zone <- Profile / HVAC / ERV
                                                         EPW File -> ID Weather -----------+
 ```
 
-No Zone/Face indices, parent-level construction fallback, assignment pass,
+In these component labels, `ID` abbreviates InvisibleDragon; it is not an
+identifier port.
+
+No entity-ID or Zone/Face-index input, parent-level construction fallback, assignment pass,
 EnergyPlus/IDD path, runtime root, or temporary-work input is required.
 Openings and opaque constructions belong to `SD Surface`; a Zone receives only
 its completed Surfaces and Zone-level values. Coincident, opposite-facing
 Surfaces with `Outdoors` intent are paired as inter-zone boundaries when either
-model is composed, so no adjacent-surface ID is typed.
+model is composed. Both Dragon modules create their deterministic relationship
+IDs internally; users express ownership by wiring typed objects rather than
+typing identifiers.
 SimpleDragon's direct runner performs weather selection, conversion, IDF
 generation, EnergyPlus execution, and GRR construction internally; no
 EPW path or InvisibleDragon execution type appears on the SimpleDragon canvas.

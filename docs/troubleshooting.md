@@ -73,7 +73,7 @@ arbitrary assignment.
 
 ## A model compiles but EnergyPlus reports severe errors
 
-Read the structured Diagnostics and Result outputs. Check source/supply compatibility, direct Zone HVAC ownership, duplicate explicit IDs, positive capacities and flows, schedule ranges, construction references, and the model address. A successful run removes its temporary working directory after parsing the result. A failed or cancelled run is retained below `%TEMP%\GonieGonie\Dragons\energyplus-runs` so its EnergyPlus output and logs can be inspected.
+Read the structured Diagnostics and Result outputs. Check source/supply compatibility, direct Zone HVAC ownership, indistinguishable duplicate authored objects, positive capacities and flows, schedule ranges, construction references, and the model address. Entity IDs are generated internally, so resolve a duplicate-identity diagnostic by making the relevant authored names, geometry, or connected definitions distinct. A successful run removes its temporary working directory after parsing the result. A failed or cancelled run is retained below `%TEMP%\GonieGonie\Dragons\energyplus-runs` so its EnergyPlus output and logs can be inspected.
 
 ## Cleaning local work
 

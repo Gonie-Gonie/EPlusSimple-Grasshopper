@@ -42,7 +42,6 @@ public sealed class ZoneComponent : DragonComponent
             "ERV",
             "Energy-recovery ventilators owned by this Zone.",
             GH_ParamAccess.list);
-        pManager.AddTextParameter("ID", "ID", "Optional stable zone identifier.", GH_ParamAccess.item, string.Empty);
         pManager[supplies].Optional = true;
         pManager[ventilators].Optional = true;
     }
@@ -69,7 +68,6 @@ public sealed class ZoneComponent : DragonComponent
         double outdoorAirFlow = 0;
         var supplyGoos = new List<DragonSupplySystemGoo>();
         var ventilatorGoos = new List<DragonEnergyRecoveryVentilatorGoo>();
-        string id = string.Empty;
         if (!DA.GetData(0, ref name)
             || !DA.GetDataList(1, surfaceGoos)
             || !DA.GetData(2, ref profileGoo)
@@ -82,7 +80,6 @@ public sealed class ZoneComponent : DragonComponent
 
         DA.GetDataList(6, supplyGoos);
         DA.GetDataList(7, ventilatorGoos);
-        DA.GetData(8, ref id);
         ZoneProfile profile = profileGoo?.Value
             ?? throw new ArgumentException("Profile requires a non-empty value.");
         Surface[] surfaces = surfaceGoos.Select((goo, index) => goo?.Value
@@ -95,7 +92,7 @@ public sealed class ZoneComponent : DragonComponent
             ?? throw new ArgumentException("ERVs contains an empty value at position " + index + "."))
             .ToArray();
         var zone = new Zone(
-            StableIds.Resolve(id, "zone", name, string.Join("|", surfaces.Select(item => item.Id.Value))),
+            StableIds.Create("zone", name, string.Join("|", surfaces.Select(item => item.Id.Value))),
             name,
             surfaces,
             profile,

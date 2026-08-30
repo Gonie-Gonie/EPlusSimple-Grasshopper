@@ -37,7 +37,6 @@ public sealed class CompositionComponentContractTests
                 "Boundary Intent",
                 "Openings",
                 "Cool Roof Reflectance",
-                "ID",
             },
             surface.Params.Input.Select(parameter => parameter.Name));
         Assert.Equal(
@@ -51,7 +50,6 @@ public sealed class CompositionComponentContractTests
                 "HVAC",
                 "ERVs",
                 "Lighting Power Density",
-                "ID",
             },
             zone.Params.Input.Select(parameter => parameter.Name));
         Assert.Equal("SimpleDragonFenestrationConstructionParam", opening.Params.Input[3].GetType().Name);

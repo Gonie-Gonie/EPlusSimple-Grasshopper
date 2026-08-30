@@ -22,7 +22,6 @@ public sealed class SimpleDragonEnergyRecoveryVentilatorComponent : SimpleDragon
         pManager.AddNumberParameter("Airflow", "Flow", "Design supply airflow rate in m³/s (> 0).", GH_ParamAccess.item, 0.2d);
         pManager.AddNumberParameter("Heating Efficiency", "HEff", "Sensible heating-recovery efficiency fraction in (0, 1).", GH_ParamAccess.item, 0.7d);
         pManager.AddNumberParameter("Cooling Efficiency", "CEff", "Cooling-recovery efficiency fraction in (0, 1).", GH_ParamAccess.item, 0.45d);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
         int count = pManager.AddIntegerParameter(
             "Count",
             "Count",
@@ -49,7 +48,6 @@ public sealed class SimpleDragonEnergyRecoveryVentilatorComponent : SimpleDragon
         double airflow = 0.2d;
         double heatingEfficiency = 0.7d;
         double coolingEfficiency = 0.45d;
-        string id = string.Empty;
         int count = 1;
         if (!DA.GetData(0, ref name)
             || !DA.GetData(1, ref airflow)
@@ -59,8 +57,7 @@ public sealed class SimpleDragonEnergyRecoveryVentilatorComponent : SimpleDragon
             return;
         }
 
-        DA.GetData(4, ref id);
-        DA.GetData(5, ref count);
+        DA.GetData(4, ref count);
         Author(
             DA,
             1,
@@ -72,8 +69,7 @@ public sealed class SimpleDragonEnergyRecoveryVentilatorComponent : SimpleDragon
                     name,
                     airflow,
                     heatingEfficiency,
-                    coolingEfficiency,
-                    OptionalId(id));
+                    coolingEfficiency);
                 var ownedErv = new VentilationAssignment(ventilator.Id.Value, count, ventilator);
                 DA.SetData(0, new SimpleDragonZoneErvGoo(ownedErv));
             });
@@ -99,7 +95,6 @@ public sealed class SimpleDragonPhotovoltaicPanelComponent : SimpleDragonHvacCom
         pManager.AddNumberParameter("Efficiency", "Eff", "Conversion efficiency fraction in (0, 1].", GH_ParamAccess.item, 0.2d);
         pManager.AddNumberParameter("Azimuth", "Az", "Clockwise azimuth from north in degrees [0, 360).", GH_ParamAccess.item, 180d);
         pManager.AddNumberParameter("Tilt", "Tilt", "Tilt above horizontal in degrees [0, 90].", GH_ParamAccess.item, 30d);
-        pManager.AddTextParameter("ID", "ID", "Optional stable ID; leave empty for a deterministic content-derived ID.", GH_ParamAccess.item, string.Empty);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -115,7 +110,6 @@ public sealed class SimpleDragonPhotovoltaicPanelComponent : SimpleDragonHvacCom
         double efficiency = 0.2d;
         double azimuth = 180d;
         double tilt = 30d;
-        string id = string.Empty;
         if (!DA.GetData(0, ref name)
             || !DA.GetData(1, ref area)
             || !DA.GetData(2, ref efficiency)
@@ -125,7 +119,6 @@ public sealed class SimpleDragonPhotovoltaicPanelComponent : SimpleDragonHvacCom
             return;
         }
 
-        DA.GetData(5, ref id);
         Author(
             DA,
             1,
@@ -138,8 +131,7 @@ public sealed class SimpleDragonPhotovoltaicPanelComponent : SimpleDragonHvacCom
                     area,
                     efficiency,
                     azimuth,
-                    tilt,
-                    OptionalId(id));
+                    tilt);
                 DA.SetData(0, new SimpleDragonPhotovoltaicPanelGoo(panel));
             });
     }
