@@ -30,27 +30,29 @@ Boolean/numeric results, outward envelope winding, solve, save, reopen, and
 round trip. Hosts run from a disposable system-temp directory outside the
 repository, and the result example proves that saved-document-relative file
 paths do not depend on the host process working directory.
-The SimpleDragon two-zone examples use one Brep and opening parameter per local
-Zone cluster. Fenestration Construction feeds Opening only; each completed
-Opening and each Zone-exclusive HVAC/ERV value feeds exactly one Zone. Zone
-definitions feed Model, and Model feeds the path-free Prepare component.
+The SimpleDragon two-Zone examples use one named single-face Brep parameter per
+Surface. Fenestration Construction feeds Opening only; each completed Opening
+feeds exactly one Surface, each completed Surface feeds exactly one Zone, and
+each Zone-exclusive HVAC/ERV value feeds exactly one Zone. Zone definitions feed
+Model, and Model feeds the path-free Prepare component.
 The standalone InvisibleDragon example follows the same rule: Window feeds its
 owning Surface, Surface/HVAC/ERV feed Zone, and only Zone plus model-level PV
 feed Model. The gate rejects any relationship-index or assignment-stage graph.
-Example 12 is the complex composition/IDF authoring case with a west-Zone
-heat-pump/AHU, east-Zone boiler/radiator, dedicated ERVs, and PV. Example 14 uses
-dedicated direct-Zone electric radiators and ERVs as
+Example 12 is the complex composition/IDF authoring case with explicit Surface
+type, construction, boundary, and opening ownership, a west-Zone heat-pump/AHU,
+east-Zone boiler/radiator, dedicated ERVs, and PV. Example 14 uses dedicated
+electric radiators and ERVs on the same Surface-to-Zone structure as
 the stable execution case and connects Prepare's typed IDF and verified Weather
 outputs directly to the managed InvisibleDragon runner before
 Result-to-GRR-to-CSV. Every persisted
 execution, cancellation, overwrite, and export trigger remains false. Runtime,
 IDD, weather-cache, and run-temp paths are implementation-owned and never appear
 on the canonical canvas or in its manifest description.
-Building-model checks cover metre units, layers, object names and user strings,
-closed solid zone Breps, exact bounds, expected adjacency pairs, and closed
-planar window curves. The two-zone graphs aggregate and validate all of their
-separate internalized Brep and Curve parameters against
-`30-two-zone-office.3dm`.
+Building-model checks cover metre units, layers, object names and ownership user
+strings, planar single-face Surface Breps, exact bounds and outward normals,
+expected adjacency pairs, and closed planar window curves. The two-Zone graphs
+aggregate and validate all separate internalized Surface Brep and Curve
+parameters against `30-two-zone-office.3dm` without face-index selectors.
 
 Use `-Target Rhino7` or `-Target Rhino8` for a single validation host. Generation
 requires the default `-Target All`: Rhino 7 writes every canonical binary, then

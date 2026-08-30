@@ -391,29 +391,27 @@ internal static class AdvancedExampleDefinitions
         bool includeRuntimeWorkflow)
     {
         var graph = new ScenarioGraphBuilder(server, instancePrefix);
-        Brep[] zoneGeometry = ExampleBuildingModels.CreateZoneBreps(TwoZoneModel);
+        ExampleSurfaceGeometry[] surfaceGeometry = ExampleBuildingModels.CreateSurfaceBreps(TwoZoneModel);
         Curve[] openingGeometry = ExampleBuildingModels.CreateOpeningCurves(TwoZoneModel);
-        Require(zoneGeometry.Length == 2, TwoZoneModel + " must provide exactly two Zone Breps.");
+        Require(surfaceGeometry.Length == 12, TwoZoneModel + " must provide exactly twelve Zone-owned Surface Breps.");
         Require(openingGeometry.Length == 2, TwoZoneModel + " must provide exactly two opening curves.");
         GraphNode modelInfo = graph.Panel(
             1,
             "Rhino source model",
-            "Open 30-two-zone-office.3dm; relink each named Brep and window to its matching local Zone cluster.",
+            "Open 30-two-zone-office.3dm; relink each named face Brep and window to its matching local Surface cluster.",
             40,
             40);
-        GraphNode westBrep = graph.Breps(2, "ZONE_01_WEST", new[] { zoneGeometry[0] }, 60, 180);
-        GraphNode eastBrep = graph.Breps(3, "ZONE_02_EAST", new[] { zoneGeometry[1] }, 60, 650);
-        GraphNode westCurve = graph.Curves(4, "WINDOW_ZONE_01_SOUTH", new[] { openingGeometry[0] }, 60, 330);
-        GraphNode eastCurve = graph.Curves(5, "WINDOW_ZONE_02_SOUTH", new[] { openingGeometry[1] }, 60, 800);
-        GraphNode profileName = graph.Panel(6, "Packaged office profile", "\uC18C\uADDC\uBAA8\uC0AC\uBB34\uC2E4", 330, 40);
-        GraphNode profile = graph.Component(7, Catalog.SimpleProfile, 620, 40);
+        GraphNode westCurve = graph.Curves(4, "WINDOW_ZONE_01_SOUTH", new[] { openingGeometry[0] }, 60, 760);
+        GraphNode eastCurve = graph.Curves(5, "WINDOW_ZONE_02_SOUTH", new[] { openingGeometry[1] }, 60, 1930);
+        GraphNode profileName = graph.Panel(6, "Packaged office profile", "\uC18C\uADDC\uBAA8\uC0AC\uBB34\uC2E4", 780, 40);
+        GraphNode profile = graph.Component(7, Catalog.SimpleProfile, 1080, 40);
         GraphNode material = graph.Component(8, Catalog.SimpleMaterial, 330, 120);
         GraphNode thickness = graph.Slider(9, "Envelope 0.200 m", 0.2m, 0.01m, 0.5m, 350, 290);
         GraphNode layer = graph.Component(14, Catalog.SimpleLayer, 620, 160);
-        GraphNode construction = graph.Component(10, Catalog.SimpleConstruction, 900, 160);
+        GraphNode construction = graph.Component(10, Catalog.SimpleConstruction, 730, 160);
         GraphNode fenestration = graph.Component(11, Catalog.SimpleFenestration, 620, 360);
-        GraphNode westOpening = graph.Component(12, Catalog.SimpleOpening, 410, 430);
-        GraphNode eastOpening = graph.Component(13, Catalog.SimpleOpening, 410, 900);
+        GraphNode westOpening = graph.Component(12, Catalog.SimpleOpening, 730, 750);
+        GraphNode eastOpening = graph.Component(13, Catalog.SimpleOpening, 730, 1920);
         graph.Connect(profileName, null, profile, 0);
         graph.Connect(material, 0, layer, 0);
         graph.Connect(thickness, null, layer, 1);
@@ -423,57 +421,82 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(fenestration, 0, westOpening, 3);
         graph.Connect(fenestration, 0, eastOpening, 3);
 
+        (GraphNode[] westSurfaces, GraphNode[] westFaceParameters) = BuildSimpleSurfaceCluster(
+            graph,
+            surfaceGeometry,
+            "ZONE_01_WEST",
+            construction,
+            westOpening,
+            keyBase: 200,
+            yStart: 390);
+        (GraphNode[] eastSurfaces, GraphNode[] eastFaceParameters) = BuildSimpleSurfaceCluster(
+            graph,
+            surfaceGeometry,
+            "ZONE_02_EAST",
+            construction,
+            eastOpening,
+            keyBase: 300,
+            yStart: 1560);
+
         GraphNode westHvac;
         GraphNode eastHvac;
-        GraphNode westVentilator = graph.Component(25, Catalog.SimpleErv, 1080, 520);
-        GraphNode eastVentilator = graph.Component(26, Catalog.SimpleErv, 1080, 990);
+        GraphNode westVentilator = graph.Component(25, Catalog.SimpleErv, 1080, 1460);
+        GraphNode eastVentilator = graph.Component(26, Catalog.SimpleErv, 1080, 2630);
         GraphNode? photovoltaic = null;
         if (!includeRuntimeWorkflow)
         {
-            GraphNode heatPump = graph.Component(20, Catalog.SimpleHeatPump, 820, 160);
-            westHvac = graph.Component(21, Catalog.SimpleAirHandler, 1080, 160);
-            GraphNode boiler = graph.Component(22, Catalog.SimpleBoiler, 820, 690);
-            eastHvac = graph.Component(23, Catalog.SimpleRadiator, 1080, 690);
-            photovoltaic = graph.Component(27, Catalog.SimplePv, 1460, 1030);
+            GraphNode heatPump = graph.Component(20, Catalog.SimpleHeatPump, 680, 1260);
+            westHvac = graph.Component(21, Catalog.SimpleAirHandler, 1080, 1360);
+            GraphNode boiler = graph.Component(22, Catalog.SimpleBoiler, 680, 2430);
+            eastHvac = graph.Component(23, Catalog.SimpleRadiator, 1080, 2530);
+            photovoltaic = graph.Component(27, Catalog.SimplePv, 1470, 2600);
             graph.Connect(heatPump, 0, westHvac, 1);
             graph.Connect(boiler, 0, eastHvac, 1);
         }
         else
         {
-            westHvac = graph.Component(21, Catalog.SimpleElectricRadiator, 1080, 160);
-            eastHvac = graph.Component(23, Catalog.SimpleElectricRadiator, 1080, 690);
+            westHvac = graph.Component(21, Catalog.SimpleElectricRadiator, 1080, 1360);
+            eastHvac = graph.Component(23, Catalog.SimpleElectricRadiator, 1080, 2530);
         }
 
-        GraphNode westHvacName = graph.Panel(15, "West Zone HVAC", "West Zone HVAC", 820, 300);
-        GraphNode eastHvacName = graph.Panel(16, "East Zone HVAC", "East Zone HVAC", 820, 830);
-        GraphNode westErvName = graph.Panel(17, "West Zone ERV", "West Zone ERV", 820, 500);
-        GraphNode eastErvName = graph.Panel(18, "East Zone ERV", "East Zone ERV", 820, 1030);
+        GraphNode westHvacName = graph.Panel(15, "West Zone HVAC", "West Zone HVAC", 780, 1360);
+        GraphNode eastHvacName = graph.Panel(16, "East Zone HVAC", "East Zone HVAC", 780, 2530);
+        GraphNode westErvName = graph.Panel(17, "West Zone ERV", "West Zone ERV", 780, 1460);
+        GraphNode eastErvName = graph.Panel(18, "East Zone ERV", "East Zone ERV", 780, 2630);
         graph.Connect(westHvacName, null, westHvac, 0);
         graph.Connect(eastHvacName, null, eastHvac, 0);
         graph.Connect(westErvName, null, westVentilator, 0);
         graph.Connect(eastErvName, null, eastVentilator, 0);
 
-        GraphNode westZone = graph.Component(30, Catalog.SimpleZone, 1390, 250);
-        GraphNode eastZone = graph.Component(31, Catalog.SimpleZone, 1390, 720);
-        foreach ((GraphNode brep, GraphNode opening, GraphNode zone) in new[]
+        GraphNode westZone = graph.Component(30, Catalog.SimpleZone, 1280, 820);
+        GraphNode eastZone = graph.Component(31, Catalog.SimpleZone, 1280, 1990);
+        GraphNode westZoneName = graph.Panel(180, "West Zone name", "West Office Zone", 990, 780);
+        GraphNode eastZoneName = graph.Panel(181, "East Zone name", "East Office Zone", 990, 1950);
+        GraphNode westHeight = graph.Slider(182, "West Zone height 3.200 m", 3.2m, 0.1m, 20m, 990, 860);
+        GraphNode eastHeight = graph.Slider(183, "East Zone height 3.200 m", 3.2m, 0.1m, 20m, 990, 2030);
+        foreach (GraphNode surface in westSurfaces)
         {
-            (westBrep, westOpening, westZone),
-            (eastBrep, eastOpening, eastZone),
-        })
-        {
-            graph.Connect(brep, null, zone, 0);
-            graph.Connect(profile, 0, zone, 3);
-            graph.Connect(construction, 0, zone, 4);
-            graph.Connect(opening, 0, zone, 5);
+            graph.Connect(surface, 0, westZone, 0);
         }
 
-        graph.Connect(westHvac, 0, westZone, 6);
-        graph.Connect(eastHvac, 0, eastZone, 6);
-        graph.Connect(westVentilator, 0, westZone, 7);
-        graph.Connect(eastVentilator, 0, eastZone, 7);
+        foreach (GraphNode surface in eastSurfaces)
+        {
+            graph.Connect(surface, 0, eastZone, 0);
+        }
 
-        GraphNode modelName = graph.Panel(28, "Model name", "Two-Zone Office", 1460, 120);
-        GraphNode model = graph.Component(32, Catalog.SimpleModel, 1770, 500);
+        graph.Connect(westZoneName, null, westZone, 1);
+        graph.Connect(eastZoneName, null, eastZone, 1);
+        graph.Connect(westHeight, null, westZone, 3);
+        graph.Connect(eastHeight, null, eastZone, 3);
+        graph.Connect(profile, 0, westZone, 4);
+        graph.Connect(profile, 0, eastZone, 4);
+        graph.Connect(westHvac, 0, westZone, 5);
+        graph.Connect(eastHvac, 0, eastZone, 5);
+        graph.Connect(westVentilator, 0, westZone, 6);
+        graph.Connect(eastVentilator, 0, eastZone, 6);
+
+        GraphNode modelName = graph.Panel(28, "Model name", "Two-Zone Office", 1470, 1320);
+        GraphNode model = graph.Component(32, Catalog.SimpleModel, 1770, 1410);
         graph.Connect(modelName, null, model, 0);
         graph.Connect(westZone, 0, model, 1);
         graph.Connect(eastZone, 0, model, 1);
@@ -495,6 +518,14 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(prepare, 3, success, null);
         graph.ExpectOutput(westOpening, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
         graph.ExpectOutput(eastOpening, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
+        foreach (GraphNode surface in westSurfaces.Concat(eastSurfaces))
+        {
+            graph.ExpectOutput(
+                surface,
+                0,
+                1,
+                "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceDefinitionGoo");
+        }
         graph.ExpectOutput(
             layer,
             0,
@@ -624,9 +655,78 @@ internal static class AdvancedExampleDefinitions
             "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo",
             new LinkedModelExpectation(
                 TwoZoneModel,
-                new[] { westBrep.InstanceGuid, eastBrep.InstanceGuid },
+                westFaceParameters.Concat(eastFaceParameters).Select(item => item.InstanceGuid).ToArray(),
                 new[] { westCurve.InstanceGuid, eastCurve.InstanceGuid }),
             runtimeWorkflow: runtimeWorkflow);
+    }
+
+    private static (GraphNode[] Surfaces, GraphNode[] FaceParameters) BuildSimpleSurfaceCluster(
+        ScenarioGraphBuilder graph,
+        IReadOnlyList<ExampleSurfaceGeometry> allGeometry,
+        string zoneName,
+        GraphNode construction,
+        GraphNode opening,
+        int keyBase,
+        float yStart)
+    {
+        ExampleSurfaceGeometry[] definitions = allGeometry
+            .Where(item => string.Equals(item.ZoneName, zoneName, StringComparison.Ordinal))
+            .ToArray();
+        Require(definitions.Length == 6, zoneName + " must provide exactly six named Surface Breps.");
+        var surfaces = new GraphNode[definitions.Length];
+        var faceParameters = new GraphNode[definitions.Length];
+        int openingConnections = 0;
+        for (int index = 0; index < definitions.Length; index++)
+        {
+            ExampleSurfaceGeometry definition = definitions[index];
+            int key = keyBase + (index * 5);
+            float y = yStart + (index * 180);
+            GraphNode face = graph.Breps(key, definition.Name, new[] { definition.Geometry }, 60, y);
+            GraphNode name = graph.Panel(key + 1, definition.Name + " name", definition.Name, 270, y);
+            GraphNode type = graph.Integers(
+                key + 2,
+                definition.Name + " type: " + definition.Type,
+                new[] { (int)definition.Type },
+                270,
+                y + 60);
+            GraphNode boundary = graph.Integers(
+                key + 3,
+                definition.Name + " boundary",
+                new[] { SimpleBoundaryValue(definition.BoundaryIntent) },
+                430,
+                y + 60);
+            GraphNode surface = graph.Component(key + 4, Catalog.SimpleSurface, 930, y + 10);
+            graph.Connect(face, null, surface, 0);
+            graph.Connect(name, null, surface, 1);
+            graph.Connect(type, null, surface, 2);
+            graph.Connect(construction, 0, surface, 3);
+            graph.Connect(boundary, null, surface, 4);
+            if (definition.Name.EndsWith("_SOUTH", StringComparison.Ordinal))
+            {
+                graph.Connect(opening, 0, surface, 5);
+                openingConnections++;
+            }
+
+            faceParameters[index] = face;
+            surfaces[index] = surface;
+        }
+
+        Require(openingConnections == 1, zoneName + " opening must feed exactly one south Surface.");
+        return (surfaces, faceParameters);
+    }
+
+    private static int SimpleBoundaryValue(string boundaryIntent)
+    {
+        return boundaryIntent switch
+        {
+            "Outdoors" => 0,
+            "Ground" => 1,
+            "Adiabatic" => 3,
+            _ => throw new ArgumentOutOfRangeException(
+                nameof(boundaryIntent),
+                boundaryIntent,
+                "A SimpleDragon Surface example must use Outdoors, Ground, or Adiabatic."),
+        };
     }
 
     private static ScenarioGraph BuildSimpleResultsAndPlots(GH_ComponentServer server)
@@ -1007,7 +1107,8 @@ internal static class AdvancedExampleDefinitions
             }
 
             Require(
-                csvContents.Any(content => content.Contains("goniegonie-simpledragon-csv-export.v1")
+                csvContents.Any(content => content.Contains("goniegonie-simpledragon-csv-export.v2")
+                    && content.Contains("\"csv_schema\": \"2\"")
                     && content.Contains("two-zone-office")),
                 "The CSV package manifest does not identify its schema and case.");
             int summaryCsvIndex = Array.FindIndex(
@@ -2197,7 +2298,8 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity SimpleErv = S("15afd6e6-1c05-4715-909b-b6e98ef91375", "SimpleDragonEnergyRecoveryVentilatorComponent");
         internal static readonly ComponentIdentity SimplePv = S("7fcb5c47-3d49-4aa0-8fbc-bd765711401f", "SimpleDragonPhotovoltaicPanelComponent");
         internal static readonly ComponentIdentity SimpleOpening = S("7d41fd2c-b93f-4fc8-88ea-db1f3abeb2f1", "CreateSimpleDragonOpeningComponent");
-        internal static readonly ComponentIdentity SimpleZone = S("79b35a81-b6a2-43cf-8f9d-361a655b63d1", "CreateSimpleDragonZoneComponent");
+        internal static readonly ComponentIdentity SimpleSurface = S("039bf7bb-da65-49e2-80fe-86d636cf0a48", "CreateSimpleDragonSurfaceComponent");
+        internal static readonly ComponentIdentity SimpleZone = S("30b8e2c4-207a-4cf5-9801-ac4ae16d33e2", "CreateSimpleDragonZoneComponent");
         internal static readonly ComponentIdentity SimpleModel = S("ce38124b-f99b-4d09-be3b-e5e5717db707", "CreateSimpleDragonModelComponent");
         internal static readonly ComponentIdentity SimplePrepare = S("ca666fd7-788c-4682-8b04-fad8c7252fe0", "PrepareSimpleDragonSimulationComponent");
         internal static readonly ComponentIdentity SimpleBuildResult = S("2a9f3a4e-56f2-4227-8725-e8befe43cf53", "BuildGreenRetrofitResultComponent");
@@ -2218,7 +2320,7 @@ internal static class AdvancedExampleDefinitions
             InvisibleManagedRun, InvisibleResultSummary,
             SimpleMaterial, SimpleLayer, SimpleConstruction, SimpleFenestration, SimpleProfile, SimpleHeatPump,
             SimpleAirHandler, SimpleBoiler, SimpleRadiator, SimpleElectricRadiator, SimpleChiller, SimpleFanCoil, SimpleErv,
-            SimplePv, SimpleOpening, SimpleZone, SimpleModel, SimplePrepare,
+            SimplePv, SimpleOpening, SimpleSurface, SimpleZone, SimpleModel, SimplePrepare,
             SimpleBuildResult, SimpleReadResult, SimpleResultSummary, SimpleDataTree,
             SimpleLinePlot, SimpleBarPlot, SimpleExportCsv, SimpleBatchCase, SimpleManagedBatch,
         };
@@ -2368,6 +2470,7 @@ internal sealed class ScenarioGraphBuilder
         string parameterType = sourceParam.GetType().Name;
         bool exclusiveOwnershipWire = sourceParam.GetType() == targetParam.GetType()
             && (parameterType == "SimpleDragonOpeningDefinitionParam"
+                || parameterType == "SimpleDragonSurfaceDefinitionParam"
                 || parameterType == "SimpleDragonSupplySystemParam"
                 || parameterType == "SimpleDragonZoneErvParam");
         if (exclusiveOwnershipWire
@@ -2379,7 +2482,7 @@ internal sealed class ScenarioGraphBuilder
                     StringComparison.Ordinal)))
         {
             throw new InvalidOperationException(
-                sourceParam.Name + " is Zone-owned and cannot be wired to more than one owning input.");
+                sourceParam.Name + " is child-owned and cannot be wired to more than one owning input.");
         }
 
         targetParam.AddSource(sourceParam);

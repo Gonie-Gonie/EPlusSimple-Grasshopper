@@ -107,7 +107,7 @@ public sealed class GrasshopperAssemblyTests
             .OrderBy(name => name, StringComparer.Ordinal)
             .ToArray();
 
-        Assert.Equal(16, parameterTypes.Length);
+        Assert.Equal(17, parameterTypes.Length);
         Assert.Equal(parameterTypes.Length, resources.Length);
         var resourceHashes = new HashSet<string>(StringComparer.Ordinal);
         var runtimeHashes = new HashSet<string>(StringComparer.Ordinal);
@@ -172,7 +172,7 @@ public sealed class GrasshopperAssemblyTests
             }
         }
 
-        Assert.Equal(35, count);
+        Assert.Equal(36, count);
     }
 
     private static void AssertTransparentBorder(Bitmap bitmap)
@@ -247,6 +247,7 @@ public sealed class GrasshopperAssemblyTests
             new SimpleDragonSurfaceParam().ComponentGuid,
             new SimpleDragonZoneParam().ComponentGuid,
             new SimpleDragonOpeningDefinitionParam().ComponentGuid,
+            new SimpleDragonSurfaceDefinitionParam().ComponentGuid,
             new SimpleDragonZoneDefinitionParam().ComponentGuid,
             new SimpleDragonSourceSystemParam().ComponentGuid,
             new SimpleDragonSupplySystemParam().ComponentGuid,

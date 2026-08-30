@@ -34,13 +34,23 @@ If access is still denied, verify that the current Windows profile can write to
 LocalAppData and the operating-system temp directory, reinstall the current
 packages, and include the diagnostic code in the report.
 
-## An opening has no host face
+## An opening has no host Surface
 
 Connect a Fenestration Construction to each `SD Opening`, then connect that
-completed Opening only to its owning `SD Zone`. Its curve must be a closed planar
-polygon lying on exactly one planar Brep face and contained by that face. A Brep
-inner loop also needs a geometrically matching explicit Opening; the Zone does
-not provide fallback opening metadata. No Zone Index or Face Index is required.
+completed Opening only to its owning `SD Surface`. Its curve must be a closed
+planar polygon coplanar with and contained by that Surface's single-face Brep.
+A trimmed inner loop also needs a geometrically matching explicit Opening; the
+Surface does not invent fallback opening metadata. No Zone Index or Face Index
+is required.
+
+## A Zone does not form a valid enclosure
+
+Connect the complete set of named `SD Surface` values to the Zone's Surfaces
+input. Every Surface must have one valid planar face, an explicit type and
+boundary intent, and compatible openings. Coincident opposite Surfaces with
+`Outdoors` intent in two different Zones are paired automatically; do not add
+adjacent-zone or face IDs.
+Also supply the Zone Height explicitly in metres.
 Coincident duplicate faces produce an ambiguity diagnostic instead of an
 arbitrary assignment.
 

@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:b0c61e0a167210bbd78e6e166295f3b16ec489a513381d7bf6b77ab0f9fcbb9f",
+            "sha256:c98ee90544ae6d7f0f68b755c880ab566a4283fecfc1c171378bf4124504067a",
             compatibility.matrix.content_sha256,
         )
         self.assertEqual(990, len(symbol_evidence.entries))
         self.assertEqual(990, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:e026066f4d14bb4903d38332e3eda9c40e2ea69f6eb76feba1ad22385069d9f6",
+            "sha256:3f7094e4ac8bb0be7652e6f6daee545c8c8113ab5325870f252707ab1cf7889e",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -2900,10 +2900,10 @@ class ConfigurationTests(unittest.TestCase):
             "MatchesPinnedModelResultThroughProductionPublicRoutes"
         )
         result_fixture_sha256 = (
-            "sha256:55d19ad2df41112fa0bb8bb1585f9e9822b68cfa4332c52b90e2aacbfd57c520"
+            "sha256:f988073b3a9b951f71009b42bd4423546f8f7a5aac61493714efc5d25aa067ed"
         )
         result_test_sha256 = (
-            "sha256:1cfc16db5802c21bafe6157b7c52b4fa490f66379ac7139223aecde9c45ebf02"
+            "sha256:c98b093757597f72846a9428a67c0e98c6257ff96ffb2063c8c2ea26be6e206e"
         )
         result_fixture_bytes = result_fixture_path.read_bytes()
         self.assertEqual(

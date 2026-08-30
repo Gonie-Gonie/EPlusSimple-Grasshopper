@@ -22,6 +22,7 @@ internal static class SimpleDragonGooSnapshot
         {
             SimpleDragonBatchCase batchCase => ("batch-case", ToJson(BatchCaseSnapshot.From(batchCase))),
             OpeningDefinition opening => ("opening-definition", ToJson(OpeningDefinitionSnapshot.From(opening))),
+            SurfaceDefinition surface => ("surface-definition", ToJson(SurfaceDefinitionSnapshot.From(surface))),
             ZoneDefinition zone => ("zone-definition", ToJson(ZoneDefinitionSnapshot.From(zone))),
             Material material => ("material", ToJson(MaterialSnapshot.From(material))),
             SurfaceConstructionLayer layer => ("surface-construction-layer", ToJson(SurfaceLayerSnapshot.From(layer))),
@@ -60,6 +61,7 @@ internal static class SimpleDragonGooSnapshot
         {
             "batch-case" => FromJson<BatchCaseSnapshot>(envelope.Payload).ToDomain(),
             "opening-definition" => FromJson<OpeningDefinitionSnapshot>(envelope.Payload).ToDomain(),
+            "surface-definition" => FromJson<SurfaceDefinitionSnapshot>(envelope.Payload).ToDomain(),
             "zone-definition" => FromJson<ZoneDefinitionSnapshot>(envelope.Payload).ToDomain(),
             "material" => FromJson<MaterialSnapshot>(envelope.Payload).ToDomain(),
             "surface-construction-layer" => FromJson<SurfaceLayerSnapshot>(envelope.Payload).ToDomain(),
@@ -620,62 +622,99 @@ internal static class SimpleDragonGooSnapshot
         }
     }
 
-    private sealed class ZoneDefinitionSnapshot
+    private sealed class SurfaceDefinitionSnapshot
     {
         public string GeometryArchive { get; set; } = string.Empty;
 
         public string Name { get; set; } = string.Empty;
 
+        public SurfaceType Type { get; set; }
+
+        public SurfaceBoundaryCondition BoundaryCondition { get; set; }
+
+        public SurfaceConstructionSnapshot? Construction { get; set; }
+
+        public List<OpeningDefinitionSnapshot> Openings { get; set; } = new();
+
+        public double? CoolRoofReflectance { get; set; }
+
+        public string? Id { get; set; }
+
+        public static SurfaceDefinitionSnapshot From(SurfaceDefinition value) => new()
+        {
+            GeometryArchive = Convert.ToBase64String(value.GeometryArchive),
+            Name = value.Name,
+            Type = value.Type,
+            BoundaryCondition = value.BoundaryCondition,
+            Construction = value.Construction is null
+                ? null
+                : SurfaceConstructionSnapshot.From(value.Construction),
+            Openings = value.Openings.Select(OpeningDefinitionSnapshot.From).ToList(),
+            CoolRoofReflectance = value.CoolRoofReflectance,
+            Id = value.Id?.Value,
+        };
+
+        public SurfaceDefinition ToDomain()
+        {
+            using Brep geometry = RhinoGeometryArchive.Decode<Brep>(
+                Convert.FromBase64String(GeometryArchive));
+            return new SurfaceDefinition(
+                geometry,
+                Name,
+                Type,
+                BoundaryCondition,
+                Construction?.ToDomain(),
+                Openings.Select(item => item.ToDomain()),
+                CoolRoofReflectance,
+                Id is null ? null : new EntityId(Id));
+        }
+    }
+
+    private sealed class ZoneDefinitionSnapshot
+    {
+        public string Name { get; set; } = string.Empty;
+
         public int FloorNumber { get; set; }
+
+        public double Height { get; set; }
+
+        public List<SurfaceDefinitionSnapshot> Surfaces { get; set; } = new();
 
         public UsageProfileSnapshot Profile { get; set; } = new();
 
-        public SurfaceConstructionSnapshot? SurfaceConstruction { get; set; }
-
-        public SurfaceBoundaryCondition UnmatchedFloorBoundary { get; set; }
-
         public double? LightDensity { get; set; }
-
-        public List<OpeningDefinitionSnapshot> Openings { get; set; } = new();
 
         public List<SupplySystemSnapshot> SupplySystems { get; set; } = new();
 
         public List<VentilationAssignmentSnapshot> VentilationAssignments { get; set; } = new();
 
+        public string? Id { get; set; }
+
         public static ZoneDefinitionSnapshot From(ZoneDefinition value) => new()
         {
-            GeometryArchive = Convert.ToBase64String(value.GeometryArchive),
             Name = value.Name,
             FloorNumber = value.FloorNumber,
+            Height = value.Height,
+            Surfaces = value.Surfaces.Select(SurfaceDefinitionSnapshot.From).ToList(),
             Profile = UsageProfileSnapshot.From(value.Profile),
-            SurfaceConstruction = value.SurfaceConstruction is null
-                ? null
-                : SurfaceConstructionSnapshot.From(value.SurfaceConstruction),
-            UnmatchedFloorBoundary = value.UnmatchedFloorBoundary,
             LightDensity = value.LightDensity,
-            Openings = value.Openings.Select(OpeningDefinitionSnapshot.From).ToList(),
             SupplySystems = value.SupplySystems.Select(SupplySystemSnapshot.From).ToList(),
             VentilationAssignments = value.VentilationAssignments
                 .Select(VentilationAssignmentSnapshot.From)
                 .ToList(),
+            Id = value.Id?.Value,
         };
 
-        public ZoneDefinition ToDomain()
-        {
-            using Brep geometry = RhinoGeometryArchive.Decode<Brep>(
-                Convert.FromBase64String(GeometryArchive));
-            return new ZoneDefinition(
-                geometry,
-                Name,
-                FloorNumber,
-                Profile.ToDomain(),
-                SurfaceConstruction?.ToDomain(),
-                UnmatchedFloorBoundary,
-                LightDensity,
-                Openings.Select(item => item.ToDomain()),
-                SupplySystems.Select(item => item.ToDomain()),
-                VentilationAssignments.Select(item => item.ToDomain()));
-        }
+        public ZoneDefinition ToDomain() => new(
+            Name,
+            FloorNumber,
+            Height,
+            Surfaces.Select(item => item.ToDomain()),
+            Profile.ToDomain(),
+            LightDensity,
+            SupplySystems.Select(item => item.ToDomain()),
+            VentilationAssignments.Select(item => item.ToDomain()),
+            Id is null ? null : new EntityId(Id));
     }
 
     private sealed class ZoneSnapshot

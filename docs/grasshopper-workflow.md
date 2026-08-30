@@ -13,30 +13,45 @@
 Build each object where its ownership is visible in the wires:
 
 ```text
-Opening Curve + Fenestration Construction -> SD Opening -> West SD Zone <- West Brep / Profile / HVAC / ERV --+
-Opening Curve + Fenestration Construction -> SD Opening -> East SD Zone <- East Brep / Profile / HVAC / ERV --+-> SD Model (Address)
-                                                                                                                   |
-                                                                                                                   v
-                                                                                                               SD to IDF
-                                                                                                            IDF + Weather
-                                                                                                                   |
-                                                                                                                   v
-                                                                                                          Run InvisibleDragon
-                                                                                                                   |
-                                                                                                                   v
-                                                                                                     Result / GRR / Plot / CSV
+Opening Curve + Fenestration Construction -> SD Opening -> West SD Surface <- Face / Type / Construction / Boundary
+                                                              |
+                                                              +-> West SD Zone <- Height / Profile / HVAC / ERV --+
+
+Opening Curve + Fenestration Construction -> SD Opening -> East SD Surface <- Face / Type / Construction / Boundary
+                                                              |
+                                                              +-> East SD Zone <- Height / Profile / HVAC / ERV --+-> SD Model (Address)
+                                                                                                                       |
+                                                                                                                       v
+                                                                                                                   SD to IDF
+                                                                                                                IDF + Weather
+                                                                                                                       |
+                                                                                                                       v
+                                                                                                              Run InvisibleDragon
+                                                                                                                       |
+                                                                                                                       v
+                                                                                                         Result / GRR / Plot / CSV
 ```
 
 `SD Opening` has no Zone Index or Face Index. Its Construction input is required
-and belongs to the Opening; a Zone never receives that construction again.
-Connect the completed Opening only to the `SD Zone` that owns it, and the host
-face is inferred from coplanarity and containment. A Brep inner loop must have a
-matching explicit Opening rather than inheriting guessed metadata. Connect each
-Zone-owned supply system and `SD ERV` only to that Zone. Set the ERV's Count input
-when a Zone has multiple identical units; no intermediate assignment component
-is involved.
+and belongs to the Opening. Connect that completed Opening only to its owning
+`SD Surface`. Each Surface owns one planar single-face Brep, its Wall/Ceiling/Floor
+type, opaque Construction, Boundary Intent, Openings, and optional cool-roof
+reflectance. The opening curve must be coplanar with and contained by that face;
+a trimmed inner loop needs a matching explicit Opening rather than guessed
+metadata.
 
-`SD Model` resolves every Zone together, so shared Brep faces still become inter-zone adjacency. It also derives the material, construction, supply, source, and ventilation catalogs from the connected objects. Those catalogs do not need parallel wires into a later assembly component.
+Connect the completed Surfaces of one closed thermal enclosure to `SD Zone`.
+The Zone owns only those Surfaces plus its Name, Floor Number, positive Height,
+Profile, lighting density, HVAC, and ERVs; it has no Brep, Construction,
+Boundary, or Opening input. Connect each Zone-owned supply system and `SD ERV`
+only to that Zone. Set the ERV's Count input when a Zone has multiple identical
+units; no intermediate assignment component is involved.
+
+`SD Model` resolves every Zone together. Coincident opposite Surfaces with
+`Outdoors` intent in different Zones are promoted to reciprocal Zone boundaries
+automatically. The Model also derives the material, construction,
+supply, source, and ventilation catalogs from the connected objects, so those
+catalogs need no parallel wires into a later assembly component.
 
 Build each opaque construction from `Construction Layer` values. Each layer owns
 its Material and Thickness, and the construction receives one ordered Layers
@@ -60,11 +75,12 @@ Curve + Construction + owned Openings -> ID Surface -> ID Zone <- Profile / HVAC
 ```
 
 Connect each Window or Door to its owning Surface, each Surface and system to
-its owning Zone, and only completed Zone definitions to the Model. Coincident
-surfaces in different Zones are paired automatically into reciprocal inter-zone
-boundaries. The Model derives HVAC assignments and nested sources from the Zone
-wires, so there are no Zone indices, adjacent-surface IDs, source catalogs, or
-assignment components on the canvas.
+its owning Zone, and only completed Zone definitions to the Model. Coincident,
+opposite-facing Surfaces with `Outdoors` intent in different Zones are paired
+automatically into reciprocal inter-zone boundaries. The Model derives HVAC
+assignments and nested sources from the Zone wires, so there are no Zone
+indices, adjacent-surface IDs, source catalogs, or assignment components on the
+canvas.
 
 Connect `ID Model -> Compile InvisibleDragon`.
 The compiler has only a typed Model input and resolves the managed EnergyPlus
@@ -100,7 +116,8 @@ CSV and reproducibility-manifest paths are outputs only.
 The tracked definitions under `examples/` progress from materials and profiles to linked Rhino geometry and a complete two-zone simulation. The principal authoring examples are:
 
 - `12-simpledragon-two-zone-to-idf.gh`: the complex authoring demonstration,
-  with two independently owned Zones, Openings, terminal systems, and ERVs;
+  with named face Breps composed as Surface-owned Openings, constructions, and
+  boundary intents, then two independently owned Zones, terminal systems, and ERVs;
   a heat-pump/AHU serves the west Zone, a boiler/radiator serves the east Zone,
   and PV is resolved with both into one GRM/IDF;
 - `14-simpledragon-two-zone-run-results-csv.gh`: the stable end-to-end gate,
@@ -117,4 +134,7 @@ Run `./dev.cmd examples` to solve and round-trip every `.gh` and `.3dm` example 
 
 ## Saving and reopening
 
-Dragon Goo stores deterministic, schema-versioned snapshots in the Grasshopper document. Opening and Zone definitions include their geometry and owned systems, and model/HVAC/weather/result values survive save and reopen.
+Dragon Goo stores deterministic, schema-versioned snapshots in the Grasshopper
+document. Opening and Surface definitions include their geometry; Zone
+snapshots include their owned Surface definitions and Zone-level values.
+Model, HVAC, weather, and result values also survive save and reopen.

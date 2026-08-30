@@ -11,7 +11,7 @@ namespace GonieGonie.SimpleDragon.Grasshopper.Tests;
 public sealed class AuthoringDefinitionGooTests
 {
     [Fact]
-    public void OpeningAndZoneDefinitionsDefensivelyOwnTheirGeometryAndItems()
+    public void OpeningSurfaceAndZoneDefinitionsDefensivelyOwnTheirGeometryAndItems()
     {
         RunWithNativeGeometry(() =>
         {
@@ -40,40 +40,52 @@ public sealed class AuthoringDefinitionGooTests
 
         Assert.NotSame(fenestration, opening.Construction);
 
-        UsageProfile profile = Profile();
         SurfaceConstruction surfaceConstruction = OpaqueConstruction();
-        SupplySystem supply = Supply();
-        VentilationSystem ventilator = Ventilator();
-        var assignment = new VentilationAssignment(ventilator.Id.Value, 2, ventilator);
-        using Brep zoneSource = ZoneBrep();
-        var zone = new ZoneDefinition(
-            zoneSource,
-            "Ground Floor",
-            1,
-            profile,
+        using Brep surfaceSource = SurfaceFace();
+        var surface = new SurfaceDefinition(
+            surfaceSource,
+            "South Wall",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Outdoors,
             surfaceConstruction,
-            SurfaceBoundaryCondition.Ground,
-            8.5d,
             new[] { opening },
-            new[] { supply },
-            new[] { assignment });
-        BoundingBox expectedZoneBounds = Bounds(zone.Geometry);
+            id: new EntityId("SURFACE-AUTHORING"));
+        BoundingBox expectedSurfaceBounds = Bounds(surface.Geometry);
 
-        Assert.True(zoneSource.Transform(Transform.Translation(200d, 0d, 0d)));
-        using (Brep firstRead = zone.Geometry)
+        Assert.True(surfaceSource.Transform(Transform.Translation(200d, 0d, 0d)));
+        using (Brep firstRead = surface.Geometry)
         {
-            Assert.Equal(expectedZoneBounds, firstRead.GetBoundingBox(true));
+            Assert.Equal(expectedSurfaceBounds, firstRead.GetBoundingBox(true));
             Assert.True(firstRead.Transform(Transform.Translation(0d, 200d, 0d)));
         }
 
-        using (Brep secondRead = zone.Geometry)
+        using (Brep secondRead = surface.Geometry)
         {
-            Assert.Equal(expectedZoneBounds, secondRead.GetBoundingBox(true));
+            Assert.Equal(expectedSurfaceBounds, secondRead.GetBoundingBox(true));
         }
 
+        Assert.NotSame(surfaceConstruction, surface.Construction);
+        Assert.NotSame(opening, surface.Openings[0]);
+
+        UsageProfile profile = Profile();
+        SupplySystem supply = Supply();
+        VentilationSystem ventilator = Ventilator();
+        var assignment = new VentilationAssignment(ventilator.Id.Value, 2, ventilator);
+        var zone = new ZoneDefinition(
+            "Ground Floor",
+            1,
+            3d,
+            new[] { surface },
+            profile,
+            8.5d,
+            new[] { supply },
+            new[] { assignment },
+            new EntityId("ZONE-AUTHORING"));
+
         Assert.NotSame(profile, zone.Profile);
-        Assert.NotSame(surfaceConstruction, zone.SurfaceConstruction);
-        Assert.NotSame(opening, zone.Openings[0]);
+        Assert.NotSame(surface, zone.Surfaces[0]);
+        Assert.NotSame(surface.Construction, zone.Surfaces[0].Construction);
+        Assert.NotSame(surface.Openings[0], zone.Surfaces[0].Openings[0]);
         Assert.NotSame(supply, zone.SupplySystems[0]);
         Assert.NotSame(assignment, zone.VentilationAssignments[0]);
         Assert.NotSame(ventilator, zone.VentilationAssignments[0].VentilationSystem);
@@ -86,6 +98,7 @@ public sealed class AuthoringDefinitionGooTests
         RunWithNativeGeometry(() =>
         {
         OpeningDefinition opening = Opening();
+        SurfaceDefinition surface = Surface(opening);
         ZoneDefinition zone = Zone(opening);
 
         var openingGoo = new SimpleDragonOpeningDefinitionGoo(opening);
@@ -95,6 +108,14 @@ public sealed class AuthoringDefinitionGooTests
             new SimpleDragonOpeningDefinitionGoo());
         AssertOpeningEquivalent(opening, openingDuplicate.Value);
         AssertOpeningEquivalent(opening, openingArchived.Value);
+
+        var surfaceGoo = new SimpleDragonSurfaceDefinitionGoo(surface);
+        var surfaceDuplicate = Assert.IsType<SimpleDragonSurfaceDefinitionGoo>(surfaceGoo.Duplicate());
+        SimpleDragonSurfaceDefinitionGoo surfaceArchived = ArchiveRoundTrip(
+            surfaceGoo,
+            new SimpleDragonSurfaceDefinitionGoo());
+        AssertSurfaceEquivalent(surface, surfaceDuplicate.Value);
+        AssertSurfaceEquivalent(surface, surfaceArchived.Value);
 
         var zoneGoo = new SimpleDragonZoneDefinitionGoo(zone);
         var zoneDuplicate = Assert.IsType<SimpleDragonZoneDefinitionGoo>(zoneGoo.Duplicate());
@@ -149,16 +170,18 @@ public sealed class AuthoringDefinitionGooTests
             FenestrationType.Window,
             TransparentConstruction()));
 
-        using var plane = new PlaneSurface(
-            Plane.WorldXY,
-            new Interval(0d, 1d),
-            new Interval(0d, 1d));
-        using Brep openBrep = Brep.CreateFromSurface(plane);
+        using Brep multiFaceBrep = ZoneBrep();
         Assert.Throws<ArgumentException>(() => new ZoneDefinition(
-            openBrep,
-            "Open Zone",
+            "Empty Zone",
             1,
+            3d,
+            Array.Empty<SurfaceDefinition>(),
             Profile()));
+        Assert.Throws<ArgumentException>(() => new SurfaceDefinition(
+            multiFaceBrep,
+            "Multiple Faces",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Outdoors));
 
         FenestrationConstruction opaque = new(
             "Opaque Door",
@@ -176,22 +199,60 @@ public sealed class AuthoringDefinitionGooTests
             FenestrationType.Window,
             opaque));
 
-        using Brep solid = ZoneBrep();
+        using Brep face = SurfaceFace();
+        var surface = new SurfaceDefinition(
+            face,
+            "South Wall",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Outdoors,
+            OpaqueConstruction(),
+            new[] { new OpeningDefinition(
+                closedCurve,
+                "Window",
+                FenestrationType.Window,
+                TransparentConstruction()) },
+            id: new EntityId("SURFACE-VALID"));
+        Assert.Throws<ArgumentOutOfRangeException>(() => new SurfaceDefinition(
+            face,
+            "Invalid Boundary",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.AdjacentSpace));
+        Assert.Throws<ArgumentException>(() => new SurfaceDefinition(
+            face,
+            "Ground With Opening",
+            SurfaceType.Floor,
+            SurfaceBoundaryCondition.Ground,
+            openings: surface.Openings));
+        Assert.Throws<ArgumentException>(() => new SurfaceDefinition(
+            face,
+            "Wall Reflectance",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Outdoors,
+            coolRoofReflectance: 0.7d));
+        Assert.Throws<ArgumentOutOfRangeException>(() => new SurfaceDefinition(
+            face,
+            "Invalid Reflectance",
+            SurfaceType.Ceiling,
+            SurfaceBoundaryCondition.Outdoors,
+            coolRoofReflectance: 1.1d));
+
         SupplySystem first = Supply("DUPLICATE-SUPPLY");
         SupplySystem second = Supply("DUPLICATE-SUPPLY");
         Assert.Throws<ArgumentException>(() => new ZoneDefinition(
-            solid,
             "Duplicate HVAC",
             1,
+            3d,
+            new[] { surface },
             Profile(),
             supplySystems: new[] { first, second }));
 
         Assert.Throws<ArgumentOutOfRangeException>(() => new ZoneDefinition(
-            solid,
-            "Invalid Floor Boundary",
+            "Invalid Height",
             1,
+            0d,
+            new[] { surface },
             Profile(),
-            unmatchedFloorBoundary: SurfaceBoundaryCondition.AdjacentSpace));
+            lightDensity: 10d));
         });
     }
 
@@ -201,13 +262,15 @@ public sealed class AuthoringDefinitionGooTests
         Type[] goos =
         {
             typeof(SimpleDragonOpeningDefinitionGoo),
+            typeof(SimpleDragonSurfaceDefinitionGoo),
             typeof(SimpleDragonZoneDefinitionGoo),
             typeof(SimpleDragonZoneErvGoo),
         };
         (Type Type, Guid Guid)[] parameters =
         {
             (typeof(SimpleDragonOpeningDefinitionParam), new Guid("51610fe9-ecf1-43b4-9157-7260b3ba89ad")),
-            (typeof(SimpleDragonZoneDefinitionParam), new Guid("3fe45962-67fe-43d4-be95-ad81b91b19eb")),
+            (typeof(SimpleDragonSurfaceDefinitionParam), new Guid("14feee1f-498c-478c-92ac-4bd0e9d256da")),
+            (typeof(SimpleDragonZoneDefinitionParam), new Guid("df2c89ba-56a7-48ea-83f2-ba58ac15f17f")),
             (typeof(SimpleDragonZoneErvParam), new Guid("14f1683e-4b0a-4754-aac5-6b85331c2126")),
         };
         Type[] exported = typeof(SimpleDragonOpeningDefinitionGoo).Assembly.GetExportedTypes();
@@ -236,28 +299,50 @@ public sealed class AuthoringDefinitionGooTests
         Assert.Equal(expectedGeometry.GetLength(), actualGeometry.GetLength(), 10);
     }
 
+    private static void AssertSurfaceEquivalent(SurfaceDefinition expected, SurfaceDefinition actual)
+    {
+        Assert.NotSame(expected, actual);
+        Assert.Equal(expected.Name, actual.Name);
+        Assert.Equal(expected.Type, actual.Type);
+        Assert.Equal(expected.BoundaryCondition, actual.BoundaryCondition);
+        Assert.Equal(expected.CoolRoofReflectance, actual.CoolRoofReflectance);
+        Assert.Equal(expected.Id, actual.Id);
+        Assert.Equal(expected.Construction?.Id, actual.Construction?.Id);
+        if (expected.Construction is not null)
+        {
+            Assert.NotSame(expected.Construction, actual.Construction);
+        }
+
+        Assert.Equal(expected.Openings.Count, actual.Openings.Count);
+        for (int index = 0; index < expected.Openings.Count; index++)
+        {
+            AssertOpeningEquivalent(expected.Openings[index], actual.Openings[index]);
+        }
+
+        using Brep expectedGeometry = expected.Geometry;
+        using Brep actualGeometry = actual.Geometry;
+        Assert.Equal(expectedGeometry.GetBoundingBox(true), actualGeometry.GetBoundingBox(true));
+        Assert.Equal(expectedGeometry.GetArea(), actualGeometry.GetArea(), 10);
+    }
+
     private static void AssertZoneEquivalent(ZoneDefinition expected, ZoneDefinition actual)
     {
         Assert.NotSame(expected, actual);
         Assert.Equal(expected.Name, actual.Name);
         Assert.Equal(expected.FloorNumber, actual.FloorNumber);
+        Assert.Equal(expected.Height, actual.Height);
         Assert.Equal(expected.Profile.Id, actual.Profile.Id);
-        Assert.Equal(expected.SurfaceConstruction!.Id, actual.SurfaceConstruction!.Id);
-        Assert.Equal(expected.UnmatchedFloorBoundary, actual.UnmatchedFloorBoundary);
         Assert.Equal(expected.LightDensity, actual.LightDensity);
-        Assert.Single(actual.Openings);
+        Assert.Equal(expected.Id, actual.Id);
+        Assert.Single(actual.Surfaces);
         Assert.Single(actual.SupplySystems);
         Assert.Single(actual.VentilationAssignments);
-        AssertOpeningEquivalent(expected.Openings[0], actual.Openings[0]);
+        AssertSurfaceEquivalent(expected.Surfaces[0], actual.Surfaces[0]);
         Assert.Equal(expected.SupplySystems[0].Id, actual.SupplySystems[0].Id);
         Assert.NotSame(expected.SupplySystems[0], actual.SupplySystems[0]);
         AssertAssignmentEquivalent(
             expected.VentilationAssignments[0],
             actual.VentilationAssignments[0]);
-        using Brep expectedGeometry = expected.Geometry;
-        using Brep actualGeometry = actual.Geometry;
-        Assert.Equal(expectedGeometry.GetBoundingBox(true), actualGeometry.GetBoundingBox(true));
-        Assert.Equal(expectedGeometry.GetVolume(), actualGeometry.GetVolume(), 10);
     }
 
     private static void AssertSingleUnitCopy(
@@ -311,18 +396,29 @@ public sealed class AuthoringDefinitionGooTests
     private static ZoneDefinition Zone(OpeningDefinition opening)
     {
         VentilationSystem ventilation = Ventilator();
-        using Brep geometry = ZoneBrep();
         return new ZoneDefinition(
-            geometry,
             "Round-trip Zone",
             2,
+            3.25d,
+            new[] { Surface(opening) },
             Profile(),
-            OpaqueConstruction(),
-            SurfaceBoundaryCondition.Ground,
             9.25d,
-            new[] { opening },
             new[] { Supply() },
-            new[] { new VentilationAssignment(ventilation.Id.Value, 3, ventilation) });
+            new[] { new VentilationAssignment(ventilation.Id.Value, 3, ventilation) },
+            new EntityId("ZONE-ROUNDTRIP"));
+    }
+
+    private static SurfaceDefinition Surface(OpeningDefinition opening)
+    {
+        using Brep geometry = SurfaceFace();
+        return new SurfaceDefinition(
+            geometry,
+            "South Wall",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Outdoors,
+            OpaqueConstruction(),
+            new[] { opening },
+            id: new EntityId("SURFACE-ROUNDTRIP"));
     }
 
     private static PolylineCurve OpeningCurve()
@@ -344,6 +440,15 @@ public sealed class AuthoringDefinitionGooTests
             new Interval(0d, 8d),
             new Interval(0d, 6d),
             new Interval(0d, 3d)).ToBrep();
+    }
+
+    private static Brep SurfaceFace()
+    {
+        using Brep zone = ZoneBrep();
+        BrepFace face = zone.Faces
+            .First(item => item.TryGetPlane(out Plane plane)
+                && Math.Abs(plane.Normal.Y) > 0.99d);
+        return face.DuplicateFace(false);
     }
 
     private static FenestrationConstruction TransparentConstruction()

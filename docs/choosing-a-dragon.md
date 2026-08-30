@@ -7,7 +7,7 @@ geometry at different levels.
 |---|---|---|
 | Geometry | Preserves ordered planar vertices | Preserves area, azimuth, height, opening area, and boundary meaning |
 | Primary use | Explicit EnergyPlus model authoring | Fast retrofit and parametric studies compatible with the SimpleDragon GRM abstraction |
-| Rhino input | Planar polylines and Brep faces converted to vertex polygons | Breps reduced to the values used by the area-and-azimuth model |
+| Rhino input | Planar polylines and Brep faces converted to vertex polygons | Named planar face Breps become `SD Surface` values, then reduce to the area-and-azimuth model |
 | HVAC | Explicit source, tower, supply, ERV, and PV object graph | Supply systems and ERVs connect directly to their owning `SD Zone` |
 | Main model | `DragonEnergyModel` | `GreenRetrofitModel` (GRM) |
 | Simulation path | Compile a typed IDF without paths, then consume typed IDF + verified Weather and manage EnergyPlus internally | Select Weather from Address/Vintage, prepare IDF, then hand both to InvisibleDragon |

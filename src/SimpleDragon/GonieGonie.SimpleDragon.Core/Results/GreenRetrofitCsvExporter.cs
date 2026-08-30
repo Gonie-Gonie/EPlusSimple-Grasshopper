@@ -14,7 +14,7 @@ namespace GonieGonie.SimpleDragon;
 public static class GreenRetrofitCsvExporter
 {
     public const string ManifestFileName = "manifest.json";
-    public const string ManifestSchemaVersion = "goniegonie-simpledragon-csv-export.v1";
+    public const string ManifestSchemaVersion = "goniegonie-simpledragon-csv-export.v2";
     public const string SummaryFileName = "summary.csv";
     public const string MonthlyByFuelFileName = "monthly_by_fuel.csv";
     public const string MonthlyByEndUseFileName = "monthly_by_enduse.csv";
@@ -277,10 +277,10 @@ public static class GreenRetrofitCsvExporter
             "case_id",
             "entity_id",
             "entity_kind",
-            "source_index",
-            "face_index",
-            "brep_loop_index",
-            "fenestration_source_index",
+            "zone_index",
+            "surface_index",
+            "opening_index",
+            "trim_loop_index",
             "rhino_object_id",
             "geometry_fingerprint",
             "grasshopper_path",
@@ -288,20 +288,20 @@ public static class GreenRetrofitCsvExporter
         foreach (GreenRetrofitGeometryMapEntry entry in values
                      .OrderBy(item => item.EntityId.Value, StringComparer.Ordinal)
                      .ThenBy(item => item.Kind)
-                     .ThenBy(item => item.SourceIndex)
-                     .ThenBy(item => item.FaceIndex ?? -1)
-                     .ThenBy(item => item.BrepLoopIndex ?? -1)
-                     .ThenBy(item => item.FenestrationSourceIndex ?? -1))
+                     .ThenBy(item => item.ZoneIndex)
+                     .ThenBy(item => item.SurfaceIndex ?? -1)
+                     .ThenBy(item => item.OpeningIndex ?? -1)
+                     .ThenBy(item => item.TrimLoopIndex ?? -1))
         {
             GeometryProvenance provenance = entry.Provenance;
             csv.Write(
                 caseId,
                 entry.EntityId.Value,
                 GeometryKindName(entry.Kind),
-                Integer(entry.SourceIndex),
-                Integer(entry.FaceIndex),
-                Integer(entry.BrepLoopIndex),
-                Integer(entry.FenestrationSourceIndex),
+                Integer(entry.ZoneIndex),
+                Integer(entry.SurfaceIndex),
+                Integer(entry.OpeningIndex),
+                Integer(entry.TrimLoopIndex),
                 provenance.RhinoObjectId?.ToString("D"),
                 provenance.GeometryFingerprint,
                 provenance.GrasshopperPath,
@@ -346,7 +346,7 @@ public static class GreenRetrofitCsvExporter
             writer.WriteStartObject();
             writer.WriteString("grm_version", GrmFormat.Version);
             writer.WriteString("grr_version", GrrFormat.Version);
-            writer.WriteString("csv_schema", "1");
+            writer.WriteString("csv_schema", "2");
             writer.WriteEndObject();
             writer.WritePropertyName("compatibility");
             writer.WriteStartObject();

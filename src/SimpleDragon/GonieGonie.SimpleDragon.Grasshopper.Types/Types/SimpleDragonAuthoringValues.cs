@@ -8,7 +8,7 @@ using Rhino.Runtime;
 namespace GonieGonie.SimpleDragon.Grasshopper.Types;
 
 /// <summary>
-/// Immutable, geometry-backed opening input used while authoring a SimpleDragon zone.
+/// Immutable, geometry-backed opening input used while authoring a SimpleDragon surface.
 /// </summary>
 public sealed class OpeningDefinition
 {
@@ -91,24 +91,22 @@ public sealed class OpeningDefinition
 }
 
 /// <summary>
-/// Immutable, geometry-backed zone input. A collection-level resolver converts these
-/// definitions to final zones so that inter-zone adjacency can be determined together.
+/// Immutable, geometry-backed surface input. A surface owns its construction,
+/// boundary intent, and openings before it is connected to exactly one zone.
 /// </summary>
-public sealed class ZoneDefinition
+public sealed class SurfaceDefinition
 {
     private readonly byte[] _geometryArchive;
 
-    public ZoneDefinition(
+    public SurfaceDefinition(
         Brep geometry,
         string name,
-        int floorNumber,
-        UsageProfile profile,
-        SurfaceConstruction? surfaceConstruction = null,
-        SurfaceBoundaryCondition unmatchedFloorBoundary = SurfaceBoundaryCondition.Ground,
-        double? lightDensity = 10d,
+        SurfaceType type,
+        SurfaceBoundaryCondition boundaryCondition,
+        SurfaceConstruction? construction = null,
         IEnumerable<OpeningDefinition>? openings = null,
-        IEnumerable<SupplySystem>? supplySystems = null,
-        IEnumerable<VentilationAssignment>? ventilationAssignments = null)
+        double? coolRoofReflectance = null,
+        EntityId? id = null)
     {
 #if NET7_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(geometry);
@@ -120,22 +118,131 @@ public sealed class ZoneDefinition
 #endif
 
         using Brep geometryCopy = geometry.DuplicateBrep()
-            ?? throw new ArgumentException("The zone Brep could not be duplicated.", nameof(geometry));
-        if (!geometryCopy.IsValid || !geometryCopy.IsSolid)
+            ?? throw new ArgumentException("The surface Brep could not be duplicated.", nameof(geometry));
+        if (!geometryCopy.IsValid || geometryCopy.Faces.Count != 1)
         {
-            throw new ArgumentException("A zone requires a valid closed Brep.", nameof(geometry));
+            throw new ArgumentException("A surface requires one valid Brep face.", nameof(geometry));
+        }
+
+        if (!geometryCopy.Faces[0].TryGetPlane(out _))
+        {
+            throw new ArgumentException("A surface Brep face must be planar.", nameof(geometry));
         }
 
         Name = AuthoringValueSupport.RequiredText(name, nameof(name));
-        Profile = AuthoringValueSupport.Copy(profile ?? throw new ArgumentNullException(nameof(profile)));
-        if (unmatchedFloorBoundary != SurfaceBoundaryCondition.Ground
-            && unmatchedFloorBoundary != SurfaceBoundaryCondition.Outdoors
-            && unmatchedFloorBoundary != SurfaceBoundaryCondition.Adiabatic)
+        if (!Enum.IsDefined(typeof(SurfaceType), type))
+        {
+            throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown surface type.");
+        }
+
+        if (boundaryCondition != SurfaceBoundaryCondition.Outdoors
+            && boundaryCondition != SurfaceBoundaryCondition.Ground
+            && boundaryCondition != SurfaceBoundaryCondition.Adiabatic)
         {
             throw new ArgumentOutOfRangeException(
-                nameof(unmatchedFloorBoundary),
-                unmatchedFloorBoundary,
-                "An unmatched floor boundary must be Ground, Outdoors, or Adiabatic.");
+                nameof(boundaryCondition),
+                boundaryCondition,
+                "A surface boundary intent must be Outdoors, Ground, or Adiabatic.");
+        }
+
+        OpeningDefinition[] openingArray = AuthoringValueSupport.CopyOpenings(openings);
+        AuthoringValueSupport.EnsureUnique(
+            openingArray.Where(item => item.Id is not null).Select(item => item.Id!.Value),
+            "opening",
+            nameof(openings));
+        if ((boundaryCondition == SurfaceBoundaryCondition.Ground
+                || boundaryCondition == SurfaceBoundaryCondition.Adiabatic)
+            && openingArray.Length > 0)
+        {
+            throw new ArgumentException(
+                "Ground and adiabatic surfaces cannot own openings.",
+                nameof(openings));
+        }
+
+        if (coolRoofReflectance.HasValue
+            && (double.IsNaN(coolRoofReflectance.Value)
+                || double.IsInfinity(coolRoofReflectance.Value)
+                || coolRoofReflectance.Value <= 0d
+                || coolRoofReflectance.Value > 1d))
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(coolRoofReflectance),
+                coolRoofReflectance,
+                "Cool-roof reflectance must be finite and in (0, 1].");
+        }
+
+        if (coolRoofReflectance.HasValue
+            && (type != SurfaceType.Ceiling
+                || boundaryCondition != SurfaceBoundaryCondition.Outdoors))
+        {
+            throw new ArgumentException(
+                "Cool-roof reflectance is only valid on an outdoor ceiling.",
+                nameof(coolRoofReflectance));
+        }
+
+        _geometryArchive = RhinoGeometryArchive.Encode(geometryCopy);
+        Type = type;
+        BoundaryCondition = boundaryCondition;
+        Construction = AuthoringValueSupport.CopyOptional(construction);
+        Openings = Array.AsReadOnly(openingArray);
+        CoolRoofReflectance = coolRoofReflectance;
+        Id = id;
+    }
+
+    public Brep Geometry => RhinoGeometryArchive.Decode<Brep>(_geometryArchive);
+
+    public string Name { get; }
+
+    public SurfaceType Type { get; }
+
+    public SurfaceBoundaryCondition BoundaryCondition { get; }
+
+    public SurfaceConstruction? Construction { get; }
+
+    public IReadOnlyList<OpeningDefinition> Openings { get; }
+
+    public double? CoolRoofReflectance { get; }
+
+    public EntityId? Id { get; }
+
+    internal byte[] GeometryArchive => (byte[])_geometryArchive.Clone();
+
+    internal SurfaceDefinition Duplicate()
+    {
+        using Brep geometry = Geometry;
+        return new SurfaceDefinition(
+            geometry,
+            Name,
+            Type,
+            BoundaryCondition,
+            Construction,
+            Openings,
+            CoolRoofReflectance,
+            Id);
+    }
+}
+
+/// <summary>
+/// Immutable zone input composed from explicitly authored surfaces. A collection-level
+/// resolver converts all zone definitions together so inter-zone adjacency can be determined.
+/// </summary>
+public sealed class ZoneDefinition
+{
+    public ZoneDefinition(
+        string name,
+        int floorNumber,
+        double height,
+        IEnumerable<SurfaceDefinition> surfaces,
+        UsageProfile profile,
+        double? lightDensity = 10d,
+        IEnumerable<SupplySystem>? supplySystems = null,
+        IEnumerable<VentilationAssignment>? ventilationAssignments = null,
+        EntityId? id = null)
+    {
+        Name = AuthoringValueSupport.RequiredText(name, nameof(name));
+        if (double.IsNaN(height) || double.IsInfinity(height) || height <= 0d)
+        {
+            throw new ArgumentOutOfRangeException(nameof(height), height, "Zone height must be finite and positive.");
         }
 
         if (lightDensity.HasValue
@@ -149,16 +256,26 @@ public sealed class ZoneDefinition
                 "Lighting power density must be finite and non-negative.");
         }
 
-        SurfaceConstruction = AuthoringValueSupport.CopyOptional(surfaceConstruction);
-        OpeningDefinition[] openingArray = AuthoringValueSupport.CopyOpenings(openings);
+        SurfaceDefinition[] surfaceArray = AuthoringValueSupport.CopySurfaces(surfaces);
+        if (surfaceArray.Length == 0)
+        {
+            throw new ArgumentException("A zone requires at least one surface.", nameof(surfaces));
+        }
+
         SupplySystem[] supplyArray = AuthoringValueSupport.CopyCoreValues(supplySystems, nameof(supplySystems));
         VentilationAssignment[] ventilationArray = AuthoringValueSupport.CopyCoreValues(
             ventilationAssignments,
             nameof(ventilationAssignments));
         AuthoringValueSupport.EnsureUnique(
-            openingArray.Where(item => item.Id is not null).Select(item => item.Id!.Value),
+            surfaceArray.Where(item => item.Id is not null).Select(item => item.Id!.Value),
+            "surface",
+            nameof(surfaces));
+        AuthoringValueSupport.EnsureUnique(
+            surfaceArray.SelectMany(item => item.Openings)
+                .Where(item => item.Id is not null)
+                .Select(item => item.Id!.Value),
             "opening",
-            nameof(openings));
+            nameof(surfaces));
         AuthoringValueSupport.EnsureUnique(
             supplyArray.Select(item => item.Id.Value),
             "supply-system",
@@ -176,59 +293,46 @@ public sealed class ZoneDefinition
                 nameof(supplySystems));
         }
 
-        foreach (OpeningDefinition opening in openingArray)
-        {
-            AuthoringValueSupport.ValidateFenestrationConstruction(
-                opening.Type,
-                opening.Construction,
-                opening.Blind);
-        }
-
-        _geometryArchive = RhinoGeometryArchive.Encode(geometryCopy);
         FloorNumber = floorNumber;
-        UnmatchedFloorBoundary = unmatchedFloorBoundary;
+        Height = height;
+        Surfaces = Array.AsReadOnly(surfaceArray);
+        Profile = AuthoringValueSupport.Copy(profile ?? throw new ArgumentNullException(nameof(profile)));
         LightDensity = lightDensity;
-        Openings = Array.AsReadOnly(openingArray);
         SupplySystems = Array.AsReadOnly(supplyArray);
         VentilationAssignments = Array.AsReadOnly(ventilationArray);
+        Id = id;
     }
-
-    public Brep Geometry => RhinoGeometryArchive.Decode<Brep>(_geometryArchive);
 
     public string Name { get; }
 
     public int FloorNumber { get; }
 
+    public double Height { get; }
+
+    public IReadOnlyList<SurfaceDefinition> Surfaces { get; }
+
     public UsageProfile Profile { get; }
 
-    public SurfaceConstruction? SurfaceConstruction { get; }
-
-    public SurfaceBoundaryCondition UnmatchedFloorBoundary { get; }
-
     public double? LightDensity { get; }
-
-    public IReadOnlyList<OpeningDefinition> Openings { get; }
 
     public IReadOnlyList<SupplySystem> SupplySystems { get; }
 
     public IReadOnlyList<VentilationAssignment> VentilationAssignments { get; }
 
-    internal byte[] GeometryArchive => (byte[])_geometryArchive.Clone();
+    public EntityId? Id { get; }
 
     internal ZoneDefinition Duplicate()
     {
-        using Brep geometry = Geometry;
         return new ZoneDefinition(
-            geometry,
             Name,
             FloorNumber,
+            Height,
+            Surfaces,
             Profile,
-            SurfaceConstruction,
-            UnmatchedFloorBoundary,
             LightDensity,
-            Openings,
             SupplySystems,
-            VentilationAssignments);
+            VentilationAssignments,
+            Id);
     }
 }
 
@@ -320,6 +424,26 @@ internal static class AuthoringValueSupport
         if (array.Any(item => item is null))
         {
             throw new ArgumentException("An opening definition cannot be null.", nameof(values));
+        }
+
+        return array.Select(item => item.Duplicate()).ToArray();
+    }
+
+    internal static SurfaceDefinition[] CopySurfaces(IEnumerable<SurfaceDefinition> values)
+    {
+#if NET7_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(values);
+#else
+        if (values is null)
+        {
+            throw new ArgumentNullException(nameof(values));
+        }
+#endif
+
+        SurfaceDefinition[] array = values.ToArray();
+        if (array.Any(item => item is null))
+        {
+            throw new ArgumentException("A surface definition cannot be null.", nameof(values));
         }
 
         return array.Select(item => item.Duplicate()).ToArray();

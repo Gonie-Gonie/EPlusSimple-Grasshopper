@@ -22,10 +22,10 @@ public sealed class GreenRetrofitGeometryMapEntry
     public GreenRetrofitGeometryMapEntry(
         EntityId entityId,
         GreenRetrofitGeometryKind kind,
-        int sourceIndex,
-        int? faceIndex,
-        int? brepLoopIndex,
-        int? fenestrationSourceIndex,
+        int zoneIndex,
+        int? surfaceIndex,
+        int? openingIndex,
+        int? trimLoopIndex,
         GeometryProvenance provenance)
     {
         EntityId = DomainSupport.NotNull(entityId, nameof(entityId));
@@ -35,62 +35,59 @@ public sealed class GreenRetrofitGeometryMapEntry
         }
 
 #if NET8_0_OR_GREATER
-        ArgumentOutOfRangeException.ThrowIfNegative(sourceIndex);
+        ArgumentOutOfRangeException.ThrowIfNegative(zoneIndex);
 #else
-        if (sourceIndex < 0)
+        if (zoneIndex < 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(sourceIndex));
+            throw new ArgumentOutOfRangeException(nameof(zoneIndex));
         }
 #endif
 
-        if (faceIndex < 0)
+        if (surfaceIndex < 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(faceIndex));
+            throw new ArgumentOutOfRangeException(nameof(surfaceIndex));
         }
 
-        if (brepLoopIndex < 0)
+        if (openingIndex < 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(brepLoopIndex));
+            throw new ArgumentOutOfRangeException(nameof(openingIndex));
         }
 
-        if (fenestrationSourceIndex < 0)
+        if (trimLoopIndex < 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(fenestrationSourceIndex));
+            throw new ArgumentOutOfRangeException(nameof(trimLoopIndex));
         }
 
         bool mapsZone = kind == GreenRetrofitGeometryKind.Zone;
         bool mapsFenestration = kind == GreenRetrofitGeometryKind.Fenestration;
-        if (mapsZone == faceIndex.HasValue)
+        if (mapsZone == surfaceIndex.HasValue)
         {
             throw new ArgumentException(
                 mapsZone
-                    ? "A zone geometry mapping must not identify one Brep face."
-                    : "A surface or fenestration geometry mapping requires a Brep face index.",
-                nameof(faceIndex));
+                    ? "A zone geometry mapping must not identify one owned surface."
+                    : "A surface or fenestration geometry mapping requires a surface index.",
+                nameof(surfaceIndex));
         }
 
-        if (!mapsFenestration
-            && (brepLoopIndex.HasValue || fenestrationSourceIndex.HasValue))
+        if (!mapsFenestration && (openingIndex.HasValue || trimLoopIndex.HasValue))
         {
             throw new ArgumentException(
-                "Only a fenestration geometry mapping may identify an opening source.",
-                nameof(brepLoopIndex));
+                "Only a fenestration geometry mapping may identify an opening or trim loop.",
+                nameof(openingIndex));
         }
 
-        if (mapsFenestration
-            && !brepLoopIndex.HasValue
-            && !fenestrationSourceIndex.HasValue)
+        if (mapsFenestration && !openingIndex.HasValue)
         {
             throw new ArgumentException(
-                "A fenestration geometry mapping requires a Brep-loop or explicit-source index.",
-                nameof(brepLoopIndex));
+                "A fenestration geometry mapping requires an opening index.",
+                nameof(openingIndex));
         }
 
         Kind = kind;
-        SourceIndex = sourceIndex;
-        FaceIndex = faceIndex;
-        BrepLoopIndex = brepLoopIndex;
-        FenestrationSourceIndex = fenestrationSourceIndex;
+        ZoneIndex = zoneIndex;
+        SurfaceIndex = surfaceIndex;
+        OpeningIndex = openingIndex;
+        TrimLoopIndex = trimLoopIndex;
         Provenance = DomainSupport.NotNull(provenance, nameof(provenance));
     }
 
@@ -98,13 +95,13 @@ public sealed class GreenRetrofitGeometryMapEntry
 
     public GreenRetrofitGeometryKind Kind { get; }
 
-    public int SourceIndex { get; }
+    public int ZoneIndex { get; }
 
-    public int? FaceIndex { get; }
+    public int? SurfaceIndex { get; }
 
-    public int? BrepLoopIndex { get; }
+    public int? OpeningIndex { get; }
 
-    public int? FenestrationSourceIndex { get; }
+    public int? TrimLoopIndex { get; }
 
     public GeometryProvenance Provenance { get; }
 }

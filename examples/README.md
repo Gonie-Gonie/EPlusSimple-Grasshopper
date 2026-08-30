@@ -2,8 +2,8 @@
 
 These examples are executable project files, not screenshots or pseudocode.
 The `.gh` files contain public Dragon components, persisted wires, inputs, and
-preview panels. The `.3dm` files use metres and contain named closed Breps and
-window curves that can be referenced directly from Grasshopper.
+preview panels. The `.3dm` files use metres and contain named planar single-face
+Surface Breps and window curves that can be referenced directly from Grasshopper.
 
 | File | Coverage |
 | --- | --- |
@@ -12,11 +12,11 @@ window curves that can be referenced directly from Grasshopper.
 | `02-invisibledragon-single-zone-hvac-idf.gh` | Window→Surface→Zone and HVAC/ERV→Zone direct ownership, PV, energy model, and path-free EnergyPlus 24.2 IDF compile/validation |
 | `10-simpledragon-material-construction.gh` | Minimal SimpleDragon Material -> Construction Layer -> Surface Construction graph |
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
-| `12-simpledragon-two-zone-to-idf.gh` | Complex two-Zone composition/IDF authoring: Fenestration Construction -> Opening -> local Zone, west heat-pump/AHU, east boiler/radiator, dedicated ERVs, PV, then path-free IDF and packaged Weather preparation |
+| `12-simpledragon-two-zone-to-idf.gh` | Complex two-Zone composition/IDF authoring: Fenestration Construction -> Opening -> local Surface, six Surfaces -> each Zone, west heat-pump/AHU, east boiler/radiator, dedicated ERVs, PV, then path-free IDF and packaged Weather preparation |
 | `13-simpledragon-results-and-plots.gh` | Real GRR read, annual summary, monthly DataTree, line plot, bar plot, and non-writing CSV preview |
-| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: dedicated electric radiators and ERVs connect to their own Zones, typed IDF and Weather feed managed InvisibleDragon Run, and a typed Batch Case feeds managed batch without parallel model/ID lists |
-| `30-two-zone-office.3dm` | Two adjacent named office-zone solids and two named south-window curves |
-| `31-three-zone-stepped-office.3dm` | Two adjacent ground-floor zones plus an adjacent upper zone and three named windows |
+| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: explicit Surface ownership, dedicated electric radiators and ERVs connect to their own Zones, typed IDF and Weather feed managed InvisibleDragon Run, and a typed Batch Case feeds managed batch without parallel model/ID lists |
+| `30-two-zone-office.3dm` | Twelve named planar Surface Breps forming two adjacent office Zones, plus two named south-window curves |
+| `31-three-zone-stepped-office.3dm` | Eighteen named planar Surface Breps forming two adjacent ground-floor Zones and an adjacent upper Zone, plus three named windows |
 
 ## Run locally
 
@@ -65,22 +65,26 @@ temporary directory. User-selected CSV export destinations remain visible.
 ## Relink the two-zone definition to live Rhino objects
 
 `12-simpledragon-two-zone-to-idf.gh` contains internalized copies of the exact
-geometry in `30-two-zone-office.3dm`, so it runs immediately and remains
-portable. To use live document references instead:
+Surface and opening geometry in `30-two-zone-office.3dm`, so it runs immediately
+and remains portable. To use live document references instead:
 
 1. Open `30-two-zone-office.3dm` in Rhino.
-2. Right-click `ZONE_01_WEST` and `ZONE_02_EAST` in Grasshopper and set each
-   parameter to its same-named Rhino Brep.
-3. Right-click `WINDOW_ZONE_01_SOUTH` and `WINDOW_ZONE_02_SOUTH` and set each
-   parameter to its same-named Rhino curve.
-4. Keep each curve wired to the SimpleDragon Opening in the same local Zone
-   cluster. The owning Zone and host face are inferred from that connection and
-   geometry; there are no zone-index or face-index panels.
+2. For each Grasshopper Brep parameter ending in `_FLOOR`, `_CEILING`,
+   `_SOUTH`, `_NORTH`, `_WEST`, or `_EAST`, set it to the same-named Rhino
+   single-face Brep. Each parameter feeds exactly one `SD Surface`; no face list
+   or positional selection is involved.
+3. Set `WINDOW_ZONE_01_SOUTH` and `WINDOW_ZONE_02_SOUTH` to their same-named
+   Rhino curves.
+4. Keep each curve wired through `SD Opening` to the matching `_SOUTH`
+   `SD Surface`, and keep the six completed Surfaces wired to their local Zone.
+   Construction and Boundary Intent belong to Surface; Height, Profile, HVAC,
+   and ERV belong to Zone. There are no zone-index or face-index panels.
 
-The Rhino objects are on `DRAGON_ZONES` and `DRAGON_OPENINGS`. Their attributes
-also carry `DragonRole` and, for windows, `ZoneName` user strings. The stepped
-three-zone model follows the same naming and layer convention and can replace
-the inputs for geometry studies.
+The Rhino objects are on `DRAGON_SURFACES` and `DRAGON_OPENINGS`. Surface
+attributes carry `DragonRole=ThermalSurface`, `ZoneName`, `SurfaceType`, and
+`BoundaryIntent`; window attributes also carry their owning `SurfaceName`.
+The stepped three-Zone model follows the same naming and layer convention and
+can replace or extend the inputs for geometry studies.
 
 ## Automated generation and verification
 
@@ -99,17 +103,18 @@ and Rhino 8:
 
 The gate runs its Rhino hosts from a disposable system-temp directory outside
 the repository. It checks component identities, the exact persisted wire set
-and total, typed outputs, selected Boolean/numeric results, outward envelope
+and total, typed outputs, selected Boolean/numeric results, outward Surface
 winding after save/reopen, runtime errors, Grasshopper round trips, and the
 document-relative GRR fixture path. For `.3dm` files it also checks metre units,
-layer and object names, solid Breps, exact bounds, required zone adjacencies,
-closed planar windows, and equality between the model geometry and the
-internalized two-zone Grasshopper inputs. Candidates, logs, summaries, and
-round-trip copies remain below `temp/example-definitions/`.
+layer, object names and ownership attributes, single-face planar Breps, exact
+bounds and normals, required Zone adjacencies, closed planar windows, and
+equality between model geometry and the internalized two-Zone Grasshopper
+inputs. Candidates, logs, summaries, and round-trip copies remain below
+`temp/example-definitions/`.
 
 When the verified distribution payloads and EnergyPlus runtime are available,
 the gate temporarily enables example 14 in memory and verifies typed packaged
-weather preparation, its direct-Zone electric-radiator model, managed Run,
+weather preparation, its Surface-to-Zone electric-radiator model, managed Run,
 Result, GRR, CSV, cache, and cancellation in both hosts. The saved trigger
 values remain `False`. Use
 `-SkipEnergyPlusWorkflow` to test the explicit disabled state or

@@ -114,9 +114,9 @@ WEATHER_RESOURCES = (
 
 NATIVE_SOURCE_RECEIPTS = (
     {
-        "bytes": 23_696,
+        "bytes": 23_665,
         "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GreenRetrofitCsvExporter.cs",
-        "sha256": "sha256:3c8ce6ae4ad2ed1de2b24f9874a4acb95029be6aff85b8d36536fbcde1febf2e",
+        "sha256": "sha256:533ee8789aa9e02951216416be168b43c0ad7c20fc8da0c256a72650806fc32f",
     },
     {
         "bytes": 17_506,

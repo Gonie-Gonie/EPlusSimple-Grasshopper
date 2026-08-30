@@ -29,6 +29,58 @@ public sealed class GreenRetrofitCsvExporterTests
     };
 
     [Fact]
+    public void GeometryMapEnforcesSurfaceOwnedOpeningHierarchy()
+    {
+        var provenance = new GeometryProvenance(null, null, "ownership-fingerprint", "{0}", 0);
+
+        Assert.Throws<ArgumentException>(() => new GreenRetrofitGeometryMapEntry(
+            new EntityId("ZONE-WITH-SURFACE"),
+            GreenRetrofitGeometryKind.Zone,
+            0,
+            0,
+            null,
+            null,
+            provenance));
+        Assert.Throws<ArgumentException>(() => new GreenRetrofitGeometryMapEntry(
+            new EntityId("SURFACE-WITHOUT-INDEX"),
+            GreenRetrofitGeometryKind.Surface,
+            0,
+            null,
+            null,
+            null,
+            provenance));
+        Assert.Throws<ArgumentException>(() => new GreenRetrofitGeometryMapEntry(
+            new EntityId("OPENING-WITH-TRIM-ONLY"),
+            GreenRetrofitGeometryKind.Fenestration,
+            0,
+            1,
+            null,
+            2,
+            provenance));
+
+        var surface = new GreenRetrofitGeometryMapEntry(
+            new EntityId("SURFACE-VALID"),
+            GreenRetrofitGeometryKind.Surface,
+            0,
+            1,
+            null,
+            null,
+            provenance);
+        var opening = new GreenRetrofitGeometryMapEntry(
+            new EntityId("OPENING-VALID"),
+            GreenRetrofitGeometryKind.Fenestration,
+            0,
+            1,
+            2,
+            null,
+            provenance);
+
+        Assert.Equal(1, surface.SurfaceIndex);
+        Assert.Equal(2, opening.OpeningIndex);
+        Assert.Null(opening.TrimLoopIndex);
+    }
+
+    [Fact]
     public void PackageHasStableSchemasOrderManifestHashesAndInvariantNumbers()
     {
         GreenRetrofitResult result = LoadResult();
@@ -80,7 +132,7 @@ public sealed class GreenRetrofitCsvExporterTests
         string geometryCsv = first.GetFile(GreenRetrofitCsvExporter.GeometryMapFileName).Content;
         string[] geometryLines = Lines(geometryCsv);
         Assert.Equal(
-            "case_id,entity_id,entity_kind,source_index,face_index,brep_loop_index,fenestration_source_index,rhino_object_id,geometry_fingerprint,grasshopper_path,grasshopper_index",
+            "case_id,entity_id,entity_kind,zone_index,surface_index,opening_index,trim_loop_index,rhino_object_id,geometry_fingerprint,grasshopper_path,grasshopper_index",
             geometryLines[0]);
         Assert.Contains(",OPEN-A,fenestration,", geometryLines[1], StringComparison.Ordinal);
         Assert.Contains(",ZONE-B,zone,", geometryLines[2], StringComparison.Ordinal);

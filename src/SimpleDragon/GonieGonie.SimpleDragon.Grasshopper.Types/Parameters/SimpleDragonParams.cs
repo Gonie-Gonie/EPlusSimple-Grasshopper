@@ -80,8 +80,19 @@ public sealed class SimpleDragonOpeningDefinitionParam
         : base(
             "SimpleDragon Opening Definition",
             "Opening",
-            "A geometry-backed opening connected directly to its owning SimpleDragon zone.") { }
+            "A geometry-backed opening connected directly to its owning SimpleDragon surface.") { }
     public override Guid ComponentGuid => new("51610fe9-ecf1-43b4-9157-7260b3ba89ad");
+}
+
+public sealed class SimpleDragonSurfaceDefinitionParam
+    : SimpleDragonParam<Types.SimpleDragonSurfaceDefinitionGoo>
+{
+    public SimpleDragonSurfaceDefinitionParam()
+        : base(
+            "SimpleDragon Surface Definition",
+            "Surface Definition",
+            "A geometry-backed surface with its construction, boundary intent, and openings.") { }
+    public override Guid ComponentGuid => new("14feee1f-498c-478c-92ac-4bd0e9d256da");
 }
 
 public sealed class SimpleDragonZoneDefinitionParam
@@ -91,8 +102,8 @@ public sealed class SimpleDragonZoneDefinitionParam
         : base(
             "SimpleDragon Zone Definition",
             "Zone Definition",
-            "A geometry-backed SimpleDragon zone with its openings, usage, and HVAC inputs.") { }
-    public override Guid ComponentGuid => new("3fe45962-67fe-43d4-be95-ad81b91b19eb");
+            "A SimpleDragon zone composed from its owned surfaces, usage, and HVAC inputs.") { }
+    public override Guid ComponentGuid => new("df2c89ba-56a7-48ea-83f2-ba58ac15f17f");
 }
 
 public sealed class SimpleDragonSourceSystemParam : SimpleDragonParam<Types.SimpleDragonSourceSystemGoo>

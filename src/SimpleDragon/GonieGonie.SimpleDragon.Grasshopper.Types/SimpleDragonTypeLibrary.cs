@@ -5,5 +5,5 @@ namespace GonieGonie.SimpleDragon.Grasshopper;
 /// </summary>
 public static class SimpleDragonTypeLibrary
 {
-    public const string SchemaVersion = "goniegonie.simple-dragon.grasshopper-goo.v1";
+    public const string SchemaVersion = "goniegonie.simple-dragon.grasshopper-goo.v2";
 }

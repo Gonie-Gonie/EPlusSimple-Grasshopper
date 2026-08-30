@@ -49,9 +49,11 @@ together when they come from the same release commit.
 The canonical Grasshopper flow keeps ownership local and simulation setup internal:
 
 ```text
-Curve + Fenestration Construction -> SD Opening -> SD Zone <- Brep / Profile / HVAC / ERV
-                                                        |
-                                                        +-> SD Model (Address/Vintage) -> SD to IDF -> IDF + Weather -> Run InvisibleDragon
+Curve + Fenestration Construction -> SD Opening --------+
+                                                        v
+Face Brep + Type + Construction + Boundary Intent -> SD Surface -> SD Zone <- Height / Profile / HVAC / ERV
+                                                                       |
+                                                                       +-> SD Model (Address/Vintage) -> SD to IDF -> IDF + Weather -> Run InvisibleDragon
 
 Curve -> ID Window / Door -> ID Surface -> ID Zone <- Profile / HVAC / ERV
                                              |
@@ -60,10 +62,12 @@ Curve -> ID Window / Door -> ID Surface -> ID Zone <- Profile / HVAC / ERV
                                                    +-> Compile InvisibleDragon -> IDF
 ```
 
-No Zone/Face indices, parent-level opening-construction fallback, assignment
-pass, EnergyPlus/IDD/EPW path, runtime root, or temporary-work input is required.
-Inter-zone surfaces are paired from coincident geometry when the
-InvisibleDragon model is composed; no adjacent-surface ID is typed.
+No Zone/Face indices, parent-level construction fallback, assignment pass,
+EnergyPlus/IDD/EPW path, runtime root, or temporary-work input is required.
+Openings and opaque constructions belong to `SD Surface`; a Zone receives only
+its completed Surfaces and Zone-level values. Coincident, opposite-facing
+Surfaces with `Outdoors` intent are paired as inter-zone boundaries when either
+model is composed, so no adjacent-surface ID is typed.
 
 ## Developer quick start
 
@@ -137,8 +141,9 @@ The eight tracked definitions and two named-building Rhino models under
 [`examples`](examples/README.md) cover materials, profiles, geometry, HVAC,
 two-zone GRM-to-IDF conversion, Address/Vintage-selected packaged weather, result plots,
 CSV previews, and the gated Run-to-GRR/CSV workflow. Example 12 is the complex
-two-zone composition/IDF authoring demonstration; example 14 uses direct Zone
-composition with electric radiators for a stable end-to-end EnergyPlus run.
+two-zone Surface-to-Zone composition/IDF authoring demonstration; example 14
+uses the same explicit Surface ownership with electric radiators for a stable
+end-to-end EnergyPlus run.
 Rhino 7 writes the canonical files;
 `.\dev.cmd examples` solves and round-trip validates them in both Rhino 7 and
 Rhino 8.

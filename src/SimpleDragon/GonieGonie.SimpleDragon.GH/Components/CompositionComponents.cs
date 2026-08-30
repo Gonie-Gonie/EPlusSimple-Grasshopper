@@ -15,7 +15,7 @@ namespace GonieGonie.SimpleDragon.Grasshopper.Components;
 
 /// <summary>
 /// Authors one geometry-backed opening. Ownership is expressed later by wiring
-/// this value into exactly one SimpleDragon Zone component.
+/// this value into exactly one SimpleDragon Surface component.
 /// </summary>
 public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
 {
@@ -23,7 +23,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
         : base(
             "SimpleDragon Opening",
             "SD Opening",
-            "Creates a typed opening definition. Connect it directly to the Zone that owns it; no zone or face index is required.",
+            "Creates a typed opening definition. Connect it directly to the Surface that owns it; no zone or face index is required.",
             SimpleDragonPanels.Geometry)
     {
     }
@@ -35,7 +35,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
         pManager.AddCurveParameter(
             "Boundary",
             "C",
-            "Closed planar polygonal opening curve on its intended Zone face.",
+            "Closed planar polygonal opening curve on its intended Surface.",
             GH_ParamAccess.item);
         pManager.AddTextParameter("Name", "N", "Opening name.", GH_ParamAccess.item, "Opening");
         int type = pManager.AddIntegerParameter(
@@ -76,7 +76,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
             new SimpleDragonOpeningDefinitionParam(),
             "Opening",
             "O",
-            "Typed opening definition for one Zone.",
+            "Typed opening definition for one Surface.",
             GH_ParamAccess.item);
         pManager.AddParameter(
             new DiagnosticParam(),
@@ -130,7 +130,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
         }
     }
 
-    private static T DefinedEnum<T>(int value, string inputName)
+    internal static T DefinedEnum<T>(int value, string inputName)
         where T : struct, Enum
     {
         if (!Enum.IsDefined(typeof(T), value))
@@ -190,8 +190,166 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
 }
 
 /// <summary>
-/// Collects all values owned by one thermal zone. Collective topology is resolved
-/// by SimpleDragon Model so adjacent Breps are still evaluated together.
+/// Authors one geometry-backed EPlusSimple surface. All envelope and opening
+/// properties are owned here rather than inherited from a Zone.
+/// </summary>
+public sealed class CreateSimpleDragonSurfaceComponent : SimpleDragonComponent
+{
+    public CreateSimpleDragonSurfaceComponent()
+        : base(
+            "SimpleDragon Surface",
+            "SD Surface",
+            "Creates one typed Surface from a single planar Brep face with its own construction, boundary intent, and openings.",
+            SimpleDragonPanels.Geometry)
+    {
+    }
+
+    public override Guid ComponentGuid => new("039bf7bb-da65-49e2-80fe-86d636cf0a48");
+
+    protected override void RegisterInputParams(GH_InputParamManager pManager)
+    {
+        pManager.AddBrepParameter(
+            "Face",
+            "F",
+            "One valid single-face planar polygon Brep.",
+            GH_ParamAccess.item);
+        pManager.AddTextParameter("Name", "N", "Surface name.", GH_ParamAccess.item, "Surface");
+        int type = pManager.AddIntegerParameter(
+            "Type",
+            "T",
+            "EPlusSimple surface type.",
+            GH_ParamAccess.item,
+            (int)SurfaceType.Wall);
+        var typeParameter = (Param_Integer)pManager[type];
+        foreach (SurfaceType value in Enum.GetValues(typeof(SurfaceType)))
+        {
+            typeParameter.AddNamedValue(value.ToString(), (int)value);
+        }
+
+        pManager.AddParameter(
+            new SimpleDragonSurfaceConstructionParam(),
+            "Construction",
+            "SC",
+            "Optional opaque construction owned by this Surface; leave empty for an unknown construction.",
+            GH_ParamAccess.item);
+        int boundary = pManager.AddIntegerParameter(
+            "Boundary Intent",
+            "BC",
+            "Outdoors, Ground, or Adiabatic. Coincident Outdoors surfaces in different Zones become reciprocal Zone boundaries.",
+            GH_ParamAccess.item,
+            (int)SurfaceBoundaryCondition.Outdoors);
+        var boundaryParameter = (Param_Integer)pManager[boundary];
+        foreach (SurfaceBoundaryCondition value in new[]
+                 {
+                     SurfaceBoundaryCondition.Outdoors,
+                     SurfaceBoundaryCondition.Ground,
+                     SurfaceBoundaryCondition.Adiabatic,
+                 })
+        {
+            boundaryParameter.AddNamedValue(value.ToString(), (int)value);
+        }
+
+        pManager.AddParameter(
+            new SimpleDragonOpeningDefinitionParam(),
+            "Openings",
+            "O",
+            "Completed openings owned by this Surface. Each opening owns its fenestration Construction.",
+            GH_ParamAccess.list);
+        pManager.AddNumberParameter(
+            "Cool Roof Reflectance",
+            "CR",
+            "Optional value in (0, 1], valid only for an outdoor Ceiling.",
+            GH_ParamAccess.item);
+        pManager.AddTextParameter("ID", "ID", "Optional stable surface identifier.", GH_ParamAccess.item, string.Empty);
+        pManager[3].Optional = true;
+        pManager[5].Optional = true;
+        pManager[6].Optional = true;
+    }
+
+    protected override void RegisterOutputParams(GH_OutputParamManager pManager)
+    {
+        pManager.AddParameter(
+            new SimpleDragonSurfaceDefinitionParam(),
+            "Surface",
+            "S",
+            "Geometry-backed Surface definition for one Zone.",
+            GH_ParamAccess.item);
+        pManager.AddParameter(
+            new DiagnosticParam(),
+            "Diagnostics",
+            "D",
+            "Surface authoring diagnostics.",
+            GH_ParamAccess.list);
+    }
+
+    protected override void Solve(IGH_DataAccess DA)
+    {
+        Brep? geometry = null;
+        string name = "Surface";
+        int typeValue = (int)SurfaceType.Wall;
+        SimpleDragonSurfaceConstructionGoo? constructionGoo = null;
+        int boundaryValue = (int)SurfaceBoundaryCondition.Outdoors;
+        var openingGoos = new List<SimpleDragonOpeningDefinitionGoo>();
+        double reflectance = 0d;
+        string id = string.Empty;
+        if (!DA.GetData(0, ref geometry)
+            || !DA.GetData(1, ref name)
+            || !DA.GetData(2, ref typeValue)
+            || !DA.GetData(4, ref boundaryValue))
+        {
+            return;
+        }
+
+        DA.GetData(3, ref constructionGoo);
+        DA.GetDataList(5, openingGoos);
+        bool hasReflectance = DA.GetData(6, ref reflectance);
+        DA.GetData(7, ref id);
+        try
+        {
+            SurfaceType type = CreateSimpleDragonOpeningComponent.DefinedEnum<SurfaceType>(typeValue, "Type");
+            SurfaceBoundaryCondition boundaryIntent =
+                CreateSimpleDragonOpeningComponent.DefinedEnum<SurfaceBoundaryCondition>(
+                    boundaryValue,
+                    "Boundary Intent");
+            if (boundaryIntent != SurfaceBoundaryCondition.Outdoors
+                && boundaryIntent != SurfaceBoundaryCondition.Ground
+                && boundaryIntent != SurfaceBoundaryCondition.Adiabatic)
+            {
+                throw new ArgumentException(
+                    "Boundary Intent must be Outdoors, Ground, or Adiabatic. Zone boundaries are resolved from coincident Surfaces.");
+            }
+
+            OpeningDefinition[] openings = openingGoos.Select((goo, index) => goo?.Value
+                ?? throw new ArgumentException("Openings[" + index + "] contains no value."))
+                .ToArray();
+            var definition = new SurfaceDefinition(
+                geometry!,
+                name,
+                type,
+                boundaryIntent,
+                constructionGoo?.Value,
+                openings,
+                hasReflectance ? reflectance : null,
+                CreateSimpleDragonOpeningComponent.OptionalId(id));
+            DA.SetData(0, new SimpleDragonSurfaceDefinitionGoo(definition));
+            DA.SetDataList(1, Array.Empty<DiagnosticGoo>());
+        }
+        catch (Exception exception) when (CreateSimpleDragonOpeningComponent.IsAuthoringException(exception))
+        {
+            var diagnostic = new Diagnostic(
+                "SD.GH.SURFACE_DEFINITION_INVALID",
+                DiagnosticSeverity.Error,
+                exception.Message,
+                suggestedAction: "Use one planar Brep face and connect only the Construction and Openings owned by this Surface.");
+            Report(new[] { diagnostic });
+            DA.SetDataList(1, new[] { new DiagnosticGoo(diagnostic) });
+        }
+    }
+}
+
+/// <summary>
+/// Collects the EPlusSimple surfaces and systems owned by one thermal zone.
+/// Collective topology is resolved by SimpleDragon Model.
 /// </summary>
 public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
 {
@@ -199,31 +357,25 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
         : base(
             "SimpleDragon Zone",
             "SD Zone",
-            "Collects one Zone Brep with its openings, HVAC, and usage values. The Model resolves all Zone definitions together so shared-face adjacency is preserved.",
+            "Collects the Surfaces, HVAC, usage, and explicit height owned by one EPlusSimple Zone.",
             SimpleDragonPanels.Geometry)
     {
     }
 
-    public override Guid ComponentGuid => new("79b35a81-b6a2-43cf-8f9d-361a655b63d1");
+    public override Guid ComponentGuid => new("30b8e2c4-207a-4cf5-9801-ac4ae16d33e2");
 
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
-        pManager.AddBrepParameter("Zone Brep", "B", "One closed polygonal thermal-zone Brep.", GH_ParamAccess.item);
+        pManager.AddParameter(
+            new SimpleDragonSurfaceDefinitionParam(),
+            "Surfaces",
+            "S",
+            "Surface definitions owned by this Zone.",
+            GH_ParamAccess.list);
         pManager.AddTextParameter("Name", "N", "Zone name.", GH_ParamAccess.item, "Zone");
         pManager.AddIntegerParameter("Floor Number", "F", "Zone floor number.", GH_ParamAccess.item, 0);
+        pManager.AddNumberParameter("Height", "H", "Positive EPlusSimple Zone height in metres.", GH_ParamAccess.item, 3d);
         pManager.AddParameter(new SimpleDragonUsageProfileParam(), "Profile", "P", "Zone usage profile.", GH_ParamAccess.item);
-        pManager.AddParameter(
-            new SimpleDragonSurfaceConstructionParam(),
-            "Surface Construction",
-            "SC",
-            "Optional construction owned by the faces extracted from this Zone Brep.",
-            GH_ParamAccess.item);
-        pManager.AddParameter(
-            new SimpleDragonOpeningDefinitionParam(),
-            "Openings",
-            "O",
-            "Completed openings owned by this Zone. Each owns its Construction; host faces are inferred geometrically.",
-            GH_ParamAccess.list);
         pManager.AddParameter(
             new SimpleDragonSupplySystemParam(),
             "HVAC",
@@ -236,22 +388,15 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
             "ERV",
             "ERV values owned by this Zone.",
             GH_ParamAccess.list);
-        pManager.AddTextParameter(
-            "Floor Boundary",
-            "Floor BC",
-            "Ground, Outdoors, or Adiabatic for unmatched floor faces.",
-            GH_ParamAccess.item,
-            "Ground");
         pManager.AddNumberParameter(
             "Lighting Power Density",
             "LPD",
             "Lighting power density in W/m².",
             GH_ParamAccess.item,
             10d);
-        pManager[4].Optional = true;
+        pManager.AddTextParameter("ID", "ID", "Optional stable zone identifier.", GH_ParamAccess.item, string.Empty);
         pManager[5].Optional = true;
         pManager[6].Optional = true;
-        pManager[7].Optional = true;
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -260,52 +405,41 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
             new SimpleDragonZoneDefinitionParam(),
             "Zone",
             "Z",
-            "Geometry-backed Zone definition for SimpleDragon Model.",
+            "Surface-backed Zone definition for SimpleDragon Model.",
             GH_ParamAccess.item);
         pManager.AddParameter(new DiagnosticParam(), "Diagnostics", "D", "Zone authoring diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
     {
-        Brep? geometry = null;
+        var surfaceGoos = new List<SimpleDragonSurfaceDefinitionGoo>();
         string name = "Zone";
         int floor = 0;
+        double height = 3d;
         SimpleDragonUsageProfileGoo? profileGoo = null;
-        SimpleDragonSurfaceConstructionGoo? surfaceConstructionGoo = null;
-        var openingGoos = new List<SimpleDragonOpeningDefinitionGoo>();
         var supplyGoos = new List<SimpleDragonSupplySystemGoo>();
         var ventilationGoos = new List<SimpleDragonZoneErvGoo>();
-        string floorBoundaryText = "Ground";
         double lightDensity = 10d;
-        if (!DA.GetData(0, ref geometry)
+        string id = string.Empty;
+        if (!DA.GetDataList(0, surfaceGoos)
             || !DA.GetData(1, ref name)
             || !DA.GetData(2, ref floor)
-            || !DA.GetData(3, ref profileGoo)
-            || !DA.GetData(8, ref floorBoundaryText)
-            || !DA.GetData(9, ref lightDensity))
+            || !DA.GetData(3, ref height)
+            || !DA.GetData(4, ref profileGoo)
+            || !DA.GetData(7, ref lightDensity))
         {
             return;
         }
 
-        DA.GetData(4, ref surfaceConstructionGoo);
-        DA.GetDataList(5, openingGoos);
-        DA.GetDataList(6, supplyGoos);
-        DA.GetDataList(7, ventilationGoos);
+        DA.GetDataList(5, supplyGoos);
+        DA.GetDataList(6, ventilationGoos);
+        DA.GetData(8, ref id);
         try
         {
             UsageProfile profile = profileGoo?.Value
                 ?? throw new ArgumentException("Profile contains no value.");
-            if (!Enum.TryParse(floorBoundaryText.Trim(), true, out SurfaceBoundaryCondition floorBoundary)
-                || (floorBoundary != SurfaceBoundaryCondition.Ground
-                    && floorBoundary != SurfaceBoundaryCondition.Outdoors
-                    && floorBoundary != SurfaceBoundaryCondition.Adiabatic))
-            {
-                throw new ArgumentException(
-                    "Floor Boundary must be Ground, Outdoors, or Adiabatic.");
-            }
-
-            OpeningDefinition[] openings = openingGoos.Select((goo, index) => goo?.Value
-                ?? throw new ArgumentException("Openings[" + index + "] contains no value."))
+            SurfaceDefinition[] surfaces = surfaceGoos.Select((goo, index) => goo?.Value
+                ?? throw new ArgumentException("Surfaces[" + index + "] contains no value."))
                 .ToArray();
             SupplySystem[] supplies = supplyGoos.Select((goo, index) => goo?.Value
                 ?? throw new ArgumentException("HVAC[" + index + "] contains no value."))
@@ -314,16 +448,15 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
                 ?? throw new ArgumentException("ERVs[" + index + "] contains no value."))
                 .ToArray();
             var definition = new ZoneDefinition(
-                geometry!,
                 name,
                 floor,
+                height,
+                surfaces,
                 profile,
-                surfaceConstructionGoo?.Value,
-                floorBoundary,
                 lightDensity,
-                openings,
                 supplies,
-                ventilation);
+                ventilation,
+                CreateSimpleDragonOpeningComponent.OptionalId(id));
             DA.SetData(0, new SimpleDragonZoneDefinitionGoo(definition));
             DA.SetDataList(1, Array.Empty<DiagnosticGoo>());
         }
@@ -333,7 +466,7 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
                 "SD.GH.ZONE_DEFINITION_INVALID",
                 DiagnosticSeverity.Error,
                 exception.Message,
-                suggestedAction: "Connect one valid Brep, Profile, and only the openings and systems owned by this Zone.");
+                suggestedAction: "Connect valid Surface definitions, one Profile, and only the systems owned by this Zone.");
             Report(new[] { diagnostic });
             DA.SetDataList(1, new[] { new DiagnosticGoo(diagnostic) });
         }
@@ -350,7 +483,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
         : base(
             "SimpleDragon Model",
             "SD Model",
-            "Resolves all Zone definitions together and creates a complete GRM. Nested openings, constructions, and HVAC are collected automatically.",
+            "Resolves all Surface-first Zone definitions together and creates a complete GRM. Nested openings, constructions, and HVAC are collected automatically.",
             SimpleDragonPanels.Model)
     {
     }
@@ -364,7 +497,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
             new SimpleDragonZoneDefinitionParam(),
             "Zones",
             "Z",
-            "Zone definitions. They are resolved collectively for shared-face adjacency.",
+            "Zone definitions. Their coincident owned Surfaces are resolved collectively for shared-boundary adjacency.",
             GH_ParamAccess.list);
         pManager.AddNumberParameter("North Axis", "North", "Clockwise building north-axis rotation in degrees.", GH_ParamAccess.item, 0d);
         pManager.AddTextParameter(
@@ -389,7 +522,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
         pManager.AddParameter(new GreenRetrofitModelParam(), "GRM", "GRM", "Complete GRM 0.7 model.", GH_ParamAccess.item);
         pManager.AddParameter(new SimpleDragonZoneParam(), "Zones", "Z", "Resolved immutable thermal zones.", GH_ParamAccess.list);
         pManager.AddParameter(new SimpleDragonSurfaceParam(), "Surfaces", "S", "Resolved area-based surfaces.", GH_ParamAccess.list);
-        pManager.AddTextParameter("Geometry Map", "Map", "Domain ID to Rhino source/face/loop mapping.", GH_ParamAccess.list);
+        pManager.AddTextParameter("Geometry Map", "Map", "Domain ID to Zone/Surface/Opening/trim source-provenance mapping.", GH_ParamAccess.list);
         pManager.AddGenericParameter(
             "Geometry Map Data",
             "Map Data",
@@ -449,81 +582,59 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
             }
 
             RhinoGeometryContext context = RhinoGeometryContext.FromDocument(document);
-            var zoneGeometry = new List<Brep>(definitions.Length);
-            var openingSourcesByZone = new List<List<RhinoFenestrationSource>>(definitions.Length);
-            for (int zoneIndex = 0; zoneIndex < definitions.Length; zoneIndex++)
-            {
-                ZoneDefinition definition = definitions[zoneIndex];
-                Brep geometry = definition.Geometry;
-                disposableGeometry.Add(geometry);
-                var openingSources = new List<RhinoFenestrationSource>(definition.Openings.Count);
-                for (int openingIndex = 0; openingIndex < definition.Openings.Count; openingIndex++)
-                {
-                    OpeningDefinition opening = definition.Openings[openingIndex];
-                    Curve boundary = opening.Geometry;
-                    disposableGeometry.Add(boundary);
-                    OpeningHostResolution host = OpeningHostResolver.Resolve(
-                        geometry,
-                        boundary,
-                        context,
-                        opening.Id);
-                    diagnostics.AddRange(host.Diagnostics);
-                    if (!host.IsSuccess)
-                    {
-                        continue;
-                    }
-
-                    openingSources.Add(new RhinoFenestrationSource(
-                        boundary,
-                        host.FaceIndex!.Value,
-                        opening.Name,
-                        opening.Type,
-                        opening.Construction,
-                        opening.Blind,
-                        opening.Id,
-                        grasshopperIndex: openingIndex));
-                }
-
-                zoneGeometry.Add(geometry);
-                openingSourcesByZone.Add(openingSources);
-            }
-
-            diagnostics.AddRange(InteriorOpeningOwnershipResolver.Reconcile(
-                zoneGeometry,
-                openingSourcesByZone,
-                context));
-            if (diagnostics.Any(item => item.IsFailure))
-            {
-                FinishDiagnostics(DA, diagnostics);
-                return;
-            }
-
             var sources = new List<RhinoZoneSource>(definitions.Length);
             for (int zoneIndex = 0; zoneIndex < definitions.Length; zoneIndex++)
             {
                 ZoneDefinition definition = definitions[zoneIndex];
+                var surfaceSources = new List<RhinoSurfaceSource>(definition.Surfaces.Count);
+                for (int surfaceIndex = 0; surfaceIndex < definition.Surfaces.Count; surfaceIndex++)
+                {
+                    SurfaceDefinition surface = definition.Surfaces[surfaceIndex];
+                    Brep face = surface.Geometry;
+                    disposableGeometry.Add(face);
+                    var openingSources = new List<RhinoFenestrationSource>(surface.Openings.Count);
+                    for (int openingIndex = 0; openingIndex < surface.Openings.Count; openingIndex++)
+                    {
+                        OpeningDefinition opening = surface.Openings[openingIndex];
+                        Curve boundary = opening.Geometry;
+                        disposableGeometry.Add(boundary);
+                        openingSources.Add(new RhinoFenestrationSource(
+                            boundary,
+                            opening.Name,
+                            opening.Type,
+                            opening.Construction,
+                            opening.Blind,
+                            opening.Id,
+                            grasshopperIndex: openingIndex));
+                    }
+
+                    surfaceSources.Add(new RhinoSurfaceSource(
+                        face,
+                        surface.Name,
+                        surface.Type,
+                        surface.BoundaryCondition,
+                        surface.Construction,
+                        openingSources,
+                        surface.CoolRoofReflectance,
+                        surface.Id,
+                        grasshopperIndex: surfaceIndex));
+                }
+
                 sources.Add(new RhinoZoneSource(
-                    zoneGeometry[zoneIndex],
                     definition.Name,
                     definition.FloorNumber,
+                    definition.Height,
                     definition.Profile,
+                    surfaceSources,
                     definition.LightDensity,
+                    definition.Id,
                     grasshopperIndex: zoneIndex,
-                    fenestrations: openingSourcesByZone[zoneIndex],
-                    surfaceConstruction: definition.SurfaceConstruction,
-                    unmatchedFloorBoundary: definition.UnmatchedFloorBoundary));
-            }
-
-            if (diagnostics.Any(item => item.IsFailure))
-            {
-                FinishDiagnostics(DA, diagnostics);
-                return;
+                    grasshopperPath: null));
             }
 
             RhinoZoneExtractionResult extraction = RhinoZoneExtractor.Extract(
                 sources,
-                context,
-                new RhinoZoneExtractionOptions());
+                context);
             diagnostics.AddRange(extraction.Diagnostics);
             if (extraction.Zones.Count != definitions.Length
                 || diagnostics.Any(item => item.IsFailure))
@@ -535,7 +646,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
                         "SD.GH.ZONE_RESOLUTION_INCOMPLETE",
                         DiagnosticSeverity.Error,
                         "Not every Zone definition could be resolved.",
-                        suggestedAction: "Review the geometry diagnostics and repair the failing Zone Brep or opening."));
+                        suggestedAction: "Review the geometry diagnostics and repair the failing Surface or opening."));
                 }
 
                 FinishDiagnostics(DA, diagnostics);
@@ -593,7 +704,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
                 "SD.GH.AZIMUTH_USES_WORLD_NORTH",
                 DiagnosticSeverity.Info,
                 "Extracted wall azimuths use Rhino world north; the GRM North Axis remains a separate model value.",
-                suggestedAction: "Do not pre-rotate Zone geometry to apply the model North Axis."));
+                suggestedAction: "Do not pre-rotate authored Surface geometry to apply the model North Axis."));
 
             DA.SetData(0, new GreenRetrofitModelGoo(model));
             DA.SetDataList(1, zones.Select(item => new SimpleDragonZoneGoo(item)));
@@ -670,15 +781,15 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
 
     private static string FormatMap(RhinoDomainGeometryMapEntry entry)
     {
-        string face = entry.FaceIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
-        string brepLoop = entry.BrepLoopIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
-        string openingSource = entry.FenestrationSourceIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
+        string surface = entry.SurfaceIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
+        string opening = entry.OpeningIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
+        string trimLoop = entry.TrimLoopIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
         return entry.EntityId.Value
             + " | " + entry.Kind
-            + " | source " + entry.SourceIndex.ToString(CultureInfo.InvariantCulture)
-            + " | face " + face
-            + " | brep loop " + brepLoop
-            + " | opening source " + openingSource
+            + " | zone " + entry.ZoneIndex.ToString(CultureInfo.InvariantCulture)
+            + " | surface " + surface
+            + " | opening " + opening
+            + " | trim loop " + trimLoop
             + " | " + entry.Provenance.GeometryFingerprint;
     }
 
@@ -694,10 +805,10 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
         return new GreenRetrofitGeometryMapEntry(
             entry.EntityId,
             kind,
-            entry.SourceIndex,
-            entry.FaceIndex,
-            entry.BrepLoopIndex,
-            entry.FenestrationSourceIndex,
+            entry.ZoneIndex,
+            entry.SurfaceIndex,
+            entry.OpeningIndex,
+            entry.TrimLoopIndex,
             entry.Provenance);
     }
 }

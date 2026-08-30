@@ -19,7 +19,7 @@ public sealed class SimpleDragonOpeningDefinitionGoo : SimpleDragonGoo<OpeningDe
     public override string TypeName => "SimpleDragon Opening Definition";
 
     public override string TypeDescription =>
-        "A geometry-backed opening that is connected directly to its owning SimpleDragon zone.";
+        "A geometry-backed opening that is connected directly to its owning SimpleDragon surface.";
 
     protected override SimpleDragonGoo<OpeningDefinition> Create(OpeningDefinition value) =>
         new SimpleDragonOpeningDefinitionGoo(value);
@@ -32,7 +32,36 @@ public sealed class SimpleDragonOpeningDefinitionGoo : SimpleDragonGoo<OpeningDe
 }
 
 /// <summary>
-/// Grasshopper wrapper for one composable, geometry-backed zone definition.
+/// Grasshopper wrapper for one composable, geometry-backed surface definition.
+/// </summary>
+public sealed class SimpleDragonSurfaceDefinitionGoo : SimpleDragonGoo<SurfaceDefinition>
+{
+    public SimpleDragonSurfaceDefinitionGoo()
+    {
+    }
+
+    public SimpleDragonSurfaceDefinitionGoo(SurfaceDefinition value)
+        : base(value)
+    {
+    }
+
+    public override string TypeName => "SimpleDragon Surface Definition";
+
+    public override string TypeDescription =>
+        "A geometry-backed SimpleDragon surface with its construction, boundary intent, and openings.";
+
+    protected override SimpleDragonGoo<SurfaceDefinition> Create(SurfaceDefinition value) =>
+        new SimpleDragonSurfaceDefinitionGoo(value);
+
+    protected override SimpleDragonGoo<SurfaceDefinition> CreateEmpty() =>
+        new SimpleDragonSurfaceDefinitionGoo();
+
+    protected override string DisplayText(SurfaceDefinition value) =>
+        $"Surface Definition {value.Name} ({value.Type}, {value.Openings.Count} openings)";
+}
+
+/// <summary>
+/// Grasshopper wrapper for one composable zone definition.
 /// </summary>
 public sealed class SimpleDragonZoneDefinitionGoo : SimpleDragonGoo<ZoneDefinition>
 {
@@ -48,7 +77,7 @@ public sealed class SimpleDragonZoneDefinitionGoo : SimpleDragonGoo<ZoneDefiniti
     public override string TypeName => "SimpleDragon Zone Definition";
 
     public override string TypeDescription =>
-        "A geometry-backed SimpleDragon zone with its openings, usage, and HVAC inputs.";
+        "A SimpleDragon zone composed from its owned surfaces, usage, and HVAC inputs.";
 
     protected override SimpleDragonGoo<ZoneDefinition> Create(ZoneDefinition value) =>
         new SimpleDragonZoneDefinitionGoo(value);
@@ -57,7 +86,7 @@ public sealed class SimpleDragonZoneDefinitionGoo : SimpleDragonGoo<ZoneDefiniti
         new SimpleDragonZoneDefinitionGoo();
 
     protected override string DisplayText(ZoneDefinition value) =>
-        $"Zone Definition {value.Name} ({value.Openings.Count} openings)";
+        $"Zone Definition {value.Name} ({value.Surfaces.Count} surfaces)";
 }
 
 /// <summary>

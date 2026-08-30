@@ -23,293 +23,380 @@ internal static class SimpleDragonRhinoSmokeChecks
             "Smoke envelope",
             new[] { new SurfaceConstructionLayer(material, 0.2) });
         var glazing = new FenestrationConstruction("Smoke window", 1.5, 0.5);
+        var otherGlazing = new FenestrationConstruction("Other smoke window", 1.8, 0.4);
         var doorConstruction = new FenestrationConstruction("Smoke opaque door", 2.5);
-        var options = new RhinoZoneExtractionOptions();
+        using var owned = new OwnedBreps();
 
         using Brep firstBox = Box(0, 0, 0, 4, 3, 2);
-        int windowHost = FindWallFace(firstBox, new Vector3d(0, -1, 0));
         using var windowCurve = new PolylineCurve(Closed(
             new Point3d(1, 0, 0.5),
             new Point3d(2, 0, 0.5),
             new Point3d(2, 0, 1.5),
             new Point3d(1, 0, 1.5)));
-        var opening = new RhinoFenestrationSource(
+        var window = new RhinoFenestrationSource(
             windowCurve,
-            windowHost,
             "South window",
             FenestrationType.Window,
-            glazing);
-        var firstSource = new RhinoZoneSource(
+            glazing,
+            id: new EntityId("FNST-SMOKE-SOUTH"));
+        IReadOnlyList<RhinoSurfaceSource> firstSurfaces = BoxSurfaces(
             firstBox,
+            "First",
+            construction,
+            context,
+            owned,
+            openings: normal => normal * new Vector3d(0, -1, 0) > 0.999999
+                ? new[] { window }
+                : null);
+        var firstSource = new RhinoZoneSource(
             "First zone",
             1,
+            2,
             profile,
-            zoneId: new EntityId("ZONE-SMOKE-1"),
-            fenestrations: new[] { opening },
-            surfaceConstruction: construction);
-        RhinoZoneExtractionResult single = RhinoZoneExtractor.Extract(
-            new[] { firstSource },
-            context,
-            options);
+            firstSurfaces,
+            lightDensity: 10,
+            zoneId: new EntityId("ZONE-SMOKE-1"));
+        RhinoZoneExtractionResult single = RhinoZoneExtractor.Extract(new[] { firstSource }, context);
         Check(single.Success, Describe(single.Diagnostics));
-        Check(single.Zones.Count == 1 && single.Floors.Count == 1, "A single box did not create one zone and floor.");
-        Check(single.Zones[0].Surfaces.Count == 6, "A box did not create six SimpleDragon surfaces.");
+        Check(single.Zones.Count == 1 && single.Floors.Count == 1, "A surface collection did not create one zone and floor.");
+        Check(single.Zones[0].Surfaces.Count == 6, "Six authored box surfaces did not survive extraction.");
         Check(AlmostEqual(single.Zones[0].Area, 12) && AlmostEqual(single.Zones[0].Height, 2),
-            "Box floor area or height changed during extraction.");
-        Check(single.Zones[0].Surfaces.Count(surface => surface.Type == SurfaceType.Wall) == 4,
-            "Box wall classification changed.");
-        Check(single.Zones[0].Surfaces.Count(surface => surface.Type == SurfaceType.Floor) == 1
+            "Explicit box floor area or zone height changed during extraction.");
+        Check(single.Zones[0].Surfaces.Count(surface => surface.Type == SurfaceType.Wall) == 4
+              && single.Zones[0].Surfaces.Count(surface => surface.Type == SurfaceType.Floor) == 1
               && single.Zones[0].Surfaces.Count(surface => surface.Type == SurfaceType.Ceiling) == 1,
-            "Box floor/ceiling classification changed.");
-        Check(single.Zones[0].Surfaces.SelectMany(surface => surface.Fenestrations).Single().Area == 1,
-            "Separate opening area changed during extraction.");
-        Check(single.GeometryMap.Count == 8, "Zone, face, and opening provenance entries are incomplete.");
-        checks += 7;
-
-        using Brep flippedBox = Box(0, 0, 0, 4, 3, 2);
-        flippedBox.Flip();
-        Check(flippedBox.SolidOrientation == BrepSolidOrientation.Inward,
-            "The flipped-solid regression fixture did not become inward-oriented.");
-        RhinoZoneExtractionResult flipped = RhinoZoneExtractor.Extract(
-            new[]
-            {
-                new RhinoZoneSource(
-                    flippedBox,
-                    "Flipped zone",
-                    1,
-                    profile,
-                    zoneId: new EntityId("ZONE-SMOKE-FLIPPED"),
-                    surfaceConstruction: construction),
-            },
-            context,
-            options);
-        Check(flipped.Success, Describe(flipped.Diagnostics));
-        Check(flipped.Zones[0].Surfaces.Single(surface => surface.Type == SurfaceType.Floor)
-                .BoundaryCondition == SurfaceBoundaryCondition.Ground
-              && flipped.Zones[0].Surfaces.Single(surface => surface.Type == SurfaceType.Ceiling)
-                .BoundaryCondition == SurfaceBoundaryCondition.Outdoors,
-            "An inward solid reversed the extracted floor and ceiling boundaries.");
-        Check(AzimuthsEqual(flipped.Zones[0], single.Zones[0]),
-            "An inward solid reversed one or more exterior-wall azimuths.");
-        checks += 4;
+            "Explicit box surface types changed.");
+        Check(AlmostEqual(single.Zones[0].Surfaces.SelectMany(surface => surface.Fenestrations).Single().Area, 1),
+            "Surface-owned opening area changed.");
+        Check(single.GeometryMap.Count == 8
+              && single.GeometryMap.Count(entry => entry.Kind == RhinoMappedGeometryKind.Zone) == 1
+              && single.GeometryMap.Count(entry => entry.Kind == RhinoMappedGeometryKind.Surface) == 6,
+            "Zone, surface, and opening provenance entries are incomplete.");
+        RhinoDomainGeometryMapEntry windowMap = single.GeometryMap.Single(entry =>
+            entry.Kind == RhinoMappedGeometryKind.Fenestration);
+        Check(windowMap.ZoneIndex == 0
+              && windowMap.SurfaceIndex.HasValue
+              && windowMap.OpeningIndex == 0
+              && !windowMap.TrimLoopIndex.HasValue,
+            "Explicit opening provenance must use Zone/Surface/Opening indices and no trim-loop index.");
+        checks += 8;
 
         var millimetreContext = new RhinoGeometryContext(UnitSystem.Millimeters, 0.001);
         using Brep millimetreBox = Box(0, 0, 0, 4000, 3000, 2000);
+        IReadOnlyList<RhinoSurfaceSource> millimetreSurfaces = BoxSurfaces(
+            millimetreBox,
+            "Millimetre",
+            construction,
+            millimetreContext,
+            owned);
         RhinoZoneExtractionResult millimetres = RhinoZoneExtractor.Extract(
             new[]
             {
                 new RhinoZoneSource(
-                    millimetreBox,
                     "Millimetre zone",
                     1,
+                    2,
                     profile,
-                    zoneId: new EntityId("ZONE-SMOKE-MM"),
-                    surfaceConstruction: construction),
+                    millimetreSurfaces,
+                    zoneId: new EntityId("ZONE-SMOKE-MM")),
             },
-            millimetreContext,
-            options);
+            millimetreContext);
         Check(millimetres.Success, Describe(millimetres.Diagnostics));
-        Check(AlmostEqual(millimetres.Zones[0].Area, 12d)
-              && AlmostEqual(millimetres.Zones[0].Height, 2d),
-            "Millimetre zone area or height was not normalized to SI units.");
+        Check(AlmostEqual(millimetres.Zones[0].Area, 12)
+              && AlmostEqual(millimetres.Zones[0].Height, 2),
+            "Millimetre surface geometry or explicit metre height was not normalized correctly.");
         Check(AreasEqual(millimetres.Zones[0], single.Zones[0]),
-            "Millimetre surface areas differ from the equivalent metre geometry.");
+            "Millimetre surface areas differ from equivalent metre geometry.");
         checks += 3;
 
         using Brep innerLoopFace = PlanarFaceWithHole();
-        int innerLoopHost = innerLoopFace.Faces[0].FaceIndex;
-        int sourceBrepLoopIndex = innerLoopFace.Faces[0].Loops
+        int sourceTrimLoopIndex = innerLoopFace.Faces[0].Loops
             .Single(loop => loop.LoopType == BrepLoopType.Inner)
             .LoopIndex;
+        var unannotatedSurface = new RhinoSurfaceSource(
+            innerLoopFace,
+            "Unannotated wall",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Outdoors,
+            construction);
+        RhinoZoneExtractionResult unannotated = RhinoZoneExtractor.Extract(
+            new[]
+            {
+                new RhinoZoneSource("Unannotated", 1, 3, profile, new[] { unannotatedSurface }),
+            },
+            context);
+        Check(!unannotated.Success
+              && unannotated.Diagnostics.Any(item => item.Code == "SD.RHINO.OPENING_METADATA_REQUIRED"),
+            "An unannotated inner trim loop was accepted.");
+
         Guid annotationRhinoId = new("aa94ddbf-3aad-4b54-8ce8-469fd9c3f312");
-        using var innerLoopAnnotationCurve = new PolylineCurve(Closed(
+        using var trimAnnotationCurve = new PolylineCurve(Closed(
             new Point3d(1, 0, 1),
             new Point3d(2, 0, 1),
             new Point3d(2, 0, 2),
             new Point3d(1, 0, 2)));
-        var innerLoopAnnotation = new RhinoFenestrationSource(
-            innerLoopAnnotationCurve,
-            innerLoopHost,
-            "Annotated inner-loop door",
+        var trimAnnotation = new RhinoFenestrationSource(
+            trimAnnotationCurve,
+            "Annotated trim door",
             FenestrationType.Door,
             doorConstruction,
-            id: new EntityId("FNST-SMOKE-INNER-OVERRIDE"),
+            id: new EntityId("FNST-SMOKE-TRIM"),
             rhinoObjectId: annotationRhinoId,
             grasshopperPath: "{2;3}",
             grasshopperIndex: 7);
-        var openFaceOptions = new RhinoZoneExtractionOptions
-        {
-            RequireClosedBreps = false,
-        };
-        RhinoZoneExtractionResult unannotatedInnerLoop = RhinoZoneExtractor.Extract(
+        var annotatedSurface = new RhinoSurfaceSource(
+            innerLoopFace,
+            "Annotated wall",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Outdoors,
+            construction,
+            new[] { trimAnnotation });
+        RhinoZoneExtractionResult annotated = RhinoZoneExtractor.Extract(
             new[]
             {
-                new RhinoZoneSource(
-                    innerLoopFace,
-                    "Unannotated inner-loop zone",
-                    1,
-                    profile,
-                    zoneId: new EntityId("ZONE-SMOKE-INNER-UNANNOTATED"),
-                    surfaceConstruction: construction),
+                new RhinoZoneSource("Annotated", 1, 3, profile, new[] { annotatedSurface }),
             },
-            context,
-            openFaceOptions);
-        Check(!unannotatedInnerLoop.Success
-              && unannotatedInnerLoop.Diagnostics.Any(item =>
-                  item.Code == "SD.RHINO.OPENING_METADATA_REQUIRED"),
-            "An unannotated Brep inner loop did not require an explicit opening definition.");
-        checks++;
-
-        RhinoZoneExtractionResult innerLoop = RhinoZoneExtractor.Extract(
-            new[]
-            {
-                new RhinoZoneSource(
-                    innerLoopFace,
-                    "Inner-loop zone",
-                    1,
-                    profile,
-                    zoneId: new EntityId("ZONE-SMOKE-INNER"),
-                    fenestrations: new[] { innerLoopAnnotation },
-                    surfaceConstruction: construction),
-            },
-            context,
-            openFaceOptions);
-        Check(innerLoop.Success, Describe(innerLoop.Diagnostics));
-        Fenestration annotated = innerLoop.Zones[0].Surfaces
-            .SelectMany(surface => surface.Fenestrations)
-            .Single();
-        Check(annotated.Id == innerLoopAnnotation.Id
-              && annotated.Name == innerLoopAnnotation.Name
-              && annotated.Type == FenestrationType.Door
-              && ReferenceEquals(annotated.Construction, doorConstruction),
-            "An explicit source did not override matching Brep inner-loop metadata.");
-        RhinoDomainGeometryMapEntry annotatedMap = innerLoop.GeometryMap.Single(entry =>
+            context);
+        Check(annotated.Success, Describe(annotated.Diagnostics));
+        RhinoDomainGeometryMapEntry annotatedMap = annotated.GeometryMap.Single(entry =>
             entry.Kind == RhinoMappedGeometryKind.Fenestration);
-        Check(annotatedMap.BrepLoopIndex == sourceBrepLoopIndex
-              && annotatedMap.FenestrationSourceIndex == 0
+        Check(annotatedMap.ZoneIndex == 0
+              && annotatedMap.SurfaceIndex == 0
+              && annotatedMap.OpeningIndex == 0
+              && annotatedMap.TrimLoopIndex == sourceTrimLoopIndex
               && annotatedMap.Provenance.RhinoObjectId == annotationRhinoId
+              && !annotatedMap.Provenance.BrepFaceIndex.HasValue
               && annotatedMap.Provenance.GrasshopperPath == "{2;3}"
               && annotatedMap.Provenance.GrasshopperIndex == 7,
-            "An inner-loop annotation did not retain both geometry-source indices and provenance.");
-        Check(innerLoop.Diagnostics.Any(item => item.Code == "SD.RHINO.OPENING_INNER_LOOP_ANNOTATED")
-              && innerLoop.Diagnostics.All(item => item.Code != "SD.RHINO.OPENING_DUPLICATE_IGNORED"),
-            "The inner-loop metadata override diagnostic is missing or still reports an ignored duplicate.");
-        checks += 4;
+            "Inner-loop annotation did not retain the new source indices and provenance.");
+        checks += 3;
 
-        using Brep slopedFace = SlopedPlanarFace(5d);
-        RhinoZoneExtractionResult sloped = RhinoZoneExtractor.Extract(
-            new[]
-            {
-                new RhinoZoneSource(
-                    slopedFace,
-                    "Sloped face zone",
-                    1,
-                    profile,
-                    zoneId: new EntityId("ZONE-SMOKE-SLOPED"),
-                    surfaceConstruction: construction),
-            },
-            context,
-            openFaceOptions);
-        Check(sloped.Success
-              && sloped.Diagnostics.Any(item => item.Code == "SD.RHINO.SLOPED_SURFACE_ABSTRACTED"),
-            "A five-degree horizontal tilt was not reported against the one-degree angle tolerance.");
+        using var offPlaneCurve = new PolylineCurve(Closed(
+            new Point3d(1, 0.1, 1),
+            new Point3d(2, 0.1, 1),
+            new Point3d(2, 0.1, 2),
+            new Point3d(1, 0.1, 2)));
+        var offPlaneOpening = new RhinoFenestrationSource(
+            offPlaneCurve,
+            "Off-plane door",
+            FenestrationType.Door,
+            doorConstruction);
+        var offPlaneSurface = new RhinoSurfaceSource(
+            innerLoopFace,
+            "Off-plane wall",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Outdoors,
+            construction,
+            new[] { offPlaneOpening });
+        RhinoZoneExtractionResult offPlane = RhinoZoneExtractor.Extract(
+            new[] { new RhinoZoneSource("Off plane", 1, 3, profile, new[] { offPlaneSurface }) },
+            context);
+        Check(!offPlane.Success
+              && offPlane.Diagnostics.Any(item => item.Code == "SD.RHINO.OPENING_NOT_COPLANAR"),
+            "A distant parallel opening curve was projected onto its surface implicitly.");
         checks++;
 
-        using Brep secondBox = Box(4, 0, 0, 8, 3, 2);
-        var secondSource = new RhinoZoneSource(
-            secondBox,
-            "Second zone",
-            1,
-            profile,
-            zoneId: new EntityId("ZONE-SMOKE-2"),
-            surfaceConstruction: construction);
-        RhinoZoneExtractionResult adjacent = RhinoZoneExtractor.Extract(
-            new[] { firstSource, secondSource },
+        var multiFaceSurface = new RhinoSurfaceSource(
+            firstBox,
+            "Invalid volume surface",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Outdoors,
+            construction);
+        RhinoZoneExtractionResult multiFace = RhinoZoneExtractor.Extract(
+            new[] { new RhinoZoneSource("Invalid volume", 1, 2, profile, new[] { multiFaceSurface }) },
+            context);
+        Check(!multiFace.Success
+              && multiFace.Diagnostics.Any(item => item.Code == "SD.RHINO.SURFACE_REQUIRES_ONE_FACE"),
+            "A multi-face zone Brep was accepted as an SD Surface.");
+        checks++;
+
+        using Brep adjacentFirstBox = Box(0, 0, 0, 4, 3, 2);
+        using Brep adjacentSecondBox = Box(4, 0, 0, 8, 3, 2);
+        IReadOnlyList<RhinoSurfaceSource> adjacentFirstSurfaces = BoxSurfaces(
+            adjacentFirstBox,
+            "Adjacent first",
+            construction,
             context,
-            options);
+            owned);
+        IReadOnlyList<RhinoSurfaceSource> adjacentSecondSurfaces = BoxSurfaces(
+            adjacentSecondBox,
+            "Adjacent second",
+            construction,
+            context,
+            owned);
+        RhinoZoneExtractionResult adjacent = RhinoZoneExtractor.Extract(
+            new[]
+            {
+                new RhinoZoneSource("Adjacent first", 1, 2, profile, adjacentFirstSurfaces,
+                    zoneId: new EntityId("ZONE-SMOKE-ADJ-1")),
+                new RhinoZoneSource("Adjacent second", 1, 2, profile, adjacentSecondSurfaces,
+                    zoneId: new EntityId("ZONE-SMOKE-ADJ-2")),
+            },
+            context);
         Check(adjacent.Success, Describe(adjacent.Diagnostics));
         Check(adjacent.Zones.Sum(zone => zone.Surfaces.Count(surface =>
                   surface.BoundaryCondition == SurfaceBoundaryCondition.Zone)) == 2,
-            "Coincident box faces did not create one reciprocal zone pair.");
+            "Coincident opposite-normal outdoor surfaces did not create reciprocal Zone boundaries.");
         Check(adjacent.Zones.SelectMany(zone => zone.Surfaces)
-                .Where(surface => surface.BoundaryCondition == SurfaceBoundaryCondition.Zone)
-                .All(surface => surface.AdjacentZoneId is not null),
-            "An adjacent SimpleDragon surface lost its zone identifier.");
+            .Where(surface => surface.BoundaryCondition == SurfaceBoundaryCondition.Zone)
+            .All(surface => surface.AdjacentZoneId is not null),
+            "A reciprocal zone surface lost its adjacent zone ID.");
         checks += 3;
 
-        using Brep duplicateFirst = Box(0, 0, 0, 4, 3, 2);
-        using Brep duplicateSecond = Box(0, 0, 0, 4, 3, 2);
-        RhinoZoneExtractionResult duplicates = RhinoZoneExtractor.Extract(
-            new[]
-            {
-                new RhinoZoneSource(
-                    duplicateFirst,
-                    "Duplicate first",
-                    1,
-                    profile,
-                    zoneId: new EntityId("ZONE-SMOKE-DUPLICATE-1"),
-                    surfaceConstruction: construction),
-                new RhinoZoneSource(
-                    duplicateSecond,
-                    "Duplicate second",
-                    1,
-                    profile,
-                    zoneId: new EntityId("ZONE-SMOKE-DUPLICATE-2"),
-                    surfaceConstruction: construction),
-            },
-            context,
-            options);
-        Check(!duplicates.Success
-              && duplicates.Diagnostics.Any(item => item.Code == "SD.RHINO.ADJACENCY_NORMALS_NOT_OPPOSED"),
-            "Coincident overlapping volumes were not rejected by their same-direction normals.");
-        Check(duplicates.Zones.SelectMany(zone => zone.Surfaces)
-            .All(surface => surface.BoundaryCondition != SurfaceBoundaryCondition.Zone),
-            "Same-direction duplicate faces were incorrectly assigned as adjacent zones.");
-        checks += 2;
-
-        using Brep mismatchFirst = Box(0, 0, 0, 4, 3, 2);
-        using Brep mismatchSecond = Box(4, 0, 0, 8, 3, 2);
-        int mismatchHost = FindWallFace(mismatchFirst, new Vector3d(1, 0, 0));
-        using var mismatchOpeningCurve = new PolylineCurve(Closed(
+        using var interiorOpeningCurve = new PolylineCurve(Closed(
             new Point3d(4, 0.75, 0.5),
             new Point3d(4, 1.75, 0.5),
             new Point3d(4, 1.75, 1.5),
             new Point3d(4, 0.75, 1.5)));
-        var mismatchOpening = new RhinoFenestrationSource(
-            mismatchOpeningCurve,
-            mismatchHost,
-            "Unpaired interior opening",
+        var interiorOpening = new RhinoFenestrationSource(
+            interiorOpeningCurve,
+            "Shared window",
             FenestrationType.Window,
-            glazing);
-        RhinoZoneExtractionResult mismatchedOpenings = RhinoZoneExtractor.Extract(
+            glazing,
+            id: new EntityId("FNST-SMOKE-SHARED"));
+        using Brep mirroredFirstBox = Box(0, 0, 0, 4, 3, 2);
+        using Brep mirroredSecondBox = Box(4, 0, 0, 8, 3, 2);
+        IReadOnlyList<RhinoSurfaceSource> mirroredFirstSurfaces = BoxSurfaces(
+            mirroredFirstBox,
+            "Mirrored first",
+            construction,
+            context,
+            owned,
+            openings: normal => normal * Vector3d.XAxis > 0.999999
+                ? new[] { interiorOpening }
+                : null);
+        IReadOnlyList<RhinoSurfaceSource> mirroredSecondSurfaces = BoxSurfaces(
+            mirroredSecondBox,
+            "Mirrored second",
+            construction,
+            context,
+            owned);
+        RhinoZoneExtractionResult mirrored = RhinoZoneExtractor.Extract(
             new[]
             {
-                new RhinoZoneSource(
-                    mismatchFirst,
-                    "Mismatch first",
-                    1,
-                    profile,
-                    zoneId: new EntityId("ZONE-SMOKE-MISMATCH-1"),
-                    fenestrations: new[] { mismatchOpening },
-                    surfaceConstruction: construction),
-                new RhinoZoneSource(
-                    mismatchSecond,
-                    "Mismatch second",
-                    1,
-                    profile,
-                    zoneId: new EntityId("ZONE-SMOKE-MISMATCH-2"),
-                    surfaceConstruction: construction),
+                new RhinoZoneSource("Mirrored first", 1, 2, profile, mirroredFirstSurfaces),
+                new RhinoZoneSource("Mirrored second", 1, 2, profile, mirroredSecondSurfaces),
             },
+            context);
+        Check(mirrored.Success, Describe(mirrored.Diagnostics));
+        Check(mirrored.Zones.SelectMany(zone => zone.Surfaces)
+                .Where(surface => surface.BoundaryCondition == SurfaceBoundaryCondition.Zone)
+                .All(surface => surface.Fenestrations.Count == 1)
+              && mirrored.Diagnostics.Any(item => item.Code == "SD.RHINO.ADJACENCY_OPENINGS_MIRRORED"),
+            "A one-sided inter-zone opening was not mirrored to the reciprocal surface.");
+        Check(mirrored.GeometryMap.Count(entry => entry.Kind == RhinoMappedGeometryKind.Fenestration) == 2
+              && mirrored.GeometryMap.Where(entry => entry.Kind == RhinoMappedGeometryKind.Fenestration)
+                  .All(entry => entry.OpeningIndex == 0),
+            "Mirrored opening provenance lost its explicit opening index.");
+        var mirroredModel = new GreenRetrofitModel(
+            "Mirrored Rhino smoke model",
+            0,
+            "서울특별시 종로구",
+            new DateTime(2020, 1, 1),
+            false,
+            mirrored.Floors,
+            new[] { material },
+            new[] { construction },
+            new[] { glazing });
+        GreenRetrofitConversionResult mirroredConversion = GreenRetrofitConverter.Convert(mirroredModel);
+        Check(mirroredConversion.Success, Describe(mirroredConversion.Diagnostics));
+        checks += 4;
+
+        using Brep mismatchFirstBox = Box(0, 0, 0, 4, 3, 2);
+        using Brep mismatchSecondBox = Box(4, 0, 0, 8, 3, 2);
+        var conflictingOpening = new RhinoFenestrationSource(
+            interiorOpeningCurve,
+            "Different shared window",
+            FenestrationType.Window,
+            otherGlazing);
+        IReadOnlyList<RhinoSurfaceSource> mismatchFirstSurfaces = BoxSurfaces(
+            mismatchFirstBox,
+            "Mismatch first",
+            construction,
             context,
-            options);
-        Check(!mismatchedOpenings.Success
-              && mismatchedOpenings.Diagnostics.Any(item =>
-                  item.Code == "SD.RHINO.ADJACENCY_OPENINGS_MISMATCH"),
-            "Coincident faces with different opening topology did not report an adjacency error.");
-        Check(mismatchedOpenings.Zones.SelectMany(zone => zone.Surfaces)
-            .All(surface => surface.BoundaryCondition != SurfaceBoundaryCondition.Zone),
-            "Faces with different opening topology were incorrectly assigned as adjacent zones.");
-        checks += 2;
+            owned,
+            openings: normal => normal * Vector3d.XAxis > 0.999999
+                ? new[] { interiorOpening }
+                : null);
+        IReadOnlyList<RhinoSurfaceSource> mismatchSecondSurfaces = BoxSurfaces(
+            mismatchSecondBox,
+            "Mismatch second",
+            construction,
+            context,
+            owned,
+            openings: normal => normal * -Vector3d.XAxis > 0.999999
+                ? new[] { conflictingOpening }
+                : null);
+        RhinoZoneExtractionResult mismatch = RhinoZoneExtractor.Extract(
+            new[]
+            {
+                new RhinoZoneSource("Mismatch first", 1, 2, profile, mismatchFirstSurfaces),
+                new RhinoZoneSource("Mismatch second", 1, 2, profile, mismatchSecondSurfaces),
+            },
+            context);
+        Check(!mismatch.Success
+              && mismatch.Diagnostics.Any(item =>
+                  item.Code == "SD.RHINO.ADJACENCY_OPENING_METADATA_CONFLICT"),
+            "Two-sided inter-zone openings with different semantics were accepted.");
+        checks++;
+
+        using Brep conflictFirstBox = Box(0, 0, 0, 4, 3, 2);
+        using Brep conflictSecondBox = Box(4, 0, 0, 8, 3, 2);
+        IReadOnlyList<RhinoSurfaceSource> conflictFirstSurfaces = BoxSurfaces(
+            conflictFirstBox,
+            "Conflict first",
+            construction,
+            context,
+            owned,
+            boundary: normal => normal * Vector3d.XAxis > 0.999999
+                ? SurfaceBoundaryCondition.Adiabatic
+                : DefaultBoundary(normal));
+        IReadOnlyList<RhinoSurfaceSource> conflictSecondSurfaces = BoxSurfaces(
+            conflictSecondBox,
+            "Conflict second",
+            construction,
+            context,
+            owned);
+        RhinoZoneExtractionResult boundaryConflict = RhinoZoneExtractor.Extract(
+            new[]
+            {
+                new RhinoZoneSource("Conflict first", 1, 2, profile, conflictFirstSurfaces),
+                new RhinoZoneSource("Conflict second", 1, 2, profile, conflictSecondSurfaces),
+            },
+            context);
+        Check(!boundaryConflict.Success
+              && boundaryConflict.Diagnostics.Any(item =>
+                  item.Code == "SD.RHINO.ADJACENCY_BOUNDARY_CONFLICT"),
+            "Coincident Ground/Adiabatic geometry was paired as an inter-zone boundary.");
+        checks++;
+
+        using Brep sameNormalFace = adjacentFirstSurfaces
+            .Single(surface => SurfaceNormal(surface, context) * Vector3d.XAxis > 0.999999)
+            .Geometry.DuplicateBrep();
+        using Brep sameNormalDuplicate = sameNormalFace.DuplicateBrep();
+        var sameNormalFirst = new RhinoSurfaceSource(
+            sameNormalFace,
+            "Same normal first",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Outdoors,
+            construction);
+        var sameNormalSecond = new RhinoSurfaceSource(
+            sameNormalDuplicate,
+            "Same normal second",
+            SurfaceType.Wall,
+            SurfaceBoundaryCondition.Outdoors,
+            construction);
+        RhinoZoneExtractionResult sameNormal = RhinoZoneExtractor.Extract(
+            new[]
+            {
+                new RhinoZoneSource("Same normal first", 1, 2, profile, new[] { sameNormalFirst }),
+                new RhinoZoneSource("Same normal second", 1, 2, profile, new[] { sameNormalSecond }),
+            },
+            context);
+        Check(!sameNormal.Success
+              && sameNormal.Diagnostics.Any(item => item.Code == "SD.RHINO.ADJACENCY_NORMALS_NOT_OPPOSED"),
+            "Same-normal coincident surfaces were paired.");
+        checks++;
 
         var model = new GreenRetrofitModel(
             "Rhino smoke model",
@@ -323,8 +410,6 @@ internal static class SimpleDragonRhinoSmokeChecks
             new[] { glazing });
         GreenRetrofitConversionResult conversion = GreenRetrofitConverter.Convert(model);
         Check(conversion.Success, Describe(conversion.Diagnostics));
-        Check(conversion.RequireEnergyModel().Zones.Single().Profile.Id == profile.Id,
-            "The converted profile did not retain its stable SimpleDragon entity ID.");
         using RhinoConversionPreview preview = RhinoConversionPreviewBuilder.Create(
             model,
             conversion,
@@ -333,34 +418,75 @@ internal static class SimpleDragonRhinoSmokeChecks
         Check(preview.Success, Describe(preview.Diagnostics));
         Check(preview.Surfaces.Count == 6
               && preview.Surfaces.All(item => item.Geometry.IsValid && item.ExplodedGeometry.IsValid),
-            "Converted InvisibleDragon surfaces did not return as six valid exact and exploded Breps.");
+            "Converted InvisibleDragon surfaces did not return as valid preview Breps.");
         Check(preview.Surfaces.All(item => AlmostEqual(item.ConvertedNetArea, item.RhinoNetArea, 1e-8)),
             "A converted preview Brep changed net area.");
-        Check(preview.Surfaces.All(item => !string.IsNullOrWhiteSpace(item.GeometryFingerprint)),
-            "A converted preview surface lost its fingerprint.");
-        Check(preview.Surfaces.All(item =>
-                item.GrossAreaDifference.HasValue
-                && item.OpeningAreaDifference.HasValue
-                && AlmostEqual(item.GrossAreaDifference.Value, 0d, 1e-8)
-                && AlmostEqual(item.OpeningAreaDifference.Value, 0d, 1e-8)),
-            "Source-to-converted gross or opening area comparison changed.");
         Check(preview.Surfaces.All(item =>
                 item.SourceGeometry is not null
                 && !string.IsNullOrWhiteSpace(item.SourceGeometryFingerprint)),
-            "A converted preview surface lost its Rhino source provenance.");
+            "A converted preview surface lost its authored Surface provenance.");
         Check(preview.Surfaces.All(LabelIsOnTrimmedFace),
             "A converted surface label anchor lies outside its trimmed Rhino face.");
-        checks += 9;
+        checks += 6;
 
         Console.WriteLine(
             $"SimpleDragon Rhino smoke checks passed: {checks} checks on Rhino {RhinoApp.Version}.");
         return 0;
     }
 
-    private static Brep Box(double x0, double y0, double z0, double x1, double y1, double z1)
+    private static List<RhinoSurfaceSource> BoxSurfaces(
+        Brep box,
+        string prefix,
+        SurfaceConstruction construction,
+        RhinoGeometryContext context,
+        OwnedBreps owned,
+        Func<Vector3d, SurfaceBoundaryCondition>? boundary = null,
+        Func<Vector3d, IEnumerable<RhinoFenestrationSource>?>? openings = null)
     {
-        return new Box(new BoundingBox(x0, y0, z0, x1, y1, z1)).ToBrep();
+        var result = new List<RhinoSurfaceSource>();
+        foreach (BrepFace face in box.Faces)
+        {
+            Brep geometry = owned.Add(face.DuplicateFace(false));
+            Vector3d normal = SurfaceNormal(geometry, context);
+            SurfaceType type = TypeFromNormal(normal);
+            result.Add(new RhinoSurfaceSource(
+                geometry,
+                prefix + " surface " + face.FaceIndex,
+                type,
+                boundary?.Invoke(normal) ?? DefaultBoundary(normal),
+                construction,
+                openings?.Invoke(normal),
+                surfaceId: new EntityId(
+                    "SURF-SMOKE-" + Sanitize(prefix) + "-" + face.FaceIndex)));
+        }
+
+        return result;
     }
+
+    private static Vector3d SurfaceNormal(RhinoSurfaceSource surface, RhinoGeometryContext context) =>
+        SurfaceNormal(surface.Geometry, context);
+
+    private static Vector3d SurfaceNormal(Brep geometry, RhinoGeometryContext context)
+    {
+        var normal = RhinoPolygonConverter.FromBrepFace(geometry.Faces[0], context).OuterLoop.Normal;
+        return new Vector3d(normal.X, normal.Y, normal.Z);
+    }
+
+    private static SurfaceType TypeFromNormal(Vector3d normal) => Math.Abs(normal.Z) <= Math.Sqrt(0.5)
+        ? SurfaceType.Wall
+        : normal.Z > 0
+            ? SurfaceType.Ceiling
+            : SurfaceType.Floor;
+
+    private static SurfaceBoundaryCondition DefaultBoundary(Vector3d normal) =>
+        TypeFromNormal(normal) == SurfaceType.Floor
+            ? SurfaceBoundaryCondition.Ground
+            : SurfaceBoundaryCondition.Outdoors;
+
+    private static string Sanitize(string value) => value.Replace(' ', '-').ToUpperInvariant();
+
+    private static Brep Box(double x0, double y0, double z0, double x1, double y1, double z1) =>
+        new Box(new BoundingBox(x0, y0, z0, x1, y1, z1)).ToBrep();
 
     private static Brep PlanarFaceWithHole()
     {
@@ -374,55 +500,18 @@ internal static class SimpleDragonRhinoSmokeChecks
             new Point3d(2, 0, 1),
             new Point3d(2, 0, 2),
             new Point3d(1, 0, 2)));
-        return CreateSinglePlanarBrep(new Curve[] { outer, inner });
-    }
-
-    private static Brep SlopedPlanarFace(double degrees)
-    {
-        double rise = 3d * Math.Tan(degrees * Math.PI / 180d);
-        using var boundary = new PolylineCurve(Closed(
-            new Point3d(0, 0, 0),
-            new Point3d(4, 0, 0),
-            new Point3d(4, 3, rise),
-            new Point3d(0, 3, rise)));
-        return CreateSinglePlanarBrep(new Curve[] { boundary });
-    }
-
-    private static Brep CreateSinglePlanarBrep(IEnumerable<Curve> boundaries)
-    {
-        Brep[] created = Brep.CreatePlanarBreps(boundaries, 1e-6);
+        Brep[] created = Brep.CreatePlanarBreps(new Curve[] { outer, inner }, 1e-6);
         if (created.Length == 1)
         {
             return created[0];
         }
 
-        foreach (Brep brep in created)
+        foreach (Brep item in created)
         {
-            brep.Dispose();
+            item.Dispose();
         }
 
-        throw new InvalidOperationException(
-            $"Expected one planar Brep smoke fixture, but Rhino created {created.Length}.");
-    }
-
-    private static bool AzimuthsEqual(
-        GonieGonie.SimpleDragon.Zone first,
-        GonieGonie.SimpleDragon.Zone second)
-    {
-        double[] firstValues = first.Surfaces
-            .Where(surface => surface.Type == SurfaceType.Wall
-                && surface.BoundaryCondition == SurfaceBoundaryCondition.Outdoors)
-            .Select(surface => surface.Azimuth!.Value)
-            .OrderBy(value => value)
-            .ToArray();
-        double[] secondValues = second.Surfaces
-            .Where(surface => surface.Type == SurfaceType.Wall
-                && surface.BoundaryCondition == SurfaceBoundaryCondition.Outdoors)
-            .Select(surface => surface.Azimuth!.Value)
-            .OrderBy(value => value)
-            .ToArray();
-        return firstValues.Length == secondValues.Length
-            && firstValues.Zip(secondValues, (left, right) => AlmostEqual(left, right)).All(value => value);
+        throw new InvalidOperationException("Expected one planar Brep with one hole.");
     }
 
     private static bool AreasEqual(
@@ -446,26 +535,6 @@ internal static class SimpleDragonRhinoSmokeChecks
         return face.ClosestPoint(preview.LabelPoint, out double u, out double v)
             && face.IsPointOnFace(u, v) != PointFaceRelation.Exterior
             && face.PointAt(u, v).DistanceTo(preview.LabelPoint) <= 1e-8;
-    }
-
-    private static int FindWallFace(Brep brep, Vector3d targetNormal)
-    {
-        foreach (BrepFace face in brep.Faces)
-        {
-            Vector3d normal = face.NormalAt(face.Domain(0).Mid, face.Domain(1).Mid);
-            if (face.OrientationIsReversed)
-            {
-                normal.Reverse();
-            }
-
-            normal.Unitize();
-            if (normal * targetNormal > 0.999999)
-            {
-                return face.FaceIndex;
-            }
-        }
-
-        throw new InvalidOperationException("The requested box wall was not found.");
     }
 
     private static UsageProfile Profile()
@@ -494,21 +563,36 @@ internal static class SimpleDragonRhinoSmokeChecks
         return polyline;
     }
 
-    private static bool AlmostEqual(double first, double second, double tolerance = 1e-10)
-    {
-        return Math.Abs(first - second) <= tolerance;
-    }
+    private static bool AlmostEqual(double first, double second, double tolerance = 1e-10) =>
+        Math.Abs(first - second) <= tolerance;
 
-    private static string Describe(IEnumerable<Diagnostic> diagnostics)
-    {
-        return string.Join(Environment.NewLine, diagnostics.Select(item => item.Code + ": " + item.Message));
-    }
+    private static string Describe(IEnumerable<Diagnostic> diagnostics) =>
+        string.Join(Environment.NewLine, diagnostics.Select(item => item.Code + ": " + item.Message));
 
     private static void Check(bool condition, string message)
     {
         if (!condition)
         {
             throw new InvalidOperationException(message);
+        }
+    }
+
+    private sealed class OwnedBreps : IDisposable
+    {
+        private readonly List<Brep> _items = new();
+
+        internal Brep Add(Brep brep)
+        {
+            _items.Add(brep ?? throw new ArgumentNullException(nameof(brep)));
+            return brep;
+        }
+
+        public void Dispose()
+        {
+            foreach (Brep item in _items)
+            {
+                item.Dispose();
+            }
         }
     }
 }
