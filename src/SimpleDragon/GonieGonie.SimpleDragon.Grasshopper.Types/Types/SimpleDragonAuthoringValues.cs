@@ -18,7 +18,7 @@ public sealed class OpeningDefinition
         Curve geometry,
         string name,
         FenestrationType type,
-        FenestrationConstruction? construction = null,
+        FenestrationConstruction construction,
         BlindType? blind = null,
         EntityId? id = null)
     {
@@ -54,10 +54,17 @@ public sealed class OpeningDefinition
             throw new ArgumentOutOfRangeException(nameof(blind), blind, "Unknown blind type.");
         }
 
+        if (construction is null)
+        {
+            throw new ArgumentNullException(
+                nameof(construction),
+                "An opening must own its fenestration construction.");
+        }
+
         AuthoringValueSupport.ValidateFenestrationConstruction(type, construction, blind);
         _geometryArchive = RhinoGeometryArchive.Encode(geometryCopy);
         Type = type;
-        Construction = AuthoringValueSupport.CopyOptional(construction);
+        Construction = AuthoringValueSupport.Copy(construction);
         Blind = blind;
         Id = id;
     }
@@ -68,7 +75,7 @@ public sealed class OpeningDefinition
 
     public FenestrationType Type { get; }
 
-    public FenestrationConstruction? Construction { get; }
+    public FenestrationConstruction Construction { get; }
 
     public BlindType? Blind { get; }
 
@@ -97,7 +104,6 @@ public sealed class ZoneDefinition
         int floorNumber,
         UsageProfile profile,
         SurfaceConstruction? surfaceConstruction = null,
-        FenestrationConstruction? defaultFenestrationConstruction = null,
         SurfaceBoundaryCondition unmatchedFloorBoundary = SurfaceBoundaryCondition.Ground,
         double? lightDensity = 10d,
         IEnumerable<OpeningDefinition>? openings = null,
@@ -144,15 +150,6 @@ public sealed class ZoneDefinition
         }
 
         SurfaceConstruction = AuthoringValueSupport.CopyOptional(surfaceConstruction);
-        DefaultFenestrationConstruction = AuthoringValueSupport.CopyOptional(defaultFenestrationConstruction);
-        if (DefaultFenestrationConstruction is not null
-            && !DefaultFenestrationConstruction.IsTransparent)
-        {
-            throw new ArgumentException(
-                "The default fenestration construction must be transparent. Use an explicit opaque construction for a door.",
-                nameof(defaultFenestrationConstruction));
-        }
-
         OpeningDefinition[] openingArray = AuthoringValueSupport.CopyOpenings(openings);
         SupplySystem[] supplyArray = AuthoringValueSupport.CopyCoreValues(supplySystems, nameof(supplySystems));
         VentilationAssignment[] ventilationArray = AuthoringValueSupport.CopyCoreValues(
@@ -183,7 +180,7 @@ public sealed class ZoneDefinition
         {
             AuthoringValueSupport.ValidateFenestrationConstruction(
                 opening.Type,
-                opening.Construction ?? DefaultFenestrationConstruction,
+                opening.Construction,
                 opening.Blind);
         }
 
@@ -206,8 +203,6 @@ public sealed class ZoneDefinition
 
     public SurfaceConstruction? SurfaceConstruction { get; }
 
-    public FenestrationConstruction? DefaultFenestrationConstruction { get; }
-
     public SurfaceBoundaryCondition UnmatchedFloorBoundary { get; }
 
     public double? LightDensity { get; }
@@ -229,7 +224,6 @@ public sealed class ZoneDefinition
             FloorNumber,
             Profile,
             SurfaceConstruction,
-            DefaultFenestrationConstruction,
             UnmatchedFloorBoundary,
             LightDensity,
             Openings,

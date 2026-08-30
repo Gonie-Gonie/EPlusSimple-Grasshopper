@@ -12,9 +12,9 @@ window curves that can be referenced directly from Grasshopper.
 | `02-invisibledragon-single-zone-hvac-idf.gh` | Window→Surface→Zone and HVAC/ERV→Zone direct ownership, PV, energy model, and path-free EnergyPlus 24.2 IDF compile/validation |
 | `10-simpledragon-material-construction.gh` | Minimal SimpleDragon Material -> Construction Layer -> Surface Construction graph |
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
-| `12-simpledragon-two-zone-to-idf.gh` | Complex two-Zone composition/IDF authoring: local Brep and Opening ownership, heat-pump/AHU, boiler/radiator, ERV, PV, then path-free IDF and packaged Weather preparation |
+| `12-simpledragon-two-zone-to-idf.gh` | Complex two-Zone composition/IDF authoring: Fenestration Construction -> Opening -> local Zone, west heat-pump/AHU, east boiler/radiator, dedicated ERVs, PV, then path-free IDF and packaged Weather preparation |
 | `13-simpledragon-results-and-plots.gh` | Real GRR read, annual summary, monthly DataTree, line plot, bar plot, and non-writing CSV preview |
-| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: electric radiators and ERV connect directly to two Zones, typed IDF and Weather feed managed InvisibleDragon Run, and a typed Batch Case feeds managed batch without parallel model/ID lists |
+| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: dedicated electric radiators and ERVs connect to their own Zones, typed IDF and Weather feed managed InvisibleDragon Run, and a typed Batch Case feeds managed batch without parallel model/ID lists |
 | `30-two-zone-office.3dm` | Two adjacent named office-zone solids and two named south-window curves |
 | `31-three-zone-stepped-office.3dm` | Two adjacent ground-floor zones plus an adjacent upper zone and three named windows |
 

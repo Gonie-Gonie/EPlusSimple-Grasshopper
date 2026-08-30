@@ -13,24 +13,28 @@
 Build each object where its ownership is visible in the wires:
 
 ```text
-Opening Curve -> SD Opening -------------------+
-                                                |
-Zone Brep + Profile + HVAC + ERV ------------> SD Zone --+
-Opening Curve -> SD Opening -------------------+          |
-                                                           +-> SD Model (Address)
-Zone Brep + Profile + HVAC + ERV ------------> SD Zone --+          |
-                                                                      v
-                                                                  SD to IDF
-                                                               IDF + Weather
-                                                                      |
-                                                                      v
-                                                             Run InvisibleDragon
-                                                                      |
-                                                                      v
-                                                        Result / GRR / Plot / CSV
+Opening Curve + Fenestration Construction -> SD Opening -> West SD Zone <- West Brep / Profile / HVAC / ERV --+
+Opening Curve + Fenestration Construction -> SD Opening -> East SD Zone <- East Brep / Profile / HVAC / ERV --+-> SD Model (Address)
+                                                                                                                   |
+                                                                                                                   v
+                                                                                                               SD to IDF
+                                                                                                            IDF + Weather
+                                                                                                                   |
+                                                                                                                   v
+                                                                                                          Run InvisibleDragon
+                                                                                                                   |
+                                                                                                                   v
+                                                                                                     Result / GRR / Plot / CSV
 ```
 
-`SD Opening` has no Zone Index or Face Index. Connect it only to the `SD Zone` that owns it; the host face is inferred from coplanarity and containment. Connect supply systems and `SD ERV` directly to that same Zone. Set the ERV's Count input when a Zone has multiple identical units; no intermediate assignment component is involved.
+`SD Opening` has no Zone Index or Face Index. Its Construction input is required
+and belongs to the Opening; a Zone never receives that construction again.
+Connect the completed Opening only to the `SD Zone` that owns it, and the host
+face is inferred from coplanarity and containment. A Brep inner loop must have a
+matching explicit Opening rather than inheriting guessed metadata. Connect each
+Zone-owned supply system and `SD ERV` only to that Zone. Set the ERV's Count input
+when a Zone has multiple identical units; no intermediate assignment component
+is involved.
 
 `SD Model` resolves every Zone together, so shared Brep faces still become inter-zone adjacency. It also derives the material, construction, supply, source, and ventilation catalogs from the connected objects. Those catalogs do not need parallel wires into a later assembly component.
 
@@ -96,8 +100,9 @@ CSV and reproducibility-manifest paths are outputs only.
 The tracked definitions under `examples/` progress from materials and profiles to linked Rhino geometry and a complete two-zone simulation. The principal authoring examples are:
 
 - `12-simpledragon-two-zone-to-idf.gh`: the complex authoring demonstration,
-  with two independently owned Zones and Openings, heat-pump/AHU and
-  boiler/radiator systems, ERV, and PV resolved into one GRM/IDF;
+  with two independently owned Zones, Openings, terminal systems, and ERVs;
+  a heat-pump/AHU serves the west Zone, a boiler/radiator serves the east Zone,
+  and PV is resolved with both into one GRM/IDF;
 - `14-simpledragon-two-zone-run-results-csv.gh`: the stable end-to-end gate,
   with an electric radiator and ERV connected directly to each Zone,
   Address/Vintage-selected Weather, InvisibleDragon execution, GRR, summaries,

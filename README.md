@@ -49,9 +49,9 @@ together when they come from the same release commit.
 The canonical Grasshopper flow keeps ownership local and simulation setup internal:
 
 ```text
-Curve -> SD Opening -> SD Zone <- Brep / Profile / HVAC / ERV
-                         |
-                         +-> SD Model (Address/Vintage) -> SD to IDF -> IDF + Weather -> Run InvisibleDragon
+Curve + Fenestration Construction -> SD Opening -> SD Zone <- Brep / Profile / HVAC / ERV
+                                                        |
+                                                        +-> SD Model (Address/Vintage) -> SD to IDF -> IDF + Weather -> Run InvisibleDragon
 
 Curve -> ID Window / Door -> ID Surface -> ID Zone <- Profile / HVAC / ERV
                                              |
@@ -60,9 +60,10 @@ Curve -> ID Window / Door -> ID Surface -> ID Zone <- Profile / HVAC / ERV
                                                    +-> Compile InvisibleDragon -> IDF
 ```
 
-No Zone/Face indices, assignment pass, EnergyPlus/IDD/EPW path, runtime root, or
-temporary-work input is required. Inter-zone surfaces are paired from coincident
-geometry when the InvisibleDragon model is composed; no adjacent-surface ID is typed.
+No Zone/Face indices, parent-level opening-construction fallback, assignment
+pass, EnergyPlus/IDD/EPW path, runtime root, or temporary-work input is required.
+Inter-zone surfaces are paired from coincident geometry when the
+InvisibleDragon model is composed; no adjacent-surface ID is typed.
 
 ## Developer quick start
 

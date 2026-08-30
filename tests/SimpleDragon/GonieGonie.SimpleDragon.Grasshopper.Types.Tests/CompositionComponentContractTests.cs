@@ -20,7 +20,7 @@ public sealed class CompositionComponentContractTests
         GH_Component prepare = Component(assembly, "PrepareSimpleDragonSimulationComponent");
 
         Assert.Equal(new Guid("7d41fd2c-b93f-4fc8-88ea-db1f3abeb2f1"), opening.ComponentGuid);
-        Assert.Equal(new Guid("f7389ac4-51dd-44dc-803a-e8e0989e7638"), zone.ComponentGuid);
+        Assert.Equal(new Guid("79b35a81-b6a2-43cf-8f9d-361a655b63d1"), zone.ComponentGuid);
         Assert.Equal(new Guid("ce38124b-f99b-4d09-be3b-e5e5717db707"), model.ComponentGuid);
         Assert.Equal(new Guid("ca666fd7-788c-4682-8b04-fad8c7252fe0"), prepare.ComponentGuid);
 
@@ -32,7 +32,6 @@ public sealed class CompositionComponentContractTests
                 "Floor Number",
                 "Profile",
                 "Surface Construction",
-                "Opening Construction",
                 "Openings",
                 "HVAC",
                 "ERVs",
@@ -40,10 +39,15 @@ public sealed class CompositionComponentContractTests
                 "Lighting Power Density",
             },
             zone.Params.Input.Select(parameter => parameter.Name));
-        Assert.Equal("SimpleDragonOpeningDefinitionParam", zone.Params.Input[6].GetType().Name);
-        Assert.Equal("SimpleDragonSupplySystemParam", zone.Params.Input[7].GetType().Name);
-        Assert.Equal("SimpleDragonZoneErvParam", zone.Params.Input[8].GetType().Name);
-        Assert.All(zone.Params.Input.Skip(6).Take(3), parameter =>
+        Assert.Equal("SimpleDragonFenestrationConstructionParam", opening.Params.Input[3].GetType().Name);
+        Assert.False(opening.Params.Input[3].Optional);
+        Assert.DoesNotContain(
+            zone.Params.Input,
+            parameter => parameter.GetType().Name == "SimpleDragonFenestrationConstructionParam");
+        Assert.Equal("SimpleDragonOpeningDefinitionParam", zone.Params.Input[5].GetType().Name);
+        Assert.Equal("SimpleDragonSupplySystemParam", zone.Params.Input[6].GetType().Name);
+        Assert.Equal("SimpleDragonZoneErvParam", zone.Params.Input[7].GetType().Name);
+        Assert.All(zone.Params.Input.Skip(5).Take(3), parameter =>
         {
             Assert.Equal(GH_ParamAccess.list, parameter.Access);
             Assert.True(parameter.Optional);

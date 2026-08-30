@@ -54,7 +54,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
             new SimpleDragonFenestrationConstructionParam(),
             "Construction",
             "FC",
-            "Optional opening construction. Empty inherits the Zone default.",
+            "Fenestration construction owned by this opening.",
             GH_ParamAccess.item);
         pManager.AddTextParameter(
             "Blind",
@@ -68,7 +68,6 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
             "Optional stable opening identifier.",
             GH_ParamAccess.item,
             string.Empty);
-        pManager[3].Optional = true;
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -97,12 +96,12 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
         string id = string.Empty;
         if (!DA.GetData(0, ref boundary)
             || !DA.GetData(1, ref name)
-            || !DA.GetData(2, ref typeValue))
+            || !DA.GetData(2, ref typeValue)
+            || !DA.GetData(3, ref constructionGoo))
         {
             return;
         }
 
-        DA.GetData(3, ref constructionGoo);
         DA.GetData(4, ref blindText);
         DA.GetData(5, ref id);
         try
@@ -113,7 +112,8 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
                 boundary!,
                 name,
                 type,
-                constructionGoo?.Value,
+                constructionGoo?.Value
+                    ?? throw new ArgumentException("Construction contains no value."),
                 blind,
                 OptionalId(id));
             DA.SetData(0, new SimpleDragonOpeningDefinitionGoo(opening));
@@ -204,7 +204,7 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
     {
     }
 
-    public override Guid ComponentGuid => new("f7389ac4-51dd-44dc-803a-e8e0989e7638");
+    public override Guid ComponentGuid => new("79b35a81-b6a2-43cf-8f9d-361a655b63d1");
 
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
@@ -216,19 +216,13 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
             new SimpleDragonSurfaceConstructionParam(),
             "Surface Construction",
             "SC",
-            "Optional default construction for this Zone's faces.",
-            GH_ParamAccess.item);
-        pManager.AddParameter(
-            new SimpleDragonFenestrationConstructionParam(),
-            "Opening Construction",
-            "FC",
-            "Optional default for Brep inner loops and openings without their own construction.",
+            "Optional construction owned by the faces extracted from this Zone Brep.",
             GH_ParamAccess.item);
         pManager.AddParameter(
             new SimpleDragonOpeningDefinitionParam(),
             "Openings",
             "O",
-            "Openings owned by this Zone. Their host faces are inferred geometrically.",
+            "Completed openings owned by this Zone. Each owns its Construction; host faces are inferred geometrically.",
             GH_ParamAccess.list);
         pManager.AddParameter(
             new SimpleDragonSupplySystemParam(),
@@ -258,7 +252,6 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
         pManager[5].Optional = true;
         pManager[6].Optional = true;
         pManager[7].Optional = true;
-        pManager[8].Optional = true;
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -279,7 +272,6 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
         int floor = 0;
         SimpleDragonUsageProfileGoo? profileGoo = null;
         SimpleDragonSurfaceConstructionGoo? surfaceConstructionGoo = null;
-        SimpleDragonFenestrationConstructionGoo? openingConstructionGoo = null;
         var openingGoos = new List<SimpleDragonOpeningDefinitionGoo>();
         var supplyGoos = new List<SimpleDragonSupplySystemGoo>();
         var ventilationGoos = new List<SimpleDragonZoneErvGoo>();
@@ -289,17 +281,16 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
             || !DA.GetData(1, ref name)
             || !DA.GetData(2, ref floor)
             || !DA.GetData(3, ref profileGoo)
-            || !DA.GetData(9, ref floorBoundaryText)
-            || !DA.GetData(10, ref lightDensity))
+            || !DA.GetData(8, ref floorBoundaryText)
+            || !DA.GetData(9, ref lightDensity))
         {
             return;
         }
 
         DA.GetData(4, ref surfaceConstructionGoo);
-        DA.GetData(5, ref openingConstructionGoo);
-        DA.GetDataList(6, openingGoos);
-        DA.GetDataList(7, supplyGoos);
-        DA.GetDataList(8, ventilationGoos);
+        DA.GetDataList(5, openingGoos);
+        DA.GetDataList(6, supplyGoos);
+        DA.GetDataList(7, ventilationGoos);
         try
         {
             UsageProfile profile = profileGoo?.Value
@@ -328,7 +319,6 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
                 floor,
                 profile,
                 surfaceConstructionGoo?.Value,
-                openingConstructionGoo?.Value,
                 floorBoundary,
                 lightDensity,
                 openings,
@@ -483,15 +473,12 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
                         continue;
                     }
 
-                    FenestrationConstruction? construction = opening.Construction
-                        ?? definition.DefaultFenestrationConstruction;
                     openingSources.Add(new RhinoFenestrationSource(
                         boundary,
                         host.FaceIndex!.Value,
                         opening.Name,
                         opening.Type,
-                        construction?.Id.Value ?? "RHINO-UNRESOLVED-FENESTRATION",
-                        construction,
+                        opening.Construction,
                         opening.Blind,
                         opening.Id,
                         grasshopperIndex: openingIndex));
@@ -519,13 +506,11 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
                     zoneGeometry[zoneIndex],
                     definition.Name,
                     definition.FloorNumber,
-                    definition.Profile.Name,
                     definition.Profile,
                     definition.LightDensity,
                     grasshopperIndex: zoneIndex,
                     fenestrations: openingSourcesByZone[zoneIndex],
-                    defaultSurfaceConstruction: definition.SurfaceConstruction,
-                    defaultFenestrationConstruction: definition.DefaultFenestrationConstruction,
+                    surfaceConstruction: definition.SurfaceConstruction,
                     unmatchedFloorBoundary: definition.UnmatchedFloorBoundary));
             }
 

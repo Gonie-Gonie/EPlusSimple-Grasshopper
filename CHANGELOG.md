@@ -26,6 +26,9 @@ independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
   the modules.
 - Use direct Window/Door -> Surface -> Zone -> Model ownership wires in
   InvisibleDragon and Opening/HVAC/ERV -> Zone -> Model wires in SimpleDragon.
+- Require each SimpleDragon Opening to own its Fenestration Construction, remove
+  the duplicate Zone construction port and all Rhino inner-loop fallbacks, and
+  reject unannotated inner loops instead of inventing opening metadata.
 - Represent opaque construction layers and managed simulation cases as typed
   values, so no authoring relationship depends on matching positions in two lists.
 - Add `Compile InvisibleDragon`, a visible path-free EnergyPlus 24.2 compiler

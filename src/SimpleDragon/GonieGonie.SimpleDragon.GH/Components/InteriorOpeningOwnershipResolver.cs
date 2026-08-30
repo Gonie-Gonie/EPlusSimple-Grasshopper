@@ -274,7 +274,7 @@ internal static class InteriorOpeningOwnershipResolver
     {
         return string.Equals(first.Name, second.Name, StringComparison.Ordinal)
             && first.Type == second.Type
-            && string.Equals(first.ConstructionId, second.ConstructionId, StringComparison.Ordinal)
+            && first.Construction.Id == second.Construction.Id
             && first.Blind == second.Blind;
     }
 
@@ -288,7 +288,6 @@ internal static class InteriorOpeningOwnershipResolver
             target.FaceIndex,
             source.Name,
             source.Type,
-            source.ConstructionId,
             source.Construction,
             source.Blind,
             PairedId(source.Id, target.Polygon, toleranceMetres),

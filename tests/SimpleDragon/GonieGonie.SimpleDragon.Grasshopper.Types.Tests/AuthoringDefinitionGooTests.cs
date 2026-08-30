@@ -52,7 +52,6 @@ public sealed class AuthoringDefinitionGooTests
             1,
             profile,
             surfaceConstruction,
-            fenestration,
             SurfaceBoundaryCondition.Ground,
             8.5d,
             new[] { opening },
@@ -74,7 +73,6 @@ public sealed class AuthoringDefinitionGooTests
 
         Assert.NotSame(profile, zone.Profile);
         Assert.NotSame(surfaceConstruction, zone.SurfaceConstruction);
-        Assert.NotSame(fenestration, zone.DefaultFenestrationConstruction);
         Assert.NotSame(opening, zone.Openings[0]);
         Assert.NotSame(supply, zone.SupplySystems[0]);
         Assert.NotSame(assignment, zone.VentilationAssignments[0]);
@@ -148,7 +146,8 @@ public sealed class AuthoringDefinitionGooTests
         Assert.Throws<ArgumentException>(() => new OpeningDefinition(
             openCurve,
             "Open",
-            FenestrationType.Window));
+            FenestrationType.Window,
+            TransparentConstruction()));
 
         using var plane = new PlaneSurface(
             Plane.WorldXY,
@@ -165,14 +164,19 @@ public sealed class AuthoringDefinitionGooTests
             "Opaque Door",
             2.2d,
             id: new EntityId("OPAQUE-DOOR"));
-        using Brep solid = ZoneBrep();
-        Assert.Throws<ArgumentException>(() => new ZoneDefinition(
-            solid,
-            "Invalid Default",
-            1,
-            Profile(),
-            defaultFenestrationConstruction: opaque));
+        using Curve closedCurve = OpeningCurve();
+        Assert.Throws<ArgumentNullException>(() => new OpeningDefinition(
+            closedCurve,
+            "Missing Construction",
+            FenestrationType.Window,
+            null!));
+        Assert.Throws<ArgumentException>(() => new OpeningDefinition(
+            closedCurve,
+            "Invalid Window",
+            FenestrationType.Window,
+            opaque));
 
+        using Brep solid = ZoneBrep();
         SupplySystem first = Supply("DUPLICATE-SUPPLY");
         SupplySystem second = Supply("DUPLICATE-SUPPLY");
         Assert.Throws<ArgumentException>(() => new ZoneDefinition(
@@ -239,9 +243,6 @@ public sealed class AuthoringDefinitionGooTests
         Assert.Equal(expected.FloorNumber, actual.FloorNumber);
         Assert.Equal(expected.Profile.Id, actual.Profile.Id);
         Assert.Equal(expected.SurfaceConstruction!.Id, actual.SurfaceConstruction!.Id);
-        Assert.Equal(
-            expected.DefaultFenestrationConstruction!.Id,
-            actual.DefaultFenestrationConstruction!.Id);
         Assert.Equal(expected.UnmatchedFloorBoundary, actual.UnmatchedFloorBoundary);
         Assert.Equal(expected.LightDensity, actual.LightDensity);
         Assert.Single(actual.Openings);
@@ -317,7 +318,6 @@ public sealed class AuthoringDefinitionGooTests
             2,
             Profile(),
             OpaqueConstruction(),
-            TransparentConstruction(),
             SurfaceBoundaryCondition.Ground,
             9.25d,
             new[] { opening },

@@ -590,7 +590,7 @@ internal static class SimpleDragonGooSnapshot
 
         public FenestrationType Type { get; set; }
 
-        public FenestrationConstructionSnapshot? Construction { get; set; }
+        public FenestrationConstructionSnapshot Construction { get; set; } = new();
 
         public BlindType? Blind { get; set; }
 
@@ -601,9 +601,7 @@ internal static class SimpleDragonGooSnapshot
             GeometryArchive = Convert.ToBase64String(value.GeometryArchive),
             Name = value.Name,
             Type = value.Type,
-            Construction = value.Construction is null
-                ? null
-                : FenestrationConstructionSnapshot.From(value.Construction),
+            Construction = FenestrationConstructionSnapshot.From(value.Construction),
             Blind = value.Blind,
             Id = value.Id?.Value,
         };
@@ -616,7 +614,7 @@ internal static class SimpleDragonGooSnapshot
                 geometry,
                 Name,
                 Type,
-                Construction?.ToDomain(),
+                Construction.ToDomain(),
                 Blind,
                 Id is null ? null : new EntityId(Id));
         }
@@ -633,8 +631,6 @@ internal static class SimpleDragonGooSnapshot
         public UsageProfileSnapshot Profile { get; set; } = new();
 
         public SurfaceConstructionSnapshot? SurfaceConstruction { get; set; }
-
-        public FenestrationConstructionSnapshot? DefaultFenestrationConstruction { get; set; }
 
         public SurfaceBoundaryCondition UnmatchedFloorBoundary { get; set; }
 
@@ -655,9 +651,6 @@ internal static class SimpleDragonGooSnapshot
             SurfaceConstruction = value.SurfaceConstruction is null
                 ? null
                 : SurfaceConstructionSnapshot.From(value.SurfaceConstruction),
-            DefaultFenestrationConstruction = value.DefaultFenestrationConstruction is null
-                ? null
-                : FenestrationConstructionSnapshot.From(value.DefaultFenestrationConstruction),
             UnmatchedFloorBoundary = value.UnmatchedFloorBoundary,
             LightDensity = value.LightDensity,
             Openings = value.Openings.Select(OpeningDefinitionSnapshot.From).ToList(),
@@ -677,7 +670,6 @@ internal static class SimpleDragonGooSnapshot
                 FloorNumber,
                 Profile.ToDomain(),
                 SurfaceConstruction?.ToDomain(),
-                DefaultFenestrationConstruction?.ToDomain(),
                 UnmatchedFloorBoundary,
                 LightDensity,
                 Openings.Select(item => item.ToDomain()),

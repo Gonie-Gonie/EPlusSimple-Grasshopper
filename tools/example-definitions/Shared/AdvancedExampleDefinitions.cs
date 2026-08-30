@@ -423,26 +423,35 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(fenestration, 0, westOpening, 3);
         graph.Connect(fenestration, 0, eastOpening, 3);
 
-        GraphNode? airHandler = null;
-        GraphNode? radiator = null;
-        GraphNode? ventilator = null;
+        GraphNode westHvac;
+        GraphNode eastHvac;
+        GraphNode westVentilator = graph.Component(25, Catalog.SimpleErv, 1080, 520);
+        GraphNode eastVentilator = graph.Component(26, Catalog.SimpleErv, 1080, 990);
         GraphNode? photovoltaic = null;
         if (!includeRuntimeWorkflow)
         {
             GraphNode heatPump = graph.Component(20, Catalog.SimpleHeatPump, 820, 160);
-            airHandler = graph.Component(21, Catalog.SimpleAirHandler, 1080, 160);
-            GraphNode boiler = graph.Component(22, Catalog.SimpleBoiler, 820, 370);
-            radiator = graph.Component(23, Catalog.SimpleRadiator, 1080, 370);
-            ventilator = graph.Component(25, Catalog.SimpleErv, 1080, 570);
+            westHvac = graph.Component(21, Catalog.SimpleAirHandler, 1080, 160);
+            GraphNode boiler = graph.Component(22, Catalog.SimpleBoiler, 820, 690);
+            eastHvac = graph.Component(23, Catalog.SimpleRadiator, 1080, 690);
             photovoltaic = graph.Component(27, Catalog.SimplePv, 1460, 1030);
-            graph.Connect(heatPump, 0, airHandler, 1);
-            graph.Connect(boiler, 0, radiator, 1);
+            graph.Connect(heatPump, 0, westHvac, 1);
+            graph.Connect(boiler, 0, eastHvac, 1);
         }
         else
         {
-            radiator = graph.Component(24, Catalog.SimpleElectricRadiator, 1080, 370);
-            ventilator = graph.Component(25, Catalog.SimpleErv, 1080, 570);
+            westHvac = graph.Component(21, Catalog.SimpleElectricRadiator, 1080, 160);
+            eastHvac = graph.Component(23, Catalog.SimpleElectricRadiator, 1080, 690);
         }
+
+        GraphNode westHvacName = graph.Panel(15, "West Zone HVAC", "West Zone HVAC", 820, 300);
+        GraphNode eastHvacName = graph.Panel(16, "East Zone HVAC", "East Zone HVAC", 820, 830);
+        GraphNode westErvName = graph.Panel(17, "West Zone ERV", "West Zone ERV", 820, 500);
+        GraphNode eastErvName = graph.Panel(18, "East Zone ERV", "East Zone ERV", 820, 1030);
+        graph.Connect(westHvacName, null, westHvac, 0);
+        graph.Connect(eastHvacName, null, eastHvac, 0);
+        graph.Connect(westErvName, null, westVentilator, 0);
+        graph.Connect(eastErvName, null, eastVentilator, 0);
 
         GraphNode westZone = graph.Component(30, Catalog.SimpleZone, 1390, 250);
         GraphNode eastZone = graph.Component(31, Catalog.SimpleZone, 1390, 720);
@@ -455,23 +464,13 @@ internal static class AdvancedExampleDefinitions
             graph.Connect(brep, null, zone, 0);
             graph.Connect(profile, 0, zone, 3);
             graph.Connect(construction, 0, zone, 4);
-            graph.Connect(fenestration, 0, zone, 5);
-            graph.Connect(opening, 0, zone, 6);
-            if (airHandler is not null)
-            {
-                graph.Connect(airHandler, 0, zone, 7);
-            }
-
-            if (radiator is not null)
-            {
-                graph.Connect(radiator, 0, zone, 7);
-            }
-
-            if (ventilator is not null)
-            {
-                graph.Connect(ventilator, 0, zone, 8);
-            }
+            graph.Connect(opening, 0, zone, 5);
         }
+
+        graph.Connect(westHvac, 0, westZone, 6);
+        graph.Connect(eastHvac, 0, eastZone, 6);
+        graph.Connect(westVentilator, 0, westZone, 7);
+        graph.Connect(eastVentilator, 0, eastZone, 7);
 
         GraphNode modelName = graph.Panel(28, "Model name", "Two-Zone Office", 1460, 120);
         GraphNode model = graph.Component(32, Catalog.SimpleModel, 1770, 500);
@@ -2198,7 +2197,7 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity SimpleErv = S("15afd6e6-1c05-4715-909b-b6e98ef91375", "SimpleDragonEnergyRecoveryVentilatorComponent");
         internal static readonly ComponentIdentity SimplePv = S("7fcb5c47-3d49-4aa0-8fbc-bd765711401f", "SimpleDragonPhotovoltaicPanelComponent");
         internal static readonly ComponentIdentity SimpleOpening = S("7d41fd2c-b93f-4fc8-88ea-db1f3abeb2f1", "CreateSimpleDragonOpeningComponent");
-        internal static readonly ComponentIdentity SimpleZone = S("f7389ac4-51dd-44dc-803a-e8e0989e7638", "CreateSimpleDragonZoneComponent");
+        internal static readonly ComponentIdentity SimpleZone = S("79b35a81-b6a2-43cf-8f9d-361a655b63d1", "CreateSimpleDragonZoneComponent");
         internal static readonly ComponentIdentity SimpleModel = S("ce38124b-f99b-4d09-be3b-e5e5717db707", "CreateSimpleDragonModelComponent");
         internal static readonly ComponentIdentity SimplePrepare = S("ca666fd7-788c-4682-8b04-fad8c7252fe0", "PrepareSimpleDragonSimulationComponent");
         internal static readonly ComponentIdentity SimpleBuildResult = S("2a9f3a4e-56f2-4227-8725-e8befe43cf53", "BuildGreenRetrofitResultComponent");
@@ -2366,6 +2365,23 @@ internal sealed class ScenarioGraphBuilder
     {
         IGH_Param sourceParam = Parameter(source.Object, sourceOutput, output: true);
         IGH_Param targetParam = Parameter(target.Object, targetInput, output: false);
+        string parameterType = sourceParam.GetType().Name;
+        bool exclusiveOwnershipWire = sourceParam.GetType() == targetParam.GetType()
+            && (parameterType == "SimpleDragonOpeningDefinitionParam"
+                || parameterType == "SimpleDragonSupplySystemParam"
+                || parameterType == "SimpleDragonZoneErvParam");
+        if (exclusiveOwnershipWire
+            && _wires.Any(item => item.SourceObjectGuid == source.InstanceGuid
+                && item.SourceOutputIndex == sourceOutput
+                && string.Equals(
+                    item.TargetParameterType,
+                    targetParam.GetType().FullName,
+                    StringComparison.Ordinal)))
+        {
+            throw new InvalidOperationException(
+                sourceParam.Name + " is Zone-owned and cannot be wired to more than one owning input.");
+        }
+
         targetParam.AddSource(sourceParam);
         _wires.Add(new WireExpectation(
             source.InstanceGuid,

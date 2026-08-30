@@ -24,11 +24,7 @@ internal static class SimpleDragonRhinoSmokeChecks
             new[] { new SurfaceConstructionLayer(material, 0.2) });
         var glazing = new FenestrationConstruction("Smoke window", 1.5, 0.5);
         var doorConstruction = new FenestrationConstruction("Smoke opaque door", 2.5);
-        var options = new RhinoZoneExtractionOptions
-        {
-            DefaultSurfaceConstruction = construction,
-            DefaultFenestrationConstruction = glazing,
-        };
+        var options = new RhinoZoneExtractionOptions();
 
         using Brep firstBox = Box(0, 0, 0, 4, 3, 2);
         int windowHost = FindWallFace(firstBox, new Vector3d(0, -1, 0));
@@ -42,16 +38,15 @@ internal static class SimpleDragonRhinoSmokeChecks
             windowHost,
             "South window",
             FenestrationType.Window,
-            glazing.Id.Value,
             glazing);
         var firstSource = new RhinoZoneSource(
             firstBox,
             "First zone",
             1,
-            profile.Name,
             profile,
             zoneId: new EntityId("ZONE-SMOKE-1"),
-            fenestrations: new[] { opening });
+            fenestrations: new[] { opening },
+            surfaceConstruction: construction);
         RhinoZoneExtractionResult single = RhinoZoneExtractor.Extract(
             new[] { firstSource },
             context,
@@ -82,9 +77,9 @@ internal static class SimpleDragonRhinoSmokeChecks
                     flippedBox,
                     "Flipped zone",
                     1,
-                    profile.Name,
                     profile,
-                    zoneId: new EntityId("ZONE-SMOKE-FLIPPED")),
+                    zoneId: new EntityId("ZONE-SMOKE-FLIPPED"),
+                    surfaceConstruction: construction),
             },
             context,
             options);
@@ -107,9 +102,9 @@ internal static class SimpleDragonRhinoSmokeChecks
                     millimetreBox,
                     "Millimetre zone",
                     1,
-                    profile.Name,
                     profile,
-                    zoneId: new EntityId("ZONE-SMOKE-MM")),
+                    zoneId: new EntityId("ZONE-SMOKE-MM"),
+                    surfaceConstruction: construction),
             },
             millimetreContext,
             options);
@@ -137,7 +132,6 @@ internal static class SimpleDragonRhinoSmokeChecks
             innerLoopHost,
             "Annotated inner-loop door",
             FenestrationType.Door,
-            doorConstruction.Id.Value,
             doorConstruction,
             id: new EntityId("FNST-SMOKE-INNER-OVERRIDE"),
             rhinoObjectId: annotationRhinoId,
@@ -146,9 +140,26 @@ internal static class SimpleDragonRhinoSmokeChecks
         var openFaceOptions = new RhinoZoneExtractionOptions
         {
             RequireClosedBreps = false,
-            DefaultSurfaceConstruction = construction,
-            DefaultFenestrationConstruction = glazing,
         };
+        RhinoZoneExtractionResult unannotatedInnerLoop = RhinoZoneExtractor.Extract(
+            new[]
+            {
+                new RhinoZoneSource(
+                    innerLoopFace,
+                    "Unannotated inner-loop zone",
+                    1,
+                    profile,
+                    zoneId: new EntityId("ZONE-SMOKE-INNER-UNANNOTATED"),
+                    surfaceConstruction: construction),
+            },
+            context,
+            openFaceOptions);
+        Check(!unannotatedInnerLoop.Success
+              && unannotatedInnerLoop.Diagnostics.Any(item =>
+                  item.Code == "SD.RHINO.OPENING_METADATA_REQUIRED"),
+            "An unannotated Brep inner loop did not require an explicit opening definition.");
+        checks++;
+
         RhinoZoneExtractionResult innerLoop = RhinoZoneExtractor.Extract(
             new[]
             {
@@ -156,10 +167,10 @@ internal static class SimpleDragonRhinoSmokeChecks
                     innerLoopFace,
                     "Inner-loop zone",
                     1,
-                    profile.Name,
                     profile,
                     zoneId: new EntityId("ZONE-SMOKE-INNER"),
-                    fenestrations: new[] { innerLoopAnnotation }),
+                    fenestrations: new[] { innerLoopAnnotation },
+                    surfaceConstruction: construction),
             },
             context,
             openFaceOptions);
@@ -193,9 +204,9 @@ internal static class SimpleDragonRhinoSmokeChecks
                     slopedFace,
                     "Sloped face zone",
                     1,
-                    profile.Name,
                     profile,
-                    zoneId: new EntityId("ZONE-SMOKE-SLOPED")),
+                    zoneId: new EntityId("ZONE-SMOKE-SLOPED"),
+                    surfaceConstruction: construction),
             },
             context,
             openFaceOptions);
@@ -209,9 +220,9 @@ internal static class SimpleDragonRhinoSmokeChecks
             secondBox,
             "Second zone",
             1,
-            profile.Name,
             profile,
-            zoneId: new EntityId("ZONE-SMOKE-2"));
+            zoneId: new EntityId("ZONE-SMOKE-2"),
+            surfaceConstruction: construction);
         RhinoZoneExtractionResult adjacent = RhinoZoneExtractor.Extract(
             new[] { firstSource, secondSource },
             context,
@@ -235,16 +246,16 @@ internal static class SimpleDragonRhinoSmokeChecks
                     duplicateFirst,
                     "Duplicate first",
                     1,
-                    profile.Name,
                     profile,
-                    zoneId: new EntityId("ZONE-SMOKE-DUPLICATE-1")),
+                    zoneId: new EntityId("ZONE-SMOKE-DUPLICATE-1"),
+                    surfaceConstruction: construction),
                 new RhinoZoneSource(
                     duplicateSecond,
                     "Duplicate second",
                     1,
-                    profile.Name,
                     profile,
-                    zoneId: new EntityId("ZONE-SMOKE-DUPLICATE-2")),
+                    zoneId: new EntityId("ZONE-SMOKE-DUPLICATE-2"),
+                    surfaceConstruction: construction),
             },
             context,
             options);
@@ -269,7 +280,6 @@ internal static class SimpleDragonRhinoSmokeChecks
             mismatchHost,
             "Unpaired interior opening",
             FenestrationType.Window,
-            glazing.Id.Value,
             glazing);
         RhinoZoneExtractionResult mismatchedOpenings = RhinoZoneExtractor.Extract(
             new[]
@@ -278,17 +288,17 @@ internal static class SimpleDragonRhinoSmokeChecks
                     mismatchFirst,
                     "Mismatch first",
                     1,
-                    profile.Name,
                     profile,
                     zoneId: new EntityId("ZONE-SMOKE-MISMATCH-1"),
-                    fenestrations: new[] { mismatchOpening }),
+                    fenestrations: new[] { mismatchOpening },
+                    surfaceConstruction: construction),
                 new RhinoZoneSource(
                     mismatchSecond,
                     "Mismatch second",
                     1,
-                    profile.Name,
                     profile,
-                    zoneId: new EntityId("ZONE-SMOKE-MISMATCH-2")),
+                    zoneId: new EntityId("ZONE-SMOKE-MISMATCH-2"),
+                    surfaceConstruction: construction),
             },
             context,
             options);

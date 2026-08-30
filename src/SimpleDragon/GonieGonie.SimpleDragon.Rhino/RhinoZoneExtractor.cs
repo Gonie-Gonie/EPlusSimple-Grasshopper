@@ -119,8 +119,7 @@ public sealed class RhinoFenestrationSource
         int hostFaceIndex,
         string name,
         FenestrationType type,
-        string constructionId,
-        FenestrationConstruction? construction = null,
+        FenestrationConstruction construction,
         BlindType? blind = null,
         EntityId? id = null,
         Guid? rhinoObjectId = null,
@@ -144,20 +143,35 @@ public sealed class RhinoFenestrationSource
             throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown fenestration type.");
         }
 
-        if (string.IsNullOrWhiteSpace(constructionId))
+        if (construction is null)
         {
-            throw new ArgumentException("A construction identifier is required.", nameof(constructionId));
+            throw new ArgumentNullException(
+                nameof(construction),
+                "A Rhino opening must own its fenestration construction.");
         }
 
-        if (construction is not null
-            && !StringComparer.Ordinal.Equals(constructionId.Trim(), construction.Id.Value))
+        if (type == FenestrationType.Door && construction.IsTransparent)
         {
-            throw new ArgumentException("The construction ID does not match the supplied construction.", nameof(constructionId));
+            throw new ArgumentException(
+                "A door requires an opaque fenestration construction.",
+                nameof(construction));
+        }
+
+        if (type != FenestrationType.Door && !construction.IsTransparent)
+        {
+            throw new ArgumentException(
+                "A window or glass door requires a transparent construction.",
+                nameof(construction));
         }
 
         if (blind.HasValue && !Enum.IsDefined(typeof(BlindType), blind.Value))
         {
             throw new ArgumentOutOfRangeException(nameof(blind), blind, "Unknown blind type.");
+        }
+
+        if (blind.HasValue && type == FenestrationType.Door)
+        {
+            throw new ArgumentException("An opaque door cannot have a window blind.", nameof(blind));
         }
 
         if (rhinoObjectId == Guid.Empty)
@@ -169,7 +183,6 @@ public sealed class RhinoFenestrationSource
         HostFaceIndex = hostFaceIndex;
         Name = name.Trim();
         Type = type;
-        ConstructionId = constructionId.Trim();
         Construction = construction;
         Blind = blind;
         Id = id;
@@ -186,9 +199,7 @@ public sealed class RhinoFenestrationSource
 
     public FenestrationType Type { get; }
 
-    public string ConstructionId { get; }
-
-    public FenestrationConstruction? Construction { get; }
+    public FenestrationConstruction Construction { get; }
 
     public BlindType? Blind { get; }
 
@@ -211,17 +222,15 @@ public sealed class RhinoZoneSource
         Brep geometry,
         string name,
         int floorNumber,
-        string profileName,
-        UsageProfile? profile = null,
+        UsageProfile profile,
         double? lightDensity = null,
         EntityId? zoneId = null,
         Guid? rhinoObjectId = null,
         string? grasshopperPath = null,
         int? grasshopperIndex = null,
         IEnumerable<RhinoFenestrationSource>? fenestrations = null,
-        SurfaceConstruction? defaultSurfaceConstruction = null,
-        FenestrationConstruction? defaultFenestrationConstruction = null,
-        SurfaceBoundaryCondition? unmatchedFloorBoundary = null)
+        SurfaceConstruction? surfaceConstruction = null,
+        SurfaceBoundaryCondition unmatchedFloorBoundary = SurfaceBoundaryCondition.Ground)
     {
         Geometry = geometry ?? throw new ArgumentNullException(nameof(geometry));
         if (string.IsNullOrWhiteSpace(name))
@@ -229,15 +238,14 @@ public sealed class RhinoZoneSource
             throw new ArgumentException("A zone name is required.", nameof(name));
         }
 
-        if (string.IsNullOrWhiteSpace(profileName))
+#if NET7_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(profile);
+#else
+        if (profile is null)
         {
-            throw new ArgumentException("A profile name is required.", nameof(profileName));
+            throw new ArgumentNullException(nameof(profile));
         }
-
-        if (profile is not null && !StringComparer.Ordinal.Equals(profileName.Trim(), profile.Name))
-        {
-            throw new ArgumentException("The profile name does not match the supplied profile.", nameof(profileName));
-        }
+#endif
 
         if (lightDensity.HasValue
             && (double.IsNaN(lightDensity.Value)
@@ -253,10 +261,9 @@ public sealed class RhinoZoneSource
         }
 
         RhinoZoneExtractor.RequireNullableNonNegative(grasshopperIndex, nameof(grasshopperIndex));
-        if (unmatchedFloorBoundary.HasValue
-            && unmatchedFloorBoundary.Value != SurfaceBoundaryCondition.Ground
-            && unmatchedFloorBoundary.Value != SurfaceBoundaryCondition.Outdoors
-            && unmatchedFloorBoundary.Value != SurfaceBoundaryCondition.Adiabatic)
+        if (unmatchedFloorBoundary != SurfaceBoundaryCondition.Ground
+            && unmatchedFloorBoundary != SurfaceBoundaryCondition.Outdoors
+            && unmatchedFloorBoundary != SurfaceBoundaryCondition.Adiabatic)
         {
             throw new ArgumentOutOfRangeException(
                 nameof(unmatchedFloorBoundary),
@@ -273,7 +280,6 @@ public sealed class RhinoZoneSource
 
         Name = name.Trim();
         FloorNumber = floorNumber;
-        ProfileName = profileName.Trim();
         Profile = profile;
         LightDensity = lightDensity;
         ZoneId = zoneId;
@@ -281,8 +287,7 @@ public sealed class RhinoZoneSource
         GrasshopperPath = string.IsNullOrWhiteSpace(grasshopperPath) ? null : grasshopperPath!.Trim();
         GrasshopperIndex = grasshopperIndex;
         Fenestrations = new ReadOnlyCollection<RhinoFenestrationSource>(fenestrationArray);
-        DefaultSurfaceConstruction = defaultSurfaceConstruction;
-        DefaultFenestrationConstruction = defaultFenestrationConstruction;
+        SurfaceConstruction = surfaceConstruction;
         UnmatchedFloorBoundary = unmatchedFloorBoundary;
     }
 
@@ -292,9 +297,7 @@ public sealed class RhinoZoneSource
 
     public int FloorNumber { get; }
 
-    public string ProfileName { get; }
-
-    public UsageProfile? Profile { get; }
+    public UsageProfile Profile { get; }
 
     public double? LightDensity { get; }
 
@@ -309,39 +312,19 @@ public sealed class RhinoZoneSource
     public IReadOnlyList<RhinoFenestrationSource> Fenestrations { get; }
 
     /// <summary>
-    /// Gets the per-zone default surface construction, or <see langword="null"/>
-    /// to use the extraction-wide option.
+    /// Gets the construction owned by the source zone's Brep faces.
     /// </summary>
-    public SurfaceConstruction? DefaultSurfaceConstruction { get; }
+    public SurfaceConstruction? SurfaceConstruction { get; }
 
     /// <summary>
-    /// Gets the per-zone default construction for Brep inner-loop openings, or
-    /// <see langword="null"/> to use the extraction-wide option.
+    /// Gets the source zone's boundary for unmatched floor faces.
     /// </summary>
-    public FenestrationConstruction? DefaultFenestrationConstruction { get; }
-
-    /// <summary>
-    /// Gets the per-zone boundary for unmatched floor faces, or
-    /// <see langword="null"/> to use the extraction-wide option.
-    /// </summary>
-    public SurfaceBoundaryCondition? UnmatchedFloorBoundary { get; }
+    public SurfaceBoundaryCondition UnmatchedFloorBoundary { get; }
 }
 
 public sealed class RhinoZoneExtractionOptions
 {
     public bool RequireClosedBreps { get; set; } = true;
-
-    public SurfaceBoundaryCondition UnmatchedFloorBoundary { get; set; } = SurfaceBoundaryCondition.Ground;
-
-    public SurfaceConstruction? DefaultSurfaceConstruction { get; set; }
-
-    public FenestrationConstruction? DefaultFenestrationConstruction { get; set; }
-
-    public string UnresolvedFenestrationConstructionId { get; set; } = "RHINO-UNRESOLVED-FENESTRATION";
-
-    public FenestrationType DefaultFenestrationType { get; set; } = FenestrationType.Window;
-
-    public BlindType? DefaultBlind { get; set; }
 }
 
 public sealed class RhinoZoneExtractionResult
@@ -400,7 +383,6 @@ public static class RhinoZoneExtractor
         RequireNotNull(context, nameof(context));
 
         options ??= new RhinoZoneExtractionOptions();
-        ValidateOptions(options);
         RhinoZoneSource[] sourceArray = sources.ToArray();
         if (sourceArray.Any(item => item is null))
         {
@@ -423,7 +405,7 @@ public static class RhinoZoneExtractor
         var geometryMap = new List<RhinoDomainGeometryMapEntry>();
         foreach (ZoneWork zoneWork in work)
         {
-            CreateZone(zoneWork, adjacency, context, options, zones, geometryMap, diagnostics);
+            CreateZone(zoneWork, adjacency, context, zones, geometryMap, diagnostics);
         }
 
         return new RhinoZoneExtractionResult(zones, geometryMap, diagnostics);
@@ -493,17 +475,12 @@ public static class RhinoZoneExtractor
                 for (int loopIndex = 0; loopIndex < extraction.InnerLoops.Count; loopIndex++)
                 {
                     DragonPolygon loop = extraction.InnerLoops[loopIndex];
-                    FenestrationConstruction? defaultFenestrationConstruction =
-                        source.DefaultFenestrationConstruction
-                        ?? options.DefaultFenestrationConstruction;
                     faceWork.Openings.Add(new OpeningWork(
                         source.Name + ":Face:" + face.FaceIndex.ToString(CultureInfo.InvariantCulture)
                             + ":Opening:" + loopIndex.ToString(CultureInfo.InvariantCulture),
-                        options.DefaultFenestrationType,
-                        defaultFenestrationConstruction?.Id.Value
-                            ?? options.UnresolvedFenestrationConstructionId.Trim(),
-                        defaultFenestrationConstruction,
-                        options.DefaultBlind,
+                        null,
+                        null,
+                        null,
                         null,
                         loop,
                         innerLoopIndices[loopIndex],
@@ -548,6 +525,24 @@ public static class RhinoZoneExtractor
         }
 
         AddExplicitFenestrations(source, sourceIndex, faces, context, diagnostics);
+        foreach (FaceWork face in faces)
+        {
+            foreach (OpeningWork opening in face.Openings.Where(item =>
+                         item.BrepLoopIndex.HasValue && !item.FenestrationSourceIndex.HasValue))
+            {
+                diagnostics.Add(Error(
+                    "SD.RHINO.OPENING_METADATA_REQUIRED",
+                    "A Brep inner loop has no matching explicit opening definition.",
+                    null,
+                    new GeometryProvenance(
+                        source.RhinoObjectId,
+                        face.FaceIndex,
+                        RhinoGeometryFingerprint.ForPolygon(opening.Polygon),
+                        source.GrasshopperPath,
+                        source.GrasshopperIndex),
+                    "Connect an SD Opening with its own Construction to the Zone for this inner loop."));
+            }
+        }
 
         string fingerprint = HashFingerprint(faces.Select(item => item.Extraction.GeometryFingerprint));
         EntityId zoneId = source.ZoneId ?? new EntityId("ZONE-RHINO-" + fingerprint.Remove(24));
@@ -621,7 +616,6 @@ public static class RhinoZoneExtractor
                         host.Openings[matchingIndex] = new OpeningWork(
                             opening.Name,
                             opening.Type,
-                            opening.ConstructionId,
                             opening.Construction,
                             opening.Blind,
                             opening.Id,
@@ -673,7 +667,6 @@ public static class RhinoZoneExtractor
                 host.Openings.Add(new OpeningWork(
                     opening.Name,
                     opening.Type,
-                    opening.ConstructionId,
                     opening.Construction,
                     opening.Blind,
                     opening.Id,
@@ -779,7 +772,6 @@ public static class RhinoZoneExtractor
         ZoneWork work,
         Dictionary<string, EntityId> adjacency,
         RhinoGeometryContext context,
-        RhinoZoneExtractionOptions options,
         List<SimpleZone> zones,
         List<RhinoDomainGeometryMapEntry> geometryMap,
         List<Diagnostic> diagnostics)
@@ -794,7 +786,7 @@ public static class RhinoZoneExtractor
             SurfaceBoundaryCondition boundary = adjacentZoneId is not null
                 ? SurfaceBoundaryCondition.Zone
                 : type == SurfaceType.Floor
-                    ? work.Source.UnmatchedFloorBoundary ?? options.UnmatchedFloorBoundary
+                    ? work.Source.UnmatchedFloorBoundary
                     : SurfaceBoundaryCondition.Outdoors;
             double? azimuth = type == SurfaceType.Wall && boundary == SurfaceBoundaryCondition.Outdoors
                 ? Azimuth(face.Extraction.OuterLoop)
@@ -808,10 +800,8 @@ public static class RhinoZoneExtractor
                 boundary,
                 geometryMap,
                 diagnostics);
-            SurfaceConstruction? defaultSurfaceConstruction =
-                work.Source.DefaultSurfaceConstruction
-                ?? options.DefaultSurfaceConstruction;
-            string? constructionId = defaultSurfaceConstruction?.Id.Value;
+            SurfaceConstruction? surfaceConstruction = work.Source.SurfaceConstruction;
+            string? constructionId = surfaceConstruction?.Id.Value;
             try
             {
                 var surface = new SimpleSurface(
@@ -821,7 +811,7 @@ public static class RhinoZoneExtractor
                     face.Extraction.OuterLoop.Area,
                     azimuth,
                     constructionId,
-                    defaultSurfaceConstruction,
+                    surfaceConstruction,
                     fenestrations,
                     adjacentZoneId: adjacentZoneId?.Value,
                     id: surfaceId);
@@ -865,7 +855,7 @@ public static class RhinoZoneExtractor
                 work.Source.FloorNumber,
                 work.HeightMetres,
                 surfaces,
-                work.Source.ProfileName,
+                work.Source.Profile.Name,
                 work.Source.Profile,
                 work.Source.LightDensity,
                 id: work.ZoneId);
@@ -925,28 +915,22 @@ public static class RhinoZoneExtractor
             return Array.Empty<Fenestration>();
         }
 
-        if (face.Openings.Any(item => item.Construction is null))
-        {
-            diagnostics.Add(new Diagnostic(
-                "SD.RHINO.FENESTRATION_CONSTRUCTION_UNRESOLVED",
-                DiagnosticSeverity.Warning,
-                "One or more Rhino openings were extracted with an unresolved fenestration construction.",
-                surfaceId,
-                hostProvenance,
-                "Supply DefaultFenestrationConstruction before converting the model to InvisibleDragon."));
-        }
-
         var result = new List<Fenestration>();
         for (int index = 0; index < face.Openings.Count; index++)
         {
             OpeningWork definition = face.Openings[index];
+            if (definition.Construction is null || !definition.Type.HasValue)
+            {
+                continue;
+            }
+
             EntityId openingId = definition.Id ?? new EntityId(
                 "FNST-" + surfaceId.Value + "-L" + index.ToString("D4", CultureInfo.InvariantCulture));
             var opening = new Fenestration(
                 definition.Name,
-                definition.Type,
+                definition.Type.Value,
                 definition.Polygon.Area,
-                definition.ConstructionId,
+                definition.Construction.Id.Value,
                 definition.Construction,
                 definition.Blind,
                 openingId);
@@ -1078,36 +1062,6 @@ public static class RhinoZoneExtractor
         return BitConverter.ToString(hash).Replace("-", string.Empty).ToLowerInvariant();
     }
 
-    private static void ValidateOptions(RhinoZoneExtractionOptions options)
-    {
-        if (options.UnmatchedFloorBoundary != SurfaceBoundaryCondition.Ground
-            && options.UnmatchedFloorBoundary != SurfaceBoundaryCondition.Outdoors
-            && options.UnmatchedFloorBoundary != SurfaceBoundaryCondition.Adiabatic)
-        {
-            throw new ArgumentException(
-                "An unmatched floor boundary must be Ground, Outdoors, or Adiabatic.",
-                nameof(options));
-        }
-
-        if (!Enum.IsDefined(typeof(FenestrationType), options.DefaultFenestrationType))
-        {
-            throw new ArgumentException("The default fenestration type is invalid.", nameof(options));
-        }
-
-        if (options.DefaultBlind.HasValue
-            && !Enum.IsDefined(typeof(BlindType), options.DefaultBlind.Value))
-        {
-            throw new ArgumentException("The default blind type is invalid.", nameof(options));
-        }
-
-        if (string.IsNullOrWhiteSpace(options.UnresolvedFenestrationConstructionId))
-        {
-            throw new ArgumentException(
-                "An unresolved fenestration construction identifier is required.",
-                nameof(options));
-        }
-    }
-
     private static string FaceKey(int sourceIndex, int faceIndex)
     {
         return sourceIndex.ToString(CultureInfo.InvariantCulture)
@@ -1188,8 +1142,7 @@ public static class RhinoZoneExtractor
     {
         internal OpeningWork(
             string name,
-            FenestrationType type,
-            string constructionId,
+            FenestrationType? type,
             FenestrationConstruction? construction,
             BlindType? blind,
             EntityId? id,
@@ -1202,7 +1155,6 @@ public static class RhinoZoneExtractor
         {
             Name = name;
             Type = type;
-            ConstructionId = constructionId;
             Construction = construction;
             Blind = blind;
             Id = id;
@@ -1216,9 +1168,7 @@ public static class RhinoZoneExtractor
 
         internal string Name { get; }
 
-        internal FenestrationType Type { get; }
-
-        internal string ConstructionId { get; }
+        internal FenestrationType? Type { get; }
 
         internal FenestrationConstruction? Construction { get; }
 
