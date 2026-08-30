@@ -88,7 +88,7 @@ public sealed class CompileInvisibleDragonComponent : DragonComponent
                     "INVISIBLEDRAGON.GH.MANAGED_IDD_DEFERRED",
                     DiagnosticSeverity.Info,
                     "The embedded EnergyPlus 24.2 execution mapping was used; the full managed IDD will be available when the bundled runtime is prepared.",
-                    suggestedAction: "Connect the typed IDF and SimpleDragon Weather outputs to Run InvisibleDragon."));
+                    suggestedAction: "For standalone execution, connect this typed IDF and the Weather output from ID Weather to Run InvisibleDragon."));
             }
             else
             {

@@ -78,8 +78,9 @@ Portable extraction rejects rooted/traversal paths, duplicate or case-ambiguous
 entries, link/reparse entries, oversized content, multiple matching archives, and
 Windows trailing-dot/space or reserved DOS-device aliases, plus package layouts
 containing the other product's GHA. Shared InvisibleDragon
-Types/Core DLLs are valid SimpleDragon dependencies, but the InvisibleDragon GHA
-itself is forbidden from the SimpleDragon-only package.
+Core/Rhino DLLs are valid SimpleDragon implementation dependencies, but the
+InvisibleDragon Grasshopper Types DLL and GHA are forbidden from the
+SimpleDragon-only package.
 
 Grasshopper's targeted `ParseGHA` entry point is not public, so both runners invoke that one host API through reflection after RhinoCore is active. The public all-external-files scan is intentionally not used: it can load unrelated user plug-ins and is not a bounded repository gate.
 

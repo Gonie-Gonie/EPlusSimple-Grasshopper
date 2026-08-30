@@ -112,9 +112,9 @@ For diagnosis, its constituent commands are:
   build/test reports, and all six copied real-host summaries.
 - Open the tracked InvisibleDragon and SimpleDragon starter definitions in each
   installed Rhino generation. Separately exercise a direct InvisibleDragon
-  HVAC graph and a SimpleDragon HVAC-to-InvisibleDragon conversion using the
+  HVAC graph and a direct SimpleDragon model-to-GRR run using the
   recipes in `examples\README.md`.
-- Verify explicit Run/Prepare trigger behavior, cancellation, cache reuse,
+- Verify explicit Run trigger behavior, cancellation, cache reuse,
   address-selected packaged EPW handling plus explicit overrides, CSV schema,
   and saved Goo persistence.
 - Review release notes for exact supported and intentionally unsupported scope.

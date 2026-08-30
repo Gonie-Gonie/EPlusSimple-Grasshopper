@@ -7,8 +7,8 @@ plugins written in C#. The public product names in this port are:
 - `GonieGonie.InvisibleDragon.GH` is the renamed IDragon port. It preserves
   planar polygon vertices and builds EnergyPlus models.
 - `GonieGonie.SimpleDragon.GH` is the renamed EPlusSimple port. It preserves the
-  area-and-azimuth abstraction and uses
-  `GreenRetrofitModel.ToInvisibleDragon()` as its simulation conversion path.
+  area-and-azimuth abstraction and internally converts a `GreenRetrofitModel`
+  through the InvisibleDragon engine when `Run SimpleDragon` is requested.
 
 The tracked upstream source is pinned in
 [`upstream/upstream.lock.json`](upstream/upstream.lock.json). Python is used only
@@ -53,21 +53,30 @@ Curve + Fenestration Construction -> SD Opening --------+
                                                         v
 Face Brep + Type + Construction + Boundary Intent -> SD Surface -> SD Zone <- Height / Profile / HVAC / ERV
                                                                        |
-                                                                       +-> SD Model (Address/Vintage) -> SD to IDF -> IDF + Weather -> Run InvisibleDragon
+                                                                       +-> SD Model (Address/Vintage) -> Run SimpleDragon -> GRR
 
 Curve -> ID Window / Door -> ID Surface -> ID Zone <- Profile / HVAC / ERV
                                              |
                                              +-> ID Model <- PV
                                                    |
-                                                   +-> Compile InvisibleDragon -> IDF
+                                                   +-> Compile InvisibleDragon -> IDF --+-> Run InvisibleDragon -> Result
+                                                                                         ^
+                                                        EPW File -> ID Weather -----------+
 ```
 
 No Zone/Face indices, parent-level construction fallback, assignment pass,
-EnergyPlus/IDD/EPW path, runtime root, or temporary-work input is required.
+EnergyPlus/IDD path, runtime root, or temporary-work input is required.
 Openings and opaque constructions belong to `SD Surface`; a Zone receives only
 its completed Surfaces and Zone-level values. Coincident, opposite-facing
 Surfaces with `Outdoors` intent are paired as inter-zone boundaries when either
 model is composed, so no adjacent-surface ID is typed.
+SimpleDragon's direct runner performs weather selection, conversion, IDF
+generation, EnergyPlus execution, and GRR construction internally; no
+EPW path or InvisibleDragon execution type appears on the SimpleDragon canvas.
+Standalone InvisibleDragon execution deliberately exposes one user-owned
+weather boundary: `EPW File -> ID Weather -> Run InvisibleDragon`. `ID Weather`
+verifies the selected EPW and creates the typed handle consumed by the runner;
+InvisibleDragon does not select or download weather.
 
 ## Developer quick start
 
@@ -139,11 +148,14 @@ portable plugin ZIPs, run:
 
 The eight tracked definitions and two named-building Rhino models under
 [`examples`](examples/README.md) cover materials, profiles, geometry, HVAC,
-two-zone GRM-to-IDF conversion, Address/Vintage-selected packaged weather, result plots,
-CSV previews, and the gated Run-to-GRR/CSV workflow. Example 12 is the complex
-two-zone Surface-to-Zone composition/IDF authoring demonstration; example 14
+standalone InvisibleDragon compile/weather/run wiring, two-zone GRM authoring,
+Address/Vintage-selected packaged weather, direct simulation, result plots,
+CSV previews, and the gated Run-to-GRR/CSV workflow. Example 02 keeps its EPW
+File input empty and every action trigger False, so opening it never reads a
+weather path or starts EnergyPlus. Example 12 is the complex
+two-zone Surface-to-Zone model-authoring demonstration; example 14
 uses the same explicit Surface ownership with electric radiators for a stable
-end-to-end EnergyPlus run.
+end-to-end `SD Model -> Run SimpleDragon -> GRR` workflow.
 Rhino 7 writes the canonical files;
 `.\dev.cmd examples` solves and round-trip validates them in both Rhino 7 and
 Rhino 8.

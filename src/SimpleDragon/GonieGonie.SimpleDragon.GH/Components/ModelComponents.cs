@@ -1,5 +1,3 @@
-using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
-using GonieGonie.InvisibleDragon.Grasshopper.Types;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
 using Grasshopper.Kernel;
@@ -30,7 +28,7 @@ public sealed class ReadGreenRetrofitModelComponent : SimpleDragonComponent
         pManager.AddParameter(new SimpleDragonZoneParam(), "Zones", "Z", "Zones contained in the model.", GH_ParamAccess.list);
         pManager.AddTextParameter("Canonical JSON", "J", "Deterministic canonical GRM JSON.", GH_ParamAccess.item);
         pManager.AddBooleanParameter("Success", "OK", "True when parsing and reference resolution succeeded.", GH_ParamAccess.item);
-        pManager.AddParameter(new DiagnosticParam(), "Diagnostics", "D", "GRM read diagnostics.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "GRM read diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
@@ -52,7 +50,7 @@ public sealed class ReadGreenRetrofitModelComponent : SimpleDragonComponent
         }
 
         DA.SetData(3, read.Success);
-        DA.SetDataList(4, read.Diagnostics.Select(item => new DiagnosticGoo(item)));
+        DA.SetDataList(4, read.Diagnostics.Select(item => new SimpleDragonDiagnosticGoo(item)));
     }
 }
 

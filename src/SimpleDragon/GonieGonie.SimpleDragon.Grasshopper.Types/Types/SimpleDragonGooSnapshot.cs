@@ -20,6 +20,7 @@ internal static class SimpleDragonGooSnapshot
     {
         (string kind, string payload) = value switch
         {
+            Diagnostic diagnostic => ("diagnostic", ToJson(diagnostic)),
             SimpleDragonBatchCase batchCase => ("batch-case", ToJson(BatchCaseSnapshot.From(batchCase))),
             OpeningDefinition opening => ("opening-definition", ToJson(OpeningDefinitionSnapshot.From(opening))),
             SurfaceDefinition surface => ("surface-definition", ToJson(SurfaceDefinitionSnapshot.From(surface))),
@@ -59,6 +60,7 @@ internal static class SimpleDragonGooSnapshot
 
         object value = envelope.Kind switch
         {
+            "diagnostic" => FromJson<Diagnostic>(envelope.Payload),
             "batch-case" => FromJson<BatchCaseSnapshot>(envelope.Payload).ToDomain(),
             "opening-definition" => FromJson<OpeningDefinitionSnapshot>(envelope.Payload).ToDomain(),
             "surface-definition" => FromJson<SurfaceDefinitionSnapshot>(envelope.Payload).ToDomain(),

@@ -16,6 +16,7 @@ internal sealed class ExampleHostInputs
     private const string EnergyPlusGateStatusVariable = "DRAGONS_ENERGYPLUS_GATE_STATUS";
     private const string EnergyPlusGateReasonVariable = "DRAGONS_ENERGYPLUS_GATE_REASON";
     private const string EnergyPlusRootVariable = "DRAGONS_ENERGYPLUS_ROOT";
+    private const string EnergyPlusIddVariable = "DRAGONS_ENERGYPLUS_IDD";
     private const string EnergyPlusWeatherVariable = "DRAGONS_ENERGYPLUS_WEATHER";
     private const string EnergyPlusTimeoutVariable = "DRAGONS_ENERGYPLUS_WORKFLOW_TIMEOUT_SECONDS";
 
@@ -28,6 +29,7 @@ internal sealed class ExampleHostInputs
         string energyPlusGateStatus,
         string energyPlusGateReason,
         string? energyPlusRuntimeRoot,
+        string? energyPlusIddPath,
         string? energyPlusWeatherPath,
         TimeSpan energyPlusWorkflowTimeout)
     {
@@ -39,6 +41,7 @@ internal sealed class ExampleHostInputs
         EnergyPlusGateStatus = energyPlusGateStatus;
         EnergyPlusGateReason = energyPlusGateReason;
         EnergyPlusRuntimeRoot = energyPlusRuntimeRoot;
+        EnergyPlusIddPath = energyPlusIddPath;
         EnergyPlusWeatherPath = energyPlusWeatherPath;
         EnergyPlusWorkflowTimeout = energyPlusWorkflowTimeout;
     }
@@ -58,6 +61,8 @@ internal sealed class ExampleHostInputs
     internal string EnergyPlusGateReason { get; }
 
     internal string? EnergyPlusRuntimeRoot { get; }
+
+    internal string? EnergyPlusIddPath { get; }
 
     internal string? EnergyPlusWeatherPath { get; }
 
@@ -100,6 +105,7 @@ internal sealed class ExampleHostInputs
         string gateReason = Environment.GetEnvironmentVariable(EnergyPlusGateReasonVariable)
             ?? "The example launcher did not configure EnergyPlus workflow execution.";
         string? runtimeRoot = OptionalFullPath(EnergyPlusRootVariable);
+        string? iddPath = OptionalFullPath(EnergyPlusIddVariable);
         string? weatherPath = OptionalFullPath(EnergyPlusWeatherVariable);
         if (string.Equals(gateStatus, "ready", StringComparison.Ordinal))
         {
@@ -107,6 +113,20 @@ internal sealed class ExampleHostInputs
             {
                 throw new DirectoryNotFoundException(
                     $"{EnergyPlusRootVariable} must identify an existing runtime when the gate is ready: {runtimeRoot}");
+            }
+
+            string expectedIddPath = Path.GetFullPath(Path.Combine(runtimeRoot, "Energy+.idd"));
+            if (iddPath is null || !File.Exists(iddPath))
+            {
+                throw new FileNotFoundException(
+                    $"{EnergyPlusIddVariable} must identify the runtime IDD when the gate is ready.",
+                    iddPath);
+            }
+
+            if (!string.Equals(iddPath, expectedIddPath, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidOperationException(
+                    $"{EnergyPlusIddVariable} must identify Energy+.idd beneath {EnergyPlusRootVariable}.");
             }
 
             if (weatherPath is not null && !File.Exists(weatherPath))
@@ -138,6 +158,7 @@ internal sealed class ExampleHostInputs
             gateStatus,
             gateReason,
             runtimeRoot,
+            iddPath,
             weatherPath,
             TimeSpan.FromSeconds(timeoutSeconds));
     }

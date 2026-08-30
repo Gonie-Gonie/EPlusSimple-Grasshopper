@@ -19,13 +19,13 @@ public sealed class CompositionComponentContractTests
         GH_Component surface = Component(assembly, "CreateSimpleDragonSurfaceComponent");
         GH_Component zone = Component(assembly, "CreateSimpleDragonZoneComponent");
         GH_Component model = Component(assembly, "CreateSimpleDragonModelComponent");
-        GH_Component prepare = Component(assembly, "PrepareSimpleDragonSimulationComponent");
+        GH_Component run = Component(assembly, "RunSimpleDragonComponent");
 
         Assert.Equal(new Guid("7d41fd2c-b93f-4fc8-88ea-db1f3abeb2f1"), opening.ComponentGuid);
         Assert.Equal(new Guid("039bf7bb-da65-49e2-80fe-86d636cf0a48"), surface.ComponentGuid);
         Assert.Equal(new Guid("30b8e2c4-207a-4cf5-9801-ac4ae16d33e2"), zone.ComponentGuid);
         Assert.Equal(new Guid("ce38124b-f99b-4d09-be3b-e5e5717db707"), model.ComponentGuid);
-        Assert.Equal(new Guid("ca666fd7-788c-4682-8b04-fad8c7252fe0"), prepare.ComponentGuid);
+        Assert.Equal(new Guid("6e242e51-77ce-4f77-8445-a17d636c7310"), run.ComponentGuid);
 
         Assert.Equal(
             new[]
@@ -88,9 +88,37 @@ public sealed class CompositionComponentContractTests
         Assert.Equal("SimpleDragonZoneDefinitionParam", model.Params.Input[1].GetType().Name);
         Assert.Equal(GH_ParamAccess.list, model.Params.Input[1].Access);
         Assert.Equal("GreenRetrofitModelParam", model.Params.Output[0].GetType().Name);
-        Assert.Equal("GreenRetrofitModelParam", prepare.Params.Input[0].GetType().Name);
-        Assert.Equal(new[] { "Energy Model", "IDF", "Weather", "Success", "Diagnostics" },
-            prepare.Params.Output.Select(parameter => parameter.Name));
+        Assert.Equal("GreenRetrofitModelParam", run.Params.Input[0].GetType().Name);
+        Assert.Equal(
+            new[] { "GRM", "Run", "Cancel", "Force Rerun", "Timeout" },
+            run.Params.Input.Select(parameter => parameter.Name));
+        Assert.Equal(
+            new[] { "GRR", "State", "Success", "Diagnostics" },
+            run.Params.Output.Select(parameter => parameter.Name));
+        Assert.Equal("GreenRetrofitResultParam", run.Params.Output[0].GetType().Name);
+        Assert.Equal("SimpleDragonDiagnosticParam", run.Params.Output[3].GetType().Name);
+    }
+
+    [Fact]
+    public void PublicSimpleDragonPortsDoNotExposeInvisibleDragonTypesOrLegacyStages()
+    {
+        Assembly assembly = LoadPlugin();
+        Type[] componentTypes = assembly.GetTypes()
+            .Where(candidate => !candidate.IsAbstract
+                && typeof(GH_Component).IsAssignableFrom(candidate))
+            .ToArray();
+        Assert.DoesNotContain(componentTypes, type => type.Name == "PrepareSimpleDragonSimulationComponent");
+        Assert.DoesNotContain(componentTypes, type => type.Name == "BuildGreenRetrofitResultComponent");
+
+        GH_Component[] components = componentTypes
+            .Select(type => Assert.IsAssignableFrom<GH_Component>(Activator.CreateInstance(type)))
+            .ToArray();
+        Assert.All(
+            components.SelectMany(component => component.Params.Input.Concat(component.Params.Output)),
+            parameter => Assert.DoesNotContain(
+                "GonieGonie.InvisibleDragon",
+                parameter.GetType().FullName ?? string.Empty,
+                StringComparison.Ordinal));
     }
 
     private static GH_Component Component(Assembly assembly, string typeName)

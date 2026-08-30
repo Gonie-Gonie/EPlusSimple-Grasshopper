@@ -9,10 +9,11 @@ and workflow guides.
 - [Choosing a Dragon](choosing-a-dragon.md): the geometry and modeling boundary
   between InvisibleDragon and SimpleDragon.
 - [Grasshopper workflow](grasshopper-workflow.md): authoring, HVAC connections,
-  conversion, simulation, results, CSV, and batch studies.
+  direct simulation, results, CSV, and batch studies.
 - [EnergyPlus and weather](energyplus-and-weather.md): the pinned runtime,
-  bundled preparation, cache locations, Address/Vintage-selected EPW behavior, and
-  explicit override policy.
+  bundled preparation, cache locations, SimpleDragon's Address/Vintage-selected
+  EPW behavior, and the explicit EPW verification boundary for standalone
+  InvisibleDragon execution.
 - [Compatibility](compatibility.md): supported hosts, upstream baseline,
   interoperability, and current limitations.
 - [Troubleshooting](troubleshooting.md): load, runtime, weather, and duplicate

@@ -56,6 +56,7 @@ $products = @(
             (New-ComponentIcon 'ZoneComponent' 6 'none'),
             (New-ComponentIcon 'EnergyModelComponent' 7 'assemble'),
             (New-ComponentIcon 'CompileInvisibleDragonComponent' 9 'build'),
+            (New-ComponentIcon 'VerifyInvisibleDragonWeatherComponent' 11 'extract'),
             (New-ComponentIcon 'ManagedRunEnergyPlusComponent' 11 'batch'),
             (New-ComponentIcon 'ReadEnergyPlusResultsComponent' 8 'read'),
             (New-ComponentIcon 'EnergyPlusResultSummaryComponent' 15 'none'),
@@ -149,8 +150,7 @@ $products = @(
             (New-ComponentIcon 'CreateSimpleDragonModelComponent' 8 'model-compose'),
             (New-ComponentIcon 'ReadGreenRetrofitModelComponent' 8 'read-model'),
             (New-ComponentIcon 'WriteGreenRetrofitModelComponent' 8 'write-model'),
-            (New-ComponentIcon 'PrepareSimpleDragonSimulationComponent' 9 'compile'),
-            (New-ComponentIcon 'BuildGreenRetrofitResultComponent' 10 'build'),
+            (New-ComponentIcon 'RunSimpleDragonComponent' 11 'batch'),
             (New-ComponentIcon 'ReadGreenRetrofitResultComponent' 10 'read-result'),
             (New-ComponentIcon 'WriteGreenRetrofitResultComponent' 10 'write-result'),
             (New-ComponentIcon 'GreenRetrofitResultSummaryComponent' 11 'none'),
@@ -161,6 +161,7 @@ $products = @(
             (New-ComponentIcon 'SimpleDragonBatchCaseComponent' 9 'batch-case'),
             (New-ComponentIcon 'ManagedRunSimpleDragonBatchComponent' 9 'managed-batch'))
         Parameters = @(
+            (New-ComponentIcon 'SimpleDragonDiagnosticParam' 9 'none'),
             (New-ComponentIcon 'SimpleDragonMaterialParam' 1 'none'),
             (New-ComponentIcon 'SimpleDragonSurfaceConstructionLayerParam' 2 'layer'),
             (New-ComponentIcon 'SimpleDragonSurfaceConstructionParam' 2 'none'),

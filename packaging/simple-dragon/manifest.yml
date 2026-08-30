@@ -4,7 +4,8 @@ authors:
   - Gonie-Gonie
 description: >-
   Gonie-Gonie SimpleDragon area-and-azimuth building-energy workflows for
-  Grasshopper, interoperable with the InvisibleDragon model and result types.
+  Grasshopper, with direct managed GRM-to-GRR simulation and internal
+  InvisibleDragon conversion and EnergyPlus execution.
 url: https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper
 icon: icon.png
 keywords:

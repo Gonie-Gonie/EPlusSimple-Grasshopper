@@ -26,6 +26,17 @@ public abstract class SimpleDragonParam<TGoo> : GH_PersistentParam<TGoo>
     }
 }
 
+public sealed class SimpleDragonDiagnosticParam
+    : SimpleDragonParam<Types.SimpleDragonDiagnosticGoo>
+{
+    public SimpleDragonDiagnosticParam()
+        : base(
+            "SimpleDragon Diagnostic",
+            "Diagnostic",
+            "A stable SimpleDragon validation or execution diagnostic.") { }
+    public override Guid ComponentGuid => new("e54751c3-4d56-4499-83fb-f833822cf6bb");
+}
+
 public sealed class SimpleDragonMaterialParam : SimpleDragonParam<Types.SimpleDragonMaterialGoo>
 {
     public SimpleDragonMaterialParam() : base("SimpleDragon Material", "Material", "A SimpleDragon opaque material.") { }

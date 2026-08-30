@@ -69,6 +69,27 @@ public sealed class SimpleDragonGooTests
             resultCopy.Value.GrossSummaries[GreenRetrofitMetric.Cost].AnnualTotal);
     }
 
+    [Fact]
+    public void SimpleDragonDiagnosticGooDuplicatesAndRoundTripsItsOwnSnapshot()
+    {
+        var diagnostic = new Diagnostic(
+            "SD.TEST.DIAGNOSTIC",
+            DiagnosticSeverity.Warning,
+            "SimpleDragon diagnostic snapshot",
+            suggestedAction: "Review the connected GRM.");
+
+        SimpleDragonDiagnosticGoo duplicate = Assert.IsType<SimpleDragonDiagnosticGoo>(
+            new SimpleDragonDiagnosticGoo(diagnostic).Duplicate());
+        SimpleDragonDiagnosticGoo reopened = ArchiveRoundTrip(
+            new SimpleDragonDiagnosticGoo(diagnostic),
+            new SimpleDragonDiagnosticGoo());
+
+        Assert.NotSame(diagnostic, duplicate.Value);
+        Assert.Equal(diagnostic, duplicate.Value);
+        Assert.NotSame(diagnostic, reopened.Value);
+        Assert.Equal(diagnostic, reopened.Value);
+    }
+
     [Theory]
     [InlineData(UsageProfileSource.Standard, 0)]
     [InlineData(UsageProfileSource.Extended, 1)]
@@ -150,6 +171,7 @@ public sealed class SimpleDragonGooTests
     {
         Guid[] identifiers =
         {
+            new SimpleDragonDiagnosticParam().ComponentGuid,
             new SimpleDragonMaterialParam().ComponentGuid,
             new SimpleDragonSurfaceConstructionLayerParam().ComponentGuid,
             new SimpleDragonSurfaceConstructionParam().ComponentGuid,
@@ -169,8 +191,9 @@ public sealed class SimpleDragonGooTests
             new GreenRetrofitResultParam().ComponentGuid,
         };
 
-        Assert.Equal(17, identifiers.Length);
+        Assert.Equal(18, identifiers.Length);
         Assert.Equal(identifiers.Length, identifiers.Distinct().Count());
+        Assert.Contains(new Guid("e54751c3-4d56-4499-83fb-f833822cf6bb"), identifiers);
         Assert.Contains(new Guid("e0546c97-2fba-4c51-9613-340dfb1fc416"), identifiers);
         Assert.Contains(new Guid("11dead46-9ee4-48ce-913e-50ff7f10d319"), identifiers);
         Assert.Contains(new Guid("51b809c1-a4ae-4dc7-bca8-81e06d49a806"), identifiers);

@@ -28,14 +28,7 @@
     "GonieGonie.BuildingEnergy.Contracts.dll",
     "GonieGonie.EnergyPlus.Runtime.dll",
     "GonieGonie.InvisibleDragon.Core.dll",
-    "GonieGonie.InvisibleDragon.Grasshopper.Types.dll",
     "GonieGonie.InvisibleDragon.Rhino.dll"
-  ],
-  "interop_types": [
-    "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonEnergyModelGoo",
-    "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo",
-    "GonieGonie.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo",
-    "GonieGonie.InvisibleDragon.Grasshopper.Types.DiagnosticGoo"
   ],
   "products": [
     {
@@ -59,7 +52,6 @@
         "GonieGonie.BuildingEnergy.Contracts.dll",
         "GonieGonie.EnergyPlus.Runtime.dll",
         "GonieGonie.InvisibleDragon.Core.dll",
-        "GonieGonie.InvisibleDragon.Grasshopper.Types.dll",
         "GonieGonie.InvisibleDragon.Rhino.dll",
         "GonieGonie.SimpleDragon.Core.dll",
         "GonieGonie.SimpleDragon.Grasshopper.Types.dll",

@@ -1,6 +1,4 @@
 using GonieGonie.BuildingEnergy.Contracts;
-using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
-using GonieGonie.InvisibleDragon.Grasshopper.Types;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
 using Grasshopper.Kernel;
@@ -38,7 +36,7 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
             "Requested export directory. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory.",
             GH_ParamAccess.item);
         pManager.AddTextParameter("Case ID", "Case", "Stable case identifier written to every CSV row.", GH_ParamAccess.item, string.Empty);
-        pManager.AddParameter(new DiagnosticParam(), "Diagnostics", "Diag", "Optional diagnostics to include.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "Diag", "Optional diagnostics to include.", GH_ParamAccess.list);
         pManager.AddGenericParameter(
             "Geometry Map Data",
             "Map",
@@ -76,7 +74,7 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
         GreenRetrofitModelGoo? modelGoo = null;
         string directory = string.Empty;
         string caseId = string.Empty;
-        var diagnosticGoos = new List<DiagnosticGoo>();
+        var diagnosticGoos = new List<SimpleDragonDiagnosticGoo>();
         var geometryWrappers = new List<GH_ObjectWrapper>();
         bool export = false;
         bool overwrite = false;

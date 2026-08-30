@@ -34,7 +34,7 @@ public abstract class SimpleDragonHeatPumpSourceComponent : SimpleDragonHvacComp
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
     {
         pManager.AddParameter(new SimpleDragonSourceSystemParam(), "Source", "S", "Authored SimpleDragon source system.", GH_ParamAccess.item);
-        pManager.AddParameter(new GonieGonie.InvisibleDragon.Grasshopper.Parameters.DiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
@@ -139,7 +139,7 @@ public sealed class SimpleDragonChillerComponent : SimpleDragonHvacComponent
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
     {
         pManager.AddParameter(new SimpleDragonSourceSystemParam(), "Source", "S", "Authored chiller source.", GH_ParamAccess.item);
-        pManager.AddParameter(new GonieGonie.InvisibleDragon.Grasshopper.Parameters.DiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
@@ -210,7 +210,7 @@ public sealed class SimpleDragonAbsorptionChillerComponent : SimpleDragonHvacCom
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
     {
         pManager.AddParameter(new SimpleDragonSourceSystemParam(), "Source", "S", "Authored absorption-chiller source.", GH_ParamAccess.item);
-        pManager.AddParameter(new GonieGonie.InvisibleDragon.Grasshopper.Parameters.DiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
@@ -276,7 +276,7 @@ public sealed class SimpleDragonBoilerComponent : SimpleDragonHvacComponent
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
     {
         pManager.AddParameter(new SimpleDragonSourceSystemParam(), "Source", "S", "Authored boiler source.", GH_ParamAccess.item);
-        pManager.AddParameter(new GonieGonie.InvisibleDragon.Grasshopper.Parameters.DiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
@@ -340,7 +340,7 @@ public sealed class SimpleDragonDistrictHeatingComponent : SimpleDragonHvacCompo
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
     {
         pManager.AddParameter(new SimpleDragonSourceSystemParam(), "Source", "S", "Authored district-heating source.", GH_ParamAccess.item);
-        pManager.AddParameter(new GonieGonie.InvisibleDragon.Grasshopper.Parameters.DiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)

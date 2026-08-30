@@ -251,7 +251,9 @@ function Copy-FrameworkPayload {
             continue
         }
         if ([string] $Product.id -eq 'simple-dragon' -and
-            $file.Name -eq 'GonieGonie.InvisibleDragon.GH.gha') {
+            $file.Name -in @(
+                'GonieGonie.InvisibleDragon.GH.gha',
+                'GonieGonie.InvisibleDragon.Grasshopper.Types.dll')) {
             continue
         }
         if ([string] $Product.id -eq 'invisible-dragon' -and

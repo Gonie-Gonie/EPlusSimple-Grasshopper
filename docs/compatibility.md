@@ -10,8 +10,10 @@
 | Rhino 9 beta, macOS | — | Not a 0.1.0 target |
 
 Both Dragon GHAs are built from the same commit and may be loaded together.
-SimpleDragon's converted model, IDF, EnergyPlus result, and diagnostic values
-use the same shared type identities as InvisibleDragon.
+SimpleDragon owns its Grasshopper model, result, and diagnostic types. Its
+direct runner keeps InvisibleDragon conversion, IDF, weather, and EnergyPlus
+execution values behind the `SD Model -> Run SimpleDragon -> GRR` boundary, so
+the SimpleDragon GHA does not depend on InvisibleDragon Grasshopper types.
 
 ## Historical baseline
 

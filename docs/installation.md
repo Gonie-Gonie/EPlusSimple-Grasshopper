@@ -82,12 +82,17 @@ publishes a package and never removes unrelated Rhino packages.
 6. Add the module's Version component before opening a production definition.
 
 InvisibleDragon can be installed by itself. SimpleDragon can also be installed
-by itself; its package carries the shared InvisibleDragon model/type libraries
-needed for conversion, but it does not install the InvisibleDragon GHA or tab.
-Installing both products enables typed conversion and result connections.
-The canonical full simulation uses both tabs: SimpleDragon selects and verifies
-the Address/Vintage-based packaged Weather, and InvisibleDragon consumes it with the
-typed IDF. No explicit EnergyPlus, IDD, EPW, runtime, or temp path is required.
+by itself; its package carries the shared InvisibleDragon Core and Rhino libraries
+needed by its internal conversion and execution pipeline, but it does not
+install the InvisibleDragon GHA or tab. `Run SimpleDragon` still accepts a GRM
+and returns a GRR directly; it never asks for an InvisibleDragon model, IDF,
+Weather, or EnergyPlus result on the canvas.
+
+Installing the matching InvisibleDragon product alongside SimpleDragon makes
+the pinned EnergyPlus archive available for an offline first run. Without that
+sibling package, SimpleDragon can reuse an existing verified per-user runtime
+cache or acquire the exact pinned official archive through the verified network
+fallback. No explicit EnergyPlus, IDD, EPW, runtime, or temp path is required.
 
 ## Updating or removing
 

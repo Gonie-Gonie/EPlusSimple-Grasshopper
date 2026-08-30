@@ -650,6 +650,8 @@ internal sealed class PackageVerifier
         {
             Check(scenario, !File.Exists(Path.Combine(payloadRoot, "GonieGonie.InvisibleDragon.GH.gha")),
                 "SimpleDragon-only payload must not contain the InvisibleDragon component GHA in " + targetKey + ".");
+            Check(scenario, !File.Exists(Path.Combine(payloadRoot, "GonieGonie.InvisibleDragon.Grasshopper.Types.dll")),
+                "SimpleDragon-only payload must not contain InvisibleDragon Grasshopper types in " + targetKey + ".");
         }
 
         var identities = new Dictionary<string, string>(StringComparer.Ordinal);
@@ -689,13 +691,14 @@ internal sealed class PackageVerifier
 
         if (product.Id == "simple-dragon")
         {
-            bool hasInteropReference = files.Where(IsManagedPayloadFile)
+            AssemblyReferenceIdentity[] invisibleGrasshopperReferences = files.Where(IsManagedPayloadFile)
                 .Select(ReadAssembly)
                 .SelectMany(item => item.References)
-                .Any(reference => reference.Name == "GonieGonie.InvisibleDragon.Grasshopper.Types"
-                    && reference.Version == new Version(0, 1, 0, 0));
-            Check(scenario, hasInteropReference,
-                "SimpleDragon " + targetKey + " does not reference the shared InvisibleDragon Grasshopper types at 0.1.0.0.");
+                .Where(reference => reference.Name is "GonieGonie.InvisibleDragon.GH"
+                    or "GonieGonie.InvisibleDragon.Grasshopper.Types")
+                .ToArray();
+            Check(scenario, invisibleGrasshopperReferences.Length == 0,
+                "SimpleDragon " + targetKey + " still references an InvisibleDragon Grasshopper assembly.");
         }
     }
 
@@ -936,22 +939,6 @@ internal sealed class PackageVerifier
                     targetHashes[shared] = firstHash;
                 }
                 _sharedHashes[targetKey] = targetHashes;
-
-                string sharedTypes = "GonieGonie.InvisibleDragon.Grasshopper.Types.dll";
-                string firstTypes = Path.Combine(invisibleRoot, sharedTypes);
-                string secondTypes = Path.Combine(simpleRoot, sharedTypes);
-                if (File.Exists(firstTypes) && File.Exists(secondTypes))
-                {
-                    string[] firstPublic = ReadAssembly(firstTypes).PublicTypes;
-                    string[] secondPublic = ReadAssembly(secondTypes).PublicTypes;
-                    Check(BothScenario, firstPublic.SequenceEqual(secondPublic, StringComparer.Ordinal),
-                        "Shared Grasshopper type surface differs between payloads in " + targetKey + ".");
-                    foreach (string requiredType in _spec.InteropTypes)
-                    {
-                        Check(BothScenario, firstPublic.Contains(requiredType, StringComparer.Ordinal),
-                            "Required interop type '" + requiredType + "' is absent in " + targetKey + ".");
-                    }
-                }
 
                 var union = new Dictionary<string, (string Hash, string Path)>(StringComparer.Ordinal);
                 foreach (string path in Directory.EnumerateFiles(invisibleRoot).Concat(Directory.EnumerateFiles(simpleRoot))
@@ -1217,9 +1204,6 @@ internal sealed class PackageSpec
 
     [JsonPropertyName("shared_assemblies")]
     public List<string> SharedAssemblies { get; set; } = new();
-
-    [JsonPropertyName("interop_types")]
-    public List<string> InteropTypes { get; set; } = new();
 
     [JsonPropertyName("products")]
     public List<ProductSpec> Products { get; set; } = new();

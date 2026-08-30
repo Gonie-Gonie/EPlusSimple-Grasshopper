@@ -10,7 +10,7 @@ geometry at different levels.
 | Rhino input | Planar polylines and Brep faces converted to vertex polygons | Named planar face Breps become `SD Surface` values, then reduce to the area-and-azimuth model |
 | HVAC | Explicit source, tower, supply, ERV, and PV object graph | Supply systems and ERVs connect directly to their owning `SD Zone` |
 | Main model | `DragonEnergyModel` | `GreenRetrofitModel` (GRM) |
-| Simulation path | Compile a typed IDF without paths, then consume typed IDF + verified Weather and manage EnergyPlus internally | Select Weather from Address/Vintage, prepare IDF, then hand both to InvisibleDragon |
+| Simulation path | `ID Model -> Compile InvisibleDragon -> Run InvisibleDragon`, with `EPW File -> ID Weather -> Run InvisibleDragon` as the deliberate weather boundary | Connect the GRM directly to `Run SimpleDragon`; Weather, IDF, runtime execution, and GRR construction stay internal |
 | Existing files | IDF-oriented values and Dragon persistence | GRM/GRR read and write |
 
 Choose InvisibleDragon when non-rectangular face vertices or direct control of
@@ -27,6 +27,12 @@ Neither product is a general-purpose editor for every EnergyPlus object. The
 initial release exposes the construction, profile, geometry, HVAC, result, and
 research workflows required by the pinned compatibility baseline.
 
-For the shortest complete graph, author with SimpleDragon and execute with
-InvisibleDragon: `SD Model -> SD to IDF -> Run InvisibleDragon`. Runtime, IDD,
-EPW, and temporary-work paths are intentionally absent from that graph.
+For the shortest complete graph, use `SD Model -> Run SimpleDragon -> GRR`.
+Runtime, IDD, IDF, EPW, InvisibleDragon execution types, and temporary-work
+paths are intentionally absent from that graph.
+
+Standalone InvisibleDragon is intentionally more explicit. Its compiler still
+manages EnergyPlus and IDD internally, but the author selects a local EPW and
+passes it through `Verify InvisibleDragon Weather` (`ID Weather`) before
+connecting the resulting typed Weather value to `Run InvisibleDragon`.
+InvisibleDragon never guesses weather from an address and never acquires it.

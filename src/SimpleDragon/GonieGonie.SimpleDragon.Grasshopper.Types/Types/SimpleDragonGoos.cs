@@ -1,4 +1,19 @@
+using GonieGonie.BuildingEnergy.Contracts;
+
 namespace GonieGonie.SimpleDragon.Grasshopper.Types;
+
+public sealed class SimpleDragonDiagnosticGoo : SimpleDragonGoo<Diagnostic>
+{
+    public SimpleDragonDiagnosticGoo() { }
+    public SimpleDragonDiagnosticGoo(Diagnostic value) : base(value) { }
+    public override string TypeName => "SimpleDragon Diagnostic";
+    public override string TypeDescription => "A stable SimpleDragon validation or execution diagnostic.";
+    protected override SimpleDragonGoo<Diagnostic> Create(Diagnostic value) =>
+        new SimpleDragonDiagnosticGoo(value);
+    protected override SimpleDragonGoo<Diagnostic> CreateEmpty() => new SimpleDragonDiagnosticGoo();
+    protected override string DisplayText(Diagnostic value) =>
+        $"{value.Severity}: {value.Code} - {value.Message}";
+}
 
 public sealed class SimpleDragonMaterialGoo : SimpleDragonGoo<Material>
 {

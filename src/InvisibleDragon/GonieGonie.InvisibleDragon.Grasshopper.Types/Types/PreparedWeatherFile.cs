@@ -52,7 +52,7 @@ public sealed class PreparedWeatherFile
     /// <remarks>This property must not be used as Grasshopper display text.</remarks>
     public string ArtifactPath => _artifactPath
         ?? throw new InvalidOperationException(
-            "This restored weather handle is not bound to a local artifact. Recompute SimpleDragon Prepare.");
+            "This restored Weather handle is not bound to a local artifact. Recreate it from a verified EPW in the workflow that owns the Weather input.");
 
     /// <summary>Gets whether this handle is currently bound to a verified local-artifact location.</summary>
     public bool IsBound => _artifactPath is not null;
@@ -67,7 +67,8 @@ public sealed class PreparedWeatherFile
     public string Sha256 { get; }
 
     /// <summary>
-    /// Creates a handle for an existing EPW artifact and records its current SHA-256 digest.
+    /// Creates a handle for an existing EPW artifact after verifying its LOCATION header,
+    /// then records its current SHA-256 digest.
     /// </summary>
     public static PreparedWeatherFile FromVerifiedArtifact(
         string artifactPath,
@@ -86,7 +87,7 @@ public sealed class PreparedWeatherFile
             normalizedPath,
             normalizedProvider,
             normalizedIdentity,
-            ComputeSha256(normalizedPath));
+            ComputeVerifiedSha256(normalizedPath));
     }
 
     /// <summary>
@@ -120,7 +121,8 @@ public sealed class PreparedWeatherFile
 
     /// <summary>
     /// Tries to obtain the local artifact path for an immediate execution operation.
-    /// Restored persisted handles intentionally remain unbound until SimpleDragon Prepare recomputes them.
+    /// Restored persisted handles intentionally remain unbound until the owning workflow recreates
+    /// them from a verified EPW artifact.
     /// </summary>
     public bool TryGetArtifactPath(out string? artifactPath)
     {
@@ -196,6 +198,34 @@ public sealed class PreparedWeatherFile
     private static string ComputeSha256(string path)
     {
         using FileStream stream = new(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        return ComputeSha256(stream);
+    }
+
+    private static string ComputeVerifiedSha256(string path)
+    {
+        using FileStream stream = new(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        using (var reader = new StreamReader(
+            stream,
+            Encoding.UTF8,
+            detectEncodingFromByteOrderMarks: true,
+            bufferSize: 1024,
+            leaveOpen: true))
+        {
+            string? header = reader.ReadLine();
+            if (header is null
+                || !header.StartsWith("LOCATION,", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidDataException(
+                    "The weather artifact must begin with an EnergyPlus LOCATION header.");
+            }
+        }
+
+        stream.Position = 0;
+        return ComputeSha256(stream);
+    }
+
+    private static string ComputeSha256(Stream stream)
+    {
         using SHA256 algorithm = SHA256.Create();
         byte[] hash = algorithm.ComputeHash(stream);
         var text = new StringBuilder(hash.Length * 2);

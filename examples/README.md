@@ -9,12 +9,12 @@ Surface Breps and window curves that can be referenced directly from Grasshopper
 | --- | --- |
 | `00-invisibledragon-material-construction.gh` | Minimal InvisibleDragon Material -> Construction Layer -> Construction -> U-value graph |
 | `01-invisibledragon-envelope-profile.gh` | Three-layer envelope, no-mass construction, constant annual profile, and typed output previews |
-| `02-invisibledragon-single-zone-hvac-idf.gh` | Window→Surface→Zone and HVAC/ERV→Zone direct ownership, PV, energy model, and path-free EnergyPlus 24.2 IDF compile/validation |
+| `02-invisibledragon-single-zone-hvac-idf.gh` | Window→Surface→Zone and HVAC/ERV→Zone ownership, PV, `ID Model -> Compile -> Run`, and the deliberate `EPW File -> ID Weather -> Run` standalone boundary |
 | `10-simpledragon-material-construction.gh` | Minimal SimpleDragon Material -> Construction Layer -> Surface Construction graph |
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
-| `12-simpledragon-two-zone-to-idf.gh` | Complex two-Zone composition/IDF authoring: Fenestration Construction -> Opening -> local Surface, six Surfaces -> each Zone, west heat-pump/AHU, east boiler/radiator, dedicated ERVs, PV, then path-free IDF and packaged Weather preparation |
+| `12-simpledragon-two-zone-model.gh` | Complex two-Zone model authoring: Fenestration Construction -> Opening -> local Surface, six Surfaces -> each Zone, west heat-pump/AHU, east boiler/radiator, dedicated ERVs, PV, then one complete GRM with JSON, provenance, and area previews |
 | `13-simpledragon-results-and-plots.gh` | Real GRR read, annual summary, monthly DataTree, line plot, bar plot, and non-writing CSV preview |
-| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: explicit Surface ownership, dedicated electric radiators and ERVs connect to their own Zones, typed IDF and Weather feed managed InvisibleDragon Run, and a typed Batch Case feeds managed batch without parallel model/ID lists |
+| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: explicit Surface ownership, dedicated electric radiators and ERVs connect to their own Zones, the complete model feeds `Run SimpleDragon` directly, GRR feeds summaries/CSV, and a typed Batch Case feeds managed batch without parallel model/ID lists |
 | `30-two-zone-office.3dm` | Twelve named planar Surface Breps forming two adjacent office Zones, plus two named south-window curves |
 | `31-three-zone-stepped-office.3dm` | Eighteen named planar Surface Breps forming two adjacent ground-floor Zones and an adjacent upper Zone, plus three named windows |
 
@@ -28,19 +28,22 @@ file in Grasshopper:
 ```
 
 Opening an example manually is safe: Run, Cancel, Force, Export, and Overwrite
-are persisted as `False`. SimpleDragon prepares the Address/Vintage-selected packaged
-weather handle without exposing its cache path; InvisibleDragon resolves its
-managed EnergyPlus runtime and system-temp work directory only after Run
+are persisted as `False`. `Run SimpleDragon` selects and verifies the
+Address/Vintage-based packaged weather, converts the GRM, resolves the managed
+EnergyPlus runtime, and uses a system-temp work directory only after Run
 receives an explicit False-to-True edge.
-Example 02 is the complete standalone InvisibleDragon authoring-to-IDF path;
-example 14 is the complete simulation path shared by the two products. Example
-14 derives Seoul weather from the Model Address/Vintage: wait until
-`Preparation success` is `True` and `Verified packaged weather` contains a typed
-weather value, then create a fresh False-to-True edge on Run. Its intentionally
+Example 02 is the complete standalone InvisibleDragon authoring-to-run graph.
+Its EPW File parameter intentionally contains no data, so `ID Weather` performs
+no path access and the definition remains a safe preview until a user chooses
+an EPW and creates a fresh Run edge. The Run, Cancel, and Force controls are
+saved False.
+Example 14 is the complete SimpleDragon simulation path. It derives Seoul
+weather from the Model Address/Vintage internally: create a fresh False-to-True
+edge on Run and follow the State, Success, and Diagnostics outputs. Its intentionally
 simple electric-radiator HVAC keeps this full-process execution example stable;
 use example 12 for the broader HVAC/ERV/PV composition demonstration. No EnergyPlus,
 IDD, EPW, runtime-root, or temporary-directory path belongs on this canonical
-canvas.
+SimpleDragon canvas.
 
 `13-simpledragon-results-and-plots.gh` keeps both paths relative to the saved
 Grasshopper document:
@@ -57,14 +60,14 @@ while GRM/GRR/CSV output paths use the system temp directory. `Export CSV` is
 held at `False`; its directory and file-content outputs are previews only, so
 this example does not create the preview directory or write CSV files.
 
-The canonical SimpleDragon Prepare and InvisibleDragon Run components expose no
-EnergyPlus, IDD, EPW, or temp path;
+The canonical `Run SimpleDragon` component exposes no InvisibleDragon model,
+IDF, EnergyPlus-result, Weather, EnergyPlus, IDD, EPW, or temp-path port;
 implementation-owned artifacts remain in verified per-user caches or the system
 temporary directory. User-selected CSV export destinations remain visible.
 
 ## Relink the two-zone definition to live Rhino objects
 
-`12-simpledragon-two-zone-to-idf.gh` contains internalized copies of the exact
+`12-simpledragon-two-zone-model.gh` contains internalized copies of the exact
 Surface and opening geometry in `30-two-zone-office.3dm`, so it runs immediately
 and remains portable. To use live document references instead:
 
@@ -112,24 +115,34 @@ equality between model geometry and the internalized two-Zone Grasshopper
 inputs. Candidates, logs, summaries, and round-trip copies remain below
 `temp/example-definitions/`.
 
+For example 02, that topology check includes `ID Weather`, `Run
+InvisibleDragon`, and every compile/weather/run wire. Its deliberately data-empty
+EPW File parameter and False triggers remain no-op through solve, save, reopen,
+and round trip; the automated gate does not invent a standalone weather path.
+
 When the verified distribution payloads and EnergyPlus runtime are available,
-the gate temporarily enables example 14 in memory and verifies typed packaged
-weather preparation, its Surface-to-Zone electric-radiator model, managed Run,
-Result, GRR, CSV, cache, and cancellation in both hosts. The saved trigger
+the gate temporarily enables example 14 in memory and verifies internal
+packaged-weather selection, its Surface-to-Zone electric-radiator model, direct
+SimpleDragon Run-to-GRR execution, CSV, cache, and cancellation in both hosts. The saved trigger
 values remain `False`. Use
 `-SkipEnergyPlusWorkflow` to test the explicit disabled state or
-`-EnergyPlusRoot` to select a runtime. `-WeatherPath` remains an explicit test
-override for workflows that require one. An unavailable prerequisite is
-reported as `Not Run`, not as a successful simulation.
+`-EnergyPlusRoot` to select a runtime. The gate supplies that root, its IDD, and
+an optional `-WeatherPath` EPW to `Run SimpleDragon` only through internal
+automation environment values; none are canvas inputs. Without gate overrides,
+the component uses its managed LocalAppData runtime bootstrap and address-selected
+packaged weather. An unavailable prerequisite is reported as `Not Run`, not as a
+successful simulation.
 
 ## Further workflow recipes
 
 - Example 02 uses `Compile InvisibleDragon`, whose managed IDD and embedded
-  EnergyPlus 24.2 execution mapping require no path input. Use example 14 to see
-  SimpleDragon select and verify weather from Model Address/Vintage, then pass
-  typed IDF and Weather directly to the managed InvisibleDragon runner.
+  EnergyPlus 24.2 execution mapping require no path input. To run it deliberately,
+  select an EPW in the empty EPW File parameter, pass it through `ID Weather`,
+  and create a fresh False-to-True edge on `Run InvisibleDragon`. Use example 14 to see
+  SimpleDragon select and verify weather from Model Address/Vintage and perform
+  the complete managed simulation without exposing its internal IDF or Weather.
 - Use Read GRM with `fixtures\simple-dragon\grm\ASHRAE 140 modified.grm`, then
-  connect the typed model directly to Prepare to inspect or simulate an existing model.
+  connect the typed model directly to `Run SimpleDragon` to simulate an existing model.
 - Wrap each model and its optional stable ID in a SimpleDragon Batch Case, feed
   the Cases list into Managed Run SimpleDragon Batch, set a parallel limit, and
   use only the Run/Cancel triggers. Runtime, weather, case temp, and result

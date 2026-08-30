@@ -14,8 +14,8 @@ using Rhino;
 namespace GonieGonie.InvisibleDragon.Grasshopper.Components;
 
 /// <summary>
-/// Canonical path-free EnergyPlus runner. InvisibleDragon consumes the EPW handle
-/// supplied by SimpleDragon but never selects or acquires weather itself.
+/// Canonical path-free EnergyPlus runner. InvisibleDragon consumes a verified EPW handle
+/// created by its dedicated standalone weather-verification component.
 /// </summary>
 [SuppressMessage(
     "Design",
@@ -36,7 +36,7 @@ public sealed class ManagedRunEnergyPlusComponent : DragonComponent
         : base(
             "Run InvisibleDragon",
             "Run",
-            "Runs EnergyPlus off the Rhino UI thread. EnergyPlus, IDD, and temporary paths are managed internally; InvisibleDragon only consumes the connected verified EPW handle.",
+            "Runs EnergyPlus off the Rhino UI thread. EnergyPlus, IDD, and temporary paths are managed internally; connect an EPW handle verified by ID Weather.",
             DragonPanels.Core)
     {
     }
@@ -55,7 +55,7 @@ public sealed class ManagedRunEnergyPlusComponent : DragonComponent
             new PreparedWeatherFileParam(),
             "Weather",
             "EPW",
-            "Verified EPW handle prepared by SimpleDragon. InvisibleDragon does not acquire weather.",
+            "Verified EPW handle from ID Weather.",
             GH_ParamAccess.item);
         pManager.AddBooleanParameter(
             "Run",
@@ -167,7 +167,7 @@ public sealed class ManagedRunEnergyPlusComponent : DragonComponent
         {
             AddRuntimeMessage(
                 GH_RuntimeMessageLevel.Error,
-                "Weather is required. Connect SimpleDragon's verified Weather output.");
+                "Weather is required. Connect the Weather output from ID Weather.");
             return;
         }
 
@@ -175,7 +175,7 @@ public sealed class ManagedRunEnergyPlusComponent : DragonComponent
         {
             AddRuntimeMessage(
                 GH_RuntimeMessageLevel.Error,
-                "The restored Weather metadata is not bound to a local EPW artifact. Recompute SimpleDragon Prepare.");
+                "The restored Weather metadata is not bound to a local EPW artifact. Recompute ID Weather and reconnect its Weather output.");
             return;
         }
 
@@ -184,7 +184,7 @@ public sealed class ManagedRunEnergyPlusComponent : DragonComponent
         {
             AddRuntimeMessage(
                 GH_RuntimeMessageLevel.Error,
-                "The prepared EPW artifact is missing or no longer matches its verified SHA-256. Recompute SimpleDragon Prepare.");
+                "The EPW artifact is missing or no longer matches its verified SHA-256. Recompute ID Weather before running InvisibleDragon again.");
             return;
         }
 

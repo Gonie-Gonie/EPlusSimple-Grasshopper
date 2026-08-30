@@ -34,17 +34,22 @@ The SimpleDragon two-Zone examples use one named single-face Brep parameter per
 Surface. Fenestration Construction feeds Opening only; each completed Opening
 feeds exactly one Surface, each completed Surface feeds exactly one Zone, and
 each Zone-exclusive HVAC/ERV value feeds exactly one Zone. Zone definitions feed
-Model, and Model feeds the path-free Prepare component.
+Model. The complex authoring example ends at the complete GRM, while the
+execution example feeds that GRM directly to `Run SimpleDragon`.
 The standalone InvisibleDragon example follows the same rule: Window feeds its
 owning Surface, Surface/HVAC/ERV feed Zone, and only Zone plus model-level PV
-feed Model. The gate rejects any relationship-index or assignment-stage graph.
-Example 12 is the complex composition/IDF authoring case with explicit Surface
+feed Model. It then shows `Model -> Compile -> Run` beside
+`EPW File -> ID Weather -> Run`. The EPW File parameter has no persisted data
+and Run, Cancel, and Force are False, so solve/save/reopen performs no weather
+path access and starts no simulation. The gate rejects any relationship-index
+or assignment-stage graph.
+Example 12 is the complex model-authoring case with explicit Surface
 type, construction, boundary, and opening ownership, a west-Zone heat-pump/AHU,
 east-Zone boiler/radiator, dedicated ERVs, and PV. Example 14 uses dedicated
 electric radiators and ERVs on the same Surface-to-Zone structure as
-the stable execution case and connects Prepare's typed IDF and verified Weather
-outputs directly to the managed InvisibleDragon runner before
-Result-to-GRR-to-CSV. Every persisted
+the stable execution case and connects Model directly to `Run SimpleDragon`,
+whose GRR output feeds summary and CSV components. Conversion, IDF, weather,
+EnergyPlus execution, and GRR construction remain internal. Every persisted
 execution, cancellation, overwrite, and export trigger remains false. Runtime,
 IDD, weather-cache, and run-temp paths are implementation-owned and never appear
 on the canonical canvas or in its manifest description.
@@ -59,6 +64,9 @@ requires the default `-Target All`: Rhino 7 writes every canonical binary, then
 Rhino 7 and Rhino 8 both validate it before the command succeeds. Custom Rhino
 executable locations can be supplied with `-Rhino7Exe` and `-Rhino8Exe`.
 Use `-EnergyPlusRoot` to select the runtime gate or `-SkipEnergyPlusWorkflow` to
-verify the disabled state without executing a simulation. `-WeatherPath` remains
-an optional legacy/test override; the canonical SimpleDragon examples select
-and verify packaged weather internally from the Model Address/Vintage.
+verify the disabled state without executing a simulation. The gate passes its
+verified runtime root and IDD to `Run SimpleDragon` through internal automation
+environment values; they never become Grasshopper inputs. `-WeatherPath` is an
+optional test-host-only EPW override carried through the same internal boundary.
+Without these gate overrides, `Run SimpleDragon` keeps its managed LocalAppData
+runtime bootstrap and packaged weather selection from the Model Address/Vintage.

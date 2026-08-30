@@ -1,5 +1,4 @@
 using GonieGonie.BuildingEnergy.Contracts;
-using GonieGonie.InvisibleDragon.Grasshopper.Types;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
@@ -138,7 +137,7 @@ public abstract class SimpleDragonHvacComponent : SimpleDragonComponent
         try
         {
             create();
-            access.SetDataList(diagnosticOutputIndex, Array.Empty<DiagnosticGoo>());
+            access.SetDataList(diagnosticOutputIndex, Array.Empty<SimpleDragonDiagnosticGoo>());
         }
         catch (Exception exception) when (
             exception is ArgumentException
@@ -150,7 +149,7 @@ public abstract class SimpleDragonHvacComponent : SimpleDragonComponent
                 exception.Message,
                 suggestedAction: action);
             Report(new[] { diagnostic });
-            access.SetDataList(diagnosticOutputIndex, new[] { new DiagnosticGoo(diagnostic) });
+            access.SetDataList(diagnosticOutputIndex, new[] { new SimpleDragonDiagnosticGoo(diagnostic) });
         }
     }
 }

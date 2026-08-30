@@ -1,8 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using GonieGonie.BuildingEnergy.Contracts;
 using GonieGonie.EnergyPlus.Runtime;
-using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
-using GonieGonie.InvisibleDragon.Grasshopper.Types;
 using GonieGonie.SimpleDragon.Batch;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
@@ -80,7 +78,7 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
         pManager.AddTextParameter("Manifest", "Manifest", "Deterministic reproducibility manifest result path.", GH_ParamAccess.item);
         pManager.AddBooleanParameter("Complete", "OK", "True when every case succeeded.", GH_ParamAccess.item);
         pManager.AddParameter(
-            new DiagnosticParam(),
+            new SimpleDragonDiagnosticParam(),
             "Diagnostics",
             "D",
             "Path-free preparation and per-case diagnostics.",
@@ -149,7 +147,7 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 
         IReadOnlyList<Diagnostic> diagnostics = outcome?.Diagnostics ?? Array.Empty<Diagnostic>();
         Report(diagnostics);
-        DA.SetDataList(6, diagnostics.Select(item => new DiagnosticGoo(item)));
+        DA.SetDataList(6, diagnostics.Select(item => new SimpleDragonDiagnosticGoo(item)));
     }
 
     public override void AddedToDocument(GH_Document document)
@@ -408,12 +406,14 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
             return ManagedWeatherPreparation.CancelledOutcome();
         }
 
-        var preparedByFileName = new Dictionary<string, PreparedWeatherFile>(StringComparer.Ordinal);
+        var preparedByFileName = new Dictionary<string, string>(StringComparer.Ordinal);
         for (int index = 0; index < selections.Length; index++)
         {
             WeatherSelection selection = selections[index];
             SimpleDragonWeatherFileResolution resolution = resolutions[index];
-            if (!resolution.IsSuccess || resolution.FilePath is null)
+            if (!resolution.IsSuccess
+                || resolution.FilePath is null
+                || !File.Exists(resolution.FilePath))
             {
                 return ManagedWeatherPreparation.Failed(new Diagnostic(
                     "SD.GH.MANAGED_BATCH_WEATHER_NOT_READY",
@@ -422,33 +422,7 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
                     suggestedAction: "Reinstall the SimpleDragon weather package with dev.cmd install."));
             }
 
-            PreparedWeatherFile prepared;
-            try
-            {
-                prepared = PreparedWeatherFile.FromVerifiedArtifact(
-                    resolution.FilePath,
-                    "SimpleDragon packaged weather",
-                    selection.EpwFileName);
-            }
-            catch (Exception exception) when (exception is IOException
-                or UnauthorizedAccessException
-                or ArgumentException)
-            {
-                return ManagedWeatherPreparation.Failed(new Diagnostic(
-                    "SD.GH.MANAGED_BATCH_WEATHER_INVALID",
-                    DiagnosticSeverity.Error,
-                    "The packaged weather artifact for '" + selection.EpwFileName + "' failed integrity verification."));
-            }
-
-            if (!prepared.VerifyArtifact())
-            {
-                return ManagedWeatherPreparation.Failed(new Diagnostic(
-                    "SD.GH.MANAGED_BATCH_WEATHER_CHANGED",
-                    DiagnosticSeverity.Error,
-                    "The packaged weather artifact for '" + selection.EpwFileName + "' changed after preparation."));
-            }
-
-            preparedByFileName.Add(selection.EpwFileName, prepared);
+            preparedByFileName.Add(selection.EpwFileName, resolution.FilePath);
             diagnostics.AddRange(resolution.Diagnostics
                 .Where(item => !item.IsFailure)
                 .Select(PublicDiagnostic));
@@ -461,7 +435,7 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
             resolvedCases[index] = new BatchCaseDefinition(
                 item.Model,
                 item.CaseId,
-                preparedByFileName[effectiveSelections[index].EpwFileName].ArtifactPath,
+                preparedByFileName[effectiveSelections[index].EpwFileName],
                 item.Options);
         }
 

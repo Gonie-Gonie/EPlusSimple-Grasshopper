@@ -22,14 +22,10 @@ Opening Curve + Fenestration Construction -> SD Opening -> East SD Surface <- Fa
                                                               +-> East SD Zone <- Height / Profile / HVAC / ERV --+-> SD Model (Address)
                                                                                                                        |
                                                                                                                        v
-                                                                                                                   SD to IDF
-                                                                                                                IDF + Weather
+                                                                                                              Run SimpleDragon
                                                                                                                        |
                                                                                                                        v
-                                                                                                              Run InvisibleDragon
-                                                                                                                       |
-                                                                                                                       v
-                                                                                                         Result / GRR / Plot / CSV
+                                                                                                            GRR / Plot / CSV
 ```
 
 `SD Opening` has no Zone Index or Face Index. Its Construction input is required
@@ -57,9 +53,20 @@ Build each opaque construction from `Construction Layer` values. Each layer owns
 its Material and Thickness, and the construction receives one ordered Layers
 list; Materials and Thicknesses are never matched by list position.
 
-The model Address and Vintage select the weather record. `SD to IDF` preserves the SimpleDragon conversion semantics while emitting the valid EnergyPlus 24.2 HVAC field layout, then asynchronously prepares the matching packaged EPW. Its `Weather` output is a verified typed handle, not a path panel.
+The model Address and Vintage select the weather record. Connect the completed
+GRM directly to `Run SimpleDragon`, then use its Run, Cancel, Force Rerun, and
+Timeout controls. The component internally converts the GRM, generates the
+EnergyPlus 24.2 IDF, verifies the matching packaged EPW, resolves the supported
+runtime, executes EnergyPlus, and constructs the GRR. Its public outputs are
+only GRR, State, Success, and Diagnostics.
 
-## InvisibleDragon execution boundary
+The first observed Run or Cancel value is a baseline. Toggle False, allow one
+solution, then toggle True to request an action. An identical
+model/weather/timeout combination reuses the last GRR unless Force Rerun is
+enabled. Opening or recomputing a saved document never prepares weather or
+starts EnergyPlus by itself.
+
+## Standalone InvisibleDragon boundary
 
 Low-level authoring uses the same local-ownership rule:
 
@@ -71,7 +78,9 @@ Curve + Construction + owned Openings -> ID Surface -> ID Zone <- Profile / HVAC
                                                         +-> ID Model <- PV
                                                                  |
                                                                  v
-                                                        Compile InvisibleDragon
+                                                        Compile InvisibleDragon -> IDF --+-> Run InvisibleDragon
+                                                                                          ^
+                                                           EPW File -> ID Weather --------+
 ```
 
 Connect each Window or Door to its owning Surface, each Surface and system to
@@ -82,26 +91,35 @@ assignments and nested sources from the Zone wires, so there are no Zone
 indices, adjacent-surface IDs, source catalogs, or assignment components on the
 canvas.
 
-Connect `ID Model -> Compile InvisibleDragon`.
+Connect `ID Model -> Compile InvisibleDragon -> Run InvisibleDragon`.
 The compiler has only a typed Model input and resolves the managed EnergyPlus
-24.2 IDD or its embedded execution mapping internally. Its typed IDF can then
-join the verified SimpleDragon Weather handle at the execution boundary.
+24.2 IDD or its embedded execution mapping internally. This visible low-level
+compile path is useful when the author deliberately works in InvisibleDragon;
+SimpleDragon does not expose it as an intermediate stage.
 
-`Run InvisibleDragon` accepts only:
+For the second runner input, connect
+`EPW File -> Verify InvisibleDragon Weather -> Run InvisibleDragon`.
+`ID Weather` verifies the deliberately selected local EPW and emits a typed,
+content-addressed Weather handle. An empty EPW File parameter is a safe no-op,
+so a saved example can show the complete topology without reading a path.
+InvisibleDragon does not select, download, or infer weather.
 
-- a typed IDF;
-- the typed `Weather` produced by SimpleDragon;
-- Run, Cancel, Force Rerun, and Timeout controls.
+`Run InvisibleDragon` remains the low-level executor for this explicit workflow.
+It is not inserted between `SD Model` and `Run SimpleDragon`, and none of its
+ports is required on a SimpleDragon canvas.
 
-EnergyPlus, Energy+.idd, the runtime cache, EPW extraction, working directories, and cleanup are module-owned. The runtime is verified and prepared below the current user's LocalAppData; simulations use the operating-system temp directory. Nothing writes below the Rhino installation directory, and no administrator permission is required.
-
-The first observed Run or Cancel value is a baseline. Toggle False, allow one solution, then toggle True to request an action. Identical IDF/weather/timeout inputs reuse the last result unless Force Rerun is enabled.
-
-InvisibleDragon still contains the low-level model and HVAC types used by the port, but the Grasshopper authoring surface exposes only the direct composition and managed execution path.
+EnergyPlus, Energy+.idd, runtime caches, working directories, and cleanup are
+module-owned. SimpleDragon also owns its packaged weather cache. A standalone
+InvisibleDragon EPW stays at the user-selected location and is verified before
+execution; simulations use the operating-system temp directory. Nothing writes
+below the Rhino installation directory, and no administrator permission is
+required.
 
 ## Results, CSV, and batch studies
 
-Build GRR applies the SimpleDragon result aggregation after an InvisibleDragon result is available. Summary, DataTree, line-plot, and bar-plot components expose the same ordered month, fuel, and end-use data without a file round trip.
+`Run SimpleDragon` emits the completed GRR directly. Summary, DataTree,
+line-plot, and bar-plot components expose the same ordered month, fuel, and
+end-use data without an InvisibleDragon-result handoff or file round trip.
 
 GRM/GRR readers, writers, and CSV export intentionally expose artifact destinations because those are user-owned results, not simulation setup. Relative output paths use the saved Grasshopper document folder; unsaved definitions fall back to the per-user temp directory.
 
@@ -115,18 +133,21 @@ CSV and reproducibility-manifest paths are outputs only.
 
 The tracked definitions under `examples/` progress from materials and profiles to linked Rhino geometry and a complete two-zone simulation. The principal authoring examples are:
 
-- `12-simpledragon-two-zone-to-idf.gh`: the complex authoring demonstration,
+- `12-simpledragon-two-zone-model.gh`: the complex authoring demonstration,
   with named face Breps composed as Surface-owned Openings, constructions, and
   boundary intents, then two independently owned Zones, terminal systems, and ERVs;
   a heat-pump/AHU serves the west Zone, a boiler/radiator serves the east Zone,
-  and PV is resolved with both into one GRM/IDF;
+  and PV is resolved with both into one complete GRM;
 - `14-simpledragon-two-zone-run-results-csv.gh`: the stable end-to-end gate,
   with an electric radiator and ERV connected directly to each Zone,
-  Address/Vintage-selected Weather, InvisibleDragon execution, GRR, summaries,
-  CSV, and a typed Batch Case feeding the managed batch runner.
+  `SD Model -> Run SimpleDragon -> GRR`, summaries, CSV, and a typed Batch Case
+  feeding the managed batch runner.
 
-`02-invisibledragon-single-zone-hvac-idf.gh` shows the standalone low-level
-authoring path through the path-free `Compile InvisibleDragon` component.
+`02-invisibledragon-single-zone-hvac-idf.gh` shows the complete standalone
+low-level topology: authoring, path-free compile, explicit EPW verification,
+and `Run InvisibleDragon`. Its EPW File parameter contains no data and all
+action triggers are saved False, so choose an EPW and create a fresh Run edge
+only when execution is intended.
 
 The geometry is also available as `30-two-zone-office.3dm` and `31-three-zone-stepped-office.3dm`. All action triggers are saved False.
 
@@ -137,4 +158,4 @@ Run `./dev.cmd examples` to solve and round-trip every `.gh` and `.3dm` example 
 Dragon Goo stores deterministic, schema-versioned snapshots in the Grasshopper
 document. Opening and Surface definitions include their geometry; Zone
 snapshots include their owned Surface definitions and Zone-level values.
-Model, HVAC, weather, and result values also survive save and reopen.
+Model, HVAC, and result values also survive save and reopen.

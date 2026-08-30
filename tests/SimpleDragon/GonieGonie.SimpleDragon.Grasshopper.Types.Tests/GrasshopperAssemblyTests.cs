@@ -56,6 +56,8 @@ public sealed class GrasshopperAssemblyTests
             components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("11336c6a-5bd4-4d6b-80a1-89bd168f8d54"),
             components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("6e242e51-77ce-4f77-8445-a17d636c7310"),
+            components.Select(component => component.ComponentGuid));
     }
 
     [Fact]
@@ -107,7 +109,7 @@ public sealed class GrasshopperAssemblyTests
             .OrderBy(name => name, StringComparer.Ordinal)
             .ToArray();
 
-        Assert.Equal(17, parameterTypes.Length);
+        Assert.Equal(18, parameterTypes.Length);
         Assert.Equal(parameterTypes.Length, resources.Length);
         var resourceHashes = new HashSet<string>(StringComparer.Ordinal);
         var runtimeHashes = new HashSet<string>(StringComparer.Ordinal);
@@ -172,7 +174,7 @@ public sealed class GrasshopperAssemblyTests
             }
         }
 
-        Assert.Equal(36, count);
+        Assert.Equal(37, count);
     }
 
     private static void AssertTransparentBorder(Bitmap bitmap)
@@ -239,6 +241,7 @@ public sealed class GrasshopperAssemblyTests
     {
         Guid[] simpleParameters =
         {
+            new SimpleDragonDiagnosticParam().ComponentGuid,
             new SimpleDragonMaterialParam().ComponentGuid,
             new SimpleDragonSurfaceConstructionLayerParam().ComponentGuid,
             new SimpleDragonSurfaceConstructionParam().ComponentGuid,

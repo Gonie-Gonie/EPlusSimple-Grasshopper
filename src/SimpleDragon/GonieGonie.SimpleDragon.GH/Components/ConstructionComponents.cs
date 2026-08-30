@@ -1,6 +1,4 @@
 using GonieGonie.BuildingEnergy.Contracts;
-using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
-using GonieGonie.InvisibleDragon.Grasshopper.Types;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
 using Grasshopper.Kernel;
@@ -261,7 +259,7 @@ public sealed class LookupUsageProfileComponent : SimpleDragonComponent
     {
         pManager.AddParameter(new SimpleDragonUsageProfileParam(), "Profile", "P", "Resolved usage profile.", GH_ParamAccess.item);
         pManager.AddTextParameter("Available Names", "Names", "All packaged usage-profile names.", GH_ParamAccess.list);
-        pManager.AddParameter(new DiagnosticParam(), "Diagnostics", "D", "Lookup diagnostics.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Lookup diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
@@ -282,6 +280,6 @@ public sealed class LookupUsageProfileComponent : SimpleDragonComponent
             DA.SetData(0, new SimpleDragonUsageProfileGoo(lookup.Value));
         }
 
-        DA.SetDataList(2, lookup.Diagnostics.Select(item => new DiagnosticGoo(item)));
+        DA.SetDataList(2, lookup.Diagnostics.Select(item => new SimpleDragonDiagnosticGoo(item)));
     }
 }

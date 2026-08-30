@@ -40,7 +40,7 @@ public sealed class SimpleDragonEnergyRecoveryVentilatorComponent : SimpleDragon
             "ERV",
             "Owned ERV value to connect directly to one SimpleDragon Zone.",
             GH_ParamAccess.item);
-        pManager.AddParameter(new GonieGonie.InvisibleDragon.Grasshopper.Parameters.DiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
@@ -105,7 +105,7 @@ public sealed class SimpleDragonPhotovoltaicPanelComponent : SimpleDragonHvacCom
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
     {
         pManager.AddParameter(new SimpleDragonPhotovoltaicPanelParam(), "PV", "PV", "Authored photovoltaic panel.", GH_ParamAccess.item);
-        pManager.AddParameter(new GonieGonie.InvisibleDragon.Grasshopper.Parameters.DiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Authoring diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)

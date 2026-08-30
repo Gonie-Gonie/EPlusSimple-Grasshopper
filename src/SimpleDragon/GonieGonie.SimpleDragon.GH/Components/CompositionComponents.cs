@@ -1,7 +1,5 @@
 using System.Globalization;
 using GonieGonie.BuildingEnergy.Contracts;
-using GonieGonie.InvisibleDragon.Grasshopper.Parameters;
-using GonieGonie.InvisibleDragon.Grasshopper.Types;
 using GonieGonie.InvisibleDragon.Rhino;
 using GonieGonie.SimpleDragon.Grasshopper.Parameters;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
@@ -79,7 +77,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
             "Typed opening definition for one Surface.",
             GH_ParamAccess.item);
         pManager.AddParameter(
-            new DiagnosticParam(),
+            new SimpleDragonDiagnosticParam(),
             "Diagnostics",
             "D",
             "Opening authoring diagnostics.",
@@ -117,7 +115,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
                 blind,
                 OptionalId(id));
             DA.SetData(0, new SimpleDragonOpeningDefinitionGoo(opening));
-            DA.SetDataList(1, Array.Empty<DiagnosticGoo>());
+            DA.SetDataList(1, Array.Empty<SimpleDragonDiagnosticGoo>());
         }
         catch (Exception exception) when (IsAuthoringException(exception))
         {
@@ -185,7 +183,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
             message,
             suggestedAction: suggestedAction);
         Report(new[] { diagnostic });
-        access.SetDataList(outputIndex, new[] { new DiagnosticGoo(diagnostic) });
+        access.SetDataList(outputIndex, new[] { new SimpleDragonDiagnosticGoo(diagnostic) });
     }
 }
 
@@ -275,7 +273,7 @@ public sealed class CreateSimpleDragonSurfaceComponent : SimpleDragonComponent
             "Geometry-backed Surface definition for one Zone.",
             GH_ParamAccess.item);
         pManager.AddParameter(
-            new DiagnosticParam(),
+            new SimpleDragonDiagnosticParam(),
             "Diagnostics",
             "D",
             "Surface authoring diagnostics.",
@@ -332,7 +330,7 @@ public sealed class CreateSimpleDragonSurfaceComponent : SimpleDragonComponent
                 hasReflectance ? reflectance : null,
                 CreateSimpleDragonOpeningComponent.OptionalId(id));
             DA.SetData(0, new SimpleDragonSurfaceDefinitionGoo(definition));
-            DA.SetDataList(1, Array.Empty<DiagnosticGoo>());
+            DA.SetDataList(1, Array.Empty<SimpleDragonDiagnosticGoo>());
         }
         catch (Exception exception) when (CreateSimpleDragonOpeningComponent.IsAuthoringException(exception))
         {
@@ -342,7 +340,7 @@ public sealed class CreateSimpleDragonSurfaceComponent : SimpleDragonComponent
                 exception.Message,
                 suggestedAction: "Use one planar Brep face and connect only the Construction and Openings owned by this Surface.");
             Report(new[] { diagnostic });
-            DA.SetDataList(1, new[] { new DiagnosticGoo(diagnostic) });
+            DA.SetDataList(1, new[] { new SimpleDragonDiagnosticGoo(diagnostic) });
         }
     }
 }
@@ -407,7 +405,7 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
             "Z",
             "Surface-backed Zone definition for SimpleDragon Model.",
             GH_ParamAccess.item);
-        pManager.AddParameter(new DiagnosticParam(), "Diagnostics", "D", "Zone authoring diagnostics.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Zone authoring diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
@@ -458,7 +456,7 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
                 ventilation,
                 CreateSimpleDragonOpeningComponent.OptionalId(id));
             DA.SetData(0, new SimpleDragonZoneDefinitionGoo(definition));
-            DA.SetDataList(1, Array.Empty<DiagnosticGoo>());
+            DA.SetDataList(1, Array.Empty<SimpleDragonDiagnosticGoo>());
         }
         catch (Exception exception) when (CreateSimpleDragonOpeningComponent.IsAuthoringException(exception))
         {
@@ -468,7 +466,7 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
                 exception.Message,
                 suggestedAction: "Connect valid Surface definitions, one Profile, and only the systems owned by this Zone.");
             Report(new[] { diagnostic });
-            DA.SetDataList(1, new[] { new DiagnosticGoo(diagnostic) });
+            DA.SetDataList(1, new[] { new SimpleDragonDiagnosticGoo(diagnostic) });
         }
     }
 }
@@ -530,7 +528,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
             GH_ParamAccess.list);
         pManager.AddTextParameter("JSON", "J", "Deterministic GRM 0.7 JSON.", GH_ParamAccess.item);
         pManager.AddNumberParameter("Floor Area", "A", "Total floor area in m².", GH_ParamAccess.item);
-        pManager.AddParameter(new DiagnosticParam(), "Diagnostics", "D", "Geometry, weather, and model diagnostics.", GH_ParamAccess.list);
+        pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Geometry, weather, and model diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
@@ -751,7 +749,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
     private void FinishDiagnostics(IGH_DataAccess access, IReadOnlyList<Diagnostic> diagnostics)
     {
         Report(diagnostics);
-        access.SetDataList(7, diagnostics.Select(item => new DiagnosticGoo(item)));
+        access.SetDataList(7, diagnostics.Select(item => new SimpleDragonDiagnosticGoo(item)));
     }
 
     private static T[] DistinctById<T>(IEnumerable<T> values)

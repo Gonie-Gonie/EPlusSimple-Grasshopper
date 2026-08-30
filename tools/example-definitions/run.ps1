@@ -530,6 +530,12 @@ function Invoke-ExampleHost(
     }
     # Short host directory names keep Rhino 7 batch evidence below legacy MAX_PATH.
     $output = Join-Path $runRoot $outputKey
+    $runtimeIdd = if ([string]::IsNullOrWhiteSpace($EnergyPlusWorkflow.RuntimeRoot)) {
+        ""
+    }
+    else {
+        Join-Path $EnergyPlusWorkflow.RuntimeRoot "Energy+.idd"
+    }
     $environment = @{
         DRAGONS_EXAMPLE_ACTION = $Action
         DRAGONS_INVISIBLE_GHA = $InvisibleGha
@@ -539,6 +545,7 @@ function Invoke-ExampleHost(
         DRAGONS_ENERGYPLUS_GATE_STATUS = $EnergyPlusWorkflow.Status
         DRAGONS_ENERGYPLUS_GATE_REASON = $EnergyPlusWorkflow.Reason
         DRAGONS_ENERGYPLUS_ROOT = $EnergyPlusWorkflow.RuntimeRoot
+        DRAGONS_ENERGYPLUS_IDD = $runtimeIdd
         DRAGONS_ENERGYPLUS_WEATHER = $EnergyPlusWorkflow.WeatherPath
         DRAGONS_ENERGYPLUS_WORKFLOW_TIMEOUT_SECONDS = $WorkflowStageTimeoutSeconds
     }

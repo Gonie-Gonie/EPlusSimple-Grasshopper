@@ -96,45 +96,36 @@
       "goniegonie.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
+          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )"
         }
       },
       "goniegonie.invisibledragon.core": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )",
+          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )",
+          "GonieGonie.EnergyPlus.Runtime": "[0.1.0, )",
           "System.Text.Json": "[8.0.6, )"
-        }
-      },
-      "goniegonie.invisibledragon.grasshopper.types": {
-        "type": "Project",
-        "dependencies": {
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
-          "Grasshopper": "[7.0.20314.3001, )",
-          "RhinoCommon": "[7.0.20314.3001, )"
         }
       },
       "goniegonie.invisibledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
+          "GonieGonie.InvisibleDragon.Core": "[0.1.0, )",
           "RhinoCommon": "[7.0.20314.3001, )"
         }
       },
       "goniegonie.simpledragon.core": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
+          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )",
+          "GonieGonie.InvisibleDragon.Core": "[0.1.0, )",
           "System.Text.Json": "[8.0.6, )"
         }
       },
       "goniegonie.simpledragon.grasshopper.types": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.InvisibleDragon.Grasshopper.Types": "[1.0.0, )",
-          "GonieGonie.SimpleDragon.Core": "[1.0.0, )",
+          "GonieGonie.SimpleDragon.Core": "[0.1.0, )",
           "Grasshopper": "[7.0.20314.3001, )",
           "RhinoCommon": "[7.0.20314.3001, )"
         }
@@ -142,8 +133,8 @@
       "goniegonie.simpledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.InvisibleDragon.Rhino": "[1.0.0, )",
-          "GonieGonie.SimpleDragon.Core": "[1.0.0, )",
+          "GonieGonie.InvisibleDragon.Rhino": "[0.1.0, )",
+          "GonieGonie.SimpleDragon.Core": "[0.1.0, )",
           "RhinoCommon": "[7.0.20314.3001, )"
         }
       },
@@ -190,44 +181,35 @@
       "goniegonie.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
+          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )"
         }
       },
       "goniegonie.invisibledragon.core": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
-        }
-      },
-      "goniegonie.invisibledragon.grasshopper.types": {
-        "type": "Project",
-        "dependencies": {
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
-          "Grasshopper": "[8.0.23304.9001, )",
-          "RhinoCommon": "[8.0.23304.9001, )"
+          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )",
+          "GonieGonie.EnergyPlus.Runtime": "[0.1.0, )"
         }
       },
       "goniegonie.invisibledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
+          "GonieGonie.InvisibleDragon.Core": "[0.1.0, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
       },
       "goniegonie.simpledragon.core": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
+          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )",
+          "GonieGonie.InvisibleDragon.Core": "[0.1.0, )",
           "System.Text.Json": "[8.0.6, )"
         }
       },
       "goniegonie.simpledragon.grasshopper.types": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.InvisibleDragon.Grasshopper.Types": "[1.0.0, )",
-          "GonieGonie.SimpleDragon.Core": "[1.0.0, )",
+          "GonieGonie.SimpleDragon.Core": "[0.1.0, )",
           "Grasshopper": "[8.0.23304.9001, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
@@ -235,8 +217,8 @@
       "goniegonie.simpledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.InvisibleDragon.Rhino": "[1.0.0, )",
-          "GonieGonie.SimpleDragon.Core": "[1.0.0, )",
+          "GonieGonie.InvisibleDragon.Rhino": "[0.1.0, )",
+          "GonieGonie.SimpleDragon.Core": "[0.1.0, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
       },
@@ -272,44 +254,35 @@
       "goniegonie.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
+          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )"
         }
       },
       "goniegonie.invisibledragon.core": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
-        }
-      },
-      "goniegonie.invisibledragon.grasshopper.types": {
-        "type": "Project",
-        "dependencies": {
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
-          "Grasshopper": "[8.0.23304.9001, )",
-          "RhinoCommon": "[8.0.23304.9001, )"
+          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )",
+          "GonieGonie.EnergyPlus.Runtime": "[0.1.0, )"
         }
       },
       "goniegonie.invisibledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
+          "GonieGonie.InvisibleDragon.Core": "[0.1.0, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
       },
       "goniegonie.simpledragon.core": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
+          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )",
+          "GonieGonie.InvisibleDragon.Core": "[0.1.0, )",
           "System.Text.Json": "[8.0.6, )"
         }
       },
       "goniegonie.simpledragon.grasshopper.types": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.InvisibleDragon.Grasshopper.Types": "[1.0.0, )",
-          "GonieGonie.SimpleDragon.Core": "[1.0.0, )",
+          "GonieGonie.SimpleDragon.Core": "[0.1.0, )",
           "Grasshopper": "[8.0.23304.9001, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
@@ -317,8 +290,8 @@
       "goniegonie.simpledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.InvisibleDragon.Rhino": "[1.0.0, )",
-          "GonieGonie.SimpleDragon.Core": "[1.0.0, )",
+          "GonieGonie.InvisibleDragon.Rhino": "[0.1.0, )",
+          "GonieGonie.SimpleDragon.Core": "[0.1.0, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
       },

@@ -30,6 +30,7 @@ public sealed class ManagedBatchComponentContractTests
             new[] { "State", "Case IDs", "Statuses", "Combined CSV", "Manifest", "Complete", "Diagnostics" },
             component.Params.Output.Select(parameter => parameter.Name));
         Assert.IsType<SimpleDragonBatchCaseParam>(component.Params.Input[0]);
+        Assert.IsType<SimpleDragonDiagnosticParam>(component.Params.Output[6]);
         Assert.Equal(GH_ParamAccess.list, component.Params.Input[0].Access);
         Assert.Equal(GH_ParamAccess.item, component.Params.Input[1].Access);
         Assert.Equal(GH_ParamAccess.item, component.Params.Input[2].Access);

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using GonieGonie.BuildingEnergy.Contracts;
-using GonieGonie.InvisibleDragon.Grasshopper.Types;
 using GonieGonie.SimpleDragon.Grasshopper.Types;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Data;
@@ -52,7 +51,7 @@ public sealed class SimpleDragonHvacComponentContractTests
             Assert.Equal(ExpectedComponents[component.GetType().Name], component.ComponentGuid);
             Assert.Equal(2, component.Params.Output.Count);
             Assert.Equal("Diagnostics", component.Params.Output[1].Name);
-            Assert.Equal("DiagnosticParam", component.Params.Output[1].GetType().Name);
+            Assert.Equal("SimpleDragonDiagnosticParam", component.Params.Output[1].GetType().Name);
         });
         Assert.Equal(components.Length, components.Select(item => item.ComponentGuid).Distinct().Count());
 
@@ -289,7 +288,8 @@ public sealed class SimpleDragonHvacComponentContractTests
         InvokeSolve(Component(assembly, "SimpleDragonFanCoilUnitComponent"), access);
 
         Assert.False(access.Outputs.ContainsKey(0));
-        DiagnosticGoo diagnostic = Assert.IsType<DiagnosticGoo>(Assert.Single(access.OutputList(1)));
+        SimpleDragonDiagnosticGoo diagnostic = Assert.IsType<SimpleDragonDiagnosticGoo>(
+            Assert.Single(access.OutputList(1)));
         Assert.Equal("SD.GH.HVAC.SOURCE_INCOMPATIBLE", diagnostic.Value.Code);
         Assert.Equal(DiagnosticSeverity.Error, diagnostic.Value.Severity);
         Assert.Contains("Allowed source types", diagnostic.Value.Message, StringComparison.Ordinal);

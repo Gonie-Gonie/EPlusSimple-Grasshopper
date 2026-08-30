@@ -12,7 +12,15 @@ This usually indicates mixed shared assemblies. Close Rhino, remove both install
 
 ## EnergyPlus is not found
 
-Use `Run InvisibleDragon`; no separate Prepare Runtime component is needed. Toggle Run False, allow one Grasshopper solution, then toggle True. InvisibleDragon verifies the per-user cache and prepares the pinned bundled runtime when needed.
+Use `Run SimpleDragon`; no To-IDF, Weather, InvisibleDragon Run, or separate
+Prepare Runtime component is needed. Toggle Run False, allow one Grasshopper
+solution, then toggle True. The component verifies the per-user cache and asks
+the internal execution layer to prepare the pinned runtime when needed.
+
+For deliberate standalone InvisibleDragon execution, connect
+`ID Model -> Compile InvisibleDragon -> Run InvisibleDragon` and
+`EPW File -> ID Weather -> Run InvisibleDragon`. EnergyPlus and IDD paths remain
+internal; the EPW is the only user-selected execution path.
 
 If it still fails, inspect the structured diagnostics. For a source checkout, run `./dev.cmd setup` and `./dev.cmd install` again with Rhino closed. Do not point the graph at Rhino's `Program Files` directory or manually copy an unverified EnergyPlus folder.
 
@@ -22,9 +30,18 @@ This is expected when a saved Boolean is already True. Set it False, allow one s
 
 ## The simulation has no weather
 
-Connect `SD Model` to `SD to IDF`, then connect its typed `Weather` output directly to `Run InvisibleDragon`. The GRM Address and Vintage must resolve to a supported Korean weather record.
+Connect `SD Model` directly to `Run SimpleDragon`. The GRM Address and Vintage
+must resolve to a supported Korean weather record; weather selection,
+verification, and handoff are internal.
 
-If Weather remains empty, inspect `SD.GH.WEATHER_*` and `SD.WEATHER.*` diagnostics, then rebuild/reinstall both products from the same candidate. There is no EPW path panel in the canonical workflow.
+If the run reports a weather failure, inspect `SD.GH.WEATHER_*` and
+`SD.WEATHER.*` diagnostics, then rebuild/reinstall both products from the same
+candidate. There is no EPW path panel in the canonical SimpleDragon workflow.
+
+For standalone InvisibleDragon, select a local `.epw` file in the `EPW File`
+parameter and connect it to `ID Weather`. Success must be True before its Weather
+output can feed `Run InvisibleDragon`. If the parameter is empty, the verifier
+is intentionally a no-op; it does not access a path or emit an error.
 
 ## Rhino reports access denied when Run is clicked
 

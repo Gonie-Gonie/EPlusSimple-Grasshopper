@@ -48,6 +48,24 @@ public sealed class RuntimeComponentTests
         "Diagnostics",
     };
 
+    private static readonly string[] WeatherInputNames = { "EPW File" };
+
+    private static readonly string[] WeatherInputTypes = { "Param_String" };
+
+    private static readonly string[] WeatherOutputNames =
+    {
+        "Weather",
+        "Success",
+        "Diagnostics",
+    };
+
+    private static readonly string[] WeatherOutputTypes =
+    {
+        "PreparedWeatherFileParam",
+        "Param_Boolean",
+        "DiagnosticParam",
+    };
+
     [Fact]
     public void ExplicitTriggerGateRequiresANewRisingEdgeAfterDocumentLoad()
     {
@@ -119,8 +137,48 @@ public sealed class RuntimeComponentTests
                 || parameter.Name.Contains("Root", StringComparison.OrdinalIgnoreCase)
                 || parameter.Name.Contains("Directory", StringComparison.OrdinalIgnoreCase));
         Assert.Contains("managed internally", component.Description, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("only consumes", component.Description, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("ID Weather", component.Description, StringComparison.Ordinal);
+        Assert.DoesNotContain("SimpleDragon", component.Description, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain(
+            component.Params.Input,
+            parameter => parameter.Description.Contains(
+                "SimpleDragon",
+                StringComparison.OrdinalIgnoreCase));
         Assert.Equal(false, PersistentDefault(component.Params.Input[2]));
+    }
+
+    [Fact]
+    public void InvisibleDragonWeatherHasOneDeliberateFileInputAndTypedOutputs()
+    {
+        Assembly assembly = LoadPlugin();
+        GH_Component component = CreateComponent(
+            assembly,
+            "GonieGonie.InvisibleDragon.Grasshopper.Components.VerifyInvisibleDragonWeatherComponent");
+
+        Assert.Equal(new Guid("4f443564-2e13-4a79-8845-27d1e6eb285d"), component.ComponentGuid);
+        Assert.Equal("Verify InvisibleDragon Weather", component.Name);
+        Assert.Equal("ID Weather", component.NickName);
+        Assert.Equal("InvisibleDragon", component.Category);
+        Assert.Equal("Core", component.SubCategory);
+        Assert.Equal(GH_Exposure.primary, component.Exposure);
+        Assert.Equal(WeatherInputNames, component.Params.Input.Select(parameter => parameter.Name));
+        Assert.Equal(WeatherInputTypes, component.Params.Input.Select(parameter => parameter.GetType().Name));
+        Assert.True(component.Params.Input[0].Optional);
+        Assert.Equal(WeatherOutputNames, component.Params.Output.Select(parameter => parameter.Name));
+        Assert.Equal(WeatherOutputTypes, component.Params.Output.Select(parameter => parameter.GetType().Name));
+        Assert.DoesNotContain(
+            component.Params.Input,
+            parameter => parameter.Name.Contains("Runtime", StringComparison.OrdinalIgnoreCase)
+                || parameter.Name.Contains("Root", StringComparison.OrdinalIgnoreCase)
+                || parameter.Name.Contains("Directory", StringComparison.OrdinalIgnoreCase)
+                || parameter.Name.Contains("IDD", StringComparison.OrdinalIgnoreCase));
+        Assert.DoesNotContain(
+            component.Params.Output,
+            parameter => parameter.Name.Contains("Path", StringComparison.OrdinalIgnoreCase)
+                || parameter.Name.Contains("File", StringComparison.OrdinalIgnoreCase)
+                || parameter.Name.Contains("Directory", StringComparison.OrdinalIgnoreCase));
+        Assert.Contains("paths are not exposed", component.Description, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("SimpleDragon", component.Description, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

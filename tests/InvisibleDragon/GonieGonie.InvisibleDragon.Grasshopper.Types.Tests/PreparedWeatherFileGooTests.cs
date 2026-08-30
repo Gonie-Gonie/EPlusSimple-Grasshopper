@@ -79,6 +79,27 @@ public sealed class PreparedWeatherFileGooTests
     }
 
     [Fact]
+    public void FactoryRejectsArtifactWithoutLocationHeader()
+    {
+        string artifactPath = CreateArtifact("NOT-AN-EPW\nDATA,invalid");
+        try
+        {
+            InvalidDataException exception = Assert.Throws<InvalidDataException>(
+                () => PreparedWeatherFile.FromVerifiedArtifact(
+                    artifactPath,
+                    Provider,
+                    WeatherIdentity));
+
+            Assert.Contains("LOCATION", exception.Message, StringComparison.Ordinal);
+            Assert.DoesNotContain(artifactPath, exception.Message, StringComparison.OrdinalIgnoreCase);
+        }
+        finally
+        {
+            DeleteArtifact(artifactPath);
+        }
+    }
+
+    [Fact]
     public void DomainAndGooDisplayExposeIdentityButNeverLocalPath()
     {
         string artifactPath = CreateArtifact("LOCATION,Seoul\nDATA,display");
