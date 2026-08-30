@@ -21,10 +21,10 @@ $packagesRoot = Join-Path $artifactsRoot 'packages'
 $workingRoot = Join-Path $repositoryRoot 'temp\packaging'
 $packageStageRoot = Join-Path $workingRoot 'stage'
 $specPath = Join-Path $repositoryRoot 'packaging\package-spec.json'
-$settingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
+$settingsPath = Join-Path $repositoryRoot '.tools\state\local.settings.json'
 $licensePath = Join-Path $repositoryRoot 'LICENSE'
 $noticePath = Join-Path $repositoryRoot 'NOTICE.md'
-$distributionManifestPath = Join-Path $repositoryRoot 'runtime\distributions.json'
+$distributionManifestPath = Join-Path $repositoryRoot 'resources\runtime\distributions.json'
 $distributionRoot = Join-Path $repositoryRoot '.tools\distributions'
 
 function Reset-GeneratedDirectory {
@@ -241,9 +241,12 @@ function Copy-PackageRootFiles {
     )
 
     Ensure-Directory -Path $Destination
-    $sourceRoot = Join-Path $repositoryRoot (Join-Path 'packaging' ([string] $Product.id))
-    Copy-Item -LiteralPath (Join-Path $sourceRoot 'manifest.yml') -Destination (Join-Path $Destination 'manifest.yml') -Force
-    Copy-Item -LiteralPath (Join-Path $sourceRoot 'icon.png') -Destination (Join-Path $Destination 'icon.png') -Force
+    $productId = [string] $Product.id
+    $sourceManifest = Join-Path $repositoryRoot ("packaging\manifests\{0}.yml" -f $productId)
+    $sourceIcon = Join-Path $repositoryRoot (
+        "resources\icons\generated\{0}\{0}-256.png" -f $productId)
+    Copy-Item -LiteralPath $sourceManifest -Destination (Join-Path $Destination 'manifest.yml') -Force
+    Copy-Item -LiteralPath $sourceIcon -Destination (Join-Path $Destination 'icon.png') -Force
     Copy-Item -LiteralPath $licensePath -Destination (Join-Path $Destination 'LICENSE.txt') -Force
     Copy-Item -LiteralPath $noticePath -Destination (Join-Path $Destination 'NOTICE.md') -Force
 
@@ -745,7 +748,8 @@ foreach ($target in @($spec.targets)) {
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $indexProducts = @()
 foreach ($product in @($spec.products)) {
-    $sourceManifest = Join-Path $repositoryRoot (Join-Path 'packaging' (Join-Path ([string] $product.id) 'manifest.yml'))
+    $sourceManifest = Join-Path $repositoryRoot (
+        "packaging\manifests\{0}.yml" -f ([string] $product.id))
     $manifestText = [System.IO.File]::ReadAllText($sourceManifest)
     if ($manifestText -notmatch ('(?m)^name:\s*' + [regex]::Escape([string] $product.id) + '\s*$') -or
         $manifestText -notmatch ('(?m)^version:\s*' + [regex]::Escape([string] $spec.version) + '\s*$') -or

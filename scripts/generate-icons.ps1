@@ -28,9 +28,8 @@ function New-ComponentIcon {
 $products = @(
     [pscustomobject]@{
         Slug = 'invisible-dragon'
-        Source = Join-Path $repositoryRoot 'assets\icons\source\invisible-dragon.png'
-        Atlas = Join-Path $repositoryRoot 'assets\icons\illustrated\invisible-dragon-functional-atlas.png'
-        PackageDirectory = Join-Path $repositoryRoot 'packaging\invisible-dragon'
+        Source = Join-Path $repositoryRoot 'resources\icons\source\invisible-dragon.png'
+        Atlas = Join-Path $repositoryRoot 'resources\icons\illustrated\invisible-dragon-functional-atlas.png'
         Palette = [pscustomobject]@{
             Style = 'spectral'
             Backplate = [System.Drawing.Color]::FromArgb(224, 13, 25, 61)
@@ -72,7 +71,7 @@ $products = @(
                 'DomesticHotWaterComponent' `
                 13 `
                 'none' `
-                (Join-Path $repositoryRoot 'assets\icons\illustrated\invisible-dragon-domestic-hot-water.png')),
+                (Join-Path $repositoryRoot 'resources\icons\illustrated\invisible-dragon-domestic-hot-water.png')),
             (New-ComponentIcon 'DistrictHeatingComponent' 13 'network'),
             (New-ComponentIcon 'PackagedAirConditionerComponent' 12 'packaged'),
             (New-ComponentIcon 'AirHandlingUnitComponent' 12 'ahu'),
@@ -100,7 +99,7 @@ $products = @(
                 'DragonDomesticHotWaterParam' `
                 13 `
                 'none' `
-                (Join-Path $repositoryRoot 'assets\icons\illustrated\invisible-dragon-domestic-hot-water.png')),
+                (Join-Path $repositoryRoot 'resources\icons\illustrated\invisible-dragon-domestic-hot-water.png')),
             (New-ComponentIcon 'DragonEnergyRecoveryVentilatorParam' 12 'erv'),
             (New-ComponentIcon 'DragonPhotovoltaicPanelParam' 7 'photovoltaic'),
             (New-ComponentIcon 'DragonIdfParam' 8 'none'),
@@ -110,9 +109,8 @@ $products = @(
     },
     [pscustomobject]@{
         Slug = 'simple-dragon'
-        Source = Join-Path $repositoryRoot 'assets\icons\source\simple-dragon.png'
-        Atlas = Join-Path $repositoryRoot 'assets\icons\illustrated\simple-dragon-functional-atlas.png'
-        PackageDirectory = Join-Path $repositoryRoot 'packaging\simple-dragon'
+        Source = Join-Path $repositoryRoot 'resources\icons\source\simple-dragon.png'
+        Atlas = Join-Path $repositoryRoot 'resources\icons\illustrated\simple-dragon-functional-atlas.png'
         Palette = [pscustomobject]@{
             Style = 'origami'
             Backplate = [System.Drawing.Color]::FromArgb(238, 246, 244, 218)
@@ -1358,7 +1356,7 @@ foreach ($product in $products) {
         throw "Duplicate icon names for $($product.Slug): $($duplicateNames.Name -join ', ')"
     }
 
-    $generatedDirectory = Join-Path $repositoryRoot "assets\icons\generated\$($product.Slug)"
+    $generatedDirectory = Join-Path $repositoryRoot "resources\icons\generated\$($product.Slug)"
     $sourceImage = [System.Drawing.Image]::FromFile($product.Source)
     try {
         if ($sourceImage.Width -ne $sourceImage.Height) {
@@ -1470,14 +1468,6 @@ foreach ($product in $products) {
         Write-Host "Generated $parameterContactSheet"
     }
     finally { $atlas.Dispose() }
-
-    [System.IO.Directory]::CreateDirectory($product.PackageDirectory) | Out-Null
-    $packageIcon = Join-Path $product.PackageDirectory 'icon.png'
-    Copy-Item `
-        -LiteralPath (Join-Path $generatedDirectory "$($product.Slug)-256.png") `
-        -Destination $packageIcon `
-        -Force
-    Write-Host "Updated $packageIcon"
 }
 
 Assert-IconVisualSeparation `

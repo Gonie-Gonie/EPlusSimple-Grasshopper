@@ -21,7 +21,7 @@ Set-StrictMode -Version 2.0
 $repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
 $packagesRoot = Join-Path $repositoryRoot 'artifacts\packages'
 $packageIndexPath = Join-Path $packagesRoot 'package-index.json'
-$localSettingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
+$localSettingsPath = Join-Path $repositoryRoot '.tools\state\local.settings.json'
 $runStamp = [DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss-fff')
 $runRoot = Join-Path $repositoryRoot (Join-Path 'temp\install' ("run-" + $runStamp))
 $productIds = @('invisible-dragon', 'simple-dragon')

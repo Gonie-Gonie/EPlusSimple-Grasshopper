@@ -51,6 +51,7 @@ public sealed class RuntimeManifestTests
     {
         var manifestPath = System.IO.Path.Combine(
             TestDirectory.FindRepositoryRoot(),
+            "resources",
             "runtime",
             "manifest.template.json");
 

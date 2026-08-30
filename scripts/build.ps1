@@ -17,7 +17,7 @@ Set-StrictMode -Version 2.0
 . (Join-Path $PSScriptRoot 'common.ps1')
 
 $repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
-$localSettingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
+$localSettingsPath = Join-Path $repositoryRoot '.tools\state\local.settings.json'
 $nugetConfig = Join-Path $repositoryRoot 'NuGet.config'
 $toolsRoot = Join-Path $repositoryRoot '.tools'
 $tempRoot = Join-Path $repositoryRoot 'temp'

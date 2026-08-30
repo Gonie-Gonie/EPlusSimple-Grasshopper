@@ -86,7 +86,7 @@ function Resolve-EnergyPlusWorkflow {
     $weatherArchivePath = Join-Path $repoRoot ".tools\distributions\weather\KoreanTMY-v1.zip"
     $expectedWeatherArchiveSize = 128349513L
     $expectedWeatherArchiveSha256 = "fa88b8d69364b6a6b663afdc6dc2eb30c0ddee17cd37e5802ce5a5dec63d92d0"
-    $settingsPath = Join-Path $repoRoot ".config\local.settings.json"
+    $settingsPath = Join-Path $repoRoot ".tools\state\local.settings.json"
     if ([string]::IsNullOrWhiteSpace($runtimeRoot) -and (Test-Path -LiteralPath $settingsPath -PathType Leaf)) {
         try {
             $settings = Get-Content -LiteralPath $settingsPath -Raw | ConvertFrom-Json

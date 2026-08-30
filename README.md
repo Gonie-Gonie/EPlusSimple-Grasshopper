@@ -31,6 +31,25 @@ The SDK packages are sufficient for a headless compile. Rhino 7 and Rhino 8 are
 detected independently; each installed version enables only its own viewport,
 Grasshopper load, geometry, and document tests.
 
+## Repository layout
+
+The root contains only stable project boundaries:
+
+| Path | Responsibility |
+|---|---|
+| `src/` | InvisibleDragon, SimpleDragon, and shared production code |
+| `tests/` | Product, compatibility, packaging, installer, and lifecycle tests |
+| `examples/` | Tracked Grasshopper definitions and Rhino building models |
+| `scripts/` / `tools/` | `dev.cmd` workflows and their implementation utilities |
+| `resources/` | Canonical icon artwork and pinned external-runtime declarations |
+| `packaging/` | Product manifests, package rules, and runtime packaging policy |
+| `data/` | Byte-pinned upstream SimpleDragon CSV inputs |
+| `fixtures/` / `upstream/` | Immutable compatibility baselines and provenance controls |
+| `artifacts/` / `temp/` / `.tools/` | Results, disposable work, and reusable local toolchains |
+
+Generated local settings live with the reusable toolchain state under
+`.tools\state`; no generated configuration directory is kept at the root.
+
 ## Installing a packaged candidate
 
 Installed plugins require Rhino 7 or Rhino 8 on Windows, but not the .NET SDK,
@@ -104,7 +123,7 @@ Run `.\dev.cmd help` to list every supported workflow from this single entry poi
 `.\dev.cmd setup` finds the exact SDK from `global.json` or installs it under
 `.tools\dotnet`, selects exact Python 3.12.7 (installing the official embeddable
 package locally when needed), validates Rhino 7 and Rhino 8 independently, and
-writes the generated, non-secret `.config\local.settings.json`. It is
+writes the generated, non-secret `.tools\state\local.settings.json`. It is
 idempotent, so rerun it after installing Rhino to enable that version's tests.
 Setup and build serialize their sanctioned NuGet restore workflows with a
 repository-local lease under `.tools` and always run the all-file normalizer

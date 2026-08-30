@@ -22,7 +22,7 @@ Set-StrictMode -Version 2.0
 . (Join-Path $PSScriptRoot 'common.ps1')
 
 $repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
-$settingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
+$settingsPath = Join-Path $repositoryRoot '.tools\state\local.settings.json'
 $lockPath = Join-Path $repositoryRoot 'upstream\upstream.lock.json'
 $requirementsPath = Join-Path $repositoryRoot 'tools\python-reference\requirements.lock.txt'
 $bootstrapPath = Join-Path $repositoryRoot 'tools\python-reference\bootstrap_reference.py'

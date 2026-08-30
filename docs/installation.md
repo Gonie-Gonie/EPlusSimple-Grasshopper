@@ -71,7 +71,7 @@ Use `-Target Rhino7` or `-Target Rhino8` to limit the operation. Logs and the
 installation receipt are written below `temp\install`; the script never
 publishes a package and never removes unrelated Rhino packages.
 
-Setup remembers nonstandard Rhino locations in `.config\local.settings.json`,
+Setup remembers nonstandard Rhino locations in `.tools\state\local.settings.json`,
 and `install` reuses those exact locations before trying the standard `Program
 Files` paths. A location may be the Rhino installation root, its `System`
 directory, or `Rhino.exe` itself. You can also override either host explicitly:

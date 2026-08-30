@@ -22,6 +22,7 @@ internal static class Program
             string stageRoot = RequiredOption(options, "--stage-root");
             string specPath = RequiredOption(options, "--spec");
             string distributionsPath = RequiredOption(options, "--distributions");
+            string repositoryRoot = Path.GetFullPath(RequiredOption(options, "--repository-root"));
             options.TryGetValue("--report", out string? reportPath);
 
             PackageSpec spec = JsonSerializer.Deserialize<PackageSpec>(
@@ -30,7 +31,6 @@ internal static class Program
             DistributionManifest distributions = JsonSerializer.Deserialize<DistributionManifest>(
                 File.ReadAllText(distributionsPath),
                 JsonOptions()) ?? throw new InvalidDataException("Distribution manifest is empty.");
-            string repositoryRoot = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(distributionsPath))!, ".."));
             var verifier = new PackageVerifier(
                 Path.GetFullPath(packagesRoot),
                 Path.GetFullPath(stageRoot),

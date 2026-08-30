@@ -3,7 +3,6 @@
 
 # Repository-local toolchains and dependency caches created by setup.ps1.
 /.tools/
-/.config/local.*
 
 # Generated deliverables. Keep the policy document, ignore staged binaries.
 /artifacts/*

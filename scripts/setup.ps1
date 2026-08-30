@@ -24,9 +24,11 @@ $toolsRoot = Join-Path $repositoryRoot '.tools'
 $tempRoot = Join-Path $repositoryRoot 'temp'
 $bootstrapRoot = Join-Path $tempRoot 'bootstrap'
 $logsRoot = Join-Path $tempRoot 'logs'
-$configPath = Join-Path $repositoryRoot '.config\local.settings.json'
-$runtimeManifestPath = Join-Path $repositoryRoot 'runtime\manifest.template.json'
-$distributionManifestPath = Join-Path $repositoryRoot 'runtime\distributions.json'
+$configPath = Join-Path $repositoryRoot '.tools\state\local.settings.json'
+$retiredConfigRoot = Join-Path $repositoryRoot '.config'
+$retiredConfigPath = Join-Path $retiredConfigRoot 'local.settings.json'
+$runtimeManifestPath = Join-Path $repositoryRoot 'resources\runtime\manifest.template.json'
+$distributionManifestPath = Join-Path $repositoryRoot 'resources\runtime\distributions.json'
 $distributionRoot = Join-Path $toolsRoot 'distributions'
 $preparedDistributions = @{}
 
@@ -50,7 +52,7 @@ if (-not (Test-Path -LiteralPath $runtimeManifestPath -PathType Leaf)) {
 $runtimeManifest = Get-Content -LiteralPath $runtimeManifestPath -Raw | ConvertFrom-Json
 if ([string] $runtimeManifest.energyplus_version -ne $requiredEnergyPlusVersion -or
     [string] $runtimeManifest.energyplus_build -ne $requiredEnergyPlusBuild) {
-    throw 'runtime/manifest.template.json does not match the pinned EnergyPlus runtime identity.'
+    throw 'resources/runtime/manifest.template.json does not match the pinned EnergyPlus runtime identity.'
 }
 
 if (-not (Test-Path -LiteralPath $distributionManifestPath -PathType Leaf)) {
@@ -91,13 +93,13 @@ $expectedDistributions = @{
 
 $distributionPayloads = @($distributionManifest.payloads)
 if ($distributionPayloads.Count -ne $expectedDistributions.Count) {
-    throw 'runtime/distributions.json must contain exactly the two reviewed embedded payloads.'
+    throw 'resources/runtime/distributions.json must contain exactly the two reviewed embedded payloads.'
 }
 $seenDistributionIds = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::Ordinal)
 foreach ($payload in $distributionPayloads) {
     $id = [string] $payload.id
     if (-not $expectedDistributions.ContainsKey($id) -or -not $seenDistributionIds.Add($id)) {
-        throw "Unreviewed distribution payload '$id' is present in runtime/distributions.json."
+        throw "Unreviewed distribution payload '$id' is present in resources/runtime/distributions.json."
     }
     $expected = $expectedDistributions[$id]
     $uri = [uri] ([string] $payload.url)
@@ -178,6 +180,36 @@ function Remove-SetupOwnedTree {
     }
 
     Remove-Item -LiteralPath $safePath -Recurse -Force
+}
+
+function Remove-RetiredRootLocalSettings {
+    if (-not (Test-Path -LiteralPath $retiredConfigPath -PathType Leaf)) {
+        return
+    }
+
+    $safeConfigPath = Assert-RepositoryChildPath `
+        -RepositoryRoot $repositoryRoot `
+        -Path $retiredConfigPath `
+        -AllowedTopLevelNames @('.config')
+    Assert-NoReparsePoints -Path $safeConfigPath -AnchorPath $repositoryRoot
+
+    $remainingEntries = @(Get-ChildItem -LiteralPath $retiredConfigRoot -Force |
+        Where-Object { -not $_.FullName.Equals(
+            $safeConfigPath,
+            [System.StringComparison]::OrdinalIgnoreCase) })
+
+    if ($WhatIfPreference) {
+        Write-Host "What if: remove retired generated configuration '$safeConfigPath'."
+        if ($remainingEntries.Count -eq 0) {
+            Write-Host "What if: remove empty retired configuration directory '$retiredConfigRoot'."
+        }
+        return
+    }
+
+    Remove-Item -LiteralPath $safeConfigPath -Force
+    if ($remainingEntries.Count -eq 0) {
+        Remove-Item -LiteralPath $retiredConfigRoot -Force
+    }
 }
 
 function Invoke-OfficialDownload {
@@ -1115,6 +1147,7 @@ $localSettings = [ordered] @{
 }
 
 Write-Utf8JsonIfChanged -InputObject $localSettings -Path $configPath -Depth 10
+Remove-RetiredRootLocalSettings
 
 $solution = Find-SolutionFile -RepositoryRoot $repositoryRoot
 if ($null -eq $solution) {

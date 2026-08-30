@@ -28,5 +28,6 @@ collisions, and compares all component and parameter resources on both light and
 Grasshopper-like backgrounds. No pair may share more than 72 percent of its pixels or have
 normalized composited RMS distance below 0.10. These gates reject the former nine-pixel
 corner-badge scheme, whose confusing families shared 82-91 percent of their pixels. The command
-also refreshes all contact sheets and synchronizes package icons. Do not hand-edit generated PNG
-files.
+also refreshes all contact sheets. Packaging copies each product's canonical generated 256-pixel
+icon directly, so there is no second package-icon source to synchronize. Do not hand-edit
+generated PNG files.

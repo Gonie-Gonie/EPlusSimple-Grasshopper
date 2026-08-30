@@ -18,7 +18,7 @@ a public binary release.
 EnergyPlus is a separate product of the U.S. Department of Energy and its
 contributors. Source control does not store its binaries. Development setup
 downloads the exact official EnergyPlus 24.2.0 Windows archive pinned by URL,
-byte length, and SHA-256 in `runtime/distributions.json`; InvisibleDragon package
+byte length, and SHA-256 in `resources/runtime/distributions.json`; InvisibleDragon package
 candidates embed that archive unchanged under `runtime/energyplus/`. EnergyPlus
 retains its own license and notices; `runtime/energyplus/LICENSE.txt` is copied
 byte-for-byte from the pinned archive and separately hash-checked. This
@@ -31,7 +31,7 @@ packages and are not redistributed as part of the plugin payload.
 
 Korean TMY EPW files are not expanded or stored in source control. Development
 setup downloads the exact `KoreanTMY-v1.zip` pinned by URL, byte length, and
-SHA-256 in `runtime/distributions.json`; SimpleDragon package candidates embed
+SHA-256 in `resources/runtime/distributions.json`; SimpleDragon package candidates embed
 that archive unchanged under `runtime/weather/`. The archive contains 80 root
 EPWs and covers all 78 unique EPW names referenced by the tracked address
 metadata. Redistribution/publication rights for this weather payload have not

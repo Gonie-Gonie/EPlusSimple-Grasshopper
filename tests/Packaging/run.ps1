@@ -22,7 +22,7 @@ Set-StrictMode -Version 2.0
 
 $repositoryRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 . (Join-Path $repositoryRoot 'scripts\common.ps1')
-$distributionManifestPath = Join-Path $repositoryRoot 'runtime\distributions.json'
+$distributionManifestPath = Join-Path $repositoryRoot 'resources\runtime\distributions.json'
 
 $spec = Get-Content -LiteralPath $SpecPath -Raw | ConvertFrom-Json
 $version = [string] $spec.version
@@ -49,13 +49,31 @@ foreach ($packageInfo in @(
     }
 }
 
+$manifestRoot = Join-Path $repositoryRoot 'packaging\manifests'
+$sourceManifests = @(Get-ChildItem -LiteralPath $manifestRoot -File -Filter '*.yml')
+if ($sourceManifests.Count -ne @($spec.products).Count) {
+    throw 'The packaging manifest directory must contain exactly one manifest per product.'
+}
+
 foreach ($product in @($spec.products)) {
-    $manifestPath = Join-Path $repositoryRoot (Join-Path 'packaging' (Join-Path ([string] $product.id) 'manifest.yml'))
+    $productId = [string] $product.id
+    $manifestPath = Join-Path $manifestRoot ($productId + '.yml')
     $manifest = [System.IO.File]::ReadAllText($manifestPath)
-    if ($manifest -notmatch ('(?m)^name:\s*' + [regex]::Escape([string] $product.id) + '\s*$') -or
+    if ($manifest -notmatch ('(?m)^name:\s*' + [regex]::Escape($productId) + '\s*$') -or
         $manifest -notmatch ('(?m)^version:\s*' + [regex]::Escape($version) + '\s*$') -or
         $manifest -notmatch '(?m)^icon:\s*icon\.png\s*$') {
         throw "Source Yak manifest identity/version/icon mismatch: '$manifestPath'."
+    }
+
+    $canonicalIcon = Join-Path $repositoryRoot (
+        "resources\icons\generated\{0}\{0}-256.png" -f $productId)
+    if (-not (Test-Path -LiteralPath $canonicalIcon -PathType Leaf)) {
+        throw "Canonical package icon is missing: '$canonicalIcon'."
+    }
+
+    $legacyProductRoot = Join-Path $repositoryRoot (Join-Path 'packaging' $productId)
+    if (Test-Path -LiteralPath $legacyProductRoot) {
+        throw "Product manifests and duplicate icons must not use '$legacyProductRoot'."
     }
 }
 
@@ -87,7 +105,8 @@ $arguments = @(
     '--packages-root', [System.IO.Path]::GetFullPath($PackagesRoot),
     '--stage-root', [System.IO.Path]::GetFullPath($StageRoot),
     '--spec', [System.IO.Path]::GetFullPath($SpecPath),
-    '--distributions', [System.IO.Path]::GetFullPath($distributionManifestPath))
+    '--distributions', [System.IO.Path]::GetFullPath($distributionManifestPath),
+    '--repository-root', $repositoryRoot)
 if (-not [string]::IsNullOrWhiteSpace($ReportPath)) {
     $arguments += @('--report', [System.IO.Path]::GetFullPath($ReportPath))
 }

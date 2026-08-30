@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\..\..\assets\icons\generated\invisible-dragon\parameters\*.png">
+    <EmbeddedResource Include="..\..\..\resources\icons\generated\invisible-dragon\parameters\*.png">
       <Link>Resources\Parameters\%(Filename)%(Extension)</Link>
       <LogicalName>GonieGonie.InvisibleDragon.Grasshopper.Resources.Parameters.%(Filename)%(Extension)</LogicalName>
     </EmbeddedResource>

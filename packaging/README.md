@@ -7,6 +7,22 @@ Yak archives, creates portable plugin ZIPs, and runs the package layout and
 shared-assembly compatibility gates. It never publishes or installs a package.
 Rhino is not required for this default packaging flow.
 
+Each tracked packaging input has one canonical location:
+
+```text
+packaging/
+|-- manifests/{invisible-dragon,simple-dragon}.yml
+|-- package-spec.json
+`-- yak.lock.json
+
+resources/
+|-- icons/generated/<product>/<product>-256.png
+`-- runtime/{distributions.json,manifest.template.json}
+```
+
+The generated 256-pixel product icon is consumed directly; packaging does not
+keep a duplicate `icon.png` beside each source manifest.
+
 To run the release-level host gate against the portable ZIP artifacts after all
 normal package verification has passed, use:
 

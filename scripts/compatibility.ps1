@@ -16,13 +16,13 @@ Set-StrictMode -Version 2.0
 . (Join-Path $PSScriptRoot 'common.ps1')
 
 $repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
-$settingsPath = Join-Path $repositoryRoot '.config\local.settings.json'
+$settingsPath = Join-Path $repositoryRoot '.tools\state\local.settings.json'
 $manifestPath = Join-Path $repositoryRoot 'fixtures\compatibility\cases.json'
 $bootstrapPath = Join-Path $repositoryRoot 'tools\python-reference\bootstrap_reference.py'
 $pythonEnginePath = Join-Path $repositoryRoot 'tools\compatibility-runner\python_engine.py'
 $reporterPath = Join-Path $repositoryRoot 'tools\compatibility-runner\compare_outputs.py'
 $csharpProject = Join-Path $repositoryRoot 'tools\compatibility-runner\GonieGonie.CompatibilityRunner.csproj'
-$runtimeManifestPath = Join-Path $repositoryRoot 'runtime\manifest.template.json'
+$runtimeManifestPath = Join-Path $repositoryRoot 'resources\runtime\manifest.template.json'
 $compatibilityExceptionsPath = Join-Path $repositoryRoot 'upstream\compatibility-exceptions.yml'
 $dependencyRoot = Join-Path $repositoryRoot '.tools\python-reference\3.12.7\site-packages'
 $upstreamRoot = Join-Path $repositoryRoot 'temp\reference\upstream\eplussimple'

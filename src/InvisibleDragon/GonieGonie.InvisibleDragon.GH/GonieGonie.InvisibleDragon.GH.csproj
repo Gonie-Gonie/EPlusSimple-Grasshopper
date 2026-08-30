@@ -21,10 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\..\..\assets\icons\generated\invisible-dragon\invisible-dragon-24.png"
+    <EmbeddedResource Include="..\..\..\resources\icons\generated\invisible-dragon\invisible-dragon-24.png"
                       Link="Resources\invisible-dragon-24.png"
                       LogicalName="GonieGonie.InvisibleDragon.Grasshopper.Resources.InvisibleDragon24.png" />
-    <EmbeddedResource Include="..\..\..\assets\icons\generated\invisible-dragon\components\*.png">
+    <EmbeddedResource Include="..\..\..\resources\icons\generated\invisible-dragon\components\*.png">
       <Link>Resources\Components\%(Filename)%(Extension)</Link>
       <LogicalName>GonieGonie.InvisibleDragon.Grasshopper.Resources.Components.%(Filename)%(Extension)</LogicalName>
     </EmbeddedResource>
