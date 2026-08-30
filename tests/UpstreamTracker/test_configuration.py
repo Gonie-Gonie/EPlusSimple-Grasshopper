@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:c98ee90544ae6d7f0f68b755c880ab566a4283fecfc1c171378bf4124504067a",
+            "sha256:a966da9575d42ba79510cae764c2054dbc9fe273e16886f50b7789594cc83475",
             compatibility.matrix.content_sha256,
         )
         self.assertEqual(990, len(symbol_evidence.entries))
         self.assertEqual(990, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:3f7094e4ac8bb0be7652e6f6daee545c8c8113ab5325870f252707ab1cf7889e",
+            "sha256:350e91115b53e8d7c3bbd824eadcf12fc733de6702f845e61b5bd9e6b918398d",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -2903,7 +2903,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:f988073b3a9b951f71009b42bd4423546f8f7a5aac61493714efc5d25aa067ed"
         )
         result_test_sha256 = (
-            "sha256:c98b093757597f72846a9428a67c0e98c6257ff96ffb2063c8c2ea26be6e206e"
+            "sha256:24839d4170db23a9839c5656ba0b259afc85f9a035468694599c5df4f00b013a"
         )
         result_fixture_bytes = result_fixture_path.read_bytes()
         self.assertEqual(
@@ -3276,7 +3276,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            317,
+            316,
             sum(
                 item.identifier
                 not in model_core_exception_ids | result_exception_ids
@@ -4686,7 +4686,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            346,
+            345,
             sum(
                 item.identifier not in set(hvac_exception_ids.values())
                 and not item.identifier.startswith(
@@ -5093,7 +5093,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            356,
+            355,
             sum(
                 item.identifier not in thermal_exception_ids
                 and "reviewed-native-discriminated-supply-aggregate-and-conversion-route-"
@@ -5487,7 +5487,7 @@ class ConfigurationTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            379,
+            378,
             sum(
                 item.identifier not in supply_exception_ids
                 and not item.identifier.startswith(
@@ -5786,7 +5786,7 @@ class ConfigurationTests(unittest.TestCase):
             - len(imugi_idf_object_list_evidence_entries),
         )
         self.assertEqual(
-            412,
+            411,
             sum(
                 item.identifier not in other_exception_ids
                 and item.identifier not in source_tower_exception_ids
@@ -6137,7 +6137,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:6832bde12cb4e5ab213f2f12307267ebe571de1bf2fc1a8ffa37db728014eabd"
         )
         supply_core_test_sha256 = (
-            "sha256:4dac9b429af4833841d19c1449589e5501ca2f66f88cb55385a9642eff8e66c6"
+            "sha256:cfa17eaf72837075ed895020928acd3750033f59227c268bf9ecbbaa16f1f41a"
         )
         for pinned_path, expected_sha256 in (
             (supply_core_fixture_path, supply_core_fixture_sha256),
@@ -6475,7 +6475,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf"
         )
         appender_controller_test_sha256 = (
-            "sha256:5aa8742d1090473cb9af8420fab2fc1159c20b2c9603e09712e7481daf03d678"
+            "sha256:018cade648998fc7854baa7b9b3f815167ce0564588b1e2a340391528f4fb6c0"
         )
         for pinned_path, expected_sha256 in (
             (appender_controller_fixture_path, appender_controller_fixture_sha256),
@@ -6776,7 +6776,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117"
         )
         misc_systems_test_sha256 = (
-            "sha256:4e2f01a04b3454faf08e82b3710b244396a01dffd6f6d09ffcda0f1704ebb519"
+            "sha256:b4b44fc23c32899b551f4486c0cbefc106c5c27de2024845d81112a3241a55ac"
         )
         for pinned_path, expected_sha256 in (
             (misc_systems_fixture_path, misc_systems_fixture_sha256),

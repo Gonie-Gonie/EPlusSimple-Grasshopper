@@ -33,7 +33,7 @@ EXPECTED_FINAL_DECISIONS_SHA256 = (
     "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:c98ee90544ae6d7f0f68b755c880ab566a4283fecfc1c171378bf4124504067a"
+    "sha256:a966da9575d42ba79510cae764c2054dbc9fe273e16886f50b7789594cc83475"
 )
 
 
@@ -1604,7 +1604,7 @@ class SafeScopePolicyTests(unittest.TestCase):
                 "commit 61bb21b",
                 "sha256:f988073b3a9b951f71009b42bd4423546f8f7a5aac61493714efc5d25aa067ed",
                 "sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4",
-                "sha256:c98b093757597f72846a9428a67c0e98c6257ff96ffb2063c8c2ea26be6e206e",
+                "sha256:24839d4170db23a9839c5656ba0b259afc85f9a035468694599c5df4f00b013a",
             ):
                 self.assertIn(exact_binding, entry.rationale, symbol)
 
