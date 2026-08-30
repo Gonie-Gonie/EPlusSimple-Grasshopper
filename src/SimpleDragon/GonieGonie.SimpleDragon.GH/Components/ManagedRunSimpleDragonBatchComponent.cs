@@ -20,6 +20,10 @@ namespace GonieGonie.SimpleDragon.Grasshopper.Components;
     Justification = "Grasshopper owns component lifetime; removal cancels work and completion disposes the token source.")]
 public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 {
+    private const string ExampleActionVariable = "DRAGONS_EXAMPLE_ACTION";
+    private const string GateStatusVariable = "DRAGONS_ENERGYPLUS_GATE_STATUS";
+    private const string ExampleOutputVariable = "DRAGONS_EXAMPLES_OUTPUT";
+    private const string RuntimeRootVariable = "DRAGONS_ENERGYPLUS_ROOT";
     private readonly object _syncRoot = new();
     private readonly ExplicitManagedBatchTriggerGate _triggerGate = new();
     private CancellationTokenSource? _activeCancellation;
@@ -223,13 +227,17 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 
         try
         {
+            string tempDirectory = Path.GetTempPath();
             BatchCaseDefinition[] definitions = cases
                 .Select(item => new BatchCaseDefinition(item.Model, item.CaseId))
                 .ToArray();
             return new ManagedBatchInputs(
                 definitions,
                 casePaths.ToArray(),
-                ManagedBatchPaths.Create(Path.GetTempPath()),
+                ManagedBatchPaths.Create(
+                    tempDirectory,
+                    CaptureAutomationRuntimeRoot(),
+                    CaptureAutomationOutputRoot(tempDirectory)),
                 parallelLimit);
         }
         catch (ArgumentException exception)
@@ -339,6 +347,11 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
             return null;
         }
 
+        if (!paths.CanBootstrapRuntime)
+        {
+            return null;
+        }
+
         UpdateState("Preparing Runtime");
         EnergyPlusRuntimeBootstrapOptions bootstrapOptions = CreateRuntimeBootstrapOptions(paths);
         var progress = new InlineProgress<EnergyPlusRuntimeBootstrapProgress>(
@@ -372,6 +385,70 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
         TargetRoot = paths.RuntimeRoot,
         ReplaceInvalidExistingTarget = true,
     };
+
+    private static string? CaptureAutomationRuntimeRoot(Func<string, string?>? readVariable = null)
+    {
+        readVariable ??= Environment.GetEnvironmentVariable;
+        string? action = OptionalEnvironmentValue(readVariable(ExampleActionVariable));
+        string? gateStatus = OptionalEnvironmentValue(readVariable(GateStatusVariable));
+        if ((!string.Equals(action, "Generate", StringComparison.OrdinalIgnoreCase)
+                && !string.Equals(action, "Validate", StringComparison.OrdinalIgnoreCase))
+            || !string.Equals(gateStatus, "ready", StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        return OptionalEnvironmentValue(readVariable(RuntimeRootVariable));
+    }
+
+    private static string? CaptureAutomationOutputRoot(
+        string tempDirectory,
+        Func<string, string?>? readVariable = null)
+    {
+        readVariable ??= Environment.GetEnvironmentVariable;
+        string? action = OptionalEnvironmentValue(readVariable(ExampleActionVariable));
+        string? gateStatus = OptionalEnvironmentValue(readVariable(GateStatusVariable));
+        if ((!string.Equals(action, "Generate", StringComparison.OrdinalIgnoreCase)
+                && !string.Equals(action, "Validate", StringComparison.OrdinalIgnoreCase))
+            || !string.Equals(gateStatus, "ready", StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        string? outputDirectory = OptionalEnvironmentValue(readVariable(ExampleOutputVariable));
+        if (outputDirectory is null)
+        {
+            return null;
+        }
+
+        string fullOutputDirectory = Path.GetFullPath(outputDirectory);
+        return IsSameOrDescendant(fullOutputDirectory, tempDirectory)
+            ? Path.Combine(fullOutputDirectory, "b")
+            : null;
+    }
+
+    private static bool IsSameOrDescendant(string rootPath, string candidatePath)
+    {
+        string root = Path.GetFullPath(rootPath);
+        string candidate = Path.GetFullPath(candidatePath);
+        string comparableRoot = root.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        string comparableCandidate = candidate.TrimEnd(
+            Path.DirectorySeparatorChar,
+            Path.AltDirectorySeparatorChar);
+        if (string.Equals(comparableRoot, comparableCandidate, StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+
+        string rootWithSeparator = root.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal)
+            || root.EndsWith(Path.AltDirectorySeparatorChar.ToString(), StringComparison.Ordinal)
+            ? root
+            : root + Path.DirectorySeparatorChar;
+        return candidate.StartsWith(rootWithSeparator, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string? OptionalEnvironmentValue(string? value) =>
+        string.IsNullOrWhiteSpace(value) ? null : value!.Trim();
 
     private static BatchRunOptions CreateBatchRunOptions(ManagedBatchInputs inputs) => new()
     {
@@ -597,12 +674,14 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
             string root,
             string runtimeRoot,
             string weatherCacheRoot,
-            string outputRoot)
+            string outputRoot,
+            bool canBootstrapRuntime)
         {
             Root = root;
             RuntimeRoot = runtimeRoot;
             WeatherCacheRoot = weatherCacheRoot;
             OutputRoot = outputRoot;
+            CanBootstrapRuntime = canBootstrapRuntime;
         }
 
         internal string Root { get; }
@@ -613,7 +692,12 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 
         internal string OutputRoot { get; }
 
-        internal static ManagedBatchPaths Create(string tempDirectory)
+        internal bool CanBootstrapRuntime { get; }
+
+        internal static ManagedBatchPaths Create(
+            string tempDirectory,
+            string? runtimeRootOverride,
+            string? outputRootOverride)
         {
             if (string.IsNullOrWhiteSpace(tempDirectory))
             {
@@ -625,19 +709,27 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
                 "GonieGonie",
                 "Dragons"));
             EnergyPlusRuntimeManifest runtime = EnergyPlusRuntimeManifest.Supported;
+            string managedRuntimeRoot = Path.Combine(
+                root,
+                "runtime",
+                "EnergyPlus",
+                runtime.EnergyPlusVersion + "-" + runtime.EnergyPlusBuild);
+            string runtimeRoot = string.IsNullOrWhiteSpace(runtimeRootOverride)
+                ? managedRuntimeRoot
+                : Path.GetFullPath(runtimeRootOverride!.Trim());
+            string outputRoot = string.IsNullOrWhiteSpace(outputRootOverride)
+                ? Path.Combine(root, "temp", "simpledragon-managed-batch")
+                : Path.GetFullPath(outputRootOverride!.Trim());
             return new ManagedBatchPaths(
                 root,
-                Path.Combine(
-                    root,
-                    "runtime",
-                    "EnergyPlus",
-                    runtime.EnergyPlusVersion + "-" + runtime.EnergyPlusBuild),
+                runtimeRoot,
                 Path.Combine(
                     root,
                     "weather",
                     "SimpleDragon",
                     SimpleDragonWeatherPackManifest.Supported.PackId),
-                Path.Combine(root, "temp", "simpledragon-managed-batch"));
+                outputRoot,
+                string.IsNullOrWhiteSpace(runtimeRootOverride));
         }
     }
 

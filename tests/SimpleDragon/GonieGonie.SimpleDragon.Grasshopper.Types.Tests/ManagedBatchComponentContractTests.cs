@@ -56,7 +56,7 @@ public sealed class ManagedBatchComponentContractTests
             "Create",
             BindingFlags.Static | BindingFlags.NonPublic));
         string tempDirectory = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "managed-batch-contract-root"));
-        object paths = Required(create.Invoke(null, new object[] { tempDirectory }));
+        object paths = Required(create.Invoke(null, new object?[] { tempDirectory, null, null }));
         Assert.Equal(pathsType, paths.GetType());
         string expectedRoot = Path.Combine(tempDirectory, "GonieGonie", "Dragons");
         string root = Property<string>(paths, "Root");
@@ -68,6 +68,7 @@ public sealed class ManagedBatchComponentContractTests
         AssertChild(root, runtimeRoot);
         AssertChild(root, weatherRoot);
         AssertChild(root, outputRoot);
+        Assert.True(Property<bool>(paths, "CanBootstrapRuntime"));
 
         object resolveOptions = InvokeStatic(componentType, "CreateRuntimeResolveOptions", paths);
         Assert.Equal(runtimeRoot, Property<string>(resolveOptions, "RuntimeRoot"));
@@ -81,6 +82,66 @@ public sealed class ManagedBatchComponentContractTests
 
         object weatherOptions = InvokeStatic(componentType, "CreateWeatherPackOptions", weatherRoot);
         Assert.Equal(weatherRoot, Property<string>(weatherOptions, "CacheRoot"));
+
+        string verifiedRuntime = Path.Combine(tempDirectory, "verified-runtime");
+        object overridden = Required(create.Invoke(
+            null,
+            new object?[] { tempDirectory, verifiedRuntime, null }));
+        Assert.Equal(Path.GetFullPath(verifiedRuntime), Property<string>(overridden, "RuntimeRoot"));
+        Assert.False(Property<bool>(overridden, "CanBootstrapRuntime"));
+        AssertChild(root, Property<string>(overridden, "WeatherCacheRoot"));
+        AssertChild(root, Property<string>(overridden, "OutputRoot"));
+    }
+
+    [Fact]
+    public void VerifiedExampleGateMayBindTheBatchToItsAutomationPaths()
+    {
+        Type componentType = ManagedComponentType();
+        MethodInfo captureRuntime = Assert.IsAssignableFrom<MethodInfo>(componentType.GetMethod(
+            "CaptureAutomationRuntimeRoot",
+            BindingFlags.Static | BindingFlags.NonPublic));
+        MethodInfo captureOutput = Assert.IsAssignableFrom<MethodInfo>(componentType.GetMethod(
+            "CaptureAutomationOutputRoot",
+            BindingFlags.Static | BindingFlags.NonPublic));
+        string runtimeRoot = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "verified-example-runtime"));
+        string outputDirectory = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "verified-example-output"));
+        var ready = new Dictionary<string, string?>(StringComparer.Ordinal)
+        {
+            ["DRAGONS_EXAMPLE_ACTION"] = "Validate",
+            ["DRAGONS_ENERGYPLUS_GATE_STATUS"] = "ready",
+            ["DRAGONS_ENERGYPLUS_ROOT"] = runtimeRoot,
+            ["DRAGONS_EXAMPLES_OUTPUT"] = outputDirectory,
+        };
+        Func<string, string?> readReady = name => ready.TryGetValue(name, out string? value) ? value : null;
+        Func<string, string?> readOrdinary = name => name switch
+        {
+            "DRAGONS_ENERGYPLUS_ROOT" => runtimeRoot,
+            "DRAGONS_EXAMPLES_OUTPUT" => outputDirectory,
+            _ => null,
+        };
+
+        string expectedBatchOutput = Path.Combine(outputDirectory, "b");
+        string isolatedTempDirectory = Path.Combine(outputDirectory, "t");
+        Assert.Equal(runtimeRoot, captureRuntime.Invoke(null, new object[] { readReady }));
+        Assert.Equal(
+            expectedBatchOutput,
+            captureOutput.Invoke(null, new object[] { isolatedTempDirectory, readReady }));
+        Assert.Null(captureRuntime.Invoke(null, new object[] { readOrdinary }));
+        Assert.Null(captureOutput.Invoke(null, new object[] { isolatedTempDirectory, readOrdinary }));
+        Assert.Null(captureOutput.Invoke(
+            null,
+            new object[] { Path.Combine(Path.GetTempPath(), "unrelated-temp"), readReady }));
+
+        Type pathsType = Assert.Single(
+            componentType.GetNestedTypes(BindingFlags.NonPublic),
+            type => type.Name == "ManagedBatchPaths");
+        MethodInfo create = Assert.IsAssignableFrom<MethodInfo>(pathsType.GetMethod(
+            "Create",
+            BindingFlags.Static | BindingFlags.NonPublic));
+        object paths = Required(create.Invoke(
+            null,
+            new object?[] { Path.GetTempPath(), runtimeRoot, expectedBatchOutput }));
+        Assert.Equal(expectedBatchOutput, Property<string>(paths, "OutputRoot"));
     }
 
     [Fact]

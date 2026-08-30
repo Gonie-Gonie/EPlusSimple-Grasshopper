@@ -66,8 +66,9 @@ Rhino 7 and Rhino 8 both validate it before the command succeeds. Custom Rhino
 executable locations can be supplied with `-Rhino7Exe` and `-Rhino8Exe`.
 Use `-EnergyPlusRoot` to select the runtime gate or `-SkipEnergyPlusWorkflow` to
 verify the disabled state without executing a simulation. The gate passes its
-verified runtime root and IDD to `Run SimpleDragon` through internal automation
-environment values; they never become Grasshopper inputs. `-WeatherPath` is an
-optional test-host-only EPW override carried through the same internal boundary.
-Without these gate overrides, `Run SimpleDragon` keeps its managed LocalAppData
+verified runtime root through internal automation environment values; it never
+becomes a Grasshopper input. For the standalone InvisibleDragon example, the gate
+extracts one EPW from the verified archive and injects it only into the reopened
+in-memory File Path parameter. The tracked definition stays blank. `-WeatherPath`
+is an optional test-host-only override. SimpleDragon still proves its managed
 runtime bootstrap and packaged weather selection from the Model Address/Vintage.

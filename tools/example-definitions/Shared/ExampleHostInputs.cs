@@ -18,6 +18,7 @@ internal sealed class ExampleHostInputs
     private const string EnergyPlusRootVariable = "DRAGONS_ENERGYPLUS_ROOT";
     private const string EnergyPlusIddVariable = "DRAGONS_ENERGYPLUS_IDD";
     private const string EnergyPlusWeatherVariable = "DRAGONS_ENERGYPLUS_WEATHER";
+    private const string InvisibleEnergyPlusWeatherVariable = "DRAGONS_INVISIBLE_EXAMPLE_EPW";
     private const string EnergyPlusTimeoutVariable = "DRAGONS_ENERGYPLUS_WORKFLOW_TIMEOUT_SECONDS";
 
     private ExampleHostInputs(
@@ -31,6 +32,7 @@ internal sealed class ExampleHostInputs
         string? energyPlusRuntimeRoot,
         string? energyPlusIddPath,
         string? energyPlusWeatherPath,
+        string? invisibleEnergyPlusWeatherPath,
         TimeSpan energyPlusWorkflowTimeout)
     {
         Action = action;
@@ -43,6 +45,7 @@ internal sealed class ExampleHostInputs
         EnergyPlusRuntimeRoot = energyPlusRuntimeRoot;
         EnergyPlusIddPath = energyPlusIddPath;
         EnergyPlusWeatherPath = energyPlusWeatherPath;
+        InvisibleEnergyPlusWeatherPath = invisibleEnergyPlusWeatherPath;
         EnergyPlusWorkflowTimeout = energyPlusWorkflowTimeout;
     }
 
@@ -65,6 +68,8 @@ internal sealed class ExampleHostInputs
     internal string? EnergyPlusIddPath { get; }
 
     internal string? EnergyPlusWeatherPath { get; }
+
+    internal string? InvisibleEnergyPlusWeatherPath { get; }
 
     internal TimeSpan EnergyPlusWorkflowTimeout { get; }
 
@@ -107,6 +112,7 @@ internal sealed class ExampleHostInputs
         string? runtimeRoot = OptionalFullPath(EnergyPlusRootVariable);
         string? iddPath = OptionalFullPath(EnergyPlusIddVariable);
         string? weatherPath = OptionalFullPath(EnergyPlusWeatherVariable);
+        string? invisibleWeatherPath = OptionalFullPath(InvisibleEnergyPlusWeatherVariable);
         if (string.Equals(gateStatus, "ready", StringComparison.Ordinal))
         {
             if (runtimeRoot is null || !Directory.Exists(runtimeRoot))
@@ -135,6 +141,22 @@ internal sealed class ExampleHostInputs
                     $"{EnergyPlusWeatherVariable}, when supplied, must identify an EPW file.",
                     weatherPath);
             }
+
+            if (invisibleWeatherPath is null || !File.Exists(invisibleWeatherPath))
+            {
+                throw new FileNotFoundException(
+                    $"{InvisibleEnergyPlusWeatherVariable} must identify the automation-only InvisibleDragon EPW when the gate is ready.",
+                    invisibleWeatherPath);
+            }
+
+            if (!string.Equals(
+                    Path.GetExtension(invisibleWeatherPath),
+                    ".epw",
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidOperationException(
+                    $"{InvisibleEnergyPlusWeatherVariable} must identify an EPW file.");
+            }
         }
 
         string timeoutText = Environment.GetEnvironmentVariable(EnergyPlusTimeoutVariable) ?? "60";
@@ -160,6 +182,7 @@ internal sealed class ExampleHostInputs
             runtimeRoot,
             iddPath,
             weatherPath,
+            invisibleWeatherPath,
             TimeSpan.FromSeconds(timeoutSeconds));
     }
 

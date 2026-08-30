@@ -349,8 +349,17 @@ internal static class AdvancedExampleDefinitions
         GraphNode radiantFloor = graph.Component(63, Catalog.InvisibleRadiantFloor, 620, 1480);
         GraphNode ventilator = graph.Component(64, Catalog.InvisibleErv, 620, 1680);
         GraphNode photovoltaic = graph.Component(65, Catalog.InvisiblePv, 1230, 1600);
+        GraphNode ventilationFlow = graph.Slider(
+            66,
+            "ERV supply flow 0.20 m3/s",
+            0.2m,
+            0.01m,
+            2m,
+            300,
+            1740);
         graph.Connect(heatPump, 0, airHandler, 1);
         graph.Connect(boiler, 0, radiantFloor, 1);
+        graph.Connect(ventilationFlow, null, ventilator, 3);
         graph.Connect(airHandler, 0, zone, 6);
         graph.Connect(radiantFloor, 0, zone, 6);
         graph.Connect(ventilator, 0, zone, 7);
@@ -478,6 +487,7 @@ internal static class AdvancedExampleDefinitions
             airHandler,
             boiler,
             radiantFloor,
+            ventilationFlow,
             ventilator);
         graph.Group(
             903,
@@ -524,7 +534,15 @@ internal static class AdvancedExampleDefinitions
             "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo",
             envelope: new OutwardEnvelopeExpectation(
                 curves.Select(item => item.InstanceGuid).ToArray(),
-                new Point3d(4, 3, 1.5)));
+                new Point3d(4, 3, 1.5)),
+            runtimeWorkflow: new InvisibleRuntimeWorkflowExpectation(
+                compile.InstanceGuid,
+                epwPath.InstanceGuid,
+                weather.InstanceGuid,
+                run.InstanceGuid,
+                runTrigger.InstanceGuid,
+                cancelTrigger.InstanceGuid,
+                forceRerun.InstanceGuid));
     }
 
     private static ScenarioGraph BuildSimpleEnvelopeHvac(GH_ComponentServer server)
@@ -1070,7 +1088,7 @@ internal static class AdvancedExampleDefinitions
                 batchState,
                 batchComplete);
 
-            runtimeWorkflow = new RuntimeWorkflowExpectation(
+            runtimeWorkflow = new SimpleRuntimeWorkflowExpectation(
                 run.InstanceGuid,
                 runTrigger.InstanceGuid,
                 cancelTrigger.InstanceGuid,
@@ -1609,6 +1627,204 @@ internal static class AdvancedExampleDefinitions
                 "This definition has no executable EnergyPlus workflow.");
         }
 
+        if (exercise && inputs.CanRunEnergyPlusWorkflow)
+        {
+            string processTempRoot = Path.GetFullPath(Path.GetTempPath());
+            Require(
+                IsSameOrDescendant(processTempRoot, inputs.OutputDirectory),
+                "The example host temp directory escaped repository temp evidence: " + processTempRoot);
+        }
+
+        return expectation switch
+        {
+            InvisibleRuntimeWorkflowExpectation invisible => ValidateInvisibleRuntimeWorkflow(
+                document,
+                invisible,
+                inputs,
+                exercise),
+            SimpleRuntimeWorkflowExpectation simple => ValidateSimpleRuntimeWorkflow(
+                document,
+                simple,
+                inputs,
+                exercise),
+            _ => throw new InvalidOperationException(
+                "Unsupported runtime workflow expectation: " + expectation.GetType().FullName),
+        };
+    }
+
+    private static RuntimeValidationFacts ValidateInvisibleRuntimeWorkflow(
+        GH_Document document,
+        InvisibleRuntimeWorkflowExpectation expectation,
+        ExampleHostInputs inputs,
+        bool exercise)
+    {
+        RequireEmptyFilePath(document, expectation.WeatherPathGuid);
+        RequirePersistentBoolean(document, expectation.RunTriggerGuid, false);
+        RequirePersistentBoolean(document, expectation.CancelTriggerGuid, false);
+        RequirePersistentBoolean(document, expectation.ForceRerunGuid, false);
+
+        if (!exercise)
+        {
+            return NotExecutedRuntime(
+                "deferred",
+                "The saved InvisibleDragon workflow, blank EPW input, and safe False triggers were validated; runtime exercise is deferred to the final reopened document.");
+        }
+
+        if (!inputs.CanRunEnergyPlusWorkflow)
+        {
+            return NotExecutedRuntime(
+                inputs.EnergyPlusGateStatus,
+                inputs.EnergyPlusGateReason);
+        }
+
+        string weatherPath = inputs.InvisibleEnergyPlusWeatherPath
+            ?? throw new InvalidOperationException(
+                "The ready EnergyPlus gate did not supply the EPW required for InvisibleDragon automation.");
+        Require(File.Exists(weatherPath), "The InvisibleDragon automation EPW is absent: " + weatherPath);
+        string workflowRoot = Path.Combine(inputs.OutputDirectory, "runtime-workflow", "invisibledragon");
+        Require(!Directory.Exists(workflowRoot), "The runtime evidence directory already exists: " + workflowRoot);
+        Directory.CreateDirectory(workflowRoot);
+
+        try
+        {
+            SetFilePath(document, expectation.WeatherPathGuid, weatherPath);
+            SetBoolean(document, expectation.RunTriggerGuid, false);
+            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetBoolean(document, expectation.ForceRerunGuid, false);
+            Solve(document);
+            Require(
+                ReadBoolean(document, expectation.WeatherComponentGuid, 1),
+                "ID Weather did not verify the automation-only EPW. "
+                    + RuntimeMessages(document, expectation.WeatherComponentGuid));
+            RequireOutputType(
+                document,
+                expectation.WeatherComponentGuid,
+                0,
+                "GonieGonie.InvisibleDragon.Grasshopper.Types.PreparedWeatherFileGoo");
+            RequireOutputType(
+                document,
+                expectation.CompileComponentGuid,
+                0,
+                "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo");
+            Require(
+                ReadBoolean(document, expectation.CompileComponentGuid, 2),
+                "Compile InvisibleDragon did not report a valid managed IDF. "
+                    + RuntimeMessages(document, expectation.CompileComponentGuid));
+
+            SetBoolean(document, expectation.RunTriggerGuid, true);
+            Solve(document);
+            string firstRunState = WaitForTerminalState(
+                document,
+                expectation.RunComponentGuid,
+                "_sync",
+                "_activeTask",
+                "_state",
+                inputs.EnergyPlusWorkflowTimeout,
+                "Succeeded",
+                "Failed",
+                "Cancelled",
+                "TimedOut");
+            SetBoolean(document, expectation.RunTriggerGuid, false);
+            Solve(document);
+            Require(
+                string.Equals(firstRunState, "Succeeded", StringComparison.Ordinal),
+                "The real InvisibleDragon example run ended in " + firstRunState + ". "
+                    + RuntimeMessages(document, expectation.RunComponentGuid));
+            Require(
+                ReadBoolean(document, expectation.RunComponentGuid, 2),
+                "The InvisibleDragon run did not report success.");
+            RequireOutputType(
+                document,
+                expectation.RunComponentGuid,
+                0,
+                "GonieGonie.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo");
+
+            SetBoolean(document, expectation.RunTriggerGuid, true);
+            Solve(document);
+            string cachedRunState = WaitForTerminalState(
+                document,
+                expectation.RunComponentGuid,
+                "_sync",
+                "_activeTask",
+                "_state",
+                inputs.EnergyPlusWorkflowTimeout,
+                "Cached",
+                "Succeeded",
+                "Failed",
+                "Cancelled",
+                "TimedOut");
+            SetBoolean(document, expectation.RunTriggerGuid, false);
+            Solve(document);
+            Require(
+                string.Equals(cachedRunState, "Cached", StringComparison.Ordinal),
+                "An identical InvisibleDragon rerun did not use the component cache; state was "
+                    + cachedRunState + ".");
+            Require(
+                ReadBoolean(document, expectation.RunComponentGuid, 2),
+                "The cached InvisibleDragon result lost its success state.");
+
+            SetBoolean(document, expectation.ForceRerunGuid, true);
+            Solve(document);
+            SetBoolean(document, expectation.RunTriggerGuid, true);
+            Solve(document);
+            SetBoolean(document, expectation.CancelTriggerGuid, true);
+            Solve(document);
+            string cancellationState = WaitForTerminalState(
+                document,
+                expectation.RunComponentGuid,
+                "_sync",
+                "_activeTask",
+                "_state",
+                inputs.EnergyPlusWorkflowTimeout,
+                "Cancelled",
+                "Succeeded",
+                "Failed",
+                "TimedOut");
+            Require(
+                string.Equals(cancellationState, "Cancelled", StringComparison.Ordinal),
+                "The explicit InvisibleDragon cancellation exercise ended in " + cancellationState + ".");
+            Solve(document);
+            Require(
+                !ReadBoolean(document, expectation.RunComponentGuid, 2),
+                "A cancelled InvisibleDragon run incorrectly reported success.");
+
+            return new RuntimeValidationFacts(
+                "ready",
+                inputs.EnergyPlusGateReason,
+                true,
+                cancellationState,
+                firstRunState,
+                cachedRunState,
+                cancellationState,
+                "Not Run",
+                "Not Run",
+                "Not Run",
+                true,
+                false,
+                true,
+                true,
+                false,
+                false,
+                Path.GetFullPath(inputs.OutputDirectory),
+                null,
+                Array.Empty<string>(),
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty);
+        }
+        finally
+        {
+            BestEffortCancelAndDrain(document, expectation, inputs.EnergyPlusWorkflowTimeout);
+        }
+    }
+
+    private static RuntimeValidationFacts ValidateSimpleRuntimeWorkflow(
+        GH_Document document,
+        SimpleRuntimeWorkflowExpectation expectation,
+        ExampleHostInputs inputs,
+        bool exercise)
+    {
         RequirePersistentBoolean(document, expectation.RunTriggerGuid, false);
         RequirePersistentBoolean(document, expectation.CancelTriggerGuid, false);
         RequirePersistentBoolean(document, expectation.ForceRerunGuid, false);
@@ -1631,7 +1847,7 @@ internal static class AdvancedExampleDefinitions
                 inputs.EnergyPlusGateReason);
         }
 
-        string workflowRoot = Path.Combine(inputs.OutputDirectory, "runtime-workflow");
+        string workflowRoot = Path.Combine(inputs.OutputDirectory, "runtime-workflow", "simpledragon");
         string csvRoot = Path.Combine(workflowRoot, "csv-package");
         Require(!Directory.Exists(workflowRoot), "The runtime evidence directory already exists: " + workflowRoot);
         Directory.CreateDirectory(workflowRoot);
@@ -1826,12 +2042,7 @@ internal static class AdvancedExampleDefinitions
             SetBoolean(document, expectation.ForceRerunGuid, false);
             Solve(document);
 
-            string managedBatchRoot = Path.Combine(
-                Path.GetTempPath(),
-                "GonieGonie",
-                "Dragons",
-                "temp",
-                "simpledragon-managed-batch");
+            string managedBatchRoot = Path.Combine(inputs.OutputDirectory, "b");
             SetPanel(
                 document,
                 expectation.BatchModelNameGuid,
@@ -2169,7 +2380,7 @@ internal static class AdvancedExampleDefinitions
 
     private static void BestEffortCancelAndDrain(
         GH_Document document,
-        RuntimeWorkflowExpectation expectation,
+        SimpleRuntimeWorkflowExpectation expectation,
         TimeSpan workflowTimeout)
     {
         TimeSpan drainTimeout = TimeSpan.FromSeconds(Math.Max(5, Math.Min(30, workflowTimeout.TotalSeconds)));
@@ -2264,6 +2475,70 @@ internal static class AdvancedExampleDefinitions
             {
                 Console.Error.WriteLine("Runtime workflow trigger reset failed: " + exception.Message);
             }
+        }
+    }
+
+    private static void BestEffortCancelAndDrain(
+        GH_Document document,
+        InvisibleRuntimeWorkflowExpectation expectation,
+        TimeSpan workflowTimeout)
+    {
+        TimeSpan drainTimeout = TimeSpan.FromSeconds(Math.Max(5, Math.Min(30, workflowTimeout.TotalSeconds)));
+        try
+        {
+            SetBoolean(document, expectation.RunTriggerGuid, false);
+            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetBoolean(document, expectation.ForceRerunGuid, false);
+            Solve(document);
+
+            RuntimeComponentSnapshot run = ReadRuntimeSnapshot(
+                document,
+                expectation.RunComponentGuid,
+                "_sync",
+                "_activeTask",
+                "_state");
+            if (run.HasActiveTask)
+            {
+                SetBoolean(document, expectation.CancelTriggerGuid, true);
+                Solve(document);
+                var stopwatch = Stopwatch.StartNew();
+                while (stopwatch.Elapsed < drainTimeout)
+                {
+                    run = ReadRuntimeSnapshot(
+                        document,
+                        expectation.RunComponentGuid,
+                        "_sync",
+                        "_activeTask",
+                        "_state");
+                    if (!run.HasActiveTask)
+                    {
+                        break;
+                    }
+
+                    System.Threading.Thread.Sleep(25);
+                }
+
+                if (run.HasActiveTask)
+                {
+                    Console.Error.WriteLine(
+                        "InvisibleDragon runtime cleanup could not drain the active task within "
+                            + drainTimeout.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                            + " seconds.");
+                }
+            }
+
+            SetBoolean(document, expectation.RunTriggerGuid, false);
+            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetBoolean(document, expectation.ForceRerunGuid, false);
+            SetFilePath(document, expectation.WeatherPathGuid, null);
+            Solve(document);
+            RequireEmptyFilePath(document, expectation.WeatherPathGuid);
+        }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine(
+                "InvisibleDragon runtime workflow cleanup failed: "
+                    + exception.GetType().Name + ": " + exception.Message);
         }
     }
 
@@ -2462,6 +2737,18 @@ internal static class AdvancedExampleDefinitions
         panel.ExpireSolution(false);
     }
 
+    private static void SetFilePath(GH_Document document, Guid instanceGuid, string? value)
+    {
+        Param_FilePath parameter = RequireObject<Param_FilePath>(document, instanceGuid);
+        parameter.PersistentData.Clear();
+        if (!string.IsNullOrWhiteSpace(value))
+        {
+            parameter.PersistentData.Append(new GH_String(Path.GetFullPath(value)));
+        }
+
+        parameter.ExpireSolution(false);
+    }
+
     private static void SetBoolean(GH_Document document, Guid instanceGuid, bool value)
     {
         Param_Boolean parameter = RequireObject<Param_Boolean>(document, instanceGuid);
@@ -2478,6 +2765,14 @@ internal static class AdvancedExampleDefinitions
         Require(
             value.Value == expected,
             instanceGuid + " was saved " + value.Value + " instead of the safe value " + expected + ".");
+    }
+
+    private static void RequireEmptyFilePath(GH_Document document, Guid instanceGuid)
+    {
+        Param_FilePath parameter = RequireObject<Param_FilePath>(document, instanceGuid);
+        Require(
+            !parameter.PersistentData.AllData(true).Any(),
+            instanceGuid + " must remain data-empty in the saved Grasshopper definition.");
     }
 
     private static void RequireOutputType(
@@ -3376,7 +3671,18 @@ internal sealed record LinkedModelExpectation(
 
 internal sealed record OutwardEnvelopeExpectation(Guid[] CurveParameterGuids, Point3d ZoneCentroid);
 
-internal sealed record RuntimeWorkflowExpectation(
+internal abstract record RuntimeWorkflowExpectation;
+
+internal sealed record InvisibleRuntimeWorkflowExpectation(
+    Guid CompileComponentGuid,
+    Guid WeatherPathGuid,
+    Guid WeatherComponentGuid,
+    Guid RunComponentGuid,
+    Guid RunTriggerGuid,
+    Guid CancelTriggerGuid,
+    Guid ForceRerunGuid) : RuntimeWorkflowExpectation;
+
+internal sealed record SimpleRuntimeWorkflowExpectation(
     Guid RunComponentGuid,
     Guid RunTriggerGuid,
     Guid CancelTriggerGuid,
@@ -3390,7 +3696,7 @@ internal sealed record RuntimeWorkflowExpectation(
     Guid BatchComponentGuid,
     Guid BatchModelNameGuid,
     Guid BatchRunTriggerGuid,
-    Guid BatchCancelTriggerGuid);
+    Guid BatchCancelTriggerGuid) : RuntimeWorkflowExpectation;
 
 internal sealed record ScenarioGraph(
     string Product,

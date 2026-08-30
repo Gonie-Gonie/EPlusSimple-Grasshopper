@@ -210,6 +210,60 @@ function Resolve-EnergyPlusWorkflow {
     }
 }
 
+function Resolve-InvisibleExampleWeather([hashtable]$EnergyPlusWorkflow) {
+    if ([string]$EnergyPlusWorkflow.Status -ne "ready") {
+        return ""
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace([string]$EnergyPlusWorkflow.WeatherPath)) {
+        return Require-File ([string]$EnergyPlusWorkflow.WeatherPath) "InvisibleDragon automation EPW override"
+    }
+
+    $weatherArchivePath = Require-File (
+        Join-Path $repoRoot ".tools\distributions\weather\KoreanTMY-v1.zip"
+    ) "Pinned SimpleDragon weather archive"
+    $entryName = "KOR_SO_Seoul.WS.471080_TMYx.2009-2023.epw"
+    $weatherDirectory = Join-Path $runRoot "w"
+    $weatherTarget = Join-Path $weatherDirectory "invisible.epw"
+    [IO.Directory]::CreateDirectory($weatherDirectory) | Out-Null
+
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $archive = [IO.Compression.ZipFile]::OpenRead($weatherArchivePath)
+    try {
+        $entries = @($archive.Entries | Where-Object {
+            [string]::Equals($_.FullName, $entryName, [StringComparison]::Ordinal)
+        })
+        if ($entries.Count -ne 1) {
+            throw "The verified weather archive must contain exactly one $entryName entry; found $($entries.Count)."
+        }
+
+        $inputStream = $entries[0].Open()
+        try {
+            $outputStream = [IO.File]::Open($weatherTarget, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::None)
+            try {
+                $inputStream.CopyTo($outputStream)
+            }
+            finally {
+                $outputStream.Dispose()
+            }
+        }
+        finally {
+            $inputStream.Dispose()
+        }
+    }
+    finally {
+        $archive.Dispose()
+    }
+
+    $weatherTarget = Require-File $weatherTarget "Extracted InvisibleDragon automation EPW"
+    $firstLine = [IO.File]::ReadLines($weatherTarget) | Select-Object -First 1
+    if (-not ([string]$firstLine).StartsWith("LOCATION,", [StringComparison]::OrdinalIgnoreCase)) {
+        throw "The extracted InvisibleDragon automation EPW has no LOCATION header: $weatherTarget"
+    }
+
+    return $weatherTarget
+}
+
 function Invoke-DotNetLogged([string[]]$Arguments, [string]$LogName) {
     $logPath = Join-Path $runRoot $LogName
     & $script:dotnet @Arguments 2>&1 | Tee-Object -FilePath $logPath
@@ -530,6 +584,8 @@ function Invoke-ExampleHost(
     }
     # Short host directory names keep Rhino 7 batch evidence below legacy MAX_PATH.
     $output = Join-Path $runRoot $outputKey
+    $hostTemp = Join-Path $output "t"
+    [IO.Directory]::CreateDirectory($hostTemp) | Out-Null
     $runtimeIdd = if ([string]::IsNullOrWhiteSpace($EnergyPlusWorkflow.RuntimeRoot)) {
         ""
     }
@@ -547,7 +603,11 @@ function Invoke-ExampleHost(
         DRAGONS_ENERGYPLUS_ROOT = $EnergyPlusWorkflow.RuntimeRoot
         DRAGONS_ENERGYPLUS_IDD = $runtimeIdd
         DRAGONS_ENERGYPLUS_WEATHER = $EnergyPlusWorkflow.WeatherPath
+        DRAGONS_INVISIBLE_EXAMPLE_EPW = $EnergyPlusWorkflow.InvisibleWeatherPath
         DRAGONS_ENERGYPLUS_WORKFLOW_TIMEOUT_SECONDS = $WorkflowStageTimeoutSeconds
+        GONIEGONIE_ENERGYPLUS_ROOT = $EnergyPlusWorkflow.RuntimeRoot
+        TEMP = $hostTemp
+        TMP = $hostTemp
     }
     if ($HostName -eq "Rhino7") {
         $environment.DRAGONS_RHINO7_EXE = $RhinoExecutable
@@ -560,11 +620,55 @@ function Invoke-ExampleHost(
     $summaryPath = Require-File (Join-Path $output "summary.json") "$HostName $Action summary"
     if ($RequireEnergyPlusWorkflow) {
         $summary = Get-Content -LiteralPath $summaryPath -Raw | ConvertFrom-Json
+        $invisibleWorkflowRows = @($summary.definitions | Where-Object {
+            $_.fileName -eq "02-invisibledragon-single-zone-hvac-idf.gh"
+        })
+        if ($invisibleWorkflowRows.Count -ne 1) {
+            throw "$HostName $Action summary must contain exactly one InvisibleDragon EnergyPlus workflow row."
+        }
+
+        $invisibleWorkflow = $invisibleWorkflowRows[0]
+        if ([string]$invisibleWorkflow.runtimeGateStatus -ne "ready") {
+            throw "$HostName $Action InvisibleDragon did not use the ready EnergyPlus gate: $($invisibleWorkflow.runtimeGateStatus)"
+        }
+
+        foreach ($property in @(
+                "runtimeExecuted",
+                "runtimeResultVerified",
+                "runtimeCacheVerified",
+                "runtimeCancellationVerified")) {
+            if ($invisibleWorkflow.$property -ne $true) {
+                throw "$HostName $Action InvisibleDragon did not verify $property."
+            }
+        }
+
+        foreach ($property in @(
+                "runtimeCsvVerified",
+                "runtimeBatchVerified",
+                "runtimeBatchCancellationVerified")) {
+            if ($invisibleWorkflow.$property -ne $false) {
+                throw "$HostName $Action InvisibleDragon unexpectedly reported $property."
+            }
+        }
+
+        $invisibleStates = @{
+            runtimeFirstRunState = "Succeeded"
+            runtimeCachedRunState = "Cached"
+            runtimeCancellationState = "Cancelled"
+            runtimeState = "Cancelled"
+        }
+        foreach ($property in $invisibleStates.Keys) {
+            if ([string]$invisibleWorkflow.$property -ne $invisibleStates[$property]) {
+                throw ("{0} {1} InvisibleDragon reported {2}='{3}', expected '{4}'." -f `
+                    $HostName, $Action, $property, $invisibleWorkflow.$property, $invisibleStates[$property])
+            }
+        }
+
         $workflowRows = @($summary.definitions | Where-Object {
             $_.fileName -eq "14-simpledragon-two-zone-run-results-csv.gh"
         })
         if ($workflowRows.Count -ne 1) {
-            throw "$HostName $Action summary must contain exactly one executable EnergyPlus workflow row."
+            throw "$HostName $Action summary must contain exactly one SimpleDragon EnergyPlus workflow row."
         }
 
         $workflow = $workflowRows[0]
@@ -573,7 +677,9 @@ function Invoke-ExampleHost(
             "runtimeResultVerified",
             "runtimeCsvVerified",
             "runtimeCacheVerified",
-            "runtimeCancellationVerified"
+            "runtimeCancellationVerified",
+            "runtimeBatchVerified",
+            "runtimeBatchCancellationVerified"
         )
         if ([string]$workflow.runtimeGateStatus -ne "ready") {
             throw "$HostName $Action did not use the ready EnergyPlus gate: $($workflow.runtimeGateStatus)"
@@ -589,6 +695,9 @@ function Invoke-ExampleHost(
             runtimeFirstRunState = "Succeeded"
             runtimeCachedRunState = "Cached"
             runtimeCancellationState = "Cancelled"
+            runtimeFirstBatchState = "Succeeded"
+            runtimeCachedBatchState = "Succeeded"
+            runtimeBatchCancellationState = "Cancelled"
         }
         foreach ($property in $requiredStates.Keys) {
             if ([string]$workflow.$property -ne $requiredStates[$property]) {
@@ -624,6 +733,16 @@ function Invoke-ExampleHost(
             }).Count -ne 0) {
             throw "$HostName $Action summary did not contain complete CSV evidence hashes."
         }
+
+        foreach ($property in @(
+                "runtimeBatchCombinedCsvSha256",
+                "runtimeBatchManifestSha256",
+                "runtimeBatchCancellationCsvSha256",
+                "runtimeBatchCancellationManifestSha256")) {
+            if ([string]$workflow.$property -notmatch '^[0-9a-f]{64}$') {
+                throw "$HostName $Action summary did not contain valid $property evidence."
+            }
+        }
     }
 }
 
@@ -638,6 +757,7 @@ try {
 
     $script:dotnet = Resolve-DotNet
     $energyPlusWorkflow = Resolve-EnergyPlusWorkflow
+    $energyPlusWorkflow["InvisibleWeatherPath"] = Resolve-InvisibleExampleWeather $energyPlusWorkflow
     Write-Host (
         "EnergyPlus example workflow gate: $($energyPlusWorkflow.Status) - " +
         $energyPlusWorkflow.Reason)
@@ -704,7 +824,7 @@ try {
     if ($RequireEnergyPlusWorkflow) {
         [IO.File]::WriteAllText(
             (Join-Path $runRoot "ENERGYPLUS-WORKFLOW-PASS.txt"),
-            "Every requested Rhino host reported ready, executed, result, CSV, cache, run cancellation, batch, and batch cancellation evidence." +
+            "Every requested Rhino host reported InvisibleDragon compile/weather/run/cache/cancellation and SimpleDragon result/CSV/cache/run/batch/cancellation evidence." +
                 [Environment]::NewLine)
     }
     Write-Host "Grasshopper example-definition gate passed. Logs: $runRoot"

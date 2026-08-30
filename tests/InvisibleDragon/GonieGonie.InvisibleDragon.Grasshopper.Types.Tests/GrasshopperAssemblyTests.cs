@@ -59,7 +59,7 @@ public sealed class GrasshopperAssemblyTests
     }
 
     [Fact]
-    public void PublicComponentsDoNotExposeEntityIdentifierInputs()
+    public void PublicComponentsDoNotExposeEntityIdentifiersOrRelationshipIndices()
     {
         Assembly assembly = LoadPlugin();
         GH_Component[] components = ComponentTypes(assembly)
@@ -71,6 +71,15 @@ public sealed class GrasshopperAssemblyTests
             parameter => string.Equals(parameter.Name, "ID", StringComparison.OrdinalIgnoreCase)
                 || parameter.Name.EndsWith(" ID", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(parameter.NickName, "ID", StringComparison.OrdinalIgnoreCase));
+        Assert.All(
+            components.SelectMany(component => component.Params.Input),
+            parameter =>
+            {
+                Assert.DoesNotContain("Index", parameter.Name, StringComparison.OrdinalIgnoreCase);
+                Assert.DoesNotContain("Indices", parameter.Name, StringComparison.OrdinalIgnoreCase);
+                Assert.DoesNotContain("Index", parameter.Description, StringComparison.OrdinalIgnoreCase);
+                Assert.DoesNotContain("Indices", parameter.Description, StringComparison.OrdinalIgnoreCase);
+            });
     }
 
     [Fact]

@@ -15,6 +15,13 @@ MANIFEST = ROOT / "fixtures" / "compatibility" / "cases.json"
 RELEASE_WORKFLOW = ROOT / ".github" / "workflows" / "release-candidate.yml"
 EXAMPLE_TOOL_README = ROOT / "tools" / "example-definitions" / "README.md"
 EXAMPLES_README = ROOT / "examples" / "README.md"
+EXAMPLE_RUNNER = ROOT / "tools" / "example-definitions" / "run.ps1"
+EXAMPLE_HOST_INPUTS = (
+    ROOT / "tools" / "example-definitions" / "Shared" / "ExampleHostInputs.cs"
+)
+ADVANCED_EXAMPLES = (
+    ROOT / "tools" / "example-definitions" / "Shared" / "AdvancedExampleDefinitions.cs"
+)
 SOURCE_ROOTS = (
     "src/Shared/GonieGonie.BuildingEnergy.Contracts",
     "src/Shared/GonieGonie.EnergyPlus.Runtime",
@@ -148,18 +155,47 @@ class EngineeringProvenanceContractTests(unittest.TestCase):
         self.assertNotIn("temp/example-definitions/run-*", tool_readme)
         self.assertNotIn("`temp/example-definitions/`", examples_readme)
 
+    def test_invisible_example_executes_with_a_separate_epw_boundary(self) -> None:
+        runner = EXAMPLE_RUNNER.read_text(encoding="utf-8")
+        inputs = EXAMPLE_HOST_INPUTS.read_text(encoding="utf-8")
+        examples = ADVANCED_EXAMPLES.read_text(encoding="utf-8")
+        for required in (
+            "KOR_SO_Seoul.WS.471080_TMYx.2009-2023.epw",
+            'DRAGONS_INVISIBLE_EXAMPLE_EPW = $EnergyPlusWorkflow.InvisibleWeatherPath',
+            "GONIEGONIE_ENERGYPLUS_ROOT = $EnergyPlusWorkflow.RuntimeRoot",
+            'TEMP = $hostTemp',
+            'TMP = $hostTemp',
+            '$_.fileName -eq "02-invisibledragon-single-zone-hvac-idf.gh"',
+        ):
+            self.assertIn(required, runner)
+        self.assertIn(
+            'private const string InvisibleEnergyPlusWeatherVariable = '
+            '"DRAGONS_INVISIBLE_EXAMPLE_EPW";',
+            inputs,
+        )
+        for required in (
+            "new InvisibleRuntimeWorkflowExpectation(",
+            "RequireEmptyFilePath(document, expectation.WeatherPathGuid);",
+            "ValidateInvisibleRuntimeWorkflow(",
+            "IsSameOrDescendant(processTempRoot, inputs.OutputDirectory)",
+            '"GonieGonie.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo"',
+            '"ERV supply flow 0.20 m3/s"',
+        ):
+            self.assertIn(required, examples)
+
     def test_powershell_scripts_parse(self) -> None:
         powershell = shutil.which("powershell") or shutil.which("pwsh")
         if powershell is None:
             self.skipTest("PowerShell is unavailable")
         expression = (
-            "& { param($first,$second) $ErrorActionPreference='Stop';"
+            "& { param($first,$second,$third) $ErrorActionPreference='Stop';"
             "[void][scriptblock]::Create([IO.File]::ReadAllText($first));"
-            "[void][scriptblock]::Create([IO.File]::ReadAllText($second)) }"
+            "[void][scriptblock]::Create([IO.File]::ReadAllText($second));"
+            "[void][scriptblock]::Create([IO.File]::ReadAllText($third)) }"
         )
         completed = subprocess.run(
             [powershell, "-NoLogo", "-NoProfile", "-Command", expression,
-             str(COMPATIBILITY), str(RELEASE)],
+             str(COMPATIBILITY), str(RELEASE), str(EXAMPLE_RUNNER)],
             cwd=ROOT,
             capture_output=True,
             text=True,
