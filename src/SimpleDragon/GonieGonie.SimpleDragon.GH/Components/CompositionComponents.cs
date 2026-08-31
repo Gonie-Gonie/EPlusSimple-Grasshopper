@@ -154,7 +154,7 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
 }
 
 /// <summary>
-/// Authors one geometry-backed EPlusSimple surface. All envelope and opening
+/// Authors one geometry-backed SimpleDragon surface. All envelope and opening
 /// properties are owned here rather than inherited from a Zone.
 /// </summary>
 public abstract class SimpleDragonOpaqueSurfaceComponent : SimpleDragonComponent
@@ -359,7 +359,7 @@ public sealed class CreateSimpleDragonWallComponent : SimpleDragonOpaqueSurfaceC
 }
 
 /// <summary>
-/// Collects the EPlusSimple surfaces and systems owned by one thermal zone.
+/// Collects the SimpleDragon surfaces and systems owned by one thermal zone.
 /// Collective topology is resolved by SimpleDragon Model.
 /// </summary>
 public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
@@ -368,7 +368,7 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
         : base(
             "SimpleDragon Zone",
             "SD Zone",
-            "Collects the Surfaces, HVAC, usage, and explicit height owned by one EPlusSimple Zone.",
+            "Collects the Surfaces, HVAC, usage, and explicit height owned by one SimpleDragon Zone.",
             SimpleDragonPanels.Geometry)
     {
     }
@@ -385,7 +385,7 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
             GH_ParamAccess.list);
         pManager.AddTextParameter("Name", "N", "Zone name.", GH_ParamAccess.item, "Zone");
         pManager.AddIntegerParameter("Floor Number", "F", "Zone floor number.", GH_ParamAccess.item, 0);
-        pManager.AddNumberParameter("Height", "H", "Positive EPlusSimple Zone height in metres.", GH_ParamAccess.item, 3d);
+        pManager.AddNumberParameter("Height", "H", "Positive SimpleDragon Zone height in metres.", GH_ParamAccess.item, 3d);
         pManager.AddParameter(new SimpleDragonUsageProfileParam(), "Profile", "P", "Zone usage profile.", GH_ParamAccess.item);
         pManager.AddParameter(
             new SimpleDragonSupplySystemParam(),

@@ -489,6 +489,24 @@ names, file paths, and contents without creating a directory. With
 - `diagnostics.csv`
 - `geometry_map.csv`
 
+Every CSV is written as UTF-8 with a BOM so Korean text opens correctly in
+Windows Excel. Numbers always use `.` as the decimal separator, enum values use
+stable `snake_case`, dates use ISO 8601 text, and units are carried in column
+names or explicit unit columns. Every result table includes `case_id`; the
+combined batch CSV also preserves it for each input case.
+
+`manifest.json` is UTF-8 JSON without a BOM. It records the schema and product
+versions, tracked upstream commit, EnergyPlus version/build, canonical numeric
+and enum formats, explicit-trigger and overwrite policies, and SHA-256 values
+for the model, result, and every emitted CSV.
+
+The separate batch `reproducibility-manifest.json` records the run fingerprint,
+parallelism, executor and canonical options, both core versions, upstream and
+EnergyPlus identities, plus each case's cache key, model/weather hashes,
+snake-case status, metrics, and diagnostics. The release gate binds its verified
+reports, packages, documentation, runtime payloads, and checksums into the local
+candidate evidence.
+
 GRR and Directory are required. GRM, diagnostics, and Model `Geometry Map Data`
 are optional additions to the package. If files already exist, either choose a
 new directory or deliberately set `Overwrite=True`. Reset Export to False after

@@ -67,8 +67,15 @@ public static class BatchRunner
             Directory.CreateDirectory(outputDirectory);
             csvPath = Path.Combine(outputDirectory, "combined.csv");
             manifestPath = Path.Combine(outputDirectory, "reproducibility-manifest.json");
-            AtomicFile.WriteAllText(csvPath, combinedCsv, CancellationToken.None);
-            AtomicFile.WriteAllText(manifestPath, manifest, CancellationToken.None);
+            AtomicFile.WriteAllText(
+                csvPath,
+                combinedCsv,
+                emitUtf8Bom: true,
+                cancellationToken: CancellationToken.None);
+            AtomicFile.WriteAllText(
+                manifestPath,
+                manifest,
+                cancellationToken: CancellationToken.None);
             writtenDirectory = outputDirectory;
         }
 
@@ -648,7 +655,10 @@ internal static class BatchCache
         }
 
         cancellationToken.ThrowIfCancellationRequested();
-        AtomicFile.WriteAllText(path, Encoding.UTF8.GetString(stream.ToArray()), cancellationToken);
+        AtomicFile.WriteAllText(
+            path,
+            Encoding.UTF8.GetString(stream.ToArray()),
+            cancellationToken: cancellationToken);
     }
 }
 
@@ -672,7 +682,7 @@ internal static class BatchOutputWriter
             {
                 item.Index.ToString(CultureInfo.InvariantCulture),
                 item.CaseId,
-                item.Status.ToString(),
+                StatusName(item.Status),
             };
             foreach (string metricName in metricNames)
             {
@@ -741,7 +751,7 @@ internal static class BatchOutputWriter
                     writer.WriteString("weather_file_sha256", item.WeatherFileSha256);
                 }
 
-                writer.WriteString("status", item.Status.ToString());
+                writer.WriteString("status", StatusName(item.Status));
                 writer.WriteStartObject("metrics");
                 foreach (KeyValuePair<string, double> metric in item.Metrics)
                 {
@@ -785,6 +795,9 @@ internal static class BatchOutputWriter
         output.Append('\n');
     }
 
+    private static string StatusName(BatchCaseStatus status) =>
+        SnakeCaseLowerNamingPolicy.Instance.ConvertName(status.ToString());
+
     private static void AppendCsvField(StringBuilder output, string value)
     {
         if (!RequiresCsvQuoting(value))
@@ -815,10 +828,12 @@ internal static class BatchOutputWriter
 internal static class AtomicFile
 {
     private static readonly Encoding Utf8WithoutBom = new UTF8Encoding(false);
+    private static readonly Encoding Utf8WithBom = new UTF8Encoding(true);
 
     internal static void WriteAllText(
         string path,
         string contents,
+        bool emitUtf8Bom = false,
         CancellationToken cancellationToken = default)
     {
         string fullPath = Path.GetFullPath(path);
@@ -840,7 +855,9 @@ internal static class AtomicFile
                 FileMode.CreateNew,
                 FileAccess.Write,
                 FileShare.None))
-            using (var writer = new StreamWriter(stream, Utf8WithoutBom))
+            using (var writer = new StreamWriter(
+                stream,
+                emitUtf8Bom ? Utf8WithBom : Utf8WithoutBom))
             {
                 writer.Write(contents);
                 writer.Flush();

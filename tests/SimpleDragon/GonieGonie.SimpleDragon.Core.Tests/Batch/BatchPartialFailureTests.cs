@@ -41,7 +41,7 @@ public sealed class BatchPartialFailureTests
             result.Cases.Select(item => item.Status));
         Assert.Contains("SD.BATCH.CASE_FAILED", result.Cases[1].Diagnostics.Select(item => item.Code));
         Assert.Contains("SD.TEST.EXPLICIT_FAILURE", result.Cases[3].Diagnostics.Select(item => item.Code));
-        Assert.Contains(",Succeeded,", result.CombinedCsv, StringComparison.Ordinal);
-        Assert.Contains(",Failed,", result.CombinedCsv, StringComparison.Ordinal);
+        Assert.Contains(",succeeded,", result.CombinedCsv, StringComparison.Ordinal);
+        Assert.Contains(",failed,", result.CombinedCsv, StringComparison.Ordinal);
     }
 }

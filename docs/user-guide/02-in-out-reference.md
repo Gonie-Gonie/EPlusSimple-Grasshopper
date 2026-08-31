@@ -1561,7 +1561,7 @@ _This component has no inputs._
 | 0 | Surfaces (`S`) | SimpleDragon Surface Definition | List | No | — | Surface definitions owned by this Zone. |
 | 1 | Name (`N`) | Text | Item | No | Default: `Zone` | Zone name. |
 | 2 | Floor Number (`F`) | Integer | Item | No | Default: `0` | Zone floor number. |
-| 3 | Height (`H`) | Number | Item | No | Default: `3` | Positive EPlusSimple Zone height in metres. |
+| 3 | Height (`H`) | Number | Item | No | Default: `3` | Positive SimpleDragon Zone height in metres. |
 | 4 | Profile (`P`) | SimpleDragon Usage Profile | Item | No | — | Zone usage profile. |
 | 5 | HVAC (`HVAC`) | SimpleDragon Supply System | List | Yes | — | Supply systems owned by this Zone. |
 | 6 | ERVs (`ERV`) | SimpleDragon Zone ERV | List | Yes | — | ERV values owned by this Zone. |

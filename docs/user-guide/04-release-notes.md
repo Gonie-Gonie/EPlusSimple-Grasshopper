@@ -23,6 +23,23 @@ standalone-license omission described in `NOTICE.md` is reviewed.
 - Tracks the EPlusSimple/IDragon 0.7.0 engineering baseline at upstream commit
   `847b01f68f438f560a986072bcaa7768fbf67897`.
 
+### Candidate verification matrix
+
+| Gate | Required 0.1.0 evidence | Candidate status |
+| --- | --- | --- |
+| Managed implementation | All discovered unit/integration projects pass with no required skip | Enforced by `dev.cmd release` |
+| Engineering parity | 11 paired Python/C# cases × 6 stages; zero failure or skip | Enforced; report included in candidate |
+| Rhino/Grasshopper | Rhino 7 and Rhino 8 geometry, load, solve, save, and reopen | Enforced on the release host |
+| Examples | Eight `.gh` definitions and two `.3dm` models, including both full workflows | Enforced on Rhino 7 and Rhino 8 |
+| Packages | Invisible-only, Simple-only, and co-loaded portable candidates; no Python | Enforced for both Rhino generations |
+| Documentation | Four chapters, all 75 components and 37 typed parameters, PDF postflight | Enforced and included as one PDF asset |
+| Public publication | License and weather redistribution review | Blocked; no tag, GitHub release, or Yak publication |
+
+The authoritative result for a particular local candidate is
+`artifacts/release/release-gate.json`, together with the referenced engineering,
+host, example, package, checksum, and documentation reports. Source code or a
+green headless build by itself is not a release attestation.
+
 ### Grasshopper-native authoring
 
 - Adds explicit `Floor`, `Ceiling`, and `Wall` components in both products.

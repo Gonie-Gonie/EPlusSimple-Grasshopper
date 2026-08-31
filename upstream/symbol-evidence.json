@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:350e91115b53e8d7c3bbd824eadcf12fc733de6702f845e61b5bd9e6b918398d",
+  "content_sha256": "sha256:d00f10b22f1193997933bc0ed61fb749f6b0f1758757a73093fab3577b18a3e8",
   "entries": [
     {
       "implementation": {
@@ -25614,7 +25614,7 @@
     {
       "implementation": {
         "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Batch/BatchRunner.cs",
-        "source_sha256": "sha256:0c10ef83545c12cf458e891efaa60e9b7101f23beac16f3ffec580d545ddb7eb",
+        "source_sha256": "sha256:c0ce851c7656e117ced852d5b7906114c13c0d7cd58a5403f01ff87d9ad99e81",
         "symbol": "GonieGonie.SimpleDragon.Batch.BatchRunner.RunAsync"
       },
       "path": "src/idragon/launcher.py",

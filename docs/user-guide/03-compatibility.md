@@ -101,6 +101,108 @@ The following are not compatibility promises for the Grasshopper products:
 - A general editor for every EnergyPlus object, field, node, branch, or plant
   loop.
 
+## Engineering compatibility gate
+
+Run `dev.cmd compatibility` to execute the paired Python/C# engineering gate.
+The tracked manifest declares exactly 11 cases. Every case must execute these
+six stages without a skip:
+
+1. GRM cross-read.
+2. Authoring IDF comparison.
+3. Expanded IDF comparison.
+4. EnergyPlus 24.2.0 execution.
+5. GRR comparison.
+6. Warning, Severe, and Fatal comparison.
+
+Eight cases use the pinned Chicago weather record. The packaged ERV/PV/opening
+case is additionally repeated with Tampa, Golden, and San Francisco EPWs. The
+matrix covers adjacency, shared heat pumps, screw and absorption chillers,
+cooling towers, geothermal AHU, packaged equipment, boilers, district heat,
+FCU, radiators, radiant systems, DHW, ERV, PV, multiple fuels, and openings.
+The resulting 11-case/66-stage report is written to
+`artifacts/reports/engineering-compatibility.json`.
+
+Numeric comparison uses:
+
+```text
+|C# - Python| <= absolute_tolerance
+                + relative_tolerance * max(|C#|, |Python|)
+```
+
+The tracked case manifest sets authoring/expanded IDF numeric tolerances to
+absolute and relative `1e-9`. GRR values use absolute `0.01` and relative
+`0.001` under the same formula. Its `0.005` near-zero value floors the
+denominator used to report relative error and is the threshold that explicitly
+designated non-zero result totals must exceed; it does not replace the pass/fail
+formula. Warning-count delta is zero. A matching non-zero Severe or
+Fatal result is still a failure unless the exact normalized diagnostic and
+count belong to a reviewed exception. The report records the maximum absolute
+error, the relative error at that same JSON path, and the path itself rather
+than hiding the comparison behind a pass flag.
+
+`-AllowDifferences` is a diagnostic development mode and is never release
+evidence. A verified release requires all 11 cases, all 66 stages, zero failed
+cases, zero skipped stages, and no unreviewed difference.
+
+## Compatibility evidence and exceptions
+
+The upstream public-symbol inventory contains 1,242 ordered symbols. Each row
+must be classified as `equivalent`, `exception`, or `out_of_scope`; the release
+gate rejects `needs_reverification`. Symbol evidence binds the exact upstream
+commit and symbol hash, production C# file/symbol/hash, verifying test
+file/symbol/hash, assertion ID, and deterministic expected output. Fixture-backed
+receipts additionally record their fixture and generator hashes. Broad
+file-level mappings are not equivalence claims.
+
+Intentional native adaptations live in
+`upstream/compatibility-exceptions.yml`. Each exception identifies the exact
+upstream symbol, native behavior, engineering/IDF/result effect, evidence, and
+approval. Generated-name differences may be canonicalized only as a one-to-one
+mapping that preserves every definition and reference; missing, swapped,
+merged, or dangling relationships fail the gate.
+
+The data parity suite separately covers all 24 packaged usage profiles through
+their final schedules, every surface-regulation branch, every fenestration key,
+all 252 weather rows, and climate effective-date boundaries. Runtime, EPW, GRM,
+and source inputs are content-addressed before either engine runs.
+
+## Geometry abstraction and provenance
+
+InvisibleDragon keeps authored planar vertices. SimpleDragon deliberately
+reduces surfaces to its area, azimuth, height, boundary, construction, and
+opening abstraction before generating deterministic InvisibleDragon geometry.
+Consequently a converted face is valid simulation geometry, not a promise to
+reproduce every original Rhino vertex.
+
+Structured Geometry Map outputs preserve the generated entity identity and
+source Rhino object/face provenance where available. `geometry_map.csv` carries
+the entity, topology indices, Rhino object, geometry fingerprint, and
+Grasshopper tree path/index; `diagnostics.csv` additionally carries a Brep face
+index when the diagnostic has one. Use these values to trace a result back to
+source geometry; users never supply them as relationship inputs.
+
+The two Version components expose the product version and pinned upstream
+commit. CSV/batch manifests record the product/core versions and run identity;
+release manifests additionally bind EnergyPlus executable, IDD, ExpandObjects,
+weather archive/file, shared assembly, and package SHA-256 values.
+
+## Maintainer upstream synchronization
+
+The scheduled/manual upstream workflow detects source and data drift but never
+auto-merges Python code. To accept a new baseline:
+
+1. Create `sync/simpledragon-upstream-<short-sha>` from current `main`.
+2. Collect the upstream diff and symbol-hash report without changing the lock.
+3. Add or update Python behavioral fixtures for every affected branch.
+4. Port the behavior in C# and update its symbol/test mapping.
+5. Run unit, semantic authoring/expanded IDF, and numerical EnergyPlus gates.
+6. Review every intentional difference in the exception registry.
+7. Require zero unmapped symbols and zero `needs_reverification` rows.
+8. Update the pinned upstream lock only after all evidence passes, then review
+   and merge the sync branch.
+
+Never update the compatibility lock merely to silence a drift report.
+
 ## Product boundary compatibility
 
 SimpleDragon owns the GRM, GRR, and SimpleDragon diagnostic values visible on

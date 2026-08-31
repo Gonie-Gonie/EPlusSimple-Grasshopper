@@ -1,4 +1,5 @@
 using GonieGonie.SimpleDragon.Batch;
+using System.Text;
 
 namespace GonieGonie.SimpleDragon.Tests.Batch;
 
@@ -22,8 +23,14 @@ public sealed class BatchOutputDeterminismTests
         Assert.Equal(first.ReproducibilityManifest, cached.ReproducibilityManifest);
         Assert.DoesNotContain("cache_hit", first.CombinedCsv, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("timestamp", first.ReproducibilityManifest, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(",succeeded,", first.CombinedCsv, StringComparison.Ordinal);
+        Assert.Contains("\"status\": \"succeeded\"", first.ReproducibilityManifest, StringComparison.Ordinal);
         Assert.Equal(first.CombinedCsv, await File.ReadAllTextAsync(first.CombinedCsvPath!));
         Assert.Equal(first.ReproducibilityManifest, await File.ReadAllTextAsync(first.ManifestPath!));
+        byte[] csvBytes = await File.ReadAllBytesAsync(first.CombinedCsvPath!);
+        byte[] manifestBytes = await File.ReadAllBytesAsync(first.ManifestPath!);
+        Assert.True(csvBytes.AsSpan().StartsWith(Encoding.UTF8.GetPreamble()));
+        Assert.False(manifestBytes.AsSpan().StartsWith(Encoding.UTF8.GetPreamble()));
     }
 
     [Fact]

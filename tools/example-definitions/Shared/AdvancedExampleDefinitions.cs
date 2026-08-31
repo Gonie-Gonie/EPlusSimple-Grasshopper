@@ -2086,13 +2086,13 @@ internal static class AdvancedExampleDefinitions
             string manifestContent = File.ReadAllText(manifest);
             Require(
                 combinedCsvContent.StartsWith("index,case_id,status", StringComparison.Ordinal)
-                    && combinedCsvContent.Contains(batchCaseId + ",Succeeded"),
+                    && combinedCsvContent.Contains(batchCaseId + ",succeeded"),
                 "The SimpleDragon batch combined CSV does not contain the successful ordered case.");
             RequireBatchCsvMatchesResult(combinedCsvContent, batchCaseId, totalArea, annualResult);
             Require(
                 manifestContent.Contains("goniegonie.simple-dragon.batch-manifest.v1")
                     && manifestContent.Contains(batchCaseId)
-                    && manifestContent.Contains("\"status\": \"Succeeded\""),
+                    && manifestContent.Contains("\"status\": \"succeeded\""),
                 "The SimpleDragon batch manifest does not contain its schema and successful case.");
 
             SetBoolean(document, expectation.BatchRunTriggerGuid, true);
@@ -2183,12 +2183,12 @@ internal static class AdvancedExampleDefinitions
                 evidenceNotBeforeUtc,
                 "Cancelled SimpleDragon batch manifest");
             Require(
-                File.ReadAllText(cancelledBatchCsv).Contains(cancelledBatchCaseId + ",Cancelled"),
+                File.ReadAllText(cancelledBatchCsv).Contains(cancelledBatchCaseId + ",cancelled"),
                 "The cancelled batch CSV does not preserve the cancelled case status.");
             string cancelledManifestContent = File.ReadAllText(cancelledBatchManifest);
             Require(
                 cancelledManifestContent.Contains(cancelledBatchCaseId)
-                    && cancelledManifestContent.Contains("\"status\": \"Cancelled\""),
+                    && cancelledManifestContent.Contains("\"status\": \"cancelled\""),
                 "The cancelled batch manifest does not preserve the model-derived case ID and cancelled status.");
 
             string finalRunState = ReadRuntimeSnapshot(
@@ -2631,7 +2631,7 @@ internal static class AdvancedExampleDefinitions
             "The batch combined CSV is missing required identity, status, or GRR metric columns.");
         Require(
             string.Equals(row[caseIndex], expectedCaseId, StringComparison.Ordinal)
-                && string.Equals(row[statusIndex], "Succeeded", StringComparison.Ordinal),
+                && string.Equals(row[statusIndex], "succeeded", StringComparison.Ordinal),
             "The batch combined CSV does not identify the successful two-zone case.");
 
         string[] numericColumns =
