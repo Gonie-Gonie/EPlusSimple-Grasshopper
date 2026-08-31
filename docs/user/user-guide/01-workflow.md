@@ -41,8 +41,9 @@ Keep the extracted tree intact while the command runs. The installer verifies
 all four bundled Yak files by relative path, byte length, and SHA-256 before it
 removes an installed package. It does not require the repository, Python,
 OODocs, the .NET SDK, Visual Studio, administrator rights, or network access.
-The public release is not yet available while the documented publication holds
-remain unresolved.
+The public release is not yet available while the complete
+Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain for the
+bundled TMYx weather remains unresolved.
 
 After installation:
 

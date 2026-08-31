@@ -21,9 +21,13 @@ Use the labels as follows:
 - Listing strategy: two separate Apps, because each Dragon has its own Yak
   package identity, icon, product boundary, and release history.
 - Publication status: **BLOCKED - metadata preparation only.**
-- Blocking conditions: review the historical upstream standalone-license
-  omission; confirm KoreanTMY public redistribution rights; confirm a public
-  support email. See [NOTICE](../../../NOTICE.md).
+- Remaining blocking condition: retain written permission to redistribute the
+  Climate.OneBuilding TMYx files embedded in `KoreanTMY-v1.zip`, including the
+  complete Oikolab/ERA5 and Copernicus pass-through terms and notices and the
+  ASHRAE design-condition material, or replace them with an adequately licensed
+  payload. The MIT code-license and public support-email reviews are complete.
+  See [NOTICE](../../../NOTICE.md) and the
+  [weather rights review](weather-rights-review.md).
 - Version status: the first-release source is deliberately fixed at `0.1.0`.
   No public tag exists. If that remains the final decision, the future repository
   tag must be exactly `v0.1.0` and must equal `packaging/package-spec.json`.
@@ -73,25 +77,24 @@ https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper/issues
 Confirm immediately before submission that public GitHub Issues are enabled
 and accept reports from users who are not repository collaborators.
 
-### Support Email [BLOCKED]
+### Support Email [PASTE]
 
 ```text
-<CONFIRM_PUBLIC_SUPPORT_EMAIL>
+hyeonggon.jo@snu.ac.kr
 ```
 
-Do not copy the local Git identity or another private address into this field.
-The account owner must confirm an address intended for public support before
-either App is submitted.
+The account owner confirmed this address for public support on 2026-08-31.
 
-### License Agreement [BLOCKED]
+### License Agreement [SELECT]
 
 ```text
-<BLOCKED_PENDING_LICENSE_REVIEW>
+MIT
 ```
 
-The planned value after both legal holds documented in `NOTICE.md` are cleared
-is **MIT**. Until then, do not select MIT or any other value as a claim about
-unresolved third-party redistribution rights.
+The Gonie-Gonie owner confirmed individual project ownership, the repository
+ships the full MIT text, and the pinned upstream `citation.cff` declares MIT.
+This value describes the Dragon software license; it does not claim that the
+separately sourced weather payload is MIT licensed.
 
 ### App Platforms [SELECT]
 
@@ -137,6 +140,17 @@ Gonie-Gonie
 
 The public App byline comes from the signed-in Rhino account. `Yak Authors` is
 verified against the package manifest; it is not a second byline field.
+
+### SimpleDragon Weather Source [VERIFY]
+
+```text
+https://climate.onebuilding.org/
+```
+
+The exact TMYx archive remains blocked for public bundling under
+`BLOCKED_PENDING_CLIMATE_ONEBUILDING_REDISTRIBUTION_PERMISSION`. Source
+attribution alone is not redistribution permission. The machine-readable review
+status is `blocked-permission-not-found`.
 
 ## InvisibleDragon App
 
@@ -277,16 +291,16 @@ resources/icons/generated/invisible-dragon/invisible-dragon-component-contact-sh
 resources/icons/generated/invisible-dragon/invisible-dragon-parameter-contact-sheet.png
 ```
 
-### Media [TODO]
+### Media [OPTIONAL — LEAVE BLANK]
 
 ```text
-<CAPTURE_INVISIBLEDRAGON_RHINO_AND_GRASSHOPPER_SCREENSHOTS>
+Leave blank (optional media is not included in 0.1.0).
 ```
 
-Capture at least one real Rhino viewport and one left-to-right Grasshopper
-workflow screenshot from the verified examples. If video or 3D media is added,
-use an embeddable URL from a Food4Rhino-supported provider such as YouTube,
-Vimeo, p3d.in, mcneel.github.io, or ShapeDiver. No media URL is prepared yet.
+No optional media URL is included in the 0.1.0 worksheet. For a later listing
+update, capture at least one real Rhino viewport and one left-to-right
+Grasshopper workflow from the verified examples. Video or 3D media must use an
+embeddable URL accepted by Food4Rhino.
 
 ## SimpleDragon App
 
@@ -427,23 +441,25 @@ resources/icons/generated/simple-dragon/simple-dragon-component-contact-sheet.pn
 resources/icons/generated/simple-dragon/simple-dragon-parameter-contact-sheet.png
 ```
 
-### Media [TODO]
+### Media [OPTIONAL — LEAVE BLANK]
 
 ```text
-<CAPTURE_SIMPLEDRAGON_RHINO_AND_GRASSHOPPER_SCREENSHOTS>
+Leave blank (optional media is not included in 0.1.0).
 ```
 
-Capture at least one real Rhino viewport and one left-to-right Grasshopper
-workflow screenshot from the verified examples. If video or 3D media is added,
-use an embeddable URL from a Food4Rhino-supported provider such as YouTube,
-Vimeo, p3d.in, mcneel.github.io, or ShapeDiver. No media URL is prepared yet.
+No optional media URL is included in the 0.1.0 worksheet. For a later listing
+update, capture at least one real Rhino viewport and one left-to-right
+Grasshopper workflow from the verified examples. Video or 3D media must use an
+embeddable URL accepted by Food4Rhino.
 
 ## Upload sequence after authorization
 
-1. Resolve every publication blocker in `NOTICE.md` and record explicit
-   authorization outside this worksheet.
-2. Replace `CONFIRM_PUBLIC_SUPPORT_EMAIL` with the account owner's confirmed
-   public support address, then replace the license hold with the cleared value.
+1. Retain the complete written Climate.OneBuilding/Oikolab/Copernicus/ASHRAE
+   rights-and-notice chain for the exact weather payload, or replace it with an
+   adequately licensed payload and rerun every weather, compatibility, and
+   package hash gate.
+2. Verify that the prepared MIT license and `hyeonggon.jo@snu.ac.kr` support
+   address remain the owner's intended public values.
 3. Confirm that the GitHub Issues support link is publicly usable.
 4. Reconfirm the deliberate first-release version in
    `packaging/package-spec.json`. If it remains `0.1.0`, reserve only the exact

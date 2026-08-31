@@ -269,7 +269,7 @@ function Read-PackageIndex {
     ) "portable package index"
     Assert-NoReparseChain $indexPath
     $index = Get-Content -LiteralPath $indexPath -Raw | ConvertFrom-Json
-    if ([string]$index.schema -ne "goniegonie.dragons-grasshopper.package-index.v1") {
+    if ([string]$index.schema -ne "goniegonie.dragons-grasshopper.package-index.v2") {
         throw "Unsupported portable package index schema in '$indexPath'."
     }
 
@@ -496,7 +496,7 @@ function Assert-IndexedArchiveShaRejected {
     $archivePath = Join-Path $portable "invisible-dragon-0.1.0-portable-plugin-win.zip"
     New-ArchiveSafetyTestZip $archivePath @("safe.txt")
     $index = [pscustomobject]@{
-        schema = "goniegonie.dragons-grasshopper.package-index.v1"
+        schema = "goniegonie.dragons-grasshopper.package-index.v2"
         products = @([pscustomobject]@{
             id = "invisible-dragon"
             portable = [pscustomobject]@{

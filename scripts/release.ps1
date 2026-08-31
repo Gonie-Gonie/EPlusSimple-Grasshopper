@@ -17,9 +17,20 @@ if (-not (Test-Path -LiteralPath $packageSpecPath -PathType Leaf)) {
 }
 $packageSpec = Get-Content -LiteralPath $packageSpecPath -Raw -Encoding UTF8 |
     ConvertFrom-Json
-if ([string] $packageSpec.schema -cne 'goniegonie.dragons-grasshopper.package-spec.v1' -or
+if ([string] $packageSpec.schema -cne 'goniegonie.dragons-grasshopper.package-spec.v2' -or
     [string] $packageSpec.version -cne '0.1.0') {
     throw 'The first public release process is deliberately bound to version 0.1.0. Decide and commit the final version in package-spec.json before changing this guard.'
+}
+$publicationSpec = $packageSpec.publication
+if ([string] $publicationSpec.projectLicense -cne 'MIT' -or
+    [string] $publicationSpec.projectLicenseOwner -cne 'Gonie-Gonie' -or
+    [string] $publicationSpec.projectLicenseOwnerType -cne 'individual' -or
+    [string] $publicationSpec.projectLicenseReview -cne 'resolved-2026-08-31' -or
+    [string] $publicationSpec.publicSupportEmail -cne 'hyeonggon.jo@snu.ac.kr' -or
+    [string] $publicationSpec.publicSupportEmailReview -cne 'resolved-2026-08-31' -or
+    [string] $publicationSpec.weatherSource -cne 'https://climate.onebuilding.org/' -or
+    [string] $publicationSpec.weatherRedistributionStatus -cne 'blocked-permission-not-found') {
+    throw 'Release publication metadata differs from the reviewed individual/MIT/support/weather-rights contract.'
 }
 $releaseVersion = [string] $packageSpec.version
 $artifactsRoot = Join-Path $repositoryRoot 'artifacts'
@@ -3294,7 +3305,19 @@ Assert-EngineeringPortProvenance `
     -ExpectedCommit $commit
 $packageIndex = Require-Json `
     -Path $packageIndexPath `
-    -Schema 'goniegonie.dragons-grasshopper.package-index.v1'
+    -Schema 'goniegonie.dragons-grasshopper.package-index.v2'
+$packagePublication = $packageIndex.redistribution
+if ([bool] $packagePublication.publicPublicationAuthorized -or
+    [string] $packagePublication.projectLicense -cne [string] $publicationSpec.projectLicense -or
+    [string] $packagePublication.projectLicenseOwner -cne [string] $publicationSpec.projectLicenseOwner -or
+    [string] $packagePublication.projectLicenseOwnerType -cne [string] $publicationSpec.projectLicenseOwnerType -or
+    [string] $packagePublication.projectLicenseReview -cne [string] $publicationSpec.projectLicenseReview -or
+    [string] $packagePublication.publicSupportEmail -cne [string] $publicationSpec.publicSupportEmail -or
+    [string] $packagePublication.publicSupportEmailReview -cne [string] $publicationSpec.publicSupportEmailReview -or
+    [string] $packagePublication.weatherSource -cne [string] $publicationSpec.weatherSource -or
+    [string] $packagePublication.weatherRedistributionStatus -cne [string] $publicationSpec.weatherRedistributionStatus) {
+    throw 'Package index publication metadata does not match package-spec.json.'
+}
 $compatibilityReport = Require-Json `
     -Path $compatibilityPath `
     -Schema 'goniegonie.dragons-grasshopper.package-verification.v1'
@@ -3922,7 +3945,15 @@ $releaseGate = [pscustomobject] [ordered] @{
         tagCreated = $false
         githubReleaseCreated = $false
         yakPublished = $false
-        reason = 'This command creates a local verified candidate only. Public publication remains blocked by the upstream standalone-license review, KoreanTMY redistribution authorization, and confirmation of the public support email.'
+        projectLicense = [string] $packagePublication.projectLicense
+        projectLicenseOwner = [string] $packagePublication.projectLicenseOwner
+        projectLicenseOwnerType = [string] $packagePublication.projectLicenseOwnerType
+        projectLicenseReview = [string] $packagePublication.projectLicenseReview
+        publicSupportEmail = [string] $packagePublication.publicSupportEmail
+        publicSupportEmailReview = [string] $packagePublication.publicSupportEmailReview
+        weatherSource = [string] $packagePublication.weatherSource
+        weatherRedistributionStatus = [string] $packagePublication.weatherRedistributionStatus
+        reason = 'This command creates a local verified candidate only. Public publication remains blocked because the complete Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain for the bundled TMYx weather has not been established.'
     }
 }
 

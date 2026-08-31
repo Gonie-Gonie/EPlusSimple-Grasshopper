@@ -131,10 +131,11 @@ internal sealed class PackageVerifier
 
     public VerificationReport Verify()
     {
-        Check(BothScenario, _spec.Schema == "goniegonie.dragons-grasshopper.package-spec.v1",
+        Check(BothScenario, _spec.Schema == "goniegonie.dragons-grasshopper.package-spec.v2",
             "Unsupported package specification schema '" + _spec.Schema + "'.");
         Check(BothScenario, Regex.IsMatch(_spec.Version, @"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$"),
             "Package version is not SemVer: '" + _spec.Version + "'.");
+        VerifyPublicationSpec();
         Check(BothScenario, Directory.Exists(_packagesRoot), "Packages root does not exist: '" + _packagesRoot + "'.");
         VerifyDistributionManifest();
 
@@ -172,7 +173,7 @@ internal sealed class PackageVerifier
 
     private void VerifyDistributionManifest()
     {
-        Check(BothScenario, _distributions.Schema == "goniegonie.dragons-grasshopper.distributions.v1",
+        Check(BothScenario, _distributions.Schema == "goniegonie.dragons-grasshopper.distributions.v2",
             "Unsupported distribution manifest schema '" + _distributions.Schema + "'.");
         Check(BothScenario, _distributions.Payloads.Count == 2,
             "Distribution manifest must contain exactly two reviewed payloads.");
@@ -206,6 +207,19 @@ internal sealed class PackageVerifier
                     && weather.MetadataPath == "data/simple-dragon/weather/행정구역별기상데이터.csv"
                     && weather.MetadataColumn == "EPW파일명",
                 "KoreanTMY distribution coverage metadata must pin 80 root EPWs and all 78 metadata-referenced EPWs.");
+            Check(SimpleScenario,
+                weather.Origin.Site == _spec.Publication.WeatherSource
+                && weather.Origin.Dataset == "TMYx"
+                && weather.Origin.SourcePage == "https://climate.onebuilding.org/sources/default.html"
+                && weather.Origin.SouthKoreaIndex == "https://climate.onebuilding.org/WMO_Region_2_Asia/KOR_South_Korea/index.html"
+                && weather.Origin.Citation == "Lawrie, Linda K, Drury B Crawley. 2022. Development of Global Typical Meteorological Years (TMYx). https://climate.onebuilding.org"
+                && weather.Origin.SolarDataSource == "ERA5"
+                && weather.Origin.SolarDataProvider == "Oikolab"
+                && weather.Origin.CopernicusLicense == "https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products"
+                && weather.Origin.OikolabTerms == "https://docs.oikolab.com/terms/"
+                && weather.Origin.ReviewedAt == "2026-08-31"
+                && weather.Origin.WeatherRedistributionStatus == _spec.Publication.WeatherRedistributionStatus,
+                "KoreanTMY origin and redistribution review differ from package-spec.json.");
         }
         DistributionPayload? energyPlus = DistributionFor("invisible-dragon");
         if (energyPlus is not null)
@@ -217,6 +231,21 @@ internal sealed class PackageVerifier
                 && energyPlus.LicenseSha256 == "b43f1553459a4bcc49d180b42123a64a54fcbb6213cd99ac6ac6aa32cb1c1a05",
                 "EnergyPlus archive/package license identity differs from the reviewed contract.");
         }
+    }
+
+    private void VerifyPublicationSpec()
+    {
+        PublicationSpec publication = _spec.Publication;
+        Check(BothScenario,
+            publication.ProjectLicense == "MIT"
+            && publication.ProjectLicenseOwner == "Gonie-Gonie"
+            && publication.ProjectLicenseOwnerType == "individual"
+            && publication.ProjectLicenseReview == "resolved-2026-08-31"
+            && publication.PublicSupportEmail == "hyeonggon.jo@snu.ac.kr"
+            && publication.PublicSupportEmailReview == "resolved-2026-08-31"
+            && publication.WeatherSource == "https://climate.onebuilding.org/"
+            && publication.WeatherRedistributionStatus == "blocked-permission-not-found",
+            "Package specification publication metadata differs from the reviewed contract.");
     }
 
     private void VerifyDistributionPin(
@@ -265,13 +294,21 @@ internal sealed class PackageVerifier
         using JsonDocument document = JsonDocument.Parse(File.ReadAllText(path));
         JsonElement root = document.RootElement;
         Check(BothScenario, root.GetProperty("schema").GetString()
-                == "goniegonie.dragons-grasshopper.package-index.v1",
+                == "goniegonie.dragons-grasshopper.package-index.v2",
             "Package index schema mismatch.");
         JsonElement redistribution = root.GetProperty("redistribution");
         Check(BothScenario, redistribution.GetProperty("energyPlusBinariesIncluded").GetBoolean()
                 && redistribution.GetProperty("weatherIncluded").GetBoolean()
                 && !redistribution.GetProperty("portableArchivesArePluginOnly").GetBoolean()
-                && !redistribution.GetProperty("publicPublicationAuthorized").GetBoolean(),
+                && !redistribution.GetProperty("publicPublicationAuthorized").GetBoolean()
+                && redistribution.GetProperty("projectLicense").GetString() == _spec.Publication.ProjectLicense
+                && redistribution.GetProperty("projectLicenseOwner").GetString() == _spec.Publication.ProjectLicenseOwner
+                && redistribution.GetProperty("projectLicenseOwnerType").GetString() == _spec.Publication.ProjectLicenseOwnerType
+                && redistribution.GetProperty("projectLicenseReview").GetString() == _spec.Publication.ProjectLicenseReview
+                && redistribution.GetProperty("publicSupportEmail").GetString() == _spec.Publication.PublicSupportEmail
+                && redistribution.GetProperty("publicSupportEmailReview").GetString() == _spec.Publication.PublicSupportEmailReview
+                && redistribution.GetProperty("weatherSource").GetString() == _spec.Publication.WeatherSource
+                && redistribution.GetProperty("weatherRedistributionStatus").GetString() == _spec.Publication.WeatherRedistributionStatus,
             "Package index redistribution/publication flags are not truthful for the embedded archives.");
 
         JsonElement[] products = root.GetProperty("products").EnumerateArray().ToArray();
@@ -1280,6 +1317,9 @@ internal sealed class PackageSpec
     [JsonPropertyName("version")]
     public string Version { get; set; } = string.Empty;
 
+    [JsonPropertyName("publication")]
+    public PublicationSpec Publication { get; set; } = new();
+
     [JsonPropertyName("targets")]
     public List<TargetSpec> Targets { get; set; } = new();
 
@@ -1288,6 +1328,33 @@ internal sealed class PackageSpec
 
     [JsonPropertyName("products")]
     public List<ProductSpec> Products { get; set; } = new();
+}
+
+internal sealed class PublicationSpec
+{
+    [JsonPropertyName("projectLicense")]
+    public string ProjectLicense { get; set; } = string.Empty;
+
+    [JsonPropertyName("projectLicenseOwner")]
+    public string ProjectLicenseOwner { get; set; } = string.Empty;
+
+    [JsonPropertyName("projectLicenseOwnerType")]
+    public string ProjectLicenseOwnerType { get; set; } = string.Empty;
+
+    [JsonPropertyName("projectLicenseReview")]
+    public string ProjectLicenseReview { get; set; } = string.Empty;
+
+    [JsonPropertyName("publicSupportEmail")]
+    public string PublicSupportEmail { get; set; } = string.Empty;
+
+    [JsonPropertyName("publicSupportEmailReview")]
+    public string PublicSupportEmailReview { get; set; } = string.Empty;
+
+    [JsonPropertyName("weatherSource")]
+    public string WeatherSource { get; set; } = string.Empty;
+
+    [JsonPropertyName("weatherRedistributionStatus")]
+    public string WeatherRedistributionStatus { get; set; } = string.Empty;
 }
 
 internal sealed class DistributionManifest
@@ -1328,6 +1395,9 @@ internal sealed class DistributionPayload
     [JsonPropertyName("developmentPath")]
     public string DevelopmentPath { get; set; } = string.Empty;
 
+    [JsonPropertyName("origin")]
+    public DistributionOrigin Origin { get; set; } = new();
+
     [JsonPropertyName("archiveEpwCount")]
     public int ArchiveEpwCount { get; set; }
 
@@ -1351,6 +1421,42 @@ internal sealed class DistributionPayload
 
     [JsonPropertyName("licenseSha256")]
     public string LicenseSha256 { get; set; } = string.Empty;
+}
+
+internal sealed class DistributionOrigin
+{
+    [JsonPropertyName("site")]
+    public string Site { get; set; } = string.Empty;
+
+    [JsonPropertyName("dataset")]
+    public string Dataset { get; set; } = string.Empty;
+
+    [JsonPropertyName("sourcePage")]
+    public string SourcePage { get; set; } = string.Empty;
+
+    [JsonPropertyName("southKoreaIndex")]
+    public string SouthKoreaIndex { get; set; } = string.Empty;
+
+    [JsonPropertyName("citation")]
+    public string Citation { get; set; } = string.Empty;
+
+    [JsonPropertyName("solarDataSource")]
+    public string SolarDataSource { get; set; } = string.Empty;
+
+    [JsonPropertyName("solarDataProvider")]
+    public string SolarDataProvider { get; set; } = string.Empty;
+
+    [JsonPropertyName("copernicusLicense")]
+    public string CopernicusLicense { get; set; } = string.Empty;
+
+    [JsonPropertyName("oikolabTerms")]
+    public string OikolabTerms { get; set; } = string.Empty;
+
+    [JsonPropertyName("reviewedAt")]
+    public string ReviewedAt { get; set; } = string.Empty;
+
+    [JsonPropertyName("weatherRedistributionStatus")]
+    public string WeatherRedistributionStatus { get; set; } = string.Empty;
 }
 
 internal sealed class TargetSpec

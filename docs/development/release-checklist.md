@@ -16,14 +16,17 @@ authorize publication, Yak upload, tag creation, or a GitHub release.
   override or a product-specific tag.
 - Validate the upstream lock, symbol map, compatibility exceptions, and Python
   reference fixtures.
-- Recheck `LICENSE` and `NOTICE.md`. Resolve the recorded historical upstream
-  standalone-license omission before public binary release.
+- Recheck `LICENSE` and `NOTICE.md`. The owner confirmed individual ownership
+  and MIT publication for the port on 2026-08-31; retain that decision and the
+  pinned upstream MIT attribution.
 - Confirm that SimpleDragon contains only the exact hash-pinned KoreanTMY
   archive, no expanded or arbitrary EPW files, and that redistribution rights
-  are resolved before any public binary release.
-- Confirm a public support email owned for this project before any GitHub,
-  Yak, or Food4Rhino publication. A local Git identity or private address is
-  not an acceptable substitute.
+  and required notices for its complete Climate.OneBuilding/Oikolab/ERA5,
+  Copernicus, and ASHRAE chain are resolved before any public binary release.
+  Follow the
+  [weather rights review](publishing/weather-rights-review.md).
+- Reconfirm `hyeonggon.jo@snu.ac.kr` as the intended public support address
+  immediately before GitHub, Yak, or Food4Rhino publication.
 - Require both Rhino 7 and Rhino 8 for the complete release gate. A normal
   developer build may skip tests for a missing Rhino generation, but a release
   candidate may not.
@@ -62,8 +65,9 @@ For diagnosis, its constituent commands are:
   chapters, the framework coverage statement, and zero internal GUID leakage.
 - Require the Food4Rhino metadata PDF builder to import the canonical
   publishing worksheet through OODocs and postflight its version, document
-  metadata, required sections, all field headings and fenced values, and both
-  unresolved safety tokens. Building the worksheet must not clear a hold.
+  metadata, required sections, all field headings and fenced values, and the
+  remaining weather-rights safety token. Building the worksheet must not clear
+  a hold.
 - Require all 1,242 pinned upstream public symbols to have exact registry
   coverage, no `needs_reverification` rows, and fresh authoritative assertion
   evidence for every `equivalent` or `exception` row. External evidence JSON
@@ -179,10 +183,11 @@ interactive host gates. The gate still verifies the pinned EnergyPlus runtime
 and every required tool rather than trusting runner labels alone.
 
 Do not push `v0.1.0`, upload a binary, create or publish a GitHub release, or
-publish to Yak while any of these conditions remains unresolved: the historical
-upstream standalone-license omission recorded in `NOTICE.md`, KoreanTMY public
-redistribution rights, or the project owner's confirmed public support email.
-After all three are explicitly resolved, re-confirm that the chosen release
+publish to Yak while the complete rights-and-notice chain for the exact
+Climate.OneBuilding/Oikolab/Copernicus/ASHRAE-bearing weather payload remains
+unresolved. The MIT code-license and `hyeonggon.jo@snu.ac.kr` support-address
+decisions are already recorded. After the remaining weather right is explicitly
+resolved, re-confirm that the chosen release
 version is still `0.1.0` and that tag `v0.1.0` equals it exactly. Tag creation,
 the GitHub release with exactly the four staged assets, binary upload, Yak
 publication, and Food4Rhino submission remain distinct, explicitly authorized

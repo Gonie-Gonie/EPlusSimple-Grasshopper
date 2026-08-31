@@ -88,8 +88,10 @@ source version exactly: the current first-release source `0.1.0` maps only to
 ### Distribution status
 
 - Public binaries, release tag `v0.1.0`, GitHub releases, Yak publication, and
-  Food4Rhino submission remain withheld pending review of the historical
-  upstream standalone-license omission recorded in `NOTICE.md`, confirmation
-  of KoreanTMY public redistribution rights, and confirmation of a project-owned
-  public support email. `dev.cmd release` creates only a local verified
-  candidate and performs none of those publication actions.
+  Food4Rhino submission remain withheld pending written permission to
+  redistribute the Climate.OneBuilding TMYx payload under a complete
+  Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain. The
+  owner has confirmed the MIT code license and
+  `hyeonggon.jo@snu.ac.kr` public support address. `dev.cmd release` creates
+  only a local verified candidate and performs none of those publication
+  actions.

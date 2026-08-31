@@ -137,8 +137,9 @@ package gates applicable to it pass.
 The [documentation index](docs/README.md) covers the end-user workflow,
 compatibility boundary, troubleshooting, examples, and maintainer release
 gates. No public binary, release tag, GitHub release, or Yak publication is
-authorized until the historical upstream standalone-license omission recorded
-in [NOTICE.md](NOTICE.md) has been reviewed and resolved.
+authorized while the complete Climate.OneBuilding/Oikolab/Copernicus/ASHRAE
+rights-and-notice chain recorded in [NOTICE.md](NOTICE.md) remains unresolved.
+The MIT code-license and public support-email reviews are complete.
 
 ## Repository rules
 

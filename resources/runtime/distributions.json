@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.dragons-grasshopper.distributions.v1",
+  "schema": "goniegonie.dragons-grasshopper.distributions.v2",
   "payloads": [
     {
       "id": "energyplus-24.2.0-windows-x64",
@@ -26,6 +26,19 @@
       "sha256": "fa88b8d69364b6a6b663afdc6dc2eb30c0ddee17cd37e5802ce5a5dec63d92d0",
       "developmentPath": "weather/KoreanTMY-v1.zip",
       "packagePath": "runtime/weather/KoreanTMY-v1.zip",
+      "origin": {
+        "site": "https://climate.onebuilding.org/",
+        "dataset": "TMYx",
+        "sourcePage": "https://climate.onebuilding.org/sources/default.html",
+        "southKoreaIndex": "https://climate.onebuilding.org/WMO_Region_2_Asia/KOR_South_Korea/index.html",
+        "citation": "Lawrie, Linda K, Drury B Crawley. 2022. Development of Global Typical Meteorological Years (TMYx). https://climate.onebuilding.org",
+        "solarDataSource": "ERA5",
+        "solarDataProvider": "Oikolab",
+        "copernicusLicense": "https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products",
+        "oikolabTerms": "https://docs.oikolab.com/terms/",
+        "reviewedAt": "2026-08-31",
+        "weatherRedistributionStatus": "blocked-permission-not-found"
+      },
       "archiveEpwCount": 80,
       "metadataReferencedUniqueEpwCount": 78,
       "metadataPath": "data/simple-dragon/weather/행정구역별기상데이터.csv",

@@ -181,9 +181,10 @@ is not a Python source-compatibility artifact.
 - Successful managed runs clean their work directories. Failed and cancelled
   run directories are retained for diagnosis and can consume temporary storage
   until removed.
-- Public binary distribution remains withheld while the historical upstream
-  standalone-license omission recorded in `NOTICE.md` is reviewed. Repository
-  source licensing does not by itself authorize a public Dragon binary release.
+- Public binary distribution remains withheld while the complete
+  Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain for the
+  bundled TMYx weather remains unresolved. The repository's MIT source license
+  does not license that separate runtime data.
 
 Review the release-notes chapter for the current distribution status before
 sharing a package.

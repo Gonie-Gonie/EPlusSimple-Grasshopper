@@ -85,4 +85,7 @@ result is parsed. Failed or cancelled simulations are retained below
 `%TEMP%\GonieGonie\Dragons\energyplus-runs` so their EnergyPlus output and logs
 can be inspected; that whole location is disposable after diagnosis.
 
-The local candidate mechanism does not establish redistribution rights. Public publication remains unauthorized as recorded in `NOTICE.md`.
+The files are sourced from Climate.OneBuilding using ISD and Oikolab-supplied
+ERA5 inputs, but public download and attribution do not establish the complete
+Copernicus/Oikolab/ASHRAE right and notice chain needed to rebundle them. Public
+publication remains unauthorized as recorded in `NOTICE.md`.

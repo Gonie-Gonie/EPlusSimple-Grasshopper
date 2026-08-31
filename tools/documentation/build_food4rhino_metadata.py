@@ -36,12 +36,22 @@ _load_oodocs = _USER_GUIDE_HELPERS._load_oodocs
 render_pdf_only = _USER_GUIDE_HELPERS.render_pdf_only
 
 
-PACKAGE_SCHEMA = "goniegonie.dragons-grasshopper.package-spec.v1"
+PACKAGE_SCHEMA = "goniegonie.dragons-grasshopper.package-spec.v2"
 EXPECTED_RELEASE_VERSION = "0.1.0"
 SOURCE_PATH = Path("docs/development/publishing/food4rhino.md")
 EXPECTED_PRODUCT_IDENTITIES = {
     "invisible-dragon": "InvisibleDragon",
     "simple-dragon": "SimpleDragon",
+}
+EXPECTED_PUBLICATION = {
+    "projectLicense": "MIT",
+    "projectLicenseOwner": "Gonie-Gonie",
+    "projectLicenseOwnerType": "individual",
+    "projectLicenseReview": "resolved-2026-08-31",
+    "publicSupportEmail": "hyeonggon.jo@snu.ac.kr",
+    "publicSupportEmailReview": "resolved-2026-08-31",
+    "weatherSource": "https://climate.onebuilding.org/",
+    "weatherRedistributionStatus": "blocked-permission-not-found",
 }
 EXPECTED_SECTIONS = (
     "Publication status and field contract",
@@ -52,8 +62,7 @@ EXPECTED_SECTIONS = (
     "Upload sequence after authorization",
 )
 SAFETY_TOKENS = (
-    "CONFIRM_PUBLIC_SUPPORT_EMAIL",
-    "BLOCKED_PENDING_LICENSE_REVIEW",
+    "BLOCKED_PENDING_CLIMATE_ONEBUILDING_REDISTRIBUTION_PERMISSION",
 )
 
 
@@ -92,6 +101,11 @@ def _load_contract(repo_root: Path) -> tuple[str, Path, str, tuple[str, ...], tu
         raise Food4RhinoPdfError(
             f"Package products differ from the two release Apps: {identities!r}."
         )
+    publication = spec.get("publication")
+    if publication != EXPECTED_PUBLICATION:
+        raise Food4RhinoPdfError(
+            f"Package publication metadata differs from the reviewed contract: {publication!r}."
+        )
 
     try:
         source = source_path.read_text(encoding="utf-8")
@@ -99,6 +113,15 @@ def _load_contract(repo_root: Path) -> tuple[str, Path, str, tuple[str, ...], tu
         raise Food4RhinoPdfError("Food4Rhino worksheet is not valid UTF-8.") from exc
     if not source.strip():
         raise Food4RhinoPdfError("Food4Rhino worksheet is blank.")
+    stale_placeholders = ("[TODO]", "<CAPTURE_", "<TODO", "TODO>")
+    present_placeholders = tuple(
+        placeholder for placeholder in stale_placeholders if placeholder in source
+    )
+    if present_placeholders:
+        raise Food4RhinoPdfError(
+            "Food4Rhino worksheet contains stale placeholders: "
+            + ", ".join(present_placeholders)
+        )
 
     sections = tuple(
         match.group(1).strip()
@@ -123,6 +146,18 @@ def _load_contract(repo_root: Path) -> tuple[str, Path, str, tuple[str, ...], tu
     for token in SAFETY_TOKENS:
         if token not in source:
             raise Food4RhinoPdfError(f"Food4Rhino safety token is missing: {token}")
+    for value in (
+        EXPECTED_PUBLICATION["projectLicense"],
+        EXPECTED_PUBLICATION["projectLicenseOwner"],
+        EXPECTED_PUBLICATION["projectLicenseOwnerType"],
+        EXPECTED_PUBLICATION["publicSupportEmail"],
+        EXPECTED_PUBLICATION["weatherSource"],
+        EXPECTED_PUBLICATION["weatherRedistributionStatus"],
+    ):
+        if value not in source:
+            raise Food4RhinoPdfError(
+                f"Food4Rhino worksheet does not reflect package publication metadata: {value!r}."
+            )
     return version, source_path, source, fields, fenced_values
 
 

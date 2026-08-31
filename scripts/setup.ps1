@@ -68,7 +68,7 @@ if (-not (Test-Path -LiteralPath $distributionManifestPath -PathType Leaf)) {
 }
 
 $distributionManifest = Get-Content -LiteralPath $distributionManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v1') {
+if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v2') {
     throw "Unsupported distribution manifest schema in '$distributionManifestPath'."
 }
 
@@ -96,6 +96,17 @@ $expectedDistributions = @{
         sha256 = 'fa88b8d69364b6a6b663afdc6dc2eb30c0ddee17cd37e5802ce5a5dec63d92d0'
         developmentPath = 'weather/KoreanTMY-v1.zip'
         packagePath = 'runtime/weather/KoreanTMY-v1.zip'
+        originSite = 'https://climate.onebuilding.org/'
+        originDataset = 'TMYx'
+        originSourcePage = 'https://climate.onebuilding.org/sources/default.html'
+        originSouthKoreaIndex = 'https://climate.onebuilding.org/WMO_Region_2_Asia/KOR_South_Korea/index.html'
+        originCitation = 'Lawrie, Linda K, Drury B Crawley. 2022. Development of Global Typical Meteorological Years (TMYx). https://climate.onebuilding.org'
+        originSolarDataSource = 'ERA5'
+        originSolarDataProvider = 'Oikolab'
+        originCopernicusLicense = 'https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products'
+        originOikolabTerms = 'https://docs.oikolab.com/terms/'
+        originReviewedAt = '2026-08-31'
+        originWeatherRedistributionStatus = 'blocked-permission-not-found'
     }
 }
 
@@ -120,6 +131,18 @@ foreach ($payload in $distributionPayloads) {
         ([string] $payload.sha256).ToLowerInvariant() -ne [string] $expected.sha256 -or
         [string] $payload.developmentPath -ne [string] $expected.developmentPath -or
         [string] $payload.packagePath -ne [string] $expected.packagePath -or
+        ($id -eq 'korean-tmy-v1' -and (
+            [string] $payload.origin.site -ne [string] $expected.originSite -or
+            [string] $payload.origin.dataset -ne [string] $expected.originDataset -or
+            [string] $payload.origin.sourcePage -ne [string] $expected.originSourcePage -or
+            [string] $payload.origin.southKoreaIndex -ne [string] $expected.originSouthKoreaIndex -or
+            [string] $payload.origin.citation -ne [string] $expected.originCitation -or
+            [string] $payload.origin.solarDataSource -ne [string] $expected.originSolarDataSource -or
+            [string] $payload.origin.solarDataProvider -ne [string] $expected.originSolarDataProvider -or
+            [string] $payload.origin.copernicusLicense -ne [string] $expected.originCopernicusLicense -or
+            [string] $payload.origin.oikolabTerms -ne [string] $expected.originOikolabTerms -or
+            [string] $payload.origin.reviewedAt -ne [string] $expected.originReviewedAt -or
+            [string] $payload.origin.weatherRedistributionStatus -ne [string] $expected.originWeatherRedistributionStatus)) -or
         ($id -eq 'energyplus-24.2.0-windows-x64' -and (
             [string] $payload.licenseEntry -ne [string] $expected.licenseEntry -or
             [string] $payload.packageLicensePath -ne [string] $expected.packageLicensePath -or

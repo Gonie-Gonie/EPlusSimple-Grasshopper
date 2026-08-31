@@ -12,8 +12,11 @@ The tracked upstream `citation.cff` declares its EPlusSimple and IDragon source
 as MIT licensed. Those names identify the upstream Python packages; the names
 of the products published from this repository are SimpleDragon and
 InvisibleDragon. The tracked upstream commit does not contain a standalone
-`LICENSE` file, so that omission is recorded here and must be rechecked before
-a public binary release.
+`LICENSE` file, so this notice preserves the exact MIT declaration and pinned
+source attribution. On 2026-08-31, the Gonie-Gonie owner confirmed that this
+port is individually owned and released under the repository MIT license. The
+source-code license review is therefore complete; this does not grant rights
+to separately sourced runtime data.
 
 EnergyPlus is a separate product of the U.S. Department of Energy and its
 contributors. Source control does not store its binaries. Development setup
@@ -34,5 +37,23 @@ setup downloads the exact `KoreanTMY-v1.zip` pinned by URL, byte length, and
 SHA-256 in `resources/runtime/distributions.json`; SimpleDragon package candidates embed
 that archive unchanged under `runtime/weather/`. The archive contains 80 root
 EPWs and covers all 78 unique EPW names referenced by the tracked address
-metadata. Redistribution/publication rights for this weather payload have not
-been established, so public package publication remains unauthorized.
+metadata. Their headers identify the files as TMYx data downloaded from
+[Climate.OneBuilding](https://climate.onebuilding.org/), whose source page says
+that its authors create TMYx from public ISD observations and ERA5 solar data
+supplied through Oikolab, and supplies the requested citation. The current
+general Copernicus Products licence allows distribution and adaptation subject
+to visible attribution and a European Commission/ECMWF no-responsibility
+statement. However, the exact archive carries neither those notices nor a
+documented pass-through grant, Oikolab's public API terms do not grant public
+redistribution, and Climate.OneBuilding states `All Rights Reserved`. Public
+download availability therefore does not establish a complete right to bundle
+the files in a new installer. In addition, 59 of the 80 EPWs embed 2021 ASHRAE
+climatic design conditions, for which ASHRAE separately directs software
+developers to obtain an embedding licence. The evidence is recorded in the
+[weather rights review](https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper/blob/main/docs/development/publishing/weather-rights-review.md).
+Public package publication remains unauthorized until written redistribution
+permission and every applicable upstream notice are retained, or this payload
+is replaced with one carrying adequate redistribution terms.
+
+The confirmed public support address for both Dragon products is
+`hyeonggon.jo@snu.ac.kr`.

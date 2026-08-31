@@ -632,11 +632,22 @@ if (-not (Test-Path -LiteralPath $distributionManifestPath -PathType Leaf)) {
 }
 
 $spec = Get-Content -LiteralPath $specPath -Raw | ConvertFrom-Json
-if ([string] $spec.schema -ne 'goniegonie.dragons-grasshopper.package-spec.v1') {
+if ([string] $spec.schema -ne 'goniegonie.dragons-grasshopper.package-spec.v2') {
     throw "Unsupported package spec schema in '$specPath'."
 }
+$publicationSpec = $spec.publication
+if ([string] $publicationSpec.projectLicense -cne 'MIT' -or
+    [string] $publicationSpec.projectLicenseOwner -cne 'Gonie-Gonie' -or
+    [string] $publicationSpec.projectLicenseOwnerType -cne 'individual' -or
+    [string] $publicationSpec.projectLicenseReview -cne 'resolved-2026-08-31' -or
+    [string] $publicationSpec.publicSupportEmail -cne 'hyeonggon.jo@snu.ac.kr' -or
+    [string] $publicationSpec.publicSupportEmailReview -cne 'resolved-2026-08-31' -or
+    [string] $publicationSpec.weatherSource -cne 'https://climate.onebuilding.org/' -or
+    [string] $publicationSpec.weatherRedistributionStatus -cne 'blocked-permission-not-found') {
+    throw 'Package publication metadata differs from the reviewed individual/MIT/support/weather-rights contract.'
+}
 $distributionManifest = Get-Content -LiteralPath $distributionManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v1' -or
+if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v2' -or
     @($distributionManifest.payloads).Count -ne 2 -or
     @($distributionManifest.payloads | Group-Object product | Where-Object { $_.Count -ne 1 }).Count -ne 0) {
     throw "Distribution manifest must define exactly one reviewed payload for each product: '$distributionManifestPath'."
@@ -665,6 +676,17 @@ $reviewedDistributions = @{
         sha256 = 'fa88b8d69364b6a6b663afdc6dc2eb30c0ddee17cd37e5802ce5a5dec63d92d0'
         developmentPath = 'weather/KoreanTMY-v1.zip'
         packagePath = 'runtime/weather/KoreanTMY-v1.zip'
+        originSite = 'https://climate.onebuilding.org/'
+        originDataset = 'TMYx'
+        originSourcePage = 'https://climate.onebuilding.org/sources/default.html'
+        originSouthKoreaIndex = 'https://climate.onebuilding.org/WMO_Region_2_Asia/KOR_South_Korea/index.html'
+        originCitation = 'Lawrie, Linda K, Drury B Crawley. 2022. Development of Global Typical Meteorological Years (TMYx). https://climate.onebuilding.org'
+        originSolarDataSource = 'ERA5'
+        originSolarDataProvider = 'Oikolab'
+        originCopernicusLicense = 'https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products'
+        originOikolabTerms = 'https://docs.oikolab.com/terms/'
+        originReviewedAt = '2026-08-31'
+        originWeatherRedistributionStatus = 'blocked-permission-not-found'
     }
 }
 foreach ($distribution in @($distributionManifest.payloads)) {
@@ -681,6 +703,20 @@ foreach ($distribution in @($distributionManifest.payloads)) {
         ([string] $distribution.sha256).ToLowerInvariant() -ne [string] $expected.sha256 -or
         [string] $distribution.developmentPath -ne [string] $expected.developmentPath -or
         [string] $distribution.packagePath -ne [string] $expected.packagePath -or
+        ($productId -eq 'simple-dragon' -and (
+            [string] $distribution.origin.site -ne [string] $expected.originSite -or
+            [string] $distribution.origin.dataset -ne [string] $expected.originDataset -or
+            [string] $distribution.origin.sourcePage -ne [string] $expected.originSourcePage -or
+            [string] $distribution.origin.southKoreaIndex -ne [string] $expected.originSouthKoreaIndex -or
+            [string] $distribution.origin.citation -ne [string] $expected.originCitation -or
+            [string] $distribution.origin.solarDataSource -ne [string] $expected.originSolarDataSource -or
+            [string] $distribution.origin.solarDataProvider -ne [string] $expected.originSolarDataProvider -or
+            [string] $distribution.origin.copernicusLicense -ne [string] $expected.originCopernicusLicense -or
+            [string] $distribution.origin.oikolabTerms -ne [string] $expected.originOikolabTerms -or
+            [string] $distribution.origin.reviewedAt -ne [string] $expected.originReviewedAt -or
+            [string] $distribution.origin.weatherRedistributionStatus -ne [string] $expected.originWeatherRedistributionStatus -or
+            [string] $distribution.origin.site -cne [string] $publicationSpec.weatherSource -or
+            [string] $distribution.origin.weatherRedistributionStatus -cne [string] $publicationSpec.weatherRedistributionStatus)) -or
         ($productId -eq 'invisible-dragon' -and (
             [string] $distribution.licenseEntry -ne [string] $expected.licenseEntry -or
             [string] $distribution.packageLicensePath -ne [string] $expected.packageLicensePath -or
@@ -881,7 +917,7 @@ foreach ($product in @($spec.products)) {
 }
 
 $index = [pscustomobject] [ordered] @{
-    schema = 'goniegonie.dragons-grasshopper.package-index.v1'
+    schema = 'goniegonie.dragons-grasshopper.package-index.v2'
     version = [string] $spec.version
     owner = 'Gonie-Gonie'
     products = @($indexProducts)
@@ -890,6 +926,14 @@ $index = [pscustomobject] [ordered] @{
         weatherIncluded = $true
         portableArchivesArePluginOnly = $false
         publicPublicationAuthorized = $false
+        projectLicense = [string] $publicationSpec.projectLicense
+        projectLicenseOwner = [string] $publicationSpec.projectLicenseOwner
+        projectLicenseOwnerType = [string] $publicationSpec.projectLicenseOwnerType
+        projectLicenseReview = [string] $publicationSpec.projectLicenseReview
+        publicSupportEmail = [string] $publicationSpec.publicSupportEmail
+        publicSupportEmailReview = [string] $publicationSpec.publicSupportEmailReview
+        weatherSource = [string] $publicationSpec.weatherSource
+        weatherRedistributionStatus = [string] $publicationSpec.weatherRedistributionStatus
     }
 }
 Write-Utf8JsonIfChanged -InputObject $index -Path (Join-Path $packagesRoot 'package-index.json') -Depth 10

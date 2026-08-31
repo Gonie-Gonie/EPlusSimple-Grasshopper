@@ -47,6 +47,9 @@ the complete disposable tree.
   Food4Rhino worksheet, and the two version-bound PDF outputs.
 - [Release checklist](release-checklist.md): clean-source, host, package,
   evidence, legal, and publication gates.
+- [Weather rights review](publishing/weather-rights-review.md): exact
+  Climate.OneBuilding payload provenance and the remaining
+  Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-chain hold.
 - [Example maintenance](example-maintenance.md): canonical binary generation,
   Rhino-host round trips, runtime gates, and disposable evidence.
 - [Food4Rhino publishing sheet](publishing/food4rhino.md): the single

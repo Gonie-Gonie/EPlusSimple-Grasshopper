@@ -277,7 +277,7 @@ if (-not (Test-Path -LiteralPath $packageIndexPath -PathType Leaf)) {
     throw "Package index is missing: '$packageIndexPath'. Rerun without -UseExistingPackages."
 }
 $packageIndex = Get-Content -LiteralPath $packageIndexPath -Raw | ConvertFrom-Json
-if ([string] $packageIndex.schema -ne 'goniegonie.dragons-grasshopper.package-index.v1') {
+if ([string] $packageIndex.schema -ne 'goniegonie.dragons-grasshopper.package-index.v2') {
     throw "Unsupported package-index schema: '$($packageIndex.schema)'."
 }
 $version = [string] $packageIndex.version

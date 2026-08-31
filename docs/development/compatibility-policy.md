@@ -137,9 +137,12 @@ either engine returns a zero active-load result.
   graph editor.
 - SimpleDragon intentionally loses arbitrary source vertices during its
   area-and-azimuth abstraction.
-- Public binary publication remains blocked until the historical upstream
-  license omission recorded in `NOTICE.md` is resolved or release counsel
-  confirms the required attribution basis.
+- Public binary publication remains blocked until the exact
+  Climate.OneBuilding TMYx payload has written redistribution permission that
+  resolves its Oikolab/ERA5 and Copernicus pass-through terms and notices plus
+  its embedded ASHRAE design-condition material, or the payload is replaced
+  with an adequately licensed alternative.
 
-The repository's own code is offered under its `LICENSE`; that statement does
-not erase third-party provenance or the release checks in `NOTICE.md`.
+The repository's own code is offered under MIT and the public support address
+is confirmed; neither fact erases third-party provenance or the weather-rights
+review in `NOTICE.md`.

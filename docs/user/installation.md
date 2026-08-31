@@ -4,9 +4,10 @@ This page is for people installing and loading released Dragon packages.
 
 There is no public Dragon binary or `v0.1.0` tag yet. The release names and
 steps below describe the intended first public bundle only. Publication remains
-blocked until the upstream license omission in `NOTICE.md` is resolved,
-KoreanTMY redistribution rights are confirmed, and the project owner confirms
-a public support email.
+blocked until written redistribution permission and every applicable notice are
+retained for the Climate.OneBuilding TMYx weather embedded by SimpleDragon,
+including its Oikolab/ERA5, Copernicus, and ASHRAE rights chain. The MIT code
+license and public support address are confirmed.
 
 ## Requirements
 

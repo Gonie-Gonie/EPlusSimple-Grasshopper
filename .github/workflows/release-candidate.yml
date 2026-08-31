@@ -80,6 +80,14 @@ jobs:
               [string] $food4RhinoMetadata.status -cne 'passed' -or
               [string] $githubRelease.status -cne 'prepared' -or
               [bool] $publication.publicPublicationAuthorized -or
+              [string] $publication.projectLicense -cne 'MIT' -or
+              [string] $publication.projectLicenseOwner -cne 'Gonie-Gonie' -or
+              [string] $publication.projectLicenseOwnerType -cne 'individual' -or
+              [string] $publication.projectLicenseReview -cne 'resolved-2026-08-31' -or
+              [string] $publication.publicSupportEmail -cne 'hyeonggon.jo@snu.ac.kr' -or
+              [string] $publication.publicSupportEmailReview -cne 'resolved-2026-08-31' -or
+              [string] $publication.weatherSource -cne 'https://climate.onebuilding.org/' -or
+              [string] $publication.weatherRedistributionStatus -cne 'blocked-permission-not-found' -or
               [bool] $publication.tagCreated -or
               [bool] $publication.githubReleaseCreated -or
               [bool] $publication.yakPublished) {
@@ -318,5 +326,7 @@ jobs:
 
       # Intentionally do not upload, attest, or publish artifacts/packages,
       # artifacts/release/github-assets, or binary-bearing temp trees while
-      # publicPublicationAuthorized is false. The exact four future GitHub
-      # Release assets remain only on the protected self-hosted runner.
+      # publicPublicationAuthorized is false while the complete
+      # Climate.OneBuilding/Oikolab/Copernicus/ASHRAE weather rights chain
+      # remains unresolved. The exact four
+      # future GitHub Release assets remain only on the protected self-hosted runner.

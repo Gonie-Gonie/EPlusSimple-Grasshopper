@@ -1,6 +1,16 @@
 {
-  "schema": "goniegonie.dragons-grasshopper.package-spec.v1",
+  "schema": "goniegonie.dragons-grasshopper.package-spec.v2",
   "version": "0.1.0",
+  "publication": {
+    "projectLicense": "MIT",
+    "projectLicenseOwner": "Gonie-Gonie",
+    "projectLicenseOwnerType": "individual",
+    "projectLicenseReview": "resolved-2026-08-31",
+    "publicSupportEmail": "hyeonggon.jo@snu.ac.kr",
+    "publicSupportEmailReview": "resolved-2026-08-31",
+    "weatherSource": "https://climate.onebuilding.org/",
+    "weatherRedistributionStatus": "blocked-permission-not-found"
+  },
   "targets": [
     {
       "id": "rhino7",

@@ -29,6 +29,7 @@ DEVELOPMENT_FILES = (
     "example-maintenance.md",
     "release-checklist.md",
     "publishing/food4rhino.md",
+    "publishing/weather-rights-review.md",
 )
 OBSOLETE_PATHS = (
     "docs/installation.md",
@@ -181,6 +182,23 @@ def _field(section: str, label: str) -> str:
 def _validate_food4rhino(repo_root: Path) -> int:
     path = repo_root / "docs/development/publishing/food4rhino.md"
     text = _read(path)
+    try:
+        package_spec = json.loads(_read(repo_root / "packaging/package-spec.json"))
+    except json.JSONDecodeError as exc:
+        raise DocumentationError("Package specification is not valid JSON.") from exc
+    publication = package_spec.get("publication")
+    expected_publication = {
+        "projectLicense": "MIT",
+        "projectLicenseOwner": "Gonie-Gonie",
+        "projectLicenseOwnerType": "individual",
+        "projectLicenseReview": "resolved-2026-08-31",
+        "publicSupportEmail": "hyeonggon.jo@snu.ac.kr",
+        "publicSupportEmailReview": "resolved-2026-08-31",
+        "weatherSource": "https://climate.onebuilding.org/",
+        "weatherRedistributionStatus": "blocked-permission-not-found",
+    }
+    if publication != expected_publication:
+        raise DocumentationError("Package publication metadata differs from the reviewed contract.")
     if "Publication status: **BLOCKED" not in text:
         raise DocumentationError("Food4Rhino publication status must remain explicitly blocked.")
 
@@ -190,7 +208,8 @@ def _validate_food4rhino(repo_root: Path) -> int:
         "Cost": "Free",
         "Website": "https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper",
         "Support Forum": "https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper/issues",
-        "License Agreement": "<BLOCKED_PENDING_LICENSE_REVIEW>",
+        "Support Email": expected_publication["publicSupportEmail"],
+        "License Agreement": expected_publication["projectLicense"],
         "App Platforms": "Windows\nGrasshopper",
         "Release Platforms": (
             "Grasshopper for Rhino 7 for Win\nGrasshopper for Rhino 8 for Win"
@@ -204,11 +223,10 @@ def _validate_food4rhino(repo_root: Path) -> int:
             )
 
     support_email = _field(shared, "Support Email")
-    if support_email.startswith("<CONFIRM_"):
-        if "Publication status: **BLOCKED" not in text:
-            raise DocumentationError("An unresolved support email requires blocked publication.")
-    elif EMAIL_PATTERN.fullmatch(support_email) is None:
-        raise DocumentationError("Food4Rhino Support Email is neither confirmed nor a clear marker.")
+    if EMAIL_PATTERN.fullmatch(support_email) is None:
+        raise DocumentationError("Food4Rhino Support Email is not a valid confirmed address.")
+    if "BLOCKED_PENDING_CLIMATE_ONEBUILDING_REDISTRIBUTION_PERMISSION" not in text:
+        raise DocumentationError("Food4Rhino weather redistribution blocker is missing.")
 
     exact_source_metadata = {
         "Source Code": "https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper",
@@ -217,6 +235,7 @@ def _validate_food4rhino(repo_root: Path) -> int:
             "blob/main/docs/user/README.md"
         ),
         "Yak Authors": "Gonie-Gonie",
+        "SimpleDragon Weather Source": expected_publication["weatherSource"],
     }
     for label, expected in exact_source_metadata.items():
         actual = _field(source_metadata, label)
@@ -228,6 +247,8 @@ def _validate_food4rhino(repo_root: Path) -> int:
 
     if "A `.yak` file is never selected in Food4Rhino's" not in text:
         raise DocumentationError("Food4Rhino sheet does not distinguish Yak linkage from uploads.")
+    if expected_publication["weatherRedistributionStatus"] not in text:
+        raise DocumentationError("Food4Rhino weather redistribution status is stale.")
     file_link_pattern = re.compile(
         r"^### [^\n]*File / Link[^\n]*\n\n```text\n(?P<value>.*?)\n```",
         re.MULTILINE | re.DOTALL,
