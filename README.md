@@ -221,8 +221,8 @@ The eight tracked definitions and two named-building Rhino models under
 standalone InvisibleDragon compile/weather/run wiring, two-zone GRM authoring,
 Address/Vintage-selected packaged weather, direct simulation, result plots,
 CSV previews, and the complete Run-to-GRR/CSV workflow. Example 02 keeps its EPW
-File input empty and every action trigger False, so opening it never reads a
-weather path or starts EnergyPlus. Example 12 is the complex two-zone
+File input empty and every action Button at its resting `False` value, so opening
+it never reads a weather path or starts EnergyPlus. Example 12 is the complex two-zone
 Floor/Ceiling/Wall-to-Zone model-authoring demonstration; its opening-free walls
 are authored as lists while opening-bearing walls remain separate. Example 14
 uses the same explicit Surface ownership with electric radiators for a stable
@@ -276,7 +276,8 @@ in [NOTICE.md](NOTICE.md) has been reviewed and resolved.
 
 - Core projects do not reference RhinoCommon or Grasshopper.
 - Rhino adapters own geometry conversion; GH projects own UI and serialization.
-- Simulation runs are explicit and asynchronous, never slider-triggered.
+- Simulation runs are explicit and asynchronous. Run, Cancel, Write, and Export
+  actions use momentary Grasshopper Buttons rather than Sliders or Toggles.
 - IDs, collection order, numeric culture, manifests, and generated artifacts are
   deterministic.
 - Meaningful milestones are tested, committed, and pushed to `main`.

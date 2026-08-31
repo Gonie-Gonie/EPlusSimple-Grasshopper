@@ -61,13 +61,13 @@ public sealed class ManagedRunEnergyPlusComponent : DragonComponent
         pManager.AddBooleanParameter(
             "Run",
             "Run",
-            "Toggle False then True to start one run. A saved True value never runs when a document opens.",
+            "Connect a momentary Grasshopper Button and press it to start one run; do not use a Toggle for this action.",
             GH_ParamAccess.item,
             false);
         pManager.AddBooleanParameter(
             "Cancel",
             "Cancel",
-            "Toggle False then True to cancel the active run.",
+            "Connect a momentary Grasshopper Button and press it to cancel the active run.",
             GH_ParamAccess.item,
             false);
         pManager.AddBooleanParameter(
@@ -244,7 +244,7 @@ public sealed class ManagedRunEnergyPlusComponent : DragonComponent
         {
             AddRuntimeMessage(
                 GH_RuntimeMessageLevel.Warning,
-                "The displayed result belongs to previous inputs. Toggle Run False, then True, to evaluate the current simulation.");
+                "The displayed result belongs to previous inputs. Press the Run Button to evaluate the current simulation.");
         }
 
         if (outcome is not null)

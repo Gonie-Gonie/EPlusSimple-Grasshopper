@@ -29,9 +29,9 @@ explicit run, the internal execution layer reuses a verified per-user cache or
 transactionally prepares it from that archive. A matching InvisibleDragon
 package provides the offline archive to a SimpleDragon run without placing an
 InvisibleDragon component on the canvas; the verified official download is the
-fallback when the archive is unavailable. A saved `Run=True` is only a baseline;
-a new False-to-True edge is required, so opening a document never extracts a
-runtime or launches EnergyPlus.
+fallback when the archive is unavailable. Connect a Grasshopper Button to Run
+and press it for a momentary action pulse; its resting False value ensures that
+opening a document never extracts a runtime or launches EnergyPlus.
 
 ## Packaged weather
 
@@ -60,10 +60,10 @@ runtime-cache, and temporary-work paths remain internal; only this intentionally
 selected EPW path appears on a standalone InvisibleDragon canvas.
 
 An unconnected or data-empty EPW File input is a safe no-op: it does not read a
-path, emit a Weather value, or report a path error. A saved Run value is only a
-baseline, and a new False-to-True edge is still required. The tracked standalone
-example therefore opens and recomputes without touching a weather file or
-starting EnergyPlus.
+path, emit a Weather value, or report a path error. The tracked standalone
+example connects a momentary Grasshopper Button to Run; the unpressed Button
+rests at False, so the example opens and recomputes without touching a weather
+file or starting EnergyPlus.
 
 Developer setup verifies the same archives used by candidate packaging. Released plugins do not need Python, the .NET SDK, or a machine-wide EnergyPlus installation.
 

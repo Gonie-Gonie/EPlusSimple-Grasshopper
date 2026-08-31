@@ -11,10 +11,11 @@
 - Choose finite categories such as Boundary Condition from the named choices on the input. Integer enum codes are not part of the public authoring workflow.
 - Item-access geometry inputs accept ordinary items, lists, or Data Trees. Grasshopper vectorizes the component and preserves branch paths; ownership-list inputs such as Zone Surfaces consume their values branch by branch.
 - Red runtime messages stop that component's output. Warnings describe a usable result that needs review.
-- Run, Cancel, and Managed Batch require a new False-to-True Boolean edge. A
-  saved True value never starts those actions when a document opens. Write GRM,
-  Write GRR, and Export CSV are currently level-triggered; return their Boolean
-  to False immediately after the intended write.
+- Connect a momentary Grasshopper Button to every action input: Run, Cancel,
+  Managed Batch Run/Cancel, Write GRM, Write GRR, and Export CSV. Pressing a
+  Button supplies one bounded Boolean pulse and then returns to its resting
+  False value. Use Toggles only for persistent options such as Force Rerun and
+  Overwrite; they do not launch an action by themselves.
 
 ## Canonical SimpleDragon graph
 
@@ -67,14 +68,14 @@ its Material and Thickness, and the construction receives one ordered Layers
 list; Materials and Thicknesses are never matched by list position.
 
 The model Address and Vintage select the weather record. Connect the completed
-GRM directly to `Run SimpleDragon`, then use its Run, Cancel, Force Rerun, and
-Timeout controls. The component internally converts the GRM, generates the
+GRM directly to `Run SimpleDragon`; connect Grasshopper Buttons to Run and
+Cancel, and use Force Rerun and Timeout as options. The component internally converts the GRM, generates the
 EnergyPlus 24.2 IDF, verifies the matching packaged EPW, resolves the supported
 runtime, executes EnergyPlus, and constructs the GRR. Its public outputs are
 only GRR, State, Success, and Diagnostics.
 
-The first observed Run or Cancel value is a baseline. Toggle False, allow one
-solution, then toggle True to request an action. An identical
+Let the definition solve once with the Run and Cancel Buttons at their resting
+False value, then press the required Button to request one action. An identical
 model/weather/timeout combination reuses the last GRR unless Force Rerun is
 enabled. Opening or recomputing a saved document never prepares weather or
 starts EnergyPlus by itself.
@@ -159,10 +160,11 @@ low-level InvisibleDragon simulations, use one Run component per simulation.
 
 GRM/GRR readers, writers, and CSV export intentionally expose artifact destinations because those are user-owned results, not simulation setup. Relative output paths use the saved Grasshopper document folder; unsaved definitions fall back to the per-user temp directory. When a GRM is connected, CSV export derives its case identity from that model rather than asking for a text ID.
 
-Write GRM, Write GRR, and Export CSV attempt their operation on every solution
-while Write or Export remains True. Set the Boolean back to False immediately
-after the desired output is created. This differs from the rising-edge Run,
-Cancel, and Managed Batch controls.
+Connect a Grasshopper Button to Write GRM, Write GRR, and Export CSV. Their
+Boolean input is internally level-sensitive, so a Toggle left True could write
+again on later solutions; the Button's momentary pulse bounds the operation to
+the intended solution. Overwrite is a persistent option Toggle for Export, not
+an action trigger.
 
 Wrap each model in a `SimpleDragon Batch Case`, which derives a deterministic
 case identity from the GRM, then connect the Cases list or tree to `Managed Run
@@ -192,10 +194,10 @@ The tracked definitions under `examples/` progress from materials and profiles t
 `02-invisibledragon-single-zone-hvac-idf.gh` shows the complete standalone
 low-level topology: authoring, path-free compile, explicit EPW verification,
 and `Run InvisibleDragon`. Its EPW File parameter contains no data and all
-action triggers are saved False, so choose an EPW and create a fresh Run edge
-only when execution is intended.
+action Buttons rest at False, so choose an EPW and press Run only when execution
+is intended.
 
-The geometry is also available as `30-two-zone-office.3dm` and `31-three-zone-stepped-office.3dm`. All action triggers are saved False.
+The geometry is also available as `30-two-zone-office.3dm` and `31-three-zone-stepped-office.3dm`. All action Buttons are saved at their resting False value.
 
 Run `./dev.cmd examples` to solve and round-trip every `.gh` and `.3dm` example in Rhino 7 and Rhino 8. Use `-SkipEnergyPlusWorkflow` to verify the explicit Not Run path. Run `./dev.cmd examples -Generate` only when deliberately refreshing the Rhino 7-authored canonical binaries.
 

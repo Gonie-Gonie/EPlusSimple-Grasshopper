@@ -14,7 +14,7 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
         : base(
             "Export SimpleDragon CSV",
             "Export CSV",
-            "Builds the deterministic SimpleDragon CSV package and writes it only when Export is true.",
+            "Builds the deterministic SimpleDragon CSV package and writes it when the Export Button is pressed.",
             SimpleDragonPanels.Results)
     {
     }
@@ -44,7 +44,7 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
         pManager.AddBooleanParameter(
             "Export",
             "E",
-            "Explicit file-write trigger. False previews content without creating a directory or files.",
+            "Connect a momentary Grasshopper Button and press it once to write; unpressed previews content without creating files.",
             GH_ParamAccess.item,
             false);
         pManager.AddBooleanParameter(

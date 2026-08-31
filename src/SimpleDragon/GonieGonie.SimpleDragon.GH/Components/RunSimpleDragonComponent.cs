@@ -77,13 +77,13 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
         pManager.AddBooleanParameter(
             "Run",
             "Run",
-            "Toggle False then True to start one run. A saved True value never runs when a document opens.",
+            "Connect a momentary Grasshopper Button and press it to start one run; do not use a Toggle for this action.",
             GH_ParamAccess.item,
             false);
         pManager.AddBooleanParameter(
             "Cancel",
             "Cancel",
-            "Toggle False then True to cancel the active run.",
+            "Connect a momentary Grasshopper Button and press it to cancel the active run.",
             GH_ParamAccess.item,
             false);
         pManager.AddBooleanParameter(
@@ -754,7 +754,7 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
         OutcomeVisibility.HiddenWhileRunning =>
             "The previous GRR is hidden while a SimpleDragon run is active. Wait for the current run to finish.",
         OutcomeVisibility.HiddenForDifferentInputs =>
-            "The previous GRR is hidden because it belongs to different inputs. Toggle Run False, then True, to evaluate the current GRM.",
+            "The previous GRR is hidden because it belongs to different inputs. Press the Run Button to evaluate the current GRM.",
         _ => null,
     };
 

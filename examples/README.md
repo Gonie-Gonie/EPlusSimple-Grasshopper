@@ -27,19 +27,21 @@ file in Grasshopper:
 .\dev.cmd install
 ```
 
-Opening an example manually is safe: Run, Cancel, Force, Export, and Overwrite
-are persisted as `False`. `Run SimpleDragon` selects and verifies the
+Opening an example manually is safe: every Run, Cancel, Write, and Export action
+is wired to a Grasshopper Button, whose resting persisted value is `False`.
+Force Rerun and Overwrite are option Toggles and are persisted as `False`.
+`Run SimpleDragon` selects and verifies the
 Address/Vintage-based packaged weather, converts the GRM, resolves the managed
 EnergyPlus runtime, and uses a system-temp work directory only after Run
-receives an explicit False-to-True edge.
+receives a momentary Button press.
 Example 02 is the complete standalone InvisibleDragon authoring-to-run graph.
 Its EPW File parameter intentionally contains no data, so `ID Weather` performs
 no path access and the definition remains a safe preview until a user chooses
-an EPW and creates a fresh Run edge. The Run, Cancel, and Force controls are
-saved False.
+an EPW and presses the Run Button. The Run and Cancel Buttons rest at False;
+the Force Rerun option Toggle is saved False.
 Example 14 is the complete SimpleDragon simulation path. It derives Seoul
-weather from the Model Address/Vintage internally: create a fresh False-to-True
-edge on Run and follow the State, Success, Diagnostics, and monthly line-graph
+weather from the Model Address/Vintage internally: press its Run Button and
+follow the State, Success, Diagnostics, and monthly line-graph
 outputs. The Run GRR is the graph's only connected input; its defaults draw
 monthly SiteUses per area, grouped by fuel, on a 12 x 6 World XY frame. Its intentionally
 simple electric-radiator HVAC keeps this full-process execution example stable;
@@ -65,8 +67,9 @@ Grasshopper document:
 SimpleDragon resolves relative GRM, GRR, and CSV paths from the folder that
 contains the saved `.gh` file, regardless of Rhino's working directory. In an
 unsaved definition, read-only GRM/GRR inputs use the current working directory,
-while GRM/GRR/CSV output paths use the system temp directory. `Export CSV` is
-held at `False`; its directory and file-content outputs are previews only, so
+while GRM/GRR/CSV output paths use the system temp directory. The `Export CSV`
+Button is unpressed and therefore rests at `False`; its directory and
+file-content outputs are previews only, so
 this example does not create the preview directory or write CSV files.
 
 The canonical `Run SimpleDragon` component exposes no InvisibleDragon model,
@@ -134,7 +137,7 @@ short-path run directory `temp/e/<token>`.
 
 For example 02, that topology check includes `ID Weather`, `Run
 InvisibleDragon`, and every compile/weather/run wire. Its deliberately data-empty
-EPW File parameter and False triggers remain no-op through solve, save, reopen,
+EPW File parameter and unpressed action Buttons remain no-op through solve, save, reopen,
 and round trip. When the required runtime gate runs, automation extracts one
 verified EPW below `temp/`, injects it only into the reopened in-memory document,
 and verifies first-run, cache, and cancellation behavior in Rhino 7 and Rhino 8.
@@ -143,8 +146,8 @@ The tracked definition remains blank and safe to open.
 When the verified distribution payloads and EnergyPlus runtime are available,
 the gate also temporarily enables example 14 in memory and verifies internal
 packaged-weather selection, its Floor/Ceiling/Wall-to-Zone electric-radiator model, direct
-SimpleDragon Run-to-GRR execution, the default monthly graph, CSV, cache, and cancellation in both hosts. All saved trigger
-values remain `False`. Use
+SimpleDragon Run-to-GRR execution, the default monthly graph, CSV, cache, and cancellation in both hosts. All saved action
+Buttons remain at their resting `False` value. Use
 `-SkipEnergyPlusWorkflow` to test the explicit disabled state or
 `-EnergyPlusRoot` to select a runtime. The gate supplies that root, its IDD, and
 an optional `-WeatherPath` test override only through internal automation
@@ -158,15 +161,15 @@ successful simulation.
 - Example 02 uses `Compile InvisibleDragon`, whose managed IDD and embedded
   EnergyPlus 24.2 execution mapping require no path input. To run it deliberately,
   select an EPW in the empty EPW File parameter, pass it through `ID Weather`,
-  and create a fresh False-to-True edge on `Run InvisibleDragon`. Use example 14 to see
+  and press the `Run InvisibleDragon` Button. Use example 14 to see
   SimpleDragon select and verify weather from Model Address/Vintage and perform
   the complete managed simulation without exposing its internal IDF or Weather.
 - Use Read GRM with `fixtures\simple-dragon\grm\ASHRAE 140 modified.grm`, then
   connect the typed model directly to `Run SimpleDragon` to simulate an existing model.
 - Wrap each model in a SimpleDragon Batch Case; its deterministic case identity
   is derived from the GRM. Feed the Cases list or tree into Managed Run
-  SimpleDragon Batch, set a parallel limit, and use only the Run/Cancel
-  triggers. The complete tree is one batch, and Case IDs/Statuses preserve its
+  SimpleDragon Batch, set a parallel limit, and connect Grasshopper Buttons to
+  its Run and Cancel action inputs. The complete tree is one batch, and Case IDs/Statuses preserve its
   paths. Runtime, weather, case temp, and result storage paths are managed
   internally.
 

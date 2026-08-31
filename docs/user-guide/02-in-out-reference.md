@@ -194,14 +194,14 @@ _This component has no inputs._
 
 **Purpose:** Runs one compiled InvisibleDragon IDF against one verified EPW and returns a typed EnergyPlus result.
 
-**How to use it:** Connect Compile InvisibleDragon to IDF and Verify InvisibleDragon Weather to Weather. Let Run solve as False once, then create a False-to-True edge; use the Result with EnergyPlus Result Summary.
+**How to use it:** Connect Compile InvisibleDragon to IDF and Verify InvisibleDragon Weather to Weather. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run; use the Result with EnergyPlus Result Summary.
 
 **Canvas location:** InvisibleDragon → Core. Exposure: `primary`.
 
 **Important caveats:**
 
 - One component accepts one data-matched simulation; use separate Run components for separate low-level cases.
-- An identical IDF, weather hash, and timeout can reuse the last result unless Force Rerun is enabled for the next Run edge.
+- An identical IDF, weather hash, and timeout can reuse the last result unless the Force Rerun option is enabled for the next Run Button press.
 - Successful work directories are cleaned after parsing; failed and cancelled runs remain under the Windows temp directory for diagnosis.
 
 **Inputs**
@@ -210,8 +210,8 @@ _This component has no inputs._
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | IDF (`IDF`) | InvisibleDragon IDF | Item | No | — | Compiled EnergyPlus IDF document. |
 | 1 | Weather (`EPW`) | InvisibleDragon Prepared Weather | Item | No | — | Verified EPW handle from ID Weather. |
-| 2 | Run (`Run`) | Boolean | Item | No | Default: `False` | Toggle False then True to start one run. A saved True value never runs when a document opens. |
-| 3 | Cancel (`Cancel`) | Boolean | Item | No | Default: `False` | Toggle False then True to cancel the active run. |
+| 2 | Run (`Run`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it to start one run; do not use a Toggle for this action. |
+| 3 | Cancel (`Cancel`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it to cancel the active run. |
 | 4 | Force Rerun (`Force`) | Boolean | Item | No | Default: `False` | Ignore the last result for identical IDF, weather, and timeout inputs. |
 | 5 | Timeout (`Min`) | Number | Item | No | Default: `30` | Positive timeout in minutes. |
 
@@ -1343,14 +1343,14 @@ _This component has no inputs._
 
 **Purpose:** Runs one complete GRM through address-selected packaged weather and module-managed EnergyPlus, returning the final typed GRR without exposing an intermediate IDF workflow.
 
-**How to use it:** Connect GRM directly from SimpleDragon Model or Read GRM, let Run solve once as False, then create a False-to-True edge. Send GRR directly to Summary, Data Tree, Plot, Write GRR, or CSV Export.
+**How to use it:** Connect GRM directly from SimpleDragon Model or Read GRM. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run. Send GRR directly to Summary, Data Tree, Plot, Write GRR, or CSV Export.
 
 **Canvas location:** SimpleDragon → Core. Exposure: `primary`.
 
 **Important caveats:**
 
 - One Run component accepts one data-matched input set; use Batch Case and Managed Batch for model lists or trees.
-- The last successful identical model/weather/timeout result is reused unless Force Rerun is True for the next Run edge.
+- The last successful identical model/weather/timeout result is reused unless the Force Rerun option is True for the next Run Button press.
 - Previous GRR output is hidden while a new run is active or after inputs change, preventing downstream consumers from mixing stale results.
 
 **Inputs**
@@ -1358,8 +1358,8 @@ _This component has no inputs._
 | # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | GRM (`GRM`) | SimpleDragon GRM | Item | No | — | Complete SimpleDragon model. Its Address and Vintage select the packaged weather internally. |
-| 1 | Run (`Run`) | Boolean | Item | No | Default: `False` | Toggle False then True to start one run. A saved True value never runs when a document opens. |
-| 2 | Cancel (`Cancel`) | Boolean | Item | No | Default: `False` | Toggle False then True to cancel the active run. |
+| 1 | Run (`Run`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it to start one run; do not use a Toggle for this action. |
+| 2 | Cancel (`Cancel`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it to cancel the active run. |
 | 3 | Force Rerun (`Force`) | Boolean | Item | No | Default: `False` | Ignore the last result for an identical GRM and timeout. |
 | 4 | Timeout (`Min`) | Number | Item | No | Default: `30` | Positive EnergyPlus timeout in minutes. |
 
@@ -2130,14 +2130,14 @@ _This component has no inputs._
 
 **Purpose:** Serializes a typed model as deterministic UTF-8 GRM 0.7 JSON for exchange, review, or versioned study records.
 
-**How to use it:** Connect GRM and a destination, inspect JSON and Full Path while Write is False, and enable Write only when the user-owned artifact should be created.
+**How to use it:** Connect GRM and a destination, inspect JSON and Full Path while the Write Button is unpressed, then press the Button once when the user-owned artifact should be created.
 
 **Canvas location:** SimpleDragon → Model. Exposure: `primary`.
 
 **Important caveats:**
 
 - Relative output paths use the saved .gh folder; unsaved definitions use the Windows temp directory.
-- Write is currently level-triggered and overwrites the target on every recompute while True, so return it to False after writing.
+- Write is internally level-sensitive, so connect a momentary Grasshopper Button rather than a Toggle; one Button pulse bounds the overwrite to the intended solution.
 
 **Inputs**
 
@@ -2145,7 +2145,7 @@ _This component has no inputs._
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | GRM (`GRM`) | SimpleDragon GRM | Item | No | — | GRM model to serialize. |
 | 1 | Path (`P`) | Text | Item | No | — | Destination .grm or JSON path. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. |
-| 2 | Write (`W`) | Boolean | Item | No | Default: `False` | Explicit write trigger. |
+| 2 | Write (`W`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it once to write. |
 
 **Outputs**
 
@@ -2165,14 +2165,14 @@ _This component has no inputs._
 
 **Purpose:** Builds a deterministic eight-file analysis package from a GRR and optionally enriches its manifest, diagnostics, and geometry provenance.
 
-**How to use it:** Connect GRR, optionally GRM, Run Diagnostics, and SimpleDragon Model's structured Geometry Map Data, then inspect File Names, Paths, and Content while Export is False. Enable Export only for a deliberate user-owned write.
+**How to use it:** Connect GRR, optionally GRM, Run Diagnostics, and SimpleDragon Model's structured Geometry Map Data, then inspect File Names, Paths, and Content while the Export Button is unpressed. Press Export once for a deliberate user-owned write.
 
 **Canvas location:** SimpleDragon → Results. Exposure: `primary`.
 
 **Important caveats:**
 
 - The package contains manifest.json, summary.csv, monthly/annual files by fuel and end use, diagnostics.csv, and geometry_map.csv; connect structured Map Data rather than the display-text map.
-- Export False is a no-write preview, while Overwrite False blocks any existing package file. Export is currently level-triggered and retries on every recompute while True.
+- An unpressed Export Button provides the no-write preview, while the Overwrite option Toggle blocks existing package files when False. Export is internally level-sensitive, so use a momentary Button rather than a Toggle.
 - File Paths describe what would be written; Written is the authoritative indication that all package files were created in that solution.
 
 **Inputs**
@@ -2184,7 +2184,7 @@ _This component has no inputs._
 | 2 | Directory (`D`) | Text | Item | No | — | Requested export directory. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. |
 | 3 | Diagnostics (`Diag`) | SimpleDragon Diagnostic | List | Yes | — | Optional diagnostics to include. |
 | 4 | Geometry Map Data (`Map`) | Generic Data | List | Yes | — | Structured GreenRetrofitGeometryMapEntry values from SimpleDragon Model. |
-| 5 | Export (`E`) | Boolean | Item | No | Default: `False` | Explicit file-write trigger. False previews content without creating a directory or files. |
+| 5 | Export (`E`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it once to write; unpressed previews content without creating files. |
 | 6 | Overwrite (`O`) | Boolean | Item | No | Default: `False` | Explicitly allow replacement of existing package files. |
 
 **Outputs**
@@ -2205,7 +2205,7 @@ _This component has no inputs._
 
 **Purpose:** Executes a branch-preserving research matrix of SimpleDragon models with managed runtime, packaged weather, caching, and result artifacts.
 
-**How to use it:** Feed a Case tree from SimpleDragon Batch Case, choose a practical Parallel Limit, let Run solve once as False, then create a False-to-True edge. Track State, Case IDs, Statuses, Combined CSV, Manifest, and Complete.
+**How to use it:** Feed a Case tree from SimpleDragon Batch Case, choose a practical Parallel Limit, and connect momentary Grasshopper Buttons to Run and Cancel. Let them solve once at rest, then press Run. Track State, Case IDs, Statuses, Combined CSV, Manifest, and Complete.
 
 **Canvas location:** SimpleDragon → Results. Exposure: `primary`.
 
@@ -2213,7 +2213,7 @@ _This component has no inputs._
 
 - Parallel Limit must be 1–1024; the default caps ordinary execution at four simultaneous cases or the processor count.
 - Case IDs and Statuses preserve the original paths, but the component outputs aggregate CSV/manifest artifacts rather than one GRR wire per case.
-- Cancel uses a rising edge and preserves already completed cases; Complete is True only when every case succeeds.
+- Pressing the Cancel Button preserves already completed cases; Complete is True only when every case succeeds.
 
 **Inputs**
 
@@ -2221,8 +2221,8 @@ _This component has no inputs._
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | Cases (`Cases`) | SimpleDragon Batch Case | Tree | No | — | Typed batch-case tree. Branches are preserved in Case IDs and Statuses; execution identity and weather are resolved within SimpleDragon. |
 | 1 | Parallel Limit (`N`) | Integer | Item | No | Default: `4` | Maximum simultaneous EnergyPlus cases. |
-| 2 | Run (`R`) | Boolean | Item | No | Default: `False` | Toggle false then true to explicitly start a batch. A saved True value does not run when a document opens. |
-| 3 | Cancel (`C`) | Boolean | Item | No | Default: `False` | Cancels the active batch while preserving completed cases. |
+| 2 | Run (`R`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it to explicitly start one batch. |
+| 3 | Cancel (`C`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it to cancel the active batch while preserving completed cases. |
 
 **Outputs**
 
@@ -2463,14 +2463,14 @@ _This component has no inputs._
 
 **Purpose:** Serializes a typed GRR as deterministic UTF-8 GRR 0.7 JSON for reproducible exchange or archival.
 
-**How to use it:** Connect GRR and a destination, inspect JSON and Full Path while Write is False, and enable Write only when the result artifact should be persisted.
+**How to use it:** Connect GRR and a destination, inspect JSON and Full Path while the Write Button is unpressed, then press the Button once when the result artifact should be persisted.
 
 **Canvas location:** SimpleDragon → Results. Exposure: `primary`.
 
 **Important caveats:**
 
 - Relative output paths use the saved .gh folder; unsaved definitions use the Windows temp directory.
-- Write is currently level-triggered and overwrites the target on every recompute while True, so return it to False after writing.
+- Write is internally level-sensitive, so connect a momentary Grasshopper Button rather than a Toggle; one Button pulse bounds the overwrite to the intended solution.
 
 **Inputs**
 
@@ -2478,7 +2478,7 @@ _This component has no inputs._
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | GRR (`GRR`) | SimpleDragon GRR | Item | No | — | GRR result to serialize. |
 | 1 | Path (`P`) | Text | Item | No | — | Destination .grr or JSON path. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. |
-| 2 | Write (`W`) | Boolean | Item | No | Default: `False` | Explicit write trigger. |
+| 2 | Write (`W`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it once to write. |
 
 **Outputs**
 

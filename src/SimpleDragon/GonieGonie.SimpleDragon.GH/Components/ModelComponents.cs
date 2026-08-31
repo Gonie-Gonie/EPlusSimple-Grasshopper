@@ -60,7 +60,7 @@ public sealed class WriteGreenRetrofitModelComponent : SimpleDragonComponent
         : base(
             "Write SimpleDragon GRM",
             "Write GRM",
-            "Writes deterministic UTF-8 GRM 0.7 JSON when Write is true.",
+            "Writes deterministic UTF-8 GRM 0.7 JSON when the Write Button is pressed.",
             SimpleDragonPanels.Model)
     {
     }
@@ -75,7 +75,7 @@ public sealed class WriteGreenRetrofitModelComponent : SimpleDragonComponent
             "P",
             "Destination .grm or JSON path. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory.",
             GH_ParamAccess.item);
-        pManager.AddBooleanParameter("Write", "W", "Explicit write trigger.", GH_ParamAccess.item, false);
+        pManager.AddBooleanParameter("Write", "W", "Connect a momentary Grasshopper Button and press it once to write.", GH_ParamAccess.item, false);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)

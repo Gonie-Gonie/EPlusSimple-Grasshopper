@@ -64,13 +64,13 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
         pManager.AddBooleanParameter(
             "Run",
             "R",
-            "Toggle false then true to explicitly start a batch. A saved True value does not run when a document opens.",
+            "Connect a momentary Grasshopper Button and press it to explicitly start one batch.",
             GH_ParamAccess.item,
             false);
         pManager.AddBooleanParameter(
             "Cancel",
             "C",
-            "Cancels the active batch while preserving completed cases.",
+            "Connect a momentary Grasshopper Button and press it to cancel the active batch while preserving completed cases.",
             GH_ParamAccess.item,
             false);
     }

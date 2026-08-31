@@ -40,9 +40,10 @@ execution example feeds that GRM directly to `Run SimpleDragon`.
 The standalone InvisibleDragon example follows the same rule: Window feeds its
 owning Surface, Surface/HVAC/ERV feed Zone, and only Zone plus model-level PV
 feed Model. It then shows `Model -> Compile -> Run` beside
-`EPW File -> ID Weather -> Run`. The EPW File parameter has no persisted data
-and Run, Cancel, and Force are False, so solve/save/reopen performs no weather
-path access and starts no simulation. The gate rejects any relationship-index
+`EPW File -> ID Weather -> Run`. The EPW File parameter has no persisted data;
+the Run and Cancel action Buttons rest at False, and the Force Rerun option
+Toggle is False, so solve/save/reopen performs no weather path access and starts
+no simulation. The gate rejects any relationship-index
 or assignment-stage graph.
 Example 12 is the complex model-authoring case with explicit Surface
 type, construction, boundary, and opening ownership, a west-Zone heat-pump/AHU,
@@ -51,7 +52,8 @@ electric radiators and ERVs on the same Surface-to-Zone structure as
 the stable execution case and connects Model directly to `Run SimpleDragon`,
 whose GRR output feeds summary and CSV components. Conversion, IDF, weather,
 EnergyPlus execution, and GRR construction remain internal. Every persisted
-execution, cancellation, overwrite, and export trigger remains false. Runtime,
+execution, cancellation, Write, and Export action uses a momentary Button that
+rests at False; Overwrite remains a disabled option Toggle. Runtime,
 IDD, weather-cache, and run-temp paths are implementation-owned and never appear
 on the canonical canvas or in its manifest description.
 Building-model checks cover metre units, layers, object names and ownership user

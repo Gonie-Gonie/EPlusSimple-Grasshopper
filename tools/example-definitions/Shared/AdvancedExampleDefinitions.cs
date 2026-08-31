@@ -18,6 +18,13 @@ internal static class AdvancedExampleDefinitions
     private static readonly string[] CsvLineSeparators = { "\r\n", "\n", "\r" };
     private static readonly string[] SurfaceBoundaryChoices = { "Outdoors", "Ground", "Adiabatic" };
     private static readonly string[] InvisiblePlainWallNames = { "North Wall", "West Wall", "East Wall" };
+    private static readonly HashSet<string> MomentaryActionInputNames = new(StringComparer.Ordinal)
+    {
+        "Run",
+        "Cancel",
+        "Export",
+        "Write",
+    };
 
     private static readonly AdvancedDefinition[] Definitions =
     {
@@ -375,8 +382,8 @@ internal static class AdvancedExampleDefinitions
         GraphNode weather = graph.Component(84, Catalog.InvisibleWeather, 2120, 1380);
         GraphNode weatherSuccess = graph.Panel(85, "Weather verified", string.Empty, 2400, 1400);
         GraphNode weatherDiagnostics = graph.Panel(86, "Weather diagnostics", string.Empty, 2400, 1530);
-        GraphNode runTrigger = graph.Boolean(87, "Run - explicit rising edge", false, 2480, 760);
-        GraphNode cancelTrigger = graph.Boolean(88, "Cancel active run", false, 2480, 840);
+        GraphNode runTrigger = graph.Button(87, "Run", 2480, 760);
+        GraphNode cancelTrigger = graph.Button(88, "Cancel", 2480, 840);
         GraphNode forceRerun = graph.Boolean(89, "Force rerun", false, 2480, 920);
         GraphNode timeout = graph.Slider(90, "Run timeout 30 min", 30m, 1m, 120m, 2480, 1000);
         GraphNode run = graph.Component(91, Catalog.InvisibleManagedRun, 2800, 850);
@@ -446,7 +453,7 @@ internal static class AdvancedExampleDefinitions
             1300);
         GraphNode runNote = graph.Note(
             806,
-            "Set Run to True for a rising edge. Cancel, force-rerun and timeout remain optional controls.",
+            "Press Run to start. Cancel is also a momentary button; force-rerun and timeout remain persistent options.",
             2460,
             690);
         graph.Group(
@@ -953,8 +960,8 @@ internal static class AdvancedExampleDefinitions
                 map,
                 area);
 
-            GraphNode runTrigger = graph.Boolean(103, "Run - explicit rising edge", false, 2500, 1700);
-            GraphNode cancelTrigger = graph.Boolean(104, "Cancel active run", false, 2500, 1780);
+            GraphNode runTrigger = graph.Button(103, "Run", 2500, 1700);
+            GraphNode cancelTrigger = graph.Button(104, "Cancel", 2500, 1780);
             GraphNode forceRerun = graph.Boolean(105, "Force rerun", false, 2500, 1860);
             GraphNode timeout = graph.Slider(107, "Run timeout 2 min", 2m, 1m, 30m, 2500, 1940);
             GraphNode run = graph.Component(110, Catalog.SimpleRun, 2850, 1780);
@@ -972,7 +979,7 @@ internal static class AdvancedExampleDefinitions
                 @"..\temp\example-preview\run-results-csv",
                 3200,
                 2520);
-            GraphNode exportTrigger = graph.Boolean(116, "Export CSV", false, 3200, 2700);
+            GraphNode exportTrigger = graph.Button(116, "Export CSV", 3200, 2700);
             GraphNode overwrite = graph.Boolean(117, "Overwrite CSV", false, 3200, 2780);
             GraphNode exportCsv = graph.Component(118, Catalog.SimpleExportCsv, 3550, 2550);
             graph.Connect(run, 0, resultSummary, 0);
@@ -1002,8 +1009,8 @@ internal static class AdvancedExampleDefinitions
 
             GraphNode batchCase = graph.Component(141, Catalog.SimpleBatchCase, 2850, 3020);
             GraphNode batchParallel = graph.Slider(142, "Batch parallel limit", 1m, 1m, 16m, 2850, 3170);
-            GraphNode batchRun = graph.Boolean(143, "Run batch", false, 2850, 3250);
-            GraphNode batchCancel = graph.Boolean(144, "Cancel batch", false, 2850, 3330);
+            GraphNode batchRun = graph.Button(143, "Run batch", 2850, 3250);
+            GraphNode batchCancel = graph.Button(144, "Cancel batch", 2850, 3330);
             GraphNode managedBatch = graph.Component(145, Catalog.SimpleManagedBatch, 3200, 3110);
             GraphNode batchState = graph.Panel(146, "Managed batch state", string.Empty, 3550, 3070);
             GraphNode batchComplete = graph.Panel(147, "Managed batch complete", string.Empty, 3550, 3230);
@@ -1026,7 +1033,7 @@ internal static class AdvancedExampleDefinitions
 
             GraphNode runNote = graph.Note(
                 804,
-                "SimpleDragon resolves EnergyPlus and weather internally; toggle Run for a rising edge.",
+                "SimpleDragon resolves EnergyPlus and weather internally; press the Run Button to start.",
                 2480,
                 1630);
             GraphNode resultsNote = graph.Note(
@@ -1036,12 +1043,12 @@ internal static class AdvancedExampleDefinitions
                 1020);
             GraphNode csvNote = graph.Note(
                 806,
-                "CSV export is optional; choose a temporary directory and toggle Export CSV.",
+                "CSV export is optional; choose a temporary directory and press the Export CSV Button.",
                 3180,
                 2440);
             GraphNode batchNote = graph.Note(
                 807,
-                "The same model can become a managed batch case with explicit run and cancel controls.",
+                "The same model can become a managed batch case with explicit Run and Cancel Buttons.",
                 2830,
                 2940);
             graph.Group(
@@ -1265,6 +1272,7 @@ internal static class AdvancedExampleDefinitions
             @"..\temp\example-preview\simpledragon-csv",
             390,
             1330);
+        GraphNode exportTrigger = graph.Button(9, "Export CSV", 390, 1430);
         GraphNode annual = graph.Panel(10, "Annual site use", string.Empty, 1160, 70);
         GraphNode monthly = graph.Panel(11, "Monthly data tree", string.Empty, 1160, 330);
         GraphNode lines = graph.Panel(12, "Line plot curves", string.Empty, 1160, 710);
@@ -1277,6 +1285,7 @@ internal static class AdvancedExampleDefinitions
         }
 
         graph.Connect(exportDirectory, null, export, 2);
+        graph.Connect(exportTrigger, null, export, 5);
         graph.Connect(summary, 1, annual, null);
         graph.Connect(dataTree, 3, monthly, null);
         graph.Connect(linePlot, 0, lines, null);
@@ -1314,7 +1323,7 @@ internal static class AdvancedExampleDefinitions
             500);
         GraphNode csvNote = graph.Note(
             803,
-            "CSV export writes only when explicitly triggered; this example previews the target package.",
+            "Press Export CSV to write the previewed package; Overwrite remains off unless supplied explicitly.",
             360,
             1160);
         graph.Group(
@@ -1348,6 +1357,7 @@ internal static class AdvancedExampleDefinitions
             ExampleGroupTheme.Results,
             csvNote,
             exportDirectory,
+            exportTrigger,
             export,
             csvFiles);
         return graph.Build(
@@ -1371,6 +1381,13 @@ internal static class AdvancedExampleDefinitions
             Require(
                 string.Equals(actual.GetType().FullName, expected.TypeName, StringComparison.Ordinal),
                 expected.InstanceGuid + " reopened as " + actual.GetType().FullName + " instead of " + expected.TypeName + ".");
+            if (actual is GH_ButtonObject button)
+            {
+                Require(
+                    !button.ButtonDown,
+                    expected.InstanceGuid + " momentary action button was saved in its pressed state.");
+            }
+
             if (actual is not GH_Group)
             {
                 Require(
@@ -1388,6 +1405,8 @@ internal static class AdvancedExampleDefinitions
                     expected.InstanceGuid + " component identity changed.");
             }
         }
+
+        RequireMomentaryActionButtons(document);
 
         foreach (NoteExpectation expected in graph.Notes)
         {
@@ -1659,15 +1678,15 @@ internal static class AdvancedExampleDefinitions
         bool exercise)
     {
         RequireEmptyFilePath(document, expectation.WeatherPathGuid);
-        RequirePersistentBoolean(document, expectation.RunTriggerGuid, false);
-        RequirePersistentBoolean(document, expectation.CancelTriggerGuid, false);
+        RequireButtonReleased(document, expectation.RunTriggerGuid);
+        RequireButtonReleased(document, expectation.CancelTriggerGuid);
         RequirePersistentBoolean(document, expectation.ForceRerunGuid, false);
 
         if (!exercise)
         {
             return NotExecutedRuntime(
                 "deferred",
-                "The saved InvisibleDragon workflow, blank EPW input, and safe False triggers were validated; runtime exercise is deferred to the final reopened document.");
+                "The saved InvisibleDragon workflow, blank EPW input, released action buttons, and disabled Force Rerun option were validated; runtime exercise is deferred to the final reopened document.");
         }
 
         if (!inputs.CanRunEnergyPlusWorkflow)
@@ -1688,8 +1707,8 @@ internal static class AdvancedExampleDefinitions
         try
         {
             SetFilePath(document, expectation.WeatherPathGuid, weatherPath);
-            SetBoolean(document, expectation.RunTriggerGuid, false);
-            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetButtonDown(document, expectation.RunTriggerGuid, false);
+            SetButtonDown(document, expectation.CancelTriggerGuid, false);
             SetBoolean(document, expectation.ForceRerunGuid, false);
             Solve(document);
             Require(
@@ -1711,7 +1730,7 @@ internal static class AdvancedExampleDefinitions
                 "Compile InvisibleDragon did not report a valid managed IDF. "
                     + RuntimeMessages(document, expectation.CompileComponentGuid));
 
-            SetBoolean(document, expectation.RunTriggerGuid, true);
+            SetButtonDown(document, expectation.RunTriggerGuid, true);
             Solve(document);
             string firstRunState = WaitForTerminalState(
                 document,
@@ -1724,7 +1743,7 @@ internal static class AdvancedExampleDefinitions
                 "Failed",
                 "Cancelled",
                 "TimedOut");
-            SetBoolean(document, expectation.RunTriggerGuid, false);
+            SetButtonDown(document, expectation.RunTriggerGuid, false);
             Solve(document);
             Require(
                 string.Equals(firstRunState, "Succeeded", StringComparison.Ordinal),
@@ -1739,7 +1758,7 @@ internal static class AdvancedExampleDefinitions
                 0,
                 "GonieGonie.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo");
 
-            SetBoolean(document, expectation.RunTriggerGuid, true);
+            SetButtonDown(document, expectation.RunTriggerGuid, true);
             Solve(document);
             string cachedRunState = WaitForTerminalState(
                 document,
@@ -1753,7 +1772,7 @@ internal static class AdvancedExampleDefinitions
                 "Failed",
                 "Cancelled",
                 "TimedOut");
-            SetBoolean(document, expectation.RunTriggerGuid, false);
+            SetButtonDown(document, expectation.RunTriggerGuid, false);
             Solve(document);
             Require(
                 string.Equals(cachedRunState, "Cached", StringComparison.Ordinal),
@@ -1765,9 +1784,9 @@ internal static class AdvancedExampleDefinitions
 
             SetBoolean(document, expectation.ForceRerunGuid, true);
             Solve(document);
-            SetBoolean(document, expectation.RunTriggerGuid, true);
+            SetButtonDown(document, expectation.RunTriggerGuid, true);
             Solve(document);
-            SetBoolean(document, expectation.CancelTriggerGuid, true);
+            SetButtonDown(document, expectation.CancelTriggerGuid, true);
             Solve(document);
             string cancellationState = WaitForTerminalState(
                 document,
@@ -1825,19 +1844,19 @@ internal static class AdvancedExampleDefinitions
         ExampleHostInputs inputs,
         bool exercise)
     {
-        RequirePersistentBoolean(document, expectation.RunTriggerGuid, false);
-        RequirePersistentBoolean(document, expectation.CancelTriggerGuid, false);
+        RequireButtonReleased(document, expectation.RunTriggerGuid);
+        RequireButtonReleased(document, expectation.CancelTriggerGuid);
         RequirePersistentBoolean(document, expectation.ForceRerunGuid, false);
-        RequirePersistentBoolean(document, expectation.ExportTriggerGuid, false);
+        RequireButtonReleased(document, expectation.ExportTriggerGuid);
         RequirePersistentBoolean(document, expectation.OverwriteGuid, false);
-        RequirePersistentBoolean(document, expectation.BatchRunTriggerGuid, false);
-        RequirePersistentBoolean(document, expectation.BatchCancelTriggerGuid, false);
+        RequireButtonReleased(document, expectation.BatchRunTriggerGuid);
+        RequireButtonReleased(document, expectation.BatchCancelTriggerGuid);
 
         if (!exercise)
         {
             return NotExecutedRuntime(
                 "deferred",
-                "The saved workflow and safe False triggers were validated; runtime exercise is deferred to the final reopened document.");
+                "The saved workflow, released action buttons, and disabled persistent options were validated; runtime exercise is deferred to the final reopened document.");
         }
 
         if (!inputs.CanRunEnergyPlusWorkflow)
@@ -1856,14 +1875,14 @@ internal static class AdvancedExampleDefinitions
         try
         {
             SetPanel(document, expectation.ExportDirectoryGuid, csvRoot);
-            SetBoolean(document, expectation.RunTriggerGuid, false);
-            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetButtonDown(document, expectation.RunTriggerGuid, false);
+            SetButtonDown(document, expectation.CancelTriggerGuid, false);
             SetBoolean(document, expectation.ForceRerunGuid, false);
-            SetBoolean(document, expectation.ExportTriggerGuid, false);
+            SetButtonDown(document, expectation.ExportTriggerGuid, false);
             SetBoolean(document, expectation.OverwriteGuid, false);
             Solve(document);
 
-            SetBoolean(document, expectation.RunTriggerGuid, true);
+            SetButtonDown(document, expectation.RunTriggerGuid, true);
             Solve(document);
             string firstRunState = WaitForTerminalState(
                 document,
@@ -1875,7 +1894,7 @@ internal static class AdvancedExampleDefinitions
                 "Succeeded",
                 "Failed",
                 "Cancelled");
-            SetBoolean(document, expectation.RunTriggerGuid, false);
+            SetButtonDown(document, expectation.RunTriggerGuid, false);
             Solve(document);
             Require(
                 string.Equals(firstRunState, "Succeeded", StringComparison.Ordinal),
@@ -1929,7 +1948,7 @@ internal static class AdvancedExampleDefinitions
                 "The zero-configuration monthly plot reported errors: " + string.Join(" | ", plotErrors));
 
             SetBoolean(document, expectation.OverwriteGuid, true);
-            SetBoolean(document, expectation.ExportTriggerGuid, true);
+            SetButtonDown(document, expectation.ExportTriggerGuid, true);
             Solve(document);
             Require(
                 ReadBoolean(document, expectation.ExportCsvGuid, 4),
@@ -1983,13 +2002,13 @@ internal static class AdvancedExampleDefinitions
                 csvContents.Any(content => content.Contains("goniegonie-simpledragon-csv-export.v2")
                     && content.Contains(csvCaseId)),
                 "The CSV package manifest does not preserve its model-derived case ID.");
-            SetBoolean(document, expectation.ExportTriggerGuid, false);
+            SetButtonDown(document, expectation.ExportTriggerGuid, false);
             SetBoolean(document, expectation.OverwriteGuid, false);
             Solve(document);
 
-            SetBoolean(document, expectation.RunTriggerGuid, false);
+            SetButtonDown(document, expectation.RunTriggerGuid, false);
             Solve(document);
-            SetBoolean(document, expectation.RunTriggerGuid, true);
+            SetButtonDown(document, expectation.RunTriggerGuid, true);
             Solve(document);
             string cachedRunState = WaitForTerminalState(
                 document,
@@ -2002,7 +2021,7 @@ internal static class AdvancedExampleDefinitions
                 "Succeeded",
                 "Failed",
                 "Cancelled");
-            SetBoolean(document, expectation.RunTriggerGuid, false);
+            SetButtonDown(document, expectation.RunTriggerGuid, false);
             Solve(document);
             Require(
                 string.Equals(cachedRunState, "Cached", StringComparison.Ordinal),
@@ -2016,9 +2035,9 @@ internal static class AdvancedExampleDefinitions
 
             SetBoolean(document, expectation.ForceRerunGuid, true);
             Solve(document);
-            SetBoolean(document, expectation.RunTriggerGuid, true);
+            SetButtonDown(document, expectation.RunTriggerGuid, true);
             Solve(document);
-            SetBoolean(document, expectation.CancelTriggerGuid, true);
+            SetButtonDown(document, expectation.CancelTriggerGuid, true);
             Solve(document);
             string cancellationState = WaitForTerminalState(
                 document,
@@ -2037,8 +2056,8 @@ internal static class AdvancedExampleDefinitions
             Require(
                 !ReadBoolean(document, expectation.RunComponentGuid, 2),
                 "A cancelled SimpleDragon run incorrectly reported success.");
-            SetBoolean(document, expectation.RunTriggerGuid, false);
-            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetButtonDown(document, expectation.RunTriggerGuid, false);
+            SetButtonDown(document, expectation.CancelTriggerGuid, false);
             SetBoolean(document, expectation.ForceRerunGuid, false);
             Solve(document);
 
@@ -2048,7 +2067,7 @@ internal static class AdvancedExampleDefinitions
                 expectation.BatchModelNameGuid,
                 "Two-Zone Office Runtime " + Guid.NewGuid().ToString("N"));
             Solve(document);
-            SetBoolean(document, expectation.BatchRunTriggerGuid, true);
+            SetButtonDown(document, expectation.BatchRunTriggerGuid, true);
             Solve(document);
             string firstBatchState = WaitForTerminalState(
                 document,
@@ -2061,7 +2080,7 @@ internal static class AdvancedExampleDefinitions
                 "Failed",
                 "Cancelled",
                 "Completed With Failures");
-            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+            SetButtonDown(document, expectation.BatchRunTriggerGuid, false);
             Solve(document);
             Require(
                 string.Equals(firstBatchState, "Succeeded", StringComparison.Ordinal),
@@ -2095,7 +2114,7 @@ internal static class AdvancedExampleDefinitions
                     && manifestContent.Contains("\"status\": \"succeeded\""),
                 "The SimpleDragon batch manifest does not contain its schema and successful case.");
 
-            SetBoolean(document, expectation.BatchRunTriggerGuid, true);
+            SetButtonDown(document, expectation.BatchRunTriggerGuid, true);
             Solve(document);
             string cachedBatchState = WaitForTerminalState(
                 document,
@@ -2108,7 +2127,7 @@ internal static class AdvancedExampleDefinitions
                 "Failed",
                 "Cancelled",
                 "Completed With Failures");
-            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
+            SetButtonDown(document, expectation.BatchRunTriggerGuid, false);
             Solve(document);
             Require(
                 string.Equals(cachedBatchState, "Succeeded", StringComparison.Ordinal),
@@ -2127,10 +2146,10 @@ internal static class AdvancedExampleDefinitions
                 document,
                 expectation.BatchModelNameGuid,
                 "Two-Zone Office Cancellation " + Guid.NewGuid().ToString("N"));
-            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
-            SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+            SetButtonDown(document, expectation.BatchRunTriggerGuid, false);
+            SetButtonDown(document, expectation.BatchCancelTriggerGuid, false);
             Solve(document);
-            SetBoolean(document, expectation.BatchRunTriggerGuid, true);
+            SetButtonDown(document, expectation.BatchRunTriggerGuid, true);
             Solve(document);
             string batchStartState = WaitForState(
                 document,
@@ -2146,7 +2165,7 @@ internal static class AdvancedExampleDefinitions
             Require(
                 string.Equals(batchStartState, "Running", StringComparison.Ordinal),
                 "The batch cancellation exercise reached " + batchStartState + " before cancellation could be requested.");
-            SetBoolean(document, expectation.BatchCancelTriggerGuid, true);
+            SetButtonDown(document, expectation.BatchCancelTriggerGuid, true);
             Solve(document);
             string batchCancellationState = WaitForTerminalState(
                 document,
@@ -2159,8 +2178,8 @@ internal static class AdvancedExampleDefinitions
                 "Succeeded",
                 "Failed",
                 "Completed With Failures");
-            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
-            SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+            SetButtonDown(document, expectation.BatchRunTriggerGuid, false);
+            SetButtonDown(document, expectation.BatchCancelTriggerGuid, false);
             Solve(document);
             Require(
                 string.Equals(batchCancellationState, "Cancelled", StringComparison.Ordinal),
@@ -2386,13 +2405,13 @@ internal static class AdvancedExampleDefinitions
         TimeSpan drainTimeout = TimeSpan.FromSeconds(Math.Max(5, Math.Min(30, workflowTimeout.TotalSeconds)));
         try
         {
-            SetBoolean(document, expectation.RunTriggerGuid, false);
-            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetButtonDown(document, expectation.RunTriggerGuid, false);
+            SetButtonDown(document, expectation.CancelTriggerGuid, false);
             SetBoolean(document, expectation.ForceRerunGuid, false);
-            SetBoolean(document, expectation.ExportTriggerGuid, false);
+            SetButtonDown(document, expectation.ExportTriggerGuid, false);
             SetBoolean(document, expectation.OverwriteGuid, false);
-            SetBoolean(document, expectation.BatchRunTriggerGuid, false);
-            SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+            SetButtonDown(document, expectation.BatchRunTriggerGuid, false);
+            SetButtonDown(document, expectation.BatchCancelTriggerGuid, false);
 
             Solve(document);
 
@@ -2410,12 +2429,12 @@ internal static class AdvancedExampleDefinitions
                 "_state");
             if (run.HasActiveTask)
             {
-                SetBoolean(document, expectation.CancelTriggerGuid, true);
+                SetButtonDown(document, expectation.CancelTriggerGuid, true);
             }
 
             if (batch.HasActiveTask)
             {
-                SetBoolean(document, expectation.BatchCancelTriggerGuid, true);
+                SetButtonDown(document, expectation.BatchCancelTriggerGuid, true);
             }
 
             if (run.HasActiveTask || batch.HasActiveTask)
@@ -2461,13 +2480,13 @@ internal static class AdvancedExampleDefinitions
         {
             try
             {
-                SetBoolean(document, expectation.RunTriggerGuid, false);
-                SetBoolean(document, expectation.CancelTriggerGuid, false);
+                SetButtonDown(document, expectation.RunTriggerGuid, false);
+                SetButtonDown(document, expectation.CancelTriggerGuid, false);
                 SetBoolean(document, expectation.ForceRerunGuid, false);
-                SetBoolean(document, expectation.ExportTriggerGuid, false);
+                SetButtonDown(document, expectation.ExportTriggerGuid, false);
                 SetBoolean(document, expectation.OverwriteGuid, false);
-                SetBoolean(document, expectation.BatchRunTriggerGuid, false);
-                SetBoolean(document, expectation.BatchCancelTriggerGuid, false);
+                SetButtonDown(document, expectation.BatchRunTriggerGuid, false);
+                SetButtonDown(document, expectation.BatchCancelTriggerGuid, false);
 
                 Solve(document);
             }
@@ -2486,8 +2505,8 @@ internal static class AdvancedExampleDefinitions
         TimeSpan drainTimeout = TimeSpan.FromSeconds(Math.Max(5, Math.Min(30, workflowTimeout.TotalSeconds)));
         try
         {
-            SetBoolean(document, expectation.RunTriggerGuid, false);
-            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetButtonDown(document, expectation.RunTriggerGuid, false);
+            SetButtonDown(document, expectation.CancelTriggerGuid, false);
             SetBoolean(document, expectation.ForceRerunGuid, false);
             Solve(document);
 
@@ -2499,7 +2518,7 @@ internal static class AdvancedExampleDefinitions
                 "_state");
             if (run.HasActiveTask)
             {
-                SetBoolean(document, expectation.CancelTriggerGuid, true);
+                SetButtonDown(document, expectation.CancelTriggerGuid, true);
                 Solve(document);
                 var stopwatch = Stopwatch.StartNew();
                 while (stopwatch.Elapsed < drainTimeout)
@@ -2527,8 +2546,8 @@ internal static class AdvancedExampleDefinitions
                 }
             }
 
-            SetBoolean(document, expectation.RunTriggerGuid, false);
-            SetBoolean(document, expectation.CancelTriggerGuid, false);
+            SetButtonDown(document, expectation.RunTriggerGuid, false);
+            SetButtonDown(document, expectation.CancelTriggerGuid, false);
             SetBoolean(document, expectation.ForceRerunGuid, false);
             SetFilePath(document, expectation.WeatherPathGuid, null);
             Solve(document);
@@ -2755,6 +2774,36 @@ internal static class AdvancedExampleDefinitions
         parameter.PersistentData.Clear();
         parameter.PersistentData.Append(new GH_Boolean(value));
         parameter.ExpireSolution(false);
+    }
+
+    private static void SetButtonDown(GH_Document document, Guid instanceGuid, bool value)
+    {
+        GH_ButtonObject button = RequireObject<GH_ButtonObject>(document, instanceGuid);
+        button.ButtonDown = value;
+        button.ExpireSolution(false);
+    }
+
+    private static void RequireButtonReleased(GH_Document document, Guid instanceGuid)
+    {
+        GH_ButtonObject button = RequireObject<GH_ButtonObject>(document, instanceGuid);
+        Require(
+            !button.ButtonDown,
+            instanceGuid + " momentary action button must be saved in its released state.");
+    }
+
+    private static void RequireMomentaryActionButtons(GH_Document document)
+    {
+        foreach (GH_Component component in document.Objects.OfType<GH_Component>())
+        {
+            foreach (IGH_Param input in component.Params.Input
+                .Where(input => MomentaryActionInputNames.Contains(input.Name)))
+            {
+                Require(
+                    input.SourceCount == 1 && input.Sources.Single() is GH_ButtonObject,
+                    component.Name + " input " + input.Name
+                        + " is a momentary action and must be driven by exactly one Grasshopper Button.");
+            }
+        }
     }
 
     private static void RequirePersistentBoolean(GH_Document document, Guid instanceGuid, bool expected)
@@ -3430,6 +3479,16 @@ internal sealed class ScenarioGraphBuilder
         var parameter = new Param_Boolean { NickName = nickName };
         parameter.PersistentData.Append(new GH_Boolean(value));
         return AddSpecial(key, parameter, x, y);
+    }
+
+    internal GraphNode Button(int key, string nickName, float x, float y)
+    {
+        var button = new GH_ButtonObject
+        {
+            NickName = nickName,
+            ButtonDown = false,
+        };
+        return AddSpecial(key, button, x, y);
     }
 
     internal GraphNode FilePath(int key, string nickName, string value, float x, float y)

@@ -15,9 +15,10 @@ This usually indicates mixed shared assemblies. Close Rhino, remove both install
 ## EnergyPlus is not found
 
 Use `Run SimpleDragon`; no To-IDF, Weather, InvisibleDragon Run, or separate
-Prepare Runtime component is needed. Toggle Run False, allow one Grasshopper
-solution, then toggle True. The component verifies the per-user cache and asks
-the internal execution layer to prepare the pinned runtime when needed.
+Prepare Runtime component is needed. Connect a Grasshopper Button to Run, let
+the definition solve once with the Button unpressed, and press it once. The
+component verifies the per-user cache and asks the internal execution layer to
+prepare the pinned runtime when needed.
 
 For deliberate standalone InvisibleDragon execution, connect
 `ID Model -> Compile InvisibleDragon -> Run InvisibleDragon` and
@@ -28,11 +29,11 @@ If it still fails, inspect the structured diagnostics. For a source checkout, ru
 
 ## An action stays idle
 
-For Run, Cancel, and Managed Batch, this is expected when a saved Boolean is
-already True. Set it False, allow one solution, then set it True. Write GRM,
-Write GRR, and Export CSV are currently level-triggered instead: they attempt
-the action on each solution while True, so return them to False immediately
-after writing.
+Every action input should be driven by a momentary Grasshopper Button, not a
+Toggle: Run, Cancel, Managed Batch Run/Cancel, Write GRM, Write GRR, and Export
+CSV. Let the definition solve once with a newly connected Button at rest, then
+press it. Force Rerun and Overwrite are persistent option Toggles; changing
+either one alone does not launch an action.
 
 ## The simulation has no weather
 

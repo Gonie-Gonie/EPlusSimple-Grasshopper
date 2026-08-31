@@ -98,13 +98,15 @@ green headless build by itself is not a release attestation.
 
 ### Execution and file-control behavior
 
-- `Run`, `Cancel`, and managed Batch Run/Cancel require a new False-to-True
-  edge. A saved True is only a baseline and does not launch work when a
-  Grasshopper document opens.
-- `Force Rerun` is an option for the next Run edge, not a trigger by itself.
-- `Write GRM`, `Write GRR`, and `Export CSV` are level-gated: while True, each
-  new solution may write. Users should reset them to False after the intended
-  operation.
+- `Run`, `Cancel`, managed Batch Run/Cancel, `Write GRM`, `Write GRR`, and
+  `Export CSV` are action inputs intended for momentary Grasshopper Buttons.
+  The tracked examples wire every such input to a Button at its resting False
+  value, so opening a document cannot launch work or write files.
+- `Force Rerun` and `Overwrite` are persistent option Toggles. They do not
+  launch an action by themselves.
+- Write and Export inputs are internally level-sensitive; the required Button
+  pulse prevents an accidentally enabled Toggle from writing again on later
+  solutions.
 - SimpleDragon optional capacity inputs use a disconnected port for
   autosize/unset. Zero remains a real value unless a specific input explicitly
   documents `0 means autosize`.

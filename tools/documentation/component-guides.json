@@ -57,10 +57,10 @@
     "GonieGonie.InvisibleDragon.Grasshopper.Components.ManagedRunEnergyPlusComponent": {
       "role": "Trigger",
       "purpose": "Runs one compiled InvisibleDragon IDF against one verified EPW and returns a typed EnergyPlus result.",
-      "workflow": "Connect Compile InvisibleDragon to IDF and Verify InvisibleDragon Weather to Weather. Let Run solve as False once, then create a False-to-True edge; use the Result with EnergyPlus Result Summary.",
+      "workflow": "Connect Compile InvisibleDragon to IDF and Verify InvisibleDragon Weather to Weather. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run; use the Result with EnergyPlus Result Summary.",
       "caveats": [
         "One component accepts one data-matched simulation; use separate Run components for separate low-level cases.",
-        "An identical IDF, weather hash, and timeout can reuse the last result unless Force Rerun is enabled for the next Run edge.",
+        "An identical IDF, weather hash, and timeout can reuse the last result unless the Force Rerun option is enabled for the next Run Button press.",
         "Successful work directories are cleaned after parsing; failed and cancelled runs remain under the Windows temp directory for diagnosis."
       ]
     },
@@ -454,10 +454,10 @@
     "GonieGonie.SimpleDragon.Grasshopper.Components.WriteGreenRetrofitModelComponent": {
       "role": "Utility",
       "purpose": "Serializes a typed model as deterministic UTF-8 GRM 0.7 JSON for exchange, review, or versioned study records.",
-      "workflow": "Connect GRM and a destination, inspect JSON and Full Path while Write is False, and enable Write only when the user-owned artifact should be created.",
+      "workflow": "Connect GRM and a destination, inspect JSON and Full Path while the Write Button is unpressed, then press the Button once when the user-owned artifact should be created.",
       "caveats": [
         "Relative output paths use the saved .gh folder; unsaved definitions use the Windows temp directory.",
-        "Write is currently level-triggered and overwrites the target on every recompute while True, so return it to False after writing."
+        "Write is internally level-sensitive, so connect a momentary Grasshopper Button rather than a Toggle; one Button pulse bounds the overwrite to the intended solution."
       ]
     },
     "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonHeatPumpComponent": {
@@ -598,10 +598,10 @@
     "GonieGonie.SimpleDragon.Grasshopper.Components.RunSimpleDragonComponent": {
       "role": "Trigger",
       "purpose": "Runs one complete GRM through address-selected packaged weather and module-managed EnergyPlus, returning the final typed GRR without exposing an intermediate IDF workflow.",
-      "workflow": "Connect GRM directly from SimpleDragon Model or Read GRM, let Run solve once as False, then create a False-to-True edge. Send GRR directly to Summary, Data Tree, Plot, Write GRR, or CSV Export.",
+      "workflow": "Connect GRM directly from SimpleDragon Model or Read GRM. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run. Send GRR directly to Summary, Data Tree, Plot, Write GRR, or CSV Export.",
       "caveats": [
         "One Run component accepts one data-matched input set; use Batch Case and Managed Batch for model lists or trees.",
-        "The last successful identical model/weather/timeout result is reused unless Force Rerun is True for the next Run edge.",
+        "The last successful identical model/weather/timeout result is reused unless the Force Rerun option is True for the next Run Button press.",
         "Previous GRR output is hidden while a new run is active or after inputs change, preventing downstream consumers from mixing stale results."
       ]
     },
@@ -617,10 +617,10 @@
     "GonieGonie.SimpleDragon.Grasshopper.Components.WriteGreenRetrofitResultComponent": {
       "role": "Result",
       "purpose": "Serializes a typed GRR as deterministic UTF-8 GRR 0.7 JSON for reproducible exchange or archival.",
-      "workflow": "Connect GRR and a destination, inspect JSON and Full Path while Write is False, and enable Write only when the result artifact should be persisted.",
+      "workflow": "Connect GRR and a destination, inspect JSON and Full Path while the Write Button is unpressed, then press the Button once when the result artifact should be persisted.",
       "caveats": [
         "Relative output paths use the saved .gh folder; unsaved definitions use the Windows temp directory.",
-        "Write is currently level-triggered and overwrites the target on every recompute while True, so return it to False after writing."
+        "Write is internally level-sensitive, so connect a momentary Grasshopper Button rather than a Toggle; one Button pulse bounds the overwrite to the intended solution."
       ]
     },
     "GonieGonie.SimpleDragon.Grasshopper.Components.GreenRetrofitResultSummaryComponent": {
@@ -662,10 +662,10 @@
     "GonieGonie.SimpleDragon.Grasshopper.Components.ExportGreenRetrofitCsvComponent": {
       "role": "Result",
       "purpose": "Builds a deterministic eight-file analysis package from a GRR and optionally enriches its manifest, diagnostics, and geometry provenance.",
-      "workflow": "Connect GRR, optionally GRM, Run Diagnostics, and SimpleDragon Model's structured Geometry Map Data, then inspect File Names, Paths, and Content while Export is False. Enable Export only for a deliberate user-owned write.",
+      "workflow": "Connect GRR, optionally GRM, Run Diagnostics, and SimpleDragon Model's structured Geometry Map Data, then inspect File Names, Paths, and Content while the Export Button is unpressed. Press Export once for a deliberate user-owned write.",
       "caveats": [
         "The package contains manifest.json, summary.csv, monthly/annual files by fuel and end use, diagnostics.csv, and geometry_map.csv; connect structured Map Data rather than the display-text map.",
-        "Export False is a no-write preview, while Overwrite False blocks any existing package file. Export is currently level-triggered and retries on every recompute while True.",
+        "An unpressed Export Button provides the no-write preview, while the Overwrite option Toggle blocks existing package files when False. Export is internally level-sensitive, so use a momentary Button rather than a Toggle.",
         "File Paths describe what would be written; Written is the authoritative indication that all package files were created in that solution."
       ]
     },
@@ -681,11 +681,11 @@
     "GonieGonie.SimpleDragon.Grasshopper.Components.ManagedRunSimpleDragonBatchComponent": {
       "role": "Trigger",
       "purpose": "Executes a branch-preserving research matrix of SimpleDragon models with managed runtime, packaged weather, caching, and result artifacts.",
-      "workflow": "Feed a Case tree from SimpleDragon Batch Case, choose a practical Parallel Limit, let Run solve once as False, then create a False-to-True edge. Track State, Case IDs, Statuses, Combined CSV, Manifest, and Complete.",
+      "workflow": "Feed a Case tree from SimpleDragon Batch Case, choose a practical Parallel Limit, and connect momentary Grasshopper Buttons to Run and Cancel. Let them solve once at rest, then press Run. Track State, Case IDs, Statuses, Combined CSV, Manifest, and Complete.",
       "caveats": [
         "Parallel Limit must be 1–1024; the default caps ordinary execution at four simultaneous cases or the processor count.",
         "Case IDs and Statuses preserve the original paths, but the component outputs aggregate CSV/manifest artifacts rather than one GRR wire per case.",
-        "Cancel uses a rising edge and preserves already completed cases; Complete is True only when every case succeeds."
+        "Pressing the Cancel Button preserves already completed cases; Complete is True only when every case succeeds."
       ]
     }
   }

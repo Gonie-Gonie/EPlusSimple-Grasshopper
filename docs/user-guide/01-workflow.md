@@ -296,16 +296,16 @@ Connect the GRM output directly to `Run SimpleDragon`. The runner internally:
 6. Runs EnergyPlus away from Rhino's UI thread.
 7. Parses the result and returns a GRR.
 
-`Run` and `Cancel` are rising-edge commands. Start with `Run=False`, then change
-it to `True` to launch exactly one run. A document opened with a saved True
-value treats it as a baseline and does not run. To run again, return the toggle
-to False and then create another False-to-True edge. Cancel uses the same
-pattern during an active run.
+Connect a momentary Grasshopper Button to `Run` and another to `Cancel`; do not
+use Toggles for these action inputs. Let the definition solve once while the
+Buttons are unpressed, then press Run to launch exactly one run. Press Cancel
+during an active run when needed. Each Button returns to its resting False value
+after the pulse, so opening or recomputing a saved document does not launch work.
 
-`Force Rerun` is an option sampled when a new Run edge occurs; it is not itself
-a run command. When False, an identical GRM and timeout may reuse the previous
-result. When True, the new Run edge ignores that last identical result. Timeout
-defaults to 30 positive minutes.
+`Force Rerun` is an option sampled when the Run Button is pressed; it is not
+itself a run command. When False, an identical GRM and timeout may reuse the
+previous result. When True, the next Run Button press ignores that last
+identical result. Timeout defaults to 30 positive minutes.
 
 Watch `State`, `Success`, and `Diagnostics`. `Run SimpleDragon` accepts one
 data-matched model per component. Use the managed batch workflow for a list or
@@ -335,13 +335,13 @@ tree components preserve the incoming GRR path and append a series index, so
 separate result branches stay separate downstream.
 
 Use `Write GRR` to save the canonical result JSON, or `Export CSV` for a table
-package. Those file components use level gates, not rising-edge commands:
-while `Write=True` or `Export=True`, every new Grasshopper solution is allowed
-to write again. Keep the value False while previewing, set it True only for the
-intended solution, then reset it to False. `Export CSV` requires
-`Overwrite=True` to replace existing package files. `Write GRM` and `Write GRR`
-have no separate Overwrite switch and replace their selected destination when
-Write is True.
+package. Connect a momentary Grasshopper Button to every Write or Export action
+input and press it only for the intended write. These inputs are internally
+level-sensitive, so a Toggle left True could write again on later solutions;
+the Button avoids that accidental repetition. `Export CSV` requires the
+`Overwrite` option Toggle to be True when replacing existing package files.
+`Write GRM` and `Write GRR` have no separate Overwrite option and replace their
+selected destination when their Write Button is pressed.
 
 ## Complete InvisibleDragon workflow
 
@@ -412,11 +412,12 @@ unchanged before execution. If the EPW is moved or edited, recompute
 
 ### 5. Run and inspect results
 
-Connect the compiled IDF and verified Weather to `Run InvisibleDragon`. The
-same rising-edge rule applies: change Run from False to True to start; change
-Cancel from False to True to cancel. A saved True does not run on document
-open. `Force Rerun=True` bypasses reuse of the last identical IDF, weather, and
-timeout when the next Run edge occurs. Timeout defaults to 30 positive minutes.
+Connect the compiled IDF and verified Weather to `Run InvisibleDragon`. Connect
+momentary Grasshopper Buttons to Run and Cancel, then press Run to start or
+Cancel during an active simulation. `Force Rerun=True` is a persistent option
+that bypasses reuse of the last identical IDF, weather, and timeout when the
+next Run Button is pressed; changing Force alone does not start work. Timeout
+defaults to 30 positive minutes.
 
 The runner accepts one data-matched input set. Use one runner per simultaneous
 InvisibleDragon simulation. Connect its structured Result to
@@ -466,7 +467,7 @@ follow their individual validation ranges.
 `Read GRM` and `Read GRR` load existing SimpleDragon files and return typed
 values plus validation diagnostics. `Write GRM` and `Write GRR` always provide
 their deterministic JSON and resolved path outputs, but they touch the file
-system only while `Write=True`.
+system only during a Write Button pulse.
 
 For a saved Grasshopper document, relative Dragon file paths resolve from its
 folder. In an unsaved definition, read-only GRM/GRR paths resolve from the
@@ -476,9 +477,9 @@ paths that must be portable with the project.
 
 ### CSV package
 
-With `Export=False`, `Export CSV` previews the resolved directory, stable file
-names, file paths, and contents without creating a directory. With
-`Export=True`, the package contains:
+With the Export Button unpressed, `Export CSV` previews the resolved directory,
+stable file names, file paths, and contents without creating a directory. When
+the Export Button is pressed, the package contains:
 
 - `manifest.json`
 - `summary.csv`
@@ -509,8 +510,9 @@ candidate evidence.
 
 GRR and Directory are required. GRM, diagnostics, and Model `Geometry Map Data`
 are optional additions to the package. If files already exist, either choose a
-new directory or deliberately set `Overwrite=True`. Reset Export to False after
-the intended write because it remains a level gate.
+new directory or deliberately set the `Overwrite` option Toggle to True. Press
+the Export Button once for the intended write; do not leave a Toggle connected
+to this level-sensitive action input.
 
 ### Managed SimpleDragon batch
 
@@ -519,8 +521,8 @@ Connect a list or tree of cases to `Managed Run SimpleDragon Batch`. The entire
 tree is one batch and the Case IDs and Statuses outputs preserve input paths.
 
 Parallel Limit defaults to the smaller of the machine's logical processor
-count and `4`, with a minimum of `1`. Batch Run and Cancel are rising-edge
-commands. The runner returns state, path-preserving identities and statuses,
+count and `4`, with a minimum of `1`. Connect momentary Grasshopper Buttons to
+Batch Run and Cancel and press one only for the intended action. The runner returns state, path-preserving identities and statuses,
 combined CSV and manifest paths, a Complete flag, and diagnostics. Completed
 cases remain available when an active batch is cancelled. Runtime, weather,
 case-work, and result-storage paths stay internal.
@@ -528,7 +530,8 @@ case-work, and result-storage paths stay internal.
 ## Worked examples
 
 The repository examples are executable `.gh` and `.3dm` files, not screenshots.
-All simulation and file-write controls are saved False.
+Every simulation and file-write action is wired to a Grasshopper Button saved
+at its resting False value. Force Rerun and Overwrite remain option Toggles.
 
 | Start here | What it demonstrates |
 | --- | --- |
@@ -543,14 +546,13 @@ All simulation and file-write controls are saved False.
 | `examples/30-two-zone-office.3dm` | Named planar two-zone Breps and window curves for live Rhino references |
 | `examples/31-three-zone-stepped-office.3dm` | A larger stepped three-zone Rhino model |
 
-For the quickest visible full process, open example 14. Create a fresh
-False-to-True edge on Run and watch State, Success, Diagnostics, and the monthly
-line plot. The plot already has useful defaults, so the run's GRR is its only
-required connection.
+For the quickest visible full process, open example 14. Press its Run Button
+and watch State, Success, Diagnostics, and the monthly line plot. The plot
+already has useful defaults, so the run's GRR is its only required connection.
 
 For InvisibleDragon, open example 02, select a local EPW in its intentionally
-empty EPW File parameter, let `ID Weather` verify it, then create a fresh Run
-edge. The example remains a safe preview until both actions are performed.
+empty EPW File parameter, let `ID Weather` verify it, then press the Run Button.
+The example remains a safe preview until both actions are performed.
 
 The two-zone Grasshopper example contains internalized geometry and opens by
 itself. To work with live Rhino geometry, open
@@ -560,11 +562,12 @@ wall on a matching branch.
 
 ## Troubleshooting
 
-### A Run toggle is True, but nothing starts
+### Pressing Run does not start
 
-The first observed value is a baseline. Set Run to False, allow Grasshopper to
-solve, then set it to True. Changing Force alone does not launch a run. The
-same edge rule applies to Cancel and managed Batch Run.
+Confirm that Run is connected to a Grasshopper Button rather than a Toggle. Let
+the definition solve once with a newly connected Button unpressed, then press
+it again. Changing the Force Rerun option alone does not launch a run. Use the
+same Button pattern for Cancel and managed Batch Run/Cancel.
 
 ### Rhino reports access denied or a runtime cache cannot be prepared
 
@@ -581,7 +584,7 @@ Normal use should not require “Run as administrator.” Confirm that the curre
 Windows account can write to LocalAppData and the system temporary directory,
 close all Rhino processes, and reinstall the matching product package. If a
 cache is reported as corrupt, remove only the exact module-owned cache named in
-the diagnostic; the next explicit Run edge verifies and prepares it again.
+the diagnostic; the next Run Button press verifies and prepares it again.
 Do not redirect the cache into `Program Files` or the Rhino plugin folder.
 
 ### SimpleDragon rejects Address or Vintage
@@ -620,11 +623,13 @@ The plot components wait quietly until they receive a complete valid GRR. Check
 Run Success and Diagnostics or `Read GRR` Success first. Then connect the GRR
 directly and retain the default Metric/Grouping until a basic plot appears.
 
-### CSV export succeeds once and errors on a later solve
+### CSV export repeats or errors on a later solve
 
-Export is a level gate. Reset Export to False after writing. When intentionally
-replacing existing files, set Overwrite True for the write solution, then reset
-both controls.
+Connect a momentary Button, not a Toggle, to Export. The Button automatically
+returns to False after the write pulse, preventing later solutions from
+repeating it. When intentionally replacing existing files, enable the
+Overwrite option Toggle before pressing Export, then disable Overwrite after
+the write.
 
 ### One Dragon tab loads and the other fails
 
