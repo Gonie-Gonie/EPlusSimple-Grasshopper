@@ -12,21 +12,30 @@ Use the labels as follows:
   not paste the path as public text.
 - **[VERIFY]**: compare the imported or generated value; it is not a manual
   Food4Rhino input.
-- A block containing `<CONFIRM_...>` or `<BLOCKED_...>` is unresolved and must
-  never be submitted as written.
+- A block containing `<CONFIRM_...>` is unresolved and must never be submitted
+  as written.
 
 ## Publication status and field contract
 
 - Last field review: `2026-08-31`.
 - Listing strategy: two separate Apps, because each Dragon has its own Yak
   package identity, icon, product boundary, and release history.
-- Publication status: **BLOCKED - metadata preparation only.**
-- Remaining blocking condition: retain written permission to redistribute the
-  Climate.OneBuilding TMYx files embedded in `KoreanTMY-v1.zip`, including the
-  complete Oikolab/ERA5 and Copernicus pass-through terms and notices and the
-  ASHRAE design-condition material, or replace them with an adequately licensed
-  payload. The MIT code-license and public support-email reviews are complete.
-  See [NOTICE](../../../NOTICE.md) and the
+- Publication status: **OWNER APPROVED TO PROCEED — WEATHER PERMISSION UNVERIFIED.**
+- Owner decision: on `2026-08-31`, the project owner instructed maintainers to
+  proceed and accepted the risk of doing so without verified written
+  redistribution or embedding permission for the Climate.OneBuilding TMYx
+  files embedded in `KoreanTMY-v1.zip`. The decision marker is
+  `OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION`; the machine-readable
+  approval basis is `owner-risk-acceptance-2026-08-31`, the risk-acceptance
+  review is `accepted-2026-08-31`, and the status is
+  `owner-risk-accepted-unverified`. The corresponding booleans remain explicit:
+  `publicPublicationApprovedByOwner: true`, `weatherRightsVerified: false`, and
+  `weatherRiskAcceptedByOwner: true`.
+- Disclosure: this project-owner release decision does not state or imply that
+  Climate.OneBuilding, Oikolab, Copernicus/ECMWF, ASHRAE, or any other third
+  party granted permission. The MIT code-license and public support-email
+  reviews are complete, but the weather provenance and unverified-permission
+  findings remain recorded in [NOTICE](../../../NOTICE.md) and the
   [weather rights review](weather-rights-review.md).
 - Version status: the first-release source is deliberately fixed at `0.1.0`.
   No public tag exists. If that remains the final decision, the future repository
@@ -147,10 +156,12 @@ verified against the package manifest; it is not a second byline field.
 https://climate.onebuilding.org/
 ```
 
-The exact TMYx archive remains blocked for public bundling under
-`BLOCKED_PENDING_CLIMATE_ONEBUILDING_REDISTRIBUTION_PERMISSION`. Source
-attribution alone is not redistribution permission. The machine-readable review
-status is `blocked-permission-not-found`.
+The owner approved proceeding under
+`OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION`; the machine-readable
+status is `owner-risk-accepted-unverified`. Source attribution alone is not
+redistribution permission, and written redistribution or embedding permission
+for the complete upstream chain remains unverified. This project-owner release
+decision does not state or imply that any upstream party granted permission.
 
 ## InvisibleDragon App
 
@@ -236,7 +247,7 @@ artifacts/packages/invisible-dragon/yak/invisible-dragon-0.1.0-rh8-win.yak
 artifacts/packages/invisible-dragon/portable/invisible-dragon-0.1.0-portable-plugin-win.zip
 ```
 
-The two `.yak` files are inputs to the authorized Yak publication workflow,
+The two `.yak` files are inputs to the owner-approved Yak publication workflow,
 not manual Food4Rhino attachments. The ZIP is the only optional manual file.
 
 ### Optional Portable File Title [PASTE]
@@ -327,6 +338,8 @@ Create constructions and openings, place them on explicit floors, ceilings, and 
 
 Connect the GRM directly to Run SimpleDragon. Address and Vintage select packaged weather internally; InvisibleDragon conversion, IDF generation, EnergyPlus execution, and Green Retrofit Result (GRR) construction remain inside the component. Plot monthly results, inspect data trees, write GRM/GRR files, export a documented CSV package, or run managed batches without exposing EPW, IDD, EnergyPlus, or temporary paths on the canvas.
 
+The packaged TMYx weather is sourced from Climate.OneBuilding. Written redistribution or embedding permission for the complete Climate.OneBuilding/Oikolab/Copernicus/ASHRAE chain has not been verified; the project owner accepted that risk and directed publication to proceed. This project-owner decision does not state or imply that an upstream party granted permission. See the repository NOTICE for provenance and the complete disclosure.
+
 SimpleDragon supports Windows x64 with Rhino 7 or Rhino 8. Installed packages do not require Python, the .NET SDK, Visual Studio, or a machine-wide EnergyPlus installation.
 
 Documentation: https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper/blob/main/docs/user/README.md
@@ -385,7 +398,7 @@ artifacts/packages/simple-dragon/yak/simple-dragon-0.1.0-rh8-win.yak
 artifacts/packages/simple-dragon/portable/simple-dragon-0.1.0-portable-plugin-win.zip
 ```
 
-The two `.yak` files are inputs to the authorized Yak publication workflow,
+The two `.yak` files are inputs to the owner-approved Yak publication workflow,
 not manual Food4Rhino attachments. The ZIP is the only optional manual file.
 
 ### Optional Portable File Title [PASTE]
@@ -454,10 +467,13 @@ embeddable URL accepted by Food4Rhino.
 
 ## Upload sequence after authorization
 
-1. Retain the complete written Climate.OneBuilding/Oikolab/Copernicus/ASHRAE
-   rights-and-notice chain for the exact weather payload, or replace it with an
-   adequately licensed payload and rerun every weather, compatibility, and
-   package hash gate.
+1. Verify that `packaging/package-spec.json`, the package index, release gate,
+   NOTICE, and this worksheet all record
+   `OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION`, machine status
+   `owner-risk-accepted-unverified`, `weatherRightsVerified: false`, and the
+   owner's dated risk acceptance. Retain the exact weather archive identity,
+   source citation, provenance links, and transparent unverified-permission
+   disclosure in every applicable release record.
 2. Verify that the prepared MIT license and `hyeonggon.jo@snu.ac.kr` support
    address remain the owner's intended public values.
 3. Confirm that the GitHub Issues support link is publicly usable.
@@ -470,8 +486,9 @@ embeddable URL accepted by Food4Rhino.
 6. Verify that `artifacts/release/github-assets` contains only the Installer
    ZIP, the user guide PDF, this Food4Rhino metadata PDF, and `SHA256SUMS.txt`,
    with the exact `0.1.0` filenames listed above and valid hashes.
-7. Only with separate publication authorization, create tag `v0.1.0` and a
-   GitHub release whose attached files are exactly those four staged assets.
+7. Confirm that the owner's recorded publication instruction remains current,
+   then create tag `v0.1.0` and a GitHub release whose attached files are
+   exactly those four staged assets.
 8. Publish the two attested `.yak` packages for each product through the
    authorized Yak workflow. Do not upload `.yak` files through Food4Rhino's
    File / Link control.
@@ -485,6 +502,8 @@ embeddable URL accepted by Food4Rhino.
 12. Upload real Rhino and Grasshopper screenshots, add only supported media
    embeds, preview both listings, and submit them for Food4Rhino review.
 
-Preparing this sheet, building a candidate, or passing local verification does
-not authorize a Food4Rhino submission, Yak publication, tag, GitHub binary
-release, or any other public binary upload.
+The owner's recorded decision authorizes the project workflow to proceed at the
+accepted risk, but preparing this sheet, building a candidate, or passing local
+verification does not itself create a Food4Rhino submission, Yak publication,
+tag, GitHub binary release, or any other public upload. No public release or tag
+exists at the time of this worksheet review.

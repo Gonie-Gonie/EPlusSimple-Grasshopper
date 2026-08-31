@@ -87,11 +87,12 @@ source version exactly: the current first-release source `0.1.0` maps only to
 
 ### Distribution status
 
-- Public binaries, release tag `v0.1.0`, GitHub releases, Yak publication, and
-  Food4Rhino submission remain withheld pending written permission to
-  redistribute the Climate.OneBuilding TMYx payload under a complete
-  Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain. The
-  owner has confirmed the MIT code license and
-  `hyeonggon.jo@snu.ac.kr` public support address. `dev.cmd release` creates
-  only a local verified candidate and performs none of those publication
-  actions.
+- On 2026-08-31, the individual owner authorized public publication while
+  accepting that written permission for the complete
+  Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain has not
+  been verified. The machine-readable weather status is
+  `owner-risk-accepted-unverified`; it does not claim that the payload is MIT
+  licensed. The MIT code license and `hyeonggon.jo@snu.ac.kr` public support
+  address are confirmed. No public binary, `v0.1.0` tag, GitHub Release, Yak
+  publication, or Food4Rhino submission has yet occurred, and `dev.cmd release`
+  performs none of those actions.

@@ -52,4 +52,6 @@ stages automatically.
 The generated version is deliberately fixed at `0.1.0`; a future tag must be
 exactly `v0.1.0`. These are local, ignored artifacts. Their presence does not
 mean a tag, GitHub release, Yak package, or Food4Rhino listing has been
-published, and the current public-release blockers still apply.
+published. Owner authorization to proceed despite unverified weather rights is
+recorded separately and does not turn generated candidate files into completed
+publication actions.

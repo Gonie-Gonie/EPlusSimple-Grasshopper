@@ -9,11 +9,13 @@ Version 0.1.0 is an unreleased, locally buildable candidate. There is no public
 and the PDF guide are development artifacts and must not be represented as a
 published release.
 
-Public distribution remains withheld while the complete written rights and
-notice chain for the bundled Climate.OneBuilding TMYx weather—including
-Oikolab/ERA5, Copernicus, and ASHRAE obligations—remains unresolved. The MIT
-code license and public support address
-`hyeonggon.jo@snu.ac.kr` are confirmed.
+On 2026-08-31, the individual owner authorized public distribution to proceed
+while accepting that written permission for the complete rights-and-notice
+chain of the bundled Climate.OneBuilding TMYx weather, including Oikolab/ERA5,
+Copernicus, and ASHRAE obligations, has not been verified. The recorded status
+is `owner-risk-accepted-unverified`; it is not a claim of upstream permission.
+The MIT code license and public support address `hyeonggon.jo@snu.ac.kr` are
+confirmed.
 
 ### Product highlights
 
@@ -41,7 +43,7 @@ code license and public support address
 | Packages | Invisible-only, Simple-only, and co-loaded portable candidates; no Python | Enforced for both Rhino generations |
 | Documentation | Four chapters, all 75 components and 37 typed parameters, plus Food4Rhino metadata PDF postflight | Enforced as two version-bound OODocs PDFs |
 | GitHub assets | Installer ZIP, user guide PDF, Food4Rhino metadata PDF, and `SHA256SUMS.txt` only | Deterministically assembled and verified locally |
-| Public publication | Complete Climate.OneBuilding/Oikolab/Copernicus/ASHRAE weather rights and notices | Blocked; MIT and support email resolved, but no tag, GitHub release, Yak, or Food4Rhino publication |
+| Public publication | Owner authorization separated from unverified Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights | Owner-authorized with risk accepted; no tag, GitHub Release, Yak, or Food4Rhino publication has occurred |
 
 A candidate is distributable only when its engineering, host, example,
 package, checksum, and documentation reports all belong to the same source

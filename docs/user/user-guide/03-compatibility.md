@@ -114,8 +114,9 @@ both products together.
 
 These checks support the engineering behavior described here; they do not
 promise historical Python import, call, container, CLI, Excel, pandas, or regex
-compatibility. A public release remains blocked until the release-notes and
-NOTICE conditions say otherwise.
+compatibility, establish third-party weather rights, or perform a publication.
+The release-notes and NOTICE chapters distinguish owner authorization from the
+current no-public-action state and unverified upstream permission.
 
 ## Geometry abstraction and provenance
 
@@ -181,10 +182,11 @@ is not a Python source-compatibility artifact.
 - Successful managed runs clean their work directories. Failed and cancelled
   run directories are retained for diagnosis and can consume temporary storage
   until removed.
-- Public binary distribution remains withheld while the complete
-  Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain for the
-  bundled TMYx weather remains unresolved. The repository's MIT source license
-  does not license that separate runtime data.
+- Written permission for the complete
+  Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain of the
+  bundled TMYx weather has not been verified. The individual owner accepted
+  that risk and authorized public publication to proceed. This decision does
+  not make the separate runtime data MIT licensed.
 
 Review the release-notes chapter for the current distribution status before
 sharing a package.

@@ -131,7 +131,7 @@ internal sealed class PackageVerifier
 
     public VerificationReport Verify()
     {
-        Check(BothScenario, _spec.Schema == "goniegonie.dragons-grasshopper.package-spec.v2",
+        Check(BothScenario, _spec.Schema == "goniegonie.dragons-grasshopper.package-spec.v3",
             "Unsupported package specification schema '" + _spec.Schema + "'.");
         Check(BothScenario, Regex.IsMatch(_spec.Version, @"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$"),
             "Package version is not SemVer: '" + _spec.Version + "'.");
@@ -173,7 +173,7 @@ internal sealed class PackageVerifier
 
     private void VerifyDistributionManifest()
     {
-        Check(BothScenario, _distributions.Schema == "goniegonie.dragons-grasshopper.distributions.v2",
+        Check(BothScenario, _distributions.Schema == "goniegonie.dragons-grasshopper.distributions.v3",
             "Unsupported distribution manifest schema '" + _distributions.Schema + "'.");
         Check(BothScenario, _distributions.Payloads.Count == 2,
             "Distribution manifest must contain exactly two reviewed payloads.");
@@ -218,6 +218,9 @@ internal sealed class PackageVerifier
                 && weather.Origin.CopernicusLicense == "https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products"
                 && weather.Origin.OikolabTerms == "https://docs.oikolab.com/terms/"
                 && weather.Origin.ReviewedAt == "2026-08-31"
+                && !weather.Origin.WeatherRightsVerified
+                && weather.Origin.WeatherRiskAcceptedByOwner
+                && weather.Origin.WeatherRiskAcceptanceReview == "accepted-2026-08-31"
                 && weather.Origin.WeatherRedistributionStatus == _spec.Publication.WeatherRedistributionStatus,
                 "KoreanTMY origin and redistribution review differ from package-spec.json.");
         }
@@ -243,9 +246,14 @@ internal sealed class PackageVerifier
             && publication.ProjectLicenseReview == "resolved-2026-08-31"
             && publication.PublicSupportEmail == "hyeonggon.jo@snu.ac.kr"
             && publication.PublicSupportEmailReview == "resolved-2026-08-31"
+            && publication.PublicPublicationApprovedByOwner
+            && publication.PublicPublicationApprovalBasis == "owner-risk-acceptance-2026-08-31"
             && publication.WeatherSource == "https://climate.onebuilding.org/"
-            && publication.WeatherRedistributionStatus == "blocked-permission-not-found",
-            "Package specification publication metadata differs from the reviewed contract.");
+            && !publication.WeatherRightsVerified
+            && publication.WeatherRiskAcceptedByOwner
+            && publication.WeatherRiskAcceptanceReview == "accepted-2026-08-31"
+            && publication.WeatherRedistributionStatus == "owner-risk-accepted-unverified",
+            "Package specification publication metadata differs from the reviewed owner-risk-acceptance contract.");
     }
 
     private void VerifyDistributionPin(
@@ -294,13 +302,16 @@ internal sealed class PackageVerifier
         using JsonDocument document = JsonDocument.Parse(File.ReadAllText(path));
         JsonElement root = document.RootElement;
         Check(BothScenario, root.GetProperty("schema").GetString()
-                == "goniegonie.dragons-grasshopper.package-index.v2",
+                == "goniegonie.dragons-grasshopper.package-index.v3",
             "Package index schema mismatch.");
         JsonElement redistribution = root.GetProperty("redistribution");
         Check(BothScenario, redistribution.GetProperty("energyPlusBinariesIncluded").GetBoolean()
                 && redistribution.GetProperty("weatherIncluded").GetBoolean()
                 && !redistribution.GetProperty("portableArchivesArePluginOnly").GetBoolean()
-                && !redistribution.GetProperty("publicPublicationAuthorized").GetBoolean()
+                && redistribution.GetProperty("publicPublicationApprovedByOwner").GetBoolean()
+                    == _spec.Publication.PublicPublicationApprovedByOwner
+                && redistribution.GetProperty("publicPublicationApprovalBasis").GetString()
+                    == _spec.Publication.PublicPublicationApprovalBasis
                 && redistribution.GetProperty("projectLicense").GetString() == _spec.Publication.ProjectLicense
                 && redistribution.GetProperty("projectLicenseOwner").GetString() == _spec.Publication.ProjectLicenseOwner
                 && redistribution.GetProperty("projectLicenseOwnerType").GetString() == _spec.Publication.ProjectLicenseOwnerType
@@ -308,6 +319,12 @@ internal sealed class PackageVerifier
                 && redistribution.GetProperty("publicSupportEmail").GetString() == _spec.Publication.PublicSupportEmail
                 && redistribution.GetProperty("publicSupportEmailReview").GetString() == _spec.Publication.PublicSupportEmailReview
                 && redistribution.GetProperty("weatherSource").GetString() == _spec.Publication.WeatherSource
+                && redistribution.GetProperty("weatherRightsVerified").GetBoolean()
+                    == _spec.Publication.WeatherRightsVerified
+                && redistribution.GetProperty("weatherRiskAcceptedByOwner").GetBoolean()
+                    == _spec.Publication.WeatherRiskAcceptedByOwner
+                && redistribution.GetProperty("weatherRiskAcceptanceReview").GetString()
+                    == _spec.Publication.WeatherRiskAcceptanceReview
                 && redistribution.GetProperty("weatherRedistributionStatus").GetString() == _spec.Publication.WeatherRedistributionStatus,
             "Package index redistribution/publication flags are not truthful for the embedded archives.");
 
@@ -1350,9 +1367,30 @@ internal sealed class PublicationSpec
     [JsonPropertyName("publicSupportEmailReview")]
     public string PublicSupportEmailReview { get; set; } = string.Empty;
 
+    [JsonRequired]
+    [JsonPropertyName("publicPublicationApprovedByOwner")]
+    public bool PublicPublicationApprovedByOwner { get; set; }
+
+    [JsonRequired]
+    [JsonPropertyName("publicPublicationApprovalBasis")]
+    public string PublicPublicationApprovalBasis { get; set; } = string.Empty;
+
     [JsonPropertyName("weatherSource")]
     public string WeatherSource { get; set; } = string.Empty;
 
+    [JsonRequired]
+    [JsonPropertyName("weatherRightsVerified")]
+    public bool WeatherRightsVerified { get; set; }
+
+    [JsonRequired]
+    [JsonPropertyName("weatherRiskAcceptedByOwner")]
+    public bool WeatherRiskAcceptedByOwner { get; set; }
+
+    [JsonRequired]
+    [JsonPropertyName("weatherRiskAcceptanceReview")]
+    public string WeatherRiskAcceptanceReview { get; set; } = string.Empty;
+
+    [JsonRequired]
     [JsonPropertyName("weatherRedistributionStatus")]
     public string WeatherRedistributionStatus { get; set; } = string.Empty;
 }
@@ -1455,6 +1493,19 @@ internal sealed class DistributionOrigin
     [JsonPropertyName("reviewedAt")]
     public string ReviewedAt { get; set; } = string.Empty;
 
+    [JsonRequired]
+    [JsonPropertyName("weatherRightsVerified")]
+    public bool WeatherRightsVerified { get; set; }
+
+    [JsonRequired]
+    [JsonPropertyName("weatherRiskAcceptedByOwner")]
+    public bool WeatherRiskAcceptedByOwner { get; set; }
+
+    [JsonRequired]
+    [JsonPropertyName("weatherRiskAcceptanceReview")]
+    public string WeatherRiskAcceptanceReview { get; set; } = string.Empty;
+
+    [JsonRequired]
     [JsonPropertyName("weatherRedistributionStatus")]
     public string WeatherRedistributionStatus { get; set; } = string.Empty;
 }

@@ -137,12 +137,14 @@ either engine returns a zero active-load result.
   graph editor.
 - SimpleDragon intentionally loses arbitrary source vertices during its
   area-and-azimuth abstraction.
-- Public binary publication remains blocked until the exact
-  Climate.OneBuilding TMYx payload has written redistribution permission that
-  resolves its Oikolab/ERA5 and Copernicus pass-through terms and notices plus
-  its embedded ASHRAE design-condition material, or the payload is replaced
-  with an adequately licensed alternative.
+- Written redistribution permission has not been verified for the exact
+  Climate.OneBuilding TMYx payload, its Oikolab/ERA5 and Copernicus
+  pass-through terms and notices, or its embedded ASHRAE design-condition
+  material. On 2026-08-31, the individual owner accepted that risk and
+  authorized public publication to proceed. The recorded status is
+  `owner-risk-accepted-unverified`, not a finding that those rights are
+  resolved.
 
 The repository's own code is offered under MIT and the public support address
-is confirmed; neither fact erases third-party provenance or the weather-rights
-review in `NOTICE.md`.
+is confirmed; neither those facts nor the owner's risk decision erases
+third-party provenance or the weather-rights review in `NOTICE.md`.

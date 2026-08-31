@@ -8,4 +8,4 @@ compatibility mappings are auditable.
 Accordingly, `snu-bslab/EPlusSimple`, `src/idragon`, and `src/epsimple` may
 appear in files in this directory only as upstream provenance. They are not
 project ownership, package, assembly, namespace, schema, or artifact names for
-the products published from this repository.
+the public products intended for this repository.

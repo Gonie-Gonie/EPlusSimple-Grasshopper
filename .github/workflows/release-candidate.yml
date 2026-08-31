@@ -51,6 +51,26 @@ jobs:
           EXPECTED_SHA: ${{ steps.source.outputs.sha }}
         run: |
           $ErrorActionPreference = 'Stop'
+          Set-StrictMode -Version 2.0
+
+          function Test-ExactJsonBoolean {
+            param(
+              [Parameter(Mandatory = $true)]
+              [object] $Object,
+
+              [Parameter(Mandatory = $true)]
+              [string] $Name,
+
+              [Parameter(Mandatory = $true)]
+              [bool] $Expected
+            )
+
+            $property = $Object.PSObject.Properties[$Name]
+            return ($null -ne $property -and
+              $property.Value -is [bool] -and
+              [bool] $property.Value -eq $Expected)
+          }
+
           $gatePath = 'artifacts/release/release-gate.json'
           if (-not (Test-Path -LiteralPath $gatePath -PathType Leaf)) {
             throw "Release gate is missing: '$gatePath'."
@@ -62,12 +82,12 @@ jobs:
           $food4RhinoMetadata = $gate.verification.food4RhinoMetadata
           $githubRelease = $gate.githubRelease
           $publication = $gate.publication
-          if ([string] $gate.schema -cne 'goniegonie.dragons-grasshopper.release-gate.v2' -or
+          if ([string] $gate.schema -cne 'goniegonie.dragons-grasshopper.release-gate.v3' -or
               [string] $gate.status -cne 'passed' -or
               [string] $gate.source.commit -cne $env:EXPECTED_SHA -or
               [string] $gate.source.branch -cne 'main' -or
-              -not [bool] $gate.source.clean -or
-              -not [bool] $gate.source.pushedToOriginMain -or
+              -not (Test-ExactJsonBoolean -Object $gate.source -Name 'clean' -Expected $true) -or
+              -not (Test-ExactJsonBoolean -Object $gate.source -Name 'pushedToOriginMain' -Expected $true) -or
               [int] $engineering.declaredCaseCount -ne 11 -or
               [int] $engineering.executedCaseCount -ne 11 -or
               [int] $engineering.skippedStageCount -ne 0 -or
@@ -79,7 +99,8 @@ jobs:
               [string] $userGuide.status -cne 'passed' -or
               [string] $food4RhinoMetadata.status -cne 'passed' -or
               [string] $githubRelease.status -cne 'prepared' -or
-              [bool] $publication.publicPublicationAuthorized -or
+              -not (Test-ExactJsonBoolean -Object $publication -Name 'publicPublicationApprovedByOwner' -Expected $true) -or
+              [string] $publication.publicPublicationApprovalBasis -cne 'owner-risk-acceptance-2026-08-31' -or
               [string] $publication.projectLicense -cne 'MIT' -or
               [string] $publication.projectLicenseOwner -cne 'Gonie-Gonie' -or
               [string] $publication.projectLicenseOwnerType -cne 'individual' -or
@@ -87,10 +108,14 @@ jobs:
               [string] $publication.publicSupportEmail -cne 'hyeonggon.jo@snu.ac.kr' -or
               [string] $publication.publicSupportEmailReview -cne 'resolved-2026-08-31' -or
               [string] $publication.weatherSource -cne 'https://climate.onebuilding.org/' -or
-              [string] $publication.weatherRedistributionStatus -cne 'blocked-permission-not-found' -or
-              [bool] $publication.tagCreated -or
-              [bool] $publication.githubReleaseCreated -or
-              [bool] $publication.yakPublished) {
+              -not (Test-ExactJsonBoolean -Object $publication -Name 'weatherRightsVerified' -Expected $false) -or
+              -not (Test-ExactJsonBoolean -Object $publication -Name 'weatherRiskAcceptedByOwner' -Expected $true) -or
+              [string] $publication.weatherRiskAcceptanceReview -cne 'accepted-2026-08-31' -or
+              [string] $publication.weatherRedistributionStatus -cne 'owner-risk-accepted-unverified' -or
+              -not (Test-ExactJsonBoolean -Object $publication -Name 'tagCreated' -Expected $false) -or
+              -not (Test-ExactJsonBoolean -Object $publication -Name 'githubReleaseCreated' -Expected $false) -or
+              -not (Test-ExactJsonBoolean -Object $publication -Name 'yakPublished' -Expected $false) -or
+              -not (Test-ExactJsonBoolean -Object $publication -Name 'food4RhinoSubmitted' -Expected $false)) {
             throw 'Release gate identity, verification, or non-publication policy is invalid.'
           }
 
@@ -324,9 +349,8 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-      # Intentionally do not upload, attest, or publish artifacts/packages,
-      # artifacts/release/github-assets, or binary-bearing temp trees while
-      # publicPublicationAuthorized is false while the complete
-      # Climate.OneBuilding/Oikolab/Copernicus/ASHRAE weather rights chain
-      # remains unresolved. The exact four
-      # future GitHub Release assets remain only on the protected self-hosted runner.
+      # This workflow intentionally builds and verifies a local candidate only.
+      # Owner approval does not mean third-party weather rights were verified,
+      # and this workflow does not create a tag, GitHub Release, Yak publication,
+      # Food4Rhino submission, or uploaded binary artifact. The exact four future
+      # GitHub Release assets remain only on the protected self-hosted runner.

@@ -62,32 +62,40 @@ Chapter 14 Climatic Design Information` in their `DESIGN CONDITIONS` records;
 the other 21 declare zero design conditions.
 [ASHRAE's permissions page](https://www.ashrae.org/permissions) directs software
 developers to purchase a license to embed ASHRAE climatic design data in
-derivative works. The eventual rights record must therefore either cover those
-embedded records with a documented downstream grant, or the release must
-separately resolve or remove that material.
+derivative works. A fully verified rights record would therefore need to cover
+those embedded records with a documented downstream grant, or a future payload
+revision would need to remove that material.
 
 Publicly accessible download and a requested citation establish source and
-attribution, not redistribution permission. The result of this review is
-therefore `BLOCKED_PENDING_CLIMATE_ONEBUILDING_REDISTRIBUTION_PERMISSION`.
+attribution, not redistribution permission. The evidence review did not verify
+written redistribution or embedding permission for the complete upstream
+rights chain.
 
 ## Release decision
 
-Do not upload a SimpleDragon Yak, portable ZIP, combined Windows Installer, or
-other binary that contains this archive until one of the following is recorded:
+On 2026-08-31, the project owner instructed maintainers to proceed with public
+package publication and accepted the risk of doing so without verified written
+redistribution or embedding permission for the exact reviewed weather payload.
+The decision marker is
+`OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION`, and the canonical
+machine-readable status is `owner-risk-accepted-unverified`.
 
-1. Written permission from Climate.OneBuilding or another party able to
-   demonstrate the complete rights chain, expressly permitting bundling and
-   redistribution of the exact reviewed TMYx EPWs in the MIT-licensed, free
-   SimpleDragon package. The record must resolve the Oikolab/ERA5 pass-through
-   terms, identify and include every applicable Copernicus attribution and
-   no-responsibility statement, and cover or remove the embedded ASHRAE design
-   conditions; or
-2. Replacement weather files whose license expressly allows the intended
-   public binary redistribution, followed by new file, count, metadata,
-   compatibility, and package hashes.
+This project-owner release decision does not state or imply that
+Climate.OneBuilding, Oikolab, Copernicus/ECMWF, ASHRAE, or any other third party
+granted permission. It does not change the archive's provenance, create a new
+license for the weather data, extend the repository MIT license to that data,
+or supersede any applicable attribution, notice, or other obligation. Public
+release materials must retain this disclosure, the requested source citation,
+the exact archive identity, and the findings above.
 
-The repository license and public support-email reviews are complete. This
-complete weather rights chain is the only documented rights blocker, but
-resolving it still does not itself create a tag, GitHub Release, Yak
-publication, or Food4Rhino submission; each publication action remains
+Written permission covering the complete rights chain or replacement weather
+files with explicit redistribution terms would justify a new review and status
+change if either is later obtained. Neither is represented here as currently
+existing.
+
+The repository license and public support-email reviews are complete. The
+owner's instruction permits the project workflow to proceed despite the
+unverified weather permission, but it does not itself create a tag, GitHub
+Release, Yak publication, or Food4Rhino submission. No such public release or
+tag exists at the time of this decision; each publication action remains
 deliberate.

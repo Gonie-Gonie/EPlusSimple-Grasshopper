@@ -194,13 +194,18 @@ def _validate_food4rhino(repo_root: Path) -> int:
         "projectLicenseReview": "resolved-2026-08-31",
         "publicSupportEmail": "hyeonggon.jo@snu.ac.kr",
         "publicSupportEmailReview": "resolved-2026-08-31",
+        "publicPublicationApprovedByOwner": True,
+        "publicPublicationApprovalBasis": "owner-risk-acceptance-2026-08-31",
         "weatherSource": "https://climate.onebuilding.org/",
-        "weatherRedistributionStatus": "blocked-permission-not-found",
+        "weatherRightsVerified": False,
+        "weatherRiskAcceptedByOwner": True,
+        "weatherRiskAcceptanceReview": "accepted-2026-08-31",
+        "weatherRedistributionStatus": "owner-risk-accepted-unverified",
     }
     if publication != expected_publication:
         raise DocumentationError("Package publication metadata differs from the reviewed contract.")
-    if "Publication status: **BLOCKED" not in text:
-        raise DocumentationError("Food4Rhino publication status must remain explicitly blocked.")
+    if "Publication status: **OWNER APPROVED TO PROCEED" not in text:
+        raise DocumentationError("Food4Rhino publication status must record owner approval.")
 
     shared = _section(text, "Shared Food4Rhino fields", "Shared source and Yak metadata")
     source_metadata = _section(text, "Shared source and Yak metadata", "InvisibleDragon App")
@@ -225,8 +230,23 @@ def _validate_food4rhino(repo_root: Path) -> int:
     support_email = _field(shared, "Support Email")
     if EMAIL_PATTERN.fullmatch(support_email) is None:
         raise DocumentationError("Food4Rhino Support Email is not a valid confirmed address.")
-    if "BLOCKED_PENDING_CLIMATE_ONEBUILDING_REDISTRIBUTION_PERMISSION" not in text:
-        raise DocumentationError("Food4Rhino weather redistribution blocker is missing.")
+    if "OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION" not in text:
+        raise DocumentationError("Food4Rhino owner-risk disclosure token is missing.")
+    if "does not state or imply" not in text:
+        raise DocumentationError("Food4Rhino owner-risk disclosure is incomplete.")
+    for contract_value in (
+        expected_publication["publicPublicationApprovalBasis"],
+        expected_publication["weatherRiskAcceptanceReview"],
+        expected_publication["weatherRedistributionStatus"],
+        "publicPublicationApprovedByOwner: true",
+        "weatherRightsVerified: false",
+        "weatherRiskAcceptedByOwner: true",
+    ):
+        if contract_value not in text:
+            raise DocumentationError(
+                "Food4Rhino worksheet omits machine-readable publication value: "
+                f"{contract_value!r}."
+            )
 
     exact_source_metadata = {
         "Source Code": "https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper",

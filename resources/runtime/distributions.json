@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.dragons-grasshopper.distributions.v2",
+  "schema": "goniegonie.dragons-grasshopper.distributions.v3",
   "payloads": [
     {
       "id": "energyplus-24.2.0-windows-x64",
@@ -37,7 +37,10 @@
         "copernicusLicense": "https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products",
         "oikolabTerms": "https://docs.oikolab.com/terms/",
         "reviewedAt": "2026-08-31",
-        "weatherRedistributionStatus": "blocked-permission-not-found"
+        "weatherRightsVerified": false,
+        "weatherRiskAcceptedByOwner": true,
+        "weatherRiskAcceptanceReview": "accepted-2026-08-31",
+        "weatherRedistributionStatus": "owner-risk-accepted-unverified"
       },
       "archiveEpwCount": 80,
       "metadataReferencedUniqueEpwCount": 78,

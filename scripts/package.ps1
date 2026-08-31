@@ -632,7 +632,7 @@ if (-not (Test-Path -LiteralPath $distributionManifestPath -PathType Leaf)) {
 }
 
 $spec = Get-Content -LiteralPath $specPath -Raw | ConvertFrom-Json
-if ([string] $spec.schema -ne 'goniegonie.dragons-grasshopper.package-spec.v2') {
+if ([string] $spec.schema -ne 'goniegonie.dragons-grasshopper.package-spec.v3') {
     throw "Unsupported package spec schema in '$specPath'."
 }
 $publicationSpec = $spec.publication
@@ -642,12 +642,17 @@ if ([string] $publicationSpec.projectLicense -cne 'MIT' -or
     [string] $publicationSpec.projectLicenseReview -cne 'resolved-2026-08-31' -or
     [string] $publicationSpec.publicSupportEmail -cne 'hyeonggon.jo@snu.ac.kr' -or
     [string] $publicationSpec.publicSupportEmailReview -cne 'resolved-2026-08-31' -or
+    -not [bool] $publicationSpec.publicPublicationApprovedByOwner -or
+    [string] $publicationSpec.publicPublicationApprovalBasis -cne 'owner-risk-acceptance-2026-08-31' -or
     [string] $publicationSpec.weatherSource -cne 'https://climate.onebuilding.org/' -or
-    [string] $publicationSpec.weatherRedistributionStatus -cne 'blocked-permission-not-found') {
-    throw 'Package publication metadata differs from the reviewed individual/MIT/support/weather-rights contract.'
+    [bool] $publicationSpec.weatherRightsVerified -or
+    -not [bool] $publicationSpec.weatherRiskAcceptedByOwner -or
+    [string] $publicationSpec.weatherRiskAcceptanceReview -cne 'accepted-2026-08-31' -or
+    [string] $publicationSpec.weatherRedistributionStatus -cne 'owner-risk-accepted-unverified') {
+    throw 'Package publication metadata differs from the reviewed individual/MIT/support/owner-risk-acceptance contract.'
 }
 $distributionManifest = Get-Content -LiteralPath $distributionManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v2' -or
+if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v3' -or
     @($distributionManifest.payloads).Count -ne 2 -or
     @($distributionManifest.payloads | Group-Object product | Where-Object { $_.Count -ne 1 }).Count -ne 0) {
     throw "Distribution manifest must define exactly one reviewed payload for each product: '$distributionManifestPath'."
@@ -686,7 +691,10 @@ $reviewedDistributions = @{
         originCopernicusLicense = 'https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products'
         originOikolabTerms = 'https://docs.oikolab.com/terms/'
         originReviewedAt = '2026-08-31'
-        originWeatherRedistributionStatus = 'blocked-permission-not-found'
+        originWeatherRightsVerified = $false
+        originWeatherRiskAcceptedByOwner = $true
+        originWeatherRiskAcceptanceReview = 'accepted-2026-08-31'
+        originWeatherRedistributionStatus = 'owner-risk-accepted-unverified'
     }
 }
 foreach ($distribution in @($distributionManifest.payloads)) {
@@ -714,7 +722,13 @@ foreach ($distribution in @($distributionManifest.payloads)) {
             [string] $distribution.origin.copernicusLicense -ne [string] $expected.originCopernicusLicense -or
             [string] $distribution.origin.oikolabTerms -ne [string] $expected.originOikolabTerms -or
             [string] $distribution.origin.reviewedAt -ne [string] $expected.originReviewedAt -or
+            [bool] $distribution.origin.weatherRightsVerified -ne [bool] $expected.originWeatherRightsVerified -or
+            [bool] $distribution.origin.weatherRiskAcceptedByOwner -ne [bool] $expected.originWeatherRiskAcceptedByOwner -or
+            [string] $distribution.origin.weatherRiskAcceptanceReview -ne [string] $expected.originWeatherRiskAcceptanceReview -or
             [string] $distribution.origin.weatherRedistributionStatus -ne [string] $expected.originWeatherRedistributionStatus -or
+            [bool] $distribution.origin.weatherRightsVerified -ne [bool] $publicationSpec.weatherRightsVerified -or
+            [bool] $distribution.origin.weatherRiskAcceptedByOwner -ne [bool] $publicationSpec.weatherRiskAcceptedByOwner -or
+            [string] $distribution.origin.weatherRiskAcceptanceReview -cne [string] $publicationSpec.weatherRiskAcceptanceReview -or
             [string] $distribution.origin.site -cne [string] $publicationSpec.weatherSource -or
             [string] $distribution.origin.weatherRedistributionStatus -cne [string] $publicationSpec.weatherRedistributionStatus)) -or
         ($productId -eq 'invisible-dragon' -and (
@@ -917,7 +931,7 @@ foreach ($product in @($spec.products)) {
 }
 
 $index = [pscustomobject] [ordered] @{
-    schema = 'goniegonie.dragons-grasshopper.package-index.v2'
+    schema = 'goniegonie.dragons-grasshopper.package-index.v3'
     version = [string] $spec.version
     owner = 'Gonie-Gonie'
     products = @($indexProducts)
@@ -925,7 +939,8 @@ $index = [pscustomobject] [ordered] @{
         energyPlusBinariesIncluded = $true
         weatherIncluded = $true
         portableArchivesArePluginOnly = $false
-        publicPublicationAuthorized = $false
+        publicPublicationApprovedByOwner = [bool] $publicationSpec.publicPublicationApprovedByOwner
+        publicPublicationApprovalBasis = [string] $publicationSpec.publicPublicationApprovalBasis
         projectLicense = [string] $publicationSpec.projectLicense
         projectLicenseOwner = [string] $publicationSpec.projectLicenseOwner
         projectLicenseOwnerType = [string] $publicationSpec.projectLicenseOwnerType
@@ -933,6 +948,9 @@ $index = [pscustomobject] [ordered] @{
         publicSupportEmail = [string] $publicationSpec.publicSupportEmail
         publicSupportEmailReview = [string] $publicationSpec.publicSupportEmailReview
         weatherSource = [string] $publicationSpec.weatherSource
+        weatherRightsVerified = [bool] $publicationSpec.weatherRightsVerified
+        weatherRiskAcceptedByOwner = [bool] $publicationSpec.weatherRiskAcceptedByOwner
+        weatherRiskAcceptanceReview = [string] $publicationSpec.weatherRiskAcceptanceReview
         weatherRedistributionStatus = [string] $publicationSpec.weatherRedistributionStatus
     }
 }

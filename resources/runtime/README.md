@@ -19,5 +19,8 @@ with `.\dev.cmd clean -TempOnly`.
 Each candidate package copies one verified archive unchanged at its root:
 InvisibleDragon uses `runtime/energyplus/` and SimpleDragon uses
 `runtime/weather/`. Python and directly expanded EnergyPlus/EPW files remain
-excluded. Public publication stays unauthorized until the licensing items in
-`NOTICE.md` are resolved.
+excluded. Written permission for the weather rights chain has not been
+verified. The individual owner accepted that risk and authorized public
+publication to proceed under the recorded
+`owner-risk-accepted-unverified` status; this is not a claim that the payload
+is openly licensed.

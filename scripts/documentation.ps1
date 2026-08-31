@@ -40,7 +40,7 @@ if (-not (Test-Path -LiteralPath $packageSpecPath -PathType Leaf)) {
 }
 $packageSpec = Get-Content -LiteralPath $packageSpecPath -Raw -Encoding UTF8 |
     ConvertFrom-Json
-if ([string] $packageSpec.schema -cne 'goniegonie.dragons-grasshopper.package-spec.v2' -or
+if ([string] $packageSpec.schema -cne 'goniegonie.dragons-grasshopper.package-spec.v3' -or
     [string] $packageSpec.version -cne '0.1.0') {
     throw 'Documentation requires the deliberate first-release package version 0.1.0.'
 }

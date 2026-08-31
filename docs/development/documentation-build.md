@@ -14,8 +14,8 @@ is generated from the current public Grasshopper catalog and carries a
 generated warning; the other chapters are maintained as task-oriented user
 guidance. The second PDF renders the maintainer-owned
 `docs/development/publishing/food4rhino.md` worksheet. It preserves the
-copy/select/upload fields and unresolved publication holds; it is release
-metadata, not plugin-user guidance.
+copy/select/upload fields and the owner-authorized but unverified weather-rights
+state; it is release metadata, not plugin-user guidance.
 
 From the repository root, prepare the repository-local documentation
 environment once and then build both PDFs:
@@ -44,7 +44,10 @@ records, generates the complete In/Out reference, and renders the combined
 guide with OODocs. A separate Python-native builder imports the canonical
 Food4Rhino Markdown, renders it with the same locked OODocs environment, and
 postflights its PDF metadata, headings, field values, safety tokens, and copy
-blocks. Temporary catalog and log files remain under `temp\documentation` and
+blocks. In particular, the safety token
+`OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION` preserves the
+distinction between authorization and verified upstream permission. Temporary
+catalog and log files remain under `temp\documentation` and
 are not part of either deliverable.
 
 Both filenames are bound to `packaging/package-spec.json`. The first-release

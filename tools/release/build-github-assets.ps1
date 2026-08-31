@@ -22,8 +22,8 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
 $expectedVersion = '0.1.0'
-$packageSpecSchema = 'goniegonie.dragons-grasshopper.package-spec.v2'
-$packageIndexSchema = 'goniegonie.dragons-grasshopper.package-index.v2'
+$packageSpecSchema = 'goniegonie.dragons-grasshopper.package-spec.v3'
+$packageIndexSchema = 'goniegonie.dragons-grasshopper.package-index.v3'
 $installerManifestSchema = 'goniegonie.dragons-grasshopper.windows-installer.v1'
 $assetManifestSchema = 'goniegonie.dragons-grasshopper.github-release-assets.v1'
 $fixedZipTimestamp = [DateTimeOffset]::new(1980, 1, 1, 0, 0, 0, [TimeSpan]::Zero)

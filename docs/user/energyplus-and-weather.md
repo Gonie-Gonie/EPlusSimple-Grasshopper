@@ -87,5 +87,7 @@ can be inspected; that whole location is disposable after diagnosis.
 
 The files are sourced from Climate.OneBuilding using ISD and Oikolab-supplied
 ERA5 inputs, but public download and attribution do not establish the complete
-Copernicus/Oikolab/ASHRAE right and notice chain needed to rebundle them. Public
-publication remains unauthorized as recorded in `NOTICE.md`.
+Copernicus/Oikolab/ASHRAE right and notice chain needed to rebundle them. No
+written upstream permission has been verified. As recorded in `NOTICE.md`, the
+individual owner accepted that risk and authorized publication to proceed; this
+is an operational decision, not a finding that the weather rights are resolved.

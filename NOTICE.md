@@ -10,11 +10,11 @@ compatibility mapping requires them.
 
 The tracked upstream `citation.cff` declares its EPlusSimple and IDragon source
 as MIT licensed. Those names identify the upstream Python packages; the names
-of the products published from this repository are SimpleDragon and
+of the public products intended for this repository are SimpleDragon and
 InvisibleDragon. The tracked upstream commit does not contain a standalone
 `LICENSE` file, so this notice preserves the exact MIT declaration and pinned
 source attribution. On 2026-08-31, the Gonie-Gonie owner confirmed that this
-port is individually owned and released under the repository MIT license. The
+port is individually owned and offered under the repository MIT license. The
 source-code license review is therefore complete; this does not grant rights
 to separately sourced runtime data.
 
@@ -51,9 +51,16 @@ the files in a new installer. In addition, 59 of the 80 EPWs embed 2021 ASHRAE
 climatic design conditions, for which ASHRAE separately directs software
 developers to obtain an embedding licence. The evidence is recorded in the
 [weather rights review](https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper/blob/main/docs/development/publishing/weather-rights-review.md).
-Public package publication remains unauthorized until written redistribution
-permission and every applicable upstream notice are retained, or this payload
-is replaced with one carrying adequate redistribution terms.
+On 2026-08-31, the project owner instructed maintainers to proceed with public
+package publication and accepted the risk of doing so without verified written
+redistribution or embedding permission for this weather payload. This decision
+is recorded as `OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION`; its
+machine-readable status is `owner-risk-accepted-unverified`. This project-owner
+release decision does not state or imply that Climate.OneBuilding, Oikolab,
+Copernicus/ECMWF, ASHRAE, or any other third party granted permission. The
+provenance, attribution requirements, and unresolved rights findings above
+remain applicable. This decision also does not mean that a release, tag, Yak
+publication, or Food4Rhino submission has already occurred.
 
 The confirmed public support address for both Dragon products is
 `hyeonggon.jo@snu.ac.kr`.

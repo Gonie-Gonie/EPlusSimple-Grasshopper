@@ -68,7 +68,7 @@ if (-not (Test-Path -LiteralPath $distributionManifestPath -PathType Leaf)) {
 }
 
 $distributionManifest = Get-Content -LiteralPath $distributionManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v2') {
+if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v3') {
     throw "Unsupported distribution manifest schema in '$distributionManifestPath'."
 }
 
@@ -106,7 +106,10 @@ $expectedDistributions = @{
         originCopernicusLicense = 'https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products'
         originOikolabTerms = 'https://docs.oikolab.com/terms/'
         originReviewedAt = '2026-08-31'
-        originWeatherRedistributionStatus = 'blocked-permission-not-found'
+        originWeatherRightsVerified = $false
+        originWeatherRiskAcceptedByOwner = $true
+        originWeatherRiskAcceptanceReview = 'accepted-2026-08-31'
+        originWeatherRedistributionStatus = 'owner-risk-accepted-unverified'
     }
 }
 
@@ -142,6 +145,9 @@ foreach ($payload in $distributionPayloads) {
             [string] $payload.origin.copernicusLicense -ne [string] $expected.originCopernicusLicense -or
             [string] $payload.origin.oikolabTerms -ne [string] $expected.originOikolabTerms -or
             [string] $payload.origin.reviewedAt -ne [string] $expected.originReviewedAt -or
+            [bool] $payload.origin.weatherRightsVerified -ne [bool] $expected.originWeatherRightsVerified -or
+            [bool] $payload.origin.weatherRiskAcceptedByOwner -ne [bool] $expected.originWeatherRiskAcceptedByOwner -or
+            [string] $payload.origin.weatherRiskAcceptanceReview -ne [string] $expected.originWeatherRiskAcceptanceReview -or
             [string] $payload.origin.weatherRedistributionStatus -ne [string] $expected.originWeatherRedistributionStatus)) -or
         ($id -eq 'energyplus-24.2.0-windows-x64' -and (
             [string] $payload.licenseEntry -ne [string] $expected.licenseEntry -or

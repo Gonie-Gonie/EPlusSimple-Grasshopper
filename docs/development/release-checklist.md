@@ -3,8 +3,10 @@
 This is an internal maintainer checklist, not installation or usage guidance.
 
 This checklist is for maintainers preparing the first local InvisibleDragon and
-SimpleDragon 0.1.0 candidate for Rhino 7+. Building a candidate does not
-authorize publication, Yak upload, tag creation, or a GitHub release.
+SimpleDragon 0.1.0 candidate for Rhino 7+. Building a candidate does not itself
+create a tag, GitHub Release, Yak publication, or Food4Rhino submission. The
+owner's separate authorization to proceed despite unverified weather rights is
+recorded in `packaging/package-spec.json`.
 
 ## Source and provenance
 
@@ -20,9 +22,11 @@ authorize publication, Yak upload, tag creation, or a GitHub release.
   and MIT publication for the port on 2026-08-31; retain that decision and the
   pinned upstream MIT attribution.
 - Confirm that SimpleDragon contains only the exact hash-pinned KoreanTMY
-  archive, no expanded or arbitrary EPW files, and that redistribution rights
-  and required notices for its complete Climate.OneBuilding/Oikolab/ERA5,
-  Copernicus, and ASHRAE chain are resolved before any public binary release.
+  archive and no expanded or arbitrary EPW files. Retain the finding that
+  written permission for its complete Climate.OneBuilding/Oikolab/ERA5,
+  Copernicus, and ASHRAE chain has not been verified, together with the owner's
+  2026-08-31 decision to accept that risk and authorize publication. Do not
+  describe the rights as resolved or the weather payload as MIT licensed.
   Follow the
   [weather rights review](publishing/weather-rights-review.md).
 - Reconfirm `hyeonggon.jo@snu.ac.kr` as the intended public support address
@@ -66,8 +70,9 @@ For diagnosis, its constituent commands are:
 - Require the Food4Rhino metadata PDF builder to import the canonical
   publishing worksheet through OODocs and postflight its version, document
   metadata, required sections, all field headings and fenced values, and the
-  remaining weather-rights safety token. Building the worksheet must not clear
-  a hold.
+  `OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION` safety token.
+  Building the worksheet must not turn owner risk acceptance into a claim of
+  verified permission.
 - Require all 1,242 pinned upstream public symbols to have exact registry
   coverage, no `needs_reverification` rows, and fresh authoritative assertion
   evidence for every `equivalent` or `exception` row. External evidence JSON
@@ -171,24 +176,24 @@ For diagnosis, its constituent commands are:
 release, plugin installation, or Yak publication.
 
 The manually dispatched `Build verified local release candidate` workflow runs
-that same authoritative `dev.cmd release` gate. While publication remains
-blocked, it uploads only JSON/text/PDF diagnostics: package binaries, the
+that same authoritative `dev.cmd release` gate. It remains a candidate-only
+workflow and uploads only JSON/text/PDF diagnostics: package binaries, the
 Installer ZIP, binary-bearing temporary trees, and the four-file
 `github-assets` directory remain on the protected self-hosted runner and are
 not uploaded or attested. The workflow does not react to tags and does not
-create a GitHub release or publish to Yak. Its self-hosted Windows x64 runner
+create a GitHub Release or publish to Yak. Its self-hosted Windows x64 runner
 must carry the `rhino7`, `rhino8`, `energyplus-24-2`, and `dragons-release`
 labels and have licensed Rhino 7 and Rhino 8 installations available to the
 interactive host gates. The gate still verifies the pinned EnergyPlus runtime
 and every required tool rather than trusting runner labels alone.
 
-Do not push `v0.1.0`, upload a binary, create or publish a GitHub release, or
-publish to Yak while the complete rights-and-notice chain for the exact
-Climate.OneBuilding/Oikolab/Copernicus/ASHRAE-bearing weather payload remains
-unresolved. The MIT code-license and `hyeonggon.jo@snu.ac.kr` support-address
-decisions are already recorded. After the remaining weather right is explicitly
-resolved, re-confirm that the chosen release
-version is still `0.1.0` and that tag `v0.1.0` equals it exactly. Tag creation,
-the GitHub release with exactly the four staged assets, binary upload, Yak
-publication, and Food4Rhino submission remain distinct, explicitly authorized
-manual operations outside this candidate workflow.
+The owner has authorized public publication while accepting that the complete
+Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain remains
+unverified. Immediately before acting, confirm that the machine-readable state
+still records `weatherRightsVerified: false`, owner risk acceptance, and
+`publicPublicationApprovedByOwner: true`; never describe this as written permission.
+Re-confirm that the chosen release version is still `0.1.0` and that tag
+`v0.1.0` equals it exactly. Tag creation, the GitHub Release with exactly the
+four staged assets, binary upload, Yak publication, and Food4Rhino submission
+remain distinct manual operations. Record each only after that action actually
+occurs; none is performed by this candidate workflow.

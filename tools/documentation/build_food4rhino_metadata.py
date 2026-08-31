@@ -36,7 +36,7 @@ _load_oodocs = _USER_GUIDE_HELPERS._load_oodocs
 render_pdf_only = _USER_GUIDE_HELPERS.render_pdf_only
 
 
-PACKAGE_SCHEMA = "goniegonie.dragons-grasshopper.package-spec.v2"
+PACKAGE_SCHEMA = "goniegonie.dragons-grasshopper.package-spec.v3"
 EXPECTED_RELEASE_VERSION = "0.1.0"
 SOURCE_PATH = Path("docs/development/publishing/food4rhino.md")
 EXPECTED_PRODUCT_IDENTITIES = {
@@ -50,8 +50,13 @@ EXPECTED_PUBLICATION = {
     "projectLicenseReview": "resolved-2026-08-31",
     "publicSupportEmail": "hyeonggon.jo@snu.ac.kr",
     "publicSupportEmailReview": "resolved-2026-08-31",
+    "publicPublicationApprovedByOwner": True,
+    "publicPublicationApprovalBasis": "owner-risk-acceptance-2026-08-31",
     "weatherSource": "https://climate.onebuilding.org/",
-    "weatherRedistributionStatus": "blocked-permission-not-found",
+    "weatherRightsVerified": False,
+    "weatherRiskAcceptedByOwner": True,
+    "weatherRiskAcceptanceReview": "accepted-2026-08-31",
+    "weatherRedistributionStatus": "owner-risk-accepted-unverified",
 }
 EXPECTED_SECTIONS = (
     "Publication status and field contract",
@@ -62,7 +67,7 @@ EXPECTED_SECTIONS = (
     "Upload sequence after authorization",
 )
 SAFETY_TOKENS = (
-    "BLOCKED_PENDING_CLIMATE_ONEBUILDING_REDISTRIBUTION_PERMISSION",
+    "OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION",
 )
 
 
@@ -151,8 +156,13 @@ def _load_contract(repo_root: Path) -> tuple[str, Path, str, tuple[str, ...], tu
         EXPECTED_PUBLICATION["projectLicenseOwner"],
         EXPECTED_PUBLICATION["projectLicenseOwnerType"],
         EXPECTED_PUBLICATION["publicSupportEmail"],
+        EXPECTED_PUBLICATION["publicPublicationApprovalBasis"],
         EXPECTED_PUBLICATION["weatherSource"],
+        EXPECTED_PUBLICATION["weatherRiskAcceptanceReview"],
         EXPECTED_PUBLICATION["weatherRedistributionStatus"],
+        "publicPublicationApprovedByOwner: true",
+        "weatherRightsVerified: false",
+        "weatherRiskAcceptedByOwner: true",
     ):
         if value not in source:
             raise Food4RhinoPdfError(
@@ -282,6 +292,13 @@ def _validate_pdf(
         *EXPECTED_PRODUCT_IDENTITIES.values(),
         version,
         *SAFETY_TOKENS,
+        EXPECTED_PUBLICATION["publicPublicationApprovalBasis"],
+        EXPECTED_PUBLICATION["weatherRiskAcceptanceReview"],
+        EXPECTED_PUBLICATION["weatherRedistributionStatus"],
+        "publicPublicationApprovedByOwner: true",
+        "weatherRightsVerified: false",
+        "weatherRiskAcceptedByOwner: true",
+        "does not state or imply",
         *fields,
     )
     missing = [value for value in required_text if _compact(value) not in compact_text]

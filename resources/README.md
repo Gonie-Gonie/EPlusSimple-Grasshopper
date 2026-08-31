@@ -9,7 +9,9 @@ one build or packaging workflow:
   setup validates and packages without committing or expanding those payloads.
   The KoreanTMY declaration also pins its Climate.OneBuilding origin,
   Oikolab/ERA5 and Copernicus provenance links, and current
-  `blocked-permission-not-found` redistribution status; see the maintainer
+  `owner-risk-accepted-unverified` redistribution status. Written upstream
+  permission has not been verified; the individual owner accepted that risk
+  and authorized publication to proceed. See the maintainer
   [weather rights review](../docs/development/publishing/weather-rights-review.md).
 
 Generated packages belong under `artifacts`, downloaded payloads under

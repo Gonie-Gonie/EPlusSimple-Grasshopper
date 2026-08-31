@@ -76,13 +76,17 @@ candidate evidence and is not a fifth public asset.
 `packaging/package-spec.json` deliberately fixes the current first-release
 version at `0.1.0`. The final version decision must be made in source, and the
 future repository tag must equal it exactly (`v0.1.0` for `0.1.0`). Assembling
-these files locally does not create a tag or authorize publication.
+these files locally does not create a tag or perform a publication action;
+owner authorization is recorded independently in the specification.
 The same specification is the machine-readable source for the individual
 Gonie-Gonie ownership, MIT license, confirmed public support email, and current
-Climate.OneBuilding weather-redistribution status. Packaging verifies the
-Oikolab/ERA5 and Copernicus provenance links in the distribution manifest,
-copies the reviewed publication values into `package-index.json`, and lets the
-release gate cross-check them before preparing any GitHub assets.
+Climate.OneBuilding weather-redistribution decision. It records project-owner
+publication approval, `weatherRightsVerified: false`, and
+`weatherRedistributionStatus: owner-risk-accepted-unverified` separately so
+that approval cannot be mistaken for verified upstream permission. Packaging
+verifies the Oikolab/ERA5 and Copernicus provenance links in the distribution
+manifest, copies the reviewed publication values into `package-index.json`,
+and lets the release gate cross-check them before preparing any GitHub assets.
 
 The transient stage and final ZIP roots include their manifest, icon, Gonie-Gonie notices,
 payload manifest, and SHA-256 list. Each package root additionally contains
