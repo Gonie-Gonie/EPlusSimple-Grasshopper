@@ -1,5 +1,7 @@
 # Release notes
 
+These notes describe externally relevant behavior in the current candidate.
+
 ## 0.1.0 — Unreleased local candidate
 
 Version 0.1.0 is an unreleased, locally buildable candidate. There is no public
@@ -27,7 +29,7 @@ standalone-license omission described in `NOTICE.md` is reviewed.
 
 | Gate | Required 0.1.0 evidence | Candidate status |
 | --- | --- | --- |
-| Managed implementation | All discovered unit/integration projects pass with no required skip | Enforced by `dev.cmd release` |
+| Managed implementation | All discovered unit/integration projects pass with no required skip | Passed by the verified candidate gate |
 | Engineering parity | 11 paired Python/C# cases × 6 stages; zero failure or skip | Enforced; report included in candidate |
 | Rhino/Grasshopper | Rhino 7 and Rhino 8 geometry, load, solve, save, and reopen | Enforced on the release host |
 | Examples | Eight `.gh` definitions and two `.3dm` models, including both full workflows | Enforced on Rhino 7 and Rhino 8 |
@@ -35,10 +37,10 @@ standalone-license omission described in `NOTICE.md` is reviewed.
 | Documentation | Four chapters, all 75 components and 37 typed parameters, PDF postflight | Enforced and included as one PDF asset |
 | Public publication | License and weather redistribution review | Blocked; no tag, GitHub release, or Yak publication |
 
-The authoritative result for a particular local candidate is
-`artifacts/release/release-gate.json`, together with the referenced engineering,
-host, example, package, checksum, and documentation reports. Source code or a
-green headless build by itself is not a release attestation.
+A candidate is distributable only when its engineering, host, example,
+package, checksum, and documentation reports all belong to the same source
+commit. Source code or a green headless build by itself is not a release
+attestation.
 
 ### Grasshopper-native authoring
 

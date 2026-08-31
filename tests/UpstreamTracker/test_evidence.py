@@ -961,7 +961,7 @@ public enum ForgedEnum
         workspace.write("tests/ServiceParityTests.cs", TEST_SOURCE)
         workspace.write("tools/EvidenceCollector.cs", COLLECTOR_SOURCE)
         workspace.write(
-            "docs/compatibility.md",
+            "docs/development/compatibility-policy.md",
             "## Declared product compatibility scope\n",
         )
         subprocess.run(
@@ -1083,7 +1083,7 @@ public enum ForgedEnum
             "out_of_scope",
             "compiled_rhino_grasshopper_product",
             "Test-only exact product-contract decision.",
-            "docs/compatibility.md#declared-product-compatibility-scope",
+            "docs/development/compatibility-policy.md#declared-product-compatibility-scope",
             "approved",
         )
 

@@ -15,6 +15,7 @@ MANIFEST = ROOT / "fixtures" / "compatibility" / "cases.json"
 RELEASE_WORKFLOW = ROOT / ".github" / "workflows" / "release-candidate.yml"
 EXAMPLE_TOOL_README = ROOT / "tools" / "example-definitions" / "README.md"
 EXAMPLES_README = ROOT / "examples" / "README.md"
+EXAMPLE_MAINTENANCE = ROOT / "docs" / "development" / "example-maintenance.md"
 EXAMPLE_RUNNER = ROOT / "tools" / "example-definitions" / "run.ps1"
 EXAMPLE_HOST_INPUTS = (
     ROOT / "tools" / "example-definitions" / "Shared" / "ExampleHostInputs.cs"
@@ -146,10 +147,12 @@ class EngineeringProvenanceContractTests(unittest.TestCase):
         workflow = RELEASE_WORKFLOW.read_text(encoding="utf-8")
         tool_readme = EXAMPLE_TOOL_README.read_text(encoding="utf-8")
         examples_readme = EXAMPLES_README.read_text(encoding="utf-8")
+        maintenance_readme = EXAMPLE_MAINTENANCE.read_text(encoding="utf-8")
         self.assertIn("temp/e/", workflow)
         self.assertNotIn("temp/example-definitions/", workflow)
         self.assertIn("temp/e/<token>", tool_readme)
-        self.assertIn("temp/e/<token>", examples_readme)
+        self.assertIn("temp/e/<token>", maintenance_readme)
+        self.assertNotIn("temp/e/<token>", examples_readme)
         self.assertNotIn("temp/example-definitions/run-*", tool_readme)
         self.assertNotIn("`temp/example-definitions/`", examples_readme)
 

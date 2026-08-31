@@ -1,31 +1,19 @@
-# Dragon documentation
+# Documentation
 
-InvisibleDragon and SimpleDragon are separate Grasshopper products built from
-one source tree. Start with the module comparison, then follow the installation
-and workflow guides.
+The documentation tree has two explicit audiences. Do not place a maintainer
+procedure in the user tree or link a development worksheet as user guidance.
 
-- [Installation](installation.md): Rhino versions, packages, local builds, and
-  simultaneous installation.
-- [Choosing a Dragon](choosing-a-dragon.md): the geometry and modeling boundary
-  between InvisibleDragon and SimpleDragon.
-- [Grasshopper workflow](grasshopper-workflow.md): authoring, HVAC connections,
-  direct simulation, results, CSV, and batch studies.
-- [EnergyPlus and weather](energyplus-and-weather.md): the pinned runtime,
-  bundled preparation, cache locations, SimpleDragon's Address/Vintage-selected
-  EPW behavior, and the explicit EPW verification boundary for standalone
-  InvisibleDragon execution.
-- [Compatibility](compatibility.md): supported hosts, upstream baseline,
-  interoperability, and current limitations.
-- [Troubleshooting](troubleshooting.md): load, runtime, weather, and duplicate
-  assembly problems.
-- [Release checklist](release-checklist.md): maintainer-only candidate and
-  publication gates.
+| Audience | Start here | Contents |
+|---|---|---|
+| Plugin users and public project pages | [User documentation](user/README.md) | Installation, product choice, Grasshopper workflows, runtime/weather behavior, troubleshooting, examples, and the four externally distributed user-guide chapters |
+| Contributors and release maintainers | [Development documentation](development/README.md) | Reproducible setup, build/test workflows, compatibility policy, OODocs generation, packaging, release gates, and publishing worksheets |
 
-Worked recipe outlines live in [the examples directory](../examples/README.md).
-The four canonical PDF sources live in [user-guide](user-guide/README.md); run
-`dev.cmd docs` to regenerate the exhaustive component reference from the
-current runtime metadata and build the user-distribution PDF with OODocs.
+The generated PDF remains the only bundled documentation artifact:
+`artifacts/documentation/Dragons-Grasshopper-User-Guide-0.1.0.pdf`.
+Its authored and generated Markdown chapters live under
+[`user/user-guide`](user/user-guide/01-workflow.md); the build procedure lives
+only in the development tree.
 
-Python is never required by an installed plugin. The repository setup creates
-one isolated venv for the development oracle and PDF documentation build, so
-contributors do not install those modules globally.
+Repository-wide legal and release records remain at the conventional root
+locations: [LICENSE](../LICENSE), [NOTICE](../NOTICE.md), and
+[CHANGELOG](../CHANGELOG.md).

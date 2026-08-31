@@ -30,7 +30,7 @@ NEEDS_RATIONALE = (
     "No symbol-level equivalence, verified exception, or out-of-scope evidence is registered."
 )
 EXPECTED_FINAL_DECISIONS_SHA256 = (
-    "sha256:7550b201dba05d5a277948f7b494b455c7069ecbab2fbbef819e3df33aff1cd6"
+    "sha256:25a52087451b51f1af128d3a0a6b89bf76a080e0b39a160bcc76299ab04b6403"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
     "sha256:a966da9575d42ba79510cae764c2054dbc9fe273e16886f50b7789594cc83475"
@@ -3358,7 +3358,7 @@ class SafeScopePolicyTests(unittest.TestCase):
             "out_of_scope",
             "compiled_rhino_grasshopper_product",
             "Python mutable-container editing entry point.",
-            "docs/compatibility.md#declared-product-compatibility-scope",
+            "docs/development/compatibility-policy.md#declared-product-compatibility-scope",
             "approved",
         )
         invalid_decisions = ScopeDecisionRegistry(
@@ -3404,7 +3404,7 @@ class SafeScopePolicyTests(unittest.TestCase):
             "out_of_scope",
             "compiled_rhino_grasshopper_product",
             "forged",
-            "docs/compatibility.md#declared-product-compatibility-scope",
+            "docs/development/compatibility-policy.md#declared-product-compatibility-scope",
             "approved",
         )
         decisions = ScopeDecisionRegistry(

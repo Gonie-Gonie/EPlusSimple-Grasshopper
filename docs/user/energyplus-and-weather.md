@@ -1,5 +1,7 @@
 # EnergyPlus and weather
 
+This page explains the runtime and weather behavior visible to plugin users.
+
 ## No setup paths in the SimpleDragon graph
 
 The canonical SimpleDragon workflow does not ask for an EnergyPlus executable,
@@ -65,7 +67,9 @@ example connects a momentary Grasshopper Button to Run; the unpressed Button
 rests at False, so the example opens and recomputes without touching a weather
 file or starting EnergyPlus.
 
-Developer setup verifies the same archives used by candidate packaging. Released plugins do not need Python, the .NET SDK, or a machine-wide EnergyPlus installation.
+Package preparation verifies the same archives used by the installed products.
+Released plugins do not need Python, the .NET SDK, or a machine-wide EnergyPlus
+installation.
 
 ## Security and recovery
 

@@ -17,6 +17,7 @@ $requirementsPath = Join-Path $repositoryRoot 'tools\documentation\requirements.
 $nugetConfigPath = Join-Path $repositoryRoot 'NuGet.config'
 $nugetPackagesPath = Join-Path $repositoryRoot '.tools\nuget\packages'
 $environmentVerifierPath = Join-Path $repositoryRoot 'tools\documentation\verify_environment.py'
+$sourceVerifierPath = Join-Path $repositoryRoot 'tools\documentation\verify_repository_docs.py'
 $guideBuilderPath = Join-Path $repositoryRoot 'tools\documentation\build_user_guide.py'
 $guideMetadataPath = Join-Path $repositoryRoot 'tools\documentation\component-guides.json'
 $catalogProjectPath = Join-Path $repositoryRoot 'tools\component-catalog\GonieGonie.Dragons.ComponentCatalog.csproj'
@@ -47,7 +48,7 @@ $safeWorkRoot = Assert-RepositoryChildPath `
     -Path $workRoot `
     -AllowedTopLevelNames @('temp')
 $outputDirectory = Split-Path -Parent $safeOutputPath
-$referenceDirectory = Join-Path $repositoryRoot 'docs\user-guide'
+$referenceDirectory = Join-Path $repositoryRoot 'docs\user\user-guide'
 
 # Lexical containment is not enough for a write workflow: a junction beneath
 # temp, artifacts, or docs could redirect a later replace outside the checkout.
@@ -60,6 +61,7 @@ foreach ($requiredFile in @(
     $environmentStampPath,
     $requirementsPath,
     $environmentVerifierPath,
+    $sourceVerifierPath,
     $guideBuilderPath,
     $guideMetadataPath,
     $catalogProjectPath)) {
@@ -129,6 +131,7 @@ if ([string] $settings.pythonEnvironment.version -cne '3.12.7' -or
 
 if ($WhatIfPreference) {
     Write-Host "What if: verify the hash-locked documentation venv '$pythonExecutable'."
+    Write-Host 'What if: verify the public/development documentation boundary, links, and Food4Rhino fields.'
     Write-Host "What if: restore the component catalog project graph in NuGet locked mode."
     Write-Host "What if: build the runtime component catalog project '$catalogProjectPath'."
     Write-Host "What if: extract and compare Rhino 7/net48 plus Rhino 8/net7.0-windows and net8.0-windows component catalogs."
@@ -162,6 +165,15 @@ Invoke-LoggedNativeCommand `
         '--expected-oodocs', '1.3.0') `
     -LogPath (Join-Path $logsRoot 'verify-environment.log') `
     -FailureMessage 'The repository documentation environment is not reproducible'
+
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList @(
+        '-I', '-B', '-X', 'utf8',
+        $sourceVerifierPath,
+        '--repo-root', $repositoryRoot) `
+    -LogPath (Join-Path $logsRoot 'verify-documentation-sources.log') `
+    -FailureMessage 'The documentation hierarchy, links, or Food4Rhino metadata is invalid'
 
 Invoke-WithTrackedPackageLockNormalization `
     -RepositoryRoot $repositoryRoot `

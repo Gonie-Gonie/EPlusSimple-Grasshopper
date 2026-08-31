@@ -1,5 +1,7 @@
 # Workflow
 
+This chapter is part of the externally distributed Dragon user guide.
+
 InvisibleDragon and SimpleDragon are two independently installable Grasshopper
 products for building-energy authoring and EnergyPlus simulation. Both use
 typed Grasshopper values and direct ownership wires: an opening belongs to a
@@ -29,14 +31,6 @@ InvisibleDragon and SimpleDragon have separate package identities. Install
 either one or both from the same version. For Yak packages, select the package
 for the host generation: `rh7-win` for Rhino 7 and `rh8-win` for Rhino 8. Close
 all Rhino processes before installing, replacing, or removing plugin files.
-
-For a local source checkout, one command replaces any existing local Dragon
-packages with a newly built candidate in every detected Rhino 7 and Rhino 8
-host:
-
-```text
-.\dev.cmd install
-```
 
 After installation:
 
@@ -504,9 +498,7 @@ for the model, result, and every emitted CSV.
 The separate batch `reproducibility-manifest.json` records the run fingerprint,
 parallelism, executor and canonical options, both core versions, upstream and
 EnergyPlus identities, plus each case's cache key, model/weather hashes,
-snake-case status, metrics, and diagnostics. The release gate binds its verified
-reports, packages, documentation, runtime payloads, and checksums into the local
-candidate evidence.
+snake-case status, metrics, and diagnostics.
 
 GRR and Directory are required. GRM, diagnostics, and Model `Geometry Map Data`
 are optional additions to the package. If files already exist, either choose a

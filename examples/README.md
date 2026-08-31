@@ -20,12 +20,9 @@ Surface Breps and window curves that can be referenced directly from Grasshopper
 
 ## Run locally
 
-Install the current Dragon build, close and reopen Rhino, then open any `.gh`
-file in Grasshopper:
-
-```powershell
-.\dev.cmd install
-```
+Install the matching released packages for your Rhino generation as described
+in the [installation guide](../docs/user/installation.md), close and reopen
+Rhino, then open any `.gh` file in Grasshopper.
 
 Opening an example manually is safe: every Run, Cancel, Write, and Export action
 is wired to a Grasshopper Button, whose resting persisted value is `False`.
@@ -109,53 +106,6 @@ attributes carry `DragonRole=ThermalSurface`, `ZoneName`, `SurfaceType`, and
 The stepped three-Zone model follows the same naming and layer convention and
 can replace or extend the inputs for geometry studies.
 
-## Automated generation and verification
-
-Validate every tracked definition and model in both supported Rhino hosts:
-
-```powershell
-.\dev.cmd examples
-```
-
-Regenerate all canonical binaries with Rhino 7, then validate them in Rhino 7
-and Rhino 8:
-
-```powershell
-.\dev.cmd examples -Generate
-```
-
-The gate runs its Rhino hosts from a disposable system-temp directory outside
-the repository. It checks component identities, the exact persisted wire set
-and total, typed outputs, selected Boolean/numeric results, outward Surface
-winding after save/reopen, runtime errors, Grasshopper round trips, and the
-document-relative GRR fixture path. For `.3dm` files it also checks metre units,
-layer, object names and ownership attributes, single-face planar Breps, exact
-bounds and normals, required Zone adjacencies, closed planar windows, and
-equality between model geometry and the internalized two-Zone Grasshopper
-inputs. Candidates, logs, summaries, and round-trip copies remain below the
-short-path run directory `temp/e/<token>`.
-
-For example 02, that topology check includes `ID Weather`, `Run
-InvisibleDragon`, and every compile/weather/run wire. Its deliberately data-empty
-EPW File parameter and unpressed action Buttons remain no-op through solve, save, reopen,
-and round trip. When the required runtime gate runs, automation extracts one
-verified EPW below `temp/`, injects it only into the reopened in-memory document,
-and verifies first-run, cache, and cancellation behavior in Rhino 7 and Rhino 8.
-The tracked definition remains blank and safe to open.
-
-When the verified distribution payloads and EnergyPlus runtime are available,
-the gate also temporarily enables example 14 in memory and verifies internal
-packaged-weather selection, its Floor/Ceiling/Wall-to-Zone electric-radiator model, direct
-SimpleDragon Run-to-GRR execution, the default monthly graph, CSV, cache, and cancellation in both hosts. All saved action
-Buttons remain at their resting `False` value. Use
-`-SkipEnergyPlusWorkflow` to test the explicit disabled state or
-`-EnergyPlusRoot` to select a runtime. The gate supplies that root, its IDD, and
-an optional `-WeatherPath` test override only through internal automation
-environment values; none are added as product path inputs. Without gate overrides,
-the component uses its managed LocalAppData runtime bootstrap and address-selected
-packaged weather. An unavailable prerequisite is reported as `Not Run`, not as a
-successful simulation.
-
 ## Further workflow recipes
 
 - Example 02 uses `Compile InvisibleDragon`, whose managed IDD and embedded
@@ -173,5 +123,5 @@ successful simulation.
   paths. Runtime, weather, case temp, and result storage paths are managed
   internally.
 
-See [the workflow guide](../docs/grasshopper-workflow.md) for units, optional
+See [the workflow guide](../docs/user/grasshopper-workflow.md) for units, optional
 inputs, triggers, and persistence rules.

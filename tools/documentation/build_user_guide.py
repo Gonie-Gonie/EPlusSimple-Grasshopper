@@ -32,7 +32,7 @@ EXPECTED_COMPONENT_COUNT = 75
 EXPECTED_PRODUCTS = ("InvisibleDragon", "SimpleDragon")
 
 GUIDES_PATH = Path("tools/documentation/component-guides.json")
-REFERENCE_PATH = Path("docs/user-guide/02-in-out-reference.md")
+REFERENCE_PATH = Path("docs/user/user-guide/02-in-out-reference.md")
 SOURCE_CHAPTERS = (
     ("01-workflow.md", "Workflow"),
     ("02-in-out-reference.md", "Component In/Out Reference"),
@@ -826,6 +826,8 @@ def render_component_reference(
     lines = [
         "# Component In/Out Reference",
         "",
+        "_Generated from the public runtime catalog; do not edit this chapter directly._",
+        "",
         "This reference combines runtime-reflected Grasshopper ports with curated "
         "workflow guidance. It covers every public component in InvisibleDragon and "
         "SimpleDragon; port order, access mode, defaults, choices, and wire types come "
@@ -1132,7 +1134,7 @@ def _build_document(
     internal_guids: frozenset[str],
     reference_source: str,
 ) -> Any:
-    guide_directory = repo_root / "docs/user-guide"
+    guide_directory = repo_root / "docs/user/user-guide"
     chapters = tuple(
         _import_chapter(
             api,
@@ -1442,7 +1444,7 @@ def _parser() -> argparse.ArgumentParser:
         "--repo-root",
         required=True,
         type=Path,
-        help="Repository root containing global.json and docs/user-guide.",
+        help="Repository root containing global.json and docs/user/user-guide.",
     )
     parser.add_argument(
         "--catalog",

@@ -1,5 +1,7 @@
 # Component In/Out Reference
 
+_Generated from the public runtime catalog; do not edit this chapter directly._
+
 This reference combines runtime-reflected Grasshopper ports with curated workflow guidance. It covers every public component in InvisibleDragon and SimpleDragon; port order, access mode, defaults, choices, and wire types come from the built plugins rather than a manually maintained list.
 
 **Coverage:** 75 components and 37 standalone typed parameters for `net48 + net7.0-windows + net8.0-windows`.

@@ -1,12 +1,12 @@
 # Troubleshooting
 
+Start here when an installed Dragon package, model, or simulation does not behave as expected.
+
 ## The Grasshopper tab does not appear
 
-Close all Rhino processes, verify that the package targets the running Rhino generation, and unblock the downloaded archive before reinstalling. Do not copy only the GHA; its adjacent `GonieGonie.*` dependencies are required.
-
-For a source checkout, rerun `./dev.cmd setup` after installing Rhino, then run
-`./dev.cmd build`. Stable reports are below `artifacts/reports`; the newest
-failed host run remains below `temp/grasshopper-smoke` until the next workflow.
+Close all Rhino processes, verify that the package targets the running Rhino
+generation, and unblock the downloaded archive before reinstalling. Do not copy
+only the GHA; its adjacent `GonieGonie.*` dependencies are required.
 
 ## One Dragon loads and the other fails
 
@@ -25,7 +25,9 @@ For deliberate standalone InvisibleDragon execution, connect
 `EPW File -> ID Weather -> Run InvisibleDragon`. EnergyPlus and IDD paths remain
 internal; the EPW is the only user-selected execution path.
 
-If it still fails, inspect the structured diagnostics. For a source checkout, run `./dev.cmd setup` and `./dev.cmd install` again with Rhino closed. Do not point the graph at Rhino's `Program Files` directory or manually copy an unverified EnergyPlus folder.
+If it still fails, inspect the structured diagnostics and reinstall the complete
+matching package with Rhino closed. Do not point the graph at Rhino's `Program
+Files` directory or manually copy an unverified EnergyPlus folder.
 
 ## An action stays idle
 
@@ -42,8 +44,8 @@ must resolve to a supported Korean weather record; weather selection,
 verification, and handoff are internal.
 
 If the run reports a weather failure, inspect `SD.GH.WEATHER_*` and
-`SD.WEATHER.*` diagnostics, then rebuild/reinstall both products from the same
-candidate. There is no EPW path panel in the canonical SimpleDragon workflow.
+`SD.WEATHER.*` diagnostics, then reinstall both products from the same release.
+There is no EPW path panel in the canonical SimpleDragon workflow.
 
 For standalone InvisibleDragon, select a local `.epw` file in the `EPW File`
 parameter and connect it to `ID Weather`. Success must be True before its Weather
@@ -97,25 +99,3 @@ matching can apply the same Opening list to unrelated faces.
 ## A model compiles but EnergyPlus reports severe errors
 
 Read the structured Diagnostics and Result outputs. Check source/supply compatibility, direct Zone HVAC ownership, indistinguishable duplicate authored objects, positive capacities and flows, schedule ranges, construction references, and the model address. Entity IDs are generated internally, so resolve a duplicate-identity diagnostic by making the relevant authored names, geometry, or connected definitions distinct. A successful run removes its temporary working directory after parsing the result. A failed or cancelled run is retained below `%TEMP%\GonieGonie\Dragons\energyplus-runs` so its EnergyPlus output and logs can be inspected.
-
-## Cleaning local work
-
-Each non-clean top-level `dev.cmd` workflow empties exact-name heavy run
-collections before execution. On success it removes the new Grasshopper smoke,
-example, trusted-evidence, and release-test runs too; their durable evidence is
-already tracked or copied under `artifacts`. On failure it retains only the
-newest run until the next explicit workflow. Small install receipts always keep
-their newest entry. The policy never selects an unknown name and leaves reusable
-build/reference workspaces intact. A repository-local lease prevents supported
-concurrent workflows from deleting the current run; `-WhatIf` creates no lease
-and performs no automatic deletion.
-
-`.\dev.cmd clean -TempOnly` removes the complete disposable repository `temp`
-tree; `.\dev.cmd clean` also removes generated artifact content and ignored
-source-tree caches after validating the target paths. Use
-`.\dev.cmd clean -CachesOnly` to remove only ignored `bin`, `obj`,
-`TestResults`, `__pycache__`, and `.pytest_cache` directories beneath source,
-test, script, and tool roots. All modes preserve `.tools`, tracked artifact documentation,
-GH/3DM/GRM/GRR files, per-user runtime/weather caches, and retained system-temp
-simulation failures. Remove or copy a retained failure directory only after
-collecting the diagnostics you need.

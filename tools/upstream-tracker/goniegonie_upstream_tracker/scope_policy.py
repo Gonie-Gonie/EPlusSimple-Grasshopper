@@ -13,7 +13,7 @@ from .errors import ConfigurationError
 from .evidence import ScopeDecision, ScopeDecisionRegistry
 
 
-POLICY_REFERENCE = "docs/compatibility.md#declared-product-compatibility-scope"
+POLICY_REFERENCE = "docs/development/compatibility-policy.md#declared-product-compatibility-scope"
 PRODUCT_CONTRACT = "compiled_rhino_grasshopper_product"
 EXPECTED_SAFE_SCOPE_COUNT = 252
 EXPECTED_BASELINE_DECISION_COUNT = 16

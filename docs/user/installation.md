@@ -1,13 +1,14 @@
 # Installation
 
+This page is for people installing and loading released Dragon packages.
+
 ## Requirements
 
 - Windows x64.
 - Rhino 7 or Rhino 8 with Grasshopper. Both versions may be installed.
-- Network access while setup downloads the pinned archives, or only as a
-  verified fallback if an installed package's embedded EnergyPlus archive is
-  absent. A normal InvisibleDragon package prepares its embedded runtime
-  offline.
+- Network access is needed only when an installed product cannot find its
+  embedded or cached pinned EnergyPlus runtime and uses the verified fallback.
+  A normal InvisibleDragon package prepares its embedded runtime offline.
 
 Installed plugins do not require the .NET SDK, Python, Visual Studio, or a
 machine-wide EnergyPlus installer. Rhino is licensed separately and is never
@@ -33,56 +34,8 @@ are verified before use; Python and directly expanded runtime/weather files are
 deliberately excluded.
 
 Do not combine files from different commits or versions. When both products
-are installed, their shared `GonieGonie.*` assemblies must be byte-identical.
-The package verifier enforces this for every generated candidate.
-
-## Local release candidates
-
-Contributors can reproduce packages from a clean checkout:
-
-```text
-.\dev.cmd setup
-.\dev.cmd build
-.\dev.cmd package -SkipBuild
-```
-
-Outputs are written below `artifacts\packages`. Packaging never installs a
-plugin, publishes to Rhino Package Manager, creates a Git tag, or creates a
-public release.
-
-## One-command local reinstall
-
-Close every Rhino process, then run `.\dev.cmd install`. It prepares the reproducible
-environment, builds the current source without tests, creates fresh packages,
-uninstalls only the `invisible-dragon` and `simple-dragon` package IDs from each
-detected Rhino 7/8 installation, and installs the matching local Yak files.
-
-```text
-.\dev.cmd install
-```
-
-To skip setup/build/package and reinstall the existing hash-checked Yak files:
-
-```text
-.\dev.cmd install -UseExistingPackages
-```
-
-Use `-Target Rhino7` or `-Target Rhino8` to limit the operation. Logs and the
-installation receipt are written below `temp\install`; the script never
-publishes a package and never removes unrelated Rhino packages.
-
-Setup remembers nonstandard Rhino locations in `.tools\state\local.settings.json`,
-and `install` reuses those exact locations before trying the standard `Program
-Files` paths. A location may be the Rhino installation root, its `System`
-directory, or `Rhino.exe` itself. You can also override either host explicitly:
-
-```text
-.\dev.cmd install -Rhino7Path "D:\Apps\Rhino 7" -Rhino8Path "D:\Apps\Rhino 8"
-```
-
-The selected `Rhino.exe` and its sibling `yak.exe` must both exist and report
-the requested Rhino major version. When install rebuilds packages, it forwards
-the same resolved executables back to setup so a custom location is not lost.
+are installed, install the complete packages from the same release so their
+shared `GonieGonie.*` assemblies remain identical.
 
 ## First load
 

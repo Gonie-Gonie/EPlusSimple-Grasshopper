@@ -1,4 +1,8 @@
-# Compatibility
+# Compatibility policy
+
+This document is a maintainer contract for port scope, evidence, and release
+verification. User-facing host support and limitations are documented in the
+[public compatibility chapter](../user/user-guide/03-compatibility.md).
 
 ## Host matrix
 

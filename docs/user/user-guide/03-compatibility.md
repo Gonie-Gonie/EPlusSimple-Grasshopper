@@ -1,5 +1,7 @@
 # Compatibility
 
+This chapter describes compatibility guarantees and limitations relevant to plugin users.
+
 ## Supported host matrix
 
 Version 0.1.0 targets Grasshopper on Windows x64.
@@ -101,70 +103,19 @@ The following are not compatibility promises for the Grasshopper products:
 - A general editor for every EnergyPlus object, field, node, branch, or plant
   loop.
 
-## Engineering compatibility gate
+## Verified compatibility coverage
 
-Run `dev.cmd compatibility` to execute the paired Python/C# engineering gate.
-The tracked manifest declares exactly 11 cases. Every case must execute these
-six stages without a skip:
+The 0.1.0 candidate is checked with 11 paired Python/C# engineering cases and
+66 declared stages covering GRM cross-read, authored and expanded IDF,
+EnergyPlus 24.2 execution, GRR values, and diagnostics. The host gates also
+load, solve, save, and reopen the public components and examples in Rhino 7 and
+Rhino 8. Package gates exercise InvisibleDragon alone, SimpleDragon alone, and
+both products together.
 
-1. GRM cross-read.
-2. Authoring IDF comparison.
-3. Expanded IDF comparison.
-4. EnergyPlus 24.2.0 execution.
-5. GRR comparison.
-6. Warning, Severe, and Fatal comparison.
-
-Eight cases use the pinned Chicago weather record. The packaged ERV/PV/opening
-case is additionally repeated with Tampa, Golden, and San Francisco EPWs. The
-matrix covers adjacency, shared heat pumps, screw and absorption chillers,
-cooling towers, geothermal AHU, packaged equipment, boilers, district heat,
-FCU, radiators, radiant systems, DHW, ERV, PV, multiple fuels, and openings.
-The resulting 11-case/66-stage report is written to
-`artifacts/reports/engineering-compatibility.json`.
-
-Numeric comparison uses:
-
-```text
-|C# - Python| <= absolute_tolerance
-                + relative_tolerance * max(|C#|, |Python|)
-```
-
-The tracked case manifest sets authoring/expanded IDF numeric tolerances to
-absolute and relative `1e-9`. GRR values use absolute `0.01` and relative
-`0.001` under the same formula. Its `0.005` near-zero value floors the
-denominator used to report relative error and is the threshold that explicitly
-designated non-zero result totals must exceed; it does not replace the pass/fail
-formula. Warning-count delta is zero. A matching non-zero Severe or
-Fatal result is still a failure unless the exact normalized diagnostic and
-count belong to a reviewed exception. The report records the maximum absolute
-error, the relative error at that same JSON path, and the path itself rather
-than hiding the comparison behind a pass flag.
-
-`-AllowDifferences` is a diagnostic development mode and is never release
-evidence. A verified release requires all 11 cases, all 66 stages, zero failed
-cases, zero skipped stages, and no unreviewed difference.
-
-## Compatibility evidence and exceptions
-
-The upstream public-symbol inventory contains 1,242 ordered symbols. Each row
-must be classified as `equivalent`, `exception`, or `out_of_scope`; the release
-gate rejects `needs_reverification`. Symbol evidence binds the exact upstream
-commit and symbol hash, production C# file/symbol/hash, verifying test
-file/symbol/hash, assertion ID, and deterministic expected output. Fixture-backed
-receipts additionally record their fixture and generator hashes. Broad
-file-level mappings are not equivalence claims.
-
-Intentional native adaptations live in
-`upstream/compatibility-exceptions.yml`. Each exception identifies the exact
-upstream symbol, native behavior, engineering/IDF/result effect, evidence, and
-approval. Generated-name differences may be canonicalized only as a one-to-one
-mapping that preserves every definition and reference; missing, swapped,
-merged, or dangling relationships fail the gate.
-
-The data parity suite separately covers all 24 packaged usage profiles through
-their final schedules, every surface-regulation branch, every fenestration key,
-all 252 weather rows, and climate effective-date boundaries. Runtime, EPW, GRM,
-and source inputs are content-addressed before either engine runs.
+These checks support the engineering behavior described here; they do not
+promise historical Python import, call, container, CLI, Excel, pandas, or regex
+compatibility. A public release remains blocked until the release-notes and
+NOTICE conditions say otherwise.
 
 ## Geometry abstraction and provenance
 
@@ -185,23 +136,6 @@ The two Version components expose the product version and pinned upstream
 commit. CSV/batch manifests record the product/core versions and run identity;
 release manifests additionally bind EnergyPlus executable, IDD, ExpandObjects,
 weather archive/file, shared assembly, and package SHA-256 values.
-
-## Maintainer upstream synchronization
-
-The scheduled/manual upstream workflow detects source and data drift but never
-auto-merges Python code. To accept a new baseline:
-
-1. Create `sync/simpledragon-upstream-<short-sha>` from current `main`.
-2. Collect the upstream diff and symbol-hash report without changing the lock.
-3. Add or update Python behavioral fixtures for every affected branch.
-4. Port the behavior in C# and update its symbol/test mapping.
-5. Run unit, semantic authoring/expanded IDF, and numerical EnergyPlus gates.
-6. Review every intentional difference in the exception registry.
-7. Require zero unmapped symbols and zero `needs_reverification` rows.
-8. Update the pinned upstream lock only after all evidence passes, then review
-   and merge the sync branch.
-
-Never update the compatibility lock merely to silence a drift report.
 
 ## Product boundary compatibility
 

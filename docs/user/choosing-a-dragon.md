@@ -1,5 +1,7 @@
 # Choosing a Dragon
 
+Use this guide to choose the product boundary that fits the Grasshopper model.
+
 The two products share an EnergyPlus execution path but intentionally model
 geometry at different levels.
 

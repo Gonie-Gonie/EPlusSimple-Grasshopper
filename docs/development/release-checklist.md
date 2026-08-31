@@ -1,5 +1,7 @@
 # Release checklist
 
+This is an internal maintainer checklist, not installation or usage guidance.
+
 This checklist is for maintainers preparing the first local InvisibleDragon and
 SimpleDragon 0.1.0 candidate for Rhino 7+. Building a candidate does not
 authorize publication, Yak upload, tag creation, or a GitHub release.

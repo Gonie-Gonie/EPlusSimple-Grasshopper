@@ -1,5 +1,7 @@
 # Grasshopper workflow
 
+This is the concise canvas-authoring guide for installed Dragon components.
+
 ## Shared conventions
 
 - Numeric geometry and HVAC inputs use the SI units shown in each parameter description.
@@ -185,7 +187,7 @@ The tracked definitions under `examples/` progress from materials and profiles t
   remain directly owned by their Zones;
   a heat-pump/AHU serves the west Zone, a boiler/radiator serves the east Zone,
   and PV is resolved with both into one complete GRM;
-- `14-simpledragon-two-zone-run-results-csv.gh`: the stable end-to-end gate,
+- `14-simpledragon-two-zone-run-results-csv.gh`: the stable end-to-end example,
   with an electric radiator and ERV connected directly to each Zone,
   `SD Model -> Run SimpleDragon -> GRR`, a directly connected default monthly
   line graph, summaries, CSV, and a typed Batch Case feeding the managed batch
@@ -199,7 +201,9 @@ is intended.
 
 The geometry is also available as `30-two-zone-office.3dm` and `31-three-zone-stepped-office.3dm`. All action Buttons are saved at their resting False value.
 
-Run `./dev.cmd examples` to solve and round-trip every `.gh` and `.3dm` example in Rhino 7 and Rhino 8. Use `-SkipEnergyPlusWorkflow` to verify the explicit Not Run path. Run `./dev.cmd examples -Generate` only when deliberately refreshing the Rhino 7-authored canonical binaries.
+Open the tracked definitions from the [examples directory](../../examples/README.md).
+Each action Button is saved unpressed, so opening an example does not start a
+simulation or write a file.
 
 ## Saving and reopening
 

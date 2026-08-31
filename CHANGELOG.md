@@ -56,6 +56,8 @@ independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
 - Add a reproducible repository venv and OODocs PDF workflow whose Python-native
   catalog reader and guide builder combine runtime-reflected metadata with
   detailed guidance and require exact In/Out coverage for every public component.
+- Add one Food4Rhino publishing sheet containing copy-ready App fields, Yak
+  connection values, platform labels, and upload assets for both separate Apps.
 
 ### Development and verification
 
@@ -72,6 +74,9 @@ independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
   the Python oracle, all production targets and tests, real EnergyPlus runs,
   the exhaustive PDF guide, tracked Grasshopper examples, package contents, and
   all six Rhino 7/Rhino 8 portable-package load scenarios.
+- Separate external user documentation from development, evidence, release, and
+  publishing procedures, and validate that hierarchy, its local links, and the
+  Food4Rhino field contract during every `dev.cmd docs` run.
 
 ### Distribution status
 

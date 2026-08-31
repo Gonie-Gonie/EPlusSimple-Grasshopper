@@ -7,7 +7,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 RELEASE = ROOT / "scripts" / "release.ps1"
 RELEASE_WORKFLOW = ROOT / ".github" / "workflows" / "release-candidate.yml"
-RELEASE_CHECKLIST = ROOT / "docs" / "release-checklist.md"
+RELEASE_CHECKLIST = ROOT / "docs" / "development" / "release-checklist.md"
 
 
 class ReleaseExampleEvidenceContractTests(unittest.TestCase):

@@ -1,15 +1,16 @@
-# Dragon user-guide sources
+# Building the Dragon user guide
 
-The distributable PDF is assembled from these Markdown chapters in this order:
+The distributable PDF is assembled from the externally visible Markdown
+chapters under `docs/user/user-guide` in this order:
 
 1. `01-workflow.md`
 2. `02-in-out-reference.md`
 3. `03-compatibility.md`
 4. `04-release-notes.md`
 
-This README is not included in the PDF. The In/Out reference is generated from
-the current public Grasshopper catalog; the other chapters are maintained as
-task-oriented user guidance.
+This development page is not included in the PDF. The In/Out reference is
+generated from the current public Grasshopper catalog and carries a generated
+warning; the other chapters are maintained as task-oriented user guidance.
 
 From the repository root, prepare the repository-local documentation
 environment once and then build the PDF:

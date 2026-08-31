@@ -335,7 +335,7 @@ class _PrivateService:
                     "out_of_scope",
                     "compiled_rhino_grasshopper_product",
                     "Test-only reviewed scope decision.",
-                    "docs/compatibility.md#declared-product-compatibility-scope",
+                    "docs/development/compatibility-policy.md#declared-product-compatibility-scope",
                     "approved",
                 )
                 for index, item in enumerate(inventory.symbols)
@@ -445,7 +445,7 @@ class _PrivateService:
                 canonical_decisions.to_data(),
             )
             workspace.write(
-                "docs/compatibility.md",
+                "docs/development/compatibility-policy.md",
                 "## Declared product compatibility scope\n",
             )
             self._commit_repository(workspace.path)
@@ -476,7 +476,7 @@ class _PrivateService:
                         "out_of_scope",
                         "compiled_rhino_grasshopper_product",
                         "Forged direct-API decision.",
-                        "docs/compatibility.md#declared-product-compatibility-scope",
+                        "docs/development/compatibility-policy.md#declared-product-compatibility-scope",
                         "approved",
                     )
                     for index, item in enumerate(inventory.symbols)

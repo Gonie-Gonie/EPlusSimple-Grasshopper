@@ -41,6 +41,7 @@ The root contains only stable project boundaries:
 | `src/` | InvisibleDragon, SimpleDragon, and shared production code |
 | `tests/` | Product, compatibility, packaging, installer, and lifecycle tests |
 | `examples/` | Tracked Grasshopper definitions and Rhino building models |
+| `docs/` | Audience-routed user documentation and separate development/maintainer procedures |
 | `scripts/` / `tools/` | `dev.cmd` workflows and their implementation utilities |
 | `resources/` | Canonical icon artwork and pinned external-runtime declarations |
 | `packaging/` | Product manifests, package rules, and runtime packaging policy |
@@ -61,8 +62,8 @@ InvisibleDragon candidates carry the exact pinned EnergyPlus ZIP and
 SimpleDragon candidates carry the exact pinned KoreanTMY ZIP; neither payload
 is expanded in source control or directly inside a package.
 
-Read [Installation](docs/installation.md), [Choosing a Dragon](docs/choosing-a-dragon.md),
-and [EnergyPlus and weather](docs/energyplus-and-weather.md) before using a
+Read [Installation](docs/user/installation.md), [Choosing a Dragon](docs/user/choosing-a-dragon.md),
+and [EnergyPlus and weather](docs/user/energyplus-and-weather.md) before using a
 candidate. InvisibleDragon and SimpleDragon may be installed independently or
 together when they come from the same release commit.
 
@@ -110,153 +111,20 @@ weather boundary: `EPW File -> ID Weather -> Run InvisibleDragon`. `ID Weather`
 verifies the selected EPW and creates the typed handle consumed by the runner;
 InvisibleDragon does not select or download weather.
 
-## Developer quick start
+## Development
 
-From a Windows command prompt or PowerShell:
+Repository contributors use the single root wrapper:
 
 ```text
 .\dev.cmd setup
 .\dev.cmd build
 ```
 
-Run `.\dev.cmd help` to list every supported workflow from this single entry point.
-
-`.\dev.cmd setup` finds the exact SDK from `global.json` or installs it under
-`.tools\dotnet`, selects exact 64-bit CPython 3.12.7 (installing the official
-CPython NuGet payload locally when needed), creates the isolated `.tools\venv`,
-installs its complete hash-locked OODocs dependency closure, validates Rhino 7
-and Rhino 8 independently, and writes the generated, non-secret
-`.tools\state\local.settings.json`. It is
-idempotent, so rerun it after installing Rhino to enable that version's tests.
-Setup and build serialize their sanctioned NuGet restore workflows with a
-repository-local lease under `.tools` and always run the all-file normalizer
-after the restore attempt. A successful verified batch normalizes every tracked
-`packages.lock.json` to LF. A caught commit failure is rolled back when rollback
-verification succeeds; otherwise ambiguous state is retained with recovery
-evidence instead of overwritten. A process crash leaves its snapshots under
-`.tools\package-lock-normalization`, and the next restore fails closed before
-doing work so they are not silently reused.
-Every top-level `dev.cmd` workflow also holds a repository-local temp lease, so
-two supplied workflows cannot prune or overwrite each other's current run.
-Release's nested `dev.cmd` stages inherit that lease. Before a normal workflow,
-exact-name heavy run collections for Grasshopper smoke checks, examples,
-trusted-evidence sessions, release staging, and interrupted installer tests are
-emptied. Afterward they are empty on success, while a failure keeps only its
-newest diagnostic until the next explicit workflow. Small install receipts keep
-their newest entry. A successful release also drops superseded `previous-*`
-rollback copies; a failed release keeps its newest recovery copy. Unknown temp
-content, the reusable `temp\build` output, and the current reference workspace
-are never selected by automatic retention. `-WhatIf` workflows do not create
-the temp lease or prune anything.
-`dev.cmd clean` acquires the NuGet workflow lease as well before removing the
-fully disposable `temp` tree and generated source caches while preserving
-`.tools` recovery state. `dev.cmd clean -CachesOnly` removes only ignored
-`bin`, `obj`, `TestResults`, `__pycache__`, and `.pytest_cache` directories
-beneath source, test, script, and tool roots. These
-leases coordinate the supplied repository commands; they are not an
-operating-system sandbox against a malicious same-user process swapping
-filesystem paths mid-operation.
-
-For port-equivalence work, `.\dev.cmd reference` runs the pinned historical Python
-implementation plus the hash-locked EnergyPlus 24.2 IDD and official epJSON
-schema in isolated processes, then writes deterministic database, full-schema,
-GRM, and semantic IDF references under `temp\reference`. If EnergyPlus is not
-already present, first run
-`.\dev.cmd setup -InstallEnergyPlus`. Use
-`.\dev.cmd reference -Mode Verify` to compare them byte-for-byte with the reviewed
-baseline in `fixtures\reference\python-0.7.0`. Python remains development-only
-and is not loaded by either installed Grasshopper plugin.
-
-To rebuild the user-distribution PDF from the current compiled components and
-the authored guides, run:
-
-```text
-.\dev.cmd docs
-```
-
-This command reflects every public component and persistent typed parameter
-from the Rhino 7/net48 and both Rhino 8 payloads, then requires their complete
-Grasshopper contracts to match. The Python builder reads that runtime catalog
-into immutable dataclasses, requires a matching detailed guide entry for every
-component, generates the canonical In/Out Reference, and writes only
-`artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.0.pdf`. It invokes
-the repository venv directly; no activation step or machine-wide Python module
-installation is needed.
-
-EnergyPlus extraction uses a deliberate detect-only default. Setup always
-prepares the exact EnergyPlus and KoreanTMY distribution ZIPs under
-`.tools\distributions` unless `-SkipEmbeddedPayloads` is passed, and validates the corrected
-24.2.0 build `94a887817b` at `C:\EnergyPlusV24-2-0` or under `.tools` by the
-executable, IDD, and ExpandObjects SHA-256 values. To download and verify the
-official portable ZIP and extract it when no compatible runtime exists, run:
-
-```text
-.\dev.cmd setup -InstallEnergyPlus
-```
-
-Use `.\dev.cmd setup -WhatIf -SkipRestore` for a no-write preview. `.\dev.cmd build`
-performs restore, compile, and tests with the setup-selected SDK, then stages
-all runtime variants under `artifacts\<module>\rhino7\net48`,
-`artifacts\<module>\rhino8\net7.0`, and
-`artifacts\<module>\rhino8\net8.0`. Rhino-dependent tests are skipped only for the
-missing Rhino version; headless projects continue to build.
-
-All disposable downloads, build intermediates, test runs, logs, and simulations
-are routed under `temp`; NuGet packages and reusable local toolchains are under
-`.tools`. Successful heavy runs are removed automatically; a failed run's newest
-diagnostics remain available until the next workflow. Run
-`.\dev.cmd clean -TempOnly` to remove the complete repository `temp` tree, or
-`.\dev.cmd clean` to remove `temp`, generated artifact contents, and ignored
-source-tree caches, while preserving `.tools` and `artifacts\README.md`.
-
-To package an already successful build into deterministic Yak archives and
-portable plugin ZIPs, run:
-
-```text
-.\dev.cmd package -SkipBuild
-```
-
-The eight tracked definitions and two named-building Rhino models under
-[`examples`](examples/README.md) cover materials, profiles, geometry, HVAC,
-standalone InvisibleDragon compile/weather/run wiring, two-zone GRM authoring,
-Address/Vintage-selected packaged weather, direct simulation, result plots,
-CSV previews, and the complete Run-to-GRR/CSV workflow. Example 02 keeps its EPW
-File input empty and every action Button at its resting `False` value, so opening
-it never reads a weather path or starts EnergyPlus. Example 12 is the complex two-zone
-Floor/Ceiling/Wall-to-Zone model-authoring demonstration; its opening-free walls
-are authored as lists while opening-bearing walls remain separate. Example 14
-uses the same explicit Surface ownership with electric radiators for a stable
-end-to-end `SD Model -> Run SimpleDragon -> GRR` workflow.
-Rhino 7 writes the canonical files;
-`.\dev.cmd examples` solves and round-trip validates them in both Rhino 7 and
-Rhino 8.
-
-Maintainers can execute the complete first-candidate gate with:
-
-```text
-.\dev.cmd release
-```
-
-This command requires a clean `main` commit already pushed to `origin/main`,
-both Rhino 7 and Rhino 8, and the pinned EnergyPlus runtime (which setup can
-prepare). It repeats setup, oracle verification, build/tests, the exhaustive
-OODocs PDF build, example round-trips, packaging, and six exact-portable-ZIP
-host scenarios, then writes the attested local candidate below
-`artifacts\release`. The PDF is included in the release asset inventory. It does
-not create a tag, GitHub release, plugin installation, or Yak publication. See the
-[release checklist](docs/release-checklist.md) for the evidence reviewed by the
-gate.
-
-To rebuild the current source, remove any installed Dragon packages, and
-install both products into every detected Rhino 7/8 generation, close Rhino and
-run:
-
-```text
-.\dev.cmd install
-```
-
-Use `.\dev.cmd install -UseExistingPackages` for an immediate reinstall from the
-already generated, hash-checked Yak files under `artifacts\packages`.
+The [development documentation](docs/development/README.md) owns setup,
+build/test, OODocs, compatibility, packaging, installation, cleanup, release,
+and publishing procedures. The public [user documentation](docs/user/README.md)
+contains no repository setup steps. Run `.\dev.cmd help` for the complete
+command list.
 
 ## Current status
 
