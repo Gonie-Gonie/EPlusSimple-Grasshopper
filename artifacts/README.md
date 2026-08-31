@@ -22,12 +22,17 @@ artifacts/
 |   |-- simple-dragon/{yak,portable}/
 |   |-- compatibility-report.json
 |   `-- checksums.sha256
+|-- documentation/
+|   `-- Dragons-Grasshopper-User-Guide-0.1.0.pdf
 `-- reports/
     |-- build-manifest.json
     `-- test-summary.json
 ```
 
-Delete the generated files at any time and run `dev.cmd build` to reproduce them.
-Run `dev.cmd package` to recreate transient verification stages plus the retained
-Yak distributions and portable plugin ZIPs after normal build artifacts are
-available. Successful package runs remove their scratch stages automatically.
+Generated contents can be deleted at any time. Each command owns and recreates
+its corresponding subtree: `dev.cmd build` resets and stages plugin binaries and
+reports, `dev.cmd package` recreates the package subtree after a build, and
+`dev.cmd docs` recreates the documentation subtree from current runtime metadata
+and the tracked authored chapters. Because a new build resets generated
+artifacts, run package and docs after build when preparing a complete hand-off.
+Successful package runs remove their scratch stages automatically.

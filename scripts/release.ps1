@@ -13,6 +13,7 @@ $releaseStartedUtc = [DateTime]::UtcNow
 $releaseStamp = $releaseStartedUtc.ToString('yyyyMMdd-HHmmss-fff')
 $artifactsRoot = Join-Path $repositoryRoot 'artifacts'
 $packagesRoot = Join-Path $artifactsRoot 'packages'
+$documentationPdfPath = Join-Path $artifactsRoot 'documentation\Dragons-Grasshopper-User-Guide-0.1.0.pdf'
 $reportsRoot = Join-Path $artifactsRoot 'reports'
 $finalReleaseRoot = Join-Path $artifactsRoot 'release'
 $releaseScratchRoot = Join-Path $repositoryRoot 'temp\release-candidate'
@@ -3215,6 +3216,12 @@ Invoke-RepositoryCommand `
     -Arguments @('build', '-NoRestore', '-RequireEnergyPlus') `
     -FailureMessage 'Release build failed'
 
+Write-Host 'Building and postflight-validating the exhaustive PDF user guide...'
+Invoke-RepositoryCommand `
+    -Path (Join-Path $repositoryRoot 'dev.cmd') `
+    -Arguments @('docs') `
+    -FailureMessage 'Release documentation build failed'
+
 Write-Host 'Running strict cross-language engineering compatibility cases...'
 Invoke-RepositoryCommand `
     -Path (Join-Path $repositoryRoot 'dev.cmd') `
@@ -3686,11 +3693,13 @@ $releaseAssets = @(
     Get-Item -LiteralPath $compatibilityPath
     Get-Item -LiteralPath $packageChecksumsPath
     Get-Item -LiteralPath $engineeringCompatibilityPath
+    Get-Item -LiteralPath $documentationPdfPath
 )
 if (@($releaseAssets | Where-Object { $_.Extension -eq '.yak' }).Count -ne 4 -or
     @($releaseAssets | Where-Object { $_.Extension -eq '.zip' }).Count -ne 2 -or
-    $releaseAssets.Count -ne 10) {
-    throw "Expected four Yak archives, two portable ZIPs, and four common reports; found $($releaseAssets.Count) release assets."
+    @($releaseAssets | Where-Object { $_.Extension -eq '.pdf' }).Count -ne 1 -or
+    $releaseAssets.Count -ne 11) {
+    throw "Expected four Yak archives, two portable ZIPs, one user-guide PDF, and four common reports; found $($releaseAssets.Count) release assets."
 }
 $assetReports = @($releaseAssets | Sort-Object FullName | ForEach-Object {
     [pscustomobject] [ordered] @{
@@ -3758,6 +3767,11 @@ $releaseGate = [pscustomobject] [ordered] @{
         grasshopperExamples = 'passed'
         grasshopperExampleGate = $exampleGateEvidence
         packageCompatibility = 'passed'
+        userGuide = [pscustomobject] [ordered] @{
+            status = 'passed'
+            path = Get-RelativeUnixPath -Root $artifactsRoot -Path $documentationPdfPath
+            sha256 = Get-Sha256 -Path $documentationPdfPath
+        }
         buildManifest = [pscustomobject] [ordered] @{
             path = Get-RelativeUnixPath -Root $artifactsRoot -Path $buildManifestPath
             sha256 = Get-Sha256 -Path $buildManifestPath

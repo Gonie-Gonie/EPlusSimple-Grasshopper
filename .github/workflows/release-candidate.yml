@@ -62,6 +62,7 @@ jobs:
           $gate = Get-Content -LiteralPath $gatePath -Raw | ConvertFrom-Json
           $engineering = $gate.verification.engineeringCompatibility
           $exampleGate = $gate.verification.grasshopperExampleGate
+          $userGuide = $gate.verification.userGuide
           $publication = $gate.publication
           if ([string] $gate.schema -cne 'goniegonie.dragons-grasshopper.release-gate.v1' -or
               [string] $gate.status -cne 'passed' -or
@@ -77,11 +78,33 @@ jobs:
               [string] $exampleGate.status -cne 'passed' -or
               [string] $exampleGate.sourceRun -notmatch '^[0-9a-f]{8}$' -or
               [string] $gate.verification.packageCompatibility -cne 'passed' -or
+              [string] $userGuide.status -cne 'passed' -or
               [bool] $publication.publicPublicationAuthorized -or
               [bool] $publication.tagCreated -or
               [bool] $publication.githubReleaseCreated -or
               [bool] $publication.yakPublished) {
             throw 'Release gate identity, verification, or non-publication policy is invalid.'
+          }
+
+          $expectedGuidePath = 'documentation/Dragons-Grasshopper-User-Guide-0.1.0.pdf'
+          $guidePath = Join-Path 'artifacts' ($expectedGuidePath -replace '/', '\')
+          if ([string] $userGuide.path -cne $expectedGuidePath -or
+              [string] $userGuide.sha256 -notmatch '^[0-9a-f]{64}$' -or
+              -not (Test-Path -LiteralPath $guidePath -PathType Leaf)) {
+            throw 'Release gate does not identify the expected user-guide PDF.'
+          }
+          $guideItem = Get-Item -LiteralPath $guidePath
+          $guideSha256 = (Get-FileHash -LiteralPath $guidePath -Algorithm SHA256).Hash.ToLowerInvariant()
+          $guideAssets = @($gate.assets | Where-Object {
+            [string] $_.path -ceq $expectedGuidePath
+          })
+          if ($guideItem.Length -lt 10kb -or
+              $guideSha256 -cne [string] $userGuide.sha256 -or
+              $guideAssets.Count -ne 1 -or
+              [long] $guideAssets[0].bytes -ne $guideItem.Length -or
+              [string] $guideAssets[0].sha256 -cne $guideSha256 -or
+              @($gate.assets | Where-Object { [string] $_.path -match '(?i)\.pdf$' }).Count -ne 1) {
+            throw 'The user-guide PDF does not match the exact release asset inventory.'
           }
 
           $expectedScenarios = @(
@@ -204,6 +227,7 @@ jobs:
           path: |
             artifacts/release/
             artifacts/reports/
+            artifacts/documentation/
             temp/logs/
             temp/reference/logs/
             temp/compatibility/logs/
@@ -213,13 +237,14 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-      - name: Attest packaged binaries
+      - name: Attest candidate deliverables
         uses: actions/attest-build-provenance@43d14bc2b83dec42d39ecae14e916627a18bb661 # v3
         with:
           subject-path: |
             artifacts/packages/**/*.yak
             artifacts/packages/**/*-portable-plugin-win.zip
             artifacts/packages/checksums.sha256
+            artifacts/documentation/Dragons-Grasshopper-User-Guide-0.1.0.pdf
 
       - name: Upload complete verified local candidate
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -229,5 +254,6 @@ jobs:
             artifacts/release/
             artifacts/packages/
             artifacts/reports/
+            artifacts/documentation/
           if-no-files-found: error
           retention-days: 30

@@ -39,6 +39,7 @@ For diagnosis, its constituent commands are:
 .\dev.cmd reference -Mode Verify
 .\dev.cmd upstream compatibility-gate --source-root temp/reference/upstream/eplussimple --collect-evidence
 .\dev.cmd build -NoRestore -RequireEnergyPlus
+.\dev.cmd docs
 .\dev.cmd compatibility -SkipReferencePreparation -NoRestore
 .\dev.cmd examples -SkipPluginBuild -RequireEnergyPlusWorkflow
 .\dev.cmd package -SkipBuild -RunPortableHostGate
@@ -46,6 +47,10 @@ For diagnosis, its constituent commands are:
 
 - Require zero compiler warnings and errors for `net48`, `net7.0-windows`, and
   `net8.0-windows`.
+- Require the PDF builder to reflect and exactly cross-compare all three public
+  Grasshopper contracts, join detailed guidance 1:1 for all 75 components, and
+  postflight the PDF for all component and typed-parameter names, all four
+  chapters, the framework coverage statement, and zero internal GUID leakage.
 - Require all 1,242 pinned upstream public symbols to have exact registry
   coverage, no `needs_reverification` rows, and fresh authoritative assertion
   evidence for every `equivalent` or `exception` row. External evidence JSON
@@ -111,14 +116,16 @@ For diagnosis, its constituent commands are:
   complete `trusted-evidence\<session-id>` bundle (receipt, index, and indexed
   `artifacts` tree),
   `engineering-compatibility.json`, package index and compatibility report,
-  build/test reports, and all six copied real-host summaries.
+  build/test reports, `artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.0.pdf`,
+  and all six copied real-host summaries. Confirm the PDF appears in the release
+  gate asset inventory with its exact byte count and SHA-256.
 - Open the tracked InvisibleDragon and SimpleDragon starter definitions in each
   installed Rhino generation. Separately exercise a direct InvisibleDragon
   HVAC graph and a direct SimpleDragon model-to-GRR run using the
   recipes in `examples\README.md`.
 - Verify explicit Run trigger behavior, cancellation, cache reuse,
-  address-selected packaged EPW handling plus explicit overrides, CSV schema,
-  and saved Goo persistence.
+  SimpleDragon's address-selected packaged weather, standalone InvisibleDragon's
+  explicit EPW boundary, CSV schema, and saved Goo persistence.
 - Review release notes for exact supported and intentionally unsupported scope.
 
 ## Publication
