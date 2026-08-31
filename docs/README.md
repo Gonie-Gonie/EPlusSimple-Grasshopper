@@ -22,5 +22,10 @@ and workflow guides.
   publication gates.
 
 Worked recipe outlines live in [the examples directory](../examples/README.md).
-Python is never required by an installed plugin; it is only a development
-oracle used to compare this port with its pinned historical baseline.
+The four canonical PDF sources live in [user-guide](user-guide/README.md); run
+`dev.cmd docs` to regenerate the exhaustive component reference from the
+current runtime metadata and build the user-distribution PDF with OODocs.
+
+Python is never required by an installed plugin. The repository setup creates
+one isolated venv for the development oracle and PDF documentation build, so
+contributors do not install those modules globally.

@@ -31,11 +31,15 @@ jobs:
 
       - name: Bootstrap pinned local environment
         shell: powershell
-        run: .\dev.cmd setup -SkipPythonInstall -InstallEnergyPlus -RequireEnergyPlus
+        run: .\dev.cmd setup -InstallEnergyPlus -RequireEnergyPlus
 
       - name: Build, test, and stage all plugin targets
         shell: powershell
         run: .\dev.cmd build -NoRestore -RequireEnergyPlus
+
+      - name: Build exhaustive PDF user guide from runtime metadata
+        shell: powershell
+        run: .\dev.cmd docs
 
       - name: Upload staged plugins and reports
         if: always()
@@ -84,7 +88,7 @@ jobs:
 
       - name: Bootstrap local configuration
         shell: powershell
-        run: .\dev.cmd setup -SkipRestore -InstallEnergyPlus -RequireEnergyPlus
+        run: .\dev.cmd setup -SkipPythonInstall -SkipPythonEnvironment -SkipRestore -InstallEnergyPlus -RequireEnergyPlus
 
       - name: Reproduce and verify compatibility fixtures
         shell: powershell

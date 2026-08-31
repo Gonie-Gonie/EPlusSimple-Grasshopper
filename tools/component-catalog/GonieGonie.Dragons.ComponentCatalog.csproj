@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net48;net7.0-windows;net8.0-windows</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>GonieGonie.Dragons.ComponentCatalog</AssemblyName>
+    <RootNamespace>GonieGonie.Dragons.ComponentCatalog</RootNamespace>
+    <Description>Deterministic documentation catalog for every public Dragon Grasshopper object.</Description>
+    <UseWindowsForms>true</UseWindowsForms>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grasshopper" VersionOverride="7.0.20314.3001" PrivateAssets="all" Condition="'$(TargetFramework)' == 'net48'" />
+    <PackageReference Include="Grasshopper" VersionOverride="8.0.23304.9001" PrivateAssets="all" Condition="'$(TargetFramework)' != 'net48'" />
+    <PackageReference Include="RhinoCommon" VersionOverride="7.0.20314.3001" PrivateAssets="all" Condition="'$(TargetFramework)' == 'net48'" />
+    <PackageReference Include="RhinoCommon" VersionOverride="8.0.23304.9001" PrivateAssets="all" Condition="'$(TargetFramework)' != 'net48'" />
+    <PackageReference Include="System.Text.Json" />
+    <ProjectReference Include="..\..\src\InvisibleDragon\GonieGonie.InvisibleDragon.GH\GonieGonie.InvisibleDragon.GH.csproj"
+                      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\..\src\SimpleDragon\GonieGonie.SimpleDragon.GH\GonieGonie.SimpleDragon.GH.csproj"
+                      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+</Project>

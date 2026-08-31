@@ -3,12 +3,18 @@
 ## Shared conventions
 
 - Numeric geometry and HVAC inputs use the SI units shown in each parameter description.
-- Leave an optional numeric input disconnected to preserve `null` or autosize semantics. Zero is a real value.
+- In SimpleDragon, leave an optional capacity disconnected to preserve its
+  unset/autosize meaning; zero is generally invalid there. In InvisibleDragon,
+  several HVAC capacity and flow ports explicitly use `0` for autosize. Follow
+  the description of the individual port.
 - Entity and relationship IDs are generated deterministically inside both Dragon modules; they are not authoring inputs. Express ownership and references by connecting the typed objects instead of passing text IDs.
 - Choose finite categories such as Boundary Condition from the named choices on the input. Integer enum codes are not part of the public authoring workflow.
 - Item-access geometry inputs accept ordinary items, lists, or Data Trees. Grasshopper vectorizes the component and preserves branch paths; ownership-list inputs such as Zone Surfaces consume their values branch by branch.
 - Red runtime messages stop that component's output. Warnings describe a usable result that needs review.
-- Run, Write, Export, and Batch actions require a new False-to-True Boolean edge. A saved True value never starts work when a document opens.
+- Run, Cancel, and Managed Batch require a new False-to-True Boolean edge. A
+  saved True value never starts those actions when a document opens. Write GRM,
+  Write GRR, and Export CSV are currently level-triggered; return their Boolean
+  to False immediately after the intended write.
 
 ## Canonical SimpleDragon graph
 
@@ -152,6 +158,11 @@ SimpleDragon model list or tree, use Batch Case and Managed Batch; for separate
 low-level InvisibleDragon simulations, use one Run component per simulation.
 
 GRM/GRR readers, writers, and CSV export intentionally expose artifact destinations because those are user-owned results, not simulation setup. Relative output paths use the saved Grasshopper document folder; unsaved definitions fall back to the per-user temp directory. When a GRM is connected, CSV export derives its case identity from that model rather than asking for a text ID.
+
+Write GRM, Write GRR, and Export CSV attempt their operation on every solution
+while Write or Export remains True. Set the Boolean back to False immediately
+after the desired output is created. This differs from the rising-edge Run,
+Cancel, and Managed Batch controls.
 
 Wrap each model in a `SimpleDragon Batch Case`, which derives a deterministic
 case identity from the GRM, then connect the Cases list or tree to `Managed Run

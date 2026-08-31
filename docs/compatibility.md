@@ -81,8 +81,8 @@ listed in `upstream/compatibility-exceptions.yml`; they remain visible as warnin
 silently removed from the emitted IDF.
 
 A broad class or object name in the port map does not by itself assert complete
-behavioral parity. Review `upstream/reports`, compatibility exceptions, and the
-release notes for the exact verified matrix.
+behavioral parity. Review the tracked compatibility exceptions, generated
+engineering report, and release notes for the exact verified matrix.
 
 ## Declared product compatibility scope
 
@@ -126,8 +126,9 @@ either engine returns a zero active-load result.
 
 - Windows is the only supported operating system.
 - One pinned EnergyPlus version is supported.
-- SimpleDragon candidates include the hash-pinned KoreanTMY archive; callers may still supply an
-  explicit compatible EPW where the workflow supports it.
+- SimpleDragon candidates include the hash-pinned KoreanTMY archive and select
+  weather internally from Address and Vintage. SimpleDragon exposes no EPW
+  override; explicit EPW selection belongs only to standalone InvisibleDragon.
 - Neither module exposes every EnergyPlus object or a full HVAC node/branch
   graph editor.
 - SimpleDragon intentionally loses arbitrary source vertices during its

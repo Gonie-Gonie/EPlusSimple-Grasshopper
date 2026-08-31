@@ -52,6 +52,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.SimpleDragon.Gra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.CompatibilityRunner", "tools\compatibility-runner\GonieGonie.CompatibilityRunner.csproj", "{9585626A-CD28-40BF-811E-1F892CF46579}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.Dragons.ComponentCatalog", "tools\component-catalog\GonieGonie.Dragons.ComponentCatalog.csproj", "{447C670C-D840-44DE-AAFA-B212E91C1E39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +140,10 @@ Global
 		{9585626A-CD28-40BF-811E-1F892CF46579}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9585626A-CD28-40BF-811E-1F892CF46579}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9585626A-CD28-40BF-811E-1F892CF46579}.Release|Any CPU.Build.0 = Release|Any CPU
+		{447C670C-D840-44DE-AAFA-B212E91C1E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{447C670C-D840-44DE-AAFA-B212E91C1E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{447C670C-D840-44DE-AAFA-B212E91C1E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{447C670C-D840-44DE-AAFA-B212E91C1E39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,5 +159,6 @@ Global
 		{A5DB67CF-CBD4-4955-8B8B-364553E0189A} = {65F29CFD-8035-4E56-9A1A-8DC76C52960F}
 		{AE1B1BB1-11DA-4277-9320-7FD665F6B57B} = {A5DB67CF-CBD4-4955-8B8B-364553E0189A}
 		{9585626A-CD28-40BF-811E-1F892CF46579} = {99E9D322-CE32-45E7-8852-2416AC9530A9}
+		{447C670C-D840-44DE-AAFA-B212E91C1E39} = {99E9D322-CE32-45E7-8852-2416AC9530A9}
 	EndGlobalSection
 EndGlobal

@@ -18,7 +18,8 @@ independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
 - Add full authoring paths for source and zone-side HVAC systems, cooling
   towers, ERVs, PV, direct Zone ownership, and SimpleDragon-to-InvisibleDragon
   conversion.
-- Add composable `SD Opening`, `SD Surface`, `SD Zone`, and `SD Model` authoring
+- Add composable `SD Opening`, `SD Floor`, `SD Ceiling`, `SD Wall`, `SD Zone`,
+  and `SD Model` authoring
   values so opening/Surface/HVAC/ERV ownership is expressed by local wires
   without Zone/Face indices, assignment passes, or repeated model-catalog
   connections.
@@ -52,11 +53,14 @@ independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
   package manifests, compatibility reports, and SHA-256 inventories.
 - Add distinct illustration-derived icons for every public component and
   persistent parameter instead of sharing Grasshopper's default data icon.
+- Add a reproducible repository venv and OODocs PDF workflow whose Python-native
+  catalog reader and guide builder combine runtime-reflected metadata with
+  detailed guidance and require exact In/Out coverage for every public component.
 
 ### Development and verification
 
 - Consolidate setup, build, reference, package, install, example, smoke,
-  release, cleanup, icon, and upstream workflows behind the single
+  documentation, release, cleanup, icon, and upstream workflows behind the single
   `dev.cmd <command>` development entry point.
 - Pin the historical EPlusSimple and IDragon 0.7.0 source commit for provenance
   and deterministic Python-oracle compatibility testing.
@@ -66,8 +70,8 @@ independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
   and `temp` respectively.
 - Add `dev.cmd release`, a clean/pushed-`main` local candidate gate that verifies
   the Python oracle, all production targets and tests, real EnergyPlus runs,
-  tracked Grasshopper examples, package contents, and all six Rhino 7/Rhino 8
-  portable-package load scenarios.
+  the exhaustive PDF guide, tracked Grasshopper examples, package contents, and
+  all six Rhino 7/Rhino 8 portable-package load scenarios.
 
 ### Distribution status
 

@@ -24,10 +24,11 @@ categories are selected by name. Their item-access geometry inputs naturally
 vectorize Grasshopper lists and trees while preserving paths, and each Zone
 consumes its owned Surface list branch by branch.
 
-SimpleDragon deliberately does not retain arbitrary Rhino vertices. Its
-conversion preview exists so the exact InvisibleDragon surfaces produced by
-the abstraction can be inspected. A geometry-loss diagnostic is information
-about that boundary, not a failed conversion.
+SimpleDragon deliberately does not retain arbitrary Rhino vertices. The
+completed GRM and its geometry-map output expose the reduced area, azimuth,
+height, opening, and ownership meaning; no public conversion-preview component
+or InvisibleDragon execution type is required on its canvas. A geometry-loss
+diagnostic is information about that boundary, not a failed conversion.
 
 Neither product is a general-purpose editor for every EnergyPlus object. The
 initial release exposes the construction, profile, geometry, HVAC, result, and

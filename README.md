@@ -11,8 +11,9 @@ plugins written in C#. The public product names in this port are:
   through the InvisibleDragon engine when `Run SimpleDragon` is requested.
 
 The tracked upstream source is pinned in
-[`upstream/upstream.lock.json`](upstream/upstream.lock.json). Python is used only
-as a development oracle; released plugins do not require Python.
+[`upstream/upstream.lock.json`](upstream/upstream.lock.json). Python supports the
+development oracle and PDF documentation toolchain; released plugins do not
+require Python.
 
 ## Supported baseline
 
@@ -121,9 +122,11 @@ From a Windows command prompt or PowerShell:
 Run `.\dev.cmd help` to list every supported workflow from this single entry point.
 
 `.\dev.cmd setup` finds the exact SDK from `global.json` or installs it under
-`.tools\dotnet`, selects exact Python 3.12.7 (installing the official embeddable
-package locally when needed), validates Rhino 7 and Rhino 8 independently, and
-writes the generated, non-secret `.tools\state\local.settings.json`. It is
+`.tools\dotnet`, selects exact 64-bit CPython 3.12.7 (installing the official
+CPython NuGet payload locally when needed), creates the isolated `.tools\venv`,
+installs its complete hash-locked OODocs dependency closure, validates Rhino 7
+and Rhino 8 independently, and writes the generated, non-secret
+`.tools\state\local.settings.json`. It is
 idempotent, so rerun it after installing Rhino to enable that version's tests.
 Setup and build serialize their sanctioned NuGet restore workflows with a
 repository-local lease under `.tools` and always run the all-file normalizer
@@ -161,7 +164,24 @@ GRM, and semantic IDF references under `temp\reference`. If EnergyPlus is not
 already present, first run
 `.\dev.cmd setup -InstallEnergyPlus`. Use
 `.\dev.cmd reference -Mode Verify` to compare them byte-for-byte with the reviewed
-baseline in `fixtures\reference\python-0.7.0`. Python remains development-only.
+baseline in `fixtures\reference\python-0.7.0`. Python remains development-only
+and is not loaded by either installed Grasshopper plugin.
+
+To rebuild the user-distribution PDF from the current compiled components and
+the authored guides, run:
+
+```text
+.\dev.cmd docs
+```
+
+This command reflects every public component and persistent typed parameter
+from the Rhino 7/net48 and both Rhino 8 payloads, then requires their complete
+Grasshopper contracts to match. The Python builder reads that runtime catalog
+into immutable dataclasses, requires a matching detailed guide entry for every
+component, generates the canonical In/Out Reference, and writes only
+`artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.0.pdf`. It invokes
+the repository venv directly; no activation step or machine-wide Python module
+installation is needed.
 
 EnergyPlus extraction uses a deliberate detect-only default. Setup always
 prepares the exact EnergyPlus and KoreanTMY distribution ZIPs under
@@ -200,7 +220,7 @@ The eight tracked definitions and two named-building Rhino models under
 [`examples`](examples/README.md) cover materials, profiles, geometry, HVAC,
 standalone InvisibleDragon compile/weather/run wiring, two-zone GRM authoring,
 Address/Vintage-selected packaged weather, direct simulation, result plots,
-CSV previews, and the gated Run-to-GRR/CSV workflow. Example 02 keeps its EPW
+CSV previews, and the complete Run-to-GRR/CSV workflow. Example 02 keeps its EPW
 File input empty and every action trigger False, so opening it never reads a
 weather path or starts EnergyPlus. Example 12 is the complex two-zone
 Floor/Ceiling/Wall-to-Zone model-authoring demonstration; its opening-free walls
@@ -219,10 +239,11 @@ Maintainers can execute the complete first-candidate gate with:
 
 This command requires a clean `main` commit already pushed to `origin/main`,
 both Rhino 7 and Rhino 8, and the pinned EnergyPlus runtime (which setup can
-prepare). It repeats setup, oracle verification, build/tests, example
-round-trips, packaging, and six exact-portable-ZIP host scenarios, then writes
-the attested local candidate below `artifacts\release`. It does not create a
-tag, GitHub release, plugin installation, or Yak publication. See the
+prepare). It repeats setup, oracle verification, build/tests, the exhaustive
+OODocs PDF build, example round-trips, packaging, and six exact-portable-ZIP
+host scenarios, then writes the attested local candidate below
+`artifacts\release`. The PDF is included in the release asset inventory. It does
+not create a tag, GitHub release, plugin installation, or Yak publication. See the
 [release checklist](docs/release-checklist.md) for the evidence reviewed by the
 gate.
 

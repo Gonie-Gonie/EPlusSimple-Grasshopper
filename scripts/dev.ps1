@@ -17,6 +17,7 @@ $commands = [ordered]@{
     clean = Join-Path $PSScriptRoot 'clean.ps1'
     icons = Join-Path $PSScriptRoot 'generate-icons.ps1'
     compatibility = Join-Path $PSScriptRoot 'compatibility.ps1'
+    docs = Join-Path $PSScriptRoot 'documentation.ps1'
     upstream = Join-Path $repositoryRoot 'tools\upstream-tracker\run.ps1'
 }
 
@@ -39,6 +40,7 @@ Commands:
   clean       Remove disposable temp, artifact content, or source caches
   icons       Regenerate component and package icons
   compatibility  Run paired Python/C# IDF, EnergyPlus, warning, and GRR parity
+  docs        Generate the exhaustive PDF user guide with OODocs
   upstream    Validate, hash, or compare the pinned upstream source
   help        Show this command list
 
@@ -48,6 +50,7 @@ Examples:
   dev.cmd examples -Generate
   dev.cmd install -UseExistingPackages
   dev.cmd compatibility -AllowDifferences
+  dev.cmd docs
   dev.cmd clean -TempOnly
   dev.cmd clean -CachesOnly
 '@

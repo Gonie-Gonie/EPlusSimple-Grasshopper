@@ -28,7 +28,11 @@ If it still fails, inspect the structured diagnostics. For a source checkout, ru
 
 ## An action stays idle
 
-This is expected when a saved Boolean is already True. Set it False, allow one solution, then set it True. The same edge rule prevents Run, Cancel, Write, Export, and Batch actions from repeating on document load or ordinary recompute.
+For Run, Cancel, and Managed Batch, this is expected when a saved Boolean is
+already True. Set it False, allow one solution, then set it True. Write GRM,
+Write GRR, and Export CSV are currently level-triggered instead: they attempt
+the action on each solution while True, so return them to False immediately
+after writing.
 
 ## The simulation has no weather
 
