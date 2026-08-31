@@ -14,6 +14,8 @@ $repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
 $settingsPath = Join-Path $repositoryRoot '.tools\state\local.settings.json'
 $environmentStampPath = Join-Path $repositoryRoot '.tools\state\python-environment.json'
 $requirementsPath = Join-Path $repositoryRoot 'tools\documentation\requirements.lock.txt'
+$nugetConfigPath = Join-Path $repositoryRoot 'NuGet.config'
+$nugetPackagesPath = Join-Path $repositoryRoot '.tools\nuget\packages'
 $environmentVerifierPath = Join-Path $repositoryRoot 'tools\documentation\verify_environment.py'
 $guideBuilderPath = Join-Path $repositoryRoot 'tools\documentation\build_user_guide.py'
 $guideMetadataPath = Join-Path $repositoryRoot 'tools\documentation\component-guides.json'
@@ -127,6 +129,7 @@ if ([string] $settings.pythonEnvironment.version -cne '3.12.7' -or
 
 if ($WhatIfPreference) {
     Write-Host "What if: verify the hash-locked documentation venv '$pythonExecutable'."
+    Write-Host "What if: restore the component catalog project graph in NuGet locked mode."
     Write-Host "What if: build the runtime component catalog project '$catalogProjectPath'."
     Write-Host "What if: extract and compare Rhino 7/net48 plus Rhino 8/net7.0-windows and net8.0-windows component catalogs."
     Write-Host "What if: generate the exhaustive In/Out reference and render '$safeOutputPath' with OODocs."
@@ -159,6 +162,21 @@ Invoke-LoggedNativeCommand `
         '--expected-oodocs', '1.3.0') `
     -LogPath (Join-Path $logsRoot 'verify-environment.log') `
     -FailureMessage 'The repository documentation environment is not reproducible'
+
+Invoke-WithTrackedPackageLockNormalization `
+    -RepositoryRoot $repositoryRoot `
+    -Action {
+        Invoke-LoggedNativeCommand `
+            -FilePath $dotnetExecutable `
+            -ArgumentList @(
+                'restore', $catalogProjectPath,
+                '--locked-mode',
+                '--configfile', $nugetConfigPath,
+                '--packages', $nugetPackagesPath,
+                '--nologo') `
+            -LogPath (Join-Path $logsRoot 'restore-component-catalog.log') `
+            -FailureMessage 'Restoring the locked component catalog project graph failed'
+    }
 
 Invoke-LoggedNativeCommand `
     -FilePath $dotnetExecutable `
