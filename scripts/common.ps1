@@ -134,6 +134,33 @@ function Assert-NoReparsePoints {
     }
 }
 
+function Resolve-ExecutablePathWithRepositorySafety {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $RepositoryRoot,
+
+        [Parameter(Mandatory = $true)]
+        [string] $ExecutablePath,
+
+        [string[]] $AllowedRepositoryTopLevelNames = @('.tools')
+    )
+
+    $root = [System.IO.Path]::GetFullPath($RepositoryRoot).TrimEnd('\', '/')
+    $candidate = [System.IO.Path]::GetFullPath($ExecutablePath)
+    $repositoryPrefix = $root + [System.IO.Path]::DirectorySeparatorChar
+    if ($candidate.StartsWith(
+            $repositoryPrefix,
+            [System.StringComparison]::OrdinalIgnoreCase)) {
+        $safeCandidate = Assert-RepositoryChildPath `
+            -RepositoryRoot $root `
+            -Path $candidate `
+            -AllowedTopLevelNames $AllowedRepositoryTopLevelNames
+        Assert-NoReparsePoints -Path $safeCandidate -AnchorPath $root
+    }
+    return $candidate
+}
+
 function Ensure-Directory {
     [CmdletBinding()]
     param(

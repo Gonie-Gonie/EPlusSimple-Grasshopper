@@ -8,6 +8,7 @@ param(
     [switch] $InstallEnergyPlus,
     [switch] $SkipEmbeddedPayloads,
     [switch] $SkipPythonInstall,
+    [switch] $SkipPythonEnvironment,
     [switch] $SkipRestore,
     [switch] $RequireEnergyPlus,
     [switch] $RequireRhino7,
@@ -31,11 +32,18 @@ $runtimeManifestPath = Join-Path $repositoryRoot 'resources\runtime\manifest.tem
 $distributionManifestPath = Join-Path $repositoryRoot 'resources\runtime\distributions.json'
 $distributionRoot = Join-Path $toolsRoot 'distributions'
 $preparedDistributions = @{}
+$pythonEnvironmentRoot = Join-Path $toolsRoot 'venv'
+$pythonEnvironmentExecutable = Join-Path $pythonEnvironmentRoot 'Scripts\python.exe'
+$pythonEnvironmentStampPath = Join-Path $toolsRoot 'state\python-environment.json'
+$pythonRequirementsPath = Join-Path $repositoryRoot 'tools\documentation\requirements.lock.txt'
+$pythonEnvironmentVerifierPath = Join-Path $repositoryRoot 'tools\documentation\verify_environment.py'
 
 $globalSettings = Get-Content -LiteralPath (Join-Path $repositoryRoot 'global.json') -Raw | ConvertFrom-Json
 $requiredDotNetSdk = [string] $globalSettings.sdk.version
 $requiredDotNetRuntime = '8.0.30'
 $requiredPython = '3.12.7'
+$requiredDocumentationPip = '24.3.1'
+$requiredOodocs = '1.3.0'
 $requiredEnergyPlusVersion = '24.2.0'
 $requiredEnergyPlusBuild = '94a887817b'
 $minimumRhino7 = [version] '7.0'
@@ -471,6 +479,9 @@ function Get-DotNetSdkSelection {
     }
 
     foreach ($candidate in $candidates) {
+        $candidate = Resolve-ExecutablePathWithRepositorySafety `
+            -RepositoryRoot $repositoryRoot `
+            -ExecutablePath $candidate
         if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
             continue
         }
@@ -576,6 +587,10 @@ function Install-PinnedDotNetSdk {
     }
 
     $stagedDotNet = Join-Path $staging 'dotnet.exe'
+    $stagedDotNet = Resolve-ExecutablePathWithRepositorySafety `
+        -RepositoryRoot $repositoryRoot `
+        -ExecutablePath $stagedDotNet `
+        -AllowedRepositoryTopLevelNames @('temp')
     $previousErrorActionPreference = $ErrorActionPreference
     try {
         $ErrorActionPreference = 'Continue'
@@ -601,6 +616,9 @@ function Install-PinnedDotNetSdk {
     Move-Item -LiteralPath $staging -Destination $localDotNetRoot
 
     $installedDotNet = Join-Path $localDotNetRoot 'dotnet.exe'
+    $installedDotNet = Resolve-ExecutablePathWithRepositorySafety `
+        -RepositoryRoot $repositoryRoot `
+        -ExecutablePath $installedDotNet
     $installedVersion = @(& $installedDotNet --version 2>$null)
     if ($LASTEXITCODE -ne 0 -or $installedVersion.Count -eq 0 -or [string] $installedVersion[-1] -ne $requiredDotNetSdk) {
         throw 'The completed repository-local .NET SDK failed its final self-check.'
@@ -613,6 +631,10 @@ function Get-PythonDetails {
         [string] $Executable
     )
 
+    $Executable = Resolve-ExecutablePathWithRepositorySafety `
+        -RepositoryRoot $repositoryRoot `
+        -ExecutablePath $Executable `
+        -AllowedRepositoryTopLevelNames @('.tools', 'temp')
     if (-not (Test-Path -LiteralPath $Executable -PathType Leaf)) {
         return $null
     }
@@ -624,7 +646,7 @@ function Get-PythonDetails {
 
     # Avoid quote-sensitive JSON source in a native-command argument; the
     # separator cannot occur in a Windows executable path.
-    $pythonCode = "import sys; print('%d.%d.%d|%s' % (sys.version_info[0],sys.version_info[1],sys.version_info[2],sys.executable))"
+    $pythonCode = "import ensurepip,struct,sys,venv; assert sys.prefix == sys.base_prefix and struct.calcsize('P') == 8; print('%d.%d.%d|%s' % (sys.version_info[0],sys.version_info[1],sys.version_info[2],sys.executable))"
     $previousErrorActionPreference = $ErrorActionPreference
     try {
         $ErrorActionPreference = 'Continue'
@@ -651,7 +673,7 @@ function Get-PythonDetails {
     $resolvedExecutable = [System.IO.Path]::GetFullPath([string] $identityParts[1])
     $source = 'system'
     if ($resolvedExecutable.StartsWith($toolsRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
-        $source = 'repository-embedded'
+        $source = 'repository-local'
     }
 
     return [pscustomobject] [ordered] @{
@@ -713,11 +735,15 @@ function Get-PythonSelection {
 }
 
 function Install-PinnedPython {
-    $pythonArchive = Join-Path $bootstrapRoot 'python-3.12.7-embed-amd64.zip'
-    $expectedArchiveSha256 = '0d57bb6cb078b74d23dbfe91f77d6780d45bed328911609f1f7ee2ba1606bf44'
-    $pythonDownload = 'https://www.python.org/ftp/python/3.12.7/python-3.12.7-embed-amd64.zip'
+    # The python.org embeddable distribution intentionally omits venv and pip.
+    # The CPython-owned NuGet package is the official build-oriented layout and
+    # contains the standard library, venv, and ensurepip required by setup.
+    $pythonArchive = Join-Path $bootstrapRoot 'python.3.12.7.nupkg.zip'
+    $expectedArchiveSize = [int64] 14428078
+    $expectedArchiveSha256 = '149dd298e0b7a82250ca019471770fff079874088a4e8501ca20922d7df3a6ac'
+    $pythonDownload = 'https://api.nuget.org/v3-flatcontainer/python/3.12.7/python.3.12.7.nupkg'
     $target = Join-Path $toolsRoot 'python\3.12.7'
-    $staging = Join-Path $bootstrapRoot 'python-3.12.7-extracted'
+    $staging = Join-Path $bootstrapRoot 'python-3.12.7-nuget-extracted'
 
     $downloadRequired = -not (Test-Path -LiteralPath $pythonArchive -PathType Leaf)
     if (-not $downloadRequired) {
@@ -737,20 +763,309 @@ function Install-PinnedPython {
     if ($actualArchiveSha256 -ne $expectedArchiveSha256) {
         throw "Python archive SHA-256 mismatch. Expected $expectedArchiveSha256; got $actualArchiveSha256."
     }
+    $actualArchiveSize = (Get-Item -LiteralPath $pythonArchive).Length
+    if ($actualArchiveSize -ne $expectedArchiveSize) {
+        throw "Python archive size mismatch. Expected $expectedArchiveSize; got $actualArchiveSize."
+    }
 
     Remove-SetupOwnedTree -Path $staging
     Ensure-Directory -Path $staging
     Expand-Archive -LiteralPath $pythonArchive -DestinationPath $staging -Force
 
-    $stagedPython = Join-Path $staging 'python.exe'
+    $stagedRuntime = Join-Path $staging 'tools'
+    $stagedPython = Join-Path $stagedRuntime 'python.exe'
     $stagedDetails = Get-PythonDetails -Executable $stagedPython
     if ($null -eq $stagedDetails) {
-        throw 'The extracted official Python archive did not identify itself as Python 3.12.7.'
+        throw 'The extracted official Python package is not a venv-capable 64-bit CPython 3.12.7 runtime.'
     }
 
     Remove-SetupOwnedTree -Path $target
     Ensure-Directory -Path (Split-Path -Parent $target)
-    Move-Item -LiteralPath $staging -Destination $target
+    Move-Item -LiteralPath $stagedRuntime -Destination $target
+    Remove-SetupOwnedTree -Path $staging
+}
+
+function Set-DocumentationPythonProcessEnvironment {
+    $env:PYTHONHOME = $null
+    $env:PYTHONPATH = $null
+    $env:PYTHONUTF8 = '1'
+    $env:PYTHONNOUSERSITE = '1'
+    $env:PIP_NO_INPUT = '1'
+    $env:PIP_DISABLE_PIP_VERSION_CHECK = '1'
+    $env:PIP_REQUIRE_VIRTUALENV = '1'
+}
+
+function Test-PythonEnvironmentReady {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object] $Python,
+
+        [Parameter(Mandatory = $true)]
+        [string] $RequirementsSha256
+    )
+
+    if (-not (Test-Path -LiteralPath $pythonEnvironmentExecutable -PathType Leaf) -or
+        -not (Test-Path -LiteralPath $pythonEnvironmentStampPath -PathType Leaf)) {
+        return $false
+    }
+    $safeEnvironmentExecutable = Resolve-ExecutablePathWithRepositorySafety `
+        -RepositoryRoot $repositoryRoot `
+        -ExecutablePath $pythonEnvironmentExecutable
+    Assert-NoReparsePoints -Path $pythonEnvironmentStampPath -AnchorPath $repositoryRoot
+
+    try {
+        $stamp = Get-Content -LiteralPath $pythonEnvironmentStampPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        if ([string] $stamp.schema -ne 'goniegonie.documentation-python-environment.v1' -or
+            [string] $stamp.pythonVersion -ne $requiredPython -or
+            [string] $stamp.baseExecutable -ne [string] $Python.executable -or
+            [string] $stamp.venvExecutable -ne $pythonEnvironmentExecutable -or
+            [string] $stamp.requirementsSha256 -ne $RequirementsSha256 -or
+            [string] $stamp.pipVersion -ne $requiredDocumentationPip -or
+            [string] $stamp.oodocsVersion -ne $requiredOodocs) {
+            return $false
+        }
+    }
+    catch {
+        return $false
+    }
+
+    Set-DocumentationPythonProcessEnvironment
+    $verificationArguments = @(
+        '-I', '-B', '-X', 'utf8',
+        $pythonEnvironmentVerifierPath,
+        '--requirements', $pythonRequirementsPath,
+        '--expected-python', $requiredPython,
+        '--expected-oodocs', $requiredOodocs
+    )
+    $previousErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        & $safeEnvironmentExecutable @verificationArguments 2>$null | Out-Null
+        $verificationExitCode = $LASTEXITCODE
+    }
+    catch {
+        return $false
+    }
+    finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
+
+    return $verificationExitCode -eq 0
+}
+
+function Remove-PythonEnvironmentStamp {
+    if (-not (Test-Path -LiteralPath $pythonEnvironmentStampPath -PathType Leaf)) {
+        return
+    }
+
+    $safeStamp = Assert-RepositoryChildPath `
+        -RepositoryRoot $repositoryRoot `
+        -Path $pythonEnvironmentStampPath `
+        -AllowedTopLevelNames @('.tools')
+    Assert-NoReparsePoints -Path $safeStamp -AnchorPath $repositoryRoot
+    if ($WhatIfPreference) {
+        Write-Host "What if: remove stale documentation environment stamp '$safeStamp'."
+        return
+    }
+    Remove-Item -LiteralPath $safeStamp -Force
+}
+
+function Ensure-PythonEnvironment {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object] $Python
+    )
+
+    if (-not (Test-Path -LiteralPath $pythonRequirementsPath -PathType Leaf)) {
+        throw "Documentation dependency lock not found: '$pythonRequirementsPath'."
+    }
+    if (-not (Test-Path -LiteralPath $pythonEnvironmentVerifierPath -PathType Leaf)) {
+        throw "Documentation environment verifier not found: '$pythonEnvironmentVerifierPath'."
+    }
+
+    $requirementsSha256 = Get-Sha256 -Path $pythonRequirementsPath
+    if ($SkipPythonEnvironment) {
+        Write-Host 'Repository Python environment skipped by -SkipPythonEnvironment.'
+        return [pscustomobject] [ordered] @{
+            status = 'skipped'
+            version = $requiredPython
+            root = $pythonEnvironmentRoot
+            executable = $pythonEnvironmentExecutable
+            baseExecutable = $Python.executable
+            requirementsSha256 = $requirementsSha256
+            pipVersion = $requiredDocumentationPip
+            oodocsVersion = $requiredOodocs
+            reason = 'Repository Python environment preparation was explicitly skipped.'
+        }
+    }
+
+    if ([string] $Python.status -eq 'planned') {
+        Write-Host "What if: create and verify the repository Python environment at '$pythonEnvironmentRoot'."
+        return [pscustomobject] [ordered] @{
+            status = 'planned'
+            version = $requiredPython
+            root = $pythonEnvironmentRoot
+            executable = $pythonEnvironmentExecutable
+            baseExecutable = $Python.executable
+            requirementsSha256 = $requirementsSha256
+            pipVersion = $requiredDocumentationPip
+            oodocsVersion = $requiredOodocs
+        }
+    }
+
+    if ([string] $Python.status -ne 'ready') {
+        $reason = "A venv-capable Python $requiredPython base interpreter is unavailable. Rerun setup without -SkipPythonInstall."
+        Write-Warning $reason
+        return [pscustomobject] [ordered] @{
+            status = 'missing'
+            version = $requiredPython
+            root = $pythonEnvironmentRoot
+            executable = $pythonEnvironmentExecutable
+            baseExecutable = $null
+            requirementsSha256 = $requirementsSha256
+            pipVersion = $requiredDocumentationPip
+            oodocsVersion = $requiredOodocs
+            reason = $reason
+        }
+    }
+    if ([string] $Python.source -cne 'repository-local') {
+        throw (
+            "The documentation venv requires the hash-pinned repository CPython. " +
+            "Rerun setup without -SkipPythonInstall, or also pass -SkipPythonEnvironment " +
+            "when only non-documentation workflows are required.")
+    }
+
+    if (Test-PythonEnvironmentReady -Python $Python -RequirementsSha256 $requirementsSha256) {
+        Write-Host "Repository Python environment: ready ($pythonEnvironmentRoot)"
+        return [pscustomobject] [ordered] @{
+            status = 'ready'
+            version = $requiredPython
+            root = $pythonEnvironmentRoot
+            executable = $pythonEnvironmentExecutable
+            baseExecutable = $Python.executable
+            requirementsSha256 = $requirementsSha256
+            pipVersion = $requiredDocumentationPip
+            oodocsVersion = $requiredOodocs
+        }
+    }
+
+    if ($WhatIfPreference) {
+        Write-Host "What if: replace and verify the repository Python environment at '$pythonEnvironmentRoot'."
+        return [pscustomobject] [ordered] @{
+            status = 'planned'
+            version = $requiredPython
+            root = $pythonEnvironmentRoot
+            executable = $pythonEnvironmentExecutable
+            baseExecutable = $Python.executable
+            requirementsSha256 = $requirementsSha256
+            pipVersion = $requiredDocumentationPip
+            oodocsVersion = $requiredOodocs
+        }
+    }
+
+    $setupPythonTemp = Join-Path $tempRoot 'setup\python-environment'
+    $pipCache = Join-Path $setupPythonTemp 'pip-cache'
+    $smokePdf = Join-Path $setupPythonTemp 'oodocs-smoke.pdf'
+    # Validate the existing ancestor chain before creating or writing through
+    # it, then inspect the small setup-owned subtree after creation.
+    Assert-NoReparsePoints `
+        -Path (Join-Path $setupPythonTemp '.goniegonie-ancestor-safety-probe') `
+        -AnchorPath $repositoryRoot
+    Ensure-Directory -Path $setupPythonTemp
+    Ensure-Directory -Path $pipCache
+    Assert-NoReparsePoints -Path $setupPythonTemp -AnchorPath $repositoryRoot
+    Set-DocumentationPythonProcessEnvironment
+
+    try {
+        Remove-PythonEnvironmentStamp
+        Remove-SetupOwnedTree -Path $pythonEnvironmentRoot
+
+        Invoke-LoggedNativeCommand `
+            -FilePath ([string] $Python.executable) `
+            -ArgumentList @(
+                '-I', '-B', '-X', 'utf8',
+                '-m', 'venv', '--copies', $pythonEnvironmentRoot
+            ) `
+            -LogPath (Join-Path $logsRoot 'python-environment-create.log') `
+            -FailureMessage 'Creating the repository Python environment failed'
+
+        $safeEnvironmentExecutable = Resolve-ExecutablePathWithRepositorySafety `
+            -RepositoryRoot $repositoryRoot `
+            -ExecutablePath $pythonEnvironmentExecutable
+
+        Invoke-LoggedNativeCommand `
+            -FilePath $safeEnvironmentExecutable `
+            -ArgumentList @(
+                '-I', '-B', '-X', 'utf8',
+                '-m', 'pip', '--isolated', 'install',
+                '--disable-pip-version-check',
+                '--no-input',
+                '--index-url', 'https://pypi.org/simple',
+                '--require-hashes',
+                '--only-binary=:all:',
+                '--no-deps',
+                '--requirement', $pythonRequirementsPath,
+                '--cache-dir', $pipCache
+            ) `
+            -LogPath (Join-Path $logsRoot 'python-environment-install.log') `
+            -FailureMessage 'Installing the hash-locked documentation dependencies failed'
+
+        Invoke-LoggedNativeCommand `
+            -FilePath $safeEnvironmentExecutable `
+            -ArgumentList @('-I', '-B', '-X', 'utf8', '-m', 'pip', 'check') `
+            -LogPath (Join-Path $logsRoot 'python-environment-pip-check.log') `
+            -FailureMessage 'The repository Python environment has inconsistent dependencies'
+
+        Invoke-LoggedNativeCommand `
+            -FilePath $safeEnvironmentExecutable `
+            -ArgumentList @(
+                '-I', '-B', '-X', 'utf8',
+                $pythonEnvironmentVerifierPath,
+                '--requirements', $pythonRequirementsPath,
+                '--expected-python', $requiredPython,
+                '--expected-oodocs', $requiredOodocs,
+                '--smoke-output', $smokePdf
+            ) `
+            -LogPath (Join-Path $logsRoot 'python-environment-verify.log') `
+            -FailureMessage 'Verifying the exact OODocs environment and PDF renderer failed'
+
+        $stamp = [ordered] @{
+            schema = 'goniegonie.documentation-python-environment.v1'
+            pythonVersion = $requiredPython
+            baseExecutable = [string] $Python.executable
+            venvExecutable = $pythonEnvironmentExecutable
+            requirementsSha256 = $requirementsSha256
+            pipVersion = $requiredDocumentationPip
+            oodocsVersion = $requiredOodocs
+        }
+        Assert-NoReparsePoints `
+            -Path (Join-Path (Split-Path -Parent $pythonEnvironmentStampPath) '.goniegonie-ancestor-safety-probe') `
+            -AnchorPath $repositoryRoot
+        Write-Utf8JsonIfChanged -InputObject $stamp -Path $pythonEnvironmentStampPath -Depth 4
+
+        if (Test-Path -LiteralPath $smokePdf -PathType Leaf) {
+            Assert-NoReparsePoints -Path $setupPythonTemp -AnchorPath $repositoryRoot
+            Remove-Item -LiteralPath $smokePdf -Force
+        }
+        Remove-SetupOwnedTree -Path $pipCache
+    }
+    catch {
+        Remove-PythonEnvironmentStamp
+        Remove-SetupOwnedTree -Path $pythonEnvironmentRoot
+        throw
+    }
+
+    Write-Host "Repository Python environment: created ($pythonEnvironmentRoot)"
+    return [pscustomobject] [ordered] @{
+        status = 'ready'
+        version = $requiredPython
+        root = $pythonEnvironmentRoot
+        executable = $pythonEnvironmentExecutable
+        baseExecutable = $Python.executable
+        requirementsSha256 = $requirementsSha256
+        pipVersion = $requiredDocumentationPip
+        oodocsVersion = $requiredOodocs
+    }
 }
 
 function Get-EnergyPlusDetails {
@@ -1040,20 +1355,30 @@ if ($null -eq $dotnet) {
 }
 Write-Host ".NET SDK: $($dotnet.sdkVersion) [$($dotnet.source)]"
 
-$python = Get-PythonSelection
-if ($null -eq $python -and -not $SkipPythonInstall) {
-    Write-Host "Exact Python oracle $requiredPython was not found."
-    Install-PinnedPython
-    if ($WhatIfPreference) {
-        $python = [pscustomobject] [ordered] @{
-            status = 'planned'
-            version = $requiredPython
-            executable = Join-Path $toolsRoot 'python\3.12.7\python.exe'
-            source = 'repository-embedded'
+$repositoryPythonExecutable = Join-Path $toolsRoot 'python\3.12.7\python.exe'
+$python = $null
+if ($SkipPythonInstall) {
+    $python = Get-PythonSelection
+}
+else {
+    $python = Get-PythonDetails -Executable $repositoryPythonExecutable
+    if ($null -eq $python) {
+        Write-Host "Hash-pinned repository Python $requiredPython was not found."
+        Install-PinnedPython
+        if ($WhatIfPreference) {
+            $python = [pscustomobject] [ordered] @{
+                status = 'planned'
+                version = $requiredPython
+                executable = $repositoryPythonExecutable
+                source = 'repository-local'
+            }
         }
-    }
-    else {
-        $python = Get-PythonSelection
+        else {
+            $python = Get-PythonDetails -Executable $repositoryPythonExecutable
+            if ($null -eq $python) {
+                throw 'The verified repository Python package failed its final identity check.'
+            }
+        }
     }
 }
 
@@ -1070,6 +1395,8 @@ if ($null -eq $python) {
 else {
     Write-Host "Python oracle: $($python.version) [$($python.source)]"
 }
+
+$pythonEnvironment = Ensure-PythonEnvironment -Python $python
 
 $energyPlus = Get-EnergyPlusSelection
 if ($null -eq $energyPlus -and $InstallEnergyPlus) {
@@ -1127,6 +1454,7 @@ $localSettings = [ordered] @{
     repositoryRoot = $repositoryRoot
     dotnet = $dotnet
     pythonOracle = $python
+    pythonEnvironment = $pythonEnvironment
     energyPlus = $energyPlus
     distributions = @($preparedDistributions.Values | Sort-Object product)
     rhino = [ordered] @{
@@ -1140,12 +1468,17 @@ $localSettings = [ordered] @{
         nugetPackages = Join-Path $toolsRoot 'nuget\packages'
         nugetHttpCache = Join-Path $toolsRoot 'nuget\http-cache'
         dotnetCliHome = Join-Path $toolsRoot 'dotnet-cli-home'
+        pythonEnvironment = $pythonEnvironmentRoot
         buildOutput = Join-Path $tempRoot 'build'
         testResults = Join-Path $tempRoot 'test-results'
         logs = $logsRoot
+        documentationOutput = Join-Path $repositoryRoot 'artifacts\documentation'
     }
 }
 
+Assert-NoReparsePoints `
+    -Path (Join-Path (Split-Path -Parent $configPath) '.goniegonie-ancestor-safety-probe') `
+    -AnchorPath $repositoryRoot
 Write-Utf8JsonIfChanged -InputObject $localSettings -Path $configPath -Depth 10
 Remove-RetiredRootLocalSettings
 
