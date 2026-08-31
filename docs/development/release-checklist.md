@@ -9,7 +9,11 @@ authorize publication, Yak upload, tag creation, or a GitHub release.
 ## Source and provenance
 
 - Work from a clean `main` commit already pushed to `origin/main`.
-- Confirm the package version, assembly version, and both product manifests.
+- Confirm that `packaging/package-spec.json`, assembly metadata, both product
+  manifests, both PDF filenames, and every package filename agree on the
+  deliberately fixed first-release version `0.1.0`. Make the final version
+  decision in source; a future tag must be exactly `v0.1.0`, not a runtime
+  override or a product-specific tag.
 - Validate the upstream lock, symbol map, compatibility exceptions, and Python
   reference fixtures.
 - Recheck `LICENSE` and `NOTICE.md`. Resolve the recorded historical upstream
@@ -17,6 +21,9 @@ authorize publication, Yak upload, tag creation, or a GitHub release.
 - Confirm that SimpleDragon contains only the exact hash-pinned KoreanTMY
   archive, no expanded or arbitrary EPW files, and that redistribution rights
   are resolved before any public binary release.
+- Confirm a public support email owned for this project before any GitHub,
+  Yak, or Food4Rhino publication. A local Git identity or private address is
+  not an acceptable substitute.
 - Require both Rhino 7 and Rhino 8 for the complete release gate. A normal
   developer build may skip tests for a missing Rhino generation, but a release
   candidate may not.
@@ -49,10 +56,14 @@ For diagnosis, its constituent commands are:
 
 - Require zero compiler warnings and errors for `net48`, `net7.0-windows`, and
   `net8.0-windows`.
-- Require the PDF builder to reflect and exactly cross-compare all three public
+- Require the user-guide PDF builder to reflect and exactly cross-compare all three public
   Grasshopper contracts, join detailed guidance 1:1 for all 75 components, and
   postflight the PDF for all component and typed-parameter names, all four
   chapters, the framework coverage statement, and zero internal GUID leakage.
+- Require the Food4Rhino metadata PDF builder to import the canonical
+  publishing worksheet through OODocs and postflight its version, document
+  metadata, required sections, all field headings and fenced values, and both
+  unresolved safety tokens. Building the worksheet must not clear a hold.
 - Require all 1,242 pinned upstream public symbols to have exact registry
   coverage, no `needs_reverification` rows, and fresh authoritative assertion
   evidence for every `equivalent` or `exception` row. External evidence JSON
@@ -118,9 +129,29 @@ For diagnosis, its constituent commands are:
   complete `trusted-evidence\<session-id>` bundle (receipt, index, and indexed
   `artifacts` tree),
   `engineering-compatibility.json`, package index and compatibility report,
-  build/test reports, `artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.0.pdf`,
-  and all six copied real-host summaries. Confirm the PDF appears in the release
-  gate asset inventory with its exact byte count and SHA-256.
+  build/test reports, both
+  `artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.0.pdf` and
+  `artifacts\documentation\Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf`,
+  and all six copied real-host summaries. Confirm both PDFs appear in the
+  release-gate asset inventory with their exact byte counts and SHA-256 values.
+- Confirm `artifacts\release\github-assets` contains exactly these four future
+  GitHub release assets and nothing else:
+
+  ```text
+  Dragons-Grasshopper-0.1.0-Windows-Installer.zip
+  Dragons-Grasshopper-User-Guide-0.1.0.pdf
+  Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf
+  SHA256SUMS.txt
+  ```
+
+  `SHA256SUMS.txt` must verify the other three files. Keep the internal
+  `release-assets-manifest.json` beside `github-assets`, never inside the public
+  asset set.
+- Safely extract the Installer ZIP as a complete directory and run
+  `Install-Dragons.cmd --check` from its root. Confirm its manifest, internal
+  `checksums.sha256`, notices, and `packages\rhino7|rhino8` payloads resolve
+  relative to that extracted root; no repository checkout, `.tools`, or
+  developer setup may be required.
 - Open the tracked InvisibleDragon and SimpleDragon starter definitions in each
   installed Rhino generation. Separately exercise a direct InvisibleDragon
   HVAC graph and a direct SimpleDragon model-to-GRR run using the
@@ -136,17 +167,23 @@ For diagnosis, its constituent commands are:
 release, plugin installation, or Yak publication.
 
 The manually dispatched `Build verified local release candidate` workflow runs
-that same authoritative `dev.cmd release` gate and uploads its local candidate
-and evidence as workflow artifacts. It does not react to tags and does not
+that same authoritative `dev.cmd release` gate. While publication remains
+blocked, it uploads only JSON/text/PDF diagnostics: package binaries, the
+Installer ZIP, binary-bearing temporary trees, and the four-file
+`github-assets` directory remain on the protected self-hosted runner and are
+not uploaded or attested. The workflow does not react to tags and does not
 create a GitHub release or publish to Yak. Its self-hosted Windows x64 runner
 must carry the `rhino7`, `rhino8`, `energyplus-24-2`, and `dragons-release`
 labels and have licensed Rhino 7 and Rhino 8 installations available to the
 interactive host gates. The gate still verifies the pinned EnergyPlus runtime
 and every required tool rather than trusting runner labels alone.
 
-Do not push an `invisible-dragon-vX.Y.Z` or `simple-dragon-vX.Y.Z` tag, upload a
-binary, create or publish a GitHub release, or publish to Yak while the
-historical upstream standalone-license omission recorded in `NOTICE.md` remains
-under review. After that review is explicitly resolved, any tag, GitHub
-release, binary upload, or Yak publication remains a distinct, explicitly
-authorized manual operation outside this candidate workflow.
+Do not push `v0.1.0`, upload a binary, create or publish a GitHub release, or
+publish to Yak while any of these conditions remains unresolved: the historical
+upstream standalone-license omission recorded in `NOTICE.md`, KoreanTMY public
+redistribution rights, or the project owner's confirmed public support email.
+After all three are explicitly resolved, re-confirm that the chosen release
+version is still `0.1.0` and that tag `v0.1.0` equals it exactly. Tag creation,
+the GitHub release with exactly the four staged assets, binary upload, Yak
+publication, and Food4Rhino submission remain distinct, explicitly authorized
+manual operations outside this candidate workflow.

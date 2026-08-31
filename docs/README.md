@@ -8,11 +8,19 @@ procedure in the user tree or link a development worksheet as user guidance.
 | Plugin users and public project pages | [User documentation](user/README.md) | Installation, product choice, Grasshopper workflows, runtime/weather behavior, troubleshooting, examples, and the four externally distributed user-guide chapters |
 | Contributors and release maintainers | [Development documentation](development/README.md) | Reproducible setup, build/test workflows, compatibility policy, OODocs generation, packaging, release gates, and publishing worksheets |
 
-The generated PDF remains the only bundled documentation artifact:
-`artifacts/documentation/Dragons-Grasshopper-User-Guide-0.1.0.pdf`.
-Its authored and generated Markdown chapters live under
-[`user/user-guide`](user/user-guide/01-workflow.md); the build procedure lives
-only in the development tree.
+The PDF-only OODocs build creates two version-bound artifacts:
+
+- `artifacts/documentation/Dragons-Grasshopper-User-Guide-0.1.0.pdf` is the
+  externally visible user guide. Its authored and generated Markdown chapters
+  live under [`user/user-guide`](user/user-guide/01-workflow.md).
+- `artifacts/documentation/Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf`
+  is the maintainer publishing worksheet rendered from
+  [`development/publishing/food4rhino.md`](development/publishing/food4rhino.md).
+  It is not normal plugin-user guidance.
+
+The build procedure lives only in the [development tree](development/documentation-build.md).
+Both outputs are currently local `0.1.0` candidate artifacts; no public tag or
+release is implied.
 
 Repository-wide legal and release records remain at the conventional root
 locations: [LICENSE](../LICENSE), [NOTICE](../NOTICE.md), and

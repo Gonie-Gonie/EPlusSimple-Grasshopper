@@ -24,6 +24,9 @@ Use the labels as follows:
 - Blocking conditions: review the historical upstream standalone-license
   omission; confirm KoreanTMY public redistribution rights; confirm a public
   support email. See [NOTICE](../../../NOTICE.md).
+- Version status: the first-release source is deliberately fixed at `0.1.0`.
+  No public tag exists. If that remains the final decision, the future repository
+  tag must be exactly `v0.1.0` and must equal `packaging/package-spec.json`.
 - Official field reference: [Food4Rhino FAQ](https://www.food4rhino.com/en/faq?lang=en).
 - Public-field examples: [Ladybug Tools](https://www.food4rhino.com/en/app/ladybug-tools?lang=en)
   and [Reer AI](https://www.food4rhino.com/en/app/reer-ai?lang=en).
@@ -32,6 +35,13 @@ Food4Rhino lists Title, Short Description, Body, Category, License Agreement,
 Support Email, and Project Icon as mandatory App fields. Short Description is
 limited to 180 characters. Website, Support Forum, Other Images, platform, and
 release/file information are prepared below where applicable.
+
+The future GitHub release has a separate, closed asset contract: exactly
+`Dragons-Grasshopper-0.1.0-Windows-Installer.zip`,
+`Dragons-Grasshopper-User-Guide-0.1.0.pdf`,
+`Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf`, and `SHA256SUMS.txt`.
+Per-product Yak files and optional portable ZIPs below are Yak/Food4Rhino
+publication inputs, not additional GitHub release assets.
 
 Create each App through **Create App from Yak** and enter only its Yak Package
 Name for that connection. A `.yak` file is never selected in Food4Rhino's
@@ -435,20 +445,28 @@ Vimeo, p3d.in, mcneel.github.io, or ShapeDiver. No media URL is prepared yet.
 2. Replace `CONFIRM_PUBLIC_SUPPORT_EMAIL` with the account owner's confirmed
    public support address, then replace the license hold with the cleared value.
 3. Confirm that the GitHub Issues support link is publicly usable.
-4. Run `dev.cmd release` from a clean `main` commit already pushed to
+4. Reconfirm the deliberate first-release version in
+   `packaging/package-spec.json`. If it remains `0.1.0`, reserve only the exact
+   future tag `v0.1.0`; do not create it yet.
+5. Run `dev.cmd release` from a clean `main` commit already pushed to
    `origin/main`; require `status: passed` in
    `artifacts/release/release-gate.json`.
-5. Publish the two attested `.yak` packages for each product through the
+6. Verify that `artifacts/release/github-assets` contains only the Installer
+   ZIP, the user guide PDF, this Food4Rhino metadata PDF, and `SHA256SUMS.txt`,
+   with the exact `0.1.0` filenames listed above and valid hashes.
+7. Only with separate publication authorization, create tag `v0.1.0` and a
+   GitHub release whose attached files are exactly those four staged assets.
+8. Publish the two attested `.yak` packages for each product through the
    authorized Yak workflow. Do not upload `.yak` files through Food4Rhino's
    File / Link control.
-6. In Food4Rhino, use Create App from Yak with Package Name `invisible-dragon`
+9. In Food4Rhino, use Create App from Yak with Package Name `invisible-dragon`
    and `simple-dragon`, then paste, select, and upload only the correspondingly
    labeled App values from this file.
-7. Verify that Yak import groups both Rhino platforms under version 0.1.0; do
+10. Verify that Yak import groups both Rhino platforms under version 0.1.0; do
    not create duplicate manual release rows.
-8. If a separate portable download is wanted, add its one ZIP record, select
+11. If a separate portable download is wanted, add its one ZIP record, select
    both Rhino release platforms, and drag it after the managed installers.
-9. Upload real Rhino and Grasshopper screenshots, add only supported media
+12. Upload real Rhino and Grasshopper screenshots, add only supported media
    embeds, preview both listings, and submit them for Food4Rhino review.
 
 Preparing this sheet, building a candidate, or passing local verification does

@@ -53,6 +53,31 @@ artifacts/packages/<product>/
     `-- <product>-0.1.0-portable-plugin-win.zip
 ```
 
+These per-product files are candidate inputs, not the GitHub release attachment
+set. The local release gate assembles a separate end-user bundle below
+`artifacts/release/github-assets` with exactly four future public assets:
+
+```text
+Dragons-Grasshopper-0.1.0-Windows-Installer.zip
+Dragons-Grasshopper-User-Guide-0.1.0.pdf
+Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf
+SHA256SUMS.txt
+```
+
+The Installer ZIP contains `Install-Dragons.cmd`, `release-manifest.json`, an
+internal `checksums.sha256`, `LICENSE.txt`, `NOTICE.md`, `README.txt`, and only
+the required Yak payloads below `packages/rhino7` and `packages/rhino8`. The
+installer must work from a complete extracted copy by resolving every payload
+relative to its own directory. It must not require the repository, `.tools`,
+or development setup. `SHA256SUMS.txt` verifies the other three GitHub assets;
+the internal `release-assets-manifest.json` remains beside `github-assets` as
+candidate evidence and is not a fifth public asset.
+
+`packaging/package-spec.json` deliberately fixes the current first-release
+version at `0.1.0`. The final version decision must be made in source, and the
+future repository tag must equal it exactly (`v0.1.0` for `0.1.0`). Assembling
+these files locally does not create a tag or authorize publication.
+
 The transient stage and final ZIP roots include their manifest, icon, Gonie-Gonie notices,
 payload manifest, and SHA-256 list. Each package root additionally contains
 exactly one product-specific verified archive: EnergyPlus for InvisibleDragon,

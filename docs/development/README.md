@@ -26,7 +26,7 @@ generation.
 | `dev.cmd reference` | Generate or verify the pinned historical Python oracle |
 | `dev.cmd compatibility` | Compare the Python/C# engineering cases and EnergyPlus outputs |
 | `dev.cmd examples` | Generate and round-trip the tracked `.gh` and `.3dm` examples |
-| `dev.cmd docs` | Reflect every public component contract and build the OODocs PDF |
+| `dev.cmd docs` | Reflect every public component contract and build both OODocs PDFs |
 | `dev.cmd package` | Produce verified Yak and portable ZIP candidates without publishing |
 | `dev.cmd install` | Replace only local Dragon packages in detected Rhino installations |
 | `dev.cmd release` | Build a clean, pushed, fully attested local release candidate |
@@ -42,9 +42,9 @@ the complete disposable tree.
 
 - [Compatibility policy](compatibility-policy.md): declared port scope,
   historical baseline, evidence boundaries, and current limitations.
-- [Building the user guide](documentation-build.md): repository-local
+- [Building the documentation PDFs](documentation-build.md): repository-local
   Python/OODocs environment, runtime metadata extraction, generated reference,
-  and PDF output.
+  Food4Rhino worksheet, and the two version-bound PDF outputs.
 - [Release checklist](release-checklist.md): clean-source, host, package,
   evidence, legal, and publication gates.
 - [Example maintenance](example-maintenance.md): canonical binary generation,
@@ -68,4 +68,7 @@ Implementation-specific documentation remains beside the system it describes:
 
 The standard root [LICENSE](../../LICENSE), [NOTICE](../../NOTICE.md), and
 [CHANGELOG](../../CHANGELOG.md) remain authoritative for legal and release
-history. A local candidate does not authorize public publication.
+history. The future GitHub release contract is exactly one Installer ZIP, the
+user guide PDF, the Food4Rhino metadata PDF, and `SHA256SUMS.txt`, all bound to
+the deliberately selected package version and matching repository tag. A local
+candidate does not authorize public publication.

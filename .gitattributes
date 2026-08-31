@@ -8,6 +8,9 @@
 *.targets text eol=lf
 *.ps1 text eol=lf
 *.cmd text eol=crlf
+# The hybrid release installer is hashed into a deterministic ZIP; keep its
+# tested LF bytes identical on every checkout (cmd.exe accepts LF scripts).
+packaging/release/Install-Dragons.cmd text eol=lf
 *.sln text eol=lf
 *.md text eol=lf
 *.json text eol=lf

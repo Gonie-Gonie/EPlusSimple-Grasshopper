@@ -1,7 +1,9 @@
 # Changelog
 
-All notable changes to this project are documented here. The project uses
-independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
+All notable changes to this project are documented here. Both products share
+one release version. A future repository tag must equal the deliberately chosen
+source version exactly: the current first-release source `0.1.0` maps only to
+`v0.1.0`. No public tag exists yet.
 
 ## Unreleased
 
@@ -53,11 +55,12 @@ independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
   package manifests, compatibility reports, and SHA-256 inventories.
 - Add distinct illustration-derived icons for every public component and
   persistent parameter instead of sharing Grasshopper's default data icon.
-- Add a reproducible repository venv and OODocs PDF workflow whose Python-native
+- Add a reproducible repository venv and two-PDF OODocs workflow whose Python-native
   catalog reader and guide builder combine runtime-reflected metadata with
   detailed guidance and require exact In/Out coverage for every public component.
 - Add one Food4Rhino publishing sheet containing copy-ready App fields, Yak
-  connection values, platform labels, and upload assets for both separate Apps.
+  connection values, platform labels, and upload assets for both separate Apps,
+  plus a version-bound OODocs metadata PDF generated directly from that sheet.
 
 ### Development and verification
 
@@ -74,13 +77,19 @@ independent `invisible-dragon-v*` and `simple-dragon-v*` release tags.
   the Python oracle, all production targets and tests, real EnergyPlus runs,
   the exhaustive PDF guide, tracked Grasshopper examples, package contents, and
   all six Rhino 7/Rhino 8 portable-package load scenarios.
+- Assemble a future GitHub attachment set containing exactly
+  `Dragons-Grasshopper-0.1.0-Windows-Installer.zip`, the user guide PDF, the
+  Food4Rhino metadata PDF, and `SHA256SUMS.txt`. The extracted installer uses
+  only bundle-relative manifests, checksums, notices, and Rhino 7/8 Yak payloads.
 - Separate external user documentation from development, evidence, release, and
   publishing procedures, and validate that hierarchy, its local links, and the
   Food4Rhino field contract during every `dev.cmd docs` run.
 
 ### Distribution status
 
-- Public binaries, release tags, GitHub releases, and Yak publication remain
-  withheld pending review of the historical upstream standalone-license
-  omission recorded in `NOTICE.md`. `dev.cmd release` creates only a local
-  verified candidate and performs none of those publication actions.
+- Public binaries, release tag `v0.1.0`, GitHub releases, Yak publication, and
+  Food4Rhino submission remain withheld pending review of the historical
+  upstream standalone-license omission recorded in `NOTICE.md`, confirmation
+  of KoreanTMY public redistribution rights, and confirmation of a project-owned
+  public support email. `dev.cmd release` creates only a local verified
+  candidate and performs none of those publication actions.

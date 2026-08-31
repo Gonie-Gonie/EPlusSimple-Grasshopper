@@ -23,7 +23,16 @@ artifacts/
 |   |-- compatibility-report.json
 |   `-- checksums.sha256
 |-- documentation/
-|   `-- Dragons-Grasshopper-User-Guide-0.1.0.pdf
+|   |-- Dragons-Grasshopper-User-Guide-0.1.0.pdf
+|   `-- Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf
+|-- release/
+|   |-- github-assets/
+|   |   |-- Dragons-Grasshopper-0.1.0-Windows-Installer.zip
+|   |   |-- Dragons-Grasshopper-User-Guide-0.1.0.pdf
+|   |   |-- Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf
+|   |   `-- SHA256SUMS.txt
+|   |-- release-assets-manifest.json
+|   `-- release-gate.json
 `-- reports/
     |-- build-manifest.json
     `-- test-summary.json
@@ -32,7 +41,15 @@ artifacts/
 Generated contents can be deleted at any time. Each command owns and recreates
 its corresponding subtree: `dev.cmd build` resets and stages plugin binaries and
 reports, `dev.cmd package` recreates the package subtree after a build, and
-`dev.cmd docs` recreates the documentation subtree from current runtime metadata
-and the tracked authored chapters. Because a new build resets generated
-artifacts, run package and docs after build when preparing a complete hand-off.
-Successful package runs remove their scratch stages automatically.
+`dev.cmd docs` recreates both OODocs PDFs in the documentation subtree from
+current runtime metadata and the tracked authored chapters and publishing
+worksheet. `dev.cmd release` assembles the exact four-file `github-assets`
+candidate set and keeps its internal manifest outside that directory. Because
+a new build resets generated artifacts, run package and docs after build when
+preparing a complete hand-off. Successful package runs remove their scratch
+stages automatically.
+
+The generated version is deliberately fixed at `0.1.0`; a future tag must be
+exactly `v0.1.0`. These are local, ignored artifacts. Their presence does not
+mean a tag, GitHub release, Yak package, or Food4Rhino listing has been
+published, and the current public-release blockers still apply.

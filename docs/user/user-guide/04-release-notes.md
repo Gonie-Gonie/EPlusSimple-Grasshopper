@@ -10,7 +10,9 @@ and the PDF guide are development artifacts and must not be represented as a
 published release.
 
 Public distribution remains withheld while the historical upstream
-standalone-license omission described in `NOTICE.md` is reviewed.
+standalone-license omission described in `NOTICE.md` is reviewed, KoreanTMY
+redistribution rights are confirmed, and a project-owned public support email
+is confirmed.
 
 ### Product highlights
 
@@ -19,7 +21,9 @@ standalone-license omission described in `NOTICE.md` is reviewed.
   for the GRM/GRR building workflow.
 - Supports Rhino 7 on .NET Framework 4.8, Rhino 8.0–8.19 on .NET 7, and Rhino
   8.20+ on .NET 8, all on Windows x64.
-- Provides host-specific Yak candidates and portable packages for each product.
+- Produces host-specific Yak candidates and portable packages internally, then
+  assembles one relative-path Windows Installer ZIP for the future GitHub
+  release.
 - Keeps installed plugins independent of Python, OODocs, Visual Studio, the
   .NET SDK, and a machine-wide EnergyPlus installation.
 - Tracks the EPlusSimple/IDragon 0.7.0 engineering baseline at upstream commit
@@ -34,8 +38,9 @@ standalone-license omission described in `NOTICE.md` is reviewed.
 | Rhino/Grasshopper | Rhino 7 and Rhino 8 geometry, load, solve, save, and reopen | Enforced on the release host |
 | Examples | Eight `.gh` definitions and two `.3dm` models, including both full workflows | Enforced on Rhino 7 and Rhino 8 |
 | Packages | Invisible-only, Simple-only, and co-loaded portable candidates; no Python | Enforced for both Rhino generations |
-| Documentation | Four chapters, all 75 components and 37 typed parameters, PDF postflight | Enforced and included as one PDF asset |
-| Public publication | License and weather redistribution review | Blocked; no tag, GitHub release, or Yak publication |
+| Documentation | Four chapters, all 75 components and 37 typed parameters, plus Food4Rhino metadata PDF postflight | Enforced as two version-bound OODocs PDFs |
+| GitHub assets | Installer ZIP, user guide PDF, Food4Rhino metadata PDF, and `SHA256SUMS.txt` only | Deterministically assembled and verified locally |
+| Public publication | Upstream license, KoreanTMY redistribution, and public support-email review | Blocked; no tag, GitHub release, Yak, or Food4Rhino publication |
 
 A candidate is distributable only when its engineering, host, example,
 package, checksum, and documentation reports all belong to the same source

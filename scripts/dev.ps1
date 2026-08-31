@@ -40,7 +40,7 @@ Commands:
   clean       Remove disposable temp, artifact content, or source caches
   icons       Regenerate component and package icons
   compatibility  Run paired Python/C# IDF, EnergyPlus, warning, and GRR parity
-  docs        Generate the exhaustive PDF user guide with OODocs
+  docs        Generate the user-guide and Food4Rhino metadata PDFs with OODocs
   upstream    Validate, hash, or compare the pinned upstream source
   help        Show this command list
 

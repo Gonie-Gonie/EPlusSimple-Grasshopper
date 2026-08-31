@@ -2,7 +2,9 @@
 
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
 param(
-    [string] $OutputPath
+    [string] $OutputPath,
+
+    [string] $Food4RhinoOutputPath
 )
 
 $ErrorActionPreference = 'Stop'
@@ -19,7 +21,10 @@ $nugetPackagesPath = Join-Path $repositoryRoot '.tools\nuget\packages'
 $environmentVerifierPath = Join-Path $repositoryRoot 'tools\documentation\verify_environment.py'
 $sourceVerifierPath = Join-Path $repositoryRoot 'tools\documentation\verify_repository_docs.py'
 $guideBuilderPath = Join-Path $repositoryRoot 'tools\documentation\build_user_guide.py'
+$food4RhinoBuilderPath = Join-Path $repositoryRoot 'tools\documentation\build_food4rhino_metadata.py'
+$food4RhinoSourcePath = Join-Path $repositoryRoot 'docs\development\publishing\food4rhino.md'
 $guideMetadataPath = Join-Path $repositoryRoot 'tools\documentation\component-guides.json'
+$packageSpecPath = Join-Path $repositoryRoot 'packaging\package-spec.json'
 $catalogProjectPath = Join-Path $repositoryRoot 'tools\component-catalog\GonieGonie.Dragons.ComponentCatalog.csproj'
 $catalogNet8AssemblyPath = Join-Path $repositoryRoot 'temp\build\bin\GonieGonie.Dragons.ComponentCatalog\Release\net8.0-windows\GonieGonie.Dragons.ComponentCatalog.dll'
 $catalogNet48ExecutablePath = Join-Path $repositoryRoot 'temp\build\bin\GonieGonie.Dragons.ComponentCatalog\Release\net48\GonieGonie.Dragons.ComponentCatalog.exe'
@@ -28,31 +33,62 @@ $catalogNet8Path = Join-Path $workRoot 'component-catalog.net8.0-windows.json'
 $catalogNet7Path = Join-Path $workRoot 'component-catalog.net7.0-windows.json'
 $catalogNet48Path = Join-Path $workRoot 'component-catalog.net48.json'
 $logsRoot = Join-Path $workRoot 'logs'
-$defaultOutputPath = Join-Path $repositoryRoot 'artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.0.pdf'
+$documentationOutputRoot = Join-Path $repositoryRoot 'artifacts\documentation'
+
+if (-not (Test-Path -LiteralPath $packageSpecPath -PathType Leaf)) {
+    throw "Package specification is missing: '$packageSpecPath'."
+}
+$packageSpec = Get-Content -LiteralPath $packageSpecPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json
+if ([string] $packageSpec.schema -cne 'goniegonie.dragons-grasshopper.package-spec.v1' -or
+    [string] $packageSpec.version -cne '0.1.0') {
+    throw 'Documentation requires the deliberate first-release package version 0.1.0.'
+}
+$releaseVersion = [string] $packageSpec.version
+$defaultOutputPath = Join-Path $documentationOutputRoot (
+    "Dragons-Grasshopper-User-Guide-$releaseVersion.pdf")
+$defaultFood4RhinoOutputPath = Join-Path $documentationOutputRoot (
+    "Dragons-Grasshopper-Food4Rhino-Metadata-$releaseVersion.pdf")
 
 if ([string]::IsNullOrWhiteSpace($OutputPath)) {
     $OutputPath = $defaultOutputPath
 }
+if ([string]::IsNullOrWhiteSpace($Food4RhinoOutputPath)) {
+    $Food4RhinoOutputPath = $defaultFood4RhinoOutputPath
+}
 $OutputPath = [System.IO.Path]::GetFullPath($OutputPath)
-if (-not [System.IO.Path]::GetExtension($OutputPath).Equals(
-    '.pdf',
-    [System.StringComparison]::OrdinalIgnoreCase)) {
-    throw "Documentation output must be a PDF: '$OutputPath'."
+$Food4RhinoOutputPath = [System.IO.Path]::GetFullPath($Food4RhinoOutputPath)
+foreach ($candidate in @($OutputPath, $Food4RhinoOutputPath)) {
+    if (-not [System.IO.Path]::GetExtension($candidate).Equals(
+        '.pdf',
+        [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Documentation output must be a PDF: '$candidate'."
+    }
 }
 $safeOutputPath = Assert-RepositoryChildPath `
     -RepositoryRoot $repositoryRoot `
     -Path $OutputPath `
+    -AllowedTopLevelNames @('artifacts')
+$safeFood4RhinoOutputPath = Assert-RepositoryChildPath `
+    -RepositoryRoot $repositoryRoot `
+    -Path $Food4RhinoOutputPath `
     -AllowedTopLevelNames @('artifacts')
 $safeWorkRoot = Assert-RepositoryChildPath `
     -RepositoryRoot $repositoryRoot `
     -Path $workRoot `
     -AllowedTopLevelNames @('temp')
 $outputDirectory = Split-Path -Parent $safeOutputPath
+$food4RhinoOutputDirectory = Split-Path -Parent $safeFood4RhinoOutputPath
 $referenceDirectory = Join-Path $repositoryRoot 'docs\user\user-guide'
 
 # Lexical containment is not enough for a write workflow: a junction beneath
 # temp, artifacts, or docs could redirect a later replace outside the checkout.
-foreach ($path in @($safeWorkRoot, $outputDirectory, $referenceDirectory)) {
+$initialDocumentationWritePaths = @(
+    $safeWorkRoot,
+    $outputDirectory,
+    $food4RhinoOutputDirectory,
+    $referenceDirectory) | Select-Object -Unique
+foreach ($path in $initialDocumentationWritePaths) {
     Assert-NoReparsePoints -Path $path -AnchorPath $repositoryRoot
 }
 
@@ -63,7 +99,10 @@ foreach ($requiredFile in @(
     $environmentVerifierPath,
     $sourceVerifierPath,
     $guideBuilderPath,
+    $food4RhinoBuilderPath,
+    $food4RhinoSourcePath,
     $guideMetadataPath,
+    $packageSpecPath,
     $catalogProjectPath)) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
         throw "Required documentation input is missing: '$requiredFile'. Run 'dev.cmd setup' first if local settings are absent."
@@ -136,11 +175,12 @@ if ($WhatIfPreference) {
     Write-Host "What if: build the runtime component catalog project '$catalogProjectPath'."
     Write-Host "What if: extract and compare Rhino 7/net48 plus Rhino 8/net7.0-windows and net8.0-windows component catalogs."
     Write-Host "What if: generate the exhaustive In/Out reference and render '$safeOutputPath' with OODocs."
+    Write-Host "What if: render the Food4Rhino publishing worksheet '$safeFood4RhinoOutputPath' with OODocs."
     return
 }
 if (-not $PSCmdlet.ShouldProcess(
-    $safeOutputPath,
-    'Reflect every public Dragon component and replace the generated user-guide PDF')) {
+    "$safeOutputPath; $safeFood4RhinoOutputPath",
+    'Reflect every public Dragon component and replace both generated release PDFs')) {
     return
 }
 
@@ -151,7 +191,13 @@ Set-RepositoryBuildEnvironment `
 Ensure-Directory -Path $safeWorkRoot
 Ensure-Directory -Path $logsRoot
 Ensure-Directory -Path $outputDirectory
-foreach ($path in @($safeWorkRoot, $outputDirectory, $referenceDirectory)) {
+Ensure-Directory -Path $food4RhinoOutputDirectory
+$documentationWritePaths = @(
+    $safeWorkRoot,
+    $outputDirectory,
+    $food4RhinoOutputDirectory,
+    $referenceDirectory) | Select-Object -Unique
+foreach ($path in $documentationWritePaths) {
     Assert-NoReparsePoints -Path $path -AnchorPath $repositoryRoot
 }
 
@@ -253,25 +299,40 @@ Invoke-LoggedNativeCommand `
     -LogPath (Join-Path $logsRoot 'build-user-guide.log') `
     -FailureMessage 'Generating the exhaustive reference and OODocs PDF failed'
 
-Assert-NoReparsePoints -Path $outputDirectory -AnchorPath $repositoryRoot
-if (-not (Test-Path -LiteralPath $safeOutputPath -PathType Leaf)) {
-    throw "OODocs did not create the expected PDF: '$safeOutputPath'."
+Invoke-LoggedNativeCommand `
+    -FilePath $pythonExecutable `
+    -ArgumentList @(
+        '-I', '-B', '-X', 'utf8',
+        $food4RhinoBuilderPath,
+        '--repo-root', $repositoryRoot,
+        '--output', $safeFood4RhinoOutputPath) `
+    -LogPath (Join-Path $logsRoot 'build-food4rhino-metadata.log') `
+    -FailureMessage 'Generating the Food4Rhino OODocs metadata PDF failed'
+
+foreach ($directory in @($outputDirectory, $food4RhinoOutputDirectory) | Select-Object -Unique) {
+    Assert-NoReparsePoints -Path $directory -AnchorPath $repositoryRoot
 }
-$pdf = Get-Item -LiteralPath $safeOutputPath
-if ($pdf.Length -lt 10kb) {
-    throw "The generated PDF is unexpectedly small ($($pdf.Length) bytes): '$safeOutputPath'."
-}
-$stream = [System.IO.File]::OpenRead($safeOutputPath)
-try {
-    $signatureBytes = New-Object byte[] 5
-    if ($stream.Read($signatureBytes, 0, 5) -ne 5 -or
-        [System.Text.Encoding]::ASCII.GetString($signatureBytes) -cne '%PDF-') {
-        throw "The generated documentation does not have a PDF signature: '$safeOutputPath'."
+foreach ($pdfPath in @($safeOutputPath, $safeFood4RhinoOutputPath)) {
+    if (-not (Test-Path -LiteralPath $pdfPath -PathType Leaf)) {
+        throw "OODocs did not create the expected PDF: '$pdfPath'."
+    }
+    $pdf = Get-Item -LiteralPath $pdfPath
+    if ($pdf.Length -lt 10kb) {
+        throw "The generated PDF is unexpectedly small ($($pdf.Length) bytes): '$pdfPath'."
+    }
+    $stream = [System.IO.File]::OpenRead($pdfPath)
+    try {
+        $signatureBytes = New-Object byte[] 5
+        if ($stream.Read($signatureBytes, 0, 5) -ne 5 -or
+            [System.Text.Encoding]::ASCII.GetString($signatureBytes) -cne '%PDF-') {
+            throw "The generated documentation does not have a PDF signature: '$pdfPath'."
+        }
+    }
+    finally {
+        $stream.Dispose()
     }
 }
-finally {
-    $stream.Dispose()
-}
 
-Write-Host "Documentation PDF: $safeOutputPath"
+Write-Host "User guide PDF: $safeOutputPath"
+Write-Host "Food4Rhino metadata PDF: $safeFood4RhinoOutputPath"
 Write-Host "Runtime catalogs: $catalogNet48Path, $catalogNet7Path, and $catalogNet8Path (disposable)"

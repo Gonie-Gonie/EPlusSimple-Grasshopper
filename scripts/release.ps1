@@ -11,9 +11,23 @@ Set-StrictMode -Version 2.0
 $repositoryRoot = Get-RepositoryRoot -ScriptDirectory $PSScriptRoot
 $releaseStartedUtc = [DateTime]::UtcNow
 $releaseStamp = $releaseStartedUtc.ToString('yyyyMMdd-HHmmss-fff')
+$packageSpecPath = Join-Path $repositoryRoot 'packaging\package-spec.json'
+if (-not (Test-Path -LiteralPath $packageSpecPath -PathType Leaf)) {
+    throw "Package specification is missing: '$packageSpecPath'."
+}
+$packageSpec = Get-Content -LiteralPath $packageSpecPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json
+if ([string] $packageSpec.schema -cne 'goniegonie.dragons-grasshopper.package-spec.v1' -or
+    [string] $packageSpec.version -cne '0.1.0') {
+    throw 'The first public release process is deliberately bound to version 0.1.0. Decide and commit the final version in package-spec.json before changing this guard.'
+}
+$releaseVersion = [string] $packageSpec.version
 $artifactsRoot = Join-Path $repositoryRoot 'artifacts'
 $packagesRoot = Join-Path $artifactsRoot 'packages'
-$documentationPdfPath = Join-Path $artifactsRoot 'documentation\Dragons-Grasshopper-User-Guide-0.1.0.pdf'
+$documentationPdfPath = Join-Path $artifactsRoot (
+    "documentation\Dragons-Grasshopper-User-Guide-$releaseVersion.pdf")
+$food4RhinoPdfPath = Join-Path $artifactsRoot (
+    "documentation\Dragons-Grasshopper-Food4Rhino-Metadata-$releaseVersion.pdf")
 $reportsRoot = Join-Path $artifactsRoot 'reports'
 $finalReleaseRoot = Join-Path $artifactsRoot 'release'
 $releaseScratchRoot = Join-Path $repositoryRoot 'temp\release-candidate'
@@ -25,6 +39,10 @@ $upstreamRoot = Join-Path $repositoryRoot 'temp\reference\upstream\eplussimple'
 $upstreamGatePath = Join-Path $repositoryRoot 'temp\upstream-tracker\compatibility-gate.json'
 $upstreamReleasePath = Join-Path $releaseRoot 'upstream-compatibility-gate.json'
 $trustedEvidenceReleaseRoot = Join-Path $releaseRoot 'trusted-evidence'
+$githubAssetsRoot = Join-Path $releaseRoot 'github-assets'
+$githubAssetsManifestPath = Join-Path $releaseRoot 'release-assets-manifest.json'
+$githubAssetsBuildRoot = Join-Path $releaseRoot '.github-release-build'
+$githubAssetsBuilderPath = Join-Path $repositoryRoot 'tools\release\build-github-assets.ps1'
 
 function Resolve-GitExecutable {
     $command = Get-Command git.exe -ErrorAction SilentlyContinue
@@ -3216,7 +3234,7 @@ Invoke-RepositoryCommand `
     -Arguments @('build', '-NoRestore', '-RequireEnergyPlus') `
     -FailureMessage 'Release build failed'
 
-Write-Host 'Building and postflight-validating the exhaustive PDF user guide...'
+Write-Host 'Building and postflight-validating both OODocs release PDFs...'
 Invoke-RepositoryCommand `
     -Path (Join-Path $repositoryRoot 'dev.cmd') `
     -Arguments @('docs') `
@@ -3694,12 +3712,13 @@ $releaseAssets = @(
     Get-Item -LiteralPath $packageChecksumsPath
     Get-Item -LiteralPath $engineeringCompatibilityPath
     Get-Item -LiteralPath $documentationPdfPath
+    Get-Item -LiteralPath $food4RhinoPdfPath
 )
 if (@($releaseAssets | Where-Object { $_.Extension -eq '.yak' }).Count -ne 4 -or
     @($releaseAssets | Where-Object { $_.Extension -eq '.zip' }).Count -ne 2 -or
-    @($releaseAssets | Where-Object { $_.Extension -eq '.pdf' }).Count -ne 1 -or
-    $releaseAssets.Count -ne 11) {
-    throw "Expected four Yak archives, two portable ZIPs, one user-guide PDF, and four common reports; found $($releaseAssets.Count) release assets."
+    @($releaseAssets | Where-Object { $_.Extension -eq '.pdf' }).Count -ne 2 -or
+    $releaseAssets.Count -ne 12) {
+    throw "Expected four Yak archives, two portable ZIPs, two OODocs PDFs, and four common reports; found $($releaseAssets.Count) release inputs."
 }
 $assetReports = @($releaseAssets | Sort-Object FullName | ForEach-Object {
     [pscustomobject] [ordered] @{
@@ -3709,8 +3728,111 @@ $assetReports = @($releaseAssets | Sort-Object FullName | ForEach-Object {
     }
 })
 
+Write-Host 'Building the exact four future GitHub Release assets...'
+$windowsPowerShell = Join-Path $PSHOME 'powershell.exe'
+Invoke-RepositoryCommand `
+    -Path $windowsPowerShell `
+    -Arguments @(
+        '-NoLogo',
+        '-NoProfile',
+        '-ExecutionPolicy', 'Bypass',
+        '-File', $githubAssetsBuilderPath,
+        '-RepositoryRoot', $repositoryRoot,
+        '-SourceCandidateRoot', $packagesRoot,
+        '-UserGuidePdf', $documentationPdfPath,
+        '-Food4RhinoPdf', $food4RhinoPdfPath,
+        '-OutputRoot', $githubAssetsBuildRoot) `
+    -FailureMessage 'Building the deterministic GitHub Release asset set failed'
+
+$builtGithubAssetsRoot = Join-Path $githubAssetsBuildRoot 'github-assets'
+$builtGithubManifestPath = Join-Path $githubAssetsBuildRoot 'release-assets-manifest.json'
+if (-not (Test-Path -LiteralPath $builtGithubAssetsRoot -PathType Container) -or
+    -not (Test-Path -LiteralPath $builtGithubManifestPath -PathType Leaf) -or
+    (Test-Path -LiteralPath $githubAssetsRoot) -or
+    (Test-Path -LiteralPath $githubAssetsManifestPath)) {
+    throw 'GitHub Release asset staging did not produce the exact promotable layout.'
+}
+Assert-NoReparseAncestorChain -Root $repositoryRoot -Candidate $builtGithubAssetsRoot
+Assert-NoReparseAncestorChain -Root $repositoryRoot -Candidate $builtGithubManifestPath
+Move-Item -LiteralPath $builtGithubAssetsRoot -Destination $githubAssetsRoot
+Move-Item -LiteralPath $builtGithubManifestPath -Destination $githubAssetsManifestPath
+if (@(Get-ChildItem -LiteralPath $githubAssetsBuildRoot -Force).Count -ne 0) {
+    throw 'GitHub Release asset builder left unexpected staging entries.'
+}
+Remove-Item -LiteralPath $githubAssetsBuildRoot -Force
+
+$githubAssetsManifest = Require-Json `
+    -Path $githubAssetsManifestPath `
+    -Schema 'goniegonie.dragons-grasshopper.github-release-assets.v1'
+if ([string] $githubAssetsManifest.version -cne $releaseVersion -or
+    [string] $githubAssetsManifest.publicDirectory -cne 'github-assets' -or
+    [string] $githubAssetsManifest.installerManifestSchema -cne
+        'goniegonie.dragons-grasshopper.windows-installer.v1' -or
+    @($githubAssetsManifest.packageInputs).Count -ne 4) {
+    throw 'GitHub Release asset manifest has the wrong version, layout, installer schema, or package count.'
+}
+$expectedGithubAssetRoles = [ordered] @{
+    'windows-installer' = "Dragons-Grasshopper-$releaseVersion-Windows-Installer.zip"
+    'user-guide' = "Dragons-Grasshopper-User-Guide-$releaseVersion.pdf"
+    'food4rhino-metadata' = "Dragons-Grasshopper-Food4Rhino-Metadata-$releaseVersion.pdf"
+    'checksums' = 'SHA256SUMS.txt'
+}
+$githubReleaseAssetReports = @($githubAssetsManifest.assets | ForEach-Object {
+    $sourceRole = [string] $_.role
+    if (-not $expectedGithubAssetRoles.Contains($sourceRole)) {
+        throw "GitHub Release asset manifest contains unexpected role '$sourceRole'."
+    }
+    $expectedFileName = [string] $expectedGithubAssetRoles[$sourceRole]
+    $expectedManifestPath = 'github-assets/' + $expectedFileName
+    if ([string] $_.fileName -cne $expectedFileName -or
+        [string] $_.path -cne $expectedManifestPath -or
+        [string] $_.sha256 -cnotmatch '^[0-9a-f]{64}$') {
+        throw "GitHub Release asset '$sourceRole' has a non-canonical path or SHA-256."
+    }
+    $assetPath = Join-Path $githubAssetsRoot $expectedFileName
+    if (-not (Test-Path -LiteralPath $assetPath -PathType Leaf)) {
+        throw "GitHub Release asset is missing: '$assetPath'."
+    }
+    $asset = Get-Item -LiteralPath $assetPath
+    $actualHash = Get-Sha256 -Path $assetPath
+    if ([int64] $_.bytes -ne $asset.Length -or [string] $_.sha256 -cne $actualHash) {
+        throw "GitHub Release asset '$sourceRole' differs from its internal manifest."
+    }
+    $publicRole = switch ($sourceRole) {
+        'windows-installer' { 'installer' }
+        'user-guide' { 'userGuide' }
+        'food4rhino-metadata' { 'food4RhinoMetadata' }
+        'checksums' { 'checksums' }
+        default { throw "Unexpected GitHub Release asset role '$sourceRole'." }
+    }
+    [pscustomobject] [ordered] @{
+        role = $publicRole
+        fileName = $expectedFileName
+        path = 'release/github-assets/' + $expectedFileName
+        bytes = [int64] $asset.Length
+        sha256 = $actualHash
+    }
+})
+$actualGithubAssetNames = @(Get-ChildItem -LiteralPath $githubAssetsRoot -File |
+    ForEach-Object { $_.Name } | Sort-Object)
+if ($githubReleaseAssetReports.Count -ne 4 -or
+    @($githubReleaseAssetReports.role | Sort-Object -Unique).Count -ne 4 -or
+    @(Compare-Object `
+            -ReferenceObject @($expectedGithubAssetRoles.Values | Sort-Object) `
+            -DifferenceObject $actualGithubAssetNames).Count -ne 0) {
+    throw 'The future GitHub Release directory must contain exactly its four declared assets.'
+}
+$githubUserGuide = @($githubReleaseAssetReports | Where-Object { $_.role -ceq 'userGuide' })
+$githubFood4Rhino = @($githubReleaseAssetReports | Where-Object { $_.role -ceq 'food4RhinoMetadata' })
+if ($githubUserGuide.Count -ne 1 -or
+    $githubFood4Rhino.Count -ne 1 -or
+    [string] $githubUserGuide[0].sha256 -cne (Get-Sha256 -Path $documentationPdfPath) -or
+    [string] $githubFood4Rhino[0].sha256 -cne (Get-Sha256 -Path $food4RhinoPdfPath)) {
+    throw 'The GitHub Release PDF copies differ from the postflight-validated OODocs outputs.'
+}
+
 $releaseGate = [pscustomobject] [ordered] @{
-    schema = 'goniegonie.dragons-grasshopper.release-gate.v1'
+    schema = 'goniegonie.dragons-grasshopper.release-gate.v2'
     status = 'passed'
     generatedUtc = [DateTime]::UtcNow.ToString('o')
     source = [pscustomobject] [ordered] @{
@@ -3772,6 +3894,11 @@ $releaseGate = [pscustomobject] [ordered] @{
             path = Get-RelativeUnixPath -Root $artifactsRoot -Path $documentationPdfPath
             sha256 = Get-Sha256 -Path $documentationPdfPath
         }
+        food4RhinoMetadata = [pscustomobject] [ordered] @{
+            status = 'passed'
+            path = Get-RelativeUnixPath -Root $artifactsRoot -Path $food4RhinoPdfPath
+            sha256 = Get-Sha256 -Path $food4RhinoPdfPath
+        }
         buildManifest = [pscustomobject] [ordered] @{
             path = Get-RelativeUnixPath -Root $artifactsRoot -Path $buildManifestPath
             sha256 = Get-Sha256 -Path $buildManifestPath
@@ -3782,13 +3909,20 @@ $releaseGate = [pscustomobject] [ordered] @{
         }
         portableHostGate = @($scenarioReports | Sort-Object host, scenario)
     }
-    assets = $assetReports
+    releaseInputs = $assetReports
+    githubRelease = [pscustomobject] [ordered] @{
+        status = 'prepared'
+        version = $releaseVersion
+        directory = 'release/github-assets'
+        manifest = 'release/release-assets-manifest.json'
+        assets = @($githubReleaseAssetReports | Sort-Object role)
+    }
     publication = [pscustomobject] [ordered] @{
         publicPublicationAuthorized = $false
         tagCreated = $false
         githubReleaseCreated = $false
         yakPublished = $false
-        reason = 'This command creates a local verified candidate only. NOTICE.md records an unresolved upstream standalone-license omission that requires review before public binary publication.'
+        reason = 'This command creates a local verified candidate only. Public publication remains blocked by the upstream standalone-license review, KoreanTMY redistribution authorization, and confirmation of the public support email.'
     }
 }
 
@@ -3798,6 +3932,8 @@ $checksumFiles = @(
     Get-Item -LiteralPath $releaseGatePath
     Get-Item -LiteralPath $engineeringReleasePath
     Get-Item -LiteralPath $upstreamReleasePath
+    Get-Item -LiteralPath $githubAssetsManifestPath
+    Get-ChildItem -LiteralPath $githubAssetsRoot -File
     Get-ChildItem -LiteralPath $trustedEvidenceReleaseRoot -File -Recurse
     Get-ChildItem -LiteralPath $exampleEvidenceRoot -File
     Get-ChildItem -LiteralPath $hostReportRoot -File -Filter '*.json'
@@ -3817,4 +3953,5 @@ Write-Host ''
 Write-Host "Verified local release candidate complete: $finalReleaseRoot"
 Write-Host "Version: $($packageIndex.version)"
 Write-Host "Commit: $commit"
+Write-Host "Future GitHub Release assets: $(Join-Path $finalReleaseRoot 'github-assets')"
 Write-Host 'No tag, GitHub release, package install, or Yak publication was performed.'

@@ -27,10 +27,22 @@ Studio, or a machine-wide EnergyPlus installation. Python and OODocs in the
 repository are documentation-development tools; installed Grasshopper plugins
 do not load them.
 
-InvisibleDragon and SimpleDragon have separate package identities. Install
-either one or both from the same version. For Yak packages, select the package
-for the host generation: `rh7-win` for Rhino 7 and `rh8-win` for Rhino 8. Close
-all Rhino processes before installing, replacing, or removing plugin files.
+InvisibleDragon and SimpleDragon have separate package identities, but the
+planned `0.1.0` GitHub release provides one Windows Installer ZIP containing
+both products for Rhino 7 and Rhino 8. Download that ZIP and `SHA256SUMS.txt`
+from the same release, verify the ZIP hash, extract the complete directory, and
+close every Rhino process. From the extracted root, run
+`Install-Dragons.cmd --check` for a read-only preflight and then run
+`Install-Dragons.cmd` to install both products into every detected Rhino 7 and
+Rhino 8 host. `Install-Dragons.cmd rhino7` or `Install-Dragons.cmd rhino8`
+limits the selected generation.
+
+Keep the extracted tree intact while the command runs. The installer verifies
+all four bundled Yak files by relative path, byte length, and SHA-256 before it
+removes an installed package. It does not require the repository, Python,
+OODocs, the .NET SDK, Visual Studio, administrator rights, or network access.
+The public release is not yet available while the documented publication holds
+remain unresolved.
 
 After installation:
 
