@@ -515,7 +515,6 @@ public sealed class SimpleDragonSimulationExecutorTests
             Path = System.IO.Path.Combine(
                 System.IO.Path.GetTempPath(),
                 "Dragons",
-                "Dragons",
                 "temp",
                 "simpledragon-simulation-tests",
                 Guid.NewGuid().ToString("N"));

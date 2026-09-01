@@ -419,7 +419,6 @@ public sealed class ManagedRunEnergyPlusComponent : DragonComponent
             string tempRoot = Path.Combine(
                 Path.GetTempPath(),
                 "Dragons",
-                "Dragons",
                 "energyplus-runs");
             Directory.CreateDirectory(tempRoot);
             stagedIdf = Path.Combine(tempRoot, "managed-input-" + Guid.NewGuid().ToString("N") + ".idf");

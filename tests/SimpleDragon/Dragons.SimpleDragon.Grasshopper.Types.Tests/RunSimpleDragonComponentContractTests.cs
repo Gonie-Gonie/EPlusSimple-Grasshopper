@@ -277,7 +277,7 @@ public sealed class RunSimpleDragonComponentContractTests
             + Path.DirectorySeparatorChar;
         Assert.StartsWith(tempRoot, runRoot, StringComparison.OrdinalIgnoreCase);
         Assert.EndsWith(
-            Path.Combine("Dragons", "Dragons", "simpledragon-runs"),
+            Path.Combine("Dragons", "simpledragon-runs"),
             runRoot,
             StringComparison.OrdinalIgnoreCase);
     }

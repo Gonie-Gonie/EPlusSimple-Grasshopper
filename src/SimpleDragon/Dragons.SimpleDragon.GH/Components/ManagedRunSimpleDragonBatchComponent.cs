@@ -706,7 +706,6 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
 
             string root = Path.GetFullPath(Path.Combine(
                 tempDirectory.Trim(),
-                "Dragons",
                 "Dragons"));
             EnergyPlusRuntimeManifest runtime = EnergyPlusRuntimeManifest.Supported;
             string managedRuntimeRoot = Path.Combine(

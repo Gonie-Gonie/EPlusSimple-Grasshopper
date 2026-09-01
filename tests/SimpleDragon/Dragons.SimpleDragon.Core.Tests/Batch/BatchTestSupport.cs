@@ -144,7 +144,6 @@ internal sealed class TemporaryBatchDirectory : IDisposable
         Path = System.IO.Path.Combine(
             System.IO.Path.GetTempPath(),
             "Dragons",
-            "Dragons",
             "temp",
             "batch-tests",
             Guid.NewGuid().ToString("N"));

@@ -58,7 +58,7 @@ public sealed class ManagedBatchComponentContractTests
         string tempDirectory = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "managed-batch-contract-root"));
         object paths = Required(create.Invoke(null, new object?[] { tempDirectory, null, null }));
         Assert.Equal(pathsType, paths.GetType());
-        string expectedRoot = Path.Combine(tempDirectory, "Dragons", "Dragons");
+        string expectedRoot = Path.Combine(tempDirectory, "Dragons");
         string root = Property<string>(paths, "Root");
         string runtimeRoot = Property<string>(paths, "RuntimeRoot");
         string weatherRoot = Property<string>(paths, "WeatherCacheRoot");
