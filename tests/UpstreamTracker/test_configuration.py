@@ -63,13 +63,13 @@ class ConfigurationTests(unittest.TestCase):
         symbol_evidence = compatibility.symbol_evidence
         assert symbol_evidence is not None
         self.assertEqual(
-            "sha256:5f4b08ae280be6a0f216bde2a88d049c6c14f8fe9bb78f58964af2ef1e9a487c",
+            "sha256:edc4f0c1b9a316d888056ec4139796ae748149e42f09a97813a313da247b5d08",
             compatibility.matrix.content_sha256,
         )
         self.assertEqual(990, len(symbol_evidence.entries))
         self.assertEqual(990, len(symbol_evidence.receipts))
         self.assertEqual(
-            "sha256:f3321c40115941bf3bd9236258569d8fe0d81d4576869ad23c23a337cf5b0039",
+            "sha256:a13a9e5c34816dd6a4c18cfa7a312144f5d9b58c510224396377ea6ccb70981a",
             symbol_evidence.content_sha256,
         )
         self.assertEqual(
@@ -409,40 +409,40 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(29, len(numeric_indices))
 
         expected_identifier_conventions = {
-            10: ("AUTOID_PREFIX", "exception", "immutable-native-auto-id-prefix-catalog-9a7c270a", "sha256:b10ed5ce1876c090eef0d007f4cbcab9623af5e80b0646047d5b2755376f3536", "sha256:73127503d2192368daaa35dbb4ed2870c542d4ed8acce3d58e6b5b0193fbee94", "auto"),
-            11: ("AUTOID_PREFIX.DAY_SCHEDULE", "equivalent", None, "sha256:533051c33f4ea40635b1c9c44064ac5bdd894cf4b3fc23397a82e2f15aa8ed80", "sha256:c10c90a26a58e5395855de56a0b639c10299809cbec6b793154aeb1fffef022a", "auto"),
-            12: ("AUTOID_PREFIX.FENESTRATION", "equivalent", None, "sha256:3cd4904c325fb7f204a16fd9ff38099598dc790e0045bd809ea5419e07838fdf", "sha256:7d81a3853eb7234ed6bbf732dac79ca4dfba9545924849b42b81c932f5322d19", "auto"),
-            13: ("AUTOID_PREFIX.FENESTRATION_CONSTRUCTION", "equivalent", None, "sha256:481f20bce14877d389d0a2d090c633b44571e72efc0289361ae200dfde7e6782", "sha256:584363f0ce95fc4117ab388c6e5c537fe1f435d4e9c4026551fa82f2622dcdb5", "auto"),
-            14: ("AUTOID_PREFIX.HEAT_EXCHANGER", "equivalent", None, "sha256:c54292e537f76a02fcdceb18713a4d18923058e9f25c9abce2d84a879575047e", "sha256:fd63fa267d4a4724ed258f81a3e22be7030b3f618bc87b28a453df432e62a89f", "auto"),
-            15: ("AUTOID_PREFIX.MATERIAL", "equivalent", None, "sha256:11746ae758fc60476a2b0c9db296293012036b9c78cadab3ede802c102f2b0c0", "sha256:8b256bfbd3420b2feb38d93c6bf0b4a63e540ef3518dcec37e9e7b156e785a87", "auto"),
-            16: ("AUTOID_PREFIX.PROFILE", "equivalent", None, "sha256:f76f9652016c9c30bd38d0f26ce186c664959724cf7ca7c3b7106996b345f389", "sha256:7aef8ac2ce2a3a17b61880be4bbe607c656d830baeff69e3dcfaa1983748bb7d", "auto"),
-            17: ("AUTOID_PREFIX.PV_PANEL", "equivalent", None, "sha256:c3993c02938942742a0910d033186cf567543eb101e33e86fe18dcdfc12e480d", "sha256:ecd837e3d57a8ef11f6365aa941b018cc73cef15550550059094c81249dd95f3", "auto"),
-            18: ("AUTOID_PREFIX.RULESET", "equivalent", None, "sha256:d9e8a95be4247cdb36900d47dc8fdfb79d3ef6c9be7742f96f803ab0e68951d2", "sha256:815d16607bc7a5eeb37d7e3d8d3d459c5851bfc6608eaf9e1af1ac79e532c21e", "auto"),
-            19: ("AUTOID_PREFIX.SCHEDULE", "equivalent", None, "sha256:c6ef426497304fad96b717df50f10d4b7d2b01e125f0fa990780724841ce7d2b", "sha256:93a7a4d2cabfa8fe4e1949ac4be752528ae4ccb51a5d330218e1c91e0783d619", "auto"),
-            20: ("AUTOID_PREFIX.SOURCE_SYSTEM", "equivalent", None, "sha256:c6d8108e99638a18d2f9ffe4e16369f54246cd46dd653feb2cf27f9bade1dc5a", "sha256:802717ba5b8447985608e74ca70e7ba7aae18e4f04564f2198efac83260330ba", "auto"),
-            21: ("AUTOID_PREFIX.SUPPLY_SYSTEM", "equivalent", None, "sha256:aa02146f3f01e2562c63a46457fc470d1bc543cc2b72704306da211bc5200d77", "sha256:08be16056de0e40d3fd428ef41569e60cd1b1457b8a57348eec3f2bab3ba108e", "auto"),
-            22: ("AUTOID_PREFIX.SURFACE", "equivalent", None, "sha256:c84816eda9f0885fa12cab43c961667660ae53461b1479069b84f32cbcd3bea1", "sha256:d35e654a38757245b7e62366af8e89e0196a726f01ab6e204313e12536889379", "auto"),
-            23: ("AUTOID_PREFIX.SURFACE_CONSTRUCTION", "equivalent", None, "sha256:e7698d8c660f36e76da71e2dd8347d181f6156b2d9f254b01b3685b3b98506d9", "sha256:9e8dbf413717eab20e1aaa60b9d7d6d46916502b2ca0900ebe9c05cf3be4ba7b", "auto"),
-            24: ("AUTOID_PREFIX.ZONE", "equivalent", None, "sha256:8873a0deea5e3a82afdbb6928ab066441ae7ccdf1b0d6477352c85f932139750", "sha256:3c48e5de917255ea513e44231b8600fc3fca4ed78df847d6e87d2697b02f6072", "auto"),
-            25: ("AUTOID_PREFIX.__format__", "equivalent", None, "sha256:2d44517c14b063ea50bfbea33ed0e3b4ead4729e79181829a178c49e49e94347", "sha256:7f6151b8efdcc3244e60c838d7e6e20f13545f9afe614353071cf427c502a965", "auto_format"),
-            27: ("AUTOID_PREFIX.__str__", "equivalent", None, "sha256:dc4645c08d29f8d0beca17e8bb2b42d1775d88883fbcc279b8ac7b81075751ea", "sha256:ef928abd65ac99c22585e2264d66cc039bdaa7f92da3371ed1bde28770c33429", "auto_format"),
-            31: ("Directory", "exception", "embedded-explicit-native-resource-layout-5b876ad7", "sha256:4654bf36a8322b1141c3eec5434e815058285b3e6c0de5377274b3cb54cd5a56", "sha256:3b3f4d4665cd3a5b66a5e0c814e1f9de18c789aca3006f22b2176cc885aefec6", "embedded"),
-            32: ("Directory.CONSTRUCTION_DIR", "exception", "embedded-native-construction-resources-91c573a0", "sha256:6f10fb873dfc81f4331b33ea8c79aa27699632c98d1b894f5b7b4891cc245cc6", "sha256:beab5b59fc91caa5483723a0023d159bb7b7319722bde2a09889492315eda3e1", "embedded"),
-            33: ("Directory.PROFILE_DIR", "exception", "embedded-native-profile-resources-f65d5eae", "sha256:21a669c66ca4e1c0dcc1cc5ad03dac406a5a7366872e0045122f7d0225b4691d", "sha256:5553a83ed33a809f9a87a3f77eb10d945fd984064c0ea1652059cf699e15ca39", "embedded"),
-            34: ("Directory.WEATHER_DATA_DIR", "exception", "caller-supplied-native-weather-data-root-8a5bf654", "sha256:ba908878aed524968415f355f53c12a1b717d89f530cdfb0acab7ef4a73fac17", "sha256:8f2428f4416b81a787ea66ccf3373862e249436a46e5cab0d6c4e7bb77344276", "weather"),
-            35: ("Directory.WEATHER_META_DIR", "exception", "embedded-native-weather-metadata-resources-15e81d1d", "sha256:33d46ef8857437d5254f422ff94ae7f3607cdd6b660094a0069c737b3145eee4", "sha256:a8fad7054b00169e9b03b39329c5d0996265bd21be700c91df8afdf4a5990086", "embedded"),
-            36: ("PackageInfo", "exception", "static-native-simpledragon-package-information-aaf5b98d", "sha256:863656b54c9dd5e6c150bc22c37d8c9b34780003f3fd54d4d4f447deee8759ae", "sha256:3ac075a6d02f5879a92b2649f4b6f3752042a9d0033d3d33d2cf7dddb728456a", "package"),
-            37: ("PackageInfo.NAME", "exception", "native-simpledragon-package-name-537c8c3b", "sha256:08a7ac18f7b17d2f70b0d3c5871fe3fe9232a5fd368a700370b6aa2e23ce4c03", "sha256:e07e3f9ca8d293b0200f812903ddff2be15fef9814295268d52929c316079476", "package_name"),
-            38: ("PackageInfo.REQUIRED_PYTHON", "exception", "compiled-simpledragon-target-framework-contract-cf74d0eb", "sha256:0df4a31f2a4d1f345462e9b1166a8b3bae6d85566a56731676a92bdb6ef3e2af", "sha256:ab8559b83d4d6229967773e1006094d271e3a48fdcb8cb01f63e5650471a9038", "package"),
-            39: ("PackageInfo.VERSION", "exception", "native-simpledragon-and-upstream-version-identity-a8260e5f", "sha256:f711bd670d75cc20ed2a83dda8b050c795bcbd55028e143e188f74dfd360d242", "sha256:dde259cac3dafa7c4b72de6ef8626444c1bc623f051fcd7daf4a09d6bbaa59e8", "package_version"),
-            58: ("SpecialTag", "exception", "immutable-native-special-tag-catalog-a66e2175", "sha256:6776c0f5b45fcf41830dbf87b58d71839d686708ac51f4ecd25aad9b13b49f6b", "sha256:7121d283546656d316fd0dba6ac7745b1478e9de448f8a06f5d6d5ce2a15d4e2", "special"),
-            59: ("SpecialTag.CLONE", "equivalent", None, "sha256:55865a0eb173aaffad6d2f38ae5fff9fd8bcbc327700be81be6c9034d45a8b2b", "sha256:e04b970e093723347b392d2350abc1437c1d6cd14688ef325c4d796482c06a23", "special"),
-            60: ("SpecialTag.COOLROOF", "equivalent", None, "sha256:97732d156b1470ee978d0b528ff935e76772ca6ead85bda2ba3b21161c68eb07", "sha256:afdf7cee808262eaba8e36f9586c273a2ad9b02036e0a16c6bdb393bf70807bf", "special"),
-            61: ("SpecialTag.DB", "equivalent", None, "sha256:6a7f09fc790bd561d9aca92df5c2003f2669c7d4b40ccdaa7a87a665e898bbf5", "sha256:558087a43fe14654239c22937a8cb70320a3e39a72d39d76100f5d3009aa2fb2", "special"),
-            62: ("SpecialTag.FLIP", "equivalent", None, "sha256:94a93b9afe287b39fe6cdadc9cf7ea4c571a5fcdcb701aed2fc17d798f95f1ab", "sha256:b177bf9e74c6ded9484b185f11ac98c393a776d96d84df6114a54e011a054349", "special"),
-            63: ("SpecialTag.SPECIAL", "equivalent", None, "sha256:58bc2b290418599d48d1c6064416cf598424c26178284aff4ef6911bb9957390", "sha256:aff6065d0fcccaba44f7ee34e070a9dd630ba6912c82d842cceff5c69dfe7f3a", "special"),
-            64: ("SpecialTag.__format__", "equivalent", None, "sha256:694e07c540cc553f7d105c81b0a937b66b432da4b145db969ef298f2684310ec", "sha256:2fea1bd1d4ffdf45ffc6a87ed581d8f36c98516819324b754996896d50ac37c7", "special_format"),
-            66: ("SpecialTag.__str__", "equivalent", None, "sha256:a0b46b759da0e191c622198bda4f288d06537b3ad416a2d8e1364508ad103f17", "sha256:430b9d5ac66cc8331162e4c96988509bb073ece26da0b1a4e82501f3723543c6", "special_format"),
+            10: ("AUTOID_PREFIX", "exception", "immutable-native-auto-id-prefix-catalog-9a7c270a", "sha256:22696419df2acdd2f9657b84b3107ba0fb3b72d1de6cd9f1778286a0456a524c", "sha256:e4a4dfa53f01c48fe9bb3c1fce7b43bd4cdc5074e1ee1a73a6c4086e2cd7df40", "auto"),
+            11: ("AUTOID_PREFIX.DAY_SCHEDULE", "equivalent", None, "sha256:e48c9adec39a3fa24f0b8613d1675c25a2064237664a8105f642e656faa6dce9", "sha256:be240b2298a0862f21631b55f2e6c9b144513c792e0a98a3590a45eed847e997", "auto"),
+            12: ("AUTOID_PREFIX.FENESTRATION", "equivalent", None, "sha256:c1a225945c08ead821d72ba45d489914d8a80d84f98bcfe5be7da0ad55aed742", "sha256:bbfc388dddc3c2c9c208ae821a312fc99395e0f52440cfc5ebf685f0934a8ad6", "auto"),
+            13: ("AUTOID_PREFIX.FENESTRATION_CONSTRUCTION", "equivalent", None, "sha256:da6bcc3e44802b13e1fde57e30d719eb05f13ce4230d0c4fe5d31dae9bb57884", "sha256:23ff7ad5de3ce2f024d86d0ab01e1789639a3bf8ca9cf3f6a7a43933e7698324", "auto"),
+            14: ("AUTOID_PREFIX.HEAT_EXCHANGER", "equivalent", None, "sha256:988f5d0e56e157fbf86698520ae5f1316fa1b7f43278f0ea89550d47123da874", "sha256:29b92b59871440cc4ed6a3e327d0e1441d7b516a7aa8c0af3b7606136de273f9", "auto"),
+            15: ("AUTOID_PREFIX.MATERIAL", "equivalent", None, "sha256:25e1db34e06e98f822489a2fd81ff0116e13fc5cb4c599bfc3e848340f6a4bdd", "sha256:8d85f380aaf7b983d89dfd773d49e3484a649b1a3e7ad336b79b74821ac941e2", "auto"),
+            16: ("AUTOID_PREFIX.PROFILE", "equivalent", None, "sha256:579ddc67359dedbabe5938500359fc7e32e8ffaa61fa335d2636548c6b6f7e35", "sha256:75a4e84557e55829538b4936ecd9c2c0de4b7c3221e2ab29219b0ef659f09da7", "auto"),
+            17: ("AUTOID_PREFIX.PV_PANEL", "equivalent", None, "sha256:85555a35d41989361b4a446c3fae28b3950be8f3d58639032a0a507da39f1de7", "sha256:2e09ed3459b99fc76838f5a64b9bcd53bc1da373436bb23125fb21134eb03fd9", "auto"),
+            18: ("AUTOID_PREFIX.RULESET", "equivalent", None, "sha256:eee17dde11d175df92e7be0226a04d551351cf91652de6ae0fea319303ffc68b", "sha256:8f7db0a6e8326116ff152965efd09e4468915cd6255b64e6818f885b42f99c19", "auto"),
+            19: ("AUTOID_PREFIX.SCHEDULE", "equivalent", None, "sha256:43f2ebe3ecc509b36aef4f5b8f7b5066e74f6f33601ffb58439c1ec7344e0ed7", "sha256:8a857f7362123599a6e0614555b81c89198d795a4ea9213a285a0072109b010e", "auto"),
+            20: ("AUTOID_PREFIX.SOURCE_SYSTEM", "equivalent", None, "sha256:09e744fab78384c339d40df89257da74aa0520daeacfeefffa408aa346cd0e62", "sha256:c96a5bc1537dcc4a0a5666d1f69304e9e1e60be71eb543a9bf14385eb9a6c89b", "auto"),
+            21: ("AUTOID_PREFIX.SUPPLY_SYSTEM", "equivalent", None, "sha256:4a60dd64ad48ead389732bc329ece5dcac495c27a96eaba1cff1dae4064cb921", "sha256:9ec836ef085743b8200c40f5a377cc6ae3eeeb37805d6253d867cec7e5578227", "auto"),
+            22: ("AUTOID_PREFIX.SURFACE", "equivalent", None, "sha256:7b4e6369ce085157ba4c2b5921a2435357723de2ba720889c0f952090d8fec6a", "sha256:c58686b455dc044b0b3d4d4cae58138f607de691a3deeece1c18a32236f3888e", "auto"),
+            23: ("AUTOID_PREFIX.SURFACE_CONSTRUCTION", "equivalent", None, "sha256:1e72a76dd67146ebe41b02f98959c85b09593e3063d2d8213fb756a118f951cf", "sha256:643a25fb859547fe267bb346bbc77023bea8aa1f333a93a37839de29bf9cb664", "auto"),
+            24: ("AUTOID_PREFIX.ZONE", "equivalent", None, "sha256:2720c09e009d3bdf9a85e0954fb5f8398bc8b1a0ae1aa12af6eb9e84d0b2cb3f", "sha256:46c0996bef563fe74fede22d04aa720df23e5b3a32c60552bdd14af601eac401", "auto"),
+            25: ("AUTOID_PREFIX.__format__", "equivalent", None, "sha256:a816cddeda045574ece80e4d280477f6f6d5ba719bd250848d41e9cc24df964d", "sha256:9f557ea7ab157fc18c15cb4a024c17ebaa80fb0681d214f07f181ebcae1478f2", "auto_format"),
+            27: ("AUTOID_PREFIX.__str__", "equivalent", None, "sha256:63a868daac14f7900d160c3b9b93a4e25e017e473ed17ba9fa6484c9ee8c89db", "sha256:062b39444f424a91cd344225a8605ad9eb4b9144135af3433794a46ec19b9a13", "auto_format"),
+            31: ("Directory", "exception", "embedded-explicit-native-resource-layout-5b876ad7", "sha256:723fb76aee65e3c0a549836c678b87ad1adcec3c3997762adac6332cd37028fc", "sha256:211c624ed64926026161b5980a575aa7f5928a6a9e5856158ac3057ca6865fa7", "embedded"),
+            32: ("Directory.CONSTRUCTION_DIR", "exception", "embedded-native-construction-resources-91c573a0", "sha256:2224fc383d4d95587bada9e2a53e8d225ee4b04b14d6827239d8f4769df12f77", "sha256:379985d0bd07aa196673e200bc7e8e068447bbb6e6166b5fe19ab980da2910a8", "embedded"),
+            33: ("Directory.PROFILE_DIR", "exception", "embedded-native-profile-resources-f65d5eae", "sha256:c032da9509cd77fe6ccd80716e6fd2f2cd99106314c9c69dd5942f5f7a4888f0", "sha256:85b3fd7f2ecdf4fb58acb30027f67c51f97647072b414e59b8c2480aea889461", "embedded"),
+            34: ("Directory.WEATHER_DATA_DIR", "exception", "caller-supplied-native-weather-data-root-8a5bf654", "sha256:60035d4ba11ad55d8db9be9ec210b13b0006aebff5d52925e4cc2bb7c72e9f71", "sha256:5290a367de8fc8feddfe7dbb376e8d3c1a4716fa634bbce58eef28a80e1646d5", "weather"),
+            35: ("Directory.WEATHER_META_DIR", "exception", "embedded-native-weather-metadata-resources-15e81d1d", "sha256:74d71a4020250fed6f7b673755272d8daf3718a2bfd0e41df7a9e08760e3ba2c", "sha256:996340a8f6b7d1daa039220c2817b3986d8c4d065ffe430db4a9373065a30a2f", "embedded"),
+            36: ("PackageInfo", "exception", "static-native-simpledragon-package-information-aaf5b98d", "sha256:2b6c246086882d342beb6bb57d37a75fc2ae22c9bf79d8f9be87fdc9cb4733be", "sha256:321a4d4ba1eb004b5566096831e613c227dc63461a8f8c1b59d85bfd7249c8e6", "package"),
+            37: ("PackageInfo.NAME", "exception", "native-simpledragon-package-name-537c8c3b", "sha256:3ad9dca79d585649de8f049226cad044f8a0059655de5e659794d405f5860137", "sha256:4eb6514fe149a35ae7b88125211cf42040164ccbe9993db2fbbaa97692ce70e2", "package_name"),
+            38: ("PackageInfo.REQUIRED_PYTHON", "exception", "compiled-simpledragon-target-framework-contract-cf74d0eb", "sha256:472a512d8c6a348b78562a2ba90743ca1cd94d3b4d1d40eabdf9c65ddf7505a0", "sha256:267e58b39c3243e9c3ab289561c5916664ea0791f8e4124cf4588ca945c14f2c", "package"),
+            39: ("PackageInfo.VERSION", "exception", "native-simpledragon-and-upstream-version-identity-a8260e5f", "sha256:691a7ac0839d15f54120e4247d22426a1e9a73be013bdcc5d06caed6d3723d5a", "sha256:bbf98958a9d0771823aae2f45ab3ee542aec908445c0db366e6d53ddfa03e37d", "package_version"),
+            58: ("SpecialTag", "exception", "immutable-native-special-tag-catalog-a66e2175", "sha256:2b09900dfa47263d6e1581ba5292bc3e3836983ee1f110fb9a0d25d970738e13", "sha256:e3e63d3889985e9df3f38c88b568bbdbb40eaf49c4d2e618e6a6fbfe90e7d6d4", "special"),
+            59: ("SpecialTag.CLONE", "equivalent", None, "sha256:68caa0f055733d4fb0355492e9141f69cf3d496b22b23f65c8bc31360c0d7fe4", "sha256:8ae821188f1f95efc6bdc6a69998ac64d2a799f000426c9dcc3f7220b5a84e82", "special"),
+            60: ("SpecialTag.COOLROOF", "equivalent", None, "sha256:e017c5ab929de08f39938b2a8b49f3614baeeb307cdc3aac77d3b341e8acbbcf", "sha256:58f353a5e1560f93d260000878e7aafe3c0c113419d1836a625fd2e14af64bac", "special"),
+            61: ("SpecialTag.DB", "equivalent", None, "sha256:16b8ccdd55935eb917e956a6d3420b2cb68f8d9aef9de50cfe9df1d349145e9e", "sha256:7d4addfcdef93cccad903edf046db1925467446ec0bda74cd98a4d5bcd9f78bd", "special"),
+            62: ("SpecialTag.FLIP", "equivalent", None, "sha256:3a57d524c6ab76a5960245ea23c1fb40871f633297a0e8ae2284c13cfe2c9066", "sha256:1fd7d6b2bab642a2a30417b8c63549b46b94cdb89dbd8bbc9139365d095fccaf", "special"),
+            63: ("SpecialTag.SPECIAL", "equivalent", None, "sha256:c7b1ce68b80c60a900cf68b1967195db31ea399bdfc85c88c445cec00d7ff92c", "sha256:5db6b86d948ae4b176d07d50021d900e79f78ec0b7b8da36b134c78b0d918379", "special"),
+            64: ("SpecialTag.__format__", "equivalent", None, "sha256:7fab4ad475da909182182f598471198ad3e3850b8c2448086b09192a8a806c8f", "sha256:f4c704c491fb9763fac05e962bf53a120e2e7a1141436c8839c7e788a60d3fcf", "special_format"),
+            66: ("SpecialTag.__str__", "equivalent", None, "sha256:80ca5168bcdac3483d97de5f3041641f0ba952bc250855f62aabb7ef329a1541", "sha256:e73b3caf39330488e4a5fdbf91270e5aca19a2f3fc1ecbe3790f5b8fbe05bb38", "special_format"),
         }
         identifier_implementations = {
             "auto": (
@@ -468,17 +468,17 @@ class ConfigurationTests(unittest.TestCase):
             "package": (
                 "src/SimpleDragon/Dragons.SimpleDragon.Core/PackageInfo.cs",
                 "Dragons.SimpleDragon.PackageInfo",
-                "sha256:ae38d765d945b10c0aa59197efcab4ee0e47c020aaffc120ef99f8d22382ab91",
+                "sha256:ef73d4b6f9c9bd8948d73c225bb88012ab1616bcf4f6fc89b8d84f46cb95efe0",
             ),
             "package_name": (
                 "src/SimpleDragon/Dragons.SimpleDragon.Core/PackageInfo.cs",
                 "Dragons.SimpleDragon.PackageInfo.Name",
-                "sha256:ae38d765d945b10c0aa59197efcab4ee0e47c020aaffc120ef99f8d22382ab91",
+                "sha256:ef73d4b6f9c9bd8948d73c225bb88012ab1616bcf4f6fc89b8d84f46cb95efe0",
             ),
             "package_version": (
                 "src/SimpleDragon/Dragons.SimpleDragon.Core/PackageInfo.cs",
                 "Dragons.SimpleDragon.PackageInfo.Version",
-                "sha256:ae38d765d945b10c0aa59197efcab4ee0e47c020aaffc120ef99f8d22382ab91",
+                "sha256:ef73d4b6f9c9bd8948d73c225bb88012ab1616bcf4f6fc89b8d84f46cb95efe0",
             ),
             "special": (
                 "src/SimpleDragon/Dragons.SimpleDragon.Core/Constants/IdentifierConventions.cs",
@@ -500,7 +500,7 @@ class ConfigurationTests(unittest.TestCase):
             "MatchesPinnedPythonIdentifierAndMetadataConventions"
         )
         identifier_test_hash = (
-            "sha256:c3a8c284d625546ba69b3232be535d5ef117ef5866a055c62eb79bb7e003685a"
+            "sha256:6c3c7f613c892ef605099b3e39df32a95a660bab0e4c5dceabf604ce5d39ae40"
         )
         identifier_exceptions = {
             item.identifier: item for item in configuration.exceptions
@@ -822,7 +822,7 @@ class ConfigurationTests(unittest.TestCase):
             "MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes"
         )
         construction_core_test_hash = (
-            "sha256:f87c5ff114a957f5c55a2a51cba4fe9ace4ddff0844a15f0a4f227085ec4a8d8"
+            "sha256:e919ffa54a6c73b0261d21beb313e9bc5c09bc4a12cfd2efdde864f878db6091"
         )
         construction_core_exceptions = {
             item.identifier: item for item in configuration.exceptions
@@ -1951,8 +1951,8 @@ class ConfigurationTests(unittest.TestCase):
                 568,
                 "resolved-native-runtime-and-resource-layout",
                 "constants-metadata-568-5b876ad7",
-                "sha256:88d915e41a1dcd70b46dda1575758dd86034b649563cacbc7bec8a3abdbab6e7",
-                "sha256:161514891090c2d3416b6aaee61a44f950c19f79c0733631d13cc15ceaf0f366",
+                "sha256:0f2d14c42d42f298582eea56c68ccff8bcdb529b6b46f62abe32f7008089b037",
+                "sha256:399dc79ecd5f0c9aa520efac66b926af9694c102fd6318ba919cff6eecef3896",
                 "src/Shared/Dragons.EnergyPlus.Runtime/RuntimeResolver.cs",
                 "Dragons.EnergyPlus.Runtime.RuntimeResolver",
                 "sha256:ae290360e832f99eb6190744684624fda003172428b668cb7d47ba84f28f35b2",
@@ -1961,8 +1961,8 @@ class ConfigurationTests(unittest.TestCase):
                 569,
                 "explicit-validated-native-energyplus-runtime-root",
                 "constants-metadata-569-7e01ceac",
-                "sha256:ce484a5a52cc1a1a99dac74a8193fef2b022bcb0f74973d3aa9db89351f69439",
-                "sha256:be88ec95133d383e2fb2db2c7a1c69ab9d5c34f5339c1409c9eb7498e1f48621",
+                "sha256:c04ff6693002dd618726423aef024fecf018187e4da672c671d300081e5b20cf",
+                "sha256:22d61c40bebb9817197e78cbb6b3353c48c471676242689ba64234a8a3d5a85a",
                 "src/Shared/Dragons.EnergyPlus.Runtime/EnergyPlusRuntimeLayout.cs",
                 "Dragons.EnergyPlus.Runtime.EnergyPlusRuntimeLayout.RootPath",
                 "sha256:5552379c29e2f60e0edd5d2762d3468c605fd5a8e47aec65f3eab9f6c758458b",
@@ -1971,8 +1971,8 @@ class ConfigurationTests(unittest.TestCase):
                 570,
                 "validated-native-idd-path-resolution",
                 "constants-metadata-570-1f0c2815",
-                "sha256:dae69cb2f9deac8b8cc1269f92de2773bd0e20e30b515df551d1168e10eef57a",
-                "sha256:54f5f64076edd7a07335a64941c12219861cae2e393ebf16d0fcbbd44ab3347e",
+                "sha256:728d979a870b16310d0be9c1b5be1f016f6732fe461cbb3eaae327ed97eab6f3",
+                "sha256:1ed232b36511c05220553039d2d774decc637ad81be76c18dd55f1f23f68b006",
                 "src/Shared/Dragons.EnergyPlus.Runtime/EnergyPlusRuntimeLayout.cs",
                 "Dragons.EnergyPlus.Runtime.EnergyPlusRuntimeLayout.IddPath",
                 "sha256:5552379c29e2f60e0edd5d2762d3468c605fd5a8e47aec65f3eab9f6c758458b",
@@ -1981,8 +1981,8 @@ class ConfigurationTests(unittest.TestCase):
                 571,
                 "typed-native-profile-data-without-package-profile-directory",
                 "constants-metadata-571-f65d5eae",
-                "sha256:7a18a1fdd4703aa16446d2b0d7fa304dc596a2548a41608dd6093ef71fa65823",
-                "sha256:5ccb84d1c53c8fc73206cda5a701712408fb7e2b16a083591e8068289f4fa7ca",
+                "sha256:ead05bd05e2dc66a464732dc248106e747ee1263474335d3c53c7f2d0872e71f",
+                "sha256:13506910df2c33a01fcb5376ed85aecf1240e6c509ce89d1aa9455928d4f0166",
                 "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Profile/Profile.cs",
                 "Dragons.InvisibleDragon.Profile.Profile",
                 "sha256:670c41d252c47be93f5bc839967332a1aba33061a2eb832b532e658b1b3683fd",
@@ -1991,41 +1991,41 @@ class ConfigurationTests(unittest.TestCase):
                 572,
                 "static-native-package-information",
                 "constants-metadata-572-aaf5b98d",
-                "sha256:7e828e878759ff776b0426042840e41270579428de7e897c1d0d3d98e2147fbf",
-                "sha256:199e64994c454a3b997f7189beba9d0353ca760f3f44196ad865c7ed9b374205",
+                "sha256:ad76215fd35edababaa90be19f8dd585769ebb53f75f284fc2095d3317463de6",
+                "sha256:75b93bdfe73fefcb963b9b2e73dd200f8abc406b0e6d61e6a6f414aef4fe3a8d",
                 "src/InvisibleDragon/Dragons.InvisibleDragon.Core/PackageInfo.cs",
                 "Dragons.InvisibleDragon.PackageInfo",
-                "sha256:ca115b1128e531e70ee35ff0cf081a9b83cd14daec06322cf2cae64d33c5dcc1",
+                "sha256:933a0d70a9cfed35e91a4ea0f31452c487e56ff43984387fb8d030b2fdc28385",
             ),
             "PackageInfo.NAME": (
                 573,
                 "native-invisibledragon-package-name",
                 "constants-metadata-573-3942a963",
-                "sha256:c83234f70630c6a7d7397f1b3c37c42a19c99c0eb477a8a9bc07b80bddd2eb24",
-                "sha256:80495d757457dcec75c124d29ea869fce42a31ad0fa4f1762c5f2cf8f6a153ce",
+                "sha256:e118b7662e7b419f407cbc830d22ebd2a9f47ffbac8de33d000e82e551d0b857",
+                "sha256:a567ed0d0b1ad33d735ebc678f5938fd3ec7c1c2e8835ce07ae977ab30fe8d4b",
                 "src/InvisibleDragon/Dragons.InvisibleDragon.Core/PackageInfo.cs",
                 "Dragons.InvisibleDragon.PackageInfo.Name",
-                "sha256:ca115b1128e531e70ee35ff0cf081a9b83cd14daec06322cf2cae64d33c5dcc1",
+                "sha256:933a0d70a9cfed35e91a4ea0f31452c487e56ff43984387fb8d030b2fdc28385",
             ),
             "PackageInfo.REQUIRED_PYTHON": (
                 574,
                 "compiled-native-target-framework-contract",
                 "constants-metadata-574-cf74d0eb",
-                "sha256:7e038b45a1588208dcc8261a0e4e3bb675232df849747ee3f23f0b76c7ab8a08",
-                "sha256:5cb765ac345649bc74c74b05e05bcefd9a50ffd0edaea95f64bfcf78ffd61a35",
+                "sha256:9921458bc9c834d7f27a432c089cff812d473192197e4998ea959fd93b91c8f5",
+                "sha256:48642b169fedda75b44969a49380bc77ef6c43cbbb14af69925e5cc560ac016d",
                 "src/InvisibleDragon/Dragons.InvisibleDragon.Core/PackageInfo.cs",
                 "Dragons.InvisibleDragon.PackageInfo",
-                "sha256:ca115b1128e531e70ee35ff0cf081a9b83cd14daec06322cf2cae64d33c5dcc1",
+                "sha256:933a0d70a9cfed35e91a4ea0f31452c487e56ff43984387fb8d030b2fdc28385",
             ),
             "PackageInfo.VERSION": (
                 575,
                 "native-semantic-version-string",
                 "constants-metadata-575-a8260e5f",
-                "sha256:d255e942d93dd17261240f6ce9827ff48dc2b7bf554d02b0d7d2eab55efa774d",
-                "sha256:44e84d997df1d3c2fa94619368e1268938d46e4058672bf934434526efc5237f",
+                "sha256:bbfeaa6056580d29f18bf1bcd687dc180aacfddec7c43d5637045f905f458930",
+                "sha256:bda279b108ed40b8e0c8751a2c178e11192c4f8341e199e957f8fe8c981037ec",
                 "src/InvisibleDragon/Dragons.InvisibleDragon.Core/PackageInfo.cs",
                 "Dragons.InvisibleDragon.PackageInfo.Version",
-                "sha256:ca115b1128e531e70ee35ff0cf081a9b83cd14daec06322cf2cae64d33c5dcc1",
+                "sha256:933a0d70a9cfed35e91a4ea0f31452c487e56ff43984387fb8d030b2fdc28385",
             ),
         }
         constants_test_path = (
@@ -2037,7 +2037,7 @@ class ConfigurationTests(unittest.TestCase):
             "MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations"
         )
         constants_test_hash = (
-            "sha256:d92cb362c664cc6a11066aae295a341bcbfc84dbdcc3d33e77f596579dbb35fe"
+            "sha256:c5d5162dbcf874f6b662db12d34791da40fe87c1e58e6ebdace47043c5429e31"
         )
         exceptions_by_id = {
             item.identifier: item for item in configuration.exceptions

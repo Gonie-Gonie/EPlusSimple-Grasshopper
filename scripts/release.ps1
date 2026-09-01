@@ -18,8 +18,8 @@ if (-not (Test-Path -LiteralPath $packageSpecPath -PathType Leaf)) {
 $packageSpec = Get-Content -LiteralPath $packageSpecPath -Raw -Encoding UTF8 |
     ConvertFrom-Json
 if ([string] $packageSpec.schema -cne 'dragons-grasshopper.package-spec.v3' -or
-    [string] $packageSpec.version -cne '0.1.1') {
-    throw 'The corrected public release process is deliberately bound to version 0.1.1.'
+    [string] $packageSpec.version -cne '0.1.2') {
+    throw 'The corrected public release process is deliberately bound to version 0.1.2.'
 }
 $publicationSpec = $packageSpec.publication
 if ([string] $publicationSpec.projectLicense -cne 'MIT' -or

@@ -47,10 +47,10 @@ is independent:
 ```text
 artifacts/packages/<product>/
 |-- yak/
-|   |-- <product>-0.1.1-rh7-win.yak
-|   `-- <product>-0.1.1-rh8-win.yak
+|   |-- <product>-0.1.2-rh7-win.yak
+|   `-- <product>-0.1.2-rh8-win.yak
 `-- portable/
-    `-- <product>-0.1.1-portable-plugin-win.zip
+    `-- <product>-0.1.2-portable-plugin-win.zip
 ```
 
 These per-product files are candidate inputs, not the GitHub release attachment
@@ -58,9 +58,9 @@ set. The local release gate assembles a separate end-user bundle below
 `artifacts/release/github-assets` with exactly four future public assets:
 
 ```text
-Dragons-Grasshopper-0.1.1-Windows-Installer.zip
-Dragons-Grasshopper-User-Guide-0.1.1.pdf
-Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf
+Dragons-Grasshopper-0.1.2-Windows-Installer.zip
+Dragons-Grasshopper-User-Guide-0.1.2.pdf
+Dragons-Grasshopper-Food4Rhino-Metadata-0.1.2.pdf
 SHA256SUMS.txt
 ```
 
@@ -74,8 +74,8 @@ the internal `release-assets-manifest.json` remains beside `github-assets` as
 candidate evidence and is not a fifth public asset.
 
 `packaging/package-spec.json` deliberately fixes the current first-release
-version at `0.1.1`. The final version decision must be made in source, and the
-repository tag must equal it exactly (`v0.1.1` for `0.1.1`). Assembling
+version at `0.1.2`. The final version decision must be made in source, and the
+repository tag must equal it exactly (`v0.1.2` for `0.1.2`). Assembling
 these files locally does not create a tag or perform a publication action.
 The same specification is the machine-readable source for the MIT license,
 confirmed public support email, publication approval, and Climate.OneBuilding

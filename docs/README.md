@@ -10,17 +10,17 @@ procedure in the user tree or link a development worksheet as user guidance.
 
 The PDF-only OODocs build creates two version-bound artifacts:
 
-- `artifacts/documentation/Dragons-Grasshopper-User-Guide-0.1.1.pdf` is the
+- `artifacts/documentation/Dragons-Grasshopper-User-Guide-0.1.2.pdf` is the
   externally visible user guide. Its authored and generated Markdown chapters
   live under [`user/user-guide`](user/user-guide/01-workflow.md).
-- `artifacts/documentation/Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf`
+- `artifacts/documentation/Dragons-Grasshopper-Food4Rhino-Metadata-0.1.2.pdf`
   is the maintainer publishing worksheet rendered from
   [`development/publishing/food4rhino.md`](development/publishing/food4rhino.md).
   It is not normal plugin-user guidance.
 
 The build procedure lives only in the [development tree](development/documentation-build.md).
 Locally built copies are candidates; the copies attached to the matching
-`v0.1.1` GitHub release are the public release assets.
+`v0.1.2` GitHub release are the public release assets.
 
 Repository-wide legal and release records remain at the conventional root
 locations: [LICENSE](../LICENSE), [NOTICE](../NOTICE.md), and

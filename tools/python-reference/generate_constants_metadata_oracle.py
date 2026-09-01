@@ -110,7 +110,7 @@ NATIVE_ADAPTATION_CANDIDATES = {
     "PackageInfo": "Dragons.InvisibleDragon.PackageInfo static class",
     "PackageInfo.NAME": "Dragons.InvisibleDragon.PackageInfo.Name (InvisibleDragon)",
     "PackageInfo.REQUIRED_PYTHON": "net48, net7.0-windows, and net8.0-windows build targets",
-    "PackageInfo.VERSION": "Dragons.InvisibleDragon.PackageInfo.Version (0.1.1)",
+    "PackageInfo.VERSION": "Dragons.InvisibleDragon.PackageInfo.Version (0.1.2)",
 }
 RUNTIME_CONTRACTS = {
     "Directory": "class-signature:()",

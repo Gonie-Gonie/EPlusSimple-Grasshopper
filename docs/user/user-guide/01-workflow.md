@@ -28,7 +28,7 @@ repository are documentation-development tools; installed Grasshopper plugins
 do not load them.
 
 InvisibleDragon and SimpleDragon have separate package identities, but the
-`0.1.1` GitHub release provides one Windows Installer ZIP containing
+`0.1.2` GitHub release provides one Windows Installer ZIP containing
 both products for Rhino 7 and Rhino 8. Download that ZIP and `SHA256SUMS.txt`
 from the same release, verify the ZIP hash, extract the complete directory, and
 close every Rhino process. From the extracted root, run

@@ -128,20 +128,20 @@
       "dragons.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.2, )"
         }
       },
       "dragons.invisibledragon.core": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )",
-          "Dragons.EnergyPlus.Runtime": "[0.1.1, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.2, )",
+          "Dragons.EnergyPlus.Runtime": "[0.1.2, )"
         }
       },
       "dragons.invisibledragon.grasshopper.types": {
         "type": "Project",
         "dependencies": {
-          "Dragons.InvisibleDragon.Core": "[0.1.1, )",
+          "Dragons.InvisibleDragon.Core": "[0.1.2, )",
           "Grasshopper": "[8.0.23304.9001, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
@@ -149,15 +149,15 @@
       "dragons.simpledragon.core": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )",
-          "Dragons.InvisibleDragon.Core": "[0.1.1, )",
+          "Dragons.BuildingEnergy.Contracts": "[0.1.2, )",
+          "Dragons.InvisibleDragon.Core": "[0.1.2, )",
           "System.Text.Json": "[8.0.6, )"
         }
       },
       "dragons.simpledragon.grasshopper.types": {
         "type": "Project",
         "dependencies": {
-          "Dragons.SimpleDragon.Core": "[0.1.1, )",
+          "Dragons.SimpleDragon.Core": "[0.1.2, )",
           "Grasshopper": "[8.0.23304.9001, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }

@@ -3,7 +3,7 @@
 This is an internal maintainer checklist, not installation or usage guidance.
 
 This checklist is for maintainers preparing the first local InvisibleDragon and
-SimpleDragon 0.1.1 candidate for Rhino 7+. Building a candidate does not itself
+SimpleDragon 0.1.2 candidate for Rhino 7+. Building a candidate does not itself
 create a tag, GitHub Release, Yak publication, or Food4Rhino submission.
 
 ## Source and provenance
@@ -11,8 +11,8 @@ create a tag, GitHub Release, Yak publication, or Food4Rhino submission.
 - Work from a clean `main` commit already pushed to `origin/main`.
 - Confirm that `packaging/package-spec.json`, assembly metadata, both product
   manifests, both PDF filenames, and every package filename agree on the
-  deliberately fixed first-release version `0.1.1`. Make the final version
-  decision in source; the release tag must be exactly `v0.1.1`, not a runtime
+  deliberately fixed first-release version `0.1.2`. Make the final version
+  decision in source; the release tag must be exactly `v0.1.2`, not a runtime
   override or a product-specific tag.
 - Validate the upstream lock, symbol map, compatibility exceptions, and Python
   reference fixtures.
@@ -130,17 +130,17 @@ For diagnosis, its constituent commands are:
   `artifacts` tree),
   `engineering-compatibility.json`, package index and compatibility report,
   build/test reports, both
-  `artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.1.pdf` and
-  `artifacts\documentation\Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf`,
+  `artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.2.pdf` and
+  `artifacts\documentation\Dragons-Grasshopper-Food4Rhino-Metadata-0.1.2.pdf`,
   and all six copied real-host summaries. Confirm both PDFs appear in the
   release-gate asset inventory with their exact byte counts and SHA-256 values.
 - Confirm `artifacts\release\github-assets` contains exactly these four future
   GitHub release assets and nothing else:
 
   ```text
-  Dragons-Grasshopper-0.1.1-Windows-Installer.zip
-  Dragons-Grasshopper-User-Guide-0.1.1.pdf
-  Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf
+  Dragons-Grasshopper-0.1.2-Windows-Installer.zip
+  Dragons-Grasshopper-User-Guide-0.1.2.pdf
+  Dragons-Grasshopper-Food4Rhino-Metadata-0.1.2.pdf
   SHA256SUMS.txt
   ```
 
@@ -181,8 +181,8 @@ and every required tool rather than trusting runner labels alone.
 Immediately before acting, confirm that the machine-readable state still
 records `publicPublicationApprovedByOwner: true` and the canonical
 Climate.OneBuilding weather source. Re-confirm that the chosen release version
-is still `0.1.1` and that tag
-`v0.1.1` equals it exactly. Tag creation, the GitHub Release with exactly the
+is still `0.1.2` and that tag
+`v0.1.2` equals it exactly. Tag creation, the GitHub Release with exactly the
 four staged assets, binary upload, Yak publication, and Food4Rhino submission
 remain distinct manual operations. Record each only after that action actually
 occurs; none is performed by this candidate workflow.

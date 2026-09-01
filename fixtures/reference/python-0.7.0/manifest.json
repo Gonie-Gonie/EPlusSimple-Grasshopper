@@ -30,7 +30,7 @@
     {
       "path": "constants-metadata-oracle.json",
       "bytes": 117140,
-      "sha256": "7a154b6147fe4dca6717c59f3005943d6ab44f9c3ce2dfe03255686481413810"
+      "sha256": "0bd15a140cf0fa50b40c984083e7e0ea68ddfbf20f55c6c21efc3e89c7b7cc13"
     },
     {
       "path": "construction-equality-hash-oracle.json",

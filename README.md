@@ -122,7 +122,7 @@ command list.
 ## Current status
 
 This repository defines the corrected lockstep
-`InvisibleDragon 0.1.1` and `SimpleDragon 0.1.1` release. A generated
+`InvisibleDragon 0.1.2` and `SimpleDragon 0.1.2` release. A generated
 binary is not considered compatible until the algorithm, semantic IDF,
 EnergyPlus result, Rhino geometry, example round-trip, and isolated/co-loaded
 package gates applicable to it pass.

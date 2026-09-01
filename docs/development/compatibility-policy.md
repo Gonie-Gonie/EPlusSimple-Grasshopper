@@ -11,7 +11,7 @@ verification. User-facing host support and limitations are documented in the
 | Rhino 7 / Grasshopper | .NET Framework 4.8 (`net48`) | Supported |
 | Rhino 8.0–8.19 / Grasshopper | .NET 7 (`net7.0-windows`) | Supported |
 | Rhino 8.20+ / Grasshopper | .NET 8 (`net8.0-windows`) | Supported |
-| Rhino 9 beta, macOS | — | Not a 0.1.1 target |
+| Rhino 9 beta, macOS | — | Not a 0.1.2 target |
 
 Both Dragon GHAs are built from the same commit and may be loaded together.
 SimpleDragon owns its Grasshopper model, result, and diagnostic types. Its
@@ -95,7 +95,7 @@ compiled Grasshopper products. It does not mean Python source, import, or call
 syntax compatibility. The release gate may claim compatibility only for rows
 that have symbol-level evidence or a reviewed exception.
 
-| In the 0.1.1 engineering scope | Outside the Grasshopper product scope |
+| In the 0.1.2 engineering scope | Outside the Grasshopper product scope |
 |---|---|
 | GRM 0.7.0 read/write semantics, defaults, nulls, and references | Python package import and function-call syntax |
 | Pinned construction, profile, climate, and weather data/query results | Excel/GREXCEL input conversion and execution |

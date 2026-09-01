@@ -21,7 +21,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
-$expectedVersion = '0.1.1'
+$expectedVersion = '0.1.2'
 $packageSpecSchema = 'dragons-grasshopper.package-spec.v3'
 $packageIndexSchema = 'dragons-grasshopper.package-index.v3'
 $installerManifestSchema = 'dragons-grasshopper.windows-installer.v1'
@@ -1052,10 +1052,10 @@ See LICENSE.txt and NOTICE.md for licensing and provenance.
         'README.txt',
         'checksums.sha256',
         'release-manifest.json',
-        'packages/rhino7/invisible-dragon-0.1.1-rh7-win.yak',
-        'packages/rhino7/simple-dragon-0.1.1-rh7-win.yak',
-        'packages/rhino8/invisible-dragon-0.1.1-rh8-win.yak',
-        'packages/rhino8/simple-dragon-0.1.1-rh8-win.yak'
+        'packages/rhino7/invisible-dragon-0.1.2-rh7-win.yak',
+        'packages/rhino7/simple-dragon-0.1.2-rh7-win.yak',
+        'packages/rhino8/invisible-dragon-0.1.2-rh8-win.yak',
+        'packages/rhino8/simple-dragon-0.1.2-rh8-win.yak'
     )
     if (-not (Test-ExactOrdinalStringArrays `
             -Left $canonicalExpectedBundlePaths `

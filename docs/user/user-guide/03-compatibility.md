@@ -4,14 +4,14 @@ This chapter describes compatibility guarantees and limitations relevant to plug
 
 ## Supported host matrix
 
-Version 0.1.1 targets Grasshopper on Windows x64.
+Version 0.1.2 targets Grasshopper on Windows x64.
 
 | Rhino host | Plugin target selected for that host | Status |
 | --- | --- | --- |
 | Rhino 7 / Grasshopper | .NET Framework 4.8 (`net48`) | Supported |
 | Rhino 8.0 through 8.19 / Grasshopper | .NET 7 (`net7.0-windows`) | Supported |
 | Rhino 8.20 and later / Grasshopper | .NET 8 (`net8.0-windows`) | Supported |
-| Rhino 9 beta | None | Not a 0.1.1 target |
+| Rhino 9 beta | None | Not a 0.1.2 target |
 | Rhino for macOS | None | Not supported |
 
 The Rhino 8 package contains both Rhino 8 payloads so the host can select the
@@ -59,7 +59,7 @@ through `ID Weather`. It does not infer weather from geometry or address.
 EnergyPlus, IDD, runtime-cache, and temporary-work paths remain internal in both
 products.
 
-Only the pinned EnergyPlus version is supported by the 0.1.1 product. A
+Only the pinned EnergyPlus version is supported by the 0.1.2 product. A
 different machine-wide EnergyPlus installation is neither required nor used as
 an interchangeable runtime.
 
@@ -76,7 +76,7 @@ Compatibility means that the compiled Grasshopper products preserve the
 verified engineering meaning of that baseline for the declared scope. It does
 not mean that the C# API copies Python syntax or mutable Python object behavior.
 
-The 0.1.1 engineering scope includes:
+The 0.1.2 engineering scope includes:
 
 - GRM 0.7 read/write meaning, defaults, nulls, and relationships.
 - Packaged construction, profile, climate, and weather data used by supported
@@ -105,7 +105,7 @@ The following are not compatibility promises for the Grasshopper products:
 
 ## Verified compatibility coverage
 
-The 0.1.1 release was checked with 11 paired Python/C# engineering cases and
+The 0.1.2 release was checked with 11 paired Python/C# engineering cases and
 66 declared stages covering GRM cross-read, authored and expanded IDF,
 EnergyPlus 24.2 execution, GRR values, and diagnostics. The host gates also
 load, solve, save, and reopen the public components and examples in Rhino 7 and
@@ -156,7 +156,7 @@ is not a Python source-compatibility artifact.
 ## Known limitations
 
 - Windows x64 is the only supported platform.
-- Rhino 9 beta and Rhino for macOS are not 0.1.1 targets.
+- Rhino 9 beta and Rhino for macOS are not 0.1.2 targets.
 - Only EnergyPlus 24.2.0 build `94a887817b` is supported.
 - SimpleDragon's packaged weather workflow is Korean-address based. An address
   must begin with a supported administrative-area prefix and Vintage must fall
@@ -174,7 +174,7 @@ is not a Python source-compatibility artifact.
 - `Domestic Hot Water` currently creates a typed InvisibleDragon value, but the
   public `Thermal Zone` and `Energy Model` inputs do not currently attach that
   value to the canonical executable model graph. Do not treat a standalone DHW
-  component as simulated equipment in 0.1.1.
+  component as simulated equipment in 0.1.2.
 - `Run SimpleDragon` and `Run InvisibleDragon` each accept one data-matched
   simulation per component. SimpleDragon provides a separate managed batch
   workflow; use one runner per simulation for standalone InvisibleDragon.

@@ -638,7 +638,7 @@ _This component has no inputs._
 
 **Purpose:** Creates a typed domestic-hot-water definition retained for domain compatibility and future integration.
 
-**How to use it:** Use it only when inspecting or extending the domain model; it is not part of the executable 0.1.1 Grasshopper simulation graph.
+**How to use it:** Use it only when inspecting or extending the domain model; it is not part of the executable 0.1.2 Grasshopper simulation graph.
 
 **Canvas location:** InvisibleDragon → HVAC. Exposure: `primary`.
 

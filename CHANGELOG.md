@@ -2,7 +2,30 @@
 
 All notable changes to this project are documented here. Both products share
 one release version. A repository tag must equal the deliberately chosen source
-version exactly: source `0.1.1` maps only to `v0.1.1`.
+version exactly: source `0.1.2` maps only to `v0.1.2`.
+
+## 0.1.2 — 2026-09-01
+
+### Corrected
+
+- Map deterministic compiler and PDB paths to the neutral `/_/` source root so
+  packaged first-party assemblies do not expose a developer profile or checkout
+  path.
+- Make package verification inspect every first-party PE CodeView record and
+  reject non-neutral drive-root, UNC, user-profile, or repository paths.
+- Regenerate all eight Grasshopper definitions with the current `Dragons.*`
+  assembly identity and exact release version, replacing stale pre-rename
+  library metadata.
+- Serialize both Rhino building examples in memory with neutral application
+  metadata, preventing the output path and operating-system user from being
+  embedded in the tracked `.3dm` files.
+- Add host-side regression checks for Grasshopper library identity and version,
+  absolute paths, and Rhino binary metadata on generation, validation, and
+  round trip.
+
+Version 0.1.2 is a lockstep patch for InvisibleDragon and SimpleDragon and
+supersedes 0.1.1. Existing Yak versions are immutable, so corrected packages
+use the new patch version rather than replacing the prior files in place.
 
 ## 0.1.1 — 2026-09-01
 

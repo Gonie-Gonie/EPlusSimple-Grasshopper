@@ -115,8 +115,8 @@ jobs:
           }
 
           $expectedDocuments = [ordered] @{
-            'documentation/Dragons-Grasshopper-User-Guide-0.1.1.pdf' = $userGuide
-            'documentation/Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf' = $food4RhinoMetadata
+            'documentation/Dragons-Grasshopper-User-Guide-0.1.2.pdf' = $userGuide
+            'documentation/Dragons-Grasshopper-Food4Rhino-Metadata-0.1.2.pdf' = $food4RhinoMetadata
           }
           foreach ($expectedDocument in $expectedDocuments.GetEnumerator()) {
             $expectedPath = [string] $expectedDocument.Key
@@ -147,14 +147,14 @@ jobs:
           }
 
           $expectedGitHubAssets = [ordered] @{
-            installer = 'Dragons-Grasshopper-0.1.1-Windows-Installer.zip'
-            userGuide = 'Dragons-Grasshopper-User-Guide-0.1.1.pdf'
-            food4RhinoMetadata = 'Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf'
+            installer = 'Dragons-Grasshopper-0.1.2-Windows-Installer.zip'
+            userGuide = 'Dragons-Grasshopper-User-Guide-0.1.2.pdf'
+            food4RhinoMetadata = 'Dragons-Grasshopper-Food4Rhino-Metadata-0.1.2.pdf'
             checksums = 'SHA256SUMS.txt'
           }
           $githubAssetRows = @($githubRelease.assets)
           $actualRoles = @($githubAssetRows | ForEach-Object { [string] $_.role } | Sort-Object)
-          if ([string] $githubRelease.version -cne '0.1.1' -or
+          if ([string] $githubRelease.version -cne '0.1.2' -or
               [string] $githubRelease.directory -cne 'release/github-assets' -or
               [string] $githubRelease.manifest -cne 'release/release-assets-manifest.json' -or
               $githubAssetRows.Count -ne 4 -or
@@ -162,7 +162,7 @@ jobs:
               @(Compare-Object `
                   -ReferenceObject @($expectedGitHubAssets.Keys | Sort-Object) `
                   -DifferenceObject $actualRoles).Count -ne 0) {
-            throw 'GitHub release asset metadata is not the exact four-file 0.1.1 contract.'
+            throw 'GitHub release asset metadata is not the exact four-file 0.1.2 contract.'
           }
           foreach ($assetRow in $githubAssetRows) {
             $role = [string] $assetRow.role

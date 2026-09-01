@@ -27,7 +27,7 @@ Use the labels as follows:
   address coverage are recorded in [NOTICE](../../../NOTICE.md) and the
   [weather provenance record](weather-provenance.md).
 - Version status: the corrected release source is deliberately fixed at
-  `0.1.1`; the matching repository tag is exactly `v0.1.1` and must equal
+  `0.1.2`; the matching repository tag is exactly `v0.1.2` and must equal
   `packaging/package-spec.json`.
 - Official field reference: [Food4Rhino FAQ](https://www.food4rhino.com/en/faq?lang=en).
 - Public-field examples: [Ladybug Tools](https://www.food4rhino.com/en/app/ladybug-tools?lang=en)
@@ -39,9 +39,9 @@ limited to 180 characters. Website, Support Forum, Other Images, platform, and
 release/file information are prepared below where applicable.
 
 The GitHub release has a separate, closed asset contract: exactly
-`Dragons-Grasshopper-0.1.1-Windows-Installer.zip`,
-`Dragons-Grasshopper-User-Guide-0.1.1.pdf`,
-`Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf`, and `SHA256SUMS.txt`.
+`Dragons-Grasshopper-0.1.2-Windows-Installer.zip`,
+`Dragons-Grasshopper-User-Guide-0.1.2.pdf`,
+`Dragons-Grasshopper-Food4Rhino-Metadata-0.1.2.pdf`, and `SHA256SUMS.txt`.
 Per-product Yak files and optional portable ZIPs below are Yak/Food4Rhino
 publication inputs, not additional GitHub release assets.
 
@@ -205,13 +205,13 @@ This Package Name is the only manual value for the Yak connection.
 ### Yak Version [VERIFY]
 
 ```text
-0.1.1
+0.1.2
 ```
 
 ### Yak-managed Release Title [VERIFY OR PASTE IF EDITABLE]
 
 ```text
-InvisibleDragon 0.1.1
+InvisibleDragon 0.1.2
 ```
 
 ### Yak-managed Release Description [VERIFY OR PASTE IF EDITABLE]
@@ -221,15 +221,15 @@ Corrected first Rhino 7+ release. Adds typed construction, opening, floor, ceili
 ```
 
 Do not create a second manual release record if the Yak connection has already
-imported version 0.1.1. Verify that the Rhino 7 and Rhino 8 installers appear
+imported version 0.1.2. Verify that the Rhino 7 and Rhino 8 installers appear
 under the same version.
 
 ### Candidate Artifact Inventory [VERIFY - NEVER UPLOAD]
 
 ```text
-artifacts/packages/invisible-dragon/yak/invisible-dragon-0.1.1-rh7-win.yak
-artifacts/packages/invisible-dragon/yak/invisible-dragon-0.1.1-rh8-win.yak
-artifacts/packages/invisible-dragon/portable/invisible-dragon-0.1.1-portable-plugin-win.zip
+artifacts/packages/invisible-dragon/yak/invisible-dragon-0.1.2-rh7-win.yak
+artifacts/packages/invisible-dragon/yak/invisible-dragon-0.1.2-rh8-win.yak
+artifacts/packages/invisible-dragon/portable/invisible-dragon-0.1.2-portable-plugin-win.zip
 ```
 
 The two `.yak` files are inputs to the Yak publication workflow,
@@ -238,7 +238,7 @@ not manual Food4Rhino attachments. The ZIP is the only optional manual file.
 ### Optional Portable File Title [PASTE]
 
 ```text
-InvisibleDragon 0.1.1 portable plugin
+InvisibleDragon 0.1.2 portable plugin
 ```
 
 ### Optional Portable File Description [PASTE]
@@ -250,7 +250,7 @@ Portable Windows x64 plugin ZIP for controlled deployment, inspection, or recove
 ### Optional Portable File / Link [UPLOAD]
 
 ```text
-artifacts/packages/invisible-dragon/portable/invisible-dragon-0.1.1-portable-plugin-win.zip
+artifacts/packages/invisible-dragon/portable/invisible-dragon-0.1.2-portable-plugin-win.zip
 ```
 
 ### Optional Portable Platforms [SELECT]
@@ -290,10 +290,10 @@ docs/user/assets/illustrations/zone-tree-branches.png
 ### Media [OPTIONAL — LEAVE BLANK]
 
 ```text
-Leave blank (optional media is not included in 0.1.1).
+Leave blank (optional media is not included in 0.1.2).
 ```
 
-No optional media URL is included in the 0.1.1 worksheet. For a later listing
+No optional media URL is included in the 0.1.2 worksheet. For a later listing
 update, capture at least one real Rhino viewport and one left-to-right
 Grasshopper workflow from the verified examples. Video or 3D media must use an
 embeddable URL accepted by Food4Rhino.
@@ -356,13 +356,13 @@ This Package Name is the only manual value for the Yak connection.
 ### Yak Version [VERIFY]
 
 ```text
-0.1.1
+0.1.2
 ```
 
 ### Yak-managed Release Title [VERIFY OR PASTE IF EDITABLE]
 
 ```text
-SimpleDragon 0.1.1
+SimpleDragon 0.1.2
 ```
 
 ### Yak-managed Release Description [VERIFY OR PASTE IF EDITABLE]
@@ -372,15 +372,15 @@ Corrected first Rhino 7+ release. Adds typed construction, opening, floor, ceili
 ```
 
 Do not create a second manual release record if the Yak connection has already
-imported version 0.1.1. Verify that the Rhino 7 and Rhino 8 installers appear
+imported version 0.1.2. Verify that the Rhino 7 and Rhino 8 installers appear
 under the same version.
 
 ### Candidate Artifact Inventory [VERIFY - NEVER UPLOAD]
 
 ```text
-artifacts/packages/simple-dragon/yak/simple-dragon-0.1.1-rh7-win.yak
-artifacts/packages/simple-dragon/yak/simple-dragon-0.1.1-rh8-win.yak
-artifacts/packages/simple-dragon/portable/simple-dragon-0.1.1-portable-plugin-win.zip
+artifacts/packages/simple-dragon/yak/simple-dragon-0.1.2-rh7-win.yak
+artifacts/packages/simple-dragon/yak/simple-dragon-0.1.2-rh8-win.yak
+artifacts/packages/simple-dragon/portable/simple-dragon-0.1.2-portable-plugin-win.zip
 ```
 
 The two `.yak` files are inputs to the Yak publication workflow,
@@ -389,7 +389,7 @@ not manual Food4Rhino attachments. The ZIP is the only optional manual file.
 ### Optional Portable File Title [PASTE]
 
 ```text
-SimpleDragon 0.1.1 portable plugin
+SimpleDragon 0.1.2 portable plugin
 ```
 
 ### Optional Portable File Description [PASTE]
@@ -401,7 +401,7 @@ Portable Windows x64 plugin ZIP for controlled deployment, inspection, or recove
 ### Optional Portable File / Link [UPLOAD]
 
 ```text
-artifacts/packages/simple-dragon/portable/simple-dragon-0.1.1-portable-plugin-win.zip
+artifacts/packages/simple-dragon/portable/simple-dragon-0.1.2-portable-plugin-win.zip
 ```
 
 ### Optional Portable Platforms [SELECT]
@@ -442,10 +442,10 @@ docs/user/assets/illustrations/shared-ownership.png
 ### Media [OPTIONAL — LEAVE BLANK]
 
 ```text
-Leave blank (optional media is not included in 0.1.1).
+Leave blank (optional media is not included in 0.1.2).
 ```
 
-No optional media URL is included in the 0.1.1 worksheet. For a later listing
+No optional media URL is included in the 0.1.2 worksheet. For a later listing
 update, capture at least one real Rhino viewport and one left-to-right
 Grasshopper workflow from the verified examples. Video or 3D media must use an
 embeddable URL accepted by Food4Rhino.
@@ -459,16 +459,16 @@ embeddable URL accepted by Food4Rhino.
    address remain the owner's intended public values.
 3. Confirm that the GitHub Issues support link is publicly usable.
 4. Reconfirm the deliberate first-release version in
-   `packaging/package-spec.json`; use only the exact tag `v0.1.1` after the
+   `packaging/package-spec.json`; use only the exact tag `v0.1.2` after the
    verified commit is pushed.
 5. Run `dev.cmd release` from a clean `main` commit already pushed to
    `origin/main`; require `status: passed` in
    `artifacts/release/release-gate.json`.
 6. Verify that `artifacts/release/github-assets` contains only the Installer
    ZIP, the user guide PDF, this Food4Rhino metadata PDF, and `SHA256SUMS.txt`,
-   with the exact `0.1.1` filenames listed above and valid hashes.
+   with the exact `0.1.2` filenames listed above and valid hashes.
 7. Confirm that the recorded publication approval remains current, then create
-   tag `v0.1.1` and a GitHub release whose attached files are
+   tag `v0.1.2` and a GitHub release whose attached files are
    exactly those four staged assets.
 8. Publish the two attested `.yak` packages for each product through the Yak
    workflow. Do not upload `.yak` files through Food4Rhino's
@@ -476,7 +476,7 @@ embeddable URL accepted by Food4Rhino.
 9. In Food4Rhino, use Create App from Yak with Package Name `invisible-dragon`
    and `simple-dragon`, then paste, select, and upload only the correspondingly
    labeled App values from this file.
-10. Verify that Yak import groups both Rhino platforms under version 0.1.1; do
+10. Verify that Yak import groups both Rhino platforms under version 0.1.2; do
    not create duplicate manual release rows.
 11. If a separate portable download is wanted, add its one ZIP record, select
    both Rhino release platforms, and drag it after the managed installers.

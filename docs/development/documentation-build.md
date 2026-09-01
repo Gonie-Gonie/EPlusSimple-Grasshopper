@@ -32,8 +32,8 @@ documentation dependencies into Rhino's Python environment.
 The outputs are:
 
 ```text
-artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.1.pdf
-artifacts\documentation\Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf
+artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.2.pdf
+artifacts\documentation\Dragons-Grasshopper-Food4Rhino-Metadata-0.1.2.pdf
 ```
 
 `dev.cmd docs` verifies the isolated Python environment, rebuilds and extracts
@@ -48,7 +48,7 @@ blocks. Temporary catalog and log files remain under `temp\documentation` and
 are not part of either deliverable.
 
 Both filenames are bound to `packaging/package-spec.json`. The first-release
-source and builders deliberately require `0.1.1`; this is not a command-line
+source and builders deliberately require `0.1.2`; this is not a command-line
 version override. Before publication, maintainers must make a final deliberate
-version decision in source. For version `0.1.1`, the only matching repository
-tag is `v0.1.1`.
+version decision in source. For version `0.1.2`, the only matching repository
+tag is `v0.1.2`.

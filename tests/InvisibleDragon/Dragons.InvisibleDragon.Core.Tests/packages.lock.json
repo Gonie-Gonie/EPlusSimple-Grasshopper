@@ -113,14 +113,14 @@
       "dragons.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.2, )"
         }
       },
       "dragons.invisibledragon.core": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )",
-          "Dragons.EnergyPlus.Runtime": "[0.1.1, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.2, )",
+          "Dragons.EnergyPlus.Runtime": "[0.1.2, )"
         }
       }
     }

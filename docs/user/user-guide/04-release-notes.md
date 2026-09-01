@@ -2,15 +2,25 @@
 
 These notes describe externally relevant behavior in the current release.
 
-## 0.1.1 — Current release
+## 0.1.2 — Current release
 
-Version 0.1.1 is the corrected first public release line for both Dragon
+Version 0.1.2 is the corrected public release line for both Dragon
 products. A package is part of this release only when its version, source
 commit, checksums, and release record agree.
 
 SimpleDragon includes hash-verified Korean TMYx weather data sourced from
 Climate.OneBuilding. The MIT code license and public support address
 `hyeonggon.jo@snu.ac.kr` are confirmed.
+
+### 0.1.2 patch corrections
+
+- Removes developer profile and checkout paths from first-party DLL/GHA
+  CodeView records by mapping deterministic build paths to `/_/`.
+- Refreshes all tracked Grasshopper examples with the exact current
+  `Dragons.*` assembly identity and version.
+- Writes the Rhino example models through an in-memory archive so no local
+  output path or operating-system user is stored in the public `.3dm` files.
+- Adds release gates that reject those identities if they recur.
 
 ### Product highlights
 
@@ -31,7 +41,7 @@ Climate.OneBuilding. The MIT code license and public support address
 
 ### Candidate verification matrix
 
-| Gate | Required 0.1.1 evidence | Candidate status |
+| Gate | Required 0.1.2 evidence | Candidate status |
 | --- | --- | --- |
 | Managed implementation | All discovered unit/integration projects pass with no required skip | Passed by the verified candidate gate |
 | Engineering parity | 11 paired Python/C# cases × 6 stages; zero failure or skip | Enforced; report included in candidate |
@@ -40,7 +50,7 @@ Climate.OneBuilding. The MIT code license and public support address
 | Packages | Invisible-only, Simple-only, and co-loaded portable candidates; no Python | Enforced for both Rhino generations |
 | Documentation | Four chapters, all 75 components and 37 typed parameters, plus Food4Rhino metadata PDF postflight | Enforced as two version-bound OODocs PDFs |
 | GitHub assets | Installer ZIP, user guide PDF, Food4Rhino metadata PDF, and `SHA256SUMS.txt` only | Deterministically assembled and verified locally |
-| Public publication | Tag, GitHub Release, Yak, and Food4Rhino are separate actions | Each published item must match the verified 0.1.1 commit |
+| Public publication | Tag, GitHub Release, Yak, and Food4Rhino are separate actions | Each published item must match the verified 0.1.2 commit |
 
 A candidate is distributable only when its engineering, host, example,
 package, checksum, and documentation reports all belong to the same source
@@ -149,3 +159,10 @@ attestation.
 - There is no public SimpleDragon-to-InvisibleDragon conversion-preview
   component; the direct SimpleDragon runner intentionally keeps that layer
   internal.
+
+## 0.1.1 — Superseded
+
+Version 0.1.1 introduced the corrected Dragon product identities and full
+release workflow. Version 0.1.2 supersedes it because the packaged managed
+binaries and tracked examples still retained local build metadata that could
+not be replaced in place on the immutable Yak package server.

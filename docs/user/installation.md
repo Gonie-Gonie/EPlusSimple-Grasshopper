@@ -2,7 +2,7 @@
 
 This page is for people installing and loading released Dragon packages.
 
-The `v0.1.1` release keeps InvisibleDragon and SimpleDragon on one lockstep
+The `v0.1.2` release keeps InvisibleDragon and SimpleDragon on one lockstep
 version. SimpleDragon includes hash-verified Korean TMYx weather data sourced from
 Climate.OneBuilding. The MIT code license and public support address are
 confirmed.
@@ -50,18 +50,18 @@ shared `Dragons.*` assemblies remain identical.
 
 ## Installing the release bundle
 
-The `v0.1.1` GitHub release is intentionally limited to exactly four
+The `v0.1.2` GitHub release is intentionally limited to exactly four
 assets:
 
 ```text
-Dragons-Grasshopper-0.1.1-Windows-Installer.zip
-Dragons-Grasshopper-User-Guide-0.1.1.pdf
-Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf
+Dragons-Grasshopper-0.1.2-Windows-Installer.zip
+Dragons-Grasshopper-User-Guide-0.1.2.pdf
+Dragons-Grasshopper-Food4Rhino-Metadata-0.1.2.pdf
 SHA256SUMS.txt
 ```
 
 The version is fixed by the release source, not chosen by the installer. The
-tag must equal the source version exactly: source `0.1.1` uses tag `v0.1.1`.
+tag must equal the source version exactly: source `0.1.2` uses tag `v0.1.2`.
 Use `SHA256SUMS.txt` from that same release to verify the Installer ZIP before
 opening it.
 
